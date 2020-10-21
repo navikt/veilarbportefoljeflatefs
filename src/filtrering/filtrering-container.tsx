@@ -11,10 +11,10 @@ import FilteringVeilederGrupper from './filtrering-veileder-grupper/filtrering-v
 import {OrNothing} from '../utils/types/types';
 import {Tiltak} from '../ducks/enhettiltak';
 import {pagineringSetup} from '../ducks/paginering';
-import FiltreringMineFilter from "./filtrering-mine-filter/filtrering-mine-filter";
-import {logEvent} from "../utils/frontend-logger";
-import {finnSideNavn} from "../middleware/metrics-middleware";
-import {ListevisningType} from "../ducks/ui/listevisning";
+import FiltreringMineFilter from './filtrering-mine-filter/filtrering-mine-filter';
+import {logEvent} from '../utils/frontend-logger';
+import {finnSideNavn} from '../middleware/metrics-middleware';
+import {ListevisningType} from '../ducks/ui/listevisning';
 
 interface FiltreringContainerProps {
     enhettiltak: OrNothing<Tiltak>;
@@ -31,31 +31,30 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
     };
 
     const sessionConfig = {
-        key: '@lagret-filter-lamell-apen',
+        key: '@lagret-filter-lamell-apen'
     };
 
-    const [erLagredeFilterApen, setErLagredeFilterApen] = useState<boolean>(sessionStorage.getItem(sessionConfig.key) === "true")
+    const [erLagredeFilterApen, setErLagredeFilterApen] = useState<boolean>(
+        sessionStorage.getItem(sessionConfig.key) === 'true'
+    );
     const klikkPaLagredeFilter = () => {
         if (erLagredeFilterApen) {
-            setErLagredeFilterApen(false)
-            sessionStorage.setItem(sessionConfig.key, "false");
+            setErLagredeFilterApen(false);
+            sessionStorage.setItem(sessionConfig.key, 'false');
         } else {
-            setErLagredeFilterApen(true)
-            sessionStorage.setItem(sessionConfig.key, "true");
+            setErLagredeFilterApen(true);
+            sessionStorage.setItem(sessionConfig.key, 'true');
         }
         logEvent('portefolje.metrikker.lamell', {
-            navn: "mine-filter",
+            navn: 'mine-filter',
             apen: !erLagredeFilterApen,
-            sideNavn: finnSideNavn(),
+            sideNavn: finnSideNavn()
         });
-    }
+    };
 
     return (
         <div className="blokk-m">
-            <FiltreringNavnellerfnr
-                filtervalg={filtervalg}
-                endreFiltervalg={doEndreFiltervalg}
-            />
+            <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
             <MetrikkEkspanderbartpanel
                 apen={erLagredeFilterApen}
                 lamellNavn="mine-filter"
@@ -63,7 +62,7 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 onClick={klikkPaLagredeFilter}
                 className="mine-filter-wrapper"
             >
-                <FiltreringMineFilter filtergruppe={filtergruppe}/>
+                <FiltreringMineFilter filtergruppe={filtergruppe} />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={false}
@@ -71,17 +70,10 @@ function FiltreringContainer({filtergruppe, filtervalg, enhettiltak}: Filtrering
                 lamellNavn="veiledergrupper"
                 hidden={filtergruppe === ListevisningType.minOversikt}
             >
-                <FilteringVeilederGrupper filtergruppe={filtergruppe}/>
+                <FilteringVeilederGrupper filtergruppe={filtergruppe} />
             </MetrikkEkspanderbartpanel>
-            <MetrikkEkspanderbartpanel
-                apen
-                tittel="Status"
-                lamellNavn="status"
-            >
-                <FiltreringStatus
-                    filtergruppe={filtergruppe}
-                    filtervalg={filtervalg}
-                />
+            <MetrikkEkspanderbartpanel apen tittel="Status" lamellNavn="status">
+                <FiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
             </MetrikkEkspanderbartpanel>
             <MetrikkEkspanderbartpanel
                 apen={filtergruppe !== ListevisningType.minOversikt}

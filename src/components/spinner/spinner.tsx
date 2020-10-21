@@ -5,7 +5,7 @@ import './spinner.less';
 function Spinner() {
     return (
         <div className="nav-spinner" aria-describedby="Nav frontend spinner">
-            <NavFrontendSpinner type="XL"/>
+            <NavFrontendSpinner type="XL" />
         </div>
     );
 }

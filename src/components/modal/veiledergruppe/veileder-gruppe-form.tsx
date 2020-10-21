@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { Input } from 'nav-frontend-skjema';
-import { FiltervalgModell } from '../../../model-interfaces';
+import React, {PropsWithChildren} from 'react';
+import {Normaltekst} from 'nav-frontend-typografi';
+import {Input} from 'nav-frontend-skjema';
+import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeilederGruppeListe from './valgt-veileder-gruppeliste';
-import { useFocus } from '../../../hooks/use-focus';
+import {useFocus} from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 
@@ -22,7 +22,11 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit}>
             <Input
-                label={<p className="veiledergruppe-modal__gruppenavntekst">Gruppenavn: <i>(maks 35 tegn)</i></p>}
+                label={
+                    <p className="veiledergruppe-modal__gruppenavntekst">
+                        Gruppenavn: <i>(maks 35 tegn)</i>
+                    </p>
+                }
                 value={props.gruppeNavn}
                 bredde="XL"
                 onChange={e => props.setGruppeNavn(e.target.value)}
@@ -32,7 +36,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
             />
             <div className="veiledergruppe-modal__sokefilter">
                 <SokVeiledereVeiledergrupper
-                    erValgt={(ident) => props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false}
+                    erValgt={ident => (props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false)}
                     hanterVeilederValgt={props.hanterVeilederChange}
                 />
             </div>
@@ -41,7 +45,7 @@ function VeilederGruppeForm(props: PropsWithChildren<VeilederGruppeForm>) {
             </Normaltekst>
             <ValgtVeilederGruppeListe
                 valgteVeileder={props.filterValg.veiledere}
-                fjernValgtVeileder={(veilederTarget) => props.hanterVeilederChange(false, veilederTarget)}
+                fjernValgtVeileder={veilederTarget => props.hanterVeilederChange(false, veilederTarget)}
                 feil={props.errors.filterValg}
             />
             {props.children}

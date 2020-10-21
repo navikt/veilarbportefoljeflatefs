@@ -8,8 +8,8 @@ import {ReactComponent as ArbeidslisteikonLilla} from '../../../components/ikone
 import {ReactComponent as ArbeidslisteikonGronn} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {KategoriModell} from '../../../model-interfaces';
-import {NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
-import NyBarInputCheckbox from "../../../components/barinput/ny_barinput-checkbox";
+import {NyBarInputRadio} from '../../../components/barinput/ny_bar_input_radio';
+import NyBarInputCheckbox from '../../../components/barinput/ny_barinput-checkbox';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -39,32 +39,56 @@ function NyFilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) 
             {props.checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <NyBarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonBla/><span className="arbeidslistetekst"
-                                                                  title="Arbeidslistekategori blå">Blå</span></>}
+                        labelTekst={
+                            <>
+                                <ArbeidslisteikonBla />
+                                <span className="arbeidslistetekst" title="Arbeidslistekategori blå">
+                                    Blå
+                                </span>
+                            </>
+                        }
                         filterNavn="minArbeidslisteBla"
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
                     />
                     <NyBarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonLilla/><span className="arbeidslistetekst"
-                                                                    title="Arbeidslistekategori lilla">Lilla</span></>}
+                        labelTekst={
+                            <>
+                                <ArbeidslisteikonLilla />
+                                <span className="arbeidslistetekst" title="Arbeidslistekategori lilla">
+                                    Lilla
+                                </span>
+                            </>
+                        }
                         filterNavn="minArbeidslisteLilla"
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
                     />
                     <NyBarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonGronn/><span className="arbeidslistetekst"
-                                                                    title="Arbeidslistekategori grønn">Grønn</span></>}
+                        labelTekst={
+                            <>
+                                <ArbeidslisteikonGronn />
+                                <span className="arbeidslistetekst" title="Arbeidslistekategori grønn">
+                                    Grønn
+                                </span>
+                            </>
+                        }
                         filterNavn="minArbeidslisteGronn"
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
                     />
                     <NyBarInputCheckbox
-                        labelTekst={<><ArbeidslisteikonGul/><span className="arbeidslistetekst"
-                                                                  title="Arbeidslistekategori gul">Gul</span></>}
+                        labelTekst={
+                            <>
+                                <ArbeidslisteikonGul />
+                                <span className="arbeidslistetekst" title="Arbeidslistekategori gul">
+                                    Gul
+                                </span>
+                            </>
+                        }
                         filterNavn="minArbeidslisteGul"
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GUL)}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER } from '../../filter-konstanter';
-import { BarInputRadio } from '../../../components/barinput/barinput-radio';
+import {I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER} from '../../filter-konstanter';
+import {BarInputRadio} from '../../../components/barinput/barinput-radio';
 import BarInputGruppe from '../../../components/barinput/barinput-gruppe';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
+import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
 
 interface FiltreringStatusAktivitetProps {
     ferdigfilterListe: string[];

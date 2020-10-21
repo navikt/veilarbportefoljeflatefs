@@ -4,11 +4,12 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import './ny_enhetsportefolje.less';
 import './brukerliste.less';
-import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 
 function EnhetTabellOverskrift() {
-    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(ListevisningType.enhetensOversikt);
+    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
+        ListevisningType.enhetensOversikt
+    );
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(ListevisningType.enhetensOversikt);
 
     return (

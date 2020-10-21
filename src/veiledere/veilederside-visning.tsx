@@ -1,23 +1,19 @@
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useMemo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
-import { sortBy } from '../ducks/sortering';
-import { sorter } from '../utils/sortering';
-import {
-    selectFraIndex,
-    selectSeAlle,
-    selectSideStorrelse
-} from '../components/toolbar/paginering/paginering-selector';
-import { ListevisningType } from '../ducks/ui/listevisning';
-import { PortefoljeStorrelser } from '../ducks/portefoljestorrelser';
+import {sortBy} from '../ducks/sortering';
+import {sorter} from '../utils/sortering';
+import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './ny_veiledere.less';
-import { VeilederModell } from '../model-interfaces';
-import { AppState } from '../reducer';
+import {VeilederModell} from '../model-interfaces';
+import {AppState} from '../reducer';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere && veiledere.length > 0) {
-        return (veileder) => veiledere.includes(veileder.ident);
+        return veileder => veiledere.includes(veileder.ident);
     }
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
@@ -25,12 +21,14 @@ function erValgtHvisFiltrering(veiledere: string[]) {
 function medPortefoljestorrelse(portefoljeStorrelse) {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
-        return (veileder) => ({...veileder, portefoljestorrelse: 0});
+        return veileder => ({...veileder, portefoljestorrelse: 0});
     }
-    const storrelseMap = portefoljeStorrelse.data.facetResults
-        .reduce((acc, {value: ident, count}) => ({...acc, [ident]: count}), {});
+    const storrelseMap = portefoljeStorrelse.data.facetResults.reduce(
+        (acc, {value: ident, count}) => ({...acc, [ident]: count}),
+        {}
+    );
 
-    return (veileder) => ({...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0});
+    return veileder => ({...veileder, portefoljestorrelse: storrelseMap[veileder.ident] || 0});
 }
 
 function propertySort({property, direction}) {

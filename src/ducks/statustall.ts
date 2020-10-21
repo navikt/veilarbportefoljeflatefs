@@ -1,6 +1,6 @@
 import * as Api from './../middleware/api';
-import { doThenDispatch, STATUS } from './utils';
-import { OrNothing } from '../utils/types/types';
+import {doThenDispatch, STATUS} from './utils';
+import {OrNothing} from '../utils/types/types';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall/OK';
@@ -58,7 +58,7 @@ export const initalStatusState: StatustallState = {
         trengerVurdering: 0,
         underVurdering: 0,
         permitterteEtterNiendeMars: 0,
-        ikkePermitterteEtterNiendeMars: 0,
+        ikkePermitterteEtterNiendeMars: 0
     }
 };
 
@@ -79,7 +79,8 @@ export default function reducer(state: StatustallState = initalStatusState, acti
             return {
                 ...state,
                 data: {
-                    ...state.data, [action.statustall]: state.data[action.statustall] + action.antall
+                    ...state.data,
+                    [action.statustall]: state.data[action.statustall] + action.antall
                 }
             };
         }
@@ -105,9 +106,10 @@ export function hentStatusTall(enhet: OrNothing<string>, veileder?: string) {
 }
 
 export function leggTilStatustall(statustall, antall) {
-    return (dispatch) => dispatch({
-        type: LEGG_TIL_STATUSTALL,
-        statustall,
-        antall
-    });
+    return dispatch =>
+        dispatch({
+            type: LEGG_TIL_STATUSTALL,
+            statustall,
+            antall
+        });
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER} from '../../filter-konstanter';
 import BarInputGruppe from '../../../components/barinput/barinput-gruppe';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
-import {NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
+import {NyBarInputRadio} from '../../../components/barinput/ny_bar_input_radio';
 
 interface FiltreringStatusAktivitetProps {
     ferdigfilterListe: string[];

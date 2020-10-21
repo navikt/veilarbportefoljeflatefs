@@ -27,16 +27,18 @@ import VelgFilterMelding from './velg-filter-melding';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
-import {MineFilterLagreFilterKnapp} from "../minoversikt/mine-filter-lagre-filter-knapp";
-import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
+import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
-        return Object.entries(value).map(([_, verdi]) => {
-            if (verdi === 'NA') return 0;
-            return 1;
-        }).reduce((a: number, b: number) => a + b, 0);
+        return Object.entries(value)
+            .map(([_, verdi]) => {
+                if (verdi === 'NA') return 0;
+                return 1;
+            })
+            .reduce((a: number, b: number) => a + b, 0);
     }
 
     return Object.entries(filtervalg)
@@ -51,15 +53,22 @@ function antallFilter(filtervalg) {
                 return value ? Object.entries(value).length : 0;
             } else if (value) return 1;
             return 0;
-        }).reduce((a, b) => a + b, 0);
-
+        })
+        .reduce((a, b) => a + b, 0);
 }
-
 
 function EnhetSide() {
     const statustall = useFetchStatusTall();
     const filtergruppe = ListevisningType.enhetensOversikt;
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(filtergruppe);
+    const {
+        portefolje,
+        filtervalg,
+        listevisning,
+        enhetId,
+        sorteringsrekkefolge,
+        sorteringsfelt,
+        enhettiltak
+    } = usePortefoljeSelector(filtergruppe);
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
 
@@ -70,28 +79,37 @@ function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({filtergruppe: filtergruppe});
 
-    const slettVeilederFilter = useCallback(ident =>
-            dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)),
-        [dispatch, filtergruppe]);
+    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe)), [
+        dispatch,
+        filtergruppe
+    ]);
 
     const portefoljeData = portefolje.data;
-    const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
+    const antallBrukere =
+        portefoljeData.antallReturnert > portefoljeData.antallTotalt
+            ? portefoljeData.antallTotalt
+            : portefoljeData.antallReturnert;
     const flereEnnAntallBrukere = (antall: number) => {
         return antallBrukere > antall;
     };
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const harFilter = antallFilter(filtervalg) !== 0;
 
-    const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
+    const veilederLabel = useMemo(
+        () => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),
+        [filtervalg.veiledere, veilederliste, slettVeilederFilter]
+    );
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny/>
+                <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div id="enhetens-oversikt"
-                         role="tabpanel"
-                         className="oversikt-sideinnhold"
-                         aria-labelledby="enhetens-oversikt">
+                    <div
+                        id="enhetens-oversikt"
+                        role="tabpanel"
+                        className="oversikt-sideinnhold"
+                        aria-labelledby="enhetens-oversikt"
+                    >
                         <div className="status-filter-kolonne">
                             <FiltreringContainer
                                 filtervalg={filtervalg}
@@ -111,48 +129,63 @@ function EnhetSide() {
                                     listevisning={listevisning}
                                     className="filtrering-label-container"
                                 />
-                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
+                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
                             </div>
-                            {harFilter
-                                ? <>
-                                    <div className={flereEnnAntallBrukere(4)
-                                        ? 'sticky-container'
-                                        : 'sticky-container__fjernet'}>
-                                        <TabellOverskrift className="tabelloverskrift blokk-xxs"/>
-                                        <span className={flereEnnAntallBrukere(4)
-                                            ? 'sticky-skygge'
-                                            : 'ikke-sticky__skygge'}>
-                                            <div className={flereEnnAntallBrukere(4)
-                                                ? 'toolbar-container'
-                                                : 'ikke-sticky__toolbar-container'}>
+                            {harFilter ? (
+                                <>
+                                    <div
+                                        className={
+                                            flereEnnAntallBrukere(4) ? 'sticky-container' : 'sticky-container__fjernet'
+                                        }
+                                    >
+                                        <TabellOverskrift className="tabelloverskrift blokk-xxs" />
+                                        <span
+                                            className={
+                                                flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'
+                                            }
+                                        >
+                                            <div
+                                                className={
+                                                    flereEnnAntallBrukere(4)
+                                                        ? 'toolbar-container'
+                                                        : 'ikke-sticky__toolbar-container'
+                                                }
+                                            >
                                                 <Toolbar
-                                                    onPaginering={() => dispatch(hentPortefoljeForEnhet(
-                                                        enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    ))}
+                                                    onPaginering={() =>
+                                                        dispatch(
+                                                            hentPortefoljeForEnhet(
+                                                                enhetId,
+                                                                sorteringsrekkefolge,
+                                                                sorteringsfelt,
+                                                                filtervalg
+                                                            )
+                                                        )
+                                                    }
                                                     filtergruppe={filtergruppe}
                                                     sokVeilederSkalVises
                                                     antallTotalt={portefoljeData.antallTotalt}
                                                 />
-                                                <EnhetTabellOverskrift/>
+                                                <EnhetTabellOverskrift />
                                             </div>
-                                            </span>
+                                        </span>
                                     </div>
                                     <EnhetTabell
-                                        classNameWrapper={flereEnnAntallBrukere(0)
-                                            ? 'portefolje__container'
-                                            : 'portefolje__container__tom-liste'}
+                                        classNameWrapper={
+                                            flereEnnAntallBrukere(0)
+                                                ? 'portefolje__container'
+                                                : 'portefolje__container__tom-liste'
+                                        }
                                     />
                                 </>
-                                : <VelgFilterMelding/>
-                            }
+                            ) : (
+                                <VelgFilterMelding />
+                            )}
                         </div>
                     </div>
                 </Innholdslaster>
-                <MineFilterModal filtergruppe={filtergruppe}/>
-                <ModalEnhetSideController/>
+                <MineFilterModal filtergruppe={filtergruppe} />
+                <ModalEnhetSideController />
             </div>
         </DocumentTitle>
     );

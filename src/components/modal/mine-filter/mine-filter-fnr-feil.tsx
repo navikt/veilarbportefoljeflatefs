@@ -1,5 +1,5 @@
-import {Normaltekst} from "nav-frontend-typografi";
-import React from "react";
+import {Normaltekst} from 'nav-frontend-typografi';
+import React from 'react';
 
 export function MineFilterFnrFeil() {
     return (
@@ -7,5 +7,5 @@ export function MineFilterFnrFeil() {
             <Normaltekst>Fødselsnummer og navn kan ikke brukes i mine filter.</Normaltekst>
             <Normaltekst>Du må fjerne fødselsnummer og navn for å lagre filteret.</Normaltekst>
         </div>
-    )
+    );
 }

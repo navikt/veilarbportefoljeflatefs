@@ -1,36 +1,35 @@
 import moment from 'moment';
-import {Maybe} from "./types";
+import {Maybe} from './types';
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
 }
 
-
-
 export function autobind(ctx) {
     Object.getOwnPropertyNames(ctx.constructor.prototype)
-        .filter((prop) => typeof ctx[prop] === 'function')
-        .forEach((method) => {
+        .filter(prop => typeof ctx[prop] === 'function')
+        .forEach(method => {
             // eslint-disable-next-line
             ctx[method] = ctx[method].bind(ctx);
         });
 }
 
 function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString().substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString()
+        .substring(1);
 }
 
 export function guid() {
     return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
 
-export const erGyldigISODato = (isoDato) => !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
+export const erGyldigISODato = isoDato => !!(isoDato && moment(isoDato, moment.ISO_8601).isValid());
 
-export const erGyldigFormattertDato = (formattertDato) => !!(formattertDato &&
-    formattertDato.length === 10 &&
-    moment(formattertDato, 'DD.MM.YYYY', true).isValid());
+export const erGyldigFormattertDato = formattertDato =>
+    !!(formattertDato && formattertDato.length === 10 && moment(formattertDato, 'DD.MM.YYYY', true).isValid());
 
-export const erGyldigDatoformat = (dato) => {
+export const erGyldigDatoformat = dato => {
     const d = dato.replace(/\./g, '');
     let s = `${parseInt(d, 10)}`;
     if (dato.startsWith('0')) {
@@ -45,7 +44,7 @@ export const erGyldigDatoformat = (dato) => {
     return true;
 };
 
-export const erGyldigDato = (dato) => {
+export const erGyldigDato = dato => {
     // eslint-disable-next-line
     const re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
     if (!re.test(dato)) {
@@ -62,9 +61,7 @@ export function toDate(dato): Maybe<Date> {
     if (typeof dato === 'undefined' || dato === null) {
         return null;
     }
-    return erLocalDate(dato)
-        ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth)
-        : new Date(dato);
+    return erLocalDate(dato) ? new Date(dato.year, dato.monthValue - 1, dato.dayOfMonth) : new Date(dato);
 }
 
 export function toDatePrettyPrint(dato): Maybe<string> {
@@ -74,26 +71,22 @@ export function toDatePrettyPrint(dato): Maybe<string> {
 
     const date = toDate(dato);
     if (!date) {
-        return null
+        return null;
     }
 
-    const days = date.getDate() < 10
-        ? `0${date.getDate()}`
-        : `${date.getDate()}`;
-    const months = date.getMonth() + 1 < 10
-        ? `0${date.getMonth() + 1}`
-        : `${date.getMonth() + 1}`;
+    const days = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    const months = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
     const years = date.getFullYear();
 
     return `${days}.${months}.${years}`;
-};
+}
 
-export const datePickerToISODate = (dato) => {
+export const datePickerToISODate = dato => {
     const parsetDato = moment(dato, 'DD.MM.YYYY', true);
     return parsetDato.isValid() ? parsetDato.toISOString() : '';
 };
 
-export const dateToISODate = (dato) => {
+export const dateToISODate = dato => {
     const parsetDato = moment(dato);
     return dato && parsetDato.isValid() ? parsetDato.toISOString() : '';
 };
@@ -101,26 +94,13 @@ export const dateToISODate = (dato) => {
 /**
  * @return {string}
  */
-export const ISODateToDatePicker = (dato) => {
+export const ISODateToDatePicker = dato => {
     const parsetDato = moment(dato);
     return dato && parsetDato.isValid() ? parsetDato.format('DD.MM.YYYY') : '';
 };
 
 moment.updateLocale('nb', {
-    monthsShort: [
-        'jan',
-        'feb',
-        'mar',
-        'apr',
-        'mai',
-        'jun',
-        'jul',
-        'aug',
-        'sep',
-        'okt',
-        'nov',
-        'des'
-    ]
+    monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
 });
 
 export function dateLess(date1, date2) {
@@ -157,19 +137,19 @@ export function dateGreater(date1, date2) {
 
 export function klokkeslettTilMinutter(klokkeSlett) {
     const tilMoment = moment(klokkeSlett);
-    return (tilMoment.get('hours') * 60) + tilMoment.get('minutes');
+    return tilMoment.get('hours') * 60 + tilMoment.get('minutes');
 }
 
 export function minuttDifferanse(klokkeslett2, klokkeslett1) {
-    return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes()
+    return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes();
 }
 
 export function dagerSiden(dato) {
-    if(!dato) {
-        return null ;
+    if (!dato) {
+        return null;
     }
-    const hentDato = moment(dato, "YYYY-MM-DD");
-    return moment().diff((hentDato), 'days');
+    const hentDato = moment(dato, 'YYYY-MM-DD');
+    return moment().diff(hentDato, 'days');
 }
 
 export function validerDatoField(input, intl, alternativer, valgfritt) {
@@ -186,10 +166,7 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
         return intl.formatMessage({
             id: 'datepicker.feilmelding.ugyldig-dato'
         });
-    } else if (
-        fra &&
-        (fraDato.isAfter(inputDato, 'day'))
-    ) {
+    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
         fraDato.subtract(1, 'day');
 
         const msgValues = {
@@ -203,28 +180,21 @@ export function validerDatoField(input, intl, alternativer, valgfritt) {
     return undefined;
 }
 
-
 export function validerDatoFeldt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);
     const fraDato = moment(fra);
     if (!valgfritt && !input) {
         error = 'Du må angi en frist';
-
     } else if (input && !erGyldigISODato(input)) {
         error = 'Datoen du har oppgitt er ikke en gyldig dato';
-    } else if (
-        fra &&
-        (fraDato.isAfter(inputDato, 'day'))
-    ) {
-
-        error = 'Fristen må være i dag eller senere'
+    } else if (fra && fraDato.isAfter(inputDato, 'day')) {
+        error = 'Fristen må være i dag eller senere';
     }
     return error;
 }
 
 export function oppfolgingStartetDato(dato: string): Maybe<Date> {
-
     if (!dato) {
         return null;
     }
@@ -232,5 +202,5 @@ export function oppfolgingStartetDato(dato: string): Maybe<Date> {
     const oppfolgingStartetDato = new Date(dato);
     const tidligsteDato = new Date('2017-12-04');
 
-    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato
+    return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
 }

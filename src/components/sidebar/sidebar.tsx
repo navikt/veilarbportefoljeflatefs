@@ -100,10 +100,10 @@ function Sidebar(props: SidebarProps) {
 
     let tabFoc = tabFocus();
 
-    const keyCode = (e) => e.which || e.keyCode;
+    const keyCode = e => e.which || e.keyCode;
 
     function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
-        return tabs.find((t) => t.type === viewType) as Sidebar;
+        return tabs.find(t => t.type === viewType) as Sidebar;
     }
 
     const mapTabTilView = (tab: Sidebar, isSelected: boolean, key: number) => {
@@ -112,13 +112,13 @@ function Sidebar(props: SidebarProps) {
             <button
                 key={key}
                 className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
-                onClick={(e) => handleMouseClick(e, tab)}
+                onClick={e => handleMouseClick(e, tab)}
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
                 aria-controls={tab.type}
                 id={tab.type}
                 tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={(e) => handleKeyUp(e, tab)}
+                onKeyUp={e => handleKeyUp(e, tab)}
                 title={ariaFaneTekst}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
@@ -184,10 +184,10 @@ function Sidebar(props: SidebarProps) {
     }
 
     const Tabs = () => {
-        const visVeiledergrupper = (tab) => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
         if (erPaMinOversikt) {
             return sidebar
-                .filter((tab) => !visVeiledergrupper(tab))
+                .filter(tab => !visVeiledergrupper(tab))
                 .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
         }
         return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));

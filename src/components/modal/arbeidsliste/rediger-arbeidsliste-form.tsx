@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Form, } from 'formik';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import {Form} from 'formik';
+import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import {Undertekst, Undertittel} from 'nav-frontend-typografi';
 import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
-import { BrukerModell } from '../../../model-interfaces';
-import { logEvent } from '../../../utils/frontend-logger';
-import { ReactComponent as SlettIcon } from '../../ikoner/slett.svg';
+import {BrukerModell} from '../../../model-interfaces';
+import {logEvent} from '../../../utils/frontend-logger';
+import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -22,7 +22,6 @@ interface RedigerArbeidslisteProps {
 }
 
 function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
-
     const fjernBruker = () => {
         logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
         props.settMarkert(props.bruker.fnr, true);
@@ -36,15 +35,15 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <Undertittel>
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
                     </Undertittel>
-                    <FormikInput name="overskrift"/>
-                    <FormikTekstArea name="kommentar"/>
+                    <FormikInput name="overskrift" />
+                    <FormikTekstArea name="kommentar" />
                     <Undertekst className="arbeidsliste--modal-redigering">
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                     </Undertekst>
                 </div>
                 <div className="skjemaelement dato-kategori-wrapper">
-                    <FormikDatoVelger name="frist"/>
-                    <ArbeidslisteKategori name="kategori" index=""/>
+                    <FormikDatoVelger name="frist" />
+                    <ArbeidslisteKategori name="kategori" index="" />
                 </div>
             </div>
             <div className="modal-footer">
@@ -64,12 +63,8 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <Flatknapp className="knapp knapp--avbryt" onClick={props.lukkModal}>
                     Avbryt
                 </Flatknapp>
-                <Flatknapp
-                    htmlType="button"
-                    onClick={fjernBruker}
-                    className="fjern--knapp"
-                >
-                    <SlettIcon/>
+                <Flatknapp htmlType="button" onClick={fjernBruker} className="fjern--knapp">
+                    <SlettIcon />
                     <span>Fjern</span>
                 </Flatknapp>
             </div>

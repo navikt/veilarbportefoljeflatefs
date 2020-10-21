@@ -1,4 +1,4 @@
-import {FiltervalgModell} from "../model-interfaces";
+import {FiltervalgModell} from '../model-interfaces';
 
 export interface LagretFilter {
     filterNavn: string;
@@ -6,7 +6,7 @@ export interface LagretFilter {
     filterValg: FiltervalgModell;
     opprettetDato: Date;
     sortOrder: number | null;
-    filterCleanup: boolean
+    filterCleanup: boolean;
 }
 
 export interface LagretFilterState {

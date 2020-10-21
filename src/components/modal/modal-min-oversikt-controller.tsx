@@ -6,16 +6,23 @@ import {
     TILDELING_FEILET
 } from '../../ducks/modal-feilmelding-brukere';
 import ServerFeilModal from './server-feil-modal';
-import { VIS_TILDELING_SUKSESS_MODAL } from '../../ducks/modal';
-import { useModalControllerSelector } from '../../hooks/redux/use-modal-controller.selector';
-import { NY_FEILET_MODAL } from '../../ducks/modal-serverfeil';
+import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
+import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
+import {NY_FEILET_MODAL} from '../../ducks/modal-serverfeil';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
-import { TildelingerOk } from './modal-suksess';
-import { logEvent } from '../../utils/frontend-logger';
+import {TildelingerOk} from './modal-suksess';
+import {logEvent} from '../../utils/frontend-logger';
 import './feilmelding-brukere.less';
 
 export function MinOversiktModalController() {
-    const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} = useModalControllerSelector();
+    const {
+        serverfeilModalSkalVises,
+        feilmeldingModal,
+        modal,
+        closeServerfeilModal,
+        closeFeilmeldingModal,
+        closeModal
+    } = useModalControllerSelector();
 
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();
@@ -29,10 +36,7 @@ export function MinOversiktModalController() {
 
     return (
         <>
-            <ServerFeilModal
-                isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
-                onClose={closeServerfeilModal}
-            />
+            <ServerFeilModal isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL} onClose={closeServerfeilModal} />
             <TildelingerOk
                 isOpen={modal.modal === VIS_TILDELING_SUKSESS_MODAL}
                 onRequestClose={lukkTildelingVellykketModal}
@@ -59,9 +63,5 @@ export function MinOversiktModalController() {
                 infotekstTekst="Kunne ikke slette arbeidsliste for følgende bruker(e):"
             />
         </>
-
     );
-
 }
-
-

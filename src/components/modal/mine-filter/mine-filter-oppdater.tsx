@@ -33,7 +33,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
     const requestHandlerOppdater = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
     const requestHandlerSlette = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
 
-    const doLagreEndringer = (event) => {
+    const doLagreEndringer = event => {
         event.preventDefault();
         const trimmetFilterNavn = nyttFilterNavn.trim();
         const feilValideringResponse = feilValidering(trimmetFilterNavn, filterValg, data, filterId);
@@ -58,7 +58,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
         }
     };
 
-    const bekreftSletting = (event) => {
+    const bekreftSletting = event => {
         event.preventDefault();
         setVisBekreftSlettModal(true);
     };
@@ -71,11 +71,11 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
 
     return (
         <>
-            <form onSubmit={(e) => doLagreEndringer(e)}>
+            <form onSubmit={e => doLagreEndringer(e)}>
                 <Input
                     label="Navn:"
                     value={nyttFilterNavn}
-                    onChange={(e) => setNyttFilterNavn(e.target.value)}
+                    onChange={e => setNyttFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
                     maxLength={255}
@@ -84,7 +84,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                     <Hovedknapp mini htmlType="submit">
                         Lagre
                     </Hovedknapp>
-                    <Knapp mini onClick={(e) => bekreftSletting(e)}>
+                    <Knapp mini onClick={e => bekreftSletting(e)}>
                         Slett
                     </Knapp>
                 </div>

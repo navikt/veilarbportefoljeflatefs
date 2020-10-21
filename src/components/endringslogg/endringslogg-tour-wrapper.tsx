@@ -7,13 +7,13 @@ import {
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
-    registrerInnholdIRemoteStorage,
+    registrerInnholdIRemoteStorage
 } from './utils/endringslogg-utils';
-import { logEvent } from '../../utils/frontend-logger';
+import {logEvent} from '../../utils/frontend-logger';
 import './endringslogg.less';
 import './collapse-container-transition.less';
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector()!.ident;
@@ -28,31 +28,35 @@ function EndringsloggTourWrapper() {
         hentSetteVersjonerRemotestorage()
             .then(resp => {
                 setInnholdsliste(mapRemoteToState(resp, alleFeatureToggles));
-                setIsLoading(false)
+                setIsLoading(false);
             })
             .catch(() => {
                 setIsLoading(false);
                 setInnholdsliste(setHarSettAlt);
-            })
-    },[alleFeatureToggles]);
+            });
+    }, [alleFeatureToggles]);
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);
     };
 
     const onClose = () => {
-        const ulestFelt = innholdsListe.some((element) => !element.sett);
+        const ulestFelt = innholdsListe.some(element => !element.sett);
         const tidBrukt = stoppTimer();
-        if(veilederIdent) {
+        if (veilederIdent) {
             krypterVeilederident(veilederIdent)
-                .then((res) =>
-                    logEvent('portefolje.endringslogg', {
-                        feature: 'mine-filter', //Husk å endre denne ved bytte
-                        tidBrukt,
-                        nyeNotifikasjoner: ulestFelt,
-                    }, {hash: hexString(res)})
+                .then(res =>
+                    logEvent(
+                        'portefolje.endringslogg',
+                        {
+                            feature: 'mine-filter', //Husk å endre denne ved bytte
+                            tidBrukt,
+                            nyeNotifikasjoner: ulestFelt
+                        },
+                        {hash: hexString(res)}
+                    )
                 )
-                .catch((e) => console.log(e)); // tslint:disable-line
+                .catch(e => console.log(e)); // tslint:disable-line
         }
         if (ulestFelt) {
             const newList = setHarSettAlt(innholdsListe);
@@ -61,18 +65,11 @@ function EndringsloggTourWrapper() {
         }
     };
 
-
-    if(isLoading) {
-        return null
+    if (isLoading) {
+        return null;
     }
 
-    return (
-        <Endringslogg
-            innhold={innholdsListe}
-            onOpen={startTimer}
-            onClose={onClose}
-        />
-    );
+    return <Endringslogg innhold={innholdsListe} onOpen={startTimer} onClose={onClose} />;
 }
 
 export default EndringsloggTourWrapper;

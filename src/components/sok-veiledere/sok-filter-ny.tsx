@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import '../toolbar/toolbar.less';
-import { useFocus } from '../../hooks/use-focus';
-import { Input } from 'nav-frontend-skjema';
+import {useFocus} from '../../hooks/use-focus';
+import {Input} from 'nav-frontend-skjema';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -22,13 +22,18 @@ function SokFilterNy<T>(props: SokFilterProps<T>) {
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
     useEffect(() => {
-        setRawfilteredData(data.filter(elem => !query || JSON.stringify(elem).toLowerCase().includes(query.toLowerCase())));
+        setRawfilteredData(
+            data.filter(
+                elem =>
+                    !query ||
+                    JSON.stringify(elem)
+                        .toLowerCase()
+                        .includes(query.toLowerCase())
+            )
+        );
     }, [query, data]);
 
-    const filteredData =
-        limitSize === undefined
-            ? rawfilteredData
-            : limit(rawfilteredData, limitSize || 20);
+    const filteredData = limitSize === undefined ? rawfilteredData : limit(rawfilteredData, limitSize || 20);
 
     const harData = filteredData.length > 0;
     const {focusRef} = useFocus();
@@ -45,12 +50,13 @@ function SokFilterNy<T>(props: SokFilterProps<T>) {
                     inputRef={inputRef => (focusRef.current = inputRef)}
                 />
             </div>
-            {harData
-                ? children(filteredData)
-                : <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+            {harData ? (
+                children(filteredData)
+            ) : (
+                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                     Ingen veiledere funnet
                 </AlertStripe>
-            }
+            )}
         </>
     );
 }

@@ -5,8 +5,8 @@ import DragAndDropContainer from './drag-and-drop-container';
 import NyMineFilterRad from '../ny_mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
-import {LagretFilter} from "../../../ducks/lagretFilter";
-import {ListevisningType} from "../../../ducks/ui/listevisning";
+import {LagretFilter} from '../../../ducks/lagretFilter';
+import {ListevisningType} from '../../../ducks/ui/listevisning';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];

@@ -1,10 +1,10 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .checkbox-filterform {
     &__valg {
         max-height: 16rem;
         overflow-x: auto;
-        padding: .5rem .5rem 0;
+        padding: 0.5rem 0.5rem 0;
     }
 
     .registreringstype {
@@ -16,11 +16,11 @@
     }
 
     &__under-valg {
-        padding: .5rem 0 .5rem .5rem;
+        padding: 0.5rem 0 0.5rem 0.5rem;
     }
 
     &__alertstripe {
-        padding: .5rem 0 1rem .5rem;
+        padding: 0.5rem 0 1rem 0.5rem;
         border: none;
     }
 }
@@ -42,12 +42,12 @@
 
 .fodselsdato__container {
     text-align: center;
-    margin: .2rem;
+    margin: 0.2rem;
 
     label {
         position: relative;
         cursor: pointer;
-        padding: .1rem;
+        padding: 0.1rem;
         background-color: @white;
         border: 1px solid transparent;
         border-radius: 4px;
@@ -58,48 +58,48 @@
         border: 1px solid @navBla;
     }
 
-    label::before, label::after {
+    label::before,
+    label::after {
         position: absolute;
     }
 
     label::before {
-        content: "";
+        content: '';
         height: 100%;
         width: 100%;
         left: 0;
         top: 0;
-        padding: .2rem;
-
+        padding: 0.2rem;
     }
 
     label::after {
-        content: "";
-        padding: .2rem;
+        content: '';
+        padding: 0.2rem;
         height: 100%;
         width: 100%;
         left: 0;
         top: 0;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
         opacity: 0;
         appearance: none;
     }
 
-    input[type="checkbox"] + label::after {
+    input[type='checkbox'] + label::after {
         content: none;
     }
 
-    input[type="checkbox"]:checked + label {
+    input[type='checkbox']:checked + label {
         background-color: @navBlaDarken20;
         color: white;
     }
 
-    input[type="checkbox"]:checked + label::after {
-        content: "";
+    input[type='checkbox']:checked + label::after {
+        content: '';
     }
 
-    input[type="checkbox"]:focus + label::before {
+    input[type='checkbox']:focus + label::before {
         border-radius: 4px;
         box-shadow: 0 0 0 3px @fokusFarge;
         outline: none;

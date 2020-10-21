@@ -13,14 +13,14 @@ export interface DragAndDropRowProps {
 }
 
 function DragAndDropRow({
-                            idx,
-                            filterNavn,
-                            isLastRow,
-                            shouldBeFocused,
-                            requestFocus,
-                            className,
-                            onClick
-                        }: DragAndDropRowProps) {
+    idx,
+    filterNavn,
+    isLastRow,
+    shouldBeFocused,
+    requestFocus,
+    className,
+    onClick
+}: DragAndDropRowProps) {
     const dragNode = useRef<HTMLLIElement>(null);
     useEffect(() => {
         if (shouldBeFocused) {
@@ -41,7 +41,7 @@ function DragAndDropRow({
             aria-selected={true}
             value={idx}
         >
-            <DragIcon aria-disabled={true}/>
+            <DragIcon aria-disabled={true} />
             {filterNavn}
             <FlyttKnappWraper
                 showUpBtn={idx !== 0}

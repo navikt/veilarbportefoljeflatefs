@@ -1,5 +1,5 @@
-import { range, lag2Sifret } from '../utils/utils';
-import { KategoriModell, Sorteringsfelt } from '../model-interfaces';
+import {range, lag2Sifret} from '../utils/utils';
+import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
@@ -44,7 +44,7 @@ export const mapFilternavnTilFilterValue = {
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
     underVurdering: UNDER_VURDERING,
     permitterteEtterNiendeMars: PERMITTERTE_ETTER_NIENDE_MARS,
-    ikkePermitterteEtterNiendeMars: IKKE_PERMITTERTE_ETTER_NIENDE_MARS,
+    ikkePermitterteEtterNiendeMars: IKKE_PERMITTERTE_ETTER_NIENDE_MARS
 };
 
 export const FILTERGRUPPE_ENHET = 'enhetensOversikt';
@@ -71,14 +71,14 @@ export const ferdigfilterListe = {
     MOTER_IDAG: 'Møte med NAV idag',
     UNDER_VURDERING: 'Under vurdering',
     PERMITTERTE_ETTER_NIENDE_MARS: 'Permitterte etter 09.03.2020',
-    IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020',
+    IKKE_PERMITTERTE_ETTER_NIENDE_MARS: 'Alle utenom permitterte etter 09.03.2020'
 };
 
 export const arbeidslisteKategori = {
     BLA: 'Blå',
     LILLA: 'Lilla',
     GRONN: 'Grønn',
-    GUL: 'Gul',
+    GUL: 'Gul'
 };
 
 export const alder = {
@@ -89,36 +89,40 @@ export const alder = {
     '40-49': '40-49 år',
     '50-59': '50-59 år',
     '60-66': '60-66 år',
-    '67-70': '67-70 år',
+    '67-70': '67-70 år'
 };
 
-export const fodselsdagIMnd = () => range(1, 31, true).reduce((acc, x) => ({
-    ...acc,
-    [x]: lag2Sifret(x)
-}), {});
+export const fodselsdagIMnd = () =>
+    range(1, 31, true).reduce(
+        (acc, x) => ({
+            ...acc,
+            [x]: lag2Sifret(x)
+        }),
+        {}
+    );
 
 export const kjonn = {
-    K: {label:'Kvinne'},
-    M: {label:'Mann'}
+    K: {label: 'Kvinne'},
+    M: {label: 'Mann'}
 };
 
 export const innsatsgruppe = {
     IKVAL: 'Standardinnsats',
     BFORM: 'Situasjonsbestemt innsats',
     BATT: 'Spesielt tilpasset innsats',
-    VARIG: 'Varig tilpasset',
+    VARIG: 'Varig tilpasset'
 };
 
 export const hovedmal = {
     SKAFFEA: 'Skaffe arbeid',
     BEHOLDEA: 'Beholde arbeid',
-    OKEDELT: 'Øke deltakelse eller mål om arbeid',
+    OKEDELT: 'Øke deltakelse eller mål om arbeid'
 };
 
 export const formidlingsgruppe = {
     ARBS: 'Arbeidssøker',
     IARBS: 'Ikke arbeidssøker',
-    ISERV: 'Ikke servicebehov',
+    ISERV: 'Ikke servicebehov'
 };
 
 export const servicegruppe = {
@@ -149,10 +153,14 @@ export const ytelse = {
     TILTAKSPENGER: {label: 'Tiltakspenger'}
 };
 
-export const ytelsevalg: () => { [id: string]: string } = () => Object.keys(ytelse).reduce((acc, val) => ({
-    ...acc,
-    [val]: val
-}), {});
+export const ytelsevalg: () => {[id: string]: string} = () =>
+    Object.keys(ytelse).reduce(
+        (acc, val) => ({
+            ...acc,
+            [val]: val
+        }),
+        {}
+    );
 
 export const ytelseUtlopsSortering = {
     DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
@@ -203,7 +211,7 @@ export const registreringstype = {
     AKKURAT_FULLFORT_UTDANNING: 'Har akkurat fullført utdanning, militærtjeneste eller annet',
     HAR_SAGT_OPP: 'Har sagt opp eller kommer til å si opp',
     ALDRI_HATT_JOBB: 'Har aldri vært i jobb',
-    JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene',
+    JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene'
 };
 
 export default {

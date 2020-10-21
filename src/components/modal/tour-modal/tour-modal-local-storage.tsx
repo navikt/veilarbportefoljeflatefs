@@ -1,5 +1,5 @@
 import {default as React, useState} from 'react';
-import {default as TourModal, ModalName,} from './tour-modal';
+import {default as TourModal, ModalName} from './tour-modal';
 
 interface TourModalLocalStorageProps {
     onTourComplete?: (e: string) => void;
@@ -22,17 +22,7 @@ export default function TourModalLocalStorage({onTourComplete, skalVises = false
         setApenModal(false);
     };
 
-    return (
-        <>
-            {skalVises &&
-            <TourModal
-                open={openModal}
-                modalName={modalNavn}
-                onClose={lukkModal}
-            />
-            }
-        </>
-    );
+    return <>{skalVises && <TourModal open={openModal} modalName={modalNavn} onClose={lukkModal} />}</>;
 }
 
 export function hasStored(tagName: string): boolean {

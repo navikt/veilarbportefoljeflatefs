@@ -9,12 +9,12 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 
-import {ListevisningType} from "../../ducks/ui/listevisning";
-import {STATUS} from "../../ducks/utils";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
-import NyVeilederGruppeInnhold from "./ny_veiledergrupper-innhold";
-import {AlertStripeFeil} from "nav-frontend-alertstriper";
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import {STATUS} from '../../ducks/utils';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import NyVeilederGruppeInnhold from './ny_veiledergrupper-innhold';
+import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 
 interface FilteringVeilederGrupperProps {
     filtergruppe: ListevisningType;
@@ -39,7 +39,7 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
                     },
                     enhet
                 )
-            ).then((resp) => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
+            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) =>
@@ -67,12 +67,12 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
 
     return (
         <>
-            {
-                lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()
-            }
-            <LeggTilKnapp onClick={() => {
-                setVeilederGruppeModal(true);
-            }}/>
+            {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
+            <LeggTilKnapp
+                onClick={() => {
+                    setVeilederGruppeModal(true);
+                }}
+            />
             <VeilederGruppeModal
                 initialVerdi={{gruppeNavn: '', filterValg: initialState, filterId: -1}}
                 isOpen={visVeilederGruppeModal}

@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
-import './til-toppen-knapp.less'
+import './til-toppen-knapp.less';
 import {ReactComponent as TilToppenIkonBla} from '../ikoner/til-toppen-bla.svg';
-import {logEvent} from "../../utils/frontend-logger";
-import {finnSideNavn} from "../../middleware/metrics-middleware";
+import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();
@@ -14,14 +14,14 @@ export const TilToppenKnapp = () => {
         setScrollPosition(window.scrollY);
     }, 1000);
 
-    const onClick = (e) => {
+    const onClick = e => {
         if (knappSkalVises) {
             window.scrollTo({top: 0});
         }
         if (knappRef && knappRef.current) {
             knappRef.current.blur();
         }
-        logEvent('portefolje.metrikker.tiltoppenknapp', {sideNavn: finnSideNavn()})
+        logEvent('portefolje.metrikker.tiltoppenknapp', {sideNavn: finnSideNavn()});
     };
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const TilToppenKnapp = () => {
             aria-hidden={!knappSkalVises}
             onClick={onClick}
         >
-            <TilToppenIkonBla/>
+            <TilToppenIkonBla />
         </button>
     );
 };

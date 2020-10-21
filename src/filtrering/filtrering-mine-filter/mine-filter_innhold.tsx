@@ -9,7 +9,7 @@ import {REDESIGN} from '../../konstanter';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import MineFilterRad from './mine-filter-rad';
-import {LagretFilter} from "../../ducks/lagretFilter";
+import {LagretFilter} from '../../ducks/lagretFilter';
 
 const HiddenHjelpetekst = hiddenIf(Hjelpetekst);
 
@@ -27,7 +27,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
     const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
     const erRedesignFeatureTogglePa = useFeatureSelector()(REDESIGN);
 
-    const fjernUtilgjengeligeFilter = (elem) => {
+    const fjernUtilgjengeligeFilter = elem => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
         const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const veiledergrupper = elem.filterValg.veiledere.length > 0;
@@ -42,7 +42,7 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
 
     const outerDivRef = useRef<HTMLDivElement>(null);
     const filtrertListe = () => {
-        return props.mineFilter.filter((elem) => fjernUtilgjengeligeFilter(elem));
+        return props.mineFilter.filter(elem => fjernUtilgjengeligeFilter(elem));
     };
 
     useEffect(() => {
@@ -54,16 +54,17 @@ function MineFilterInnhold(props: MineFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className='mine-filter__valgfelt' ref={outerDivRef}>
-                {filtrertListe().map((filter, idx) =>
+            <div className="mine-filter__valgfelt" ref={outerDivRef}>
+                {filtrertListe().map((filter, idx) => (
                     <MineFilterRad
                         key={idx}
                         lagretFilter={filter}
                         filtergruppe={props.filtergruppe}
                         parentDiv={outerDivRef}
                     />
-                )}
-            </div>)
+                ))}
+            </div>
+        );
     };
 
     const getEmptyState = () => {

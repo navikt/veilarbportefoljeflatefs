@@ -17,10 +17,10 @@ import {pagineringSetup} from '../../ducks/paginering';
 import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import {MIN_ARBEIDSLISTE,} from '../filter-konstanter';
+import {MIN_ARBEIDSLISTE} from '../filter-konstanter';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import {useWindowWidth} from "../../hooks/use-window-width";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {useWindowWidth} from '../../hooks/use-window-width';
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -34,17 +34,15 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(
-            'ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
+        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
         dispatch(pagineringSetup({side: 1}));
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
-            : kategoriliste.filter((elem) => elem !== e.target.value);
-        dispatch(endreFiltervalg(
-            'arbeidslisteKategori', nyeFerdigfilterListe, props.filtergruppe));
+            : kategoriliste.filter(elem => elem !== e.target.value);
+        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, props.filtergruppe));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -58,8 +56,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(endreFiltervalg(
-                'arbeidslisteKategori', [], props.filtergruppe));
+            dispatch(endreFiltervalg('arbeidslisteKategori', [], props.filtergruppe));
         }
     }
 
@@ -78,13 +75,19 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 />
                 <div className="permittering_checkboksgruppe">
                     <div className="hjelpetekst__wrapper">
-                        <Hjelpetekst id="hjelpetekst" type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}>
-                            <p><b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
+                        <Hjelpetekst
+                            id="hjelpetekst"
+                            type={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
+                        >
+                            <p>
+                                <b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
                                 ved registrering og tidspunkt for registrering, men ekskludert de som har registrert seg
                                 som permittert etter 9. mars 2020.
                             </p>
-                            <p><b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
-                                har svart at de er permittert.</p>
+                            <p>
+                                <b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
+                                har svart at de er permittert.
+                            </p>
                             <p>Merk at situasjonen kan ha endret seg for permitterte brukere.</p>
                         </Hjelpetekst>
                     </div>
@@ -102,18 +105,12 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusDialog
-                ferdigfilterListe={ferdigfilterListe}
-                handleChange={handleRadioButtonChange}
-            />
+            <FiltreringStatusDialog ferdigfilterListe={ferdigfilterListe} handleChange={handleRadioButtonChange} />
             <FiltreringStatusAvtaltMoteMedNav
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}
             />
-            <FiltreringStatusAktiviteter
-                ferdigfilterListe={ferdigfilterListe}
-                handleChange={handleRadioButtonChange}
-            />
+            <FiltreringStatusAktiviteter ferdigfilterListe={ferdigfilterListe} handleChange={handleRadioButtonChange} />
             <FiltreringStatusInavtiveBrukere
                 ferdigfilterListe={ferdigfilterListe}
                 handleChange={handleRadioButtonChange}

@@ -1,17 +1,17 @@
-export const tekstAntallBrukere = (tall) => {
+export const tekstAntallBrukere = tall => {
     if (tall === 0) {
-        return 'Ingen brukere'
+        return 'Ingen brukere';
     } else if (tall === 1) {
-        return 'Totalt 1 bruker'
+        return 'Totalt 1 bruker';
     }
-    return `Totalt ${tall} brukere`
+    return `Totalt ${tall} brukere`;
 };
 
-export const tekstValgteBrukere = (antallValgt) => {
+export const tekstValgteBrukere = antallValgt => {
     if (antallValgt === 0) {
-        return 'Ingen brukere valgt.'
+        return 'Ingen brukere valgt.';
     } else if (antallValgt === 1) {
-        return '1 bruker valgt.'
+        return '1 bruker valgt.';
     }
-    return `${antallValgt} brukere valgt.`
+    return `${antallValgt} brukere valgt.`;
 };

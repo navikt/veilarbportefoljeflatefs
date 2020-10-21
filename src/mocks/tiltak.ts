@@ -33,6 +33,6 @@ export default {
         GRUPPEAMO: 'Gruppe AMO',
         ENKFAGYRKE: 'Enkeltplass Fag- og yrkesopplæring VGS og høyere yrkesfaglig utdanning',
         HOYEREUTD: 'Høyere utdanning',
-        ENKELAMO: 'Enkeltplass AMO',
+        ENKELAMO: 'Enkeltplass AMO'
     }
 };

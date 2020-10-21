@@ -11,9 +11,4 @@ export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const REDESIGN = 'veilarbportefolje.redesign';
 
-export const PORTEFOLJE_FEATURES = [
-    SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    GJEM_HOVEDMAL,
-    REDESIGN,
-];
+export const PORTEFOLJE_FEATURES = [SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, GJEM_HOVEDMAL, REDESIGN];

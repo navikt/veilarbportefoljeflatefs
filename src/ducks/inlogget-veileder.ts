@@ -1,7 +1,7 @@
-import { hentAktivBruker } from '../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
-import {  VeilederModell } from '../model-interfaces';
-import {OrNothing} from "../utils/types/types";
+import {hentAktivBruker} from '../middleware/api';
+import {STATUS, doThenDispatch} from './utils';
+import {VeilederModell} from '../model-interfaces';
+import {OrNothing} from '../utils/types/types';
 
 // Actions
 export const OK = 'veilarbveileder/me/OK';
@@ -10,7 +10,7 @@ export const PENDING = 'veilarbveileder/me/PENDING';
 
 export interface InloggetVeilederState {
     status: any;
-    data:  OrNothing<VeilederModell>;
+    data: OrNothing<VeilederModell>;
 }
 
 const initialState = {
@@ -22,11 +22,11 @@ const initialState = {
 export default function reducer(state: InloggetVeilederState = initialState, action) {
     switch (action.type) {
         case PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         default:
             return state;
     }

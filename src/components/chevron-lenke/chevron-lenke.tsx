@@ -1,10 +1,11 @@
 import * as React from 'react';
 import cls from 'classnames';
-import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
+import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import './chevron-lenke.less';
 
 export enum Retning {
-    HOYRE, VENSTRE
+    HOYRE,
+    VENSTRE
 }
 
 interface ChevronLenkeProps {
@@ -21,7 +22,7 @@ function ChevronLenke(props: ChevronLenkeProps) {
     if (retning === Retning.VENSTRE) {
         return (
             <button className={cls(clsPar)} onClick={onClick}>
-                <VenstreChevron/>
+                <VenstreChevron />
                 <span className="chevron-lenke__tekst">{tekst}</span>
             </button>
         );
@@ -29,7 +30,7 @@ function ChevronLenke(props: ChevronLenkeProps) {
     return (
         <button className={cls(clsPar)} onClick={onClick}>
             <span className="chevron-lenke__tekst">{tekst}</span>
-            <HoyreChevron/>
+            <HoyreChevron />
         </button>
     );
 }

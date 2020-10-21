@@ -16,28 +16,27 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
 
     useEffect(() => {
         // @ts-ignore
-        savedCallback.current = (b) => endreFiltervalg('navnEllerFnrQuery', b);
+        savedCallback.current = b => endreFiltervalg('navnEllerFnrQuery', b);
     }, [endreFiltervalg]);
 
-    useEffect(
-        () => {
-            function functionCall() {
-                // @ts-ignore
-                savedCallback.current(navnEllerFnrQuery);
-            }
+    useEffect(() => {
+        function functionCall() {
+            // @ts-ignore
+            savedCallback.current(navnEllerFnrQuery);
+        }
 
-            if (isInitialMount.current) {
-                isInitialMount.current = false;
-            } else {
-                if (!timer.current) {
-                    timer.current = window.setTimeout(functionCall, 500);
-                }
-                return () => {
-                    clearTimeout(timer.current);
-                    timer.current = undefined;
-                };
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            if (!timer.current) {
+                timer.current = window.setTimeout(functionCall, 500);
             }
-        }, [navnEllerFnrQuery]);
+            return () => {
+                clearTimeout(timer.current);
+                timer.current = undefined;
+            };
+        }
+    }, [navnEllerFnrQuery]);
 
     useEffect(() => {
         const prevQuery = filtervalg.navnEllerFnrQuery;

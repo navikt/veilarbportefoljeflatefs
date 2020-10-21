@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrukerModell } from '../../model-interfaces';
+import {BrukerModell} from '../../model-interfaces';
 
 interface VeilederidProps {
     className?: string;
@@ -12,9 +12,7 @@ function VeilederId({className, skalVises, bruker}: VeilederidProps) {
         return null;
     }
 
-    return <div className={className}>
-        {bruker.veilederId}
-    </div>;
+    return <div className={className}>{bruker.veilederId}</div>;
 }
 
 export default VeilederId;

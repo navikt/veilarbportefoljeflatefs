@@ -33,7 +33,7 @@ function FiltreringLabel({
     );
 
     if (label === undefined) {
-        return (<FilterFeilModal isOpen={true}/>);
+        return <FilterFeilModal isOpen={true} />;
     }
     return (
         <button

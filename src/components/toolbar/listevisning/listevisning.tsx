@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ } from '../../../ducks/ui/listevisning';
-import { selectMuligeAlternativer, selectValgteAlternativer } from '../../../ducks/ui/listevisning-selectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ} from '../../../ducks/ui/listevisning';
+import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listvisning-rad';
 import './listevisning.less';
-import { ReactComponent as VelgKolonneIkon } from '../../ikoner/settings.svg';
+import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
 import Dropdown from '../../dropdown/dropdown';
-import { AppState } from '../../../reducer';
+import {AppState} from '../../../reducer';
 
 interface ListevisningProps {
     filtergruppe: ListevisningType;
 }
 
 function Listevisning(props: ListevisningProps) {
-
     const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, props.filtergruppe));
     const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, props.filtergruppe));
 
@@ -35,21 +34,21 @@ function Listevisning(props: ListevisningProps) {
         return null;
     }
 
-    const DropdownNavn = () =>
+    const DropdownNavn = () => (
         <>
-            <VelgKolonneIkon/>
+            <VelgKolonneIkon />
             <span className="velg-kolonner__tekst">Velg kolonner</span>
-        </>;
+        </>
+    );
 
     return (
         <Dropdown
-            name={<DropdownNavn/>}
+            name={<DropdownNavn />}
             disabled={muligeAlternativer.length <= 3}
             className="dropdown--toolbar toolbar__velg-kolonner"
-            render={() =>
-                <ul
-                    className="ustilet">
-                    {muligeAlternativer.map((kolonne) => (
+            render={() => (
+                <ul className="ustilet">
+                    {muligeAlternativer.map(kolonne => (
                         <ListevisningRad
                             key={kolonne}
                             kolonne={kolonne}
@@ -59,7 +58,7 @@ function Listevisning(props: ListevisningProps) {
                         />
                     ))}
                 </ul>
-            }
+            )}
         />
     );
 }

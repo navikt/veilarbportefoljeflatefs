@@ -10,7 +10,7 @@ import {Knapp} from 'nav-frontend-knapper';
 import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
-import {useSelectGjeldendeVeileder} from "../../../hooks/portefolje/use-select-gjeldende-veileder";
+import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 
 interface TildelVeilederProps {
     filtergruppe?: string;
@@ -22,34 +22,32 @@ function TildelVeileder({filtergruppe, btnOnClick}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const sorterVeiledere = veiledere.sort((a, b) => a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1);
+    const sorterVeiledere = veiledere.sort((a, b) =>
+        a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
+    );
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder));
     };
 
-    const valgteBrukere = brukere.filter((bruker) => bruker.markert === true);
+    const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
         btnOnClick();
         if (ident) {
-            const tilordninger = valgteBrukere
-                .map((bruker) => ({
-                    fraVeilederId: bruker.veilederId,
-                    tilVeilederId: ident,
-                    brukerFnr: bruker.fnr
-                }));
+            const tilordninger = valgteBrukere.map(bruker => ({
+                fraVeilederId: bruker.veilederId,
+                tilVeilederId: ident,
+                brukerFnr: bruker.fnr
+            }));
             doTildelTilVeileder(tilordninger, ident);
         }
     };
 
     return (
-        <SokFilterNy
-            placeholder="Tildel veileder"
-            data={sorterVeiledere}
-        >
-            {data =>
+        <SokFilterNy placeholder="Tildel veileder" data={sorterVeiledere}>
+            {data => (
                 <TildelVeilederRenderer
                     ident={ident}
                     onChange={setIdent}
@@ -57,7 +55,7 @@ function TildelVeileder({filtergruppe, btnOnClick}: TildelVeilederProps) {
                     data={data}
                     btnOnClick={() => onSubmit()}
                 />
-            }
+            )}
         </SokFilterNy>
     );
 }
@@ -74,7 +72,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit}>
             <div className="radio-filterform__valg">
-                {data.map(veileder =>
+                {data.map(veileder => (
                     <Radio
                         name="veileder"
                         key={veileder.ident}
@@ -83,7 +81,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                         checked={ident ? ident === veileder.ident : false}
                         onChange={e => onChange(e.target.value)}
                     />
-                )}
+                ))}
             </div>
             <div className="blokk-xxs radio-filterform__under-valg">
                 <Knapp
@@ -99,10 +97,10 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe]
-    return ({
-        filtervalg: state[stateSlice],
-    });
+    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
+    return {
+        filtervalg: state[stateSlice]
+    };
 };
 
 export default connect(mapStateToProps)(TildelVeileder);

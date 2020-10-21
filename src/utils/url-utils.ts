@@ -1,7 +1,6 @@
 import * as queryString from 'query-string';
-import  { basename } from '../history';
-import { IKKE_SATT } from '../konstanter';
-
+import {basename} from '../history';
+import {IKKE_SATT} from '../konstanter';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;
@@ -14,20 +13,20 @@ export function setFraBrukerIUrl(bruker: string) {
     const lastSearch = localStorage.getItem('lastsearch');
     const fnrRegex = new RegExp('[0-9]{11}');
 
-    if(lastSearch && fnrRegex.test(lastSearch)) {
+    if (lastSearch && fnrRegex.test(lastSearch)) {
         localStorage.setItem('lastsearch', lastSearch.replace(fnrRegex, bruker));
-    } else if(lastSearch && !fnrRegex.test(lastSearch)) {
+    } else if (lastSearch && !fnrRegex.test(lastSearch)) {
         localStorage.setItem('lastsearch', lastSearch.concat(`&fraBruker=${bruker}`));
     }
-        localStorage.setItem('xPos', window.pageXOffset.toString());
-        localStorage.setItem('yPos', window.pageYOffset.toString());
+    localStorage.setItem('xPos', window.pageXOffset.toString());
+    localStorage.setItem('yPos', window.pageYOffset.toString());
 }
 
 export function getSideFromUrl() {
-    return parseInt(queryString.parse(window.location.search).side as string || '1', 10);
+    return parseInt((queryString.parse(window.location.search).side as string) || '1', 10);
 }
 
-export function getInitialStateFromUrl () {
+export function getInitialStateFromUrl() {
     const side = getSideFromUrl();
     const seAlle = getSeAlleFromUrl();
     const sorteringsfelt = getSorteringsFeltFromUrl();

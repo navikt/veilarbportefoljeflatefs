@@ -1,11 +1,10 @@
 import React from 'react';
-import { Field, getIn } from 'formik';
-import { Input } from 'nav-frontend-skjema';
+import {Field, getIn} from 'formik';
+import {Input} from 'nav-frontend-skjema';
 
 const TITTEL_MAKS_LENGDE = 30;
 
 function FormikInput({name}) {
-
     const validate = (value: string): string | undefined => {
         let error: undefined | string;
         if (!value) {

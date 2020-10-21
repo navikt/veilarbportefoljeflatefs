@@ -1,17 +1,13 @@
 import React from 'react';
-import {
-    ER_SYKMELDT_MED_ARBEIDSGIVER,
-    TRENGER_VURDERING,
-    UNDER_VURDERING
-} from '../../filter-konstanter';
+import {ER_SYKMELDT_MED_ARBEIDSGIVER, TRENGER_VURDERING, UNDER_VURDERING} from '../../filter-konstanter';
 import {FiltreringStatusGruppe} from './ufordelte-brukere';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
 import {VEDTAKSTOTTE} from '../../../konstanter';
-import {HiddenIfNyBarInputRadio, NyBarInputRadio} from "../../../components/barinput/ny_bar_input_radio";
-import {useFeatureSelector} from "../../../hooks/redux/use-feature-selector";
+import {HiddenIfNyBarInputRadio, NyBarInputRadio} from '../../../components/barinput/ny_bar_input_radio';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 
 export function NyFiltreringStatusBehovsVurdering(props: FiltreringStatusGruppe) {
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE)
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const statusTall = useStatusTallSelector();
 
     return (

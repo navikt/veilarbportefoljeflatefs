@@ -29,20 +29,21 @@ import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
-import {NyMineFilterLagreFilterKnapp} from "../minoversikt/ny_mine-filter-lagre-filter-knapp";
-import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
-import {useWindowWidth} from "../hooks/use-window-width";
-import NyToolbar from "../components/toolbar/ny_toolbar";
-import NyFiltreringNavnellerfnr from "../filtrering/ny_filtrering-navnellerfnr";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
-
+import {NyMineFilterLagreFilterKnapp} from '../minoversikt/ny_mine-filter-lagre-filter-knapp';
+import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
+import {useWindowWidth} from '../hooks/use-window-width';
+import NyToolbar from '../components/toolbar/ny_toolbar';
+import NyFiltreringNavnellerfnr from '../filtrering/ny_filtrering-navnellerfnr';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
-        return Object.entries(value).map(([_, verdi]) => {
-            if (verdi === 'NA') return 0;
-            return 1;
-        }).reduce((a: number, b: number) => a + b, 0);
+        return Object.entries(value)
+            .map(([_, verdi]) => {
+                if (verdi === 'NA') return 0;
+                return 1;
+            })
+            .reduce((a: number, b: number) => a + b, 0);
     }
 
     return Object.entries(filtervalg)
@@ -57,22 +58,40 @@ function antallFilter(filtervalg) {
                 return value ? Object.entries(value).length : 0;
             } else if (value) return 1;
             return 0;
-        }).reduce((a, b) => a + b, 0);
+        })
+        .reduce((a, b) => a + b, 0);
 }
 
 const filtergruppe = ListevisningType.enhetensOversikt;
-const id = "enhetens-oversikt";
+const id = 'enhetens-oversikt';
 
 function Ny_EnhetSide() {
     const statustall = useFetchStatusTall();
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} = usePortefoljeSelector(filtergruppe);
+    const {
+        portefolje,
+        filtervalg,
+        enhetId,
+        sorteringsrekkefolge,
+        sorteringsfelt,
+        enhettiltak,
+        listevisning
+    } = usePortefoljeSelector(filtergruppe);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
-    const antallBrukere = portefoljeData.antallReturnert > portefoljeData.antallTotalt ? portefoljeData.antallTotalt : portefoljeData.antallReturnert;
+    const antallBrukere =
+        portefoljeData.antallReturnert > portefoljeData.antallTotalt
+            ? portefoljeData.antallTotalt
+            : portefoljeData.antallReturnert;
     const harFilter = antallFilter(filtervalg) !== 0;
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const slettVeilederFilter = useCallback(ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)), [dispatch]);
-    const veilederLabel = useMemo(() => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter), [filtervalg.veiledere, veilederliste, slettVeilederFilter]);
+    const slettVeilederFilter = useCallback(
+        ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)),
+        [dispatch]
+    );
+    const veilederLabel = useMemo(
+        () => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),
+        [filtervalg.veiledere, veilederliste, slettVeilederFilter]
+    );
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
@@ -101,22 +120,20 @@ function Ny_EnhetSide() {
             }
         }
 
-        window.addEventListener("scroll", onScroll);
-        return window.addEventListener("scroll", onScroll);
+        window.addEventListener('scroll', onScroll);
+        return window.addEventListener('scroll', onScroll);
     });
-
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse__ny"
-                 role="tab"
-                 aria-controls={id}
-                 id={id}
-            >
-                <ToppMeny/>
+            <div className="side-storrelse__ny" role="tab" aria-controls={id} id={id}>
+                <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
-                        className={classNames('oversikt-sideinnhold__ny', isSidebarHidden && 'oversikt-sideinnhold__ny__hidden')}
+                        className={classNames(
+                            'oversikt-sideinnhold__ny',
+                            isSidebarHidden && 'oversikt-sideinnhold__ny__hidden'
+                        )}
                         role="tabpanel"
                         aria-labelledby={id}
                         id={id}
@@ -128,11 +145,8 @@ function Ny_EnhetSide() {
                             isSidebarHidden={isSidebarHidden}
                         />
                         <div className="sokefelt-knapp__container">
-                            <NyFiltreringNavnellerfnr
-                                filtervalg={filtervalg}
-                                endreFiltervalg={doEndreFiltervalg}
-                            />
-                            <NyMineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
+                            <NyFiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                            <NyMineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
                         </div>
                         <FiltreringLabelContainer
                             filtervalg={{
@@ -144,52 +158,73 @@ function Ny_EnhetSide() {
                             listevisning={listevisning}
                             className="ny__filtrering-label-container"
                         />
-                        {harFilter ?
-                            <div className={classNames('oversikt__container',
-                                isSidebarHidden && 'oversikt__container__hidden')}>
-                                <div className={antallBrukere > 4
-                                    ? 'sticky-container__ny'
-                                    : 'ikke-sticky__ny__container'}>
-                                    <span className={antallBrukere > 4
-                                        ? 'sticky-skygge__ny'
-                                        : 'ikke-sticky__ny__skygge'}>
-                            <div className={antallBrukere > 4
-                                ? 'toolbar-container__ny'
-                                : 'ikke-sticky__ny__toolbar-container'}>
-                                    <TabellOverskrift
-                                        className={classNames('tabelloverskrift__ny',
-                                            (((scrolling && isSidebarHidden) ||
-                                                (scrolling && windowWidth < 1200) ||
-                                                (!isSidebarHidden && windowWidth < 1200 && scrolling))
-                                                && "tabelloverskrift__ny__hidden"))}/>
-                                <NyToolbar
-                                    onPaginering={() => dispatch(hentPortefoljeForEnhet(
-                                        enhetId,
-                                        sorteringsrekkefolge,
-                                        sorteringsfelt,
-                                        filtervalg
-                                    ))}
-                                    filtergruppe={filtergruppe}
-                                    sokVeilederSkalVises
-                                    antallTotalt={portefoljeData.antallTotalt}
-                                    scrolling={scrolling}
-                                    isSidebarHidden={isSidebarHidden}
-                                />
-                                <EnhetTabellOverskrift/>
-                            </div>
-                            </span>
+                        {harFilter ? (
+                            <div
+                                className={classNames(
+                                    'oversikt__container',
+                                    isSidebarHidden && 'oversikt__container__hidden'
+                                )}
+                            >
+                                <div
+                                    className={
+                                        antallBrukere > 4 ? 'sticky-container__ny' : 'ikke-sticky__ny__container'
+                                    }
+                                >
+                                    <span
+                                        className={antallBrukere > 4 ? 'sticky-skygge__ny' : 'ikke-sticky__ny__skygge'}
+                                    >
+                                        <div
+                                            className={
+                                                antallBrukere > 4
+                                                    ? 'toolbar-container__ny'
+                                                    : 'ikke-sticky__ny__toolbar-container'
+                                            }
+                                        >
+                                            <TabellOverskrift
+                                                className={classNames(
+                                                    'tabelloverskrift__ny',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        'tabelloverskrift__ny__hidden'
+                                                )}
+                                            />
+                                            <NyToolbar
+                                                onPaginering={() =>
+                                                    dispatch(
+                                                        hentPortefoljeForEnhet(
+                                                            enhetId,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
+                                                        )
+                                                    )
+                                                }
+                                                filtergruppe={filtergruppe}
+                                                sokVeilederSkalVises
+                                                antallTotalt={portefoljeData.antallTotalt}
+                                                scrolling={scrolling}
+                                                isSidebarHidden={isSidebarHidden}
+                                            />
+                                            <EnhetTabellOverskrift />
+                                        </div>
+                                    </span>
                                     <EnhetTabell
-                                        classNameWrapper={antallBrukere > 0
-                                            ? 'portefolje__container__ny'
-                                            : 'portefolje__container__ny__tom-liste'}
+                                        classNameWrapper={
+                                            antallBrukere > 0
+                                                ? 'portefolje__container__ny'
+                                                : 'portefolje__container__ny__tom-liste'
+                                        }
                                     />
                                 </div>
                             </div>
-                            : <VelgFilterMelding/>}
+                        ) : (
+                            <VelgFilterMelding />
+                        )}
                     </div>
                 </Innholdslaster>
-                <MineFilterModal filtergruppe={filtergruppe}/>
-                <ModalEnhetSideController/>
+                <MineFilterModal filtergruppe={filtergruppe} />
+                <ModalEnhetSideController />
             </div>
         </DocumentTitle>
     );

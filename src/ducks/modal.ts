@@ -8,7 +8,7 @@ export const VIS_FJERN_ARBEIDSLISTE_MODAL = 'FJERN_ARBEIDSLISTE/vis';
 
 const initalState = {
     modal: undefined,
-    brukere: [],
+    brukere: []
 };
 
 // Reducer

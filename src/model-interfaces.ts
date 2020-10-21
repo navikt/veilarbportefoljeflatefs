@@ -1,4 +1,4 @@
-import { FiltreringAktiviteterValg } from './ducks/filtrering';
+import {FiltreringAktiviteterValg} from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -58,7 +58,7 @@ export interface FiltervalgModell {
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
     registreringstype: string[];
-    cvJobbprofil: null | string
+    cvJobbprofil: null | string;
 }
 
 export interface EnhetModell {
@@ -76,7 +76,7 @@ export interface VeilederModell {
     navn: string;
     fornavn: string;
     etternavn: string;
-    enheter: EnhetModell[]
+    enheter: EnhetModell[];
 }
 
 export enum VurderingsBehov {
@@ -130,7 +130,7 @@ export interface BrukerModell {
     erSykmeldtMedArbeidsgiver: boolean;
     moteStartTid: string;
     moteSluttTid: string;
-    vedtakStatus?: string,
+    vedtakStatus?: string;
     vedtakStatusEndret?: string;
     trengerRevurdering: boolean;
 }
@@ -152,7 +152,7 @@ export enum KategoriModell {
     BLA = 'BLA',
     LILLA = 'LILLA',
     GRONN = 'GRONN',
-    GUL = 'GUL',
+    GUL = 'GUL'
 }
 
 export interface ArbeidslisteModell {
@@ -162,7 +162,7 @@ export interface ArbeidslisteModell {
     arbeidslisteAktiv: boolean;
     endringstidspunkt: string; // dato
     isOppfolgendeVeileder: boolean;
-    sistEndretAv: { veilederId: string };
+    sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
 }
 

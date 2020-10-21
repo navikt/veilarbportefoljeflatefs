@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker} from './utils';
-import {oppfolgingStartetDato} from "./dato-utils";
+import {oppfolgingStartetDato} from './dato-utils';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {
@@ -35,7 +35,9 @@ describe('Date utils', () => {
                 a3: '2050-08-22T13:22:00Z',
                 a4: '2050-08-23T13:22:00Z'
             };
-            expect(utledValgteAktivitetsTyper(brukerAktiviteter, aktivitetFiltervalg)).toStrictEqual({a2: '2050-08-21T13:22:00Z'});
+            expect(utledValgteAktivitetsTyper(brukerAktiviteter, aktivitetFiltervalg)).toStrictEqual({
+                a2: '2050-08-21T13:22:00Z'
+            });
         });
         it('skal returnere null om objekter er tomt eller null', () => {
             expect(utledValgteAktivitetsTyper(null, null)).toBeNull();
@@ -57,14 +59,13 @@ describe('Date utils', () => {
         it('skal regne ut antall uker', () => {
             const uker = 7 * 24 * 3600 * 1000;
             const now = new Date().getTime();
-            const fremtiden = new Date(now + (2 * uker));
-            const fortiden = new Date(now - (2 * uker));
+            const fremtiden = new Date(now + 2 * uker);
+            const fortiden = new Date(now - 2 * uker);
 
             expect(utlopsdatoUker(`${fremtiden}`)).toBe(2);
             expect(utlopsdatoUker(`${fortiden}`)).toBe(-2);
         });
     });
-
 
     describe('Sjekke oppfølging startet-dato', () => {
         it('Dato er før 04.12.2017, skal returnere null', () => {
@@ -75,8 +76,5 @@ describe('Date utils', () => {
         it('skal returnere gitt dato', () => {
             expect(oppfolgingStartetDato('2019-02-01')).toEqual(new Date('2019-02-01'));
         });
-
     });
-
-
 });

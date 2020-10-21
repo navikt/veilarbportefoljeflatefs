@@ -28,7 +28,7 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, props.lukkModal);
 
-    const doLagreNyttFilter = (event) => {
+    const doLagreNyttFilter = event => {
         event.preventDefault();
         const feilValideringResponse = feilValidering(filterNavn, filterValg, data);
         setFeilmelding(feilValideringResponse);
@@ -52,12 +52,12 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
 
     return (
         <>
-            <form onSubmit={(e) => doLagreNyttFilter(e)}>
+            <form onSubmit={e => doLagreNyttFilter(e)}>
                 <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"
                     value={filterNavn}
-                    onChange={(e) => setFilterNavn(e.target.value)}
+                    onChange={e => setFilterNavn(e.target.value)}
                     feil={feilmelding.filterNavn}
                     autoFocus={true}
                     maxLength={255}

@@ -1,4 +1,4 @@
-import {erObjektValuesTomt, lagretFilterValgModellErLik} from "./mine-filter-utils";
+import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
 
 describe('Mine filter utils', () => {
     describe('Er objekt values tomt', () => {

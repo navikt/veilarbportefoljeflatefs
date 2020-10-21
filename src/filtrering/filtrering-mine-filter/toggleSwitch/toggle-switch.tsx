@@ -20,7 +20,7 @@ function ToggleSwitch({onOpen, onClose, defaultChecked, checked, ariaLabel}: Tog
                 aria-label={ariaLabel}
                 defaultChecked={defaultChecked}
                 checked={checked}
-                onChange={(e) => {
+                onChange={e => {
                     const checkbox = e.target;
                     if (checkbox.checked) {
                         if (onOpen) onOpen();

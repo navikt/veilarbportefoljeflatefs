@@ -1,7 +1,7 @@
 import React from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { VarselModal, VarselModalType } from '../varselmodal/varselmodal';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './modal.less';
 
 interface VeiledergruppeendringFeiletProps {
@@ -22,19 +22,11 @@ function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProp
             type={VarselModalType.ADVARSEL}
         >
             <div className="blokk-s veiledergruppe-feilet-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">
-                    {props.innholdstittel}
-                </Innholdstittel>
-                <Normaltekst>
-                    {props.tekst}
-                </Normaltekst>
-
+                <Innholdstittel className="blokk-s">{props.innholdstittel}</Innholdstittel>
+                <Normaltekst>{props.tekst}</Normaltekst>
             </div>
             <div className="veiledergruppe-feilet-modal__knappegruppe">
-                <Hovedknapp
-                    htmlType="submit"
-                    onClick={props.onRequestClose}
-                >
+                <Hovedknapp htmlType="submit" onClick={props.onRequestClose}>
                     Ok
                 </Hovedknapp>
             </div>
