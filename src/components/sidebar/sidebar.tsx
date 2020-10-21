@@ -100,10 +100,10 @@ function Sidebar(props: SidebarProps) {
 
     let tabFoc = tabFocus();
 
-    const keyCode = (e) => e.which || e.keyCode;
+    const keyCode = e => e.which || e.keyCode;
 
     function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
-        return tabs.find((t) => t.type === viewType) as Sidebar;
+        return tabs.find(t => t.type === viewType) as Sidebar;
     }
 
     const mapTabTilView = (tab: Sidebar, isSelected: boolean, key: number) => {
@@ -111,15 +111,18 @@ function Sidebar(props: SidebarProps) {
         return (
             <button
                 key={key}
-                className={classNames('sidebar__tab', {'sidebar__tab-valgt': isSelected})}
-                onClick={(e) => handleMouseClick(e, tab)}
+                className={classNames('sidebar__tab', {
+                    'sidebar__tab-valgt': isSelected
+                })}
+                onClick={e => handleMouseClick(e, tab)}
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
                 aria-controls={tab.type}
                 id={tab.type}
                 tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={(e) => handleKeyUp(e, tab)}
+                onKeyUp={e => handleKeyUp(e, tab)}
                 title={ariaFaneTekst}
+                data-testid={`sidebar-tab_${tab.type}`}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>
@@ -184,10 +187,10 @@ function Sidebar(props: SidebarProps) {
     }
 
     const Tabs = () => {
-        const visVeiledergrupper = (tab) => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
         if (erPaMinOversikt) {
             return sidebar
-                .filter((tab) => !visVeiledergrupper(tab))
+                .filter(tab => !visVeiledergrupper(tab))
                 .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
         }
         return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
@@ -195,7 +198,9 @@ function Sidebar(props: SidebarProps) {
 
     outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden) {
-            logEvent('portefolje.metrikker.klikk-utenfor', {sideNavn: finnSideNavn()});
+            logEvent('portefolje.metrikker.klikk-utenfor', {
+                sideNavn: finnSideNavn()
+            });
             dispatch(skjulSidebar(props.filtergruppe));
         }
     });
@@ -217,6 +222,7 @@ function Sidebar(props: SidebarProps) {
                 aria-labelledby={selectedTabData.type}
                 id={selectedTabData.type}
                 tabIndex={0}
+                data-testid="sidebar_content-container"
             >
                 <Sidevelger
                     selectedTabData={selectedTabData}

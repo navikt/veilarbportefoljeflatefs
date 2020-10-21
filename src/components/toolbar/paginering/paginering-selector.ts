@@ -1,4 +1,4 @@
-import { AppState } from '../../../reducer';
+import {AppState} from '../../../reducer';
 
 export function selectSide(state: AppState): number {
     return state.paginering.side;

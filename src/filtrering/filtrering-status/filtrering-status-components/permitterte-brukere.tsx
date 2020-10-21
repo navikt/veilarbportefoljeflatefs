@@ -1,6 +1,6 @@
 import React from 'react';
-import { PERMITTERTE_ETTER_NIENDE_MARS } from '../../filter-konstanter';
-import { useStatusTallSelector } from '../../../hooks/redux/use-statustall';
+import {PERMITTERTE_ETTER_NIENDE_MARS} from '../../filter-konstanter';
+import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
 import BarInputCheckbox from '../../../components/barinput/barinput-checkbox';
 
 export interface FiltreringStatusGruppe {

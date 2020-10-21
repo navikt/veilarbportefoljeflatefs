@@ -20,9 +20,9 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
-import MetrikkEkspanderbartpanel from "../components/ekspandertbart-panel/metrikk-ekspanderbartpanel";
-import {ListevisningType} from "../ducks/ui/listevisning";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
+import {ListevisningType} from '../ducks/ui/listevisning';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function Ny_veiledereSide() {
     const statustall = useFetchStatusTall();
@@ -32,7 +32,7 @@ function Ny_veiledereSide() {
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
-    const id = "veileder-oversikt";
+    const id = 'veileder-oversikt';
     useSetEnhetIUrl();
 
     useOnMount(() => {
@@ -47,33 +47,17 @@ function Ny_veiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse__ny veilederoversikt"
-                 role="tab"
-                 aria-controls={id}
-                 id={id}
-            >
-                <ToppMeny/>
+            <div className="side-storrelse__ny veilederoversikt" role="tab" aria-controls={id} id={id}>
+                <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div
-                        className="oversikt-sideinnhold-veilederside__ny"
-                        role="tabpanel"
-                        aria-labelledby={id}
-                        id={id}
-                    >
-
+                    <div className="oversikt-sideinnhold-veilederside__ny" role="tabpanel" aria-labelledby={id} id={id}>
                         <div className="status-filter-kolonne__ny">
                             <PanelBase className="blokk-xxxs sok-veileder__ny">
-                                <Undertittel>
-                                    Søk veileder
-                                </Undertittel>
-                                <FiltreringVeiledere/>
+                                <Undertittel>Søk veileder</Undertittel>
+                                <FiltreringVeiledere />
                             </PanelBase>
-                            <MetrikkEkspanderbartpanel
-                                apen={true}
-                                lamellNavn="veiledergrupper"
-                                tittel="Veiledergrupper"
-                            >
-                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt}/>
+                            <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                                <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>
                         <div className="liste-kolonne__ny">

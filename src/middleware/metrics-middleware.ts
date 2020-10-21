@@ -21,7 +21,7 @@ import {
     SLETT_MINEFILTER_OK,
     SORTER_MINEFILTER_FEILET,
     SORTER_MINEFILTER_OK
-} from "../ducks/mine-filter";
+} from '../ducks/mine-filter';
 
 interface FilterEndringData {
     filterId: string;
@@ -52,7 +52,7 @@ export function finnSideNavn(): SideNavn {
 function finnElementerSomErLagtTil(prevElementer: string[], nyeElementer: string[]): string[] {
     const elementerLagtTil: string[] = [];
 
-    nyeElementer.forEach((element) => {
+    nyeElementer.forEach(element => {
         if (prevElementer.indexOf(element) === -1) {
             elementerLagtTil.push(element);
         }
@@ -91,11 +91,11 @@ export function finnFiltergruppe(sideNavn) {
     if (sideNavn === 'MIN_OVERSIKT') {
         return ListevisningType.minOversikt;
     } else if (sideNavn === 'ENHETENS_OVERSIKT') {
-        return ListevisningType.enhetensOversikt
+        return ListevisningType.enhetensOversikt;
     } else if (sideNavn === 'VEILEDER_OVERSIKT') {
-        return ListevisningType.veilederOversikt
+        return ListevisningType.veilederOversikt;
     }
-    return ''
+    return '';
 }
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {
@@ -151,7 +151,13 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         }
         case NY_VEILEDERGRUPPER_OK:
-            loggNyVeiledergruppeOK(action.data.filterValg.veiledere.length, store.getState().mineFilter.data.length, action.data.filterNavn.trim().length, store.getState().valgtEnhet.data.enhetId, finnSideNavn());
+            loggNyVeiledergruppeOK(
+                action.data.filterValg.veiledere.length,
+                store.getState().mineFilter.data.length,
+                action.data.filterNavn.trim().length,
+                store.getState().valgtEnhet.data.enhetId,
+                finnSideNavn()
+            );
             break;
         case REDIGER_VEILEDERGRUPPER_OK:
             loggRedigerVeiledergruppeOK(action.data.filterValg.veiledere.length, sideNavn);
@@ -164,26 +170,26 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggRedigerMineFilterOK(sideNavn);
             break;
         case SLETT_MINEFILTER_OK:
-            const opprettetTidspunkt = finnSlettetGruppe(store, action.data)
+            const opprettetTidspunkt = finnSlettetGruppe(store, action.data);
             loggSlettMineFilterOK(opprettetTidspunkt, sideNavn);
             break;
         case HENT_MINEFILTER_FEILET:
-            loggHentMineFilterFeilet(sideNavn)
+            loggHentMineFilterFeilet(sideNavn);
             break;
         case NY_MINEFILTER_FEILET:
-            loggNyttMineFilterFeilet(sideNavn)
+            loggNyttMineFilterFeilet(sideNavn);
             break;
         case REDIGER_MINEFILTER_FEILET:
-            loggRedigerMineFilterFeilet(sideNavn)
+            loggRedigerMineFilterFeilet(sideNavn);
             break;
         case SLETT_MINEFILTER_FEILET:
-            loggSlettMineFilterFeilet(sideNavn)
+            loggSlettMineFilterFeilet(sideNavn);
             break;
         case SORTER_MINEFILTER_OK:
-            loggSorterMineFilterOK(sideNavn)
+            loggSorterMineFilterOK(sideNavn);
             break;
         case SORTER_MINEFILTER_FEILET:
-            loggSorterMineFilterFeilet(sideNavn)
+            loggSorterMineFilterFeilet(sideNavn);
             break;
     }
 
@@ -209,7 +215,7 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
         const prevFilter = filtrering[data.filterId];
         const lagtTilFilterVerdier = finnElementerSomErLagtTil(prevFilter, data.filterVerdi);
 
-        lagtTilFilterVerdier.forEach((verdi) => {
+        lagtTilFilterVerdier.forEach(verdi => {
             logEvent('portefolje.metrikker.endre_filter', {
                 sideNavn,
                 filter: data.filterId,
@@ -217,7 +223,6 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
                 veilederIdent
             });
         });
-
     } else {
         logEvent('portefolje.metrikker.endre_filter', {
             sideNavn,
@@ -226,7 +231,6 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
             veilederIdent
         });
     }
-
 };
 
 const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
@@ -258,8 +262,10 @@ const loggArbeidslisteApne = (sideNavn: SideNavn) => {
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {
-    if ((sorteringsfelt !== 'etternavn' || rekkefolge !== 'ascending')
-        && (sorteringsfelt !== 'ikke_satt' || rekkefolge !== 'ikke_satt')) {
+    if (
+        (sorteringsfelt !== 'etternavn' || rekkefolge !== 'ascending') &&
+        (sorteringsfelt !== 'ikke_satt' || rekkefolge !== 'ikke_satt')
+    ) {
         logEvent('portefolje.metrikker.endre_sortering', {sideNavn, sorteringsfelt, rekkefolge});
     }
 };
@@ -286,45 +292,43 @@ const loggSlettVeiledergruppeFeilet = () => {
 };
 
 const loggNyVeiledergruppeOK = (antallVeiledere, antallGrupper, gruppeNavn, enhetId, sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.veiledergrupper.oppretting-vellykket',
+    logEvent(
+        'portefolje.metrikker.veiledergrupper.oppretting-vellykket',
         {veiledere: antallVeiledere, antallGrupper, gruppeNavn},
-        {enhetId, sideNavn});
+        {enhetId, sideNavn}
+    );
 };
 
 const loggRedigerVeiledergruppeOK = (antallVeiledere, sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket',
-        {veiledere: antallVeiledere},
-        {sideNavn});
+    logEvent('portefolje.metrikker.veiledergrupper.lagring-vellykket', {veiledere: antallVeiledere}, {sideNavn});
 };
 
 const loggSlettVeiledergruppeOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.veiledergrupper.sletting-vellykket',
+    logEvent(
+        'portefolje.metrikker.veiledergrupper.sletting-vellykket',
         {levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24)},
-        {sideNavn});
+        {sideNavn}
+    );
 };
-
 
 //Lagrede filter
 const loggNyttMineFilterOK = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.oppretting-vellykket',
-        {sideNavn: sideNavn},
-        {});
+    logEvent('portefolje.metrikker.lagredefilter.oppretting-vellykket', {sideNavn: sideNavn}, {});
 };
 
 const loggRedigerMineFilterOK = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.lagring-vellykket',
-        {sideNavn: sideNavn},
-        {});
+    logEvent('portefolje.metrikker.lagredefilter.lagring-vellykket', {sideNavn: sideNavn}, {});
 };
 
-
 const loggSlettMineFilterOK = (opprettetTidspunkt, sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.lagredefilter.sletting-vellykket',
+    logEvent(
+        'portefolje.metrikker.lagredefilter.sletting-vellykket',
         {
             levetid: (new Date().getTime() - new Date(opprettetTidspunkt).getTime()) / (1000 * 3600 * 24),
             sideNavn: sideNavn
         },
-        {});
+        {}
+    );
 };
 
 const loggHentMineFilterFeilet = (sideNavn: SideNavn) => {
@@ -350,5 +354,3 @@ const loggSorterMineFilterOK = (sideNavn: SideNavn) => {
 const loggSorterMineFilterFeilet = (sideNavn: SideNavn) => {
     logEvent('portefolje.metrikker.lagredefilter.sortering-feilet', {sideNavn: sideNavn});
 };
-
-

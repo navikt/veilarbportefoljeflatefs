@@ -9,7 +9,7 @@ import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React, {RefObject, useRef} from 'react';
 import {antallFilter} from '../../components/modal/mine-filter/mine-filter-utils';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {LagretFilter} from "../../ducks/lagretFilter";
+import {LagretFilter} from '../../ducks/lagretFilter';
 
 interface MineFilterRadProps {
     lagretFilter: LagretFilter;

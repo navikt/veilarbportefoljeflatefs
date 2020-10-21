@@ -1,6 +1,6 @@
-import React, { ChangeEventHandler } from 'react';
+import React, {ChangeEventHandler} from 'react';
 import BarInput from './barinput';
-import { ferdigfilterListe, mapFilternavnTilFilterValue } from '../../filtrering/filter-konstanter';
+import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './barlabel.less';
 
 interface BarInputCheckboxProps {

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Input } from 'nav-frontend-skjema';
-import { connect } from 'react-redux';
-import { endreFiltervalg } from '../ducks/filtrering';
+import {Input} from 'nav-frontend-skjema';
+import {connect} from 'react-redux';
+import {endreFiltervalg} from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import {ListevisningType} from "../ducks/ui/listevisning";
+import {ListevisningType} from '../ducks/ui/listevisning';
 
 interface FiltreringVeiledereState {
     veilederNavnQuery?: string;
@@ -21,13 +21,12 @@ interface DispatchProps {
 type AllProps = StateProps & DispatchProps;
 
 class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereState> {
-
     private wrapperRef;
 
     constructor(props: AllProps) {
         super(props);
         this.state = {
-            hasFocus: false,
+            hasFocus: false
         };
     }
 
@@ -39,7 +38,7 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
-    handleChange = (event) => {
+    handleChange = event => {
         const nyQuery = event.target.value;
         this.setState({veilederNavnQuery: nyQuery});
         this.props.endreFiltervalg('veilederNavnQuery', nyQuery);
@@ -53,34 +52,37 @@ class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereS
         this.setFocus(false);
     };
 
-    handleClickOutside = (event) => {
+    handleClickOutside = event => {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.setFocus(false);
         }
     };
 
     render() {
-
         const {hasFocus, veilederNavnQuery} = this.state;
 
         return (
-            <div className="filtrering-veiledere" ref={(ref) => {
-                this.wrapperRef = ref;
-            }}>
+            <div
+                className="filtrering-veiledere"
+                ref={ref => {
+                    this.wrapperRef = ref;
+                }}
+            >
                 <Input
                     label=""
                     placeholder="Navn eller NAV-ident"
                     onChange={this.handleChange}
                     value={veilederNavnQuery}
                     onFocus={() => this.setFocus(true)}
+                    data-testid="veilederoversikt_sok-veileder-input"
                 />
-                {hasFocus &&
-                <VeilederCheckboxListe
-                    open={hasFocus}
-                    onSubmit={this.handleVeiledereSubmitted}
-                    onClose={() => this.setFocus(false)}
-                />
-                }
+                {hasFocus && (
+                    <VeilederCheckboxListe
+                        open={hasFocus}
+                        onSubmit={this.handleVeiledereSubmitted}
+                        onClose={() => this.setFocus(false)}
+                    />
+                )}
             </div>
         );
     }
@@ -90,7 +92,7 @@ const mapStateToProps = (state): StateProps => ({
     veilederNavnQuery: state.filtreringVeilederoversikt.veilederNavnQuery
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     endreFiltervalg: (filterId: string, filterVerdi: string) => {
         dispatch(endreFiltervalg(filterId, filterVerdi, ListevisningType.veilederOversikt));
     }

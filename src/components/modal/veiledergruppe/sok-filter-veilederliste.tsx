@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Input } from 'nav-frontend-skjema';
+import React, {useEffect, useState} from 'react';
+import {Input} from 'nav-frontend-skjema';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 interface SokFilterProps<T> {
@@ -20,13 +20,18 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
     useEffect(() => {
-        setRawfilteredData(data.filter(elem => !query || JSON.stringify(elem).toLowerCase().includes(query.toLowerCase())));
+        setRawfilteredData(
+            data.filter(
+                elem =>
+                    !query ||
+                    JSON.stringify(elem)
+                        .toLowerCase()
+                        .includes(query.toLowerCase())
+            )
+        );
     }, [query, data]);
 
-    const filteredData =
-        limitSize === undefined
-            ? rawfilteredData
-            : limit(rawfilteredData, limitSize || 20);
+    const filteredData = limitSize === undefined ? rawfilteredData : limit(rawfilteredData, limitSize || 20);
 
     const harData = filteredData.length > 0;
 
@@ -39,17 +44,19 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
                     value={query}
                     inputClassName="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
+                    data-testid="veiledergruppe_modal_sok-veileder-input"
                 />
             </div>
             <span className="text-hide" aria-live="polite" aria-atomic="true">
                 {`Viser ${filteredData.length} treff`}
             </span>
-            {harData
-                ? children(filteredData)
-                : <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+            {harData ? (
+                children(filteredData)
+            ) : (
+                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                     Ingen veiledere funnet
                 </AlertStripe>
-            }
+            )}
         </>
     );
 }

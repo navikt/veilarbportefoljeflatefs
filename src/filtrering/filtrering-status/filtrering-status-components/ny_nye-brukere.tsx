@@ -3,7 +3,7 @@ import {FiltreringStatusGruppe} from './ufordelte-brukere';
 import {NYE_BRUKERE_FOR_VEILEDER} from '../../filter-konstanter';
 import hiddenIf from '../../../components/hidden-if/hidden-if';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
-import NyBarInputCheckbox from "../../../components/barinput/ny_barinput-checkbox";
+import NyBarInputCheckbox from '../../../components/barinput/ny_barinput-checkbox';
 
 function NyFiltreringStatusNyeBrukere(props: FiltreringStatusGruppe) {
     const statusTall = useStatusTallSelector();

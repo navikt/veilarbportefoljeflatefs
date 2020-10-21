@@ -1,4 +1,4 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 // TABELLER
 // --------------------------------------------------
 @gray-background: #efefef;
@@ -37,11 +37,13 @@
         text-align: left;
     }
 
-    td:first-child, th:first-child {
+    td:first-child,
+    th:first-child {
         border-left: 1px solid @navGra60;
     }
 
-    td:last-child, th:last-child {
+    td:last-child,
+    th:last-child {
         border-right: 1px solid @navGra60;
     }
 
@@ -54,7 +56,7 @@
     }
 
     thead th {
-        background-color: #F4F4F4;
+        background-color: #f4f4f4;
         border-bottom: 1px solid @navGra60;
         position: sticky;
         top: 2.5rem;
@@ -83,7 +85,8 @@
         text-align: left;
     }
 
-    th, td {
+    th,
+    td {
         padding: @table-cell-padding;
         line-height: @line-height-base;
         vertical-align: top;
@@ -92,7 +95,8 @@
 
     thead {
         tr:first-child {
-            th, td {
+            th,
+            td {
                 border-top: none;
                 font-weight: 100;
             }
@@ -101,13 +105,15 @@
 
     tbody {
         tr:first-child {
-            th, td {
+            th,
+            td {
                 border-top-width: 2px;
             }
         }
 
         tr:last-child {
-            th, td {
+            th,
+            td {
                 border-bottom: none;
             }
         }
@@ -116,7 +122,8 @@
             background-color: @white;
         }
 
-        th, td {
+        th,
+        td {
             border-bottom: 1px solid @navGra40;
             border-top: none;
             font-weight: normal;
@@ -141,7 +148,8 @@
 
 // Condensed.tabell w/ half padding
 .tabell-kompakt {
-    th, td {
+    th,
+    td {
         padding: @table-condensed-cell-padding;
     }
 }
@@ -153,9 +161,8 @@ table .tabell-element-center {
 
 // Table cell sizing
 // Reset default.tabell behavior
-table col[class*="col-"] {
+table col[class*='col-'] {
     position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
     float: none;
     display: table-column;
 }
-

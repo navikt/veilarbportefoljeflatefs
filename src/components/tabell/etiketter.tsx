@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
-import {Advarsel, Bas, Fokus, Info} from "./etikett";
+import {Advarsel, Bas, Fokus, Info} from './etikett';
 
 interface EtiketterProps {
     className?: string;
@@ -9,75 +9,74 @@ interface EtiketterProps {
 }
 
 function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
-
     return (
         <span className={className}>
-            <Bas
-                type="info"
-                className="etikett--doed"
-                hidden={!bruker.erDoed}
-                typo="undertekst"
-            >
+            <Bas type="info" className="etikett--doed" hidden={!bruker.erDoed} typo="undertekst">
                 Død
             </Bas>
-            <Advarsel
-                hidden={bruker.sikkerhetstiltak.length === 0}
-                typo="undertekst"
-            >
+            <Advarsel hidden={bruker.sikkerhetstiltak.length === 0} typo="undertekst">
                 Sikkerhetstiltak
             </Advarsel>
-            <Fokus
-                hidden={!bruker.diskresjonskode}
-                typo="undertekst"
-            >
+            <Fokus hidden={!bruker.diskresjonskode} typo="undertekst">
                 {`Kode ${bruker.diskresjonskode}`}
             </Fokus>
-            <Fokus
-                hidden={!bruker.egenAnsatt}
-                typo="undertekst"
-            >
-               Egen ansatt
+            <Fokus hidden={!bruker.egenAnsatt} typo="undertekst">
+                Egen ansatt
             </Fokus>
             <Info
-                hidden={erVedtakStotteFeatureTogglePa ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT}
+                hidden={
+                    erVedtakStotteFeatureTogglePa
+                        ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
+                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
+                }
                 typo="undertekst"
             >
                 Trenger vurdering
             </Info>
             <Info
-                hidden={erVedtakStotteFeatureTogglePa ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING}
+                hidden={
+                    erVedtakStotteFeatureTogglePa
+                        ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
+                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
+                }
                 typo="undertekst"
             >
                 Behov for AEV
             </Info>
             <Info
-                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER}
+                hidden={
+                    !erVedtakStotteFeatureTogglePa ||
+                    !bruker.trengerVurdering ||
+                    bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER
+                }
                 typo="undertekst"
             >
-               Oppgitt hindringer
+                Oppgitt hindringer
             </Info>
             <Info
-                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER}
+                hidden={
+                    !erVedtakStotteFeatureTogglePa ||
+                    !bruker.trengerVurdering ||
+                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER
+                }
                 typo="undertekst"
             >
-               Antatt gode muligheter
+                Antatt gode muligheter
             </Info>
             <Info
-                hidden={!erVedtakStotteFeatureTogglePa || !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING}
+                hidden={
+                    !erVedtakStotteFeatureTogglePa ||
+                    !bruker.trengerVurdering ||
+                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING
+                }
                 typo="undertekst"
             >
                 Antatt behov for veiledning
             </Info>
-            <Info
-                hidden={!bruker.erSykmeldtMedArbeidsgiver}
-                typo="undertekst"
-            >
+            <Info hidden={!bruker.erSykmeldtMedArbeidsgiver} typo="undertekst">
                 Sykmeldt
             </Info>
-            <Info
-                hidden={!bruker.trengerRevurdering}
-                typo="undertekst"
-            >
+            <Info hidden={!bruker.trengerRevurdering} typo="undertekst">
                 Revurdering
             </Info>
         </span>

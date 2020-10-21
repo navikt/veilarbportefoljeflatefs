@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrukerModell } from '../../model-interfaces';
+import {BrukerModell} from '../../model-interfaces';
 
 interface ArbeidslisteOverskriftProps {
     className?: string;
@@ -12,9 +12,7 @@ function ArbeidslisteOverskrift({className, skalVises, bruker}: ArbeidslisteOver
         return null;
     }
 
-    return <div className={className}>
-        {bruker.arbeidsliste.overskrift}
-    </div>;
+    return <div className={className}>{bruker.arbeidsliste.overskrift}</div>;
 }
 
 export default ArbeidslisteOverskrift;

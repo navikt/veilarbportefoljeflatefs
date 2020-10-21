@@ -1,10 +1,10 @@
 import {STATUS, doThenDispatch} from './utils';
 import {httpArbeidsliste} from '../middleware/api';
-import {skjulModal} from "./modal";
-import {markerAlleBrukere} from "./portefolje";
-import {oppdaterState} from "../components/modal/arbeidsliste/legg-til-arbeidslisteform";
-import {oppdaterArbeidsListeState} from "../components/modal/arbeidsliste/arbeidsliste-modal-rediger";
-import {dateToISODate} from "../utils/dato-utils";
+import {skjulModal} from './modal';
+import {markerAlleBrukere} from './portefolje';
+import {oppdaterState} from '../components/modal/arbeidsliste/legg-til-arbeidslisteform';
+import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
+import {dateToISODate} from '../utils/dato-utils';
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -49,7 +49,6 @@ export default function reducer(state = initialState, action) {
     }
 }
 
-
 // Action Creators
 export function lagreArbeidsliste(arbeidsliste, props) {
     const {valgteBrukere} = props;
@@ -62,14 +61,12 @@ export function lagreArbeidsliste(arbeidsliste, props) {
     }));
     return dispatch =>
         postArbeidsliste(liste)(dispatch)
-            .then((res) => oppdaterState(res, liste, props, dispatch))
+            .then(res => oppdaterState(res, liste, props, dispatch))
             .then(() => {
-                    dispatch(skjulModal());
-                    dispatch(markerAlleBrukere(false));
-                }
-            );
+                dispatch(skjulModal());
+                dispatch(markerAlleBrukere(false));
+            });
 }
-
 
 export function redigerArbeidsliste(formData, props) {
     const arbeidsliste = {
@@ -80,9 +77,13 @@ export function redigerArbeidsliste(formData, props) {
     };
 
     return dispatch =>
-        putArbeidsliste(arbeidsliste, props.bruker.fnr)(dispatch)
-            .then((res) => oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr,
-                dispatch))
+        putArbeidsliste(
+            arbeidsliste,
+            props.bruker.fnr
+        )(dispatch)
+            .then(res =>
+                oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch)
+            )
             .then(() => dispatch(skjulModal()));
 }
 
@@ -109,4 +110,3 @@ export function putArbeidsliste(arbeidsliste, fnr) {
         PENDING: ARBEIDSLISTE_REDIGER_PENDING
     });
 }
-

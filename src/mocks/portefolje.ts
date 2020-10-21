@@ -1,8 +1,8 @@
-import veiledereResponse, { innloggetVeileder } from './veiledere';
-import { aktiviteter } from '../filtrering/filter-konstanter';
-import { rnd, MOCK_CONFIG } from './utils';
+import veiledereResponse, {innloggetVeileder} from './veiledere';
+import {aktiviteter} from '../filtrering/filter-konstanter';
+import {rnd, MOCK_CONFIG} from './utils';
 import * as faker from 'faker/locale/nb_NO';
-import { KategoriModell } from '../model-interfaces';
+import {KategoriModell} from '../model-interfaces';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -31,9 +31,11 @@ function lagGrunndata() {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     const ar = rnd(0, 99);
-    const erDoed = Math.random() < ((100 - ar * 20) / 100);
+    const erDoed = Math.random() < (100 - ar * 20) / 100;
 
-    const arhundre = rnd(0, 99).toString().padStart(2, '0');
+    const arhundre = rnd(0, 99)
+        .toString()
+        .padStart(2, '0');
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
     const kjonnsiffer = kjonn === 'K' ? partall() : oddetall();
     const individsifre = `${arhundre}${kjonnsiffer}`;
@@ -43,13 +45,17 @@ function lagGrunndata() {
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
-    const brukerAktiviteter = Object.keys(aktiviteter)
-        .reduce((acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date()}), {});
+    const brukerAktiviteter = Object.keys(aktiviteter).reduce(
+        (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date()}),
+        {}
+    );
 
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
 
     return {
-        fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`,
+        fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar
+            .toString()
+            .padStart(2, '0')}${individsifre}${kontrollsifre}`,
         fodselsdato: {
             dayOfMonth: dag,
             monthValue: mnd,
@@ -64,7 +70,7 @@ function lagGrunndata() {
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
-        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + ((15 * 60 * 1000)))
+        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + 15 * 60 * 1000)
     };
 }
 
@@ -116,15 +122,15 @@ function lagVedtakUtkast() {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
     if (maybeUtkast > 0.5) {
-        return ({
+        return {
             vedtakStatusEndret: randomDate({past: true}),
             vedtakStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter'
-        });
+        };
     }
-    return ({
+    return {
         vedtakStatusEndret: null,
         vedtakStatus: null
-    });
+    };
 }
 
 function lagArbeidsliste() {
@@ -151,15 +157,16 @@ function lagArbeidsliste() {
         kategori = KategoriModell.LILLA;
     }
 
-    return ({
+    return {
         overskrift: lagOverskrift(),
-        kommentar: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do',
+        kommentar:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do',
         frist: new Date(),
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: true,
         sistEndretAv: {veilederId: innloggetVeileder.ident},
         kategori
-    });
+    };
 }
 
 function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {

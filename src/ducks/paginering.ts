@@ -1,5 +1,5 @@
 // Actions
-import { DEFAULT_PAGINERING_STORRELSE } from '../konstanter';
+import {DEFAULT_PAGINERING_STORRELSE} from '../konstanter';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
@@ -19,7 +19,7 @@ const initialState: PagineringState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SETUP:
-            return { ...state, ...action.data };
+            return {...state, ...action.data};
         default:
             return state;
     }

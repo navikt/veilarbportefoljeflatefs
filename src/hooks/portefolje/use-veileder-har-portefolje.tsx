@@ -1,9 +1,8 @@
-import { useIdentSelector } from '../redux/use-inlogget-ident';
-import {useSelector} from "react-redux";
-import {AppState} from "../../reducer";
+import {useIdentSelector} from '../redux/use-inlogget-ident';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 export function useVeilederHarPortefolje() {
-
     const innloggetVeileder = useIdentSelector();
     const identId = innloggetVeileder && innloggetVeileder.ident;
 

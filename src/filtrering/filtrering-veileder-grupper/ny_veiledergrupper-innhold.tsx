@@ -8,17 +8,16 @@ import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veilede
 import {FiltervalgModell} from '../../model-interfaces';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import '../../components/sidebar/sidebar.less'
-import './ny_veileder-gruppe.less'
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
-import {ListevisningType} from "../../ducks/ui/listevisning";
-import {LagretFilter} from "../../ducks/lagretFilter";
-import VeilederGruppeRad from "./ny_veileder_gruppe_rad";
-
+import '../../components/sidebar/sidebar.less';
+import './ny_veileder-gruppe.less';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import {LagretFilter} from '../../ducks/lagretFilter';
+import VeilederGruppeRad from './ny_veileder_gruppe_rad';
 
 interface VeilederGruppeInnholdProps {
-    lagretFilter: LagretFilter[]
+    lagretFilter: LagretFilter[];
     filterValg?: FiltervalgModell;
     filtergruppe: ListevisningType;
 }
@@ -29,9 +28,16 @@ function isOverflown(element) {
 
 function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
-    const valgtGruppeEnhetensOversikt = useSelector((state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe);
-    const valgtGruppeVeilederOversikt = useSelector((state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe);
-    const valgtGruppe = (props.filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt)
+    const valgtGruppeEnhetensOversikt = useSelector(
+        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeilederGruppe
+    );
+    const valgtGruppeVeilederOversikt = useSelector(
+        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeilederGruppe
+    );
+    const valgtGruppe =
+        props.filtergruppe === ListevisningType.veilederOversikt
+            ? valgtGruppeVeilederOversikt
+            : valgtGruppeEnhetensOversikt;
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
@@ -39,21 +45,37 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
     const enhet = useEnhetSelector();
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
-        if (valgtGruppe && enhet && harGjortEndringer(filterValg.veiledere, valgtGruppe.filterValg.veiledere, valgtGruppe.filterNavn, gruppeNavn)) {
-            dispatch(lagreEndringer({
-                filterId: valgtGruppe.filterId,
-                filterNavn: gruppeNavn,
-                filterValg
-            }, enhet))
-                .then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
+        if (
+            valgtGruppe &&
+            enhet &&
+            harGjortEndringer(
+                filterValg.veiledere,
+                valgtGruppe.filterValg.veiledere,
+                valgtGruppe.filterNavn,
+                gruppeNavn
+            )
+        ) {
+            dispatch(
+                lagreEndringer(
+                    {
+                        filterId: valgtGruppe.filterId,
+                        filterNavn: gruppeNavn,
+                        filterValg
+                    },
+                    enhet
+                )
+            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
         } else {
             dispatch(visIngenEndringerToast());
         }
     };
 
     const sletteKnapp = () => {
-        valgtGruppe && enhet && dispatch(slettGruppe(enhet, valgtGruppe.filterId))
-            .then(() => dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt)));
+        valgtGruppe &&
+            enhet &&
+            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>
+                dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt))
+            );
     };
 
     useEffect(() => {
@@ -65,29 +87,30 @@ function NyVeilederGruppeInnhold(props: VeilederGruppeInnholdProps) {
 
     return (
         <div className="ny__veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe, idx) =>
+            {props.lagretFilter.map((veilederGruppe, index) => (
                 <VeilederGruppeRad
-                    key={idx}
+                    key={index}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                     filtergruppe={props.filtergruppe}
                 />
+            ))}
+            {valgtGruppe && (
+                <VeilederGruppeModal
+                    initialVerdi={{
+                        gruppeNavn: valgtGruppe.filterNavn,
+                        filterValg: valgtGruppe.filterValg,
+                        filterId: valgtGruppe.filterId,
+                        filterCleanup: valgtGruppe.filterCleanup
+                    }}
+                    isOpen={visEndreGruppeModal}
+                    onSubmit={submitEndringer}
+                    modalTittel="Rediger veiledergruppe"
+                    lagreKnappeTekst="Lagre endringer"
+                    onRequestClose={() => setVisEndreGruppeModal(false)}
+                    onSlett={sletteKnapp}
+                />
             )}
-            {valgtGruppe &&
-            <VeilederGruppeModal
-                initialVerdi={{
-                    gruppeNavn: valgtGruppe.filterNavn,
-                    filterValg: valgtGruppe.filterValg,
-                    filterId: valgtGruppe.filterId,
-                    filterCleanup: valgtGruppe.filterCleanup
-                }}
-                isOpen={visEndreGruppeModal}
-                onSubmit={submitEndringer}
-                modalTittel="Rediger veiledergruppe"
-                lagreKnappeTekst="Lagre endringer"
-                onRequestClose={() => setVisEndreGruppeModal(false)}
-                onSlett={sletteKnapp}
-            />}
         </div>
     );
 }

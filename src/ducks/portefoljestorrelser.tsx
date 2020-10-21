@@ -1,5 +1,5 @@
-import { fetchPortefoljeStorrelser } from '../middleware/api';
-import { STATUS, doThenDispatch } from './utils';
+import {fetchPortefoljeStorrelser} from '../middleware/api';
+import {STATUS, doThenDispatch} from './utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefoljestorrelser/OK';
@@ -14,7 +14,7 @@ interface FacetResults {
 export interface PortefoljeStorrelser {
     status: string;
     data: {
-        facetResults: FacetResults[]
+        facetResults: FacetResults[];
     };
 }
 
@@ -29,11 +29,11 @@ const initialState: PortefoljeStorrelser = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
-            return { ...state, status: STATUS.PENDING };
+            return {...state, status: STATUS.PENDING};
         case FEILET:
-            return { ...state, status: STATUS.ERROR, data: action.data };
+            return {...state, status: STATUS.ERROR, data: action.data};
         case OK:
-            return { ...state, status: STATUS.OK, data: action.data };
+            return {...state, status: STATUS.OK, data: action.data};
         default:
             return state;
     }

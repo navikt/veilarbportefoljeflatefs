@@ -7,7 +7,7 @@ interface TidKolonneProps {
     skalVises: boolean;
 }
 
-function TidKolonne({ className, dato, skalVises }: TidKolonneProps) {
+function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -17,19 +17,15 @@ function TidKolonne({ className, dato, skalVises }: TidKolonneProps) {
     let minutterString = minutes.toString();
     let timmerString = hours.toString();
 
-    if(minutes < 10) {
+    if (minutes < 10) {
         minutterString = '0' + minutterString;
     }
 
-    if(hours < 10) {
+    if (hours < 10) {
         timmerString = '0' + timmerString;
     }
 
-    return (
-        <span className={className}>
-        {`${timmerString}:${minutterString}`}
-        </span>
-    );
+    return <span className={className}>{`${timmerString}:${minutterString}`}</span>;
 }
 
 export default TidKolonne;

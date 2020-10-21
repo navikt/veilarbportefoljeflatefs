@@ -37,7 +37,7 @@ export function handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement
 }
 
 export function handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}: HandleDragStartProps) {
-    return (e) => {
+    return e => {
         if (eventIsInsideContainer(e)) {
             if (typeof e.target.value === 'number') setSrcIndex(e.target.value);
             setDropIndex(-1);
@@ -46,14 +46,14 @@ export function handleDragStart({eventIsInsideContainer, setSrcIndex, setDropInd
 }
 
 export function handleDragEnd({
-                                  srcIndex,
-                                  destIndex,
-                                  dragIsInsideElement,
-                                  requestNewOrder,
-                                  setSrcIndex,
-                                  setDestIndex
-                              }: HandleDragEndProps) {
-    return (e) => {
+    srcIndex,
+    destIndex,
+    dragIsInsideElement,
+    requestNewOrder,
+    setSrcIndex,
+    setDestIndex
+}: HandleDragEndProps) {
+    return e => {
         if (dragIsInsideElement) {
             requestNewOrder(srcIndex, destIndex);
         }
@@ -63,7 +63,7 @@ export function handleDragEnd({
 }
 
 export function handleDragOver({eventIsInsideContainer, setDestIndex}: HandleDragOverProps) {
-    return (e) => {
+    return e => {
         e.preventDefault();
         e.stopPropagation();
         if (eventIsInsideContainer(e)) {

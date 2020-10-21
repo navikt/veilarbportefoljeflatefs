@@ -1,6 +1,6 @@
 import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
-import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from "./lagretFilter";
+import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from './lagretFilter';
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';
@@ -18,7 +18,6 @@ export const NY_VEILEDERGRUPPER_PENDING = 'veiledergrupper_ny/PENDING';
 export const SLETT_VEILEDERGRUPPER_OK = 'veiledergrupper_slette/OK';
 export const SLETT_VEILEDERGRUPPER_FEILET = 'veiledergrupper_slette/FEILET';
 export const SLETT_VEILEDERGRUPPER_PENDING = 'veiledergrupper_slette/PENDING';
-
 
 const initialState = {
     status: STATUS.NOT_STARTED,
@@ -46,20 +45,27 @@ export default function reducer(state: LagretFilterState = initialState, action)
         case HENT_VEILEDERGRUPPER_OK:
             return {...state, status: STATUS.OK, data: action.data};
         case NY_VEILEDERGRUPPER_OK:
-            return {...state, status: STATUS.OK, data: state.data.concat(action.data)};
+            return {
+                ...state,
+                status: STATUS.OK,
+                data: state.data.concat(action.data)
+            };
         case REDIGER_VEILEDERGRUPPER_OK:
             return {
-                ...state, status: STATUS.OK, data: state.data.map(elem => {
-                        if (elem.filterId !== action.data.filterId) {
-                            return elem;
-                        }
-                        return action.data;
+                ...state,
+                status: STATUS.OK,
+                data: state.data.map(elem => {
+                    if (elem.filterId !== action.data.filterId) {
+                        return elem;
                     }
-                )
+                    return action.data;
+                })
             };
         case SLETT_VEILEDERGRUPPER_OK:
             return {
-                ...state, status: STATUS.OK, data: state.data.filter(elem => elem.filterId !== action.data)
+                ...state,
+                status: STATUS.OK,
+                data: state.data.filter(elem => elem.filterId !== action.data)
             };
 
         default:

@@ -1,6 +1,6 @@
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { useFocus } from '../../../hooks/use-focus';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {useFocus} from '../../../hooks/use-focus';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
 
@@ -17,9 +17,7 @@ export default function TransitionContainer(props: TransitionProps) {
         <TransitionGroup component={null}>
             {props.visible && (
                 <CSSTransition classNames="collapse-container" timeout={400}>
-                    <CollapseContainer>
-                        {props.children}
-                    </CollapseContainer>
+                    <CollapseContainer>{props.children}</CollapseContainer>
                 </CSSTransition>
             )}
         </TransitionGroup>
@@ -30,10 +28,7 @@ function CollapseContainer(props: CollapseContainerProps) {
     const {focusRef} = useFocus();
     return (
         <div className="collapse-container">
-            <div
-                className="endringslogg-content"
-                ref={inputRef => (focusRef.current = inputRef)}
-                tabIndex={-1}>
+            <div className="endringslogg-content" ref={inputRef => (focusRef.current = inputRef)} tabIndex={-1}>
                 {props.children}
             </div>
         </div>

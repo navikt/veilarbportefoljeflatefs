@@ -22,13 +22,12 @@ import listevisningReducer, {
 } from './ducks/ui/listevisning';
 import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
-import {FiltervalgModell} from "./model-interfaces";
-import inloggetVeilederReducer, {InloggetVeilederState} from "./ducks/inlogget-veileder";
-import sidebarReducer, {initialStateSidebar} from "./ducks/sidebar-tab";
-import mineFilterReducer from "./ducks/mine-filter";
-import lagretFilterUIState, {LagretFilterUIState} from "./ducks/lagret-filter-ui-state";
-import {LagretFilterState} from "./ducks/lagretFilter";
-
+import {FiltervalgModell} from './model-interfaces';
+import inloggetVeilederReducer, {InloggetVeilederState} from './ducks/inlogget-veileder';
+import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
+import mineFilterReducer from './ducks/mine-filter';
+import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
+import {LagretFilterState} from './ducks/lagretFilter';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -78,10 +77,30 @@ export interface AppState {
 
 export default combineReducers<AppState>({
     ui: combineReducers({
-        listevisningMinOversikt: persistent('minOversiktListevisningState', window.location, named(ListevisningType.minOversikt, listevisningReducer), initialStateMinOversikt),
-        listevisningEnhetensOversikt: persistent('enhetensOversiktListevisningState', window.location, named(ListevisningType.enhetensOversikt, listevisningReducer), initialStateEnhetensOversikt),
-        sidebarMinOversikt: persistent('minOversiktSidebar', window.location, named(ListevisningType.minOversikt, sidebarReducer), initialStateSidebar),
-        sidebarEnhetensOversikt: persistent('enhetensOversiktSidebar', window.location, named(ListevisningType.enhetensOversikt, sidebarReducer), initialStateSidebar)
+        listevisningMinOversikt: persistent(
+            'minOversiktListevisningState',
+            window.location,
+            named(ListevisningType.minOversikt, listevisningReducer),
+            initialStateMinOversikt
+        ),
+        listevisningEnhetensOversikt: persistent(
+            'enhetensOversiktListevisningState',
+            window.location,
+            named(ListevisningType.enhetensOversikt, listevisningReducer),
+            initialStateEnhetensOversikt
+        ),
+        sidebarMinOversikt: persistent(
+            'minOversiktSidebar',
+            window.location,
+            named(ListevisningType.minOversikt, sidebarReducer),
+            initialStateSidebar
+        ),
+        sidebarEnhetensOversikt: persistent(
+            'enhetensOversiktSidebar',
+            window.location,
+            named(ListevisningType.enhetensOversikt, sidebarReducer),
+            initialStateSidebar
+        )
     }),
     valgtEnhet: valgtEnhetReducer,
     portefolje: portefoljeReducer,
@@ -90,8 +109,18 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtreringEnhetensOversikt: persistent('enhetsState', window.location, named(ListevisningType.enhetensOversikt, filtreringReducer), initialState),
-    filtreringMinoversikt: persistent('veilederState', window.location, named(ListevisningType.minOversikt, filtreringReducer), initialState),
+    filtreringEnhetensOversikt: persistent(
+        'enhetsState',
+        window.location,
+        named(ListevisningType.enhetensOversikt, filtreringReducer),
+        initialState
+    ),
+    filtreringMinoversikt: persistent(
+        'veilederState',
+        window.location,
+        named(ListevisningType.minOversikt, filtreringReducer),
+        initialState
+    ),
     filtreringVeilederoversikt: named(ListevisningType.veilederOversikt, filtreringReducer),
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,

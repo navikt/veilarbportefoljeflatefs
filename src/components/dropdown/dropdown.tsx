@@ -1,14 +1,16 @@
 import React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
-import { useFocus } from '../../hooks/use-focus';
+import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
 
-const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) => classNames('dropdown', props.className, {
-    'dropdown--apen': apen,
-});
+const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
+    classNames('dropdown', props.className, {
+        'dropdown--apen': apen
+    });
 
-const btnWrapperCls = (disabled?: boolean) => classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
+const btnWrapperCls = (disabled?: boolean) =>
+    classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 interface DropdownProps {
     hoyre?: boolean;
@@ -40,7 +42,7 @@ function Dropdown(props: DropdownProps) {
     });
 
     function toggleDropdown() {
-        const {onLukk = () => void (0)} = props;
+        const {onLukk = () => void 0} = props;
         if (apen) {
             onLukk();
         }
@@ -48,7 +50,7 @@ function Dropdown(props: DropdownProps) {
     }
 
     function lukkDropdown() {
-        const {onLukk = () => void (0)} = props;
+        const {onLukk = () => void 0} = props;
         setApen(false);
 
         if (btnRef.current != null) {
@@ -65,7 +67,7 @@ function Dropdown(props: DropdownProps) {
 
     const {name, disabled, render, hoyre, hidden} = props;
 
-    if(hidden) {
+    if (hidden) {
         return null;
     }
 
@@ -95,6 +97,7 @@ function Dropdown(props: DropdownProps) {
                     aria-expanded={apen}
                     aria-controls={`${name}-dropdown__innhold`}
                     disabled={disabled}
+                    data-testid={`dropdown-knapp_${name}`}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

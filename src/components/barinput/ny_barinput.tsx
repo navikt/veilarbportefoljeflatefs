@@ -1,7 +1,7 @@
 import React from 'react';
 import {guid} from 'nav-frontend-js-utils';
 import './barlabel.less';
-import NyBarlabel from "./ny_barlabel";
+import NyBarlabel from './ny_barlabel';
 
 interface BarInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     labelTekst: React.ReactNode;
@@ -13,7 +13,7 @@ function NyBarInput({labelTekst, antall, max, barClassname, ...props}: BarInputP
     const htmlFor = props.id || guid();
     return (
         <div className="skjema__input">
-            <input {...props} />
+            <input {...props} data-testid={`filter_checkboks-container_${barClassname}`} />
             <NyBarlabel
                 htmlFor={htmlFor}
                 labelTekst={labelTekst}

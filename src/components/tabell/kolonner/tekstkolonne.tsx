@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface TekstKolonneProps {
     tekst?: string;
@@ -11,5 +11,5 @@ export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
         return null;
     }
 
-    return (<span className={className}>{tekst}</span>);
+    return <span className={className}>{tekst}</span>;
 }

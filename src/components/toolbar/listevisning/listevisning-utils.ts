@@ -1,4 +1,4 @@
-import { Kolonne } from '../../../ducks/ui/listevisning';
+import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export interface Alternativ {
     tekstlabel: string;
@@ -25,4 +25,3 @@ alternativerConfig.set(Kolonne.ARBEIDSLISTE_FRIST, {tekstlabel: 'Arbeidsliste fr
 alternativerConfig.set(Kolonne.ARBEIDSLISTE_OVERSKRIFT, {tekstlabel: 'Arbeidsliste tittel'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status oppfølgingsvedtak'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {tekstlabel: 'Oppfølgingsvedtak status tidspunkt'});
-

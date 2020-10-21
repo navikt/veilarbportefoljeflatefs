@@ -26,9 +26,9 @@ import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
-import {MineFilterModal} from "../components/modal/mine-filter/mine-filter-modal";
-import {MineFilterLagreFilterKnapp} from "./mine-filter-lagre-filter-knapp";
-import LagredeFilterUIController from "../filtrering/lagrede-filter-controller";
+import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
+import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
+import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
 function MinoversiktSide() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -36,7 +36,15 @@ function MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(ListevisningType.minOversikt);
     const dispatch = useDispatch();
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {
+        portefolje,
+        filtervalg,
+        listevisning,
+        enhetId,
+        sorteringsrekkefolge,
+        sorteringsfelt,
+        enhettiltak
+    } = usePortefoljeSelector(ListevisningType.minOversikt);
     const filtergruppe = ListevisningType.minOversikt;
 
     useSetStateFromUrl();
@@ -46,7 +54,10 @@ function MinoversiktSide() {
     LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
-    const antallBrukere = portefolje.data.antallReturnert > portefolje.data.antallTotalt ? portefolje.data.antallTotalt : portefolje.data.antallReturnert;
+    const antallBrukere =
+        portefolje.data.antallReturnert > portefolje.data.antallTotalt
+            ? portefolje.data.antallTotalt
+            : portefolje.data.antallReturnert;
     const flereEnnAntallBrukere = (antall: number) => {
         return antallBrukere > antall;
     };
@@ -55,7 +66,7 @@ function MinoversiktSide() {
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse blokk-xl">
-                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje}/>
+                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper>
                         <div className="status-filter-kolonne">
@@ -72,25 +83,43 @@ function MinoversiktSide() {
                                     filtergruppe={filtergruppe}
                                     enhettiltak={enhettiltak.data.tiltak}
                                     listevisning={listevisning}
-                                    className={visesAnnenVeiledersPortefolje ? 'filtrering-label-container__annen-veileder' : 'filtrering-label-container'}
+                                    className={
+                                        visesAnnenVeiledersPortefolje
+                                            ? 'filtrering-label-container__annen-veileder'
+                                            : 'filtrering-label-container'
+                                    }
                                 />
-                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe}/>
+                                <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
                             </div>
                             <div className={flereEnnAntallBrukere(4) ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <TabellOverskrift
-                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder blokk-xxs' : 'tabelloverskrift blokk-xxs'}/>
+                                    className={
+                                        visesAnnenVeiledersPortefolje
+                                            ? 'tabelloverskrift__annen-veileder blokk-xxs'
+                                            : 'tabelloverskrift blokk-xxs'
+                                    }
+                                />
                                 <span className={flereEnnAntallBrukere(4) ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                <div
-                                    className={flereEnnAntallBrukere(4) ? 'toolbar-container' : 'ikke-sticky__toolbar-container'}>
+                                    <div
+                                        className={
+                                            flereEnnAntallBrukere(4)
+                                                ? 'toolbar-container'
+                                                : 'ikke-sticky__toolbar-container'
+                                        }
+                                    >
                                         <Toolbar
                                             filtergruppe={ListevisningType.minOversikt}
-                                            onPaginering={() => dispatch(hentPortefoljeForVeileder(
-                                                enhetId,
-                                                gjeldendeVeileder,
-                                                sorteringsrekkefolge,
-                                                sorteringsfelt,
-                                                filtervalg
-                                            ))}
+                                            onPaginering={() =>
+                                                dispatch(
+                                                    hentPortefoljeForVeileder(
+                                                        enhetId,
+                                                        gjeldendeVeileder,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
+                                                    )
+                                                )
+                                            }
                                             gjeldendeVeileder={gjeldendeVeileder}
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                             sokVeilederSkalVises={false}
@@ -101,19 +130,23 @@ function MinoversiktSide() {
                                             innloggetVeileder={innloggetVeilederIdent!.ident}
                                             settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                                         />
-                                </div>
+                                    </div>
                                 </span>
                             </div>
                             <MinoversiktTabell
                                 innloggetVeileder={innloggetVeilederIdent}
                                 settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                classNameWrapper={flereEnnAntallBrukere(0) ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                classNameWrapper={
+                                    flereEnnAntallBrukere(0)
+                                        ? 'portefolje__container'
+                                        : 'portefolje__container__tom-liste'
+                                }
                             />
-                            <MinOversiktModalController/>
+                            <MinOversiktModalController />
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <MineFilterModal filtergruppe={filtergruppe}/>
+                <MineFilterModal filtergruppe={filtergruppe} />
             </div>
         </DocumentTitle>
     );

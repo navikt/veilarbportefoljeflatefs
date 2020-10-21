@@ -8,7 +8,7 @@ import {VeiledereState} from '../../ducks/veiledere';
 import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
 import './toolbar.less';
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {ListevisningType} from '../../ducks/ui/listevisning';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
@@ -37,9 +37,10 @@ function SokVeilederFilter(props: AllProps) {
 
     const harValg = valgteVeileder.length > 0;
 
-    const hanterChange = (erValgt, veilederTarget) => erValgt
-        ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-        : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
+    const hanterChange = (erValgt, veilederTarget) =>
+        erValgt
+            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
+            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
 
     const createHandleOnSubmit = (filterverdi: string[]) => {
         props.onClick();
@@ -61,21 +62,29 @@ function SokVeilederFilter(props: AllProps) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe] || (ownProps.filtergruppe === ListevisningType.enhetensOversikt ? 'filtreringEnhetensOversikt' : 'filtreringMinoversikt')
-    return ({
+    const stateSlice =
+        nameToStateSliceMap[ownProps.filtergruppe] ||
+        (ownProps.filtergruppe === ListevisningType.enhetensOversikt
+            ? 'filtreringEnhetensOversikt'
+            : 'filtreringMinoversikt');
+    return {
         veiledere: state.veiledere,
         filtervalg: state[stateSlice],
         veileder: ownProps.veileder || state.enheter.valgtVeileder
-    });
+    };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-    sokEtterVeileder(filterId: string, filterverdi: string[]) {
-        return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe);
-    },
-    veilederSokt() {
-        return veilederSoktFraToolbar();
-    }
-}, dispatch);
+const mapDispatchToProps = (dispatch, ownProps) =>
+    bindActionCreators(
+        {
+            sokEtterVeileder(filterId: string, filterverdi: string[]) {
+                return endreFiltervalg(filterId, filterverdi, ownProps.filtergruppe);
+            },
+            veilederSokt() {
+                return veilederSoktFraToolbar();
+            }
+        },
+        dispatch
+    );
 
 export default connect(mapStateToProps, mapDispatchToProps)(SokVeilederFilter);

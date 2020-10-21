@@ -1,10 +1,16 @@
 import React from 'react';
-import { Textarea } from 'nav-frontend-skjema';
-import { Field, getIn } from 'formik';
+import {Textarea} from 'nav-frontend-skjema';
+import {Field, getIn} from 'formik';
 
 const KOMMENTAR_MAKS_LENGDE = 500;
 
-function FormikTekstArea({name}) {
+interface FormikTekstAreaProps {
+    name: string;
+    index?: number;
+}
+
+function FormikTekstArea({name, index}: FormikTekstAreaProps) {
+    const indexId = index ? `_${index}` : '';
 
     const validate = (value: string) => {
         let error: undefined | string;
@@ -33,7 +39,9 @@ function FormikTekstArea({name}) {
                         name={name}
                         feil={feil}
                         maxLength={500}
-                    />);
+                        data-testid={`modal_arbeidsliste_kommentar${indexId}`}
+                    />
+                );
             }}
         </Field>
     );

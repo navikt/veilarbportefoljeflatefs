@@ -7,7 +7,7 @@ interface VarighetKolonneProps {
     skalVises: boolean;
 }
 
-function VarighetKolonne({ className, dato, skalVises }: VarighetKolonneProps) {
+function VarighetKolonne({className, dato, skalVises}: VarighetKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -17,22 +17,17 @@ function VarighetKolonne({ className, dato, skalVises }: VarighetKolonneProps) {
     let minutterString = '';
     let timerString = '';
 
-    if(timer > 0) {
-        timerString = timer.toString() + "t";
+    if (timer > 0) {
+        timerString = timer.toString() + 't';
     }
 
-    if(minutter > 0) {
-        minutterString = minutter.toString() + "min";
+    if (minutter > 0) {
+        minutterString = minutter.toString() + 'min';
     }
 
+    const kolonn = timer > 0 && minutter > 0 ? ' ' : '';
 
-    const kolonn = timer > 0 && minutter > 0 ? ' ': '';
-
-    return (
-        <span className={className}>
-        {`${timerString}${kolonn}${minutterString}`}
-        </span>
-    );
+    return <span className={className}>{`${timerString}${kolonn}${minutterString}`}</span>;
 }
 
 export default VarighetKolonne;

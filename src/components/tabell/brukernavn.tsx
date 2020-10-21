@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import { BrukerModell } from '../../model-interfaces';
-import { setFraBrukerIUrl } from '../../utils/url-utils';
+import {BrukerModell} from '../../model-interfaces';
+import {setFraBrukerIUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.less';
-import {OrNothing} from "../../utils/types/types";
+import {OrNothing} from '../../utils/types/types';
 
-const settSammenNavn = (bruker) => {
+const settSammenNavn = bruker => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
         return '';
     }
@@ -20,7 +20,6 @@ const brukerNavn = (className, bruker, enhetId) => (
             }}
             href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
             className={classnames('lenke lenke--frittstaende')}
-
         >
             {settSammenNavn(bruker)}
         </a>

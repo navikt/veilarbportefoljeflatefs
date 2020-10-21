@@ -4,7 +4,7 @@ import {Redirect, useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import classNames from 'classnames';
-import './ny__minoversikt.less'
+import './ny__minoversikt.less';
 
 interface MinOversiktWrapperProps {
     className: string;
@@ -18,14 +18,15 @@ export function NyMinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithC
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;
 
     if (ident && veiledere.findIndex(v => v.ident === ident) < 0) {
-        return <Redirect to="/enhet"/>;
+        return <Redirect to="/enhet" />;
     }
 
     return (
-        <div className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'ny__annen-veileder' : '')}
-             role="tabpanel"
-             aria-labelledby={props.id}
-             id={props.id}
+        <div
+            className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'ny__annen-veileder' : '')}
+            role="tabpanel"
+            aria-labelledby={props.id}
+            id={props.id}
         >
             {props.children}
         </div>

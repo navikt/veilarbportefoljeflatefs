@@ -6,7 +6,7 @@ import {
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
-import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from "./lagretFilter";
+import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagretFilter';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -28,7 +28,6 @@ export const SLETT_MINEFILTER_PENDING = 'lagredefilter_slette/PENDING';
 export const SORTER_MINEFILTER_OK = 'lagredefilter_sortering/OK';
 export const SORTER_MINEFILTER_FEILET = 'lagredefilter_sortering/FEILET';
 
-
 const initialState = {
     status: STATUS.NOT_STARTED,
     data: [],
@@ -39,23 +38,60 @@ const initialState = {
 export default function reducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.NYTT};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.NYTT
+            };
         case REDIGER_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.REDIGERE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.REDIGERE
+            };
         case SLETT_MINEFILTER_PENDING:
-            return {...state, status: STATUS.PENDING, handlingType: HandlingsType.SLETTE};
+            return {
+                ...state,
+                status: STATUS.PENDING,
+                handlingType: HandlingsType.SLETTE
+            };
         case HENT_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.NYTT};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.NYTT
+            };
         case REDIGER_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.REDIGERE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.REDIGERE
+            };
         case SLETT_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SLETTE};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.SLETTE
+            };
         case HENT_MINEFILTER_OK:
-            return {...state, status: STATUS.OK, data: action.data, handlingType: HandlingsType.HENTE};
+            return {
+                ...state,
+                status: STATUS.OK,
+                data: action.data,
+                handlingType: HandlingsType.HENTE
+            };
         case NY_MINEFILTER_OK:
             return {
                 ...state,
@@ -68,7 +104,7 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.REDIGERE,
-                data: state.data.map((elem) => {
+                data: state.data.map(elem => {
                     if (elem.filterId !== action.data.filterId) {
                         return elem;
                     }
@@ -80,11 +116,15 @@ export default function reducer(state: LagretFilterState = initialState, action)
                 ...state,
                 status: STATUS.OK,
                 handlingType: HandlingsType.SLETTE,
-                data: state.data.filter((elem) => elem.filterId !== action.data)
+                data: state.data.filter(elem => elem.filterId !== action.data)
             };
 
         case SORTER_MINEFILTER_FEILET:
-            return {...state, status: STATUS.ERROR, handlingType: HandlingsType.SORTERING};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                handlingType: HandlingsType.SORTERING
+            };
         case SORTER_MINEFILTER_OK:
             return {
                 ...state,
@@ -130,9 +170,9 @@ export function slettFilter(filterId: number) {
 }
 
 export function lagreSorteringForFilter(sorteringOgIder: SorteringOgId[]) {
-    return (dispatch) => {
+    return dispatch => {
         return lagreSorteringFiltere(sorteringOgIder)
-            .then((data) => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
+            .then(data => sendResultatTilDispatch(dispatch, SORTER_MINEFILTER_OK)(data))
             .catch(handterFeil(dispatch, SORTER_MINEFILTER_FEILET));
     };
 }

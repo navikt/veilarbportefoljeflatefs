@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useRef } from 'react';
+import {DependencyList, useEffect, useRef} from 'react';
 
 export function useTimeOut(handler: TimerHandler, timeout: number, deps?: DependencyList) {
     const timer = useRef<number | undefined>();

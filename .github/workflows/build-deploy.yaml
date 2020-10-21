@@ -7,6 +7,23 @@ env:
   PRINT_PAYLOAD: true
 
 jobs:
+  cypress-run:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          headless: true
+          start: npm start cypress:run
+          wait-on: http://localhost:3000
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
   build:
     name: Build Project
     runs-on: ubuntu-latest
@@ -53,7 +70,9 @@ jobs:
     name: Deply q0 fss
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev'
-    needs: build-docker-image
+    needs:
+      - build-docker-image
+      - cypress-run
     steps:
       - uses: actions/checkout@v1
       - uses: nais/deploy/actions/deploy@v1
@@ -65,7 +84,9 @@ jobs:
   deploy-q1:
     name: Deply q1 fss
     if: github.ref == 'refs/heads/dev'
-    needs: build-docker-image
+    needs:
+      - build-docker-image
+      - cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -78,7 +99,9 @@ jobs:
   deploy-prod:
     name: deply prod fss
     if: github.ref == 'refs/heads/master'
-    needs: build-docker-image
+    needs:
+      - build-docker-image
+      - cypress-run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -90,7 +113,9 @@ jobs:
           VAR: version=${{ env.IMAGE_TAG }}
   release-dev:
     name: Create dev release
-    needs: [deploy-q0, deploy-q1]
+    needs: 
+      - deploy-q0
+      - deploy-q1
     runs-on: ubuntu-latest
     steps:
       - name: Create release

@@ -26,15 +26,7 @@ interface OwnProps {
 type PagineringProps = StateProps & OwnProps & DispatchProps;
 
 function Paginering(props: PagineringProps) {
-    const {
-        className,
-        onChange,
-        side,
-        sideStorrelse,
-        antallTotalt,
-        seAlle,
-        endrePaginering
-    } = props;
+    const {className, onChange, side, sideStorrelse, antallTotalt, seAlle, endrePaginering} = props;
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse);
     const erPaForsteSide: boolean = side === 1;
@@ -53,43 +45,55 @@ function Paginering(props: PagineringProps) {
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
                 pressed={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
+                data-testid={!seAlle ? 'se-alle_knapp' : 'se-faerre_knapp'}
             >
-                {!seAlle ? 'Se alle' :
-                    'Se færre'
-                }
+                {!seAlle ? 'Se alle' : 'Se færre'}
             </KnappPanel>
 
-            <KnappPanel disabled={erPaForsteSide} onClick={() => totalPaginering(side - 1, seAlle)}>
-                <VenstreChevron/>
+            <KnappPanel
+                disabled={erPaForsteSide}
+                onClick={() => totalPaginering(side - 1, seAlle)}
+                data-testid="paginering_venstre"
+            >
+                <VenstreChevron />
             </KnappPanel>
 
-            {!erPaForsteSide && <KnappPanel onClick={() => totalPaginering(1, seAlle)}>1</KnappPanel>}
+            {!erPaForsteSide && (
+                <KnappPanel onClick={() => totalPaginering(1, seAlle)} data-testid="paginering-tall_1">
+                    1
+                </KnappPanel>
+            )}
 
-            <KnappPanel>
+            <KnappPanel data-testid={`paginering-tall_${side}`} selected>
                 <strong>{side}</strong>
             </KnappPanel>
 
-            {(!erPaSisteSide && !seAlle) &&
-            <KnappPanel
-                onClick={() => totalPaginering(antallSider, seAlle)}
-            >
-                {antallSider}
-            </KnappPanel>
-            }
+            {!erPaSisteSide && !seAlle && (
+                <KnappPanel
+                    onClick={() => totalPaginering(antallSider, seAlle)}
+                    data-testid={`paginering-tall_${antallSider}`}
+                >
+                    {antallSider}
+                </KnappPanel>
+            )}
 
-            <KnappPanel disabled={erPaSisteSide || seAlle} onClick={() => totalPaginering(side + 1, seAlle)}>
-                <HoyreChevron/>
+            <KnappPanel
+                disabled={erPaSisteSide || seAlle}
+                onClick={() => totalPaginering(side + 1, seAlle)}
+                data-testid="paginering_hoyre"
+            >
+                <HoyreChevron />
             </KnappPanel>
         </div>
     );
 }
 
 const mapStateToProps = (state): StateProps => {
-    return ({
+    return {
         side: selectSide(state),
         sideStorrelse: selectSideStorrelse(state),
-        seAlle: selectSeAlle(state),
-    });
+        seAlle: selectSeAlle(state)
+    };
 };
 
 const mapDispatchToProps = (dispatch, props: OwnProps) => ({

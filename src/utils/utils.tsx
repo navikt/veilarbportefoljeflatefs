@@ -21,10 +21,10 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>)
     const dagensDato = new Date();
     dagensDato.setHours(0, 0, 0, 0);
     return Object.keys(utlopsdatoer)
-        .map((key) => utlopsdatoer[key])
-        .filter((value) => !!value)
-        .map((dateString) => new Date(dateString))
-        .filter((date) => date.getTime() >= dagensDato.getTime())
+        .map(key => utlopsdatoer[key])
+        .filter(value => !!value)
+        .map(dateString => new Date(dateString))
+        .filter(date => date.getTime() >= dagensDato.getTime())
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 

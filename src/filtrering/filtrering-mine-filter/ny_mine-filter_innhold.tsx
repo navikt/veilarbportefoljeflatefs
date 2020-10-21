@@ -2,9 +2,9 @@ import React, {useEffect, useRef} from 'react';
 import './ny_mine-filter-innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
-import DragAndDrop from './dragAndDrop/drag-and-drop';
-import {LagretFilter} from "../../ducks/lagretFilter";
-import {ListevisningType} from "../../ducks/ui/listevisning";
+import {LagretFilter} from '../../ducks/lagretFilter';
+import {ListevisningType} from '../../ducks/ui/listevisning';
+import DragAndDrop from './drag-and-drop/drag-and-drop';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -22,7 +22,7 @@ function NyLagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
-        return props.lagretFilter.filter((elem) => props.fjernUtilgjengeligeFilter(elem));
+        return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem));
     };
 
     useEffect(() => {

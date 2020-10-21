@@ -7,7 +7,7 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
-import {LagretFilter} from "../../../ducks/lagretFilter";
+import {LagretFilter} from '../../../ducks/lagretFilter';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
@@ -18,12 +18,12 @@ export interface DragAndDropContainerProps {
 }
 
 function DragAndDropContainer({
-                                  dragAndDropOrder,
-                                  setDragAndDropOrder,
-                                  lagreRekkefolge,
-                                  avbryt,
-                                  onUnmount
-                              }: DragAndDropContainerProps) {
+    dragAndDropOrder,
+    setDragAndDropOrder,
+    lagreRekkefolge,
+    avbryt,
+    onUnmount
+}: DragAndDropContainerProps) {
     const [srcIndex, setSrcIndex] = useState(-1);
     const [destIndex, setDestIndex] = useState(-1);
     const [dropIndex, setDropIndex] = useState(-1);
@@ -51,20 +51,20 @@ function DragAndDropContainer({
                 if (from < to)
                     setAriaTekst(
                         dragAndDropOrderRef.current[from].filterNavn +
-                        ' flyttet under ' +
-                        dragAndDropOrderRef.current[to].filterNavn +
-                        ', til posisjon ' +
-                        (to + 1) +
-                        '.'
+                            ' flyttet under ' +
+                            dragAndDropOrderRef.current[to].filterNavn +
+                            ', til posisjon ' +
+                            (to + 1) +
+                            '.'
                     );
                 else
                     setAriaTekst(
                         dragAndDropOrderRef.current[from].filterNavn +
-                        ' flyttet over ' +
-                        dragAndDropOrderRef.current[to].filterNavn +
-                        ', til posisjon ' +
-                        (to + 1) +
-                        '.'
+                            ' flyttet over ' +
+                            dragAndDropOrderRef.current[to].filterNavn +
+                            ', til posisjon ' +
+                            (to + 1) +
+                            '.'
                     );
                 flyttElementIArray(dragAndDropOrderRef.current, from, to);
 
@@ -91,7 +91,7 @@ function DragAndDropContainer({
     useEffect(() => () => onUnmount.current(), [onUnmount]);
 
     //-------- Drag and drop with mouse handeling --------
-    const eventIsInsideContainer = (e) => dragContainer.current !== null && dragContainer.current.contains(e.target);
+    const eventIsInsideContainer = e => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
     useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}));
     useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));

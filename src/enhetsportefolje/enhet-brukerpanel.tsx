@@ -7,10 +7,10 @@ import EnhetKolonner from './enhet-kolonner';
 import {useLayoutEffect} from 'react';
 import './ny_enhetsportefolje.less';
 import './brukerliste.less';
-import {OrNothing} from "../utils/types/types";
-import {Checkbox} from "nav-frontend-skjema";
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
-import {VEDTAKSTOTTE} from "../konstanter";
+import {OrNothing} from '../utils/types/types';
+import {Checkbox} from 'nav-frontend-skjema';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VEDTAKSTOTTE} from '../konstanter';
 
 interface EnhetBrukerpanelProps {
     bruker: any;
@@ -22,13 +22,21 @@ interface EnhetBrukerpanelProps {
     forrigeBruker: OrNothing<string>;
 }
 
-function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeileder, valgteKolonner, forrigeBruker}: EnhetBrukerpanelProps) {
+function EnhetBrukerpanel({
+    bruker,
+    settMarkert,
+    enhetId,
+    filtervalg,
+    brukersVeileder,
+    valgteKolonner,
+    forrigeBruker
+}: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     const scrollToLastPos = () => {
-        const xPos = parseInt(localStorage.getItem("xPos") || '0');
-        const yPos = parseInt(localStorage.getItem("yPos") || '0');
+        const xPos = parseInt(localStorage.getItem('xPos') || '0');
+        const yPos = parseInt(localStorage.getItem('yPos') || '0');
         window.scrollTo(xPos, yPos);
     };
 
@@ -39,7 +47,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
     }, [varForrigeBruker]);
 
     const classname = classNames('brukerliste__element', {
-        'brukerliste--forrigeBruker': varForrigeBruker,
+        'brukerliste--forrigeBruker': varForrigeBruker
     });
 
     return (
@@ -62,7 +70,7 @@ function EnhetBrukerpanel({bruker, settMarkert, enhetId, filtervalg, brukersVeil
                 brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
-                <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa}/>
+                <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
             </div>
         </li>
     );

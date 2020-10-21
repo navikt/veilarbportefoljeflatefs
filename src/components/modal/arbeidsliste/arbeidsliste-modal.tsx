@@ -37,7 +37,6 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
             isOpen: this.props.isOpen,
             formIsDirty: false,
             laster: props.arbeidslisteStatus !== undefined && props.arbeidslisteStatus !== STATUS.OK
-
         };
         this.lukkModal = this.lukkModal.bind(this);
         this.setFormIsDirty = this.setFormIsDirty.bind(this);
@@ -60,13 +59,13 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
             <NavFrontendModal
-                className='arbeidsliste-modal'
+                className="arbeidsliste-modal legg-i-arbeidsliste"
                 contentLabel="arbeidsliste"
                 isOpen={this.state.isOpen || false}
                 onRequestClose={this.lukkModal}
                 closeButton
             >
-                <ModalHeader tittel='Legg i arbeidsliste'/>
+                <ModalHeader tittel="Legg i arbeidsliste" />
                 <div className="modal-innhold">
                     <LeggTilArbeidslisteForm
                         valgteBrukere={valgteBrukere}
@@ -80,7 +79,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
     }
 
     fjernFraModal(valgteBrukere) {
-        const brukereSomSkalFjernes = valgteBrukere.filter((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
+        const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
 
         return (
             <VarselModal
@@ -88,6 +87,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                 onRequestClose={this.lukkModal}
                 contentLabel="Fjern brukere fra arbeidsliste"
                 type={VarselModalType.ADVARSEL}
+                dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">
@@ -95,13 +95,12 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                             Fjern fra arbeidsliste
                         </Innholdstittel>
                         <Normaltekst className="blokk-s">
-                            {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'} fra arbeidslisten.`}
+                            {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
+                                brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
+                            } fra arbeidslisten.`}
                         </Normaltekst>
                     </div>
-                    <FjernFraArbeidslisteForm
-                        valgteBrukere={brukereSomSkalFjernes}
-                        lukkModal={this.lukkModal}
-                    />
+                    <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={this.lukkModal} />
                 </div>
             </VarselModal>
         );
@@ -109,11 +108,13 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 
     render() {
         const {valgteBrukere} = this.props;
-        const fjerne = valgteBrukere.some((bruker) => bruker.arbeidsliste.arbeidslisteAktiv);
-        return (
-            this.state.laster ?
-                <LasterModal/>
-                : fjerne ? this.fjernFraModal(valgteBrukere) : this.leggTilModal(valgteBrukere)
+        const fjerne = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+        return this.state.laster ? (
+            <LasterModal />
+        ) : fjerne ? (
+            this.fjernFraModal(valgteBrukere)
+        ) : (
+            this.leggTilModal(valgteBrukere)
         );
     }
 }
@@ -123,7 +124,7 @@ const mapStateToProps = (state: AppState) => ({
     arbeidslisteStatus: state.arbeidsliste.status
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     skjulArbeidslisteModal: () => dispatch(skjulModal()),
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
 });

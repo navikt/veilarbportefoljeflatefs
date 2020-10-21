@@ -7,14 +7,19 @@ export interface HeaderProps {
     className?: string;
     children?: React.ReactNode;
     title?: string;
+    headerId: string;
 }
 
-function Header({children, skalVises = true, className = '', title}: HeaderProps) {
+function Header({children, skalVises = true, className = '', title, headerId}: HeaderProps) {
     if (!skalVises) {
         return null;
     }
     return (
-        <span title={title} className={classNames('sorteringheader', className)}>
+        <span
+            title={title}
+            className={classNames('sorteringheader', className)}
+            data-testid={`sorteringheader_${headerId}`}
+        >
             {children}
         </span>
     );

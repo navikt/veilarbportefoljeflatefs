@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './arbeidsliste-kategori.less';
-import { ReactComponentElement } from 'react';
+import {ReactComponentElement} from 'react';
 
 interface ArbeidslisteikonProps {
     value: string;
@@ -10,11 +10,21 @@ interface ArbeidslisteikonProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     index: string;
     title: string;
+    dataTestId: string;
 }
 
-function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onChange, index, title}: ArbeidslisteikonProps) {
+function Arbeidslistekategori({
+    value,
+    arbeidslistekategori,
+    name,
+    checked,
+    onChange,
+    index,
+    title,
+    dataTestId
+}: ArbeidslisteikonProps) {
     return (
-        <div className="arbeidslistekategori__container" title={title}>
+        <div className="arbeidslistekategori__container" title={title} data-testid={dataTestId}>
             <input
                 id={`${value}[${index}]`}
                 type="radio"
@@ -23,12 +33,9 @@ function Arbeidslistekategori({value, arbeidslistekategori, name, checked, onCha
                 checked={checked}
                 onChange={onChange}
             />
-            <label
-                htmlFor={`${value}[${index}]`}
-            >{arbeidslistekategori}</label>
+            <label htmlFor={`${value}[${index}]`}>{arbeidslistekategori}</label>
         </div>
     );
 }
 
 export default Arbeidslistekategori;
-

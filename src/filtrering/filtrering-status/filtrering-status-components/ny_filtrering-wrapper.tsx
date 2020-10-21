@@ -2,11 +2,10 @@ import React from 'react';
 import {Element} from 'nav-frontend-typografi';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
 import {tekstAntallBrukere} from '../../../utils/tekst-utils';
-import '../ny_filtrering-status.less'
-import '../../../components/sidebar/sidebar.less'
+import '../ny_filtrering-status.less';
+import '../../../components/sidebar/sidebar.less';
 
-export function NyFiltreringStatusContainer(props: { children: React.ReactNode }) {
-
+export function NyFiltreringStatusContainer(props: {children: React.ReactNode}) {
     const statusTall = useStatusTallSelector();
     const brukereTekst = tekstAntallBrukere(statusTall.totalt);
 

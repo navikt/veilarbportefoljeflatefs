@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-    ArbeidslisteDataModell,
-    BrukerModell,
-    KategoriModell,
-    Status,
-    VeilederModell
-} from '../../../model-interfaces';
+import {ArbeidslisteDataModell, BrukerModell, KategoriModell, Status, VeilederModell} from '../../../model-interfaces';
 import {postArbeidsliste} from '../../../ducks/arbeidsliste';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
@@ -49,33 +43,39 @@ interface FormValues {
 type LeggTilArbeidslisteFormProps = OwnProps & StateProps & DispatchProps;
 
 function LeggTilArbeidslisteForm({
-                                     lukkModal,
-                                     valgteBrukere,
-                                     onSubmit,
-                                     setFormIsDirty,
-                                     fjernMarkerteBrukere
-                                 }: LeggTilArbeidslisteFormProps) {
-
-    const initialValues = valgteBrukere.map((bruker) => ({kommentar: '', frist: '', overskrift: '', kategori: 'BLA'}));
+    lukkModal,
+    valgteBrukere,
+    onSubmit,
+    setFormIsDirty,
+    fjernMarkerteBrukere
+}: LeggTilArbeidslisteFormProps) {
+    const initialValues = valgteBrukere.map(bruker => ({
+        kommentar: '',
+        frist: '',
+        overskrift: '',
+        kategori: 'BLA'
+    }));
 
     return (
         <Formik
             initialValues={{arbeidsliste: initialValues}}
-            onSubmit={(values) => {
-                values.arbeidsliste.map(value => logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                    kategori: value.kategori,
-                    leggtil: true,
-                    applikasjon: 'oversikt'
-                }));
+            onSubmit={values => {
+                values.arbeidsliste.map(value =>
+                    logEvent('teamvoff.metrikker.arbeidslistekategori', {
+                        kategori: value.kategori,
+                        leggtil: true,
+                        applikasjon: 'oversikt'
+                    })
+                );
 
                 onSubmit(values.arbeidsliste);
             }}
-            render={(formikProps) => {
+            render={formikProps => {
                 setFormIsDirty(formikProps.dirty);
                 return (
-                    <Form>
+                    <Form data-testid="modal_arbeidsliste_form">
                         <Normaltekst className="arbeidsliste__info-tekst">
-                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : 'brukere'} valgt.`}
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
                         </Normaltekst>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
@@ -83,25 +83,35 @@ function LeggTilArbeidslisteForm({
                         />
                         <div>
                             <div className="modal-footer">
-                                <Hovedknapp className="knapp knapp--hoved">
+                                <Hovedknapp className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
                                     Lagre
                                 </Hovedknapp>
-                                <Flatknapp className="knapp" onClick={() => {
-                                    formikProps.resetForm();
-                                    fjernMarkerteBrukere();
-                                    lukkModal();
-                                }}>
+                                <Flatknapp
+                                    className="knapp"
+                                    data-testid="modal_arbeidsliste_avbryt-knapp"
+                                    onClick={() => {
+                                        formikProps.resetForm();
+                                        fjernMarkerteBrukere();
+                                        lukkModal();
+                                    }}
+                                >
                                     Avbryt
                                 </Flatknapp>
                             </div>
                         </div>
                     </Form>
                 );
-            }}/>
+            }}
+        />
     );
 }
 
-export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: { innloggetVeileder: VeilederModell, bruker: BrukerModell }, dispatch) {
+export function oppdaterState(
+    res,
+    liste: ArbeidslisteDataModell[],
+    props: {innloggetVeileder: VeilederModell; bruker: BrukerModell},
+    dispatch
+) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -110,13 +120,13 @@ export function oppdaterState(res, liste: ArbeidslisteDataModell[], props: { inn
     const brukereError = res.data.error;
 
     const arbeidslisteToDispatch = liste
-        .map((a) => ({
+        .map(a => ({
             ...a,
             sistEndretAv: {veilederId: props.innloggetVeileder},
             endringstidspunkt: new Date().toISOString(),
             arbeidslisteAktiv: true
         }))
-        .filter((bruker) => brukereOK.includes(bruker.fnr));
+        .filter(bruker => brukereOK.includes(bruker.fnr));
 
     if (brukereError.length > 0) {
         visFeiletModal({
@@ -144,14 +154,13 @@ const mapDispatchToProps = (dispatch, props) => ({
             kategori: elem.kategori
         }));
         return postArbeidsliste(liste)(dispatch)
-            .then((data) => {
+            .then(data => {
                 oppdaterState(data, liste, props, dispatch);
             })
             .then(() => {
-                    dispatch(skjulModal());
-                    dispatch(markerAlleBrukere(false));
-                }
-            );
+                dispatch(skjulModal());
+                dispatch(markerAlleBrukere(false));
+            });
     },
     lukkModal: () => dispatch(skjulModal()),
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))

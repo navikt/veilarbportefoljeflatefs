@@ -1,8 +1,8 @@
-import { VarselModal, VarselModalType } from './varselmodal/varselmodal';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import React, { PropsWithChildren } from 'react';
-import { Fnr, FnrList } from '../fnr-list';
+import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import React, {PropsWithChildren} from 'react';
+import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
 
 interface ModalSuksessProps {
@@ -10,8 +10,9 @@ interface ModalSuksessProps {
     onRequestClose: () => void;
     tittel: string;
     tekst: string;
-    closeButton?: boolean;
     hovedknappTekst: string;
+    closeButton?: boolean;
+    testNavn?: string;
 }
 
 function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
@@ -26,18 +27,14 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             closeButton={props.closeButton}
         >
             <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">
-                    {props.tittel}
-                </Innholdstittel>
-                <Normaltekst>
-                    {props.tekst}
-                </Normaltekst>
+                <Innholdstittel className="blokk-s">{props.tittel}</Innholdstittel>
+                <Normaltekst>{props.tekst}</Normaltekst>
                 {props.children}
-
             </div>
             <Hovedknapp
                 htmlType="submit"
                 onClick={props.onRequestClose}
+                data-testid={`modal-suksess_${props.testNavn}`}
             >
                 {props.hovedknappTekst}
             </Hovedknapp>
@@ -45,7 +42,7 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
     );
 }
 
-export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => void; fnr: Fnr[] }) {
+export function TildelingerOk(props: {isOpen: boolean; onRequestClose: () => void; fnr: Fnr[]}) {
     return (
         <ModalSuksess
             isOpen={props.isOpen}
@@ -54,8 +51,9 @@ export function TildelingerOk(props: { isOpen: boolean, onRequestClose: () => vo
             tekst="Følgende bruker(e) ble tildelt veileder:"
             closeButton={false}
             hovedknappTekst="Lukk"
+            testNavn="tildel-veileder"
         >
-            <FnrList listeMedFnr={props.fnr}/>
+            <FnrList listeMedFnr={props.fnr} />
         </ModalSuksess>
     );
 }

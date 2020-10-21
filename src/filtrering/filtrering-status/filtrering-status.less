@@ -1,38 +1,38 @@
-@import "~nav-frontend-core/less/core";
+@import '~nav-frontend-core/less/core';
 
 .veilarbportefoljeflatefs {
-  .filtrering-oversikt {
-    .panel {
-      padding: 0;
+    .filtrering-oversikt {
+        .panel {
+            padding: 0;
+        }
+
+        .skjema__input {
+            padding: 0.15rem 0;
+        }
+
+        &__totalt-antall {
+            font-weight: 800 !important;
+        }
     }
 
-    .skjema__input {
-      padding: 0.15rem 0;
+    .filter-checkboks-container {
+        border-bottom: 1px solid @navGra60;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
     }
 
-    &__totalt-antall {
-      font-weight: 800 !important;
+    .permittering_checkboksgruppe {
+        border-top: 1px solid @navGra60;
+        margin-top: 1rem;
+        padding-top: 1rem;
+
+        .hjelpetekst {
+            grid-column: 2;
+
+            &__wrapper {
+                display: grid;
+                grid-template-columns: auto fit-content(100%);
+            }
+        }
     }
-  }
-
-  .filter-checkboks-container {
-    border-bottom: 1px solid @navGra60;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .permittering_checkboksgruppe {
-    border-top: 1px solid @navGra60;
-    margin-top: 1rem;
-    padding-top: 1rem;
-
-    .hjelpetekst {
-      grid-column: 2;
-
-      &__wrapper {
-        display: grid;
-        grid-template-columns: auto fit-content(100%);
-      }
-    }
-  }
 }

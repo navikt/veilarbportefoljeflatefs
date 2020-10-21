@@ -14,10 +14,10 @@ export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;
 
     if (ident && veiledere.findIndex(v => v.ident === ident) < 0) {
-        return <Redirect to="/enhet"/>;
+        return <Redirect to="/enhet" />;
     }
 
-    const veilederFraUrl = veiledere.find((veileder) => (veileder.ident === ident)) || {fornavn: '', etternavn: ''};
+    const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
 
     const annenVeilederVarsel = (
         <Normaltekst tag="h1" className="blokk-s annen-veileder-varsel">
@@ -28,10 +28,12 @@ export function MinOversiktWrapper(props: PropsWithChildren<{}>) {
     return (
         <section className={visesAnnenVeiledersPortefolje ? 'annen-veileder' : ''}>
             {visesAnnenVeiledersPortefolje ? annenVeilederVarsel : null}
-            <div id="min-oversikt"
-                 role="tabpanel"
-                 className="oversikt-sideinnhold portefolje-side"
-                 aria-labelledby="min-oversikt">
+            <div
+                id="min-oversikt"
+                role="tabpanel"
+                className="oversikt-sideinnhold portefolje-side"
+                aria-labelledby="min-oversikt"
+            >
                 {props.children}
             </div>
         </section>
