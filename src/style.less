@@ -285,3 +285,27 @@ html {
         }
     }
 }
+
+//Dark mode
+body.light-mode {
+    background-color: #fff;
+    color: @navMorkGra;
+    transition: background-color 0.3s ease;
+}
+body.dark-mode {
+    background-color: #1a1919 !important;
+    color: #999;
+}
+
+#mainapp.light-mode {
+    background-color: @white;
+}
+#mainapp.dark-mode {
+    background-color: @navDypBlaDarken80;
+}
+
+.veilarbportefoljeflatefs {
+    .sidebar__tab-container.dark-mode {
+        background-color: @navDypBlaDarken80;
+    }
+}

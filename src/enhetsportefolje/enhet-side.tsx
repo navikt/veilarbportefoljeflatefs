@@ -65,7 +65,7 @@ function antallFilter(filtervalg) {
 const filtergruppe = ListevisningType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
-function EnhetSide() {
+export default function EnhetSide() {
     const statustall = useFetchStatusTall();
     const {
         portefolje,
@@ -232,5 +232,3 @@ function EnhetSide() {
         </DocumentTitle>
     );
 }
-
-export default EnhetSide;

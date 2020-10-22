@@ -6,6 +6,7 @@ import {Lenker} from './lenker';
 import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
+import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
@@ -18,6 +19,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     return (
         <div className="topp-meny" role="tablist">
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
+            <DarkModeToggle />
             <Toasts />
             <EndringsloggTourWrapper />
         </div>

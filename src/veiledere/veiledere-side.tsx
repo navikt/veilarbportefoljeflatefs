@@ -24,7 +24,7 @@ import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrik
 import {ListevisningType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
-function VeiledereSide() {
+export default function VeiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const filtergruppe = ListevisningType.veilederOversikt;
@@ -85,5 +85,3 @@ function VeiledereSide() {
         </DocumentTitle>
     );
 }
-
-export default VeiledereSide;
