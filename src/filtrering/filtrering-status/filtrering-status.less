@@ -2,10 +2,6 @@
 
 .veilarbportefoljeflatefs {
     .filtrering-oversikt {
-        .panel {
-            padding: 0;
-        }
-
         .skjema__input {
             padding: 0.15rem 0;
         }
@@ -26,13 +22,17 @@
         margin-top: 1rem;
         padding-top: 1rem;
 
+        .hjelpetekst__wrapper {
+            display: grid;
+            grid-template-columns: auto fit-content(100%);
+        }
+
+        .hjelpetekst__innhold {
+            max-width: 40rem;
+        }
+
         .hjelpetekst {
             grid-column: 2;
-
-            &__wrapper {
-                display: grid;
-                grid-template-columns: auto fit-content(100%);
-            }
         }
     }
 }

@@ -26,8 +26,8 @@ import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
+import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import {useWindowWidth} from '../hooks/use-window-width';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -37,10 +37,9 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-
     return (
-        <div className="row">
-            <div className="col-sm-12 blokk-xs">
+        <div className="filtrering-filter" data-testid="filtrering-filter_container">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
                 </Element>
@@ -82,7 +81,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
@@ -181,7 +180,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs">
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Rettighetsgruppe og ytelse
                 </Element>
@@ -210,11 +209,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     )}
                 />
             </div>
-            <div className="col-sm-12">
+            <div className="col-sm-12 filtrering-filter__kolonne">
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                    orientering={useWindowWidth() < 1200 ? PopoverOrientering.Venstre : PopoverOrientering.Over}
+                    orientering={PopoverOrientering.Hoyre}
                 />
                 <Dropdown
                     name="Aktivitet"
@@ -238,6 +237,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                            className="tiltakstyper"
                         />
                     )}
                 />

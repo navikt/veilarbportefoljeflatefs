@@ -16,7 +16,7 @@ import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import './ny_enhetsportefolje.less';
+import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
 

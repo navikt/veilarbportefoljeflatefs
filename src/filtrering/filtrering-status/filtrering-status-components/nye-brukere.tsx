@@ -1,9 +1,9 @@
 import React from 'react';
 import {FiltreringStatusGruppe} from './ufordelte-brukere';
-import BarInputCheckbox from '../../../components/barinput/barinput-checkbox';
 import {NYE_BRUKERE_FOR_VEILEDER} from '../../filter-konstanter';
 import hiddenIf from '../../../components/hidden-if/hidden-if';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import BarInputCheckbox from '../../../components/barinput/barinput-checkbox';
 
 function FiltreringStatusNyeBrukere(props: FiltreringStatusGruppe) {
     const statusTall = useStatusTallSelector();
@@ -14,7 +14,6 @@ function FiltreringStatusNyeBrukere(props: FiltreringStatusGruppe) {
             antall={statusTall.nyeBrukereForVeileder}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
-            max={statusTall.totalt}
         />
     );
 }

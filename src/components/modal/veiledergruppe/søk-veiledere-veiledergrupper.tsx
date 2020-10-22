@@ -1,7 +1,7 @@
 import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
 import {useSelector} from 'react-redux';
-import '../../../ny_style.less';
+import '../../../style.less';
 import {AppState} from '../../../reducer';
 import SokFilterVeilederliste from './sok-filter-veilederliste';
 

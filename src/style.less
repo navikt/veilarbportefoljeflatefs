@@ -79,12 +79,6 @@ html {
     z-index: 2000;
 }
 
-@media (min-width: 1200px) {
-    .container {
-        width: 956px;
-    }
-}
-
 .flex {
     display: flex;
 }
@@ -106,14 +100,8 @@ html {
 }
 
 .sticky-container {
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    z-index: 5;
     background-color: @bakgrunnsGra;
-
-    .toolbar {
-        justify-content: space-between;
-    }
 
     .blokk-xxs {
         margin-bottom: 0;
@@ -152,11 +140,40 @@ html {
 .toolbar-container {
     position: sticky;
     top: 0;
-    margin-top: -18px;
     z-index: 3;
+    margin-top: -20px;
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
+    display: grid;
+    grid-template-columns: 21.8rem auto;
+    grid-template-rows: auto auto auto;
+
+    .tabelloverskrift {
+        padding-top: 0.3rem;
+        background-color: @bakgrunnsGra;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row: 1;
+    }
+
+    .toolbar {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row: 2;
+        margin-top: 0.5rem;
+    }
+
+    .brukerliste__header {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row: 3;
+    }
+
+    .tabelloverskrift__hidden {
+        grid-column-start: 2;
+        padding-bottom: 2rem;
+    }
 }
 
 .sticky-skygge::before,
@@ -168,7 +185,7 @@ html {
 }
 
 .sticky-skygge::before {
-    top: 114px;
+    top: 117px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     margin: 0 4px;
 }
@@ -190,55 +207,81 @@ html {
         margin: 0 auto;
         padding: 0 3rem;
         max-width: 1809px;
+        display: grid;
+        grid-template-rows: auto 1fr;
     }
 
     .oversikt-sideinnhold {
         display: grid;
-        grid-template-columns: 1fr minmax(805px, 1322px);
-        column-gap: 16px;
-    }
+        column-gap: 1%;
+        grid-template-columns: 21rem auto;
+        grid-template-rows: auto auto auto;
 
-    .status-filter-kolonne {
-        min-width: 320px;
-        max-width: 375px;
-    }
-
-    .liste-kolonne {
-        min-width: 805px;
-        max-width: 1322px;
-
-        .filtreringlabel {
-            display: inline-flex;
-        }
-    }
-
-    .hjelpetekst {
-        height: 1rem;
-        width: 1rem;
-
-        svg {
-            height: 1rem;
-            width: 1rem;
+        .annen-veileder-varsel {
+            grid-row: 1;
+            grid-column: 2;
         }
 
-        &__innhold {
-            max-width: 24rem;
-            padding: 1rem;
+        .sokefelt-knapp__container {
+            grid-row: 1;
+            grid-column: 2;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
 
-        &__tooltip {
-            z-index: 2000;
+        .sidebar {
+            grid-row-start: 1;
+            grid-column: 1;
+        }
+
+        .filtrering-label-container,
+        .filtrering-label-container__annen-veileder {
+            grid-row: 2;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .oversikt__container {
+            grid-row: 3;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            margin: 1rem 0 2rem;
+        }
+
+        .alertstripe--info {
+            grid-row: 2;
+            grid-column-start: 2;
+            grid-column-end: 3;
+        }
+
+        &__hidden {
+            .oversikt__container {
+                grid-column-start: 1;
+            }
+
+            .filtrering-label-container {
+                grid-column-start: 1;
+            }
+
+            .alertstripe--info {
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
         }
     }
 
     @media (max-width: 1200px) {
         .oversikt-sideinnhold {
-            grid-template-rows: auto auto;
-            grid-template-columns: none;
-        }
+            .oversikt__container {
+                grid-column-start: 1;
+            }
 
-        .status-filter-kolonne {
-            max-width: none;
+            .sidebar {
+                z-index: 1200;
+            }
         }
     }
 }

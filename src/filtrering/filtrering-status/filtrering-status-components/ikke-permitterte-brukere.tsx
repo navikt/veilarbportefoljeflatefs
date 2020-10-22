@@ -22,7 +22,6 @@ function FiltreringStatusIkkePermitterteEtterNiendeBrukere(props: FiltreringStat
                     Alle <b>utenom</b> permitterte etter 09.03.2020
                 </>
             }
-            max={statusTall.totalt}
         />
     );
 }
