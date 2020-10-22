@@ -1,5 +1,4 @@
 import {ModalName, Step} from '../tour-modal';
-import React from 'react';
 import mineFilter1 from './mine-filter/mine-filter1.png';
 import mineFilter2 from './mine-filter/mine-filter2.png';
 import mineFilter3 from './mine-filter/mine-filter3.png';
