@@ -13,15 +13,14 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
-            - name: Hello world action step
-              id: hello
-              uses: stianStensli/TrelloActions@v1.5
+            - name: Get trello card id
+              id: card
+              uses: stianStensli/TrelloActions/get-card@v1.6
               with:
                   key: ${{ secrets.TRELLO_KEY }}
                   token: ${{ secrets.TRELLO_TOKEN }}
-            # Use the output from the `hello` step
-            - name: Get the output time
-              run: echo "The time was ${{ steps.hello.outputs.time }}"
+            - name: Get the print card id
+              run: echo "The card id is ${{ steps.card.outputs.cardId }}"
 
     cypress-run:
         name: Cypress run
