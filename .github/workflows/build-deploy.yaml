@@ -9,13 +9,13 @@ env:
 jobs:
     link-to-trello:
         runs-on: ubuntu-latest
-        name: TrelloLink
+        name: Trello
         steps:
             - name: Checkout
               uses: actions/checkout@v2
             - name: Hello world action step
               id: hello
-              uses: ./.github/actions/trello-action/
+              uses: stianStensli/TrelloActions
               with:
                   who-to-greet: 'Stian'
             # Use the output from the `hello` step
