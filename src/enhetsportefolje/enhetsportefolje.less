@@ -2,6 +2,7 @@
 
 .veilarbportefoljeflatefs {
     .portefolje__container {
+        min-height: 100%;
         margin-bottom: 2rem;
         border-bottom: 1px solid @navGra60;
         border-radius: @border-radius-base;
@@ -50,14 +51,14 @@
         }
     }
 
-    .status-filter-kolonne {
-        .filtrering-navn-fnr {
-            width: auto;
-            margin: 0.4rem 0 0.4rem 0;
+    .filtrering-navn-fnr {
+        width: 100%;
+        max-width: 40%;
+        min-width: 16rem;
+        margin: 0.5rem 5% 0.5rem 0;
 
-            .skjemaelement {
-                margin-bottom: 0;
-            }
+        .skjemaelement {
+            margin-bottom: 0;
         }
     }
 }

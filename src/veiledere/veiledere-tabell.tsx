@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {ReactComponent as PilAscending} from '../components/tabell/arrow-up.svg';
 import {ReactComponent as PilDescending} from '../components/tabell/arrow-down.svg';
-import './ny_veiledere.less';
+import './veiledere.less';
 
 interface VeiledereTabellProps {
     veiledere: any;

@@ -8,13 +8,13 @@ import classNames from 'classnames';
 import './modal.less';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 
-interface ValgtVeilederGruppeListeProps {
+interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
     fjernValgtVeileder: (veilederId: string) => void;
     feil?: string;
 }
 
-function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
+function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const veiledere = veilederePaEnheten
         .filter(veilederPaEnhet => props.valgteVeileder.includes(veilederPaEnhet.ident))
@@ -62,4 +62,4 @@ function ValgtVeilederGruppeListe(props: ValgtVeilederGruppeListeProps) {
     );
 }
 
-export default ValgtVeilederGruppeListe;
+export default ValgtVeiledergruppeListe;

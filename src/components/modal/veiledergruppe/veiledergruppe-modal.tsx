@@ -8,7 +8,7 @@ import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
-import VeilederGruppeForm from './veileder-gruppe-form';
+import VeiledergruppeForm from './veiledergruppe-form';
 import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
@@ -35,17 +35,17 @@ interface VeilederModalProps {
     filterValg?: FiltervalgModell;
 }
 
-interface VeilederGruppeErrors {
+interface VeiledergruppeErrors {
     gruppeNavn: OrNothing<string>;
     filterValg: OrNothing<string>;
 }
 
 const HiddenIfAlertStripe = hiddenIf(AlertStripeAdvarsel);
 
-export function VeilederGruppeModal(props: VeilederModalProps) {
+export function VeiledergruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
-    const [errors, setErrors] = useState<VeilederGruppeErrors>({} as VeilederGruppeErrors);
+    const [errors, setErrors] = useState<VeiledergruppeErrors>({} as VeiledergruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
     const [alertTekst, setAlertTekst] = useState('');
 
@@ -55,7 +55,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
     useEffect(() => {
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
-        setErrors({} as VeilederGruppeErrors);
+        setErrors({} as VeiledergruppeErrors);
         setHarForsoktSubmitte(false);
     }, [props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
 
@@ -108,12 +108,12 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             setEndringerIkkeLagretModal(true);
             return;
         }
-        setErrors({} as VeilederGruppeErrors);
+        setErrors({} as VeiledergruppeErrors);
         setAlertTekst('');
         props.onRequestClose();
     }
 
-    function lagreVeilederGruppeEndringer(e) {
+    function lagreVeiledergruppeEndringer(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -128,7 +128,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
 
         setFilterValg(initialState);
         setGruppeNavn('');
-        setErrors({} as VeilederGruppeErrors);
+        setErrors({} as VeiledergruppeErrors);
         setHarForsoktSubmitte(false);
         props.onRequestClose();
     }
@@ -144,7 +144,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         setEndringerIkkeLagretModal(false);
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
-        setErrors({} as VeilederGruppeErrors);
+        setErrors({} as VeiledergruppeErrors);
         setHarForsoktSubmitte(false);
         props.onRequestClose();
     }
@@ -158,20 +158,20 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
         .map(v => v.trim())
         .map(v => v.toLowerCase());
 
-    const lagredeVeilederGrupper = lagredeGrupper.map(v => ({
+    const lagredeVeiledergrupper = lagredeGrupper.map(v => ({
         veiledere: v.filterValg.veiledere,
         gruppeNavn: v.filterNavn
     }));
 
     useEffect(() => {
         if (lagredeGrupper.length > 0 && erTomtObjekt(errors) && props.isOpen && props.initialVerdi.filterCleanup) {
-            const finnLikVeilederGruppe = lagredeGrupper.find(v =>
+            const finnLikVeiledergruppe = lagredeGrupper.find(v =>
                 veilederlisterErLik(v.filterValg.veiledere, props.initialVerdi.filterValg.veiledere)
             );
-            if (finnLikVeilederGruppe !== undefined) {
-                const errorTekst = `En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '${finnLikVeilederGruppe.filterNavn}'. Du må legge til/fjerne veiledere eller slette gruppen.`;
+            if (finnLikVeiledergruppe !== undefined) {
+                const errorTekst = `En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik '${finnLikVeiledergruppe.filterNavn}'. Du må legge til/fjerne veiledere eller slette gruppen.`;
                 setAlertTekst(errorTekst);
-                setErrors({filterValg: errorTekst} as VeilederGruppeErrors);
+                setErrors({filterValg: errorTekst} as VeiledergruppeErrors);
             }
         }
     }, [lagredeGrupper, props.initialVerdi, props.isOpen, errors]);
@@ -189,12 +189,12 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
             errors.filterValg = 'Du må legge til veiledere.';
         }
 
-        const finnLikVeilederGruppe = lagredeVeilederGrupper.find(v =>
+        const finnLikVeiledergruppe = lagredeVeiledergrupper.find(v =>
             veilederlisterErLik(v.veiledere, filterValg.veiledere)
         );
 
-        if (finnLikVeilederGruppe) {
-            errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeilederGruppe.gruppeNavn}"`;
+        if (finnLikVeiledergruppe) {
+            errors.filterValg = `Det finnes allerede en gruppe med disse veilederne ved navn "${finnLikVeiledergruppe.gruppeNavn}"`;
         }
 
         setErrors(errors);
@@ -218,13 +218,13 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                 <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">
                     {alertTekst}
                 </HiddenIfAlertStripe>
-                <VeilederGruppeForm
+                <VeiledergruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}
                     modalTittel={props.modalTittel}
                     hanterVeilederChange={hanterChange}
                     setGruppeNavn={hanterGruppeNavnChange}
-                    onSubmit={lagreVeilederGruppeEndringer}
+                    onSubmit={lagreVeiledergruppeEndringer}
                     errors={errors}
                 >
                     <div className="veiledergruppe-modal__knappegruppe">
@@ -253,7 +253,7 @@ export function VeilederGruppeModal(props: VeilederModalProps) {
                             </Flatknapp>
                         )}
                     </div>
-                </VeilederGruppeForm>
+                </VeiledergruppeForm>
             </ModalWrapper>
             <EndringerIkkeLagretModal
                 isOpen={visEndringerIkkeLagretModal}

@@ -1,51 +1,41 @@
 @import '~nav-frontend-core/less/core';
 
 .veilarbportefoljeflatefs {
+    .sidebar__content-container .mine-filter__valgfelt {
+        padding: 0.5rem;
+    }
+
     .mine-filter-wrapper {
         &__tekst {
             font-style: italic;
             margin: 0.5rem 0;
         }
+    }
 
-        .mine-filter-emptystate {
-            text-align: left;
+    .mine-filter-emptystate {
+        text-align: left;
 
-            &__tekst {
-                font-style: italic;
-                margin: 0.5rem 0;
-            }
-        }
-
-        .mine-filter {
-            &__valgfelt {
-                padding: 0.5rem;
-                max-height: 17rem;
-                overflow-y: auto;
-
-                .skjemaelement__label {
-                    word-break: break-word;
-                }
-            }
-
-            &__rad {
-                display: flex;
-                justify-content: space-between;
-                min-height: 2rem;
-            }
-
-            &__filternavn {
-                width: 85%;
-            }
-        }
-
-        .mine-filter_alertstripe {
-            margin-bottom: 0.5rem;
+        &__tekst {
+            font-style: italic;
+            margin: 0.5rem 0;
         }
     }
 
-    .gammelt__hjelpetekst {
-        display: flex;
-        margin-left: auto;
-        margin-bottom: 0.5rem;
+    .mine-filter {
+        &__valgfelt {
+            .skjemaelement__label {
+                word-break: break-word;
+            }
+        }
+
+        &__rad {
+            display: flex;
+            justify-content: space-between;
+            min-height: 2rem;
+        }
+
+        &__filternavn {
+            width: 85%;
+        }
     }
 }

@@ -1,18 +1,22 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import LagredeFilterInnhold from './mine-filter_innhold';
 import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
-import {HandlingsType} from '../../ducks/lagretFilter';
+import './mine-filter_innhold.less';
+import NyttMineFilterInnhold from './mine-filter_innhold';
+import {HandlingsType, LagretFilter} from '../../ducks/lagretFilter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 
-function FiltreringMineFilter(props: {filtergruppe: ListevisningType}) {
+function FiltreringMineFilter(props: {
+    filtergruppe: ListevisningType;
+    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
+    sortertMineFilter;
+    isDraggable: boolean;
+    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
-    const mineFilter = mineFilterState.data;
-    mineFilter.sort((a, b) =>
-        a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true})
-    );
+
     return (
         <>
             {mineFilterState.handlingType === HandlingsType.HENTE && mineFilterState.status === STATUS.ERROR ? (
@@ -20,7 +24,13 @@ function FiltreringMineFilter(props: {filtergruppe: ListevisningType}) {
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
                 </AlertStripeFeil>
             ) : (
-                <LagredeFilterInnhold mineFilter={mineFilter} filtergruppe={props.filtergruppe} />
+                <NyttMineFilterInnhold
+                    lagretFilter={props.sortertMineFilter}
+                    filtergruppe={props.filtergruppe}
+                    isDraggable={props.isDraggable}
+                    fjernUtilgjengeligeFilter={props.fjernUtilgjengeligeFilter}
+                    setisDraggable={props.setisDraggable}
+                />
             )}
         </>
     );

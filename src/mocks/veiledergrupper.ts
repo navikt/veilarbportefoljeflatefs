@@ -3,7 +3,7 @@ import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
 import {LagretFilter} from '../ducks/lagretFilter';
 
-export const veilederGrupper = () => {
+export const veiledergrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map(v => v.ident);
     const veilederGruppe2 = veiledere.slice(5, 10).map(v => v.ident);
     const veilederGruppe3 = veiledere.slice(11, 15).map(v => v.ident);

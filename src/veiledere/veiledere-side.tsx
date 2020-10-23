@@ -18,10 +18,9 @@ import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import FilteringVeilederGrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veileder-grupper';
-import '../style.less';
-import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
+import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 
@@ -33,7 +32,7 @@ function VeiledereSide() {
     const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
-
+    const id = 'veileder-oversikt';
     useSetEnhetIUrl();
 
     useOnMount(() => {
@@ -48,46 +47,39 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse blokk-xl">
+            <div className="side-storrelse veilederoversikt" role="tab" aria-controls={id} id={id}>
                 <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <section>
-                        <div
-                            id="veileder-oversikt"
-                            role="tabpanel"
-                            className="oversikt-sideinnhold"
-                            aria-labelledby="veileder-oversikt"
-                        >
-                            <div className="status-filter-kolonne">
-                                <PanelBase className="blokk-xxxs sok-veileder">
-                                    <Undertittel>Søk veileder</Undertittel>
-                                    <FiltreringVeiledere />
-                                </PanelBase>
-                                <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
-                                    <FilteringVeilederGrupper filtergruppe={ListevisningType.veilederOversikt} />
-                                </MetrikkEkspanderbartpanel>
-                            </div>
-                            <div className="liste-kolonne">
-                                <FiltreringLabelContainer
-                                    filtervalg={{
-                                        veiledere: lagLablerTilVeiledereMedIdenter(
-                                            filtervalg.veiledere,
-                                            veiledere.data.veilederListe,
-                                            slettVeilederFilter
-                                        )
-                                    }}
-                                    filtergruppe={ListevisningType.veilederOversikt}
-                                    className="filtrering-label-container"
-                                />
-                                <VeiledersideVisning
-                                    veiledere={veiledere.data.veilederListe}
-                                    portefoljestorrelser={portefoljestorrelser}
-                                    veilederFilter={filtervalg.veiledere}
-                                    antallVeiledere={veiledere.data.veilederListe.length}
-                                />
-                            </div>
+                    <div className="oversikt-sideinnhold-veilederside" role="tabpanel" aria-labelledby={id} id={id}>
+                        <div className="status-filter-kolonne">
+                            <PanelBase className="blokk-xxxs sok-veileder">
+                                <Undertittel>Søk veileder</Undertittel>
+                                <FiltreringVeiledere />
+                            </PanelBase>
+                            <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                                <FilteringVeiledergrupper filtergruppe={ListevisningType.veilederOversikt} />
+                            </MetrikkEkspanderbartpanel>
                         </div>
-                    </section>
+                        <div className="liste-kolonne">
+                            <FiltreringLabelContainer
+                                filtervalg={{
+                                    veiledere: lagLablerTilVeiledereMedIdenter(
+                                        filtervalg.veiledere,
+                                        veiledere.data.veilederListe,
+                                        slettVeilederFilter
+                                    )
+                                }}
+                                filtergruppe={ListevisningType.veilederOversikt}
+                                className="filtrering-label-container"
+                            />
+                            <VeiledersideVisning
+                                veiledere={veiledere.data.veilederListe}
+                                portefoljestorrelser={portefoljestorrelser}
+                                veilederFilter={filtervalg.veiledere}
+                                antallVeiledere={veiledere.data.veilederListe.length}
+                            />
+                        </div>
+                    </div>
                 </Innholdslaster>
             </div>
         </DocumentTitle>

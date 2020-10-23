@@ -19,11 +19,12 @@ Fra `.`, kjør:
 ```
 npm start
 ```
+
 P.S. Husk og kjøre en `npm i` før du bygger
 
 ### Watching
 
-For å watche uten mocking kjører man `npm run watch`. 
+For å watche uten mocking kjører man `npm run watch`.
 
 For å aktivere mocking kjør `npm run watch:mock`
 

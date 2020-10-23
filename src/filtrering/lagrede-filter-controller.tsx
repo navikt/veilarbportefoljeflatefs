@@ -2,9 +2,9 @@ import {useEffect} from 'react';
 import {
     avmarkerSisteValgtMineFilter,
     avmarkerValgtMineFilter,
-    avmarkerValgtVeilederGruppe,
+    avmarkerValgtVeiledergruppe,
     markerMineFilter,
-    markerValgtVeilederGruppe
+    markerValgtVeiledergruppe
 } from '../ducks/lagret-filter-ui-state';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,7 +22,7 @@ export function LagredeFilterUIController(props: {filtergruppe: ListevisningType
     const filtreringVeilederoversikt = useSelector((state: AppState) => state.filtreringVeilederoversikt);
 
     const lagretMineFilter = useSelector((state: AppState) => state.mineFilter.data);
-    const lagretVeilederGrupper = useSelector((state: AppState) => state.veiledergrupper.data);
+    const lagretVeiledergrupper = useSelector((state: AppState) => state.veiledergrupper.data);
 
     useEffect(() => {
         const getFiltrering = () => {
@@ -34,7 +34,7 @@ export function LagredeFilterUIController(props: {filtergruppe: ListevisningType
         const valgtMineFilter = lagretMineFilter.filter(elem =>
             lagretFilterValgModellErLik(elem.filterValg, getFiltrering())
         );
-        const valgtVeilederGruppe = lagretVeilederGrupper.filter(elem =>
+        const valgtVeiledergruppe = lagretVeiledergrupper.filter(elem =>
             veilederlisterErLik(elem.filterValg.veiledere, getFiltrering()!.veiledere)
         );
 
@@ -49,16 +49,16 @@ export function LagredeFilterUIController(props: {filtergruppe: ListevisningType
             dispatch(markerMineFilter(valgtMineFilter[0], props.filtergruppe));
         }
 
-        if (valgtVeilederGruppe.length === 0) {
-            dispatch(avmarkerValgtVeilederGruppe(props.filtergruppe));
-        } else if (valgtVeilederGruppe.length === 1) {
-            dispatch(markerValgtVeilederGruppe(valgtVeilederGruppe[0], props.filtergruppe));
+        if (valgtVeiledergruppe.length === 0) {
+            dispatch(avmarkerValgtVeiledergruppe(props.filtergruppe));
+        } else if (valgtVeiledergruppe.length === 1) {
+            dispatch(markerValgtVeiledergruppe(valgtVeiledergruppe[0], props.filtergruppe));
         }
     }, [
         dispatch,
         props.filtergruppe,
         lagretMineFilter,
-        lagretVeilederGrupper,
+        lagretVeiledergrupper,
         filtreringEnhetensOversikt,
         filtreringMinoversikt,
         filtreringVeilederoversikt

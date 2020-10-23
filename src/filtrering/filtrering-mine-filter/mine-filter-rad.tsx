@@ -6,22 +6,20 @@ import {velgMineFilter} from '../../ducks/filtrering';
 import {apneMineFilterModal, markerMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import React, {RefObject, useRef} from 'react';
-import {antallFilter} from '../../components/modal/mine-filter/mine-filter-utils';
+import React from 'react';
+import './mine-filter_innhold.less';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagretFilter';
 
 interface MineFilterRadProps {
-    lagretFilter: LagretFilter;
+    mineFilter: LagretFilter;
     filtergruppe: ListevisningType;
-    parentDiv: RefObject<HTMLDivElement>;
 }
 
-function MineFilterRad({lagretFilter, filtergruppe, parentDiv}: MineFilterRadProps) {
+function MineFilterRad({mineFilter, filtergruppe}: MineFilterRadProps) {
     const dispatch = useDispatch();
-    const checkboxRef = useRef<HTMLDivElement>(null);
 
-    const valgtLagretFilter = useSelector((state: AppState) =>
+    const valgtMineFilter = useSelector((state: AppState) =>
         filtergruppe === ListevisningType.minOversikt
             ? state.mineFilterMinOversikt.valgtMineFilter
             : state.mineFilterEnhetensOversikt.valgtMineFilter
@@ -32,57 +30,38 @@ function MineFilterRad({lagretFilter, filtergruppe, parentDiv}: MineFilterRadPro
     function velgFilter() {
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {antallFilter: antallFilter(lagretFilter.filterValg)},
+            {},
             {
-                filterId: lagretFilter.filterId,
+                filterId: mineFilter.filterId,
                 sideNavn: finnSideNavn(),
                 id: veilederIdentTilNonsens
             }
         );
-        dispatch(velgMineFilter(lagretFilter, filtergruppe));
-        dispatch(markerMineFilter(lagretFilter, filtergruppe));
+        dispatch(velgMineFilter(mineFilter, filtergruppe));
+        dispatch(markerMineFilter(mineFilter, filtergruppe));
     }
 
     function onClickRedigerKnapp() {
         dispatch(apneMineFilterModal(filtergruppe));
     }
 
-    function scrollAndSelect() {
-        if (
-            parentDiv.current != null &&
-            checkboxRef.current &&
-            valgtLagretFilter &&
-            valgtLagretFilter?.filterId === lagretFilter.filterId
-        ) {
-            if (
-                parentDiv.current.offsetTop + parentDiv.current.scrollTop > checkboxRef.current.offsetTop ||
-                checkboxRef.current.offsetTop > parentDiv.current.offsetTop + parentDiv.current.clientHeight
-            ) {
-                parentDiv.current.scrollTo({
-                    top: checkboxRef.current.offsetTop - parentDiv.current.offsetTop,
-                    left: 0,
-                    behavior: 'smooth'
-                });
-            }
-        }
-        return valgtLagretFilter?.filterId === lagretFilter.filterId;
-    }
-
     return (
-        <div className="mine-filter__rad" ref={checkboxRef}>
+        <div className="mine-filter__rad" data-testid="mine-filter_rad-wrapper">
             <Radio
                 className="mine-filter__filternavn"
-                key={lagretFilter.filterId}
+                key={mineFilter.filterId}
                 name="mineFilter"
-                label={lagretFilter.filterNavn}
-                value={lagretFilter.filterId}
+                label={mineFilter.filterNavn}
+                value={mineFilter.filterId}
                 onChange={() => velgFilter()}
-                checked={scrollAndSelect()}
+                checked={valgtMineFilter?.filterId === mineFilter.filterId}
+                data-testid={`mine-filter-rad_${mineFilter.filterNavn}`}
             />
             <RedigerKnapp
-                hidden={valgtLagretFilter?.filterId !== lagretFilter.filterId}
-                aria="Rediger lagret filter"
+                hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
+                aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
+                dataTestid={`rediger-filter_knapp_${mineFilter.filterNavn}`}
             />
         </div>
     );

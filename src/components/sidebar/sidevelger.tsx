@@ -1,8 +1,8 @@
 import SidebarTab from './sidebar-tab';
-import {NyFiltreringStatus} from '../../filtrering/filtrering-status/ny_filtrering-status';
-import NyFiltreringFilter from '../../filtrering/ny_filtrering-filter';
-import NyFilteringVeilederGrupper from '../../filtrering/filtrering-veileder-grupper/ny_filtrering-veileder-grupper';
-import NyFiltreringMineFilter from '../../filtrering/filtrering-mine-filter/ny_filtrering-mine-filter';
+import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
+import FiltreringFilter from '../../filtrering/filtrering-filter';
+import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
+import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -75,7 +75,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 handleClick={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
-                <NyFiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
+                <FiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Filter') {
@@ -85,7 +85,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 handleClick={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
-                <NyFiltreringFilter
+                <FiltreringFilter
                     endreFiltervalg={doEndreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
@@ -99,7 +99,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 handleClick={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
-                <NyFilteringVeilederGrupper filtergruppe={filtergruppe} />
+                <FilteringVeiledergrupper filtergruppe={filtergruppe} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Mine filter') {
@@ -125,7 +125,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                     </>
                 }
             >
-                <NyFiltreringMineFilter
+                <FiltreringMineFilter
                     filtergruppe={filtergruppe}
                     fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                     sortertMineFilter={mineFilter.sort(sortMineFilter)}

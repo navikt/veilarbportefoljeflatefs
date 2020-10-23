@@ -16,7 +16,6 @@ function FiltreringStatusPermitterteEtterNiendeBrukere(props: FiltreringStatusGr
             antall={statusTall.permitterteEtterNiendeMars}
             handleChange={props.handleChange}
             checked={props.ferdigfilterListe.includes(PERMITTERTE_ETTER_NIENDE_MARS)}
-            max={statusTall.totalt}
         />
     );
 }

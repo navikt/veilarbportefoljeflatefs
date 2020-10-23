@@ -1,8 +1,8 @@
 import React from 'react';
 import {I_AVTALT_AKTIVITET, IKKE_I_AVTALT_AKTIVITET, UTLOPTE_AKTIVITETER} from '../../filter-konstanter';
-import {BarInputRadio} from '../../../components/barinput/barinput-radio';
 import BarInputGruppe from '../../../components/barinput/barinput-gruppe';
 import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import {BarInputRadio} from '../../../components/barinput/barinput-radio';
 
 interface FiltreringStatusAktivitetProps {
     ferdigfilterListe: string[];
@@ -18,21 +18,18 @@ export function FiltreringStatusAktiviteter(props: FiltreringStatusAktivitetProp
                 antall={statusTall.utlopteAktiviteter}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
-                max={statusTall.totalt}
             />
             <BarInputRadio
                 filterNavn="ikkeIavtaltAktivitet"
                 antall={statusTall.ikkeIavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
-                max={statusTall.totalt}
             />
             <BarInputRadio
                 filterNavn="iavtaltAktivitet"
                 antall={statusTall.iavtaltAktivitet}
                 handleChange={props.handleChange}
                 checked={props.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
-                max={statusTall.totalt}
             />
         </BarInputGruppe>
     );

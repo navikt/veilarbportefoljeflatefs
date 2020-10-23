@@ -3,25 +3,24 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {VeilederGruppeModal} from '../../components/modal/veiledergruppe/veileder-gruppe-modal';
+import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
-
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import NyVeilederGruppeInnhold from './ny_veiledergrupper-innhold';
+import VeiledergruppeInnhold from './veiledergruppe-innhold';
 import {AlertStripeFeil} from 'nav-frontend-alertstriper';
 
-interface FilteringVeilederGrupperProps {
+interface FilteringVeiledergruppeProps {
     filtergruppe: ListevisningType;
 }
 
-function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProps) {
-    const [visVeilederGruppeModal, setVeilederGruppeModal] = useState(false);
+function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) {
+    const [visVeiledergruppeModal, setVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
     const lagretFilter = lagretFilterState.data;
@@ -48,7 +47,7 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
 
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0 ? (
-            <NyVeilederGruppeInnhold lagretFilter={sortertVeiledergruppe} filtergruppe={filtergruppe} />
+            <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} filtergruppe={filtergruppe} />
         ) : (
             <div className="veiledergruppe-emptystate">
                 <Normaltekst className="veiledergruppe-emptystate__tekst">
@@ -70,23 +69,23 @@ function NyFilteringVeilederGrupper({filtergruppe}: FilteringVeilederGrupperProp
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
             <LeggTilKnapp
                 onClick={() => {
-                    setVeilederGruppeModal(true);
+                    setVeiledergruppeModal(true);
                 }}
             />
-            <VeilederGruppeModal
+            <VeiledergruppeModal
                 initialVerdi={{
                     gruppeNavn: '',
                     filterValg: initialState,
                     filterId: -1
                 }}
-                isOpen={visVeilederGruppeModal}
+                isOpen={visVeiledergruppeModal}
                 onSubmit={submitEndringer}
                 modalTittel="Ny veiledergruppe"
                 lagreKnappeTekst="Lagre"
-                onRequestClose={() => setVeilederGruppeModal(false)}
+                onRequestClose={() => setVeiledergruppeModal(false)}
             />
         </>
     );
 }
 
-export default NyFilteringVeilederGrupper;
+export default FilteringVeiledergrupper;
