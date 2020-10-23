@@ -25,7 +25,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '29. september 2020',
         tittel: 'Endringer i filtrene',
         versjonId: '29.09.20',
-        featureToggleName: 'veilarbportefolje.redesign',
         children: (
             <>
                 <ul>
