@@ -7,6 +7,19 @@ env:
     PRINT_PAYLOAD: true
 
 jobs:
+    link-to-trello:
+        runs-on: ubuntu-latest
+        name: TrelloLink
+        steps:
+            - name: Hello world action step
+              id: hello
+              uses: ../actions/trello-action/
+              with:
+                  who-to-greet: 'Mona the Octocat'
+            # Use the output from the `hello` step
+            - name: Get the output time
+              run: echo "The time was ${{ steps.hello.outputs.time }}"
+
     cypress-run:
         name: Cypress run
         runs-on: ubuntu-latest
