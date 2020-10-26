@@ -15,18 +15,19 @@ jobs:
               uses: actions/checkout@v2
             - name: Get trello card id
               id: card
-              uses: stianStensli/TrelloActions/get-card@v1.8.3
+              uses: stianStensli/TrelloActions/get-card@v1.8.4
               with:
                   key: ${{ secrets.TRELLO_KEY }}
                   token: ${{ secrets.TRELLO_TOKEN }}
                   board: xwFqjmQY
-            - name: Attach commit to card
+            - name: Attach branch to card
               id: Attach
-              uses: stianStensli/TrelloActions/create-attachment@v1.8.3
+              uses: stianStensli/TrelloActions/create-attachment@v1.8.4
               with:
                   key: ${{ secrets.TRELLO_KEY }}
                   token: ${{ secrets.TRELLO_TOKEN }}
-                  cardId: ${{ steps.card.outputs.cardId }}
+                  card-id: ${{ steps.card.outputs.cardId }}
+                  attachment-type: branch
 
     cypress-run:
         name: Cypress run
