@@ -9,18 +9,24 @@ env:
 jobs:
     link-to-trello:
         runs-on: ubuntu-latest
-        name: Trello
+        name: Trello update
         steps:
             - name: Checkout
               uses: actions/checkout@v2
             - name: Get trello card id
               id: card
-              uses: stianStensli/TrelloActions/get-card@v1.7.3
+              uses: stianStensli/TrelloActions/get-card@v1.8.3
               with:
                   key: ${{ secrets.TRELLO_KEY }}
                   token: ${{ secrets.TRELLO_TOKEN }}
-            - name: Get the print card id
-              run: echo "The card id is ${{ steps.card.outputs.cardId }}"
+                  board: xwFqjmQY
+            - name: Attach commit to card
+              id: Attach
+              uses: stianStensli/TrelloActions/create-attachment@v1.8.3
+              with:
+                  key: ${{ secrets.TRELLO_KEY }}
+                  token: ${{ secrets.TRELLO_TOKEN }}
+                  cardId: ${{ steps.card.outputs.cardId }}
 
     cypress-run:
         name: Cypress run
