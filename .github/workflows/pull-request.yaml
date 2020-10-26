@@ -1,6 +1,6 @@
 name: Pull request Cypress run
 
-on: pullrequest
+on: pull_request
 env:
   IMAGE_TAG: ${{ github.sha }}
   IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
