@@ -1,6 +1,6 @@
 name: Bygg og Deploy Dev
 
-on: pullrequest
+on: pull request
 env:
   IMAGE_TAG: ${{ github.sha }}
   IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
