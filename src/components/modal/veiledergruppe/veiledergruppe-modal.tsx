@@ -33,6 +33,7 @@ interface VeilederModalProps {
     lagreKnappeTekst: string;
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
     filterValg?: FiltervalgModell;
+    className?: string;
 }
 
 interface VeiledergruppeErrors {
@@ -213,9 +214,14 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                 contentLabel={props.modalTittel}
                 onRequestClose={lukkModal}
                 portalClassName="veiledergruppe-modal"
+                className={props.className}
             >
                 <ModalHeader tittel={props.modalTittel} />
-                <HiddenIfAlertStripe hidden={alertTekst.length === 0} className="alerttext">
+                <HiddenIfAlertStripe
+                    hidden={alertTekst.length === 0}
+                    className="alerttext"
+                    data-testid="veiledergruppe_modal_alertstripe"
+                >
                     {alertTekst}
                 </HiddenIfAlertStripe>
                 <VeiledergruppeForm

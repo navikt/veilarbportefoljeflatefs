@@ -10,6 +10,7 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
+import {kebabCase} from '../../utils/utils';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
@@ -62,13 +63,13 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
                 value={veilederGruppe.filterId}
                 onChange={() => velgGruppe()}
                 checked={valgtGruppe?.filterId === veilederGruppe.filterId}
-                data-testid={`veiledergruppe-rad_${veilederGruppe.filterNavn}`}
+                data-testid={`veiledergruppe-rad_${kebabCase(veilederGruppe.filterNavn)}`}
             />
             <RedigerKnapp
                 hidden={valgtGruppe?.filterId !== veilederGruppe.filterId}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-veiledergruppe_knapp_${veilederGruppe.filterNavn}`}
+                dataTestid={`rediger-veiledergruppe_knapp_${kebabCase(veilederGruppe.filterNavn)}`}
             />
         </div>
     );

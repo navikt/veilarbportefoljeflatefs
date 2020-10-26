@@ -1,8 +1,10 @@
 import React from 'react';
+import {kebabCase} from '../../src/utils/utils';
 
-const gruppenavn = 'Voffvoff';
-const gruppenavnRedigert = 'Mjaumjau';
-const eksisterendeGruppenavn = 'Gruppen brukes til test, la stå';
+const gruppenavn = kebabCase('Voffvoff');
+const gruppenavnRedigert = kebabCase('Mjaumjau');
+const eksisterendeGruppenavn = 'Gruppen brukes til test la stå';
+const eksisterendeGruppenavnKebab = kebabCase(eksisterendeGruppenavn);
 const andersen = 'Andersen';
 const jonas = 'Jonas';
 const aasen = 'Aasen';
@@ -92,6 +94,7 @@ describe('Lag ny veiledergruppe', () => {
 describe('Rediger filternavn', () => {
     it('Klikk på blyantsymbolet', () => {
         cy.getByTestId(`rediger-veiledergruppe_knapp_${gruppenavn}`).click();
+        //TODO forvent at modalen vises
     });
     it('Skriv inn nytt gruppenavn', () => {
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input')
@@ -178,5 +181,19 @@ describe('Slett veiledergruppe', () => {
         cy.getByTestId('timed-toast')
             .should('be.visible')
             .contains('Gruppen er slettet');
+    });
+});
+
+describe('Veileder har byttet enhet', () => {
+    it('Marker gruppen som inneholder veiledere som har sluttet', () => {
+        cy.getByTestId(`veiledergruppe-rad_${eksisterendeGruppenavnKebab}`).click({force: true});
+    });
+    it('Redigermodalen og alertstripe skal synes', () => {
+        cy.get('.veiledergruppe_modal_rediger-veiledergruppe')
+            .should('be.visible')
+            .contains('Rediger veiledergruppe');
+        cy.getByTestId('veiledergruppe_modal_alertstripe')
+            .should('be.visible')
+            .contains('En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik');
     });
 });

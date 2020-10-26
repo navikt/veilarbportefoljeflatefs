@@ -103,3 +103,7 @@ export const keyCodes = {
     down: 40,
     esc: 27
 };
+
+export function kebabCase(string) {
+    return string.replace(/\s+/g, '-').toLowerCase();
+}

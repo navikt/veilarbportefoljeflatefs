@@ -46,7 +46,7 @@ export const veiledergrupper = () => {
             filterCleanup: false
         },
         {
-            filterNavn: 'Gruppen brukes til test, la stå',
+            filterNavn: 'Gruppen brukes til test la stå',
             filterId: 17,
             filterValg: {...initialState, veiledere: veilederGruppe5},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),

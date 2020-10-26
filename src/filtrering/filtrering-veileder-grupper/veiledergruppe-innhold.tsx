@@ -15,6 +15,7 @@ import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagretFilter';
 import VeiledergruppeRad from './veiledergruppe_rad';
+import {kebabCase} from '../../utils/utils';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -109,6 +110,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     lagreKnappeTekst="Lagre endringer"
                     onRequestClose={() => setVisEndreGruppeModal(false)}
                     onSlett={sletteKnapp}
+                    className={`veiledergruppe_modal_${kebabCase('Rediger veiledergruppe')}`}
                 />
             )}
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
+import {kebabCase} from '../../src/utils/utils';
 
-const mineFilterNavn = 'Voff';
-const mineFilterNavnRedigert = 'Mjau';
+const mineFilterNavn = kebabCase('Voff');
+const mineFilterNavnRedigert = kebabCase('Mjau');
 const forLangtFilterNavn =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
 const eksisterendeFilterNavn = 'Denne brukes til test, la stå';
