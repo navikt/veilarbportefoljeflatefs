@@ -1,10 +1,9 @@
 import React from 'react';
 import {kebabCase} from '../../src/utils/utils';
 
-const gruppenavn = kebabCase('Voffvoff');
-const gruppenavnRedigert = kebabCase('Mjaumjau');
+const gruppenavn = 'Voffvoff';
+const gruppenavnRedigert = 'Mjaumjau';
 const eksisterendeGruppenavn = 'Gruppen brukes til test la stå';
-const eksisterendeGruppenavnKebab = kebabCase(eksisterendeGruppenavn);
 const andersen = 'Andersen';
 const jonas = 'Jonas';
 const aasen = 'Aasen';
@@ -82,7 +81,7 @@ describe('Lag ny veiledergruppe', () => {
     });
     it('Ny gruppe skal være valgt', () => {
         cy.getByTestId('veiledergruppe_rad-wrapper').contains(gruppenavn);
-        cy.getByTestId(`veiledergruppe-rad_${gruppenavn}`).should('be.checked');
+        cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');
     });
     it('Verifiser at den nye gruppen finnes i veilederoversikt', () => {
         cy.gaTilOversikt('veileder-oversikt');
@@ -93,7 +92,7 @@ describe('Lag ny veiledergruppe', () => {
 
 describe('Rediger filternavn', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${gruppenavn}`).click();
+        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavn)}`).click();
     });
     it('Skriv inn nytt gruppenavn', () => {
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input')
@@ -116,7 +115,7 @@ describe('Rediger filternavn', () => {
 
 describe('Rediger filtervalg', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${gruppenavnRedigert}`).click();
+        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
     });
     it('Fjern veiledere', () => {
         cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp')
@@ -165,7 +164,7 @@ describe('Rediger filtervalg', () => {
 
 describe('Slett veiledergruppe', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${gruppenavnRedigert}`).click();
+        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
     });
     it('Klikk på slette-knapp', () => {
         cy.getByTestId('veiledergruppe_modal_slette-knapp').click();
@@ -185,7 +184,7 @@ describe('Slett veiledergruppe', () => {
 
 describe('Veileder har byttet enhet', () => {
     it('Marker gruppen som inneholder veiledere som har sluttet', () => {
-        cy.getByTestId(`veiledergruppe-rad_${eksisterendeGruppenavnKebab}`).click({force: true});
+        cy.getByTestId(`veiledergruppe-rad_${kebabCase(eksisterendeGruppenavn)}`).click({force: true});
     });
     it('Redigermodalen og alertstripe skal synes', () => {
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe')
