@@ -1,8 +1,8 @@
 import React from 'react';
 import {kebabCase} from '../../src/utils/utils';
 
-const mineFilterNavn = kebabCase('Voff');
-const mineFilterNavnRedigert = kebabCase('Mjau');
+const mineFilterNavn = 'Voff';
+const mineFilterNavnRedigert = 'Mjau';
 const forLangtFilterNavn =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
 const testFilterNavn = 'Denne brukes til test la stå';
@@ -84,7 +84,7 @@ describe('Lag nytt filter', () => {
     });
     it('Nytt filter er valgt', () => {
         cy.getByTestId('mine-filter_rad-wrapper').contains(mineFilterNavn);
-        cy.getByTestId(`mine-filter-rad_${mineFilterNavn}`).should('be.checked');
+        cy.getByTestId(`mine-filter-rad_${kebabCase(mineFilterNavn)}`).should('be.checked');
     });
     it('Etikettene viser to filtervalg', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 2);
@@ -96,7 +96,7 @@ describe('Lag nytt filter', () => {
 
 describe('Rediger filternavn', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-filter_knapp_${mineFilterNavn}`).click();
+        cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavn)}`).click();
     });
     it('Skriv inn nytt navn', () => {
         cy.getByTestId('redigere-filter-navn-input')
@@ -160,7 +160,7 @@ describe('Rediger filtervalg', () => {
 
 describe('Slett lagret filter', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-filter_knapp_${mineFilterNavnRedigert}`).click();
+        cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavnRedigert)}`).click();
     });
     it('Slett filter', () => {
         cy.getByTestId('rediger-filter_modal_slett-knapp').click();
