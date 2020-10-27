@@ -59,16 +59,14 @@ export interface FiltervalgModell {
     veilederNavnQuery: string;
     registreringstype: string[];
     cvJobbprofil: null | string;
+    utdanning: string[];
+    utdanningGodkjentSvar: string[];
+    utdanningBestattSvar: string[];
 }
 
 export interface EnhetModell {
     enhetId: string;
     navn?: string;
-}
-
-export interface ValgtEnhetModell {
-    enhet?: EnhetModell;
-    status: string;
 }
 
 export interface VeilederModell {
@@ -164,20 +162,6 @@ export interface ArbeidslisteModell {
     isOppfolgendeVeileder: boolean;
     sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
-}
-
-export interface StatustallModell {
-    totalt: number;
-    ufordelteBrukere?: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-}
-
-export interface FeilmeldingModalModell {
-    aarsak: string;
-    brukereError: string[];
 }
 
 export enum Status {

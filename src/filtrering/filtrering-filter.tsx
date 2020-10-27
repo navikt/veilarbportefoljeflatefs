@@ -15,7 +15,10 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    utdanning,
+    utdanningBeståttSvar,
+    utdanningGodkjentSvar
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
@@ -28,6 +31,7 @@ import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
+import DoubleCheckboxFilterform from '../components/checkbox-filterform/double-checkbox-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -83,22 +87,10 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
-                    Status og brukergrupper
+                    Svar fra registrering
                 </Element>
                 <Dropdown
-                    name="CV og jobbprofil"
-                    render={lukkDropdown => (
-                        <RadioFilterform
-                            valg={cvJobbprofil}
-                            endreFiltervalg={endreFiltervalg}
-                            filtervalg={filtervalg}
-                            closeDropdown={lukkDropdown}
-                            filterId="cvJobbprofil"
-                        />
-                    )}
-                />
-                <Dropdown
-                    name="Svar fra registrering"
+                    name="Situasjon"
                     render={lukkDropdown => (
                         <>
                             <div className="registreringsfilter__infocontainer">
@@ -116,6 +108,51 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                 className="registreringstype"
                             />
                         </>
+                    )}
+                />
+                <Dropdown
+                    name="Høyeste fullførte utdanning"
+                    render={lukkDropdown => (
+                        <CheckboxFilterform
+                            form="utdanning"
+                            valg={utdanning}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanning godkjent og bestått"
+                    render={lukkDropdown => (
+                        <DoubleCheckboxFilterform
+                            valgCol1={utdanningGodkjentSvar}
+                            valgCol2={utdanningBeståttSvar}
+                            titleCol1={'Er utdanningen godkjent i Norge?'}
+                            titleCol2={'Er utdanningen bestått i Norge?'}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            formCol1="utdanningGodkjentSvar"
+                            formCol2="utdanningBestattSvar"
+                            endreFilterValg={endreFiltervalg}
+                        />
+                    )}
+                />
+            </div>
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
+                <Element className="blokk-xxs" tag="h3">
+                    Status og brukergrupper
+                </Element>
+                <Dropdown
+                    name="CV og jobbprofil"
+                    render={lukkDropdown => (
+                        <RadioFilterform
+                            valg={cvJobbprofil}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            filterId="cvJobbprofil"
+                        />
                     )}
                 />
                 <Dropdown
