@@ -45,6 +45,8 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
 
+    const modalTittel = 'Rediger veiledergruppe';
+
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
         if (
             valgtGruppe &&
@@ -106,11 +108,11 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     }}
                     isOpen={visEndreGruppeModal}
                     onSubmit={submitEndringer}
-                    modalTittel="Rediger veiledergruppe"
+                    modalTittel={modalTittel}
                     lagreKnappeTekst="Lagre endringer"
                     onRequestClose={() => setVisEndreGruppeModal(false)}
                     onSlett={sletteKnapp}
-                    className={`veiledergruppe_modal_${kebabCase('Rediger veiledergruppe')}`}
+                    className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
                 />
             )}
         </div>

@@ -245,6 +245,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                             className="veiledergruppe-modal__knappegruppe__avbryt"
                             htmlType="button"
                             onClick={lukkModal}
+                            data-testid="veiledergruppe_modal_avbryt-knapp"
                         >
                             Avbryt
                         </Flatknapp>

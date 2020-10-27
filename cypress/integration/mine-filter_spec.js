@@ -5,7 +5,7 @@ const mineFilterNavn = kebabCase('Voff');
 const mineFilterNavnRedigert = kebabCase('Mjau');
 const forLangtFilterNavn =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
-const eksisterendeFilterNavn = 'Denne brukes til test, la stå';
+const testFilterNavn = 'Denne brukes til test la stå';
 let antallFilter = 0;
 
 describe('Lag nytt filter', () => {
@@ -13,7 +13,7 @@ describe('Lag nytt filter', () => {
         cy.configure();
     });
     it('Gå til Mine filter-tab', () => {
-        cy.getByTestId('sidebar-tab_MINE_FILTER').click();
+        cy.klikkTab('MINE_FILTER');
     });
     it('Finn antall filter', () => {
         cy.get('[data-testid=mine-filter_rad-wrapper]').then(ant => {
@@ -67,7 +67,7 @@ describe('Lag nytt filter', () => {
     it('Validering: Eksisterende filternavn', () => {
         cy.getByTestId('lagre-nytt-filter_modal_navn-input')
             .clear()
-            .type(eksisterendeFilterNavn);
+            .type(testFilterNavn);
         cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
         cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
     });
@@ -174,38 +174,81 @@ describe('Slett lagret filter', () => {
     });
 });
 
-//TODO drag and drop
-xdescribe('Sjekk at drag and drop funker', () => {
-    it('Klikk på mine filter-tab', () => {
-        cy.klikkTab('MINE_FILTER');
+describe('Sjekk at drag and drop funker', () => {
+    it('Test-filter er det fjerde filteret', () => {
+        cy.getByTestId('mine-filter_radio-container')
+            .children()
+            .first()
+            .next()
+            .next()
+            .next()
+            .contains(testFilterNavn);
     });
     it('Klikk på hengelåsen', () => {
         cy.getByTestId('toggle-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('be.visible');
     });
-    it('Dra øverste filter til nederste rad', () => {
-        cy.getByTestId('drag-drop_rad')
-            .contains('UfordelteBrukere')
-            .trigger('mousedown', {which: 1})
-            .trigger('mousemove', {clientX: 340, clientY: 130})
-            .trigger('mouseup', {force: true});
-
-        cy.getByTestId('drag-drop_rad')
-            .contains('UfordelteBrukere')
+    it('Dra test-filteret til nederste rad', () => {
+        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+            .contains(testFilterNavn)
+            .should('have.value', 3)
+            .click()
+            .type('{shift}{downarrow}');
+        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+            .contains(testFilterNavn)
             .should('have.value', 4);
     });
-    it('Ufordelte brukere skal ha fokus', () => {
-        cy.getByTestId('drag-drop_rad')
-            .contains('UfordelteBrukere')
-            .should('have.focus');
+    it('Klikk lagre', () => {
+        cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('not.be.visible');
     });
-    it('Klikk øverste filter til nederste rad', () => {
-        cy.getByTestId('drag-drop_rad')
-            .contains('UfordelteBrukere')
-            .should('have.value', 0);
-        cy.getByTestId('flytt-knapp_ned_0').should('be.visible');
-        cy.getByTestId('flytt-knapp_ned_0').click();
-        cy.getByTestId('drag-drop_rad')
-            .contains('UfordelteBrukere')
-            .should('have.value', 1);
+    it('Test-filter skal ligge nederst', () => {
+        cy.getByTestId('mine-filter_radio-container')
+            .children()
+            .last()
+            .contains(testFilterNavn);
+    });
+    it('Klikk på hengelåsen', () => {
+        cy.getByTestId('toggle-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('be.visible');
+    });
+    it('Dra test-filter opp ett trinn', () => {
+        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+            .contains(testFilterNavn)
+            .should('have.value', 4)
+            .click()
+            .type('{shift}{uparrow}');
+        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+            .contains(testFilterNavn)
+            .should('have.value', 3);
+    });
+    it('Klikk avbryt', () => {
+        cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('not.be.visible');
+    });
+    it('Test-filter skal ligge nederst', () => {
+        cy.getByTestId('mine-filter_radio-container')
+            .children()
+            .last()
+            .contains(testFilterNavn);
+    });
+    it('Klikk på hengelåsen', () => {
+        cy.getByTestId('toggle-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('be.visible');
+    });
+    it('Klikk nullstill', () => {
+        cy.getByTestId('mine-filter_sortering_nullstill-knapp').click();
+    });
+    it('Klikk lagre', () => {
+        cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
+        cy.getByTestId('drag-drop_infotekst').should('not.be.visible');
+    });
+    it('Filtrene settes alfabetisk, test-filteret er nå det tredje filteret', () => {
+        cy.getByTestId('mine-filter_radio-container')
+            .children()
+            .first()
+            .next()
+            .next()
+            .contains(testFilterNavn);
     });
 });

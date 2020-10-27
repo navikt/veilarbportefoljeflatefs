@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
 import FlyttKnappWrapper from './flytt-knapp-wrapper';
+import {kebabCase} from '../../../utils/utils';
 
 export interface DragAndDropRowProps {
     idx: number;
@@ -40,6 +41,7 @@ function DragAndDropRow({
             aria-describedby="operation"
             aria-selected={true}
             value={idx}
+            data-testid={`drag-drop_rad_${kebabCase(filterNavn)}`}
         >
             <DragIcon aria-disabled={true} />
             {filterNavn}

@@ -34,7 +34,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
-            <div className="mine-filter__valgfelt" ref={outerDivRef}>
+            <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
                 <DragAndDrop
                     stateFilterOrder={filtrertListe()}
                     filtergruppe={props.filtergruppe}

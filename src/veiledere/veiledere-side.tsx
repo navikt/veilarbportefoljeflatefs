@@ -33,6 +33,8 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
+    document.body.style.backgroundColor = '#F4F4F4';
+
     useSetEnhetIUrl();
 
     useOnMount(() => {
