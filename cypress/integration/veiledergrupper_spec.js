@@ -94,7 +94,6 @@ describe('Lag ny veiledergruppe', () => {
 describe('Rediger filternavn', () => {
     it('Klikk på blyantsymbolet', () => {
         cy.getByTestId(`rediger-veiledergruppe_knapp_${gruppenavn}`).click();
-        //TODO forvent at modalen vises
     });
     it('Skriv inn nytt gruppenavn', () => {
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input')
