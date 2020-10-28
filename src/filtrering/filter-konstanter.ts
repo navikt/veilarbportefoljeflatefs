@@ -238,21 +238,18 @@ export const utdanning = {
     VIDEREGAENDE_GRUNNUTDANNING: 'Videregående grunnutdanning (1 til 2 år)',
     VIDEREGAENDE_FAGBREV_SVENNEBREV: 'Videregående, fagbrev eller svennebrev (3 år eller mer)',
     HOYERE_UTDANNING_1_TIL_4: 'Høyere utdanning (1 til 4 år)',
-    HOYERE_UTDANNING_5_ELLER_MER: 'Høyere utdanning (5 år eller mer)',
-    INGEN_SVAR: 'Ingen svar'
+    HOYERE_UTDANNING_5_ELLER_MER: 'Høyere utdanning (5 år eller mer)'
 };
 
 export const utdanningGodkjentSvar = {
     JA: 'Ja',
     NEI: 'Nei',
-    VET_IKKE: 'Vet ikke',
-    INGEN_SVAR: 'Ingen svar'
+    VET_IKKE: 'Vet ikke'
 };
 
 export const utdanningBeståttSvar = {
     JA: 'Ja',
-    NEI: 'Nei',
-    INGEN_SVAR: 'Ingen svar'
+    NEI: 'Nei'
 };
 
 export default {

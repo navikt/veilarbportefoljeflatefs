@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Element, Normaltekst} from 'nav-frontend-typografi';
+import {Element} from 'nav-frontend-typografi';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
 import {
@@ -25,7 +25,6 @@ import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
 import Dropdown from '../components/dropdown/dropdown';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
-import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
@@ -86,28 +85,22 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs" tag="h3">
-                    Svar fra registrering
-                </Element>
+                <OverskriftMedHjelpeTekst
+                    overskriftTekst="Svar fra registrering"
+                    hjelpeTekst="Informasjon som brukeren oppgir på registreringstidspunktet."
+                    orientering={PopoverOrientering.Hoyre}
+                />
                 <Dropdown
                     name="Situasjon"
                     render={lukkDropdown => (
-                        <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Situasjonen brukeren oppgir på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
-                            <CheckboxFilterform
-                                form="registreringstype"
-                                valg={registreringstype}
-                                filtervalg={filtervalg}
-                                endreFilterValg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                                className="registreringstype"
-                            />
-                        </>
+                        <CheckboxFilterform
+                            form="registreringstype"
+                            valg={registreringstype}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                            className="registreringstype"
+                        />
                     )}
                 />
                 <Dropdown
