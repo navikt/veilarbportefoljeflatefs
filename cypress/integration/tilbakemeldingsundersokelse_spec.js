@@ -33,7 +33,6 @@ describe('Tilbakemeldingsundersøkelse', () => {
         cy.getByTestId('tilbakemelding_modal').should('not.be.visible');
         cy.getByTestId('tilbakemelding_fab_knapp_trykket').should('be.visible');
         cy.get('body').click(20, 500);
-        cy.getByTestId('tilbakemelding_modal_takk').should('not.be.visible');
         cy.getByTestId('tilbakemelding_fab_knapp').should('not.be.visible');
     });
 });

@@ -90,9 +90,9 @@ describe('Lag ny veiledergruppe', () => {
     });
 });
 
-describe('Rediger filternavn', () => {
+describe('Rediger gruppenavn', () => {
     it('Klikk på blyantsymbolet', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavn)}`).click();
+        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavn)}`, {timeout: 5000}).click();
     });
     it('Skriv inn nytt gruppenavn', () => {
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input')
