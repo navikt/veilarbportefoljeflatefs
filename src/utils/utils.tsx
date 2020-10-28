@@ -92,6 +92,8 @@ export default function TittelValg(ytelseSorteringHeader) {
 export const keyCodes = {
     tab: 9,
     enter: 13,
+    shift: 16,
+    alt: 18,
     space: 32,
     pageup: 33,
     pagedown: 34,
@@ -103,3 +105,7 @@ export const keyCodes = {
     down: 40,
     esc: 27
 };
+
+export function kebabCase(string) {
+    return string.replace(/\s+/g, '-').toLowerCase();
+}

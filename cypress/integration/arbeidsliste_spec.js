@@ -283,8 +283,8 @@ describe('Sjekk validering i rediger arbeidsliste-modal', () => {
     it('Lukk chevron', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen')
-            .first();
+            .first()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .first()
             .click();
