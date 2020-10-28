@@ -85,11 +85,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <OverskriftMedHjelpeTekst
-                    overskriftTekst="Svar fra registrering"
-                    hjelpeTekst="Informasjon som brukeren oppgir på registreringstidspunktet."
-                    orientering={PopoverOrientering.Hoyre}
-                />
+                <Element className="blokk-xxs" tag="h3">
+                    Svar fra registrering
+                </Element>
                 <Dropdown
                     name="Situasjon"
                     render={lukkDropdown => (
