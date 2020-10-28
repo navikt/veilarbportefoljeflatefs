@@ -5,7 +5,7 @@ import './radio-filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
 
 interface ValgType {
-    [key: string]: {label: string, className?: string};
+    [key: string]: {label: string; className?: string};
 }
 
 interface RadioFilterformProps {
@@ -25,12 +25,13 @@ export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg,
         }
         closeDropdown();
     };
-
+    let reactKey = 1;
     return (
         <form className="skjema radio-filterform" onSubmit={createHandleOnSubmit}>
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
+                        key={reactKey++}
                         label={valg[v].label}
                         value={v}
                         name={valg[v].label}
