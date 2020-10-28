@@ -77,11 +77,14 @@ export default function MinoversiktSide() {
     const {ident} = useParams();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
-
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+
+    visesAnnenVeiledersPortefolje
+        ? (document.body.style.backgroundColor = 'rgb(133, 213, 240)')
+        : (document.body.style.backgroundColor = 'rgb(244, 244, 244)');
 
     const [scrolling, setScrolling] = useState(false);
 
@@ -98,10 +101,6 @@ export default function MinoversiktSide() {
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
-
-    if (visesAnnenVeiledersPortefolje) {
-        document.body.style.backgroundColor = 'rgb(133, 213, 240)';
-    }
 
     return (
         <DocumentTitle title="Min oversikt">

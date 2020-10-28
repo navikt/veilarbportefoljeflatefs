@@ -15,6 +15,7 @@ import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagretFilter';
 import VeiledergruppeRad from './veiledergruppe_rad';
+import {kebabCase} from '../../utils/utils';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -43,6 +44,8 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
+
+    const modalTittel = 'Rediger veiledergruppe';
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
         if (
@@ -105,10 +108,11 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     }}
                     isOpen={visEndreGruppeModal}
                     onSubmit={submitEndringer}
-                    modalTittel="Rediger veiledergruppe"
+                    modalTittel={modalTittel}
                     lagreKnappeTekst="Lagre endringer"
                     onRequestClose={() => setVisEndreGruppeModal(false)}
                     onSlett={sletteKnapp}
+                    className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
                 />
             )}
         </div>

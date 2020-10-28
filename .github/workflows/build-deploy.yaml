@@ -7,6 +7,27 @@ env:
     PRINT_PAYLOAD: true
 
 jobs:
+    link-to-trello:
+        runs-on: ubuntu-latest
+        name: Trello update
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Get trello card id
+              id: card
+              uses: navikt/veilarbtrelloactions/get-card@v1.0
+              with:
+                  key: ${{ secrets.TRELLO_KEY }}
+                  token: ${{ secrets.TRELLO_TOKEN }}
+                  board: xwFqjmQY
+            - name: Attach branch to card
+              id: Attach
+              uses: navikt/veilarbtrelloactions/create-attachment@v1.0
+              with:
+                  key: ${{ secrets.TRELLO_KEY }}
+                  token: ${{ secrets.TRELLO_TOKEN }}
+                  card-id: ${{ steps.card.outputs.card-id }}
+                  attachment-type: branch
     cypress-run:
         name: Cypress run
         runs-on: ubuntu-latest

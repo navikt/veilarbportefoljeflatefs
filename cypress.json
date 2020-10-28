@@ -4,5 +4,8 @@
     "viewportWidth": 1800,
     "requestTimeout": 10000,
     "defaultCommandTimeout": 10000,
-    "projectId": "r1wxsg"
+    "projectId": "r1wxsg",
+    "retries": {
+        "runMode": 2
+    }
 }
