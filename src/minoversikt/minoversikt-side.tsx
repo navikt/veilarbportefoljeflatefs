@@ -81,10 +81,9 @@ export default function MinoversiktSide() {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-
     visesAnnenVeiledersPortefolje
         ? (document.body.style.backgroundColor = 'rgb(133, 213, 240)')
-        : (document.body.style.backgroundColor = 'rgb(244, 244, 244)');
+        : (document.body.style.backgroundColor = '');
 
     const [scrolling, setScrolling] = useState(false);
 
