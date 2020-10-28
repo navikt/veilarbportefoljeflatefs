@@ -26,7 +26,7 @@ import './minoversikt.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
-import {endreFiltervalg, initialState} from '../ducks/filtrering';
+import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
 import classNames from 'classnames';
 import {MinOversiktWrapper} from './minoversikt_wrapper';
@@ -39,7 +39,6 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
-import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = 'min-oversikt';

@@ -7,6 +7,14 @@ import './dark-mode-toggle.less';
 function DarkModeToggle() {
     const darkMode = useDarkMode(false);
 
+    if (darkMode.value) {
+        document.body.style.backgroundColor = 'rgb(26, 26, 26)';
+        document.body.style.filter = 'invert(90%)';
+    } else {
+        document.body.style.backgroundColor = '';
+        document.body.style.filter = '';
+    }
+
     return (
         <div className="dark-mode-toggle">
             <button type="button" onClick={darkMode.disable}>

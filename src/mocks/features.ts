@@ -1,8 +1,9 @@
-import {SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE} from '../konstanter';
+import {DARKMODE, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE} from '../konstanter';
 
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
-    [VEDTAKSTOTTE]: true
+    [VEDTAKSTOTTE]: true,
+    [DARKMODE]: true
 };
 
 export default toggles;

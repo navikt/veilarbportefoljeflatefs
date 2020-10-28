@@ -2,7 +2,6 @@ import React, {useRef} from 'react';
 import {Input} from 'nav-frontend-skjema';
 import {FiltervalgModell} from '../model-interfaces';
 import {useEffect, useState} from 'react';
-import {Simulate} from 'react-dom/test-utils';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
@@ -46,20 +45,16 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
         }
     }, [filtervalg.navnEllerFnrQuery]);
 
-    const onChange = () => {
-        return (e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value);
-    };
     return (
         <div className="filtrering-navn-fnr">
             <Input
                 label=""
                 placeholder="Søk etter navn eller fødselsnummer"
-                onChange={() => onChange()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}
                 data-testid="sok-navn-fnr_input"
             />
         </div>
     );
 }
-
 export default FiltreringNavnellerfnr;
