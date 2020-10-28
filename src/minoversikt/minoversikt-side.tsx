@@ -99,11 +99,13 @@ function MinoversiktSide() {
         return window.addEventListener('scroll', onScroll);
     });
 
-    if (visesAnnenVeiledersPortefolje) {
-        document.body.style.backgroundColor = 'rgb(133, 213, 240)';
-    } else {
-        document.body.style.backgroundColor = '#F4F4F4';
-    }
+    console.log('annen', visesAnnenVeiledersPortefolje);
+    console.log('farge', document.body.style.backgroundColor);
+    useEffect(() => {
+        if (visesAnnenVeiledersPortefolje) {
+            document.body.style.backgroundColor = 'rgb(133, 213, 240)';
+        }
+    }, [visesAnnenVeiledersPortefolje]);
 
     return (
         <DocumentTitle title="Min oversikt">

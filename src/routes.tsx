@@ -16,7 +16,7 @@ loggBrowserMetrikker();
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
-    document.body.style.backgroundColor = '#F4F4F4';
+    // document.body.style.backgroundColor = '#F4F4F4';
 
     return (
         <div className="portefolje">

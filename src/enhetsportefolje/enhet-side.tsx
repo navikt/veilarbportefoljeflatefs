@@ -95,7 +95,6 @@ function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
-    document.body.style.backgroundColor = '#F4F4F4';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
