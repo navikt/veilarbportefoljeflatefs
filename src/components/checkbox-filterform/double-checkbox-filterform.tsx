@@ -35,6 +35,9 @@ function DoubleCheckboxFilterform({
 }: DoubleCheckboxFilterformProps) {
     const harValgCol1 = Object.keys(valgCol1).length > 0;
     const harValgCol2 = Object.keys(valgCol1).length > 0;
+
+    const [uniqueValgCol1, setUniqueValgCol1] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol1));
+    const [uniqueValgCol2, setUniqueValgCol2] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol2));
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
 
@@ -43,21 +46,31 @@ function DoubleCheckboxFilterform({
     }, [filtervalg, formCol1]);
 
     useEffect(() => {
-        setCheckBoxValgCol1(filtervalg[formCol2]);
+        setCheckBoxValgCol2(filtervalg[formCol2]);
     }, [filtervalg, formCol2]);
+
+    useEffect(() => {
+        setUniqueValgCol1(makeValgUnique(valgCol1, formCol1));
+    }, [valgCol1, formCol1]);
+
+    useEffect(() => {
+        setUniqueValgCol2(makeValgUnique(valgCol2, formCol2));
+    }, [valgCol2, formCol2]);
 
     const velgCheckBox1 = e => {
         e.persist();
+        const id = e.target.value.replace(`${formCol1}_`, '');
         return e.target.checked
-            ? setCheckBoxValgCol1(prevState => [...prevState, e.target.value])
-            : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== e.target.value));
+            ? setCheckBoxValgCol1(prevState => [...prevState, id])
+            : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
     };
 
     const velgCheckBox2 = e => {
         e.persist();
+        const id = e.target.value.replace(`${formCol2}_`, '');
         return e.target.checked
-            ? setCheckBoxValgCol2(prevState => [...prevState, e.target.value])
-            : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== e.target.value));
+            ? setCheckBoxValgCol2(prevState => [...prevState, id])
+            : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
     };
 
     return (
@@ -66,6 +79,7 @@ function DoubleCheckboxFilterform({
             onSubmit={e => {
                 e.preventDefault();
                 endreFilterValg(formCol1, checkBoxValgCol1);
+                endreFilterValg(formCol2, checkBoxValgCol2);
                 if (closeDropdown) {
                     closeDropdown();
                 }
@@ -75,12 +89,22 @@ function DoubleCheckboxFilterform({
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
                     <div className={'checkbox-filterform-col1'}>
                         <Element>{titleCol1}</Element>
-                        <RenderFields valg={valgCol1} velgCheckBox={velgCheckBox1} checkBoxValg={checkBoxValgCol1} />
+                        <RenderFields
+                            valg={uniqueValgCol1}
+                            form={formCol1}
+                            velgCheckBox={velgCheckBox1}
+                            checkBoxValg={checkBoxValgCol1}
+                        />
                     </div>
 
                     <div className={'checkbox-filterform-col2'}>
                         <Element>{titleCol2}</Element>
-                        <RenderFields valg={valgCol2} velgCheckBox={velgCheckBox2} checkBoxValg={checkBoxValgCol2} />
+                        <RenderFields
+                            valg={uniqueValgCol2}
+                            form={formCol2}
+                            velgCheckBox={velgCheckBox2}
+                            checkBoxValg={checkBoxValgCol2}
+                        />
                     </div>
                 </div>
             )}
@@ -124,7 +148,12 @@ function DoubleCheckboxFilterform({
     );
 }
 
-function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => void; checkBoxValg: string[]}) {
+function RenderFields(props: {
+    valg: Dictionary<string>;
+    form: string;
+    velgCheckBox: (e) => void;
+    checkBoxValg: string[];
+}) {
     return (
         <>
             {Object.entries(props.valg).map(([filterKey, filterValue]) => (
@@ -134,7 +163,7 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
                         type="checkbox"
                         className="skjemaelement__input checkboks"
                         value={filterKey}
-                        checked={props.checkBoxValg.includes(filterKey)}
+                        checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
                         onChange={props.velgCheckBox}
                         data-testid={`filter_${filterKey}`}
                     />
@@ -145,6 +174,15 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
             ))}
         </>
     );
+}
+
+function makeValgUnique(valg: Dictionary<string>, form: string) {
+    const unique = {};
+    Object.entries(valg).forEach(([filterKey, filterValue]) => {
+        const NEW_KEY = form + '_' + filterKey;
+        unique[NEW_KEY] = filterValue;
+    });
+    return unique;
 }
 
 export default DoubleCheckboxFilterform;

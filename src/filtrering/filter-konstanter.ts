@@ -250,9 +250,9 @@ export const utdanningGodkjentSvar = {
 };
 
 export const utdanningBeståttSvar = {
-    JAT: 'Ja',
-    NEIT: 'Nei',
-    INGEN_SVART: 'Ingen svar'
+    JA: 'Ja',
+    NEI: 'Nei',
+    INGEN_SVAR: 'Ingen svar'
 };
 
 export default {
