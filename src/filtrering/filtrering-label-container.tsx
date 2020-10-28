@@ -77,20 +77,20 @@ function FiltreringLabelContainer({
                 });
             } else if (key === 'utdanningGodkjentSvar') {
                 return value.map(singleValue => {
-                return (
-                    <FiltreringLabel
-                        key={`utdanningGodkjent-${singleValue}`}
-                        label={`Utdanning godkjent: ${singleValue}`}
-                        slettFilter={() => slettEnkelt(key, singleValue)}
-                    />
-                );
-            });
+                    return (
+                        <FiltreringLabel
+                            key={`utdanningGodkjent-${singleValue}`}
+                            label={`Utdanning godkjent: ${singleValue}`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (key === 'utdanning') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
-                            label={`Utdanning: ${singleValue}`}
+                            label={`${singleValue}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
