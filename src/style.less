@@ -163,15 +163,19 @@ html {
         grid-column-start: 1;
         grid-column-end: 3;
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 40% 60%;
 
         &__annen-veileder {
-            padding-top: .5rem;
+            padding-top: 0.5rem;
         }
         .tabelloverskrift {
-            padding-top: 0.3rem;
             background-color: @bakgrunnsGra;
             grid-column: 1;
+        }
+        &__hidden {
+            grid-column-start: 2;
+            padding-bottom: 1.5rem;
+            padding-top: 0.5rem;
         }
     }
 
@@ -188,13 +192,10 @@ html {
         grid-row: 3;
     }
 
-    .tabellinfo__hidden {
-        grid-column-start: 2;
-    }
-
     .tabelloverskrift__hidden {
         grid-column-start: 2;
         padding-bottom: 2rem;
+        padding-top: 0.5rem;
     }
 }
 
@@ -252,8 +253,7 @@ html {
             grid-row: 1;
             grid-column-start: 2;
             grid-column-end: 3;
-            width: fit-content;
-            margin-left: auto;
+            width: 100%;
         }
 
         .sokefelt-knapp__container {

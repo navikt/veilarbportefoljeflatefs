@@ -39,6 +39,9 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {ANNEN_VEILEDER, VEDTAKSTOTTE} from '../konstanter';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = 'min-oversikt';
@@ -73,7 +76,7 @@ export default function MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
     const windowWidth = useWindowWidth();
-
+    const erAnnenVeilederFeaturePa = useFeatureSelector()(ANNEN_VEILEDER);
     const {ident} = useParams();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
@@ -81,6 +84,11 @@ export default function MinoversiktSide() {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+
+    !erAnnenVeilederFeaturePa &&
+        (visesAnnenVeiledersPortefolje
+            ? (document.body.style.backgroundColor = 'rgb(133, 213, 240)')
+            : (document.body.style.backgroundColor = 'rgb(244, 244, 244)'));
 
     const [scrolling, setScrolling] = useState(false);
 
@@ -119,6 +127,15 @@ export default function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                            {!erAnnenVeilederFeaturePa && visesAnnenVeiledersPortefolje && (
+                                <Normaltekst
+                                    tag="h1"
+                                    className="blokk-s annen-veileder-varsel"
+                                    data-testid="annen-veileder_infotekst"
+                                >
+                                    {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                </Normaltekst>
+                            )}
                             <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
                         </div>
                         <FiltreringLabelContainer
@@ -145,33 +162,45 @@ export default function MinoversiktSide() {
                                             antallBrukere > 4 ? 'toolbar-container' : 'ikke-sticky__toolbar-container'
                                         }
                                     >
-                                        <div
-                                            className={classNames(
-                                                'tabellinfo',
-                                                visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
-                                                ((scrolling && isSidebarHidden) ||
-                                                    (scrolling && windowWidth < 1200) ||
-                                                    (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
-                                                    'tabellinfo__hidden'
-                                            )}
-                                        >
+                                        {erAnnenVeilederFeaturePa ? (
+                                            <div
+                                                className={classNames(
+                                                    'tabellinfo',
+                                                    visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        'tabellinfo__hidden'
+                                                )}
+                                            >
+                                                <TabellOverskrift
+                                                    className={classNames(
+                                                        visesAnnenVeiledersPortefolje
+                                                            ? 'tabelloverskrift__annen-veileder'
+                                                            : 'tabelloverskrift'
+                                                    )}
+                                                />
+                                                {visesAnnenVeiledersPortefolje && (
+                                                    <AlertStripe
+                                                        type={'info'}
+                                                        className="alertstripe__annen-veileder-varsel"
+                                                        data-testid="annen-veileder_infotekst"
+                                                    >
+                                                        {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                                    </AlertStripe>
+                                                )}
+                                            </div>
+                                        ) : (
                                             <TabellOverskrift
                                                 className={classNames(
-                                                    visesAnnenVeiledersPortefolje
-                                                        ? 'tabelloverskrift__annen-veileder'
-                                                        : 'tabelloverskrift'
+                                                    'tabelloverskrift',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        'tabelloverskrift__hidden'
                                                 )}
                                             />
-                                            {visesAnnenVeiledersPortefolje && (
-                                                <AlertStripe
-                                                    type={'info'}
-                                                    className="alertstripe__annen-veileder-varsel"
-                                                    data-testid="annen-veileder_infotekst"
-                                                >
-                                                    {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-                                                </AlertStripe>
-                                            )}
-                                        </div>
+                                        )}
                                         <Toolbar
                                             onPaginering={() =>
                                                 dispatch(
