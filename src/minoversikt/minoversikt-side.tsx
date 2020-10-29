@@ -40,7 +40,7 @@ import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selecto
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {ANNEN_VEILEDER, VEDTAKSTOTTE} from '../konstanter';
+import {ANNEN_VEILEDER} from '../konstanter';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 const filtergruppe = ListevisningType.minOversikt;

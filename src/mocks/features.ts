@@ -3,7 +3,7 @@ import {ANNEN_VEILEDER, DARKMODE, SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE} from '..
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
-    [DARKMODE]: false,
+    [DARKMODE]: true,
     [ANNEN_VEILEDER]: true
 };
 
