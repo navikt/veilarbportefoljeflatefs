@@ -95,7 +95,6 @@ export default function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
-    document.body.style.backgroundColor = 'rgb(244, 244, 244)';
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -175,15 +174,17 @@ export default function EnhetSide() {
                                                     : 'ikke-sticky__toolbar-container'
                                             }
                                         >
-                                            <TabellOverskrift
-                                                className={classNames(
-                                                    'tabelloverskrift',
-                                                    ((scrolling && isSidebarHidden) ||
-                                                        (scrolling && windowWidth < 1200) ||
-                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
-                                                        'tabelloverskrift__hidden'
-                                                )}
-                                            />
+                                            <div className="tabellinfo">
+                                                <TabellOverskrift
+                                                    className={classNames(
+                                                        'tabelloverskrift',
+                                                        ((scrolling && isSidebarHidden) ||
+                                                            (scrolling && windowWidth < 1200) ||
+                                                            (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                            'tabelloverskrift__hidden'
+                                                    )}
+                                                />
+                                            </div>
                                             <Toolbar
                                                 onPaginering={() =>
                                                     dispatch(
@@ -216,7 +217,7 @@ export default function EnhetSide() {
                         ) : (
                             <Alertstripe
                                 type="info"
-                                className="blokk-m"
+                                className="blokk-m alertstripe__filtrering"
                                 aria-live="assertive"
                                 role="alert"
                                 aria-atomic="true"
