@@ -5,6 +5,8 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import {LagretFilter} from '../../ducks/lagretFilter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
+import hiddenIf from "../../components/hidden-if/hidden-if";
+import {AlertStripeInfo} from "nav-frontend-alertstriper";
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -13,6 +15,8 @@ interface LagredeFilterInnholdProps {
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const HiddenIfAlertStripe = hiddenIf(AlertStripeInfo);
 
 function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
@@ -25,6 +29,14 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem));
     };
 
+    const aktiveFilter = () => {
+        return filtrertListe().filter(elem => elem.aktiv);
+    }
+
+    const inaktiveFilter = () => {
+        return filtrertListe().filter(elem => !elem.aktiv);
+    }
+
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
             outerDivRef.current.style.borderTop = '1px solid #888888';
@@ -34,14 +46,19 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const hentFiltrertListeinnhold = () => {
         return (
+            <>
+            <HiddenIfAlertStripe hidden={inaktiveFilter().length === 0}  className="checkbox-filterform__alertstripe">
+                {inaktiveFilter().map(elem => elem.note+" ")}
+            </HiddenIfAlertStripe>
             <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
                 <DragAndDrop
-                    stateFilterOrder={filtrertListe()}
+                    stateFilterOrder={aktiveFilter()}
                     filtergruppe={props.filtergruppe}
                     isDraggable={props.isDraggable}
                     setisDraggable={props.setisDraggable}
                 />
             </div>
+            </>
         );
     };
 
