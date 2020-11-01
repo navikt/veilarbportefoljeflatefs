@@ -7,6 +7,8 @@ export interface LagretFilter {
     opprettetDato: Date;
     sortOrder: number | null;
     filterCleanup: boolean;
+    aktiv: boolean;
+    note: string;
 }
 
 export interface LagretFilterState {
