@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {AlertStripeFeil} from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
 import './mine-filter_innhold.less';
 import NyttMineFilterInnhold from './mine-filter_innhold';
@@ -20,9 +20,9 @@ function FiltreringMineFilter(props: {
     return (
         <>
             {mineFilterState.handlingType === HandlingsType.HENTE && mineFilterState.status === STATUS.ERROR ? (
-                <AlertStripeFeil>
+                <AlertStripe type="feil">
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
-                </AlertStripeFeil>
+                </AlertStripe>
             ) : (
                 <NyttMineFilterInnhold
                     lagretFilter={props.sortertMineFilter}
