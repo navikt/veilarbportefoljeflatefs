@@ -105,7 +105,8 @@ mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter)
 
 mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
     let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
-    customMineFilter[filterIndex] = body;
+    const aktiv  = true;
+    customMineFilter[filterIndex] = {...body, aktiv};
     return res(ctx.json(customMineFilter[filterIndex]));
 });
 
