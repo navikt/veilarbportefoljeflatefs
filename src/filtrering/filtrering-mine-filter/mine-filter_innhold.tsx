@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './mine-filter_innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
@@ -51,7 +51,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
             <>
                 {inaktiveFilter().length !== 0 && (
                     <AlertStripe type="info" className="mine-filter_alertstripe">
-                        {inaktiveFilter()[0].note}
+                        {"'" + inaktiveFilter()[0].filterNavn + "' er slettet fordi filteret '" + inaktiveFilter()[0].note + "' er fjernet."}
                         <Lukknapp
                             className="alertstripe_lukknapp"
                             onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
