@@ -11,9 +11,6 @@ import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.less';
-import DarkModeToggle from './components/toggle/dark-mode-toggle';
-import {useFeatureSelector} from './hooks/redux/use-feature-selector';
-import {DARKMODE} from './konstanter';
 
 loggBrowserMetrikker();
 

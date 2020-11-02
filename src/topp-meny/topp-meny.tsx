@@ -9,7 +9,6 @@ import {STATUS} from '../ducks/utils';
 import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {DARKMODE} from '../konstanter';
-import Innholdslaster from '../innholdslaster/innholdslaster';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
