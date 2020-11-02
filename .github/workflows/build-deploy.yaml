@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v2
             - name: Get trello card id
               id: card
-              uses: avikt/veilarbtrelloactions/get-card@v2.0
+              uses: navikt/veilarbtrelloactions/get-card@v2.0
               with:
                   key: ${{ secrets.TRELLO_KEY }}
                   token: ${{ secrets.TRELLO_TOKEN }}
