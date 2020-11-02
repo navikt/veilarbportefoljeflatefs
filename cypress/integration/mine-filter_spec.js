@@ -8,6 +8,26 @@ const forLangtFilterNavn =
 const testFilterNavn = 'Denne brukes til test la stå';
 let antallFilter = 0;
 
+xdescribe('Fjern fjernet filter', () => {
+    it('Start server', () => {
+        cy.configure();
+    });
+    it('Gå til Mine filter-tab', () => {
+        cy.klikkTab('MINE_FILTER');
+    });
+    it('Alertstripe synes fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe').should('be.visible');
+    });
+    it('Klikk lukknapp i alertstripen', () => {
+        cy.getByTestId('mine-filter_alertstripe_knapp')
+            .should('be.visible')
+            .click();
+    });
+    it('Alertstripe synes ikke fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe').should('not.be.visible');
+    });
+});
+
 describe('Lag nytt filter', () => {
     it('Start server', () => {
         cy.configure();
@@ -175,11 +195,10 @@ describe('Slett lagret filter', () => {
 });
 
 describe('Sjekk at drag and drop funker', () => {
-    it('Test-filter er det fjerde filteret', () => {
+    it('Test-filter er det tredje filteret', () => {
         cy.getByTestId('mine-filter_radio-container')
             .children()
             .first()
-            .next()
             .next()
             .next()
             .contains(testFilterNavn);
@@ -191,12 +210,12 @@ describe('Sjekk at drag and drop funker', () => {
     it('Dra test-filteret til nederste rad', () => {
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 3)
+            .should('have.value', 2)
             .click()
             .type('{shift}{downarrow}');
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 4);
+            .should('have.value', 3);
     });
     it('Klikk lagre', () => {
         cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
@@ -215,12 +234,12 @@ describe('Sjekk at drag and drop funker', () => {
     it('Dra test-filter opp ett trinn', () => {
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 4)
+            .should('have.value', 3)
             .click()
             .type('{shift}{uparrow}');
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 3);
+            .should('have.value', 2);
     });
     it('Klikk avbryt', () => {
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();

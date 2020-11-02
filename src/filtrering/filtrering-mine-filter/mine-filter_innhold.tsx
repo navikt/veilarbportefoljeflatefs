@@ -50,11 +50,12 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         return (
             <>
                 {inaktiveFilter().length !== 0 && (
-                    <AlertStripe type="info" className="mine-filter_alertstripe">
+                    <AlertStripe type="info" className="mine-filter_alertstripe" data-testid="mine-filter_alertstripe">
                         {inaktiveFilter()[0].note}
                         <Lukknapp
                             className="alertstripe_lukknapp"
                             onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
+                            data-testid="mine-filter_alertstripe_knapp"
                         />
                     </AlertStripe>
                 )}
