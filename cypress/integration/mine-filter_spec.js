@@ -8,26 +8,6 @@ const forLangtFilterNavn =
 const testFilterNavn = 'Denne brukes til test la stå';
 let antallFilter = 0;
 
-xdescribe('Fjern fjernet filter', () => {
-    it('Start server', () => {
-        cy.configure();
-    });
-    it('Gå til Mine filter-tab', () => {
-        cy.klikkTab('MINE_FILTER');
-    });
-    it('Alertstripe synes fordi vi har fjernet filter', () => {
-        cy.getByTestId('mine-filter_alertstripe').should('be.visible');
-    });
-    it('Klikk lukknapp i alertstripen', () => {
-        cy.getByTestId('mine-filter_alertstripe_knapp')
-            .should('be.visible')
-            .click();
-    });
-    it('Alertstripe synes ikke fordi vi har fjernet filter', () => {
-        cy.getByTestId('mine-filter_alertstripe').should('not.be.visible');
-    });
-});
-
 describe('Lag nytt filter', () => {
     it('Start server', () => {
         cy.configure();
@@ -269,5 +249,25 @@ describe('Sjekk at drag and drop funker', () => {
             .next()
             .next()
             .contains(testFilterNavn);
+    });
+});
+
+describe('Fjern fjernet filter', () => {
+    it('Start server', () => {
+        cy.configure();
+    });
+    it('Gå til Mine filter-tab', () => {
+        cy.klikkTab('MINE_FILTER');
+    });
+    it('Alertstripe synes fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe').should('be.visible');
+    });
+    it('Klikk lukknapp i alertstripen', () => {
+        cy.getByTestId('mine-filter_alertstripe_knapp')
+            .should('be.visible')
+            .click();
+    });
+    it('Alertstripe synes ikke fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe').should('not.be.visible');
     });
 });
