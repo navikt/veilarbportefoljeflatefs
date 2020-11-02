@@ -1,6 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
-import {LagretFilter} from '../ducks/lagretFilter';
+import {LagretFilter} from '../ducks/lagret-filter';
+import {ferdigfilterListe} from '../filtrering/filter-konstanter';
 
 export const mineFilter = () => {
     return [
@@ -13,7 +14,9 @@ export const mineFilter = () => {
                 ferdigfilterListe: ['MOTER_IDAG']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: '10. Spesiell tilpasset innsats',
@@ -24,49 +27,63 @@ export const mineFilter = () => {
                 formidlingsgruppe: ['ARBS']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: 'delete filter'
         },
         {
             filterNavn: 'Denne brukes til test la stå',
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: '15. arbeidsliste',
             filterId: 4,
             filterValg: {...initialState, ferdigfilterListe: ['MIN_ARBEIDSLISTE']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'GUL',
             filterId: 5,
             filterValg: {...initialState, arbeidslisteKategori: ['GUL']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'Kvinner',
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'LILLA',
             filterId: 7,
             filterValg: {...initialState, arbeidslisteKategori: ['LILLA']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: 3
+            sortOrder: 3,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'GRØNN',
             filterId: 8,
             filterValg: {...initialState, arbeidslisteKategori: ['GRONN']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'BLÅ',
@@ -77,7 +94,9 @@ export const mineFilter = () => {
                 alder: ['20-24']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: 2
+            sortOrder: 2,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'Nye brukere',
@@ -87,14 +106,32 @@ export const mineFilter = () => {
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: null
+            sortOrder: null,
+            aktiv: true,
+            note: ''
         },
         {
             filterNavn: 'UfordelteBrukere',
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
-            sortOrder: 1
+            sortOrder: 1,
+            aktiv: true,
+            note: ''
+        },
+        {
+            filterNavn: 'Permitterte filter',
+            filterId: 12,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: [
+                    'ER_SYKMELDT_MED_ARBEIDSGIVER',
+                    'IKKE_PERMITTERTE_ETTER_NIENDE_MARS',
+                    'NYE_BRUKERE_FOR_VEILEDER'
+                ]
+            },
+            aktiv: false,
+            note: ferdigfilterListe.IKKE_PERMITTERTE_ETTER_NIENDE_MARS
         }
     ] as LagretFilter[];
 };

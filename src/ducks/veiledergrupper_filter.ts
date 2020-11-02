@@ -1,6 +1,6 @@
 import {hentEnhetsFilterGrupper, nyVeiledergruppe, redigerVeiledergruppe, slettVeiledergruppe} from '../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
-import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from './lagretFilter';
+import {LagretFilterState, NyttLagretFilter, RedigerLagretFilter} from './lagret-filter';
 
 // Actions
 export const HENT_VEILEDERGRUPPER_OK = 'veiledergrupper/OK';

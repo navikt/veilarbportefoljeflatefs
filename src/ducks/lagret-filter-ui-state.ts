@@ -1,5 +1,5 @@
 import {OrNothing} from '../utils/types/types';
-import {LagretFilter} from './lagretFilter';
+import {LagretFilter} from './lagret-filter';
 
 // Actions
 export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';

@@ -16,7 +16,7 @@ import Sidebar from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {

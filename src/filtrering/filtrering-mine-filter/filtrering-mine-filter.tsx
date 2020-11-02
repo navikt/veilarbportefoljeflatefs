@@ -5,7 +5,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
 import './mine-filter_innhold.less';
 import NyttMineFilterInnhold from './mine-filter_innhold';
-import {HandlingsType, LagretFilter} from '../../ducks/lagretFilter';
+import {HandlingsType, LagretFilter} from '../../ducks/lagret-filter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 
 function FiltreringMineFilter(props: {

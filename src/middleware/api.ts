@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
-import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagretFilter';
+import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';

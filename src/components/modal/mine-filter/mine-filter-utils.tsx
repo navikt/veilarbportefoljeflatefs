@@ -64,7 +64,7 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
     }
 
     if (
-        eksisterendeFilter.find(
+        eksisterendeFilter.filter(elem => elem.aktiv).find(
             elem => elem.filterId !== filterId && elem.filterNavn.toLowerCase() === filterNavn.toLowerCase()
         )
     ) {
@@ -72,7 +72,7 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
     }
 
     if (
-        eksisterendeFilter.find(
+        eksisterendeFilter.filter(elem => elem.aktiv).find(
             elem => elem.filterId !== filterId && lagretFilterValgModellErLik(elem.filterValg, filterValg)
         )
     ) {
