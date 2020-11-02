@@ -11,7 +11,7 @@ export const veiledergrupper = () => {
     const veilederGruppe5 = veiledere.slice(23, 27).map(v => v.ident);
     return [
         {
-            filterNavn: 'Fantastic 4',
+            filterNavn: 'Fantastic four',
             filterId: 12,
             filterValg: {...initialState, veiledere: veilederGruppe1},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
