@@ -20,7 +20,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     }
 
     return (
-        <div className="topp-meny" role="tablist">
+        <div className="topp-meny" role="tablist ">
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
