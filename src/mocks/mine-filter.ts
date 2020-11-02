@@ -115,8 +115,22 @@ export const mineFilter = () => {
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: 1,
-            aktiv: false,
+            aktiv: true,
             note: ''
+        },
+        {
+            filterNavn: 'Permitterte filter',
+            filterId: 12,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: [
+                    'ER_SYKMELDT_MED_ARBEIDSGIVER',
+                    'IKKE_PERMITTERTE_ETTER_NIENDE_MARS',
+                    'NYE_BRUKERE_FOR_VEILEDER'
+                ]
+            },
+            aktiv: false,
+            note: 'Alle utenom permitterte etter 09.03.2020'
         }
     ] as LagretFilter[];
 };
