@@ -16,6 +16,7 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
+import {hentMineFilterForVeileder} from "../../ducks/mine-filter";
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -76,9 +77,10 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
     const sletteKnapp = () => {
         valgtGruppe &&
             enhet &&
-            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>
-                dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt))
-            );
+            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>{
+                    dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt));
+                    dispatch(hentMineFilterForVeileder());
+            });
     };
 
     useEffect(() => {
