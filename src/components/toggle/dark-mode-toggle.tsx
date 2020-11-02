@@ -6,7 +6,7 @@ import './dark-mode-toggle.less';
 function DarkModeToggle() {
     const [darkmode, setDarkmode] = useState(false);
 
-    localStorage.setItem(String(document.body.classList.toggle('darkmode', darkmode)), 'true');
+    document.body.classList.toggle('darkmode', darkmode);
 
     return (
         <div className="dark-mode-toggle">
