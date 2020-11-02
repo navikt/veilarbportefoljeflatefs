@@ -13,7 +13,7 @@ import './veiledergruppe.less';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
 

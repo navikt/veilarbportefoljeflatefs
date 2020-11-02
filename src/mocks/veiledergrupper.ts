@@ -1,7 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
-import {LagretFilter} from '../ducks/lagretFilter';
+import {LagretFilter} from '../ducks/lagret-filter';
 
 export const veiledergrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map(v => v.ident);

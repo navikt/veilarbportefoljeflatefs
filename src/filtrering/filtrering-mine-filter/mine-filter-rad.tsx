@@ -9,7 +9,7 @@ import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React from 'react';
 import './mine-filter_innhold.less';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 
 interface MineFilterRadProps {

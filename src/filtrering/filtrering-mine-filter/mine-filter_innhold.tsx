@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import './mine-filter_innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
 import hiddenIf from "../../components/hidden-if/hidden-if";
