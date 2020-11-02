@@ -1,6 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
 import {LagretFilter} from '../ducks/lagret-filter';
+import {ferdigfilterListe} from '../filtrering/filter-konstanter';
 
 export const mineFilter = () => {
     return [
@@ -130,7 +131,7 @@ export const mineFilter = () => {
                 ]
             },
             aktiv: false,
-            note: 'Alle utenom permitterte etter 09.03.2020'
+            note: ferdigfilterListe.IKKE_PERMITTERTE_ETTER_NIENDE_MARS
         }
     ] as LagretFilter[];
 };
