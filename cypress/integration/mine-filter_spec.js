@@ -175,10 +175,11 @@ describe('Slett lagret filter', () => {
 });
 
 describe('Sjekk at drag and drop funker', () => {
-    it('Test-filter er det tredje filteret', () => {
+    it('Test-filter er det fjerde filteret', () => {
         cy.getByTestId('mine-filter_radio-container')
             .children()
             .first()
+            .next()
             .next()
             .next()
             .contains(testFilterNavn);
@@ -190,12 +191,12 @@ describe('Sjekk at drag and drop funker', () => {
     it('Dra test-filteret til nederste rad', () => {
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 2)
+            .should('have.value', 3)
             .click()
             .type('{shift}{downarrow}');
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 3);
+            .should('have.value', 4);
     });
     it('Klikk lagre', () => {
         cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
@@ -214,12 +215,12 @@ describe('Sjekk at drag and drop funker', () => {
     it('Dra test-filter opp ett trinn', () => {
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 3)
+            .should('have.value', 4)
             .click()
             .type('{shift}{uparrow}');
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 2);
+            .should('have.value', 3);
     });
     it('Klikk avbryt', () => {
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
@@ -253,14 +254,18 @@ describe('Sjekk at drag and drop funker', () => {
 });
 
 describe('Fjern fjernet filter', () => {
-    it('Start server', () => {
-        cy.configure();
+    it('Gå til min oversikt', () => {
+        cy.gaTilOversikt('min-oversikt');
     });
     it('Gå til Mine filter-tab', () => {
         cy.klikkTab('MINE_FILTER');
     });
     it('Alertstripe synes fordi vi har fjernet filter', () => {
-        cy.getByTestId('mine-filter_alertstripe').should('be.visible');
+        cy.getByTestId('mine-filter_alertstripe')
+            .should('be.visible')
+            .contains(
+                "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
+            );
     });
     it('Klikk lukknapp i alertstripen', () => {
         cy.getByTestId('mine-filter_alertstripe_knapp')

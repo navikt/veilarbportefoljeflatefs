@@ -50,8 +50,10 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
         return (
             <>
                 {inaktiveFilter().length !== 0 && (
-                    <AlertStripe type="info" className="mine-filter_alertstripe">
-                        {"'" + inaktiveFilter()[0].filterNavn + "' er slettet fordi filteret '" + inaktiveFilter()[0].note + "' er fjernet."}
+                    <AlertStripe type="info" className="mine-filter_alertstripe" data-testid="mine-filter_alertstripe">
+                        {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${
+                            inaktiveFilter()[0].note
+                        }' er fjernet.`}
                         <Lukknapp
                             className="alertstripe_lukknapp"
                             onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
