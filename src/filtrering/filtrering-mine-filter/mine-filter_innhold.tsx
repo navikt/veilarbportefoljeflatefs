@@ -55,6 +55,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                         <Lukknapp
                             className="alertstripe_lukknapp"
                             onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
+                            data-testid="mine-filter_alertstripe_knapp"
                         />
                     </AlertStripe>
                 )}
