@@ -111,8 +111,9 @@ mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
 
 mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    customMineFilter = [...customMineFilter, {...req.body, filterId}];
-    return res(ctx.json({...req.body, filterId}));
+    const aktiv  = true;
+    customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
+    return res(ctx.json({...req.body, filterId, aktiv}));
 });
 
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
