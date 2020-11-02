@@ -12,7 +12,7 @@ import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
-import {LagretFilter, SorteringOgId} from '../ducks/lagretFilter';
+import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);

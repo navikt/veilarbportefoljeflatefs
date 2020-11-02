@@ -6,7 +6,7 @@ import {
     redigerMineFilter,
     slettMineFilter
 } from '../middleware/api';
-import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagretFilter';
+import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagret-filter';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';

@@ -7,7 +7,7 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
-import {LagretFilter} from '../../../ducks/lagretFilter';
+import {LagretFilter} from '../../../ducks/lagret-filter';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
