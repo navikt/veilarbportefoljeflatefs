@@ -1,17 +1,12 @@
-name: Cancelling Duplicates
-on:
-    workflow_run:
-        workflows: ['CI']
-        types: ['requested']
-
+name: Cancel
+on: [push]
 jobs:
-    cancel-duplicate-workflow-runs:
-        name: 'Cancel duplicate workflow runs'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: potiuk/cancel-workflow-runs@master
-              name: 'Cancel duplicate workflow runs'
-              with:
-                  cancelMode: allDuplicates
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  sourceRunId: ${{ github.event.workflow_run.id }}
+  cancel:
+    name: 'Cancel Previous Runs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          workflow_id: 479426
+          access_token: ${{ github.token }}
