@@ -26,7 +26,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ANNEN_VEILEDER} from '../konstanter';
 
-export default function VeiledereSide() {
+function VeiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const filtergruppe = ListevisningType.veilederOversikt;
@@ -90,3 +90,5 @@ export default function VeiledereSide() {
         </DocumentTitle>
     );
 }
+
+export default VeiledereSide;
