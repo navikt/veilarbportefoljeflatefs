@@ -115,7 +115,7 @@ export const mineFilter = () => {
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: 1,
-            aktiv: true,
+            aktiv: false,
             note: ''
         }
     ] as LagretFilter[];

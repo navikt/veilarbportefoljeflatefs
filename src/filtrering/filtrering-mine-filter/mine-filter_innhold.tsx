@@ -1,12 +1,14 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './mine-filter_innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
-import hiddenIf from "../../components/hidden-if/hidden-if";
-import {AlertStripeInfo} from "nav-frontend-alertstriper";
+import AlertStripe from 'nav-frontend-alertstriper';
+import Lukknapp from 'nav-frontend-lukknapp';
+import {useDispatch} from 'react-redux';
+import {slettFilter} from '../../ducks/mine-filter';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -15,8 +17,6 @@ interface LagredeFilterInnholdProps {
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const HiddenIfAlertStripe = hiddenIf(AlertStripeInfo);
 
 function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
@@ -31,11 +31,13 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
 
     const aktiveFilter = () => {
         return filtrertListe().filter(elem => elem.aktiv);
-    }
+    };
 
     const inaktiveFilter = () => {
         return filtrertListe().filter(elem => !elem.aktiv);
-    }
+    };
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
@@ -47,17 +49,23 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-            <HiddenIfAlertStripe hidden={inaktiveFilter().length === 0}  className="checkbox-filterform__alertstripe">
-                {inaktiveFilter().map(elem => elem.note+" ")}
-            </HiddenIfAlertStripe>
-            <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
-                <DragAndDrop
-                    stateFilterOrder={aktiveFilter()}
-                    filtergruppe={props.filtergruppe}
-                    isDraggable={props.isDraggable}
-                    setisDraggable={props.setisDraggable}
-                />
-            </div>
+                {inaktiveFilter().length !== 0 && (
+                    <AlertStripe type="info" className="mine-filter_alertstripe">
+                        {inaktiveFilter()[0].note}
+                        <Lukknapp
+                            className="alertstripe_lukknapp"
+                            onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
+                        />
+                    </AlertStripe>
+                )}
+                <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
+                    <DragAndDrop
+                        stateFilterOrder={aktiveFilter()}
+                        filtergruppe={props.filtergruppe}
+                        isDraggable={props.isDraggable}
+                        setisDraggable={props.setisDraggable}
+                    />
+                </div>
             </>
         );
     };
