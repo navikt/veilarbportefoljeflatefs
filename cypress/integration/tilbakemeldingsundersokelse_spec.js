@@ -36,7 +36,6 @@ describe(
                 .contains('Send')
                 .click({force: true});
             cy.getByTestId('tilfredshet_send-knapp').should('not.be.visible');
-            cy.wait(1000);
             cy.getByTestId('tilbakemelding_modal_takk').should('be.visible');
             cy.getByTestId('tilbakemelding_modal').should('not.be.visible');
             cy.getByTestId('tilbakemelding_fab_knapp_trykket')
