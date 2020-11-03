@@ -155,10 +155,11 @@ describe('Rediger filtervalg', () => {
             .should('be.visible')
             .contains('Gruppen er lagret');
     });
+
     it('Sjekk at det er ett filtervalg', () => {
         cy.getByTestId('filtreringlabel')
             .should('have.length', 1)
-            .contains(aasen);
+            .contains(andersen);
     });
 });
 
