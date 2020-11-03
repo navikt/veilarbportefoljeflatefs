@@ -222,6 +222,7 @@ function Sidebar(props: SidebarProps) {
                     aria-labelledby={selectedTabData.type}
                     id={selectedTabData.type}
                     data-testid="sidebar_content-container"
+                    tabIndex={0}
                 >
                     <Sidevelger
                         selectedTabData={selectedTabData}
