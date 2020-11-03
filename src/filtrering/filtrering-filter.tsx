@@ -120,7 +120,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             valgCol1={utdanningGodkjentSvar}
                             valgCol2={utdanningBeståttSvar}
                             titleCol1={'Er utdanningen godkjent i Norge?'}
-                            titleCol2={'Er utdanningen bestått i Norge?'}
+                            titleCol2={'Er utdanningen bestått?'}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             formCol1="utdanningGodkjentSvar"
