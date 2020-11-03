@@ -12,4 +12,4 @@ export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ANNEN_VEILEDER = 'veilarbportefolje.annen_veileder';
 
-export const PORTEFOLJE_FEATURES = [SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, GJEM_HOVEDMAL, DARKMODE];
+export const PORTEFOLJE_FEATURES = [SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, GJEM_HOVEDMAL, DARKMODE, ANNEN_VEILEDER];
