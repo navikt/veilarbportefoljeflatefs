@@ -215,22 +215,22 @@ function Sidebar(props: SidebarProps) {
             >
                 {Tabs()}
             </div>
-            <div
-                className="sidebar__content-container"
-                role="tabpanel"
-                hidden={isSidebarHidden}
-                aria-labelledby={selectedTabData.type}
-                id={selectedTabData.type}
-                tabIndex={0}
-                data-testid="sidebar_content-container"
-            >
-                <Sidevelger
-                    selectedTabData={selectedTabData}
-                    filtergruppe={props.filtergruppe}
-                    filtervalg={props.filtervalg}
-                    enhettiltak={props.enhettiltak}
-                />
-            </div>
+            {!isSidebarHidden && (
+                <div
+                    className="sidebar__content-container"
+                    role="tabpanel"
+                    aria-labelledby={selectedTabData.type}
+                    id={selectedTabData.type}
+                    data-testid="sidebar_content-container"
+                >
+                    <Sidevelger
+                        selectedTabData={selectedTabData}
+                        filtergruppe={props.filtergruppe}
+                        filtervalg={props.filtervalg}
+                        enhettiltak={props.enhettiltak}
+                    />
+                </div>
+            )}
         </div>
     );
 }
