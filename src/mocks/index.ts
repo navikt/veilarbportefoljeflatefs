@@ -105,14 +105,14 @@ mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter)
 
 mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
     let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
-    const aktiv  = true;
+    const aktiv = true;
     customMineFilter[filterIndex] = {...body, aktiv};
     return res(ctx.json(customMineFilter[filterIndex]));
 });
 
 mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    const aktiv  = true;
+    const aktiv = true;
     customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
     return res(ctx.json({...req.body, filterId, aktiv}));
 });

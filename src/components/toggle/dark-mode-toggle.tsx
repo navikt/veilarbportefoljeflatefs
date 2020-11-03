@@ -6,16 +6,10 @@ import './dark-mode-toggle.less';
 function DarkModeToggle() {
     const [darkmode, setDarkmode] = useState(localStorage.getItem('darkmode') === 'true');
 
-
     useEffect(() => {
-        if (darkmode){
-            document.body.classList.add('darkmode');
-        }else{
-            document.body.classList.remove('darkmode');
-        }
-        localStorage.setItem('darkmode', darkmode+'');
-    },[darkmode])
-
+        document.body.classList.toggle('darkmode', darkmode);
+        localStorage.setItem('darkmode', darkmode + '');
+    }, [darkmode]);
 
     return (
         <div className="dark-mode-toggle">
