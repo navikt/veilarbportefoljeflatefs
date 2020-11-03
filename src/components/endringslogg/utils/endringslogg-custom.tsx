@@ -22,9 +22,9 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '3. november 2020',
+        dato: '4. november 2020',
         tittel: 'Filteret “Permittert etter 09.03.2020” er fjernet',
-        versjonId: '29.09.20',
+        versjonId: '04.11.20',
         children: (
             <>
                 <p>
