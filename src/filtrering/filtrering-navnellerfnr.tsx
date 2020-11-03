@@ -57,5 +57,4 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
         </div>
     );
 }
-
 export default FiltreringNavnellerfnr;

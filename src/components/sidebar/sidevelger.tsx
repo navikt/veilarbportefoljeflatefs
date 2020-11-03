@@ -118,8 +118,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                         </Hjelpetekst>
                         <ToggleSwitch
                             checked={isMinefiltereDraggable}
-                            onOpen={() => setIsMinefiltereDraggable(true)}
-                            onClose={() => setIsMinefiltereDraggable(false)}
+                            onChange={() => setIsMinefiltereDraggable(!isMinefiltereDraggable)}
                             ariaLabel={'Endre rekkefølge'}
                         />
                     </>
