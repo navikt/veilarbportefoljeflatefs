@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import {Hovedknapp} from 'nav-frontend-knapper';
 import {Textarea} from 'nav-frontend-skjema';
-import {Element, Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
