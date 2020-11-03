@@ -1,7 +1,6 @@
 import {initialState} from '../ducks/filtrering';
 import * as faker from 'faker/locale/nb_NO';
 import {LagretFilter} from '../ducks/lagret-filter';
-import {ferdigfilterListe} from '../filtrering/filter-konstanter';
 
 export const mineFilter = () => {
     return [
@@ -124,14 +123,10 @@ export const mineFilter = () => {
             filterId: 12,
             filterValg: {
                 ...initialState,
-                ferdigfilterListe: [
-                    'ER_SYKMELDT_MED_ARBEIDSGIVER',
-                    'IKKE_PERMITTERTE_ETTER_NIENDE_MARS',
-                    'NYE_BRUKERE_FOR_VEILEDER'
-                ]
+                ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
             aktiv: false,
-            note: ferdigfilterListe.IKKE_PERMITTERTE_ETTER_NIENDE_MARS
+            note: 'Alle utenom permitterte etter 09.03.2020'
         }
     ] as LagretFilter[];
 };
