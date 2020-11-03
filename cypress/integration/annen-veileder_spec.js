@@ -4,7 +4,7 @@ describe('Gå inn til annen veileders oversikt via tabellen', () => {
     });
     it('Gå til veilederoversikt', () => {
         cy.gaTilOversikt('veileder-oversikt');
-        cy.get('body').should('have.css', 'background-color', 'rgb(244, 244, 244)');
+        // cy.get('body').should('have.css', 'background-color', 'rgb(244, 244, 244)');
     });
     it('Sorter på antall brukere ', () => {
         cy.getByTestId('sorteringspil_ascending').should('not.be.visible');
@@ -20,18 +20,18 @@ describe('Gå inn til annen veileders oversikt via tabellen', () => {
             .contains('Thoresen, Herman')
             .click();
     });
-    it('Bakgrunnsfargen skal være turkis og det skal vises en infotekst', () => {
+    it('Det skal vises en infotekst', () => {
         cy.getByTestId('annen-veileder_infotekst')
             .should('be.visible')
             .should('contain', 'Du er inne på Herman Thoresen sin oversikt');
-        cy.get('body').should('have.css', 'background-color', 'rgb(133, 213, 240)');
+        // cy.get('body').should('have.css', 'background-color', 'rgb(133, 213, 240)');
     });
 });
 
 describe('Søk veileder i veilederoversikt', () => {
     it('Gå til veilederoversikt', () => {
         cy.gaTilOversikt('veileder-oversikt');
-        cy.get('body').should('have.css', 'background-color', 'rgb(244, 244, 244)');
+        // cy.get('body').should('have.css', 'background-color', 'rgb(244, 244, 244)');
     });
     it('Søk på Glosli ', () => {
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();

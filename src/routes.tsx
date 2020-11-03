@@ -16,7 +16,6 @@ loggBrowserMetrikker();
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
-
     return (
         <div className="portefolje">
             <div className="maincontent side-innhold">
