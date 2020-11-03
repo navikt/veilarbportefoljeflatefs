@@ -138,6 +138,7 @@ describe('Rediger filtervalg', () => {
         cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
     });
     it('Velg veileder', () => {
+        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(aasen);
         cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
             force: true
         });
@@ -159,7 +160,7 @@ describe('Rediger filtervalg', () => {
     it('Sjekk at det er ett filtervalg', () => {
         cy.getByTestId('filtreringlabel')
             .should('have.length', 1)
-            .contains(andersen);
+            .contains(aasen);
     });
 });
 
