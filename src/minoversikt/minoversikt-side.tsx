@@ -145,7 +145,10 @@ export default function MinoversiktSide() {
                             listevisning={listevisning}
                             className={classNames(
                                 'filtrering-label-container',
-                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
+                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder',
+                                visesAnnenVeiledersPortefolje &&
+                                    !erAnnenVeilederFeaturePa &&
+                                    'filtrering-label-container__annen-veileder__feature'
                             )}
                         />
                         <div
