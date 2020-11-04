@@ -64,17 +64,17 @@ export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filte
     }
 
     if (
-        eksisterendeFilter.find(
-            elem => elem.filterId !== filterId && elem.filterNavn.toLowerCase() === filterNavn.toLowerCase()
-        )
+        eksisterendeFilter
+            .filter(elem => elem.aktiv)
+            .find(elem => elem.filterId !== filterId && elem.filterNavn.toLowerCase() === filterNavn.toLowerCase())
     ) {
         feilmelding.filterNavn = 'Filternavn er allerede i bruk.';
     }
 
     if (
-        eksisterendeFilter.find(
-            elem => elem.filterId !== filterId && lagretFilterValgModellErLik(elem.filterValg, filterValg)
-        )
+        eksisterendeFilter
+            .filter(elem => elem.aktiv)
+            .find(elem => elem.filterId !== filterId && lagretFilterValgModellErLik(elem.filterValg, filterValg))
     ) {
         feilmelding.filterNavn = 'Valgt filter er allerede lagret.';
     }

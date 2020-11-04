@@ -35,6 +35,8 @@ import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {ANNEN_VEILEDER} from '../konstanter';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -65,7 +67,7 @@ function antallFilter(filtervalg) {
 const filtergruppe = ListevisningType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
-function EnhetSide() {
+export default function EnhetSide() {
     const statustall = useFetchStatusTall();
     const {
         portefolje,
@@ -95,7 +97,9 @@ function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
-    document.body.style.backgroundColor = 'rgb(244, 244, 244)';
+    const erAnnenVeilederFeaturePa = useFeatureSelector()(ANNEN_VEILEDER);
+
+    !erAnnenVeilederFeaturePa && (document.body.style.backgroundColor = 'rgb(244, 244, 244)');
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -169,21 +173,34 @@ function EnhetSide() {
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                     <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                         <div
-                                            className={
-                                                antallBrukere > 4
-                                                    ? 'toolbar-container'
-                                                    : 'ikke-sticky__toolbar-container'
-                                            }
+                                            className={classNames(
+                                                'toolbar-container',
+                                                antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                            )}
                                         >
-                                            <TabellOverskrift
-                                                className={classNames(
-                                                    'tabelloverskrift',
-                                                    ((scrolling && isSidebarHidden) ||
-                                                        (scrolling && windowWidth < 1200) ||
-                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
-                                                        'tabelloverskrift__hidden'
-                                                )}
-                                            />
+                                            {erAnnenVeilederFeaturePa ? (
+                                                <div
+                                                    className={classNames(
+                                                        'tabellinfo',
+                                                        ((scrolling && isSidebarHidden) ||
+                                                            (scrolling && windowWidth < 1200) ||
+                                                            (!isSidebarHidden && windowWidth < 1200)) &&
+                                                            'tabellinfo__hidden'
+                                                    )}
+                                                >
+                                                    <TabellOverskrift className={'tabelloverskrift'} />
+                                                </div>
+                                            ) : (
+                                                <TabellOverskrift
+                                                    className={classNames(
+                                                        'tabelloverskrift',
+                                                        ((scrolling && isSidebarHidden) ||
+                                                            (scrolling && windowWidth < 1200) ||
+                                                            (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                            'tabelloverskrift__hidden'
+                                                    )}
+                                                />
+                                            )}
                                             <Toolbar
                                                 onPaginering={() =>
                                                     dispatch(
@@ -216,7 +233,7 @@ function EnhetSide() {
                         ) : (
                             <Alertstripe
                                 type="info"
-                                className="blokk-m"
+                                className="blokk-m alertstripe__filtrering"
                                 aria-live="assertive"
                                 role="alert"
                                 aria-atomic="true"
@@ -233,5 +250,3 @@ function EnhetSide() {
         </DocumentTitle>
     );
 }
-
-export default EnhetSide;

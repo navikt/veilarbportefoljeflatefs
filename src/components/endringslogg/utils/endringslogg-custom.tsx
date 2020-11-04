@@ -22,6 +22,27 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '4. november 2020',
+        tittel: 'Filteret “Permittert etter 09.03.2020” er fjernet',
+        versjonId: '04.11.20',
+        children: (
+            <>
+                <p>
+                    Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene
+                    brukerne oppga når de registrerte seg.
+                </p>
+                <p>
+                    Mange av de som tidligere var permittert har fått endret situasjon, og filtrene “Alle utenom
+                    permittert etter 09.03.2020” og “Permittert etter 09.03.2020" har derfor vært misvisende.
+                </p>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filteret--Permittert-etter-09.03.2020%E2%80%9D-er-n%C3%A5-fjernet-fra-oversikten-i-Modia.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+            </>
+        )
+    },
+    {
         dato: '29. september 2020',
         tittel: 'Endringer i filtrene',
         versjonId: '29.09.20',

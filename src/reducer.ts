@@ -27,7 +27,7 @@ import inloggetVeilederReducer, {InloggetVeilederState} from './ducks/inlogget-v
 import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
 import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
-import {LagretFilterState} from './ducks/lagretFilter';
+import {LagretFilterState} from './ducks/lagret-filter';
 
 function named(name, reducer) {
     return (state, action) => {

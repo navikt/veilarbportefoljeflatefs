@@ -13,7 +13,7 @@ import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import VeiledergruppeInnhold from './veiledergruppe-innhold';
-import {AlertStripeFeil} from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 import {kebabCase} from '../../utils/utils';
 
 interface FilteringVeiledergruppeProps {
@@ -60,9 +60,9 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
     };
     const veilederGrupperError = () => {
         return (
-            <AlertStripeFeil>
+            <AlertStripe type="feil">
                 Det oppsto en feil, og veiledergrupper kunne ikke hentes fram. Prøv igjen senere.
-            </AlertStripeFeil>
+            </AlertStripe>
         );
     };
 

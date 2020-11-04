@@ -22,17 +22,21 @@ describe('Tilbakemeldingsundersøkelse', () => {
             .should('be.empty')
             .click()
             .type('How do you throw a space party? You planet!');
+        cy.wait(1000);
     });
     it('Send undersøkelse og lukk modal', () => {
         cy.getByTestId('tilfredshet_send-knapp')
             .contains('Send')
             .click({force: true});
+        cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp').should('not.be.visible');
-
         cy.getByTestId('tilbakemelding_modal_takk').should('be.visible');
         cy.getByTestId('tilbakemelding_modal').should('not.be.visible');
-        cy.getByTestId('tilbakemelding_fab_knapp_trykket').should('be.visible');
+        cy.getByTestId('tilbakemelding_fab_knapp_trykket')
+            .should('be.visible')
+            .click();
         cy.get('body').click(20, 500);
         cy.getByTestId('tilbakemelding_fab_knapp').should('not.be.visible');
+        cy.getByTestId('tilbakemelding_modal_takk').should('not.be.visible');
     });
 });

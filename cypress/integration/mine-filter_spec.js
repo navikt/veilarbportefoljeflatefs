@@ -252,3 +252,27 @@ describe('Sjekk at drag and drop funker', () => {
             .contains(testFilterNavn);
     });
 });
+
+describe('Fjern fjernet filter', () => {
+    it('Gå til min oversikt', () => {
+        cy.gaTilOversikt('min-oversikt');
+    });
+    it('Gå til Mine filter-tab', () => {
+        cy.klikkTab('MINE_FILTER');
+    });
+    it('Alertstripe synes fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe')
+            .should('be.visible')
+            .contains(
+                "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
+            );
+    });
+    it('Klikk lukknapp i alertstripen', () => {
+        cy.getByTestId('mine-filter_alertstripe_knapp')
+            .should('be.visible')
+            .click();
+    });
+    it('Alertstripe synes ikke fordi vi har fjernet filter', () => {
+        cy.getByTestId('mine-filter_alertstripe').should('not.be.visible');
+    });
+});

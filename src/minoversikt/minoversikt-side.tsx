@@ -21,8 +21,8 @@ import {useDispatch} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
-import './minoversikt-side.less';
 import './minoversikt.less';
+import './../components/tabell-overskrift.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
@@ -36,15 +36,17 @@ import {useWindowWidth} from '../hooks/use-window-width';
 import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {Normaltekst} from 'nav-frontend-typografi';
-import {useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
+import {useParams} from 'react-router';
+import AlertStripe from 'nav-frontend-alertstriper';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {ANNEN_VEILEDER} from '../konstanter';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = 'min-oversikt';
 
-function MinoversiktSide() {
-    const innloggetVeilederIdent = useIdentSelector();
+export default function MinoversiktSide() {
     const {
         portefolje,
         filtervalg,
@@ -54,6 +56,7 @@ function MinoversiktSide() {
         sorteringsfelt,
         enhettiltak
     } = usePortefoljeSelector(filtergruppe);
+    const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(filtergruppe);
@@ -73,7 +76,7 @@ function MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
     const windowWidth = useWindowWidth();
-
+    const erAnnenVeilederFeaturePa = useFeatureSelector()(ANNEN_VEILEDER);
     const {ident} = useParams();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
@@ -82,9 +85,10 @@ function MinoversiktSide() {
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
 
-    visesAnnenVeiledersPortefolje
-        ? (document.body.style.backgroundColor = 'rgb(133, 213, 240)')
-        : (document.body.style.backgroundColor = 'rgb(244, 244, 244)');
+    !erAnnenVeilederFeaturePa &&
+        (visesAnnenVeiledersPortefolje
+            ? (document.body.style.backgroundColor = 'rgb(133, 213, 240)')
+            : (document.body.style.backgroundColor = 'rgb(244, 244, 244)'));
 
     const [scrolling, setScrolling] = useState(false);
 
@@ -100,7 +104,7 @@ function MinoversiktSide() {
 
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
-    });
+    }, [scrolling]);
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -110,7 +114,8 @@ function MinoversiktSide() {
                     <MinOversiktWrapper
                         className={classNames(
                             'oversikt-sideinnhold portefolje-side',
-                            isSidebarHidden && 'oversikt-sideinnhold__hidden'
+                            isSidebarHidden && 'oversikt-sideinnhold__hidden',
+                            visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'
                         )}
                         id={id}
                     >
@@ -122,7 +127,7 @@ function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            {visesAnnenVeiledersPortefolje && (
+                            {!erAnnenVeilederFeaturePa && visesAnnenVeiledersPortefolje && (
                                 <Normaltekst
                                     tag="h1"
                                     className="blokk-s annen-veileder-varsel"
@@ -138,11 +143,13 @@ function MinoversiktSide() {
                             filtergruppe={filtergruppe}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
-                            className={
-                                visesAnnenVeiledersPortefolje
-                                    ? 'filtrering-label-container__annen-veileder'
-                                    : 'filtrering-label-container'
-                            }
+                            className={classNames(
+                                'filtrering-label-container',
+                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder',
+                                visesAnnenVeiledersPortefolje &&
+                                    !erAnnenVeilederFeaturePa &&
+                                    'filtrering-label-container__annen-veileder__feature'
+                            )}
                         />
                         <div
                             className={classNames(
@@ -153,23 +160,50 @@ function MinoversiktSide() {
                             <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                     <div
-                                        className={
-                                            antallBrukere > 4 ? 'toolbar-container' : 'ikke-sticky__toolbar-container'
-                                        }
+                                        className={classNames(
+                                            'toolbar-container',
+                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                        )}
                                     >
-                                        <TabellOverskrift
-                                            className={
-                                                visesAnnenVeiledersPortefolje
-                                                    ? 'tabelloverskrift__annen-veileder'
-                                                    : classNames(
-                                                          'tabelloverskrift',
-                                                          ((scrolling && isSidebarHidden) ||
-                                                              (scrolling && windowWidth < 1200) ||
-                                                              (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
-                                                              'tabelloverskrift__hidden'
-                                                      )
-                                            }
-                                        />
+                                        {erAnnenVeilederFeaturePa ? (
+                                            <div
+                                                className={classNames(
+                                                    'tabellinfo',
+                                                    visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200)) &&
+                                                        'tabellinfo__hidden'
+                                                )}
+                                            >
+                                                <TabellOverskrift
+                                                    className={classNames(
+                                                        visesAnnenVeiledersPortefolje
+                                                            ? 'tabelloverskrift__annen-veileder'
+                                                            : 'tabelloverskrift'
+                                                    )}
+                                                />
+                                                {visesAnnenVeiledersPortefolje && (
+                                                    <AlertStripe
+                                                        type={'info'}
+                                                        className="alertstripe__annen-veileder-varsel"
+                                                        data-testid="annen-veileder_infotekst"
+                                                    >
+                                                        {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                                    </AlertStripe>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <TabellOverskrift
+                                                className={classNames(
+                                                    'tabelloverskrift',
+                                                    ((scrolling && isSidebarHidden) ||
+                                                        (scrolling && windowWidth < 1200) ||
+                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        'tabelloverskrift__hidden'
+                                                )}
+                                            />
+                                        )}
                                         <Toolbar
                                             onPaginering={() =>
                                                 dispatch(
@@ -214,5 +248,3 @@ function MinoversiktSide() {
         </DocumentTitle>
     );
 }
-
-export default MinoversiktSide;
