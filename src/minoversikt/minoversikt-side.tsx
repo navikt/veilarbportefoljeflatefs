@@ -143,11 +143,10 @@ export default function MinoversiktSide() {
                             filtergruppe={filtergruppe}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
-                            className={
-                                visesAnnenVeiledersPortefolje
-                                    ? 'filtrering-label-container__annen-veileder'
-                                    : 'filtrering-label-container'
-                            }
+                            className={classNames(
+                                'filtrering-label-container',
+                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
+                            )}
                         />
                         <div
                             className={classNames(
@@ -158,9 +157,10 @@ export default function MinoversiktSide() {
                             <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                     <div
-                                        className={
-                                            antallBrukere > 4 ? 'toolbar-container' : 'ikke-sticky__toolbar-container'
-                                        }
+                                        className={classNames(
+                                            'toolbar-container',
+                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                        )}
                                     >
                                         {erAnnenVeilederFeaturePa ? (
                                             <div
@@ -169,7 +169,7 @@ export default function MinoversiktSide() {
                                                     visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
                                                     ((scrolling && isSidebarHidden) ||
                                                         (scrolling && windowWidth < 1200) ||
-                                                        (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                        (!isSidebarHidden && windowWidth < 1200)) &&
                                                         'tabellinfo__hidden'
                                                 )}
                                             >

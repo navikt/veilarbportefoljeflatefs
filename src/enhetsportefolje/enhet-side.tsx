@@ -173,11 +173,10 @@ export default function EnhetSide() {
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                     <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                         <div
-                                            className={
-                                                antallBrukere > 4
-                                                    ? 'toolbar-container'
-                                                    : 'ikke-sticky__toolbar-container'
-                                            }
+                                            className={classNames(
+                                                'toolbar-container',
+                                                antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                            )}
                                         >
                                             {erAnnenVeilederFeaturePa ? (
                                                 <div
@@ -185,7 +184,7 @@ export default function EnhetSide() {
                                                         'tabellinfo',
                                                         ((scrolling && isSidebarHidden) ||
                                                             (scrolling && windowWidth < 1200) ||
-                                                            (!isSidebarHidden && windowWidth < 1200 && scrolling)) &&
+                                                            (!isSidebarHidden && windowWidth < 1200)) &&
                                                             'tabellinfo__hidden'
                                                     )}
                                                 >
