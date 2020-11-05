@@ -11,5 +11,13 @@ export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ANNEN_VEILEDER = 'veilarbportefolje.annen_veileder';
+export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
 
-export const PORTEFOLJE_FEATURES = [SPOR_OM_TILBAKEMELDING, VEDTAKSTOTTE, GJEM_HOVEDMAL, DARKMODE, ANNEN_VEILEDER];
+export const PORTEFOLJE_FEATURES = [
+    SPOR_OM_TILBAKEMELDING,
+    VEDTAKSTOTTE,
+    GJEM_HOVEDMAL,
+    DARKMODE,
+    ANNEN_VEILEDER,
+    ALERTSTRIPE_FEILMELDING
+];
