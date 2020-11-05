@@ -23,7 +23,7 @@ function Routes() {
             <div className="maincontent side-innhold">
                 <AlertStripeFeil className="stor-feil-modal">
                     Vi har for tiden problemer med overføringen av data mellom applikasjonene. Dette kan medføre ustabilitet og feil i filtreringene. <Lenke
-                    href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/SitePages/Det-kan-oppleves-treghet-i-Modia-og-Gosys.aspx">Følg med på drifstmelding på Navet</Lenke>
+                    href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/SitePages/Det-kan-oppleves-treghet-i-Modia-og-Gosys.aspx">Følg med på driftsmelding på Navet</Lenke>
                 </AlertStripeFeil>
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
