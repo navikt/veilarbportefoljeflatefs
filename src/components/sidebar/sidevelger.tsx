@@ -18,7 +18,6 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagretFilter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
-import {useEventListener} from '../../hooks/use-event-listener';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -51,7 +50,6 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-    useEventListener('mousedown', e => e.preventDefault());
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
