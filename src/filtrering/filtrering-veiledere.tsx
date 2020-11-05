@@ -1,101 +1,57 @@
 import * as React from 'react';
 import {Input} from 'nav-frontend-skjema';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 import {ListevisningType} from '../ducks/ui/listevisning';
+import {useRef, useState} from 'react';
+import {useEventListener} from '../hooks/use-event-listener';
+import {AppState} from '../reducer';
 
-interface FiltreringVeiledereState {
-    veilederNavnQuery?: string;
-    hasFocus: boolean;
-}
+function FiltreringVeiledere() {
+    const [hasFocus, setHasFocus] = useState(false);
 
-interface StateProps {
-    veilederNavnQuery: string;
-}
+    const veilederNavnQuerySelector = useSelector(
+        (state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery
+    );
+    const [veilederNavnQuery, setVeilederNavnQuery] = useState(veilederNavnQuerySelector);
 
-interface DispatchProps {
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
-}
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
-type AllProps = StateProps & DispatchProps;
-
-class FiltreringVeiledere extends React.Component<AllProps, FiltreringVeiledereState> {
-    private wrapperRef;
-
-    constructor(props: AllProps) {
-        super(props);
-        this.state = {
-            hasFocus: false
-        };
-    }
-
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-
-    handleChange = event => {
-        const nyQuery = event.target.value;
-        this.setState({veilederNavnQuery: nyQuery});
-        this.props.endreFiltervalg('veilederNavnQuery', nyQuery);
-    };
-
-    setFocus = (focus: boolean) => {
-        this.setState({hasFocus: focus});
-    };
-
-    handleVeiledereSubmitted = () => {
-        this.setFocus(false);
-    };
-
-    handleClickOutside = event => {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-            this.setFocus(false);
+    const handleClickOutside = e => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            setHasFocus(false);
         }
     };
 
-    render() {
-        const {hasFocus, veilederNavnQuery} = this.state;
+    useEventListener('mousedown', handleClickOutside);
 
-        return (
-            <div
-                className="filtrering-veiledere"
-                ref={ref => {
-                    this.wrapperRef = ref;
-                }}
-            >
-                <Input
-                    label=""
-                    placeholder="Navn eller NAV-ident"
-                    onChange={this.handleChange}
-                    value={veilederNavnQuery}
-                    onFocus={() => this.setFocus(true)}
-                    data-testid="veilederoversikt_sok-veileder-input"
+    const handleChange = event => {
+        const nyQuery = event.target.value;
+        setVeilederNavnQuery(nyQuery);
+        dispatch(endreFiltervalg('veilederNavnQuery', nyQuery, ListevisningType.veilederOversikt));
+    };
+
+    return (
+        <div className="filtrering-veiledere" ref={wrapperRef}>
+            <Input
+                label=""
+                placeholder="Navn eller NAV-ident"
+                onChange={e => handleChange(e)}
+                value={veilederNavnQuery}
+                onFocus={() => setHasFocus(true)}
+                data-testid="veilederoversikt_sok-veileder-input"
+            />
+            {hasFocus && (
+                <VeilederCheckboxListe
+                    open={hasFocus}
+                    onSubmit={() => setHasFocus(false)}
+                    onClose={() => setHasFocus(false)}
                 />
-                {hasFocus && (
-                    <VeilederCheckboxListe
-                        open={hasFocus}
-                        onSubmit={this.handleVeiledereSubmitted}
-                        onClose={() => this.setFocus(false)}
-                    />
-                )}
-            </div>
-        );
-    }
+            )}
+        </div>
+    );
 }
 
-const mapStateToProps = (state): StateProps => ({
-    veilederNavnQuery: state.filtreringVeilederoversikt.veilederNavnQuery
-});
-
-const mapDispatchToProps = dispatch => ({
-    endreFiltervalg: (filterId: string, filterVerdi: string) => {
-        dispatch(endreFiltervalg(filterId, filterVerdi, ListevisningType.veilederOversikt));
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FiltreringVeiledere);
+export default FiltreringVeiledere;

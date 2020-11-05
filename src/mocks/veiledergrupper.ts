@@ -1,7 +1,7 @@
 import {initialState} from '../ducks/filtrering';
 import {veiledere} from './veiledere';
 import * as faker from 'faker/locale/nb_NO';
-import {LagretFilter} from '../ducks/lagretFilter';
+import {LagretFilter} from '../ducks/lagret-filter';
 
 export const veiledergrupper = () => {
     const veilederGruppe1 = veiledere.slice(0, 4).map(v => v.ident);
@@ -46,7 +46,7 @@ export const veiledergrupper = () => {
             filterCleanup: false
         },
         {
-            filterNavn: 'Gruppen brukes til test, la stå',
+            filterNavn: 'Gruppen brukes til test la stå',
             filterId: 17,
             filterValg: {...initialState, veiledere: veilederGruppe5},
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),

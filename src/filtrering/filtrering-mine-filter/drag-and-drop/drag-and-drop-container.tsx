@@ -7,7 +7,7 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
-import {LagretFilter} from '../../../ducks/lagretFilter';
+import {LagretFilter} from '../../../ducks/lagret-filter';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
@@ -144,13 +144,24 @@ function DragAndDropContainer({
 
     return (
         <>
-            <span aria-live="assertive" className="assistive-text">
+            <div aria-live="assertive" className="assistive-text">
                 {ariaTekst}
-            </span>
-            <Normaltekst tag={'h3'} className="drag-and-drop-tittel" aria-readonly="true" aria-live="polite">
+            </div>
+            <Normaltekst
+                tag={'h3'}
+                className="drag-and-drop-tittel"
+                aria-readonly="true"
+                aria-live="polite"
+                data-testid="drag-drop_infotekst"
+            >
                 Endre rekkefølge med SHIFT-tast + piltaster eller dra og slipp:
             </Normaltekst>
-            <ul ref={dragContainer} className="drag-and-drop-container" role={'listbox'}>
+            <ul
+                ref={dragContainer}
+                className="drag-and-drop-container"
+                role={'listbox'}
+                data-testid="drag-drop_container"
+            >
                 {dragAndDropOrder.map((filter, idx) => (
                     <DragAndDropRow
                         key={idx}
@@ -176,6 +187,7 @@ function DragAndDropContainer({
                     aria-label="Lagre sortering"
                     mini
                     onClick={() => lagreRekkefolge()}
+                    data-testid="mine-filter_sortering_lagre-knapp"
                 >
                     Lagre
                 </Hovedknapp>
@@ -184,6 +196,7 @@ function DragAndDropContainer({
                     aria-label="Avbryt sortering"
                     mini
                     onClick={() => avbryt()}
+                    data-testid="mine-filter_sortering_avbryt-knapp"
                 >
                     Avbryt
                 </Knapp>
@@ -192,6 +205,7 @@ function DragAndDropContainer({
                     aria-label="Nullstill til alfabetisk sortering"
                     mini
                     onClick={() => alfabetiskSort()}
+                    data-testid="mine-filter_sortering_nullstill-knapp"
                 >
                     Nullstill
                 </Flatknapp>

@@ -13,8 +13,10 @@ import './veiledergruppe.less';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
+import {kebabCase} from '../../utils/utils';
+import {hentMineFilterForVeileder} from "../../ducks/mine-filter";
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -43,6 +45,8 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
+
+    const modalTittel = 'Rediger veiledergruppe';
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
         if (
@@ -73,9 +77,10 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
     const sletteKnapp = () => {
         valgtGruppe &&
             enhet &&
-            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>
-                dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt))
-            );
+            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>{
+                    dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt));
+                    dispatch(hentMineFilterForVeileder());
+            });
     };
 
     useEffect(() => {
@@ -105,10 +110,11 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     }}
                     isOpen={visEndreGruppeModal}
                     onSubmit={submitEndringer}
-                    modalTittel="Rediger veiledergruppe"
+                    modalTittel={modalTittel}
                     lagreKnappeTekst="Lagre endringer"
                     onRequestClose={() => setVisEndreGruppeModal(false)}
                     onSlett={sletteKnapp}
+                    className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
                 />
             )}
         </div>

@@ -13,7 +13,8 @@ import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import VeiledergruppeInnhold from './veiledergruppe-innhold';
-import {AlertStripeFeil} from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
+import {kebabCase} from '../../utils/utils';
 
 interface FilteringVeiledergruppeProps {
     filtergruppe: ListevisningType;
@@ -27,6 +28,7 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const enhet = useEnhetSelector();
+    const modalTittel = 'Ny veiledergruppe';
 
     const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
         enhet &&
@@ -58,9 +60,9 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
     };
     const veilederGrupperError = () => {
         return (
-            <AlertStripeFeil>
+            <AlertStripe type="feil">
                 Det oppsto en feil, og veiledergrupper kunne ikke hentes fram. Prøv igjen senere.
-            </AlertStripeFeil>
+            </AlertStripe>
         );
     };
 
@@ -80,9 +82,10 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
                 }}
                 isOpen={visVeiledergruppeModal}
                 onSubmit={submitEndringer}
-                modalTittel="Ny veiledergruppe"
+                modalTittel={modalTittel}
                 lagreKnappeTekst="Lagre"
                 onRequestClose={() => setVeiledergruppeModal(false)}
+                className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
             />
         </>
     );

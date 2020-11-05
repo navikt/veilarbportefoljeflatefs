@@ -4,13 +4,14 @@
 @bakgrunnsGra: #f4f4f4;
 
 body {
-    margin: 0;
     height: 100%;
     width: 100%;
     font-size: 1rem;
     font-weight: 400;
     color: @navMorkGra;
     font-family: @font-family;
+    background-color: @bakgrunnsGra;
+    filter: none;
 
     @media print {
         a[href]:after {
@@ -26,6 +27,10 @@ body {
         box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
     }
 
+    //#mainapp__alertstripe {
+    //    background-color: transparent;
+    //}
+
     @media (max-width: 870px) {
         #mainapp {
             max-height: 10rem;
@@ -37,6 +42,15 @@ body {
             max-height: 11rem;
         }
     }
+}
+
+html.darkmode {
+    background-color: rgb(26, 26, 26) !important;
+    filter: invert(90%);
+}
+
+body.annen-veileder {
+    background-color: rgb(133, 213, 240);
 }
 
 html {
@@ -149,12 +163,20 @@ html {
     grid-template-columns: 21.8rem auto;
     grid-template-rows: auto auto auto;
 
-    .tabelloverskrift {
-        padding-top: 0.3rem;
-        background-color: @bakgrunnsGra;
+    .tabellinfo {
+        grid-row: 1;
         grid-column-start: 1;
         grid-column-end: 3;
-        grid-row: 1;
+        display: grid;
+        grid-template-columns: 40% 60%;
+
+        .tabelloverskrift {
+            background-color: @bakgrunnsGra;
+            grid-column: 1;
+        }
+        &__hidden {
+            grid-column-start: 2;
+        }
     }
 
     .toolbar {
@@ -173,6 +195,7 @@ html {
     .tabelloverskrift__hidden {
         grid-column-start: 2;
         padding-bottom: 2rem;
+        padding-top: 0.5rem;
     }
 }
 
@@ -218,8 +241,19 @@ html {
         grid-template-rows: auto auto auto;
 
         .annen-veileder-varsel {
-            grid-row: 1;
             grid-column: 2;
+            grid-row: 1;
+            text-align: right;
+            margin: 0;
+            font-weight: bolder;
+            padding-right: 1rem;
+        }
+
+        .alertstripe__annen-veileder-varsel {
+            grid-row: 1;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            width: 100%;
         }
 
         .sokefelt-knapp__container {
@@ -242,6 +276,10 @@ html {
             grid-column-end: 3;
             display: flex;
             flex-wrap: wrap;
+
+            &__feature {
+                background-color: rgb(133, 213, 240);
+            }
         }
 
         .oversikt__container {
@@ -251,7 +289,7 @@ html {
             margin: 1rem 0 2rem;
         }
 
-        .alertstripe--info {
+        .alertstripe__filtrering {
             grid-row: 2;
             grid-column-start: 2;
             grid-column-end: 3;
@@ -266,7 +304,7 @@ html {
                 grid-column-start: 1;
             }
 
-            .alertstripe--info {
+            .alertstripe--filtrering {
                 grid-column-start: 1;
                 grid-column-end: 3;
             }

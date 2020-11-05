@@ -2,7 +2,7 @@ import React from 'react';
 
 const forsteVeileder = 'Aasen, Markus';
 
-xdescribe('Søk veileder med navn', () => {
+describe('Søk veileder med navn', () => {
     it('Start server', () => {
         cy.configure();
     });

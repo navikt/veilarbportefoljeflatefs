@@ -27,8 +27,6 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
-    permitterteEtterNiendeMars: number;
-    ikkePermitterteEtterNiendeMars: number;
 }
 
 export interface StatustallState {
@@ -56,9 +54,7 @@ export const initalStatusState: StatustallState = {
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
-        underVurdering: 0,
-        permitterteEtterNiendeMars: 0,
-        ikkePermitterteEtterNiendeMars: 0
+        underVurdering: 0
     }
 };
 

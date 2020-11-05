@@ -9,7 +9,8 @@ import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React from 'react';
 import './mine-filter_innhold.less';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {LagretFilter} from '../../ducks/lagretFilter';
+import {LagretFilter} from '../../ducks/lagret-filter';
+import {kebabCase} from '../../utils/utils';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;
@@ -55,13 +56,13 @@ function MineFilterRad({mineFilter, filtergruppe}: MineFilterRadProps) {
                 value={mineFilter.filterId}
                 onChange={() => velgFilter()}
                 checked={valgtMineFilter?.filterId === mineFilter.filterId}
-                data-testid={`mine-filter-rad_${mineFilter.filterNavn}`}
+                data-testid={`mine-filter-rad_${kebabCase(mineFilter.filterNavn)}`}
             />
             <RedigerKnapp
                 hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"
                 onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-filter_knapp_${mineFilter.filterNavn}`}
+                dataTestid={`rediger-filter_knapp_${kebabCase(mineFilter.filterNavn)}`}
             />
         </div>
     );

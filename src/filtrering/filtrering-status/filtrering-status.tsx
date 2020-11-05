@@ -4,19 +4,15 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {MIN_ARBEIDSLISTE} from '../filter-konstanter';
-import {PopoverOrientering} from 'nav-frontend-popover';
 import {FiltreringStatusContainer} from './filtrering-status-components/filtrering-wrapper';
 import FiltreringStatusNyeBrukere from './filtrering-status-components/nye-brukere';
 import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
-import FiltreringStatusPermitterteEtterNiendeBrukere from './filtrering-status-components/permitterte-brukere';
 import {FiltreringStatusBehovsVurdering} from './filtrering-status-components/behov-og-arbeidsevnevurdering';
 import {FiltreringStatusDialog} from './filtrering-status-components/dialog-gruppe';
 import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
 import {FiltreringStatusInavtiveBrukere} from './filtrering-status-components/inaktive-brukere';
 import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
-import FiltreringStatusIkkePermitterteEtterNiendeBrukere from './filtrering-status-components/ikke-permitterte-brukere';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {FiltreringStatusAktiviteter} from './filtrering-status-components/aktiviteter';
 
@@ -71,30 +67,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     ferdigfilterListe={ferdigfilterListe}
                     hidden={props.filtergruppe === ListevisningType.minOversikt}
                 />
-                <div className="permittering_checkboksgruppe">
-                    <div className="hjelpetekst__wrapper">
-                        <Hjelpetekst id="hjelpetekst" type={PopoverOrientering.Hoyre}>
-                            <p>
-                                <b>Alle utenom permitterte etter 09.03.2020:</b> Alle brukere, uavhengig av situasjon
-                                ved registrering og tidspunkt for registrering, men ekskludert de som har registrert seg
-                                som permittert etter 9. mars 2020.
-                            </p>
-                            <p>
-                                <b>Permitterte etter 09.03.2020:</b> Brukere som har registrert seg etter 9. mars og som
-                                har svart at de er permittert.
-                            </p>
-                            <p>Merk at situasjonen kan ha endret seg for permitterte brukere.</p>
-                        </Hjelpetekst>
-                    </div>
-                    <FiltreringStatusIkkePermitterteEtterNiendeBrukere
-                        handleChange={handleCheckboxChange}
-                        ferdigfilterListe={ferdigfilterListe}
-                    />
-                    <FiltreringStatusPermitterteEtterNiendeBrukere
-                        handleChange={handleCheckboxChange}
-                        ferdigfilterListe={ferdigfilterListe}
-                    />
-                </div>
             </div>
             <FiltreringStatusBehovsVurdering
                 ferdigfilterListe={ferdigfilterListe}

@@ -13,8 +13,6 @@ describe('Søk etter brukere med navn og fnr', () => {
             .should('be.visible');
     });
 
-    //TODO fyll ut med riktig filtrering når vi får fikset mocken
-
     it('Skriv inn fnr', () => {
         cy.getByTestId('sok-navn-fnr_input')
             .click()

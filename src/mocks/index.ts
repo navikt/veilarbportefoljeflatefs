@@ -12,7 +12,7 @@ import * as faker from 'faker/locale/nb_NO';
 import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
-import {LagretFilter, SorteringOgId} from '../ducks/lagretFilter';
+import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -105,14 +105,16 @@ mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter)
 
 mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
     let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
-    customMineFilter[filterIndex] = body;
+    const aktiv = true;
+    customMineFilter[filterIndex] = {...body, aktiv};
     return res(ctx.json(customMineFilter[filterIndex]));
 });
 
 mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
-    customMineFilter = [...customMineFilter, {...req.body, filterId}];
-    return res(ctx.json({...req.body, filterId}));
+    const aktiv = true;
+    customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
+    return res(ctx.json({...req.body, filterId, aktiv}));
 });
 
 mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {

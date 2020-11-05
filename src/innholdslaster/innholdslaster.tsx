@@ -2,103 +2,73 @@ import * as React from 'react';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Laster from './innholdslaster-laster';
 import {STATUS} from '../ducks/utils';
-
-const array = value => (Array.isArray(value) ? value : [value]);
-const harStatus = (...status) => element => array(status).includes(element.status);
-
-const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-
-const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
-
-const alleLastetEllerReloading = avhengigheter =>
-    avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
-const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
-
-function getFeilmeldingForReducer(feilendeReducer) {
-    const status = feilendeReducer.data.response.status;
-    if (status >= 500) {
-        return 'Vi har dessverre tekniske problemer. Vi jobber med å løse disse.';
-    } else if (status === 403) {
-        return 'Beklager, du har ikke tilgang.';
-    }
-    return null;
-}
+import {useState} from 'react';
+import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
 
 interface InnholdslasterProps {
     className?: string;
     avhengigheter: any;
+    children: React.ReactNode;
 }
 
-interface InnholdslasterState {
-    timeout: boolean;
-}
+function Innholdslaster(props: InnholdslasterProps) {
+    const array = value => (Array.isArray(value) ? value : [value]);
+    const harStatus = (...status) => element => array(status).includes(element.status);
+    const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
+    const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
 
-class Innholdslaster extends React.Component<InnholdslasterProps, InnholdslasterState> {
-    private timer: number | undefined;
+    const alleLastetEllerReloading = avhengigheter =>
+        avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
+    const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
+    const [timeout, setLocalTimeout] = useState(false);
+    let timer;
 
-    constructor(props) {
-        super(props);
-
-        this.state = {timeout: false};
-        this.timer = undefined;
-
-        this.renderChildren = this.renderChildren.bind(this);
-        this.setTimer = this.setTimer.bind(this);
-        this.clearTimer = this.clearTimer.bind(this);
-    }
-
-    setTimer() {
-        if (!this.timer) {
-            this.timer = window.setTimeout(() => {
-                this.setState({timeout: true});
+    const setTimer = () => {
+        if (!timer) {
+            timer = window.setTimeout(() => {
+                setLocalTimeout(false);
             }, 200);
         }
+    };
+
+    const clearTimer = () => {
+        if (timer) {
+            clearTimeout(timer);
+            timer = undefined;
+            setTimeout(() => setLocalTimeout(false), 0);
+        }
+    };
+
+    const renderChildren = () => {
+        if (typeof props.children === 'function') {
+            return <>{props.children(props.avhengigheter)}</>;
+        }
+        return <>{props.children}</>;
+    };
+
+    if (alleLastet(props.avhengigheter)) {
+        clearTimer();
+        return renderChildren();
+    } else if (!timeout && alleLastetEllerReloading(props.avhengigheter)) {
+        setTimer();
+        return renderChildren();
     }
 
-    clearTimer() {
-        if (this.timer) {
-            clearTimeout(this.timer);
-            this.timer = undefined;
+    if (noenHarFeil(props.avhengigheter)) {
+        clearTimer();
+        const feilendeReducer = medFeil(props.avhengigheter);
 
-            // Deferred, slik at setState ikke er en del av render
-            setTimeout(() => this.setState({timeout: false}), 0);
-        }
+        const feilmelding =
+            getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
+
+        return (
+            <AlertStripe type="advarsel" className={props.className}>
+                <p>{feilmelding}</p>
+            </AlertStripe>
+        );
     }
 
-    renderChildren() {
-        const {avhengigheter, children} = this.props;
-        if (typeof children === 'function') {
-            return <>{children(avhengigheter)}</>;
-        }
-        return <>{children}</>;
-    }
-
-    render() {
-        const {avhengigheter, className} = this.props;
-        if (alleLastet(avhengigheter)) {
-            this.clearTimer();
-            return this.renderChildren();
-        } else if (!this.state.timeout && alleLastetEllerReloading(avhengigheter)) {
-            this.setTimer();
-            return this.renderChildren();
-        }
-
-        if (noenHarFeil(avhengigheter)) {
-            this.clearTimer();
-            const feilendeReducer = medFeil(avhengigheter);
-
-            const feilmelding =
-                getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
-
-            return (
-                <AlertStripe type="advarsel" className={className}>
-                    <p>{feilmelding}</p>
-                </AlertStripe>
-            );
-        }
-
-        return <Laster />;
-    }
+    return <Laster />;
 }
 
 export default Innholdslaster;
