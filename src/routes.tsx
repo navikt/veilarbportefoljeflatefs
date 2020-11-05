@@ -11,6 +11,8 @@ import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.less';
+import {AlertStripeFeil} from "nav-frontend-alertstriper";
+import Lenke from "nav-frontend-lenker";
 
 loggBrowserMetrikker();
 
@@ -19,16 +21,20 @@ function Routes() {
     return (
         <div className="portefolje">
             <div className="maincontent side-innhold">
+                <AlertStripeFeil className="stor-feil-modal">
+                    Vi har for tiden problemer med overføringen av data mellom applikasjonene. Dette kan medføre ustabilitet og feil i filtreringene. <Lenke
+                    href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/SitePages/Det-kan-oppleves-treghet-i-Modia-og-Gosys.aspx">Følg med på drifstmelding på Navet</Lenke>
+                </AlertStripeFeil>
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
-                        <Route path="/enhet" component={EnhetSide} />
-                        <Route path="/veiledere" component={VeiledereSide} />
-                        <Route path="/portefolje/:ident" component={MinoversiktSide} />
-                        <Route path="/portefolje" component={MinoversiktSide} />
+                        <Route path="/enhet" component={EnhetSide}/>
+                        <Route path="/veiledere" component={VeiledereSide}/>
+                        <Route path="/portefolje/:ident" component={MinoversiktSide}/>
+                        <Route path="/portefolje" component={MinoversiktSide}/>
                     </Switch>
-                    <TilbakemeldingFab />
-                    <TilToppenKnapp />
-                    <TourModalLocalStorage skalVises={false} />
+                    <TilbakemeldingFab/>
+                    <TilToppenKnapp/>
+                    <TourModalLocalStorage skalVises={false}/>
                 </Innholdslaster>
             </div>
         </div>
