@@ -96,8 +96,6 @@ export default function EnhetSide() {
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
 
-    document.body.style.backgroundColor = 'rgb(244, 244, 244)';
-
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
