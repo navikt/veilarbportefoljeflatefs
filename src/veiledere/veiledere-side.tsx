@@ -23,8 +23,6 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {ANNEN_VEILEDER} from '../konstanter';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -35,8 +33,6 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
-    const erAnnenVeilederFeaturePa = useFeatureSelector()(ANNEN_VEILEDER);
-    !erAnnenVeilederFeaturePa && (document.body.style.backgroundColor = 'rgb(244, 244, 244)');
 
     useSetEnhetIUrl();
 
