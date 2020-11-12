@@ -28,6 +28,7 @@ import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
+import AlderFilterform from '../components/alder-filterform/alder-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -46,11 +47,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Alder"
                     render={lukkDropdown => (
-                        <CheckboxFilterform
+                        <AlderFilterform
                             form="alder"
                             valg={alder}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             columns={2}
                         />
