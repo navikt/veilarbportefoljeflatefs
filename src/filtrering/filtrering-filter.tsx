@@ -38,17 +38,6 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-    const erUtdanningFeatureTogglePa = useFeatureSelector()(UTDANNING_FILTER);
-
-    if (erUtdanningFeatureTogglePa) {
-        return (
-            <FiltreringFilterUtdanning
-                endreFiltervalg={endreFiltervalg}
-                filtervalg={filtervalg}
-                enhettiltak={enhettiltak}
-            />
-        );
-    }
 
     return (
         <div className="filtrering-filter" data-testid="filtrering-filter_container">

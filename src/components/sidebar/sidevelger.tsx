@@ -18,6 +18,9 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
+import FiltreringFilterUtdanning from '../../filtrering/filtrering-filter-utdanning';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {UTDANNING_FILTER} from '../../konstanter';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -50,6 +53,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
+    const erUtdanningFeatureTogglePa = useFeatureSelector()(UTDANNING_FILTER);
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -85,11 +89,19 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 handleClick={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
-                <FiltreringFilter
-                    endreFiltervalg={doEndreFiltervalg}
-                    filtervalg={filtervalg}
-                    enhettiltak={enhettiltak}
-                />
+                {erUtdanningFeatureTogglePa ? (
+                    <FiltreringFilterUtdanning
+                        endreFiltervalg={endreFiltervalg}
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak}
+                    />
+                ) : (
+                    <FiltreringFilter
+                        endreFiltervalg={doEndreFiltervalg}
+                        filtervalg={filtervalg}
+                        enhettiltak={enhettiltak}
+                    />
+                )}
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Veiledergrupper') {
