@@ -24,11 +24,10 @@ import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, UTDANNING_FILTER} from '../konstanter';
+import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import FiltreringFilterUtdanning from './filtrering-filter-utdanning';
 
 interface FiltreringFilterProps {
     filtervalg: any;

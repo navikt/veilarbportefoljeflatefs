@@ -107,7 +107,7 @@ function DoubleCheckboxFilterform({
                         <button
                             className="knapp knapp--mini knapp--hoved"
                             type="submit"
-                            data-testid="checkbox-filterform_velg-knapp"
+                            data-testid="double-checkbox-filterform_velg-knapp"
                         >
                             Velg
                         </button>
@@ -116,7 +116,7 @@ function DoubleCheckboxFilterform({
                             className="knapp knapp--mini"
                             type="button"
                             onClick={closeDropdown}
-                            data-testid="checkbox-filterform_lukk-knapp"
+                            data-testid="double-checkbox-filterform_lukk-knapp"
                         >
                             Lukk
                         </button>
@@ -125,7 +125,7 @@ function DoubleCheckboxFilterform({
                     <button
                         className="knapp knapp--mini knapp--hoved"
                         type="submit"
-                        data-testid="checkbox-filterform_velg-knapp"
+                        data-testid="double-checkbox-filterform_velg-knapp"
                     >
                         Velg
                     </button>
