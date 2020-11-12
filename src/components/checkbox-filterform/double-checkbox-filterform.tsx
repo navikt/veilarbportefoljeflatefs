@@ -84,7 +84,7 @@ function DoubleCheckboxFilterform({
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
                     <div className={'checkbox-filterform-col1'}>
-                        <Element className={'double-form-tittle'}>{titleCol1}</Element>
+                        <Element className={'double-form-title'}>{titleCol1}</Element>
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
@@ -94,7 +94,7 @@ function DoubleCheckboxFilterform({
                     </div>
 
                     <div className={'checkbox-filterform-col2'}>
-                        <Element className={'double-form-tittle'}>{titleCol2}</Element>
+                        <Element className={'double-form-title'}>{titleCol2}</Element>
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}
