@@ -53,7 +53,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
-                            columns={2}
                         />
                     )}
                 />

@@ -4,6 +4,7 @@ import {Dictionary} from '../../utils/types/types';
 import Grid from '../grid/grid';
 import classNames from 'classnames';
 import './alder-filterform.less';
+import {Input} from 'nav-frontend-skjema';
 
 interface AlderFilterformProps {
     form: string;
@@ -11,42 +12,23 @@ interface AlderFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown?: () => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
     className?: string;
 }
 
-function AlderFilterform({
-    endreFiltervalg,
-    valg,
-    closeDropdown,
-    form,
-    filtervalg,
-    columns = 1,
-    className
-}: AlderFilterformProps) {
-
-    console.log('form', form);
-    console.log('filtervalg', filtervalg[form]);
+function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
     const [inputAlderFra, setInputAlderFra] = useState<string[]>([]);
     const [inputAlderTil, setInputAlderTil] = useState<string[]>([]);
-    const [inputValg, setInputValg] = useState<string[]>(filtervalg[form]);
-
-    // const input = `${inputAlderFra}-${inputAlderTil}`;
-
-    console.log('checkbox', checkBoxValg);
-    console.log('valg', inputValg);
 
     const [inputDirty, setInputDirty] = useState(inputAlderFra === [''] || inputAlderTil === ['']);
     const harValg = Object.keys(valg).length > 0 || inputDirty;
 
     const velgCheckBox = e => {
+        e.persist();
         if (inputDirty) {
             setInputAlderTil([]);
             setInputAlderFra([]);
         }
-        e.persist();
-        setCheckBoxValg(filtervalg[form]);
         return e.target.checked
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
@@ -67,7 +49,6 @@ function AlderFilterform({
         if (checkBoxValg.length > 0) {
             setCheckBoxValg([]);
         }
-        // setInputValg(inputAlderFra, inputAlderTil)
         if (til) {
             setInputAlderTil([e.target.value]);
         } else {
@@ -75,9 +56,19 @@ function AlderFilterform({
         }
     };
 
+    // const validation = () => {
+    //     if (inputAlderFra > inputAlderTil) {
+    //         return 'Alderen i fra-feltet kan ikke være større enn alderen i til-feltet'
+    //     }
+    // };
+
     const submitForm = e => {
         e.preventDefault();
-        checkBoxValg.length > 0 && endreFiltervalg(form, checkBoxValg);
+
+        // validation();
+        checkBoxValg.length > 0
+            ? endreFiltervalg(form, checkBoxValg)
+            : (inputAlderFra || inputAlderTil) && endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil + ' år']);
         if (closeDropdown) {
             closeDropdown();
         }
@@ -93,7 +84,7 @@ function AlderFilterform({
             {harValg && (
                 <>
                     <div className={classNames('checkbox-filterform__valg', className)}>
-                        <Grid columns={columns}>
+                        <Grid columns={2}>
                             {Object.entries(valg).map(([filterKey, filterValue]) => (
                                 <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
                                     <input
@@ -117,9 +108,8 @@ function AlderFilterform({
 
                     <div className="alder-input">
                         <div className="alder-container_fra">
-                            {console.log(inputAlderFra)}
                             <label htmlFor="filter_alder-fra">Fra:</label>
-                            <input
+                            <Input
                                 min={0}
                                 type="number"
                                 id="filter_alder-fra"
@@ -130,9 +120,8 @@ function AlderFilterform({
                             />
                         </div>
                         <div className="alder-container_til">
-                            {console.log(inputAlderTil)}
                             <label htmlFor="filter_alder-til">Til:</label>
-                            <input
+                            <Input
                                 min={0}
                                 type="number"
                                 id="filter_alder-til"
