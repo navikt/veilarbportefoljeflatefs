@@ -5,6 +5,13 @@
         max-height: 16rem;
         overflow-x: auto;
         padding: 0.5rem 0.5rem 0;
+
+        &__double {
+            display: grid;
+            max-height: 16rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.5rem 0;
+        }
     }
 
     .registreringstype {
@@ -25,6 +32,14 @@
     }
 }
 
+.checkbox-filterform-col1 {
+    grid-column: 1;
+}
+
+.checkbox-filterform-col2 {
+    grid-column: 2;
+}
+
 .field__container {
     position: relative;
 
@@ -32,7 +47,10 @@
         margin-bottom: 0;
     }
 }
-
+.double-form-title {
+    margin-bottom: 1rem;
+    line-height: 110%;
+}
 .fodselsdato__grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

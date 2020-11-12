@@ -226,6 +226,26 @@ export const registreringstype = {
     JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene'
 };
 
+export const utdanning = {
+    INGEN_UTDANNING: 'Ingen utdanning',
+    GRUNNSKOLE: 'Grunnskole',
+    VIDEREGAENDE_GRUNNUTDANNING: 'Videregående grunnutdanning (1 til 2 år)',
+    VIDEREGAENDE_FAGBREV_SVENNEBREV: 'Videregående, fagbrev eller svennebrev (3 år eller mer)',
+    HOYERE_UTDANNING_1_TIL_4: 'Høyere utdanning (1 til 4 år)',
+    HOYERE_UTDANNING_5_ELLER_MER: 'Høyere utdanning (5 år eller mer)'
+};
+
+export const utdanningGodkjentSvar = {
+    JA: 'Ja',
+    NEI: 'Nei',
+    VET_IKKE: 'Vet ikke'
+};
+
+export const utdanningBestattSvar = {
+    JA: 'Ja',
+    NEI: 'Nei'
+};
+
 export default {
     ytelseUtlopsSortering,
     ferdigfilterListe,
