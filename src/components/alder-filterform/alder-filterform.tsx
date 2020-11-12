@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FiltervalgModell} from '../../model-interfaces';
 import {Dictionary} from '../../utils/types/types';
 import Grid from '../grid/grid';
@@ -11,63 +11,41 @@ interface AlderFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown?: () => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
     className?: string;
 }
 
-function AlderFilterform({
-    endreFiltervalg,
-    valg,
-    closeDropdown,
-    form,
-    filtervalg,
-    columns = 1,
-    className
-}: AlderFilterformProps) {
-
-    console.log('form', form);
-    console.log('filtervalg', filtervalg[form]);
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string[]>([]);
     const [inputAlderTil, setInputAlderTil] = useState<string[]>([]);
-    const [inputValg, setInputValg] = useState<string[]>(filtervalg[form]);
 
-    // const input = `${inputAlderFra}-${inputAlderTil}`;
+    const harValg = Object.keys(valg).length > 0;
 
-    console.log('checkbox', checkBoxValg);
-    console.log('valg', inputValg);
-
-    const [inputDirty, setInputDirty] = useState(inputAlderFra === [''] || inputAlderTil === ['']);
-    const harValg = Object.keys(valg).length > 0 || inputDirty;
+    useEffect(() => {
+        const alderValg = filtervalg[form];
+        const konstAlderVerdi = Object.entries(valg).map(([filterKey]) => filterKey);
+        alderValg.forEach(alder => {
+            if (konstAlderVerdi.includes(alder)) {
+                setCheckBoxValg(prevState => [...prevState, alder]);
+            } else {
+                const [alderFra, alderTil] = alder.split('-');
+                alderFra && setInputAlderFra(alderFra);
+                alderTil && setInputAlderTil(alderTil);
+            }
+        });
+    }, [filtervalg, form, valg]);
 
     const velgCheckBox = e => {
-        if (inputDirty) {
-            setInputAlderTil([]);
-            setInputAlderFra([]);
-        }
+        setInputAlderTil([]);
+        setInputAlderFra([]);
         e.persist();
-        setCheckBoxValg(filtervalg[form]);
         return e.target.checked
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
-    const setDirty = () => {
-        if (inputAlderFra.length > 0 || inputAlderTil.length > 0) {
-            setInputDirty(true);
-        } else {
-            setInputAlderFra([]);
-            setInputAlderTil([]);
-            setInputDirty(false);
-        }
-    };
-
     const changeInput = (e, til) => {
-        setDirty();
-        if (checkBoxValg.length > 0) {
-            setCheckBoxValg([]);
-        }
-        // setInputValg(inputAlderFra, inputAlderTil)
+        setCheckBoxValg([]);
         if (til) {
             setInputAlderTil([e.target.value]);
         } else {
@@ -78,6 +56,10 @@ function AlderFilterform({
     const submitForm = e => {
         e.preventDefault();
         checkBoxValg.length > 0 && endreFiltervalg(form, checkBoxValg);
+        checkBoxValg.length === 0 &&
+            inputAlderFra.length > 0 &&
+            inputAlderTil.length > 0 &&
+            endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
         if (closeDropdown) {
             closeDropdown();
         }
@@ -93,7 +75,7 @@ function AlderFilterform({
             {harValg && (
                 <>
                     <div className={classNames('checkbox-filterform__valg', className)}>
-                        <Grid columns={columns}>
+                        <Grid columns={2}>
                             {Object.entries(valg).map(([filterKey, filterValue]) => (
                                 <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
                                     <input
@@ -117,7 +99,6 @@ function AlderFilterform({
 
                     <div className="alder-input">
                         <div className="alder-container_fra">
-                            {console.log(inputAlderFra)}
                             <label htmlFor="filter_alder-fra">Fra:</label>
                             <input
                                 min={0}
@@ -130,7 +111,6 @@ function AlderFilterform({
                             />
                         </div>
                         <div className="alder-container_til">
-                            {console.log(inputAlderTil)}
                             <label htmlFor="filter_alder-til">Til:</label>
                             <input
                                 min={0}
@@ -146,7 +126,7 @@ function AlderFilterform({
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
-                {checkBoxValg.length > 0 || inputDirty ? (
+                {checkBoxValg.length > 0 || (inputAlderFra.length > 0 && inputAlderTil.length > 0) ? (
                     <button
                         className="knapp knapp--mini knapp--hoved"
                         type="submit"
