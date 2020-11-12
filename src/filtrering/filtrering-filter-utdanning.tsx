@@ -28,7 +28,7 @@ import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import UtdanningFilterform from '../components/checkbox-filterform/utdanning-filterform';
+import DoubleCheckboxFilterform from '../components/checkbox-filterform/double-checkbox-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -114,7 +114,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Er utdanning godkjent og bestått"
                     render={lukkDropdown => (
-                        <UtdanningFilterform
+                        <DoubleCheckboxFilterform
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             endreFilterValg={endreFiltervalg}

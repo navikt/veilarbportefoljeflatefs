@@ -5,14 +5,9 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
+import {utdanningBestattSvar, utdanningGodkjentSvar} from '../../filtrering/filter-konstanter';
 
 interface DoubleCheckboxFilterformProps {
-    formCol1: string;
-    formCol2: string;
-    valgCol1: Dictionary<string>;
-    valgCol2: Dictionary<string>;
-    titleCol1: string;
-    titleCol2: string;
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
     closeDropdown?: () => void;
     filtervalg: FiltervalgModell;
@@ -22,19 +17,19 @@ interface DoubleCheckboxFilterformProps {
 
 function DoubleCheckboxFilterform({
     endreFilterValg,
-    valgCol1,
-    valgCol2,
     closeDropdown,
-    formCol1,
-    formCol2,
-    titleCol1,
-    titleCol2,
     filtervalg,
     className,
     emptyCheckboxFilterFormMessage
 }: DoubleCheckboxFilterformProps) {
+    const valgCol1 = utdanningGodkjentSvar;
+    const valgCol2 = utdanningBestattSvar;
+
     const harValgCol1 = Object.keys(valgCol1).length > 0;
     const harValgCol2 = Object.keys(valgCol1).length > 0;
+
+    const formCol1 = 'utdanningGodkjentSvar';
+    const formCol2 = 'utdanningBestattSvar';
 
     const [uniqueValgCol1, setUniqueValgCol1] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol1));
     const [uniqueValgCol2, setUniqueValgCol2] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol2));
@@ -64,9 +59,11 @@ function DoubleCheckboxFilterform({
             return e.target.checked
                 ? setCheckBoxValgCol1(prevState => [...prevState, id])
                 : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
-        return e.target.checked
-            ? setCheckBoxValgCol2(prevState => [...prevState, id])
-            : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
+        else if (typeForm === formCol2)
+            return e.target.checked
+                ? setCheckBoxValgCol2(prevState => [...prevState, id])
+                : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
+        return;
     };
 
     return (
@@ -84,7 +81,7 @@ function DoubleCheckboxFilterform({
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
                     <div className={'checkbox-filterform-col1'}>
-                        <Element className={'double-form-title'}>{titleCol1}</Element>
+                        <Element className={'double-form-title'}>{'Er utdanningen godkjent i Norge?'}</Element>
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
@@ -94,7 +91,7 @@ function DoubleCheckboxFilterform({
                     </div>
 
                     <div className={'checkbox-filterform-col2'}>
-                        <Element className={'double-form-title'}>{titleCol2}</Element>
+                        <Element className={'double-form-title'}>{'Er utdanningen bestått?'}</Element>
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}

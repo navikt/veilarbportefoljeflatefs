@@ -241,7 +241,7 @@ export const utdanningGodkjentSvar = {
     VET_IKKE: 'Vet ikke'
 };
 
-export const utdanningBeståttSvar = {
+export const utdanningBestattSvar = {
     JA: 'Ja',
     NEI: 'Nei'
 };
