@@ -57,17 +57,13 @@ function DoubleCheckboxFilterform({
         setUniqueValgCol2(makeValgUnique(valgCol2, formCol2));
     }, [valgCol2, formCol2]);
 
-    const velgCheckBox1 = e => {
+    const velgCheckBox = (e, typeForm) => {
         e.persist();
-        const id = e.target.value.replace(`${formCol1}_`, '');
-        return e.target.checked
-            ? setCheckBoxValgCol1(prevState => [...prevState, id])
-            : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
-    };
-
-    const velgCheckBox2 = e => {
-        e.persist();
-        const id = e.target.value.replace(`${formCol2}_`, '');
+        const id = e.target.value.replace(`${typeForm}_`, '');
+        if (typeForm === formCol1)
+            return e.target.checked
+                ? setCheckBoxValgCol1(prevState => [...prevState, id])
+                : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
         return e.target.checked
             ? setCheckBoxValgCol2(prevState => [...prevState, id])
             : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
@@ -92,7 +88,7 @@ function DoubleCheckboxFilterform({
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
-                            velgCheckBox={velgCheckBox1}
+                            velgCheckBox={e => velgCheckBox(e, formCol1)}
                             checkBoxValg={checkBoxValgCol1}
                         />
                     </div>
@@ -102,7 +98,7 @@ function DoubleCheckboxFilterform({
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}
-                            velgCheckBox={velgCheckBox2}
+                            velgCheckBox={e => velgCheckBox(e, formCol2)}
                             checkBoxValg={checkBoxValgCol2}
                         />
                     </div>
