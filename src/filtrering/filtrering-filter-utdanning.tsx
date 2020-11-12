@@ -16,9 +16,7 @@ import {
     rettighetsgruppe,
     servicegruppe,
     ytelse,
-    utdanning,
-    utdanningBeståttSvar,
-    utdanningGodkjentSvar
+    utdanning
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
@@ -30,7 +28,7 @@ import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import DoubleCheckboxFilterform from '../components/checkbox-filterform/double-checkbox-filterform';
+import UtdanningFilterform from '../components/checkbox-filterform/utdanning-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -116,15 +114,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Er utdanning godkjent og bestått"
                     render={lukkDropdown => (
-                        <DoubleCheckboxFilterform
-                            valgCol1={utdanningGodkjentSvar}
-                            valgCol2={utdanningBeståttSvar}
-                            titleCol1={'Er utdanningen godkjent i Norge?'}
-                            titleCol2={'Er utdanningen bestått?'}
+                        <UtdanningFilterform
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            formCol1="utdanningGodkjentSvar"
-                            formCol2="utdanningBestattSvar"
                             endreFilterValg={endreFiltervalg}
                         />
                     )}
