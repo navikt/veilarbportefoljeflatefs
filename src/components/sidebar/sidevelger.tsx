@@ -91,7 +91,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
             >
                 {erUtdanningFeatureTogglePa ? (
                     <FiltreringFilterUtdanning
-                        endreFiltervalg={endreFiltervalg}
+                        endreFiltervalg={doEndreFiltervalg}
                         filtervalg={filtervalg}
                         enhettiltak={enhettiltak}
                     />
