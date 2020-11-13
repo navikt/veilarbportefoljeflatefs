@@ -22,6 +22,9 @@ const valgCol2 = utdanningBestattSvar;
 const harValgCol1 = Object.keys(valgCol1).length > 0;
 const harValgCol2 = Object.keys(valgCol1).length > 0;
 
+const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
+const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
+
 function DoubleCheckboxFilterform({
     endreFilterValg,
     closeDropdown,
@@ -29,26 +32,16 @@ function DoubleCheckboxFilterform({
     className,
     emptyCheckboxFilterFormMessage
 }: DoubleCheckboxFilterformProps) {
-    const [uniqueValgCol1, setUniqueValgCol1] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol1));
-    const [uniqueValgCol2, setUniqueValgCol2] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol2));
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
-    }, [filtervalg, formCol1]);
+    }, [filtervalg]);
 
     useEffect(() => {
         setCheckBoxValgCol2(filtervalg[formCol2]);
-    }, [filtervalg, formCol2]);
-
-    useEffect(() => {
-        setUniqueValgCol1(makeValgUnique(valgCol1, formCol1));
-    }, [valgCol1, formCol1]);
-
-    useEffect(() => {
-        setUniqueValgCol2(makeValgUnique(valgCol2, formCol2));
-    }, [valgCol2, formCol2]);
+    }, [filtervalg]);
 
     const velgCheckBox = (e, typeForm) => {
         e.persist();
