@@ -16,8 +16,11 @@ interface AlderFilterformProps {
 
 function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
-    const [inputAlderFra, setInputAlderFra] = useState<string[]>([]);
-    const [inputAlderTil, setInputAlderTil] = useState<string[]>([]);
+    const [inputAlderFra, setInputAlderFra] = useState<string>('');
+    const [inputAlderTil, setInputAlderTil] = useState<string>('');
+
+    const minAlderFra = 0;
+    const maxAlderTil = 70;
 
     const harValg = Object.keys(valg).length > 0;
 
@@ -36,8 +39,8 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     }, [filtervalg, form, valg]);
 
     const velgCheckBox = e => {
-        setInputAlderTil([]);
-        setInputAlderFra([]);
+        setInputAlderTil('');
+        setInputAlderFra('');
         e.persist();
         return e.target.checked
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
@@ -47,19 +50,27 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const changeInput = (e, til) => {
         setCheckBoxValg([]);
         if (til) {
-            setInputAlderTil([e.target.value]);
+            setInputAlderTil(e.target.value);
         } else {
-            setInputAlderFra([e.target.value]);
+            setInputAlderFra(e.target.value);
         }
     };
 
     const submitForm = e => {
         e.preventDefault();
-        checkBoxValg.length > 0 && endreFiltervalg(form, checkBoxValg);
-        checkBoxValg.length === 0 &&
-            inputAlderFra.length > 0 &&
-            inputAlderTil.length > 0 &&
-            endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+        if (checkBoxValg.length) {
+            endreFiltervalg(form, checkBoxValg);
+        } else {
+            if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
+                endreFiltervalg(form, [minAlderFra + '-' + inputAlderTil]);
+            }
+            if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + maxAlderTil]);
+            }
+            if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+            }
+        }
         if (closeDropdown) {
             closeDropdown();
         }
@@ -126,7 +137,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
-                {checkBoxValg.length > 0 || (inputAlderFra.length > 0 && inputAlderTil.length > 0) ? (
+                {checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0 ? (
                     <button
                         className="knapp knapp--mini knapp--hoved"
                         type="submit"
