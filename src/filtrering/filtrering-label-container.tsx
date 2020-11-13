@@ -65,17 +65,17 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'utdanningBestattSvar') {
+            if (key === 'utdanningBestatt') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
-                            key={`utdanningBestattSvar-${singleValue}`}
+                            key={`utdanningBestatt-${singleValue}`}
                             label={`Utdanning bestått: ${singleValue}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
                 });
-            } else if (key === 'utdanningGodkjentSvar') {
+            } else if (key === 'utdanningGodkjent') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel

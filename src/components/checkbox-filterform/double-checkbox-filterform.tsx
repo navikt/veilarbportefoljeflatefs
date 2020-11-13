@@ -15,6 +15,13 @@ interface DoubleCheckboxFilterformProps {
     emptyCheckboxFilterFormMessage?: string;
 }
 
+const formCol1 = 'utdanningGodkjent';
+const formCol2 = 'utdanningBestatt';
+const valgCol1 = utdanningGodkjentSvar;
+const valgCol2 = utdanningBestattSvar;
+const harValgCol1 = Object.keys(valgCol1).length > 0;
+const harValgCol2 = Object.keys(valgCol1).length > 0;
+
 function DoubleCheckboxFilterform({
     endreFilterValg,
     closeDropdown,
@@ -22,15 +29,6 @@ function DoubleCheckboxFilterform({
     className,
     emptyCheckboxFilterFormMessage
 }: DoubleCheckboxFilterformProps) {
-    const valgCol1 = utdanningGodkjentSvar;
-    const valgCol2 = utdanningBestattSvar;
-
-    const harValgCol1 = Object.keys(valgCol1).length > 0;
-    const harValgCol2 = Object.keys(valgCol1).length > 0;
-
-    const formCol1 = 'utdanningGodkjentSvar';
-    const formCol2 = 'utdanningBestattSvar';
-
     const [uniqueValgCol1, setUniqueValgCol1] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol1));
     const [uniqueValgCol2, setUniqueValgCol2] = useState<Dictionary<string>>(makeValgUnique(valgCol1, formCol2));
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);

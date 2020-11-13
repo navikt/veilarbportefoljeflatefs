@@ -60,8 +60,8 @@ export interface FiltervalgModell {
     registreringstype: string[];
     cvJobbprofil: null | string;
     utdanning: string[];
-    utdanningGodkjentSvar: string[];
-    utdanningBestattSvar: string[];
+    utdanningGodkjent: string[];
+    utdanningBestatt: string[];
 }
 
 export interface EnhetModell {
