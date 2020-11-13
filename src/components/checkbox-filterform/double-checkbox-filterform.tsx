@@ -32,8 +32,12 @@ function DoubleCheckboxFilterform({
     className,
     emptyCheckboxFilterFormMessage
 }: DoubleCheckboxFilterformProps) {
-    const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
-    const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
+    const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(
+        filtervalg[formCol1] ? filtervalg[formCol1] : []
+    );
+    const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(
+        filtervalg[formCol2] ? filtervalg[formCol2] : []
+    );
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
