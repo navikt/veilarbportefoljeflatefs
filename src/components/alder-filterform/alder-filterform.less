@@ -3,30 +3,28 @@
         display: grid;
         grid-template-columns: auto auto;
         padding: 0.5rem 0.5rem;
+
+        &__validering {
+            border: 2px solid red;
+        }
     }
     .filter-alder__tekst {
         display: flex;
         justify-content: center;
     }
 
-    .alder-container_fra {
-        margin: 0 0 0.5rem 0;
-    }
-    .alder-container_til {
-        margin: 0 0.5rem 0 0;
-    }
-
     .alder-container_fra,
     .alder-container_til {
+        margin: 0 0 0.5rem 0;
         display: flex;
+        label {
+            margin: auto 0;
+        }
         .filter_alder-fra,
         .filter_alder-til {
             margin: 0 0.5rem;
             max-width: 5rem;
-            input {
-                max-height: 2rem;
-            }
+            max-height: 2rem;
         }
     }
-
 }
