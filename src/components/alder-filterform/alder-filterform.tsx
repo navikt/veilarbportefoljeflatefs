@@ -65,11 +65,9 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             setFeil(false);
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [0 + '-' + inputAlderTil]);
-            }
-            if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+            } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
                 endreFiltervalg(form, [inputAlderFra + '-' + 70]);
-            }
-            if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+            } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
             if (closeDropdown) {
@@ -88,6 +86,10 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         } else {
             onSubmitInput();
         }
+    };
+
+    const fjernTegn = e => {
+        (e.key === 'e' || e.key === '.' || e.key === ',' || e.key === '-' || e.key === '+') && e.preventDefault();
     };
 
     return (
@@ -131,6 +133,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 data-testid="filter_alder-fra"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, false)}
                                 value={inputAlderFra}
+                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                         <div className="alder-container">
@@ -143,6 +146,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 data-testid="filter_alder-til"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, true)}
                                 value={inputAlderTil}
+                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                     </div>
