@@ -130,7 +130,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     )}
                 />
                 <Dropdown
-                    name="Er utdanning godkjent og bestått"
+                    name="Er utdanningen godkjent og bestått"
                     render={lukkDropdown => (
                         <DoubleCheckboxFilterform
                             filtervalg={filtervalg}
