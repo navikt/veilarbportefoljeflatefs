@@ -24,11 +24,12 @@ import Dropdown from '../components/dropdown/dropdown';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL} from '../konstanter';
+import {ALDER_FILTER, GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from '../components/checkbox-filterform/double-checkbox-filterform';
+import AlderFilterform from '../components/alder-filterform/alder-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -38,25 +39,42 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
+    const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
+
     return (
         <div className="filtrering-filter" data-testid="filtrering-filter_container">
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
                 </Element>
-                <Dropdown
-                    name="Alder"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="alder"
-                            valg={alder}
-                            filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                            columns={2}
-                        />
-                    )}
-                />
+                {erAlderFeatureTogglePa ? (
+                    <Dropdown
+                        name="Alder"
+                        render={lukkDropdown => (
+                            <AlderFilterform
+                                form="alder"
+                                valg={alder}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )}
+                    />
+                ) : (
+                    <Dropdown
+                        name="Alder"
+                        render={lukkDropdown => (
+                            <CheckboxFilterform
+                                form="alder"
+                                valg={alder}
+                                filtervalg={filtervalg}
+                                endreFilterValg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                                columns={2}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Fødselsdato"
                     render={lukkDropdown => (

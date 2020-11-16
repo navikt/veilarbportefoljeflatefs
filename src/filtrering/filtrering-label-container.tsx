@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
@@ -6,12 +7,11 @@ import FilterKonstanter, {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
-import {useEffect} from 'react';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 
 interface FiltreringLabelContainerProps {
@@ -102,6 +102,16 @@ function FiltreringLabelContainer({
                             key={`fodselsdagIMnd-${singleValue}`}
                             label={`Fødselsdato: ${singleValue}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'alder') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue.key || singleValue}`}
+                            label={FilterKonstanter[key][singleValue] || singleValue + ' år'}
+                            slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         />
                     );
                 });

@@ -25,6 +25,7 @@ function MineFilterRad({mineFilter, filtergruppe}: MineFilterRadProps) {
             ? state.mineFilterMinOversikt.valgtMineFilter
             : state.mineFilterEnhetensOversikt.valgtMineFilter
     );
+
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 

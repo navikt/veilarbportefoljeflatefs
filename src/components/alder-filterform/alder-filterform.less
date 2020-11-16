@@ -1,0 +1,39 @@
+.veilarbportefoljeflatefs {
+    .skilletekst {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+    }
+    .alder-input {
+        display: grid;
+        grid-template-columns: auto auto;
+        padding: 0.5rem 0.5rem;
+    }
+    .filter-alder__tekst {
+        display: flex;
+        justify-content: center;
+    }
+
+    .alder-container {
+        margin: 0 0 0.5rem 0;
+        display: flex;
+        label {
+            margin: auto 0;
+        }
+        .filter_alder {
+            margin: 0 0.5rem;
+            max-width: 5rem;
+            max-height: 2rem;
+            &__validering {
+                border: 2px solid red;
+            }
+        }
+    }
+    .validering-tekst {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        color: red;
+        font-weight: bolder;
+        margin: 0 0.5rem;
+    }
+}
