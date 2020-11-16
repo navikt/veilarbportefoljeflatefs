@@ -146,7 +146,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                             />
                         </div>
                     </div>
-                    {feil && <p className="validering-tekst"> Fra-alder kan ikke være større enn til-alder.</p>}
+                    {feil && (
+                        <p className="validering-tekst" data-testid="filter_alder_valideringstekst">
+                            Fra-alder kan ikke være større enn til-alder.
+                        </p>
+                    )}
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
