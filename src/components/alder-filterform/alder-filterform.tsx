@@ -88,6 +88,10 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         }
     };
 
+    const fjernTegn = e => {
+        (e.key === 'e' || e.key === '.' || e.key === ',' || e.key === '-' || e.key === '+') && e.preventDefault();
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
@@ -129,6 +133,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 data-testid="filter_alder-fra"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, false)}
                                 value={inputAlderFra}
+                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                         <div className="alder-container">
@@ -141,6 +146,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 data-testid="filter_alder-til"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, true)}
                                 value={inputAlderTil}
+                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                     </div>
