@@ -64,13 +64,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         } else {
             setFeil(false);
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [0 + '-' + inputTilNummer]);
-            }
-            if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                endreFiltervalg(form, [inputFraNummer + '-' + 70]);
-            }
-            if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [inputFraNummer + '-' + inputTilNummer]);
+                endreFiltervalg(form, [0 + '-' + inputAlderTil]);
+            } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + 70]);
+            } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
             if (closeDropdown) {
                 closeDropdown();
