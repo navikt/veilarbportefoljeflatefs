@@ -121,7 +121,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     </div>
                     <p className="skilletekst">----------------------------------</p>
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
-                        <div className="alder-container_fra">
+                        <div className="alder-container">
                             <label htmlFor="filter_alder-fra">Fra:</label>
                             <input
                                 min={0}
@@ -133,7 +133,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 value={inputAlderFra}
                             />
                         </div>
-                        <div className="alder-container_til">
+                        <div className="alder-container">
                             <label htmlFor="filter_alder-til">Til:</label>
                             <input
                                 min={0}
