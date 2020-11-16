@@ -5,7 +5,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
-import {utdanningBestattSvar, utdanningGodkjentSvar} from '../../filtrering/filter-konstanter';
+import {utdanningBestatt, utdanningGodkjent} from '../../filtrering/filter-konstanter';
 
 interface DoubleCheckboxFilterformProps {
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
@@ -17,8 +17,8 @@ interface DoubleCheckboxFilterformProps {
 
 const formCol1 = 'utdanningGodkjent';
 const formCol2 = 'utdanningBestatt';
-const valgCol1 = utdanningGodkjentSvar;
-const valgCol2 = utdanningBestattSvar;
+const valgCol1 = utdanningGodkjent;
+const valgCol2 = utdanningBestatt;
 const harValgCol1 = Object.keys(valgCol1).length > 0;
 const harValgCol2 = Object.keys(valgCol1).length > 0;
 

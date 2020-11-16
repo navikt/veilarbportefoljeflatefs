@@ -235,13 +235,13 @@ export const utdanning = {
     HOYERE_UTDANNING_5_ELLER_MER: 'Høyere utdanning (5 år eller mer)'
 };
 
-export const utdanningGodkjentSvar = {
+export const utdanningGodkjent = {
     JA: 'Ja',
     NEI: 'Nei',
     VET_IKKE: 'Vet ikke'
 };
 
-export const utdanningBestattSvar = {
+export const utdanningBestatt = {
     JA: 'Ja',
     NEI: 'Nei'
 };
@@ -265,5 +265,8 @@ export default {
     manuellBrukerStatus,
     registreringstype,
     arbeidslisteKategori,
-    cvJobbprofil
+    cvJobbprofil,
+    utdanning,
+    utdanningBestatt,
+    utdanningGodkjent
 };
