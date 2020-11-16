@@ -67,7 +67,6 @@ function FiltreringLabelContainer({
         .map(([key, value]) => {
             if (key === 'utdanningBestatt') {
                 return value.map(singleValue => {
-                    console.log(FilterKonstanter[key][singleValue]);
                     return (
                         <FiltreringLabel
                             key={`utdanningBestatt-${singleValue}`}
