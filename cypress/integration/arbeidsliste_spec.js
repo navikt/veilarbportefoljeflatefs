@@ -222,11 +222,13 @@ describe('Slett arbeidsliste via rediger-modal', () => {
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp')
             .should('be.visible')
             .click();
+        cy.get('.spinner').should('be.visible');
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.be.visible');
     });
 
     let antallEtterSletting = 0;
     it('Det skal være en mindre bruker med arbeidsliste', () => {
+        cy.get('.spinner').should('not.be.visible');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .should('be.visible')
             .then(ant => {
