@@ -18,6 +18,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
+    const [feil, setFeil] = useState(false);
 
     const harValg = Object.keys(valg).length > 0;
 
@@ -38,6 +39,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const velgCheckBox = e => {
         setInputAlderTil('');
         setInputAlderFra('');
+        setFeil(false);
         e.persist();
         return e.target.checked
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
@@ -45,6 +47,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     };
 
     const onChangeInput = (e, til) => {
+        setFeil(false);
         setCheckBoxValg([]);
         if (til) {
             setInputAlderTil(e.target.value);
@@ -54,14 +57,24 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     };
 
     const onSubmitInput = () => {
-        if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-            endreFiltervalg(form, [0 + '-' + inputAlderTil]);
-        }
-        if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-            endreFiltervalg(form, [inputAlderFra + '-' + 70]);
-        }
-        if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-            endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+        const inputFraNummer: number = parseInt(inputAlderFra);
+        const inputTilNummer: number = parseInt(inputAlderTil);
+        if (inputFraNummer > inputTilNummer) {
+            setFeil(true);
+        } else {
+            setFeil(false);
+            if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
+                endreFiltervalg(form, [0 + '-' + inputAlderTil]);
+            }
+            if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + 70]);
+            }
+            if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+            }
+            if (closeDropdown) {
+                closeDropdown();
+            }
         }
     };
 
@@ -69,11 +82,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         e.preventDefault();
         if (checkBoxValg.length) {
             endreFiltervalg(form, checkBoxValg);
+            if (closeDropdown) {
+                closeDropdown();
+            }
         } else {
             onSubmitInput();
-        }
-        if (closeDropdown) {
-            closeDropdown();
         }
     };
 
@@ -106,17 +119,15 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                             ))}
                         </Grid>
                     </div>
-
-                    <p className="filter-alder__tekst"> ------ eller ------ </p>
-
-                    <div className="alder-input">
+                    <p className="skilletekst">----------------------------------</p>
+                    <div className={classNames('alder-input', feil && 'alder-input__validering')}>
                         <div className="alder-container_fra">
                             <label htmlFor="filter_alder-fra">Fra:</label>
                             <input
                                 min={0}
                                 type="number"
                                 id="filter_alder-fra"
-                                className="filter_alder-fra"
+                                className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-fra"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, false)}
                                 value={inputAlderFra}
@@ -128,13 +139,14 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 min={0}
                                 type="number"
                                 id="filter_alder-til"
-                                className="filter_alder-til"
+                                className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-til"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, true)}
                                 value={inputAlderTil}
                             />
                         </div>
                     </div>
+                    {feil && <p className="validering-tekst"> Fra-alder kan ikke være større enn til-alder.</p>}
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
