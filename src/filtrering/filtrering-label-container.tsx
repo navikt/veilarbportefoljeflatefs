@@ -70,7 +70,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanningBestatt-${singleValue}`}
-                            label={`Utdanning bestått: ${singleValue}`}
+                            label={`Utdanning bestått: ${FilterKonstanter[key][singleValue]}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -80,7 +80,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanningGodkjent-${singleValue}`}
-                            label={`Utdanning godkjent: ${singleValue}`}
+                            label={`Utdanning godkjent: ${FilterKonstanter[key][singleValue]}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -90,7 +90,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
-                            label={`${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
