@@ -5,7 +5,8 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    ALERTSTRIPE_FEILMELDING
+    ALERTSTRIPE_FEILMELDING,
+    UTDANNING_FILTER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -18,7 +19,8 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false
+    [ALERTSTRIPE_FEILMELDING]: false,
+    [UTDANNING_FILTER]: false
 };
 
 // Reducer

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Element, Normaltekst} from 'nav-frontend-typografi';
+import {Element} from 'nav-frontend-typografi';
 import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
 import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
 import {
@@ -15,20 +15,20 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    utdanning
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
 import Dropdown from '../components/dropdown/dropdown';
 import '../components/checkbox-filterform/checkbox-filterform.less';
 import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
-import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import AlderFilterform from '../components/alder-filterform/alder-filterform';
+import DoubleCheckboxFilterform from '../components/checkbox-filterform/double-checkbox-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -38,7 +38,6 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-
     return (
         <div className="filtrering-filter" data-testid="filtrering-filter_container">
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
@@ -48,12 +47,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Alder"
                     render={lukkDropdown => (
-                        <AlderFilterform
+                        <CheckboxFilterform
                             form="alder"
                             valg={alder}
                             filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
+                            endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
+                            columns={2}
                         />
                     )}
                 />
@@ -84,6 +84,46 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
+                    Svar fra registrering
+                </Element>
+                <Dropdown
+                    name="Situasjon"
+                    render={lukkDropdown => (
+                        <CheckboxFilterform
+                            form="registreringstype"
+                            valg={registreringstype}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                            className="registreringstype"
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Høyeste fullførte utdanning"
+                    render={lukkDropdown => (
+                        <CheckboxFilterform
+                            form="utdanning"
+                            valg={utdanning}
+                            filtervalg={filtervalg}
+                            endreFilterValg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanning godkjent og bestått"
+                    render={lukkDropdown => (
+                        <DoubleCheckboxFilterform
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            endreFilterValg={endreFiltervalg}
+                        />
+                    )}
+                />
+            </div>
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
+                <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
                 <Dropdown
@@ -96,27 +136,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             closeDropdown={lukkDropdown}
                             filterId="cvJobbprofil"
                         />
-                    )}
-                />
-                <Dropdown
-                    name="Svar fra registrering"
-                    render={lukkDropdown => (
-                        <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Situasjonen brukeren oppgir på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
-                            <CheckboxFilterform
-                                form="registreringstype"
-                                valg={registreringstype}
-                                filtervalg={filtervalg}
-                                endreFilterValg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                                className="registreringstype"
-                            />
-                        </>
                     )}
                 />
                 <Dropdown

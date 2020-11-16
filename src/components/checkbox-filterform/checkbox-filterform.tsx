@@ -28,7 +28,6 @@ function CheckboxFilterform({
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
-
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
     useEffect(() => {
