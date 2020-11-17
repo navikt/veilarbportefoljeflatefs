@@ -17,11 +17,11 @@ const klikkAlderDropdown = () => {
     });
 };
 
-describe('Sjekk at alders-input og  utdanningen godkjent og bestått fungerer', () => {
-    it('Start server', () => {
-        cy.configure();
-    });
+it('Start server', () => {
+    cy.configure();
+});
 
+describe('Sjekk at alders-input fungerer', () => {
     it('Gå til filter-tab', () => {
         cy.klikkTab('FILTER');
     });
@@ -116,7 +116,9 @@ describe('Sjekk at alders-input og  utdanningen godkjent og bestått fungerer', 
     it('Etiketten har "0-34 år"', () => {
         cy.getByTestId('filtreringlabel').contains('0-' + tilAlder + ' år');
     });
+});
 
+describe('Sjekk at "utdanningen godkjent og bestått" fungerer', () => {
     it('Klikk "Er utdanningen godkjent og bestått"-dropdown', () => {
         cy.getByTestId('dropdown-knapp_er-utdanningen-godkjent-og-bestatt').click();
     });
