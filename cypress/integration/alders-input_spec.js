@@ -1,5 +1,21 @@
 const fraAlder = '2';
 const tilAlder = '34';
+const hoyAlder = '88';
+
+const klikkVelg = () => {
+    it('Klikk velg', () => {
+        cy.getByTestId('checkbox-filterform_velg-knapp')
+            .contains('Velg')
+            .should('be.visible')
+            .click();
+    });
+};
+
+const klikkAlderDropdown = () => {
+    it('Klikk alder-dropdown', () => {
+        cy.getByTestId('dropdown-knapp_Alder').click();
+    });
+};
 
 describe('Sjekk at nytt alders-input fungerer', () => {
     it('Start server', () => {
@@ -8,9 +24,7 @@ describe('Sjekk at nytt alders-input fungerer', () => {
     it('Gå til filter-tab', () => {
         cy.klikkTab('FILTER');
     });
-    it('Klikk alder-dropdown', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
-    });
+    klikkAlderDropdown();
     it('Skriv inn tall i inputfeltene', () => {
         cy.getByTestId('checkbox-filterform_lukk-knapp')
             .contains('Lukk')
@@ -24,12 +38,7 @@ describe('Sjekk at nytt alders-input fungerer', () => {
             .type(fraAlder);
         cy.getByTestId('checkbox-filterform_lukk-knapp').should('not.be.visible');
     });
-    it('Klikk velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
-    });
+    klikkVelg();
     it('Se validering', () => {
         cy.getByTestId('filter_alder_valideringstekst')
             .should('be.visible')
@@ -46,12 +55,7 @@ describe('Sjekk at nytt alders-input fungerer', () => {
             .type(tilAlder);
         cy.getByTestId('filter_alder_valideringstekst').should('not.be.visible');
     });
-    it('Klikk velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
-    });
+    klikkVelg();
     it('Etiketten har "2-34 år"', () => {
         cy.getByTestId('filtreringlabel').contains(fraAlder + '-' + tilAlder + ' år');
     });
@@ -63,37 +67,40 @@ describe('Sjekk at nytt alders-input fungerer', () => {
         cy.getByTestId('filter_alder-fra').should('have.value', '');
         cy.getByTestId('filter_alder-til').should('have.value', '');
     });
-    it('Klikk velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
-    });
+    klikkVelg();
     it('Etiketten har "40-49 år"', () => {
         cy.getByTestId('filtreringlabel').contains('40-49 år');
     });
-    it('Klikk alder-dropdown', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
-    });
+    klikkAlderDropdown();
     it('Skriv kun inn fra-tall', () => {
         cy.getByTestId('filter_40-49').should('be.checked');
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
             .type(fraAlder);
+        cy.getByTestId('filter_alder_valideringstekst').should('not.be.visible');
         cy.getByTestId('filter_40-49').should('not.be.checked');
     });
-    it('Klikk velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
-    });
+    klikkVelg();
     it('Etiketten har "2-70 år"', () => {
         cy.getByTestId('filtreringlabel').contains(fraAlder + '-70 år');
     });
-    it('Klikk alder-dropdown', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
+    klikkAlderDropdown();
+    it('Validering av for høyt tall', () => {
+        cy.getByTestId('filter_alder-fra')
+            .click()
+            .clear()
+            .type(hoyAlder);
+        cy.getByTestId('filter_alder-til')
+            .click()
+            .clear()
+            .should('have.value', '');
+    });
+    klikkVelg();
+    it('Se validering', () => {
+        cy.getByTestId('filter_alder_valideringstekst')
+            .should('be.visible')
+            .contains('Du må skrive et tall lavere enn 70 i fra-feltet hvis til-feltet står tomt.');
     });
     it('Skriv kun inn til-tall', () => {
         cy.getByTestId('filter_alder-fra')
@@ -104,12 +111,7 @@ describe('Sjekk at nytt alders-input fungerer', () => {
             .clear()
             .type(tilAlder);
     });
-    it('Klikk velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
-    });
+    klikkVelg();
     it('Etiketten har "0-34 år"', () => {
         cy.getByTestId('filtreringlabel').contains('0-' + tilAlder + ' år');
     });

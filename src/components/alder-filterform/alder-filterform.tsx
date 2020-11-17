@@ -4,6 +4,7 @@ import {Dictionary} from '../../utils/types/types';
 import Grid from '../grid/grid';
 import classNames from 'classnames';
 import './alder-filterform.less';
+import {logEvent} from '../../utils/frontend-logger';
 
 interface AlderFilterformProps {
     form: string;
@@ -19,6 +20,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
     const [feil, setFeil] = useState(false);
+    const [feilTekst, setFeilTekst] = useState<string>('');
 
     const harValg = Object.keys(valg).length > 0;
 
@@ -61,8 +63,13 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         const inputTilNummer: number = parseInt(inputAlderTil);
         if (inputFraNummer > inputTilNummer) {
             setFeil(true);
+            setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
+        } else if (inputFraNummer >= 70 && inputAlderTil.length === 0) {
+            setFeil(true);
+            setFeilTekst('Du må skrive et tall lavere enn 70 i fra-feltet hvis til-feltet står tomt.');
         } else {
             setFeil(false);
+            setFeilTekst('');
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [0 + '-' + inputAlderTil]);
             } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
@@ -83,8 +90,14 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             if (closeDropdown) {
                 closeDropdown();
             }
+            logEvent('portefolje.metrikker.aldersfilter', {
+                checkbox: true
+            });
         } else {
             onSubmitInput();
+            logEvent('portefolje.metrikker.aldersfilter', {
+                checkbox: false
+            });
         }
     };
 
@@ -152,7 +165,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     </div>
                     {feil && (
                         <p className="validering-tekst" data-testid="filter_alder_valideringstekst">
-                            Fra-alder kan ikke være større enn til-alder.
+                            {feilTekst}
                         </p>
                     )}
                 </>
