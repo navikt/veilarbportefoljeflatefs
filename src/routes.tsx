@@ -31,7 +31,7 @@ function Routes() {
                             Vi har dessverre tekniske problemer som kan medføre ustabilitet og/eller feil med
                             filtreringer. Feilretting pågår.{' '}
                             <Lenke href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/" target="_blank">
-                                <b>Følg med på driftsmelding på Navet.</b>
+                                <b>Følg med på driftsmeldinger på Navet.</b>
                             </Lenke>
                         </AlertStripe>
                     )}
