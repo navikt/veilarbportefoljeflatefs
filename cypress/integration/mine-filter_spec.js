@@ -38,7 +38,7 @@ describe('Lag nytt filter', () => {
         cy.getByTestId('sidebar-tab_FILTER').click();
     });
     it('Filtrer på alder: under 19', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
+        cy.getByTestId('dropdown-knapp_alder').click();
         cy.getByTestId('filter_19-og-under').check({force: true});
     });
     it('Trykk på velg', () => {
