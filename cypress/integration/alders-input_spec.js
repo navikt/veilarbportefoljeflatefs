@@ -13,7 +13,7 @@ const klikkVelg = () => {
 
 const klikkAlderDropdown = () => {
     it('Klikk alder-dropdown', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
+        cy.getByTestId('dropdown-knapp_alder').click();
     });
 };
 
@@ -60,7 +60,7 @@ describe('Sjekk at nytt alders-input fungerer', () => {
         cy.getByTestId('filtreringlabel').contains(fraAlder + '-' + tilAlder + ' år');
     });
     it('Velg checkbox', () => {
-        cy.getByTestId('dropdown-knapp_Alder').click();
+        cy.getByTestId('dropdown-knapp_alder').click();
         cy.getByTestId('filter_alder-fra').should('have.value', fraAlder);
         cy.getByTestId('filter_alder-til').should('have.value', tilAlder);
         cy.checkbox('filter_40-49');

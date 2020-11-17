@@ -5,6 +5,7 @@ import Grid from '../grid/grid';
 import classNames from 'classnames';
 import './alder-filterform.less';
 import {logEvent} from '../../utils/frontend-logger';
+import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 interface AlderFilterformProps {
     form: string;
@@ -91,12 +92,14 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                 closeDropdown();
             }
             logEvent('portefolje.metrikker.aldersfilter', {
-                checkbox: true
+                checkbox: true,
+                sideNavn: finnSideNavn()
             });
         } else {
             onSubmitInput();
             logEvent('portefolje.metrikker.aldersfilter', {
-                checkbox: false
+                checkbox: false,
+                sideNavn: finnSideNavn()
             });
         }
     };
