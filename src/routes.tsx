@@ -11,7 +11,7 @@ import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.less';
-import AlertStripe, {AlertStripeFeil} from 'nav-frontend-alertstriper';
+import AlertStripe from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING} from './konstanter';
