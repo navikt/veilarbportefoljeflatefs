@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import SubmitKnapp from './../submit-knapp';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './aktivitet-filterform.less';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
     BEHANDLING: AktiviteterValg.NA,
@@ -63,11 +63,24 @@ function AktivitetFilterform(props) {
         </div>
     ]);
 
+    const harValg =
+        valgteAktiviteter.BEHANDLING !== 'NA' ||
+        valgteAktiviteter.EGEN !== 'NA' ||
+        valgteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
+        valgteAktiviteter.IJOBB !== 'NA' ||
+        valgteAktiviteter.MOTE !== 'NA' ||
+        valgteAktiviteter.SOKEAVTALE !== 'NA' ||
+        valgteAktiviteter.STILLING !== 'NA' ||
+        valgteAktiviteter.TILTAK !== 'NA' ||
+        valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+
     return (
         <form
             className="skjema aktivitetfilterform"
             onSubmit={() => {
-                props.onSubmit('aktiviteter', valgteAktiviteter);
+                if (harValg) {
+                    props.onSubmit('aktiviteter', valgteAktiviteter);
+                }
                 props.closeDropdown();
             }}
         >
@@ -77,7 +90,7 @@ function AktivitetFilterform(props) {
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
             <div className="aktivitetfilter_knapper blokk-xxs">
-                <SubmitKnapp pristine={false} closeDropdown={props.closeDropdown} dataTestId="filter_aktivitet" />
+                <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
                 <button
                     type="button"
                     className="knapp knapp--standard knapp--mini"

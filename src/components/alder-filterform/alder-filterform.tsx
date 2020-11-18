@@ -6,12 +6,13 @@ import classNames from 'classnames';
 import './alder-filterform.less';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface AlderFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown?: () => void;
+    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
 }
@@ -62,6 +63,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const onSubmitInput = () => {
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
+
         if (inputFraNummer > inputTilNummer) {
             setFeil(true);
             setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
@@ -78,30 +80,26 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
-            if (closeDropdown) {
-                closeDropdown();
-            }
         }
     };
 
     const submitForm = e => {
         e.preventDefault();
-        if (checkBoxValg.length) {
+        if (checkBoxValg.length > 0) {
             endreFiltervalg(form, checkBoxValg);
-            if (closeDropdown) {
-                closeDropdown();
-            }
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: true,
                 sideNavn: finnSideNavn()
             });
-        } else {
+        }
+        if (inputAlderFra.length > 0 || inputAlderTil.length > 0) {
             onSubmitInput();
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: false,
                 sideNavn: finnSideNavn()
             });
         }
+        closeDropdown();
     };
 
     const fjernTegn = e => {
@@ -174,24 +172,10 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
-                {checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0 ? (
-                    <button
-                        className="knapp knapp--mini knapp--hoved"
-                        type="submit"
-                        data-testid="checkbox-filterform_velg-knapp"
-                    >
-                        Velg
-                    </button>
-                ) : (
-                    <button
-                        className="knapp knapp--mini"
-                        type="button"
-                        onClick={closeDropdown}
-                        data-testid="checkbox-filterform_lukk-knapp"
-                    >
-                        Lukk
-                    </button>
-                )}
+                <VelgLukkKnapp
+                    harValg={checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0}
+                    dataTestId="checkbox-filterform"
+                />
             </div>
         </form>
     );

@@ -6,10 +6,11 @@ import './checkbox-filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filtrering/filter-konstanter';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface DoubleCheckboxFilterformProps {
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown?: () => void;
+    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
@@ -62,17 +63,17 @@ function DoubleCheckboxFilterform({
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
-                endreFilterValg(formCol1, checkBoxValgCol1);
-                endreFilterValg(formCol2, checkBoxValgCol2);
-                if (closeDropdown) {
-                    closeDropdown();
+                if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
+                    endreFilterValg(formCol1, checkBoxValgCol1);
+                    endreFilterValg(formCol2, checkBoxValgCol2);
                 }
+                closeDropdown();
             }}
         >
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
-                    <div className={'checkbox-filterform-col1'}>
-                        <Element className={'double-form-title'}>{'Er utdanningen godkjent i Norge?'}</Element>
+                    <div className="checkbox-filterform-col1">
+                        <Element className="double-form-title">{'Er utdanningen godkjent i Norge?'}</Element>
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
@@ -80,9 +81,8 @@ function DoubleCheckboxFilterform({
                             checkBoxValg={checkBoxValgCol1}
                         />
                     </div>
-
-                    <div className={'checkbox-filterform-col2'}>
-                        <Element className={'double-form-title'}>{'Er utdanningen bestått?'}</Element>
+                    <div className="checkbox-filterform-col2">
+                        <Element className="double-form-title">{'Er utdanningen bestått?'}</Element>
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}
@@ -93,35 +93,10 @@ function DoubleCheckboxFilterform({
                 </div>
             )}
             <div className="checkbox-filterform__under-valg">
-                {closeDropdown ? (
-                    checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0 ? (
-                        <button
-                            className="knapp knapp--mini knapp--hoved"
-                            type="submit"
-                            data-testid="double-checkbox-filterform_velg-knapp"
-                        >
-                            Velg
-                        </button>
-                    ) : (
-                        <button
-                            className="knapp knapp--mini"
-                            type="button"
-                            onClick={closeDropdown}
-                            data-testid="double-checkbox-filterform_lukk-knapp"
-                        >
-                            Lukk
-                        </button>
-                    )
-                ) : (
-                    <button
-                        className="knapp knapp--mini knapp--hoved"
-                        type="submit"
-                        data-testid="double-checkbox-filterform_velg-knapp"
-                    >
-                        Velg
-                    </button>
-                )}
-
+                <VelgLukkKnapp
+                    harValg={checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0}
+                    dataTestId="double-checkbox-filterform"
+                />
                 {(!harValgCol1 || !harValgCol2) && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}

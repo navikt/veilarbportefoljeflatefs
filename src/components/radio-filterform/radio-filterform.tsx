@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {Radio} from 'nav-frontend-skjema';
 import './radio-filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -45,14 +46,7 @@ export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg,
                 ))}
             </div>
             <div className={classNames('radio-filterform__under-valg')}>
-                <button
-                    type="submit"
-                    className={classNames('knapp', 'knapp--mini', {
-                        'knapp--hoved': valgtFilterValg
-                    })}
-                >
-                    {valgtFilterValg ? 'Velg' : 'Lukk'}
-                </button>
+                <VelgLukkKnapp harValg={valgtFilterValg !== null} dataTestId="radio-filterform" />
             </div>
         </form>
     );
