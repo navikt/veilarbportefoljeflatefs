@@ -74,6 +74,11 @@ function AktivitetFilterform(props) {
         valgteAktiviteter.TILTAK !== 'NA' ||
         valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
+    const fjernAktiviteter = () => {
+        setValgteAktiviteter(aktivitetInitialState);
+        return props.onSubmit('aktiviteter', aktivitetInitialState);
+    };
+
     return (
         <form
             className="skjema aktivitetfilterform"
@@ -94,7 +99,7 @@ function AktivitetFilterform(props) {
                 <button
                     type="button"
                     className="knapp knapp--standard knapp--mini"
-                    onClick={() => setValgteAktiviteter(aktivitetInitialState)}
+                    onClick={() => fjernAktiviteter()}
                     data-testid="filter_aktivitet_fjern-knapp"
                 >
                     Fjern aktiviteter
