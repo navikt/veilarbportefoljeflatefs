@@ -21,7 +21,7 @@ it('Start server', () => {
     cy.configure();
 });
 
-xdescribe('Sjekk at alders-input fungerer', () => {
+describe('Sjekk at alders-input fungerer', () => {
     it('Gå til filter-tab', () => {
         cy.klikkTab('FILTER');
     });
