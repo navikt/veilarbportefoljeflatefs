@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface Props {
-    fjernValg: () => React.ReactNode;
+    fjernValg: () => void;
     dataTestId: string;
     knappeTekst?: string;
 }
 
- function FjernValgKnapp({fjernValg, dataTestId, knappeTekst = 'Fjern valg'}: Props) {
+function FjernValgKnapp({fjernValg, dataTestId, knappeTekst = 'Fjern valg'}: Props) {
     return (
         <button
             type="button"
             className="knapp knapp--standard knapp--mini"
-            onClick={() => fjernValg()}
+            onClick={fjernValg}
             data-testid={`${dataTestId}_fjern-knapp`}
         >
             {knappeTekst}

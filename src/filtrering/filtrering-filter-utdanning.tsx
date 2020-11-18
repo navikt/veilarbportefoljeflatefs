@@ -259,7 +259,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         <AktivitetFilterform
                             valg={aktiviteter}
                             filtervalg={filtervalg}
-                            onSubmit={endreFiltervalg}
+                            endreFilterValg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}

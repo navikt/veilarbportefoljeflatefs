@@ -3,6 +3,15 @@ import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering
 import './aktivitet-filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
 import FjernValgKnapp from '../fjern-valg-knapp';
+import {Dictionary} from '../../utils/types/types';
+import {FiltervalgModell} from '../../model-interfaces';
+
+interface AktivitetFilterformProps {
+    valg: Dictionary<string>;
+    filtervalg: FiltervalgModell;
+    endreFilterValg: (form: string, filterVerdi: any) => void;
+    closeDropdown: () => void;
+}
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
     BEHANDLING: AktiviteterValg.NA,
@@ -16,7 +25,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
     UTDANNINGAKTIVITET: AktiviteterValg.NA
 };
 
-function AktivitetFilterform(props) {
+function AktivitetFilterform(props: AktivitetFilterformProps) {
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -77,7 +86,7 @@ function AktivitetFilterform(props) {
 
     const fjernAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        return props.onSubmit('aktiviteter', aktivitetInitialState);
+        props.endreFilterValg('aktiviteter', aktivitetInitialState);
     };
 
     return (
@@ -85,7 +94,7 @@ function AktivitetFilterform(props) {
             className="skjema aktivitetfilterform"
             onSubmit={() => {
                 if (harValg) {
-                    props.onSubmit('aktiviteter', valgteAktiviteter);
+                    props.endreFilterValg('aktiviteter', valgteAktiviteter);
                 }
                 props.closeDropdown();
             }}
@@ -99,8 +108,8 @@ function AktivitetFilterform(props) {
                 <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
                 <FjernValgKnapp
                     dataTestId="filter_aktivitet"
-                    fjernValg={() => fjernAktiviteter()}
-                    knappeTekst='Fjern aktiviteter'
+                    fjernValg={fjernAktiviteter}
+                    knappeTekst="Fjern aktiviteter"
                 />
             </div>
         </form>
