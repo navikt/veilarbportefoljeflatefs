@@ -9,10 +9,9 @@ describe('Søk veileder med navn', () => {
     it('Gå til enhetens oversikt', () => {
         cy.gaTilOversikt('enhetens-oversikt');
     });
-    it('Gå til Status tab', () => {
-        cy.klikkTab('STATUS');
-    });
     it('Filtrer på ufordelte brukere', () => {
+        cy.get('.spinner').should('not.be.visible');
+        cy.getByTestId('sidebar_content-container').contains('Status').should('be.visible');
         cy.checkbox('filter_checkboks-container_ufordeltebruker');
     });
     it('Sjekk at etiketten for ufordelte brukere er der', () => {
