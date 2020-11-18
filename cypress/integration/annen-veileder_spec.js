@@ -22,7 +22,7 @@ describe('Gå inn til annen veileders oversikt via tabellen', () => {
     it('Det skal vises en infotekst', () => {
         cy.getByTestId('annen-veileder_infotekst')
             .should('be.visible')
-            .should('contain', 'Du er inne på Herman Thoresen sin oversikt');
+            .and('contain', 'Du er inne på Herman Thoresen sin oversikt');
     });
 });
 
@@ -38,7 +38,7 @@ describe('Søk veileder i veilederoversikt', () => {
         cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
         cy.getByTestId('veilederoversikt_alertstripe_info')
             .should('contain', 'Ingen veiledere funnet')
-            .should('be.visible');
+            .and('be.visible');
         cy.getByTestId('veilederoversikt_sok-veileder-input')
             .click()
             .clear()

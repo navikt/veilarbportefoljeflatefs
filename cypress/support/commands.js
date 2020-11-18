@@ -49,43 +49,39 @@ Cypress.Commands.add('gaTilOversikt', side => {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
             cy.getByTestId(side).click({force: true});
         }
+        cy.get('.spinner').should('be.visible');
         cy.url().should('include', '/veilarbportefoljeflatefs/portefolje');
     } else if (side === 'enhetens-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
             cy.getByTestId(side).click({force: true});
         }
+        cy.get('.spinner').should('be.visible');
         cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
     } else if (side === 'veileder-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
             cy.getByTestId(side).click({force: true});
         }
+        cy.get('.spinner').should('be.visible');
         cy.url().should('include', '/veilarbportefoljeflatefs/veiledere');
     }
+    cy.get('.spinner').should('not.be.visible');
 });
 
 Cypress.Commands.add('klikkTab', tab => {
-    cy.get('.spinner').should('not.be.visible');
-    if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Veiledergrupper')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+    const overskrift = () => {
+        if (tab === 'VEILEDERGRUPPER') {
+            return 'Veiledergrupper';
+        } else if (tab === 'MINE_FILTER') {
+            return 'Mine filter';
+        } else if (tab === 'STATUS') {
+            return 'Status';
+        } else if (tab === 'FILTER') {
+            return 'Filter';
         }
-        cy.getByTestId('sidebar_content-container').contains('Veiledergrupper');
-    } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Mine filter')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
-        }
-        cy.getByTestId('sidebar_content-container').contains('Mine filter');
-    } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Status')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
-        }
-        cy.getByTestId('sidebar_content-container').contains('Status');
-    } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Filter')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
-        }
-        cy.getByTestId('sidebar_content-container').contains('Filter');
-    }
+    };
+
+    cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+    cy.getByTestId('sidebar_content-container').contains(overskrift());
 });
 
 Cypress.Commands.add('checkbox', testid => {

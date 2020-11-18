@@ -1,8 +1,10 @@
+// before('Start server', () => {
+//        cy.configure();
+// });
+
 describe('Lag én ny arbeidsliste og sjekk validering', () => {
-    it('Start server', () => {
-        cy.configure();
-    });
     it('Gå til min oversikt', () => {
+        cy.configure();
         cy.gaTilOversikt('min-oversikt');
     });
     it('Velg bruker uten arbeidsliste', () => {
@@ -46,7 +48,7 @@ describe('Lag én ny arbeidsliste og sjekk validering', () => {
             .click();
         cy.getByTestId('modal_arbeidsliste_form')
             .should('not.contain', 'Du må fylle ut en kommentar')
-            .should('not.be.visible');
+            .and('not.be.visible');
     });
     it('Brukeren skal nå ha gult arbeidslisteikon', () => {
         cy.get('.legg-i-arbeidsliste').should('not.be.visible');
