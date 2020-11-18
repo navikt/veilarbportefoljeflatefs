@@ -119,9 +119,6 @@ describe('Sjekk at alders-input fungerer', () => {
 });
 
 describe('Sjekk at "utdanningen godkjent og bestått" fungerer', () => {
-    it('Gå til filter-tab', () => {
-        cy.klikkTab('FILTER');
-    });
     it('Klikk "Er utdanningen godkjent og bestått"-dropdown', () => {
         cy.getByTestId('dropdown-knapp_er-utdanningen-godkjent-og-bestatt').click();
     });

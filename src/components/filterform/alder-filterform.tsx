@@ -25,6 +25,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const [feilTekst, setFeilTekst] = useState<string>('');
 
     const harValg = Object.keys(valg).length > 0;
+    const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
 
     useEffect(() => {
         const alderValg = filtervalg[form];
@@ -60,7 +61,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         }
     };
 
-    const onSubmitInput = () => {
+    const onSubmitCustomInput = () => {
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
 
@@ -80,26 +81,31 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
+            closeDropdown();
         }
     };
 
     const submitForm = e => {
         e.preventDefault();
+
         if (checkBoxValg.length > 0) {
             endreFiltervalg(form, checkBoxValg);
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: true,
                 sideNavn: finnSideNavn()
             });
+            closeDropdown();
         }
         if (inputAlderFra.length > 0 || inputAlderTil.length > 0) {
-            onSubmitInput();
+            onSubmitCustomInput();
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: false,
                 sideNavn: finnSideNavn()
             });
         }
-        closeDropdown();
+        if (!kanVelgeFilter) {
+            closeDropdown();
+        }
     };
 
     const fjernTegn = e => {
@@ -172,10 +178,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                 </>
             )}
             <div className="checkbox-filterform__under-valg">
-                <VelgLukkKnapp
-                    harValg={checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0}
-                    dataTestId="checkbox-filterform"
-                />
+                <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
             </div>
         </form>
     );
