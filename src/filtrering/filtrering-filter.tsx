@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Element, Normaltekst} from 'nav-frontend-typografi';
-import CheckboxFilterform from '../components/checkbox-filterform/checkbox-filterform';
-import AktivitetFilterform from '../components/aktivitet-filterform/aktivitet-filterform';
+import CheckboxFilterform from '../components/filterform/checkbox-filterform';
+import AktivitetFilterform from '../components/filterform/aktivitet-filterform';
 import {
     aktiviteter,
     alder,
@@ -18,17 +18,17 @@ import {
     ytelse
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
-import {RadioFilterform} from '../components/radio-filterform/radio-filterform';
+import {RadioFilterform} from '../components/filterform/radio-filterform';
 import Dropdown from '../components/dropdown/dropdown';
-import '../components/checkbox-filterform/checkbox-filterform.less';
-import FodselsdatoFilterform from '../components/checkbox-filterform/fodselsdato-filterform';
+import '../components/filterform/checkbox-filterform.less';
+import FodselsdatoFilterform from '../components/filterform/fodselsdato-filterform';
 import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALDER_FILTER, GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import AlderFilterform from '../components/alder-filterform/alder-filterform';
+import AlderFilterform from '../components/filterform/alder-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
