@@ -74,9 +74,9 @@ function DoubleCheckboxFilterform({
                     <div
                         className={'checkbox-filterform-col1'}
                         role="group"
-                        aria-labelledby="double-checkbox-filterform-col1"
+                        aria-labelledby="double-filterform-label-col1"
                     >
-                        <Element id="double-checkbox-filterform-col1" className={'double-form-title'}>
+                        <Element id="double-filterform-label-col1" className={'double-form-title'}>
                             {'Er utdanningen godkjent i Norge?'}
                         </Element>
                         <RenderFields
@@ -90,9 +90,9 @@ function DoubleCheckboxFilterform({
                     <div
                         className={'checkbox-filterform-col2'}
                         role="group"
-                        aria-labelledby="double-checkbox-filterform-col2"
+                        aria-labelledby="double-filterform-label-col2"
                     >
-                        <Element id="double-checkbox-filterform-col2" className={'double-form-title'}>
+                        <Element id="double-filterform-label-col2" className={'double-form-title'}>
                             {'Er utdanningen bestått?'}
                         </Element>
                         <RenderFields
