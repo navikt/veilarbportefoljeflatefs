@@ -72,9 +72,14 @@ function DoubleCheckboxFilterform({
         >
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
-                    <div className="checkbox-filterform-col1" role="group"
-                         aria-labelledby="double-filterform-label-col1">
-                        <Element id="double-filterform-label-col1" className="double-form-title">{'Er utdanningen godkjent i Norge?'}</Element>
+                    <div
+                        className="checkbox-filterform-col1"
+                        role="group"
+                        aria-labelledby="double-filterform-label-col1"
+                    >
+                        <Element id="double-filterform-label-col1" className="double-form-title">
+                            {'Er utdanningen godkjent i Norge?'}
+                        </Element>
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
@@ -82,9 +87,14 @@ function DoubleCheckboxFilterform({
                             checkBoxValg={checkBoxValgCol1}
                         />
                     </div>
-                    <div className="checkbox-filterform-col2" role="group"
-                         aria-labelledby="double-filterform-label-col2">
-                        <Element id="double-filterform-label-col2" className="double-form-title">{'Er utdanningen bestått?'}</Element>
+                    <div
+                        className="checkbox-filterform-col2"
+                        role="group"
+                        aria-labelledby="double-filterform-label-col2"
+                    >
+                        <Element id="double-filterform-label-col2" className="double-form-title">
+                            {'Er utdanningen bestått?'}
+                        </Element>
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}
