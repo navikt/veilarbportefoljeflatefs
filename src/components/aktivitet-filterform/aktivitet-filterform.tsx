@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './aktivitet-filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import FjernValgKnapp from '../fjern-valg-knapp';
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
     BEHANDLING: AktiviteterValg.NA,
@@ -96,14 +97,11 @@ function AktivitetFilterform(props) {
             <div className="aktivitetfilterform__valg">{fields}</div>
             <div className="aktivitetfilter_knapper blokk-xxs">
                 <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
-                <button
-                    type="button"
-                    className="knapp knapp--standard knapp--mini"
-                    onClick={() => fjernAktiviteter()}
-                    data-testid="filter_aktivitet_fjern-knapp"
-                >
-                    Fjern aktiviteter
-                </button>
+                <FjernValgKnapp
+                    dataTestId="filter_aktivitet"
+                    fjernValg={() => fjernAktiviteter()}
+                    knappeTekst='Fjern aktiviteter'
+                />
             </div>
         </form>
     );
