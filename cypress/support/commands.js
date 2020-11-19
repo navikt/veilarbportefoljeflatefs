@@ -64,31 +64,27 @@ Cypress.Commands.add('gaTilOversikt', side => {
 });
 
 Cypress.Commands.add('klikkTab', tab => {
-    const Status = 'Status';
-    const Filter = 'Filter';
-    const MineFilter = 'Mine filter';
-    const Veiledergrupper = 'Veiledergrupper';
-
+    cy.get('.spinner').should('not.be.visible');
     if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', Veiledergrupper)) {
+        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Veiledergrupper')) {
             cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
-        cy.getByTestId('sidebar_content-container').contains(Veiledergrupper);
+        cy.getByTestId('sidebar_content-container').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', MineFilter)) {
+        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Mine filter')) {
             cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
-        cy.getByTestId('sidebar_content-container').contains(MineFilter);
+        cy.getByTestId('sidebar_content-container').contains('Mine filter');
     } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', Status)) {
+        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Status')) {
             cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
-        cy.getByTestId('sidebar_content-container').contains(Status);
+        cy.getByTestId('sidebar_content-container').contains('Status');
     } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', Filter)) {
+        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Filter')) {
             cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
         }
-        cy.getByTestId('sidebar_content-container').contains(Filter);
+        cy.getByTestId('sidebar_content-container').contains('Filter');
     }
 });
 

@@ -17,8 +17,8 @@ describe('Slett alle filtre', () => {
         cy.klikkTab('FILTER');
     });
     it('Velg to aktivitetsfiltre', () => {
-        cy.getByTestId('dropdown-knapp_Tiltakstype').should('be.disabled');
-        cy.getByTestId('dropdown-knapp_Aktivitet').click();
+        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.disabled');
+        cy.getByTestId('dropdown-knapp_aktivitet').click();
         cy.getByTestId('filter_aktivitet-STILLING-ja').check({force: true});
         cy.getByTestId('filter_aktivitet-TILTAK-ja').check({force: true});
         cy.getByTestId('filter_aktivitet_velg-knapp').click();
@@ -28,7 +28,7 @@ describe('Slett alle filtre', () => {
         cy.getByTestId('filtreringlabel').should('have.length', 5);
     });
     it('Velg to tiltakstyper', () => {
-        cy.getByTestId('dropdown-knapp_Tiltakstype')
+        cy.getByTestId('dropdown-knapp_tiltakstype')
             .should('be.enabled')
             .click();
 

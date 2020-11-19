@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
+import {kebabCase} from '../../utils/utils';
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
     classNames('dropdown', props.className, {
@@ -81,6 +82,7 @@ function Dropdown(props: DropdownProps) {
         </div>
     );
 
+    const nameString = name ? name.toString() : '';
     return (
         <div
             className={btnCls(props, apen, hover)}
@@ -95,9 +97,9 @@ function Dropdown(props: DropdownProps) {
                     className="dropdown__btn"
                     onClick={toggleDropdown}
                     aria-expanded={apen}
-                    aria-controls={`${name}-dropdown__innhold`}
+                    aria-controls={`${kebabCase(nameString)}-dropdown__innhold`}
                     disabled={disabled}
-                    data-testid={`dropdown-knapp_${name}`}
+                    data-testid={`dropdown-knapp_${kebabCase(nameString)}`}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

@@ -22,6 +22,26 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '16. november 2020',
+        tittel: 'Filtrer på svarene fra registreringen om utdanning',
+        featureToggleName: 'veilarbportefolje.utdanning_filter',
+        versjonId: '16.11.20',
+        children: (
+            <>
+                <p>
+                    Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan
+                    hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
+                    utdanning.
+                </p>
+                <p>Filtrene ligger i fanen lengst til høyre under "Svar fra registrering".</p>
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx"
+                    linkTekst="Nyhetssak på Navet"
+                />
+            </>
+        )
+    },
+    {
         dato: '4. november 2020',
         tittel: 'Filteret “Permittert etter 09.03.2020” er fjernet',
         versjonId: '04.11.20',

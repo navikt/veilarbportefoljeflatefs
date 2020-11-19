@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
@@ -6,12 +7,11 @@ import FilterKonstanter, {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {slettEnkeltFilter, clearFiltervalg, AktiviteterValg, endreFiltervalg} from '../ducks/filtrering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
-import {useEffect} from 'react';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 
 interface FiltreringLabelContainerProps {
@@ -65,13 +65,53 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'fodselsdagIMnd') {
+            if (key === 'utdanningBestatt') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`utdanningBestatt-${singleValue}`}
+                            label={`Utdanning bestått: ${FilterKonstanter[key][singleValue]}`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'utdanningGodkjent') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`utdanningGodkjent-${singleValue}`}
+                            label={`Utdanning godkjent: ${FilterKonstanter[key][singleValue]}`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'utdanning') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`utdanning-${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'fodselsdagIMnd') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
                             key={`fodselsdagIMnd-${singleValue}`}
                             label={`Fødselsdato: ${singleValue}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'alder') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue.key || singleValue}`}
+                            label={FilterKonstanter[key][singleValue] || singleValue + ' år'}
+                            slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         />
                     );
                 });

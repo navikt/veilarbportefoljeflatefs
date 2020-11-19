@@ -5,12 +5,13 @@ import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
 import classNames from 'classnames';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown?: () => void;
+    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
     className?: string;
@@ -28,7 +29,6 @@ function CheckboxFilterform({
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
-
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
     useEffect(() => {
@@ -47,10 +47,10 @@ function CheckboxFilterform({
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
-                endreFilterValg(form, checkBoxValg);
-                if (closeDropdown) {
-                    closeDropdown();
+                if (checkBoxValg.length > 0) {
+                    endreFilterValg(form, checkBoxValg);
                 }
+                closeDropdown();
             }}
         >
             {harValg && (
@@ -61,35 +61,7 @@ function CheckboxFilterform({
                 </div>
             )}
             <div className="checkbox-filterform__under-valg">
-                {closeDropdown ? (
-                    checkBoxValg.length > 0 ? (
-                        <button
-                            className="knapp knapp--mini knapp--hoved"
-                            type="submit"
-                            data-testid="checkbox-filterform_velg-knapp"
-                        >
-                            Velg
-                        </button>
-                    ) : (
-                        <button
-                            className="knapp knapp--mini"
-                            type="button"
-                            onClick={closeDropdown}
-                            data-testid="checkbox-filterform_lukk-knapp"
-                        >
-                            Lukk
-                        </button>
-                    )
-                ) : (
-                    <button
-                        className="knapp knapp--mini knapp--hoved"
-                        type="submit"
-                        data-testid="checkbox-filterform_velg-knapp"
-                    >
-                        Velg
-                    </button>
-                )}
-
+                <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}

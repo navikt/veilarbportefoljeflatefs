@@ -63,7 +63,10 @@ export const initialState: FiltervalgModell = {
     veilederNavnQuery: '',
     registreringstype: [],
     arbeidslisteKategori: [],
-    cvJobbprofil: null
+    cvJobbprofil: null,
+    utdanning: [],
+    utdanningGodkjent: [],
+    utdanningBestatt: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

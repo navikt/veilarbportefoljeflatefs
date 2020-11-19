@@ -31,3 +31,4 @@ npm-debug.log
 .nyc_output/
 
 /cypress/videos
+/cypress/screenshots
