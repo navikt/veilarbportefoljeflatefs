@@ -3,6 +3,7 @@ import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './checkbox-filterform.less';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -10,17 +11,9 @@ interface CheckboxFilterformProps {
     endreFilterValg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
 }
 
-function FodselsdatoFilterform({
-    endreFilterValg,
-    valg,
-    closeDropdown,
-    form,
-    filtervalg,
-    columns = 1
-}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -37,7 +30,9 @@ function FodselsdatoFilterform({
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
-                endreFilterValg(form, checkBoxValg);
+                if (checkBoxValg.length > 0) {
+                    endreFilterValg(form, checkBoxValg);
+                }
                 closeDropdown();
             }}
         >
@@ -47,15 +42,7 @@ function FodselsdatoFilterform({
                 </div>
             )}
             <div className="checkbox-filterform__under-valg">
-                {checkBoxValg.length > 0 ? (
-                    <button className="knapp knapp--mini knapp--hoved" type="submit">
-                        Velg
-                    </button>
-                ) : (
-                    <button className="knapp knapp--mini" type="button" onClick={closeDropdown}>
-                        Lukk
-                    </button>
-                )}
+                <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         Ingen veiledere funnet

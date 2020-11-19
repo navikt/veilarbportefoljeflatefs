@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {Radio} from 'nav-frontend-skjema';
 import './radio-filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
+import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -19,15 +20,18 @@ interface RadioFilterformProps {
 export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
 
-    const createHandleOnSubmit = () => {
-        if (valgtFilterValg) {
-            endreFiltervalg(filterId, valgtFilterValg);
-        }
-        closeDropdown();
-    };
     let reactKey = 1;
     return (
-        <form className="skjema radio-filterform" onSubmit={createHandleOnSubmit}>
+        <form
+            className="skjema radio-filterform"
+            onSubmit={e => {
+                e.preventDefault();
+                if (valgtFilterValg) {
+                    endreFiltervalg(filterId, valgtFilterValg);
+                }
+                closeDropdown();
+            }}
+        >
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
@@ -42,14 +46,7 @@ export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg,
                 ))}
             </div>
             <div className={classNames('radio-filterform__under-valg')}>
-                <button
-                    onClick={createHandleOnSubmit}
-                    className={classNames('knapp', 'knapp--mini', {
-                        'knapp--hoved': valgtFilterValg
-                    })}
-                >
-                    {valgtFilterValg ? 'Velg' : 'Lukk'}
-                </button>
+                <VelgLukkKnapp harValg={valgtFilterValg !== null} dataTestId="radio-filterform" />
             </div>
         </form>
     );
