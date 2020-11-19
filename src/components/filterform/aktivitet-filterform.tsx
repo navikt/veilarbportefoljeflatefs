@@ -9,7 +9,7 @@ import {FiltervalgModell} from '../../model-interfaces';
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFilterValg: (form: string, filterVerdi: any) => void;
+    endreFiltervalg: (form: string, filterVerdi: any) => void;
     closeDropdown: () => void;
 }
 
@@ -86,7 +86,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
 
     const fjernAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        props.endreFilterValg('aktiviteter', aktivitetInitialState);
+        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
     };
 
     return (
@@ -94,7 +94,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
             className="skjema aktivitetfilterform"
             onSubmit={() => {
                 if (harValg) {
-                    props.endreFilterValg('aktiviteter', valgteAktiviteter);
+                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
                 }
                 props.closeDropdown();
             }}

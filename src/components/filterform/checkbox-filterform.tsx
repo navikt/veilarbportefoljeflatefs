@@ -10,7 +10,7 @@ import VelgLukkKnapp from '../velg-lukk-knapp';
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
@@ -19,7 +19,7 @@ interface CheckboxFilterformProps {
 }
 
 function CheckboxFilterform({
-    endreFilterValg,
+    endreFiltervalg,
     valg,
     closeDropdown,
     form,
@@ -48,7 +48,7 @@ function CheckboxFilterform({
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    endreFilterValg(form, checkBoxValg);
+                    endreFiltervalg(form, checkBoxValg);
                 }
                 closeDropdown();
             }}
