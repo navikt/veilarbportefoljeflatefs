@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
-import './aktivitet-filterform.less';
+import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
-import FjernValgKnapp from '../fjern-valg-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFilterValg: (form: string, filterVerdi: any) => void;
+    endreFiltervalg: (form: string, filterVerdi: any) => void;
     closeDropdown: () => void;
 }
 
@@ -84,9 +84,9 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
         valgteAktiviteter.TILTAK !== 'NA' ||
         valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
-    const fjernAktiviteter = () => {
+    const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        props.endreFilterValg('aktiviteter', aktivitetInitialState);
+        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
     };
 
     return (
@@ -94,7 +94,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
             className="skjema aktivitetfilterform"
             onSubmit={() => {
                 if (harValg) {
-                    props.endreFilterValg('aktiviteter', valgteAktiviteter);
+                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
                 }
                 props.closeDropdown();
             }}
@@ -104,16 +104,11 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="aktivitetfilter_knapper blokk-xxs">
+            <div className="filterform__under-valg aktivitetfilter_knapper">
                 <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
-                <FjernValgKnapp
-                    dataTestId="filter_aktivitet"
-                    fjernValg={fjernAktiviteter}
-                    knappeTekst="Fjern aktiviteter"
-                />
+                <NullstillValgKnapp dataTestId="filter_aktivitet" nullstillValg={nullstillAktiviteter} />
             </div>
         </form>
     );
 }
-
 export default AktivitetFilterform;

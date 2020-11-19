@@ -3,14 +3,15 @@ import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './checkbox-filterform.less';
+import './filterform.less';
 import classNames from 'classnames';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
@@ -19,7 +20,7 @@ interface CheckboxFilterformProps {
 }
 
 function CheckboxFilterform({
-    endreFilterValg,
+    endreFiltervalg,
     valg,
     closeDropdown,
     form,
@@ -42,13 +43,18 @@ function CheckboxFilterform({
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
+    const nullstillValg = () => {
+        setCheckBoxValg([]);
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    endreFilterValg(form, checkBoxValg);
+                    endreFiltervalg(form, checkBoxValg);
                 }
                 closeDropdown();
             }}
@@ -60,8 +66,9 @@ function CheckboxFilterform({
                     </Grid>
                 </div>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div className="filterform__under-valg">
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
+                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}

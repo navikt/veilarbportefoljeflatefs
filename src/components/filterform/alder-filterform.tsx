@@ -3,10 +3,11 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {Dictionary} from '../../utils/types/types';
 import Grid from '../grid/grid';
 import classNames from 'classnames';
-import './alder-filterform.less';
+import './filterform.less';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 
 interface AlderFilterformProps {
     form: string;
@@ -112,6 +113,13 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         (e.key === 'e' || e.key === '.' || e.key === ',' || e.key === '-' || e.key === '+') && e.preventDefault();
     };
 
+    const nullstillValg = () => {
+        setInputAlderFra('');
+        setInputAlderTil('');
+        setCheckBoxValg([]);
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
@@ -177,8 +185,9 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div className="filterform__under-valg">
                 <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
+                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
             </div>
         </form>
     );

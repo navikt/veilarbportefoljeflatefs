@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './checkbox-filterform.less';
+import './filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filtrering/filter-konstanter';
 import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface DoubleCheckboxFilterformProps {
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
@@ -27,7 +27,7 @@ const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
 const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
 
 function DoubleCheckboxFilterform({
-    endreFilterValg,
+    endreFiltervalg,
     closeDropdown,
     filtervalg,
     className,
@@ -58,14 +58,19 @@ function DoubleCheckboxFilterform({
         return;
     };
 
+    const nullstillValg = () => {
+        setCheckBoxValg([])
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
-                    endreFilterValg(formCol1, checkBoxValgCol1);
-                    endreFilterValg(formCol2, checkBoxValgCol2);
+                    endreFiltervalg(formCol1, checkBoxValgCol1);
+                    endreFiltervalg(formCol2, checkBoxValgCol2);
                 }
                 closeDropdown();
             }}
@@ -95,16 +100,34 @@ function DoubleCheckboxFilterform({
                         <Element id="double-filterform-label-col2" className="double-form-title">
                             {'Er utdanningen bestått?'}
                         </Element>
-                        <RenderFields
-                            valg={uniqueValgCol2}
-                            form={formCol2}
-                            velgCheckBox={e => velgCheckBox(e, formCol2)}
-                            checkBoxValg={checkBoxValgCol2}
-                        />
+                        {/*<RenderFields*/}
+                        {/*    valg={uniqueValgCol2}*/}
+                        {/*    form={formCol2}*/}
+                        {/*    velgCheckBox={e => velgCheckBox(e, formCol2)}*/}
+                        {/*    checkBoxValg={checkBoxValgCol2}*/}
+                        {/*/>*/}
+                        <>
+                        {Object.entries(uniqueValgCol2).map(([filterKey, filterValue]) => (
+                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                <input
+                                    id={filterKey}
+                                    type="checkbox"
+                                    className="skjemaelement__input checkboks"
+                                    value={filterKey}
+                                    checked={checkBoxValgCol2.includes(filterKey.replace(`${formCol2}_`, ''))}
+                                    onChange={e => velgCheckBox(e, formCol2)}
+                                    data-testid={`filter_${filterKey}`}
+                                />
+                                <label htmlFor={filterKey} className="skjemaelement__label">
+                                    {filterValue}
+                                </label>
+                            </div>
+                        ))}
+                    </>
                     </div>
                 </div>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div className="filterform__under-valg">
                 <VelgLukkKnapp
                     harValg={checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0}
                     dataTestId="double-checkbox-filterform"

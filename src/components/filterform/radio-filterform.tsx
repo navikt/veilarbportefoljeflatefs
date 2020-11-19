@@ -1,24 +1,30 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import {Radio} from 'nav-frontend-skjema';
-import './radio-filterform.less';
+import './filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
 }
 
 interface RadioFilterformProps {
-    filterId: string;
+    form: string;
     endreFiltervalg: (form: string, filterVerdi: string) => void;
     closeDropdown: () => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
 }
 
-export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
-    const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[filterId]);
+export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
+    const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
+
+    const nullstillValg = () => {
+        setValgteFilterValg('');
+        endreFiltervalg(form, '');
+    };
 
     let reactKey = 1;
     return (
@@ -27,7 +33,7 @@ export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg,
             onSubmit={e => {
                 e.preventDefault();
                 if (valgtFilterValg) {
-                    endreFiltervalg(filterId, valgtFilterValg);
+                    endreFiltervalg(form, valgtFilterValg);
                 }
                 closeDropdown();
             }}
@@ -45,8 +51,9 @@ export function RadioFilterform({filterId, endreFiltervalg, closeDropdown, valg,
                     />
                 ))}
             </div>
-            <div className={classNames('radio-filterform__under-valg')}>
+            <div className="filterform__under-valg">
                 <VelgLukkKnapp harValg={valgtFilterValg !== null} dataTestId="radio-filterform" />
+                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
             </div>
         </form>
     );

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Element, Normaltekst} from 'nav-frontend-typografi';
 import CheckboxFilterform from '../components/filterform/checkbox-filterform';
-import AktivitetFilterform from '../components/filterform/aktivitet-filterform';
 import {
     aktiviteter,
     alder,
@@ -18,9 +17,8 @@ import {
     ytelse
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
-import {RadioFilterform} from '../components/filterform/radio-filterform';
 import Dropdown from '../components/dropdown/dropdown';
-import '../components/filterform/checkbox-filterform.less';
+import '../components/filterform/filterform.less';
 import FodselsdatoFilterform from '../components/filterform/fodselsdato-filterform';
 import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
@@ -29,6 +27,8 @@ import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import AlderFilterform from '../components/filterform/alder-filterform';
+import {RadioFilterform} from '../components/filterform/radio-filterform';
+import AktivitetFilterform from '../components/filterform/aktivitet-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -67,7 +67,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                 form="alder"
                                 valg={alder}
                                 filtervalg={filtervalg}
-                                endreFilterValg={endreFiltervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 columns={2}
                             />
@@ -81,7 +81,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="fodselsdagIMnd"
                             valg={fodselsdagIMnd()}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -94,7 +94,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            filterId="kjonn"
+                            form="kjonn"
                         />
                     )}
                 />
@@ -111,7 +111,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            filterId="cvJobbprofil"
+                            form="cvJobbprofil"
                         />
                     )}
                 />
@@ -129,7 +129,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                 form="registreringstype"
                                 valg={registreringstype}
                                 filtervalg={filtervalg}
-                                endreFilterValg={endreFiltervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 className="registreringstype"
                             />
@@ -143,7 +143,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="innsatsgruppe"
                             valg={innsatsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -156,7 +156,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="hovedmal"
                             valg={hovedmal}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -168,7 +168,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="formidlingsgruppe"
                             valg={formidlingsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -180,7 +180,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="servicegruppe"
                             valg={servicegruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -192,7 +192,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="manuellBrukerStatus"
                             valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -209,7 +209,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="rettighetsgruppe"
                             valg={rettighetsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -222,7 +222,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            filterId="ytelse"
+                            form="ytelse"
                         />
                     )}
                 />
@@ -239,7 +239,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         <AktivitetFilterform
                             valg={aktiviteter}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -252,7 +252,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             form="tiltakstyper"
                             valg={enhettiltak}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"

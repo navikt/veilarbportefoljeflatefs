@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './checkbox-filterform.less';
+import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -25,13 +26,18 @@ function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filt
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
+    const nullstillValg = () => {
+        setCheckBoxValg([])
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    endreFilterValg(form, checkBoxValg);
+                    endreFiltervalg(form, checkBoxValg);
                 }
                 closeDropdown();
             }}
@@ -41,8 +47,9 @@ function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filt
                     <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
                 </div>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div className="filterform__under-valg">
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
+                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         Ingen veiledere funnet
