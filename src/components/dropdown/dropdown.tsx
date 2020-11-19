@@ -82,6 +82,7 @@ function Dropdown(props: DropdownProps) {
         </div>
     );
 
+    const nameString = name ? name.toString() : '';
     return (
         <div
             className={btnCls(props, apen, hover)}
@@ -96,9 +97,9 @@ function Dropdown(props: DropdownProps) {
                     className="dropdown__btn"
                     onClick={toggleDropdown}
                     aria-expanded={apen}
-                    aria-controls={`${kebabCase(name && name.toString())}-dropdown__innhold`}
+                    aria-controls={`${kebabCase(nameString)}-dropdown__innhold`}
                     disabled={disabled}
-                    data-testid={`dropdown-knapp_${kebabCase(name && name.toString())}`}
+                    data-testid={`dropdown-knapp_${kebabCase(nameString)}`}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>
