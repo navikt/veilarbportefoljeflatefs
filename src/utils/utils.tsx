@@ -109,7 +109,7 @@ export const keyCodes = {
 export function kebabCase(label: string) {
     return label
         .toLowerCase()
-        .split('e')
+        .split('æ')
         .join('ae')
         .split('ø')
         .join('o')
