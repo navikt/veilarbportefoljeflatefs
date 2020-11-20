@@ -72,16 +72,16 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         if (inputFraNummer > inputTilNummer) {
             setFeil(true);
             setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
-        } else if (inputFraNummer >= 70 && inputAlderTil.length === 0) {
+        } else if (inputFraNummer >= 100 && inputAlderTil.length === 0) {
             setFeil(true);
-            setFeilTekst('Du må skrive et tall lavere enn 70 i fra-feltet hvis til-feltet står tomt.');
+            setFeilTekst('Du må skrive et tall lavere enn 100 i fra-feltet hvis til-feltet står tomt.');
         } else {
             setFeil(false);
             setFeilTekst('');
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [0 + '-' + inputAlderTil]);
             } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                endreFiltervalg(form, [inputAlderFra + '-' + 70]);
+                endreFiltervalg(form, [inputAlderFra + '-' + 100]);
             } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
                 endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
