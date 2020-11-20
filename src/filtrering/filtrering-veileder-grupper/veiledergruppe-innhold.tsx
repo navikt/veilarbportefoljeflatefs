@@ -10,14 +10,14 @@ import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import '../../components/sidebar/sidebar.less';
 import './veiledergruppe.less';
-import './../../components/filterform/filterform.less'
+import './../../components/filterform/filterform.less';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
-import {hentMineFilterForVeileder} from "../../ducks/mine-filter";
+import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -78,9 +78,9 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
     const sletteKnapp = () => {
         valgtGruppe &&
             enhet &&
-            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() =>{
-                    dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt));
-                    dispatch(hentMineFilterForVeileder());
+            dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
+                dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt));
+                dispatch(hentMineFilterForVeileder());
             });
     };
 
