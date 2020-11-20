@@ -1,6 +1,6 @@
 const fraAlder = '2';
 const tilAlder = '34';
-const hoyAlder = '88';
+const hoyAlder = '109';
 
 const klikkVelg = () => {
     it('Klikk velg', () => {
@@ -48,6 +48,7 @@ describe('Sjekk at alders-input fungerer', () => {
             .click()
             .clear()
             .type(tilAlder);
+        cy.getByTestId('filter_alder_valideringstekst').should('not.be.visible');
         cy.getByTestId('filter_alder_valideringstekst').should('not.be.visible');
     });
     klikkVelg();
