@@ -109,8 +109,11 @@ export const keyCodes = {
 export function kebabCase(label: string) {
     return label
         .toLowerCase()
-        .replaceAll('æ', 'ae')
-        .replaceAll('ø', 'o')
-        .replaceAll('å', 'a')
+        .split('e')
+        .join('ae')
+        .split('ø')
+        .join('o')
+        .split('å')
+        .join('a')
         .replace(/\s+/g, '-');
 }
