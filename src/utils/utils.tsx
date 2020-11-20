@@ -106,8 +106,8 @@ export const keyCodes = {
     esc: 27
 };
 
-export function kebabCase(label: string) {
-    return label
+export function kebabCase(str: string) {
+    return str
         .toLowerCase()
         .split('æ')
         .join('ae')

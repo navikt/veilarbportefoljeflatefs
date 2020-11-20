@@ -1,7 +1,39 @@
 @import '~nav-frontend-core/less/core';
 
+.checkbox-filterform {
+    &__valg {
+        max-height: 16rem;
+        overflow-x: auto;
+        padding: 0.5rem 0.5rem 0;
+
+        &__double {
+            display: grid;
+            max-height: 16rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.5rem 0;
+        }
+    }
+
+    .registreringstype {
+        max-height: none;
+    }
+
+    &__valg-knapp {
+        margin-top: 1rem;
+    }
+
+    &__under-valg {
+        padding: 0.5rem 0 0.5rem 0.5rem;
+    }
+
+    &__alertstripe {
+        padding: 0.5rem 0 1rem 0.5rem;
+        border: none;
+    }
+}
+
 .advarsel-modal .modal__overlay .ReactModal__Content {
-    width: 448px !important;
+    max-width: 448px !important;
 }
 
 .endringer-ikke-lagret-modal {

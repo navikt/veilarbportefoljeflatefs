@@ -44,7 +44,7 @@ function Listevisning(props: ListevisningProps) {
     return (
         <Dropdown
             name={<DropdownNavn />}
-            id='velg-kolonne'
+            id="velg-kolonner"
             disabled={muligeAlternativer.length <= 3}
             className="dropdown--toolbar toolbar__velg-kolonner"
             render={() => (

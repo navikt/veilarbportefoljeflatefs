@@ -2,7 +2,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import '../filterform/checkbox-filterform.less';
+import '../filterform/filterform.less';
 import '../../style.less';
 import SokFilterNy from './sok-filter-ny';
 import classNames from 'classnames';
@@ -36,7 +36,7 @@ function SokVeiledere(props: SokVeiledereProps) {
                             />
                         ))}
                     </div>
-                    <div className="blokk-xxs checkbox-filterform__under-valg">
+                    <div className="blokk-xxs filterform__under-valg">
                         <button
                             onClick={props.btnOnClick}
                             className={classNames('knapp', 'knapp--mini', {
