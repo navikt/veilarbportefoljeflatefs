@@ -50,6 +50,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 {erAlderFeatureTogglePa ? (
                     <Dropdown
                         name="Alder"
+                        id='alder'
                         render={lukkDropdown => (
                             <AlderFilterform
                                 form="alder"
@@ -63,12 +64,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 ) : (
                     <Dropdown
                         name="Alder"
+                        id='alder'
                         render={lukkDropdown => (
                             <CheckboxFilterform
                                 form="alder"
                                 valg={alder}
                                 filtervalg={filtervalg}
-                                endreFilterValg={endreFiltervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 columns={2}
                             />
@@ -77,6 +79,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 )}
                 <Dropdown
                     name="Fødselsdato"
+                    id='fodselsdato'
                     render={lukkDropdown => (
                         <FodselsdatoFilterform
                             form="fodselsdagIMnd"
@@ -89,6 +92,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Kjønn"
+                    id='kjonn'
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={kjonn}
@@ -106,12 +110,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown
                     name="Situasjon"
+                    id='situasjon'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="registreringstype"
                             valg={registreringstype}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             className="registreringstype"
                         />
@@ -119,23 +124,25 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Høyeste fullførte utdanning"
+                    id='hoyeste-fullforte-utdanning'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="utdanning"
                             valg={utdanning}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Er utdanningen godkjent og bestått"
+                    id='er-utdanningen-godkjent-og-bestatt'
                     render={lukkDropdown => (
                         <DoubleCheckboxFilterform
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />
@@ -146,6 +153,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown
                     name="CV og jobbprofil"
+                    id='cv-og-jobbprofil'
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={cvJobbprofil}
@@ -158,61 +166,66 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Innsatsgruppe"
+                    id='innsatsgruppe'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="innsatsgruppe"
                             valg={innsatsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Hovedmål"
+                    id='hovedmal'
                     hidden={erGjemHovedmalFeatureTogglePa}
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="hovedmal"
                             valg={hovedmal}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Formidlingsgruppe"
+                    id='formidlingsgruppe'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="formidlingsgruppe"
                             valg={formidlingsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Servicegruppe"
+                    id='servicegruppe'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="servicegruppe"
                             valg={servicegruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Manuell oppfølging"
+                    id='manuell-oppfolging'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="manuellBrukerStatus"
                             valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -224,18 +237,20 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown
                     name="Rettighetsgruppe"
+                    id='rettighetsgruppe'
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="rettighetsgruppe"
                             valg={rettighetsgruppe}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Ytelse"
+                    id='ytelse'
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={ytelse}
@@ -255,24 +270,26 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Aktivitet"
+                    id='aktivitet'
                     render={lukkDropdown => (
                         <AktivitetFilterform
                             valg={aktiviteter}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
                 />
                 <Dropdown
                     name="Tiltakstype"
+                    id='tiltakstype'
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="tiltakstyper"
                             valg={enhettiltak}
                             filtervalg={filtervalg}
-                            endreFilterValg={endreFiltervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"

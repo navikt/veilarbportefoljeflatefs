@@ -9,7 +9,7 @@ import {utdanningBestatt, utdanningGodkjent} from '../../filtrering/filter-konst
 import VelgLukkKnapp from '../velg-lukk-knapp';
 
 interface DoubleCheckboxFilterformProps {
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
@@ -27,7 +27,7 @@ const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
 const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
 
 function DoubleCheckboxFilterform({
-    endreFilterValg,
+    endreFiltervalg,
     closeDropdown,
     filtervalg,
     className,
@@ -64,8 +64,8 @@ function DoubleCheckboxFilterform({
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
-                    endreFilterValg(formCol1, checkBoxValgCol1);
-                    endreFilterValg(formCol2, checkBoxValgCol2);
+                    endreFiltervalg(formCol1, checkBoxValgCol1);
+                    endreFiltervalg(formCol2, checkBoxValgCol2);
                 }
                 closeDropdown();
             }}

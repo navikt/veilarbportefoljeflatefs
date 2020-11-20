@@ -19,7 +19,7 @@ describe('Velg andre kolonner', () => {
         cy.getByTestId('sorteringheader_oppfolging-startet').should('not.be.visible');
     });
     it('Klikk på Velg kolonner', () => {
-        cy.get('[data-testid="dropdown-knapp_[object-object]"]')
+        cy.getByTestId('dropdown-knapp_velg-kolonne')
             .contains('Velg kolonner')
             .should('not.be.disabled')
             .click();
