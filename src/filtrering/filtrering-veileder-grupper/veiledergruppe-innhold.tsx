@@ -10,6 +10,7 @@ import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import '../../components/sidebar/sidebar.less';
 import './veiledergruppe.less';
+import './../../components/filterform/filterform.less'
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {ListevisningType} from '../../ducks/ui/listevisning';

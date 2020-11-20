@@ -3,7 +3,6 @@ import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
-import {kebabCase} from '../../utils/utils';
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
     classNames('dropdown', props.className, {
@@ -18,6 +17,7 @@ interface DropdownProps {
     apen?: boolean;
     disabled?: boolean;
     name: React.ReactNode;
+    id: string;
     render: (lukkDropdown: () => void) => React.ReactChild;
     className?: string;
     onLukk?: () => void;
@@ -25,6 +25,7 @@ interface DropdownProps {
 }
 
 function Dropdown(props: DropdownProps) {
+    const {name, disabled, render, hoyre, hidden, id} = props;
     const [apen, setApen] = useState(props.apen || false);
     const [hover, setHover] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -66,8 +67,6 @@ function Dropdown(props: DropdownProps) {
         };
     }
 
-    const {name, disabled, render, hoyre, hidden} = props;
-
     if (hidden) {
         return null;
     }
@@ -96,9 +95,9 @@ function Dropdown(props: DropdownProps) {
                     className="dropdown__btn"
                     onClick={toggleDropdown}
                     aria-expanded={apen}
-                    aria-controls={`${kebabCase(name && name.toString())}-dropdown__innhold`}
+                    aria-controls={`${id}-dropdown__innhold`}
                     disabled={disabled}
-                    data-testid={`dropdown-knapp_${kebabCase(name && name.toString())}`}
+                    data-testid={`dropdown-knapp_${id}`}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

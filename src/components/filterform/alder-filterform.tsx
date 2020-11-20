@@ -8,6 +8,8 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface AlderFilterformProps {
     form: string;
@@ -24,6 +26,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
     const [feil, setFeil] = useState(false);
     const [feilTekst, setFeilTekst] = useState<string>('');
+    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
@@ -185,9 +188,15 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-            <div className="filterform__under-valg">
+            <div
+                className={
+                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
+                }
+            >
                 <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
-                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
+                {erNullstillFeatureTogglePa && (
+                    <NullstillValgKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} />
+                )}
             </div>
         </form>
     );

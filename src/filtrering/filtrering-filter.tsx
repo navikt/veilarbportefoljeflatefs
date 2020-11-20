@@ -49,6 +49,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 {erAlderFeatureTogglePa ? (
                     <Dropdown
                         name="Alder"
+                        id="alder"
                         render={lukkDropdown => (
                             <AlderFilterform
                                 form="alder"
@@ -62,6 +63,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 ) : (
                     <Dropdown
                         name="Alder"
+                        id="alder"
                         render={lukkDropdown => (
                             <CheckboxFilterform
                                 form="alder"
@@ -76,6 +78,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 )}
                 <Dropdown
                     name="Fødselsdato"
+                    id="fodselsdato"
                     render={lukkDropdown => (
                         <FodselsdatoFilterform
                             form="fodselsdagIMnd"
@@ -88,6 +91,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Kjønn"
+                    id="kjonn"
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={kjonn}
@@ -105,6 +109,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown
                     name="CV og jobbprofil"
+                    id="cv-og-jobbprofil"
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={cvJobbprofil}
@@ -117,6 +122,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Svar fra registrering"
+                    id="svar-fra-registrering"
                     render={lukkDropdown => (
                         <>
                             <div className="registreringsfilter__infocontainer">
@@ -138,6 +144,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Innsatsgruppe"
+                    id="innsatsgruppe"
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="innsatsgruppe"
@@ -150,6 +157,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Hovedmål"
+                    id="hovedmal"
                     hidden={erGjemHovedmalFeatureTogglePa}
                     render={lukkDropdown => (
                         <CheckboxFilterform
@@ -163,6 +171,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Formidlingsgruppe"
+                    id="formidlingsgruppe"
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="formidlingsgruppe"
@@ -175,6 +184,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Servicegruppe"
+                    id="servicegruppe"
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="servicegruppe"
@@ -187,6 +197,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Manuell oppfølging"
+                    id="manuell-oppfolging"
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="manuellBrukerStatus"
@@ -204,6 +215,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 </Element>
                 <Dropdown
                     name="Rettighetsgruppe"
+                    id="rettighetsgruppe"
                     render={lukkDropdown => (
                         <CheckboxFilterform
                             form="rettighetsgruppe"
@@ -216,6 +228,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Ytelse"
+                    id="ytelse"
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={ytelse}
@@ -235,6 +248,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Aktivitet"
+                    id="aktivitet"
                     render={lukkDropdown => (
                         <AktivitetFilterform
                             valg={aktiviteter}
@@ -246,6 +260,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
                 <Dropdown
                     name="Tiltakstype"
+                    id="tiltakstype"
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                     render={lukkDropdown => (
                         <CheckboxFilterform

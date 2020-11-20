@@ -5,6 +5,8 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -16,6 +18,7 @@ interface CheckboxFilterformProps {
 
 function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
+    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
@@ -27,7 +30,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
     };
 
     const nullstillValg = () => {
-        setCheckBoxValg([])
+        setCheckBoxValg([]);
         endreFiltervalg(form, []);
     };
 
@@ -47,9 +50,15 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
                     <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
                 </div>
             )}
-            <div className="filterform__under-valg">
+            <div
+                className={
+                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
+                }
+            >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
-                <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
+                {erNullstillFeatureTogglePa && (
+                    <NullstillValgKnapp dataTestId="fodselsdato-filterform" nullstillValg={nullstillValg} />
+                )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         Ingen veiledere funnet
@@ -72,8 +81,13 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
                         value={filterKey}
                         checked={props.checkBoxValg.includes(filterKey)}
                         onChange={props.velgCheckBox}
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}_input`}
                     />
-                    <label htmlFor={filterKey} className="fodselsdato__label">
+                    <label
+                        htmlFor={filterKey}
+                        className="fodselsdato__label"
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}`}
+                    >
                         {filterValue}
                     </label>
                 </div>

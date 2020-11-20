@@ -5,6 +5,8 @@ import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -29,6 +31,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
+    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     const handleRadioChange = (aktivitetKey, verdi) => {
         setValgteAktiviteter(prevState => ({
@@ -50,7 +53,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'JA')}
                     key={`Ja, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-ja`}
+                    data-testid={`aktivitet-filterform-${kode}-ja`}
                 />
                 <label htmlFor={`aktivitet-${kode}-ja`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Ja, {verdi}</span>
@@ -64,7 +67,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'NEI')}
                     key={`NEJ, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-nei`}
+                    data-testid={`aktivitet-filterform-${kode}-nei`}
                 />
                 <label htmlFor={`aktivitet-${kode}-nei`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Nei, {verdi}</span>
@@ -104,9 +107,17 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="filterform__under-valg aktivitetfilter_knapper">
-                <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
-                <NullstillValgKnapp dataTestId="filter_aktivitet" nullstillValg={nullstillAktiviteter} />
+            <div
+                className={
+                    erNullstillFeatureTogglePa
+                        ? 'filterform__under-valg__nullstill-feature  aktivitetfilter_knapper'
+                        : 'filterform__under-valg  aktivitetfilter_knapper'
+                }
+            >
+                <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
+                {erNullstillFeatureTogglePa && (
+                    <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
+                )}
             </div>
         </form>
     );
