@@ -31,7 +31,6 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     const handleRadioChange = (aktivitetKey, verdi) => {
         setValgteAktiviteter(prevState => ({
@@ -107,17 +106,9 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div
-                className={
-                    erNullstillFeatureTogglePa
-                        ? 'filterform__under-valg__nullstill-feature  aktivitetfilter_knapper'
-                        : 'filterform__under-valg  aktivitetfilter_knapper'
-                }
-            >
+            <div className="filterform__under-valg aktivitetfilter_knapper">
                 <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
-                )}
+                <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
             </div>
         </form>
     );
