@@ -22,10 +22,10 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '16. november 2020',
+        dato: '23. november 2020',
         tittel: 'Filtrer på svarene fra registreringen om utdanning',
         featureToggleName: 'veilarbportefolje.utdanning_filter',
-        versjonId: '16.11.20',
+        versjonId: '23.11.20',
         children: (
             <>
                 <p>
