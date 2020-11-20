@@ -77,8 +77,8 @@ describe('Sjekk at alders-input fungerer', () => {
         cy.getByTestId('filter_40-49').should('not.be.checked');
     });
     klikkVelg();
-    it('Etiketten har "2-70 år"', () => {
-        cy.getByTestId('filtreringlabel').contains(fraAlder + '-70 år');
+    it('Etiketten har "2-100 år"', () => {
+        cy.getByTestId('filtreringlabel').contains(fraAlder + '-100 år');
     });
     it('Validering av for høyt tall', () => {
         cy.apneFilterDropdown('alder');
@@ -95,7 +95,7 @@ describe('Sjekk at alders-input fungerer', () => {
     it('Se validering', () => {
         cy.getByTestId('filter_alder_valideringstekst')
             .should('be.visible')
-            .contains('Du må skrive et tall lavere enn 70 i fra-feltet hvis til-feltet står tomt.');
+            .contains('Du må skrive et tall lavere enn 100 i fra-feltet hvis til-feltet står tomt.');
     });
     it('Skriv kun inn til-tall', () => {
         cy.getByTestId('filter_alder-fra')
