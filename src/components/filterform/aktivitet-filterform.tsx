@@ -5,8 +5,6 @@ import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
