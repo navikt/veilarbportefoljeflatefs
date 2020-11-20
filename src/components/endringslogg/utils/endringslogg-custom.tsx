@@ -22,10 +22,10 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '16. november 2020',
+        dato: '23. november 2020',
         tittel: 'Filtrer på svarene fra registreringen om utdanning',
         featureToggleName: 'veilarbportefolje.utdanning_filter',
-        versjonId: '16.11.20',
+        versjonId: '23.11.20',
         children: (
             <>
                 <p>
@@ -33,7 +33,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
                     utdanning.
                 </p>
-                <p>Filtrene ligger i fanen lengst til høyre under "Svar fra registrering".</p>
+                <p>Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.</p>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx"
                     linkTekst="Nyhetssak på Navet"

@@ -4,7 +4,8 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     UTDANNING_FILTER,
-    ALDER_FILTER
+    ALDER_FILTER,
+    NULLSTILL_KNAPP
 } from '../konstanter';
 
 const toggles = {
@@ -13,7 +14,8 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTDANNING_FILTER]: true,
-    [ALDER_FILTER]: true
+    [ALDER_FILTER]: true,
+    [NULLSTILL_KNAPP]: true
 };
 
 export default toggles;

@@ -76,7 +76,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Status"
-                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
                 <FiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
@@ -86,7 +86,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Filter"
-                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
                 {erUtdanningFeatureTogglePa ? (
@@ -108,7 +108,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Veiledergrupper"
-                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
                 <FilteringVeiledergrupper filtergruppe={filtergruppe} />
@@ -118,7 +118,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Mine filter"
-                handleClick={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
                 meta={
                     <>

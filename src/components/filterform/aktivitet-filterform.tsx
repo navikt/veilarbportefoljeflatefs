@@ -1,7 +1,17 @@
 import React, {useState} from 'react';
-import SubmitKnapp from './../submit-knapp';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
-import './aktivitet-filterform.less';
+import './filterform.less';
+import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
+import {Dictionary} from '../../utils/types/types';
+import {FiltervalgModell} from '../../model-interfaces';
+
+interface AktivitetFilterformProps {
+    valg: Dictionary<string>;
+    filtervalg: FiltervalgModell;
+    endreFiltervalg: (form: string, filterVerdi: any) => void;
+    closeDropdown: () => void;
+}
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
     BEHANDLING: AktiviteterValg.NA,
@@ -15,7 +25,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
     UTDANNINGAKTIVITET: AktiviteterValg.NA
 };
 
-function AktivitetFilterform(props) {
+function AktivitetFilterform(props: AktivitetFilterformProps) {
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -40,7 +50,7 @@ function AktivitetFilterform(props) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'JA')}
                     key={`Ja, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-ja`}
+                    data-testid={`aktivitet-filterform-${kode}-ja`}
                 />
                 <label htmlFor={`aktivitet-${kode}-ja`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Ja, {verdi}</span>
@@ -54,7 +64,7 @@ function AktivitetFilterform(props) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'NEI')}
                     key={`NEJ, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-nei`}
+                    data-testid={`aktivitet-filterform-${kode}-nei`}
                 />
                 <label htmlFor={`aktivitet-${kode}-nei`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Nei, {verdi}</span>
@@ -63,11 +73,29 @@ function AktivitetFilterform(props) {
         </div>
     ]);
 
+    const harValg =
+        valgteAktiviteter.BEHANDLING !== 'NA' ||
+        valgteAktiviteter.EGEN !== 'NA' ||
+        valgteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
+        valgteAktiviteter.IJOBB !== 'NA' ||
+        valgteAktiviteter.MOTE !== 'NA' ||
+        valgteAktiviteter.SOKEAVTALE !== 'NA' ||
+        valgteAktiviteter.STILLING !== 'NA' ||
+        valgteAktiviteter.TILTAK !== 'NA' ||
+        valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+
+    const nullstillAktiviteter = () => {
+        setValgteAktiviteter(aktivitetInitialState);
+        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
+    };
+
     return (
         <form
             className="skjema aktivitetfilterform"
             onSubmit={() => {
-                props.onSubmit('aktiviteter', valgteAktiviteter);
+                if (harValg) {
+                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
+                }
                 props.closeDropdown();
             }}
         >
@@ -76,19 +104,11 @@ function AktivitetFilterform(props) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="aktivitetfilter_knapper blokk-xxs">
-                <SubmitKnapp pristine={false} closeDropdown={props.closeDropdown} dataTestId="filter_aktivitet" />
-                <button
-                    type="button"
-                    className="knapp knapp--standard knapp--mini"
-                    onClick={() => setValgteAktiviteter(aktivitetInitialState)}
-                    data-testid="filter_aktivitet_fjern-knapp"
-                >
-                    Fjern aktiviteter
-                </button>
+            <div className="filterform__under-valg aktivitetfilter_knapper">
+                <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
+                <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
             </div>
         </form>
     );
 }
-
 export default AktivitetFilterform;

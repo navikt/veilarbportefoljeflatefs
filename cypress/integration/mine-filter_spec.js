@@ -38,11 +38,11 @@ describe('Lag nytt filter', () => {
         cy.getByTestId('sidebar-tab_FILTER').click();
     });
     it('Filtrer på alder: under 19', () => {
-        cy.getByTestId('dropdown-knapp_alder').click();
+        cy.apneFilterDropdown('alder');
         cy.getByTestId('filter_19-og-under').check({force: true});
     });
     it('Trykk på velg', () => {
-        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+        cy.getByTestId('checkbox-filterform_velg-knapp').should('be.visible').click();
     });
     it('Etiketten for ≤ 19 år vises', () => {
         cy.getByTestId('filtreringlabel').contains('≤ 19 år');

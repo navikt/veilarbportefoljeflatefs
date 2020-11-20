@@ -106,11 +106,14 @@ export const keyCodes = {
     esc: 27
 };
 
-export function kebabCase(string) {
-    return string
+export function kebabCase(str: string) {
+    return str
         .toLowerCase()
-        .replaceAll('æ', 'ae')
-        .replaceAll('ø', 'o')
-        .replaceAll('å', 'a')
+        .split('æ')
+        .join('ae')
+        .split('ø')
+        .join('o')
+        .split('å')
+        .join('a')
         .replace(/\s+/g, '-');
 }
