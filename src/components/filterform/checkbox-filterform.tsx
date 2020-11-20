@@ -3,9 +3,12 @@ import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './checkbox-filterform.less';
+import './filterform.less';
 import classNames from 'classnames';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -30,6 +33,7 @@ function CheckboxFilterform({
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     useEffect(() => {
         setCheckBoxValg(filtervalg[form]);
@@ -40,6 +44,11 @@ function CheckboxFilterform({
         return e.target.checked
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
+    };
+
+    const nullstillValg = () => {
+        setCheckBoxValg([]);
+        endreFiltervalg(form, []);
     };
 
     return (
@@ -60,8 +69,15 @@ function CheckboxFilterform({
                     </Grid>
                 </div>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div
+                className={
+                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
+                }
+            >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
+                {erNullstillFeatureTogglePa && (
+                    <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
+                )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
