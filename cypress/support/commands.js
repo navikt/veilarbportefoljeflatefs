@@ -114,3 +114,9 @@ Cypress.Commands.add('checkboxLast', testid => {
         .last()
         .should('be.checked');
 });
+
+Cypress.Commands.add('apneFilterDropdown', filternavn => {
+    cy.getByTestId(`dropdown-knapp_${filternavn}`)
+        .should('be.visible')
+        .click();
+});

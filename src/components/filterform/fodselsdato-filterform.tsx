@@ -2,19 +2,23 @@ import React, {useState} from 'react';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
-import './checkbox-filterform.less';
+import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFilterValg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
+    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
@@ -25,13 +29,18 @@ function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filt
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
+    const nullstillValg = () => {
+        setCheckBoxValg([]);
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    endreFilterValg(form, checkBoxValg);
+                    endreFiltervalg(form, checkBoxValg);
                 }
                 closeDropdown();
             }}
@@ -41,8 +50,15 @@ function FodselsdatoFilterform({endreFilterValg, valg, closeDropdown, form, filt
                     <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
                 </div>
             )}
-            <div className="checkbox-filterform__under-valg">
+            <div
+                className={
+                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
+                }
+            >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
+                {erNullstillFeatureTogglePa && (
+                    <NullstillValgKnapp dataTestId="fodselsdato-filterform" nullstillValg={nullstillValg} />
+                )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         Ingen veiledere funnet
@@ -65,8 +81,13 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
                         value={filterKey}
                         checked={props.checkBoxValg.includes(filterKey)}
                         onChange={props.velgCheckBox}
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}_input`}
                     />
-                    <label htmlFor={filterKey} className="fodselsdato__label">
+                    <label
+                        htmlFor={filterKey}
+                        className="fodselsdato__label"
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}`}
+                    >
                         {filterValue}
                     </label>
                 </div>

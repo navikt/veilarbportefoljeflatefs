@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
-import './aktivitet-filterform.less';
+import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
-import FjernValgKnapp from '../fjern-valg-knapp';
+import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 
@@ -50,7 +50,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'JA')}
                     key={`Ja, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-ja`}
+                    data-testid={`aktivitet-filterform-${kode}-ja`}
                 />
                 <label htmlFor={`aktivitet-${kode}-ja`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Ja, {verdi}</span>
@@ -64,7 +64,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     className="skjemaelement__input radioknapp"
                     onChange={() => handleRadioChange(kode, 'NEI')}
                     key={`NEJ, ${verdi}`}
-                    data-testid={`filter_aktivitet-${kode}-nei`}
+                    data-testid={`aktivitet-filterform-${kode}-nei`}
                 />
                 <label htmlFor={`aktivitet-${kode}-nei`} className="skjemaelement__label aktivitet_radioknapp_label">
                     <span className="sr-only">Nei, {verdi}</span>
@@ -84,7 +84,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
         valgteAktiviteter.TILTAK !== 'NA' ||
         valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
-    const fjernAktiviteter = () => {
+    const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
         props.endreFiltervalg('aktiviteter', aktivitetInitialState);
     };
@@ -104,16 +104,11 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="aktivitetfilter_knapper blokk-xxs">
-                <VelgLukkKnapp harValg={harValg} dataTestId={'filter_aktivitet'} />
-                <FjernValgKnapp
-                    dataTestId="filter_aktivitet"
-                    fjernValg={fjernAktiviteter}
-                    knappeTekst="Fjern aktiviteter"
-                />
+            <div className="filterform__under-valg aktivitetfilter_knapper">
+                <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
+                <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
             </div>
         </form>
     );
 }
-
 export default AktivitetFilterform;
