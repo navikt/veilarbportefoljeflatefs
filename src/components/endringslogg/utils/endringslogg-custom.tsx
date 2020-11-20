@@ -33,7 +33,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
                     utdanning.
                 </p>
-                <p>Filtrene ligger i fanen lengst til høyre under "Svar fra registrering".</p>
+                <p>Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.</p>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx"
                     linkTekst="Nyhetssak på Navet"
