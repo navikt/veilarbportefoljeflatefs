@@ -19,12 +19,7 @@ function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwit
                 aria-label={ariaLabel}
                 defaultChecked={defaultChecked}
                 checked={checked}
-                onChange={e => {
-                    const checkbox = e.target;
-                    if (checkbox.checked) {
-                        onChange();
-                    }
-                }}
+                onChange={onChange}
             />
             <span className="switch-slider" />
             <div className="toggle-switch-las__lukked">
