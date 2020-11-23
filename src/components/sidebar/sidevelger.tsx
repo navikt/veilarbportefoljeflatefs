@@ -46,6 +46,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
     const dispatch = useDispatch();
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
+
     const mineFilter = mineFilterState.data;
     const erPaMinOversikt = filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = filtergruppe === ListevisningType.enhetensOversikt;
@@ -130,8 +131,10 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                         </Hjelpetekst>
                         <ToggleSwitch
                             checked={isMinefiltereDraggable}
-                            onChange={() => setIsMinefiltereDraggable(!isMinefiltereDraggable)}
-                            ariaLabel={'Endre rekkefølge'}
+                            onChange={() => {
+                                setIsMinefiltereDraggable(!isMinefiltereDraggable);
+                            }}
+                            ariaLabel="Endre rekkefølge"
                         />
                     </>
                 }
