@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -24,8 +24,11 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
+    useEffect(() => {
+        setValgteFilterValg(filtervalg[form]);
+    }, [filtervalg, form]);
+
     const nullstillValg = () => {
-        setValgteFilterValg('');
         endreFiltervalg(form, '');
     };
 

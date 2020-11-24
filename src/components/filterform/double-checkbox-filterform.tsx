@@ -63,8 +63,6 @@ function DoubleCheckboxFilterform({
     };
 
     const nullstillValg = () => {
-        setCheckBoxValgCol1([]);
-        setCheckBoxValgCol2([]);
         endreFiltervalg(formCol1, []);
         endreFiltervalg(formCol2, []);
     };

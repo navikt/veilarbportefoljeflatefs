@@ -47,7 +47,6 @@ function CheckboxFilterform({
     };
 
     const nullstillValg = () => {
-        setCheckBoxValg([]);
         endreFiltervalg(form, []);
     };
 
