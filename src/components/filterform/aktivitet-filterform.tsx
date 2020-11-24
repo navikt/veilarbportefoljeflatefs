@@ -106,7 +106,11 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
             <div className="aktivitetfilterform__valg">{fields}</div>
             <div className="filterform__under-valg aktivitetfilter_knapper">
                 <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
-                <NullstillValgKnapp dataTestId="aktivitet-filterform" nullstillValg={nullstillAktiviteter} />
+                <NullstillValgKnapp
+                    dataTestId="aktivitet-filterform"
+                    nullstillValg={nullstillAktiviteter}
+                    form={'aktiviteter'}
+                />
             </div>
         </form>
     );

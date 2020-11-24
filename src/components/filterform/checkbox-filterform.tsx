@@ -75,7 +75,7 @@ function CheckboxFilterform({
             >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} form={form} />
                 )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
