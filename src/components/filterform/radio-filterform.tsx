@@ -25,7 +25,8 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     useEffect(() => {
-        setValgteFilterValg(filtervalg[form]);
+        // setValgteFilterValg(filtervalg[form]);
+        setValgteFilterValg('');
     }, [filtervalg, form]);
 
     const nullstillValg = () => {
