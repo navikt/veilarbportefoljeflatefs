@@ -1,11 +1,17 @@
-describe('Gå inn til annen veileders oversikt via tabellen', () => {
-    it('Start server', () => {
-        cy.configure();
-    });
-    it('Gå til veilederoversikt', () => {
-        cy.gaTilOversikt('veileder-oversikt');
-    });
-    it('Sorter på antall brukere ', () => {
+before('Start server', () => {
+    cy.configure();
+});
+
+beforeEach('Gå til Veilederoversikt', () => {
+    cy.gaTilOversikt('veileder-oversikt');
+});
+
+afterEach('Gå til Enhetens Oversikt', () => {
+    cy.gaTilOversikt('enhet-oversikt');
+});
+
+describe('Annen veileder', () => {
+    it('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.getByTestId('sorteringspil_ascending').should('not.be.visible');
         cy.getByTestId('sorteringspil_descending').should('not.be.visible');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
@@ -13,24 +19,15 @@ describe('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_ascending').should('not.be.visible');
         cy.getByTestId('sorteringspil_descending').should('be.visible');
-    });
-    it('Velg Herman Thoresen', () => {
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Thoresen, Herman')
             .click();
-    });
-    it('Det skal vises en infotekst', () => {
         cy.getByTestId('annen-veileder_infotekst')
             .should('be.visible')
             .and('contain', 'Du er inne på Herman Thoresen sin oversikt');
     });
-});
 
-describe('Søk veileder i veilederoversikt', () => {
-    it('Gå til veilederoversikt', () => {
-        cy.gaTilOversikt('veileder-oversikt');
-    });
-    it('Søk på Glosli ', () => {
+    it('Gå inn til annen veileders oversikt via søkefeltet', () => {
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .children()
@@ -50,8 +47,7 @@ describe('Søk veileder i veilederoversikt', () => {
             .contains('Lukk')
             .should('be.visible');
         cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp').should('not.be.visible');
-    });
-    it('Velg Glosli ', () => {
+
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 20);

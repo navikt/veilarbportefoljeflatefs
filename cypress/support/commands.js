@@ -45,6 +45,8 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
 });
 
 Cypress.Commands.add('gaTilOversikt', side => {
+    console.log('SIDE', side);
+    console.log(cy.url());
     if (side === 'min-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
             return cy
@@ -72,18 +74,17 @@ Cypress.Commands.add('gaTilOversikt', side => {
             .cy.url()
             .should('include', '/veilarbportefoljeflatefs/enhet');
     } else if (side === 'veileder-oversikt') {
+        console.log('den kom hit');
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            return cy
-                .getByTestId(side)
-                .click({force: true})
-                .cy.url()
-                .should('include', '/veilarbportefoljeflatefs/veiledere');
+            return (
+                cy.getByTestId(side).click({force: true}) &&
+                cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+            );
         }
-        return cy
-            .get('.spinner')
-            .should('be.visible')
-            .cy.url()
-            .should('include', '/veilarbportefoljeflatefs/veiledere');
+        console.log('den kom hit', cy.url());
+        return (
+            cy.get('.spinner').should('be.visible') && cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+        );
     }
 });
 
@@ -91,38 +92,34 @@ Cypress.Commands.add('klikkTab', tab => {
     cy.get('.spinner').should('not.be.visible');
     if (tab === 'VEILEDERGRUPPER') {
         if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Veiledergrupper')) {
-            return cy
-                .getByTestId(`sidebar-tab_${tab}`)
-                .click({force: true})
-                .cy.getByTestId('sidebar_content-container')
-                .contains('Veiledergrupper');
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar_content-container').contains('Veiledergrupper')
+            );
         }
         return cy.getByTestId('sidebar_content-container').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
         if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Mine filter')) {
-            return cy
-                .getByTestId(`sidebar-tab_${tab}`)
-                .click({force: true})
-                .cy.getByTestId('sidebar_content-container')
-                .contains('Mine filter');
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar_content-container').contains('Mine filter')
+            );
         }
         return cy.getByTestId('sidebar_content-container').contains('Mine filter');
     } else if (tab === 'STATUS') {
         if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Status')) {
-            return cy
-                .getByTestId(`sidebar-tab_${tab}`)
-                .click({force: true})
-                .cy.getByTestId('sidebar_content-container')
-                .contains('Status');
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar_content-container').contains('Status')
+            );
         }
         return cy.getByTestId('sidebar_content-container').contains('Status');
     } else if (tab === 'FILTER') {
         if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Filter')) {
-            return cy
-                .getByTestId(`sidebar-tab_${tab}`)
-                .click({force: true})
-                .cy.getByTestId('sidebar_content-container')
-                .contains('Filter');
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar_content-container').contains('Filter')
+            );
         }
         return cy.getByTestId('sidebar_content-container').contains('Filter');
     }
