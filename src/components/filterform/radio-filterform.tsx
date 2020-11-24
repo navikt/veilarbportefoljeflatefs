@@ -30,7 +30,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     }, [filtervalg, form]);
 
     const nullstillValg = () => {
-      endreFiltervalg(form, null);
+        endreFiltervalg(form, null);
     };
 
     let reactKey = 1;
@@ -69,7 +69,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     dataTestId="radio-filterform"
                 />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} form={form} />
                 )}
             </div>
         </form>

@@ -224,12 +224,14 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
             });
         });
     } else {
-        logEvent('portefolje.metrikker.endre_filter', {
-            sideNavn,
-            filter: data.filterId,
-            verdi: data.filterVerdi,
-            veilederIdent
-        });
+        if (data.filterVerdi !== null) {
+            logEvent('portefolje.metrikker.endre_filter', {
+                sideNavn,
+                filter: data.filterId,
+                verdi: data.filterVerdi,
+                veilederIdent
+            });
+        }
     }
 };
 
