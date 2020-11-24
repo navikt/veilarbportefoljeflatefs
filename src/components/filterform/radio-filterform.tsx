@@ -30,7 +30,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     }, [filtervalg, form]);
 
     const nullstillValg = () => {
-        form === 'kjonn' ? endreFiltervalg(form, null) : endreFiltervalg(form, '');
+      endreFiltervalg(form, null);
     };
 
     let reactKey = 1;
