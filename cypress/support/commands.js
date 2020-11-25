@@ -79,7 +79,7 @@ Cypress.Commands.add('gaTilOversikt', side => {
 
 Cypress.Commands.add('klikkTab', tab => {
     if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar-header').should('not.contain', 'Veiledergrupper')) {
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Veiledergrupper')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
                 cy.getByTestId('sidebar-header').contains('Veiledergrupper')
@@ -87,7 +87,7 @@ Cypress.Commands.add('klikkTab', tab => {
         }
         return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.contain', 'Mine filter')) {
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Mine filter')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
                 cy.getByTestId('sidebar-header').contains('Mine filter')
@@ -95,7 +95,7 @@ Cypress.Commands.add('klikkTab', tab => {
         }
         return cy.getByTestId('sidebar-header').contains('Mine filter');
     } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar-header').should('not.contain', 'Status')) {
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Status')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
                 cy.getByTestId('sidebar-header').contains('Status')
@@ -103,7 +103,7 @@ Cypress.Commands.add('klikkTab', tab => {
         }
         return cy.getByTestId('sidebar-header').contains('Status');
     } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.contain', 'Filter')) {
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Filter')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
                 cy.getByTestId('sidebar-header').contains('Filter')
