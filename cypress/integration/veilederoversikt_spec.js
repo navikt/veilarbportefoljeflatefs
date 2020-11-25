@@ -2,32 +2,25 @@ before('Start server', () => {
     cy.configure();
 });
 
-beforeEach('Gå til Veilederoversikt', () => {
-    cy.gaTilOversikt('veileder-oversikt');
-});
-
-afterEach('Gå til Enhetens Oversikt', () => {
-    cy.gaTilOversikt('enhet-oversikt');
-});
-
 describe('Annen veileder', () => {
     it('Gå inn til annen veileders oversikt via tabellen', () => {
-        cy.getByTestId('sorteringspil_ascending').should('not.be.visible');
-        cy.getByTestId('sorteringspil_descending').should('not.be.visible');
+        cy.gaTilOversikt('veileder-oversikt');
+        cy.getByTestId('sorteringspil_ascending').should('not.exist');
+        cy.getByTestId('sorteringspil_descending').should('not.exist');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_ascending').should('be.visible');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
-        cy.getByTestId('sorteringspil_ascending').should('not.be.visible');
+        cy.getByTestId('sorteringspil_ascending').should('not.exist');
         cy.getByTestId('sorteringspil_descending').should('be.visible');
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Thoresen, Herman')
             .click();
         cy.getByTestId('annen-veileder_infotekst')
             .should('be.visible')
-            .and('contain', 'Du er inne på Herman Thoresen sin oversikt');
+            .should('contain', 'Du er inne på Herman Thoresen sin oversikt');
     });
-
-    it('Gå inn til annen veileders oversikt via søkefeltet', () => {
+    it('Søk veileder i veilederoversikt', () => {
+        cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .children()
@@ -35,7 +28,7 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
         cy.getByTestId('veilederoversikt_alertstripe_info')
             .should('contain', 'Ingen veiledere funnet')
-            .and('be.visible');
+            .should('be.visible');
         cy.getByTestId('veilederoversikt_sok-veileder-input')
             .click()
             .clear()
@@ -46,13 +39,15 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_sok-veileder_lukk-knapp')
             .contains('Lukk')
             .should('be.visible');
-        cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp').should('not.be.visible');
-
+        cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp').should('not.exist');
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 20);
-        cy.checkbox('veilederoversikt_sok-veileder_veilederliste_element_0');
-        cy.getByTestId('veilederoversikt_sok-veileder_lukk-knapp').should('not.be.visible');
+        cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0')
+            .should('not.be.checked')
+            .check({force: true});
+        cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0').should('be.checked');
+        cy.getByTestId('veilederoversikt_sok-veileder_lukk-knapp').should('not.exist');
         cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp')
             .contains('Velg')
             .should('be.visible')

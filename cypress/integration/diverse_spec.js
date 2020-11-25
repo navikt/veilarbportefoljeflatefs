@@ -1,0 +1,178 @@
+before('Start server', () => {
+    cy.configure();
+});
+describe('Diverse', () => {
+    it('Verifiser blå prikk og stepper', () => {
+        cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
+        cy.getByTestId('endringslogg-innhold').should('not.exist');
+        cy.getByTestId('endringslogg-knapp').click();
+        cy.getByTestId('endringslogg-innhold').should('be.visible');
+        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+        cy.getByTestId('endringslogg_se-hvordan-knapp')
+            .contains('Se hvordan')
+            .first()
+            .click();
+        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
+        cy.getByTestId('endringslogg_forrige-knapp').should('be.hidden');
+        cy.getByTestId('endringslogg_neste-knapp')
+            .contains('Neste')
+            .click();
+        cy.getByTestId('endringslogg_forrige-knapp').should('be.visible');
+        cy.getByTestId('endringslogg_stegviser').then($element => {
+            if ($element.find('.stegviser__steg').length === 3) {
+                return cy
+                    .getByTestId('endringslogg_neste-knapp')
+                    .contains('Neste')
+                    .click();
+            }
+        });
+        cy.getByTestId('endringslogg_ferdig-knapp')
+            .contains('Ferdig')
+            .click();
+        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+        cy.getByTestId('endringslogg-innhold').should('be.visible');
+        cy.getByTestId('endringslogg-knapp').click();
+        cy.getByTestId('endringslogg-innhold').should('not.exist');
+        cy.getByTestId('endringslogg_nye-notifikasjoner').should('not.exist');
+    });
+
+    it('Verifiser tilbakemeldingsundersøkelse', () => {
+        cy.getByTestId('tilbakemelding_modal').should('not.exist');
+        cy.getByTestId('tilbakemelding_fab_knapp')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('tilbakemelding_modal').should('be.visible');
+        cy.getByTestId('tilfredshet-ikon_5')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
+        cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet_kommentarfelt')
+            .should('be.empty')
+            .click()
+            .type('How do you throw a space party? You planet!');
+        cy.wait(1000);
+        cy.getByTestId('tilfredshet_send-knapp')
+            .contains('Send')
+            .click({force: true});
+        cy.wait(1000);
+        cy.getByTestId('tilfredshet_send-knapp').should('not.exist');
+        cy.getByTestId('tilbakemelding_modal_takk').should('be.visible');
+        cy.getByTestId('tilbakemelding_modal').should('not.exist');
+        cy.getByTestId('tilbakemelding_fab_knapp_trykket')
+            .should('be.visible')
+            .click();
+        cy.get('body').click(20, 500);
+        cy.getByTestId('tilbakemelding_fab_knapp').should('not.exist');
+        cy.getByTestId('tilbakemelding_modal_takk').should('not.exist');
+    });
+
+    it('Paginering og til toppen-knapp', () => {
+        cy.gaTilOversikt('min-oversikt');
+        cy.getByTestId('paginering_venstre').should('be.disabled');
+        cy.getByTestId('paginering_hoyre').should('be.enabled');
+        cy.getByTestId('paginering-tall_7').should('be.visible');
+        cy.get('.brukerliste')
+            .children()
+            .should('have.length', 20);
+        cy.getByTestId('se-alle_knapp')
+            .should('be.visible')
+            .click();
+        cy.wait(1000);
+        cy.getByTestId('til-toppen_knapp').should('be.hidden');
+        cy.scrollTo(0, 2000);
+        cy.getByTestId('til-toppen_knapp')
+            .should('not.be.hidden')
+            .click();
+        cy.getByTestId('til-toppen_knapp').should('be.hidden');
+        cy.getByTestId('paginering-tall_7').should('not.exist');
+        cy.get('.brukerliste')
+            .children()
+            .should('have.length', 123);
+        cy.getByTestId('paginering_venstre').should('be.disabled');
+        cy.getByTestId('paginering_hoyre').should('be.disabled');
+        cy.getByTestId('se-faerre_knapp')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('paginering-tall_2').should('not.exist');
+        cy.getByTestId('paginering_venstre').should('be.disabled');
+        cy.getByTestId('paginering_hoyre')
+            .should('be.enabled')
+            .click();
+        cy.getByTestId('paginering-tall_2').should('be.visible');
+        cy.getByTestId('paginering-tall_1')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('paginering_venstre').should('be.disabled');
+        cy.getByTestId('paginering_hoyre').should('be.enabled');
+        cy.gaTilOversikt('enhetens-oversikt');
+    });
+
+    const forsteVeileder = 'Aasen, Markus';
+    it('Søk på navn', () => {
+        cy.getByTestId('sok-navn-fnr_input')
+            .click()
+            .type('andersen');
+        cy.getByTestId('filtreringlabel')
+            .contains('Søk på navn')
+            .should('be.visible')
+            .click();
+    });
+
+    it('Søk på fnr', () => {
+        cy.getByTestId('sok-navn-fnr_input')
+            .click()
+            .clear()
+            .type('10108000398');
+        cy.getByTestId('filtreringlabel')
+            .contains('Søk på fødselsnummer')
+            .should('be.visible')
+            .click();
+    });
+
+    it('Søk etter veileder', () => {
+        cy.get('.spinner').should('not.exist');
+        cy.getByTestId('sidebar_content-container')
+            .contains('Status')
+            .should('be.visible');
+        cy.checkbox('filter_checkboks-container_ufordeltebruker');
+        cy.getByTestId('filtreringlabel').contains('Ufordelte brukere');
+        cy.getByTestId('sok-veileder_knapp').click();
+        cy.getByTestId('sok-filter_input')
+            .click()
+            .type(forsteVeileder);
+        cy.checkbox('sok-veileder_rad_0');
+        cy.getByTestId('sok-veileder_velg-knapp').click();
+        cy.getByTestId('filtreringlabel')
+            .contains(forsteVeileder)
+            .click();
+        cy.getByTestId('filtreringlabel')
+            .contains('Ufordelte brukere')
+            .click();
+    });
+
+    it('Velg andre kolonner', () => {
+        cy.getByTestId('alertstripe_filtrering').should('be.visible');
+        cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({
+            force: true
+        });
+        cy.getByTestId('sorteringheader_veileder').should('be.visible');
+        cy.getByTestId('sorteringheader_oppfolging-startet').should('not.exist');
+        cy.getByTestId('dropdown-knapp_velg-kolonner')
+            .contains('Velg kolonner')
+            .click({force: true});
+        cy.getByTestId('velg-kolonne-rad_veileder').uncheck({force: true});
+        cy.getByTestId('velg-kolonne-rad_oppfolgingstartet')
+            .should('be.enabled')
+            .check({force: true});
+        cy.getByTestId('sorteringheader_veileder').should('not.exist');
+        cy.getByTestId('sorteringheader_oppfolging-startet').should('be.visible');
+        cy.getByTestId('filtreringlabel')
+            .contains('I avtalt aktivitet')
+            .should('be.visible')
+            .click();
+    });
+});
