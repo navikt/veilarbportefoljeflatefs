@@ -7,5 +7,6 @@
     "projectId": "r1wxsg",
     "retries": {
         "runMode": 2
-    }
+    },
+    "videoUploadOnPasses": false
 }
