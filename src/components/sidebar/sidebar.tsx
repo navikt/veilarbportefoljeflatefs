@@ -20,7 +20,7 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
-import {keyCodes} from '../../utils/utils';
+import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
 
 interface Sidebar {
@@ -117,7 +117,7 @@ function Sidebar(props: SidebarProps) {
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
                 aria-controls={tab.type}
-                id={tab.type}
+                id={kebabCase(`${tab.type}_tab`)}
                 tabIndex={(!isSelected && -1) || 0}
                 onKeyUp={e => handleKeyUp(e, tab)}
                 data-testid={`sidebar-tab_${tab.type}`}
@@ -209,7 +209,7 @@ function Sidebar(props: SidebarProps) {
                 className="sidebar__tab-container"
                 role="tablist"
                 aria-label="Faner for filtrering"
-                aria-labelledby={selectedTabData.type}
+                aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
             >
                 {Tabs()}
             </div>
@@ -217,7 +217,7 @@ function Sidebar(props: SidebarProps) {
                 <div
                     className="sidebar__content-container"
                     role="tabpanel"
-                    aria-labelledby={selectedTabData.type}
+                    aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
                     id={selectedTabData.type}
                     data-testid="sidebar_content-container"
                     tabIndex={0}

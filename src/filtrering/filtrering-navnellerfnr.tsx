@@ -46,13 +46,14 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
     }, [filtervalg.navnEllerFnrQuery]);
 
     return (
-        <div className="filtrering-navn-fnr">
+        <div className="filtrering-navn-fnr" role="search">
             <Input
-                label=""
                 placeholder="Søk etter navn eller fødselsnummer"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}
                 data-testid="sok-navn-fnr_input"
+                id="sok-navn-fnr_input"
+                aria-label="sok-navn-fnr_input"
             />
         </div>
     );

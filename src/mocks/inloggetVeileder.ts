@@ -1,6 +1,6 @@
 import {innloggetVeileder} from './veiledere';
 
-export const inloggetEnhet = {
+export const innloggetEnhet = {
     enhetId: '1234',
     navn: 'NAV Testheim'
 };
@@ -20,5 +20,5 @@ export default {
     navn: innloggetVeileder.navn,
     etternavn: innloggetVeileder.etternavn,
     fornavn: innloggetVeileder.fornavn,
-    enheter: [inloggetEnhet, alternativEnhet, alternativEnhet2]
+    enheter: [innloggetEnhet, alternativEnhet, alternativEnhet2]
 };

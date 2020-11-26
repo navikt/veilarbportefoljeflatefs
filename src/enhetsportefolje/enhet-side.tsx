@@ -126,7 +126,7 @@ export default function EnhetSide() {
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse" role="tab" aria-controls={id} id={id}>
+            <div className="side-storrelse" id={`side-storrelse_${id}`}>
                 <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
@@ -134,9 +134,7 @@ export default function EnhetSide() {
                             'oversikt-sideinnhold',
                             isSidebarHidden && 'oversikt-sideinnhold__hidden'
                         )}
-                        role="tabpanel"
-                        aria-labelledby={id}
-                        id={id}
+                        id={`oversikt-sideinnhold_${id}`}
                     >
                         <Sidebar
                             filtervalg={filtervalg}

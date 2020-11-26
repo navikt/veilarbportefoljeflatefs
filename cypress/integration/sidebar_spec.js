@@ -142,7 +142,8 @@ describe('Mine filter', () => {
     });
 
     it('Drag and drop - Verifiser lagring', () => {
-        cy.getByTestId('drag-drop_container')
+        cy.getByTestId('mine-filter_radio-container')
+            .children()
             .children()
             .first()
             .next()
