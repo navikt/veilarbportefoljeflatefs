@@ -66,7 +66,7 @@ export default function Endringslogg(props: EndringsProps) {
     useEventListener('keydown', escHandler);
 
     return (
-        <div ref={loggNode} className="endringslogg" role="tab">
+        <div ref={loggNode} className="endringslogg">
             <EndringsloggKnapp
                 klikk={klikk}
                 open={endringsloggApen}

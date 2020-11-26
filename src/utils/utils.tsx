@@ -106,14 +106,31 @@ export const keyCodes = {
     esc: 27
 };
 
-export function kebabCase(str: string) {
+export function specialChar(str: string) {
     return str
-        .toLowerCase()
         .split('æ')
         .join('ae')
         .split('ø')
         .join('o')
         .split('å')
-        .join('a')
+        .join('a');
+}
+
+export function kebabCase(str: string) {
+    return specialChar(str)
+        .toLowerCase()
         .replace(/\s+/g, '-');
+}
+
+export function camelCase(str: string) {
+    return specialChar(str)
+        .toLowerCase()
+        .split('-')
+        .join(' ')
+        .split('_')
+        .join(' ')
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        })
+        .replace(/\s+/g, '');
 }

@@ -29,7 +29,7 @@ function TimedToast(props: TimedToastProps) {
     });
 
     return (
-        <div className="timed-toast" ref={toastRef} tabIndex={0} role="tab">
+        <div className="timed-toast" ref={toastRef} tabIndex={0}>
             <AlertStripe type={props.alertstripe} className="timed-toast__alertstripe" data-testid="timed-toast">
                 <span className="timed-toast__tekst">{props.toastTekst}</span>
             </AlertStripe>

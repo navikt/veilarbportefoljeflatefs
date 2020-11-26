@@ -12,7 +12,7 @@ function DarkModeToggle() {
     }, [darkmode]);
 
     return (
-        <div className="dark-mode-toggle" role="tab">
+        <div className="dark-mode-toggle">
             <button type="button">☀</button>
             <Toggle checked={darkmode} onChange={() => setDarkmode(!darkmode)} />
             <button type="button">☾</button>
