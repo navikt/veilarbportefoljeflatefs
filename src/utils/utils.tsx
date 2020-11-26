@@ -122,16 +122,3 @@ export function kebabCase(str: string) {
         .toLowerCase()
         .replace(/\s+/g, '-');
 }
-
-export function camelCase(str: string) {
-    return specialChar(str)
-        .toLowerCase()
-        .split('-')
-        .join(' ')
-        .split('_')
-        .join(' ')
-        .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
-            return index === 0 ? word.toLowerCase() : word.toUpperCase();
-        })
-        .replace(/\s+/g, '');
-}
