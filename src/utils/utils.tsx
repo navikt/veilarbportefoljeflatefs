@@ -108,6 +108,7 @@ export const keyCodes = {
 
 export function specialChar(str: string) {
     return str
+        .toLowerCase()
         .split('æ')
         .join('ae')
         .split('ø')
