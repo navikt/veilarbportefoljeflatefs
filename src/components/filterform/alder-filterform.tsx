@@ -32,10 +32,12 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
 
     useEffect(() => {
-        const alderValg = filtervalg[form];
-        const konstAlderVerdi = Object.entries(valg).map(([filterKey]) => filterKey);
-        alderValg.forEach(alder => {
-            if (konstAlderVerdi.includes(alder)) {
+        filtervalg[form].forEach(alder => {
+            if (
+                Object.entries(valg)
+                    .map(([filterKey]) => filterKey)
+                    .includes(alder)
+            ) {
                 setCheckBoxValg(prevState => [...prevState, alder]);
             } else {
                 const [alderFra, alderTil] = alder.split('-');
@@ -195,7 +197,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             >
                 <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} form={form} />
                 )}
             </div>
         </form>

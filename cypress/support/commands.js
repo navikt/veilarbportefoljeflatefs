@@ -47,44 +47,69 @@ Cypress.Commands.add('getByTestId', (selector, ...args) => {
 Cypress.Commands.add('gaTilOversikt', side => {
     if (side === 'min-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            cy.getByTestId(side).click({force: true});
+            return (
+                cy.getByTestId(side).click({force: true}) &&
+                cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
+            );
         }
-        cy.url().should('include', '/veilarbportefoljeflatefs/portefolje');
+        return (
+            cy.get('.spinner').should('be.visible') &&
+            cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
+        );
     } else if (side === 'enhetens-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            cy.getByTestId(side).click({force: true});
+            return (
+                cy.getByTestId(side).click({force: true}) &&
+                cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+            );
         }
-        cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
+        return cy.get('.spinner').should('be.visible') && cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
     } else if (side === 'veileder-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            cy.getByTestId(side).click({force: true});
+            return (
+                cy.getByTestId(side).click({force: true}) &&
+                cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+            );
         }
-        cy.url().should('include', '/veilarbportefoljeflatefs/veiledere');
+        return (
+            cy.get('.spinner').should('be.visible') && cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+        );
     }
 });
 
 Cypress.Commands.add('klikkTab', tab => {
-    cy.get('.spinner').should('not.be.visible');
     if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Veiledergrupper')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Veiledergrupper')) {
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar-header').contains('Veiledergrupper')
+            );
         }
-        cy.getByTestId('sidebar_content-container').contains('Veiledergrupper');
+        return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Mine filter')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Mine filter')) {
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar-header').contains('Mine filter')
+            );
         }
-        cy.getByTestId('sidebar_content-container').contains('Mine filter');
+        return cy.getByTestId('sidebar-header').contains('Mine filter');
     } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Status')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Status')) {
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar-header').contains('Status')
+            );
         }
-        cy.getByTestId('sidebar_content-container').contains('Status');
+        return cy.getByTestId('sidebar-header').contains('Status');
     } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar_content-container').should('not.contain', 'Filter')) {
-            cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
+        if (cy.getByTestId('sidebar-header').should('not.equal', 'Filter')) {
+            return (
+                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
+                cy.getByTestId('sidebar-header').contains('Filter')
+            );
         }
-        cy.getByTestId('sidebar_content-container').contains('Filter');
+        return cy.getByTestId('sidebar-header').contains('Filter');
     }
 });
 

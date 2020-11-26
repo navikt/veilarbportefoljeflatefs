@@ -63,8 +63,6 @@ function DoubleCheckboxFilterform({
     };
 
     const nullstillValg = () => {
-        setCheckBoxValgCol1([]);
-        setCheckBoxValgCol2([]);
         endreFiltervalg(formCol1, []);
         endreFiltervalg(formCol2, []);
     };
@@ -125,7 +123,11 @@ function DoubleCheckboxFilterform({
                     dataTestId="double-checkbox-filterform"
                 />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="double-checkbox-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp
+                        dataTestId="double-checkbox-filterform"
+                        nullstillValg={nullstillValg}
+                        form={'utdanning-godkjent-og-bestatt'}
+                    />
                 )}
                 {(!harValgCol1 || !harValgCol2) && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">

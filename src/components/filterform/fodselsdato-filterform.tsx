@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -29,8 +29,11 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
+    useEffect(() => {
+        setCheckBoxValg(filtervalg[form]);
+    }, [filtervalg, form]);
+
     const nullstillValg = () => {
-        setCheckBoxValg([]);
         endreFiltervalg(form, []);
     };
 
@@ -57,7 +60,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
             >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="fodselsdato-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp dataTestId="fodselsdato-filterform" nullstillValg={nullstillValg} form={form} />
                 )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">

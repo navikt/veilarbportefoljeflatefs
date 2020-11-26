@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -7,6 +7,7 @@ import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
 import {kebabCase} from '../../utils/utils';
+import {OrNothing} from '../../utils/types/types';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -14,7 +15,7 @@ interface ValgType {
 
 interface RadioFilterformProps {
     form: string;
-    endreFiltervalg: (form: string, filterVerdi: string) => void;
+    endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
     closeDropdown: () => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
@@ -24,9 +25,12 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
+    useEffect(() => {
+        setValgteFilterValg(filtervalg[form]);
+    }, [filtervalg, form]);
+
     const nullstillValg = () => {
-        setValgteFilterValg('');
-        endreFiltervalg(form, '');
+        endreFiltervalg(form, null);
     };
 
     let reactKey = 1;
@@ -65,7 +69,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     dataTestId="radio-filterform"
                 />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} />
+                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} form={form} />
                 )}
             </div>
         </form>
