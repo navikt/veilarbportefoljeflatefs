@@ -40,7 +40,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
                     </Normaltekst>
                 </div>
             )}
-            <button className="knapp knapp--hoved" onClick={props.onClose} role="button">
+            <button className="knapp knapp--hoved" onClick={props.onClose}>
                 Lukk
             </button>
         </VarselModal>

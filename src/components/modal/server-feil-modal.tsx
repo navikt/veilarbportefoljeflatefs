@@ -31,7 +31,7 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
                     Handlingen kan ikke utføres
                 </Undertittel>
                 <Normaltekst className="blokk-s">Noe gikk feil, prøv igjen senere.</Normaltekst>
-                <button className="knapp knapp--hoved blokk-s" onClick={lukkModal} role="button">
+                <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
                     Ok
                 </button>
             </div>

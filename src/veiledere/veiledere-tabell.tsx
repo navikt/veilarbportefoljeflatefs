@@ -66,7 +66,6 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                         })}
                                         aria-pressed={sorterEtternavn}
                                         aria-label={sorterEtternavn ? currentSortering.direction : 'inaktiv'}
-                                        role="button"
                                     >
                                         Etternavn
                                     </button>
@@ -89,7 +88,6 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                         })}
                                         aria-pressed={sorterPaaPortefoljeStr}
                                         aria-label={sorterPaaPortefoljeStr ? currentSortering.direction : 'inaktiv'}
-                                        role="button"
                                     >
                                         Antall brukere
                                     </button>

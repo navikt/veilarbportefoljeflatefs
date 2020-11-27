@@ -43,7 +43,6 @@ function SokVeiledere(props: SokVeiledereProps) {
                                 'knapp--hoved': props.harValg
                             })}
                             data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
-                            role="button"
                         >
                             {props.harValg ? 'Velg' : 'Lukk'}
                         </button>

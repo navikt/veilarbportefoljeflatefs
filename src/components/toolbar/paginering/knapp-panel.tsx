@@ -22,7 +22,6 @@ function KnappPanel({children, disabled = false, pressed = false, selected = fal
             disabled={disabled}
             {...props}
             aria-label="Pagineringsknapp"
-            role="button"
         >
             {children}
         </button>

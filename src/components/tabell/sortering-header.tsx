@@ -55,7 +55,6 @@ function SorteringHeader({
                         erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv'
                     }
                     title={title}
-                    role="button"
                 >
                     {tekst}
                 </button>
