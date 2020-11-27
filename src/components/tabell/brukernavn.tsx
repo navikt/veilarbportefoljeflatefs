@@ -20,6 +20,7 @@ const brukerNavn = (className, bruker, enhetId) => (
             }}
             href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
             className={classnames('lenke lenke--frittstaende')}
+            aria-label="Lenke til bruker"
         >
             {settSammenNavn(bruker)}
         </a>

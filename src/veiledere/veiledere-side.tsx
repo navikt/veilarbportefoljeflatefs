@@ -48,7 +48,7 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse veilederoversikt" role="tab" aria-controls={id} id={id}>
+            <div className="side-storrelse veilederoversikt" id={id}>
                 <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div className="oversikt-sideinnhold-veilederside" role="tabpanel" aria-labelledby={id} id={id}>

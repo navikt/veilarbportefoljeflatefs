@@ -28,6 +28,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                     to={`/portefolje/${veileder.ident}`}
                     className="lenke lenke--frittstaende"
                     data-testid="veilederoversikt_navn_lenke"
+                    aria-label="Lenke til veileder"
                 >
                     {`${veileder.navn}`}
                 </Link>

@@ -80,6 +80,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         label=""
                         className="brukerliste__checkbox"
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                        aria-label="Min oversikt brukerliste-checkbox"
                     />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}

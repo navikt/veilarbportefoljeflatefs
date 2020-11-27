@@ -13,7 +13,7 @@ interface VelgalleCheckboksProps {
     className: string;
 }
 
-function VelgalleCheckboks({skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
+function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
     if (!skalVises) {
         return null;
     }
@@ -27,6 +27,7 @@ function VelgalleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
             disabled={disabled}
             onChange={onClickHandler}
             title="Velg alle checkbox"
+            aria-label="Velg alle checkboxer"
         />
     );
 }
@@ -48,4 +49,4 @@ const mapDispatchToProps = dispatch =>
         dispatch
     );
 
-export default connect(mapStateToProps, mapDispatchToProps)(VelgalleCheckboks);
+export default connect(mapStateToProps, mapDispatchToProps)(VelgAlleCheckboks);
