@@ -3,7 +3,14 @@ import './dark-mode-toggle.less';
 
 const Toggle = ({checked, onChange}) => (
     <span className="toggle-control">
-        <input className="dmcheck" type="checkbox" checked={checked} onChange={onChange} id="dmcheck" />
+        <input
+            className="dmcheck"
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            id="dmcheck"
+            aria-label="dmcheck"
+        />
         <label htmlFor="dmcheck" />
     </span>
 );

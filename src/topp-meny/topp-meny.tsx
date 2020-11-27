@@ -23,7 +23,8 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     return (
         <div
             className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}
-            role="tablist"
+            role="navigation"
+            aria-label="Naviger mellom de forskjellige oversiktene."
         >
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
