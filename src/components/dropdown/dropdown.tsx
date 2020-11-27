@@ -98,6 +98,7 @@ function Dropdown(props: DropdownProps) {
                     aria-controls={`${id}-dropdown__innhold`}
                     disabled={disabled}
                     data-testid={`dropdown-knapp_${id}`}
+                    role="button"
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

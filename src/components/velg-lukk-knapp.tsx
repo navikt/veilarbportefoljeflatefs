@@ -11,6 +11,7 @@ function VelgLukkKnapp({harValg, dataTestId}: Props) {
             type="submit"
             className={harValg ? 'knapp knapp--mini knapp--hoved' : 'knapp knapp--mini'}
             data-testid={harValg ? `${dataTestId}_velg-knapp` : `${dataTestId}_lukk-knapp`}
+            role="button"
         >
             {harValg ? 'Velg' : 'Lukk'}
         </button>

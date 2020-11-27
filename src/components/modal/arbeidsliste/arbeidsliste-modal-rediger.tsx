@@ -97,6 +97,7 @@ function ArbeidslisteModalRediger({
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={klikkRedigerknapp}
                 data-testid="min-oversikt_chevron-arbeidsliste_rediger-knapp"
+                role="button"
             >
                 Rediger
             </button>

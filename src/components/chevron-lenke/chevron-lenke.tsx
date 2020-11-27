@@ -21,7 +21,7 @@ function ChevronLenke(props: ChevronLenkeProps) {
     const {retning, tekst, onClick, hide, dataTestId} = props;
     const clsPar = ['chevron-lenke', {'chevron-lenke--hide': hide}];
     return (
-        <button className={cls(clsPar)} onClick={onClick} data-testid={dataTestId}>
+        <button className={cls(clsPar)} onClick={onClick} data-testid={dataTestId} role="button">
             {retning === Retning.VENSTRE ? (
                 <>
                     <VenstreChevron />

@@ -29,6 +29,7 @@ const LukkeKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
         type="button"
         onClick={props.onClick}
         data-testid="veilederoversikt_sok-veileder_lukk-knapp"
+        role="button"
     >
         Lukk
     </button>
@@ -40,6 +41,7 @@ const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
         type="button"
         onClick={props.onClick}
         data-testid="veilederoversikt_sok-veileder_velg-knapp"
+        role="button"
     >
         Velg
     </button>

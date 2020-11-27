@@ -30,6 +30,7 @@ function FiltreringLabelArbeidsliste({
             aria-label="Slett filter"
             className={buttonClassnames}
             onClick={slettFilter}
+            role="button"
         >
             <span className="filtreringlabel__container">
                 <ArbeidslistekategoriVisning skalVises kategori={kategori} />

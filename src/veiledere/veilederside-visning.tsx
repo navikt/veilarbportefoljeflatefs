@@ -69,7 +69,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
     const veiledere = getVeiledere();
 
     return (
-        <>
+        <div role="listitem">
             <Toolbar
                 filtergruppe={ListevisningType.veilederOversikt}
                 antallTotalt={veilederListe.length}
@@ -83,7 +83,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
                 sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}
             />
-        </>
+        </div>
     );
 }
 

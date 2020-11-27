@@ -29,7 +29,7 @@ function FeilmeldingBrukereModal(props: FeilmeldingBrukereModalProps) {
             </Undertittel>
             <Normaltekst className="blokk-s">{props.infotekstTekst}</Normaltekst>
             <FnrList listeMedFnr={props.fnrFeil} />
-            <button className="knapp knapp--hoved" onClick={props.onClose}>
+            <button className="knapp knapp--hoved" onClick={props.onClose} role="button">
                 Ok
             </button>
         </VarselModal>

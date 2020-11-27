@@ -42,6 +42,7 @@ export const TilToppenKnapp = () => {
             hidden={!knappSkalVises}
             onClick={onClick}
             data-testid="til-toppen_knapp"
+            role="button"
         >
             <TilToppenIkonBla />
         </button>

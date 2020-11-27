@@ -97,6 +97,7 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
             className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
             onClick={props.klikk}
             data-testid="endringslogg-knapp"
+            role="button"
         >
             <AlarmIcon />
             {props.nyeNotifikasjoner && (

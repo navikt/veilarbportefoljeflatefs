@@ -44,6 +44,7 @@ function FiltreringLabel({
             className={buttonClassnames}
             onClick={slettFilter}
             data-testid="filtreringlabel"
+            role="button"
         >
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon />}

@@ -13,9 +13,13 @@ function DarkModeToggle() {
 
     return (
         <div className="dark-mode-toggle">
-            <button type="button">☀</button>
+            <button type="button" role="button">
+                ☀
+            </button>
             <Toggle checked={darkmode} onChange={() => setDarkmode(!darkmode)} />
-            <button type="button">☾</button>
+            <button type="button" role="button">
+                ☾
+            </button>
         </div>
     );
 }

@@ -25,6 +25,7 @@ const arbeidslisteButton = ({className, onClick, apen, dataTestid}: Arbeidsliste
             aria-expanded={apen}
             data-testid={dataTestid}
             aria-label="Chevron for arbeidliste"
+            role="button"
         >
             <span className={chevronCls} />
         </button>

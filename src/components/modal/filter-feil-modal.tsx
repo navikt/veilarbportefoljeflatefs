@@ -37,7 +37,7 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
                 <br />
                 Prøv igjen senere.
             </Normaltekst>
-            <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
+            <button className="knapp knapp--hoved blokk-s" onClick={lukkModal} role="button">
                 Ok
             </button>
         </VarselModal>

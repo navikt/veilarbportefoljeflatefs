@@ -23,6 +23,7 @@ function NullstillValgKnapp({nullstillValg, dataTestId, form}: Props) {
             className="knapp knapp--standard knapp--mini"
             onClick={nullstille}
             data-testid={`${dataTestId}_nullstill-knapp`}
+            role="button"
         >
             Nullstill
         </button>
