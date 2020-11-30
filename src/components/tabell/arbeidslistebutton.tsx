@@ -19,7 +19,13 @@ const arbeidslisteButton = ({className, onClick, apen, dataTestid}: Arbeidsliste
         ? 'brukerliste__arbeidslisteknapp--chevron-apen'
         : 'brukerliste__arbeidslisteknapp--chevron-lukket';
     return (
-        <button className={cls(className)} onClick={onClick} aria-expanded={apen} data-testid={dataTestid}>
+        <button
+            className={cls(className)}
+            onClick={onClick}
+            aria-expanded={apen}
+            data-testid={dataTestid}
+            aria-label="Chevron for arbeidliste"
+        >
             <span className={chevronCls} />
         </button>
     );

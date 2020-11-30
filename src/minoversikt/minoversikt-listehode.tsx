@@ -72,7 +72,7 @@ function MinOversiktListeHode({
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
-            <div className="brukerliste__gutter-left" />
+            <div className="brukerliste__gutter-left"/>
             <div className="brukerliste__innhold">
                 <VelgalleCheckboks
                     skalVises={filtergruppe in ListevisningType}

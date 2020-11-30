@@ -15,7 +15,14 @@ function KnappPanel({children, disabled = false, pressed = false, selected = fal
         'paginering__knapp--pressed': pressed
     });
     return (
-        <button className={classes} aria-disabled={disabled} aria-pressed={pressed} disabled={disabled} {...props}>
+        <button
+            className={classes}
+            aria-disabled={disabled}
+            aria-pressed={pressed}
+            disabled={disabled}
+            {...props}
+            aria-label="Pagineringsknapp"
+        >
             {children}
         </button>
     );

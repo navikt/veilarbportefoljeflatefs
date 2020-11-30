@@ -99,7 +99,7 @@ export default function MinoversiktSide() {
 
     return (
         <DocumentTitle title="Min oversikt">
-            <div className="side-storrelse" role="tab" aria-controls={id} id={id}>
+            <div className="side-storrelse" id={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
@@ -108,7 +108,7 @@ export default function MinoversiktSide() {
                             isSidebarHidden && 'oversikt-sideinnhold__hidden',
                             visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'
                         )}
-                        id={id}
+                        id={`oversikt-sideinnhold_${id}`}
                     >
                         <Sidebar
                             filtervalg={filtervalg}

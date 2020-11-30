@@ -35,7 +35,7 @@ function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
     const {children, lamellNavn, className, ...rest} = props;
     return (
         <div className={classNames('blokk-xxs portefolje__ekspanderbarpanel', className)}>
-            <Ekspanderbartpanel border onClick={handleOnClick} {...rest}>
+            <Ekspanderbartpanel border onClick={handleOnClick} {...rest} role="button">
                 {children}
             </Ekspanderbartpanel>
         </div>
