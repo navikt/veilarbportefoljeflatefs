@@ -17,7 +17,7 @@ interface RedigerArbeidslisteProps {
     laster: boolean;
     lukkModal: () => void;
     bruker: BrukerModell;
-    fjernModal?: () => void;
+    fjernModal?: any;
     settMarkert: (fnr: string, markert: boolean) => void;
 }
 
@@ -25,7 +25,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     const fjernBruker = () => {
         logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
         props.settMarkert(props.bruker.fnr, true);
-        return props.fjernModal;
+        props.fjernModal();
     };
 
     return (
