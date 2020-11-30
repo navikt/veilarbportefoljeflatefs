@@ -30,6 +30,7 @@ function ListevisningRad(props: ListevisningRadProps) {
                     props.onChange(props.kolonneoverskrift, e.target.checked)
                 }
                 data-testid={`velg-kolonne-rad_${kolonneoverskrift}`}
+                role="checkbox"
             />
         </li>
     );

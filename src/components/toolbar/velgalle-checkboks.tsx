@@ -28,6 +28,7 @@ function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
             onChange={onClickHandler}
             title="Velg alle checkbox"
             aria-label="Velg alle checkboxer"
+            role="checkbox"
         />
     );
 }
