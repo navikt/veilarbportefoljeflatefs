@@ -62,6 +62,7 @@ function FodselsdatoFilterform({valg, closeDropdown, form, filtervalg}: Checkbox
                         dataTestId="fodselsdato-filterform"
                         nullstillValg={() => dispatch(endreFiltervalg(form, []))}
                         form={form}
+                        disabled={checkBoxValg.length <= 0}
                     />
                 )}
                 {!harValg && (

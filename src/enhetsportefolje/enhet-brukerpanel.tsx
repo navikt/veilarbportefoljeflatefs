@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {useLayoutEffect} from 'react';
@@ -13,7 +13,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 
 interface EnhetBrukerpanelProps {
-    bruker: any;
+    bruker: BrukerModell;
     settMarkert: (bruker: string, markert: boolean) => void;
     enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
@@ -58,6 +58,7 @@ function EnhetBrukerpanel({
                     disabled={bruker.fnr === ''}
                     onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                     label=""
+                    role="checkbox"
                     className="brukerliste__checkbox"
                 />
             </div>

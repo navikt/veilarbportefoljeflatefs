@@ -70,6 +70,7 @@ export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFi
                         dataTestId="radio-filterform"
                         nullstillValg={() => dispatch(endreFiltervalg(form, null))}
                         form={form}
+                        disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
                     />
                 )}
             </div>

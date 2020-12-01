@@ -128,6 +128,7 @@ function DoubleCheckboxFilterform({
                         dataTestId="double-checkbox-filterform"
                         nullstillValg={nullstillValg}
                         form={'utdanning-godkjent-og-bestatt'}
+                        disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
                     />
                 )}
                 {(!harValgCol1 || !harValgCol2) && (

@@ -78,6 +78,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         disabled={bruker.fnr === ''}
                         onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                         label=""
+                        role="checkbox"
                         className="brukerliste__checkbox"
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />

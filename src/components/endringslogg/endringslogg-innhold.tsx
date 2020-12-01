@@ -23,7 +23,7 @@ export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; 
     return (
         <Lenke className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
-            <LinkIcon />
+            <LinkIcon className='linkikon'/>
         </Lenke>
     );
 }
