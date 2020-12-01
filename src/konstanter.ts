@@ -11,7 +11,6 @@ export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
-export const UTDANNING_FILTER = 'veilarbportefolje.utdanning_filter';
 export const ALDER_FILTER = 'veilarbportefolje.alder_filter';
 export const NULLSTILL_KNAPP = 'veilarbportefolje.nullstill-knapp';
 
@@ -21,7 +20,6 @@ export const PORTEFOLJE_FEATURES = [
     GJEM_HOVEDMAL,
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
-    UTDANNING_FILTER,
     ALDER_FILTER,
     NULLSTILL_KNAPP
 ];

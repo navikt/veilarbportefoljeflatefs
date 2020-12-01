@@ -24,7 +24,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '23. november 2020',
         tittel: 'Filtrer på svarene fra registreringen om utdanning',
-        featureToggleName: 'veilarbportefolje.utdanning_filter',
         versjonId: '23.11.20',
         children: (
             <>
