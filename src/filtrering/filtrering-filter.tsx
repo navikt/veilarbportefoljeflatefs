@@ -14,21 +14,23 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    ytelse
+    ytelse,
+    utdanning
 } from './filter-konstanter';
 import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
 import Dropdown from '../components/dropdown/dropdown';
 import '../components/filterform/filterform.less';
 import FodselsdatoFilterform from '../components/filterform/fodselsdato-filterform';
-import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALDER_FILTER, GJEM_HOVEDMAL} from '../konstanter';
 import './filtrering-skjema.less';
 import '../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
+import DoubleCheckboxFilterform from '../components/filterform/double-checkbox-filterform';
 import AlderFilterform from '../components/filterform/alder-filterform';
 import {RadioFilterform} from '../components/filterform/radio-filterform';
 import AktivitetFilterform from '../components/filterform/aktivitet-filterform';
+import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -105,6 +107,73 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
+                    Svar fra registrering
+                </Element>
+                <Dropdown
+                    name="Situasjon"
+                    id="situasjon"
+                    render={lukkDropdown => (
+                        <>
+                            <div className="registreringsfilter__infocontainer">
+                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Normaltekst className="registreringsfilter__infotekst">
+                                    Svarene brukeren oppga på registreringstidspunktet.
+                                </Normaltekst>
+                            </div>
+                            <CheckboxFilterform
+                                form="registreringstype"
+                                valg={registreringstype}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                                className="registreringstype"
+                            />
+                        </>
+                    )}
+                />
+                <Dropdown
+                    name="Høyeste fullførte utdanning"
+                    id="hoyeste-fullforte-utdanning"
+                    render={lukkDropdown => (
+                        <>
+                            <div className="registreringsfilter__infocontainer">
+                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Normaltekst className="registreringsfilter__infotekst">
+                                    Svarene brukeren oppga på registreringstidspunktet.
+                                </Normaltekst>
+                            </div>
+                            <CheckboxFilterform
+                                form="utdanning"
+                                valg={utdanning}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        </>
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanningen godkjent og bestått"
+                    id="er-utdanningen-godkjent-og-bestatt"
+                    render={lukkDropdown => (
+                        <>
+                            <div className="registreringsfilter__infocontainer">
+                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Normaltekst className="registreringsfilter__infotekst">
+                                    Svarene brukeren oppga på registreringstidspunktet.
+                                </Normaltekst>
+                            </div>
+                            <DoubleCheckboxFilterform
+                                filtervalg={filtervalg}
+                                closeDropdown={lukkDropdown}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
+                    )}
+                />
+            </div>
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
+                <Element className="blokk-xxs" tag="h3">
                     Status og brukergrupper
                 </Element>
                 <Dropdown
@@ -118,28 +187,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                             closeDropdown={lukkDropdown}
                             form="cvJobbprofil"
                         />
-                    )}
-                />
-                <Dropdown
-                    name="Svar fra registrering"
-                    id="svar-fra-registrering"
-                    render={lukkDropdown => (
-                        <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Situasjonen brukeren oppgir på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
-                            <CheckboxFilterform
-                                form="registreringstype"
-                                valg={registreringstype}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                                className="registreringstype"
-                            />
-                        </>
                     )}
                 />
                 <Dropdown

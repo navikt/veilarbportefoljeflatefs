@@ -1,6 +1,5 @@
 import SidebarTab from './sidebar-tab';
 import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
-import FiltreringFilter from '../../filtrering/filtrering-filter';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
@@ -18,9 +17,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
-import FiltreringFilterUtdanning from '../../filtrering/filtrering-filter-utdanning';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {UTDANNING_FILTER} from '../../konstanter';
+import FiltreringFilter from '../../filtrering/filtrering-filter';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -54,7 +51,6 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
     };
-    const erUtdanningFeatureTogglePa = useFeatureSelector()(UTDANNING_FILTER);
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -90,19 +86,11 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
                 tab={selectedTabData.type}
             >
-                {erUtdanningFeatureTogglePa ? (
-                    <FiltreringFilterUtdanning
-                        endreFiltervalg={doEndreFiltervalg}
-                        filtervalg={filtervalg}
-                        enhettiltak={enhettiltak}
-                    />
-                ) : (
-                    <FiltreringFilter
-                        endreFiltervalg={doEndreFiltervalg}
-                        filtervalg={filtervalg}
-                        enhettiltak={enhettiltak}
-                    />
-                )}
+                <FiltreringFilter
+                    endreFiltervalg={doEndreFiltervalg}
+                    filtervalg={filtervalg}
+                    enhettiltak={enhettiltak}
+                />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Veiledergrupper') {
