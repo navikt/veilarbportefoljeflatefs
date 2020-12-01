@@ -9,11 +9,12 @@ import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {useDispatch} from 'react-redux';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
@@ -22,7 +23,6 @@ interface CheckboxFilterformProps {
 }
 
 function CheckboxFilterform({
-    endreFiltervalg,
     valg,
     closeDropdown,
     form,
@@ -34,6 +34,7 @@ function CheckboxFilterform({
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setCheckBoxValg(filtervalg[form]);
@@ -46,17 +47,13 @@ function CheckboxFilterform({
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
-    const nullstillValg = () => {
-        endreFiltervalg(form, []);
-    };
-
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    endreFiltervalg(form, checkBoxValg);
+                    dispatch(endreFiltervalg(form, checkBoxValg));
                 }
                 closeDropdown();
             }}
@@ -75,7 +72,11 @@ function CheckboxFilterform({
             >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="checkbox-filterform" nullstillValg={nullstillValg} form={form} />
+                    <NullstillValgKnapp
+                        dataTestId="checkbox-filterform"
+                        nullstillValg={() => dispatch(endreFiltervalg(form, []))}
+                        form={form}
+                    />
                 )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">

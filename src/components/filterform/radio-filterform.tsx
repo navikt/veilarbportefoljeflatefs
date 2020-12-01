@@ -7,7 +7,8 @@ import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
 import {kebabCase} from '../../utils/utils';
-import {OrNothing} from '../../utils/types/types';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {useDispatch} from 'react-redux';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -15,23 +16,19 @@ interface ValgType {
 
 interface RadioFilterformProps {
     form: string;
-    endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
     closeDropdown: () => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
 }
 
-export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
+export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setValgteFilterValg(filtervalg[form]);
     }, [filtervalg, form]);
-
-    const nullstillValg = () => {
-        endreFiltervalg(form, null);
-    };
 
     let reactKey = 1;
     return (
@@ -40,7 +37,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
             onSubmit={e => {
                 e.preventDefault();
                 if (valgtFilterValg) {
-                    endreFiltervalg(form, valgtFilterValg);
+                    dispatch(endreFiltervalg(form, valgtFilterValg));
                 }
                 closeDropdown();
             }}
@@ -69,7 +66,11 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     dataTestId="radio-filterform"
                 />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} form={form} />
+                    <NullstillValgKnapp
+                        dataTestId="radio-filterform"
+                        nullstillValg={() => dispatch(endreFiltervalg(form, null))}
+                        form={form}
+                    />
                 )}
             </div>
         </form>

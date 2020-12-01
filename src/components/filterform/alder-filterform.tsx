@@ -10,17 +10,18 @@ import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {useDispatch} from 'react-redux';
 
 interface AlderFilterformProps {
     form: string;
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
 }
 
-function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
+function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
@@ -30,6 +31,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
 
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
+    const dispatch = useDispatch();
 
     useEffect(() => {
         filtervalg[form].forEach(alder => {
@@ -81,11 +83,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             setFeil(false);
             setFeilTekst('');
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [0 + '-' + inputAlderTil]);
+                dispatch(endreFiltervalg(form, [0 + '-' + inputAlderTil]));
             } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                endreFiltervalg(form, [inputAlderFra + '-' + 100]);
+                dispatch(endreFiltervalg(form, [inputAlderFra + '-' + 100]));
             } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+                dispatch(endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]));
             }
             closeDropdown();
         }
@@ -95,7 +97,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         e.preventDefault();
 
         if (checkBoxValg.length > 0) {
-            endreFiltervalg(form, checkBoxValg);
+            dispatch(endreFiltervalg(form, checkBoxValg));
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: true,
                 sideNavn: finnSideNavn()
@@ -122,7 +124,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
-        endreFiltervalg(form, []);
+        dispatch(endreFiltervalg(form, []));
     };
 
     return (

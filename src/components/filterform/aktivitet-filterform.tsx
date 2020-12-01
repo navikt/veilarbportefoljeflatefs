@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
+import {AktiviteterValg, endreFiltervalg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './filterform.less';
 import VelgLukkKnapp from '../velg-lukk-knapp';
 import NullstillValgKnapp from '../nullstill-valg-knapp';
 import {Dictionary} from '../../utils/types/types';
 import {FiltervalgModell} from '../../model-interfaces';
+import {pagineringSetup} from '../../ducks/paginering';
+import {useDispatch} from 'react-redux';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (form: string, filterVerdi: any) => void;
     closeDropdown: () => void;
 }
 
@@ -26,6 +27,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterform(props: AktivitetFilterformProps) {
+    const dispatch = useDispatch();
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -86,7 +88,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
 
     const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
+        dispatch(endreFiltervalg('aktiviteter', aktivitetInitialState));
     };
 
     return (
@@ -94,7 +96,8 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
             className="skjema aktivitetfilterform"
             onSubmit={() => {
                 if (harValg) {
-                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
+                    pagineringSetup({side: 1});
+                    dispatch(endreFiltervalg('aktiviteter', valgteAktiviteter));
                 }
                 props.closeDropdown();
             }}

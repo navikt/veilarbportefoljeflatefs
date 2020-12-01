@@ -4,8 +4,6 @@ import FiltreringFilter from '../../filtrering/filtrering-filter';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
-import {pagineringSetup} from '../../ducks/paginering';
-import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {ListevisningType} from '../../ducks/ui/listevisning';
@@ -50,10 +48,6 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
     const mineFilter = mineFilterState.data;
     const erPaMinOversikt = filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = filtergruppe === ListevisningType.enhetensOversikt;
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
-        dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
-    };
     const erUtdanningFeatureTogglePa = useFeatureSelector()(UTDANNING_FILTER);
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
@@ -92,13 +86,11 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
             >
                 {erUtdanningFeatureTogglePa ? (
                     <FiltreringFilterUtdanning
-                        endreFiltervalg={doEndreFiltervalg}
                         filtervalg={filtervalg}
                         enhettiltak={enhettiltak}
                     />
                 ) : (
                     <FiltreringFilter
-                        endreFiltervalg={doEndreFiltervalg}
                         filtervalg={filtervalg}
                         enhettiltak={enhettiltak}
                     />
