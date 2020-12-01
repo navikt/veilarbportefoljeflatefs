@@ -76,6 +76,7 @@ function CheckboxFilterform({
                         dataTestId="checkbox-filterform"
                         nullstillValg={() => dispatch(endreFiltervalg(form, []))}
                         form={form}
+                        disabled={checkBoxValg.length <= 0}
                     />
                 )}
                 {!harValg && (

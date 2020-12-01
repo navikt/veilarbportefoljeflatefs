@@ -37,7 +37,7 @@ interface FiltreringFilterProps {
     enhettiltak: any;
 }
 
-function FiltreringFilter({filtervalg, enhettiltak,}: FiltreringFilterProps) {
+function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
 
@@ -119,7 +119,6 @@ function FiltreringFilter({filtervalg, enhettiltak,}: FiltreringFilterProps) {
                                 form="registreringstype"
                                 valg={registreringstype}
                                 filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 className="registreringstype"
                             />
@@ -141,7 +140,6 @@ function FiltreringFilter({filtervalg, enhettiltak,}: FiltreringFilterProps) {
                                 form="utdanning"
                                 valg={utdanning}
                                 filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                             />
                         </>
@@ -158,11 +156,7 @@ function FiltreringFilter({filtervalg, enhettiltak,}: FiltreringFilterProps) {
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
                             </div>
-                            <DoubleCheckboxFilterform
-                                filtervalg={filtervalg}
-                                closeDropdown={lukkDropdown}
-                                endreFiltervalg={endreFiltervalg}
-                            />
+                            <DoubleCheckboxFilterform filtervalg={filtervalg} closeDropdown={lukkDropdown} />
                         </>
                     )}
                 />
@@ -177,7 +171,6 @@ function FiltreringFilter({filtervalg, enhettiltak,}: FiltreringFilterProps) {
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={cvJobbprofil}
-                            endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             form="cvJobbprofil"
