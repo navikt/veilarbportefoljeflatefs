@@ -69,7 +69,12 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     dataTestId="radio-filterform"
                 />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="radio-filterform" nullstillValg={nullstillValg} form={form} />
+                    <NullstillValgKnapp
+                        dataTestId="radio-filterform"
+                        nullstillValg={nullstillValg}
+                        form={form}
+                        disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
+                    />
                 )}
             </div>
         </form>

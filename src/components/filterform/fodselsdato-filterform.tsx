@@ -60,7 +60,12 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
             >
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="fodselsdato-filterform" nullstillValg={nullstillValg} form={form} />
+                    <NullstillValgKnapp
+                        dataTestId="fodselsdato-filterform"
+                        nullstillValg={nullstillValg}
+                        form={form}
+                        disabled={checkBoxValg.length <= 0}
+                    />
                 )}
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">

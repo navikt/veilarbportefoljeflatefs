@@ -23,6 +23,7 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
                     <div className="checkbox-filterform__valg">
                         {liste.map((elem, index) => (
                             <Checkbox
+                                role="checkbox"
                                 key={elem.ident}
                                 label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}

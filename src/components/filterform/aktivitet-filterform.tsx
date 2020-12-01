@@ -109,7 +109,8 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAktiviteter}
-                    form={'aktiviteter'}
+                    form='aktiviteter'
+                    disabled={!harValg}
                 />
             </div>
         </form>

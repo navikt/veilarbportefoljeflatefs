@@ -42,6 +42,7 @@ function FiltreringVeiledere() {
                 value={veilederNavnQuery}
                 onFocus={() => setHasFocus(true)}
                 data-testid="veilederoversikt_sok-veileder-input"
+                aria-label="Navn eller NAV-ident"
             />
             {hasFocus && (
                 <VeilederCheckboxListe

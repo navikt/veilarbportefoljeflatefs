@@ -197,7 +197,12 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             >
                 <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
                 {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} form={form} />
+                    <NullstillValgKnapp
+                        dataTestId="alder-filterform"
+                        nullstillValg={nullstillValg}
+                        form={form}
+                        disabled={!kanVelgeFilter}
+                    />
                 )}
             </div>
         </form>

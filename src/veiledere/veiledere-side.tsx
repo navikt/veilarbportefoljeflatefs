@@ -48,12 +48,16 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse veilederoversikt" role="tab" aria-controls={id} id={id}>
+            <div className="side-storrelse veilederoversikt" id={`side-storrelse_${id}`}>
                 <ToppMeny />
                 <Innholdslaster avhengigheter={[statustall]}>
-                    <div className="oversikt-sideinnhold-veilederside" role="tabpanel" aria-labelledby={id} id={id}>
+                    <div
+                        className="oversikt-sideinnhold-veilederside"
+                        role="tabpanel"
+                        id={`oversikt-sideinnhold_${id}`}
+                    >
                         <div className="status-filter-kolonne">
-                            <PanelBase className="blokk-xxxs sok-veileder">
+                            <PanelBase className="blokk-xxxs sok-veileder" role="search">
                                 <Undertittel>Søk veileder</Undertittel>
                                 <FiltreringVeiledere />
                             </PanelBase>
@@ -61,7 +65,7 @@ function VeiledereSide() {
                                 <FilteringVeiledergrupper filtergruppe={ListevisningType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>
-                        <div className="liste-kolonne">
+                        <div className="liste-kolonne" role="list">
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     veiledere: lagLablerTilVeiledereMedIdenter(
@@ -72,6 +76,7 @@ function VeiledereSide() {
                                 }}
                                 filtergruppe={ListevisningType.veilederOversikt}
                                 className="filtrering-label-container"
+                                role="listitem"
                             />
                             <VeiledersideVisning
                                 veiledere={veiledere.data.veilederListe}
