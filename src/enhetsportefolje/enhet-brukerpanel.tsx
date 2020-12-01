@@ -60,11 +60,6 @@ function EnhetBrukerpanel({
                     label=""
                     role="checkbox"
                     className="brukerliste__checkbox"
-                    aria-label={`Checkbox for ${
-                        bruker.fnr === ''
-                            ? 'kode ' + bruker.diskresjonskode + ' bruker'
-                            : bruker.fornavn + ' ' + bruker.etternavn
-                    }`}
                 />
             </div>
             <EnhetKolonner
