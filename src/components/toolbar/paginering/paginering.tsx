@@ -52,7 +52,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 disabled={erPaForsteSide}
                 onClick={() => totalPaginering(side - 1, seAlle)}
                 data-testid="paginering_venstre"
-                ariaLabel="Se forrige side"
+                ariaLabel="Forrige side"
             >
                 <VenstreChevron />
             </KnappPanel>
@@ -61,13 +61,13 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 <KnappPanel
                     onClick={() => totalPaginering(1, seAlle)}
                     data-testid="paginering-tall_1"
-                    ariaLabel="Vis side 1"
+                    ariaLabel="Side 1"
                 >
                     1
                 </KnappPanel>
             )}
 
-            <KnappPanel data-testid={`paginering-tall_${side}`} selected ariaLabel={`Vis side ${side}`}>
+            <KnappPanel data-testid={`paginering-tall_${side}`} selected ariaLabel={`Side ${side}`}>
                 <strong>{side}</strong>
             </KnappPanel>
 
@@ -75,7 +75,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 <KnappPanel
                     onClick={() => totalPaginering(antallSider, seAlle)}
                     data-testid={`paginering-tall_${antallSider}`}
-                    ariaLabel={`Vis side ${antallSider}`}
+                    ariaLabel={`Side ${antallSider}`}
                 >
                     {antallSider}
                 </KnappPanel>
@@ -85,7 +85,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 disabled={erPaSisteSide || seAlle}
                 onClick={() => totalPaginering(side + 1, seAlle)}
                 data-testid="paginering_hoyre"
-                ariaLabel="Se neste side"
+                ariaLabel="Neste side"
             >
                 <HoyreChevron />
             </KnappPanel>
