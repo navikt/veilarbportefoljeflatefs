@@ -29,52 +29,36 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
     const skalSkjules =
         innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
 
+    const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBrukerMedOgUtenArbeidsliste =
+        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
+
     if (skalSkjules) {
         return null;
     }
 
     return (
         <div className="toolbar_btnwrapper">
-            <ArbeidsListeKnapp
-                valgteBrukere={valgteBrukere}
-                onClickHandler={() => dispatch(visArbeidslisteModal())}
-                visesAnnenVeiledersPortefolje={props.visesAnnenVeiledersPortefolje}
-            />
+            <button
+                type="button"
+                className="toolbar_btn"
+                disabled={
+                    valgteBrukere.length < 1 ||
+                    props.visesAnnenVeiledersPortefolje ||
+                    inneholderBrukerMedOgUtenArbeidsliste
+                }
+                onClick={() => dispatch(visArbeidslisteModal())}
+                data-testid={
+                    inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
+                }
+            >
+                <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon" />
+                <Normaltekst className="toolbar-knapp__tekst">
+                    {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
+                </Normaltekst>
+            </button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
         </div>
     );
 }
-
-function ArbeidsListeKnapp(props: {
-    valgteBrukere: BrukerModell[];
-    onClickHandler: () => void;
-    visesAnnenVeiledersPortefolje: boolean;
-}) {
-    const inneholderBrukerMedArbeidsliste = props.valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-    const inneholderBrukerMedOgUtenArbeidsliste =
-        inneholderBrukerMedArbeidsliste && props.valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
-
-    const arbeidslisteButton = tekst => (
-        <button
-            type="button"
-            className="toolbar_btn"
-            disabled={
-                props.valgteBrukere.length < 1 ||
-                props.visesAnnenVeiledersPortefolje ||
-                inneholderBrukerMedOgUtenArbeidsliste
-            }
-            onClick={props.onClickHandler}
-            data-testid={inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'}
-        >
-            <ArbeidslisteIkonLinje className="toolbar-knapp__ikon" id="arbeidsliste-ikon" />
-            <Normaltekst className="toolbar-knapp__tekst">{tekst}</Normaltekst>
-        </button>
-    );
-
-    if (inneholderBrukerMedArbeidsliste) {
-        return arbeidslisteButton('Fjern fra arbeidsliste');
-    }
-    return arbeidslisteButton('Legg i arbeidsliste');
-}
-
 export default LeggTilArbeidsliste;

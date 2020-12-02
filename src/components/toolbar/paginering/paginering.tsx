@@ -1,32 +1,29 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSeAlle, selectSide, selectSideStorrelse} from './paginering-selector';
 import './paginering.less';
+import {AppState} from '../../../reducer';
 
-interface StateProps {
-    side: number;
-    sideStorrelse: number;
-    seAlle: boolean;
-}
-
-interface DispatchProps {
-    endrePaginering: (side: number, seAlle: boolean) => void;
-}
-
-interface OwnProps {
+interface PagineringProps {
     className: string;
     antallTotalt: number;
     onChange?: (fra?: number, til?: number) => void;
 }
 
-type PagineringProps = StateProps & OwnProps & DispatchProps;
+function Paginering({className, antallTotalt, onChange}: PagineringProps) {
+    const side = useSelector((state: AppState) => selectSide(state));
+    const sideStorrelse = useSelector((state: AppState) => selectSideStorrelse(state));
+    const seAlle = useSelector((state: AppState) => selectSeAlle(state));
 
-function Paginering(props: PagineringProps) {
-    const {className, onChange, side, sideStorrelse, antallTotalt, seAlle, endrePaginering} = props;
+    const dispatch = useDispatch();
+
+    const endrePaginering = (side, seAlle) => {
+        dispatch(pagineringSetup({side, seAlle}));
+    };
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse);
     const erPaForsteSide: boolean = side === 1;
@@ -43,9 +40,10 @@ function Paginering(props: PagineringProps) {
         <div className={classNames('paginering', className)}>
             <KnappPanel
                 disabled={!seAlle && antallTotalt <= sideStorrelse}
-                pressed={seAlle && antallTotalt <= sideStorrelse}
+                selected={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
                 data-testid={!seAlle ? 'se-alle_knapp' : 'se-faerre_knapp'}
+                ariaLabel={!seAlle ? 'Se alle' : 'Se færre'}
             >
                 {!seAlle ? 'Se alle' : 'Se færre'}
             </KnappPanel>
@@ -54,17 +52,22 @@ function Paginering(props: PagineringProps) {
                 disabled={erPaForsteSide}
                 onClick={() => totalPaginering(side - 1, seAlle)}
                 data-testid="paginering_venstre"
+                ariaLabel="Se forrige side"
             >
                 <VenstreChevron />
             </KnappPanel>
 
             {!erPaForsteSide && (
-                <KnappPanel onClick={() => totalPaginering(1, seAlle)} data-testid="paginering-tall_1">
+                <KnappPanel
+                    onClick={() => totalPaginering(1, seAlle)}
+                    data-testid="paginering-tall_1"
+                    ariaLabel="Vis side 1"
+                >
                     1
                 </KnappPanel>
             )}
 
-            <KnappPanel data-testid={`paginering-tall_${side}`} selected>
+            <KnappPanel data-testid={`paginering-tall_${side}`} selected ariaLabel={`Vis side ${side}`}>
                 <strong>{side}</strong>
             </KnappPanel>
 
@@ -72,6 +75,7 @@ function Paginering(props: PagineringProps) {
                 <KnappPanel
                     onClick={() => totalPaginering(antallSider, seAlle)}
                     data-testid={`paginering-tall_${antallSider}`}
+                    ariaLabel={`Vis side ${antallSider}`}
                 >
                     {antallSider}
                 </KnappPanel>
@@ -81,6 +85,7 @@ function Paginering(props: PagineringProps) {
                 disabled={erPaSisteSide || seAlle}
                 onClick={() => totalPaginering(side + 1, seAlle)}
                 data-testid="paginering_hoyre"
+                ariaLabel="Se neste side"
             >
                 <HoyreChevron />
             </KnappPanel>
@@ -88,16 +93,4 @@ function Paginering(props: PagineringProps) {
     );
 }
 
-const mapStateToProps = (state): StateProps => {
-    return {
-        side: selectSide(state),
-        sideStorrelse: selectSideStorrelse(state),
-        seAlle: selectSeAlle(state)
-    };
-};
-
-const mapDispatchToProps = (dispatch, props: OwnProps) => ({
-    endrePaginering: (side, seAlle) => dispatch(pagineringSetup({side, seAlle}))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Paginering);
+export default Paginering;
