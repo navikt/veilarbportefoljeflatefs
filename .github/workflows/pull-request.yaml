@@ -11,7 +11,7 @@ jobs:
         name: Cypress run
         runs-on: ubuntu-latest
         timeout-minutes: 15
-        if: "!contains(github.event.pull_request.title, 'no_cypress')"
+        if: contains(github.event.pull_request.title, '[no_cypress]') == false
         steps:
             - name: Checkout
               uses: actions/checkout@v2
