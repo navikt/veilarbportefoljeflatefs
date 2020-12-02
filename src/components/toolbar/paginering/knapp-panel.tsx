@@ -23,7 +23,6 @@ function KnappPanel({children, disabled = false, selected = false, ariaLabel, ..
             {...props}
             aria-label={ariaLabel}
             title={ariaLabel}
-            aria-selected={selected}
         >
             {children}
         </button>

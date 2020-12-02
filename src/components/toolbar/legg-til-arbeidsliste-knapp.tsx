@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
 import './toolbar.less';
 import {useLocation, useParams} from 'react-router';
-import {BrukerModell} from '../../model-interfaces';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
 import {ReactComponent as ArbeidslisteIkonLinje} from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
@@ -14,7 +13,7 @@ interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
 }
 
-function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
+function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
     const innloggetVeileder = useIdentSelector();
@@ -61,4 +60,4 @@ function LeggTilArbeidsliste(props: LeggTilArbeidslisteProps) {
         </div>
     );
 }
-export default LeggTilArbeidsliste;
+export default ArbeidslisteKnapp;
