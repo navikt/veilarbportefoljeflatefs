@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {AktiviteterValg, endreFiltervalg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
+import {AktiviteterValg, endreFiltervalg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
 import './filterform.less';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {Dictionary} from '../../utils/types/types';
-import {FiltervalgModell} from '../../model-interfaces';
-import {pagineringSetup} from '../../ducks/paginering';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {Dictionary} from '../../../utils/types/types';
+import {FiltervalgModell} from '../../../model-interfaces';
+import {pagineringSetup} from '../../../ducks/paginering';
 import {useDispatch} from 'react-redux';
 
 interface AktivitetFilterformProps {

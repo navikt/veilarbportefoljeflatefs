@@ -15,7 +15,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
-import FiltreringFilter from '../../filtrering/filtrering-filter';
+import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {

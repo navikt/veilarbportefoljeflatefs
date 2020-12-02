@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../model-interfaces';
-import {Dictionary} from '../../utils/types/types';
-import Grid from '../grid/grid';
+import {FiltervalgModell} from '../../../model-interfaces';
+import {Dictionary} from '../../../utils/types/types';
+import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
 import './filterform.less';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../konstanter';
-import {endreFiltervalg} from '../../ducks/filtrering';
+import {logEvent} from '../../../utils/frontend-logger';
+import {finnSideNavn} from '../../../middleware/metrics-middleware';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../../konstanter';
+import {endreFiltervalg} from '../../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
-import {pagineringSetup} from '../../ducks/paginering';
+import {pagineringSetup} from '../../../ducks/paginering';
 
 interface AlderFilterformProps {
     form: string;
