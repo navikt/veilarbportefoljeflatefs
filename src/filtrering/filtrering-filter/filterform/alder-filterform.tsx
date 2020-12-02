@@ -12,6 +12,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
+import {pagineringSetup} from '../../ducks/paginering';
 
 interface AlderFilterformProps {
     form: string;
@@ -95,8 +96,8 @@ function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: Ald
 
     const submitForm = e => {
         e.preventDefault();
-
         if (checkBoxValg.length > 0) {
+            pagineringSetup({side: 1});
             dispatch(endreFiltervalg(form, checkBoxValg));
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: true,

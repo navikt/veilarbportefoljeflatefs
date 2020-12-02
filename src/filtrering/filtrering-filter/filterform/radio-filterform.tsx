@@ -9,6 +9,7 @@ import {NULLSTILL_KNAPP} from '../../konstanter';
 import {kebabCase} from '../../utils/utils';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
+import {pagineringSetup} from '../../ducks/paginering';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -30,18 +31,32 @@ export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFi
         setValgteFilterValg(filtervalg[form]);
     }, [filtervalg, form]);
 
+    console.log('ESRHSFH', valgtFilterValg);
+
+    const handleRadioChange = e => {
+        setValgteFilterValg(e.target.value);
+        e.preventDefault();
+        if (valgtFilterValg) {
+            console.log("HER");
+            pagineringSetup({side: 1});
+            dispatch(endreFiltervalg(form, valgtFilterValg));
+        }
+        // closeDropdown();
+    };
     let reactKey = 1;
     return (
-        <form
-            className="skjema radio-filterform"
-            onSubmit={e => {
-                e.preventDefault();
-                if (valgtFilterValg) {
-                    dispatch(endreFiltervalg(form, valgtFilterValg));
-                }
-                closeDropdown();
-            }}
-        >
+        // <form
+        //     className="skjema radio-filterform"
+        //     onChange={e => {
+        //         e.preventDefault();
+        //         if (valgtFilterValg) {
+        //             pagineringSetup({side: 1});
+        //             dispatch(endreFiltervalg(form, valgtFilterValg));
+        //         }
+        //         closeDropdown();
+        //     }}
+        // >
+        <>
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
@@ -51,7 +66,7 @@ export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFi
                         name={valg[v].label}
                         className={valg[v].className}
                         checked={valgtFilterValg === v}
-                        onChange={e => setValgteFilterValg(e.target.value)}
+                        onChange={e => handleRadioChange(e)}
                         data-testid={`radio-valg_${kebabCase(valg[v].label)}`}
                     />
                 ))}
@@ -61,10 +76,14 @@ export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFi
                     erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
                 }
             >
-                <VelgLukkKnapp
-                    harValg={valgtFilterValg !== '' && valgtFilterValg !== null}
-                    dataTestId="radio-filterform"
-                />
+                {/*<VelgLukkKnapp*/}
+                {/*    harValg={valgtFilterValg !== '' && valgtFilterValg !== null}*/}
+                {/*    dataTestId="radio-filterform"*/}
+                {/*/>*/}
+                <button type="button" className={'knapp knapp--mini'} data-testid={`radio-filterform_lukk-knapp`}>
+                    Lukk
+                </button>
+
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="radio-filterform"
@@ -74,6 +93,6 @@ export function RadioFilterform({form, closeDropdown, valg, filtervalg}: RadioFi
                     />
                 )}
             </div>
-        </form>
+        </>
     );
 }

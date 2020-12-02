@@ -9,6 +9,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../konstanter';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
+import {pagineringSetup} from '../../ducks/paginering';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -41,6 +42,7 @@ function FodselsdatoFilterform({valg, closeDropdown, form, filtervalg}: Checkbox
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
+                    pagineringSetup({side: 1});
                     dispatch(endreFiltervalg(form, checkBoxValg));
                 }
                 closeDropdown();
