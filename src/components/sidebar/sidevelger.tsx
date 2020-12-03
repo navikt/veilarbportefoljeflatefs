@@ -88,9 +88,9 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 tab={selectedTabData.type}
             >
                 <FiltreringFilter
+                    endreFiltervalg={doEndreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
-                    endreFiltervalg={doEndreFiltervalg}
                 />
             </SidebarTab>
         );

@@ -51,34 +51,40 @@ function CheckboxFilterform({
               );
     };
 
+    const nullstillValg = () => {
+        endreFiltervalg(form, []);
+        closeDropdown();
+    };
+
     return (
-        <form
-            className="skjema checkbox-filterform"
-            // onSubmit={e => {
-            //     e.preventDefault();
-            //     if (checkBoxValg.length > 0) {
-            //         endreFiltervalg(form, checkBoxValg);
-            //     }
-            //     closeDropdown();
-            // }}
-        >
+        <form className="skjema checkbox-filterform">
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={columns}>
-                        <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
+                        {Object.entries(valg).map(([filterKey, filterValue]) => (
+                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                <input
+                                    id={filterKey}
+                                    type="checkbox"
+                                    className="skjemaelement__input checkboks"
+                                    value={filterKey}
+                                    checked={checkBoxValg.includes(filterKey)}
+                                    onChange={velgCheckBox}
+                                    data-testid={`filter_${filterKey}`}
+                                />
+                                <label htmlFor={filterKey} className="skjemaelement__label">
+                                    {filterValue}
+                                </label>
+                            </div>
+                        ))}
                     </Grid>
                 </div>
             )}
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
-                <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
+            <div className={'filterform__under-valg'}>
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="checkbox-filterform"
-                        nullstillValg={() => dispatch(endreFiltervalg(form, []))}
+                        nullstillValg={nullstillValg}
                         form={form}
                         disabled={checkBoxValg.length <= 0}
                     />
@@ -90,29 +96,6 @@ function CheckboxFilterform({
                 )}
             </div>
         </form>
-    );
-}
-
-function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => void; checkBoxValg: string[]}) {
-    return (
-        <>
-            {Object.entries(props.valg).map(([filterKey, filterValue]) => (
-                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                    <input
-                        id={filterKey}
-                        type="checkbox"
-                        className="skjemaelement__input checkboks"
-                        value={filterKey}
-                        checked={props.checkBoxValg.includes(filterKey)}
-                        onChange={props.velgCheckBox}
-                        data-testid={`filter_${filterKey}`}
-                    />
-                    <label htmlFor={filterKey} className="skjemaelement__label">
-                        {filterValue}
-                    </label>
-                </div>
-            ))}
-        </>
     );
 }
 

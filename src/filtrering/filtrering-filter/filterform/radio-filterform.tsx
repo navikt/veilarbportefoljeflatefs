@@ -4,7 +4,6 @@ import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
 import {FiltervalgModell} from '../../../model-interfaces';
-import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
@@ -25,25 +24,20 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
     useEffect(() => {
         setValgteFilterValg(filtervalg[form]);
     }, [filtervalg, form]);
+
     const nullstillValg = () => {
         endreFiltervalg(form, null);
+        closeDropdown();
     };
+
     const onChange = e => {
         e.preventDefault();
         endreFiltervalg(form, e.target.value);
     };
+
     let reactKey = 1;
     return (
-        <form
-            className="skjema radio-filterform"
-            // onSubmit={e => {
-            //     e.preventDefault();
-            //     if (valgtFilterValg) {
-            //         endreFiltervalg(form, valgtFilterValg);
-            //     }
-            //     closeDropdown();
-            // }}
-        >
+        <form className="skjema radio-filterform">
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
@@ -58,15 +52,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     />
                 ))}
             </div>
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
-                <VelgLukkKnapp
-                    harValg={valgtFilterValg !== '' && valgtFilterValg !== null}
-                    dataTestId="radio-filterform"
-                />
+            <div className={'filterform__under-valg'}>
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="radio-filterform"
