@@ -11,6 +11,7 @@ import {useDispatch} from 'react-redux';
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
+    endreFiltervalg: (form: string, filterVerdi: any) => void;
     closeDropdown: () => void;
 }
 
@@ -27,7 +28,6 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterform(props: AktivitetFilterformProps) {
-    const dispatch = useDispatch();
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -88,7 +88,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
 
     const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        dispatch(endreFiltervalg('aktiviteter', aktivitetInitialState));
+        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
     };
 
     return (
@@ -96,8 +96,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
             className="skjema aktivitetfilterform"
             onSubmit={() => {
                 if (harValg) {
-                    pagineringSetup({side: 1});
-                    dispatch(endreFiltervalg('aktiviteter', valgteAktiviteter));
+                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
                 }
                 props.closeDropdown();
             }}
@@ -112,7 +111,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAktiviteter}
-                    form='aktiviteter'
+                    form="aktiviteter"
                     disabled={!harValg}
                 />
             </div>

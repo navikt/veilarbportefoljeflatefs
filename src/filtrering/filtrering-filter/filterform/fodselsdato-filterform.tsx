@@ -14,14 +14,14 @@ import {pagineringSetup} from '../../../ducks/paginering';
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-    const dispatch = useDispatch();
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
@@ -36,14 +36,17 @@ function FodselsdatoFilterform({valg, closeDropdown, form, filtervalg}: Checkbox
         setCheckBoxValg(filtervalg[form]);
     }, [filtervalg, form]);
 
+    const nullstillValg = () => {
+        endreFiltervalg(form, []);
+    };
+
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
                 e.preventDefault();
                 if (checkBoxValg.length > 0) {
-                    pagineringSetup({side: 1});
-                    dispatch(endreFiltervalg(form, checkBoxValg));
+                    endreFiltervalg(form, checkBoxValg);
                 }
                 closeDropdown();
             }}
@@ -62,7 +65,7 @@ function FodselsdatoFilterform({valg, closeDropdown, form, filtervalg}: Checkbox
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="fodselsdato-filterform"
-                        nullstillValg={() => dispatch(endreFiltervalg(form, []))}
+                        nullstillValg={nullstillValg}
                         form={form}
                         disabled={checkBoxValg.length <= 0}
                     />

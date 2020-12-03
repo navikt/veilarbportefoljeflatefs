@@ -17,12 +17,13 @@ import {pagineringSetup} from '../../../ducks/paginering';
 interface AlderFilterformProps {
     form: string;
     valg: Dictionary<string>;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
 }
 
-function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
+function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
@@ -32,7 +33,6 @@ function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: Ald
 
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
-    const dispatch = useDispatch();
 
     useEffect(() => {
         filtervalg[form].forEach(alder => {
@@ -84,11 +84,11 @@ function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: Ald
             setFeil(false);
             setFeilTekst('');
             if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                dispatch(endreFiltervalg(form, [0 + '-' + inputAlderTil]));
+                endreFiltervalg(form, [0 + '-' + inputAlderTil]);
             } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                dispatch(endreFiltervalg(form, [inputAlderFra + '-' + 100]));
+                endreFiltervalg(form, [inputAlderFra + '-' + 100]);
             } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                dispatch(endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]));
+                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
             }
             closeDropdown();
         }
@@ -97,8 +97,7 @@ function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: Ald
     const submitForm = e => {
         e.preventDefault();
         if (checkBoxValg.length > 0) {
-            pagineringSetup({side: 1});
-            dispatch(endreFiltervalg(form, checkBoxValg));
+            endreFiltervalg(form, checkBoxValg);
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: true,
                 sideNavn: finnSideNavn()
@@ -125,7 +124,7 @@ function AlderFilterform({valg, closeDropdown, form, filtervalg, className}: Ald
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
-        dispatch(endreFiltervalg(form, []));
+        endreFiltervalg(form, []);
     };
 
     return (

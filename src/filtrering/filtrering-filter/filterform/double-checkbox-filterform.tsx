@@ -12,9 +12,9 @@ import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
 import {endreFiltervalg} from '../../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
-import {pagineringSetup} from '../../../ducks/paginering';
 
 interface DoubleCheckboxFilterformProps {
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
@@ -32,6 +32,7 @@ const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
 const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
 
 function DoubleCheckboxFilterform({
+    endreFiltervalg,
     closeDropdown,
     filtervalg,
     className,
@@ -40,7 +41,6 @@ function DoubleCheckboxFilterform({
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
@@ -65,22 +65,21 @@ function DoubleCheckboxFilterform({
     };
 
     const nullstillValg = () => {
-        dispatch(endreFiltervalg(formCol1, []));
-        dispatch(endreFiltervalg(formCol2, []));
+        endreFiltervalg(formCol1, []);
+        endreFiltervalg(formCol2, []);
     };
 
     return (
         <form
             className="skjema checkbox-filterform"
-            onSubmit={e => {
-                e.preventDefault();
-                if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
-                    pagineringSetup({side: 1});
-                    dispatch(endreFiltervalg(formCol1, checkBoxValgCol1));
-                    dispatch(endreFiltervalg(formCol2, checkBoxValgCol2));
-                }
-                closeDropdown();
-            }}
+            // onSubmit={e => {
+            //     e.preventDefault();
+            //     if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
+            //         endreFiltervalg(formCol1, checkBoxValgCol1);
+            //         endreFiltervalg(formCol2, checkBoxValgCol2);
+            //     }
+            //     closeDropdown();
+            // }}
         >
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>

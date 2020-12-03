@@ -16,6 +16,8 @@ import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
+import {pagineringSetup} from '../../ducks/paginering';
+import {endreFiltervalg} from '../../ducks/filtrering';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -45,6 +47,11 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
     const mineFilter = mineFilterState.data;
     const erPaMinOversikt = filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = filtergruppe === ListevisningType.enhetensOversikt;
+
+    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+        dispatch(pagineringSetup({side: 1}));
+        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
+    };
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -83,6 +90,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 <FiltreringFilter
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
+                    endreFiltervalg={doEndreFiltervalg}
                 />
             </SidebarTab>
         );

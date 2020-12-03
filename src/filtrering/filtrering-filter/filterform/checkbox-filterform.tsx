@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Dictionary} from '../../../utils/types/types';
+import {Dictionary, OrNothing} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -9,13 +9,12 @@ import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
-import {endreFiltervalg} from '../../../ducks/filtrering';
 import {useDispatch} from 'react-redux';
-import {pagineringSetup} from '../../../ducks/paginering';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
@@ -24,6 +23,7 @@ interface CheckboxFilterformProps {
 }
 
 function CheckboxFilterform({
+    endreFiltervalg,
     valg,
     closeDropdown,
     form,
@@ -44,21 +44,23 @@ function CheckboxFilterform({
     const velgCheckBox = e => {
         e.persist();
         return e.target.checked
-            ? setCheckBoxValg(prevState => [...prevState, e.target.value])
-            : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
+            ? endreFiltervalg(form, [...checkBoxValg, e.target.value])
+            : endreFiltervalg(
+                  form,
+                  checkBoxValg.filter(value => value !== e.target.value)
+              );
     };
 
     return (
         <form
             className="skjema checkbox-filterform"
-            onSubmit={e => {
-                e.preventDefault();
-                if (checkBoxValg.length > 0) {
-                    pagineringSetup({side: 1});
-                    dispatch(endreFiltervalg(form, checkBoxValg));
-                }
-                closeDropdown();
-            }}
+            // onSubmit={e => {
+            //     e.preventDefault();
+            //     if (checkBoxValg.length > 0) {
+            //         endreFiltervalg(form, checkBoxValg);
+            //     }
+            //     closeDropdown();
+            // }}
         >
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>

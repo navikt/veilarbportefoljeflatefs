@@ -34,15 +34,19 @@ import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg'
 
 interface FiltreringFilterProps {
     filtervalg: any;
+    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
     enhettiltak: any;
 }
 
-function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
+function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
 
     return (
-        <div className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne" data-testid="filtrering-filter_container">
+        <div
+            className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
+            data-testid="filtrering-filter_container"
+        >
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
@@ -56,6 +60,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                                 form="alder"
                                 valg={alder}
                                 filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                             />
                         )}
@@ -69,6 +74,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                                 form="alder"
                                 valg={alder}
                                 filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 columns={2}
                             />
@@ -83,6 +89,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="fodselsdagIMnd"
                             valg={fodselsdagIMnd()}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -93,6 +100,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={kjonn}
+                            endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             form="kjonn"
@@ -119,6 +127,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                                 form="registreringstype"
                                 valg={registreringstype}
                                 filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                                 className="registreringstype"
                             />
@@ -140,6 +149,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                                 form="utdanning"
                                 valg={utdanning}
                                 filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
                                 closeDropdown={lukkDropdown}
                             />
                         </>
@@ -156,7 +166,11 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
                             </div>
-                            <DoubleCheckboxFilterform filtervalg={filtervalg} closeDropdown={lukkDropdown} />
+                            <DoubleCheckboxFilterform
+                                filtervalg={filtervalg}
+                                closeDropdown={lukkDropdown}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         </>
                     )}
                 />
@@ -171,6 +185,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={cvJobbprofil}
+                            endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             closeDropdown={lukkDropdown}
                             form="cvJobbprofil"
@@ -185,6 +200,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="innsatsgruppe"
                             valg={innsatsgruppe}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -198,6 +214,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="hovedmal"
                             valg={hovedmal}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -210,6 +227,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="formidlingsgruppe"
                             valg={formidlingsgruppe}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -222,6 +240,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="servicegruppe"
                             valg={servicegruppe}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -234,6 +253,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="manuellBrukerStatus"
                             valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -251,6 +271,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="rettighetsgruppe"
                             valg={rettighetsgruppe}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                         />
                     )}
@@ -262,6 +283,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                         <RadioFilterform
                             valg={ytelse}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             form="ytelse"
                         />
@@ -278,7 +300,12 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                     name="Aktivitet"
                     id="aktivitet"
                     render={lukkDropdown => (
-                        <AktivitetFilterform valg={aktiviteter} filtervalg={filtervalg} closeDropdown={lukkDropdown} />
+                        <AktivitetFilterform
+                            valg={aktiviteter}
+                            filtervalg={filtervalg}
+                            closeDropdown={lukkDropdown}
+                            endreFiltervalg={endreFiltervalg}
+                        />
                     )}
                 />
                 <Dropdown
@@ -290,6 +317,7 @@ function FiltreringFilter({filtervalg, enhettiltak}: FiltreringFilterProps) {
                             form="tiltakstyper"
                             valg={enhettiltak}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"
