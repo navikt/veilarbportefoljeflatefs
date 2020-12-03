@@ -6,12 +6,9 @@ import './filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
-import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
-import {endreFiltervalg} from '../../../ducks/filtrering';
-import {useDispatch} from 'react-redux';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -55,32 +52,29 @@ function DoubleCheckboxFilterform({
         const id = e.target.value.replace(`${typeForm}_`, '');
         if (typeForm === formCol1)
             return e.target.checked
-                ? setCheckBoxValgCol1(prevState => [...prevState, id])
-                : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
+                ? endreFiltervalg(formCol1, [...checkBoxValgCol1, id])
+                : endreFiltervalg(
+                      formCol1,
+                      checkBoxValgCol1.filter(value => value !== id)
+                  );
         else if (typeForm === formCol2)
             return e.target.checked
-                ? setCheckBoxValgCol2(prevState => [...prevState, id])
-                : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
+                ? endreFiltervalg(formCol2, [...checkBoxValgCol2, id])
+                : endreFiltervalg(
+                      formCol2,
+                      checkBoxValgCol2.filter(value => value !== id)
+                  );
         return;
     };
 
     const nullstillValg = () => {
         endreFiltervalg(formCol1, []);
         endreFiltervalg(formCol2, []);
+        closeDropdown();
     };
 
     return (
-        <form
-            className="skjema checkbox-filterform"
-            // onSubmit={e => {
-            //     e.preventDefault();
-            //     if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
-            //         endreFiltervalg(formCol1, checkBoxValgCol1);
-            //         endreFiltervalg(formCol2, checkBoxValgCol2);
-            //     }
-            //     closeDropdown();
-            // }}
-        >
+        <form className="skjema checkbox-filterform">
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
                     <div
@@ -115,15 +109,7 @@ function DoubleCheckboxFilterform({
                     </div>
                 </div>
             )}
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
-                <VelgLukkKnapp
-                    harValg={checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0}
-                    dataTestId="double-checkbox-filterform"
-                />
+            <div className={'filterform__under-valg'}>
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="double-checkbox-filterform"

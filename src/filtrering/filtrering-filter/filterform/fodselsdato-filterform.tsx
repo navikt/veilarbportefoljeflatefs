@@ -3,13 +3,9 @@ import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
-import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
-import {endreFiltervalg} from '../../../ducks/filtrering';
-import {useDispatch} from 'react-redux';
-import {pagineringSetup} from '../../../ducks/paginering';
 
 interface CheckboxFilterformProps {
     form: string;

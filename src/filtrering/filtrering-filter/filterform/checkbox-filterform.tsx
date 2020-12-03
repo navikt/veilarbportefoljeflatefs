@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Dictionary, OrNothing} from '../../../utils/types/types';
+import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
-import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {NULLSTILL_KNAPP} from '../../../konstanter';
-import {useDispatch} from 'react-redux';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -35,7 +33,6 @@ function CheckboxFilterform({
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setCheckBoxValg(filtervalg[form]);
