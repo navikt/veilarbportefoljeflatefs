@@ -38,11 +38,21 @@ function getBrowserZoom(): number {
 
 export const loggBrowserMetrikker = (): void => {
     const browserAgent = getBrowserAgent();
+    const browserVersion = getBrowserVersion();
 
     logEvent('portefolje.browser_bruk', {browser: browserAgent, zoom: getBrowserZoom()});
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
-        logEvent(BROWSER_METRIKKER_LOG_TAG, {browser: browserAgent});
+        logEvent(BROWSER_METRIKKER_LOG_TAG, {browser: browserAgent, version: browserVersion});
     }
 };
+
+function getBrowserVersion() {
+    var ua = navigator.userAgent,
+        tem;
+    var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if (M && (tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
+    M = M ? [M[2]] : [navigator.appVersion, '-?'];
+    return M;
+}
