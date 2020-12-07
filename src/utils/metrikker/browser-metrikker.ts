@@ -40,7 +40,7 @@ export const loggBrowserMetrikker = (): void => {
     const browserAgent = getBrowserAgent();
     const browserVersion = getBrowserVersion();
 
-    logEvent('portefolje.browser_bruk', {browser: browserAgent, zoom: getBrowserZoom()});
+    logEvent('portefolje.browser_bruk', {browser: browserAgent, version: browserVersion, zoom: getBrowserZoom()});
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
