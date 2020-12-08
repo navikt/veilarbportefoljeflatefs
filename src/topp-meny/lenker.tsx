@@ -47,6 +47,5 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 </ActiveLink>
             </h2>
         </div>
-        // </>
     );
 }
