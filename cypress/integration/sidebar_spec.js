@@ -330,11 +330,15 @@ describe('Filter', () => {
     afterEach('Gå til status-tab', () => {
         cy.klikkTab('STATUS');
     });
-    it('Aldersinput med validering', () => {
+    it('Alder-filterform', () => {
         cy.apneLukkeFilterDropdown('alder');
+        cy.getByTestId('alder-filterform').should('exist');
+        cy.getByTestId('alder-filterform_nullstill-knapp').should('be.disabled');
+        cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
         cy.getByTestId('filter_alder-fra')
             .click()
             .type(tilAlder);
+        cy.getByTestId('alder-filterform_nullstill-knapp').should('be.enabled');
         cy.getByTestId('filter_alder-til')
             .click()
             .type(fraAlder);
@@ -354,33 +358,40 @@ describe('Filter', () => {
             .clear()
             .type(tilAlder);
         cy.getByTestId('filter_alder_valideringstekst').should('not.exist');
-
         cy.getByTestId('checkbox-filterform_velg-knapp')
             .contains('Velg')
             .should('be.enabled')
             .click();
+        cy.getByTestId('alder-filterform').should('not.exist');
         cy.getByTestId('filtreringlabel').contains(fraAlder + '-' + tilAlder + ' år');
+
         cy.apneLukkeFilterDropdown('alder');
+        cy.getByTestId('alder-filterform').should('exist');
         cy.getByTestId('filter_alder-fra').should('have.value', fraAlder);
         cy.getByTestId('filter_alder-til').should('have.value', tilAlder);
 
         cy.checkbox('filter_40-49');
         cy.getByTestId('filter_alder-fra').should('have.value', '');
         cy.getByTestId('filter_alder-til').should('have.value', '');
+        cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
+
         cy.getByTestId('filtreringlabel').contains('40-49 år');
         cy.getByTestId('filter_40-49').should('be.checked');
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
             .type(fraAlder);
+
         cy.getByTestId('filter_alder_valideringstekst').should('not.exist');
         cy.getByTestId('filter_40-49').should('not.be.checked');
         cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
             .should('be.enabled')
             .click();
         cy.getByTestId('filtreringlabel').contains(fraAlder + '-100 år');
+        cy.getByTestId('alder-filterform').should('not.exist');
+
         cy.apneLukkeFilterDropdown('alder');
+        cy.getByTestId('alder-filterform').should('exist');
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
@@ -390,7 +401,6 @@ describe('Filter', () => {
             .clear()
             .should('have.value', '');
         cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
             .should('be.enabled')
             .click();
         cy.getByTestId('filter_alder_valideringstekst')
@@ -404,27 +414,103 @@ describe('Filter', () => {
             .clear()
             .type(tilAlder);
         cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
             .should('be.enabled')
             .click();
-        cy.getByTestId('filtreringlabel')
-            .contains('0-' + tilAlder + ' år')
+        cy.getByTestId('alder-filterform').should('not.exist');
+
+        cy.apneLukkeFilterDropdown('alder');
+        cy.getByTestId('alder-filterform').should('exist');
+        cy.getByTestId('alder-filterform_nullstill-knapp')
+            .should('be.enabled')
             .click();
     });
 
-    it('Utdanningsfilter', () => {
+    it('Double checkbox-filterform', () => {
         cy.apneLukkeFilterDropdown('er-utdanningen-godkjent-og-bestatt');
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
+        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
         cy.getByTestId('filter_utdanningBestatt_JA').uncheck({force: true});
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
-        cy.getByTestId('filter_utdanningBestatt_NEI').check({force: true});
         cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
+        cy.getByTestId('filter_utdanningBestatt_NEI').check({force: true});
         cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Ja');
         cy.getByTestId('filter_utdanningGodkjent_NEI').check({force: true});
         cy.getByTestId('filtreringlabel').contains('Utdanning godkjent: Nei');
-        cy.getByTestId('filtreringlabel')
-            .contains('Slett alle filtervalg')
+        cy.getByTestId('double-checkbox-filterform_nullstill-knapp')
+            .should('be.enabled')
             .click();
+        cy.getByTestId('filtreringlabel').should('have.length', 0);
+    });
+
+    it('Aktivitet-filterform', () => {
+        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.disabled');
+        cy.apneLukkeFilterDropdown('aktivitet');
+        cy.getByTestId('aktivitet-filterform').should('exist');
+        cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.disabled');
+        cy.getByTestId('aktivitet-filterform-STILLING-ja').check({force: true});
+        cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.enabled');
+        cy.getByTestId('filtreringlabel').contains('Stilling bruker skal søke: JA');
+        cy.getByTestId('aktivitet-filterform-TILTAK-ja').check({force: true});
+        cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV: JA');
+        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.enabled');
+        cy.getByTestId('aktivitet-filterform_nullstill-knapp').click();
+        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('aktivitet-filterform').should('not.exist');
+    });
+
+    it('Fødselsdato-filterform', () => {
+        cy.apneLukkeFilterDropdown('fodselsdato');
+        cy.getByTestId('fodselsdato-filterform').should('exist');
+        cy.getByTestId('fodselsdato-filterform_nullstill-knapp').should('be.disabled');
+        cy.getByTestId('fodselsdato-filterform_dato-04').click();
+        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 4');
+        cy.getByTestId('fodselsdato-filterform_nullstill-knapp').should('be.enabled');
+        cy.getByTestId('fodselsdato-filterform_dato-23').click();
+        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 23');
+        cy.getByTestId('fodselsdato-filterform_dato-27').click();
+        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 27');
+        cy.getByTestId('filtreringlabel').should('have.length', 4);
+        cy.getByTestId('fodselsdato-filterform_dato-04_input').should('be.checked');
+        cy.getByTestId('fodselsdato-filterform_dato-23_input').should('be.checked');
+        cy.getByTestId('fodselsdato-filterform_dato-27_input').should('be.checked');
+        cy.getByTestId('fodselsdato-filterform_nullstill-knapp').click();
+        cy.getByTestId('fodselsdato-filterform').should('not.exist');
+        cy.apneLukkeFilterDropdown('fodselsdato');
+        cy.getByTestId('fodselsdato-filterform_dato-04_input').should('not.be.checked');
+        cy.getByTestId('fodselsdato-filterform_dato-23_input').should('not.be.checked');
+        cy.getByTestId('fodselsdato-filterform_dato-27_input').should('not.be.checked');
+        cy.apneLukkeFilterDropdown('fodselsdato');
+        cy.getByTestId('filtreringlabel').should('have.length', 0);
+    });
+
+    it('Radio-filterform', () => {
+        cy.apneLukkeFilterDropdown('kjonn');
+        cy.getByTestId('radio-filterform').should('exist');
+        cy.getByTestId('radio-filterform_nullstill-knapp').should('be.disabled');
+        cy.checkbox('radio-valg_kvinne');
+        cy.getByTestId('radio-filterform_nullstill-knapp').should('be.enabled');
+        cy.getByTestId('filtreringlabel')
+            .should('have.length', 1)
+            .contains('Kvinne');
+        cy.getByTestId('radio-filterform_nullstill-knapp').click();
+        cy.getByTestId('radio-filterform').should('not.exist');
+        cy.getByTestId('filtreringlabel').should('have.length', 0);
+    });
+
+    it('Checkbox-filterform', () => {
+        cy.apneLukkeFilterDropdown('innsatsgruppe');
+        cy.getByTestId('checkbox-filterform').should('exist');
+        cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.disabled');
+        cy.checkbox('filter_IKVAL');
+        cy.getByTestId('filtreringlabel').contains('Standardinnsats');
+        cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.enabled');
+        cy.checkbox('filter_BATT');
+        cy.getByTestId('filtreringlabel').contains('Spesielt tilpasset innsats');
+        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
+        cy.getByTestId('checkbox-filterform').should('not.exist');
+        cy.getByTestId('filtreringlabel').should('have.length', 0);
     });
 
     it('Slett alle filtre', () => {
@@ -451,48 +537,5 @@ describe('Filter', () => {
         cy.getByTestId('alertstripe_filtrering')
             .should('be.visible')
             .contains('Du må gjøre en filtrering for å se brukere i listen.');
-    });
-
-    it('Nullstill-knapp i checkbox-filterform, radio-filterform, double-checkbox-filterform, fødselsdato-filterform og aktivitet-filterform', () => {
-        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.disabled');
-        cy.apneLukkeFilterDropdown('aktivitet');
-        cy.getByTestId('aktivitet-filterform-STILLING-ja').check({force: true});
-        cy.getByTestId('filtreringlabel').contains('Stilling bruker skal søke: JA');
-        cy.getByTestId('aktivitet-filterform-TILTAK-ja').check({force: true});
-        cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV: JA');
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
-        cy.getByTestId('aktivitet-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
-        cy.apneLukkeFilterDropdown('fodselsdato');
-        cy.getByTestId('fodselsdato-filterform_dato-04').click();
-        cy.getByTestId('fodselsdato-filterform_dato-23').click();
-        cy.getByTestId('fodselsdato-filterform_dato-27').click();
-        cy.getByTestId('filtreringlabel').should('have.length', 4);
-        cy.getByTestId('filtreringlabel')
-            .should('contain', 'Fødselsdato: 23')
-            .and('contain', 'Fødselsdato: 27')
-            .and('contain', 'Fødselsdato: 4');
-        cy.getByTestId('fodselsdato-filterform_dato-04_input').should('be.checked');
-        cy.getByTestId('fodselsdato-filterform_dato-23_input').should('be.checked');
-        cy.getByTestId('fodselsdato-filterform_dato-27_input').should('be.checked');
-        cy.getByTestId('fodselsdato-filterform_nullstill-knapp').click();
-        cy.apneLukkeFilterDropdown('fodselsdato');
-        cy.getByTestId('fodselsdato-filterform_dato-04_input').should('not.be.checked');
-        cy.getByTestId('fodselsdato-filterform_dato-23_input').should('not.be.checked');
-        cy.getByTestId('fodselsdato-filterform_dato-27_input').should('not.be.checked');
-        cy.apneLukkeFilterDropdown('fodselsdato');
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
-        cy.apneLukkeFilterDropdown('kjonn');
-        cy.checkbox('radio-valg_kvinne');
-        cy.getByTestId('filtreringlabel').should('have.length', 1);
-        cy.getByTestId('filtreringlabel').should('contain', 'Kvinne');
-        cy.getByTestId('radio-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
-        cy.apneLukkeFilterDropdown('innsatsgruppe');
-        cy.checkbox('filter_IKVAL');
-        cy.checkbox('filter_BATT');
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
-        cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
     });
 });

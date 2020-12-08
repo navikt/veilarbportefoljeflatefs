@@ -19,12 +19,9 @@ interface RadioFilterformProps {
     filtervalg: FiltervalgModell;
 }
 export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
-    const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
-    useEffect(() => {
-        setValgteFilterValg(filtervalg[form]);
-    }, [filtervalg, form]);
+    const valgtFilterValg = filtervalg[form];
 
     const nullstillValg = () => {
         endreFiltervalg(form, null);
@@ -38,7 +35,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
 
     let reactKey = 1;
     return (
-        <form className="skjema radio-filterform">
+        <form className="skjema radio-filterform" data-testid='radio-filterform'>
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio

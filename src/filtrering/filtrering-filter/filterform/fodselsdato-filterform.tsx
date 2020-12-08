@@ -41,7 +41,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
     };
 
     return (
-        <form className="skjema checkbox-filterform">
+        <form className="skjema checkbox-filterform" data-testid="fodselsdato-filterform">
             {harValg && (
                 <div className="checkbox-filterform__valg fodselsdato__grid">
                     {Object.entries(valg).map(([filterKey, filterValue]) => (

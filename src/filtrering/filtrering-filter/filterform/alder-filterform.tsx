@@ -125,6 +125,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             onSubmit={e => {
                 onSubmitCustomInput(e);
             }}
+            data-testid="alder-filterform"
         >
             {harValg && (
                 <>

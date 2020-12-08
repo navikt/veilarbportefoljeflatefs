@@ -54,7 +54,7 @@ function CheckboxFilterform({
     };
 
     return (
-        <form className="skjema checkbox-filterform">
+        <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={columns}>

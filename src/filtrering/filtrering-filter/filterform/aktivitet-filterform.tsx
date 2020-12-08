@@ -59,7 +59,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     };
 
     return (
-        <form className="skjema aktivitetfilterform">
+        <form className="skjema aktivitetfilterform" data-testid='aktivitet-filterform'>
             <div className="aktivitetvalg__header blokk-xxs">
                 <span className="aktivitetvalg__header--first">Ja</span>
                 <span>Nei</span>
