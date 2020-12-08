@@ -10,7 +10,7 @@ import {
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
-    [DARKMODE]: false,
+    [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [ALDER_FILTER]: true,
     [NULLSTILL_KNAPP]: true

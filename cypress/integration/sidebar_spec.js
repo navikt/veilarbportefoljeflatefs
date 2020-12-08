@@ -48,7 +48,9 @@ describe('Mine filter', () => {
         cy.apneLukkeFilterDropdown('alder');
         cy.getByTestId('filter_19-og-under').check({force: true});
         cy.getByTestId('filtreringlabel').contains('≤ 19 år');
+
         cy.getByTestId('lagre-filter_knapp').click();
+
         cy.getByTestId('lagre-nytt-filter_modal_knapp').click();
     });
 
@@ -319,6 +321,10 @@ describe('Veiledergrupper', () => {
             .contains('En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik');
         cy.getByTestId('veiledergruppe_modal_avbryt-knapp').click();
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('not.exist');
+
+        cy.getByTestId('filtreringlabel')
+            .contains('Slett alle filtervalg')
+            .click();
     });
 });
 
@@ -419,7 +425,9 @@ describe('Filter', () => {
         cy.getByTestId('alder-filterform').should('not.exist');
 
         cy.apneLukkeFilterDropdown('alder');
+
         cy.getByTestId('alder-filterform').should('exist');
+
         cy.getByTestId('alder-filterform_nullstill-knapp')
             .should('be.enabled')
             .click();
@@ -428,12 +436,12 @@ describe('Filter', () => {
     it('Double checkbox-filterform', () => {
         cy.apneLukkeFilterDropdown('er-utdanningen-godkjent-og-bestatt');
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
-        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
+        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Ja');
         cy.getByTestId('filter_utdanningBestatt_JA').uncheck({force: true});
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
-        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
-        cy.getByTestId('filter_utdanningBestatt_NEI').check({force: true});
         cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Ja');
+        cy.getByTestId('filter_utdanningBestatt_NEI').check({force: true});
+        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
         cy.getByTestId('filter_utdanningGodkjent_NEI').check({force: true});
         cy.getByTestId('filtreringlabel').contains('Utdanning godkjent: Nei');
         cy.getByTestId('double-checkbox-filterform_nullstill-knapp')
