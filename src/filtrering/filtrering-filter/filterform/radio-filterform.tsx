@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
