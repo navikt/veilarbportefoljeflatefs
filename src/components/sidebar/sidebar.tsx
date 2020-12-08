@@ -195,7 +195,6 @@ function Sidebar(props: SidebarProps) {
     };
 
     outsideClick(sidebarRef, () => {
-        console.log("modal?", document.body.className !== 'ReactModal__Body--open');
         if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'ReactModal__Body--open') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()

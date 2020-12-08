@@ -27,6 +27,7 @@ before('Start server', () => {
 
 describe('Mine filter', () => {
     it('Finn antall filter', () => {
+        cy.gaTilOversikt('enhetens-oversikt');
         cy.klikkTab('MINE_FILTER');
         cy.get('[data-testid=mine-filter_rad-wrapper]').then(ant => {
             antallFilter += Cypress.$(ant).length;

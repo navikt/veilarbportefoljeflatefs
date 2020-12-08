@@ -12,6 +12,8 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_ascending').should('not.exist');
         cy.getByTestId('sorteringspil_descending').should('be.visible');
+        cy.getByTestId('se-alle_knapp').click();
+
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Thoresen, Herman')
             .click();
@@ -57,6 +59,10 @@ describe('Annen veileder', () => {
             .should('have.length', 1);
         cy.getByTestId('filtreringlabel')
             .contains('Glosli, Kasper')
-            .should('be.visible');
+            .should('be.visible')
+            .click();
+        cy.getByTestId('veilederoversikt_sok-veileder-input')
+            .click()
+            .clear();
     });
 });
