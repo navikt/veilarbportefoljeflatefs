@@ -2,9 +2,7 @@ import React from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
-import {NULLSTILL_KNAPP} from '../../../konstanter';
 import {FiltervalgModell} from '../../../model-interfaces';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
 
@@ -19,8 +17,6 @@ interface RadioFilterformProps {
     filtervalg: FiltervalgModell;
 }
 export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-
     const valgtFilterValg = filtervalg[form];
 
     const nullstillValg = () => {
@@ -35,7 +31,7 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
 
     let reactKey = 1;
     return (
-        <form className="skjema radio-filterform" data-testid='radio-filterform'>
+        <form className="skjema radio-filterform" data-testid="radio-filterform">
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
@@ -51,14 +47,12 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                 ))}
             </div>
             <div className={'filterform__under-valg'}>
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp
-                        dataTestId="radio-filterform"
-                        nullstillValg={nullstillValg}
-                        form={form}
-                        disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
-                    />
-                )}
+                <NullstillValgKnapp
+                    dataTestId="radio-filterform"
+                    nullstillValg={nullstillValg}
+                    form={form}
+                    disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
+                />
             </div>
         </form>
     );

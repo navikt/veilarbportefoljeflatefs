@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../../konstanter';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -37,7 +35,6 @@ function DoubleCheckboxFilterform({
 }: DoubleCheckboxFilterformProps) {
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
@@ -110,14 +107,12 @@ function DoubleCheckboxFilterform({
                 </div>
             )}
             <div className={'filterform__under-valg'}>
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp
-                        dataTestId="double-checkbox-filterform"
-                        nullstillValg={nullstillValg}
-                        form={'utdanning-godkjent-og-bestatt'}
-                        disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
-                    />
-                )}
+                <NullstillValgKnapp
+                    dataTestId="double-checkbox-filterform"
+                    nullstillValg={nullstillValg}
+                    form={'utdanning-godkjent-og-bestatt'}
+                    disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
+                />
                 {(!harValgCol1 || !harValgCol2) && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}

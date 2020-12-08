@@ -6,8 +6,6 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -32,7 +30,6 @@ function CheckboxFilterform({
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     useEffect(() => {
         setCheckBoxValg(filtervalg[form]);
@@ -78,14 +75,12 @@ function CheckboxFilterform({
                 </div>
             )}
             <div className={'filterform__under-valg'}>
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp
-                        dataTestId="checkbox-filterform"
-                        nullstillValg={nullstillValg}
-                        form={form}
-                        disabled={checkBoxValg.length <= 0}
-                    />
-                )}
+                <NullstillValgKnapp
+                    dataTestId="checkbox-filterform"
+                    nullstillValg={nullstillValg}
+                    form={form}
+                    disabled={checkBoxValg.length <= 0}
+                />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
                         {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
