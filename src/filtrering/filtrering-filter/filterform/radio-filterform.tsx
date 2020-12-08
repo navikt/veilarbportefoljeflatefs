@@ -21,6 +21,7 @@ interface RadioFilterformProps {
 export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
+
     useEffect(() => {
         setValgteFilterValg(filtervalg[form]);
     }, [filtervalg, form]);

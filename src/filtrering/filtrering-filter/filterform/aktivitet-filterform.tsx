@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
-import {AktiviteterValg, endreFiltervalg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
+import React, {useEffect, useState} from 'react';
+import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
 import './filterform.less';
-import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
-import {pagineringSetup} from '../../../ducks/paginering';
-import {useDispatch} from 'react-redux';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -28,52 +25,21 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterform(props: AktivitetFilterformProps) {
+    const {valg, filtervalg, endreFiltervalg, closeDropdown} = props;
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
 
-    const handleRadioChange = (aktivitetKey, verdi) => {
-        setValgteAktiviteter(prevState => ({
-            ...prevState,
-            [aktivitetKey]: verdi
-        }));
-    };
+    useEffect(() => {
+        setValgteAktiviteter(Object.assign({}, aktivitetInitialState, filtervalg.aktiviteter));
+    }, [filtervalg.aktiviteter]);
 
-    const fields = Object.entries(props.valg).map(([kode, verdi]) => [
-        <div key={`skjemaelement skjemaelement--horisontal aktivitet-${kode}`} className="aktivitetvalg blokk-xxs">
-            <span className="aktivitetvalg__tekst">{verdi as string}</span>
-            <div className="radioknapp-gruppe">
-                <input
-                    id={`aktivitet-${kode}-ja`}
-                    name={kode}
-                    value="JA"
-                    type="radio"
-                    checked={valgteAktiviteter[kode] === 'JA'}
-                    className="skjemaelement__input radioknapp"
-                    onChange={() => handleRadioChange(kode, 'JA')}
-                    key={`Ja, ${verdi}`}
-                    data-testid={`aktivitet-filterform-${kode}-ja`}
-                />
-                <label htmlFor={`aktivitet-${kode}-ja`} className="skjemaelement__label aktivitet_radioknapp_label">
-                    <span className="sr-only">Ja, {verdi}</span>
-                </label>
-                <input
-                    id={`aktivitet-${kode}-nei`}
-                    name={kode}
-                    value="NEI"
-                    type="radio"
-                    checked={valgteAktiviteter[kode] === 'NEI'}
-                    className="skjemaelement__input radioknapp"
-                    onChange={() => handleRadioChange(kode, 'NEI')}
-                    key={`NEJ, ${verdi}`}
-                    data-testid={`aktivitet-filterform-${kode}-nei`}
-                />
-                <label htmlFor={`aktivitet-${kode}-nei`} className="skjemaelement__label aktivitet_radioknapp_label">
-                    <span className="sr-only">Nei, {verdi}</span>
-                </label>
-            </div>
-        </div>
-    ]);
+    const handleRadioChange = (aktivitetKey, verdi) => {
+        endreFiltervalg('aktiviteter', {
+            ...valgteAktiviteter,
+            [aktivitetKey]: verdi
+        });
+    };
 
     const harValg =
         valgteAktiviteter.BEHANDLING !== 'NA' ||
@@ -88,26 +54,63 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
 
     const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
-        props.endreFiltervalg('aktiviteter', aktivitetInitialState);
+        endreFiltervalg('aktiviteter', aktivitetInitialState);
+        closeDropdown();
     };
 
     return (
-        <form
-            className="skjema aktivitetfilterform"
-            onSubmit={() => {
-                if (harValg) {
-                    props.endreFiltervalg('aktiviteter', valgteAktiviteter);
-                }
-                props.closeDropdown();
-            }}
-        >
+        <form className="skjema aktivitetfilterform">
             <div className="aktivitetvalg__header blokk-xxs">
                 <span className="aktivitetvalg__header--first">Ja</span>
                 <span>Nei</span>
             </div>
-            <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="filterform__under-valg aktivitetfilter_knapper">
-                <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
+            <div className="aktivitetfilterform__valg">
+                {Object.entries(valg).map(([kode, verdi]) => [
+                    <div
+                        key={`skjemaelement skjemaelement--horisontal aktivitet-${kode}`}
+                        className="aktivitetvalg blokk-xxs"
+                    >
+                        <span className="aktivitetvalg__tekst">{verdi as string}</span>
+                        <div className="radioknapp-gruppe">
+                            <input
+                                id={`aktivitet-${kode}-ja`}
+                                name={kode}
+                                value="JA"
+                                type="radio"
+                                checked={valgteAktiviteter[kode] === 'JA'}
+                                className="skjemaelement__input radioknapp"
+                                onChange={() => handleRadioChange(kode, 'JA')}
+                                key={`Ja, ${verdi}`}
+                                data-testid={`aktivitet-filterform-${kode}-ja`}
+                            />
+                            <label
+                                htmlFor={`aktivitet-${kode}-ja`}
+                                className="skjemaelement__label aktivitet_radioknapp_label"
+                            >
+                                <span className="sr-only">Ja, {verdi}</span>
+                            </label>
+                            <input
+                                id={`aktivitet-${kode}-nei`}
+                                name={kode}
+                                value="NEI"
+                                type="radio"
+                                checked={valgteAktiviteter[kode] === 'NEI'}
+                                className="skjemaelement__input radioknapp"
+                                onChange={() => handleRadioChange(kode, 'NEI')}
+                                key={`NEJ, ${verdi}`}
+                                data-testid={`aktivitet-filterform-${kode}-nei`}
+                            />
+                            <label
+                                htmlFor={`aktivitet-${kode}-nei`}
+                                className="skjemaelement__label aktivitet_radioknapp_label"
+                            >
+                                <span className="sr-only">Nei, {verdi}</span>
+                            </label>
+                        </div>
+                    </div>
+                ])}
+            </div>
+            <div className="filterform__under-valg">
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAktiviteter}

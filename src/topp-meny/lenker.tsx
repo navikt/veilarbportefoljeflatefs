@@ -11,7 +11,8 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
 
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
     return (
-        <>
+        <div className="oversikt-overskrifter">
+        {/*<>*/}
             <h2 className="h2__lenke" aria-controls="min-oversikt">
                 <ActiveLink
                     to="/portefolje"
@@ -46,6 +47,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                     Veilederoversikt
                 </ActiveLink>
             </h2>
-        </>
+        </div>
+        // </>
     );
 }
