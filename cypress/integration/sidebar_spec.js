@@ -246,7 +246,7 @@ describe('Veiledergrupper', () => {
             .clear()
             .type(gruppenavn);
         cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-        cy.getByTestId('timed-toast').contains('Gruppen er opprettet');
+        cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
         cy.getByTestId('filtreringlabel').contains(andersen);
         cy.getByTestId('filtreringlabel').contains(jonas);
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
@@ -263,7 +263,7 @@ describe('Veiledergrupper', () => {
             .clear()
             .type(gruppenavnRedigert);
         cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-        cy.getByTestId('timed-toast').contains('Gruppen er lagret');
+        cy.getByTestId('timed-toast_gruppen-er-lagret').contains('Gruppen er lagret');
         cy.getByTestId('veiledergruppe_rad-wrapper').contains(gruppenavnRedigert);
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
     });
@@ -290,7 +290,7 @@ describe('Veiledergrupper', () => {
             .contains('Lagre endringer')
             .click();
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
-        cy.getByTestId('timed-toast')
+        cy.getByTestId('timed-toast_gruppen-er-lagret')
             .should('be.visible')
             .contains('Gruppen er lagret');
         cy.getByTestId('filtreringlabel')
@@ -303,7 +303,7 @@ describe('Veiledergrupper', () => {
         cy.getByTestId('veiledergruppe_modal_slette-knapp').click();
         cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper);
-        cy.getByTestId('timed-toast')
+        cy.getByTestId('timed-toast_gruppen-er-slettet')
             .should('be.visible')
             .contains('Gruppen er slettet');
     });
