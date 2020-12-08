@@ -1,6 +1,6 @@
-export const ASCENDING = 'ascending';
+export const STIGENDE = 'stigende';
 
-export const DESCENDING = 'descending';
+export const SYNKENDE = 'synkende';
 
 export const IKKE_SATT = 'ikke_satt';
 

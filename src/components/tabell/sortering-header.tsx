@@ -2,8 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
-import {ReactComponent as PilAscending} from './arrow-up.svg';
-import {ReactComponent as PilDescending} from './arrow-down.svg';
+import {ReactComponent as PilStigende} from './arrow-up.svg';
+import {ReactComponent as PilSynkende} from './arrow-down.svg';
 import './tabell.less';
 import {OrNothing} from '../../utils/types/types';
 
@@ -28,13 +28,14 @@ function SorteringHeader({
     title,
     headerId
 }: SorteringHeaderProps) {
-    const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv';
+    const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'ingen sortering';
+
     const sorteringspil = () => {
         const className = 'sorteringheader__pil';
-        if (ariaLabel === 'ascending') {
-            return <PilAscending className={className} />;
-        } else if (ariaLabel === 'descending') {
-            return <PilDescending className={className} />;
+        if (ariaLabel === 'stigende') {
+            return <PilStigende className={className} />;
+        } else if (ariaLabel === 'synkende') {
+            return <PilSynkende className={className} />;
         } else {
             return null;
         }
@@ -52,7 +53,9 @@ function SorteringHeader({
                     )}
                     aria-pressed={erValgt}
                     aria-label={
-                        erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'inaktiv'
+                        erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt
+                            ? tekst + ', ' + rekkefolge + ' rekkefølge'
+                            : tekst + ', ingen sortering'
                     }
                     title={title}
                 >
