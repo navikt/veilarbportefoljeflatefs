@@ -175,4 +175,27 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
     });
+
+    it('Tildel veileder', () => {
+        cy.gaTilOversikt('min-oversikt');
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+
+        cy.getByTestId('tildel-veileder_dropdown').should('be.visible');
+
+        cy.checkbox('tildel-veileder_valg_0');
+        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
+        cy.getByTestId(`tildel-veileder_velg-knapp`)
+            .contains('Velg')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('modal-suksess_tildel-veileder')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
+    });
 });
+

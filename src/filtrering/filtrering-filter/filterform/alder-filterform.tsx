@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../model-interfaces';
-import {Dictionary} from '../../utils/types/types';
-import Grid from '../grid/grid';
+import {FiltervalgModell} from '../../../model-interfaces';
+import {Dictionary} from '../../../utils/types/types';
+import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
 import './filterform.less';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../konstanter';
-
+import {logEvent} from '../../../utils/frontend-logger';
+import {finnSideNavn} from '../../../middleware/metrics-middleware';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {NULLSTILL_KNAPP} from '../../../konstanter';
 interface AlderFilterformProps {
     form: string;
     valg: Dictionary<string>;
@@ -19,7 +17,6 @@ interface AlderFilterformProps {
     filtervalg: FiltervalgModell;
     className?: string;
 }
-
 function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
@@ -27,10 +24,8 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const [feil, setFeil] = useState(false);
     const [feilTekst, setFeilTekst] = useState<string>('');
     const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
-
     useEffect(() => {
         filtervalg[form].forEach(alder => {
             if (
@@ -38,7 +33,9 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     .map(([filterKey]) => filterKey)
                     .includes(alder)
             ) {
-                setCheckBoxValg(prevState => [...prevState, alder]);
+                setInputAlderTil('');
+                setInputAlderFra('');
+                setCheckBoxValg(filtervalg[form]);
             } else {
                 const [alderFra, alderTil] = alder.split('-');
                 alderFra && setInputAlderFra(alderFra);
@@ -57,6 +54,20 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
 
+    const submitCheckBox = e => {
+        velgCheckBox(e);
+        logEvent('portefolje.metrikker.aldersfilter', {
+            checkbox: true,
+            sideNavn: finnSideNavn()
+        });
+        return e.target.checked
+            ? endreFiltervalg(form, [...checkBoxValg, e.target.value])
+            : endreFiltervalg(
+                  form,
+                  checkBoxValg.filter(value => value !== e.target.value)
+              );
+    };
+
     const onChangeInput = (e, til) => {
         setFeil(false);
         setCheckBoxValg([]);
@@ -67,70 +78,54 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         }
     };
 
-    const onSubmitCustomInput = () => {
+    const onSubmitCustomInput = e => {
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
-
-        if (inputFraNummer > inputTilNummer) {
-            setFeil(true);
-            setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
-        } else if (inputFraNummer >= 100 && inputAlderTil.length === 0) {
-            setFeil(true);
-            setFeilTekst('Du må skrive et tall lavere enn 100 i fra-feltet hvis til-feltet står tomt.');
-        } else {
-            setFeil(false);
-            setFeilTekst('');
-            if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [0 + '-' + inputAlderTil]);
-            } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                endreFiltervalg(form, [inputAlderFra + '-' + 100]);
-            } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
-            }
-            closeDropdown();
-        }
-    };
-
-    const submitForm = e => {
+        endreFiltervalg(form, []);
         e.preventDefault();
-
-        if (checkBoxValg.length > 0) {
-            endreFiltervalg(form, checkBoxValg);
-            logEvent('portefolje.metrikker.aldersfilter', {
-                checkbox: true,
-                sideNavn: finnSideNavn()
-            });
+        if (!kanVelgeFilter) {
             closeDropdown();
-        }
-        if (inputAlderFra.length > 0 || inputAlderTil.length > 0) {
-            onSubmitCustomInput();
+        } else {
+            if (inputFraNummer > inputTilNummer) {
+                setFeil(true);
+                setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
+            } else if (inputFraNummer >= 100 && inputAlderTil.length === 0) {
+                setFeil(true);
+                setFeilTekst('Du må skrive et tall lavere enn 100 i fra-feltet hvis til-feltet står tomt.');
+            } else {
+                setFeil(false);
+                setFeilTekst('');
+                if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
+                    endreFiltervalg(form, [0 + '-' + inputAlderTil]);
+                } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+                    endreFiltervalg(form, [inputAlderFra + '-' + 100]);
+                } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+                    endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+                }
+                closeDropdown();
+            }
             logEvent('portefolje.metrikker.aldersfilter', {
                 checkbox: false,
                 sideNavn: finnSideNavn()
             });
         }
-        if (!kanVelgeFilter) {
-            closeDropdown();
-        }
     };
-
     const fjernTegn = e => {
         (e.key === 'e' || e.key === '.' || e.key === ',' || e.key === '-' || e.key === '+') && e.preventDefault();
     };
-
     const nullstillValg = () => {
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
         endreFiltervalg(form, []);
     };
-
     return (
         <form
             className="skjema checkbox-filterform"
             onSubmit={e => {
-                submitForm(e);
+                onSubmitCustomInput(e);
             }}
+            data-testid="alder-filterform"
         >
             {harValg && (
                 <>
@@ -144,7 +139,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                         className="skjemaelement__input checkboks"
                                         value={filterKey}
                                         checked={checkBoxValg.includes(filterKey)}
-                                        onChange={velgCheckBox}
+                                        onChange={e => submitCheckBox(e)}
                                         data-testid={`filter_${filterKey}`}
                                     />
                                     <label htmlFor={filterKey} className="skjemaelement__label">
@@ -154,9 +149,9 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                             ))}
                         </Grid>
                     </div>
-                    <p className="skilletekst">----------------------------------</p>
+                    <hr className="alder-border" />
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
-                        <div className="alder-container">
+                        <div className="alder-container alder-container__fra">
                             <label htmlFor="filter_alder-fra">Fra:</label>
                             <input
                                 min={0}
@@ -169,7 +164,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
-                        <div className="alder-container">
+                        <div className="alder-container alder-container__til">
                             <label htmlFor="filter_alder-til">Til:</label>
                             <input
                                 min={0}
@@ -182,6 +177,14 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
+                        <button
+                            type="submit"
+                            className="knapp knapp--mini knapp--hoved alder-velg-knapp"
+                            data-testid="checkbox-filterform_velg-knapp"
+                            disabled={!(inputAlderFra.length > 0 || inputAlderTil.length > 0)}
+                        >
+                            Velg
+                        </button>
                     </div>
                     {feil && (
                         <p className="validering-tekst" data-testid="filter_alder_valideringstekst">
@@ -190,12 +193,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
-                <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
+            <div className="filterform__under-valg aldersfilter">
                 {erNullstillFeatureTogglePa && (
                     <NullstillValgKnapp
                         dataTestId="alder-filterform"
