@@ -5,13 +5,16 @@ import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    ER_SYKMELDT_MED_ARBEIDSGIVER,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
+    TRENGER_VURDERING,
     UFORDELTE_BRUKERE,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
@@ -21,9 +24,11 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import BarInputGruppe from '../../components/barinput/barinput-gruppe';
-import {BarInputRadio} from '../../components/barinput/barinput-radio';
+import {BarInputRadio, HiddenIfBarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {Element} from 'nav-frontend-typografi';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VEDTAKSTOTTE} from '../../konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -64,6 +69,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     }
 
     const statusTall = useStatusTallSelector();
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     return (
         <div className="filtrering-oversikt panel">
@@ -87,6 +93,28 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     />
                 )}
             </div>
+            <BarInputGruppe>
+                <BarInputRadio
+                    filterNavn="trengerVurdering"
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(TRENGER_VURDERING)}
+                    antall={statusTall.trengerVurdering}
+                />
+                <BarInputRadio
+                    filterNavn="erSykmeldtMedArbeidsgiver"
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
+                    antall={statusTall.erSykmeldtMedArbeidsgiver}
+                />
+                {erVedtaksStotteFeatureTogglePa && (
+                    <BarInputRadio
+                        filterNavn="underVurdering"
+                        handleChange={handleRadioButtonChange}
+                        checked={ferdigfilterListe.includes(UNDER_VURDERING)}
+                        antall={statusTall.underVurdering}
+                    />
+                )}
+            </BarInputGruppe>
             <BarInputGruppe>
                 <BarInputRadio
                     filterNavn="venterPaSvarFraNAV"
