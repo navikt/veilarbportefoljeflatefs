@@ -265,7 +265,7 @@ const loggArbeidslisteApne = (sideNavn: SideNavn) => {
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {
     if (
-        (sorteringsfelt !== 'etternavn' || rekkefolge !== 'ascending') &&
+        (sorteringsfelt !== 'etternavn' || rekkefolge !== 'stigende') &&
         (sorteringsfelt !== 'ikke_satt' || rekkefolge !== 'ikke_satt')
     ) {
         logEvent('portefolje.metrikker.endre_sortering', {sideNavn, sorteringsfelt, rekkefolge});

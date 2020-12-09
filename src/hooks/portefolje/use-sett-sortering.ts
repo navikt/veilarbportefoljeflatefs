@@ -1,7 +1,7 @@
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {ListevisningType} from '../../ducks/ui/listevisning';
 import {useDispatch} from 'react-redux';
-import {ASCENDING, DESCENDING} from '../../konstanter';
+import {STIGENDE, SYNKENDE} from '../../konstanter';
 import {settSortering} from '../../ducks/portefolje';
 
 export function useSetPortefoljeSortering(listevisningType: ListevisningType) {
@@ -12,9 +12,9 @@ export function useSetPortefoljeSortering(listevisningType: ListevisningType) {
         let valgtRekkefolge = '';
 
         if (felt !== sorteringsfelt) {
-            valgtRekkefolge = ASCENDING;
+            valgtRekkefolge = STIGENDE;
         } else {
-            valgtRekkefolge = sorteringsrekkefolge === ASCENDING ? DESCENDING : ASCENDING;
+            valgtRekkefolge = sorteringsrekkefolge === STIGENDE ? SYNKENDE : STIGENDE;
         }
 
         dispatch(settSortering(valgtRekkefolge, felt));

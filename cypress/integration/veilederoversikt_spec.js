@@ -5,13 +5,13 @@ before('Start server', () => {
 describe('Annen veileder', () => {
     it('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.gaTilOversikt('veileder-oversikt');
-        cy.getByTestId('sorteringspil_ascending').should('not.exist');
-        cy.getByTestId('sorteringspil_descending').should('not.exist');
+        cy.getByTestId('sorteringspil_stigende').should('not.exist');
+        cy.getByTestId('sorteringspil_synkende').should('not.exist');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
-        cy.getByTestId('sorteringspil_ascending').should('be.visible');
+        cy.getByTestId('sorteringspil_stigende').should('be.visible');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
-        cy.getByTestId('sorteringspil_ascending').should('not.exist');
-        cy.getByTestId('sorteringspil_descending').should('be.visible');
+        cy.getByTestId('sorteringspil_stigende').should('not.exist');
+        cy.getByTestId('sorteringspil_synkende').should('be.visible');
         cy.getByTestId('se-alle_knapp').click();
 
         cy.getByTestId('veilederoversikt_navn_lenke')
