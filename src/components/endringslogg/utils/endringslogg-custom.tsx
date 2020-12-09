@@ -22,6 +22,13 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '9. desember 2020',
+        tittel: 'Endre info om søknadsprosessen',
+        versjonId: '09.12.20',
+        tekst:
+            'Nå kan brukere oppdatere status om søknadsprosessen også etter at en stillingsaktivitet er satt til “Fullført” eller “Avbrutt”.'
+    },
+    {
         dato: '23. november 2020',
         tittel: 'Filtrer på svarene fra registreringen om utdanning',
         versjonId: '23.11.20',
