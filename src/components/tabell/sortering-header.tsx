@@ -28,13 +28,14 @@ function SorteringHeader({
     title,
     headerId
 }: SorteringHeaderProps) {
-    const ariaLabel = erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'ingen sortering';
+    const sorteringsrekkefolge =
+        erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'ingen sortering';
 
     const sorteringspil = () => {
         const className = 'sorteringheader__pil';
-        if (ariaLabel === 'stigende') {
+        if (sorteringsrekkefolge === Sorteringsrekkefolge.stigende) {
             return <PilStigende className={className} />;
-        } else if (ariaLabel === 'synkende') {
+        } else if (sorteringsrekkefolge === Sorteringsrekkefolge.synkende) {
             return <PilSynkende className={className} />;
         } else {
             return null;
