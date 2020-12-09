@@ -40,7 +40,11 @@ export const loggBrowserMetrikker = (): void => {
     const browserAgent = getBrowserAgent();
     const browserVersion = getBrowserVersion();
 
-    logEvent('portefolje.browser_bruk', {browser: browserAgent, version: browserVersion, zoom: getBrowserZoom()});
+    logEvent(
+        'portefolje.browser_bruk',
+        {browser: browserAgent, version: browserVersion, zoom: getBrowserZoom()},
+        {version: browserVersion}
+    );
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
@@ -49,10 +53,10 @@ export const loggBrowserMetrikker = (): void => {
 };
 
 function getBrowserVersion() {
-    let ua = navigator.userAgent,
+    var ua = navigator.userAgent,
         tem;
-    let M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-    if (M && (tem = ua.match(/version\/([\d]+)/i)) != null) M[2] = tem[1];
+    var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if (M && (tem = ua.match(/version\/([.\d]+)/i)) != null) M[2] = tem[1];
     M = M ? [M[2]] : [navigator.appVersion, '-?'];
     return M;
 }
