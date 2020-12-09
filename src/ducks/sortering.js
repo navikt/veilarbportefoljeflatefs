@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import {DIRECTION} from './../utils/sortering';
+import {RETNING} from './../utils/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
@@ -7,7 +7,7 @@ export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState = {
     property: null,
-    direction: DIRECTION.NA
+    direction: RETNING.NA
 };
 
 // Reducer
@@ -16,9 +16,9 @@ export default function reducer(state = initialState, action) {
         case SORTERT_PA:
             const {property} = action.data;
 
-            let direction = DIRECTION.ASC;
+            let direction = RETNING.STIGENDE;
             if (property === state.property) {
-                direction = state.direction === DIRECTION.DESC ? DIRECTION.ASC : DIRECTION.DESC;
+                direction = state.direction === RETNING.SYNKENDE ? RETNING.STIGENDE : RETNING.SYNKENDE;
             }
 
             return {property, direction};

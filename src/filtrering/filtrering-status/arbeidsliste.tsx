@@ -1,15 +1,15 @@
 import React from 'react';
-import hiddenIf from '../../../components/hidden-if/hidden-if';
+import hiddenIf from '../../components/hidden-if/hidden-if';
 import {Element} from 'nav-frontend-typografi';
-import {useStatusTallSelector} from '../../../hooks/redux/use-statustall';
+import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.less';
-import {ReactComponent as ArbeidslisteikonBla} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
-import {KategoriModell} from '../../../model-interfaces';
-import {BarInputRadio} from '../../../components/barinput/barinput-radio';
-import BarInputCheckbox from '../../../components/barinput/barinput-checkbox';
+import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+import {KategoriModell} from '../../model-interfaces';
+import {BarInputRadio} from '../../components/barinput/barinput-radio';
+import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];

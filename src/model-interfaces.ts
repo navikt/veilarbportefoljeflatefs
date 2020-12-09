@@ -2,8 +2,8 @@ import {FiltreringAktiviteterValg} from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
-    ascending = 'ascending',
-    descending = 'descending'
+    stigende = 'stigende',
+    synkende = 'synkende'
 }
 
 export enum Sorteringsfelt {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Element, Normaltekst} from 'nav-frontend-typografi';
-import CheckboxFilterform from '../components/filterform/checkbox-filterform';
+import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     aktiviteter,
     alder,
@@ -16,21 +16,21 @@ import {
     servicegruppe,
     ytelse,
     utdanning
-} from './filter-konstanter';
-import OverskriftMedHjelpeTekst from '../components/overskrift-med-hjelpetekst';
-import Dropdown from '../components/dropdown/dropdown';
-import '../components/filterform/filterform.less';
-import FodselsdatoFilterform from '../components/filterform/fodselsdato-filterform';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {ALDER_FILTER, GJEM_HOVEDMAL} from '../konstanter';
-import './filtrering-skjema.less';
-import '../components/sidebar/sidebar.less';
+} from '../filter-konstanter';
+import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
+import Dropdown from '../../components/dropdown/dropdown';
+import './filterform/filterform.less';
+import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {ALDER_FILTER, GJEM_HOVEDMAL} from '../../konstanter';
+import '../filtrering-skjema.less';
+import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
-import DoubleCheckboxFilterform from '../components/filterform/double-checkbox-filterform';
-import AlderFilterform from '../components/filterform/alder-filterform';
-import {RadioFilterform} from '../components/filterform/radio-filterform';
-import AktivitetFilterform from '../components/filterform/aktivitet-filterform';
-import {ReactComponent as InfoIkon} from '../components/ikoner/info-ikon.svg';
+import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
+import AlderFilterform from './filterform/alder-filterform';
+import {RadioFilterform} from './filterform/radio-filterform';
+import AktivitetFilterform from './filterform/aktivitet-filterform';
+import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -43,7 +43,10 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
     const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
 
     return (
-        <div className="filtrering-filter" data-testid="filtrering-filter_container">
+        <div
+            className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
+            data-testid="filtrering-filter_container"
+        >
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs" tag="h3">
                     Demografi
@@ -279,8 +282,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     render={lukkDropdown => (
                         <RadioFilterform
                             valg={ytelse}
-                            endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
                             form="ytelse"
                         />
@@ -300,8 +303,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                         <AktivitetFilterform
                             valg={aktiviteter}
                             filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
                             closeDropdown={lukkDropdown}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />

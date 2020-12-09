@@ -2,7 +2,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import '../filterform/filterform.less';
+import '../../filtrering/filtrering-filter/filterform/filterform.less';
 import '../../style.less';
 import SokFilterNy from './sok-filter-ny';
 import classNames from 'classnames';

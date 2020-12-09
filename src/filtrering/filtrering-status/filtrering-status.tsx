@@ -4,17 +4,26 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
-import {MIN_ARBEIDSLISTE} from '../filter-konstanter';
-import {FiltreringStatusContainer} from './filtrering-status-components/filtrering-wrapper';
-import FiltreringStatusNyeBrukere from './filtrering-status-components/nye-brukere';
-import FiltreringStatusUfordelteBrukere from './filtrering-status-components/ufordelte-brukere';
-import {FiltreringStatusBehovsVurdering} from './filtrering-status-components/behov-og-arbeidsevnevurdering';
-import {FiltreringStatusDialog} from './filtrering-status-components/dialog-gruppe';
-import FiltreringStatusAvtaltMoteMedNav from './filtrering-status-components/avtalt-mote-med-nav';
-import {FiltreringStatusInavtiveBrukere} from './filtrering-status-components/inaktive-brukere';
-import FilterStatusMinArbeidsliste from './filtrering-status-components/arbeidsliste';
+import {
+    I_AVTALT_AKTIVITET,
+    IKKE_I_AVTALT_AKTIVITET,
+    INAKTIVE_BRUKERE,
+    MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
+    NYE_BRUKERE_FOR_VEILEDER,
+    UFORDELTE_BRUKERE,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV
+} from '../filter-konstanter';
+import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {ListevisningType} from '../../ducks/ui/listevisning';
-import {FiltreringStatusAktiviteter} from './filtrering-status-components/aktiviteter';
+import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
+import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
+import BarInputGruppe from '../../components/barinput/barinput-gruppe';
+import {BarInputRadio} from '../../components/barinput/barinput-radio';
+import {tekstAntallBrukere} from '../../utils/tekst-utils';
+import {Element} from 'nav-frontend-typografi';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -54,34 +63,78 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         }
     }
 
+    const statusTall = useStatusTallSelector();
+
     return (
-        <FiltreringStatusContainer>
+        <div className="filtrering-oversikt panel">
+            <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
+                {tekstAntallBrukere(statusTall.totalt)}
+            </Element>
             <div className="filter-checkboks-container">
-                <FiltreringStatusNyeBrukere
-                    handleChange={handleCheckboxChange}
-                    ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe !== ListevisningType.minOversikt}
-                />
-                <FiltreringStatusUfordelteBrukere
-                    handleChange={handleCheckboxChange}
-                    ferdigfilterListe={ferdigfilterListe}
-                    hidden={props.filtergruppe === ListevisningType.minOversikt}
-                />
+                {props.filtergruppe === ListevisningType.minOversikt ? (
+                    <BarInputCheckbox
+                        filterNavn="nyeBrukere"
+                        antall={statusTall.nyeBrukereForVeileder}
+                        handleChange={handleCheckboxChange}
+                        checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
+                    />
+                ) : (
+                    <BarInputCheckbox
+                        filterNavn="ufordeltebruker"
+                        antall={statusTall.ufordelteBrukere}
+                        handleChange={handleRadioButtonChange}
+                        checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                    />
+                )}
             </div>
-            <FiltreringStatusBehovsVurdering
-                ferdigfilterListe={ferdigfilterListe}
-                handleChange={handleRadioButtonChange}
-            />
-            <FiltreringStatusDialog ferdigfilterListe={ferdigfilterListe} handleChange={handleRadioButtonChange} />
-            <FiltreringStatusAvtaltMoteMedNav
-                ferdigfilterListe={ferdigfilterListe}
-                handleChange={handleRadioButtonChange}
-            />
-            <FiltreringStatusAktiviteter ferdigfilterListe={ferdigfilterListe} handleChange={handleRadioButtonChange} />
-            <FiltreringStatusInavtiveBrukere
-                ferdigfilterListe={ferdigfilterListe}
-                handleChange={handleRadioButtonChange}
-            />
+            <BarInputGruppe>
+                <BarInputRadio
+                    filterNavn="venterPaSvarFraNAV"
+                    antall={statusTall.venterPaSvarFraNAV}
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+                />
+                <BarInputRadio
+                    filterNavn="venterPaSvarFraBruker"
+                    antall={statusTall.venterPaSvarFraBruker}
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                />
+                <BarInputRadio
+                    filterNavn="avtaltMoteMedNav"
+                    handleChange={handleRadioButtonChange}
+                    antall={statusTall.moterMedNAVIdag}
+                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                />
+            </BarInputGruppe>
+            <BarInputGruppe>
+                <BarInputRadio
+                    filterNavn="utlopteAktiviteter"
+                    antall={statusTall.utlopteAktiviteter}
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
+                />
+                <BarInputRadio
+                    filterNavn="ikkeIavtaltAktivitet"
+                    antall={statusTall.ikkeIavtaltAktivitet}
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(IKKE_I_AVTALT_AKTIVITET)}
+                />
+                <BarInputRadio
+                    filterNavn="iavtaltAktivitet"
+                    antall={statusTall.iavtaltAktivitet}
+                    handleChange={handleRadioButtonChange}
+                    checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
+                />
+            </BarInputGruppe>
+            <BarInputGruppe>
+                <BarInputRadio
+                    filterNavn="inaktiveBrukere"
+                    handleChange={handleRadioButtonChange}
+                    antall={statusTall.inaktiveBrukere}
+                    checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
+                />
+            </BarInputGruppe>
             <FilterStatusMinArbeidsliste
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
@@ -91,6 +144,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 endreFiltervalg={dispatchFiltreringStatusChanged}
                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
             />
-        </FiltreringStatusContainer>
+        </div>
     );
 }

@@ -1,7 +1,6 @@
 before('Start server', () => {
     cy.configure();
 });
-
 describe('Arbeidsliste', () => {
     let fornavn = '';
     let antallMedArbeidsliste = 0;
@@ -16,7 +15,6 @@ describe('Arbeidsliste', () => {
     let antallEtterSletting = 0;
     const nyTittel = 'Skal ikke lagres';
     const nyKommentar = 'Kommentar skal heller ikke lagres';
-
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
@@ -280,25 +278,10 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain', kommentar);
-    });
-});
-
-describe('Tildel veileder', () => {
-    it('Tildel veileder', () => {
-        cy.gaTilOversikt('min-oversikt');
-        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
-        cy.getByTestId('tildel-veileder_dropdown').should('not.exist');
-        cy.getByTestId('tildel-veileder_knapp').click();
-        cy.getByTestId('tildel-veileder_dropdown').should('be.visible');
-        cy.checkbox('tildel-veileder_valg_0');
-        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
-        cy.getByTestId(`tildel-veileder_velg-knapp`)
-            .contains('Velg')
-            .should('be.visible')
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+            .first()
+            .children()
+            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen')
             .click();
-        cy.getByTestId('modal-suksess_tildel-veileder')
-            .should('be.visible')
-            .click();
-        cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
     });
 });
