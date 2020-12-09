@@ -11,7 +11,6 @@ interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     columns?: number;
     className?: string;
@@ -21,7 +20,6 @@ interface CheckboxFilterformProps {
 function CheckboxFilterform({
     endreFiltervalg,
     valg,
-    closeDropdown,
     form,
     filtervalg,
     columns = 1,
@@ -47,7 +45,6 @@ function CheckboxFilterform({
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
-        closeDropdown();
     };
 
     return (

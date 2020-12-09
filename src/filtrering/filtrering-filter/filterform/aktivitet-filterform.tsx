@@ -9,7 +9,6 @@ interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
     endreFiltervalg: (form: string, filterVerdi: any) => void;
-    closeDropdown: () => void;
 }
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
@@ -25,7 +24,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterform(props: AktivitetFilterformProps) {
-    const {valg, filtervalg, endreFiltervalg, closeDropdown} = props;
+    const {valg, filtervalg, endreFiltervalg} = props;
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -55,11 +54,10 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     const nullstillAktiviteter = () => {
         setValgteAktiviteter(aktivitetInitialState);
         endreFiltervalg('aktiviteter', aktivitetInitialState);
-        closeDropdown();
     };
 
     return (
-        <form className="skjema aktivitetfilterform" data-testid='aktivitet-filterform'>
+        <form className="skjema aktivitetfilterform" data-testid="aktivitet-filterform">
             <div className="aktivitetvalg__header blokk-xxs">
                 <span className="aktivitetvalg__header--first">Ja</span>
                 <span>Nei</span>

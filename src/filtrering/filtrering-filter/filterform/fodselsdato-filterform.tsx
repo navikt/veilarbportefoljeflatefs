@@ -9,11 +9,10 @@ interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
-    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -34,7 +33,6 @@ function FodselsdatoFilterform({endreFiltervalg, valg, closeDropdown, form, filt
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
-        closeDropdown();
     };
 
     return (

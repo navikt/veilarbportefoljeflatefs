@@ -22,7 +22,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.less';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {ALDER_FILTER, GJEM_HOVEDMAL} from '../../konstanter';
+import {ALDER_FILTER, GJEM_HOVEDMAL, LIVE_FILTRERING} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
@@ -31,6 +31,12 @@ import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import AktivitetFilterform from './filterform/aktivitet-filterform';
 import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
+import GammelAktivitetFilterform from './filterform/gammel_aktivitet-filterform';
+import GammelAlderFilterform from './filterform/gammel_alder-filterform';
+import GammelCheckboxFilterform from './filterform/gammel_checkbox-filterform';
+import GammelDoubleCheckboxFilterform from './filterform/gammel_double-checkbox-filterform';
+import GammelFodselsdatoFilterform from './filterform/gammel_fodselsdato-filterform';
+import GammelRadioFilterform from './filterform/gammel_radio-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -41,6 +47,7 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
+    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     return (
         <div
@@ -55,57 +62,95 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     <Dropdown
                         name="Alder"
                         id="alder"
-                        render={lukkDropdown => (
-                            <AlderFilterform
-                                form="alder"
-                                valg={alder}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                            />
-                        )}
+                        render={lukkDropdown =>
+                            erLiveFiltreringFeatureTogglePa ? (
+                                <AlderFilterform
+                                    form="alder"
+                                    valg={alder}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    closeDropdown={lukkDropdown}
+                                />
+                            ) : (
+                                <GammelAlderFilterform
+                                    form="alder"
+                                    valg={alder}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    closeDropdown={lukkDropdown}
+                                />
+                            )
+                        }
                     />
                 ) : (
                     <Dropdown
                         name="Alder"
                         id="alder"
-                        render={lukkDropdown => (
-                            <CheckboxFilterform
-                                form="alder"
-                                valg={alder}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                                columns={2}
-                            />
-                        )}
+                        render={lukkDropdown =>
+                            erLiveFiltreringFeatureTogglePa ? (
+                                <CheckboxFilterform
+                                    form="alder"
+                                    valg={alder}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    columns={2}
+                                />
+                            ) : (
+                                <GammelCheckboxFilterform
+                                    form="alder"
+                                    valg={alder}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    closeDropdown={lukkDropdown}
+                                    columns={2}
+                                />
+                            )
+                        }
                     />
                 )}
                 <Dropdown
                     name="Fødselsdato"
                     id="fodselsdato"
-                    render={lukkDropdown => (
-                        <FodselsdatoFilterform
-                            form="fodselsdagIMnd"
-                            valg={fodselsdagIMnd()}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <FodselsdatoFilterform
+                                form="fodselsdagIMnd"
+                                valg={fodselsdagIMnd()}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelFodselsdatoFilterform
+                                form="fodselsdagIMnd"
+                                valg={fodselsdagIMnd()}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Kjønn"
                     id="kjonn"
-                    render={lukkDropdown => (
-                        <RadioFilterform
-                            valg={kjonn}
-                            endreFiltervalg={endreFiltervalg}
-                            filtervalg={filtervalg}
-                            closeDropdown={lukkDropdown}
-                            form="kjonn"
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <RadioFilterform
+                                valg={kjonn}
+                                endreFiltervalg={endreFiltervalg}
+                                filtervalg={filtervalg}
+                                form="kjonn"
+                            />
+                        ) : (
+                            <GammelRadioFilterform
+                                valg={kjonn}
+                                endreFiltervalg={endreFiltervalg}
+                                filtervalg={filtervalg}
+                                closeDropdown={lukkDropdown}
+                                form="kjonn"
+                            />
+                        )
+                    }
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
@@ -123,14 +168,24 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
                             </div>
-                            <CheckboxFilterform
-                                form="registreringstype"
-                                valg={registreringstype}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                                className="registreringstype"
-                            />
+                            {erLiveFiltreringFeatureTogglePa ? (
+                                <CheckboxFilterform
+                                    form="registreringstype"
+                                    valg={registreringstype}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    className="registreringstype"
+                                />
+                            ) : (
+                                <GammelCheckboxFilterform
+                                    form="registreringstype"
+                                    valg={registreringstype}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    closeDropdown={lukkDropdown}
+                                    className="registreringstype"
+                                />
+                            )}
                         </>
                     )}
                 />
@@ -145,13 +200,22 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
                             </div>
-                            <CheckboxFilterform
-                                form="utdanning"
-                                valg={utdanning}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                            />
+                            {erLiveFiltreringFeatureTogglePa ? (
+                                <CheckboxFilterform
+                                    form="utdanning"
+                                    valg={utdanning}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            ) : (
+                                <GammelCheckboxFilterform
+                                    form="utdanning"
+                                    valg={utdanning}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    closeDropdown={lukkDropdown}
+                                />
+                            )}
                         </>
                     )}
                 />
@@ -166,11 +230,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
                             </div>
-                            <DoubleCheckboxFilterform
-                                filtervalg={filtervalg}
-                                closeDropdown={lukkDropdown}
-                                endreFiltervalg={endreFiltervalg}
-                            />
+                            {erLiveFiltreringFeatureTogglePa ? (
+                                <DoubleCheckboxFilterform
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            ) : (
+                                <GammelDoubleCheckboxFilterform
+                                    filtervalg={filtervalg}
+                                    closeDropdown={lukkDropdown}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
                         </>
                     )}
                 />
@@ -182,81 +253,135 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="CV og jobbprofil"
                     id="cv-og-jobbprofil"
-                    render={lukkDropdown => (
-                        <RadioFilterform
-                            valg={cvJobbprofil}
-                            endreFiltervalg={endreFiltervalg}
-                            filtervalg={filtervalg}
-                            closeDropdown={lukkDropdown}
-                            form="cvJobbprofil"
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <RadioFilterform
+                                valg={cvJobbprofil}
+                                endreFiltervalg={endreFiltervalg}
+                                filtervalg={filtervalg}
+                                form="cvJobbprofil"
+                            />
+                        ) : (
+                            <GammelRadioFilterform
+                                valg={cvJobbprofil}
+                                endreFiltervalg={endreFiltervalg}
+                                filtervalg={filtervalg}
+                                closeDropdown={lukkDropdown}
+                                form="cvJobbprofil"
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Innsatsgruppe"
                     id="innsatsgruppe"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="innsatsgruppe"
-                            valg={innsatsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="innsatsgruppe"
+                                valg={innsatsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="innsatsgruppe"
+                                valg={innsatsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Hovedmål"
                     id="hovedmal"
                     hidden={erGjemHovedmalFeatureTogglePa}
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="hovedmal"
-                            valg={hovedmal}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="hovedmal"
+                                valg={hovedmal}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="hovedmal"
+                                valg={hovedmal}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Formidlingsgruppe"
                     id="formidlingsgruppe"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="formidlingsgruppe"
-                            valg={formidlingsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="formidlingsgruppe"
+                                valg={formidlingsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="formidlingsgruppe"
+                                valg={formidlingsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Servicegruppe"
                     id="servicegruppe"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="servicegruppe"
-                            valg={servicegruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="servicegruppe"
+                                valg={servicegruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="servicegruppe"
+                                valg={servicegruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Manuell oppfølging"
                     id="manuell-oppfolging"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="manuellBrukerStatus"
-                            valg={manuellBrukerStatus}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="manuellBrukerStatus"
+                                valg={manuellBrukerStatus}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="manuellBrukerStatus"
+                                valg={manuellBrukerStatus}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
@@ -266,28 +391,46 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Rettighetsgruppe"
                     id="rettighetsgruppe"
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="rettighetsgruppe"
-                            valg={rettighetsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="rettighetsgruppe"
+                                valg={rettighetsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="rettighetsgruppe"
+                                valg={rettighetsgruppe}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Ytelse"
                     id="ytelse"
-                    render={lukkDropdown => (
-                        <RadioFilterform
-                            valg={ytelse}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                            form="ytelse"
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <RadioFilterform
+                                valg={ytelse}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                form="ytelse"
+                            />
+                        ) : (
+                            <GammelRadioFilterform
+                                valg={ytelse}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                                form="ytelse"
+                            />
+                        )
+                    }
                 />
             </div>
             <div className="col-sm-12 filtrering-filter__kolonne">
@@ -299,30 +442,49 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <Dropdown
                     name="Aktivitet"
                     id="aktivitet"
-                    render={lukkDropdown => (
-                        <AktivitetFilterform
-                            valg={aktiviteter}
-                            filtervalg={filtervalg}
-                            closeDropdown={lukkDropdown}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <AktivitetFilterform
+                                valg={aktiviteter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        ) : (
+                            <GammelAktivitetFilterform
+                                valg={aktiviteter}
+                                filtervalg={filtervalg}
+                                closeDropdown={lukkDropdown}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Tiltakstype"
                     id="tiltakstype"
                     disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
-                    render={lukkDropdown => (
-                        <CheckboxFilterform
-                            form="tiltakstyper"
-                            valg={enhettiltak}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                            emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
-                            className="tiltakstyper"
-                        />
-                    )}
+                    render={lukkDropdown =>
+                        erLiveFiltreringFeatureTogglePa ? (
+                            <CheckboxFilterform
+                                form="tiltakstyper"
+                                valg={enhettiltak}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                                className="tiltakstyper"
+                            />
+                        ) : (
+                            <GammelCheckboxFilterform
+                                form="tiltakstyper"
+                                valg={enhettiltak}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                                emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                                className="tiltakstyper"
+                            />
+                        )
+                    }
                 />
             </div>
         </div>

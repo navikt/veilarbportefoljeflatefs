@@ -1,35 +1,51 @@
-import React from 'react';
+import * as React from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
+import {useEffect, useState} from 'react';
 import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../model-interfaces';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
 }
+
 interface RadioFilterformProps {
     form: string;
     endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
+    closeDropdown: () => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
 }
-export function RadioFilterform({form, endreFiltervalg, valg, filtervalg}: RadioFilterformProps) {
-    const valgtFilterValg = filtervalg[form];
+
+function GammelRadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
+    const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
+    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
+
+    useEffect(() => {
+        setValgteFilterValg(filtervalg[form]);
+    }, [filtervalg, form]);
 
     const nullstillValg = () => {
         endreFiltervalg(form, null);
     };
 
-    const onChange = e => {
-        e.preventDefault();
-        endreFiltervalg(form, e.target.value);
-    };
-
     let reactKey = 1;
     return (
-        <form className="skjema radio-filterform" data-testid="radio-filterform">
+        <form
+            className="skjema radio-filterform"
+            onSubmit={e => {
+                e.preventDefault();
+                if (valgtFilterValg) {
+                    endreFiltervalg(form, valgtFilterValg);
+                }
+                closeDropdown();
+            }}
+        >
             <div className="radio-filterform__valg">
                 {Object.keys(valg).map(v => (
                     <Radio
@@ -39,12 +55,16 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg}: Radio
                         name={valg[v].label}
                         className={valg[v].className}
                         checked={valgtFilterValg === v}
-                        onChange={e => onChange(e)}
+                        onChange={e => setValgteFilterValg(e.target.value)}
                         data-testid={`radio-valg_${kebabCase(valg[v].label)}`}
                     />
                 ))}
             </div>
-            <div className={'filterform__under-valg'}>
+            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+                <VelgLukkKnapp
+                    harValg={valgtFilterValg !== '' && valgtFilterValg !== null}
+                    dataTestId="radio-filterform"
+                />
                 <NullstillValgKnapp
                     dataTestId="radio-filterform"
                     nullstillValg={nullstillValg}
@@ -55,3 +75,5 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg}: Radio
         </form>
     );
 }
+
+export default GammelRadioFilterform;

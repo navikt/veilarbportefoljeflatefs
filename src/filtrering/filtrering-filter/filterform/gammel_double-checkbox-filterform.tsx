@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell} from '../../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
+import {Dictionary} from '../../../utils/types/types';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
+import {FiltervalgModell} from '../../../model-interfaces';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
@@ -25,14 +29,16 @@ const harValgCol2 = Object.keys(valgCol1).length > 0;
 const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
 const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
 
-function DoubleCheckboxFilterform({
+function GammelDoubleCheckboxFilterform({
     endreFiltervalg,
+    closeDropdown,
     filtervalg,
     className,
     emptyCheckboxFilterFormMessage
 }: DoubleCheckboxFilterformProps) {
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
+    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
@@ -47,18 +53,12 @@ function DoubleCheckboxFilterform({
         const id = e.target.value.replace(`${typeForm}_`, '');
         if (typeForm === formCol1)
             return e.target.checked
-                ? endreFiltervalg(formCol1, [...checkBoxValgCol1, id])
-                : endreFiltervalg(
-                      formCol1,
-                      checkBoxValgCol1.filter(value => value !== id)
-                  );
+                ? setCheckBoxValgCol1(prevState => [...prevState, id])
+                : setCheckBoxValgCol1(prevState => prevState.filter(value => value !== id));
         else if (typeForm === formCol2)
             return e.target.checked
-                ? endreFiltervalg(formCol2, [...checkBoxValgCol2, id])
-                : endreFiltervalg(
-                      formCol2,
-                      checkBoxValgCol2.filter(value => value !== id)
-                  );
+                ? setCheckBoxValgCol2(prevState => [...prevState, id])
+                : setCheckBoxValgCol2(prevState => prevState.filter(value => value !== id));
         return;
     };
 
@@ -68,7 +68,17 @@ function DoubleCheckboxFilterform({
     };
 
     return (
-        <form className="skjema checkbox-filterform">
+        <form
+            className="skjema checkbox-filterform"
+            onSubmit={e => {
+                e.preventDefault();
+                if (checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0) {
+                    endreFiltervalg(formCol1, checkBoxValgCol1);
+                    endreFiltervalg(formCol2, checkBoxValgCol2);
+                }
+                closeDropdown();
+            }}
+        >
             {harValgCol1 && harValgCol2 && (
                 <div className={classNames('checkbox-filterform__valg__double', className)}>
                     <div
@@ -103,7 +113,11 @@ function DoubleCheckboxFilterform({
                     </div>
                 </div>
             )}
-            <div className={'filterform__under-valg'}>
+            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+                <VelgLukkKnapp
+                    harValg={checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0}
+                    dataTestId="double-checkbox-filterform"
+                />
                 <NullstillValgKnapp
                     dataTestId="double-checkbox-filterform"
                     nullstillValg={nullstillValg}
@@ -157,4 +171,4 @@ function makeValgUnique(valg: Dictionary<string>, form: string) {
     return unique;
 }
 
-export default DoubleCheckboxFilterform;
+export default GammelDoubleCheckboxFilterform;
