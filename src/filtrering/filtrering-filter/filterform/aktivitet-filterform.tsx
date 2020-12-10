@@ -34,7 +34,6 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     }, [filtervalg.aktiviteter]);
 
     const handleRadioChange = (aktivitetKey, verdi) => {
-        console.log(aktivitetKey);
         endreFiltervalg('aktiviteter', {
             ...valgteAktiviteter,
             [aktivitetKey]: verdi
