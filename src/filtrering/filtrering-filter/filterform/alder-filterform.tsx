@@ -191,7 +191,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-            <div className="filterform__under-valg aldersfilter">
+            <div className="filterform__under-valg">
                 <NullstillValgKnapp
                     dataTestId="alder-filterform"
                     nullstillValg={nullstillValg}

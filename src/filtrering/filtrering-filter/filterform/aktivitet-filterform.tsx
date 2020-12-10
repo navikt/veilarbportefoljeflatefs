@@ -34,6 +34,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
     }, [filtervalg.aktiviteter]);
 
     const handleRadioChange = (aktivitetKey, verdi) => {
+        console.log(aktivitetKey);
         endreFiltervalg('aktiviteter', {
             ...valgteAktiviteter,
             [aktivitetKey]: verdi
@@ -95,7 +96,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                                 checked={valgteAktiviteter[kode] === 'NEI'}
                                 className="skjemaelement__input radioknapp"
                                 onChange={() => handleRadioChange(kode, 'NEI')}
-                                key={`NEJ, ${verdi}`}
+                                key={`NEI, ${verdi}`}
                                 data-testid={`aktivitet-filterform-${kode}-nei`}
                             />
                             <label

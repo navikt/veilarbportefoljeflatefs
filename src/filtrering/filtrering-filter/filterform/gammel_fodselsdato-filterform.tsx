@@ -5,8 +5,6 @@ import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -24,7 +22,6 @@ function GammelFodselsdatoFilterform({
     filtervalg
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
 
     const velgCheckBox = e => {
@@ -58,7 +55,7 @@ function GammelFodselsdatoFilterform({
                     <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
                 </div>
             )}
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 <NullstillValgKnapp
                     dataTestId="fodselsdato-filterform"

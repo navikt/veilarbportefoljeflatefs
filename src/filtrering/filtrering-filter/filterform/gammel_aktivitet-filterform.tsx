@@ -5,8 +5,6 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -28,7 +26,6 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function GammelAktivitetFilterform(props: AktivitetFilterformProps) {
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -107,7 +104,7 @@ function GammelAktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform"

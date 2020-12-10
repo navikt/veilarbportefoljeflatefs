@@ -8,8 +8,6 @@ import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {logEvent} from '../../../utils/frontend-logger';
 import classNames from 'classnames';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface AlderFilterformProps {
     form: string;
@@ -33,7 +31,6 @@ function GammelAlderFilterform({
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
     const [feil, setFeil] = useState(false);
     const [feilTekst, setFeilTekst] = useState<string>('');
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
@@ -197,7 +194,7 @@ function GammelAlderFilterform({
                     )}
                 </>
             )}
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp harValg={kanVelgeFilter} dataTestId="checkbox-filterform" />
                 <NullstillValgKnapp
                     dataTestId="alder-filterform"

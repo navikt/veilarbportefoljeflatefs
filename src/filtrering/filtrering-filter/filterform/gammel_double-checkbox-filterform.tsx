@@ -8,8 +8,6 @@ import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -38,7 +36,6 @@ function GammelDoubleCheckboxFilterform({
 }: DoubleCheckboxFilterformProps) {
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     useEffect(() => {
         setCheckBoxValgCol1(filtervalg[formCol1]);
@@ -113,7 +110,7 @@ function GammelDoubleCheckboxFilterform({
                     </div>
                 </div>
             )}
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp
                     harValg={checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0}
                     dataTestId="double-checkbox-filterform"

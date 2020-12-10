@@ -7,8 +7,6 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -24,7 +22,6 @@ interface RadioFilterformProps {
 
 function GammelRadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     useEffect(() => {
         setValgteFilterValg(filtervalg[form]);
@@ -60,7 +57,7 @@ function GammelRadioFilterform({form, endreFiltervalg, closeDropdown, valg, filt
                     />
                 ))}
             </div>
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp
                     harValg={valgtFilterValg !== '' && valgtFilterValg !== null}
                     dataTestId="radio-filterform"

@@ -7,8 +7,6 @@ import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import AlertStripe from 'nav-frontend-alertstriper';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import classNames from 'classnames';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {LIVE_FILTRERING} from '../../../konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -33,7 +31,6 @@ function GammelCheckboxFilterform({
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
-    const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
 
     useEffect(() => {
         setCheckBoxValg(filtervalg[form]);
@@ -68,7 +65,7 @@ function GammelCheckboxFilterform({
                     </Grid>
                 </div>
             )}
-            <div className={erLiveFiltreringFeatureTogglePa ? 'filterform__under-valg' : 'filterform__gammel'}>
+            <div className='filterform__gammel'>
             <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
                 <NullstillValgKnapp
                     dataTestId="checkbox-filterform"
