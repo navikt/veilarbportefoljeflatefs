@@ -5,7 +5,7 @@ import {ListevisningType} from '../../ducks/ui/listevisning';
 import './toolbar.less';
 import '../../style.less';
 import {useSelector} from 'react-redux';
-import LeggTilArbeidsliste from './legg-til-arbeidsliste-knapp';
+import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
 import {ReactComponent as TildelVeilederIkon} from '../ikoner/person-add-1.svg';
@@ -48,7 +48,7 @@ function Toolbar(props: ToolbarProps) {
     const oversikt = side => {
         switch (side) {
             case ListevisningType.minOversikt:
-                return <LeggTilArbeidsliste visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />;
+                return <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />;
             case ListevisningType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">

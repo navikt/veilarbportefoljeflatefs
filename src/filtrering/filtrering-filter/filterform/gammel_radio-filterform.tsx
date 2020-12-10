@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import * as React from 'react';
 import {Radio} from 'nav-frontend-skjema';
 import './filterform.less';
-import {FiltervalgModell} from '../../model-interfaces';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../konstanter';
-import {kebabCase} from '../../utils/utils';
-import {OrNothing} from '../../utils/types/types';
+import {useEffect, useState} from 'react';
+import {kebabCase} from '../../../utils/utils';
+import {FiltervalgModell} from '../../../model-interfaces';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {OrNothing} from '../../../utils/types/types';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -21,9 +20,8 @@ interface RadioFilterformProps {
     filtervalg: FiltervalgModell;
 }
 
-export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
+function GammelRadioFilterform({form, endreFiltervalg, closeDropdown, valg, filtervalg}: RadioFilterformProps) {
     const [valgtFilterValg, setValgteFilterValg] = useState<string>(filtervalg[form]);
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
 
     useEffect(() => {
         setValgteFilterValg(filtervalg[form]);
@@ -59,24 +57,20 @@ export function RadioFilterform({form, endreFiltervalg, closeDropdown, valg, fil
                     />
                 ))}
             </div>
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp
                     harValg={valgtFilterValg !== '' && valgtFilterValg !== null}
                     dataTestId="radio-filterform"
                 />
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp
-                        dataTestId="radio-filterform"
-                        nullstillValg={nullstillValg}
-                        form={form}
-                        disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
-                    />
-                )}
+                <NullstillValgKnapp
+                    dataTestId="radio-filterform"
+                    nullstillValg={nullstillValg}
+                    form={form}
+                    disabled={!(valgtFilterValg !== '' && valgtFilterValg !== null)}
+                />
             </div>
         </form>
     );
 }
+
+export default GammelRadioFilterform;

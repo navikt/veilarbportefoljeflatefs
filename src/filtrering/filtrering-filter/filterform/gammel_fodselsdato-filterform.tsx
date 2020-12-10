@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Dictionary} from '../../utils/types/types';
-import {FiltervalgModell} from '../../model-interfaces';
-import Grid from '../grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
-import classNames from 'classnames';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {NULLSTILL_KNAPP} from '../../konstanter';
+import {Dictionary} from '../../../utils/types/types';
+import {FiltervalgModell} from '../../../model-interfaces';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -16,28 +12,17 @@ interface CheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
-    className?: string;
-    emptyCheckboxFilterFormMessage?: string;
 }
 
-function CheckboxFilterform({
+function GammelFodselsdatoFilterform({
     endreFiltervalg,
     valg,
     closeDropdown,
     form,
-    filtervalg,
-    columns = 1,
-    className,
-    emptyCheckboxFilterFormMessage
+    filtervalg
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
-    const erNullstillFeatureTogglePa = useFeatureSelector()(NULLSTILL_KNAPP);
-
-    useEffect(() => {
-        setCheckBoxValg(filtervalg[form]);
-    }, [filtervalg, form]);
 
     const velgCheckBox = e => {
         e.persist();
@@ -45,6 +30,10 @@ function CheckboxFilterform({
             ? setCheckBoxValg(prevState => [...prevState, e.target.value])
             : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
     };
+
+    useEffect(() => {
+        setCheckBoxValg(filtervalg[form]);
+    }, [filtervalg, form]);
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
@@ -62,29 +51,21 @@ function CheckboxFilterform({
             }}
         >
             {harValg && (
-                <div className={classNames('checkbox-filterform__valg', className)}>
-                    <Grid columns={columns}>
-                        <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
-                    </Grid>
+                <div className="checkbox-filterform__valg fodselsdato__grid">
+                    <RenderFields valg={valg} velgCheckBox={velgCheckBox} checkBoxValg={checkBoxValg} />
                 </div>
             )}
-            <div
-                className={
-                    erNullstillFeatureTogglePa ? 'filterform__under-valg__nullstill-feature' : 'filterform__under-valg'
-                }
-            >
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp harValg={checkBoxValg.length > 0} dataTestId="checkbox-filterform" />
-                {erNullstillFeatureTogglePa && (
-                    <NullstillValgKnapp
-                        dataTestId="checkbox-filterform"
-                        nullstillValg={nullstillValg}
-                        form={form}
-                        disabled={checkBoxValg.length <= 0}
-                    />
-                )}
+                <NullstillValgKnapp
+                    dataTestId="fodselsdato-filterform"
+                    nullstillValg={nullstillValg}
+                    form={form}
+                    disabled={checkBoxValg.length <= 0}
+                />
                 {!harValg && (
                     <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
+                        Ingen veiledere funnet
                     </AlertStripe>
                 )}
             </div>
@@ -96,17 +77,21 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
     return (
         <>
             {Object.entries(props.valg).map(([filterKey, filterValue]) => (
-                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                <div key={filterKey} className="fodselsdato__container">
                     <input
                         id={filterKey}
                         type="checkbox"
-                        className="skjemaelement__input checkboks"
+                        className="fodselsdato__checkboks"
                         value={filterKey}
                         checked={props.checkBoxValg.includes(filterKey)}
                         onChange={props.velgCheckBox}
-                        data-testid={`filter_${filterKey}`}
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}_input`}
                     />
-                    <label htmlFor={filterKey} className="skjemaelement__label">
+                    <label
+                        htmlFor={filterKey}
+                        className="fodselsdato__label"
+                        data-testid={`fodselsdato-filterform_dato-${filterValue}`}
+                    >
                         {filterValue}
                     </label>
                 </div>
@@ -115,4 +100,4 @@ function RenderFields(props: {valg: Dictionary<string>; velgCheckBox: (e) => voi
     );
 }
 
-export default CheckboxFilterform;
+export default GammelFodselsdatoFilterform;

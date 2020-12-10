@@ -33,6 +33,7 @@ spec:
     ingresses:
         - https://veilarbportefoljeflatefs-{{namespace}}.nais.preprod.local
         - https://app-{{namespace}}.adeo.no/veilarbportefoljeflatefs
+        - https://app-{{namespace}}.dev.adeo.no/veilarbportefoljeflatefs
     vault:
         enabled: true
     envFrom:

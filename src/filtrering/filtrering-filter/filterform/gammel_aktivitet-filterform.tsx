@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../../ducks/filtrering';
 import './filterform.less';
-import VelgLukkKnapp from '../velg-lukk-knapp';
-import NullstillValgKnapp from '../nullstill-valg-knapp';
-import {Dictionary} from '../../utils/types/types';
-import {FiltervalgModell} from '../../model-interfaces';
+import {Dictionary} from '../../../utils/types/types';
+import {FiltervalgModell} from '../../../model-interfaces';
+import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -25,7 +25,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
     UTDANNINGAKTIVITET: AktiviteterValg.NA
 };
 
-function AktivitetFilterform(props: AktivitetFilterformProps) {
+function GammelAktivitetFilterform(props: AktivitetFilterformProps) {
     const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
     );
@@ -104,16 +104,16 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform__valg">{fields}</div>
-            <div className="filterform__under-valg aktivitetfilter_knapper">
+            <div className='filterform__gammel'>
                 <VelgLukkKnapp harValg={harValg} dataTestId={'aktivitet-filterform'} />
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAktiviteter}
-                    form='aktiviteter'
+                    form="aktiviteter"
                     disabled={!harValg}
                 />
             </div>
         </form>
     );
 }
-export default AktivitetFilterform;
+export default GammelAktivitetFilterform;

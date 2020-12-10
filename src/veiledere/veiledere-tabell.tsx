@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {ReactComponent as PilAscending} from '../components/tabell/arrow-up.svg';
-import {ReactComponent as PilDescending} from '../components/tabell/arrow-down.svg';
+import {ReactComponent as PilStigende} from '../components/tabell/arrow-up.svg';
+import {ReactComponent as PilSynkende} from '../components/tabell/arrow-down.svg';
 import './veiledere.less';
 
 interface VeiledereTabellProps {
@@ -41,10 +41,10 @@ function VeilederTabell(props: VeiledereTabellProps) {
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
-            if (currentSortering.direction === 'ascending') {
-                return <PilAscending className={className} data-testid="sorteringspil_ascending" />;
-            } else if (currentSortering.direction === 'descending') {
-                return <PilDescending className={className} data-testid="sorteringspil_descending" />;
+            if (currentSortering.direction === 'stigende') {
+                return <PilStigende className={className} data-testid="sorteringspil_stigende" />;
+            } else if (currentSortering.direction === 'synkende') {
+                return <PilSynkende className={className} data-testid="sorteringspil_synkende" />;
             }
         }
         return null;

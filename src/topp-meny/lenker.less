@@ -2,8 +2,9 @@
 
 .veilarbportefoljeflatefs {
     .topp-meny {
-        display: flex;
         align-items: normal;
+        display: grid;
+        grid-template-columns: auto auto auto auto;
     }
 
     .topp-meny__alertstripe {
@@ -14,6 +15,12 @@
         border: 0;
         padding: 0;
         text-decoration: none;
+    }
+
+    .oversikt-overskrifter {
+        grid-column: 1;
+        display: flex;
+        flex-direction: row;
     }
 
     .h2__lenke {

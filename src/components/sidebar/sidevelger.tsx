@@ -3,8 +3,6 @@ import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-st
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
-import {pagineringSetup} from '../../ducks/paginering';
-import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {ListevisningType} from '../../ducks/ui/listevisning';
@@ -17,7 +15,9 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
-import FiltreringFilter from '../../filtrering/filtrering-filter';
+import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
+import {pagineringSetup} from '../../ducks/paginering';
+import {endreFiltervalg} from '../../ducks/filtrering';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -47,6 +47,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
     const mineFilter = mineFilterState.data;
     const erPaMinOversikt = filtergruppe === ListevisningType.minOversikt;
     const erPaEnhetensOversikt = filtergruppe === ListevisningType.enhetensOversikt;
+
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));

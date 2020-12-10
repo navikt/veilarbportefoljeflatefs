@@ -7,7 +7,7 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     ALDER_FILTER,
-    NULLSTILL_KNAPP
+    LIVE_FILTRERING
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,7 +22,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [ALDER_FILTER]: false,
-    [NULLSTILL_KNAPP]: false
+    [LIVE_FILTRERING]: false
 };
 
 // Reducer
