@@ -34,6 +34,11 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
 }
 
 export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filtervalg: {}, fra?: number, antall?: number) {
+    if (rekkefolge === 'stigende') {
+        rekkefolge = 'ascending';
+    } else if (rekkefolge === 'synkende') {
+        rekkefolge = 'descending';
+    }
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
