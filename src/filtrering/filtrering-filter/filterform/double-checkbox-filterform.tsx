@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
-import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
@@ -12,7 +11,6 @@ interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     className?: string;
-    emptyCheckboxFilterFormMessage?: string;
 }
 
 const formCol1 = 'utdanningGodkjent';
@@ -25,12 +23,7 @@ const harValgCol2 = Object.keys(valgCol1).length > 0;
 const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
 const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
 
-function DoubleCheckboxFilterform({
-    endreFiltervalg,
-    filtervalg,
-    className,
-    emptyCheckboxFilterFormMessage
-}: DoubleCheckboxFilterformProps) {
+function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: DoubleCheckboxFilterformProps) {
     const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
     const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
 
@@ -110,11 +103,6 @@ function DoubleCheckboxFilterform({
                     form={'utdanning-godkjent-og-bestatt'}
                     disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
                 />
-                {(!harValgCol1 || !harValgCol2) && (
-                    <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
-                    </AlertStripe>
-                )}
             </div>
         </form>
     );
