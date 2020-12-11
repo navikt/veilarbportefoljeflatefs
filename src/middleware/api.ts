@@ -54,6 +54,11 @@ export function hentVeiledersPortefolje(
     fra?: number,
     antall?: number
 ) {
+    if (rekkefolge === 'stigende') {
+        rekkefolge = 'ascending';
+    } else if (rekkefolge === 'synkende') {
+        rekkefolge = 'descending';
+    }
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
