@@ -43,12 +43,16 @@ export const loggBrowserMetrikker = (): void => {
     logEvent(
         'portefolje.browser_bruk',
         {browser: browserAgent, version: browserVersion, zoom: getBrowserZoom()},
-        {version: browserVersion}
+        {versionTag: browserVersion}
     );
 
     if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
         window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
-        logEvent(BROWSER_METRIKKER_LOG_TAG, {browser: browserAgent, version: browserVersion});
+        logEvent(
+            BROWSER_METRIKKER_LOG_TAG,
+            {browser: browserAgent, version: browserVersion},
+            {versionTag: browserVersion}
+        );
     }
 };
 
