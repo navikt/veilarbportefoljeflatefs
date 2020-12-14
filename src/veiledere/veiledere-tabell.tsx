@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import {ReactComponent as PilStigende} from '../components/tabell/arrow-up.svg';
 import {ReactComponent as PilSynkende} from '../components/tabell/arrow-down.svg';
 import './veiledere.less';
-import {Sorteringsrekkefolge} from '../model-interfaces';
 
 interface VeiledereTabellProps {
     veiledere: any;

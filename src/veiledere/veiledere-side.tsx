@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Undertittel} from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
