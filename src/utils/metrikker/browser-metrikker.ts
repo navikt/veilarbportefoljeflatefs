@@ -1,24 +1,35 @@
+import {OrNothing} from '../types/types';
+import {VeilederModell} from '../../model-interfaces';
 import {logEvent} from '../frontend-logger';
-
-const BROWSER_METRIKKER_LOG_TAG = 'portefolje.browser_metrikker';
-const BROWSER_METRIKKER_LOCAL_STORAGE_KEY = 'har_logget_browser_metrikker';
+import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
+import {
+    engineName,
+    fullBrowserVersion,
+    isChrome,
+    isEdge,
+    isEdgeChromium,
+    isFirefox,
+    isIE,
+    isLegacyEdge,
+    isOpera,
+    isSafari,
+    osName
+} from 'react-device-detect';
 
 function getBrowserAgent(): string {
-    const userAgent = navigator.userAgent;
-    const contains = (str: string): boolean => userAgent.indexOf(str) > -1;
     let agent;
 
-    if (contains('Firefox')) {
+    if (isFirefox) {
         agent = 'firefox';
-    } else if (contains('Opera') || contains('OPR')) {
+    } else if (isOpera) {
         agent = 'opera';
-    } else if (contains('Trident')) {
+    } else if (isIE) {
         agent = 'ie';
-    } else if (contains('Edge')) {
+    } else if (isEdge || isLegacyEdge || isEdgeChromium) {
         agent = 'edge';
-    } else if (contains('Chrome')) {
+    } else if (isChrome) {
         agent = 'chrome';
-    } else if (contains('Safari')) {
+    } else if (isSafari) {
         agent = 'safari';
     } else {
         agent = 'unknown';
@@ -36,31 +47,40 @@ function getBrowserZoom(): number {
     return Math.round(window.devicePixelRatio * 100);
 }
 
-export const loggBrowserMetrikker = (): void => {
+export const logBrowserMetrikker = (veilederIdent: OrNothing<VeilederModell>): void => {
     const browserAgent = getBrowserAgent();
     const browserVersion = getBrowserVersion();
+    const operatingSystem = getOS();
+    const engineName = getEngineName();
 
-    logEvent(
-        'portefolje.browser_bruk',
-        {browser: browserAgent, version: browserVersion, zoom: getBrowserZoom()},
-        {versionTag: browserVersion}
-    );
-
-    if (window.localStorage.getItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY) == null) {
-        window.localStorage.setItem(BROWSER_METRIKKER_LOCAL_STORAGE_KEY, 'true');
+    if (veilederIdent) {
         logEvent(
-            BROWSER_METRIKKER_LOG_TAG,
-            {browser: browserAgent, version: browserVersion},
-            {versionTag: browserVersion}
+            'portefolje.browser_bruk',
+            {
+                browser: browserAgent,
+                version: browserVersion,
+                zoom: getBrowserZoom(),
+                os: operatingSystem,
+                engineName: engineName
+            },
+            {
+                versionTag: browserVersion,
+                osTag: operatingSystem,
+                engineNameTag: engineName,
+                identTag: mapVeilederIdentTilNonsens(veilederIdent.ident)
+            }
         );
     }
 };
 
 function getBrowserVersion() {
-    var ua = navigator.userAgent,
-        tem;
-    var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-    if (M && (tem = ua.match(/version\/([.\d]+)/i)) != null) M[2] = tem[1];
-    M = M ? [M[2]] : [navigator.appVersion, '-?'];
-    return M[0];
+    return fullBrowserVersion;
+}
+
+function getOS() {
+    return osName;
+}
+
+function getEngineName() {
+    return engineName;
 }
