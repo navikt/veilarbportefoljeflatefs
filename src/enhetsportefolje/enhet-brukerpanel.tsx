@@ -57,7 +57,7 @@ function EnhetBrukerpanel({
                     checked={bruker.markert}
                     disabled={bruker.fnr === ''}
                     onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
-                    label=""
+                    label=" "
                     role="checkbox"
                     className="brukerliste__checkbox"
                 />

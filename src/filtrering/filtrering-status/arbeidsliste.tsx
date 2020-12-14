@@ -26,9 +26,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
     return (
         <>
             <div className="minArbeidsliste__tittel typo-element">
-                <Element className="blokk-xxs" tag="h3">
-                    Arbeidsliste
-                </Element>
+                <Element className="blokk-xxs">Arbeidsliste</Element>
             </div>
             <BarInputRadio
                 filterNavn="minArbeidsliste"

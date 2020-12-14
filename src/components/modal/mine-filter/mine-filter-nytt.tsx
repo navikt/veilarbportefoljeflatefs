@@ -52,7 +52,11 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
 
     return (
         <>
-            <form onSubmit={e => doLagreNyttFilter(e)} data-testid="lagre-nytt-filter_modal_form">
+            <form
+                onSubmit={e => doLagreNyttFilter(e)}
+                data-testid="lagre-nytt-filter_modal_form"
+                data-widget="accessible-autocomplete"
+            >
                 <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
                 <Input
                     label="Navn:"

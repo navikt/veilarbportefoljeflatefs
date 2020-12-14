@@ -58,14 +58,14 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                <Undertittel>Søk veileder</Undertittel>
+                                {/*<Undertittel>Søk veileder</Undertittel>*/}
                                 <FiltreringVeiledere />
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper filtergruppe={ListevisningType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>
-                        <div className="liste-kolonne" role="list">
+                        <div className="liste-kolonne">
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     veiledere: lagLablerTilVeiledereMedIdenter(

@@ -23,7 +23,7 @@ export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; 
     return (
         <Lenke className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
-            <LinkIcon className='linkikon'/>
+            <LinkIcon className="linkikon" />
         </Lenke>
     );
 }
@@ -61,7 +61,7 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                 <EtikettLiten>{props.dato}</EtikettLiten>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
-                <Undertittel tag="h3"> {props.innholdsOverskrift} </Undertittel>
+                <Undertittel> {props.innholdsOverskrift} </Undertittel>
                 {props.innholdsTekst && <Normaltekst> {props.innholdsTekst} </Normaltekst>}
                 {props.children}
             </div>

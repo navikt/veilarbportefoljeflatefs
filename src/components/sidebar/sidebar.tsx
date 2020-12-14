@@ -116,11 +116,12 @@ function Sidebar(props: SidebarProps) {
                 onClick={e => handleMouseClick(e, tab)}
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
-                aria-controls={tab.type}
+                aria-controls={kebabCase(`${tab.type}_tab`)}
                 id={kebabCase(`${tab.type}_tab`)}
                 tabIndex={(!isSelected && -1) || 0}
                 onKeyUp={e => handleKeyUp(e, tab)}
                 data-testid={`sidebar-tab_${tab.type}`}
+                aria-label={tab.tittel}
             >
                 <div className="sidebar__tab-ikon">{tab.icon}</div>
             </button>
