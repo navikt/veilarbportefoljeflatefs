@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux';
 import {useCallback} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {useOnMount} from '../use-on-mount';
+import {logBrowserMetrikker} from '../../utils/metrikker/browser-metrikker';
 
 export function useSetStateFromUrl() {
     const innloggetVeilederIdent = useIdentSelector();
@@ -41,6 +42,7 @@ export function useSetStateFromUrl() {
     useOnMount(() => {
         loggSkjermMetrikker(side);
         loggSideVisning(innloggetVeilederIdent, side);
+        logBrowserMetrikker(innloggetVeilederIdent);
         settInitalStateFraUrl();
     });
 }
