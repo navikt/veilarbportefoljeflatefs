@@ -80,7 +80,6 @@ function Dropdown(props: DropdownProps) {
             {render(lukkDropdown)}
         </div>
     );
-    console.log('typeof navn', typeof name, 'navn', name);
 
     const ariaLabel = () => {
         return typeof name === 'object' ? 'Velg kolonner' : `Ekspanderbart panel for "${name}"`;
