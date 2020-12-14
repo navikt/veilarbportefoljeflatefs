@@ -64,7 +64,11 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                             'valgt-sortering': sorterEtternavn
                                         })}
                                         aria-pressed={sorterEtternavn}
-                                        aria-label={sorterEtternavn ? currentSortering.direction : 'inaktiv'}
+                                        aria-label={
+                                            sorterEtternavn
+                                                ? `Etternavn, ${currentSortering.direction} rekkefølge`
+                                                : 'Etternavn, ingen sortering'
+                                        }
                                     >
                                         Etternavn
                                     </button>
@@ -86,7 +90,11 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                             'valgt-sortering': sorterPaaPortefoljeStr
                                         })}
                                         aria-pressed={sorterPaaPortefoljeStr}
-                                        aria-label={sorterPaaPortefoljeStr ? currentSortering.direction : 'inaktiv'}
+                                        aria-label={
+                                            sorterPaaPortefoljeStr
+                                                ? `Antall brukere, ${currentSortering.direction} rekkefølge`
+                                                : 'Antall brukere, ingen sortering'
+                                        }
                                     >
                                         Antall brukere
                                     </button>

@@ -81,7 +81,7 @@ function Toolbar(props: ToolbarProps) {
         >
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {filtergruppe === ListevisningType.veilederOversikt && (
-                    <Undertittel tag="h1" className="veiledere-undertittel blokk-xxs">
+                    <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
                         {antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${antallVeiledere} ${veiledereGrammatikk}`}
                     </Undertittel>
                 )}

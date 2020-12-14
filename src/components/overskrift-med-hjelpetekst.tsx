@@ -13,7 +13,7 @@ interface OverskriftMedHjelpeTekstProps {
 export default function OverskriftMedHjelpetekst(props: OverskriftMedHjelpeTekstProps) {
     return (
         <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
-            <Element tag="h3">{props.overskriftTekst}</Element>
+            <Element>{props.overskriftTekst}</Element>
             <Hjelpetekst id={props.hjelpeTekst} type={props.orientering}>
                 {props.hjelpeTekst}
             </Hjelpetekst>

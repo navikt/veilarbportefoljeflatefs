@@ -91,7 +91,11 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onIkkeVisIgjen}: Tilb
                             />
                         </div>
                         {harBesvartTilfredshet && (
-                            <form className="tilbakemelding-modal__ekspander" onSubmit={handleFormSubmitted}>
+                            <form
+                                className="tilbakemelding-modal__ekspander"
+                                onSubmit={handleFormSubmitted}
+                                data-widget="accessible-autocomplete"
+                            >
                                 {visFritekst && (
                                     <div className="tilbakemelding-modal__kommentar">
                                         <Textarea

@@ -22,9 +22,7 @@ function Barlabel({htmlFor, labelTekst, antall, className}: BarlabelProps) {
                         <span className="text-hide" aria-live="polite" aria-atomic="true">
                             {`Det er ${tekstAntallBrukere(antall)} i Min arbeidsliste`}
                         </span>
-                        <Element className="barlabel__antall" aria-hidden="true">
-                            {antall}
-                        </Element>
+                        <Element className="barlabel__antall">{antall}</Element>
                     </div>
                 )}
                 {htmlFor !== 'minArbeidsliste' && <Element className="barlabel__antall">{antall}</Element>}

@@ -21,11 +21,11 @@ function TabellOverskrift(props: {className: string}) {
     const enEllerFlereBrukere = antallTotalt <= 20 ? `${maksBrukere}` : `${fraIndexMax} - ${maksBrukere}`;
 
     return (
-        <Element tag="h1" className={props.className}>
-            <strong aria-live="polite" aria-atomic="true">
+        <Element className={props.className}>
+            <p aria-live="polite" aria-atomic="true">
                 {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt} ${brukereGrammatikk}. `}
                 {antallValgteBrukere}
-            </strong>
+            </p>
         </Element>
     );
 }

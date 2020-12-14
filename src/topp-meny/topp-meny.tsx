@@ -21,11 +21,11 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
         return null;
     }
     return (
-        <div
-            className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}
-            aria-label="Naviger mellom de forskjellige oversiktene."
-        >
-            <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
+        <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
+            <Lenker
+                erPaloggetVeileder={!!props.erPaloggetVeileder}
+                aria-label="Naviger mellom de forskjellige oversiktene."
+            />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             <EndringsloggTourWrapper />
