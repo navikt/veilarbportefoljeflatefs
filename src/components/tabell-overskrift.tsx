@@ -5,7 +5,6 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import './tabell-overskrift.less';
 import classNames from 'classnames';
-import {OrNothing} from '../utils/types/types';
 
 function TabellOverskrift(props: {className?: string}) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
