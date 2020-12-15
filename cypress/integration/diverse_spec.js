@@ -50,10 +50,10 @@ describe('Diverse', () => {
         cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
         cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
         cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet_kommentarfelt')
-            .should('be.empty')
-            .click()
-            .type('How do you throw a space party? You planet!');
+        // cy.getByTestId('tilfredshet_kommentarfelt')
+        //     .should('be.empty')
+        //     .click()
+        //     .type('How do you throw a space party? You planet!');
         cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp')
             .contains('Send')
