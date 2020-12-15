@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Undertittel} from 'nav-frontend-typografi';
 import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
@@ -58,14 +57,13 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                <Undertittel>Søk veileder</Undertittel>
                                 <FiltreringVeiledere />
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper filtergruppe={ListevisningType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>
-                        <div className="liste-kolonne" role="list">
+                        <div className="liste-kolonne">
                             <FiltreringLabelContainer
                                 filtervalg={{
                                     veiledere: lagLablerTilVeiledereMedIdenter(

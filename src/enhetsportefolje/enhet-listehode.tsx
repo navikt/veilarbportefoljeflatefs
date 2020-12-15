@@ -109,7 +109,6 @@ function EnhetListehode({
                 <Header
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                    title="Navn på tildelt veileder"
                     headerId="veileder"
                 >
                     Veileder

@@ -93,8 +93,16 @@
 }
 
 .flytt-knapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2rem 2rem;
     margin-left: auto;
+}
+
+.flytt-knapp_opp {
+    grid-column: 1;
+}
+.flytt-knapp_ned {
+    grid-column: 2;
 }
 
 .flytt-knapp {
@@ -119,10 +127,6 @@
 
 .drag-and-drop-row:focus .flytt-knapp {
     pointer-events: auto;
-}
-
-.flytt-knapp:first-child {
-    margin-right: 0.2rem;
 }
 
 .drag-and-drop-row:focus .flytt-knapp:hover {

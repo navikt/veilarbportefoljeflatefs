@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Input} from 'nav-frontend-skjema';
+import {Input, Label} from 'nav-frontend-skjema';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
@@ -35,14 +35,17 @@ function FiltreringVeiledere() {
 
     return (
         <div className="filtrering-veiledere" ref={wrapperRef}>
+            <Label htmlFor="sok-veileder" className="veilederoversikt_sok-veileder">
+                Søk veileder
+            </Label>
             <Input
-                label=""
                 placeholder="Navn eller NAV-ident"
                 onChange={e => handleChange(e)}
                 value={veilederNavnQuery}
                 onFocus={() => setHasFocus(true)}
                 data-testid="veilederoversikt_sok-veileder-input"
                 aria-label="Navn eller NAV-ident"
+                id="sok-veileder"
             />
             {hasFocus && (
                 <VeilederCheckboxListe

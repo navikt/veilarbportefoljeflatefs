@@ -55,9 +55,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
             data-testid="filtrering-filter_container"
         >
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs" tag="h3">
-                    Demografi
-                </Element>
+                <Element className="blokk-xxs">Demografi</Element>
                 {erAlderFeatureTogglePa ? (
                     <Dropdown
                         name="Alder"
@@ -154,9 +152,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs" tag="h3">
-                    Svar fra registrering
-                </Element>
+                <Element className="blokk-xxs">Svar fra registrering</Element>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
@@ -231,10 +227,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                 </Normaltekst>
                             </div>
                             {erLiveFiltreringFeatureTogglePa ? (
-                                <DoubleCheckboxFilterform
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
+                                <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                             ) : (
                                 <GammelDoubleCheckboxFilterform
                                     filtervalg={filtervalg}
@@ -247,9 +240,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs" tag="h3">
-                    Status og brukergrupper
-                </Element>
+                <Element className="blokk-xxs">Status og brukergrupper</Element>
                 <Dropdown
                     name="CV og jobbprofil"
                     id="cv-og-jobbprofil"
@@ -385,9 +376,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 />
             </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs" tag="h3">
-                    Rettighetsgruppe og ytelse
-                </Element>
+                <Element className="blokk-xxs">Rettighetsgruppe og ytelse</Element>
                 <Dropdown
                     name="Rettighetsgruppe"
                     id="rettighetsgruppe"

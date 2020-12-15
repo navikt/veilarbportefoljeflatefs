@@ -42,6 +42,10 @@ function SorteringHeader({
         }
     };
 
+    const ariaLabel = () => {
+        return typeof tekst !== 'string' ? title : tekst;
+    };
+
     return (
         <Header skalVises={skalVises} className={className} headerId={headerId}>
             <div className="sorteringheader__lenke">
@@ -55,8 +59,8 @@ function SorteringHeader({
                     aria-pressed={erValgt}
                     aria-label={
                         erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt
-                            ? tekst + ', ' + rekkefolge + ' rekkefølge'
-                            : tekst + ', ingen sortering'
+                            ? ariaLabel() + ', ' + rekkefolge + ' rekkefølge'
+                            : ariaLabel() + ', ingen sortering'
                     }
                     title={title}
                 >

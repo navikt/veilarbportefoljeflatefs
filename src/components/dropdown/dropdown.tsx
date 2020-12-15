@@ -81,6 +81,10 @@ function Dropdown(props: DropdownProps) {
         </div>
     );
 
+    const ariaLabel = () => {
+        return typeof name === 'object' ? 'Velg kolonner' : `Ekspanderbart panel for "${name}"`;
+    };
+
     return (
         <div
             className={btnCls(props, apen, hover)}
@@ -96,9 +100,10 @@ function Dropdown(props: DropdownProps) {
                     onClick={toggleDropdown}
                     aria-expanded={apen}
                     aria-controls={`${id}-dropdown__innhold`}
+                    id={`${id}-dropdown__innhold`}
                     disabled={disabled}
                     data-testid={`dropdown-knapp_${id}`}
-                    aria-label={`Ekspanderbart panel for "${name}"`}
+                    aria-label={ariaLabel()}
                 >
                     <span className="dropdown__btntext">{name}</span>
                 </button>

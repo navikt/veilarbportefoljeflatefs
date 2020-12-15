@@ -5,7 +5,6 @@ import MinoversiktSide from './minoversikt/minoversikt-side';
 import EnhetSide from './enhetsportefolje/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
-import {loggBrowserMetrikker} from './utils/metrikker/browser-metrikker';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import Innholdslaster from './innholdslaster/innholdslaster';
 import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
@@ -15,8 +14,6 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING} from './konstanter';
 import Lenke from 'nav-frontend-lenker';
-
-loggBrowserMetrikker();
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();

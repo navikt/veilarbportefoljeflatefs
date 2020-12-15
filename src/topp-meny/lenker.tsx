@@ -12,40 +12,37 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
     return (
         <div className="oversikt-overskrifter">
-            <h2 className="h2__lenke" aria-controls="min-oversikt">
-                <ActiveLink
-                    to="/portefolje"
-                    className="oversiktslenke typo-undertittel"
-                    activeClassName={aktivLink}
-                    title="Her vises alle brukere som er tildelt deg"
-                    hidden={!(harPortefolje || props.erPaloggetVeileder)}
-                    id="min-oversikt"
-                >
-                    Min oversikt
-                </ActiveLink>
-            </h2>
-            <h2 className="h2__lenke" aria-controls="enhetens-oversikt">
-                <ActiveLink
-                    to="/enhet"
-                    className="oversiktslenke typo-undertittel"
-                    activeClassName="oversiktslenke--valgt"
-                    title="Her vises alle brukere som tilhører enheten"
-                    id="enhetens-oversikt"
-                >
-                    Enhetens oversikt
-                </ActiveLink>
-            </h2>
-            <h2 className="h2__lenke" aria-controls="veileder-oversikt">
-                <ActiveLink
-                    to="/veiledere"
-                    className="oversiktslenke typo-undertittel"
-                    activeClassName="oversiktslenke--valgt"
-                    title="Her vises alle veilederne som tilhører enheten"
-                    id="veileder-oversikt"
-                >
-                    Veilederoversikt
-                </ActiveLink>
-            </h2>
+            <ActiveLink
+                to="/portefolje"
+                className="oversiktslenke typo-undertittel"
+                activeClassName={aktivLink}
+                title="Her vises alle brukere som er tildelt deg"
+                hidden={!(harPortefolje || props.erPaloggetVeileder)}
+                id="min-oversikt"
+                aria-label="Her vises alle brukere som er tildelt deg"
+            >
+                Min oversikt
+            </ActiveLink>
+            <ActiveLink
+                to="/enhet"
+                className="oversiktslenke typo-undertittel"
+                activeClassName="oversiktslenke--valgt"
+                title="Her vises alle brukere som tilhører enheten"
+                id="enhetens-oversikt"
+                aria-label="Her vises alle brukere som tilhører enheten"
+            >
+                Enhetens oversikt
+            </ActiveLink>
+            <ActiveLink
+                to="/veiledere"
+                className="oversiktslenke typo-undertittel"
+                activeClassName="oversiktslenke--valgt"
+                title="Her vises alle veilederne som tilhører enheten"
+                id="veileder-oversikt"
+                aria-label="Her vises alle veilederne som tilhører enheten"
+            >
+                Veilederoversikt
+            </ActiveLink>
         </div>
     );
 }

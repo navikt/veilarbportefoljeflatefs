@@ -16,7 +16,7 @@ interface TilbakemeldingFabProps {
 
 function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     const TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    const TILBAKEMELDING_FEATURE_TAG = 'digital_dialog'; // NB: Husk å endre for hver nye feature
+    const TILBAKEMELDING_FEATURE_TAG = 'generell_tilfredshet_desember2020'; // NB: Husk å endre for hver nye feature
 
     const [isModalOpen, setModalOpen] = useState(false);
     const harSendtTilbakemelding = false;
