@@ -155,11 +155,11 @@ export default function MinoversiktSide() {
                                             )}
                                         >
                                             <TabellOverskrift
-                                                className={classNames(
+                                                className={
                                                     visesAnnenVeiledersPortefolje
                                                         ? 'tabelloverskrift__annen-veileder'
-                                                        : 'tabelloverskrift'
-                                                )}
+                                                        : ''
+                                                }
                                             />
                                             {visesAnnenVeiledersPortefolje && (
                                                 <AlertStripe
