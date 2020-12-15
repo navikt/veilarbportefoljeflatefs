@@ -19,7 +19,7 @@ interface TilbakemeldingModalProps {
     onIkkeVisIgjen: () => void;
 }
 
-function TilbakemeldingModal({open, onTilbakemeldingSendt, onIkkeVisIgjen}: TilbakemeldingModalProps) {
+function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalProps) {
     const KOMMENTAR_ROWS = 5;
     const KOMMENTAR_MAX_CHAR = 750;
 
@@ -47,7 +47,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onIkkeVisIgjen}: Tilb
     };
 
     const harBesvartTilfredshet = tilfredshet > 0;
-    const visFritekst = true;
+    const visFritekst = false;
 
     if (open && !harBlittVist) {
         setHarBlittVist(true);
@@ -77,11 +77,10 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onIkkeVisIgjen}: Tilb
                 ) : (
                     <>
                         <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
-                            Den digitale dialogen
+                            Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Vi gjør en kartlegging av dialogen. Hvor fornøyd er du med den digitale dialogen? Svarene er
-                            anonyme.
+                            Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)? Svarene er anonyme.
                         </Normaltekst>
                         <div className="tilbakemelding-modal__tilfredshet">
                             <TilfredshetValg
