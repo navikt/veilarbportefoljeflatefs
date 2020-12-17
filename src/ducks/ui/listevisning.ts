@@ -30,7 +30,9 @@ export enum Kolonne {
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
-    VEDTAKSTATUS = 'vedtakstatus'
+    VEDTAKSTATUS = 'vedtakstatus',
+    SISTE_ENDRING = 'siste_endring',
+    SISTE_ENDRING_DATO = 'siste_endring_dato'
 }
 
 export enum ListevisningType {

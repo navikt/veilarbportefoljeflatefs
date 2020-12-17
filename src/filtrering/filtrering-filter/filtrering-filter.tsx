@@ -14,15 +14,15 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    ytelse,
-    utdanning
+    utdanning,
+    ytelse
 } from '../filter-konstanter';
 import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.less';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {ALDER_FILTER, GJEM_HOVEDMAL, LIVE_FILTRERING} from '../../konstanter';
+import {ALDER_FILTER, GJEM_HOVEDMAL, LIVE_FILTRERING, SISTE_ENDRING} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
@@ -37,6 +37,7 @@ import GammelCheckboxFilterform from './filterform/gammel_checkbox-filterform';
 import GammelDoubleCheckboxFilterform from './filterform/gammel_double-checkbox-filterform';
 import GammelFodselsdatoFilterform from './filterform/gammel_fodselsdato-filterform';
 import GammelRadioFilterform from './filterform/gammel_radio-filterform';
+import {Hendelser} from './filterform/hendelser';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -48,6 +49,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erAlderFeatureTogglePa = useFeatureSelector()(ALDER_FILTER);
     const erLiveFiltreringFeatureTogglePa = useFeatureSelector()(LIVE_FILTRERING);
+    const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
 
     return (
         <div
@@ -151,6 +153,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     }
                 />
             </div>
+            {erSisteEndringFeatureTogglePa && (
+                <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
+                    <Element className="blokk-xxs">Hendelser</Element>
+                    <Dropdown
+                        name="Hendelser"
+                        id="hendelser"
+                        render={lukkDropdown => (
+                            <Hendelser form="hendelser" filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                        )}
+                    ></Dropdown>
+                </div>
+            )}
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs">Svar fra registrering</Element>
                 <Dropdown

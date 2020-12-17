@@ -95,6 +95,16 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
+            } else if (key === 'hendelser') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`hendelser-${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (key === 'fodselsdagIMnd') {
                 return value.map(singleValue => {
                     return (
