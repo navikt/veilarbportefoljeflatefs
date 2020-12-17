@@ -66,7 +66,8 @@ export const initialState: FiltervalgModell = {
     cvJobbprofil: null,
     utdanning: [],
     utdanningGodkjent: [],
-    utdanningBestatt: []
+    utdanningBestatt: [],
+    hendelser: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {
