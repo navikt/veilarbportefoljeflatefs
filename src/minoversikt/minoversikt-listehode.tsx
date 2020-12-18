@@ -377,7 +377,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     tekst="Dato siste endring"
-                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     className="sortering-header__dato col col-xs-2"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"
