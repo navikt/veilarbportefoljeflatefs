@@ -5,6 +5,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
+import {hendelserLabels} from '../../filter-konstanter';
 
 interface HendelserFilterformProps {
     form: string;
@@ -32,22 +33,6 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
         return keys.filter(x => checkBoxValg.includes(x)).length > 0;
     };
 
-    const labels = {
-        NY_STILLING: 'En jobb jeg vil søke på',
-        NY_IJOBB: 'Jobb jeg har nå',
-        NY_EGEN: 'Jobbrettet egenaktivitet',
-        NY_BEHANDLING: 'Medisinsk behandling',
-        FULLFORT_STILLING: 'En jobb jeg vil søke på',
-        FULLFORT_IJOBB: 'Jobb jeg har nå',
-        FULLFORT_EGEN: 'Jobbrettet egenaktivitet',
-        FULLFORT_BEHANDLING: 'Medisinsk behandling',
-        FULLFORT_SOKEAVTALE: 'Avtale om å søke jobber',
-        AVBRUTT_STILLING: 'En jobb jeg vil søke på',
-        AVBRUTT_IJOBB: 'Jobb jeg har nå',
-        AVBRUTT_EGEN: 'Jobbrettet egenaktivitet',
-        AVBRUTT_BEHANDLING: 'Medisinsk behandling',
-        AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
-    };
     const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
     const fullfortAvBruker = [
         'FULLFORT_STILLING',
@@ -73,8 +58,8 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {lagtTilAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={labels[key]}
-                            name="hendelser"
+                            label={hendelserLabels[key]}
+                            name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
@@ -85,8 +70,8 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {fullfortAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={labels[key]}
-                            name="hendelser"
+                            label={hendelserLabels[key]}
+                            name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
@@ -97,8 +82,8 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {avbruttAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={labels[key]}
-                            name="hendelser"
+                            label={hendelserLabels[key]}
+                            name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
@@ -107,8 +92,8 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                 </Collapsible>
                 <Radio
                     onChange={velgCheckBox}
-                    label="Endring i mål"
-                    name="hendelser"
+                    label={hendelserLabels['MAL']}
+                    name="sisteEndringKategori"
                     value="MAL"
                     checked={checkBoxValg.includes('MAL')}
                     key="MAL"

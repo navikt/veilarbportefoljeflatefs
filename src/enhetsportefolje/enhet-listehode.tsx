@@ -66,6 +66,7 @@ function EnhetListehode({
         : harValgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const erSisteEndringAktiv = !!filtervalg ? filtervalg.sisteEndringKategori.length > 0 : false;
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
@@ -288,6 +289,28 @@ function EnhetListehode({
                     className="sortering-header__dato col col-xs-2"
                     title="Dager siden fikk status"
                     headerId="vedtakstatus-endret"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.SISTE_ENDRING}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
+                    tekst="Siste endring"
+                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Siste endring"
+                    headerId="siste-endring"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
+                    tekst="Dato siste endring"
+                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Dato siste endring"
+                    headerId="dato-siste-endring"
                 />
             </div>
             <div className="brukerliste__gutter-right" />

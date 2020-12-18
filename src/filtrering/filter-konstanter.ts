@@ -246,24 +246,44 @@ export const utdanningBestatt = {
     NEI: 'Nei'
 };
 
-export const hendelser = {
+export const hendelserLabels = {
     MAL: 'Endring i mål',
-    NY_STILLING: 'En jobb jeg vil søke på (lagt til av bruker)',
-    NY_IJOBB: 'Jobb jeg har nå (lagt til av bruker)',
-    NY_EGEN: 'Jobbrettet egenaktivitet (lagt til av bruker)',
-    NY_BEHANDLING: 'Medisinsk behandling (lagt til av bruker)',
+    NY_STILLING: 'En jobb jeg vil søke på',
+    NY_IJOBB: 'Jobb jeg har nå',
+    NY_EGEN: 'Jobbrettet egenaktivitet',
+    NY_BEHANDLING: 'Medisinsk behandling',
 
-    FULLFORT_STILLING: 'En jobb jeg vil søke på (fullført av bruker)',
-    FULLFORT_IJOBB: 'Jobb jeg har nå (fullført av bruker)',
-    FULLFORT_EGEN: 'Jobbrettet egenaktivitet (fullført av bruker)',
-    FULLFORT_BEHANDLING: 'Medisinsk behandling (fullført av bruker)',
-    FULLFORT_SOKEAVTALE: 'Avtale om å søke jobber (fullført av bruker)',
+    FULLFORT_STILLING: 'En jobb jeg vil søke på',
+    FULLFORT_IJOBB: 'Jobb jeg har nå',
+    FULLFORT_EGEN: 'Jobbrettet egenaktivitet',
+    FULLFORT_BEHANDLING: 'Medisinsk behandling',
+    FULLFORT_SOKEAVTALE: 'Avtale om å søke jobber',
 
-    AVBRUTT_STILLING: 'En jobb jeg vil søke på (avbrutt av bruker)',
-    AVBRUTT_IJOBB: 'Jobb jeg har nå (avbrutt av bruker)',
-    AVBRUTT_EGEN: 'Jobbrettet egenaktivitet (avbrutt av bruker)',
-    AVBRUTT_BEHANDLING: 'Medisinsk behandling (avbrutt av bruker)',
-    AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber (avbrutt av bruker)'
+    AVBRUTT_STILLING: 'En jobb jeg vil søke på',
+    AVBRUTT_IJOBB: 'Jobb jeg har nå',
+    AVBRUTT_EGEN: 'Jobbrettet egenaktivitet',
+    AVBRUTT_BEHANDLING: 'Medisinsk behandling',
+    AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
+};
+
+export const hendelserEtikett = {
+    MAL: 'Endring i mål',
+    NY_STILLING: 'Aktivitet lagt til: En jobb jeg vil søke på',
+    NY_IJOBB: 'Aktivitet lagt til: Jobb jeg har nå',
+    NY_EGEN: 'Aktivitet lagt til: Jobbrettet egenaktivitet',
+    NY_BEHANDLING: 'Aktivitet lagt til: Medisinsk behandling',
+
+    FULLFORT_STILLING: 'Aktivitet fullført: En jobb jeg vil søke på (fullført av bruker)',
+    FULLFORT_IJOBB: 'Aktivitet fullført: Jobb jeg har nå (fullført av bruker)',
+    FULLFORT_EGEN: 'Aktivitet fullført: Jobbrettet egenaktivitet (fullført av bruker)',
+    FULLFORT_BEHANDLING: 'Aktivitet fullført: Medisinsk behandling (fullført av bruker)',
+    FULLFORT_SOKEAVTALE: 'Aktivitet fullført: Avtale om å søke jobber (fullført av bruker)',
+
+    AVBRUTT_STILLING: 'Aktivitet avbrutt: En jobb jeg vil søke på (avbrutt av bruker)',
+    AVBRUTT_IJOBB: 'Aktivitet avbrutt: Jobb jeg har nå (avbrutt av bruker)',
+    AVBRUTT_EGEN: 'Aktivitet avbrutt: Jobbrettet egenaktivitet (avbrutt av bruker)',
+    AVBRUTT_BEHANDLING: 'Aktivitet avbrutt: Medisinsk behandling (avbrutt av bruker)',
+    AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber (avbrutt av bruker)'
 };
 
 export default {
@@ -289,5 +309,6 @@ export default {
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    hendelser
+    hendelserEtikett,
+    hendelserLabels
 };
