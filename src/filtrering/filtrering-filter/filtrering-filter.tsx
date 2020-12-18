@@ -158,9 +158,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     <Element className="blokk-xxs">Hendelser</Element>
                     <Dropdown
                         name="Hendelser"
-                        id="hendelser"
+                        id="sisteEndringKategori"
                         render={lukkDropdown => (
-                            <Hendelser form="hendelser" filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                            <Hendelser
+                                form="sisteEndringKategori"
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         )}
                     ></Dropdown>
                 </div>

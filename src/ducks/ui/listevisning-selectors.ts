@@ -2,16 +2,16 @@ import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, ListevisningType} from './listevisning';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET,
-    MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
-    UNDER_VURDERING
+    I_AVTALT_AKTIVITET,
+    MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
+    UNDER_VURDERING,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
 
@@ -141,5 +141,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, name: Listevisni
         )
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
-        .concat([Kolonne.OPPFOLGINGSTARTET]);
+        .concat([Kolonne.OPPFOLGINGSTARTET])
+        .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
+        .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0));
 }

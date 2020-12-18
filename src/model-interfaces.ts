@@ -32,7 +32,9 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
-    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori'
+    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
+    SISTE_ENDRING = 'sisteEndringKategori',
+    SISTE_ENDRING_DATO = 'sisteEndringTidspunkt'
 }
 
 export interface FiltervalgModell {
@@ -62,7 +64,7 @@ export interface FiltervalgModell {
     utdanning: string[];
     utdanningGodkjent: string[];
     utdanningBestatt: string[];
-    hendelser: string[];
+    sisteEndringKategori: string[];
 }
 
 export interface EnhetModell {
