@@ -1,4 +1,3 @@
-import {Normaltekst} from 'nav-frontend-typografi';
 import {Collapsible} from '../../../components/collapsible/collapsible';
 import {Radio} from 'nav-frontend-skjema';
 import * as React from 'react';
@@ -50,10 +49,8 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
     ];
 
     return (
-        <form className="skjema checkbox-filterform">
+        <form className="skjema checkbox-filterform" aria-label="Naviger mellom de forskjellige hendelser.">
             <div className="hendelser__content">
-                <Normaltekst className="hendelser__infotekst">Siste endring gjort av bruker</Normaltekst>
-
                 <Collapsible titel="Siste aktivitet lagt til av bruker" apen={skalApen(lagtTilAvBruker)}>
                     {lagtTilAvBruker.map(key => (
                         <Radio
@@ -90,14 +87,14 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                         />
                     ))}
                 </Collapsible>
-                <Radio
+                {/*<Radio
                     onChange={velgCheckBox}
                     label={hendelserLabels['MAL']}
                     name="sisteEndringKategori"
                     value="MAL"
                     checked={checkBoxValg.includes('MAL')}
                     key="MAL"
-                />
+                />*/}
             </div>
             <div className={'filterform__under-valg'}>
                 <NullstillValgKnapp

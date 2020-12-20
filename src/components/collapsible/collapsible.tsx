@@ -11,6 +11,7 @@ interface CollapsibleProps {
 
 export function Collapsible(props: CollapsibleProps) {
     const [apen, setApen] = useState(props.apen || false);
+    const id = Math.random();
 
     function togglePanel(e) {
         setApen(!apen);
@@ -18,14 +19,20 @@ export function Collapsible(props: CollapsibleProps) {
 
     return (
         <div className="collapsible">
-            <div onClick={e => togglePanel(e)} className="collapsible__header">
+            <div
+                onClick={e => togglePanel(e)}
+                aria-controls={`${id}-collapsible__content`}
+                className="collapsible__header"
+            >
                 <>
                     {apen ? <CollapseIcon className="toggleIkon" /> : <ExpandIcon className="toggleIkon" />}
                     {props.titel}
                 </>
             </div>
-            <div className="collapsible__content">
-                <div hidden={!apen}>{props.children}</div>
+            <div className="collapsible__content" id={`${id}-collapsible__content`}>
+                <div aria-expanded={apen} hidden={!apen}>
+                    {props.children}
+                </div>
             </div>
         </div>
     );
