@@ -157,7 +157,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                 <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                     <Element className="blokk-xxs">Hendelser</Element>
                     <Dropdown
-                        name="Hendelser"
+                        name="Siste endring av bruker"
                         id="sisteEndringKategori"
                         render={lukkDropdown => (
                             <Hendelser
