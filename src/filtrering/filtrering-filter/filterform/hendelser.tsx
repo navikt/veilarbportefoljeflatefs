@@ -60,7 +60,6 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
-                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
@@ -73,7 +72,6 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
-                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
@@ -86,7 +84,6 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
-                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
