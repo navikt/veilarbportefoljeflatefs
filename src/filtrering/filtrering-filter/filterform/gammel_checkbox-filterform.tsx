@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
 import AlertStripe from 'nav-frontend-alertstriper';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import classNames from 'classnames';
 
 interface CheckboxFilterformProps {

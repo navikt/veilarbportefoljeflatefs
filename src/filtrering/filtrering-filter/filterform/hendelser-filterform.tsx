@@ -4,7 +4,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
-import {hendelserLabels} from '../../filter-konstanter';
+import {hendelser} from '../../filter-konstanter';
 
 interface HendelserFilterformProps {
     form: string;
@@ -55,7 +55,7 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {lagtTilAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={hendelserLabels[key]}
+                            label={hendelser[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
@@ -67,7 +67,7 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {fullfortAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={hendelserLabels[key]}
+                            label={hendelser[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
@@ -79,7 +79,7 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                     {avbruttAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
-                            label={hendelserLabels[key]}
+                            label={hendelser[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={checkBoxValg.includes(key)}
@@ -87,14 +87,6 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                         />
                     ))}
                 </Collapsible>
-                {/*<Radio
-                    onChange={velgCheckBox}
-                    label={hendelserLabels['MAL']}
-                    name="sisteEndringKategori"
-                    value="MAL"
-                    checked={checkBoxValg.includes('MAL')}
-                    key="MAL"
-                />*/}
             </div>
             <div className={'filterform__under-valg'}>
                 <NullstillValgKnapp

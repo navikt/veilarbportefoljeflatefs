@@ -5,7 +5,7 @@ import './filterform.less';
 import classNames from 'classnames';
 import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -96,14 +96,12 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                     </div>
                 </div>
             )}
-            <div className={'filterform__under-valg'}>
                 <NullstillValgKnapp
                     dataTestId="double-checkbox-filterform"
                     nullstillValg={nullstillValg}
                     form={'utdanning-godkjent-og-bestatt'}
                     disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
                 />
-            </div>
         </form>
     );
 }

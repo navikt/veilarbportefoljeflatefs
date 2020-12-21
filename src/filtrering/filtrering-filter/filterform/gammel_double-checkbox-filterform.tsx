@@ -7,7 +7,7 @@ import {Dictionary} from '../../../utils/types/types';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;

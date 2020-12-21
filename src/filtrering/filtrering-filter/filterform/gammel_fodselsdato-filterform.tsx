@@ -4,7 +4,7 @@ import './filterform.less';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;

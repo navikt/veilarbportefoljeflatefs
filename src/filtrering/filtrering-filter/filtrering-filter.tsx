@@ -37,7 +37,7 @@ import GammelCheckboxFilterform from './filterform/gammel_checkbox-filterform';
 import GammelDoubleCheckboxFilterform from './filterform/gammel_double-checkbox-filterform';
 import GammelFodselsdatoFilterform from './filterform/gammel_fodselsdato-filterform';
 import GammelRadioFilterform from './filterform/gammel_radio-filterform';
-import {Hendelser} from './filterform/hendelser';
+import {HendelserFilterform} from './filterform/hendelser-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -159,14 +159,14 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                     <Dropdown
                         name="Siste endring av bruker"
                         id="sisteEndringKategori"
-                        render={lukkDropdown => (
-                            <Hendelser
+                        render={() => (
+                            <HendelserFilterform
                                 form="sisteEndringKategori"
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
-                    ></Dropdown>
+                    />
                 </div>
             )}
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
