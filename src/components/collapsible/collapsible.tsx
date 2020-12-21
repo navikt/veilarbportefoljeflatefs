@@ -2,8 +2,7 @@ import {default as React, useState} from 'react';
 import './collapsible.less';
 import {ReactComponent as ExpandIcon} from '../ikoner/squared-plus.svg';
 import {ReactComponent as CollapseIcon} from '../ikoner/squared-minus.svg';
-import {kebabCase, keyCodes} from '../../utils/utils';
-import {useFocus} from '../../hooks/use-focus';
+import {kebabCase} from '../../utils/utils';
 
 interface CollapsibleProps {
     apen?: boolean;
@@ -14,51 +13,46 @@ interface CollapsibleProps {
 export function Collapsible(props: CollapsibleProps) {
     const [apen, setApen] = useState(props.apen || false);
 
-    const keyCode = e => e.which || e.keyCode;
-    const {focusRef} = useFocus();
-
     function togglePanel(e) {
-        setApen(!apen);
-    }
-
-    function handleChange(e) {
         e.preventDefault();
-        if (keyCode(e) === keyCodes.space || keyCode(e) === keyCodes.enter) {
-            togglePanel(e);
-        }
+        setApen(!apen);
     }
 
     return (
         <div className="collapsible">
-            <div
+            <button
                 onClick={e => togglePanel(e)}
-                onKeyPress={e => handleChange(e)}
                 className="collapsible__header"
-                ref={inputRef => (focusRef.current = inputRef)}
                 aria-expanded={apen}
                 aria-controls={kebabCase(props.tittel!)}
-                tabIndex={0}
+                id={`header-${kebabCase(props.tittel!)}`}
             >
                 <>
                     {apen ? (
                         <CollapseIcon
                             aria-label={`${props.tittel}, åpen gruppe. Klikk enter eller mellomromstast for å lukke.`}
                             className="toggleIkon"
-                            id={`collapse_${kebabCase(props.tittel!)}`}
+                            aria-hidden="true"
                         />
                     ) : (
                         <ExpandIcon
                             aria-label={`${props.tittel}, lukket gruppe. Klikk enter eller mellomromstast for å åpne.`}
                             className="toggleIkon"
-                            id={`expand_${kebabCase(props.tittel!)}`}
+                            aria-hidden="true"
                         />
                     )}
                     {props.tittel}
                 </>
-            </div>
-            <div className="collapsible__content" hidden={!apen} id={kebabCase(props.tittel!)} role="region">
+            </button>
+            <section
+                className="collapsible__content"
+                hidden={!apen}
+                id={kebabCase(props.tittel!)}
+                role="region"
+                aria-labelledby={`header-${kebabCase(props.tittel!)}`}
+            >
                 {props.children}
-            </div>
+            </section>
         </div>
     );
 }
