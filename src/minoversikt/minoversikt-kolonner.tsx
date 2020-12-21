@@ -9,6 +9,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    hendelserLabels,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -226,9 +227,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 }
             />
             <TekstKolonne
-                tekst={bruker.sisteEndringKategori}
+                tekst={hendelserLabels[bruker.sisteEndringKategori!]}
                 skalVises={
-                    (!!bruker.sisteEndringKategori && bruker.sisteEndringKategori.length > 0) ||
+                    (!!bruker.sisteEndringKategori &&
+                        bruker.sisteEndringKategori.length > 0 &&
+                        hendelserLabels[bruker.sisteEndringKategori] != null) ||
                     valgteKolonner.includes(Kolonne.SISTE_ENDRING)
                 }
                 className="col col-xs-2"

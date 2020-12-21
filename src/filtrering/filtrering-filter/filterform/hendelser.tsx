@@ -49,9 +49,9 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
     ];
 
     return (
-        <form className="skjema checkbox-filterform" aria-label="Naviger mellom de forskjellige hendelser.">
+        <form className="skjema checkbox-filterform">
             <div className="hendelser__content">
-                <Collapsible titel="Siste aktivitet lagt til av bruker" apen={skalApen(lagtTilAvBruker)}>
+                <Collapsible tittel="Siste aktivitet lagt til av bruker" apen={skalApen(lagtTilAvBruker)}>
                     {lagtTilAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
@@ -60,10 +60,11 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
+                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
-                <Collapsible titel="Siste aktivitet fullført av bruker" apen={skalApen(fullfortAvBruker)}>
+                <Collapsible tittel="Siste aktivitet fullført av bruker" apen={skalApen(fullfortAvBruker)}>
                     {fullfortAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
@@ -72,10 +73,11 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
+                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
-                <Collapsible titel="Siste aktivitet avbrutt av bruker" apen={skalApen(avbruttAvBruker)}>
+                <Collapsible tittel="Siste aktivitet avbrutt av bruker" apen={skalApen(avbruttAvBruker)}>
                     {avbruttAvBruker.map(key => (
                         <Radio
                             onChange={velgCheckBox}
@@ -84,6 +86,7 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
                             value={key}
                             checked={checkBoxValg.includes(key)}
                             key={key}
+                            tabIndex={1}
                         />
                     ))}
                 </Collapsible>
