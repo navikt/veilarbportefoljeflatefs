@@ -48,7 +48,6 @@ export function Collapsible(props: CollapsibleProps) {
                 className="collapsible__content"
                 hidden={!apen}
                 id={kebabCase(props.tittel!)}
-                role="region"
                 aria-labelledby={`header-${kebabCase(props.tittel!)}`}
             >
                 {props.children}
