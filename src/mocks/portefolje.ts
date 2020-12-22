@@ -181,7 +181,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const arbeidsliste = lagArbeidsliste();
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
-
+    const randomSisteEndring = randomEndring();
     return {
         fnr: grunndata.fnr,
         fornavn: grunndata.fornavn,
@@ -216,7 +216,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         moteSluttTid: grunndata.moteSluttTid,
         vedtakStatus: vedtakUtkast.vedtakStatus,
         vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
-        sisteEndringKategori: randomEndring(),
+        sisteEndringKategori: randomSisteEndring,
         sisteEndringTidspunkt: randomDate({past: true})
     };
 }

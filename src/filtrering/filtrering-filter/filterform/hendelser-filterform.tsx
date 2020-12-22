@@ -1,10 +1,10 @@
-import {Collapsible} from '../../../components/collapsible/collapsible';
-import {Radio} from 'nav-frontend-skjema';
+import {Label, Radio} from 'nav-frontend-skjema';
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
-import {hendelser} from '../../filter-konstanter';
+import {hendelserLabels} from '../../filter-konstanter';
+import './filterform.less';
+import {useEffect, useState} from 'react';
 
 interface HendelserFilterformProps {
     form: string;
@@ -12,24 +12,21 @@ interface HendelserFilterformProps {
     filtervalg: FiltervalgModell;
 }
 
-export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterformProps) {
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+export function HendelserFilterform({form, filtervalg, endreFiltervalg}: HendelserFilterformProps) {
+    const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
     };
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[form]);
+        setHendelserValg(filtervalg[form]);
     }, [filtervalg, form]);
 
-    const velgCheckBox = e => {
+
+    const onChange = e => {
         e.persist();
         endreFiltervalg(form, [e.target.value]);
-    };
-
-    const skalApen = (keys: string[]) => {
-        return keys.filter(x => checkBoxValg.includes(x)).length > 0;
     };
 
     const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
@@ -49,53 +46,56 @@ export function Hendelser({form, filtervalg, endreFiltervalg}: HendelserFilterfo
     ];
 
     return (
-        <form className="skjema checkbox-filterform">
-            <div className="hendelser__content">
-                <Collapsible tittel="Siste aktivitet lagt til av bruker" apen={skalApen(lagtTilAvBruker)}>
+        <form className="skjema hendelser-filterform">
+            <div className="hendelser-filterform__valg">
+                <Label htmlFor="lagtTilAvBruker">Siste aktivitet lagt til av bruker</Label>
+                <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
                     {lagtTilAvBruker.map(key => (
                         <Radio
-                            onChange={velgCheckBox}
-                            label={hendelser[key]}
+                            onChange={e => onChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
-                            checked={checkBoxValg.includes(key)}
+                            checked={hendelserValg.includes(key)}
                             key={key}
                         />
                     ))}
-                </Collapsible>
-                <Collapsible tittel="Siste aktivitet fullført av bruker" apen={skalApen(fullfortAvBruker)}>
+                </div>
+
+                <Label htmlFor="fullfortAvBruker">Siste aktivitet fullført av bruker</Label>
+                <div className="hendelser-filterform__radio-gruppe" id="fullfortAvBruker">
                     {fullfortAvBruker.map(key => (
                         <Radio
-                            onChange={velgCheckBox}
-                            label={hendelser[key]}
+                            onChange={e => onChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
-                            checked={checkBoxValg.includes(key)}
+                            checked={hendelserValg.includes(key)}
                             key={key}
                         />
                     ))}
-                </Collapsible>
-                <Collapsible tittel="Siste aktivitet avbrutt av bruker" apen={skalApen(avbruttAvBruker)}>
+                </div>
+
+                <Label htmlFor="avbruttAvBruker">Siste aktivitet avbrutt av bruker </Label>
+                <div className="hendelser-filterform__radio-gruppe" id="avbruttAvBruker">
                     {avbruttAvBruker.map(key => (
                         <Radio
-                            onChange={velgCheckBox}
-                            label={hendelser[key]}
+                            onChange={e => onChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
-                            checked={checkBoxValg.includes(key)}
+                            checked={hendelserValg.includes(key)}
                             key={key}
                         />
                     ))}
-                </Collapsible>
+                </div>
             </div>
-            <div className={'filterform__under-valg'}>
-                <NullstillValgKnapp
-                    dataTestId="checkbox-filterform"
-                    nullstillValg={nullstillValg}
-                    form={form}
-                    disabled={checkBoxValg.length <= 0}
-                />
-            </div>
+            <NullstillValgKnapp
+                dataTestId="hendelser-filterform"
+                nullstillValg={nullstillValg}
+                form={form}
+                disabled={hendelserValg.length <= 0}
+            />
         </form>
     );
 }

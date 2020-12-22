@@ -6,10 +6,14 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
 
+interface ValgType {
+    [key: string]: {label: string; className?: string};
+}
+
 interface RadioFilterformProps {
     form: string;
     endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
-    valg: {[key: string]: {label: string; className?: string}};
+    valg: ValgType;
     filtervalg: FiltervalgModell;
 }
 export function RadioFilterform({form, endreFiltervalg, valg, filtervalg}: RadioFilterformProps) {
