@@ -453,14 +453,14 @@ describe('Veiledergrupper', () => {
     });
 });
 
-describe.only('Filter', () => {
+describe('Filter', () => {
     beforeEach('Gå til filter-tab', () => {
         cy.klikkTab('FILTER');
     });
 
-    // afterEach('Gå til status-tab', () => {
-    //     cy.klikkTab('STATUS');
-    // });
+    afterEach('Gå til status-tab', () => {
+        cy.klikkTab('STATUS');
+    });
 
     it('Alder-filterform', () => {
         cy.apneLukkeFilterDropdown('alder');
@@ -559,7 +559,7 @@ describe.only('Filter', () => {
             .click();
     });
 
-    it.only('Hendelser-filterform', () => {
+    it('Hendelser-filterform', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori')
             .contains('Siste endring av bruker')
             .click();
