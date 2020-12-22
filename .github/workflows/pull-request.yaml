@@ -9,7 +9,7 @@ env:
 jobs:
     cypress-run:
         name: Cypress run
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
         timeout-minutes: 15
         steps:
             - name: Checkout
