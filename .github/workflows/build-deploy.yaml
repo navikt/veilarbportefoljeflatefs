@@ -33,7 +33,7 @@ jobs:
         name: Cypress run
         runs-on: ubuntu-latest
         timeout-minutes: 15
-        if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/SisteEndring'
+        if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev'
         steps:
             - name: Checkout
               uses: actions/checkout@v2

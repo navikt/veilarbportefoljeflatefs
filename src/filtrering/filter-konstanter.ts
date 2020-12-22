@@ -18,6 +18,8 @@ export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
+export const SISTE_ENDRING = 'SISTE_ENDRING';
+export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -40,10 +42,10 @@ export const mapFilternavnTilFilterValue = {
     aapYtelse: AAP_YTELSE,
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
-    underVurdering: UNDER_VURDERING
+    underVurdering: UNDER_VURDERING,
+    sisteEndring: SISTE_ENDRING,
+    sisteEndringDato: SISTE_ENDRING_DATO
 };
-
-export const FILTERGRUPPE_ENHET = 'enhetensOversikt';
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
@@ -56,16 +58,16 @@ export const ferdigfilterListe = {
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     TRENGER_VURDERING: 'Trenger vurdering',
-    INAKTIVE_BRUKERE: 'Ikke servicebehov',
+    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
+    UNDER_VURDERING: 'Under vurdering',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
+    MOTER_IDAG: 'Møte med NAV idag',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
+    INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
-    MOTER_IDAG: 'Møte med NAV idag',
-    UNDER_VURDERING: 'Under vurdering'
 };
 
 export const arbeidslisteKategori = {

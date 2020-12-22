@@ -1,6 +1,6 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg, {ytelseFilterErAktiv} from '../utils/utils';
+import TittelValg from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -66,7 +66,6 @@ function EnhetListehode({
         : harValgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const erSisteEndringAktiv = !!filtervalg ? filtervalg.sisteEndringKategori.length > 0 : false;
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
@@ -131,7 +130,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     tekst={ytelseSorteringHeader}
-                    skalVises={ytelseFilterErAktiv(filtervalg.ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                    skalVises={!!filtervalg.ytelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                     className="sortering-header__dato col col-xs-2"
                     title={TittelValg(ytelseSorteringHeader)}
                     headerId="ytelse-utlopsdato"
@@ -142,11 +141,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     tekst="Gjenstående uker vedtak"
-                    skalVises={
-                        ytelseFilterErAktiv(filtervalg.ytelse) &&
-                        erAapYtelse &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)
-                    }
+                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker på gjeldende vedtak"
                     headerId="ytelse-utlopsdato-navn"
@@ -157,11 +152,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     tekst="Gjenstående uker rettighet"
-                    skalVises={
-                        ytelseFilterErAktiv(filtervalg.ytelse) &&
-                        erAapYtelse &&
-                        valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)
-                    }
+                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker av rettighetsperioden for ytelsen"
                     headerId="rettighetsperiode-gjenstaende"
@@ -296,7 +287,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
                     tekst="Siste endring"
-                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     className="sortering-header__dato col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
@@ -307,7 +298,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     tekst="Dato siste endring"
-                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     className="sortering-header__dato col col-xs-2"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"

@@ -453,14 +453,14 @@ describe('Veiledergrupper', () => {
     });
 });
 
-describe('Filter', () => {
+describe.only('Filter', () => {
     beforeEach('Gå til filter-tab', () => {
         cy.klikkTab('FILTER');
     });
 
-    afterEach('Gå til status-tab', () => {
-        cy.klikkTab('STATUS');
-    });
+    // afterEach('Gå til status-tab', () => {
+    //     cy.klikkTab('STATUS');
+    // });
 
     it('Alder-filterform', () => {
         cy.apneLukkeFilterDropdown('alder');
@@ -559,12 +559,13 @@ describe('Filter', () => {
             .click();
     });
 
-    it('Hendelser-filterform', () => {
+    it.only('Hendelser-filterform', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori')
             .contains('Siste endring av bruker')
             .click();
 
         cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
+
         cy.getByTestId('brukerliste_innhold')
             .children()
             .should('have.length', 6)
@@ -575,6 +576,31 @@ describe('Filter', () => {
         cy.getByTestId('brukerliste_innhold')
             .last()
             .contains('Dato siste endring');
+
+        cy.getByTestId('dropdown-knapp_velg-kolonner')
+            .contains('Velg kolonner')
+            .click({force: true});
+
+        cy.getByTestId('velg-kolonne-rad_siste_endring')
+            .should('be.checked')
+            .uncheck({force: true});
+
+        cy.getByTestId('brukerliste_innhold')
+            .children()
+            .should('have.length', 5)
+            .last()
+            .prev()
+            .contains('Veileder');
+
+        cy.getByTestId('velg-kolonne-rad_siste_endring_dato')
+            .should('be.checked')
+            .uncheck({force: true});
+
+        cy.getByTestId('brukerliste_innhold')
+            .children()
+            .should('have.length', 4)
+            .last()
+            .contains('Veileder');
 
         cy.getByTestId('filtreringlabel')
             .contains('Aktivitet lagt til: Jobb jeg har nå')

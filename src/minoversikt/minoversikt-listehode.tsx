@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg, {ytelseFilterErAktiv} from '../utils/utils';
+import TittelValg from '../utils/utils';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
@@ -68,7 +68,6 @@ function MinOversiktListeHode({
         : harValgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const erSisteEndringAktiv = !!filtervalg ? filtervalg.sisteEndringKategori.length > 0 : false;
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
@@ -155,7 +154,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === ytelseUtlopsdatoNavn}
                     tekst={ytelseSorteringHeader}
-                    skalVises={ytelseFilterErAktiv(ytelse) && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                    skalVises={!!ytelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
                     className="sortering-header__dato col col-xs-2"
                     title={TittelValg(ytelseSorteringHeader)}
                     headerId="ytelse-utlopsdato"
@@ -166,11 +165,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     tekst="Gjenstående uker vedtak"
-                    skalVises={
-                        ytelseFilterErAktiv(filtervalg.ytelse) &&
-                        erAapYtelse &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)
-                    }
+                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker på gjeldende vedtak"
                     headerId="ytelse-utlopsdato-navn"
@@ -181,9 +176,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     tekst="Gjenstående uker rettighet"
-                    skalVises={
-                        ytelseFilterErAktiv(ytelse) && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)
-                    }
+                    skalVises={!!ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                     className="sortering-header__dato col col-xs-2"
                     title="Gjenstående uker av rettighetsperioden for ytelsen"
                     headerId="rettighetsperiode-gjenstaende"
@@ -366,7 +359,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
                     tekst="Siste endring"
-                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     className="sortering-header__dato col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
@@ -377,7 +370,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     tekst="Dato siste endring"
-                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     className="sortering-header__dato col col-xs-2"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"
