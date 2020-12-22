@@ -180,7 +180,7 @@ export default function EnhetSide() {
                                                         'tabellinfo__hidden'
                                                 )}
                                             >
-                                                <TabellOverskrift className={'tabelloverskrift'} />
+                                                <TabellOverskrift />
                                             </div>
                                             <Toolbar
                                                 onPaginering={() =>

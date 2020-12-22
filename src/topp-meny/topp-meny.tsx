@@ -24,7 +24,6 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
         <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
             <Lenker
                 erPaloggetVeileder={!!props.erPaloggetVeileder}
-                aria-label="Naviger mellom de forskjellige oversiktene."
             />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
