@@ -461,6 +461,7 @@ describe('Filter', () => {
     afterEach('Gå til status-tab', () => {
         cy.klikkTab('STATUS');
     });
+
     it('Alder-filterform', () => {
         cy.apneLukkeFilterDropdown('alder');
         cy.getByTestId('alder-filterform').should('exist');
@@ -555,6 +556,28 @@ describe('Filter', () => {
 
         cy.getByTestId('alder-filterform_nullstill-knapp')
             .should('be.enabled')
+            .click();
+    });
+
+    it('Hendelser-filterform', () => {
+        cy.getByTestId('dropdown-knapp_sisteEndringKategori')
+            .contains('Siste endring av bruker')
+            .click();
+
+        cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
+        cy.getByTestId('brukerliste_innhold')
+            .children()
+            .should('have.length', 6)
+            .last()
+            .prev()
+            .contains('Siste endring');
+
+        cy.getByTestId('brukerliste_innhold')
+            .last()
+            .contains('Dato siste endring');
+
+        cy.getByTestId('filtreringlabel')
+            .contains('Aktivitet lagt til: Jobb jeg har nå')
             .click();
     });
 

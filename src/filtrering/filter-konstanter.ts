@@ -273,17 +273,17 @@ export const hendelserEtikett = {
     NY_EGEN: 'Aktivitet lagt til: Jobbrettet egenaktivitet',
     NY_BEHANDLING: 'Aktivitet lagt til: Medisinsk behandling',
 
-    FULLFORT_STILLING: 'Aktivitet fullført: En jobb jeg vil søke på (fullført av bruker)',
-    FULLFORT_IJOBB: 'Aktivitet fullført: Jobb jeg har nå (fullført av bruker)',
-    FULLFORT_EGEN: 'Aktivitet fullført: Jobbrettet egenaktivitet (fullført av bruker)',
-    FULLFORT_BEHANDLING: 'Aktivitet fullført: Medisinsk behandling (fullført av bruker)',
-    FULLFORT_SOKEAVTALE: 'Aktivitet fullført: Avtale om å søke jobber (fullført av bruker)',
+    FULLFORT_STILLING: 'Aktivitet fullført: En jobb jeg vil søke på',
+    FULLFORT_IJOBB: 'Aktivitet fullført: Jobb jeg har nå',
+    FULLFORT_EGEN: 'Aktivitet fullført: Jobbrettet egenaktivitet',
+    FULLFORT_BEHANDLING: 'Aktivitet fullført: Medisinsk behandling',
+    FULLFORT_SOKEAVTALE: 'Aktivitet fullført: Avtale om å søke jobber',
 
-    AVBRUTT_STILLING: 'Aktivitet avbrutt: En jobb jeg vil søke på (avbrutt av bruker)',
-    AVBRUTT_IJOBB: 'Aktivitet avbrutt: Jobb jeg har nå (avbrutt av bruker)',
-    AVBRUTT_EGEN: 'Aktivitet avbrutt: Jobbrettet egenaktivitet (avbrutt av bruker)',
-    AVBRUTT_BEHANDLING: 'Aktivitet avbrutt: Medisinsk behandling (avbrutt av bruker)',
-    AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber (avbrutt av bruker)'
+    AVBRUTT_STILLING: 'Aktivitet avbrutt: En jobb jeg vil søke på',
+    AVBRUTT_IJOBB: 'Aktivitet avbrutt: Jobb jeg har nå',
+    AVBRUTT_EGEN: 'Aktivitet avbrutt: Jobbrettet egenaktivitet',
+    AVBRUTT_BEHANDLING: 'Aktivitet avbrutt: Medisinsk behandling',
+    AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
 export default {

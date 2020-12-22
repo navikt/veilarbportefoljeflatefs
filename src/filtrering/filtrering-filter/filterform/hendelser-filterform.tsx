@@ -5,6 +5,7 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels} from '../../filter-konstanter';
 import './filterform.less';
 import {useEffect, useState} from 'react';
+import {kebabCase} from '../../../utils/utils';
 
 interface HendelserFilterformProps {
     form: string;
@@ -22,7 +23,6 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
     useEffect(() => {
         setHendelserValg(filtervalg[form]);
     }, [filtervalg, form]);
-
 
     const onChange = e => {
         e.persist();
@@ -58,6 +58,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
+                            data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
                 </div>
@@ -72,6 +73,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
+                            data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
                 </div>
@@ -86,6 +88,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
+                            data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
                 </div>
