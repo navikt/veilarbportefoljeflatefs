@@ -55,9 +55,6 @@ function Dropdown(props: DropdownProps) {
         const {onLukk = () => void 0} = props;
         setApen(false);
 
-        if (btnRef.current != null) {
-            btnRef.current.focus();
-        }
         onLukk();
     }
 
