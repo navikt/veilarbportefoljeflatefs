@@ -42,7 +42,7 @@
     "dependencies": {
         "@craco/craco": "^5.6.4",
         "@navikt/fnrvalidator": "^1.1.3",
-        "@navikt/navspa": "^1.0.3",
+        "@navikt/navspa": "^1.2.2",
         "axe-core": "^4.1.1",
         "babel-polyfill": "6.26.0",
         "classnames": "^2.2.6",
@@ -92,12 +92,14 @@
         "nav-frontend-tabs-style": "0.0.27",
         "nav-frontend-typografi": "^2.0.26",
         "nav-frontend-typografi-style": "^1.0.22",
+        "node-notifier": "^9.0.0",
         "npm-run-all": "^4.1.5",
         "prop-types": "^15.7.2",
         "query-string": "6.13.1",
         "react": "^16.13.1",
         "react-collapse": "5.0.1",
         "react-day-picker": "^7.4.8",
+        "react-device-detect": "^1.14.0",
         "react-document-title": "2.0.3",
         "react-dom": "16.13.1",
         "react-modal": "3.11.2",
@@ -112,8 +114,7 @@
         "reselect": "^4.0.0",
         "typescript": "^3.9.7",
         "wait-on": "^5.2.0",
-        "webpack-cli": "^3.3.12",
-        "react-device-detect": "^1.14.0"
+        "webpack-cli": "^3.3.12"
     },
     "eslintConfig": {
         "extends": "react-app"

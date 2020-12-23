@@ -33,7 +33,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
         setValgteAktiviteter(Object.assign({}, aktivitetInitialState, filtervalg.aktiviteter));
     }, [filtervalg.aktiviteter]);
 
-    const handleRadioChange = (aktivitetKey, verdi) => {
+    const handleChange = (aktivitetKey, verdi) => {
         endreFiltervalg('aktiviteter', {
             ...valgteAktiviteter,
             [aktivitetKey]: verdi
@@ -77,7 +77,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                                 type="radio"
                                 checked={valgteAktiviteter[kode] === 'JA'}
                                 className="skjemaelement__input radioknapp"
-                                onChange={() => handleRadioChange(kode, 'JA')}
+                                onChange={() => handleChange(kode, 'JA')}
                                 key={`Ja, ${verdi}`}
                                 data-testid={`aktivitet-filterform-${kode}-ja`}
                             />
@@ -94,7 +94,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                                 type="radio"
                                 checked={valgteAktiviteter[kode] === 'NEI'}
                                 className="skjemaelement__input radioknapp"
-                                onChange={() => handleRadioChange(kode, 'NEI')}
+                                onChange={() => handleChange(kode, 'NEI')}
                                 key={`NEI, ${verdi}`}
                                 data-testid={`aktivitet-filterform-${kode}-nei`}
                             />
