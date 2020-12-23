@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import {ytelseFilterErAktiv} from '../utils/utils';
+import TittelValg, {ytelseFilterErAktiv} from '../utils/utils';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
@@ -16,7 +16,6 @@ import {
 } from '../filtrering/filter-konstanter';
 import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
-import TittelValg from '../utils/utils';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
@@ -69,10 +68,11 @@ function MinOversiktListeHode({
         : harValgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const erSisteEndringAktiv = !!filtervalg ? filtervalg.sisteEndringKategori.length > 0 : false;
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
-            <div className="brukerliste__gutter-left"/>
+            <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold">
                 <VelgalleCheckboks
                     skalVises={filtergruppe in ListevisningType}
@@ -344,6 +344,43 @@ function MinOversiktListeHode({
                     className="sortering-header__dato col col-xs-2"
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="forrige-dato-for-avtalt-aktivitet"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    tekst="Passert startdato aktivitet"
+                    skalVises={
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                        valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
+                    }
+                    className="sortering-header__dato col col-xs-2"
+                    title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
+                    headerId="forrige-dato-for-avtalt-aktivitet"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.SISTE_ENDRING}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
+                    tekst="Siste endring"
+                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Siste endring"
+                    headerId="siste-endring"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
+                    tekst="Dato siste endring"
+                    skalVises={!!erSisteEndringAktiv || valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    className="sortering-header__dato col col-xs-2"
+                    title="Dato siste endring"
+                    headerId="dato-siste-endring"
                 />
             </div>
             <div className="brukerliste__gutter-right" />

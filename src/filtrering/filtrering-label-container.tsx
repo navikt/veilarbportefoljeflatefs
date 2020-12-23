@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
+    hendelserEtikett,
     I_AVTALT_AKTIVITET,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
@@ -91,6 +92,16 @@ function FiltreringLabelContainer({
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
                             label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'sisteEndringKategori') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`hendelser-${singleValue}`}
+                            label={hendelserEtikett[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );

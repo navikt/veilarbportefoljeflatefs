@@ -66,6 +66,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (
         <div className={className}>
@@ -201,6 +202,19 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     ferdigfilterListe.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
+            />
+            <TekstKolonne
+                tekst={bruker.sisteEndringKategori}
+                skalVises={
+                    (!!bruker.sisteEndringKategori && bruker.sisteEndringKategori.length > 0) ||
+                    valgteKolonner.includes(Kolonne.SISTE_ENDRING)
+                }
+                className="col col-xs-2"
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={sisteEndringTidspunkt}
+                skalVises={!!bruker.sisteEndringTidspunkt || valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
             />
         </div>
     );

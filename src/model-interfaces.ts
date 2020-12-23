@@ -32,7 +32,9 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
-    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori'
+    ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
+    SISTE_ENDRING = 'sisteEndringKategori',
+    SISTE_ENDRING_DATO = 'sisteEndringTidspunkt'
 }
 
 export interface FiltervalgModell {
@@ -62,6 +64,7 @@ export interface FiltervalgModell {
     utdanning: string[];
     utdanningGodkjent: string[];
     utdanningBestatt: string[];
+    sisteEndringKategori: string[];
 }
 
 export interface EnhetModell {
@@ -131,6 +134,8 @@ export interface BrukerModell {
     vedtakStatus?: string;
     vedtakStatusEndret?: string;
     trengerRevurdering: boolean;
+    sisteEndringKategori?: string;
+    sisteEndringTidspunkt?: string; //dato
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?

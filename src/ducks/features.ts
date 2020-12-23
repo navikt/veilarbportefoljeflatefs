@@ -1,13 +1,14 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
-    DARKMODE,
-    PORTEFOLJE_FEATURES,
-    SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    ALERTSTRIPE_FEILMELDING,
     ALDER_FILTER,
-    LIVE_FILTRERING
+    ALERTSTRIPE_FEILMELDING,
+    DARKMODE,
+    LIVE_FILTRERING,
+    PORTEFOLJE_FEATURES,
+    SISTE_ENDRING,
+    SPOR_OM_TILBAKEMELDING,
+    VEDTAKSTOTTE
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,7 +23,8 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [ALDER_FILTER]: false,
-    [LIVE_FILTRERING]: false
+    [LIVE_FILTRERING]: false,
+    [SISTE_ENDRING]: false
 };
 
 // Reducer
