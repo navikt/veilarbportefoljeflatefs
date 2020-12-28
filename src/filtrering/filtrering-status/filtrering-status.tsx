@@ -88,7 +88,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputCheckbox
                         filterNavn="ufordeltebruker"
                         antall={statusTall.ufordelteBrukere}
-                        handleChange={handleRadioButtonChange}
+                        handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                     />
                 )}
