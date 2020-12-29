@@ -3,7 +3,6 @@ import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
-import classNames from 'classnames';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
