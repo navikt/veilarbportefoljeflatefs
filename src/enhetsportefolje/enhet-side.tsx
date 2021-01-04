@@ -35,6 +35,7 @@ import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
+import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -95,11 +96,12 @@ export default function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
+    const valgteKolonner = useSelector((state: AppState) => selectValgteAlternativer(state, filtergruppe));
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(filtergruppe);
+    useFetchPortefolje(filtergruppe, valgteKolonner);
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({filtergruppe: filtergruppe});
 

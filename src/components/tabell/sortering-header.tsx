@@ -23,7 +23,7 @@ function SorteringHeader({
     rekkefolge,
     erValgt,
     tekst,
-    skalVises = true,
+    skalVises,
     className = '',
     title,
     headerId
