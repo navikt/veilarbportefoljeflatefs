@@ -33,8 +33,8 @@ export enum Sorteringsfelt {
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
-    SISTE_ENDRING = 'sisteEndringKategori',
-    SISTE_ENDRING_DATO = 'sisteEndringTidspunkt'
+    SISTE_ENDRING = 'siste_endring_kategori',
+    SISTE_ENDRING_DATO = 'siste_endring_tidspunkt'
 }
 
 export interface FiltervalgModell {

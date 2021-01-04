@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {OrNothing} from '../../../utils/types/types';
 
 interface ValgType {

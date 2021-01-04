@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -71,19 +71,17 @@ function CheckboxFilterform({
                     </Grid>
                 </div>
             )}
-            <div className={'filterform__under-valg'}>
-                <NullstillValgKnapp
-                    dataTestId="checkbox-filterform"
-                    nullstillValg={nullstillValg}
-                    form={form}
-                    disabled={checkBoxValg.length <= 0}
-                />
-                {!harValg && (
-                    <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
-                    </AlertStripe>
-                )}
-            </div>
+            <NullstillValgKnapp
+                dataTestId="checkbox-filterform"
+                nullstillValg={nullstillValg}
+                form={form}
+                disabled={checkBoxValg.length <= 0}
+            />
+            {!harValg && (
+                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                    {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
+                </AlertStripe>
+            )}
         </form>
     );
 }

@@ -9,10 +9,6 @@ export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
 }
 
-export function ytelseFilterErAktiv(ytelse) {
-    return !!ytelse;
-}
-
 export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>): Maybe<Date> {
     if (!utlopsdatoer) {
         return null;

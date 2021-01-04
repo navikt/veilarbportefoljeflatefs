@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import Grid from '../../../components/grid/grid';
 import {FiltervalgModell} from '../../../model-interfaces';
 import VelgLukkKnapp from '../../../components/velg-lukk-knapp';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {logEvent} from '../../../utils/frontend-logger';
 import classNames from 'classnames';
 

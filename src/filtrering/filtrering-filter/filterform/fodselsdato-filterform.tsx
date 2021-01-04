@@ -3,7 +3,7 @@ import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -61,19 +61,17 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
                     ))}
                 </div>
             )}
-            <div className={'filterform__under-valg'}>
-                <NullstillValgKnapp
-                    dataTestId="fodselsdato-filterform"
-                    nullstillValg={nullstillValg}
-                    form={form}
-                    disabled={checkBoxValg.length <= 0}
-                />
-                {!harValg && (
-                    <AlertStripe type="info" className="checkbox-filterform__alertstripe">
-                        Ingen veiledere funnet
-                    </AlertStripe>
-                )}
-            </div>
+            <NullstillValgKnapp
+                dataTestId="fodselsdato-filterform"
+                nullstillValg={nullstillValg}
+                form={form}
+                disabled={checkBoxValg.length <= 0}
+            />
+            {!harValg && (
+                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                    Ingen veiledere funnet
+                </AlertStripe>
+            )}
         </form>
     );
 }

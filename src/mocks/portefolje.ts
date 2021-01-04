@@ -181,9 +181,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const arbeidsliste = lagArbeidsliste();
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
-
     const randomSisteEndring = randomEndring();
-
     return {
         fnr: grunndata.fnr,
         fornavn: grunndata.fornavn,

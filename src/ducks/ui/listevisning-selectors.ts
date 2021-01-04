@@ -63,6 +63,8 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, name: ListevisningType): Kolonne[] {
     return ([] as Kolonne[])
+        .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
+        .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
@@ -141,7 +143,5 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, name: Listevisni
         )
         .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
-        .concat([Kolonne.OPPFOLGINGSTARTET])
-        .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
-        .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0));
+        .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

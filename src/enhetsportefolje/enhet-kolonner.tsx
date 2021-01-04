@@ -205,16 +205,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 tekst={bruker.sisteEndringKategori}
-                skalVises={
-                    (!!bruker.sisteEndringKategori && bruker.sisteEndringKategori.length > 0) ||
-                    valgteKolonner.includes(Kolonne.SISTE_ENDRING)
-                }
+                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}
-                skalVises={!!bruker.sisteEndringTidspunkt || valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
             />
         </div>
     );

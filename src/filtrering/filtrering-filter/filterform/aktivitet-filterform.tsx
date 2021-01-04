@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
 import './filterform.less';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 
@@ -108,14 +108,12 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     </div>
                 ])}
             </div>
-            <div className="filterform__under-valg">
-                <NullstillValgKnapp
-                    dataTestId="aktivitet-filterform"
-                    nullstillValg={nullstillAktiviteter}
-                    form="aktiviteter"
-                    disabled={!harValg}
-                />
-            </div>
+            <NullstillValgKnapp
+                dataTestId="aktivitet-filterform"
+                nullstillValg={nullstillAktiviteter}
+                form="aktiviteter"
+                disabled={!harValg}
+            />
         </form>
     );
 }
