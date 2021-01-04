@@ -9,17 +9,26 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const {ident} = useParams();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
+
+    const erAktiv = id => {
+        const elem = document.getElementById(id);
+        if (elem) {
+            return elem.className.includes('oversiktslenke typo-undertittel oversiktslenke--valgt');
+        }
+    };
+
     return (
         <div className="oversikt-overskrifter" aria-label="Naviger mellom de forskjellige oversiktene.">
             <NavLink
                 to="/portefolje"
                 className="oversiktslenke typo-undertittel"
                 activeClassName={aktivLink}
-                id='min-oversikt'
+                id="min-oversikt"
                 title="Her vises alle brukere som er tildelt deg"
-                aria-label="Her vises alle brukere som er tildelt deg"
+                aria-label="Min oversikt"
                 data-testid="min-oversikt"
                 hidden={!(harPortefolje || props.erPaloggetVeileder)}
+                aria-selected={erAktiv('min-oversikt')}
             >
                 Min oversikt
             </NavLink>
@@ -29,8 +38,9 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 activeClassName="oversiktslenke--valgt"
                 id="enhetens-oversikt"
                 title="Her vises alle brukere som tilhører enheten"
-                aria-label="Her vises alle brukere som tilhører enheten"
+                aria-label="Enhetens oversikt"
                 data-testid="enhetens-oversikt"
+                aria-selected={erAktiv('enhetens-oversikt')}
             >
                 Enhetens oversikt
             </NavLink>
@@ -40,8 +50,9 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 activeClassName="oversiktslenke--valgt"
                 title="Her vises alle veilederne som tilhører enheten"
                 id="veileder-oversikt"
-                aria-label="Her vises alle veilederne som tilhører enheten"
+                aria-label="Veilederoversikt"
                 data-testid="veileder-oversikt"
+                aria-selected={erAktiv('veileder-oversikt')}
             >
                 Veilederoversikt
             </NavLink>
