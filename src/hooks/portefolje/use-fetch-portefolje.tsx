@@ -30,5 +30,5 @@ export function useFetchPortefolje(listevisningType: ListevisningType, valgteAlt
                 oppdaterAlternativer(dispatch, filtervalg, listevisningType, valgteAlternativer);
             }
         }
-    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, listevisningType]);
+    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, listevisningType, valgteAlternativer]);
 }
