@@ -42,6 +42,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import {ALERTSTRIPE_FEILMELDING} from '../konstanter';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = 'min-oversikt';
@@ -85,7 +86,6 @@ export default function MinoversiktSide() {
     };
 
     const [scrolling, setScrolling] = useState(false);
-    const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
     useEffect(() => {
         function onScroll() {
@@ -105,15 +105,7 @@ export default function MinoversiktSide() {
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
-                {erAlertstripeFeilmeldingFeatureTogglePa && (
-                    <AlertStripe type="feil" className="stor-feil-modal">
-                        Vi har dessverre tekniske problemer som kan medføre ustabilitet og/eller feil med filtreringer.
-                        Feilretting pågår.{' '}
-                        <Lenke href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/" target="_blank">
-                            <b>Følg med på driftsmeldinger på Navet.</b>
-                        </Lenke>
-                    </AlertStripe>
-                )}
+                <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
                         className={classNames(
