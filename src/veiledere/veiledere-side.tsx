@@ -22,10 +22,6 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import Lenke from 'nav-frontend-lenker';
-import {ALERTSTRIPE_FEILMELDING} from '../konstanter';
-import AlertStripe from 'nav-frontend-alertstriper';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 function VeiledereSide() {

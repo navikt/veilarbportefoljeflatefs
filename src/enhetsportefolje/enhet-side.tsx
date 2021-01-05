@@ -35,10 +35,6 @@ import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import Lenke from 'nav-frontend-lenker';
-import AlertStripe from 'nav-frontend-alertstriper';
-import {ALERTSTRIPE_FEILMELDING} from '../konstanter';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 function antallFilter(filtervalg) {

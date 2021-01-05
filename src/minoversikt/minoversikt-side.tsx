@@ -39,9 +39,6 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
-import Lenke from 'nav-frontend-lenker';
-import {ALERTSTRIPE_FEILMELDING} from '../konstanter';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 const filtergruppe = ListevisningType.minOversikt;
