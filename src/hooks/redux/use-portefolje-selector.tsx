@@ -47,6 +47,6 @@ interface UsePortefoljeSelector {
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-export function usePortefoljeSelector(listevisningType: ListevisningType): UsePortefoljeSelector {
-    return useSelector((state: AppState) => selectPortefoljeTabell(state, listevisningType));
+export function usePortefoljeSelector(filtergruppe: ListevisningType): UsePortefoljeSelector {
+    return useSelector((state: AppState) => selectPortefoljeTabell(state, filtergruppe));
 }

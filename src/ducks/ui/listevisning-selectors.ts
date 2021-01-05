@@ -15,22 +15,22 @@ import {
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
 
-export function selectMuligeAlternativer(state: AppState, name: string): Kolonne[] {
-    if (name === ListevisningType.minOversikt) {
+export function selectMuligeAlternativer(state: AppState, filtergruppe: string): Kolonne[] {
+    if (filtergruppe === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.mulige;
     }
     return state.ui.listevisningEnhetensOversikt.mulige;
 }
 
-export function selectValgteAlternativer(state: AppState, name: string): Kolonne[] {
-    if (name === ListevisningType.minOversikt) {
+export function selectValgteAlternativer(state: AppState, filtergruppe: string): Kolonne[] {
+    if (filtergruppe === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt.valgte;
     }
     return state.ui.listevisningEnhetensOversikt.valgte;
 }
 
-export function selectListeVisning(state: AppState, name: string): ListevisningState {
-    if (name === ListevisningType.minOversikt) {
+export function selectListeVisning(state: AppState, filtergruppe: string): ListevisningState {
+    if (filtergruppe === ListevisningType.minOversikt) {
         return state.ui.listevisningMinOversikt;
     }
     return state.ui.listevisningEnhetensOversikt;
@@ -50,8 +50,8 @@ function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
     return tiltakstyper.length === 0;
 }
 
-export function getFiltertingState(state: AppState, name: ListevisningType): FiltervalgModell {
-    switch (name) {
+export function getFiltertingState(state: AppState, filtergruppe: ListevisningType): FiltervalgModell {
+    switch (filtergruppe) {
         case ListevisningType.enhetensOversikt:
             return state.filtreringEnhetensOversikt;
         case ListevisningType.minOversikt:
@@ -61,7 +61,7 @@ export function getFiltertingState(state: AppState, name: ListevisningType): Fil
     }
 }
 
-export function getMuligeKolonner(filtervalg: FiltervalgModell, name: ListevisningType): Kolonne[] {
+export function getMuligeKolonner(filtervalg: FiltervalgModell, filtergruppe: ListevisningType): Kolonne[] {
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
@@ -114,34 +114,37 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, name: Listevisni
         .concat(
             addHvis(
                 Kolonne.START_DATO_AKTIVITET,
-                name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
+                filtergruppe === ListevisningType.minOversikt &&
+                    filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
             )
         )
         .concat(
             addHvis(
                 Kolonne.NESTE_START_DATO_AKTIVITET,
-                name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
+                filtergruppe === ListevisningType.minOversikt &&
+                    filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
             )
         )
         .concat(
             addHvis(
                 Kolonne.FORRIGE_START_DATO_AKTIVITET,
-                name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
+                filtergruppe === ListevisningType.minOversikt &&
+                    filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)
             )
         )
         .concat(
             addHvis(
                 Kolonne.ARBEIDSLISTE_FRIST,
-                name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
+                filtergruppe === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
             )
         )
         .concat(
             addHvis(
                 Kolonne.ARBEIDSLISTE_OVERSKRIFT,
-                name === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
+                filtergruppe === ListevisningType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
             )
         )
-        .concat(addHvis(Kolonne.VEILEDER, name === ListevisningType.enhetensOversikt))
-        .concat(addHvis(Kolonne.NAVIDENT, name === ListevisningType.enhetensOversikt))
+        .concat(addHvis(Kolonne.VEILEDER, filtergruppe === ListevisningType.enhetensOversikt))
+        .concat(addHvis(Kolonne.NAVIDENT, filtergruppe === ListevisningType.enhetensOversikt))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

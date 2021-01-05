@@ -120,26 +120,26 @@ export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    name: ListevisningType,
-    valgteKolonner: Kolonne[]
+    filtergruppe: ListevisningType
 ) => {
-    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, name);
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, filtergruppe);
+
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
         kolonner: nyeMuligeAlternativer,
-        name
+        name: filtergruppe
     });
     if (nyeMuligeAlternativer.length <= 3) {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             kolonner: nyeMuligeAlternativer,
-            name
+            name: filtergruppe
         });
     } else {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-            kolonner: valgteKolonner,
-            name
+            kolonner: nyeMuligeAlternativer.slice(0, 3),
+            name: filtergruppe
         });
     }
 };

@@ -96,12 +96,11 @@ export default function EnhetSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
     const windowWidth = useWindowWidth();
-    const valgteKolonner = useSelector((state: AppState) => selectValgteAlternativer(state, filtergruppe));
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(filtergruppe, valgteKolonner);
+    useFetchPortefolje(filtergruppe);
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({filtergruppe: filtergruppe});
 

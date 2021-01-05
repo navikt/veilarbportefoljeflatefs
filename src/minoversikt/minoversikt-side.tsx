@@ -17,7 +17,7 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
@@ -40,8 +40,6 @@ import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selecto
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
-import {AppState} from '../reducer';
-import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
 
 const filtergruppe = ListevisningType.minOversikt;
 const id = 'min-oversikt';
@@ -61,12 +59,11 @@ export default function MinoversiktSide() {
     const statustall = useFetchStatusTall(gjeldendeVeileder);
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(filtergruppe);
     const dispatch = useDispatch();
-    const valgteKolonner = useSelector((state: AppState) => selectValgteAlternativer(state, filtergruppe));
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
-    useFetchPortefolje(filtergruppe, valgteKolonner);
+    useFetchPortefolje(filtergruppe);
     LagredeFilterUIController({filtergruppe: filtergruppe});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
