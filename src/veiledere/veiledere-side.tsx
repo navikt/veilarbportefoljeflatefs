@@ -22,6 +22,7 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {ListevisningType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
+import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -49,6 +50,7 @@ function VeiledereSide() {
         <DocumentTitle title="Veilederoversikt">
             <div className="side-storrelse veilederoversikt" id={`side-storrelse_${id}`}>
                 <ToppMeny />
+                <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
                         className="oversikt-sideinnhold-veilederside"
