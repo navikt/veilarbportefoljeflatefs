@@ -35,7 +35,7 @@ import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
+import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -130,6 +130,7 @@ export default function EnhetSide() {
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`}>
                 <ToppMeny />
+                <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
                         className={classNames(

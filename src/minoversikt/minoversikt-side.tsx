@@ -39,6 +39,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
+import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {AppState} from '../reducer';
 import {selectValgteAlternativer} from '../ducks/ui/listevisning-selectors';
 
@@ -104,6 +105,7 @@ export default function MinoversiktSide() {
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
+                <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
                         className={classNames(
