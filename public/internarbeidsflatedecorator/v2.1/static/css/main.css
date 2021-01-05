@@ -238,12 +238,10 @@
 }
 .dekorator .alertstripe {
     background-color: #fff;
-    display: block;
     padding: 1rem;
     border-radius: 4px;
     display: flex;
     align-content: center;
-    border-radius: 0.25rem;
     color: #3e3832;
 }
 .dekorator .alertstripe--info {
@@ -260,7 +258,6 @@
 }
 .dekorator .alertstripe--feil {
     border: 1px solid #ba3a26;
-    background-color: #e79999;
 }
 .dekorator .alertstripe__ikon {
     margin-right: 0.75rem;
