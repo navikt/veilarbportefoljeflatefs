@@ -12,12 +12,11 @@ function label(bruker: BrukerModell): React.ReactNode {
 }
 
 function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
-
     return (
         <>
             {arbeidsliste.map((bruker, index) => (
-                <div className="arbeidsliste__bruker">
-                    <div className="nav-input blokk-s" key={index}>
+                <div className="arbeidsliste__bruker" key={index}>
+                    <div className="nav-input blokk-s">
                         <legend data-testid="modal_legg-i-arbeidsliste_navn">{label(valgteBrukere[index])}</legend>
                         <FormikInput name={`arbeidsliste[${index}].overskrift`} index={index} />
                         <FormikTekstArea name={`arbeidsliste[${index}].kommentar`} index={index} />

@@ -29,14 +29,12 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises,
             <span className="flex">
                 <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
                 <span className="brukerliste__arbeidslisteinnhold flex--grow">
-                    <div className="brukerliste__arbeidslisteinnhold-hboks">
                         <UndertekstBold data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</UndertekstBold>
-                        <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                        <p className="brukerliste__arbeidslisteinnhold_frist typo-undertekst">
                             Arbeidsliste frist: {arbeidslisteFristTekst}
                         </p>
-                    </div>
                     <p data-testid="chevron_arbeidslisteinnhold_kommentar">{bruker.arbeidsliste.kommentar}</p>
-                    <p className="brukerliste__arbeidslisteinnhold-footer typo-undertekst">
+                    <p className="brukerliste__arbeidslisteinnhold_footer typo-undertekst">
                         {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                         <ArbeidslisteModalRediger
                             bruker={bruker}
