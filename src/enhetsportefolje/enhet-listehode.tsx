@@ -281,17 +281,14 @@ function EnhetListehode({
                     title="Dager siden fikk status"
                     headerId="vedtakstatus-endret"
                 />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.SISTE_ENDRING}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
-                    tekst="Siste endring"
+                <Header
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    className="sortering-header col col-xs-2"
+                    className="col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
-                />
+                >
+                    Siste endring
+                </Header>
                 <SorteringHeader
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     onClick={sorteringOnClick}
