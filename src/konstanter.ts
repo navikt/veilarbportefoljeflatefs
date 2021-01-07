@@ -10,7 +10,8 @@ export const SPOR_OM_TILBAKEMELDING = 'veilarbportefolje.spor_om_tilbakemelding'
 export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
-export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
+export const ALERTSTRIPE_FEILMELDING_FEIL = 'veilarbportefolje.alertstripe_feilmelding.feil';
+export const ALERTSTRIPE_FEILMELDING_ADVARSEL = 'veilarbportefolje.alertstripe_feilmelding.advarsel';
 export const ALDER_FILTER = 'veilarbportefolje.alder_filter';
 export const LIVE_FILTRERING = 'veilarbportefolje.live_filtrering';
 
@@ -19,7 +20,8 @@ export const PORTEFOLJE_FEATURES = [
     VEDTAKSTOTTE,
     GJEM_HOVEDMAL,
     DARKMODE,
-    ALERTSTRIPE_FEILMELDING,
+    ALERTSTRIPE_FEILMELDING_FEIL,
+    ALERTSTRIPE_FEILMELDING_ADVARSEL,
     ALDER_FILTER,
     LIVE_FILTRERING
 ];
