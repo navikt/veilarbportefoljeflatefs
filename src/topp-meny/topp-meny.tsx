@@ -15,14 +15,14 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
-    const erAlertstripeAdvarselmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
+    const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
     if (portefoljestorrelser.status === STATUS.PENDING || portefoljestorrelser.status === STATUS.NOT_STARTED) {
         return null;
     }
     return (
         <div
-            className={classNames('topp-meny', erAlertstripeAdvarselmeldingFeatureTogglePa && 'topp-meny__alertstripe')}
+            className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}
         >
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}

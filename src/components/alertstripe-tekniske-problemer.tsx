@@ -6,9 +6,9 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING} from '../konstanter';
 
 function AlertstripeTekniskeProblemer() {
-    const erAlertstripeAdvarselFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
+    const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
-    return erAlertstripeAdvarselFeatureTogglePa ? (
+    return erAlertstripeFeilmeldingFeatureTogglePa ? (
         <AlertStripe type="advarsel" className="stor-feil-modal" form="inline">
             Vi har dessverre tekniske problemer som kan medføre ustabilitet og/eller feil med filtreringer. Feilretting
             pågår.{' '}
