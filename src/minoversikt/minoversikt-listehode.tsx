@@ -353,17 +353,14 @@ function MinOversiktListeHode({
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="forrige-dato-for-avtalt-aktivitet"
                 />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.SISTE_ENDRING}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING}
-                    tekst="Siste endring"
+                <Header
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     className="col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
-                />
+                >
+                    Siste endring
+                </Header>
                 <SorteringHeader
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     onClick={sorteringOnClick}
