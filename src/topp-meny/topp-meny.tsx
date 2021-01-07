@@ -21,10 +21,10 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
         return null;
     }
     return (
-        <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
-            <Lenker
-                erPaloggetVeileder={!!props.erPaloggetVeileder}
-            />
+        <div
+            className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}
+        >
+            <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             <EndringsloggTourWrapper />

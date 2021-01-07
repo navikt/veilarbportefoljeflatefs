@@ -9,11 +9,11 @@ function AlertstripeTekniskeProblemer() {
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
     return erAlertstripeFeilmeldingFeatureTogglePa ? (
-        <AlertStripe type="feil" className="stor-feil-modal">
+        <AlertStripe type="advarsel" className="stor-feil-modal" form="inline">
             Vi har dessverre tekniske problemer som kan medføre ustabilitet og/eller feil med filtreringer. Feilretting
             pågår.{' '}
             <Lenke href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/" target="_blank">
-                <b>Følg med på driftsmeldinger på Navet.</b>
+                <b>Les mer om feilen på driftsmeldinger på Navet.</b>
             </Lenke>
         </AlertStripe>
     ) : (
