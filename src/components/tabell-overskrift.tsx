@@ -22,7 +22,12 @@ function TabellOverskrift(props: {className?: string}) {
     const antallValgteBrukere = tekstValgteBrukere(brukere.filter(b => b.markert).length);
 
     return (
-        <Element className={classNames('tabelloverskrift', props.className)}>
+        <Element
+            tag="h2"
+            className={classNames('tabelloverskrift', props.className)}
+            aria-live="polite"
+            aria-atomic="true"
+        >
             {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt} ${brukereGrammatikk}. `}
             {antallValgteBrukere}
         </Element>

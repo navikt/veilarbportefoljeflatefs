@@ -25,7 +25,9 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: StatusTabProps) {
         <>
             <div className="sidebar-header" data-testid="sidebar-header">
                 <div className="sidebar-header__tekst">
-                    <Systemtittel className="blokk-m">{tittel}</Systemtittel>
+                    <Systemtittel className="blokk-m">
+                        {tittel}
+                    </Systemtittel>
                 </div>
                 {meta && <div className="sidebar-header__meta">{meta}</div>}
                 <div className="sidebar-header__lukknapp">
