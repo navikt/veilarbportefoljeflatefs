@@ -18,4 +18,3 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 require('cypress-dark');
-require('@4tw/cypress-drag-drop');
