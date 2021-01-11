@@ -14,8 +14,7 @@ export interface BarlabelProps {
 function Barlabel({htmlFor, labelTekst, antall, className}: BarlabelProps) {
     return (
         <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
-            <span className="barlabel__labeltext">{labelTekst}</span>
-            &nbsp;
+            <div className="barlabel__labeltext">{labelTekst}</div>
             <div className="barlabel__barwrapper barlabel__barwrapper">
                 {htmlFor === 'minArbeidsliste' && (
                     <div className="arbeidsliste">
