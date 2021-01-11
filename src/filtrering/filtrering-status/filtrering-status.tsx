@@ -73,7 +73,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     return (
         <div className="filtrering-oversikt panel">
-            <Element className="filtrering-oversikt__totalt-antall blokk-xxs">
+            <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
                 {tekstAntallBrukere(statusTall.totalt)}
             </Element>
             <div className="filter-checkboks-container">
