@@ -3,7 +3,7 @@ import {Input, Label} from 'nav-frontend-skjema';
 import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg} from '../ducks/filtrering';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {useRef, useState} from 'react';
 import {useEventListener} from '../hooks/use-event-listener';
 import {AppState} from '../reducer';
@@ -30,7 +30,7 @@ function FiltreringVeiledere() {
     const handleChange = event => {
         const nyQuery = event.target.value;
         setVeilederNavnQuery(nyQuery);
-        dispatch(endreFiltervalg('veilederNavnQuery', nyQuery, ListevisningType.veilederOversikt));
+        dispatch(endreFiltervalg('veilederNavnQuery', nyQuery, OversiktType.veilederOversikt));
     };
 
     return (

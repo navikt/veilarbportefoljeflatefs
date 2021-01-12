@@ -3,7 +3,7 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {ListevisningType, lukkInfopanel} from '../../../ducks/ui/listevisning';
+import {OversiktType, lukkInfopanel} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import {ReactComponent as Ikon} from './info-ikon.svg';
 import './listevisning.less';
@@ -13,11 +13,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    lukkPanel: (name: ListevisningType) => void;
+    lukkPanel: (name: OversiktType) => void;
 }
 
 interface OwnProps {
-    name: ListevisningType;
+    name: OversiktType;
 }
 
 type ListevisningInfopanelProps = StateProps & DispatchProps & OwnProps;
@@ -42,8 +42,8 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     );
 };
 
-const harLukketInfoPanel = (name: ListevisningType, state: AppState) => {
-    if (name === ListevisningType.enhetensOversikt) {
+const harLukketInfoPanel = (name: OversiktType, state: AppState) => {
+    if (name === OversiktType.enhetensOversikt) {
         return state.ui.listevisningEnhetensOversikt.lukketInfopanel;
     }
     return state.ui.listevisningMinOversikt.lukketInfopanel;

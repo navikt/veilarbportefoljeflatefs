@@ -10,7 +10,7 @@ import './enhetsportefolje.less';
 import './brukerliste.less';
 import ToppMeny from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
@@ -63,7 +63,7 @@ function antallFilter(filtervalg) {
         .reduce((a, b) => a + b, 0);
 }
 
-const filtergruppe = ListevisningType.enhetensOversikt;
+const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export default function EnhetSide() {
@@ -76,7 +76,7 @@ export default function EnhetSide() {
         sorteringsfelt,
         enhettiltak,
         listevisning
-    } = usePortefoljeSelector(filtergruppe);
+    } = usePortefoljeSelector(oversiktType);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =
@@ -86,7 +86,7 @@ export default function EnhetSide() {
     const harFilter = antallFilter(filtervalg) !== 0;
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const slettVeilederFilter = useCallback(
-        ident => dispatch(slettEnkeltFilter('veiledere', ident, ListevisningType.enhetensOversikt)),
+        ident => dispatch(slettEnkeltFilter('veiledere', ident, OversiktType.enhetensOversikt)),
         [dispatch]
     );
     const veilederLabel = useMemo(
@@ -94,19 +94,19 @@ export default function EnhetSide() {
         [filtervalg.veiledere, veilederliste, slettVeilederFilter]
     );
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const isSidebarHidden = useSidebarViewStore(filtergruppe).isSidebarHidden;
+    const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
     const windowWidth = useWindowWidth();
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
-    useFetchPortefolje(filtergruppe);
+    useFetchPortefolje(oversiktType);
     useSetLocalStorageOnUnmount();
-    LagredeFilterUIController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({oversiktType: oversiktType});
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
 
     const [scrolling, setScrolling] = useState(false);
@@ -140,20 +140,20 @@ export default function EnhetSide() {
                     >
                         <Sidebar
                             filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                             enhettiltak={tiltak}
                             isSidebarHidden={isSidebarHidden}
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
+                            <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer
                             filtervalg={{
                                 ...filtervalg,
                                 veiledere: veilederLabel
                             }}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className="filtrering-label-container"
@@ -195,7 +195,7 @@ export default function EnhetSide() {
                                                         )
                                                     )
                                                 }
-                                                filtergruppe={filtergruppe}
+                                                oversiktType={oversiktType}
                                                 sokVeilederSkalVises
                                                 antallTotalt={portefoljeData.antallTotalt}
                                                 scrolling={scrolling}
@@ -227,7 +227,7 @@ export default function EnhetSide() {
                         )}
                     </div>
                 </Innholdslaster>
-                <MineFilterModal filtergruppe={filtergruppe} />
+                <MineFilterModal oversiktType={oversiktType} />
                 <ModalEnhetSideController />
             </div>
         </DocumentTitle>

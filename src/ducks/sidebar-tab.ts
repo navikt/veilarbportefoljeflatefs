@@ -24,26 +24,26 @@ export default function sidebarReducer(state = initialStateSidebar, action) {
     }
 }
 
-export function visSidebar(filtergruppe: string) {
+export function visSidebar(oversiktType: string) {
     logEvent('portefolje.metrikker.sidebar-synlig', {
         sideNavn: finnSideNavn(),
         isSidebarHidden: false
     });
     return {
         type: SIDEBAR_VISES,
-        name: filtergruppe,
+        name: oversiktType,
         isSidebarHidden: false
     };
 }
 
-export function skjulSidebar(filtergruppe: string) {
+export function skjulSidebar(oversiktType: string) {
     logEvent('portefolje.metrikker.sidebar-synlig', {
         sideNavn: finnSideNavn(),
         isSidebarHidden: true
     });
     return {
         type: SIDEBAR_SKJULT,
-        name: filtergruppe,
+        name: oversiktType,
         isSidebarHidden: true
     };
 }

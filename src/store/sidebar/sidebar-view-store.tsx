@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 export enum SidebarTabInfo {
     STATUS = 'STATUS',
@@ -10,7 +10,7 @@ export enum SidebarTabInfo {
 }
 
 export function sidebarSelector(state: AppState, name: string) {
-    if (name === ListevisningType.minOversikt) {
+    if (name === OversiktType.minOversikt) {
         return state.ui.sidebarMinOversikt;
     }
     return state.ui.sidebarEnhetensOversikt;

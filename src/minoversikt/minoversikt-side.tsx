@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
@@ -41,7 +41,7 @@ import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
-const filtergruppe = ListevisningType.minOversikt;
+const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
 export default function MinoversiktSide() {
@@ -53,18 +53,18 @@ export default function MinoversiktSide() {
         sorteringsrekkefolge,
         sorteringsfelt,
         enhettiltak
-    } = usePortefoljeSelector(filtergruppe);
+    } = usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
-    const settSorteringogHentPortefolje = useSetPortefoljeSortering(filtergruppe);
+    const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
-    useFetchPortefolje(filtergruppe);
-    LagredeFilterUIController({filtergruppe: filtergruppe});
+    useFetchPortefolje(oversiktType);
+    LagredeFilterUIController({oversiktType: oversiktType});
 
     const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
     const antallBrukere =
@@ -72,14 +72,14 @@ export default function MinoversiktSide() {
             ? portefolje.data.antallTotalt
             : portefolje.data.antallReturnert;
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
-    const {isSidebarHidden} = useSidebarViewStore(filtergruppe);
+    const {isSidebarHidden} = useSidebarViewStore(oversiktType);
     const windowWidth = useWindowWidth();
     const {ident} = useParams();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
 
     const [scrolling, setScrolling] = useState(false);
@@ -114,17 +114,17 @@ export default function MinoversiktSide() {
                     >
                         <Sidebar
                             filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                             enhettiltak={tiltak}
                             isSidebarHidden={isSidebarHidden}
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            <MineFilterLagreFilterKnapp filtergruppe={filtergruppe} />
+                            <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer
                             filtervalg={filtervalg}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
                             className={classNames(
@@ -185,7 +185,7 @@ export default function MinoversiktSide() {
                                                     )
                                                 )
                                             }
-                                            filtergruppe={filtergruppe}
+                                            oversiktType={oversiktType}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
                                             gjeldendeVeileder={gjeldendeVeileder}
@@ -212,7 +212,7 @@ export default function MinoversiktSide() {
                         </div>
                     </MinOversiktWrapper>
                 </Innholdslaster>
-                <MineFilterModal filtergruppe={filtergruppe} />
+                <MineFilterModal oversiktType={oversiktType} />
             </div>
         </DocumentTitle>
     );

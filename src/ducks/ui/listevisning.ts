@@ -33,7 +33,7 @@ export enum Kolonne {
     VEDTAKSTATUS = 'vedtakstatus'
 }
 
-export enum ListevisningType {
+export enum OversiktType {
     minOversikt = 'minOversikt',
     enhetensOversikt = 'enhetensOversikt',
     veilederOversikt = 'veilederOversikt'
@@ -103,22 +103,22 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+export const velgAlternativ = (kolonne: Kolonne, name: OversiktType) => ({
     type: ActionTypeKeys.VELG_ALTERNATIV,
     kolonne,
     name
 });
-export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+export const avvelgAlternativ = (kolonne: Kolonne, name: OversiktType) => ({
     type: ActionTypeKeys.AVVELG_ALTERNATIV,
     kolonne,
     name
 });
-export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
+export const lukkInfopanel = (name: OversiktType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
 
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    name: ListevisningType
+    name: OversiktType
 ) => {
     const nyeMuligeAlternativer = getMuligeKolonner(filterValg, name);
 
