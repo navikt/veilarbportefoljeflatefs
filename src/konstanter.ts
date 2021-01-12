@@ -12,7 +12,6 @@ export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
 export const ALDER_FILTER = 'veilarbportefolje.alder_filter';
-export const LIVE_FILTRERING = 'veilarbportefolje.live_filtrering';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
@@ -21,5 +20,4 @@ export const PORTEFOLJE_FEATURES = [
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
     ALDER_FILTER,
-    LIVE_FILTRERING
 ];
