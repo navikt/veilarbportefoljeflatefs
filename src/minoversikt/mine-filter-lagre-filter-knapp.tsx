@@ -5,15 +5,15 @@ import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/mod
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 
-export function MineFilterLagreFilterKnapp(props: {filtergruppe: string}) {
+export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
 
-    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = props.filtergruppe === ListevisningType.enhetensOversikt;
+    const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
+    const erPaEnhetensOversikt = props.oversiktType === OversiktType.enhetensOversikt;
 
     const filtrering = useSelector((state: AppState) =>
         erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
@@ -25,7 +25,7 @@ export function MineFilterLagreFilterKnapp(props: {filtergruppe: string}) {
 
     function lagreFilterModal(event) {
         event.preventDefault();
-        dispatch(apneMineFilterModal(props.filtergruppe));
+        dispatch(apneMineFilterModal(props.oversiktType));
     }
 
     useEffect(() => {

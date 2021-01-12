@@ -8,7 +8,7 @@ import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
@@ -17,10 +17,10 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {kebabCase} from '../../utils/utils';
 
 interface FilteringVeiledergruppeProps {
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
-function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) {
+function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
     const [visVeiledergruppeModal, setVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
@@ -40,7 +40,7 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
                     },
                     enhet
                 )
-            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, filtergruppe)));
+            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType)));
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) =>
@@ -49,7 +49,7 @@ function FilteringVeiledergrupper({filtergruppe}: FilteringVeiledergruppeProps) 
 
     const veilederGrupperOK = () => {
         return lagretFilter.length > 0 ? (
-            <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} filtergruppe={filtergruppe} />
+            <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
         ) : (
             <div className="veiledergruppe-emptystate">
                 <Normaltekst className="veiledergruppe-emptystate__tekst">

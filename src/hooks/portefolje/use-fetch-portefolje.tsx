@@ -3,20 +3,20 @@ import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/por
 import {useDispatch} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {ListevisningType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
+import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 
-export function useFetchPortefolje(filtergruppe: ListevisningType) {
+export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(filtergruppe);
+    const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);
 
     useEffect(() => {
         if (enhet && sorteringsrekkefolge && sorteringsfelt) {
-            if (filtergruppe === ListevisningType.enhetensOversikt) {
+            if (oversiktType === OversiktType.enhetensOversikt) {
                 dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
-            } else if (filtergruppe === ListevisningType.minOversikt && gjeldendeVeileder) {
+            } else if (oversiktType === OversiktType.minOversikt && gjeldendeVeileder) {
                 dispatch(
                     hentPortefoljeForVeileder(
                         enhet,
@@ -28,9 +28,9 @@ export function useFetchPortefolje(filtergruppe: ListevisningType) {
                 );
             }
         }
-    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, filtergruppe]);
+    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
 
     useEffect(() => {
-        oppdaterAlternativer(dispatch, filtervalg, filtergruppe);
-    }, [dispatch, filtervalg, filtergruppe]);
+        oppdaterAlternativer(dispatch, filtervalg, oversiktType);
+    }, [dispatch, filtervalg, oversiktType]);
 }

@@ -13,11 +13,11 @@ import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 
 interface TildelVeilederProps {
-    filtergruppe?: string;
+    oversiktType?: string;
     btnOnClick: () => void;
 }
 
-function TildelVeileder({filtergruppe, btnOnClick}: TildelVeilederProps) {
+function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
@@ -28,7 +28,7 @@ function TildelVeileder({filtergruppe, btnOnClick}: TildelVeilederProps) {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
-        return dispatch(tildelVeileder(tilordninger, tilVeileder, filtergruppe, gjeldendeVeileder));
+        return dispatch(tildelVeileder(tilordninger, tilVeileder, oversiktType, gjeldendeVeileder));
     };
 
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
@@ -101,7 +101,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const stateSlice = nameToStateSliceMap[ownProps.filtergruppe];
+    const stateSlice = nameToStateSliceMap[ownProps.oversiktType];
     return {
         filtervalg: state[stateSlice]
     };

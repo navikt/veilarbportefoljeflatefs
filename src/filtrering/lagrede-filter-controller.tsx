@@ -11,10 +11,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {logEvent} from '../utils/frontend-logger';
 import {finnSideNavn} from '../middleware/metrics-middleware';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
-export function LagredeFilterUIController(props: {filtergruppe: ListevisningType}) {
+export function LagredeFilterUIController(props: {oversiktType: OversiktType}) {
     const dispatch = useDispatch();
 
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
@@ -26,9 +26,9 @@ export function LagredeFilterUIController(props: {filtergruppe: ListevisningType
 
     useEffect(() => {
         const getFiltrering = () => {
-            if (props.filtergruppe === ListevisningType.veilederOversikt) return filtreringVeilederoversikt;
-            else if (props.filtergruppe === ListevisningType.minOversikt) return filtreringMinoversikt;
-            else if (props.filtergruppe === ListevisningType.enhetensOversikt) return filtreringEnhetensOversikt;
+            if (props.oversiktType === OversiktType.veilederOversikt) return filtreringVeilederoversikt;
+            else if (props.oversiktType === OversiktType.minOversikt) return filtreringMinoversikt;
+            else if (props.oversiktType === OversiktType.enhetensOversikt) return filtreringEnhetensOversikt;
         };
 
         const valgtMineFilter = lagretMineFilter.filter(elem =>
@@ -39,24 +39,24 @@ export function LagredeFilterUIController(props: {filtergruppe: ListevisningType
         );
 
         if (erObjektValuesTomt(getFiltrering())) {
-            dispatch(avmarkerSisteValgtMineFilter(props.filtergruppe));
+            dispatch(avmarkerSisteValgtMineFilter(props.oversiktType));
         }
 
         if (valgtMineFilter.length === 0) {
-            dispatch(avmarkerValgtMineFilter(props.filtergruppe));
+            dispatch(avmarkerValgtMineFilter(props.oversiktType));
             logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering', {}, {sideNavn: finnSideNavn()});
         } else if (valgtMineFilter.length === 1) {
-            dispatch(markerMineFilter(valgtMineFilter[0], props.filtergruppe));
+            dispatch(markerMineFilter(valgtMineFilter[0], props.oversiktType));
         }
 
         if (valgtVeiledergruppe.length === 0) {
-            dispatch(avmarkerValgtVeiledergruppe(props.filtergruppe));
+            dispatch(avmarkerValgtVeiledergruppe(props.oversiktType));
         } else if (valgtVeiledergruppe.length === 1) {
-            dispatch(markerValgtVeiledergruppe(valgtVeiledergruppe[0], props.filtergruppe));
+            dispatch(markerValgtVeiledergruppe(valgtVeiledergruppe[0], props.oversiktType));
         }
     }, [
         dispatch,
-        props.filtergruppe,
+        props.oversiktType,
         lagretMineFilter,
         lagretVeiledergrupper,
         filtreringEnhetensOversikt,

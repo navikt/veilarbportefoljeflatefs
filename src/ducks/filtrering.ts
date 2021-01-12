@@ -1,6 +1,6 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
-import {ListevisningType} from './ui/listevisning';
+import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -135,18 +135,18 @@ export default function reducer(state: FiltervalgModell = initialState, action):
     }
 }
 
-export function velgMineFilter(filterVerdi: LagretFilter, filtergruppe: ListevisningType) {
+export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: OversiktType) {
     return {
         type: VELG_MINE_FILTER,
         data: filterVerdi,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
 export function endreFiltervalg(
     filterId: string,
     filterVerdi,
-    filtergruppe: ListevisningType = ListevisningType.enhetensOversikt
+    oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort();
@@ -155,33 +155,33 @@ export function endreFiltervalg(
         return {
             type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
             data: {filterId, filterVerdi},
-            name: filtergruppe
+            name: oversiktType
         };
     }
     return {
         type: ENDRE_FILTER,
         data: {filterId, filterVerdi},
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, filtergruppe = ListevisningType.enhetensOversikt) {
+export function slettEnkeltFilter(filterId, filterVerdi, oversiktType = OversiktType.enhetensOversikt) {
     if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
         return {
             type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
             data: {filterId, filterVerdi},
-            name: filtergruppe
+            name: oversiktType
         };
     }
     return {
         type: SLETT_ENKELT_FILTER,
         data: {filterId, filterVerdi},
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function clearFiltervalg(filtergruppe = ListevisningType.enhetensOversikt) {
-    return {type: CLEAR_FILTER, name: filtergruppe};
+export function clearFiltervalg(oversiktType = OversiktType.enhetensOversikt) {
+    return {type: CLEAR_FILTER, name: oversiktType};
 }
 
 export function veilederSoktFraToolbar() {

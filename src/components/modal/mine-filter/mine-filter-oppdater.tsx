@@ -10,16 +10,16 @@ import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
-import {ListevisningType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 
-export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; filtergruppe}) {
+export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; oversiktType}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const filterValg = useSelector((state: AppState) =>
-        props.filtergruppe === ListevisningType.minOversikt
+        props.oversiktType === OversiktType.minOversikt
             ? state.filtreringMinoversikt
             : state.filtreringEnhetensOversikt
     );
@@ -51,7 +51,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                 endreSideBar({
                     dispatch: dispatch,
                     requestedTab: SidebarTabInfo.MINE_FILTER,
-                    currentListevisningsType: props.filtergruppe
+                    currentOversiktType: props.oversiktType
                 });
             });
             requestHandlerOppdater.setSaveRequestSent(true);
@@ -65,7 +65,7 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
 
     const doSlettFilter = () => {
         dispatch(slettFilter(filterId));
-        dispatch(avmarkerSisteValgtMineFilter(props.filtergruppe));
+        dispatch(avmarkerSisteValgtMineFilter(props.oversiktType));
         requestHandlerSlette.setSaveRequestSent(true);
     };
 

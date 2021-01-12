@@ -4,7 +4,7 @@ import React from 'react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {AppState} from '../../reducer';
@@ -15,10 +15,10 @@ import {kebabCase} from '../../utils/utils';
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
     onClickRedigerKnapp: () => void;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
-function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: VeiledergruppeRadProps) {
+function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType}: VeiledergruppeRadProps) {
     const dispatch = useDispatch();
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -27,7 +27,7 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
         (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
     );
     const valgtGruppe =
-        filtergruppe === ListevisningType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt;
+        oversiktType === OversiktType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt;
 
     const lagredeGrupper = useSelector((state: AppState) =>
         state.veiledergrupper.data.filter(v => v.filterId !== veilederGruppe.filterId)
@@ -45,8 +45,8 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, filtergruppe}: 
             {},
             {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
         );
-        dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, filtergruppe));
-        dispatch(markerValgtVeiledergruppe(veilederGruppe, filtergruppe));
+        dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, oversiktType));
+        dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
 
         if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {
             onClickRedigerKnapp();

@@ -10,7 +10,7 @@ import FilterKonstanter, {
 } from './filter-konstanter';
 import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState, ListevisningType} from '../ducks/ui/listevisning';
+import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
@@ -22,7 +22,7 @@ interface FiltreringLabelContainerProps {
         slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
     };
     filtervalg: FiltervalgModell;
-    filtergruppe: string;
+    oversiktType: string;
     listevisning?: ListevisningState;
     className: string;
 }
@@ -52,7 +52,7 @@ function FiltreringLabelContainer({
     enhettiltak,
     listevisning,
     actions: {slettAlle, slettEnkelt},
-    filtergruppe,
+    oversiktType,
     className
 }: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
@@ -182,7 +182,7 @@ function FiltreringLabelContainer({
             } else if (value) {
                 kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
                 muligMenIkkeValgt =
-                    kolonne === Kolonne.AVTALT_AKTIVITET && filtergruppe === ListevisningType.minOversikt
+                    kolonne === Kolonne.AVTALT_AKTIVITET && oversiktType === OversiktType.minOversikt
                         ? true
                         : harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
@@ -220,13 +220,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.filtergruppe));
+            dispatch(clearFiltervalg(ownProps.oversiktType));
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.filtergruppe));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
-                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.filtergruppe));
+                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
         }
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {avvelgAlternativ, Kolonne, ListevisningType, velgAlternativ} from '../../../ducks/ui/listevisning';
+import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listvisning-rad';
 import './listevisning.less';
@@ -9,20 +9,20 @@ import Dropdown from '../../dropdown/dropdown';
 import {AppState} from '../../../reducer';
 
 interface ListevisningProps {
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
 function Listevisning(props: ListevisningProps) {
-    const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, props.filtergruppe));
-    const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, props.filtergruppe));
+    const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, props.oversiktType));
+    const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, props.oversiktType));
 
     const dispatch = useDispatch();
 
-    const handleChange = (name, checked) => {
+    const handleChange = (oversiktType, checked) => {
         if (checked) {
-            dispatch(velgAlternativ(name, props.filtergruppe));
+            dispatch(velgAlternativ(oversiktType, props.oversiktType));
         } else {
-            dispatch(avvelgAlternativ(name, props.filtergruppe));
+            dispatch(avvelgAlternativ(oversiktType, props.oversiktType));
         }
     };
 
@@ -30,7 +30,7 @@ function Listevisning(props: ListevisningProps) {
         return valgteAlternativ.indexOf(kolonne) > -1;
     };
 
-    if (![ListevisningType.minOversikt, ListevisningType.enhetensOversikt].includes(props.filtergruppe)) {
+    if (![OversiktType.minOversikt, OversiktType.enhetensOversikt].includes(props.oversiktType)) {
         return null;
     }
 

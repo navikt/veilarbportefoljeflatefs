@@ -5,7 +5,7 @@ import VeiledereTabell from './veiledere-tabell';
 import {sortBy} from '../ducks/sortering';
 import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './veiledere.less';
 import {VeilederModell} from '../model-interfaces';
@@ -71,7 +71,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
     return (
         <>
             <Toolbar
-                filtergruppe={ListevisningType.veilederOversikt}
+                oversiktType={OversiktType.veilederOversikt}
                 antallTotalt={veilederListe.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"

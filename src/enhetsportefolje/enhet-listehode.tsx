@@ -12,7 +12,7 @@ import {
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {Kolonne, ListevisningType} from '../ducks/ui/listevisning';
+import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -36,7 +36,7 @@ interface EnhetListehodeProps {
     valgteKolonner: Kolonne[];
     filtervalg: FiltervalgModell;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
 function EnhetListehode({
@@ -45,7 +45,7 @@ function EnhetListehode({
     filtervalg,
     sorteringsfelt,
     valgteKolonner,
-    filtergruppe
+    oversiktType
 }: EnhetListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -72,7 +72,7 @@ function EnhetListehode({
             <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <VelgalleCheckboks
-                    skalVises={filtergruppe in ListevisningType}
+                    skalVises={oversiktType in OversiktType}
                     className="velgalle-checkboks col col-xs-2"
                 />
                 <SorteringHeader

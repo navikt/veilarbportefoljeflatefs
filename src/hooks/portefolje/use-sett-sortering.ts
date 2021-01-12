@@ -1,10 +1,10 @@
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {useDispatch} from 'react-redux';
 import {STIGENDE, SYNKENDE} from '../../konstanter';
 import {settSortering} from '../../ducks/portefolje';
 
-export function useSetPortefoljeSortering(listevisningType: ListevisningType) {
+export function useSetPortefoljeSortering(listevisningType: OversiktType) {
     const {sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(listevisningType);
     const dispatch = useDispatch();
 

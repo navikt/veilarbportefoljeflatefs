@@ -35,7 +35,7 @@ export enum Kolonne {
     SISTE_ENDRING_DATO = 'siste_endring_dato'
 }
 
-export enum ListevisningType {
+export enum OversiktType {
     minOversikt = 'minOversikt',
     enhetensOversikt = 'enhetensOversikt',
     veilederOversikt = 'veilederOversikt'
@@ -105,41 +105,42 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+export const velgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
     type: ActionTypeKeys.VELG_ALTERNATIV,
     kolonne,
-    name
+    name: oversiktType
 });
-export const avvelgAlternativ = (kolonne: Kolonne, name: ListevisningType) => ({
+export const avvelgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
     type: ActionTypeKeys.AVVELG_ALTERNATIV,
     kolonne,
-    name
+    name: oversiktType
 });
-export const lukkInfopanel = (name: ListevisningType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
+export const lukkInfopanel = (oversiktType: OversiktType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name: oversiktType});
 
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    filtergruppe: ListevisningType
+    oversiktType: OversiktType
 ) => {
-    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, filtergruppe);
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);
 
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
         kolonner: nyeMuligeAlternativer,
-        name: filtergruppe
+        name: oversiktType
     });
+
     if (nyeMuligeAlternativer.length <= 3) {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             kolonner: nyeMuligeAlternativer,
-            name: filtergruppe
+            name: oversiktType
         });
     } else {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-            kolonner: nyeMuligeAlternativer.slice(0, 3),
-            name: filtergruppe
+            name: oversiktType,
+            kolonner: nyeMuligeAlternativer.slice(0, 3)
         });
     }
 };
