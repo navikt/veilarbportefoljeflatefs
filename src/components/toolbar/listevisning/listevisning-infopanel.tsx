@@ -13,11 +13,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    lukkPanel: (name: OversiktType) => void;
+    lukkPanel: (oversiktType: OversiktType) => void;
 }
 
 interface OwnProps {
-    name: OversiktType;
+    oversiktType: OversiktType;
 }
 
 type ListevisningInfopanelProps = StateProps & DispatchProps & OwnProps;
@@ -34,7 +34,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
             </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span> Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.</span>
-                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>
+                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.oversiktType)}>
                     Lukk
                 </Lukknapp>
             </div>
@@ -42,8 +42,8 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     );
 };
 
-const harLukketInfoPanel = (name: OversiktType, state: AppState) => {
-    if (name === OversiktType.enhetensOversikt) {
+const harLukketInfoPanel = (oversiktType: OversiktType, state: AppState) => {
+    if (oversiktType === OversiktType.enhetensOversikt) {
         return state.ui.listevisningEnhetensOversikt.lukketInfopanel;
     }
     return state.ui.listevisningMinOversikt.lukketInfopanel;

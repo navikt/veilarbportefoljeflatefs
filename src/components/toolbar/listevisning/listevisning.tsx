@@ -18,11 +18,11 @@ function Listevisning(props: ListevisningProps) {
 
     const dispatch = useDispatch();
 
-    const handleChange = (name, checked) => {
+    const handleChange = (oversiktType, checked) => {
         if (checked) {
-            dispatch(velgAlternativ(name, props.oversiktType));
+            dispatch(velgAlternativ(oversiktType, props.oversiktType));
         } else {
-            dispatch(avvelgAlternativ(name, props.oversiktType));
+            dispatch(avvelgAlternativ(oversiktType, props.oversiktType));
         }
     };
 

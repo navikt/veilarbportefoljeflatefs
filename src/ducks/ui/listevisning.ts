@@ -103,41 +103,41 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
 
 export default listevisningReducer;
 
-export const velgAlternativ = (kolonne: Kolonne, name: OversiktType) => ({
+export const velgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
     type: ActionTypeKeys.VELG_ALTERNATIV,
     kolonne,
-    name
+    name: oversiktType
 });
-export const avvelgAlternativ = (kolonne: Kolonne, name: OversiktType) => ({
+export const avvelgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
     type: ActionTypeKeys.AVVELG_ALTERNATIV,
     kolonne,
-    name
+    name: oversiktType
 });
-export const lukkInfopanel = (name: OversiktType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name});
+export const lukkInfopanel = (oversiktType: OversiktType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name: oversiktType});
 
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    name: OversiktType
+    oversiktType: OversiktType
 ) => {
-    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, name);
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);
 
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
         kolonner: nyeMuligeAlternativer,
-        name
+        name: oversiktType
     });
 
     if (nyeMuligeAlternativer.length <= 3) {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
             kolonner: nyeMuligeAlternativer,
-            name
+            name: oversiktType
         });
     } else {
         dispatch({
             type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
-            name,
+            name: oversiktType,
             kolonner: nyeMuligeAlternativer.slice(0, 3)
         });
     }
