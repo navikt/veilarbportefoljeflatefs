@@ -2,7 +2,7 @@ import {ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER, ENDRE_FILTER, VEILEDER_SOKT_FR
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
-import {ActionTypeKeys, Kolonne, ListevisningType} from '../ducks/ui/listevisning';
+import {ActionTypeKeys, Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import {VIS_ARBEIDSLISTE_MODAL} from '../ducks/modal';
 import {SORTERT_PA} from '../ducks/sortering';
 import {NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL} from '../ducks/modal-serverfeil';
@@ -89,11 +89,11 @@ function finnSlettetGruppe(store: any, filterId: number) {
 
 export function finnFiltergruppe(sideNavn) {
     if (sideNavn === 'MIN_OVERSIKT') {
-        return ListevisningType.minOversikt;
+        return OversiktType.minOversikt;
     } else if (sideNavn === 'ENHETENS_OVERSIKT') {
-        return ListevisningType.enhetensOversikt;
+        return OversiktType.enhetensOversikt;
     } else if (sideNavn === 'VEILEDER_OVERSIKT') {
-        return ListevisningType.veilederOversikt;
+        return OversiktType.veilederOversikt;
     }
     return '';
 }

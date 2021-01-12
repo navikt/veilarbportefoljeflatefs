@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Paginering from './paginering/paginering';
 import Listevisning from './listevisning/listevisning';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.less';
 import '../../style.less';
 import {useSelector} from 'react-redux';
@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 
 interface ToolbarProps {
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     onPaginering?: (fra?: number, antall?: number) => void;
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
@@ -31,7 +31,7 @@ interface ToolbarProps {
 function Toolbar(props: ToolbarProps) {
     const {
         id,
-        filtergruppe,
+        oversiktType,
         visesAnnenVeiledersPortefolje,
         antallTotalt,
         onPaginering,
@@ -47,9 +47,9 @@ function Toolbar(props: ToolbarProps) {
 
     const oversikt = side => {
         switch (side) {
-            case ListevisningType.minOversikt:
+            case OversiktType.minOversikt:
                 return <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />;
-            case ListevisningType.enhetensOversikt:
+            case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">
                         <ToolbarKnapp
@@ -58,11 +58,11 @@ function Toolbar(props: ToolbarProps) {
                             aktiv
                             tildelveileder={false}
                             ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                         />
                     </div>
                 );
-            case ListevisningType.veilederOversikt:
+            case OversiktType.veilederOversikt:
                 return <></>;
         }
     };
@@ -80,27 +80,27 @@ function Toolbar(props: ToolbarProps) {
             id={id}
         >
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
-                {filtergruppe === ListevisningType.veilederOversikt && (
+                {oversiktType === OversiktType.veilederOversikt && (
                     <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
                         {antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${antallVeiledere} ${veiledereGrammatikk}`}
                     </Undertittel>
                 )}
-                {filtergruppe !== ListevisningType.veilederOversikt && (
+                {oversiktType !== OversiktType.veilederOversikt && (
                     <div className="tildel-veileder-wrapper">
                         <ToolbarKnapp
                             tittel="Tildel veileder"
-                            skalVises={filtergruppe in ListevisningType}
+                            skalVises={oversiktType in OversiktType}
                             aktiv={aktiv}
                             tildelveileder
                             ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
-                            filtergruppe={filtergruppe}
+                            oversiktType={oversiktType}
                         />
                     </div>
                 )}
-                {oversikt(filtergruppe)}
+                {oversikt(oversiktType)}
             </div>
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
-                <Listevisning filtergruppe={filtergruppe} />
+                <Listevisning oversiktType={oversiktType} />
                 <Paginering
                     className="toolbar--skille-mellom-elementer"
                     onChange={onPaginering}

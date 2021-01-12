@@ -9,7 +9,7 @@ import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/t
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
-import {ListevisningType} from './ui/listevisning';
+import {OversiktType} from './ui/listevisning';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -249,7 +249,7 @@ export function markerAlleBrukere(markert) {
         });
 }
 
-export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veilederIdent) {
+export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veilederIdent) {
     return (dispatch, getState: () => AppState) => {
         dispatch({type: TILDEL_VEILEDER_RELOAD});
         dispatch({type: PENDING});
@@ -280,7 +280,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     );
                     dispatch(pagineringSetup({side: 1}));
                 }
-                if (filtergruppe === ListevisningType.minOversikt) {
+                if (oversiktType === OversiktType.minOversikt) {
                     dispatch({
                         type: OPPDATER_ANTALL,
                         antallTilordninger: tilordninger.length - res.feilendeTilordninger.length
@@ -293,7 +293,7 @@ export function tildelVeileder(tilordninger, tilVeileder, filtergruppe, veileder
                     const enhet = getState().valgtEnhet.data.enhetId;
                     const rekkefolge = getState().portefolje.sorteringsrekkefolge;
                     const sorteringsfelt = getState().portefolje.sorteringsfelt;
-                    if (filtergruppe === ListevisningType.minOversikt) {
+                    if (oversiktType === OversiktType.minOversikt) {
                         const filtervalg = getState().filtreringMinoversikt;
                         dispatch(
                             hentPortefoljeForVeileder(enhet, veilederIdent, rekkefolge, sorteringsfelt, filtervalg)

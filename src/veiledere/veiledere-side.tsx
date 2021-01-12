@@ -20,16 +20,16 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
-    const filtergruppe = ListevisningType.veilederOversikt;
+    const oversiktType = OversiktType.veilederOversikt;
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, filtergruppe));
+    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, oversiktType));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
@@ -44,7 +44,7 @@ function VeiledereSide() {
     });
 
     useSetLocalStorageOnUnmount();
-    LagredeFilterUIController({filtergruppe: filtergruppe});
+    LagredeFilterUIController({oversiktType: oversiktType});
 
     return (
         <DocumentTitle title="Veilederoversikt">
@@ -62,7 +62,7 @@ function VeiledereSide() {
                                 <FiltreringVeiledere />
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
-                                <FilteringVeiledergrupper filtergruppe={ListevisningType.veilederOversikt} />
+                                <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
                         </div>
                         <div className="liste-kolonne">
@@ -74,7 +74,7 @@ function VeiledereSide() {
                                         slettVeilederFilter
                                     )
                                 }}
-                                filtergruppe={ListevisningType.veilederOversikt}
+                                oversiktType={OversiktType.veilederOversikt}
                                 className="filtrering-label-container"
                                 role="listitem"
                             />

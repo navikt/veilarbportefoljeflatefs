@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {getFiltertingState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
-import {ListevisningState, ListevisningType} from '../../ducks/ui/listevisning';
+import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
+import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
 import {createSelector} from 'reselect';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
@@ -21,7 +21,7 @@ const selectPortefoljeTabell = createSelector(
     selectValgtEnhetId,
     selectSorteringsrekkefolge,
     selectBrukere,
-    (state, listevisningType) => getFiltertingState(state, listevisningType),
+    (state, listevisningType) => getFiltreringState(state, listevisningType),
     (state, listevisningType) => selectListeVisning(state, listevisningType),
     selectSorteringsFeldt,
     (enhettiltak, portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) => ({
@@ -47,6 +47,6 @@ interface UsePortefoljeSelector {
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-export function usePortefoljeSelector(listevisningType: ListevisningType): UsePortefoljeSelector {
+export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
     return useSelector((state: AppState) => selectPortefoljeTabell(state, listevisningType));
 }

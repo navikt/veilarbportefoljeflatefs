@@ -8,20 +8,20 @@ import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React from 'react';
 import './mine-filter_innhold.less';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
-function MineFilterRad({mineFilter, filtergruppe}: MineFilterRadProps) {
+function MineFilterRad({mineFilter, oversiktType}: MineFilterRadProps) {
     const dispatch = useDispatch();
 
     const valgtMineFilter = useSelector((state: AppState) =>
-        filtergruppe === ListevisningType.minOversikt
+        oversiktType === OversiktType.minOversikt
             ? state.mineFilterMinOversikt.valgtMineFilter
             : state.mineFilterEnhetensOversikt.valgtMineFilter
     );
@@ -39,12 +39,12 @@ function MineFilterRad({mineFilter, filtergruppe}: MineFilterRadProps) {
                 id: veilederIdentTilNonsens
             }
         );
-        dispatch(velgMineFilter(mineFilter, filtergruppe));
-        dispatch(markerMineFilter(mineFilter, filtergruppe));
+        dispatch(velgMineFilter(mineFilter, oversiktType));
+        dispatch(markerMineFilter(mineFilter, oversiktType));
     }
 
     function onClickRedigerKnapp() {
-        dispatch(apneMineFilterModal(filtergruppe));
+        dispatch(apneMineFilterModal(oversiktType));
     }
 
     return (

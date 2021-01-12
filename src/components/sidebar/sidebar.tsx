@@ -14,7 +14,7 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {useDispatch} from 'react-redux';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
@@ -31,13 +31,13 @@ interface Sidebar {
 
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
-    currentListevisningsType: ListevisningType | string;
+    currentOversiktType: OversiktType | string;
     requestedTab: SidebarTabInfo;
 }
 
-export function endreSideBar({dispatch, currentListevisningsType, requestedTab}: EndreSideBarProps) {
+export function endreSideBar({dispatch, currentOversiktType, requestedTab}: EndreSideBarProps) {
     dispatch({
-        name: currentListevisningsType,
+        name: currentOversiktType,
         selectedTab: requestedTab,
         type: SIDEBAR_TAB_ENDRET
     });
@@ -69,20 +69,20 @@ const sidebar: Sidebar[] = [
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     isSidebarHidden: boolean;
 }
 
 function Sidebar(props: SidebarProps) {
-    const erPaMinOversikt = props.filtergruppe === ListevisningType.minOversikt;
+    const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
     const selectedTab = useSidebarViewStore(
-        erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+        erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
     );
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
-    const isSidebarHidden = useSidebarViewStore(props.filtergruppe).isSidebarHidden;
+    const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
 
     const tabFocus = () => {
         if (erPaMinOversikt) {
@@ -169,13 +169,13 @@ function Sidebar(props: SidebarProps) {
         endreSideBar({
             dispatch: dispatch,
             requestedTab: tab.type,
-            currentListevisningsType: erPaMinOversikt ? ListevisningType.minOversikt : ListevisningType.enhetensOversikt
+            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
         });
 
         if (isSidebarHidden) {
-            dispatch(visSidebar(props.filtergruppe));
+            dispatch(visSidebar(props.oversiktType));
         } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(props.filtergruppe));
+            dispatch(skjulSidebar(props.oversiktType));
         }
 
         logEvent('portefolje.metrikker.sidebar-tab', {
@@ -200,7 +200,7 @@ function Sidebar(props: SidebarProps) {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()
             });
-            dispatch(skjulSidebar(props.filtergruppe));
+            dispatch(skjulSidebar(props.oversiktType));
         }
     });
 
@@ -225,7 +225,7 @@ function Sidebar(props: SidebarProps) {
                 >
                     <Sidevelger
                         selectedTabData={selectedTabData}
-                        filtergruppe={props.filtergruppe}
+                        oversiktType={props.oversiktType}
                         filtervalg={props.filtervalg}
                         enhettiltak={props.enhettiltak}
                     />
