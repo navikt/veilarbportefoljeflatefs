@@ -16,7 +16,6 @@ export function useFetchPortefolje(filtergruppe: ListevisningType) {
         if (enhet && sorteringsrekkefolge && sorteringsfelt) {
             if (filtergruppe === ListevisningType.enhetensOversikt) {
                 dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
-                oppdaterAlternativer(dispatch, filtervalg, filtergruppe);
             } else if (filtergruppe === ListevisningType.minOversikt && gjeldendeVeileder) {
                 dispatch(
                     hentPortefoljeForVeileder(
@@ -27,16 +26,11 @@ export function useFetchPortefolje(filtergruppe: ListevisningType) {
                         filtervalg
                     )
                 );
-                oppdaterAlternativer(dispatch, filtervalg, filtergruppe);
             }
         }
-    }, [
-        dispatch,
-        enhet,
-        sorteringsfelt,
-        sorteringsrekkefolge,
-        filtervalg,
-        gjeldendeVeileder,
-        filtergruppe
-    ]);
+    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, filtergruppe]);
+
+    useEffect(() => {
+        oppdaterAlternativer(dispatch, filtervalg, filtergruppe);
+    }, [dispatch, filtervalg, filtergruppe]);
 }
