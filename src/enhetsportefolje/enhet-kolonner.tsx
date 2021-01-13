@@ -3,6 +3,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    hendelserLabels,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -204,7 +205,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 }
             />
             <TekstKolonne
-                tekst={bruker.sisteEndringKategori}
+                tekst={!!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' '}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />

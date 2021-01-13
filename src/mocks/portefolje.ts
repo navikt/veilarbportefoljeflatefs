@@ -222,8 +222,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 }
 
 const randomEndring = () => {
-    var keys = Object.keys(hendelserLabels);
-    return hendelserLabels[keys[(keys.length * Math.random()) << 0]];
+    const keys = Object.keys(hendelserLabels);
+    return keys[(keys.length * Math.random()) << 0];
 };
 
 const randomDate = ({past}) => {
