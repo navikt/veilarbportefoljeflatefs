@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
 import './enhetsportefolje.less';
 import './brukerliste.less';
@@ -20,7 +20,7 @@ interface EnhetTabellProps {
 function EnhetTabell(props: EnhetTabellProps) {
     const forrigeBruker = useForrigeBruker();
     const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
-        ListevisningType.enhetensOversikt
+        OversiktType.enhetensOversikt
     );
     const veiledere = useSelector((state: AppState) => state.veiledere);
 

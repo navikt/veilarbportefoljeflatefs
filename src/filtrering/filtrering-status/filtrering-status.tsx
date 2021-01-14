@@ -20,7 +20,7 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import BarInputGruppe from '../../components/barinput/barinput-gruppe';
@@ -32,7 +32,7 @@ import {VEDTAKSTOTTE} from '../../konstanter';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
@@ -42,7 +42,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, props.filtergruppe));
+        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, props.oversiktType));
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -50,7 +50,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
             : kategoriliste.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, props.filtergruppe));
+        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, props.oversiktType));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -64,7 +64,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(endreFiltervalg('arbeidslisteKategori', [], props.filtergruppe));
+            dispatch(endreFiltervalg('arbeidslisteKategori', [], props.oversiktType));
         }
     }
 
@@ -77,7 +77,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 {tekstAntallBrukere(statusTall.totalt)}
             </Element>
             <div className="filter-checkboks-container">
-                {props.filtergruppe === ListevisningType.minOversikt ? (
+                {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox
                         filterNavn="nyeBrukere"
                         antall={statusTall.nyeBrukereForVeileder}
@@ -167,7 +167,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}
                 handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                hidden={props.filtergruppe !== ListevisningType.minOversikt}
+                hidden={props.oversiktType !== OversiktType.minOversikt}
                 filtervalg={props.filtervalg}
                 endreFiltervalg={dispatchFiltreringStatusChanged}
                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}

@@ -3,7 +3,7 @@ import './mine-filter_innhold.less';
 import '../../components/sidebar/sidebar.less';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
@@ -12,7 +12,7 @@ import {slettFilter} from '../../ducks/mine-filter';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
@@ -64,7 +64,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                 <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
                     <DragAndDrop
                         stateFilterOrder={aktiveFilter()}
-                        filtergruppe={props.filtergruppe}
+                        oversiktType={props.oversiktType}
                         isDraggable={props.isDraggable}
                         setisDraggable={props.setisDraggable}
                     />

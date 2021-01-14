@@ -6,16 +6,16 @@ import MineFilterRad from '../mine-filter-rad';
 import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
-import {ListevisningType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggable}: DragAndDropProps) {
+function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function DragAndDrop({stateFilterOrder, filtergruppe, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <MineFilterRad key={idx} mineFilter={filter} filtergruppe={filtergruppe} />
+                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} />
             ))}
         </>
     );

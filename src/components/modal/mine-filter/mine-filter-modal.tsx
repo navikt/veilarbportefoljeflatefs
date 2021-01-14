@@ -10,7 +10,7 @@ import hiddenIf from '../../hidden-if/hidden-if';
 import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
-import {ListevisningType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 export enum Visningstype {
     MENY,
@@ -35,9 +35,9 @@ const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter);
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil);
 
-export function MineFilterModal(props: {filtergruppe: string}) {
+export function MineFilterModal(props: {oversiktType: string}) {
     const {sisteValgtMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) =>
-        props.filtergruppe === ListevisningType.minOversikt
+        props.oversiktType === OversiktType.minOversikt
             ? state.mineFilterMinOversikt
             : state.mineFilterEnhetensOversikt
     );
@@ -53,7 +53,7 @@ export function MineFilterModal(props: {filtergruppe: string}) {
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkMineFilterModal(props.filtergruppe));
+        dispatch(lukkMineFilterModal(props.oversiktType));
     };
 
     useEffect(() => {
@@ -80,14 +80,14 @@ export function MineFilterModal(props: {filtergruppe: string}) {
                 <HiddenIfLagreNytt
                     hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                     lukkModal={lukkModal}
-                    filtergruppe={props.filtergruppe}
+                    oversiktType={props.oversiktType}
                 />
                 <HiddenIfOppdaterFilter
                     hidden={valgtVisningstype !== Visningstype.OPPDATER}
                     gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
                     filterId={sisteValgtMineFilter!}
                     lukkModal={lukkModal}
-                    filtergruppe={props.filtergruppe}
+                    oversiktType={props.oversiktType}
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>

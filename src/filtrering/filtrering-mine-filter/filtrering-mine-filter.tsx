@@ -6,10 +6,10 @@ import {STATUS} from '../../ducks/utils';
 import './mine-filter_innhold.less';
 import NyttMineFilterInnhold from './mine-filter_innhold';
 import {HandlingsType, LagretFilter} from '../../ducks/lagret-filter';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 function FiltreringMineFilter(props: {
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     sortertMineFilter;
     isDraggable: boolean;
@@ -26,7 +26,7 @@ function FiltreringMineFilter(props: {
             ) : (
                 <NyttMineFilterInnhold
                     lagretFilter={props.sortertMineFilter}
-                    filtergruppe={props.filtergruppe}
+                    oversiktType={props.oversiktType}
                     isDraggable={props.isDraggable}
                     fjernUtilgjengeligeFilter={props.fjernUtilgjengeligeFilter}
                     setisDraggable={props.setisDraggable}

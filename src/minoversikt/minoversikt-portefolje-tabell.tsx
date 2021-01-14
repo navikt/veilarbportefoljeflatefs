@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
-import {ListevisningType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
 import {OrNothing} from '../utils/types/types';
@@ -23,7 +23,7 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, listevisning} = usePortefoljeSelector(ListevisningType.minOversikt);
+    const {brukere, filtervalg, enhetId, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));

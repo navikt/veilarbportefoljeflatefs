@@ -5,7 +5,7 @@ import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtre
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
@@ -34,23 +34,23 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
 
 interface SidevelgerProps {
     selectedTabData: Sidebar;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: SidevelgerProps) {
+function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: SidevelgerProps) {
     const dispatch = useDispatch();
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
 
     const mineFilter = mineFilterState.data;
-    const erPaMinOversikt = filtergruppe === ListevisningType.minOversikt;
-    const erPaEnhetensOversikt = filtergruppe === ListevisningType.enhetensOversikt;
+    const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
+    const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, filtergruppe));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
@@ -74,17 +74,17 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Status"
-                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
             >
-                <FiltreringStatus filtergruppe={filtergruppe} filtervalg={filtervalg} />
+                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Filter') {
         return (
             <SidebarTab
                 tittel="Filter"
-                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
             >
                 <FiltreringFilter
@@ -98,24 +98,24 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
         return (
             <SidebarTab
                 tittel="Veiledergrupper"
-                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
             >
-                <FilteringVeiledergrupper filtergruppe={filtergruppe} />
+                <FilteringVeiledergrupper oversiktType={oversiktType} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Mine filter') {
         return (
             <SidebarTab
                 tittel="Mine filter"
-                handleLukk={() => dispatch(skjulSidebar(filtergruppe))}
+                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
                 meta={
                     <>
                         <Hjelpetekst type={PopoverOrientering.Hoyre}>
-                            {filtergruppe === ListevisningType.minOversikt &&
+                            {oversiktType === OversiktType.minOversikt &&
                                 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
-                            {filtergruppe === ListevisningType.enhetensOversikt &&
+                            {oversiktType === OversiktType.enhetensOversikt &&
                                 'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
                         </Hjelpetekst>
                         <ToggleSwitch
@@ -129,7 +129,7 @@ function Sidevelger({selectedTabData, filtergruppe, filtervalg, enhettiltak}: Si
                 }
             >
                 <FiltreringMineFilter
-                    filtergruppe={filtergruppe}
+                    oversiktType={oversiktType}
                     fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
                     sortertMineFilter={mineFilter.sort(sortMineFilter)}
                     isDraggable={isMinefiltereDraggable}

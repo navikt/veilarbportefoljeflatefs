@@ -13,7 +13,7 @@ import './veiledergruppe.less';
 import '../filtrering-filter/filterform/filterform.less';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {ListevisningType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
@@ -22,7 +22,7 @@ import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
     filterValg?: FiltervalgModell;
-    filtergruppe: ListevisningType;
+    oversiktType: OversiktType;
 }
 
 function isOverflown(element) {
@@ -38,7 +38,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
         (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
     );
     const valgtGruppe =
-        props.filtergruppe === ListevisningType.veilederOversikt
+        props.oversiktType === OversiktType.veilederOversikt
             ? valgtGruppeVeilederOversikt
             : valgtGruppeEnhetensOversikt;
 
@@ -69,7 +69,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     },
                     enhet
                 )
-            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.filtergruppe)));
+            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.oversiktType)));
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -79,7 +79,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
         valgtGruppe &&
             enhet &&
             dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
-                dispatch(endreFiltervalg('veiledere', [], ListevisningType.enhetensOversikt));
+                dispatch(endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt));
                 dispatch(hentMineFilterForVeileder());
             });
     };
@@ -98,7 +98,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     key={index}
                     veilederGruppe={veilederGruppe}
                     onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
-                    filtergruppe={props.filtergruppe}
+                    oversiktType={props.oversiktType}
                 />
             ))}
             {valgtGruppe && (

@@ -1,4 +1,4 @@
-import {ListevisningType} from './ui/listevisning';
+import {OversiktType} from './ui/listevisning';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -78,9 +78,9 @@ export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
 }
 
 export const stateSliceToNameMap = {
-    filtreringEnhetensOversikt: ListevisningType.enhetensOversikt,
-    filtreringMinoversikt: ListevisningType.minOversikt,
-    filtreringVeilederoversikt: ListevisningType.veilederOversikt
+    filtreringEnhetensOversikt: OversiktType.enhetensOversikt,
+    filtreringMinoversikt: OversiktType.minOversikt,
+    filtreringVeilederoversikt: OversiktType.veilederOversikt
 };
 
 export const nameToStateSliceMap = Object.entries(stateSliceToNameMap)

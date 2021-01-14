@@ -9,15 +9,15 @@ import {LagretFilterValideringsError} from './mine-filter-modal';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
 import {lagreNyttFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
-import {ListevisningType} from '../../../ducks/ui/listevisning';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 
-export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
+export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
     const filterValg = useSelector((state: AppState) =>
-        props.filtergruppe === ListevisningType.minOversikt
+        props.oversiktType === OversiktType.minOversikt
             ? state.filtreringMinoversikt
             : state.filtreringEnhetensOversikt
     );
@@ -44,7 +44,7 @@ export function LagreNyttMineFilter(props: {filtergruppe: string; lukkModal}) {
                 endreSideBar({
                     dispatch: dispatch,
                     requestedTab: SidebarTabInfo.MINE_FILTER,
-                    currentListevisningsType: props.filtergruppe
+                    currentOversiktType: props.oversiktType
                 });
             });
         }

@@ -54,53 +54,53 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
 }
 
 // Action Creators
-export function markerMineFilter(filterVerdi: LagretFilter, filtergruppe: string) {
+export function markerMineFilter(filterVerdi: LagretFilter, oversiktType: string) {
     return {
         type: MARKER_MINE_FILTER,
         data: filterVerdi,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, filtergruppe: string) {
+export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, oversiktType: string) {
     return {
         type: MARKER_VEILEDER_GRUPPE,
         data: filterVerdi,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function avmarkerValgtMineFilter(filtergruppe: string) {
+export function avmarkerValgtMineFilter(oversiktType: string) {
     return {
         type: AVMARKER_MINE_FILTER,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function avmarkerValgtVeiledergruppe(filtergruppe: string) {
+export function avmarkerValgtVeiledergruppe(oversiktType: string) {
     return {
         type: AVMARKER_VEILEDER_GRUPPE,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function avmarkerSisteValgtMineFilter(filtergruppe: string) {
+export function avmarkerSisteValgtMineFilter(oversiktType: string) {
     return {
         type: AVMARKER_SISTE_VALGT_MINE_FILTER,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function apneMineFilterModal(filtergruppe: string) {
+export function apneMineFilterModal(oversiktType: string) {
     return {
         type: APEN_MINE_FILTER_MODAL,
-        name: filtergruppe
+        name: oversiktType
     };
 }
 
-export function lukkMineFilterModal(filtergruppe: string) {
+export function lukkMineFilterModal(oversiktType: string) {
     return {
         type: LUKK_MINE_FILTER_MODAL,
-        name: filtergruppe
+        name: oversiktType
     };
 }

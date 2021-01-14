@@ -3,7 +3,7 @@ import Lukknapp from 'nav-frontend-lukknapp';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {ListevisningType, lukkInfopanel} from '../../../ducks/ui/listevisning';
+import {OversiktType, lukkInfopanel} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import {ReactComponent as Ikon} from './info-ikon.svg';
 import './listevisning.less';
@@ -13,11 +13,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    lukkPanel: (name: ListevisningType) => void;
+    lukkPanel: (oversiktType: OversiktType) => void;
 }
 
 interface OwnProps {
-    name: ListevisningType;
+    oversiktType: OversiktType;
 }
 
 type ListevisningInfopanelProps = StateProps & DispatchProps & OwnProps;
@@ -34,7 +34,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
             </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span> Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.</span>
-                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.name)}>
+                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.oversiktType)}>
                     Lukk
                 </Lukknapp>
             </div>
@@ -42,8 +42,8 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     );
 };
 
-const harLukketInfoPanel = (name: ListevisningType, state: AppState) => {
-    if (name === ListevisningType.enhetensOversikt) {
+const harLukketInfoPanel = (oversiktType: OversiktType, state: AppState) => {
+    if (oversiktType === OversiktType.enhetensOversikt) {
         return state.ui.listevisningEnhetensOversikt.lukketInfopanel;
     }
     return state.ui.listevisningMinOversikt.lukketInfopanel;
