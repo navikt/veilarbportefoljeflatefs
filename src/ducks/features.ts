@@ -1,7 +1,6 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
-    ALDER_FILTER,
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     PORTEFOLJE_FEATURES,
@@ -21,7 +20,6 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [ALDER_FILTER]: false
     [SISTE_ENDRING]: false
 };
 
