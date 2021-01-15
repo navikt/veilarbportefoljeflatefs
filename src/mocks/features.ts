@@ -3,7 +3,6 @@ import {
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     ALDER_FILTER,
-    LIVE_FILTRERING,
     ALERTSTRIPE_FEILMELDING
 } from '../konstanter';
 
@@ -13,7 +12,6 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [ALDER_FILTER]: true,
-    [LIVE_FILTRERING]: true
 };
 
 export default toggles;
