@@ -4,11 +4,10 @@ import {
     ALDER_FILTER,
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
-    LIVE_FILTRERING,
     PORTEFOLJE_FEATURES,
     SISTE_ENDRING,
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE
+    VEDTAKSTOTTE,
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,8 +21,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [ALDER_FILTER]: false,
-    [LIVE_FILTRERING]: false,
+    [ALDER_FILTER]: false
     [SISTE_ENDRING]: false
 };
 
