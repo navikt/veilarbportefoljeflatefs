@@ -6,6 +6,8 @@ import {hendelserLabels} from '../../filter-konstanter';
 import './filterform.less';
 import {useEffect, useState} from 'react';
 import {kebabCase} from '../../../utils/utils';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {HENDELSE_MEDISINSKBEHANDLING} from '../../../konstanter';
 
 interface HendelserFilterformProps {
     form: string;
@@ -14,6 +16,7 @@ interface HendelserFilterformProps {
 }
 
 export function HendelserFilterform({form, filtervalg, endreFiltervalg}: HendelserFilterformProps) {
+    const erMedisinskBehandlingFeatureTogglePa = useFeatureSelector()(HENDELSE_MEDISINSKBEHANDLING);
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
 
     const nullstillValg = () => {
@@ -29,21 +32,15 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
         endreFiltervalg(form, [e.target.value]);
     };
 
-    const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
-    const fullfortAvBruker = [
-        'FULLFORT_STILLING',
-        'FULLFORT_IJOBB',
-        'FULLFORT_EGEN',
-        'FULLFORT_BEHANDLING',
-        'FULLFORT_SOKEAVTALE'
-    ];
-    const avbruttAvBruker = [
-        'AVBRUTT_STILLING',
-        'AVBRUTT_IJOBB',
-        'AVBRUTT_EGEN',
-        'AVBRUTT_BEHANDLING',
-        'AVBRUTT_SOKEAVTALE'
-    ];
+    const lagtTilAvBruker = erMedisinskBehandlingFeatureTogglePa
+        ? ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING']
+        : ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN'];
+    const fullfortAvBruker = erMedisinskBehandlingFeatureTogglePa
+        ? ['FULLFORT_STILLING', 'FULLFORT_IJOBB', 'FULLFORT_EGEN', 'FULLFORT_BEHANDLING', 'FULLFORT_SOKEAVTALE']
+        : ['FULLFORT_STILLING', 'FULLFORT_IJOBB', 'FULLFORT_EGEN', 'FULLFORT_SOKEAVTALE'];
+    const avbruttAvBruker = erMedisinskBehandlingFeatureTogglePa
+        ? ['AVBRUTT_STILLING', 'AVBRUTT_IJOBB', 'AVBRUTT_EGEN', 'AVBRUTT_BEHANDLING', 'AVBRUTT_SOKEAVTALE']
+        : ['AVBRUTT_STILLING', 'AVBRUTT_IJOBB', 'AVBRUTT_EGEN', 'AVBRUTT_SOKEAVTALE'];
 
     return (
         <form className="skjema hendelser-filterform">

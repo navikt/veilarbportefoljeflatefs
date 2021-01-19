@@ -7,6 +7,7 @@ import {
     SISTE_ENDRING,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
+    HENDELSE_MEDISINSKBEHANDLING
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -20,7 +21,8 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [SISTE_ENDRING]: false
+    [SISTE_ENDRING]: false,
+    [HENDELSE_MEDISINSKBEHANDLING]: true
 };
 
 // Reducer
