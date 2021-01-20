@@ -5,7 +5,7 @@ import {SidebarTabInfo} from '../../store/sidebar/sidebar-view-store';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 
-interface StatusTabProps {
+interface TabProps {
     tittel: string;
     handleLukk: () => void;
     children: React.ReactNode;
@@ -13,7 +13,7 @@ interface StatusTabProps {
     meta?: React.ReactNode;
 }
 
-function SidebarTab({tittel, handleLukk, meta, children, tab}: StatusTabProps) {
+function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
     const lukkTab = () => {
         logEvent('portefolje.metrikker.lukk-pa-kryss', {
             tab: tab,
