@@ -11,7 +11,8 @@ export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
-export const ALDER_FILTER = 'veilarbportefolje.alder_filter';
+export const SISTE_ENDRING = 'veilarbportefolje.siste_endring';
+export const HENDELSE_MEDISINSKBEHANDLING = 'veilarbportefolje.hendelse_medisinskbehandling';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
@@ -19,5 +20,6 @@ export const PORTEFOLJE_FEATURES = [
     GJEM_HOVEDMAL,
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
-    ALDER_FILTER,
+    SISTE_ENDRING,
+    HENDELSE_MEDISINSKBEHANDLING
 ];

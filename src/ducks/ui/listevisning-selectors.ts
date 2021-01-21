@@ -2,35 +2,35 @@ import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
 import {
-    I_AVTALT_AKTIVITET,
-    MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
-    UNDER_VURDERING
+    I_AVTALT_AKTIVITET,
+    MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
+    UNDER_VURDERING,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
 
-export function selectMuligeAlternativer(state: AppState, name: string): Kolonne[] {
-    if (name === OversiktType.minOversikt) {
+export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
+    if (oversiktType === OversiktType.minOversikt) {
         return state.ui.listevisningMinOversikt.mulige;
     }
     return state.ui.listevisningEnhetensOversikt.mulige;
 }
 
-export function selectValgteAlternativer(state: AppState, name: string): Kolonne[] {
-    if (name === OversiktType.minOversikt) {
+export function selectValgteAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
+    if (oversiktType === OversiktType.minOversikt) {
         return state.ui.listevisningMinOversikt.valgte;
     }
     return state.ui.listevisningEnhetensOversikt.valgte;
 }
 
-export function selectListeVisning(state: AppState, name: string): ListevisningState {
-    if (name === OversiktType.minOversikt) {
+export function selectListeVisning(state: AppState, oversiktType: OversiktType): ListevisningState {
+    if (oversiktType === OversiktType.minOversikt) {
         return state.ui.listevisningMinOversikt;
     }
     return state.ui.listevisningEnhetensOversikt;
@@ -63,6 +63,8 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
     return ([] as Kolonne[])
+        .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
+        .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))

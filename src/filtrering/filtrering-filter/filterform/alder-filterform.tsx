@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import './filterform.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp';
+import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface AlderFilterformProps {
     form: string;
@@ -191,14 +191,12 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-            <div className="filterform__under-valg">
                 <NullstillValgKnapp
                     dataTestId="alder-filterform"
                     nullstillValg={nullstillValg}
                     form={form}
                     disabled={!kanVelgeFilter}
                 />
-            </div>
         </form>
     );
 }

@@ -1,6 +1,6 @@
 import veiledereResponse, {innloggetVeileder} from './veiledere';
-import {aktiviteter} from '../filtrering/filter-konstanter';
-import {rnd, MOCK_CONFIG} from './utils';
+import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
+import {MOCK_CONFIG, rnd} from './utils';
 import * as faker from 'faker/locale/nb_NO';
 import {KategoriModell} from '../model-interfaces';
 
@@ -181,7 +181,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const arbeidsliste = lagArbeidsliste();
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
-
+    const randomSisteEndring = randomEndring();
     return {
         fnr: grunndata.fnr,
         fornavn: grunndata.fornavn,
@@ -215,9 +215,16 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         moteStartTid: grunndata.moteStartTid,
         moteSluttTid: grunndata.moteSluttTid,
         vedtakStatus: vedtakUtkast.vedtakStatus,
-        vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret
+        vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
+        sisteEndringKategori: randomSisteEndring,
+        sisteEndringTidspunkt: randomDate({past: true})
     };
 }
+
+const randomEndring = () => {
+    const keys = Object.keys(hendelserLabels);
+    return keys[(keys.length * Math.random()) << 0];
+};
 
 const randomDate = ({past}) => {
     const dag = rnd(1, 31);

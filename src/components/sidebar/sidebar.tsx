@@ -76,9 +76,7 @@ interface SidebarProps {
 function Sidebar(props: SidebarProps) {
     const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
     const sidebarRef = useRef<HTMLDivElement>(null);
-    const selectedTab = useSidebarViewStore(
-        erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
-    );
+    const selectedTab = useSidebarViewStore(erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt);
     const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();

@@ -16,7 +16,7 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
 
     useEffect(() => {
         // @ts-ignore
-        savedCallback.current = b => endreFiltervalg('navnEllerFnrQuery', b);
+        savedCallback.current = filterverdi => endreFiltervalg('navnEllerFnrQuery', filterverdi);
     }, [endreFiltervalg]);
 
     useEffect(() => {

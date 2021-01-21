@@ -9,6 +9,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    hendelserLabels,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -66,6 +67,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (
         <div className={className}>
@@ -223,6 +225,16 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                     ferdigfilterListe.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
+            />
+            <TekstKolonne
+                tekst={!!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' '}
+                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                className="col col-xs-2"
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={sisteEndringTidspunkt}
+                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
             />
         </div>
     );

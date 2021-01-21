@@ -18,6 +18,8 @@ export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
+export const SISTE_ENDRING = 'SISTE_ENDRING';
+export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -40,10 +42,10 @@ export const mapFilternavnTilFilterValue = {
     aapYtelse: AAP_YTELSE,
     aapYtelseMaxtid: AAP_YTELSE_MAXTID,
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
-    underVurdering: UNDER_VURDERING
+    underVurdering: UNDER_VURDERING,
+    sisteEndring: SISTE_ENDRING,
+    sisteEndringDato: SISTE_ENDRING_DATO
 };
-
-export const FILTERGRUPPE_ENHET = 'enhetensOversikt';
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
@@ -56,16 +58,16 @@ export const ferdigfilterListe = {
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     TRENGER_VURDERING: 'Trenger vurdering',
-    INAKTIVE_BRUKERE: 'Ikke servicebehov',
+    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
+    UNDER_VURDERING: 'Under vurdering',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
+    MOTER_IDAG: 'Møte med NAV idag',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
+    INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
-    MOTER_IDAG: 'Møte med NAV idag',
-    UNDER_VURDERING: 'Under vurdering'
 };
 
 export const arbeidslisteKategori = {
@@ -246,6 +248,46 @@ export const utdanningBestatt = {
     NEI: 'Nei'
 };
 
+export const hendelserLabels = {
+    MAL: 'Endring i mål',
+    NY_STILLING: 'En jobb jeg vil søke på',
+    NY_IJOBB: 'Jobb jeg har nå',
+    NY_EGEN: 'Jobbrettet egenaktivitet',
+    NY_BEHANDLING: 'Medisinsk behandling',
+
+    FULLFORT_STILLING: 'En jobb jeg vil søke på',
+    FULLFORT_IJOBB: 'Jobb jeg har nå',
+    FULLFORT_EGEN: 'Jobbrettet egenaktivitet',
+    FULLFORT_BEHANDLING: 'Medisinsk behandling',
+    FULLFORT_SOKEAVTALE: 'Avtale om å søke jobber',
+
+    AVBRUTT_STILLING: 'En jobb jeg vil søke på',
+    AVBRUTT_IJOBB: 'Jobb jeg har nå',
+    AVBRUTT_EGEN: 'Jobbrettet egenaktivitet',
+    AVBRUTT_BEHANDLING: 'Medisinsk behandling',
+    AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
+};
+
+export const hendelserEtikett = {
+    MAL: 'Endring i mål',
+    NY_STILLING: 'Aktivitet lagt til: En jobb jeg vil søke på',
+    NY_IJOBB: 'Aktivitet lagt til: Jobb jeg har nå',
+    NY_EGEN: 'Aktivitet lagt til: Jobbrettet egenaktivitet',
+    NY_BEHANDLING: 'Aktivitet lagt til: Medisinsk behandling',
+
+    FULLFORT_STILLING: 'Aktivitet fullført: En jobb jeg vil søke på',
+    FULLFORT_IJOBB: 'Aktivitet fullført: Jobb jeg har nå',
+    FULLFORT_EGEN: 'Aktivitet fullført: Jobbrettet egenaktivitet',
+    FULLFORT_BEHANDLING: 'Aktivitet fullført: Medisinsk behandling',
+    FULLFORT_SOKEAVTALE: 'Aktivitet fullført: Avtale om å søke jobber',
+
+    AVBRUTT_STILLING: 'Aktivitet avbrutt: En jobb jeg vil søke på',
+    AVBRUTT_IJOBB: 'Aktivitet avbrutt: Jobb jeg har nå',
+    AVBRUTT_EGEN: 'Aktivitet avbrutt: Jobbrettet egenaktivitet',
+    AVBRUTT_BEHANDLING: 'Aktivitet avbrutt: Medisinsk behandling',
+    AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
+};
+
 export default {
     ytelseUtlopsSortering,
     ferdigfilterListe,
@@ -268,5 +310,7 @@ export default {
     cvJobbprofil,
     utdanning,
     utdanningBestatt,
-    utdanningGodkjent
+    utdanningGodkjent,
+    hendelserEtikett,
+    hendelserLabels
 };
