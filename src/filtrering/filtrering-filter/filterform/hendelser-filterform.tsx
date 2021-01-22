@@ -35,12 +35,20 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
     const lagtTilAvBruker = erMedisinskBehandlingFeatureTogglePa
         ? ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING']
         : ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN'];
-    const fullfortAvBruker = erMedisinskBehandlingFeatureTogglePa
-        ? ['FULLFORT_STILLING', 'FULLFORT_IJOBB', 'FULLFORT_EGEN', 'FULLFORT_BEHANDLING', 'FULLFORT_SOKEAVTALE']
-        : ['FULLFORT_STILLING', 'FULLFORT_IJOBB', 'FULLFORT_EGEN', 'FULLFORT_SOKEAVTALE'];
-    const avbruttAvBruker = erMedisinskBehandlingFeatureTogglePa
-        ? ['AVBRUTT_STILLING', 'AVBRUTT_IJOBB', 'AVBRUTT_EGEN', 'AVBRUTT_BEHANDLING', 'AVBRUTT_SOKEAVTALE']
-        : ['AVBRUTT_STILLING', 'AVBRUTT_IJOBB', 'AVBRUTT_EGEN', 'AVBRUTT_SOKEAVTALE'];
+    const fullfortAvBruker = [
+        'FULLFORT_STILLING',
+        'FULLFORT_IJOBB',
+        'FULLFORT_EGEN',
+        'FULLFORT_BEHANDLING',
+        'FULLFORT_SOKEAVTALE'
+    ];
+    const avbruttAvBruker = [
+        'AVBRUTT_STILLING',
+        'AVBRUTT_IJOBB',
+        'AVBRUTT_EGEN',
+        'AVBRUTT_BEHANDLING',
+        'AVBRUTT_SOKEAVTALE'
+    ];
 
     return (
         <form className="skjema hendelser-filterform">
