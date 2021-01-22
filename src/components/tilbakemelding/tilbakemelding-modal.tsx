@@ -1,33 +1,61 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {Hovedknapp} from 'nav-frontend-knapper';
-import {Textarea} from 'nav-frontend-skjema';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
+import {Textarea} from 'nav-frontend-skjema';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import TilfredshetValg from './tilfredshet-valg';
+import TilbakemeldingsskjemaCheckbox from './tilbakemeldingsskjema-checkbox';
 
 export interface Tilbakemelding {
     tilfredshet: number;
     kommentar: string;
 }
 
+export interface TilbakemeldingCheckboxProps {
+    checkboxverdi: number[];
+    kommentar: string;
+}
+
 interface TilbakemeldingModalProps {
     open: boolean;
     onTilbakemeldingSendt: (tilbakemelding: Tilbakemelding) => void;
+    onTilbakemeldingCheckboxSendt: (tilbakemelding: TilbakemeldingCheckboxProps) => void;
     onIkkeVisIgjen: () => void;
 }
 
-function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalProps) {
-    const KOMMENTAR_ROWS = 5;
+function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheckboxSendt}: TilbakemeldingModalProps) {
     const KOMMENTAR_MAX_CHAR = 750;
+    const KOMMENTAR_ROWS = 5;
 
-    const [tilfredshet, setTilfredshet] = useState(0);
     const [kommentar, setKommentar] = useState('');
-    const [harSendt, setHarSendt] = useState(false);
     const [harBlittVist, setHarBlittVist] = useState(false);
+    const [harSendt, setHarSendt] = useState(false);
+    const [tilfredshet, setTilfredshet] = useState(0);
+    const [checkboxverdi, setCheckboxverdi] = useState<number[]>([]);
+
     const ikkeVisIgjen = false;
+    const visTilfredshet = false;
+
+    const handleFormSubmitted = () => {
+        setHarSendt(true);
+        visTilfredshet
+            ? onTilbakemeldingSendt({tilfredshet, kommentar})
+            : onTilbakemeldingCheckboxSendt({
+                  checkboxverdi,
+                  kommentar
+              });
+    };
+
+    const handleTilfredshetChanged = (tilfredshet: number) => {
+        setTilfredshet(tilfredshet);
+    };
+
+    const handleCheckboxverdiChanged = verdi => {
+        setCheckboxverdi(verdi);
+    };
 
     const handleKommentarChanged = e => {
         const value = e.target.value;
@@ -37,18 +65,6 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
         }
     };
 
-    const handleFormSubmitted = () => {
-        setHarSendt(true);
-        onTilbakemeldingSendt({tilfredshet, kommentar});
-    };
-
-    const handleTilfredshetChanged = (tilfredshet: number) => {
-        setTilfredshet(tilfredshet);
-    };
-
-    const harBesvartTilfredshet = tilfredshet > 0;
-    const visFritekst = false;
-
     if (open && !harBlittVist) {
         setHarBlittVist(true);
     }
@@ -57,6 +73,8 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
     if ((!open && !harBlittVist) || ikkeVisIgjen) {
         return null;
     }
+    const harBesvartTilfredshet = tilfredshet > 0;
+    const visFritekst = true;
 
     return (
         <div
@@ -80,8 +98,13 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
                             Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)? Svarene er anonyme.
+                            Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)?
+                            Svarene er anonyme.
                         </Normaltekst>
+                    </>
+                )}
+                {visTilfredshet ? (
+                    <>
                         <div className="tilbakemelding-modal__tilfredshet">
                             <TilfredshetValg
                                 className="blokk-xs"
@@ -114,6 +137,15 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
                             </form>
                         )}
                     </>
+                ) : (
+                    <TilbakemeldingsskjemaCheckbox
+                        handleFormSubmitted={() => handleFormSubmitted()}
+                        handleKommentarChanged={e => handleKommentarChanged(e)}
+                        kommentar={kommentar}
+                        kommentarMaxChar={KOMMENTAR_MAX_CHAR}
+                        kommentarRows={KOMMENTAR_ROWS}
+                        handleCheckboxvalgChanged={e => handleCheckboxverdiChanged(e)}
+                    />
                 )}
             </div>
         </div>
