@@ -1,6 +1,7 @@
 before('Start server', () => {
     cy.configure();
 });
+
 describe('Diverse', () => {
     it('Verifiser blå prikk og stepper', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
@@ -36,22 +37,33 @@ describe('Diverse', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('not.exist');
     });
 
-    it.only('Verifiser tilbakemeldingsundersøkelse', () => {
+    it('Verifiser tilbakemeldingsundersøkelse', () => {
         cy.getByTestId('tilbakemelding_modal').should('not.exist');
         cy.getByTestId('tilbakemelding_fab_knapp')
             .should('be.visible')
             .click();
         cy.getByTestId('tilbakemelding_modal').should('be.visible');
 
+        //Hvis checkbox
+        cy.getByTestId('tilfredshet_send-knapp')
+            .contains('Send')
+            .click({force: true});
+
+        cy.getByTestId('tilfredshet_feilmelding')
+            .contains('Velg minst en avkrysningsboks.')
+            .should('be.visible');
+
         cy.checkbox('checkboxvalg_1');
         cy.checkbox('checkboxvalg_4');
         cy.checkbox('checkboxvalg_7');
         cy.checkbox('checkboxvalg_8');
+
         cy.getByTestId('checkboxvalg_2').should('be.disabled');
         cy.getByTestId('checkboxvalg_3').should('be.disabled');
         cy.getByTestId('checkboxvalg_5').should('be.disabled');
         cy.getByTestId('checkboxvalg_6').should('be.disabled');
 
+        // Hvis tilfredshet
         // cy.getByTestId('tilfredshet-ikon_5')
         //     .should('be.visible')
         //     .click();

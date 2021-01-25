@@ -168,7 +168,9 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                         data-testid="tilfredshet_kommentarfelt"
                                     />
                                 </div>
-                                <p className="tilbakemelding-modal__feilmelding">{feilmelding}</p>
+                                <p className="tilbakemelding-modal__feilmelding" data-testid="tilfredshet_feilmelding">
+                                    {feilmelding}
+                                </p>
                                 <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                                     Send
                                 </Hovedknapp>
