@@ -68,7 +68,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Build and publish Docker image
         needs: build
-        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/meldepliktkort'
         steps:
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
@@ -92,7 +92,7 @@ jobs:
     deploy-q0:
         name: Deploy q0 fss
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/meldepliktkort'
         needs:
             - build-docker-image
         steps:
@@ -105,7 +105,7 @@ jobs:
                   VAR: version=${{ env.IMAGE_TAG }},namespace=q0
     deploy-q1:
         name: Deploy q1 fss
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/meldepliktkort'
         needs:
             - build-docker-image
         runs-on: ubuntu-latest
