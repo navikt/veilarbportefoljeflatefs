@@ -7,10 +7,10 @@ export enum Meldepliktverdier {
     LEVERT_MELDEKORT = 'Om personen har levert siste meldekort eller ikke',
     JOBB_14_DAGER = 'Jobbet siste 14 dager eller ikke',
     HVOR_MYE_JOBB = 'Hvor mye personen har jobbet',
-    GJENNOMFORT_AKTIVITET = 'Gjennomført avtalt aktivitet/tiltak /kurs/utdanning eller ikke',
+    GJENNOMFORT_AKTIVITET = 'Gjennomført avtalt aktivitet/tiltak/kurs/utdanning eller ikke',
     SYKDOM = 'Sykdom',
     FERIE_FRAVAER = 'Ferie eller fravær',
-    REGISTRERT = 'Ønsker forstatt å stå registrert eller ikke'
+    REGISTRERT = 'Ønsker fortsatt å stå registrert eller ikke'
 }
 
 interface CheckboxValgProps {
