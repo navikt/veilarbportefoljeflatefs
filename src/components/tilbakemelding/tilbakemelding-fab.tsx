@@ -64,11 +64,23 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
             ...tilbakemelding
         });
 
-        tilbakemelding.checkboxverdi.forEach(verdi => {
-            logEvent('portefolje.tilbakemelding.checkboxverdier', {
-                feature: TILBAKEMELDING_FEATURE_TAG,
-                verdi
-            });
+        // tilbakemelding.checkboxverdi.forEach(verdi => {
+        //     logEvent('portefolje.tilbakemelding.checkboxverdier', {
+        //         feature: TILBAKEMELDING_FEATURE_TAG,
+        //         verdi
+        //     });
+        // });
+
+        logEvent('portefolje.tilbakemelding.checkboxverdier', {
+            feature: TILBAKEMELDING_FEATURE_TAG,
+            checkbox1: tilbakemelding.checkboxverdi[0],
+            checkbox2: tilbakemelding.checkboxverdi[1],
+            checkbox3: tilbakemelding.checkboxverdi[2],
+            checkbox4: tilbakemelding.checkboxverdi[3],
+            checkbox5: tilbakemelding.checkboxverdi[4],
+            checkbox6: tilbakemelding.checkboxverdi[5],
+            checkbox7: tilbakemelding.checkboxverdi[6],
+            checkbox8: tilbakemelding.checkboxverdi[7]
         });
     };
 
