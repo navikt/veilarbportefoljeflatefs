@@ -1,33 +1,72 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {Hovedknapp} from 'nav-frontend-knapper';
-import {Textarea} from 'nav-frontend-skjema';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import TilfredshetValg from './tilfredshet-valg';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
+import {Textarea} from 'nav-frontend-skjema';
+import {Hovedknapp} from 'nav-frontend-knapper';
+import TilfredshetValg from './tilfredshet-valg';
+import CheckboxValg from './checkbox-valg';
 
 export interface Tilbakemelding {
     tilfredshet: number;
     kommentar: string;
 }
 
+export interface TilbakemeldingCheckboxProps {
+    checkboxverdi: number[];
+    kommentar: string;
+}
+
 interface TilbakemeldingModalProps {
     open: boolean;
     onTilbakemeldingSendt: (tilbakemelding: Tilbakemelding) => void;
+    onTilbakemeldingCheckboxSendt: (tilbakemelding: TilbakemeldingCheckboxProps) => void;
     onIkkeVisIgjen: () => void;
 }
 
-function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalProps) {
-    const KOMMENTAR_ROWS = 5;
+function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheckboxSendt}: TilbakemeldingModalProps) {
     const KOMMENTAR_MAX_CHAR = 750;
+    const KOMMENTAR_ROWS = 5;
 
-    const [tilfredshet, setTilfredshet] = useState(0);
     const [kommentar, setKommentar] = useState('');
-    const [harSendt, setHarSendt] = useState(false);
     const [harBlittVist, setHarBlittVist] = useState(false);
+    const [harSendt, setHarSendt] = useState(false);
+    const [tilfredshet, setTilfredshet] = useState(0);
+    const [checkboxverdi, setCheckboxverdi] = useState<number[]>([]);
+    const [feilmelding, setFeilmelding] = useState<string>('');
+
     const ikkeVisIgjen = false;
+    const visTilfredshet = false;
+
+    const handleFormSubmitted = e => {
+        e.preventDefault();
+        setHarSendt(true);
+        onTilbakemeldingSendt({tilfredshet, kommentar});
+    };
+
+    const handleCheckboxFormSubmitted = e => {
+        e.preventDefault();
+        if (checkboxverdi.length === 0) {
+            setFeilmelding('Velg minst en avkrysningsboks.');
+        } else {
+            setFeilmelding('');
+            setHarSendt(true);
+            onTilbakemeldingCheckboxSendt({
+                checkboxverdi,
+                kommentar
+            });
+        }
+    };
+
+    const handleTilfredshetChanged = (tilfredshet: number) => {
+        setTilfredshet(tilfredshet);
+    };
+
+    const handleCheckboxverdiChanged = verdi => {
+        setCheckboxverdi(verdi);
+    };
 
     const handleKommentarChanged = e => {
         const value = e.target.value;
@@ -37,18 +76,6 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
         }
     };
 
-    const handleFormSubmitted = () => {
-        setHarSendt(true);
-        onTilbakemeldingSendt({tilfredshet, kommentar});
-    };
-
-    const handleTilfredshetChanged = (tilfredshet: number) => {
-        setTilfredshet(tilfredshet);
-    };
-
-    const harBesvartTilfredshet = tilfredshet > 0;
-    const visFritekst = false;
-
     if (open && !harBlittVist) {
         setHarBlittVist(true);
     }
@@ -57,6 +84,8 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
     if ((!open && !harBlittVist) || ikkeVisIgjen) {
         return null;
     }
+    const harBesvartTilfredshet = tilfredshet > 0;
+    const visFritekst = true;
 
     return (
         <div
@@ -77,37 +106,71 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt}: TilbakemeldingModalP
                 ) : (
                     <>
                         <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
-                            Tilbakemelding
+                            Meldekortopplysninger
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Hvor fornøyd er du med oversiktene (Min oversikt, Enhetens oversikt, Veilederoversikt)? Svarene er anonyme.
+                            Hvilke opplysninger fra brukernes meldekort er viktigst for deg? Svarene er anonyme, og du
+                            kan velge maks 4 opplysninger.
                         </Normaltekst>
-                        <div className="tilbakemelding-modal__tilfredshet">
-                            <TilfredshetValg
-                                className="blokk-xs"
-                                onTilfredshetChanged={handleTilfredshetChanged}
-                                defaultTilfredshet={tilfredshet}
-                            />
-                        </div>
-                        {harBesvartTilfredshet && (
+                        {visTilfredshet ? (
+                            <>
+                                <div className="tilbakemelding-modal__tilfredshet">
+                                    <TilfredshetValg
+                                        className="blokk-xs"
+                                        onTilfredshetChanged={handleTilfredshetChanged}
+                                        defaultTilfredshet={tilfredshet}
+                                    />
+                                </div>
+                                {harBesvartTilfredshet && (
+                                    <form
+                                        className="tilbakemelding-modal__ekspander"
+                                        onSubmit={e => handleFormSubmitted(e)}
+                                        data-widget="accessible-autocomplete"
+                                    >
+                                        {visFritekst && (
+                                            <div className="tilbakemelding-modal__kommentar">
+                                                <Textarea
+                                                    className="tilbakemelding-modal__kommentar-felt"
+                                                    label="Fortell gjerne litt mer om hvorfor."
+                                                    rows={KOMMENTAR_ROWS}
+                                                    maxLength={KOMMENTAR_MAX_CHAR}
+                                                    value={kommentar}
+                                                    onChange={handleKommentarChanged}
+                                                    data-testid="tilfredshet_kommentarfelt"
+                                                />
+                                            </div>
+                                        )}
+                                        <Hovedknapp
+                                            role="submit"
+                                            className="knapp--hoved"
+                                            data-testid="tilfredshet_send-knapp"
+                                        >
+                                            Send
+                                        </Hovedknapp>
+                                    </form>
+                                )}
+                            </>
+                        ) : (
                             <form
                                 className="tilbakemelding-modal__ekspander"
-                                onSubmit={handleFormSubmitted}
+                                onSubmit={e => handleCheckboxFormSubmitted(e)}
                                 data-widget="accessible-autocomplete"
                             >
-                                {visFritekst && (
-                                    <div className="tilbakemelding-modal__kommentar">
-                                        <Textarea
-                                            className="tilbakemelding-modal__kommentar-felt"
-                                            label="Fortell gjerne litt mer om hvorfor."
-                                            rows={KOMMENTAR_ROWS}
-                                            maxLength={KOMMENTAR_MAX_CHAR}
-                                            value={kommentar}
-                                            onChange={handleKommentarChanged}
-                                            data-testid="tilfredshet_kommentarfelt"
-                                        />
-                                    </div>
-                                )}
+                                <CheckboxValg onCheckboxChanged={handleCheckboxverdiChanged} />
+                                <div className="tilbakemelding-modal__kommentar">
+                                    <Textarea
+                                        className="tilbakemelding-modal__kommentar-felt"
+                                        label="Si gjerne litt mer om hvordan du bruker opplysningene i oppfølging. (Frivillig)"
+                                        rows={KOMMENTAR_ROWS}
+                                        maxLength={KOMMENTAR_MAX_CHAR}
+                                        value={kommentar}
+                                        onChange={handleKommentarChanged}
+                                        data-testid="tilfredshet_kommentarfelt"
+                                    />
+                                </div>
+                                <p className="tilbakemelding-modal__feilmelding" data-testid="tilfredshet_feilmelding">
+                                    {feilmelding}
+                                </p>
                                 <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                                     Send
                                 </Hovedknapp>

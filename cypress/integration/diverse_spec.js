@@ -1,6 +1,7 @@
 before('Start server', () => {
     cy.configure();
 });
+
 describe('Diverse', () => {
     it('Verifiser blå prikk og stepper', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
@@ -42,18 +43,41 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
         cy.getByTestId('tilbakemelding_modal').should('be.visible');
-        cy.getByTestId('tilfredshet-ikon_5')
-            .should('be.visible')
-            .click();
-        cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
-        cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        // cy.getByTestId('tilfredshet_kommentarfelt')
-        //     .should('be.empty')
-        //     .click()
-        //     .type('How do you throw a space party? You planet!');
+
+        //Hvis checkbox
+        cy.getByTestId('tilfredshet_send-knapp')
+            .contains('Send')
+            .click({force: true});
+
+        cy.getByTestId('tilfredshet_feilmelding')
+            .contains('Velg minst en avkrysningsboks.')
+            .should('be.visible');
+
+        cy.checkbox('checkboxvalg_1');
+        cy.checkbox('checkboxvalg_4');
+        cy.checkbox('checkboxvalg_7');
+        cy.checkbox('checkboxvalg_8');
+
+        cy.getByTestId('checkboxvalg_2').should('be.disabled');
+        cy.getByTestId('checkboxvalg_3').should('be.disabled');
+        cy.getByTestId('checkboxvalg_5').should('be.disabled');
+        cy.getByTestId('checkboxvalg_6').should('be.disabled');
+
+        // Hvis tilfredshet
+        // cy.getByTestId('tilfredshet-ikon_5')
+        //     .should('be.visible')
+        //     .click();
+        // cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
+        // cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        // cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        // cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        // cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+
+        cy.getByTestId('tilfredshet_kommentarfelt')
+            .should('be.empty')
+            .click()
+            .type('How do you throw a space party? You planet!');
+
         cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp')
             .contains('Send')
@@ -198,4 +222,3 @@ describe('Diverse', () => {
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
     });
 });
-

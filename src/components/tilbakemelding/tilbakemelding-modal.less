@@ -1,13 +1,13 @@
 @import '~nav-frontend-core/less/core';
 
 .tilbakemelding-modal {
-    width: 350px;
+    width: 450px;
     position: fixed;
     right: 25px;
     border-radius: 2.5%;
     background-color: @white;
     box-shadow: 0 6px 10px 0 @navGra60;
-    z-index: 998;
+    z-index: 10000;
 
     &__tittel {
         font-size: 24px;
@@ -32,6 +32,8 @@
 
     &__innhold {
         padding: 1rem;
+        max-height: 46vh;
+        overflow-y: auto;
     }
 
     &__innhold--takk {
@@ -44,6 +46,55 @@
 
     &__tilfredshet {
         margin: 2rem 0 0.5rem 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+
+        .tilfredshet-valg__ikon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .tilfredshet-valg__ikon--valgt {
+            transform: scale(1.4);
+        }
+
+        .tilfredshet-valg__ikon--ikke-valgt {
+            opacity: 0.6;
+        }
+
+        .tilfredshet-valg__ikon:hover {
+            transform: scale(1.4);
+            cursor: pointer;
+            opacity: 1;
+        }
+    }
+
+    &__checkbox-gruppe {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0.5rem;
+    }
+
+    &__checkbox {
+        display: flex;
+        flex-direction: row;
+        margin: 0.2rem 0;
+
+        input {
+            margin: 0 0.5rem 0 0;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__knappegruppe {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
     &__takk-melding {
@@ -62,7 +113,7 @@
     }
 
     &__kommentar {
-        margin-bottom: 2rem;
+        margin-top: 1rem;
 
         &-felt {
             resize: none;
@@ -75,6 +126,32 @@
         animation-name: ekspander;
         animation-duration: 0.5s;
         overflow: hidden;
+    }
+
+    &__feilmelding {
+        color: red;
+        font-weight: bolder;
+    }
+}
+
+.tilfredshet-valg__wrapper {
+    .tilfredshet-valg__ikon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tilfredshet-valg__ikon--valgt {
+        transform: scale(1.4);
+    }
+
+    .tilfredshet-valg__ikon--ikke-valgt {
+        opacity: 0.6;
+    }
+
+    .tilfredshet-valg__ikon:hover {
+        transform: scale(1.4);
+        cursor: pointer;
+        opacity: 1;
     }
 }
 

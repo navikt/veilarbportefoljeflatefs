@@ -9,8 +9,6 @@ import {
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
-import {logEvent} from '../utils/frontend-logger';
-import {finnSideNavn} from '../middleware/metrics-middleware';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
@@ -44,7 +42,6 @@ export function LagredeFilterUIController(props: {oversiktType: OversiktType}) {
 
         if (valgtMineFilter.length === 0) {
             dispatch(avmarkerValgtMineFilter(props.oversiktType));
-            logEvent('portefolje.metrikker.lagredefilter.direkte-filtrering', {}, {sideNavn: finnSideNavn()});
         } else if (valgtMineFilter.length === 1) {
             dispatch(markerMineFilter(valgtMineFilter[0], props.oversiktType));
         }

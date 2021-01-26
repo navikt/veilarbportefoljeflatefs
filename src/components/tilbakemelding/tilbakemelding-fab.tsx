@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import './tilbakemelding-fab.less';
 import {sjekkFeature} from '../../ducks/features';
 import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
-import TilbakemeldingModal, {Tilbakemelding} from './tilbakemelding-modal';
+import TilbakemeldingModal, {Tilbakemelding, TilbakemeldingCheckboxProps} from './tilbakemelding-modal';
 import {logEvent} from '../../utils/frontend-logger';
 import {useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
@@ -16,7 +16,7 @@ interface TilbakemeldingFabProps {
 
 function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     const TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    const TILBAKEMELDING_FEATURE_TAG = 'generell_tilfredshet_desember2020'; // NB: Husk å endre for hver nye feature
+    const TILBAKEMELDING_FEATURE_TAG = 'meldeplikt'; // NB: Husk å endre for hver nye feature
 
     const [isModalOpen, setModalOpen] = useState(false);
     const harSendtTilbakemelding = false;
@@ -44,16 +44,31 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         if (!isModalOpen) {
             logEvent('portefolje.tilbakemelding_modal_apnet');
         }
-
         setModalOpen(!isModalOpen);
     };
 
-    const handleTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
+    const handleTilfredshetsTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
         window.localStorage.setItem(tilbakemeldingLocalStorageName, 'true');
 
         logEvent('portefolje.tilbakemelding', {
             feature: TILBAKEMELDING_FEATURE_TAG,
             ...tilbakemelding
+        });
+    };
+
+    const handleCheckboxTilbakemeldingSendt = (tilbakemelding: TilbakemeldingCheckboxProps) => {
+        window.localStorage.setItem(tilbakemeldingLocalStorageName, 'true');
+
+        logEvent('portefolje.tilbakemelding', {
+            feature: TILBAKEMELDING_FEATURE_TAG,
+            ...tilbakemelding
+        });
+
+        tilbakemelding.checkboxverdi.forEach(verdi => {
+            logEvent('portefolje.tilbakemelding.checkboxverdier', {
+                feature: TILBAKEMELDING_FEATURE_TAG,
+                verdi
+            });
         });
     };
 
@@ -93,7 +108,8 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
             </div>
             <TilbakemeldingModal
                 open={isModalOpen}
-                onTilbakemeldingSendt={handleTilbakemeldingSendt}
+                onTilbakemeldingSendt={handleTilfredshetsTilbakemeldingSendt}
+                onTilbakemeldingCheckboxSendt={handleCheckboxTilbakemeldingSendt}
                 onIkkeVisIgjen={handleIkkeVisIgjen}
             />
         </div>
