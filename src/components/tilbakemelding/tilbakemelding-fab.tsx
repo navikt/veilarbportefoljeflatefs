@@ -63,6 +63,13 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
             feature: TILBAKEMELDING_FEATURE_TAG,
             ...tilbakemelding
         });
+
+        tilbakemelding.checkboxverdi.forEach(verdi => {
+            logEvent('portefolje.tilbakemelding.checkboxverdier', {
+                feature: TILBAKEMELDING_FEATURE_TAG,
+                verdi
+            });
+        });
     };
 
     const handleIkkeVisIgjen = () => {
