@@ -32,7 +32,7 @@ function TilbakemeldingsskjemaCheckbox({
             <div className="tilbakemelding-modal__kommentar">
                 <Textarea
                     className="tilbakemelding-modal__kommentar-felt"
-                    label="Si gjerne litt mer om hvordan du bruker opplysningene i oppfølging. (Frivillig)"
+                    label="Si gjerne litt mer om hvordan du bruker opplysningene i oppfølgingen. (Frivillig)"
                     rows={kommentarRows}
                     maxLength={kommentarMaxChar}
                     value={kommentar}
