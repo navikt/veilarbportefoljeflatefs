@@ -1,10 +1,10 @@
 import {Label, Radio} from 'nav-frontend-skjema';
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels} from '../../filter-konstanter';
 import './filterform.less';
-import {useEffect, useState} from 'react';
 import {kebabCase} from '../../../utils/utils';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {HENDELSE_MEDISINSKBEHANDLING} from '../../../konstanter';
@@ -50,6 +50,8 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
         'AVBRUTT_SOKEAVTALE'
     ];
 
+    const andreMuligheter = ['MAL'];
+
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
@@ -94,6 +96,21 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
+                        />
+                    ))}
+                </div>
+
+                <Label htmlFor="avbruttAvBruker">Andre </Label>
+                <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
+                    {andreMuligheter.map(key => (
+                        <Radio
+                            onChange={e => onChange(e)}
+                            label={hendelserLabels[key]}
+                            name="sisteEndringKategori"
+                            value={key}
+                            checked={hendelserValg.includes(key)}
+                            key={key}
+                            data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
                 </div>
