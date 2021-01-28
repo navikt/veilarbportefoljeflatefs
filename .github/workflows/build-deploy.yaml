@@ -33,11 +33,7 @@ jobs:
         name: Cypress run
         runs-on: ubuntu-latest
         timeout-minutes: 15
-<<<<<<< Updated upstream
         if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev'
-=======
-        if: ! contains(toJSON(github.event.commits.*.message), ‘[skip-cypress]’) && github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
->>>>>>> Stashed changes
         steps:
             - name: Checkout
               uses: actions/checkout@v2
