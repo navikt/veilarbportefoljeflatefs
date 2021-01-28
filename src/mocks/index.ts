@@ -144,9 +144,11 @@ mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonRes
 
 // portefolje-api
 mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(1000, jsonResponse(statustall)));
-mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
-    res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
-);
+mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) => {
+    console.log('Kjønn: ' + req.body['kjonn']);
+    console.log('Kjønn type: ' + typeof req.body['kjonn']);
+    return res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)));
+});
 mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonResponse(lagPortefoljeStorrelser()));
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
