@@ -100,8 +100,8 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                     ))}
                 </div>
 
-                <Label htmlFor="avbruttAvBruker">Andre </Label>
-                <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
+                <Label htmlFor="andreMuligheter">Andre </Label>
+                <div className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
                     {andreMuligheter.map(key => (
                         <Radio
                             onChange={e => onChange(e)}
@@ -110,7 +110,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
-                            data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            data-testid={`andreMuligheter_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
                 </div>
