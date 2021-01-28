@@ -50,8 +50,6 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
         'AVBRUTT_SOKEAVTALE'
     ];
 
-    const andreMuligheter = ['MAL'];
-
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
@@ -102,17 +100,15 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
 
                 <Label htmlFor="andreMuligheter">Andre </Label>
                 <div className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
-                    {andreMuligheter.map(key => (
-                        <Radio
-                            onChange={e => onChange(e)}
-                            label={hendelserLabels[key]}
-                            name="sisteEndringKategori"
-                            value={key}
-                            checked={hendelserValg.includes(key)}
-                            key={key}
-                            data-testid={`andreMuligheter_${kebabCase(hendelserLabels[key])}`}
-                        />
-                    ))}
+                    <Radio
+                        onChange={e => onChange(e)}
+                        label={hendelserLabels['MAL']}
+                        name="sisteEndringKategori"
+                        value={'MAL'}
+                        checked={hendelserValg.includes('MAL')}
+                        key={'MAL'}
+                        data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
+                    />
                 </div>
             </div>
             <NullstillValgKnapp
