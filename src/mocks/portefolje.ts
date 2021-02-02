@@ -121,15 +121,18 @@ function lagOverskrift() {
 function lagVedtakUtkast() {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
+    const ansvarligVeilederForVedtak = faker.name.firstName() + ' ' + faker.name.lastName();
     if (maybeUtkast > 0.5) {
         return {
             vedtakStatusEndret: randomDate({past: true}),
-            vedtakStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter'
+            vedtakStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
+            ansvarligVeilederForVedtak: ansvarligVeilederForVedtak
         };
     }
     return {
         vedtakStatusEndret: null,
-        vedtakStatus: null
+        vedtakStatus: null,
+        ansvarligVeilederForVedtak: ''
     };
 }
 
@@ -216,6 +219,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         moteSluttTid: grunndata.moteSluttTid,
         vedtakStatus: vedtakUtkast.vedtakStatus,
         vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
+        ansvarligVeilederForVedtak: vedtakUtkast.ansvarligVeilederForVedtak,
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true})

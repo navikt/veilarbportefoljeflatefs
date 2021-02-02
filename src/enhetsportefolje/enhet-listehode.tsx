@@ -281,6 +281,21 @@ function EnhetListehode({
                     title="Dager siden fikk status"
                     headerId="vedtakstatus-endret"
                 />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    tekst="Ansvarlig veileder for vedtak"
+                    skalVises={
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(UNDER_VURDERING) &&
+                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
+                    }
+                    className="col col-xs-2"
+                    title="Ansvarlig veileder for vedtak"
+                    headerId="vedtakstatus-endret"
+                />
                 <Header
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     className="col col-xs-2"
