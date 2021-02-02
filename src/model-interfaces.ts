@@ -32,6 +32,7 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
+    ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
     SISTE_ENDRING = 'siste_endring_kategori',
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt'
@@ -133,6 +134,7 @@ export interface BrukerModell {
     moteSluttTid: string;
     vedtakStatus?: string;
     vedtakStatusEndret?: string;
+    ansvarligVeilederForVedtak?: string;
     trengerRevurdering: boolean;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato

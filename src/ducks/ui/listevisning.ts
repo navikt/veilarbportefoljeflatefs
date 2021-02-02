@@ -31,6 +31,7 @@ export enum Kolonne {
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
     VEDTAKSTATUS = 'vedtakstatus',
+    ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_veileder',
     SISTE_ENDRING = 'siste_endring',
     SISTE_ENDRING_DATO = 'siste_endring_dato'
 }
@@ -115,7 +116,10 @@ export const avvelgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) =
     kolonne,
     name: oversiktType
 });
-export const lukkInfopanel = (oversiktType: OversiktType) => ({type: ActionTypeKeys.LUKK_INFOPANEL, name: oversiktType});
+export const lukkInfopanel = (oversiktType: OversiktType) => ({
+    type: ActionTypeKeys.LUKK_INFOPANEL,
+    name: oversiktType
+});
 
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
