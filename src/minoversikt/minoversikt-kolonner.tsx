@@ -227,6 +227,15 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 }
             />
             <TekstKolonne
+                tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
+                }
+                className="col col-xs-2"
+            />
+            <TekstKolonne
                 tekst={!!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' '}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
