@@ -136,6 +136,7 @@ export interface BrukerModell {
     trengerRevurdering: boolean;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
+    sisteEndringAktivitetId?: string;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
