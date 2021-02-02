@@ -4,7 +4,6 @@ import {Knapp} from 'nav-frontend-knapper';
 import {logEvent} from '../../../utils/frontend-logger';
 import './tour-modal.less';
 import classNames from 'classnames';
-import {kebabCase} from '../../../utils/utils';
 
 interface ModalStepperProps {
     modal: ModalName;
