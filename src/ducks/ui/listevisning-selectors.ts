@@ -78,6 +78,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         )
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
+        .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
         .concat(
             addHvis(
                 Kolonne.UTLOP_YTELSE,
