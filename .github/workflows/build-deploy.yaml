@@ -68,7 +68,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Build and publish Docker image
         needs: build
-        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/LegTilAnsvarligVeilederForVedtak'
         steps:
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
@@ -91,7 +91,7 @@ jobs:
                   docker push ${IMAGE}:${IMAGE_TAG}
     deploy-q1:
         name: Deploy q1 fss
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/LegTilAnsvarligVeilederForVedtak'
         needs:
             - build-docker-image
         runs-on: ubuntu-latest
