@@ -217,6 +217,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         vedtakStatus: vedtakUtkast.vedtakStatus,
         vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
         sisteEndringKategori: randomSisteEndring,
+        sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true})
     };
 }
