@@ -24,7 +24,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 data-testid="endringslogg_se-hvordan-knapp"
                 onClick={() => {
                     setOpen(true);
-                    logEvent('portefolje.endringslogg_stepper', kebabCase(props.modal));
+                    logEvent('portefolje.endringslogg_stepper', {modal: props.modal});
                 }}
             >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
