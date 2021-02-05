@@ -22,6 +22,13 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '5. februar 2021',
+        tittel: 'TEST',
+        versjonId: '05.02.21',
+        tekst:
+            'Dette er en test for å verifisere ny endringsloggikon'
+    },
+    {
         dato: '10. desember 2020',
         tittel: 'Endre info om søknadsprosessen',
         versjonId: '10.12.20',
