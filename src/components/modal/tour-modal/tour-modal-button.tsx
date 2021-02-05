@@ -7,7 +7,6 @@ import classNames from 'classnames';
 
 interface ModalStepperProps {
     modal: ModalName;
-    metrikknavn: string;
     knappeTekst?: string;
     className?: string;
     systemtittel?: string;
@@ -24,7 +23,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 data-testid="endringslogg_se-hvordan-knapp"
                 onClick={() => {
                     setOpen(true);
-                    logEvent(props.metrikknavn);
+                    logEvent('portefolje.endringslogg_stepper', props.modal);
                 }}
             >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
