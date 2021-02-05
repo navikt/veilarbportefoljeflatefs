@@ -4,6 +4,7 @@ import {Knapp} from 'nav-frontend-knapper';
 import {logEvent} from '../../../utils/frontend-logger';
 import './tour-modal.less';
 import classNames from 'classnames';
+import {kebabCase} from '../../../utils/utils';
 
 interface ModalStepperProps {
     modal: ModalName;
@@ -23,7 +24,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 data-testid="endringslogg_se-hvordan-knapp"
                 onClick={() => {
                     setOpen(true);
-                    logEvent('portefolje.endringslogg_stepper', props.modal);
+                    logEvent('portefolje.endringslogg_stepper', kebabCase(props.modal));
                 }}
             >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
