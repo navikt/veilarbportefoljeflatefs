@@ -3,7 +3,6 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
-    hendelserLabels,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -32,6 +31,7 @@ import './enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
+import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -204,8 +204,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
             />
-            <TekstKolonne
-                tekst={!!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' '}
+            <SisteEndringKategori
+                bruker={bruker}
+                enhetId={enhetId}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
