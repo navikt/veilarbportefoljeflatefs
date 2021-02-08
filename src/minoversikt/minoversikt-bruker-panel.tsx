@@ -17,6 +17,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Info} from '../components/tabell/etikett';
+import BlaPrikkVisning from '../components/tabell/bla-prikk-ikon';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -81,6 +82,10 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         role="checkbox"
                         className="brukerliste__checkbox"
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                    />
+                    <BlaPrikkVisning
+                        skalVises={true} //når Skru av/på er av er denne false eller når kolonneheader vises/ikke vises
+                        dataTestid="brukerliste-bla-prikk"
                     />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}

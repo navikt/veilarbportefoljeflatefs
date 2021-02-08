@@ -18,8 +18,11 @@ import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
+import '../components/tabell/dropdown-header.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {OrNothing} from '../utils/types/types';
+import DropdownHeader from '../components/tabell/dropdown-header';
+import {ReactComponent as BlaPrikk} from '../components/ikoner/bla-prikk.svg';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -76,6 +79,15 @@ function MinOversiktListeHode({
                 <VelgalleCheckboks
                     skalVises={oversiktType in OversiktType}
                     className="velgalle-checkboks col col-xs-2"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
+                    tekst={<BlaPrikk />}
+                    title="Blå prikk"
+                    headerId="bla-prikk"
                 />
                 <SorteringHeader
                     className="arbeidslistekategori__sorteringsheader"
