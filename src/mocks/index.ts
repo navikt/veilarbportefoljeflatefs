@@ -14,6 +14,8 @@ import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 
+const MOCK_DELAY = 0;
+
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
     enhetportefolje.brukere.forEach(bruker => (bruker.veilederId = me.ident));
@@ -56,7 +58,10 @@ let customMineFilter = mineFilter();
 
 const mock = FetchMock.configure({
     enableFallback: true,
-    middleware: MiddlewareUtils.combine(MiddlewareUtils.delayMiddleware(500), MiddlewareUtils.loggingMiddleware())
+    middleware: MiddlewareUtils.combine(
+        MiddlewareUtils.delayMiddleware(MOCK_DELAY),
+        MiddlewareUtils.loggingMiddleware()
+    )
 });
 
 // features
@@ -143,7 +148,7 @@ mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
-mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(MOCK_DELAY, jsonResponse(statustall)));
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
@@ -151,7 +156,7 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonRespo
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
 );
-mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(MOCK_DELAY, jsonResponse(statustall)));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 
 // situasjon-api
@@ -195,7 +200,7 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}, res, ctx) =>
 mock.get(
     '/modiacontextholder/api/context/aktivenhet',
     delayed(
-        500,
+        MOCK_DELAY,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: '1234'
@@ -206,7 +211,7 @@ mock.get(
 mock.get(
     '/modiacontextholder/api/context/aktivbruker',
     delayed(
-        500,
+        MOCK_DELAY,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: null
@@ -217,7 +222,7 @@ mock.get(
 mock.delete(
     '/modiacontextholder/api/context/aktivbruker',
     delayed(
-        500,
+        MOCK_DELAY,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: null
@@ -228,7 +233,7 @@ mock.delete(
 mock.get(
     '/modiacontextholder/api/decorator',
     delayed(
-        500,
+        MOCK_DELAY,
         jsonResponse({
             enheter: inloggetVeileder.enheter,
             etternavn: inloggetVeileder.etternavn,
