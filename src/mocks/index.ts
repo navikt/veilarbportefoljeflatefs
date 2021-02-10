@@ -143,7 +143,7 @@ mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
-mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(1000, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustall)));
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
@@ -151,7 +151,7 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonRespo
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
 );
-mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(1000, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustall)));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 
 // situasjon-api
@@ -195,7 +195,7 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}, res, ctx) =>
 mock.get(
     '/modiacontextholder/api/context/aktivenhet',
     delayed(
-        1000,
+        500,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: '1234'
@@ -206,7 +206,7 @@ mock.get(
 mock.get(
     '/modiacontextholder/api/context/aktivbruker',
     delayed(
-        1000,
+        500,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: null
@@ -217,7 +217,7 @@ mock.get(
 mock.delete(
     '/modiacontextholder/api/context/aktivbruker',
     delayed(
-        1000,
+        500,
         jsonResponse({
             aktivBruker: null,
             aktivEnhet: null
@@ -228,7 +228,7 @@ mock.delete(
 mock.get(
     '/modiacontextholder/api/decorator',
     delayed(
-        1000,
+        500,
         jsonResponse({
             enheter: inloggetVeileder.enheter,
             etternavn: inloggetVeileder.etternavn,
