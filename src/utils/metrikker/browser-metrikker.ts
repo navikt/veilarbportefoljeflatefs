@@ -59,14 +59,10 @@ export const logBrowserMetrikker = (veilederIdent: OrNothing<VeilederModell>): v
             {
                 browser: browserAgent,
                 version: browserVersion,
-                zoom: getBrowserZoom(),
-                os: operatingSystem,
-                engineName: engineName
+                zoom: getBrowserZoom()
             },
             {
                 versionTag: browserVersion,
-                osTag: operatingSystem,
-                engineNameTag: engineName,
                 identTag: mapVeilederIdentTilNonsens(veilederIdent.ident)
             }
         );
