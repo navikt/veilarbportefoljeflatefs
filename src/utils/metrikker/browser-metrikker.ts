@@ -3,7 +3,6 @@ import {VeilederModell} from '../../model-interfaces';
 import {logEvent} from '../frontend-logger';
 import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 import {
-    engineName,
     fullBrowserVersion,
     isChrome,
     isEdge,
@@ -12,8 +11,7 @@ import {
     isIE,
     isLegacyEdge,
     isOpera,
-    isSafari,
-    osName
+    isSafari
 } from 'react-device-detect';
 
 function getBrowserAgent(): string {
@@ -50,8 +48,6 @@ function getBrowserZoom(): number {
 export const logBrowserMetrikker = (veilederIdent: OrNothing<VeilederModell>): void => {
     const browserAgent = getBrowserAgent();
     const browserVersion = getBrowserVersion();
-    const operatingSystem = getOS();
-    const engineName = getEngineName();
 
     if (veilederIdent) {
         logEvent(
@@ -71,12 +67,4 @@ export const logBrowserMetrikker = (veilederIdent: OrNothing<VeilederModell>): v
 
 function getBrowserVersion() {
     return fullBrowserVersion;
-}
-
-function getOS() {
-    return osName;
-}
-
-function getEngineName() {
-    return engineName;
 }
