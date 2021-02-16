@@ -36,6 +36,8 @@ import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
+import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -124,6 +126,15 @@ export default function EnhetSide() {
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
+
+    const {sisteValgtMineFilter} = useSelector((state: AppState) => state.mineFilterEnhetensOversikt);
+
+    const data = useSelector((state: AppState) => state.mineFilter.data);
+    const lagretFilterNavn = filterId =>
+        data
+            .filter(elem => elem.filterId === filterId)
+            .map(elem => elem.filterNavn)
+            .toString();
 
     return (
         <DocumentTitle title="Enhetens oversikt">
@@ -228,6 +239,12 @@ export default function EnhetSide() {
                     </div>
                 </Innholdslaster>
                 <MineFilterModal oversiktType={oversiktType} />
+                <FeilTiltakModal
+                    lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
+                    filterId={sisteValgtMineFilter!}
+                    oversiktType={oversiktType}
+                    gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+                />
                 <ModalEnhetSideController />
             </div>
         </DocumentTitle>
