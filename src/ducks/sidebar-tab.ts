@@ -14,7 +14,7 @@ export const SIDEBAR_VISES = 'sidebarVises';
 export default function sidebarReducer(state = initialStateSidebar, action) {
     switch (action.type) {
         case SIDEBAR_TAB_ENDRET:
-            return {selectedTab: action.selectedTab};
+            return {...state, selectedTab: action.selectedTab};
         case SIDEBAR_SKJULT:
             return {...state, isSidebarHidden: true};
         case SIDEBAR_VISES:

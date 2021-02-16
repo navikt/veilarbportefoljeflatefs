@@ -28,7 +28,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                     setFraBrukerIUrl(bruker.fnr);
                 }}
                 href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}/aktivitet/vis/${bruker.sisteEndringAktivitetId}?enhet=${enhetId}`}
-                className={classnames('lenke lenke--frittstaende')}
+                className={classnames('lenke_siste-endring')}
             >
                 {sisteEndringKategori}
             </a>

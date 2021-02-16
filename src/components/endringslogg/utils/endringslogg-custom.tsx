@@ -109,11 +109,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.',
         children: (
             <>
-                <TourModalButton
-                    metrikknavn="portefolje.endringslogg_modal.mine-filter"
-                    modal={ModalName.MINE_FILTER}
-                    knappeTekst="Se hvordan"
-                />
+                <TourModalButton modal={ModalName.MINE_FILTER} knappeTekst="Se hvordan" />
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Lagre-filtre-i-Min-oversikt.aspx "
                     linkTekst="Nyhetssak på Navet"
