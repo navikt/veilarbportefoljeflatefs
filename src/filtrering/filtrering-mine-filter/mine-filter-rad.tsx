@@ -11,7 +11,7 @@ import {
 } from '../../ducks/lagret-filter-ui-state';
 import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './mine-filter_innhold.less';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
@@ -37,16 +37,16 @@ function MineFilterRad({mineFilter, oversiktType, enhettiltak}: MineFilterRadPro
     const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
-    const mapTiltakTilLabel = () => {
-        let counter = 0;
+    const [tiltaksfeil, setTiltaksfeil] = useState(false);
+
+    useEffect(() => {
         mineFilter.filterValg.tiltakstyper.map(tiltak => {
             if (enhettiltak && enhettiltak[tiltak] === undefined) {
-                counter++;
+                setTiltaksfeil(true);
             }
-            return counter;
+            return tiltaksfeil;
         });
-        return counter;
-    };
+    });
 
     function velgFilter() {
         logEvent(
@@ -59,7 +59,7 @@ function MineFilterRad({mineFilter, oversiktType, enhettiltak}: MineFilterRadPro
             }
         );
 
-        if (mapTiltakTilLabel()) {
+        if (tiltaksfeil) {
             dispatch(markerMineFilter(mineFilter, oversiktType));
             dispatch(apneFeilTiltakModal(oversiktType));
             dispatch(avmarkerValgtMineFilter(oversiktType));
