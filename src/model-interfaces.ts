@@ -32,7 +32,7 @@ export enum Sorteringsfelt {
     MOTER_IDAG = 'moterMedNAVIdag',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
-    ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
+    ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarligveilederforvedtak',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
     SISTE_ENDRING = 'siste_endring_kategori',
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt'
