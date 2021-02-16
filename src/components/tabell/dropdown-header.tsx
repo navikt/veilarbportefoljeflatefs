@@ -22,7 +22,6 @@ function DropdownHeader({sortering, onClick, rekkefolge, erValgt, headerId, teks
     const [blaPrikkSkalVises, setblaPrikkSkalVises] = useState(true);
 
     return (
-        <div className="dropdown-header-wrapper">
             <SorteringHeader
                 sortering={sortering}
                 onClick={onClick}
@@ -33,25 +32,30 @@ function DropdownHeader({sortering, onClick, rekkefolge, erValgt, headerId, teks
                 title="Blå prikk"
                 headerId={headerId}
             />
-            {/*<Dropdown*/}
-            {/*    id="test"*/}
-            {/*    className="dropdown-header"*/}
-            {/*    render={() => (*/}
-            {/*        <div className="dropdown-header__innhold">*/}
-            {/*            <div className="dropdown-header__toggle">*/}
-            {/*                <ToggleSwitch*/}
-            {/*                    onChange={() => setblaPrikkSkalVises(!blaPrikkSkalVises)}*/}
-            {/*                    ariaLabel={'Skru av/på blå prikk'}*/}
-            {/*                    checked={blaPrikkSkalVises}*/}
-            {/*                    defaultChecked={true}*/}
-            {/*                />*/}
-            {/*                <label className="dropdown-header__toggle-label">Skru av/på</label>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*/>*/}
-        </div>
+
     );
 }
 
 export default DropdownHeader;
+
+
+
+// <div className="dropdown-header-wrapper">
+{/*<Dropdown*/}
+{/*    id="test"*/}
+{/*    className="dropdown-header"*/}
+{/*    render={() => (*/}
+{/*        <div className="dropdown-header__innhold">*/}
+{/*            <div className="dropdown-header__toggle">*/}
+{/*                <ToggleSwitch*/}
+{/*                    onChange={() => setblaPrikkSkalVises(!blaPrikkSkalVises)}*/}
+{/*                    ariaLabel={'Skru av/på blå prikk'}*/}
+{/*                    checked={blaPrikkSkalVises}*/}
+{/*                    defaultChecked={true}*/}
+{/*                />*/}
+{/*                <label className="dropdown-header__toggle-label">Skru av/på</label>*/}
+{/*            </div>*/}
+{/*        </div>*/}
+{/*    )}*/}
+{/*/>*/}
+// </div>
