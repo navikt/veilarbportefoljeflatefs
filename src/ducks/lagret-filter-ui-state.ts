@@ -13,18 +13,23 @@ export const AVMARKER_VEILEDER_GRUPPE = 'lagretfilter_velg/AVMARKER_VEILEDER_GRU
 export const APEN_MINE_FILTER_MODAL = 'lagretfilter_velg/APEN_MINE_FILTER_MODAL';
 export const LUKK_MINE_FILTER_MODAL = 'lagretfilter_velg/LUKK_MINE_FILTER_MODAL';
 
+export const APNE_FEIL_TILTAK_MODAL = 'lagretfilter_velg/APNE_FEIL_TILTAK_MODAL';
+export const LUKK_FEIL_TILTAK_MODAL = 'lagretfilter_velg/LUKK_FEIL_TILTAK_MODAL';
+
 export interface LagretFilterUIState {
     valgtMineFilter: OrNothing<LagretFilter>;
     valgtVeiledergruppe: OrNothing<LagretFilter>;
     sisteValgtMineFilter: OrNothing<number>;
     erModalApen: boolean;
+    erFeilTiltakModalApen: boolean;
 }
 
 const initialState = {
     valgtMineFilter: null,
     valgtVeiledergruppe: null,
     sisteValgtMineFilter: null,
-    erModalApen: false
+    erModalApen: false,
+    erFeilTiltakModalApen: false
 };
 
 //  Reducer
@@ -48,6 +53,10 @@ export default function reducer(state: LagretFilterUIState = initialState, actio
             return {...state, erModalApen: true};
         case LUKK_MINE_FILTER_MODAL:
             return {...state, erModalApen: false};
+        case APNE_FEIL_TILTAK_MODAL:
+            return {...state, erFeilTiltakModalApen: true};
+        case LUKK_FEIL_TILTAK_MODAL:
+            return {...state, erFeilTiltakModalApen: false};
         default:
             return state;
     }
@@ -101,6 +110,19 @@ export function apneMineFilterModal(oversiktType: string) {
 export function lukkMineFilterModal(oversiktType: string) {
     return {
         type: LUKK_MINE_FILTER_MODAL,
+        name: oversiktType
+    };
+}
+export function apneFeilTiltakModal(oversiktType: string) {
+    return {
+        type: APNE_FEIL_TILTAK_MODAL,
+        name: oversiktType
+    };
+}
+
+export function lukkFeilTiltakModal(oversiktType: string) {
+    return {
+        type: LUKK_FEIL_TILTAK_MODAL,
         name: oversiktType
     };
 }

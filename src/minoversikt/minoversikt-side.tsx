@@ -17,7 +17,7 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.less';
@@ -40,6 +40,9 @@ import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selecto
 import {useParams} from 'react-router';
 import AlertStripe from 'nav-frontend-alertstriper';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
+import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
+import {AppState} from '../reducer';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -97,6 +100,15 @@ export default function MinoversiktSide() {
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     }, [scrolling]);
+
+    const {sisteValgtMineFilter} = useSelector((state: AppState) => state.mineFilterMinOversikt);
+
+    const data = useSelector((state: AppState) => state.mineFilter.data);
+    const lagretFilterNavn = filterId =>
+        data
+            .filter(elem => elem.filterId === filterId)
+            .map(elem => elem.filterNavn)
+            .toString();
 
     return (
         <DocumentTitle title="Min oversikt">
@@ -213,6 +225,12 @@ export default function MinoversiktSide() {
                     </MinOversiktWrapper>
                 </Innholdslaster>
                 <MineFilterModal oversiktType={oversiktType} />
+                <FeilTiltakModal
+                    lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
+                    filterId={sisteValgtMineFilter!}
+                    oversiktType={oversiktType}
+                    gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+                />
             </div>
         </DocumentTitle>
     );
