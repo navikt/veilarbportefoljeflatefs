@@ -9,6 +9,8 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import {useDispatch} from 'react-redux';
 import {slettFilter} from '../../ducks/mine-filter';
+import {OrNothing} from '../../utils/types/types';
+import {Tiltak} from '../../ducks/enhettiltak';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -16,13 +18,14 @@ interface LagredeFilterInnholdProps {
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+    enhettiltak: OrNothing<Tiltak>;
 }
 
 function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
+function MineFilterInnhold(props: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
@@ -67,6 +70,7 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
                         oversiktType={props.oversiktType}
                         isDraggable={props.isDraggable}
                         setisDraggable={props.setisDraggable}
+                        enhettiltak={props.enhettiltak}
                     />
                 </div>
             </>
@@ -84,4 +88,4 @@ function LagredeFilterInnhold(props: LagredeFilterInnholdProps) {
     return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
 }
 
-export default LagredeFilterInnhold;
+export default MineFilterInnhold;

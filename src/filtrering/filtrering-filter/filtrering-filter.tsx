@@ -42,7 +42,6 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
-
     return (
         <div
             className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
