@@ -42,11 +42,6 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
-    if (enhettiltak != null) {
-        console.log(enhettiltak);
-        // @ts-ignore
-        enhettiltak['TULLETOES'] = 'Tull for testing';
-    }
     return (
         <div
             className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
