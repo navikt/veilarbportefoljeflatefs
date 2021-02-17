@@ -1,10 +1,10 @@
 import {Label, Radio} from 'nav-frontend-skjema';
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels} from '../../filter-konstanter';
 import './filterform.less';
-import {useEffect, useState} from 'react';
 import {kebabCase} from '../../../utils/utils';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {HENDELSE_MEDISINSKBEHANDLING} from '../../../konstanter';
@@ -96,6 +96,19 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                             data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
                         />
                     ))}
+                </div>
+
+                <Label htmlFor="andreMuligheter">Andre </Label>
+                <div className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
+                    <Radio
+                        onChange={e => onChange(e)}
+                        label={hendelserLabels['MAL']}
+                        name="sisteEndringKategori"
+                        value={'MAL'}
+                        checked={hendelserValg.includes('MAL')}
+                        key={'MAL'}
+                        data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
+                    />
                 </div>
             </div>
             <NullstillValgKnapp
