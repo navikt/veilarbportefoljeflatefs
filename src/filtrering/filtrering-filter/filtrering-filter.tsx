@@ -32,11 +32,13 @@ import {RadioFilterform} from './filterform/radio-filterform';
 import AktivitetFilterform from './filterform/aktivitet-filterform';
 import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
+import {OrNothing} from '../../utils/types/types';
+import {Tiltak} from '../../ducks/enhettiltak';
 
 interface FiltreringFilterProps {
     filtervalg: any;
     endreFiltervalg: (filterId: string, filterVerdi: any) => void;
-    enhettiltak;
+    enhettiltak: any;
 }
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
