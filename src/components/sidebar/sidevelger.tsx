@@ -68,7 +68,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: Si
         );
     } else if (selectedTabData.tittel === 'Mine filter') {
         return (
-            <MineFilterTab oversiktType={oversiktType} selectedTabData={selectedTabData} />
+            <MineFilterTab oversiktType={oversiktType} selectedTabData={selectedTabData} enhettiltak={enhettiltak} />
         );
     }
     return null;

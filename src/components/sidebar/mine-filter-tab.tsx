@@ -10,6 +10,8 @@ import Sidebar from './sidebar';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
+import {OrNothing} from '../../utils/types/types';
+import {Tiltak} from '../../ducks/enhettiltak';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -27,9 +29,10 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
 interface SidevelgerProps {
     selectedTabData: Sidebar;
     oversiktType: OversiktType;
+    enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({selectedTabData, oversiktType}: SidevelgerProps) {
+function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerProps) {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -80,6 +83,7 @@ function MineFilterTab({selectedTabData, oversiktType}: SidevelgerProps) {
                 sortertMineFilter={mineFilter.sort(sortMineFilter)}
                 isDraggable={isMinefiltereDraggable}
                 setisDraggable={setIsMinefiltereDraggable}
+                enhettiltak={enhettiltak}
             />
         </SidebarTab>
     );

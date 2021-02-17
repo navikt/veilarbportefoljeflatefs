@@ -10,7 +10,8 @@ export const mineFilter = () => {
             filterValg: {
                 ...initialState,
                 alder: ['20-24'],
-                ferdigfilterListe: ['MOTER_IDAG']
+                ferdigfilterListe: ['MOTER_IDAG'],
+                tiltakstyper: ['UTDYRK']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: null,
@@ -18,12 +19,13 @@ export const mineFilter = () => {
             note: ''
         },
         {
-            filterNavn: '10. Spesiell tilpasset innsats',
+            filterNavn: 'TiltaksFilter',
             filterId: 2,
             filterValg: {
                 ...initialState,
                 innsatsgruppe: ['BATT'],
-                formidlingsgruppe: ['ARBS']
+                formidlingsgruppe: ['ARBS'],
+                tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
             opprettetDato: faker.date.between(new Date('2015-01-01'), new Date()),
             sortOrder: null,

@@ -7,15 +7,18 @@ import {useDispatch} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OrNothing} from '../../../utils/types/types';
+import {Tiltak} from '../../../ducks/enhettiltak';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
     oversiktType: OversiktType;
     isDraggable: boolean;
     setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+    enhettiltak: OrNothing<Tiltak>;
 }
 
-function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable}: DragAndDropProps) {
+function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable, enhettiltak}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const dispatch = useDispatch();
@@ -64,7 +67,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} />
+                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} enhettiltak={enhettiltak}/>
             ))}
         </>
     );
