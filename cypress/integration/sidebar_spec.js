@@ -215,14 +215,13 @@ describe('Mine filter', () => {
             .first()
             .next()
             .next()
-            .next()
             .contains(testFilterNavn);
 
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 3)
+            .should('have.value', 2)
             .click()
-            .type('{shift}{downarrow}');
+            .type('{shift}{downarrow}{downarrow}');
 
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
@@ -278,12 +277,23 @@ describe('Mine filter', () => {
             .children()
             .first()
             .next()
-            .next()
             .contains(testFilterNavn);
 
         cy.getByTestId('filtreringlabel')
             .contains('Møte med NAV idag')
             .click();
+    });
+
+    it('Tiltaksfilter borte fra lagret filter', () => {
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 5);
+        cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
+
+        cy.getByTestId('la-sta-knapp').click();
+        cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
+
+        cy.getByTestId('slett-knapp').click();
+        cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
+        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', 4);
     });
 });
 
