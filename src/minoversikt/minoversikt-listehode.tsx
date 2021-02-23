@@ -262,7 +262,7 @@ function MinOversiktListeHode({
                         ferdigfilterListe.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
-                    tekst="Status oppfølgingsvedtak"
+                    tekst="Status § 14a-vedtak"
                     className="col col-xs-2"
                     title="Status oppfølgingvedtak"
                     headerId="vedtakstatus"
@@ -287,7 +287,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
-                    tekst="Ansvarlig veileder for vedtak"
+                    tekst="Ansvarlig for vedtak"
                     skalVises={
                         !!ferdigfilterListe &&
                         ferdigfilterListe.includes(UNDER_VURDERING) &&
