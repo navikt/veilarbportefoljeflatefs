@@ -18,7 +18,6 @@ import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
-import '../components/tabell/dropdown-header.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {OrNothing} from '../utils/types/types';
 
