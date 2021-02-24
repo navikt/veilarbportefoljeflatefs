@@ -16,7 +16,7 @@ interface DropdownProps {
     hoyre?: boolean;
     apen?: boolean;
     disabled?: boolean;
-    name?: React.ReactNode;
+    name: React.ReactNode;
     id: string;
     render: (lukkDropdown: () => void) => React.ReactChild;
     className?: string;
