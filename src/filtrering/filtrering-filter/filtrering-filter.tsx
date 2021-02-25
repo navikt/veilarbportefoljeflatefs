@@ -32,14 +32,16 @@ import {RadioFilterform} from './filterform/radio-filterform';
 import AktivitetFilterform from './filterform/aktivitet-filterform';
 import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 interface FiltreringFilterProps {
     filtervalg: any;
     endreFiltervalg: (filterId: string, filterVerdi: any) => void;
     enhettiltak: any;
+    oversiktType: OversiktType;
 }
 
-function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: FiltreringFilterProps) {
+function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
     return (
@@ -98,6 +100,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak}: Filtrering
                                 form="sisteEndringKategori"
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
+                                oversiktType={oversiktType}
                             />
                         )}
                     />

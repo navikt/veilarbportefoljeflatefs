@@ -53,6 +53,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: Si
                     endreFiltervalg={doEndreFiltervalg}
                     filtervalg={filtervalg}
                     enhettiltak={enhettiltak}
+                    oversiktType={oversiktType}
                 />
             </SidebarTab>
         );

@@ -67,7 +67,7 @@ export const ferdigfilterListe = {
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
-    MIN_ARBEIDSLISTE: 'Min arbeidsliste',
+    MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 };
 
 export const arbeidslisteKategori = {
@@ -248,6 +248,10 @@ export const utdanningBestatt = {
     NEI: 'Nei'
 };
 
+export const ulesteEndringer = {
+    ULESTE_ENDRINGER: 'Uleste endringer'
+};
+
 export const hendelserLabels = {
     MAL: 'Endring i mål',
     NY_STILLING: 'En jobb jeg vil søke på',
@@ -312,5 +316,6 @@ export default {
     utdanningBestatt,
     utdanningGodkjent,
     hendelserEtikett,
-    hendelserLabels
+    hendelserLabels,
+    ulesteEndringer
 };

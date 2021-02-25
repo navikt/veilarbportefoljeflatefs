@@ -84,7 +84,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                     />
                 ))}
             </div>
-            <div className="blokk-xxs radio-filterform__under-valg">
+            <div className="blokk-xxs filterform__under-valg">
                 <Knapp
                     onClick={btnOnClick}
                     className={classNames('knapp', 'knapp--mini', {

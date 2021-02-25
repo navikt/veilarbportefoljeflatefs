@@ -87,7 +87,7 @@ function finnSlettetGruppe(store: any, filterId: number) {
     return undefined;
 }
 
-export function finnFiltergruppe(sideNavn) {
+export function finnOversiktType(sideNavn) {
     if (sideNavn === 'MIN_OVERSIKT') {
         return OversiktType.minOversikt;
     } else if (sideNavn === 'ENHETENS_OVERSIKT') {

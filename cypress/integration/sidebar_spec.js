@@ -569,7 +569,7 @@ describe('Filter', () => {
             .click();
     });
 
-    it('Hendelser-filterform', () => {
+    it('Hendelser-filterform - Enhetens oversikt', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori')
             .contains('Siste endring av bruker')
             .click();
@@ -615,6 +615,30 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel')
             .contains('Aktivitet lagt til: Jobb jeg har nå')
             .click();
+    });
+
+    it('Hendelser-filterform - Min oversikt', () => {
+        cy.gaTilOversikt('min-oversikt');
+
+        cy.klikkTab('FILTER');
+
+        cy.getByTestId('dropdown-knapp_sisteEndringKategori')
+            .contains('Siste endring av bruker')
+            .click();
+
+        cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
+
+        cy.checkbox('filter_uleste-endringer');
+
+        cy.getByTestId('filtreringlabel').contains('Aktivitet lagt til: Jobb jeg har nå');
+
+        cy.getByTestId('filtreringlabel').contains('Uleste endringer');
+
+        cy.getByTestId('hendelser-filterform_nullstill-knapp')
+            .contains('Nullstill')
+            .click();
+
+        cy.gaTilOversikt('enhetens-oversikt');
     });
 
     it('Double checkbox-filterform', () => {
