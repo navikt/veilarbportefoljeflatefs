@@ -261,7 +261,7 @@ function EnhetListehode({
                         ferdigfilterListe.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
-                    tekst="Status oppfølgingsvedtak"
+                    tekst="Status § 14a-vedtak"
                     className="col col-xs-2"
                     title="Status oppfølgingvedtak"
                     headerId="vedtakstatus"
@@ -279,6 +279,21 @@ function EnhetListehode({
                     }
                     className="col col-xs-2"
                     title="Dager siden fikk status"
+                    headerId="vedtakstatus-endret"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    tekst="Ansvarlig for vedtak"
+                    skalVises={
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(UNDER_VURDERING) &&
+                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
+                    }
+                    className="col col-xs-2"
+                    title="Ansvarlig veileder for vedtak"
                     headerId="vedtakstatus-endret"
                 />
                 <Header
