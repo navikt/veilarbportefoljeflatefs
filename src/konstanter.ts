@@ -13,7 +13,7 @@ export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
 export const SISTE_ENDRING = 'veilarbportefolje.siste_endring';
 export const HENDELSE_MEDISINSKBEHANDLING = 'veilarbportefolje.hendelse_medisinskbehandling';
-export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer'
+export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,

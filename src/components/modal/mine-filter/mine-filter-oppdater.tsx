@@ -19,9 +19,7 @@ import {endreSideBar} from '../../sidebar/sidebar';
 export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; oversiktType}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const filterValg = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt
-            ? state.filtreringMinoversikt
-            : state.filtreringEnhetensOversikt
+        props.oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );
     const data = useSelector((state: AppState) => state.mineFilter.data);
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false);

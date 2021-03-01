@@ -20,8 +20,6 @@ function TilbakemeldingsskjemaCheckbox({
     handleKommentarChanged,
     handleCheckboxvalgChanged
 }: TilbakemeldingCheckboxProps) {
-
-
     return (
         <form
             className="tilbakemelding-modal__ekspander"

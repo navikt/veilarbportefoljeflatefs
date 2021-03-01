@@ -17,9 +17,7 @@ import {endreSideBar} from '../../sidebar/sidebar';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
     const filterValg = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt
-            ? state.filtreringMinoversikt
-            : state.filtreringEnhetensOversikt
+        props.oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );
     const data = useSelector((state: AppState) => state.mineFilter.data);
     const [filterNavn, setFilterNavn] = useState('');

@@ -67,7 +67,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     return (
         <>
             {dragAndDropOrder.map((filter, idx) => (
-                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} enhettiltak={enhettiltak}/>
+                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} enhettiltak={enhettiltak} />
             ))}
         </>
     );

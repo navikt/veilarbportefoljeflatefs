@@ -204,21 +204,21 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
             />
-          <TekstKolonne
-            tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
-            skalVises={
-              !!ferdigfilterListe &&
-              ferdigfilterListe.includes(UNDER_VURDERING) &&
-              valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-            }
-            className="col col-xs-2"
-          />
-          <SisteEndringKategori
-            bruker={bruker}
-            enhetId={enhetId}
-            skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-            className="col col-xs-2"
-          />
+            <TekstKolonne
+                tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
+                }
+                className="col col-xs-2"
+            />
+            <SisteEndringKategori
+                bruker={bruker}
+                enhetId={enhetId}
+                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                className="col col-xs-2"
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}

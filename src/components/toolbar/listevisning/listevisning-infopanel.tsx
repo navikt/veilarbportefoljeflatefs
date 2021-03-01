@@ -34,7 +34,10 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
             </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span> Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.</span>
-                <Lukknapp className="listevisning--infopanel__lukkKnapp" onClick={() => props.lukkPanel(props.oversiktType)}>
+                <Lukknapp
+                    className="listevisning--infopanel__lukkKnapp"
+                    onClick={() => props.lukkPanel(props.oversiktType)}
+                >
                     Lukk
                 </Lukknapp>
             </div>

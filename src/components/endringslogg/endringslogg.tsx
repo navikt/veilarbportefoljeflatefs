@@ -102,7 +102,7 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
             {props.nyeNotifikasjoner && (
                 <div className="ring-container">
                     <div className="ringring" />
-                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner"/>
+                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
                 </div>
             )}
         </button>
