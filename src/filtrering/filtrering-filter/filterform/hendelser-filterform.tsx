@@ -21,10 +21,12 @@ interface HendelserFilterformProps {
 
 export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversiktType}: HendelserFilterformProps) {
     const erMedisinskBehandlingFeatureTogglePa = useFeatureSelector()(HENDELSE_MEDISINSKBEHANDLING);
+    const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
+
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
     const [checkboxValg, setCheckboxValg] = useState<string[]>(filtervalg[form]);
+
     const ulestTittel = ulesteEndringer.ULESTE_ENDRINGER;
-    const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);

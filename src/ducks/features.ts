@@ -22,7 +22,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [SISTE_ENDRING]: false,
-    [HENDELSE_MEDISINSKBEHANDLING]: true,
+    [HENDELSE_MEDISINSKBEHANDLING]: false,
     [ULESTE_ENDRINGER]: false
 };
 
