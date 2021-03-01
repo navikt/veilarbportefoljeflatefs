@@ -95,7 +95,9 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
                             type={PopoverOrientering.Hoyre}
                             className={`hjelpetekst__${kebabCase(ulestTittel)}`}
                         >
-                            Filteret viser brukere som har uleste endringer.
+                            Filteret viser brukere som har endret målet, lagt til, fullført
+                            <br />
+                            eller avbrutt en aktivitet siden du sist var inne på aktivitetsplanen.
                         </Hjelpetekst>
                     </div>
                 ) : (
