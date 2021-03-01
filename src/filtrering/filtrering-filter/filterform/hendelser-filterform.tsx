@@ -7,7 +7,7 @@ import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {HENDELSE_MEDISINSKBEHANDLING} from '../../../konstanter';
+import {HENDELSE_MEDISINSKBEHANDLING, ULESTE_ENDRINGER} from '../../../konstanter';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import {OversiktType} from '../../../ducks/ui/listevisning';
@@ -24,6 +24,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
     const [checkboxValg, setCheckboxValg] = useState<string[]>(filtervalg[form]);
     const ulestTittel = ulesteEndringer.ULESTE_ENDRINGER;
+    const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
@@ -74,7 +75,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
-                {oversiktType === OversiktType.minOversikt ? (
+                {erUlesteEndringerFeatureTogglePa && oversiktType === OversiktType.minOversikt ? (
                     <div className="hendelser-filterform__checkbox-gruppe">
                         <div className={kebabCase(ulestTittel)}>
                             <input
