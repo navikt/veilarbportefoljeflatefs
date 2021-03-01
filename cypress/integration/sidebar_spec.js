@@ -225,7 +225,7 @@ describe('Mine filter', () => {
 
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
-            .should('have.value', 2);
+            .should('have.value', 4);
 
         cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
 
