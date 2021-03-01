@@ -3,29 +3,43 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
-import {hendelserLabels} from '../../filter-konstanter';
+import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {HENDELSE_MEDISINSKBEHANDLING} from '../../../konstanter';
+import {HENDELSE_MEDISINSKBEHANDLING, ULESTE_ENDRINGER} from '../../../konstanter';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import {PopoverOrientering} from 'nav-frontend-popover';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 interface HendelserFilterformProps {
     form: string;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
+    oversiktType: OversiktType;
 }
 
-export function HendelserFilterform({form, filtervalg, endreFiltervalg}: HendelserFilterformProps) {
+export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversiktType}: HendelserFilterformProps) {
     const erMedisinskBehandlingFeatureTogglePa = useFeatureSelector()(HENDELSE_MEDISINSKBEHANDLING);
+    const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
+
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
+    const [checkboxValg, setCheckboxValg] = useState<string[]>(filtervalg[form]);
+
+    const ulestTittel = ulesteEndringer.ULESTE_ENDRINGER;
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
+        endreFiltervalg('ulesteEndringer', []);
     };
 
     useEffect(() => {
         setHendelserValg(filtervalg[form]);
     }, [filtervalg, form]);
+
+    useEffect(() => {
+        setCheckboxValg(filtervalg['ulesteEndringer']);
+    }, [filtervalg]);
 
     const onChange = e => {
         e.persist();
@@ -50,9 +64,48 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
         'AVBRUTT_SOKEAVTALE'
     ];
 
+    const velgCheckBox = e => {
+        e.persist();
+        return e.target.checked
+            ? endreFiltervalg('ulesteEndringer', [...checkboxValg, e.target.value])
+            : endreFiltervalg(
+                  'ulesteEndringer',
+                  checkboxValg.filter(value => value !== e.target.value)
+              );
+    };
+
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
+                {erUlesteEndringerFeatureTogglePa && oversiktType === OversiktType.minOversikt ? (
+                    <div className="hendelser-filterform__checkbox-gruppe">
+                        <div className={kebabCase(ulestTittel)}>
+                            <input
+                                id={kebabCase(ulestTittel)}
+                                type="checkbox"
+                                className="skjemaelement__input checkboks"
+                                value={ulestTittel}
+                                checked={checkboxValg.includes(ulestTittel)}
+                                onChange={velgCheckBox}
+                                data-testid={`filter_${kebabCase(ulestTittel)}`}
+                            />
+                            <label htmlFor={kebabCase(ulestTittel)} className="skjemaelement__label">
+                                {ulestTittel}
+                            </label>
+                        </div>
+                        <Hjelpetekst
+                            type={PopoverOrientering.Hoyre}
+                            className={`hjelpetekst__${kebabCase(ulestTittel)}`}
+                        >
+                            Filteret viser brukere som har endret målet, lagt til, fullført
+                            <br />
+                            eller avbrutt en aktivitet siden du sist var inne på aktivitetsplanen.
+                        </Hjelpetekst>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
                 <Label htmlFor="lagtTilAvBruker">Siste aktivitet lagt til av bruker</Label>
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
                     {lagtTilAvBruker.map(key => (
@@ -115,7 +168,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg}: Hendels
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={hendelserValg.length <= 0}
+                disabled={hendelserValg.length <= 0 && checkboxValg.length <= 0}
             />
         </form>
     );

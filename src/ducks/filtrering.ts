@@ -67,7 +67,8 @@ export const initialState: FiltervalgModell = {
     utdanning: [],
     utdanningGodkjent: [],
     utdanningBestatt: [],
-    sisteEndringKategori: []
+    sisteEndringKategori: [],
+    ulesteEndringer: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {
