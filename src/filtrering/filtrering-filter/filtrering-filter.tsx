@@ -100,6 +100,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 form="sisteEndringKategori"
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
+                                endreCheckboxFiltervalg={endreFiltervalg}
                                 oversiktType={oversiktType}
                             />
                         )}

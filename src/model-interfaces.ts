@@ -66,7 +66,7 @@ export interface FiltervalgModell {
     utdanningGodkjent: string[];
     utdanningBestatt: string[];
     sisteEndringKategori: string[];
-    ulesteEndringer: string[];
+    ulesteEndringer: null | string;
 }
 
 export interface EnhetModell {

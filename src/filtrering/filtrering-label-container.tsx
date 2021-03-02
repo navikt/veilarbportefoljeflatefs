@@ -5,6 +5,7 @@ import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
+    ulesteEndringer,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -137,6 +138,14 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
+            } else if (key === 'ulesteEndringer' && value === 'ULESTE_ENDRINGER') {
+                return [
+                    <FiltreringLabel
+                        key={key}
+                        label={hendelserEtikett['ULESTE_ENDRINGER']}
+                        slettFilter={() => slettEnkelt(key, false)}
+                    />
+                ];
             } else if (value === true) {
                 return [
                     <FiltreringLabel

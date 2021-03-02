@@ -11,26 +11,32 @@ import {HENDELSE_MEDISINSKBEHANDLING, ULESTE_ENDRINGER} from '../../../konstante
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import {OrNothing} from '../../../utils/types/types';
 
 interface HendelserFilterformProps {
     form: string;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreCheckboxFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
 }
 
-export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversiktType}: HendelserFilterformProps) {
+export function HendelserFilterform({
+    form,
+    filtervalg,
+    endreFiltervalg,
+    endreCheckboxFiltervalg,
+    oversiktType
+}: HendelserFilterformProps) {
     const erMedisinskBehandlingFeatureTogglePa = useFeatureSelector()(HENDELSE_MEDISINSKBEHANDLING);
     const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
 
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
-    const [checkboxValg, setCheckboxValg] = useState<string[]>(filtervalg[form]);
-
-    const ulestTittel = ulesteEndringer.ULESTE_ENDRINGER;
+    const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
-        endreFiltervalg('ulesteEndringer', []);
+        endreCheckboxFiltervalg('ulesteEndringer', null);
     };
 
     useEffect(() => {
@@ -41,9 +47,16 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
         setCheckboxValg(filtervalg['ulesteEndringer']);
     }, [filtervalg]);
 
-    const onChange = e => {
+    const onRadioChange = e => {
         e.persist();
         endreFiltervalg(form, [e.target.value]);
+    };
+
+    const onCheckboxChange = e => {
+        e.persist();
+        return e.target.checked
+            ? endreCheckboxFiltervalg('ulesteEndringer', e.target.value)
+            : endreCheckboxFiltervalg('ulesteEndringer', null);
     };
 
     const lagtTilAvBruker = erMedisinskBehandlingFeatureTogglePa
@@ -64,53 +77,44 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
         'AVBRUTT_SOKEAVTALE'
     ];
 
-    const velgCheckBox = e => {
-        e.persist();
-        return e.target.checked
-            ? endreFiltervalg('ulesteEndringer', [...checkboxValg, e.target.value])
-            : endreFiltervalg(
-                  'ulesteEndringer',
-                  checkboxValg.filter(value => value !== e.target.value)
-              );
-    };
-
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
-                {erUlesteEndringerFeatureTogglePa && oversiktType === OversiktType.minOversikt ? (
+                {erUlesteEndringerFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
                     <div className="hendelser-filterform__checkbox-gruppe">
-                        <div className={kebabCase(ulestTittel)}>
+                        <div className={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}>
                             <input
-                                id={kebabCase(ulestTittel)}
+                                id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
                                 type="checkbox"
                                 className="skjemaelement__input checkboks"
-                                value={ulestTittel}
-                                checked={checkboxValg.includes(ulestTittel)}
-                                onChange={velgCheckBox}
-                                data-testid={`filter_${kebabCase(ulestTittel)}`}
+                                value="ULESTE_ENDRINGER"
+                                checked={checkboxValg === 'ULESTE_ENDRINGER'}
+                                onChange={e => onCheckboxChange(e)}
+                                data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                             />
-                            <label htmlFor={kebabCase(ulestTittel)} className="skjemaelement__label">
-                                {ulestTittel}
+                            <label
+                                htmlFor={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
+                                className="skjemaelement__label"
+                            >
+                                {ulesteEndringer.ULESTE_ENDRINGER}
                             </label>
                         </div>
                         <Hjelpetekst
                             type={PopoverOrientering.Hoyre}
-                            className={`hjelpetekst__${kebabCase(ulestTittel)}`}
+                            className={`hjelpetekst__${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                         >
                             Filteret viser brukere som har endret målet, lagt til, fullført
                             <br />
                             eller avbrutt en aktivitet siden du sist var inne på aktivitetsplanen.
                         </Hjelpetekst>
                     </div>
-                ) : (
-                    <></>
                 )}
 
                 <Label htmlFor="lagtTilAvBruker">Siste aktivitet lagt til av bruker</Label>
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
                     {lagtTilAvBruker.map(key => (
                         <Radio
-                            onChange={e => onChange(e)}
+                            onChange={e => onRadioChange(e)}
                             label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
@@ -125,7 +129,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
                 <div className="hendelser-filterform__radio-gruppe" id="fullfortAvBruker">
                     {fullfortAvBruker.map(key => (
                         <Radio
-                            onChange={e => onChange(e)}
+                            onChange={e => onRadioChange(e)}
                             label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
@@ -140,7 +144,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
                 <div className="hendelser-filterform__radio-gruppe" id="avbruttAvBruker">
                     {avbruttAvBruker.map(key => (
                         <Radio
-                            onChange={e => onChange(e)}
+                            onChange={e => onRadioChange(e)}
                             label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
@@ -154,7 +158,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
                 <Label htmlFor="andreMuligheter">Andre </Label>
                 <div className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
                     <Radio
-                        onChange={e => onChange(e)}
+                        onChange={e => onRadioChange(e)}
                         label={hendelserLabels['MAL']}
                         name="sisteEndringKategori"
                         value={'MAL'}
@@ -168,7 +172,7 @@ export function HendelserFilterform({form, filtervalg, endreFiltervalg, oversikt
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={hendelserValg.length <= 0 && checkboxValg.length <= 0}
+                disabled={hendelserValg.length <= 0 && checkboxValg !== null}
             />
         </form>
     );

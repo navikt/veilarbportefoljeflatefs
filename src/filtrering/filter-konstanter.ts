@@ -273,6 +273,7 @@ export const hendelserLabels = {
 };
 
 export const hendelserEtikett = {
+    ULESTE_ENDRINGER: 'Uleste endringer (Siste endring av bruker)',
     MAL: 'Endring i mål',
     NY_STILLING: 'Aktivitet lagt til: En jobb jeg vil søke på',
     NY_IJOBB: 'Aktivitet lagt til: Jobb jeg har nå',
