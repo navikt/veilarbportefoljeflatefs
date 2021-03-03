@@ -48,7 +48,7 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                 tittel="Tiltaksfilter finnes ikke"
             >
                 <Normaltekst>
-                    Ett eller flere av tiltakstypene du har lagret finnes ikke lenger som filter. Det kan skyldes at det
+                    En eller flere av tiltakstypene du har lagret finnes ikke lenger som filter. Det kan skyldes at det
                     ikke er brukere som deltar på tiltakene akkurat nå.
                     <br />
                     <br />
