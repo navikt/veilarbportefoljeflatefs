@@ -5,7 +5,6 @@ import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
-    ulesteEndringer,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
