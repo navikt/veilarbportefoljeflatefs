@@ -25,7 +25,7 @@ before('Start server', () => {
     cy.configure();
 });
 
-describe.only('Mine filter', () => {
+describe('Mine filter', () => {
     it('Finn antall filter', () => {
         cy.gaTilOversikt('enhetens-oversikt');
 
@@ -235,8 +235,6 @@ describe.only('Mine filter', () => {
             .children()
             .last()
             .contains(testFilterNavn);
-
-        cy.wait(1000);
     });
 
     it('Drag and drop - Verifiser avbryt-knapp', () => {
