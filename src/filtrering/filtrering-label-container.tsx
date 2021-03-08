@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
+    aktiviteter,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
     UTLOPTE_AKTIVITETER,
@@ -66,6 +67,7 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
+            // {console.log("kmfha", key, value);}
             if (key === 'utdanningBestatt') {
                 return value.map(singleValue => {
                     return (
@@ -134,6 +136,16 @@ function FiltreringLabelContainer({
                             label={FilterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             kategori={singleValue}
+                        />
+                    );
+                });
+            } else if (key === 'aktiviteterForenklet') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={singleValue}
+                            label={aktiviteter[singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
                 });

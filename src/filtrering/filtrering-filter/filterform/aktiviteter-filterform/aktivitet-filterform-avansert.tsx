@@ -1,73 +1,58 @@
-import React, {useEffect, useState} from 'react';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../ducks/filtrering';
-import './filterform.less';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
-import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell} from '../../../model-interfaces';
+import React from 'react';
+import '../filterform.less';
+import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import {Dictionary} from '../../../../utils/types/types';
+import {FiltervalgModell} from '../../../../model-interfaces';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
     endreFiltervalg: (form: string, filterVerdi: any) => void;
+    klikkPaForenkletLenke: () => void;
+    nullstillAvanserteAktiviteter: () => void;
+    nullstillForenkledeAktiviteter: () => void;
+    valgteAvanserteAktiviteter: any;
 }
 
-const aktivitetInitialState: FiltreringAktiviteterValg = {
-    BEHANDLING: AktiviteterValg.NA,
-    EGEN: AktiviteterValg.NA,
-    GRUPPEAKTIVITET: AktiviteterValg.NA,
-    IJOBB: AktiviteterValg.NA,
-    MOTE: AktiviteterValg.NA,
-    SOKEAVTALE: AktiviteterValg.NA,
-    STILLING: AktiviteterValg.NA,
-    TILTAK: AktiviteterValg.NA,
-    UTDANNINGAKTIVITET: AktiviteterValg.NA
-};
-
-function AktivitetFilterform(props: AktivitetFilterformProps) {
-    const {valg, filtervalg, endreFiltervalg} = props;
-    const [valgteAktiviteter, setValgteAktiviteter] = useState<FiltreringAktiviteterValg>(
-        Object.assign({}, aktivitetInitialState, props.filtervalg.aktiviteter)
-    );
-
-    useEffect(() => {
-        setValgteAktiviteter(Object.assign({}, aktivitetInitialState, filtervalg.aktiviteter));
-    }, [filtervalg.aktiviteter]);
-
+function AktivitetFilterformAvansert({
+    valg,
+    filtervalg,
+    endreFiltervalg,
+                                         klikkPaForenkletLenke,
+    nullstillForenkledeAktiviteter,
+    nullstillAvanserteAktiviteter,
+    valgteAvanserteAktiviteter
+}: AktivitetFilterformProps) {
     const handleChange = (aktivitetKey, verdi) => {
+        if (filtervalg.aktiviteterForenklet.length > 0) {
+            nullstillForenkledeAktiviteter();
+        }
         endreFiltervalg('aktiviteter', {
-            ...valgteAktiviteter,
+            ...valgteAvanserteAktiviteter,
             [aktivitetKey]: verdi
         });
     };
 
-    const harValg =
-        valgteAktiviteter.BEHANDLING !== 'NA' ||
-        valgteAktiviteter.EGEN !== 'NA' ||
-        valgteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
-        valgteAktiviteter.IJOBB !== 'NA' ||
-        valgteAktiviteter.MOTE !== 'NA' ||
-        valgteAktiviteter.SOKEAVTALE !== 'NA' ||
-        valgteAktiviteter.STILLING !== 'NA' ||
-        valgteAktiviteter.TILTAK !== 'NA' ||
-        valgteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
-
-    const nullstillAktiviteter = () => {
-        setValgteAktiviteter(aktivitetInitialState);
-        endreFiltervalg('aktiviteter', aktivitetInitialState);
-    };
+    const harValgteAvanserteAktiviteter =
+        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
+        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
+        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
+        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
+        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
+        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
+        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
+        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
+        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
     return (
-        <form className="skjema aktivitetfilterform" data-testid="aktivitet-filterform">
+        <form className="skjema aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetvalg__header blokk-xxs">
                 <span className="aktivitetvalg__header--first">Ja</span>
                 <span>Nei</span>
             </div>
-            <div className="aktivitetfilterform__valg">
+            <div className="aktivitetfilterform-avansert__valg">
                 {Object.entries(valg).map(([kode, verdi]) => [
-                    <div
-                        key={`skjemaelement skjemaelement--horisontal aktivitet-${kode}`}
-                        className="aktivitetvalg blokk-xxs"
-                    >
+                    <div key={kode} className="aktivitetvalg blokk-xxs">
                         <span className="aktivitetvalg__tekst">{verdi as string}</span>
                         <div className="radioknapp-gruppe">
                             <input
@@ -75,7 +60,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                                 name={kode}
                                 value="JA"
                                 type="radio"
-                                checked={valgteAktiviteter[kode] === 'JA'}
+                                checked={valgteAvanserteAktiviteter[kode] === 'JA'}
                                 className="skjemaelement__input radioknapp"
                                 onChange={() => handleChange(kode, 'JA')}
                                 key={`Ja, ${verdi}`}
@@ -92,7 +77,7 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                                 name={kode}
                                 value="NEI"
                                 type="radio"
-                                checked={valgteAktiviteter[kode] === 'NEI'}
+                                checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
                                 className="skjemaelement__input radioknapp"
                                 onChange={() => handleChange(kode, 'NEI')}
                                 key={`NEI, ${verdi}`}
@@ -108,13 +93,21 @@ function AktivitetFilterform(props: AktivitetFilterformProps) {
                     </div>
                 ])}
             </div>
-            <NullstillValgKnapp
-                dataTestId="aktivitet-filterform"
-                nullstillValg={nullstillAktiviteter}
-                form="aktiviteter"
-                disabled={!harValg}
-            />
+            <div className="aktivitet-filterform__knappegruppe">
+                <div className="filterknapp-container">
+                    <button type="button" onClick={klikkPaForenkletLenke} className="filterknapp">
+                        Forenklet filter
+                    </button>
+                </div>
+
+                <NullstillValgKnapp
+                    dataTestId="aktivitet-filterform"
+                    nullstillValg={nullstillAvanserteAktiviteter}
+                    form="aktiviteter"
+                    disabled={!harValgteAvanserteAktiviteter}
+                />
+            </div>
         </form>
     );
 }
-export default AktivitetFilterform;
+export default AktivitetFilterformAvansert;

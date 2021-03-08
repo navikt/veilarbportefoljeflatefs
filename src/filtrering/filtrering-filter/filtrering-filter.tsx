@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Element, Normaltekst} from 'nav-frontend-typografi';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
-    aktiviteter,
     alder,
     cvJobbprofil,
     fodselsdagIMnd,
@@ -29,10 +28,10 @@ import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import AktivitetFilterform from './filterform/aktivitet-filterform';
 import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -279,17 +278,15 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     name="Aktivitet"
                     id="aktivitet"
                     render={() => (
-                        <AktivitetFilterform
-                            valg={aktiviteter}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
+                        <AktivitetFilterformController filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown
                     name="Tiltakstype"
                     id="tiltakstype"
-                    disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
+                    disabled={
+                        !(filtervalg.aktiviteter.TILTAK === 'JA') && !filtervalg.aktiviteterForenklet.includes('TILTAK')
+                    }
                     render={() => (
                         <CheckboxFilterform
                             form="tiltakstyper"

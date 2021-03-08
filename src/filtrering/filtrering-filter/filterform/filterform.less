@@ -8,7 +8,7 @@
         margin: 0 0.5rem 0.5rem;
     }
 
-    .aktivitetfilterform {
+    .aktivitetfilterform-avansert {
         label {
             display: inline-block;
         }
@@ -32,6 +32,7 @@
 
         .radioknapp-gruppe {
             flex-shrink: 0;
+            margin-left: 0.5rem;
         }
 
         .radioknapp + label {
@@ -43,8 +44,29 @@
         }
 
         &__valg {
-            padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+            padding: 0.5rem;
             margin-bottom: 0.5rem;
+        }
+    }
+    .aktivitet-filterform__knappegruppe {
+        display: flex;
+        justify-content: space-between;
+
+        .filterknapp-container {
+            padding: 0.5rem;
+            .filterknapp {
+                padding: 0 0.5rem;
+                background-color: transparent;
+                border: none;
+                color: @navBla;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .aktivitetfilterform-forenklet {
+        .aktivitetvalg {
+            margin: 0.5rem;
         }
     }
 
