@@ -670,8 +670,6 @@ describe('Filter', () => {
     });
 
     it('Aktivitet-filterform', () => {
-        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.disabled');
-
         cy.apneLukkeFilterDropdown('aktivitet');
 
         cy.getByTestId('aktivitet-filterform-forenklet').should('exist');
@@ -689,8 +687,6 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV');
 
         cy.getByTestId('filtreringlabel').should('have.length', 2);
-
-        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.enabled');
 
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').click();
 
@@ -826,8 +822,6 @@ describe('Filter', () => {
     });
 
     it('Slett alle filtre', () => {
-        cy.getByTestId('dropdown-knapp_tiltakstype').should('be.disabled');
-
         cy.apneLukkeFilterDropdown('aktivitet');
 
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
