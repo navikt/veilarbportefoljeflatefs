@@ -6,6 +6,7 @@ import {aktiviteter} from '../../../filter-konstanter';
 import AktivitetFilterformAvansert from './aktivitet-filterform-avansert';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../../ducks/filtrering';
 import {logEvent} from '../../../../utils/frontend-logger';
+import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 
 interface AktivitetFilterformProps {
     filtervalg: FiltervalgModell;
@@ -53,7 +54,7 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
 
     const klikkPaLenke = bool => {
         setErForenkletFilterSynlig(bool);
-        logEvent('portefolje.metrikker.aktivitet-lenke', {erForenkletLenke: bool});
+        logEvent('portefolje.metrikker.aktivitet-lenke', {erForenkletLenke: bool, sideNavn: finnSideNavn()});
     };
 
     const harAvanserteAktiviteter =
