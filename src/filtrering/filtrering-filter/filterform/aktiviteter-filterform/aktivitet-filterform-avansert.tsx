@@ -12,16 +12,18 @@ interface AktivitetFilterformProps {
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;
     valgteAvanserteAktiviteter: any;
+    harAvanserteAktiviteter: boolean;
 }
 
 function AktivitetFilterformAvansert({
     valg,
     filtervalg,
     endreFiltervalg,
-                                         klikkPaForenkletLenke,
+    klikkPaForenkletLenke,
     nullstillForenkledeAktiviteter,
     nullstillAvanserteAktiviteter,
-    valgteAvanserteAktiviteter
+    valgteAvanserteAktiviteter,
+    harAvanserteAktiviteter
 }: AktivitetFilterformProps) {
     const handleChange = (aktivitetKey, verdi) => {
         if (filtervalg.aktiviteterForenklet.length > 0) {
@@ -32,17 +34,6 @@ function AktivitetFilterformAvansert({
             [aktivitetKey]: verdi
         });
     };
-
-    const harValgteAvanserteAktiviteter =
-        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
-        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
-        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
-        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
-        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
-        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
-        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
-        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
-        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
     return (
         <form className="skjema aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
@@ -95,7 +86,13 @@ function AktivitetFilterformAvansert({
             </div>
             <div className="aktivitet-filterform__knappegruppe">
                 <div className="filterknapp-container">
-                    <button type="button" onClick={klikkPaForenkletLenke} className="filterknapp">
+                    <button
+                        type="button"
+                        onClick={klikkPaForenkletLenke}
+                        className="filterknapp"
+                        data-testid="aktiviteter_forenklet-filter_knapp"
+                        aria-label="Forenklet aktivitetsfilter"
+                    >
                         Forenklet filter
                     </button>
                 </div>
@@ -104,7 +101,7 @@ function AktivitetFilterformAvansert({
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
                     form="aktiviteter"
-                    disabled={!harValgteAvanserteAktiviteter}
+                    disabled={!harAvanserteAktiviteter}
                 />
             </div>
         </form>

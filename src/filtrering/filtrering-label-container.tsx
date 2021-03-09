@@ -67,7 +67,6 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            // {console.log("kmfha", key, value);}
             if (key === 'utdanningBestatt') {
                 return value.map(singleValue => {
                     return (

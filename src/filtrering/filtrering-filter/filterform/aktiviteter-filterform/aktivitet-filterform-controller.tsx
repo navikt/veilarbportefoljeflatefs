@@ -56,6 +56,17 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
         logEvent('portefolje.metrikker.aktivitet-lenke', {erForenkletLenke: bool});
     };
 
+    const harAvanserteAktiviteter =
+        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
+        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
+        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
+        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
+        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
+        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
+        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
+        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
+        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+
     return (
         <>
             {erForenkletFilterSynlig ? (
@@ -66,6 +77,7 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
                     nullstillAvanserteAktiviteter={nullstillAvanserteAktiviteter}
                     nullstillForenkledeAktiviteter={nullstillForenkledeAktiviteter}
                     valgteForenkledeAktiviteter={valgteForenkledeAktiviteter}
+                    harAvanserteAktiviteter={harAvanserteAktiviteter}
                 />
             ) : (
                 <AktivitetFilterformAvansert
@@ -76,6 +88,7 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
                     nullstillForenkledeAktiviteter={nullstillForenkledeAktiviteter}
                     nullstillAvanserteAktiviteter={nullstillAvanserteAktiviteter}
                     valgteAvanserteAktiviteter={valgteAvanserteAktiviteter}
+                    harAvanserteAktiviteter={harAvanserteAktiviteter}
                 />
             )}
         </>

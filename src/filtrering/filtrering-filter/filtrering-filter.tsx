@@ -295,9 +295,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Tiltakstype"
                     id="tiltakstype"
-                    disabled={
-                        !(filtervalg.aktiviteter.TILTAK === 'JA') && !filtervalg.aktiviteterForenklet.includes('TILTAK')
-                    }
                     render={() => (
                         <CheckboxFilterform
                             form="tiltakstyper"
