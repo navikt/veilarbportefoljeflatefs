@@ -26,10 +26,23 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetFilterformProps) {
-    const [erForenkletFilterSynlig, setErForenkletFilterSynlig] = useState(true);
+
     const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<FiltreringAktiviteterValg>(
         Object.assign({}, aktivitetInitialState, filtervalg.aktiviteter)
     );
+
+    const harAvanserteAktiviteter =
+        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
+        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
+        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
+        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
+        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
+        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
+        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
+        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
+        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+
+    const [erForenkletFilterSynlig, setErForenkletFilterSynlig] = useState(!harAvanserteAktiviteter);
     const [valgteForenkledeAktiviteter, setValgteForenkledeAktiviteter] = useState<string[]>(
         filtervalg['aktiviteterForenklet']
     );
@@ -56,17 +69,6 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
         setErForenkletFilterSynlig(bool);
         logEvent('portefolje.metrikker.aktivitet-lenke', {erForenkletLenke: bool, sideNavn: finnSideNavn()});
     };
-
-    const harAvanserteAktiviteter =
-        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
-        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
-        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
-        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
-        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
-        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
-        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
-        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
-        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
 
     return (
         <>
