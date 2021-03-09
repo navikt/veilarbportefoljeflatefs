@@ -33,12 +33,12 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                     aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.
                 </p>
                 <p>
-                    Nå kan du kan også filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV”
-                    fra aktivitetsfilteret.
-                </p>
-                <p className="forenklet-filter__bunn">
                     Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har
                     en gitt aktivitet.
+                </p>
+                <p className="forenklet-filter__bunn">
+                    Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra
+                    aktivitetsfilteret.
                 </p>
             </>
         )

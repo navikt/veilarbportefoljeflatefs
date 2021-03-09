@@ -292,20 +292,38 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         )
                     }
                 />
-                <Dropdown
-                    name="Tiltakstype"
-                    id="tiltakstype"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="tiltakstyper"
-                            valg={enhettiltak}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
-                            className="tiltakstyper"
-                        />
-                    )}
-                />
+                {erAktivitetFeatureTogglePa ? (
+                    <Dropdown
+                        name="Tiltakstype"
+                        id="tiltakstype"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="tiltakstyper"
+                                valg={enhettiltak}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                                className="tiltakstyper"
+                            />
+                        )}
+                    />
+                ) : (
+                    <Dropdown
+                        name="Tiltakstype"
+                        id="tiltakstype"
+                        disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
+                        render={() => (
+                            <CheckboxFilterform
+                                form="tiltakstyper"
+                                valg={enhettiltak}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
+                                className="tiltakstyper"
+                            />
+                        )}
+                    />
+                )}
             </div>
         </div>
     );
