@@ -54,6 +54,7 @@ export interface FiltervalgModell {
     veiledere: string[];
     ytelse: null | string;
     aktiviteter?: FiltreringAktiviteterValg;
+    aktiviteterForenklet: string[],
     tiltakstyper: string[];
     hovedmal?: string[];
     navnEllerFnrQuery: string;

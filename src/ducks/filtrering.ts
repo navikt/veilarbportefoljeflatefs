@@ -17,7 +17,7 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
-type AktivititetNykkel =
+type AktivititetNokkel =
     | 'BEHANDLING'
     | 'EGEN'
     | 'GRUPPEAKTIVITET'
@@ -29,7 +29,7 @@ type AktivititetNykkel =
     | 'UTDANNINGAKTIVITET';
 
 export type FiltreringAktiviteterValg = {
-    [aktivitet in AktivititetNykkel]: AktiviteterValg;
+    [aktivitet in AktivititetNokkel]: AktiviteterValg;
 };
 
 //  Reducer
@@ -55,6 +55,7 @@ export const initialState: FiltervalgModell = {
         TILTAK: AktiviteterValg.NA,
         UTDANNINGAKTIVITET: AktiviteterValg.NA
     } as FiltreringAktiviteterValg,
+    aktiviteterForenklet: [],
     tiltakstyper: [],
     ytelse: null,
     manuellBrukerStatus: [],

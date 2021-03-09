@@ -22,17 +22,18 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.less';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, SISTE_ENDRING} from '../../konstanter';
+import {AKTIVITETER, GJEM_HOVEDMAL, SISTE_ENDRING} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import AktivitetFilterform from './filterform/aktivitet-filterform';
 import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
+import AktivitetFilterform from './filterform/aktivitet-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: any;
@@ -44,6 +45,7 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
+    const erAktivitetFeatureTogglePa = useFeatureSelector()(AKTIVITETER);
     return (
         <div
             className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
@@ -278,18 +280,21 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Aktivitet"
                     id="aktivitet"
-                    render={() => (
-                        <AktivitetFilterform
-                            valg={aktiviteter}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
+                    render={() =>
+                        erAktivitetFeatureTogglePa ? (
+                            <AktivitetFilterformController filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                        ) : (
+                            <AktivitetFilterform
+                                valg={aktiviteter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )
+                    }
                 />
                 <Dropdown
                     name="Tiltakstype"
                     id="tiltakstype"
-                    disabled={!(filtervalg.aktiviteter.TILTAK === 'JA')}
                     render={() => (
                         <CheckboxFilterform
                             form="tiltakstyper"
