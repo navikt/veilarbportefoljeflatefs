@@ -22,6 +22,28 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '10. mars 2021',
+        tittel: 'Forenklet filter for aktiviteter og tiltak',
+        versjonId: '10.03.2021',
+        featureToggleName: 'veilarbportefolje.aktiviteter',
+        children: (
+            <>
+                <p className="forenklet-filter__topp">
+                    Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av
+                    aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.
+                </p>
+                <p>
+                    Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har
+                    en gitt aktivitet.
+                </p>
+                <p className="forenklet-filter__bunn">
+                    Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra
+                    aktivitetsfilteret.
+                </p>
+            </>
+        )
+    },
+    {
         dato: '10. desember 2020',
         tittel: 'Endre info om søknadsprosessen',
         versjonId: '10.12.20',

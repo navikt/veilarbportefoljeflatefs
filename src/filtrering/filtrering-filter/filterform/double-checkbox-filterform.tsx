@@ -96,12 +96,12 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                     </div>
                 </div>
             )}
-                <NullstillValgKnapp
-                    dataTestId="double-checkbox-filterform"
-                    nullstillValg={nullstillValg}
-                    form={'utdanning-godkjent-og-bestatt'}
-                    disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
-                />
+            <NullstillValgKnapp
+                dataTestId="double-checkbox-filterform"
+                nullstillValg={nullstillValg}
+                form={'utdanning-godkjent-og-bestatt'}
+                disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
+            />
         </form>
     );
 }

@@ -37,9 +37,7 @@ const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil);
 
 export function MineFilterModal(props: {oversiktType: string}) {
     const {sisteValgtMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt
-            ? state.mineFilterMinOversikt
-            : state.mineFilterEnhetensOversikt
+        props.oversiktType === OversiktType.minOversikt ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt
     );
     const data = useSelector((state: AppState) => state.mineFilter.data);
     const lagretFilterNavn = filterId =>

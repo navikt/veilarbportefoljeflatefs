@@ -191,12 +191,12 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     )}
                 </>
             )}
-                <NullstillValgKnapp
-                    dataTestId="alder-filterform"
-                    nullstillValg={nullstillValg}
-                    form={form}
-                    disabled={!kanVelgeFilter}
-                />
+            <NullstillValgKnapp
+                dataTestId="alder-filterform"
+                nullstillValg={nullstillValg}
+                form={form}
+                disabled={!kanVelgeFilter}
+            />
         </form>
     );
 }

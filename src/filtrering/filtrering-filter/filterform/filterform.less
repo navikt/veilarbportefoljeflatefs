@@ -8,7 +8,7 @@
         margin: 0 0.5rem 0.5rem;
     }
 
-    .aktivitetfilterform {
+    .aktivitetfilterform-avansert {
         label {
             display: inline-block;
         }
@@ -21,7 +21,6 @@
                 padding-right: 0.4rem;
             }
         }
-
         .aktivitetvalg {
             display: flex;
             justify-content: space-between;
@@ -33,6 +32,7 @@
 
         .radioknapp-gruppe {
             flex-shrink: 0;
+            margin-left: 0.5rem;
         }
 
         .radioknapp + label {
@@ -44,8 +44,30 @@
         }
 
         &__valg {
-            padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+            padding: 0.5rem;
             margin-bottom: 0.5rem;
+        }
+    }
+    .aktivitet-filterform__knappegruppe {
+        display: flex;
+        justify-content: space-between;
+
+        .filterknapp-container {
+            padding: 0.5rem;
+            .filterknapp {
+                padding: 0 0.5rem;
+                background-color: transparent;
+                border: none;
+                color: @navBla;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .aktivitetfilterform-forenklet {
+        .aktivitetvalg {
+            margin: 0.5rem;
         }
     }
 
@@ -251,6 +273,23 @@
 
         &__radio-gruppe {
             margin-left: 1rem;
+        }
+
+        &__checkbox-gruppe {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #78706a;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .uleste-endringer {
+                margin-left: 1rem;
+            }
+
+            .hjelpetekst__uleste-endringer {
+                margin-right: 1rem;
+            }
         }
     }
 }

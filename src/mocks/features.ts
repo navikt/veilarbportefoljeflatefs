@@ -3,7 +3,9 @@ import {
     SISTE_ENDRING,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    ALERTSTRIPE_FEILMELDING
+    ALERTSTRIPE_FEILMELDING,
+    ULESTE_ENDRINGER,
+    HENDELSE_MEDISINSKBEHANDLING, AKTIVITETER
 } from '../konstanter';
 
 const toggles = {
@@ -11,7 +13,10 @@ const toggles = {
     [VEDTAKSTOTTE]: true,
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [SISTE_ENDRING]: true
+    [SISTE_ENDRING]: true,
+    [HENDELSE_MEDISINSKBEHANDLING]: false,
+    [ULESTE_ENDRINGER]: true,
+    [AKTIVITETER]: true
 };
 
 export default toggles;

@@ -17,7 +17,7 @@ function Header({children, skalVises = true, className = '', title, headerId}: H
     return (
         <span
             title={title}
-            className={classNames('sorteringheader', className)}
+            className={classNames('sorteringheader', className, `sorteringheader_${headerId}`)}
             data-testid={`sorteringheader_${headerId}`}
         >
             {children}
