@@ -153,7 +153,7 @@ function FiltreringLabelContainer({
                     <FiltreringLabel
                         key={key}
                         label={hendelserEtikett['ULESTE_ENDRINGER']}
-                        slettFilter={() => slettEnkelt(key, false)}
+                        slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
             } else if (value === true) {
