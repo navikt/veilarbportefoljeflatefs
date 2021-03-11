@@ -1,8 +1,4 @@
-import {
-    ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-    ENDRE_FILTER,
-    VEILEDER_SOKT_FRA_TOOLBAR
-} from '../ducks/filtrering';
+import {ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER, ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
@@ -108,7 +104,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     switch (type) {
         case ENDRE_FILTER:
-            loggEndreMineFilter(sideNavn, data, store);
+            loggEndreFilter(sideNavn, data, store);
             break;
         case SETUP:
             loggPaginering(sideNavn, data);
@@ -208,7 +204,7 @@ export function mapVeilederIdentTilNonsens(veilederIdent: string) {
         .join('');
 }
 
-export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
     const veilederIdent = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
@@ -240,7 +236,8 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
 const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) => {
     logEvent('portefolje.metrikker.endre_filter', {
         sideNavn,
-        ...data.filterVerdi
+        ...data.filterVerdi,
+        filter: data.filterId,
     });
 };
 
