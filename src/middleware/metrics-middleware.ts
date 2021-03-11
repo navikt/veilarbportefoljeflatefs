@@ -1,4 +1,10 @@
-import {ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER, ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
+import {
+    AktiviteterValg,
+    ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
+    ENDRE_FILTER,
+    FiltreringAktiviteterValg,
+    VEILEDER_SOKT_FRA_TOOLBAR
+} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
@@ -22,10 +28,11 @@ import {
     SORTER_MINEFILTER_FEILET,
     SORTER_MINEFILTER_OK
 } from '../ducks/mine-filter';
+import {AktiviteterModell} from '../model-interfaces';
 
 interface FilterEndringData {
     filterId: string;
-    filterVerdi: string | string[];
+    filterVerdi: string[];
 }
 
 enum SideNavn {
@@ -234,7 +241,10 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
 };
 
 const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) => {
-    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter', verdi: data.filterVerdi});
+    logEvent('portefolje.metrikker.endre_filter', {
+        sideNavn,
+        ...data.filterVerdi
+    });
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any) => {
