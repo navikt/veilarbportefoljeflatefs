@@ -1,8 +1,6 @@
 import {
-    AktiviteterValg,
     ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
     ENDRE_FILTER,
-    FiltreringAktiviteterValg,
     VEILEDER_SOKT_FRA_TOOLBAR
 } from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
@@ -28,7 +26,6 @@ import {
     SORTER_MINEFILTER_FEILET,
     SORTER_MINEFILTER_OK
 } from '../ducks/mine-filter';
-import {AktiviteterModell} from '../model-interfaces';
 
 interface FilterEndringData {
     filterId: string;
