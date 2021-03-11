@@ -209,6 +209,13 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }
+    if (data.filterId === 'aktiviteter') {
+        logEvent('portefolje.metrikker.endre_filter', {
+            sideNavn,
+            ...data.filterVerdi,
+            filter: data.filterId
+        });
+    }
 
     if (Array.isArray(data.filterVerdi)) {
         const filtrering = finnFiltreringForSide(store, sideNavn);
@@ -237,7 +244,7 @@ const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) =
     logEvent('portefolje.metrikker.endre_filter', {
         sideNavn,
         ...data.filterVerdi,
-        filter: data.filterId,
+        filter: data.filterId
     });
 };
 
