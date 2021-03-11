@@ -134,7 +134,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggVeilederSoktFraToolbar(sideNavn);
             break;
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
-            loggEndreAktivitetFilter(sideNavn);
+            loggEndreAktivitetFilter(sideNavn, data);
             break;
         case SLETTING_FEILET_MODAL:
             loggSlettVeiledergruppeFeilet();
@@ -223,20 +223,18 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
                 veilederIdent
             });
         });
-    } else {
-        if (data.filterVerdi !== null) {
-            logEvent('portefolje.metrikker.endre_filter', {
-                sideNavn,
-                filter: data.filterId,
-                verdi: data.filterVerdi,
-                veilederIdent
-            });
-        }
+    } else if (data.filterVerdi !== null) {
+        logEvent('portefolje.metrikker.endre_filter', {
+            sideNavn,
+            filter: data.filterId,
+            verdi: data.filterVerdi,
+            veilederIdent
+        });
     }
 };
 
-const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter'});
+const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) => {
+    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter', verdi: data.filterVerdi});
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any) => {
