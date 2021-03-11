@@ -25,7 +25,7 @@ import {
 
 interface FilterEndringData {
     filterId: string;
-    filterVerdi: string | string[];
+    filterVerdi: string[];
 }
 
 enum SideNavn {
@@ -104,7 +104,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
 
     switch (type) {
         case ENDRE_FILTER:
-            loggEndreMineFilter(sideNavn, data, store);
+            loggEndreFilter(sideNavn, data, store);
             break;
         case SETUP:
             loggPaginering(sideNavn, data);
@@ -134,7 +134,7 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             loggVeilederSoktFraToolbar(sideNavn);
             break;
         case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
-            loggEndreAktivitetFilter(sideNavn);
+            loggEndreAktivitetFilter(sideNavn, data);
             break;
         case SLETTING_FEILET_MODAL:
             loggSlettVeiledergruppeFeilet();
@@ -204,10 +204,13 @@ export function mapVeilederIdentTilNonsens(veilederIdent: string) {
         .join('');
 }
 
-export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
+export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
     const veilederIdent = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
+    }
+    if (data.filterId === 'aktiviteter') {
+        loggEndreAktivitetFilter(sideNavn, data);
     }
 
     if (Array.isArray(data.filterVerdi)) {
@@ -223,20 +226,22 @@ export const loggEndreMineFilter = (sideNavn: SideNavn, data: FilterEndringData,
                 veilederIdent
             });
         });
-    } else {
-        if (data.filterVerdi !== null) {
-            logEvent('portefolje.metrikker.endre_filter', {
-                sideNavn,
-                filter: data.filterId,
-                verdi: data.filterVerdi,
-                veilederIdent
-            });
-        }
+    } else if (data.filterVerdi !== null) {
+        logEvent('portefolje.metrikker.endre_filter', {
+            sideNavn,
+            filter: data.filterId,
+            verdi: data.filterVerdi,
+            veilederIdent
+        });
     }
 };
 
-const loggEndreAktivitetFilter = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.endre_filter', {sideNavn, filter: 'aktiviteter'});
+const loggEndreAktivitetFilter = (sideNavn: SideNavn, data: FilterEndringData) => {
+    logEvent('portefolje.metrikker.endre_filter', {
+        sideNavn,
+        ...data.filterVerdi,
+        filter: data.filterId
+    });
 };
 
 const loggPaginering = (sideNavn: SideNavn, data: any) => {

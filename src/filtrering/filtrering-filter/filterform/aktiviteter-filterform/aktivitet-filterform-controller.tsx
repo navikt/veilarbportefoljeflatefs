@@ -26,10 +26,10 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetFilterformProps) {
-
-    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<FiltreringAktiviteterValg>(
-        Object.assign({}, aktivitetInitialState, filtervalg.aktiviteter)
-    );
+    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<FiltreringAktiviteterValg>({
+        ...aktivitetInitialState,
+        ...filtervalg.aktiviteter
+    });
 
     const harAvanserteAktiviteter =
         valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||

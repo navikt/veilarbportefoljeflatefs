@@ -66,7 +66,7 @@ function AktivitetFilterformForenklet({
                 <NullstillValgKnapp
                     dataTestId="aktivitet-filterform-forenklet"
                     nullstillValg={nullstillForenkledeAktiviteter}
-                    form="aktiviteter"
+                    form="aktiviteterForenklet"
                     disabled={valgteForenkledeAktiviteter.length <= 0}
                 />
             </div>
