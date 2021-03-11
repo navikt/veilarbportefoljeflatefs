@@ -210,11 +210,7 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
         return;
     }
     if (data.filterId === 'aktiviteter') {
-        logEvent('portefolje.metrikker.endre_filter', {
-            sideNavn,
-            ...data.filterVerdi,
-            filter: data.filterId
-        });
+        loggEndreAktivitetFilter(sideNavn, data);
     }
 
     if (Array.isArray(data.filterVerdi)) {
