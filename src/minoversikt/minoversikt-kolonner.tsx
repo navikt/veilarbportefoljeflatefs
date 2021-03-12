@@ -179,7 +179,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={avtaltAktivitetOgTiltak}
+                skalVises={
+                    avtaltAktivitetOgTiltak ||
+                    filtervalg.aktiviteterForenklet.length > 0 ||
+                    filtervalg.tiltakstyper.length > 0
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"

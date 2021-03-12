@@ -166,7 +166,11 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={avtaltAktivitetOgTiltak}
+                skalVises={
+                    avtaltAktivitetOgTiltak ||
+                    filtervalg.aktiviteterForenklet.length > 0 ||
+                    filtervalg.tiltakstyper.length > 0
+                }
             />
             <TidKolonne
                 className="col col-xs-2"
