@@ -53,6 +53,10 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const valgteAktivitetstyperForenklet = utledValgteAktivitetsTyper(
+        bruker.aktiviteter,
+        filtervalg.aktiviteterForenklet
+    );
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
@@ -62,11 +66,18 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         !!ferdigfilterListe &&
         ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
         valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+
     const avtaltAktivitetOgTiltak = iAvtaltAktivitet
         ? false
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
+    const forenkletAktivitetOgTiltak =
+        !!valgteAktivitetstyperForenklet &&
+        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (
@@ -166,11 +177,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={
-                    avtaltAktivitetOgTiltak ||
-                    filtervalg.aktiviteterForenklet.length > 0 ||
-                    filtervalg.tiltakstyper.length > 0
-                }
+                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <TidKolonne
                 className="col col-xs-2"

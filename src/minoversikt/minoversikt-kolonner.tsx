@@ -45,6 +45,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
+    const valgteAktivitetstyperForenklet = utledValgteAktivitetsTyper(
+        bruker.aktiviteter,
+        filtervalg.aktiviteterForenklet
+    );
 
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -67,6 +71,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
+    const forenkletAktivitetOgTiltak =
+        !!valgteAktivitetstyperForenklet &&
+        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (
@@ -179,11 +189,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={
-                    avtaltAktivitetOgTiltak ||
-                    filtervalg.aktiviteterForenklet.length > 0 ||
-                    filtervalg.tiltakstyper.length > 0
-                }
+                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"
