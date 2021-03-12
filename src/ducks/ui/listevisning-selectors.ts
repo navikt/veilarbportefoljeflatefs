@@ -44,10 +44,6 @@ function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boole
     return Object.entries(aktiviteter).filter(([_, value]) => value === AktiviteterValg.JA).length >= 1;
 }
 
-function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
-    return tiltakstyper.length === 0;
-}
-
 export function getFiltreringState(state: AppState, oversiktType: OversiktType): FiltervalgModell {
     switch (oversiktType) {
         case OversiktType.enhetensOversikt:
