@@ -41,14 +41,13 @@ function lagGrunndata() {
     const individsifre = `${arhundre}${kjonnsiffer}`;
     const venterPaSvarFraBruker = randomDate({past: true});
     const venterPaSvarFraNAV = randomDate({past: true});
-    const nyesteUtlopteAktivitet = randomDate({past: true});
+    const nesteUtlopteAktivitet = randomDate({past: false});
 
     const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
-    const brukerAktiviteter = Object.keys(aktiviteter).reduce(
-        (acc, curr) => ({...acc, [curr]: Math.random() > 0.05 ? null : new Date()}),
-        {}
-    );
+    const brukerAktiviteter = Object.keys(aktiviteter)
+        .map((x: string) => x.toLowerCase())
+        .reduce((acc, curr) => ({...acc, [curr]: Math.random() > 0.1 ? null : randomDate({past: false})}), {});
 
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
 
@@ -65,7 +64,7 @@ function lagGrunndata() {
         etternavn: faker.name.lastName(kjonn === 'K' ? 1 : 0),
         kjonn,
         erDoed,
-        nyesteUtlopteAktivitet,
+        nesteUtlopteAktivitet,
         venterPaSvarFraBruker,
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
@@ -196,7 +195,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
-        nyesteUtlopteAktivitet: grunndata.nyesteUtlopteAktivitet,
+        nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt,
         erDoed: grunndata.erDoed,
         fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,

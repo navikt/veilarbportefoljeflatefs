@@ -3,6 +3,8 @@ import '../filterform.less';
 import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
+import {AVANSERT_AKTIVITET} from '../../../../ducks/forenklet-aktivitet';
+import {useDispatch} from 'react-redux';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -25,7 +27,9 @@ function AktivitetFilterformAvansert({
     valgteAvanserteAktiviteter,
     harAvanserteAktiviteter
 }: AktivitetFilterformProps) {
+    const dispatch = useDispatch();
     const handleChange = (aktivitetKey, verdi) => {
+        dispatch({type: AVANSERT_AKTIVITET});
         if (filtervalg.aktiviteterForenklet.length > 0) {
             nullstillForenkledeAktiviteter();
         }

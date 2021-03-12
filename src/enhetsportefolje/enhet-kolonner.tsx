@@ -18,6 +18,7 @@ import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interface
 import {
     aapRettighetsperiode,
     nesteUtlopsdatoEllerNull,
+    utledForenkledeValgteAktivitetsTyper,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -32,6 +33,8 @@ import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
+import {AppState} from '../reducer';
+import {useSelector} from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -53,7 +56,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const valgteAktivitetstyperForenklet = utledValgteAktivitetsTyper(
+    const valgteAktivitetstyperForenklet = utledForenkledeValgteAktivitetsTyper(
         bruker.aktiviteter,
         filtervalg.aktiviteterForenklet
     );
@@ -62,24 +65,23 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const iAvtaltAktivitet =
+    const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe &&
         ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
         valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
-    const avtaltAktivitetOgTiltak = iAvtaltAktivitet
+    const avtaltAktivitetOgTiltak: boolean = iAvtaltAktivitet
         ? false
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     const forenkletAktivitetOgTiltak =
-        !!valgteAktivitetstyperForenklet &&
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+    const erForenkletAktivitet = useSelector((state: AppState) => state.forenkletAktivitet.erForenkletAktivitet);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
-
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -176,7 +178,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
+                dato={nesteUtlopsdatoEllerNull(
+                    erForenkletAktivitet ? valgteAktivitetstyperForenklet : valgteAktivitetstyper
+                )}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <TidKolonne
