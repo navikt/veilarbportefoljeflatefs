@@ -40,10 +40,8 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
     return add ? [kolonne] : [];
 }
 
-function harValgtMinstEnAktivitet(aktiviteter?: FiltreringAktiviteterValg): boolean {
-    return (
-        !!aktiviteter && Object.entries(aktiviteter).filter(([_, value]) => value === AktiviteterValg.JA).length >= 1
-    );
+function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
+    return Object.entries(aktiviteter).filter(([_, value]) => value === AktiviteterValg.JA).length >= 1;
 }
 
 function harIkkeValgtTiltakstype(tiltakstyper: string[]): boolean {
@@ -107,9 +105,13 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(
                 Kolonne.UTLOP_AKTIVITET,
-                !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                    harValgtMinstEnAktivitet(filtervalg.aktiviteter) &&
-                    harIkkeValgtTiltakstype(filtervalg.tiltakstyper)
+                //TODO fiks her når aktivitetsfeature fjernes
+                (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                    harValgtMinstEnAktivitet(filtervalg.aktiviteter!) &&
+                    filtervalg.tiltakstyper.length === 0) ||
+                    (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                        filtervalg.aktiviteterForenklet.length > 0) ||
+                    filtervalg.tiltakstyper.length > 0
             )
         )
         .concat(

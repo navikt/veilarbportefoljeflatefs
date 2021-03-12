@@ -33,7 +33,6 @@ export type FiltreringAktiviteterValg = {
 };
 
 //  Reducer
-// TODO Se om det finnes en måte å slippe å definere alt dette for alle filter-reducer
 export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
     alder: [],

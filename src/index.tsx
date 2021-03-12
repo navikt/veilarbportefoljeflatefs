@@ -7,7 +7,6 @@ if (!(window as any)._babelPolyfill) {
     require('babel-polyfill'); // tslint:disable-line
 }
 
-//TODO GJOR DET BEDRE
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.setItem('filterVersjon', 'v1');
     localStorage.removeItem('veilederState');

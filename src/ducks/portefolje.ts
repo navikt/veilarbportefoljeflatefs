@@ -204,7 +204,6 @@ function hentPortefolje(hentPorefoljeFn: (...args: any[]) => void, ...args: any[
         const fra = seAlle ? undefined : selectFraIndex(state);
         const antall = seAlle ? undefined : selectSideStorrelse(state);
 
-        // todo sortering should be read from the state as well
         return hentPorefoljeFn(...args, fra, antall);
     };
     return doThenDispatch(fn, {

@@ -219,7 +219,11 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     tekst="Neste utløpsdato aktivitet"
-                    skalVises={avtaltAktivitetOgTiltak}
+                    skalVises={
+                        avtaltAktivitetOgTiltak ||
+                        filtervalg.aktiviteterForenklet.length > 0 ||
+                        filtervalg.tiltakstyper.length > 0
+                    }
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"
