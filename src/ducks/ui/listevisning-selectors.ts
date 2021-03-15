@@ -56,6 +56,21 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
+    const avansertAktivitetErValgt = () => {
+        return (
+            !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+            harValgtMinstEnAktivitet(filtervalg.aktiviteter!) &&
+            filtervalg.tiltakstyper.length === 0
+        );
+    };
+
+    const forenkletAktivitetErValgt = () => {
+        return (
+            (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+                filtervalg.aktiviteterForenklet.length > 0) ||
+            filtervalg.tiltakstyper.length > 0
+        );
+    };
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
@@ -102,12 +117,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             addHvis(
                 Kolonne.UTLOP_AKTIVITET,
                 //TODO fiks her når aktivitetsfeature fjernes
-                (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                    harValgtMinstEnAktivitet(filtervalg.aktiviteter!) &&
-                    filtervalg.tiltakstyper.length === 0) ||
-                    (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-                        filtervalg.aktiviteterForenklet.length > 0) ||
-                    filtervalg.tiltakstyper.length > 0
+                avansertAktivitetErValgt() || forenkletAktivitetErValgt()
             )
         )
         .concat(
