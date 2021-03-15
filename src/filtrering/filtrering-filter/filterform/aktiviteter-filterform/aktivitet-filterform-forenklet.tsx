@@ -3,6 +3,8 @@ import '../filterform.less';
 import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Checkbox} from 'nav-frontend-skjema';
+import {FORENKLET_AKTIVITET} from '../../../../ducks/forenklet-aktivitet';
+import {useDispatch} from 'react-redux';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -23,8 +25,11 @@ function AktivitetFilterformForenklet({
     valgteForenkledeAktiviteter,
     harAvanserteAktiviteter
 }: AktivitetFilterformProps) {
+    const dispatch = useDispatch();
+
     const velgCheckBox = e => {
         e.persist();
+        dispatch({type: FORENKLET_AKTIVITET});
         if (harAvanserteAktiviteter) {
             nullstillAvanserteAktiviteter();
         }

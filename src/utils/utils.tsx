@@ -24,18 +24,41 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>)
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 
-export function utledValgteAktivitetsTyper(brukerAktiviteter, aktiviteterFiltervalg): Maybe<AktiviteterModell> {
+export function utledValgteAktivitetsTyper(
+    brukerAktiviteter,
+    avanserteAktiviteterFiltervalg
+): Maybe<AktiviteterModell> {
     if (
-        !aktiviteterFiltervalg ||
-        Object.keys(aktiviteterFiltervalg).length === 0 ||
+        !avanserteAktiviteterFiltervalg ||
+        Object.keys(avanserteAktiviteterFiltervalg).length === 0 ||
         !brukerAktiviteter ||
-        Object.keys(aktiviteterFiltervalg).length === 0
+        Object.keys(avanserteAktiviteterFiltervalg).length === 0
     ) {
         return null;
     }
-    return Object.entries(aktiviteterFiltervalg)
+    return Object.entries(avanserteAktiviteterFiltervalg)
         .filter(([_, value]) => value === 'JA')
         .map(([key, _]) => key.toLowerCase())
+        .reduce((obj, key) => {
+            obj[key] = brukerAktiviteter[key];
+            return obj;
+        }, {});
+}
+
+export function utledForenkledeValgteAktivitetsTyper(
+    brukerAktiviteter: AktiviteterModell | undefined,
+    forenkledeAktiviteter: string[]
+): Maybe<AktiviteterModell> {
+    if (
+        !forenkledeAktiviteter ||
+        Object.keys(forenkledeAktiviteter).length === 0 ||
+        !brukerAktiviteter ||
+        Object.keys(forenkledeAktiviteter).length === 0
+    ) {
+        return null;
+    }
+    return forenkledeAktiviteter
+        .map(key => key.toLowerCase())
         .reduce((obj, key) => {
             obj[key] = brukerAktiviteter[key];
             return obj;

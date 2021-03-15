@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
     aapRettighetsperiode,
     nesteUtlopsdatoEllerNull,
+    utledForenkledeValgteAktivitetsTyper,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -31,6 +32,8 @@ import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
+import {useSelector} from 'react-redux';
+import {AppState} from '../reducer';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -45,7 +48,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    // TODO: bør gjøres før data lagres i storen
+    const valgteAktivitetstyperForenklet = utledForenkledeValgteAktivitetsTyper(
+        bruker.aktiviteter,
+        filtervalg.aktiviteterForenklet
+    );
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
@@ -58,15 +64,21 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const iAvtaltAktivitet =
+    const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe &&
         ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
         valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
-    const avtaltAktivitetOgTiltak = iAvtaltAktivitet
+    const avtaltAktivitetOgTiltak: boolean = iAvtaltAktivitet
         ? false
         : !!valgteAktivitetstyper &&
           filtervalg.tiltakstyper.length === 0 &&
           valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
+    const forenkletAktivitetOgTiltak =
+        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+    const erForenkletAktivitet = useSelector((state: AppState) => state.forenkletAktivitet.erForenkletAktivitet);
+
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (
@@ -178,8 +190,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(valgteAktivitetstyper)}
-                skalVises={avtaltAktivitetOgTiltak}
+                dato={nesteUtlopsdatoEllerNull(
+                    erForenkletAktivitet ? valgteAktivitetstyperForenklet : valgteAktivitetstyper
+                )}
+                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"

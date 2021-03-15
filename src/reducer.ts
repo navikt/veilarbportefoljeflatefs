@@ -24,6 +24,7 @@ import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from './model-interfaces';
 import inloggetVeilederReducer, {InloggetVeilederState} from './ducks/inlogget-veileder';
+import forenkletAktivitetReducer, {ForenkletAktivitetState} from './ducks/forenklet-aktivitet';
 import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
 import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
@@ -73,6 +74,7 @@ export interface AppState {
     mineFilterVeilederOversikt: LagretFilterUIState;
     toastReducer: ToastState;
     inloggetVeileder: InloggetVeilederState;
+    forenkletAktivitet: ForenkletAktivitetState;
 }
 
 export default combineReducers<AppState>({
@@ -134,5 +136,6 @@ export default combineReducers<AppState>({
     mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIState),
     mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIState),
     toastReducer: toastReducer,
-    inloggetVeileder: inloggetVeilederReducer
+    inloggetVeileder: inloggetVeilederReducer,
+    forenkletAktivitet: forenkletAktivitetReducer
 });

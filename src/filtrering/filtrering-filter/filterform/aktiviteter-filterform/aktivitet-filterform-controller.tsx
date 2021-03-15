@@ -65,9 +65,12 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
         endreFiltervalg('aktiviteterForenklet', []);
     };
 
-    const klikkPaLenke = bool => {
-        setErForenkletFilterSynlig(bool);
-        logEvent('portefolje.metrikker.aktivitet-lenke', {erForenkletLenke: bool, sideNavn: finnSideNavn()});
+    const klikkPaLenke = erForenkletLenke => {
+        setErForenkletFilterSynlig(erForenkletLenke);
+        logEvent('portefolje.metrikker.aktivitet-lenke', {
+            erForenkletLenke: erForenkletLenke,
+            sideNavn: finnSideNavn()
+        });
     };
 
     return (
