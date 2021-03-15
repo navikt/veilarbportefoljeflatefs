@@ -10,7 +10,6 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
-    hendelserLabels,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -34,6 +33,7 @@ import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
+import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -249,8 +249,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 }
                 className="col col-xs-2"
             />
-            <TekstKolonne
-                tekst={!!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' '}
+            <SisteEndringKategori
+                bruker={bruker}
+                enhetId={enhetId}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
