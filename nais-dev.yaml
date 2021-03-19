@@ -2,7 +2,7 @@ apiVersion: 'nais.io/v1alpha1'
 kind: 'Application'
 metadata:
     name: veilarbportefoljeflatefs
-    namespace: {{namespace}}
+    namespace: pto
     cluster: dev-fss
     labels:
         team: pto
@@ -31,9 +31,9 @@ spec:
         enabled: true
         path: veilarbportefoljeflatefs/internal/prometheus
     ingresses:
-        - https://veilarbportefoljeflatefs-{{namespace}}.nais.preprod.local
-        - https://app-{{namespace}}.adeo.no/veilarbportefoljeflatefs
-        - https://app-{{namespace}}.dev.adeo.no/veilarbportefoljeflatefs
+        - https://veilarbportefoljeflatefs-q1.nais.preprod.local
+        - https://app-q1.adeo.no/veilarbportefoljeflatefs
+        - https://app-q1.dev.adeo.no/veilarbportefoljeflatefs
     vault:
         enabled: true
     envFrom:
