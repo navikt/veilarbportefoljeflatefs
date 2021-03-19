@@ -89,7 +89,7 @@ jobs:
                   echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
                   docker build -t ${IMAGE}:${IMAGE_TAG} .
                   docker push ${IMAGE}:${IMAGE_TAG}
-    deploy-q1:
+    deploy-dev:
         name: Deploy q1 fss
         if: github.ref == 'refs/heads/dev'
         needs:
@@ -101,8 +101,8 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-fss
-                  RESOURCE: nais-q.yaml
-                  VAR: version=${{ env.IMAGE_TAG }},namespace=q1
+                  RESOURCE: nais-dev.yaml
+                  VAR: version=${{ env.IMAGE_TAG }},namespace=pto
     deploy-prod:
         name: Deploy prod fss
         if: github.ref == 'refs/heads/master'
@@ -115,12 +115,12 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: prod-fss
-                  RESOURCE: nais.yaml
+                  RESOURCE: nais-prod.yaml
                   VAR: version=${{ env.IMAGE_TAG }}
     release-dev:
         name: Create dev release
         needs:
-            - deploy-q1
+            - deploy-dev
         runs-on: ubuntu-latest
         steps:
             - name: Create release
