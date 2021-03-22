@@ -1,4 +1,4 @@
-import {ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER, ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
+import {ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
@@ -133,9 +133,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case VEILEDER_SOKT_FRA_TOOLBAR:
             loggVeilederSoktFraToolbar(sideNavn);
             break;
-        case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
-            loggEndreAktivitetFilter(sideNavn, data);
-            break;
         case SLETTING_FEILET_MODAL:
             loggSlettVeiledergruppeFeilet();
             break;
@@ -210,7 +207,7 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
         return;
     }
     if (data.filterId === 'aktiviteter') {
-        loggEndreAktivitetFilter(sideNavn, data);
+        return loggEndreAktivitetFilter(sideNavn, data);
     }
 
     if (Array.isArray(data.filterVerdi)) {
