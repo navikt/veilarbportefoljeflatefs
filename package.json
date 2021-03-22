@@ -56,6 +56,7 @@
         "express": "4.17.1",
         "faker": "4.1.0",
         "formik": "^2.2.6",
+        "is-svg": "^4.3.1",
         "lodash.throttle": "^4.1.1",
         "moment": "2.27.0",
         "nav-datovelger": "^6.1.9",
@@ -100,6 +101,7 @@
         "react": "^16.14.0",
         "react-collapse": "5.0.1",
         "react-day-picker": "^7.4.8",
+        "react-dev-utils": "^11.0.4",
         "react-device-detect": "^1.14.0",
         "react-document-title": "2.0.3",
         "react-dom": "16.13.1",
@@ -113,6 +115,7 @@
         "redux": "4.0.5",
         "redux-thunk": "2.3.0",
         "reselect": "^4.0.0",
+        "ssri": "^8.0.1",
         "typescript": "^3.9.7",
         "wait-on": "^5.2.1",
         "webpack-cli": "^3.3.12"
