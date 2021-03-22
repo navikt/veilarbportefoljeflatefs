@@ -5,12 +5,7 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     ULESTE_ENDRINGER,
-<<<<<<< HEAD
-    HENDELSE_MEDISINSKBEHANDLING,
-    AKTIVITETER
-=======
     HENDELSE_MEDISINSKBEHANDLING
->>>>>>> dev
 } from '../konstanter';
 
 const toggles = {
