@@ -16,7 +16,9 @@
         "lint": "echo not implemented",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
-        "cy:run": "cypress run"
+        "cy:run": "cypress run",
+        "prettier": "prettier --write src/**/*.ts{,x}",
+        "prettier:check": "prettier --check src/**/*.ts{,x}"
     },
     "devDependencies": {
         "@types/classnames": "^2.2.10",
@@ -34,7 +36,7 @@
         "cypress-dark": "^1.7.14",
         "cypress-intellij-reporter": "0.0.4",
         "immer": ">=8.0.1",
-        "prettier": "1.19.1",
+        "prettier": "^1.19.1",
         "start-server-and-test": "^1.11.7",
         "webpack": "^4.44.2",
         "yet-another-fetch-mock": "4.0.0"
