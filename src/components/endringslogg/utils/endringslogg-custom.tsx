@@ -25,7 +25,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '10. mars 2021',
         tittel: 'Forenklet filter for aktiviteter og tiltak',
         versjonId: '10.03.2021',
-        featureToggleName: 'veilarbportefolje.aktiviteter',
         children: (
             <>
                 <p className="forenklet-filter__topp">
