@@ -116,7 +116,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(
                 Kolonne.UTLOP_AKTIVITET,
-                //TODO fiks her når aktivitetsfeature fjernes
                 avansertAktivitetErValgt() || forenkletAktivitetErValgt()
             )
         )
