@@ -126,18 +126,9 @@ export const keyCodes = {
 };
 
 export function specialChar(str: string) {
-    return str
-        .toLowerCase()
-        .split('æ')
-        .join('ae')
-        .split('ø')
-        .join('o')
-        .split('å')
-        .join('a');
+    return str.toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
 }
 
 export function kebabCase(str: string) {
-    return specialChar(str)
-        .toLowerCase()
-        .replace(/\s+/g, '-');
+    return specialChar(str).toLowerCase().replace(/\s+/g, '-');
 }

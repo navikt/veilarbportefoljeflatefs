@@ -24,7 +24,7 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [SISTE_ENDRING]: false,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
-    [ULESTE_ENDRINGER]: false,
+    [ULESTE_ENDRINGER]: false
 };
 
 // Reducer

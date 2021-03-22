@@ -15,7 +15,7 @@ const toggles = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [SISTE_ENDRING]: true,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
-    [ULESTE_ENDRINGER]: true,
+    [ULESTE_ENDRINGER]: true
 };
 
 export default toggles;

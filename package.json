@@ -36,7 +36,7 @@
         "cypress-dark": "^1.7.14",
         "cypress-intellij-reporter": "0.0.4",
         "immer": ">=8.0.1",
-        "prettier": "^1.19.1",
+        "prettier": "2.2.1",
         "start-server-and-test": "^1.11.7",
         "webpack": "^4.44.2",
         "yet-another-fetch-mock": "4.0.0"

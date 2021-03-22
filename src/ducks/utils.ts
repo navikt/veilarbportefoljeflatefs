@@ -61,9 +61,7 @@ export function handterFeil(dispatch, action) {
 }
 
 export function fetchToJson(url: string, config: RequestInit = {}) {
-    return fetch(url, config)
-        .then(sjekkStatuskode)
-        .then(toJson);
+    return fetch(url, config).then(sjekkStatuskode).then(toJson);
 }
 
 export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
