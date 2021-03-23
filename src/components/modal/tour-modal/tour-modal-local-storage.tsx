@@ -7,7 +7,7 @@ interface TourModalLocalStorageProps {
 }
 
 export default function TourModalLocalStorage({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
-    const modalNavn = ModalName.MINE_FILTER;
+    const modalNavn = ModalName.TILRETTELEGGING;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {
@@ -22,7 +22,18 @@ export default function TourModalLocalStorage({onTourComplete, skalVises = false
         setApenModal(false);
     };
 
-    return <>{skalVises && <TourModal open={openModal} modalName={modalNavn} onClose={lukkModal} />}</>;
+    return (
+        <>
+            {skalVises && (
+                <TourModal
+                    open={openModal}
+                    modalName={modalNavn}
+                    onClose={lukkModal}
+                    systemtittel="Visste du at..."
+                />
+            )}
+        </>
+    );
 }
 
 export function hasStored(tagName: string): boolean {

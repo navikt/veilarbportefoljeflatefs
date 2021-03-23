@@ -22,6 +22,22 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '24. mars 2021',
+        tittel: 'Gi dine brukere flere muligheter for å komme i jobb',
+        versjonId: '24.03.21',
+        children: (
+            <>
+                I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos
+                arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Inkludering---for-vei.aspx"
+                    linkTekst="Se mer informasjon på Navet"
+                />
+                <TourModalButton modal={ModalName.TILRETTELEGGING} knappeTekst="Se hvordan" />
+            </>
+        )
+    },
+    {
         dato: '10. mars 2021',
         tittel: 'Forenklet filter for aktiviteter og tiltak',
         versjonId: '10.03.2021',
