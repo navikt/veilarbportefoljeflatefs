@@ -26,7 +26,7 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab />
                     <TilToppenKnapp />
-                    <TourModalLocalStorage skalVises={false} />
+                    <TourModalLocalStorage skalVises={true} />
                 </Innholdslaster>
             </div>
         </div>

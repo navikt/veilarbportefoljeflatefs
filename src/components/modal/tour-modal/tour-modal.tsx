@@ -3,17 +3,19 @@ import NavFrontendModal from 'nav-frontend-modal';
 import {Normaltekst, Systemtittel, Undertittel} from 'nav-frontend-typografi';
 import ChevronLenke, {Retning} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
-import {getTour} from './tour-modal-custom/tour-modal-custom';
 import './tour-modal.less';
+import {getTour} from './tour-modal-custom/tour-modal-custom';
 
 export enum ModalName {
-    MINE_FILTER = 'TOUR_MODAL-MINE_FILTER'
+    MINE_FILTER = 'TOUR_MODAL-MINE_FILTER',
+    TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING'
 }
 
 export interface Step {
     tittel: string;
     tekst: React.ReactNode;
     bilde: string;
+    altTekst: string;
 }
 
 interface TourModalProps {
@@ -65,7 +67,7 @@ function TourModal(props: TourModalProps) {
             </div>
             <main className="tour-modal__main">
                 <div className="tour-modal__main--bilde-wrapper">
-                    <img alt="Bilde på endringen" src={step.bilde} className="tour-modal__main--bilde" />
+                    <img alt={step.altTekst} src={step.bilde} className="tour-modal__main--bilde" />
                 </div>
                 <div className="tour-modal__main--beskrivelse">
                     <Undertittel className="blokk-xxxs">{step.tittel}</Undertittel>
