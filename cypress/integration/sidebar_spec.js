@@ -26,6 +26,20 @@ before('Start server', () => {
 });
 
 describe('Mine filter', () => {
+    //TODO fjern denne når tvungen stepper er borte
+    before('Tvungen stepper', () => {
+        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
+        cy.getByTestId('endringslogg_neste-knapp')
+            .contains('Neste')
+            .click();
+        cy.getByTestId('endringslogg_neste-knapp')
+            .contains('Neste')
+            .click();
+        cy.getByTestId('endringslogg_ferdig-knapp')
+            .contains('Ferdig')
+            .click();
+        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+    });
     it('Finn antall filter', () => {
         cy.gaTilOversikt('enhetens-oversikt');
 
