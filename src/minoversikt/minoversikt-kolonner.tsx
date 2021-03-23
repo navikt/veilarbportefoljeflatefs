@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
     aapRettighetsperiode,
     nesteUtlopsdatoEllerNull,
-    utledForenkledeValgteAktivitetsTyper,
+    parseDatoString,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -31,8 +31,6 @@ import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
-import {useSelector} from 'react-redux';
-import {AppState} from '../reducer';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 
 interface MinOversiktKolonnerProps {
@@ -48,10 +46,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const valgteAktivitetstyperForenklet = utledForenkledeValgteAktivitetsTyper(
-        bruker.aktiviteter,
-        filtervalg.aktiviteterForenklet
-    );
     const arbeidslisteFrist = bruker.arbeidsliste.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
@@ -77,7 +71,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-    const erForenkletAktivitet = useSelector((state: AppState) => state.forenkletAktivitet.erForenkletAktivitet);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
@@ -190,9 +183,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(
-                    erForenkletAktivitet ? valgteAktivitetstyperForenklet : valgteAktivitetstyper
-                )}
+                dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <DatoKolonne

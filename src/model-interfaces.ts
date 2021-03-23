@@ -54,7 +54,7 @@ export interface FiltervalgModell {
     veiledere: string[];
     ytelse: null | string;
     aktiviteter?: FiltreringAktiviteterValg;
-    aktiviteterForenklet: string[],
+    aktiviteterForenklet: string[];
     tiltakstyper: string[];
     hovedmal?: string[];
     navnEllerFnrQuery: string;
@@ -141,6 +141,7 @@ export interface BrukerModell {
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
+    nesteUtlopsdatoAktivitet?: string;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
