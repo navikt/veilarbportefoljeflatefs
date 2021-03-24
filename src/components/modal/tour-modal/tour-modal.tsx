@@ -4,13 +4,17 @@ import {Normaltekst, Systemtittel, Undertittel} from 'nav-frontend-typografi';
 import ChevronLenke, {Retning} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
 import './tour-modal.less';
-import {getTour} from './tour-modal-custom/tour-modal-custom';
+import {getTitle, getTour} from './tour-modal-custom/tour-modal-custom';
 
 export enum ModalName {
     MINE_FILTER = 'TOUR_MODAL-MINE_FILTER',
     TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING'
 }
 
+export interface TourModalConfig {
+    steps: Step[];
+    modalTittel?: string;
+}
 export interface Step {
     tittel: string;
     tekst: React.ReactNode;
@@ -22,12 +26,10 @@ interface TourModalProps {
     modalName: ModalName;
     open: boolean;
     onClose: (e: boolean) => void;
-    systemtittel?: string;
 }
 
 function TourModal(props: TourModalProps) {
     const [stepIndex, setStepIndex] = useState(0);
-
     const lukkModal = () => {
         props.onClose(isFinalStep);
     };
@@ -49,7 +51,9 @@ function TourModal(props: TourModalProps) {
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
     const systemtittel =
-        props.systemtittel === '' || props.systemtittel === undefined ? 'Ny oppdatering' : props.systemtittel;
+        getTitle(props.modalName) === '' || getTitle(props.modalName) === undefined
+            ? 'Ny oppdatering'
+            : getTitle(props.modalName);
 
     return (
         <NavFrontendModal

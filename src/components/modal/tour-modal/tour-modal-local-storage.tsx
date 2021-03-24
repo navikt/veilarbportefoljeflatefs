@@ -22,18 +22,7 @@ export default function TourModalLocalStorage({onTourComplete, skalVises = false
         setApenModal(false);
     };
 
-    return (
-        <>
-            {skalVises && (
-                <TourModal
-                    open={openModal}
-                    modalName={modalNavn}
-                    onClose={lukkModal}
-                    systemtittel="Visste du at..."
-                />
-            )}
-        </>
-    );
+    return <>{skalVises && <TourModal open={openModal} modalName={modalNavn} onClose={lukkModal} />}</>;
 }
 
 export function hasStored(tagName: string): boolean {
