@@ -3,6 +3,20 @@ before('Start server', () => {
 });
 
 describe('Diverse', () => {
+    //TODO fjern denne når tvungen stepper er borte
+    before('Tvungen stepper', () => {
+        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
+        cy.getByTestId('endringslogg_neste-knapp')
+            .contains('Neste')
+            .click();
+        cy.getByTestId('endringslogg_neste-knapp')
+            .contains('Neste')
+            .click();
+        cy.getByTestId('endringslogg_ferdig-knapp')
+            .contains('Ferdig')
+            .click();
+        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+    });
     it('Verifiser blå prikk og stepper', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
         cy.getByTestId('endringslogg-innhold').should('not.exist');

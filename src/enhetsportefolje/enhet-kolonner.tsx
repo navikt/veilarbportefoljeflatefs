@@ -18,7 +18,7 @@ import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interface
 import {
     aapRettighetsperiode,
     nesteUtlopsdatoEllerNull,
-    utledForenkledeValgteAktivitetsTyper,
+    parseDatoString,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -33,8 +33,6 @@ import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import {AppState} from '../reducer';
-import {useSelector} from 'react-redux';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -56,10 +54,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const valgteAktivitetstyperForenklet = utledForenkledeValgteAktivitetsTyper(
-        bruker.aktiviteter,
-        filtervalg.aktiviteterForenklet
-    );
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
@@ -79,7 +73,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-    const erForenkletAktivitet = useSelector((state: AppState) => state.forenkletAktivitet.erForenkletAktivitet);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     return (
@@ -178,9 +171,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(
-                    erForenkletAktivitet ? valgteAktivitetstyperForenklet : valgteAktivitetstyper
-                )}
+                dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <TidKolonne

@@ -28,12 +28,7 @@ export default function TourModalButton(props: ModalStepperProps) {
             >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
             </Knapp>
-            <TourModal
-                open={open}
-                modalName={props.modal}
-                onClose={() => setOpen(false)}
-                systemtittel={props.systemtittel}
-            />
+            <TourModal open={open} modalName={props.modal} onClose={() => setOpen(false)} />
         </>
     );
 }

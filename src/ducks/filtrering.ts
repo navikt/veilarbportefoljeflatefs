@@ -7,8 +7,6 @@ export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
-export const ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER = 'filtrering/ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER';
-export const SLETT_AKTIVITETER_OG_TILTAK_FILTER = 'filtrering/SLETT_AKTIVITETER_OG_TILTAK_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 
 export enum AktiviteterValg {
@@ -111,22 +109,6 @@ export default function reducer(state: FiltervalgModell = initialState, action):
                     action.data.filterVerdi
                 )
             };
-        case ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER:
-            return {
-                ...state,
-                [action.data.filterId]: action.data.filterVerdi,
-                tiltakstyper: []
-            };
-        case SLETT_AKTIVITETER_OG_TILTAK_FILTER:
-            return {
-                ...state,
-                [action.data.filterId]: fjern(
-                    action.data.filterId,
-                    state[action.data.filterId],
-                    action.data.filterVerdi
-                ),
-                tiltakstyper: []
-            };
         case SETT_FILTERVALG:
             return {...action.data};
         case VELG_MINE_FILTER:
@@ -152,13 +134,6 @@ export function endreFiltervalg(
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort();
     }
-    if (filterId === 'aktiviteter' && !(filterVerdi.TILTAK === 'JA')) {
-        return {
-            type: ENDRE_AKTIVITETER_OG_FJERN_TILTAK_FILTER,
-            data: {filterId, filterVerdi},
-            name: oversiktType
-        };
-    }
     return {
         type: ENDRE_FILTER,
         data: {filterId, filterVerdi},
@@ -167,13 +142,6 @@ export function endreFiltervalg(
 }
 
 export function slettEnkeltFilter(filterId, filterVerdi, oversiktType = OversiktType.enhetensOversikt) {
-    if (filterId === 'aktiviteter' && filterVerdi === 'TILTAK') {
-        return {
-            type: SLETT_AKTIVITETER_OG_TILTAK_FILTER,
-            data: {filterId, filterVerdi},
-            name: oversiktType
-        };
-    }
     return {
         type: SLETT_ENKELT_FILTER,
         data: {filterId, filterVerdi},

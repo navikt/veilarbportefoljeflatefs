@@ -7,7 +7,7 @@ interface TourModalLocalStorageProps {
 }
 
 export default function TourModalLocalStorage({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
-    const modalNavn = ModalName.MINE_FILTER;
+    const modalNavn = ModalName.TILRETTELEGGING;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {

@@ -5,7 +5,7 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     ULESTE_ENDRINGER,
-    HENDELSE_MEDISINSKBEHANDLING, AKTIVITETER
+    HENDELSE_MEDISINSKBEHANDLING
 } from '../konstanter';
 
 const toggles = {
@@ -16,7 +16,6 @@ const toggles = {
     [SISTE_ENDRING]: true,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
     [ULESTE_ENDRINGER]: true,
-    [AKTIVITETER]: true
 };
 
 export default toggles;

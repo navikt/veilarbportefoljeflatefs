@@ -24,6 +24,12 @@ export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>)
         .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
 }
 
+export function parseDatoString(datoString: Maybe<string>): Maybe<Date> {
+    if (!datoString) return null;
+
+    return new Date(datoString);
+}
+
 export function utledValgteAktivitetsTyper(
     brukerAktiviteter,
     avanserteAktiviteterFiltervalg
@@ -39,26 +45,6 @@ export function utledValgteAktivitetsTyper(
     return Object.entries(avanserteAktiviteterFiltervalg)
         .filter(([_, value]) => value === 'JA')
         .map(([key, _]) => key.toLowerCase())
-        .reduce((obj, key) => {
-            obj[key] = brukerAktiviteter[key];
-            return obj;
-        }, {});
-}
-
-export function utledForenkledeValgteAktivitetsTyper(
-    brukerAktiviteter: AktiviteterModell | undefined,
-    forenkledeAktiviteter: string[]
-): Maybe<AktiviteterModell> {
-    if (
-        !forenkledeAktiviteter ||
-        Object.keys(forenkledeAktiviteter).length === 0 ||
-        !brukerAktiviteter ||
-        Object.keys(forenkledeAktiviteter).length === 0
-    ) {
-        return null;
-    }
-    return forenkledeAktiviteter
-        .map(key => key.toLowerCase())
         .reduce((obj, key) => {
             obj[key] = brukerAktiviteter[key];
             return obj;
@@ -126,18 +112,9 @@ export const keyCodes = {
 };
 
 export function specialChar(str: string) {
-    return str
-        .toLowerCase()
-        .split('æ')
-        .join('ae')
-        .split('ø')
-        .join('o')
-        .split('å')
-        .join('a');
+    return str.toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
 }
 
 export function kebabCase(str: string) {
-    return specialChar(str)
-        .toLowerCase()
-        .replace(/\s+/g, '-');
+    return specialChar(str).toLowerCase().replace(/\s+/g, '-');
 }
