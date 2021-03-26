@@ -168,7 +168,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs">Status og brukergrupper</Element>
                 <Dropdown
-                    name="CV og jobbprofil"
+                    name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
                     render={() => (
                         <RadioFilterform
