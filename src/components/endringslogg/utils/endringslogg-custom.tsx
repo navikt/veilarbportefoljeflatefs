@@ -22,6 +22,25 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '07. april 2021',
+        tittel: 'Ny aktivitet for brukere og nye filter i oversikten',
+        versjonId: '07.04.21',
+        featureToggleName: 'veilarbportefolje.siste_endring',
+        children: (
+            <>
+                Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.
+                <br />
+                Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som
+                har gjort endringer i målet.
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging[…]Viktige-endring-i-Modia-arbeidsrettet-oppf%C3%B8lging.aspx"
+                    linkTekst="Se mer informasjon på Navet"
+                />
+                <TourModalButton modal={ModalName.SISTE_ENDRING} knappeTekst="Se hvordan" />
+            </>
+        )
+    },
+    {
         dato: '24. mars 2021',
         tittel: 'Gi dine brukere flere muligheter for å komme i jobb',
         versjonId: '24.03.21',

@@ -8,5 +8,11 @@
     "retries": {
         "runMode": 2
     },
-    "videoUploadOnPasses": false
+    "videoUploadOnPasses": false,
+    "component": {
+        "componentFolder": "src",
+        "testFiles": ".*/__tests__/.*spec.tsx",
+        "viewportHeight": 500,
+        "viewportWidth": 700
+    }
 }

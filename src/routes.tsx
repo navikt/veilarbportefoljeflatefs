@@ -7,7 +7,7 @@ import VeiledereSide from './veiledere/veiledere-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import Innholdslaster from './innholdslaster/innholdslaster';
-import TourModalLocalStorage from './components/modal/tour-modal/tour-modal-local-storage';
+import TvungenStepper from './components/modal/tour-modal/tvungen-stepper';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.less';
 
@@ -26,7 +26,7 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab />
                     <TilToppenKnapp />
-                    <TourModalLocalStorage skalVises={true} />
+                    <TvungenStepper skalVises={true} />
                 </Innholdslaster>
             </div>
         </div>

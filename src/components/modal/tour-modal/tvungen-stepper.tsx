@@ -6,8 +6,8 @@ interface TourModalLocalStorageProps {
     skalVises?: boolean;
 }
 
-export default function TourModalLocalStorage({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
-    const modalNavn = ModalName.TILRETTELEGGING;
+export default function TvungenStepper({onTourComplete, skalVises = false}: TourModalLocalStorageProps) {
+    const modalNavn = ModalName.SISTE_ENDRING;
     const [openModal, setApenModal] = useState(!hasStored(modalNavn));
 
     const lagreIkkeVisModal = () => {
