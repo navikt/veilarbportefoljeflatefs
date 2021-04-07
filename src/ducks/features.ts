@@ -1,5 +1,5 @@
 import {AppState} from '../reducer';
-import {hentFeatures} from '../middleware/api';
+import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
 import {
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
@@ -24,7 +24,7 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [SISTE_ENDRING]: false,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
-    [ULESTE_ENDRINGER]: false,
+    [ULESTE_ENDRINGER]: false
 };
 
 // Reducer
@@ -48,6 +48,17 @@ export function hentFeaturesFraUnleash() {
             dispatch({
                 type: ADD_FEATURE,
                 features: json
+            })
+        );
+    };
+}
+
+export function hentFeatureForVedtaksstotte() {
+    return dispatch => {
+        hentVedtakstotteFeature().then(json =>
+            dispatch({
+                type: ADD_FEATURE,
+                features: {[VEDTAKSTOTTE]: json}
             })
         );
     };
