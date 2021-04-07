@@ -8,7 +8,8 @@ import {getTitle, getTour} from './tour-modal-custom/tour-modal-custom';
 
 export enum ModalName {
     MINE_FILTER = 'TOUR_MODAL-MINE_FILTER',
-    TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING'
+    TILRETTELEGGING = 'TOUR_MODAL-TILRETTELEGGING',
+    SISTE_ENDRING = 'TOUR_MODAL-SISTE_ENDRING'
 }
 
 export interface TourModalConfig {

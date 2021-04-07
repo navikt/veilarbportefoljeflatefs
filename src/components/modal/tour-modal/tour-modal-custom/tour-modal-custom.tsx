@@ -7,6 +7,10 @@ import tilrettelegging1 from './tilrettelegging/tilrettelegging1.jpg';
 import tilrettelegging2 from './tilrettelegging/tilrettelegging2.jpg';
 import tilrettelegging3 from './tilrettelegging/tilrettelegging3.jpg';
 
+import sisteEndring1 from './siste-endring/siste-endring1.png';
+import sisteEndring2 from './siste-endring/siste-endring2.png';
+import sisteEndring3 from './siste-endring/siste-endring3.png';
+
 const stepsMineFilter: TourModalConfig = {
     steps: [
         {
@@ -49,9 +53,35 @@ const stepsTilrettelegging: TourModalConfig = {
         {
             tittel: 'Registrer behov du også!',
             bilde: tilrettelegging3,
-            altTekst: 'Bilde av aktivitetsplanen med ',
+            altTekst:
+                'Bilde av aktivitetsplanen med Detaljer-fanen åpen, med nedtrekksmenyen "Behov for tilrettelegging" markert.',
             tekst:
                 'Gi dine brukere flere muligheter for å komme i jobb. Registrer tilretteleggingsbehov under "Detaljer".'
+        }
+    ]
+};
+
+const stepsSisteEndring: TourModalConfig = {
+    steps: [
+        {
+            tittel: 'Ny aktivitet for brukere',
+            bilde: sisteEndring1,
+            altTekst: '',
+            tekst: 'Nå kan brukere selv legge til aktivitetstypen “medisinsk behandling”.'
+        },
+        {
+            tittel: 'Siste endring av bruker',
+            bilde: sisteEndring2,
+            altTekst: '',
+            tekst:
+                'I oversikten kan du filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som har gjort endringer i målet.'
+        },
+        {
+            tittel: 'Uleste endringer',
+            bilde: sisteEndring3,
+            altTekst: '',
+            tekst:
+                'I Min oversikt kan du også identifisere brukere som har gjort endringer siden du sist var inne på aktivitetsplanen.'
         }
     ]
 };
@@ -62,6 +92,8 @@ export function getTour(modal: ModalName) {
             return stepsMineFilter.steps;
         case ModalName.TILRETTELEGGING:
             return stepsTilrettelegging.steps;
+        case ModalName.SISTE_ENDRING:
+            return stepsSisteEndring.steps;
         default:
             return null;
     }
@@ -73,6 +105,8 @@ export function getTitle(modal: ModalName) {
             return stepsMineFilter.modalTittel;
         case ModalName.TILRETTELEGGING:
             return stepsTilrettelegging.modalTittel;
+        case ModalName.SISTE_ENDRING:
+            return stepsSisteEndring.modalTittel;
         default:
             return null;
     }
