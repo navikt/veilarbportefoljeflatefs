@@ -162,7 +162,7 @@ function tildel(body: any) {
 }
 
 //veilarbvedtakstøtte
-mock.get('/veilarbvedtaksstotte/api/utrulling/tilhorerVeilederUtrulletKontor', jsonResponse(true));
+mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
 
 mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(ctx.json(tildel(body))));
 
