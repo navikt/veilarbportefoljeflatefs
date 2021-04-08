@@ -33,7 +33,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som
                 har gjort endringer i målet.
                 <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging[…]Viktige-endring-i-Modia-arbeidsrettet-oppf%C3%B8lging.aspx"
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppfølging.aspx"
                     linkTekst="Se mer informasjon på Navet"
                 />
                 <TourModalButton modal={ModalName.SISTE_ENDRING} knappeTekst="Se hvordan" />
