@@ -28,7 +28,6 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;
     const erPaForsteSide: boolean = side === 1;
     const erPaSisteSide: boolean = side >= antallSider;
-    console.log(antallSider, erPaForsteSide, erPaForsteSide);
     const totalPaginering = (sideNumber: number, seAlleBool: boolean): void => {
         endrePaginering(sideNumber, seAlleBool);
         if (onChange) {
