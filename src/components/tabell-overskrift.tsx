@@ -17,7 +17,8 @@ function TabellOverskrift(props: {className?: string}) {
 
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
 
-    const enEllerFlereBrukere = antallTotalt <= 20 ? `${maksBrukere}` : `${fraIndexMax} - ${maksBrukere}`;
+    const enEllerFlereBrukere =
+        antallTotalt <= 20 ? `${maksBrukere}` : `${fraIndexMax ? fraIndex : 0} - ${maksBrukere ? maksBrukere : 0}`;
     const brukereGrammatikk = antallTotalt === 1 ? 'bruker' : 'brukere';
     const antallValgteBrukere = tekstValgteBrukere(brukere.filter(b => b.markert).length);
 
@@ -28,7 +29,7 @@ function TabellOverskrift(props: {className?: string}) {
             aria-live="polite"
             aria-atomic="true"
         >
-            {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt} ${brukereGrammatikk}. `}
+            {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt ? antallTotalt : 'ingen'} ${brukereGrammatikk}. `}
             {antallValgteBrukere}
         </Element>
     );

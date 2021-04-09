@@ -53,9 +53,9 @@ export function hentFeaturesFraUnleash() {
     };
 }
 
-export function hentFeatureForVedtaksstotte() {
+export function hentFeatureForVedtaksstotte(enhetId: string) {
     return dispatch => {
-        hentVedtakstotteFeature().then(json =>
+        hentVedtakstotteFeature(enhetId).then(json =>
             dispatch({
                 type: ADD_FEATURE,
                 features: {[VEDTAKSTOTTE]: json}
