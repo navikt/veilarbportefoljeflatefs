@@ -17,7 +17,6 @@ export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
     GJEM_HOVEDMAL,
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,

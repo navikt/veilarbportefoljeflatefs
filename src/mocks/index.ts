@@ -161,6 +161,9 @@ function tildel(body: any) {
     //return {feilendeTilordninger: body}; //alle feilende brukere
 }
 
+//veilarbvedtakstøtte
+mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
+
 mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(ctx.json(tildel(body))));
 
 // arbeidsliste-api
