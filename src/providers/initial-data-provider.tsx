@@ -20,8 +20,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
         if (valgtEnhet) {
             dispatch(hentFeatureForVedtaksstotte(valgtEnhet));
         }
-        // eslint-disable-next-line
-    }, [valgtEnhet]);
+    }, [valgtEnhet, dispatch]);
 
     return <Innholdslaster avhengigheter={[inloggetVeileder]}>{props.children}</Innholdslaster>;
 }
