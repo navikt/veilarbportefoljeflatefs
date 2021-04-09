@@ -29,7 +29,7 @@ function TabellOverskrift(props: {className?: string}) {
             aria-live="polite"
             aria-atomic="true"
         >
-            {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt ? antallTotalt : 'ingen'} ${brukereGrammatikk}. `}
+            {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt ? antallTotalt : '0'} ${brukereGrammatikk}. `}
             {antallValgteBrukere}
         </Element>
     );
