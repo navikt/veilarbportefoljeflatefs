@@ -14,6 +14,7 @@ export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmeldin
 export const SISTE_ENDRING = 'veilarbportefolje.siste_endring';
 export const HENDELSE_MEDISINSKBEHANDLING = 'veilarbportefolje.hendelse_medisinskbehandling';
 export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer';
+export const UTEN_KRR_FILTER = 'veilarbportefolje.uten_krr_filter';
 
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
