@@ -29,13 +29,13 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     const antallInt = isNaN(maybeAntal) ? alleBrukere.length : maybeAntal;
 
     const filtrerteBrukere = alleBrukere.slice(fraInt, fraInt + antallInt).map((bruker, index) => {
-        if (index < 5) {
+        if (index < 2) {
             bruker.fnr = '';
             bruker.fornavn = '';
             bruker.etternavn = '';
             bruker.kjonn = '';
             bruker.fodselsdato = null;
-            bruker.diskresjonskode = Math.random() < 0.5 ? '6' : '7';
+            bruker.diskresjonskode = index == 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
         }
