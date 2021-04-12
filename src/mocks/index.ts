@@ -35,7 +35,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.etternavn = '';
             bruker.kjonn = '';
             bruker.fodselsdato = null;
-            bruker.diskresjonskode = index == 0 ? '6' : '7';
+            bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
         }
