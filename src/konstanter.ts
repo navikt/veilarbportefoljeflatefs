@@ -14,7 +14,9 @@ export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmeldin
 export const SISTE_ENDRING = 'veilarbportefolje.siste_endring';
 export const HENDELSE_MEDISINSKBEHANDLING = 'veilarbportefolje.hendelse_medisinskbehandling';
 export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer';
+export const UTEN_KRR_FILTER = 'veilarbportefolje.uten_krr_filter';
 
+//HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     GJEM_HOVEDMAL,
@@ -22,5 +24,6 @@ export const PORTEFOLJE_FEATURES = [
     ALERTSTRIPE_FEILMELDING,
     SISTE_ENDRING,
     HENDELSE_MEDISINSKBEHANDLING,
-    ULESTE_ENDRINGER
+    ULESTE_ENDRINGER,
+    UTEN_KRR_FILTER
 ];

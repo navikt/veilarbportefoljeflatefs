@@ -10,6 +10,7 @@ import {
     innsatsgruppe,
     kjonn,
     manuellBrukerStatus,
+    manuellBrukerStatusUtenKRR,
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
@@ -21,7 +22,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.less';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, SISTE_ENDRING} from '../../konstanter';
+import {GJEM_HOVEDMAL, UTEN_KRR_FILTER, SISTE_ENDRING} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
@@ -43,6 +44,8 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
+    const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
+
     return (
         <div
             className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
@@ -234,7 +237,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <CheckboxFilterform
                             form="manuellBrukerStatus"
-                            valg={manuellBrukerStatus}
+                            valg={erKRRFilterFeatureTogglePa ? manuellBrukerStatusUtenKRR : manuellBrukerStatus}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />

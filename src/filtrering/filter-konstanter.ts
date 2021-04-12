@@ -133,6 +133,9 @@ export const manuellBrukerStatus = {
     MANUELL: 'Manuell oppfølging',
     KRR: 'Reservert i KRR'
 };
+export const manuellBrukerStatusUtenKRR = {
+    MANUELL: 'Manuell oppfølging'
+};
 
 export const ytelse = {
     DAGPENGER: {label: 'Dagpenger'},
