@@ -17,7 +17,7 @@ const toggles = {
     [SISTE_ENDRING]: true,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
     [ULESTE_ENDRINGER]: true,
-    [UTEN_KRR_FILTER]: false
+    [UTEN_KRR_FILTER]: true
 };
 
 export default toggles;
