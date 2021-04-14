@@ -1,9 +1,11 @@
 import * as React from 'react';
 import './arbeidsliste-kategori.less';
-import {ReactComponent as ArbeidslisteikonBla} from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+
+import {ReactComponent as ArbeidslisteikonBla} from '../../ikoner/arbeidsliste/arbeidslisteikoner/blue-bookmark.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../../ikoner/arbeidsliste/arbeidslisteikoner/green-triangle.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../../ikoner/arbeidsliste/arbeidslisteikoner/purple-square.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../../ikoner/arbeidsliste/arbeidslisteikoner/yellow-circle.svg';
+
 import Arbeidslistekategori from './arbeidslistekategori';
 import {Field} from 'formik';
 import {KategoriModell} from '../../../model-interfaces';
@@ -28,16 +30,6 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             dataTestId={`modal_arbeidslistekategori_${KategoriModell.BLA}${indexId}`}
                         />
                         <Arbeidslistekategori
-                            value={KategoriModell.LILLA}
-                            arbeidslistekategori={<ArbeidslisteikonLilla />}
-                            name={props.name}
-                            onChange={() => form.setFieldValue(props.name, KategoriModell.LILLA)}
-                            checked={field.value === KategoriModell.LILLA}
-                            index={props.index}
-                            title="Arbeidslisteikon lilla"
-                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.LILLA}${indexId}`}
-                        />
-                        <Arbeidslistekategori
                             value={KategoriModell.GRONN}
                             arbeidslistekategori={<ArbeidslisteikonGronn />}
                             name={props.name}
@@ -46,6 +38,16 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
                             index={props.index}
                             title="Arbeidslisteikon grønn"
                             dataTestId={`modal_arbeidslistekategori_${KategoriModell.GRONN}${indexId}`}
+                        />
+                        <Arbeidslistekategori
+                            value={KategoriModell.LILLA}
+                            arbeidslistekategori={<ArbeidslisteikonLilla />}
+                            name={props.name}
+                            onChange={() => form.setFieldValue(props.name, KategoriModell.LILLA)}
+                            checked={field.value === KategoriModell.LILLA}
+                            index={props.index}
+                            title="Arbeidslisteikon lilla"
+                            dataTestId={`modal_arbeidslistekategori_${KategoriModell.LILLA}${indexId}`}
                         />
                         <Arbeidslistekategori
                             value={KategoriModell.GUL}
