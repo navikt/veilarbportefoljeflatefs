@@ -15,7 +15,7 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [SISTE_ENDRING]: true,
-    [HENDELSE_MEDISINSKBEHANDLING]: false,
+    [HENDELSE_MEDISINSKBEHANDLING]: true,
     [ULESTE_ENDRINGER]: true,
     [UTEN_KRR_FILTER]: true
 };
