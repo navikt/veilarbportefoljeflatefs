@@ -18,8 +18,7 @@ import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
-import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikoner/blue-bookmark.svg';
-
+import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon-bla.svg';
 import {OrNothing} from '../utils/types/types';
 
 function harValgteAktiviteter(aktiviteter) {

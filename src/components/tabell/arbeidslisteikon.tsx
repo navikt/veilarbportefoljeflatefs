@@ -1,10 +1,9 @@
 import * as React from 'react';
 import '../../minoversikt/minoversikt.less';
-
-import {ReactComponent as ArbeidslisteikonBla} from '../ikoner/arbeidsliste/arbeidslisteikoner/blue-bookmark.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../ikoner/arbeidsliste/arbeidslisteikoner/green-triangle.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../ikoner/arbeidsliste/arbeidslisteikoner/purple-square.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../ikoner/arbeidsliste/arbeidslisteikoner/yellow-circle.svg';
+import {ReactComponent as ArbeidslisteikonBla} from '../ikoner/arbeidsliste/arbeidslisteikon-bla.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../ikoner/arbeidsliste/arbeidslisteikon-gronn.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../ikoner/arbeidsliste/arbeidslisteikon-lilla.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../ikoner/arbeidsliste/arbeidslisteikon-gul.svg';
 
 import {KategoriModell} from '../../model-interfaces';
 

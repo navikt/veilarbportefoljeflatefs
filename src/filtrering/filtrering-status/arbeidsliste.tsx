@@ -3,11 +3,10 @@ import hiddenIf from '../../components/hidden-if/hidden-if';
 import {Element} from 'nav-frontend-typografi';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.less';
-
-import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikoner/blue-bookmark.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikoner/green-triangle.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikoner/purple-square.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikoner/yellow-circle.svg';
+import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon-bla.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon-gronn.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon-lilla.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon-gul.svg';
 import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
