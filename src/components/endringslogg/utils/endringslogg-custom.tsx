@@ -22,6 +22,12 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '16. april 2021',
+        tittel: 'Justering av arbeidslisteikoner',
+        versjonId: '16.04.21',
+        tekst: 'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
+    },
+    {
         dato: '08. april 2021',
         tittel: 'Ny aktivitet for brukere og nye filter i oversikten',
         versjonId: '08.04.21',
