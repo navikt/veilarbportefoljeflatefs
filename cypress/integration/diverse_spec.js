@@ -121,7 +121,7 @@ describe('Diverse', () => {
             .click();
         cy.wait(1000);
         cy.getByTestId('til-toppen_knapp').should('be.hidden');
-        cy.scrollTo(0, 2000);
+        cy.scrollTo(0, 4000);
         cy.getByTestId('til-toppen_knapp')
             .should('not.be.hidden')
             .click();
@@ -230,6 +230,7 @@ describe('Diverse', () => {
             .contains('Velg')
             .should('be.visible')
             .click();
+        cy.wait(1000);
         cy.getByTestId('modal-suksess_tildel-veileder')
             .should('be.visible')
             .click();

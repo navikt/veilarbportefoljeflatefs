@@ -16,15 +16,16 @@ function Barlabel({htmlFor, labelTekst, antall, className}: BarlabelProps) {
         <label htmlFor={htmlFor} className={classNames('barlabel', className)}>
             <div className="barlabel__labeltext">{labelTekst}</div>
             <div className="barlabel__barwrapper barlabel__barwrapper">
-                {htmlFor === 'minArbeidsliste' && (
+                {htmlFor === 'minArbeidsliste' ? (
                     <div className="arbeidsliste">
                         <span className="text-hide" aria-live="polite" aria-atomic="true">
                             {`Det er ${tekstAntallBrukere(antall)} i Min arbeidsliste`}
                         </span>
                         <Element className="barlabel__antall">{antall}</Element>
                     </div>
+                ) : (
+                    <Element className="barlabel__antall">{antall}</Element>
                 )}
-                {htmlFor !== 'minArbeidsliste' && <Element className="barlabel__antall">{antall}</Element>}
             </div>
         </label>
     );
