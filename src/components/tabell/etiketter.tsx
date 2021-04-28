@@ -14,7 +14,7 @@ function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: Etiketter
             <Bas type="info" className="etikett--doed" hidden={!bruker.erDoed} typo="undertekst">
                 Død
             </Bas>
-            <Advarsel hidden={bruker.sikkerhetstiltak.length === 0} typo="undertekst">
+            <Advarsel hidden={!bruker.sikkerhetstiltak || bruker.sikkerhetstiltak.length === 0} typo="undertekst">
                 Sikkerhetstiltak
             </Advarsel>
             <Fokus hidden={!bruker.diskresjonskode} typo="undertekst">
