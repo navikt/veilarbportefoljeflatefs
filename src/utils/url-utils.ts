@@ -55,3 +55,7 @@ export function updateLastPath() {
         localStorage.setItem('lastsearch', search);
     }
 }
+
+export function getBrukVeilarbportefoljeV2FraUrl() {
+    return queryString.parse(window.location.search).brukV2;
+}

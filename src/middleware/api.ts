@@ -2,6 +2,7 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
+import {getBrukVeilarbportefoljeV2FraUrl} from '../utils/url-utils';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -14,7 +15,7 @@ const MED_CREDENTIALS: RequestInit = {
 };
 
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
-export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
+export const VEILARBPORTEFOLJE_URL = `/veilarbportefolje/api${getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''}`;
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
