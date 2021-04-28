@@ -26,7 +26,7 @@ function AktivitetFilterformAvansert({
     harAvanserteAktiviteter
 }: AktivitetFilterformProps) {
     const handleChange = (aktivitetKey, verdi) => {
-        if (filtervalg.aktiviteterForenklet.length > 0) {
+        if (filtervalg.aktiviteterForenklet && filtervalg.aktiviteterForenklet.length > 0) {
             nullstillForenkledeAktiviteter();
         }
         endreFiltervalg('aktiviteter', {
