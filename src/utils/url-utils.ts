@@ -56,6 +56,6 @@ export function updateLastPath() {
     }
 }
 
-export function getBrukVeilarbportefoljeV2FraUrl() {
-    return queryString.parse(window.location.search).brukV2;
+export function getBrukVeilarbportefoljeV2FraUrl(): boolean {
+    return !!queryString.parse(window.location.search).brukV2;
 }
