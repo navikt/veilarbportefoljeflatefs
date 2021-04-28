@@ -15,7 +15,7 @@ const MED_CREDENTIALS: RequestInit = {
 };
 
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
-export const VEILARBPORTEFOLJE_URL = `/veilarbportefolje/api${getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''}`;
+export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
@@ -41,7 +41,9 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filterva
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}${
+        getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''
+    }/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
     return fetchToJson(url, config);
@@ -61,7 +63,9 @@ export function hentVeiledersPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}${
+        getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''
+    }/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
     return fetchToJson(url, config);
