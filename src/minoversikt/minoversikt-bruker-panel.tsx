@@ -54,7 +54,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     }
 
     const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
-    const arbeidslisteAktiv = bruker.arbeidsliste.arbeidslisteAktiv;
+    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
 
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
@@ -84,8 +84,8 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
-                        kategori={bruker.arbeidsliste.kategori}
-                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste.kategori}`}
+                        kategori={bruker.arbeidsliste?.kategori}
+                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
                 </div>
                 <MinOversiktKolonner

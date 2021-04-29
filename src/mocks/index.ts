@@ -157,9 +157,9 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 mock.post('/veilarbportefolje/api/v2/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
-mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
+mock.post('/veilarbportefolje/api/v2/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
-)
+);
 
 // situasjon-api
 function tildel(body: any) {
