@@ -11,7 +11,7 @@ import TvungenStepper from './components/modal/tour-modal/tvungen-stepper';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.less';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
-import {SISTE_ENDRING, TVUNGEN_STEPPER} from './konstanter';
+import {SISTE_ENDRING} from './konstanter';
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
