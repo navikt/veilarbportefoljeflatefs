@@ -3,20 +3,20 @@ before('Start server', () => {
 });
 
 describe('Arbeidsliste', () => {
-    //TODO fjern denne når tvungen stepper er borte
-    before('Tvungen stepper', () => {
-        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
-        cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
-            .click();
-        cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
-            .click();
-        cy.getByTestId('endringslogg_ferdig-knapp')
-            .contains('Ferdig')
-            .click();
-        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-    });
+    //TODO toggle denne når tvungen stepper er av/på
+    // before('Tvungen stepper', () => {
+    //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
+    //     cy.getByTestId('endringslogg_neste-knapp')
+    //         .contains('Neste')
+    //         .click();
+    //     cy.getByTestId('endringslogg_neste-knapp')
+    //         .contains('Neste')
+    //         .click();
+    //     cy.getByTestId('endringslogg_ferdig-knapp')
+    //         .contains('Ferdig')
+    //         .click();
+    //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+    // });
     let fornavn = '';
     let antallMedArbeidsliste = 0;
     let antallMedArbeidslisteEtterOppretting = 0;
@@ -33,11 +33,6 @@ describe('Arbeidsliste', () => {
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
-        //TODO fjern denne når tvungen stepper er borte
-        cy.getByTestId('min-oversikt_brukerliste-checkbox')
-            .first()
-            .should('not.be.checked')
-            .check({force: true});
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp')

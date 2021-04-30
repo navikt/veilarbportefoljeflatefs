@@ -15,6 +15,7 @@ export const SISTE_ENDRING = 'veilarbportefolje.siste_endring';
 export const HENDELSE_MEDISINSKBEHANDLING = 'veilarbportefolje.hendelse_medisinskbehandling';
 export const ULESTE_ENDRINGER = 'veilarbportefolje.uleste_endringer';
 export const UTEN_KRR_FILTER = 'veilarbportefolje.uten_krr_filter';
+export const TVUNGEN_STEPPER = 'veilarbportefolje.tvungen_stepper';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -25,5 +26,6 @@ export const PORTEFOLJE_FEATURES = [
     SISTE_ENDRING,
     HENDELSE_MEDISINSKBEHANDLING,
     ULESTE_ENDRINGER,
-    UTEN_KRR_FILTER
+    UTEN_KRR_FILTER,
+    TVUNGEN_STEPPER
 ];
