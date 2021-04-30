@@ -19,7 +19,7 @@ const toggles = {
     [HENDELSE_MEDISINSKBEHANDLING]: true,
     [ULESTE_ENDRINGER]: true,
     [UTEN_KRR_FILTER]: true,
-    [TVUNGEN_STEPPER]: true
+    [TVUNGEN_STEPPER]: false
 };
 
 export default toggles;

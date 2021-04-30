@@ -110,7 +110,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                             Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Hvor fornøyd er du med filtrene "Siste endring av bruker"? Svaret er anonymt.
+                            Hvor fornøyd er du med de nye filtrene "Siste endring av bruker"? Svaret er anonymt.
                         </Normaltekst>
                         {visTilfredshet ? (
                             <>
