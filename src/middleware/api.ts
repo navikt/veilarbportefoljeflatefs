@@ -2,6 +2,7 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
+import {getBrukVeilarbportefoljeV2FraUrl} from '../utils/url-utils';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -40,7 +41,9 @@ export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filterva
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}${
+        getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''
+    }/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
     return fetchToJson(url, config);
@@ -60,7 +63,9 @@ export function hentVeiledersPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
+    const baseUrl = `${VEILARBPORTEFOLJE_URL}${
+        getBrukVeilarbportefoljeV2FraUrl() ? '/v2' : ''
+    }/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
     return fetchToJson(url, config);

@@ -9,7 +9,8 @@ import {
     VEDTAKSTOTTE,
     HENDELSE_MEDISINSKBEHANDLING,
     ULESTE_ENDRINGER,
-    UTEN_KRR_FILTER
+    UTEN_KRR_FILTER,
+    TVUNGEN_STEPPER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -26,7 +27,8 @@ const initalState: FeaturesState = {
     [SISTE_ENDRING]: false,
     [HENDELSE_MEDISINSKBEHANDLING]: false,
     [ULESTE_ENDRINGER]: false,
-    [UTEN_KRR_FILTER]: false
+    [UTEN_KRR_FILTER]: false,
+    [TVUNGEN_STEPPER]: false
 };
 
 // Reducer

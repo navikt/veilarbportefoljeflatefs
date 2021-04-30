@@ -16,7 +16,7 @@ interface TilbakemeldingFabProps {
 
 function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     const TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
-    const TILBAKEMELDING_FEATURE_TAG = 'meldeplikt'; // NB: Husk å endre for hver nye feature
+    const TILBAKEMELDING_FEATURE_TAG = 'siste_endring'; // TODO: Husk å endre for hver nye feature
 
     const [isModalOpen, setModalOpen] = useState(false);
     const harSendtTilbakemelding = false;

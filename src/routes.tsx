@@ -29,7 +29,7 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab />
                     <TilToppenKnapp />
-                    {erSisteEndringFeatureTogglePa && <TvungenStepper skalVises={true} />}
+                    {erSisteEndringFeatureTogglePa && <TvungenStepper/>}
                 </Innholdslaster>
             </div>
         </div>
