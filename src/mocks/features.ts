@@ -6,7 +6,8 @@ import {
     ALERTSTRIPE_FEILMELDING,
     ULESTE_ENDRINGER,
     HENDELSE_MEDISINSKBEHANDLING,
-    UTEN_KRR_FILTER
+    UTEN_KRR_FILTER,
+    TVUNGEN_STEPPER
 } from '../konstanter';
 
 const toggles = {
@@ -17,7 +18,8 @@ const toggles = {
     [SISTE_ENDRING]: true,
     [HENDELSE_MEDISINSKBEHANDLING]: true,
     [ULESTE_ENDRINGER]: true,
-    [UTEN_KRR_FILTER]: true
+    [UTEN_KRR_FILTER]: true,
+    [TVUNGEN_STEPPER]: true
 };
 
 export default toggles;

@@ -3,20 +3,20 @@ before('Start server', () => {
 });
 
 describe('Diverse', () => {
-    //TODO fjern denne når tvungen stepper er borte
-    before('Tvungen stepper', () => {
-        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
-        cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
-            .click();
-        cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
-            .click();
-        cy.getByTestId('endringslogg_ferdig-knapp')
-            .contains('Ferdig')
-            .click();
-        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-    });
+    //TODO toggle denne når tvungen stepper er av/på
+    // before('Tvungen stepper', () => {
+    //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
+    //     cy.getByTestId('endringslogg_neste-knapp')
+    //         .contains('Neste')
+    //         .click();
+    //     cy.getByTestId('endringslogg_neste-knapp')
+    //         .contains('Neste')
+    //         .click();
+    //     cy.getByTestId('endringslogg_ferdig-knapp')
+    //         .contains('Ferdig')
+    //         .click();
+    //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
+    // });
     it('Verifiser blå prikk og stepper', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
         cy.getByTestId('endringslogg-innhold').should('not.exist');
@@ -58,34 +58,35 @@ describe('Diverse', () => {
             .click();
         cy.getByTestId('tilbakemelding_modal').should('be.visible');
 
-        //Hvis checkbox
-        cy.getByTestId('tilfredshet_send-knapp')
-            .contains('Send')
-            .click({force: true});
+        //TODO toggle hvis tilbakemeldingsundersøkelsen er checkboxer/tilfredshet
+            //Hvis checkbox
+        // cy.getByTestId('tilfredshet_send-knapp')
+        //     .contains('Send')
+        //     .click({force: true});
+        //
+        // cy.getByTestId('tilfredshet_feilmelding')
+        //     .contains('Velg minst en avkrysningsboks.')
+        //     .should('be.visible');
+        //
+        // cy.checkbox('checkboxvalg_1');
+        // cy.checkbox('checkboxvalg_4');
+        // cy.checkbox('checkboxvalg_7');
+        // cy.checkbox('checkboxvalg_8');
+        //
+        // cy.getByTestId('checkboxvalg_2').should('be.disabled');
+        // cy.getByTestId('checkboxvalg_3').should('be.disabled');
+        // cy.getByTestId('checkboxvalg_5').should('be.disabled');
+        // cy.getByTestId('checkboxvalg_6').should('be.disabled');
 
-        cy.getByTestId('tilfredshet_feilmelding')
-            .contains('Velg minst en avkrysningsboks.')
-            .should('be.visible');
-
-        cy.checkbox('checkboxvalg_1');
-        cy.checkbox('checkboxvalg_4');
-        cy.checkbox('checkboxvalg_7');
-        cy.checkbox('checkboxvalg_8');
-
-        cy.getByTestId('checkboxvalg_2').should('be.disabled');
-        cy.getByTestId('checkboxvalg_3').should('be.disabled');
-        cy.getByTestId('checkboxvalg_5').should('be.disabled');
-        cy.getByTestId('checkboxvalg_6').should('be.disabled');
-
-        // Hvis tilfredshet
-        // cy.getByTestId('tilfredshet-ikon_5')
-        //     .should('be.visible')
-        //     .click();
-        // cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
-        // cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        // cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        // cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        // cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+            // Hvis tilfredshet
+        cy.getByTestId('tilfredshet-ikon_5')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
+        cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
+        cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
 
         cy.getByTestId('tilfredshet_kommentarfelt')
             .should('be.empty')

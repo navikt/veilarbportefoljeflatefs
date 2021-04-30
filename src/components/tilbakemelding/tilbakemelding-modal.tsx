@@ -38,7 +38,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
     const [feilmelding, setFeilmelding] = useState<string>('');
 
     const ikkeVisIgjen = false;
-    const visTilfredshet = false;
+    const visTilfredshet = true;
 
     const handleFormSubmitted = e => {
         e.preventDefault();
@@ -84,6 +84,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
     if ((!open && !harBlittVist) || ikkeVisIgjen) {
         return null;
     }
+
     const harBesvartTilfredshet = tilfredshet > 0;
     const visFritekst = true;
 
@@ -106,11 +107,10 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                 ) : (
                     <>
                         <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
-                            Meldekortopplysninger
+                            Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Hvilke opplysninger fra brukernes meldekort er viktigst for deg? Svarene er anonyme, og du
-                            kan velge maks 4 opplysninger.
+                            Hvor fornøyd er du med filtrene "Siste endring av bruker"? Svaret er anonymt.
                         </Normaltekst>
                         {visTilfredshet ? (
                             <>
@@ -131,7 +131,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                             <div className="tilbakemelding-modal__kommentar">
                                                 <Textarea
                                                     className="tilbakemelding-modal__kommentar-felt"
-                                                    label="Fortell gjerne litt mer om hvorfor."
+                                                    label="Si gjerne litt mer om hvordan du bruker disse filtrene i oppfølgingen. (Frivillig)"
                                                     rows={KOMMENTAR_ROWS}
                                                     maxLength={KOMMENTAR_MAX_CHAR}
                                                     value={kommentar}
