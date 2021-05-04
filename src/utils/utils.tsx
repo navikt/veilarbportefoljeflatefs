@@ -112,9 +112,26 @@ export const keyCodes = {
 };
 
 export function specialChar(str: string) {
-    return str.toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
+    return str
+        .toLowerCase()
+        .split('æ')
+        .join('ae')
+        .split('ø')
+        .join('o')
+        .split('å')
+        .join('a');
 }
 
 export function kebabCase(str: string) {
-    return specialChar(str).toLowerCase().replace(/\s+/g, '-');
+    return specialChar(str)
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+}
+
+export function capitalize(str: string) {
+    return str
+        .toLowerCase()
+        .replace(/(?!^[0-9])(^|[^a-zA-Z\u00C0-\u017F\u0400-\u04FF'])([a-zA-Z\u00C0-\u017F\u0400-\u04FF])/g, s =>
+            s.toUpperCase()
+        );
 }
