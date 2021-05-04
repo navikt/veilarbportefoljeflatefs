@@ -131,7 +131,5 @@ export function kebabCase(str: string) {
 export function capitalize(str: string) {
     return str
         .toLowerCase()
-        .replace(/(?!^[0-9])(^|[^a-zA-Z\u00C0-\u017F\u0400-\u04FF'])([a-zA-Z\u00C0-\u017F\u0400-\u04FF])/g, s =>
-            s.toUpperCase()
-        );
+        .replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());
 }
