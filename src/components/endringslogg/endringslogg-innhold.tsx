@@ -31,16 +31,14 @@ export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     const content = props.innleggsListe.map((endring, index) => {
         return (
-            endring.erEndringsloggFeaturePa && (
-                <EndringsloggInnlegg
-                    key={index}
-                    dato={endring.dato}
-                    innholdsTekst={endring.tekst}
-                    innholdsOverskrift={endring.tittel}
-                    nyeNotifikasjoner={!endring.sett}
-                    children={endring.children}
-                />
-            )
+            <EndringsloggInnlegg
+                key={index}
+                dato={endring.dato}
+                innholdsTekst={endring.tekst}
+                innholdsOverskrift={endring.tittel}
+                nyeNotifikasjoner={!endring.sett}
+                children={endring.children}
+            />
         );
     });
 
