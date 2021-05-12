@@ -68,8 +68,8 @@ function VeilederCheckboxListe(props: any) {
 
         return veiledere.data.veilederListe.filter(
             veileder =>
-                (veileder.navn?.toLowerCase().indexOf(query) >= 0) ||
-                (veileder.ident?.toLowerCase().indexOf(query) >= 0)
+                (veileder.navn && veileder.navn.toLowerCase().indexOf(query) >= 0) ||
+                (veileder.ident && veileder.ident.toLowerCase().indexOf(query) >= 0)
         );
     };
 
@@ -131,7 +131,7 @@ function VeilederCheckboxListe(props: any) {
 
     const valgCheckboxListe = mapVeiledereToCheckboxList(getFiltrerteVeiledere());
     const harValg = valgCheckboxListe && valgCheckboxListe.length > 0;
-    const harValgteElementer = valgteElementer?.length > 0;
+    const harValgteElementer = valgteElementer && valgteElementer.length > 0;
 
     if (!open) {
         return null;

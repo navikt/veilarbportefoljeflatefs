@@ -33,7 +33,7 @@ function Dropdown(props: DropdownProps) {
     const {focusRef} = useFocus();
 
     function handler(e) {
-        if (apen && !divRef.current?.contains(e.target)) {
+        if (apen && divRef.current && !divRef.current.contains(e.target)) {
             lukkDropdown();
         }
     }
