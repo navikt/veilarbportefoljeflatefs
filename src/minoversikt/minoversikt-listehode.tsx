@@ -26,7 +26,7 @@ function harValgteAktiviteter(aktiviteter) {
         const valgteAktiviteter = Object.values(aktiviteter).filter(
             aktivitetvalg => aktivitetvalg !== AktiviteterValg.NA
         );
-        return valgteAktiviteter?.length > 0;
+        return valgteAktiviteter && valgteAktiviteter.length > 0;
     }
     return false;
 }
@@ -59,7 +59,9 @@ function MinOversiktListeHode({
         ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const iAvtaltAktivitet =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+        !!ferdigfilterListe &&
+        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+        valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avansertAktivitet = iAvtaltAktivitet
         ? false
@@ -124,7 +126,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
                     tekst="Arbeidsliste frist"
                     skalVises={
-                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
                         valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
                     }
                     className="col col-xs-2"
@@ -138,7 +141,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
                     tekst="Arbeidsliste tittel"
                     skalVises={
-                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
                         valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
                     }
                     className="col col-xs-2"
@@ -184,7 +188,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     tekst="Dato på melding"
-                    skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
                     className="col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra NAV"'
                     headerId="venter-pa-svar-fra-nav"
@@ -195,7 +199,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     tekst="Dato på melding"
-                    skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                     className="col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     headerId="venter-pa-svar-fra-bruker"
@@ -206,7 +210,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     tekst="Utløpsdato aktivitet"
-                    skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
+                    skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
                     className="col col-xs-2"
                     title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="utlopte-aktiviteter"
@@ -228,14 +232,20 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
                     tekst="Klokkeslett møte"
-                    skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                    skalVises={
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(MOTER_IDAG) &&
+                        valgteKolonner.includes(Kolonne.MOTER_IDAG)
+                    }
                     className="col col-xs-2"
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
                 />
                 <Header
                     skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(MOTER_IDAG) &&
+                        valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
                     }
                     className="col col-xs-2"
                     title="Varighet på møtet"
@@ -249,7 +259,9 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
                     skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(UNDER_VURDERING) &&
+                        valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
                     tekst="Status § 14a-vedtak"
                     className="col col-xs-2"
@@ -263,7 +275,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
                     tekst="Dager siden status"
                     skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                     }
                     className="col col-xs-2"
@@ -277,7 +290,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
                     tekst="Ansvarlig for vedtak"
                     skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
                     }
                     className="col col-xs-2"
@@ -302,7 +316,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
                     tekst="Startdato aktivitet"
                     skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
                     }
                     className="col col-xs-2"
@@ -316,7 +331,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
                     tekst="Neste startdato aktivitet"
                     skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
                     }
                     className="col col-xs-2"
@@ -330,7 +346,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     tekst="Passert startdato aktivitet"
                     skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                     }
                     className="col col-xs-2"
@@ -344,7 +361,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     tekst="Passert startdato aktivitet"
                     skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                        !!ferdigfilterListe &&
+                        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                     }
                     className="col col-xs-2"

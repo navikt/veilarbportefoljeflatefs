@@ -109,7 +109,7 @@ describe('Diverse', () => {
         cy.getByTestId('tilbakemelding_modal_takk').should('not.exist');
     });
 
-    it('Paginering', () => {
+    it('Paginering og til toppen-knapp', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('paginering_venstre').should('be.disabled');
         cy.getByTestId('paginering_hoyre').should('be.enabled');
@@ -121,6 +121,12 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
         cy.wait(1000);
+        cy.getByTestId('til-toppen_knapp').should('be.hidden');
+        cy.scrollTo(0, 4000);
+        cy.getByTestId('til-toppen_knapp')
+            .should('not.be.hidden')
+            .click();
+        cy.getByTestId('til-toppen_knapp').should('be.hidden');
         cy.getByTestId('paginering-tall_7').should('not.exist');
         cy.get('.brukerliste')
             .children()

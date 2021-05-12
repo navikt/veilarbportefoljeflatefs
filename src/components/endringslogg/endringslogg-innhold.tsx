@@ -1,5 +1,5 @@
 import classNames from 'classnames/dedupe';
-import {Normaltekst, Undertekst, Undertittel} from 'nav-frontend-typografi';
+import {EtikettLiten, Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {default as React} from 'react';
 import {ReactComponent as LinkIcon} from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
@@ -31,14 +31,16 @@ export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; 
 export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
     const content = props.innleggsListe.map((endring, index) => {
         return (
-            <EndringsloggInnlegg
-                key={index}
-                dato={endring.dato}
-                innholdsTekst={endring.tekst}
-                innholdsOverskrift={endring.tittel}
-                nyeNotifikasjoner={!endring.sett}
-                children={endring.children}
-            />
+            endring.erEndringsloggFeaturePa && (
+                <EndringsloggInnlegg
+                    key={index}
+                    dato={endring.dato}
+                    innholdsTekst={endring.tekst}
+                    innholdsOverskrift={endring.tittel}
+                    nyeNotifikasjoner={!endring.sett}
+                    children={endring.children}
+                />
+            )
         );
     });
 
@@ -56,7 +58,7 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                         'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                     })}
                 />
-                <Undertekst>{props.dato}</Undertekst>
+                <EtikettLiten>{props.dato}</EtikettLiten>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel> {props.innholdsOverskrift} </Undertittel>
