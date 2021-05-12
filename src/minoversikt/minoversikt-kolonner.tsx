@@ -59,7 +59,9 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet: boolean =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+        !!ferdigfilterListe &&
+        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
+        valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak: boolean = iAvtaltAktivitet
         ? false
         : !!valgteAktivitetstyper &&
@@ -85,7 +87,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={arbeidslisteFrist}
                 skalVises={
-                    !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
                     valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
                 }
             />
@@ -93,7 +96,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 bruker={bruker}
                 skalVises={
-                    !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MIN_ARBEIDSLISTE) &&
                     valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
                 }
             />
@@ -142,22 +146,30 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
             />
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MOTER_IDAG) &&
+                    valgteKolonner.includes(Kolonne.MOTER_IDAG)
+                }
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                skalVises={
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(MOTER_IDAG) &&
+                    valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -167,7 +179,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
+                skalVises={!!ferdigfilterListe && ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -178,7 +190,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
                 skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                     valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
                 }
             />
@@ -186,7 +199,8 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
                 skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                     valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
                 }
             />
@@ -194,14 +208,17 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
                     valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                 }
             />
             <TekstKolonne
                 tekst={bruker.vedtakStatus}
                 skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                 }
                 className="col col-xs-2"
             />
@@ -209,14 +226,16 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 dato={dagerSiden(bruker.vedtakStatusEndret)}
                 skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
             />
             <TekstKolonne
                 tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
                 skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
+                    !!ferdigfilterListe &&
+                    ferdigfilterListe.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
                 }
                 className="col col-xs-2"

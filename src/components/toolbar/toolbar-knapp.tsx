@@ -24,7 +24,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     };
 
     const handleClickOutside = e => {
-        if (loggNode.current?.contains(e.target)) {
+        if (loggNode.current && loggNode.current.contains(e.target)) {
             // Klikket er inne i komponenten
             return;
         }

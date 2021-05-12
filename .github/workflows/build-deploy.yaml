@@ -29,6 +29,24 @@ jobs:
                   token: ${{ secrets.TRELLO_TOKEN }}
                   card-id: ${{ steps.card.outputs.card-id }}
                   attachment-type: branch
+    cypress-run:
+        name: Cypress run
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Cypress run
+              uses: cypress-io/github-action@v2
+              with:
+                  browser: chrome
+                  headless: true
+                  start: npm start cypress:run
+                  wait-on: http://localhost:3000
+                  record: true
+              env:
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
     build:
         name: Build Project
         runs-on: ubuntu-latest
