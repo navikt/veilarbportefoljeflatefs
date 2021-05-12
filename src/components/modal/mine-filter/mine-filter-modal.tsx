@@ -45,7 +45,9 @@ export function MineFilterModal(props: {oversiktType: string}) {
             .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
-    const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
+    const filterValg = useSelector((state: AppState) =>
+        props.oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
+    );
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY);
 
     const dispatch = useDispatch();
@@ -55,11 +57,11 @@ export function MineFilterModal(props: {oversiktType: string}) {
     };
 
     useEffect(() => {
-        if (filtreringMinOversikt.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL);
+        if (filterValg.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL);
         else if (valgtMineFilter) setValgtVisningstype(Visningstype.OPPDATER);
         else if (!sisteValgtMineFilter) setValgtVisningstype(Visningstype.LAGRE_NYTT);
         else setValgtVisningstype(Visningstype.MENY);
-    }, [filtreringMinOversikt, valgtMineFilter, sisteValgtMineFilter, erModalApen]);
+    }, [filterValg, valgtMineFilter, sisteValgtMineFilter, erModalApen]);
 
     return (
         <Modal
