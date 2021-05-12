@@ -60,9 +60,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet: boolean =
-        !!ferdigfilterListe &&
-        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-        valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avtaltAktivitetOgTiltak: boolean = iAvtaltAktivitet
         ? false
@@ -141,8 +139,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />
@@ -150,8 +147,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) &&
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />
@@ -159,8 +155,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) &&
+                    !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
                     valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
                 }
             />
@@ -177,27 +172,17 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(MOTER_IDAG) &&
-                    valgteKolonner.includes(Kolonne.MOTER_IDAG)
-                }
+                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(MOTER_IDAG) &&
-                    valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
-                }
+                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <TekstKolonne
                 tekst={bruker.vedtakStatus}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
+                    !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                 }
                 className="col col-xs-2"
             />
@@ -205,16 +190,14 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 dato={dagerSiden(bruker.vedtakStatusEndret)}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
             />
             <TekstKolonne
                 tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
                 skalVises={
-                    !!ferdigfilterListe &&
-                    ferdigfilterListe.includes(UNDER_VURDERING) &&
+                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
                 }
                 className="col col-xs-2"

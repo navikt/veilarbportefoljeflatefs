@@ -25,7 +25,7 @@ function harValgteAktiviteter(aktiviteter) {
         const valgteAktiviteter = Object.values(aktiviteter).filter(
             aktivitetvalg => aktivitetvalg !== AktiviteterValg.NA
         );
-        return valgteAktiviteter && valgteAktiviteter.length > 0;
+        return valgteAktiviteter?.length > 0;
     }
     return false;
 }
@@ -57,9 +57,7 @@ function EnhetListehode({
         ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const iAvtaltAktivitet =
-        !!ferdigfilterListe &&
-        ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-        valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avansertAktivitet = iAvtaltAktivitet
         ? false
@@ -165,8 +163,7 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     tekst="Dato på melding"
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV) &&
+                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
                         valgteKolonner.includes(Kolonne.VENTER_SVAR)
                     }
                     className="col col-xs-2"
@@ -180,8 +177,7 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     tekst="Dato på melding"
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
+                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
                         valgteKolonner.includes(Kolonne.VENTER_SVAR)
                     }
                     className="col col-xs-2"
@@ -195,8 +191,7 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     tekst="Utløpsdato aktivitet"
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(UTLOPTE_AKTIVITETER) &&
+                        !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
                         valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
                     }
                     className="col col-xs-2"
@@ -231,20 +226,14 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
                     tekst="Klokkeslett møte"
-                    skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(MOTER_IDAG) &&
-                        valgteKolonner.includes(Kolonne.MOTER_IDAG)
-                    }
+                    skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                     className="col col-xs-2"
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
                 />
                 <Header
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(MOTER_IDAG) &&
-                        valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
+                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
                     }
                     className="col col-xs-2"
                     title="Varighet på møtet"
@@ -258,9 +247,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
+                        !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
                     tekst="Status § 14a-vedtak"
                     className="col col-xs-2"
@@ -274,8 +261,7 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
                     tekst="Statusendring"
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(UNDER_VURDERING) &&
+                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                     }
                     className="col col-xs-2"
@@ -289,8 +275,7 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
                     tekst="Ansvarlig for vedtak"
                     skalVises={
-                        !!ferdigfilterListe &&
-                        ferdigfilterListe.includes(UNDER_VURDERING) &&
+                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
                     }
                     className="col col-xs-2"
