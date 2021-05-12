@@ -155,33 +155,10 @@ mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, js
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 
 mock.post('/veilarbportefolje/api/v2/enhet/:enhetId/portefolje', (req, res, ctx) =>
-    res(
-        ctx.json(
-            lagPortefolje(
-                req.queryParams,
-                req.pathParams.enhetId,
-                brukere.map(bruker => ({
-                    ...bruker,
-                    fornavn: bruker.fornavn.toUpperCase(),
-                    etternavn: bruker.etternavn.toUpperCase()
-                }))
-            )
-        )
-    )
+    res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
 mock.post('/veilarbportefolje/api/v2/veileder/:ident/portefolje', (req, res, ctx) =>
-    res(
-        ctx.json(
-            lagPortefoljeForVeileder(
-                req.queryParams,
-                brukere.map(bruker => ({
-                    ...bruker,
-                    fornavn: bruker.fornavn.toUpperCase(),
-                    etternavn: bruker.etternavn.toUpperCase()
-                }))
-            )
-        )
-    )
+    res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
 );
 
 // situasjon-api

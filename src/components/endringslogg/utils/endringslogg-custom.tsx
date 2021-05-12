@@ -4,6 +4,7 @@ import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
+import {FeaturesState} from '../../../ducks/features';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -16,6 +17,7 @@ export interface EndringsloggInnlegg {
 
 export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
     sett: boolean;
+    erEndringsloggFeaturePa?: boolean;
 }
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
@@ -203,6 +205,18 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
     }
 ];
 
+export function settModalEndring(
+    innholdState: EndringsloggInnleggMedSettStatus[],
+    modal: string
+): EndringsloggInnleggMedSettStatus[] {
+    return innholdState.map(el => {
+        if (el.versjonId === modal) {
+            el.sett = true;
+        }
+        return el;
+    });
+}
+
 export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
     return endringslogginnhold.map(el => {
         return {
@@ -212,12 +226,13 @@ export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
     });
 }
 
-export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
+export function mapRemoteToState(remotestorage: string[], features: FeaturesState): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map(el => {
         const settRemote = remotestorage.some(ver => ver === el.versjonId);
         return {
             ...el,
-            sett: settRemote
+            sett: settRemote,
+            erEndringsloggFeaturePa: el.featureToggleName ? features[el.featureToggleName] : true
         };
     });
 }

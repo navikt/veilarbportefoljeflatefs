@@ -10,7 +10,6 @@ import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
-import {capitalize} from '../utils/utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -116,12 +115,7 @@ export default function reducer(state = initialState, action): PortefoljeState {
                 status: STATUS.OK,
                 data: {
                     ...action.data,
-                    brukere: action.data.brukere.map(bruker => ({
-                        ...bruker,
-                        guid: lagBrukerGuid(bruker),
-                        fornavn: capitalize(bruker.fornavn),
-                        etternavn: capitalize(bruker.etternavn)
-                    }))
+                    brukere: action.data.brukere.map(bruker => ({...bruker, guid: lagBrukerGuid(bruker)}))
                 }
             };
         case SETT_SORTERING: {
