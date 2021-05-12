@@ -1,5 +1,5 @@
 import classNames from 'classnames/dedupe';
-import {EtikettLiten, Normaltekst, Undertittel} from 'nav-frontend-typografi';
+import {Normaltekst, Undertekst, Undertittel} from 'nav-frontend-typografi';
 import {default as React} from 'react';
 import {ReactComponent as LinkIcon} from './external-link.svg';
 import Lenke from 'nav-frontend-lenker';
@@ -58,7 +58,7 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                         'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                     })}
                 />
-                <EtikettLiten>{props.dato}</EtikettLiten>
+                <Undertekst>{props.dato}</Undertekst>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel> {props.innholdsOverskrift} </Undertittel>
