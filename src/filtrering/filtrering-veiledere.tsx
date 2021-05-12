@@ -20,7 +20,7 @@ function FiltreringVeiledere() {
     const dispatch = useDispatch();
 
     const handleClickOutside = e => {
-        if (!wrapperRef.current?.contains(e.target)) {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
             setHasFocus(false);
         }
     };
