@@ -4,6 +4,7 @@ import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
+import {FeaturesState} from '../../../ducks/features';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -23,7 +24,8 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '16. april 2021',
         tittel: 'Justering av arbeidslisteikoner',
         versjonId: '16.04.21',
-        tekst: 'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
+        tekst:
+            'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
     },
     {
         dato: '08. april 2021',

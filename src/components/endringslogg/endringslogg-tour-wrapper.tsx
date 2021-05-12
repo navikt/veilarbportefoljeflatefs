@@ -12,6 +12,8 @@ import {
 import {logEvent} from '../../utils/frontend-logger';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 function EndringsloggTourWrapper() {
     const veilederIdent = useIdentSelector()!.ident;
@@ -32,7 +34,7 @@ function EndringsloggTourWrapper() {
                 setIsLoading(false);
                 setInnholdsliste(setHarSettAlt);
             });
-    }, []);
+    }, [alleFeatureToggles]);
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);
