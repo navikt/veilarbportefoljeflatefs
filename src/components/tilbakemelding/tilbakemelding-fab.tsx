@@ -24,7 +24,7 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = e => {
-        if (wrapperRef.current && wrapperRef.current.contains(e.target)) {
+        if (wrapperRef.current?.contains(e.target)) {
             return;
         }
         if (isModalOpen) {
