@@ -30,7 +30,7 @@ function EndringsloggTourWrapper() {
                 setIsLoading(false);
                 setInnholdsliste(setHarSettAlt);
             });
-    });
+    }, []);
 
     const registrerInnholdRemote = async (innhold: EndringsloggInnleggMedSettStatus[]) => {
         await registrerInnholdIRemoteStorage(innhold);
