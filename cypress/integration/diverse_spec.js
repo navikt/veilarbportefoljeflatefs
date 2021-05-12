@@ -109,7 +109,7 @@ describe('Diverse', () => {
         cy.getByTestId('tilbakemelding_modal_takk').should('not.exist');
     });
 
-    it('Paginering og til toppen-knapp', () => {
+    it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('paginering_venstre').should('be.disabled');
         cy.getByTestId('paginering_hoyre').should('be.enabled');
