@@ -18,7 +18,7 @@ export const TilToppenKnapp = () => {
         if (knappSkalVises) {
             window.scrollTo({top: 0});
         }
-        if (knappRef && knappRef.current) {
+        if (knappRef?.current) {
             knappRef.current.blur();
         }
         logEvent('portefolje.metrikker.tiltoppenknapp', {

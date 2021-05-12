@@ -12,7 +12,7 @@ import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
-    if (veiledere && veiledere.length > 0) {
+    if (veiledere?.length > 0) {
         return veileder => veiledere.includes(veileder.ident);
     }
     return () => true; // Ikke valgt noe filter, så alle skal være med.

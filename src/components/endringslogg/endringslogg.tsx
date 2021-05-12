@@ -17,7 +17,6 @@ interface EndringsProps {
 export default function Endringslogg(props: EndringsProps) {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const overordnetNotifikasjon = props.innhold
-        .filter(elem => elem.erEndringsloggFeaturePa)
         .some(element => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null); // Referranse til omsluttende div rundt loggen
@@ -33,7 +32,7 @@ export default function Endringslogg(props: EndringsProps) {
     };
 
     const handleClickOutside = e => {
-        if (loggNode.current && loggNode.current.contains(e.target)) {
+        if (loggNode.current?.contains(e.target)) {
             // Klikket er inne i komponenten
             return;
         }
