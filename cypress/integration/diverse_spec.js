@@ -121,12 +121,12 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
         cy.wait(1000);
-        cy.getByTestId('til-toppen_knapp').should('be.hidden');
-        cy.scrollTo(0, 4000);
-        cy.getByTestId('til-toppen_knapp')
-            .should('not.be.hidden')
-            .click();
-        cy.getByTestId('til-toppen_knapp').should('be.hidden');
+        // cy.getByTestId('til-toppen_knapp').should('be.hidden');
+        // cy.scrollTo(0, 8000);
+        // cy.getByTestId('til-toppen_knapp')
+        //     .should('not.be.hidden')
+        //     .click();
+        // cy.getByTestId('til-toppen_knapp').should('be.hidden');
         cy.getByTestId('paginering-tall_7').should('not.exist');
         cy.get('.brukerliste')
             .children()
