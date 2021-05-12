@@ -20,10 +20,12 @@ function EndringsloggTourWrapper() {
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const alleFeatureToggles = useSelector((state: AppState) => state.features);
+
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
             .then(resp => {
-                setInnholdsliste(mapRemoteToState(resp));
+                setInnholdsliste(mapRemoteToState(resp, alleFeatureToggles));
                 setIsLoading(false);
             })
             .catch(() => {
