@@ -213,11 +213,15 @@ function Sidebar(props: SidebarProps) {
     });
 
     return (
-        <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+        <div
+            ref={sidebarRef}
+            aria-label={`Sidenavigasjon er nå ${props.isSidebarHidden ? 'lukket' : 'åpen'}`}
+            className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}
+        >
             <div
                 className="sidebar__tab-container"
                 role="tablist"
-                aria-label="Faner for filtrering"
+                aria-label="Faner for filtrering. Du kan bruke piltastene for å navigere mellom de ulike fanene."
                 aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
             >
                 {Tabs()}
