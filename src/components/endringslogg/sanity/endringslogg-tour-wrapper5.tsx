@@ -12,14 +12,11 @@ import {logEvent} from '../../../utils/frontend-logger';
 import {AppState} from '../../../reducer';
 import {useTimer} from '../../../hooks/use-timer';
 import EndringsloggSanity from './endringslogg4';
-import {EndringsloggData} from './endringslogg-groq1';
 
 function EndringsloggTourWrapperSanity() {
     const veilederIdent = useIdentSelector()!.ident;
-
     const {startTimer, stoppTimer} = useTimer();
     const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
-    const [innholdsListeSanity] = useState<EndringsloggData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const alleFeatureToggles = useSelector((state: AppState) => state.features);
@@ -41,7 +38,7 @@ function EndringsloggTourWrapperSanity() {
     };
 
     const onClose = () => {
-        const ulestFelt = innholdsListe.some(element => !element.sett);
+        // const ulestFelt = innholdsListe.some(element => !element.sett);
         const tidBrukt = stoppTimer();
         if (veilederIdent) {
             krypterVeilederident(veilederIdent)
@@ -51,25 +48,23 @@ function EndringsloggTourWrapperSanity() {
                         {
                             feature: 'mine-filter', //Husk å endre denne ved bytte
                             tidBrukt,
-                            nyeNotifikasjoner: ulestFelt
+                            nyeNotifikasjoner: true
                         },
                         {hash: hexString(res)}
                     )
                 )
                 .catch(e => console.log(e)); // tslint:disable-line
         }
-        if (ulestFelt) {
-            const newList = setHarSettAlt(innholdsListe);
-            setInnholdsliste(newList);
-            registrerInnholdRemote(newList);
-        }
+        const newList = setHarSettAlt(innholdsListe);
+        setInnholdsliste(newList);
+        registrerInnholdRemote(newList);
     };
 
     if (isLoading) {
         return null;
     }
 
-    return <EndringsloggSanity innhold={innholdsListeSanity} onOpen={startTimer} onClose={onClose} />;
+    return <EndringsloggSanity onOpen={startTimer} onClose={onClose} />;
 }
 
 export default EndringsloggTourWrapperSanity;

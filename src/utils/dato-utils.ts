@@ -169,3 +169,47 @@ export function oppfolgingStartetDato(dato: string): Maybe<Date> {
 
     return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
 }
+
+function maanedFormattering(maaned) {
+    switch (maaned) {
+        case '01':
+            return 'januar';
+        case '02':
+            return 'februar';
+        case '03':
+            return 'mars';
+        case '04':
+            return 'april';
+        case '05':
+            return 'mai';
+        case '06':
+            return 'juni';
+        case '07':
+            return 'juli';
+        case '08':
+            return 'august';
+        case '09':
+            return 'september';
+        case '10':
+            return 'oktober';
+        case '11':
+            return 'november';
+        case '12':
+            return 'desember';
+        default:
+            return null;
+    }
+}
+
+export function sanityDatoFormattering(dato: Date) {
+    if (!dato) {
+        return null;
+    }
+    const nyDato = dato.toString();
+
+    const dag = nyDato.substring(8, 10);
+    const maaned = nyDato.substring(5, 7);
+    const aar = nyDato.substring(0, 4);
+
+    return `${dag}. ${maanedFormattering(maaned)} ${aar}`;
+}

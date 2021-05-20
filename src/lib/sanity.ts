@@ -8,7 +8,7 @@ import {
 
 const config: ClientConfig = {
     dataset: "production",
-    projectId: "c9hptfq7",
+    projectId: "9ediv52f",
     useCdn: process.env.NODE_ENV === "production",
 };
 

@@ -3,7 +3,6 @@ import {getClient} from '../../../lib/sanity';
 import groq from 'groq';
 import EndringsloggForside from './endringslogg-forside3';
 import {useEffect, useState} from 'react';
-import {StepperData} from '../../modal/tour-modal-sanity/stepper-groq';
 
 export const groqEndringsloggPreviewFields = `
   tittel,
@@ -26,7 +25,7 @@ export type EndringsloggData = {
     dato: Date;
     innhold: string;
     lenke?: string;
-    stepper?: StepperData[];
+    stepper?: Array<any>;
     _createdAt: string;
     _id: string;
 };

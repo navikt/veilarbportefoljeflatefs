@@ -1,21 +1,18 @@
 import {default as React, RefObject, useRef, useState} from 'react';
-import {ReactComponent as AlarmIcon} from '../icon-v3.svg'
-import {EndringsloggData} from './endringslogg-groq1';
+import {ReactComponent as AlarmIcon} from '../icon-v3.svg';
+import PreviewWrapper from './endringslogg-groq';
 import TransitionContainer from '../utils/transition-container';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import EndringsloggForside from './endringslogg-forside3';
+import '../endringslogg.less'
 
 interface EndringsProps {
-    innhold: EndringsloggData[];
     onOpen: () => void;
     onClose: () => void;
 }
 
 export default function EndringsloggSanity(props: EndringsProps) {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = props.innhold.some(element => !element.sett);
-
     const loggNode = useRef<HTMLDivElement>(null); // Referranse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -63,18 +60,13 @@ export default function EndringsloggSanity(props: EndringsProps) {
 
     return (
         <div ref={loggNode} className="endringslogg">
-            <EndringsloggKnapp
-                klikk={klikk}
-                open={endringsloggApen}
-                nyeNotifikasjoner={overordnetNotifikasjon}
-                buttonRef={buttonRef}
-            />
+            <EndringsloggKnapp klikk={klikk} open={endringsloggApen} nyeNotifikasjoner={true} buttonRef={buttonRef} />
             <TransitionContainer visible={endringsloggApen}>
                 <Undertittel className="collapse-header" tag="h2">
                     Nytt i Arbeidsrettet oppfølging
                 </Undertittel>
                 <div className={'innhold-container'} data-testid="endringslogg-innhold">
-                    <EndringsloggForside endringsloggmeldinger={props.innhold} />
+                    <PreviewWrapper />
                 </div>
             </TransitionContainer>
         </div>

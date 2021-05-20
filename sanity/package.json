@@ -1,10 +1,10 @@
 {
-  "name": "sanity",
+  "name": "veilarbendringslogg",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "package.json",
-  "author": "Tania Holst <holst.tania@gmail.com>",
+  "author": "Team VOFF - PTO",
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
