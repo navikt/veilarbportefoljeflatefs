@@ -10,11 +10,11 @@ import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import {ModalName} from '../../modal/tour-modal/tour-modal';
 import {sanityDatoFormattering} from '../../../utils/dato-utils';
 
-interface EndringsloggForsideProps {
+interface EndringsloggMeldingProps {
     endringsloggmeldinger: EndringsloggData[];
 }
 
-export default function EndringsloggForside(props: EndringsloggForsideProps) {
+export default function EndringsloggMelding(props: EndringsloggMeldingProps) {
     return props.endringsloggmeldinger.length === 0 ? (
         <div className="endringsloggmeldinger_spinner">
             <Spinner />

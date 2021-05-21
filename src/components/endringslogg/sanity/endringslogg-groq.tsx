@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {getClient} from '../../../lib/sanity';
 import groq from 'groq';
-import EndringsloggForside from './endringslogg-forside3';
+import EndringsloggMelding from './endringslogg-melding';
 import {useEffect, useState} from 'react';
 
 export const groqEndringsloggPreviewFields = `
@@ -41,7 +41,7 @@ const PreviewWrapper = () => {
             });
     }, []);
 
-    return <EndringsloggForside endringsloggmeldinger={post} />;
+    return <EndringsloggMelding endringsloggmeldinger={post} />;
 };
 
 export default PreviewWrapper;

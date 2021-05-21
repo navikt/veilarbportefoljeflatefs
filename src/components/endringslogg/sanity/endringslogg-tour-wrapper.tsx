@@ -16,7 +16,8 @@ import EndringsloggInnholdSanity from './endringslogg-innhold';
 function EndringsloggTourWrapperSanity() {
     const veilederIdent = useIdentSelector()!.ident;
     const {startTimer, stoppTimer} = useTimer();
-    const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
+    // const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
+    const [innholdsListeSanity, setInnholdslisteSanity] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const alleFeatureToggles = useSelector((state: AppState) => state.features);
@@ -24,12 +25,12 @@ function EndringsloggTourWrapperSanity() {
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
             .then(resp => {
-                setInnholdsliste(mapRemoteToState(resp, alleFeatureToggles));
+                setInnholdslisteSanity(mapRemoteToState(resp, alleFeatureToggles));
                 setIsLoading(false);
             })
             .catch(() => {
                 setIsLoading(false);
-                setInnholdsliste(setHarSettAlt);
+                setInnholdslisteSanity(setHarSettAlt);
             });
     }, [alleFeatureToggles]);
 
@@ -38,7 +39,7 @@ function EndringsloggTourWrapperSanity() {
     };
 
     const onClose = () => {
-        const ulestFelt = innholdsListe.some(element => !element.sett);
+        const ulestFelt = innholdsListeSanity.some(element => !element.sett);
         const tidBrukt = stoppTimer();
         if (veilederIdent) {
             krypterVeilederident(veilederIdent)
@@ -48,16 +49,21 @@ function EndringsloggTourWrapperSanity() {
                         {
                             feature: 'mine-filter', //Husk å endre denne ved bytte
                             tidBrukt,
-                            nyeNotifikasjoner: true
+                            nyeNotifikasjoner: ulestFelt
                         },
                         {hash: hexString(res)}
                     )
                 )
                 .catch(e => console.log(e)); // tslint:disable-line
         }
-        const newList = setHarSettAlt(innholdsListe);
-        setInnholdsliste(newList);
+        const newList = setHarSettAlt(innholdsListeSanity);
+        setInnholdslisteSanity(newList);
         registrerInnholdRemote(newList);
+        if (ulestFelt) {
+            const newList = setHarSettAlt(innholdsListeSanity);
+            setInnholdslisteSanity(newList);
+            registrerInnholdRemote(newList);
+        }
     };
 
     if (isLoading) {

@@ -9,7 +9,7 @@ import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE, ENDRINGSLOGG_SANITY} from '../konstanter';
 import classNames from 'classnames';
-import EndringsloggTourWrapperSanity from '../components/endringslogg/sanity/endringslogg-tour-wrapper5';
+import EndringsloggTourWrapperSanity from '../components/endringslogg/sanity/endringslogg-tour-wrapper';
 import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean}) {

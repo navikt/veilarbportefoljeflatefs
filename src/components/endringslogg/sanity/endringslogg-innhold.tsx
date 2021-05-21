@@ -1,19 +1,19 @@
-import {default as React, RefObject, useRef, useState} from 'react';
-import {ReactComponent as AlarmIcon} from '../icon-v3.svg';
+import {default as React, useRef, useState} from 'react';
 import PreviewWrapper from './endringslogg-groq';
 import TransitionContainer from '../utils/transition-container';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import Undertittel from 'nav-frontend-typografi/lib/undertittel';
-import '../endringslogg.less'
+import '../endringslogg.less';
+import EndringsloggKnapp from './endringslogg-knapp';
 
-interface EndringsProps {
+interface EndringsloggInnholdProps {
     onOpen: () => void;
     onClose: () => void;
 }
 
-export default function EndringsloggSanity(props: EndringsProps) {
+export default function EndringsloggInnholdSanity(props: EndringsloggInnholdProps) {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const loggNode = useRef<HTMLDivElement>(null); // Referranse til omsluttende div rundt loggen
+    const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const requestSetOpenStatus = (setOpenTo: boolean) => {
@@ -73,28 +73,4 @@ export default function EndringsloggSanity(props: EndringsProps) {
     );
 }
 
-interface EndringsloggKnappProps {
-    buttonRef: RefObject<HTMLButtonElement>;
-    open: boolean;
-    nyeNotifikasjoner: boolean;
-    klikk: (e?: any) => void;
-}
 
-function EndringsloggKnapp(props: EndringsloggKnappProps) {
-    return (
-        <button
-            ref={props.buttonRef}
-            className={`endringslogg-knapp endringslogg-dropDown ${props.open && 'endringslogg-dropDown-active'}`}
-            onClick={props.klikk}
-            data-testid="endringslogg-knapp"
-        >
-            <AlarmIcon />
-            {props.nyeNotifikasjoner && (
-                <div className="ring-container">
-                    <div className="ringring" />
-                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
-                </div>
-            )}
-        </button>
-    );
-}
