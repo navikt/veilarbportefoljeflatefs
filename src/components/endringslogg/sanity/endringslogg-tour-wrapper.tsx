@@ -11,7 +11,7 @@ import {
 import {logEvent} from '../../../utils/frontend-logger';
 import {AppState} from '../../../reducer';
 import {useTimer} from '../../../hooks/use-timer';
-import EndringsloggSanity from './endringslogg4';
+import EndringsloggInnholdSanity from './endringslogg-innhold';
 
 function EndringsloggTourWrapperSanity() {
     const veilederIdent = useIdentSelector()!.ident;
@@ -38,7 +38,7 @@ function EndringsloggTourWrapperSanity() {
     };
 
     const onClose = () => {
-        // const ulestFelt = innholdsListe.some(element => !element.sett);
+        const ulestFelt = innholdsListe.some(element => !element.sett);
         const tidBrukt = stoppTimer();
         if (veilederIdent) {
             krypterVeilederident(veilederIdent)
@@ -64,7 +64,7 @@ function EndringsloggTourWrapperSanity() {
         return null;
     }
 
-    return <EndringsloggSanity onOpen={startTimer} onClose={onClose} />;
+    return <EndringsloggInnholdSanity onOpen={startTimer} onClose={onClose} />;
 }
 
 export default EndringsloggTourWrapperSanity;

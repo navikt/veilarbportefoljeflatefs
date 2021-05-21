@@ -7,6 +7,7 @@ export default {
             title: 'Tittel',
             name: 'tittel',
             type: 'string',
+            description: 'Må ha et unikt navn, og skrives på denne måten: "SISTE_ENDRING"',
             validation: Rule => Rule.required()
         },
         {
