@@ -216,6 +216,7 @@ function Sidebar(props: SidebarProps) {
         <div
             ref={sidebarRef}
             aria-label={`Sidenavigasjon er nå ${props.isSidebarHidden ? 'lukket' : 'åpen'}`}
+            aria-live="polite"
             className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}
         >
             <div
