@@ -1,26 +1,23 @@
-
-import Endringslogg from './endringslogg';
 import {default as React, useEffect, useState} from 'react';
-import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from './utils/endringslogg-custom';
-import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
-import {useTimer} from '../../hooks/use-timer';
+import {useIdentSelector} from '../../../hooks/redux/use-inlogget-ident';
+import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from '../utils/endringslogg-custom';
+import {useSelector} from 'react-redux';
 import {
     hentSetteVersjonerRemotestorage,
     hexString,
     krypterVeilederident,
     registrerInnholdIRemoteStorage
-} from './utils/endringslogg-utils';
-import {logEvent} from '../../utils/frontend-logger';
-import './endringslogg.less';
-import './collapse-container-transition.less';
-import {useSelector} from 'react-redux';
-import {AppState} from '../../reducer';
+} from '../utils/endringslogg-utils';
+import {logEvent} from '../../../utils/frontend-logger';
+import {AppState} from '../../../reducer';
+import {useTimer} from '../../../hooks/use-timer';
+import EndringsloggInnholdSanity from './endringslogg-innhold';
 
-function EndringsloggTourWrapper() {
+function EndringsloggTourWrapperSanity() {
     const veilederIdent = useIdentSelector()!.ident;
-
     const {startTimer, stoppTimer} = useTimer();
-    const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
+    // const [innholdsListe, setInnholdsliste] = useState<EndringsloggInnleggMedSettStatus[]>([]);
+    const [innholdsListeSanity, setInnholdslisteSanity] = useState<EndringsloggInnleggMedSettStatus[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const alleFeatureToggles = useSelector((state: AppState) => state.features);
@@ -28,12 +25,12 @@ function EndringsloggTourWrapper() {
     useEffect(() => {
         hentSetteVersjonerRemotestorage()
             .then(resp => {
-                setInnholdsliste(mapRemoteToState(resp, alleFeatureToggles));
+                setInnholdslisteSanity(mapRemoteToState(resp, alleFeatureToggles));
                 setIsLoading(false);
             })
             .catch(() => {
                 setIsLoading(false);
-                setInnholdsliste(setHarSettAlt);
+                setInnholdslisteSanity(setHarSettAlt);
             });
     }, [alleFeatureToggles]);
 
@@ -42,7 +39,7 @@ function EndringsloggTourWrapper() {
     };
 
     const onClose = () => {
-        const ulestFelt = innholdsListe.some(element => !element.sett);
+        const ulestFelt = innholdsListeSanity.some(element => !element.sett);
         const tidBrukt = stoppTimer();
         if (veilederIdent) {
             krypterVeilederident(veilederIdent)
@@ -59,9 +56,12 @@ function EndringsloggTourWrapper() {
                 )
                 .catch(e => console.log(e)); // tslint:disable-line
         }
+        const newList = setHarSettAlt(innholdsListeSanity);
+        setInnholdslisteSanity(newList);
+        registrerInnholdRemote(newList);
         if (ulestFelt) {
-            const newList = setHarSettAlt(innholdsListe);
-            setInnholdsliste(newList);
+            const newList = setHarSettAlt(innholdsListeSanity);
+            setInnholdslisteSanity(newList);
             registrerInnholdRemote(newList);
         }
     };
@@ -70,7 +70,7 @@ function EndringsloggTourWrapper() {
         return null;
     }
 
-    return <Endringslogg innhold={innholdsListe} onOpen={startTimer} onClose={onClose} />;
+    return <EndringsloggInnholdSanity onOpen={startTimer} onClose={onClose} />;
 }
 
-export default EndringsloggTourWrapper;
+export default EndringsloggTourWrapperSanity;

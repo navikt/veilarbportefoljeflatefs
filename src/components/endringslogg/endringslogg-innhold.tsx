@@ -48,16 +48,14 @@ export default function EndringsloggInnhold(props: EndringsloggInnholdProps) {
 function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
     return (
         <div className="endringslogg-rad endringslogg-skille">
-            <div className="endringslogg-datolinje">
-                <div
-                    role={props.nyeNotifikasjoner ? 'alert' : ''}
-                    aria-label={props.nyeNotifikasjoner ? 'Nye endringer i Arbeidsrettet oppfølging' : ''}
-                    className={classNames('endringslogg-info-kolonne', {
-                        'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
-                    })}
-                />
-                <Undertekst>{props.dato}</Undertekst>
-            </div>
+            <div
+                role={props.nyeNotifikasjoner ? 'alert' : ''}
+                aria-label={props.nyeNotifikasjoner ? 'Nye endringer i Arbeidsrettet oppfølging' : ''}
+                className={classNames('endringslogg-info-kolonne', {
+                    'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
+                })}
+            />
+            <Undertekst>{props.dato}</Undertekst>
             <div className="endringslogg-innhold endringslogg-kolonne">
                 <Undertittel> {props.innholdsOverskrift} </Undertittel>
                 {props.innholdsTekst && <Normaltekst> {props.innholdsTekst} </Normaltekst>}
