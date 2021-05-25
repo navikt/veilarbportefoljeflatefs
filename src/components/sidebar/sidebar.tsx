@@ -136,7 +136,6 @@ function Sidebar(props: SidebarProps) {
             sidebarTabs[tabFoc].setAttribute('tabindex', '-1');
             sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab');
             sidebarTabs[tabFoc].setAttribute('aria-selected', 'false');
-
             if (keyCode(e) === keyCodes.right) {
                 tabFoc++;
                 // Hvis vi er i enden av tabpanelet, gå til starten
@@ -153,8 +152,17 @@ function Sidebar(props: SidebarProps) {
             sidebarTabs[tabFoc].setAttribute('tabindex', '0');
             sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab sidebar__tab-valgt');
             sidebarTabs[tabFoc].setAttribute('aria-selected', 'true');
-
             sidebarTabs[tabFoc].focus();
+
+            if (erPaMinOversikt) {
+                handleOnTabClicked(
+                    e,
+                    sidebar.filter(tab => tab.type !== SidebarTabType.VEILEDERGRUPPER)[tabFoc],
+                    false
+                );
+            } else {
+                handleOnTabClicked(e, sidebar[tabFoc], false);
+            }
         }
     }
 
@@ -163,17 +171,19 @@ function Sidebar(props: SidebarProps) {
         handleOnTabClicked(e, tab);
     }
 
-    function handleOnTabClicked(e, tab: Sidebar) {
+    function handleOnTabClicked(e, tab: Sidebar, toggleSidebar: boolean = true) {
         endreSideBar({
             dispatch: dispatch,
             requestedTab: tab.type,
             currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
         });
 
-        if (isSidebarHidden) {
-            dispatch(visSidebar(props.oversiktType));
-        } else if (tab.type === selectedTab.selectedTab) {
-            dispatch(skjulSidebar(props.oversiktType));
+        if (toggleSidebar) {
+            if (isSidebarHidden) {
+                dispatch(visSidebar(props.oversiktType));
+            } else if (tab.type === selectedTab.selectedTab) {
+                dispatch(skjulSidebar(props.oversiktType));
+            }
         }
 
         logEvent('portefolje.metrikker.sidebar-tab', {
@@ -203,11 +213,16 @@ function Sidebar(props: SidebarProps) {
     });
 
     return (
-        <div ref={sidebarRef} className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}>
+        <div
+            ref={sidebarRef}
+            aria-label={`Sidenavigasjon er nå ${props.isSidebarHidden ? 'lukket' : 'åpen'}`}
+            aria-live="polite"
+            className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}
+        >
             <div
                 className="sidebar__tab-container"
                 role="tablist"
-                aria-label="Faner for filtrering"
+                aria-label="Faner for filtrering. Du kan bruke piltastene for å navigere mellom de ulike fanene."
                 aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
             >
                 {Tabs()}
