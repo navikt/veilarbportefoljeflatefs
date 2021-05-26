@@ -17,15 +17,15 @@ function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
     const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
-    const [valgteElementer, setValgteElementer] = useState<string[]>([]);
+    const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const form = 'veiledere';
 
     useEffect(() => {
-        setValgteElementer(filtervalg.veiledere);
+        setValgteVeiledere(filtervalg.veiledere);
     }, [filtervalg]);
 
     const erValgt = (ident: string | undefined): boolean => {
-        return !!ident && !!valgteElementer.find(valgtElement => ident === valgtElement);
+        return !!ident && !!valgteVeiledere.find(valgtElement => ident === valgtElement);
     };
 
     const getFiltrerteVeiledere = (): VeilederModell[] => {
@@ -42,11 +42,11 @@ function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
         const valueErValgt = erValgt(value);
         let valgteElem;
         if (!valueErValgt) {
-            valgteElem = [...valgteElementer, value];
-            setValgteElementer(valgteElem);
+            valgteElem = [...valgteVeiledere, value];
+            setValgteVeiledere(valgteElem);
         } else if (valueErValgt) {
-            valgteElem = valgteElementer.filter(valgtElement => value !== valgtElement);
-            setValgteElementer(valgteElem);
+            valgteElem = valgteVeiledere.filter(valgtElement => value !== valgtElement);
+            setValgteVeiledere(valgteElem);
         }
         endreFiltervalg(form, valgteElem);
     };
@@ -85,15 +85,13 @@ function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
                 <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
                     {valgCheckboxListe}
                 </div>
-                {/*<div className="checkbox-liste__valg-footer">*/}
                 <NullstillValgKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
                     form={form}
-                    disabled={valgteElementer.length <= 0}
+                    disabled={valgteVeiledere.length <= 0}
                     className="veilederoversikt-nullstill-knapp"
                 />
-                {/*</div>*/}
             </form>
         );
     } else {
