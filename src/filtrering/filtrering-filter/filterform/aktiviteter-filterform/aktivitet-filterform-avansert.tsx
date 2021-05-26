@@ -7,7 +7,7 @@ import {FiltervalgModell} from '../../../../model-interfaces';
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (form: string, filterVerdi: any) => void;
+    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
     klikkPaForenkletLenke: () => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;

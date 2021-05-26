@@ -10,10 +10,11 @@ import {AppState} from '../../reducer';
 import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
 
 interface VeilederCheckboxListeProps {
-    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
+    nullstillInputfelt: () => void;
 }
 
-function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
+function VeilederCheckboxListe({endreFiltervalg, nullstillInputfelt}: VeilederCheckboxListeProps) {
     const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
@@ -52,6 +53,7 @@ function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
     };
 
     const nullstillValg = () => {
+        nullstillInputfelt();
         endreFiltervalg(form, []);
     };
 

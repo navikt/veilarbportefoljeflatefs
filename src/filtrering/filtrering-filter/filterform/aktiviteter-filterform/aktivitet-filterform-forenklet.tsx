@@ -6,7 +6,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: any) => void;
+    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
     klikkPaAvansertLenke: () => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;

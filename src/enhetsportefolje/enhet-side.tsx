@@ -106,7 +106,7 @@ export default function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };

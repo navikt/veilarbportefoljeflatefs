@@ -128,7 +128,7 @@ export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: Oversikt
 
 export function endreFiltervalg(
     filterId: string,
-    filterVerdi,
+    filterVerdi: React.ReactNode,
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {
     if (Array.isArray(filterVerdi)) {

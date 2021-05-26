@@ -1,26 +1,26 @@
 import * as React from 'react';
 import {Input, Label} from 'nav-frontend-skjema';
-import {useSelector} from 'react-redux';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 import {useRef, useState} from 'react';
-import {AppState} from '../reducer';
 
 interface FiltreringVeiledereProps {
-    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
 }
 
 export default function FiltreringVeiledere({endreFiltervalg}: FiltreringVeiledereProps) {
-    const veilederNavnQuerySelector = useSelector(
-        (state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery
-    );
-    const [veilederNavnQuery, setVeilederNavnQuery] = useState(veilederNavnQuerySelector);
+    const [veilederNavnQuery, setVeilederNavnQuery] = useState('');
 
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     const handleChange = event => {
         const nyQuery = event.target.value;
         setVeilederNavnQuery(nyQuery);
-        endreFiltervalg('veilederNavnQuery', nyQuery);
+        endreFiltervalg('veilederNavnQuery', veilederNavnQuery);
+    };
+
+    const nullstillInputfelt = () => {
+        setVeilederNavnQuery('');
+        endreFiltervalg('veilederNavnQuery', '');
     };
 
     return (
@@ -36,7 +36,7 @@ export default function FiltreringVeiledere({endreFiltervalg}: FiltreringVeilede
                 aria-label="Navn eller NAV-ident"
                 id="sok-veileder"
             />
-            <VeilederCheckboxListe endreFiltervalg={endreFiltervalg}/>
+            <VeilederCheckboxListe endreFiltervalg={endreFiltervalg} nullstillInputfelt={nullstillInputfelt} />
         </div>
     );
 }
