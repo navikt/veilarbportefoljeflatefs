@@ -7,7 +7,7 @@ import {AppState} from '../../../reducer';
 import {Radio} from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.less';
 import {Knapp} from 'nav-frontend-knapper';
-import SokFilterNy from '../../sok-veiledere/sok-filter-ny';
+import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
@@ -46,7 +46,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     };
 
     return (
-        <SokFilterNy placeholder="Tildel veileder" data={sorterVeiledere}>
+        <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
             {data => (
                 <TildelVeilederRenderer
                     ident={ident}
@@ -56,7 +56,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     btnOnClick={() => onSubmit()}
                 />
             )}
-        </SokFilterNy>
+        </SokFilter>
     );
 }
 

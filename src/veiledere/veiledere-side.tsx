@@ -7,7 +7,7 @@ import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
-import {slettEnkeltFilter} from '../ducks/filtrering';
+import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
@@ -46,6 +46,11 @@ function VeiledereSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
+    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+        dispatch(pagineringSetup({side: 1}));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+    };
+
     return (
         <DocumentTitle title="Veilederoversikt">
             <div className="side-storrelse veilederoversikt" id={`side-storrelse_${id}`}>
@@ -59,7 +64,7 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                <FiltreringVeiledere />
+                                <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} />
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />

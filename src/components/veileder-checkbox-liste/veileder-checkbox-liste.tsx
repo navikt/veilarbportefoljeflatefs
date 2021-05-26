@@ -1,114 +1,61 @@
 import * as React from 'react';
-import {ReactNode, useEffect, useState} from 'react';
-import {connect} from 'react-redux';
+import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {Checkbox} from 'nav-frontend-skjema';
-import {endreFiltervalg} from '../../ducks/filtrering';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {AppState} from '../../reducer';
+import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
 
-interface StateProps {
-    veiledere: VeiledereState;
-    filtervalg: FiltervalgModell;
-    veilederNavnQuery: string;
+interface VeilederCheckboxListeProps {
+    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
 }
 
-interface DispatchProps {
-    sokEtterVeileder: (veiledere: string[]) => void;
-}
-
-interface KnappProps {
-    onClick: (e) => void;
-}
-
-const LukkeKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button
-        className="knapp knapp--mini checkbox-liste__valg-knapp"
-        type="button"
-        onClick={props.onClick}
-        data-testid="veilederoversikt_sok-veileder_lukk-knapp"
-    >
-        Lukk
-    </button>
-);
-
-const SubmitKnapp: React.SFC<KnappProps> = (props: KnappProps) => (
-    <button
-        className="knapp knapp--mini knapp--hoved checkbox-liste__valg-knapp"
-        type="button"
-        onClick={props.onClick}
-        data-testid="veilederoversikt_sok-veileder_velg-knapp"
-    >
-        Velg
-    </button>
-);
-
-function VeilederCheckboxListe(props: any) {
-    const [valgteElementer, setValgteElementer] = useState<string[]>([]);
-    const [open, setOpen] = useState<boolean>(props.open);
+function VeilederCheckboxListe({endreFiltervalg}: VeilederCheckboxListeProps) {
+    const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
+    const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
+    const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
+    const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
+    const form = 'veiledere';
 
     useEffect(() => {
-        setOpen(props.open);
-    }, [props.open]);
+        setValgteVeiledere(filtervalg.veiledere);
+    }, [filtervalg]);
 
-    useEffect(() => {
-        setValgteElementer(props.filtervalg.veiledere);
-    }, [props.filtervalg]);
-
-    const erValgt = (value: string | undefined): boolean => {
-        return !!value && !!valgteElementer.find(valgtElement => value === valgtElement);
+    const erValgt = (ident: string | undefined): boolean => {
+        return !!ident && !!valgteVeiledere.find(valgtElement => ident === valgtElement);
     };
 
     const getFiltrerteVeiledere = (): VeilederModell[] => {
-        const {veilederNavnQuery, veiledere} = props;
-
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
         return veiledere.data.veilederListe.filter(
             veileder =>
-                (veileder.navn?.toLowerCase().indexOf(query) >= 0) ||
-                (veileder.ident?.toLowerCase().indexOf(query) >= 0)
+                veileder.navn?.toLowerCase().indexOf(query) >= 0 || veileder.ident?.toLowerCase().indexOf(query) >= 0
         );
     };
 
-    const handleCheckboxOnClick = (value: string | undefined) => {
-        if (!value) {
-            return;
-        }
-
+    const handleCheckboxOnClick = (e, value: string | undefined) => {
+        e.persist();
         const valueErValgt = erValgt(value);
         let valgteElem;
-
         if (!valueErValgt) {
-            valgteElem = [...valgteElementer, value];
-            setValgteElementer(valgteElem);
+            valgteElem = [...valgteVeiledere, value];
+            setValgteVeiledere(valgteElem);
         } else if (valueErValgt) {
-            valgteElem = valgteElementer.filter(valgtElement => value !== valgtElement);
-            setValgteElementer(valgteElem);
+            valgteElem = valgteVeiledere.filter(valgtElement => value !== valgtElement);
+            setValgteVeiledere(valgteElem);
         }
+        endreFiltervalg(form, valgteElem);
     };
 
-    const handleSubmitKnappOnClick = e => {
-        e.preventDefault();
-
-        props.sokEtterVeileder(valgteElementer);
-
-        if (props.onSubmit) {
-            props.onSubmit();
-        }
+    const nullstillValg = () => {
+        endreFiltervalg(form, []);
     };
 
-    const handleLukkeKnappOnClick = e => {
-        e.preventDefault();
-
-        if (props.onClose) {
-            props.onClose();
-        }
-    };
-
-    const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]): ReactNode[] | null => {
+    const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]) => {
         if (!veiledere) {
             return null;
         }
@@ -122,7 +69,7 @@ function VeilederCheckboxListe(props: any) {
                         key={vlg.ident}
                         label={vlg.navn}
                         checked={identErValgt}
-                        onChange={() => handleCheckboxOnClick(vlg.ident)}
+                        onChange={e => handleCheckboxOnClick(e, vlg.ident)}
                         data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
                     />
                 );
@@ -131,11 +78,6 @@ function VeilederCheckboxListe(props: any) {
 
     const valgCheckboxListe = mapVeiledereToCheckboxList(getFiltrerteVeiledere());
     const harValg = valgCheckboxListe && valgCheckboxListe.length > 0;
-    const harValgteElementer = valgteElementer?.length > 0;
-
-    if (!open) {
-        return null;
-    }
 
     if (harValg) {
         return (
@@ -143,13 +85,13 @@ function VeilederCheckboxListe(props: any) {
                 <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
                     {valgCheckboxListe}
                 </div>
-                <div className="checkbox-liste__valg-footer">
-                    {harValgteElementer ? (
-                        <SubmitKnapp onClick={handleSubmitKnappOnClick} />
-                    ) : (
-                        <LukkeKnapp onClick={handleLukkeKnappOnClick} />
-                    )}
-                </div>
+                <NullstillValgKnapp
+                    dataTestId="veileder-checkbox-filterform"
+                    nullstillValg={nullstillValg}
+                    form={form}
+                    disabled={valgteVeiledere.length <= 0}
+                    className="veilederoversikt-nullstill-knapp"
+                />
             </form>
         );
     } else {
@@ -167,16 +109,4 @@ function VeilederCheckboxListe(props: any) {
     }
 }
 
-const mapStateToProps = (state): StateProps => ({
-    filtervalg: state.filtreringVeilederoversikt,
-    veiledere: state.veiledere,
-    veilederNavnQuery: state.filtreringVeilederoversikt.veilederNavnQuery
-});
-
-const mapDispatchToProps = (dispatch): DispatchProps => ({
-    sokEtterVeileder(veiledere: string[]) {
-        dispatch(endreFiltervalg('veiledere', veiledere, OversiktType.veilederOversikt));
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(VeilederCheckboxListe);
+export default VeilederCheckboxListe;

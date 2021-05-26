@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import '../../filtrering/filtrering-filter/filterform/filterform.less';
 import '../../style.less';
-import SokFilterNy from './sok-filter-ny';
+import SokFilter from './sok-filter';
 import classNames from 'classnames';
 
 interface SokVeiledereProps {
@@ -21,7 +21,7 @@ function SokVeiledere(props: SokVeiledereProps) {
     );
 
     return (
-        <SokFilterNy placeholder="Søk veileder" data={sorterteVeilederePaEtterNavn}>
+        <SokFilter placeholder="Søk veileder" data={sorterteVeilederePaEtterNavn}>
             {liste => (
                 <div className="checkbox-filterform">
                     <div className="checkbox-filterform__valg">
@@ -49,7 +49,7 @@ function SokVeiledere(props: SokVeiledereProps) {
                     </div>
                 </div>
             )}
-        </SokFilterNy>
+        </SokFilter>
     );
 }
 

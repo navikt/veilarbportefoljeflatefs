@@ -16,7 +16,7 @@ function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
 }
 
-function SokFilterNy<T>(props: SokFilterProps<T>) {
+function SokFilter<T>(props: SokFilterProps<T>) {
     const {data, limitSize, children} = props;
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
@@ -62,4 +62,4 @@ function SokFilterNy<T>(props: SokFilterProps<T>) {
     );
 }
 
-export default SokFilterNy;
+export default SokFilter;

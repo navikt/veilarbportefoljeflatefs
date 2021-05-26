@@ -7,13 +7,10 @@ describe('Arbeidsliste', () => {
     // before('Tvungen stepper', () => {
     //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
@@ -37,18 +34,13 @@ describe('Arbeidsliste', () => {
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp')
             .should('be.enabled')
-            .contains('Legg i arbeidsliste')
             .click();
         cy.get('.legg-i-arbeidsliste').should('be.visible');
-        cy.getByTestId('modal_arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en kommentar');
         cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
-        cy.getByTestId('modal_arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
         cy.get('#fristInput').type('01.03.2066');
@@ -60,9 +52,7 @@ describe('Arbeidsliste', () => {
         });
     });
     it('Lagre ny arbeidsliste', () => {
-        cy.getByTestId('modal_arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
@@ -86,7 +76,6 @@ describe('Arbeidsliste', () => {
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp')
             .should('be.enabled')
-            .contains('Legg i arbeidsliste')
             .click();
         cy.get('.legg-i-arbeidsliste').should('be.visible');
 
@@ -96,9 +85,7 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_arbeidsliste_tittel_1').type('heiheihei hallå');
         cy.getByTestId('modal_arbeidsliste_kommentar_1').type('Team Voff er best i test hehehe');
-        cy.getByTestId('modal_arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
@@ -223,22 +210,16 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
-        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Du må fylle ut en tittel');
         cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Du må fylle ut en kommentar');
 
         cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
-        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
 
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
-        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp')
-            .contains('Lagre')
-            .click();
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.get('.rediger-arbeidsliste').should('not.exist');
 
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
@@ -287,9 +268,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar')
             .clear()
             .type(nyKommentar);
-        cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp')
-            .contains('Avbryt')
-            .click();
+        cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain', kommentar);
