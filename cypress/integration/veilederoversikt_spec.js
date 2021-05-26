@@ -52,10 +52,7 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .children()
             .should('have.length', 1);
-        cy.getByTestId('veilederoversikt_sok-veileder_lukk-knapp')
-            .contains('Lukk')
-            .should('be.visible');
-        cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp').should('not.exist');
+        cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 20);
@@ -63,11 +60,7 @@ describe('Annen veileder', () => {
             .should('not.be.checked')
             .check({force: true});
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0').should('be.checked');
-        cy.getByTestId('veilederoversikt_sok-veileder_lukk-knapp').should('not.exist');
-        cy.getByTestId('veilederoversikt_sok-veileder_velg-knapp')
-            .contains('Velg')
-            .should('be.visible')
-            .click();
+        cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.enabled');
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 1);

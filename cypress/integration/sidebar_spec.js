@@ -30,13 +30,10 @@ describe('Mine filter', () => {
     // before('Tvungen stepper', () => {
     //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
@@ -416,7 +413,6 @@ describe('Veiledergrupper', () => {
         cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains('Ingen veiledere lagt til i gruppen');
 
         cy.getByTestId('veiledergruppe_modal_lagre-knapp')
-            .contains('Lagre endringer')
             .click();
 
         cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
@@ -428,7 +424,6 @@ describe('Veiledergrupper', () => {
         });
 
         cy.getByTestId('veiledergruppe_modal_lagre-knapp')
-            .contains('Lagre endringer')
             .click();
 
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
@@ -461,7 +456,6 @@ describe('Veiledergrupper', () => {
 
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe')
             .should('be.visible')
-            .contains('Rediger veiledergruppe');
 
         cy.getByTestId('veiledergruppe_modal_alertstripe')
             .should('be.visible')
@@ -499,7 +493,6 @@ describe('Filter', () => {
             .click()
             .type(fraAlder);
         cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
             .should('be.enabled')
             .click();
         cy.getByTestId('filter_alder_valideringstekst')
@@ -515,7 +508,6 @@ describe('Filter', () => {
             .type(tilAlder);
         cy.getByTestId('filter_alder_valideringstekst').should('not.exist');
         cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
             .should('be.enabled')
             .click();
         cy.getByTestId('alder-filterform').should('not.exist');
@@ -585,7 +577,6 @@ describe('Filter', () => {
 
     it('Hendelser-filterform - Enhetens oversikt', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori')
-            .contains('Siste endring av bruker')
             .click();
 
         cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
@@ -649,7 +640,6 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel').contains('Uleste endringer');
 
         cy.getByTestId('hendelser-filterform_nullstill-knapp')
-            .contains('Nullstill')
             .click();
 
         cy.gaTilOversikt('enhetens-oversikt');

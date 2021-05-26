@@ -7,13 +7,10 @@ describe('Diverse', () => {
     // before('Tvungen stepper', () => {
     //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
@@ -24,25 +21,21 @@ describe('Diverse', () => {
         cy.getByTestId('endringslogg-innhold').should('be.visible');
         cy.getByTestId('endringslogg_tour-modal').should('not.exist');
         cy.getByTestId('endringslogg_se-hvordan-knapp')
-            .contains('Se hvordan')
             .first()
             .click();
         cy.getByTestId('endringslogg_tour-modal').should('be.visible');
         cy.getByTestId('endringslogg_forrige-knapp').should('be.hidden');
         cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
             .click();
         cy.getByTestId('endringslogg_forrige-knapp').should('be.visible');
         cy.getByTestId('endringslogg_stegviser').then($element => {
             if ($element.find('.stegviser__steg').length === 3) {
                 return cy
                     .getByTestId('endringslogg_neste-knapp')
-                    .contains('Neste')
                     .click();
             }
         });
         cy.getByTestId('endringslogg_ferdig-knapp')
-            .contains('Ferdig')
             .click();
         cy.getByTestId('endringslogg_tour-modal').should('not.exist');
         cy.getByTestId('endringslogg-innhold').should('be.visible');
@@ -61,11 +54,9 @@ describe('Diverse', () => {
         //TODO toggle hvis tilbakemeldingsundersøkelsen er checkboxer/tilfredshet
             //Hvis checkbox
         // cy.getByTestId('tilfredshet_send-knapp')
-        //     .contains('Send')
         //     .click({force: true});
         //
         // cy.getByTestId('tilfredshet_feilmelding')
-        //     .contains('Velg minst en avkrysningsboks.')
         //     .should('be.visible');
         //
         // cy.checkbox('checkboxvalg_1');
@@ -95,7 +86,6 @@ describe('Diverse', () => {
 
         cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp')
-            .contains('Send')
             .click({force: true});
         cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp').should('not.exist');
@@ -169,7 +159,6 @@ describe('Diverse', () => {
     it('Søk etter veileder', () => {
         cy.get('.spinner').should('not.exist');
         cy.getByTestId('sidebar_content-container')
-            .contains('Status')
             .should('be.visible');
         cy.checkbox('filter_checkboks-container_ufordeltebruker');
         cy.getByTestId('filtreringlabel').contains('Ufordelte brukere');
@@ -222,7 +211,6 @@ describe('Diverse', () => {
         cy.checkbox('tildel-veileder_valg_0');
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
         cy.getByTestId(`tildel-veileder_velg-knapp`)
-            .contains('Velg')
             .should('be.visible')
             .click();
         cy.wait(1000);
