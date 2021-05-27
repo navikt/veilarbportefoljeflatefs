@@ -8,7 +8,7 @@ export const OK = 'veilarbveileder/me/OK';
 export const FEILET = 'veilarbveileder/me/FEILET';
 export const PENDING = 'veilarbveileder/me/PENDING';
 
-export interface InloggetVeilederState {
+export interface InnloggetVeilederState {
     status: any;
     data: OrNothing<VeilederModell>;
 }
@@ -19,7 +19,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: InloggetVeilederState = initialState, action) {
+export default function innloggetVeilederReducer(state: InnloggetVeilederState = initialState, action) {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};
@@ -33,7 +33,7 @@ export default function reducer(state: InloggetVeilederState = initialState, act
 }
 
 // Action Creators
-export function hentInloggetVeileder() {
+export function hentInnloggetVeileder() {
     return doThenDispatch(() => hentAktivBruker(), {
         OK,
         FEILET,

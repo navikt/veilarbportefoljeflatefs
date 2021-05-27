@@ -32,7 +32,7 @@ const initalState: FeaturesState = {
 };
 
 // Reducer
-export default function reducer(state: FeaturesState = initalState, action): FeaturesState {
+export default function featuresReducer(state: FeaturesState = initalState, action): FeaturesState {
     switch (action.type) {
         case ADD_FEATURE:
             return {

@@ -63,7 +63,7 @@ function VeilederCheckboxListe({endreFiltervalg, nullstillInputfelt}: VeilederCh
         }
 
         return veiledere
-            .sort()
+            .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
             .filter(veileder => veileder.ident && veileder.navn)
             .map((veileder, index) => {
                 const identErValgt = erValgt(veileder.ident);

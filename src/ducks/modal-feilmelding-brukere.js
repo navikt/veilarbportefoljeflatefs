@@ -11,7 +11,7 @@ const initalState = {
     aarsak: undefined,
     brukereError: []
 };
-export default function reducer(state = initalState, action) {
+export default function feilmedlingModalReducer(state = initalState, action) {
     switch (action.type) {
         case SKJUL_FEILMELDING_MODAL:
             return {...initalState};

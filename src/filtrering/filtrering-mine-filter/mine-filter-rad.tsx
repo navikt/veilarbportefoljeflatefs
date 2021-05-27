@@ -34,7 +34,7 @@ function MineFilterRad({mineFilter, oversiktType, enhettiltak}: MineFilterRadPro
             : state.mineFilterEnhetensOversikt.valgtMineFilter
     );
 
-    const veilederIdent = useSelector((state: AppState) => state.inloggetVeileder.data!);
+    const veilederIdent = useSelector((state: AppState) => state.innloggetVeileder.data!);
     const veilederIdentTilNonsens = mapVeilederIdentTilNonsens(veilederIdent.ident);
 
     const [tiltaksfeil, setTiltaksfeil] = useState(false);

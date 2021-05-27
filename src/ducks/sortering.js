@@ -1,17 +1,17 @@
 /* eslint-disable no-case-declarations */
-import {RETNING} from './../utils/sortering';
+import {RETNING} from '../utils/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
 export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState = {
-    property: null,
-    direction: RETNING.NA
+    property: 'etternavn',
+    direction: RETNING.STIGENDE
 };
 
 // Reducer
-export default function reducer(state = initialState, action) {
+export default function sorteringReducer(state = initialState, action) {
     switch (action.type) {
         case SORTERT_PA:
             const {property} = action.data;

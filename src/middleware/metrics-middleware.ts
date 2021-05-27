@@ -202,7 +202,7 @@ export function mapVeilederIdentTilNonsens(veilederIdent: string) {
 }
 
 export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
-    const veilederIdent = mapVeilederIdentTilNonsens(store.getState().inloggetVeileder.data.ident);
+    const veilederIdent = mapVeilederIdentTilNonsens(store.getState().innloggetVeileder.data.ident);
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }

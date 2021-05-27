@@ -22,7 +22,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: VeiledereState = initialState, action) {
+export default function veiledereReducer(state: VeiledereState = initialState, action) {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};

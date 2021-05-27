@@ -59,7 +59,7 @@ export const initalStatusState: StatustallState = {
 };
 
 // Reducer
-export default function reducer(state: StatustallState = initalStatusState, action): StatustallState {
+export default function statustallReducer(state: StatustallState = initalStatusState, action): StatustallState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

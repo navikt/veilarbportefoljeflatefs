@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';

@@ -1,6 +1,5 @@
-import {lagTilfeldigVeilederId} from './veiledere';
+import {innloggetVeileder, lagTilfeldigVeilederId} from './veiledere';
 import {rnd} from './utils';
-import inloggetVeileder from './inloggetVeileder';
 
 function lagPortefoljeStorrelse() {
     return {
@@ -13,6 +12,6 @@ export default function lagPortefoljeStorrelser() {
     return {
         facetResults: new Array(40)
             .fill(lagPortefoljeStorrelse())
-            .concat(new Array(1).fill({value: inloggetVeileder.ident, count: rnd(0, 50)}))
+            .concat(new Array(1).fill({value: innloggetVeileder.ident, count: rnd(0, 50)}))
     };
 }

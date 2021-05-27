@@ -3,7 +3,7 @@ import {loggSideVisning} from '../../utils/metrikker/side-visning-metrikker';
 import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
 import {settSortering} from '../../ducks/portefolje';
-import {useIdentSelector} from '../redux/use-inlogget-ident';
+import {useIdentSelector} from '../redux/use-innlogget-ident';
 import {useDispatch} from 'react-redux';
 import {useCallback} from 'react';
 import {useLocation, useParams} from 'react-router';

@@ -26,7 +26,7 @@ const initialState: PortefoljeStorrelser = {
 };
 
 //  Reducer
-export default function reducer(state = initialState, action) {
+export default function portefoljestorrelserReducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};

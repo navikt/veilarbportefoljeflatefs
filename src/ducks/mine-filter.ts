@@ -35,7 +35,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: LagretFilterState = initialState, action) {
+export default function mineFilterReducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_MINEFILTER_PENDING:
             return {
