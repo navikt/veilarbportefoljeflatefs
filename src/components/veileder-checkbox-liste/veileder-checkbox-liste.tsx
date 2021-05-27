@@ -63,15 +63,16 @@ function VeilederCheckboxListe({endreFiltervalg, nullstillInputfelt}: VeilederCh
         }
 
         return veiledere
-            .filter(vlg => vlg.ident && vlg.navn)
-            .map((vlg, index) => {
-                const identErValgt = erValgt(vlg.ident);
+            .sort()
+            .filter(veileder => veileder.ident && veileder.navn)
+            .map((veileder, index) => {
+                const identErValgt = erValgt(veileder.ident);
                 return (
                     <Checkbox
-                        key={vlg.ident}
-                        label={vlg.navn}
+                        key={veileder.ident}
+                        label={veileder.navn}
                         checked={identErValgt}
-                        onChange={e => handleCheckboxOnClick(e, vlg.ident)}
+                        onChange={e => handleCheckboxOnClick(e, veileder.ident)}
                         data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
                     />
                 );
