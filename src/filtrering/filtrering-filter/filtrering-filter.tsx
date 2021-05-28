@@ -22,7 +22,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.less';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, UTEN_KRR_FILTER, SISTE_ENDRING} from '../../konstanter';
+import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
 import {PopoverOrientering} from 'nav-frontend-popover';
@@ -44,7 +44,6 @@ interface FiltreringFilterProps {
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-    const erSisteEndringFeatureTogglePa = useFeatureSelector()(SISTE_ENDRING);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
 
     return (
@@ -92,24 +91,22 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            {erSisteEndringFeatureTogglePa && (
-                <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                    <Element className="blokk-xxs">Hendelser</Element>
-                    <Dropdown
-                        name="Siste endring av bruker"
-                        id="sisteEndringKategori"
-                        render={() => (
-                            <HendelserFilterform
-                                form="sisteEndringKategori"
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                endreCheckboxFiltervalg={endreFiltervalg}
-                                oversiktType={oversiktType}
-                            />
-                        )}
-                    />
-                </div>
-            )}
+            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
+                <Element className="blokk-xxs">Hendelser</Element>
+                <Dropdown
+                    name="Siste endring av bruker"
+                    id="sisteEndringKategori"
+                    render={() => (
+                        <HendelserFilterform
+                            form="sisteEndringKategori"
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                            endreCheckboxFiltervalg={endreFiltervalg}
+                            oversiktType={oversiktType}
+                        />
+                    )}
+                />
+            </div>
             <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
                 <Element className="blokk-xxs">Svar fra registrering</Element>
                 <Dropdown

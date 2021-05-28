@@ -30,7 +30,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '08. april 2021',
         tittel: 'Ny aktivitet for brukere og nye filter i oversikten',
         versjonId: '08.04.21',
-        featureToggleName: 'veilarbportefolje.siste_endring',
         children: (
             <>
                 Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.

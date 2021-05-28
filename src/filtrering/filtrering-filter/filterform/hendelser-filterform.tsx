@@ -6,8 +6,6 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {HENDELSE_MEDISINSKBEHANDLING, ULESTE_ENDRINGER} from '../../../konstanter';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {PopoverOrientering} from 'nav-frontend-popover';
 import {OversiktType} from '../../../ducks/ui/listevisning';
@@ -28,9 +26,6 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const erMedisinskBehandlingFeatureTogglePa = useFeatureSelector()(HENDELSE_MEDISINSKBEHANDLING);
-    const erUlesteEndringerFeatureTogglePa = useFeatureSelector()(ULESTE_ENDRINGER);
-
     const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
@@ -59,9 +54,7 @@ export function HendelserFilterform({
             : endreCheckboxFiltervalg('ulesteEndringer', null);
     };
 
-    const lagtTilAvBruker = erMedisinskBehandlingFeatureTogglePa
-        ? ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING']
-        : ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN'];
+    const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
     const fullfortAvBruker = [
         'FULLFORT_STILLING',
         'FULLFORT_IJOBB',
@@ -80,7 +73,7 @@ export function HendelserFilterform({
     return (
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
-                {erUlesteEndringerFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                {oversiktType === OversiktType.minOversikt && (
                     <div className="hendelser-filterform__checkbox-gruppe">
                         <div className={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}>
                             <input
