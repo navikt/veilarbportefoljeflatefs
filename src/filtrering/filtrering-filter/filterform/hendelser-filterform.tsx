@@ -54,7 +54,7 @@ export function HendelserFilterform({
             : endreCheckboxFiltervalg('ulesteEndringer', null);
     };
 
-    const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN'];
+    const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
     const fullfortAvBruker = [
         'FULLFORT_STILLING',
         'FULLFORT_IJOBB',
