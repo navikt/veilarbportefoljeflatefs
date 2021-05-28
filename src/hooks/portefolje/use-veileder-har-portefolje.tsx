@@ -1,4 +1,4 @@
-import {useIdentSelector} from '../redux/use-inlogget-ident';
+import {useIdentSelector} from '../redux/use-innlogget-ident';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 

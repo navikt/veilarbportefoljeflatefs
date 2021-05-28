@@ -24,7 +24,7 @@ const initalState: EnhettiltakState = {
 };
 
 // Reducer
-export default function reducer(state: EnhettiltakState = initalState, action) {
+export default function enhetTiltakReducer(state: EnhettiltakState = initalState, action) {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

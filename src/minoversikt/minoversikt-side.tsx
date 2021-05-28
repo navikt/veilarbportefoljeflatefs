@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
@@ -80,7 +80,7 @@ export default function MinoversiktSide() {
     const {ident} = useParams();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
@@ -112,7 +112,7 @@ export default function MinoversiktSide() {
 
     return (
         <DocumentTitle title="Min oversikt">
-            <div className="side-storrelse" id={`side-storrelse_${id}`}>
+            <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>

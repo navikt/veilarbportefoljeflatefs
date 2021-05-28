@@ -28,15 +28,11 @@ before('Start server', () => {
 describe('Mine filter', () => {
     //TODO toggle denne når tvungen stepper er av/på
     // before('Tvungen stepper', () => {
-    //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
@@ -61,7 +57,7 @@ describe('Mine filter', () => {
             force: true
         });
 
-        cy.getByTestId('filtreringlabel').contains('Ufordelte brukere');
+        cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
 
         cy.getByTestId('sidebar-tab_FILTER').click();
 
@@ -69,7 +65,7 @@ describe('Mine filter', () => {
 
         cy.getByTestId('filter_19-og-under').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('≤ 19 år');
+        cy.getByTestId('filtreringlabel_-19-ar').should('be.visible');
 
         cy.getByTestId('lagre-filter_knapp').click();
 
@@ -111,7 +107,9 @@ describe('Mine filter', () => {
 
         cy.getByTestId(`mine-filter-rad_${kebabCase(mineFilterNavn)}`).should('be.checked');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
     });
@@ -127,12 +125,14 @@ describe('Mine filter', () => {
 
         cy.getByTestId('mine-filter_rad-wrapper').contains(mineFilterNavnRedigert);
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Ufordelte brukere')
+        cy.getByTestId('filtreringlabel_ufordelte-brukere')
+            .should('be.visible')
             .click();
 
         cy.klikkTab('STATUS');
@@ -141,8 +141,8 @@ describe('Mine filter', () => {
             force: true
         });
 
-        cy.getByTestId('filtreringlabel')
-            .contains('≤ 19 år')
+        cy.getByTestId('filtreringlabel_-19-ar')
+            .should('be.visible')
             .click();
 
         cy.getByTestId('lagre-filter_knapp').click();
@@ -153,9 +153,7 @@ describe('Mine filter', () => {
 
         cy.getByTestId('rediger-filter_modal_lagre-knapp').click();
 
-        cy.getByTestId('filtreringlabel')
-            .should('have.length', 1)
-            .contains('Møte med NAV idag');
+        cy.getByTestId('filtreringlabel_mote-med-nav-idag').should('be.visible');
 
         cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter + 1);
     });
@@ -293,8 +291,8 @@ describe('Mine filter', () => {
             .next()
             .contains(testFilterNavn);
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Møte med NAV idag')
+        cy.getByTestId('filtreringlabel_mote-med-nav-idag')
+            .should('be.visible')
             .click();
     });
 
@@ -330,6 +328,8 @@ describe('Veiledergrupper', () => {
         cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
 
         cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear();
+
+        cy.wait(1000);
 
         cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
 
@@ -367,9 +367,13 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
 
-        cy.getByTestId('filtreringlabel').contains(andersen);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .contains(andersen);
 
-        cy.getByTestId('filtreringlabel').contains(jonas);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .contains(jonas);
 
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
 
@@ -415,9 +419,7 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains('Ingen veiledere lagt til i gruppen');
 
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp')
-            .contains('Lagre endringer')
-            .click();
+        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
 
         cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
 
@@ -427,9 +429,7 @@ describe('Veiledergrupper', () => {
             force: true
         });
 
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp')
-            .contains('Lagre endringer')
-            .click();
+        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
 
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
 
@@ -437,7 +437,9 @@ describe('Veiledergrupper', () => {
             .should('be.visible')
             .contains('Gruppen er lagret');
 
-        cy.getByTestId('filtreringlabel')
+        //TODO funker denne?
+        cy.getByTestId('filtrering_label-container')
+            .children()
             .should('have.length', 1)
             .contains(aasen);
     });
@@ -459,9 +461,7 @@ describe('Veiledergrupper', () => {
     it('Veileder har byttet enhet', () => {
         cy.getByTestId(`veiledergruppe-rad_${kebabCase(eksisterendeGruppenavn)}`).click({force: true});
 
-        cy.get('.veiledergruppe_modal_rediger-veiledergruppe')
-            .should('be.visible')
-            .contains('Rediger veiledergruppe');
+        cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('be.visible');
 
         cy.getByTestId('veiledergruppe_modal_alertstripe')
             .should('be.visible')
@@ -471,8 +471,8 @@ describe('Veiledergrupper', () => {
 
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('not.exist');
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Slett alle filtervalg')
+        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+            .should('be.visible')
             .click();
     });
 });
@@ -488,105 +488,125 @@ describe('Filter', () => {
 
     it('Alder-filterform', () => {
         cy.apneLukkeFilterDropdown('alder');
+
         cy.getByTestId('alder-filterform').should('exist');
+
         cy.getByTestId('alder-filterform_nullstill-knapp').should('be.disabled');
+
         cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
+
         cy.getByTestId('filter_alder-fra')
             .click()
             .type(tilAlder);
+
         cy.getByTestId('alder-filterform_nullstill-knapp').should('be.enabled');
+
         cy.getByTestId('filter_alder-til')
             .click()
             .type(fraAlder);
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.enabled')
-            .click();
+
+        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+
         cy.getByTestId('filter_alder_valideringstekst')
             .should('be.visible')
             .contains('Fra-alder kan ikke være større enn til-alder.');
+
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
             .type(fraAlder);
+
         cy.getByTestId('filter_alder-til')
             .click()
             .clear()
             .type(tilAlder);
+
         cy.getByTestId('filter_alder_valideringstekst').should('not.exist');
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .contains('Velg')
-            .should('be.enabled')
-            .click();
+
+        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+
         cy.getByTestId('alder-filterform').should('not.exist');
-        cy.getByTestId('filtreringlabel').contains(fraAlder + '-' + tilAlder + ' år');
+
+        cy.getByTestId('filtreringlabel_2-34-ar').should('be.visible');
+
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
 
         cy.apneLukkeFilterDropdown('alder');
+
         cy.getByTestId('alder-filterform').should('exist');
+
         cy.getByTestId('filter_alder-fra').should('have.value', fraAlder);
+
         cy.getByTestId('filter_alder-til').should('have.value', tilAlder);
 
         cy.checkbox('filter_40-49');
+
         cy.getByTestId('filter_alder-fra').should('have.value', '');
+
         cy.getByTestId('filter_alder-til').should('have.value', '');
+
         cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
 
-        cy.getByTestId('filtreringlabel').contains('40-49 år');
-        cy.getByTestId('filter_40-49').should('be.checked');
-        cy.getByTestId('filter_alder-fra')
-            .click()
-            .clear()
-            .type(fraAlder);
-
-        cy.getByTestId('filter_alder_valideringstekst').should('not.exist');
-        cy.getByTestId('filter_40-49').should('not.be.checked');
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .should('be.enabled')
+        cy.getByTestId('filtreringlabel_40-49-ar')
+            .should('be.visible')
             .click();
-        cy.getByTestId('filtreringlabel').contains(fraAlder + '-100 år');
-        cy.getByTestId('alder-filterform').should('not.exist');
 
         cy.apneLukkeFilterDropdown('alder');
-        cy.getByTestId('alder-filterform').should('exist');
+
+        cy.getByTestId('filter_40-49').should('not.be.checked');
+
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
             .type(hoyAlder);
+
+        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+
         cy.getByTestId('filter_alder-til')
             .click()
             .clear()
             .should('have.value', '');
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .should('be.enabled')
-            .click();
+
+        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+
         cy.getByTestId('filter_alder_valideringstekst')
             .should('be.visible')
             .contains('Du må skrive et tall lavere enn 100 i fra-feltet hvis til-feltet står tomt.');
+
         cy.getByTestId('filter_alder-fra')
             .click()
             .clear();
-        cy.getByTestId('filter_alder-til')
+
+        cy.getByTestId('filter_alder-fra')
             .click()
             .clear()
             .type(tilAlder);
-        cy.getByTestId('checkbox-filterform_velg-knapp')
-            .should('be.enabled')
-            .click();
+
+        cy.getByTestId('checkbox-filterform_velg-knapp').click();
+
         cy.getByTestId('alder-filterform').should('not.exist');
+
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
 
         cy.apneLukkeFilterDropdown('alder');
 
         cy.getByTestId('alder-filterform').should('exist');
 
-        cy.getByTestId('alder-filterform_nullstill-knapp')
-            .should('be.enabled')
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 1);
+
+        cy.getByTestId('filtreringlabel_34-100-ar')
+            .should('be.visible')
             .click();
+
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
     });
 
     it('Hendelser-filterform - Enhetens oversikt', () => {
-        cy.getByTestId('dropdown-knapp_sisteEndringKategori')
-            .contains('Siste endring av bruker')
-            .click();
+        cy.getByTestId('dropdown-knapp_sisteEndringKategori').click();
 
         cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
 
@@ -626,8 +646,12 @@ describe('Filter', () => {
             .last()
             .contains('Veileder');
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Aktivitet lagt til: Jobb jeg har nå')
+        cy.getByTestId('dropdown-knapp_velg-kolonner')
+            .contains('Velg kolonner')
+            .click({force: true});
+
+        cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na')
+            .should('exist')
             .click();
     });
 
@@ -644,13 +668,15 @@ describe('Filter', () => {
 
         cy.checkbox('filter_uleste-endringer');
 
-        cy.getByTestId('filtreringlabel').contains('Aktivitet lagt til: Jobb jeg har nå');
+        cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('be.visible');
 
-        cy.getByTestId('filtreringlabel').contains('Uleste endringer');
+        // cy.getByTestId('side-storrelse_min-oversikt')
+        //     .click()
+        //     .scrollTo('top');
 
-        cy.getByTestId('hendelser-filterform_nullstill-knapp')
-            .contains('Nullstill')
-            .click();
+        cy.getByTestId('filtreringlabel_uleste-endringer-siste-endring-av-bruker').should('be.visible');
+
+        cy.getByTestId('hendelser-filterform_nullstill-knapp').click();
 
         cy.gaTilOversikt('enhetens-oversikt');
     });
@@ -660,30 +686,38 @@ describe('Filter', () => {
 
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Ja');
+        cy.getByTestId('filtreringlabel_utdanning-bestatt-ja').should('be.visible');
 
         cy.getByTestId('filter_utdanningBestatt_JA').uncheck({force: true});
 
         cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Ja');
+        cy.getByTestId('filtreringlabel_utdanning-bestatt-ja').should('be.visible');
 
         cy.getByTestId('filter_utdanningBestatt_NEI').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Utdanning bestått: Nei');
+        cy.getByTestId('filtreringlabel_utdanning-bestatt-nei').should('be.visible');
 
         cy.getByTestId('filter_utdanningGodkjent_NEI').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Utdanning godkjent: Nei');
+        cy.getByTestId('filtreringlabel_utdanning-godkjent-nei').should('be.visible');
 
-        cy.getByTestId('double-checkbox-filterform_nullstill-knapp')
-            .should('be.enabled')
+        // cy.getByTestId('double-checkbox-filterform_nullstill-knapp')
+        //     .should('be.enabled')
+        //     .click();
+
+        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+            .should('be.visible')
             .click();
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
     });
 
     it('Aktivitet-filterform', () => {
+        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
+
         cy.apneLukkeFilterDropdown('aktivitet');
 
         cy.getByTestId('aktivitet-filterform-forenklet').should('exist');
@@ -694,23 +728,29 @@ describe('Filter', () => {
 
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').should('be.enabled');
 
-        cy.getByTestId('filtreringlabel').contains('Stilling bruker skal søke');
+        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke').should('be.visible');
 
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV');
+        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').click();
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
 
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
 
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.getByTestId('aktiviteter_avansert-filter_knapp').click();
 
@@ -722,19 +762,21 @@ describe('Filter', () => {
 
         cy.getByTestId('aktivitet-filterform-STILLING-ja').check({force: true});
 
-        cy.getByTestId('filtreringlabel').should('have.length', 1);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 1);
 
         cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.enabled');
 
-        cy.getByTestId('filtreringlabel').contains('Stilling bruker skal søke: JA');
+        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke-ja').should('be.visible');
 
         cy.getByTestId('aktivitet-filterform-TILTAK-ja').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV: JA');
+        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav-ja').should('be.visible');
 
         cy.getByTestId('aktivitet-filterform-MOTE-ja').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Møte med NAV: JA');
+        cy.getByTestId('filtreringlabel_mote-med-nav-ja').should('be.visible');
 
         cy.getByTestId('aktiviteter_forenklet-filter_knapp').click();
 
@@ -742,10 +784,12 @@ describe('Filter', () => {
 
         cy.getByTestId('aktivitet-filterform').should('not.exist');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 4);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 4);
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Slett alle filtervalg')
+        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+            .should('be.visible')
             .click();
     });
 
@@ -758,19 +802,27 @@ describe('Filter', () => {
 
         cy.getByTestId('fodselsdato-filterform_dato-04').click();
 
-        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 4');
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
+
+        cy.getByTestId('filtreringlabel_fodselsdato-4').should('be.visible');
 
         cy.getByTestId('fodselsdato-filterform_nullstill-knapp').should('be.enabled');
 
         cy.getByTestId('fodselsdato-filterform_dato-23').click();
 
-        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 23');
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
+
+        cy.getByTestId('filtreringlabel_fodselsdato-23').should('be.visible');
 
         cy.getByTestId('fodselsdato-filterform_dato-27').click();
 
-        cy.getByTestId('filtreringlabel').contains('Fødselsdato: 27');
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 4);
+        cy.getByTestId('filtreringlabel_fodselsdato-27').should('be.visible');
+
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 4);
 
         cy.getByTestId('fodselsdato-filterform_dato-04_input').should('be.checked');
 
@@ -786,9 +838,13 @@ describe('Filter', () => {
 
         cy.getByTestId('fodselsdato-filterform_dato-27_input').should('not.be.checked');
 
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
+
         cy.apneLukkeFilterDropdown('fodselsdato');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
     });
 
     it('Radio-filterform', () => {
@@ -802,13 +858,15 @@ describe('Filter', () => {
 
         cy.getByTestId('radio-filterform_nullstill-knapp').should('be.enabled');
 
-        cy.getByTestId('filtreringlabel')
-            .should('have.length', 1)
-            .contains('Kvinne');
+        cy.getByTestId('filtrering_label-container')
+            .contains('Kvinne')
+            .should('be.visible');
 
         cy.getByTestId('radio-filterform_nullstill-knapp').click();
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
     });
 
     it('Checkbox-filterform', () => {
@@ -820,33 +878,41 @@ describe('Filter', () => {
 
         cy.checkbox('filter_IKVAL');
 
-        cy.getByTestId('filtreringlabel').contains('Standardinnsats');
+        cy.getByTestId('filtreringlabel_standardinnsats').should('be.visible');
 
         cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.enabled');
 
         cy.checkbox('filter_BATT');
 
-        cy.getByTestId('filtreringlabel').contains('Spesielt tilpasset innsats');
+        cy.getByTestId('filtreringlabel_spesielt-tilpasset-innsats').should('be.visible');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
     });
 
     it('Slett alle filtre', () => {
+        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
+
         cy.apneLukkeFilterDropdown('aktivitet');
 
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Stilling bruker skal søke');
+        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke').should('be.visible');
 
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
 
-        cy.getByTestId('filtreringlabel').contains('Tiltak gjennom NAV');
+        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
 
-        cy.getByTestId('filtreringlabel').should('have.length', 2);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 2);
 
         cy.apneLukkeFilterDropdown('aktivitet');
 
@@ -862,13 +928,15 @@ describe('Filter', () => {
 
         cy.getByTestId('filter_AVKLARAG').check({force: true});
 
-        cy.getByTestId('filtreringlabel').should('have.length', 5);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 5);
 
-        cy.getByTestId('filtreringlabel')
-            .contains('Slett alle filtervalg')
-            .click();
+        cy.getByTestId('filtreringlabel_slett-alle-filtervalg').click();
 
-        cy.getByTestId('filtreringlabel').should('have.length', 0);
+        cy.getByTestId('filtrering_label-container')
+            .children()
+            .should('have.length', 0);
 
         cy.getByTestId('alertstripe_filtrering')
             .should('be.visible')

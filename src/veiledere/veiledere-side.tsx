@@ -7,7 +7,7 @@ import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
-import {slettEnkeltFilter} from '../ducks/filtrering';
+import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
@@ -23,6 +23,9 @@ import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrik
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import GammelFiltreringVeiledere from '../filtrering/gammel_filtrering-veiledere';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {SOK_VEILEDER} from '../konstanter';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -33,6 +36,7 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
+    const erSokVeilederFeatureTogglePa = useFeatureSelector()(SOK_VEILEDER);
 
     useSetEnhetIUrl();
 
@@ -46,9 +50,18 @@ function VeiledereSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
+    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+        dispatch(pagineringSetup({side: 1}));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+    };
+
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse veilederoversikt" id={`side-storrelse_${id}`}>
+            <div
+                className="side-storrelse veilederoversikt"
+                id={`side-storrelse_${id}`}
+                data-testid={`side-storrelse_${id}`}
+            >
                 <ToppMeny />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
@@ -59,7 +72,11 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                <FiltreringVeiledere />
+                                {erSokVeilederFeatureTogglePa ? (
+                                    <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} />
+                                ) : (
+                                    <GammelFiltreringVeiledere />
+                                )}
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />

@@ -3,7 +3,7 @@ import {AppState} from '../../reducer';
 import {OrNothing} from '../../utils/types/types';
 import {VeilederModell} from '../../model-interfaces';
 
-const selectIdent = (state: AppState) => state.inloggetVeileder.data;
+const selectIdent = (state: AppState) => state.innloggetVeileder.data;
 
 export function useIdentSelector(): OrNothing<VeilederModell> {
     return useSelector(selectIdent);

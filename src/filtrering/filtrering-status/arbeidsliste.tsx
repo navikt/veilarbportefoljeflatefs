@@ -7,7 +7,7 @@ import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arb
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
-import {KategoriModell} from '../../model-interfaces';
+import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 
@@ -15,8 +15,8 @@ export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
     handleChange: (e: any) => void;
     handleChangeCheckbox: (e: any) => void;
-    filtervalg: any;
-    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
+    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     checked: boolean;
 }
 

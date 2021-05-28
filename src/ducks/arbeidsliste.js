@@ -24,7 +24,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state = initialState, action) {
+export default function arbeidslisteReducer(state = initialState, action) {
     switch (action.type) {
         case ARBEIDSLISTE_LAGRE_PENDING:
             return {...state, status: STATUS.PENDING};

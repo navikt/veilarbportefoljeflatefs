@@ -4,7 +4,7 @@ import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
 import './toolbar.less';
 import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
-import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import {ReactComponent as ArbeidslisteIkonLinje} from '../ikoner/arbeidsliste/arbeidslisteikon-linje.svg';
 import {Normaltekst} from 'nav-frontend-typografi';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';

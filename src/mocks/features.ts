@@ -7,7 +7,8 @@ import {
     ULESTE_ENDRINGER,
     HENDELSE_MEDISINSKBEHANDLING,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    SOK_VEILEDER
 } from '../konstanter';
 
 const toggles = {
@@ -19,7 +20,8 @@ const toggles = {
     [HENDELSE_MEDISINSKBEHANDLING]: true,
     [ULESTE_ENDRINGER]: true,
     [UTEN_KRR_FILTER]: true,
-    [TVUNGEN_STEPPER]: false
+    [TVUNGEN_STEPPER]: false,
+    [SOK_VEILEDER]: true
 };
 
 export default toggles;

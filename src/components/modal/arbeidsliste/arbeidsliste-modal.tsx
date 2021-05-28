@@ -120,7 +120,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 }
 
 const mapStateToProps = (state: AppState) => ({
-    innloggetVeileder: state.inloggetVeileder.data!.ident,
+    innloggetVeileder: state.innloggetVeileder.data!.ident,
     arbeidslisteStatus: state.arbeidsliste.status
 });
 

@@ -7,13 +7,10 @@ describe('Diverse', () => {
     // before('Tvungen stepper', () => {
     //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
     //         .click();
     //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
@@ -24,26 +21,18 @@ describe('Diverse', () => {
         cy.getByTestId('endringslogg-innhold').should('be.visible');
         cy.getByTestId('endringslogg_tour-modal').should('not.exist');
         cy.getByTestId('endringslogg_se-hvordan-knapp')
-            .contains('Se hvordan')
             .first()
             .click();
         cy.getByTestId('endringslogg_tour-modal').should('be.visible');
         cy.getByTestId('endringslogg_forrige-knapp').should('be.hidden');
-        cy.getByTestId('endringslogg_neste-knapp')
-            .contains('Neste')
-            .click();
+        cy.getByTestId('endringslogg_neste-knapp').click();
         cy.getByTestId('endringslogg_forrige-knapp').should('be.visible');
         cy.getByTestId('endringslogg_stegviser').then($element => {
             if ($element.find('.stegviser__steg').length === 3) {
-                return cy
-                    .getByTestId('endringslogg_neste-knapp')
-                    .contains('Neste')
-                    .click();
+                return cy.getByTestId('endringslogg_neste-knapp').click();
             }
         });
-        cy.getByTestId('endringslogg_ferdig-knapp')
-            .contains('Ferdig')
-            .click();
+        cy.getByTestId('endringslogg_ferdig-knapp').click();
         cy.getByTestId('endringslogg_tour-modal').should('not.exist');
         cy.getByTestId('endringslogg-innhold').should('be.visible');
         cy.getByTestId('endringslogg-knapp').click();
@@ -59,13 +48,11 @@ describe('Diverse', () => {
         cy.getByTestId('tilbakemelding_modal').should('be.visible');
 
         //TODO toggle hvis tilbakemeldingsundersøkelsen er checkboxer/tilfredshet
-            //Hvis checkbox
+        //Hvis checkbox
         // cy.getByTestId('tilfredshet_send-knapp')
-        //     .contains('Send')
         //     .click({force: true});
         //
         // cy.getByTestId('tilfredshet_feilmelding')
-        //     .contains('Velg minst en avkrysningsboks.')
         //     .should('be.visible');
         //
         // cy.checkbox('checkboxvalg_1');
@@ -78,7 +65,7 @@ describe('Diverse', () => {
         // cy.getByTestId('checkboxvalg_5').should('be.disabled');
         // cy.getByTestId('checkboxvalg_6').should('be.disabled');
 
-            // Hvis tilfredshet
+        // Hvis tilfredshet
         cy.getByTestId('tilfredshet-ikon_5')
             .should('be.visible')
             .click();
@@ -94,9 +81,7 @@ describe('Diverse', () => {
             .type('How do you throw a space party? You planet!');
 
         cy.wait(1000);
-        cy.getByTestId('tilfredshet_send-knapp')
-            .contains('Send')
-            .click({force: true});
+        cy.getByTestId('tilfredshet_send-knapp').click({force: true});
         cy.wait(1000);
         cy.getByTestId('tilfredshet_send-knapp').should('not.exist');
         cy.getByTestId('tilbakemelding_modal_takk').should('be.visible');
@@ -149,8 +134,7 @@ describe('Diverse', () => {
         cy.getByTestId('sok-navn-fnr_input')
             .click()
             .type('andersen');
-        cy.getByTestId('filtreringlabel')
-            .contains('Søk på navn')
+        cy.getByTestId('filtreringlabel_sok-pa-navn')
             .should('be.visible')
             .click();
     });
@@ -160,30 +144,27 @@ describe('Diverse', () => {
             .click()
             .clear()
             .type('10108000398');
-        cy.getByTestId('filtreringlabel')
-            .contains('Søk på fødselsnummer')
+        cy.getByTestId('filtreringlabel_sok-pa-fodselsnummer')
             .should('be.visible')
             .click();
     });
 
     it('Søk etter veileder', () => {
         cy.get('.spinner').should('not.exist');
-        cy.getByTestId('sidebar_content-container')
-            .contains('Status')
-            .should('be.visible');
+        cy.getByTestId('sidebar_content-container').should('be.visible');
         cy.checkbox('filter_checkboks-container_ufordeltebruker');
-        cy.getByTestId('filtreringlabel').contains('Ufordelte brukere');
+        cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
         cy.getByTestId('sok-veileder_knapp').click();
         cy.getByTestId('sok-filter_input')
             .click()
             .type(forsteVeileder);
         cy.checkbox('sok-veileder_rad_0');
         cy.getByTestId('sok-veileder_velg-knapp').click();
-        cy.getByTestId('filtreringlabel')
+        cy.getByTestId('filtrering_label-container')
             .contains(forsteVeileder)
             .click();
-        cy.getByTestId('filtreringlabel')
-            .contains('Ufordelte brukere')
+        cy.getByTestId('filtreringlabel_ufordelte-brukere')
+            .should('be.visible')
             .click();
     });
 
@@ -203,8 +184,7 @@ describe('Diverse', () => {
             .check({force: true});
         cy.getByTestId('sorteringheader_veileder').should('not.exist');
         cy.getByTestId('sorteringheader_oppfolging-startet').should('be.visible');
-        cy.getByTestId('filtreringlabel')
-            .contains('I avtalt aktivitet')
+        cy.getByTestId('filtreringlabel_i-avtalt-aktivitet')
             .should('be.visible')
             .click();
     });
@@ -222,7 +202,6 @@ describe('Diverse', () => {
         cy.checkbox('tildel-veileder_valg_0');
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
         cy.getByTestId(`tildel-veileder_velg-knapp`)
-            .contains('Velg')
             .should('be.visible')
             .click();
         cy.wait(1000);

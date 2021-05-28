@@ -100,7 +100,7 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     });
 }
 
-export default function reducer(state = initialState, action): PortefoljeState {
+export default function portefoljeReducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

@@ -10,7 +10,8 @@ import {
     HENDELSE_MEDISINSKBEHANDLING,
     ULESTE_ENDRINGER,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    SOK_VEILEDER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -28,11 +29,12 @@ const initalState: FeaturesState = {
     [HENDELSE_MEDISINSKBEHANDLING]: false,
     [ULESTE_ENDRINGER]: false,
     [UTEN_KRR_FILTER]: false,
-    [TVUNGEN_STEPPER]: false
+    [TVUNGEN_STEPPER]: false,
+    [SOK_VEILEDER]: true
 };
 
 // Reducer
-export default function reducer(state: FeaturesState = initalState, action): FeaturesState {
+export default function featuresReducer(state: FeaturesState = initalState, action): FeaturesState {
     switch (action.type) {
         case ADD_FEATURE:
             return {

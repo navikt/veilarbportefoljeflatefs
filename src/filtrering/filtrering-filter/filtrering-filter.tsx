@@ -33,10 +33,11 @@ import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg'
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
+import {FiltervalgModell} from '../../model-interfaces';
 
 interface FiltreringFilterProps {
-    filtervalg: any;
-    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
+    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     enhettiltak: any;
     oversiktType: OversiktType;
 }

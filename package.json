@@ -121,7 +121,8 @@
         "typescript": "^3.9.7",
         "wait-on": "^5.2.1",
         "webpack-cli": "^3.3.12",
-        "y18n": "^5.0.6"
+        "y18n": "^5.0.6",
+        "browserslist": "^4.16.5"
     },
     "eslintConfig": {
         "extends": "react-app"

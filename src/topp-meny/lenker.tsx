@@ -1,5 +1,5 @@
 import React from 'react';
-import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';

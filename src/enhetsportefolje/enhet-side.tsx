@@ -106,7 +106,7 @@ export default function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: any) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
@@ -138,7 +138,7 @@ export default function EnhetSide() {
 
     return (
         <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse" id={`side-storrelse_${id}`}>
+            <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
                 <ToppMeny />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>

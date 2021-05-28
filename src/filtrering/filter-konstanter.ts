@@ -211,8 +211,6 @@ export const aktiviteter = {
     UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
 
-const veiledere = {};
-
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med NAV'},
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med NAV'}
@@ -309,7 +307,6 @@ export default {
     ytelse,
     ytelsevalg,
     rettighetsgruppe,
-    veiledere,
     aktiviteter,
     ytelseAapSortering,
     manuellBrukerStatus,

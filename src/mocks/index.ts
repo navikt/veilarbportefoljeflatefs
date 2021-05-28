@@ -1,4 +1,4 @@
-import inloggetVeileder from './inloggetVeileder';
+import innloggetVeileder from './innloggetVeileder';
 import me from './me';
 import brukere from './portefolje';
 import veiledere from './veiledere';
@@ -15,7 +15,7 @@ import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
-    const enhetportefolje = lagPortefolje(queryParams, inloggetVeileder.enheter[0].enhetId, alleBrukere);
+    const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
     enhetportefolje.brukere.forEach(bruker => (bruker.veilederId = me.ident));
     return enhetportefolje;
 }
@@ -138,7 +138,7 @@ mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx
 });
 
 // veileder-api
-mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(inloggetVeileder));
+mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(innloggetVeileder));
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
@@ -240,11 +240,11 @@ mock.get(
     delayed(
         500,
         jsonResponse({
-            enheter: inloggetVeileder.enheter,
-            etternavn: inloggetVeileder.etternavn,
-            fornavn: inloggetVeileder.fornavn,
-            ident: inloggetVeileder.ident,
-            navn: inloggetVeileder.navn
+            enheter: innloggetVeileder.enheter,
+            etternavn: innloggetVeileder.etternavn,
+            fornavn: innloggetVeileder.fornavn,
+            ident: innloggetVeileder.ident,
+            navn: innloggetVeileder.navn
         })
     )
 );

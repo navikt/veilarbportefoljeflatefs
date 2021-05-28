@@ -1,7 +1,7 @@
 import Endringslogg from './endringslogg';
 import {default as React, useEffect, useState} from 'react';
 import {EndringsloggInnleggMedSettStatus, mapRemoteToState, setHarSettAlt} from './utils/endringslogg-custom';
-import {useIdentSelector} from '../../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import {useTimer} from '../../hooks/use-timer';
 import {
     hentSetteVersjonerRemotestorage,

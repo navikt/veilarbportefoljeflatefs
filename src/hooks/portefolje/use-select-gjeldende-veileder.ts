@@ -1,5 +1,5 @@
 import {useParams} from 'react-router';
-import {useIdentSelector} from '../redux/use-inlogget-ident';
+import {useIdentSelector} from '../redux/use-innlogget-ident';
 
 export function useSelectGjeldendeVeileder() {
     const {ident} = useParams();

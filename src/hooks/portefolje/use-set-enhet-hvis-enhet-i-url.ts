@@ -4,16 +4,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 
 export function useSetInitalEnhet() {
-    const inloggetVeilederInfo = useSelector((state: AppState) => state.inloggetVeileder.data);
+    const innloggetVeilederInfo = useSelector((state: AppState) => state.innloggetVeileder.data);
 
     const dispatch = useDispatch();
     const enhetId = useQueryParams().enhet;
 
-    if (!inloggetVeilederInfo) {
+    if (!innloggetVeilederInfo) {
         return {hasError: true};
     }
 
-    const enheter = inloggetVeilederInfo.enheter;
+    const enheter = innloggetVeilederInfo.enheter;
 
     if (enheter.length === 0) {
         return {hasError: true};

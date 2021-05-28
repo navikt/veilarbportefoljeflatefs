@@ -2,7 +2,7 @@ import * as React from 'react';
 import {PropsWithChildren} from 'react';
 import {Redirect, useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
-import {useIdentSelector} from '../hooks/redux/use-inlogget-ident';
+import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import classNames from 'classnames';
 import './minoversikt.less';
 
