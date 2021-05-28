@@ -152,7 +152,9 @@ describe('Diverse', () => {
     it('Søk etter veileder', () => {
         cy.get('.spinner').should('not.exist');
         cy.getByTestId('sidebar_content-container').should('be.visible');
-        cy.checkbox('filter_checkboks-container_ufordeltebruker');
+        cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({force: true});
+        cy.getByTestId('filter_checkboks-container_ufordeltebruker').should('be.checked');
+
         cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
         cy.getByTestId('sok-veileder_knapp').click();
         cy.getByTestId('sok-filter_input')

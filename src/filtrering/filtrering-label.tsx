@@ -39,7 +39,6 @@ function FiltreringLabel({
         return <FilterFeilModal isOpen={true} />;
     }
 
-    console.log(`filtreringlabel_${kebabUtenSpesialtegn(label)}`);
     return (
         <button
             title={lagConfig(label).label}
