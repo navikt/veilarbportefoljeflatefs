@@ -3,7 +3,7 @@ import {Input, Label} from 'nav-frontend-skjema';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 import {useRef, useState} from 'react';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, SOK_VEILEDER} from '../konstanter';
+import {SOK_VEILEDER} from '../konstanter';
 import GammelVeilederCheckboxListe from '../components/veileder-checkbox-liste/gammel_veileder-checkbox-liste';
 import {useEventListener} from '../hooks/use-event-listener';
 
