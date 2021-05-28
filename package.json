@@ -123,6 +123,7 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "reselect": "^4.0.0",
+    "sanity": "^2.2.6",
     "ssri": "^8.0.1",
     "typescript": "^3.9.7",
     "wait-on": "^5.2.1",
