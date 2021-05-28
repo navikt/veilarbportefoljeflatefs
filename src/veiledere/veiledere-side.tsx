@@ -23,6 +23,9 @@ import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrik
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import GammelFiltreringVeiledere from '../filtrering/gammel_filtrering-veiledere';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {SOK_VEILEDER} from '../konstanter';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -33,6 +36,7 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
+    const erSokVeilederFeatureTogglePa = useFeatureSelector()(SOK_VEILEDER);
 
     useSetEnhetIUrl();
 
@@ -64,7 +68,11 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} />
+                                {erSokVeilederFeatureTogglePa ? (
+                                    <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} />
+                                ) : (
+                                    <GammelFiltreringVeiledere />
+                                )}
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
