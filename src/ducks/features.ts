@@ -24,7 +24,7 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: false,
     [TVUNGEN_STEPPER]: false,
-    [SOK_VEILEDER]: true
+    [SOK_VEILEDER]: false
 };
 
 // Reducer
