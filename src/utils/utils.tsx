@@ -111,10 +111,24 @@ export const keyCodes = {
     esc: 27
 };
 
-export function specialChar(str: string) {
-    return str.toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
+export function specialChar(string: string | {label: string}) {
+    return string
+        .toString()
+        .toLowerCase()
+        .split('æ')
+        .join('ae')
+        .split('ø')
+        .join('o')
+        .split('å')
+        .join('a');
 }
 
-export function kebabCase(str: string) {
-    return specialChar(str).toLowerCase().replace(/\s+/g, '-');
+export function kebabCase(string: string | {label: string}) {
+    return specialChar(string).replace(/\s+/g, '-');
+}
+
+export function kebabUtenSpesialtegn(string: string | {label: string}) {
+    string.toString();
+    const regExpr = /[^a-zA-Z0-9-. ]/g;
+    return kebabCase(string).replace(regExpr, '');
 }

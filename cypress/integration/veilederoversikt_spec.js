@@ -64,9 +64,9 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 1);
-        cy.getByTestId('filtreringlabel')
+        cy.getByTestId('filtrering_label-container')
+            .children()
             .contains('Glosli, Kasper')
-            .should('be.visible')
             .click();
         cy.getByTestId('veilederoversikt_sok-veileder-input')
             .click()

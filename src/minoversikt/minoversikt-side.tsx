@@ -112,7 +112,7 @@ export default function MinoversiktSide() {
 
     return (
         <DocumentTitle title="Min oversikt">
-            <div className="side-storrelse" id={`side-storrelse_${id}`}>
+            <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>

@@ -54,7 +54,6 @@ describe('Arbeidsliste', () => {
     it('Lagre ny arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
             .contains(fornavn)
             .first();

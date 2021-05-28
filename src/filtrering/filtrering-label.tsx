@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import './filtrering-label.less';
 import './filtrering-skjema.less';
 import FilterFeilModal from '../components/modal/filter-feil-modal';
+import {kebabUtenSpesialtegn} from '../utils/utils';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -37,13 +38,15 @@ function FiltreringLabel({
     if (label === undefined) {
         return <FilterFeilModal isOpen={true} />;
     }
+
+    console.log(`filtreringlabel_${kebabUtenSpesialtegn(label)}`);
     return (
         <button
             title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
             onClick={slettFilter}
-            data-testid="filtreringlabel"
+            data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon />}

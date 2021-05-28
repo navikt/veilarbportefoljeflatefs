@@ -57,7 +57,11 @@ function VeiledereSide() {
 
     return (
         <DocumentTitle title="Veilederoversikt">
-            <div className="side-storrelse veilederoversikt" id={`side-storrelse_${id}`}>
+            <div
+                className="side-storrelse veilederoversikt"
+                id={`side-storrelse_${id}`}
+                data-testid={`side-storrelse_${id}`}
+            >
                 <ToppMeny />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
