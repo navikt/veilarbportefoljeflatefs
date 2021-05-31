@@ -73,7 +73,7 @@ function VeiledereSide() {
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
                                 {erSokVeilederFeatureTogglePa ? (
-                                    <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} />
+                                    <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg}/>
                                 ) : (
                                     <GammelFiltreringVeiledere />
                                 )}
