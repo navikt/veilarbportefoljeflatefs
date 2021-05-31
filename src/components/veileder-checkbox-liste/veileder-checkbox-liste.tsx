@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {Checkbox} from 'nav-frontend-skjema';
 import {VeiledereState} from '../../ducks/veiledere';
@@ -8,18 +8,21 @@ import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
 import {AppState} from '../../reducer';
 import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
+import {endreFiltervalg} from '../../ducks/filtrering';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 interface VeilederCheckboxListeProps {
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    // endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     nullstillInputfelt: () => void;
 }
 
-function VeilederCheckboxListe({endreFiltervalg, nullstillInputfelt}: VeilederCheckboxListeProps) {
+function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps) {
     const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const form = 'veiledere';
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);
@@ -49,12 +52,12 @@ function VeilederCheckboxListe({endreFiltervalg, nullstillInputfelt}: VeilederCh
             valgteElem = valgteVeiledere.filter(valgtElement => value !== valgtElement);
             setValgteVeiledere(valgteElem);
         }
-        endreFiltervalg(form, valgteElem);
+        dispatch(endreFiltervalg(form, valgteElem, OversiktType.veilederOversikt));
     };
 
     const nullstillValg = () => {
         nullstillInputfelt();
-        endreFiltervalg(form, '');
+        dispatch(endreFiltervalg(form, [], OversiktType.veilederOversikt));
     };
 
     const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]) => {
