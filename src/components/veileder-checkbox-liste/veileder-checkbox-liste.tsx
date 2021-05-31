@@ -12,7 +12,6 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
 
 interface VeilederCheckboxListeProps {
-    // endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     nullstillInputfelt: () => void;
 }
 
