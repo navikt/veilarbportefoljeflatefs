@@ -53,7 +53,7 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
                 value={navnEllerFnrQuery}
                 data-testid="sok-navn-fnr_input"
                 id="sok-navn-fnr_input"
-                aria-label="sok-navn-fnr_input"
+                aria-label="Søk etter navn eller fødselsnummer"
             />
         </div>
     );

@@ -22,8 +22,7 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
     }, [endreFiltervalg]);
 
     useEffect(() => {
-        const prevQuery = filtervalg.veilederNavnQuery;
-        if (prevQuery === '') {
+        if (filtervalg.veilederNavnQuery === '') {
             setVeilederNavnQuery('');
         }
     }, [filtervalg.veilederNavnQuery]);
@@ -49,7 +48,7 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
 
     const nullstillInputfelt = () => {
         setVeilederNavnQuery('');
-        endreFiltervalg('veilederNavnQuery', veilederNavnQuery);
+        endreFiltervalg('veilederNavnQuery', '');
     };
 
     return (
@@ -65,7 +64,7 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
                 aria-label="Navn eller NAV-ident"
                 id="sok-veileder"
             />
-            <VeilederCheckboxListe endreFiltervalg={endreFiltervalg} nullstillInputfelt={nullstillInputfelt} />
+            <VeilederCheckboxListe nullstillInputfelt={nullstillInputfelt} />
         </div>
     );
 }
