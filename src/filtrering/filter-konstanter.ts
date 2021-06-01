@@ -78,7 +78,7 @@ export const arbeidslisteKategori = {
 };
 
 export const alder = {
-    '19-og-under': '≤ 19 år',
+    '0-19': '≤ 19 år',
     '20-24': '20-24 år',
     '25-29': '25-29 år',
     '30-39': '30-39 år',
