@@ -63,7 +63,7 @@ describe('Mine filter', () => {
 
         cy.apneLukkeFilterDropdown('alder');
 
-        cy.getByTestId('filter_19-og-under').check({force: true});
+        cy.getByTestId('filter_0-19').check({force: true});
 
         cy.getByTestId('filtreringlabel_-19-ar').should('be.visible');
 
