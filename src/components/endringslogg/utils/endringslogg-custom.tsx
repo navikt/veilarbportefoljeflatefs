@@ -20,6 +20,22 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '16. juni 2021',
+        tittel: 'Forhåndsorientering blir nå lagt til aktiviteten',
+        versjonId: '16.06.21',
+        featureToggleName: 'veilarbportefolje.forhandsorientering',
+        children: (
+            <>
+                Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for
+                ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx"
+                    linkTekst="Se mer informasjon på Navet"
+                />
+            </>
+        )
+    },
+    {
         dato: '16. april 2021',
         tittel: 'Justering av arbeidslisteikoner',
         versjonId: '16.04.21',
