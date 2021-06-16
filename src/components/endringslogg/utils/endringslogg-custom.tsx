@@ -21,7 +21,7 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
         dato: '16. juni 2021',
-        tittel: 'Forhåndsorientering blir nå lagt til aktiviteten',
+        tittel: 'Forhåndsorientering vises i aktiviteten',
         versjonId: '16.06.21',
         featureToggleName: 'veilarbportefolje.forhandsorientering',
         children: (
