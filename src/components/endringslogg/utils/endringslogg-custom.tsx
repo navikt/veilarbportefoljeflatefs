@@ -23,7 +23,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '16. juni 2021',
         tittel: 'Forhåndsorientering vises i aktiviteten',
         versjonId: '16.06.21',
-        featureToggleName: 'veilarbportefolje.forhandsorientering',
         children: (
             <>
                 Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for
