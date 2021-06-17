@@ -56,6 +56,18 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
             >
                 Veilederoversikt
             </NavLink>
+            <NavLink
+                to="/enhet1/v1"
+                className="oversiktslenke typo-undertittel"
+                activeClassName="oversiktslenke--valgt"
+                id="enhetens-oversikt-v1"
+                title="Her vises alle brukere som tilhører enheten"
+                aria-label="Enhetens oversikt"
+                data-testid="enhetens-oversikt"
+                aria-selected={erAktiv('enhetens-oversikt-v1')}
+            >
+                Enhetens oversikt V1
+            </NavLink>
         </div>
     );
 }

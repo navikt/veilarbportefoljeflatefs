@@ -3,6 +3,7 @@ import 'moment/locale/nb';
 import {Route, Switch} from 'react-router-dom';
 import MinoversiktSide from './minoversikt/minoversikt-side';
 import EnhetSide from './enhetsportefolje/enhet-side';
+import EnhetSideV1 from './enhetsportefolje_v1/enhet-side';
 import VeiledereSide from './veiledere/veiledere-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
@@ -16,10 +17,10 @@ function Routes() {
 
     return (
         <div className="portefolje">
-            <div className="maincontent side-innhold">
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
                         <Route path="/enhet" component={EnhetSide} />
+                        <Route path="/enhet1/v1" component={EnhetSideV1} />
                         <Route path="/veiledere" component={VeiledereSide} />
                         <Route path="/portefolje/:ident" component={MinoversiktSide} />
                         <Route path="/portefolje" component={MinoversiktSide} />
@@ -28,7 +29,6 @@ function Routes() {
                     <TilToppenKnapp />
                     <TvungenStepper/>
                 </Innholdslaster>
-            </div>
         </div>
     );
 }

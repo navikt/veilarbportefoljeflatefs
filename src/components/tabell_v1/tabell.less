@@ -1,0 +1,21 @@
+.veilarbportefoljeflatefs {
+    .sorteringheader {
+        display: grid;
+        grid-template-columns: fit-content(100%) auto;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &__lenke {
+            grid-column: 1;
+        }
+
+        &__pil {
+            width: 1rem;
+            height: 1rem;
+            grid-column: 2;
+            float: left;
+            margin-top: 2px;
+        }
+    }
+}
