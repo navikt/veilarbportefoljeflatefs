@@ -1,3 +1,5 @@
+import endringsloggmelding from './endringsloggmelding';
+
 export default {
     name: 'stepper',
     title: 'Stepper',
@@ -7,8 +9,14 @@ export default {
             title: 'Tittel',
             name: 'tittel',
             type: 'string',
-            description: 'Må ha et unikt navn, og skrives på denne måten: "SISTE_ENDRING"',
+            // description: 'Må ha et unikt navn, og skrives på denne måten: "SISTE_ENDRING"',
             validation: Rule => Rule.required()
+        },
+        {
+            title: 'Endringsloggmelding',
+            name: 'endringsloggmelding',
+            type: 'reference',
+            to: {type: 'endringsloggmelding'}
         },
         {
             title: 'Knappetekst',
