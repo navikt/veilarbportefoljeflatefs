@@ -1,15 +1,15 @@
 import {klokkeslettTilMinutter, minuttDifferanse} from '../utils/dato-utils';
 
 describe('dato utils test', () => {
-    describe('omvandler allt til minutter dersom tidskolonne skall kunne vare mer generisk', () => {
-        it('skall omvandle klokkeslett til minutter', () => {
+    describe('endrer alt til minutter dersom tidskolonne skal kunne være mer generisk', () => {
+        it('skal endre klokkeslett til minutter', () => {
             const date = new Date();
             const minutter = klokkeslettTilMinutter(date);
             const minutterDate = date.getHours() * 60 + date.getMinutes();
             expect(minutter).toBe(minutterDate);
         });
 
-        it('skall bereigne differransen mellom to klokkeslett i minutter', () => {
+        it('skal beregne differansen mellom to klokkeslett i minutter', () => {
             const date = new Date();
             const date2 = new Date();
             date2.setMinutes(date.getMinutes() + 30);

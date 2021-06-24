@@ -1,8 +1,5 @@
-import * as React from 'react';
-import {getClient} from '../../../lib/sanity';
 import groq from 'groq';
-import EndringsloggMelding from './endringslogg-melding';
-import {useEffect, useState} from 'react';
+import {ModalName} from '../../modal/sanity-tour-modal/sanity_tour-modal';
 
 export const groqEndringsloggPreviewFields = `
   tittel,
@@ -14,7 +11,7 @@ export const groqEndringsloggPreviewFields = `
   _id
 `;
 
-const query = groq`
+export const query = groq`
 *[_type == "endringsloggmelding"] | order(dato desc) {
   ${groqEndringsloggPreviewFields}
 }
@@ -25,23 +22,7 @@ export type EndringsloggData = {
     dato: Date;
     innhold: string;
     lenke?: string;
-    stepper?: Array<any>;
+    stepper?: Array<ModalName>;
     _createdAt: string;
     _id: string;
 };
-
-const PreviewWrapper = () => {
-    const [post, setPost] = useState<Array<any>>([]);
-
-    useEffect(() => {
-        getClient(false)
-            .fetch(query)
-            .then(blogpost => {
-                setPost(blogpost);
-            });
-    }, []);
-
-    return <EndringsloggMelding endringsloggmeldinger={post} />;
-};
-
-export default PreviewWrapper;
