@@ -59,26 +59,24 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
             .sort(propertySort(sortering));
     }, [props.veilederFilter, props.portefoljestorrelser, props.veiledere, sortering]);
 
-    function getVeiledere() {
+    function getValgteVeiledere() {
         if (seAlle) {
             return veilederListe;
         }
         return veilederListe.slice(fra, fra + sideStorrelse);
     }
 
-    const veiledere = getVeiledere();
-
     return (
         <>
             <Toolbar
                 oversiktType={OversiktType.veilederOversikt}
-                antallTotalt={veilederListe.length}
+                antallTotalt={props.veiledere.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"
-                antallVeiledere={props.antallVeiledere}
+                antallValgteVeiledere={getValgteVeiledere().length}
             />
             <VeiledereTabell
-                veiledere={veiledere}
+                veiledere={getValgteVeiledere()}
                 currentSortering={sortering}
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
                 sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}
