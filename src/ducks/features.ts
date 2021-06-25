@@ -8,7 +8,8 @@ import {
     VEDTAKSTOTTE,
     UTEN_KRR_FILTER,
     TVUNGEN_STEPPER,
-    SOK_VEILEDER
+    SOK_VEILEDER,
+    BYTTE_LISTE_MED_TABELL
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -24,7 +25,8 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: false,
     [TVUNGEN_STEPPER]: false,
-    [SOK_VEILEDER]: false
+    [SOK_VEILEDER]: false,
+    [BYTTE_LISTE_MED_TABELL]: false
 };
 
 // Reducer

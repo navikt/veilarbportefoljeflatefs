@@ -3,13 +3,15 @@ import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
+import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
+import {BYTTE_LISTE_MED_TABELL} from "../konstanter";
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
-
+    const erBytteListeMedTabellFeatureTogglePa = useFeatureSelector()(BYTTE_LISTE_MED_TABELL);
     const erAktiv = id => {
         const elem = document.getElementById(id);
         if (elem) {
@@ -31,19 +33,6 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 aria-selected={erAktiv('min-oversikt')}
             >
                 Min oversikt
-            </NavLink>
-            <NavLink
-                to="/portefolje_v1/v1"
-                className="oversiktslenke typo-undertittel"
-                activeClassName={aktivLink}
-                id="min-oversikt"
-                title="Her vises alle brukere som er tildelt deg"
-                aria-label="Min oversikt"
-                data-testid="min-oversikt"
-                hidden={!(harPortefolje || props.erPaloggetVeileder)}
-                aria-selected={erAktiv('min-oversikt')}
-            >
-                Min oversikt V1
             </NavLink>
             <NavLink
                 to="/enhet"
@@ -70,6 +59,19 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Veilederoversikt
             </NavLink>
             <NavLink
+                to="/portefolje_v1/v1"
+                className="oversiktslenke typo-undertittel"
+                activeClassName={aktivLink}
+                id="min-oversikt"
+                title="Her vises alle brukere som er tildelt deg"
+                aria-label="Min oversikt"
+                data-testid="min-oversikt"
+                hidden={!(harPortefolje || props.erPaloggetVeileder) || erBytteListeMedTabellFeatureTogglePa}
+                aria-selected={erAktiv('min-oversikt-v1')}
+            >
+                Min oversikt V1
+            </NavLink>
+            <NavLink
                 to="/enhet1/v1"
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
@@ -77,6 +79,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 title="Her vises alle brukere som tilhører enheten"
                 aria-label="Enhetens oversikt"
                 data-testid="enhetens-oversikt"
+                hidden={erBytteListeMedTabellFeatureTogglePa}
                 aria-selected={erAktiv('enhetens-oversikt-v1')}
             >
                 Enhetens oversikt V1

@@ -14,6 +14,7 @@ export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmeldin
 export const UTEN_KRR_FILTER = 'veilarbportefolje.uten_krr_filter';
 export const TVUNGEN_STEPPER = 'veilarbportefolje.tvungen_stepper';
 export const SOK_VEILEDER = 'veilarbportefolje.sok-veileder';
+export const BYTTE_LISTE_MED_TABELL = 'veilarbportefolje.bytte_liste_med_tabell';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -23,5 +24,6 @@ export const PORTEFOLJE_FEATURES = [
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
     TVUNGEN_STEPPER,
-    SOK_VEILEDER
+    SOK_VEILEDER,
+    BYTTE_LISTE_MED_TABELL
 ];
