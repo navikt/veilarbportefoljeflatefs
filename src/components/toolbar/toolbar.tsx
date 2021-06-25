@@ -81,7 +81,9 @@ function Toolbar(props: ToolbarProps) {
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {oversiktType === OversiktType.veilederOversikt && (
                     <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
-                        {`Viser ${antallSynligeVeiledere} av totalt ${antallTotalt} veiledere.`}
+                        {antallTotalt === 0
+                            ? `Ingen veiledere`
+                            : `Viser ${antallSynligeVeiledere} av totalt ${antallTotalt} veiledere.`}
                     </Undertittel>
                 )}
                 {oversiktType !== OversiktType.veilederOversikt && (
