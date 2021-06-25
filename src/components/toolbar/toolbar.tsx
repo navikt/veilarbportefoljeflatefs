@@ -23,7 +23,7 @@ interface ToolbarProps {
     gjeldendeVeileder?: string;
     antallTotalt: number;
     id?: string;
-    antallSynligeVeiledere?: number;
+    antallValgteVeiledere?: number;
     scrolling?: boolean;
     isSidebarHidden?: boolean;
 }
@@ -37,7 +37,7 @@ function Toolbar(props: ToolbarProps) {
         onPaginering,
         scrolling = false,
         isSidebarHidden = false,
-        antallSynligeVeiledere,
+        antallValgteVeiledere,
         sokVeilederSkalVises
     } = props;
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
@@ -83,7 +83,7 @@ function Toolbar(props: ToolbarProps) {
                     <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
                         {antallTotalt === 0
                             ? `Ingen veiledere`
-                            : `Viser ${antallSynligeVeiledere} av totalt ${antallTotalt} veiledere.`}
+                            : `Viser ${antallValgteVeiledere} av totalt ${antallTotalt} veiledere.`}
                     </Undertittel>
                 )}
                 {oversiktType !== OversiktType.veilederOversikt && (
