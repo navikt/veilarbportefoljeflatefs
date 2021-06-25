@@ -10,7 +10,6 @@ import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './veiledere.less';
 import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
-import {veiledere} from '../mocks/veiledere';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {

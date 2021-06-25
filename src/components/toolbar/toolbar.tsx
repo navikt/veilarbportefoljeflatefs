@@ -13,7 +13,6 @@ import {ReactComponent as SokVeilederIkon} from '../ikoner/person-view-1.svg';
 import {Undertittel} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
-import {tekstValgteBrukere} from '../../utils/tekst-utils';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
