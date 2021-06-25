@@ -13,7 +13,6 @@ export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
 export const UTEN_KRR_FILTER = 'veilarbportefolje.uten_krr_filter';
 export const TVUNGEN_STEPPER = 'veilarbportefolje.tvungen_stepper';
-export const SOK_VEILEDER = 'veilarbportefolje.sok-veileder';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -22,6 +21,5 @@ export const PORTEFOLJE_FEATURES = [
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER,
-    SOK_VEILEDER
+    TVUNGEN_STEPPER
 ];
