@@ -10,6 +10,7 @@ import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './veiledere.less';
 import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
+import {veiledere} from '../mocks/veiledere';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {
@@ -66,19 +67,17 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
         return veilederListe.slice(fra, fra + sideStorrelse);
     }
 
-    const veiledere = getVeiledere();
-
     return (
         <>
             <Toolbar
                 oversiktType={OversiktType.veilederOversikt}
-                antallTotalt={veilederListe.length}
+                antallTotalt={props.veiledere.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"
-                antallVeiledere={props.antallVeiledere}
+                antallSynligeVeiledere={getVeiledere().length}
             />
             <VeiledereTabell
-                veiledere={veiledere}
+                veiledere={getVeiledere()}
                 currentSortering={sortering}
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
                 sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}

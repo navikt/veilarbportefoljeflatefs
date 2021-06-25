@@ -13,6 +13,7 @@ import {ReactComponent as SokVeilederIkon} from '../ikoner/person-view-1.svg';
 import {Undertittel} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
+import {tekstValgteBrukere} from '../../utils/tekst-utils';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -23,7 +24,7 @@ interface ToolbarProps {
     gjeldendeVeileder?: string;
     antallTotalt: number;
     id?: string;
-    antallVeiledere?: number;
+    antallSynligeVeiledere?: number;
     scrolling?: boolean;
     isSidebarHidden?: boolean;
 }
@@ -37,13 +38,12 @@ function Toolbar(props: ToolbarProps) {
         onPaginering,
         scrolling = false,
         isSidebarHidden = false,
-        antallVeiledere,
+        antallSynligeVeiledere,
         sokVeilederSkalVises
     } = props;
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
-    const veiledereGrammatikk = antallVeiledere === 1 ? 'veileder' : 'veiledere';
 
     const oversikt = side => {
         switch (side) {
@@ -82,7 +82,7 @@ function Toolbar(props: ToolbarProps) {
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {oversiktType === OversiktType.veilederOversikt && (
                     <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
-                        {antallVeiledere === 0 ? `Ingen veiledere` : `Totalt ${antallVeiledere} ${veiledereGrammatikk}`}
+                        {`Viser ${antallSynligeVeiledere} av totalt ${antallTotalt} veiledere.`}
                     </Undertittel>
                 )}
                 {oversiktType !== OversiktType.veilederOversikt && (
