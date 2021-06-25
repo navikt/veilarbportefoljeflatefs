@@ -3,12 +3,13 @@ import moment from 'moment';
 
 interface VarighetKolonneProps {
     role?: string;
+    labelledBy?: string;
     className?: string;
     dato: number | null;
     skalVises: boolean;
 }
 
-function VarighetKolonne({role, className, dato, skalVises}: VarighetKolonneProps) {
+function VarighetKolonne({role, labelledBy, className, dato, skalVises}: VarighetKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -28,7 +29,7 @@ function VarighetKolonne({role, className, dato, skalVises}: VarighetKolonneProp
 
     const kolonn = timer > 0 && minutter > 0 ? ' ' : '';
 
-    return <span role={role} className={className}> {`${timerString}${kolonn}${minutterString}`} </span>;
+    return <span role={role} aria-labelledby={labelledBy} className={className}> {`${timerString}${kolonn}${minutterString}`} </span>;
 }
 
 export default VarighetKolonne;

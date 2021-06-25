@@ -11,13 +11,13 @@ export interface HeaderProps {
     headerId: string;
 }
 
-function Header({children, role, skalVises = true, className = '', title, headerId}: HeaderProps) {
+function Header({children, skalVises = true, className = '', title, headerId}: HeaderProps) {
     if (!skalVises) {
         return null;
     }
     return (
         <span
-            role={role}
+            id={headerId}
             title={title}
             className={classNames('sorteringheader', className, `sorteringheader_${headerId}`)}
             data-testid={`sorteringheader_${headerId}`}

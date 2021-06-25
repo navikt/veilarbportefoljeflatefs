@@ -4,13 +4,14 @@ import {Info} from './etikett';
 
 interface VeiledernavnProps {
     role?: string;
+    labelledBy?: string;
     className?: string;
     bruker: BrukerModell;
     skalVises: boolean;
     veileder?: VeilederModell;
 }
 
-function VeilederNavn({role, className, bruker, skalVises, veileder}: VeiledernavnProps) {
+function VeilederNavn({role, labelledBy, className, bruker, skalVises, veileder}: VeiledernavnProps) {
     if (!skalVises) {
         return null;
     }
@@ -23,7 +24,9 @@ function VeilederNavn({role, className, bruker, skalVises, veileder}: Veilederna
         </Info>
     );
 
-    return <div role={role} className={className}>{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</div>;
+    return <div role={role} aria-labelledby={labelledBy} className={className}>
+                {bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}
+           </div>;
 }
 
 export default VeilederNavn;

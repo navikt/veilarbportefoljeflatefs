@@ -21,14 +21,15 @@ const brukerNavn = (fornavn: string, etternavn: string) => {
 
 interface BrukerNavnProps {
     role?: string;
+    labelledBy?: string;
     className?: string;
     bruker: BrukerModell;
     enhetId: OrNothing<string>;
 }
 
-function BrukerNavn({role, className, bruker, enhetId}: BrukerNavnProps) {
+function BrukerNavn({role, labelledBy, className, bruker, enhetId}: BrukerNavnProps) {
     return (
-        <div role={role} className={className}>
+        <div role={role} aria-labelledby={labelledBy} className={className}>
             <a
                 href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
                 onClick={() => setFraBrukerIUrl(bruker.fnr)}

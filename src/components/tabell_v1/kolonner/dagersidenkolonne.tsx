@@ -2,13 +2,14 @@ import * as React from 'react';
 
 interface DagerSidenKolonneProps {
     role?: string;
+    labelledBy?: string;
     skalVises: boolean;
     dato: number | null;
     className: string;
 }
 
 export function DagerSidenKolonne(props: DagerSidenKolonneProps) {
-    const {role, skalVises, dato, className} = props;
+    const {role, labelledBy, skalVises, dato, className} = props;
 
     if (!skalVises || dato === null) {
         return null;
@@ -24,5 +25,5 @@ export function DagerSidenKolonne(props: DagerSidenKolonneProps) {
         }
     };
 
-    return <span role={role} className={className}> {datoTekst()} </span>;
+    return <span role={role} aria-labelledby={labelledBy} className={className}> {datoTekst()} </span>;
 }

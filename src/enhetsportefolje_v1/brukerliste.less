@@ -38,8 +38,6 @@
             margin-top: 10px;
         }
 
-
-
         &__header {
             z-index: 500;
             background-color: @bakgrunnsGra;
@@ -86,12 +84,6 @@
             width: 100%;
         }
 
-        .lenke--frittstaende {
-            border: 0;
-            padding: 0;
-            text-decoration: none;
-        }
-
         &__arbeidslisteknapp {
             cursor: pointer;
             padding: 0;
@@ -136,6 +128,33 @@
                 .chevron-mixin();
                 .chevron-orientasjon-mixin(ned);
             }
+        }
+    }
+
+    div.brukerliste__element {
+        border-left: 1px solid @navGra60;
+        border-right: 1px solid @navGra60;
+        border-top: 1px solid @navGra40;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    div.arbeidsliste-collapse {
+        border-left: 1px solid @navGra60;
+        border-right: 1px solid @navGra60;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
         }
     }
 

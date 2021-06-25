@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import './tabell.less';
 
 export interface HeaderProps {
@@ -17,7 +16,7 @@ function Header({children, skalVises = true, className = '', title, headerId}: H
     return (
         <span
             title={title}
-            className={classNames('sorteringheader', className, `sorteringheader_${headerId}`)}
+            className={`sorteringheader ${className} sorteringheader_${headerId}`}
             data-testid={`sorteringheader_${headerId}`}
         >
             {children}

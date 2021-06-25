@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface UkekolonneProps {
     role?:string;
+    labelledBy?: string;
     className?: string;
     ukerIgjen?: number;
     minVal: number;
@@ -17,11 +18,11 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-function UkeKolonne({role, className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
+function UkeKolonne({role, labelledBy, className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }
-    return <span role={role} className={className}> {lagUkerTekst(ukerIgjen, minVal)} </span>;
+    return <span role={role} aria-labelledby={labelledBy} className={className}> {lagUkerTekst(ukerIgjen, minVal)} </span>;
 }
 
 export default UkeKolonne;

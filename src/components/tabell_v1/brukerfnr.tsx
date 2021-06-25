@@ -3,8 +3,13 @@ import {BrukerModell} from '../../model-interfaces';
 
 interface BrukerFnrProps {
     role?: string;
+    labelledBy?: string;
     className?: string;
     bruker: BrukerModell;
 }
 
-export default ({role, className, bruker}: BrukerFnrProps) => <div role={role} className={className}>{bruker.fnr}</div>;
+export default ({role, labelledBy, className, bruker}: BrukerFnrProps) => (
+    <div role={role} aria-labelledby={labelledBy} className={className}>
+        {bruker.fnr}
+    </div>
+);

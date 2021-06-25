@@ -8,13 +8,14 @@ import {setFraBrukerIUrl} from '../../utils/url-utils';
 
 interface SisteEndringKategoriProps {
     role?: string;
+    labelledBy?: string;
     className?: string;
     bruker: BrukerModell;
     enhetId: OrNothing<string>;
     skalVises: boolean;
 }
 
-function SisteEndringKategori({role, className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
+function SisteEndringKategori({role, labelledBy, className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     if (!skalVises) {
         return null;
     }
@@ -23,7 +24,7 @@ function SisteEndringKategori({role, className, bruker, enhetId, skalVises}: Sis
         return <span className={className}>{sisteEndringKategori}</span>;
     }
     return (
-        <div role={role} className={className}>
+        <div role={role} aria-labelledby={labelledBy} className={className}>
             <a
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);

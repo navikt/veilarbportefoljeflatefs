@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import EnhetTabellRow from './enhet-tabell-body';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
@@ -18,13 +17,14 @@ import {
     ytelseAapSortering,
     ytelsevalg
 } from "../filtrering/filter-konstanter";
-import EnhetTabellHeader from "./enhet-tabell-header";
+import EnhetTableHeader from "./enhet-table-header";
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
+import EnhetTableRow from "./enhet-table-row";
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
-interface EnhetTabellProps {
-    classNameWrapper: string;
+interface EnhetTableProps {
+    cssClass: string;
 }
 
 export interface VisKolonne {
@@ -48,7 +48,7 @@ export interface VisKolonne {
     sisteEndringTidsfunkt: boolean;
 }
 
-function EnhetTabell(props: EnhetTabellProps) {
+function EnhetTable(props: EnhetTableProps) {
     const forrigeBruker = useForrigeBruker();
     const {brukere, filtervalg, enhetId, listevisning, portefolje, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
@@ -62,7 +62,6 @@ function EnhetTabell(props: EnhetTabellProps) {
     const ytelsevalgIntl = ytelsevalg();
     const valgteKolonner = listevisning.valgte;
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
-    const ytelseAapVedtaksperiodeSkalVises = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeSkalVises = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const erYtelseFilterValgt = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const erDagpengerUtenPermitteringYtelse: boolean = (
@@ -78,7 +77,7 @@ function EnhetTabell(props: EnhetTabellProps) {
         veilederIdent: valgteKolonner.includes(Kolonne.NAVIDENT),
         rettighetsperiodeTilDagpenger: (erYtelseFilterValgt && erDagpengerUtenPermitteringYtelse),
         rettighetsperiodeTilDagpengerMedPermittering: (erYtelseFilterValgt && erDagPengerMedPermitteringYtelse),
-        vedtaksPeriodeTilAAP: (ytelseAapVedtaksperiodeSkalVises && erAapYtelse),
+        vedtaksPeriodeTilAAP: (valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse),
         rettighetsPeriodeTilAAP: (ytelseAapRettighetsperiodeSkalVises && erAapYtelse),
         rettighetsperiodeTilTiltakPenger: (erYtelseFilterValgt && erTiltakpengerYtelse),
         datoTilVenterPaSvarFraBruker: (ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)),
@@ -96,20 +95,20 @@ function EnhetTabell(props: EnhetTabellProps) {
 
     return (
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
-            <div role="table" className={props.classNameWrapper}>
-                <div role="rowgroup">
-                    <EnhetTabellHeader
-                    sorteringsrekkefolge={sorteringsrekkefolge}
-                    sorteringOnClick={settSorteringOgHentPortefolje}
-                    filtervalg={filtervalg}
-                    sorteringsfelt={sorteringsfelt}
-                    valgteKolonner={valgteKolonner}
-                    oversiktType={OversiktType.enhetensOversikt}
-                />
+            <div role="table" className={props.cssClass}>
+                <div role="rowgroup" className="enhet-header">
+                    <EnhetTableHeader
+                        sorteringsrekkefolge={sorteringsrekkefolge}
+                        sorteringOnClick={settSorteringOgHentPortefolje}
+                        filtervalg={filtervalg}
+                        sorteringsfelt={sorteringsfelt}
+                        valgteKolonner={valgteKolonner}
+                        oversiktType={OversiktType.enhetensOversikt}
+                    />
                 </div>
-                <div role="rowgroup" className="blokk-xs enhet-tabell brukerliste">
+                <div role="rowgroup" className="typo-undertekst-enhet enhet-tabell brukerliste">
                     {brukere.map(bruker => (
-                        <EnhetTabellRow
+                        <EnhetTableRow
                             key={bruker.fnr || bruker.guid}
                             bruker={bruker}
                             enhetId={enhetId}
@@ -127,4 +126,4 @@ function EnhetTabell(props: EnhetTabellProps) {
     );
 }
 
-export default EnhetTabell;
+export default EnhetTable;

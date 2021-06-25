@@ -33,6 +33,19 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Min oversikt
             </NavLink>
             <NavLink
+                to="/portefolje_v1/v1"
+                className="oversiktslenke typo-undertittel"
+                activeClassName={aktivLink}
+                id="min-oversikt"
+                title="Her vises alle brukere som er tildelt deg"
+                aria-label="Min oversikt"
+                data-testid="min-oversikt"
+                hidden={!(harPortefolje || props.erPaloggetVeileder)}
+                aria-selected={erAktiv('min-oversikt')}
+            >
+                Min oversikt V1
+            </NavLink>
+            <NavLink
                 to="/enhet"
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"

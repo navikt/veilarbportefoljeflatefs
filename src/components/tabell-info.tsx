@@ -6,7 +6,7 @@ import {AppState} from '../reducer';
 import './tabell-overskrift.less';
 import classNames from 'classnames';
 
-function TabellOverskrift(props: {className?: string}) {
+function TabellInfo(props: {className?: string}) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
 
     const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
@@ -35,4 +35,4 @@ function TabellOverskrift(props: {className?: string}) {
     );
 }
 
-export default TabellOverskrift;
+export default TabellInfo;

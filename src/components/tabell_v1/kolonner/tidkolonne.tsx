@@ -3,12 +3,13 @@ import moment from 'moment';
 
 interface TidKolonneProps {
     role?: string;
+    labelledBy?:string;
     className?: string;
     dato: number | null;
     skalVises: boolean;
 }
 
-function TidKolonne({role, className, dato, skalVises}: TidKolonneProps) {
+function TidKolonne({role, labelledBy, className, dato, skalVises}: TidKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -26,7 +27,7 @@ function TidKolonne({role, className, dato, skalVises}: TidKolonneProps) {
         timmerString = '0' + timmerString;
     }
 
-    return <span role={role} className={className}> {`${timmerString}:${minutterString}`} </span>;
+    return <span role={role} aria-labelledby={labelledBy} className={className}> {`${timmerString}:${minutterString}`} </span>;
 }
 
 export default TidKolonne;

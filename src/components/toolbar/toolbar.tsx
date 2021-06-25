@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Paginering from './paginering/paginering';
-import Listevisning from './listevisning/listevisning';
+import {default as VelgKolonner} from './listevisning/listevisning';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.less';
 import '../../style.less';
@@ -100,7 +100,7 @@ function Toolbar(props: ToolbarProps) {
                 {oversikt(oversiktType)}
             </div>
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
-                <Listevisning oversiktType={oversiktType} />
+                <VelgKolonner oversiktType={oversiktType} />
                 <Paginering
                     className="toolbar--skille-mellom-elementer"
                     onChange={onPaginering}

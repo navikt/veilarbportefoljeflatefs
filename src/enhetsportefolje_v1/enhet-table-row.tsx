@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Etiketter from '../components/tabell_v1/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import EnhetKolonner from './enhet-kolonner';
+import EnhetTableColumns from './enhet-table-columns';
 import {useLayoutEffect} from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
@@ -11,7 +11,7 @@ import {OrNothing} from '../utils/types/types';
 import {Checkbox} from 'nav-frontend-skjema';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
-import {VisKolonne} from "./enhet-tabell";
+import {VisKolonne} from "./enhet-table";
 
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
@@ -24,15 +24,15 @@ interface EnhetBrukerpanelProps {
     SkalViseKolonne: ()=> VisKolonne;
 }
 
-function EnhetTabellBody({
-                              bruker,
-                              settMarkert,
-                              enhetId,
-                              filtervalg,
-                              brukersVeileder,
-                              valgteKolonner,
-                              forrigeBruker,
-                              SkalViseKolonne
+function EnhetTableRow({
+                           bruker,
+                           settMarkert,
+                           enhetId,
+                           filtervalg,
+                           brukersVeileder,
+                           valgteKolonner,
+                           forrigeBruker,
+                           SkalViseKolonne
                           }: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
@@ -49,12 +49,8 @@ function EnhetTabellBody({
         }
     }, [varForrigeBruker]);
 
-    const classname = classNames('brukerliste--rad', {
-        'brukerliste--forrigeBruker': varForrigeBruker
-    });
-
     return (
-        <div role="row" className={classname}>
+        <div role="row" className={`brukerliste--rad ${varForrigeBruker && 'varForrigeBruker'}`}>
             <div role="cell" className="brukerliste__gutter-left">
                 <Checkbox
                     checked={bruker.markert}
@@ -66,7 +62,7 @@ function EnhetTabellBody({
                 />
             </div>
             <div className="brukerliste__innhold flex flex--center">
-                <EnhetKolonner
+                <EnhetTableColumns
                     bruker={bruker}
                     enhetId={enhetId}
                     filtervalg={filtervalg}
@@ -75,11 +71,11 @@ function EnhetTabellBody({
                     visKolonne={SkalViseKolonne}
                 />
             </div>
-            <div role="cell" className="brukerliste__gutter-right">
+            <div role="cell" aria-labelledby="etiketter" className="brukerliste__gutter-right">
                 <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
             </div>
         </div>
     );
 }
 
-export default EnhetTabellBody;
+export default EnhetTableRow;

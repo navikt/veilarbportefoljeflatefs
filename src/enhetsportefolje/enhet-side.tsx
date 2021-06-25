@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import TabellOverskrift from '../components/tabell-overskrift';
+import TabellOverskrift from '../components/tabell-info';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import EnhetTabell from './enhetsportefolje-tabell';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
@@ -143,10 +143,7 @@ export default function EnhetSide() {
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
-                        className={classNames(
-                            'oversikt-sideinnhold',
-                            isSidebarHidden && 'oversikt-sideinnhold__hidden'
-                        )}
+                        className={`oversikt-sideinnhold ${isSidebarHidden && 'oversikt-sideinnhold__hidden'}`}
                         id={`oversikt-sideinnhold_${id}`}
                     >
                         <Sidebar
@@ -170,12 +167,7 @@ export default function EnhetSide() {
                             className="filtrering-label-container"
                         />
                         {harFilter ? (
-                            <div
-                                className={classNames(
-                                    'oversikt__container',
-                                    isSidebarHidden && 'oversikt__container__hidden'
-                                )}
-                            >
+                            <div className={`oversikt__container ${isSidebarHidden && 'oversikt__container__hidden'}`}>
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                     <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                         <div

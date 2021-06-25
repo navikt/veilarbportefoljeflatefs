@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
 import {ReactComponent as PilStigende} from './arrow-up.svg';
@@ -48,16 +47,14 @@ function SorteringHeader({
         return typeof tekst !== 'string' ? title : tekst;
     };
 
+    const headerCss = `lenke lenke--frittstaende text--left ${erValgt && 'valgt'} ${erValgt && 'valgt-sortering'}`;
+
     return (
         <Header skalVises={skalVises} className={className} headerId={headerId}>
             <div className="sorteringheader__lenke">
                 <button
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
-                    className={classNames(
-                        'lenke lenke--frittstaende text--left',
-                        {valgt: erValgt},
-                        {'valgt-sortering': erValgt}
-                    )}
+                    className={headerCss}
                     role={role}
                     aria-label={
                         erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt
