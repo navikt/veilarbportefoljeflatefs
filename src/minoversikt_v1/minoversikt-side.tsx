@@ -5,7 +5,7 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
-import MinoversiktTable from './minoversikt-table';
+import MinoversiktTabell from './minoversikt-tabell';
 import TabellOverskrift from '../components/tabell-info';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import ToppMeny from '../topp-meny/topp-meny';
@@ -15,7 +15,7 @@ import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering'
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
-import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../ducks/portefolje';
+import { hentPortefoljeForVeileder } from '../ducks/portefolje';
 import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -27,7 +27,6 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
-import classNames from 'classnames';
 import {MinOversiktWrapper} from './minoversikt_wrapper';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
@@ -186,7 +185,7 @@ export default function MinoversiktSide() {
                                         />
                                     </div>
                                 </span>
-                                <MinoversiktTable
+                                <MinoversiktTabell
                                     innloggetVeileder={innloggetVeilederIdent}
                                     settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                                     classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}

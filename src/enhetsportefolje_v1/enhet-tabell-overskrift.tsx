@@ -39,7 +39,7 @@ interface EnhetTabellHeaderProps {
     oversiktType: OversiktType;
 }
 
-function EnhetTableHeader({
+function EnhetTabellOverskrift({
     sorteringsrekkefolge,
     sorteringOnClick,
     filtervalg,
@@ -317,4 +317,4 @@ function EnhetTableHeader({
     );
 }
 
-export default EnhetTableHeader;
+export default EnhetTabellOverskrift;

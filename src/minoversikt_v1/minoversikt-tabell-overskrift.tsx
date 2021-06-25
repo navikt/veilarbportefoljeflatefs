@@ -41,7 +41,7 @@ interface MinOversiktListehodeProps {
     oversiktType: OversiktType;
 }
 
-function MinoversiktTableHeader({
+function MinoversiktTabellOverskrift({
     sorteringsrekkefolge,
     sorteringOnClick,
     filtervalg,
@@ -70,15 +70,15 @@ function MinoversiktTableHeader({
 
     return (
         <div role="row" className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
-            <div role="cell" className="brukerliste__gutter-left" />
+            <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <VelgalleCheckboks
-                    role="cell"
+                    role="checkbox"
                     skalVises={oversiktType in OversiktType}
                     className="velgalle-checkboks col col-xs-2"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     className="arbeidslistekategori__sorteringsheader"
                     sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     onClick={sorteringOnClick}
@@ -89,7 +89,7 @@ function MinoversiktTableHeader({
                     headerId="arbeidslistekategori"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     className="col col-xs-2"
                     sortering={Sorteringsfelt.ETTERNAVN}
                     onClick={sorteringOnClick}
@@ -100,7 +100,7 @@ function MinoversiktTableHeader({
                     headerId="etternavn"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     className="col col-xs-2"
                     sortering={Sorteringsfelt.FODSELSNUMMER}
                     onClick={sorteringOnClick}
@@ -111,7 +111,7 @@ function MinoversiktTableHeader({
                     headerId="fnr"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -123,7 +123,7 @@ function MinoversiktTableHeader({
                     headerId="oppfolgingstartet"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -138,7 +138,7 @@ function MinoversiktTableHeader({
                     headerId="arbeidsliste-frist"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -153,7 +153,7 @@ function MinoversiktTableHeader({
                     headerId="arbeidsliste-overskrift"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -165,7 +165,7 @@ function MinoversiktTableHeader({
                     headerId="ytelse-utlopsdato"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -177,7 +177,7 @@ function MinoversiktTableHeader({
                     headerId="ytelse-utlopsdato-navn"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={aapRettighetsperiode}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -189,7 +189,7 @@ function MinoversiktTableHeader({
                     headerId="rettighetsperiode-gjenstaende"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -201,7 +201,7 @@ function MinoversiktTableHeader({
                     headerId="venter-pa-svar-fra-nav"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -213,7 +213,7 @@ function MinoversiktTableHeader({
                     headerId="venter-pa-svar-fra-bruker"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -225,7 +225,7 @@ function MinoversiktTableHeader({
                     headerId="utlopte-aktiviteter"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -237,7 +237,7 @@ function MinoversiktTableHeader({
                     headerId="i-avtalt-aktivitet"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.MOTER_IDAG}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -249,7 +249,7 @@ function MinoversiktTableHeader({
                     headerId="moter-idag"
                 />
                 <Header
-                    role="cell"
+                    role="columnheader"
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
                     }
@@ -260,7 +260,7 @@ function MinoversiktTableHeader({
                     Varighet møte
                 </Header>
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.VEDTAKSTATUS}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -274,7 +274,7 @@ function MinoversiktTableHeader({
                     headerId="vedtakstatus"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.VEDTAKSTATUS_ENDRET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -289,7 +289,7 @@ function MinoversiktTableHeader({
                     headerId="vedtakstatus-endret"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -304,7 +304,7 @@ function MinoversiktTableHeader({
                     headerId="vedtakstatus-endret"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -316,7 +316,7 @@ function MinoversiktTableHeader({
                     headerId="valgte-aktiviteter"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -331,7 +331,7 @@ function MinoversiktTableHeader({
                     headerId="start-dato-for-avtalt-aktivitet"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -346,7 +346,7 @@ function MinoversiktTableHeader({
                     headerId="neste-start-dato-for-avtalt-aktivitet"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -361,7 +361,7 @@ function MinoversiktTableHeader({
                     headerId="forrige-dato-for-avtalt-aktivitet"
                 />
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -376,7 +376,7 @@ function MinoversiktTableHeader({
                     headerId="forrige-dato-for-avtalt-aktivitet"
                 />
                 <Header
-                    role="cell"
+                    role="columnheader"
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     className="col col-xs-2"
                     title="Siste endring"
@@ -385,7 +385,7 @@ function MinoversiktTableHeader({
                     Siste endring
                 </Header>
                 <SorteringHeader
-                    role="cell"
+                    role="columnheader"
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -397,9 +397,9 @@ function MinoversiktTableHeader({
                     headerId="dato-siste-endring"
                 />
             </div>
-            <div className="brukerliste__gutter-right" />
+            <div role="columnheader" className="brukerliste__gutter-right" />
         </div>
     );
 }
 
-export default MinoversiktTableHeader;
+export default MinoversiktTabellOverskrift;

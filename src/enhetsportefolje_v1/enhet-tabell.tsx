@@ -17,9 +17,9 @@ import {
     ytelseAapSortering,
     ytelsevalg
 } from "../filtrering/filter-konstanter";
-import EnhetTableHeader from "./enhet-table-header";
+import EnhetTabellOverskrift from "./enhet-tabell-overskrift";
 import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import EnhetTableRow from "./enhet-table-row";
+import EnhetTabellData from "./enhet-tabell-data";
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
@@ -48,7 +48,7 @@ export interface VisKolonne {
     sisteEndringTidsfunkt: boolean;
 }
 
-function EnhetTable(props: EnhetTableProps) {
+function EnhetTabell(props: EnhetTableProps) {
     const forrigeBruker = useForrigeBruker();
     const {brukere, filtervalg, enhetId, listevisning, portefolje, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
@@ -97,7 +97,7 @@ function EnhetTable(props: EnhetTableProps) {
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
             <div role="table" className={props.cssClass}>
                 <div role="rowgroup" className="enhet-header">
-                    <EnhetTableHeader
+                    <EnhetTabellOverskrift
                         sorteringsrekkefolge={sorteringsrekkefolge}
                         sorteringOnClick={settSorteringOgHentPortefolje}
                         filtervalg={filtervalg}
@@ -108,7 +108,7 @@ function EnhetTable(props: EnhetTableProps) {
                 </div>
                 <div role="rowgroup" className="typo-undertekst-enhet enhet-tabell brukerliste">
                     {brukere.map(bruker => (
-                        <EnhetTableRow
+                        <EnhetTabellData
                             key={bruker.fnr || bruker.guid}
                             bruker={bruker}
                             enhetId={enhetId}
@@ -117,7 +117,7 @@ function EnhetTable(props: EnhetTableProps) {
                             valgteKolonner={valgteKolonner}
                             brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
                             forrigeBruker={forrigeBruker}
-                            SkalViseKolonne={visKolonner}
+                            kolonneSkalVises={visKolonner}
                         />
                     ))}
                 </div>
@@ -126,4 +126,4 @@ function EnhetTable(props: EnhetTableProps) {
     );
 }
 
-export default EnhetTable;
+export default EnhetTabell;

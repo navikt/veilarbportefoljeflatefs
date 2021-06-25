@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import MinoversiktTableRow from './minoversikt-table-row';
+import MinoversiktTabellDatarad from './minoversikt-tabell-datarad';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
@@ -13,7 +13,7 @@ import './minoversikt.less';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
-import MinoversiktTableHeader from "./minoversikt-table-header";
+import MinoversiktTabellOverskrift from "./minoversikt-tabell-overskrift";
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -22,7 +22,7 @@ interface MinOversiktTabellProps {
     classNameWrapper: string;
 }
 
-function MinoversiktTable(props: MinOversiktTabellProps) {
+function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
     const {brukere, filtervalg, enhetId, listevisning, sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
@@ -39,7 +39,7 @@ function MinoversiktTable(props: MinOversiktTabellProps) {
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div role="table" className={props.classNameWrapper}>
                 <div role="rowgroup" className="enhet-header">
-                    <MinoversiktTableHeader
+                    <MinoversiktTabellOverskrift
                         sorteringsrekkefolge={sorteringsrekkefolge}
                         sorteringOnClick={props.settSorteringOgHentPortefolje}
                         filtervalg={filtervalg}
@@ -51,7 +51,7 @@ function MinoversiktTable(props: MinOversiktTabellProps) {
                 </div>
                 <div role="rowgroup" className="enhet-table typo-undertekst blokk-xs brukerliste" data-testid="brukerliste">
                     {brukere.map(bruker => (
-                        <MinoversiktTableRow
+                        <MinoversiktTabellDatarad
                             key={bruker.fnr || bruker.guid}
                             bruker={bruker}
                             enhetId={enhetId}
@@ -68,4 +68,4 @@ function MinoversiktTable(props: MinOversiktTabellProps) {
     );
 }
 
-export default MinoversiktTable;
+export default MinoversiktTabell;

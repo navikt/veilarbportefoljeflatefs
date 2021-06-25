@@ -59,7 +59,7 @@ function SorteringHeader({
                     aria-label={
                         erValgt && rekkefolge && rekkefolge !== Sorteringsrekkefolge.ikke_satt
                             ? ariaLabel() + ', ' + rekkefolge + ' rekkefølge'
-                            : ariaLabel() + ', ingen sortering'
+                            : ''
                     }
                     title={title}
                 >

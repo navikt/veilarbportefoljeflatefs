@@ -5,7 +5,7 @@ import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
-import MinOversiktKolonner from './minoversikt-columns';
+import MinoversiktDataKolonner from './minoversikt-data-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useLayoutEffect} from 'react';
@@ -28,7 +28,7 @@ interface MinOversiktBrukerPanelProps {
     varForrigeBruker?: boolean;
 }
 
-function MinoversiktTableRow(props: MinOversiktBrukerPanelProps) {
+function MinoversiktTabellDatarad(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const scrollToLastPos = () => {
@@ -84,7 +84,7 @@ function MinoversiktTableRow(props: MinOversiktBrukerPanelProps) {
                     />
                 </div>
                 <div className="brukerliste__innhold flex flex--center">
-                    <MinOversiktKolonner
+                    <MinoversiktDataKolonner
                         bruker={bruker}
                         filtervalg={filtervalg}
                         valgteKolonner={valgteKolonner}
@@ -109,10 +109,10 @@ function MinoversiktTableRow(props: MinOversiktBrukerPanelProps) {
             <div className="arbeidsliste-collapse">
                 <Collapse isOpened={apen}>
                     <ArbeidslistePanel
-                    skalVises={arbeidslisteAktiv}
-                    bruker={bruker}
-                    innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        skalVises={arbeidslisteAktiv}
+                        bruker={bruker}
+                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                     />
                 </Collapse>
             </div>
@@ -120,4 +120,4 @@ function MinoversiktTableRow(props: MinOversiktBrukerPanelProps) {
     );
 }
 
-export default MinoversiktTableRow;
+export default MinoversiktTabellDatarad;

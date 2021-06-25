@@ -35,8 +35,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
-import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import EnhetTable from "./enhet-table";
+import EnhetTabell from "./enhet-tabell";
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -78,7 +77,6 @@ export default function EnhetSide() {
         enhettiltak,
         listevisning
     } = usePortefoljeSelector(oversiktType);
-    const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =
@@ -194,7 +192,7 @@ export default function EnhetSide() {
                                             isSidebarHidden={isSidebarHidden}
                                         />
                                     </div>
-                                    <EnhetTable cssClass={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}/>
+                                    <EnhetTabell cssClass={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}/>
                                 </div>
                             </div>
                         ) : (
