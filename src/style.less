@@ -147,12 +147,34 @@ html {
     top: -16px;
 }
 
+.sticky-skygge::before,
+.sticky-skygge::after {
+    content: '';
+    display: block;
+    height: 16px;
+    position: sticky;
+}
+
+.sticky-skygge::before {
+    top: 145px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 4px;
+}
+
+.sticky-skygge::after {
+    background: linear-gradient(white, rgba(255, 255, 255, 0.3));
+    top: 0;
+    z-index: 2;
+    height: 0;
+    width: auto;
+}
+
 //Skal fjernes etter brukerliste skal vises med tabell istedenfor liste
 .toolbar-container {
     position: sticky;
     top: 0;
     z-index: 3;
-    margin-top: -15px;
+    margin-top: -20px;
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
