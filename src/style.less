@@ -147,11 +147,12 @@ html {
     top: -16px;
 }
 
+//Skal fjernes etter brukerliste skal vises med tabell istedenfor liste
 .toolbar-container {
     position: sticky;
     top: 0;
     z-index: 3;
-    margin-top: -20px;
+    margin-top: -15px;
     background-color: @bakgrunnsGra;
     border-bottom: 1px solid @navGra60;
     border-radius: 4px;
@@ -190,11 +191,11 @@ html {
     }
 }
 
-.minoversikt-toolbar-container {
+.oversikt-toolbar-container {
     position: sticky;
     top: 0;
     z-index: 3;
-    margin-top: -20px;
+    margin-top: -15px;
     background-color: @bakgrunnsGra;
     border-radius: 4px;
     display: grid;
@@ -224,63 +225,6 @@ html {
         grid-row: 2;
         margin-top: 0.5rem;
     }
-
-    .brukerliste__header {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row: 3;
-    }
-}
-
-.enhet-toolbar-container {
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    margin-top: -20px;
-    background-color: @bakgrunnsGra;
-    //border-bottom: 1px solid @navGra60;
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: 21.8rem auto;
-    grid-template-rows: auto auto auto;
-
-    .tabellinfo {
-        grid-row: 1;
-        grid-column-start: 1;
-        grid-column-end: 3;
-        display: grid;
-        grid-template-columns: 40% 60%;
-
-        &__hidden {
-            grid-column-start: 2;
-        }
-
-        .tabelloverskrift {
-            background-color: @bakgrunnsGra;
-            grid-column: 1;
-        }
-    }
-
-    .toolbar {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row: 2;
-        margin-top: 0.5rem;
-    }
-
-    .brukerliste__header {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row: 3;
-    }
-}
-
-.enhet-header{
-    position: -webkit-sticky;
-    position: sticky;
-    top: 112px;
-    z-index: 2;
-    border-bottom: 1px solid @navGra60;
 }
 
 .skjemaelement {

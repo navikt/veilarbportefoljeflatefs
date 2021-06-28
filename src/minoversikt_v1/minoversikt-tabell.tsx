@@ -38,7 +38,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     return (
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div role="table" className={props.classNameWrapper}>
-                <div role="rowgroup" className="enhet-header">
+                <div role="rowgroup" className="oversikt-header">
                     <MinoversiktTabellOverskrift
                         sorteringsrekkefolge={sorteringsrekkefolge}
                         sorteringOnClick={props.settSorteringOgHentPortefolje}
@@ -49,7 +49,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                         oversiktType={OversiktType.enhetensOversikt}
                     />
                 </div>
-                <div role="rowgroup" className="enhet-table typo-undertekst blokk-xs brukerliste" data-testid="brukerliste">
+                <div role="rowgroup" className="typo-undertekst brukerliste" data-testid="brukerliste">
                     {brukere.map(bruker => (
                         <MinoversiktTabellDatarad
                             key={bruker.fnr || bruker.guid}

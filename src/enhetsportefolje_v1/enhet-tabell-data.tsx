@@ -242,7 +242,7 @@ function EnhetTabellData({bruker, enhetId, filtervalg, valgteKolonner, brukersVe
                     role="cell"
                     className="col col-xs-2"
                     dato={sisteEndringTidspunkt}
-                    skalVises={skalVise.sisteEndringTidsfunkt}
+                    skalVises={skalVise.sisteEndringsDato}
                     labelledBy="dato-siste-endring"
                 />
             </div>

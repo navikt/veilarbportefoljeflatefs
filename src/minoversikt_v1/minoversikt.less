@@ -3,16 +3,13 @@
 @bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
-    .minoversikt-liste__wrapper {
-        background-color: @bakgrunnsGra;
-        border-top: none;
-        border-bottom: none;
-        border-radius: 0 0 @border-radius-base @border-radius-base;
-        margin-bottom: 0;
 
-        div:nth-child(odd) {
-            background-color: white;
-        }
+    .oversikt-header{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 112px;
+        z-index: 2;
+        border-bottom: 1px solid @navGra60;
     }
 
     .tilbaketilveileder {

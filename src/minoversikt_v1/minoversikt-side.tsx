@@ -153,10 +153,9 @@ export default function MinoversiktSide() {
                             listevisning={listevisning}
                             className={`filtrering-label-container ${visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'}`}
                         />
-                        <div className={`oversikt__container ${isSidebarHidden && 'oversikt__container__hidden'}`}>
+                        <div className={`oversikt__container`}>
                             <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                    <div className={`minoversikt-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
+                                    <div className={`oversikt-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
                                         <div className=
                                                  {`tabellinfo 
                                                  ${visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder'} 
@@ -184,7 +183,6 @@ export default function MinoversiktSide() {
                                             isSidebarHidden={isSidebarHidden}
                                         />
                                     </div>
-                                </span>
                                 <MinoversiktTabell
                                     innloggetVeileder={innloggetVeilederIdent}
                                     settSorteringOgHentPortefolje={settSorteringogHentPortefolje}

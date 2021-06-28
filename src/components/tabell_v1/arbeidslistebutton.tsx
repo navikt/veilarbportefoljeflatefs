@@ -2,7 +2,7 @@ import * as React from 'react';
 import {MouseEvent} from 'react';
 import classnames from 'classnames';
 import './tabell.less';
-import '../../enhetsportefolje/brukerliste.less';
+import '../../enhetsportefolje_v1/brukerliste.less';
 
 interface ArbeidslisteButtonProps {
     className?: string;

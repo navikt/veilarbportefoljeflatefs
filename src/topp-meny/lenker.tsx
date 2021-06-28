@@ -59,7 +59,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Veilederoversikt
             </NavLink>
             <NavLink
-                to="/portefolje_v1/v1"
+                to="/portefolje_v1"
                 className="oversiktslenke typo-undertittel"
                 activeClassName={aktivLink}
                 id="min-oversikt"
@@ -72,7 +72,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Min oversikt V1
             </NavLink>
             <NavLink
-                to="/enhet1/v1"
+                to="/enhet_v1"
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
                 id="enhetens-oversikt-v1"

@@ -2,12 +2,6 @@ import React from 'react';
 import SorteringHeader from '../components/tabell_v1/sortering-header';
 import TittelValg from '../utils/utils';
 import {
-    I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
-    UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
@@ -19,6 +13,7 @@ import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
+import {VisKolonne} from "./enhet-tabell";
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -37,6 +32,7 @@ interface EnhetTabellHeaderProps {
     filtervalg: FiltervalgModell;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
     oversiktType: OversiktType;
+    kolonneSkalVises: ()=> VisKolonne;
 }
 
 function EnhetTabellOverskrift({
@@ -45,22 +41,17 @@ function EnhetTabellOverskrift({
     filtervalg,
     sorteringsfelt,
     valgteKolonner,
+    kolonneSkalVises,
     oversiktType
 }: EnhetTabellHeaderProps) {
     const {ytelse} = filtervalg;
+    const skalVises = kolonneSkalVises();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[ytelse!];
     const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
-    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const iAvtaltAktivitet = ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
-
-    const avansertAktivitet = iAvtaltAktivitet
-        ? false
-        : harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-
-    const forenkletAktivitet =
-        harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const avansertAktivitet = skalVises.iAvtaltAktivitet ? false : harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div role="row" className="brukerliste__header brukerliste__sorteringheader typo-undertekst-enhet">
@@ -101,14 +92,14 @@ function EnhetTabellOverskrift({
                     erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
                     tekst="Oppfølging startet"
                     className="col col-xs-2"
-                    skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                    skalVises={skalVises.oppfolgingStartet}
                     title="Startdato for pågående oppfølgingsperiode"
                     headerId="oppfolging-startet"
                 />
                 <Header
                     role="columnheader"
                     className="col col-xs-2"
-                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
+                    skalVises={skalVises.veilederNavn}
                     headerId="veileder"
                 >
                     Veileder
@@ -120,7 +111,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
                     tekst="NAV-ident"
-                    skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
+                    skalVises={skalVises.veilederIdent}
                     className="header__veilederident col col-xs-2"
                     title="NAV-ident på tildelt veileder"
                     headerId="navident"
@@ -144,7 +135,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     tekst="Gjenstående uker vedtak"
-                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    skalVises={skalVises.vedtaksPeriodeTilAAP}
                     className="col col-xs-2"
                     title="Gjenstående uker på gjeldende vedtak"
                     headerId="ytelse-utlopsdato-navn"
@@ -156,7 +147,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     tekst="Gjenstående uker rettighet"
-                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                    skalVises={skalVises.rettighetsPeriodeTilAAP}
                     className="col col-xs-2"
                     title="Gjenstående uker av rettighetsperioden for ytelsen"
                     headerId="rettighetsperiode-gjenstaende"
@@ -168,10 +159,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     tekst="Dato på melding"
-                    skalVises={
-                        ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                    }
+                    skalVises={skalVises.datoTilVenterPaSvarFraNav}
                     className="col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra NAV"'
                     headerId="venter-pa-svar-fra-nav"
@@ -183,10 +171,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     tekst="Dato på melding"
-                    skalVises={
-                        ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                    }
+                    skalVises={skalVises.datoTilVenterPaSvarFraBruker}
                     className="col col-xs-2"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     headerId="venter-pa-svar-fra-bruker"
@@ -198,10 +183,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     tekst="Utløpsdato aktivitet"
-                    skalVises={
-                        ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
-                        valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
-                    }
+                    skalVises={skalVises.datoTilUtlopteAktiviteter}
                     className="col col-xs-2"
                     title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="utlopte-aktiviteter"
@@ -213,7 +195,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                     tekst="Neste utløpsdato aktivitet"
-                    skalVises={iAvtaltAktivitet}
+                    skalVises={skalVises.iAvtaltAktivitet}
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="i-avtalt-aktivitet"
@@ -237,14 +219,14 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
                     tekst="Klokkeslett møte"
-                    skalVises={ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                    skalVises={skalVises.moteKlokkeslett}
                     className="col col-xs-2"
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
                 />
                 <Header
                     role="columnheader"
-                    skalVises={ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                    skalVises={skalVises.moteVarighet}
                     className="col col-xs-2"
                     title="Varighet på møtet"
                     headerId="varighet-mote"
@@ -257,7 +239,7 @@ function EnhetTabellOverskrift({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
-                    skalVises={ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                    skalVises={skalVises.vedtakStatus}
                     tekst="Status § 14a-vedtak"
                     className="col col-xs-2"
                     title="Status oppfølgingvedtak"
@@ -270,7 +252,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
                     tekst="Statusendring"
-                    skalVises={ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                    skalVises={skalVises.vedtakStatusEndret}
                     className="col col-xs-2"
                     title="Dager siden fikk status"
                     headerId="vedtakstatus-endret"
@@ -282,17 +264,14 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
                     tekst="Ansvarlig for vedtak"
-                    skalVises={
-                        ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                    }
+                    skalVises={skalVises.ansvarligVeilderForVedtak}
                     className="col col-xs-2"
                     title="Ansvarlig veileder for vedtak"
                     headerId="ansvarlig-veileder-for-vedtak"
                 />
                 <Header
                     role="columnheader"
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={skalVises.sisteEndring}
                     className="col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
@@ -306,7 +285,7 @@ function EnhetTabellOverskrift({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     tekst="Dato siste endring"
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    skalVises={skalVises.sisteEndringsDato}
                     className="col col-xs-2"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"

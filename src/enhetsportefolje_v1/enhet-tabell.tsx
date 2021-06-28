@@ -10,7 +10,9 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {
-    I_AVTALT_AKTIVITET, MOTER_IDAG, UNDER_VURDERING,
+    I_AVTALT_AKTIVITET,
+    MOTER_IDAG,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -30,6 +32,7 @@ interface EnhetTableProps {
 export interface VisKolonne {
     veilederNavn: boolean;
     veilederIdent: boolean;
+    oppfolgingStartet: boolean;
     rettighetsperiodeTilDagpenger: boolean;
     rettighetsperiodeTilDagpengerMedPermittering: boolean;
     vedtaksPeriodeTilAAP: boolean;
@@ -45,7 +48,7 @@ export interface VisKolonne {
     vedtakStatusEndret: boolean;
     ansvarligVeilderForVedtak: boolean;
     sisteEndring: boolean;
-    sisteEndringTidsfunkt: boolean;
+    sisteEndringsDato: boolean;
 }
 
 function EnhetTabell(props: EnhetTableProps) {
@@ -75,6 +78,7 @@ function EnhetTabell(props: EnhetTableProps) {
     const visKolonner = (): VisKolonne => ({
         veilederNavn: valgteKolonner.includes(Kolonne.VEILEDER),
         veilederIdent: valgteKolonner.includes(Kolonne.NAVIDENT),
+        oppfolgingStartet: valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET),
         rettighetsperiodeTilDagpenger: (erYtelseFilterValgt && erDagpengerUtenPermitteringYtelse),
         rettighetsperiodeTilDagpengerMedPermittering: (erYtelseFilterValgt && erDagPengerMedPermitteringYtelse),
         vedtaksPeriodeTilAAP: (valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse),
@@ -90,19 +94,20 @@ function EnhetTabell(props: EnhetTableProps) {
         vedtakStatusEndret: (ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)),
         ansvarligVeilderForVedtak: (ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)),
         sisteEndring: (filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)),
-        sisteEndringTidsfunkt: (filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO))
+        sisteEndringsDato: (filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO))
     });
 
     return (
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
             <div role="table" className={props.cssClass}>
-                <div role="rowgroup" className="enhet-header">
+                <div role="rowgroup" className="oversikt-header">
                     <EnhetTabellOverskrift
                         sorteringsrekkefolge={sorteringsrekkefolge}
                         sorteringOnClick={settSorteringOgHentPortefolje}
                         filtervalg={filtervalg}
                         sorteringsfelt={sorteringsfelt}
                         valgteKolonner={valgteKolonner}
+                        kolonneSkalVises={visKolonner}
                         oversiktType={OversiktType.enhetensOversikt}
                     />
                 </div>

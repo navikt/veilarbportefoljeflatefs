@@ -26,7 +26,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const valgteBrukere = portefolje.brukere.filter(bruker => bruker.markert === true);
 
     const skalSkjules =
-        innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
+        innloggetVeileder && (pathname === '/portefolje' || pathname === '/portefolje_v1') ? (ident ? ident !== innloggetVeileder.ident : false) : true;
 
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     const inneholderBrukerMedOgUtenArbeidsliste =

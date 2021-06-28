@@ -177,9 +177,9 @@ export default function EnhetSide() {
                             className="filtrering-label-container"
                         />
                         {harFilter ? (
-                            <div className={`oversikt__container ${isSidebarHidden && 'oversikt__container__hidden'}`}>
+                            <div className="oversikt__container">
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                    <div className={`enhet-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
+                                    <div className={`oversikt-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
                                         <div className={`tabellinfo ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}>
                                             <TabellInfo />
                                         </div>

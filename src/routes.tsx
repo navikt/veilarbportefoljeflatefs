@@ -21,11 +21,11 @@ function Routes() {
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
                         <Route path="/enhet" component={EnhetSide} />
-                        <Route path="/enhet1/v1" component={EnhetSideV1} />
+                        <Route path="/enhet_v1" component={EnhetSideV1} />
                         <Route path="/veiledere" component={VeiledereSide} />
                         <Route path="/portefolje/:ident" component={MinoversiktSide} />
                         <Route path="/portefolje" component={MinoversiktSide} />
-                        <Route path="/portefolje_v1/v1" component={MinoversiktSideV1} />
+                        <Route path="/portefolje_v1" component={MinoversiktSideV1} />
                     </Switch>
                     <TilbakemeldingFab />
                     <TilToppenKnapp />

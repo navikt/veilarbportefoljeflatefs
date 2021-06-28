@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {MouseEvent, useState} from 'react';
-import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
-import Etiketter from '../components/tabell/etiketter';
+import ArbeidslisteButton from '../components/tabell_v1/arbeidslistebutton';
+import ArbeidslistekategoriVisning from '../components/tabell_v1/arbeidslisteikon';
+import Etiketter from '../components/tabell_v1/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import Collapse from 'react-collapse';
 import MinoversiktDataKolonner from './minoversikt-data-kolonner';
@@ -15,7 +15,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
-import {Info} from '../components/tabell/etikett';
+import {Info} from '../components/tabell_v1/etikett';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
