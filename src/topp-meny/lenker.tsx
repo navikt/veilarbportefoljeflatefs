@@ -3,8 +3,8 @@ import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
-import {BYTTE_LISTE_MED_TABELL} from "../konstanter";
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {BYTTE_LISTE_MED_TABELL} from '../konstanter';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
@@ -65,8 +65,8 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 id="min-oversikt"
                 title="Her vises alle brukere som er tildelt deg"
                 aria-label="Min oversikt"
-                data-testid="min-oversikt"
-                hidden={!(harPortefolje || props.erPaloggetVeileder) || erBytteListeMedTabellFeatureTogglePa}
+                data-testid="min-oversikt_v1"
+                hidden={!(harPortefolje || props.erPaloggetVeileder) || !erBytteListeMedTabellFeatureTogglePa}
                 aria-selected={erAktiv('min-oversikt-v1')}
             >
                 Min oversikt V1
@@ -78,8 +78,8 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 id="enhetens-oversikt-v1"
                 title="Her vises alle brukere som tilhører enheten"
                 aria-label="Enhetens oversikt"
-                data-testid="enhetens-oversikt"
-                hidden={erBytteListeMedTabellFeatureTogglePa}
+                data-testid="enhetens-oversikt_v1"
+                hidden={!erBytteListeMedTabellFeatureTogglePa}
                 aria-selected={erAktiv('enhetens-oversikt-v1')}
             >
                 Enhetens oversikt V1

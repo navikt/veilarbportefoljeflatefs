@@ -100,9 +100,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={
                     ytelseErValgtKolonne &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
-                    ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                    ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
-                    ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
+                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
+                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
                 }
             />
             <UkeKolonne

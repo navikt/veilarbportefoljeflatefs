@@ -29,7 +29,12 @@ function VarighetKolonne({role, labelledBy, className, dato, skalVises}: Varighe
 
     const kolonn = timer > 0 && minutter > 0 ? ' ' : '';
 
-    return <span role={role} aria-labelledby={labelledBy} className={className}> {`${timerString}${kolonn}${minutterString}`} </span>;
+    return (
+        <span role={role} aria-labelledby={labelledBy} className={className}>
+            {' '}
+            {`${timerString}${kolonn}${minutterString}`}{' '}
+        </span>
+    );
 }
 
 export default VarighetKolonne;

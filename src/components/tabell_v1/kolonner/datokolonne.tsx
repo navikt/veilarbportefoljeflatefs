@@ -25,12 +25,7 @@ function DatoKolonne({role, labelledBy, className, dato, skalVises = true}: Dato
     } else {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato
-            <div
-                role={role}
-                aria-labelledby={labelledBy}
-                style={{visibility: 'hidden'}}
-                className={className}
-            >
+            <div role={role} aria-labelledby={labelledBy} style={{visibility: 'hidden'}} className={className}>
                 {new Date(0).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
             </div>
         );

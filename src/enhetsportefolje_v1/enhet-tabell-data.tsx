@@ -21,14 +21,14 @@ import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell_v1/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell_v1/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell_v1/sisteendringkategori';
-import {VisKolonne} from "./enhet-tabell";
+import {VisKolonne} from './enhet-tabell';
 import BrukerNavn from '../components/tabell_v1/brukernavn';
-import BrukerFnr from "../components/tabell_v1/brukerfnr";
-import {Checkbox} from "nav-frontend-skjema";
-import Etiketter from "../components/tabell_v1/etiketter";
-import {useLayoutEffect} from "react";
-import {useFeatureSelector} from "../hooks/redux/use-feature-selector";
-import {VEDTAKSTOTTE} from "../konstanter";
+import BrukerFnr from '../components/tabell_v1/brukerfnr';
+import {Checkbox} from 'nav-frontend-skjema';
+import Etiketter from '../components/tabell_v1/etiketter';
+import {useLayoutEffect} from 'react';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VEDTAKSTOTTE} from '../konstanter';
 
 interface EnhetKolonnerProps {
     bruker: BrukerModell;
@@ -36,14 +36,23 @@ interface EnhetKolonnerProps {
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
-    kolonneSkalVises: ()=> VisKolonne;
+    kolonneSkalVises: () => VisKolonne;
     forrigeBruker: OrNothing<string>;
     settMarkert: (bruker: string, markert: boolean) => void;
 }
 
-function EnhetTabellData({bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder, kolonneSkalVises, forrigeBruker, settMarkert}: EnhetKolonnerProps) {
+function EnhetTabellData({
+    bruker,
+    enhetId,
+    filtervalg,
+    valgteKolonner,
+    brukersVeileder,
+    kolonneSkalVises,
+    forrigeBruker,
+    settMarkert
+}: EnhetKolonnerProps) {
     const {ytelse} = filtervalg;
-    const skalVise : VisKolonne = kolonneSkalVises();
+    const skalVise: VisKolonne = kolonneSkalVises();
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -54,10 +63,13 @@ function EnhetTabellData({bruker, enhetId, filtervalg, valgteKolonner, brukersVe
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const avtaltAktivitetOgTiltak: boolean = skalVise.iAvtaltAktivitet ? false : !!valgteAktivitetstyper &&
-                                            (filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET));
-    const forenkletAktivitetOgTiltak = valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
-                                       (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+    const avtaltAktivitetOgTiltak: boolean = skalVise.iAvtaltAktivitet
+        ? false
+        : !!valgteAktivitetstyper &&
+          filtervalg.tiltakstyper.length === 0 && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const forenkletAktivitetOgTiltak =
+        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     const scrollToLastPos = () => {
@@ -92,12 +104,7 @@ function EnhetTabellData({bruker, enhetId, filtervalg, valgteKolonner, brukersVe
                     enhetId={enhetId}
                     labelledBy="etternavn"
                 />
-                <BrukerFnr
-                    role="cell"
-                    className="col col-xs-2"
-                    bruker={bruker}
-                    labelledBy="fødselsnummer"
-                />
+                <BrukerFnr role="cell" className="col col-xs-2" bruker={bruker} labelledBy="fødselsnummer" />
                 <DatoKolonne
                     role="cell"
                     className="col col-xs-2"

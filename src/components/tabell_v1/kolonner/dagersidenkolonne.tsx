@@ -25,5 +25,10 @@ export function DagerSidenKolonne(props: DagerSidenKolonneProps) {
         }
     };
 
-    return <span role={role} aria-labelledby={labelledBy} className={className}> {datoTekst()} </span>;
+    return (
+        <span role={role} aria-labelledby={labelledBy} className={className}>
+            {' '}
+            {datoTekst()}{' '}
+        </span>
+    );
 }

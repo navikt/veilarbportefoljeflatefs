@@ -13,5 +13,10 @@ export function TekstKolonne({role, labelledBy, tekst, skalVises, className}: Te
         return null;
     }
 
-    return <span role={role} aria-labelledby={labelledBy} className={className}> {tekst} </span>;
+    return (
+        <span role={role} aria-labelledby={labelledBy} className={className}>
+            {' '}
+            {tekst}{' '}
+        </span>
+    );
 }

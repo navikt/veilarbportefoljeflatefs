@@ -15,7 +15,7 @@ import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering'
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
-import { hentPortefoljeForVeileder } from '../ducks/portefolje';
+import {hentPortefoljeForVeileder} from '../ducks/portefolje';
 import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -85,7 +85,8 @@ export default function MinoversiktSide() {
 
     const [scrolling, setScrolling] = useState(false);
 
-    let isSidebarHiddenCss = (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
+    let isSidebarHiddenCss =
+        (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
 
     useEffect(() => {
         function onScroll() {
@@ -112,14 +113,8 @@ export default function MinoversiktSide() {
 
     const hentPortefolje = () => {
         dispatch(
-            hentPortefoljeForVeileder(
-                enhetId,
-                gjeldendeVeileder,
-                sorteringsrekkefolge,
-                sorteringsfelt,
-                filtervalg
-            )
-        )
+            hentPortefoljeForVeileder(enhetId, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg)
+        );
     };
 
     return (
@@ -129,11 +124,9 @@ export default function MinoversiktSide() {
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
-                        className={
-                            `oversikt-sideinnhold portefolje-side 
+                        className={`oversikt-sideinnhold portefolje-side 
                             ${isSidebarHidden && 'oversikt-sideinnhold__hidden'} 
-                            ${visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'}`
-                        }
+                            ${visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'}`}
                         id={`oversikt-sideinnhold_${id}`}
                     >
                         <Sidebar
@@ -151,42 +144,52 @@ export default function MinoversiktSide() {
                             oversiktType={oversiktType}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
-                            className={`filtrering-label-container ${visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'}`}
+                            className={`filtrering-label-container ${visesAnnenVeiledersPortefolje &&
+                                'filtrering-label-container__annen-veileder'}`}
                         />
                         <div className={`oversikt__container`}>
                             <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                    <div className={`oversikt-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
-                                        <div className=
-                                                 {`tabellinfo 
+                                <div
+                                    className={`oversikt-toolbar-container ${antallBrukere < 4 &&
+                                        'ikke-sticky__toolbar-container'}`}
+                                >
+                                    <div
+                                        className={`tabellinfo 
                                                  ${visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder'} 
                                                  ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}
-                                        >
-                                            <TabellOverskrift className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''} />
-                                            {visesAnnenVeiledersPortefolje && (
-                                                <AlertStripe
-                                                    type={'info'}
-                                                    className="alertstripe__annen-veileder-varsel"
-                                                    data-testid="annen-veileder_infotekst"
-                                                >
-                                                    {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-                                                </AlertStripe>
-                                            )}
-                                        </div>
-                                        <Toolbar
-                                            onPaginering={hentPortefolje}
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
+                                    >
+                                        <TabellOverskrift
+                                            className={
+                                                visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''
+                                            }
                                         />
+                                        {visesAnnenVeiledersPortefolje && (
+                                            <AlertStripe
+                                                type={'info'}
+                                                className="alertstripe__annen-veileder-varsel"
+                                                data-testid="annen-veileder_infotekst"
+                                            >
+                                                {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                            </AlertStripe>
+                                        )}
                                     </div>
+                                    <Toolbar
+                                        onPaginering={hentPortefolje}
+                                        oversiktType={oversiktType}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        scrolling={scrolling}
+                                        isSidebarHidden={isSidebarHidden}
+                                    />
+                                </div>
                                 <MinoversiktTabell
                                     innloggetVeileder={innloggetVeilederIdent}
                                     settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                    classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}
+                                    classNameWrapper={
+                                        antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
+                                    }
                                 />
                             </div>
                             <MinOversiktModalController />
