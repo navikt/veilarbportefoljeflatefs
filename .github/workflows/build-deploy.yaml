@@ -73,7 +73,7 @@ jobs:
                   docker push ${IMAGE}:${IMAGE_TAG}
     deploy-dev:
         name: Deploy q1 fss
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/Endre-listevisning-av-brukerlisten-til-tabell'
         needs:
             - build-docker-image
         runs-on: ubuntu-latest
