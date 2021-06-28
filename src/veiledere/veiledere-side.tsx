@@ -23,9 +23,6 @@ import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrik
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
-import GammelFiltreringVeiledere from '../filtrering/gammel_filtrering-veiledere';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {SOK_VEILEDER} from '../konstanter';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -36,7 +33,7 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
-    const erSokVeilederFeatureTogglePa = useFeatureSelector()(SOK_VEILEDER);
+    const antallSynligeVeiledere = veiledere.data.veilederListe.length;
 
     useSetEnhetIUrl();
 
@@ -72,11 +69,7 @@ function VeiledereSide() {
                     >
                         <div className="status-filter-kolonne">
                             <PanelBase className="blokk-xxxs sok-veileder" role="search">
-                                {erSokVeilederFeatureTogglePa ? (
-                                    <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg}/>
-                                ) : (
-                                    <GammelFiltreringVeiledere />
-                                )}
+                                <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                             </PanelBase>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
@@ -99,7 +92,7 @@ function VeiledereSide() {
                                 veiledere={veiledere.data.veilederListe}
                                 portefoljestorrelser={portefoljestorrelser}
                                 veilederFilter={filtervalg.veiledere}
-                                antallVeiledere={veiledere.data.veilederListe.length}
+                                antallVeiledere={antallSynligeVeiledere}
                             />
                         </div>
                     </div>
