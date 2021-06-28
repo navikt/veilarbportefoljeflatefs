@@ -13,7 +13,11 @@ function ArbeidslisteOverskrift({role, className, skalVises, bruker}: Arbeidslis
         return null;
     }
 
-    return <div role={role} className={className}>{bruker.arbeidsliste.overskrift}</div>;
+    return (
+        <div role={role} className={className}>
+            {bruker.arbeidsliste.overskrift}
+        </div>
+    );
 }
 
 export default ArbeidslisteOverskrift;

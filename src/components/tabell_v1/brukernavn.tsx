@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.less';
-import {OrNothing} from "../../utils/types/types";
-import {setFraBrukerIUrl} from "../../utils/url-utils";
-import classnames from "classnames";
+import {OrNothing} from '../../utils/types/types';
+import {setFraBrukerIUrl} from '../../utils/url-utils';
+import classnames from 'classnames';
 
 const brukerNavn = (fornavn: string, etternavn: string) => {
     const manglerFornavn = fornavn === '';
@@ -38,7 +38,7 @@ function BrukerNavn({role, labelledBy, className, bruker, enhetId}: BrukerNavnPr
                 {brukerNavn(bruker.fornavn, bruker.etternavn)}
             </a>
         </div>
-    )
+    );
 }
 
 export default BrukerNavn;

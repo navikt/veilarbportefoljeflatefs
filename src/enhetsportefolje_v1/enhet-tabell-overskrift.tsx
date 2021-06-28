@@ -1,10 +1,7 @@
 import React from 'react';
 import SorteringHeader from '../components/tabell_v1/sortering-header';
 import TittelValg from '../utils/utils';
-import {
-    ytelseAapSortering,
-    ytelseUtlopsSortering
-} from '../filtrering/filter-konstanter';
+import {ytelseAapSortering, ytelseUtlopsSortering} from '../filtrering/filter-konstanter';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
@@ -13,7 +10,7 @@ import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
-import {VisKolonne} from "./enhet-tabell";
+import {VisKolonne} from './enhet-tabell';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -32,7 +29,7 @@ interface EnhetTabellHeaderProps {
     filtervalg: FiltervalgModell;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
     oversiktType: OversiktType;
-    kolonneSkalVises: ()=> VisKolonne;
+    kolonneSkalVises: () => VisKolonne;
 }
 
 function EnhetTabellOverskrift({
@@ -48,14 +45,20 @@ function EnhetTabellOverskrift({
     const skalVises = kolonneSkalVises();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : ytelseUtlopsSortering[ytelse!];
-    const ytelseSorteringHeader = ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
-    const avansertAktivitet = skalVises.iAvtaltAktivitet ? false : harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-    const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const ytelseUtlopsdatoNavn = erAapYtelse
+        ? ytelseAapSortering[ytelse!].vedtaksperiode
+        : ytelseUtlopsSortering[ytelse!];
+    const ytelseSorteringHeader =
+        ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
+    const avansertAktivitet = skalVises.iAvtaltAktivitet
+        ? false
+        : harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const forenkletAktivitet =
+        harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div role="row" className="brukerliste__header brukerliste__sorteringheader typo-undertekst-enhet">
-            <div className="brukerliste__gutter-left"/>
+            <div className="brukerliste__gutter-left" />
             <div role="columnheader" className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <VelgalleCheckboks
                     role="checkbox"
@@ -291,7 +294,7 @@ function EnhetTabellOverskrift({
                     headerId="dato-siste-endring"
                 />
             </div>
-            <div className="brukerliste__gutter-right" role="columnheader" id="etiketter"/>
+            <div className="brukerliste__gutter-right" role="columnheader" id="etiketter" />
         </div>
     );
 }

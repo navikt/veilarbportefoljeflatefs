@@ -18,10 +18,10 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelsevalg
-} from "../filtrering/filter-konstanter";
-import EnhetTabellOverskrift from "./enhet-tabell-overskrift";
-import {useSetPortefoljeSortering} from "../hooks/portefolje/use-sett-sortering";
-import EnhetTabellData from "./enhet-tabell-data";
+} from '../filtrering/filter-konstanter';
+import EnhetTabellOverskrift from './enhet-tabell-overskrift';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
+import EnhetTabellData from './enhet-tabell-data';
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
@@ -53,9 +53,15 @@ export interface VisKolonne {
 
 function EnhetTabell(props: EnhetTableProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, listevisning, portefolje, sorteringsrekkefolge, sorteringsfelt} = usePortefoljeSelector(
-        OversiktType.enhetensOversikt
-    );
+    const {
+        brukere,
+        filtervalg,
+        enhetId,
+        listevisning,
+        portefolje,
+        sorteringsrekkefolge,
+        sorteringsfelt
+    } = usePortefoljeSelector(OversiktType.enhetensOversikt);
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -67,34 +73,42 @@ function EnhetTabell(props: EnhetTableProps) {
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const ytelseAapRettighetsperiodeSkalVises = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const erYtelseFilterValgt = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
-    const erDagpengerUtenPermitteringYtelse: boolean = (
-        ytelse === ytelsevalgIntl.DAGPENGER || ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+    const erDagpengerUtenPermitteringYtelse: boolean =
+        ytelse === ytelsevalgIntl.DAGPENGER ||
+        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
-        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER);
-    const erDagPengerMedPermitteringYtelse: boolean = (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING);
-    const erTiltakpengerYtelse: boolean = (ytelse === ytelsevalgIntl.TILTAKSPENGER);
+        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER;
+    const erDagPengerMedPermitteringYtelse: boolean = ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING;
+    const erTiltakpengerYtelse: boolean = ytelse === ytelsevalgIntl.TILTAKSPENGER;
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
     const visKolonner = (): VisKolonne => ({
         veilederNavn: valgteKolonner.includes(Kolonne.VEILEDER),
         veilederIdent: valgteKolonner.includes(Kolonne.NAVIDENT),
         oppfolgingStartet: valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET),
-        rettighetsperiodeTilDagpenger: (erYtelseFilterValgt && erDagpengerUtenPermitteringYtelse),
-        rettighetsperiodeTilDagpengerMedPermittering: (erYtelseFilterValgt && erDagPengerMedPermitteringYtelse),
-        vedtaksPeriodeTilAAP: (valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse),
-        rettighetsPeriodeTilAAP: (ytelseAapRettighetsperiodeSkalVises && erAapYtelse),
-        rettighetsperiodeTilTiltakPenger: (erYtelseFilterValgt && erTiltakpengerYtelse),
-        datoTilVenterPaSvarFraBruker: (ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR)),
-        datoTilVenterPaSvarFraNav: (ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR)),
-        datoTilUtlopteAktiviteter: (ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)),
-        iAvtaltAktivitet: (ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)),
-        moteKlokkeslett: (ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)),
-        moteVarighet: (ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)),
-        vedtakStatus: (ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)),
-        vedtakStatusEndret: (ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)),
-        ansvarligVeilderForVedtak: (ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)),
-        sisteEndring: (filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)),
-        sisteEndringsDato: (filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO))
+        rettighetsperiodeTilDagpenger: erYtelseFilterValgt && erDagpengerUtenPermitteringYtelse,
+        rettighetsperiodeTilDagpengerMedPermittering: erYtelseFilterValgt && erDagPengerMedPermitteringYtelse,
+        vedtaksPeriodeTilAAP: valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse,
+        rettighetsPeriodeTilAAP: ytelseAapRettighetsperiodeSkalVises && erAapYtelse,
+        rettighetsperiodeTilTiltakPenger: erYtelseFilterValgt && erTiltakpengerYtelse,
+        datoTilVenterPaSvarFraBruker:
+            ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) && valgteKolonner.includes(Kolonne.VENTER_SVAR),
+        datoTilVenterPaSvarFraNav:
+            ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) && valgteKolonner.includes(Kolonne.VENTER_SVAR),
+        datoTilUtlopteAktiviteter:
+            ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) && valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER),
+        iAvtaltAktivitet:
+            ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET),
+        moteKlokkeslett: ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG),
+        moteVarighet: ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET),
+        vedtakStatus: ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS),
+        vedtakStatusEndret:
+            ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET),
+        ansvarligVeilderForVedtak:
+            ferdigfilterListe?.includes(UNDER_VURDERING) &&
+            valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK),
+        sisteEndring: filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING),
+        sisteEndringsDato: filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)
     });
 
     return (

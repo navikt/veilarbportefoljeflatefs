@@ -35,7 +35,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
-import EnhetTabell from "./enhet-tabell";
+import EnhetTabell from './enhet-tabell';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -110,14 +110,8 @@ export default function EnhetSide() {
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
 
-    const hentPortefolje = ()=> {
-        dispatch(
-            hentPortefoljeForEnhet(
-                enhetId,
-                sorteringsrekkefolge,
-                sorteringsfelt,
-                filtervalg
-            ))
+    const hentPortefolje = () => {
+        dispatch(hentPortefoljeForEnhet(enhetId, sorteringsrekkefolge, sorteringsfelt, filtervalg));
     };
 
     const [scrolling, setScrolling] = useState(false);
@@ -140,11 +134,13 @@ export default function EnhetSide() {
 
     const data = useSelector((state: AppState) => state.mineFilter.data);
     const lagretFilterNavn = filterId =>
-        data.filter(elem => elem.filterId === filterId)
+        data
+            .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
 
-    let isSidebarHiddenCss = (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
+    let isSidebarHiddenCss =
+        (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
 
     return (
         <DocumentTitle title="Enhetens oversikt">
@@ -179,7 +175,10 @@ export default function EnhetSide() {
                         {harFilter ? (
                             <div className="oversikt__container">
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                    <div className={`oversikt-toolbar-container ${antallBrukere < 4 && 'ikke-sticky__toolbar-container'}`}>
+                                    <div
+                                        className={`oversikt-toolbar-container ${antallBrukere < 4 &&
+                                            'ikke-sticky__toolbar-container'}`}
+                                    >
                                         <div className={`tabellinfo ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}>
                                             <TabellInfo />
                                         </div>
@@ -192,7 +191,13 @@ export default function EnhetSide() {
                                             isSidebarHidden={isSidebarHidden}
                                         />
                                     </div>
-                                    <EnhetTabell cssClass={antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'}/>
+                                    <EnhetTabell
+                                        cssClass={
+                                            antallBrukere > 0
+                                                ? 'portefolje__container'
+                                                : 'portefolje__container__tom-liste'
+                                        }
+                                    />
                                 </div>
                             </div>
                         ) : (

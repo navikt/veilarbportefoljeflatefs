@@ -13,7 +13,7 @@ import './minoversikt.less';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
-import MinoversiktTabellOverskrift from "./minoversikt-tabell-overskrift";
+import MinoversiktTabellOverskrift from './minoversikt-tabell-overskrift';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -24,7 +24,9 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, listevisning, sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(OversiktType.minOversikt);
+    const {brukere, filtervalg, enhetId, listevisning, sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(
+        OversiktType.minOversikt
+    );
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));

@@ -24,9 +24,11 @@ function VeilederNavn({role, labelledBy, className, bruker, skalVises, veileder}
         </Info>
     );
 
-    return <div role={role} aria-labelledby={labelledBy} className={className}>
-                {bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}
-           </div>;
+    return (
+        <div role={role} aria-labelledby={labelledBy} className={className}>
+            {bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}
+        </div>
+    );
 }
 
 export default VeilederNavn;
