@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 import './tilbakemelding-fab.less';
 import {sjekkFeature} from '../../ducks/features';
 import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
-import {Tilbakemelding} from './tilbakemelding-modal';
+import TilbakemeldingModal, {BegrensetCheckboxValgProps, Tilbakemelding} from './tilbakemelding-modal';
 import {logEvent} from '../../utils/frontend-logger';
 import {useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import tilbakemeldingBilde from './tilbakemelding.svg';
 import lukkBilde from './lukk.svg';
-import FamiliemedlemCheckboxValg, {TilbakemeldingCheckboxProps} from "./familiemedlem-checkboxvalg";
+import {TilbakemeldingCheckboxProps} from "./familiemedlem-checkboxvalg";
 // FAB = Floating Action Button
 interface TilbakemeldingFabProps {
     harFeature: (feature: string) => boolean;
@@ -63,7 +63,23 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         });
     };
 
-    const handleCheckboxTilbakemeldingSendt = (tilbakemelding: TilbakemeldingCheckboxProps, checkboxStatusListe: any) => {
+    const handleBegrensetCheckboxValgSendt = (tilbakemelding: BegrensetCheckboxValgProps) => {
+        window.localStorage.setItem(TILBAKEMELDING_LOCALSTORAGE_NAME, 'true');
+
+        logEvent('portefolje.tilbakemelding', {
+            feature: TILBAKEMELDING_FEATURE_TAG,
+            ...tilbakemelding
+        });
+
+        tilbakemelding.checkboxverdi.forEach(verdi => {
+            logEvent('portefolje.tilbakemelding.checkboxverdier', {
+                feature: TILBAKEMELDING_FEATURE_TAG,
+                verdi
+            });
+        });
+    };
+
+    const handleCheckboxValgSendt = (tilbakemelding: TilbakemeldingCheckboxProps, checkboxStatusListe: any) => {
         startAutoClose();
         setHideFab(true);
         window.localStorage.setItem(TILBAKEMELDING_LOCALSTORAGE_NAME, 'true');
@@ -100,9 +116,12 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
                     />
                 </div>
             )}
-            <FamiliemedlemCheckboxValg
+            <TilbakemeldingModal
                open={isModalOpen}
-               onTilbakemeldingCheckboxSendt={handleCheckboxTilbakemeldingSendt}
+               onTilfredshetsTilbakemeldingSendt={handleTilfredshetsTilbakemeldingSendt}
+               onCheckboxTilbakemeldingSend={handleCheckboxValgSendt}
+               onBegrensetCheckboxValgSendt={handleBegrensetCheckboxValgSendt}
+               onIkkeVisIgjen={handleIkkeVisIgjen}
             />
         </div>
     );

@@ -5,7 +5,6 @@ import {useState} from 'react';
 import {Checkbox, Textarea} from 'nav-frontend-skjema';
 import {Hovedknapp} from 'nav-frontend-knapper';
 import CheckboxValg from './checkbox-valg';
-import TakkIkon from './takk-ikon.png';
 import classNames from "classnames";
 import TilbakemeldingTakkModal from "./tilbakemelding-takk-modal";
 
@@ -94,12 +93,6 @@ function FamiliemedlemCheckboxValg({open, onTilbakemeldingCheckboxSendt}: Tilbak
         return null;
     }
 
-    const renderTakkMelding = () => {
-        return (
-            TilbakemeldingTakkModal
-        );
-    };
-
     const CheckboxValg = () => {
         return (
             <>
@@ -131,7 +124,7 @@ function FamiliemedlemCheckboxValg({open, onTilbakemeldingCheckboxSendt}: Tilbak
                     onSubmit={handleCheckboxFormSubmitted}
                     data-widget="accessible-autocomplete"
                 >
-                    <CheckboxValg/>
+                    <CheckboxValg />
                     <div className="tilbakemelding-modal__kommentar">
                         <Textarea
                             className="tilbakemelding-modal__kommentar-felt"
