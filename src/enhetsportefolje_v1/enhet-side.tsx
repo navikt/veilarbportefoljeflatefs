@@ -175,29 +175,31 @@ export default function EnhetSide() {
                         {harFilter ? (
                             <div className="oversikt__container">
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                    <div
-                                        className={`oversikt-toolbar-container ${antallBrukere < 4 &&
-                                            'ikke-sticky__toolbar-container'}`}
-                                    >
-                                        <div className={`tabellinfo ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}>
-                                            <TabellInfo />
+                                    <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                        <div
+                                            className={`oversikt-toolbar-container ${antallBrukere < 4 &&
+                                                'ikke-sticky__toolbar-container'}`}
+                                        >
+                                            <div className={`tabellinfo ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}>
+                                                <TabellInfo />
+                                            </div>
+                                            <Toolbar
+                                                onPaginering={hentPortefolje}
+                                                oversiktType={oversiktType}
+                                                sokVeilederSkalVises
+                                                antallTotalt={portefoljeData.antallTotalt}
+                                                scrolling={scrolling}
+                                                isSidebarHidden={isSidebarHidden}
+                                            />
                                         </div>
-                                        <Toolbar
-                                            onPaginering={hentPortefolje}
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises
-                                            antallTotalt={portefoljeData.antallTotalt}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
+                                        <EnhetTabell
+                                            cssClass={
+                                                antallBrukere > 0
+                                                    ? 'portefolje__container'
+                                                    : 'portefolje__container__tom-liste'
+                                            }
                                         />
-                                    </div>
-                                    <EnhetTabell
-                                        cssClass={
-                                            antallBrukere > 0
-                                                ? 'portefolje__container'
-                                                : 'portefolje__container__tom-liste'
-                                        }
-                                    />
+                                    </span>
                                 </div>
                             </div>
                         ) : (
