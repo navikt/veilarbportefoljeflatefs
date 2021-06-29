@@ -37,7 +37,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     return (
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div className={props.classNameWrapper}>
-                <div className="minoversikt-liste__wrapper typo-undertekst blokk-xs">
+                <div className="minoversikt-liste__wrapper typo-undertekst">
                     <ul className="brukerliste" data-testid="brukerliste">
                         {brukere.map(bruker => (
                             <MinoversiktBrukerPanel

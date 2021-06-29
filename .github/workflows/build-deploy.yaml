@@ -50,7 +50,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Build and publish Docker image
         needs: build
-        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/Endre-listevisning-av-brukerlisten-til-tabell'
         steps:
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
@@ -73,7 +73,7 @@ jobs:
                   docker push ${IMAGE}:${IMAGE_TAG}
     deploy-dev:
         name: Deploy q1 fss
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/Endre-listevisning-av-brukerlisten-til-tabell'
         needs:
             - build-docker-image
         runs-on: ubuntu-latest

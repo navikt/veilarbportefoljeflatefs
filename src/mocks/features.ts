@@ -4,7 +4,8 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    BYTTE_LISTE_MED_TABELL
 } from '../konstanter';
 
 const toggles = {
@@ -14,6 +15,7 @@ const toggles = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: true,
     [TVUNGEN_STEPPER]: false,
+    [BYTTE_LISTE_MED_TABELL]: true
 };
 
 export default toggles;

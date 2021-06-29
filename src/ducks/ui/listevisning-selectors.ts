@@ -113,12 +113,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                     filtervalg.ytelse === AAP_YTELSE_UNNTAK
             )
         )
-        .concat(
-            addHvis(
-                Kolonne.UTLOP_AKTIVITET,
-                avansertAktivitetErValgt() || forenkletAktivitetErValgt()
-            )
-        )
+        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt() || forenkletAktivitetErValgt()))
         .concat(
             addHvis(
                 Kolonne.START_DATO_AKTIVITET,

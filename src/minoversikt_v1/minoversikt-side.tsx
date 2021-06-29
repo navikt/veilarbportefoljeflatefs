@@ -5,9 +5,8 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
-import MinoversiktTabell from './minoversikt-portefolje-tabell';
-import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
-import TabellInfo from '../components/tabell-info';
+import MinoversiktTabell from './minoversikt-tabell';
+import TabellOverskrift from '../components/tabell-info';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
@@ -28,7 +27,6 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
-import classNames from 'classnames';
 import {MinOversiktWrapper} from './minoversikt_wrapper';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
@@ -87,6 +85,9 @@ export default function MinoversiktSide() {
 
     const [scrolling, setScrolling] = useState(false);
 
+    let isSidebarHiddenCss =
+        (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
+
     useEffect(() => {
         function onScroll() {
             let currentPosition = window.pageYOffset;
@@ -110,6 +111,12 @@ export default function MinoversiktSide() {
             .map(elem => elem.filterNavn)
             .toString();
 
+    const hentPortefolje = () => {
+        dispatch(
+            hentPortefoljeForVeileder(enhetId, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg)
+        );
+    };
+
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
@@ -117,11 +124,9 @@ export default function MinoversiktSide() {
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
-                        className={classNames(
-                            'oversikt-sideinnhold portefolje-side',
-                            isSidebarHidden && 'oversikt-sideinnhold__hidden',
-                            visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'
-                        )}
+                        className={`oversikt-sideinnhold portefolje-side 
+                            ${isSidebarHidden && 'oversikt-sideinnhold__hidden'} 
+                            ${visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'}`}
                         id={`oversikt-sideinnhold_${id}`}
                     >
                         <Sidebar
@@ -139,40 +144,24 @@ export default function MinoversiktSide() {
                             oversiktType={oversiktType}
                             enhettiltak={enhettiltak.data.tiltak}
                             listevisning={listevisning}
-                            className={classNames(
-                                'filtrering-label-container',
-                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
-                            )}
+                            className={`filtrering-label-container ${visesAnnenVeiledersPortefolje &&
+                                'filtrering-label-container__annen-veileder'}`}
                         />
-                        <div
-                            className={classNames(
-                                'oversikt__container',
-                                isSidebarHidden && 'oversikt__container__hidden'
-                            )}
-                        >
+                        <div className={`oversikt__container`}>
                             <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                 <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                     <div
-                                        className={classNames(
-                                            'toolbar-container',
-                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
-                                        )}
+                                        className={`oversikt-toolbar-container ${antallBrukere < 4 &&
+                                            'ikke-sticky__toolbar-container'}`}
                                     >
                                         <div
-                                            className={classNames(
-                                                'tabellinfo',
-                                                visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
-                                                ((scrolling && isSidebarHidden) ||
-                                                    (scrolling && windowWidth < 1200) ||
-                                                    (!isSidebarHidden && windowWidth < 1200)) &&
-                                                    'tabellinfo__hidden'
-                                            )}
+                                            className={`tabellinfo 
+                                                     ${visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder'} 
+                                                     ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}
                                         >
-                                            <TabellInfo
+                                            <TabellOverskrift
                                                 className={
-                                                    visesAnnenVeiledersPortefolje
-                                                        ? 'tabelloverskrift__annen-veileder'
-                                                        : ''
+                                                    visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''
                                                 }
                                             />
                                             {visesAnnenVeiledersPortefolje && (
@@ -186,17 +175,7 @@ export default function MinoversiktSide() {
                                             )}
                                         </div>
                                         <Toolbar
-                                            onPaginering={() =>
-                                                dispatch(
-                                                    hentPortefoljeForVeileder(
-                                                        enhetId,
-                                                        gjeldendeVeileder,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )
-                                                )
-                                            }
+                                            onPaginering={hentPortefolje}
                                             oversiktType={oversiktType}
                                             sokVeilederSkalVises={false}
                                             antallTotalt={portefolje.data.antallTotalt}
@@ -204,11 +183,6 @@ export default function MinoversiktSide() {
                                             visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                             scrolling={scrolling}
                                             isSidebarHidden={isSidebarHidden}
-                                        />
-                                        <MinoversiktTabellOverskrift
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            innloggetVeileder={innloggetVeilederIdent!.ident}
-                                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                                         />
                                     </div>
                                 </span>

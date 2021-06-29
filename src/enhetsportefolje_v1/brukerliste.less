@@ -7,32 +7,29 @@
     @brukerliste-padding: 5px;
 
     .brukerliste {
-        list-style: none;
         margin: 0;
         padding: 0;
 
-        li:nth-child(odd) {
+        &--rad:nth-child(odd) {
             background-color: @white;
         }
 
-        li {
+        &--rad {
             border-left: 1px solid @navGra60;
             border-right: 1px solid @navGra60;
             border-top: 1px solid @navGra40;
-
-            &:first-child {
-                border-top: none;
-            }
 
             &:last-child {
                 border-bottom: none;
             }
         }
 
-        &__element {
+        &--rad {
             display: flex;
             align-items: center;
             padding: 0.5rem 0;
+            color: #3e3832;
+            text-decoration: none;
         }
 
         &__checkbox {
@@ -41,19 +38,6 @@
 
         .arbeidsliste--ikon {
             margin-top: 10px;
-        }
-
-        &--borders {
-            border-top: 1px solid @navGra40;
-            border-bottom: 1px solid @navGra40;
-        }
-
-        &--border-bottom {
-            border-bottom: 2px solid @navGra40;
-        }
-
-        &--forrigeBruker {
-            box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
         }
 
         &__header {
@@ -100,6 +84,10 @@
 
         &__etiketter {
             width: 100%;
+        }
+
+        &--forrigeBruker {
+            box-shadow: inset -1px 0 0 2px @navGra60, inset 1px 0 0 2px @navGra40;
         }
 
         &__arbeidslisteknapp {
@@ -149,6 +137,33 @@
         }
     }
 
+    div.brukerliste__element {
+        border-left: 1px solid @navGra60;
+        border-right: 1px solid @navGra60;
+        border-top: 1px solid @navGra40;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    div.arbeidsliste-collapse {
+        border-left: 1px solid @navGra60;
+        border-right: 1px solid @navGra60;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
     .valgt-sortering {
         font-weight: bold;
     }
@@ -157,7 +172,7 @@
         background-color: @bakgrunnsGra;
         border-top-color: @white;
         border-bottom: none;
-        border-radius: 0 0 @border-radius-base @border-radius-base;
+        border-radius: @border-radius-base @border-radius-base @border-radius-base @border-radius-base;
         margin-bottom: 0;
     }
 

@@ -2,10 +2,8 @@ import * as React from 'react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
-import TabellOverskrift from '../components/tabell-info';
+import TabellInfo from '../components/tabell-info';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
-import EnhetTabell from './enhetsportefolje-tabell';
-import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import ToppMeny from '../topp-meny/topp-meny';
@@ -24,7 +22,6 @@ import '../style.less';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
-import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import Sidebar from '../components/sidebar/sidebar';
@@ -38,6 +35,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
+import EnhetTabell from './enhet-tabell';
 
 function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -97,6 +95,7 @@ export default function EnhetSide() {
     );
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
+
     const windowWidth = useWindowWidth();
 
     useSetStateFromUrl();
@@ -109,6 +108,10 @@ export default function EnhetSide() {
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+    };
+
+    const hentPortefolje = () => {
+        dispatch(hentPortefoljeForEnhet(enhetId, sorteringsrekkefolge, sorteringsfelt, filtervalg));
     };
 
     const [scrolling, setScrolling] = useState(false);
@@ -135,6 +138,9 @@ export default function EnhetSide() {
             .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
+
+    let isSidebarHiddenCss =
+        (scrolling && isSidebarHidden) || (scrolling && windowWidth < 1200) || (!isSidebarHidden && windowWidth < 1200);
 
     return (
         <DocumentTitle title="Enhetens oversikt">
@@ -167,53 +173,33 @@ export default function EnhetSide() {
                             className="filtrering-label-container"
                         />
                         {harFilter ? (
-                            <div className={`oversikt__container ${isSidebarHidden && 'oversikt__container__hidden'}`}>
+                            <div className="oversikt__container">
                                 <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
                                     <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
                                         <div
-                                            className={classNames(
-                                                'toolbar-container',
-                                                antallBrukere < 4 && 'ikke-sticky__toolbar-container'
-                                            )}
+                                            className={`oversikt-toolbar-container ${antallBrukere < 4 &&
+                                                'ikke-sticky__toolbar-container'}`}
                                         >
-                                            <div
-                                                className={classNames(
-                                                    'tabellinfo',
-                                                    ((scrolling && isSidebarHidden) ||
-                                                        (scrolling && windowWidth < 1200) ||
-                                                        (!isSidebarHidden && windowWidth < 1200)) &&
-                                                        'tabellinfo__hidden'
-                                                )}
-                                            >
-                                                <TabellOverskrift />
+                                            <div className={`tabellinfo ${isSidebarHiddenCss && 'tabellinfo__hidden'}`}>
+                                                <TabellInfo />
                                             </div>
                                             <Toolbar
-                                                onPaginering={() =>
-                                                    dispatch(
-                                                        hentPortefoljeForEnhet(
-                                                            enhetId,
-                                                            sorteringsrekkefolge,
-                                                            sorteringsfelt,
-                                                            filtervalg
-                                                        )
-                                                    )
-                                                }
+                                                onPaginering={hentPortefolje}
                                                 oversiktType={oversiktType}
                                                 sokVeilederSkalVises
                                                 antallTotalt={portefoljeData.antallTotalt}
                                                 scrolling={scrolling}
                                                 isSidebarHidden={isSidebarHidden}
                                             />
-                                            <EnhetTabellOverskrift />
                                         </div>
+                                        <EnhetTabell
+                                            cssClass={
+                                                antallBrukere > 0
+                                                    ? 'portefolje__container'
+                                                    : 'portefolje__container__tom-liste'
+                                            }
+                                        />
                                     </span>
-                                    <EnhetTabell
-                                        classNameWrapper={
-                                            antallBrukere > 0
-                                                ? 'portefolje__container'
-                                                : 'portefolje__container__tom-liste'
-                                        }
-                                    />
                                 </div>
                             </div>
                         ) : (

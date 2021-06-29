@@ -6,6 +6,7 @@ import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.less';
 
 interface VelgalleCheckboksProps {
+    role?: string;
     skalVises: boolean;
     disabled: boolean;
     alleMarkert: boolean;
@@ -13,7 +14,7 @@ interface VelgalleCheckboksProps {
     className: string;
 }
 
-function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
+function VelgAlleCheckboks({role, skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
     if (!skalVises) {
         return null;
     }
@@ -21,6 +22,7 @@ function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
 
     return (
         <Checkbox
+            role={role}
             label={''}
             className={className}
             checked={alleMarkert}
@@ -28,7 +30,6 @@ function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
             onChange={onClickHandler}
             title="Velg alle checkbox"
             aria-label="Velg alle checkboxer"
-            role="checkbox"
         />
     );
 }
