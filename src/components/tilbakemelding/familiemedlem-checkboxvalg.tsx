@@ -4,7 +4,6 @@ import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import {Checkbox, Textarea} from 'nav-frontend-skjema';
 import {Hovedknapp} from 'nav-frontend-knapper';
-import CheckboxValg from './checkbox-valg';
 import classNames from "classnames";
 import TilbakemeldingTakkModal from "./tilbakemelding-takk-modal";
 

@@ -17,12 +17,13 @@ interface TilbakemeldingFabProps {
 }
 
 function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
-    const TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
+    const TILBAKEMELDING_PREFIX = 'tilbakemelding';
     const TILBAKEMELDING_FEATURE_TAG = 'opplysninger_om_familiemedlemmer'; // TODO: Husk å endre for hver nye feature
     const TILBAKEMELDING_LOCALSTORAGE_NAME = `${TILBAKEMELDING_PREFIX}__${TILBAKEMELDING_FEATURE_TAG}`;
 
     const [hideFab, setHideFab] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
+    // eslint-disable-next-line
     const [ikkeVisIgjen, setIkkeVisIgjen] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -83,9 +84,7 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         startAutoClose();
         setHideFab(true);
         window.localStorage.setItem(TILBAKEMELDING_LOCALSTORAGE_NAME, 'true');
-
-        console.log("checkboxStatusListe: ", checkboxStatusListe, "kommentar: ", tilbakemelding.kommentar, "checkboxIndexListe: ", tilbakemelding.checkboxIndexListe);
-        logEvent('detaljer.tilbakemelding', {feature: TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding, ...checkboxStatusListe});
+        logEvent('portefolje.tilbakemelding.checkboxstatuser', {feature: TILBAKEMELDING_FEATURE_TAG, ...tilbakemelding, ...checkboxStatusListe});
     };
 
     const handleIkkeVisIgjen = () => {
