@@ -40,7 +40,7 @@ describe('Diverse', () => {
         cy.getByTestId('endringslogg_nye-notifikasjoner').should('not.exist');
     });
 
-    it('Verifiser tilbakemeldingsundersøkelse', () => {
+    /*it('Verifiser tilbakemeldingsundersøkelse', () => {
         cy.getByTestId('tilbakemelding_modal').should('not.exist');
         cy.getByTestId('tilbakemelding_fab_knapp')
             .should('be.visible')
@@ -92,7 +92,7 @@ describe('Diverse', () => {
         cy.get('body').click(20, 500);
         cy.getByTestId('tilbakemelding_fab_knapp').should('not.exist');
         cy.getByTestId('tilbakemelding_modal_takk').should('not.exist');
-    });
+    });*/
 
     it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
