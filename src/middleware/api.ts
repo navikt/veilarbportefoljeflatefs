@@ -10,6 +10,7 @@ const credentials = 'same-origin';
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
+        'Nav-Consumer-Id': 'internarbeidsflatedecorator',
         'Content-Type': 'application/json'
     }
 };
