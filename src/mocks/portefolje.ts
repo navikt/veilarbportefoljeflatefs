@@ -79,11 +79,8 @@ function lagYtelse() {
     const out = {
         ytelse,
         utlopsdato: '',
-        utlopsdatoFasett: '',
         aapmaxtidUke: '',
-        aapmaxtidUkeFasett: '',
         aapUnntakUkerIgjen: '',
-        aapUnntakUkerIgjenFasett: ''
     };
 
     const dag = rnd(1, 31);
@@ -95,15 +92,11 @@ function lagYtelse() {
         const todayDate = new Date().getTime();
 
         const aaptidUke = Math.round((rndDate - todayDate) / (1000 * 60 * 60 * 24 * 7));
-        const aaptidUkeFasett = `KV${rnd(1, 16)}`;
 
         out.aapmaxtidUke = aaptidUke.toString();
-        out.aapmaxtidUkeFasett = aaptidUkeFasett;
         out.aapUnntakUkerIgjen = aaptidUke.toString();
-        out.aapUnntakUkerIgjenFasett = aaptidUkeFasett;
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
-        out.utlopsdatoFasett = `MND${rnd(1, 12)}`;
     }
 
     return out;
@@ -206,11 +199,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         aktivitetStart: ytelse.utlopsdato,
         nesteAktivitetStart: ytelse.utlopsdato,
         forrigeAktivitetStart: ytelse.utlopsdato,
-        utlopsdatoFasett: ytelse.utlopsdatoFasett,
         aapmaxtidUke: ytelse.aapmaxtidUke,
-        aapmaxtidUkeFasett: ytelse.aapmaxtidUkeFasett,
         aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
-        aapUnntakUkerIgjenFasett: ytelse.aapUnntakUkerIgjenFasett,
         arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,

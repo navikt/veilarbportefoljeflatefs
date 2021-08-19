@@ -111,14 +111,10 @@ export interface BrukerModell {
     kjonn: string; // enum
     ytelse?: string;
     utlopsdato?: string; // dato
-    utlopsdatoFasett?: string; // dato
     aapUnntakUkerIgjen?: number;
     dagputlopUke?: number;
-    dagputlopUkeFasett?: string; // dato
     permutlopUke?: number;
-    permutlopUkeFasett?: string; // dato
     aapmaxtidUke?: number;
-    aapmaxtidUkeFasett?: string; // dato
     arbeidsliste: ArbeidslisteModell;
     venterPaSvarFraNAV?: string;
     venterPaSvarFraBruker?: string;
