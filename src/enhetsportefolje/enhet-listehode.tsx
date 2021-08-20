@@ -59,9 +59,8 @@ function EnhetListehode({
     const iAvtaltAktivitet =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
-    const avansertAktivitet = iAvtaltAktivitet
-        ? false
-        : harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const avansertAktivitet =
+        harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     const forenkletAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
@@ -215,7 +214,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     tekst="Neste utløpsdato aktivitet"
-                    skalVises={avansertAktivitet || forenkletAktivitet}
+                    skalVises={!iAvtaltAktivitet && (avansertAktivitet || forenkletAktivitet)}
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"
