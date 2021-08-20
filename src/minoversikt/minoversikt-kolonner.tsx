@@ -171,7 +171,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             <DatoKolonne
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
-                skalVises={!iAvtaltAktivitet && (avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak)}
+                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
             <DatoKolonne
                 className="col col-xs-2"

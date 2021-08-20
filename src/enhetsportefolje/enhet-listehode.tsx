@@ -213,8 +213,8 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    tekst="Neste utløpsdato aktivitet"
-                    skalVises={!iAvtaltAktivitet && (avansertAktivitet || forenkletAktivitet)}
+                    tekst="Neste utløpsdato valgt aktivitet"
+                    skalVises={avansertAktivitet || forenkletAktivitet}
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"
