@@ -131,7 +131,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                             <div className="tilbakemelding-modal__kommentar">
                                                 <Textarea
                                                     className="tilbakemelding-modal__kommentar-felt"
-                                                    label='Fortell gjerne mer om hvordan og når du bruker "Ikke send forhåndsorientering" (Frivillig):'
+                                                    label='Fortell gjerne mer om hvordan, og når du bruker "Ikke send forhåndsorientering" (Frivillig):'
                                                     rows={KOMMENTAR_ROWS}
                                                     maxLength={KOMMENTAR_MAX_CHAR}
                                                     value={kommentar}
