@@ -110,7 +110,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                             Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Hvor fornøyd er du med filtrene "Siste endring av bruker"? Svaret er anonymt.
+                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og forhåndsorientering i aktivitetsplanen?
                         </Normaltekst>
                         {visTilfredshet ? (
                             <>
@@ -131,7 +131,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                             <div className="tilbakemelding-modal__kommentar">
                                                 <Textarea
                                                     className="tilbakemelding-modal__kommentar-felt"
-                                                    label="Si gjerne litt mer om hvordan du bruker disse filtrene i oppfølgingen. (Frivillig)"
+                                                    label='Fortell gjerne mer om hvordan og når du bruker "Ikke send forhåndsorientering" (Frivillig):'
                                                     rows={KOMMENTAR_ROWS}
                                                     maxLength={KOMMENTAR_MAX_CHAR}
                                                     value={kommentar}
