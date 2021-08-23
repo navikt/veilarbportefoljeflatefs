@@ -60,11 +60,10 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
-    const avtaltAktivitetOgTiltak: boolean = iAvtaltAktivitet
-        ? false
-        : !!valgteAktivitetstyper &&
-          filtervalg.tiltakstyper.length === 0 &&
-          valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const avtaltAktivitetOgTiltak: boolean =
+        !!valgteAktivitetstyper &&
+        filtervalg.tiltakstyper.length === 0 &&
+        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
