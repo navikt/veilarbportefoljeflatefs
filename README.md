@@ -39,3 +39,4 @@ For å åpne applikasjonen i nettleseren, gå til `https://localhost:9592/veilar
 Denne applikasjonen bundler ikke med Redux Devtools, men har lagt inn støtte for chrome extensionen
 `Redux Devtools extension`, som kommer med både LogMonitor og Inspector. Denne finner man på fellesdisken
 under `F:\programvare\Chrome-extensions`.
+

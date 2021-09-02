@@ -13,7 +13,7 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: true,
-    [TVUNGEN_STEPPER]: false,
+    [TVUNGEN_STEPPER]: false
 };
 
 export default toggles;
