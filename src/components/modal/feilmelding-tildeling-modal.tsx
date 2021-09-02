@@ -28,7 +28,8 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             <Normaltekst className="blokk-s">Tildeling av veileder til følgende bruker(e) feilet:</Normaltekst>
             <FnrList listeMedFnr={props.fnrFeil} />
             <Normaltekst className="blokk-s">
-                Det kan skyldes manglende tilgang på bruker(e), eller at veilederen allerede er tildelt brukeren(e).
+                Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
+                brukeren ikke er under oppfølging.
             </Normaltekst>
 
             {props.fnrSuksess?.length > 0 && (
