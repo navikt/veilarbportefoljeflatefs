@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import NavFrontendModal from 'nav-frontend-modal';
 import {skjulModal} from '../../../ducks/modal';
@@ -14,110 +14,82 @@ import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 
-interface ArbeidslisteModalProps {
+type Props = {
     isOpen: boolean;
     valgteBrukere: BrukerModell[];
     skjulArbeidslisteModal: () => void;
     fjernMarkerteBrukere: () => void;
     innloggetVeileder: string;
     arbeidslisteStatus?: Status;
-}
+};
 
-interface ArbeidslisteModalState {
-    formIsDirty: boolean;
-    isOpen: boolean;
-    laster: boolean;
-}
+const ArbeidslisteModal: React.FC<Props> = ({
+    isOpen,
+    valgteBrukere,
+    skjulArbeidslisteModal,
+    fjernMarkerteBrukere,
+    innloggetVeileder,
+    arbeidslisteStatus
+}) => {
+    const [open, setOpen] = useState<boolean>(isOpen);
+    const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
+    const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
+    const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
 
-class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteModalState> {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isOpen: this.props.isOpen,
-            formIsDirty: false,
-            laster: props.arbeidslisteStatus !== undefined && props.arbeidslisteStatus !== STATUS.OK
-        };
-        this.lukkModal = this.lukkModal.bind(this);
-        this.setFormIsDirty = this.setFormIsDirty.bind(this);
-    }
-
-    setFormIsDirty(formIsDirty: boolean) {
-        this.setState({...this.state, formIsDirty});
-    }
-
-    lukkModal() {
-        const {skjulArbeidslisteModal, fjernMarkerteBrukere} = this.props;
+    console.log('hello');
+    const lukkModal = () => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
-        if (!this.state.formIsDirty || window.confirm(dialogTekst)) {
-            this.setState({isOpen: false});
+        if (!formIsDirty || window.confirm(dialogTekst)) {
+            setOpen(false);
             fjernMarkerteBrukere();
             skjulArbeidslisteModal();
         }
-    }
+    };
 
-    leggTilModal(valgteBrukere: BrukerModell[]) {
-        return (
-            <NavFrontendModal
-                className="arbeidsliste-modal legg-i-arbeidsliste"
-                contentLabel="arbeidsliste"
-                isOpen={this.state.isOpen || false}
-                onRequestClose={this.lukkModal}
-                closeButton
-            >
-                <ModalHeader tittel="Legg i arbeidsliste" />
-                <div className="modal-innhold">
-                    <LeggTilArbeidslisteForm
-                        valgteBrukere={valgteBrukere}
-                        lukkModal={this.lukkModal}
-                        innloggetVeileder={this.props.innloggetVeileder}
-                        setFormIsDirty={this.setFormIsDirty}
-                    />
+    return laster ? (
+        <LasterModal />
+    ) : brukereSomSkalFjernes.length > 0 ? (
+        <VarselModal
+            isOpen={open}
+            onRequestClose={lukkModal}
+            contentLabel="Fjern brukere fra arbeidsliste"
+            type={VarselModalType.ADVARSEL}
+            dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
+        >
+            <div className="fjern-arbeidsliste">
+                <div className="arbeidsliste-headertekst">
+                    <Innholdstittel tag="h1" className="blokk-xs">
+                        Fjern fra arbeidsliste
+                    </Innholdstittel>
+                    <Normaltekst className="blokk-s">
+                        {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
+                            brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
+                        } fra arbeidslisten.`}
+                    </Normaltekst>
                 </div>
-            </NavFrontendModal>
-        );
-    }
-
-    fjernFraModal(valgteBrukere) {
-        const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-
-        return (
-            <VarselModal
-                isOpen={this.state.isOpen}
-                onRequestClose={this.lukkModal}
-                contentLabel="Fjern brukere fra arbeidsliste"
-                type={VarselModalType.ADVARSEL}
-                dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
-            >
-                <div className="fjern-arbeidsliste">
-                    <div className="arbeidsliste-headertekst">
-                        <Innholdstittel tag="h1" className="blokk-xs">
-                            Fjern fra arbeidsliste
-                        </Innholdstittel>
-                        <Normaltekst className="blokk-s">
-                            {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
-                                brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
-                            } fra arbeidslisten.`}
-                        </Normaltekst>
-                    </div>
-                    <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={this.lukkModal} />
-                </div>
-            </VarselModal>
-        );
-    }
-
-    render() {
-        const {valgteBrukere} = this.props;
-        const fjerne = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-        return this.state.laster ? (
-            <LasterModal />
-        ) : fjerne ? (
-            this.fjernFraModal(valgteBrukere)
-        ) : (
-            this.leggTilModal(valgteBrukere)
-        );
-    }
-}
+                <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={lukkModal} />
+            </div>
+        </VarselModal>
+    ) : (
+        <NavFrontendModal
+            className="arbeidsliste-modal legg-i-arbeidsliste"
+            contentLabel="arbeidsliste"
+            isOpen={open}
+            onRequestClose={lukkModal}
+            closeButton
+        >
+            <ModalHeader tittel="Legg i arbeidsliste" />
+            <div className="modal-innhold">
+                <LeggTilArbeidslisteForm
+                    valgteBrukere={valgteBrukere}
+                    lukkModal={lukkModal}
+                    innloggetVeileder={innloggetVeileder}
+                    setFormIsDirty={setFormIsDirty}
+                />
+            </div>
+        </NavFrontendModal>
+    );
+};
 
 const mapStateToProps = (state: AppState) => ({
     innloggetVeileder: state.innloggetVeileder.data!.ident,
