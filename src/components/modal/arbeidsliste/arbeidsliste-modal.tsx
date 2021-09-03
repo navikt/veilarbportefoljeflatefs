@@ -36,7 +36,6 @@ const ArbeidslisteModal: React.FC<Props> = ({
     const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
 
-    console.log('hello');
     const lukkModal = () => {
         const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!formIsDirty || window.confirm(dialogTekst)) {
