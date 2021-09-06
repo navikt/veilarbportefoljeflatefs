@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Lenke from 'nav-frontend-lenker';
 import AlertStripe from 'nav-frontend-alertstriper';
 import './modal/feilmelding-brukere.less';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
@@ -9,7 +8,7 @@ const AlertstripeTekniskeProblemer = () => {
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
     return erAlertstripeFeilmeldingFeatureTogglePa ? (
-        <AlertStripe type="advarsel" className="stor-feil-modal" >
+        <AlertStripe type="advarsel" className="stor-feil-modal">
             Vi har en varierende treghet i oversikten som gjør at det kan ta opptil et kvarter før tildelte brukere
             dukker opp i Min oversikt, og at filtre på dialog og aktiviteter oppdateres. Det vil også kunne gi
             feilmelding ved bruk av arbeidslista. Vi jobber med å finne løsning på problemet.
