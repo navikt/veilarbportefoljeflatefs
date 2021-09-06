@@ -9,15 +9,10 @@ const AlertstripeTekniskeProblemer = () => {
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
 
     return erAlertstripeFeilmeldingFeatureTogglePa ? (
-        <AlertStripe type="advarsel" className="stor-feil-modal">
-            Oversikten og aktivitetsplanen vil være utilgjengelig fra lørdag 4. september kl. 09.00. Systemene forventes
-            å være oppe igjen lørdag ettermiddag.{' '}
-            <Lenke
-                href="https://navno.sharepoint.com/sites/intranett-driftsmeldinger/SitePages/Planlagt-nedetid--Modia-arbeidsrettet-oppf%C3%B8lging-har-l%C3%B8rdag-formiddag.aspx"
-                target="_blank"
-            >
-                <b>Les mer på Navet.</b>
-            </Lenke>
+        <AlertStripe type="advarsel" className="stor-feil-modal" >
+            Vi har en varierende treghet i oversikten som gjør at det kan ta opptil et kvarter før tildelte brukere
+            dukker opp i Min oversikt, og at filtre på dialog og aktiviteter oppdateres. Det vil også kunne gi
+            feilmelding ved bruk av arbeidslista. Vi jobber med å finne løsning på problemet.
         </AlertStripe>
     ) : null;
 };
