@@ -36,8 +36,6 @@ export function useRedirectOnMount() {
         } else if (location.pathname === '/tilbake' || location.pathname === '/') {
             history.push('/enhet');
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
-        } else {
-            dispatch(settSortering('ikke_satt', 'ikke_satt'));
         }
     });
 }
