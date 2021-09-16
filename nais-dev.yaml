@@ -8,6 +8,7 @@ metadata:
         team: pto
     annotations:
         nais.io/run-as-group: '0'
+        nais.io/read-only-file-system: 'false'
 spec:
     image: docker.pkg.github.com/navikt/veilarbportefoljeflatefs/veilarbportefoljeflatefs:{{version}}
     port: 8080
