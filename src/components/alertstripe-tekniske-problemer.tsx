@@ -9,9 +9,8 @@ const AlertstripeTekniskeProblemer = () => {
 
     return erAlertstripeFeilmeldingFeatureTogglePa ? (
         <AlertStripe type="advarsel" className="stor-feil-modal">
-            Vi har en varierende treghet i oversikten som gjør at det kan ta opptil et kvarter før tildelte brukere
-            dukker opp i Min oversikt, og at filtre på dialog og aktiviteter oppdateres. Det vil også kunne gi
-            feilmelding ved bruk av arbeidslista. Vi jobber med å finne løsning på problemet.
+            Vi opplever treghet i oversikten som gjør at noen statusfilter kan vise feil. Vi jobber med å finne løsning
+            på problemet, og beklager ulempen det medfører.{' '}
         </AlertStripe>
     ) : null;
 };
