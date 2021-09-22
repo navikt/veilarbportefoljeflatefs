@@ -1,4 +1,4 @@
-name: Bygg og Deploy branch til Dev
+name: Deploy til Q1
 on:
     workflow_dispatch:
         environment:
