@@ -1,4 +1,4 @@
-name: Deploy til Q1
+name: Deploy til Q1 - ${{ github.head_ref }}
 on: [workflow_dispatch]
 env:
     IMAGE_TAG: ${{ github.sha }}
