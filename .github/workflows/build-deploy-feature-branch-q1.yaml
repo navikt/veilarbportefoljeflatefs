@@ -6,12 +6,32 @@ env:
     PRINT_PAYLOAD: true
 
 jobs:
+    link-to-trello:
+        runs-on: ubuntu-latest
+        name: Trello update
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Get trello card id
+              id: card
+              uses: navikt/veilarbtrelloactions/get-card@v2.0
+              with:
+                  key: ${{ secrets.TRELLO_KEY }}
+                  token: ${{ secrets.TRELLO_TOKEN }}
+                  board: BcjrjQZk
+            - name: Attach branch to card
+              id: Attach
+              uses: navikt/veilarbtrelloactions/create-attachment@v2.0
+              if: ${{ steps.card.outputs.success }}
+              with:
+                  key: ${{ secrets.TRELLO_KEY }}
+                  token: ${{ secrets.TRELLO_TOKEN }}
+                  card-id: ${{ steps.card.outputs.card-id }}
+                  attachment-type: branch
     build:
         name: Build Project
         runs-on: ubuntu-latest
         steps:
-            - name: Branch navn
-              run: echo running on branch ${GITHUB_REF##*/}
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
               with:
@@ -50,7 +70,7 @@ jobs:
                   docker build -t ${IMAGE}:${IMAGE_TAG} .
                   docker push ${IMAGE}:${IMAGE_TAG}
     deploy-dev:
-        name: Deploy til Q1
+        name: Deploy q1 fss
         needs:
             - build-docker-image
         runs-on: ubuntu-latest
