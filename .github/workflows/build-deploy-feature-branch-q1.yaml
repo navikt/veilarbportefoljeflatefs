@@ -61,17 +61,3 @@ jobs:
                   CLUSTER: dev-fss
                   RESOURCE: nais-dev.yaml
                   VAR: version=${{ env.IMAGE_TAG }},namespace=pto
-    release-dev:
-        name: Create dev release
-        needs:
-            - deploy-dev
-        runs-on: ubuntu-latest
-        steps:
-            - name: Create release
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tag_name: release/dev@${{ env.IMAGE_TAG }}
-                  release_name: Release to dev
-                  prerelease: true
