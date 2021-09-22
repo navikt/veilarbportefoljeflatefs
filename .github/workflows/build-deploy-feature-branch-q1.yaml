@@ -10,6 +10,8 @@ jobs:
         name: Build Project
         runs-on: ubuntu-latest
         steps:
+            - name: Branch navn
+              run: echo running on branch ${GITHUB_REF##*/}
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
               with:
