@@ -41,7 +41,6 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-node-cache
             - name: Build production artifact
-              run: npm ci
               run: npm run build
             - name: Build and publish Docker image
               env:
