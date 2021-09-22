@@ -22,7 +22,9 @@ jobs:
                   key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: |
                       ${{ runner.os }}-node-cache
+            - run: npm ci
             - run: npm run build
+            - run: npm run test
     build-docker-image:
         runs-on: ubuntu-latest
         name: Build and publish Docker image
@@ -38,6 +40,9 @@ jobs:
                   key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: |
                       ${{ runner.os }}-node-cache
+            - name: Build production artifact
+              run: npm ci
+              run: npm run build
             - name: Build and publish Docker image
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
