@@ -1,10 +1,10 @@
 name: Deploy til Q1
-on:
-    workflow_dispatch:
-        environment:
-            description: 'Miljø'
-            required: true
-            default: 'Q1'
+on: [workflow_dispatch]
+env:
+    IMAGE_TAG: ${{ github.sha }}
+    IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
+    PRINT_PAYLOAD: true
+
 jobs:
     build:
         name: Build Project
