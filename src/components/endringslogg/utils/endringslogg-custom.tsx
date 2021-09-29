@@ -215,6 +215,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 />
             </>
         )
+    },
+    {
+        dato: '29. Sep 2021',
+        tittel: 'Ny informasjon i Detaljer under Personalia',
+        versjonId: '29.09.21',
+        tekst:
+            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.',
     }
 ];
 
