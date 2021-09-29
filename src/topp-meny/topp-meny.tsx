@@ -1,8 +1,9 @@
 import React from 'react';
-import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 import './lenker.less';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
+import {Endringslogg} from 'endringslogg';
+import 'endringslogg/dist/bundle.css';
 import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
@@ -24,8 +25,16 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
         <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
+            <div style={{gridColumn: 4, justifySelf: 'end'}}>
+                <Endringslogg
+                    userId="1"
+                    appId="afolg"
+                    backendUrl="http://localhost:8080"
+                    appName="Arbeidsrettet oppfølging"
+                    alignLeft
+                />
+            </div>
             <Toasts />
-            <EndringsloggTourWrapper />
         </div>
     );
 }

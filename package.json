@@ -55,6 +55,7 @@
         "cypress-drag-drop": "^1.1.1",
         "cypress-run": "^1.1.1",
         "cypress-wait-until": "^1.7.1",
+        "endringslogg": "^2.0.4",
         "express": "4.17.1",
         "faker": "4.1.0",
         "formik": "^2.2.6",
