@@ -20,6 +20,13 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '30. Sep 2021',
+        tittel: 'Ny informasjon i Detaljer under Personalia',
+        versjonId: '30.09.21',
+        tekst:
+            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.',
+    },
+    {
         dato: '16. juni 2021',
         tittel: 'Forhåndsorientering vises i aktiviteten',
         versjonId: '16.06.21',
@@ -216,13 +223,6 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             </>
         )
     },
-    {
-        dato: '30. Sep 2021',
-        tittel: 'Ny informasjon i Detaljer under Personalia',
-        versjonId: '30.09.21',
-        tekst:
-            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.',
-    }
 ];
 
 export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
