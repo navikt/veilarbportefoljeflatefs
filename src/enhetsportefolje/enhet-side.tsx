@@ -39,7 +39,7 @@ import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-pro
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 
-function antallFilter(filtervalg) {
+export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
         return Object.entries(value)
             .map(([_, verdi]) => {

@@ -5,6 +5,7 @@ import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
+import {antallFilter} from '../../enhetsportefolje/enhet-side';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
 
     useEffect(() => {
         if (enhet && sorteringsrekkefolge && sorteringsfelt) {
-            if (oversiktType === OversiktType.enhetensOversikt) {
+            if (oversiktType === OversiktType.enhetensOversikt && antallFilter(filtervalg)) {
                 dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
             } else if (oversiktType === OversiktType.minOversikt && gjeldendeVeileder) {
                 dispatch(
