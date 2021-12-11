@@ -20,11 +20,27 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
-        dato: '30. Sep 2021',
+        dato: '19. oktober 2021',
+        tittel: 'Rekrutteringsbistand + aktivitetsplan',
+        versjonId: '19.10.21',
+        children: (
+            <>
+                Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra
+                NAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller
+                nei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.
+                <EndringsloggLinkMedIkon
+                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx"
+                    linkTekst="Se mer informasjon på Navet"
+                />
+            </>
+        )
+    },
+    {
+        dato: '30. september 2021',
         tittel: 'Ny informasjon i Detaljer under Personalia',
         versjonId: '30.09.21',
         tekst:
-            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.',
+            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.'
     },
     {
         dato: '16. juni 2021',
@@ -222,7 +238,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                 />
             </>
         )
-    },
+    }
 ];
 
 export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
