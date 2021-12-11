@@ -1,2 +1,2 @@
-FROM ghcr.io/navikt/pus-fss-frontend/pus-fss-frontend:1c352636abafb45d7ab17329240b620932f1fdc9
+FROM ghcr.io/navikt/pus-fss-frontend/pus-fss-frontend:b71eb91a9d67d4c8240541ca350ebd3ddb7dc563
 COPY build /app/public
