@@ -318,7 +318,11 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                 // Venter litt slik at indeks kan komme i sync
                 setTimeout(() => {
                     const enhet = getState().valgtEnhet.data.enhetId;
-                    hentStatusTall(enhet, veilederIdent)(dispatch);
+                    if (oversiktType === OversiktType.minOversikt) {
+                        hentStatusTall(enhet, veilederIdent)(dispatch);
+                    } else {
+                        hentStatusTall(enhet)(dispatch);
+                    }
                 }, 2000);
             });
     };
