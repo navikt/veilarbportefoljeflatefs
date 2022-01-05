@@ -130,7 +130,12 @@ function MinOversiktListeHode({
                     title="Fristdato som er satt i arbeidslisten"
                     headerId="arbeidsliste-frist"
                 />
-                <Header
+                <SorteringHeader
+                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    tekst="Arbeidsliste tittel"
                     skalVises={
                         !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
                         valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
@@ -138,9 +143,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                     title="Tittel som er skrevet i arbeidslisten"
                     headerId="arbeidsliste-overskrift"
-                >
-                    Arbeidsliste tittel
-                </Header>
+                />
                 <SorteringHeader
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
