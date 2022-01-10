@@ -1,11 +1,12 @@
 import {useEffect} from 'react';
-import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
+import {hentArbeidslisteforVeileder, hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
 import {useDispatch} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
+import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
@@ -27,6 +28,9 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
                         filtervalg
                     )
                 );
+                if (filtervalg.ferdigfilterListe?.includes(MIN_ARBEIDSLISTE)) {
+                    dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
+                }
             }
         }
     }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
