@@ -36,14 +36,13 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
     useEffect(() => {
         if (
             enhet &&
-            oversiktType === OversiktType.minOversikt &&
             gjeldendeVeileder &&
-            filtervalg.ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-            portefolje.status === STATUS.OK
+            portefolje.status === STATUS.OK &&
+            (oversiktType === OversiktType.minOversikt || oversiktType === OversiktType.veilederOversikt)
         ) {
             dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
         }
-    }, [dispatch, enhet, filtervalg, gjeldendeVeileder, oversiktType, portefolje.status]);
+    }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
 
     useEffect(() => {
         oppdaterAlternativer(dispatch, filtervalg, oversiktType);
