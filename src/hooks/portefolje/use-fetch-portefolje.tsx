@@ -19,21 +19,19 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             if (oversiktType === OversiktType.enhetensOversikt && antallFilter(filtervalg)) {
                 dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
             } else if (oversiktType === OversiktType.minOversikt && gjeldendeVeileder) {
-                dispatch(
-                    hentPortefoljeForVeileder(
-                        enhet,
-                        gjeldendeVeileder,
-                        sorteringsrekkefolge,
-                        sorteringsfelt,
-                        filtervalg
-                    )
-                );
-                if (filtervalg.ferdigfilterListe?.includes(MIN_ARBEIDSLISTE)) {
-                    dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
-                }
+                fetchPortefoljeVeileder();
             }
         }
     }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
+
+    const fetchPortefoljeVeileder = async () => {
+        await dispatch(
+            hentPortefoljeForVeileder(enhet, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg)
+        );
+        if (filtervalg.ferdigfilterListe?.includes(MIN_ARBEIDSLISTE)) {
+            await dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
+        }
+    };
 
     useEffect(() => {
         oppdaterAlternativer(dispatch, filtervalg, oversiktType);
