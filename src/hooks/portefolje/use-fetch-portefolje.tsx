@@ -29,9 +29,6 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
                         filtervalg
                     )
                 );
-                if (filtervalg.ferdigfilterListe?.includes(MIN_ARBEIDSLISTE)) {
-                    dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
-                }
             }
         }
     }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
