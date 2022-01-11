@@ -6,7 +6,6 @@ import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
-import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
 import {STATUS} from '../../ducks/utils';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
@@ -38,7 +37,7 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             enhet &&
             gjeldendeVeileder &&
             portefolje.status === STATUS.OK &&
-            (oversiktType === OversiktType.minOversikt || oversiktType === OversiktType.veilederOversikt)
+            oversiktType === OversiktType.minOversikt
         ) {
             dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
         }
