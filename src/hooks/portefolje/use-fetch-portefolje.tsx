@@ -14,16 +14,6 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);
 
-    useEffect(() => {
-        if (enhet && sorteringsrekkefolge && sorteringsfelt) {
-            if (oversiktType === OversiktType.enhetensOversikt && antallFilter(filtervalg)) {
-                dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
-            } else if (oversiktType === OversiktType.minOversikt && gjeldendeVeileder) {
-                fetchPortefoljeVeileder();
-            }
-        }
-    }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
-
     const fetchPortefoljeVeileder = async () => {
         await dispatch(
             hentPortefoljeForVeileder(enhet, gjeldendeVeileder, sorteringsrekkefolge, sorteringsfelt, filtervalg)
@@ -32,6 +22,25 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             await dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
         }
     };
+
+    useEffect(() => {
+        if (enhet && sorteringsrekkefolge && sorteringsfelt) {
+            if (oversiktType === OversiktType.enhetensOversikt && antallFilter(filtervalg)) {
+                dispatch(hentPortefoljeForEnhet(enhet, sorteringsrekkefolge, sorteringsfelt, filtervalg));
+            } else if (oversiktType === OversiktType.minOversikt && gjeldendeVeileder) {
+                fetchPortefoljeVeileder();
+            }
+        }
+    }, [
+        dispatch,
+        enhet,
+        sorteringsfelt,
+        sorteringsrekkefolge,
+        filtervalg,
+        gjeldendeVeileder,
+        oversiktType,
+        fetchPortefoljeVeileder
+    ]);
 
     useEffect(() => {
         oppdaterAlternativer(dispatch, filtervalg, oversiktType);
