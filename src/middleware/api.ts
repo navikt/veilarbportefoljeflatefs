@@ -67,6 +67,11 @@ export function hentVeiledersPortefolje(
     return fetchToJson(url, config);
 }
 
+export function hentArbeidslisteForVeileder(enhet, veilederident) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/hentArbeidslisteForVeileder?enhet=${enhet}`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
+
 export function hentEnhetsVeiledere(enhetId) {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);

@@ -19,6 +19,9 @@ const ytelser = [
     'TILTAKSPENGER'
 ];
 
+let mockAktoeridLopenummer = 0;
+const arbeidsliste: any = [];
+
 function partall() {
     return rnd(0, 4) * 2;
 }
@@ -80,7 +83,7 @@ function lagYtelse() {
         ytelse,
         utlopsdato: '',
         aapmaxtidUke: '',
-        aapUnntakUkerIgjen: '',
+        aapUnntakUkerIgjen: ''
     };
 
     const dag = rnd(1, 31);
@@ -128,7 +131,7 @@ function lagVedtakUtkast() {
     };
 }
 
-function lagArbeidsliste() {
+function lagArbeidsliste(aktoerid) {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
         return {
@@ -152,16 +155,25 @@ function lagArbeidsliste() {
         kategori = KategoriModell.LILLA;
     }
 
-    return {
-        overskrift: lagOverskrift(),
-        kommentar:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do',
+    const arbeidslisteElement = {
+        overskrift: null,
+        kommentar: null,
         frist: new Date(),
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: true,
         sistEndretAv: {veilederId: innloggetVeileder.ident},
         kategori
     };
+
+    arbeidsliste.push({
+        ...arbeidslisteElement,
+        aktoerid: aktoerid,
+        overskrift: lagOverskrift(),
+        kommentar:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do'
+    });
+
+    return arbeidslisteElement;
 }
 
 function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
@@ -172,13 +184,16 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const nyForEnhet = Math.random() < 25 / 100;
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
 
+    const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
-    const arbeidsliste = lagArbeidsliste();
+    const arbeidsliste = lagArbeidsliste(aktoerid);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
+
     return {
         fnr: grunndata.fnr,
+        aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
         veilederId,
@@ -230,5 +245,9 @@ const randomDate = ({past}) => {
     }
     return new Date(ar, mnd - 1, dag).toISOString();
 };
+
+export function hentArbeidsliste() {
+    return arbeidsliste;
+}
 
 export default new Array(123).fill(0).map(() => lagBruker());
