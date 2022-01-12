@@ -26,6 +26,7 @@ const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEI
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
+const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
@@ -95,6 +96,23 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
             return {
                 ...bruker,
                 arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker[0]}
+            };
+        }
+        return bruker;
+    });
+}
+
+function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
+    return brukere.map(bruker => {
+        const arbeidslisteForBruker = arbeidsliste.find(a => a.aktoerid === bruker.aktoerid);
+        if (arbeidslisteForBruker) {
+            return {
+                ...bruker,
+                arbeidsliste: {
+                    ...bruker.arbeidsliste,
+                    overskrift: arbeidslisteForBruker.overskrift,
+                    kommentar: arbeidslisteForBruker.kommentar
+                }
             };
         }
         return bruker;
@@ -195,6 +213,15 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 data: {
                     ...state.data,
                     brukere: updateArbeidslisteForBrukere(state.data.brukere, action.arbeidsliste)
+                }
+            };
+        }
+        case OPPDATER_ARBEIDSLISTE_VEILEDER: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: leggTilTittelOgKommentarArbeidsliste(state.data.brukere, action.arbeidsliste)
                 }
             };
         }
@@ -334,4 +361,15 @@ export function oppdaterArbeidslisteForBruker(arbeidsliste) {
             type: OPPDATER_ARBEIDSLISTE,
             arbeidsliste
         });
+}
+
+export function hentArbeidslisteforVeileder(enhet, veileder) {
+    return dispatch => {
+        Api.hentArbeidslisteForVeileder(enhet, veileder).then(arbeidsliste => {
+            dispatch({
+                type: OPPDATER_ARBEIDSLISTE_VEILEDER,
+                arbeidsliste
+            });
+        });
+    };
 }
