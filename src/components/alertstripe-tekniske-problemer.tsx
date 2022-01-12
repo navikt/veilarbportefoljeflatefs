@@ -9,8 +9,13 @@ const AlertstripeTekniskeProblemer = () => {
 
     return erAlertstripeFeilmeldingFeatureTogglePa ? (
         <AlertStripe type="advarsel" className="stor-feil-modal">
-            Vi opplever treghet i oversikten som gjør at noen statusfilter kan vise feil. Vi jobber med å finne løsning
-            på problemet, og beklager ulempen det medfører.{' '}
+            <b>
+                Oversikten i Modia arbeidsrettet oppfølging blir ikke oppdatert fra onsdag 12. januar kl. 16.00 til
+                torsdag morgen
+            </b>
+            <br />
+            Brukerlisten er tilgjengelig, men det vil ikke være oppdatert informasjon i filtrene på grunn av tekniske
+            oppgraderinger.
         </AlertStripe>
     ) : null;
 };
