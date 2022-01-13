@@ -2,10 +2,9 @@ import * as React from 'react';
 import classNames from 'classnames';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
-import {ReactComponent as PilStigende} from './arrow-up.svg';
-import {ReactComponent as PilSynkende} from './arrow-down.svg';
 import './tabell.less';
 import {OrNothing} from '../../utils/types/types';
+import {Down, Up} from '@navikt/ds-icons';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -34,9 +33,9 @@ function SorteringHeader({
     const sorteringspil = () => {
         const className = 'sorteringheader__pil';
         if (sorteringsrekkefolge === Sorteringsrekkefolge.stigende) {
-            return <PilStigende className={className} />;
+            return <Up className={className} />;
         } else if (sorteringsrekkefolge === Sorteringsrekkefolge.synkende) {
-            return <PilSynkende className={className} />;
+            return <Down className={className} />;
         } else {
             return null;
         }

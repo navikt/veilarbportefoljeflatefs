@@ -1,11 +1,11 @@
 import classNames from 'classnames/dedupe';
 import {Normaltekst, Undertekst, Undertittel} from 'nav-frontend-typografi';
 import {default as React} from 'react';
-import {ReactComponent as LinkIcon} from './external-link.svg';
-import Lenke from 'nav-frontend-lenker';
 import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {Link} from '@navikt/ds-react';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface EndringsloggInnleggProps {
     dato: string;
@@ -21,10 +21,10 @@ interface EndringsloggInnholdProps {
 
 export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; className?: string}) {
     return (
-        <Lenke className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
+        <Link className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
             {props.linkTekst ? props.linkTekst : props.url}
-            <LinkIcon className="linkikon" />
-        </Lenke>
+            <ExternalLink className="linkikon" />
+        </Link>
     );
 }
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import {ReactComponent as PilStigende} from '../components/tabell/arrow-up.svg';
-import {ReactComponent as PilSynkende} from '../components/tabell/arrow-down.svg';
 import './veiledere.less';
+import {Down, Up} from '@navikt/ds-icons';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -42,9 +41,9 @@ function VeilederTabell(props: VeiledereTabellProps) {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
             if (currentSortering.direction === 'stigende') {
-                return <PilStigende className={className} data-testid="sorteringspil_stigende" />;
+                return <Up className={className} data-testid="sorteringspil_stigende" />;
             } else if (currentSortering.direction === 'synkende') {
-                return <PilSynkende className={className} data-testid="sorteringspil_synkende" />;
+                return <Down className={className} data-testid="sorteringspil_synkende" />;
             }
         }
         return null;

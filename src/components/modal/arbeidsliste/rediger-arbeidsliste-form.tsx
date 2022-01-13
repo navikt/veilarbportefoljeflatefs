@@ -8,8 +8,8 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
 import {Button} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -70,13 +70,13 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Avbryt
                 </Button>
                 <Button
-                    variant="tertiary"
+                    variant="danger"
                     type="button"
                     onClick={fjernBruker}
                     className="fjern--knapp"
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <SlettIcon />
+                    <Delete />
                     <span>Fjern</span>
                 </Button>
             </div>

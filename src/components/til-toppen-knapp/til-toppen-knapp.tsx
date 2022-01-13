@@ -2,9 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import './til-toppen-knapp.less';
-import {ReactComponent as TilToppenIkonBla} from '../ikoner/til-toppen-bla.svg';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
+import {Up} from '@navikt/ds-icons';
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();
@@ -43,7 +43,7 @@ export const TilToppenKnapp = () => {
             onClick={onClick}
             data-testid="til-toppen_knapp"
         >
-            <TilToppenIkonBla />
+            <Up />
         </button>
     );
 };

@@ -1,12 +1,12 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {ReactComponent as SlettIkon} from './remove-circle.svg';
 import React from 'react';
 import classNames from 'classnames';
 import './modal.less';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 import {Button} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 
 interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
@@ -50,7 +50,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                                         onClick={() => props.fjernValgtVeileder(veileder.ident)}
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     >
-                                        <SlettIkon />
+                                        <Delete />
                                     </Button>
                                 </div>
                             ))}

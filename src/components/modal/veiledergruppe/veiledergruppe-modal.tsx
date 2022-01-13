@@ -15,6 +15,7 @@ import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -246,13 +247,14 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         </Button>
                         {props.onSlett && (
                             <Button
-                                variant="tertiary"
+                                variant="danger"
                                 className="veiledergruppe-modal__knappegruppe__slett"
                                 onClick={() => setSletteVeiledergruppeModal(true)}
                                 type="button"
                                 data-testid="veiledergruppe_modal_slette-knapp"
                             >
                                 Slett gruppe
+                                <Delete />
                             </Button>
                         )}
                     </div>

@@ -29,11 +29,11 @@ import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
+import {Information} from '@navikt/ds-icons';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -115,7 +115,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Information className="registreringsfilter__infoikon" />
                                 <Normaltekst className="registreringsfilter__infotekst">
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
@@ -136,7 +136,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Information className="registreringsfilter__infoikon" />
                                 <Normaltekst className="registreringsfilter__infotekst">
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>
@@ -156,7 +156,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
+                                <Information className="registreringsfilter__infoikon" />
                                 <Normaltekst className="registreringsfilter__infotekst">
                                     Svarene brukeren oppga på registreringstidspunktet.
                                 </Normaltekst>

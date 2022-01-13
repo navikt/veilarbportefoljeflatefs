@@ -1,10 +1,8 @@
 import React from 'react';
 import ModalWrapper from 'nav-frontend-modal';
-import {ReactComponent as AdvarselSirkelIkon} from './advarsel-sirkel.svg';
-import {ReactComponent as SuksessSirkelIkon} from './ok-sirkel.svg';
-import {ReactComponent as FeilSirkelIkon} from './feil-sirkel.svg';
 import classNames from 'classnames';
 import './varsel-modal.less';
+import {Error, Success, Warning} from '@navikt/ds-icons';
 
 export enum VarselModalType {
     ADVARSEL,
@@ -60,11 +58,11 @@ export function VarselModal({
 function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
-            return <AdvarselSirkelIkon />;
+            return <Warning />;
         case VarselModalType.FEIL:
-            return <FeilSirkelIkon />;
+            return <Error />;
         case VarselModalType.SUKSESS:
-            return <SuksessSirkelIkon />;
+            return <Success />;
         default:
             return null;
     }

@@ -113,30 +113,16 @@
                 border: none !important;
                 width: 20px;
                 padding: 0 0 10px;
-                background-color: transparent;
-
-                svg {
-                    stroke: @navGra60;
-                }
+                color: black;
             }
 
             .fjern--knapp:hover {
+                box-shadow: none !important;
                 svg {
-                    g {
-                        stroke: @navBla;
-                    }
+                    color: @navBla;
                 }
             }
 
-            .fjern--knapp:focus {
-                box-shadow: none;
-
-                svg {
-                    g {
-                        stroke: @navBla;
-                    }
-                }
-            }
         }
     }
 

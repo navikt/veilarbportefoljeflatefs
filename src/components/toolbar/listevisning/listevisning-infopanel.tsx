@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OversiktType, lukkInfopanel} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
-import {ReactComponent as Ikon} from './info-ikon.svg';
 import './listevisning.less';
+import {Information} from '@navikt/ds-icons';
 
 interface StateProps {
     skalVises: boolean;
@@ -30,7 +30,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     return (
         <div className="alertstripe alertstripe--solid alertstripe--info blokk-m">
             <span className="alertstripe__ikon" aria-label="info">
-                <Ikon />
+                <Information />
             </span>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
                 <span> Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.</span>
