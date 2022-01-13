@@ -6,10 +6,9 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import {PopoverOrientering} from 'nav-frontend-popover';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
+import {HelpText} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
     form: string;
@@ -92,14 +91,14 @@ export function HendelserFilterform({
                                 {ulesteEndringer.ULESTE_ENDRINGER}
                             </label>
                         </div>
-                        <Hjelpetekst
-                            type={PopoverOrientering.Hoyre}
+                        <HelpText
+                            placement="right"
                             className={`hjelpetekst__${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                         >
                             Filteret viser brukere som har endret målet, lagt til, fullført
                             <br />
                             eller avbrutt en aktivitet siden du sist var inne på aktivitetsplanen.
-                        </Hjelpetekst>
+                        </HelpText>
                     </div>
                 )}
 

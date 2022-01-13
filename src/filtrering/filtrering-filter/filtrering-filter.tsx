@@ -25,7 +25,6 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
-import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
@@ -273,7 +272,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                    orientering={PopoverOrientering.Hoyre}
                 />
                 <Dropdown
                     name="Aktivitet"
