@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import AlertStripe from 'nav-frontend-alertstriper';
 import {Checkbox} from 'nav-frontend-skjema';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
@@ -10,6 +9,7 @@ import {AppState} from '../../reducer';
 import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import {Alert} from '@navikt/ds-react';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
@@ -102,13 +102,13 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     } else {
         return (
             <div className="checkbox-liste__valg-footer">
-                <AlertStripe
-                    type="info"
+                <Alert
+                    variant="info"
                     className="checkbox-filterform__alertstripe"
                     data-testid="veilederoversikt_alertstripe_info"
                 >
                     Ingen veiledere funnet
-                </AlertStripe>
+                </Alert>
             </div>
         );
     }

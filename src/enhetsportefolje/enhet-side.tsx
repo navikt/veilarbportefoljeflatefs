@@ -33,11 +33,11 @@ import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal
 import {useWindowWidth} from '../hooks/use-window-width';
 import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
-import Alertstripe from 'nav-frontend-alertstriper';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
+import {Alert} from '@navikt/ds-react';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -225,8 +225,8 @@ export default function EnhetSide() {
                                 </div>
                             </div>
                         ) : (
-                            <Alertstripe
-                                type="info"
+                            <Alert
+                                variant="info"
                                 className="blokk-m alertstripe__filtrering"
                                 aria-live="assertive"
                                 role="alert"
@@ -234,7 +234,7 @@ export default function EnhetSide() {
                                 data-testid="alertstripe_filtrering"
                             >
                                 Du må gjøre en filtrering for å se brukere i listen.
-                            </Alertstripe>
+                            </Alert>
                         )}
                     </div>
                 </Innholdslaster>

@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
-import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -78,9 +78,9 @@ function CheckboxFilterform({
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe">
                     {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
-                </AlertStripe>
+                </Alert>
             )}
         </form>
     );

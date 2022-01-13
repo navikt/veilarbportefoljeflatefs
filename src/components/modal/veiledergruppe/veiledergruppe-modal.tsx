@@ -15,8 +15,7 @@ import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
-import {AlertStripeAdvarsel} from 'nav-frontend-alertstriper';
-import hiddenIf from '../../hidden-if/hidden-if';
+import {Alert} from '@navikt/ds-react';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -40,8 +39,6 @@ interface VeiledergruppeErrors {
     gruppeNavn: OrNothing<string>;
     filterValg: OrNothing<string>;
 }
-
-const HiddenIfAlertStripe = hiddenIf(AlertStripeAdvarsel);
 
 export function VeiledergruppeModal(props: VeilederModalProps) {
     const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
@@ -217,13 +214,11 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                 className={props.className}
             >
                 <ModalHeader tittel={props.modalTittel} />
-                <HiddenIfAlertStripe
-                    hidden={alertTekst.length === 0}
-                    className="alerttext"
-                    data-testid="veiledergruppe_modal_alertstripe"
-                >
-                    {alertTekst}
-                </HiddenIfAlertStripe>
+                {alertTekst.length !== 0 && (
+                    <Alert variant="warning" className="alerttext" data-testid="veiledergruppe_modal_alertstripe">
+                        {alertTekst}
+                    </Alert>
+                )}
                 <VeiledergruppeForm
                     filterValg={filterValg}
                     gruppeNavn={gruppeNavn}

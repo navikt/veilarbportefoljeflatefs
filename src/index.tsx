@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
+import '@navikt/ds-css';
 import './style.less';
 
 if (!(window as any)._babelPolyfill) {

@@ -2,8 +2,8 @@ import React, {useEffect, useRef} from 'react';
 import './toast.less';
 import {useDispatch} from 'react-redux';
 import {useTimer} from '../../hooks/use-timer';
-import AlertStripe from 'nav-frontend-alertstriper';
 import {kebabCase} from '../../utils/utils';
+import {Alert} from '@navikt/ds-react';
 
 interface TimedToastProps {
     toastTekst: string;
@@ -31,13 +31,13 @@ function TimedToast(props: TimedToastProps) {
 
     return (
         <div className="timed-toast" ref={toastRef} tabIndex={0}>
-            <AlertStripe
-                type={props.alertstripe}
+            <Alert
+                variant={props.alertstripe}
                 className="timed-toast__alertstripe"
                 data-testid={`timed-toast_${kebabCase(props.toastTekst)}`}
             >
                 <span className="timed-toast__tekst">{props.toastTekst}</span>
-            </AlertStripe>
+            </Alert>
         </div>
     );
 }

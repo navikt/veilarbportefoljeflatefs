@@ -5,12 +5,12 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
-import AlertStripe from 'nav-frontend-alertstriper';
 import Lukknapp from 'nav-frontend-lukknapp';
 import {useDispatch} from 'react-redux';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {Alert} from '@navikt/ds-react';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -53,7 +53,7 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
         return (
             <>
                 {inaktiveFilter().length !== 0 && (
-                    <AlertStripe type="info" className="mine-filter_alertstripe" data-testid="mine-filter_alertstripe">
+                    <Alert variant="info" className="mine-filter_alertstripe" data-testid="mine-filter_alertstripe">
                         {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${
                             inaktiveFilter()[0].note
                         }' er fjernet.`}
@@ -62,7 +62,7 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
                             onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
                             data-testid="mine-filter_alertstripe_knapp"
                         />
-                    </AlertStripe>
+                    </Alert>
                 )}
                 <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
                     <DragAndDrop

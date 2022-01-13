@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Input} from 'nav-frontend-skjema';
-import AlertStripe from 'nav-frontend-alertstriper';
+import {Alert} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -53,9 +53,9 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
             {harData ? (
                 children(filteredData)
             ) : (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe">
                     Ingen veiledere funnet
-                </AlertStripe>
+                </Alert>
             )}
         </>
     );

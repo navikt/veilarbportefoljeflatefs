@@ -5,7 +5,6 @@ import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
-import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -17,6 +16,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Info} from '../components/tabell/etikett';
+import {Collapse} from 'react-collapse';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
