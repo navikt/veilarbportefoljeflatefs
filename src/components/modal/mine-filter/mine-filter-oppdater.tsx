@@ -4,7 +4,6 @@ import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {Input} from 'nav-frontend-skjema';
-import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
@@ -15,6 +14,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
+import {Button} from '@navikt/ds-react';
 
 export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; oversiktType}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -79,12 +79,16 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
                     data-testid="redigere-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit" data-testid="rediger-filter_modal_lagre-knapp">
+                    <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
                         Lagre
-                    </Hovedknapp>
-                    <Knapp mini onClick={e => bekreftSletting(e)} data-testid="rediger-filter_modal_slett-knapp">
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={e => bekreftSletting(e)}
+                        data-testid="rediger-filter_modal_slett-knapp"
+                    >
                         Slett
-                    </Knapp>
+                    </Button>
                 </div>
             </form>
             <BekreftSlettingModal

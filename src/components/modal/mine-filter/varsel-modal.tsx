@@ -1,8 +1,8 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import hiddenIf from '../../hidden-if/hidden-if';
+import {Button} from '@navikt/ds-react';
 
 export enum ErrorModalType {
     OPPDATERE,
@@ -43,9 +43,9 @@ export function MineFilterVarselModal(props: {
             <HiddenIfNormalTekst hidden={props.modalType !== ErrorModalType.SLETTE}>
                 Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
             </HiddenIfNormalTekst>
-            <Hovedknapp mini className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
+            <Button className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
                 Lukk
-            </Hovedknapp>
+            </Button>
         </VarselModal>
     );
 }

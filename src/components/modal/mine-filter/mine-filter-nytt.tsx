@@ -1,5 +1,4 @@
 import {Input} from 'nav-frontend-skjema';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
@@ -14,6 +13,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
+import {Button} from '@navikt/ds-react';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
     const filterValg = useSelector((state: AppState) =>
@@ -65,9 +65,9 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
+                    <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
                         Lagre
-                    </Hovedknapp>
+                    </Button>
                 </div>
             </form>
             <MineFilterVarselModal

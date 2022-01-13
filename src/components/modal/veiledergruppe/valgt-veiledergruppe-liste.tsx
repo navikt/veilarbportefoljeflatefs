@@ -1,12 +1,12 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {Flatknapp} from 'nav-frontend-knapper';
 import {ReactComponent as SlettIkon} from './remove-circle.svg';
 import React from 'react';
 import classNames from 'classnames';
 import './modal.less';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
+import {Button} from '@navikt/ds-react';
 
 interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
@@ -43,14 +43,15 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                             {listeMedVeileder.map(veileder => (
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
                                     <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
-                                    <Flatknapp
+                                    <Button
+                                        variant="tertiary"
                                         className="fjern--knapp"
-                                        htmlType="button"
+                                        type="button"
                                         onClick={() => props.fjernValgtVeileder(veileder.ident)}
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     >
                                         <SlettIkon />
-                                    </Flatknapp>
+                                    </Button>
                                 </div>
                             ))}
                         </div>

@@ -6,11 +6,11 @@ import {VeilederModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
 import {Radio} from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.less';
-import {Knapp} from 'nav-frontend-knapper';
 import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
+import {Button} from '@navikt/ds-react';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -85,16 +85,17 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                 ))}
             </div>
             <div className="blokk-xxs filterform__under-valg">
-                <Knapp
+                <Button
+                    variant="secondary"
                     onClick={btnOnClick}
                     className={classNames('knapp', 'knapp--mini', {
                         'knapp--hoved': ident
                     })}
-                    htmlType={ident ? 'submit' : 'button'}
+                    type={ident ? 'submit' : 'button'}
                     data-testid={ident ? 'tildel-veileder_velg-knapp' : 'tildel-veileder_lukk-knapp'}
                 >
                     {ident ? 'Velg' : 'Lukk'}
-                </Knapp>
+                </Button>
             </div>
         </form>
     );

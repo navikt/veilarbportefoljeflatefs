@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {AppState} from '../../../reducer';
-import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import {slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
@@ -10,6 +9,7 @@ import Modal from '../modal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {Normaltekst} from 'nav-frontend-typografi';
 import './mine-filter.less';
+import {Button} from '@navikt/ds-react';
 
 export interface FeilTiltakModalProps {
     gammeltFilterNavn: string;
@@ -55,12 +55,12 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                     Vil du la filteret stå til det deltar brukere på tiltaket igjen, eller vil du slette det?
                 </Normaltekst>
                 <div className="knappegruppe">
-                    <Hovedknapp mini data-testid="la-sta-knapp" onClick={lukkModal}>
+                    <Button data-testid="la-sta-knapp" onClick={lukkModal}>
                         La stå
-                    </Hovedknapp>
-                    <Knapp mini onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
+                    </Button>
+                    <Button variant="secondary" onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
                         Slett
-                    </Knapp>
+                    </Button>
                 </div>
             </Modal>
             <BekreftSlettingModal

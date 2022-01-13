@@ -1,29 +1,30 @@
 import {Normaltekst} from 'nav-frontend-typografi';
 import React from 'react';
-import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import {Visningstype} from './mine-filter-modal';
+import {Button} from '@navikt/ds-react';
 
 const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
-        <Hovedknapp
+        <Button
             className="ny-knapp"
             data-testid="lagre-nytt-filter_modal_knapp"
             onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}
         >
             Lagre som nytt filter
-        </Hovedknapp>
+        </Button>
     );
 };
 
 const oppdaterMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
-        <Knapp
+        <Button
+            variant="secondary"
             className="eksisterende-knapp"
             data-testid="oppdater-eksisterende-filter_modal_knapp"
             onClick={() => setValgtVisningstype(Visningstype.OPPDATER)}
         >
             Oppdater eksisterende filter
-        </Knapp>
+        </Button>
     );
 };
 

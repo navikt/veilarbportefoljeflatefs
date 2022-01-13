@@ -1,9 +1,9 @@
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import React, {PropsWithChildren} from 'react';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
+import {Button} from '@navikt/ds-react';
 
 interface ModalSuksessProps {
     isOpen: boolean;
@@ -31,13 +31,9 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
                 <Normaltekst>{props.tekst}</Normaltekst>
                 {props.children}
             </div>
-            <Hovedknapp
-                htmlType="submit"
-                onClick={props.onRequestClose}
-                data-testid={`modal-suksess_${props.testNavn}`}
-            >
+            <Button type="submit" onClick={props.onRequestClose} data-testid={`modal-suksess_${props.testNavn}`}>
                 {props.hovedknappTekst}
-            </Hovedknapp>
+            </Button>
         </VarselModal>
     );
 }

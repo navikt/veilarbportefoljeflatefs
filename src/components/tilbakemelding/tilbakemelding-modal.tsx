@@ -5,9 +5,9 @@ import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
 import {Textarea} from 'nav-frontend-skjema';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import TilfredshetValg from './tilfredshet-valg';
 import CheckboxValg from './checkbox-valg';
+import {Button} from '@navikt/ds-react';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -110,7 +110,8 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                             Tilbakemelding
                         </Innholdstittel>
                         <Normaltekst className="tilbakemelding-modal__ingress">
-                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og forhåndsorientering i aktivitetsplanen?
+                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og
+                            forhåndsorientering i aktivitetsplanen?
                         </Normaltekst>
                         {visTilfredshet ? (
                             <>
@@ -140,13 +141,13 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                                 />
                                             </div>
                                         )}
-                                        <Hovedknapp
-                                            role="submit"
+                                        <Button
+                                            type="submit"
                                             className="knapp--hoved"
                                             data-testid="tilfredshet_send-knapp"
                                         >
                                             Send
-                                        </Hovedknapp>
+                                        </Button>
                                     </form>
                                 )}
                             </>
@@ -171,9 +172,9 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                 <p className="tilbakemelding-modal__feilmelding" data-testid="tilfredshet_feilmelding">
                                     {feilmelding}
                                 </p>
-                                <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
+                                <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                                     Send
-                                </Hovedknapp>
+                                </Button>
                             </form>
                         )}
                     </>

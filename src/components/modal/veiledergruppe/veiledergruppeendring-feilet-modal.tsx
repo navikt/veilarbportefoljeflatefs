@@ -1,8 +1,8 @@
 import React from 'react';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './modal.less';
+import {Button} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {
     contentLabel: string;
@@ -26,9 +26,9 @@ function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProp
                 <Normaltekst>{props.tekst}</Normaltekst>
             </div>
             <div className="veiledergruppe-feilet-modal__knappegruppe">
-                <Hovedknapp htmlType="submit" onClick={props.onRequestClose}>
+                <Button type="submit" onClick={props.onRequestClose}>
                     Ok
-                </Hovedknapp>
+                </Button>
             </div>
         </VarselModal>
     );

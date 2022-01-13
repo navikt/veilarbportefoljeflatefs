@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {connect} from 'react-redux';
 import {Element} from 'nav-frontend-typografi';
 import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
@@ -11,6 +10,7 @@ import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {ArbeidslisteDataModell, BrukerModell, Status} from '../../../model-interfaces';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
+import {Button} from '@navikt/ds-react';
 
 function brukerLabel(bruker) {
     return (
@@ -50,17 +50,16 @@ function FjernFraArbeidslisteForm({
                 {visBrukerLabel && <ul>{valgteBrukere.map(bruker => brukerLabel(bruker))}</ul>}
             </div>
             <div className="knapper">
-                <Hovedknapp
+                <Button
                     className="knapp knapp--hoved"
-                    spinner={laster}
-                    htmlType="submit"
+                    type="submit"
                     data-testid="modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp"
                 >
                     Bekreft
-                </Hovedknapp>
-                <Flatknapp className="knapp" onClick={lukkModal}>
+                </Button>
+                <Button variant="tertiary" className="knapp" onClick={lukkModal}>
                     Avbryt
-                </Flatknapp>
+                </Button>
             </div>
         </form>
     );

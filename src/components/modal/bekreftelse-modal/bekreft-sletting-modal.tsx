@@ -1,9 +1,9 @@
 import React from 'react';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './bekreft-sletting-modal.less';
 import hiddenIf from '../../hidden-if/hidden-if';
+import {Button} from '@navikt/ds-react';
 
 interface BekreftSlettingModalProps {
     isOpen: boolean;
@@ -38,12 +38,12 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 </Normaltekst>
             </div>
             <div className="bekreft-sletting-modal__knappegruppe">
-                <Hovedknapp htmlType="submit" onClick={slettKnapp} data-testid="bekreft-sletting_modal_slett-knapp">
+                <Button type="submit" onClick={slettKnapp} data-testid="bekreft-sletting_modal_slett-knapp">
                     Slett
-                </Hovedknapp>
-                <Flatknapp htmlType="button" onClick={props.onRequestClose}>
+                </Button>
+                <Button variant="tertiary" type="button" onClick={props.onRequestClose}>
                     Avbryt
-                </Flatknapp>
+                </Button>
             </div>
         </VarselModal>
     );

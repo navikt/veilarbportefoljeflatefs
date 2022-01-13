@@ -1,17 +1,18 @@
 import React from 'react';
-import {ReactComponent as PlussIkon} from './add-circle.svg';
-import {Flatknapp} from 'nav-frontend-knapper';
 import './knapper.less';
+import {Button} from '@navikt/ds-react';
+import {AddCircle} from '@navikt/ds-icons';
 
 export function LeggTilKnapp(props: {onClick: () => void}) {
     return (
-        <Flatknapp
+        <Button
+            variant="tertiary"
             className="veiledergruppe-knapp"
             onClick={props.onClick}
             data-testid="veiledergruppe_ny-gruppe_knapp"
         >
-            <PlussIkon className="ny-gruppe-knapp" />
+            <AddCircle className="ny-gruppe-knapp" />
             <span>Ny gruppe</span>
-        </Flatknapp>
+        </Button>
     );
 }

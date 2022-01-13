@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Form} from 'formik';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
@@ -10,6 +9,7 @@ import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
 import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
+import {Button} from '@navikt/ds-react';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -47,8 +47,8 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 </div>
             </div>
             <div className="modal-footer">
-                <Hovedknapp
-                    htmlType="submit"
+                <Button
+                    type="submit"
                     className="knapp knapp--hoved"
                     data-testid="modal_rediger-arbeidsliste_lagre-knapp"
                     onClick={() => {
@@ -60,23 +60,25 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     }}
                 >
                     Lagre
-                </Hovedknapp>
-                <Flatknapp
+                </Button>
+                <Button
+                    variant="tertiary"
                     className="knapp knapp--avbryt"
                     onClick={props.lukkModal}
                     data-testid="modal_rediger-arbeidsliste_avbryt-knapp"
                 >
                     Avbryt
-                </Flatknapp>
-                <Flatknapp
-                    htmlType="button"
+                </Button>
+                <Button
+                    variant="tertiary"
+                    type="button"
                     onClick={fjernBruker}
                     className="fjern--knapp"
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
                     <SlettIcon />
                     <span>Fjern</span>
-                </Flatknapp>
+                </Button>
             </div>
         </Form>
     );

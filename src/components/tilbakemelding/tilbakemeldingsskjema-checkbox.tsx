@@ -1,7 +1,7 @@
 import CheckboxValg from './checkbox-valg';
 import {Textarea} from 'nav-frontend-skjema';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import * as React from 'react';
+import {Button} from '@navikt/ds-react';
 
 interface TilbakemeldingCheckboxProps {
     handleFormSubmitted: () => void;
@@ -38,9 +38,9 @@ function TilbakemeldingsskjemaCheckbox({
                     data-testid="tilfredshet_kommentarfelt"
                 />
             </div>
-            <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
+            <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                 Send
-            </Hovedknapp>
+            </Button>
         </form>
     );
 }

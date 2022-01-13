@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
 import ModalWrapper from 'nav-frontend-modal';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import {useSelector} from 'react-redux';
@@ -15,7 +14,7 @@ import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './modal.less';
 import ModalHeader from '../modal-header/modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
-import {Alert} from '@navikt/ds-react';
+import {Alert, Button} from '@navikt/ds-react';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -229,30 +228,32 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                     errors={errors}
                 >
                     <div className="veiledergruppe-modal__knappegruppe">
-                        <Hovedknapp
+                        <Button
                             className="veiledergruppe-modal__knappegruppe__lagre"
-                            htmlType="submit"
+                            type="submit"
                             data-testid="veiledergruppe_modal_lagre-knapp"
                         >
                             {props.lagreKnappeTekst}
-                        </Hovedknapp>
-                        <Flatknapp
+                        </Button>
+                        <Button
+                            variant="tertiary"
                             className="veiledergruppe-modal__knappegruppe__avbryt"
-                            htmlType="button"
+                            type="button"
                             onClick={lukkModal}
                             data-testid="veiledergruppe_modal_avbryt-knapp"
                         >
                             Avbryt
-                        </Flatknapp>
+                        </Button>
                         {props.onSlett && (
-                            <Flatknapp
+                            <Button
+                                variant="tertiary"
                                 className="veiledergruppe-modal__knappegruppe__slett"
                                 onClick={() => setSletteVeiledergruppeModal(true)}
-                                htmlType="button"
+                                type="button"
                                 data-testid="veiledergruppe_modal_slette-knapp"
                             >
                                 Slett gruppe
-                            </Flatknapp>
+                            </Button>
                         )}
                     </div>
                 </VeiledergruppeForm>

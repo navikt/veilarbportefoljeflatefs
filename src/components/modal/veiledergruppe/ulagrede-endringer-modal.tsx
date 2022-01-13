@@ -1,8 +1,8 @@
 import React from 'react';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {Innholdstittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './modal.less';
+import {Button} from '@navikt/ds-react';
 
 interface EndringerIkkeLagretModal {
     isOpen: boolean;
@@ -22,25 +22,24 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
             <Innholdstittel className="blokk-s endringer-ikke-lagret-modal__innholdstittel">
                 Endringene er ikke lagret
             </Innholdstittel>
-            <div className="endringer-ikke-lagret-modal__knappegruppe">
-                <Hovedknapp
+            <div className="endringer-ikke-lagret-moda¨__knappegruppe">
+                <Button
                     className="endringer-ikke-lagret-modal__knappegruppe__redigering"
-                    mini
-                    htmlType="button"
+                    type="button"
                     onClick={props.onRequestClose}
                 >
                     Gå tilbake til redigering
-                </Hovedknapp>
-                <Flatknapp
+                </Button>
+                <Button
+                    variant="tertiary"
                     className="endringer-ikke-lagret-modal__knappegruppe__avbryt"
-                    mini
-                    htmlType="submit"
+                    type="submit"
                     onClick={() => {
                         props.onSubmit();
                     }}
                 >
                     Lukk uten å lagre
-                </Flatknapp>
+                </Button>
             </div>
         </VarselModal>
     );
