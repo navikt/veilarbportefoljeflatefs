@@ -1,5 +1,4 @@
 @import '~nav-frontend-core/less/core';
-@import '~nav-frontend-chevron-style/src/index';
 
 @bakgrunnsGra: #f4f4f4;
 
@@ -75,6 +74,10 @@
             display: flex;
             align-items: center;
             margin-left: 1rem;
+
+            .navds-checkbox-group {
+                height: 1.5rem;
+            }
         }
 
         &--min-width-minside {
@@ -129,18 +132,6 @@
                     font-style: italic;
                     border: none;
                 }
-            }
-        }
-
-        &__arbeidslisteknapp--chevron {
-            &-apen {
-                .chevron-mixin();
-                .chevron-orientasjon-mixin(opp);
-            }
-
-            &-lukket {
-                .chevron-mixin();
-                .chevron-orientasjon-mixin(ned);
             }
         }
     }

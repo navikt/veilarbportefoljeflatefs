@@ -50,6 +50,7 @@
         justify-content: space-evenly;
         flex-direction: column;
         margin: 0 5rem;
+        gap: .5rem;
 
         &__avbryt,
         &__redigering {
@@ -122,7 +123,6 @@
                     color: @navBla;
                 }
             }
-
         }
     }
 
@@ -142,6 +142,14 @@
                 border: 1px solid @navGra60;
                 border-radius: 0.25rem;
                 grid-template-columns: 1fr 1fr;
+
+                .navds-checkbox {
+                    margin-left: 1rem;
+
+                    label {
+                        padding-bottom: 0;
+                    }
+                }
             }
 
             &__alertstripe {
@@ -156,9 +164,10 @@
     &__knappegruppe {
         margin-top: 2rem;
         margin-bottom: 1rem;
+        display: flex;
 
-        &__avbryt {
-            margin: 0 0.5rem;
+        &__slett {
+            margin-left: auto !important;
         }
     }
 }

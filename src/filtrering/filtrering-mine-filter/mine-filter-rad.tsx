@@ -9,7 +9,6 @@ import {
     avmarkerValgtMineFilter,
     markerMineFilter
 } from '../../ducks/lagret-filter-ui-state';
-import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React, {useEffect, useState} from 'react';
 import './mine-filter_innhold.less';
@@ -18,6 +17,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {Radio, RadioGroup} from '@navikt/ds-react';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;
@@ -79,12 +79,13 @@ function MineFilterRad({mineFilter, oversiktType, enhettiltak}: MineFilterRadPro
                 className="mine-filter__filternavn"
                 key={mineFilter.filterId}
                 name="mineFilter"
-                label={mineFilter.filterNavn}
-                value={mineFilter.filterId}
+                value={mineFilter.filterId.toString()}
                 onChange={() => velgFilter()}
                 checked={valgtMineFilter?.filterId === mineFilter.filterId}
                 data-testid={`mine-filter-rad_${kebabCase(mineFilter.filterNavn)}`}
-            />
+            >
+                {mineFilter.filterNavn}
+            </Radio>
             <RedigerKnapp
                 hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"

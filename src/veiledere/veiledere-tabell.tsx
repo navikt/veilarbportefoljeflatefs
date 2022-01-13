@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import './veiledere.less';
 import {Down, Up} from '@navikt/ds-icons';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -57,7 +58,8 @@ function VeilederTabell(props: VeiledereTabellProps) {
                         <tr>
                             <th scope="col" className="tabellheader">
                                 <div className="tabellheader__lenke">
-                                    <button
+                                    <Button
+                                        variant="tertiary"
                                         onClick={props.sorterPaaEtternavn}
                                         className={classNames('lenke lenke--frittstaende', {
                                             'valgt-sortering': sorterEtternavn
@@ -69,21 +71,22 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Etternavn, ingen sortering'
                                         }
                                     >
-                                        Etternavn
-                                    </button>
-                                    , Fornavn
+                                        <BodyShort>Etternavn</BodyShort>
+                                    </Button>
+                                    <BodyShort>, Fornavn</BodyShort>
                                     {sorteringspil(sorterEtternavn)}
                                 </div>
                             </th>
                             <th scope="col" className="tabellheader">
-                                NAV-ident
+                                <BodyShort>NAV-ident</BodyShort>
                             </th>
                             <th className="tabellheader tabell-element-center" scope="col">
                                 <div
                                     className="tabellheader__lenke"
                                     data-testid="veilederoversikt_sortering_antall-brukere"
                                 >
-                                    <button
+                                    <Button
+                                        variant="tertiary"
                                         onClick={props.sorterPaaPortefoljestorrelse}
                                         className={classNames('lenke lenke--frittstaende tabellheader__tekst', {
                                             'valgt-sortering': sorterPaaPortefoljeStr
@@ -95,8 +98,8 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Antall brukere, ingen sortering'
                                         }
                                     >
-                                        Antall brukere
-                                    </button>
+                                        <BodyShort>Antall brukere</BodyShort>
+                                    </Button>
                                     {sorteringspil(sorterPaaPortefoljeStr)}
                                 </div>
                             </th>

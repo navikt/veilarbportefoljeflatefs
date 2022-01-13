@@ -1,7 +1,6 @@
 import CheckboxValg from './checkbox-valg';
-import {Textarea} from 'nav-frontend-skjema';
 import * as React from 'react';
-import {Button} from '@navikt/ds-react';
+import {Button, Textarea} from '@navikt/ds-react';
 
 interface TilbakemeldingCheckboxProps {
     handleFormSubmitted: () => void;

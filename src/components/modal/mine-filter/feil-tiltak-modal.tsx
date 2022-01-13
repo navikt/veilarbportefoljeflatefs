@@ -10,6 +10,7 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {Normaltekst} from 'nav-frontend-typografi';
 import './mine-filter.less';
 import {Button} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 
 export interface FeilTiltakModalProps {
     gammeltFilterNavn: string;
@@ -58,8 +59,9 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                     <Button data-testid="la-sta-knapp" onClick={lukkModal}>
                         La stå
                     </Button>
-                    <Button variant="secondary" onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
+                    <Button variant="danger" onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
                         Slett
+                        <Delete />
                     </Button>
                 </div>
             </Modal>

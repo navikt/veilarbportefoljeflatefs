@@ -7,6 +7,7 @@ import './filterform.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import {Button} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
     form: string;
@@ -175,14 +176,15 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                                 onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
-                        <button
+                        <Button
+                            variant="primary"
                             type="submit"
-                            className="knapp knapp--mini knapp--hoved alder-velg-knapp"
+                            className="alder-velg-knapp"
                             data-testid="checkbox-filterform_velg-knapp"
                             disabled={!(inputAlderFra.length > 0 || inputAlderTil.length > 0)}
                         >
                             Velg
-                        </button>
+                        </Button>
                     </div>
                     {feil && (
                         <p className="validering-tekst" data-testid="filter_alder_valideringstekst">

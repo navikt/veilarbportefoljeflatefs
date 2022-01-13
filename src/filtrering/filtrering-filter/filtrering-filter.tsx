@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Element, Normaltekst} from 'nav-frontend-typografi';
+import {Element} from 'nav-frontend-typografi';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     alder,
@@ -32,7 +32,7 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Information} from '@navikt/ds-icons';
+import {Alert} from '@navikt/ds-react';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -113,12 +113,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="situasjon"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <Information className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
+
                             <CheckboxFilterform
                                 form="registreringstype"
                                 valg={registreringstype}
@@ -134,12 +130,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="hoyeste-fullforte-utdanning"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <Information className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
                             <CheckboxFilterform
                                 form="utdanning"
                                 valg={utdanning}
@@ -154,12 +145,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="er-utdanningen-godkjent-og-bestatt"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <Information className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
                             <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                         </>
                     )}

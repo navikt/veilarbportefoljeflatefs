@@ -9,7 +9,7 @@ import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Button} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
+import {Delete, SaveFile} from '@navikt/ds-icons';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -60,6 +60,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     }}
                 >
                     Lagre
+                    <SaveFile />
                 </Button>
                 <Button
                     variant="tertiary"

@@ -6,6 +6,7 @@ import './filtrering-label.less';
 import './filtrering-skjema.less';
 import FilterFeilModal from '../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../utils/utils';
+import {Button} from '@navikt/ds-react';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -40,7 +41,8 @@ function FiltreringLabel({
     }
 
     return (
-        <button
+        <Button
+            variant="primary"
             title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
@@ -49,7 +51,7 @@ function FiltreringLabel({
         >
             <span className={className}>{lagConfig(label).label}</span>
             {skalHaKryssIkon && <FilterIkon />}
-        </button>
+        </Button>
     );
 }
 

@@ -1,4 +1,3 @@
-import {Label, Radio} from 'nav-frontend-skjema';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
@@ -8,7 +7,7 @@ import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
-import {HelpText} from '@navikt/ds-react';
+import {HelpText, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
     form: string;
@@ -102,63 +101,73 @@ export function HendelserFilterform({
                     </div>
                 )}
 
-                <Label htmlFor="lagtTilAvBruker">Siste aktivitet lagt til av bruker</Label>
-                <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
+                <RadioGroup
+                    legend="Siste aktivitet lagt til av bruker"
+                    className="hendelser-filterform__radio-gruppe"
+                    id="lagtTilAvBruker"
+                >
                     {lagtTilAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
+                        >
+                            {hendelserLabels[key]}
+                        </Radio>
                     ))}
-                </div>
+                </RadioGroup>
 
-                <Label htmlFor="fullfortAvBruker">Siste aktivitet fullført av bruker</Label>
-                <div className="hendelser-filterform__radio-gruppe" id="fullfortAvBruker">
+                <RadioGroup
+                    legend="Siste aktivitet fullført av bruker"
+                    className="hendelser-filterform__radio-gruppe"
+                    id="fullfortAvBruker"
+                >
                     {fullfortAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
+                        >
+                            {hendelserLabels[key]}
+                        </Radio>
                     ))}
-                </div>
-
-                <Label htmlFor="avbruttAvBruker">Siste aktivitet avbrutt av bruker </Label>
-                <div className="hendelser-filterform__radio-gruppe" id="avbruttAvBruker">
+                </RadioGroup>
+                <RadioGroup
+                    legend="Siste aktivitet avbrutt av bruker"
+                    className="hendelser-filterform__radio-gruppe"
+                    id="avbruttAvBruker"
+                >
                     {avbruttAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
+                        >
+                            {hendelserLabels[key]}
+                        </Radio>
                     ))}
-                </div>
-
-                <Label htmlFor="andreMuligheter">Andre </Label>
-                <div className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
+                </RadioGroup>
+                <RadioGroup legend="Andre" className="hendelser-filterform__radio-gruppe" id="andreMuligheter">
                     <Radio
                         onChange={e => onRadioChange(e)}
-                        label={hendelserLabels['MAL']}
                         name="sisteEndringKategori"
                         value={'MAL'}
                         checked={hendelserValg.includes('MAL')}
                         key={'MAL'}
                         data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
-                    />
-                </div>
+                    >
+                        {hendelserLabels['MAL']}
+                    </Radio>
+                </RadioGroup>
             </div>
             <NullstillValgKnapp
                 dataTestId="hendelser-filterform"

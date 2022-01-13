@@ -18,6 +18,7 @@ import ModalHeader from '../modal-header/modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
+import {Button} from '@navikt/ds-react';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -93,13 +94,14 @@ function ArbeidslisteModalRediger({
 
     return (
         <>
-            <button
+            <Button
+                variant="tertiary"
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={klikkRedigerknapp}
                 data-testid="min-oversikt_chevron-arbeidsliste_rediger-knapp"
             >
                 Rediger
-            </button>
+            </Button>
             {laster ? (
                 <LasterModal />
             ) : (

@@ -3,6 +3,7 @@ import '../filterform.less';
 import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
+import {Button} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -86,15 +87,14 @@ function AktivitetFilterformAvansert({
             </div>
             <div className="aktivitet-filterform__knappegruppe">
                 <div className="filterknapp-container">
-                    <button
-                        type="button"
+                    <Button
                         onClick={klikkPaForenkletLenke}
                         className="filterknapp"
                         data-testid="aktiviteter_forenklet-filter_knapp"
                         aria-label="Forenklet aktivitetsfilter"
                     >
                         Forenklet filter
-                    </button>
+                    </Button>
                 </div>
 
                 <NullstillValgKnapp

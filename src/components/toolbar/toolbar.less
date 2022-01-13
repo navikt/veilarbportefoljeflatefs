@@ -44,10 +44,12 @@
         &-knapp__ikon {
             min-width: 1.5rem;
             min-height: 1.5rem;
+            color: #000000;
         }
 
         &-knapp__tekst {
             padding-right: 0.5rem;
+            color: #000000;
         }
 
         &__element {
@@ -189,7 +191,7 @@
         position: relative;
         text-align: inherit;
         background-color: @bakgrunnsGra;
-        width: 186px;
+        width: fit-content;
         display: flex;
         flex-direction: row;
 
@@ -201,8 +203,8 @@
             }
 
             &:hover {
-                border-color: transparent;
                 cursor: default;
+                box-shadow: none;
             }
         }
 
@@ -212,9 +214,14 @@
             box-shadow: 0 0 0 3px @fokusFarge;
         }
 
+        &:active:hover, &:active {
+            background-color: transparent;
+        }
+
         &:hover {
             border-color: @navBla;
             cursor: pointer;
+            box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-hover);
         }
     }
 }

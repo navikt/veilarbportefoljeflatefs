@@ -1,11 +1,11 @@
 import React, {PropsWithChildren} from 'react';
 import {Normaltekst} from 'nav-frontend-typografi';
-import {Input} from 'nav-frontend-skjema';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
 import {useFocus} from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
+import {TextField} from '@navikt/ds-react';
 
 interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
@@ -18,21 +18,18 @@ interface VeiledergruppeFormProps {
 }
 
 function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
-    const {focusRef} = useFocus();
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit} data-testid="veiledergruppe_modal_form">
-            <Input
+            <TextField
                 label={
                     <p className="veiledergruppe-modal__gruppenavntekst">
                         Gruppenavn: <i>(maks 35 tegn)</i>
                     </p>
                 }
                 value={props.gruppeNavn}
-                bredde="XL"
                 onChange={e => props.setGruppeNavn(e.target.value)}
-                feil={props.errors.gruppeNavn}
+                error={props.errors.gruppeNavn}
                 maxLength={35}
-                inputRef={inputRef => (focusRef.current = inputRef)}
                 data-testid="veiledergruppe_modal_gruppenavn-input"
             />
             <div className="veiledergruppe-modal__sokefilter">

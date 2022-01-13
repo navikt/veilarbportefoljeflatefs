@@ -5,6 +5,7 @@ import './til-toppen-knapp.less';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {Up} from '@navikt/ds-icons';
+import {Button} from '@navikt/ds-react';
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();
@@ -36,7 +37,8 @@ export const TilToppenKnapp = () => {
     const knappSkalVises = scrollPosition && scrollPosition > window.innerHeight;
 
     return (
-        <button
+        <Button
+            variant="secondary"
             ref={knappRef}
             className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
             hidden={!knappSkalVises}
@@ -44,6 +46,6 @@ export const TilToppenKnapp = () => {
             data-testid="til-toppen_knapp"
         >
             <Up />
-        </button>
+        </Button>
     );
 };

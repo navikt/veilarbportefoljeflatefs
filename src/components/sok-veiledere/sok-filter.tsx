@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../toolbar/toolbar.less';
 import {useFocus} from '../../hooks/use-focus';
-import {Input} from 'nav-frontend-skjema';
-import {Alert} from '@navikt/ds-react';
+import {Alert, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -36,18 +35,16 @@ function SokFilter<T>(props: SokFilterProps<T>) {
     const filteredData = limitSize === undefined ? rawfilteredData : limit(rawfilteredData, limitSize || 20);
 
     const harData = filteredData.length > 0;
-    const {focusRef} = useFocus();
 
     return (
         <>
             <div className="sokfilter">
-                <Input
+                <TextField
                     label={props.label}
                     placeholder={props.placeholder}
                     value={query}
-                    inputClassName="sokfilter__input"
+                    className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
-                    inputRef={inputRef => (focusRef.current = inputRef)}
                     data-testid="sok-filter_input"
                 />
             </div>

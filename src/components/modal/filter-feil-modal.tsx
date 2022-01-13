@@ -3,6 +3,7 @@ import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
 import {useState} from 'react';
+import {Button} from '@navikt/ds-react';
 
 interface FilterFeilModalProps {
     isOpen: boolean;
@@ -37,9 +38,7 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
                 <br />
                 Prøv igjen senere.
             </Normaltekst>
-            <button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
-                Ok
-            </button>
+            <Button onClick={lukkModal}>Ok</Button>
         </VarselModal>
     );
 }

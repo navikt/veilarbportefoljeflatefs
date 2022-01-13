@@ -3,6 +3,7 @@ import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
+import {Button} from '@navikt/ds-react';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -29,9 +30,7 @@ function FeilmeldingBrukereModal(props: FeilmeldingBrukereModalProps) {
             </Undertittel>
             <Normaltekst className="blokk-s">{props.infotekstTekst}</Normaltekst>
             <FnrList listeMedFnr={props.fnrFeil} />
-            <button className="knapp knapp--hoved" onClick={props.onClose}>
-                Ok
-            </button>
+            <Button onClick={props.onClose}>Ok</Button>
         </VarselModal>
     );
 }

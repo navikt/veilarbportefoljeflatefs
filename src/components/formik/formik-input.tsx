@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, getIn} from 'formik';
-import {Input} from 'nav-frontend-skjema';
+import {TextField} from '@navikt/ds-react';
 
 const TITTEL_MAKS_LENGDE = 30;
 
@@ -29,14 +29,13 @@ function FormikInput({name, index}: FormikInputProps) {
                 const errors = getIn(form.errors, name);
                 const feil = touched && errors ? errors : undefined;
                 return (
-                    <Input
+                    <TextField
                         id={name}
                         label="Tittel"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         name={name}
-                        bredde="L"
-                        feil={feil}
+                        error={feil}
                         value={field.value}
                         data-testid={`modal_arbeidsliste_tittel${indexId}`}
                     />

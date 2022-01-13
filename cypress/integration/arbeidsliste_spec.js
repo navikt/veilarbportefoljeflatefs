@@ -105,7 +105,7 @@ describe('Arbeidsliste', () => {
             .click();
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen')
+            .should('have.class', 'collapse')
             .first();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
@@ -169,7 +169,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .first()
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+            .should('have.class', 'collapse');
         cy.get('.rediger-arbeidsliste').should('not.exist');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.rediger-arbeidsliste').should('be.visible');
@@ -201,7 +201,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .first()
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+            .should('have.class', 'collapse');
 
         cy.get('.rediger-arbeidsliste').should('not.exist');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
@@ -224,7 +224,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .children()
             .first()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen');
+            .should('have.class', 'collapse');
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .first()
             .click();
@@ -244,7 +244,7 @@ describe('Arbeidsliste', () => {
             .click();
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen')
+            .should('have.class', 'collapse')
             .first();
     });
     it('Lagre tittel og kommentar', () => {
@@ -274,7 +274,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
             .first()
             .children()
-            .should('have.class', 'brukerliste__arbeidslisteknapp--chevron-apen')
+            .should('have.class', 'collapse')
             .click();
     });
 });

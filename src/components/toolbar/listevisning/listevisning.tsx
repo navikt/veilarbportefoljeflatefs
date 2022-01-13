@@ -7,6 +7,9 @@ import './listevisning.less';
 import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
 import Dropdown from '../../dropdown/dropdown';
 import {AppState} from '../../../reducer';
+import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {ChangeEvent} from 'react';
+import {alternativerConfig} from './listevisning-utils';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
@@ -48,7 +51,7 @@ function Listevisning(props: ListevisningProps) {
             disabled={muligeAlternativer.length <= 3}
             className="dropdown--toolbar toolbar__velg-kolonner"
             render={() => (
-                <ul className="ustilet">
+                <CheckboxGroup className="ustilet" legend="" hideLegend>
                     {muligeAlternativer.map(kolonne => (
                         <ListevisningRad
                             key={kolonne}
@@ -58,7 +61,7 @@ function Listevisning(props: ListevisningProps) {
                             onChange={handleChange}
                         />
                     ))}
-                </ul>
+                </CheckboxGroup>
             )}
         />
     );

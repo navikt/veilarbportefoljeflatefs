@@ -22,7 +22,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
             <Innholdstittel className="blokk-s endringer-ikke-lagret-modal__innholdstittel">
                 Endringene er ikke lagret
             </Innholdstittel>
-            <div className="endringer-ikke-lagret-moda¨__knappegruppe">
+            <div className="endringer-ikke-lagret-modal__knappegruppe">
                 <Button
                     className="endringer-ikke-lagret-modal__knappegruppe__redigering"
                     type="button"
@@ -31,7 +31,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
                     Gå tilbake til redigering
                 </Button>
                 <Button
-                    variant="tertiary"
+                    variant="danger"
                     className="endringer-ikke-lagret-modal__knappegruppe__avbryt"
                     type="submit"
                     onClick={() => {

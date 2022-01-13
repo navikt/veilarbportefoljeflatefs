@@ -15,6 +15,7 @@ import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {Button} from '@navikt/ds-react';
+import {SaveFile} from '@navikt/ds-icons';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -85,6 +86,7 @@ function LeggTilArbeidslisteForm({
                             <div className="modal-footer">
                                 <Button className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
                                     Lagre
+                                    <SaveFile />
                                 </Button>
                                 <Button
                                     variant="tertiary"

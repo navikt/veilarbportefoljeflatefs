@@ -1,4 +1,3 @@
-import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React from 'react';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -11,6 +10,7 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
+import {Radio, RadioGroup} from '@navikt/ds-react';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
@@ -53,18 +53,23 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType}: 
         }
     }
 
+    console.log(veilederGruppe.filterId.toString());
+    console.log('checked', valgtGruppe?.filterId === veilederGruppe.filterId);
+    console.log('-------------------------');
     return (
         <div className="veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio
                 className="veileder-gruppe__gruppenavn"
                 key={veilederGruppe.filterId}
                 name="veiledergruppe"
-                label={veilederGruppe.filterNavn}
-                value={veilederGruppe.filterId}
+                value={veilederGruppe.filterId.toString()}
                 onChange={() => velgGruppe()}
                 checked={valgtGruppe?.filterId === veilederGruppe.filterId}
                 data-testid={`veiledergruppe-rad_${kebabCase(veilederGruppe.filterNavn)}`}
-            />
+            >
+                {veilederGruppe.filterNavn}
+            </Radio>
+
             <RedigerKnapp
                 hidden={valgtGruppe?.filterId !== veilederGruppe.filterId}
                 aria="Rediger veiledergruppe"

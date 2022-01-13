@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
-import {Input} from 'nav-frontend-skjema';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
 import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
@@ -14,7 +13,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
-import {Button} from '@navikt/ds-react';
+import {Button, TextField} from '@navikt/ds-react';
+import {Delete, SaveFile} from '@navikt/ds-icons';
 
 export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModal; oversiktType}) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -70,24 +70,26 @@ export function OppdaterMineFilter(props: {gammeltFilterNavn; filterId; lukkModa
     return (
         <>
             <form onSubmit={e => doLagreEndringer(e)}>
-                <Input
+                <TextField
                     label="Navn:"
                     value={nyttFilterNavn}
                     onChange={e => setNyttFilterNavn(e.target.value)}
-                    feil={feilmelding.filterNavn}
+                    error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="redigere-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
                         Lagre
+                        <SaveFile />
                     </Button>
                     <Button
-                        variant="secondary"
+                        variant="danger"
                         onClick={e => bekreftSletting(e)}
                         data-testid="rediger-filter_modal_slett-knapp"
                     >
                         Slett
+                        <Delete />
                     </Button>
                 </div>
             </form>

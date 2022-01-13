@@ -2,6 +2,7 @@ import {Normaltekst} from 'nav-frontend-typografi';
 import React from 'react';
 import {Visningstype} from './mine-filter-modal';
 import {Button} from '@navikt/ds-react';
+import {SaveFile} from '@navikt/ds-icons';
 
 const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
     return (
@@ -11,6 +12,7 @@ const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningst
             onClick={() => setValgtVisningstype(Visningstype.LAGRE_NYTT)}
         >
             Lagre som nytt filter
+            <SaveFile />
         </Button>
     );
 };

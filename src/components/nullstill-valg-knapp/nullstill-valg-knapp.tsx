@@ -3,6 +3,7 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import './nullstill-valg-knapp.less';
 import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
 
 interface Props {
     nullstillValg: () => void;
@@ -23,15 +24,15 @@ function NullstillValgKnapp({nullstillValg, dataTestId, form, disabled, classNam
 
     return (
         <div className={classNames('nullstill-valg-knapp', className)}>
-            <button
+            <Button
+                variant="tertiary"
                 type="button"
-                className="knapp knapp--standard knapp--mini"
                 onClick={nullstille}
                 disabled={disabled}
                 data-testid={`${dataTestId}_nullstill-knapp`}
             >
                 Nullstill
-            </button>
+            </Button>
         </div>
     );
 }

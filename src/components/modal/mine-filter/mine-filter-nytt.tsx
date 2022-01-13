@@ -1,4 +1,3 @@
-import {Input} from 'nav-frontend-skjema';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
@@ -13,7 +12,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
-import {Button} from '@navikt/ds-react';
+import {Button, TextField} from '@navikt/ds-react';
+import {SaveFile} from '@navikt/ds-icons';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
     const filterValg = useSelector((state: AppState) =>
@@ -56,17 +56,18 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
                 data-widget="accessible-autocomplete"
             >
                 <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
-                <Input
+                <TextField
                     label="Navn:"
                     value={filterNavn}
                     onChange={e => setFilterNavn(e.target.value)}
-                    feil={feilmelding.filterNavn}
+                    error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
                         Lagre
+                        <SaveFile />
                     </Button>
                 </div>
             </form>

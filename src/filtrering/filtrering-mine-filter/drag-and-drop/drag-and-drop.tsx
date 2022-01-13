@@ -9,6 +9,7 @@ import {LagretFilter} from '../../../ducks/lagret-filter';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
+import {RadioGroup} from '@navikt/ds-react';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
@@ -65,11 +66,11 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }
 
     return (
-        <>
+        <RadioGroup legend="" hideLegend>
             {dragAndDropOrder.map((filter, idx) => (
                 <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} enhettiltak={enhettiltak} />
             ))}
-        </>
+        </RadioGroup>
     );
 }
 

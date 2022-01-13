@@ -8,6 +8,7 @@ import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from '.
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import {Button} from '@navikt/ds-react';
+import {SaveFile} from '@navikt/ds-icons';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
@@ -189,6 +190,7 @@ function DragAndDropContainer({
                     data-testid="mine-filter_sortering_lagre-knapp"
                 >
                     Lagre
+                    <SaveFile />
                 </Button>
                 <Button
                     variant="secondary"

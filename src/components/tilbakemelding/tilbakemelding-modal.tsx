@@ -4,10 +4,9 @@ import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
-import {Textarea} from 'nav-frontend-skjema';
 import TilfredshetValg from './tilfredshet-valg';
 import CheckboxValg from './checkbox-valg';
-import {Button} from '@navikt/ds-react';
+import {Button, Textarea} from '@navikt/ds-react';
 
 export interface Tilbakemelding {
     tilfredshet: number;
