@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalWrapper from 'nav-frontend-modal';
-import NavFrontendSpinner from 'nav-frontend-spinner';
 import './laster-modal.less';
+import {Loader} from '@navikt/ds-react';
 
 export function LasterModal() {
     return (
@@ -12,7 +12,7 @@ export function LasterModal() {
             closeButton={false}
             portalClassName="veilarbportefoljeflatefs-laster-modal"
         >
-            <NavFrontendSpinner type="XXL" />
+            <Loader size="2xlarge" />
         </ModalWrapper>
     );
 }

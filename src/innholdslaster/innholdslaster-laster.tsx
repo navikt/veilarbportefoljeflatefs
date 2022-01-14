@@ -1,10 +1,10 @@
 import React from 'react';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import {Loader} from '@navikt/ds-react';
 
 function Laster() {
     return (
         <div className="innholdslaster">
-            <NavFrontendSpinner type="XL" />
+            <Loader size="xlarge" />
         </div>
     );
 }
