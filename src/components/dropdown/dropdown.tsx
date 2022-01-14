@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {BodyShort} from '@navikt/ds-react';
 
 const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
     classNames('dropdown', props.className, {
@@ -103,7 +103,7 @@ function Dropdown(props: DropdownProps) {
                     data-testid={`dropdown-knapp_${id}`}
                     aria-label={ariaLabel()}
                 >
-                    <span className="dropdown__btntext">{name}</span>
+                    <BodyShort className="dropdown__btntext">{name}</BodyShort>
                 </button>
             </div>
             {innhold}

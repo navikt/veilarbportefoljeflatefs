@@ -4,7 +4,6 @@ import {AppState} from '../../reducer';
 import '../../filtrering/filtrering-filter/filterform/filterform.less';
 import '../../style.less';
 import SokFilter from './sok-filter';
-import classNames from 'classnames';
 import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface SokVeiledereProps {

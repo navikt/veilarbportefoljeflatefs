@@ -10,7 +10,7 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
-import {Radio, RadioGroup} from '@navikt/ds-react';
+import {Radio} from '@navikt/ds-react';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;

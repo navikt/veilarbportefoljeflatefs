@@ -12,7 +12,7 @@ export default function OverskriftMedHjelpetekst(props: OverskriftMedHjelpeTekst
     return (
         <div className="blokk-xxs filtrering--overskrift-med-hjelpetekst">
             <Element>{props.overskriftTekst}</Element>
-            <HelpText id={props.hjelpeTekst} placement="right">
+            <HelpText placement="right" strategy="fixed">
                 {props.hjelpeTekst}
             </HelpText>
         </div>

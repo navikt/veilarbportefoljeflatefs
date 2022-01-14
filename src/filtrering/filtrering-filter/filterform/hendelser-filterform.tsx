@@ -91,6 +91,7 @@ export function HendelserFilterform({
                             </label>
                         </div>
                         <HelpText
+                            strategy="fixed"
                             placement="right"
                             className={`hjelpetekst__${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                         >

@@ -17,7 +17,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {Radio, RadioGroup} from '@navikt/ds-react';
+import {Radio} from '@navikt/ds-react';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;

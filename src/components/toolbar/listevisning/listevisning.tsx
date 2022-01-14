@@ -7,9 +7,7 @@ import './listevisning.less';
 import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
 import Dropdown from '../../dropdown/dropdown';
 import {AppState} from '../../../reducer';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import {ChangeEvent} from 'react';
-import {alternativerConfig} from './listevisning-utils';
+import {CheckboxGroup} from '@navikt/ds-react';
 
 interface ListevisningProps {
     oversiktType: OversiktType;

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import '../toolbar/toolbar.less';
-import {useFocus} from '../../hooks/use-focus';
 import {Alert, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {

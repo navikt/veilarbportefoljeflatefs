@@ -2,7 +2,6 @@ import React, {PropsWithChildren} from 'react';
 import {Normaltekst} from 'nav-frontend-typografi';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
-import {useFocus} from '../../../hooks/use-focus';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 import {TextField} from '@navikt/ds-react';
