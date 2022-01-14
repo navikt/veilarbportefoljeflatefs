@@ -28,7 +28,7 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
     }
 
     return (
-        <div className="alertstripe alertstripe--solid alertstripe--info blokk-m">
+        <div className="alertstripe alertstripe--solid alertstripe--info">
             <span className="alertstripe__ikon" aria-label="info">
                 <Information />
             </span>

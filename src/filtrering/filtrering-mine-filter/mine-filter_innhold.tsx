@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import './mine-filter_innhold.less';
 import '../../components/sidebar/sidebar.less';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
@@ -10,7 +9,7 @@ import {useDispatch} from 'react-redux';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {Alert} from '@navikt/ds-react';
+import {Alert, BodyShort} from '@navikt/ds-react';
 
 interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -80,7 +79,7 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
     const getEmptyState = () => {
         return (
             <div className="mine-filter-emptystate">
-                <Normaltekst className="mine-filter-emptystate__tekst">Ingen lagrede filter</Normaltekst>
+                <BodyShort className="mine-filter-emptystate__tekst">Ingen lagrede filter</BodyShort>
             </div>
         );
     };

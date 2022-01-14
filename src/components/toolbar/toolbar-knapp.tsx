@@ -1,10 +1,9 @@
 import {default as React, useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
-import {Normaltekst} from 'nav-frontend-typografi';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -89,7 +88,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             data-testid={props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp'}
         >
             {props.ikon}
-            <Normaltekst className="toolbar-knapp__tekst">{props.tittel}</Normaltekst>
+            <BodyShort className="toolbar-knapp__tekst">{props.tittel}</BodyShort>
         </Button>
     );
 }

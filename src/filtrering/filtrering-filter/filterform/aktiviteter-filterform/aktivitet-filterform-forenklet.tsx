@@ -42,7 +42,7 @@ function AktivitetFilterformForenklet({
                 {Object.entries(valg).map(([filterKey, filterValue]) => (
                     <Checkbox
                         key={filterKey}
-                        className="aktivitetvalg blokk-xxs"
+                        className="aktivitetvalg"
                         onChange={e => velgCheckBox(e)}
                         value={filterKey}
                         checked={valgteForenkledeAktiviteter.includes(filterKey)}

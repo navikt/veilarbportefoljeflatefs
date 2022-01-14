@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
 import {useState} from 'react';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FilterFeilModalProps {
     isOpen: boolean;
@@ -30,14 +29,14 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
             portalClassName="filter-feil-modal"
             className="filter-feil-modal__content"
         >
-            <Undertittel tag="h1" className="blokk-xxs">
+            <Heading size="small" level="1">
                 Det oppstod en teknisk feil.
-            </Undertittel>
-            <Normaltekst className="blokk-s">
+            </Heading>
+            <BodyShort>
                 Det oppstod et problem med ett eller flere filter.
                 <br />
                 Prøv igjen senere.
-            </Normaltekst>
+            </BodyShort>
             <Button onClick={lukkModal}>Ok</Button>
         </VarselModal>
     );

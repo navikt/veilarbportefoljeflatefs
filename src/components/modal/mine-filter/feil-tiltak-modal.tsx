@@ -7,9 +7,8 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {useDispatch, useSelector} from 'react-redux';
 import Modal from '../modal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {Normaltekst} from 'nav-frontend-typografi';
 import './mine-filter.less';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 
 export interface FeilTiltakModalProps {
@@ -48,13 +47,13 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                 onRequestClose={lukkModal}
                 tittel="Tiltaksfilter finnes ikke"
             >
-                <Normaltekst>
+                <BodyShort>
                     En eller flere av tiltakstypene du har lagret finnes ikke lenger som filter. Det kan skyldes at det
                     ikke er brukere som deltar på tiltakene akkurat nå.
                     <br />
                     <br />
                     Vil du la filteret stå til det deltar brukere på tiltaket igjen, eller vil du slette det?
-                </Normaltekst>
+                </BodyShort>
                 <div className="knappegruppe">
                     <Button data-testid="la-sta-knapp" onClick={lukkModal}>
                         La stå

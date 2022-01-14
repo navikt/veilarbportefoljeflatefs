@@ -1,8 +1,8 @@
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import React from 'react';
 import {BrukerModell} from '../../../model-interfaces';
+import {BodyShort, Heading} from '@navikt/ds-react';
 
 interface FjernFraArbeidslisteModalProps {
     isOpen: boolean;
@@ -26,10 +26,10 @@ function FjernArbeidslisteModal({isOpen, valgteBrukere, lukkModal, bruker}: Fjer
         >
             <div className="fjern-arbeidsliste">
                 <div className="arbeidsliste-headertekst">
-                    <Innholdstittel tag="h1" className="blokk-xs">
+                    <Heading size="xlarge" level="1">
                         Fjern fra arbeidsliste
-                    </Innholdstittel>
-                    <Normaltekst className="blokk-s">{`Du har valgt å fjerne ${navn} fra arbeidslisten.`}</Normaltekst>
+                    </Heading>
+                    <BodyShort>{`Du har valgt å fjerne ${navn} fra arbeidslisten.`}</BodyShort>
                 </div>
                 <FjernFraArbeidslisteForm
                     valgteBrukere={brukereSomSkalFjernes}

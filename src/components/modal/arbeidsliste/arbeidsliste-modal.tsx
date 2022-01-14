@@ -12,7 +12,7 @@ import {LasterModal} from '../lastermodal/laster-modal';
 import ModalHeader from '../modal-header/modal-header';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
+import {BodyShort, Heading} from '@navikt/ds-react';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -91,14 +91,14 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">
-                        <Innholdstittel tag="h1" className="blokk-xs">
+                        <Heading size="xlarge" level="1">
                             Fjern fra arbeidsliste
-                        </Innholdstittel>
-                        <Normaltekst className="blokk-s">
+                        </Heading>
+                        <BodyShort>
                             {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
                                 brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
                             } fra arbeidslisten.`}
-                        </Normaltekst>
+                        </BodyShort>
                     </div>
                     <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={this.lukkModal} />
                 </div>

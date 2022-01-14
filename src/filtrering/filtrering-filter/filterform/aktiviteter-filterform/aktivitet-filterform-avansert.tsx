@@ -38,13 +38,13 @@ function AktivitetFilterformAvansert({
 
     return (
         <form className="skjema aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
-            <div className="aktivitetvalg__header blokk-xxs">
+            <div className="aktivitetvalg__header ">
                 <span className="aktivitetvalg__header--first">Ja</span>
                 <span>Nei</span>
             </div>
             <div className="aktivitetfilterform-avansert__valg">
                 {Object.entries(valg).map(([kode, verdi]) => [
-                    <div key={kode} className="aktivitetvalg blokk-xxs">
+                    <div key={kode} className="aktivitetvalg ">
                         <span className="aktivitetvalg__tekst">{verdi as string}</span>
                         <div className="radioknapp-gruppe">
                             <input

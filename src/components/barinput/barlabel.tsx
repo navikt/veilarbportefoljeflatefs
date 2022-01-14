@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Element} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import './barlabel.less';
+import {Label} from '@navikt/ds-react';
 
 export interface BarlabelProps {
     htmlFor: string;
@@ -21,10 +21,10 @@ function Barlabel({htmlFor, labelTekst, antall, className}: BarlabelProps) {
                         <span className="text-hide" aria-live="polite" aria-atomic="true">
                             {`Det er ${tekstAntallBrukere(antall)} i Min arbeidsliste`}
                         </span>
-                        <Element className="barlabel__antall">{antall}</Element>
+                        <Label className="barlabel__antall">{antall}</Label>
                     </div>
                 ) : (
-                    <Element className="barlabel__antall">{antall}</Element>
+                    <Label className="barlabel__antall">{antall}</Label>
                 )}
             </div>
         </label>

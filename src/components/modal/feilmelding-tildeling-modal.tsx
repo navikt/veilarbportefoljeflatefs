@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {Normaltekst, Innholdstittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -23,23 +22,21 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
         >
-            <Innholdstittel tag="h1" className="blokk-xxs">
+            <Heading size="xlarge" level="1">
                 Handling kan ikke utføres
-            </Innholdstittel>
-            <Normaltekst className="blokk-s">Tildeling av veileder til følgende bruker(e) feilet:</Normaltekst>
+            </Heading>
+            <BodyShort>Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>
             <FnrList listeMedFnr={props.fnrFeil} />
-            <Normaltekst className="blokk-s">
+            <BodyShort>
                 Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
                 brukeren ikke er under oppfølging.
-            </Normaltekst>
+            </BodyShort>
 
             {props.fnrSuksess?.length > 0 && (
                 <div className="tildeling-veileder-modal__vellykkedebrukere">
-                    <Normaltekst className="blokk-s">Tildeling av veileder lyktes for følgende bruker(e):</Normaltekst>
+                    <BodyShort>Tildeling av veileder lyktes for følgende bruker(e):</BodyShort>
                     <FnrList listeMedFnr={props.fnrSuksess} />
-                    <Normaltekst className="blokk-s">
-                        Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.
-                    </Normaltekst>
+                    <BodyShort>Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.</BodyShort>
                 </div>
             )}
             <Button variant="secondary" onClick={props.onClose}>

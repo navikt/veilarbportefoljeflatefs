@@ -1,11 +1,10 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {Normaltekst} from 'nav-frontend-typografi';
 import React from 'react';
 import classNames from 'classnames';
 import './modal.less';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 
 interface ValgtVeiledergruppeListeProps {
@@ -34,9 +33,9 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (
-                    <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
+                    <BodyShort className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                         Ingen veiledere lagt til i gruppen
-                    </Normaltekst>
+                    </BodyShort>
                 ) : (
                     splitArrayITo.map((listeMedVeileder, index) => (
                         <div key={index}>

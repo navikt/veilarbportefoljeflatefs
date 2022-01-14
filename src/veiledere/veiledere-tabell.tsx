@@ -53,7 +53,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
     return (
         <div className="veilederoversikt__toolbar-container">
             <span className="veilederoversikt__sticky-skygge">
-                <table className="tabell veileder-tabell portefolje-tabell typo-undertekst blokk-xs">
+                <table className="tabell veileder-tabell portefolje-tabell typo-undertekst ">
                     <thead>
                         <tr>
                             <th scope="col" className="tabellheader">

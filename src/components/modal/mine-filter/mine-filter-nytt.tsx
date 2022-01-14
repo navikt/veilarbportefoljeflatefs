@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
@@ -12,7 +11,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
-import {Button, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, TextField} from '@navikt/ds-react';
 import {SaveFile} from '@navikt/ds-icons';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
@@ -55,7 +54,7 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
                 data-testid="lagre-nytt-filter_modal_form"
                 data-widget="accessible-autocomplete"
             >
-                <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
+                <BodyShort>Du vil finne igjen filteret under "Mine filter".</BodyShort>
                 <TextField
                     label="Navn:"
                     value={filterNavn}

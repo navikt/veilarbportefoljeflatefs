@@ -3,9 +3,9 @@ import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import './filterform.less';
 import classNames from 'classnames';
-import {Element} from 'nav-frontend-typografi';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import {Label} from '@navikt/ds-react';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -69,9 +69,9 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         role="group"
                         aria-labelledby="double-filterform-label-col1"
                     >
-                        <Element id="double-filterform-label-col1" className="double-form-title">
+                        <Label id="double-filterform-label-col1" className="double-form-title">
                             {'Er utdanningen godkjent i Norge?'}
-                        </Element>
+                        </Label>
                         <RenderFields
                             valg={uniqueValgCol1}
                             form={formCol1}
@@ -84,9 +84,9 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         role="group"
                         aria-labelledby="double-filterform-label-col2"
                     >
-                        <Element id="double-filterform-label-col2" className="double-form-title">
+                        <Label id="double-filterform-label-col2" className="double-form-title">
                             {'Er utdanningen bestått?'}
-                        </Element>
+                        </Label>
                         <RenderFields
                             valg={uniqueValgCol2}
                             form={formCol2}

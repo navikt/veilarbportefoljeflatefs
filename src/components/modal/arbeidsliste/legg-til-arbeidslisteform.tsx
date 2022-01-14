@@ -13,8 +13,7 @@ import {skjulModal} from '../../../ducks/modal';
 import {dateToISODate} from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Normaltekst} from 'nav-frontend-typografi';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {SaveFile} from '@navikt/ds-icons';
 
 interface OwnProps {
@@ -75,9 +74,9 @@ function LeggTilArbeidslisteForm({
                 setFormIsDirty(formikProps.dirty);
                 return (
                     <Form data-testid="modal_arbeidsliste_form">
-                        <Normaltekst className="arbeidsliste__info-tekst">
+                        <BodyShort className="arbeidsliste__info-tekst">
                             {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
-                        </Normaltekst>
+                        </BodyShort>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
                             arbeidsliste={formikProps.values.arbeidsliste}

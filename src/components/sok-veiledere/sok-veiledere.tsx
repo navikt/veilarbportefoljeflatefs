@@ -34,7 +34,7 @@ function SokVeiledere(props: SokVeiledereProps) {
                             >{`${elem.etternavn}, ${elem.fornavn}`}</Checkbox>
                         ))}
                     </CheckboxGroup>
-                    <div className="blokk-xxs filterform__under-valg">
+                    <div className=" filterform__under-valg">
                         <Button
                             onClick={props.btnOnClick}
                             data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}

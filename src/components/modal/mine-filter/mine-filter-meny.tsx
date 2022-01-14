@@ -1,7 +1,6 @@
-import {Normaltekst} from 'nav-frontend-typografi';
 import React from 'react';
 import {Visningstype} from './mine-filter-modal';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {SaveFile} from '@navikt/ds-icons';
 
 const lagreNyttMineFilterKnapp = (setValgtVisningstype: (visningstype: Visningstype) => void) => {
@@ -34,9 +33,9 @@ export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) 
     return (
         <div className="mine-filter-meny-modal__wrapper">
             {lagreNyttMineFilterKnapp(props.setValgtVisningstype)}
-            <Normaltekst data-testid="mine-filter_modal_oppdater-filter-tekst">
+            <BodyShort data-testid="mine-filter_modal_oppdater-filter-tekst">
                 Oppdater <b>"{props.sisteFilterNavn}"</b> ved å klikke på knappen under.
-            </Normaltekst>
+            </BodyShort>
             {oppdaterMineFilterKnapp(props.setValgtVisningstype)}
         </div>
     );

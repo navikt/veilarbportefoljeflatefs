@@ -1,10 +1,9 @@
 import classNames from 'classnames/dedupe';
-import {Normaltekst, Undertekst, Undertittel} from 'nav-frontend-typografi';
 import {default as React} from 'react';
 import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
-import {Link} from '@navikt/ds-react';
+import {BodyShort, Detail, Heading, Link} from '@navikt/ds-react';
 import {ExternalLink} from '@navikt/ds-icons';
 
 interface EndringsloggInnleggProps {
@@ -56,11 +55,13 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                         'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                     })}
                 />
-                <Undertekst>{props.dato}</Undertekst>
+                <Detail size="small">{props.dato}</Detail>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
-                <Undertittel> {props.innholdsOverskrift} </Undertittel>
-                {props.innholdsTekst && <Normaltekst> {props.innholdsTekst} </Normaltekst>}
+                <Heading size="small" level="2">
+                    {props.innholdsOverskrift}
+                </Heading>
+                {props.innholdsTekst && <BodyShort> {props.innholdsTekst} </BodyShort>}
                 {props.children}
             </div>
         </div>

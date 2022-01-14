@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Element} from 'nav-frontend-typografi';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     alder,
@@ -32,7 +31,7 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert} from '@navikt/ds-react';
+import {Alert, Label} from '@navikt/ds-react';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -47,11 +46,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
 
     return (
         <div
-            className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
+            className="filtrering-filter col-sm-12 filtrering-filter__kolonne"
             data-testid="filtrering-filter_container"
         >
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Demografi</Element>
+            <div className="col-sm-12  filtrering-filter__kolonne">
+                <Label>Demografi</Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -90,8 +89,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Hendelser</Element>
+            <div className="col-sm-12  filtrering-filter__kolonne">
+                <Label>Hendelser</Label>
                 <Dropdown
                     name="Siste endring av bruker"
                     id="sisteEndringKategori"
@@ -106,8 +105,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Svar fra registrering</Element>
+            <div className="col-sm-12  filtrering-filter__kolonne">
+                <Label>Svar fra registrering</Label>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
@@ -151,8 +150,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Status og brukergrupper</Element>
+            <div className="col-sm-12  filtrering-filter__kolonne">
+                <Label>Status og brukergrupper</Label>
                 <Dropdown
                     name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
@@ -227,8 +226,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Rettighetsgruppe og ytelse</Element>
+            <div className="col-sm-12  filtrering-filter__kolonne">
+                <Label>Rettighetsgruppe og ytelse</Label>
                 <Dropdown
                     name="Rettighetsgruppe"
                     id="rettighetsgruppe"

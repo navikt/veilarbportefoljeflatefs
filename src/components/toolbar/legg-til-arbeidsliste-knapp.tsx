@@ -5,9 +5,8 @@ import './toolbar.less';
 import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
-import {Normaltekst} from 'nav-frontend-typografi';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
 
 interface LeggTilArbeidslisteProps {
@@ -53,9 +52,9 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 }
             >
                 <Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />
-                <Normaltekst className="toolbar-knapp__tekst">
+                <BodyShort className="toolbar-knapp__tekst">
                     {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
-                </Normaltekst>
+                </BodyShort>
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
         </div>

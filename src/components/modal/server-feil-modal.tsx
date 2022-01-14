@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {Normaltekst, Undertittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.less';
 import {useState} from 'react';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface ServerFeilModalProps {
     isOpen: boolean;
@@ -28,11 +27,11 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
             portalClassName="tildeling-veileder-modal"
         >
             <div className="server-feil-modal">
-                <Undertittel tag="h1" className="blokk-xxs">
+                <Heading size="small" level="1">
                     Handlingen kan ikke utføres
-                </Undertittel>
-                <Normaltekst className="blokk-s">Noe gikk feil, prøv igjen senere.</Normaltekst>
-                <Button className="knapp knapp--hoved blokk-s" onClick={lukkModal}>
+                </Heading>
+                <BodyShort>Noe gikk feil, prøv igjen senere.</BodyShort>
+                <Button className="knapp knapp--hoved " onClick={lukkModal}>
                     Ok
                 </Button>
             </div>

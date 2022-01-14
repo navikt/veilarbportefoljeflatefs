@@ -3,12 +3,11 @@ import {Form} from 'formik';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
-import {Undertekst, Undertittel} from 'nav-frontend-typografi';
 import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Button} from '@navikt/ds-react';
+import {Button, Detail, Heading} from '@navikt/ds-react';
 import {Delete, SaveFile} from '@navikt/ds-icons';
 
 interface RedigerArbeidslisteProps {
@@ -31,15 +30,15 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
-                <div className="nav-input blokk-s">
-                    <Undertittel>
+                <div className="nav-input">
+                    <Heading size="small" level="2">
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
-                    </Undertittel>
+                    </Heading>
                     <FormikInput name="overskrift" />
                     <FormikTekstArea name="kommentar" />
-                    <Undertekst className="arbeidsliste--modal-redigering">
+                    <Detail size="small" className="arbeidsliste--modal-redigering">
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
-                    </Undertekst>
+                    </Detail>
                 </div>
                 <div className="skjemaelement dato-kategori-wrapper">
                     <FormikDatoVelger name="frist" />

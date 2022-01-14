@@ -1,9 +1,7 @@
 import React from 'react';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './bekreft-sletting-modal.less';
-import hiddenIf from '../../hidden-if/hidden-if';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 
 interface BekreftSlettingModalProps {
@@ -14,8 +12,6 @@ interface BekreftSlettingModalProps {
     infoTekst?: string;
     navn: string;
 }
-
-const HiddenIfInfotekst = hiddenIf(Normaltekst);
 
 function BekreftSlettingModal(props: BekreftSlettingModalProps) {
     const slettKnapp = () => {
@@ -31,12 +27,14 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
             className="bekreft-sletting-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <div className="blokk-s bekreft-sletting-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">{props.tittel}</Innholdstittel>
-                <HiddenIfInfotekst hidden={!props.infoTekst}>{props.infoTekst}</HiddenIfInfotekst>
-                <Normaltekst>
+            <div className="bekreft-sletting-modal__tekstgruppe">
+                <Heading size="xlarge" level="1">
+                    {props.tittel}
+                </Heading>
+                {props.infoTekst && <BodyShort>{props.infoTekst}</BodyShort>}
+                <BodyShort>
                     Er du sikker på at du vil slette <b>{props.navn}</b>?
-                </Normaltekst>
+                </BodyShort>
             </div>
             <div className="bekreft-sletting-modal__knappegruppe">
                 <Button

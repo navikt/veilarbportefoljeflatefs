@@ -82,7 +82,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                     >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
             </RadioGroup>
-            <div className="blokk-xxs filterform__under-valg">
+            <div className=" filterform__under-valg">
                 <Button
                     variant={ident ? 'primary' : 'secondary'}
                     onClick={btnOnClick}

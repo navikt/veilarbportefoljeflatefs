@@ -3,10 +3,10 @@ import {ReactComponent as AlarmIcon} from './icon-v3.svg';
 import EndringsloggInnhold from './endringslogg-innhold';
 import TransitionContainer from './utils/transition-container';
 import {useEventListener} from '../../hooks/use-event-listener';
-import Undertittel from 'nav-frontend-typografi/lib/undertittel';
 import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {Heading} from '@navikt/ds-react';
 
 interface EndringsProps {
     innhold: EndringsloggInnleggMedSettStatus[];
@@ -16,8 +16,7 @@ interface EndringsProps {
 
 export default function Endringslogg(props: EndringsProps) {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = props.innhold
-        .some(element => !element.sett);
+    const overordnetNotifikasjon = props.innhold.some(element => !element.sett);
 
     const loggNode = useRef<HTMLDivElement>(null); // Referranse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +73,7 @@ export default function Endringslogg(props: EndringsProps) {
             />
             <TransitionContainer visible={endringsloggApen}>
                 <EndringsloggHeader />
-                <div className={'innhold-container'} data-testid="endringslogg-innhold">
+                <div className="innhold-container" data-testid="endringslogg-innhold">
                     <EndringsloggInnhold innleggsListe={props.innhold} />
                 </div>
             </TransitionContainer>
@@ -110,8 +109,8 @@ function EndringsloggKnapp(props: EndringsloggKnappProps) {
 
 function EndringsloggHeader() {
     return (
-        <Undertittel className="collapse-header" tag="h2">
+        <Heading size="small" level="1" className="collapse-header">
             Nytt i Arbeidsrettet oppfølging
-        </Undertittel>
+        </Heading>
     );
 }

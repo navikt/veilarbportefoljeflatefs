@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Button} from '@navikt/ds-react';
 import {Back, Next} from '@navikt/ds-icons';
 import cls from 'classnames';
+import './chevron-lenke.less';
 
 export enum Retning {
     HOYRE,
@@ -19,17 +20,17 @@ interface ChevronLenkeProps {
 
 function ChevronLenke(props: ChevronLenkeProps) {
     const {retning, tekst, onClick, hide, dataTestId} = props;
-    const clsPar = ['chevron-lenke', {'chevron-lenke--hide': hide}];
+    const clsPar = {'chevron-lenke--hide': hide};
     return (
         <Button className={cls(clsPar)} onClick={onClick} data-testid={dataTestId}>
             {retning === Retning.VENSTRE ? (
                 <>
                     <Back />
-                    <span className="chevron-lenke__tekst">{tekst}</span>
+                    {tekst}
                 </>
             ) : (
                 <>
-                    <span className="chevron-lenke__tekst">{tekst}</span>
+                    {tekst}
                     <Next />
                 </>
             )}

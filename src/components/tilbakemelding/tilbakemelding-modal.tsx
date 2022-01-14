@@ -1,12 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
 import TilfredshetValg from './tilfredshet-valg';
 import CheckboxValg from './checkbox-valg';
-import {Button, Textarea} from '@navikt/ds-react';
+import {BodyShort, Button, Heading, Textarea} from '@navikt/ds-react';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -105,18 +104,17 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                     <TilbakemeldingTakkModal />
                 ) : (
                     <>
-                        <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
+                        <Heading size="xlarge" level="1" className="tilbakemelding-modal__tittel">
                             Tilbakemelding
-                        </Innholdstittel>
-                        <Normaltekst className="tilbakemelding-modal__ingress">
+                        </Heading>
+                        <BodyShort className="tilbakemelding-modal__ingress">
                             Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og
                             forhåndsorientering i aktivitetsplanen?
-                        </Normaltekst>
+                        </BodyShort>
                         {visTilfredshet ? (
                             <>
                                 <div className="tilbakemelding-modal__tilfredshet">
                                     <TilfredshetValg
-                                        className="blokk-xs"
                                         onTilfredshetChanged={handleTilfredshetChanged}
                                         defaultTilfredshet={tilfredshet}
                                     />

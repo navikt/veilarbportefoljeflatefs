@@ -26,9 +26,9 @@ import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import BarInputGruppe from '../../components/barinput/barinput-gruppe';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
-import {Element} from 'nav-frontend-typografi';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../../konstanter';
+import {Label} from '@navikt/ds-react';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -73,9 +73,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     return (
         <div className="filtrering-oversikt panel">
-            <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
-                {tekstAntallBrukere(statusTall.totalt)}
-            </Element>
+            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
             <div className="filter-checkboks-container">
                 {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox

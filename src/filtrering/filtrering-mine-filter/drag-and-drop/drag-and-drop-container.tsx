@@ -2,12 +2,11 @@ import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 import {LagretFilter} from '../../../ducks/lagret-filter';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {SaveFile} from '@navikt/ds-icons';
 
 export interface DragAndDropContainerProps {
@@ -148,15 +147,14 @@ function DragAndDropContainer({
             <div aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </div>
-            <Normaltekst
-                tag={'h3'}
+            <BodyShort
                 className="drag-and-drop-tittel"
                 aria-readonly="true"
                 aria-live="polite"
                 data-testid="drag-drop_infotekst"
             >
                 Endre rekkefølge med SHIFT-tast + piltaster eller dra og slipp:
-            </Normaltekst>
+            </BodyShort>
             <ul
                 ref={dragContainer}
                 className="drag-and-drop-container"

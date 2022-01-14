@@ -1,6 +1,5 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import {Element} from 'nav-frontend-typografi';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
@@ -10,6 +9,7 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
+import {Label} from '@navikt/ds-react';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -25,8 +25,8 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
 
     return (
         <>
-            <div className="minArbeidsliste__tittel typo-element">
-                <Element className="blokk-xxs">Arbeidsliste</Element>
+            <div className="minArbeidsliste__tittel">
+                <Label>Arbeidsliste</Label>
             </div>
             <BarInputRadio
                 filterNavn="minArbeidsliste"

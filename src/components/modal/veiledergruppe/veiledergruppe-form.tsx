@@ -1,10 +1,9 @@
 import React, {PropsWithChildren} from 'react';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
 import './modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
-import {TextField} from '@navikt/ds-react';
+import {BodyShort, TextField} from '@navikt/ds-react';
 
 interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
@@ -37,12 +36,12 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
                     hanterVeilederValgt={props.hanterVeilederChange}
                 />
             </div>
-            <Normaltekst
+            <BodyShort
                 className="veiledergruppe-modal__tekst"
                 data-testid={`veiledergruppe_modal_antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
             >
                 Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
-            </Normaltekst>
+            </BodyShort>
             <ValgtVeiledergruppeListe
                 valgteVeileder={props.filterValg.veiledere}
                 fjernValgtVeileder={veilederTarget => props.hanterVeilederChange(false, veilederTarget)}

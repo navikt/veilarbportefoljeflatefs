@@ -227,7 +227,7 @@ export default function EnhetSide() {
                         ) : (
                             <Alert
                                 variant="info"
-                                className="blokk-m alertstripe__filtrering"
+                                className=" alertstripe__filtrering"
                                 aria-live="assertive"
                                 role="alert"
                                 aria-atomic="true"

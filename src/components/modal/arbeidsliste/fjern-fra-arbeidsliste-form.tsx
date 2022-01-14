@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Element} from 'nav-frontend-typografi';
 import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall';
@@ -9,12 +8,12 @@ import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Button} from '@navikt/ds-react';
+import {Button, Label} from '@navikt/ds-react';
 
 function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
-            <Element>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Element>
+            <Label>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Label>
         </li>
     );
 }

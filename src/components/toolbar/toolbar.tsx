@@ -8,10 +8,10 @@ import {useSelector} from 'react-redux';
 import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
-import {Undertittel} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
+import {Heading} from '@navikt/ds-react';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -69,7 +69,7 @@ function Toolbar(props: ToolbarProps) {
     return (
         <div
             className={classNames(
-                'toolbar blokk-xs',
+                'toolbar',
                 ((scrolling && isSidebarHidden && !windowWidth) ||
                     (scrolling && windowWidth && !isSidebarHidden) ||
                     (!isSidebarHidden && windowWidth)) &&
@@ -79,11 +79,11 @@ function Toolbar(props: ToolbarProps) {
         >
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {oversiktType === OversiktType.veilederOversikt && (
-                    <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
+                    <Heading size="small" level="2">
                         {antallTotalt === 0
                             ? `Ingen veiledere`
                             : `Viser ${antallValgteVeiledere} av totalt ${antallTotalt} veiledere.`}
-                    </Undertittel>
+                    </Heading>
                 )}
                 {oversiktType !== OversiktType.veilederOversikt && (
                     <div className="tildel-veileder-wrapper">

@@ -1,9 +1,8 @@
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import React, {PropsWithChildren} from 'react';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface ModalSuksessProps {
     isOpen: boolean;
@@ -26,9 +25,11 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             type={VarselModalType.SUKSESS}
             closeButton={props.closeButton}
         >
-            <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">{props.tittel}</Innholdstittel>
-                <Normaltekst>{props.tekst}</Normaltekst>
+            <div className="tildeling-veileder-modal__tekstgruppe">
+                <Heading size="xlarge" level="1">
+                    {props.tittel}
+                </Heading>
+                <BodyShort>{props.tekst}</BodyShort>
                 {props.children}
             </div>
             <Button type="submit" onClick={props.onRequestClose} data-testid={`modal-suksess_${props.testNavn}`}>

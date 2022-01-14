@@ -1,8 +1,7 @@
 import React from 'react';
-import {Innholdstittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './modal.less';
-import {Button} from '@navikt/ds-react';
+import {Button, Heading} from '@navikt/ds-react';
 
 interface EndringerIkkeLagretModal {
     isOpen: boolean;
@@ -19,9 +18,9 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
             className="endringer-ikke-lagret-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <Innholdstittel className="blokk-s endringer-ikke-lagret-modal__innholdstittel">
+            <Heading size="xlarge" level="1" className="endringer-ikke-lagret-modal__innholdstittel">
                 Endringene er ikke lagret
-            </Innholdstittel>
+            </Heading>
             <div className="endringer-ikke-lagret-modal__knappegruppe">
                 <Button
                     className="endringer-ikke-lagret-modal__knappegruppe__redigering"

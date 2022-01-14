@@ -1,9 +1,9 @@
 import * as React from 'react';
 import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
-import {UndertekstBold} from 'nav-frontend-typografi';
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
+import {Detail} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -29,7 +29,7 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises,
             <span className="flex">
                 <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
                 <span className="brukerliste__arbeidslisteinnhold flex--grow">
-                    <UndertekstBold data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</UndertekstBold>
+                    <Detail data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</Detail>
                     <p className="brukerliste__arbeidslisteinnhold_frist typo-undertekst">
                         Arbeidsliste frist: {arbeidslisteFristTekst}
                     </p>

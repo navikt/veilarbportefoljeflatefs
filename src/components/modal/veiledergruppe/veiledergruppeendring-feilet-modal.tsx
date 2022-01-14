@@ -1,8 +1,7 @@
 import React from 'react';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './modal.less';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {
     contentLabel: string;
@@ -21,9 +20,11 @@ function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProp
             className="veiledergruppe-feilet-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <div className="blokk-s veiledergruppe-feilet-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">{props.innholdstittel}</Innholdstittel>
-                <Normaltekst>{props.tekst}</Normaltekst>
+            <div className="veiledergruppe-feilet-modal__tekstgruppe">
+                <Heading size="xlarge" level="1">
+                    {props.innholdstittel}
+                </Heading>
+                <BodyShort>{props.tekst}</BodyShort>
             </div>
             <div className="veiledergruppe-feilet-modal__knappegruppe">
                 <Button type="submit" onClick={props.onRequestClose}>
