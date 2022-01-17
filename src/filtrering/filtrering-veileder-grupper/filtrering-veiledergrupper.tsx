@@ -12,7 +12,6 @@ import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import VeiledergruppeInnhold from './veiledergruppe-innhold';
-import {kebabCase} from '../../utils/utils';
 import {Alert, BodyShort} from '@navikt/ds-react';
 
 interface FilteringVeiledergruppeProps {
@@ -84,7 +83,6 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                 modalTittel={modalTittel}
                 lagreKnappeTekst="Lagre"
                 onRequestClose={() => setVeiledergruppeModal(false)}
-                className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
             />
         </>
     );

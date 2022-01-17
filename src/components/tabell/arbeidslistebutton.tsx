@@ -17,6 +17,7 @@ interface ArbeidslisteButtonProps {
 const arbeidslisteButton = ({className, onClick, apen, dataTestid}: ArbeidslisteButtonProps) => {
     return (
         <Button
+            variant="tertiary"
             className={classnames('knapp brukerliste__arbeidslisteknapp', className)}
             onClick={onClick}
             aria-expanded={apen}

@@ -19,10 +19,8 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
 
     return (
         <VarselModal
-            contentLabel="Fikk feil fra server"
             isOpen={isOpen}
-            onRequestClose={lukkModal}
-            closeButton={false}
+            onClose={lukkModal}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"
         >

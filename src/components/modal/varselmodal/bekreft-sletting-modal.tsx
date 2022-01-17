@@ -1,8 +1,8 @@
 import React from 'react';
-import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import './bekreft-sletting-modal.less';
+import {VarselModal, VarselModalType} from './varselmodal';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
+import './varsel-modal.less';
 
 interface BekreftSlettingModalProps {
     isOpen: boolean;
@@ -21,9 +21,8 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
 
     return (
         <VarselModal
-            contentLabel={props.tittel}
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             className="bekreft-sletting-modal"
             type={VarselModalType.ADVARSEL}
         >

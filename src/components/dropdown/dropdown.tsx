@@ -5,7 +5,7 @@ import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
 import {BodyShort} from '@navikt/ds-react';
 
-const btnCls = (props: DropdownProps, apen: boolean, hover: boolean) =>
+const btnCls = (props: DropdownProps, apen: boolean) =>
     classNames('dropdown', props.className, {
         'dropdown--apen': apen
     });
@@ -28,7 +28,6 @@ interface DropdownProps {
 function Dropdown(props: DropdownProps) {
     const {name, disabled, render, hoyre, hidden, id} = props;
     const [apen, setApen] = useState(props.apen || false);
-    const [hover, setHover] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const {focusRef} = useFocus();
@@ -59,12 +58,6 @@ function Dropdown(props: DropdownProps) {
         onLukk();
     }
 
-    function isHover(hoverState) {
-        return () => {
-            setHover(hoverState);
-        };
-    }
-
     if (hidden) {
         return null;
     }
@@ -84,12 +77,7 @@ function Dropdown(props: DropdownProps) {
     };
 
     return (
-        <div
-            className={btnCls(props, apen, hover)}
-            ref={divRef}
-            onMouseEnter={isHover(true)}
-            onMouseLeave={isHover(false)}
-        >
+        <div className={btnCls(props, apen)} ref={divRef}>
             <div className={btnWrapperCls(disabled)}>
                 <button
                     ref={btnRef}

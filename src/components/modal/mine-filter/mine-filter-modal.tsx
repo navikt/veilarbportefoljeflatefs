@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Modal from '../modal';
+import EgenModal from '../egenModal';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import './mine-filter.less';
@@ -64,11 +64,10 @@ export function MineFilterModal(props: {oversiktType: string}) {
     }, [filterValg, valgtMineFilter, sisteValgtMineFilter, erModalApen]);
 
     return (
-        <Modal
+        <EgenModal
             className="mine-filter-meny-modal"
-            contentLabel="Mine filter meny modal"
-            isOpen={erModalApen}
-            onRequestClose={lukkModal}
+            open={erModalApen}
+            onClose={lukkModal}
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
         >
             <div className="modal-visningstype">
@@ -91,6 +90,6 @@ export function MineFilterModal(props: {oversiktType: string}) {
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>
-        </Modal>
+        </EgenModal>
     );
 }

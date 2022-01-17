@@ -17,13 +17,11 @@ interface ModalSuksessProps {
 function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
     return (
         <VarselModal
-            contentLabel="Tildeling av veileder vellykket"
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
-            closeButton={props.closeButton}
         >
             <div className="tildeling-veileder-modal__tekstgruppe">
                 <Heading size="xlarge" level="1">

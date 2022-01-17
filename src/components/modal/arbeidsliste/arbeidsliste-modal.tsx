@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import NavFrontendModal from 'nav-frontend-modal';
 import {skjulModal} from '../../../ducks/modal';
 import {markerAlleBrukere} from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
@@ -12,7 +11,7 @@ import {LasterModal} from '../lastermodal/laster-modal';
 import ModalHeader from '../modal-header/modal-header';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import {BodyShort, Heading} from '@navikt/ds-react';
+import {BodyShort, Heading, Modal} from '@navikt/ds-react';
 
 interface ArbeidslisteModalProps {
     isOpen: boolean;
@@ -58,12 +57,10 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
 
     leggTilModal(valgteBrukere: BrukerModell[]) {
         return (
-            <NavFrontendModal
+            <Modal
                 className="arbeidsliste-modal legg-i-arbeidsliste"
-                contentLabel="arbeidsliste"
-                isOpen={this.state.isOpen || false}
-                onRequestClose={this.lukkModal}
-                closeButton
+                open={this.state.isOpen || false}
+                onClose={this.lukkModal}
             >
                 <ModalHeader tittel="Legg i arbeidsliste" />
                 <div className="modal-innhold">
@@ -74,7 +71,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
                         setFormIsDirty={this.setFormIsDirty}
                     />
                 </div>
-            </NavFrontendModal>
+            </Modal>
         );
     }
 
@@ -84,8 +81,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
         return (
             <VarselModal
                 isOpen={this.state.isOpen}
-                onRequestClose={this.lukkModal}
-                contentLabel="Fjern brukere fra arbeidsliste"
+                onClose={this.lukkModal}
                 type={VarselModalType.ADVARSEL}
                 dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
             >

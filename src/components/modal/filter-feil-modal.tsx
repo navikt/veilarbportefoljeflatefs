@@ -21,11 +21,9 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
 
     return (
         <VarselModal
-            contentLabel={'Feil med filter'}
             isOpen={isOpen}
             type={VarselModalType.FEIL}
-            closeButton={false}
-            onRequestClose={lukkModal}
+            onClose={lukkModal}
             portalClassName="filter-feil-modal"
             className="filter-feil-modal__content"
         >

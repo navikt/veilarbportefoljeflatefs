@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 import {BodyShort, TextField} from '@navikt/ds-react';
 
@@ -20,9 +20,9 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit} data-testid="veiledergruppe_modal_form">
             <TextField
                 label={
-                    <p className="veiledergruppe-modal__gruppenavntekst">
+                    <span className="veiledergruppe-modal__gruppenavntekst">
                         Gruppenavn: <i>(maks 35 tegn)</i>
-                    </p>
+                    </span>
                 }
                 value={props.gruppeNavn}
                 onChange={e => props.setGruppeNavn(e.target.value)}
@@ -40,7 +40,9 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
                 className="veiledergruppe-modal__tekst"
                 data-testid={`veiledergruppe_modal_antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
             >
-                Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
+                <strong>
+                    Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
+                </strong>
             </BodyShort>
             <ValgtVeiledergruppeListe
                 valgteVeileder={props.filterValg.veiledere}

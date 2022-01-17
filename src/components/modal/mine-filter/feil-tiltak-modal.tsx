@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {AppState} from '../../../reducer';
-import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
+import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import {slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {useDispatch, useSelector} from 'react-redux';
-import Modal from '../modal';
+import EgenModal from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import './mine-filter.less';
 import {BodyShort, Button} from '@navikt/ds-react';
@@ -40,11 +40,10 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
 
     return (
         <>
-            <Modal
+            <EgenModal
                 className="feil-tiltak_modal"
-                contentLabel="Feil tiltak modal"
-                isOpen={erFeilTiltakModalApen}
-                onRequestClose={lukkModal}
+                open={erFeilTiltakModalApen}
+                onClose={lukkModal}
                 tittel="Tiltaksfilter finnes ikke"
             >
                 <BodyShort>
@@ -63,7 +62,7 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                         <Delete />
                     </Button>
                 </div>
-            </Modal>
+            </EgenModal>
             <BekreftSlettingModal
                 isOpen={visBekreftSlettModal}
                 onRequestClose={() => setVisBekreftSlettModal(false)}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {
@@ -14,9 +14,8 @@ interface VeiledergruppeendringFeiletProps {
 function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProps) {
     return (
         <VarselModal
-            contentLabel={props.contentLabel}
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             className="veiledergruppe-feilet-modal"
             type={VarselModalType.ADVARSEL}
         >

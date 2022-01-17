@@ -40,7 +40,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                     </Detail>
                 </div>
-                <div className="skjemaelement dato-kategori-wrapper">
+                <div className="dato-kategori-wrapper">
                     <FormikDatoVelger name="frist" />
                     <ArbeidslisteKategori name="kategori" index="" />
                 </div>

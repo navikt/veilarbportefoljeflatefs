@@ -1,27 +1,27 @@
 .varsel-modal {
-    div {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem !important;
 
     &__ikon {
-        margin: -2rem auto 0 auto; //plasserer et ikon med størrelsen 64x64 i midten av modalen
         align-items: center;
+
+        svg {
+            width: 2rem;
+            height: auto;
+        }
     }
 
-    &__innhold > * {
-        margin-bottom: 0.5rem;
-    }
+    .bekreft-sletting-modal {
+        &__tekstgruppe {
+            margin-bottom: 1rem;
+        }
 
-    .modal__overlay {
-        z-index: 2002;
-
-        .ReactModal__Content {
-            overflow: visible;
-            width: 576px;
-            padding: 0 1rem;
-            font-family: Source Sans Pro, Arial, sans-serif;
+        &__knappegruppe {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0 6rem;
         }
     }
 }

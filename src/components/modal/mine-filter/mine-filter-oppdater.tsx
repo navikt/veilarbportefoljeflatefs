@@ -4,7 +4,7 @@ import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
-import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
+import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';

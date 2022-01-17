@@ -1,6 +1,6 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import {Button, Heading} from '@navikt/ds-react';
 
 interface EndringerIkkeLagretModal {
@@ -12,9 +12,8 @@ interface EndringerIkkeLagretModal {
 function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
     return (
         <VarselModal
-            contentLabel="Endringene er ikke lagret"
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             className="endringer-ikke-lagret-modal"
             type={VarselModalType.ADVARSEL}
         >

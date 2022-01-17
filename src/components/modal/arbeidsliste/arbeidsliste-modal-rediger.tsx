@@ -1,5 +1,4 @@
 import * as React from 'react';
-import NavFrontendModal from 'nav-frontend-modal';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import {BrukerModell, KategoriModell, Status} from '../../../model-interfaces';
 import {useState} from 'react';
@@ -18,7 +17,7 @@ import ModalHeader from '../modal-header/modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
-import {Button} from '@navikt/ds-react';
+import {Button, Modal} from '@navikt/ds-react';
 
 interface Ownprops {
     bruker: BrukerModell;
@@ -112,12 +111,11 @@ function ArbeidslisteModalRediger({
                         onSubmit(values);
                     }}
                     render={formikProps => (
-                        <NavFrontendModal
-                            className="arbeidsliste-modal rediger-arbeidsliste"
-                            contentLabel="arbeidsliste"
-                            isOpen={isOpen}
-                            onRequestClose={() => lukkModalConfirm(formikProps)}
-                            closeButton
+                        <Modal
+                            className="arbeidsliste-modal"
+                            open={isOpen}
+                            onClose={() => lukkModalConfirm(formikProps)}
+                            shouldCloseOnOverlayClick
                         >
                             <ModalHeader tittel="Rediger arbeidsliste" />
                             <div className="modal-innhold">
@@ -139,7 +137,7 @@ function ArbeidslisteModalRediger({
                                     />
                                 )}
                             </div>
-                        </NavFrontendModal>
+                        </Modal>
                     )}
                 />
             )}

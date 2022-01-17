@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
-import ModalWrapper from 'nav-frontend-modal';
-import BekreftSlettingModal from '../bekreftelse-modal/bekreft-sletting-modal';
+import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
@@ -11,11 +10,12 @@ import VeiledergruppeForm from './veiledergruppe-form';
 import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import ModalHeader from '../modal-header/modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
-import {Alert, Button} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
+import {Alert, Button, Modal} from '@navikt/ds-react';
+import {Delete, SaveFile} from '@navikt/ds-icons';
+import classNames from 'classnames';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -206,12 +206,10 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
 
     return (
         <>
-            <ModalWrapper
-                isOpen={props.isOpen}
-                contentLabel={props.modalTittel}
-                onRequestClose={lukkModal}
-                portalClassName="veiledergruppe-modal"
-                className={props.className}
+            <Modal
+                open={props.isOpen}
+                onClose={lukkModal}
+                className={classNames('veiledergruppe-modal', props.className)}
             >
                 <ModalHeader tittel={props.modalTittel} />
                 {alertTekst.length !== 0 && (
@@ -235,6 +233,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                             data-testid="veiledergruppe_modal_lagre-knapp"
                         >
                             {props.lagreKnappeTekst}
+                            <SaveFile />
                         </Button>
                         <Button
                             variant="tertiary"
@@ -259,7 +258,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         )}
                     </div>
                 </VeiledergruppeForm>
-            </ModalWrapper>
+            </Modal>
             <EndringerIkkeLagretModal
                 isOpen={visEndringerIkkeLagretModal}
                 onRequestClose={() => setEndringerIkkeLagretModal(false)}

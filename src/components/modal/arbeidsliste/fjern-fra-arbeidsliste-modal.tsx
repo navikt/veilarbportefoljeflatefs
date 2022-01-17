@@ -19,8 +19,7 @@ function FjernArbeidslisteModal({isOpen, valgteBrukere, lukkModal, bruker}: Fjer
     return (
         <VarselModal
             isOpen={isOpen}
-            onRequestClose={lukkModal}
-            contentLabel="Fjern brukere fra arbeidsliste"
+            onClose={lukkModal}
             type={VarselModalType.ADVARSEL}
             dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
         >
