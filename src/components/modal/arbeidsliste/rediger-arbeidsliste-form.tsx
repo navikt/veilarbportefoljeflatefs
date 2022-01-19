@@ -10,6 +10,7 @@ import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
 import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
+import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -35,6 +36,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <Undertittel>
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
                     </Undertittel>
+                    <ArbeidslisteInformasjonsmelding />
                     <FormikInput name="overskrift" />
                     <FormikTekstArea name="kommentar" />
                     <Undertekst className="arbeidsliste--modal-redigering">
