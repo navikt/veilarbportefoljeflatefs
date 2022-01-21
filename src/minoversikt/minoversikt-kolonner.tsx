@@ -44,7 +44,7 @@ interface MinOversiktKolonnerProps {
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
+    const erAapYtelse = Object.keys(ytelseAapSortering) === ytelse;
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const arbeidslisteFrist = bruker.arbeidsliste?.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -102,17 +102,17 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 minVal={2}
                 skalVises={
                     ytelseErValgtKolonne &&
-                    (ytelse === ytelsevalgIntl.DAGPENGER ||
-                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
-                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
+                    (ytelse.includes(ytelsevalgIntl.DAGPENGER) ||
+                        ytelse.includes(ytelsevalgIntl.ORDINARE_DAGPENGER) ||
+                        ytelse.includes(ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI) ||
+                        ytelse.includes(ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER))
                 }
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+                skalVises={ytelseErValgtKolonne && ytelse.includes(ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -136,7 +136,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.TILTAKSPENGER}
+                skalVises={ytelseErValgtKolonne && ytelse.includes(ytelsevalgIntl.TILTAKSPENGER)}
             />
             <DatoKolonne
                 className="col col-xs-2"

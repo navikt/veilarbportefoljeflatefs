@@ -4,15 +4,15 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import './filterform.less';
 import classNames from 'classnames';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
-import {Alert} from '@navikt/ds-react';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
+    gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
 }
@@ -22,7 +22,7 @@ function CheckboxFilterform({
     valg,
     form,
     filtervalg,
-    columns = 1,
+    gridColumns = 1,
     className,
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
@@ -50,28 +50,27 @@ function CheckboxFilterform({
     return (
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
-                <div className={classNames('checkbox-filterform__valg', className)}>
-                    <Grid columns={columns}>
+                <CheckboxGroup legend="" hideLegend className={classNames('checkbox-filterform__valg', className)}>
+                    <Grid columns={gridColumns}>
                         {Object.entries(valg).map(([filterKey, filterValue]) => (
-                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                <input
-                                    id={filterKey}
-                                    type="checkbox"
-                                    className="skjemaelement__input checkboks"
+                            <>
+                                {console.log(checkBoxValg.includes(filterKey))}
+                                <Checkbox
+                                    key={filterKey}
                                     value={filterKey}
+                                    name={valg[filterKey]}
                                     checked={checkBoxValg.includes(filterKey)}
                                     onChange={velgCheckBox}
                                     data-testid={`filter_${filterKey}`}
-                                />
-                                <label htmlFor={filterKey} className="skjemaelement__label">
+                                >
                                     {filterValue}
-                                </label>
-                            </div>
+                                </Checkbox>
+                            </>
                         ))}
                     </Grid>
-                </div>
+                </CheckboxGroup>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
                 form={form}

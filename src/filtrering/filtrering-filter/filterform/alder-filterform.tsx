@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import './filterform.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
-import {Button} from '@navikt/ds-react';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
     form: string;
@@ -128,52 +128,51 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         >
             {harValg && (
                 <>
-                    <div className={classNames('checkbox-filterform__valg', className)}>
+                    <CheckboxGroup legend="" hideLegend className={classNames('checkbox-filterform__valg', className)}>
                         <Grid columns={2}>
                             {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                    <input
-                                        id={filterKey}
-                                        type="checkbox"
-                                        className="skjemaelement__input checkboks"
-                                        value={filterKey}
-                                        checked={checkBoxValg.includes(filterKey)}
-                                        onChange={e => submitCheckBox(e)}
-                                        data-testid={`filter_${filterKey}`}
-                                    />
-                                    <label htmlFor={filterKey} className="skjemaelement__label">
-                                        {filterValue}
-                                    </label>
-                                </div>
+                                <Checkbox
+                                    key={filterKey}
+                                    id={filterKey}
+                                    type="checkbox"
+                                    value={filterKey}
+                                    checked={checkBoxValg.includes(filterKey)}
+                                    onChange={e => submitCheckBox(e)}
+                                    data-testid={`filter_${filterKey}`}
+                                >
+                                    {filterValue}
+                                </Checkbox>
                             ))}
                         </Grid>
-                    </div>
+                    </CheckboxGroup>
                     <hr className="alder-border" />
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
                         <div className="alder-container alder-container__fra">
-                            <label htmlFor="filter_alder-fra">Fra:</label>
-                            <input
-                                min={0}
+                            <TextField
+                                label="Fra:"
+                                value={inputAlderFra}
+                                onChange={e => onChangeInput(e, false)}
+                                size="small"
+                                onKeyDown={e => fjernTegn(e)}
                                 type="number"
+                                min={0}
                                 id="filter_alder-fra"
                                 className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-fra"
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, false)}
-                                value={inputAlderFra}
-                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                         <div className="alder-container alder-container__til">
-                            <label htmlFor="filter_alder-til">Til:</label>
-                            <input
-                                min={0}
+                            <TextField
+                                label="Til:"
+                                value={inputAlderTil}
+                                onChange={e => onChangeInput(e, true)}
+                                size="small"
+                                onKeyDown={e => fjernTegn(e)}
                                 type="number"
+                                min={0}
                                 id="filter_alder-til"
                                 className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-til"
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, true)}
-                                value={inputAlderTil}
-                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                         <Button
@@ -187,13 +186,13 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                         </Button>
                     </div>
                     {feil && (
-                        <p className="validering-tekst" data-testid="filter_alder_valideringstekst">
+                        <BodyShort className="validering-tekst" data-testid="filter_alder_valideringstekst">
                             {feilTekst}
-                        </p>
+                        </BodyShort>
                     )}
                 </>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="alder-filterform"
                 nullstillValg={nullstillValg}
                 form={form}

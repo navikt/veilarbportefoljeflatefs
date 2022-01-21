@@ -50,11 +50,14 @@ function MinOversiktListeHode({
     oversiktType
 }: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
+    const erAapYtelse = Object.keys(ytelseAapSortering) === ytelse;
+    // @ts-ignore
+    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse
-        ? ytelseAapSortering[ytelse!].vedtaksperiode
-        : ytelseUtlopsSortering[ytelse!];
+        ? // @ts-ignore
+          ytelseAapSortering[ytelse].vedtaksperiode
+        : // @ts-ignore
+          ytelseUtlopsSortering[ytelse];
     const ytelseSorteringHeader =
         ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
@@ -68,7 +71,7 @@ function MinOversiktListeHode({
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
-        <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
+        <div className="brukerliste__header brukerliste__sorteringheader">
             <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <VelgalleCheckboks

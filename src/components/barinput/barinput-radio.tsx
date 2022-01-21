@@ -1,8 +1,8 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './barlabel.less';
-import hiddenIf from '../hidden-if/hidden-if';
-import BarInput from './barinput';
+import Barlabel from './barlabel';
+import {Radio} from '@navikt/ds-react';
 
 interface BarinputRadioProps {
     filterNavn: string;
@@ -11,24 +11,19 @@ interface BarinputRadioProps {
     antall: number;
 }
 
-export function BarInputRadio({filterNavn, handleChange, checked, antall}: BarinputRadioProps) {
+export const BarInputRadio = ({filterNavn, handleChange, checked, antall}: BarinputRadioProps) => {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
     const labelTekst = ferdigfilterListe[filterVerdi];
 
     return (
-        <BarInput
-            type="radio"
-            name="ferdigfilter"
-            className="radioknapp"
-            id={filterNavn}
+        <Radio
             value={filterVerdi}
+            data-testid={`filter_checkboks-container_${filterNavn}`}
             onChange={handleChange}
             checked={checked}
-            labelTekst={labelTekst}
-            antall={antall}
-            barClassname={filterNavn}
-        />
+            className="barlabel"
+        >
+            <Barlabel labelTekst={labelTekst} antall={antall} />
+        </Radio>
     );
-}
-
-export const HiddenIfBarInputRadio = hiddenIf(BarInputRadio);
+};

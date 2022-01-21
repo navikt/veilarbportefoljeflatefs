@@ -3,7 +3,7 @@ import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsli
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import {Detail} from '@navikt/ds-react';
+import {BodyShort, Detail} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -30,11 +30,13 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises,
                 <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
                 <span className="brukerliste__arbeidslisteinnhold flex--grow">
                     <Detail data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</Detail>
-                    <p className="brukerliste__arbeidslisteinnhold_frist typo-undertekst">
+                    <BodyShort className="brukerliste__arbeidslisteinnhold_frist">
                         Arbeidsliste frist: {arbeidslisteFristTekst}
-                    </p>
-                    <p data-testid="chevron_arbeidslisteinnhold_kommentar">{bruker.arbeidsliste.kommentar}</p>
-                    <p className="brukerliste__arbeidslisteinnhold_footer typo-undertekst">
+                    </BodyShort>
+                    <BodyShort data-testid="chevron_arbeidslisteinnhold_kommentar">
+                        {bruker.arbeidsliste.kommentar}
+                    </BodyShort>
+                    <BodyShort className="brukerliste__arbeidslisteinnhold_footer">
                         {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                         <ArbeidslisteModalRediger
                             bruker={bruker}
@@ -43,7 +45,7 @@ export default function ArbeidslistePanel({bruker, innloggetVeileder, skalVises,
                             sistEndretAv={sistEndretAv}
                             settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                         />
-                    </p>
+                    </BodyShort>
                 </span>
             </span>
         </article>

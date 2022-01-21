@@ -1,6 +1,6 @@
 import React from 'react';
 import '../filterform.less';
-import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
@@ -53,19 +53,16 @@ function AktivitetFilterformForenklet({
                 ))}
             </CheckboxGroup>
             <div className="aktivitet-filterform__knappegruppe">
-                <div className="filterknapp-container">
-                    <Button
-                        variant="secondary"
-                        type="button"
-                        onClick={klikkPaAvansertLenke}
-                        className="filterknapp"
-                        data-testid="aktiviteter_avansert-filter_knapp"
-                        aria-label="Avansert aktivitetsfilter"
-                    >
-                        Avansert filter
-                    </Button>
-                </div>
-                <NullstillValgKnapp
+                <Button
+                    variant="tertiary"
+                    onClick={klikkPaAvansertLenke}
+                    className="filterknapp"
+                    data-testid="aktiviteter_avansert-filter_knapp"
+                    aria-label="Avansert aktivitetsfilter"
+                >
+                    Avansert filter
+                </Button>
+                <NullstillKnapp
                     dataTestId="aktivitet-filterform-forenklet"
                     nullstillValg={nullstillForenkledeAktiviteter}
                     form="aktiviteterForenklet"

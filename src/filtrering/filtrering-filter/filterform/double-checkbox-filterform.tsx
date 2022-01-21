@@ -4,8 +4,9 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import './filterform.less';
 import classNames from 'classnames';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
-import {Label} from '@navikt/ds-react';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Checkbox, RadioGroup} from '@navikt/ds-react';
+import Grid from '../../../components/grid/grid';
 
 interface DoubleCheckboxFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -13,94 +14,81 @@ interface DoubleCheckboxFilterformProps {
     className?: string;
 }
 
-const formCol1 = 'utdanningGodkjent';
-const formCol2 = 'utdanningBestatt';
-const valgCol1 = utdanningGodkjent;
-const valgCol2 = utdanningBestatt;
-const harValgCol1 = Object.keys(valgCol1).length > 0;
-const harValgCol2 = Object.keys(valgCol1).length > 0;
+const formUtdanningGodkjent = 'utdanningGodkjent';
+const formUtdanningBestatt = 'utdanningBestatt';
+const valgGodkjent = utdanningGodkjent;
+const valgBestatt = utdanningBestatt;
+const harValgGodkjent = Object.keys(valgGodkjent).length > 0;
+const harValgBestatt = Object.keys(valgGodkjent).length > 0;
 
-const uniqueValgCol1 = makeValgUnique(valgCol1, formCol1);
-const uniqueValgCol2 = makeValgUnique(valgCol2, formCol2);
+const uniqueValgGodkjent = makeValgUnique(valgGodkjent, formUtdanningGodkjent);
+const uniqueValgBestatt = makeValgUnique(valgBestatt, formUtdanningBestatt);
 
 function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: DoubleCheckboxFilterformProps) {
-    const [checkBoxValgCol1, setCheckBoxValgCol1] = useState<string[]>(filtervalg[formCol1]);
-    const [checkBoxValgCol2, setCheckBoxValgCol2] = useState<string[]>(filtervalg[formCol2]);
+    const [checkBoxValgGodkjent, setCheckBoxValgGodkjent] = useState<string[]>(filtervalg[formUtdanningGodkjent]);
+    const [checkBoxValgBestatt, setCheckBoxValgBestatt] = useState<string[]>(filtervalg[formUtdanningBestatt]);
 
     useEffect(() => {
-        setCheckBoxValgCol1(filtervalg[formCol1]);
+        setCheckBoxValgGodkjent(filtervalg[formUtdanningGodkjent]);
     }, [filtervalg]);
 
     useEffect(() => {
-        setCheckBoxValgCol2(filtervalg[formCol2]);
+        setCheckBoxValgBestatt(filtervalg[formUtdanningBestatt]);
     }, [filtervalg]);
 
     const velgCheckBox = (e, typeForm) => {
         e.persist();
         const id = e.target.value.replace(`${typeForm}_`, '');
-        if (typeForm === formCol1)
+        if (typeForm === formUtdanningGodkjent)
             return e.target.checked
-                ? endreFiltervalg(formCol1, [...checkBoxValgCol1, id])
+                ? endreFiltervalg(formUtdanningGodkjent, [...checkBoxValgGodkjent, id])
                 : endreFiltervalg(
-                      formCol1,
-                      checkBoxValgCol1.filter(value => value !== id)
+                      formUtdanningGodkjent,
+                      checkBoxValgGodkjent.filter(value => value !== id)
                   );
-        else if (typeForm === formCol2)
+        else if (typeForm === formUtdanningBestatt)
             return e.target.checked
-                ? endreFiltervalg(formCol2, [...checkBoxValgCol2, id])
+                ? endreFiltervalg(formUtdanningBestatt, [...checkBoxValgBestatt, id])
                 : endreFiltervalg(
-                      formCol2,
-                      checkBoxValgCol2.filter(value => value !== id)
+                      formUtdanningBestatt,
+                      checkBoxValgBestatt.filter(value => value !== id)
                   );
         return;
     };
 
     const nullstillValg = () => {
-        endreFiltervalg(formCol1, []);
-        endreFiltervalg(formCol2, []);
+        endreFiltervalg(formUtdanningGodkjent, []);
+        endreFiltervalg(formUtdanningBestatt, []);
     };
 
     return (
-        <form className="skjema checkbox-filterform">
-            {harValgCol1 && harValgCol2 && (
-                <div className={classNames('checkbox-filterform__valg__double', className)}>
-                    <div
-                        className="checkbox-filterform-col1"
-                        role="group"
-                        aria-labelledby="double-filterform-label-col1"
-                    >
-                        <Label id="double-filterform-label-col1" className="double-form-title">
-                            {'Er utdanningen godkjent i Norge?'}
-                        </Label>
+        <form>
+            {harValgGodkjent && harValgBestatt && (
+                <Grid columns={2} className={classNames('checkbox-filterform__valg__double', className)}>
+                    <RadioGroup legend="Er utdanningen godkjent i Norge?" className="checkbox-filterform-col1">
                         <RenderFields
-                            valg={uniqueValgCol1}
-                            form={formCol1}
-                            velgCheckBox={e => velgCheckBox(e, formCol1)}
-                            checkBoxValg={checkBoxValgCol1}
+                            valg={uniqueValgGodkjent}
+                            form={formUtdanningGodkjent}
+                            velgCheckBox={e => velgCheckBox(e, formUtdanningGodkjent)}
+                            checkBoxValg={checkBoxValgGodkjent}
                         />
-                    </div>
-                    <div
-                        className="checkbox-filterform-col2"
-                        role="group"
-                        aria-labelledby="double-filterform-label-col2"
-                    >
-                        <Label id="double-filterform-label-col2" className="double-form-title">
-                            {'Er utdanningen bestått?'}
-                        </Label>
+                    </RadioGroup>
+
+                    <RadioGroup legend="Er utdanningen bestått?" className="checkbox-filterform-col2">
                         <RenderFields
-                            valg={uniqueValgCol2}
-                            form={formCol2}
-                            velgCheckBox={e => velgCheckBox(e, formCol2)}
-                            checkBoxValg={checkBoxValgCol2}
+                            valg={uniqueValgBestatt}
+                            form={formUtdanningBestatt}
+                            velgCheckBox={e => velgCheckBox(e, formUtdanningBestatt)}
+                            checkBoxValg={checkBoxValgBestatt}
                         />
-                    </div>
-                </div>
+                    </RadioGroup>
+                </Grid>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="double-checkbox-filterform"
                 nullstillValg={nullstillValg}
                 form={'utdanning-godkjent-og-bestatt'}
-                disabled={!(checkBoxValgCol1.length > 0 || checkBoxValgCol2.length > 0)}
+                disabled={!(checkBoxValgGodkjent.length > 0 || checkBoxValgBestatt.length > 0)}
             />
         </form>
     );
@@ -115,20 +103,16 @@ function RenderFields(props: {
     return (
         <>
             {Object.entries(props.valg).map(([filterKey, filterValue]) => (
-                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                    <input
-                        id={filterKey}
-                        type="checkbox"
-                        className="skjemaelement__input checkboks"
-                        value={filterKey}
-                        checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
-                        onChange={props.velgCheckBox}
-                        data-testid={`filter_${filterKey}`}
-                    />
-                    <label htmlFor={filterKey} className="skjemaelement__label">
-                        {filterValue}
-                    </label>
-                </div>
+                <Checkbox
+                    key={filterKey}
+                    id={filterKey}
+                    value={filterKey}
+                    checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
+                    onChange={props.velgCheckBox}
+                    data-testid={`filter_${filterKey}`}
+                >
+                    {filterValue}
+                </Checkbox>
             ))}
         </>
     );

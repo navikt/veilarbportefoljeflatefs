@@ -5,7 +5,7 @@ import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
 import {AppState} from '../../reducer';
-import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
@@ -96,7 +96,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
                 >
                     {valgCheckboxListe}
                 </CheckboxGroup>
-                <NullstillValgKnapp
+                <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
                     form={form}

@@ -53,9 +53,6 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType}: 
         }
     }
 
-    console.log(veilederGruppe.filterId.toString());
-    console.log('checked', valgtGruppe?.filterId === veilederGruppe.filterId);
-    console.log('-------------------------');
     return (
         <div className="veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio

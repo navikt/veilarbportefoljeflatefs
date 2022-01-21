@@ -21,7 +21,7 @@ interface EndringsloggInnholdProps {
 export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; className?: string}) {
     return (
         <Link className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
-            {props.linkTekst ? props.linkTekst : props.url}
+            <BodyShort>{props.linkTekst ? props.linkTekst : props.url}</BodyShort>
             <ExternalLink className="linkikon" />
         </Link>
     );

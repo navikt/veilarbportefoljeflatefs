@@ -11,7 +11,7 @@ import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './veiledergruppe-modal.less';
-import ModalHeader from '../modal-header/modal-header';
+import ModalHeader from '../modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button, Modal} from '@navikt/ds-react';
 import {Delete, SaveFile} from '@navikt/ds-icons';

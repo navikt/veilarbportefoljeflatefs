@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
-import {Advarsel, Bas, Fokus, Info} from './etikett';
+import {Tag} from '@navikt/ds-react';
 
 interface EtiketterProps {
     className?: string;
@@ -11,74 +11,40 @@ interface EtiketterProps {
 function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     return (
         <span className={className}>
-            <Bas type="info" className="etikett--doed" hidden={!bruker.erDoed} typo="undertekst">
-                Død
-            </Bas>
-            <Advarsel hidden={!bruker.sikkerhetstiltak || bruker.sikkerhetstiltak.length === 0} typo="undertekst">
-                Sikkerhetstiltak
-            </Advarsel>
-            <Fokus hidden={!bruker.diskresjonskode} typo="undertekst">
-                {`Kode ${bruker.diskresjonskode}`}
-            </Fokus>
-            <Fokus hidden={!bruker.egenAnsatt} typo="undertekst">
-                Egen ansatt
-            </Fokus>
-            <Info
-                hidden={
-                    erVedtakStotteFeatureTogglePa
-                        ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
-                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
-                }
-                typo="undertekst"
-            >
-                Trenger vurdering
-            </Info>
-            <Info
-                hidden={
-                    erVedtakStotteFeatureTogglePa
-                        ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
-                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
-                }
-                typo="undertekst"
-            >
-                Behov for AEV
-            </Info>
-            <Info
-                hidden={
-                    !erVedtakStotteFeatureTogglePa ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER
-                }
-                typo="undertekst"
-            >
-                Oppgitt hindringer
-            </Info>
-            <Info
-                hidden={
-                    !erVedtakStotteFeatureTogglePa ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER
-                }
-                typo="undertekst"
-            >
-                Antatt gode muligheter
-            </Info>
-            <Info
-                hidden={
-                    !erVedtakStotteFeatureTogglePa ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING
-                }
-                typo="undertekst"
-            >
-                Antatt behov for veiledning
-            </Info>
-            <Info hidden={!bruker.erSykmeldtMedArbeidsgiver} typo="undertekst">
-                Sykmeldt
-            </Info>
-            <Info hidden={!bruker.trengerRevurdering} typo="undertekst">
-                Revurdering
-            </Info>
+            {bruker.erDoed && (
+                <Tag variant="info" className="etikett--doed">
+                    Død
+                </Tag>
+            )}
+            {bruker.sikkerhetstiltak.length !== 0 && <Tag variant={'warning'}>Sikkerhetstiltak</Tag>}
+
+            {bruker.diskresjonskode && <Tag variant="warning">{`Kode ${bruker.diskresjonskode}`}</Tag>}
+            {bruker.egenAnsatt && <Tag variant="warning">Egen ansatt</Tag>}
+            {erVedtakStotteFeatureTogglePa
+                ? bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT
+                : (bruker.trengerVurdering || bruker.vurderingsBehov === VurderingsBehov.IKKE_VURDERT) && (
+                      <Tag variant="info">Trenger vurdering</Tag>
+                  )}
+
+            {erVedtakStotteFeatureTogglePa
+                ? bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING
+                : (bruker.trengerVurdering || bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING) && (
+                      <Tag variant="info">Behov for AEV</Tag>
+                  )}
+            {erVedtakStotteFeatureTogglePa &&
+                (bruker.trengerVurdering || bruker.vurderingsBehov === VurderingsBehov.OPPGITT_HINDRINGER) && (
+                    <Tag variant="info">Oppgitt hindringer</Tag>
+                )}
+            {erVedtakStotteFeatureTogglePa &&
+                (bruker.trengerVurdering || bruker.vurderingsBehov === VurderingsBehov.ANTATT_GODE_MULIGHETER) && (
+                    <Tag variant="info">Antatt gode muligheter</Tag>
+                )}
+            {erVedtakStotteFeatureTogglePa &&
+                (bruker.trengerVurdering || bruker.vurderingsBehov === VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING) && (
+                    <Tag variant="info">Antatt behov for veiledning</Tag>
+                )}
+            {bruker.erSykmeldtMedArbeidsgiver && <Tag variant="info">Sykmeldt</Tag>}
+            {bruker.trengerRevurdering && <Tag variant="info">Revurdering</Tag>}
         </span>
     );
 }

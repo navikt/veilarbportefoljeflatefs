@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.less';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Checkbox} from '@navikt/ds-react';
 
 interface VelgalleCheckboksProps {
     skalVises: boolean;
@@ -20,19 +20,17 @@ function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, classN
     const onClickHandler = () => markerAlle(!alleMarkert);
 
     return (
-        <CheckboxGroup legend="" hideLegend>
-            <Checkbox
-                className={className}
-                checked={alleMarkert}
-                disabled={disabled}
-                onChange={onClickHandler}
-                title="Velg alle checkbox"
-                aria-label="Velg alle checkboxer"
-                role="checkbox"
-            >
-                {}
-            </Checkbox>
-        </CheckboxGroup>
+        <Checkbox
+            className={className}
+            checked={alleMarkert}
+            disabled={disabled}
+            onChange={onClickHandler}
+            title="Velg alle checkbox"
+            aria-label="Velg alle checkboxer"
+            role="checkbox"
+        >
+            {}
+        </Checkbox>
     );
 }
 

@@ -55,7 +55,6 @@ function TourModal(props: TourModalProps) {
             ? 'Ny oppdatering'
             : getTitle(props.modalName);
 
-    console.log('hide', hidePrevBtn);
     return (
         <Modal className="tour-modal" open={props.open} shouldCloseOnOverlayClick onClose={lukkModal}>
             <div className="tour-modal__header" data-testid="endringslogg_tour-modal">

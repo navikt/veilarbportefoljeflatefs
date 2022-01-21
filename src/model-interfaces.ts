@@ -46,13 +46,13 @@ export interface FiltervalgModell {
     venterPaSvarFraBruker?: boolean;
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];
-    kjonn?: null | string;
+    kjonn?: string[];
     fodselsdagIMnd?: string[];
     innsatsgruppe?: string[];
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
     veiledere: string[];
-    ytelse: null | string;
+    ytelse: string[];
     aktiviteter?: FiltreringAktiviteterValg;
     aktiviteterForenklet: string[];
     tiltakstyper: string[];
@@ -62,7 +62,7 @@ export interface FiltervalgModell {
     manuellBrukerStatus?: string[];
     veilederNavnQuery: string;
     registreringstype: string[];
-    cvJobbprofil: null | string;
+    cvJobbprofil: string[];
     utdanning: string[];
     utdanningGodkjent: string[];
     utdanningBestatt: string[];
