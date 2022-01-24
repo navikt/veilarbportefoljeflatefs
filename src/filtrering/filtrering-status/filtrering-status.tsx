@@ -9,6 +9,7 @@ import {
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
+    mapFilternavnTilFilterValue,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
@@ -27,9 +28,9 @@ import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../../konstanter';
-import {Label} from '@navikt/ds-react';
-import RadioCheckboxGruppe from '../../components/barinput/radio-checkbox-gruppe';
+import {Label, RadioGroup} from '@navikt/ds-react';
 import './filtrering-status.less';
+import {Radio, RadioGruppe} from 'nav-frontend-skjema';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -39,6 +40,9 @@ interface FiltreringStatusProps {
 export function FiltreringStatus(props: FiltreringStatusProps) {
     const ferdigfilterListe = props.filtervalg.ferdigfilterListe;
     const kategoriliste = props.filtervalg.arbeidslisteKategori;
+    const statusTall = useStatusTallSelector();
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -69,31 +73,72 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         }
     }
 
-    const statusTall = useStatusTallSelector();
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    console.log('trenger vurdering', ferdigfilterListe);
 
     return (
         <div className="filtrering-oversikt panel">
             <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
-            <RadioCheckboxGruppe radio={false} skalViseTittel={false} className="filter-checkboks-container">
-                {props.oversiktType === OversiktType.minOversikt ? (
-                    <BarInputCheckbox
-                        filterNavn="nyeBrukere"
-                        antall={statusTall.nyeBrukereForVeileder}
-                        handleChange={handleCheckboxChange}
-                        checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
-                    />
-                ) : (
-                    <BarInputCheckbox
-                        filterNavn="ufordeltebruker"
-                        antall={statusTall.ufordelteBrukere}
-                        handleChange={handleCheckboxChange}
-                        checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
-                    />
-                )}
-            </RadioCheckboxGruppe>
+            {props.oversiktType === OversiktType.minOversikt ? (
+                <BarInputCheckbox
+                    filterNavn="nyeBrukere"
+                    antall={statusTall.nyeBrukereForVeileder}
+                    handleChange={handleCheckboxChange}
+                    checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
+                />
+            ) : (
+                <BarInputCheckbox
+                    filterNavn="ufordeltebruker"
+                    antall={statusTall.ufordelteBrukere}
+                    handleChange={handleCheckboxChange}
+                    checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                />
+            )}
 
-            <RadioCheckboxGruppe skalViseTittel={false} radio>
+            <RadioGruppe legend="Hvor vil du sitte?">
+                <Radio
+                    label={'erSykmeldtMedArbeidsgiver'}
+                    name="sitteplass"
+                    checked={ferdigfilterListe.includes(ER_SYKMELDT_MED_ARBEIDSGIVER)}
+                    onChange={handleRadioButtonChange}
+                    value={mapFilternavnTilFilterValue['erSykmeldtMedArbeidsgiver']}
+                />
+                <Radio
+                    label={'underVurdering'}
+                    name="sitteplass"
+                    checked={ferdigfilterListe.includes(UNDER_VURDERING)}
+                    onChange={handleRadioButtonChange}
+                    value={mapFilternavnTilFilterValue['underVurdering']}
+                />
+                <Radio
+                    label={'venterPaSvarFraNAV'}
+                    name="sitteplass"
+                    checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV)}
+                    onChange={handleRadioButtonChange}
+                    value={mapFilternavnTilFilterValue['venterPaSvarFraNAV']}
+                />
+            </RadioGruppe>
+
+            {/*<input*/}
+            {/*    type={'radio'}*/}
+            {/*    id={'test1'}*/}
+            {/*    name={'test'}*/}
+            {/*    value={mapFilternavnTilFilterValue['trengerVurdering']}*/}
+            {/*    onChange={handleRadioButtonChange}*/}
+            {/*    checked={ferdigfilterListe.includes(TRENGER_VURDERING)}*/}
+            {/*/>*/}
+
+            <RadioGroup legend="" hideLegend key={1}>
+                {/*<input*/}
+                {/*    type={'radio'}*/}
+                {/*    id={'test1'}*/}
+                {/*    name={'test'}*/}
+                {/*    value={mapFilternavnTilFilterValue['trengerVurdering']}*/}
+                {/*    onChange={handleRadioButtonChange}*/}
+                {/*    checked={ferdigfilterListe.includes(TRENGER_VURDERING)}*/}
+                {/*>*/}
+                {/*    /!*<label htmlFor={'test1'}>trenger vurdering</label>*!/*/}
+                {/*</input>*/}
+
                 <BarInputRadio
                     filterNavn="trengerVurdering"
                     handleChange={handleRadioButtonChange}
@@ -172,7 +217,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     endreFiltervalg={dispatchFiltreringStatusChanged}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
-            </RadioCheckboxGruppe>
+            </RadioGroup>
         </div>
     );
 }

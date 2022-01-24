@@ -21,6 +21,7 @@ export const BarInputRadio = ({filterNavn, handleChange, checked, antall}: Barin
             data-testid={`filter_checkboks-container_${filterNavn}`}
             onChange={handleChange}
             checked={checked}
+            defaultChecked={checked}
             className="barlabel"
         >
             <Barlabel labelTekst={labelTekst} antall={antall} />

@@ -7,7 +7,7 @@ import {Checkbox} from '@navikt/ds-react';
 interface BarInputCheckboxProps {
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
-    checked: boolean;
+    checked?: boolean;
     antall: number;
     labelTekst?: React.ReactNode;
     skalViseTittel?: boolean;

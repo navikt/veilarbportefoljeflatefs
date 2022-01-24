@@ -9,8 +9,7 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {BodyShort, Label} from '@navikt/ds-react';
-import RadioCheckboxGruppe from '../../components/barinput/radio-checkbox-gruppe';
+import {BodyShort, CheckboxGroup, Label} from '@navikt/ds-react';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -34,11 +33,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                 checked={props.checked}
             />
             {props.checked && (
-                <RadioCheckboxGruppe
-                    radio={false}
-                    skalViseTittel={false}
-                    className="minArbeidsliste__kategori-checkboxwrapper"
-                >
+                <CheckboxGroup legend="" hideLegend className="minArbeidsliste__kategori-checkboxwrapper" key={2}>
                     <BarInputCheckbox
                         labelTekst={
                             <>
@@ -95,7 +90,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
                     />
-                </RadioCheckboxGruppe>
+                </CheckboxGroup>
             )}
         </>
     );

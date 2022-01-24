@@ -102,19 +102,16 @@ export function HendelserFilterform({
                         Siste aktivitet lagt til av bruker
                     </Label>
                     {lagtTilAvBruker.map(key => (
-                        <>
-                            {console.log(hendelserValg)}
-                            <Radio
-                                onChange={e => onRadioChange(e)}
-                                name="sisteEndringKategori"
-                                value={key}
-                                checked={hendelserValg.includes(key)}
-                                key={key}
-                                data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
-                            >
-                                {hendelserLabels[key]}
-                            </Radio>
-                        </>
+                        <Radio
+                            onChange={e => onRadioChange(e)}
+                            name="sisteEndringKategori"
+                            value={key}
+                            checked={hendelserValg.includes(key)}
+                            key={key}
+                            data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
+                        >
+                            {hendelserLabels[key]}
+                        </Radio>
                     ))}
 
                     <Label className="hendelser-filterform__radio-gruppe__label">
