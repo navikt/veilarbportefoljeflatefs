@@ -92,25 +92,25 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             addHvis(
                 Kolonne.UTLOP_YTELSE,
                 filtervalg.ytelse !== null &&
-                    !filtervalg.ytelse.includes(AAP_YTELSE) &&
-                    !filtervalg.ytelse.includes(AAP_YTELSE_MAXTID) &&
-                    !filtervalg.ytelse.includes(AAP_YTELSE_UNNTAK)
+                    filtervalg.ytelse !== AAP_YTELSE &&
+                    filtervalg.ytelse !== AAP_YTELSE_MAXTID &&
+                    filtervalg.ytelse !== AAP_YTELSE_UNNTAK
             )
         )
         .concat(
             addHvis(
                 Kolonne.VEDTAKSPERIODE,
-                filtervalg.ytelse.includes(AAP_YTELSE) ||
-                    filtervalg.ytelse.includes(AAP_YTELSE_MAXTID) ||
-                    filtervalg.ytelse.includes(AAP_YTELSE_UNNTAK)
+                filtervalg.ytelse === AAP_YTELSE ||
+                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
+                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
             )
         )
         .concat(
             addHvis(
                 Kolonne.RETTIGHETSPERIODE,
-                filtervalg.ytelse.includes(AAP_YTELSE) ||
-                    filtervalg.ytelse.includes(AAP_YTELSE_MAXTID) ||
-                    filtervalg.ytelse.includes(AAP_YTELSE_UNNTAK)
+                filtervalg.ytelse === AAP_YTELSE ||
+                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
+                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
             )
         )
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt() || forenkletAktivitetErValgt()))

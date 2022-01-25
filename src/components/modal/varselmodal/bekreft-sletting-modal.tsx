@@ -45,7 +45,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                     Slett
                     <Delete />
                 </Button>
-                <Button variant="tertiary" type="button" onClick={props.onRequestClose}>
+                <Button variant="secondary" type="button" onClick={props.onRequestClose}>
                     Avbryt
                 </Button>
             </div>

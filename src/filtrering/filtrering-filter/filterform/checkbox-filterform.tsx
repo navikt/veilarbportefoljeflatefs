@@ -54,7 +54,6 @@ function CheckboxFilterform({
                     <Grid columns={gridColumns}>
                         {Object.entries(valg).map(([filterKey, filterValue]) => (
                             <>
-                                {console.log(checkBoxValg.includes(filterKey))}
                                 <Checkbox
                                     key={filterKey}
                                     value={filterKey}

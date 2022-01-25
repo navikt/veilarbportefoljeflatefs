@@ -50,14 +50,11 @@ function MinOversiktListeHode({
     oversiktType
 }: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering) === ytelse;
-    // @ts-ignore
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse].rettighetsperiode : '';
+    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
+    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
     const ytelseUtlopsdatoNavn = erAapYtelse
-        ? // @ts-ignore
-          ytelseAapSortering[ytelse].vedtaksperiode
-        : // @ts-ignore
-          ytelseUtlopsSortering[ytelse];
+        ? ytelseAapSortering[ytelse!].vedtaksperiode
+        : ytelseUtlopsSortering[ytelse!];
     const ytelseSorteringHeader =
         ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';

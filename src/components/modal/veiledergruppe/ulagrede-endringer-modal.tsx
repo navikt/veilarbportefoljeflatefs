@@ -21,16 +21,11 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
                 Endringene er ikke lagret
             </Heading>
             <div className="endringer-ikke-lagret-modal__knappegruppe">
-                <Button
-                    className="endringer-ikke-lagret-modal__knappegruppe__redigering"
-                    type="button"
-                    onClick={props.onRequestClose}
-                >
+                <Button type="button" onClick={props.onRequestClose}>
                     Gå tilbake til redigering
                 </Button>
                 <Button
                     variant="danger"
-                    className="endringer-ikke-lagret-modal__knappegruppe__avbryt"
                     type="submit"
                     onClick={() => {
                         props.onSubmit();

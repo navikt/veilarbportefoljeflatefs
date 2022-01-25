@@ -236,7 +236,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                             <SaveFile />
                         </Button>
                         <Button
-                            variant="tertiary"
+                            variant="secondary"
                             className="veiledergruppe-modal__knappegruppe__avbryt"
                             type="button"
                             onClick={lukkModal}

@@ -57,7 +57,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
     const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
-    const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering) === ytelse;
+    const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
@@ -98,17 +98,17 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 minVal={2}
                 skalVises={
                     ytelseErValgtKolonne &&
-                    (ytelse.includes(ytelsevalgIntl.DAGPENGER) ||
-                        ytelse.includes(ytelsevalgIntl.ORDINARE_DAGPENGER) ||
-                        ytelse.includes(ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI) ||
-                        ytelse.includes(ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER))
+                    (ytelse === ytelsevalgIntl.DAGPENGER ||
+                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
+                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
                 }
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse.includes(ytelsevalgIntl.DAGPENGER_MED_PERMITTERING)}
+                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -132,7 +132,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse.includes(ytelsevalgIntl.TILTAKSPENGER)}
+                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.TILTAKSPENGER}
             />
             <DatoKolonne
                 className="col col-xs-2"
