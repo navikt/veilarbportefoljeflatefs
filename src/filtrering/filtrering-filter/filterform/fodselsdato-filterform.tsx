@@ -3,7 +3,7 @@ import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import './filterform.less';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert, BodyShort, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
