@@ -16,6 +16,8 @@ import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button, Modal} from '@navikt/ds-react';
 import {Delete, SaveFile} from '@navikt/ds-icons';
 import classNames from 'classnames';
+import {LasterModal} from '../lastermodal/laster-modal';
+import {STATUS} from '../../../ducks/utils';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -50,6 +52,9 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
 
+    const veiledergruppeStatus = useSelector((state: AppState) => state.veiledergrupper.status);
+    const laster = veiledergruppeStatus !== undefined && veiledergruppeStatus !== STATUS.OK;
+
     useEffect(() => {
         setFilterValg(props.initialVerdi.filterValg);
         setGruppeNavn(props.initialVerdi.gruppeNavn);
@@ -77,7 +82,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
         }
     };
 
-    const hanterChange = (erValgt: boolean, veilederTarget: string) => {
+    const handleChange = (erValgt: boolean, veilederTarget: string) => {
         if (erValgt) {
             setFilterValg(prevState => ({
                 ...prevState,
@@ -206,73 +211,83 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
 
     return (
         <>
-            <Modal
-                open={props.isOpen}
-                onClose={lukkModal}
-                className={classNames('veiledergruppe-modal', props.className)}
-            >
-                <ModalHeader tittel={props.modalTittel} />
-                {alertTekst.length !== 0 && (
-                    <Alert variant="warning" className="alerttext" data-testid="veiledergruppe_modal_alertstripe">
-                        {alertTekst}
-                    </Alert>
-                )}
-                <VeiledergruppeForm
-                    filterValg={filterValg}
-                    gruppeNavn={gruppeNavn}
-                    modalTittel={props.modalTittel}
-                    hanterVeilederChange={hanterChange}
-                    setGruppeNavn={hanterGruppeNavnChange}
-                    onSubmit={lagreVeiledergruppeEndringer}
-                    errors={errors}
-                >
-                    <div className="veiledergruppe-modal__knappegruppe">
-                        <Button
-                            className="veiledergruppe-modal__knappegruppe__lagre"
-                            type="submit"
-                            data-testid="veiledergruppe_modal_lagre-knapp"
-                        >
-                            {props.lagreKnappeTekst}
-                            <SaveFile />
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            className="veiledergruppe-modal__knappegruppe__avbryt"
-                            type="button"
-                            onClick={lukkModal}
-                            data-testid="veiledergruppe_modal_avbryt-knapp"
-                        >
-                            Avbryt
-                        </Button>
-                        {props.onSlett && (
-                            <Button
-                                variant="danger"
-                                className="veiledergruppe-modal__knappegruppe__slett"
-                                onClick={() => setSletteVeiledergruppeModal(true)}
-                                type="button"
-                                data-testid="veiledergruppe_modal_slette-knapp"
+            {laster ? (
+                <LasterModal />
+            ) : (
+                <>
+                    <Modal
+                        open={props.isOpen}
+                        onClose={lukkModal}
+                        className={classNames('veiledergruppe-modal', props.className)}
+                    >
+                        <ModalHeader tittel={props.modalTittel} />
+                        {alertTekst.length !== 0 && (
+                            <Alert
+                                variant="warning"
+                                className="alerttext"
+                                data-testid="veiledergruppe_modal_alertstripe"
                             >
-                                Slett gruppe
-                                <Delete />
-                            </Button>
+                                {alertTekst}
+                            </Alert>
                         )}
-                    </div>
-                </VeiledergruppeForm>
-            </Modal>
-            <EndringerIkkeLagretModal
-                isOpen={visEndringerIkkeLagretModal}
-                onRequestClose={() => setEndringerIkkeLagretModal(false)}
-                onSubmit={endringerIkkeLagretOgLukkModaler}
-            />
-            {props.onSlett && (
-                <BekreftSlettingModal
-                    isOpen={visSletteVeiledergruppeModal}
-                    onRequestClose={avbrytSletting}
-                    onSubmit={slettVeiledergruppeOgLukkModaler}
-                    tittel="Slette veiledergruppe"
-                    infoTekst="Gruppen vil bli slettet for alle på enheten."
-                    navn={gruppeNavn}
-                />
+                        <VeiledergruppeForm
+                            filterValg={filterValg}
+                            gruppeNavn={gruppeNavn}
+                            modalTittel={props.modalTittel}
+                            hanterVeilederChange={handleChange}
+                            setGruppeNavn={hanterGruppeNavnChange}
+                            onSubmit={lagreVeiledergruppeEndringer}
+                            errors={errors}
+                        >
+                            <div className="veiledergruppe-modal__knappegruppe">
+                                <Button
+                                    className="veiledergruppe-modal__knappegruppe__lagre"
+                                    type="submit"
+                                    data-testid="veiledergruppe_modal_lagre-knapp"
+                                >
+                                    {props.lagreKnappeTekst}
+                                    <SaveFile />
+                                </Button>
+                                <Button
+                                    variant="secondary"
+                                    className="veiledergruppe-modal__knappegruppe__avbryt"
+                                    type="button"
+                                    onClick={lukkModal}
+                                    data-testid="veiledergruppe_modal_avbryt-knapp"
+                                >
+                                    Avbryt
+                                </Button>
+                                {props.onSlett && (
+                                    <Button
+                                        variant="danger"
+                                        className="veiledergruppe-modal__knappegruppe__slett"
+                                        onClick={() => setSletteVeiledergruppeModal(true)}
+                                        type="button"
+                                        data-testid="veiledergruppe_modal_slette-knapp"
+                                    >
+                                        Slett gruppe
+                                        <Delete />
+                                    </Button>
+                                )}
+                            </div>
+                        </VeiledergruppeForm>
+                    </Modal>
+                    <EndringerIkkeLagretModal
+                        isOpen={visEndringerIkkeLagretModal}
+                        onRequestClose={() => setEndringerIkkeLagretModal(false)}
+                        onSubmit={endringerIkkeLagretOgLukkModaler}
+                    />
+                    {props.onSlett && (
+                        <BekreftSlettingModal
+                            isOpen={visSletteVeiledergruppeModal}
+                            onRequestClose={avbrytSletting}
+                            onSubmit={slettVeiledergruppeOgLukkModaler}
+                            tittel="Slette veiledergruppe"
+                            infoTekst="Gruppen vil bli slettet for alle på enheten."
+                            navn={gruppeNavn}
+                        />
+                    )}
+                </>
             )}
         </>
     );

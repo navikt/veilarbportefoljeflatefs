@@ -8,6 +8,7 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../ikoner/arbeidsliste/a
 import Arbeidslistekategori from './arbeidslistekategori';
 import {Field} from 'formik';
 import {KategoriModell} from '../../../model-interfaces';
+import {Label} from '@navikt/ds-react';
 
 function ArbeidslisteKategori(props: {name: string; index: string}) {
     const indexId = props.index ? `_${props.index}` : '';
@@ -17,7 +18,7 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
             {({field, form}) => {
                 return (
                     <div className="arbeidslistekategori">
-                        <span className="skjemaelement__label">Kategori</span>
+                        <Label className="skjemaelement__label">Kategori</Label>
                         <Arbeidslistekategori
                             value={KategoriModell.BLA}
                             arbeidslistekategori={<ArbeidslisteikonBla />}
