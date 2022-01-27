@@ -30,7 +30,6 @@ function FiltreringLabel({
     const slettAlleFiltervalg = arialLabel === ' Slett alle filtervalg';
     const buttonClassnames = classNames(
         'filtreringlabel',
-        'typo-undertekst',
         {'filtreringlabel--markert': markert},
         {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
         {'slett-alle-filtervalg-knapp': slettAlleFiltervalg}

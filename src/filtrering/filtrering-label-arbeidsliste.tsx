@@ -22,7 +22,7 @@ function FiltreringLabelArbeidsliste({
     harMuligMenIkkeValgtKolonne = false,
     kategori
 }: FiltreringLabelArbeidslisteProps) {
-    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {
+    const buttonClassnames = classNames('filtreringlabel', {
         'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne
     });
     return (

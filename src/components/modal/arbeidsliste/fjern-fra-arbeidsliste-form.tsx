@@ -47,7 +47,7 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBruker
                 >
                     Bekreft
                 </Button>
-                <Button variant="tertiary" className="knapp" onClick={lukkModal}>
+                <Button variant="secondary" className="knapp" onClick={lukkModal}>
                     Avbryt
                 </Button>
             </div>

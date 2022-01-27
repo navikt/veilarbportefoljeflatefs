@@ -106,7 +106,7 @@ export const innsatsgruppe = {
     IKVAL: 'Standardinnsats',
     BFORM: 'Situasjonsbestemt innsats',
     BATT: 'Spesielt tilpasset innsats',
-    VARIG: 'Varig tilpasset',
+    VARIG: 'Varig tilpasset'
 };
 
 export const hovedmal = {

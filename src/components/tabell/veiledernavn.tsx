@@ -1,6 +1,6 @@
-import {Tag} from '@navikt/ds-react';
 import * as React from 'react';
 import {BrukerModell, VeilederModell} from '../../model-interfaces';
+import {Tag} from '@navikt/ds-react';
 
 interface VeiledernavnProps {
     className?: string;

@@ -36,7 +36,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
     const [feilmelding, setFeilmelding] = useState<string>('');
 
     const ikkeVisIgjen = false;
-    const visTilfredshet = true;
+    const visTilfredshet = false;
 
     const handleFormSubmitted = e => {
         e.preventDefault();
@@ -113,12 +113,12 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                         </BodyShort>
                         {visTilfredshet ? (
                             <>
-                                <div className="tilbakemelding-modal__tilfredshet">
-                                    <TilfredshetValg
-                                        onTilfredshetChanged={handleTilfredshetChanged}
-                                        defaultTilfredshet={tilfredshet}
-                                    />
-                                </div>
+                                {/*<div className="tilbakemelding-modal__tilfredshet">*/}
+                                <TilfredshetValg
+                                    onTilfredshetChanged={handleTilfredshetChanged}
+                                    defaultTilfredshet={tilfredshet}
+                                />
+                                {/*</div>*/}
                                 {harBesvartTilfredshet && (
                                     <form
                                         className="tilbakemelding-modal__ekspander"
@@ -166,9 +166,12 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                         data-testid="tilfredshet_kommentarfelt"
                                     />
                                 </div>
-                                <p className="tilbakemelding-modal__feilmelding" data-testid="tilfredshet_feilmelding">
+                                <BodyShort
+                                    className="tilbakemelding-modal__feilmelding"
+                                    data-testid="tilfredshet_feilmelding"
+                                >
                                     {feilmelding}
-                                </p>
+                                </BodyShort>
                                 <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                                     Send
                                 </Button>

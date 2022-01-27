@@ -13,7 +13,7 @@ import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {LasterModal} from '../lastermodal/laster-modal';
-import ModalHeader from '../modal-header/modal-header';
+import ModalHeader from '../modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';

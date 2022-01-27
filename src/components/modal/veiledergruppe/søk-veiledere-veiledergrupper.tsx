@@ -25,7 +25,6 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
                             role="checkbox"
                             key={elem.ident}
                             value={elem.ident}
-                            checked={erValgt(elem.ident)}
                             onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
                             data-testid={`veiledergruppe_modal_veileder-checkbox_${index}`}
                         >

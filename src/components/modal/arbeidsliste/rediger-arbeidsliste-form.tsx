@@ -62,7 +62,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <SaveFile />
                 </Button>
                 <Button
-                    variant="tertiary"
+                    variant="secondary"
                     className="knapp knapp--avbryt"
                     onClick={props.lukkModal}
                     data-testid="modal_rediger-arbeidsliste_avbryt-knapp"

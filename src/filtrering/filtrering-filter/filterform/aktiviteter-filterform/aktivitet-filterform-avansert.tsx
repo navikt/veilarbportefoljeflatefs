@@ -1,9 +1,9 @@
 import React from 'react';
 import '../filterform.less';
-import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
-import {Button} from '@navikt/ds-react';
+import {Button, Label, RadioGroup, Radio, BodyShort} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -37,67 +37,53 @@ function AktivitetFilterformAvansert({
     };
 
     return (
-        <form className="skjema aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
-            <div className="aktivitetvalg__header ">
-                <span className="aktivitetvalg__header--first">Ja</span>
-                <span>Nei</span>
-            </div>
+        <form className="aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetfilterform-avansert__valg">
+                <div className="aktivitetvalg__header">
+                    <Label className="aktivitetvalg__header--first">Ja</Label>
+                    <Label>Nei</Label>
+                </div>
                 {Object.entries(valg).map(([kode, verdi]) => [
-                    <div key={kode} className="aktivitetvalg ">
-                        <span className="aktivitetvalg__tekst">{verdi as string}</span>
-                        <div className="radioknapp-gruppe">
-                            <input
+                    <div className="aktivitetvalg">
+                        <BodyShort>{verdi as string}</BodyShort>
+                        <RadioGroup legend={''} hideLegend key={kode}>
+                            <Radio
                                 id={`aktivitet-${kode}-ja`}
                                 name={kode}
-                                value="JA"
-                                type="radio"
                                 checked={valgteAvanserteAktiviteter[kode] === 'JA'}
-                                className="skjemaelement__input radioknapp"
                                 onChange={() => handleChange(kode, 'JA')}
-                                key={`Ja, ${verdi}`}
+                                key={`JA, ${verdi}`}
                                 data-testid={`aktivitet-filterform-${kode}-ja`}
-                            />
-                            <label
-                                htmlFor={`aktivitet-${kode}-ja`}
-                                className="skjemaelement__label aktivitet_radioknapp_label"
+                                value={`ja-${verdi}`}
                             >
-                                <span className="sr-only">Ja, {verdi}</span>
-                            </label>
-                            <input
+                                {}
+                            </Radio>
+                            <Radio
                                 id={`aktivitet-${kode}-nei`}
                                 name={kode}
-                                value="NEI"
-                                type="radio"
                                 checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
-                                className="skjemaelement__input radioknapp"
                                 onChange={() => handleChange(kode, 'NEI')}
                                 key={`NEI, ${verdi}`}
                                 data-testid={`aktivitet-filterform-${kode}-nei`}
-                            />
-                            <label
-                                htmlFor={`aktivitet-${kode}-nei`}
-                                className="skjemaelement__label aktivitet_radioknapp_label"
+                                value={`nei-${verdi}`}
                             >
-                                <span className="sr-only">Nei, {verdi}</span>
-                            </label>
-                        </div>
+                                {}
+                            </Radio>
+                        </RadioGroup>
                     </div>
                 ])}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
-                <div className="filterknapp-container">
-                    <Button
-                        onClick={klikkPaForenkletLenke}
-                        className="filterknapp"
-                        data-testid="aktiviteter_forenklet-filter_knapp"
-                        aria-label="Forenklet aktivitetsfilter"
-                    >
-                        Forenklet filter
-                    </Button>
-                </div>
-
-                <NullstillValgKnapp
+                <Button
+                    variant="tertiary"
+                    onClick={klikkPaForenkletLenke}
+                    className="filterknapp"
+                    data-testid="aktiviteter_forenklet-filter_knapp"
+                    aria-label="Forenklet aktivitetsfilter"
+                >
+                    Forenklet filter
+                </Button>
+                <NullstillKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
                     form="aktiviteter"

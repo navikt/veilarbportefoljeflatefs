@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Laster from './innholdslaster-laster';
 import {STATUS} from '../ducks/utils';
 import {useState} from 'react';
 import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
-import {Alert} from '@navikt/ds-react';
+import {Alert, Loader} from '@navikt/ds-react';
 
 interface InnholdslasterProps {
     className?: string;
@@ -68,7 +67,7 @@ function Innholdslaster(props: InnholdslasterProps) {
         );
     }
 
-    return <Laster />;
+    return <Loader size="xlarge" />;
 }
 
 export default Innholdslaster;

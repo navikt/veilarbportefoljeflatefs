@@ -11,6 +11,7 @@ import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import {STATUS} from '../../../ducks/utils';
 
 export enum Visningstype {
     MENY,
@@ -56,6 +57,9 @@ export function MineFilterModal(props: {oversiktType: string}) {
         dispatch(lukkMineFilterModal(props.oversiktType));
     };
 
+    const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
+    const laster = mineFilterStatus !== undefined && mineFilterStatus !== STATUS.OK;
+
     useEffect(() => {
         if (filterValg.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL);
         else if (valgtMineFilter) setValgtVisningstype(Visningstype.OPPDATER);
@@ -80,6 +84,7 @@ export function MineFilterModal(props: {oversiktType: string}) {
                     hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                     lukkModal={lukkModal}
                     oversiktType={props.oversiktType}
+                    laster={laster}
                 />
                 <HiddenIfOppdaterFilter
                     hidden={valgtVisningstype !== Visningstype.OPPDATER}
@@ -87,6 +92,7 @@ export function MineFilterModal(props: {oversiktType: string}) {
                     filterId={sisteValgtMineFilter!}
                     lukkModal={lukkModal}
                     oversiktType={props.oversiktType}
+                    laster={laster}
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>

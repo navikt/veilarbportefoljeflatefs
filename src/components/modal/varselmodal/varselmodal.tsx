@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './varsel-modal.less';
-import {Error, Success, Warning} from '@navikt/ds-icons';
+import {ErrorFilled, SuccessFilled, WarningFilled} from '@navikt/ds-icons';
 import {Modal} from '@navikt/ds-react';
 
 export enum VarselModalType {
@@ -48,11 +48,11 @@ export function VarselModal({
 function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
-            return <Warning className="warning-icon" />;
+            return <WarningFilled className="warning-icon" />;
         case VarselModalType.FEIL:
-            return <Error className="error-icon" />;
+            return <ErrorFilled className="error-icon" />;
         case VarselModalType.SUKSESS:
-            return <Success className="success-icon" />;
+            return <SuccessFilled className="success-icon" />;
         default:
             return null;
     }

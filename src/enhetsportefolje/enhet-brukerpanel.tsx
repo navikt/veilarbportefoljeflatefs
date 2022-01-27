@@ -10,7 +10,7 @@ import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Checkbox} from '@navikt/ds-react';
 
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
@@ -52,17 +52,16 @@ function EnhetBrukerpanel({
 
     return (
         <li className={classname}>
-            <CheckboxGroup legend="" hideLegend className="brukerliste__gutter-left">
+            <div className="brukerliste__gutter-left">
                 <Checkbox
                     checked={bruker.markert}
                     disabled={bruker.fnr === ''}
                     onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
                     value=""
-                    role="checkbox"
                 >
                     {}
                 </Checkbox>
-            </CheckboxGroup>
+            </div>
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"
                 bruker={bruker}

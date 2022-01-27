@@ -8,7 +8,7 @@ import './arbeidsliste.less';
 import {AppState} from '../../../reducer';
 import {STATUS} from '../../../ducks/utils';
 import {LasterModal} from '../lastermodal/laster-modal';
-import ModalHeader from '../modal-header/modal-header';
+import ModalHeader from '../modal-header';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import {BodyShort, Heading, Modal} from '@navikt/ds-react';

@@ -88,7 +88,7 @@ function LeggTilArbeidslisteForm({
                                     <SaveFile />
                                 </Button>
                                 <Button
-                                    variant="tertiary"
+                                    variant="secondary"
                                     className="knapp"
                                     data-testid="modal_arbeidsliste_avbryt-knapp"
                                     onClick={() => {

@@ -45,11 +45,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
 
     return (
-        <div
-            className="filtrering-filter col-sm-12 filtrering-filter__kolonne"
-            data-testid="filtrering-filter_container"
-        >
-            <div className="col-sm-12  filtrering-filter__kolonne">
+        <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
+            <div className="filtrering-filter__kolonne">
                 <Label>Demografi</Label>
                 <Dropdown
                     name="Alder"
@@ -85,11 +82,12 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             form="kjonn"
+                            gridColumns={2}
                         />
                     )}
                 />
             </div>
-            <div className="col-sm-12  filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <Label>Hendelser</Label>
                 <Dropdown
                     name="Siste endring av bruker"
@@ -105,7 +103,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12  filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <Label>Svar fra registrering</Label>
                 <Dropdown
                     name="Situasjon"
@@ -113,7 +111,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
-
                             <CheckboxFilterform
                                 form="registreringstype"
                                 valg={registreringstype}
@@ -150,7 +147,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12  filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <Label>Status og brukergrupper</Label>
                 <Dropdown
                     name="CV og jobbønsker"
@@ -226,7 +223,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12  filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <Label>Rettighetsgruppe og ytelse</Label>
                 <Dropdown
                     name="Rettighetsgruppe"
@@ -253,7 +250,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
