@@ -110,36 +110,39 @@ function ArbeidslisteModalRediger({
                         setIsOpen(false);
                         onSubmit(values);
                     }}
-                    render={formikProps => (
-                        <Modal
-                            className="arbeidsliste-modal"
-                            open={isOpen}
-                            onClose={() => lukkModalConfirm(formikProps)}
-                            shouldCloseOnOverlayClick
-                        >
-                            <ModalHeader tittel="Rediger arbeidsliste" />
-                            <div className="modal-innhold">
-                                <RedigerArbeidslisteForm
-                                    laster={laster}
-                                    sistEndretDato={sistEndretDato}
-                                    sistEndretAv={sistEndretAv}
-                                    lukkModal={() => lukkModal(formikProps)}
-                                    bruker={bruker}
-                                    fjernModal={() => dispatch(visFjernArbeidslisteModal())}
-                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                />
-                                {modalSkalVises && (
-                                    <FjernArbeidslisteModal
+                >
+                    {formikProps => (
+                        <>
+                            <Modal
+                                className="arbeidsliste-modal"
+                                open={isOpen}
+                                onClose={() => lukkModalConfirm(formikProps)}
+                                shouldCloseOnOverlayClick
+                            >
+                                <ModalHeader tittel="Rediger arbeidsliste" />
+                                <div className="modal-innhold">
+                                    <RedigerArbeidslisteForm
+                                        laster={laster}
+                                        sistEndretDato={sistEndretDato}
+                                        sistEndretAv={sistEndretAv}
+                                        lukkModal={() => lukkModal(formikProps)}
                                         bruker={bruker}
-                                        isOpen={modalSkalVises}
-                                        valgteBrukere={valgteBrukere}
-                                        lukkModal={() => lukkFjernModal()}
+                                        fjernModal={() => dispatch(visFjernArbeidslisteModal())}
+                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                     />
-                                )}
-                            </div>
-                        </Modal>
+                                    {modalSkalVises && (
+                                        <FjernArbeidslisteModal
+                                            bruker={bruker}
+                                            isOpen={modalSkalVises}
+                                            valgteBrukere={valgteBrukere}
+                                            lukkModal={() => lukkFjernModal()}
+                                        />
+                                    )}
+                                </div>
+                            </Modal>
+                        </>
                     )}
-                />
+                </Formik>
             )}
         </>
     );

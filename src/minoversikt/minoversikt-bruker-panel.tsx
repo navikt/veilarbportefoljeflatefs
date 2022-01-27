@@ -14,9 +14,8 @@ import './minoversikt.less';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
-import {Info} from '../components/tabell/etikett';
 import {Collapse} from 'react-collapse';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Checkbox, Tag} from '@navikt/ds-react';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -73,18 +72,14 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         >
             <div className="brukerliste__element">
                 <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                    <CheckboxGroup legend={''} hideLegend>
-                        <Checkbox
-                            checked={bruker.markert}
-                            disabled={bruker.fnr === ''}
-                            onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
-                            role="checkbox"
-                            className="brukerliste__checkbox"
-                            data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
-                        >
-                            {}
-                        </Checkbox>
-                    </CheckboxGroup>
+                    <Checkbox
+                        checked={bruker.markert}
+                        disabled={bruker.fnr === ''}
+                        onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                    >
+                        {}
+                    </Checkbox>
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}
@@ -101,9 +96,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
-                        <Info hidden={!bruker.nyForVeileder} typo="undertekst">
-                            Ny bruker
-                        </Info>
+                        {bruker.nyForVeileder && <Tag variant="info">Ny bruker</Tag>}
                     </div>
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}
@@ -119,6 +112,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
                     settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    apen={apen}
                 />
             </Collapse>
         </li>
