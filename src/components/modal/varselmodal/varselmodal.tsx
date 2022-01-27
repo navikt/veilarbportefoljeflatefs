@@ -48,11 +48,11 @@ export function VarselModal({
 function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
-            return <Warning />;
+            return <Warning className="warning-icon" />;
         case VarselModalType.FEIL:
-            return <Error />;
+            return <Error className="error-icon" />;
         case VarselModalType.SUKSESS:
-            return <Success />;
+            return <Success className="success-icon" />;
         default:
             return null;
     }
