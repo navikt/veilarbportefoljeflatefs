@@ -28,7 +28,7 @@ describe('Arbeidsliste', () => {
     let antallEtterSletting = 0;
     const nyTittel = 'Skal ikke lagres';
     const nyKommentar = 'Kommentar skal heller ikke lagres';
-    xit('Lag én ny arbeidsliste og sjekk validering', () => {
+    it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
@@ -47,13 +47,13 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidslistekategori_GUL').click();
     });
 
-    xit('Lagre fornavn', () => {
+    it('Lagre fornavn', () => {
         cy.getByTestId('modal_legg-i-arbeidsliste_navn').then($navn => {
             fornavn = $navn.text().split(' ')[0];
         });
     });
 
-    xit('Lagre ny arbeidsliste', () => {
+    it('Lagre ny arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
@@ -61,7 +61,7 @@ describe('Arbeidsliste', () => {
             .first();
     });
 
-    xit('Lagre antall med arbeidsliste', () => {
+    it('Lagre antall med arbeidsliste', () => {
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
                 antallMedArbeidsliste += Cypress.$(ant).length;
@@ -71,7 +71,7 @@ describe('Arbeidsliste', () => {
             });
     });
 
-    xit('Lag to nye arbeidslister', () => {
+    it('Lag to nye arbeidslister', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
@@ -99,7 +99,7 @@ describe('Arbeidsliste', () => {
             });
     });
 
-    xit('Rediger arbeidsliste', () => {
+    it('Rediger arbeidsliste', () => {
         cy.apneArbeidslistePaPerson();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
@@ -137,7 +137,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').contains(redigertKommentar);
     });
 
-    xit('Slett arbeidsliste via fjern-knapp', () => {
+    it('Slett arbeidsliste via fjern-knapp', () => {
         cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
             antallFor += Cypress.$(ant).length;
         });
@@ -160,7 +160,7 @@ describe('Arbeidsliste', () => {
             });
     });
 
-    xit('Slett arbeidsliste via rediger-modal', () => {
+    it('Slett arbeidsliste via rediger-modal', () => {
         cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
             antallForSletting += Cypress.$(ant).length;
         });
@@ -195,7 +195,7 @@ describe('Arbeidsliste', () => {
             });
     });
 
-    xit('Sjekk validering i rediger arbeidsliste-modal', () => {
+    it('Sjekk validering i rediger arbeidsliste-modal', () => {
         cy.apneArbeidslistePaPerson();
 
         cy.get('.arbeidsliste-modal').should('not.exist');
@@ -222,9 +222,16 @@ describe('Arbeidsliste', () => {
     });
 
     it('Avbryt redigering, ingen endringer lagret', () => {
-        cy.get('.arbeidsliste-modal').should('not.exist');
-
         cy.apneArbeidslistePaPerson();
+
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
+            tittel = $tittel.text();
+        });
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
+            kommentar = $kommentar.text();
+        });
+
+        cy.get('.arbeidsliste-modal').should('not.exist');
 
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
 
