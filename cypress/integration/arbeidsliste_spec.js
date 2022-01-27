@@ -1,3 +1,4 @@
+const {useEffect} = require('react');
 before('Start server', () => {
     cy.configure();
     cy.gaTilOversikt('min-oversikt');
@@ -28,6 +29,7 @@ describe('Arbeidsliste', () => {
     let antallEtterSletting = 0;
     const nyTittel = 'Skal ikke lagres';
     const nyKommentar = 'Kommentar skal heller ikke lagres';
+
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
@@ -105,6 +107,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
             tittel = $tittel.text();
         });
+
+        console.log('TITTEL11', tittel);
 
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
@@ -221,7 +225,7 @@ describe('Arbeidsliste', () => {
         cy.lukkeArbeidslistePaPerson();
     });
 
-    it('Avbryt redigering, ingen endringer lagret', () => {
+    it('Lagre tittel og kommentar', () => {
         cy.apneArbeidslistePaPerson();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
@@ -230,11 +234,11 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
         });
+    });
 
+    it('Avbryt redigering, ingen endringer lagret', () => {
         cy.get('.arbeidsliste-modal').should('not.exist');
-
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-
         cy.get('.arbeidsliste-modal').should('be.visible');
 
         cy.getByTestId('modal_arbeidsliste_tittel')
@@ -247,6 +251,7 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain', kommentar);
-        cy.apneArbeidslistePaPerson();
+
+        cy.lukkeArbeidslistePaPerson();
     });
 });
