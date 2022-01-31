@@ -36,7 +36,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
     const [feilmelding, setFeilmelding] = useState<string>('');
 
     const ikkeVisIgjen = false;
-    const visTilfredshet = false;
+    const visTilfredshet = true;
 
     const handleFormSubmitted = e => {
         e.preventDefault();

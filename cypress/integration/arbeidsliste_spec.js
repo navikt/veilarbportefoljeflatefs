@@ -1,7 +1,5 @@
-const {useEffect} = require('react');
 before('Start server', () => {
     cy.configure();
-    cy.gaTilOversikt('min-oversikt');
 });
 
 describe('Arbeidsliste', () => {
@@ -29,6 +27,10 @@ describe('Arbeidsliste', () => {
     let antallEtterSletting = 0;
     const nyTittel = 'Skal ikke lagres';
     const nyKommentar = 'Kommentar skal heller ikke lagres';
+
+    before('Gå til min oversikt', () => {
+        cy.gaTilOversikt('min-oversikt');
+    });
 
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');

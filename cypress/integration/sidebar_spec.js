@@ -612,7 +612,7 @@ describe('Filter', () => {
 
         cy.getByTestId('brukerliste_innhold')
             .children()
-            .should('have.length', 6)
+            .should('have.length', 5)
             .last()
             .prev()
             .contains('Siste endring');
@@ -628,6 +628,10 @@ describe('Filter', () => {
         cy.getByTestId('velg-kolonne-rad_siste_endring')
             .should('be.checked')
             .uncheck({force: true});
+
+        cy.getByTestId('velg-kolonne-rad_veileder')
+            .should('not.be.checked')
+            .check({force: true});
 
         cy.getByTestId('brukerliste_innhold')
             .children()
@@ -669,10 +673,6 @@ describe('Filter', () => {
         cy.checkbox('filter_uleste-endringer');
 
         cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('be.visible');
-
-        // cy.getByTestId('side-storrelse_min-oversikt')
-        //     .click()
-        //     .scrollTo('top');
 
         cy.getByTestId('filtreringlabel_uleste-endringer-siste-endring-av-bruker').should('be.visible');
 

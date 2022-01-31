@@ -71,7 +71,9 @@ function EnhetBrukerpanel({
                 brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
-                <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                <div className="brukerliste__etiketter">
+                    <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                </div>
             </div>
         </li>
     );
