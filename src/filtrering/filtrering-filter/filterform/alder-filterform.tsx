@@ -7,7 +7,7 @@ import './filterform.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
     form: string;
@@ -128,23 +128,26 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         >
             {harValg && (
                 <>
-                    <CheckboxGroup legend="" hideLegend className={classNames('checkbox-filterform__valg', className)}>
+                    <div className={classNames('checkbox-filterform__valg', className)}>
                         <Grid columns={2}>
                             {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                <Checkbox
-                                    key={filterKey}
-                                    id={filterKey}
-                                    type="checkbox"
-                                    value={filterKey}
-                                    checked={checkBoxValg.includes(filterKey)}
-                                    onChange={e => submitCheckBox(e)}
-                                    data-testid={`filter_${filterKey}`}
-                                >
-                                    {filterValue}
-                                </Checkbox>
+                                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                    <input
+                                        id={filterKey}
+                                        type="checkbox"
+                                        className="skjemaelement__input checkboks"
+                                        value={filterKey}
+                                        checked={checkBoxValg.includes(filterKey)}
+                                        onChange={e => submitCheckBox(e)}
+                                        data-testid={`filter_${filterKey}`}
+                                    />
+                                    <label htmlFor={filterKey} className="skjemaelement__label">
+                                        {filterValue}
+                                    </label>
+                                </div>
                             ))}
                         </Grid>
-                    </CheckboxGroup>
+                    </div>
                     <hr className="alder-border" />
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
                         <div className="alder-container alder-container__fra">

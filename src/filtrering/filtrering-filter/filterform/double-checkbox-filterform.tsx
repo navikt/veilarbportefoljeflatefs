@@ -5,7 +5,7 @@ import './filterform.less';
 import classNames from 'classnames';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Checkbox, RadioGroup} from '@navikt/ds-react';
+import {Label} from '@navikt/ds-react';
 import Grid from '../../../components/grid/grid';
 
 interface DoubleCheckboxFilterformProps {
@@ -62,26 +62,40 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
     };
 
     return (
-        <form>
+        <form className="skjema checkbox-filterform">
             {harValgGodkjent && harValgBestatt && (
                 <Grid columns={2} className={classNames('checkbox-filterform__valg__double', className)}>
-                    <RadioGroup legend="Er utdanningen godkjent i Norge?" className="checkbox-filterform-col1">
+                    <div
+                        className="checkbox-filterform-col1"
+                        role="group"
+                        aria-labelledby="double-filterform-label-col1"
+                    >
+                        <Label id="double-filterform-label-col1" className="double-form-title">
+                            {'Er utdanningen godkjent i Norge?'}
+                        </Label>
                         <RenderFields
                             valg={uniqueValgGodkjent}
                             form={formUtdanningGodkjent}
                             velgCheckBox={e => velgCheckBox(e, formUtdanningGodkjent)}
                             checkBoxValg={checkBoxValgGodkjent}
                         />
-                    </RadioGroup>
+                    </div>
 
-                    <RadioGroup legend="Er utdanningen bestått?" className="checkbox-filterform-col2">
+                    <div
+                        className="checkbox-filterform-col2"
+                        role="group"
+                        aria-labelledby="double-filterform-label-col2"
+                    >
+                        <Label id="double-filterform-label-col2" className="double-form-title">
+                            {'Er utdanningen bestått?'}
+                        </Label>{' '}
                         <RenderFields
                             valg={uniqueValgBestatt}
                             form={formUtdanningBestatt}
                             velgCheckBox={e => velgCheckBox(e, formUtdanningBestatt)}
                             checkBoxValg={checkBoxValgBestatt}
                         />
-                    </RadioGroup>
+                    </div>
                 </Grid>
             )}
             <NullstillKnapp
@@ -103,16 +117,20 @@ function RenderFields(props: {
     return (
         <>
             {Object.entries(props.valg).map(([filterKey, filterValue]) => (
-                <Checkbox
-                    key={filterKey}
-                    id={filterKey}
-                    value={filterKey}
-                    checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
-                    onChange={props.velgCheckBox}
-                    data-testid={`filter_${filterKey}`}
-                >
-                    {filterValue}
-                </Checkbox>
+                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                    <input
+                        id={filterKey}
+                        type="checkbox"
+                        className="skjemaelement__input checkboks"
+                        value={filterKey}
+                        checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
+                        onChange={props.velgCheckBox}
+                        data-testid={`filter_${filterKey}`}
+                    />
+                    <label htmlFor={filterKey} className="skjemaelement__label">
+                        {filterValue}
+                    </label>
+                </div>
             ))}
         </>
     );

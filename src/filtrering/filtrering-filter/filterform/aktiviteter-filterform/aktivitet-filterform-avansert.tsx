@@ -3,7 +3,7 @@ import '../filterform.less';
 import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
-import {Button, Label, RadioGroup, Radio, BodyShort} from '@navikt/ds-react';
+import {Button, Label, BodyShort} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -44,32 +44,40 @@ function AktivitetFilterformAvansert({
                     <Label>Nei</Label>
                 </div>
                 {Object.entries(valg).map(([kode, verdi]) => [
-                    <div className="aktivitetvalg">
+                    <div key={kode} className="aktivitetvalg">
                         <BodyShort>{verdi as string}</BodyShort>
-                        <RadioGroup legend={''} hideLegend key={kode}>
-                            <Radio
-                                id={`aktivitet-${kode}-ja`}
-                                name={kode}
-                                checked={valgteAvanserteAktiviteter[kode] === 'JA'}
-                                onChange={() => handleChange(kode, 'JA')}
-                                key={`JA, ${verdi}`}
-                                data-testid={`aktivitet-filterform-${kode}-ja`}
-                                value={`ja-${verdi}`}
-                            >
-                                {}
-                            </Radio>
-                            <Radio
-                                id={`aktivitet-${kode}-nei`}
-                                name={kode}
-                                checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
-                                onChange={() => handleChange(kode, 'NEI')}
-                                key={`NEI, ${verdi}`}
-                                data-testid={`aktivitet-filterform-${kode}-nei`}
-                                value={`nei-${verdi}`}
-                            >
-                                {}
-                            </Radio>
-                        </RadioGroup>
+                        <input
+                            id={`aktivitet-${kode}-ja`}
+                            name={kode}
+                            value="JA"
+                            type="radio"
+                            checked={valgteAvanserteAktiviteter[kode] === 'JA'}
+                            onChange={() => handleChange(kode, 'JA')}
+                            key={`JA, ${verdi}`}
+                            data-testid={`aktivitet-filterform-${kode}-ja`}
+                            className="radioknapp"
+                        />
+                        <label
+                            htmlFor={`aktivitet-${kode}-ja`}
+                            className="skjemaelement__label aktivitet_radioknapp_label"
+                        >
+                            <span className="sr-only">Ja, {verdi}</span>
+                        </label>
+                        <input
+                            id={`aktivitet-${kode}-nei`}
+                            name={kode}
+                            checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
+                            onChange={() => handleChange(kode, 'NEI')}
+                            key={`NEI, ${verdi}`}
+                            data-testid={`aktivitet-filterform-${kode}-nei`}
+                            value={`nei-${verdi}`}
+                        />
+                        <label
+                            htmlFor={`aktivitet-${kode}-nei`}
+                            className="skjemaelement__label aktivitet_radioknapp_label"
+                        >
+                            <span className="sr-only">Nei, {verdi}</span>
+                        </label>
                     </div>
                 ])}
             </div>

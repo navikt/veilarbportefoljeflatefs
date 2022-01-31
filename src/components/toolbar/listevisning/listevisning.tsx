@@ -2,12 +2,11 @@ import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
-import ListevisningRad from './listvisning-rad';
+import ListevisningRad from './listevisning-rad';
 import './listevisning.less';
 import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
 import Dropdown from '../../dropdown/dropdown';
 import {AppState} from '../../../reducer';
-import {CheckboxGroup} from '@navikt/ds-react';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
@@ -49,7 +48,7 @@ function Listevisning(props: ListevisningProps) {
             disabled={muligeAlternativer.length <= 3}
             className="dropdown--toolbar toolbar__velg-kolonner"
             render={() => (
-                <CheckboxGroup className="ustilet" legend="" hideLegend>
+                <ul className="ustilet">
                     {muligeAlternativer.map(kolonne => (
                         <ListevisningRad
                             key={kolonne}
@@ -59,7 +58,7 @@ function Listevisning(props: ListevisningProps) {
                             onChange={handleChange}
                         />
                     ))}
-                </CheckboxGroup>
+                </ul>
             )}
         />
     );

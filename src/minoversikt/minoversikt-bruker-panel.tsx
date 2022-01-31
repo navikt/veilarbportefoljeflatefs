@@ -15,7 +15,8 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Checkbox, Tag} from '@navikt/ds-react';
+import {Tag} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -76,10 +77,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         checked={bruker.markert}
                         disabled={bruker.fnr === ''}
                         onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        label=""
+                        role="checkbox"
+                        className="brukerliste__checkbox"
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
-                    >
-                        {}
-                    </Checkbox>
+                    />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}

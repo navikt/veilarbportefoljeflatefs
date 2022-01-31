@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import '../../../style.less';
 import {AppState} from '../../../reducer';
 import SokFilterVeilederliste from './sok-filter-veilederliste';
-import {CheckboxGroup, Checkbox} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface SokVeiledereProps {
     erValgt: (ident: string) => boolean;
@@ -19,19 +19,19 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
     return (
         <SokFilterVeilederliste data={sorterteVeilederePaEtterNavn} label="Velg veiledere:" placeholder="Søk veileder">
             {liste => (
-                <CheckboxGroup className="checkbox-filterform__valg" legend="" hideLegend>
+                <div className="checkbox-filterform__valg">
                     {liste.map((elem, index) => (
                         <Checkbox
                             role="checkbox"
                             key={elem.ident}
+                            label={`${elem.etternavn}, ${elem.fornavn}`}
                             value={elem.ident}
+                            checked={erValgt(elem.ident)}
                             onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
                             data-testid={`veiledergruppe_modal_veileder-checkbox_${index}`}
-                        >
-                            {`${elem.etternavn}, ${elem.fornavn}`}
-                        </Checkbox>
+                        />
                     ))}
-                </CheckboxGroup>
+                </div>
             )}
         </SokFilterVeilederliste>
     );

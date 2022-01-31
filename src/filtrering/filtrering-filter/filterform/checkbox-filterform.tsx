@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -50,24 +50,27 @@ function CheckboxFilterform({
     return (
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
-                <CheckboxGroup legend="" hideLegend className={classNames('checkbox-filterform__valg', className)}>
+                <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={gridColumns}>
                         {Object.entries(valg).map(([filterKey, filterValue]) => (
-                            <>
-                                <Checkbox
-                                    key={filterKey}
+                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                <input
+                                    id={filterKey}
+                                    type="checkbox"
+                                    className="skjemaelement__input checkboks"
                                     value={filterKey}
                                     name={valg[filterKey]}
                                     checked={checkBoxValg.includes(filterKey)}
                                     onChange={velgCheckBox}
                                     data-testid={`filter_${filterKey}`}
-                                >
+                                />
+                                <label htmlFor={filterKey} className="skjemaelement__label">
                                     {filterValue}
-                                </Checkbox>
-                            </>
+                                </label>
+                            </div>
                         ))}
                     </Grid>
-                </CheckboxGroup>
+                </div>
             )}
             <NullstillKnapp
                 dataTestId="checkbox-filterform"

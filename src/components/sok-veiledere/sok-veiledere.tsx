@@ -4,7 +4,8 @@ import {AppState} from '../../reducer';
 import '../../filtrering/filtrering-filter/filterform/filterform.less';
 import '../../style.less';
 import SokFilter from './sok-filter';
-import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface SokVeiledereProps {
     erValgt: (ident: string) => boolean;
@@ -23,17 +24,18 @@ function SokVeiledere(props: SokVeiledereProps) {
         <SokFilter placeholder="Søk veileder" data={sorterteVeilederePaEtterNavn}>
             {liste => (
                 <div className="checkbox-filterform">
-                    <CheckboxGroup legend="" hideLegend className="checkbox-filterform__valg">
+                    <div className="checkbox-filterform__valg">
                         {liste.map((elem, index) => (
                             <Checkbox
                                 key={elem.ident}
+                                label={`${elem.etternavn}, ${elem.fornavn}`}
                                 value={elem.ident}
                                 checked={props.erValgt(elem.ident)}
                                 onChange={e => props.hanterVeilederValgt(e.target.checked, e.target.value)}
                                 data-testid={`sok-veileder_rad_${index}`}
-                            >{`${elem.etternavn}, ${elem.fornavn}`}</Checkbox>
+                            />
                         ))}
-                    </CheckboxGroup>
+                    </div>
                     <div className=" filterform__under-valg">
                         <Button
                             onClick={props.btnOnClick}

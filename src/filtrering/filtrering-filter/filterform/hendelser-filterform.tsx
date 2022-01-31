@@ -7,7 +7,9 @@ import './filterform.less';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
-import {Checkbox, CheckboxGroup, HelpText, Label, Radio, RadioGroup} from '@navikt/ds-react';
+import {HelpText, Label} from '@navikt/ds-react';
+import {Checkbox, Radio} from 'nav-frontend-skjema';
+import classNames from 'classnames';
 
 interface HendelserFilterformProps {
     form: string;
@@ -72,19 +74,22 @@ export function HendelserFilterform({
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
                 {oversiktType === OversiktType.minOversikt && (
-                    <div className="hendelser-filterform__checkbox-gruppe">
-                        <CheckboxGroup legend="" hideLegend className={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}>
-                            <Checkbox
-                                id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
-                                type="checkbox"
-                                value="ULESTE_ENDRINGER"
-                                checked={checkboxValg === 'ULESTE_ENDRINGER'}
-                                onChange={e => onCheckboxChange(e)}
-                                data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
-                            >
-                                {ulesteEndringer.ULESTE_ENDRINGER}
-                            </Checkbox>
-                        </CheckboxGroup>
+                    <div
+                        className={classNames(
+                            'hendelser-filterform__checkbox-gruppe',
+                            kebabCase(ulesteEndringer.ULESTE_ENDRINGER)
+                        )}
+                    >
+                        <Checkbox
+                            id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
+                            label={ulesteEndringer.ULESTE_ENDRINGER}
+                            role="checkbox"
+                            value="ULESTE_ENDRINGER"
+                            checked={checkboxValg === 'ULESTE_ENDRINGER'}
+                            onChange={e => onCheckboxChange(e)}
+                            data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
+                        />
+
                         <HelpText
                             strategy="fixed"
                             placement="right"
@@ -97,21 +102,20 @@ export function HendelserFilterform({
                     </div>
                 )}
 
-                <RadioGroup legend="" hideLegend className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
+                <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
                     <Label className="hendelser-filterform__radio-gruppe__label">
                         Siste aktivitet lagt til av bruker
                     </Label>
                     {lagtTilAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        >
-                            {hendelserLabels[key]}
-                        </Radio>
+                        />
                     ))}
 
                     <Label className="hendelser-filterform__radio-gruppe__label">
@@ -120,14 +124,13 @@ export function HendelserFilterform({
                     {fullfortAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        >
-                            {hendelserLabels[key]}
-                        </Radio>
+                        />
                     ))}
 
                     <Label className="hendelser-filterform__radio-gruppe__label">
@@ -136,28 +139,26 @@ export function HendelserFilterform({
                     {avbruttAvBruker.map(key => (
                         <Radio
                             onChange={e => onRadioChange(e)}
+                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
                             value={key}
                             checked={hendelserValg.includes(key)}
                             key={key}
                             data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        >
-                            {hendelserLabels[key]}
-                        </Radio>
+                        />
                     ))}
 
                     <Label className="hendelser-filterform__radio-gruppe__label">Andre</Label>
                     <Radio
                         onChange={e => onRadioChange(e)}
+                        label={hendelserLabels['MAL']}
                         name="sisteEndringKategori"
                         value={'MAL'}
                         checked={hendelserValg.includes('MAL')}
                         key={'MAL'}
                         data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
-                    >
-                        {hendelserLabels['MAL']}
-                    </Radio>
-                </RadioGroup>
+                    />
+                </div>
             </div>
             <NullstillKnapp
                 dataTestId="hendelser-filterform"

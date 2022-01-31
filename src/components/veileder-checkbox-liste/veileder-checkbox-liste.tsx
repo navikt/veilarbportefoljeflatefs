@@ -8,7 +8,8 @@ import {AppState} from '../../reducer';
 import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Alert} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
@@ -71,13 +72,11 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
                 return (
                     <Checkbox
                         key={veileder.ident}
-                        value={veileder.navn}
+                        label={veileder.navn}
                         checked={identErValgt}
                         onChange={e => handleCheckboxOnClick(e, veileder.ident)}
                         data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
-                    >
-                        {veileder.navn}{' '}
-                    </Checkbox>
+                    />
                 );
             });
     };
@@ -88,14 +87,9 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     if (harValg) {
         return (
             <form className="checkbox-liste">
-                <CheckboxGroup
-                    legend=""
-                    hideLegend
-                    className="checkbox-liste__valg"
-                    data-testid="veilederoversikt_sok-veileder_veilederliste"
-                >
+                <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
                     {valgCheckboxListe}
-                </CheckboxGroup>
+                </div>
                 <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}

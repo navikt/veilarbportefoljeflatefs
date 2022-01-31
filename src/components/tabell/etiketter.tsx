@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
 import {HiddenEtikett} from './etikett';
+import classnames from 'classnames';
 
 interface EtiketterProps {
     className?: string;
@@ -10,7 +11,7 @@ interface EtiketterProps {
 
 function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     return (
-        <span className={className}>
+        <span className={classnames('etikett__container', className)}>
             <HiddenEtikett variant="info" hidden={!bruker.erDoed} className="etikett--doed">
                 Død
             </HiddenEtikett>

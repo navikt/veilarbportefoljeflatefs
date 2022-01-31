@@ -2,7 +2,7 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {alternativerConfig} from './listevisning-utils';
 import {ChangeEvent} from 'react';
 import * as React from 'react';
-import {Checkbox} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface ListevisningRadProps {
     kolonneoverskrift: Kolonne;
@@ -20,16 +20,19 @@ function ListevisningRad(props: ListevisningRadProps) {
     }
 
     return (
-        <Checkbox
-            value={kolonneoverskrift}
-            checked={props.valgt}
-            disabled={props.disabled || alternativ.checkboxDisabled}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => props.onChange(props.kolonneoverskrift, e.target.checked)}
-            data-testid={`velg-kolonne-rad_${kolonneoverskrift}`}
-            role="checkbox"
-        >
-            {alternativ.tekstlabel}
-        </Checkbox>
+        <li>
+            <Checkbox
+                label={alternativ.tekstlabel}
+                value={kolonneoverskrift}
+                checked={props.valgt}
+                disabled={props.disabled || alternativ.checkboxDisabled}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    props.onChange(props.kolonneoverskrift, e.target.checked)
+                }
+                data-testid={`velg-kolonne-rad_${kolonneoverskrift}`}
+                role="checkbox"
+            />
+        </li>
     );
 }
 

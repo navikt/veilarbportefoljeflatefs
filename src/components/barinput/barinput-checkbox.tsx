@@ -1,8 +1,7 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
-import './barlabel.less';
+import './bar.less';
 import Barlabel from './barlabel';
-import {Checkbox} from '@navikt/ds-react';
 
 interface BarInputCheckboxProps {
     filterNavn: string;
@@ -17,15 +16,19 @@ function BarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst
     const egenLabelTekst = labelTekst ? labelTekst : ferdigfilterListe[filterVerdi];
 
     return (
-        <Checkbox
-            value={filterVerdi}
-            data-testid={`filter_checkboks-container_${filterNavn}`}
-            onChange={handleChange}
-            checked={checked}
-            className="barlabel"
-        >
+        <div className="barinput-checkbox">
+            <input
+                data-testid={`filter_checkboks-container_${filterNavn}`}
+                type="checkbox"
+                name="ferdigfilter"
+                id={filterNavn}
+                value={filterVerdi}
+                onChange={handleChange}
+                checked={checked}
+                className="barinput-checkbox__input"
+            />
             <Barlabel labelTekst={egenLabelTekst} antall={antall} />
-        </Checkbox>
+        </div>
     );
 }
 

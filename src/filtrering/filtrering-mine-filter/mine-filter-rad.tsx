@@ -17,7 +17,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {Radio} from '@navikt/ds-react';
+import {Radio} from 'nav-frontend-skjema';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;
@@ -79,13 +79,12 @@ function MineFilterRad({mineFilter, oversiktType, enhettiltak}: MineFilterRadPro
                 className="mine-filter__filternavn"
                 key={mineFilter.filterId}
                 name="mineFilter"
-                value={mineFilter.filterId.toString()}
+                label={mineFilter.filterNavn}
+                value={mineFilter.filterId}
                 onChange={() => velgFilter()}
                 checked={valgtMineFilter?.filterId === mineFilter.filterId}
                 data-testid={`mine-filter-rad_${kebabCase(mineFilter.filterNavn)}`}
-            >
-                {mineFilter.filterNavn}
-            </Radio>
+            />
             <RedigerKnapp
                 hidden={valgtMineFilter?.filterId !== mineFilter.filterId}
                 aria="Rediger mitt filter"

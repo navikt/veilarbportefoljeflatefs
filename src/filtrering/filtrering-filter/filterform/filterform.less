@@ -68,13 +68,10 @@
         }
     }
 
-    .alder-border {
-        margin: 0 1rem;
-    }
     .alder-input {
         display: grid;
         grid-template-columns: auto auto auto;
-        padding: 0.5rem 0.5rem;
+        padding-bottom: 0.5rem;
 
         .alder-container {
             display: flex;
@@ -116,10 +113,10 @@
     }
 
     .checkbox-filterform {
+        padding: 0.5rem;
         &__valg {
             max-height: 16rem;
             overflow-x: auto;
-            padding: 0 0.5rem 0;
 
             &__double {
                 max-height: 16rem;
@@ -154,91 +151,100 @@
             margin-bottom: 0;
         }
     }
-    .fodselsdato__grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-row-gap: 10px;
-        margin: 0.5rem 0;
-    }
 
-    .fodselsdato__container {
-        text-align: center;
-        margin: 0.2rem;
+    #Fødselsdato-dropdown__innhold .checkbox-filterform {
+        padding: 0.5rem 0 0;
 
-        label {
-            position: relative;
-            cursor: pointer;
-            padding: 0.3rem 0.5rem;
-            background-color: white;
-            border: 1px solid transparent;
-            border-radius: 4px;
+        .fodselsdato__grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-row-gap: 10px;
+            margin-bottom: 0.5rem;
         }
 
-        label:hover {
-            color: @navBla;
-            border: 1px solid @navBla;
+        .fodselsdato__container {
+            text-align: center;
+            margin: 0.2rem;
+
+            label {
+                position: relative;
+                cursor: pointer;
+                padding: 0.3rem 0.5rem;
+                background-color: white;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+
+            label:hover {
+                color: @navBla;
+                border: 1px solid @navBla;
+            }
+
+            label::before,
+            label::after {
+                position: absolute;
+            }
+
+            label::before {
+                content: '';
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+                padding: 0.2rem;
+            }
+
+            label::after {
+                content: '';
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+            input[type='checkbox'] {
+                opacity: 0;
+                appearance: none;
+            }
+
+            input[type='checkbox'] + label::after {
+                content: none;
+            }
+
+            input[type='checkbox']:checked + label {
+                background-color: @navBlaDarken20;
+                color: white;
+            }
+
+            input[type='checkbox']:checked + label::after {
+                content: '';
+            }
+
+            input[type='checkbox']:focus + label::before {
+                border-radius: 4px;
+                box-shadow: 0 0 0 3px @fokusFarge;
+                outline: none;
+            }
         }
 
-        label::before,
-        label::after {
-            position: absolute;
-        }
-
-        label::before {
-            content: '';
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-            padding: 0.2rem;
-        }
-
-        label::after {
-            content: '';
-            //padding: 0.2rem;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        input[type='checkbox'] {
-            opacity: 0;
-            appearance: none;
-        }
-
-        input[type='checkbox'] + label::after {
-            content: none;
-        }
-
-        input[type='checkbox']:checked + label {
-            background-color: @navBlaDarken20;
-            color: white;
-        }
-
-        input[type='checkbox']:checked + label::after {
-            content: '';
-        }
-
-        input[type='checkbox']:focus + label::before {
-            border-radius: 4px;
-            box-shadow: 0 0 0 3px @fokusFarge;
-            outline: none;
+        .nullstill__knapp {
+            margin: .5rem;
         }
     }
 
     .radio-filterform {
+        padding: 0.5rem;
+
         &__valg {
-            padding: 0 0.5rem 0;
             z-index: 1000;
             margin-bottom: 0;
         }
     }
 
     .hendelser-filterform {
+        padding: .5rem 0 .5rem .5rem;
         &__valg {
-            padding: 0 0.5rem 0;
             z-index: 1000;
             margin-bottom: 0;
             max-height: 24rem;
@@ -260,7 +266,6 @@
 
         &__checkbox-gruppe {
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
             border-bottom: 1px solid #78706a;
             display: flex;
             flex-direction: row;
@@ -270,6 +275,15 @@
                 margin-right: 1rem;
                 align-self: center;
             }
+        }
+        .nullstill__knapp {
+            margin: .5rem;
+        }
+
+        #uleste-endringer {
+            margin-left: .5rem;
+            align-self: center;
+            transform: scale(1.5);
         }
     }
     div.navds-popover.navds-help-text__popover {
