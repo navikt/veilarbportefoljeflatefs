@@ -46,38 +46,42 @@ function AktivitetFilterformAvansert({
                 {Object.entries(valg).map(([kode, verdi]) => [
                     <div key={kode} className="aktivitetvalg">
                         <BodyShort>{verdi as string}</BodyShort>
-                        <input
-                            id={`aktivitet-${kode}-ja`}
-                            name={kode}
-                            value="JA"
-                            type="radio"
-                            checked={valgteAvanserteAktiviteter[kode] === 'JA'}
-                            onChange={() => handleChange(kode, 'JA')}
-                            key={`JA, ${verdi}`}
-                            data-testid={`aktivitet-filterform-${kode}-ja`}
-                            className="radioknapp"
-                        />
-                        <label
-                            htmlFor={`aktivitet-${kode}-ja`}
-                            className="skjemaelement__label aktivitet_radioknapp_label"
-                        >
-                            <span className="sr-only">Ja, {verdi}</span>
-                        </label>
-                        <input
-                            id={`aktivitet-${kode}-nei`}
-                            name={kode}
-                            checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
-                            onChange={() => handleChange(kode, 'NEI')}
-                            key={`NEI, ${verdi}`}
-                            data-testid={`aktivitet-filterform-${kode}-nei`}
-                            value={`nei-${verdi}`}
-                        />
-                        <label
-                            htmlFor={`aktivitet-${kode}-nei`}
-                            className="skjemaelement__label aktivitet_radioknapp_label"
-                        >
-                            <span className="sr-only">Nei, {verdi}</span>
-                        </label>
+                        <div className="radioknapp-gruppe">
+                            <input
+                                id={`aktivitet-${kode}-ja`}
+                                name={kode}
+                                value="JA"
+                                type="radio"
+                                checked={valgteAvanserteAktiviteter[kode] === 'JA'}
+                                className="skjemaelement__input radioknapp"
+                                onChange={() => handleChange(kode, 'JA')}
+                                key={`Ja, ${verdi}`}
+                                data-testid={`aktivitet-filterform-${kode}-ja`}
+                            />
+                            <label
+                                htmlFor={`aktivitet-${kode}-ja`}
+                                className="skjemaelement__label aktivitet_radioknapp_label"
+                            >
+                                <span className="sr-only">Ja, {verdi}</span>
+                            </label>
+                            <input
+                                id={`aktivitet-${kode}-nei`}
+                                name={kode}
+                                value="NEI"
+                                type="radio"
+                                checked={valgteAvanserteAktiviteter[kode] === 'NEI'}
+                                className="skjemaelement__input radioknapp"
+                                onChange={() => handleChange(kode, 'NEI')}
+                                key={`NEI, ${verdi}`}
+                                data-testid={`aktivitet-filterform-${kode}-nei`}
+                            />
+                            <label
+                                htmlFor={`aktivitet-${kode}-nei`}
+                                className="skjemaelement__label aktivitet_radioknapp_label"
+                            >
+                                <span className="sr-only">Nei, {verdi}</span>
+                            </label>
+                        </div>
                     </div>
                 ])}
             </div>
