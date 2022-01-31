@@ -28,11 +28,8 @@ describe('Arbeidsliste', () => {
     const nyTittel = 'Skal ikke lagres';
     const nyKommentar = 'Kommentar skal heller ikke lagres';
 
-    before('Gå til min oversikt', () => {
-        cy.gaTilOversikt('min-oversikt');
-    });
-
     it('Lag én ny arbeidsliste og sjekk validering', () => {
+        cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
