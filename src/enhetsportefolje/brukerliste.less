@@ -91,11 +91,14 @@
         }
 
         &__checkbox {
-            margin-bottom: 1.5rem
+            margin-bottom: 1.5rem;
         }
 
         &__etiketter {
             width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 0.2rem;
         }
 
         &__arbeidslisteknapp {
@@ -143,5 +146,15 @@
         border-bottom: none;
         border-radius: 0 0 @border-radius-base @border-radius-base;
         margin-bottom: 0;
+    }
+
+    @media (max-width: 1240px) {
+        .brukerliste__etiketter {
+            flex-direction: column;
+
+            .navds-tag {
+                width: fit-content;
+            }
+        }
     }
 }

@@ -1,17 +1,15 @@
 import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
 import {HiddenEtikett} from './etikett';
-import classnames from 'classnames';
 
 interface EtiketterProps {
-    className?: string;
     bruker: BrukerModell;
     erVedtakStotteFeatureTogglePa: boolean;
 }
 
-function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
+function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     return (
-        <span className={classnames('etikett__container', className)}>
+        <>
             <HiddenEtikett variant="info" hidden={!bruker.erDoed} className="etikett--doed">
                 Død
             </HiddenEtikett>
@@ -87,7 +85,7 @@ function Etiketter({className, bruker, erVedtakStotteFeatureTogglePa}: Etiketter
             <HiddenEtikett variant="info" hidden={!bruker.trengerRevurdering}>
                 Revurdering
             </HiddenEtikett>
-        </span>
+        </>
     );
 }
 
