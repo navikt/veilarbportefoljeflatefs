@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {BodyShort} from '@navikt/ds-react';
 
 export function DagerSidenKolonne(props: {skalVises: boolean; dato: number | null; className: string}) {
     if (!props.skalVises || props.dato === null) {
@@ -15,5 +16,5 @@ export function DagerSidenKolonne(props: {skalVises: boolean; dato: number | nul
         }
     };
 
-    return <span className={props.className}>{datoTekst()}</span>;
+    return <BodyShort className={props.className}>{datoTekst()}</BodyShort>;
 }

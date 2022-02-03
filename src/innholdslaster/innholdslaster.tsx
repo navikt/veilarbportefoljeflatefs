@@ -2,7 +2,7 @@ import * as React from 'react';
 import {STATUS} from '../ducks/utils';
 import {useState} from 'react';
 import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
-import {Alert, Loader} from '@navikt/ds-react';
+import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 
 interface InnholdslasterProps {
     className?: string;
@@ -62,7 +62,7 @@ function Innholdslaster(props: InnholdslasterProps) {
 
         return (
             <Alert variant="error" className={props.className}>
-                <p>{feilmelding}</p>
+                <BodyShort>{feilmelding}</BodyShort>
             </Alert>
         );
     }

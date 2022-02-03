@@ -3,7 +3,7 @@ import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsli
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import {BodyShort, Detail} from '@navikt/ds-react';
+import {BodyShort, Detail, Label} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -32,32 +32,30 @@ export default function ArbeidslistePanel({
     }
 
     return skalVises ? (
-        <article className="brukerliste__arbeidslistepanel">
-            <span className="flex">
-                <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
-                {apen && (
-                    <span className={'brukerliste__arbeidslisteinnhold flex--grow'}>
-                        <Detail data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</Detail>
-                        <BodyShort className="brukerliste__arbeidslisteinnhold_frist">
-                            Arbeidsliste frist: {arbeidslisteFristTekst}
-                        </BodyShort>
-                        <BodyShort data-testid="chevron_arbeidslisteinnhold_kommentar">
-                            {bruker.arbeidsliste.kommentar}
-                        </BodyShort>
-                        <BodyShort className="brukerliste__arbeidslisteinnhold_footer">
-                            {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
-                            <ArbeidslisteModalRediger
-                                bruker={bruker}
-                                innloggetVeileder={innloggetVeileder}
-                                sistEndretDato={sistEndretDato}
-                                sistEndretAv={sistEndretAv}
-                                settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                            />
-                        </BodyShort>
-                    </span>
-                )}
-            </span>
-        </article>
+        <div className="brukerliste__arbeidslistepanel">
+            <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
+            {apen && (
+                <span className={'brukerliste__arbeidslisteinnhold flex--grow'}>
+                    <Label data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</Label>
+                    <Detail className="brukerliste__arbeidslisteinnhold_frist">
+                        Arbeidsliste frist: {arbeidslisteFristTekst}
+                    </Detail>
+                    <BodyShort data-testid="chevron_arbeidslisteinnhold_kommentar">
+                        {bruker.arbeidsliste.kommentar}
+                    </BodyShort>
+                    <Detail className="brukerliste__arbeidslisteinnhold_footer">
+                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                        <ArbeidslisteModalRediger
+                            bruker={bruker}
+                            innloggetVeileder={innloggetVeileder}
+                            sistEndretDato={sistEndretDato}
+                            sistEndretAv={sistEndretAv}
+                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        />
+                    </Detail>
+                </span>
+            )}
+        </div>
     ) : (
         <></>
     );

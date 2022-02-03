@@ -42,8 +42,8 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                     onClick={slettKnapp}
                     data-testid="bekreft-sletting_modal_slett-knapp"
                 >
-                    Slett
                     <Delete />
+                    Slett
                 </Button>
                 <Button variant="secondary" type="button" onClick={props.onRequestClose}>
                     Avbryt

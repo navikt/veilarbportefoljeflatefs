@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, TextField} from '@navikt/ds-react';
+import {Alert, BodyShort, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -46,9 +46,9 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
                     data-testid="veiledergruppe_modal_sok-veileder-input"
                 />
             </div>
-            <span className="text-hide" aria-live="polite" aria-atomic="true">
+            <BodyShort className="text-hide" aria-live="polite" aria-atomic="true">
                 {`Viser ${filteredData.length} treff`}
-            </span>
+            </BodyShort>
             {harData ? (
                 children(filteredData)
             ) : (

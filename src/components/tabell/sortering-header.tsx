@@ -5,6 +5,7 @@ import Header, {HeaderProps} from './header';
 import './tabell.less';
 import {OrNothing} from '../../utils/types/types';
 import {Down, Up} from '@navikt/ds-icons';
+import {Button} from '@navikt/ds-react';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -48,7 +49,8 @@ function SorteringHeader({
     return (
         <Header skalVises={skalVises} className={className} headerId={headerId}>
             <div className="sorteringheader__lenke">
-                <button
+                <Button
+                    variant="tertiary"
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
                     className={classNames(
                         'lenke lenke--frittstaende text--left',
@@ -64,7 +66,7 @@ function SorteringHeader({
                     title={title}
                 >
                     {tekst}
-                </button>
+                </Button>
                 {sortering === 'etternavn' ? ', Fornavn' : null}
             </div>
             {sorteringspil()}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './knapper.less';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {AddCircle} from '@navikt/ds-icons';
 
 export function LeggTilKnapp(props: {onClick: () => void}) {
@@ -12,7 +12,7 @@ export function LeggTilKnapp(props: {onClick: () => void}) {
             data-testid="veiledergruppe_ny-gruppe_knapp"
         >
             <AddCircle className="ny-gruppe-knapp" />
-            <span>Ny gruppe</span>
+            <BodyShort>Ny gruppe</BodyShort>
         </Button>
     );
 }

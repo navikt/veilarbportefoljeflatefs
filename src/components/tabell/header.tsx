@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import './tabell.less';
+import {BodyShort} from '@navikt/ds-react';
 
 export interface HeaderProps {
     skalVises?: boolean | null;
@@ -15,13 +16,13 @@ function Header({children, skalVises = true, className = '', title, headerId}: H
         return null;
     }
     return (
-        <span
+        <BodyShort
             title={title}
             className={classNames('sorteringheader', className, `sorteringheader_${headerId}`)}
             data-testid={`sorteringheader_${headerId}`}
         >
             {children}
-        </span>
+        </BodyShort>
     );
 }
 

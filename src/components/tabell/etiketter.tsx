@@ -12,24 +12,27 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
     return (
         <>
-            <HiddenEtikett variant="info" hidden={!bruker.erDoed} className="etikett--doed">
+            <HiddenEtikett variant="info" size="small" hidden={!bruker.erDoed} className="etikett--doed">
                 Død
             </HiddenEtikett>
-            <HiddenEtikett variant="warning" hidden={!bruker.sikkerhetstiltak || bruker.sikkerhetstiltak.length === 0}>
-                Sikkerhetstiltak
-            </HiddenEtikett>
-
             <HiddenEtikett
                 variant="warning"
+                size="small"
+                hidden={!bruker.sikkerhetstiltak || bruker.sikkerhetstiltak.length === 0}
+            >
+                Sikkerhetstiltak
+            </HiddenEtikett>
+            <HiddenEtikett
+                variant="warning"
+                size="small"
                 hidden={!bruker.diskresjonskode}
             >{`Kode ${bruker.diskresjonskode}`}</HiddenEtikett>
-
-            <HiddenEtikett variant="warning" hidden={!bruker.egenAnsatt}>
+            <HiddenEtikett variant="warning" size="small" hidden={!bruker.egenAnsatt}>
                 Egen ansatt
             </HiddenEtikett>
-
             <HiddenEtikett
                 variant="info"
+                size="small"
                 hidden={
                     erVedtakStotteFeatureTogglePa
                         ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
@@ -38,9 +41,9 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             >
                 Trenger vurdering
             </HiddenEtikett>
-
             <HiddenEtikett
                 variant="info"
+                size="small"
                 hidden={
                     erVedtakStotteFeatureTogglePa
                         ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
@@ -51,6 +54,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             </HiddenEtikett>
             <HiddenEtikett
                 variant="info"
+                size="small"
                 hidden={
                     !erVedtakStotteFeatureTogglePa ||
                     !bruker.trengerVurdering ||
@@ -61,6 +65,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             </HiddenEtikett>
             <HiddenEtikett
                 variant="info"
+                size="small"
                 hidden={
                     !erVedtakStotteFeatureTogglePa ||
                     !bruker.trengerVurdering ||
@@ -69,9 +74,9 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             >
                 Antatt gode muligheter
             </HiddenEtikett>
-
             <HiddenEtikett
                 variant="info"
+                size="small"
                 hidden={
                     !erVedtakStotteFeatureTogglePa ||
                     !bruker.trengerVurdering ||
@@ -80,11 +85,10 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             >
                 Antatt behov for veiledning
             </HiddenEtikett>
-
-            <HiddenEtikett variant="info" hidden={!bruker.erSykmeldtMedArbeidsgiver}>
+            <HiddenEtikett variant="info" size="small" hidden={!bruker.erSykmeldtMedArbeidsgiver}>
                 Sykmeldt
             </HiddenEtikett>
-            <HiddenEtikett variant="info" hidden={!bruker.trengerRevurdering}>
+            <HiddenEtikett variant="info" size="small" hidden={!bruker.trengerRevurdering}>
                 Revurdering
             </HiddenEtikett>
         </>

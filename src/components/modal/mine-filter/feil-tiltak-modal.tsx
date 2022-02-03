@@ -58,8 +58,8 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                         La stå
                     </Button>
                     <Button variant="danger" onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
-                        Slett
                         <Delete />
+                        Slett
                     </Button>
                 </div>
             </EgenModal>

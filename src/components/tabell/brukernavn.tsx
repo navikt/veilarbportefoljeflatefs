@@ -4,6 +4,7 @@ import {BrukerModell} from '../../model-interfaces';
 import {setFraBrukerIUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.less';
 import {OrNothing} from '../../utils/types/types';
+import {Link} from '@navikt/ds-react';
 
 const settSammenNavn = bruker => {
     if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -14,7 +15,7 @@ const settSammenNavn = bruker => {
 
 const brukerNavn = (className, bruker, enhetId) => (
     <div className={className}>
-        <a
+        <Link
             onClick={() => {
                 setFraBrukerIUrl(bruker.fnr);
             }}
@@ -22,7 +23,7 @@ const brukerNavn = (className, bruker, enhetId) => (
             className={classnames('lenke lenke--frittstaende')}
         >
             {settSammenNavn(bruker)}
-        </a>
+        </Link>
     </div>
 );
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {BodyShort} from '@navikt/ds-react';
 
 interface UkekolonneProps {
     className?: string;
@@ -20,7 +21,7 @@ function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) 
     if (!skalVises) {
         return null;
     }
-    return <span className={className}>{lagUkerTekst(ukerIgjen, minVal)}</span>;
+    return <BodyShort className={className}>{lagUkerTekst(ukerIgjen, minVal)}</BodyShort>;
 }
 
 export default UkeKolonne;

@@ -41,7 +41,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                         <div key={index}>
                             {listeMedVeileder.map(veileder => (
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
-                                    <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
+                                    <BodyShort>{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                                     <Button
                                         variant="tertiary"
                                         className="fjern--knapp"

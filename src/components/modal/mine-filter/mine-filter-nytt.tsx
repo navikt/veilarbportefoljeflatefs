@@ -12,7 +12,6 @@ import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
-import {SaveFile} from '@navikt/ds-icons';
 import {LasterModal} from '../lastermodal/laster-modal';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; laster: boolean}) {
@@ -74,7 +73,6 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; las
                         <div className="lagret-filter-knapp-wrapper">
                             <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
                                 Lagre
-                                <SaveFile />
                             </Button>
                         </div>
                     </form>

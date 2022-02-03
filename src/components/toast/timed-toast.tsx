@@ -3,7 +3,7 @@ import './toast.less';
 import {useDispatch} from 'react-redux';
 import {useTimer} from '../../hooks/use-timer';
 import {kebabCase} from '../../utils/utils';
-import {Alert} from '@navikt/ds-react';
+import {Alert, BodyShort} from '@navikt/ds-react';
 
 interface TimedToastProps {
     toastTekst: string;
@@ -36,7 +36,7 @@ function TimedToast(props: TimedToastProps) {
                 className="timed-toast__alertstripe"
                 data-testid={`timed-toast_${kebabCase(props.toastTekst)}`}
             >
-                <span className="timed-toast__tekst">{props.toastTekst}</span>
+                <BodyShort className="timed-toast__tekst">{props.toastTekst}</BodyShort>
             </Alert>
         </div>
     );

@@ -98,7 +98,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
-                        {bruker.nyForVeileder && <Tag variant="info">Ny bruker</Tag>}
+                        {bruker.nyForVeileder && (
+                            <Tag variant="info" size="small">
+                                Ny bruker
+                            </Tag>
+                        )}
                     </div>
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}

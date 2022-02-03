@@ -14,7 +14,6 @@ import {dateToISODate} from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {SaveFile} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface OwnProps {
@@ -86,7 +85,6 @@ function LeggTilArbeidslisteForm({
                             <div className="modal-footer">
                                 <Button className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
                                     Lagre
-                                    <SaveFile />
                                 </Button>
                                 <Button
                                     variant="secondary"

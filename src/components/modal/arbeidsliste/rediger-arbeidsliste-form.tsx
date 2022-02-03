@@ -7,8 +7,8 @@ import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Button, Detail, Heading} from '@navikt/ds-react';
-import {Delete, SaveFile} from '@navikt/ds-icons';
+import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface RedigerArbeidslisteProps {
@@ -61,7 +61,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     }}
                 >
                     Lagre
-                    <SaveFile />
                 </Button>
                 <Button
                     variant="secondary"
@@ -79,7 +78,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
                     <Delete />
-                    <span>Fjern</span>
+                    <BodyShort>Fjern</BodyShort>
                 </Button>
             </div>
         </Form>

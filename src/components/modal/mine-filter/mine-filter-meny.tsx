@@ -1,7 +1,6 @@
 import React from 'react';
 import {Visningstype} from './mine-filter-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {SaveFile} from '@navikt/ds-icons';
 
 export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) => void; sisteFilterNavn}) {
     return (
@@ -12,7 +11,6 @@ export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) 
                 onClick={() => props.setValgtVisningstype(Visningstype.LAGRE_NYTT)}
             >
                 Lagre som nytt filter
-                <SaveFile />
             </Button>
 
             <BodyShort className="tekst" data-testid="mine-filter_modal_oppdater-filter-tekst">

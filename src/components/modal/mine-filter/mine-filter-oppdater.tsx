@@ -14,7 +14,7 @@ import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {Button, TextField} from '@navikt/ds-react';
-import {Delete, SaveFile} from '@navikt/ds-icons';
+import {Delete} from '@navikt/ds-icons';
 import {LasterModal} from '../lastermodal/laster-modal';
 
 export function OppdaterMineFilter(props: {
@@ -92,15 +92,14 @@ export function OppdaterMineFilter(props: {
                         <div className="lagret-filter-knapp-wrapper">
                             <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
                                 Lagre
-                                <SaveFile />
                             </Button>
                             <Button
                                 variant="danger"
                                 onClick={e => bekreftSletting(e)}
                                 data-testid="rediger-filter_modal_slett-knapp"
                             >
-                                Slett
                                 <Delete />
+                                Slett
                             </Button>
                         </div>
                     </form>

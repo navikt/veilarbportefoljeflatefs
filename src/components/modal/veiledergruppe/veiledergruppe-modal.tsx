@@ -14,7 +14,7 @@ import './veiledergruppe-modal.less';
 import ModalHeader from '../modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button, Modal} from '@navikt/ds-react';
-import {Delete, SaveFile} from '@navikt/ds-icons';
+import {Delete} from '@navikt/ds-icons';
 import classNames from 'classnames';
 import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
@@ -246,7 +246,6 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                     data-testid="veiledergruppe_modal_lagre-knapp"
                                 >
                                     {props.lagreKnappeTekst}
-                                    <SaveFile />
                                 </Button>
                                 <Button
                                     variant="secondary"
@@ -265,8 +264,8 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                         type="button"
                                         data-testid="veiledergruppe_modal_slette-knapp"
                                     >
-                                        Slett gruppe
                                         <Delete />
+                                        Slett gruppe
                                     </Button>
                                 )}
                             </div>
