@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
-import {HiddenEtikett} from './etikett';
+import hiddenIf from '../hidden-if/hidden-if';
+import {Tag} from '@navikt/ds-react';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -8,6 +9,7 @@ interface EtiketterProps {
 }
 
 function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
+    const HiddenEtikett = hiddenIf(Tag);
     return (
         <>
             <HiddenEtikett variant="info" hidden={!bruker.erDoed} className="etikett--doed">
