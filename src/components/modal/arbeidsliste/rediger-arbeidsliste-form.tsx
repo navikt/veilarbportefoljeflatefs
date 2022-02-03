@@ -9,6 +9,8 @@ import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Button, Detail, Heading} from '@navikt/ds-react';
 import {Delete, SaveFile} from '@navikt/ds-icons';
+import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
+
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -34,6 +36,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     <Heading size="small" level="2">
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
                     </Heading>
+                    <ArbeidslisteInformasjonsmelding />
                     <FormikInput name="overskrift" />
                     <FormikTekstArea name="kommentar" />
                     <Detail size="small" className="arbeidsliste--modal-redigering">

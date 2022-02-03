@@ -15,6 +15,7 @@ import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {SaveFile} from '@navikt/ds-icons';
+import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -63,7 +64,6 @@ function LeggTilArbeidslisteForm({
                 values.arbeidsliste.map(value =>
                     logEvent('teamvoff.metrikker.arbeidslistekategori', {
                         kategori: value.kategori,
-                        leggtil: true,
                         applikasjon: 'oversikt'
                     })
                 );
@@ -77,6 +77,7 @@ function LeggTilArbeidslisteForm({
                         <BodyShort className="arbeidsliste__info-tekst">
                             {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
                         </BodyShort>
+                        <ArbeidslisteInformasjonsmelding />
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
                             arbeidsliste={formikProps.values.arbeidsliste}
