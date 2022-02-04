@@ -20,6 +20,22 @@ export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
 
 const endringslogginnhold: EndringsloggInnlegg[] = [
     {
+        dato: '4. februar 2022',
+        tittel: 'Endringer i detaljer inne på en bruker',
+        versjonId: '04.02.22',
+        children: (
+            <ul>
+                <li>Rekkefølge på temaene endret ut fra hva som er mest brukt</li>
+                <li>Navigasjonsmeny til venstre for å få oversikt og navigere raskt til ulike temaer</li>
+                <li>
+                    Kopiknapper i personalia for enkelt å kopiere e-post, telefon- eller kontonummer til utklippstavlen
+                </li>
+                <li>Jobbprofil oppdatert til jobbønsker for å stemme med det brukeren ser</li>
+                <li>Jobbsøkerkompetanse fjernet, siden denne tjenesten ikke lenger er i bruk</li>
+            </ul>
+        )
+    },
+    {
         dato: '19. oktober 2021',
         tittel: 'Rekrutteringsbistand + aktivitetsplan',
         versjonId: '19.10.21',
