@@ -29,11 +29,15 @@ function VeilederTabell(props: VeiledereTabellProps) {
                     className="lenke lenke--frittstaende"
                     data-testid="veilederoversikt_navn_lenke"
                 >
-                    {`${veileder.navn}`}
+                    <BodyShort>{`${veileder.navn}`}</BodyShort>
                 </Link>
             </td>
-            <td>{`${veileder.ident}`}</td>
-            <td className="tabell-element-center">{veileder.portefoljestorrelse}</td>
+            <td>
+                <BodyShort>{`${veileder.ident}`}</BodyShort>
+            </td>
+            <td className="tabell-element-center">
+                <BodyShort>{veileder.portefoljestorrelse}</BodyShort>
+            </td>
             <td />
         </tr>
     ));
