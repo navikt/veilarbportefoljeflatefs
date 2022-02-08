@@ -69,7 +69,8 @@ function LeggTilArbeidslisteForm({
 
                 onSubmit(values.arbeidsliste);
             }}
-            render={formikProps => {
+        >
+            {formikProps => {
                 setFormIsDirty(formikProps.dirty);
                 return (
                     <Form data-testid="modal_arbeidsliste_form">
@@ -103,7 +104,7 @@ function LeggTilArbeidslisteForm({
                     </Form>
                 );
             }}
-        />
+        </Formik>
     );
 }
 

@@ -15,7 +15,7 @@ import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {Button, TextField} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
-import {LasterModal} from '../lastermodal/laster-modal';
+import LasterModal from '../lastermodal/laster-modal';
 
 export function OppdaterMineFilter(props: {
     gammeltFilterNavn: string;
@@ -77,7 +77,7 @@ export function OppdaterMineFilter(props: {
     return (
         <>
             {laster ? (
-                <LasterModal />
+                <LasterModal isOpen={laster} />
             ) : (
                 <>
                     <form onSubmit={e => doLagreEndringer(e)}>
@@ -103,6 +103,7 @@ export function OppdaterMineFilter(props: {
                             </Button>
                         </div>
                     </form>
+
                     <BekreftSlettingModal
                         isOpen={visBekreftSlettModal}
                         onRequestClose={() => setVisBekreftSlettModal(false)}

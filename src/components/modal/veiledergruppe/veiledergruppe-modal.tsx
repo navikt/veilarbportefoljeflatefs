@@ -16,8 +16,8 @@ import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button, Modal} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 import classNames from 'classnames';
-import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
+import LasterModal from '../lastermodal/laster-modal';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -49,11 +49,11 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);
     const [alertTekst, setAlertTekst] = useState('');
 
+    const veiledergruppeStatus = useSelector((state: AppState) => state.veiledergrupper.status);
+    const statusLaster = veiledergruppeStatus !== undefined && veiledergruppeStatus !== STATUS.OK;
+
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
-
-    const veiledergruppeStatus = useSelector((state: AppState) => state.veiledergrupper.status);
-    const laster = veiledergruppeStatus !== undefined && veiledergruppeStatus !== STATUS.OK;
 
     useEffect(() => {
         setFilterValg(props.initialVerdi.filterValg);
@@ -211,8 +211,8 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
 
     return (
         <>
-            {laster ? (
-                <LasterModal />
+            {statusLaster ? (
+                <LasterModal isOpen={statusLaster} />
             ) : (
                 <>
                     <Modal

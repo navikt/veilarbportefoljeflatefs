@@ -12,10 +12,14 @@ import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
-import {LasterModal} from '../lastermodal/laster-modal';
+import LasterModal from '../lastermodal/laster-modal';
+import {STATUS} from '../../../ducks/utils';
 
 export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; laster: boolean}) {
     const {lukkModal, oversiktType, laster} = props;
+
+    const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
+    const statusLaster = mineFilterStatus !== undefined && mineFilterStatus !== STATUS.OK;
 
     const filterValg = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
@@ -52,8 +56,8 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; las
 
     return (
         <>
-            {laster ? (
-                <LasterModal />
+            {statusLaster ? (
+                <LasterModal isOpen={laster} />
             ) : (
                 <>
                     <form

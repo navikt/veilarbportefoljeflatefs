@@ -48,7 +48,7 @@ function SorteringHeader({
 
     return (
         <Header skalVises={skalVises} className={className} headerId={headerId}>
-            <div className="sorteringheader__lenke">
+            <span className="sorteringheader__lenke">
                 <Button
                     variant="tertiary"
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
@@ -68,7 +68,7 @@ function SorteringHeader({
                     {tekst}
                 </Button>
                 {sortering === 'etternavn' ? ', Fornavn' : null}
-            </div>
+            </span>
             {sorteringspil()}
         </Header>
     );

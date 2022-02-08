@@ -38,7 +38,9 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         labelTekst={
                             <>
                                 <BodyShort className="arbeidslistetekst" title="Arbeidslistekategori blå">
-                                    <ArbeidslisteikonBla />
+                                    <span>
+                                        <ArbeidslisteikonBla />
+                                    </span>
                                     Blå
                                 </BodyShort>
                             </>
@@ -52,7 +54,9 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         labelTekst={
                             <>
                                 <BodyShort className="arbeidslistetekst" title="Arbeidslistekategori grønn">
-                                    <ArbeidslisteikonGronn />
+                                    <span>
+                                        <ArbeidslisteikonGronn />
+                                    </span>
                                     Grønn
                                 </BodyShort>
                             </>
@@ -66,7 +70,9 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         labelTekst={
                             <>
                                 <BodyShort className="arbeidslistetekst" title="Arbeidslistekategori lilla">
-                                    <ArbeidslisteikonLilla />
+                                    <span>
+                                        <ArbeidslisteikonLilla />
+                                    </span>
                                     Lilla
                                 </BodyShort>
                             </>
@@ -80,7 +86,9 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         labelTekst={
                             <>
                                 <BodyShort className="arbeidslistetekst" title="Arbeidslistekategori gul">
-                                    <ArbeidslisteikonGul />
+                                    <span>
+                                        <ArbeidslisteikonGul />
+                                    </span>
                                     Gul
                                 </BodyShort>
                             </>

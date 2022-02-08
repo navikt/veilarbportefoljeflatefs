@@ -1,8 +1,8 @@
 import * as React from 'react';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
-import {BrukerModell, KategoriModell, Status} from '../../../model-interfaces';
+import {BrukerModell, KategoriModell} from '../../../model-interfaces';
 import {useState} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Formik, FormikProps} from 'formik';
 import {STATUS} from '../../../ducks/utils';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
@@ -12,27 +12,19 @@ import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
-import {LasterModal} from '../lastermodal/laster-modal';
 import ModalHeader from '../modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
 import {Button, Modal} from '@navikt/ds-react';
+import LasterModal from '../lastermodal/laster-modal';
 
-interface Ownprops {
+interface ArbeidslisteModalRedigerProps {
     bruker: BrukerModell;
     innloggetVeileder: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
     settMarkert: (fnr: string, markert: boolean) => void;
-}
-
-interface DispatchProps {
-    onSubmit: (formdata: any) => void;
-}
-
-interface StateProps {
-    arbeidslisteStatus: Status;
 }
 
 interface FormikPropsValues {
@@ -42,16 +34,9 @@ interface FormikPropsValues {
     kategori: KategoriModell;
 }
 
-type ArbeidslisteModalRedigerProps = StateProps & Ownprops & DispatchProps;
-
-function ArbeidslisteModalRediger({
-    bruker,
-    arbeidslisteStatus,
-    sistEndretAv,
-    sistEndretDato,
-    onSubmit,
-    settMarkert
-}: ArbeidslisteModalRedigerProps) {
+function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMarkert}: ArbeidslisteModalRedigerProps) {
+    const arbeidslisteStatus = useSelector((state: AppState) => state.arbeidsliste.status);
+    const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
     const [isOpen, setIsOpen] = useState(false);
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const valgteBrukere = portefolje.brukere.filter(bruker => bruker.markert === true);
@@ -70,8 +55,6 @@ function ArbeidslisteModalRediger({
         setIsOpen(false);
         formikProps.resetForm();
     };
-
-    const laster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
 
     const initialValues = {
         overskrift: bruker.arbeidsliste.overskrift || '',
@@ -101,14 +84,14 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </Button>
-            {laster ? (
-                <LasterModal />
+            {statusLaster ? (
+                <LasterModal isOpen={statusLaster} />
             ) : (
                 <Formik
                     initialValues={initialValues}
                     onSubmit={values => {
                         setIsOpen(false);
-                        onSubmit(values);
+                        dispatch(redigerArbeidsliste(values, {bruker, sistEndretAv, sistEndretDato, settMarkert}));
                     }}
                 >
                     {formikProps => (
@@ -122,7 +105,7 @@ function ArbeidslisteModalRediger({
                                 <ModalHeader tittel="Rediger arbeidsliste" />
                                 <div className="modal-innhold">
                                     <RedigerArbeidslisteForm
-                                        laster={laster}
+                                        laster={statusLaster}
                                         sistEndretDato={sistEndretDato}
                                         sistEndretAv={sistEndretAv}
                                         lukkModal={() => lukkModal(formikProps)}
@@ -163,15 +146,4 @@ export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, 
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
-const mapStateToProps = state => ({
-    arbeidslisteStatus: state.arbeidsliste.status
-});
-
-const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: formData => dispatch(redigerArbeidsliste(formData, props))
-});
-
-export default connect<StateProps, DispatchProps, Ownprops>(
-    mapStateToProps,
-    mapDispatchToProps
-)(ArbeidslisteModalRediger);
+export default ArbeidslisteModalRediger;
