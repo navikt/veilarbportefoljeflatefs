@@ -67,7 +67,7 @@ function Innholdslaster(props: InnholdslasterProps) {
         );
     }
 
-    return <Loader size="large" />;
+    return <Loader size="xlarge" />;
 }
 
 export default Innholdslaster;
