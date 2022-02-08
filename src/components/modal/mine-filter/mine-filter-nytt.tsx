@@ -12,15 +12,13 @@ import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
-import LasterModal from '../lastermodal/laster-modal';
-import {STATUS} from '../../../ducks/utils';
 
-export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; laster: boolean}) {
-    const {lukkModal, oversiktType, laster} = props;
+interface LagreNyttMineFilterProps {
+    oversiktType: string;
+    lukkModal: () => void;
+}
 
-    const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
-    const statusLaster = mineFilterStatus !== undefined && mineFilterStatus !== STATUS.OK;
-
+export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilterProps) {
     const filterValg = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );
@@ -56,38 +54,32 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal; las
 
     return (
         <>
-            {statusLaster ? (
-                <LasterModal isOpen={laster} />
-            ) : (
-                <>
-                    <form
-                        onSubmit={e => doLagreNyttFilter(e)}
-                        data-testid="lagre-nytt-filter_modal_form"
-                        data-widget="accessible-autocomplete"
-                    >
-                        <BodyShort>Du vil finne igjen filteret under "Mine filter".</BodyShort>
-                        <TextField
-                            label="Navn:"
-                            value={filterNavn}
-                            onChange={e => setFilterNavn(e.target.value)}
-                            error={feilmelding.filterNavn}
-                            autoFocus
-                            data-testid="lagre-nytt-filter_modal_navn-input"
-                        />
-                        <div className="lagret-filter-knapp-wrapper">
-                            <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
-                                Lagre
-                            </Button>
-                        </div>
-                    </form>
-                    <MineFilterVarselModal
-                        filterNavn={filterNavn}
-                        erApen={requestHandler.errorModalErApen}
-                        setErrorModalErApen={requestHandler.setErrorModalErApen}
-                        modalType={ErrorModalType.LAGRE}
-                    />
-                </>
-            )}
+            <form
+                onSubmit={e => doLagreNyttFilter(e)}
+                data-testid="lagre-nytt-filter_modal_form"
+                data-widget="accessible-autocomplete"
+            >
+                <BodyShort>Du vil finne igjen filteret under "Mine filter".</BodyShort>
+                <TextField
+                    label="Navn:"
+                    value={filterNavn}
+                    onChange={e => setFilterNavn(e.target.value)}
+                    error={feilmelding.filterNavn}
+                    autoFocus
+                    data-testid="lagre-nytt-filter_modal_navn-input"
+                />
+                <div className="lagret-filter-knapp-wrapper">
+                    <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
+                        Lagre
+                    </Button>
+                </div>
+            </form>
+            <MineFilterVarselModal
+                filterNavn={filterNavn}
+                erApen={requestHandler.errorModalErApen}
+                setErrorModalErApen={requestHandler.setErrorModalErApen}
+                modalType={ErrorModalType.LAGRE}
+            />
         </>
     );
 }

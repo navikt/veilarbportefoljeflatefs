@@ -15,16 +15,15 @@ import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
 import {Button, TextField} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
-import LasterModal from '../lastermodal/laster-modal';
 
-export function OppdaterMineFilter(props: {
+interface OppdaterMineFilterProps {
+    oversiktType: string;
+    lukkModal: () => void;
     gammeltFilterNavn: string;
-    filterId;
-    lukkModal;
-    oversiktType;
-    laster: boolean;
-}) {
-    const {gammeltFilterNavn, filterId, lukkModal, oversiktType, laster} = props;
+    filterId: number;
+}
+
+export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, oversiktType}: OppdaterMineFilterProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const filterValg = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
@@ -70,61 +69,54 @@ export function OppdaterMineFilter(props: {
 
     const doSlettFilter = () => {
         dispatch(slettFilter(filterId));
-        dispatch(avmarkerSisteValgtMineFilter(props.oversiktType));
+        dispatch(avmarkerSisteValgtMineFilter(oversiktType));
         requestHandlerSlette.setSaveRequestSent(true);
     };
 
     return (
         <>
-            {laster ? (
-                <LasterModal isOpen={laster} />
-            ) : (
-                <>
-                    <form onSubmit={e => doLagreEndringer(e)}>
-                        <TextField
-                            label="Navn:"
-                            value={nyttFilterNavn}
-                            onChange={e => setNyttFilterNavn(e.target.value)}
-                            error={feilmelding.filterNavn}
-                            autoFocus
-                            data-testid="redigere-filter-navn-input"
-                        />
-                        <div className="lagret-filter-knapp-wrapper">
-                            <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
-                                Lagre
-                            </Button>
-                            <Button
-                                variant="danger"
-                                onClick={e => bekreftSletting(e)}
-                                data-testid="rediger-filter_modal_slett-knapp"
-                            >
-                                <Delete />
-                                Slett
-                            </Button>
-                        </div>
-                    </form>
-
-                    <BekreftSlettingModal
-                        isOpen={visBekreftSlettModal}
-                        onRequestClose={() => setVisBekreftSlettModal(false)}
-                        onSubmit={doSlettFilter}
-                        tittel="Slette lagret filter"
-                        navn={gammeltFilterNavn}
-                    />
-                    <MineFilterVarselModal
-                        filterNavn={nyttFilterNavn}
-                        erApen={requestHandlerOppdater.errorModalErApen}
-                        modalType={ErrorModalType.OPPDATERE}
-                        setErrorModalErApen={requestHandlerOppdater.setErrorModalErApen}
-                    />
-                    <MineFilterVarselModal
-                        filterNavn={nyttFilterNavn}
-                        erApen={requestHandlerSlette.errorModalErApen}
-                        modalType={ErrorModalType.SLETTE}
-                        setErrorModalErApen={requestHandlerSlette.setErrorModalErApen}
-                    />
-                </>
-            )}
+            <form onSubmit={e => doLagreEndringer(e)}>
+                <TextField
+                    label="Navn:"
+                    value={nyttFilterNavn}
+                    onChange={e => setNyttFilterNavn(e.target.value)}
+                    error={feilmelding.filterNavn}
+                    autoFocus
+                    data-testid="redigere-filter-navn-input"
+                />
+                <div className="lagret-filter-knapp-wrapper">
+                    <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
+                        Lagre
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={e => bekreftSletting(e)}
+                        data-testid="rediger-filter_modal_slett-knapp"
+                    >
+                        <Delete />
+                        Slett
+                    </Button>
+                </div>
+            </form>
+            <BekreftSlettingModal
+                isOpen={visBekreftSlettModal}
+                onRequestClose={() => setVisBekreftSlettModal(false)}
+                onSubmit={doSlettFilter}
+                tittel="Slette lagret filter"
+                navn={gammeltFilterNavn}
+            />
+            <MineFilterVarselModal
+                filterNavn={nyttFilterNavn}
+                erApen={requestHandlerOppdater.errorModalErApen}
+                modalType={ErrorModalType.OPPDATERE}
+                setErrorModalErApen={requestHandlerOppdater.setErrorModalErApen}
+            />
+            <MineFilterVarselModal
+                filterNavn={nyttFilterNavn}
+                erApen={requestHandlerSlette.errorModalErApen}
+                modalType={ErrorModalType.SLETTE}
+                setErrorModalErApen={requestHandlerSlette.setErrorModalErApen}
+            />
         </>
     );
 }

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import EgenModal from '../egenModal';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import './mine-filter.less';
@@ -11,6 +10,8 @@ import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import EgenModal from '../egenModal';
+import LasterModal from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
 
 export enum Visningstype {
@@ -31,6 +32,7 @@ const VisningstypeToTittel = new Map<Visningstype, string>([
     [Visningstype.FNR_FEIL, 'Lagre filter']
 ]);
 
+const HiddenIfLasterModal = hiddenIf(LasterModal);
 const HiddenIfMeny = hiddenIf(Meny);
 const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter);
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
@@ -75,6 +77,7 @@ export function MineFilterModal(props: {oversiktType: string}) {
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
         >
             <div className="modal-visningstype">
+                <HiddenIfLasterModal hidden={!laster} isOpen={laster} />
                 <HiddenIfMeny
                     hidden={valgtVisningstype !== Visningstype.MENY}
                     setValgtVisningstype={setValgtVisningstype}
@@ -84,7 +87,6 @@ export function MineFilterModal(props: {oversiktType: string}) {
                     hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                     lukkModal={lukkModal}
                     oversiktType={props.oversiktType}
-                    laster={laster}
                 />
                 <HiddenIfOppdaterFilter
                     hidden={valgtVisningstype !== Visningstype.OPPDATER}
@@ -92,7 +94,6 @@ export function MineFilterModal(props: {oversiktType: string}) {
                     filterId={sisteValgtMineFilter!}
                     lukkModal={lukkModal}
                     oversiktType={props.oversiktType}
-                    laster={laster}
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>
