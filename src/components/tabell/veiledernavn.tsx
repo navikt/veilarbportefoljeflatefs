@@ -14,7 +14,7 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
         return null;
     }
 
-    const veilederNavn = <BodyShort>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</BodyShort>;
+    const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
 
     const ufordeltBrukerEtikett = (
         <Tag size="small" variant="info" hidden={!bruker.nyForEnhet}>
