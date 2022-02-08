@@ -27,7 +27,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
             type={VarselModalType.ADVARSEL}
         >
             <div className="bekreft-sletting-modal__tekstgruppe">
-                <Heading size="xlarge" level="1">
+                <Heading size="large" level="1">
                     {props.tittel}
                 </Heading>
                 {props.infoTekst && <BodyShort>{props.infoTekst}</BodyShort>}

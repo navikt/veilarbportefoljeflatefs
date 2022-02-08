@@ -87,7 +87,7 @@ class ArbeidslisteModal extends Component<ArbeidslisteModalProps, ArbeidslisteMo
             >
                 <div className="fjern-arbeidsliste">
                     <div className="arbeidsliste-headertekst">
-                        <Heading size="xlarge" level="1">
+                        <Heading size="large" level="1">
                             Fjern fra arbeidsliste
                         </Heading>
                         <BodyShort>

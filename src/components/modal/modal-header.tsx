@@ -10,7 +10,7 @@ interface OwnProps {
 
 function ModalHeader({className, tittel}: OwnProps) {
     return (
-        <Heading size="xlarge" level="1" className={classNames('modal-header', className)}>
+        <Heading size="large" level="1" className={classNames('modal-header', className)}>
             {tittel}
         </Heading>
     );

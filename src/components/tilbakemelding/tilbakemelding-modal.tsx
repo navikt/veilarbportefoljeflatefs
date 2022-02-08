@@ -104,7 +104,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                     <TilbakemeldingTakkModal />
                 ) : (
                     <>
-                        <Heading size="xlarge" level="1" className="tilbakemelding-modal__tittel">
+                        <Heading size="large" level="1" className="tilbakemelding-modal__tittel">
                             Tilbakemelding
                         </Heading>
                         <BodyShort className="tilbakemelding-modal__ingress">

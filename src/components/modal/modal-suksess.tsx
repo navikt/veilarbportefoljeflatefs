@@ -24,7 +24,7 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
             type={VarselModalType.SUKSESS}
         >
             <div className="tildeling-veileder-modal__tekstgruppe">
-                <Heading size="xlarge" level="1">
+                <Heading size="large" level="1">
                     {props.tittel}
                 </Heading>
                 <BodyShort>{props.tekst}</BodyShort>

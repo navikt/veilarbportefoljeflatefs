@@ -20,7 +20,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
         >
-            <Heading size="xlarge" level="1">
+            <Heading size="large" level="1">
                 Handling kan ikke utføres
             </Heading>
             <BodyShort>Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>

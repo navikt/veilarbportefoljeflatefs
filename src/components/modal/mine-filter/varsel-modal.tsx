@@ -22,7 +22,7 @@ export function MineFilterVarselModal(props: {
 }) {
     return (
         <VarselModal onClose={() => props.setErrorModalErApen(false)} isOpen={props.erApen} type={VarselModalType.FEIL}>
-            <Heading size="xlarge" level="1">
+            <Heading size="large" level="1">
                 {errorModalTypeToTittel.get(props.modalType)}
             </Heading>
             <br />

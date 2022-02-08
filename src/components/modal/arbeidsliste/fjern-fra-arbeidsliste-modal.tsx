@@ -25,7 +25,7 @@ function FjernArbeidslisteModal({isOpen, valgteBrukere, lukkModal, bruker}: Fjer
         >
             <div className="fjern-arbeidsliste">
                 <div className="arbeidsliste-headertekst">
-                    <Heading size="xlarge" level="1">
+                    <Heading size="large" level="1">
                         Fjern fra arbeidsliste
                     </Heading>
                     <BodyShort>{`Du har valgt å fjerne ${navn} fra arbeidslisten.`}</BodyShort>

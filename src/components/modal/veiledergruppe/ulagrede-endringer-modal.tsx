@@ -17,7 +17,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
             className="endringer-ikke-lagret-modal"
             type={VarselModalType.ADVARSEL}
         >
-            <Heading size="xlarge" level="1" className="endringer-ikke-lagret-modal__innholdstittel">
+            <Heading size="large" level="1" className="endringer-ikke-lagret-modal__innholdstittel">
                 Endringene er ikke lagret
             </Heading>
             <div className="endringer-ikke-lagret-modal__knappegruppe">
