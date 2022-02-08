@@ -11,7 +11,7 @@ export function LasterModal() {
             shouldCloseOnOverlayClick={false}
             className="veilarbportefoljeflatefs-laster-modal"
         >
-            <Loader size="xlarge" />
+            <Loader size="2xlarge" />
         </Modal>
     );
 }
