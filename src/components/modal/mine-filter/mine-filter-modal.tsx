@@ -60,7 +60,7 @@ export function MineFilterModal(props: {oversiktType: string}) {
     };
 
     const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
-    const laster = mineFilterStatus !== undefined && mineFilterStatus !== STATUS.OK;
+    const laster = mineFilterStatus !== undefined && mineFilterStatus === STATUS.PENDING;
 
     useEffect(() => {
         if (filterValg.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL);

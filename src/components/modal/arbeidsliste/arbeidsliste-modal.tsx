@@ -22,7 +22,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
     const arbeidslisteStatus = useSelector((state: AppState) => state.arbeidsliste.status);
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder.data!.ident);
 
-    const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus !== STATUS.OK;
+    const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus === STATUS.PENDING;
     const fjerneBrukere = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     const brukereSomSkalFjernes = valgteBrukere.filter(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
 

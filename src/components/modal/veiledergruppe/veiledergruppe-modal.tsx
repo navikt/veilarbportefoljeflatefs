@@ -50,7 +50,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
     const [alertTekst, setAlertTekst] = useState('');
 
     const veiledergruppeStatus = useSelector((state: AppState) => state.veiledergrupper.status);
-    const statusLaster = veiledergruppeStatus !== undefined && veiledergruppeStatus !== STATUS.OK;
+    const statusLaster = veiledergruppeStatus !== undefined && veiledergruppeStatus === STATUS.PENDING;
 
     const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
     const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
