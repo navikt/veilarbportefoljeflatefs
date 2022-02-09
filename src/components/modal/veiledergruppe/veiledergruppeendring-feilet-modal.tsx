@@ -17,7 +17,7 @@ function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProp
             isOpen={props.isOpen}
             onClose={props.onRequestClose}
             className="veiledergruppe-feilet-modal"
-            type={VarselModalType.ADVARSEL}
+            type={VarselModalType.FEIL}
         >
             <div className="veiledergruppe-feilet-modal__tekstgruppe">
                 <Heading size="large" level="1">
