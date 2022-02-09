@@ -17,7 +17,7 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
             shouldCloseOnOverlayClick={false}
             className="veilarbportefoljeflatefs-laster-modal"
         >
-            <NavFrontendSpinner />
+            <NavFrontendSpinner type="XL" />
         </Modal>
     );
 };
