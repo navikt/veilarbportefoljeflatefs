@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './laster-modal.less';
-import {Loader, Modal} from '@navikt/ds-react';
+import {Modal} from '@navikt/ds-react';
+import NavFrontendSpinner from 'nav-frontend-spinner';
 
 interface LasterModalProps {
     isOpen: boolean;
@@ -16,7 +17,7 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
             shouldCloseOnOverlayClick={false}
             className="veilarbportefoljeflatefs-laster-modal"
         >
-            <Loader size="2xlarge" />
+            <NavFrontendSpinner />
         </Modal>
     );
 };
