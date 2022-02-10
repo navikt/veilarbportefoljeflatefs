@@ -50,7 +50,7 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
             <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
         ) : (
             <div className="veiledergruppe-emptystate">
-                <BodyShort className="veiledergruppe-emptystate__tekst">
+                <BodyShort size="small" className="veiledergruppe-emptystate__tekst">
                     Ingen lagrede veiledergrupper på enheten
                 </BodyShort>
             </div>

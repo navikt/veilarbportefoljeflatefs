@@ -70,7 +70,9 @@ function TourModal(props: TourModalProps) {
                     <Heading size="small" level="1">
                         {step.tittel}
                     </Heading>
-                    <BodyShort className="tour-modal__main--tekst">{step.tekst}</BodyShort>
+                    <BodyShort size="small" className="tour-modal__main--tekst">
+                        {step.tekst}
+                    </BodyShort>
                 </div>
             </main>
             <footer className="tour-modal__footer">

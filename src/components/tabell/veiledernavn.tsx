@@ -24,7 +24,7 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
 
     return (
         <div className={className}>
-            <BodyShort>{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
+            <BodyShort size="small">{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
         </div>
     );
 }

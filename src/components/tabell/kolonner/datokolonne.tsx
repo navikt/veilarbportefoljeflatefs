@@ -17,14 +17,14 @@ function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
     if (!dato) {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato
-            <BodyShort style={{visibility: 'hidden'}} className={className}>
+            <BodyShort size="small" style={{visibility: 'hidden'}} className={className}>
                 {new Date(0).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
             </BodyShort>
         );
     }
 
     return (
-        <BodyShort className={className}>
+        <BodyShort size="small" className={className}>
             {dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
         </BodyShort>
     );

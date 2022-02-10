@@ -5,7 +5,7 @@ import Header, {HeaderProps} from './header';
 import './tabell.less';
 import {OrNothing} from '../../utils/types/types';
 import {Down, Up} from '@navikt/ds-icons';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -65,7 +65,7 @@ function SorteringHeader({
                     }
                     title={title}
                 >
-                    {tekst}
+                    <BodyShort size="small">{tekst}</BodyShort>
                 </Button>
                 {sortering === 'etternavn' ? ', Fornavn' : null}
             </span>

@@ -30,8 +30,8 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 <Heading size="large" level="1">
                     {props.tittel}
                 </Heading>
-                {props.infoTekst && <BodyShort>{props.infoTekst}</BodyShort>}
-                <BodyShort>
+                {props.infoTekst && <BodyShort size="small">{props.infoTekst}</BodyShort>}
+                <BodyShort size="small">
                     Er du sikker på at du vil slette <b>{props.navn}</b>?
                 </BodyShort>
             </div>

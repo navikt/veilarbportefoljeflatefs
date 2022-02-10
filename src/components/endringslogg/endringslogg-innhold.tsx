@@ -21,7 +21,7 @@ interface EndringsloggInnholdProps {
 export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; className?: string}) {
     return (
         <Link className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
-            <BodyShort>{props.linkTekst ? props.linkTekst : props.url}</BodyShort>
+            <BodyShort size="small">{props.linkTekst ? props.linkTekst : props.url}</BodyShort>
             <ExternalLink className="linkikon" />
         </Link>
     );
@@ -61,7 +61,7 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                 <Heading size="small" level="2">
                     {props.innholdsOverskrift}
                 </Heading>
-                {props.innholdsTekst && <BodyShort> {props.innholdsTekst} </BodyShort>}
+                {props.innholdsTekst && <BodyShort size="small"> {props.innholdsTekst} </BodyShort>}
                 {props.children}
             </div>
         </div>

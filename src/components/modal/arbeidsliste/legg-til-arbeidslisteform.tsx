@@ -75,7 +75,7 @@ function LeggTilArbeidslisteForm({
                 return (
                     <Form data-testid="modal_arbeidsliste_form">
                         <ArbeidslisteInformasjonsmelding />
-                        <BodyShort className="arbeidsliste__info-tekst">
+                        <BodyShort size="small" className="arbeidsliste__info-tekst">
                             {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
                         </BodyShort>
                         <ArbeidslisteForm

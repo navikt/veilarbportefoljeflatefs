@@ -79,7 +79,9 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
     const getEmptyState = () => {
         return (
             <div className="mine-filter-emptystate">
-                <BodyShort className="mine-filter-emptystate__tekst">Ingen lagrede filter</BodyShort>
+                <BodyShort size="small" className="mine-filter-emptystate__tekst">
+                    Ingen lagrede filter
+                </BodyShort>
             </div>
         );
     };

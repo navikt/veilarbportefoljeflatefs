@@ -17,6 +17,7 @@ function Header({children, skalVises = true, className = '', title, headerId}: H
     }
     return (
         <BodyShort
+            size="small"
             title={title}
             className={classNames('sorteringheader', className, `sorteringheader_${headerId}`)}
             data-testid={`sorteringheader_${headerId}`}

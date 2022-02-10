@@ -46,7 +46,7 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
                     data-testid="veiledergruppe_modal_sok-veileder-input"
                 />
             </div>
-            <BodyShort className="text-hide" aria-live="polite" aria-atomic="true">
+            <BodyShort size="small" className="text-hide" aria-live="polite" aria-atomic="true">
                 {`Viser ${filteredData.length} treff`}
             </BodyShort>
             {harData ? (

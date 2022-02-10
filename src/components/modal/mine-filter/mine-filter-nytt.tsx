@@ -59,7 +59,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                 data-testid="lagre-nytt-filter_modal_form"
                 data-widget="accessible-autocomplete"
             >
-                <BodyShort>Du vil finne igjen filteret under "Mine filter".</BodyShort>
+                <BodyShort size="small">Du vil finne igjen filteret under "Mine filter".</BodyShort>
                 <TextField
                     label="Navn:"
                     value={filterNavn}

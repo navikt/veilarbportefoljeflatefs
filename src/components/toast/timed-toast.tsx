@@ -36,7 +36,9 @@ function TimedToast(props: TimedToastProps) {
                 className="timed-toast__alertstripe"
                 data-testid={`timed-toast_${kebabCase(props.toastTekst)}`}
             >
-                <BodyShort className="timed-toast__tekst">{props.toastTekst}</BodyShort>
+                <BodyShort size="small" className="timed-toast__tekst">
+                    {props.toastTekst}
+                </BodyShort>
             </Alert>
         </div>
     );

@@ -30,7 +30,7 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
             <Heading size="small" level="1">
                 Det oppstod en teknisk feil.
             </Heading>
-            <BodyShort>
+            <BodyShort size="small">
                 Det oppstod et problem med ett eller flere filter.
                 <br />
                 Prøv igjen senere.

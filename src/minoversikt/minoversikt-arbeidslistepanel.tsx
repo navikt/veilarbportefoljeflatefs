@@ -40,7 +40,7 @@ export default function ArbeidslistePanel({
                     <Detail className="brukerliste__arbeidslisteinnhold_frist">
                         Arbeidsliste frist: {arbeidslisteFristTekst}
                     </Detail>
-                    <BodyShort data-testid="chevron_arbeidslisteinnhold_kommentar">
+                    <BodyShort size="small" data-testid="chevron_arbeidslisteinnhold_kommentar">
                         {bruker.arbeidsliste.kommentar}
                     </BodyShort>
                     <Detail className="brukerliste__arbeidslisteinnhold_footer">

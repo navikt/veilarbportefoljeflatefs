@@ -147,6 +147,7 @@ function DragAndDropContainer({
                 {ariaTekst}
             </div>
             <BodyShort
+                size="small"
                 className="drag-and-drop-tittel"
                 aria-readonly="true"
                 aria-live="polite"

@@ -33,7 +33,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (
-                    <BodyShort className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
+                    <BodyShort size="small" className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                         Ingen veiledere lagt til i gruppen
                     </BodyShort>
                 ) : (
@@ -41,7 +41,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                         <div key={index}>
                             {listeMedVeileder.map(veileder => (
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
-                                    <BodyShort>{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
+                                    <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                                     <Button
                                         variant="tertiary"
                                         className="fjern--knapp"

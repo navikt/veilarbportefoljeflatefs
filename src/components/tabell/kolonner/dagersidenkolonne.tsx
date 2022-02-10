@@ -16,5 +16,9 @@ export function DagerSidenKolonne(props: {skalVises: boolean; dato: number | nul
         }
     };
 
-    return <BodyShort className={props.className}>{datoTekst()}</BodyShort>;
+    return (
+        <BodyShort size="small" className={props.className}>
+            {datoTekst()}
+        </BodyShort>
+    );
 }

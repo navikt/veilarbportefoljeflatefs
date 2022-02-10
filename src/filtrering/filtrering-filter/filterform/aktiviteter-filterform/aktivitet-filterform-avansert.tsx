@@ -45,7 +45,7 @@ function AktivitetFilterformAvansert({
                 </div>
                 {Object.entries(valg).map(([kode, verdi]) => [
                     <div key={kode} className="aktivitetvalg">
-                        <BodyShort>{verdi as string}</BodyShort>
+                        <BodyShort size="small">{verdi as string}</BodyShort>
                         <div className="radioknapp-gruppe">
                             <input
                                 id={`aktivitet-${kode}-ja`}

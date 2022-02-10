@@ -27,7 +27,7 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
                 <Heading size="large" level="1">
                     {props.tittel}
                 </Heading>
-                <BodyShort>{props.tekst}</BodyShort>
+                <BodyShort size="small">{props.tekst}</BodyShort>
                 {props.children}
             </div>
             <Button type="submit" onClick={props.onRequestClose} data-testid={`modal-suksess_${props.testNavn}`}>

@@ -107,7 +107,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                         <Heading size="large" level="1" className="tilbakemelding-modal__tittel">
                             Tilbakemelding
                         </Heading>
-                        <BodyShort className="tilbakemelding-modal__ingress">
+                        <BodyShort size="small" className="tilbakemelding-modal__ingress">
                             Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og
                             forhåndsorientering i aktivitetsplanen?
                         </BodyShort>
@@ -167,6 +167,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                     />
                                 </div>
                                 <BodyShort
+                                    size="small"
                                     className="tilbakemelding-modal__feilmelding"
                                     data-testid="tilfredshet_feilmelding"
                                 >

@@ -12,5 +12,9 @@ export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
         return null;
     }
 
-    return <BodyShort className={className}>{tekst}</BodyShort>;
+    return (
+        <BodyShort size="small" className={className}>
+            {tekst}
+        </BodyShort>
+    );
 }

@@ -29,14 +29,14 @@ function VeilederTabell(props: VeiledereTabellProps) {
                     className="lenke lenke--frittstaende"
                     data-testid="veilederoversikt_navn_lenke"
                 >
-                    <BodyShort>{`${veileder.navn}`}</BodyShort>
+                    <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
                 </Link>
             </td>
             <td>
-                <BodyShort>{`${veileder.ident}`}</BodyShort>
+                <BodyShort size="small">{`${veileder.ident}`}</BodyShort>
             </td>
             <td className="tabell-element-center">
-                <BodyShort>{veileder.portefoljestorrelse}</BodyShort>
+                <BodyShort size="small">{veileder.portefoljestorrelse}</BodyShort>
             </td>
             <td />
         </tr>
@@ -75,14 +75,14 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Etternavn, ingen sortering'
                                         }
                                     >
-                                        <BodyShort>Etternavn</BodyShort>
+                                        <BodyShort size="small">Etternavn</BodyShort>
                                     </Button>
-                                    <BodyShort>, Fornavn</BodyShort>
+                                    <BodyShort size="small">, Fornavn</BodyShort>
                                     {sorteringspil(sorterEtternavn)}
                                 </div>
                             </th>
                             <th scope="col" className="tabellheader">
-                                <BodyShort>NAV-ident</BodyShort>
+                                <BodyShort size="small">NAV-ident</BodyShort>
                             </th>
                             <th className="tabellheader tabell-element-center" scope="col">
                                 <div
@@ -102,7 +102,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Antall brukere, ingen sortering'
                                         }
                                     >
-                                        <BodyShort>Antall brukere</BodyShort>
+                                        <BodyShort size="small">Antall brukere</BodyShort>
                                     </Button>
                                     {sorteringspil(sorterPaaPortefoljeStr)}
                                 </div>

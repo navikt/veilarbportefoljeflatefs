@@ -27,17 +27,17 @@ export function MineFilterVarselModal(props: {
             </Heading>
             <br />
             {props.modalType === ErrorModalType.LAGRE && (
-                <BodyShort>
+                <BodyShort size="small">
                     Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke opprettes. Prøv igjen senere.
                 </BodyShort>
             )}
             {props.modalType === ErrorModalType.OPPDATERE && (
-                <BodyShort>
+                <BodyShort size="small">
                     Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke lagres. Prøv igjen senere.
                 </BodyShort>
             )}
             {props.modalType === ErrorModalType.SLETTE && (
-                <BodyShort>
+                <BodyShort size="small">
                     Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
                 </BodyShort>
             )}

@@ -28,7 +28,7 @@ function VarighetKolonne({className, dato, skalVises}: VarighetKolonneProps) {
 
     const kolonn = timer > 0 && minutter > 0 ? ' ' : '';
 
-    return <BodyShort className={className}>{`${timerString}${kolonn}${minutterString}`}</BodyShort>;
+    return <BodyShort size="small" className={className}>{`${timerString}${kolonn}${minutterString}`}</BodyShort>;
 }
 
 export default VarighetKolonne;

@@ -189,7 +189,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                         </Button>
                     </div>
                     {feil && (
-                        <BodyShort className="validering-tekst" data-testid="filter_alder_valideringstekst">
+                        <BodyShort
+                            size="small"
+                            className="validering-tekst"
+                            data-testid="filter_alder_valideringstekst"
+                        >
                             {feilTekst}
                         </BodyShort>
                     )}

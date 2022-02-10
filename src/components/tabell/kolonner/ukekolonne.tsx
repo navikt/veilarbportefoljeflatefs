@@ -21,7 +21,11 @@ function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) 
     if (!skalVises) {
         return null;
     }
-    return <BodyShort className={className}>{lagUkerTekst(ukerIgjen, minVal)}</BodyShort>;
+    return (
+        <BodyShort size="small" className={className}>
+            {lagUkerTekst(ukerIgjen, minVal)}
+        </BodyShort>
+    );
 }
 
 export default UkeKolonne;
