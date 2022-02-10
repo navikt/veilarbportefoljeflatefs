@@ -13,7 +13,7 @@ export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) 
                 Lagre som nytt filter
             </Button>
 
-            <BodyShort className="tekst" data-testid="mine-filter_modal_oppdater-filter-tekst">
+            <BodyShort size="small" className="tekst" data-testid="mine-filter_modal_oppdater-filter-tekst">
                 Oppdater <strong>"{props.sisteFilterNavn}"</strong> ved å klikke på knappen under.
             </BodyShort>
 

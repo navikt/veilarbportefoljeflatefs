@@ -78,7 +78,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
                     <Delete />
-                    <BodyShort>Fjern</BodyShort>
+                    <BodyShort size="small">Fjern</BodyShort>
                 </Button>
             </div>
         </Form>

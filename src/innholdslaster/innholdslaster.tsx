@@ -62,7 +62,7 @@ function Innholdslaster(props: InnholdslasterProps) {
 
         return (
             <Alert variant="error" className={props.className}>
-                <BodyShort>{feilmelding}</BodyShort>
+                <BodyShort size="small">{feilmelding}</BodyShort>
             </Alert>
         );
     }

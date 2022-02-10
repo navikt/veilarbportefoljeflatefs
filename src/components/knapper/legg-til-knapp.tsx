@@ -12,7 +12,7 @@ export function LeggTilKnapp(props: {onClick: () => void}) {
             data-testid="veiledergruppe_ny-gruppe_knapp"
         >
             <AddCircle className="ny-gruppe-knapp" />
-            <BodyShort>Ny gruppe</BodyShort>
+            <BodyShort size="small">Ny gruppe</BodyShort>
         </Button>
     );
 }

@@ -88,7 +88,9 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             data-testid={props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp'}
         >
             {props.ikon}
-            <BodyShort className="toolbar-knapp__tekst">{props.tittel}</BodyShort>
+            <BodyShort size="small" className="toolbar-knapp__tekst">
+                {props.tittel}
+            </BodyShort>
         </Button>
     );
 }

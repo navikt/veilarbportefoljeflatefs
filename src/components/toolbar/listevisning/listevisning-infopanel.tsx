@@ -30,11 +30,11 @@ const ListevisningInfoPanel = (props: ListevisningInfopanelProps) => {
 
     return (
         <div className="alertstripe alertstripe--solid alertstripe--info">
-            <BodyShort className="alertstripe__ikon" aria-label="info">
+            <BodyShort size="small" className="alertstripe__ikon" aria-label="info">
                 <Information />
             </BodyShort>
             <div className="listevisning--infopanel" aria-live="assertive" role="alert" aria-atomic="true">
-                <BodyShort>
+                <BodyShort size="small">
                     Du kan kun se fem kolonner av gangen. Klikk på “Velg Kolonner” og velg det du ønsker å se.
                 </BodyShort>
                 <Lukknapp

@@ -6,7 +6,7 @@ import './filtrering-label.less';
 import './filtrering-skjema.less';
 import FilterFeilModal from '../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../utils/utils';
-import {Button} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -48,7 +48,9 @@ function FiltreringLabel({
             onClick={slettFilter}
             data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
-            <span className={className}>{lagConfig(label).label}</span>
+            <BodyShort size="small" className={className}>
+                {lagConfig(label).label}
+            </BodyShort>
             {skalHaKryssIkon && <FilterIkon />}
         </Button>
     );

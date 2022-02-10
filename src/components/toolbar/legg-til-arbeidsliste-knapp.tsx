@@ -52,7 +52,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 }
             >
                 <Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />
-                <BodyShort className="toolbar-knapp__tekst">
+                <BodyShort size="small" className="toolbar-knapp__tekst">
                     {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
                 </BodyShort>
             </Button>

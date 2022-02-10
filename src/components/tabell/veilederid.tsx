@@ -15,7 +15,7 @@ function VeilederId({className, skalVises, bruker}: VeilederidProps) {
 
     return (
         <div className={className}>
-            <BodyShort>{bruker.veilederId}</BodyShort>
+            <BodyShort size="small">{bruker.veilederId}</BodyShort>
         </div>
     );
 }

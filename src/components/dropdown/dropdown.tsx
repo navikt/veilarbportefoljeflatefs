@@ -91,7 +91,9 @@ function Dropdown(props: DropdownProps) {
                     data-testid={`dropdown-knapp_${id}`}
                     aria-label={ariaLabel()}
                 >
-                    <BodyShort className="dropdown__btntext">{name}</BodyShort>
+                    <BodyShort size="small" className="dropdown__btntext">
+                        {name}
+                    </BodyShort>
                 </button>
             </div>
             {innhold}

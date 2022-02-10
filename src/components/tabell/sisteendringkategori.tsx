@@ -20,7 +20,11 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     }
     const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
     if (bruker.sisteEndringAktivitetId === undefined || bruker.sisteEndringAktivitetId === null) {
-        return <BodyShort className={className}>{sisteEndringKategori}</BodyShort>;
+        return (
+            <BodyShort size="small" className={className}>
+                {sisteEndringKategori}
+            </BodyShort>
+        );
     }
     return (
         <div className={className}>

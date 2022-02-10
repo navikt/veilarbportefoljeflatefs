@@ -10,7 +10,9 @@ export interface BarlabelProps {
 function Barlabel({labelTekst, antall}: BarlabelProps) {
     return (
         <>
-            <BodyShort className="barlabel__labeltext">{labelTekst}</BodyShort>
+            <BodyShort size="small" className="barlabel__labeltext">
+                {labelTekst}
+            </BodyShort>
             {(antall || antall === 0) && <Label className="barlabel__antall">{antall}</Label>}
         </>
     );

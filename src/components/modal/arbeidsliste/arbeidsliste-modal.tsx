@@ -57,7 +57,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                                     <Heading size="large" level="1">
                                         Fjern fra arbeidsliste
                                     </Heading>
-                                    <BodyShort>
+                                    <BodyShort size="small">
                                         {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
                                             brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
                                         } fra arbeidslisten.`}

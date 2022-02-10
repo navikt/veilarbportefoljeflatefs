@@ -15,7 +15,7 @@ function ArbeidslisteOverskrift({className, skalVises, bruker}: ArbeidslisteOver
 
     return (
         <div className={className}>
-            <BodyShort>{bruker.arbeidsliste.overskrift}</BodyShort>
+            <BodyShort size="small">{bruker.arbeidsliste.overskrift}</BodyShort>
         </div>
     );
 }

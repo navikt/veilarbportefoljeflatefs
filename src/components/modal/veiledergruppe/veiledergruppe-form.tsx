@@ -37,6 +37,7 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
                 />
             </div>
             <BodyShort
+                size="small"
                 className="veiledergruppe-modal__tekst"
                 data-testid={`veiledergruppe_modal_antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
             >

@@ -28,7 +28,7 @@ export default function ServerFeilModal(props: ServerFeilModalProps) {
                 <Heading size="small" level="1">
                     Handlingen kan ikke utføres
                 </Heading>
-                <BodyShort>Noe gikk feil, prøv igjen senere.</BodyShort>
+                <BodyShort size="small">Noe gikk feil, prøv igjen senere.</BodyShort>
                 <Button className="knapp knapp--hoved " onClick={lukkModal}>
                     Ok
                 </Button>

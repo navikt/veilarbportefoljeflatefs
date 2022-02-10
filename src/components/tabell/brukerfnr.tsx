@@ -7,4 +7,8 @@ interface BrukerFnrProps {
     bruker: BrukerModell;
 }
 
-export default ({className, bruker}: BrukerFnrProps) => <BodyShort className={className}>{bruker.fnr}</BodyShort>;
+export default ({className, bruker}: BrukerFnrProps) => (
+    <BodyShort size="small" className={className}>
+        {bruker.fnr}
+    </BodyShort>
+);

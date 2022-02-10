@@ -29,7 +29,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                 href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}?enhet=${enhetId}`}
                 className={classnames('lenke lenke--frittstaende')}
             >
-                <BodyShort>{settSammenNavn(bruker)}</BodyShort>
+                <BodyShort size="small">{settSammenNavn(bruker)}</BodyShort>
             </Link>
         </div>
     );

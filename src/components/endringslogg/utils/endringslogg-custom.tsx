@@ -66,7 +66,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '08.04.21',
         children: (
             <>
-                <BodyShort>
+                <BodyShort size="small">
                     Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.
                     <br />
                     Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere
@@ -102,14 +102,14 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '10.03.2021',
         children: (
             <>
-                <BodyShort className="forenklet-filter__topp">
+                <BodyShort size="small" className="forenklet-filter__topp">
                     Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av
                     aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.
                     <br />
                     Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har
                     en gitt aktivitet.
                 </BodyShort>
-                <BodyShort className="forenklet-filter__bunn">
+                <BodyShort size="small" className="forenklet-filter__bunn">
                     Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra
                     aktivitetsfilteret.
                 </BodyShort>
@@ -129,7 +129,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '23.11.20',
         children: (
             <>
-                <BodyShort>
+                <BodyShort size="small">
                     Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan
                     hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
                     utdanning.
@@ -149,7 +149,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '04.11.20',
         children: (
             <>
-                <BodyShort>
+                <BodyShort size="small">
                     Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene
                     brukerne oppga når de registrerte seg.
                     <br />
@@ -168,7 +168,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tittel: 'Endringer i filtrene',
         versjonId: '29.09.20',
         children: (
-            <BodyShort>
+            <BodyShort size="small">
                 <ul>
                     <li>
                         Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre
@@ -228,7 +228,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
         children: (
             <>
-                <BodyShort>Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</BodyShort>
+                <BodyShort size="small">Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</BodyShort>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
                     linkTekst="Nyhetssak på Navet"

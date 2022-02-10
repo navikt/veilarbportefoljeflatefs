@@ -26,7 +26,7 @@ function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
         timmerString = '0' + timmerString;
     }
 
-    return <BodyShort className={className}>{`${timmerString}:${minutterString}`}</BodyShort>;
+    return <BodyShort size="small" className={className}>{`${timmerString}:${minutterString}`}</BodyShort>;
 }
 
 export default TidKolonne;
