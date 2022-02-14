@@ -1,8 +1,12 @@
 @import '~nav-frontend-core/less/core';
 
 .arbeidsliste-modal {
-    padding: 0;
     border-radius: 3px;
+    position: relative;
+    background-color: #f4f4f4;
+    outline: none;
+    padding: 1rem;
+    overflow-y: auto;
 
     .modal-innhold {
         .feedbacksummary {
@@ -75,14 +79,6 @@
         width: 50%;
         background-color: @grayBackground;
     }
-}
-
-.arbeidsliste-modal {
-    position: relative;
-    background-color: #f4f4f4;
-    outline: none;
-    padding: 1rem;
-    overflow: unset !important;
 }
 
 .arbeidsliste--rediger-lenke {
