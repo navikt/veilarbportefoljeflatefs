@@ -257,21 +257,11 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
     }
 ];
 
-export function setHarSettAlt(endringslogginnhold: EndringsloggInnlegg[]) {
+export function hentEndringslogg(): EndringsloggInnleggMedSettStatus[] {
     return endringslogginnhold.map(el => {
         return {
             ...el,
             sett: true
-        };
-    });
-}
-
-export function mapRemoteToState(remotestorage: string[]): EndringsloggInnleggMedSettStatus[] {
-    return endringslogginnhold.map(el => {
-        const settRemote = remotestorage.some(ver => ver === el.versjonId);
-        return {
-            ...el,
-            sett: settRemote
         };
     });
 }
