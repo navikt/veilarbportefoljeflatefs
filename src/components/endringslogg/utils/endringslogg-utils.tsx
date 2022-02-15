@@ -1,6 +1,4 @@
 import {getCrypto} from './crypto';
-import {fetchHarSettInnlegg, registrerSettInnlegg} from './endringslogg-api';
-import {EndringsloggInnleggMedSettStatus} from './endringslogg-custom';
 
 export function hexString(buffer) {
     const byteArray = new Uint8Array(buffer);
@@ -34,44 +32,4 @@ function encodeString(stringToBeEncoded: string): Uint8Array {
         data = encoder.encode(stringToBeEncoded);
     }
     return data;
-}
-
-const LOCALSTORAGE_KEY = 'Endringslogg';
-
-export function hentSetteVersjonerLocalstorage(): string[] {
-    const setteVersjoner: string[] = [];
-    const localstorageInnhold = localStorage.getItem(LOCALSTORAGE_KEY);
-    if (localstorageInnhold) {
-        try {
-            const parsedLocalstorage = JSON.parse(localstorageInnhold);
-            if (Array.isArray(parsedLocalstorage)) {
-                setteVersjoner.push(...parsedLocalstorage);
-            } else {
-                setteVersjoner.push(parsedLocalstorage);
-            }
-        } catch (e) {
-            // Error handling pga. tidligere versjon som bare lagret en string i LS.
-            setteVersjoner.push(localstorageInnhold);
-        }
-    }
-    return setteVersjoner;
-}
-
-export function slettersjonerLocalstorage() {
-    localStorage.removeItem(LOCALSTORAGE_KEY);
-}
-
-export async function hentSetteVersjonerRemotestorage(): Promise<string[]> {
-    const temp = await fetchHarSettInnlegg();
-    return temp.endringslogg ? temp.endringslogg.split(',') : [];
-}
-
-export async function registrerInnholdIRemoteStorage(endringslogg: EndringsloggInnleggMedSettStatus[]) {
-    const message: string[] = [];
-    endringslogg.forEach(e => {
-        if (!message.includes(e.versjonId) && e.sett) {
-            message.push(e.versjonId);
-        }
-    });
-    await registrerSettInnlegg(message.join(','));
 }
