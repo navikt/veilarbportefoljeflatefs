@@ -4,10 +4,9 @@ import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
-import {selectSeAlle, selectSide, selectSideStorrelse} from './paginering-selector';
+import {selectSeAlle, selectSide} from './paginering-selector';
 import './paginering.less';
 import {AppState} from '../../../reducer';
-import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 
 interface PagineringProps {
     className: string;
@@ -17,24 +16,25 @@ interface PagineringProps {
 
 function Paginering({className, antallTotalt, onChange}: PagineringProps) {
     const side = useSelector((state: AppState) => selectSide(state));
-    const sideStorrelse = useSelector((state: AppState) => selectSideStorrelse(state));
+
     const seAlle = useSelector((state: AppState) => selectSeAlle(state));
+    const portefolje = useSelector((state: AppState) => state.portefolje.data);
+
+    const {antallReturnert} = portefolje;
+    const sideStorrelse = antallReturnert;
 
     const dispatch = useDispatch();
 
-    const endrePaginering = (side, seAlle, sideStorrelse) => {
-        dispatch(pagineringSetup({side, seAlle, sideStorrelse: sideStorrelse}));
+    const endrePaginering = (side, seAlle, antallReturnert) => {
+        // @ts-ignore
+        dispatch(pagineringSetup({side, seAlle, antallReturnert: antallReturnert}));
     };
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;
     const erPaForsteSide: boolean = side === 1;
     const erPaSisteSide: boolean = side >= antallSider;
     const totalPaginering = (sideNumber: number, seAlleBool: boolean, sideStorrelse?: number): void => {
-        if (seAlleBool) {
-            sideStorrelse = SE_FLERE_PAGINERING_STORRELSE;
-        } else {
-            sideStorrelse = DEFAULT_PAGINERING_STORRELSE;
-        }
+        sideStorrelse = antallReturnert;
         endrePaginering(sideNumber, seAlleBool, sideStorrelse);
         if (onChange) {
             onChange();
