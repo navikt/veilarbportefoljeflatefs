@@ -18,7 +18,9 @@ export function useSyncStateMedUrl() {
     useEffect(() => {
         if (side) {
             const parsed = queryString.parse(window.location.search);
+            // @ts-ignore
             parsed.side = side;
+            // @ts-ignore
             parsed.seAlle = seAlle;
             const stringified = queryString.stringify(parsed);
             history.replace({pathname, search: stringified});

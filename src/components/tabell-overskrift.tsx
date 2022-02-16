@@ -8,8 +8,10 @@ import classNames from 'classnames';
 
 function TabellOverskrift(props: {className?: string}) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
+    const paginering = useSelector((state: AppState) => state.paginering);
 
     const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
+    const {side, seAlle, sideStorrelse} = paginering;
 
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
@@ -18,7 +20,7 @@ function TabellOverskrift(props: {className?: string}) {
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
 
     const enEllerFlereBrukere =
-        antallTotalt <= 20 ? `${maksBrukere}` : `${fraIndexMax ? fraIndex : 0} - ${maksBrukere ? maksBrukere : 0}`;
+        antallTotalt <= sideStorrelse ? `${maksBrukere}` : `${fraIndexMax ? fraIndex : 0} - ${maksBrukere ? maksBrukere : 0}`;
     const brukereGrammatikk = antallTotalt === 1 ? 'bruker' : 'brukere';
     const antallValgteBrukere = tekstValgteBrukere(brukere.filter(b => b.markert).length);
 

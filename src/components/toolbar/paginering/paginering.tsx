@@ -7,6 +7,7 @@ import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSeAlle, selectSide, selectSideStorrelse} from './paginering-selector';
 import './paginering.less';
 import {AppState} from '../../../reducer';
+import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 
 interface PagineringProps {
     className: string;
@@ -21,15 +22,20 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
 
     const dispatch = useDispatch();
 
-    const endrePaginering = (side, seAlle) => {
-        dispatch(pagineringSetup({side, seAlle}));
+    const endrePaginering = (side, seAlle, sideStorrelse) => {
+        dispatch(pagineringSetup({side, seAlle, sideStorrelse: sideStorrelse}));
     };
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;
     const erPaForsteSide: boolean = side === 1;
     const erPaSisteSide: boolean = side >= antallSider;
-    const totalPaginering = (sideNumber: number, seAlleBool: boolean): void => {
-        endrePaginering(sideNumber, seAlleBool);
+    const totalPaginering = (sideNumber: number, seAlleBool: boolean, sideStorrelse?: number): void => {
+        if (seAlleBool) {
+            sideStorrelse = SE_FLERE_PAGINERING_STORRELSE;
+        } else {
+            sideStorrelse = DEFAULT_PAGINERING_STORRELSE;
+        }
+        endrePaginering(sideNumber, seAlleBool, sideStorrelse);
         if (onChange) {
             onChange();
         }
@@ -44,7 +50,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 data-testid={!seAlle ? 'se-alle_knapp' : 'se-faerre_knapp'}
                 ariaLabel={!seAlle ? 'Se alle' : 'Se færre'}
             >
-                {!seAlle ? 'Se alle' : 'Se færre'}
+                {!seAlle ? 'Se mange' : 'Se færre'}
             </KnappPanel>
 
             <KnappPanel
@@ -70,7 +76,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 <strong>{side}</strong>
             </KnappPanel>
 
-            {!erPaSisteSide && !seAlle && (
+            {!erPaSisteSide && (
                 <KnappPanel
                     onClick={() => totalPaginering(antallSider, seAlle)}
                     data-testid={`paginering-tall_${antallSider}`}
@@ -81,7 +87,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
             )}
 
             <KnappPanel
-                disabled={erPaSisteSide || seAlle}
+                disabled={erPaSisteSide}
                 onClick={() => totalPaginering(side + 1, seAlle)}
                 data-testid="paginering_hoyre"
                 ariaLabel="Neste side"

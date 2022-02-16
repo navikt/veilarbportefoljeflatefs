@@ -3,7 +3,7 @@ import {DEFAULT_PAGINERING_STORRELSE} from '../konstanter';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
-interface PagineringState {
+export interface PagineringState {
     side: number;
     seAlle: boolean;
     sideStorrelse: number;

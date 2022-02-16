@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import persistent from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
-import pagineringReducer from './ducks/paginering';
+import pagineringReducer, {PagineringState} from './ducks/paginering';
 import sorteringReducer from './ducks/sortering';
 import veiledereReducer, {VeiledereState} from './ducks/veiledere';
 import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
@@ -52,7 +52,7 @@ export interface AppState {
     };
     valgtEnhet: ValgtEnhetState;
     portefolje: PortefoljeState;
-    paginering: any;
+    paginering: PagineringState;
     sortering: any;
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
