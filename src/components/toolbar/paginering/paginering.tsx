@@ -4,9 +4,10 @@ import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
-import {selectSeAlle, selectSide} from './paginering-selector';
+import {selectSeAlle, selectSide, selectSideStorrelse} from './paginering-selector';
 import './paginering.less';
 import {AppState} from '../../../reducer';
+import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 
 interface PagineringProps {
     className: string;
@@ -18,23 +19,25 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
     const side = useSelector((state: AppState) => selectSide(state));
 
     const seAlle = useSelector((state: AppState) => selectSeAlle(state));
-    const portefolje = useSelector((state: AppState) => state.portefolje.data);
 
-    const {antallReturnert} = portefolje;
-    const sideStorrelse = antallReturnert;
+    const sideStorrelse = useSelector((state: AppState) => selectSideStorrelse(state));
 
     const dispatch = useDispatch();
 
-    const endrePaginering = (side, seAlle, antallReturnert) => {
+    const endrePaginering = (side, seAlle, sideStorrelse) => {
         // @ts-ignore
-        dispatch(pagineringSetup({side, seAlle, antallReturnert: antallReturnert}));
+        dispatch(pagineringSetup({side, seAlle, sideStorrelse}));
     };
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;
     const erPaForsteSide: boolean = side === 1;
     const erPaSisteSide: boolean = side >= antallSider;
     const totalPaginering = (sideNumber: number, seAlleBool: boolean, sideStorrelse?: number): void => {
-        sideStorrelse = antallReturnert;
+        if (seAlleBool) {
+            sideStorrelse = SE_FLERE_PAGINERING_STORRELSE;
+        } else {
+            sideStorrelse = DEFAULT_PAGINERING_STORRELSE;
+        }
         endrePaginering(sideNumber, seAlleBool, sideStorrelse);
         if (onChange) {
             onChange();
