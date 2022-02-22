@@ -7,9 +7,8 @@ import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
-import {endringsloggListe} from './endringslogg';
 import * as faker from 'faker/locale/nb_NO';
-import FetchMock, {MatcherUtils, MiddlewareUtils} from 'yet-another-fetch-mock';
+import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
@@ -61,14 +60,6 @@ const mock = FetchMock.configure({
 
 // features
 mock.get('/veilarbportefoljeflatefs/api/feature', jsonResponse(features));
-
-// endringslogg
-mock.mock(
-    MatcherUtils.combine(MatcherUtils.method('PATCH'), MatcherUtils.url('/veilarbremotestore/')),
-    (req, res, ctx) => res(ctx.json(Object.assign(endringsloggListe, req.body)))
-);
-
-mock.get('/veilarbremotestore/', jsonResponse(endringsloggListe));
 
 //veiledergrupper
 mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeiledergrupper));
