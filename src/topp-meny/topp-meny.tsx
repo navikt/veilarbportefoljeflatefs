@@ -34,7 +34,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
             <Endringslogg
                 userId={innloggetVeileder.data?.ident!}
                 appId="afolg"
-                backendUrl="https://poao-endringslogg.intern.navn.no"
+                backendUrl="https://poao-endringslogg.intern.nav.no"
                 appName="Arbeidsrettet oppfølging"
                 alignLeft
             />
