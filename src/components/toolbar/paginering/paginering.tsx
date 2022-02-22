@@ -51,9 +51,9 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 selected={seAlle && antallTotalt <= sideStorrelse}
                 onClick={() => totalPaginering(1, !seAlle)}
                 data-testid={!seAlle ? 'se-alle_knapp' : 'se-faerre_knapp'}
-                ariaLabel={!seAlle ? 'Se 200 per side' : 'Se 50 per side'}
+                ariaLabel={!seAlle ? 'Vis 200 per side' : 'Vis 50 per side'}
             >
-                {!seAlle ? 'Se 200 per side' : 'Se 50 per side'}
+                {!seAlle ? 'Vis 200 per side' : 'Vis 50 per side'}
             </KnappPanel>
 
             <KnappPanel
