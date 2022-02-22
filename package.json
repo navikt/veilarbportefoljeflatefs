@@ -12,7 +12,7 @@
         "eject": "craco eject",
         "heroku-serve": "node heroku-server.js",
         "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
-        "test": "craco test --watchAll=false",
+        "test": "craco test --watchAll=false --transformIgnorePatterns",
         "lint": "echo not implemented",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
