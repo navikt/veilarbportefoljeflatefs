@@ -128,6 +128,14 @@ mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx
     return res(ctx.json(customMineFilter), ctx.status(200));
 });
 
+mock.post('https://poao-endringslogg.intern.navn.no/endringslogg', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
+mock.post('https://poao-endringslogg.intern.navn.no/analytics/session-duration', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(innloggetVeileder));
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
