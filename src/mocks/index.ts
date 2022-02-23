@@ -136,6 +136,14 @@ mock.post('https://poao-endringslogg.intern.nav.no/analytics/session-duration', 
     return res(ctx.json([]));
 });
 
+mock.post('https://poao-endringslogg.dev.intern.nav.no/endringslogg', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
+mock.post('https://poao-endringslogg.dev.intern.nav.no/analytics/session-duration', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(innloggetVeileder));
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
