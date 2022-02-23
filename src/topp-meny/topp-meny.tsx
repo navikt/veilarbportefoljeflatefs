@@ -10,6 +10,7 @@ import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
 import classNames from 'classnames';
+import { getEndringsloggUrl } from '../utils/url-utils';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
@@ -34,7 +35,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
             <Endringslogg
                 userId={innloggetVeileder.data?.ident!}
                 appId="afolg"
-                backendUrl="https://poao-endringslogg.dev.intern.nav.no"
+                backendUrl={getEndringsloggUrl()}
                 appName="Arbeidsrettet oppfølging"
                 alignLeft
             />

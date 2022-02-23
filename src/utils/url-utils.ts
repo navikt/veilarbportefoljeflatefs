@@ -55,3 +55,7 @@ export function updateLastPath() {
         localStorage.setItem('lastsearch', search);
     }
 }
+
+const erDev = () => window.location.host === 'app-q1.dev.adeo.no';
+
+export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
