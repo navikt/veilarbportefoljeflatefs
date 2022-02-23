@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {useFocus} from '../../hooks/use-focus';
 import './dropdown.less';
@@ -33,7 +32,12 @@ function Dropdown(props: DropdownProps) {
     const {focusRef} = useFocus();
 
     function handler(e) {
-        if (apen && !divRef.current?.contains(e.target)) {
+        if (
+            e.target.getAttribute('data-testid') === 'aktiviteter_forenklet-filter_knapp' ||
+            e.target.getAttribute('data-testid') === 'aktiviteter_avansert-filter_knapp'
+        ) {
+            return;
+        } else if (apen && !divRef.current?.contains(e.target)) {
             lukkDropdown();
         }
     }
