@@ -14,6 +14,8 @@ if (process.env.NODE_ENV !== 'test') {
 }
 moment.locale('nb');
 
+console.log(process.env.NODE_ENV);
+
 const store = createStore();
 
 function Application() {
