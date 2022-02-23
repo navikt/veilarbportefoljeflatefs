@@ -33,7 +33,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
             <Toasts />
             <Endringslogg
                 userId={innloggetVeileder.data?.ident!}
-                appId="obo"
+                appId="afolg"
                 backendUrl="https://poao-endringslogg.dev.intern.nav.no"
                 appName="Arbeidsrettet oppfølging"
                 alignLeft
