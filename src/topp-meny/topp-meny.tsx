@@ -36,6 +36,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
                 appId="afolg"
                 backendUrl="https://poao-endringslogg.intern.nav.no"
                 appName="Arbeidsrettet oppfølging"
+                alignLeft
             />
         </div>
     );
