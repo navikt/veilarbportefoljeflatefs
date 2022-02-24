@@ -1,6 +1,6 @@
-import * as queryString from "query-string";
-import { basename } from "../history";
-import { IKKE_SATT } from "../konstanter";
+import * as queryString from 'query-string';
+import {basename} from '../history';
+import {IKKE_SATT} from '../konstanter';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;
@@ -56,6 +56,6 @@ export function updateLastPath() {
     }
 }
 
-const erDev = () => window.location.host.indexOf("app-q1") > 1;
+const erProd = () => window.location.host === 'app.adeo.no';
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
+export const getEndringsloggUrl = () => `https://poao-endringslogg${erProd() ? '' : '.dev'}.intern.nav.no`;
