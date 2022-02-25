@@ -73,7 +73,7 @@ describe('Diverse', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('paginering_venstre').should('be.disabled');
         cy.getByTestId('paginering_hoyre').should('be.enabled');
-        cy.getByTestId('paginering-tall_7').should('be.visible');
+        cy.getByTestId('paginering-tall_3').should('be.visible');
         cy.get('.brukerliste')
             .children()
             .should('have.length', 20);
@@ -81,7 +81,7 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
         cy.wait(1000);
-        cy.getByTestId('paginering-tall_7').should('not.exist');
+        cy.getByTestId('paginering-tall_3').should('not.exist');
         cy.get('.brukerliste')
             .children()
             .should('have.length', 123);
