@@ -76,7 +76,7 @@ describe('Diverse', () => {
         cy.getByTestId('paginering-tall_3').should('be.visible');
         cy.get('.brukerliste')
             .children()
-            .should('have.length', 20);
+            .should('have.length', 50);
         cy.getByTestId('se-alle_knapp')
             .should('be.visible')
             .click();
