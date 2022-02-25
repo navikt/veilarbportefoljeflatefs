@@ -25,7 +25,6 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
     const dispatch = useDispatch();
 
     const endrePaginering = (side, seAlle, sideStorrelse) => {
-        // @ts-ignore
         dispatch(pagineringSetup({side, seAlle, sideStorrelse}));
     };
 
