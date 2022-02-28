@@ -25,7 +25,7 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_stigende').should('not.exist');
         cy.getByTestId('sorteringspil_synkende').should('be.visible');
-        cy.getByTestId('se-alle_knapp').click();
+        cy.getByTestId('se-flere_knapp').should('be.disabled');
 
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Thoresen, Herman')

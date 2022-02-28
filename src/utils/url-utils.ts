@@ -28,15 +28,15 @@ export function getSideFromUrl() {
 
 export function getInitialStateFromUrl() {
     const side = getSideFromUrl();
-    const seAlle = getSeAlleFromUrl();
+    const seFlere = getSeFlereFromUrl();
     const sorteringsfelt = getSorteringsFeltFromUrl();
     const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
 
-    return {side, seAlle, sorteringsfelt, sorteringsrekkefolge};
+    return {side, seFlere, sorteringsfelt, sorteringsrekkefolge};
 }
 
-export function getSeAlleFromUrl(): boolean {
-    return queryString.parse(window.location.search).seAlle === 'true';
+export function getSeFlereFromUrl(): boolean {
+    return queryString.parse(window.location.search).seFlere === 'true';
 }
 
 export function getSorteringsFeltFromUrl() {
