@@ -20,8 +20,8 @@ export function useSetStateFromUrl() {
     const pathname = location.pathname;
 
     const settInitalStateFraUrl = useCallback(() => {
-        const {side, seAlle, sorteringsfelt, sorteringsrekkefolge} = getInitialStateFromUrl();
-        dispatch(pagineringSetup({side, seAlle}));
+        const {side, seFlere, sorteringsfelt, sorteringsrekkefolge} = getInitialStateFromUrl();
+        dispatch(pagineringSetup({side, seFlere}));
         dispatch(settSortering(sorteringsrekkefolge, sorteringsfelt));
     }, [dispatch]);
 

@@ -77,7 +77,7 @@ describe('Diverse', () => {
         cy.get('.brukerliste')
             .children()
             .should('have.length', 50);
-        cy.getByTestId('se-alle_knapp')
+        cy.getByTestId('se-flere_knapp')
             .should('be.visible')
             .click();
         cy.wait(1000);
