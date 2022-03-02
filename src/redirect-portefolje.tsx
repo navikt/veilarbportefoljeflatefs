@@ -9,7 +9,11 @@ export function RedirectPortefolje(props: React.PropsWithChildren<{}>) {
     const {hasError} = useSetInitalEnhet();
 
     if (hasError) {
-        return <Alert variant="error">Noe gikk feil, prøv igjen senere.</Alert>;
+        return (
+            <Alert variant="error" size="small">
+                Noe gikk feil, prøv igjen senere.
+            </Alert>
+        );
     }
 
     return <>{props.children}</>;

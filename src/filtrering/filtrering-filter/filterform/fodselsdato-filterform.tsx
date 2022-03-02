@@ -68,7 +68,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (
-                <Alert variant="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     Ingen veiledere funnet
                 </Alert>
             )}

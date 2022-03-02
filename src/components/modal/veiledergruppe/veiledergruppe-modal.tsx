@@ -226,6 +226,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                 variant="warning"
                                 className="alerttext"
                                 data-testid="veiledergruppe_modal_alertstripe"
+                                size="small"
                             >
                                 {alertTekst}
                             </Alert>

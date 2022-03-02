@@ -61,7 +61,7 @@ function Innholdslaster(props: InnholdslasterProps) {
             getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
 
         return (
-            <Alert variant="error" className={props.className}>
+            <Alert variant="error" className={props.className} size="small">
                 <BodyShort size="small">{feilmelding}</BodyShort>
             </Alert>
         );

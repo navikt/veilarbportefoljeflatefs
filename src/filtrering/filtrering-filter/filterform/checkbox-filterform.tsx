@@ -79,7 +79,7 @@ function CheckboxFilterform({
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (
-                <Alert variant="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
                 </Alert>
             )}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Alert, Link} from '@navikt/ds-react';
 
 const ArbeidslisteInformasjonsmelding = () => (
-    <Alert variant="info" className="stor-feil-modal">
+    <Alert variant="info" className="stor-feil-modal" size="small">
         Arbeidslisten er <b>kun</b> til internt bruk. Informasjon som er relevant for personen eller saksbehandlingen
         skal alltid deles i dialogen.
         <br />

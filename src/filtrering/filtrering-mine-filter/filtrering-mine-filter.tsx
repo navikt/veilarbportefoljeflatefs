@@ -23,7 +23,7 @@ function FiltreringMineFilter(props: {
     return (
         <>
             {mineFilterState.handlingType === HandlingsType.HENTE && mineFilterState.status === STATUS.ERROR ? (
-                <Alert variant="error">
+                <Alert variant="error" size="small">
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
                 </Alert>
             ) : (

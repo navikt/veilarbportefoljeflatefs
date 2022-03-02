@@ -50,7 +50,7 @@ function SokFilter<T>(props: SokFilterProps<T>) {
             {harData ? (
                 children(filteredData)
             ) : (
-                <Alert variant="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     Ingen veiledere funnet
                 </Alert>
             )}

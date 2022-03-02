@@ -232,6 +232,7 @@ export default function EnhetSide() {
                                 role="alert"
                                 aria-atomic="true"
                                 data-testid="alertstripe_filtrering"
+                                size="small"
                             >
                                 Du må gjøre en filtrering for å se brukere i listen.
                             </Alert>

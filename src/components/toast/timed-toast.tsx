@@ -35,6 +35,7 @@ function TimedToast(props: TimedToastProps) {
                 variant={props.alertstripe}
                 className="timed-toast__alertstripe"
                 data-testid={`timed-toast_${kebabCase(props.toastTekst)}`}
+                size="small"
             >
                 <BodyShort size="small" className="timed-toast__tekst">
                     {props.toastTekst}

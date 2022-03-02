@@ -105,6 +105,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
                 variant="info"
                 className="checkbox-filterform__alertstripe"
                 data-testid="veilederoversikt_alertstripe_info"
+                size="small"
             >
                 Ingen veiledere funnet
             </Alert>

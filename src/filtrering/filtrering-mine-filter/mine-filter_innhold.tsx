@@ -52,7 +52,12 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
         return (
             <>
                 {inaktiveFilter().length !== 0 && (
-                    <Alert variant="info" className="mine-filter_alertstripe" data-testid="mine-filter_alertstripe">
+                    <Alert
+                        variant="info"
+                        className="mine-filter_alertstripe"
+                        data-testid="mine-filter_alertstripe"
+                        size="small"
+                    >
                         {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${
                             inaktiveFilter()[0].note
                         }' er fjernet.`}

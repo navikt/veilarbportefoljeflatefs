@@ -58,7 +58,7 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
     };
     const veilederGrupperError = () => {
         return (
-            <Alert variant="error">
+            <Alert variant="error" size="small">
                 Det oppsto en feil, og veiledergrupper kunne ikke hentes fram. Prøv igjen senere.
             </Alert>
         );

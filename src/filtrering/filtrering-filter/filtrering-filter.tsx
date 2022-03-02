@@ -110,7 +110,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="situasjon"
                     render={() => (
                         <>
-                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <CheckboxFilterform
                                 form="registreringstype"
                                 valg={registreringstype}
@@ -126,7 +128,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="hoyeste-fullforte-utdanning"
                     render={() => (
                         <>
-                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
                                 valg={utdanning}
@@ -141,7 +145,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="er-utdanningen-godkjent-og-bestatt"
                     render={() => (
                         <>
-                            <Alert variant="info">Svarene brukeren oppga på registreringstidspunktet.</Alert>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                         </>
                     )}

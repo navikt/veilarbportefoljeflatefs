@@ -180,6 +180,7 @@ export default function MinoversiktSide() {
                                                     variant="info"
                                                     className="alertstripe__annen-veileder-varsel"
                                                     data-testid="annen-veileder_infotekst"
+                                                    size="small"
                                                 >
                                                     {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
                                                 </Alert>
