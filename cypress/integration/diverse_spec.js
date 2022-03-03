@@ -14,31 +14,6 @@ describe('Diverse', () => {
     //         .click();
     //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
     // });
-    it('Verifiser blå prikk og stepper', () => {
-        cy.getByTestId('endringslogg_nye-notifikasjoner').should('be.visible');
-        cy.getByTestId('endringslogg-innhold').should('not.exist');
-        cy.getByTestId('endringslogg-knapp').click();
-        cy.getByTestId('endringslogg-innhold').should('be.visible');
-        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-        cy.getByTestId('endringslogg_se-hvordan-knapp')
-            .first()
-            .click();
-        cy.getByTestId('endringslogg_tour-modal').should('be.visible');
-        cy.getByTestId('endringslogg_forrige-knapp').should('be.hidden');
-        cy.getByTestId('endringslogg_neste-knapp').click();
-        cy.getByTestId('endringslogg_forrige-knapp').should('be.visible');
-        cy.getByTestId('endringslogg_stegviser').then($element => {
-            if ($element.find('.stegviser__steg').length === 3) {
-                return cy.getByTestId('endringslogg_neste-knapp').click();
-            }
-        });
-        cy.getByTestId('endringslogg_ferdig-knapp').click();
-        cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-        cy.getByTestId('endringslogg-innhold').should('be.visible');
-        cy.getByTestId('endringslogg-knapp').click();
-        cy.getByTestId('endringslogg-innhold').should('not.exist');
-        cy.getByTestId('endringslogg_nye-notifikasjoner').should('not.exist');
-    });
 
     it('Verifiser tilbakemeldingsundersøkelse', () => {
         cy.getByTestId('tilbakemelding_modal').should('not.exist');
