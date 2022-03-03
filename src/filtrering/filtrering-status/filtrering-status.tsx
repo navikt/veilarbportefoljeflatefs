@@ -23,12 +23,12 @@ import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
-import BarInputGruppe from '../../components/barinput/barinput-gruppe';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
-import {Element} from 'nav-frontend-typografi';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../../konstanter';
+import {Label} from '@navikt/ds-react';
+import './filtrering-status.less';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -73,9 +73,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     return (
         <div className="filtrering-oversikt panel">
-            <Element className="filtrering-oversikt__totalt-antall blokk-xxs" tag="h3">
-                {tekstAntallBrukere(statusTall.totalt)}
-            </Element>
+            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
             <div className="filter-checkboks-container">
                 {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox
@@ -93,7 +91,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     />
                 )}
             </div>
-            <BarInputGruppe>
+            <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
                     filterNavn="trengerVurdering"
                     handleChange={handleRadioButtonChange}
@@ -114,8 +112,8 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         antall={statusTall.underVurdering}
                     />
                 )}
-            </BarInputGruppe>
-            <BarInputGruppe>
+            </div>
+            <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
                     filterNavn="venterPaSvarFraNAV"
                     antall={statusTall.venterPaSvarFraNAV}
@@ -134,8 +132,8 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     antall={statusTall.moterMedNAVIdag}
                     checked={ferdigfilterListe.includes(MOTER_IDAG)}
                 />
-            </BarInputGruppe>
-            <BarInputGruppe>
+            </div>
+            <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
                     filterNavn="utlopteAktiviteter"
                     antall={statusTall.utlopteAktiviteter}
@@ -154,15 +152,15 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                 />
-            </BarInputGruppe>
-            <BarInputGruppe>
+            </div>
+            <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
                     filterNavn="inaktiveBrukere"
                     handleChange={handleRadioButtonChange}
                     antall={statusTall.inaktiveBrukere}
                     checked={ferdigfilterListe.includes(INAKTIVE_BRUKERE)}
                 />
-            </BarInputGruppe>
+            </div>
             <FilterStatusMinArbeidsliste
                 ferdigfilterListe={kategoriliste}
                 handleChange={handleRadioButtonChange}

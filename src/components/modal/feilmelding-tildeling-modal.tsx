@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Normaltekst, Innholdstittel} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -14,36 +14,34 @@ interface FeilmeldingBrukereModalProps {
 function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
-            contentLabel="Modal tildeling feilet"
             isOpen={props.isOpen}
-            onRequestClose={props.onClose}
-            closeButton={false}
+            onClose={props.onClose}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
         >
-            <Innholdstittel tag="h1" className="blokk-xxs">
+            <Heading size="large" level="1">
                 Handling kan ikke utføres
-            </Innholdstittel>
-            <Normaltekst className="blokk-s">Tildeling av veileder til følgende bruker(e) feilet:</Normaltekst>
+            </Heading>
+            <BodyShort size="small">Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>
             <FnrList listeMedFnr={props.fnrFeil} />
-            <Normaltekst className="blokk-s">
+            <BodyShort size="small">
                 Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
                 brukeren ikke er under oppfølging.
-            </Normaltekst>
+            </BodyShort>
 
             {props.fnrSuksess?.length > 0 && (
                 <div className="tildeling-veileder-modal__vellykkedebrukere">
-                    <Normaltekst className="blokk-s">Tildeling av veileder lyktes for følgende bruker(e):</Normaltekst>
+                    <BodyShort size="small">Tildeling av veileder lyktes for følgende bruker(e):</BodyShort>
                     <FnrList listeMedFnr={props.fnrSuksess} />
-                    <Normaltekst className="blokk-s">
+                    <BodyShort size="small">
                         Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.
-                    </Normaltekst>
+                    </BodyShort>
                 </div>
             )}
-            <button className="knapp knapp--hoved" onClick={props.onClose}>
+            <Button variant="secondary" onClick={props.onClose}>
                 Lukk
-            </button>
+            </Button>
         </VarselModal>
     );
 }

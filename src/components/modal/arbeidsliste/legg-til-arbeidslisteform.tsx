@@ -9,12 +9,11 @@ import {AppState} from '../../../reducer';
 import {Form, Formik} from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
 import {connect} from 'react-redux';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {skjulModal} from '../../../ducks/modal';
 import {dateToISODate} from '../../../utils/dato-utils';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Normaltekst} from 'nav-frontend-typografi';
+import {BodyShort, Button} from '@navikt/ds-react';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface OwnProps {
@@ -70,24 +69,26 @@ function LeggTilArbeidslisteForm({
 
                 onSubmit(values.arbeidsliste);
             }}
-            render={formikProps => {
+        >
+            {formikProps => {
                 setFormIsDirty(formikProps.dirty);
                 return (
                     <Form data-testid="modal_arbeidsliste_form">
-                        <Normaltekst className="arbeidsliste__info-tekst">
-                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
-                        </Normaltekst>
                         <ArbeidslisteInformasjonsmelding />
+                        <BodyShort size="small" className="arbeidsliste__info-tekst">
+                            {`${valgteBrukere.length} ${valgteBrukere.length === 1 ? ' bruker' : ' brukere'} valgt.`}
+                        </BodyShort>
                         <ArbeidslisteForm
                             valgteBrukere={valgteBrukere}
                             arbeidsliste={formikProps.values.arbeidsliste}
                         />
                         <div>
                             <div className="modal-footer">
-                                <Hovedknapp className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
+                                <Button className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
                                     Lagre
-                                </Hovedknapp>
-                                <Flatknapp
+                                </Button>
+                                <Button
+                                    variant="secondary"
                                     className="knapp"
                                     data-testid="modal_arbeidsliste_avbryt-knapp"
                                     onClick={() => {
@@ -97,13 +98,13 @@ function LeggTilArbeidslisteForm({
                                     }}
                                 >
                                     Avbryt
-                                </Flatknapp>
+                                </Button>
                             </div>
                         </div>
                     </Form>
                 );
             }}
-        />
+        </Formik>
     );
 }
 

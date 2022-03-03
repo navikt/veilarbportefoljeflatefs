@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Maybe} from '../../../utils/types';
+import {BodyShort} from '@navikt/ds-react';
 
 interface DatokolonneProps {
     className?: string;
@@ -16,13 +17,17 @@ function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
     if (!dato) {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato
-            <span style={{visibility: 'hidden'}} className={className}>
+            <BodyShort size="small" style={{visibility: 'hidden'}} className={className}>
                 {new Date(0).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
-            </span>
+            </BodyShort>
         );
     }
 
-    return <span className={className}>{dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}</span>;
+    return (
+        <BodyShort size="small" className={className}>
+            {dato.toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], options)}
+        </BodyShort>
+    );
 }
 
 export default DatoKolonne;

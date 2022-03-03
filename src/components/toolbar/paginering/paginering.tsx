@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
@@ -8,6 +7,8 @@ import {selectSeFlere, selectSide, selectSideStorrelse} from './paginering-selec
 import './paginering.less';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
+import {Back, Next} from '@navikt/ds-icons';
+
 
 interface PagineringProps {
     className: string;
@@ -61,7 +62,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 data-testid="paginering_venstre"
                 ariaLabel="Forrige side"
             >
-                <VenstreChevron />
+                <Back />
             </KnappPanel>
 
             {!erPaForsteSide && (
@@ -94,7 +95,7 @@ function Paginering({className, antallTotalt, onChange}: PagineringProps) {
                 data-testid="paginering_hoyre"
                 ariaLabel="Neste side"
             >
-                <HoyreChevron />
+                <Next />
             </KnappPanel>
         </div>
     );

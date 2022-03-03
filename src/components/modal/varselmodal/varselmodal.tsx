@@ -1,10 +1,8 @@
 import React from 'react';
-import ModalWrapper from 'nav-frontend-modal';
-import {ReactComponent as AdvarselSirkelIkon} from './advarsel-sirkel.svg';
-import {ReactComponent as SuksessSirkelIkon} from './ok-sirkel.svg';
-import {ReactComponent as FeilSirkelIkon} from './feil-sirkel.svg';
 import classNames from 'classnames';
 import './varsel-modal.less';
+import {ErrorFilled, SuccessFilled, WarningFilled} from '@navikt/ds-icons';
+import {Modal} from '@navikt/ds-react';
 
 export enum VarselModalType {
     ADVARSEL,
@@ -13,58 +11,48 @@ export enum VarselModalType {
 }
 
 interface VarselModalProps {
-    contentLabel: string;
     isOpen: boolean;
-    onRequestClose: () => void;
-    closeTimeoutMS?: number;
-    closeButton?: boolean;
+    onClose: () => void;
     shouldCloseOnOverlayClick?: boolean;
     className?: string;
     portalClassName?: string;
     type: VarselModalType;
-    onAfterOpen?: () => void;
     dataTestClass?: string;
 }
 
 export function VarselModal({
     type,
-    contentLabel,
     isOpen,
-    onRequestClose,
+    onClose,
     children,
-    closeTimeoutMS,
-    closeButton,
     shouldCloseOnOverlayClick,
     className,
-    portalClassName,
-    onAfterOpen,
-    dataTestClass
+    dataTestClass,
+    portalClassName
 }: React.PropsWithChildren<VarselModalProps>) {
     return (
-        <ModalWrapper
-            isOpen={isOpen}
-            contentLabel={contentLabel}
-            onRequestClose={onRequestClose}
-            closeTimeoutMS={closeTimeoutMS}
-            closeButton={closeButton}
-            portalClassName={classNames('varsel-modal', portalClassName, dataTestClass)}
+        <Modal
+            open={isOpen}
+            onClose={onClose}
+            className={classNames('varsel-modal', portalClassName, dataTestClass)}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-            onAfterOpen={onAfterOpen}
         >
-            <div className="varsel-modal__ikon">{getIkon(type)}</div>
-            <div className={classNames('varsel-modal__innhold', className)}>{children}</div>
-        </ModalWrapper>
+            <div className={classNames('varsel-modal__innhold', className)}>
+                <div className="varsel-modal__ikon">{getIkon(type)}</div>
+                {children}
+            </div>
+        </Modal>
     );
 }
 
 function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
-            return <AdvarselSirkelIkon />;
+            return <WarningFilled className="warning-icon" />;
         case VarselModalType.FEIL:
-            return <FeilSirkelIkon />;
+            return <ErrorFilled className="error-icon" />;
         case VarselModalType.SUKSESS:
-            return <SuksessSirkelIkon />;
+            return <SuccessFilled className="success-icon" />;
         default:
             return null;
     }

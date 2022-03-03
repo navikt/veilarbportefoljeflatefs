@@ -16,7 +16,7 @@ export function FnrList(props: FnrList) {
         </li>
     ));
 
-    const className = listElements.length >= 18 ? 'blokk-s modal-liste__lang' : 'blokk-s modal-liste';
+    const className = listElements.length >= 18 ? 'modal-liste__lang' : 'modal-liste';
 
     return <ul className={className}>{listElements}</ul>;
 }

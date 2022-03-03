@@ -5,18 +5,18 @@ import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
-import Collapse from 'react-collapse';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import {Checkbox} from 'nav-frontend-skjema';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
-import {Info} from '../components/tabell/etikett';
+import {Collapse} from 'react-collapse';
+import {Tag} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -98,9 +98,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
-                        <Info hidden={!bruker.nyForVeileder} typo="undertekst">
-                            Ny bruker
-                        </Info>
+                        {bruker.nyForVeileder && (
+                            <Tag variant="info" size="small">
+                                Ny bruker
+                            </Tag>
+                        )}
                     </div>
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}
@@ -116,6 +118,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
                     settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    apen={apen}
                 />
             </Collapse>
         </li>

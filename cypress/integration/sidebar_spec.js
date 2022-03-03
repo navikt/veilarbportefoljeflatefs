@@ -629,6 +629,8 @@ describe('Filter', () => {
             .should('be.checked')
             .uncheck({force: true});
 
+        cy.getByTestId('velg-kolonne-rad_veileder').check({force: true});
+
         cy.getByTestId('brukerliste_innhold')
             .children()
             .should('have.length', 5)
@@ -669,10 +671,6 @@ describe('Filter', () => {
         cy.checkbox('filter_uleste-endringer');
 
         cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('be.visible');
-
-        // cy.getByTestId('side-storrelse_min-oversikt')
-        //     .click()
-        //     .scrollTo('top');
 
         cy.getByTestId('filtreringlabel_uleste-endringer-siste-endring-av-bruker').should('be.visible');
 

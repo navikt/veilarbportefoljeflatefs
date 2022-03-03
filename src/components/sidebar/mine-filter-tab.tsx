@@ -1,7 +1,5 @@
 import SidebarTab from './sidebar-tab';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import {PopoverOrientering} from 'nav-frontend-popover';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
@@ -12,6 +10,7 @@ import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {HelpText} from '@navikt/ds-react';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -61,12 +60,12 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
             tab={selectedTabData.type}
             meta={
                 <>
-                    <Hjelpetekst type={PopoverOrientering.Hoyre}>
+                    <HelpText placement="right">
                         {oversiktType === OversiktType.minOversikt &&
                             'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
                         {oversiktType === OversiktType.enhetensOversikt &&
                             'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
-                    </Hjelpetekst>
+                    </HelpText>
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}
                         onChange={() => {

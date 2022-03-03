@@ -1,7 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import AlertStripe from 'nav-frontend-alertstriper';
 import {STATUS} from '../../ducks/utils';
 import './mine-filter_innhold.less';
 import MineFilterInnhold from './mine-filter_innhold';
@@ -9,6 +8,7 @@ import {HandlingsType, LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {Alert} from '@navikt/ds-react';
 
 function FiltreringMineFilter(props: {
     oversiktType: OversiktType;
@@ -23,9 +23,9 @@ function FiltreringMineFilter(props: {
     return (
         <>
             {mineFilterState.handlingType === HandlingsType.HENTE && mineFilterState.status === STATUS.ERROR ? (
-                <AlertStripe type="feil">
+                <Alert variant="error" size="small">
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
-                </AlertStripe>
+                </Alert>
             ) : (
                 <MineFilterInnhold
                     lagretFilter={props.sortertMineFilter}

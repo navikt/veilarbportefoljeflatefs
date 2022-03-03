@@ -1,4 +1,3 @@
-import Knapp from 'nav-frontend-knapper/lib/knapp';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
@@ -6,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
+import {Button} from '@navikt/ds-react';
 
 export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
@@ -51,14 +51,14 @@ export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
     ]);
 
     return (
-        <Knapp
+        <Button
+            variant="secondary"
             className="lagre-filter-knapp"
-            mini
             hidden={erLagreKnappSkjult}
             data-testid="lagre-filter_knapp"
             onClick={event => lagreFilterModal(event)}
         >
             Lagre filter
-        </Knapp>
+        </Button>
     );
 }

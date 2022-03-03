@@ -7,9 +7,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Grid(props: Props) {
-    /*
-     extends React.Component<Props> {
-    */
     const columns = new Array(props.columns).fill('1fr').join(props.gap ? ` ${props.gap} ` : ' ');
 
     const rows = new Array(Math.ceil(React.Children.count(props.children) / props.columns))

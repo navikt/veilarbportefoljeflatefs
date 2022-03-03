@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
 import './style.less';
+import '@navikt/ds-css';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill'); // tslint:disable-line

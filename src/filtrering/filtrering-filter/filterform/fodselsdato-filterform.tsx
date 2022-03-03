@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
-import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -38,7 +38,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
     return (
         <form className="skjema checkbox-filterform" data-testid="fodselsdato-filterform">
             {harValg && (
-                <div className="checkbox-filterform__valg fodselsdato__grid">
+                <div className="fodselsdato__grid">
                     {Object.entries(valg).map(([filterKey, filterValue]) => (
                         <div key={filterKey} className="fodselsdato__container">
                             <input
@@ -61,16 +61,16 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
                     ))}
                 </div>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="fodselsdato-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     Ingen veiledere funnet
-                </AlertStripe>
+                </Alert>
             )}
         </form>
     );

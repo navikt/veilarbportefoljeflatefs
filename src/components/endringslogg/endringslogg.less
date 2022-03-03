@@ -28,7 +28,6 @@
         height: 3rem;
         min-height: fit-content;
         text-align: center;
-        font-size: 1.1rem;
     }
     .collapse-container {
         padding-top: 1rem;
@@ -144,13 +143,14 @@
     }
     .endringslogg-link {
         margin-top: 0.2rem;
-        display: block;
     }
     .endringslogg-liste-punkt-topp {
         margin-bottom: 1rem;
     }
     .endringslogg-kolonne {
         float: left;
+        display: flex;
+        flex-direction: column;
     }
     .endringslogg-skille {
         padding-bottom: 1rem;
@@ -172,7 +172,8 @@
         stroke: @navBla;
     }
     .endringslogg-stepperKnapp {
-        margin-top: 0.8rem;
+        margin-top: 0.5rem;
+        width: fit-content;
     }
     .veiledergrupper-navet-tekst,
     .endringslogg_mine-filter {

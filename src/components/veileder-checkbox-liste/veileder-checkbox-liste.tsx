@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import AlertStripe from 'nav-frontend-alertstriper';
-import {Checkbox} from 'nav-frontend-skjema';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.less';
 import {AppState} from '../../reducer';
-import NullstillValgKnapp from '../nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import {Alert} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
@@ -90,7 +90,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
                 <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
                     {valgCheckboxListe}
                 </div>
-                <NullstillValgKnapp
+                <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
                     form={form}
@@ -101,15 +101,14 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
         );
     } else {
         return (
-            <div className="checkbox-liste__valg-footer">
-                <AlertStripe
-                    type="info"
-                    className="checkbox-filterform__alertstripe"
-                    data-testid="veilederoversikt_alertstripe_info"
-                >
-                    Ingen veiledere funnet
-                </AlertStripe>
-            </div>
+            <Alert
+                variant="info"
+                className="checkbox-filterform__alertstripe"
+                data-testid="veilederoversikt_alertstripe_info"
+                size="small"
+            >
+                Ingen veiledere funnet
+            </Alert>
         );
     }
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {Hovedknapp} from 'nav-frontend-knapper';
-import hiddenIf from '../../hidden-if/hidden-if';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 export enum ErrorModalType {
     OPPDATERE,
@@ -22,30 +20,30 @@ export function MineFilterVarselModal(props: {
     erApen: boolean;
     setErrorModalErApen;
 }) {
-    let HiddenIfNormalTekst = hiddenIf(Normaltekst);
-
     return (
-        <VarselModal
-            contentLabel={errorModalTypeToTittel.get(props.modalType)!}
-            onRequestClose={() => props.setErrorModalErApen(false)}
-            isOpen={props.erApen}
-            type={VarselModalType.FEIL}
-            closeButton={false}
-        >
-            <Innholdstittel>{errorModalTypeToTittel.get(props.modalType)}</Innholdstittel>
+        <VarselModal onClose={() => props.setErrorModalErApen(false)} isOpen={props.erApen} type={VarselModalType.FEIL}>
+            <Heading size="large" level="1">
+                {errorModalTypeToTittel.get(props.modalType)}
+            </Heading>
             <br />
-            <HiddenIfNormalTekst hidden={props.modalType !== ErrorModalType.LAGRE}>
-                Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke opprettes. Prøv igjen senere.
-            </HiddenIfNormalTekst>
-            <HiddenIfNormalTekst hidden={props.modalType !== ErrorModalType.OPPDATERE}>
-                Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke lagres. Prøv igjen senere.
-            </HiddenIfNormalTekst>
-            <HiddenIfNormalTekst hidden={props.modalType !== ErrorModalType.SLETTE}>
-                Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
-            </HiddenIfNormalTekst>
-            <Hovedknapp mini className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
+            {props.modalType === ErrorModalType.LAGRE && (
+                <BodyShort size="small">
+                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke opprettes. Prøv igjen senere.
+                </BodyShort>
+            )}
+            {props.modalType === ErrorModalType.OPPDATERE && (
+                <BodyShort size="small">
+                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke lagres. Prøv igjen senere.
+                </BodyShort>
+            )}
+            {props.modalType === ErrorModalType.SLETTE && (
+                <BodyShort size="small">
+                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
+                </BodyShort>
+            )}
+            <Button className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
                 Lukk
-            </Hovedknapp>
+            </Button>
         </VarselModal>
     );
 }

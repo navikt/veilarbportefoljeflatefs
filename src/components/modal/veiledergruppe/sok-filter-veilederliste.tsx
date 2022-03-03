@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Input} from 'nav-frontend-skjema';
-import AlertStripe from 'nav-frontend-alertstriper';
+import {Alert, BodyShort, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -38,24 +37,24 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
     return (
         <>
             <div className="sokfilter">
-                <Input
+                <TextField
                     label={props.label}
                     placeholder={props.placeholder}
                     value={query}
-                    inputClassName="sokfilter__input"
+                    className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
                     data-testid="veiledergruppe_modal_sok-veileder-input"
                 />
             </div>
-            <span className="text-hide" aria-live="polite" aria-atomic="true">
+            <BodyShort size="small" className="text-hide" aria-live="polite" aria-atomic="true">
                 {`Viser ${filteredData.length} treff`}
-            </span>
+            </BodyShort>
             {harData ? (
                 children(filteredData)
             ) : (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     Ingen veiledere funnet
-                </AlertStripe>
+                </Alert>
             )}
         </>
     );

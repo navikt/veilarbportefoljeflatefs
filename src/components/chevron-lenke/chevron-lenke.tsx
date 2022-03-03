@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {Button} from '@navikt/ds-react';
+import {Back, Next} from '@navikt/ds-icons';
 import cls from 'classnames';
-import {HoyreChevron, VenstreChevron} from 'nav-frontend-chevron';
 import './chevron-lenke.less';
 
 export enum Retning {
@@ -19,21 +20,21 @@ interface ChevronLenkeProps {
 
 function ChevronLenke(props: ChevronLenkeProps) {
     const {retning, tekst, onClick, hide, dataTestId} = props;
-    const clsPar = ['chevron-lenke', {'chevron-lenke--hide': hide}];
+    const clsPar = {'chevron-lenke--hide': hide};
     return (
-        <button className={cls(clsPar)} onClick={onClick} data-testid={dataTestId}>
+        <Button variant="tertiary" className={cls(clsPar)} onClick={onClick} data-testid={dataTestId}>
             {retning === Retning.VENSTRE ? (
                 <>
-                    <VenstreChevron />
-                    <span className="chevron-lenke__tekst">{tekst}</span>
+                    <Back />
+                    {tekst}
                 </>
             ) : (
                 <>
-                    <span className="chevron-lenke__tekst">{tekst}</span>
-                    <HoyreChevron />
+                    {tekst}
+                    <Next />
                 </>
             )}
-        </button>
+        </Button>
     );
 }
 
