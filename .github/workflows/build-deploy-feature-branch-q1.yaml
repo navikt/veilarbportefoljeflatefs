@@ -29,7 +29,7 @@ jobs:
               with:
                   node-version: '16'
                   cache: 'npm'
-            - run: npm ci
+                  cache-dependency-path: '**/package-lock.json'
             - name: Build production artifact
               run: npm run build
             - name: Build and publish Docker image
