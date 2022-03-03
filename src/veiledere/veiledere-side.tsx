@@ -10,7 +10,7 @@ import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
-import {getSeAlleFromUrl, getSideFromUrl} from '../utils/url-utils';
+import {getSeFlereFromUrl, getSideFromUrl} from '../utils/url-utils';
 import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
 import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
@@ -39,8 +39,8 @@ function VeiledereSide() {
 
     useOnMount(() => {
         const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        dispatch(pagineringSetup({side, seAlle}));
+        const seFlere = getSeFlereFromUrl();
+        dispatch(pagineringSetup({side, seFlere}));
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
