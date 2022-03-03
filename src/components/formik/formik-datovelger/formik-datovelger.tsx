@@ -21,7 +21,9 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                 });
                 return (
                     <div className={datePickerClassName}>
-                        <Label className="skjemaelement__label">Frist</Label>
+                        <Label className="skjemaelement__label" size="small">
+                            Frist
+                        </Label>
                         <Datovelger
                             id="fristDatovelger"
                             input={{

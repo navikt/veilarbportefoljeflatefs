@@ -103,7 +103,7 @@ export function HendelserFilterform({
                 )}
 
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
-                    <Label className="hendelser-filterform__radio-gruppe__label">
+                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
                         Siste aktivitet lagt til av bruker
                     </Label>
                     {lagtTilAvBruker.map(key => (
@@ -118,7 +118,7 @@ export function HendelserFilterform({
                         />
                     ))}
 
-                    <Label className="hendelser-filterform__radio-gruppe__label">
+                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
                         Siste aktivitet fullført av bruker
                     </Label>
                     {fullfortAvBruker.map(key => (
@@ -133,7 +133,7 @@ export function HendelserFilterform({
                         />
                     ))}
 
-                    <Label className="hendelser-filterform__radio-gruppe__label">
+                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
                         Siste aktivitet avbrutt av bruker
                     </Label>
                     {avbruttAvBruker.map(key => (
@@ -148,7 +148,9 @@ export function HendelserFilterform({
                         />
                     ))}
 
-                    <Label className="hendelser-filterform__radio-gruppe__label">Andre</Label>
+                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
+                        Andre
+                    </Label>
                     <Radio
                         onChange={e => onRadioChange(e)}
                         label={hendelserLabels['MAL']}

@@ -70,7 +70,7 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         role="group"
                         aria-labelledby="double-filterform-label-col1"
                     >
-                        <Label id="double-filterform-label-col1" className="double-form-title">
+                        <Label id="double-filterform-label-col1" className="double-form-title" size="small">
                             {'Er utdanningen godkjent i Norge?'}
                         </Label>
                         <RenderFields
@@ -86,7 +86,7 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         role="group"
                         aria-labelledby="double-filterform-label-col2"
                     >
-                        <Label id="double-filterform-label-col2" className="double-form-title">
+                        <Label id="double-filterform-label-col2" className="double-form-title" size="small">
                             {'Er utdanningen bestått?'}
                         </Label>{' '}
                         <RenderFields

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, getIn} from 'formik';
-import {TextField} from '@navikt/ds-react';
+import {Label, TextField} from '@navikt/ds-react';
 
 const TITTEL_MAKS_LENGDE = 30;
 
@@ -31,6 +31,7 @@ function FormikInput({name, index}: FormikInputProps) {
                 return (
                     <TextField
                         id={name}
+                        size="small"
                         label="Tittel"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}

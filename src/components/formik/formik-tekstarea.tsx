@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, getIn} from 'formik';
-import {Textarea} from '@navikt/ds-react';
+import {Label, Textarea} from '@navikt/ds-react';
 
 const KOMMENTAR_MAKS_LENGDE = 500;
 
@@ -31,6 +31,7 @@ function FormikTekstArea({name, index}: FormikTekstAreaProps) {
                 return (
                     <Textarea
                         id={name}
+                        size="small"
                         label="Kommentar"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
