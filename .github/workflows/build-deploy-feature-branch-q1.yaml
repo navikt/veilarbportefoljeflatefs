@@ -11,16 +11,11 @@ jobs:
         name: Build Project
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
-                  node-version: '12.x'
-            - uses: actions/cache@v2
-              with:
-                  path: ./node_modules
-                  key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-cache
+                  node-version: '16'
+                  cache: 'npm'
             - run: npm ci
             - run: npm run build
             - run: npm run test
@@ -29,16 +24,12 @@ jobs:
         name: Build and publish Docker image
         needs: build
         steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
-                  node-version: '12.x'
-            - uses: actions/cache@v2
-              with:
-                  path: ./node_modules
-                  key: ${{ runner.os }}-node-cache-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-cache
+                  node-version: '16'
+                  cache: 'npm'
+            - run: npm ci
             - name: Build production artifact
               run: npm run build
             - name: Build and publish Docker image
@@ -54,7 +45,7 @@ jobs:
             - build-docker-image
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v3
             - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
