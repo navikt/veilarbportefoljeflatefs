@@ -31,7 +31,7 @@ jobs:
     deploy-dev:
         name: Deploy q1 fss
         needs:
-            - build-docker-image
+            - build-project-and-docker-image
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
