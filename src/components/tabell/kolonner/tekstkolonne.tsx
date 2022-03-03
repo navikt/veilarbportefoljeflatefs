@@ -1,4 +1,5 @@
 import React from 'react';
+import {BodyShort} from '@navikt/ds-react';
 
 interface TekstKolonneProps {
     tekst?: string;
@@ -11,5 +12,9 @@ export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
         return null;
     }
 
-    return <span className={className}>{tekst}</span>;
+    return (
+        <BodyShort size="small" className={className}>
+            {tekst}
+        </BodyShort>
+    );
 }

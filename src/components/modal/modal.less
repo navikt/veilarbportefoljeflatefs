@@ -1,16 +1,17 @@
 @import '~nav-frontend-core/less/core';
 
-.veilarbportefoljeflatefs-modal {
-    .modal {
-        position: relative;
-        border: 1px solid @navGra40;
-        background-color: #f4f4f4;
-        outline: none;
-        width: 40rem;
-        padding: 0;
+.navds-modal {
+    width: 40rem;
+    padding: 1rem;
 
-        .modal-innhold {
-            padding: 0 2rem;
+    .modal {
+        &-header {
+            border-bottom: 1px solid @navGra40;
+            padding: 0 0 0.5rem;
+        }
+
+        &-innhold {
+            padding-top: 0.5rem;
         }
     }
 }

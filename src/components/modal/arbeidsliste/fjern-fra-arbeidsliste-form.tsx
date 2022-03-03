@@ -1,21 +1,19 @@
 import * as React from 'react';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import {connect} from 'react-redux';
-import {Element} from 'nav-frontend-typografi';
 import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall';
-import {STATUS} from '../../../ducks/utils';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
-import {ArbeidslisteDataModell, BrukerModell, Status} from '../../../model-interfaces';
+import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
 import './arbeidsliste.less';
 import {logEvent} from '../../../utils/frontend-logger';
+import {Button, Label} from '@navikt/ds-react';
 
 function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
-            <Element>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Element>
+            <Label>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Label>
         </li>
     );
 }
@@ -24,18 +22,10 @@ interface FjernFraArbeidslisteFormProps {
     lukkModal: () => void;
     valgteBrukere: BrukerModell[];
     onSubmit: (valgteBrukere: BrukerModell[], props) => void;
-    slettFraArbeidslisteStatus?: Status;
     visBrukerLabel?: boolean;
 }
 
-function FjernFraArbeidslisteForm({
-    lukkModal,
-    valgteBrukere,
-    onSubmit,
-    slettFraArbeidslisteStatus,
-    visBrukerLabel
-}: FjernFraArbeidslisteFormProps) {
-    const laster = slettFraArbeidslisteStatus !== undefined && slettFraArbeidslisteStatus !== STATUS.OK;
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBrukerLabel}: FjernFraArbeidslisteFormProps) {
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
     return (
@@ -50,17 +40,16 @@ function FjernFraArbeidslisteForm({
                 {visBrukerLabel && <ul>{valgteBrukere.map(bruker => brukerLabel(bruker))}</ul>}
             </div>
             <div className="knapper">
-                <Hovedknapp
+                <Button
                     className="knapp knapp--hoved"
-                    spinner={laster}
-                    htmlType="submit"
+                    type="submit"
                     data-testid="modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp"
                 >
                     Bekreft
-                </Hovedknapp>
-                <Flatknapp className="knapp" onClick={lukkModal}>
+                </Button>
+                <Button variant="secondary" className="knapp" onClick={lukkModal}>
                     Avbryt
-                </Flatknapp>
+                </Button>
             </div>
         </form>
     );

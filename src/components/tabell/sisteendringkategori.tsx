@@ -5,6 +5,7 @@ import '../../topp-meny/lenker.less';
 import {OrNothing} from '../../utils/types/types';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {setFraBrukerIUrl} from '../../utils/url-utils';
+import {BodyShort, Link} from '@navikt/ds-react';
 
 interface SisteEndringKategoriProps {
     className?: string;
@@ -19,11 +20,15 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     }
     const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
     if (bruker.sisteEndringAktivitetId === undefined || bruker.sisteEndringAktivitetId === null) {
-        return <span className={className}>{sisteEndringKategori}</span>;
+        return (
+            <BodyShort size="small" className={className}>
+                {sisteEndringKategori}
+            </BodyShort>
+        );
     }
     return (
         <div className={className}>
-            <a
+            <Link
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
@@ -31,7 +36,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                 className={classnames('lenke_siste-endring')}
             >
                 {sisteEndringKategori}
-            </a>
+            </Link>
         </div>
     );
 }

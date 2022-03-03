@@ -1,10 +1,9 @@
 import {default as React, useState} from 'react';
-import NavFrontendModal from 'nav-frontend-modal';
-import {Normaltekst, Systemtittel, Undertittel} from 'nav-frontend-typografi';
 import ChevronLenke, {Retning} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
 import './tour-modal.less';
 import {getTitle, getTour} from './tour-modal-custom/tour-modal-custom';
+import {BodyShort, Heading, Modal} from '@navikt/ds-react';
 
 export enum ModalName {
     MINE_FILTER = 'TOUR_MODAL-MINE_FILTER',
@@ -57,26 +56,23 @@ function TourModal(props: TourModalProps) {
             : getTitle(props.modalName);
 
     return (
-        <NavFrontendModal
-            className="tour-modal"
-            contentLabel="TourModal"
-            isOpen={props.open}
-            closeButton
-            shouldCloseOnOverlayClick
-            onRequestClose={lukkModal}
-        >
-            <div className="tour-modal__header--wrapper" data-testid="endringslogg_tour-modal">
-                <header className="tour-modal__header">
-                    <Systemtittel>{systemtittel}</Systemtittel>
-                </header>
+        <Modal className="tour-modal" open={props.open} shouldCloseOnOverlayClick onClose={lukkModal}>
+            <div className="tour-modal__header" data-testid="endringslogg_tour-modal">
+                <Heading size="medium" level="2">
+                    {systemtittel}
+                </Heading>
             </div>
             <main className="tour-modal__main">
                 <div className="tour-modal__main--bilde-wrapper">
                     <img alt={step.altTekst} src={step.bilde} className="tour-modal__main--bilde" />
                 </div>
                 <div className="tour-modal__main--beskrivelse">
-                    <Undertittel className="blokk-xxxs">{step.tittel}</Undertittel>
-                    <Normaltekst className="tour-modal__main--tekst">{step.tekst}</Normaltekst>
+                    <Heading size="small" level="1">
+                        {step.tittel}
+                    </Heading>
+                    <BodyShort size="small" className="tour-modal__main--tekst">
+                        {step.tekst}
+                    </BodyShort>
                 </div>
             </main>
             <footer className="tour-modal__footer">
@@ -95,7 +91,7 @@ function TourModal(props: TourModalProps) {
                     dataTestId={isFinalStep ? 'endringslogg_ferdig-knapp' : 'endringslogg_neste-knapp'}
                 />
             </footer>
-        </NavFrontendModal>
+        </Modal>
     );
 }
 

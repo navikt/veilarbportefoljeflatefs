@@ -1,12 +1,11 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {Normaltekst} from 'nav-frontend-typografi';
-import {Flatknapp} from 'nav-frontend-knapper';
-import {ReactComponent as SlettIkon} from './remove-circle.svg';
 import React from 'react';
 import classNames from 'classnames';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
+import {BodyShort, Button} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 
 interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
@@ -34,23 +33,24 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (
-                    <Normaltekst className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
+                    <BodyShort size="small" className="veiledergruppe-modal__valgteveileder__tom-liste-tekst">
                         Ingen veiledere lagt til i gruppen
-                    </Normaltekst>
+                    </BodyShort>
                 ) : (
                     splitArrayITo.map((listeMedVeileder, index) => (
                         <div key={index}>
                             {listeMedVeileder.map(veileder => (
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
-                                    <span>{`${veileder.etternavn}, ${veileder.fornavn}`}</span>
-                                    <Flatknapp
+                                    <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
+                                    <Button
+                                        variant="tertiary"
                                         className="fjern--knapp"
-                                        htmlType="button"
+                                        type="button"
                                         onClick={() => props.fjernValgtVeileder(veileder.ident)}
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     >
-                                        <SlettIkon />
-                                    </Flatknapp>
+                                        <Delete />
+                                    </Button>
                                 </div>
                             ))}
                         </div>

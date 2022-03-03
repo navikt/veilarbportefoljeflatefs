@@ -7,6 +7,7 @@ import './filtrering-label.less';
 import './filtrering-skjema.less';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import {KategoriModell} from '../model-interfaces';
+import {Button} from '@navikt/ds-react';
 
 interface FiltreringLabelArbeidslisteProps {
     label: string | {label: string};
@@ -21,11 +22,11 @@ function FiltreringLabelArbeidsliste({
     harMuligMenIkkeValgtKolonne = false,
     kategori
 }: FiltreringLabelArbeidslisteProps) {
-    const buttonClassnames = classNames('filtreringlabel', 'typo-undertekst', {
+    const buttonClassnames = classNames('filtreringlabel', {
         'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne
     });
     return (
-        <button
+        <Button
             title={`Arbeidslistekategori ${lagConfig(label).label}`}
             aria-label="Slett filter"
             className={buttonClassnames}
@@ -36,7 +37,7 @@ function FiltreringLabelArbeidsliste({
                 {lagConfig(label).label}
                 <FilterIkon />
             </span>
-        </button>
+        </Button>
     );
 }
 

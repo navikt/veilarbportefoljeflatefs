@@ -1,7 +1,6 @@
 import React from 'react';
 import './toggle-switch.less';
-import {ReactComponent as LasLukket} from './lock-close.svg';
-import {ReactComponent as LasApen} from './lock-open.svg';
+import {Locked, Unlocked} from '@navikt/ds-icons';
 
 interface ToggleSwitchProps {
     onChange: () => void;
@@ -23,10 +22,10 @@ function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwit
             />
             <span className="switch-slider" />
             <div className="toggle-switch-las__lukked">
-                <LasLukket />
+                <Locked />
             </div>
             <div className="toggle-switch-las__apen">
-                <LasApen />
+                <Unlocked />
             </div>
             <div className="toggle-switch-border" />
         </label>

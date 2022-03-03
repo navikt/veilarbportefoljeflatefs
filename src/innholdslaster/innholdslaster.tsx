@@ -1,9 +1,8 @@
 import * as React from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
-import Laster from './innholdslaster-laster';
 import {STATUS} from '../ducks/utils';
 import {useState} from 'react';
 import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
+import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 
 interface InnholdslasterProps {
     className?: string;
@@ -62,13 +61,13 @@ function Innholdslaster(props: InnholdslasterProps) {
             getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
 
         return (
-            <AlertStripe type="feil" className={props.className}>
-                <p>{feilmelding}</p>
-            </AlertStripe>
+            <Alert variant="error" className={props.className} size="small">
+                <BodyShort size="small">{feilmelding}</BodyShort>
+            </Alert>
         );
     }
 
-    return <Laster />;
+    return <Loader size="2xlarge" />;
 }
 
 export default Innholdslaster;

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import AlertStripe from 'nav-frontend-alertstriper';
 import '../toolbar/toolbar.less';
-import {useFocus} from '../../hooks/use-focus';
-import {Input} from 'nav-frontend-skjema';
+import {Alert, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
@@ -36,27 +34,25 @@ function SokFilter<T>(props: SokFilterProps<T>) {
     const filteredData = limitSize === undefined ? rawfilteredData : limit(rawfilteredData, limitSize || 20);
 
     const harData = filteredData.length > 0;
-    const {focusRef} = useFocus();
 
     return (
         <>
             <div className="sokfilter">
-                <Input
+                <TextField
                     label={props.label}
                     placeholder={props.placeholder}
                     value={query}
-                    inputClassName="sokfilter__input"
+                    className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
-                    inputRef={inputRef => (focusRef.current = inputRef)}
                     data-testid="sok-filter_input"
                 />
             </div>
             {harData ? (
                 children(filteredData)
             ) : (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     Ingen veiledere funnet
-                </AlertStripe>
+                </Alert>
             )}
         </>
     );

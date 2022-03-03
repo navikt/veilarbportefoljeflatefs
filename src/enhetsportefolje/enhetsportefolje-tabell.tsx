@@ -33,7 +33,7 @@ function EnhetTabell(props: EnhetTabellProps) {
     return (
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
             <div className={props.classNameWrapper}>
-                <div className="typo-undertekst blokk-xs enhet-tabell">
+                <div className="enhet-tabell">
                     <ul className="brukerliste">
                         {brukere.map(bruker => (
                             <EnhetBrukerpanel

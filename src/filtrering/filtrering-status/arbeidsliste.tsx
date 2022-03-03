@@ -1,6 +1,5 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import {Element} from 'nav-frontend-typografi';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
@@ -10,6 +9,7 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
+import {BodyShort, Label} from '@navikt/ds-react';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -25,9 +25,7 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
 
     return (
         <>
-            <div className="minArbeidsliste__tittel typo-element">
-                <Element className="blokk-xxs">Arbeidsliste</Element>
-            </div>
+            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
             <BarInputRadio
                 filterNavn="minArbeidsliste"
                 handleChange={props.handleChange}
@@ -39,10 +37,12 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonBla />
-                                <span className="arbeidslistetekst" title="Arbeidslistekategori blå">
+                                <BodyShort size="small" className="arbeidslistetekst" title="Arbeidslistekategori blå">
+                                    <span>
+                                        <ArbeidslisteikonBla />
+                                    </span>
                                     Blå
-                                </span>
+                                </BodyShort>
                             </>
                         }
                         filterNavn="minArbeidslisteBla"
@@ -53,10 +53,16 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonGronn />
-                                <span className="arbeidslistetekst" title="Arbeidslistekategori grønn">
+                                <BodyShort
+                                    size="small"
+                                    className="arbeidslistetekst"
+                                    title="Arbeidslistekategori grønn"
+                                >
+                                    <span>
+                                        <ArbeidslisteikonGronn />
+                                    </span>
                                     Grønn
-                                </span>
+                                </BodyShort>
                             </>
                         }
                         filterNavn="minArbeidslisteGronn"
@@ -67,10 +73,16 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonLilla />
-                                <span className="arbeidslistetekst" title="Arbeidslistekategori lilla">
+                                <BodyShort
+                                    size="small"
+                                    className="arbeidslistetekst"
+                                    title="Arbeidslistekategori lilla"
+                                >
+                                    <span>
+                                        <ArbeidslisteikonLilla />
+                                    </span>
                                     Lilla
-                                </span>
+                                </BodyShort>
                             </>
                         }
                         filterNavn="minArbeidslisteLilla"
@@ -81,10 +93,12 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonGul />
-                                <span className="arbeidslistetekst" title="Arbeidslistekategori gul">
+                                <BodyShort size="small" className="arbeidslistetekst" title="Arbeidslistekategori gul">
+                                    <span>
+                                        <ArbeidslisteikonGul />
+                                    </span>
                                     Gul
-                                </span>
+                                </BodyShort>
                             </>
                         }
                         filterNavn="minArbeidslisteGul"

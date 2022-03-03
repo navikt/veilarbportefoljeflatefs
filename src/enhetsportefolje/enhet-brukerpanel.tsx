@@ -8,9 +8,9 @@ import {useLayoutEffect} from 'react';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {OrNothing} from '../utils/types/types';
-import {Checkbox} from 'nav-frontend-skjema';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
@@ -71,7 +71,9 @@ function EnhetBrukerpanel({
                 brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
-                <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                <div className="brukerliste__etiketter">
+                    <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                </div>
             </div>
         </li>
     );

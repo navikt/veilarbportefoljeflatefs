@@ -1,9 +1,8 @@
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import React, {PropsWithChildren} from 'react';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.less';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface ModalSuksessProps {
     isOpen: boolean;
@@ -18,26 +17,22 @@ interface ModalSuksessProps {
 function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
     return (
         <VarselModal
-            contentLabel="Tildeling av veileder vellykket"
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
-            closeButton={props.closeButton}
         >
-            <div className="blokk-s tildeling-veileder-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">{props.tittel}</Innholdstittel>
-                <Normaltekst>{props.tekst}</Normaltekst>
+            <div className="tildeling-veileder-modal__tekstgruppe">
+                <Heading size="large" level="1">
+                    {props.tittel}
+                </Heading>
+                <BodyShort size="small">{props.tekst}</BodyShort>
                 {props.children}
             </div>
-            <Hovedknapp
-                htmlType="submit"
-                onClick={props.onRequestClose}
-                data-testid={`modal-suksess_${props.testNavn}`}
-            >
+            <Button type="submit" onClick={props.onRequestClose} data-testid={`modal-suksess_${props.testNavn}`}>
                 {props.hovedknappTekst}
-            </Hovedknapp>
+            </Button>
         </VarselModal>
     );
 }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Element, Normaltekst} from 'nav-frontend-typografi';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     alder,
@@ -25,15 +24,14 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
 import '../filtrering-skjema.less';
 import '../../components/sidebar/sidebar.less';
-import {PopoverOrientering} from 'nav-frontend-popover';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import {ReactComponent as InfoIkon} from '../../components/ikoner/info-ikon.svg';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
+import {Alert, Label} from '@navikt/ds-react';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -47,12 +45,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
 
     return (
-        <div
-            className="filtrering-filter col-sm-12 blokk-xs filtrering-filter__kolonne"
-            data-testid="filtrering-filter_container"
-        >
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Demografi</Element>
+        <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
+            <div className="filtrering-filter__kolonne">
+                <Label>Demografi</Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -87,12 +82,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
                             form="kjonn"
+                            gridColumns={2}
                         />
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Hendelser</Element>
+            <div className="filtrering-filter__kolonne">
+                <Label>Hendelser</Label>
                 <Dropdown
                     name="Siste endring av bruker"
                     id="sisteEndringKategori"
@@ -107,19 +103,16 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Svar fra registrering</Element>
+            <div className="filtrering-filter__kolonne">
+                <Label>Svar fra registrering</Label>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <CheckboxFilterform
                                 form="registreringstype"
                                 valg={registreringstype}
@@ -135,12 +128,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="hoyeste-fullforte-utdanning"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
                                 valg={utdanning}
@@ -155,19 +145,16 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="er-utdanningen-godkjent-og-bestatt"
                     render={() => (
                         <>
-                            <div className="registreringsfilter__infocontainer">
-                                <InfoIkon className="registreringsfilter__infoikon" />
-                                <Normaltekst className="registreringsfilter__infotekst">
-                                    Svarene brukeren oppga på registreringstidspunktet.
-                                </Normaltekst>
-                            </div>
+                            <Alert variant="info" size="small">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
                             <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                         </>
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Status og brukergrupper</Element>
+            <div className="filtrering-filter__kolonne">
+                <Label>Status og brukergrupper</Label>
                 <Dropdown
                     name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
@@ -242,8 +229,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 blokk-xs filtrering-filter__kolonne">
-                <Element className="blokk-xxs">Rettighetsgruppe og ytelse</Element>
+            <div className="filtrering-filter__kolonne">
+                <Label>Rettighetsgruppe og ytelse</Label>
                 <Dropdown
                     name="Rettighetsgruppe"
                     id="rettighetsgruppe"
@@ -269,11 +256,10 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="col-sm-12 filtrering-filter__kolonne">
+            <div className="filtrering-filter__kolonne">
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                    orientering={PopoverOrientering.Hoyre}
                 />
                 <Dropdown
                     name="Aktivitet"

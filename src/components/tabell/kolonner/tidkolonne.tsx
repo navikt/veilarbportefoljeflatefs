@@ -1,5 +1,6 @@
 import * as React from 'react';
 import moment from 'moment';
+import {BodyShort} from '@navikt/ds-react';
 
 interface TidKolonneProps {
     className?: string;
@@ -25,7 +26,7 @@ function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
         timmerString = '0' + timmerString;
     }
 
-    return <span className={className}>{`${timmerString}:${minutterString}`}</span>;
+    return <BodyShort size="small" className={className}>{`${timmerString}:${minutterString}`}</BodyShort>;
 }
 
 export default TidKolonne;

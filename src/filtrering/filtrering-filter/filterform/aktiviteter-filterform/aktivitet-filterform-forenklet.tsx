@@ -1,7 +1,8 @@
 import React from 'react';
 import '../filterform.less';
-import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
+import {Button} from '@navikt/ds-react';
 import {Checkbox} from 'nav-frontend-skjema';
 
 interface AktivitetFilterformProps {
@@ -42,7 +43,7 @@ function AktivitetFilterformForenklet({
                 {Object.entries(valg).map(([filterKey, filterValue]) => (
                     <Checkbox
                         key={filterKey}
-                        className="aktivitetvalg blokk-xxs"
+                        className="aktivitetvalg"
                         label={filterValue}
                         onChange={e => velgCheckBox(e)}
                         value={filterKey}
@@ -52,18 +53,16 @@ function AktivitetFilterformForenklet({
                 ))}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
-                <div className="filterknapp-container">
-                    <button
-                        type="button"
-                        onClick={klikkPaAvansertLenke}
-                        className="filterknapp"
-                        data-testid="aktiviteter_avansert-filter_knapp"
-                        aria-label="Avansert aktivitetsfilter"
-                    >
-                        Avansert filter
-                    </button>
-                </div>
-                <NullstillValgKnapp
+                <Button
+                    variant="tertiary"
+                    onClick={klikkPaAvansertLenke}
+                    className="filterknapp"
+                    data-testid="aktiviteter_avansert-filter_knapp"
+                    aria-label="Avansert aktivitetsfilter"
+                >
+                    Avansert filter
+                </Button>
+                <NullstillKnapp
                     dataTestId="aktivitet-filterform-forenklet"
                     nullstillValg={nullstillForenkledeAktiviteter}
                     form="aktiviteterForenklet"

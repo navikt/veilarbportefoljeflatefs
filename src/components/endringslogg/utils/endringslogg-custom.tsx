@@ -4,6 +4,7 @@ import React from 'react';
 import TourModalButton from '../../modal/tour-modal/tour-modal-button';
 import '../endringslogg.less';
 import '../collapse-container-transition.less';
+import {BodyShort} from '@navikt/ds-react';
 
 export interface EndringsloggInnlegg {
     tittel: string;
@@ -39,16 +40,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '19. oktober 2021',
         tittel: 'Rekrutteringsbistand + aktivitetsplan',
         versjonId: '19.10.21',
+        tekst:
+            'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra NAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller nei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.',
         children: (
-            <>
-                Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra
-                NAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller
-                nei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx"
-                    linkTekst="Se mer informasjon på Navet"
-                />
-            </>
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx"
+                linkTekst="Se mer informasjon på Navet"
+            />
         )
     },
     {
@@ -62,15 +60,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '16. juni 2021',
         tittel: 'Forhåndsorientering vises i aktiviteten',
         versjonId: '16.06.21',
+        tekst:
+            'Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.',
         children: (
-            <>
-                Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for
-                ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx"
-                    linkTekst="Se mer informasjon på Navet"
-                />
-            </>
+            <EndringsloggLinkMedIkon
+                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx"
+                linkTekst="Se mer informasjon på Navet"
+            />
         )
     },
     {
@@ -86,10 +82,12 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '08.04.21',
         children: (
             <>
-                Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.
-                <br />
-                Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som
-                har gjort endringer i målet.
+                <BodyShort size="small">
+                    Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.
+                    <br />
+                    Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere
+                    som har gjort endringer i målet.
+                </BodyShort>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppfølging.aspx"
                     linkTekst="Se mer informasjon på Navet"
@@ -102,10 +100,10 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         dato: '24. mars 2021',
         tittel: 'Gi dine brukere flere muligheter for å komme i jobb',
         versjonId: '24.03.21',
+        tekst:
+            'I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».',
         children: (
             <>
-                I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos
-                arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Inkludering---for-vei.aspx"
                     linkTekst="Se mer informasjon på Navet"
@@ -120,18 +118,17 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '10.03.2021',
         children: (
             <>
-                <p className="forenklet-filter__topp">
+                <BodyShort size="small" className="forenklet-filter__topp">
                     Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av
                     aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.
-                </p>
-                <p>
+                    <br />
                     Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har
                     en gitt aktivitet.
-                </p>
-                <p className="forenklet-filter__bunn">
+                </BodyShort>
+                <BodyShort size="small" className="forenklet-filter__bunn">
                     Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra
                     aktivitetsfilteret.
-                </p>
+                </BodyShort>
             </>
         )
     },
@@ -148,12 +145,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '23.11.20',
         children: (
             <>
-                <p>
+                <BodyShort size="small">
                     Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan
                     hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
                     utdanning.
-                </p>
-                <p>Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.</p>
+                    <br />
+                    Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.
+                </BodyShort>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx"
                     linkTekst="Nyhetssak på Navet"
@@ -167,14 +165,13 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         versjonId: '04.11.20',
         children: (
             <>
-                <p>
+                <BodyShort size="small">
                     Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene
                     brukerne oppga når de registrerte seg.
-                </p>
-                <p>
+                    <br />
                     Mange av de som tidligere var permittert har fått endret situasjon, og filtrene “Alle utenom
                     permittert etter 09.03.2020” og “Permittert etter 09.03.2020" har derfor vært misvisende.
-                </p>
+                </BodyShort>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filteret--Permittert-etter-09.03.2020%E2%80%9D-er-n%C3%A5-fjernet-fra-oversikten-i-Modia.aspx"
                     linkTekst="Nyhetssak på Navet"
@@ -187,7 +184,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
         tittel: 'Endringer i filtrene',
         versjonId: '29.09.20',
         children: (
-            <>
+            <BodyShort size="small">
                 <ul>
                     <li>
                         Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre
@@ -199,7 +196,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
                         Du kan lukke filtermenyen dersom du ønsker større plass til listen.
                     </li>
                 </ul>
-            </>
+            </BodyShort>
         )
     },
     {
@@ -247,7 +244,7 @@ const endringslogginnhold: EndringsloggInnlegg[] = [
             'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
         children: (
             <>
-                <p>Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</p>
+                <BodyShort size="small">Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</BodyShort>
                 <EndringsloggLinkMedIkon
                     url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
                     linkTekst="Nyhetssak på Navet"

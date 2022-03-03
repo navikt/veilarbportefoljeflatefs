@@ -1,15 +1,14 @@
 import * as React from 'react';
 import {Form} from 'formik';
-import {Flatknapp, Hovedknapp} from 'nav-frontend-knapper';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
-import {Undertekst, Undertittel} from 'nav-frontend-typografi';
 import './arbeidsliste.less';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {ReactComponent as SlettIcon} from '../../ikoner/slett.svg';
+import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
+import {Delete} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface RedigerArbeidslisteProps {
@@ -32,25 +31,25 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
-                <div className="nav-input blokk-s">
-                    <Undertittel>
-                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
-                    </Undertittel>
+                <div className="nav-input">
                     <ArbeidslisteInformasjonsmelding />
+                    <Heading size="small" level="2">
+                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
+                    </Heading>
                     <FormikInput name="overskrift" />
                     <FormikTekstArea name="kommentar" />
-                    <Undertekst className="arbeidsliste--modal-redigering">
+                    <Detail size="small" className="arbeidsliste--modal-redigering">
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
-                    </Undertekst>
+                    </Detail>
                 </div>
-                <div className="skjemaelement dato-kategori-wrapper">
+                <div className="dato-kategori-wrapper">
                     <FormikDatoVelger name="frist" />
                     <ArbeidslisteKategori name="kategori" index="" />
                 </div>
             </div>
             <div className="modal-footer">
-                <Hovedknapp
-                    htmlType="submit"
+                <Button
+                    type="submit"
                     className="knapp knapp--hoved"
                     data-testid="modal_rediger-arbeidsliste_lagre-knapp"
                     onClick={() => {
@@ -62,23 +61,25 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     }}
                 >
                     Lagre
-                </Hovedknapp>
-                <Flatknapp
+                </Button>
+                <Button
+                    variant="secondary"
                     className="knapp knapp--avbryt"
                     onClick={props.lukkModal}
                     data-testid="modal_rediger-arbeidsliste_avbryt-knapp"
                 >
                     Avbryt
-                </Flatknapp>
-                <Flatknapp
-                    htmlType="button"
+                </Button>
+                <Button
+                    variant="danger"
+                    type="button"
                     onClick={fjernBruker}
                     className="fjern--knapp"
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <SlettIcon />
-                    <span>Fjern</span>
-                </Flatknapp>
+                    <Delete />
+                    <BodyShort size="small">Fjern</BodyShort>
+                </Button>
             </div>
         </Form>
     );

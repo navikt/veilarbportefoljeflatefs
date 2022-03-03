@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
-import {Input} from 'nav-frontend-skjema';
 import {FiltervalgModell} from '../model-interfaces';
 import {useEffect, useState} from 'react';
+import {TextField} from '@navikt/ds-react';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
@@ -47,7 +47,9 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
 
     return (
         <div className="filtrering-navn-fnr" role="search">
-            <Input
+            <TextField
+                label=""
+                hideLabel
                 placeholder="Søk etter navn eller fødselsnummer"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}

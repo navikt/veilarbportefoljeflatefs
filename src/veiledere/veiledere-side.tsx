@@ -4,7 +4,6 @@ import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
-import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
@@ -23,6 +22,7 @@ import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrik
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import {Panel} from '@navikt/ds-react';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -68,9 +68,9 @@ function VeiledereSide() {
                         id={`oversikt-sideinnhold_${id}`}
                     >
                         <div className="status-filter-kolonne">
-                            <PanelBase className="blokk-xxxs sok-veileder" role="search">
+                            <Panel className="sok-veileder" role="search">
                                 <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
-                            </PanelBase>
+                            </Panel>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>
