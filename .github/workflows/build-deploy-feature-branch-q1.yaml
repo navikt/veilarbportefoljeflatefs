@@ -7,9 +7,9 @@ env:
     PRINT_PAYLOAD: true
 
 jobs:
-    build:
-        name: Build Project
+    build-project-and-docker-image:
         runs-on: ubuntu-latest
+        name: Build project and publish Docker image
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
@@ -17,21 +17,10 @@ jobs:
                   node-version: '16'
                   cache: 'npm'
             - run: npm ci
-            - run: npm run build
-            - run: npm run test
-    build-docker-image:
-        runs-on: ubuntu-latest
-        name: Build and publish Docker image
-        needs: build
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: '16'
-                  cache: 'npm'
-                  cache-dependency-path: '**/package-lock.json'
             - name: Build production artifact
               run: npm run build
+            - name: Run tests
+              run: npm run test
             - name: Build and publish Docker image
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
