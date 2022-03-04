@@ -40,8 +40,10 @@ function AktivitetFilterformAvansert({
         <form className="aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetfilterform-avansert__valg">
                 <div className="aktivitetvalg__header">
-                    <Label className="aktivitetvalg__header--first">Ja</Label>
-                    <Label>Nei</Label>
+                    <Label className="aktivitetvalg__header--first" size="small">
+                        Ja
+                    </Label>
+                    <Label size="small">Nei</Label>
                 </div>
                 {Object.entries(valg).map(([kode, verdi]) => [
                     <div key={kode} className="aktivitetvalg">

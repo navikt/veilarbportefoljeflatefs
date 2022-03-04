@@ -13,7 +13,7 @@ import {Button, Label} from '@navikt/ds-react';
 function brukerLabel(bruker) {
     return (
         <li key={bruker.fnr}>
-            <Label>{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Label>
+            <Label size="small">{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Label>
         </li>
     );
 }

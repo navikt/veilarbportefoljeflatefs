@@ -18,7 +18,9 @@ function ArbeidslisteKategori(props: {name: string; index: string}) {
             {({field, form}) => {
                 return (
                     <div className="arbeidslistekategori">
-                        <Label className="skjemaelement__label">Kategori</Label>
+                        <Label className="skjemaelement__label" size="small">
+                            Kategori
+                        </Label>
                         <Arbeidslistekategori
                             value={KategoriModell.BLA}
                             arbeidslistekategori={<ArbeidslisteikonBla />}

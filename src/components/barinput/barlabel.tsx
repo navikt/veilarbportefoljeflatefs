@@ -13,7 +13,11 @@ function Barlabel({labelTekst, antall}: BarlabelProps) {
             <BodyShort size="small" className="barlabel__labeltext">
                 {labelTekst}
             </BodyShort>
-            {(antall || antall === 0) && <Label className="barlabel__antall">{antall}</Label>}
+            {(antall || antall === 0) && (
+                <Label className="barlabel__antall" size="small">
+                    {antall}
+                </Label>
+            )}
         </>
     );
 }

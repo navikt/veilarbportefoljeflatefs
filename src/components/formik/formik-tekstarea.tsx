@@ -31,6 +31,7 @@ function FormikTekstArea({name, index}: FormikTekstAreaProps) {
                 return (
                     <Textarea
                         id={name}
+                        size="small"
                         label="Kommentar"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}

@@ -47,7 +47,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
-                <Label>Demografi</Label>
+                <Label size="small">Demografi</Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -88,7 +88,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Hendelser</Label>
+                <Label size="small">Hendelser</Label>
                 <Dropdown
                     name="Siste endring av bruker"
                     id="sisteEndringKategori"
@@ -154,7 +154,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Status og brukergrupper</Label>
+                <Label size="small">Status og brukergrupper</Label>
                 <Dropdown
                     name="CV og jobbønsker"
                     id="cv-og-jobbprofil"
@@ -230,7 +230,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Rettighetsgruppe og ytelse</Label>
+                <Label size="small">Rettighetsgruppe og ytelse</Label>
                 <Dropdown
                     name="Rettighetsgruppe"
                     id="rettighetsgruppe"

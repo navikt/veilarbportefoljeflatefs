@@ -10,7 +10,7 @@ interface OverskriftMedHjelpeTekstProps {
 export default function OverskriftMedHjelpetekst(props: OverskriftMedHjelpeTekstProps) {
     return (
         <div className="filtrering--overskrift-med-hjelpetekst">
-            <Label>{props.overskriftTekst}</Label>
+            <Label size="small">{props.overskriftTekst}</Label>
             <HelpText placement="right" strategy="fixed">
                 {props.hjelpeTekst}
             </HelpText>

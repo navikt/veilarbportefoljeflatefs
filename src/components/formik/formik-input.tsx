@@ -31,6 +31,7 @@ function FormikInput({name, index}: FormikInputProps) {
                 return (
                     <TextField
                         id={name}
+                        size="small"
                         label="Tittel"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
