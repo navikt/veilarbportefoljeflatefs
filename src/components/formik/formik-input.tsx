@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, getIn} from 'formik';
-import {Label, TextField} from '@navikt/ds-react';
+import {TextField} from '@navikt/ds-react';
 
 const TITTEL_MAKS_LENGDE = 30;
 

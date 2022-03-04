@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, getIn} from 'formik';
-import {Label, Textarea} from '@navikt/ds-react';
+import {Textarea} from '@navikt/ds-react';
 
 const KOMMENTAR_MAKS_LENGDE = 500;
 
