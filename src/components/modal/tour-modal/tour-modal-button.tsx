@@ -1,9 +1,9 @@
 import {default as React, useState} from 'react';
 import {default as TourModal, ModalName} from './tour-modal';
-import {Knapp} from 'nav-frontend-knapper';
 import {logEvent} from '../../../utils/frontend-logger';
 import './tour-modal.less';
 import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
 
 interface ModalStepperProps {
     modal: ModalName;
@@ -17,9 +17,9 @@ export default function TourModalButton(props: ModalStepperProps) {
 
     return (
         <>
-            <Knapp
+            <Button
+                variant="secondary"
                 className={classNames('endringslogg-stepperKnapp', props.className)}
-                mini
                 data-testid="endringslogg_se-hvordan-knapp"
                 onClick={() => {
                     setOpen(true);
@@ -27,7 +27,7 @@ export default function TourModalButton(props: ModalStepperProps) {
                 }}
             >
                 {props.knappeTekst ? props.knappeTekst : 'Se hvordan'}
-            </Knapp>
+            </Button>
             <TourModal open={open} modalName={props.modal} onClose={() => setOpen(false)} />
         </>
     );

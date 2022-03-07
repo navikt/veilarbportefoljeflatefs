@@ -1,8 +1,7 @@
 import React from 'react';
-import {Hovedknapp} from 'nav-frontend-knapper';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import './modal.less';
+import './veiledergruppe-modal.less';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {
     contentLabel: string;
@@ -15,20 +14,21 @@ interface VeiledergruppeendringFeiletProps {
 function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProps) {
     return (
         <VarselModal
-            contentLabel={props.contentLabel}
             isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onClose={props.onRequestClose}
             className="veiledergruppe-feilet-modal"
-            type={VarselModalType.ADVARSEL}
+            type={VarselModalType.FEIL}
         >
-            <div className="blokk-s veiledergruppe-feilet-modal__tekstgruppe">
-                <Innholdstittel className="blokk-s">{props.innholdstittel}</Innholdstittel>
-                <Normaltekst>{props.tekst}</Normaltekst>
+            <div className="veiledergruppe-feilet-modal__tekstgruppe">
+                <Heading size="large" level="1">
+                    {props.innholdstittel}
+                </Heading>
+                <BodyShort size="small">{props.tekst}</BodyShort>
             </div>
             <div className="veiledergruppe-feilet-modal__knappegruppe">
-                <Hovedknapp htmlType="submit" onClick={props.onRequestClose}>
+                <Button type="submit" onClick={props.onRequestClose}>
                     Ok
-                </Hovedknapp>
+                </Button>
             </div>
         </VarselModal>
     );

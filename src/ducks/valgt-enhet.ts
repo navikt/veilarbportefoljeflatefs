@@ -56,6 +56,6 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
             return;
         }
         dispatch(velgEnhetForVeileder(nyEnhet));
-        dispatch(pagineringSetup({side: 1, seAlle: false}));
+        dispatch(pagineringSetup({side: 1, seFlere: false}));
     };
 }

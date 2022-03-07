@@ -2,12 +2,11 @@ import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
 import './drag-and-drop.less';
-import {Flatknapp, Hovedknapp, Knapp} from 'nav-frontend-knapper';
-import {Normaltekst} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 import {LagretFilter} from '../../../ducks/lagret-filter';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
@@ -147,15 +146,15 @@ function DragAndDropContainer({
             <div aria-live="assertive" className="assistive-text">
                 {ariaTekst}
             </div>
-            <Normaltekst
-                tag={'h3'}
+            <BodyShort
+                size="small"
                 className="drag-and-drop-tittel"
                 aria-readonly="true"
                 aria-live="polite"
                 data-testid="drag-drop_infotekst"
             >
                 Endre rekkefølge med SHIFT-tast + piltaster eller dra og slipp:
-            </Normaltekst>
+            </BodyShort>
             <ul
                 ref={dragContainer}
                 className="drag-and-drop-container"
@@ -182,33 +181,32 @@ function DragAndDropContainer({
                 ))}
             </ul>
             <div className="drag-and-drop-knapper">
-                <Hovedknapp
+                <Button
                     className="drag-and-drop-knapp-lagre"
                     aria-label="Lagre sortering"
-                    mini
                     onClick={() => lagreRekkefolge()}
                     data-testid="mine-filter_sortering_lagre-knapp"
                 >
                     Lagre
-                </Hovedknapp>
-                <Knapp
+                </Button>
+                <Button
+                    variant="secondary"
                     className="drag-and-drop-knapp-avbryt"
                     aria-label="Avbryt sortering"
-                    mini
                     onClick={() => avbryt()}
                     data-testid="mine-filter_sortering_avbryt-knapp"
                 >
                     Avbryt
-                </Knapp>
-                <Flatknapp
+                </Button>
+                <Button
+                    variant="tertiary"
                     className="drag-and-drop-knapp-nullstill"
                     aria-label="Nullstill til alfabetisk sortering"
-                    mini
                     onClick={() => alfabetiskSort()}
                     data-testid="mine-filter_sortering_nullstill-knapp"
                 >
                     Nullstill
-                </Flatknapp>
+                </Button>
             </div>
         </>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
 import '../filterform.less';
-import NullstillValgKnapp from '../../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
+import {Button, Label, BodyShort} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -36,15 +37,17 @@ function AktivitetFilterformAvansert({
     };
 
     return (
-        <form className="skjema aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
-            <div className="aktivitetvalg__header blokk-xxs">
-                <span className="aktivitetvalg__header--first">Ja</span>
-                <span>Nei</span>
-            </div>
+        <form className="aktivitetfilterform-avansert" data-testid="aktivitet-filterform">
             <div className="aktivitetfilterform-avansert__valg">
+                <div className="aktivitetvalg__header">
+                    <Label className="aktivitetvalg__header--first" size="small">
+                        Ja
+                    </Label>
+                    <Label size="small">Nei</Label>
+                </div>
                 {Object.entries(valg).map(([kode, verdi]) => [
-                    <div key={kode} className="aktivitetvalg blokk-xxs">
-                        <span className="aktivitetvalg__tekst">{verdi as string}</span>
+                    <div key={kode} className="aktivitetvalg">
+                        <BodyShort size="small">{verdi as string}</BodyShort>
                         <div className="radioknapp-gruppe">
                             <input
                                 id={`aktivitet-${kode}-ja`}
@@ -85,19 +88,16 @@ function AktivitetFilterformAvansert({
                 ])}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
-                <div className="filterknapp-container">
-                    <button
-                        type="button"
-                        onClick={klikkPaForenkletLenke}
-                        className="filterknapp"
-                        data-testid="aktiviteter_forenklet-filter_knapp"
-                        aria-label="Forenklet aktivitetsfilter"
-                    >
-                        Forenklet filter
-                    </button>
-                </div>
-
-                <NullstillValgKnapp
+                <Button
+                    variant="tertiary"
+                    onClick={klikkPaForenkletLenke}
+                    className="filterknapp"
+                    data-testid="aktiviteter_forenklet-filter_knapp"
+                    aria-label="Forenklet aktivitetsfilter"
+                >
+                    Forenklet filter
+                </Button>
+                <NullstillKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
                     form="aktiviteter"

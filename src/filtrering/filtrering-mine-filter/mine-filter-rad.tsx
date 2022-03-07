@@ -9,7 +9,6 @@ import {
     avmarkerValgtMineFilter,
     markerMineFilter
 } from '../../ducks/lagret-filter-ui-state';
-import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React, {useEffect, useState} from 'react';
 import './mine-filter_innhold.less';
@@ -18,6 +17,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {Radio} from 'nav-frontend-skjema';
 
 interface MineFilterRadProps {
     mineFilter: LagretFilter;

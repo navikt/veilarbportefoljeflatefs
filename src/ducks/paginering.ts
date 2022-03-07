@@ -3,15 +3,15 @@ import {DEFAULT_PAGINERING_STORRELSE} from '../konstanter';
 
 export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
-interface PagineringState {
+export interface PagineringState {
     side: number;
-    seAlle: boolean;
+    seFlere: boolean;
     sideStorrelse: number;
 }
 
 const initialState: PagineringState = {
     side: 1,
-    seAlle: false,
+    seFlere: false,
     sideStorrelse: DEFAULT_PAGINERING_STORRELSE
 };
 
@@ -27,7 +27,7 @@ export default function pagineringReducer(state = initialState, action) {
 
 export interface PageringOppdatering {
     side: number;
-    seAlle?: boolean;
+    seFlere?: boolean;
     sideStorrelse?: number;
 }
 

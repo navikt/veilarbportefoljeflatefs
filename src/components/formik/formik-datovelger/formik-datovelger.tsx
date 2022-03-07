@@ -5,6 +5,7 @@ import {validerDatoFeldt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
 import './daypicker.less';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
+import {Label} from '@navikt/ds-react';
 
 interface FormikDatepickerProps {
     name: string;
@@ -20,7 +21,9 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                 });
                 return (
                     <div className={datePickerClassName}>
-                        <span className="skjemaelement__label">Frist</span>
+                        <Label className="skjemaelement__label" size="small">
+                            Frist
+                        </Label>
                         <Datovelger
                             id="fristDatovelger"
                             input={{

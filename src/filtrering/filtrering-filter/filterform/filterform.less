@@ -8,59 +8,53 @@
         margin: 0 0.5rem 0.5rem;
     }
 
-    .aktivitetfilterform-avansert {
-        label {
-            display: inline-block;
-        }
+    .aktivitetfilterform-avansert__valg {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
 
         .aktivitetvalg__header {
-            padding: 0.5rem 1.54rem 0 1.2rem;
-            text-align: right;
+            display: grid;
+            grid-template-columns: 75% auto auto;
+            grid-gap: 0.5rem;
 
             &--first {
-                padding-right: 0.4rem;
+                grid-column: 2;
             }
         }
         .aktivitetvalg {
             display: flex;
+            flex-direction: row;
+            align-items: center;
             justify-content: space-between;
-        }
 
-        .aktivitet_radioknapp_label {
-            margin-bottom: 1rem;
-        }
-
-        .radioknapp-gruppe {
-            flex-shrink: 0;
-            margin-left: 0.5rem;
-        }
-
-        .radioknapp + label {
-            margin-top: 0.15rem;
-        }
-
-        .radioknapp:checked + label:before {
-            top: 1px;
-        }
-
-        &__valg {
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
+            .navds-radio-buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
         }
     }
     .aktivitet-filterform__knappegruppe {
         display: flex;
         justify-content: space-between;
+        border-top: 1px solid @navGra20;
 
-        .filterknapp-container {
+        .filterknapp {
             padding: 0.5rem;
-            .filterknapp {
-                padding: 0 0.5rem;
-                background-color: transparent;
-                border: none;
-                color: @navBla;
-                text-decoration: underline;
-                cursor: pointer;
+            margin: 0.5rem;
+            background-color: transparent;
+            border: none;
+            color: @navBla;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .nullstill {
+            &__wrapper {
+                border-top: none;
+            }
+            &__knapp {
+                margin: 0.5rem;
             }
         }
     }
@@ -71,34 +65,15 @@
         }
     }
 
-    .alder-border {
-        margin: 0 1rem;
-    }
     .alder-input {
         display: grid;
         grid-template-columns: auto auto auto;
-        grid-template-rows: auto auto;
-        padding: 0.5rem 0.5rem;
+        padding-bottom: 0.5rem;
 
         .alder-container {
             display: flex;
             flex-direction: column;
 
-            &__fra {
-                grid-row-start: 1;
-                grid-row-end: 3;
-                grid-column: 1;
-            }
-
-            &__til {
-                grid-row-start: 1;
-                grid-row-end: 3;
-                grid-column: 2;
-            }
-
-            label {
-                margin: auto 0;
-            }
             input[type='number']::-webkit-inner-spin-button,
             input[type='number']::-webkit-outer-spin-button {
                 -webkit-appearance: none;
@@ -106,17 +81,19 @@
             }
             .filter_alder {
                 max-width: 4rem;
-                max-height: 2rem;
 
                 &__validering {
                     border: 2px solid red;
                 }
             }
         }
+
+        .navds-text-field__input {
+            margin-top: 0;
+        }
+
         .alder-velg-knapp {
-            margin-left: 1rem;
-            grid-row: 2;
-            grid-column: 3;
+            align-self: end;
         }
     }
     .filter-alder__tekst {
@@ -133,21 +110,26 @@
     }
 
     .checkbox-filterform {
+        padding: 0.5rem;
         &__valg {
             max-height: 16rem;
             overflow-x: auto;
-            padding: 0.5rem 0.5rem 0;
+            padding: 0.2rem;
 
             &__double {
-                display: grid;
                 max-height: 16rem;
                 overflow-x: auto;
                 padding: 0.5rem 0.5rem 0;
-            }
-        }
+                grid-gap: 0.5rem;
 
-        .registreringstype {
-            max-height: none;
+                .checkbox-filterform-col1 {
+                    grid-column: 1;
+                }
+
+                .checkbox-filterform-col2 {
+                    grid-column: 2;
+                }
+            }
         }
 
         &__valg-knapp {
@@ -160,14 +142,6 @@
         }
     }
 
-    .checkbox-filterform-col1 {
-        grid-column: 1;
-    }
-
-    .checkbox-filterform-col2 {
-        grid-column: 2;
-    }
-
     .field__container {
         position: relative;
 
@@ -175,121 +149,146 @@
             margin-bottom: 0;
         }
     }
-    .double-form-title {
-        margin-bottom: 1rem;
-        line-height: 110%;
-    }
-    .fodselsdato__grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-row-gap: 5px;
-    }
 
-    .fodselsdato__container {
-        text-align: center;
-        margin: 0.2rem;
+    #Fødselsdato-dropdown__innhold .checkbox-filterform {
+        padding: 0.5rem 0 0;
 
-        label {
-            position: relative;
-            cursor: pointer;
-            padding: 0.1rem;
-            background-color: white;
-            border: 1px solid transparent;
-            border-radius: 4px;
+        .fodselsdato__grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-row-gap: 10px;
+            margin-bottom: 0.5rem;
         }
 
-        label:hover {
-            color: @navBla;
-            border: 1px solid @navBla;
+        .fodselsdato__container {
+            text-align: center;
+            margin: 0.2rem;
+
+            label {
+                position: relative;
+                cursor: pointer;
+                padding: 0.3rem 0.5rem;
+                background-color: white;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+
+            label:hover {
+                color: @navBla;
+                border: 1px solid @navBla;
+            }
+
+            label::before,
+            label::after {
+                position: absolute;
+            }
+
+            label::before {
+                content: '';
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+                padding: 0.2rem;
+            }
+
+            label::after {
+                content: '';
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+            input[type='checkbox'] {
+                opacity: 0;
+                appearance: none;
+            }
+
+            input[type='checkbox'] + label::after {
+                content: none;
+            }
+
+            input[type='checkbox']:checked + label {
+                background-color: @navBlaDarken20;
+                color: white;
+            }
+
+            input[type='checkbox']:checked + label::after {
+                content: '';
+            }
+
+            input[type='checkbox']:focus + label::before {
+                border-radius: 4px;
+                box-shadow: 0 0 0 3px @fokusFarge;
+                outline: none;
+            }
         }
 
-        label::before,
-        label::after {
-            position: absolute;
-        }
-
-        label::before {
-            content: '';
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-            padding: 0.2rem;
-        }
-
-        label::after {
-            content: '';
-            padding: 0.2rem;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        input[type='checkbox'] {
-            opacity: 0;
-            appearance: none;
-        }
-
-        input[type='checkbox'] + label::after {
-            content: none;
-        }
-
-        input[type='checkbox']:checked + label {
-            background-color: @navBlaDarken20;
-            color: white;
-        }
-
-        input[type='checkbox']:checked + label::after {
-            content: '';
-        }
-
-        input[type='checkbox']:focus + label::before {
-            border-radius: 4px;
-            box-shadow: 0 0 0 3px @fokusFarge;
-            outline: none;
+        .nullstill__knapp {
+            margin: 0.5rem;
         }
     }
 
     .radio-filterform {
+        padding: 0.5rem;
+
         &__valg {
-            height: auto;
-            overflow-x: auto;
-            padding: 1rem 0.5rem 0;
             z-index: 1000;
             margin-bottom: 0;
         }
     }
 
     .hendelser-filterform {
+        padding: 0.5rem 0 0.5rem 0.5rem;
         &__valg {
-            height: auto;
-            overflow-x: auto;
-            padding: 1rem 0.5rem 0;
             z-index: 1000;
             margin-bottom: 0;
+            max-height: 24rem;
+            overflow-x: auto;
         }
 
         &__radio-gruppe {
-            margin-left: 1rem;
+            padding-left: 0.2rem;
+        }
+
+        &__radio-gruppe__label {
+            margin-top: 0.5rem;
+        }
+
+        &__radio-gruppe + .uleste-endringer {
+            margin-left: 0.5rem;
+        }
+
+        .navds-radio-buttons,
+        .navds-checkboxes {
+            margin-left: 0.5rem;
         }
 
         &__checkbox-gruppe {
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
             border-bottom: 1px solid #78706a;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
-            .uleste-endringer {
-                margin-left: 1rem;
-            }
-
-            .hjelpetekst__uleste-endringer {
+            .navds-help-text {
                 margin-right: 1rem;
+                align-self: center;
             }
         }
+        .nullstill__knapp {
+            margin: 0.5rem;
+        }
+
+        #uleste-endringer {
+            margin-left: 0.5rem;
+            align-self: center;
+            transform: scale(1.5);
+        }
+    }
+    div.navds-popover.navds-help-text__popover {
+        position: fixed !important;
     }
 }

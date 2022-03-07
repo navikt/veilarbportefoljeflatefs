@@ -6,6 +6,7 @@ import './filtrering-label.less';
 import './filtrering-skjema.less';
 import FilterFeilModal from '../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../utils/utils';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
@@ -29,7 +30,6 @@ function FiltreringLabel({
     const slettAlleFiltervalg = arialLabel === ' Slett alle filtervalg';
     const buttonClassnames = classNames(
         'filtreringlabel',
-        'typo-undertekst',
         {'filtreringlabel--markert': markert},
         {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
         {'slett-alle-filtervalg-knapp': slettAlleFiltervalg}
@@ -40,16 +40,19 @@ function FiltreringLabel({
     }
 
     return (
-        <button
+        <Button
+            variant="primary"
             title={lagConfig(label).label}
             aria-label={arialLabel}
             className={buttonClassnames}
             onClick={slettFilter}
             data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
-            <span className={className}>{lagConfig(label).label}</span>
+            <BodyShort size="small" className={className}>
+                {lagConfig(label).label}
+            </BodyShort>
             {skalHaKryssIkon && <FilterIkon />}
-        </button>
+        </Button>
     );
 }
 

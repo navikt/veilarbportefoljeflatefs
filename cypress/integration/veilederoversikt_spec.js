@@ -19,14 +19,13 @@ describe('Annen veileder', () => {
     // });
     it('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.gaTilOversikt('veileder-oversikt');
-        cy.getByTestId('sorteringspil_stigende').should('not.exist');
         cy.getByTestId('sorteringspil_synkende').should('not.exist');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_stigende').should('be.visible');
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_stigende').should('not.exist');
         cy.getByTestId('sorteringspil_synkende').should('be.visible');
-        cy.getByTestId('se-alle_knapp').click();
+        cy.getByTestId('se-flere_knapp').should('be.disabled');
 
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Thoresen, Herman')
@@ -55,7 +54,7 @@ describe('Annen veileder', () => {
         cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
-            .should('have.length', 20);
+            .should('have.length', 40);
 
         cy.checkbox('veilederoversikt_sok-veileder_veilederliste_element_0');
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0').should('be.checked');
@@ -69,7 +68,7 @@ describe('Annen veileder', () => {
 
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
-            .should('have.length', 20);
+            .should('have.length', 40);
 
         //TODO fjern denne når søk veileder er ferdig i pilotering
         // cy.gaTilOversikt('veileder-oversikt');

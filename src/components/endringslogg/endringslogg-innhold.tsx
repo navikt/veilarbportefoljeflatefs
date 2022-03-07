@@ -1,11 +1,10 @@
 import classNames from 'classnames/dedupe';
-import {Normaltekst, Undertekst, Undertittel} from 'nav-frontend-typografi';
 import {default as React} from 'react';
-import {ReactComponent as LinkIcon} from './external-link.svg';
-import Lenke from 'nav-frontend-lenker';
 import {EndringsloggInnleggMedSettStatus} from './utils/endringslogg-custom';
 import './endringslogg.less';
 import './collapse-container-transition.less';
+import {BodyShort, Detail, Heading, Link} from '@navikt/ds-react';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface EndringsloggInnleggProps {
     dato: string;
@@ -21,10 +20,10 @@ interface EndringsloggInnholdProps {
 
 export function EndringsloggLinkMedIkon(props: {linkTekst: string; url: string; className?: string}) {
     return (
-        <Lenke className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
-            {props.linkTekst ? props.linkTekst : props.url}
-            <LinkIcon className="linkikon" />
-        </Lenke>
+        <Link className={classNames('endringslogg-link', props.className)} target="_blank" href={props.url}>
+            <BodyShort size="small">{props.linkTekst ? props.linkTekst : props.url}</BodyShort>
+            <ExternalLink className="linkikon" />
+        </Link>
     );
 }
 
@@ -56,11 +55,13 @@ function EndringsloggInnlegg(props: EndringsloggInnleggProps) {
                         'endringslogg-info-nye-notifikasjoner ': props.nyeNotifikasjoner
                     })}
                 />
-                <Undertekst>{props.dato}</Undertekst>
+                <Detail size="small">{props.dato}</Detail>
             </div>
             <div className="endringslogg-innhold endringslogg-kolonne">
-                <Undertittel> {props.innholdsOverskrift} </Undertittel>
-                {props.innholdsTekst && <Normaltekst> {props.innholdsTekst} </Normaltekst>}
+                <Heading size="small" level="2">
+                    {props.innholdsOverskrift}
+                </Heading>
+                {props.innholdsTekst && <BodyShort size="small"> {props.innholdsTekst} </BodyShort>}
                 {props.children}
             </div>
         </div>

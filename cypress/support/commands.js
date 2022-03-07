@@ -53,7 +53,7 @@ Cypress.Commands.add('gaTilOversikt', side => {
             );
         }
         return (
-            cy.get('.spinner').should('be.visible') &&
+            cy.get('.navds-loader').should('be.visible') &&
             cy.url().should('include', '/veilarbportefoljeflatefs/portefolje')
         );
     } else if (side === 'enhetens-oversikt') {
@@ -63,7 +63,10 @@ Cypress.Commands.add('gaTilOversikt', side => {
                 cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
             );
         }
-        return cy.get('.spinner').should('be.visible') && cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
+        return (
+            cy.get('.navds-loader').should('be.visible') &&
+            cy.url().should('include', '/veilarbportefoljeflatefs/enhet')
+        );
     } else if (side === 'veileder-oversikt') {
         if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
             return (
@@ -72,7 +75,8 @@ Cypress.Commands.add('gaTilOversikt', side => {
             );
         }
         return (
-            cy.get('.spinner').should('be.visible') && cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
+            cy.get('.navds-loader').should('be.visible') &&
+            cy.url().should('include', '/veilarbportefoljeflatefs/veiledere')
         );
     }
 });
@@ -144,4 +148,36 @@ Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
     cy.getByTestId(`dropdown-knapp_${filternavn}`)
         .should('be.visible')
         .click();
+});
+
+Cypress.Commands.add('apneArbeidslistePaPerson', () => {
+    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'expand')
+        .click();
+
+    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'collapse')
+        .first();
+});
+
+Cypress.Commands.add('lukkeArbeidslistePaPerson', () => {
+    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'collapse')
+        .click();
+
+    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'expand')
+        .first();
 });

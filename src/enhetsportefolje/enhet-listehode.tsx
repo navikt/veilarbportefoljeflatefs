@@ -66,7 +66,7 @@ function EnhetListehode({
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
-        <div className="brukerliste__header brukerliste__sorteringheader typo-undertekst">
+        <div className="brukerliste__header brukerliste__sorteringheader">
             <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <VelgalleCheckboks

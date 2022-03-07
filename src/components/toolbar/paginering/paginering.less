@@ -1,31 +1,18 @@
 @import '~nav-frontend-core/less/core';
-@import '~nav-frontend-paneler-style/src/mixins';
 @bakgrunnsGra: #f4f4f4;
 
 .veilarbportefoljeflatefs {
     .paginering {
         display: flex;
         align-items: center;
-        max-width: 15rem;
-        width: 100%;
         justify-content: flex-end;
-    }
-
-    .paginering__knapper {
-        float: right;
     }
 
     .paginering__knapp {
         border: 1px solid transparent;
         border-left: 1px solid @navGra40;
         background-color: transparent !important;
-        width: 25%;
-        margin: 0 1px;
-
-        .panel-mixin();
-        .panel-focushover-mixin();
-
-        display: inline-block;
+        width: 30%;
         padding: 0.25rem 0.5rem;
         border-radius: 0;
 
@@ -65,7 +52,6 @@
         }
 
         label {
-            //background-color: @white;
             display: inline-block;
             padding: 0.3rem 0.5rem;
             border: 1px solid @navGra20;
@@ -84,7 +70,6 @@
 
             input:checked + label {
                 background-color: @navBla;
-                //color: @white;
                 border-color: @navBla;
             }
         }

@@ -1,8 +1,9 @@
 import React from 'react';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import './nullstill-valg-knapp.less';
+import './nullstill-knapp.less';
 import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
 
 interface Props {
     nullstillValg: () => void;
@@ -12,8 +13,9 @@ interface Props {
     className?: string;
 }
 
-function NullstillValgKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
-    const nullstille = () => {
+function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
+    const nullstille = e => {
+        e.persist();
         logEvent('portefolje.metrikker.nullstill-knapp', {
             sideNavn: finnSideNavn(),
             dropdown: form
@@ -22,18 +24,19 @@ function NullstillValgKnapp({nullstillValg, dataTestId, form, disabled, classNam
     };
 
     return (
-        <div className={classNames('nullstill-valg-knapp', className)}>
-            <button
+        <div className={classNames('nullstill__wrapper', className)}>
+            <Button
+                variant="secondary"
                 type="button"
-                className="knapp knapp--standard knapp--mini"
-                onClick={nullstille}
+                onClick={e => nullstille(e)}
                 disabled={disabled}
                 data-testid={`${dataTestId}_nullstill-knapp`}
+                className="nullstill__knapp"
             >
                 Nullstill
-            </button>
+            </Button>
         </div>
     );
 }
 
-export default NullstillValgKnapp;
+export default NullstillKnapp;

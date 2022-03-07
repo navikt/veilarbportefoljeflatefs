@@ -1,34 +1,32 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
-import './barlabel.less';
-import hiddenIf from '../hidden-if/hidden-if';
-import BarInput from './barinput';
+import './bar.less';
+import Barlabel from './barlabel';
 
 interface BarinputRadioProps {
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
-    checked: boolean;
+    checked?: boolean;
     antall: number;
 }
 
-export function BarInputRadio({filterNavn, handleChange, checked, antall}: BarinputRadioProps) {
+export const BarInputRadio = ({filterNavn, handleChange, antall, checked}: BarinputRadioProps) => {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
     const labelTekst = ferdigfilterListe[filterVerdi];
 
     return (
-        <BarInput
-            type="radio"
-            name="ferdigfilter"
-            className="radioknapp"
-            id={filterNavn}
-            value={filterVerdi}
-            onChange={handleChange}
-            checked={checked}
-            labelTekst={labelTekst}
-            antall={antall}
-            barClassname={filterNavn}
-        />
+        <div className="barinput-radio">
+            <input
+                data-testid={`filter_checkboks-container_${filterNavn}`}
+                type="radio"
+                name="ferdigfilter"
+                id={filterNavn}
+                value={filterVerdi}
+                onChange={handleChange}
+                checked={checked}
+                className="barinput-radio__input"
+            />
+            <Barlabel htmlFor={filterNavn} labelTekst={labelTekst} antall={antall} />
+        </div>
     );
-}
-
-export const HiddenIfBarInputRadio = hiddenIf(BarInputRadio);
+};

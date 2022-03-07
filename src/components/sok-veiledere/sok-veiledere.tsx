@@ -1,11 +1,11 @@
-import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import '../../filtrering/filtrering-filter/filterform/filterform.less';
 import '../../style.less';
 import SokFilter from './sok-filter';
-import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface SokVeiledereProps {
     erValgt: (ident: string) => boolean;
@@ -36,16 +36,13 @@ function SokVeiledere(props: SokVeiledereProps) {
                             />
                         ))}
                     </div>
-                    <div className="blokk-xxs filterform__under-valg">
-                        <button
+                    <div className=" filterform__under-valg">
+                        <Button
                             onClick={props.btnOnClick}
-                            className={classNames('knapp', 'knapp--mini', {
-                                'knapp--hoved': props.harValg
-                            })}
                             data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
                         >
                             {props.harValg ? 'Velg' : 'Lukk'}
-                        </button>
+                        </Button>
                     </div>
                 </div>
             )}

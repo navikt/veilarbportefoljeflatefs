@@ -1,12 +1,10 @@
 @import '~nav-frontend-core/less/core';
 
-.modal {
+.arbeidsliste-modal {
     padding: 0;
     border-radius: 3px;
 
     .modal-innhold {
-        padding: 0 2rem;
-
         .feedbacksummary {
             margin: 0 2rem 1rem 2rem;
             padding: 1.5rem;
@@ -39,11 +37,6 @@
             margin-bottom: 1rem;
         }
 
-        .arbeidslistekommentar {
-            width: 100%;
-            padding-bottom: 0.6rem;
-        }
-
         .typo-undertittel {
             margin-bottom: 0.5rem;
         }
@@ -57,34 +50,23 @@
         }
 
         .datovelger__DayPicker {
-            top: -15rem;
-        }
-
-        .skjemaelement__label {
-            font-weight: 400;
+            top: 0;
         }
 
         .modal-footer {
             display: flex;
-            padding: 0.5rem 0 1.5rem 0;
 
             .fjern--knapp {
                 margin-left: auto;
-
-                svg {
-                    stroke: @navGra60;
-                    margin-right: 0.3rem;
-                    margin-bottom: -0.2rem;
-                }
-
-                span {
-                    margin-left: 0.5rem;
-                }
             }
         }
 
         .arbeidsliste--modal-redigering {
             margin-bottom: 0.625rem;
+        }
+
+        .navds-form-field {
+            margin-top: 10px;
         }
     }
 
@@ -103,18 +85,15 @@
     position: relative;
     background-color: #f4f4f4;
     outline: none;
-    max-width: 50rem;
-    padding: 0;
-    width: 100%;
+    padding: 1rem;
+    overflow: unset !important;
 }
 
 .arbeidsliste--rediger-lenke {
-    margin-left: 1rem;
+    margin-left: 1rem !important;
 }
 
 .fjern-arbeidsliste {
-    padding: 1.5rem 0;
-
     .arbeidsliste-headertekst {
         text-align: center;
     }
@@ -139,14 +118,15 @@
     .knapper {
         display: flex;
         justify-content: center;
-        margin: 0 6rem;
+        margin: 0.5rem 0 0;
+        gap: 1rem;
     }
 }
 
 .dato-kategori-wrapper {
     display: grid;
     grid-template-columns: 60% 40%;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
 
     .datovelger {
         margin: 0 0 auto 0;

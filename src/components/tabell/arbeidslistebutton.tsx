@@ -3,6 +3,8 @@ import {MouseEvent} from 'react';
 import classnames from 'classnames';
 import './tabell.less';
 import '../../enhetsportefolje/brukerliste.less';
+import {Button} from '@navikt/ds-react';
+import {Collapse, Expand} from '@navikt/ds-icons';
 
 interface ArbeidslisteButtonProps {
     className?: string;
@@ -12,22 +14,18 @@ interface ArbeidslisteButtonProps {
     dataTestid: string;
 }
 
-const cls = className => classnames('knapp', 'brukerliste__arbeidslisteknapp', className);
-
 const arbeidslisteButton = ({className, onClick, apen, dataTestid}: ArbeidslisteButtonProps) => {
-    const chevronCls = apen
-        ? 'brukerliste__arbeidslisteknapp--chevron-apen'
-        : 'brukerliste__arbeidslisteknapp--chevron-lukket';
     return (
-        <button
-            className={cls(className)}
+        <Button
+            variant="tertiary"
+            className={classnames('knapp brukerliste__arbeidslisteknapp', className)}
             onClick={onClick}
             aria-expanded={apen}
             data-testid={dataTestid}
             aria-label="Chevron for arbeidliste"
         >
-            <span className={chevronCls} />
-        </button>
+            {apen ? <Collapse className="collapse" /> : <Expand className="expand" />}
+        </Button>
     );
 };
 

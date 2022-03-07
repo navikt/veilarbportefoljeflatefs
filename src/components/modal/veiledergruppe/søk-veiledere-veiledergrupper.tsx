@@ -1,9 +1,9 @@
-import {Checkbox} from 'nav-frontend-skjema';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import '../../../style.less';
 import {AppState} from '../../../reducer';
 import SokFilterVeilederliste from './sok-filter-veilederliste';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface SokVeiledereProps {
     erValgt: (ident: string) => boolean;
