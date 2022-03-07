@@ -27,7 +27,7 @@ function BarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst
                 checked={checked}
                 className="barinput-checkbox__input"
             />
-            <Barlabel labelTekst={egenLabelTekst} antall={antall} />
+            <Barlabel htmlFor={filterNavn} labelTekst={egenLabelTekst} antall={antall} />
         </div>
     );
 }

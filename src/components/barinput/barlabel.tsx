@@ -3,16 +3,17 @@ import './bar.less';
 import {BodyShort, Label} from '@navikt/ds-react';
 
 export interface BarlabelProps {
+    htmlFor: string;
     labelTekst: React.ReactNode;
     antall?: number;
 }
 
-function Barlabel({labelTekst, antall}: BarlabelProps) {
+function Barlabel({htmlFor, labelTekst, antall}: BarlabelProps) {
     return (
         <>
-            <BodyShort size="small" className="barlabel__labeltext">
-                {labelTekst}
-            </BodyShort>
+            <label htmlFor={htmlFor} className="barlabel__labeltext">
+                <BodyShort size="small">{labelTekst} test</BodyShort>
+            </label>
             {(antall || antall === 0) && (
                 <Label className="barlabel__antall" size="small">
                     {antall}

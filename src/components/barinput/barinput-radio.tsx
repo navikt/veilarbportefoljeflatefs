@@ -26,7 +26,7 @@ export const BarInputRadio = ({filterNavn, handleChange, antall, checked}: Barin
                 checked={checked}
                 className="barinput-radio__input"
             />
-            <Barlabel labelTekst={labelTekst} antall={antall} />
+            <Barlabel htmlFor={filterNavn} labelTekst={labelTekst} antall={antall} />
         </div>
     );
 };
