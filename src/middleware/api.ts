@@ -176,3 +176,7 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sorteringOgIder)};
     return fetchToJson(url, config);
 }
+
+export function hentSystemmeldinger() {
+    return fetchToJson('https://poao-sanity.intern.nav.no/systemmeldinger', MED_CREDENTIALS);
+}

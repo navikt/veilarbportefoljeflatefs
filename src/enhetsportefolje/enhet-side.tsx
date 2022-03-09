@@ -34,10 +34,10 @@ import {useWindowWidth} from '../hooks/use-window-width';
 import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
+import {Systemmeldinger} from '../components/systemmeldinger';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -140,7 +140,7 @@ export default function EnhetSide() {
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
                 <ToppMeny />
-                <AlertstripeTekniskeProblemer />
+                <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
                         className={classNames(

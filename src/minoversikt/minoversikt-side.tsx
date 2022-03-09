@@ -38,11 +38,11 @@ import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useParams} from 'react-router';
-import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
+import {Systemmeldinger} from '../components/systemmeldinger';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -114,7 +114,7 @@ export default function MinoversiktSide() {
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
                 <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
-                <AlertstripeTekniskeProblemer />
+                <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
                         className={classNames(

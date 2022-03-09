@@ -29,6 +29,15 @@ module.exports = {
                 path: BUILD_PATH,
                 filename: 'static/js/[name].js',
                 chunkFilename: 'static/js/[name].chunk.js'
+            },
+            module: {
+                rules: [
+                    {
+                        type: 'javascript/auto',
+                        test: /\.mjs$/,
+                        use: []
+                    }
+                ]
             }
         }
     }

@@ -5,6 +5,7 @@ import {hentFeaturesFraUnleash, hentFeatureForVedtaksstotte} from '../ducks/feat
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
+import {hentSystemmeldinger} from '../ducks/systemmeldinger';
 
 function InitialDataProvider(props: PropsWithChildren<{}>) {
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
@@ -14,6 +15,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
     useEffect(() => {
         dispatch(hentFeaturesFraUnleash());
         dispatch(hentInnloggetVeileder());
+        dispatch(hentSystemmeldinger());
     }, [dispatch]);
 
     useEffect(() => {

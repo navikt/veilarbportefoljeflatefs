@@ -12,6 +12,7 @@ import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
+import {hentSystemmeldinger} from './systemmeldinger';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -233,6 +234,8 @@ mock.get(
         })
     )
 );
+
+mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
 
 // websocket
 class MockWebSocket {
