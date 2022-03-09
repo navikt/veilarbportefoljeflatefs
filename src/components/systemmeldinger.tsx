@@ -9,7 +9,12 @@ export const Systemmeldinger = () => {
     return (
         <section>
             {systemmeldinger.map(systemmelding => (
-                <Alert variant={systemmelding.type} className="stor-feil-modal" size="small">
+                <Alert
+                    key={`tittel_${systemmelding.tittel}`}
+                    variant={systemmelding.type}
+                    className="stor-feil-modal"
+                    size="small"
+                >
                     <b>{`${systemmelding.tittel} `}</b>
                     <PortableText content={systemmelding.beskrivelse} />
                 </Alert>
