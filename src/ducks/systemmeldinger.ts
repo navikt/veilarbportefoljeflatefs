@@ -26,7 +26,7 @@ export default function reducer(state: SystemmeldingState = initalStatusState, a
             }
             return {...state, status: STATUS.PENDING};
         case FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return {...state, status: STATUS.ERROR};
         case OK: {
             return {...state, status: STATUS.OK, data: action.data};
         }

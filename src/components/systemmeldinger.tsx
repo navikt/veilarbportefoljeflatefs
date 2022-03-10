@@ -7,7 +7,7 @@ import {useSystemmeldingerSelector} from '../hooks/redux/use-systemmeldinger';
 export const Systemmeldinger = () => {
     const systemmeldinger = useSystemmeldingerSelector();
     return (
-        <section>
+        <section className="systemmeldinger">
             {systemmeldinger.map(systemmelding => (
                 <Alert
                     key={`tittel_${systemmelding.tittel}`}
