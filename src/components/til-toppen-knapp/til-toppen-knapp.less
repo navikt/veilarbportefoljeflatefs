@@ -4,12 +4,12 @@
     .til-toppen-knapp {
         right: 2rem;
         bottom: 2rem;
-        transition: opacity 0.5s ease-in;
         opacity: 1;
         background-color: white;
+        transition: all 0.75s ease;
+        transform: translateY(0);
 
         &.knapp {
-            padding: 0.5rem;
             position: fixed;
 
             &:hover {
@@ -19,6 +19,7 @@
 
         &--skjul {
             opacity: 0;
+            transform: translateY(20px);
 
             &:hover {
                 cursor: unset;
