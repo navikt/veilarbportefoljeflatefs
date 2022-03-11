@@ -18,7 +18,6 @@ class FetchError extends Error {
 }
 
 export function sjekkStatuskode(response) {
-    console.log(response);
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
