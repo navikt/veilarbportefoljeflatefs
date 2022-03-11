@@ -2,6 +2,7 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
+import {erProd} from '../utils/utils';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -178,9 +179,5 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
-    try {
-        return fetchToJson('https://poao-sanity.intern.nav.no/systemmeldinger', {...MED_CREDENTIALS, mode: 'no-cors'});
-    } catch (error) {
-        console.log(error);
-    }
+    return fetchToJson(`https://poao-sanity${erProd() ? '' : '.dev'}.intern.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
