@@ -235,7 +235,7 @@ mock.get(
     )
 );
 
-mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
+mock.get('https://poao-sanity.dev.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
 
 // websocket
 class MockWebSocket {

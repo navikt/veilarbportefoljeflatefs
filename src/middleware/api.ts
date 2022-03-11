@@ -181,8 +181,7 @@ export function hentSystemmeldinger() {
     try {
         return fetchToJson('https://poao-sanity.dev.intern.nav.no/systemmeldinger', {
             ...MED_CREDENTIALS,
-            method: 'GET',
-            mode: 'no-cors'
+            method: 'GET'
         });
     } catch (error) {
         console.log(error);
