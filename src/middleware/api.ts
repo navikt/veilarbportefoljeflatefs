@@ -179,7 +179,11 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 
 export function hentSystemmeldinger() {
     try {
-        return fetchToJson('https://poao-sanity.intern.nav.no/systemmeldinger', {...MED_CREDENTIALS, mode: 'no-cors'});
+        return fetchToJson('https://poao-sanity.dev.intern.nav.no/systemmeldinger', {
+            ...MED_CREDENTIALS,
+            method: 'GET',
+            mode: 'no-cors'
+        });
     } catch (error) {
         console.log(error);
     }
