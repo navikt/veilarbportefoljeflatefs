@@ -17,7 +17,7 @@ export const TilToppenKnapp = () => {
 
     const onClick = e => {
         if (knappSkalVises) {
-            window.scrollTo({top: 0});
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
         if (knappRef?.current) {
             knappRef.current.blur();
