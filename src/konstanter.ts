@@ -9,6 +9,7 @@ export const SE_FLERE_PAGINERING_STORRELSE = 200;
 
 export const SPOR_OM_TILBAKEMELDING = 'veilarbportefolje.spor_om_tilbakemelding';
 export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
+export const IKKE_AVTALT = 'veilarbportfolje.ikke_avtalte_aktiviteter';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
@@ -22,5 +23,6 @@ export const PORTEFOLJE_FEATURES = [
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    IKKE_AVTALT
 ];

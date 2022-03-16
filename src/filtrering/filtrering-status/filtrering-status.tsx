@@ -5,7 +5,9 @@ import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    ALLE_MOTER_IDAG,
     ER_SYKMELDT_MED_ARBEIDSGIVER,
+    I_AKTIVITET,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
@@ -26,7 +28,7 @@ import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../../konstanter';
+import {IKKE_AVTALT, VEDTAKSTOTTE} from '../../konstanter';
 import {Label} from '@navikt/ds-react';
 import './filtrering-status.less';
 
@@ -70,6 +72,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
 
     return (
         <div className="filtrering-oversikt panel">
@@ -126,12 +129,22 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                 />
-                <BarInputRadio
-                    filterNavn="avtaltMoteMedNav"
-                    handleChange={handleRadioButtonChange}
-                    antall={statusTall.moterMedNAVIdag}
-                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
-                />
+                {erIkkeAvtalteAktiviteterFeatureTogglePa && (
+                    <BarInputRadio
+                        filterNavn="alleMoterMedNav"
+                        handleChange={handleRadioButtonChange}
+                        antall={statusTall.alleMoterMedNAVIdag}
+                        checked={ferdigfilterListe.includes(ALLE_MOTER_IDAG)}
+                    />
+                )}
+                {!erIkkeAvtalteAktiviteterFeatureTogglePa && (
+                    <BarInputRadio
+                        filterNavn="avtaltMoteMedNav"
+                        handleChange={handleRadioButtonChange}
+                        antall={statusTall.moterMedNAVIdag}
+                        checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                    />
+                )}
             </div>
             <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
@@ -152,6 +165,14 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                 />
+                {erVedtaksStotteFeatureTogglePa && (
+                    <BarInputRadio
+                        filterNavn="iAktivitet"
+                        antall={statusTall.iAktivitet}
+                        handleChange={handleRadioButtonChange}
+                        checked={ferdigfilterListe.includes(I_AKTIVITET)}
+                    />
+                )}
             </div>
             <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
