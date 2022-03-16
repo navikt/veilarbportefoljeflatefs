@@ -71,7 +71,7 @@ export const ferdigfilterListe = {
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
-    IAKTIVITET: 'I aktivitet',
+    I_AKTIVITET: 'I aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 };
