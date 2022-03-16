@@ -165,7 +165,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                 />
-                {erVedtaksStotteFeatureTogglePa && (
+                {erIkkeAvtalteAktiviteterFeatureTogglePa && (
                     <BarInputRadio
                         filterNavn="iAktivitet"
                         antall={statusTall.iAktivitet}
