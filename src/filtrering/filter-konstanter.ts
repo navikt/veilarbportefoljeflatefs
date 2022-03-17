@@ -10,9 +10,11 @@ export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
 export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
+export const I_AKTIVITET = 'I_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
+export const ALLE_MOTER_IDAG = 'ALLE_MOTER_IDAG';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
 export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
@@ -29,9 +31,11 @@ export const mapFilternavnTilFilterValue = {
     venterPaSvarFraNAV: VENTER_PA_SVAR_FRA_NAV,
     venterPaSvarFraBruker: VENTER_PA_SVAR_FRA_BRUKER,
     avtaltMoteMedNav: MOTER_IDAG,
+    alleMoterMedNav: ALLE_MOTER_IDAG,
     utlopteAktiviteter: UTLOPTE_AKTIVITETER,
     ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
+    iAktivitet: I_AKTIVITET,
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
     minArbeidslisteBla: KategoriModell.BLA,
@@ -63,9 +67,11 @@ export const ferdigfilterListe = {
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
     MOTER_IDAG: 'Møte med NAV idag',
+    ALLE_MOTER_IDAG: 'Møte med NAV idag',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
+    I_AKTIVITET: 'I aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 };
