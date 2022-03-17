@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler} from 'react';
-import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
+import {mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './bar.less';
-import Barlabel from './barlabel';
+import {Label} from '@navikt/ds-react';
 
 interface BarInputCheckboxProps {
     filterNavn: string;
@@ -11,9 +11,8 @@ interface BarInputCheckboxProps {
     labelTekst?: React.ReactNode;
 }
 
-function BarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst}: BarInputCheckboxProps) {
+function BarInputCheckbox({filterNavn, handleChange, checked, antall}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
-    const egenLabelTekst = labelTekst ? labelTekst : ferdigfilterListe[filterVerdi];
 
     return (
         <div className="barinput-checkbox">
@@ -27,7 +26,11 @@ function BarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst
                 checked={checked}
                 className="barinput-checkbox__input"
             />
-            <Barlabel htmlFor={filterNavn} labelTekst={egenLabelTekst} antall={antall} />
+            {(antall || antall === 0) && (
+                <Label className="barlabel__antall" size="small">
+                    {antall}
+                </Label>
+            )}
         </div>
     );
 }
