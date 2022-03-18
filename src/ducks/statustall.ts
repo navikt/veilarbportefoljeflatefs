@@ -17,6 +17,7 @@ export interface Statustall {
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
+    iAktivitet: number;
     minArbeidsliste: number;
     minArbeidslisteBla: number;
     minArbeidslisteLilla: number;
@@ -24,6 +25,7 @@ export interface Statustall {
     minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
     moterMedNAVIdag: number;
+    alleMoterMedNAVIdag: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
@@ -45,6 +47,7 @@ export const initalStatusState: StatustallState = {
         utlopteAktiviteter: 0,
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,
+        iAktivitet: 0,
         minArbeidsliste: 0,
         minArbeidslisteBla: 0,
         minArbeidslisteLilla: 0,
@@ -53,6 +56,7 @@ export const initalStatusState: StatustallState = {
         erSykmeldtMedArbeidsgiver: 0,
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
+        alleMoterMedNAVIdag: 0,
         trengerVurdering: 0,
         underVurdering: 0
     }
