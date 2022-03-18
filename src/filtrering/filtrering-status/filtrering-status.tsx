@@ -81,6 +81,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         antall={statusTall.nyeBrukereForVeileder}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
+                        labelTekst={'Nye brukere'}
                     />
                 ) : (
                     <BarInputCheckbox
@@ -88,6 +89,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         antall={statusTall.ufordelteBrukere}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
+                        labelTekst={'Ufordelte brukere'}
                     />
                 )}
             </div>
