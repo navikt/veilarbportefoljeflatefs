@@ -11,21 +11,24 @@ interface BarInputCheckboxProps {
     labelTekst?: React.ReactNode;
 }
 
-function BarInputCheckbox({filterNavn, handleChange, checked, antall}: BarInputCheckboxProps) {
+function BarInputCheckbox({filterNavn, handleChange, checked, antall, labelTekst}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
 
     return (
         <div className="barinput-checkbox">
-            <input
-                data-testid={`filter_checkboks-container_${filterNavn}`}
-                type="checkbox"
-                name="ferdigfilter"
-                id={filterNavn}
-                value={filterVerdi}
-                onChange={handleChange}
-                checked={checked}
-                className="barinput-checkbox__input"
-            />
+            <label className="barlabel__labeltext">
+                <input
+                    data-testid={`filter_checkboks-container_${filterNavn}`}
+                    type="checkbox"
+                    name="ferdigfilter"
+                    id={filterNavn}
+                    value={filterVerdi}
+                    onChange={handleChange}
+                    checked={checked}
+                    className="barinput-checkbox__input"
+                />
+                {labelTekst}
+            </label>
             {(antall || antall === 0) && (
                 <Label className="barlabel__antall" size="small">
                     {antall}
