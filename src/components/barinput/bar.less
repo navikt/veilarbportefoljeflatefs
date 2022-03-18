@@ -5,15 +5,11 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+
     &__input {
         margin-right: 1rem;
         align-self: center;
         transform: scale(1.5);
-    }
-
-    .barlabel__labeltext {
-        display: inline-flex;
-        align-items: center;
     }
 
     .arbeidslisteikon__svg {
@@ -30,6 +26,11 @@
         width: 100%;
         padding-right: 0.5rem;
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        &:hover {
+            color: @navBla;
+        }
     }
 
     &__barwrapper {
