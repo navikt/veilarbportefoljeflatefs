@@ -47,7 +47,6 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
     }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
 
     useEffect(() => {
-        console.log(erIkkeAvtalteAktiviteterFeatureTogglePa);
         oppdaterAlternativer(dispatch, filtervalg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa);
     }, [dispatch, filtervalg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa]);
 }
