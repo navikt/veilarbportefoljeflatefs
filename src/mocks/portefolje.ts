@@ -221,6 +221,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
         moteSluttTid: grunndata.moteSluttTid,
+        moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
         vedtakStatus: vedtakUtkast.vedtakStatus,
         vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
         ansvarligVeilederForVedtak: vedtakUtkast.ansvarligVeilederForVedtak,

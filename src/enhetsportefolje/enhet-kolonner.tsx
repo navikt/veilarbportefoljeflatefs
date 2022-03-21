@@ -33,6 +33,8 @@ import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {IKKE_AVTALT} from '../konstanter';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -72,6 +74,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
+
+    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -178,6 +183,17 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 dato={varighet}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
+            {erIkkeAvtalteAktiviteterFeatureTogglePa && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    tekst={bruker.moteErAvtaltMedNAV ? 'Avtalt' : 'Ikke avtalt'}
+                    skalVises={
+                        !!ferdigfilterListe?.includes(MOTER_IDAG) &&
+                        valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT) &&
+                        bruker.moteStartTid != null
+                    }
+                />
+            )}
             <TekstKolonne
                 tekst={bruker.vedtakStatus}
                 skalVises={
