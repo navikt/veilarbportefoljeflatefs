@@ -15,7 +15,7 @@ const toggles = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: true,
     [TVUNGEN_STEPPER]: false,
-    [IKKE_AVTALT]: true
+    [IKKE_AVTALT]: false
 };
 
 export default toggles;
