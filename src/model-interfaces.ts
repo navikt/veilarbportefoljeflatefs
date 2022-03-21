@@ -130,7 +130,7 @@ export interface BrukerModell {
     erSykmeldtMedArbeidsgiver: boolean;
     moteStartTid: string;
     moteSluttTid: string;
-    moteErAvtaltMedNAV: boolean;
+    moteErAvtaltMedNAV?: boolean;
     vedtakStatus?: string;
     vedtakStatusEndret?: string;
     ansvarligVeilederForVedtak?: string;

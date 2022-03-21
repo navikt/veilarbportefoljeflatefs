@@ -250,10 +250,10 @@ function EnhetListehode({
                             !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                         }
                         className="col col-xs-2"
-                        title="Møte er avtalt med NAV"
+                        title="Møtestatus"
                         headerId="avtalt-mote"
                     >
-                        Avtalt med NAV
+                        Møtestatus
                     </Header>
                 )}
                 <SorteringHeader

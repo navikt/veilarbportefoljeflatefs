@@ -21,32 +21,17 @@ const ytelser = [
 
 let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
-
-function partall() {
-    return rnd(0, 4) * 2;
-}
-
-function oddetall() {
-    return rnd(1, 5) * 2 - 1;
-}
-
+let i = 123456;
 function lagGrunndata() {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     const ar = rnd(0, 99);
     const erDoed = Math.random() < (100 - ar * 20) / 100;
 
-    const arhundre = rnd(0, 99)
-        .toString()
-        .padStart(2, '0');
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const kjonnsiffer = kjonn === 'K' ? partall() : oddetall();
-    const individsifre = `${arhundre}${kjonnsiffer}`;
     const venterPaSvarFraBruker = randomDate({past: true});
     const venterPaSvarFraNAV = randomDate({past: true});
     const nesteUtlopteAktivitet = randomDate({past: false});
-
-    const kontrollsifre = `${rnd(0, 9)}${rnd(0, 9)}`;
 
     const brukerAktiviteter = Object.keys(aktiviteter)
         .map((x: string) => x.toLowerCase())
@@ -55,16 +40,14 @@ function lagGrunndata() {
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
 
     return {
-        fnr: `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar
-            .toString()
-            .padStart(2, '0')}${individsifre}${kontrollsifre}`,
+        fnr: String(i++).padStart(11, '0'),
         fodselsdato: {
             dayOfMonth: dag,
             monthValue: mnd,
             year: 1900 + ar
         },
         fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
-        etternavn: faker.name.lastName(kjonn === 'K' ? 1 : 0),
+        etternavn: 'Testson',
         kjonn,
         erDoed,
         nesteUtlopteAktivitet,

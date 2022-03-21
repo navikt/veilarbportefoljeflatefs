@@ -165,7 +165,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             {erIkkeAvtalteAktiviteterFeatureTogglePa && (
                 <TekstKolonne
                     className="col col-xs-2"
-                    tekst={bruker.moteErAvtaltMedNAV ? 'Avtalt' : 'Ikke avtalt'}
+                    tekst={bruker.moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) &&
                         valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT) &&
