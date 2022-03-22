@@ -34,6 +34,7 @@ import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {IKKE_AVTALT} from '../konstanter';
+import moment from 'moment';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -44,6 +45,16 @@ interface MinOversiktKolonnerProps {
 }
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
+    const brukIkkeAvtalteAktiviteter = useFeatureSelector()(IKKE_AVTALT);
+
+    const moteStartTid = brukIkkeAvtalteAktiviteter
+        ? klokkeslettTilMinutter(bruker.alleMoterStartTid)
+        : klokkeslettTilMinutter(bruker.moteStartTid);
+    const varighet = brukIkkeAvtalteAktiviteter
+        ? minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid)
+        : minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
+    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
+
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -52,8 +63,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
-    const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
-    const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
@@ -72,8 +81,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
-
-    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
 
     return (
         <div className={className}>
@@ -162,14 +169,12 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={varighet}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
-            {erIkkeAvtalteAktiviteterFeatureTogglePa && (
+            {brukIkkeAvtalteAktiviteter && (
                 <TekstKolonne
                     className="col col-xs-2"
-                    tekst={bruker.moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
+                    tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
                     skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) &&
-                        valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT) &&
-                        bruker.moteStartTid != null
+                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                     }
                 />
             )}

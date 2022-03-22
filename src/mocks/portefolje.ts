@@ -38,6 +38,7 @@ function lagGrunndata() {
         .reduce((acc, curr) => ({...acc, [curr]: Math.random() > 0.1 ? null : randomDate({past: false})}), {});
 
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
+    const alleMoterStartTid = Math.random() > 0.5 ? new Date() : null;
 
     return {
         fnr: String(i++).padStart(11, '0'),
@@ -55,7 +56,9 @@ function lagGrunndata() {
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
-        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + 15 * 60 * 1000)
+        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + 15 * 60 * 1000),
+        alleMoterStartTid,
+        alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + 45 * 60 * 1000)
     };
 }
 
@@ -204,6 +207,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
         moteSluttTid: grunndata.moteSluttTid,
+        alleMoterStartTid: grunndata.alleMoterStartTid,
+        alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
         vedtakStatus: vedtakUtkast.vedtakStatus,
         vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,

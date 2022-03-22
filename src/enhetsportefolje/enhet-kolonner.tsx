@@ -35,6 +35,7 @@ import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {IKKE_AVTALT} from '../konstanter';
+import moment from 'moment';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -46,6 +47,17 @@ interface EnhetKolonnerProps {
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+    const brukIkkeAvtalteAktiviteter = useFeatureSelector()(IKKE_AVTALT);
+
+    const moteStartTid = brukIkkeAvtalteAktiviteter
+        ? klokkeslettTilMinutter(bruker.alleMoterStartTid)
+        : klokkeslettTilMinutter(bruker.moteStartTid);
+    const varighet = brukIkkeAvtalteAktiviteter
+        ? minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid)
+        : minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
+    console.log(moteStartTid);
+    console.log(bruker.alleMoterStartTid);
+    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -57,8 +69,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
-    const moteStartTid = klokkeslettTilMinutter(bruker.moteStartTid);
-    const varighet = minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const iAvtaltAktivitet: boolean =
@@ -74,8 +84,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
-
-    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
 
     return (
         <div className={className}>
@@ -183,14 +191,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 dato={varighet}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
-            {erIkkeAvtalteAktiviteterFeatureTogglePa && (
+            {brukIkkeAvtalteAktiviteter && (
                 <TekstKolonne
                     className="col col-xs-2"
-                    tekst={bruker.moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
+                    tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
                     skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) &&
-                        valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT) &&
-                        bruker.moteStartTid != null
+                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                     }
                 />
             )}
