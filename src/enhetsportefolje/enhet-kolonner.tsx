@@ -55,8 +55,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const varighet = brukIkkeAvtalteAktiviteter
         ? minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid)
         : minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
-    console.log(moteStartTid);
-    console.log(bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
