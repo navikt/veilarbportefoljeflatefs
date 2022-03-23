@@ -247,16 +247,19 @@ function MinOversiktListeHode({
                     Varighet møte
                 </Header>
                 {erIkkeAvtalteAktiviteterFeatureTogglePa && (
-                    <Header
+                    <SorteringHeader
+                        sortering={Sorteringsfelt.MOTESTATUS}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                         skalVises={
                             !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                         }
                         className="col col-xs-2"
                         title="Møtestatus"
+                        tekst="Møtestatus"
                         headerId="avtalt-mote"
-                    >
-                        Møtestatus
-                    </Header>
+                    />
                 )}
                 <SorteringHeader
                     sortering={Sorteringsfelt.VEDTAKSTATUS}
