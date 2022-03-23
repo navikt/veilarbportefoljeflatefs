@@ -146,7 +146,7 @@ mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, js
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 mock.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', jsonResponse(hentArbeidsliste()));
 
-mock.get('/veilarbportefolje/api/moteplan/:veileder', jsonResponse(hentMockPlan()));
+mock.get('/veilarbportefolje/api/veileder/:veileder/moteplan', jsonResponse(hentMockPlan()));
 
 // situasjon-api
 function tildel(body: any) {

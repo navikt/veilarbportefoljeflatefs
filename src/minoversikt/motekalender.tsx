@@ -8,8 +8,14 @@ import {hentMoteplan} from '../middleware/api';
 
 interface MoteData {
     dato: string;
-    deltaker: string;
+    deltaker: Deltaker;
     avtaltMedNav: boolean;
+}
+
+interface Deltaker {
+    fornavn: string;
+    etternavn: string;
+    fnr: boolean;
 }
 
 interface MotekalenderProps {
@@ -62,7 +68,7 @@ export function Motekalender({veileder}: MotekalenderProps) {
 
 function genererKalender(dato: Date, moter: MoteData[] | null) {
     return (
-        <div>
+        <div key={dato.getDate()}>
             <h3 className="motekalender_tittel">
                 {dagFraDato(dato)}, {dato.getDate()}/{dato.getMonth()}
             </h3>
@@ -74,29 +80,28 @@ function genererKalender(dato: Date, moter: MoteData[] | null) {
                         <Table.HeaderCell>Møtestatus</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-
-                {moter == null && (
-                    <Table.Body>
+                <Table.Body>
+                    {moter == null && (
                         <Table.Row>
                             <Table.DataCell>
                                 <Loader />
                             </Table.DataCell>
                         </Table.Row>
-                    </Table.Body>
-                )}
-                {moter != null && <Table.Body> {moter.map(mote => genererKollonne(dato, mote))} </Table.Body>}
+                    )}
+                    {moter != null && moter.map((mote, i) => genererKollonne(dato, mote, i))}
+                </Table.Body>
             </Table>
         </div>
     );
 }
 
-function genererKollonne(dato: Date, mote: MoteData) {
+function genererKollonne(dato: Date, mote: MoteData, key: number) {
     const moteDato = new Date(mote.dato);
     if (!moment(dato).isSame(moteDato, 'day')) {
         return;
     }
     return (
-        <Table.Row>
+        <Table.Row key={key}>
             <Table.DataCell>
                 {moteDato
                     .getHours()
@@ -108,8 +113,8 @@ function genererKollonne(dato: Date, mote: MoteData) {
                     .toString()
                     .padStart(2, '0')}
             </Table.DataCell>
-            <Table.DataCell>{mote.deltaker}</Table.DataCell>
-            <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ''}</Table.DataCell>
+            <Table.DataCell>{mote.deltaker.etternavn}</Table.DataCell>
+            <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}</Table.DataCell>
         </Table.Row>
     );
 }

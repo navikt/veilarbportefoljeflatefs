@@ -44,6 +44,8 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import Motekalender from './motekalender';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {IKKE_AVTALT} from '../konstanter';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -58,6 +60,7 @@ export default function MinoversiktSide() {
         sorteringsfelt,
         enhettiltak
     } = usePortefoljeSelector(oversiktType);
+    const erIkkeAvtalteAktiviteterPa = useFeatureSelector()(IKKE_AVTALT);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
@@ -133,7 +136,7 @@ export default function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            <Motekalender veileder={gjeldendeVeileder} />
+                            {erIkkeAvtalteAktiviteterPa && <Motekalender veileder={gjeldendeVeileder} />}
                             <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer

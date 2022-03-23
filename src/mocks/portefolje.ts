@@ -242,8 +242,8 @@ export function hentMockPlan() {
     const omToDager = new Date();
     omToDager.setDate(omToDager.getDate() + 2);
     return [
-        {dato: new Date(), deltaker: 'john', avtaltMedNav: true},
-        {dato: omToDager, deltaker: 'Mr. X', avtaltMedNav: false}
+        {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
+        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'Mr.', fnr: '123'}, avtaltMedNav: false}
     ];
 }
 
