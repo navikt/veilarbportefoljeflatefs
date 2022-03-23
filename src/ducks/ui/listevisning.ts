@@ -27,6 +27,7 @@ export enum Kolonne {
     FORRIGE_START_DATO_AKTIVITET = 'forrige_aktivitet_start',
     MOTER_IDAG = 'moterMedNavIdag',
     MOTER_VARIGHET = 'moter_varighet',
+    MOTE_ER_AVTALT = 'mote_avtalt',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
@@ -124,9 +125,10 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    oversiktType: OversiktType
+    oversiktType: OversiktType,
+    erIkkeAvtalteAktiviteterFeatureTogglePa: boolean
 ) => {
-    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa);
 
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,

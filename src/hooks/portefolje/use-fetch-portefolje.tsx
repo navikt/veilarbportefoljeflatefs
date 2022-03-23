@@ -7,11 +7,14 @@ import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
 import {STATUS} from '../../ducks/utils';
+import {useFeatureSelector} from '../redux/use-feature-selector';
+import {IKKE_AVTALT} from '../../konstanter';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt, portefolje} = usePortefoljeSelector(oversiktType);
 
     useEffect(() => {
@@ -44,6 +47,6 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
     }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
 
     useEffect(() => {
-        oppdaterAlternativer(dispatch, filtervalg, oversiktType);
-    }, [dispatch, filtervalg, oversiktType]);
+        oppdaterAlternativer(dispatch, filtervalg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa);
+    }, [dispatch, filtervalg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa]);
 }
