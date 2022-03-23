@@ -238,5 +238,13 @@ const randomDate = ({past}) => {
 export function hentArbeidsliste() {
     return arbeidsliste;
 }
+export function hentMockPlan() {
+    const omToDager = new Date();
+    omToDager.setDate(omToDager.getDate() + 2);
+    return [
+        {dato: new Date(), deltaker: 'john', avtaltMedNav: true},
+        {dato: omToDager, deltaker: 'Mr. X', avtaltMedNav: false}
+    ];
+}
 
 export default new Array(123).fill(0).map(() => lagBruker());

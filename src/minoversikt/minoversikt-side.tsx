@@ -43,6 +43,7 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
+import Motekalender from './motekalender';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -132,6 +133,7 @@ export default function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                            <Motekalender veileder={gjeldendeVeileder} />
                             <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer
