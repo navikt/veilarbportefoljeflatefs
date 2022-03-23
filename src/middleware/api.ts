@@ -177,8 +177,8 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
     return fetchToJson(url, config);
 }
 
-export function hentMoteplan(veileder) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/`;
+export function hentMoteplan(veileder: string, enhet: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
     const config = {...MED_CREDENTIALS, method: 'get'};
     return fetchToJson(url, config);
 }

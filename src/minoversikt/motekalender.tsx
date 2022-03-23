@@ -20,9 +20,10 @@ interface Deltaker {
 
 interface MotekalenderProps {
     veileder: string;
+    enhet: string | null;
 }
 
-export function Motekalender({veileder}: MotekalenderProps) {
+export function Motekalender({veileder, enhet}: MotekalenderProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const buttonRef = useRef(null);
@@ -37,6 +38,9 @@ export function Motekalender({veileder}: MotekalenderProps) {
         dager = dager.slice(0, 3);
     }
 
+    if (enhet === null) {
+        return <></>;
+    }
     return (
         <div>
             <Button
@@ -44,7 +48,7 @@ export function Motekalender({veileder}: MotekalenderProps) {
                 variant="secondary"
                 onClick={() => {
                     if (!erOpen) {
-                        retriveMoteData(veileder, setMoter);
+                        retriveMoteData(enhet, veileder, setMoter);
                     } else {
                         setMoter(null);
                     }
@@ -53,14 +57,10 @@ export function Motekalender({veileder}: MotekalenderProps) {
             >
                 Møtekalender
             </Button>
-            <Popover
-                className="motekalender_popover"
-                open={erOpen}
-                onClose={() => setErOpen(false)}
-                anchorEl={buttonRef.current}
-                placement="auto"
-            >
-                {dager.map(dag => genererKalender(dag, moter))}
+            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
+                <Popover.Content className="motekalender_popover">
+                    {dager.map(dag => genererKalender(dag, moter))}
+                </Popover.Content>
             </Popover>
         </div>
     );
@@ -81,7 +81,7 @@ function genererKalender(dato: Date, moter: MoteData[] | null) {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {moter == null && (
+                    {moter === null && (
                         <Table.Row>
                             <Table.DataCell>
                                 <Loader />
@@ -141,8 +141,8 @@ function dagFraDato(dato: Date): string {
     }
 }
 
-function retriveMoteData(veileder: string, setMoter: (value: MoteData[]) => void) {
-    hentMoteplan(veileder)
+function retriveMoteData(enhet: string, veileder: string, setMoter: (value: MoteData[]) => void) {
+    hentMoteplan(veileder, enhet)
         .then(data => setMoter(data))
         .catch(error => console.error('kunne ikke hente moteplan', error));
 }
