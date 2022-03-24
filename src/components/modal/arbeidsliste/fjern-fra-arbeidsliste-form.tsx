@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => ({
         }));
         slettArbeidsliste(arbeidsliste)(dispatch)
             .then(res => oppdaterState(res, lukkModal, arbeidsliste, dispatch))
-            .then(() => hentStatusTall(valgtEnhet, innloggetVeileder));
+            .then(() => hentStatusTall(valgtEnhet, innloggetVeileder)(dispatch));
     }
 });
 
