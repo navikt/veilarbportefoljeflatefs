@@ -3,7 +3,6 @@ import {useRef, useState} from 'react';
 import {Button, Link, Loader, Popover, Table} from '@navikt/ds-react';
 import moment from 'moment';
 import './motekalender.less';
-import {useWindowWidth} from '../hooks/use-window-width';
 import {hentMoteplan} from '../middleware/api';
 import {setFraBrukerIUrl} from '../utils/url-utils';
 import classnames from 'classnames';
@@ -25,13 +24,14 @@ interface MotekalenderProps {
     enhet: string | null;
 }
 
+const MAX_ANTALL_DAGER = 5;
+
 export function Motekalender({veileder, enhet}: MotekalenderProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const buttonRef = useRef(null);
-    const windowWidth = useWindowWidth();
 
-    const dager: Date[] = hentMoteplanDager(moter, windowWidth);
+    const dager: Date[] = hentMoteplanDager(moter);
 
     if (enhet === null) {
         return <></>;
@@ -125,40 +125,14 @@ function genererKollonne(dato: Date, mote: MoteData, enhet: string, key: number)
     );
 }
 
-function hentMoteplanDager(moter: MoteData[] | null, width: number): Date[] {
-    let dager: Date[];
-    if (width < 950) {
-        dager = [new Date(), new Date()];
-    } else if (width < 1300) {
-        dager = [new Date(), new Date(), new Date()];
-    } else {
-        dager = [new Date(), new Date(), new Date(), new Date()];
+function hentMoteplanDager(moter: MoteData[] | null): Date[] {
+    if (moter === null) {
+        return [new Date()];
     }
-
-    const skalViseHelg =
-        moter !== null && moter.map(x => new Date(x.dato).getDay()).filter(day => erHelg(day)).length > 0;
-    let helgoffset = 0;
-
-    dager.forEach((moteplanDag, i) => {
-        const visningsdag = new Date();
-        visningsdag.setDate(moteplanDag.getDate() + helgoffset + i);
-        if (!skalViseHelg && erHelg(visningsdag.getDay())) {
-            helgoffset = erSondag(visningsdag.getDay()) ? 1 : 2;
-            visningsdag.setDate(visningsdag.getDate() + helgoffset);
-        }
-
-        moteplanDag.setDate(visningsdag.getDate());
-    });
-
-    return dager;
-}
-
-function erSondag(dag: number): boolean {
-    return dag === 0;
-}
-
-function erHelg(dag: number): boolean {
-    return dag === 6 || dag === 0;
+    return [...new Set(moter.map(x => new Date(x.dato).setHours(0, 0, 0, 0)))]
+        .map(x => new Date(x))
+        .sort()
+        .slice(0, MAX_ANTALL_DAGER);
 }
 
 function dagFraDato(dato: Date): string {
