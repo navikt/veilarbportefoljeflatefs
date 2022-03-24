@@ -243,7 +243,22 @@ export function hentMockPlan() {
     omToDager.setDate(omToDager.getDate() + 2);
     return [
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
-        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'Mr.', fnr: '123'}, avtaltMedNav: false}
+        {
+            dato: '2022-03-23T12:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {
+            dato: '2022-03-23T15:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'testson', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: '2022-03-24T15:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'tester', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
     ];
 }
 

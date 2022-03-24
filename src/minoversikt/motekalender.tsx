@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {useRef, useState} from 'react';
-import {Button, Loader, Popover, Table} from '@navikt/ds-react';
+import {Button, Link, Loader, Popover, Table} from '@navikt/ds-react';
 import moment from 'moment';
 import './motekalender.less';
 import {useWindowWidth} from '../hooks/use-window-width';
 import {hentMoteplan} from '../middleware/api';
+import {setFraBrukerIUrl} from '../utils/url-utils';
+import classnames from 'classnames';
 
 interface MoteData {
     dato: string;
@@ -15,7 +17,7 @@ interface MoteData {
 interface Deltaker {
     fornavn: string;
     etternavn: string;
-    fnr: boolean;
+    fnr: string;
 }
 
 interface MotekalenderProps {
@@ -59,14 +61,14 @@ export function Motekalender({veileder, enhet}: MotekalenderProps) {
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
                 <Popover.Content className="motekalender_popover">
-                    {dager.map(dag => genererKalender(dag, moter))}
+                    {dager.map(dag => genererKalender(dag, moter, enhet))}
                 </Popover.Content>
             </Popover>
         </div>
     );
 }
 
-function genererKalender(dato: Date, moter: MoteData[] | null) {
+function genererKalender(dato: Date, moter: MoteData[] | null, enhet: string) {
     return (
         <div key={dato.getDate()}>
             <h3 className="motekalender_tittel">
@@ -88,14 +90,14 @@ function genererKalender(dato: Date, moter: MoteData[] | null) {
                             </Table.DataCell>
                         </Table.Row>
                     )}
-                    {moter != null && moter.map((mote, i) => genererKollonne(dato, mote, i))}
+                    {moter != null && moter.map((mote, i) => genererKollonne(dato, mote, enhet, i))}
                 </Table.Body>
             </Table>
         </div>
     );
 }
 
-function genererKollonne(dato: Date, mote: MoteData, key: number) {
+function genererKollonne(dato: Date, mote: MoteData, enhet: string, key: number) {
     const moteDato = new Date(mote.dato);
     if (!moment(dato).isSame(moteDato, 'day')) {
         return;
@@ -113,7 +115,18 @@ function genererKollonne(dato: Date, mote: MoteData, key: number) {
                     .toString()
                     .padStart(2, '0')}
             </Table.DataCell>
-            <Table.DataCell>{mote.deltaker.etternavn}</Table.DataCell>
+
+            <Table.DataCell>
+                <Link
+                    onClick={() => {
+                        setFraBrukerIUrl(mote.deltaker.fnr);
+                    }}
+                    href={`${window.location.origin}/veilarbpersonflatefs/${mote.deltaker.fnr}/?enhet=${enhet}`}
+                    className={classnames('lenke_siste-endring')}
+                >
+                    {mote.deltaker.etternavn}
+                </Link>
+            </Table.DataCell>
             <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}</Table.DataCell>
         </Table.Row>
     );
