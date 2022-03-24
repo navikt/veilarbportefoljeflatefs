@@ -138,7 +138,9 @@ export default function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            {erIkkeAvtalteAktiviteterPa && <Motekalender veileder={gjeldendeVeileder} enhet={enhet} />}
+                            {erIkkeAvtalteAktiviteterPa && enhet && (
+                                <Motekalender veileder={gjeldendeVeileder} enhet={enhet} />
+                            )}
                             <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer

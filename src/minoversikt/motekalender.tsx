@@ -21,7 +21,7 @@ interface Deltaker {
 
 interface MotekalenderProps {
     veileder: string;
-    enhet: string | null;
+    enhet: string;
 }
 
 const MAX_ANTALL_DAGER = 5;
@@ -29,41 +29,39 @@ const MAX_ANTALL_DAGER = 5;
 export function Motekalender({veileder, enhet}: MotekalenderProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
+    const [fetchError, setFetchError] = useState(false);
     const buttonRef = useRef(null);
 
     const dager: Date[] = hentMoteplanDager(moter);
 
-    if (enhet === null) {
-        return <></>;
-    }
+    const fetchMoteData = () => {
+        if (!erOpen) {
+            hentMoteplan(veileder, enhet)
+                .then(data => setMoter(data))
+                .catch(error => setFetchError(true));
+        }
+        setErOpen(!erOpen);
+    };
+
     return (
         <div>
-            <Button
-                ref={buttonRef}
-                variant="secondary"
-                onClick={() => {
-                    if (!erOpen) {
-                        retriveMoteData(enhet, veileder, setMoter);
-                    } else {
-                        setMoter(null);
-                    }
-                    setErOpen(!erOpen);
-                }}
-            >
+            <Button ref={buttonRef} variant="secondary" onClick={() => fetchMoteData()}>
                 Møtekalender
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
                 <Popover.Content className="motekalender_popover">
-                    {dager.map((dag, i) => genererKalender(dag, moter, enhet, i))}
+                    {dager.map((dag, i) => (
+                        <MoteTabell dato={dag} moter={moter} enhet={enhet} />
+                    ))}
                 </Popover.Content>
             </Popover>
         </div>
     );
 }
 
-function genererKalender(dato: Date, moter: MoteData[] | null, enhet: string, i: number) {
+function MoteTabell(dato: Date, moter: MoteData[], enhet: string) {
     return (
-        <div key={i}>
+        <div>
             <h3 className="motekalender_tittel">
                 {dagFraDato(dato)}, {dato.getDate()}/{dato.getMonth()}
             </h3>
@@ -156,11 +154,4 @@ function dagFraDato(dato: Date): string {
             return '...';
     }
 }
-
-function retriveMoteData(enhet: string, veileder: string, setMoter: (value: MoteData[]) => void) {
-    hentMoteplan(veileder, enhet)
-        .then(data => setMoter(data))
-        .catch(error => console.error('kunne ikke hente moteplan', error));
-}
-
 export default Motekalender;
