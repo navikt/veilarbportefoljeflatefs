@@ -31,14 +31,7 @@ export function Motekalender({veileder, enhet}: MotekalenderProps) {
     const buttonRef = useRef(null);
     const windowWidth = useWindowWidth();
 
-    let dager: Date[] = [new Date(), new Date(), new Date(), new Date()];
-    dager.forEach((dag, i) => dag.setDate(dag.getDate() + i));
-
-    if (windowWidth < 950) {
-        dager = dager.slice(0, 2);
-    } else if (windowWidth < 1300) {
-        dager = dager.slice(0, 3);
-    }
+    const dager: Date[] = hentMoteplanDager(moter, windowWidth);
 
     if (enhet === null) {
         return <></>;
@@ -61,16 +54,16 @@ export function Motekalender({veileder, enhet}: MotekalenderProps) {
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
                 <Popover.Content className="motekalender_popover">
-                    {dager.map(dag => genererKalender(dag, moter, enhet))}
+                    {dager.map((dag, i) => genererKalender(dag, moter, enhet, i))}
                 </Popover.Content>
             </Popover>
         </div>
     );
 }
 
-function genererKalender(dato: Date, moter: MoteData[] | null, enhet: string) {
+function genererKalender(dato: Date, moter: MoteData[] | null, enhet: string, i: number) {
     return (
-        <div key={dato.getDate()}>
+        <div key={i}>
             <h3 className="motekalender_tittel">
                 {dagFraDato(dato)}, {dato.getDate()}/{dato.getMonth()}
             </h3>
@@ -130,6 +123,43 @@ function genererKollonne(dato: Date, mote: MoteData, enhet: string, key: number)
             <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}</Table.DataCell>
         </Table.Row>
     );
+}
+
+function hentMoteplanDager(moter: MoteData[] | null, width: number): Date[] {
+    let dager: Date[];
+    if (width < 950) {
+        dager = [new Date(), new Date()];
+    } else if (width < 1300) {
+        dager = [new Date(), new Date(), new Date()];
+    } else {
+        dager = [new Date(), new Date(), new Date(), new Date()];
+    }
+
+    const skalViseHelg =
+        moter !== null && moter.map(x => new Date(x.dato).getDay()).filter(day => erHelg(day)).length > 0;
+    console.log(skalViseHelg);
+    let helgoffset = 0;
+
+    dager.forEach((moteplanDag, i) => {
+        const visningsdag = new Date();
+        visningsdag.setDate(moteplanDag.getDate() + helgoffset + i);
+        if (!skalViseHelg && erHelg(visningsdag.getDay())) {
+            helgoffset = erSondag(visningsdag.getDay()) ? 1 : 2;
+            visningsdag.setDate(visningsdag.getDate() + helgoffset);
+        }
+
+        moteplanDag.setDate(visningsdag.getDate());
+    });
+
+    return dager;
+}
+
+function erSondag(dag: number): boolean {
+    return dag === 0;
+}
+
+function erHelg(dag: number): boolean {
+    return dag === 6 || dag === 0;
 }
 
 function dagFraDato(dato: Date): string {

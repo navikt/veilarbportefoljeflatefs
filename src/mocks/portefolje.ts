@@ -240,7 +240,7 @@ export function hentArbeidsliste() {
 }
 export function hentMockPlan() {
     const omToDager = new Date();
-    omToDager.setDate(omToDager.getDate() + 2);
+    omToDager.setDate(omToDager.getDate() + 4);
     return [
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
         {
@@ -249,7 +249,7 @@ export function hentMockPlan() {
             avtaltMedNav: true
         },
         {
-            dato: '2022-03-23T15:02:35.636Z',
+            dato: '2022-03-25T15:02:35.636Z',
             deltaker: {fornavn: 'john', etternavn: 'testson', fnr: '123'},
             avtaltMedNav: false
         },
