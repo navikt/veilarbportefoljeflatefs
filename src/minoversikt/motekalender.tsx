@@ -137,7 +137,6 @@ function hentMoteplanDager(moter: MoteData[] | null, width: number): Date[] {
 
     const skalViseHelg =
         moter !== null && moter.map(x => new Date(x.dato).getDay()).filter(day => erHelg(day)).length > 0;
-    console.log(skalViseHelg);
     let helgoffset = 0;
 
     dager.forEach((moteplanDag, i) => {
