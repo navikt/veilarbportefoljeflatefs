@@ -1,19 +1,18 @@
 import * as React from 'react';
 import {useRef, useState} from 'react';
-import {Button, Link, Loader, Popover, Table} from '@navikt/ds-react';
-import moment from 'moment';
+import {Button, Popover} from '@navikt/ds-react';
+
 import './motekalender.less';
 import {hentMoteplan} from '../middleware/api';
-import {setFraBrukerIUrl} from '../utils/url-utils';
-import classnames from 'classnames';
+import MoteTabell from './motetabell';
 
-interface MoteData {
+export interface MoteData {
     dato: string;
     deltaker: Deltaker;
     avtaltMedNav: boolean;
 }
 
-interface Deltaker {
+export interface Deltaker {
     fornavn: string;
     etternavn: string;
     fnr: string;
@@ -26,7 +25,7 @@ interface MotekalenderProps {
 
 const MAX_ANTALL_DAGER = 5;
 
-export function Motekalender({veileder, enhet}: MotekalenderProps) {
+function Motekalender({veileder, enhet}: MotekalenderProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -49,77 +48,13 @@ export function Motekalender({veileder, enhet}: MotekalenderProps) {
                 Møtekalender
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
-                <Popover.Content className="motekalender_popover">
-                    {dager.map((dag, i) => (
-                        <MoteTabell dato={dag} moter={moter} enhet={enhet} />
-                    ))}
+                <Popover.Content>
+                    {fetchError && 'Feil under henting av møteplan'}
+                    {!fetchError &&
+                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)}
                 </Popover.Content>
             </Popover>
         </div>
-    );
-}
-
-function MoteTabell(dato: Date, moter: MoteData[], enhet: string) {
-    return (
-        <div>
-            <h3 className="motekalender_tittel">
-                {dagFraDato(dato)}, {dato.getDate()}/{dato.getMonth()}
-            </h3>
-            <Table>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Klokkeslett</Table.HeaderCell>
-                        <Table.HeaderCell>Deltaker</Table.HeaderCell>
-                        <Table.HeaderCell>Møtestatus</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {moter === null && (
-                        <Table.Row>
-                            <Table.DataCell>
-                                <Loader />
-                            </Table.DataCell>
-                        </Table.Row>
-                    )}
-                    {moter != null && moter.map((mote, i) => genererKollonne(dato, mote, enhet, i))}
-                </Table.Body>
-            </Table>
-        </div>
-    );
-}
-
-function genererKollonne(dato: Date, mote: MoteData, enhet: string, key: number) {
-    const moteDato = new Date(mote.dato);
-    if (!moment(dato).isSame(moteDato, 'day')) {
-        return;
-    }
-    return (
-        <Table.Row key={key}>
-            <Table.DataCell>
-                {moteDato
-                    .getHours()
-                    .toString()
-                    .padStart(2, '0')}
-                :
-                {moteDato
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, '0')}
-            </Table.DataCell>
-
-            <Table.DataCell>
-                <Link
-                    onClick={() => {
-                        setFraBrukerIUrl(mote.deltaker.fnr);
-                    }}
-                    href={`${window.location.origin}/veilarbpersonflatefs/${mote.deltaker.fnr}/?enhet=${enhet}`}
-                    className={classnames('lenke_siste-endring')}
-                >
-                    {mote.deltaker.etternavn}
-                </Link>
-            </Table.DataCell>
-            <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}</Table.DataCell>
-        </Table.Row>
     );
 }
 
@@ -127,31 +62,10 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
         return [new Date()];
     }
-    return [...new Set(moter.map(x => new Date(x.dato).setHours(0, 0, 0, 0)))]
-        .map(x => new Date(x))
+    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
+        .map(dato => new Date(dato))
         .sort()
         .slice(0, MAX_ANTALL_DAGER);
 }
 
-function dagFraDato(dato: Date): string {
-    const i = dato.getDay();
-    switch (i) {
-        case 0:
-            return 'Søndag';
-        case 1:
-            return 'Mandag';
-        case 2:
-            return 'Tirsdag';
-        case 3:
-            return 'Onsdag';
-        case 4:
-            return 'Torsdag';
-        case 5:
-            return 'Fredag';
-        case 6:
-            return 'Lørdag';
-        default:
-            return '...';
-    }
-}
 export default Motekalender;
