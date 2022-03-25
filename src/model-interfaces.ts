@@ -30,6 +30,7 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
+    MOTESTATUS = 'motestatus',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
     ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
