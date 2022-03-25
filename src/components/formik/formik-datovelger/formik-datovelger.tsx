@@ -27,7 +27,6 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                         <Datepicker
                             inputId="fristDatovelger"
                             inputProps={{
-                                // id: 'fristInput' cypress bruker denne,
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå'
                                 // ariaLabel: 'Frist:'
@@ -35,7 +34,9 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                             onChange={(date?: string) => setFieldValue(field.name, date)}
                             calendarSettings={{showWeekNumbers: true, position: 'responsive'}}
                             value={field.value}
-                            dayPickerProps={{className: 'datovelger__DayPicker'}}
+                            dayPickerProps={{
+                                className: 'datovelger__DayPicker'
+                            }}
                         />
                         <SkjemaelementFeilmelding>{error}</SkjemaelementFeilmelding>
                     </div>
