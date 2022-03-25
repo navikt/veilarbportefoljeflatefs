@@ -43,7 +43,7 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
-import Motekalender from './motekalender';
+import Motekalender from './motekalender/motekalender';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {IKKE_AVTALT} from '../konstanter';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';

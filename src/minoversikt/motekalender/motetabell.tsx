@@ -1,4 +1,4 @@
-import {dagFraDato} from '../utils/dato-utils';
+import {dagFraDato} from '../../utils/dato-utils';
 import {Loader, Table} from '@navikt/ds-react';
 import * as React from 'react';
 import {MoteData} from './motekalender';

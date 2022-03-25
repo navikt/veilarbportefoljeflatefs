@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useRef, useState} from 'react';
-import {Button, Popover} from '@navikt/ds-react';
+import {Alert, Button, Popover} from '@navikt/ds-react';
 
 import './motekalender.less';
-import {hentMoteplan} from '../middleware/api';
+import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
 
 export interface MoteData {
@@ -49,7 +49,11 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
                 <Popover.Content>
-                    {fetchError && 'Feil under henting av møteplan'}
+                    {fetchError && (
+                        <Alert variant="error" className="stor-feil-modal" size="small">
+                            Kunne ikke hente møteplan.
+                        </Alert>
+                    )}
                     {!fetchError &&
                         dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)}
                 </Popover.Content>

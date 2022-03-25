@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import moment from 'moment';
 import {Link, Table} from '@navikt/ds-react';
-import {setFraBrukerIUrl} from '../utils/url-utils';
+import {setFraBrukerIUrl} from '../../utils/url-utils';
 import classnames from 'classnames';
 import {MoteData} from './motekalender';
 
