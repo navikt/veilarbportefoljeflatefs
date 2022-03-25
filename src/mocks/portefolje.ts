@@ -238,5 +238,28 @@ const randomDate = ({past}) => {
 export function hentArbeidsliste() {
     return arbeidsliste;
 }
+export function hentMockPlan() {
+    const omToDager = new Date();
+    omToDager.setDate(omToDager.getDate() + 4);
+    return [
+        {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
+        {
+            dato: '2022-03-23T12:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {
+            dato: '2022-03-25T15:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'testson', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: '2022-03-24T15:02:35.636Z',
+            deltaker: {fornavn: 'john', etternavn: 'tester', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
+    ];
+}
 
 export default new Array(123).fill(0).map(() => lagBruker());
