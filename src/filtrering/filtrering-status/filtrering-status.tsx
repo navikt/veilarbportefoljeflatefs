@@ -5,7 +5,6 @@ import {fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
-    ALLE_MOTER_IDAG,
     ER_SYKMELDT_MED_ARBEIDSGIVER,
     I_AKTIVITET,
     I_AVTALT_AKTIVITET,
@@ -131,22 +130,12 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER)}
                 />
-                {erIkkeAvtalteAktiviteterFeatureTogglePa && (
-                    <BarInputRadio
-                        filterNavn="alleMoterMedNav"
-                        handleChange={handleRadioButtonChange}
-                        antall={statusTall.alleMoterMedNAVIdag}
-                        checked={ferdigfilterListe.includes(ALLE_MOTER_IDAG)}
-                    />
-                )}
-                {!erIkkeAvtalteAktiviteterFeatureTogglePa && (
-                    <BarInputRadio
-                        filterNavn="avtaltMoteMedNav"
-                        handleChange={handleRadioButtonChange}
-                        antall={statusTall.moterMedNAVIdag}
-                        checked={ferdigfilterListe.includes(MOTER_IDAG)}
-                    />
-                )}
+                <BarInputRadio
+                    filterNavn="avtaltMoteMedNav"
+                    handleChange={handleRadioButtonChange}
+                    antall={statusTall.moterMedNAVIdag}
+                    checked={ferdigfilterListe.includes(MOTER_IDAG)}
+                />
             </div>
             <div className="forsteBarlabelIGruppe">
                 <BarInputRadio

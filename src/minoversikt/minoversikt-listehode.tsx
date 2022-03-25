@@ -20,6 +20,8 @@ import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.less';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {OrNothing} from '../utils/types/types';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {IKKE_AVTALT} from '../konstanter';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -66,6 +68,8 @@ function MinOversiktListeHode({
 
     const forenkletAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
+    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
@@ -242,6 +246,18 @@ function MinOversiktListeHode({
                 >
                     Varighet møte
                 </Header>
+                {erIkkeAvtalteAktiviteterFeatureTogglePa && (
+                    <Header
+                        skalVises={
+                            !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
+                        }
+                        className="col col-xs-2"
+                        title="Møtestatus"
+                        headerId="avtalt-mote"
+                    >
+                        Møtestatus
+                    </Header>
+                )}
                 <SorteringHeader
                     sortering={Sorteringsfelt.VEDTAKSTATUS}
                     onClick={sorteringOnClick}
