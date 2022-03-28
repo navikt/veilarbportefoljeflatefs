@@ -56,8 +56,8 @@ describe('Arbeidsliste', () => {
 
     it('Lagre ny arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-        cy.get('.navds-loader').should('be.visible');
-        cy.get('.navds-loader').should('not.exist');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
             .contains(fornavn)
@@ -93,8 +93,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar_1').type('Team Voff er best i test hehehe');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.get('.navds-loader').should('be.visible');
-        cy.get('.navds-loader').should('not.exist');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
                 antallMedArbeidslisteEtterOppretting += Cypress.$(ant).length;
@@ -156,8 +156,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp')
             .should('be.visible')
             .click();
-        cy.get('.navds-loader').should('be.visible');
-        cy.get('.navds-loader').should('not.exist');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .should('be.visible')
@@ -188,11 +188,11 @@ describe('Arbeidsliste', () => {
             .should('be.visible')
             .click();
 
-        cy.get('.navds-loader').should('be.visible');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
 
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
-        cy.get('.navds-loader').should('not.exist');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .should('be.visible')
