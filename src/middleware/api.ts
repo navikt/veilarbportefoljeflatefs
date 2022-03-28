@@ -176,3 +176,8 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sorteringOgIder)};
     return fetchToJson(url, config);
 }
+
+export function hentMoteplan(veileder: string, enhet: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
