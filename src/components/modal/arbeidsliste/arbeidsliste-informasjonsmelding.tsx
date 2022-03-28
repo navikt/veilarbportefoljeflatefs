@@ -7,7 +7,7 @@ const ArbeidslisteInformasjonsmelding = () => (
         skal alltid deles i dialogen.
         <br />
         <Link
-            href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Oversikten-i-Modia.aspx#slik-bruker-du-arbeidslisten"
+            href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
             target="_blank"
         >
             <b>Les mer om hvordan bruke arbeidslisten på Navet.</b>
