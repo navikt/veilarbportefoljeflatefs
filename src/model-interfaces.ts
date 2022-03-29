@@ -30,6 +30,7 @@ export enum Sorteringsfelt {
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
+    MOTESTATUS = 'motestatus',
     VEDTAKSTATUS = 'vedtakstatus',
     VEDTAKSTATUS_ENDRET = 'vedtak_status_endret',
     ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
@@ -121,15 +122,18 @@ export interface BrukerModell {
     nyesteUtlopteAktivitet?: string; // dato
     veilederNavn?: string;
     brukertiltak?: string[];
-    aktiviteter?: AktiviteterModell;
+    aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
+    alleAktiviteter?: AktiviteterModell;
     aktivitetStart?: string; // dato
     nesteAktivitetStart?: string; // dato
     forrigeAktivitetStart?: string; // dato
     markert?: boolean;
     manuellBrukerStatus: string;
     erSykmeldtMedArbeidsgiver: boolean;
-    moteStartTid: string;
-    moteSluttTid: string;
+    moteStartTid: string; // kun avtalte moter
+    moteSluttTid: string; // kun avtalte moter
+    alleMoterStartTid?: string;
+    alleMoterSluttTid?: string;
     vedtakStatus?: string;
     vedtakStatusEndret?: string;
     ansvarligVeilederForVedtak?: string;
@@ -169,6 +173,7 @@ export interface ArbeidslisteModell {
     isOppfolgendeVeileder: boolean;
     sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
+    hentetKommentarOgTittel: boolean;
 }
 
 export enum Status {

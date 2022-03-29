@@ -17,6 +17,7 @@ import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {Tag} from '@navikt/ds-react';
 import {Checkbox} from 'nav-frontend-skjema';
+import {ConsoleView} from 'react-device-detect';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -27,6 +28,7 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
+    hentArbeidslisteForBruker: (fnr: string) => void;
 }
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {

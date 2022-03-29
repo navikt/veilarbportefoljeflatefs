@@ -27,6 +27,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
+    const hentArbeidslisteForBruker = fnr => dispatch(hentArbeidslisteForBruker(fnr));
 
     useOnUnmount(() => {
         updateLastPath();
@@ -49,6 +50,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                 filtervalg={filtervalg}
                                 valgteKolonner={listevisning.valgte}
                                 innloggetVeileder={props.innloggetVeileder}
+                                hentArbeidslisteForBruker={hentArbeidslisteForBruker}
                             />
                         ))}
                     </ul>

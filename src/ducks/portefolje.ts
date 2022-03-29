@@ -27,10 +27,7 @@ const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
-
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
-const OPPDATER_ARBEIDSLISTE_BRUKER_PENDING = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER_PENDING';
-const OPPDATER_ARBEIDSLISTE_BRUKER_FEILET = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER_FEILET';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
@@ -106,6 +103,28 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     });
 }
 
+function leggTilTittelOgKommentarArbeidslisteForBruker(stateBrukere, arbeidsliste) {
+    const bruker = stateBrukere.find(b => b.aktoerid === arbeidsliste.aktoerid);
+
+    if (bruker) {
+        const brukere = stateBrukere.filter(b => b.aktoerid !== arbeidsliste.aktoerid);
+
+        return [
+            ...brukere,
+            {
+                ...bruker,
+                arbeidsliste: {
+                    ...bruker.arbeidsliste,
+                    overskrift: arbeidsliste.overskrift,
+                    kommentar: arbeidsliste.kommentar,
+                    hentetKommentarOgTittel: true
+                }
+            }
+        ];
+    }
+    return stateBrukere;
+}
+
 function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
     return brukere.map(bruker => {
         const arbeidslisteForBruker = arbeidsliste.find(a => a.aktoerid === bruker.aktoerid);
@@ -124,6 +143,7 @@ function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
+    console.log(state);
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
@@ -142,7 +162,8 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                         ...bruker,
                         guid: lagBrukerGuid(bruker),
                         fornavn: nameCapitalization(bruker.fornavn),
-                        etternavn: nameCapitalization(bruker.etternavn)
+                        etternavn: nameCapitalization(bruker.etternavn),
+                        arbeidsliste: {...bruker.arbeidsliste, hentetKommentarOgTittel: false}
                     }))
                 }
             };
@@ -226,6 +247,15 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 data: {
                     ...state.data,
                     brukere: leggTilTittelOgKommentarArbeidsliste(state.data.brukere, action.arbeidsliste)
+                }
+            };
+        }
+        case OPPDATER_ARBEIDSLISTE_BRUKER: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: leggTilTittelOgKommentarArbeidslisteForBruker(state.data.brukere, action.arbeidsliste)
                 }
             };
         }
@@ -381,7 +411,7 @@ export function hentArbedslisteForBruker(fodselsnummer) {
     return dispatch => {
         Api.hentArbeidslisteForBruker(fodselsnummer).then(arbeidslisteForBruker => {
             dispatch({
-                type: '',
+                type: OPPDATER_ARBEIDSLISTE_BRUKER,
                 arbeidslisteForBruker
             });
         });
