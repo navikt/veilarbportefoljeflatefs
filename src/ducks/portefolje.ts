@@ -28,6 +28,10 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 
+const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
+const OPPDATER_ARBEIDSLISTE_BRUKER_PENDING = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER_PENDING';
+const OPPDATER_ARBEIDSLISTE_BRUKER_FEILET = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER_FEILET';
+
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
 }
@@ -368,6 +372,17 @@ export function hentArbeidslisteforVeileder(enhet, veileder) {
             dispatch({
                 type: OPPDATER_ARBEIDSLISTE_VEILEDER,
                 arbeidsliste
+            });
+        });
+    };
+}
+
+export function hentArbedslisteForBruker(fodselsnummer) {
+    return dispatch => {
+        Api.hentArbeidslisteForBruker(fodselsnummer).then(arbeidslisteForBruker => {
+            dispatch({
+                type: '',
+                arbeidslisteForBruker
             });
         });
     };
