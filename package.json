@@ -59,7 +59,6 @@
         "craco-less": "^1.9.0",
         "cross-env": "7.0.2",
         "cypress-axe": "^0.12.0",
-        "cypress-drag-drop": "^1.1.1",
         "cypress-run": "^1.1.1",
         "cypress-wait-until": "^1.7.1",
         "express": "4.17.1",
