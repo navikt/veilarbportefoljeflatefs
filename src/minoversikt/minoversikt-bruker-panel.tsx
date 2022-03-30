@@ -15,7 +15,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Tag} from '@navikt/ds-react';
+import {Loader, Tag} from '@navikt/ds-react';
 import {Checkbox} from 'nav-frontend-skjema';
 
 interface MinOversiktBrukerPanelProps {
@@ -127,13 +127,17 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 </div>
             </div>
             <Collapse isOpened={apen}>
-                <ArbeidslistePanel
-                    skalVises={arbeidslisteAktiv}
-                    bruker={bruker}
-                    innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                    apen={apen}
-                />
+                {bruker.arbeidsliste.hentetKommentarOgTittel ? (
+                    <ArbeidslistePanel
+                        skalVises={arbeidslisteAktiv}
+                        bruker={bruker}
+                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        apen={apen}
+                    />
+                ) : (
+                    <Loader variant="neutral" size="2xlarge" title="Henter arbeidsliste for bruker..." />
+                )}
             </Collapse>
         </li>
     );
