@@ -103,15 +103,10 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     });
 }
 
-function leggTilTittelOgKommentarArbeidslisteForBruker(stateBrukere, arbeidsliste) {
-    const bruker = stateBrukere.find(b => b.aktoerid === arbeidsliste.aktoerid);
-
-    if (bruker) {
-        const brukere = stateBrukere.filter(b => b.aktoerid !== arbeidsliste.aktoerid);
-
-        return [
-            ...brukere,
-            {
+function leggTilTittelOgKommentarArbeidslisteForBruker(brukere, arbeidsliste) {
+    return brukere.map(bruker => {
+        if (bruker.aktoerid === arbeidsliste.aktoerid) {
+            return {
                 ...bruker,
                 arbeidsliste: {
                     ...bruker.arbeidsliste,
@@ -119,10 +114,10 @@ function leggTilTittelOgKommentarArbeidslisteForBruker(stateBrukere, arbeidslist
                     kommentar: arbeidsliste.kommentar,
                     hentetKommentarOgTittel: true
                 }
-            }
-        ];
-    }
-    return stateBrukere;
+            };
+        }
+        return bruker;
+    });
 }
 
 function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
@@ -143,7 +138,6 @@ function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
-    console.log(state);
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
@@ -255,7 +249,10 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: leggTilTittelOgKommentarArbeidslisteForBruker(state.data.brukere, action.arbeidsliste)
+                    brukere: leggTilTittelOgKommentarArbeidslisteForBruker(
+                        state.data.brukere,
+                        action.arbeidslisteForBruker
+                    )
                 }
             };
         }
@@ -407,9 +404,10 @@ export function hentArbeidslisteforVeileder(enhet, veileder) {
     };
 }
 
-export function hentArbedslisteForBruker(fodselsnummer) {
+export function hentArbeidslisteForBruker(fodselsnummer) {
     return dispatch => {
         Api.hentArbeidslisteForBruker(fodselsnummer).then(arbeidslisteForBruker => {
+            console.log(arbeidslisteForBruker);
             dispatch({
                 type: OPPDATER_ARBEIDSLISTE_BRUKER,
                 arbeidslisteForBruker

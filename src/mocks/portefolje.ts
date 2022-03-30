@@ -241,7 +241,8 @@ export function hentArbeidsliste() {
     return arbeidsliste;
 }
 
-export function hentArbeidslisteForBruker(fodselsnummer) {
+export function hentArbeidslisteForBruker(fnr) {
+    const {fodselsnummer} = fnr;
     return arbeidsliste.find(arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer);
 }
 
