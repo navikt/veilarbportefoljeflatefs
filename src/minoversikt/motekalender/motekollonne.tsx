@@ -5,6 +5,7 @@ import {Link, Table} from '@navikt/ds-react';
 import {setFraBrukerIUrl} from '../../utils/url-utils';
 import classnames from 'classnames';
 import {MoteData} from './motekalender';
+import {nameCapitalization} from '../../utils/utils';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -40,7 +41,7 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                         href={`${window.location.origin}/veilarbpersonflatefs/${mote.deltaker.fnr}/?enhet=${enhet}`}
                         className={classnames('lenke_siste-endring')}
                     >
-                        {mote.deltaker.etternavn}, {mote.deltaker.fornavn}
+                        {nameCapitalization(mote.deltaker.etternavn)}, {nameCapitalization(mote.deltaker.fornavn)}
                     </Link>
                 )}
             </Table.DataCell>
