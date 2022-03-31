@@ -8,14 +8,20 @@ import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
+import {ALERTSTRIPE_FEILMELDING, DARKMODE, IKKE_AVTALT} from '../konstanter';
 import classNames from 'classnames';
+import Motekalender from '../minoversikt/motekalender/motekalender';
+import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
+import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
+    const erIkkeAvtalteAktiviteterPa = useFeatureSelector()(IKKE_AVTALT);
+    const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const enhet = useEnhetSelector();
 
     if (portefoljestorrelser.status === STATUS.PENDING || portefoljestorrelser.status === STATUS.NOT_STARTED) {
         return null;
@@ -25,7 +31,10 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
-            <EndringsloggTourWrapper />
+            <div className="moteendringsboks">
+                {erIkkeAvtalteAktiviteterPa && enhet && <Motekalender veileder={gjeldendeVeileder} enhet={enhet} />}
+                <EndringsloggTourWrapper />
+            </div>
         </div>
     );
 }
