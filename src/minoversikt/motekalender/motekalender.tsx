@@ -5,6 +5,7 @@ import {Alert, Button, Popover} from '@navikt/ds-react';
 import './motekalender.less';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
+import {Calender} from '@navikt/ds-icons';
 
 export interface MoteData {
     dato: string;
@@ -43,12 +44,13 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
     };
 
     return (
-        <div>
-            <Button ref={buttonRef} variant="secondary" onClick={() => fetchMoteData()}>
-                Møtekalender
+        <>
+            <Button className="motekalender_knapp" ref={buttonRef} variant="tertiary" onClick={() => fetchMoteData()}>
+                <Calender title="møteplan" />
+                Møteplan
             </Button>
-            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
-                <Popover.Content>
+            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="left-start">
+                <Popover.Content className="moteplan_content">
                     {fetchError ? (
                         <Alert variant="error" className="stor-feil-modal" size="small">
                             Kunne ikke hente møteplan.
@@ -62,7 +64,7 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
                     )}
                 </Popover.Content>
             </Popover>
-        </div>
+        </>
     );
 }
 
