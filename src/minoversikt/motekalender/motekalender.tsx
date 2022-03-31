@@ -49,13 +49,17 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
             </Button>
             <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
                 <Popover.Content>
-                    {fetchError && (
+                    {fetchError ? (
                         <Alert variant="error" className="stor-feil-modal" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
+                    ) : moter?.length == 0 ? (
+                        <Alert variant="success" className="stor-feil-modal" size="small">
+                            Ingen møter er planlagt 🎉
+                        </Alert>
+                    ) : (
+                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)
                     )}
-                    {!fetchError &&
-                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)}
                 </Popover.Content>
             </Popover>
         </div>
