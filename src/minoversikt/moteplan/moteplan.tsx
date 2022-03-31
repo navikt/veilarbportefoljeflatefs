@@ -76,8 +76,8 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
         return [new Date()];
     }
     return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
-        .map(dato => new Date(dato))
         .sort()
+        .map(dato => new Date(dato))
         .slice(0, MAX_ANTALL_DAGER);
 }
 
