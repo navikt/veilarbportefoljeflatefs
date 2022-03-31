@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 
-import './motekalender.less';
+import './moteplan.less';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
 import {Calender} from '@navikt/ds-icons';
@@ -19,14 +19,14 @@ export interface Deltaker {
     fnr: string;
 }
 
-interface MotekalenderProps {
+interface MoteplanProps {
     veileder: string;
     enhet: string;
 }
 
 const MAX_ANTALL_DAGER = 5;
 
-function Motekalender({veileder, enhet}: MotekalenderProps) {
+function Moteplan({veileder, enhet}: MoteplanProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -45,7 +45,7 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
 
     return (
         <>
-            <Button className="motekalender_knapp" ref={buttonRef} variant="tertiary" onClick={() => fetchMoteData()}>
+            <Button className="moteplan_knapp" ref={buttonRef} variant="tertiary" onClick={() => fetchMoteData()}>
                 <Calender title="møteplan" />
                 Møteplan
             </Button>
@@ -78,4 +78,4 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
         .slice(0, MAX_ANTALL_DAGER);
 }
 
-export default Motekalender;
+export default Moteplan;

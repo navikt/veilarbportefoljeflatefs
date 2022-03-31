@@ -4,7 +4,7 @@ import moment from 'moment';
 import {Link, Table} from '@navikt/ds-react';
 import {setFraBrukerIUrl} from '../../utils/url-utils';
 import classnames from 'classnames';
-import {MoteData} from './motekalender';
+import {MoteData} from './moteplan';
 import {nameCapitalization} from '../../utils/utils';
 
 interface MoteKollonneProps {

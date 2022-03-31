@@ -1,7 +1,7 @@
 import {dagFraDato} from '../../utils/dato-utils';
 import {Heading, Loader, Table} from '@navikt/ds-react';
 import * as React from 'react';
-import {MoteData} from './motekalender';
+import {MoteData} from './moteplan';
 import MoteKollonne from './motekollonne';
 
 interface MoteTabellProps {

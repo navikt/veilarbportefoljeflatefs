@@ -10,11 +10,12 @@ import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE, IKKE_AVTALT} from '../konstanter';
 import classNames from 'classnames';
-import Motekalender from '../minoversikt/motekalender/motekalender';
+import Moteplan from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
+import {OversiktType} from '../ducks/ui/listevisning';
 
-function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
+function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktType}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
@@ -32,7 +33,9 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean}) {
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             <div className="moteendringsboks">
-                {erIkkeAvtalteAktiviteterPa && enhet && <Motekalender veileder={gjeldendeVeileder} enhet={enhet} />}
+                {props.oversiktType === OversiktType.minOversikt && enhet && erIkkeAvtalteAktiviteterPa && (
+                    <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
+                )}
                 <EndringsloggTourWrapper />
             </div>
         </div>
