@@ -20,7 +20,7 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
     }
     return (
         <Table.Row>
-            <Table.DataCell>
+            <Table.DataCell className="moteplan_tabell_klokkeslett">
                 {moteDato
                     .getHours()
                     .toString()
@@ -32,7 +32,7 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                     .padStart(2, '0')}
             </Table.DataCell>
 
-            <Table.DataCell>
+            <Table.DataCell className="moteplan_tabell_deltaker">
                 {mote.deltaker.fnr && (
                     <Link
                         onClick={() => {
@@ -45,7 +45,9 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                     </Link>
                 )}
             </Table.DataCell>
-            <Table.DataCell>{mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}</Table.DataCell>
+            <Table.DataCell className="moteplan_tabell_status">
+                {mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}
+            </Table.DataCell>
         </Table.Row>
     );
 }

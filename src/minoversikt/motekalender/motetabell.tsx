@@ -1,5 +1,5 @@
 import {dagFraDato} from '../../utils/dato-utils';
-import {Loader, Table} from '@navikt/ds-react';
+import {Heading, Loader, Table} from '@navikt/ds-react';
 import * as React from 'react';
 import {MoteData} from './motekalender';
 import MoteKollonne from './motekollonne';
@@ -13,15 +13,15 @@ interface MoteTabellProps {
 function MoteTabell({dato, moter, enhet}: MoteTabellProps) {
     return (
         <div>
-            <h3 className="motekalender_tittel">
-                {dagFraDato(dato)}, {dato.getDate()}/{dato.getMonth()}
+            <h3 className="moteplan_tittel">
+                {dagFraDato(dato)} {dato.getDate()}. {dato.toLocaleString('default', {month: 'long'})}
             </h3>
-            <Table>
+            <Table size="small">
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Klokkeslett</Table.HeaderCell>
-                        <Table.HeaderCell>Deltaker</Table.HeaderCell>
-                        <Table.HeaderCell>Møtestatus</Table.HeaderCell>
+                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Klokkeslett</Table.HeaderCell>
+                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Deltaker</Table.HeaderCell>
+                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Møtestatus</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
