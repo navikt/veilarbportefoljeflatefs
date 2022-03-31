@@ -18,10 +18,10 @@ function MoteTabell({dato, moter, enhet}: MoteTabellProps) {
             </h3>
             <Table size="small">
                 <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Klokkeslett</Table.HeaderCell>
-                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Deltaker</Table.HeaderCell>
-                        <Table.HeaderCell className="moteplan_tabell_tittelrad">Møtestatus</Table.HeaderCell>
+                    <Table.Row className="moteplan_tabell_tittelrad">
+                        <Table.HeaderCell>Klokkeslett</Table.HeaderCell>
+                        <Table.HeaderCell>Deltaker</Table.HeaderCell>
+                        <Table.HeaderCell>Møtestatus</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
