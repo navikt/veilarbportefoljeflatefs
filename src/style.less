@@ -57,18 +57,6 @@ html {
 @import '~nav-frontend-ekspanderbartpanel-style/src/index';
 @import './forslag_nav_frontend';
 
-.veilarbportefoljeflatefs {
-    @import 'src/components/barinput/bar';
-
-    .ekspanderbartPanel__innhold {
-        padding: 0.5rem 1rem 1rem;
-    }
-
-    .ekspanderbartPanel--apen .ReactCollapse--collapse {
-        overflow: initial !important;
-    }
-}
-
 .decorator-context-modal {
     padding: 1rem;
 }
@@ -201,6 +189,15 @@ html {
 }
 
 .veilarbportefoljeflatefs {
+    @import 'src/components/barinput/bar';
+
+    .ekspanderbartPanel__innhold {
+        padding: 0.5rem 1rem 1rem;
+    }
+
+    .ekspanderbartPanel--apen .ReactCollapse--collapse {
+        overflow: initial !important;
+    }
     .side-storrelse {
         margin: 0 auto;
         padding: 0 3rem;
@@ -286,14 +283,18 @@ html {
             }
         }
     }
-
+    .navds-alert--info {
+        margin: 4px 8px 4px 12px;
+    }
     .navds-alert__wrapper {
         display: flex;
+        font-size: 14px !important;
     }
 
     .navds-body-short {
         font-size: 14px !important;
     }
+
     .skjemaelement__label {
         font-size: 14px !important;
     }
