@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
-import {hentStatusTall, leggTilStatustall} from '../../../ducks/statustall';
+import {leggTilStatustall} from '../../../ducks/statustall';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
@@ -21,20 +21,11 @@ function brukerLabel(bruker) {
 interface FjernFraArbeidslisteFormProps {
     lukkModal: () => void;
     valgteBrukere: BrukerModell[];
-    onSubmit: (valgteBrukere: BrukerModell[], props, valgtEnhet, innloggetVeileder) => void;
+    onSubmit: (valgteBrukere: BrukerModell[], props) => void;
     visBrukerLabel?: boolean;
-    valgtEnhet: string;
-    innloggetVeileder: string;
 }
 
-function FjernFraArbeidslisteForm({
-    lukkModal,
-    valgteBrukere,
-    onSubmit,
-    visBrukerLabel,
-    valgtEnhet,
-    innloggetVeileder
-}: FjernFraArbeidslisteFormProps) {
+function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBrukerLabel}: FjernFraArbeidslisteFormProps) {
     const className = valgteBrukere.length >= 22 ? 'arbeidsliste-listetekst__lang' : 'arbeidsliste-listetekst';
 
     return (
@@ -42,7 +33,7 @@ function FjernFraArbeidslisteForm({
             onSubmit={e => {
                 e.preventDefault();
                 logEvent('portefolje.metrikker.fjern_arbeidsliste');
-                onSubmit(valgteBrukere, lukkModal, valgtEnhet, innloggetVeileder);
+                onSubmit(valgteBrukere, lukkModal);
             }}
         >
             <div className={className}>
@@ -66,7 +57,6 @@ function FjernFraArbeidslisteForm({
 
 function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
     lukkModal();
-
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -86,27 +76,25 @@ function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDat
             brukereError
         })(dispatch);
     }
+
     leggTilStatustall('minArbeidsliste', -brukereOK.length)(dispatch);
+
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
 const mapStateToProps = state => ({
-    slettFraArbeidslisteStatus: state.arbeidsliste.status,
-    valgtEnhet: state.valgtEnhet.data.enhetId,
-    innloggetVeileder: state.innloggetVeileder.data.ident
+    slettFraArbeidslisteStatus: state.arbeidsliste.status
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: (valgteBrukere, lukkModal, valgtEnhet, innloggetVeileder) => {
+    onSubmit: (valgteBrukere, lukkModal) => {
         const arbeidsliste: ArbeidslisteDataModell[] = valgteBrukere.map(bruker => ({
             fnr: bruker.fnr,
             kommentar: bruker.arbeidsliste.kommentar,
             frist: bruker.arbeidsliste.frist,
             kategori: bruker.arbeidsliste.kategori
         }));
-        slettArbeidsliste(arbeidsliste)(dispatch)
-            .then(res => oppdaterState(res, lukkModal, arbeidsliste, dispatch))
-            .then(() => hentStatusTall(valgtEnhet, innloggetVeileder)(dispatch));
+        slettArbeidsliste(arbeidsliste)(dispatch).then(res => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
     }
 });
 

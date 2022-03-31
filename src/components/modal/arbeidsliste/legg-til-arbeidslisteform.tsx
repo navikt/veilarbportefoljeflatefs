@@ -4,7 +4,8 @@ import {postArbeidsliste} from '../../../ducks/arbeidsliste';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
-import {hentStatusTall, leggTilStatustall} from '../../../ducks/statustall';
+import {leggTilStatustall} from '../../../ducks/statustall';
+import {AppState} from '../../../reducer';
 import {Form, Formik} from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
 import {connect} from 'react-redux';
@@ -24,12 +25,10 @@ interface OwnProps {
 
 interface StateProps {
     arbeidslisteStatus?: Status;
-    valgtEnhet: string;
-    innloggetVeileder: string;
 }
 
 interface DispatchProps {
-    onSubmit: (formData, valgtEnhet, innloggetVeileder) => void;
+    onSubmit: (formData) => void;
     lukkModal: () => void;
     fjernMarkerteBrukere: () => void;
 }
@@ -48,9 +47,7 @@ function LeggTilArbeidslisteForm({
     valgteBrukere,
     onSubmit,
     setFormIsDirty,
-    fjernMarkerteBrukere,
-    valgtEnhet,
-    innloggetVeileder
+    fjernMarkerteBrukere
 }: LeggTilArbeidslisteFormProps) {
     const initialValues = valgteBrukere.map(bruker => ({
         kommentar: '',
@@ -70,7 +67,7 @@ function LeggTilArbeidslisteForm({
                     })
                 );
 
-                onSubmit(values.arbeidsliste, valgtEnhet, innloggetVeileder);
+                onSubmit(values.arbeidsliste);
             }}
         >
             {formikProps => {
@@ -144,14 +141,12 @@ export function oppdaterState(
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
-const mapStateToProps = state => ({
-    arbeidslisteStatus: state.arbeidsliste.status,
-    valgtEnhet: state.valgtEnhet.data.enhetId,
-    innloggetVeileder: state.innloggetVeileder.data.ident
+const mapStateToProps = (state: AppState): StateProps => ({
+    arbeidslisteStatus: state.arbeidsliste.status
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    onSubmit: (arbeidsliste: FormValues[], valgtEnhet, innloggetVeileder) => {
+    onSubmit: (arbeidsliste: FormValues[]) => {
         const {valgteBrukere} = props;
         const liste = arbeidsliste.map((elem, index) => ({
             fnr: valgteBrukere[index].fnr,
@@ -167,8 +162,7 @@ const mapDispatchToProps = (dispatch, props) => ({
             .then(() => {
                 dispatch(skjulModal());
                 dispatch(markerAlleBrukere(false));
-            })
-            .then(() => hentStatusTall(valgtEnhet, innloggetVeileder)(dispatch));
+            });
     },
     lukkModal: () => dispatch(skjulModal()),
     fjernMarkerteBrukere: () => dispatch(markerAlleBrukere(false))
