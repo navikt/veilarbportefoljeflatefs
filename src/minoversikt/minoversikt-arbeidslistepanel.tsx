@@ -3,7 +3,7 @@ import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsli
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
-import {BodyShort, Detail, Label} from '@navikt/ds-react';
+import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -21,7 +21,10 @@ export default function ArbeidslistePanel({
     apen
 }: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
-    const sistEndretAv = bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId ? bruker.arbeidsliste.sistEndretAv.veilederId : String.fromCharCode(8212);
+    const sistEndretAv =
+        bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId
+            ? bruker.arbeidsliste.sistEndretAv.veilederId
+            : String.fromCharCode(8212);
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
 
     let arbeidslisteFristTekst;
@@ -42,6 +45,9 @@ export default function ArbeidslistePanel({
                     </Detail>
                     <BodyShort size="small" data-testid="chevron_arbeidslisteinnhold_kommentar">
                         {bruker.arbeidsliste.kommentar}
+                        {!bruker.arbeidsliste.hentetKommentarOgTittel && (
+                            <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
+                        )}
                     </BodyShort>
                     <Detail className="brukerliste__arbeidslisteinnhold_footer">
                         {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
