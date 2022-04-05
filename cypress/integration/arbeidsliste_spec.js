@@ -111,8 +111,6 @@ describe('Arbeidsliste', () => {
             tittel = $tittel.text();
         });
 
-        console.log('TITTEL11', tittel);
-
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
         });

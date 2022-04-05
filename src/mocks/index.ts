@@ -1,6 +1,6 @@
 import innloggetVeileder from './innloggetVeileder';
 import me from './me';
-import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
+import brukere, {hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
 import veiledere from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
@@ -144,7 +144,6 @@ mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =
 );
 mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustall)));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
-mock.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', jsonResponse(hentArbeidsliste()));
 mock.get('/veilarbportefolje/api/arbeidsliste/:fodselsnummer', (req, res, ctx) =>
     res(ctx.json(hentArbeidslisteForBruker(req.pathParams)))
 );

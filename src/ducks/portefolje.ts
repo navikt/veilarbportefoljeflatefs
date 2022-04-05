@@ -92,11 +92,11 @@ function updateBrukerInArray(brukere, action) {
 
 function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     return brukere.map(bruker => {
-        const arbeidslisteForBruker = arbeidsliste.filter(a => a.fnr === bruker.fnr);
-        if (arbeidslisteForBruker.length === 1) {
+        const arbeidslisteForBruker = arbeidsliste.find(a => a.fnr === bruker.fnr);
+        if (arbeidslisteForBruker) {
             return {
                 ...bruker,
-                arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker[0]}
+                arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker}
             };
         }
         return bruker;
