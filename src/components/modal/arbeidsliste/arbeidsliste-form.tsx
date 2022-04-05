@@ -12,6 +12,7 @@ function label(bruker: BrukerModell): React.ReactNode {
 }
 
 function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
+    console.log(arbeidsliste);
     return (
         <>
             {arbeidsliste.map((bruker, index) => (
