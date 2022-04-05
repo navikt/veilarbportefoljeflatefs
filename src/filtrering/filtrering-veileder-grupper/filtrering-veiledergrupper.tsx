@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -13,8 +12,7 @@ import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import VeiledergruppeInnhold from './veiledergruppe-innhold';
-import AlertStripe from 'nav-frontend-alertstriper';
-import {kebabCase} from '../../utils/utils';
+import {Alert, BodyShort} from '@navikt/ds-react';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
@@ -52,17 +50,17 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
             <VeiledergruppeInnhold lagretFilter={sortertVeiledergruppe} oversiktType={oversiktType} />
         ) : (
             <div className="veiledergruppe-emptystate">
-                <Normaltekst className="veiledergruppe-emptystate__tekst">
+                <BodyShort size="small" className="veiledergruppe-emptystate__tekst">
                     Ingen lagrede veiledergrupper på enheten
-                </Normaltekst>
+                </BodyShort>
             </div>
         );
     };
     const veilederGrupperError = () => {
         return (
-            <AlertStripe type="feil">
+            <Alert variant="error" size="small">
                 Det oppsto en feil, og veiledergrupper kunne ikke hentes fram. Prøv igjen senere.
-            </AlertStripe>
+            </Alert>
         );
     };
 
@@ -85,7 +83,6 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                 modalTittel={modalTittel}
                 lagreKnappeTekst="Lagre"
                 onRequestClose={() => setVeiledergruppeModal(false)}
-                className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
             />
         </>
     );

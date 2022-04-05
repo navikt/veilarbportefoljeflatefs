@@ -2,10 +2,10 @@ import * as React from 'react';
 import classNames from 'classnames';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
-import {ReactComponent as PilStigende} from './arrow-up.svg';
-import {ReactComponent as PilSynkende} from './arrow-down.svg';
 import './tabell.less';
 import {OrNothing} from '../../utils/types/types';
+import {Down, Up} from '@navikt/ds-icons';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -34,9 +34,9 @@ function SorteringHeader({
     const sorteringspil = () => {
         const className = 'sorteringheader__pil';
         if (sorteringsrekkefolge === Sorteringsrekkefolge.stigende) {
-            return <PilStigende className={className} />;
+            return <Up className={className} />;
         } else if (sorteringsrekkefolge === Sorteringsrekkefolge.synkende) {
-            return <PilSynkende className={className} />;
+            return <Down className={className} />;
         } else {
             return null;
         }
@@ -48,8 +48,9 @@ function SorteringHeader({
 
     return (
         <Header skalVises={skalVises} className={className} headerId={headerId}>
-            <div className="sorteringheader__lenke">
-                <button
+            <span className="sorteringheader__lenke">
+                <Button
+                    variant="tertiary"
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
                     className={classNames(
                         'lenke lenke--frittstaende text--left',
@@ -64,10 +65,10 @@ function SorteringHeader({
                     }
                     title={title}
                 >
-                    {tekst}
-                </button>
+                    <BodyShort size="small">{tekst}</BodyShort>
+                </Button>
                 {sortering === 'etternavn' ? ', Fornavn' : null}
-            </div>
+            </span>
             {sorteringspil()}
         </Header>
     );

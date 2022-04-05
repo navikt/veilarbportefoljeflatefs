@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
-import ListevisningRad from './listvisning-rad';
+import ListevisningRad from './listevisning-rad';
 import './listevisning.less';
 import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
 import Dropdown from '../../dropdown/dropdown';

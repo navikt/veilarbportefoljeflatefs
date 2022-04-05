@@ -1,6 +1,6 @@
 import React from 'react';
-import {Textarea} from 'nav-frontend-skjema';
 import {Field, getIn} from 'formik';
+import {Textarea} from '@navikt/ds-react';
 
 const KOMMENTAR_MAKS_LENGDE = 500;
 
@@ -31,13 +31,13 @@ function FormikTekstArea({name, index}: FormikTekstAreaProps) {
                 return (
                     <Textarea
                         id={name}
-                        textareaClass="skjemaelement__input input--fullbredde arbeidslistekommentar"
+                        size="small"
                         label="Kommentar"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         value={field.value}
                         name={name}
-                        feil={feil}
+                        error={feil}
                         maxLength={500}
                         data-testid={`modal_arbeidsliste_kommentar${indexId}`}
                     />

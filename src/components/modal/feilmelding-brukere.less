@@ -1,43 +1,29 @@
-.tildeling-veileder-modal {
-    &__content {
-        margin: 1rem 3rem 2rem;
-    }
-}
+@import '~nav-frontend-core/less/core';
 
-.arbeidsliste-modal {
-    &__content {
-        margin: 1rem 2rem 2rem;
+.tildeling-veileder-modal {
+    &__tekstgruppe {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-liste {
+        width: 40%;
+        margin: 1rem auto;
+
+        &__lang {
+            max-height: 20rem;
+            overflow-y: scroll;
+            border-top: 1px solid @navGra40;
+            border-bottom: 1px solid @navGra40;
+        }
     }
 }
 
 .tildeling-veileder-modal,
-.arbeidsliste-modal,
 .filter-feil-modal {
-    &__content {
-        text-align: center;
-
-        ul {
-            width: 70%;
-            margin: 1rem auto;
-
-            li {
-                width: 2rem;
-            }
-        }
-    }
-
     &__vellykkedebrukere {
-        margin-top: 1rem;
+        margin: 1rem 0;
     }
-
-    .modal__overlay .ReactModal__Content {
-        width: 480px;
-    }
-}
-
-.filter-feil-modal button {
-    width: 70%;
-    align-self: center;
 }
 
 .server-feil-modal {
@@ -45,11 +31,12 @@
     text-align: center;
 }
 
-.stor-feil-modal {
-    justify-content: center;
-    margin-bottom: 0.5rem;
+.systemmeldinger {
+    .stor-feil-modal {
+        margin-bottom: 0.5rem;
+    }
 
-    .alertstripe__tekst {
-        max-width: 70rem !important;
+    .navds-alert--small {
+        padding-top: 17px;
     }
 }

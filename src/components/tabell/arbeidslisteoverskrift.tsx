@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
+import {BodyShort} from '@navikt/ds-react';
 
 interface ArbeidslisteOverskriftProps {
     className?: string;
@@ -12,7 +13,11 @@ function ArbeidslisteOverskrift({className, skalVises, bruker}: ArbeidslisteOver
         return null;
     }
 
-    return <div className={className}>{bruker.arbeidsliste.overskrift}</div>;
+    return (
+        <div className={className}>
+            <BodyShort size="small">{bruker.arbeidsliste.overskrift}</BodyShort>
+        </div>
+    );
 }
 
 export default ArbeidslisteOverskrift;

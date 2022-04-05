@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import './filterform.less';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
     form: string;
@@ -150,48 +151,55 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                     <hr className="alder-border" />
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
                         <div className="alder-container alder-container__fra">
-                            <label htmlFor="filter_alder-fra">Fra:</label>
-                            <input
-                                min={0}
+                            <TextField
+                                label="Fra:"
+                                value={inputAlderFra}
+                                onChange={e => onChangeInput(e, false)}
+                                size="small"
+                                onKeyDown={e => fjernTegn(e)}
                                 type="number"
+                                min={0}
                                 id="filter_alder-fra"
                                 className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-fra"
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, false)}
-                                value={inputAlderFra}
-                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
                         <div className="alder-container alder-container__til">
-                            <label htmlFor="filter_alder-til">Til:</label>
-                            <input
-                                min={0}
+                            <TextField
+                                label="Til:"
+                                value={inputAlderTil}
+                                onChange={e => onChangeInput(e, true)}
+                                size="small"
+                                onKeyDown={e => fjernTegn(e)}
                                 type="number"
+                                min={0}
                                 id="filter_alder-til"
                                 className={classNames('filter_alder', feil && 'filter_alder__validering')}
                                 data-testid="filter_alder-til"
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e, true)}
-                                value={inputAlderTil}
-                                onKeyDown={e => fjernTegn(e)}
                             />
                         </div>
-                        <button
+                        <Button
+                            variant="primary"
                             type="submit"
-                            className="knapp knapp--mini knapp--hoved alder-velg-knapp"
+                            className="alder-velg-knapp"
                             data-testid="checkbox-filterform_velg-knapp"
                             disabled={!(inputAlderFra.length > 0 || inputAlderTil.length > 0)}
                         >
                             Velg
-                        </button>
+                        </Button>
                     </div>
                     {feil && (
-                        <p className="validering-tekst" data-testid="filter_alder_valideringstekst">
+                        <BodyShort
+                            size="small"
+                            className="validering-tekst"
+                            data-testid="filter_alder_valideringstekst"
+                        >
                             {feilTekst}
-                        </p>
+                        </BodyShort>
                     )}
                 </>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="alder-filterform"
                 nullstillValg={nullstillValg}
                 form={form}

@@ -1,18 +1,24 @@
-import React from 'react';
-import ModalWrapper from 'nav-frontend-modal';
-import NavFrontendSpinner from 'nav-frontend-spinner';
+import React, {useState} from 'react';
 import './laster-modal.less';
+import {Loader, Modal} from '@navikt/ds-react';
 
-export function LasterModal() {
-    return (
-        <ModalWrapper
-            isOpen
-            contentLabel="Laster data"
-            onRequestClose={() => {}} // tslint:disable-line:no-empty
-            closeButton={false}
-            portalClassName="veilarbportefoljeflatefs-laster-modal"
-        >
-            <NavFrontendSpinner type="XXL" />
-        </ModalWrapper>
-    );
+interface LasterModalProps {
+    isOpen: boolean;
 }
+
+const LasterModal = ({isOpen}: LasterModalProps) => {
+    const [isOpenLoaderModal, setIsOpenLoaderModal] = useState<boolean>(isOpen);
+    return (
+        <Modal
+            open={isOpenLoaderModal}
+            onClose={() => setIsOpenLoaderModal(false)}
+            closeButton={false}
+            shouldCloseOnOverlayClick={false}
+            className="veilarbportefoljeflatefs-laster-modal"
+        >
+            <Loader size="2xlarge" />
+        </Modal>
+    );
+};
+
+export default LasterModal;

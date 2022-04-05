@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Modal from '../modal';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import './mine-filter.less';
@@ -11,6 +10,9 @@ import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import EgenModal from '../egenModal';
+import LasterModal from '../lastermodal/laster-modal';
+import {STATUS} from '../../../ducks/utils';
 
 export enum Visningstype {
     MENY,
@@ -30,6 +32,7 @@ const VisningstypeToTittel = new Map<Visningstype, string>([
     [Visningstype.FNR_FEIL, 'Lagre filter']
 ]);
 
+const HiddenIfLasterModal = hiddenIf(LasterModal);
 const HiddenIfMeny = hiddenIf(Meny);
 const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter);
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
@@ -56,6 +59,9 @@ export function MineFilterModal(props: {oversiktType: string}) {
         dispatch(lukkMineFilterModal(props.oversiktType));
     };
 
+    const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
+    const laster = mineFilterStatus !== undefined && mineFilterStatus === STATUS.PENDING;
+
     useEffect(() => {
         if (filterValg.navnEllerFnrQuery.trim().length > 0) setValgtVisningstype(Visningstype.FNR_FEIL);
         else if (valgtMineFilter) setValgtVisningstype(Visningstype.OPPDATER);
@@ -64,14 +70,14 @@ export function MineFilterModal(props: {oversiktType: string}) {
     }, [filterValg, valgtMineFilter, sisteValgtMineFilter, erModalApen]);
 
     return (
-        <Modal
+        <EgenModal
             className="mine-filter-meny-modal"
-            contentLabel="Mine filter meny modal"
-            isOpen={erModalApen}
-            onRequestClose={lukkModal}
+            open={erModalApen}
+            onClose={lukkModal}
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
         >
             <div className="modal-visningstype">
+                <HiddenIfLasterModal hidden={!laster} isOpen={laster} />
                 <HiddenIfMeny
                     hidden={valgtVisningstype !== Visningstype.MENY}
                     setValgtVisningstype={setValgtVisningstype}
@@ -91,6 +97,6 @@ export function MineFilterModal(props: {oversiktType: string}) {
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>
-        </Modal>
+        </EgenModal>
     );
 }

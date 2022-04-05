@@ -8,11 +8,10 @@ import {useSelector} from 'react-redux';
 import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
-import {ReactComponent as TildelVeilederIkon} from '../ikoner/person-add-1.svg';
-import {ReactComponent as SokVeilederIkon} from '../ikoner/person-view-1.svg';
-import {Undertittel} from 'nav-frontend-typografi';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
+import {AddPerson, Search} from '@navikt/ds-icons';
+import {Heading} from '@navikt/ds-react';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -56,7 +55,7 @@ function Toolbar(props: ToolbarProps) {
                             skalVises={sokVeilederSkalVises}
                             aktiv
                             tildelveileder={false}
-                            ikon={<SokVeilederIkon className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
+                            ikon={<Search className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
                             oversiktType={oversiktType}
                         />
                     </div>
@@ -70,7 +69,7 @@ function Toolbar(props: ToolbarProps) {
     return (
         <div
             className={classNames(
-                'toolbar blokk-xs',
+                'toolbar',
                 ((scrolling && isSidebarHidden && !windowWidth) ||
                     (scrolling && windowWidth && !isSidebarHidden) ||
                     (!isSidebarHidden && windowWidth)) &&
@@ -80,11 +79,11 @@ function Toolbar(props: ToolbarProps) {
         >
             <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
                 {oversiktType === OversiktType.veilederOversikt && (
-                    <Undertittel tag="h2" className="veiledere-undertittel blokk-xxs">
+                    <Heading size="small" level="2">
                         {antallTotalt === 0
                             ? `Ingen veiledere`
                             : `Viser ${antallValgteVeiledere} av totalt ${antallTotalt} veiledere.`}
-                    </Undertittel>
+                    </Heading>
                 )}
                 {oversiktType !== OversiktType.veilederOversikt && (
                     <div className="tildel-veileder-wrapper">
@@ -93,7 +92,7 @@ function Toolbar(props: ToolbarProps) {
                             skalVises={oversiktType in OversiktType}
                             aktiv={aktiv}
                             tildelveileder
-                            ikon={<TildelVeilederIkon className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
+                            ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
                             oversiktType={oversiktType}
                         />
                     </div>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
 
 interface KnappPanelProps {
     children: React.ReactChild | React.ReactChildren;
@@ -15,7 +16,8 @@ function KnappPanel({children, disabled = false, selected = false, ariaLabel, ..
         'paginering__knapp--pressed': selected
     });
     return (
-        <button
+        <Button
+            variant="tertiary"
             className={classes}
             aria-disabled={disabled}
             aria-pressed={selected}
@@ -25,7 +27,7 @@ function KnappPanel({children, disabled = false, selected = false, ariaLabel, ..
             title={ariaLabel}
         >
             {children}
-        </button>
+        </Button>
     );
 }
 

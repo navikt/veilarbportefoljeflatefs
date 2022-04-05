@@ -1,11 +1,9 @@
 import React, {PropsWithChildren} from 'react';
-import {Normaltekst} from 'nav-frontend-typografi';
-import {Input} from 'nav-frontend-skjema';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
-import {useFocus} from '../../../hooks/use-focus';
-import './modal.less';
+import './veiledergruppe-modal.less';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
+import {BodyShort, TextField} from '@navikt/ds-react';
 
 interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
@@ -18,21 +16,18 @@ interface VeiledergruppeFormProps {
 }
 
 function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
-    const {focusRef} = useFocus();
     return (
         <form className="veiledergruppe-modal__form" onSubmit={props.onSubmit} data-testid="veiledergruppe_modal_form">
-            <Input
+            <TextField
                 label={
-                    <p className="veiledergruppe-modal__gruppenavntekst">
+                    <span className="veiledergruppe-modal__gruppenavntekst">
                         Gruppenavn: <i>(maks 35 tegn)</i>
-                    </p>
+                    </span>
                 }
                 value={props.gruppeNavn}
-                bredde="XL"
                 onChange={e => props.setGruppeNavn(e.target.value)}
-                feil={props.errors.gruppeNavn}
+                error={props.errors.gruppeNavn}
                 maxLength={35}
-                inputRef={inputRef => (focusRef.current = inputRef)}
                 data-testid="veiledergruppe_modal_gruppenavn-input"
             />
             <div className="veiledergruppe-modal__sokefilter">
@@ -41,12 +36,15 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
                     hanterVeilederValgt={props.hanterVeilederChange}
                 />
             </div>
-            <Normaltekst
+            <BodyShort
+                size="small"
                 className="veiledergruppe-modal__tekst"
                 data-testid={`veiledergruppe_modal_antall-valgte-veiledere_${props.filterValg.veiledere.length}`}
             >
-                Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
-            </Normaltekst>
+                <strong>
+                    Veiledere i gruppen: <i> ({props.filterValg.veiledere.length} stk)</i>
+                </strong>
+            </BodyShort>
             <ValgtVeiledergruppeListe
                 valgteVeileder={props.filterValg.veiledere}
                 fjernValgtVeileder={veilederTarget => props.hanterVeilederChange(false, veilederTarget)}

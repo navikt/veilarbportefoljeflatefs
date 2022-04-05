@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {BrukerModell, VeilederModell} from '../../model-interfaces';
-import {Info} from './etikett';
+import {BodyShort, Tag} from '@navikt/ds-react';
 
 interface VeiledernavnProps {
     className?: string;
@@ -14,15 +14,19 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
         return null;
     }
 
-    const veilederNavn = <span>{veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : ''}</span>;
+    const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
 
     const ufordeltBrukerEtikett = (
-        <Info hidden={!bruker.nyForEnhet} typo="undertekst">
+        <Tag size="small" variant="info" hidden={!bruker.nyForEnhet}>
             Ufordelt bruker
-        </Info>
+        </Tag>
     );
 
-    return <div className={className}>{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</div>;
+    return (
+        <div className={className}>
+            <BodyShort size="small">{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
+        </div>
+    );
 }
 
 export default VeilederNavn;

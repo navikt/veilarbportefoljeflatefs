@@ -1,13 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {Innholdstittel, Normaltekst} from 'nav-frontend-typografi';
 import './tilbakemelding-modal.less';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
-import {Textarea} from 'nav-frontend-skjema';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import TilfredshetValg from './tilfredshet-valg';
 import CheckboxValg from './checkbox-valg';
+import {BodyShort, Button, Heading, Textarea} from '@navikt/ds-react';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -106,21 +104,21 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                     <TilbakemeldingTakkModal />
                 ) : (
                     <>
-                        <Innholdstittel className="blokk-xxs tilbakemelding-modal__tittel">
+                        <Heading size="large" level="1" className="tilbakemelding-modal__tittel">
                             Tilbakemelding
-                        </Innholdstittel>
-                        <Normaltekst className="tilbakemelding-modal__ingress">
-                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og forhåndsorientering i aktivitetsplanen?
-                        </Normaltekst>
+                        </Heading>
+                        <BodyShort size="small" className="tilbakemelding-modal__ingress">
+                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og
+                            forhåndsorientering i aktivitetsplanen?
+                        </BodyShort>
                         {visTilfredshet ? (
                             <>
-                                <div className="tilbakemelding-modal__tilfredshet">
-                                    <TilfredshetValg
-                                        className="blokk-xs"
-                                        onTilfredshetChanged={handleTilfredshetChanged}
-                                        defaultTilfredshet={tilfredshet}
-                                    />
-                                </div>
+                                {/*<div className="tilbakemelding-modal__tilfredshet">*/}
+                                <TilfredshetValg
+                                    onTilfredshetChanged={handleTilfredshetChanged}
+                                    defaultTilfredshet={tilfredshet}
+                                />
+                                {/*</div>*/}
                                 {harBesvartTilfredshet && (
                                     <form
                                         className="tilbakemelding-modal__ekspander"
@@ -140,13 +138,13 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                                 />
                                             </div>
                                         )}
-                                        <Hovedknapp
-                                            role="submit"
+                                        <Button
+                                            type="submit"
                                             className="knapp--hoved"
                                             data-testid="tilfredshet_send-knapp"
                                         >
                                             Send
-                                        </Hovedknapp>
+                                        </Button>
                                     </form>
                                 )}
                             </>
@@ -168,12 +166,16 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                         data-testid="tilfredshet_kommentarfelt"
                                     />
                                 </div>
-                                <p className="tilbakemelding-modal__feilmelding" data-testid="tilfredshet_feilmelding">
+                                <BodyShort
+                                    size="small"
+                                    className="tilbakemelding-modal__feilmelding"
+                                    data-testid="tilfredshet_feilmelding"
+                                >
                                     {feilmelding}
-                                </p>
-                                <Hovedknapp role="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
+                                </BodyShort>
+                                <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                                     Send
-                                </Hovedknapp>
+                                </Button>
                             </form>
                         )}
                     </>

@@ -138,3 +138,5 @@ export function nameCapitalization(str: string) {
         .toLowerCase()
         .replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());
 }
+
+export const erProd = () => window.location.host === 'app.adeo.no';

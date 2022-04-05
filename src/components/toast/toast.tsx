@@ -24,7 +24,7 @@ function Toasts({toasts}: StateProps) {
             return (
                 <TimedToast
                     toastTekst="Gruppen er opprettet"
-                    alertstripe="suksess"
+                    alertstripe="success"
                     fjernToast={fjernOpprettGruppeToast()}
                 />
             );
@@ -32,7 +32,7 @@ function Toasts({toasts}: StateProps) {
             return (
                 <TimedToast
                     toastTekst="Gruppen er lagret"
-                    alertstripe="suksess"
+                    alertstripe="success"
                     fjernToast={fjernLagreEndringerToast()}
                 />
             );
@@ -40,7 +40,7 @@ function Toasts({toasts}: StateProps) {
             return (
                 <TimedToast
                     toastTekst="Gruppen er slettet"
-                    alertstripe="suksess"
+                    alertstripe="success"
                     fjernToast={fjernSletteGruppeToast()}
                 />
             );
@@ -56,7 +56,7 @@ function Toasts({toasts}: StateProps) {
             return (
                 <TimedToast
                     toastTekst="Din sortering er lagret"
-                    alertstripe="suksess"
+                    alertstripe="success"
                     fjernToast={fjernSorteringToast()}
                 />
             );
@@ -64,7 +64,7 @@ function Toasts({toasts}: StateProps) {
             return (
                 <TimedToast
                     toastTekst="Din sortering ble ikke lagret"
-                    alertstripe="feil"
+                    alertstripe="error"
                     fjernToast={fjernSorteringToast()}
                 />
             );

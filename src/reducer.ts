@@ -8,6 +8,7 @@ import veiledereReducer, {VeiledereState} from './ducks/veiledere';
 import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
 import filtreringReducer, {initialState} from './ducks/filtrering';
 import statustallReducer, {StatustallState} from './ducks/statustall';
+import systemmeldingerReducer, {SystemmeldingState} from './ducks/systemmeldinger';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
@@ -73,6 +74,7 @@ export interface AppState {
     mineFilterVeilederOversikt: LagretFilterUIState;
     toastReducer: ToastState;
     innloggetVeileder: InnloggetVeilederState;
+    systemmeldinger: SystemmeldingState;
 }
 
 export default combineReducers<AppState>({
@@ -134,5 +136,6 @@ export default combineReducers<AppState>({
     mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIState),
     mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIState),
     toastReducer: toastReducer,
-    innloggetVeileder: innloggetVeilederReducer
+    innloggetVeileder: innloggetVeilederReducer,
+    systemmeldinger: systemmeldingerReducer
 });

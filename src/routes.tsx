@@ -26,7 +26,7 @@ function Routes() {
                     </Switch>
                     <TilbakemeldingFab />
                     <TilToppenKnapp />
-                    <TvungenStepper/>
+                    <TvungenStepper />
                 </Innholdslaster>
             </div>
         </div>

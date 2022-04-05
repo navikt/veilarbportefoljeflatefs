@@ -5,7 +5,7 @@ import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatusTall} from './statustall';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {selectFraIndex, selectSeAlle, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
+import {selectFraIndex, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
@@ -230,14 +230,13 @@ export default function portefoljeReducer(state = initialState, action): Portefo
     }
 }
 
-function hentPortefolje(hentPorefoljeFn: (...args: any[]) => void, ...args: any[]) {
+function hentPortefolje(hentPortefoljeFn: (...args: any[]) => void, ...args: any[]) {
     const fn = (dispatch, getState) => {
         const state = getState();
-        const seAlle = selectSeAlle(state);
-        const fra = seAlle ? undefined : selectFraIndex(state);
-        const antall = seAlle ? undefined : selectSideStorrelse(state);
+        const fra = selectFraIndex(state);
+        const antall = selectSideStorrelse(state);
 
-        return hentPorefoljeFn(...args, fra, antall);
+        return hentPortefoljeFn(...args, fra, antall);
     };
     return doThenDispatch(fn, {
         OK,

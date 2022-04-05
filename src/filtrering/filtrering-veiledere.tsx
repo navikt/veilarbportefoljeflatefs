@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Input, Label} from 'nav-frontend-skjema';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 import {useEffect, useRef, useState} from 'react';
 import {FiltervalgModell} from '../model-interfaces';
+import {TextField} from '@navikt/ds-react';
 
 interface FiltreringVeiledereProps {
     filtervalg: FiltervalgModell;
@@ -53,16 +53,13 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
 
     return (
         <div className="filtrering-veiledere" ref={wrapperRef}>
-            <Label htmlFor="sok-veileder" className="veilederoversikt_sok-veileder">
-                Søk veileder
-            </Label>
-            <Input
+            <TextField
+                label="Søk veileder"
                 placeholder="Navn eller NAV-ident"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVeilederNavnQuery(e.target.value)}
                 value={veilederNavnQuery}
                 data-testid="veilederoversikt_sok-veileder-input"
                 aria-label="Navn eller NAV-ident"
-                id="sok-veileder"
             />
             <VeilederCheckboxListe nullstillInputfelt={nullstillInputfelt} />
         </div>

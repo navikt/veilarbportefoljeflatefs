@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import 'react-toggle/style.css';
-import Toggle from './toggle';
 import './dark-mode-toggle.less';
+import {Switch} from '@navikt/ds-react';
 
 function DarkModeToggle() {
     const [darkmode, setDarkmode] = useState(localStorage.getItem('darkmode') === 'true');
@@ -13,9 +12,9 @@ function DarkModeToggle() {
 
     return (
         <div className="dark-mode-toggle">
-            <button type="button">☀</button>
-            <Toggle checked={darkmode} onChange={() => setDarkmode(!darkmode)} />
-            <button type="button">☾</button>
+            <Switch size="medium" onChange={() => setDarkmode(!darkmode)} checked={darkmode}>
+                Slå {darkmode ? ' av ' : ' på '} darkmode
+            </Switch>
         </div>
     );
 }

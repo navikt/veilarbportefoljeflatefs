@@ -53,24 +53,13 @@ html {
     height: 100%;
 }
 
-@import '~nav-frontend-alertstriper-style/src/index';
-@import '~nav-frontend-typografi-style/src/index';
 @import '~nav-frontend-core/less/core';
 @import '~nav-frontend-grid-style/src/index';
-@import '~nav-frontend-modal-style/src/index';
-@import '~nav-frontend-paneler-style/src/index';
 @import '~nav-frontend-ekspanderbartpanel-style/src/index';
-@import '~nav-frontend-etiketter-style/src/index';
-@import '~nav-frontend-spinner-style/src/spinner-style';
-@import '~nav-frontend-skjema-style/src/index';
-@import '~nav-frontend-knapper-style/src/index';
-@import '~nav-frontend-paneler-style/src/mixins';
-@import '~nav-frontend-lenker-style/src/lenker-style';
-@import '~nav-frontend-hjelpetekst-style/src/hjelpetekst-style';
 @import './forslag_nav_frontend';
 
 .veilarbportefoljeflatefs {
-    @import './components/barinput/barlabel';
+    @import 'src/components/barinput/bar';
 
     .ekspanderbartPanel__innhold {
         padding: 0.5rem 1rem 1rem;
@@ -106,16 +95,12 @@ html {
 }
 
 .text--left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .sticky-container {
     z-index: 5;
     background-color: @bakgrunnsGra;
-
-    .blokk-xxs {
-        margin-bottom: 0;
-    }
 }
 
 .ikke-sticky {
@@ -301,6 +286,10 @@ html {
                 grid-column-end: 3;
             }
         }
+    }
+
+    .navds-body-short {
+        font-size: 14px !important;
     }
 
     @media (max-width: 1200px) {

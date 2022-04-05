@@ -1,9 +1,6 @@
-import {Input} from 'nav-frontend-skjema';
-import {Hovedknapp} from 'nav-frontend-knapper';
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import {Normaltekst} from 'nav-frontend-typografi';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
@@ -14,17 +11,24 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
+import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
-export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
+interface LagreNyttMineFilterProps {
+    oversiktType: string;
+    lukkModal: () => void;
+}
+
+export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilterProps) {
     const filterValg = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
+        oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );
     const data = useSelector((state: AppState) => state.mineFilter.data);
+
     const [filterNavn, setFilterNavn] = useState('');
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError);
 
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-    const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, props.lukkModal);
+    const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
 
     const doLagreNyttFilter = event => {
         event.preventDefault();
@@ -42,7 +46,7 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
                 endreSideBar({
                     dispatch: dispatch,
                     requestedTab: SidebarTabInfo.MINE_FILTER,
-                    currentOversiktType: props.oversiktType
+                    currentOversiktType: oversiktType
                 });
             });
         }
@@ -55,19 +59,19 @@ export function LagreNyttMineFilter(props: {oversiktType: string; lukkModal}) {
                 data-testid="lagre-nytt-filter_modal_form"
                 data-widget="accessible-autocomplete"
             >
-                <Normaltekst className="blokk-xs">Du vil finne igjen filteret under "Mine filter".</Normaltekst>
-                <Input
+                <BodyShort size="small">Du vil finne igjen filteret under "Mine filter".</BodyShort>
+                <TextField
                     label="Navn:"
                     value={filterNavn}
                     onChange={e => setFilterNavn(e.target.value)}
-                    feil={feilmelding.filterNavn}
+                    error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Hovedknapp mini htmlType="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
+                    <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
                         Lagre
-                    </Hovedknapp>
+                    </Button>
                 </div>
             </form>
             <MineFilterVarselModal

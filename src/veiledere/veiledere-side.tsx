@@ -4,14 +4,13 @@ import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
-import PanelBase from 'nav-frontend-paneler';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.less';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
-import {getSeAlleFromUrl, getSideFromUrl} from '../utils/url-utils';
+import {getSeFlereFromUrl, getSideFromUrl} from '../utils/url-utils';
 import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
 import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
@@ -22,7 +21,8 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import {Systemmeldinger} from '../components/systemmeldinger';
+import {Panel} from '@navikt/ds-react';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -39,8 +39,8 @@ function VeiledereSide() {
 
     useOnMount(() => {
         const side = getSideFromUrl();
-        const seAlle = getSeAlleFromUrl();
-        dispatch(pagineringSetup({side, seAlle}));
+        const seFlere = getSeFlereFromUrl();
+        dispatch(pagineringSetup({side, seFlere}));
         loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
@@ -60,7 +60,7 @@ function VeiledereSide() {
                 data-testid={`side-storrelse_${id}`}
             >
                 <ToppMeny />
-                <AlertstripeTekniskeProblemer />
+                <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
                         className="oversikt-sideinnhold-veilederside"
@@ -68,9 +68,9 @@ function VeiledereSide() {
                         id={`oversikt-sideinnhold_${id}`}
                     >
                         <div className="status-filter-kolonne">
-                            <PanelBase className="blokk-xxxs sok-veileder" role="search">
+                            <Panel className="sok-veileder" role="search">
                                 <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
-                            </PanelBase>
+                            </Panel>
                             <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                                 <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                             </MetrikkEkspanderbartpanel>

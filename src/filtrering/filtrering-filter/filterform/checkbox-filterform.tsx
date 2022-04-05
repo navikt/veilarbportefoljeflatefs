@@ -2,17 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
-import AlertStripe from 'nav-frontend-alertstriper';
 import './filterform.less';
 import classNames from 'classnames';
-import NullstillValgKnapp from '../../../components/nullstill-valg-knapp/nullstill-valg-knapp';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
     valg: Dictionary<string>;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    columns?: number;
+    gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
 }
@@ -22,7 +22,7 @@ function CheckboxFilterform({
     valg,
     form,
     filtervalg,
-    columns = 1,
+    gridColumns = 1,
     className,
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
@@ -51,7 +51,7 @@ function CheckboxFilterform({
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
-                    <Grid columns={columns}>
+                    <Grid columns={gridColumns}>
                         {Object.entries(valg).map(([filterKey, filterValue]) => (
                             <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
                                 <input
@@ -59,6 +59,7 @@ function CheckboxFilterform({
                                     type="checkbox"
                                     className="skjemaelement__input checkboks"
                                     value={filterKey}
+                                    name={valg[filterKey]}
                                     checked={checkBoxValg.includes(filterKey)}
                                     onChange={velgCheckBox}
                                     data-testid={`filter_${filterKey}`}
@@ -71,16 +72,16 @@ function CheckboxFilterform({
                     </Grid>
                 </div>
             )}
-            <NullstillValgKnapp
+            <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (
-                <AlertStripe type="info" className="checkbox-filterform__alertstripe">
+                <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
-                </AlertStripe>
+                </Alert>
             )}
         </form>
     );

@@ -184,3 +184,9 @@ export interface ArbeidslisteDataModell {
     kommentar: string;
     frist: string | null;
 }
+
+export interface Systemmelding {
+    tittel: string;
+    type: 'error' | 'warning' | 'info' | 'success';
+    beskrivelse: any;
+}

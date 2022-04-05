@@ -4,8 +4,8 @@ export function selectSide(state: AppState): number {
     return state.paginering.side;
 }
 
-export function selectSeAlle(state: AppState): boolean {
-    return state.paginering.seAlle;
+export function selectSeFlere(state: AppState): boolean {
+    return state.paginering.seFlere;
 }
 
 export function selectSideStorrelse(state: AppState): number {

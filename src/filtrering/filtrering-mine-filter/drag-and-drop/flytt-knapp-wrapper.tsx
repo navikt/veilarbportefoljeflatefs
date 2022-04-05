@@ -1,6 +1,5 @@
 import React from 'react';
-import {ReactComponent as PilStigende} from '../../../components/tabell/arrow-up.svg';
-import {ReactComponent as PilSynkende} from '../../../components/tabell/arrow-down.svg';
+import {Down, Up} from '@navikt/ds-icons';
 
 export interface FlyttKnappWraperProps {
     showUpBtn: boolean;
@@ -21,7 +20,7 @@ function FlyttKnappWrapper({showUpBtn, showDownBtn, onClickUp, onClickDown, idx}
                     onClick={onClickUp}
                     data-testid={`flytt-knapp_opp_${idx}`}
                 >
-                    <PilStigende />
+                    <Up />
                 </div>
             ) : (
                 <></>
@@ -35,7 +34,7 @@ function FlyttKnappWrapper({showUpBtn, showDownBtn, onClickUp, onClickDown, idx}
                     onClick={onClickDown}
                     data-testid={`flytt-knapp_ned_${idx}`}
                 >
-                    <PilSynkende />
+                    <Down />
                 </div>
             ) : (
                 <></>

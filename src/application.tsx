@@ -4,13 +4,13 @@ import Routes from './routes';
 import {Provider} from 'react-redux';
 import createStore from './store';
 import * as moment from 'moment';
-import Modal from 'nav-frontend-modal';
 import {Decorator} from './decorator';
 import InitialDataProvider from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
+import {Modal} from '@navikt/ds-react';
 
 if (process.env.NODE_ENV !== 'test') {
-    Modal.setAppElement('#applikasjon');
+    Modal.setAppElement && Modal.setAppElement('#applikasjon');
 }
 moment.locale('nb');
 

@@ -1,7 +1,7 @@
 import {useRedirectOnMount} from './hooks/use-redirect-on-mount';
 import {useSetInitalEnhet} from './hooks/portefolje/use-set-enhet-hvis-enhet-i-url';
-import AlertStripe from 'nav-frontend-alertstriper';
 import React from 'react';
+import {Alert} from '@navikt/ds-react';
 
 export function RedirectPortefolje(props: React.PropsWithChildren<{}>) {
     useRedirectOnMount();
@@ -9,7 +9,11 @@ export function RedirectPortefolje(props: React.PropsWithChildren<{}>) {
     const {hasError} = useSetInitalEnhet();
 
     if (hasError) {
-        return <AlertStripe type="feil">Noe gikk feil, prøv igjen senere.</AlertStripe>;
+        return (
+            <Alert variant="error" size="small">
+                Noe gikk feil, prøv igjen senere.
+            </Alert>
+        );
     }
 
     return <>{props.children}</>;

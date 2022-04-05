@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Checkbox} from 'nav-frontend-skjema';
 import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.less';
+import {Checkbox} from 'nav-frontend-skjema';
 
 interface VelgalleCheckboksProps {
     skalVises: boolean;
