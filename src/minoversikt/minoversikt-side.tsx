@@ -43,10 +43,6 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
-import Motekalender from './motekalender/motekalender';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {IKKE_AVTALT} from '../konstanter';
-import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -61,7 +57,6 @@ export default function MinoversiktSide() {
         sorteringsfelt,
         enhettiltak
     } = usePortefoljeSelector(oversiktType);
-    const erIkkeAvtalteAktiviteterPa = useFeatureSelector()(IKKE_AVTALT);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
@@ -83,7 +78,6 @@ export default function MinoversiktSide() {
     const {isSidebarHidden} = useSidebarViewStore(oversiktType);
     const windowWidth = useWindowWidth();
     const {ident} = useParams();
-    const enhet = useEnhetSelector();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
@@ -119,7 +113,7 @@ export default function MinoversiktSide() {
     return (
         <DocumentTitle title="Min oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
-                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} />
+                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
                 <AlertstripeTekniskeProblemer />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <MinOversiktWrapper
@@ -138,9 +132,6 @@ export default function MinoversiktSide() {
                         />
                         <div className="sokefelt-knapp__container">
                             <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            {erIkkeAvtalteAktiviteterPa && enhet && (
-                                <Motekalender veileder={gjeldendeVeileder} enhet={enhet} />
-                            )}
                             <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
                         </div>
                         <FiltreringLabelContainer

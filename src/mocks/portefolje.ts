@@ -253,7 +253,7 @@ export function hentMockPlan() {
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
         {
             dato: '2022-03-23T12:02:35.636Z',
-            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            deltaker: {fornavn: 'john', etternavn: 'johnson'},
             avtaltMedNav: true
         },
         {
