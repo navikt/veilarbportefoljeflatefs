@@ -67,7 +67,7 @@
         "formik": "^2.2.6",
         "is-svg": "^4.3.1",
         "lodash.throttle": "^4.1.1",
-        "moment": "2.27.0",
+        "moment": "2.29.2",
         "nav-datovelger": "^6.1.9",
         "nav-frontend-chevron": "1.0.30",
         "nav-frontend-chevron-style": "^1.0.4",
