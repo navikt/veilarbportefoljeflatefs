@@ -56,6 +56,6 @@ export function updateLastPath() {
     }
 }
 
-const erProd = () => window.location.host === 'app.adeo.no';
+export const erProd = () => window.location.host === 'app.adeo.no';
 
 export const getEndringsloggUrl = () => `https://poao-endringslogg${erProd() ? '' : '.dev'}.intern.nav.no`;

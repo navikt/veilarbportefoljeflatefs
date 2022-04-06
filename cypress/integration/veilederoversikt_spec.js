@@ -3,20 +3,6 @@ before('Start server', () => {
 });
 
 describe('Annen veileder', () => {
-    //TODO toggle denne når tvungen stepper er av/på
-    // before('Tvungen stepper', () => {
-    //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
-    //         .click();
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .contains('Neste')
-    //         .click();
-    //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .contains('Ferdig')
-    //         .click();
-    //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-    // });
     it('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('sorteringspil_synkende').should('not.exist');

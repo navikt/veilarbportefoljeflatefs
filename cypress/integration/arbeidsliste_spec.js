@@ -3,17 +3,6 @@ before('Start server', () => {
 });
 
 describe('Arbeidsliste', () => {
-    //TODO toggle denne når tvungen stepper er av/på
-    // before('Tvungen stepper', () => {
-    //     cy.getByTestId('endringslogg_tour-modal').should('be.visible');
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-    // });
     let fornavn = '';
     let antallMedArbeidsliste = 0;
     let antallMedArbeidslisteEtterOppretting = 0;
