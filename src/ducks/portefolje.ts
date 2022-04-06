@@ -127,7 +127,8 @@ function leggTilOverskriftArbeidsliste(brukere, arbeidsliste) {
                 ...bruker,
                 arbeidsliste: {
                     ...bruker.arbeidsliste,
-                    overskrift: arbeidslisteForBruker.overskrift
+                    overskrift: arbeidslisteForBruker.overskrift,
+                    kommentar: arbeidslisteForBruker.kommentar
                 }
             };
         }
@@ -402,7 +403,6 @@ export function hentArbeidslisteforVeileder(enhet, veileder) {
 export function hentArbeidslisteForBruker(fodselsnummer) {
     return dispatch => {
         Api.hentArbeidslisteForBruker(fodselsnummer).then(arbeidslisteForBruker => {
-            console.log(arbeidslisteForBruker);
             dispatch({
                 type: OPPDATER_ARBEIDSLISTE_BRUKER,
                 arbeidslisteForBruker
