@@ -10,6 +10,7 @@ export default {
     utlopteAktiviteter: 123,
     ikkeIavtaltAktivitet: 1231,
     iavtaltAktivitet: 2323,
+    iAktivitet: 23230,
     minArbeidsliste: 10,
     minArbeidslisteBla: 3,
     minArbeidslisteLilla: 2,

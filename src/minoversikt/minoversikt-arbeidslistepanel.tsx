@@ -21,7 +21,7 @@ export default function ArbeidslistePanel({
     apen
 }: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
-    const sistEndretAv = bruker.arbeidsliste.sistEndretAv.veilederId;
+    const sistEndretAv = bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId ? bruker.arbeidsliste.sistEndretAv.veilederId : String.fromCharCode(8212);
     const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
 
     let arbeidslisteFristTekst;

@@ -17,6 +17,7 @@ export interface Statustall {
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
+    iAktivitet: number;
     minArbeidsliste: number;
     minArbeidslisteBla: number;
     minArbeidslisteLilla: number;
@@ -45,6 +46,7 @@ export const initalStatusState: StatustallState = {
         utlopteAktiviteter: 0,
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,
+        iAktivitet: 0,
         minArbeidsliste: 0,
         minArbeidslisteBla: 0,
         minArbeidslisteLilla: 0,

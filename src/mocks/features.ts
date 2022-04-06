@@ -4,7 +4,8 @@ import {
     VEDTAKSTOTTE,
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    IKKE_AVTALT
 } from '../konstanter';
 
 const toggles = {
@@ -13,7 +14,8 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: true,
-    [TVUNGEN_STEPPER]: false
+    [TVUNGEN_STEPPER]: false,
+    [IKKE_AVTALT]: true
 };
 
 export default toggles;

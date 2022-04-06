@@ -24,15 +24,13 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
     return (
         <>
             <div className="sidebar-header" data-testid="sidebar-header">
-                <div className="sidebar-header__tekst">
-                    <Heading size="medium" level="2">
-                        {tittel}
-                    </Heading>
-                </div>
+                <Heading size="medium" level="2" className="sidebar-header__tekst">
+                    {tittel}
+                </Heading>
+
                 {meta && <div className="sidebar-header__meta">{meta}</div>}
-                <div className="sidebar-header__lukknapp">
-                    <Lukknapp overstHjorne onClick={lukkTab} />
-                </div>
+
+                <Lukknapp onClick={lukkTab} className="sidebar-header__lukknapp" />
             </div>
             {children}
         </>

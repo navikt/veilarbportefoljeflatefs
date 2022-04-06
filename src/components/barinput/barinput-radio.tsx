@@ -1,7 +1,8 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './bar.less';
-import Barlabel from './barlabel';
+import {Radio} from 'nav-frontend-skjema';
+import {Label} from '@navikt/ds-react';
 
 interface BarinputRadioProps {
     filterNavn: string;
@@ -16,17 +17,21 @@ export const BarInputRadio = ({filterNavn, handleChange, antall, checked}: Barin
 
     return (
         <div className="barinput-radio">
-            <input
-                data-testid={`filter_checkboks-container_${filterNavn}`}
-                type="radio"
+            <Radio
+                className="mine-filter__filternavn"
+                key={filterNavn}
                 name="ferdigfilter"
-                id={filterNavn}
+                label={labelTekst}
                 value={filterVerdi}
                 onChange={handleChange}
                 checked={checked}
-                className="barinput-radio__input"
+                data-testid={`filter_checkboks-container_${filterNavn}`}
             />
-            <Barlabel htmlFor={filterNavn} labelTekst={labelTekst} antall={antall} />
+            {(antall || antall === 0) && (
+                <Label className="barlabel__antall" size="small">
+                    {antall}
+                </Label>
+            )}
         </div>
     );
 };

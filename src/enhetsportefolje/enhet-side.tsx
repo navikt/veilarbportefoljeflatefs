@@ -139,7 +139,7 @@ export default function EnhetSide() {
     return (
         <DocumentTitle title="Enhetens oversikt">
             <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
-                <ToppMeny />
+                <ToppMeny oversiktType={oversiktType} />
                 <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div

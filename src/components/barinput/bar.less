@@ -5,10 +5,15 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+
     &__input {
         margin-right: 1rem;
         align-self: center;
         transform: scale(1.5);
+    }
+
+    .arbeidslisteikon__svg {
+        margin-right: 0.5rem;
     }
 }
 
@@ -20,6 +25,12 @@
     &__labeltext {
         width: 100%;
         padding-right: 0.5rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        &:hover {
+            color: @navBla;
+        }
     }
 
     &__barwrapper {
@@ -41,6 +52,7 @@
     &__antall {
         flex-basis: 3rem;
         text-align: right;
+        align-self: center;
         padding-right: 0.5rem;
         font-weight: 800;
         margin-top: -0.3rem;

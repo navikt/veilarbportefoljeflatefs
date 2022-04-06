@@ -181,3 +181,8 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 export function hentSystemmeldinger() {
     return fetchToJson(`https://poao-sanity${erProd() ? '' : '.dev'}.intern.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
+
+export function hentMoteplan(veileder: string, enhet: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
+    return fetchToJson(url, MED_CREDENTIALS);
+}
