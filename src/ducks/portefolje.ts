@@ -103,14 +103,13 @@ function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
     });
 }
 
-function leggTilTittelOgKommentarArbeidslisteForBruker(brukere, arbeidsliste) {
+function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
     return brukere.map(bruker => {
         if (bruker.aktoerid === arbeidsliste.aktoerid) {
             return {
                 ...bruker,
                 arbeidsliste: {
                     ...bruker.arbeidsliste,
-                    overskrift: arbeidsliste.overskrift,
                     kommentar: arbeidsliste.kommentar,
                     hentetKommentarOgTittel: true
                 }
@@ -120,7 +119,7 @@ function leggTilTittelOgKommentarArbeidslisteForBruker(brukere, arbeidsliste) {
     });
 }
 
-function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
+function leggTilOverskriftArbeidsliste(brukere, arbeidsliste) {
     return brukere.map(bruker => {
         const arbeidslisteForBruker = arbeidsliste.find(a => a.aktoerid === bruker.aktoerid);
         if (arbeidslisteForBruker) {
@@ -128,8 +127,7 @@ function leggTilTittelOgKommentarArbeidsliste(brukere, arbeidsliste) {
                 ...bruker,
                 arbeidsliste: {
                     ...bruker.arbeidsliste,
-                    overskrift: arbeidslisteForBruker.overskrift,
-                    kommentar: arbeidslisteForBruker.kommentar
+                    overskrift: arbeidslisteForBruker.overskrift
                 }
             };
         }
@@ -240,7 +238,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: leggTilTittelOgKommentarArbeidsliste(state.data.brukere, action.arbeidsliste)
+                    brukere: leggTilOverskriftArbeidsliste(state.data.brukere, action.arbeidsliste)
                 }
             };
         }
@@ -249,10 +247,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: leggTilTittelOgKommentarArbeidslisteForBruker(
-                        state.data.brukere,
-                        action.arbeidslisteForBruker
-                    )
+                    brukere: leggTilKommentarArbeidsliste(state.data.brukere, action.arbeidslisteForBruker)
                 }
             };
         }
