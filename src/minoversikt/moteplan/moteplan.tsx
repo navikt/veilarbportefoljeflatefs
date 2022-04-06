@@ -2,9 +2,10 @@ import * as React from 'react';
 import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 
-import './motekalender.less';
+import './moteplan.less';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
+import {Calender} from '@navikt/ds-icons';
 
 export interface MoteData {
     dato: string;
@@ -18,14 +19,14 @@ export interface Deltaker {
     fnr: string;
 }
 
-interface MotekalenderProps {
+interface MoteplanProps {
     veileder: string;
     enhet: string;
 }
 
 const MAX_ANTALL_DAGER = 5;
 
-function Motekalender({veileder, enhet}: MotekalenderProps) {
+function Moteplan({veileder, enhet}: MoteplanProps) {
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -43,22 +44,30 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
     };
 
     return (
-        <div>
-            <Button ref={buttonRef} variant="secondary" onClick={() => fetchMoteData()}>
-                Møtekalender
+        <>
+            <Button className="moteplan_knapp" ref={buttonRef} variant="tertiary" onClick={() => fetchMoteData()}>
+                <Calender title="møteplan" />
+                Møteplan
             </Button>
-            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="auto">
-                <Popover.Content>
-                    {fetchError && (
+            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="left-start">
+                <Popover.Content className="moteplan_content">
+                    {fetchError ? (
                         <Alert variant="error" className="stor-feil-modal" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
+                    ) : moter?.length === 0 ? (
+                        <Alert variant="success" className="stor-feil-modal" size="small">
+                            Ingen møter er planlagt{' '}
+                            <span role="img" aria-label="tada-emoji">
+                                🎉
+                            </span>
+                        </Alert>
+                    ) : (
+                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)
                     )}
-                    {!fetchError &&
-                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)}
                 </Popover.Content>
             </Popover>
-        </div>
+        </>
     );
 }
 
@@ -67,9 +76,9 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
         return [new Date()];
     }
     return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
-        .map(dato => new Date(dato))
         .sort()
+        .map(dato => new Date(dato))
         .slice(0, MAX_ANTALL_DAGER);
 }
 
-export default Motekalender;
+export default Moteplan;
