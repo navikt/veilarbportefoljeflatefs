@@ -119,7 +119,7 @@ function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
     });
 }
 
-function leggTilOverskriftArbeidsliste(brukere, arbeidsliste) {
+function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
     return brukere.map(bruker => {
         const arbeidslisteForBruker = arbeidsliste.find(a => a.aktoerid === bruker.aktoerid);
         if (arbeidslisteForBruker) {
@@ -239,7 +239,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: leggTilOverskriftArbeidsliste(state.data.brukere, action.arbeidsliste)
+                    brukere: leggTilOverskriftOgTittelArbeidsliste(state.data.brukere, action.arbeidsliste)
                 }
             };
         }
