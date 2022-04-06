@@ -45,10 +45,10 @@ export default function ArbeidslistePanel({
                     </Detail>
                     <BodyShort size="small" data-testid="chevron_arbeidslisteinnhold_kommentar">
                         {bruker.arbeidsliste.kommentar}
-                        {!bruker.arbeidsliste.hentetKommentarOgTittel && (
-                            <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
-                        )}
                     </BodyShort>
+                    {!bruker.arbeidsliste.hentetKommentarOgTittel && (
+                        <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
+                    )}
                     <Detail className="brukerliste__arbeidslisteinnhold_footer">
                         {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                         <ArbeidslisteModalRediger
