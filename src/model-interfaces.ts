@@ -173,6 +173,7 @@ export interface ArbeidslisteModell {
     isOppfolgendeVeileder: boolean;
     sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
+    hentetKommentarOgTittel: boolean;
 }
 
 export enum Status {

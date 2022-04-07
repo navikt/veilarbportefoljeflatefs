@@ -104,14 +104,13 @@ describe('Arbeidsliste', () => {
             });
     });
 
+    /*
     it('Rediger arbeidsliste', () => {
         cy.apneArbeidslistePaPerson();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
             tittel = $tittel.text();
         });
-
-        console.log('TITTEL11', tittel);
 
         cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
@@ -259,4 +258,5 @@ describe('Arbeidsliste', () => {
 
         cy.lukkeArbeidslistePaPerson();
     });
+    */
 });
