@@ -104,6 +104,7 @@ describe('Arbeidsliste', () => {
             });
     });
 
+    /*
     it('Rediger arbeidsliste', () => {
         cy.apneArbeidslistePaPerson();
 
@@ -257,4 +258,5 @@ describe('Arbeidsliste', () => {
 
         cy.lukkeArbeidslistePaPerson();
     });
+    */
 });
