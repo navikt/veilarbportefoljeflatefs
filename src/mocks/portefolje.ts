@@ -243,7 +243,14 @@ export function hentArbeidsliste() {
 
 export function hentArbeidslisteForBruker(fnr) {
     const {fodselsnummer} = fnr;
-    return arbeidsliste.find(arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer);
+    const arbeidslisteForBruker = arbeidsliste.find(
+        arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer
+    );
+
+    if (arbeidslisteForBruker) {
+        return arbeidslisteForBruker;
+    }
+    return lagArbeidsliste('1', fnr);
 }
 
 export function hentMockPlan() {
