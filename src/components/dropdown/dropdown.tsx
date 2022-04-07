@@ -32,12 +32,7 @@ function Dropdown(props: DropdownProps) {
     const {focusRef} = useFocus();
 
     function handler(e) {
-        if (
-            e.target.getAttribute('data-testid') === 'aktiviteter_forenklet-filter_knapp' ||
-            e.target.getAttribute('data-testid') === 'aktiviteter_avansert-filter_knapp'
-        ) {
-            return;
-        } else if (apen && !divRef.current?.contains(e.target)) {
+        if (apen && !divRef.current?.contains(e.target)) {
             lukkDropdown();
         }
     }
