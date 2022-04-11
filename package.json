@@ -42,7 +42,7 @@
         "yet-another-fetch-mock": "4.0.0"
     },
     "dependencies": {
-        "@craco/craco": "5.6.4",
+        "@craco/craco": "5.9.0",
         "@navikt/ds-css": "^0.16.3",
         "@navikt/ds-css-internal": "^0.7.1",
         "@navikt/ds-datepicker": "^1.0.4",
@@ -56,7 +56,7 @@
         "babel-polyfill": "6.26.0",
         "browserslist": "^4.16.5",
         "classnames": "^2.2.6",
-        "craco-less": "1.9.0",
+        "craco-less": "1.17.0",
         "cross-env": "7.0.2",
         "cypress-axe": "^0.12.0",
         "cypress-drag-drop": "^1.1.1",
