@@ -43,7 +43,7 @@ function Motekalender({veileder, enhet}: MotekalenderProps) {
     };
 
     return (
-        <div id="motekalender_wrapper">
+        <div>
             <Button ref={buttonRef} variant="secondary" onClick={() => fetchMoteData()}>
                 Møtekalender
             </Button>

@@ -29,7 +29,6 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                             inputProps={{
                                 name: 'frist',
                                 placeholder: 'dd.mm.åååå'
-                                // ariaLabel: 'Frist:'
                             }}
                             onChange={(date?: string) => setFieldValue(field.name, date)}
                             calendarSettings={{showWeekNumbers: true, position: 'responsive'}}
