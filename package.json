@@ -54,7 +54,7 @@
         "acorn": "^8.0.4",
         "axe-core": "^4.1.1",
         "babel-polyfill": "6.26.0",
-        "browserslist": "^4.16.5",
+        "browserslist": "^4.20.2",
         "classnames": "^2.2.6",
         "craco-less": "^1.9.0",
         "cross-env": "7.0.2",
