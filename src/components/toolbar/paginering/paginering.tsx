@@ -3,30 +3,37 @@ import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
-import {selectSeFlere, selectSide, selectSideStorrelse} from './paginering-selector';
+import {selectSeFlere, selectSeFlereEnhetensOversikt, selectSide, selectSideStorrelse} from './paginering-selector';
 import './paginering.less';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 import {Back, Next} from '@navikt/ds-icons';
-
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 interface PagineringProps {
     className: string;
     antallTotalt: number;
     onChange?: (fra?: number, til?: number) => void;
+    oversiktType: OversiktType;
 }
 
-function Paginering({className, antallTotalt, onChange}: PagineringProps) {
+function Paginering({className, antallTotalt, onChange, oversiktType}: PagineringProps) {
     const side = useSelector((state: AppState) => selectSide(state));
 
-    const seFlere = useSelector((state: AppState) => selectSeFlere(state));
+    const seFlere = useSelector((state: AppState) =>
+        oversiktType === OversiktType.enhetensOversikt ? selectSeFlereEnhetensOversikt(state) : selectSeFlere(state)
+    );
 
     const sideStorrelse = useSelector((state: AppState) => selectSideStorrelse(state));
 
     const dispatch = useDispatch();
 
     const endrePaginering = (side, seFlere, sideStorrelse) => {
-        dispatch(pagineringSetup({side, seFlere, sideStorrelse}));
+        if (oversiktType === OversiktType.enhetensOversikt) {
+            dispatch(pagineringSetup({side, sideStorrelse, seFlereEnhetensOversikt: seFlere}));
+        } else {
+            dispatch(pagineringSetup({side, seFlere, sideStorrelse}));
+        }
     };
 
     const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;

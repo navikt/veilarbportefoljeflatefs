@@ -37,6 +37,7 @@
         "cypress-intellij-reporter": "0.0.4",
         "immer": ">=8.0.1",
         "prettier": "1.19.1",
+        "react-error-overlay": "^6.0.9",
         "start-server-and-test": "^1.11.7",
         "webpack": "^5.68.0",
         "yet-another-fetch-mock": "4.0.0"
@@ -91,7 +92,7 @@
         "node-notifier": "^9.0.0",
         "npm-run-all": "^4.1.5",
         "prop-types": "^15.7.2",
-        "query-string": "6.13.1",
+        "query-string": "6.14.1",
         "react": "^17.0.2",
         "react-collapse": "5.1.1",
         "react-day-picker": "^7.4.8",
@@ -108,7 +109,7 @@
         "react-transition-group": "4.4.1",
         "redux": "4.0.5",
         "redux-thunk": "2.3.0",
-        "reselect": "^4.0.0",
+        "reselect": "^4.1.5",
         "ssri": "^8.0.1",
         "typescript": "^3.9.7",
         "wait-on": "^5.2.1",
@@ -129,5 +130,8 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "resolutions": {
+        "react-error-overlay": "6.0.9"
+    }
 }

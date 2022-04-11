@@ -21,6 +21,7 @@ const ytelser = [
 
 let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
+
 let i = 123456;
 function lagGrunndata() {
     const dag = rnd(1, 31);
@@ -117,7 +118,7 @@ function lagVedtakUtkast() {
     };
 }
 
-function lagArbeidsliste(aktoerid) {
+function lagArbeidsliste(aktoerid, fnr) {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
         return {
@@ -154,6 +155,7 @@ function lagArbeidsliste(aktoerid) {
     arbeidsliste.push({
         ...arbeidslisteElement,
         aktoerid: aktoerid,
+        fodselsnummer: fnr,
         overskrift: lagOverskrift(),
         kommentar:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do'
@@ -172,7 +174,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 
     const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
-    const arbeidsliste = lagArbeidsliste(aktoerid);
+    const arbeidsliste = lagArbeidsliste(aktoerid, grunndata.fnr);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
@@ -238,6 +240,19 @@ const randomDate = ({past}) => {
 export function hentArbeidsliste() {
     return arbeidsliste;
 }
+
+export function hentArbeidslisteForBruker(fnr) {
+    const {fodselsnummer} = fnr;
+    const arbeidslisteForBruker = arbeidsliste.find(
+        arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer
+    );
+
+    if (arbeidslisteForBruker) {
+        return arbeidslisteForBruker;
+    }
+    return lagArbeidsliste('1', fnr);
+}
+
 export function hentMockPlan() {
     const omToDager = new Date();
     omToDager.setDate(omToDager.getDate() + 4);
@@ -245,7 +260,7 @@ export function hentMockPlan() {
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
         {
             dato: '2022-03-23T12:02:35.636Z',
-            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            deltaker: {fornavn: 'john', etternavn: 'johnson'},
             avtaltMedNav: true
         },
         {
