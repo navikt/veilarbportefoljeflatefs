@@ -1,10 +1,10 @@
-import {useHistory, useLocation} from 'react-router';
-import {useOnMount} from './use-on-mount';
-import * as queryString from 'query-string';
-import {settSortering} from '../ducks/portefolje';
-import {useDispatch} from 'react-redux';
-import {erHeroku} from '../utils/utils';
-import {oppdaterValgtEnhet} from '../ducks/valgt-enhet';
+import { useHistory, useLocation } from "react-router";
+import { useOnMount } from "./use-on-mount";
+import * as queryString from "query-string";
+import { settSortering } from "../ducks/portefolje";
+import { useDispatch } from "react-redux";
+import { erGithubPages, erHeroku } from "../utils/utils";
+import { oppdaterValgtEnhet } from "../ducks/valgt-enhet";
 
 export function useRedirectOnMount() {
     const history = useHistory();
@@ -22,7 +22,7 @@ export function useRedirectOnMount() {
             const stringified = queryString.stringify(parsed);
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
             history.replace(`${pathname}?${stringified}`);
-        } else if (erHeroku()) {
+        } else if (erHeroku() || erGithubPages()) {
             history.push('/enhet');
             //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
             dispatch(oppdaterValgtEnhet('1234'));
