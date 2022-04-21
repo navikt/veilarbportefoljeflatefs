@@ -8,10 +8,6 @@ export function selectSeFlere(state: AppState): boolean {
     return state.paginering.seFlere;
 }
 
-export function selectSeFlereEnhetensOversikt(state: AppState): boolean {
-    return state.paginering.seFlereEnhetensOversikt;
-}
-
 export function selectSideStorrelse(state: AppState): number {
     return state.paginering.sideStorrelse;
 }

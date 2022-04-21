@@ -72,11 +72,6 @@ export function hentArbeidslisteForVeileder(enhet, veilederident) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentArbeidslisteForBruker(fodselsnummer) {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${fodselsnummer}`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
 export function hentEnhetsVeiledere(enhetId) {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);

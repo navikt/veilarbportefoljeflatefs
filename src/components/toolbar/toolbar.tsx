@@ -105,7 +105,6 @@ function Toolbar(props: ToolbarProps) {
                     className="toolbar--skille-mellom-elementer"
                     onChange={onPaginering}
                     antallTotalt={antallTotalt}
-                    oversiktType={oversiktType}
                 />
             </div>
         </div>
