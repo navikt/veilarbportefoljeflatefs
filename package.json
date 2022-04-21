@@ -5,7 +5,7 @@
     "description": "veilarbportefoljeflatefs",
     "author": "NAV",
     "license": "MIT",
-    "homepage": "https://navikt.github.io/veilarbportefoljeflatefs",
+    "homepage": ".",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true craco start",
         "build": "craco build",
