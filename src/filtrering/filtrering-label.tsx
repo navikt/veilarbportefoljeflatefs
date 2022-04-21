@@ -26,8 +26,8 @@ function FiltreringLabel({
     const className = classNames('filtreringlabel__label', {
         'filtreringlabel-slett-filter': !skalHaKryssIkon
     });
-    const arialLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : ' Nullstill filtervalg';
-    const slettAlleFiltervalg = arialLabel === ' Nullstill filtervalg';
+    const arialLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : ' Slett alle filtervalg';
+    const slettAlleFiltervalg = arialLabel === ' Slett alle filtervalg';
     const buttonClassnames = classNames(
         'filtreringlabel',
         {'filtreringlabel--markert': markert},
