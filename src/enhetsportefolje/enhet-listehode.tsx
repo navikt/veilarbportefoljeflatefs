@@ -255,7 +255,7 @@ function EnhetListehode({
                         }
                         className="col col-xs-2"
                         title="Møtestatus"
-                        tekst="Møtestatus"
+                        tekst="Avtalt med NAV"
                         headerId="avtalt-mote"
                     />
                 )}

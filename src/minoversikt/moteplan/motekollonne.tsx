@@ -46,7 +46,7 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                 )}
             </Table.DataCell>
             <Table.DataCell className="moteplan_tabell_status">
-                {mote.avtaltMedNav ? 'Avtalt med NAV' : ' '}
+                {mote.avtaltMedNav ? 'Avtalt med NAV' : '-'}
             </Table.DataCell>
         </Table.Row>
     );

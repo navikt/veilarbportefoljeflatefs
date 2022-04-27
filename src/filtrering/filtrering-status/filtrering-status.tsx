@@ -6,7 +6,6 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,
-    I_AKTIVITET,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
@@ -27,7 +26,7 @@ import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {IKKE_AVTALT, VEDTAKSTOTTE} from '../../konstanter';
+import {VEDTAKSTOTTE} from '../../konstanter';
 import {Label} from '@navikt/ds-react';
 import './filtrering-status.less';
 
@@ -71,7 +70,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erIkkeAvtalteAktiviteterFeatureTogglePa = useFeatureSelector()(IKKE_AVTALT);
 
     return (
         <div className="filtrering-oversikt panel">
@@ -156,14 +154,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     handleChange={handleRadioButtonChange}
                     checked={ferdigfilterListe.includes(I_AVTALT_AKTIVITET)}
                 />
-                {erIkkeAvtalteAktiviteterFeatureTogglePa && (
-                    <BarInputRadio
-                        filterNavn="iAktivitet"
-                        antall={statusTall.iAktivitet}
-                        handleChange={handleRadioButtonChange}
-                        checked={ferdigfilterListe.includes(I_AKTIVITET)}
-                    />
-                )}
             </div>
             <div className="forsteBarlabelIGruppe">
                 <BarInputRadio
