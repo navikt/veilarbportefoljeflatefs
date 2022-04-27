@@ -22,7 +22,6 @@ function SokFilter<T>(props: SokFilterProps<T>) {
 
     useEffect(() => {
         sokKnapp.current?.focus();
-        console.log('i useEffect');
     }, []);
 
     useEffect(() => {
