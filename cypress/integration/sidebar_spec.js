@@ -461,7 +461,7 @@ describe('Veiledergrupper', () => {
 
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('not.exist');
 
-        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+        cy.getByTestId('filtreringlabel_nullstill-filtervalg')
             .should('be.visible')
             .click();
     });
@@ -694,7 +694,7 @@ describe('Filter', () => {
         //     .should('be.enabled')
         //     .click();
 
-        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+        cy.getByTestId('filtreringlabel_nullstill-filtervalg')
             .should('be.visible')
             .click();
 
@@ -776,7 +776,7 @@ describe('Filter', () => {
             .children()
             .should('have.length', 4);
 
-        cy.getByTestId('filtreringlabel_slett-alle-filtervalg')
+        cy.getByTestId('filtreringlabel_nullstill-filtervalg')
             .should('be.visible')
             .click();
     });
@@ -920,7 +920,7 @@ describe('Filter', () => {
             .children()
             .should('have.length', 5);
 
-        cy.getByTestId('filtreringlabel_slett-alle-filtervalg').click();
+        cy.getByTestId('filtreringlabel_nullstill-filtervalg').click();
 
         cy.getByTestId('filtrering_label-container')
             .children()

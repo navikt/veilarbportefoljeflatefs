@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../toolbar/toolbar.less';
 import {Alert, TextField} from '@navikt/ds-react';
 
@@ -18,6 +18,11 @@ function SokFilter<T>(props: SokFilterProps<T>) {
     const {data, limitSize, children} = props;
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
+    const sokKnapp = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        sokKnapp.current?.focus();
+    }, []);
 
     useEffect(() => {
         setRawfilteredData(
@@ -45,6 +50,7 @@ function SokFilter<T>(props: SokFilterProps<T>) {
                     className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}
                     data-testid="sok-filter_input"
+                    ref={sokKnapp}
                 />
             </div>
             {harData ? (

@@ -33,7 +33,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
-        cy.get('#fristInput').type('01.03.2066');
+        cy.get('#fristDatovelger').type('01.03.2066');
         cy.getByTestId('modal_arbeidslistekategori_GUL').click();
     });
 
