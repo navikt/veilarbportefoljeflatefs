@@ -18,15 +18,12 @@ function SokFilter<T>(props: SokFilterProps<T>) {
     const {data, limitSize, children} = props;
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
-    const [isEditing, setEditing] = useState(true);
     const sokKnapp = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (isEditing) {
-            sokKnapp.current?.focus();
-            setEditing(!isEditing);
-        }
-    }, [isEditing]);
+        sokKnapp.current?.focus();
+        console.log('i useEffect');
+    }, []);
 
     useEffect(() => {
         setRawfilteredData(
