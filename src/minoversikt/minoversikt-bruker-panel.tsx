@@ -27,6 +27,7 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
+    hentArbeidslisteForBruker: (fnr: string) => void;
 }
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
@@ -44,6 +45,21 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         }
     }, [props.varForrigeBruker]);
 
+    const {
+        bruker,
+        enhetId,
+        filtervalg,
+        valgteKolonner,
+        innloggetVeileder,
+        settMarkert,
+        varForrigeBruker,
+        hentArbeidslisteForBruker
+    } = props;
+    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
+    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
+    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
+    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
+
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
@@ -52,13 +68,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
             props.onClick(event);
         }
     }
-
-    const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
-    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
-
-    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
-    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
-    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
 
     return (
         <li
@@ -107,7 +116,12 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}
                         apen={apen}
-                        onClick={handleArbeidslisteButtonClick}
+                        onClick={e => {
+                            handleArbeidslisteButtonClick(e);
+                            if (!bruker.arbeidsliste.hentetKommentarOgTittel) {
+                                hentArbeidslisteForBruker(bruker.fnr);
+                            }
+                        }}
                         dataTestid={`min-oversikt_brukerliste-chevron${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
                 </div>

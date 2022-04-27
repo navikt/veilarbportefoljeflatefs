@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
-import {settBrukerSomMarkert} from '../ducks/portefolje';
+import {settBrukerSomMarkert, hentArbeidslisteForBruker} from '../ducks/portefolje';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
@@ -27,6 +27,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
+    const hentArbeidslisteBruker = fnr => dispatch(hentArbeidslisteForBruker(fnr));
 
     useOnUnmount(() => {
         updateLastPath();
@@ -49,6 +50,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                 filtervalg={filtervalg}
                                 valgteKolonner={listevisning.valgte}
                                 innloggetVeileder={props.innloggetVeileder}
+                                hentArbeidslisteForBruker={hentArbeidslisteBruker}
                             />
                         ))}
                     </ul>

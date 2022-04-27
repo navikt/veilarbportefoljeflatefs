@@ -220,7 +220,7 @@ function FiltreringLabelContainer({
     const fjernAlle = (
         <FiltreringLabel
             key="slett-alle"
-            label="Slett alle filtervalg"
+            label="Nullstill filtervalg"
             slettFilter={slettAlle}
             harMuligMenIkkeValgtKolonne={false}
             skalHaKryssIkon={false}
