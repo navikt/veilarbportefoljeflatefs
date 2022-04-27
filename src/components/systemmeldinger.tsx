@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './modal/feilmelding-brukere.less';
-import {Alert} from '@navikt/ds-react';
-import PortableText from 'react-portable-text';
+import {Alert, Heading} from '@navikt/ds-react';
+import BlockContent from '@sanity/block-content-to-react';
 import {useSystemmeldingerSelector} from '../hooks/redux/use-systemmeldinger';
 
 export const Systemmeldinger = () => {
@@ -9,14 +9,11 @@ export const Systemmeldinger = () => {
     return (
         <section className="systemmeldinger">
             {systemmeldinger.map(systemmelding => (
-                <Alert
-                    key={`tittel_${systemmelding.tittel}`}
-                    variant={systemmelding.type}
-                    className="stor-feil-modal"
-                    size="small"
-                >
-                    <b>{`${systemmelding.tittel} `}</b>
-                    <PortableText content={systemmelding.beskrivelse} />
+                <Alert key={`tittel_${systemmelding.tittel}`} variant={systemmelding.type} size="medium" fullWidth>
+                    <Heading spacing size="small" level="3">
+                        {systemmelding.tittel}
+                    </Heading>
+                    <BlockContent blocks={systemmelding.beskrivelse} />
                 </Alert>
             ))}
         </section>

@@ -1,4 +1,3 @@
-import Endringslogg from '@navikt/familie-endringslogg';
 import React from 'react';
 import './lenker.less';
 import Toasts from '../components/toast/toast';
@@ -15,6 +14,7 @@ import Moteplan from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/listevisning';
+import Endringslogg from '../components/endringslogg';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktType}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
