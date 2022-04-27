@@ -10,7 +10,6 @@ export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
 export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
-export const I_AKTIVITET = 'I_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
@@ -33,7 +32,6 @@ export const mapFilternavnTilFilterValue = {
     utlopteAktiviteter: UTLOPTE_AKTIVITETER,
     ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
-    iAktivitet: I_AKTIVITET,
     inaktiveBrukere: INAKTIVE_BRUKERE,
     minArbeidsliste: MIN_ARBEIDSLISTE,
     minArbeidslisteBla: KategoriModell.BLA,
@@ -68,7 +66,6 @@ export const ferdigfilterListe = {
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
-    I_AKTIVITET: 'I aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste'
 };
