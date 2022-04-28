@@ -21,10 +21,10 @@
     width: 0.625rem;
     height: 0.625rem;
     border-radius: 50%;
-    background-color: var(--navds-semantic-color-feedback-info-background);
+    background-color: var(--navds-semantic-color-focus-inverted);
 }
 
 .stegviser__steg--selected {
-    background-color: var(--navds-semantic-color-interaction-primary);
+    background-color: var(--navds-semantic-color-focus);
     transition: background-color 333ms linear;
 }

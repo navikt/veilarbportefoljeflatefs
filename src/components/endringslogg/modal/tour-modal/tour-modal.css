@@ -37,10 +37,11 @@
 }
 
 .tour-modal__main--tekst {
-  margin: 0 2rem !important;
+  margin: 0 1.2rem !important;
   text-align: center;
   min-height: 4.1rem;
   max-width: 100%;
+  font-size: 0.9rem;
 }
 
 .tour-modal__main--beskrivelse {
