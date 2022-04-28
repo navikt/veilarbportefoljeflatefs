@@ -1,24 +1,13 @@
-@import "~nav-frontend-core/less/core";
-
-.forenklet-filter {
-  &__topp {
-    margin-top: 0;
-  }
-
-  &__bunn {
-    margin-bottom: 0;
-  }
-}
 .endringslogg {
   width: fit-content;
   position: relative;
 }
 .collapse-header {
-  background-color: @navMorkGra;
+  background-color: var(--navds-semantic-color-canvas-background-inverted);;
   color: white;
   padding: 1rem;
-  border-top-left-radius: @border-radius-large;
-  border-top-right-radius: @border-radius-large;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   height: 3rem;
   min-height: fit-content;
   text-align: center;
@@ -57,13 +46,13 @@
   overflow: hidden;
   box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
   background-color: white;
-  border-radius: @border-radius-large;
+  border-radius: 6px;
   max-width: 27rem;
 }
 
 .endringslogg-content:focus {
   outline: none;
-  box-shadow: 0 0 0 3px @fokusFarge;
+  box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
 }
 
 .arrow-container::after {
@@ -75,15 +64,15 @@
   height: 0;
   border-left: 0.8125rem solid transparent;
   border-right: 0.8125rem solid transparent;
-  border-bottom: 0.6875rem solid @navMorkGra;
+  border-bottom: 0.6875rem solid var(--navds-semantic-color-canvas-background-inverted);;
 }
 .innhold-container {
   overflow-y: scroll;
   max-height: 30rem;
-  ul {
-    padding-left: 1.25rem;
-    margin: 0 0 0.5rem 0;
-  }
+}
+.innhold-container ul {
+  padding-left: 1.25rem;
+  margin: 0 0 0.5rem 0;
 }
 
 .arrow-container-left::after {
@@ -95,17 +84,9 @@
   height: 0;
   border-left: 0.8125rem solid transparent;
   border-right: 0.8125rem solid transparent;
-  border-bottom: 0.6875rem solid @navMorkGra;
+  border-bottom: 0.6875rem solid var(--navds-semantic-color-canvas-background-inverted);;
 }
-.innhold-container {
-  overflow-y: scroll;
-  max-height: 30rem;
-  ul {
-    padding-left: 1.25rem;
-    margin: 0 0 0.5rem 0;
-  }
-}
-// XXX: UU?
+
 .arrow-container-left:focus-within::before {
   content: "";
   position: absolute;
@@ -115,11 +96,10 @@
   height: 0;
   border-left: 0.8125rem solid transparent;
   border-right: 0.8125rem solid transparent;
-  border-bottom: 0.6875rem solid @fokusFarge;
+  border-bottom: 0.6875rem solid var(--navds-semantic-color-focus);
   opacity: 0.78;
 }
 
-// XXX: UU?
 .arrow-container:focus-within::before {
   content: "";
   position: absolute;
@@ -129,12 +109,12 @@
   height: 0;
   border-left: 0.8125rem solid transparent;
   border-right: 0.8125rem solid transparent;
-  border-bottom: 0.6875rem solid @fokusFarge;
+  border-bottom: 0.6875rem solid var(--navds-semantic-color-focus);
   opacity: 0.78;
 }
 
 .endringslogg-info-nye-notifikasjoner {
-  background-color: @navBla;
+  background-color: var(--navds-semantic-color-interaction-primary);
   border-radius: 50%;
   display: inline-block;
 }
@@ -155,19 +135,21 @@
   margin-top: 0.2rem;
 }
 .endringslogg-dropDown:focus {
-  fill: @navBla;
-  box-shadow: 0 0 0 2.5px @fokusFarge;
+  fill: var(--navds-semantic-color-interaction-primary);
+  box-shadow: 0 0 0 2.5px var(--navds-semantic-color-focus);
   border-radius: 2px;
-  #Outline {
-    fill: @navBla;
-  }
 }
+
+.endringslogg-dropDown:focus #Outline{
+  fill: var(--navds-semantic-color-interaction-primary);
+}
+
 #alarm_svg {
   height: 2.5rem;
   width: 2.5rem;
 }
 .endringslogg-dropDown:hover #Outline {
-  fill: @navBla;
+  fill: var(--navds-semantic-color-interaction-primary);
 }
 .endringslogg-innhold {
   padding: 0 2rem 0 2rem;
@@ -195,7 +177,7 @@
   padding-bottom: 1rem;
 }
 .endringslogg-skille:not(:last-child) {
-  border-bottom: 1px solid rgba(183, 177, 169);
+  border-bottom: 1px solid rgba(183, 177, 169, 1);
 }
 .endringslogg-rad:after {
   content: "";
@@ -208,7 +190,7 @@
   margin-left: 0.3em;
 }
 .hyperlink-ikon {
-  stroke: @navBla;
+  stroke: var(--navds-semantic-color-link);
 }
 .veiledergrupper-navet-tekst,
 .endringslogg_mine-filter {
@@ -225,12 +207,12 @@
 .circle {
   width: 0.875rem;
   height: 0.875rem;
-  background-color: @navBla;
+  background-color: var(--navds-semantic-color-interaction-primary);
   border-radius: 50%;
   position: absolute;
 }
 .ringring {
-  border: 3px solid @navBla;
+  border: 3px solid var(--navds-semantic-color-interaction-primary);
   -webkit-border-radius: 30px;
   height: 25px;
   width: 25px;

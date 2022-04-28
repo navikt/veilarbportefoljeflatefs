@@ -2,7 +2,7 @@ import classNames from 'classnames/dedupe';
 import React from 'react';
 import ExternalLinkIcon from './icons/external-link';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
-import './endringslogg.less';
+import './endringslogg.css';
 import BlockContent from '@sanity/block-content-to-react';
 import {TourModalButton} from './modal/tour-modal/tour-modal-button';
 import {trackLinkClick} from './utils/utils';

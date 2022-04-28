@@ -1,0 +1,30 @@
+.stegviser {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stegviser > * {
+    margin: 0 0.25rem;
+}
+
+.stegviser > :first-child {
+    margin-left: 0;
+}
+
+.stegviser > :last-child {
+    margin-right: 0;
+}
+
+.stegviser__steg {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background-color: var(--navds-semantic-color-feedback-info-background);
+}
+
+.stegviser__steg--selected {
+    background-color: var(--navds-semantic-color-interaction-primary);
+    transition: background-color 333ms linear;
+}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import './chevron-lenke.less';
+import './chevron-lenke.css';
 import {Right, Left} from '@navikt/ds-icons';
 
 export enum Direction {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {default as TourModal} from './tour-modal';
-import '../../endringslogg.less';
+import '../../endringslogg.css';
 import {trackModalOpen} from '../../utils/utils';
 import {Button} from '@navikt/ds-react';
 import {ModalType} from '../../utils/endringslogg-custom';

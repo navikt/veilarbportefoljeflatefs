@@ -1,5 +1,5 @@
 import {default as React, useState} from 'react';
-import './tour-modal.less';
+import './tour-modal.css';
 import ChevronLenke, {Direction} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
 import {ModalType} from '../../utils/endringslogg-custom';

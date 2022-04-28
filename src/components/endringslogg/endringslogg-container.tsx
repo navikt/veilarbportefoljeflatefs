@@ -4,7 +4,7 @@ import {EndringsloggContent} from './endringslogg-content';
 import TransitionContainer from './transition-container';
 import {useEventListener} from './hooks/use-event-listener';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
-import './endringslogg.less';
+import './endringslogg.css';
 import classNames from 'classnames';
 import {Label, Heading} from '@navikt/ds-react';
 
