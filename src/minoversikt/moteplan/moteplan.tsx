@@ -57,7 +57,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                         </Alert>
                     ) : moter?.length === 0 ? (
                         <Alert variant="success" className="stor-feil-modal" size="small">
-                            Ingen møter er planlagt
+                            Ingen møter
                         </Alert>
                     ) : (
                         dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)
