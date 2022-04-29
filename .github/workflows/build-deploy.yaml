@@ -67,7 +67,7 @@ jobs:
         name: Deploy q1 fss
         if: github.ref == 'refs/heads/dev'
         needs:
-            - build-docker-image
+            - build-project-and-docker-image
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
@@ -81,7 +81,7 @@ jobs:
         name: Deploy prod fss
         if: github.ref == 'refs/heads/master'
         needs:
-            - build-docker-image
+            - build-project-and-docker-image
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
