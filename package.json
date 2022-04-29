@@ -5,7 +5,6 @@
     "description": "veilarbportefoljeflatefs",
     "author": "NAV",
     "license": "MIT",
-    "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true craco start",
         "build": "craco build",
@@ -16,7 +15,8 @@
         "lint": "echo not implemented",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
-        "cy:run": "cypress run"
+        "cy:run": "cypress run",
+        "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true craco build"
     },
     "devDependencies": {
         "@cypress/react": "^5.3.2",
