@@ -1,4 +1,4 @@
-name: Bygg og Deploy Dev
+name: Bygg og Deploy
 
 on: push
 env:
@@ -12,7 +12,7 @@ jobs:
         name: Trello update
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: Get trello card id
               id: card
               uses: navikt/veilarbtrelloactions/get-card@v2.0
@@ -33,27 +33,29 @@ jobs:
         name: Build Project
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: '16'
                   cache: 'npm'
             - run: npm ci
             - run: npm run build
             - run: npm run test
-    build-docker-image:
+    build-project-and-docker-image:
         runs-on: ubuntu-latest
-        name: Build and publish Docker image
-        needs: build
+        name: Build project and publish Docker image
         if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master'
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
                   node-version: '16'
                   cache: 'npm'
+            - run: npm ci
             - name: Build production artifact
               run: npm run build
+            - name: Run tests
+              run: npm run test
             - name: Build and publish Docker image
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,11 +67,11 @@ jobs:
         name: Deploy q1 fss
         if: github.ref == 'refs/heads/dev'
         needs:
-            - build-docker-image
+            - build-project-and-docker-image
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: nais/deploy/actions/deploy@v2
+            - uses: actions/checkout@v3
+            - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-fss
@@ -79,11 +81,11 @@ jobs:
         name: Deploy prod fss
         if: github.ref == 'refs/heads/master'
         needs:
-            - build-docker-image
+            - build-project-and-docker-image
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: nais/deploy/actions/deploy@v2
+            - uses: actions/checkout@v3
+            - uses: nais/deploy/actions/deploy@v1
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: prod-fss
