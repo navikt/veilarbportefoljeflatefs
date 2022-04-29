@@ -15,7 +15,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Loader, Tag} from '@navikt/ds-react';
+import {Tag} from '@navikt/ds-react';
 import {Checkbox} from 'nav-frontend-skjema';
 
 interface MinOversiktBrukerPanelProps {
@@ -45,6 +45,21 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         }
     }, [props.varForrigeBruker]);
 
+    const {
+        bruker,
+        enhetId,
+        filtervalg,
+        valgteKolonner,
+        innloggetVeileder,
+        settMarkert,
+        varForrigeBruker,
+        hentArbeidslisteForBruker
+    } = props;
+    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
+    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
+    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
+    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
+
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
@@ -53,13 +68,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
             props.onClick(event);
         }
     }
-
-    const {bruker, enhetId, filtervalg, valgteKolonner, innloggetVeileder, settMarkert, varForrigeBruker} = props;
-    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
-
-    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
-    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
-    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
 
     return (
         <li
@@ -108,23 +116,24 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     <ArbeidslisteButton
                         skalVises={arbeidslisteAktiv}
                         apen={apen}
-                        onClick={handleArbeidslisteButtonClick}
+                        onClick={e => {
+                            handleArbeidslisteButtonClick(e);
+                            if (!bruker.arbeidsliste.hentetKommentarOgTittel) {
+                                hentArbeidslisteForBruker(bruker.fnr);
+                            }
+                        }}
                         dataTestid={`min-oversikt_brukerliste-chevron${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
                 </div>
             </div>
             <Collapse isOpened={apen}>
-                {bruker.arbeidsliste.hentetKommentarOgTittel ? (
-                    <ArbeidslistePanel
-                        skalVises={arbeidslisteAktiv}
-                        bruker={bruker}
-                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                        apen={apen}
-                    />
-                ) : (
-                    <Loader variant="neutral" size="2xlarge" title="Henter arbeidsliste for bruker..." />
-                )}
+                <ArbeidslistePanel
+                    skalVises={arbeidslisteAktiv}
+                    bruker={bruker}
+                    innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    apen={apen}
+                />
             </Collapse>
         </li>
     );
