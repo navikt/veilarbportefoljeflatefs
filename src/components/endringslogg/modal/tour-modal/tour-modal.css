@@ -3,8 +3,8 @@
   background-color: var(--navds-semantic-color-canvas-background-light);
   display: flex;
   flex-direction: column;
-  min-width: 31.25rem;
-  max-width: 31.25rem;
+  min-width: 33.25rem;
+  max-width: 33.25rem;
   border-radius: 6px;
 }
 
@@ -30,20 +30,11 @@
 .tour-modal__main--bilde {
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 .tour-modal__main--bilde-wrapper {
   box-shadow: 0 2px 5px rgba(120, 112, 106, 0.5);
-}
-
-.tour-modal__main--bilde-wrapper :after {
-  content: " ";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
 }
 
 .tour-modal__main--tekst {
