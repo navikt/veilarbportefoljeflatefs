@@ -73,6 +73,8 @@
 .innhold-container ul {
   padding-left: 1.25rem;
   margin: 0 0 0.5rem 0;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 .arrow-container-left::after {
@@ -164,7 +166,7 @@
   padding-right: 0.5rem;
 }
 .endringslogg-link {
-  margin-top: 0.2rem;
+  margin-top: 0.7rem;
   display: block !important;
 }
 .endringslogg-liste-punkt-topp {

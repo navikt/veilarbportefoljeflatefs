@@ -21,6 +21,7 @@ export const TourModalButton = (props: ModalStepperProps) => {
                 variant="secondary"
                 className={'endringslogg-stepperKnapp'}
                 type="button"
+                size="small"
                 onClick={() => {
                     setOpen(true);
                     trackModalOpen(props.id);

@@ -1,12 +1,12 @@
 import classNames from 'classnames/dedupe';
 import React from 'react';
-import ExternalLinkIcon from './icons/external-link';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
 import BlockContent from '@sanity/block-content-to-react';
 import {TourModalButton} from './modal/tour-modal/tour-modal-button';
 import {trackLinkClick} from './utils/utils';
 import {Heading, Label, Link} from '@navikt/ds-react';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface EndringsloggContentProps {
     innleggsListe: EndringsloggEntryWithSeenStatus[];
@@ -16,7 +16,7 @@ export const EndringsloggLink = (props: {linkText: string; link: string; onClick
     return (
         <Link className={'endringslogg-link'} target="_blank" href={props.link} onClick={props.onClick}>
             {props.linkText ? props.linkText : props.link}
-            <ExternalLinkIcon className={'linkikon'} />
+            <ExternalLink className={'linkikon'} />
         </Link>
     );
 };

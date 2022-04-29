@@ -36,6 +36,16 @@
   box-shadow: 0 2px 5px rgba(120, 112, 106, 0.5);
 }
 
+.tour-modal__main--bilde-wrapper :after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+
 .tour-modal__main--tekst {
   margin: 0 1.2rem !important;
   text-align: center;
