@@ -1,4 +1,4 @@
-name: Bygg og Deploy Dev
+name: Bygg og Deploy
 
 on: push
 env:
