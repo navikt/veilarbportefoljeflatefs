@@ -1,264 +1,55 @@
-import {ModalName} from '../../modal/tour-modal/tour-modal';
-import {EndringsloggLinkMedIkon} from '../endringslogg-innhold';
-import React from 'react';
-import TourModalButton from '../../modal/tour-modal/tour-modal-button';
-import '../endringslogg.less';
-import '../collapse-container-transition.less';
-import {BodyShort} from '@navikt/ds-react';
+import React from "react";
 
-export interface EndringsloggInnlegg {
-    tittel: string;
-    dato: string;
-    versjonId: string;
-    tekst?: string;
-    children?: React.ReactNode;
-    featureToggleName?: string;
+export type BlockContentType = any;
+export type ModalType = {
+  header?: string;
+  slides: Step[];
+};
+
+type Step = {
+  slideHeader: string;
+  slideDescription?: BlockContentType;
+  altText?: string;
+  slideImage?: any;
+};
+export interface EndringsloggEntry {
+  title: string;
+  _id: string;
+  description?: BlockContentType;
+  linkAttributes?: string[];
+  date?: string;
+  linkText?: string;
+  link?: string;
+  children?: React.ReactNode;
+  featureToggleName?: string;
+  modal?: ModalType;
+  forced: boolean;
 }
 
-export interface EndringsloggInnleggMedSettStatus extends EndringsloggInnlegg {
-    sett: boolean;
+export interface EndringsloggEntryWithSeenStatus extends EndringsloggEntry {
+  seen: boolean;
+  seenForced: boolean
 }
 
-const endringslogginnhold: EndringsloggInnlegg[] = [
-    {
-        dato: '4. februar 2022',
-        tittel: 'Endringer i detaljer inne på en bruker',
-        versjonId: '04.02.22',
-        children: (
-            <ul>
-                <li>Rekkefølge på temaene endret ut fra hva som er mest brukt</li>
-                <li>Navigasjonsmeny til venstre for å få oversikt og navigere raskt til ulike temaer</li>
-                <li>
-                    Kopiknapper i personalia for enkelt å kopiere e-post, telefon- eller kontonummer til utklippstavlen
-                </li>
-                <li>Jobbprofil oppdatert til jobbønsker for å stemme med det brukeren ser</li>
-                <li>Jobbsøkerkompetanse fjernet, siden denne tjenesten ikke lenger er i bruk</li>
-            </ul>
-        )
-    },
-    {
-        dato: '19. oktober 2021',
-        tittel: 'Rekrutteringsbistand + aktivitetsplan',
-        versjonId: '19.10.21',
-        tekst:
-            'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra NAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller nei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.',
-        children: (
-            <EndringsloggLinkMedIkon
-                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx"
-                linkTekst="Se mer informasjon på Navet"
-            />
-        )
-    },
-    {
-        dato: '30. september 2021',
-        tittel: 'Ny informasjon i Detaljer under Personalia',
-        versjonId: '30.09.21',
-        tekst:
-            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.'
-    },
-    {
-        dato: '16. juni 2021',
-        tittel: 'Forhåndsorientering vises i aktiviteten',
-        versjonId: '16.06.21',
-        tekst:
-            'Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.',
-        children: (
-            <EndringsloggLinkMedIkon
-                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx"
-                linkTekst="Se mer informasjon på Navet"
-            />
-        )
-    },
-    {
-        dato: '16. april 2021',
-        tittel: 'Justering av arbeidslisteikoner',
-        versjonId: '16.04.21',
-        tekst:
-            'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
-    },
-    {
-        dato: '08. april 2021',
-        tittel: 'Ny aktivitet for brukere og nye filter i oversikten',
-        versjonId: '08.04.21',
-        children: (
-            <>
-                <BodyShort size="small">
-                    Nå kan brukere selv legge til aktiviteten “medisinsk behandling” i sin aktivitetsplan.
-                    <br />
-                    Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere
-                    som har gjort endringer i målet.
-                </BodyShort>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppfølging.aspx"
-                    linkTekst="Se mer informasjon på Navet"
-                />
-                <TourModalButton modal={ModalName.SISTE_ENDRING} knappeTekst="Se hvordan" />
-            </>
-        )
-    },
-    {
-        dato: '24. mars 2021',
-        tittel: 'Gi dine brukere flere muligheter for å komme i jobb',
-        versjonId: '24.03.21',
-        tekst:
-            'I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».',
-        children: (
-            <>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Inkludering---for-vei.aspx"
-                    linkTekst="Se mer informasjon på Navet"
-                />
-                <TourModalButton modal={ModalName.TILRETTELEGGING} knappeTekst="Se hvordan" />
-            </>
-        )
-    },
-    {
-        dato: '10. mars 2021',
-        tittel: 'Forenklet filter for aktiviteter og tiltak',
-        versjonId: '10.03.2021',
-        children: (
-            <>
-                <BodyShort size="small" className="forenklet-filter__topp">
-                    Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av
-                    aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.
-                    <br />
-                    Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har
-                    en gitt aktivitet.
-                </BodyShort>
-                <BodyShort size="small" className="forenklet-filter__bunn">
-                    Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra
-                    aktivitetsfilteret.
-                </BodyShort>
-            </>
-        )
-    },
-    {
-        dato: '10. desember 2020',
-        tittel: 'Endre info om søknadsprosessen',
-        versjonId: '10.12.20',
-        tekst:
-            'Nå kan brukere oppdatere status om søknadsprosessen også etter at en stillingsaktivitet er satt til “Fullført” eller “Avbrutt”.'
-    },
-    {
-        dato: '23. november 2020',
-        tittel: 'Filtrer på svarene fra registreringen om utdanning',
-        versjonId: '23.11.20',
-        children: (
-            <>
-                <BodyShort size="small">
-                    Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan
-                    hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om
-                    utdanning.
-                    <br />
-                    Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.
-                </BodyShort>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx"
-                    linkTekst="Nyhetssak på Navet"
-                />
-            </>
-        )
-    },
-    {
-        dato: '4. november 2020',
-        tittel: 'Filteret “Permittert etter 09.03.2020” er fjernet',
-        versjonId: '04.11.20',
-        children: (
-            <>
-                <BodyShort size="small">
-                    Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene
-                    brukerne oppga når de registrerte seg.
-                    <br />
-                    Mange av de som tidligere var permittert har fått endret situasjon, og filtrene “Alle utenom
-                    permittert etter 09.03.2020” og “Permittert etter 09.03.2020" har derfor vært misvisende.
-                </BodyShort>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filteret--Permittert-etter-09.03.2020%E2%80%9D-er-n%C3%A5-fjernet-fra-oversikten-i-Modia.aspx"
-                    linkTekst="Nyhetssak på Navet"
-                />
-            </>
-        )
-    },
-    {
-        dato: '29. september 2020',
-        tittel: 'Endringer i filtrene',
-        versjonId: '29.09.20',
-        children: (
-            <BodyShort size="small">
-                <ul>
-                    <li>
-                        Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre
-                        rekkefølgen.
-                    </li>
-                    <li>
-                        Filtrene er lagt i klikkbare faner med ikoner. Da må du skrolle mindre og får raskere tilgang
-                        til filtrene. Filtrene ligger fast på siden slik at du alltid ser dem når du scroller i listen.
-                        Du kan lukke filtermenyen dersom du ønsker større plass til listen.
-                    </li>
-                </ul>
-            </BodyShort>
-        )
-    },
-    {
-        dato: '8. september 2020',
-        tittel: 'Varsel til bruker før møter',
-        versjonId: '08.09.20',
-        tekst:
-            'For møter som er innkalt gjennom aktivitetsplanen, vil det nå bli sendt ut påminnelse til brukeren 24 timer før møtet.',
-        children: (
-            <EndringsloggLinkMedIkon
-                url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-f%C3%A5r-brukerne-automatisk-varsel-om-m%C3%B8te-med-NAV.aspx"
-                linkTekst="Nyhetssak på Navet"
-            />
-        )
-    },
-    {
-        dato: '26. august 2020',
-        tittel: 'Lagre filter',
-        versjonId: '26.08.20',
-        tekst:
-            'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.',
-        children: (
-            <>
-                <TourModalButton modal={ModalName.MINE_FILTER} knappeTekst="Se hvordan" />
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Lagre-filtre-i-Min-oversikt.aspx "
-                    linkTekst="Nyhetssak på Navet"
-                    className="endringslogg_mine-filter"
-                />
-            </>
-        )
-    },
-    {
-        dato: '3. august 2020',
-        tittel: 'Brukernotifikasjon om CV',
-        versjonId: '03.08.20',
-        tekst:
-            'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen.'
-    },
-    {
-        dato: '10. juli 2020',
-        tittel: 'Nytt filter på CV/jobbprofil',
-        versjonId: '10.07.20',
-        tekst:
-            'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.',
-        children: (
-            <>
-                <BodyShort size="small">Filtrene ligger i gruppen "Status og brukergrupper" under "Filter".</BodyShort>
-                <EndringsloggLinkMedIkon
-                    url="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx"
-                    linkTekst="Nyhetssak på Navet"
-                />
-            </>
-        )
-    }
-];
+export const setAllEntriesSeen = (endringsloggEntries: EndringsloggEntryWithSeenStatus[]) => endringsloggEntries.map((el) => {
+  return {...el,  seen: true};
+});
 
-export function hentEndringslogg(): EndringsloggInnleggMedSettStatus[] {
-    return endringslogginnhold.map(el => {
-        return {
-            ...el,
-            sett: true
-        };
-    });
-}
+export const mapRemoteToState = (
+  remotestorage: any[]
+): EndringsloggEntryWithSeenStatus[] => remotestorage
+    .map((endring) => {
+      return {
+        title: endring?.title,
+        _id: endring._id,
+        description: endring?.description,
+        modal: endring?.modal,
+        linkText: endring.linkAttributes?.linkText,
+        link: endring.linkAttributes?.link,
+        date: endring?.date,
+        seen: endring?.seen,
+        forced: endring?.forcedModal,
+        seenForced: endring.seenForced
+      };
+    })
+    .sort((a, b) => (a?.date > b?.date ? -1 : 1));

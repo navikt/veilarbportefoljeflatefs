@@ -1,5 +1,4 @@
 import React from 'react';
-import EndringsloggTourWrapper from '../components/endringslogg/endringslogg-tour-wrapper';
 import './lenker.less';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
@@ -10,14 +9,17 @@ import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE, IKKE_AVTALT} from '../konstanter';
 import classNames from 'classnames';
+import {getEndringsloggUrl} from '../utils/url-utils';
 import Moteplan from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/listevisning';
+import Endringslogg from '../components/endringslogg';
 
 function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktType}) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
+    const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
     const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
     const erIkkeAvtalteAktiviteterPa = useFeatureSelector()(IKKE_AVTALT);
@@ -27,6 +29,11 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktTy
     if (portefoljestorrelser.status === STATUS.PENDING || portefoljestorrelser.status === STATUS.NOT_STARTED) {
         return null;
     }
+
+    if (innloggetVeileder.status === STATUS.PENDING || innloggetVeileder.status === STATUS.NOT_STARTED) {
+        return null;
+    }
+
     return (
         <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
             <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
@@ -36,7 +43,13 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktTy
                 {props.oversiktType === OversiktType.minOversikt && enhet && erIkkeAvtalteAktiviteterPa && (
                     <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
                 )}
-                <EndringsloggTourWrapper />
+                <Endringslogg
+                    userId={innloggetVeileder.data?.ident!}
+                    appId="afolg"
+                    backendUrl={getEndringsloggUrl()}
+                    appName="Arbeidsrettet oppfølging"
+                    alignLeft
+                />
             </div>
         </div>
     );

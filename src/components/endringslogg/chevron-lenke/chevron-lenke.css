@@ -1,0 +1,36 @@
+.chevron-left {
+  margin-right: 0.5rem;
+
+}
+.chevron-right {
+  margin-left: 0.5rem;
+}
+.chevron-lenke {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+}
+
+.chevron-lenke--hide {
+  visibility: hidden;
+}
+
+.chevron-lenke__tekst {
+  color: var(--navds-semantic-color-interaction-primary);
+  padding-bottom: 0.125rem;
+  border-bottom: 1px solid transparent;
+}
+
+.chevron-lenke__tekst:hover {
+  border-bottom: 1px solid var(--navds-semantic-color-link);
+}
+
+.chevron-lenke__tekst:focus {
+  border: 2px solid var(--navds-semantic-color-interaction-primary);
+}

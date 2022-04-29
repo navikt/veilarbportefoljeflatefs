@@ -192,7 +192,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             {brukIkkeAvtalteAktiviteter && (
                 <TekstKolonne
                     className="col col-xs-2"
-                    tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : ''}
+                    tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                     }

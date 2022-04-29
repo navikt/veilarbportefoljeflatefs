@@ -12,6 +12,8 @@ import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
+import {hentSystemmeldinger} from './systemmeldinger';
+import {endringsloggListe} from './endringslogg';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -128,6 +130,22 @@ mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx
     return res(ctx.json(customMineFilter), ctx.status(200));
 });
 
+mock.post('https://poao-endringslogg.intern.nav.no/endringslogg', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
+mock.post('https://poao-endringslogg.intern.nav.no/analytics/session-duration', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
+mock.post('https://poao-endringslogg.dev.intern.nav.no/endringslogg', (req, res, ctx) => {
+    return res(ctx.json(endringsloggListe));
+});
+
+mock.post('https://poao-endringslogg.dev.intern.nav.no/analytics/session-duration', (req, res, ctx) => {
+    return res(ctx.json([]));
+});
+
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(innloggetVeileder));
 mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
@@ -138,6 +156,7 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonRe
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
+mock.patch('https://poao-endringslogg.dev.intern.nav.no/analytics/modal-open', (req, res, ctx) => res(ctx.json([])));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonResponse(lagPortefoljeStorrelser()));
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
@@ -238,6 +257,8 @@ mock.get(
         })
     )
 );
+
+mock.get('https://poao-sanity.dev.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
 
 // websocket
 class MockWebSocket {

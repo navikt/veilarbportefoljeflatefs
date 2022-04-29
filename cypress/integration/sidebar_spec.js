@@ -26,16 +26,6 @@ before('Start server', () => {
 });
 
 describe('Mine filter', () => {
-    //TODO toggle denne når tvungen stepper er av/på
-    // before('Tvungen stepper', () => {
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_neste-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_ferdig-knapp')
-    //         .click();
-    //     cy.getByTestId('endringslogg_tour-modal').should('not.exist');
-    // });
     it('Finn antall filter', () => {
         cy.gaTilOversikt('enhetens-oversikt');
 

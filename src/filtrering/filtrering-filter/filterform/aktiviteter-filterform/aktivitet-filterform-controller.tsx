@@ -79,7 +79,10 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
                 <AktivitetFilterformForenklet
                     valg={aktiviteter}
                     endreFiltervalg={endreFiltervalg}
-                    klikkPaAvansertLenke={() => klikkPaLenke(false)}
+                    klikkPaAvansertLenke={e => {
+                        e.stopPropagation();
+                        klikkPaLenke(false);
+                    }}
                     nullstillAvanserteAktiviteter={nullstillAvanserteAktiviteter}
                     nullstillForenkledeAktiviteter={nullstillForenkledeAktiviteter}
                     valgteForenkledeAktiviteter={valgteForenkledeAktiviteter}
@@ -90,7 +93,10 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
                     valg={aktiviteter}
                     filtervalg={filtervalg}
                     endreFiltervalg={endreFiltervalg}
-                    klikkPaForenkletLenke={() => klikkPaLenke(true)}
+                    klikkPaForenkletLenke={e => {
+                        e.stopPropagation();
+                        klikkPaLenke(true);
+                    }}
                     nullstillForenkledeAktiviteter={nullstillForenkledeAktiviteter}
                     nullstillAvanserteAktiviteter={nullstillAvanserteAktiviteter}
                     valgteAvanserteAktiviteter={valgteAvanserteAktiviteter}

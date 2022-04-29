@@ -21,7 +21,7 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import AlertstripeTekniskeProblemer from '../components/alertstripe-tekniske-problemer';
+import {Systemmeldinger} from '../components/systemmeldinger';
 import {Panel} from '@navikt/ds-react';
 
 function VeiledereSide() {
@@ -60,7 +60,7 @@ function VeiledereSide() {
                 data-testid={`side-storrelse_${id}`}
             >
                 <ToppMeny oversiktType={oversiktType} />
-                <AlertstripeTekniskeProblemer />
+                <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
                         className="oversikt-sideinnhold-veilederside"

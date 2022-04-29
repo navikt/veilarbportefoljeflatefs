@@ -7,6 +7,11 @@
         grid-template-columns: auto auto auto auto;
     }
 
+    .endringslogg {
+        grid-column: 4;
+        justify-self: end;
+    }
+
     .lenke--frittstaende {
         border: 0;
         padding: 0;
@@ -69,6 +74,16 @@
             &:hover {
                 color: @navMorkGra;
             }
+        }
+    }
+
+    .moteendringsboks {
+        grid-column: 4;
+        display: flex;
+        justify-content: flex-end;
+
+        .endringslogg {
+            margin-left: 2.5rem;
         }
     }
 }
