@@ -148,7 +148,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             <Alert variant="info" size="small">
                                 Svarene brukeren oppga på registreringstidspunktet.
                             </Alert>
-                            /* position: sticky;
                             <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                         </>
                     )}
