@@ -4,23 +4,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/index.html"
   },
   {
-    "revision": "20668c8fecf90af28c02",
+    "revision": "6bcab185b64de9374120",
     "url": "/veilarbportefoljeflatefs/static/css/2.chunk.css"
   },
   {
-    "revision": "b35a85d8b5461a1d5d91",
+    "revision": "63a3476e35f84c40d35f",
     "url": "/veilarbportefoljeflatefs/static/css/main.chunk.css"
   },
   {
-    "revision": "20668c8fecf90af28c02",
+    "revision": "6bcab185b64de9374120",
     "url": "/veilarbportefoljeflatefs/static/js/2.chunk.js"
   },
   {
-    "revision": "9b6cc9c04821a6a978a6ac0cce4c5c7b",
+    "revision": "027481246f8f023536b5b95d66a44ccd",
     "url": "/veilarbportefoljeflatefs/static/js/2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b35a85d8b5461a1d5d91",
+    "revision": "63a3476e35f84c40d35f",
     "url": "/veilarbportefoljeflatefs/static/js/main.chunk.js"
   },
   {
@@ -52,36 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/static/media/filter-ikon.e2055100.svg"
   },
   {
-    "revision": "65d6b4acd3bac90cedc355df572c07c7",
-    "url": "/veilarbportefoljeflatefs/static/media/icon-v3.65d6b4ac.svg"
-  },
-  {
-    "revision": "3d95ca9cec78896264a8df610cebfd6b",
-    "url": "/veilarbportefoljeflatefs/static/media/mine-filter1.3d95ca9c.png"
-  },
-  {
-    "revision": "6f239861c77e8c67ed71efd57a9a4a4e",
-    "url": "/veilarbportefoljeflatefs/static/media/mine-filter2.6f239861.png"
-  },
-  {
-    "revision": "e6138a3570f265e3880fb3368bca8440",
-    "url": "/veilarbportefoljeflatefs/static/media/mine-filter3.e6138a35.png"
-  },
-  {
     "revision": "0561452606bb08c50764ab60fea76973",
     "url": "/veilarbportefoljeflatefs/static/media/settings.05614526.svg"
-  },
-  {
-    "revision": "efa9dd7fe477cb93b4bf62dbf32563f0",
-    "url": "/veilarbportefoljeflatefs/static/media/siste-endring1.efa9dd7f.png"
-  },
-  {
-    "revision": "b7f91305945fe12a2bd22b865f2b8f9e",
-    "url": "/veilarbportefoljeflatefs/static/media/siste-endring2.b7f91305.png"
-  },
-  {
-    "revision": "b4f9bb36178c8231d97a5b7d044d704e",
-    "url": "/veilarbportefoljeflatefs/static/media/siste-endring3.b4f9bb36.png"
   },
   {
     "revision": "91f3b622bdd45a3e876301e154ec087f",
@@ -98,17 +70,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "4e78fdf04ce65943b6a72fb5323c0e1c",
     "url": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.4e78fdf0.svg"
-  },
-  {
-    "revision": "eef4ad900d86d24d528a75cba5e3fedf",
-    "url": "/veilarbportefoljeflatefs/static/media/tilrettelegging1.eef4ad90.jpg"
-  },
-  {
-    "revision": "d139b6f0bf592ae8c8a21422c6baae4f",
-    "url": "/veilarbportefoljeflatefs/static/media/tilrettelegging2.d139b6f0.jpg"
-  },
-  {
-    "revision": "eaa1fa470dcc47fcc7f8234bfdeb9828",
-    "url": "/veilarbportefoljeflatefs/static/media/tilrettelegging3.eaa1fa47.jpg"
   }
 ]);
