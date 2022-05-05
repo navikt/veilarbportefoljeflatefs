@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "79f95e24c4bf3d3a696c21999df9ea4a",
+    "revision": "6e79f17dfe2a6a2d136699cf9f03c531",
     "url": "/veilarbportefoljeflatefs/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/static/css/2.chunk.css"
   },
   {
-    "revision": "432d4593e9c5845430ef",
+    "revision": "63a3476e35f84c40d35f",
     "url": "/veilarbportefoljeflatefs/static/css/main.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/static/js/2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "432d4593e9c5845430ef",
+    "revision": "63a3476e35f84c40d35f",
     "url": "/veilarbportefoljeflatefs/static/js/main.chunk.js"
   },
   {
