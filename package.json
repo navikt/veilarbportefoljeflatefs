@@ -5,6 +5,7 @@
     "description": "veilarbportefoljeflatefs",
     "author": "NAV",
     "license": "MIT",
+    "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true craco start",
         "build": "craco build",
