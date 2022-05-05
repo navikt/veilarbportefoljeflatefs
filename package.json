@@ -17,7 +17,7 @@
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
         "cy:run": "cypress run",
-        "build:mock": "cross-env PUBLIC_URL=/ REACT_APP_MOCK=true craco build"
+        "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true craco build"
     },
     "devDependencies": {
         "@cypress/react": "^5.3.2",
