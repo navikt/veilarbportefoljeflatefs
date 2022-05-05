@@ -17,10 +17,9 @@ moment.locale('nb');
 const store = createStore();
 
 function Application() {
-    const basename = document.querySelector('base')?.getAttribute('href') ?? '/veilarbportefoljeflatefs'
     return (
         <Provider store={store}>
-            <BrowserRouter basename={basename}>
+            <BrowserRouter basename="/veilarbportefoljeflatefs">
                 <InitialDataProvider>
                     <RedirectPortefolje>
                         <Decorator />
