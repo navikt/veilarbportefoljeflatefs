@@ -30,9 +30,7 @@ export function useRedirectOnMount() {
             return;
         }
         else if (erGithubPages()){
-            history.push('/veilarbportefoljeflatefs/enhet');
-            //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
-            dispatch(oppdaterValgtEnhet('1234'));
+            history.push('/enhet');
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
             return;
         } else if (lastPath && location.pathname === '/tilbake') {
