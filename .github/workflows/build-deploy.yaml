@@ -66,7 +66,7 @@ jobs:
     update-gh-pages:
         name: Update GitHub pages
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/master'
+        #if: github.ref == 'refs/heads/master'
         steps:
             - name: Checkout
               uses: actions/checkout@v2

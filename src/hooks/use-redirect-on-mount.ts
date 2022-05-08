@@ -22,11 +22,18 @@ export function useRedirectOnMount() {
             const stringified = queryString.stringify(parsed);
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
             history.replace(`${pathname}?${stringified}`);
-        } else if (erHeroku() || erGithubPages()) {
+        } else if (erHeroku()) {
             history.push('/enhet');
             //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
             dispatch(oppdaterValgtEnhet('1234'));
             dispatch(settSortering('ikke_satt', 'ikke_satt'));
+            return;
+        }
+        else if (erGithubPages()){
+            history.push('/');
+            //DEKORATORN VIKER IKKE PÅ HEROKU SÅ DETTA ER EN HAKS FOR ATT FÅ ENHET SATT
+            //dispatch(oppdaterValgtEnhet('1234'));
+            //dispatch(settSortering('ikke_satt', 'ikke_satt'));
             return;
         } else if (lastPath && location.pathname === '/tilbake') {
             history.replace({pathname: lastPath, search: lastSearch});
