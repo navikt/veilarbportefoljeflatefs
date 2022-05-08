@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/static/css/2.chunk.css"
   },
   {
-    "revision": "713880674c172faa2cfd",
+    "revision": "84dedc11c9c0cca15db4",
     "url": "/veilarbportefoljeflatefs/static/css/main.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/veilarbportefoljeflatefs/static/js/2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "713880674c172faa2cfd",
+    "revision": "84dedc11c9c0cca15db4",
     "url": "/veilarbportefoljeflatefs/static/js/main.chunk.js"
   },
   {
