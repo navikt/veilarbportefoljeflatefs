@@ -125,10 +125,9 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
 export const oppdaterAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
-    oversiktType: OversiktType,
-    erIkkeAvtalteAktiviteterFeatureTogglePa: boolean
+    oversiktType: OversiktType
 ) => {
-    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType, erIkkeAvtalteAktiviteterFeatureTogglePa);
+    const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);
 
     dispatch({
         type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,

@@ -7,7 +7,7 @@ import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import DarkModeToggle from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {ALERTSTRIPE_FEILMELDING, DARKMODE, IKKE_AVTALT} from '../konstanter';
+import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
 import classNames from 'classnames';
 import {getEndringsloggUrl} from '../utils/url-utils';
 import Moteplan from '../minoversikt/moteplan/moteplan';
@@ -22,7 +22,6 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktTy
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
     const harDarkModeFeatureToggle = useFeatureSelector()(DARKMODE);
     const erAlertstripeFeilmeldingFeatureTogglePa = useFeatureSelector()(ALERTSTRIPE_FEILMELDING);
-    const erIkkeAvtalteAktiviteterPa = useFeatureSelector()(IKKE_AVTALT);
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const enhet = useEnhetSelector();
 
@@ -40,7 +39,7 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktTy
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             <div className="moteendringsboks">
-                {props.oversiktType === OversiktType.minOversikt && enhet && erIkkeAvtalteAktiviteterPa && (
+                {props.oversiktType === OversiktType.minOversikt && enhet && (
                     <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
                 )}
                 <Endringslogg
