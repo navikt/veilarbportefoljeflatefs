@@ -32,8 +32,6 @@ import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {IKKE_AVTALT} from '../konstanter';
 import moment from 'moment';
 
 interface MinOversiktKolonnerProps {
@@ -45,14 +43,8 @@ interface MinOversiktKolonnerProps {
 }
 
 function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
-    const brukIkkeAvtalteAktiviteter = useFeatureSelector()(IKKE_AVTALT);
-
-    const moteStartTid = brukIkkeAvtalteAktiviteter
-        ? klokkeslettTilMinutter(bruker.alleMoterStartTid)
-        : klokkeslettTilMinutter(bruker.moteStartTid);
-    const varighet = brukIkkeAvtalteAktiviteter
-        ? minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid)
-        : minuttDifferanse(bruker.moteSluttTid, bruker.moteStartTid);
+    const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
+    const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
 
     const {ytelse} = filtervalg;
@@ -169,15 +161,11 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
                 dato={varighet}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
-            {brukIkkeAvtalteAktiviteter && (
-                <TekstKolonne
-                    className="col col-xs-2"
-                    tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
-                    }
-                />
-            )}
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
+                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
