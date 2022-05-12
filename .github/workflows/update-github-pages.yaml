@@ -1,4 +1,4 @@
-name: Deploy til Q1
+name: Deploy github pages
 on:
     workflow_dispatch:
 env:
