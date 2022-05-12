@@ -69,9 +69,9 @@ jobs:
         if: github.ref == 'refs/heads/master'
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
             - name: Setup node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
                   node-version: '16'
                   cache: 'npm'
@@ -79,6 +79,8 @@ jobs:
               run: npm ci
             - name: Build mock application
               run: npm run build:mock
+            - name: Legg til 404 fil
+              run: cp ./.github/pages/404.html ./build/404.html
             - name: Update GitHub pages
               uses: peaceiris/actions-gh-pages@v3
               with:

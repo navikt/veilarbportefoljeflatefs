@@ -1,5 +1,5 @@
-import { AktiviteterModell } from "../model-interfaces";
-import { Maybe } from "./types";
+import {AktiviteterModell} from '../model-interfaces';
+import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -56,14 +56,9 @@ export function erDev() {
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
-export function erHeroku() {
-    return window.location.host.includes('herokuapp');
-}
-
 export function erGithubPages() {
     return window.location.host.includes('navikt.github.io');
 }
-
 
 export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     if (!utlopsdatoStr) {
