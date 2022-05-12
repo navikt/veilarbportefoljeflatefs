@@ -1,11 +1,6 @@
 name: Deploy github pages
 on:
     workflow_dispatch:
-env:
-    IMAGE_TAG: ${{ github.sha }}
-    IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
-    PRINT_PAYLOAD: true
-
 jobs:
     update-gh-pages:
         name: Update GitHub pages
