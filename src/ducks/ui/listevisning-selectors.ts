@@ -55,11 +55,7 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
     }
 }
 
-export function getMuligeKolonner(
-    filtervalg: FiltervalgModell,
-    oversiktType: OversiktType,
-    erIkkeAvtalteAktiviteterFeatureTogglePa
-): Kolonne[] {
+export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
     const avansertAktivitetErValgt = () => {
         return (
             !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
@@ -75,15 +71,12 @@ export function getMuligeKolonner(
             filtervalg.tiltakstyper.length > 0
         );
     };
-    const head = ([] as Kolonne[])
+    return ([] as Kolonne[])
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
-        .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)));
-    const middle = erIkkeAvtalteAktiviteterFeatureTogglePa
-        ? head.concat(addHvis(Kolonne.MOTE_ER_AVTALT, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
-        : head;
-    return middle
+        .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
+        .concat(addHvis(Kolonne.MOTE_ER_AVTALT, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(
