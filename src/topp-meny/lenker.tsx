@@ -42,7 +42,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 data-testid="enhetens-oversikt"
                 aria-selected={erAktiv('enhetens-oversikt')}
             >
-                Test oversikt
+                Enhetens oversikt
             </NavLink>
             <NavLink
                 to="/veiledere"
