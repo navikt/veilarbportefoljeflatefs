@@ -63,6 +63,29 @@ jobs:
                   echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
                   docker build -t ${IMAGE}:${IMAGE_TAG} .
                   docker push ${IMAGE}:${IMAGE_TAG}
+    update-gh-pages:
+        name: Update GitHub pages
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/master'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Setup node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '16'
+                  cache: 'npm'
+            - name: Install dependencies
+              run: npm ci
+            - name: Build mock application
+              run: npm run build:mock
+            - name: Legg til 404 fil
+              run: cp ./.github/pages/404.html ./build/404.html
+            - name: Update GitHub pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./build
     deploy-dev:
         name: Deploy q1 fss
         if: github.ref == 'refs/heads/dev'

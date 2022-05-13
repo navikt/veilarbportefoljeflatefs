@@ -56,8 +56,8 @@ export function erDev() {
     return host.includes('localhost') || host.includes('127.0.0.1');
 }
 
-export function erHeroku() {
-    return window.location.host.includes('herokuapp');
+export function erGithubPages() {
+    return window.location.host.includes('navikt.github.io');
 }
 
 export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
