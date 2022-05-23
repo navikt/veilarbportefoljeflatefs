@@ -1,4 +1,5 @@
-export const hentSystemmeldinger = () => [
+export const hentSystemmeldinger = () => [];
+/*[
     {
         tittel: 'Oversikten i Modia arbeidsrettet oppfølging blir ikke oppdatert torsdag morgen',
         type: 'warning',
@@ -20,4 +21,4 @@ export const hentSystemmeldinger = () => [
             }
         ]
     }
-];
+];*/

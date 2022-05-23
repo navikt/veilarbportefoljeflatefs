@@ -256,7 +256,7 @@ export function hentArbeidslisteForBruker(fnr) {
 export function hentMockPlan() {
     const omToDager = new Date();
     omToDager.setDate(omToDager.getDate() + 4);
-    return []; /*[
+    return [
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
         {
             dato: '2022-03-23T12:02:35.636Z',
@@ -274,7 +274,7 @@ export function hentMockPlan() {
             avtaltMedNav: true
         },
         {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
-    ];*/
+    ];
 }
 
 export default new Array(123).fill(0).map(() => lagBruker());
