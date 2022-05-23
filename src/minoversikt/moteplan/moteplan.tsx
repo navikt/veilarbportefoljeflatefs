@@ -58,11 +58,11 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
             >
                 <Popover.Content className="moteplan_content">
                     {fetchError ? (
-                        <Alert variant="error" className="stor-feil-modal" size="small">
+                        <Alert variant="error" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
                     ) : moter?.length === 0 ? (
-                        <Alert variant="success" className="stor-feil-modal" size="small">
+                        <Alert variant="success" size="small">
                             Ingen møter
                         </Alert>
                     ) : (
