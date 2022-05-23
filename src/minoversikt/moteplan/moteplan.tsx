@@ -49,7 +49,13 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 <Calender title="møteplan" />
                 Møteplan
             </Button>
-            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="left-start">
+            <Popover
+                className="moteplan_popover"
+                open={erOpen}
+                onClose={() => setErOpen(false)}
+                anchorEl={buttonRef.current}
+                placement="left-start"
+            >
                 <Popover.Content className="moteplan_content">
                     {fetchError ? (
                         <Alert variant="error" className="stor-feil-modal" size="small">
