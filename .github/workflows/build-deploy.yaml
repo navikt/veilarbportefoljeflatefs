@@ -67,7 +67,7 @@ jobs:
               with:
                 context: .
                 push: true
-                tags: ${IMAGE}:${IMAGE_TAG}
+                tags: ${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
     update-gh-pages:
         name: Update GitHub pages
         runs-on: ubuntu-latest
