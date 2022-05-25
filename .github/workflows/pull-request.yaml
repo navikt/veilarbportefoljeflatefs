@@ -1,11 +1,6 @@
 name: Cypress testing
 
 on: pull_request
-env:
-    IMAGE_TAG: ${{ github.sha }}
-    IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
-    PRINT_PAYLOAD: true
-
 jobs:
     cypress-run:
         name: Cypress run

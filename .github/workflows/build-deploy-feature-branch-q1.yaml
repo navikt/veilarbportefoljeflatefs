@@ -3,7 +3,7 @@ on:
     workflow_dispatch:
 env:
     IMAGE_TAG: ${{ github.sha }}
-    IMAGE: docker.pkg.github.com/${{ github.repository }}/veilarbportefoljeflatefs
+    IMAGE: ghcr.io/${{ github.repository }}/veilarbportefoljeflatefs
     PRINT_PAYLOAD: true
 
 jobs:
@@ -21,13 +21,18 @@ jobs:
               run: npm run build
             - name: Run tests
               run: npm run test
-            - name: Build and publish Docker image
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
-                  docker build -t ${IMAGE}:${IMAGE_TAG} .
-                  docker push ${IMAGE}:${IMAGE_TAG}
+            - name: Login to Docker
+              uses: docker/login-action@v1
+              with:
+                registry: ghcr.io
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v2
+              with:
+                context: .
+                push: true
+                tags: ${{ env.IMAGE }}:${{ env.IMAGE_TAG }}
     deploy-dev:
         name: Deploy q1 fss
         needs:
