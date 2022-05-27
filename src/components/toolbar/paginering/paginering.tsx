@@ -3,107 +3,58 @@ import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
-import {selectSeFlere, selectSeFlereEnhetensOversikt, selectSide, selectSideStorrelse} from './paginering-selector';
+import {selectSide, selectSidestorrelse} from './paginering-selector';
 import './paginering.less';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
-import {Back, Next} from '@navikt/ds-icons';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {Pagination} from '@navikt/ds-react';
 
 interface PagineringProps {
     className: string;
     antallTotalt: number;
-    onChange?: (fra?: number, til?: number) => void;
-    oversiktType: OversiktType;
+    onPaginering?: () => void;
 }
 
-function Paginering({className, antallTotalt, onChange, oversiktType}: PagineringProps) {
-    const side = useSelector((state: AppState) => selectSide(state));
-
-    const seFlere = useSelector((state: AppState) =>
-        oversiktType === OversiktType.enhetensOversikt ? selectSeFlereEnhetensOversikt(state) : selectSeFlere(state)
-    );
-
-    const sideStorrelse = useSelector((state: AppState) => selectSideStorrelse(state));
-
+function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
     const dispatch = useDispatch();
+    const side = useSelector((state: AppState) => selectSide(state));
+    const sidestorrelseRedux = useSelector((state: AppState) => selectSidestorrelse(state));
+    const viserDefaultAntall = DEFAULT_PAGINERING_STORRELSE === sidestorrelseRedux;
+    const sidestorrelse = viserDefaultAntall ? DEFAULT_PAGINERING_STORRELSE : SE_FLERE_PAGINERING_STORRELSE;
+    const alternativSidestorrelse = viserDefaultAntall ? SE_FLERE_PAGINERING_STORRELSE : DEFAULT_PAGINERING_STORRELSE;
 
-    const endrePaginering = (side, seFlere, sideStorrelse) => {
-        if (oversiktType === OversiktType.enhetensOversikt) {
-            dispatch(pagineringSetup({side, sideStorrelse, seFlereEnhetensOversikt: seFlere}));
-        } else {
-            dispatch(pagineringSetup({side, seFlere, sideStorrelse}));
-        }
+    const antallSider: number = Math.ceil(antallTotalt / sidestorrelse) ? Math.ceil(antallTotalt / sidestorrelse) : 1;
+    const endreSide = (nySide: number) => {
+        endreSidestorrelse(nySide, sidestorrelse);
     };
 
-    const antallSider: number = Math.ceil(antallTotalt / sideStorrelse) ? Math.ceil(antallTotalt / sideStorrelse) : 1;
-    const erPaForsteSide: boolean = side === 1;
-    const erPaSisteSide: boolean = side >= antallSider;
-    const totalPaginering = (sideNumber: number, seFlereBool: boolean, sideStorrelse?: number): void => {
-        if (seFlereBool) {
-            sideStorrelse = SE_FLERE_PAGINERING_STORRELSE;
-        } else {
-            sideStorrelse = DEFAULT_PAGINERING_STORRELSE;
-        }
-        endrePaginering(sideNumber, seFlereBool, sideStorrelse);
-        if (onChange) {
-            onChange();
+    const endreSidestorrelse = (nySide: number, nyttAntall: number) => {
+        dispatch(pagineringSetup({side: nySide, sidestorrelse: nyttAntall}));
+        if (onPaginering) {
+            onPaginering();
         }
     };
 
     return (
         <div className={classNames('paginering', className)}>
             <KnappPanel
-                disabled={!seFlere && antallTotalt <= sideStorrelse}
-                selected={seFlere && antallTotalt <= sideStorrelse}
-                onClick={() => totalPaginering(1, !seFlere)}
-                data-testid={!seFlere ? 'se-flere_knapp' : 'se-faerre_knapp'}
-                ariaLabel={!seFlere ? 'Vis 200 per side' : 'Vis 50 per side'}
+                disabled={viserDefaultAntall && antallTotalt <= sidestorrelse}
+                selected={!viserDefaultAntall && antallTotalt <= sidestorrelse}
+                onClick={() => endreSidestorrelse(1, alternativSidestorrelse)}
+                data-testid={viserDefaultAntall ? 'se-flere_knapp' : 'se-faerre_knapp'}
+                ariaLabel={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
             >
-                {!seFlere ? 'Vis 200 per side' : 'Vis 50 per side'}
+                {viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
             </KnappPanel>
 
-            <KnappPanel
-                disabled={erPaForsteSide}
-                onClick={() => totalPaginering(side - 1, seFlere)}
-                data-testid="paginering_venstre"
-                ariaLabel="Forrige side"
-            >
-                <Back />
-            </KnappPanel>
-
-            {!erPaForsteSide && (
-                <KnappPanel
-                    onClick={() => totalPaginering(1, seFlere)}
-                    data-testid="paginering-tall_1"
-                    ariaLabel="Side 1"
-                >
-                    1
-                </KnappPanel>
-            )}
-
-            <KnappPanel data-testid={`paginering-tall_${side}`} selected ariaLabel={`Side ${side}`}>
-                <strong>{side}</strong>
-            </KnappPanel>
-
-            {!erPaSisteSide && (
-                <KnappPanel
-                    onClick={() => totalPaginering(antallSider, seFlere)}
-                    data-testid={`paginering-tall_${antallSider}`}
-                    ariaLabel={`Side ${antallSider}`}
-                >
-                    {antallSider}
-                </KnappPanel>
-            )}
-
-            <KnappPanel
-                disabled={erPaSisteSide}
-                onClick={() => totalPaginering(side + 1, seFlere)}
-                data-testid="paginering_hoyre"
-                ariaLabel="Neste side"
-            >
-                <Next />
-            </KnappPanel>
+            <Pagination
+                page={side}
+                onPageChange={endreSide}
+                count={antallSider}
+                size="medium"
+                siblingCount={0}
+                boundaryCount={1}
+            />
         </div>
     );
 }
