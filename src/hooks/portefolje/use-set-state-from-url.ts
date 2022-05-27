@@ -37,11 +37,11 @@ export function useSetStateFromUrl() {
                 return Side.MIN_OVERSIKT;
         }
     }
-    const side = useCallback(getSideFromPathName, [pathname])(pathname);
+    const oversiktsside = useCallback(getSideFromPathName, [pathname])(pathname);
 
     useOnMount(() => {
-        loggSkjermMetrikker(side);
-        loggSideVisning(innloggetVeilederIdent, side);
+        loggSkjermMetrikker(oversiktsside);
+        loggSideVisning(innloggetVeilederIdent, oversiktsside);
         logBrowserMetrikker(innloggetVeilederIdent);
         settInitalStateFraUrl();
     });

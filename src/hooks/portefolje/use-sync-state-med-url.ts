@@ -8,7 +8,7 @@ import {useSetEnhetIUrl} from './use-set-enhet-i-url';
 export function useSyncStateMedUrl() {
     const history = useHistory();
     const location = useLocation();
-    const {side, seFlere} = useSelector((state: AppState) => state.paginering);
+    const {side, sidestorrelse} = useSelector((state: AppState) => state.paginering);
     const {sorteringsrekkefolge, sorteringsfelt} = useSelector((state: AppState) => state.portefolje);
 
     const pathname = location.pathname;
@@ -19,11 +19,11 @@ export function useSyncStateMedUrl() {
         if (side) {
             const parsed = queryString.parse(window.location.search);
             parsed.side = side;
-            parsed.seFlere = seFlere;
+            parsed.sidestorrelse = sidestorrelse;
             const stringified = queryString.stringify(parsed);
             history.replace({pathname, search: stringified});
         }
-    }, [history, side, pathname, seFlere, dispatch]);
+    }, [history, side, pathname, sidestorrelse, dispatch]);
 
     useEffect(() => {
         if (sorteringsfelt) {
