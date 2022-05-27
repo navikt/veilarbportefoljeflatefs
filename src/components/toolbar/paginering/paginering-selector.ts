@@ -12,11 +12,11 @@ export function selectSeFlereEnhetensOversikt(state: AppState): boolean {
     return state.paginering.seFlereEnhetensOversikt;
 }
 
-export function selectSideStorrelse(state: AppState): number {
-    return state.paginering.sideStorrelse;
+export function selectSidestorrelse(state: AppState): number {
+    return state.paginering.sidestorrelse;
 }
 
 export function selectFraIndex(state: AppState): number {
     // paginering starts at 1 not 0
-    return (selectSide(state) - 1) * selectSideStorrelse(state);
+    return (selectSide(state) - 1) * selectSidestorrelse(state);
 }

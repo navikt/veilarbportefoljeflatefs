@@ -2,6 +2,7 @@ import {STATUS} from './utils';
 import {Action, Dispatch} from 'redux';
 import {AppState} from '../reducer';
 import {pagineringSetup} from './paginering';
+import {DEFAULT_PAGINERING_STORRELSE} from '../konstanter';
 
 // Actions
 const PENDING = 'veilarbportefolje/enheter/PENDING';
@@ -56,6 +57,6 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
             return;
         }
         dispatch(velgEnhetForVeileder(nyEnhet));
-        dispatch(pagineringSetup({side: 1, seFlere: false}));
+        dispatch(pagineringSetup({side: 1, sidestorrelse: DEFAULT_PAGINERING_STORRELSE}));
     };
 }

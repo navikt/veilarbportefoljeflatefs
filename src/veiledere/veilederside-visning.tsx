@@ -4,7 +4,7 @@ import Toolbar from './../components/toolbar/toolbar';
 import VeiledereTabell from './veiledere-tabell';
 import {sortBy} from '../ducks/sortering';
 import {sorter} from '../utils/sortering';
-import {selectFraIndex, selectSeFlere, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
+import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './veiledere.less';
@@ -48,7 +48,7 @@ interface VeilederesideVisningProps {
 function VeilederesideVisning(props: VeilederesideVisningProps) {
     const dispatch = useDispatch();
     const fra = useSelector(selectFraIndex);
-    const sideStorrelse = useSelector(selectSideStorrelse);
+    const sidestorrelse = useSelector(selectSidestorrelse);
     const seAlle = useSelector(selectSeFlere);
     const sortering = useSelector((state: AppState) => state.sortering);
 
@@ -63,7 +63,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
         if (seAlle) {
             return veilederListe;
         }
-        return veilederListe.slice(fra, fra + sideStorrelse);
+        return veilederListe.slice(fra, fra + sidestorrelse);
     }
 
     return (

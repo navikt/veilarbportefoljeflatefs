@@ -5,16 +5,12 @@ export const SETUP = 'veilarbportefoljeflatefs/paginering/SETUP';
 
 export interface PagineringState {
     side: number;
-    seFlere: boolean;
-    seFlereEnhetensOversikt: boolean;
-    sideStorrelse: number;
+    sidestorrelse: number;
 }
 
 const initialState: PagineringState = {
     side: 1,
-    seFlere: false,
-    seFlereEnhetensOversikt: false,
-    sideStorrelse: DEFAULT_PAGINERING_STORRELSE
+    sidestorrelse: DEFAULT_PAGINERING_STORRELSE
 };
 
 // Reducer
@@ -29,9 +25,7 @@ export default function pagineringReducer(state = initialState, action) {
 
 export interface PageringOppdatering {
     side: number;
-    seFlere?: boolean;
-    seFlereEnhetensOversikt?: boolean;
-    sideStorrelse?: number;
+    sidestorrelse?: number;
 }
 
 // Action Creators

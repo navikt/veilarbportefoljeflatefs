@@ -5,7 +5,7 @@ import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatusTall} from './statustall';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {selectFraIndex, selectSideStorrelse} from '../components/toolbar/paginering/paginering-selector';
+import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
@@ -261,7 +261,7 @@ function hentPortefolje(hentPortefoljeFn: (...args: any[]) => void, ...args: any
     const fn = (dispatch, getState) => {
         const state = getState();
         const fra = selectFraIndex(state);
-        const antall = selectSideStorrelse(state);
+        const antall = selectSidestorrelse(state);
 
         return hentPortefoljeFn(...args, fra, antall);
     };

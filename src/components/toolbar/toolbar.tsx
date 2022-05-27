@@ -15,7 +15,7 @@ import {Heading} from '@navikt/ds-react';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
-    onPaginering?: (fra?: number, antall?: number) => void;
+    onPaginering?: () => void;
     sokVeilederSkalVises?: boolean;
     visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
@@ -103,9 +103,8 @@ function Toolbar(props: ToolbarProps) {
                 <Listevisning oversiktType={oversiktType} />
                 <Paginering
                     className="toolbar--skille-mellom-elementer"
-                    onChange={onPaginering}
+                    onPaginering={onPaginering}
                     antallTotalt={antallTotalt}
-                    oversiktType={oversiktType}
                 />
             </div>
         </div>
