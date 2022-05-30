@@ -3,6 +3,7 @@ import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
+import {getSidestorrelseFromUrl} from '../utils/url-utils';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
@@ -17,10 +18,15 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
         }
     };
 
+    const sidestorrelse = getSidestorrelseFromUrl();
+
     return (
         <div className="oversikt-overskrifter" aria-label="Naviger mellom de forskjellige oversiktene.">
             <NavLink
-                to="/portefolje"
+                to={{
+                    pathname: '/portefolje',
+                    search: '?sidestorrelse=' + sidestorrelse
+                }}
                 className="oversiktslenke typo-undertittel"
                 activeClassName={aktivLink}
                 id="min-oversikt"
@@ -33,7 +39,10 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Min oversikt
             </NavLink>
             <NavLink
-                to="/enhet"
+                to={{
+                    pathname: '/enhet',
+                    search: '?sidestorrelse=' + sidestorrelse
+                }}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
                 id="enhetens-oversikt"
