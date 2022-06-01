@@ -54,7 +54,10 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Enhetens oversikt
             </NavLink>
             <NavLink
-                to="/veiledere"
+                to={{
+                    pathname: '/veiledere',
+                    search: '?sidestorrelse=' + sidestorrelse
+                }}
                 className="oversiktslenke typo-undertittel"
                 activeClassName="oversiktslenke--valgt"
                 title="Her vises alle veilederne som tilhører enheten"
