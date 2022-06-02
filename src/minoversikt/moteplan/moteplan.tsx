@@ -49,14 +49,20 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 <Calender title="møteplan" />
                 Møteplan
             </Button>
-            <Popover open={erOpen} onClose={() => setErOpen(false)} anchorEl={buttonRef.current} placement="left-start">
+            <Popover
+                className="moteplan_popover"
+                open={erOpen}
+                onClose={() => setErOpen(false)}
+                anchorEl={buttonRef.current}
+                placement="left-start"
+            >
                 <Popover.Content className="moteplan_content">
                     {fetchError ? (
-                        <Alert variant="error" className="stor-feil-modal" size="small">
+                        <Alert variant="error" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
                     ) : moter?.length === 0 ? (
-                        <Alert variant="success" className="stor-feil-modal" size="small">
+                        <Alert variant="success" size="small">
                             Ingen møter
                         </Alert>
                     ) : (
