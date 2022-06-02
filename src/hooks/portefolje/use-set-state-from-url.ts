@@ -20,8 +20,8 @@ export function useSetStateFromUrl() {
     const pathname = location.pathname;
 
     const settInitalStateFraUrl = useCallback(() => {
-        const {side, seFlere, sorteringsfelt, sorteringsrekkefolge} = getInitialStateFromUrl();
-        dispatch(pagineringSetup({side, seFlere}));
+        const {side, sidestorrelse, sorteringsfelt, sorteringsrekkefolge} = getInitialStateFromUrl();
+        dispatch(pagineringSetup({side, sidestorrelse}));
         dispatch(settSortering(sorteringsrekkefolge, sorteringsfelt));
     }, [dispatch]);
 
@@ -37,11 +37,11 @@ export function useSetStateFromUrl() {
                 return Side.MIN_OVERSIKT;
         }
     }
-    const side = useCallback(getSideFromPathName, [pathname])(pathname);
+    const oversiktsside = useCallback(getSideFromPathName, [pathname])(pathname);
 
     useOnMount(() => {
-        loggSkjermMetrikker(side);
-        loggSideVisning(innloggetVeilederIdent, side);
+        loggSkjermMetrikker(oversiktsside);
+        loggSideVisning(innloggetVeilederIdent, oversiktsside);
         logBrowserMetrikker(innloggetVeilederIdent);
         settInitalStateFraUrl();
     });
