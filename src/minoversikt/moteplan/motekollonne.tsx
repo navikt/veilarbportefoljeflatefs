@@ -3,7 +3,6 @@ import * as React from 'react';
 import moment from 'moment';
 import {Link, Table} from '@navikt/ds-react';
 import {setFraBrukerIUrl} from '../../utils/url-utils';
-import classnames from 'classnames';
 import {MoteData} from './moteplan';
 import {nameCapitalization} from '../../utils/utils';
 
@@ -39,7 +38,6 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                             setFraBrukerIUrl(mote.deltaker.fnr);
                         }}
                         href={`${window.location.origin}/veilarbpersonflatefs/${mote.deltaker.fnr}/?enhet=${enhet}`}
-                        className={classnames('lenke_siste-endring')}
                     >
                         {nameCapitalization(mote.deltaker.etternavn)}, {nameCapitalization(mote.deltaker.fornavn)}
                     </Link>
