@@ -37,7 +37,7 @@ export function getInitialStateFromUrl() {
 
 export function getSidestorrelseFromUrl(): number {
     const sidestorrelseQuery = queryString.parse(window.location.search).sidestorrelse;
-    if (typeof sidestorrelseQuery === 'string') {
+    if (typeof sidestorrelseQuery === 'string' && parseInt(sidestorrelseQuery) > 0) {
         return parseInt(sidestorrelseQuery);
     } else {
         return DEFAULT_PAGINERING_STORRELSE;
