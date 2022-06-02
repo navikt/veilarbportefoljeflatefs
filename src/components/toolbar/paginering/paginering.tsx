@@ -54,6 +54,7 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
                 size="medium"
                 siblingCount={0}
                 boundaryCount={1}
+                data-testid="paginering"
             />
         </div>
     );

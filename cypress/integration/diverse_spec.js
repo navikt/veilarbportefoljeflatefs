@@ -59,36 +59,24 @@ describe('Diverse', () => {
 
     it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
-        cy.getByTestId('paginering_venstre').should('be.disabled');
-        cy.getByTestId('paginering_hoyre').should('be.enabled');
-        cy.getByTestId('paginering-tall_3').should('be.visible');
         cy.get('.brukerliste')
             .children()
             .should('have.length', 50);
+        cy.getByTestId('paginering').children().children().should('have.length', 5);
+        cy.getByTestId('paginering').children().children().last().click().click();
+        cy.get('.brukerliste')
+            .children()
+            .should('have.length', 23);
         cy.getByTestId('se-flere_knapp')
             .should('be.visible')
             .click();
         cy.wait(1000);
-        cy.getByTestId('paginering-tall_3').should('not.exist');
         cy.get('.brukerliste')
             .children()
             .should('have.length', 123);
-        cy.getByTestId('paginering_venstre').should('be.disabled');
-        cy.getByTestId('paginering_hoyre').should('be.disabled');
         cy.getByTestId('se-faerre_knapp')
             .should('be.visible')
             .click();
-        cy.getByTestId('paginering-tall_2').should('not.exist');
-        cy.getByTestId('paginering_venstre').should('be.disabled');
-        cy.getByTestId('paginering_hoyre')
-            .should('be.enabled')
-            .click();
-        cy.getByTestId('paginering-tall_2').should('be.visible');
-        cy.getByTestId('paginering-tall_1')
-            .should('be.visible')
-            .click();
-        cy.getByTestId('paginering_venstre').should('be.disabled');
-        cy.getByTestId('paginering_hoyre').should('be.enabled');
         cy.gaTilOversikt('enhetens-oversikt');
     });
 
