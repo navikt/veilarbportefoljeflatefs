@@ -25,10 +25,14 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
 
     const antallSider: number = Math.ceil(antallTotalt / sidestorrelse) ? Math.ceil(antallTotalt / sidestorrelse) : 1;
     const endreSide = (nySide: number) => {
-        endreSidestorrelse(nySide, sidestorrelse);
+        endreSideOgSidestorrelse(nySide, sidestorrelse);
     };
 
-    const endreSidestorrelse = (nySide: number, nyttAntall: number) => {
+    const endreSidestorrelse = (storrelse: number) => {
+        endreSideOgSidestorrelse(1, storrelse);
+    };
+
+    const endreSideOgSidestorrelse = (nySide: number, nyttAntall: number) => {
         dispatch(pagineringSetup({side: nySide, sidestorrelse: nyttAntall}));
         if (onPaginering) {
             onPaginering();
@@ -40,7 +44,7 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
             <KnappPanel
                 disabled={viserDefaultAntall && antallTotalt <= sidestorrelse}
                 selected={!viserDefaultAntall && antallTotalt <= sidestorrelse}
-                onClick={() => endreSidestorrelse(1, alternativSidestorrelse)}
+                onClick={() => endreSidestorrelse(alternativSidestorrelse)}
                 data-testid={viserDefaultAntall ? 'se-flere_knapp' : 'se-faerre_knapp'}
                 ariaLabel={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
             >
