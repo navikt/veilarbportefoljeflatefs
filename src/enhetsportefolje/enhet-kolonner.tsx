@@ -187,7 +187,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
             <TekstKolonne
-                tekst={bruker.vedtakStatus}
+                tekst={bruker.utkast14aStatus}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                 }
@@ -195,14 +195,14 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
-                dato={dagerSiden(bruker.vedtakStatusEndret)}
+                dato={dagerSiden(bruker.utkast14aStatusEndret)}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                 }
             />
             <TekstKolonne
-                tekst={!!bruker.ansvarligVeilederForVedtak ? bruker.ansvarligVeilederForVedtak : ' '}
+                tekst={!!bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
