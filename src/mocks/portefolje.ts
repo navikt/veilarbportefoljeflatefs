@@ -103,18 +103,18 @@ function lagOverskrift() {
 function lagVedtakUtkast() {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
-    const ansvarligVeilederForVedtak = faker.name.firstName() + ' ' + faker.name.lastName();
+    const ansvarligVeileder = faker.name.firstName() + ' ' + faker.name.lastName();
     if (maybeUtkast > 0.5) {
         return {
-            vedtakStatusEndret: randomDate({past: true}),
-            vedtakStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
-            ansvarligVeilederForVedtak: ansvarligVeilederForVedtak
+            utkast14aStatusEndret: randomDate({past: true}),
+            utkast14aStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
+            utkast14aAnsvarligVeileder: ansvarligVeileder
         };
     }
     return {
-        vedtakStatusEndret: null,
-        vedtakStatus: null,
-        ansvarligVeilederForVedtak: ''
+        utkast14aStatusEndret: null,
+        utkast14aStatus: null,
+        utkast14aAnsvarligVeileder: ''
     };
 }
 
@@ -212,9 +212,9 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        vedtakStatus: vedtakUtkast.vedtakStatus,
-        vedtakStatusEndret: vedtakUtkast.vedtakStatusEndret,
-        ansvarligVeilederForVedtak: vedtakUtkast.ansvarligVeilederForVedtak,
+        utkast14aStatus: vedtakUtkast.utkast14aStatus,
+        utkast14aStatusEndret: vedtakUtkast.utkast14aStatusEndret,
+        utkast14aAnsvarligVeileder: vedtakUtkast.utkast14aAnsvarligVeileder,
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),

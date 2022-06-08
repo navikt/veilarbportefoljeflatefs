@@ -256,10 +256,10 @@ function MinOversiktListeHode({
                     headerId="avtalt-mote"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.VEDTAKSTATUS}
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
@@ -269,10 +269,10 @@ function MinOversiktListeHode({
                     headerId="vedtakstatus"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VEDTAKSTATUS_ENDRET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     tekst="Dager siden status"
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
@@ -283,10 +283,10 @@ function MinOversiktListeHode({
                     headerId="vedtakstatus-endret"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ANSVARLIG_VEILEDER_FOR_VEDTAK}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     tekst="Ansvarlig for vedtak"
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
