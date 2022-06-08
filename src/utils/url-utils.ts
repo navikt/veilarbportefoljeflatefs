@@ -1,6 +1,6 @@
 import * as queryString from 'query-string';
 import {basename} from '../history';
-import {IKKE_SATT} from '../konstanter';
+import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;
@@ -28,15 +28,20 @@ export function getSideFromUrl() {
 
 export function getInitialStateFromUrl() {
     const side = getSideFromUrl();
-    const seFlere = getSeFlereFromUrl();
+    const sidestorrelse = getSidestorrelseFromUrl();
     const sorteringsfelt = getSorteringsFeltFromUrl();
     const sorteringsrekkefolge = getSorteringsRekkefolgeFromUrl();
 
-    return {side, seFlere, sorteringsfelt, sorteringsrekkefolge};
+    return {side, sidestorrelse, sorteringsfelt, sorteringsrekkefolge};
 }
 
-export function getSeFlereFromUrl(): boolean {
-    return queryString.parse(window.location.search).seFlere === 'true';
+export function getSidestorrelseFromUrl(): number {
+    const sidestorrelseQuery = queryString.parse(window.location.search).sidestorrelse;
+    if (typeof sidestorrelseQuery === 'string' && parseInt(sidestorrelseQuery) > 0) {
+        return parseInt(sidestorrelseQuery);
+    } else {
+        return DEFAULT_PAGINERING_STORRELSE;
+    }
 }
 
 export function getSorteringsFeltFromUrl() {

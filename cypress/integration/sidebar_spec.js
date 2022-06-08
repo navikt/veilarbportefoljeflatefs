@@ -48,7 +48,8 @@ describe('Mine filter', () => {
         });
 
         cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
-
+        
+        cy.wait(500);
         cy.getByTestId('sidebar-tab_FILTER').click();
 
         cy.apneLukkeFilterDropdown('alder');

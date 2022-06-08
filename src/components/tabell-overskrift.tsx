@@ -11,7 +11,7 @@ function TabellOverskrift(props: {className?: string}) {
     const paginering = useSelector((state: AppState) => state.paginering);
 
     const {antallTotalt, antallReturnert, fraIndex, brukere} = portefolje;
-    const {sideStorrelse} = paginering;
+    const {sidestorrelse} = paginering;
 
     const fixedFraIndex = antallTotalt === 0 ? 0 : 1;
     const fraIndexMax = Math.max(fraIndex, fixedFraIndex);
@@ -20,7 +20,7 @@ function TabellOverskrift(props: {className?: string}) {
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
 
     const enEllerFlereBrukere =
-        antallTotalt <= sideStorrelse
+        antallTotalt <= sidestorrelse
             ? `${maksBrukere}`
             : `${fraIndexMax ? fraIndex : 0} - ${maksBrukere ? maksBrukere : 0}`;
     const brukereGrammatikk = antallTotalt === 1 ? 'bruker' : 'brukere';
