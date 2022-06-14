@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: veilarbportefoljeflatefs
-  namespace: poao
+  namespace: obo
   labels:
-    team: poao
+    team: obo
 spec:
   image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.05.18_10.19-08a4135c0657
   port: 8080
@@ -37,7 +37,7 @@ spec:
       autoLogin: true
   gcp:
     buckets:
-      - name: poao-veilarbportefoljeflatefs-dev
+      - name: obo-veilarbportefoljeflatefs-dev
         cascadingDelete: false
   accessPolicy:
     outbound:
@@ -59,7 +59,7 @@ spec:
             "loginProvider": "AZURE_AD"
           },
           "gcs": {
-            "bucketName": "poao-veilarbportefoljeflatefs-dev"
+            "bucketName": "obo-veilarbportefoljeflatefs-dev"
           },
           "redirects": [
             {

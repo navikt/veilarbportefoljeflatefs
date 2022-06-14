@@ -6,7 +6,7 @@ on:
       - 'dev'
     paths:
       - '.github/workflows/poao-frontend-container-dev.yml'
-      - '.nais/poao-nais-dev.yaml'
+      - '.nais/obo-nais-dev.yaml'
   workflow_dispatch:
 
 concurrency:
@@ -26,4 +26,4 @@ jobs:
         uses: nais/deploy/actions/deploy@v1
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/poao-nais-dev.yaml
+          RESOURCE: .nais/obo-nais-dev.yaml
