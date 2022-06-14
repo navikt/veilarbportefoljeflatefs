@@ -44,5 +44,5 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-fss
-                  RESOURCE: nais-dev.yaml
+                  RESOURCE: .nais/nais-dev.yaml
                   VAR: version=${{ env.IMAGE_TAG }},namespace=pto

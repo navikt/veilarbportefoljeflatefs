@@ -1,0 +1,117 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: veilarbportefoljeflatefs
+  namespace: obo
+  labels:
+    team: obo
+spec:
+  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.05.18_10.19-08a4135c0657
+  port: 8080
+  ingresses:
+    - https://veilarbportefoljeflatefs.dev.intern.nav.no
+  liveness:
+    path: /internal/alive
+    initialDelay: 10
+  readiness:
+    path: /internal/ready
+    initialDelay: 10
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 75
+  resources:
+    limits:
+      cpu: "1"
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  secureLogs:
+    enabled: true
+  azure:
+    application:
+      enabled: true
+    sidecar:
+      enabled: true
+      autoLogin: true
+  gcp:
+    buckets:
+      - name: obo-veilarbportefoljeflatefs-dev
+        cascadingDelete: false
+  accessPolicy:
+    outbound:
+      rules:
+        - application: poao-unleash
+  env:
+    - name: JSON_CONFIG
+      value: >
+        {
+          "enableSecureLogs": true,
+          "fallbackStrategy": "SERVE_INDEX_HTML",
+          "auth": {
+            "loginProvider": "AZURE_AD"
+          },
+          "gcs": {
+            "bucketName": "obo-veilarbportefoljeflatefs-dev"
+          },
+          "redirects": [
+            {
+              "fromPath": "/internarbeidsflatedecorator/*",
+              "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
+              "preserveFromPath": true
+            }
+          ],
+          "proxies": [
+            {
+              "fromPath": "/frontendlogger",
+              "toUrl": "https://frontendlogger.dev-fss-pub.nais.io",
+              "preserveFromPath": true
+            },
+            {
+              "fromPath": "/veilarbportefolje",
+              "toUrl": "https://veilarbportefolje.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbportefolje",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbfilter",
+              "toUrl": "https://veilarbfilter.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbfilter",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbvedtaksstotte",
+              "toUrl": "https://veilarbvedtaksstotte.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbvedtaksstotte",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbveileder",
+              "toUrl": "https://veilarbveileder.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbveileder",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbportefoljeflatefs",
+              "toUrl": "http://poao-unleash.poao.svc.cluster.local",
+              "preserveFromPath": false
+            }
+          ]
+        }
