@@ -23,7 +23,7 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
+    const {brukere, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -44,7 +44,6 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                             <MinoversiktBrukerPanel
                                 key={bruker.fnr || bruker.guid}
                                 bruker={bruker}
-                                enhetId={enhetId}
                                 settMarkert={settMarkert}
                                 varForrigeBruker={forrigeBruker === bruker.fnr}
                                 filtervalg={filtervalg}

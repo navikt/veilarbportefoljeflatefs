@@ -66,7 +66,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                             Ingen møter
                         </Alert>
                     ) : (
-                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhet={enhet} key={key} />)
+                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} key={key} />)
                     )}
                 </Popover.Content>
             </Popover>

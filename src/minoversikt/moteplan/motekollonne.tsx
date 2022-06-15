@@ -9,10 +9,9 @@ import {nameCapitalization} from '../../utils/utils';
 interface MoteKollonneProps {
     dato: Date;
     mote: MoteData;
-    enhet: string;
 }
 
-function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
+function MoteKollonne({dato, mote}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
     if (!moment(dato).isSame(moteDato, 'day')) {
         return <></>;

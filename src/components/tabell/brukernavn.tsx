@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.less';
-import {OrNothing} from '../../utils/types/types';
 import {BodyShort, Link} from '@navikt/ds-react';
 
 interface BrukerNavnProps {

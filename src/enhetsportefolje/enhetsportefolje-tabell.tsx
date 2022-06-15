@@ -19,9 +19,7 @@ interface EnhetTabellProps {
 
 function EnhetTabell(props: EnhetTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
-        OversiktType.enhetensOversikt
-    );
+    const {brukere, filtervalg, listevisning, portefolje} = usePortefoljeSelector(OversiktType.enhetensOversikt);
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
     const dispatch = useDispatch();
@@ -39,7 +37,6 @@ function EnhetTabell(props: EnhetTabellProps) {
                             <EnhetBrukerpanel
                                 key={bruker.fnr || bruker.guid}
                                 bruker={bruker}
-                                enhetId={enhetId}
                                 settMarkert={settMarkert}
                                 filtervalg={filtervalg}
                                 valgteKolonner={listevisning.valgte}

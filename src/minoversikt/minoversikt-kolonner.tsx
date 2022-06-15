@@ -27,7 +27,6 @@ import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift'
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -39,10 +38,9 @@ interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    enhetId: OrNothing<string>;
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -76,7 +74,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <DatoKolonne
                 className="col col-xs-2"
@@ -230,7 +228,6 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
             />
             <SisteEndringKategori
                 bruker={bruker}
-                enhetId={enhetId}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />

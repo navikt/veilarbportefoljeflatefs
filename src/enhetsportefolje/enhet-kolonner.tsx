@@ -27,7 +27,6 @@ import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from '../utils/types/types';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
@@ -38,13 +37,12 @@ import moment from 'moment';
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
 }
 
-function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+function EnhetKolonner({className, bruker, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -77,7 +75,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <DatoKolonne
                 className="col col-xs-2"

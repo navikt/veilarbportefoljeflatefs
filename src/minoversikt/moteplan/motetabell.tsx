@@ -7,10 +7,9 @@ import MoteKollonne from './motekollonne';
 interface MoteTabellProps {
     dato: Date;
     moter: MoteData[] | null;
-    enhet: string;
 }
 
-function MoteTabell({dato, moter, enhet}: MoteTabellProps) {
+function MoteTabell({dato, moter}: MoteTabellProps) {
     return (
         <div>
             <Heading className="moteplan_tittel" size="small" level="2">
@@ -32,8 +31,7 @@ function MoteTabell({dato, moter, enhet}: MoteTabellProps) {
                             </Table.DataCell>
                         </Table.Row>
                     )}
-                    {moter != null &&
-                        moter.map((mote, key) => <MoteKollonne dato={dato} mote={mote} enhet={enhet} key={key} />)}
+                    {moter != null && moter.map((mote, key) => <MoteKollonne dato={dato} mote={mote} key={key} />)}
                 </Table.Body>
             </Table>
         </div>

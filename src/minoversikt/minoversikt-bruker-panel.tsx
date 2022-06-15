@@ -21,7 +21,6 @@ import {Checkbox} from 'nav-frontend-skjema';
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
-    enhetId: OrNothing<string>;
     filtervalg: FiltervalgModell;
     innloggetVeileder: OrNothing<VeilederModell>;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -47,7 +46,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
 
     const {
         bruker,
-        enhetId,
         filtervalg,
         valgteKolonner,
         innloggetVeileder,
@@ -102,7 +100,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     bruker={bruker}
                     filtervalg={filtervalg}
                     valgteKolonner={valgteKolonner}
-                    enhetId={enhetId}
                 />
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
