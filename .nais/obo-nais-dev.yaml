@@ -43,6 +43,7 @@ spec:
     outbound:
       rules:
         - application: poao-unleash
+          namespace: poao
   env:
     - name: JSON_CONFIG
       value: >
