@@ -51,9 +51,8 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function erDev() {
-    const host: string = window.location.host;
-    return host.includes('localhost') || host.includes('127.0.0.1');
+export function erGCP(): boolean {
+    return window.location.hostname.endsWith('intern.nav.no');
 }
 
 export function erGithubPages() {
