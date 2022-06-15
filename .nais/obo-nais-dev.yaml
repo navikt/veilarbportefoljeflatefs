@@ -43,6 +43,7 @@ spec:
     outbound:
       rules:
         - application: poao-unleash
+          namespace: poao
   env:
     - name: JSON_CONFIG
       value: >
@@ -126,5 +127,14 @@ spec:
               }
 >>>>>>> Stashed changes
             }
+            {
+              "fromPath": "/modiacontextholder",
+              "toUrl": "https://modiacontextholder-q1.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "modiacontextholder-q1",
+                "namespace": "personoversikt",
+                "cluster": "dev-fss"
+              }
           ]
         }
