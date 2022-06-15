@@ -35,4 +35,5 @@ export interface DecoratorProps {
     toggles?: TogglesConfig;
     markup?: Markup;
     contextholderConfig?: Contextholder;
+    useProxy?: boolean | string;
 }
