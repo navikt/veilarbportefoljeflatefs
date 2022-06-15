@@ -1,6 +1,7 @@
 import * as queryString from 'query-string';
 import {basename} from '../history';
 import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
+import {erGCP} from './utils';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;
@@ -52,6 +53,16 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
+export function getPersonUrl(fnr: string): string {
+    if (erGCP()) {
+        if (erDev()) {
+            return `https://veilarbperson.dev.intern.nav.no/veilarbpersonflatefs/${fnr}`;
+        }
+        return `https://veilarbperson.intern.nav.no/veilarbpersonflatefs/${fnr}`;
+    }
+    return `veilarbpersonflatefs/${fnr}`;
+}
+
 export function updateLastPath() {
     const base = window.location.pathname.replace(basename, '');
     if (base !== '/tilbake') {
@@ -61,6 +72,6 @@ export function updateLastPath() {
     }
 }
 
-export const erProd = () => window.location.host === 'app.adeo.no';
+export const erDev = () => window.location.host.includes('dev') || window.location.host.includes('q1');
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg${erProd() ? '' : '.dev'}.intern.nav.no`;
+export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;

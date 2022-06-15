@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {erGCP} from './utils/utils';
+import {getPersonUrl} from './utils/url-utils';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -18,8 +19,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             ignoreWsEvents: true,
             onChange: value => {
                 if (value) {
-                    //TODO: må vurdere å endres ved overgang til gcp
-                    window.location.pathname = `veilarbpersonflatefs/${value}`;
+                    window.location.pathname = erGCP() ? getPersonUrl(value) : `veilarbpersonflatefs/${value}`;
                 }
             }
         },
