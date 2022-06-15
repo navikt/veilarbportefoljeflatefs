@@ -56,9 +56,9 @@ export function getSorteringsRekkefolgeFromUrl() {
 export function getPersonUrl(fnr: string): string {
     if (erGCP()) {
         if (erDev()) {
-            return `https://veilarbperson.dev.intern.nav.no/veilarbpersonflatefs/${fnr}`;
+            return `https://veilarbpersonflatefs.dev.intern.nav.no/${fnr}`;
         }
-        return `https://veilarbperson.intern.nav.no/veilarbpersonflatefs/${fnr}`;
+        return `https://veilarbpersonflatefs.intern.nav.no/${fnr}`;
     }
     return `veilarbpersonflatefs/${fnr}`;
 }
