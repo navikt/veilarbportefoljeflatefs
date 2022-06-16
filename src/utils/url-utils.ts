@@ -56,7 +56,7 @@ export function getSorteringsRekkefolgeFromUrl() {
 export function getPersonUrl(fnr: string, enhet?: string): string {
     if (erGCP()) {
         if (erDev()) {
-            return `https://veilarbpersonflatefs.dev.intern.nav.no/${fnr}${enhet ? '?enhet=' + enhet : ''}}`;
+            return `https://veilarbpersonflatefs.dev.intern.nav.no/${fnr}${enhet ? '?enhet=' + enhet : ''}`;
         }
         return `https://veilarbpersonflatefs.intern.nav.no/${fnr}${enhet ? '?enhet=' + enhet : ''}`;
     }
