@@ -115,6 +115,16 @@ spec:
               "preserveFromPath": false
             },
             {
+              "fromPath": "/veilarboppfolging",
+              "toUrl": "https://veilarboppfolging.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarboppfolging",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
+            },
+            {
               "fromPath": "/modiacontextholder",
               "toUrl": "https://modiacontextholder-q1.dev-fss-pub.nais.io",
               "preserveFromPath": true,
