@@ -53,14 +53,14 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
-export function getPersonUrl(fnr: string): string {
+export function getPersonUrl(fnr: string, enhet?: string): string {
     if (erGCP()) {
         if (erDev()) {
-            return `https://veilarbpersonflatefs.dev.intern.nav.no/${fnr}`;
+            return `https://veilarbpersonflatefs.dev.intern.nav.no/${fnr}${enhet ? '?enhet=' + enhet : ''}}`;
         }
-        return `https://veilarbpersonflatefs.intern.nav.no/${fnr}`;
+        return `https://veilarbpersonflatefs.intern.nav.no/${fnr}${enhet ? '?enhet=' + enhet : ''}`;
     }
-    return `veilarbpersonflatefs/${fnr}`;
+    return `veilarbpersonflatefs/${fnr}${enhet ? '?enhet=' + enhet : ''}`;
 }
 
 export function updateLastPath() {

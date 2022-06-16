@@ -9,10 +9,11 @@ import {BodyShort, Link} from '@navikt/ds-react';
 interface SisteEndringKategoriProps {
     className?: string;
     bruker: BrukerModell;
+    enhetId: string;
     skalVises: boolean;
 }
 
-function SisteEndringKategori({className, bruker, skalVises}: SisteEndringKategoriProps) {
+function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     if (!skalVises) {
         return null;
     }
@@ -30,7 +31,7 @@ function SisteEndringKategori({className, bruker, skalVises}: SisteEndringKatego
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
-                href={`${getPersonUrl(bruker.fnr)}/aktivitet/vis/${bruker.sisteEndringAktivitetId}`}
+                href={`${getPersonUrl(bruker.fnr, enhetId)}/aktivitet/vis/${bruker.sisteEndringAktivitetId}`}
                 className={classnames('lenke lenke--frittstaende')}
             >
                 <BodyShort size="small">{sisteEndringKategori}</BodyShort>

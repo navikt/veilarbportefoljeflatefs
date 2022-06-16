@@ -15,6 +15,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
     settMarkert: (bruker: string, markert: boolean) => void;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
@@ -24,6 +25,7 @@ interface EnhetBrukerpanelProps {
 function EnhetBrukerpanel({
     bruker,
     settMarkert,
+    enhetId,
     filtervalg,
     brukersVeileder,
     valgteKolonner,
@@ -63,6 +65,7 @@ function EnhetBrukerpanel({
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"
                 bruker={bruker}
+                enhetId={enhetId}
                 filtervalg={filtervalg}
                 valgteKolonner={valgteKolonner}
                 brukersVeileder={brukersVeileder}

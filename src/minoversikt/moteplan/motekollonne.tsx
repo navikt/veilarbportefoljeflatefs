@@ -9,9 +9,10 @@ import {nameCapitalization} from '../../utils/utils';
 interface MoteKollonneProps {
     dato: Date;
     mote: MoteData;
+    enhetId: string;
 }
 
-function MoteKollonne({dato, mote}: MoteKollonneProps) {
+function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
     if (!moment(dato).isSame(moteDato, 'day')) {
         return <></>;
@@ -36,7 +37,7 @@ function MoteKollonne({dato, mote}: MoteKollonneProps) {
                         onClick={() => {
                             setFraBrukerIUrl(mote.deltaker.fnr);
                         }}
-                        href={getPersonUrl(mote.deltaker.fnr)}
+                        href={getPersonUrl(mote.deltaker.fnr, enhetId)}
                     >
                         {nameCapitalization(mote.deltaker.etternavn)}, {nameCapitalization(mote.deltaker.fornavn)}
                     </Link>

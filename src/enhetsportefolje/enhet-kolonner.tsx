@@ -37,12 +37,13 @@ import moment from 'moment';
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
 }
 
-function EnhetKolonner({className, bruker, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -75,7 +76,7 @@ function EnhetKolonner({className, bruker, filtervalg, valgteKolonner, brukersVe
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <DatoKolonne
                 className="col col-xs-2"
@@ -209,6 +210,7 @@ function EnhetKolonner({className, bruker, filtervalg, valgteKolonner, brukersVe
             />
             <SisteEndringKategori
                 bruker={bruker}
+                enhetId={enhetId}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />

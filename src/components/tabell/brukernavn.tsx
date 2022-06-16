@@ -8,9 +8,10 @@ import {BodyShort, Link} from '@navikt/ds-react';
 interface BrukerNavnProps {
     className?: string;
     bruker: BrukerModell;
+    enhetId: string;
 }
 
-const BrukerNavn = ({className, bruker}: BrukerNavnProps) => {
+const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const settSammenNavn = bruker => {
         if (bruker.etternavn === '' && bruker.fornavn === '') {
             return '';
@@ -24,7 +25,7 @@ const BrukerNavn = ({className, bruker}: BrukerNavnProps) => {
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
-                href={getPersonUrl(bruker.fnr)}
+                href={getPersonUrl(bruker.fnr, enhetId)}
                 className={classnames('lenke lenke--frittstaende')}
             >
                 <BodyShort size="small">{settSammenNavn(bruker)}</BodyShort>

@@ -23,7 +23,7 @@ interface MinOversiktTabellProps {
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
+    const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -40,18 +40,20 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
             <div className={props.classNameWrapper}>
                 <div className="minoversikt-liste__wrapper">
                     <ul className="brukerliste" data-testid="brukerliste">
-                        {brukere.map(bruker => (
-                            <MinoversiktBrukerPanel
-                                key={bruker.fnr || bruker.guid}
-                                bruker={bruker}
-                                settMarkert={settMarkert}
-                                varForrigeBruker={forrigeBruker === bruker.fnr}
-                                filtervalg={filtervalg}
-                                valgteKolonner={listevisning.valgte}
-                                innloggetVeileder={props.innloggetVeileder}
-                                hentArbeidslisteForBruker={hentArbeidslisteBruker}
-                            />
-                        ))}
+                        {enhetId &&
+                            brukere.map(bruker => (
+                                <MinoversiktBrukerPanel
+                                    key={bruker.fnr || bruker.guid}
+                                    bruker={bruker}
+                                    enhetId={enhetId}
+                                    settMarkert={settMarkert}
+                                    varForrigeBruker={forrigeBruker === bruker.fnr}
+                                    filtervalg={filtervalg}
+                                    valgteKolonner={listevisning.valgte}
+                                    innloggetVeileder={props.innloggetVeileder}
+                                    hentArbeidslisteForBruker={hentArbeidslisteBruker}
+                                />
+                            ))}
                     </ul>
                 </div>
             </div>

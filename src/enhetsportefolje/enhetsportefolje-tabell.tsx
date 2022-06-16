@@ -19,7 +19,9 @@ interface EnhetTabellProps {
 
 function EnhetTabell(props: EnhetTabellProps) {
     const forrigeBruker = useForrigeBruker();
-    const {brukere, filtervalg, listevisning, portefolje} = usePortefoljeSelector(OversiktType.enhetensOversikt);
+    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
+        OversiktType.enhetensOversikt
+    );
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
     const dispatch = useDispatch();
@@ -33,17 +35,19 @@ function EnhetTabell(props: EnhetTabellProps) {
             <div className={props.classNameWrapper}>
                 <div className="enhet-tabell">
                     <ul className="brukerliste">
-                        {brukere.map(bruker => (
-                            <EnhetBrukerpanel
-                                key={bruker.fnr || bruker.guid}
-                                bruker={bruker}
-                                settMarkert={settMarkert}
-                                filtervalg={filtervalg}
-                                valgteKolonner={listevisning.valgte}
-                                brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
-                                forrigeBruker={forrigeBruker}
-                            />
-                        ))}
+                        {enhetId &&
+                            brukere.map(bruker => (
+                                <EnhetBrukerpanel
+                                    key={bruker.fnr || bruker.guid}
+                                    bruker={bruker}
+                                    enhetId={enhetId}
+                                    settMarkert={settMarkert}
+                                    filtervalg={filtervalg}
+                                    valgteKolonner={listevisning.valgte}
+                                    brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
+                                    forrigeBruker={forrigeBruker}
+                                />
+                            ))}
                     </ul>
                 </div>
             </div>

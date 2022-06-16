@@ -36,11 +36,12 @@ import moment from 'moment';
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -74,7 +75,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner}
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} />
+            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <DatoKolonne
                 className="col col-xs-2"
@@ -228,6 +229,7 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner}
             />
             <SisteEndringKategori
                 bruker={bruker}
+                enhetId={enhetId}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
