@@ -19,7 +19,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             ignoreWsEvents: true,
             onChange: value => {
                 if (value) {
-                    window.location.pathname = erGCP() ? getPersonUrl(value) : `veilarbpersonflatefs/${value}`;
+                    window.location.pathname = `veilarbpersonflatefs/${value}`;
                 }
             }
         },

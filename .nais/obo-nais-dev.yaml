@@ -61,6 +61,11 @@ spec:
               "fromPath": "/internarbeidsflatedecorator/*",
               "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
               "preserveFromPath": true
+            },
+            {
+              "fromPath": "/veilarbpersonflatefs/*",
+              "toUrl": "https://veilarbpersonflatefs.dev.intern.nav.no",
+              "preserveFromPath": true
             }
           ],
           "proxies": [
