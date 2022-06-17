@@ -70,17 +70,7 @@ spec:
             {
               "fromPath": "/veilarbpersonflatefs/*",
               "toUrl": "https://veilarbpersonflatefs.dev.intern.nav.no",
-              "preserveFromPath": true
-            },
-            {
-              "fromPath": "veilarbportefoljeflatefs/*",
-              "toUrl": "https://veilarbportefoljeflatefs.dev.intern.nav.no/",
-              "preserveFromPath": true
-            },
-            {
-              "fromPath": "veilarbportefoljeflatefs/veilarbpersonflatefs/*",
-              "toUrl": "https://veilarbpersonflatefs.dev.intern.nav.no",
-              "preserveFromPath": true
+              "preserveFromPath": false
             }
           ],
           "proxies": [
