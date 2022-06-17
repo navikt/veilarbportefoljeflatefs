@@ -56,6 +56,11 @@ spec:
           "gcs": {
             "bucketName": "obo-veilarbportefoljeflatefs-dev"
           },
+          "header": {
+            "csp": {
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
+             }
+          },
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
