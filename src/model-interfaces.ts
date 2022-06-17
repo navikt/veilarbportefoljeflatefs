@@ -36,7 +36,10 @@ export enum Sorteringsfelt {
     UTKAST_14A_ANSVARLIG_VEILEDER = 'utkast_14a_ansvarlig_veileder',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
     SISTE_ENDRING = 'siste_endring_kategori',
-    SISTE_ENDRING_DATO = 'siste_endring_tidspunkt'
+    SISTE_ENDRING_DATO = 'siste_endring_tidspunkt',
+    FODELAND = 'fodeland',
+    STATSBORGERSKAP = 'statsborgerskap',
+    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra'
 }
 
 export interface FiltervalgModell {
@@ -48,6 +51,7 @@ export interface FiltervalgModell {
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];
     kjonn?: null | string;
+    landgruppe: string[];
     fodselsdagIMnd?: string[];
     innsatsgruppe?: string[];
     formidlingsgruppe?: string[];
@@ -142,6 +146,14 @@ export interface BrukerModell {
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
     nesteUtlopsdatoAktivitet?: string;
+    statsborgerskap: Statsborgerskap[];
+    foedeland?: string;
+}
+
+interface Statsborgerskap {
+    statsborgerskap: string;
+    gyldigFra?: string;
+    gyldigTil?: string;
 }
 
 // TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?

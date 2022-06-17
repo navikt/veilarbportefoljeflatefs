@@ -229,6 +229,14 @@ export const registreringstype = {
     JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene'
 };
 
+export const landgruppe = {
+    LANDGRUPPE_UKJENT: 'Ukjent fødeland',
+    LANDGRUPPE_0: 'Landgruppekode 0',
+    LANDGRUPPE_1: 'Landgruppekode 1',
+    LANDGRUPPE_2: 'Landgruppekode 2',
+    LANDGRUPPE_3: 'Landgruppekode 3'
+};
+
 export const utdanning = {
     INGEN_UTDANNING: 'Ingen utdanning',
     GRUNNSKOLE: 'Grunnskole',
@@ -300,6 +308,7 @@ export default {
     alder,
     fodselsdagIMnd,
     kjonn,
+    landgruppe,
     innsatsgruppe,
     hovedmal,
     formidlingsgruppe,

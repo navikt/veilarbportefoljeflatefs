@@ -75,10 +75,36 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
+    console.log(filtervalg.landgruppe);
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={bruker.foedeland ? bruker.foedeland : '-'}
+                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={
+                    bruker.statsborgerskap && bruker.statsborgerskap.length > 0
+                        ? bruker.statsborgerskap[0].statsborgerskap
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                tekst={
+                    bruker.statsborgerskap && bruker.statsborgerskap.length > 0
+                        ? bruker.statsborgerskap[0].gyldigFra
+                        : '-'
+                }
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}

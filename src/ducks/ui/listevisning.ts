@@ -34,7 +34,10 @@ export enum Kolonne {
     VEDTAKSTATUS = 'vedtakstatus',
     ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
     SISTE_ENDRING = 'siste_endring',
-    SISTE_ENDRING_DATO = 'siste_endring_dato'
+    SISTE_ENDRING_DATO = 'siste_endring_dato',
+    FODELAND = 'fodeland',
+    STATSBORGERSKAP = 'statsborgerskap',
+    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra'
 }
 
 export enum OversiktType {
