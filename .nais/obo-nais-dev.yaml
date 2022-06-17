@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.05.18_10.19-08a4135c0657
+  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.06.17_07.46-de6b76803211
   port: 8080
   ingresses:
     - https://veilarbportefoljeflatefs.dev.intern.nav.no

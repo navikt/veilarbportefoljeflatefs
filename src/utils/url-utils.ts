@@ -1,7 +1,6 @@
 import * as queryString from 'query-string';
 import {basename} from '../history';
 import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
-import {erGCP} from './utils';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;

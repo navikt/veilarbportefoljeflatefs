@@ -5,7 +5,6 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {erGCP} from './utils/utils';
-import {getPersonUrl} from './utils/url-utils';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
