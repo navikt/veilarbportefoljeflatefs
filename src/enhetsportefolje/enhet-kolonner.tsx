@@ -90,8 +90,8 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={
-                    bruker.statsborgerskap && bruker.statsborgerskap.length > 0
-                        ? bruker.statsborgerskap[0].statsborgerskap
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                        ? bruker.hovedStatsborgerskap.statsborgerskap
                         : '-'
                 }
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
@@ -100,8 +100,8 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
-                    bruker.statsborgerskap && bruker.statsborgerskap.length > 0
-                        ? bruker.statsborgerskap[0].gyldigFra
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                        ? bruker.hovedStatsborgerskap.gyldigFra
                         : '-'
                 }
             />

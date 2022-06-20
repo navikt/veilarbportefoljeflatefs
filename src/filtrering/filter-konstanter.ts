@@ -230,11 +230,11 @@ export const registreringstype = {
 };
 
 export const landgruppe = {
-    LANDGRUPPE_UKJENT: 'Ukjent fødeland',
-    LANDGRUPPE_0: 'Landgruppekode 0',
-    LANDGRUPPE_1: 'Landgruppekode 1',
-    LANDGRUPPE_2: 'Landgruppekode 2',
-    LANDGRUPPE_3: 'Landgruppekode 3'
+    LANDGRUPPE_0: 'Landgruppe 0',
+    LANDGRUPPE_1: 'Landgruppe 1',
+    LANDGRUPPE_2: 'Landgruppe 2',
+    LANDGRUPPE_3: 'Landgruppe 3',
+    LANDGRUPPE_UKJENT: 'Ukjent fødeland'
 };
 
 export const utdanning = {

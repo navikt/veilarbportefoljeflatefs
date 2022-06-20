@@ -146,7 +146,9 @@ export interface BrukerModell {
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
     nesteUtlopsdatoAktivitet?: string;
-    statsborgerskap: Statsborgerskap[];
+    hovedStatsborgerskap: Statsborgerskap;
+    harFlereStatsborgerskap: boolean;
+    innflyttingTilNorgeFraLand: string;
     foedeland?: string;
 }
 

@@ -219,8 +219,14 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
-        statsborgerskap: [{statsborgerskap: hentLand(), gyldigFra: '30.10.1990', gyldigTil: ''}],
-        foedeland: hentLand()
+        hovedStatsborgerskap: {
+            statsborgerskap: hentLand(),
+            gyldigFra: new Date(Math.floor(Math.random() * Date.now())).toLocaleDateString(),
+            gyldigTil: ''
+        },
+        foedeland: hentLand(),
+        harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
+        innflyttingTilNorgeFraLand: ''
     };
 }
 
