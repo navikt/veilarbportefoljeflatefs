@@ -14,7 +14,7 @@ jobs:
                   node-version: '16'
                   cache: 'npm'
             - name: Install dependencies
-              run: npm ci
+              run: npm ci --legacy-peer-deps
             - name: Build mock application
               run: npm run build:mock
             - name: Legg til 404 fil
