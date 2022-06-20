@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.05.18_10.19-08a4135c0657
+  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.06.17_07.46-de6b76803211
   port: 8080
   ingresses:
     - https://veilarbportefoljeflatefs.dev.intern.nav.no
@@ -56,10 +56,20 @@ spec:
           "gcs": {
             "bucketName": "obo-veilarbportefoljeflatefs-dev"
           },
+          "header": {
+            "csp": {
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
+             }
+          },
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
               "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
+              "preserveFromPath": true
+            },
+            {
+              "fromPath": "/veilarbpersonflatefs/*",
+              "toUrl": "https://veilarbpersonflatefs.dev.intern.nav.no",
               "preserveFromPath": true
             }
           ],
@@ -113,6 +123,16 @@ spec:
               "fromPath": "/veilarbportefoljeflatefs",
               "toUrl": "http://poao-unleash.poao.svc.cluster.local",
               "preserveFromPath": false
+            },
+            {
+              "fromPath": "/veilarboppfolging",
+              "toUrl": "https://veilarboppfolging.dev-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarboppfolging",
+                "namespace": "pto",
+                "cluster": "dev-fss"
+              }
             },
             {
               "fromPath": "/modiacontextholder",

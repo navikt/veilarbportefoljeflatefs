@@ -2,17 +2,17 @@ import * as React from 'react';
 
 import moment from 'moment';
 import {Link, Table} from '@navikt/ds-react';
-import {setFraBrukerIUrl} from '../../utils/url-utils';
+import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {nameCapitalization} from '../../utils/utils';
 
 interface MoteKollonneProps {
     dato: Date;
     mote: MoteData;
-    enhet: string;
+    enhetId: string;
 }
 
-function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
+function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
     if (!moment(dato).isSame(moteDato, 'day')) {
         return <></>;
@@ -37,7 +37,7 @@ function MoteKollonne({dato, mote, enhet}: MoteKollonneProps) {
                         onClick={() => {
                             setFraBrukerIUrl(mote.deltaker.fnr);
                         }}
-                        href={`${window.location.origin}/veilarbpersonflatefs/${mote.deltaker.fnr}/?enhet=${enhet}`}
+                        href={getPersonUrl(mote.deltaker.fnr, enhetId)}
                     >
                         {nameCapitalization(mote.deltaker.etternavn)}, {nameCapitalization(mote.deltaker.fornavn)}
                     </Link>

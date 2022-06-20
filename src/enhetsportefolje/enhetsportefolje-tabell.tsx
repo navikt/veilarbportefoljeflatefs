@@ -35,18 +35,19 @@ function EnhetTabell(props: EnhetTabellProps) {
             <div className={props.classNameWrapper}>
                 <div className="enhet-tabell">
                     <ul className="brukerliste">
-                        {brukere.map(bruker => (
-                            <EnhetBrukerpanel
-                                key={bruker.fnr || bruker.guid}
-                                bruker={bruker}
-                                enhetId={enhetId}
-                                settMarkert={settMarkert}
-                                filtervalg={filtervalg}
-                                valgteKolonner={listevisning.valgte}
-                                brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
-                                forrigeBruker={forrigeBruker}
-                            />
-                        ))}
+                        {enhetId &&
+                            brukere.map(bruker => (
+                                <EnhetBrukerpanel
+                                    key={bruker.fnr || bruker.guid}
+                                    bruker={bruker}
+                                    enhetId={enhetId}
+                                    settMarkert={settMarkert}
+                                    filtervalg={filtervalg}
+                                    valgteKolonner={listevisning.valgte}
+                                    brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
+                                    forrigeBruker={forrigeBruker}
+                                />
+                            ))}
                     </ul>
                 </div>
             </div>
