@@ -70,7 +70,7 @@ spec:
             {
               "fromPath": "/veilarbpersonflatefs/*",
               "toUrl": "https://veilarbpersonflatefs.dev.intern.nav.no",
-              "preserveFromPath": false
+              "preserveFromPath": true
             }
           ],
           "proxies": [
