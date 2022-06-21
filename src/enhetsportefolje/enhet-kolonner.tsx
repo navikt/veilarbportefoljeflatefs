@@ -27,7 +27,6 @@ import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from '../utils/types/types';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
@@ -38,7 +37,7 @@ import moment from 'moment';
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: OrNothing<string>;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
