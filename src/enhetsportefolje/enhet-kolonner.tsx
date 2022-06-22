@@ -74,8 +74,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
-    console.log(filtervalg.landgruppe);
-
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
