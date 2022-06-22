@@ -9,6 +9,7 @@ import {
     innsatsgruppe,
     kjonn,
     landgruppe,
+    landgruppeTooltips,
     manuellBrukerStatus,
     manuellBrukerStatusUtenKRR,
     registreringstype,
@@ -97,6 +98,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             className="landgruppe"
+                            tooltips={landgruppeTooltips}
                         />
                     )}
                 />

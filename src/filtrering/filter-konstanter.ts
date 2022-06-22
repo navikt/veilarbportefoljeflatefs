@@ -237,6 +237,15 @@ export const landgruppe = {
     LANDGRUPPE_UKJENT: 'Ukjent fødeland'
 };
 
+export const landgruppeTooltips = {
+    LANDGRUPPE_0: 'Norge',
+    LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
+    LANDGRUPPE_2: 'Østeuropeiske EU-land',
+    LANDGRUPPE_3:
+        'Asia, Afrika, Amerika (utenom USA og Canada), Øst-Europa (utenfor EU), Oseania (utenom Australia og New Zealand)',
+    LANDGRUPPE_UKJENT: 'Mangler informasjon om fødeland'
+};
+
 export const utdanning = {
     INGEN_UTDANNING: 'Ingen utdanning',
     GRUNNSKOLE: 'Grunnskole',
