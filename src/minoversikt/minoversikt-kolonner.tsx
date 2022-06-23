@@ -77,6 +77,30 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={bruker.foedeland ? bruker.foedeland : '-'}
+                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                        ? bruker.hovedStatsborgerskap.statsborgerskap
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                        ? bruker.hovedStatsborgerskap.gyldigFra
+                        : '-'
+                }
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}

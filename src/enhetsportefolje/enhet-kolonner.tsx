@@ -78,7 +78,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
-
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={bruker.foedeland ? bruker.foedeland : '-'}
