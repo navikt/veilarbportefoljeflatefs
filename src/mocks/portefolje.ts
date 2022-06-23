@@ -221,7 +221,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
         hovedStatsborgerskap: {
             statsborgerskap: hentLand(),
-            gyldigFra: new Date(Math.floor(Math.random() * Date.now())).toLocaleDateString(),
+            gyldigFra: new Date(Math.floor(Math.random() * Date.now())),
             gyldigTil: ''
         },
         foedeland: hentLand(),
@@ -231,7 +231,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 }
 
 const hentLand = () => {
-    const landListe = ['Norge', 'Sverige', 'Finland', 'Danmark', 'England', 'Montenegro', 'Island', 'Hellas'];
+    const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
 };

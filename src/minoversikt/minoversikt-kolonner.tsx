@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
     aapRettighetsperiode,
+    capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
     utledValgteAktivitetsTyper,
@@ -25,7 +26,7 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato, toDate} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
@@ -80,14 +81,14 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
 
             <TekstKolonne
                 className="col col-xs-2"
-                tekst={bruker.foedeland ? bruker.foedeland : '-'}
+                tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
             />
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
-                        ? bruker.hovedStatsborgerskap.statsborgerskap
+                        ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
                         : '-'
                 }
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
@@ -97,7 +98,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
-                        ? bruker.hovedStatsborgerskap.gyldigFra
+                        ? toDate(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
             />
