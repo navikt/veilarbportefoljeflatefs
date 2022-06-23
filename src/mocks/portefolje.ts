@@ -221,7 +221,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
         hovedStatsborgerskap: {
             statsborgerskap: hentLand(),
-            gyldigFra: new Date(Math.floor(Math.random() * Date.now())),
+            gyldigFra: '1961-06-12',
             gyldigTil: ''
         },
         foedeland: hentLand(),

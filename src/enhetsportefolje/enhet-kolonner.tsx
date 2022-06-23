@@ -26,7 +26,13 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato, toDate} from '../utils/dato-utils';
+import {
+    dagerSiden,
+    klokkeslettTilMinutter,
+    minuttDifferanse,
+    oppfolgingStartetDato,
+    toDateString
+} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import './enhetsportefolje.less';
 import './brukerliste.less';
@@ -98,7 +104,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
-                        ? toDate(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
             />

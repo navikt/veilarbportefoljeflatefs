@@ -26,7 +26,13 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato, toDate} from '../utils/dato-utils';
+import {
+    dagerSiden,
+    klokkeslettTilMinutter,
+    minuttDifferanse,
+    oppfolgingStartetDato,
+    toDateString
+} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
@@ -98,7 +104,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
-                        ? toDate(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
             />
