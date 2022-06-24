@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Alert, Tooltip, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -15,6 +15,7 @@ interface CheckboxFilterformProps {
     gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
+    tooltips?: Dictionary<string>;
 }
 
 function CheckboxFilterform({
@@ -24,7 +25,8 @@ function CheckboxFilterform({
     filtervalg,
     gridColumns = 1,
     className,
-    emptyCheckboxFilterFormMessage
+    emptyCheckboxFilterFormMessage,
+    tooltips
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -53,11 +55,26 @@ function CheckboxFilterform({
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={gridColumns}>
                         <CheckboxGroup legend="" value={checkBoxValg} size="small">
-                            {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
-                                    {filterValue}
-                                </Checkbox>
-                            ))}
+                        {Object.entries(valg).map(([filterKey, filterValue]) =>
+                            tooltips && tooltips[filterKey] ? (
+                                <Tooltip
+                                    content={tooltips[filterKey]}
+                                    placement="right"
+                                    offset={-130}
+                                    maxChar={999}
+                                    key={`tooltip-${filterKey}`}
+                                >
+                                    <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
+                                        {filterValue}
+                                    </Checkbox>
+
+                                </Tooltip>
+                            ) : (
+                              <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
+                                  {filterValue}
+                              </Checkbox>
+                            )
+                        )}
                         </CheckboxGroup>
                     </Grid>
                 </div>

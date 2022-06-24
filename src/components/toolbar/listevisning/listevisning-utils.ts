@@ -28,3 +28,6 @@ alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status oppfølgingsve
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {tekstlabel: 'Oppfølgingsvedtak status tidspunkt'});
 alternativerConfig.set(Kolonne.SISTE_ENDRING, {tekstlabel: 'Siste endring'});
 alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {tekstlabel: 'Siste endring dato'});
+alternativerConfig.set(Kolonne.FODELAND, {tekstlabel: 'Fødeland'});
+alternativerConfig.set(Kolonne.STATSBORGERSKAP, {tekstlabel: 'Statsborgerskap'});
+alternativerConfig.set(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, {tekstlabel: 'Statsborgerskap gyldig fra'});
