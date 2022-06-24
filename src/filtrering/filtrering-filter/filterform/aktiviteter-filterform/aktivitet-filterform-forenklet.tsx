@@ -2,8 +2,7 @@ import React from 'react';
 import '../filterform.less';
 import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
-import {Button} from '@navikt/ds-react';
-import {Checkbox} from 'nav-frontend-skjema';
+import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -39,19 +38,20 @@ function AktivitetFilterformForenklet({
 
     return (
         <form className="skjema aktivitetfilterform-forenklet" data-testid="aktivitet-filterform-forenklet">
-            <div className="aktivitetfilterform-forenklet__valg">
+            <CheckboxGroup legend="" size="small">
                 {Object.entries(valg).map(([filterKey, filterValue]) => (
                     <Checkbox
                         key={filterKey}
                         className="aktivitetvalg"
-                        label={filterValue}
                         onChange={e => velgCheckBox(e)}
                         value={filterKey}
                         checked={valgteForenkledeAktiviteter.includes(filterKey)}
                         data-testid={`aktivitet-forenklet_${filterKey}`}
-                    />
+                    >
+                        {filterValue}
+                    </Checkbox>
                 ))}
-            </div>
+            </CheckboxGroup>
             <div className="aktivitet-filterform__knappegruppe">
                 <Button
                     variant="tertiary"

@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert} from '@navikt/ds-react';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -52,23 +52,13 @@ function CheckboxFilterform({
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={gridColumns}>
-                        {Object.entries(valg).map(([filterKey, filterValue]) => (
-                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                <input
-                                    id={filterKey}
-                                    type="checkbox"
-                                    className="skjemaelement__input checkboks"
-                                    value={filterKey}
-                                    name={valg[filterKey]}
-                                    checked={checkBoxValg.includes(filterKey)}
-                                    onChange={velgCheckBox}
-                                    data-testid={`filter_${filterKey}`}
-                                />
-                                <label htmlFor={filterKey} className="skjemaelement__label">
+                        <CheckboxGroup legend="" value={checkBoxValg} size="small">
+                            {Object.entries(valg).map(([filterKey, filterValue]) => (
+                                <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
                                     {filterValue}
-                                </label>
-                            </div>
-                        ))}
+                                </Checkbox>
+                            ))}
+                        </CheckboxGroup>
                     </Grid>
                 </div>
             )}

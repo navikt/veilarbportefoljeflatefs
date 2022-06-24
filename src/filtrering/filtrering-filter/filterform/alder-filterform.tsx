@@ -180,6 +180,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                         </div>
                         <Button
                             variant="primary"
+                            size="small"
                             type="submit"
                             className="alder-velg-knapp"
                             data-testid="checkbox-filterform_velg-knapp"
