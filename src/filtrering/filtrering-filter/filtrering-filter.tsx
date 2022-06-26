@@ -8,6 +8,8 @@ import {
     hovedmal,
     innsatsgruppe,
     kjonn,
+    landgruppe,
+    landgruppeTooltips,
     manuellBrukerStatus,
     manuellBrukerStatusUtenKRR,
     registreringstype,
@@ -47,7 +49,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Demografi</Label>
+                <Label size="small">Om personen</Label>
                 <Dropdown
                     name="Alder"
                     id="alder"
@@ -83,6 +85,20 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             filtervalg={filtervalg}
                             form="kjonn"
                             gridColumns={2}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Fødeland"
+                    id="foedeland"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="landgruppe"
+                            valg={landgruppe}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                            className="landgruppe"
+                            tooltips={landgruppeTooltips}
                         />
                     )}
                 />

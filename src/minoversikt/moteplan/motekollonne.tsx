@@ -4,7 +4,7 @@ import moment from 'moment';
 import {Link, Table} from '@navikt/ds-react';
 import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
-import {nameCapitalization} from '../../utils/utils';
+import {capitalize} from '../../utils/utils';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -39,7 +39,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
                         }}
                         href={getPersonUrl(mote.deltaker.fnr, enhetId)}
                     >
-                        {nameCapitalization(mote.deltaker.etternavn)}, {nameCapitalization(mote.deltaker.fornavn)}
+                        {capitalize(mote.deltaker.etternavn)}, {capitalize(mote.deltaker.fornavn)}
                     </Link>
                 )}
             </Table.DataCell>
