@@ -31,7 +31,11 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
-                href={`${getPersonUrl(bruker.fnr, enhetId)}/aktivitet/vis/${bruker.sisteEndringAktivitetId}`}
+                href={getPersonUrl(
+                    bruker.fnr,
+                    enhetId,
+                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`
+                )}
                 className={classnames('lenke lenke--frittstaende')}
             >
                 <BodyShort size="small">{sisteEndringKategori}</BodyShort>

@@ -37,7 +37,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
                         onClick={() => {
                             setFraBrukerIUrl(mote.deltaker.fnr);
                         }}
-                        href={getPersonUrl(mote.deltaker.fnr, enhetId)}
+                        href={getPersonUrl(mote.deltaker.fnr, enhetId, '#visAktivitetsplanen')}
                     >
                         {capitalize(mote.deltaker.etternavn)}, {capitalize(mote.deltaker.fornavn)}
                     </Link>

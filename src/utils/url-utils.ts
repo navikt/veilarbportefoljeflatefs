@@ -53,12 +53,13 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
-export function getPersonUrl(fnr: string, enhet?: string): string {
+export function getPersonUrl(fnr: string, enhet?: string, pathParam?: string): string {
     const enhetParam = enhet ? '?enhet=' + enhet : '';
+    const params = enhetParam + (!!pathParam ? pathParam : '');
     if (erGCP()) {
-        return `/veilarbpersonflatefs/${fnr}${enhetParam}`;
+        return `/veilarbpersonflatefs/${fnr}${params}`;
     }
-    return `${window.location.origin}/veilarbpersonflatefs/${fnr}${enhetParam}`;
+    return `${window.location.origin}/veilarbpersonflatefs/${fnr}${params}`;
 }
 
 export function updateLastPath() {
