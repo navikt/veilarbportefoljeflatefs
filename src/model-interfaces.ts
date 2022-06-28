@@ -195,3 +195,7 @@ export interface Systemmelding {
     type: 'error' | 'warning' | 'info' | 'success';
     beskrivelse: any;
 }
+
+export interface IdentParam {
+    ident: string;
+}

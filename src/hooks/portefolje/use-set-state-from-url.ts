@@ -9,13 +9,14 @@ import {useCallback} from 'react';
 import {useLocation, useParams} from 'react-router';
 import {useOnMount} from '../use-on-mount';
 import {logBrowserMetrikker} from '../../utils/metrikker/browser-metrikker';
+import {IdentParam} from '../../model-interfaces';
 
 export function useSetStateFromUrl() {
     const innloggetVeilederIdent = useIdentSelector();
     const dispatch = useDispatch();
 
     const location = useLocation();
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
 
     const pathname = location.pathname;
 

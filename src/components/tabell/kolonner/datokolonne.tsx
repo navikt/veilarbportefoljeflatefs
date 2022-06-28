@@ -13,7 +13,7 @@ function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
         return null;
     }
 
-    const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
+    const options: Intl.DateTimeFormatOptions = {day: '2-digit', month: '2-digit', year: 'numeric'};
     if (!dato) {
         return (
             //  Sørger med dette for at spanen tar akkurat like mye plass som et felt med dato

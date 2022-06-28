@@ -8,6 +8,7 @@ import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
+import {IdentParam} from '../../model-interfaces';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -19,7 +20,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const innloggetVeileder = useIdentSelector();
     const dispatch = useDispatch();
 
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const location = useLocation();
     const pathname = location.pathname;
 
