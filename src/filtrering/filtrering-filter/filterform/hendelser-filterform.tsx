@@ -113,7 +113,7 @@ export function HendelserFilterform({
                                 key={key}
                                 data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
                             >
-                                {hendelserLabels[key]}
+                                {hendelserLabels[key]}{' '}{key}{hendelserValg}
                             </Radio>
                         ))}
                     </RadioGroup>
