@@ -1,5 +1,5 @@
-import {lag2Sifret, range} from '../utils/utils';
-import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import { lag2Sifret, range } from "../utils/utils";
+import { KategoriModell, Sorteringsfelt } from "../model-interfaces";
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
@@ -237,6 +237,11 @@ export const landgruppe = {
     LANDGRUPPE_UKJENT: 'Ukjent fødeland'
 };
 
+export const tolkebehov = {
+    TALESPRAAKTOLK: 'Talespråktolk',
+    TEGNSPRAAKTOLK: 'Tegnspråktolk'
+};
+
 export const landgruppeTooltips = {
     LANDGRUPPE_0: 'Norge',
     LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
@@ -336,7 +341,8 @@ const filterKonstanter = {
     utdanningGodkjent,
     hendelserEtikett,
     hendelserLabels,
-    ulesteEndringer
+    ulesteEndringer,
+    tolkebehov
 };
 
 export default filterKonstanter;

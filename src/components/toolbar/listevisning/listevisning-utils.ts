@@ -1,4 +1,4 @@
-import {Kolonne} from '../../../ducks/ui/listevisning';
+import { Kolonne } from "../../../ducks/ui/listevisning";
 
 export interface Alternativ {
     tekstlabel: string;
@@ -31,3 +31,6 @@ alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {tekstlabel: 'Siste endring d
 alternativerConfig.set(Kolonne.FODELAND, {tekstlabel: 'Fødeland'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP, {tekstlabel: 'Statsborgerskap'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, {tekstlabel: 'Statsborgerskap gyldig fra'});
+alternativerConfig.set(Kolonne.TOLKEBEHOV, {tekstlabel: 'Tolkebehov'});
+alternativerConfig.set(Kolonne.TOLKE_SPRAAK, {tekstlabel: 'Språk'});
+alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Sist oppdatert'});

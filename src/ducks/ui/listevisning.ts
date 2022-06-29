@@ -1,6 +1,6 @@
-import {Dispatch} from 'redux';
-import {getMuligeKolonner} from './listevisning-selectors';
-import {FiltervalgModell} from '../../model-interfaces';
+import { Dispatch } from "redux";
+import { getMuligeKolonner } from "./listevisning-selectors";
+import { FiltervalgModell } from "../../model-interfaces";
 
 export enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',
@@ -37,7 +37,10 @@ export enum Kolonne {
     SISTE_ENDRING_DATO = 'siste_endring_dato',
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
-    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra'
+    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    TOLKEBEHOV = 'tolkebehov',
+    TOLKE_SPRAAK = 'tolkebehov_spraak',
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert'
 }
 
 export enum OversiktType {

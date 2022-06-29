@@ -1,37 +1,39 @@
-import * as React from 'react';
+import * as React from "react";
 import {
-    aapRettighetsperiode,
-    capitalize,
-    nesteUtlopsdatoEllerNull,
-    parseDatoString,
-    utledValgteAktivitetsTyper,
-    utlopsdatoUker
-} from '../utils/utils';
-import BrukerNavn from '../components/tabell/brukernavn';
-import BrukerFnr from '../components/tabell/brukerfnr';
-import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
+  aapRettighetsperiode,
+  capitalize,
+  nesteUtlopsdatoEllerNull,
+  parseDatoString,
+  tolkBehov,
+  tolkBehovSpraak,
+  utledValgteAktivitetsTyper,
+  utlopsdatoUker
+} from "../utils/utils";
+import BrukerNavn from "../components/tabell/brukernavn";
+import BrukerFnr from "../components/tabell/brukerfnr";
+import UkeKolonne from "../components/tabell/kolonner/ukekolonne";
 import {
-    I_AVTALT_AKTIVITET,
-    MIN_ARBEIDSLISTE,
-    MOTER_IDAG,
-    UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
-    ytelseAapSortering,
-    ytelsevalg
-} from '../filtrering/filter-konstanter';
-import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne} from '../ducks/ui/listevisning';
-import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
-import TidKolonne from '../components/tabell/kolonner/tidkolonne';
+  I_AVTALT_AKTIVITET,
+  MIN_ARBEIDSLISTE,
+  MOTER_IDAG,
+  UNDER_VURDERING,
+  UTLOPTE_AKTIVITETER,
+  VENTER_PA_SVAR_FRA_BRUKER,
+  VENTER_PA_SVAR_FRA_NAV,
+  ytelseAapSortering,
+  ytelsevalg
+} from "../filtrering/filter-konstanter";
+import DatoKolonne from "../components/tabell/kolonner/datokolonne";
+import { BrukerModell, FiltervalgModell } from "../model-interfaces";
+import { Kolonne } from "../ducks/ui/listevisning";
+import ArbeidslisteOverskrift from "../components/tabell/arbeidslisteoverskrift";
+import TidKolonne from "../components/tabell/kolonner/tidkolonne";
 import {
-    dagerSiden,
-    klokkeslettTilMinutter,
-    minuttDifferanse,
-    oppfolgingStartetDato,
-    toDateString
+  dagerSiden,
+  klokkeslettTilMinutter,
+  minuttDifferanse,
+  oppfolgingStartetDato,
+  toDateString
 } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
 import './minoversikt.css';
@@ -107,6 +109,25 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
+            />
+            <TekstKolonne
+              className="col col-xs-2"
+              tekst={tolkBehov(filtervalg, bruker)}
+              skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+            />
+            <TekstKolonne
+              className="col col-xs-2"
+              tekst={tolkBehovSpraak(filtervalg, bruker)}
+              skalVises={valgteKolonner.includes(Kolonne.TOLKE_SPRAAK)}
+            />
+            <TekstKolonne
+              className="col col-xs-2"
+              skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+              tekst={
+                bruker.tolkBehovSistOppdatert && bruker.tolkBehovSistOppdatert
+                  ? toDateString(bruker.tolkBehovSistOppdatert)!.toString()
+                  : '-'
+              }
             />
             <DatoKolonne
                 className="col col-xs-2"
