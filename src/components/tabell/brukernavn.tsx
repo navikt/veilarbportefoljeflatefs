@@ -25,7 +25,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
-                href={getPersonUrl(bruker.fnr, enhetId)}
+                href={getPersonUrl(bruker.fnr, '', enhetId)}
                 className={classnames('lenke lenke--frittstaende')}
             >
                 <BodyShort size="small">{settSammenNavn(bruker)}</BodyShort>

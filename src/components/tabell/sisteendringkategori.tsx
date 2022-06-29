@@ -33,8 +33,8 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                 }}
                 href={getPersonUrl(
                     bruker.fnr,
-                    enhetId,
-                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`
+                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
+                    enhetId
                 )}
                 className={classnames('lenke lenke--frittstaende')}
             >
