@@ -25,7 +25,7 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
+    const [hendelserValg, setHendelserValg] = useState<string>(filtervalg[form]);
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
@@ -34,7 +34,12 @@ export function HendelserFilterform({
     };
 
     useEffect(() => {
-        setHendelserValg(filtervalg[form]);
+        if (filtervalg[form]) {
+            setHendelserValg(filtervalg[form][0]);
+        } else {
+            setHendelserValg('');
+        }
+        console.log('filtervalg[form][0] ', filtervalg[form][0]);
     }, [filtervalg, form]);
 
     useEffect(() => {
@@ -109,11 +114,10 @@ export function HendelserFilterform({
                                 onChange={e => onRadioChange(e)}
                                 name="sisteEndringKategori"
                                 value={key}
-                                checked={hendelserValg.includes(key)}
                                 key={key}
                                 data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
                             >
-                                {hendelserLabels[key]}{' '}{key}{hendelserValg}
+                                {hendelserLabels[key]}{hendelserValg}{key}
                             </Radio>
                         ))}
                     </RadioGroup>
@@ -124,7 +128,6 @@ export function HendelserFilterform({
                                 onChange={e => onRadioChange(e)}
                                 name="sisteEndringKategori"
                                 value={key}
-                                checked={hendelserValg.includes(key)}
                                 key={key}
                                 data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
                             >
@@ -139,7 +142,6 @@ export function HendelserFilterform({
                                 onChange={e => onRadioChange(e)}
                                 name="sisteEndringKategori"
                                 value={key}
-                                checked={hendelserValg.includes(key)}
                                 key={key}
                                 data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
                             >
@@ -153,7 +155,6 @@ export function HendelserFilterform({
                             onChange={e => onRadioChange(e)}
                             name="sisteEndringKategori"
                             value={'MAL'}
-                            checked={hendelserValg.includes('MAL')}
                             key={'MAL'}
                             data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
                         >
@@ -166,7 +167,7 @@ export function HendelserFilterform({
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={hendelserValg.length <= 0 && checkboxValg !== null}
+                disabled={checkboxValg === null}
             />
         </form>
     );
