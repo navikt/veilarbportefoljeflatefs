@@ -1,0 +1,36 @@
+name: Deploy to prod
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+env:
+  CI: true
+  TZ: Europe/Amsterdam
+
+jobs:
+  deploy-dev:
+    name: Deploy application to prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      - name: Run tests
+        run: npm run test
+      - name: Build application
+        run: npm run build:gcp
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GCS_SA_KEY_PROD }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+      - name: Upload files to GCS
+        run: gsutil -m rsync -r build gs://obo-veilarbportefoljeflatefs-prod
