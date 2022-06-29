@@ -55,7 +55,7 @@ export function getSorteringsRekkefolgeFromUrl() {
 
 export function getPersonUrl(fnr: string, enhet?: string, pathParam?: string): string {
     const enhetParam = enhet ? '?enhet=' + enhet : '';
-    const params = enhetParam + (!!pathParam ? pathParam : '');
+    const params = (!!pathParam ? pathParam : '') + enhetParam;
     if (erGCP()) {
         return `/veilarbpersonflatefs/${fnr}${params}`;
     }
