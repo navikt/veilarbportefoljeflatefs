@@ -1,6 +1,6 @@
-import {AppState} from '../../reducer';
-import {Kolonne, ListevisningState, OversiktType} from './listevisning';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
+import { AppState } from "../../reducer";
+import { Kolonne, ListevisningState, OversiktType } from "./listevisning";
+import { AktiviteterValg, FiltreringAktiviteterValg } from "../filtrering";
 import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
@@ -12,8 +12,8 @@ import {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
-} from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../model-interfaces';
+} from "../../filtrering/filter-konstanter";
+import { FiltervalgModell } from "../../model-interfaces";
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
@@ -71,6 +71,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             filtervalg.tiltakstyper.length > 0
         );
     };
+
+    const tolkBehovErValgt = () => {
+        return filtervalg.tolkebehov!.length > 0 || (filtervalg.tolkBehovSpraak !== null && filtervalg.tolkBehovSpraak!.length > 0);
+    }
+
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
@@ -150,5 +155,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         )
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.TOLKE_SPRAAK, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

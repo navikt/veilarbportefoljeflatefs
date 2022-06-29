@@ -1,8 +1,8 @@
-import veiledereResponse, {innloggetVeileder} from './veiledere';
-import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
-import {MOCK_CONFIG, rnd} from './utils';
-import * as faker from 'faker/locale/nb_NO';
-import {KategoriModell} from '../model-interfaces';
+import veiledereResponse, { innloggetVeileder } from "./veiledere";
+import { aktiviteter, hendelserLabels } from "../filtrering/filter-konstanter";
+import { MOCK_CONFIG, rnd } from "./utils";
+import * as faker from "faker/locale/nb_NO";
+import { KategoriModell } from "../model-interfaces";
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -226,7 +226,10 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         },
         foedeland: hentLand(),
         harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
-        innflyttingTilNorgeFraLand: ''
+        innflyttingTilNorgeFraLand: '',
+        talespraaktolk: hentSpraak(),
+        tegnspraaktolk: hentSpraak(),
+        tolkBehovSistOppdatert: randomDate({past: true})
     };
 }
 
@@ -234,6 +237,12 @@ const hentLand = () => {
     const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
+};
+
+const hentSpraak = () => {
+    const spraakListe = [null, 'Italiensk ', 'Engelsk', 'Spansk', 'Norsk', 'Fransk', 'Portugisisk', 'Rumensk'];
+
+    return spraakListe[Math.floor(Math.random() * spraakListe.length)];
 };
 
 const randomEndring = () => {
