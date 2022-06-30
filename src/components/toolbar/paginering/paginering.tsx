@@ -47,9 +47,8 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
                 onClick={() => endreSidestorrelse(alternativSidestorrelse)}
                 data-testid={viserDefaultAntall ? 'se-flere_knapp' : 'se-faerre_knapp'}
                 ariaLabel={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
-            >
-                {viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
-            </KnappPanel>
+                tekst={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
+            />
 
             <Pagination
                 page={side}
