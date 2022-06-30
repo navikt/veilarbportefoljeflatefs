@@ -25,7 +25,7 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const [hendelserValg, setHendelserValg] = useState<string>(filtervalg[form]);
+    const [hendelserValg, setHendelserValg] = useState<string | null>('');
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
@@ -39,8 +39,7 @@ export function HendelserFilterform({
         } else {
             setHendelserValg('');
         }
-        console.log('filtervalg[form][0] ', filtervalg[form][0]);
-    }, [filtervalg, form]);
+    }, [filtervalg, hendelserValg, form]);
 
     useEffect(() => {
         setCheckboxValg(filtervalg['ulesteEndringer']);
@@ -117,7 +116,7 @@ export function HendelserFilterform({
                                 key={key}
                                 data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
                             >
-                                {hendelserLabels[key]}{hendelserValg}{key}
+                                {hendelserLabels[key]}
                             </Radio>
                         ))}
                     </RadioGroup>
@@ -167,7 +166,7 @@ export function HendelserFilterform({
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={checkboxValg === null}
+                disabled={hendelserValg === undefined && checkboxValg === null}
             />
         </form>
     );
