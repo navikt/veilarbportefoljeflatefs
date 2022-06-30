@@ -1,5 +1,6 @@
-import moment from 'moment';
-import {Maybe} from './types';
+import moment from "moment";
+import { Maybe } from "./types";
+import { SkjermingTil } from "../model-interfaces";
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
@@ -195,5 +196,41 @@ export function dagFraDato(dato: Date): string {
             return 'Lørdag';
         default:
             return '...';
+    }
+}
+
+export function hentSkjermetTil(skjermetTil): SkjermingTil{
+
+    var daysUntil = moment(skjermetTil).diff(moment(),'days');
+
+    if (daysUntil < 1){
+        return {
+            tittel: "Skjerming utløper om " + moment(skjermetTil).diff(moment(), 'hours') + "t",
+            type: 'error'
+        };
+    }
+    else if (daysUntil < 5){
+        return {
+            tittel: "Skjerming utløper om " + daysUntil + "d",
+            type: 'error'
+        };
+    }
+    else if (daysUntil <= 14 && daysUntil >= 5){
+        return {
+            tittel: "Skjerming utløper om " + daysUntil + "d",
+            type: 'warning'
+        };
+    }
+    else if (daysUntil >= 14){
+        return {
+            tittel: "Skjermet til " + moment(skjermetTil).format("DD.MM.YYYY"),
+            type: 'info'
+        };
+    }
+    else{
+        return {
+            tittel: null,
+            type: 'info'
+        }
     }
 }
