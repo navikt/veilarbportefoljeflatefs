@@ -17,7 +17,7 @@ env:
   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_GCP }}
 
 jobs:
-  deploy-dev:
+  deploy-prod:
     runs-on: ubuntu-latest
 
     steps:
