@@ -366,7 +366,7 @@ export let endringsloggListe = [
         apiHost: 'https://cdn.sanity.io'
     },
     {
-        title: 'Møteplan i Min oversikt',
+        title: 'Dette er kun test data',
         description: [
             {
                 _key: '982adbeb7735',
