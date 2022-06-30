@@ -1,8 +1,9 @@
-import veiledereResponse, {innloggetVeileder} from './veiledere';
-import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
-import {MOCK_CONFIG, rnd} from './utils';
-import * as faker from 'faker/locale/nb_NO';
-import {KategoriModell} from '../model-interfaces';
+import veiledereResponse, { innloggetVeileder } from "./veiledere";
+import { aktiviteter, hendelserLabels } from "../filtrering/filter-konstanter";
+import { MOCK_CONFIG, rnd } from "./utils";
+import * as faker from "faker/locale/nb_NO";
+import { KategoriModell } from "../model-interfaces";
+import moment from "moment";
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -179,6 +180,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
+    const random_eggenAnsatt = Math.random() < 0.5;
+
     return {
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
@@ -193,6 +196,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt,
+        skjermetTil: random_eggenAnsatt ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
         fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
         fodselsdato: grunndata.fodselsdato,
@@ -249,6 +253,10 @@ const randomDate = ({past}) => {
         ar = -rnd(0, 4) + new Date().getFullYear();
     }
     return new Date(ar, mnd - 1, dag).toISOString();
+};
+
+const randomDateInNearFuture = () => {
+    return moment().add(rnd(0, 20), 'days').add(rnd(0,23), 'hours').add(rnd(10, 50), 'minutes').format("YYYY-MM-DD HH:mm");
 };
 
 export function hentArbeidsliste() {
