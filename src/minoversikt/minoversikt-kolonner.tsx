@@ -118,7 +118,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehovSpraak(filtervalg, bruker)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKE_SPRAAK)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
             />
             <TekstKolonne
                 className="col col-xs-2"
