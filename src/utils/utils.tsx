@@ -94,7 +94,7 @@ export default function TittelValg(ytelseSorteringHeader) {
 }
 
 export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
-    var behov: string[] = [];
+    const behov: string[] = [];
     if (
         filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
         bruker.talespraaktolk !== undefined &&
@@ -121,7 +121,7 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
 }
 
 export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerModell) {
-    var behovSpraak: string[] = [];
+    const behovSpraak: string[] = [];
     if (
         filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
         bruker.talespraaktolk !== undefined &&

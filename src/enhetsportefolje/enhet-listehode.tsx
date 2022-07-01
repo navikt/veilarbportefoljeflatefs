@@ -147,7 +147,7 @@ function EnhetListehode({
                     title="Tolk behov språk"
                     tekst="Språk"
                     headerId="tolkespraak"
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKE_SPRAAK)}
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
