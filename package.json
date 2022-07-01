@@ -8,7 +8,7 @@
     "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true craco start",
-        "build": "GENERATE_SOURCEMAP=false craco build",
+        "build": "CI='' GENERATE_SOURCEMAP=false craco build",
         "eject": "craco eject",
         "heroku-serve": "node heroku-server.js",
         "heroku-postbuild": "cross-env REACT_APP_MOCK=true npm run build",
@@ -18,7 +18,7 @@
         "cypress:open": "cypress open",
         "cy:run": "cypress run",
         "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true craco build",
-        "build:gcp": "GENERATE_SOURCEMAP=false cross-env REACT_APP_MOCK=false PUBLIC_URL=/ craco build --config craco.config-gcp.js"
+        "build:gcp": "CI='' GENERATE_SOURCEMAP=false cross-env REACT_APP_MOCK=false PUBLIC_URL=/ craco build --config craco.config-gcp.js"
     },
     "devDependencies": {
         "@cypress/react": "^5.12.5",
