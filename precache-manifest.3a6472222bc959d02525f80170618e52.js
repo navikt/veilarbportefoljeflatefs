@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c73f17ad44ad0a98096d72f2d698fd1c",
+    "revision": "b1f38a39184f9e222beabc3d817645e7",
     "url": "/veilarbportefoljeflatefs/index.html"
   },
   {
