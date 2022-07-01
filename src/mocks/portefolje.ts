@@ -254,7 +254,11 @@ const randomDate = ({past}) => {
 };
 
 const randomDateInNearFuture = () => {
-    return moment().add(rnd(0, 20), 'days').add(rnd(0,23), 'hours').add(rnd(10, 50), 'minutes').format("YYYY-MM-DD HH:mm");
+    return moment()
+        .add(rnd(0, 20), 'days')
+        .add(rnd(0, 23), 'hours')
+        .add(rnd(10, 50), 'minutes')
+        .format('YYYY-MM-DD HH:mm');
 };
 
 export function hentArbeidsliste() {

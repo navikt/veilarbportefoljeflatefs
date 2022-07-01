@@ -1,6 +1,6 @@
-import moment from "moment";
-import { Maybe } from "./types";
-import { SkjermingTil } from "../model-interfaces";
+import moment from 'moment';
+import {Maybe} from './types';
+import {SkjermingTil} from '../model-interfaces';
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
@@ -199,38 +199,33 @@ export function dagFraDato(dato: Date): string {
     }
 }
 
-export function hentSkjermetTil(skjermetTil): SkjermingTil{
+export function hentSkjermetTil(skjermetTil): SkjermingTil {
+    var daysUntil = moment(skjermetTil).diff(moment(), 'days');
 
-    var daysUntil = moment(skjermetTil).diff(moment(),'days');
-
-    if (daysUntil < 1){
+    if (daysUntil < 1) {
         return {
-            tittel: "Skjerming utløper om " + moment(skjermetTil).diff(moment(), 'hours') + "t",
+            tittel: 'Skjerming utløper om ' + moment(skjermetTil).diff(moment(), 'hours') + 't',
             type: 'error'
         };
-    }
-    else if (daysUntil < 5){
+    } else if (daysUntil < 5) {
         return {
-            tittel: "Skjerming utløper om " + daysUntil + "d",
+            tittel: 'Skjerming utløper om ' + daysUntil + 'd',
             type: 'error'
         };
-    }
-    else if (daysUntil <= 14 && daysUntil >= 5){
+    } else if (daysUntil <= 14 && daysUntil >= 5) {
         return {
-            tittel: "Skjerming utløper om " + daysUntil + "d",
+            tittel: 'Skjerming utløper om ' + daysUntil + 'd',
             type: 'warning'
         };
-    }
-    else if (daysUntil >= 14){
+    } else if (daysUntil >= 14) {
         return {
-            tittel: "Skjermet til " + moment(skjermetTil).format("DD.MM.YYYY"),
+            tittel: 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY'),
             type: 'info'
         };
-    }
-    else{
+    } else {
         return {
             tittel: null,
             type: 'info'
-        }
+        };
     }
 }
