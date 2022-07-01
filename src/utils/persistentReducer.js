@@ -24,6 +24,7 @@ function erFiltreringEndret(scope, initialState) {
     );
 }
 
+/* eslint-disable import/no-anonymous-default-export */
 export default (scope, location, reducer, initialFilterstate) => (state, action) => {
     let nState = state;
     if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {

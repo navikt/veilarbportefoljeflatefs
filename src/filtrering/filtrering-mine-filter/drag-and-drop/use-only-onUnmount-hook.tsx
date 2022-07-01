@@ -7,6 +7,7 @@ function generateSetOnUnmount(onUnmountRef: React.MutableRefObject<() => void>) 
 export function useOnlyOnUnmount(
     onUnmount?: () => void
 ): [React.MutableRefObject<() => void>, (newAction: any) => any] {
+    /* eslint-disable react-hooks/exhaustive-deps */
     const onUnmountNotNull = onUnmount ? onUnmount : () => null;
 
     const onUnmountRef = useRef(() => {

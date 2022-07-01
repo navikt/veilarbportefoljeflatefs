@@ -37,6 +37,7 @@ export function useSetStateFromUrl() {
                 return Side.MIN_OVERSIKT;
         }
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
     const oversiktsside = useCallback(getSideFromPathName, [pathname])(pathname);
 
     useOnMount(() => {

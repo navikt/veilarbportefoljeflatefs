@@ -5,7 +5,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
-import Sidebar from './sidebar';
+import {SidebarType} from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -15,7 +15,7 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import MineFilterTab from './mine-filter-tab';
 
 interface SidevelgerProps {
-    selectedTabData: Sidebar;
+    selectedTabData: SidebarType;
     oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;

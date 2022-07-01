@@ -4,7 +4,7 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
-import Sidebar from './sidebar';
+import {SidebarType} from './sidebar';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
@@ -26,7 +26,7 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
 }
 
 interface SidevelgerProps {
-    selectedTabData: Sidebar;
+    selectedTabData: SidebarType;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
 }

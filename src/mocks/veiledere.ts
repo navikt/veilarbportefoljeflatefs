@@ -24,6 +24,7 @@ function lagVeileder() {
 export const veiledere = new Array(40).fill(0).map(() => lagVeileder());
 export const innloggetVeileder = veiledere[0];
 
+/* eslint-disable import/no-anonymous-default-export */
 export default {
     veilederListe: veiledere,
     enhet: {enhetId: '1234', navn: 'NAV Testheim'}
