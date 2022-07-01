@@ -1,8 +1,8 @@
-import * as React from "react";
-import SorteringHeader from "../components/tabell/sortering-header";
-import TittelValg from "../utils/utils";
-import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from "../model-interfaces";
-import { AktiviteterValg } from "../ducks/filtrering";
+import * as React from 'react';
+import SorteringHeader from '../components/tabell/sortering-header';
+import TittelValg from '../utils/utils';
+import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {AktiviteterValg} from '../ducks/filtrering';
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
@@ -13,13 +13,13 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelseUtlopsSortering
-} from "../filtrering/filter-konstanter";
-import { Kolonne, OversiktType } from "../ducks/ui/listevisning";
-import Header from "../components/tabell/header";
-import VelgalleCheckboks from "../components/toolbar/velgalle-checkboks";
-import "./minoversikt.less";
-import { ReactComponent as ArbeidslisteikonBla } from "../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg";
-import { OrNothing } from "../utils/types/types";
+} from '../filtrering/filter-konstanter';
+import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
+import Header from '../components/tabell/header';
+import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
+import './minoversikt.less';
+import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {OrNothing} from '../utils/types/types';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -141,37 +141,37 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
-                  sortering={Sorteringsfelt.TOLKEBEHOV}
-                  onClick={sorteringOnClick}
-                  rekkefolge={sorteringsrekkefolge}
-                  erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV}
-                  tekst="Tolkebehov"
-                  className="col col-xs-2"
-                  title="Tolkebehov"
-                  headerId="tolkebehov"
-                  skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+                    sortering={Sorteringsfelt.TOLKEBEHOV}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV}
+                    tekst="Tolkebehov"
+                    className="col col-xs-2"
+                    title="Tolkebehov"
+                    headerId="tolkebehov"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
                 />
                 <SorteringHeader
-                  sortering={Sorteringsfelt.TOLKE_SPRAAK}
-                  onClick={sorteringOnClick}
-                  rekkefolge={sorteringsrekkefolge}
-                  erValgt={sorteringsfelt === Sorteringsfelt.TOLKE_SPRAAK}
-                  title="Tolk behov språk"
-                  className="col col-xs-2"
-                  tekst="Språk"
-                  headerId="tolkespraak"
-                  skalVises={valgteKolonner.includes(Kolonne.TOLKE_SPRAAK)}
+                    sortering={Sorteringsfelt.TOLKE_SPRAAK}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKE_SPRAAK}
+                    title="Tolk behov språk"
+                    className="col col-xs-2"
+                    tekst="Språk"
+                    headerId="tolkespraak"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKE_SPRAAK)}
                 />
                 <SorteringHeader
-                  sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
-                  onClick={sorteringOnClick}
-                  rekkefolge={sorteringsrekkefolge}
-                  erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
-                  tekst="Sist oppdatert"
-                  className="col col-xs-2"
-                  title="Tolk behov sist oppdatert"
-                  headerId="tolkbehovsistoppdatert"
-                  skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                    sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
+                    tekst="Sist oppdatert"
+                    className="col col-xs-2"
+                    title="Tolk behov sist oppdatert"
+                    headerId="tolkbehovsistoppdatert"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 />
 
                 <SorteringHeader

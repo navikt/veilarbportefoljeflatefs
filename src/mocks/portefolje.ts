@@ -1,8 +1,8 @@
-import veiledereResponse, { innloggetVeileder } from "./veiledere";
-import { aktiviteter, hendelserLabels } from "../filtrering/filter-konstanter";
-import { MOCK_CONFIG, rnd } from "./utils";
-import * as faker from "faker/locale/nb_NO";
-import { KategoriModell } from "../model-interfaces";
+import veiledereResponse, {innloggetVeileder} from './veiledere';
+import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
+import {MOCK_CONFIG, rnd} from './utils';
+import * as faker from 'faker/locale/nb_NO';
+import {KategoriModell} from '../model-interfaces';
 
 faker.seed(MOCK_CONFIG.seed);
 
