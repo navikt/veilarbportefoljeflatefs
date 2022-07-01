@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
     aapRettighetsperiode,
+    capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
     utledValgteAktivitetsTyper,
@@ -25,9 +26,14 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
+import {
+    dagerSiden,
+    klokkeslettTilMinutter,
+    minuttDifferanse,
+    oppfolgingStartetDato,
+    toDateString
+} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from '../utils/types/types';
 import './minoversikt.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -37,12 +43,12 @@ import moment from 'moment';
 interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    enhetId: OrNothing<string>;
 }
 
-function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner, enhetId}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -78,6 +84,30 @@ function MinoversiktDatokolonner({className, bruker, filtervalg, valgteKolonner,
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
+                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                        ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                        ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        : '-'
+                }
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}

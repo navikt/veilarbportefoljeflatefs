@@ -18,7 +18,6 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             ignoreWsEvents: true,
             onChange: value => {
                 if (value) {
-                    //TODO: må vurdere å endres ved overgang til gcp
                     window.location.pathname = `veilarbpersonflatefs/${value}`;
                 }
             }

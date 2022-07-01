@@ -35,6 +35,7 @@ export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
     alder: [],
     kjonn: null,
+    landgruppe: [],
     fodselsdagIMnd: [],
     innsatsgruppe: [],
     formidlingsgruppe: [],

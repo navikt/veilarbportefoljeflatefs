@@ -17,6 +17,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
     utledValgteAktivitetsTyper,
@@ -25,9 +26,14 @@ import {
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, oppfolgingStartetDato} from '../utils/dato-utils';
+import {
+    dagerSiden,
+    klokkeslettTilMinutter,
+    minuttDifferanse,
+    oppfolgingStartetDato,
+    toDateString
+} from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import {OrNothing} from '../utils/types/types';
 import './enhetsportefolje.less';
 import './brukerliste.less';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
@@ -38,7 +44,7 @@ import moment from 'moment';
 interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: OrNothing<string>;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
@@ -79,6 +85,29 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
+                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                        ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                tekst={
+                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                        ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        : '-'
+                }
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
