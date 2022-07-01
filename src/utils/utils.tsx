@@ -51,9 +51,8 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function erDev() {
-    const host: string = window.location.host;
-    return host.includes('localhost') || host.includes('127.0.0.1');
+export function erGCP(): boolean {
+    return window.location.hostname.endsWith('intern.nav.no');
 }
 
 export function erGithubPages() {
@@ -133,7 +132,7 @@ export function kebabUtenSpesialtegn(string: string | {label: string}) {
     return kebabCase(string).replace(regExpr, '');
 }
 
-export function nameCapitalization(str: string) {
+export function capitalize(str: string) {
     return str
         .toLowerCase()
         .replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());

@@ -15,7 +15,7 @@ import {Checkbox} from 'nav-frontend-skjema';
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
     settMarkert: (bruker: string, markert: boolean) => void;
-    enhetId: OrNothing<string>;
+    enhetId: string;
     filtervalg: FiltervalgModell;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];

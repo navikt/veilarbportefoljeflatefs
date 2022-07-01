@@ -5,7 +5,7 @@ import Grid from '../../../components/grid/grid';
 import './filterform.less';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert} from '@navikt/ds-react';
+import {Alert, Tooltip} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -15,8 +15,8 @@ interface CheckboxFilterformProps {
     gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
+    tooltips?: Dictionary<string>;
 }
-
 function CheckboxFilterform({
     endreFiltervalg,
     valg,
@@ -24,7 +24,8 @@ function CheckboxFilterform({
     filtervalg,
     gridColumns = 1,
     className,
-    emptyCheckboxFilterFormMessage
+    emptyCheckboxFilterFormMessage,
+    tooltips
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -52,23 +53,49 @@ function CheckboxFilterform({
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={gridColumns}>
-                        {Object.entries(valg).map(([filterKey, filterValue]) => (
-                            <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                <input
-                                    id={filterKey}
-                                    type="checkbox"
-                                    className="skjemaelement__input checkboks"
-                                    value={filterKey}
-                                    name={valg[filterKey]}
-                                    checked={checkBoxValg.includes(filterKey)}
-                                    onChange={velgCheckBox}
-                                    data-testid={`filter_${filterKey}`}
-                                />
-                                <label htmlFor={filterKey} className="skjemaelement__label">
-                                    {filterValue}
-                                </label>
-                            </div>
-                        ))}
+                        {Object.entries(valg).map(([filterKey, filterValue]) =>
+                            tooltips && tooltips[filterKey] ? (
+                                <Tooltip
+                                    content={tooltips[filterKey]}
+                                    placement="right"
+                                    offset={-130}
+                                    maxChar={999}
+                                    key={`tooltip-${filterKey}`}
+                                >
+                                    <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                        <input
+                                            id={filterKey}
+                                            type="checkbox"
+                                            className="skjemaelement__input checkboks"
+                                            value={filterKey}
+                                            name={valg[filterKey]}
+                                            checked={checkBoxValg.includes(filterKey)}
+                                            onChange={velgCheckBox}
+                                            data-testid={`filter_${filterKey}`}
+                                        />
+                                        <label htmlFor={filterKey} className="skjemaelement__label">
+                                            {filterValue}
+                                        </label>
+                                    </div>
+                                </Tooltip>
+                            ) : (
+                                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
+                                    <input
+                                        id={filterKey}
+                                        type="checkbox"
+                                        className="skjemaelement__input checkboks"
+                                        value={filterKey}
+                                        name={valg[filterKey]}
+                                        checked={checkBoxValg.includes(filterKey)}
+                                        onChange={velgCheckBox}
+                                        data-testid={`filter_${filterKey}`}
+                                    />
+                                    <label htmlFor={filterKey} className="skjemaelement__label">
+                                        {filterValue}
+                                    </label>
+                                </div>
+                            )
+                        )}
                     </Grid>
                 </div>
             )}

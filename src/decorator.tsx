@@ -4,6 +4,7 @@ import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
+import {erGCP} from './utils/utils';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -32,13 +33,15 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
                     settValgtEnhet(value);
                 }
             }
-        }
+        },
+        useProxy: erGCP()
     };
 }
 
 export function Decorator() {
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
+
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));
     }

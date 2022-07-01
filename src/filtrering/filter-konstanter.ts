@@ -229,6 +229,23 @@ export const registreringstype = {
     JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene'
 };
 
+export const landgruppe = {
+    LANDGRUPPE_0: 'Landgruppe 0',
+    LANDGRUPPE_1: 'Landgruppe 1',
+    LANDGRUPPE_2: 'Landgruppe 2',
+    LANDGRUPPE_3: 'Landgruppe 3',
+    LANDGRUPPE_UKJENT: 'Ukjent fødeland'
+};
+
+export const landgruppeTooltips = {
+    LANDGRUPPE_0: 'Norge',
+    LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
+    LANDGRUPPE_2: 'Østeuropeiske EU-land',
+    LANDGRUPPE_3:
+        'Asia, Afrika, Amerika (utenom USA og Canada), Øst-Europa (utenfor EU), Oseania (utenom Australia og New Zealand)',
+    LANDGRUPPE_UKJENT: 'Mangler informasjon om fødeland'
+};
+
 export const utdanning = {
     INGEN_UTDANNING: 'Ingen utdanning',
     GRUNNSKOLE: 'Grunnskole',
@@ -294,12 +311,13 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
-export default {
+const filterKonstanter = {
     ytelseUtlopsSortering,
     ferdigfilterListe,
     alder,
     fodselsdagIMnd,
     kjonn,
+    landgruppe,
     innsatsgruppe,
     hovedmal,
     formidlingsgruppe,
@@ -320,3 +338,5 @@ export default {
     hendelserLabels,
     ulesteEndringer
 };
+
+export default filterKonstanter;

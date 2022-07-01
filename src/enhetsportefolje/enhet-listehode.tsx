@@ -94,6 +94,41 @@ function EnhetListehode({
                     headerId="fnr"
                 />
                 <SorteringHeader
+                    sortering={Sorteringsfelt.FODELAND}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.FODELAND}
+                    tekst="Fødeland"
+                    className="col col-xs-2"
+                    title="Fødeland"
+                    headerId="fodeland"
+                    skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.STATSBORGERSKAP}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP}
+                    tekst="Statsborgerskap"
+                    className="col col-xs-2"
+                    title="Statsborgerskap"
+                    headerId="statsborgerskap"
+                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+                />
+
+                <SorteringHeader
+                    sortering={Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
+                    tekst="Gyldig fra"
+                    className="col col-xs-2"
+                    title="Statsborgerskap gyldig fra"
+                    headerId="statsborgerskap_gyldig_fra"
+                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                />
+
+                <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}

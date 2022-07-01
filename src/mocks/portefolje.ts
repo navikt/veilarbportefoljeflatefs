@@ -218,9 +218,23 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
-        nesteUtlopsdatoAktivitet: randomDate({past: false})
+        nesteUtlopsdatoAktivitet: randomDate({past: false}),
+        hovedStatsborgerskap: {
+            statsborgerskap: hentLand(),
+            gyldigFra: '1961-06-12',
+            gyldigTil: ''
+        },
+        foedeland: hentLand(),
+        harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
+        innflyttingTilNorgeFraLand: ''
     };
 }
+
+const hentLand = () => {
+    const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
+
+    return landListe[Math.floor(Math.random() * landListe.length)];
+};
 
 const randomEndring = () => {
     const keys = Object.keys(hendelserLabels);

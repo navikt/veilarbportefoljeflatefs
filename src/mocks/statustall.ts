@@ -1,5 +1,6 @@
 import portefolje from './portefolje';
 
+/* eslint-disable import/no-anonymous-default-export */
 export default {
     totalt: portefolje.length,
     ufordelteBrukere: 2032,

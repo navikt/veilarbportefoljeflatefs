@@ -16,7 +16,7 @@ jobs:
               with:
                   node-version: '16'
                   cache: 'npm'
-            - run: npm ci
+            - run: npm ci --legacy-peer-deps
             - name: Build production artifact
               run: npm run build
             - name: Run tests
@@ -44,5 +44,5 @@ jobs:
               env:
                   APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
                   CLUSTER: dev-fss
-                  RESOURCE: nais-dev.yaml
+                  RESOURCE: .nais/nais-dev.yaml
                   VAR: version=${{ env.IMAGE_TAG }},namespace=pto

@@ -15,6 +15,7 @@ const alternativEnhet2 = {
     navn: 'NAV Brummedal'
 };
 
+/* eslint-disable import/no-anonymous-default-export */
 export default {
     ident: innloggetVeileder.ident,
     navn: innloggetVeileder.navn,

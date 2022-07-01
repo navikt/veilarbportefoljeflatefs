@@ -2,15 +2,14 @@ import * as React from 'react';
 import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.less';
-import {OrNothing} from '../../utils/types/types';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
-import {setFraBrukerIUrl} from '../../utils/url-utils';
+import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import {BodyShort, Link} from '@navikt/ds-react';
 
 interface SisteEndringKategoriProps {
     className?: string;
     bruker: BrukerModell;
-    enhetId: OrNothing<string>;
+    enhetId: string;
     skalVises: boolean;
 }
 
@@ -32,7 +31,11 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                 onClick={() => {
                     setFraBrukerIUrl(bruker.fnr);
                 }}
-                href={`${window.location.origin}/veilarbpersonflatefs/${bruker.fnr}/aktivitet/vis/${bruker.sisteEndringAktivitetId}?enhet=${enhetId}`}
+                href={getPersonUrl(
+                    bruker.fnr,
+                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
+                    enhetId
+                )}
                 className={classnames('lenke lenke--frittstaende')}
             >
                 <BodyShort size="small">{sisteEndringKategori}</BodyShort>
