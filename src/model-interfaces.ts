@@ -1,4 +1,4 @@
-import { FiltreringAktiviteterValg } from "./ducks/filtrering";
+import {FiltreringAktiviteterValg} from './ducks/filtrering';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -76,8 +76,8 @@ export interface FiltervalgModell {
     utdanningBestatt: string[];
     sisteEndringKategori: string[];
     ulesteEndringer: null | string;
-    foedeland?: null | string[];
-    tolkebehov?: null | string[];
+    tolkebehov: string[];
+    tolkBehovSpraak: null | string;
 }
 
 export interface EnhetModell {
@@ -156,8 +156,8 @@ export interface BrukerModell {
     harFlereStatsborgerskap: boolean;
     innflyttingTilNorgeFraLand: string;
     foedeland?: string;
-    talespraaktolk? : string;
-    tegnspraaktolk? : string;
+    talespraaktolk?: string;
+    tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
 }
 
