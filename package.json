@@ -45,7 +45,7 @@
         "yet-another-fetch-mock": "4.0.0"
     },
     "dependencies": {
-        "@craco/craco": "^7.0.0-alpha.3",
+        "@craco/craco": "7.0.0-alpha.6",
         "@navikt/ds-css": "^0.16.3",
         "@navikt/ds-css-internal": "^0.7.1",
         "@navikt/ds-datepicker": "^1.0.4",
