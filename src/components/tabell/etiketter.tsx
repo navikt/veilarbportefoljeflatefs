@@ -1,8 +1,8 @@
-import * as React from "react";
-import { BrukerModell, VurderingsBehov } from "../../model-interfaces";
-import hiddenIf from "../hidden-if/hidden-if";
-import { Tag } from "@navikt/ds-react";
-import { hentSkjermetTil } from "../../utils/dato-utils";
+import * as React from 'react';
+import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
+import hiddenIf from '../hidden-if/hidden-if';
+import {Tag} from '@navikt/ds-react';
+import {hentSkjermetTil} from '../../utils/dato-utils';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -94,9 +94,9 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 Revurdering
             </HiddenEtikett>
             <HiddenEtikett
-              variant={skjermetTil.type}
-              size="small"
-              hidden={!skjermetTil.tittel}
+                variant={skjermetTil.type}
+                size="small"
+                hidden={!skjermetTil.tittel}
             >{`${skjermetTil.tittel}`}</HiddenEtikett>
         </>
     );

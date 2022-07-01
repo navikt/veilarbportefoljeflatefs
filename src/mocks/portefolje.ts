@@ -1,9 +1,9 @@
-import veiledereResponse, { innloggetVeileder } from "./veiledere";
-import { aktiviteter, hendelserLabels } from "../filtrering/filter-konstanter";
-import { MOCK_CONFIG, rnd } from "./utils";
-import * as faker from "faker/locale/nb_NO";
-import { KategoriModell } from "../model-interfaces";
-import moment from "moment";
+import veiledereResponse, {innloggetVeileder} from './veiledere';
+import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
+import {MOCK_CONFIG, rnd} from './utils';
+import * as faker from 'faker/locale/nb_NO';
+import {KategoriModell} from '../model-interfaces';
+import moment from 'moment';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -256,7 +256,11 @@ const randomDate = ({past}) => {
 };
 
 const randomDateInNearFuture = () => {
-    return moment().add(rnd(0, 20), 'days').add(rnd(0,23), 'hours').add(rnd(10, 50), 'minutes').format("YYYY-MM-DD HH:mm");
+    return moment()
+        .add(rnd(0, 20), 'days')
+        .add(rnd(0, 23), 'hours')
+        .add(rnd(10, 50), 'minutes')
+        .format('YYYY-MM-DD HH:mm');
 };
 
 export function hentArbeidsliste() {
