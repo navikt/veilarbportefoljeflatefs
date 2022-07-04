@@ -71,6 +71,14 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             filtervalg.tiltakstyper.length > 0
         );
     };
+
+    const tolkBehovErValgt = () => {
+        return (
+            filtervalg.tolkebehov!.length > 0 ||
+            (filtervalg.tolkBehovSpraak !== null && filtervalg.tolkBehovSpraak!.length > 0)
+        );
+    };
+
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
@@ -150,5 +158,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         )
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

@@ -39,7 +39,10 @@ export enum Sorteringsfelt {
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt',
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
-    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra'
+    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    TOLKEBEHOV = 'tolkebehov',
+    TOLKE_SPRAAK = 'tolkespraak',
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert'
 }
 
 export interface FiltervalgModell {
@@ -73,6 +76,8 @@ export interface FiltervalgModell {
     utdanningBestatt: string[];
     sisteEndringKategori: string[];
     ulesteEndringer: null | string;
+    tolkebehov: string[];
+    tolkBehovSpraak: null | string;
 }
 
 export interface EnhetModell {
@@ -151,6 +156,9 @@ export interface BrukerModell {
     harFlereStatsborgerskap: boolean;
     innflyttingTilNorgeFraLand: string;
     foedeland?: string;
+    talespraaktolk?: string;
+    tegnspraaktolk?: string;
+    tolkBehovSistOppdatert?: string;
 }
 
 interface Statsborgerskap {

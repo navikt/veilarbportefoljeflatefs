@@ -20,6 +20,8 @@ import {
     capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
+    tolkBehov,
+    tolkBehovSpraak,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -105,6 +107,25 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        : '-'
+                }
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehov(filtervalg, bruker)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehovSpraak(filtervalg, bruker)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                tekst={
+                    bruker.tolkBehovSistOppdatert && bruker.tolkBehovSistOppdatert
+                        ? toDateString(bruker.tolkBehovSistOppdatert)!.toString()
                         : '-'
                 }
             />

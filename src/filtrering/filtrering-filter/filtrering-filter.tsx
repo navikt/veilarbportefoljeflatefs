@@ -15,6 +15,7 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
+    tolkebehov,
     utdanning,
     ytelse
 } from '../filter-konstanter';
@@ -99,6 +100,19 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             endreFiltervalg={endreFiltervalg}
                             className="landgruppe"
                             tooltips={landgruppeTooltips}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Tolkebehov"
+                    id="tolkebehov"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="tolkebehov"
+                            valg={tolkebehov}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                            className="tolkebehov"
                         />
                     )}
                 />

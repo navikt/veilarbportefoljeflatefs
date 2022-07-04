@@ -237,6 +237,11 @@ export const landgruppe = {
     LANDGRUPPE_UKJENT: 'Ukjent fødeland'
 };
 
+export const tolkebehov = {
+    TALESPRAAKTOLK: 'Talespråktolk',
+    TEGNSPRAAKTOLK: 'Tegnspråktolk'
+};
+
 export const landgruppeTooltips = {
     LANDGRUPPE_0: 'Norge',
     LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
@@ -336,5 +341,6 @@ export default {
     utdanningGodkjent,
     hendelserEtikett,
     hendelserLabels,
-    ulesteEndringer
+    ulesteEndringer,
+    tolkebehov
 };
