@@ -60,6 +60,16 @@ const mock = FetchMock.configure({
     middleware: MiddlewareUtils.combine(MiddlewareUtils.delayMiddleware(500), MiddlewareUtils.loggingMiddleware())
 });
 
+// Azure Ad
+mock.get(
+    '/auth/info',
+    jsonResponse({
+        loggedIn: true,
+        expirationTime: '2040-07-04T14:18:54.000Z',
+        remainingSeconds: -1
+    })
+);
+
 // features
 mock.get('/veilarbportefoljeflatefs/api/feature', jsonResponse(features));
 

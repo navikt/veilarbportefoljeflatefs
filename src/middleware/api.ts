@@ -10,11 +10,12 @@ const credentials = 'same-origin';
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
-        'Nav-Consumer-Id': 'internarbeidsflatedecorator',
+        'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
         'Content-Type': 'application/json'
     }
 };
 
+export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
@@ -190,4 +191,18 @@ export function hentSystemmeldinger() {
 export function hentMoteplan(veileder: string, enhet: string) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export async function hentResterendeSekunder(): Promise<number> {
+    return fetchToJson(AUTH_URL, MED_CREDENTIALS)
+        .then(data => {
+            const remainingSeconds = data?.remainingSeconds;
+            if (remainingSeconds && typeof remainingSeconds == 'number' && remainingSeconds > 0) {
+                return remainingSeconds;
+            }
+            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
+        })
+        .catch(e => {
+            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
+        });
 }
