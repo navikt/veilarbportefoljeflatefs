@@ -106,6 +106,7 @@ export interface BrukerModell {
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
     egenAnsatt: boolean;
+    skjermetTil?: string;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
     trengerVurdering: boolean;
@@ -208,4 +209,9 @@ export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';
     beskrivelse: any;
+}
+
+export interface SkjermingTil {
+    tittel: string | null;
+    type: 'error' | 'warning' | 'info' | 'success';
 }

@@ -1,0 +1,29 @@
+name: paoa frontend container prod
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/poao-frontend-container-prod.yaml'
+      - '.nais/obo-nais-prod.yaml'
+  workflow_dispatch:
+
+concurrency:
+  group: pto_frontend_container_prod
+  cancel-in-progress: true
+
+env:
+  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_GCP }}
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: deploy gcp prod
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/obo-nais-prod.yaml

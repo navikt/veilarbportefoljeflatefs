@@ -1,0 +1,148 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: veilarbportefoljeflatefs
+  namespace: obo
+  labels:
+    team: obo
+spec:
+  image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.06.21_07.33-5244a7b7ae64
+  port: 8080
+  ingresses:
+    - https://veilarbportefoljeflatefs.intern.nav.no
+  liveness:
+    path: /internal/alive
+    initialDelay: 10
+  readiness:
+    path: /internal/ready
+    initialDelay: 10
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 75
+  resources:
+    limits:
+      cpu: "1"
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  secureLogs:
+    enabled: true
+  azure:
+    application:
+      enabled: true
+    sidecar:
+      enabled: true
+      autoLogin: true
+  gcp:
+    buckets:
+      - name: obo-veilarbportefoljeflatefs-prod
+        cascadingDelete: false
+  accessPolicy:
+    outbound:
+      rules:
+        - application: poao-unleash
+          namespace: poao
+  env:
+    - name: JSON_CONFIG
+      value: >
+        {
+          "enableSecureLogs": true,
+          "fallbackStrategy": "SERVE_INDEX_HTML",
+          "auth": {
+            "loginProvider": "AZURE_AD"
+          },
+          "gcs": {
+            "bucketName": "obo-veilarbportefoljeflatefs-prod"
+          },
+          "header": {
+            "csp": {
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
+             }
+          },
+          "redirects": [
+            {
+              "fromPath": "/internarbeidsflatedecorator/*",
+              "toUrl": "https://internarbeidsflatedecorator.intern.nav.no",
+              "preserveFromPath": true
+            },
+            {
+              "fromPath": "/veilarbpersonflatefs/*",
+              "toUrl": "https://veilarbpersonflatefs.intern.nav.no",
+              "preserveFromPath": false
+            }
+          ],
+          "proxies": [
+            {
+              "fromPath": "/frontendlogger",
+              "toUrl": "https://frontendlogger.prod-fss-pub.nais.io",
+              "preserveFromPath": true
+            },
+            {
+              "fromPath": "/veilarbportefolje",
+              "toUrl": "https://veilarbportefolje.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbportefolje",
+                "namespace": "pto",
+                "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbfilter",
+              "toUrl": "https://veilarbfilter.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbfilter",
+                "namespace": "pto",
+                "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbvedtaksstotte",
+              "toUrl": "https://veilarbvedtaksstotte.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbvedtaksstotte",
+                "namespace": "pto",
+                "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbveileder",
+              "toUrl": "https://veilarbveileder.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbveileder",
+                "namespace": "pto",
+                "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbportefoljeflatefs",
+              "toUrl": "http://poao-unleash.poao.svc.cluster.local",
+              "preserveFromPath": false
+            },
+            {
+              "fromPath": "/veilarboppfolging",
+              "toUrl": "https://veilarboppfolging.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarboppfolging",
+                "namespace": "pto",
+                "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/modiacontextholder",
+              "toUrl": "https://modiacontextholder.prod-fss-pub.nais.io",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "modiacontextholder",
+                "namespace": "personoversikt",
+                "cluster": "prod-fss"
+              }
+            }
+          ]
+        }
