@@ -58,6 +58,7 @@ spec:
           },
           "header": {
             "csp": {
+              "default-src": ["https://login.microsoftonline.com"]
               "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
              }
           },
