@@ -193,7 +193,7 @@ export function hentMoteplan(veileder: string, enhet: string) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function loggEvent(event: FrontendEvent) {
+export function sendEventTilPortefolje(event: FrontendEvent) {
     const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
     return fetch(url, config);
