@@ -7,7 +7,7 @@ import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';

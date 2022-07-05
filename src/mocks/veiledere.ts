@@ -1,5 +1,5 @@
 import {rnd, MOCK_CONFIG} from './utils';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -10,8 +10,8 @@ export function lagTilfeldigVeilederId() {
 function lagVeileder() {
     const ident = lagTilfeldigVeilederId();
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const fornavn = faker.name.firstName(kjonn === 'K' ? 1 : 0);
-    const etternavn = faker.name.lastName(kjonn === 'K' ? 1 : 0);
+    const fornavn = faker.name.firstName(kjonn === 'K' ? 'female' : 'male');
+    const etternavn = faker.name.lastName(kjonn === 'K' ? 'female' : 'male');
     const navn = etternavn + ', ' + fornavn;
     return {
         ident,
