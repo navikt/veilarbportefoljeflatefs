@@ -1,6 +1,6 @@
-import React from 'react';
-import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg from '../utils/utils';
+import React from "react";
+import SorteringHeader from "../components/tabell/sortering-header";
+import TittelValg from "../utils/utils";
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -127,17 +127,14 @@ function EnhetListehode({
                     headerId="statsborgerskap_gyldig_fra"
                     skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.TOLKEBEHOV}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV}
-                    tekst="Tolkebehov"
-                    className="col col-xs-2"
-                    title="Tolkebehov"
-                    headerId="tolkebehov"
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-                />
+                <Header
+                  className="col col-xs-2"
+                  title="Tolkebehov"
+                  headerId="tolkebehov"
+                  skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+                >
+                    Tolkebehov
+                </Header>
                 <SorteringHeader
                     sortering={Sorteringsfelt.TOLKE_SPRAAK}
                     onClick={sorteringOnClick}

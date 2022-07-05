@@ -1,8 +1,8 @@
-import * as React from 'react';
-import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg from '../utils/utils';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {AktiviteterValg} from '../ducks/filtrering';
+import * as React from "react";
+import SorteringHeader from "../components/tabell/sortering-header";
+import TittelValg from "../utils/utils";
+import { BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from "../model-interfaces";
+import { AktiviteterValg } from "../ducks/filtrering";
 import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
@@ -140,17 +140,14 @@ function MinOversiktListeHode({
                     skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 />
 
-                <SorteringHeader
-                    sortering={Sorteringsfelt.TOLKEBEHOV}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV}
-                    tekst="Tolkebehov"
+                <Header
                     className="col col-xs-2"
                     title="Tolkebehov"
                     headerId="tolkebehov"
                     skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-                />
+                >
+                    Tolkebehov
+                </Header>
                 <SorteringHeader
                     sortering={Sorteringsfelt.TOLKE_SPRAAK}
                     onClick={sorteringOnClick}
