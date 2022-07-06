@@ -21,7 +21,19 @@ function lagVeileder() {
     };
 }
 
-export const veiledere = new Array(40).fill(0).map(() => lagVeileder());
+function lagVeiledere() {
+    const veiledere = new Array(40).fill(0).map(() => lagVeileder());
+    veiledere.push({
+        ident: lagTilfeldigVeilederId(),
+        navn: 'Testesen, Testias',
+        fornavn: 'Testias',
+        etternavn: 'Testesen'
+    });
+
+    return veiledere;
+}
+
+export const veiledere = lagVeiledere();
 export const innloggetVeileder = veiledere[0];
 
 /* eslint-disable import/no-anonymous-default-export */
