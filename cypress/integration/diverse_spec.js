@@ -110,7 +110,7 @@ describe('Diverse', () => {
         cy.getByTestId('sok-veileder_knapp').click();
         cy.getByTestId('sok-filter_input')
             .click()
-            .type('Aasen');
+            .type(forsteVeileder);
         cy.checkbox('sok-veileder_rad_0');
         cy.getByTestId('sok-veileder_velg-knapp').click();
         cy.getByTestId('filtrering_label-container')
