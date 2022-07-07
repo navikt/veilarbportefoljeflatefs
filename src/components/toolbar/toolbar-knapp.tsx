@@ -78,6 +78,8 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         );
     }
 
+    const dataTestId = props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp';
+
     return (
         <Button
             variant="tertiary"
@@ -85,7 +87,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             className="toolbar_btn"
             disabled={!props.aktiv}
             onClick={klikk}
-            data-testid={props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp'}
+            data-testid={dataTestId}
         >
             {props.ikon}
             <BodyShort size="small" className="toolbar-knapp__tekst">
