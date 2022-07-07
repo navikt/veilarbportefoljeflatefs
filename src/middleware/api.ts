@@ -3,6 +3,7 @@ import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev} from '../utils/url-utils';
+import {FrontendEvent} from '../utils/frontend-logger';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -10,7 +11,7 @@ const credentials = 'same-origin';
 const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
-        'Nav-Consumer-Id': 'internarbeidsflatedecorator',
+        'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
         'Content-Type': 'application/json'
     }
 };
@@ -190,4 +191,10 @@ export function hentSystemmeldinger() {
 export function hentMoteplan(veileder: string, enhet: string) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function sendEventTilPortefolje(event: FrontendEvent) {
+    const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
+    return fetch(url, config);
 }
