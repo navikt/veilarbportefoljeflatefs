@@ -11,6 +11,7 @@ interface ToolbarKnappProps {
     tildelveileder: boolean;
     ikon: React.ReactNode;
     tittel: string;
+    testid: string;
     oversiktType: OversiktType;
 }
 
@@ -78,8 +79,6 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         );
     }
 
-    const dataTestId = props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp';
-
     return (
         <Button
             variant="tertiary"
@@ -87,7 +86,8 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             className="toolbar_btn"
             disabled={!props.aktiv}
             onClick={klikk}
-            data-testid={dataTestId}
+            // data-testid={props.tildelveileder ? 'tildel-veileder_knapp' : 'sok-veileder_knapp'}
+            data-testid={props.testid}
         >
             {props.ikon}
             <BodyShort size="small" className="toolbar-knapp__tekst">
