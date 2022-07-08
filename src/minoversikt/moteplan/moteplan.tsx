@@ -71,7 +71,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                             .map((dag, key) => <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />)
                     )}
                     <SeFlereMoterKnapp
-                        className={'seFlereMoterKnapp'}
+                        cssId={'seFlereMoterKnapp'}
                         antalDager={dager.length}
                         maxAntallDager={maxAntallDager}
                         setMaxAntall={setMaxAntallDager}

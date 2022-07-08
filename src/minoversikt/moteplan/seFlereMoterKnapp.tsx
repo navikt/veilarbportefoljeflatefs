@@ -2,25 +2,20 @@ import * as React from 'react';
 import {Button} from '@navikt/ds-react';
 
 interface SeFlereMoterKnappProps {
-    className?: string;
+    cssId?: string;
     antalDager: number;
     maxAntallDager: number;
     setMaxAntall: (number) => void;
 }
 
-export default function SeFlereMoterKnapp({
-    className,
-    antalDager,
-    maxAntallDager,
-    setMaxAntall
-}: SeFlereMoterKnappProps) {
+export default function SeFlereMoterKnapp({cssId, antalDager, maxAntallDager, setMaxAntall}: SeFlereMoterKnappProps) {
     if (antalDager <= maxAntallDager) {
         return <></>;
     }
 
     return (
         <Button
-            className={className}
+            id={cssId}
             variant="tertiary"
             size="medium"
             onClick={e => {
