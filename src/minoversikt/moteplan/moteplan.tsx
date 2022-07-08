@@ -6,6 +6,7 @@ import './moteplan.less';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
 import {Calender} from '@navikt/ds-icons';
+import SeFlereMoterKnapp from './seFlereMoterKnapp';
 
 export interface MoteData {
     dato: string;
@@ -24,9 +25,8 @@ interface MoteplanProps {
     enhet: string;
 }
 
-const MAX_ANTALL_DAGER = 5;
-
 function Moteplan({veileder, enhet}: MoteplanProps) {
+    const [maxAntallDager, setMaxAntallDager] = useState<number>(5);
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -66,8 +66,16 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                             Ingen møter
                         </Alert>
                     ) : (
-                        dager.map((dag, key) => <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />)
+                        dager
+                            .slice(0, maxAntallDager)
+                            .map((dag, key) => <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />)
                     )}
+                    <SeFlereMoterKnapp
+                        cssId={'seFlereMoterKnapp'}
+                        antalDager={dager.length}
+                        maxAntallDager={maxAntallDager}
+                        setMaxAntall={setMaxAntallDager}
+                    />
                 </Popover.Content>
             </Popover>
         </>
@@ -78,10 +86,7 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
         return [new Date()];
     }
-    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
-        .sort()
-        .map(dato => new Date(dato))
-        .slice(0, MAX_ANTALL_DAGER);
+    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))].sort().map(dato => new Date(dato));
 }
 
 export default Moteplan;
