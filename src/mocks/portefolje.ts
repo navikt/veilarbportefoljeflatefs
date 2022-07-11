@@ -287,6 +287,16 @@ export function hentMockPlan() {
             deltaker: {fornavn: 'john', etternavn: 'tester', fnr: '123'},
             avtaltMedNav: true
         },
+        {
+            dato: '2022-03-26T15:02:35.636Z',
+            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {
+            dato: '2022-03-27T15:02:35.636Z',
+            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
+            avtaltMedNav: true
+        },
         {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
     ];
 }
