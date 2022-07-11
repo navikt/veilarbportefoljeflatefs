@@ -5,7 +5,7 @@ import './style.less';
 import '@navikt/ds-css';
 
 if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill'); // tslint:disable-line
+    require('babel-polyfill');
 }
 
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
@@ -15,10 +15,10 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
 }
 
 if (process.env.REACT_APP_MOCK === 'true') {
-    console.log('=========================='); // tslint:disable-line
-    console.log('======== MED MOCK ========'); // tslint:disable-line
-    console.log('=========================='); // tslint:disable-line
-    require('./mocks'); // tslint:disable-line
+    console.log('==========================');
+    console.log('======== MED MOCK ========');
+    console.log('==========================');
+    require('./mocks');
 }
 
 ReactDOM.render(<Application />, document.getElementById('mainapp'));

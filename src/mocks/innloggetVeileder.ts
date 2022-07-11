@@ -1,4 +1,4 @@
-import {innloggetVeileder} from './veiledere';
+import {innloggetVeileder as iv} from './veiledere';
 
 export const innloggetEnhet = {
     enhetId: '1234',
@@ -15,11 +15,9 @@ const alternativEnhet2 = {
     navn: 'NAV Brummedal'
 };
 
-/* eslint-disable import/no-anonymous-default-export */
-export default {
-    ident: innloggetVeileder.ident,
-    navn: innloggetVeileder.navn,
-    etternavn: innloggetVeileder.etternavn,
-    fornavn: innloggetVeileder.fornavn,
+const innloggetVeileder = {
+    ...iv,
     enheter: [innloggetEnhet, alternativEnhet, alternativEnhet2]
 };
+
+export default innloggetVeileder;

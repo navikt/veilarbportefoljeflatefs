@@ -36,8 +36,7 @@ function lagVeiledere() {
 export const veiledere = lagVeiledere();
 export const innloggetVeileder = veiledere[0];
 
-/* eslint-disable import/no-anonymous-default-export */
-export default {
+export const veilederResponse = {
     veilederListe: veiledere,
     enhet: {enhetId: '1234', navn: 'NAV Testheim'}
 };
