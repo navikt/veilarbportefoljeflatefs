@@ -8,7 +8,7 @@
     "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true craco start",
-        "build": "CI='' GENERATE_SOURCEMAP=false craco build",
+        "build": "craco build",
         "eject": "craco eject",
         "test": "craco test --watchAll=false --transformIgnorePatterns",
         "lint": "echo not implemented",
@@ -16,7 +16,7 @@
         "cypress:open": "cypress open",
         "cy:run": "cypress run",
         "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true craco build",
-        "build:gcp": "CI='' GENERATE_SOURCEMAP=false cross-env REACT_APP_MOCK=false PUBLIC_URL=/ craco build --config craco.config-gcp.js"
+        "build:gcp": "cross-env REACT_APP_MOCK=false PUBLIC_URL=/ craco build --config craco.config-gcp.js"
     },
     "devDependencies": {
         "@cypress/react": "^5.12.5",
