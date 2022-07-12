@@ -10,7 +10,7 @@ import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 
 interface AktivitetFilterformProps {
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (form: string, filterVerdi: any) => void;
 }
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {

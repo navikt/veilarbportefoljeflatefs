@@ -23,7 +23,7 @@ import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-
 import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
 
-interface Sidebar {
+export interface Sidebarelement {
     type: SidebarTabType;
     icon: React.ReactNode;
     tittel: string;
@@ -43,7 +43,7 @@ export function endreSideBar({dispatch, currentOversiktType, requestedTab}: Endr
     });
 }
 
-const sidebar: Sidebar[] = [
+const sidebar: Sidebarelement[] = [
     {
         type: SidebarTabType.STATUS,
         icon: <StatusIkon />,
@@ -100,11 +100,11 @@ function Sidebar(props: SidebarProps) {
 
     const keyCode = e => e.which || e.keyCode;
 
-    function finnTab(viewType: SidebarTabType, tabs: Sidebar[]): Sidebar {
-        return tabs.find(t => t.type === viewType) as Sidebar;
+    function finnTab(viewType: SidebarTabType, tabs: Sidebarelement[]): Sidebarelement {
+        return tabs.find(t => t.type === viewType) as Sidebarelement;
     }
 
-    const mapTabTilView = (tab: Sidebar, isSelected: boolean, key: number) => {
+    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
         return (
             <button
                 key={key}
@@ -166,12 +166,12 @@ function Sidebar(props: SidebarProps) {
         }
     }
 
-    function handleMouseClick(e, tab: Sidebar) {
+    function handleMouseClick(e, tab: Sidebarelement) {
         e.preventDefault();
         handleOnTabClicked(e, tab);
     }
 
-    function handleOnTabClicked(e, tab: Sidebar, toggleSidebar: boolean = true) {
+    function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
         endreSideBar({
             dispatch: dispatch,
             requestedTab: tab.type,

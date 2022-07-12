@@ -311,7 +311,7 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
-export default {
+const filterKonstanter = {
     ytelseUtlopsSortering,
     ferdigfilterListe,
     alder,
@@ -338,3 +338,5 @@ export default {
     hendelserLabels,
     ulesteEndringer
 };
+
+export default filterKonstanter;

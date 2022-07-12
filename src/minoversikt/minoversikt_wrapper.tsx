@@ -5,6 +5,7 @@ import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selecto
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import classNames from 'classnames';
 import './minoversikt.less';
+import {IdentParam} from '../model-interfaces';
 
 interface MinOversiktWrapperProps {
     className: string;
@@ -12,7 +13,7 @@ interface MinOversiktWrapperProps {
 }
 
 export function MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;

@@ -14,18 +14,18 @@ describe('Annen veileder', () => {
         cy.getByTestId('se-flere_knapp').should('be.disabled');
 
         cy.getByTestId('veilederoversikt_navn_lenke')
-            .contains('Thoresen, Herman')
+            .contains('Testesen, Testias')
             .click();
         cy.getByTestId('annen-veileder_infotekst')
             .should('be.visible')
-            .should('contain', 'Du er inne på Herman Thoresen sin oversikt');
+            .should('contain', 'Du er inne på Testias Testesen sin oversikt');
     });
     it('Søk veileder i veilederoversikt', () => {
         cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .children()
-            .should('have.length', 40);
+            .should('have.length', 41);
         cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
         cy.getByTestId('veilederoversikt_alertstripe_info')
             .should('contain', 'Ingen veiledere funnet')
@@ -40,7 +40,7 @@ describe('Annen veileder', () => {
         cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
-            .should('have.length', 40);
+            .should('have.length', 41);
 
         cy.checkbox('veilederoversikt_sok-veileder_veilederliste_element_0');
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0').should('be.checked');
@@ -54,7 +54,7 @@ describe('Annen veileder', () => {
 
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
-            .should('have.length', 40);
+            .should('have.length', 41);
 
         //TODO fjern denne når søk veileder er ferdig i pilotering
         // cy.gaTilOversikt('veileder-oversikt');

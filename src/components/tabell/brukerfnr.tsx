@@ -7,8 +7,12 @@ interface BrukerFnrProps {
     bruker: BrukerModell;
 }
 
-export default ({className, bruker}: BrukerFnrProps) => (
-    <BodyShort size="small" className={className}>
-        {bruker.fnr}
-    </BodyShort>
-);
+function BrukerFnr({className, bruker}: BrukerFnrProps) {
+    return (
+        <BodyShort size="small" className={className}>
+            {bruker.fnr}
+        </BodyShort>
+    );
+}
+
+export default BrukerFnr;

@@ -3,13 +3,13 @@ import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './veiledergruppe-modal.less';
 import {Button, Heading} from '@navikt/ds-react';
 
-interface EndringerIkkeLagretModal {
+interface EndringerIkkeLagretModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
     onSubmit: () => void;
 }
 
-function EndringerIkkeLagretModal(props: EndringerIkkeLagretModal) {
+function EndringerIkkeLagretModal(props: EndringerIkkeLagretModalProps) {
     return (
         <VarselModal
             isOpen={props.isOpen}

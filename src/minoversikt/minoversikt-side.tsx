@@ -43,6 +43,7 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {Systemmeldinger} from '../components/systemmeldinger';
+import {IdentParam} from '../model-interfaces';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -77,7 +78,7 @@ export default function MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(oversiktType);
     const windowWidth = useWindowWidth();
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {

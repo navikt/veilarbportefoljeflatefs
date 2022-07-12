@@ -55,6 +55,7 @@ function Toolbar(props: ToolbarProps) {
                             skalVises={sokVeilederSkalVises}
                             aktiv
                             tildelveileder={false}
+                            testid="sok-veileder_knapp"
                             ikon={<Search className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
                             oversiktType={oversiktType}
                         />
@@ -92,6 +93,7 @@ function Toolbar(props: ToolbarProps) {
                             skalVises={oversiktType in OversiktType}
                             aktiv={aktiv}
                             tildelveileder
+                            testid="tildel-veileder_knapp"
                             ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
                             oversiktType={oversiktType}
                         />

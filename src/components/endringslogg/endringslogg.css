@@ -3,7 +3,7 @@
   position: relative;
 }
 .collapse-header {
-  background-color: var(--navds-semantic-color-canvas-background-inverted);;
+  background-color: var(--navds-semantic-color-canvas-background-inverted);
   color: white;
   padding: 1rem;
   border-top-left-radius: 6px;

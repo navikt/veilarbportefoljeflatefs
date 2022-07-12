@@ -1,5 +1,5 @@
-@import 'tabell';
-@import '~nav-frontend-core/less/_variabler';
+@import './tabell.less';
+@import '/node_modules/nav-frontend-core/less/_variabler.less';
 
 @bakgrunnsGra: #f4f4f4;
 
@@ -52,9 +52,9 @@ html {
     height: 100%;
 }
 
-@import '~nav-frontend-core/less/core';
-@import '~nav-frontend-grid-style/src/index';
-@import '~nav-frontend-ekspanderbartpanel-style/src/index';
+@import '/node_modules/nav-frontend-core/less/core.less';
+@import '/node_modules/nav-frontend-grid-style/src/index.less';
+@import '/node_modules/nav-frontend-ekspanderbartpanel-style/src/index.less';
 @import './forslag_nav_frontend';
 
 .decorator-context-modal {
@@ -188,7 +188,7 @@ html {
 }
 
 .veilarbportefoljeflatefs {
-    @import 'src/components/barinput/bar';
+    @import './components/barinput/bar.less';
 
     .ekspanderbartPanel__innhold {
         padding: 0.5rem 1rem 1rem;

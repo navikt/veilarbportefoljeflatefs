@@ -1,5 +1,5 @@
 function read(scope) {
-    const content = localStorage.getItem(scope); // eslint-disable-line no-undef
+    const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return undefined;
     }
@@ -7,11 +7,11 @@ function read(scope) {
 }
 
 function write(scope, content) {
-    return localStorage.setItem(scope, JSON.stringify(content)); // eslint-disable-line no-undef
+    return localStorage.setItem(scope, JSON.stringify(content));
 }
 
 function erFiltreringEndret(scope, initialState) {
-    const content = localStorage.getItem(scope); // eslint-disable-line no-undef
+    const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return true;
     }
@@ -24,6 +24,7 @@ function erFiltreringEndret(scope, initialState) {
     );
 }
 
+/* eslint-disable import/no-anonymous-default-export */
 export default (scope, location, reducer, initialFilterstate) => (state, action) => {
     let nState = state;
     if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {

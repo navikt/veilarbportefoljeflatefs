@@ -1,12 +1,10 @@
-import veiledereResponse, {innloggetVeileder} from './veiledere';
+import {veiledere, innloggetVeileder} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 import {KategoriModell} from '../model-interfaces';
 
 faker.seed(MOCK_CONFIG.seed);
-
-const veiledere = veiledereResponse.veilederListe;
 
 const ytelser = [
     'ORDINARE_DAGPENGER',
@@ -48,7 +46,7 @@ function lagGrunndata() {
             monthValue: mnd,
             year: 1900 + ar
         },
-        fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
+        fornavn: faker.name.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
         kjonn,
         erDoed,
