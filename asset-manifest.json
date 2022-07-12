@@ -1,36 +1,24 @@
 {
   "files": {
-    "main.css": "/veilarbportefoljeflatefs/static/css/main.chunk.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.chunk.js",
-    "main.js.map": "/veilarbportefoljeflatefs/static/js/main.chunk.js.map",
-    "runtime-main.js": "/veilarbportefoljeflatefs/static/js/runtime-main.js",
-    "runtime-main.js.map": "/veilarbportefoljeflatefs/static/js/runtime-main.js.map",
-    "static/css/2.chunk.css": "/veilarbportefoljeflatefs/static/css/2.chunk.css",
-    "static/js/2.chunk.js": "/veilarbportefoljeflatefs/static/js/2.chunk.js",
-    "static/js/2.chunk.js.map": "/veilarbportefoljeflatefs/static/js/2.chunk.js.map",
+    "main.css": "/veilarbportefoljeflatefs/static/css/main.css",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.js",
+    "static/media/tab_veiledergrupper.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.3d7005052409d33ff936c957a8934d9b.svg",
+    "static/media/arbeidslisteikon_bla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_bla.b1f96319b765dbbb666e1f6177e9aa29.svg",
     "index.html": "/veilarbportefoljeflatefs/index.html",
-    "precache-manifest.1cc5a66050974025c679458b70421ed8.js": "/veilarbportefoljeflatefs/precache-manifest.1cc5a66050974025c679458b70421ed8.js",
-    "service-worker.js": "/veilarbportefoljeflatefs/service-worker.js",
-    "static/css/2.chunk.css.map": "/veilarbportefoljeflatefs/static/css/2.chunk.css.map",
-    "static/css/main.chunk.css.map": "/veilarbportefoljeflatefs/static/css/main.chunk.css.map",
-    "static/js/2.chunk.js.LICENSE.txt": "/veilarbportefoljeflatefs/static/js/2.chunk.js.LICENSE.txt",
-    "static/media/arbeidslisteikon_bla.066de983.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_bla.066de983.svg",
-    "static/media/arbeidslisteikon_gronn.828d482c.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gronn.828d482c.svg",
-    "static/media/arbeidslisteikon_gul.6eba3d4a.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gul.6eba3d4a.svg",
-    "static/media/arbeidslisteikon_lilla.f619ae02.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_lilla.f619ae02.svg",
-    "static/media/dragIcon.a9dd540e.svg": "/veilarbportefoljeflatefs/static/media/dragIcon.a9dd540e.svg",
-    "static/media/filter-ikon.e2055100.svg": "/veilarbportefoljeflatefs/static/media/filter-ikon.e2055100.svg",
-    "static/media/settings.05614526.svg": "/veilarbportefoljeflatefs/static/media/settings.05614526.svg",
-    "static/media/tab_filter.91f3b622.svg": "/veilarbportefoljeflatefs/static/media/tab_filter.91f3b622.svg",
-    "static/media/tab_mine-filter.12f547a3.svg": "/veilarbportefoljeflatefs/static/media/tab_mine-filter.12f547a3.svg",
-    "static/media/tab_status.7becfdcc.svg": "/veilarbportefoljeflatefs/static/media/tab_status.7becfdcc.svg",
-    "static/media/tab_veiledergrupper.4e78fdf0.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.4e78fdf0.svg"
+    "static/media/arbeidslisteikon_gronn.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gronn.224ed17e96c832fc3a45ae3aff1a0dcf.svg",
+    "static/media/settings.svg": "/veilarbportefoljeflatefs/static/media/settings.f141f5db12e42d003a4e3d2657b7024a.svg",
+    "static/media/arbeidslisteikon_lilla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_lilla.131212530fc3f8247477612badde3b60.svg",
+    "static/media/arbeidslisteikon_gul.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gul.308e65e05f8758bc1c4ac55930c716ec.svg",
+    "static/media/dragIcon.svg": "/veilarbportefoljeflatefs/static/media/dragIcon.960f7e2f75f3c436d84adc87e31f3007.svg",
+    "static/media/filter-ikon.svg": "/veilarbportefoljeflatefs/static/media/filter-ikon.3780765b6a9ff9601e778d557fc68ccd.svg",
+    "static/media/tab_mine-filter.svg": "/veilarbportefoljeflatefs/static/media/tab_mine-filter.b52bcca09f1ec50567660b6314893fba.svg",
+    "static/media/tab_filter.svg": "/veilarbportefoljeflatefs/static/media/tab_filter.1be8f60a590dcc609f09372d123b0b02.svg",
+    "static/media/tab_status.svg": "/veilarbportefoljeflatefs/static/media/tab_status.f58f279078f48af9ce888fd4d0840690.svg",
+    "main.css.map": "/veilarbportefoljeflatefs/static/css/main.css.map",
+    "main.js.map": "/veilarbportefoljeflatefs/static/js/main.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.js",
-    "static/css/2.chunk.css",
-    "static/js/2.chunk.js",
-    "static/css/main.chunk.css",
-    "static/js/main.chunk.js"
+    "static/css/main.css",
+    "static/js/main.js"
   ]
 }
