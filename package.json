@@ -57,7 +57,7 @@
         "@sanity/block-content-to-react": "^3.0.0",
         "@navikt/frontendlogger": "^2.0.0",
         "acorn": "^8.0.4",
-        "axe-core": "^4.1.1",
+        "axe-core": "^4.4.2",
         "babel-polyfill": "6.26.0",
         "browserslist": "^4.16.5",
         "classnames": "^2.2.6",
