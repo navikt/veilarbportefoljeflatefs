@@ -46,7 +46,7 @@
     },
     "dependencies": {
         "@craco/craco": "5.9.0",
-        "@navikt/ds-css": "^0.16.3",
+        "@navikt/ds-css": "^0.18.16",
         "@navikt/ds-css-internal": "^0.7.1",
         "@navikt/ds-datepicker": "^1.0.4",
         "@navikt/ds-react": "^0.18.1",
