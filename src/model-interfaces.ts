@@ -73,6 +73,8 @@ export interface FiltervalgModell {
     utdanningBestatt: string[];
     sisteEndringKategori: string[];
     ulesteEndringer: null | string;
+    foedeland?: null | string[];
+    tolkebehov?: null | string[];
 }
 
 export interface EnhetModell {

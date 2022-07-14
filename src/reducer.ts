@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import persistent from './utils/persistentReducer';
+import persistentReducer from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
@@ -79,25 +79,25 @@ export interface AppState {
 
 export default combineReducers<AppState>({
     ui: combineReducers({
-        listevisningMinOversikt: persistent(
+        listevisningMinOversikt: persistentReducer(
             'minOversiktListevisningState',
             window.location,
             named(OversiktType.minOversikt, listevisningReducer),
             initialStateMinOversikt
         ),
-        listevisningEnhetensOversikt: persistent(
+        listevisningEnhetensOversikt: persistentReducer(
             'enhetensOversiktListevisningState',
             window.location,
             named(OversiktType.enhetensOversikt, listevisningReducer),
             initialStateEnhetensOversikt
         ),
-        sidebarMinOversikt: persistent(
+        sidebarMinOversikt: persistentReducer(
             'minOversiktSidebar',
             window.location,
             named(OversiktType.minOversikt, sidebarReducer),
             initialStateSidebar
         ),
-        sidebarEnhetensOversikt: persistent(
+        sidebarEnhetensOversikt: persistentReducer(
             'enhetensOversiktSidebar',
             window.location,
             named(OversiktType.enhetensOversikt, sidebarReducer),
@@ -111,13 +111,13 @@ export default combineReducers<AppState>({
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
     statustall: statustallReducer,
-    filtreringEnhetensOversikt: persistent(
+    filtreringEnhetensOversikt: persistentReducer(
         'enhetsState',
         window.location,
         named(OversiktType.enhetensOversikt, filtreringReducer),
         initialState
     ),
-    filtreringMinoversikt: persistent(
+    filtreringMinoversikt: persistentReducer(
         'veilederState',
         window.location,
         named(OversiktType.minOversikt, filtreringReducer),
