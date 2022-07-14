@@ -24,21 +24,22 @@ function erFiltreringEndret(scope, initialState) {
     );
 }
 
-/* eslint-disable import/no-anonymous-default-export */
-export default (scope, location, reducer, initialFilterstate) => (state, action) => {
-    let nState = state;
-    if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
-        write(scope, undefined);
-    }
-    if (state === undefined) {
-        nState = read(scope);
-    }
+export default function persistentReducer(scope, location, reducer, initialFilterstate) {
+    return (state, action) => {
+        let nState = state;
+        if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
+            write(scope, undefined);
+        }
+        if (state === undefined) {
+            nState = read(scope);
+        }
+        
+        const rState = reducer(nState, action);
+        
+        if (rState !== nState) {
+            write(scope, rState);
+        }
 
-    const rState = reducer(nState, action);
-
-    if (rState !== nState) {
-        write(scope, rState);
-    }
-
-    return rState;
+        return rState;
+    };
 };
