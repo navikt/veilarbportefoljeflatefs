@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import React from 'react';
 import classNames from 'classnames';
-import './veiledergruppe-modal.less';
+import './veiledergruppe-modal.css';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';

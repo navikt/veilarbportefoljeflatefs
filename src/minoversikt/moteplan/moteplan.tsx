@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 
-import './moteplan.less';
+import './moteplan.css';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
 import {Calender} from '@navikt/ds-icons';

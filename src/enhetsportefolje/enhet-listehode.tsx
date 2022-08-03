@@ -16,8 +16,8 @@ import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import './enhetsportefolje.less';
-import './brukerliste.less';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 
 function harValgteAktiviteter(aktiviteter) {

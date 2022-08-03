@@ -1,0 +1,11 @@
+.navds-modal {
+  width: 40rem;
+  padding: 1rem;
+}
+.navds-modal .modal-header {
+  border-bottom: 1px solid #a0a0a0;
+  padding: 0 0 0.5rem;
+}
+.navds-modal .modal-innhold {
+  padding-top: 0.5rem;
+}

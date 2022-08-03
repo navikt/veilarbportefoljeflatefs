@@ -1,7 +1,7 @@
 import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
-import './drag-and-drop.less';
+import './drag-and-drop.css';
 import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';

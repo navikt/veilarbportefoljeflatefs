@@ -4,7 +4,7 @@ import {skjulModal} from '../../../ducks/modal';
 import {markerAlleBrukere} from '../../../ducks/portefolje';
 import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import {BrukerModell} from '../../../model-interfaces';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import {AppState} from '../../../reducer';
 import {STATUS} from '../../../ducks/utils';
 import ModalHeader from '../modal-header';

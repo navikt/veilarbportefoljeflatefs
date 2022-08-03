@@ -7,16 +7,16 @@
     "license": "MIT",
     "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
-        "start": "cross-env REACT_APP_MOCK=true craco start",
-        "build": "craco build",
-        "eject": "craco eject",
-        "test": "craco test --watchAll=false --transformIgnorePatterns",
+        "start": "cross-env REACT_APP_MOCK=true react-scripts start",
+        "build": "react-scripts build",
+        "eject": "react-scripts eject",
+        "test": "react-scripts test --watchAll=false --transformIgnorePatterns",
         "lint": "echo not implemented",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",
         "cy:run": "cypress run",
-        "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true craco build",
-        "build:gcp": "cross-env REACT_APP_MOCK=false PUBLIC_URL=/ craco build --config craco.config-gcp.js"
+        "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true react-scripts build",
+        "build:gcp": "cross-env REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build"
     },
     "devDependencies": {
         "@cypress/react": "^5.12.5",
@@ -35,7 +35,6 @@
         "yet-another-fetch-mock": "4.1.0"
     },
     "dependencies": {
-        "@craco/craco": "7.0.0-alpha.7",
         "@navikt/ds-css": "0.18.27",
         "@navikt/ds-css-internal": "0.7.7",
         "@navikt/ds-icons": "0.8.19",
@@ -47,7 +46,6 @@
         "babel-polyfill": "6.26.0",
         "browserslist": "4.21.2",
         "classnames": "^2.2.6",
-        "craco-less": "2.1.0-alpha.0",
         "cross-env": "7.0.3",
         "cypress-axe": "^0.14.0",
         "cypress-run": "^1.1.1",
