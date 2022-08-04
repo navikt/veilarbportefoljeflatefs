@@ -165,15 +165,20 @@
   margin-left: 0.2rem;
   padding-right: 0.5rem;
 }
-.endringslogg-link {
-  margin-top: 0.7rem;
-  display: block !important;
-}
 .endringslogg-liste-punkt-topp {
   margin-bottom: 1rem;
 }
 .endringslogg-kolonne {
   float: left;
+}
+.endringslogg-block-content > p {
+  padding: 0;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
+}
+.endringslogg-block-footer {
+  display: flex;
+  justify-content: space-between;
 }
 .endringslogg-skille {
   padding-bottom: 1rem;
@@ -197,9 +202,6 @@
 .veiledergrupper-navet-tekst,
 .endringslogg_mine-filter {
   margin-top: 0.5rem;
-}
-.linkikon {
-  margin-left: 0.3rem;
 }
 .ring-container {
   position: relative;
@@ -250,10 +252,4 @@
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0;
   }
-}
-
-.endringslogg-block-content > p {
-  padding: 0;
-  margin-bottom: 0.7rem;
-  margin-top: 0.7rem;
 }
