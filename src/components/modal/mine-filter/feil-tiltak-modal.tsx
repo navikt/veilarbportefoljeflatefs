@@ -7,7 +7,7 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {useDispatch, useSelector} from 'react-redux';
 import EgenModal from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import './mine-filter.less';
+import './mine-filter.css';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 

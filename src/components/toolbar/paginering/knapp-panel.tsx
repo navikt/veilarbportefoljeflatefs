@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 
 interface KnappPanelProps {
-    children: React.ReactChild | React.ReactChildren;
+    tekst: string;
     disabled?: boolean;
     onClick?: () => void;
     selected?: boolean;
     ariaLabel: string;
 }
 
-function KnappPanel({children, disabled = false, selected = false, ariaLabel, ...props}: KnappPanelProps) {
+function KnappPanel({disabled = false, selected = false, ariaLabel, ...props}: KnappPanelProps) {
     const classes = classNames('paginering__knapp', {
         disabled,
         'paginering__knapp--pressed': selected
@@ -26,7 +26,7 @@ function KnappPanel({children, disabled = false, selected = false, ariaLabel, ..
             aria-label={ariaLabel}
             title={ariaLabel}
         >
-            {children}
+            {props.tekst}
         </Button>
     );
 }

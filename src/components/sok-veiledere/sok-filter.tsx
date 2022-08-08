@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import '../toolbar/toolbar.less';
+import '../toolbar/toolbar.css';
 import {Alert, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
@@ -26,13 +26,7 @@ function SokFilter<T>(props: SokFilterProps<T>) {
 
     useEffect(() => {
         setRawfilteredData(
-            data.filter(
-                elem =>
-                    !query ||
-                    JSON.stringify(elem)
-                        .toLowerCase()
-                        .includes(query.toLowerCase())
-            )
+            data.filter(elem => !query || JSON.stringify(elem).toLowerCase().includes(query.toLowerCase()))
         );
     }, [query, data]);
 

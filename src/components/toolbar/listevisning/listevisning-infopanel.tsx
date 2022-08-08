@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OversiktType, lukkInfopanel} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer} from '../../../ducks/ui/listevisning-selectors';
-import './listevisning.less';
+import './listevisning.css';
 import {Information} from '@navikt/ds-icons';
 import {BodyShort} from '@navikt/ds-react';
 

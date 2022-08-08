@@ -1,5 +1,5 @@
 import React from 'react';
-import './dark-mode-toggle.less';
+import './dark-mode-toggle.css';
 
 const Toggle = ({checked, onChange}) => (
     <span className="toggle-control">

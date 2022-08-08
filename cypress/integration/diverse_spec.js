@@ -80,7 +80,7 @@ describe('Diverse', () => {
         cy.gaTilOversikt('enhetens-oversikt');
     });
 
-    const forsteVeileder = 'Aasen, Markus';
+    const aasen = 'Aasen';
     it('Søk på navn', () => {
         cy.getByTestId('sok-navn-fnr_input')
             .click()
@@ -110,11 +110,11 @@ describe('Diverse', () => {
         cy.getByTestId('sok-veileder_knapp').click();
         cy.getByTestId('sok-filter_input')
             .click()
-            .type(forsteVeileder);
+            .type(aasen);
         cy.checkbox('sok-veileder_rad_0');
         cy.getByTestId('sok-veileder_velg-knapp').click();
         cy.getByTestId('filtrering_label-container')
-            .contains(forsteVeileder)
+            .contains(aasen)
             .click();
         cy.getByTestId('filtreringlabel_ufordelte-brukere')
             .should('be.visible')

@@ -20,9 +20,9 @@ import {hentPortefoljeForVeileder} from '../ducks/portefolje';
 import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import '../style.less';
-import './minoversikt.less';
-import './../components/tabell-overskrift.less';
+import '../style.css';
+import './minoversikt.css';
+import './../components/tabell-overskrift.css';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
@@ -43,20 +43,14 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {Systemmeldinger} from '../components/systemmeldinger';
+import {IdentParam} from '../model-interfaces';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
 export default function MinoversiktSide() {
-    const {
-        portefolje,
-        filtervalg,
-        listevisning,
-        enhetId,
-        sorteringsrekkefolge,
-        sorteringsfelt,
-        enhettiltak
-    } = usePortefoljeSelector(oversiktType);
+    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
+        usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatusTall(gjeldendeVeileder);
@@ -77,7 +71,7 @@ export default function MinoversiktSide() {
     const tiltak = sortTiltak(enhettiltak.data.tiltak);
     const {isSidebarHidden} = useSidebarViewStore(oversiktType);
     const windowWidth = useWindowWidth();
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {

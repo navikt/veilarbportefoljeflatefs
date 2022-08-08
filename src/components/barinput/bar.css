@@ -1,0 +1,109 @@
+.barinput-checkbox,
+.barinput-radio {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.barinput-checkbox__input,
+.barinput-radio__input {
+  margin-right: 1rem;
+  align-self: center;
+  transform: scale(1.5);
+}
+.barinput-checkbox .arbeidslisteikon__svg,
+.barinput-radio .arbeidslisteikon__svg {
+  margin-right: 0.5rem;
+}
+.barlabel {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+.barlabel__labeltext {
+  width: 100%;
+  padding-right: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.barlabel__labeltext:hover {
+  color: #0067c5;
+}
+.barlabel__barwrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: 45%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.barlabel__barwrapper .arbeidsliste {
+  flex-basis: 3rem;
+  display: inline-flex;
+  height: 2rem;
+}
+.barlabel__antall {
+  flex-basis: 3rem;
+  text-align: right;
+  align-self: center;
+  padding-right: 0.5rem;
+  font-weight: 800;
+  margin-top: -0.3rem;
+}
+.barlabel__bar {
+  position: relative;
+  height: 1rem;
+  flex-grow: 1;
+}
+.barlabel__bartrack {
+  display: block;
+  background-color: #f1f1f1;
+  height: 12px;
+  border-radius: 1rem;
+  width: 100%;
+}
+.barlabel__barface {
+  position: absolute;
+  display: block;
+  background-color: #7cdaf8;
+  height: 12px;
+  border-radius: 1rem;
+  transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
+  left: 0;
+  top: 0;
+}
+.barlabel.ufordeltebrukere .barlabel__barface {
+  background-color: #8269a2;
+}
+.barlabel.venterPaSvarFraNAV .barlabel__barface {
+  background-color: #8269a2;
+}
+.barlabel.venterPaSvarFraBruker .barlabel__barface {
+  background-color: #c1cb33;
+}
+.barlabel.avtaltMoteMedNav .barlabel__barface {
+  background-color: #00243a;
+}
+.barlabel.utlopteAktiviteter .barlabel__barface {
+  background-color: #6a6a6a;
+}
+.barlabel.ikkeIAvtaltAktivitet .barlabel__barface {
+  background-color: #6a6a6a;
+}
+.barlabel.iAvtaltAktivitet .barlabel__barface {
+  background-color: #3380a5;
+}
+.barlabel.inaktiveBrukere .barlabel__barface {
+  background-color: #6a6a6a;
+}
+.barlabel.minArbeidsliste .barlabel__barface {
+  background-color: #6a6a6a;
+}
+.forsteBarlabelIGruppe {
+  padding-top: 1rem;
+  border-top: 1px solid #6a6a6a;
+  margin-top: 1rem;
+}
+.barlabel__barwrapper {
+  flex: none;
+}

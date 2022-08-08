@@ -1,6 +1,6 @@
 import React, {ChangeEventHandler} from 'react';
 import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
-import './bar.less';
+import './bar.css';
 import {Radio} from 'nav-frontend-skjema';
 import {Label} from '@navikt/ds-react';
 

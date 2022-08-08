@@ -50,20 +50,18 @@ export function handterFeil(dispatch, action) {
     return error => {
         if (error.response) {
             error.response.text().then(data => {
-                console.error(error, error.stack, data); // tslint:disable-line no-console
+                console.error(error, error.stack, data);
                 dispatch({type: action, data: {response: error.response, data}});
             });
         } else {
-            console.error(error, error.stack); // tslint:disable-line no-console
+            console.error(error, error.stack);
             dispatch({type: action, data: error.toString()});
         }
     };
 }
 
 export function fetchToJson(url: string, config: RequestInit = {}) {
-    return fetch(url, config)
-        .then(sjekkStatuskode)
-        .then(toJson);
+    return fetch(url, config).then(sjekkStatuskode).then(toJson);
 }
 
 export function doThenDispatch(fn, {OK, FEILET, PENDING}) {

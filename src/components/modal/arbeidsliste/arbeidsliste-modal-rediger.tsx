@@ -10,7 +10,7 @@ import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/p
 import {redigerArbeidsliste} from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import ModalHeader from '../modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';

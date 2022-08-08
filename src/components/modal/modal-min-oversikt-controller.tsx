@@ -12,17 +12,11 @@ import {NY_FEILET_MODAL} from '../../ducks/modal-serverfeil';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import {TildelingerOk} from './modal-suksess';
 import {logEvent} from '../../utils/frontend-logger';
-import './feilmelding-brukere.less';
+import './feilmelding-brukere.css';
 
 export function MinOversiktModalController() {
-    const {
-        serverfeilModalSkalVises,
-        feilmeldingModal,
-        modal,
-        closeServerfeilModal,
-        closeFeilmeldingModal,
-        closeModal
-    } = useModalControllerSelector();
+    const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} =
+        useModalControllerSelector();
 
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './varsel-modal.less';
+import './varsel-modal.css';
 import {ErrorFilled, SuccessFilled, WarningFilled} from '@navikt/ds-icons';
 import {Modal} from '@navikt/ds-react';
 

@@ -12,7 +12,7 @@ import hiddenIf from '../hidden-if/hidden-if';
 import {AppState} from '../../reducer';
 import {OrNothing} from '../../utils/types/types';
 import TimedToast from './timed-toast';
-import './toast.less';
+import './toast.css';
 
 interface StateProps {
     toasts: OrNothing<ToastActionType>;

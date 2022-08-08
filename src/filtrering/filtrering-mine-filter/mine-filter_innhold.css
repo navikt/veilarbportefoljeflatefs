@@ -1,0 +1,39 @@
+.veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt {
+  padding: 0.5rem;
+}
+.veilarbportefoljeflatefs .mine-filter-wrapper__tekst {
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+.veilarbportefoljeflatefs .mine-filter-emptystate {
+  text-align: left;
+}
+.veilarbportefoljeflatefs .mine-filter-emptystate__tekst {
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+.veilarbportefoljeflatefs .mine-filter__valgfelt .skjemaelement__label {
+  word-break: break-word;
+}
+.veilarbportefoljeflatefs .mine-filter__rad {
+  display: flex;
+  justify-content: space-between;
+  min-height: 3rem;
+  align-items: center;
+}
+.veilarbportefoljeflatefs .mine-filter__filternavn {
+  width: 85%;
+}
+.veilarbportefoljeflatefs .mine-filter_alertstripe {
+  display: flex;
+  justify-content: space-between;
+}
+.veilarbportefoljeflatefs .mine-filter_alertstripe .alertstripe_lukknapp {
+  height: 24px;
+  width: 24px;
+  border: none;
+}
+.veilarbportefoljeflatefs .mine-filter_alertstripe .alertstripe__tekst {
+  display: flex;
+  justify-content: space-between;
+}

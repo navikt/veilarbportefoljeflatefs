@@ -73,6 +73,8 @@ export interface FiltervalgModell {
     utdanningBestatt: string[];
     sisteEndringKategori: string[];
     ulesteEndringer: null | string;
+    foedeland?: null | string[];
+    tolkebehov?: null | string[];
 }
 
 export interface EnhetModell {
@@ -208,4 +210,8 @@ export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';
     beskrivelse: any;
+}
+
+export interface IdentParam {
+    ident: string;
 }

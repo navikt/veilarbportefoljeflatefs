@@ -1,7 +1,7 @@
 import React from 'react';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import './nullstill-knapp.less';
+import './nullstill-knapp.css';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 

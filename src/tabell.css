@@ -1,0 +1,110 @@
+.tabell {
+  background-color: transparent;
+  border-radius: 4px;
+  border-collapse: separate;
+  border-bottom: 1px solid #6a6a6a;
+  border-top: none;
+  margin-right: 0;
+  border-spacing: 0;
+  width: 100%;
+}
+.tabell caption {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #7f756c;
+  text-align: left;
+}
+.tabell td:first-child,
+.tabell th:first-child {
+  border-left: 1px solid #6a6a6a;
+}
+.tabell td:last-child,
+.tabell th:last-child {
+  border-right: 1px solid #6a6a6a;
+}
+.tabell th:last-child {
+  border-right: none;
+}
+.tabell th:first-child {
+  border-left: none;
+}
+.tabell thead th {
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #6a6a6a;
+  position: sticky;
+  top: 2.5rem;
+  -webkit-backface-visibility: hidden;
+}
+.tabell .tabellheader__lenke {
+  display: flex;
+}
+.tabell .tabellheader__tekst {
+  width: max-content;
+  padding: 0.2rem;
+}
+.tabell .tabellheader__pil {
+  width: 1rem;
+  height: 1rem;
+  grid-column: 2;
+  float: left;
+  margin-top: 2px;
+}
+.tabell th {
+  text-align: left;
+}
+.tabell th,
+.tabell td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #a0a0a0;
+}
+.tabell thead tr:first-child th,
+.tabell thead tr:first-child td {
+  border-top: none;
+  font-weight: 100;
+}
+.tabell tbody tr:first-child th,
+.tabell tbody tr:first-child td {
+  border-top-width: 2px;
+}
+.tabell tbody tr:last-child th,
+.tabell tbody tr:last-child td {
+  border-bottom: none;
+}
+.tabell tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+.tabell tbody th,
+.tabell tbody td {
+  border-bottom: 1px solid #a0a0a0;
+  border-top: none;
+  font-weight: normal;
+}
+.tabell tbody th:first-child,
+.tabell tbody td:first-child {
+  width: 30%;
+  white-space: pre-wrap;
+}
+.tabell tbody th:nth-child(2),
+.tabell tbody td:nth-child(2) {
+  width: 20%;
+  white-space: pre-wrap;
+}
+.tabell tbody th:nth-child(3),
+.tabell tbody td:nth-child(3) {
+  width: 7rem;
+  white-space: pre-wrap;
+}
+.tabell-kompakt th,
+.tabell-kompakt td {
+  padding: 5px;
+}
+table .tabell-element-center {
+  text-align: center;
+}
+table col[class*='col-'] {
+  position: static;
+  float: none;
+  display: table-column;
+}

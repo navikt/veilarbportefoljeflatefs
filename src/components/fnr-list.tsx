@@ -1,15 +1,15 @@
 import React from 'react';
-import './modal-liste.less';
+import './modal-liste.css';
 
 export interface Fnr {
     brukerFnr: string;
 }
 
-interface FnrList {
+interface FnrListProps {
     listeMedFnr: Fnr[];
 }
 
-export function FnrList(props: FnrList) {
+export function FnrList(props: FnrListProps) {
     const listElements = props.listeMedFnr.map(tilordning => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">
             {tilordning.brukerFnr}

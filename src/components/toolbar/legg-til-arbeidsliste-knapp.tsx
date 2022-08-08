@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
-import './toolbar.less';
+import './toolbar.css';
 import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
+import {IdentParam} from '../../model-interfaces';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -19,7 +20,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const innloggetVeileder = useIdentSelector();
     const dispatch = useDispatch();
 
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const location = useLocation();
     const pathname = location.pathname;
 

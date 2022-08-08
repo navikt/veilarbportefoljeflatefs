@@ -3,7 +3,7 @@ import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
 import {BrukerModell} from '../../../model-interfaces';
 import FormikInput from '../../formik/formik-input';
 import FormikTekstArea from '../../formik/formik-tekstarea';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {Heading} from '@navikt/ds-react';
 

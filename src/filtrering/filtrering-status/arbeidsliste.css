@@ -1,0 +1,17 @@
+.veilarbportefoljeflatefs .minArbeidsliste__tittel {
+  margin: 1rem 0 0.5rem;
+}
+.veilarbportefoljeflatefs .minArbeidsliste__kategori-checkboxwrapper {
+  margin: 0 0 0 1.5rem;
+  padding-bottom: 0;
+}
+.veilarbportefoljeflatefs .arbeidslistetekst {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: flex-start !important;
+}
+.veilarbportefoljeflatefs .arbeidslisteikon__svg {
+  width: auto;
+  height: 1.2rem;
+}

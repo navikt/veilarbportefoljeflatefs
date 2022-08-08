@@ -1,12 +1,10 @@
-import veiledereResponse, {innloggetVeileder} from './veiledere';
+import {veiledere, innloggetVeileder} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 import {KategoriModell} from '../model-interfaces';
 
 faker.seed(MOCK_CONFIG.seed);
-
-const veiledere = veiledereResponse.veilederListe;
 
 const ytelser = [
     'ORDINARE_DAGPENGER',
@@ -48,7 +46,7 @@ function lagGrunndata() {
             monthValue: mnd,
             year: 1900 + ar
         },
-        fornavn: faker.name.firstName(kjonn === 'K' ? 1 : 0),
+        fornavn: faker.name.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
         kjonn,
         erDoed,
@@ -285,6 +283,16 @@ export function hentMockPlan() {
         {
             dato: '2022-03-24T15:02:35.636Z',
             deltaker: {fornavn: 'john', etternavn: 'tester', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {
+            dato: '2022-03-26T15:02:35.636Z',
+            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
+            avtaltMedNav: true
+        },
+        {
+            dato: '2022-03-27T15:02:35.636Z',
+            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
             avtaltMedNav: true
         },
         {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
