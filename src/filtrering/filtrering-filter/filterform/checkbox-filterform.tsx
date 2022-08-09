@@ -6,7 +6,6 @@ import './filterform.css';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert, Tooltip, Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import { kebabCase } from "../../../utils/utils";
 
 interface CheckboxFilterformProps {
     form: string;
