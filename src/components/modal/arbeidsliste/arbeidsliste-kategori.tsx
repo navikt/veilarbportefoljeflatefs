@@ -1,6 +1,6 @@
 import * as React from 'react';
-import './arbeidsliste-kategori.less';
-import './arbeidsliste.less';
+import './arbeidsliste-kategori.css';
+import './arbeidsliste.css';
 import {ReactComponent as ArbeidslisteikonBla} from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as ArbeidslisteikonGronn} from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';

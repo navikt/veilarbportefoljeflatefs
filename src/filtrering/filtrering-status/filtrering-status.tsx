@@ -28,7 +28,7 @@ import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../../konstanter';
 import {Label} from '@navikt/ds-react';
-import './filtrering-status.less';
+import './filtrering-status.css';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;

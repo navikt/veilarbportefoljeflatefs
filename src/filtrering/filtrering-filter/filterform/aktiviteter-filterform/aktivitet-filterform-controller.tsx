@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../filterform.less';
+import '../filterform.css';
 import {FiltervalgModell} from '../../../../model-interfaces';
 import AktivitetFilterformForenklet from './aktivitet-filterform-forenklet';
 import {aktiviteter} from '../../../filter-konstanter';

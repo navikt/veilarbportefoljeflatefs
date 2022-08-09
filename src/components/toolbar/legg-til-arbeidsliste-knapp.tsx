@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
-import './toolbar.less';
+import './toolbar.css';
 import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';

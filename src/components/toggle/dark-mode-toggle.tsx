@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './dark-mode-toggle.less';
+import './dark-mode-toggle.css';
 import {Switch} from '@navikt/ds-react';
 
 function DarkModeToggle() {

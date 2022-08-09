@@ -1,0 +1,68 @@
+.oversikt-sideinnhold-veilederside {
+    display: grid;
+    grid-template-columns: 21rem auto;
+    column-gap: 1rem;
+}
+.oversikt-sideinnhold-veilederside .veileder-gruppe__valgfelt {
+    height: auto;
+    overflow-y: auto;
+    padding: 0.5rem;
+    max-height: 40vh;
+}
+.veiledersok__wrapper {
+    margin-top: 1rem;
+    width: 25%;
+    margin-right: 75%;
+}
+.veiledersok__wrapper .veiledere__soketabell a {
+    border-bottom: none;
+    color: #0067c5;
+    text-decoration: none;
+}
+.tildelveileder_wrapper {
+    min-height: 3rem;
+}
+.veileder__hide {
+    display: none;
+}
+.sok-veileder {
+    border: 1px solid #6a6a6a;
+    border-radius: 4px;
+    margin: 0.5rem 0 1rem;
+}
+.veilederoversikt__toolbar-container {
+    position: relative;
+    top: 0;
+    margin-top: -18px;
+}
+.veilederoversikt__sticky-skygge::before,
+.veilederoversikt__sticky-skygge::after {
+    content: '';
+    display: block;
+    height: 16px;
+    position: sticky;
+}
+.veilederoversikt__sticky-skygge::before {
+    top: 61px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 4px;
+}
+.veilederoversikt__sticky-skygge::after {
+    top: 0;
+    height: 0;
+    width: auto;
+}
+.status-filter-kolonne {
+    height: fit-content;
+    position: sticky;
+    top: 0.5rem;
+}
+@media (max-width: 900px) {
+    .oversikt-sideinnhold-veilederside {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .status-filter-kolonne {
+        position: inherit;
+    }
+}

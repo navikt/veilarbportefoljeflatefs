@@ -1,0 +1,44 @@
+.veilarbportefoljeflatefs .moteplan_knapp {
+    height: fit-content;
+    margin-top: 0.3125rem !important;
+    margin-right: 0.5rem;
+}
+.veilarbportefoljeflatefs .moteplan_popover {
+    z-index: 1201 !important;
+}
+.veilarbportefoljeflatefs .moteplan_content div:first-child h3 {
+    margin-top: 0;
+}
+.veilarbportefoljeflatefs .moteplan_tittel {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    margin-left: 0.75rem;
+}
+.veilarbportefoljeflatefs .moteplan_tabell_tittelrad th {
+    padding-bottom: 0 !important;
+    font-size: 1rem;
+    font-weight: normal;
+    font-variant: all-small-caps;
+}
+.veilarbportefoljeflatefs .moteplan_tabell_klokkeslett {
+    width: 3rem;
+}
+.veilarbportefoljeflatefs .moteplan_tabell_deltaker {
+    width: 10rem;
+    max-width: 10rem;
+}
+.veilarbportefoljeflatefs .moteplan_tabell_deltaker a {
+    display: block;
+    width: 9rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.veilarbportefoljeflatefs .moteplan_tabell_status {
+    width: 7.125rem;
+}
+#seFlereMoterKnapp {
+    float: right;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+}

@@ -1,0 +1,58 @@
+.veilarbportefoljeflatefs .paginering {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.veilarbportefoljeflatefs .paginering__knapp {
+    border: 1px solid transparent;
+    border-left: 1px solid #a0a0a0;
+    background-color: transparent !important;
+    width: 30%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0;
+}
+.veilarbportefoljeflatefs .paginering__knapp:hover {
+    box-shadow: none;
+    border-bottom: 1px solid #a0a0a0;
+    cursor: pointer;
+}
+.veilarbportefoljeflatefs .paginering__knapp:first-child {
+    border-left: none;
+    min-width: fit-content;
+}
+.veilarbportefoljeflatefs .paginering__knapp:last-child {
+    border-right: 1px solid #a0a0a0;
+}
+.veilarbportefoljeflatefs .paginering__knapp.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #c9c9c9;
+}
+.veilarbportefoljeflatefs .paginering__knapp:focus {
+    box-shadow: 0 0 0 3px #00347d;
+}
+.veilarbportefoljeflatefs .visningsgruppe {
+    display: inline-flex;
+}
+.veilarbportefoljeflatefs .visningsgruppe input {
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+.veilarbportefoljeflatefs .visningsgruppe label {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #c9c9c9;
+}
+.veilarbportefoljeflatefs .visningsgruppe__knapp:first-child label {
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+.veilarbportefoljeflatefs .visningsgruppe__knapp:last-child label {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.veilarbportefoljeflatefs .visningsgruppe__knapp input:checked + label {
+    background-color: #0067c5;
+    border-color: #0067c5;
+}
