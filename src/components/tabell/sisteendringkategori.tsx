@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
-import '../../topp-meny/lenker.less';
+import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import {BodyShort, Link} from '@navikt/ds-react';

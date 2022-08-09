@@ -1,5 +1,5 @@
 import React from 'react';
-import './modal-liste.less';
+import './modal-liste.css';
 
 export interface Fnr {
     brukerFnr: string;

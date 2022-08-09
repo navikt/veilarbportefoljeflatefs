@@ -11,7 +11,7 @@ import {
 } from '../../ducks/lagret-filter-ui-state';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React, {useEffect, useState} from 'react';
-import './mine-filter_innhold.less';
+import './mine-filter_innhold.css';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';

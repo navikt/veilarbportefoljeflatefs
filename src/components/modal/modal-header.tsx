@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import {Heading} from '@navikt/ds-react';
-import './modal.less';
+import './modal.css';
 
 interface OwnProps {
     className?: string;

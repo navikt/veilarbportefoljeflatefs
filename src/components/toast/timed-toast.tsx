@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import './toast.less';
+import './toast.css';
 import {useDispatch} from 'react-redux';
 import {useTimer} from '../../hooks/use-timer';
 import {kebabCase} from '../../utils/utils';

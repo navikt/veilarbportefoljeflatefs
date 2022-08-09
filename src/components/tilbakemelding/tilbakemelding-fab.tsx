@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import {connect} from 'react-redux';
-import './tilbakemelding-fab.less';
+import './tilbakemelding-fab.css';
 import {sjekkFeature} from '../../ducks/features';
 import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
 import TilbakemeldingModal, {Tilbakemelding, TilbakemeldingCheckboxProps} from './tilbakemelding-modal';

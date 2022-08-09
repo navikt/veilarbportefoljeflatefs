@@ -2,8 +2,8 @@ import React from 'react';
 import EnhetListehode from './enhet-listehode';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
-import './enhetsportefolje.less';
-import './brukerliste.less';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 
 function EnhetTabellOverskrift() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './toggle-switch.less';
+import './toggle-switch.css';
 import {Locked, Unlocked} from '@navikt/ds-icons';
 
 interface ToggleSwitchProps {

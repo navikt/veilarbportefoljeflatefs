@@ -3,7 +3,7 @@ import {FiltervalgModell} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
 import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
-import './filterform.less';
+import './filterform.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';

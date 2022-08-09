@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {MouseEvent} from 'react';
 import classnames from 'classnames';
-import './tabell.less';
-import '../../enhetsportefolje/brukerliste.less';
+import './tabell.css';
+import '../../enhetsportefolje/brukerliste.css';
 import {Button} from '@navikt/ds-react';
 import {Collapse, Expand} from '@navikt/ds-icons';
 

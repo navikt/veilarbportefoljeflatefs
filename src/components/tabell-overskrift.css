@@ -1,0 +1,11 @@
+.veilarbportefoljeflatefs .tabelloverskrift {
+    z-index: 1000;
+    margin-bottom: 0;
+    width: max-content;
+    padding: 1rem 0;
+}
+.veilarbportefoljeflatefs .tabelloverskrift__annen-veileder {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 1rem 0;
+}

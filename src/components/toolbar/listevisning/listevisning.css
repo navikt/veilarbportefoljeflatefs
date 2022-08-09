@@ -1,0 +1,50 @@
+.veilarbportefoljeflatefs .typo-normal {
+    width: 100%;
+}
+.veilarbportefoljeflatefs .listevisning--infopanel {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+.veilarbportefoljeflatefs .listevisning--infopanel__lukkKnapp {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    right: -0.25rem;
+    top: -0.25rem;
+}
+.veilarbportefoljeflatefs .skjemaelement__input:disabled + label {
+    cursor: default;
+}
+.veilarbportefoljeflatefs .skjemaelement__input:disabled + label::before {
+    background-color: #a0a0a0;
+    border-color: #a0a0a0;
+}
+.veilarbportefoljeflatefs .ustilet {
+    padding: 1rem 0.5rem 0;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner {
+    margin-right: 1rem;
+    min-width: 11rem;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown {
+    margin-bottom: 0;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btnwrapper--disabled svg {
+    opacity: 0.4;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btnwrapper--disabled:hover {
+    border: none;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btn {
+    background-color: #f4f4f4;
+    border: 1px solid transparent;
+    padding: 0.5rem 0.5rem 0 0.5rem !important;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner svg {
+    margin-right: 0.2rem;
+}
+.veilarbportefoljeflatefs .toolbar__velg-kolonner .velg-kolonner__tekst {
+    position: absolute;
+    top: 10px;
+}

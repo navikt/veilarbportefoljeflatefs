@@ -8,7 +8,7 @@ import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import Innholdslaster from './innholdslaster/innholdslaster';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
-import './style.less';
+import './style.css';
 
 function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();

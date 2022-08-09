@@ -1,7 +1,7 @@
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import React, {PropsWithChildren} from 'react';
 import {Fnr, FnrList} from '../fnr-list';
-import './feilmelding-brukere.less';
+import './feilmelding-brukere.css';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface ModalSuksessProps {

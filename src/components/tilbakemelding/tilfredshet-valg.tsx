@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import './tilfredshet-valg.less';
+import './tilfredshet-valg.css';
 import {useState} from 'react';
 
 interface TilfredshetValgProps {

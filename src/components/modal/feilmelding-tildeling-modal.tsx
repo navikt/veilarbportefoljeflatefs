@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Fnr, FnrList} from '../fnr-list';
-import './feilmelding-brukere.less';
+import './feilmelding-brukere.css';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FeilmeldingBrukereModalProps {

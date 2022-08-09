@@ -3,7 +3,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import hiddenIf from '../hidden-if/hidden-if';
-import '../toolbar/toolbar.less';
+import '../toolbar/toolbar.css';
 import classNames from 'classnames';
 import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
 

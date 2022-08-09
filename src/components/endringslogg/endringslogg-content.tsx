@@ -14,9 +14,9 @@ interface EndringsloggContentProps {
 
 export const EndringsloggLink = (props: {linkText: string; link: string; onClick: () => void}) => {
     return (
-        <Link className={'endringslogg-link'} target="_blank" href={props.link} onClick={props.onClick}>
+        <Link target="_blank" href={props.link} onClick={props.onClick}>
             {props.linkText ? props.linkText : props.link}
-            <ExternalLink className={'linkikon'} />
+            <ExternalLink />
         </Link>
     );
 };
@@ -67,20 +67,25 @@ const EndringsloggEntry = (props: EndringsloggEntryWithSeenStatus) => {
                     {props.title}
                 </Heading>
                 {props.description && (
-                    <div className={'endringslogg-block-content'}>
-                        <BlockContent blocks={props.description} />
-                    </div>
+                    <BlockContent className={'endringslogg-block-content'} blocks={props.description} />
                 )}
-                {props.modal && (
-                    <TourModalButton id={props._id} modal={props.modal} buttonText="Se hvordan" forced={props.forced} />
-                )}
-                {props.link && props.linkText && (
-                    <EndringsloggLink
-                        linkText={props.linkText}
-                        link={props.link}
-                        onClick={() => trackLinkClick(props._id)}
-                    />
-                )}
+                <div className="endringslogg-block-footer">
+                    {props.modal && (
+                        <TourModalButton
+                            id={props._id}
+                            modal={props.modal}
+                            buttonText="Se hvordan"
+                            forced={props.forced}
+                        />
+                    )}
+                    {props.link && props.linkText && (
+                        <EndringsloggLink
+                            linkText={props.linkText}
+                            link={props.link}
+                            onClick={() => trackLinkClick(props._id)}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -13,17 +13,11 @@ import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
 import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
 import {logEvent} from '../../utils/frontend-logger';
-import './feilmelding-brukere.less';
+import './feilmelding-brukere.css';
 
 export function ModalEnhetSideController() {
-    const {
-        serverfeilModalSkalVises,
-        feilmeldingModal,
-        modal,
-        closeServerfeilModal,
-        closeFeilmeldingModal,
-        closeModal
-    } = useModalControllerSelector();
+    const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} =
+        useModalControllerSelector();
 
     const lukkTildelingFeiletModal = () => {
         closeFeilmeldingModal();

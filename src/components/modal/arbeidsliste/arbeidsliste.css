@@ -1,0 +1,101 @@
+.arbeidsliste-modal .modal-innhold .feedbacksummary {
+    margin: 0 2rem 1rem 2rem;
+    padding: 1.5rem;
+    border-radius: 4px;
+    background-color: #ba3a26;
+    color: #fff;
+    list-style-position: inside;
+}
+.arbeidsliste-modal .modal-innhold .feedbacksummary:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px #00347d;
+}
+.arbeidsliste-modal .modal-innhold .feedbacksummary a {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-decoration: none;
+}
+.arbeidsliste-modal .modal-innhold .arbeidsliste__info-tekst {
+    margin-bottom: 0;
+    font-style: italic;
+}
+.arbeidsliste-modal .modal-innhold .arbeidsliste__bruker {
+    border-bottom: 1px solid #a0a0a0;
+    margin-bottom: 1rem;
+}
+.arbeidsliste-modal .modal-innhold .typo-undertittel {
+    margin-bottom: 0.5rem;
+}
+.arbeidsliste-modal .modal-innhold .skjemaelement--harFeil textarea {
+    margin-bottom: 0.5rem;
+}
+.arbeidsliste-modal .modal-innhold .knapp--hoved {
+    margin-right: 1rem;
+}
+.arbeidsliste-modal .modal-innhold .datovelger__DayPicker {
+    position: absolute;
+    height: 20rem;
+    top: -100%;
+    transform: translateY(-100%);
+    border: 1px solid #a0a0a0;
+}
+.arbeidsliste-modal .modal-innhold .DayPicker-WeekNumber {
+    min-width: 2rem;
+}
+.arbeidsliste-modal .modal-innhold .nav-datovelger__kalenderPortal--responsive {
+    top: 0;
+}
+.arbeidsliste-modal .modal-innhold .modal-footer {
+    display: flex;
+}
+.arbeidsliste-modal .modal-innhold .modal-footer .fjern--knapp {
+    margin-left: auto;
+}
+.arbeidsliste-modal .modal-innhold .arbeidsliste--modal-redigering {
+    margin-bottom: 0.625rem;
+}
+.arbeidsliste-modal .modal-innhold .navds-form-field {
+    margin-top: 10px;
+}
+.arbeidsliste-modal .innhold {
+    padding: 1.7rem 2rem;
+}
+.arbeidsliste-modal .tom-portefolje-modal {
+    padding: 0;
+    width: 50%;
+    background-color: #f1f1f1;
+}
+.arbeidsliste--rediger-lenke {
+    margin-left: 1rem !important;
+}
+.fjern-arbeidsliste .arbeidsliste-headertekst {
+    text-align: center;
+}
+.fjern-arbeidsliste .arbeidsliste-listetekst {
+    width: 60%;
+    margin: 0 auto;
+}
+.fjern-arbeidsliste .arbeidsliste-listetekst__lang {
+    max-height: 30rem;
+    overflow-y: scroll;
+    border-top: 1px solid #a0a0a0;
+    border-bottom: 1px solid #a0a0a0;
+    margin: 0 4rem 1rem;
+}
+.fjern-arbeidsliste .arbeidsliste-listetekst__lang ul {
+    margin-top: 0;
+}
+.fjern-arbeidsliste .knapper {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0 0;
+    gap: 1rem;
+}
+.dato-kategori-wrapper {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin: 0.5rem 0;
+}
+.dato-kategori-wrapper .datovelger {
+    margin: 0 0 auto 0;
+}

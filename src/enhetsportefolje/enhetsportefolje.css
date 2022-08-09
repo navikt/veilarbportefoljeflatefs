@@ -1,0 +1,42 @@
+.veilarbportefoljeflatefs .portefolje__container {
+    min-height: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #6a6a6a;
+    border-radius: 4px;
+}
+.veilarbportefoljeflatefs .portefolje__container__tom-liste {
+    border-bottom: none;
+}
+.veilarbportefoljeflatefs .portefolje__container__sticky {
+    position: sticky;
+    top: 5rem;
+}
+.veilarbportefoljeflatefs .velgfiltermelding {
+    text-align: center;
+}
+.veilarbportefoljeflatefs .velgfiltermelding__ikon {
+    position: relative;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100%;
+    background-color: #ffaa33;
+}
+.veilarbportefoljeflatefs .velgfiltermelding__ikon:after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 0.5rem;
+    display: block;
+    margin-left: 15%;
+    background-color: #fff;
+    top: calc(1.25rem - 0.25rem);
+    border-radius: 2px;
+}
+.veilarbportefoljeflatefs .filtrering-navn-fnr {
+    width: 100%;
+    max-width: 50%;
+    min-width: 16rem;
+    margin: 0.5rem 5% 0.5rem 0;
+}

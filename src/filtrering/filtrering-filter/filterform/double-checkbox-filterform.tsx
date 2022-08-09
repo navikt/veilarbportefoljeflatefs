@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
-import './filterform.less';
+import './filterform.css';
 import classNames from 'classnames';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';

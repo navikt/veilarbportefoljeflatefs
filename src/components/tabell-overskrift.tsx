@@ -2,7 +2,7 @@ import React from 'react';
 import {tekstValgteBrukere} from '../utils/tekst-utils';
 import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
-import './tabell-overskrift.less';
+import './tabell-overskrift.css';
 import classNames from 'classnames';
 import {Label} from '@navikt/ds-react';
 
