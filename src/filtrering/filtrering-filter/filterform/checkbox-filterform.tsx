@@ -6,6 +6,7 @@ import './filterform.css';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert, Tooltip, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import { kebabCase } from "../../../utils/utils";
 
 interface CheckboxFilterformProps {
     form: string;
@@ -64,13 +65,13 @@ function CheckboxFilterform({
                                     maxChar={999}
                                     key={`tooltip-${filterKey}`}
                                 >
-                                    <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
+                                    <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox} data-testid={`filter_${filterKey}`}>
                                         {filterValue}
                                     </Checkbox>
 
                                 </Tooltip>
                             ) : (
-                              <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox}>
+                              <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox} data-testid={`filter_${filterKey}`}>
                                   {filterValue}
                               </Checkbox>
                             )
