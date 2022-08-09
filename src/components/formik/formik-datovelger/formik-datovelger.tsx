@@ -3,10 +3,9 @@ import {Field, FieldProps, getIn} from 'formik';
 import {Datepicker} from 'nav-datovelger';
 import {validerDatoFeldt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
-import './daypicker.css';
+import 'nav-datovelger/lib/styles/main.css';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import {Label} from '@navikt/ds-react';
-import './nav-datovelger.css';
 
 interface FormikDatepickerProps {
     name: string;
