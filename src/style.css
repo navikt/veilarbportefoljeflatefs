@@ -614,7 +614,7 @@ body .invisible {
   visibility: hidden;
 }
 body .text-hide {
-  font: 0/0 a;
+  font: 0px/0 a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
@@ -970,7 +970,7 @@ GRID
   margin-left: 8.33333333%;
 }
 .col-xs-offset-0 {
-  margin-left: 0%;
+  margin-left: 0;
 }
 @media (min-width: 768px) {
   .col-sm-1,
@@ -1138,7 +1138,7 @@ GRID
     margin-left: 8.33333333%;
   }
   .col-sm-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
   }
 }
 @media (min-width: 992px) {
@@ -1307,7 +1307,7 @@ GRID
     margin-left: 8.33333333%;
   }
   .col-md-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
   }
 }
 @media (min-width: 1200px) {
@@ -1476,7 +1476,7 @@ GRID
     margin-left: 8.33333333%;
   }
   .col-lg-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
   }
 }
 .col,
@@ -1904,6 +1904,7 @@ GRID
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 10;
 }
 .veilarbportefoljeflatefs .oversikt-sideinnhold .sidebar {
   grid-row-start: 1;
