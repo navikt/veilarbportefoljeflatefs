@@ -1,24 +1,24 @@
 .veileder-gruppe {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .veileder-gruppe__rad {
-  display: flex;
-  justify-content: space-between;
-  min-height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    min-height: 3rem;
 }
 .veileder-gruppe__knapperad {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0.5rem 0;
 }
 .veileder-gruppe__gruppenavn {
-  align-self: center;
+    align-self: center;
 }
 .veiledergruppe-emptystate {
-  text-align: left;
+    text-align: left;
 }
 .veiledergruppe-emptystate__tekst {
-  font-style: italic;
-  margin: 0.5rem 0;
+    font-style: italic;
+    margin: 0.5rem 0;
 }

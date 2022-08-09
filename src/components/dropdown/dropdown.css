@@ -1,118 +1,118 @@
 .veilarbportefoljeflatefs .dropdown {
-  position: relative;
-  margin-bottom: 0.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
 }
 .veilarbportefoljeflatefs .dropdown__btnwrapper {
-  width: 100%;
-  position: relative;
-  display: inline-block;
+    width: 100%;
+    position: relative;
+    display: inline-block;
 }
 .veilarbportefoljeflatefs .dropdown__btnwrapper:before {
-  pointer-events: none;
-  content: '';
-  background: currentColor;
-  height: 2px;
-  width: 10px;
-  border-radius: 10px;
-  right: 0.75rem;
-  top: 1.3rem;
-  position: absolute;
-  transition: transform 0.2s;
-  transform: translateX(3px) rotate(-45deg);
+    pointer-events: none;
+    content: '';
+    background: currentColor;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 1.3rem;
+    position: absolute;
+    transition: transform 0.2s;
+    transform: translateX(3px) rotate(-45deg);
 }
 .veilarbportefoljeflatefs .dropdown__btnwrapper:after {
-  pointer-events: none;
-  content: '';
-  background: currentColor;
-  height: 2px;
-  width: 10px;
-  border-radius: 10px;
-  right: 0.75rem;
-  top: 1.3rem;
-  position: absolute;
-  transition: transform 0.2s;
-  transform: translateX(-3px) rotate(45deg);
+    pointer-events: none;
+    content: '';
+    background: currentColor;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 1.3rem;
+    position: absolute;
+    transition: transform 0.2s;
+    transform: translateX(-3px) rotate(45deg);
 }
 .veilarbportefoljeflatefs .dropdown__btnwrapper--disabled {
-  color: #c9c9c9;
+    color: #c9c9c9;
 }
 .veilarbportefoljeflatefs .dropdown__btn {
-  text-align: left;
-  width: 100%;
-  padding: 0.45rem 1.5em 0.45rem 0.45rem;
-  background: #fff;
-  border: 1px solid #6a6a6a;
-  border-radius: 2px;
-  color: #000000;
+    text-align: left;
+    width: 100%;
+    padding: 0.45rem 1.5em 0.45rem 0.45rem;
+    background: #fff;
+    border: 1px solid #6a6a6a;
+    border-radius: 2px;
+    color: #000000;
 }
 .veilarbportefoljeflatefs .dropdown__btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px #00347d;
+    outline: none;
+    box-shadow: 0 0 0 3px #00347d;
 }
 .veilarbportefoljeflatefs .dropdown__btn:disabled {
-  color: #c9c9c9;
+    color: #c9c9c9;
 }
 .veilarbportefoljeflatefs .dropdown__innhold {
-  position: absolute;
-  z-index: 2000;
-  border: 1px solid #a0a0a0;
-  top: calc(100% - 1px);
-  background-color: #fff;
-  border-radius: 0 0 2px 2px;
-  width: 100%;
-  margin-bottom: 2rem;
+    position: absolute;
+    z-index: 2000;
+    border: 1px solid #a0a0a0;
+    top: calc(100% - 1px);
+    background-color: #fff;
+    border-radius: 0 0 2px 2px;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 .veilarbportefoljeflatefs .dropdown .hoyre {
-  margin-left: -30%;
+    margin-left: -30%;
 }
 .veilarbportefoljeflatefs .dropdown:hover .dropdown__btn,
 .veilarbportefoljeflatefs .dropdown:hover .dropdown__innhold {
-  border-color: #0067c5;
+    border-color: #0067c5;
 }
 .veilarbportefoljeflatefs .dropdown--apen {
-  margin-bottom: -0.05rem;
-  border-bottom: none;
+    margin-bottom: -0.05rem;
+    border-bottom: none;
 }
 .veilarbportefoljeflatefs .dropdown--apen .dropdown__btnwrapper:before {
-  pointer-events: none;
-  content: '';
-  background: currentColor;
-  height: 2px;
-  width: 10px;
-  border-radius: 10px;
-  right: 0.75rem;
-  top: 1.3rem;
-  position: absolute;
-  transition: transform 0.2s;
-  transform: translateX(3px) rotate(45deg);
-  z-index: 2000;
+    pointer-events: none;
+    content: '';
+    background: currentColor;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 1.3rem;
+    position: absolute;
+    transition: transform 0.2s;
+    transform: translateX(3px) rotate(45deg);
+    z-index: 2000;
 }
 .veilarbportefoljeflatefs .dropdown--apen .dropdown__btnwrapper:after {
-  pointer-events: none;
-  content: '';
-  background: currentColor;
-  height: 2px;
-  width: 10px;
-  border-radius: 10px;
-  right: 0.75rem;
-  top: 1.3rem;
-  position: absolute;
-  transition: transform 0.2s;
-  transform: translateX(-3px) rotate(-45deg);
-  z-index: 2000;
+    pointer-events: none;
+    content: '';
+    background: currentColor;
+    height: 2px;
+    width: 10px;
+    border-radius: 10px;
+    right: 0.75rem;
+    top: 1.3rem;
+    position: absolute;
+    transition: transform 0.2s;
+    transform: translateX(-3px) rotate(-45deg);
+    z-index: 2000;
 }
 .veilarbportefoljeflatefs .dropdown--apen .dropdown__btn {
-  position: relative;
-  z-index: 120;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 1rem;
+    position: relative;
+    z-index: 120;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1rem;
 }
 .veilarbportefoljeflatefs .dropdown--alignright .dropdown__innhold {
-  right: 0;
-  border-radius: 2px 0 2px 2px;
+    right: 0;
+    border-radius: 2px 0 2px 2px;
 }
 .veilarbportefoljeflatefs .dropdown .knapperad {
-  padding: 0;
+    padding: 0;
 }

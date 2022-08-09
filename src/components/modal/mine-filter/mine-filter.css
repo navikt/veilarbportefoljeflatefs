@@ -1,54 +1,54 @@
 .mine-filter-meny-modal {
-  width: 30rem;
-  padding: 1rem;
+    width: 30rem;
+    padding: 1rem;
 }
 .mine-filter-meny-modal__wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  margin: 0.5rem 0;
-  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    text-align: center;
 }
 .mine-filter-meny-modal__wrapper .ny-knapp {
-  margin-right: 0;
-  margin-bottom: 2rem;
+    margin-right: 0;
+    margin-bottom: 2rem;
 }
 .mine-filter-meny-modal__wrapper .tekst {
-  font-size: 17px;
+    font-size: 17px;
 }
 .mine-filter-meny-modal__wrapper .eksisterende-knapp {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 .mine-filter-meny-modal .fnr-feil {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 .mine-filter-meny-modal .typo-normal {
-  word-break: break-word;
+    word-break: break-word;
 }
 .lagret-filter-knapp-wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 0;
 }
 .feil-tiltak_modal {
-  width: 30rem;
-  padding: 1rem;
+    width: 30rem;
+    padding: 1rem;
 }
 .feil-tiltak_modal .knappegruppe {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0 0;
-  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 0;
+    text-align: center;
 }
 .feil-tiltak_modal .knappegruppe button {
-  width: 10rem;
+    width: 10rem;
 }
 .varsel-modal__innhold {
-  text-align: center;
+    text-align: center;
 }
 .varsel-modal__innhold .error-knapp {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 .varsel-modal__innhold .typo-normal {
-  word-break: break-word;
+    word-break: break-word;
 }

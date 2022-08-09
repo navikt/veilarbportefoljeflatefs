@@ -1,4 +1,4 @@
 .veilarbportefoljeflatefs .grid {
-  display: grid;
-  display: -ms-grid;
+    display: grid;
+    display: -ms-grid;
 }
