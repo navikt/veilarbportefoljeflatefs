@@ -1,29 +1,30 @@
 .veilarbportefoljeflatefs .til-toppen-knapp {
-  right: 2rem;
-  bottom: 2rem;
-  box-shadow: inset 0 0 0 2px var(--navds-button-color-secondary-border), 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.05);
-  opacity: 1;
-  background-color: white;
-  transition: all 0.75s ease;
-  transform: translateY(0);
+    right: 2rem;
+    bottom: 2rem;
+    box-shadow: inset 0 0 0 2px var(--navds-button-color-secondary-border), 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0px 2px 4px -2px rgba(0, 0, 0, 0.05);
+    opacity: 1;
+    background-color: white;
+    transition: all 0.75s ease;
+    transform: translateY(0);
 }
 .veilarbportefoljeflatefs .til-toppen-knapp.knapp {
-  position: fixed;
+    position: fixed;
 }
 .veilarbportefoljeflatefs .til-toppen-knapp.knapp:hover {
-  background-color: #0074df;
+    background-color: #0074df;
 }
 .veilarbportefoljeflatefs .til-toppen-knapp--skjul {
-  opacity: 0;
-  transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
 }
 .veilarbportefoljeflatefs .til-toppen-knapp--skjul:hover {
-  cursor: unset;
+    cursor: unset;
 }
 .veilarbportefoljeflatefs .til-toppen-knapp svg {
-  width: 22px;
-  height: 24px;
+    width: 22px;
+    height: 24px;
 }
 .veilarbportefoljeflatefs .til-toppen-knapp:focus {
-  fill: #0074df;
+    fill: #0074df;
 }

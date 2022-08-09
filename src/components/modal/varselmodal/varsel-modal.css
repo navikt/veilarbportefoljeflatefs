@@ -1,30 +1,30 @@
 .varsel-modal {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1rem !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem !important;
 }
 .varsel-modal__ikon {
-  align-items: center;
+    align-items: center;
 }
 .varsel-modal__ikon svg {
-  width: 4rem;
-  height: auto;
+    width: 4rem;
+    height: auto;
 }
 .varsel-modal__ikon .warning-icon {
-  color: #ff9100;
+    color: #ff9100;
 }
 .varsel-modal__ikon .error-icon {
-  color: #ba3a26;
+    color: #ba3a26;
 }
 .varsel-modal__ikon .success-icon {
-  color: green;
+    color: green;
 }
 .varsel-modal .bekreft-sletting-modal__tekstgruppe {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 .varsel-modal .bekreft-sletting-modal__knappegruppe {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
