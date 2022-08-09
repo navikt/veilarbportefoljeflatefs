@@ -6,7 +6,7 @@ import {leggTilStatustall} from '../../../ducks/statustall';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Button, Label} from '@navikt/ds-react';
 

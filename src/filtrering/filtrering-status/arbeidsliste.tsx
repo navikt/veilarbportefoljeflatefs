@@ -1,7 +1,7 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';

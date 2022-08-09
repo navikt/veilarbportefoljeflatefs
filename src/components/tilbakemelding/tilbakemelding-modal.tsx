@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import './tilbakemelding-modal.less';
+import './tilbakemelding-modal.css';
 import {useState} from 'react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
 import TilfredshetValg from './tilfredshet-valg';

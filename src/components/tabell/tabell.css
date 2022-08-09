@@ -1,0 +1,14 @@
+.veilarbportefoljeflatefs .sorteringheader {
+    display: grid;
+    grid-template-columns: fit-content(100%) auto;
+}
+.veilarbportefoljeflatefs .sorteringheader__lenke {
+    grid-column: 1;
+}
+.veilarbportefoljeflatefs .sorteringheader__pil {
+    width: 1rem;
+    height: 1rem;
+    grid-column: 2;
+    float: left;
+    margin: 2px 0 0 2px;
+}

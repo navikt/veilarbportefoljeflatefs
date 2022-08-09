@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
-import './til-toppen-knapp.less';
+import './til-toppen-knapp.css';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {Up} from '@navikt/ds-icons';

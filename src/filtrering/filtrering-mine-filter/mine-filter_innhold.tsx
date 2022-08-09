@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
-import './mine-filter_innhold.less';
-import '../../components/sidebar/sidebar.less';
+import './mine-filter_innhold.css';
+import '../../components/sidebar/sidebar.css';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';

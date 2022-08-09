@@ -5,8 +5,8 @@ import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interface
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {useLayoutEffect} from 'react';
-import './enhetsportefolje.less';
-import './brukerliste.less';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';

@@ -1,6 +1,6 @@
 import React, {ChangeEventHandler} from 'react';
 import {mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
-import './bar.less';
+import './bar.css';
 import {Label} from '@navikt/ds-react';
 
 interface BarInputCheckboxProps {

@@ -34,7 +34,7 @@ import {
     toDateString
 } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import './minoversikt.less';
+import './minoversikt.css';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';

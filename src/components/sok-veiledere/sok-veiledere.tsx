@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import '../../filtrering/filtrering-filter/filterform/filterform.less';
-import '../../style.less';
+import '../../filtrering/filtrering-filter/filterform/filterform.css';
+import '../../style.css';
 import SokFilter from './sok-filter';
 import {Button} from '@navikt/ds-react';
 import {Checkbox} from 'nav-frontend-skjema';

@@ -20,12 +20,12 @@ import {
 } from '../filter-konstanter';
 import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
-import './filterform/filterform.less';
+import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
-import '../filtrering-skjema.less';
-import '../../components/sidebar/sidebar.less';
+import '../filtrering-skjema.css';
+import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';

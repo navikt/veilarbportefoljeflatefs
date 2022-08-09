@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
-import './tabell.less';
+import './tabell.css';
 import {OrNothing} from '../../utils/types/types';
 import {Down, Up} from '@navikt/ds-icons';
 import {BodyShort, Button} from '@navikt/ds-react';

@@ -1,6 +1,6 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import './veiledergruppe-modal.less';
+import './veiledergruppe-modal.css';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {

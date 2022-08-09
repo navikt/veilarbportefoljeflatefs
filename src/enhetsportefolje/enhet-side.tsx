@@ -6,8 +6,8 @@ import TabellOverskrift from '../components/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import EnhetTabell from './enhetsportefolje-tabell';
 import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
-import './enhetsportefolje.less';
-import './brukerliste.less';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 import ToppMeny from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
@@ -20,7 +20,7 @@ import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import '../style.less';
+import '../style.css';
 import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
@@ -70,15 +70,8 @@ const id = 'enhetens-oversikt';
 
 export default function EnhetSide() {
     const statustall = useFetchStatusTall();
-    const {
-        portefolje,
-        filtervalg,
-        enhetId,
-        sorteringsrekkefolge,
-        sorteringsfelt,
-        enhettiltak,
-        listevisning
-    } = usePortefoljeSelector(oversiktType);
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
+        usePortefoljeSelector(oversiktType);
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =

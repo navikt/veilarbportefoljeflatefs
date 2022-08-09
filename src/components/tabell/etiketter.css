@@ -1,0 +1,11 @@
+.veilarbportefoljeflatefs .brukerliste__gutter-right .etikett {
+    text-align: center;
+    padding: 0.125rem 0.5rem;
+    margin: 0.125rem;
+    width: auto;
+}
+.veilarbportefoljeflatefs .brukerliste__gutter-right .etikett--doed {
+    border-color: #262626;
+    background-color: #4f4f4f;
+    color: #fff;
+}

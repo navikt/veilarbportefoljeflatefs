@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../filtrering/filtrering-skjema.less';
+import '../filtrering/filtrering-skjema.css';
 import {HelpText, Label} from '@navikt/ds-react';
 
 interface OverskriftMedHjelpeTekstProps {

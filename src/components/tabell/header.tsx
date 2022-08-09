@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import './tabell.less';
+import './tabell.css';
 import {BodyShort} from '@navikt/ds-react';
 
 export interface HeaderProps {
