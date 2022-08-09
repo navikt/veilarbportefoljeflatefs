@@ -1,5 +1,5 @@
 import React from 'react';
-import '../filterform.less';
+import '../filterform.css';
 import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Button} from '@navikt/ds-react';

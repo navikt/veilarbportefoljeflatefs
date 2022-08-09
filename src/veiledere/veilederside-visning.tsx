@@ -7,7 +7,7 @@ import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
-import './veiledere.less';
+import './veiledere.css';
 import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
 

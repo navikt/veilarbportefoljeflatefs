@@ -9,7 +9,7 @@ import {OrNothing} from '../utils/types/types';
 import {VeilederModell} from '../model-interfaces';
 import {useOnUnmount} from '../hooks/use-on-unmount';
 import {updateLastPath} from '../utils/url-utils';
-import './minoversikt.less';
+import './minoversikt.css';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';

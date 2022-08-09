@@ -1,0 +1,22 @@
+.veilarbportefoljeflatefs .timed-toast {
+    grid-column: 3;
+    width: fit-content;
+    z-index: 10;
+    margin: auto 0 1.7rem auto;
+}
+.veilarbportefoljeflatefs .timed-toast:focus {
+    border-radius: 4px;
+    box-shadow: 0 0 0 3px #00347d;
+    outline: none;
+}
+.veilarbportefoljeflatefs .timed-toast__alertstripe {
+    padding: 0.3rem 0.5rem;
+}
+.veilarbportefoljeflatefs .timed-toast__tekst {
+    color: black;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.2rem;
+}

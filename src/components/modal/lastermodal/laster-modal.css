@@ -1,0 +1,12 @@
+.veilarbportefoljeflatefs-laster-modal {
+    overflow: hidden !important;
+    width: auto !important;
+}
+.veilarbportefoljeflatefs-laster-modal .modal {
+    outline: none;
+    height: 4.2rem;
+}
+.veilarbportefoljeflatefs-laster-modal .modal svg {
+    align-self: auto;
+    margin: 0 auto;
+}

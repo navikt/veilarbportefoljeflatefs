@@ -10,7 +10,7 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
-import './minoversikt.less';
+import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';

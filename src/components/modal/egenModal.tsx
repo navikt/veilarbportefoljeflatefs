@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalHeader from './modal-header';
-import './modal.less';
+import './modal.css';
 import {Modal} from '@navikt/ds-react';
 
 interface ModalProps {

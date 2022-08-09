@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './modal/feilmelding-brukere.less';
+import './modal/feilmelding-brukere.css';
 import {Alert, Heading} from '@navikt/ds-react';
 import BlockContent from '@sanity/block-content-to-react';
 import {useSystemmeldingerSelector} from '../hooks/redux/use-systemmeldinger';

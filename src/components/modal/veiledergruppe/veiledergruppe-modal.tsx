@@ -10,7 +10,7 @@ import VeiledergruppeForm from './veiledergruppe-form';
 import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import './veiledergruppe-modal.less';
+import './veiledergruppe-modal.css';
 import ModalHeader from '../modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {Alert, Button, Modal} from '@navikt/ds-react';

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSide, selectSidestorrelse} from './paginering-selector';
-import './paginering.less';
+import './paginering.css';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 import {Pagination} from '@navikt/ds-react';

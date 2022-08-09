@@ -1,0 +1,67 @@
+.arbeidslistekategori {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+}
+.arbeidslistekategori .skjemaelement__label {
+    grid-row: 1;
+}
+.arbeidslistekategori__container {
+    grid-row: 2;
+    justify-self: left;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+.arbeidslistekategori__container label {
+    position: relative;
+    cursor: pointer;
+    padding: 1rem 0.5rem 0.2rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.arbeidslistekategori__container label:hover {
+    border: 1px solid #6a6a6a;
+}
+.arbeidslistekategori__container label::before,
+.arbeidslistekategori__container label::after {
+    position: absolute;
+}
+.arbeidslistekategori__container svg {
+    height: 25px;
+    width: auto;
+}
+.arbeidslistekategori__container label::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 0.2rem;
+}
+.arbeidslistekategori__container label::after {
+    content: '';
+    padding: 0.2rem;
+    left: 0;
+    top: 0;
+}
+.arbeidslistekategori__container input[type='radio'] + svg {
+    cursor: pointer;
+    padding: 0.2rem;
+}
+.arbeidslistekategori__container input[type='radio'] {
+    opacity: 0;
+    appearance: none;
+}
+.arbeidslistekategori__container input[type='radio'] + label::after {
+    content: none;
+}
+.arbeidslistekategori__container input[type='radio']:checked + label {
+    border: 1px solid #4f4f4f;
+}
+.arbeidslistekategori__container input[type='radio']:checked + label::after {
+    content: '';
+}
+.arbeidslistekategori__container input[type='radio']:focus + label::before {
+    outline: none;
+    box-shadow: 0 0 0 3px #00347d;
+}

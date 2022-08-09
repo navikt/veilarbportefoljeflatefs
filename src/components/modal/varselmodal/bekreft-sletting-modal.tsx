@@ -2,7 +2,7 @@ import React from 'react';
 import {VarselModal, VarselModalType} from './varselmodal';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
-import './varsel-modal.less';
+import './varsel-modal.css';
 
 interface BekreftSlettingModalProps {
     isOpen: boolean;

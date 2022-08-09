@@ -5,7 +5,7 @@ import {
     useSidebarViewStore
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
-import './sidebar.less';
+import './sidebar.css';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
 import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
 import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
