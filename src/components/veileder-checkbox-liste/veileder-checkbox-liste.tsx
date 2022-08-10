@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
-import './veileder-checkbox-liste.less';
+import './veileder-checkbox-liste.css';
 import {AppState} from '../../reducer';
 import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';

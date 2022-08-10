@@ -1,0 +1,23 @@
+.veilarbportefoljeflatefs .filter-checkboks-container {
+    padding-top: 1rem;
+    padding-left: 0.25rem;
+}
+.veilarbportefoljeflatefs .permittering_checkboksgruppe {
+    border-top: 1px solid #6a6a6a;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+.veilarbportefoljeflatefs .permittering_checkboksgruppe .hjelpetekst__wrapper {
+    display: grid;
+    grid-template-columns: auto fit-content(100%);
+}
+.veilarbportefoljeflatefs .permittering_checkboksgruppe .hjelpetekst__innhold {
+    max-width: 40rem;
+}
+.veilarbportefoljeflatefs .permittering_checkboksgruppe .hjelpetekst {
+    grid-column: 2;
+}
+.veilarbportefoljeflatefs .filtrering-skillelinje {
+    padding-top: 1rem;
+    border-top: 1px solid #6a6a6a;
+}

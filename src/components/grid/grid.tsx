@@ -1,5 +1,5 @@
 import React from 'react';
-import './grid.less';
+import './grid.css';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     columns: number;

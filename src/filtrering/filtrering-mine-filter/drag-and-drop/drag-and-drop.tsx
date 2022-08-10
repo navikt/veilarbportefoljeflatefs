@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './drag-and-drop.less';
+import './drag-and-drop.css';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import MineFilterRad from '../mine-filter-rad';

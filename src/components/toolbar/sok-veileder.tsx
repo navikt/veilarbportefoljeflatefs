@@ -7,7 +7,7 @@ import {FiltervalgModell} from '../../model-interfaces';
 import {VeiledereState} from '../../ducks/veiledere';
 import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
-import './toolbar.less';
+import './toolbar.css';
 import {OversiktType} from '../../ducks/ui/listevisning';
 
 interface SokVeilederProps {

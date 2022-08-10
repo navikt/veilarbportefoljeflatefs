@@ -1,6 +1,6 @@
 import portefolje from './portefolje';
 
-export default {
+const statustall = {
     totalt: portefolje.length,
     ufordelteBrukere: 2032,
     nyeBrukereForVeileder: 15,
@@ -20,3 +20,5 @@ export default {
     moterMedNAVIdag: 40,
     underVurdering: 14
 };
+
+export default statustall;

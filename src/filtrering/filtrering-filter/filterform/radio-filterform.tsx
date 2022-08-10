@@ -1,5 +1,5 @@
 import React from 'react';
-import './filterform.less';
+import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../model-interfaces';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';

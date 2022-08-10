@@ -1,5 +1,5 @@
 import {rnd, MOCK_CONFIG} from './utils';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -10,8 +10,8 @@ export function lagTilfeldigVeilederId() {
 function lagVeileder() {
     const ident = lagTilfeldigVeilederId();
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const fornavn = faker.name.firstName(kjonn === 'K' ? 1 : 0);
-    const etternavn = faker.name.lastName(kjonn === 'K' ? 1 : 0);
+    const fornavn = faker.name.firstName(kjonn === 'K' ? 'female' : 'male');
+    const etternavn = faker.name.lastName(kjonn === 'K' ? 'female' : 'male');
     const navn = etternavn + ', ' + fornavn;
     return {
         ident,
@@ -21,10 +21,22 @@ function lagVeileder() {
     };
 }
 
-export const veiledere = new Array(40).fill(0).map(() => lagVeileder());
+function lagVeiledere() {
+    const veiledere = new Array(40).fill(0).map(() => lagVeileder());
+    veiledere.push({
+        ident: lagTilfeldigVeilederId(),
+        navn: 'Testesen, Testias',
+        fornavn: 'Testias',
+        etternavn: 'Testesen'
+    });
+
+    return veiledere;
+}
+
+export const veiledere = lagVeiledere();
 export const innloggetVeileder = veiledere[0];
 
-export default {
+export const veilederResponse = {
     veilederListe: veiledere,
     enhet: {enhetId: '1234', navn: 'NAV Testheim'}
 };

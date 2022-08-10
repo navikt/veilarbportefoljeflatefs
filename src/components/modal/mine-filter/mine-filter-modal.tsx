@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import './mine-filter.less';
+import './mine-filter.css';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
 import {OrNothing} from '../../../utils/types/types';

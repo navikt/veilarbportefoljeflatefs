@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {MouseEvent} from 'react';
 import classnames from 'classnames';
-import './tabell.less';
-import '../../enhetsportefolje/brukerliste.less';
+import './tabell.css';
+import '../../enhetsportefolje/brukerliste.css';
 import {Button} from '@navikt/ds-react';
 import {Collapse, Expand} from '@navikt/ds-icons';
 
@@ -14,8 +14,8 @@ interface ArbeidslisteButtonProps {
     dataTestid: string;
 }
 
-const arbeidslisteButton = ({className, onClick, apen, dataTestid}: ArbeidslisteButtonProps) => {
-    return (
+const arbeidslisteButton = ({className, onClick, apen, dataTestid, skalVises}: ArbeidslisteButtonProps) =>
+    skalVises ? (
         <Button
             variant="tertiary"
             className={classnames('knapp brukerliste__arbeidslisteknapp', className)}
@@ -26,8 +26,8 @@ const arbeidslisteButton = ({className, onClick, apen, dataTestid}: Arbeidsliste
         >
             {apen ? <Collapse className="collapse" /> : <Expand className="expand" />}
         </Button>
+    ) : (
+        <div className="brukerliste__arbeidslisteknapp" />
     );
-};
 
-export default (props: ArbeidslisteButtonProps) =>
-    props.skalVises ? arbeidslisteButton(props) : <div className="brukerliste__arbeidslisteknapp" />;
+export default arbeidslisteButton;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './knapper.less';
+import './knapper.css';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {AddCircle} from '@navikt/ds-icons';
 

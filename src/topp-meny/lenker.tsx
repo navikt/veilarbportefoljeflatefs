@@ -4,10 +4,11 @@ import {useParams} from 'react-router';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
+import {IdentParam} from '../model-interfaces';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
-    const {ident} = useParams();
+    const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
 

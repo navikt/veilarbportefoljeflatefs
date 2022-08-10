@@ -5,7 +5,7 @@ import {tildelVeileder} from '../../../ducks/portefolje';
 import {VeilederModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
 import {Radio} from 'nav-frontend-skjema';
-import '../../toolbar/toolbar.less';
+import '../../toolbar/toolbar.css';
 import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';

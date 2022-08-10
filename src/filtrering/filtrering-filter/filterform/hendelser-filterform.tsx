@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
-import './filterform.less';
+import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';

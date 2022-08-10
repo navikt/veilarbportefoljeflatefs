@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import './veiledere.less';
+import './veiledere.css';
 import {Down, Up} from '@navikt/ds-icons';
 import {BodyShort, Button} from '@navikt/ds-react';
 

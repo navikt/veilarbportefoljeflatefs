@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {STATUS} from '../../ducks/utils';
-import './mine-filter_innhold.less';
+import './mine-filter_innhold.css';
 import MineFilterInnhold from './mine-filter_innhold';
 import {HandlingsType, LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';

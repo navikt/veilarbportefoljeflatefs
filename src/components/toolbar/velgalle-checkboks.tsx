@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {markerAlleBrukere} from '../../ducks/portefolje';
-import './toolbar.less';
+import './toolbar.css';
 import {Checkbox} from 'nav-frontend-skjema';
 
 interface VelgalleCheckboksProps {

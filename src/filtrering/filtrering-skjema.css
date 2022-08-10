@@ -1,0 +1,22 @@
+.veilarbportefoljeflatefs .skjemaelement--innrykk {
+    margin-left: 1.25rem;
+}
+.veilarbportefoljeflatefs .dropdown--fixed .dropdown__innhold {
+    border-top-right-radius: 2px;
+}
+.veilarbportefoljeflatefs .filtrering--overskrift-med-hjelpetekst {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.veilarbportefoljeflatefs .filtrering-navn-sok {
+    display: flex;
+}
+.veilarbportefoljeflatefs .sok-knapp {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 2.44rem;
+}
+.veilarbportefoljeflatefs .hendelser__content {
+    padding: 0 0.5rem 1rem;
+}

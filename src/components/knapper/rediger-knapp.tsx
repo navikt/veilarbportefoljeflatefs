@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import hiddenIf from '../hidden-if/hidden-if';
-import './knapper.less';
+import './knapper.css';
 import {Edit, EditFilled} from '@navikt/ds-icons';
 import {Button} from '@navikt/ds-react';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
-import './minoversikt.less';
+import './minoversikt.css';
 import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
