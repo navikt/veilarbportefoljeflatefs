@@ -11,11 +11,9 @@ describe('Date utils', () => {
             expect(nesteUtlopsdato.toUTCString()).toBe(new Date(nesteDatoString).toUTCString());
         });
         it('skal returnere null om ingen datoer finnes', () => {
-            // eslint-disable-next-line no-unused-expressions
             expect(!!nesteUtlopsdatoEllerNull({})).toBeFalsy();
         });
         it('skal returnere null dersom dato er null', () => {
-            // eslint-disable-next-line no-unused-expressions
             expect(!!nesteUtlopsdatoEllerNull({a: null})).toBeFalsy();
         });
         it('skal returnere nyeste dato dersom én er null', () => {

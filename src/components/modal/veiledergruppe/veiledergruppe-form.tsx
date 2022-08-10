@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
-import './veiledergruppe-modal.less';
+import './veiledergruppe-modal.css';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 import {BodyShort, TextField} from '@navikt/ds-react';
 

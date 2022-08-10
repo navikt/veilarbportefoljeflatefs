@@ -7,7 +7,7 @@ import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
-import './veiledere.less';
+import './veiledere.css';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSidestorrelseFromUrl, getSideFromUrl} from '../utils/url-utils';

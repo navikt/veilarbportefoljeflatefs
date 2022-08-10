@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
-import './filterform.less';
+import './filterform.css';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert} from '@navikt/ds-react';
 

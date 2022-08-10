@@ -1,5 +1,5 @@
 function read(scope) {
-    const content = localStorage.getItem(scope); // eslint-disable-line no-undef
+    const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return undefined;
     }
@@ -7,11 +7,11 @@ function read(scope) {
 }
 
 function write(scope, content) {
-    return localStorage.setItem(scope, JSON.stringify(content)); // eslint-disable-line no-undef
+    return localStorage.setItem(scope, JSON.stringify(content));
 }
 
 function erFiltreringEndret(scope, initialState) {
-    const content = localStorage.getItem(scope); // eslint-disable-line no-undef
+    const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return true;
     }
@@ -24,20 +24,22 @@ function erFiltreringEndret(scope, initialState) {
     );
 }
 
-export default (scope, location, reducer, initialFilterstate) => (state, action) => {
-    let nState = state;
-    if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
-        write(scope, undefined);
-    }
-    if (state === undefined) {
-        nState = read(scope);
-    }
+export default function persistentReducer(scope, location, reducer, initialFilterstate) {
+    return (state, action) => {
+        let nState = state;
+        if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
+            write(scope, undefined);
+        }
+        if (state === undefined) {
+            nState = read(scope);
+        }
+        
+        const rState = reducer(nState, action);
+        
+        if (rState !== nState) {
+            write(scope, rState);
+        }
 
-    const rState = reducer(nState, action);
-
-    if (rState !== nState) {
-        write(scope, rState);
-    }
-
-    return rState;
+        return rState;
+    };
 };

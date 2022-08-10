@@ -11,7 +11,7 @@ import ArbeidslisteForm from './arbeidsliste-form';
 import {connect} from 'react-redux';
 import {skjulModal} from '../../../ducks/modal';
 import {dateToISODate} from '../../../utils/dato-utils';
-import './arbeidsliste.less';
+import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {BodyShort, Button} from '@navikt/ds-react';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';

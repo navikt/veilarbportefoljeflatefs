@@ -16,7 +16,7 @@ const gruppenavn = 'Voffvoff';
 const gruppenavnRedigert = 'Mjaumjau';
 const eksisterendeGruppenavn = 'Gruppen brukes til test la stå';
 const andersen = 'Andersen';
-const jonas = 'Jonas';
+const johansen = 'Johansen';
 const aasen = 'Aasen';
 const minstEnVeileder = 'Du må legge til veiledere.';
 let antallVeiledergrupper = 0;
@@ -334,7 +334,7 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('veiledergruppe_modal_sok-veileder-input')
             .clear()
-            .type(jonas);
+            .type(johansen);
 
         cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
             force: true
@@ -364,7 +364,7 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('filtrering_label-container')
             .children()
-            .contains(jonas);
+            .contains(johansen);
 
         cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
 

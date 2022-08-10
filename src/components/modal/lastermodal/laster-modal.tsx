@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './laster-modal.less';
+import './laster-modal.css';
 import {Loader, Modal} from '@navikt/ds-react';
 
 interface LasterModalProps {

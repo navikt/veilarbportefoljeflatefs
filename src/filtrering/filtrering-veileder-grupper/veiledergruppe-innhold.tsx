@@ -8,9 +8,9 @@ import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veilede
 import {FiltervalgModell} from '../../model-interfaces';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import '../../components/sidebar/sidebar.less';
-import './veiledergruppe.less';
-import '../filtrering-filter/filterform/filterform.less';
+import '../../components/sidebar/sidebar.css';
+import './veiledergruppe.css';
+import '../filtrering-filter/filterform/filterform.css';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {OversiktType} from '../../ducks/ui/listevisning';

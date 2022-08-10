@@ -75,11 +75,6 @@ spec:
           ],
           "proxies": [
             {
-              "fromPath": "/frontendlogger",
-              "toUrl": "https://frontendlogger.prod-fss-pub.nais.io",
-              "preserveFromPath": true
-            },
-            {
               "fromPath": "/veilarbportefolje",
               "toUrl": "https://veilarbportefolje.prod-fss-pub.nais.io",
               "preserveFromPath": true,

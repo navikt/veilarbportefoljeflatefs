@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import KnappPanel from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSide, selectSidestorrelse} from './paginering-selector';
-import './paginering.less';
+import './paginering.css';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 import {Pagination} from '@navikt/ds-react';
@@ -47,9 +47,8 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
                 onClick={() => endreSidestorrelse(alternativSidestorrelse)}
                 data-testid={viserDefaultAntall ? 'se-flere_knapp' : 'se-faerre_knapp'}
                 ariaLabel={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
-            >
-                {viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
-            </KnappPanel>
+                tekst={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
+            />
 
             <Pagination
                 page={side}

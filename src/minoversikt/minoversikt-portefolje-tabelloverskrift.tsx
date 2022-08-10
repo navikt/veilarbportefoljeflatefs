@@ -2,7 +2,7 @@ import React from 'react';
 import MinOversiktListehode from './minoversikt-listehode';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import './minoversikt.less';
+import './minoversikt.css';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: string;

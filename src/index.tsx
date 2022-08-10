@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
-import './style.less';
+import 'nav-frontend-chevron-style/dist/main.css';
+import 'nav-frontend-ekspanderbartpanel-style/dist/main.css';
+import 'nav-frontend-grid-style/dist/main.css';
+import 'nav-frontend-lenker-style/dist/main.css';
+import 'nav-frontend-lukknapp-style/dist/main.css';
+import 'nav-frontend-paneler-style/dist/main.css';
+import 'nav-frontend-skjema-style/dist/main.css';
+import 'nav-frontend-typografi-style/dist/main.css';
 import '@navikt/ds-css';
+import './style.css';
 
 if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill'); // tslint:disable-line
+    require('babel-polyfill');
 }
 
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
@@ -15,10 +23,10 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
 }
 
 if (process.env.REACT_APP_MOCK === 'true') {
-    console.log('=========================='); // tslint:disable-line
-    console.log('======== MED MOCK ========'); // tslint:disable-line
-    console.log('=========================='); // tslint:disable-line
-    require('./mocks'); // tslint:disable-line
+    console.log('==========================');
+    console.log('======== MED MOCK ========');
+    console.log('==========================');
+    require('./mocks');
 }
 
 ReactDOM.render(<Application />, document.getElementById('mainapp'));

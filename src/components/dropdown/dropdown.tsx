@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {useFocus} from '../../hooks/use-focus';
-import './dropdown.less';
+import './dropdown.css';
 import {BodyShort} from '@navikt/ds-react';
 
 const btnCls = (props: DropdownProps, apen: boolean) =>

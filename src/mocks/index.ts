@@ -1,13 +1,13 @@
 import innloggetVeileder from './innloggetVeileder';
 import me from './me';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
-import veiledere from './veiledere';
+import {veilederResponse} from './veiledere';
 import statustall from './statustall';
 import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
-import * as faker from 'faker/locale/nb_NO';
+import {faker} from '@faker-js/faker/locale/nb_NO';
 import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
 import {delayed, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
@@ -144,7 +144,7 @@ mock.post('https://poao-endringslogg.intern.nav.no/analytics/session-duration', 
 
 // veileder-api
 mock.get('/veilarbveileder/api/veileder/v2/me', jsonResponse(innloggetVeileder));
-mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veiledere));
+mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veilederResponse));
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
@@ -259,11 +259,11 @@ mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentS
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
-        console.log('MOCK WS: Tried to connect to: ' + uri); // tslint:disable-line
+        console.log('MOCK WS: Tried to connect to: ' + uri);
     }
 
-    addEventListener() {} // tslint:disable-line
-    close() {} // tslint:disable-line
+    addEventListener() {}
+    close() {}
 }
 
-(window as any).WebSocket = MockWebSocket; // tslint:disable-line
+(window as any).WebSocket = MockWebSocket;

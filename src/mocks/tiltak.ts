@@ -1,4 +1,4 @@
-export default {
+const tiltak = {
     tiltak: {
         VV: 'Varig vernet arbeid (VVA)',
         OPPLT2AAR: '2-årig opplæringstiltak',
@@ -36,3 +36,5 @@ export default {
         ENKELAMO: 'Enkeltplass AMO'
     }
 };
+
+export default tiltak;
