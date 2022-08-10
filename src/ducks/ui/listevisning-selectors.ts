@@ -154,7 +154,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             )
         )
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
-        .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt && !tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))

@@ -1,5 +1,5 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
-import {Maybe} from './types';
+import { AktiviteterModell, BrukerModell, FiltervalgModell } from "../model-interfaces";
+import { Maybe } from "./types";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -122,13 +122,22 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
 
 export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behovSpraak: string[] = [];
+    var leggTilSpraakInfo = false;
+    if (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')){
+        leggTilSpraakInfo = true;
+    }
+
     if (
         filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
         bruker.talespraaktolk !== undefined &&
         bruker.talespraaktolk !== null &&
         bruker.talespraaktolk.length > 0
     ) {
-        behovSpraak.push(bruker.talespraaktolk);
+        if (leggTilSpraakInfo){
+            behovSpraak.push(bruker.talespraaktolk +  " (Tale)");
+        }else{
+            behovSpraak.push(bruker.talespraaktolk);
+        }
     }
 
     if (
@@ -137,7 +146,11 @@ export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerMode
         bruker.tegnspraaktolk !== null &&
         bruker.tegnspraaktolk.length > 0
     ) {
-        behovSpraak.push(bruker.tegnspraaktolk);
+        if (leggTilSpraakInfo){
+            behovSpraak.push(bruker.tegnspraaktolk + " (Tegn)");
+        }else{
+            behovSpraak.push(bruker.tegnspraaktolk);
+        }
     }
 
     if (behovSpraak.length === 0) {
