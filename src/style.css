@@ -614,7 +614,7 @@ body .invisible {
     visibility: hidden;
 }
 body .text-hide {
-    font: 0/0 a;
+    font: 0px/0 a;
     color: transparent;
     text-shadow: none;
     background-color: transparent;

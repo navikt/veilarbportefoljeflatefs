@@ -5,3 +5,15 @@
 .ny-gruppe-knapp {
     margin: -2px 0;
 }
+.kopiknapp {
+    padding: 0.125rem 0.375rem 0.375rem;
+}
+.kopiknapp :hover {
+    box-shadow: none !important;
+}
+.kopiknapp svg {
+    position: relative;
+    top: 0.1rem;
+    height: 0.8rem;
+    width: 0.8rem;
+}
