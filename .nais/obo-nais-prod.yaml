@@ -69,7 +69,7 @@ spec:
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
-              "toUrl": "https://veilarbpersonflatefs.intern.nav.no",
+              "toUrl": "https://veilarbpersonflate.intern.nav.no",
               "preserveFromPath": false
             }
           ],
