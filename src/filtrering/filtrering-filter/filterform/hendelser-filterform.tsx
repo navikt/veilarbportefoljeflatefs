@@ -107,51 +107,45 @@ export function HendelserFilterform({
                 )}
 
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
-                    <div className="hendelser-filterform__radio-gruppe_flere">
-                        <RadioGroup legend="Siste aktivitet lagt til av bruker" value={hendelserValg} size="small">
-                            {lagtTilAvBruker.map(key => (
-                                <Radio
-                                    onChange={e => onRadioChange(e)}
-                                    name="sisteEndringKategori"
-                                    value={key}
-                                    key={key}
-                                    data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
-                                >
-                                    {hendelserLabels[key]}
-                                </Radio>
-                            ))}
-                        </RadioGroup>
-                    </div>
-                    <div className="hendelser-filterform__radio-gruppe_flere">
-                        <RadioGroup legend="Siste aktivitet fullført av bruker" value={hendelserValg} size="small">
-                            {fullfortAvBruker.map(key => (
-                                <Radio
-                                    onChange={e => onRadioChange(e)}
-                                    name="sisteEndringKategori"
-                                    value={key}
-                                    key={key}
-                                    data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
-                                >
-                                    {hendelserLabels[key]}
-                                </Radio>
-                            ))}
-                        </RadioGroup>
-                    </div>
-                    <div className="hendelser-filterform__radio-gruppe_flere">
-                        <RadioGroup legend="Siste aktivitet avbrutt av bruker" value={hendelserValg} size="small">
-                            {avbruttAvBruker.map(key => (
-                                <Radio
-                                    onChange={e => onRadioChange(e)}
-                                    name="sisteEndringKategori"
-                                    value={key}
-                                    key={key}
-                                    data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
-                                >
-                                    {hendelserLabels[key]}
-                                </Radio>
-                            ))}
-                        </RadioGroup>
-                    </div>
+                    <RadioGroup legend="Siste aktivitet lagt til av bruker" value={hendelserValg} size="small">
+                        {lagtTilAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                    <RadioGroup legend="Siste aktivitet fullført av bruker" value={hendelserValg} size="small">
+                        {fullfortAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                    <RadioGroup legend="Siste aktivitet avbrutt av bruker" value={hendelserValg} size="small">
+                        {avbruttAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
                     <RadioGroup legend="Andre" value={hendelserValg} size="small">
                         <Radio
                             onChange={e => onRadioChange(e)}
