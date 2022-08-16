@@ -4,7 +4,7 @@ import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../model-interfaces';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {OrNothing} from '../../../utils/types/types';
-import {Radio} from 'nav-frontend-skjema';
+import {Radio, RadioGroup} from '@navikt/ds-react';
 import Grid from '../../../components/grid/grid';
 
 interface ValgType {
@@ -32,20 +32,22 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
 
     return (
         <form className="skjema radio-filterform" data-testid="radio-filterform">
-            <Grid columns={gridColumns} className="radio-filterform__valg">
-                {Object.keys(valg).map(key => (
-                    <Radio
-                        key={key}
-                        label={valg[key].label}
-                        value={key}
-                        name={valg[key].label}
-                        className={valg[key].className}
-                        checked={valgtFilterValg === key}
-                        onChange={e => onChange(e)}
-                        data-testid={`radio-valg_${kebabCase(valg[key].label)}`}
-                    />
-                ))}
-            </Grid>
+            <RadioGroup legend="" value={valgtFilterValg} size="small">
+                <Grid columns={gridColumns} className="radio-filterform__valg">
+                    {Object.keys(valg).map(key => (
+                        <Radio
+                            key={key}
+                            value={key}
+                            name={valg[key].label}
+                            className={valg[key].className}
+                            onChange={v => onChange(v)}
+                            data-testid={`radio-valg_${kebabCase(valg[key].label)}`}
+                        >
+                            {valg[key].label}
+                        </Radio>
+                    ))}
+                </Grid>
+            </RadioGroup>
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
