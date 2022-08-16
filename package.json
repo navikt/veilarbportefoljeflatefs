@@ -118,7 +118,8 @@
         "typescript": "^3.9.7",
         "wait-on": "^5.2.1",
         "webpack-cli": "^4.9.2",
-        "y18n": "^5.0.6"
+        "y18n": "^5.0.6",
+        "react-multi-select-component": "4.3.2"
     },
     "eslintConfig": {
         "extends": "react-app"

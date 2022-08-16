@@ -1,20 +1,22 @@
-import * as React from 'react';
-import {useEffect} from 'react';
-import {connect, useDispatch} from 'react-redux';
-import FiltreringLabel from './filtrering-label';
+import * as React from "react";
+import { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import FiltreringLabel from "./filtrering-label";
 import FilterKonstanter, {
     aktiviteter,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
-} from './filter-konstanter';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import {pagineringSetup} from '../ducks/paginering';
-import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
-import {hentMineFilterForVeileder} from '../ducks/mine-filter';
+} from "./filter-konstanter";
+import { AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter } from "../ducks/filtrering";
+import { EnhetModell, FiltervalgModell } from "../model-interfaces";
+import { Kolonne, ListevisningState, OversiktType } from "../ducks/ui/listevisning";
+import { pagineringSetup } from "../ducks/paginering";
+import FiltreringLabelArbeidsliste from "./filtrering-label-arbeidsliste";
+import { hentMineFilterForVeileder } from "../ducks/mine-filter";
+import { hentFoedelandList } from "../ducks/foedeland";
+import { useFoedelandSelector } from "../hooks/redux/use-foedeland-selector";
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -63,7 +65,10 @@ function FiltreringLabelContainer({
 
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
+        dispatch(hentFoedelandList(enhettiltak.enhetId));
     }, [dispatch]);
+
+    const foedelandListData = useFoedelandSelector();
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
@@ -164,7 +169,21 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
-            } else if (Array.isArray(value)) {
+            }
+            else if (key === 'foedeland'){
+                return value.map(singleValue => {
+                    if (foedelandListData.get(singleValue) != null){
+                        return (
+                          <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={'Fødeland: ' + foedelandListData.get(singleValue)}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                          />
+                        );
+                    }
+                });
+            }
+            else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel

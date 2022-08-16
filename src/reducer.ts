@@ -1,34 +1,35 @@
-import {combineReducers} from 'redux';
-import persistent from './utils/persistentReducer';
-import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
-import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
-import pagineringReducer from './ducks/paginering';
-import sorteringReducer from './ducks/sortering';
-import veiledereReducer, {VeiledereState} from './ducks/veiledere';
-import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
-import filtreringReducer, {initialState} from './ducks/filtrering';
-import statustallReducer, {StatustallState} from './ducks/statustall';
-import systemmeldingerReducer, {SystemmeldingState} from './ducks/systemmeldinger';
-import modalReducer from './ducks/modal';
-import serverfeilModalReducer from './ducks/modal-serverfeil';
-import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import veiledergrupperLagretFilterReducer from './ducks/veiledergrupper_filter';
-import arbeidslisteReducer from './ducks/arbeidsliste';
-import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
+import { combineReducers } from "redux";
+import persistent from "./utils/persistentReducer";
+import valgtEnhetReducer, { ValgtEnhetState } from "./ducks/valgt-enhet";
+import portefoljeReducer, { PortefoljeState } from "./ducks/portefolje";
+import pagineringReducer from "./ducks/paginering";
+import sorteringReducer from "./ducks/sortering";
+import veiledereReducer, { VeiledereState } from "./ducks/veiledere";
+import portefoljestorrelserReducer, { PortefoljeStorrelser } from "./ducks/portefoljestorrelser";
+import filtreringReducer, { initialState } from "./ducks/filtrering";
+import statustallReducer, { StatustallState } from "./ducks/statustall";
+import systemmeldingerReducer, { SystemmeldingState } from "./ducks/systemmeldinger";
+import modalReducer from "./ducks/modal";
+import serverfeilModalReducer from "./ducks/modal-serverfeil";
+import feilmedlingModalReducer from "./ducks/modal-feilmelding-brukere";
+import veiledergrupperLagretFilterReducer from "./ducks/veiledergrupper_filter";
+import arbeidslisteReducer from "./ducks/arbeidsliste";
+import enhetTiltakReducer, { EnhettiltakState } from "./ducks/enhettiltak";
 import listevisningReducer, {
     initialStateEnhetensOversikt,
     initialStateMinOversikt,
     ListevisningState,
     OversiktType
-} from './ducks/ui/listevisning';
-import featuresReducer, {FeaturesState} from './ducks/features';
-import toastReducer, {ToastState} from './store/toast/reducer';
-import {FiltervalgModell} from './model-interfaces';
-import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
-import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
-import mineFilterReducer from './ducks/mine-filter';
-import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
-import {LagretFilterState} from './ducks/lagret-filter';
+} from "./ducks/ui/listevisning";
+import featuresReducer, { FeaturesState } from "./ducks/features";
+import toastReducer, { ToastState } from "./store/toast/reducer";
+import { FiltervalgModell } from "./model-interfaces";
+import innloggetVeilederReducer, { InnloggetVeilederState } from "./ducks/innlogget-veileder";
+import sidebarReducer, { initialStateSidebar } from "./ducks/sidebar-tab";
+import mineFilterReducer from "./ducks/mine-filter";
+import lagretFilterUIState, { LagretFilterUIState } from "./ducks/lagret-filter-ui-state";
+import { LagretFilterState } from "./ducks/lagret-filter";
+import foedelandListReducer, { FoedelandListState } from "./ducks/foedeland";
 
 function named(name, reducer) {
     return (state, action) => {
@@ -75,6 +76,7 @@ export interface AppState {
     toastReducer: ToastState;
     innloggetVeileder: InnloggetVeilederState;
     systemmeldinger: SystemmeldingState;
+    foedelandList: FoedelandListState;
 }
 
 export default combineReducers<AppState>({
@@ -137,5 +139,6 @@ export default combineReducers<AppState>({
     mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIState),
     toastReducer: toastReducer,
     innloggetVeileder: innloggetVeilederReducer,
-    systemmeldinger: systemmeldingerReducer
+    systemmeldinger: systemmeldingerReducer,
+    foedelandList: foedelandListReducer
 });

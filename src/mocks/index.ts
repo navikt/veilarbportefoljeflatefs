@@ -1,19 +1,20 @@
-import innloggetVeileder from './innloggetVeileder';
-import me from './me';
-import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
-import veiledere from './veiledere';
-import statustall from './statustall';
-import tiltak from './tiltak';
-import {veiledergrupper} from './veiledergrupper';
-import lagPortefoljeStorrelser from './portefoljestorrelser';
-import features from './features';
-import * as faker from 'faker/locale/nb_NO';
-import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
-import {delayed, jsonResponse} from './utils';
-import {mineFilter} from './mine-filter';
-import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {hentSystemmeldinger} from './systemmeldinger';
-import {endringsloggListe} from './endringslogg';
+import innloggetVeileder from "./innloggetVeileder";
+import me from "./me";
+import brukere, { hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan } from "./portefolje";
+import veiledere from "./veiledere";
+import statustall from "./statustall";
+import tiltak from "./tiltak";
+import { veiledergrupper } from "./veiledergrupper";
+import lagPortefoljeStorrelser from "./portefoljestorrelser";
+import features from "./features";
+import * as faker from "faker/locale/nb_NO";
+import FetchMock, { MiddlewareUtils } from "yet-another-fetch-mock";
+import { delayed, jsonResponse } from "./utils";
+import { mineFilter } from "./mine-filter";
+import { LagretFilter, SorteringOgId } from "../ducks/lagret-filter";
+import { hentSystemmeldinger } from "./systemmeldinger";
+import { endringsloggListe } from "./endringslogg";
+import { foedelandList } from "./foedeland";
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -54,6 +55,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
+let foedeland = foedelandList();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -255,6 +257,8 @@ mock.get(
 );
 
 mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
+
+mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));
 
 // websocket
 class MockWebSocket {

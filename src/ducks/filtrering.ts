@@ -1,7 +1,7 @@
-import {FiltervalgModell} from '../model-interfaces';
-import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
-import {OversiktType} from './ui/listevisning';
-import {LagretFilter} from './lagret-filter';
+import { FiltervalgModell } from "../model-interfaces";
+import { VELG_MINE_FILTER } from "./lagret-filter-ui-state";
+import { OversiktType } from "./ui/listevisning";
+import { LagretFilter } from "./lagret-filter";
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -36,6 +36,7 @@ export const initialState: FiltervalgModell = {
     alder: [],
     kjonn: null,
     landgruppe: [],
+    foedeland: [],
     fodselsdagIMnd: [],
     innsatsgruppe: [],
     formidlingsgruppe: [],
@@ -69,7 +70,7 @@ export const initialState: FiltervalgModell = {
     sisteEndringKategori: [],
     ulesteEndringer: null,
     tolkebehov: [],
-    tolkBehovSpraak: null
+    tolkBehovSpraak: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

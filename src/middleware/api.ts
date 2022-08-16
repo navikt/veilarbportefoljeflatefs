@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
-import {VeilederModell} from '../model-interfaces';
-import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev} from '../utils/url-utils';
+import { fetchToJson, sjekkStatuskode } from "../ducks/utils";
+import { VeilederModell } from "../model-interfaces";
+import { NyttLagretFilter, RedigerLagretFilter, SorteringOgId } from "../ducks/lagret-filter";
+import { erDev } from "../utils/url-utils";
+import { Foedeland } from "../ducks/foedeland";
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -190,4 +191,8 @@ export function hentSystemmeldinger() {
 export function hentMoteplan(veileder: string, enhet: string) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
 }

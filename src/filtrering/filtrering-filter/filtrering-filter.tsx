@@ -1,40 +1,39 @@
-import * as React from 'react';
-import CheckboxFilterform from './filterform/checkbox-filterform';
+import * as React from "react";
+import CheckboxFilterform from "./filterform/checkbox-filterform";
 import {
-    alder,
-    cvJobbprofil,
-    fodselsdagIMnd,
-    formidlingsgruppe,
-    hovedmal,
-    innsatsgruppe,
-    kjonn,
-    landgruppe,
-    landgruppeTooltips,
-    manuellBrukerStatus,
-    manuellBrukerStatusUtenKRR,
-    registreringstype,
-    rettighetsgruppe,
-    servicegruppe,
-    tolkebehov,
-    utdanning,
-    ytelse
-} from '../filter-konstanter';
-import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
-import Dropdown from '../../components/dropdown/dropdown';
-import './filterform/filterform.less';
-import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
-import '../filtrering-skjema.less';
-import '../../components/sidebar/sidebar.less';
-import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
-import AlderFilterform from './filterform/alder-filterform';
-import {RadioFilterform} from './filterform/radio-filterform';
-import {HendelserFilterform} from './filterform/hendelser-filterform';
-import {OversiktType} from '../../ducks/ui/listevisning';
-import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
-import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label} from '@navikt/ds-react';
+  alder,
+  cvJobbprofil,
+  fodselsdagIMnd,
+  formidlingsgruppe,
+  hovedmal,
+  innsatsgruppe,
+  kjonn,
+  manuellBrukerStatus,
+  manuellBrukerStatusUtenKRR,
+  registreringstype,
+  rettighetsgruppe,
+  servicegruppe,
+  tolkebehov,
+  utdanning,
+  ytelse
+} from "../filter-konstanter";
+import OverskriftMedHjelpeTekst from "../../components/overskrift-med-hjelpetekst";
+import Dropdown from "../../components/dropdown/dropdown";
+import "./filterform/filterform.less";
+import FodselsdatoFilterform from "./filterform/fodselsdato-filterform";
+import { useFeatureSelector } from "../../hooks/redux/use-feature-selector";
+import { GJEM_HOVEDMAL, UTEN_KRR_FILTER } from "../../konstanter";
+import "../filtrering-skjema.less";
+import "../../components/sidebar/sidebar.less";
+import DoubleCheckboxFilterform from "./filterform/double-checkbox-filterform";
+import AlderFilterform from "./filterform/alder-filterform";
+import { RadioFilterform } from "./filterform/radio-filterform";
+import { HendelserFilterform } from "./filterform/hendelser-filterform";
+import { OversiktType } from "../../ducks/ui/listevisning";
+import AktivitetFilterformController from "./filterform/aktiviteter-filterform/aktivitet-filterform-controller";
+import { FiltervalgModell } from "../../model-interfaces";
+import { Alert, Label } from "@navikt/ds-react";
+import FoedelandFilterform from "./filterform/foedeland-filterform";
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -93,13 +92,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     name="Fødeland"
                     id="foedeland"
                     render={() => (
-                        <CheckboxFilterform
-                            form="landgruppe"
-                            valg={landgruppe}
+                        <FoedelandFilterform
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
-                            className="landgruppe"
-                            tooltips={landgruppeTooltips}
                         />
                     )}
                 />
