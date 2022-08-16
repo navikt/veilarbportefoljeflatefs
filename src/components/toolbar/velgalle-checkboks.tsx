@@ -3,33 +3,29 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.css';
-import {Checkbox} from 'nav-frontend-skjema';
+import {Checkbox} from '@navikt/ds-react';
 
 interface VelgalleCheckboksProps {
-    skalVises: boolean;
     disabled: boolean;
     alleMarkert: boolean;
     markerAlle: (markert: boolean) => void;
     className: string;
 }
 
-function VelgAlleCheckboks({skalVises, disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
-    if (!skalVises) {
-        return null;
-    }
+function VelgAlleCheckboks({disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
     const onClickHandler = () => markerAlle(!alleMarkert);
 
     return (
         <Checkbox
-            label={''}
             className={className}
             checked={alleMarkert}
             disabled={disabled}
+            hideLabel
             onChange={onClickHandler}
-            title="Velg alle checkbox"
-            aria-label="Velg alle checkboxer"
-            role="checkbox"
-        />
+            size="small"
+        >
+            Velg alle
+        </Checkbox>
     );
 }
 

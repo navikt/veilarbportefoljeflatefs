@@ -37,11 +37,6 @@ function SokVeilederFilter(props: AllProps) {
 
     const harValg = valgteVeileder.length > 0;
 
-    const hanterChange = (erValgt, veilederTarget) =>
-        erValgt
-            ? setValgteVeileder([veilederTarget, ...valgteVeileder])
-            : setValgteVeileder(valgteVeileder.filter(veileder => veileder !== veilederTarget));
-
     const createHandleOnSubmit = (filterverdi: string[]) => {
         props.onClick();
         if (harValg) {
@@ -53,10 +48,10 @@ function SokVeilederFilter(props: AllProps) {
 
     return (
         <SokVeiledere
-            erValgt={ident => valgteVeileder.includes(ident)}
-            hanterVeilederValgt={hanterChange}
+            handterVeiledereValgt={setValgteVeileder}
             btnOnClick={() => createHandleOnSubmit(valgteVeileder)}
             harValg={harValg}
+            valgteVeiledere={valgteVeileder}
         />
     );
 }
