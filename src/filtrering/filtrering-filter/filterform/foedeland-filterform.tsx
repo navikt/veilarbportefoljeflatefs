@@ -32,13 +32,13 @@ function FoedelandFilterform({ endreFiltervalg, filtervalg, gridColumns=1}: Foed
     if (foedelandListData != null && foedelandListData.size > 0){
       let selectedValues:FoedelandOptions[] = [];
       filtervalg.foedeland.forEach(x => {
-        if (foedelandListData.get(x) != null && foedelandListData.get(x) != undefined){
+        if (foedelandListData.get(x) != null && foedelandListData.get(x) !== undefined){
           selectedValues.push({label: foedelandListData.get(x)!, value: x, checked: true})
         }
       });
       setSelectedFoedeland(selectedValues);
     }
-  }, [filtervalg]);
+  }, [filtervalg, foedelandListData]);
 
   const velgFoedeland = (data) => {
     nullstillLandgruppeValg();
