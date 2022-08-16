@@ -66,7 +66,7 @@ function FiltreringLabelContainer({
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
         dispatch(hentFoedelandList(enhettiltak.enhetId));
-    }, [dispatch]);
+    }, [dispatch, enhettiltak]);
 
     const foedelandListData = useFoedelandSelector();
 
@@ -180,6 +180,8 @@ function FiltreringLabelContainer({
                             slettFilter={() => slettEnkelt(key, singleValue)}
                           />
                         );
+                    }else {
+                        return '';
                     }
                 });
             }
