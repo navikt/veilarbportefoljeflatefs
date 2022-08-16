@@ -1892,6 +1892,7 @@ GRID
     padding-right: 1rem;
 }
 .veilarbportefoljeflatefs .oversikt-sideinnhold .alertstripe__annen-veileder-varsel {
+    align-self: center;
     grid-row: 1;
     grid-column-start: 2;
     grid-column-end: 3;
