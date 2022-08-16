@@ -89,7 +89,8 @@
         "redux": "4.2.0",
         "redux-thunk": "2.4.1",
         "reselect": "^4.1.5",
-        "typescript": "4.7.4"
+        "typescript": "4.7.4",
+        "react-multi-select-component": "4.3.2"
     },
     "eslintConfig": {
         "extends": "react-app"

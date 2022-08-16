@@ -54,6 +54,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
+let foedeland = foedelandList();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -255,6 +256,8 @@ mock.get(
 );
 
 mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
+
+mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));
 
 // websocket
 class MockWebSocket {

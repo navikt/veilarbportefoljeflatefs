@@ -192,6 +192,10 @@ export function hentMoteplan(veileder: string, enhet: string) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
+export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
+}
+
 export function sendEventTilPortefolje(event: FrontendEvent) {
     const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};

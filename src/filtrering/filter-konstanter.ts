@@ -1,5 +1,5 @@
-import {lag2Sifret, range} from '../utils/utils';
-import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import { lag2Sifret, range } from "../utils/utils";
+import { KategoriModell, Sorteringsfelt } from "../model-interfaces";
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';

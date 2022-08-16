@@ -1,23 +1,21 @@
-import * as React from 'react';
-import CheckboxFilterform from './filterform/checkbox-filterform';
+import * as React from "react";
+import CheckboxFilterform from "./filterform/checkbox-filterform";
 import {
-    alder,
-    cvJobbprofil,
-    fodselsdagIMnd,
-    formidlingsgruppe,
-    hovedmal,
-    innsatsgruppe,
-    kjonn,
-    landgruppe,
-    landgruppeTooltips,
-    manuellBrukerStatus,
-    manuellBrukerStatusUtenKRR,
-    registreringstype,
-    rettighetsgruppe,
-    servicegruppe,
-    tolkebehov,
-    utdanning,
-    ytelse
+  alder,
+  cvJobbprofil,
+  fodselsdagIMnd,
+  formidlingsgruppe,
+  hovedmal,
+  innsatsgruppe,
+  kjonn,
+  manuellBrukerStatus,
+  manuellBrukerStatusUtenKRR,
+  registreringstype,
+  rettighetsgruppe,
+  servicegruppe,
+  tolkebehov,
+  utdanning,
+  ytelse
 } from '../filter-konstanter';
 import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
@@ -93,13 +91,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     name="Fødeland"
                     id="foedeland"
                     render={() => (
-                        <CheckboxFilterform
-                            form="landgruppe"
-                            valg={landgruppe}
+                        <FoedelandFilterform
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
-                            className="landgruppe"
-                            tooltips={landgruppeTooltips}
                         />
                     )}
                 />
