@@ -35,16 +35,6 @@ function CheckboxFilterform({
         setCheckBoxValg(filtervalg[form]);
     }, [filtervalg, form]);
 
-    const velgCheckBox = e => {
-        e.persist();
-        return e.target.checked
-            ? endreFiltervalg(form, [...checkBoxValg, e.target.value])
-            : endreFiltervalg(
-                  form,
-                  checkBoxValg.filter(value => value !== e.target.value)
-              );
-    };
-
     const nullstillValg = () => {
         endreFiltervalg(form, []);
     };
@@ -54,27 +44,39 @@ function CheckboxFilterform({
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
                     <Grid columns={gridColumns}>
-                        <CheckboxGroup legend="" value={checkBoxValg} size="small">
-                        {Object.entries(valg).map(([filterKey, filterValue]) =>
-                            tooltips && tooltips[filterKey] ? (
-                                <Tooltip
-                                    content={tooltips[filterKey]}
-                                    placement="right"
-                                    offset={-130}
-                                    maxChar={999}
-                                    key={`tooltip-${filterKey}`}
-                                >
-                                    <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox} data-testid={`filter_${filterKey}`}>
+                        <CheckboxGroup
+                            hideLegend
+                            legend=""
+                            onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
+                            size="small"
+                            value={checkBoxValg}
+                        >
+                            {Object.entries(valg).map(([filterKey, filterValue]) =>
+                                tooltips && tooltips[filterKey] ? (
+                                    <Tooltip
+                                        content={tooltips[filterKey]}
+                                        placement="right"
+                                        offset={-130}
+                                        maxChar={999}
+                                        key={`tooltip-${filterKey}`}
+                                    >
+                                        {/* Wrapper i div for at Tooltip-en skal legge seg ved label-en og ikke rett ved checkbox-en */}
+                                        <div>
+                                            <Checkbox
+                                                data-testid={`filter_${filterKey}`}
+                                                key={filterKey}
+                                                value={filterKey}
+                                            >
+                                                {filterValue}
+                                            </Checkbox>
+                                        </div>
+                                    </Tooltip>
+                                ) : (
+                                    <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} value={filterKey}>
                                         {filterValue}
                                     </Checkbox>
-
-                                </Tooltip>
-                            ) : (
-                              <Checkbox key={filterKey} value={filterKey} onChange={velgCheckBox} data-testid={`filter_${filterKey}`}>
-                                  {filterValue}
-                              </Checkbox>
-                            )
-                        )}
+                                )
+                            )}
                         </CheckboxGroup>
                     </Grid>
                 </div>

@@ -7,7 +7,7 @@ import './filterform.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {BodyShort, Button, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
     form: string;
@@ -43,28 +43,18 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         });
     }, [filtervalg, form, valg]);
 
-    const velgCheckBox = e => {
+    const submitCheckBoxValg = (checkboxValg: string[]) => {
         setInputAlderTil('');
         setInputAlderFra('');
         setFeil(false);
-        e.persist();
-        return e.target.checked
-            ? setCheckBoxValg(prevState => [...prevState, e.target.value])
-            : setCheckBoxValg(prevState => prevState.filter(value => value !== e.target.value));
-    };
 
-    const submitCheckBox = e => {
-        velgCheckBox(e);
+        setCheckBoxValg(checkboxValg);
+        endreFiltervalg(form, checkboxValg);
+
         logEvent('portefolje.metrikker.aldersfilter', {
             checkbox: true,
             sideNavn: finnSideNavn()
         });
-        return e.target.checked
-            ? endreFiltervalg(form, [...checkBoxValg, e.target.value])
-            : endreFiltervalg(
-                  form,
-                  checkBoxValg.filter(value => value !== e.target.value)
-              );
     };
 
     const onChangeInput = (e, til) => {
@@ -109,15 +99,18 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             });
         }
     };
+
     const fjernTegn = e => {
         (e.key === 'e' || e.key === '.' || e.key === ',' || e.key === '-' || e.key === '+') && e.preventDefault();
     };
+
     const nullstillValg = () => {
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
         endreFiltervalg(form, []);
     };
+
     return (
         <form
             className="skjema checkbox-filterform"
@@ -129,24 +122,15 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             {harValg && (
                 <>
                     <div className={classNames('checkbox-filterform__valg', className)}>
-                        <Grid columns={2}>
-                            {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                    <input
-                                        id={filterKey}
-                                        type="checkbox"
-                                        className="skjemaelement__input checkboks"
-                                        value={filterKey}
-                                        checked={checkBoxValg.includes(filterKey)}
-                                        onChange={e => submitCheckBox(e)}
-                                        data-testid={`filter_${filterKey}`}
-                                    />
-                                    <label htmlFor={filterKey} className="skjemaelement__label">
+                        <CheckboxGroup hideLegend legend="" value={checkBoxValg} onChange={submitCheckBoxValg}>
+                            <Grid columns={2}>
+                                {Object.entries(valg).map(([filterKey, filterValue]) => (
+                                    <Checkbox data-testid={`filter_${filterKey}`} size="small" value={filterKey}>
                                         {filterValue}
-                                    </label>
-                                </div>
-                            ))}
-                        </Grid>
+                                    </Checkbox>
+                                ))}
+                            </Grid>
+                        </CheckboxGroup>
                     </div>
                     <hr className="alder-border" />
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
