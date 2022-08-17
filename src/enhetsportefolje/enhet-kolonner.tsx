@@ -86,7 +86,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2" bruker={bruker} />
             <TekstKolonne
-                className="col col-xs-2"
+                className="col col-xs-2 fnr-kolonne"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
             />
