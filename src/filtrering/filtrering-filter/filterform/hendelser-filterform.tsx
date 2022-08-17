@@ -7,8 +7,7 @@ import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
-import {HelpText, Label} from '@navikt/ds-react';
-import {Checkbox, Radio} from 'nav-frontend-skjema';
+import {HelpText, Checkbox, Radio, RadioGroup} from '@navikt/ds-react';
 import classNames from 'classnames';
 
 interface HendelserFilterformProps {
@@ -26,7 +25,7 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const [hendelserValg, setHendelserValg] = useState<string[]>(filtervalg[form]);
+    const [hendelserValg, setHendelserValg] = useState<string | null>('');
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
@@ -35,8 +34,12 @@ export function HendelserFilterform({
     };
 
     useEffect(() => {
-        setHendelserValg(filtervalg[form]);
-    }, [filtervalg, form]);
+        if (filtervalg[form]) {
+            setHendelserValg(filtervalg[form][0]);
+        } else {
+            setHendelserValg('');
+        }
+    }, [filtervalg, hendelserValg, form]);
 
     useEffect(() => {
         setCheckboxValg(filtervalg['ulesteEndringer']);
@@ -82,13 +85,14 @@ export function HendelserFilterform({
                     >
                         <Checkbox
                             id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
-                            label={ulesteEndringer.ULESTE_ENDRINGER}
                             role="checkbox"
                             value="ULESTE_ENDRINGER"
                             checked={checkboxValg === 'ULESTE_ENDRINGER'}
                             onChange={e => onCheckboxChange(e)}
                             data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
-                        />
+                        >
+                            {ulesteEndringer.ULESTE_ENDRINGER}
+                        </Checkbox>
 
                         <HelpText
                             strategy="fixed"
@@ -103,70 +107,63 @@ export function HendelserFilterform({
                 )}
 
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
-                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
-                        Siste aktivitet lagt til av bruker
-                    </Label>
-                    {lagtTilAvBruker.map(key => (
+                    <RadioGroup legend="Siste aktivitet lagt til av bruker" value={hendelserValg} size="small">
+                        {lagtTilAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                    <RadioGroup legend="Siste aktivitet fullført av bruker" value={hendelserValg} size="small">
+                        {fullfortAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                    <RadioGroup legend="Siste aktivitet avbrutt av bruker" value={hendelserValg} size="small">
+                        {avbruttAvBruker.map(key => (
+                            <Radio
+                                onChange={e => onRadioChange(e)}
+                                name="sisteEndringKategori"
+                                value={key}
+                                key={key}
+                                data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
+                            >
+                                {hendelserLabels[key]}
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                    <RadioGroup legend="Andre" value={hendelserValg} size="small">
                         <Radio
                             onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
                             name="sisteEndringKategori"
-                            value={key}
-                            checked={hendelserValg.includes(key)}
-                            key={key}
-                            data-testid={`lagtTilAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
-                    ))}
-
-                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
-                        Siste aktivitet fullført av bruker
-                    </Label>
-                    {fullfortAvBruker.map(key => (
-                        <Radio
-                            onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
-                            name="sisteEndringKategori"
-                            value={key}
-                            checked={hendelserValg.includes(key)}
-                            key={key}
-                            data-testid={`fullfortAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
-                    ))}
-
-                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
-                        Siste aktivitet avbrutt av bruker
-                    </Label>
-                    {avbruttAvBruker.map(key => (
-                        <Radio
-                            onChange={e => onRadioChange(e)}
-                            label={hendelserLabels[key]}
-                            name="sisteEndringKategori"
-                            value={key}
-                            checked={hendelserValg.includes(key)}
-                            key={key}
-                            data-testid={`avbruttAvBruker_${kebabCase(hendelserLabels[key])}`}
-                        />
-                    ))}
-
-                    <Label className="hendelser-filterform__radio-gruppe__label" size="small">
-                        Andre
-                    </Label>
-                    <Radio
-                        onChange={e => onRadioChange(e)}
-                        label={hendelserLabels['MAL']}
-                        name="sisteEndringKategori"
-                        value={'MAL'}
-                        checked={hendelserValg.includes('MAL')}
-                        key={'MAL'}
-                        data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
-                    />
+                            value={'MAL'}
+                            key={'MAL'}
+                            data-testid={`andreMuligheter_${kebabCase(hendelserLabels['MAL'])}`}
+                        >
+                            {hendelserLabels['MAL']}
+                        </Radio>
+                    </RadioGroup>
                 </div>
             </div>
             <NullstillKnapp
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={hendelserValg.length <= 0 && checkboxValg !== null}
+                disabled={hendelserValg === undefined && checkboxValg === null}
             />
         </form>
     );

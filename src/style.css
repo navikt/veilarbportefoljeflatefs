@@ -1905,6 +1905,7 @@ GRID
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    z-index: 10;
 }
 .veilarbportefoljeflatefs .oversikt-sideinnhold .sidebar {
     grid-row-start: 1;

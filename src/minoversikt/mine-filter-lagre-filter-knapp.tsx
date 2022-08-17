@@ -53,6 +53,7 @@ export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
     return (
         <Button
             variant="secondary"
+            size="small"
             className="lagre-filter-knapp"
             hidden={erLagreKnappSkjult}
             data-testid="lagre-filter_knapp"

@@ -27,6 +27,7 @@ function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: 
         <div className={classNames('nullstill__wrapper', className)}>
             <Button
                 variant="secondary"
+                size="small"
                 type="button"
                 onClick={e => nullstille(e)}
                 disabled={disabled}
