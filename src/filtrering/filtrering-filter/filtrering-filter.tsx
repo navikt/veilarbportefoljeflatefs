@@ -1,21 +1,21 @@
-import * as React from "react";
-import CheckboxFilterform from "./filterform/checkbox-filterform";
+import * as React from 'react';
+import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
-  alder,
-  cvJobbprofil,
-  fodselsdagIMnd,
-  formidlingsgruppe,
-  hovedmal,
-  innsatsgruppe,
-  kjonn,
-  manuellBrukerStatus,
-  manuellBrukerStatusUtenKRR,
-  registreringstype,
-  rettighetsgruppe,
-  servicegruppe,
-  tolkebehov,
-  utdanning,
-  ytelse
+    alder,
+    cvJobbprofil,
+    fodselsdagIMnd,
+    formidlingsgruppe,
+    hovedmal,
+    innsatsgruppe,
+    kjonn,
+    manuellBrukerStatus,
+    manuellBrukerStatusUtenKRR,
+    registreringstype,
+    rettighetsgruppe,
+    servicegruppe,
+    tolkebehov,
+    utdanning,
+    ytelse
 } from '../filter-konstanter';
 import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
@@ -33,6 +33,7 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
 import {Alert, Label} from '@navikt/ds-react';
+import FoedelandFilterform from './filterform/foedeland-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -90,12 +91,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Fødeland"
                     id="foedeland"
-                    render={() => (
-                        <FoedelandFilterform
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
+                    render={() => <FoedelandFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />}
                 />
                 <Dropdown
                     name="Tolkebehov"
