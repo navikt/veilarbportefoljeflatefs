@@ -126,7 +126,7 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                 <hr />
                 <label className="skjemaelement__label">Velg et eller flere land</label>
                 <MultiSelect
-                    className="multiSelect"
+                    className="utvalgsliste"
                     options={foedelandSelectOptions}
                     value={selectedFoedeland}
                     onChange={velgFoedeland}
