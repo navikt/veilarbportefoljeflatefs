@@ -82,9 +82,14 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     return ([] as Kolonne[])
-        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, filtervalg.landgruppe!.length > 0))
+        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(
+            addHvis(
+                Kolonne.STATSBORGERSKAP_GYLDIG_FRA,
+                filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0
+            )
+        )
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
