@@ -1,4 +1,4 @@
-export const foedelandList = () => {
+export const foedelandListMockData = () => {
     return [
         {code: 'AFG', land: 'Afghanistan'},
         {code: 'ALB', land: 'Albania'},

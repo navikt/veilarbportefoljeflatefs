@@ -19,7 +19,7 @@ export interface FoedelandOptions {
 
 export interface FoedelandListState {
     data: Map<string, string>;
-    status?: string;
+    status: string;
 }
 
 const initalState: FoedelandListState = {

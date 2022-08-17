@@ -15,7 +15,6 @@ import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
-import {hentFoedelandList} from '../ducks/foedeland';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 
 interface FiltreringLabelContainerProps {
@@ -65,8 +64,7 @@ function FiltreringLabelContainer({
 
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
-        dispatch(hentFoedelandList(enhettiltak.enhetId));
-    }, [dispatch, enhettiltak]);
+    }, [dispatch]);
 
     const foedelandListData = useFoedelandSelector();
 

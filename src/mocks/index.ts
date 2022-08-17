@@ -14,7 +14,7 @@ import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
-import {foedelandList} from './foedeland';
+import {foedelandListMockData} from './foedeland';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -55,7 +55,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
-let foedeland = foedelandList();
+let foedeland = foedelandListMockData();
 
 const mock = FetchMock.configure({
     enableFallback: true,
