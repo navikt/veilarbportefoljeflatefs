@@ -1,6 +1,6 @@
-import moment from "moment";
-import { Maybe } from "./types";
-import { SkjermingTil } from "../model-interfaces";
+import moment from 'moment';
+import {Maybe} from './types';
+import {SkjermingTil} from '../model-interfaces';
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;

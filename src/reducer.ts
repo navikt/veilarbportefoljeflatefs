@@ -20,16 +20,16 @@ import listevisningReducer, {
     initialStateMinOversikt,
     ListevisningState,
     OversiktType
-} from "./ducks/ui/listevisning";
-import featuresReducer, { FeaturesState } from "./ducks/features";
-import toastReducer, { ToastState } from "./store/toast/reducer";
-import { FiltervalgModell } from "./model-interfaces";
-import innloggetVeilederReducer, { InnloggetVeilederState } from "./ducks/innlogget-veileder";
-import sidebarReducer, { initialStateSidebar } from "./ducks/sidebar-tab";
-import mineFilterReducer from "./ducks/mine-filter";
-import lagretFilterUIState, { LagretFilterUIState } from "./ducks/lagret-filter-ui-state";
-import { LagretFilterState } from "./ducks/lagret-filter";
-import foedelandListReducer, { FoedelandListState } from "./ducks/foedeland";
+} from './ducks/ui/listevisning';
+import featuresReducer, {FeaturesState} from './ducks/features';
+import toastReducer, {ToastState} from './store/toast/reducer';
+import {FiltervalgModell} from './model-interfaces';
+import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
+import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
+import mineFilterReducer from './ducks/mine-filter';
+import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
+import {LagretFilterState} from './ducks/lagret-filter';
+import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
 
 function named(name, reducer) {
     return (state, action) => {

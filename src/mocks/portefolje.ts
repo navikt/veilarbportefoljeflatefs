@@ -3,7 +3,7 @@ import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {KategoriModell} from '../model-interfaces';
-import moment from "moment";
+import moment from 'moment';
 
 faker.seed(MOCK_CONFIG.seed);
 
