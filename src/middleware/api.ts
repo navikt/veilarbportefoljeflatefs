@@ -3,6 +3,8 @@ import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
+import {Foedeland} from '../ducks/foedeland';
+import {TolkebehovSpraak} from '../ducks/tolkebehov';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -191,6 +193,14 @@ export function hentSystemmeldinger() {
 export function hentMoteplan(veileder: string, enhet: string) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
+}
+
+export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
+}
+
+export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
 export async function hentResterendeSekunder(): Promise<number> {

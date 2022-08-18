@@ -37,7 +37,10 @@ export enum Kolonne {
     SISTE_ENDRING_DATO = 'siste_endring_dato',
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
-    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra'
+    STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    TOLKEBEHOV = 'tolkebehov',
+    TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert'
 }
 
 export enum OversiktType {

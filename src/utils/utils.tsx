@@ -1,4 +1,4 @@
-import {AktiviteterModell} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -93,6 +93,84 @@ export default function TittelValg(ytelseSorteringHeader) {
     return '';
 }
 
+export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
+    const behov: string[] = [];
+    if (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
+            bruker.talespraaktolk !== undefined &&
+            bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk.length > 0) ||
+        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+    ) {
+        behov.push('Talespråktolk');
+    }
+
+    if (
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
+            bruker.tegnspraaktolk !== undefined &&
+            bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk.length > 0) ||
+        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+    ) {
+        behov.push('Tegnspråktolk');
+    }
+
+    if (behov.length === 0) {
+        return '-';
+    }
+
+    return behov.join(', ');
+}
+
+export function tolkBehovSpraak(
+    filtervalg: FiltervalgModell,
+    bruker: BrukerModell,
+    tolkbehovSpraakData: Map<string, string>
+) {
+    const behovSpraak: string[] = [];
+    let leggTilSpraakInfo = false;
+    if (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
+        filtervalg.tolkBehovSpraak.length > 0
+    ) {
+        leggTilSpraakInfo = true;
+    }
+
+    if (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
+            bruker.talespraaktolk !== undefined &&
+            bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk.length > 0) ||
+        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+    ) {
+        if (leggTilSpraakInfo) {
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + ' (Tale)');
+        } else {
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk)!);
+        }
+    }
+
+    if (
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
+            bruker.tegnspraaktolk !== undefined &&
+            bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk.length > 0) ||
+        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+    ) {
+        if (leggTilSpraakInfo) {
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk) + ' (Tegn)');
+        } else {
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk)!);
+        }
+    }
+
+    if (behovSpraak.length === 0) {
+        return '-';
+    }
+
+    return behovSpraak.join(', ');
+}
+
 export const keyCodes = {
     tab: 9,
     enter: 13,
@@ -111,15 +189,7 @@ export const keyCodes = {
 };
 
 export function specialChar(string: string | {label: string}) {
-    return string
-        .toString()
-        .toLowerCase()
-        .split('æ')
-        .join('ae')
-        .split('ø')
-        .join('o')
-        .split('å')
-        .join('a');
+    return string.toString().toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
 }
 
 export function kebabCase(string: string | {label: string}) {

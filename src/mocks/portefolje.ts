@@ -1,4 +1,4 @@
-import {veiledere, innloggetVeileder} from './veiledere';
+import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
@@ -224,7 +224,10 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         },
         foedeland: hentLand(),
         harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
-        innflyttingTilNorgeFraLand: ''
+        innflyttingTilNorgeFraLand: '',
+        talespraaktolk: hentSpraak(),
+        tegnspraaktolk: hentSpraak(),
+        tolkBehovSistOppdatert: randomDate({past: true})
     };
 }
 
@@ -232,6 +235,17 @@ const hentLand = () => {
     const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
+};
+
+const hentSpraak = () => {
+    const spraakListe = ['AR ', 'NB', 'ES', 'UK'];
+
+    let x = Math.floor(Math.random() * 100);
+
+    if (x % 5 === 0) {
+        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    }
+    return '';
 };
 
 const randomEndring = () => {

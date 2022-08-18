@@ -8,8 +8,6 @@ import {
     hovedmal,
     innsatsgruppe,
     kjonn,
-    landgruppe,
-    landgruppeTooltips,
     manuellBrukerStatus,
     manuellBrukerStatusUtenKRR,
     registreringstype,
@@ -34,6 +32,8 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
 import {Alert, Label} from '@navikt/ds-react';
+import FoedelandFilterform from './filterform/foedeland-filterform';
+import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -91,16 +91,12 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Fødeland"
                     id="foedeland"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="landgruppe"
-                            valg={landgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            className="landgruppe"
-                            tooltips={landgruppeTooltips}
-                        />
-                    )}
+                    render={() => <FoedelandFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />}
+                />
+                <Dropdown
+                    name="Tolkebehov"
+                    id="tolkebehov"
+                    render={() => <TolkebehovFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />}
                 />
             </div>
             <div className="filtrering-filter__kolonne">

@@ -122,6 +122,36 @@ function EnhetListehode({
                     headerId="statsborgerskap_gyldig_fra"
                     skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 />
+                <Header
+                    className="col col-xs-2"
+                    title="Tolkebehov"
+                    headerId="tolkebehov"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+                >
+                    Tolkebehov
+                </Header>
+                <SorteringHeader
+                    sortering={Sorteringsfelt.TOLKE_SPRAAK}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKE_SPRAAK}
+                    className="col col-xs-2"
+                    title="Tolk behov språk"
+                    tekst="Språk"
+                    headerId="tolkespraak"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
+                    tekst="Sist oppdatert"
+                    className="col col-xs-2"
+                    title="Tolk behov sist oppdatert"
+                    headerId="tolkbehovsistoppdatert"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                />
 
                 <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}

@@ -36,8 +36,8 @@ export const initialState: FiltervalgModell = {
     alder: [],
     kjonn: null,
     landgruppe: [],
-    fodselsdagIMnd: [],
     foedeland: [],
+    fodselsdagIMnd: [],
     innsatsgruppe: [],
     formidlingsgruppe: [],
     servicegruppe: [],
@@ -64,12 +64,13 @@ export const initialState: FiltervalgModell = {
     registreringstype: [],
     arbeidslisteKategori: [],
     cvJobbprofil: null,
-    tolkebehov: [],
     utdanning: [],
     utdanningGodkjent: [],
     utdanningBestatt: [],
     sisteEndringKategori: [],
-    ulesteEndringer: null
+    ulesteEndringer: null,
+    tolkebehov: [],
+    tolkBehovSpraak: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

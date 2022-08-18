@@ -4,6 +4,8 @@ import {
     capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
+    tolkBehov,
+    tolkBehovSpraak,
     utledValgteAktivitetsTyper,
     utlopsdatoUker
 } from '../utils/utils';
@@ -39,6 +41,7 @@ import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
+import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -79,6 +82,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
+    const tolkbehovSpraakData = useTolkbehovSelector();
 
     return (
         <div className={className}>
@@ -105,6 +109,25 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
+                        : '-'
+                }
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehov(filtervalg, bruker)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                tekst={
+                    bruker.tolkBehovSistOppdatert && bruker.tolkBehovSistOppdatert
+                        ? toDateString(bruker.tolkBehovSistOppdatert)!.toString()
                         : '-'
                 }
             />

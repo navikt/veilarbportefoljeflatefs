@@ -71,10 +71,25 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             filtervalg.tiltakstyper.length > 0
         );
     };
+
+    const tolkBehovErValgt = () => {
+        return (
+            filtervalg.tolkebehov.length > 0 ||
+            (filtervalg.tolkBehovSpraak !== undefined &&
+                filtervalg.tolkBehovSpraak !== null &&
+                filtervalg.tolkBehovSpraak.length > 0)
+        );
+    };
+
     return ([] as Kolonne[])
-        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, filtervalg.landgruppe!.length > 0))
+        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(
+            addHvis(
+                Kolonne.STATSBORGERSKAP_GYLDIG_FRA,
+                filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0
+            )
+        )
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
@@ -149,6 +164,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             )
         )
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }
