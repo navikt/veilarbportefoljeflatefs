@@ -1,13 +1,13 @@
-import { FiltervalgModell } from "../../../model-interfaces";
-import * as React from "react";
-import { useEffect, useState } from "react";
-import classNames from "classnames";
-import Grid from "../../../components/grid/grid";
-import NullstillKnapp from "../../../components/nullstill-valg-knapp/nullstill-knapp";
-import { MultiSelect } from "react-multi-select-component";
-import { tolkebehov } from "../../filter-konstanter";
-import { TolkebehovSpraakOptions } from "../../../ducks/tolkebehov";
-import { useTolkbehovSelector } from "../../../hooks/redux/use-tolkbehovspraak-selector";
+import {FiltervalgModell} from '../../../model-interfaces';
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import classNames from 'classnames';
+import Grid from '../../../components/grid/grid';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {MultiSelect} from 'react-multi-select-component';
+import {tolkebehov} from '../../filter-konstanter';
+import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';
+import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
 
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -39,11 +39,11 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
     }, [filtervalg, tolkbehovSpraakData]);
 
     const velgTolkbehovSpraak = data => {
-        //nullstillBehovValg();
+        nullstillBehovValg();
         setSelectedTolkbehovSpraak(data);
 
         let selectedValues: string[] = [];
-        data.forEach(x => selectedValues.push(x.label));
+        data.forEach(x => selectedValues.push(x.value));
         endreFiltervalg('tolkBehovSpraak', selectedValues);
     };
 
@@ -54,7 +54,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
 
         if (tolkbehovSpraakData != null && tolkbehovSpraakData.size > 0) {
             tolkbehovSpraakData.forEach((value, key) => {
-                if (selectedTolkbehovSpraak.includes(value)) {
+                if (selectedTolkbehovSpraak.includes(key)) {
                     result.push({label: value, value: key, checked: true});
                 } else {
                     result.push({label: value, value: key, checked: false});
@@ -65,7 +65,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
     }, [tolkbehovSpraakData, filtervalg]);
 
     const velgTolkbehov = e => {
-        //nullstillSpraakValg();
+        nullstillSpraakValg();
         e.persist();
         return e.target.checked
             ? endreFiltervalg('tolkebehov', [...tolkebehovValg, e.target.value])

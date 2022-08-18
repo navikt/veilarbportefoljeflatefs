@@ -1,4 +1,4 @@
-import {veiledere, innloggetVeileder} from './veiledere';
+import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
@@ -242,7 +242,7 @@ const hentLand = () => {
 };
 
 const hentSpraak = () => {
-    const spraakListe = [null, 'Italiensk ', 'Engelsk', 'Spansk', 'Norsk', 'Fransk', 'Portugisisk', 'Rumensk'];
+    const spraakListe = [null, 'AR ', 'NB', 'ES', 'UK'];
 
     return spraakListe[Math.floor(Math.random() * spraakListe.length)];
 };

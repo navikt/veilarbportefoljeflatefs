@@ -96,19 +96,21 @@ export default function TittelValg(ytelseSorteringHeader) {
 export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
     if (
-        filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-        bruker.talespraaktolk !== undefined &&
-        bruker.talespraaktolk !== null &&
-        bruker.talespraaktolk.length > 0
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
+            bruker.talespraaktolk !== undefined &&
+            bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk.length > 0) ||
+        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
         behov.push('Talespråktolk');
     }
 
     if (
-        filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-        bruker.tegnspraaktolk !== undefined &&
-        bruker.tegnspraaktolk !== null &&
-        bruker.tegnspraaktolk.length > 0
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
+            bruker.tegnspraaktolk !== undefined &&
+            bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk.length > 0) ||
+        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
         behov.push('Tegnspråktolk');
     }
@@ -120,9 +122,13 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     return behov.join(', ');
 }
 
-export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerModell) {
+export function tolkBehovSpraak(
+    filtervalg: FiltervalgModell,
+    bruker: BrukerModell,
+    tolkbehovSpraakData: Map<string, string>
+) {
     const behovSpraak: string[] = [];
-    var leggTilSpraakInfo = false;
+    let leggTilSpraakInfo = false;
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
         filtervalg.tolkBehovSpraak.length > 0
@@ -138,9 +144,9 @@ export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerMode
         (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
         if (leggTilSpraakInfo) {
-            behovSpraak.push(bruker.talespraaktolk + ' (Tale)');
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + ' (Tale)');
         } else {
-            behovSpraak.push(bruker.talespraaktolk);
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk)!);
         }
     }
 
@@ -152,9 +158,9 @@ export function tolkBehovSpraak(filtervalg: FiltervalgModell, bruker: BrukerMode
         (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
         if (leggTilSpraakInfo) {
-            behovSpraak.push(bruker.tegnspraaktolk + ' (Tegn)');
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk) + ' (Tegn)');
         } else {
-            behovSpraak.push(bruker.tegnspraaktolk);
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk)!);
         }
     }
 
