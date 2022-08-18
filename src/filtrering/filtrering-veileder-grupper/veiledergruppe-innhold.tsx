@@ -18,6 +18,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
 import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
+import {RadioGroup} from '@navikt/ds-react';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -93,14 +94,19 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            {props.lagretFilter.map((veilederGruppe, index) => (
-                <VeiledergruppeRad
-                    key={index}
-                    veilederGruppe={veilederGruppe}
-                    onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
-                    oversiktType={props.oversiktType}
-                />
-            ))}
+            <RadioGroup hideLegend legend="" value={valgtGruppe?.filterId} defaultValue={valgtGruppe?.filterId}>
+                {props.lagretFilter.map((veilederGruppe, index) => {
+                    return (
+                        <VeiledergruppeRad
+                            key={index}
+                            veilederGruppe={veilederGruppe}
+                            onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
+                            oversiktType={props.oversiktType}
+                            erValgt={veilederGruppe.filterId === valgtGruppe?.filterId}
+                        />
+                    );
+                })}
+            </RadioGroup>
             {valgtGruppe && (
                 <VeiledergruppeModal
                     initialVerdi={{
