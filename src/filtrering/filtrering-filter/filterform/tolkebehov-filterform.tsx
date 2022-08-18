@@ -43,7 +43,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
         setSelectedTolkbehovSpraak(data);
 
         let selectedValues: string[] = [];
-        data.forEach(x => selectedValues.push(x.value));
+        data.forEach(x => selectedValues.push(x.label));
         endreFiltervalg('tolkBehovSpraak', selectedValues);
     };
 
