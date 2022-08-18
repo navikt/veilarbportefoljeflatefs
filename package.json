@@ -44,7 +44,7 @@
         "@navikt/navspa": "5.0.1",
         "@sanity/block-content-to-react": "^3.0.0",
         "babel-polyfill": "6.26.0",
-        "browserslist": "4.21.2",
+        "browserslist": "4.21.3",
         "classnames": "^2.2.6",
         "cross-env": "7.0.3",
         "cypress-axe": "^0.14.0",
