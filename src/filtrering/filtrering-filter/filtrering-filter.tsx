@@ -13,7 +13,6 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    tolkebehov,
     utdanning,
     ytelse
 } from '../filter-konstanter';
@@ -34,6 +33,7 @@ import AktivitetFilterformController from './filterform/aktiviteter-filterform/a
 import {FiltervalgModell} from '../../model-interfaces';
 import {Alert, Label} from '@navikt/ds-react';
 import FoedelandFilterform from './filterform/foedeland-filterform';
+import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -96,15 +96,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Tolkebehov"
                     id="tolkebehov"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="tolkebehov"
-                            valg={tolkebehov}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            className="tolkebehov"
-                        />
-                    )}
+                    render={() => <TolkebehovFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />}
                 />
             </div>
             <div className="filtrering-filter__kolonne">

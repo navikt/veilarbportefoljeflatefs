@@ -4,6 +4,7 @@ import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lag
 import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {Foedeland} from '../ducks/foedeland';
+import {TolkebehovSpraak} from '../ducks/tolkebehov';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -195,6 +196,10 @@ export function hentMoteplan(veileder: string, enhet: string) {
 
 export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
+}
+
+export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
 export function sendEventTilPortefolje(event: FrontendEvent) {

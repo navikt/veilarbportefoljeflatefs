@@ -15,6 +15,7 @@ import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
 import {foedelandListMockData} from './foedeland';
+import {tolkebehovSpraakMockData} from './tolkebehovSpraak';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -56,6 +57,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
 let foedeland = foedelandListMockData();
+let tolkebehovSpraak = tolkebehovSpraakMockData();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -259,6 +261,7 @@ mock.get(
 mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
 
 mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/tolkSpraak', delayed(500, jsonResponse(tolkebehovSpraak)));
 
 // websocket
 class MockWebSocket {
