@@ -23,6 +23,7 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Systemmeldinger} from '../components/systemmeldinger';
 import {Panel} from '@navikt/ds-react';
+import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -60,6 +61,7 @@ function VeiledereSide() {
                 data-testid={`side-storrelse_${id}`}
             >
                 <ToppMeny oversiktType={oversiktType} />
+                <SesjonNotifikasjon />
                 <Systemmeldinger />
                 <Innholdslaster avhengigheter={[statustall]}>
                     <div
