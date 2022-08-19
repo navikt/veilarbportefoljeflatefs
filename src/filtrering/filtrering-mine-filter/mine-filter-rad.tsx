@@ -26,7 +26,7 @@ function MineFilterRad({filter, oversiktType, erValgt}: MineFilterRadProps) {
             <Radio
                 className="mine-filter__filternavn"
                 data-testid={`mine-filter-rad_${kebabCase(filter.filterNavn)}`}
-                value={filter.filterId}
+                value={`${filter.filterId}`}
             >
                 {filter.filterNavn}
             </Radio>

@@ -9,7 +9,7 @@ import {LagretFilter} from '../../../ducks/lagret-filter';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
-import {RadioGroup} from '@navikt/ds-react';
+import {Radio, RadioGroup} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
@@ -27,6 +27,7 @@ export interface DragAndDropProps {
 function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable, enhettiltak}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
+    const [valgtFilter, setValgtFilter] = useState("")
     const dispatch = useDispatch();
 
     const veilederIdent = useSelector((state: AppState) => state.innloggetVeileder.data!);
@@ -57,8 +58,8 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         setisDraggable(false);
     };
 
-    const velgFilter = (filterId: number) => {
-        const filter: LagretFilter = dragAndDropOrder.find(sortertFilter => sortertFilter.filterId === filterId) as LagretFilter
+    const velgFilter = (filterId: string) => {
+        const filter: LagretFilter = dragAndDropOrder.find(sortertFilter => `${sortertFilter.filterId}` === filterId) as LagretFilter
 
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
@@ -92,6 +93,12 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         setDragAndDropOrder([...stateFilterOrder]);
     }, [stateFilterOrder]);
 
+    useEffect(() => {
+        if(valgtMineFilter !== undefined && valgtMineFilter !== null) {
+            setValgtFilter(`${valgtMineFilter.filterId}`)
+        }
+    }, [valgtMineFilter])
+
     if (isDraggable) {
         return (
             <DragAndDropContainer
@@ -109,8 +116,8 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
             hideLegend
             legend=""
             onChange={velgFilter}
-            value={valgtMineFilter?.filterId}
-            defaultValue={valgtMineFilter?.filterId}
+            value={valgtFilter}
+            defaultValue={valgtFilter}
         >
             {dragAndDropOrder.map((filter, idx) => (
                 <MineFilterRad
