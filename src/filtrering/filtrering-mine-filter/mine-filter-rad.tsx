@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux';
 import {apneMineFilterModal} from '../../ducks/lagret-filter-ui-state';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
-import React, {useEffect} from 'react';
+import React from 'react';
 import './mine-filter_innhold.css';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';

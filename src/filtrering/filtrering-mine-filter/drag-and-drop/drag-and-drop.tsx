@@ -9,7 +9,7 @@ import {LagretFilter} from '../../../ducks/lagret-filter';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
-import {Radio, RadioGroup} from '@navikt/ds-react';
+import {RadioGroup} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
