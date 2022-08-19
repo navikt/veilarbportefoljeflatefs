@@ -86,7 +86,7 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
 
     const LoginLenke = () => (
         <Link href={loginUrl()} className="wonderwallLoginLenke">
-            Logg inn på nytt
+            Forleng innloggingen
         </Link>
     );
 
@@ -94,13 +94,13 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
         <div className="sesjonNotifikasjonWraper">
             {visTvungen && (
                 <Alert variant="error" role="alert">
-                    Du blir logget ut nå, og må logge inn på ny.
+                    Du blir straks logget ut, og må forlenge innloggingen.
                     <LoginLenke />
                 </Alert>
             )}
             {visUtloper && (
                 <Alert variant="warning" role="alert">
-                    Du blir snart logget ut
+                    Du blir snart logget ut. Forleng innloggingen for å unngå å miste pågående arbeid.
                     <LoginLenke />
                 </Alert>
             )}

@@ -14,7 +14,6 @@ import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
-import {loginUrl} from '../utils/url-utils';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -67,7 +66,7 @@ mock.get(
     jsonResponse({
         loggedIn: true,
         expirationTime: '2040-07-04T14:18:54.000Z',
-        remainingSeconds: 60 * 6
+        remainingSeconds: 60 * 60
     })
 );
 

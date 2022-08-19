@@ -9,7 +9,6 @@ import InitialDataProvider from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
 import {Modal} from '@navikt/ds-react';
 import {erGCP} from './utils/utils';
-import {SesjonNotifikasjon} from './components/modal/sesjon-notifikasjon';
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
