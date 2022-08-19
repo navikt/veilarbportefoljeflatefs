@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: veilarbportefoljeflate
+  name: veilarbportefoljeflatefs
   namespace: obo
   labels:
     team: obo
