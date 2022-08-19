@@ -39,7 +39,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
     }, [filtervalg, tolkbehovSpraakData]);
 
     const velgTolkbehovSpraak = data => {
-        nullstillBehovValg();
+        //nullstillBehovValg();
         setSelectedTolkbehovSpraak(data);
 
         let selectedValues: string[] = [];
@@ -65,7 +65,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
     }, [tolkbehovSpraakData, filtervalg]);
 
     const velgTolkbehov = e => {
-        nullstillSpraakValg();
+        //nullstillSpraakValg();
         e.persist();
         return e.target.checked
             ? endreFiltervalg('tolkebehov', [...tolkebehovValg, e.target.value])
