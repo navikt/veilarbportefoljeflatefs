@@ -131,7 +131,7 @@ export function tolkBehovSpraak(
     let leggTilSpraakInfo = false;
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
-        filtervalg.tolkBehovSpraak.length > 0
+        (filtervalg.tolkBehovSpraak.length > 0 && filtervalg.tolkebehov.length === 0)
     ) {
         leggTilSpraakInfo = true;
     }
