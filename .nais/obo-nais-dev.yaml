@@ -10,6 +10,7 @@ spec:
   port: 8080
   ingresses:
     - https://veilarbportefoljeflatefs.dev.intern.nav.no
+    - https://veilarbportefoljeflate.dev.intern.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
