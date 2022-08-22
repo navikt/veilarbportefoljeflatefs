@@ -117,7 +117,6 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
             legend=""
             onChange={velgFilter}
             value={valgtFilter}
-            defaultValue={valgtFilter}
         >
             {dragAndDropOrder.map((filter, idx) => (
                 <MineFilterRad

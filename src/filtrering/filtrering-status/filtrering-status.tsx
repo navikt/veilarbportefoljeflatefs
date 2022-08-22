@@ -84,8 +84,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
             <RadioGroup
                 hideLegend
                 legend=""
-                value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0]}
-                defaultValue={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0]}
+                value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0] ?? ''}
             >
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
