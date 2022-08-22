@@ -9,7 +9,7 @@ spec:
   image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.06.21_07.33-5244a7b7ae64
   port: 8080
   ingresses:
-    - https://veilarbportefoljeflatefs.intern.nav.no
+    - https://veilarbportefoljeflate.intern.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
