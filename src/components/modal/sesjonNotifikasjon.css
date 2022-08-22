@@ -1,0 +1,9 @@
+.sesjonNotifikasjonWraper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.wonderwallLoginLenke {
+    margin-left: 1rem;
+}

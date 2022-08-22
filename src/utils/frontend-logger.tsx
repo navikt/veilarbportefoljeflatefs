@@ -1,4 +1,5 @@
 import {sendEventTilPortefolje} from '../middleware/api';
+import {erMock} from './url-utils';
 
 export interface FrontendEvent {
     name: string;
@@ -7,7 +8,7 @@ export interface FrontendEvent {
 }
 
 export const logEvent = (logTag: string, fields?: {}, tags?: {}): void => {
-    if (process.env.REACT_APP_MOCK === 'true') {
+    if (erMock()) {
         console.log('Event', logTag, 'Fields:', fields, 'Tags:', tags);
     } else {
         sendEventTilPortefolje({name: logTag, fields: fields, tags: tags});
