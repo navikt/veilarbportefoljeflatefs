@@ -136,6 +136,25 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                         search: 'Søk',
                         selectSomeItems: 'Velg land...'
                     }}
+                    ItemRenderer={({checked, option, onClick, disabled}) => (
+                        <div className={'navds-checkbox navds-checkbox--small'}>
+                            <input
+                                type="checkbox"
+                                onChange={onClick}
+                                checked={checked}
+                                tabIndex={-1}
+                                className={'navds-checkbox__input'}
+                                value={option.value}
+                                aria-checked={checked}
+                                id={`checkbox-foedeland-${option.value}`}
+                            />
+                            <label className={'navds-checkbox__label'} htmlFor={`checkbox-foedeland-${option.value}`}>
+                                <div className="navds-checkbox__content">
+                                    <div className="navds-body-short navds-body-short--small">{option.label}</div>
+                                </div>
+                            </label>
+                        </div>
+                    )}
                 />
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
