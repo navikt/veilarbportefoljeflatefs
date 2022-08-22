@@ -1,14 +1,14 @@
-import {FiltervalgModell} from '../../../model-interfaces';
-import * as React from 'react';
-import {useEffect, useState} from 'react';
-import classNames from 'classnames';
-import Grid from '../../../components/grid/grid';
-import {Tooltip} from '@navikt/ds-react';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {MultiSelect} from 'react-multi-select-component';
-import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
-import {FoedelandOptions} from '../../../ducks/foedeland';
-import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
+import { FiltervalgModell } from "../../../model-interfaces";
+import * as React from "react";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
+import Grid from "../../../components/grid/grid";
+import { Checkbox, CheckboxGroup, Tooltip } from "@navikt/ds-react";
+import NullstillKnapp from "../../../components/nullstill-valg-knapp/nullstill-knapp";
+import { MultiSelect } from "react-multi-select-component";
+import { useFoedelandSelector } from "../../../hooks/redux/use-foedeland-selector";
+import { FoedelandOptions } from "../../../ducks/foedeland";
+import { landgruppe, landgruppeTooltips } from "../../filter-konstanter";
 
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -95,6 +95,7 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                 {harValg && (
                     <div className={classNames('checkbox-filterform__valg', 'landgruppe')}>
                         <Grid columns={gridColumns}>
+                            <CheckboxGroup legend="" value={landgrupppeValg} size="small">
                             {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
                                 <Tooltip
                                     content={landgruppeTooltips[filterKey]}
@@ -103,23 +104,12 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                                     maxChar={999}
                                     key={`tooltip-${filterKey}`}
                                 >
-                                    <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                        <input
-                                            id={filterKey}
-                                            type="checkbox"
-                                            className="skjemaelement__input checkboks"
-                                            value={filterKey}
-                                            name={landgruppe[filterKey]}
-                                            checked={landgrupppeValg.includes(filterKey)}
-                                            onChange={velgLandgruppe}
-                                            data-testid={`filter_${filterKey}`}
-                                        />
-                                        <label htmlFor={filterKey} className="skjemaelement__label">
-                                            {filterValue}
-                                        </label>
-                                    </div>
+                                    <Checkbox key={filterKey} value={filterKey} onChange={velgLandgruppe} data-testid={`filter_${filterKey}`}>
+                                        {filterValue}
+                                    </Checkbox>
                                 </Tooltip>
                             ))}
+                            </CheckboxGroup>
                         </Grid>
                     </div>
                 )}
