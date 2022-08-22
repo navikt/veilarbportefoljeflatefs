@@ -3,11 +3,12 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import Grid from '../../../components/grid/grid';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {MultiSelect} from 'react-multi-select-component';
 import {tolkebehov} from '../../filter-konstanter';
 import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
+import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -64,17 +65,6 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
         }
     }, [tolkbehovSpraakData, filtervalg]);
 
-    const velgTolkbehov = e => {
-        //nullstillSpraakValg();
-        e.persist();
-        return e.target.checked
-            ? endreFiltervalg('tolkebehov', [...tolkebehovValg, e.target.value])
-            : endreFiltervalg(
-                  'tolkebehov',
-                  tolkebehovValg.filter(value => value !== e.target.value)
-              );
-    };
-
     const nullstillValg = () => {
         nullstillBehovValg();
         nullstillSpraakValg();
@@ -94,23 +84,19 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
                 {harValg && (
                     <div className={classNames('checkbox-filterform__valg', 'tolkbehov')}>
                         <Grid columns={gridColumns}>
-                            {Object.entries(tolkebehov).map(([filterKey, filterValue]) => (
-                                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                                    <input
-                                        id={filterKey}
-                                        type="checkbox"
-                                        className="skjemaelement__input checkboks"
-                                        value={filterKey}
-                                        name={tolkebehov[filterKey]}
-                                        checked={tolkebehovValg.includes(filterKey)}
-                                        onChange={velgTolkbehov}
-                                        data-testid={`filter_${filterKey}`}
-                                    />
-                                    <label htmlFor={filterKey} className="skjemaelement__label">
+                            <CheckboxGroup
+                                hideLegend
+                                legend=""
+                                onChange={(filtre: string[]) => endreFiltervalg('tolkebehov', filtre)}
+                                size="small"
+                                value={tolkebehovValg}
+                            >
+                                {Object.entries(tolkebehov).map(([filterKey, filterValue]) => (
+                                    <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
                                         {filterValue}
-                                    </label>
-                                </div>
-                            ))}
+                                    </Checkbox>
+                                ))}
+                            </CheckboxGroup>
                         </Grid>
                     </div>
                 )}
