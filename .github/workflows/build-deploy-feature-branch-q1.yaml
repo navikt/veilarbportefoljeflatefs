@@ -17,7 +17,7 @@ jobs:
                   node-version: '16'
                   cache: 'npm'
             - name: Legg til build
-              run: run mkdir ./build
+              run: mkdir ./build
             - name: Legg til 404 fil
               run: cp ./.github/pages/404.html ./build/index.html
             - name: Login to Docker
