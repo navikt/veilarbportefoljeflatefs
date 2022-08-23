@@ -49,11 +49,10 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
     };
 
     useEffect(() => {
-        let result: FoedelandOptions[] = [];
-
-        let selectedFoedeland = filtervalg.foedeland;
-
         if (foedelandListData != null && foedelandListData.size > 0) {
+            let result: FoedelandOptions[] = [];
+            let selectedFoedeland = filtervalg.foedeland;
+
             foedelandListData.forEach((value, key) => {
                 if (selectedFoedeland.includes(key)) {
                     result.push({label: value, value: key, checked: true});
