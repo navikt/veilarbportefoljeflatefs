@@ -3,12 +3,18 @@ import './drag-and-drop.css';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import MineFilterRad from '../mine-filter-rad';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
+import {RadioGroup} from '@navikt/ds-react';
+import {AppState} from '../../../reducer';
+import {logEvent} from '../../../utils/frontend-logger';
+import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
+import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
+import {velgMineFilter} from '../../../ducks/filtrering';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
@@ -21,7 +27,15 @@ export interface DragAndDropProps {
 function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable, enhettiltak}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
+    const [valgtFilter, setValgtFilter] = useState("")
     const dispatch = useDispatch();
+
+    const veilederIdent = useSelector((state: AppState) => state.innloggetVeileder.data!);
+    const valgtMineFilter = useSelector((state: AppState) =>
+        oversiktType === OversiktType.minOversikt
+            ? state.mineFilterMinOversikt.valgtMineFilter
+            : state.mineFilterEnhetensOversikt.valgtMineFilter
+    );
 
     const lagreRekkefolge = useCallback(() => {
         const idAndPriorities = dragAndDropOrder.map((filter, idx) => ({
@@ -44,6 +58,33 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         setisDraggable(false);
     };
 
+    const velgFilter = (filterId: string) => {
+        const filter: LagretFilter = dragAndDropOrder.find(sortertFilter => `${sortertFilter.filterId}` === filterId) as LagretFilter
+
+        logEvent(
+            'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
+            {},
+            {
+                filterId: filter.filterId,
+                sideNavn: finnSideNavn(),
+                id: mapVeilederIdentTilNonsens(veilederIdent.ident)
+            }
+        );
+
+        const tiltaksfeil = filter.filterValg.tiltakstyper.some(
+            tiltak => enhettiltak && enhettiltak[tiltak] === undefined
+        );
+
+        if (tiltaksfeil) {
+            dispatch(markerMineFilter(filter, oversiktType));
+            dispatch(apneFeilTiltakModal(oversiktType));
+            dispatch(avmarkerValgtMineFilter(oversiktType));
+        } else {
+            dispatch(markerMineFilter(filter, oversiktType));
+            dispatch(velgMineFilter(filter, oversiktType));
+        }
+    };
+
     useEffect(() => {
         setOnUnmount(lagreRekkefolge);
     }, [lagreRekkefolge, setOnUnmount]);
@@ -51,6 +92,12 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     useEffect(() => {
         setDragAndDropOrder([...stateFilterOrder]);
     }, [stateFilterOrder]);
+
+    useEffect(() => {
+        if(valgtMineFilter !== undefined && valgtMineFilter !== null) {
+            setValgtFilter(`${valgtMineFilter.filterId}`)
+        }
+    }, [valgtMineFilter])
 
     if (isDraggable) {
         return (
@@ -65,11 +112,22 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }
 
     return (
-        <>
+        <RadioGroup
+            hideLegend
+            legend=""
+            onChange={velgFilter}
+            value={valgtFilter}
+            size="small"
+        >
             {dragAndDropOrder.map((filter, idx) => (
-                <MineFilterRad key={idx} mineFilter={filter} oversiktType={oversiktType} enhettiltak={enhettiltak} />
+                <MineFilterRad
+                    key={idx}
+                    filter={filter}
+                    oversiktType={oversiktType}
+                    erValgt={valgtMineFilter?.filterId === filter.filterId}
+                />
             ))}
-        </>
+        </RadioGroup>
     );
 }
 

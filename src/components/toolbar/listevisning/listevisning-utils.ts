@@ -2,7 +2,6 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export interface Alternativ {
     tekstlabel: string;
-    checkboxDisabled?: boolean;
 }
 
 export const alternativerConfig = new Map<Kolonne, Alternativ>();

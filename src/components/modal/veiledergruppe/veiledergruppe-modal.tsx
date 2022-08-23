@@ -62,19 +62,6 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
         setHarForsoktSubmitte(false);
     }, [props.initialVerdi.filterValg, props.initialVerdi.gruppeNavn]);
 
-    const fjernVeiledereFraListen = (veilederTarget: string) => {
-        setFilterValg(prevState => ({
-            ...prevState,
-            veiledere: prevState.veiledere.filter(v => v !== veilederTarget)
-        }));
-        if (harForsoktSubmitte) {
-            validate(gruppeNavn, {
-                ...filterValg,
-                veiledere: filterValg.veiledere.filter(v => v !== veilederTarget)
-            });
-        }
-    };
-
     const hanterGruppeNavnChange = (nyttNavn: string) => {
         setGruppeNavn(nyttNavn);
         if (harForsoktSubmitte) {
@@ -82,20 +69,16 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
         }
     };
 
-    const handleChange = (erValgt: boolean, veilederTarget: string) => {
-        if (erValgt) {
-            setFilterValg(prevState => ({
-                ...prevState,
-                veiledere: [...prevState.veiledere, veilederTarget]
-            }));
-            if (harForsoktSubmitte) {
-                validate(gruppeNavn, {
-                    ...filterValg,
-                    veiledere: [...filterValg.veiledere, veilederTarget]
-                });
-            }
-        } else {
-            fjernVeiledereFraListen(veilederTarget);
+    const handleChange = (valgteVeiledere: string[]) => {
+        setFilterValg(prevState => ({
+            ...prevState,
+            veiledere: [...valgteVeiledere]
+        }));
+        if (harForsoktSubmitte) {
+            validate(gruppeNavn, {
+                ...filterValg,
+                veiledere: [...filterValg.veiledere]
+            });
         }
     };
 

@@ -23,7 +23,6 @@ function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
             sorteringsfelt={sorteringsfelt}
             valgteKolonner={listevisning.valgte}
             brukere={brukere}
-            oversiktType={OversiktType.enhetensOversikt}
         />
     );
 }

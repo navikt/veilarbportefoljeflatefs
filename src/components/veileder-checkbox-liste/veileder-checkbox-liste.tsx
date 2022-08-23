@@ -8,8 +8,7 @@ import {AppState} from '../../reducer';
 import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {Alert} from '@navikt/ds-react';
-import {Checkbox} from 'nav-frontend-skjema';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
@@ -20,80 +19,76 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
-    const form = 'veiledere';
+    const formNavn = 'veiledere';
     const dispatch = useDispatch();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);
     }, [filtervalg]);
 
-    const erValgt = (ident: string | undefined): boolean => {
-        return !!ident && !!valgteVeiledere.find(valgtElement => ident === valgtElement);
-    };
-
     const getFiltrerteVeiledere = (): VeilederModell[] => {
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
-        return veiledere.data.veilederListe.filter(
-            veileder =>
-                veileder.navn?.toLowerCase().indexOf(query) >= 0 || veileder.ident?.toLowerCase().indexOf(query) >= 0
-        );
+        return veiledere.data.veilederListe
+            .filter(
+                veileder =>
+                    veileder.navn?.toLowerCase().indexOf(query) >= 0 ||
+                    veileder.ident?.toLowerCase().indexOf(query) >= 0
+            )
+            .filter(veileder => veileder.ident && veileder.navn);
     };
 
-    const handleCheckboxOnClick = (e, value: string | undefined) => {
-        e.persist();
-        const valueErValgt = erValgt(value);
-        let valgteElem;
-        if (!valueErValgt) {
-            valgteElem = [...valgteVeiledere, value];
-            setValgteVeiledere(valgteElem);
-        } else if (valueErValgt) {
-            valgteElem = valgteVeiledere.filter(valgtElement => value !== valgtElement);
-            setValgteVeiledere(valgteElem);
-        }
-        dispatch(endreFiltervalg(form, valgteElem, OversiktType.veilederOversikt));
+    const handterValgteVeiledere = (valgteVeiledere: string[]) => {
+        setValgteVeiledere(valgteVeiledere);
+        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt));
     };
 
     const nullstillValg = () => {
         nullstillInputfelt();
-        dispatch(endreFiltervalg(form, [], OversiktType.veilederOversikt));
+        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt));
     };
 
-    const mapVeiledereToCheckboxList = (veiledere?: VeilederModell[]) => {
+    const mapToCheckboxList = (veiledere?: VeilederModell[]) => {
         if (!veiledere) {
             return null;
         }
 
         return veiledere
             .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
-            .filter(veileder => veileder.ident && veileder.navn)
             .map((veileder, index) => {
-                const identErValgt = erValgt(veileder.ident);
                 return (
                     <Checkbox
-                        key={veileder.ident}
-                        label={veileder.navn}
-                        checked={identErValgt}
-                        onChange={e => handleCheckboxOnClick(e, veileder.ident)}
                         data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
-                    />
+                        key={veileder.ident}
+                        size="small"
+                        value={veileder.ident}
+                    >
+                        {veileder.navn}
+                    </Checkbox>
                 );
             });
     };
 
-    const valgCheckboxListe = mapVeiledereToCheckboxList(getFiltrerteVeiledere());
+    const valgCheckboxListe = mapToCheckboxList(getFiltrerteVeiledere());
     const harValg = valgCheckboxListe && valgCheckboxListe.length > 0;
 
     if (harValg) {
         return (
             <form className="checkbox-liste">
-                <div className="checkbox-liste__valg" data-testid="veilederoversikt_sok-veileder_veilederliste">
+                <CheckboxGroup
+                    className="checkbox-liste__valg"
+                    data-testid="veilederoversikt_sok-veileder_veilederliste"
+                    hideLegend
+                    legend=""
+                    onChange={handterValgteVeiledere}
+                    value={valgteVeiledere}
+                >
                     {valgCheckboxListe}
-                </div>
+                </CheckboxGroup>
                 <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={form}
+                    form={formNavn}
                     disabled={valgteVeiledere.length <= 0}
                     className="veilederoversikt-nullstill-knapp"
                 />
