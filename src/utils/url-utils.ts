@@ -73,4 +73,16 @@ export function updateLastPath() {
 
 export const erDev = () => window.location.host.includes('dev') || window.location.host.includes('q1');
 
+export const erMock = () => process.env.REACT_APP_MOCK === 'true';
+
 export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
+
+export const loginUrl = () => {
+    if (erGCP()) {
+        return `${window.location.origin}/oauth2/login?redirect=${window.location.href}`;
+    } else if (erMock()) {
+        return '/';
+    }
+    console.error('Loging URL er ikke nødvendig med OpenAm');
+    return '/';
+};
