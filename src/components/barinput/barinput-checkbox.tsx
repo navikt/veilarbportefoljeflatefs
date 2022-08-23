@@ -9,7 +9,6 @@ interface BarInputCheckboxProps {
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     labelTekst?: React.ReactNode;
-    kompakt?: boolean;
 }
 
 function BarInputCheckbox({
@@ -18,7 +17,6 @@ function BarInputCheckbox({
     filterNavn,
     handleChange,
     labelTekst,
-    kompakt = false
 }: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
 
@@ -31,7 +29,7 @@ function BarInputCheckbox({
                 value={filterVerdi}
                 onChange={handleChange}
                 checked={checked}
-                size={kompakt ? 'small' : 'medium'}
+                size="small"
             >
                 {labelTekst}
             </Checkbox>

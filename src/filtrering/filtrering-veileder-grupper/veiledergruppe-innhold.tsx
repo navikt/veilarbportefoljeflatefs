@@ -94,7 +94,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
 
     return (
         <div className="veileder-gruppe__valgfelt" ref={outerDivRef}>
-            <RadioGroup hideLegend legend="" value={valgtGruppe?.filterId} defaultValue={valgtGruppe?.filterId}>
+            <RadioGroup hideLegend legend="" value={valgtGruppe?.filterId} defaultValue={valgtGruppe?.filterId} size="small">
                 {props.lagretFilter.map((veilederGruppe, index) => {
                     return (
                         <VeiledergruppeRad

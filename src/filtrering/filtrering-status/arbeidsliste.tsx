@@ -44,7 +44,6 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
-                        kompakt
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -57,7 +56,6 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
-                        kompakt
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -70,7 +68,6 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
-                        kompakt
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -83,7 +80,6 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                         handleChange={props.handleChangeCheckbox}
                         checked={props.checked && props.ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
-                        kompakt
                     />
                 </div>
             )}

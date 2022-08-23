@@ -68,7 +68,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
-                        kompakt
                     />
                 ) : (
                     <BarInputCheckbox
@@ -77,7 +76,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
-                        kompakt
                     />
                 )}
             </div>
