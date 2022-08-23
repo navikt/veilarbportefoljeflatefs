@@ -118,6 +118,14 @@
     font-style: italic;
     border: none;
 }
+.veilarbportefoljeflatefs .fnr-kolonne {
+    display: flex;
+    align-items: center;
+}
+.veilarbportefoljeflatefs .fnr-kolonne svg {
+    height: 1rem;
+    width: 1rem;
+}
 .veilarbportefoljeflatefs .valgt-sortering {
     font-weight: bold;
 }
