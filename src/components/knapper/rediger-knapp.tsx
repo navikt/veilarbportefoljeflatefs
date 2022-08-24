@@ -16,6 +16,7 @@ function RedigerKnapp(props: {aria: string; onClick: () => void; dataTestid?: st
             aria-describedby={props.aria}
             onClick={props.onClick}
             data-testid={props.dataTestid}
+            size="small"
         >
             {hover ? <EditFilled /> : <Edit />}
         </Button>

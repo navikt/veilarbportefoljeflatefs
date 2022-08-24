@@ -1,4 +1,3 @@
-import {Radio} from 'nav-frontend-skjema';
 import RedigerKnapp from '../../components/knapper/rediger-knapp';
 import React from 'react';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -11,23 +10,17 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
+import {Radio} from '@navikt/ds-react';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
     onClickRedigerKnapp: () => void;
     oversiktType: OversiktType;
+    erValgt: boolean;
 }
 
-function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType}: VeiledergruppeRadProps) {
+function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType, erValgt}: VeiledergruppeRadProps) {
     const dispatch = useDispatch();
-    const valgtGruppeEnhetensOversikt = useSelector(
-        (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
-    );
-    const valgtGruppeVeilederOversikt = useSelector(
-        (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
-    );
-    const valgtGruppe =
-        oversiktType === OversiktType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt;
 
     const lagredeGrupper = useSelector((state: AppState) =>
         state.veiledergrupper.data.filter(v => v.filterId !== veilederGruppe.filterId)
@@ -57,16 +50,16 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType}: 
         <div className="veileder-gruppe__rad" data-testid="veiledergruppe_rad-wrapper">
             <Radio
                 className="veileder-gruppe__gruppenavn"
+                data-testid={`veiledergruppe-rad_${kebabCase(veilederGruppe.filterNavn)}`}
                 key={veilederGruppe.filterId}
                 name="veiledergruppe"
-                label={veilederGruppe.filterNavn}
-                value={veilederGruppe.filterId}
                 onChange={() => velgGruppe()}
-                checked={valgtGruppe?.filterId === veilederGruppe.filterId}
-                data-testid={`veiledergruppe-rad_${kebabCase(veilederGruppe.filterNavn)}`}
-            />
+                value={veilederGruppe.filterId}
+            >
+                {veilederGruppe.filterNavn}
+            </Radio>
             <RedigerKnapp
-                hidden={valgtGruppe?.filterId !== veilederGruppe.filterId}
+                hidden={!erValgt}
                 aria="Rediger veiledergruppe"
                 onClick={onClickRedigerKnapp}
                 dataTestid={`rediger-veiledergruppe_knapp_${kebabCase(veilederGruppe.filterNavn)}`}

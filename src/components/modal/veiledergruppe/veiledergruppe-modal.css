@@ -90,12 +90,6 @@
     border-radius: 0.25rem;
     grid-template-columns: 1fr 1fr;
 }
-.veiledergruppe-modal__sokefilter .checkbox-filterform__valg .navds-checkbox {
-    margin-left: 1rem;
-}
-.veiledergruppe-modal__sokefilter .checkbox-filterform__valg .navds-checkbox label {
-    padding-bottom: 0;
-}
 .veiledergruppe-modal__sokefilter .checkbox-filterform__alertstripe {
     max-height: 13rem;
     min-height: 13rem;

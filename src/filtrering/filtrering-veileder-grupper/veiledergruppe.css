@@ -5,7 +5,7 @@
 .veileder-gruppe__rad {
     display: flex;
     justify-content: space-between;
-    min-height: 3rem;
+    margin-bottom: 5px;
 }
 .veileder-gruppe__knapperad {
     display: flex;

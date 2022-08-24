@@ -14,7 +14,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
+import {Kolonne} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.css';
@@ -38,7 +38,6 @@ interface MinOversiktListehodeProps {
     filtervalg: FiltervalgModell;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
-    oversiktType: OversiktType;
 }
 
 function MinOversiktListeHode({
@@ -46,8 +45,7 @@ function MinOversiktListeHode({
     sorteringOnClick,
     filtervalg,
     sorteringsfelt,
-    valgteKolonner,
-    oversiktType
+    valgteKolonner
 }: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -71,10 +69,7 @@ function MinOversiktListeHode({
         <div className="brukerliste__header brukerliste__sorteringheader">
             <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <VelgalleCheckboks
-                    skalVises={oversiktType in OversiktType}
-                    className="velgalle-checkboks col col-xs-2"
-                />
+                <VelgalleCheckboks className="velgalle-checkboks" />
                 <SorteringHeader
                     className="arbeidslistekategori__sorteringsheader"
                     sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}

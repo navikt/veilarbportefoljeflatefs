@@ -21,6 +21,8 @@ const aasen = 'Aasen';
 const minstEnVeileder = 'Du må legge til veiledere.';
 let antallVeiledergrupper = 0;
 
+const navDsRadioButtonsSelector = ".navds-radio-buttons"
+
 before('Start server', () => {
     cy.configure();
 });
@@ -235,6 +237,7 @@ describe('Mine filter', () => {
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
         cy.getByTestId('mine-filter_radio-container')
+            .get(navDsRadioButtonsSelector)
             .children()
             .last()
             .contains(testFilterNavn);
@@ -260,6 +263,7 @@ describe('Mine filter', () => {
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
         cy.getByTestId('mine-filter_radio-container')
+            .get(navDsRadioButtonsSelector)
             .children()
             .last()
             .contains(testFilterNavn);
@@ -277,6 +281,7 @@ describe('Mine filter', () => {
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
         cy.getByTestId('mine-filter_radio-container')
+            .get(navDsRadioButtonsSelector)
             .children()
             .first()
             .next()

@@ -19,7 +19,6 @@ function EnhetTabellOverskrift() {
             filtervalg={filtervalg}
             sorteringsfelt={sorteringsfelt}
             valgteKolonner={listevisning.valgte}
-            oversiktType={OversiktType.enhetensOversikt}
         />
     );
 }
