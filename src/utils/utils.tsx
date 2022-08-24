@@ -112,7 +112,11 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
             bruker.tegnspraaktolk.length > 0) ||
         (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
-        behov.push('Tegnspråktolk');
+        if (behov.length > 0) {
+            behov.push('tegnspråktolk');
+        } else {
+            behov.push('Tegnspråktolk');
+        }
     }
 
     if (behov.length === 0) {
@@ -144,7 +148,7 @@ export function tolkBehovSpraak(
         (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
         if (leggTilSpraakInfo) {
-            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + ' (Tale)');
+            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + ' (tale)');
         } else {
             behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk)!);
         }
@@ -157,10 +161,14 @@ export function tolkBehovSpraak(
             bruker.tegnspraaktolk.length > 0) ||
         (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
+        let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
+        if (behovSpraak.length > 0 && spraak != undefined) {
+            spraak = spraak.toLowerCase();
+        }
         if (leggTilSpraakInfo) {
-            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk) + ' (Tegn)');
+            behovSpraak.push(spraak + ' (tegn)');
         } else {
-            behovSpraak.push(tolkbehovSpraakData.get(bruker.tegnspraaktolk)!);
+            behovSpraak.push(spraak!);
         }
     }
 
