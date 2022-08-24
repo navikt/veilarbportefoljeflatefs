@@ -1,5 +1,5 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
-import {Maybe} from './types';
+import { AktiviteterModell, BrukerModell, FiltervalgModell } from "../model-interfaces";
+import { Maybe } from "./types";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -162,7 +162,7 @@ export function tolkBehovSpraak(
         (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
         let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
-        if (behovSpraak.length > 0 && spraak != undefined) {
+        if (behovSpraak.length > 0 && spraak !== undefined) {
             spraak = spraak.toLowerCase();
         }
         if (leggTilSpraakInfo) {
