@@ -10,14 +10,14 @@ import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {MultiSelect} from 'react-multi-select-component';
 
-interface FoedelandFilterformProps {
+interface TolkebehovFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
 }
 
-function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
+function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: TolkebehovFilterformProps) {
     const [tolkebehovValg, setTolkebehovValg] = useState<string[]>(filtervalg.tolkebehov);
     const [selectedTolkbehovSpraak, setSelectedTolkbehovSpraak] = useState<TolkebehovSpraakOptions[]>([]);
     const [tolkbehovSpraakSelectOptions, setTolkbehovSpraakSelectOptions] = useState<TolkebehovSpraakOptions[]>([]);
@@ -43,9 +43,10 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
         //nullstillBehovValg();
         setSelectedTolkbehovSpraak(data);
 
-        let selectedValues: string[] = [];
-        data.forEach(x => selectedValues.push(x.value));
-        endreFiltervalg('tolkBehovSpraak', selectedValues);
+        endreFiltervalg(
+            'tolkBehovSpraak',
+            data.map(x => x.value)
+        );
     };
 
     useEffect(() => {
@@ -109,6 +110,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
                     onChange={velgTolkbehovSpraak}
                     labelledBy="Select"
                     hasSelectAll={false}
+                    closeOnChangedValue={false}
                     overrideStrings={{
                         allItemsAreSelected: 'Alle språk er valgt.',
                         clearSearch: 'Fjern søk',
@@ -121,7 +123,10 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Fo
                         <div className={'navds-checkbox navds-checkbox--small'}>
                             <input
                                 type="checkbox"
-                                onChange={onClick}
+                                onChange={e => {
+                                    e.stopPropagation();
+                                    onClick();
+                                }}
                                 checked={checked}
                                 tabIndex={-1}
                                 className={'navds-checkbox__input'}

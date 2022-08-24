@@ -5,10 +5,10 @@ import classNames from 'classnames';
 import Grid from '../../../components/grid/grid';
 import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {MultiSelect} from 'react-multi-select-component';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
 import {FoedelandOptions} from '../../../ducks/foedeland';
 import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
+import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -22,8 +22,6 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
     const [selectedFoedeland, setSelectedFoedeland] = useState<FoedelandOptions[]>([]);
     const [foedelandSelectOptions, setFoedelandSelectOptions] = useState<FoedelandOptions[]>([]);
     const foedelandListData = useFoedelandSelector();
-
-    const harValg = Object.keys(landgruppe).length > 0;
 
     useEffect(() => {
         setLandgrupppeValg(filtervalg.landgruppe);
@@ -41,33 +39,22 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
 
     const velgFoedeland = data => {
         nullstillLandgruppeValg();
-        setSelectedFoedeland(data);
-
-        let selectedValues: string[] = [];
-        data.forEach(x => selectedValues.push(x.value));
-        endreFiltervalg('foedeland', selectedValues);
+        endreFiltervalg(
+            'foedeland',
+            data.map(x => x.value)
+        );
     };
 
     useEffect(() => {
         if (foedelandListData != null && foedelandListData.size > 0) {
             let result: FoedelandOptions[] = [];
-            let selectedFoedeland = filtervalg.foedeland;
 
             foedelandListData.forEach((value, key) => {
-                if (selectedFoedeland.includes(key)) {
-                    result.push({label: value, value: key, checked: true});
-                } else {
-                    result.push({label: value, value: key, checked: false});
-                }
+                result.push({label: value, value: key});
             });
             setFoedelandSelectOptions(result);
         }
-    }, [foedelandListData, filtervalg]);
-
-    const velgLandgruppe = (filtre: string[]) => {
-        nullstillFoedelandValg();
-        endreFiltervalg('landgruppe', filtre);
-    };
+    }, [foedelandListData]);
 
     const nullstillValg = () => {
         nullstillLandgruppeValg();
@@ -85,39 +72,36 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
     return (
         <>
             <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
-                {harValg && (
-                    <div className={classNames('checkbox-filterform__valg', 'landgruppe')}>
-                        <Grid columns={gridColumns}>
-                            <CheckboxGroup
-                                hideLegend
-                                legend=""
-                                onChange={velgLandgruppe}
-                                size="small"
-                                value={landgrupppeValg}
-                            >
-                                {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
-                                    <Tooltip
-                                        content={landgruppeTooltips[filterKey]}
-                                        placement="right"
-                                        offset={-130}
-                                        maxChar={999}
-                                        key={`tooltip-${filterKey}`}
-                                    >
-                                        <div>
-                                            <Checkbox
-                                                key={filterKey}
-                                                value={filterKey}
-                                                data-testid={`filter_${filterKey}`}
-                                            >
-                                                {filterValue}
-                                            </Checkbox>
-                                        </div>
-                                    </Tooltip>
-                                ))}
-                            </CheckboxGroup>
-                        </Grid>
-                    </div>
-                )}
+                <div className={classNames('checkbox-filterform__valg', 'landgruppe')}>
+                    <Grid columns={gridColumns}>
+                        <CheckboxGroup
+                            hideLegend
+                            legend=""
+                            onChange={(filtre: string[]) => {
+                                nullstillFoedelandValg();
+                                endreFiltervalg('landgruppe', filtre);
+                            }}
+                            size="small"
+                            value={landgrupppeValg}
+                        >
+                            {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
+                                <Tooltip
+                                    content={landgruppeTooltips[filterKey]}
+                                    placement="right"
+                                    offset={-130}
+                                    maxChar={999}
+                                    key={`tooltip-${filterKey}`}
+                                >
+                                    <div>
+                                        <Checkbox key={filterKey} value={filterKey} data-testid={`filter_${filterKey}`}>
+                                            {filterValue}
+                                        </Checkbox>
+                                    </div>
+                                </Tooltip>
+                            ))}
+                        </CheckboxGroup>
+                    </Grid>
+                </div>
                 <hr />
                 <label className="skjemaelement__label">Velg et eller flere land</label>
                 <MultiSelect
@@ -139,7 +123,10 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                         <div className={'navds-checkbox navds-checkbox--small'}>
                             <input
                                 type="checkbox"
-                                onChange={onClick}
+                                onChange={e => {
+                                    e.stopPropagation();
+                                    onClick();
+                                }}
                                 checked={checked}
                                 tabIndex={-1}
                                 className={'navds-checkbox__input'}

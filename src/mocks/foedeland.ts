@@ -154,7 +154,6 @@ export const foedelandListMockData = () => {
             land: 'Hongkong'
         },
         {code: 'BLR', land: 'Hviterussland'},
-        {code: '???', land: 'Ikke Tilgjengelig'},
         {
             code: 'IND',
             land: 'India'
