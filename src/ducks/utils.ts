@@ -22,8 +22,8 @@ export function sjekkStatuskode(response) {
         return response;
     }
     if (response.status === 401) {
-        if (!window.location.href.toString().includes('/feilsider/401.html')) {
-            window.location.href = '/veilarbportefoljeflatefs/feilsider/401.html';
+        if (!window.location.href.toString().includes('401.html')) {
+            window.location.href = '/401.html';
         }
     }
     return Promise.reject(new FetchError(response.statusText, response));
