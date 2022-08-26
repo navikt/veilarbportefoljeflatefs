@@ -1,4 +1,5 @@
 import {OversiktType} from './ui/listevisning';
+import {logEvent} from '../utils/frontend-logger';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -23,6 +24,10 @@ export function sjekkStatuskode(response) {
     }
     if (response.status === 401) {
         if (!window.location.href.toString().includes('401.html')) {
+            const urlUtenFnr = response?.url?.replace(/\d{11}/, '');
+            logEvent('portefolje.logger.innlogging', {
+                url: urlUtenFnr
+            });
             window.location.href = '/401.html';
         }
     }
