@@ -164,12 +164,12 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
-            } else if (value === true) {
+            } else if (key === 'visGeografiskBosted') {
                 return [
                     <FiltreringLabel
-                        key={key}
-                        label={FilterKonstanter[key]}
-                        slettFilter={() => slettEnkelt(key, false)}
+                        key="visGeografiskBosted-1"
+                        label="Vis geografisk bosted"
+                        slettFilter={() => slettEnkelt(key, '1')}
                     />
                 ];
             } else if (key === 'geografiskBosted') {
@@ -186,12 +186,12 @@ function FiltreringLabelContainer({
                         return '';
                     }
                 });
-            } else if (key === 'visGeografiskBosted') {
+            } else if (value === true) {
                 return [
                     <FiltreringLabel
-                        key="geografisk_bosted"
-                        label="Vis geografisk bosted"
-                        slettFilter={() => slettEnkelt(key, '1')}
+                        key={key}
+                        label={FilterKonstanter[key]}
+                        slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
             } else if (key === 'foedeland') {
