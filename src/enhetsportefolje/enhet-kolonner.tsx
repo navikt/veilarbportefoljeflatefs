@@ -42,6 +42,7 @@ import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
+import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
 interface EnhetKolonnerProps {
@@ -84,6 +85,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
+
+    const geografiskbostedData = useGeografiskbostedSelector();
+    const bostedKommune = bruker.bostedKommune
+        ? geografiskbostedData.get(bruker.bostedKommune)
+        : bruker.harUtelandsAddresse
+        ? 'Utland'
+        : '-';
 
     return (
         <div className={className}>
@@ -133,6 +141,21 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={
                     bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
                 }
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+                tekst={bostedKommune}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                tekst={bruker.bostedBydel ? geografiskbostedData.get(bruker.bostedBydel) : '-'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
             />
             <DatoKolonne
                 className="col col-xs-2"

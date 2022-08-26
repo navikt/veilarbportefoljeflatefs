@@ -225,6 +225,10 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         foedeland: hentLand(),
         harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
         innflyttingTilNorgeFraLand: '',
+        bostedKommune: hentBostedKommune(),
+        bostedBydel: hentBostedBydel(),
+        bostedSistOppdatert: randomDate({past: true})
+        innflyttingTilNorgeFraLand: '',
         talespraaktolk: hentSpraak(),
         tegnspraaktolk: hentSpraak(),
         tolkBehovSistOppdatert: randomDate({past: true}),
@@ -236,6 +240,28 @@ const hentLand = () => {
     const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
+};
+
+const hentBostedKommune = () => {
+    const spraakListe = ['0301', '1103'];
+
+    let x = Math.floor(Math.random() * 100);
+
+    if (x % 3 === 0) {
+        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    }
+    return '';
+};
+
+const hentBostedBydel = () => {
+    const spraakListe = ['030103', '110307'];
+
+    let x = Math.floor(Math.random() * 100);
+
+    if (x % 3 === 0) {
+        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    }
+    return '';
 };
 
 const hentSpraak = () => {

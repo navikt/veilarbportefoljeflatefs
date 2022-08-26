@@ -33,6 +33,7 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
 import {Alert, Label} from '@navikt/ds-react';
+import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 
@@ -88,6 +89,13 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             form="kjonn"
                             gridColumns={2}
                         />
+                    )}
+                />
+                <Dropdown
+                    name="Geografisk bosted"
+                    id="bosted"
+                    render={() => (
+                        <GeografiskbostedFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown

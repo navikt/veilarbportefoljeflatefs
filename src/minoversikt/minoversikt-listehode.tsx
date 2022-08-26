@@ -168,6 +168,33 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
+                    tekst="Geografisk bosted"
+                    headerId="bosted_kommune"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_BYDEL}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
+                    tekst="Detaljer geografisk"
+                    headerId="bosted_bydel"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    tekst="Geografisk sist oppdatert"
+                    headerId="bosted_sist_oppdatert"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+                />
+                <SorteringHeader
                     sortering={Sorteringsfelt.CV_SVARFRIST}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}

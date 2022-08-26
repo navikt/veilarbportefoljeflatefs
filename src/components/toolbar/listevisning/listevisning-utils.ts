@@ -30,6 +30,9 @@ alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {tekstlabel: 'Siste endring d
 alternativerConfig.set(Kolonne.FODELAND, {tekstlabel: 'Fødeland'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP, {tekstlabel: 'Statsborgerskap'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, {tekstlabel: 'Statsborgerskap gyldig fra'});
+alternativerConfig.set(Kolonne.BOSTED_KOMMUNE, {tekstlabel: 'Geografisk bosted'});
+alternativerConfig.set(Kolonne.BOSTED_BYDEL, {tekstlabel: 'Detaljer geografisk'});
+alternativerConfig.set(Kolonne.BOSTED_SIST_OPPDATERT, {tekstlabel: 'Geografisk bosted endring'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV, {tekstlabel: 'Tolkebehov'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SPRAAK, {tekstlabel: 'Språk'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Sist oppdatert'});

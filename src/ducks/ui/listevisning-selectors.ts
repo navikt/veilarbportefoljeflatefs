@@ -72,6 +72,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         );
     };
 
+    const visGeografiskBosted = () => {
+        return filtervalg.geografiskBosted!.length > 0 || filtervalg.visGeografiskBosted.length > 0;
+    };
+
+
     const tolkBehovErValgt = () => {
         return (
             filtervalg.tolkebehov.length > 0 ||
@@ -82,6 +87,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     return ([] as Kolonne[])
+        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
+        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
+        .concat(addHvis(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, filtervalg.landgruppe!.length > 0))
+        .concat(addHvis(Kolonne.BOSTED_KOMMUNE, visGeografiskBosted()))
+        .concat(addHvis(Kolonne.BOSTED_BYDEL, visGeografiskBosted()))
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(
@@ -169,5 +179,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
+        .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, visGeografiskBosted()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

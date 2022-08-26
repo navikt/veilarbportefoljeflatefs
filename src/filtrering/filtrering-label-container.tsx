@@ -15,6 +15,7 @@ import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
+import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
@@ -69,6 +70,8 @@ function FiltreringLabelContainer({
 
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
+
+    const geografiskBostedListData = useGeografiskbostedSelector();
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
@@ -166,6 +169,28 @@ function FiltreringLabelContainer({
                     <FiltreringLabel
                         key={key}
                         label={FilterKonstanter[key]}
+                        slettFilter={() => slettEnkelt(key, false)}
+                    />
+                ];
+            } else if (key === 'geografiskBosted') {
+                return value.map(singleValue => {
+                    if (geografiskBostedListData.get(singleValue) != null) {
+                        return (
+                            <FiltreringLabel
+                                key={`${key}--${singleValue}`}
+                                label={'Bosted: ' + geografiskBostedListData.get(singleValue)}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    } else {
+                        return '';
+                    }
+                });
+            } else if (key === 'visGeografiskBosted') {
+                return [
+                    <FiltreringLabel
+                        key="geografisk_bosted"
+                        label="Geografisk bosted"
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
