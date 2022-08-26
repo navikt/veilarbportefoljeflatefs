@@ -172,7 +172,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
-                    tekst="Geografisk bosted"
+                    tekst="Bosted"
                     headerId="bosted_kommune"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
                 />
@@ -181,7 +181,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
-                    tekst="Detaljer geografisk"
+                    tekst="Bosted detaljer"
                     headerId="bosted_bydel"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
                 />

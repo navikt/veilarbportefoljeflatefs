@@ -190,7 +190,7 @@ function FiltreringLabelContainer({
                 return [
                     <FiltreringLabel
                         key="geografisk_bosted"
-                        label="Geografisk bosted"
+                        label="Bosted"
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
