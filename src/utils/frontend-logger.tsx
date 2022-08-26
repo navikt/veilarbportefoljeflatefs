@@ -1,4 +1,5 @@
 import {erMock} from './url-utils';
+import {sendEventTilPortefolje} from '../middleware/api';
 
 export interface FrontendEvent {
     name: string;
@@ -10,7 +11,6 @@ export const logEvent = (logTag: string, fields?: {}, tags?: {}): void => {
     if (erMock()) {
         console.log('Event', logTag, 'Fields:', fields, 'Tags:', tags);
     } else {
-        // TODO: legg tilbake etter prodhendelsen er over
-        //sendEventTilPortefolje({name: logTag, fields: fields, tags: tags});
+        sendEventTilPortefolje({name: logTag, fields: fields, tags: tags});
     }
 };
