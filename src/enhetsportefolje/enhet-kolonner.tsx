@@ -88,7 +88,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const geografiskbostedData = useGeografiskbostedSelector();
     const bostedKommune = bruker.bostedKommune
-        ? bruker.bostedKommune + ' ' + geografiskbostedData.get(bruker.bostedKommune)
+        ? geografiskbostedData.get(bruker.bostedKommune)
         : bruker.harUtelandsAddresse
         ? 'Utland'
         : '-';
@@ -150,9 +150,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
-                tekst={
-                    bruker.bostedBydel ? bruker.bostedBydel + ' ' + geografiskbostedData.get(bruker.bostedBydel) : '-'
-                }
+                tekst={bruker.bostedBydel ? geografiskbostedData.get(bruker.bostedBydel) : '-'}
             />
             <TekstKolonne
                 className="col col-xs-2"
