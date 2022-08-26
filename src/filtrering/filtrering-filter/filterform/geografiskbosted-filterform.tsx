@@ -119,9 +119,7 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
                             />
                             <label className={'navds-checkbox__label'} htmlFor={`checkbox-bosted-${option.value}`}>
                                 <div className="navds-checkbox__content">
-                                    <div className="navds-body-short navds-body-short--small">
-                                        {option.value + ' ' + option.label}
-                                    </div>
+                                    <div className="navds-body-short navds-body-short--small">{option.label}</div>
                                 </div>
                             </label>
                         </div>
