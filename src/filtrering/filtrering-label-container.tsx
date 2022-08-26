@@ -191,7 +191,7 @@ function FiltreringLabelContainer({
                     <FiltreringLabel
                         key="geografisk_bosted"
                         label="Vis geografisk bosted"
-                        slettFilter={() => slettEnkelt(key, false)}
+                        slettFilter={() => slettEnkelt(key, '1')}
                     />
                 ];
             } else if (key === 'foedeland') {
