@@ -5,6 +5,8 @@ metadata:
   namespace: obo
   labels:
     team: obo
+  annotations:
+    wonderwall.nais.io/beta: "true"
 spec:
   image: ghcr.io/navikt/poao-frontend/poao-frontend:2022.08.01_11.00-f813dcd15fd5
   port: 8080
