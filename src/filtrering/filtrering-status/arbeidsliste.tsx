@@ -30,7 +30,6 @@ function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
                 filterNavn="minArbeidsliste"
                 handleChange={props.handleChange}
                 antall={statusTall.minArbeidsliste}
-                checked={props.checked}
             />
             {props.checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">

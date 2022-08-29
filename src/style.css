@@ -614,12 +614,12 @@ body .invisible {
     visibility: hidden;
 }
 body .text-hide {
-  font: 0px/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-  position: absolute;
+    font: 0px/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+    position: absolute;
 }
 body .ustilet {
     margin: 0;

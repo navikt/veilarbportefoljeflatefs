@@ -24,6 +24,7 @@ describe('Annen veileder', () => {
         cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
+            .get(".navds-checkboxes")
             .children()
             .should('have.length', 41);
         cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
@@ -35,6 +36,7 @@ describe('Annen veileder', () => {
             .clear()
             .type('Glosli');
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
+            .get(".navds-checkboxes")
             .children()
             .should('have.length', 1);
         cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');

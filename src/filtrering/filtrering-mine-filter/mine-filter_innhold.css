@@ -1,6 +1,9 @@
 .veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt {
     padding: 0.5rem;
 }
+.veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt .mine-filter__rad {
+    margin-bottom: 5px;
+}
 .veilarbportefoljeflatefs .mine-filter-wrapper__tekst {
     font-style: italic;
     margin: 0.5rem 0;
@@ -18,7 +21,6 @@
 .veilarbportefoljeflatefs .mine-filter__rad {
     display: flex;
     justify-content: space-between;
-    min-height: 3rem;
     align-items: center;
 }
 .veilarbportefoljeflatefs .mine-filter__filternavn {
