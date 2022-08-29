@@ -51,10 +51,6 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function erGCP(): boolean {
-    return window.location.hostname.endsWith('intern.nav.no');
-}
-
 export function erGithubPages() {
     return window.location.host.includes('navikt.github.io');
 }
@@ -111,15 +107,7 @@ export const keyCodes = {
 };
 
 export function specialChar(string: string | {label: string}) {
-    return string
-        .toString()
-        .toLowerCase()
-        .split('æ')
-        .join('ae')
-        .split('ø')
-        .join('o')
-        .split('å')
-        .join('a');
+    return string.toString().toLowerCase().split('æ').join('ae').split('ø').join('o').split('å').join('a');
 }
 
 export function kebabCase(string: string | {label: string}) {

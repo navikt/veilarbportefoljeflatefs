@@ -1,7 +1,6 @@
 import * as queryString from 'query-string';
 import {basename} from '../history';
 import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
-import {erGCP} from './utils';
 
 export function getFraBrukerFraUrl(): string {
     return queryString.parse(window.location.search).fraBruker as string;
@@ -56,10 +55,7 @@ export function getSorteringsRekkefolgeFromUrl() {
 export function getPersonUrl(fnr: string, pathParam: string, enhet: string): string {
     const enhetParam = enhet ? '?enhet=' + enhet : '';
     const params = pathParam + enhetParam;
-    if (erGCP()) {
-        return `/veilarbpersonflatefs/${fnr}${params}`;
-    }
-    return `${window.location.origin}/veilarbpersonflatefs/${fnr}${params}`;
+    return `/veilarbpersonflatefs/${fnr}${params}`;
 }
 
 export function updateLastPath() {
@@ -78,11 +74,8 @@ export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
 
 export const loginUrl = () => {
-    if (erGCP()) {
-        return `${window.location.origin}/oauth2/login?redirect=${window.location.href}`;
-    } else if (erMock()) {
+    if (erMock()) {
         return '/';
     }
-    console.error('Loging URL er ikke nødvendig med OpenAm');
-    return '/';
+    return `${window.location.origin}/oauth2/login?redirect=${window.location.href}`;
 };
