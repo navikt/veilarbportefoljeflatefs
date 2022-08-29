@@ -4,13 +4,12 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 import {tildelVeileder} from '../../../ducks/portefolje';
 import {VeilederModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
-import {Radio} from 'nav-frontend-skjema';
 import '../../toolbar/toolbar.css';
 import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {Button} from '@navikt/ds-react';
+import {Button, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -71,19 +70,17 @@ interface TildelVeilederRendererProps {
 function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
-            <div className="radio-filterform__valg">
+            <RadioGroup hideLegend legend="" className="radio-filterform__valg" onChange={onChange}>
                 {data.map((veileder, index) => (
                     <Radio
-                        name="veileder"
-                        key={veileder.ident}
-                        label={`${veileder.etternavn}, ${veileder.fornavn}`}
-                        value={veileder.ident}
-                        checked={ident ? ident === veileder.ident : false}
-                        onChange={e => onChange(e.target.value)}
                         data-testid={`tildel-veileder_valg_${index}`}
-                    />
+                        key={veileder.ident}
+                        name="veileder"
+                        size="small"
+                        value={veileder.ident}
+                    >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
-            </div>
+            </RadioGroup>
             <div className="filterform__under-valg">
                 <Button
                     onClick={btnOnClick}

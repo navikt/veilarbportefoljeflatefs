@@ -1,5 +1,5 @@
-import {sendEventTilPortefolje} from '../middleware/api';
 import {erMock} from './url-utils';
+import {sendEventTilPortefolje} from '../middleware/api';
 
 export interface FrontendEvent {
     name: string;

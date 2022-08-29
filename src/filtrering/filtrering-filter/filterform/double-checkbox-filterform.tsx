@@ -5,7 +5,7 @@ import './filterform.css';
 import classNames from 'classnames';
 import {utdanningBestatt, utdanningGodkjent} from '../../filter-konstanter';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Label} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup, Label} from '@navikt/ds-react';
 import Grid from '../../../components/grid/grid';
 
 interface DoubleCheckboxFilterformProps {
@@ -36,24 +36,11 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
         setCheckBoxValgBestatt(filtervalg[formUtdanningBestatt]);
     }, [filtervalg]);
 
-    const velgCheckBox = (e, typeForm) => {
-        e.persist();
-        const id = e.target.value.replace(`${typeForm}_`, '');
-        if (typeForm === formUtdanningGodkjent)
-            return e.target.checked
-                ? endreFiltervalg(formUtdanningGodkjent, [...checkBoxValgGodkjent, id])
-                : endreFiltervalg(
-                      formUtdanningGodkjent,
-                      checkBoxValgGodkjent.filter(value => value !== id)
-                  );
-        else if (typeForm === formUtdanningBestatt)
-            return e.target.checked
-                ? endreFiltervalg(formUtdanningBestatt, [...checkBoxValgBestatt, id])
-                : endreFiltervalg(
-                      formUtdanningBestatt,
-                      checkBoxValgBestatt.filter(value => value !== id)
-                  );
-        return;
+    const velgCheckBox = (valg: string[], typeForm) => {
+        endreFiltervalg(
+            typeForm,
+            valg.map(v => v.replace(`${typeForm}_`, ''))
+        );
     };
 
     const nullstillValg = () => {
@@ -76,7 +63,7 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         <RenderFields
                             valg={uniqueValgGodkjent}
                             form={formUtdanningGodkjent}
-                            velgCheckBox={e => velgCheckBox(e, formUtdanningGodkjent)}
+                            velgCheckBox={(valg: string[]) => velgCheckBox(valg, formUtdanningGodkjent)}
                             checkBoxValg={checkBoxValgGodkjent}
                         />
                     </div>
@@ -92,7 +79,7 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
                         <RenderFields
                             valg={uniqueValgBestatt}
                             form={formUtdanningBestatt}
-                            velgCheckBox={e => velgCheckBox(e, formUtdanningBestatt)}
+                            velgCheckBox={(valg: string[]) => velgCheckBox(valg, formUtdanningBestatt)}
                             checkBoxValg={checkBoxValgBestatt}
                         />
                     </div>
@@ -111,28 +98,22 @@ function DoubleCheckboxFilterform({endreFiltervalg, filtervalg, className}: Doub
 function RenderFields(props: {
     valg: Dictionary<string>;
     form: string;
-    velgCheckBox: (e) => void;
+    velgCheckBox: (valg: string[]) => void;
     checkBoxValg: string[];
 }) {
     return (
-        <>
+        <CheckboxGroup
+            hideLegend
+            legend=""
+            onChange={props.velgCheckBox}
+            value={props.checkBoxValg.map(valg => `${props.form}_${valg}`)}
+        >
             {Object.entries(props.valg).map(([filterKey, filterValue]) => (
-                <div className="skjemaelement skjemaelement--horisontal" key={filterKey}>
-                    <input
-                        id={filterKey}
-                        type="checkbox"
-                        className="skjemaelement__input checkboks"
-                        value={filterKey}
-                        checked={props.checkBoxValg.includes(filterKey.replace(`${props.form}_`, ''))}
-                        onChange={props.velgCheckBox}
-                        data-testid={`filter_${filterKey}`}
-                    />
-                    <label htmlFor={filterKey} className="skjemaelement__label">
-                        {filterValue}
-                    </label>
-                </div>
+                <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} value={filterKey} size="small">
+                    {filterValue}
+                </Checkbox>
             ))}
-        </>
+        </CheckboxGroup>
     );
 }
 

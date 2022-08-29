@@ -7,7 +7,7 @@ import {BodyShort, TextField} from '@navikt/ds-react';
 
 interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
-    hanterVeilederChange: (erValgt: boolean, veilederIdent: string) => void;
+    hanterVeilederChange: (veilederIdent: string[]) => void;
     gruppeNavn: string;
     setGruppeNavn: (nyttNavn: string) => void;
     modalTittel: string;
@@ -32,8 +32,8 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
             />
             <div className="veiledergruppe-modal__sokefilter">
                 <SokVeiledereVeiledergrupper
-                    erValgt={ident => (props.filterValg.veiledere ? props.filterValg.veiledere.includes(ident) : false)}
-                    hanterVeilederValgt={props.hanterVeilederChange}
+                    handterVeiledereValgt={props.hanterVeilederChange}
+                    valgteVeiledere={props.filterValg.veiledere}
                 />
             </div>
             <BodyShort
@@ -47,7 +47,11 @@ function VeiledergruppeForm(props: PropsWithChildren<VeiledergruppeFormProps>) {
             </BodyShort>
             <ValgtVeiledergruppeListe
                 valgteVeileder={props.filterValg.veiledere}
-                fjernValgtVeileder={veilederTarget => props.hanterVeilederChange(false, veilederTarget)}
+                fjernValgtVeileder={veilederTarget =>
+                    props.hanterVeilederChange(
+                        props.filterValg.veiledere.filter(veileder => veileder !== veilederTarget)
+                    )
+                }
                 feil={props.errors.filterValg}
             />
             {props.children}

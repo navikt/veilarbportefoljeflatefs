@@ -32,7 +32,7 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
 
     return (
         <form className="skjema radio-filterform" data-testid="radio-filterform">
-            <RadioGroup legend="" value={valgtFilterValg} size="small">
+            <RadioGroup hideLegend legend="" value={valgtFilterValg} size="small">
                 <Grid columns={gridColumns} className="radio-filterform__valg">
                     {Object.keys(valg).map(key => (
                         <Radio

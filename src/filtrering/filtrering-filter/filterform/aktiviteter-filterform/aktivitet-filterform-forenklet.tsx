@@ -23,30 +23,28 @@ function AktivitetFilterformForenklet({
     valgteForenkledeAktiviteter,
     harAvanserteAktiviteter
 }: AktivitetFilterformProps) {
-    const velgCheckBox = e => {
-        e.persist();
+    const velgCheckBox = (filtre: string[]) => {
         if (harAvanserteAktiviteter) {
             nullstillAvanserteAktiviteter();
         }
-        return e.target.checked
-            ? endreFiltervalg('aktiviteterForenklet', [...valgteForenkledeAktiviteter, e.target.value])
-            : endreFiltervalg(
-                  'aktiviteterForenklet',
-                  valgteForenkledeAktiviteter.filter(value => value !== e.target.value)
-              );
+        endreFiltervalg('aktiviteterForenklet', filtre);
     };
 
     return (
         <form className="skjema aktivitetfilterform-forenklet" data-testid="aktivitet-filterform-forenklet">
-            <CheckboxGroup legend="" size="small">
+            <CheckboxGroup
+                hideLegend
+                legend=""
+                size="small"
+                onChange={velgCheckBox}
+                value={valgteForenkledeAktiviteter}
+            >
                 {Object.entries(valg).map(([filterKey, filterValue]) => (
                     <Checkbox
-                        key={filterKey}
                         className="aktivitetvalg"
-                        onChange={e => velgCheckBox(e)}
-                        value={filterKey}
-                        checked={valgteForenkledeAktiviteter.includes(filterKey)}
                         data-testid={`aktivitet-forenklet_${filterKey}`}
+                        key={filterKey}
+                        value={filterKey}
                     >
                         {filterValue}
                     </Checkbox>

@@ -3,14 +3,14 @@ import {useSelector} from 'react-redux';
 import '../../../style.css';
 import {AppState} from '../../../reducer';
 import SokFilterVeilederliste from './sok-filter-veilederliste';
-import {Checkbox} from 'nav-frontend-skjema';
+import {CheckboxGroup, Checkbox} from '@navikt/ds-react';
 
 interface SokVeiledereProps {
-    erValgt: (ident: string) => boolean;
-    hanterVeilederValgt: (erValgt: boolean, veilederIdent: string) => void;
+    handterVeiledereValgt: (veilederIdenter: string[]) => void;
+    valgteVeiledere: string[];
 }
 
-function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeiledereProps) {
+function SokVeiledereVeiledergrupper({handterVeiledereValgt, valgteVeiledere}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) =>
         a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
@@ -19,19 +19,22 @@ function SokVeiledereVeiledergrupper({erValgt, hanterVeilederValgt}: SokVeileder
     return (
         <SokFilterVeilederliste data={sorterteVeilederePaEtterNavn} label="Velg veiledere:" placeholder="Søk veileder">
             {liste => (
-                <div className="checkbox-filterform__valg">
+                <CheckboxGroup
+                    className="checkbox-filterform__valg"
+                    hideLegend
+                    legend=""
+                    onChange={handterVeiledereValgt}
+                    value={valgteVeiledere}
+                >
                     {liste.map((elem, index) => (
                         <Checkbox
-                            role="checkbox"
-                            key={elem.ident}
-                            label={`${elem.etternavn}, ${elem.fornavn}`}
-                            value={elem.ident}
-                            checked={erValgt(elem.ident)}
-                            onChange={e => hanterVeilederValgt(e.target.checked, e.target.value)}
                             data-testid={`veiledergruppe_modal_veileder-checkbox_${index}`}
-                        />
+                            key={elem.ident}
+                            value={elem.ident}
+                            size="small"
+                        >{`${elem.etternavn}, ${elem.fornavn}`}</Checkbox>
                     ))}
-                </div>
+                </CheckboxGroup>
             )}
         </SokFilterVeilederliste>
     );

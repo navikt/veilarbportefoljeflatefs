@@ -4,14 +4,13 @@ import {AppState} from '../../reducer';
 import '../../filtrering/filtrering-filter/filterform/filterform.css';
 import '../../style.css';
 import SokFilter from './sok-filter';
-import {Button} from '@navikt/ds-react';
-import {Checkbox} from 'nav-frontend-skjema';
+import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface SokVeiledereProps {
-    erValgt: (ident: string) => boolean;
-    hanterVeilederValgt: (erValgt: boolean, veilederIdent: string) => void;
+    handterVeiledereValgt: (veilederIdenter: string[]) => void;
     btnOnClick: () => void;
     harValg: boolean;
+    valgteVeiledere: string[];
 }
 
 function SokVeiledere(props: SokVeiledereProps) {
@@ -24,18 +23,22 @@ function SokVeiledere(props: SokVeiledereProps) {
         <SokFilter placeholder="Søk veileder" data={sorterteVeilederePaEtterNavn}>
             {liste => (
                 <div className="checkbox-filterform">
-                    <div className="checkbox-filterform__valg">
+                    <CheckboxGroup
+                        className="checkbox-filterform__valg"
+                        hideLegend
+                        legend=""
+                        onChange={props.handterVeiledereValgt}
+                        value={props.valgteVeiledere}
+                    >
                         {liste.map((elem, index) => (
                             <Checkbox
-                                key={elem.ident}
-                                label={`${elem.etternavn}, ${elem.fornavn}`}
-                                value={elem.ident}
-                                checked={props.erValgt(elem.ident)}
-                                onChange={e => props.hanterVeilederValgt(e.target.checked, e.target.value)}
                                 data-testid={`sok-veileder_rad_${index}`}
-                            />
+                                key={elem.ident}
+                                size="small"
+                                value={elem.ident}
+                            >{`${elem.etternavn}, ${elem.fornavn}`}</Checkbox>
                         ))}
-                    </div>
+                    </CheckboxGroup>
                     <div className=" filterform__under-valg">
                         <Button
                             onClick={props.btnOnClick}

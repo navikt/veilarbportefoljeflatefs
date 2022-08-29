@@ -7,8 +7,7 @@ import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
-import {HelpText, Checkbox, Radio, RadioGroup} from '@navikt/ds-react';
-import classNames from 'classnames';
+import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
     form: string;
@@ -77,23 +76,18 @@ export function HendelserFilterform({
         <form className="skjema hendelser-filterform">
             <div className="hendelser-filterform__valg">
                 {oversiktType === OversiktType.minOversikt && (
-                    <div
-                        className={classNames(
-                            'hendelser-filterform__checkbox-gruppe',
-                            kebabCase(ulesteEndringer.ULESTE_ENDRINGER)
-                        )}
-                    >
-                        <Checkbox
-                            id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
-                            role="checkbox"
-                            value="ULESTE_ENDRINGER"
-                            checked={checkboxValg === 'ULESTE_ENDRINGER'}
-                            onChange={e => onCheckboxChange(e)}
-                            data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
-                        >
-                            {ulesteEndringer.ULESTE_ENDRINGER}
-                        </Checkbox>
-
+                    <div className="hendelser-filterform__checkbox-gruppe">
+                        <CheckboxGroup hideLegend legend="">
+                            <Checkbox
+                                id={kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}
+                                value="ULESTE_ENDRINGER"
+                                checked={checkboxValg === 'ULESTE_ENDRINGER'}
+                                onChange={e => onCheckboxChange(e)}
+                                data-testid={`filter_${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
+                            >
+                                {ulesteEndringer.ULESTE_ENDRINGER}
+                            </Checkbox>
+                        </CheckboxGroup>
                         <HelpText
                             strategy="fixed"
                             placement="right"
@@ -107,7 +101,7 @@ export function HendelserFilterform({
                 )}
 
                 <div className="hendelser-filterform__radio-gruppe" id="lagtTilAvBruker">
-                    <RadioGroup legend="Siste aktivitet lagt til av bruker" value={hendelserValg} size="small">
+                    <RadioGroup legend="Siste aktivitet lagt til av bruker" value={hendelserValg ?? ''} size="small">
                         {lagtTilAvBruker.map(key => (
                             <Radio
                                 onChange={e => onRadioChange(e)}
@@ -120,7 +114,7 @@ export function HendelserFilterform({
                             </Radio>
                         ))}
                     </RadioGroup>
-                    <RadioGroup legend="Siste aktivitet fullført av bruker" value={hendelserValg} size="small">
+                    <RadioGroup legend="Siste aktivitet fullført av bruker" value={hendelserValg ?? ''} size="small">
                         {fullfortAvBruker.map(key => (
                             <Radio
                                 onChange={e => onRadioChange(e)}
@@ -133,7 +127,7 @@ export function HendelserFilterform({
                             </Radio>
                         ))}
                     </RadioGroup>
-                    <RadioGroup legend="Siste aktivitet avbrutt av bruker" value={hendelserValg} size="small">
+                    <RadioGroup legend="Siste aktivitet avbrutt av bruker" value={hendelserValg ?? ''} size="small">
                         {avbruttAvBruker.map(key => (
                             <Radio
                                 onChange={e => onRadioChange(e)}
@@ -146,7 +140,7 @@ export function HendelserFilterform({
                             </Radio>
                         ))}
                     </RadioGroup>
-                    <RadioGroup legend="Andre" value={hendelserValg} size="small">
+                    <RadioGroup legend="Andre" value={hendelserValg ?? ''} size="small">
                         <Radio
                             onChange={e => onRadioChange(e)}
                             name="sisteEndringKategori"
