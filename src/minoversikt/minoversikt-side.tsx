@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import DocumentTitle from 'react-document-title';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
@@ -58,6 +57,10 @@ export default function MinoversiktSide() {
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        document.title = 'Min oversikt';
+    }, []);
+
     useSetStateFromUrl();
     useSyncStateMedUrl();
     useSetLocalStorageOnUnmount();
@@ -106,130 +109,123 @@ export default function MinoversiktSide() {
             .toString();
 
     return (
-        <DocumentTitle title="Min oversikt">
-            <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
-                <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
-                <SesjonNotifikasjon />
-                <Systemmeldinger />
+        <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
+            <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
+            <SesjonNotifikasjon />
+            <Systemmeldinger />
 
-                <Innholdslaster avhengigheter={[statustall]}>
-                    <MinOversiktWrapper
+            <Innholdslaster avhengigheter={[statustall]}>
+                <MinOversiktWrapper
+                    className={classNames(
+                        'oversikt-sideinnhold portefolje-side',
+                        isSidebarHidden && 'oversikt-sideinnhold__hidden',
+                        visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'
+                    )}
+                    id={`oversikt-sideinnhold_${id}`}
+                >
+                    <Sidebar
+                        filtervalg={filtervalg}
+                        oversiktType={oversiktType}
+                        enhettiltak={tiltak}
+                        isSidebarHidden={isSidebarHidden}
+                    />
+                    <div className="sokefelt-knapp__container">
+                        <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                        <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
+                    </div>
+                    <FiltreringLabelContainer
+                        filtervalg={filtervalg}
+                        oversiktType={oversiktType}
+                        enhettiltak={enhettiltak.data.tiltak}
+                        listevisning={listevisning}
                         className={classNames(
-                            'oversikt-sideinnhold portefolje-side',
-                            isSidebarHidden && 'oversikt-sideinnhold__hidden',
-                            visesAnnenVeiledersPortefolje && 'oversikt-sideinnhold__annen-veileder'
+                            'filtrering-label-container',
+                            visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
                         )}
-                        id={`oversikt-sideinnhold_${id}`}
+                    />
+                    <div
+                        className={classNames('oversikt__container', isSidebarHidden && 'oversikt__container__hidden')}
                     >
-                        <Sidebar
-                            filtervalg={filtervalg}
-                            oversiktType={oversiktType}
-                            enhettiltak={tiltak}
-                            isSidebarHidden={isSidebarHidden}
-                        />
-                        <div className="sokefelt-knapp__container">
-                            <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
-                        </div>
-                        <FiltreringLabelContainer
-                            filtervalg={filtervalg}
-                            oversiktType={oversiktType}
-                            enhettiltak={enhettiltak.data.tiltak}
-                            listevisning={listevisning}
-                            className={classNames(
-                                'filtrering-label-container',
-                                visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
-                            )}
-                        />
-                        <div
-                            className={classNames(
-                                'oversikt__container',
-                                isSidebarHidden && 'oversikt__container__hidden'
-                            )}
-                        >
-                            <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                        <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
+                            <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                <div
+                                    className={classNames(
+                                        'toolbar-container',
+                                        antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                    )}
+                                >
                                     <div
                                         className={classNames(
-                                            'toolbar-container',
-                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                            'tabellinfo',
+                                            visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
+                                            ((scrolling && isSidebarHidden) ||
+                                                (scrolling && windowWidth < 1200) ||
+                                                (!isSidebarHidden && windowWidth < 1200)) &&
+                                                'tabellinfo__hidden'
                                         )}
                                     >
-                                        <div
-                                            className={classNames(
-                                                'tabellinfo',
-                                                visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
-                                                ((scrolling && isSidebarHidden) ||
-                                                    (scrolling && windowWidth < 1200) ||
-                                                    (!isSidebarHidden && windowWidth < 1200)) &&
-                                                    'tabellinfo__hidden'
-                                            )}
-                                        >
-                                            <TabellOverskrift
-                                                className={
-                                                    visesAnnenVeiledersPortefolje
-                                                        ? 'tabelloverskrift__annen-veileder'
-                                                        : ''
-                                                }
-                                            />
-                                            {visesAnnenVeiledersPortefolje && (
-                                                <Alert
-                                                    variant="info"
-                                                    className="alertstripe__annen-veileder-varsel"
-                                                    data-testid="annen-veileder_infotekst"
-                                                    size="small"
-                                                >
-                                                    {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-                                                </Alert>
-                                            )}
-                                        </div>
-                                        <Toolbar
-                                            onPaginering={() =>
-                                                dispatch(
-                                                    hentPortefoljeForVeileder(
-                                                        enhetId,
-                                                        gjeldendeVeileder,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )
-                                                )
+                                        <TabellOverskrift
+                                            className={
+                                                visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''
                                             }
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
                                         />
-                                        <MinoversiktTabellOverskrift
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            innloggetVeileder={innloggetVeilederIdent!.ident}
-                                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                        />
+                                        {visesAnnenVeiledersPortefolje && (
+                                            <Alert
+                                                variant="info"
+                                                className="alertstripe__annen-veileder-varsel"
+                                                data-testid="annen-veileder_infotekst"
+                                                size="small"
+                                            >
+                                                {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                            </Alert>
+                                        )}
                                     </div>
-                                </span>
-                                <MinoversiktTabell
-                                    innloggetVeileder={innloggetVeilederIdent}
-                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                    classNameWrapper={
-                                        antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
-                                    }
-                                />
-                            </div>
-                            <MinOversiktModalController />
+                                    <Toolbar
+                                        onPaginering={() =>
+                                            dispatch(
+                                                hentPortefoljeForVeileder(
+                                                    enhetId,
+                                                    gjeldendeVeileder,
+                                                    sorteringsrekkefolge,
+                                                    sorteringsfelt,
+                                                    filtervalg
+                                                )
+                                            )
+                                        }
+                                        oversiktType={oversiktType}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        scrolling={scrolling}
+                                        isSidebarHidden={isSidebarHidden}
+                                    />
+                                    <MinoversiktTabellOverskrift
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        innloggetVeileder={innloggetVeilederIdent!.ident}
+                                        settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                    />
+                                </div>
+                            </span>
+                            <MinoversiktTabell
+                                innloggetVeileder={innloggetVeilederIdent}
+                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                                classNameWrapper={
+                                    antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
+                                }
+                            />
                         </div>
-                    </MinOversiktWrapper>
-                </Innholdslaster>
-                <MineFilterModal oversiktType={oversiktType} />
-                <FeilTiltakModal
-                    lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
-                    filterId={sisteValgtMineFilter!}
-                    oversiktType={oversiktType}
-                    gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                />
-            </div>
-        </DocumentTitle>
+                        <MinOversiktModalController />
+                    </div>
+                </MinOversiktWrapper>
+            </Innholdslaster>
+            <MineFilterModal oversiktType={oversiktType} />
+            <FeilTiltakModal
+                lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
+                filterId={sisteValgtMineFilter!}
+                oversiktType={oversiktType}
+                gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+            />
+        </div>
     );
 }
