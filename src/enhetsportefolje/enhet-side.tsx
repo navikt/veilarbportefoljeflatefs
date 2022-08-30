@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import DocumentTitle from 'react-document-title';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import TabellOverskrift from '../components/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
@@ -93,6 +92,10 @@ export default function EnhetSide() {
     const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
     const windowWidth = useWindowWidth();
 
+    useEffect(() => {
+        document.title = 'Enhetens oversikt';
+    }, []);
+
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
@@ -116,7 +119,6 @@ export default function EnhetSide() {
                 setScrolling(false);
             }
         }
-
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
@@ -131,118 +133,111 @@ export default function EnhetSide() {
             .toString();
 
     return (
-        <DocumentTitle title="Enhetens oversikt">
-            <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
-                <ToppMeny oversiktType={oversiktType} />
-                <SesjonNotifikasjon />
-                <Systemmeldinger />
-                <Innholdslaster avhengigheter={[statustall]}>
-                    <div
-                        className={classNames(
-                            'oversikt-sideinnhold',
-                            isSidebarHidden && 'oversikt-sideinnhold__hidden'
-                        )}
-                        id={`oversikt-sideinnhold_${id}`}
-                    >
-                        <Sidebar
-                            filtervalg={filtervalg}
-                            oversiktType={oversiktType}
-                            enhettiltak={tiltak}
-                            isSidebarHidden={isSidebarHidden}
-                        />
-                        <div className="sokefelt-knapp__container">
-                            <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
-                            <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
-                        </div>
-                        <FiltreringLabelContainer
-                            filtervalg={{
-                                ...filtervalg,
-                                veiledere: veilederLabel
-                            }}
-                            oversiktType={oversiktType}
-                            enhettiltak={enhettiltak.data.tiltak}
-                            listevisning={listevisning}
-                            className="filtrering-label-container"
-                        />
-                        {harFilter ? (
-                            <div
-                                className={classNames(
-                                    'oversikt__container',
-                                    isSidebarHidden && 'oversikt__container__hidden'
-                                )}
-                            >
-                                <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                    <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+        <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
+            <ToppMeny oversiktType={oversiktType} />
+            <SesjonNotifikasjon />
+            <Systemmeldinger />
+            <Innholdslaster avhengigheter={[statustall]}>
+                <div
+                    className={classNames('oversikt-sideinnhold', isSidebarHidden && 'oversikt-sideinnhold__hidden')}
+                    id={`oversikt-sideinnhold_${id}`}
+                >
+                    <Sidebar
+                        filtervalg={filtervalg}
+                        oversiktType={oversiktType}
+                        enhettiltak={tiltak}
+                        isSidebarHidden={isSidebarHidden}
+                    />
+                    <div className="sokefelt-knapp__container">
+                        <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
+                        <MineFilterLagreFilterKnapp oversiktType={oversiktType} />
+                    </div>
+                    <FiltreringLabelContainer
+                        filtervalg={{
+                            ...filtervalg,
+                            veiledere: veilederLabel
+                        }}
+                        oversiktType={oversiktType}
+                        enhettiltak={enhettiltak.data.tiltak}
+                        listevisning={listevisning}
+                        className="filtrering-label-container"
+                    />
+                    {harFilter ? (
+                        <div
+                            className={classNames(
+                                'oversikt__container',
+                                isSidebarHidden && 'oversikt__container__hidden'
+                            )}
+                        >
+                            <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
+                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
+                                    <div
+                                        className={classNames(
+                                            'toolbar-container',
+                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                        )}
+                                    >
                                         <div
                                             className={classNames(
-                                                'toolbar-container',
-                                                antallBrukere < 4 && 'ikke-sticky__toolbar-container'
+                                                'tabellinfo',
+                                                ((scrolling && isSidebarHidden) ||
+                                                    (scrolling && windowWidth < 1200) ||
+                                                    (!isSidebarHidden && windowWidth < 1200)) &&
+                                                    'tabellinfo__hidden'
                                             )}
                                         >
-                                            <div
-                                                className={classNames(
-                                                    'tabellinfo',
-                                                    ((scrolling && isSidebarHidden) ||
-                                                        (scrolling && windowWidth < 1200) ||
-                                                        (!isSidebarHidden && windowWidth < 1200)) &&
-                                                        'tabellinfo__hidden'
-                                                )}
-                                            >
-                                                <TabellOverskrift />
-                                            </div>
-                                            <Toolbar
-                                                onPaginering={() =>
-                                                    dispatch(
-                                                        hentPortefoljeForEnhet(
-                                                            enhetId,
-                                                            sorteringsrekkefolge,
-                                                            sorteringsfelt,
-                                                            filtervalg
-                                                        )
-                                                    )
-                                                }
-                                                oversiktType={oversiktType}
-                                                sokVeilederSkalVises
-                                                antallTotalt={portefoljeData.antallTotalt}
-                                                scrolling={scrolling}
-                                                isSidebarHidden={isSidebarHidden}
-                                            />
-                                            <EnhetTabellOverskrift />
+                                            <TabellOverskrift />
                                         </div>
-                                    </span>
-                                    <EnhetTabell
-                                        classNameWrapper={
-                                            antallBrukere > 0
-                                                ? 'portefolje__container'
-                                                : 'portefolje__container__tom-liste'
-                                        }
-                                    />
-                                </div>
+                                        <Toolbar
+                                            onPaginering={() =>
+                                                dispatch(
+                                                    hentPortefoljeForEnhet(
+                                                        enhetId,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
+                                                    )
+                                                )
+                                            }
+                                            oversiktType={oversiktType}
+                                            sokVeilederSkalVises
+                                            antallTotalt={portefoljeData.antallTotalt}
+                                            scrolling={scrolling}
+                                            isSidebarHidden={isSidebarHidden}
+                                        />
+                                        <EnhetTabellOverskrift />
+                                    </div>
+                                </span>
+                                <EnhetTabell
+                                    classNameWrapper={
+                                        antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
+                                    }
+                                />
                             </div>
-                        ) : (
-                            <Alert
-                                variant="info"
-                                className=" alertstripe__filtrering"
-                                aria-live="assertive"
-                                role="alert"
-                                aria-atomic="true"
-                                data-testid="alertstripe_filtrering"
-                                size="medium"
-                            >
-                                Du må gjøre en filtrering for å se brukere i listen.
-                            </Alert>
-                        )}
-                    </div>
-                </Innholdslaster>
-                <MineFilterModal oversiktType={oversiktType} />
-                <FeilTiltakModal
-                    lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
-                    filterId={sisteValgtMineFilter!}
-                    oversiktType={oversiktType}
-                    gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                />
-                <ModalEnhetSideController />
-            </div>
-        </DocumentTitle>
+                        </div>
+                    ) : (
+                        <Alert
+                            variant="info"
+                            className=" alertstripe__filtrering"
+                            aria-live="assertive"
+                            role="alert"
+                            aria-atomic="true"
+                            data-testid="alertstripe_filtrering"
+                            size="medium"
+                        >
+                            Du må gjøre en filtrering for å se brukere i listen.
+                        </Alert>
+                    )}
+                </div>
+            </Innholdslaster>
+            <MineFilterModal oversiktType={oversiktType} />
+            <FeilTiltakModal
+                lukkModal={() => dispatch(lukkFeilTiltakModal(oversiktType))}
+                filterId={sisteValgtMineFilter!}
+                oversiktType={oversiktType}
+                gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+            />
+            <ModalEnhetSideController />
+        </div>
     );
 }
