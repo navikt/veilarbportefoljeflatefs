@@ -5,7 +5,6 @@ import React, {useEffect, useRef, useState} from 'react';
 
 import {loginUrl} from '../../utils/url-utils';
 import {hentResterendeSekunder} from '../../middleware/api';
-import {erGCP} from '../../utils/utils';
 import {logEvent} from '../../utils/frontend-logger';
 
 enum SesjonStatus {
@@ -23,9 +22,7 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
         hentResterendeSekunder()
             .then(remainingSeconds => setExpirationTimeMs(remainingSeconds * 1000))
             .catch(e => {
-                if (erGCP()) {
-                    console.error(e);
-                }
+                console.error(e);
             });
     }, [setExpirationTimeMs]);
 

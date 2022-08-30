@@ -8,7 +8,7 @@ import {Decorator} from './decorator';
 import InitialDataProvider from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
 import {Modal} from '@navikt/ds-react';
-import {erGCP} from './utils/utils';
+import {erMock} from './utils/url-utils';
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
@@ -20,7 +20,7 @@ const store = createStore();
 function Application() {
     return (
         <Provider store={store}>
-            <BrowserRouter basename={erGCP() ? '/' : '/veilarbportefoljeflatefs'}>
+            <BrowserRouter basename={erMock() ? '/veilarbportefoljeflatefs' : '/'}>
                 <InitialDataProvider>
                     <RedirectPortefolje>
                         <Decorator />
