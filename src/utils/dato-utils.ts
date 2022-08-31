@@ -199,33 +199,29 @@ export function dagFraDato(dato: Date): string {
     }
 }
 
-export function hentSkjermetTil(skjermetTil): SkjermingTil {
-    var daysUntil = moment(skjermetTil).diff(moment(), 'days');
-    var tittelVerdi = 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
+export function hentSkjermetTil(skjermetTil: string | undefined): SkjermingTil {
+    if (!skjermetTil) {
+        return {
+            tittel: null,
+            type: 'info'
+        };
+    }
+    const daysUntil = moment(skjermetTil).diff(moment(), 'days');
+    const tittelVerdi = 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
 
-    if (daysUntil < 1) {
+    if (daysUntil < 5) {
         return {
             tittel: tittelVerdi,
             type: 'error'
         };
-    } else if (daysUntil < 5) {
-        return {
-            tittel: tittelVerdi,
-            type: 'error'
-        };
-    } else if (daysUntil <= 14 && daysUntil >= 5) {
+    } else if (daysUntil <= 14) {
         return {
             tittel: tittelVerdi,
             type: 'warning'
         };
-    } else if (daysUntil >= 14) {
-        return {
-            tittel: tittelVerdi,
-            type: 'info'
-        };
     } else {
         return {
-            tittel: null,
+            tittel: tittelVerdi,
             type: 'info'
         };
     }

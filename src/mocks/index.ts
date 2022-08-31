@@ -273,6 +273,7 @@ class MockWebSocket {
     }
 
     addEventListener() {}
+
     close() {}
 }
 
