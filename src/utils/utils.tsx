@@ -51,10 +51,6 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function erGCP(): boolean {
-    return window.location.hostname.endsWith('intern.nav.no');
-}
-
 export function erGithubPages() {
     return window.location.host.includes('navikt.github.io');
 }

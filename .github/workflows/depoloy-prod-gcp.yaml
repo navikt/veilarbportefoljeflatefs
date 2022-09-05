@@ -9,7 +9,7 @@ env:
     TZ: Europe/Amsterdam
 
 jobs:
-    deploy-dev:
+    deploy-prod:
         name: Deploy application to prod
         runs-on: ubuntu-latest
         steps:

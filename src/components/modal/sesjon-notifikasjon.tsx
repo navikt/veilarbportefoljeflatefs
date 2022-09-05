@@ -5,7 +5,7 @@ import React, {useEffect, useRef, useState} from 'react';
 
 import {loginUrl} from '../../utils/url-utils';
 import {hentResterendeSekunder} from '../../middleware/api';
-import {erGCP} from '../../utils/utils';
+import {logEvent} from '../../utils/frontend-logger';
 
 enum SesjonStatus {
     UTLOPER_SNART,
@@ -22,9 +22,7 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
         hentResterendeSekunder()
             .then(remainingSeconds => setExpirationTimeMs(remainingSeconds * 1000))
             .catch(e => {
-                if (erGCP()) {
-                    console.error(e);
-                }
+                console.error(e);
             });
     }, [setExpirationTimeMs]);
 
@@ -44,6 +42,13 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
         const msTilUtloperSnartAlert = expirationTimeMs - fiveMin;
         const msTilUtloggingAlert = expirationTimeMs - oneMin;
         const msTilUtlogging = expirationTimeMs - tenS;
+
+        // TODO: Bytt ut med nais sin autorefresh når den er klar
+        const refreshTokenWorkAround = expirationTimeMs - 60 * 30 * 1000;
+        if (refreshTokenWorkAround < 0) {
+            logEvent('portefolje.metrikker.autoRefresh');
+            window.location.href = loginUrl();
+        }
 
         setUtlopAlertOmMs(Math.max(msTilUtloperSnartAlert, 0));
         setUtloggingAlertOmMs(Math.max(msTilUtloggingAlert, 0));
