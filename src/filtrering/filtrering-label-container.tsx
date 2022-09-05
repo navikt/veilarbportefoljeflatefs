@@ -9,13 +9,13 @@ import FilterKonstanter, {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
+import {pagineringSetup} from '../ducks/paginering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
@@ -164,17 +164,20 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
-            } else if (key === 'visGeografiskBosted') {
+            } else if (key === 'visGeografiskBosted' && value.length > 0) {
+                console.log(key + ' visGeografiskBosted');
                 return [
                     <FiltreringLabel
-                        key="visGeografiskBosted-1"
-                        label="Vis geografisk bosted"
+                        key={`visGeografiskBosted-1`}
+                        label={`Vis geografisk bosted`}
                         slettFilter={() => slettEnkelt(key, '1')}
                     />
                 ];
-            } else if (key === 'geografiskBosted') {
-                return value.map(singleValue => {
-                    if (geografiskBostedListData.get(singleValue) != null) {
+            } else if (key === 'geografiskBosted' && value.length > 0) {
+                console.log(key + ' geografiskBosted');
+                return value
+                    .filter(singleValue => geografiskBostedListData.get(singleValue) !== null)
+                    .map(singleValue => {
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue}`}
@@ -182,10 +185,7 @@ function FiltreringLabelContainer({
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
-                    } else {
-                        return '';
-                    }
-                });
+                    });
             } else if (value === true) {
                 return [
                     <FiltreringLabel
