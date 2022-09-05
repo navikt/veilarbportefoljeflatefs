@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import DocumentTitle from 'react-document-title';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
@@ -24,6 +23,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Systemmeldinger} from '../components/systemmeldinger';
 import {Panel} from '@navikt/ds-react';
 import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
+import {useEffect} from 'react';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -35,6 +35,10 @@ function VeiledereSide() {
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
     const antallSynligeVeiledere = veiledere.data.veilederListe.length;
+
+    useEffect(() => {
+        document.title = 'Veilederoversikt';
+    }, []);
 
     useSetEnhetIUrl();
 
@@ -54,53 +58,47 @@ function VeiledereSide() {
     };
 
     return (
-        <DocumentTitle title="Veilederoversikt">
-            <div
-                className="side-storrelse veilederoversikt"
-                id={`side-storrelse_${id}`}
-                data-testid={`side-storrelse_${id}`}
-            >
-                <ToppMeny oversiktType={oversiktType} />
-                <SesjonNotifikasjon />
-                <Systemmeldinger />
-                <Innholdslaster avhengigheter={[statustall]}>
-                    <div
-                        className="oversikt-sideinnhold-veilederside"
-                        role="tabpanel"
-                        id={`oversikt-sideinnhold_${id}`}
-                    >
-                        <div className="status-filter-kolonne">
-                            <Panel className="sok-veileder" role="search">
-                                <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
-                            </Panel>
-                            <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
-                                <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
-                            </MetrikkEkspanderbartpanel>
-                        </div>
-                        <div className="liste-kolonne">
-                            <FiltreringLabelContainer
-                                filtervalg={{
-                                    veiledere: lagLablerTilVeiledereMedIdenter(
-                                        filtervalg.veiledere,
-                                        veiledere.data.veilederListe,
-                                        slettVeilederFilter
-                                    )
-                                }}
-                                oversiktType={OversiktType.veilederOversikt}
-                                className="filtrering-label-container"
-                                role="listitem"
-                            />
-                            <VeiledersideVisning
-                                veiledere={veiledere.data.veilederListe}
-                                portefoljestorrelser={portefoljestorrelser}
-                                veilederFilter={filtervalg.veiledere}
-                                antallVeiledere={antallSynligeVeiledere}
-                            />
-                        </div>
+        <div
+            className="side-storrelse veilederoversikt"
+            id={`side-storrelse_${id}`}
+            data-testid={`side-storrelse_${id}`}
+        >
+            <ToppMeny oversiktType={oversiktType} />
+            <SesjonNotifikasjon />
+            <Systemmeldinger />
+            <Innholdslaster avhengigheter={[statustall]}>
+                <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
+                    <div className="status-filter-kolonne">
+                        <Panel className="sok-veileder" role="search">
+                            <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
+                        </Panel>
+                        <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                            <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
+                        </MetrikkEkspanderbartpanel>
                     </div>
-                </Innholdslaster>
-            </div>
-        </DocumentTitle>
+                    <div className="liste-kolonne">
+                        <FiltreringLabelContainer
+                            filtervalg={{
+                                veiledere: lagLablerTilVeiledereMedIdenter(
+                                    filtervalg.veiledere,
+                                    veiledere.data.veilederListe,
+                                    slettVeilederFilter
+                                )
+                            }}
+                            oversiktType={OversiktType.veilederOversikt}
+                            className="filtrering-label-container"
+                            role="listitem"
+                        />
+                        <VeiledersideVisning
+                            veiledere={veiledere.data.veilederListe}
+                            portefoljestorrelser={portefoljestorrelser}
+                            veilederFilter={filtervalg.veiledere}
+                            antallVeiledere={antallSynligeVeiledere}
+                        />
+                    </div>
+                </div>
+            </Innholdslaster>
+        </div>
     );
 }
 
