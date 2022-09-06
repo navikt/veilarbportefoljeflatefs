@@ -165,7 +165,6 @@ function FiltreringLabelContainer({
                     />
                 ];
             } else if (key === 'visGeografiskBosted' && value.length > 0) {
-                console.log(key + ' visGeografiskBosted');
                 return [
                     <FiltreringLabel
                         key={`visGeografiskBosted-1`}
@@ -174,7 +173,6 @@ function FiltreringLabelContainer({
                     />
                 ];
             } else if (key === 'geografiskBosted' && value.length > 0) {
-                console.log(key + ' geografiskBosted');
                 return value
                     .filter(singleValue => geografiskBostedListData.get(singleValue) !== null)
                     .map(singleValue => {

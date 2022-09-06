@@ -173,6 +173,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
                     tekst="Bosted"
+                    className="col col-xs-2"
                     headerId="bosted_kommune"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
                 />
@@ -182,6 +183,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
                     tekst="Bosted detaljer"
+                    className="col col-xs-2"
                     headerId="bosted_bydel"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
                 />
@@ -192,6 +194,7 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
                     tekst="Geografisk sist oppdatert"
                     headerId="bosted_sist_oppdatert"
+                    className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 />
                 <SorteringHeader
