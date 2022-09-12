@@ -22,6 +22,7 @@ export const SesjonNotifikasjon = (): React.ReactElement | null => {
         hentResterendeSekunder()
             .then(remainingSeconds => setExpirationTimeMs(remainingSeconds * 1000))
             .catch(e => {
+                // eslint-disable-next-line no-console
                 console.error(e);
             });
     }, [setExpirationTimeMs]);

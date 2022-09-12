@@ -90,12 +90,10 @@
         "reselect": "^4.1.5",
         "typescript": "4.7.4"
     },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
     "lint-staged": {
         "*.{js,ts,tsx,json,less,css,md}": [
             "prettier --write",
+            "eslint src --config .eslintrc.lintstaged.json",
             "git add"
         ]
     },

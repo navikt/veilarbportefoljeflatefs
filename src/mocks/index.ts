@@ -269,6 +269,7 @@ mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentS
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
+        // eslint-disable-next-line no-console
         console.log('MOCK WS: Tried to connect to: ' + uri);
     }
 
