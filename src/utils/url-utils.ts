@@ -67,11 +67,9 @@ export function updateLastPath() {
     }
 }
 
-export const erDev = () => window.location.host.includes('dev') || window.location.host.includes('q1');
-
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
+export const getEndringsloggUrl = () => `/poao-sanity`;
 
 export const loginUrl = () => {
     if (erMock()) {

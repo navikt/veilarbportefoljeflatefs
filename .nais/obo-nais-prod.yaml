@@ -44,6 +44,8 @@ spec:
       rules:
         - application: poao-unleash
           namespace: poao
+        - application: endringslogg
+          namespace: pto
   env:
     - name: JSON_CONFIG
       value: >
@@ -138,6 +140,11 @@ spec:
                 "namespace": "personoversikt",
                 "cluster": "prod-fss"
               }
+            },
+            {
+              "fromPath": "/poao-sanity",
+              "toUrl": "http://endringslogg.pto",
+              "preserveFromPath": false,
             }
           ]
         }
