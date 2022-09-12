@@ -12,7 +12,10 @@ interface InnholdslasterProps {
 
 function Innholdslaster(props: InnholdslasterProps) {
     const array = value => (Array.isArray(value) ? value : [value]);
-    const harStatus = (...status) => element => array(status).includes(element.status);
+    const harStatus =
+        (...status) =>
+        element =>
+            array(status).includes(element.status);
     const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
     const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
 
