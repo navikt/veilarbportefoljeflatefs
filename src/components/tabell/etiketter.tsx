@@ -30,7 +30,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 hidden={!bruker.diskresjonskode}
             >{`Kode ${bruker.diskresjonskode}`}</HiddenEtikett>
             <HiddenEtikett variant="warning" size="small" hidden={!bruker.egenAnsatt || !!bruker.skjermetTil}>
-                Egen ansatt
+                Skjermet
             </HiddenEtikett>
             <HiddenEtikett
                 variant="info"
