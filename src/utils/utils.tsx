@@ -129,6 +129,17 @@ function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
     );
 }
 
+function formatSpraakTekst(inputText: string, leggTilSpraak: boolean, tolkvehov: string, lowerCase: boolean) {
+    if (leggTilSpraak) {
+        inputText += '(' + tolkvehov + ')';
+    }
+
+    if (lowerCase) {
+        inputText = inputText.toLowerCase();
+    }
+    return inputText;
+}
+
 export function tolkBehovSpraak(
     filtervalg: FiltervalgModell,
     bruker: BrukerModell,
@@ -144,7 +155,9 @@ export function tolkBehovSpraak(
             bruker.talespraaktolk.length > 0) ||
         (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
-        behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + (leggTilSpraak ? ' (tale)' : ''));
+        behovSpraak.push(
+            formatSpraakTekst(tolkbehovSpraakData.get(bruker.talespraaktolk)!, leggTilSpraak, 'tale', false)
+        );
     }
 
     if (
@@ -155,11 +168,9 @@ export function tolkBehovSpraak(
         (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
         let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
-        if (behovSpraak.length > 0 && spraak !== undefined) {
-            spraak = spraak.toLowerCase();
-        }
+        let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;
 
-        behovSpraak.push(spraak + (leggTilSpraak ? ' (tegn)' : ''));
+        behovSpraak.push(formatSpraakTekst(spraak!, leggTilSpraak, 'tegn', convertToLowerCase));
     }
 
     if (behovSpraak.length === 0) {
