@@ -1,6 +1,6 @@
-import {AppState} from '../../reducer';
-import {Kolonne, ListevisningState, OversiktType} from './listevisning';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
+import { AppState } from "../../reducer";
+import { Kolonne, ListevisningState, OversiktType } from "./listevisning";
+import { AktiviteterValg, FiltreringAktiviteterValg } from "../filtrering";
 import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
@@ -12,8 +12,8 @@ import {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
-} from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../model-interfaces';
+} from "../../filtrering/filter-konstanter";
+import { FiltervalgModell } from "../../model-interfaces";
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
@@ -82,12 +82,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     return ([] as Kolonne[])
-        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
+        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(
             addHvis(
                 Kolonne.STATSBORGERSKAP_GYLDIG_FRA,
-                filtervalg.landgruppe!.length > 0 || filtervalg.foedeland.length > 0
+                filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0
             )
         )
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
