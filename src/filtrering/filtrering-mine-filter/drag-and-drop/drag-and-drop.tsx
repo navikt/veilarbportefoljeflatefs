@@ -27,7 +27,7 @@ export interface DragAndDropProps {
 function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable, enhettiltak}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
-    const [valgtFilter, setValgtFilter] = useState("")
+    const [valgtFilter, setValgtFilter] = useState('');
     const dispatch = useDispatch();
 
     const veilederIdent = useSelector((state: AppState) => state.innloggetVeileder.data!);
@@ -59,7 +59,9 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     };
 
     const velgFilter = (filterId: string) => {
-        const filter: LagretFilter = dragAndDropOrder.find(sortertFilter => `${sortertFilter.filterId}` === filterId) as LagretFilter
+        const filter: LagretFilter = dragAndDropOrder.find(
+            sortertFilter => `${sortertFilter.filterId}` === filterId
+        ) as LagretFilter;
 
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
@@ -94,10 +96,10 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }, [stateFilterOrder]);
 
     useEffect(() => {
-        if(valgtMineFilter !== undefined && valgtMineFilter !== null) {
-            setValgtFilter(`${valgtMineFilter.filterId}`)
+        if (valgtMineFilter !== undefined && valgtMineFilter !== null) {
+            setValgtFilter(`${valgtMineFilter.filterId}`);
         }
-    }, [valgtMineFilter])
+    }, [valgtMineFilter]);
 
     if (isDraggable) {
         return (
@@ -112,13 +114,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }
 
     return (
-        <RadioGroup
-            hideLegend
-            legend=""
-            onChange={velgFilter}
-            value={valgtFilter}
-            size="small"
-        >
+        <RadioGroup hideLegend legend="" onChange={velgFilter} value={valgtFilter} size="small">
             {dragAndDropOrder.map((filter, idx) => (
                 <MineFilterRad
                     key={idx}

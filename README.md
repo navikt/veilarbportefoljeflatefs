@@ -40,3 +40,10 @@ Denne applikasjonen bundler ikke med Redux Devtools, men har lagt inn støtte fo
 `Redux Devtools extension`, som kommer med både LogMonitor og Inspector. Denne finner man på fellesdisken
 under `F:\programvare\Chrome-extensions`.
 
+## Konfigurere git blame til å ignorere spesifikke commits
+
+Om du ønsker kan du konfigurere git blame til å ignorere spesifikke commits definert i [.git-blame-ignore-revs](.git-blame-ignore-revs) (naviger til filen for å se hvilke commits som er ignorert for dette prosjektet).
+Commits definert i denne filen vil ikke dukke opp i git blame. Se forøvrig git sin dokumentasjon for hvordan dette fungerer: [https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revltrevgt](https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revltrevgt).
+
+Fremgangsmåte:
+`git config --global blame.ignoreRevsFile .git-blame-ignore-revs`

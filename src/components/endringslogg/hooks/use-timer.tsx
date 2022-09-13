@@ -1,24 +1,24 @@
-import { useRef } from "react";
+import {useRef} from 'react';
 
 export const useTimer = (): {
-  startTimer: () => void;
-  stopTimer: () => number;
+    startTimer: () => void;
+    stopTimer: () => number;
 } => {
-  const ref = useRef<number>(-1);
+    const ref = useRef<number>(-1);
 
-  const start = () => {
-    ref.current = Date.now();
-  };
+    const start = () => {
+        ref.current = Date.now();
+    };
 
-  const stop = () => {
-    if (ref.current === -1) {
-      return -1;
-    }
+    const stop = () => {
+        if (ref.current === -1) {
+            return -1;
+        }
 
-    const ret = Date.now() - ref.current;
-    ref.current = -1;
-    return ret;
-  };
+        const ret = Date.now() - ref.current;
+        ref.current = -1;
+        return ret;
+    };
 
-  return { startTimer: start, stopTimer: stop };
+    return {startTimer: start, stopTimer: stop};
 };

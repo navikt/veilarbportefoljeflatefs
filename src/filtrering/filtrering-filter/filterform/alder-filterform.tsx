@@ -125,7 +125,12 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                         <CheckboxGroup hideLegend legend="" value={checkBoxValg} onChange={submitCheckBoxValg}>
                             <Grid columns={2}>
                                 {Object.entries(valg).map(([filterKey, filterValue]) => (
-                                    <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} size="small" value={filterKey}>
+                                    <Checkbox
+                                        data-testid={`filter_${filterKey}`}
+                                        key={filterKey}
+                                        size="small"
+                                        value={filterKey}
+                                    >
                                         {filterValue}
                                     </Checkbox>
                                 ))}
