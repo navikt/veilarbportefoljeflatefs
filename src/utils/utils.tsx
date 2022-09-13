@@ -1,5 +1,5 @@
-import { AktiviteterModell, BrukerModell, FiltervalgModell } from "../model-interfaces";
-import { Maybe } from "./types";
+import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -122,19 +122,20 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     return behov.join(', ');
 }
 
+function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
+    return (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
+        (filtervalg.tolkBehovSpraak.length > 0 && filtervalg.tolkebehov.length === 0)
+    );
+}
+
 export function tolkBehovSpraak(
     filtervalg: FiltervalgModell,
     bruker: BrukerModell,
     tolkbehovSpraakData: Map<string, string>
 ) {
     const behovSpraak: string[] = [];
-    let leggTilSpraakInfo = false;
-    if (
-        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
-        (filtervalg.tolkBehovSpraak.length > 0 && filtervalg.tolkebehov.length === 0)
-    ) {
-        leggTilSpraakInfo = true;
-    }
+    let leggTilSpraak = leggTilSpraakInfo(filtervalg);
 
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
@@ -143,11 +144,7 @@ export function tolkBehovSpraak(
             bruker.talespraaktolk.length > 0) ||
         (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
-        if (leggTilSpraakInfo) {
-            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + ' (tale)');
-        } else {
-            behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk)!);
-        }
+        behovSpraak.push(tolkbehovSpraakData.get(bruker.talespraaktolk) + (leggTilSpraak ? ' (tale)' : ''));
     }
 
     if (
@@ -161,11 +158,8 @@ export function tolkBehovSpraak(
         if (behovSpraak.length > 0 && spraak !== undefined) {
             spraak = spraak.toLowerCase();
         }
-        if (leggTilSpraakInfo) {
-            behovSpraak.push(spraak + ' (tegn)');
-        } else {
-            behovSpraak.push(spraak!);
-        }
+
+        behovSpraak.push(spraak + (leggTilSpraak ? ' (tegn)' : ''));
     }
 
     if (behovSpraak.length === 0) {

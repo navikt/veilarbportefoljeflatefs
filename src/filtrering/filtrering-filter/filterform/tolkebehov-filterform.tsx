@@ -40,7 +40,6 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: To
     }, [filtervalg, tolkbehovSpraakData]);
 
     const velgTolkbehovSpraak = data => {
-        //nullstillBehovValg();
         setSelectedTolkbehovSpraak(data);
 
         endreFiltervalg(
