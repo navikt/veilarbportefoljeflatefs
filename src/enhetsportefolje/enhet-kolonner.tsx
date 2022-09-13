@@ -1,48 +1,48 @@
-import * as React from 'react';
-import BrukerNavn from '../components/tabell/brukernavn';
-import BrukerFnr from '../components/tabell/brukerfnr';
-import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
+import * as React from "react";
+import BrukerNavn from "../components/tabell/brukernavn";
+import BrukerFnr from "../components/tabell/brukerfnr";
+import UkeKolonne from "../components/tabell/kolonner/ukekolonne";
 import {
-    I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
-    UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
-    ytelseAapSortering,
-    ytelsevalg
-} from '../filtrering/filter-konstanter';
-import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {Kolonne} from '../ducks/ui/listevisning';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+  I_AVTALT_AKTIVITET,
+  MOTER_IDAG,
+  UNDER_VURDERING,
+  UTLOPTE_AKTIVITETER,
+  VENTER_PA_SVAR_FRA_BRUKER,
+  VENTER_PA_SVAR_FRA_NAV,
+  ytelseAapSortering,
+  ytelsevalg
+} from "../filtrering/filter-konstanter";
+import DatoKolonne from "../components/tabell/kolonner/datokolonne";
+import { Kolonne } from "../ducks/ui/listevisning";
+import { BrukerModell, FiltervalgModell, VeilederModell } from "../model-interfaces";
 import {
-    aapRettighetsperiode,
-    capitalize,
-    nesteUtlopsdatoEllerNull,
-    parseDatoString,
-    tolkBehov,
-    tolkBehovSpraak,
-    utledValgteAktivitetsTyper,
-    utlopsdatoUker
-} from '../utils/utils';
-import VeilederNavn from '../components/tabell/veiledernavn';
-import VeilederId from '../components/tabell/veilederid';
-import TidKolonne from '../components/tabell/kolonner/tidkolonne';
+  aapRettighetsperiode,
+  capitalize,
+  nesteUtlopsdatoEllerNull,
+  parseDatoString,
+  tolkBehov,
+  tolkBehovSpraak,
+  utledValgteAktivitetsTyper,
+  utlopsdatoUker
+} from "../utils/utils";
+import VeilederNavn from "../components/tabell/veiledernavn";
+import VeilederId from "../components/tabell/veilederid";
+import TidKolonne from "../components/tabell/kolonner/tidkolonne";
 import {
-    dagerSiden,
-    klokkeslettTilMinutter,
-    minuttDifferanse,
-    oppfolgingStartetDato,
-    toDateString
-} from '../utils/dato-utils';
-import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import './enhetsportefolje.css';
-import './brukerliste.css';
-import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
-import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
-import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import moment from 'moment';
-import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+  dagerSiden,
+  klokkeslettTilMinutter,
+  minuttDifferanse,
+  oppfolgingStartetDato,
+  toDateString
+} from "../utils/dato-utils";
+import VarighetKolonne from "../components/tabell/kolonner/varighetkolonne";
+import "./enhetsportefolje.css";
+import "./brukerliste.css";
+import { DagerSidenKolonne } from "../components/tabell/kolonner/dagersidenkolonne";
+import { TekstKolonne } from "../components/tabell/kolonner/tekstkolonne";
+import SisteEndringKategori from "../components/tabell/sisteendringkategori";
+import moment from "moment";
+import { useTolkbehovSelector } from "../hooks/redux/use-tolkbehovspraak-selector";
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -126,7 +126,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 tekst={
-                    bruker.tolkBehovSistOppdatert && bruker.tolkBehovSistOppdatert
+                    bruker.tolkBehovSistOppdatert
                         ? toDateString(bruker.tolkBehovSistOppdatert)!.toString()
                         : '-'
                 }
