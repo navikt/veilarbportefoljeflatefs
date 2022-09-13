@@ -276,6 +276,7 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/tolkSpraak', delayed(500, jsonRe
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
+        // eslint-disable-next-line no-console
         console.log('MOCK WS: Tried to connect to: ' + uri);
     }
 

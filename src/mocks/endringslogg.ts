@@ -10,8 +10,7 @@ export let endringsloggListe = [
                         _key: 'a7b34de7d90c',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Nå kan brukere oppdatere status om søknadsprosessen også etter at en stillingsaktivitet er satt til “Fullført” eller “Avbrutt”.'
+                        text: 'Nå kan brukere oppdatere status om søknadsprosessen også etter at en stillingsaktivitet er satt til “Fullført” eller “Avbrutt”.'
                     }
                 ],
                 markDefs: [],
@@ -39,8 +38,7 @@ export let endringsloggListe = [
                         _key: '819de1e7ece5',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre rekkefølgen.'
+                        text: 'Nå kan du bestemme rekkefølgen på filtrene i Mine filter. Klikk på hengelåssymbolet for å endre rekkefølgen.'
                     }
                 ],
                 markDefs: [],
@@ -54,8 +52,7 @@ export let endringsloggListe = [
                         _key: '5e8a4935dc13',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Filtrene er lagt i klikkbare faner med ikoner. Da må du skrolle mindre og får raskere tilgang til filtrene. Filtrene ligger fast på siden slik at du alltid ser dem når du scroller i listen. Du kan lukke filtermenyen dersom du ønsker større plass til listen.'
+                        text: 'Filtrene er lagt i klikkbare faner med ikoner. Da må du skrolle mindre og får raskere tilgang til filtrene. Filtrene ligger fast på siden slik at du alltid ser dem når du scroller i listen. Du kan lukke filtermenyen dersom du ønsker større plass til listen.'
                     }
                 ],
                 markDefs: [],
@@ -83,8 +80,7 @@ export let endringsloggListe = [
                         _key: '62917a3a33040',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra\nNAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller\nnei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.'
+                        text: 'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra\nNAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller\nnei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.'
                     }
                 ],
                 markDefs: [],
@@ -93,8 +89,7 @@ export let endringsloggListe = [
         ],
         date: '2021-10-19',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Rekrutteringsbistand-+-aktivitetsplanen.aspx',
             linkText: 'Se mer informasjon på Navet'
         },
         _id: '187920c6-31c9-4893-badc-012d147cc73f',
@@ -116,8 +111,7 @@ export let endringsloggListe = [
                         _key: '2e3d482cfbef',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».'
+                        text: 'I Rekrutteringsbistand finner du ca. 900 stillinger med inkluderingsmuligheter. Bruk mulighetsrommet hos arbeidsgiver og registrer behov for tilrettelegging under «Detaljer».'
                     }
                 ],
                 markDefs: [],
@@ -126,8 +120,7 @@ export let endringsloggListe = [
         ],
         date: '2021-03-24',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Inkludering---for-vei.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-markedsarbeid/SitePages/Inkludering---for-vei.aspx',
             linkText: 'Se mer informasjon på Navet'
         },
         _id: '2b83a568-d19b-41ee-bb19-1df97bff2550',
@@ -148,8 +141,7 @@ export let endringsloggListe = [
                                     _key: 'e894f125946b',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'I Rekrutteringsbistand finner du ca. 900 stillinger hvor arbeidsgiver er åpen for å inkludere.'
+                                    text: 'I Rekrutteringsbistand finner du ca. 900 stillinger hvor arbeidsgiver er åpen for å inkludere.'
                                 }
                             ],
                             markDefs: [],
@@ -193,8 +185,7 @@ export let endringsloggListe = [
                                     _key: '9e69c96757c0',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'Gi dine brukere flere muligheter for å komme i jobb. Registrer tilretteleggingsbehov under "Detaljer".'
+                                    text: 'Gi dine brukere flere muligheter for å komme i jobb. Registrer tilretteleggingsbehov under "Detaljer".'
                                 }
                             ],
                             markDefs: [],
@@ -222,8 +213,7 @@ export let endringsloggListe = [
                         _key: '4e990b13b1db',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.'
+                        text: 'Nå kan du lagre filter i oversikten. Dette kan være nyttig for å lage kombinasjoner av flere filter og som en snarvei til et filter du bruker ofte. Filtrene finner du i “Mine filter”.'
                     }
                 ],
                 markDefs: [],
@@ -232,8 +222,7 @@ export let endringsloggListe = [
         ],
         date: '2020-08-26',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Lagre-filtre-i-Min-oversikt.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Lagre-filtre-i-Min-oversikt.aspx',
             linkText: 'Nyhetssak på Navet'
         },
         _id: '3c2a6e4c-fad6-4ea8-912b-f01ca8f44c1a',
@@ -254,8 +243,7 @@ export let endringsloggListe = [
                                     _key: '09610a6e89eb',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'Nå kan du lagre enkeltfiltre og kombinasjoner av flere filter. Da får du enklere tilgang på filtreringer du bruker mye.'
+                                    text: 'Nå kan du lagre enkeltfiltre og kombinasjoner av flere filter. Da får du enklere tilgang på filtreringer du bruker mye.'
                                 }
                             ],
                             markDefs: [],
@@ -277,8 +265,7 @@ export let endringsloggListe = [
                                     _key: 'c3ec555728cf',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'Gjør filtreringen du ønsker å lagre. Klikk på knappen «Lagre filter» og gi filteret et navn.'
+                                    text: 'Gjør filtreringen du ønsker å lagre. Klikk på knappen «Lagre filter» og gi filteret et navn.'
                                 }
                             ],
                             markDefs: [],
@@ -300,8 +287,7 @@ export let endringsloggListe = [
                                     _key: '9d57d60aaeea',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'Velg det aktuelle filteret og klikk på blyantsymbolet for å redigere navnet eller slette filteret.'
+                                    text: 'Velg det aktuelle filteret og klikk på blyantsymbolet for å redigere navnet eller slette filteret.'
                                 }
                             ],
                             markDefs: [],
@@ -328,8 +314,7 @@ export let endringsloggListe = [
                         _key: '3cea8e8cbd6a',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene brukerne oppga når de registrerte seg.'
+                        text: 'Ved å bruke filteret “Svar fra registrering” kan du fremdeles filtrere på de ulike situasjonene brukerne oppga når de registrerte seg.'
                     }
                 ],
                 markDefs: [],
@@ -343,8 +328,7 @@ export let endringsloggListe = [
                         _key: '2dcbe12e9b560',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Mange av de som tidligere var permittert har fått endret situasjon, og filtrene “Alle utenom permittert etter 09.03.2020” og “Permittert etter 09.03.2020" har derfor vært misvisende.'
+                        text: 'Mange av de som tidligere var permittert har fått endret situasjon, og filtrene “Alle utenom permittert etter 09.03.2020” og “Permittert etter 09.03.2020" har derfor vært misvisende.'
                     }
                 ],
                 markDefs: [],
@@ -353,8 +337,7 @@ export let endringsloggListe = [
         ],
         date: '2020-11-04',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filteret--Permittert-etter-09.03.2020%E2%80%9D-er-n%C3%A5-fjernet-fra-oversikten-i-Modia.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filteret--Permittert-etter-09.03.2020%E2%80%9D-er-n%C3%A5-fjernet-fra-oversikten-i-Modia.aspx',
             linkText: 'Nyhetssak på Navet'
         },
         _id: '44897a68-f6a1-4bd1-a5a9-4a208ae3ec50',
@@ -388,8 +371,7 @@ export let endringsloggListe = [
                         _key: 'd52ddf32708f',
                         _type: 'span',
                         marks: [],
-                        text:
-                            ', som kan gjøre det lettere å planlegge eller ta over midlertidig for en annen veileder. '
+                        text: ', som kan gjøre det lettere å planlegge eller ta over midlertidig for en annen veileder. '
                     }
                 ],
                 level: 1,
@@ -405,8 +387,7 @@ export let endringsloggListe = [
                         _key: '7f364989f5c2',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Alle møter vises også i filteret "Møter med NAV i dag" på Min oversikt og Enhetens oversikt, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
+                        text: 'Alle møter vises også i filteret "Møter med NAV i dag" på Min oversikt og Enhetens oversikt, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
                     }
                 ],
                 level: 1,
@@ -435,8 +416,7 @@ export let endringsloggListe = [
                                     _key: '972a0d76c3bf',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'I øvre høyre hjørne finner du møteplanen, og du kan klikke deg inn på de brukerne du har planlagt møter med. En egen kolonne viser om møtet er markert "Avtalt med NAV" eller ikke.'
+                                    text: 'I øvre høyre hjørne finner du møteplanen, og du kan klikke deg inn på de brukerne du har planlagt møter med. En egen kolonne viser om møtet er markert "Avtalt med NAV" eller ikke.'
                                 }
                             ],
                             markDefs: [],
@@ -458,8 +438,7 @@ export let endringsloggListe = [
                                     _key: '2542620d5a23',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'Alle møter vises i filteret "Møter med NAV i dag" nå, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
+                                    text: 'Alle møter vises i filteret "Møter med NAV i dag" nå, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
                                 }
                             ],
                             markDefs: [],
@@ -500,8 +479,7 @@ export let endringsloggListe = [
                         _key: '4bcbe7bb0a61',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som har gjort endringer i målet.'
+                        text: 'Du kan filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som har gjort endringer i målet.'
                     }
                 ],
                 markDefs: [],
@@ -510,8 +488,7 @@ export let endringsloggListe = [
         ],
         date: '2021-04-08',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppf%C3%B8lging.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppf%C3%B8lging.aspx',
             linkText: 'Se mer informasjon på Navet'
         },
         _id: '66e03f98-0617-494d-bddd-dc705387a6fc',
@@ -554,8 +531,7 @@ export let endringsloggListe = [
                                     _key: '3b93916812e3',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'I oversikten kan du filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som har gjort endringer i målet.'
+                                    text: 'I oversikten kan du filtrere på brukere som selv har lagt til nye, fullført eller avbrutt aktiviteter, og brukere som har gjort endringer i målet.'
                                 }
                             ],
                             markDefs: [],
@@ -577,8 +553,7 @@ export let endringsloggListe = [
                                     _key: '7ef147b30ba8',
                                     _type: 'span',
                                     marks: [],
-                                    text:
-                                        'I Min oversikt kan du også identifisere brukere som har gjort endringer siden du sist var inne på aktivitetsplanen.'
+                                    text: 'I Min oversikt kan du også identifisere brukere som har gjort endringer siden du sist var inne på aktivitetsplanen.'
                                 }
                             ],
                             markDefs: [],
@@ -604,8 +579,7 @@ export let endringsloggListe = [
                         _key: '6caf6c23480c',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.'
+                        text: 'Vi har forenklet filtrene for ulike aktivitetstyper. Når du velger en eller flere av aktivitetstypene viser listen brukere som har en eller flere av de valgte aktivitetene.'
                     }
                 ],
                 markDefs: [],
@@ -619,8 +593,7 @@ export let endringsloggListe = [
                         _key: 'c5283aeb3f6a0',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har en gitt aktivitet.'
+                        text: 'Velg “Avansert filter” for å filtrere på brukere som kun har bestemte aktiviteter eller som ikke har en gitt aktivitet.'
                     }
                 ],
                 markDefs: [],
@@ -634,8 +607,7 @@ export let endringsloggListe = [
                         _key: 'c93928c899010',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra aktivitetsfilteret.'
+                        text: 'Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra aktivitetsfilteret.'
                     }
                 ],
                 markDefs: [],
@@ -663,8 +635,7 @@ export let endringsloggListe = [
                         _key: '01da3facd137',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
+                        text: 'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
                     }
                 ],
                 markDefs: [],
@@ -692,8 +663,7 @@ export let endringsloggListe = [
                         _key: 'b59fdb452024',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.'
+                        text: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.'
                     }
                 ],
                 markDefs: [],
@@ -716,8 +686,7 @@ export let endringsloggListe = [
         ],
         date: '2020-07-10',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nytt-filter-i-oversikten--Delt-ikke-delt-CV-og-jobbprofil-med-NAV.aspx',
             linkText: 'Nyhetssak på Navet'
         },
         _id: '9302dca3-33d1-4283-af7f-d0c6ea8b3612',
@@ -739,8 +708,7 @@ export let endringsloggListe = [
                         _key: '0a8b17c2976a',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'For møter som er innkalt gjennom aktivitetsplanen, vil det nå bli sendt ut påminnelse til brukeren 24 timer før møtet.'
+                        text: 'For møter som er innkalt gjennom aktivitetsplanen, vil det nå bli sendt ut påminnelse til brukeren 24 timer før møtet.'
                     }
                 ],
                 markDefs: [],
@@ -749,8 +717,7 @@ export let endringsloggListe = [
         ],
         date: '2020-09-08',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-f%C3%A5r-brukerne-automatisk-varsel-om-m%C3%B8te-med-NAV.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/N%C3%A5-f%C3%A5r-brukerne-automatisk-varsel-om-m%C3%B8te-med-NAV.aspx',
             linkText: 'Nyhetssak på Navet'
         },
         _id: '96528e39-1ca5-4da7-af55-4d1f72f40b25',
@@ -772,8 +739,7 @@ export let endringsloggListe = [
                         _key: '8556eb48be6f',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.'
+                        text: 'Forhåndsorienteringen er nå flyttet fra dialogen til aktiviteten. Informasjon om mulig konsekvens for ytelse knyttes tettere til den aktiviteten den gjelder. Brukeren vil fortsatt motta sms/e-post.'
                     }
                 ],
                 markDefs: [],
@@ -782,8 +748,7 @@ export let endringsloggListe = [
         ],
         date: '2021-06-16',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ny-flyt-og-utseende-p%C3%A5-forh%C3%A5ndsorientering-i-aktivitetsplanen.aspx',
             linkText: 'Se mer informasjon på Navet'
         },
         _id: '9e5678e1-bc46-4fd6-acbf-8ff9426fd6e6',
@@ -805,8 +770,7 @@ export let endringsloggListe = [
                         _key: '1c4ebe6a67c4',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen. '
+                        text: 'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen. '
                     }
                 ],
                 markDefs: [],
@@ -834,8 +798,7 @@ export let endringsloggListe = [
                         _key: '146502168e9a',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om utdanning.'
+                        text: 'Nå kan du filtrere på svarene brukerne oppga i registreringen på spørsmålene om utdanning. Dette kan hjelpe deg med å identifisere og prioritere hvilke brukere som kan ha behov for veiledning om utdanning.'
                     }
                 ],
                 markDefs: [],
@@ -849,8 +812,7 @@ export let endringsloggListe = [
                         _key: 'ba4ea0202aba0',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.'
+                        text: 'Filtrene finner du i filtergruppen "Svar fra registrering" i fanen til høyre i filterkolonnen.'
                     }
                 ],
                 markDefs: [],
@@ -859,8 +821,7 @@ export let endringsloggListe = [
         ],
         date: '2020-11-23',
         linkAttributes: {
-            link:
-                'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx',
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Nye-filter-i-oversikten--Svar-om-utdanning-fra-registrering.aspx',
             linkText: 'Nyhetssak på Navet'
         },
         _id: 'cc5b4d8d-3002-4370-8ce1-92e6312b73d2',
@@ -882,8 +843,7 @@ export let endringsloggListe = [
                         _key: '74b5a9a8a9ba0',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.'
+                        text: 'I Personalia-bolken i Detaljer kan du nå se informasjon bl.a. om vergemål, fullmakt og behov for tilrettelagt kommunikasjon (språktolk og tegnspråktolk), samt mer informasjon om adresser og familiemedlemmer.'
                     }
                 ],
                 markDefs: [],
@@ -943,8 +903,7 @@ export let endringsloggListe = [
                         _key: '2e68dcc1e5ba',
                         _type: 'span',
                         marks: [],
-                        text:
-                            'Kopiknapper i personalia for enkelt å kopiere e-post, telefon- eller kontonummer til utklippstavlen'
+                        text: 'Kopiknapper i personalia for enkelt å kopiere e-post, telefon- eller kontonummer til utklippstavlen'
                     }
                 ],
                 level: 1,

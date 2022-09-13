@@ -33,13 +33,13 @@ export default function persistentReducer(scope, location, reducer, initialFilte
         if (state === undefined) {
             nState = read(scope);
         }
-        
+
         const rState = reducer(nState, action);
-        
+
         if (rState !== nState) {
             write(scope, rState);
         }
 
         return rState;
     };
-};
+}

@@ -20,15 +20,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     return (
         <Table.Row>
             <Table.DataCell className="moteplan_tabell_klokkeslett">
-                {moteDato
-                    .getHours()
-                    .toString()
-                    .padStart(2, '0')}
-                :
-                {moteDato
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, '0')}
+                {moteDato.getHours().toString().padStart(2, '0')}:{moteDato.getMinutes().toString().padStart(2, '0')}
             </Table.DataCell>
 
             <Table.DataCell className="moteplan_tabell_deltaker">
