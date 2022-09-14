@@ -18,6 +18,7 @@ const statustall = {
     erSykmeldtMedArbeidsgiver: 20,
     trengerVurdering: 42,
     moterMedNAVIdag: 40,
+    cvDeltStillingFraNav: 3,
     underVurdering: 14
 };
 
