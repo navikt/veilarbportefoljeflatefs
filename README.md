@@ -47,3 +47,7 @@ Commits definert i denne filen vil ikke dukke opp i git blame. Se forøvrig git 
 
 Fremgangsmåte:
 `git config --global blame.ignoreRevsFile .git-blame-ignore-revs`
+
+## For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #team-obo-poao.
