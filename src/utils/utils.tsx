@@ -153,7 +153,9 @@ export function tolkBehovSpraak(
             bruker.talespraaktolk !== undefined &&
             bruker.talespraaktolk !== null &&
             bruker.talespraaktolk.length > 0) ||
-        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+        (bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
     ) {
         behovSpraak.push(
             formatSpraakTekst(tolkbehovSpraakData.get(bruker.talespraaktolk)!, leggTilSpraak, 'tale', false)
@@ -165,7 +167,9 @@ export function tolkBehovSpraak(
             bruker.tegnspraaktolk !== undefined &&
             bruker.tegnspraaktolk !== null &&
             bruker.tegnspraaktolk.length > 0) ||
-        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+        (bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
     ) {
         let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
         let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;

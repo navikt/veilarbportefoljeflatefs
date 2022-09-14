@@ -238,14 +238,14 @@ const hentLand = () => {
 };
 
 const hentSpraak = () => {
-    const spraakListe = ['AR ', 'NB', 'ES', 'UK'];
+    const spraakListe = ['AR', 'NB', 'ES', 'UK'];
 
     let x = Math.floor(Math.random() * 100);
 
     if (x % 5 === 0) {
         return spraakListe[Math.floor(Math.random() * spraakListe.length)];
     }
-    return '';
+    return null;
 };
 
 const randomEndring = () => {
