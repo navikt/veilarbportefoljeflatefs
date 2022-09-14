@@ -161,7 +161,7 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
                     tekst="Sist oppdatert"
                     className="col col-xs-2"
-                    title="Tolk behov sist oppdatert"
+                    title="Tolkebehov sist oppdatert"
                     headerId="tolkbehovsistoppdatert"
                     skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 />
