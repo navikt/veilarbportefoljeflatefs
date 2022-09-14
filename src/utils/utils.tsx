@@ -1,5 +1,5 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
-import {Maybe} from './types';
+import { AktiviteterModell, BrukerModell, FiltervalgModell } from "../model-interfaces";
+import { Maybe } from "./types";
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -131,7 +131,7 @@ function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
 
 function formatSpraakTekst(inputText: string, leggTilSpraak: boolean, tolkvehov: string, lowerCase: boolean) {
     if (leggTilSpraak) {
-        inputText += '(' + tolkvehov + ')';
+        inputText += ' (' + tolkvehov + ')';
     }
 
     if (lowerCase) {
