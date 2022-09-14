@@ -79,6 +79,7 @@ export interface FiltervalgModell {
     ulesteEndringer: null | string;
     tolkebehov: string[];
     tolkBehovSpraak: string[];
+    cvDeltFraNAV: null | string;
 }
 
 export interface EnhetModell {
@@ -159,6 +160,8 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    cvDeltStillingFraNav?: string;
+    //skal den være her? Hva er forskjellen på string og string[], kan det siste være en liste?
 }
 
 interface Statsborgerskap {
