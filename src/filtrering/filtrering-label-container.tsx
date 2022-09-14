@@ -15,6 +15,8 @@ import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning
 import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
+import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
+import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -64,6 +66,9 @@ function FiltreringLabelContainer({
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
     }, [dispatch]);
+
+    const foedelandListData = useFoedelandSelector();
+    const tolkbehovSpraakListData = useTolkbehovSelector();
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
@@ -164,6 +169,34 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
+            } else if (key === 'foedeland') {
+                return value.map(singleValue => {
+                    if (foedelandListData.get(singleValue) != null) {
+                        return (
+                            <FiltreringLabel
+                                key={`${key}--${singleValue}`}
+                                label={'Fødeland: ' + foedelandListData.get(singleValue)}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    } else {
+                        return '';
+                    }
+                });
+            } else if (key === 'tolkBehovSpraak') {
+                return value.map(singleValue => {
+                    if (tolkbehovSpraakListData.get(singleValue) != null) {
+                        return (
+                            <FiltreringLabel
+                                key={`${key}--${singleValue}`}
+                                label={'Tolkebehov språk: ' + tolkbehovSpraakListData.get(singleValue)}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    } else {
+                        return '';
+                    }
+                });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (

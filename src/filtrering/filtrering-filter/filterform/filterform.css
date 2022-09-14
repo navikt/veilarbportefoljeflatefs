@@ -121,6 +121,16 @@
     padding: 0.5rem 0 1rem 0.5rem;
     border: none;
 }
+.veilarbportefoljeflatefs .checkbox-filterform .utvalgsliste {
+    font-size: 14px !important;
+    margin-bottom: 1rem;
+}
+
+.veilarbportefoljeflatefs .checkbox-filterform .utvalgsliste .navds-checkbox__label {
+    padding: 0 0;
+    margin: -4px 0;
+}
+
 .veilarbportefoljeflatefs .field__container {
     position: relative;
 }

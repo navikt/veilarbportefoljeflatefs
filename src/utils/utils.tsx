@@ -1,4 +1,4 @@
-import {AktiviteterModell} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -87,6 +87,101 @@ export default function TittelValg(ytelseSorteringHeader) {
         return 'Gjenstående uker av rettighetsperioden for ytelsen';
     }
     return '';
+}
+
+export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
+    const behov: string[] = [];
+    if (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
+            bruker.talespraaktolk !== undefined &&
+            bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk.length > 0) ||
+        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+    ) {
+        behov.push('Talespråktolk');
+    }
+
+    if (
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
+            bruker.tegnspraaktolk !== undefined &&
+            bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk.length > 0) ||
+        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+    ) {
+        if (behov.length > 0) {
+            behov.push('tegnspråktolk');
+        } else {
+            behov.push('Tegnspråktolk');
+        }
+    }
+
+    if (behov.length === 0) {
+        return '-';
+    }
+
+    return behov.join(', ');
+}
+
+function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
+    return (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
+        (filtervalg.tolkBehovSpraak.length > 0 && filtervalg.tolkebehov.length === 0)
+    );
+}
+
+function formatSpraakTekst(inputText: string, leggTilSpraak: boolean, tolkvehov: string, lowerCase: boolean) {
+    if (leggTilSpraak) {
+        inputText += '(' + tolkvehov + ')';
+    }
+
+    if (lowerCase) {
+        inputText = inputText.toLowerCase();
+    }
+    return inputText;
+}
+
+export function tolkBehovSpraak(
+    filtervalg: FiltervalgModell,
+    bruker: BrukerModell,
+    tolkbehovSpraakData: Map<string, string>
+) {
+    const behovSpraak: string[] = [];
+    let leggTilSpraak = leggTilSpraakInfo(filtervalg);
+
+    if (
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
+            bruker.talespraaktolk !== undefined &&
+            bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk.length > 0) ||
+        (bruker.talespraaktolk !== null &&
+            bruker.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+    ) {
+        behovSpraak.push(
+            formatSpraakTekst(tolkbehovSpraakData.get(bruker.talespraaktolk)!, leggTilSpraak, 'tale', false)
+        );
+    }
+
+    if (
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
+            bruker.tegnspraaktolk !== undefined &&
+            bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk.length > 0) ||
+        (bruker.tegnspraaktolk !== null &&
+            bruker.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+    ) {
+        let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
+        let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;
+
+        behovSpraak.push(formatSpraakTekst(spraak!, leggTilSpraak, 'tegn', convertToLowerCase));
+    }
+
+    if (behovSpraak.length === 0) {
+        return '-';
+    }
+
+    return behovSpraak.join(', ');
 }
 
 export const keyCodes = {
