@@ -86,9 +86,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     return ([] as Kolonne[])
-        .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe!.length > 0))
-        .concat(addHvis(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, filtervalg.landgruppe!.length > 0))
         .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
@@ -174,7 +171,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         )
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
-        .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
