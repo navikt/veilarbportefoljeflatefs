@@ -136,7 +136,6 @@ export function oppdaterState(
             brukereError
         })(dispatch);
     }
-    console.log(arbeidslisteToDispatch[arbeidslisteToDispatch.length - 1].kategori);
 
     leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
     switch (arbeidslisteToDispatch[arbeidslisteToDispatch.length - 1].kategori) {
