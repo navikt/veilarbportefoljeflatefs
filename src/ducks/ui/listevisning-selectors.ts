@@ -76,7 +76,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         return filtervalg.geografiskBosted.length > 0 || filtervalg.visGeografiskBosted!.length > 0;
     };
 
-
     const tolkBehovErValgt = () => {
         return (
             filtervalg.tolkebehov.length > 0 ||
@@ -92,8 +91,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, filtervalg.landgruppe!.length > 0))
         .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
-        .concat(addHvis(Kolonne.BOSTED_KOMMUNE, visGeografiskBosted()))
-        .concat(addHvis(Kolonne.BOSTED_BYDEL, visGeografiskBosted()))
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(

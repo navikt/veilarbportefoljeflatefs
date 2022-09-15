@@ -227,8 +227,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         innflyttingTilNorgeFraLand: '',
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
-        bostedSistOppdatert: randomDate({past: true})
-        innflyttingTilNorgeFraLand: '',
+        bostedSistOppdatert: randomDate({past: true}),
         talespraaktolk: hentSpraak(),
         tegnspraaktolk: hentSpraak(),
         tolkBehovSistOppdatert: randomDate({past: true}),

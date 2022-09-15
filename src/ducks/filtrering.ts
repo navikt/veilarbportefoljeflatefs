@@ -70,8 +70,7 @@ export const initialState: FiltervalgModell = {
     sisteEndringKategori: [],
     ulesteEndringer: null,
     geografiskBosted: [],
-    visGeografiskBosted: []
-    ulesteEndringer: null,
+    visGeografiskBosted: [],
     tolkebehov: [],
     tolkBehovSpraak: [],
     stillingFraNavFilter: []

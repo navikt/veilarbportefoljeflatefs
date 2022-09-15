@@ -70,7 +70,6 @@ function FiltreringLabelContainer({
 
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
-
     const geografiskBostedListData = useGeografiskbostedSelector();
 
     const filterElementer = Object.entries(filtervalg)
