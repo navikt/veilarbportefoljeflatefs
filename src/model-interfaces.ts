@@ -211,6 +211,7 @@ export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
     frist: string | null;
+    kategori: KategoriModell | null;
 }
 
 export interface Systemmelding {

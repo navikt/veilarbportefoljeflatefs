@@ -5,7 +5,7 @@ import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
-import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
+import {ArbeidslisteDataModell, BrukerModell, KategoriModell} from '../../../model-interfaces';
 import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Button, Label} from '@navikt/ds-react';
@@ -78,6 +78,22 @@ function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDat
     }
 
     leggTilStatustall('minArbeidsliste', -brukereOK.length)(dispatch);
+    switch (arbeidslisteToDispatch[arbeidslisteToDispatch.length - 1].kategori) {
+        case KategoriModell.BLA: {
+            leggTilStatustall('minArbeidslisteBla', -brukereOK.length)(dispatch);
+            break;
+        }
+        case KategoriModell.GRONN: {
+            leggTilStatustall('minArbeidslisteGronn', -brukereOK.length)(dispatch);
+            break;
+        }
+        case KategoriModell.GUL: {
+            leggTilStatustall('minArbeidslisteGul', -brukereOK.length)(dispatch);
+            break;
+        }
+        case KategoriModell.LILLA:
+            leggTilStatustall('minArbeidslisteLilla', -brukereOK.length)(dispatch);
+    }
 
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
