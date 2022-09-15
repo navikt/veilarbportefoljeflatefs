@@ -138,22 +138,29 @@ export function oppdaterState(
     }
 
     leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
-    switch (arbeidslisteToDispatch[arbeidslisteToDispatch.length - 1].kategori) {
-        case KategoriModell.BLA: {
-            leggTilStatustall('minArbeidslisteBla', brukereOK.length)(dispatch);
-            break;
+
+    function oppdaterArbeidslisteKategoriTall(data: ArbeidslisteDataModell) {
+
+        switch (data.kategori) {
+            case KategoriModell.BLA: {
+                leggTilStatustall('minArbeidslisteBla', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.GRONN: {
+                leggTilStatustall('minArbeidslisteGronn', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.GUL: {
+                leggTilStatustall('minArbeidslisteGul', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.LILLA:
+                leggTilStatustall('minArbeidslisteLilla', 1)(dispatch);
         }
-        case KategoriModell.GRONN: {
-            leggTilStatustall('minArbeidslisteGronn', brukereOK.length)(dispatch);
-            break;
-        }
-        case KategoriModell.GUL: {
-            leggTilStatustall('minArbeidslisteGul', brukereOK.length)(dispatch);
-            break;
-        }
-        case KategoriModell.LILLA:
-            leggTilStatustall('minArbeidslisteLilla', brukereOK.length)(dispatch);
     }
+
+    arbeidslisteToDispatch.forEach(oppdaterArbeidslisteKategoriTall);
+
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
