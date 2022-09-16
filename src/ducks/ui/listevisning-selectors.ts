@@ -73,7 +73,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     const geografiskBostedErValgt = () => {
-        return filtervalg.geografiskBosted.length > 0 || filtervalg.visGeografiskBosted!.length > 0;
+        return filtervalg.geografiskBosted.length > 0 || filtervalg.visGeografiskBosted.length > 0;
     };
 
     const tolkBehovErValgt = () => {
