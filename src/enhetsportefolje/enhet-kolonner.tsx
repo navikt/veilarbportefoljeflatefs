@@ -87,11 +87,15 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     const geografiskbostedData = useGeografiskbostedSelector();
-    const bostedKommune = bruker.bostedKommune
-        ? geografiskbostedData.get(bruker.bostedKommune)
-        : bruker.harUtelandsAddresse
-        ? 'Utland'
-        : '-';
+    const bostedKommune = (bruker: BrukerModell) => {
+        if (bruker.bostedKommune) {
+            return geografiskbostedData.get(bruker.bostedKommune);
+        }
+        if (bruker.harUtelandsAddresse) {
+            return 'Utland';
+        }
+        return '-';
+    };
 
     return (
         <div className={className}>
@@ -145,7 +149,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommune}
+                tekst={bostedKommune(bruker)}
             />
             <TekstKolonne
                 className="col col-xs-2"
