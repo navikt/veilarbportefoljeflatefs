@@ -253,12 +253,13 @@ const hentBostedKommune = () => {
 };
 
 const hentBostedBydel = () => {
-    const spraakListe = ['030103', '110307'];
+    const bostedListe = ['030103', '110307'];
 
-    let x = Math.floor(Math.random() * 100);
+    let randomArray = new Int8Array(2);
+    window.crypto.getRandomValues(randomArray);
 
-    if (x % 3 === 0) {
-        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    if (randomArray[0] % 3 === 0) {
+        return bostedListe[Math.abs(randomArray[1] % bostedListe.length)];
     }
     return '';
 };
@@ -266,11 +267,13 @@ const hentBostedBydel = () => {
 const hentSpraak = () => {
     const spraakListe = ['AR', 'NB', 'ES', 'UK'];
 
-    let x = Math.floor(Math.random() * 100);
+    let randomArray = new Int8Array(2);
+    window.crypto.getRandomValues(randomArray);
 
-    if (x % 5 === 0) {
-        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    if (randomArray[0] % 3 === 0) {
+        return spraakListe[Math.abs(randomArray[1] % spraakListe.length)];
     }
+
     return null;
 };
 
