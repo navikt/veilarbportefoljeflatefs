@@ -179,6 +179,7 @@ export interface AktiviteterModell {
     ijobb?: string;
     samtalereferat?: string;
     mote?: string;
+    stillingFraNav?: string;
     tiltak?: string;
     gruppeaktivitet?: string;
 }

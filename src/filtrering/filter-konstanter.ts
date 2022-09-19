@@ -210,6 +210,7 @@ export const aktiviteter = {
     EGEN: 'Jobbrettet egenaktivitet',
     IJOBB: 'Jobb bruker har nå',
     MOTE: 'Møte med NAV',
+    STILLING_FRA_NAV: 'Stilling fra NAV',
     GRUPPEAKTIVITET: 'Gruppeaktivitet',
     UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
