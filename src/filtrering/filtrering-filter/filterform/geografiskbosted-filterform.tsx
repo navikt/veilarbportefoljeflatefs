@@ -8,6 +8,8 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 import {GeografiskBostedOptions} from '../../../ducks/geografiskBosted';
 import {MultiSelect} from 'react-multi-select-component';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../../reducer';
 
 interface GeografiskBostedFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
@@ -21,6 +23,13 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
     const [selectedGeografiskBosted, setSelectedGeografiskBosted] = useState<GeografiskBostedOptions[]>([]);
     const [geografiskBostedOptions, setGeografiskBostedOptions] = useState<GeografiskBostedOptions[]>([]);
     const geografiskbostedListData = useGeografiskbostedSelector();
+    const valgtEnhet = useSelector((state: AppState) => state.valgtEnhet.data.enhetId);
+
+    useEffect(() => {
+        if (valgtEnhet) {
+            endreFiltervalg('geografiskBosted', []);
+        }
+    }, [valgtEnhet]);
 
     useEffect(() => {
         setVisGeografiskBosted(filtervalg.visGeografiskBosted);
