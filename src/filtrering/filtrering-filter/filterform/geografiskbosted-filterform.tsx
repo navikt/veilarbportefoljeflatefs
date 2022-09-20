@@ -29,7 +29,7 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
         if (valgtEnhet) {
             endreFiltervalg('geografiskBosted', []);
         }
-    }, [valgtEnhet]);
+    }, [valgtEnhet, endreFiltervalg]);
 
     useEffect(() => {
         setVisGeografiskBosted(filtervalg.visGeografiskBosted);
