@@ -174,6 +174,7 @@ function FiltreringLabelContainer({
             } else if (key === 'geografiskBosted' && value.length > 0) {
                 return value
                     .filter(singleValue => geografiskBostedListData.get(singleValue) !== null)
+                    .filter(singleValue => geografiskBostedListData.get(singleValue) !== undefined)
                     .map(singleValue => {
                         return (
                             <FiltreringLabel
