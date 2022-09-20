@@ -72,10 +72,6 @@ function FiltreringLabelContainer({
     const tolkbehovSpraakListData = useTolkbehovSelector();
     const geografiskBostedListData = useGeografiskbostedSelector();
 
-    const hentBostedFullNavn = bostedCode => {
-        return geografiskBostedListData.get(bostedCode) ? geografiskBostedListData.get(bostedCode) : 'ugyldig';
-    };
-
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
             if (key === 'utdanningBestatt') {
@@ -182,7 +178,12 @@ function FiltreringLabelContainer({
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue}`}
-                                label={'Bosted: ' + hentBostedFullNavn(singleValue)}
+                                label={
+                                    'Bosted: ' +
+                                    (geografiskBostedListData.has(singleValue)
+                                        ? geografiskBostedListData.get(singleValue)
+                                        : 'ugyldig')
+                                }
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
