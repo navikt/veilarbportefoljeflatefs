@@ -202,7 +202,12 @@ function FiltreringLabelContainer({
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue}`}
-                                label={'Fødeland: ' + foedelandListData.get(singleValue)}
+                                label={
+                                    'Fødeland: ' +
+                                    (foedelandListData.has(singleValue)
+                                        ? foedelandListData.get(singleValue)
+                                        : 'ugyldig')
+                                }
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
@@ -216,7 +221,12 @@ function FiltreringLabelContainer({
                         return (
                             <FiltreringLabel
                                 key={`${key}--${singleValue}`}
-                                label={'Tolkebehov språk: ' + tolkbehovSpraakListData.get(singleValue)}
+                                label={
+                                    'Tolkebehov språk: ' +
+                                    (tolkbehovSpraakListData.has(singleValue)
+                                        ? tolkbehovSpraakListData.get(singleValue)
+                                        : 'ugyldig')
+                                }
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
