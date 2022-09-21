@@ -11,17 +11,19 @@ interface BrukerFnrProps {
 function BrukerFnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
-            {bruker.fnr && (
-                <CopyToClipboard
-                    copyText={bruker.fnr}
-                    popoverText="Kopiert"
-                    popoverPlacement="top"
-                    iconPosition="right"
-                    size="xsmall"
-                >
-                    {bruker.fnr}
-                </CopyToClipboard>
-            )}
+            <span>
+                {bruker.fnr && (
+                    <CopyToClipboard
+                        copyText={bruker.fnr}
+                        popoverText="Kopiert"
+                        popoverPlacement="top"
+                        iconPosition="right"
+                        size="xsmall"
+                    >
+                        {bruker.fnr}
+                    </CopyToClipboard>
+                )}
+            </span>
         </BodyShort>
     );
 }
