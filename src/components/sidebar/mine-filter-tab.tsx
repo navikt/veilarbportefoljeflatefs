@@ -61,10 +61,16 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
             meta={
                 <>
                     <HelpText placement="right">
-                        {oversiktType === OversiktType.minOversikt &&
-                            'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.'}
-                        {oversiktType === OversiktType.enhetensOversikt &&
-                            'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.'}
+                        {(() => {
+                            switch (oversiktType) {
+                                case OversiktType.minOversikt:
+                                    return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
+                                case OversiktType.enhetensOversikt:
+                                    return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
+                                default:
+                                    return ' ';
+                            }
+                        })()}
                     </HelpText>
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}

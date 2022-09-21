@@ -12,7 +12,13 @@ function BrukerFnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (
-                <CopyToClipboard copyText={bruker.fnr} popoverText="Kopiert" iconPlacement="right" size="xsmall">
+                <CopyToClipboard
+                    copyText={bruker.fnr}
+                    popoverText="Kopiert"
+                    popoverPlacement="top"
+                    iconPosition="right"
+                    size="xsmall"
+                >
                     {bruker.fnr}
                 </CopyToClipboard>
             )}
