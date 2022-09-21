@@ -66,7 +66,7 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
                                 case OversiktType.minOversikt:
                                     return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
                                 case OversiktType.enhetensOversikt:
-                                    return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
+                                    return 'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.';
                                 default:
                                     return ' ';
                             }
