@@ -13,6 +13,7 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
+    stillingFraNavFilter,
     utdanning,
     ytelse
 } from '../filter-konstanter';
@@ -272,6 +273,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
+                />
+                <Dropdown
+                    name="Stilling fra NAV"
+                    id="stillingFraNav"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="stillingFraNavFilter"
+                            valg={stillingFraNavFilter}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
                 />
                 <Dropdown
                     name="Aktivitet"

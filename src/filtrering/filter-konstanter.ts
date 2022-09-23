@@ -242,15 +242,6 @@ export const tolkebehov = {
     TEGNSPRAAKTOLK: 'Tegnspråktolk'
 };
 
-export const landgruppeTooltips = {
-    LANDGRUPPE_0: 'Norge',
-    LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
-    LANDGRUPPE_2: 'Østeuropeiske EU-land',
-    LANDGRUPPE_3:
-        'Asia, Afrika, Amerika (utenom USA og Canada), Øst-Europa (utenfor EU), Oseania (utenom Australia og New Zealand)',
-    LANDGRUPPE_UKJENT: 'Mangler informasjon om fødeland'
-};
-
 export const utdanning = {
     INGEN_UTDANNING: 'Ingen utdanning',
     GRUNNSKOLE: 'Grunnskole',
@@ -316,7 +307,12 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
+export const stillingFraNavFilter = {
+    CV_KAN_DELES_STATUS_JA: 'CV kan deles med arbeidsgiver'
+};
+
 const filterKonstanter = {
+    stillingFraNavFilter,
     ytelseUtlopsSortering,
     ferdigfilterListe,
     alder,

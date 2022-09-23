@@ -7,7 +7,7 @@ import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
 import {FoedelandOptions} from '../../../ducks/foedeland';
-import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
+import {landgruppe} from '../../filter-konstanter';
 import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
@@ -16,6 +16,15 @@ interface FoedelandFilterformProps {
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
 }
+
+const landgruppeTooltips = {
+    LANDGRUPPE_0: 'Norge',
+    LANDGRUPPE_1: 'Vest-Europa (utenom Norge), USA, Canada, Australia og New Zealand',
+    LANDGRUPPE_2: 'Østeuropeiske EU-land',
+    LANDGRUPPE_3:
+        'Asia, Afrika, Amerika (utenom USA og Canada), Øst-Europa (utenfor EU), Oseania (utenom Australia og New Zealand)',
+    LANDGRUPPE_UKJENT: 'Mangler informasjon om fødeland'
+};
 
 function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
     const [landgrupppeValg, setLandgrupppeValg] = useState<string[]>(filtervalg.landgruppe);
