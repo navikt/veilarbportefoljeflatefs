@@ -71,7 +71,7 @@ export const initialState: FiltervalgModell = {
     ulesteEndringer: null,
     tolkebehov: [],
     tolkBehovSpraak: [],
-    cvDeltStillingFraNAV: ''
+    stillingFraNAV: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

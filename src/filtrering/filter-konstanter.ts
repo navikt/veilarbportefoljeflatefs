@@ -210,7 +210,6 @@ export const aktiviteter = {
     EGEN: 'Jobbrettet egenaktivitet',
     IJOBB: 'Jobb bruker har nå',
     MOTE: 'Møte med NAV',
-    STILLING_FRA_NAV: 'Stilling fra NAV',
     GRUPPEAKTIVITET: 'Gruppeaktivitet',
     UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
@@ -218,6 +217,10 @@ export const aktiviteter = {
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med NAV'},
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med NAV'}
+};
+
+export const stillingFraNAV = {
+    CV_KAN_DELES_STATUS: {label: 'CV kan deles Stilling fra NAV'}
 };
 
 export const registreringstype = {
