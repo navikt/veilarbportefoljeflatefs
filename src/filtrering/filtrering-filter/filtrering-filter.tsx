@@ -10,11 +10,10 @@ import {
     kjonn,
     manuellBrukerStatus,
     manuellBrukerStatusUtenKRR,
-    mapFilternavnTilFilterValue,
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
-    stillingFraNAV,
+    stillingFraNavFilter,
     utdanning,
     ytelse
 } from '../filter-konstanter';
@@ -33,7 +32,7 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Checkbox, Label} from '@navikt/ds-react';
+import {Alert, Label} from '@navikt/ds-react';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 
@@ -276,15 +275,14 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
                 />
                 <Dropdown
-                    name="StillingFraNav"
+                    name="Stilling fra nav"
                     id="stillingFraNav"
                     render={() => (
-                        <RadioFilterform
-                            valg={stillingFraNAV}
-                            endreFiltervalg={endreFiltervalg}
+                        <CheckboxFilterform
+                            form="stillingFraNavFilter"
+                            valg={stillingFraNavFilter}
                             filtervalg={filtervalg}
-                            form="stillingFraNav"
-                            gridColumns={1}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />

@@ -85,7 +85,7 @@ function CheckboxFilterform({
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
                 form={form}
-                disabled={checkBoxValg.length <= 0}
+                disabled={checkBoxValg?.length <= 0}
             />
             {!harValg && (
                 <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">

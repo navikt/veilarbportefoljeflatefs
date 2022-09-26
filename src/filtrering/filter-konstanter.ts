@@ -30,7 +30,6 @@ export const mapFilternavnTilFilterValue = {
     venterPaSvarFraNAV: VENTER_PA_SVAR_FRA_NAV,
     venterPaSvarFraBruker: VENTER_PA_SVAR_FRA_BRUKER,
     avtaltMoteMedNav: MOTER_IDAG,
-    cvDeltStillingFraNav: CV_DELT_STILLING_FRA_NAV,
     utlopteAktiviteter: UTLOPTE_AKTIVITETER,
     ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
@@ -219,8 +218,8 @@ export const cvJobbprofil = {
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med NAV'}
 };
 
-export const stillingFraNAV = {
-    CV_KAN_DELES_STATUS: {label: 'CV kan deles Stilling fra NAV'}
+export const stillingFraNavFilter = {
+    CV_KAN_DELES_STATUS: 'CV kan deles Stilling fra NAV'
 };
 
 export const registreringstype = {
@@ -349,7 +348,8 @@ const filterKonstanter = {
     hendelserEtikett,
     hendelserLabels,
     ulesteEndringer,
-    tolkebehov
+    tolkebehov,
+    stillingFraNavFilter
 };
 
 export default filterKonstanter;

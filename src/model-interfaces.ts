@@ -42,7 +42,8 @@ export enum Sorteringsfelt {
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
-    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert'
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
+    STILLING_FRA_NAV = 'stilling_fra_nav'
 }
 
 export interface FiltervalgModell {
@@ -79,7 +80,7 @@ export interface FiltervalgModell {
     ulesteEndringer: null | string;
     tolkebehov: string[];
     tolkBehovSpraak: string[];
-    stillingFraNAV: null | string[];
+    stillingFraNavFilter: string[];
 }
 
 export interface EnhetModell {
