@@ -24,7 +24,6 @@ export interface Statustall {
     minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
     moterMedNAVIdag: number;
-    cvDeltStillingFraNav: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
@@ -54,7 +53,6 @@ export const initalStatusState: StatustallState = {
         erSykmeldtMedArbeidsgiver: 0,
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
-        cvDeltStillingFraNav: 0,
         trengerVurdering: 0,
         underVurdering: 0
     }
