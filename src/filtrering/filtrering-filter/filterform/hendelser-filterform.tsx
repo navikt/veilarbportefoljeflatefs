@@ -93,9 +93,8 @@ export function HendelserFilterform({
                             placement="right"
                             className={`hjelpetekst__${kebabCase(ulesteEndringer.ULESTE_ENDRINGER)}`}
                         >
-                            Filteret viser brukere som har endret målet, lagt til, fullført
-                            <br />
-                            eller avbrutt en aktivitet siden du sist var inne på aktivitetsplanen.
+                            Filteret viser brukere som har endret målet, lagt til, fullført eller avbrutt en aktivitet
+                            siden du sist var inne på aktivitetsplanen.
                         </HelpText>
                     </div>
                 )}

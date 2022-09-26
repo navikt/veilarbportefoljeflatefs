@@ -54,10 +54,11 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
                 page={side}
                 onPageChange={endreSide}
                 count={antallSider}
-                size="medium"
+                size="small"
                 siblingCount={0}
                 boundaryCount={1}
                 data-testid="paginering"
+                data-version="v1"
             />
         </div>
     );
