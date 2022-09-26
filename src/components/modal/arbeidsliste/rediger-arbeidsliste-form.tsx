@@ -58,6 +58,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                             leggtil: false,
                             applikasjon: 'oversikt'
                         });
+                        window.location.reload();
                     }}
                 >
                     Lagre
