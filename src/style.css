@@ -849,6 +849,9 @@ GRID
 .col-xs-3 {
     width: 25%;
 }
+.col-xs-2-5 {
+    width: 20%;
+}
 .col-xs-2 {
     width: 16.66666667%;
 }
