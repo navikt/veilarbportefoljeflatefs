@@ -22,7 +22,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -46,6 +46,7 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
+    const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
 
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
@@ -277,6 +278,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Stilling fra nav"
                     id="stillingFraNav"
+                    hidden={!erStillingFraNavFeatureTogglePa}
                     render={() => (
                         <CheckboxFilterform
                             form="stillingFraNavFilter"
