@@ -84,11 +84,11 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             variant="tertiary"
             type="button"
             className="toolbar_btn"
+            icon={props.ikon}
             disabled={!props.aktiv}
             onClick={klikk}
             data-testid={props.testid}
         >
-            {props.ikon}
             <BodyShort size="small" className="toolbar-knapp__tekst">
                 {props.tittel}
             </BodyShort>

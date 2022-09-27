@@ -123,6 +123,7 @@
     width: 1rem;
 }
 .veilarbportefoljeflatefs .fnr-kolonne :first-child {
+    padding-left: 0;
     color: var(--navds-semantic-color-text);
     font-weight: normal;
 }
