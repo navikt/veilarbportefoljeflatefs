@@ -84,7 +84,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
                     tekst="Fødselsnr."
-                    className="col col-xs-2-5"
+                    className="col col-xs-2"
                     title="Fødselsnummer"
                     headerId="fnr"
                 />

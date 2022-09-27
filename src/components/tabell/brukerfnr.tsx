@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
-import {BodyShort} from '@navikt/ds-react';
+import {BodyShort, Tooltip} from '@navikt/ds-react';
 import {CopyToClipboard} from '@navikt/ds-react-internal';
 
 interface BrukerFnrProps {
@@ -12,15 +12,18 @@ function BrukerFnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (
-                <CopyToClipboard
-                    copyText={bruker.fnr}
-                    popoverText="Kopiert"
-                    popoverPlacement="top"
-                    iconPosition="right"
-                    size="xsmall"
-                >
-                    {bruker.fnr}
-                </CopyToClipboard>
+                <Tooltip content="Kopier fødselsnr">
+                    <CopyToClipboard
+                        copyText={bruker.fnr}
+                        popoverText="Kopiert"
+                        popoverPlacement="top"
+                        iconPosition="right"
+                        size="xsmall"
+                        title="Fødselsnummer"
+                    >
+                        {bruker.fnr}
+                    </CopyToClipboard>
+                </Tooltip>
             )}
         </BodyShort>
     );

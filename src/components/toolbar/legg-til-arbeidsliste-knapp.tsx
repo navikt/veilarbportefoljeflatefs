@@ -42,6 +42,8 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
             <Button
                 variant="tertiary"
                 className="toolbar_btn"
+                icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
+                iconPosition="left"
                 disabled={
                     valgteBrukere.length < 1 ||
                     props.visesAnnenVeiledersPortefolje ||
@@ -52,7 +54,6 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                     inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
-                <Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />
                 <BodyShort size="small" className="toolbar-knapp__tekst">
                     {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
                 </BodyShort>
