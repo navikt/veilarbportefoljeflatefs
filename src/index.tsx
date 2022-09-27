@@ -23,8 +23,11 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
 }
 
 if (process.env.REACT_APP_MOCK === 'true') {
+    // eslint-disable-next-line no-console
     console.log('==========================');
+    // eslint-disable-next-line no-console
     console.log('======== MED MOCK ========');
+    // eslint-disable-next-line no-console
     console.log('==========================');
     require('./mocks');
 }

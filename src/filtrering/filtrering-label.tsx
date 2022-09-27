@@ -47,11 +47,12 @@ function FiltreringLabel({
             className={buttonClassnames}
             onClick={slettFilter}
             data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
+            icon={skalHaKryssIkon && <FilterIkon />}
+            iconPosition="right"
         >
             <BodyShort size="small" className={className}>
                 {lagConfig(label).label}
             </BodyShort>
-            {skalHaKryssIkon && <FilterIkon />}
         </Button>
     );
 }
