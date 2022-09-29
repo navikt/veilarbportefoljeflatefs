@@ -91,7 +91,7 @@ function MinOversiktListeHode({
                     headerId="etternavn"
                 />
                 <SorteringHeader
-                    className="col col-xs-2-5"
+                    className="col col-xs-2"
                     sortering={Sorteringsfelt.FODSELSNUMMER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
