@@ -63,7 +63,6 @@ export const ferdigfilterListe = {
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
     MOTER_IDAG: 'Møte med NAV idag',
-    CV_DELT_STILLING_FRA_NAV: 'Stilling fra NAV',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
