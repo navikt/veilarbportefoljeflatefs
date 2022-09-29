@@ -43,7 +43,6 @@ import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {Systemmeldinger} from '../components/systemmeldinger';
 import {IdentParam} from '../model-interfaces';
-import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -111,7 +110,6 @@ export default function MinoversiktSide() {
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
-            <SesjonNotifikasjon />
             <Systemmeldinger />
 
             <Innholdslaster avhengigheter={[statustall]}>
