@@ -42,9 +42,7 @@ export enum Sorteringsfelt {
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
-    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    STILLING_FRA_NAV = 'stilling_fra_nav'
-    //TODO: skal STILLING_FRA_NAV legges inn for sortering på et vis?
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert'
 }
 
 export interface FiltervalgModell {
