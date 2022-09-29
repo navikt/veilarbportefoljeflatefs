@@ -203,20 +203,6 @@ export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]>
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
-export async function hentResterendeSekunder(): Promise<number> {
-    return fetchToJson(AUTH_URL, MED_CREDENTIALS)
-        .then(data => {
-            const remainingSeconds = data?.remainingSeconds;
-            if (remainingSeconds && typeof remainingSeconds == 'number' && remainingSeconds > 0) {
-                return remainingSeconds;
-            }
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        })
-        .catch(e => {
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        });
-}
-
 export function sendEventTilPortefolje(event: FrontendEvent) {
     const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
