@@ -67,19 +67,20 @@ function MinOversiktListeHode({
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
-            <div className="brukerliste__gutter-left" />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <VelgalleCheckboks className="velgalle-checkboks" />
-                <SorteringHeader
-                    className="arbeidslistekategori__sorteringsheader"
-                    sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                    tekst={<ArbeidslisteikonBla />}
-                    title="Sorter på farge"
-                    headerId="arbeidslistekategori"
-                />
+                <div className="brukerliste__gutter-left brukerliste--min-width-minside">
+                    <VelgalleCheckboks className="velgalle-checkboks" />
+                    <SorteringHeader
+                        className="arbeidslistekategori__sorteringsheader"
+                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        tekst={<ArbeidslisteikonBla />}
+                        title="Sorter på farge"
+                        headerId="arbeidslistekategori"
+                    />
+                </div>
                 <SorteringHeader
                     className="col col-xs-2"
                     sortering={Sorteringsfelt.ETTERNAVN}
