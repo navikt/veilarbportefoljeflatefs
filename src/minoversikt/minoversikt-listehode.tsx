@@ -91,7 +91,7 @@ function MinOversiktListeHode({
                     headerId="etternavn"
                 />
                 <SorteringHeader
-                    className="col col-xs-2-5"
+                    className="col col-xs-2"
                     sortering={Sorteringsfelt.FODSELSNUMMER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -106,7 +106,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODELAND}
                     tekst="Fødeland"
-                    className="col col-xs-2"
+                    className="col col-xs-2-5"
                     title="Fødeland"
                     headerId="fodeland"
                     skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
