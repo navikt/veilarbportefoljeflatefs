@@ -162,8 +162,6 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
-    cvDeltStillingFraNav?: string[];
-    //skal den være her? Hva er forskjellen på string og string[], kan det siste være en liste?
 }
 
 interface Statsborgerskap {
@@ -181,7 +179,6 @@ export interface AktiviteterModell {
     ijobb?: string;
     samtalereferat?: string;
     mote?: string;
-    stillingFraNav?: string;
     tiltak?: string;
     gruppeaktivitet?: string;
 }
