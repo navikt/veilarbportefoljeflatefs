@@ -1,6 +1,6 @@
-import React from "react";
-import SorteringHeader from "../components/tabell/sortering-header";
-import TittelValg from "../utils/utils";
+import React from 'react';
+import SorteringHeader from '../components/tabell/sortering-header';
+import TittelValg from '../utils/utils';
 import {
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
@@ -10,15 +10,15 @@ import {
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelseUtlopsSortering
-} from "../filtrering/filter-konstanter";
-import { FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge } from "../model-interfaces";
-import { Kolonne } from "../ducks/ui/listevisning";
-import { AktiviteterValg } from "../ducks/filtrering";
-import Header from "../components/tabell/header";
-import VelgalleCheckboks from "../components/toolbar/velgalle-checkboks";
-import "./enhetsportefolje.css";
-import "./brukerliste.css";
-import { OrNothing } from "../utils/types/types";
+} from '../filtrering/filter-konstanter';
+import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {Kolonne} from '../ducks/ui/listevisning';
+import {AktiviteterValg} from '../ducks/filtrering';
+import Header from '../components/tabell/header';
+import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
+import './enhetsportefolje.css';
+import './brukerliste.css';
+import {OrNothing} from '../utils/types/types';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -147,7 +147,7 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
-                    tekst="Geografisk sist oppdatert"
+                    tekst="Bosted sist oppdatert"
                     headerId="bosted_sist_oppdatert"
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}

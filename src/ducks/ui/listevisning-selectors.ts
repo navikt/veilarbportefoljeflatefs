@@ -87,7 +87,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
-        .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(

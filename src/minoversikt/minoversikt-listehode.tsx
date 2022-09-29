@@ -192,7 +192,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
-                    tekst="Geografisk sist oppdatert"
+                    tekst="Bosted sist oppdatert"
                     headerId="bosted_sist_oppdatert"
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
