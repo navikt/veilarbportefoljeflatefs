@@ -16,6 +16,7 @@ import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
 import {foedelandListMockData} from './foedeland';
 import {tolkebehovSpraakMockData} from './tolkebehovSpraak';
+import sessionData from './session';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -58,6 +59,7 @@ let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
 let foedeland = foedelandListMockData();
 let tolkebehovSpraak = tolkebehovSpraakMockData();
+let session = sessionData();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -273,6 +275,18 @@ mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentS
 mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tolkSpraak', delayed(500, jsonResponse(tolkebehovSpraak)));
 
+mock.get('/oauth2/session', delayed(100, jsonResponse(session)));
+mock.get(
+    '/oauth2/session/refresh',
+    delayed(
+        100,
+        (() => {
+            session = sessionData(true);
+            return jsonResponse(session);
+        })()
+    )
+);
+
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
@@ -281,6 +295,7 @@ class MockWebSocket {
     }
 
     addEventListener() {}
+
     close() {}
 }
 
