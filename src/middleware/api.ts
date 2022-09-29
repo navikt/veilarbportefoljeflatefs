@@ -17,6 +17,26 @@ const MED_CREDENTIALS: RequestInit = {
     }
 };
 
+export interface Session {
+    created_at?: string;
+    ends_at?: string;
+    ends_in_seconds?: number;
+}
+
+export interface Tokens {
+    expire_at?: string;
+    expire_in_seconds?: number;
+    next_auto_refresh_in_seconds?: number;
+    refresh_cooldown?: boolean;
+    refresh_cooldown_seconds?: number;
+    refreshed_at?: string;
+}
+
+export interface SessionMeta {
+    session?: Session;
+    tokens?: Tokens;
+}
+
 export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
@@ -208,3 +228,11 @@ export function sendEventTilPortefolje(event: FrontendEvent) {
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
     return fetch(url, config);
 }
+
+export const refreshAccessTokens = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session/refresh').then(data => Promise.resolve(data as SessionMeta));
+};
+
+export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session').then(data => Promise.resolve(data as SessionMeta));
+};
