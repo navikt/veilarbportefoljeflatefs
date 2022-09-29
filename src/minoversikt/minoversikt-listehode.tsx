@@ -106,7 +106,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODELAND}
                     tekst="Fødeland"
-                    className="col col-xs-2-5"
+                    className="col col-xs-2"
                     title="Fødeland"
                     headerId="fodeland"
                     skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
