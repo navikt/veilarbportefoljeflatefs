@@ -94,6 +94,9 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         if (bruker.harUtelandsAddresse) {
             return 'Utland';
         }
+        if (bruker.harUkjentBosted) {
+            return 'Ukjent';
+        }
         return '-';
     };
 

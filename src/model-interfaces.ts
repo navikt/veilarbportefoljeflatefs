@@ -170,6 +170,7 @@ export interface BrukerModell {
     bostedBydel?: string;
     bostedSistOppdatert?: string;
     harUtelandsAddresse?: boolean;
+    harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
 }
 
