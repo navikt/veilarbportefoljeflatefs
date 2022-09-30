@@ -13,6 +13,7 @@ import {
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
+    stillingFraNavFilter,
     utdanning,
     ytelse
 } from '../filter-konstanter';
@@ -21,7 +22,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, UTEN_KRR_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -45,6 +46,7 @@ interface FiltreringFilterProps {
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
+    const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
 
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
@@ -272,6 +274,19 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <OverskriftMedHjelpeTekst
                     overskriftTekst="Aktivitet"
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
+                />
+                <Dropdown
+                    name="Stilling fra nav"
+                    id="stillingFraNav"
+                    hidden={!erStillingFraNavFeatureTogglePa}
+                    render={() => (
+                        <CheckboxFilterform
+                            form="stillingFraNavFilter"
+                            valg={stillingFraNavFilter}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
                 />
                 <Dropdown
                     name="Aktivitet"

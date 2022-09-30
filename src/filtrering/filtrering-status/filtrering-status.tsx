@@ -56,7 +56,6 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-
     return (
         <div className="filtrering-oversikt panel">
             <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>

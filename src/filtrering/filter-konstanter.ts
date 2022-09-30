@@ -216,6 +216,10 @@ export const cvJobbprofil = {
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med NAV'}
 };
 
+export const stillingFraNavFilter = {
+    CV_KAN_DELES_STATUS_JA: 'CV kan deles Stilling fra NAV'
+};
+
 export const registreringstype = {
     ER_PERMITTERT: 'Er permittert eller kommer til å bli permittert',
     USIKKER_JOBBSITUASJON: 'Er usikker på jobbsituasjonen min',
@@ -342,7 +346,8 @@ const filterKonstanter = {
     hendelserEtikett,
     hendelserLabels,
     ulesteEndringer,
-    tolkebehov
+    tolkebehov,
+    stillingFraNavFilter
 };
 
 export default filterKonstanter;
