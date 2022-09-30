@@ -87,7 +87,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2 fnr-kolonne" bruker={bruker} />
+            <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
             <TekstKolonne
                 className="col col-xs-2"
