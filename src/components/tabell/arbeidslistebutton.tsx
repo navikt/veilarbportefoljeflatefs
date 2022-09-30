@@ -17,15 +17,14 @@ interface ArbeidslisteButtonProps {
 const arbeidslisteButton = ({className, onClick, apen, dataTestid, skalVises}: ArbeidslisteButtonProps) =>
     skalVises ? (
         <Button
-            variant="tertiary"
             className={classnames('knapp brukerliste__arbeidslisteknapp', className)}
+            variant="tertiary"
             onClick={onClick}
+            icon={apen ? <Collapse className="collapse" /> : <Expand className="expand" />}
             aria-expanded={apen}
             data-testid={dataTestid}
             aria-label="Chevron for arbeidliste"
-        >
-            {apen ? <Collapse className="collapse" /> : <Expand className="expand" />}
-        </Button>
+        ></Button>
     ) : (
         <div className="brukerliste__arbeidslisteknapp" />
     );

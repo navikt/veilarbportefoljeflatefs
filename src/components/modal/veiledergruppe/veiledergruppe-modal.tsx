@@ -242,13 +242,13 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                 </Button>
                                 {props.onSlett && (
                                     <Button
-                                        variant="danger"
                                         className="veiledergruppe-modal__knappegruppe__slett"
-                                        onClick={() => setSletteVeiledergruppeModal(true)}
+                                        variant="danger"
                                         type="button"
+                                        onClick={() => setSletteVeiledergruppeModal(true)}
+                                        icon={<Delete />}
                                         data-testid="veiledergruppe_modal_slette-knapp"
                                     >
-                                        <Delete />
                                         Slett gruppe
                                     </Button>
                                 )}
