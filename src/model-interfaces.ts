@@ -79,6 +79,7 @@ export interface FiltervalgModell {
     ulesteEndringer: null | string;
     tolkebehov: string[];
     tolkBehovSpraak: string[];
+    stillingFraNavFilter: string[];
 }
 
 export interface EnhetModell {

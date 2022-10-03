@@ -116,8 +116,13 @@ spec:
             },
             {
               "fromPath": "/veilarbportefoljeflatefs",
-              "toUrl": "http://poao-unleash.poao.svc.cluster.local",
-              "preserveFromPath": false
+              "toUrl": "http://poao-unleash.poao",
+              "preserveFromPath": false,
+              "toApp": {
+                "name": "poao-unleash",
+                "namespace": "poao",
+                "cluster": "prod-gcp"
+              }
             },
             {
               "fromPath": "/veilarboppfolging",

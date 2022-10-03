@@ -7,7 +7,8 @@ import {
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    TVUNGEN_STEPPER,
+    STILLING_FRA_NAV
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,7 +23,8 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: false,
-    [TVUNGEN_STEPPER]: false
+    [TVUNGEN_STEPPER]: false,
+    [STILLING_FRA_NAV]: false
 };
 
 // Reducer

@@ -202,11 +202,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`${key}--${singleValue.key || singleValue}`}
-                            label={
-                                key === 'tiltakstyper'
-                                    ? enhettiltak[singleValue]
-                                    : singleValue.label || FilterKonstanter[key][singleValue] || singleValue
-                            }
+                            label={getLabel(singleValue, key, enhettiltak)}
                             slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         />
                     );
@@ -283,5 +279,21 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         }
     }
 });
+
+function getLabel(singleValue: any, key: any, enhettiltak: any): string {
+    if (key === 'tiltakstyper') {
+        return enhettiltak[singleValue];
+    }
+    if (singleValue?.label) {
+        return singleValue.label;
+    }
+    if (FilterKonstanter[key] && FilterKonstanter[key][singleValue]) {
+        return FilterKonstanter[key][singleValue];
+    }
+    if (FilterKonstanter[singleValue]) {
+        return FilterKonstanter[singleValue];
+    }
+    return singleValue;
+}
 
 export default connect(null, mapDispatchToProps)(FiltreringLabelContainer);
