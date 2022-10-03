@@ -26,7 +26,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
         logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
         props.settMarkert(props.bruker.fnr, true);
         props.fjernModal();
-        window.location.reload();
     };
 
     return (
@@ -59,7 +58,6 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                             leggtil: false,
                             applikasjon: 'oversikt'
                         });
-                        window.location.reload();
                     }}
                 >
                     Lagre
