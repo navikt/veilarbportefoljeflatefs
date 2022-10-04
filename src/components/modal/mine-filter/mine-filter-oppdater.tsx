@@ -91,9 +91,9 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     <Button
                         variant="danger"
                         onClick={e => bekreftSletting(e)}
+                        icon={<Delete />}
                         data-testid="rediger-filter_modal_slett-knapp"
                     >
-                        <Delete />
                         Slett
                     </Button>
                 </div>

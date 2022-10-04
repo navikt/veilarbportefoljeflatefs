@@ -11,7 +11,7 @@
     border-radius: 2px;
     display: flex;
     background: #c9c9c9 none;
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
     justify-content: space-between;
     font-weight: normal;
     margin: 0.5rem 1rem 0.5rem 0;
@@ -33,7 +33,6 @@
     background-color: #ffd799;
 }
 .veilarbportefoljeflatefs .filtreringlabel__label {
-    padding-right: 0.5rem;
     max-width: 10rem;
     white-space: nowrap;
     overflow: hidden;
@@ -44,11 +43,11 @@
 }
 .veilarbportefoljeflatefs .filtreringlabel__container {
     display: flex;
+    align-items: center;
 }
 .veilarbportefoljeflatefs .filtreringlabel__container .arbeidsliste--ikon {
-    right: 0;
-    height: 0;
-    margin-right: 0.2rem;
+    margin-right: 0.25rem;
+    display: flex;
 }
 .veilarbportefoljeflatefs .filtreringlabel__container .filter-ikon-x-svg {
     margin-left: 0.5rem;
@@ -56,7 +55,7 @@
 .veilarbportefoljeflatefs .slett-alle-filtervalg-knapp {
     background-color: #6a6a6a;
     color: white;
-    padding-right: 0;
+    padding-right: 0.5rem;
 }
 .veilarbportefoljeflatefs .slett-alle-filtervalg-knapp:hover {
     background: #4f4f4f none;

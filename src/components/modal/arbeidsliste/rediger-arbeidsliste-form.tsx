@@ -71,13 +71,13 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Avbryt
                 </Button>
                 <Button
+                    className="fjern--knapp"
                     variant="danger"
                     type="button"
                     onClick={fjernBruker}
-                    className="fjern--knapp"
+                    icon={<Delete />}
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <Delete />
                     <BodyShort size="small">Fjern</BodyShort>
                 </Button>
             </div>

@@ -38,14 +38,13 @@ export const TilToppenKnapp = () => {
 
     return (
         <Button
+            className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
             variant="secondary"
             ref={knappRef}
-            className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
             hidden={!knappSkalVises}
             onClick={onClick}
+            icon={<Up />}
             data-testid="til-toppen_knapp"
-        >
-            <Up />
-        </Button>
+        ></Button>
     );
 };
