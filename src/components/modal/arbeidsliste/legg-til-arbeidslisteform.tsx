@@ -140,7 +140,6 @@ export function oppdaterState(
     leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
 
     function oppdaterArbeidslisteKategoriTall(data: ArbeidslisteDataModell) {
-
         switch (data.kategori) {
             case KategoriModell.BLA: {
                 leggTilStatustall('minArbeidslisteBla', 1)(dispatch);
