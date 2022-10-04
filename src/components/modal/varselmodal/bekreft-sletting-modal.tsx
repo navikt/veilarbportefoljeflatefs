@@ -40,9 +40,9 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                     variant="danger"
                     type="submit"
                     onClick={slettKnapp}
+                    icon={<Delete />}
                     data-testid="bekreft-sletting_modal_slett-knapp"
                 >
-                    <Delete />
                     Slett
                 </Button>
                 <Button variant="secondary" type="button" onClick={props.onRequestClose}>

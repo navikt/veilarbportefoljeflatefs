@@ -31,11 +31,12 @@ function FiltreringLabelArbeidsliste({
             aria-label="Slett filter"
             className={buttonClassnames}
             onClick={slettFilter}
+            icon={<FilterIkon />}
+            iconPosition="right"
         >
             <span className="filtreringlabel__container">
                 <ArbeidslistekategoriVisning skalVises kategori={kategori} />
                 {lagConfig(label).label}
-                <FilterIkon />
             </span>
         </Button>
     );

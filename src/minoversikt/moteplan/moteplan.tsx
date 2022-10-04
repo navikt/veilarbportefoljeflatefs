@@ -45,8 +45,13 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
 
     return (
         <>
-            <Button className="moteplan_knapp" ref={buttonRef} variant="tertiary" onClick={() => fetchMoteData()}>
-                <Calender title="møteplan" />
+            <Button
+                className="moteplan_knapp"
+                ref={buttonRef}
+                variant="tertiary"
+                onClick={() => fetchMoteData()}
+                icon={<Calender title="møteplan" />}
+            >
                 Møteplan
             </Button>
             <Popover
