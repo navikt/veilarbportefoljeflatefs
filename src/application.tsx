@@ -9,6 +9,7 @@ import InitialDataProvider from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
 import {Modal} from '@navikt/ds-react';
 import {erMock} from './utils/url-utils';
+import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
@@ -18,6 +19,8 @@ moment.locale('nb');
 const store = createStore();
 
 function Application() {
+    useBrukeraktivitetTokenRefresh();
+
     return (
         <Provider store={store}>
             <BrowserRouter basename={erMock() ? '/veilarbportefoljeflatefs' : '/'}>

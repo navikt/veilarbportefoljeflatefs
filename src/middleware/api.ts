@@ -17,6 +17,26 @@ const MED_CREDENTIALS: RequestInit = {
     }
 };
 
+export interface Session {
+    created_at?: string;
+    ends_at?: string;
+    ends_in_seconds?: number;
+}
+
+export interface Tokens {
+    expire_at?: string;
+    expire_in_seconds?: number;
+    next_auto_refresh_in_seconds?: number;
+    refresh_cooldown?: boolean;
+    refresh_cooldown_seconds?: number;
+    refreshed_at?: string;
+}
+
+export interface SessionMeta {
+    session?: Session;
+    tokens?: Tokens;
+}
+
 export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
@@ -203,22 +223,16 @@ export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]>
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
-export async function hentResterendeSekunder(): Promise<number> {
-    return fetchToJson(AUTH_URL, MED_CREDENTIALS)
-        .then(data => {
-            const remainingSeconds = data?.remainingSeconds;
-            if (remainingSeconds && typeof remainingSeconds == 'number' && remainingSeconds > 0) {
-                return remainingSeconds;
-            }
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        })
-        .catch(e => {
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        });
-}
-
 export function sendEventTilPortefolje(event: FrontendEvent) {
     const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
     return fetch(url, config);
 }
+
+export const refreshAccessTokens = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session/refresh').then(data => Promise.resolve(data as SessionMeta));
+};
+
+export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session').then(data => Promise.resolve(data as SessionMeta));
+};
