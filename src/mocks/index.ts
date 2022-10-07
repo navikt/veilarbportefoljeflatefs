@@ -9,7 +9,7 @@ import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
-import {delayed, jsonResponse} from './utils';
+import {delayed, errorResponse, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
@@ -282,7 +282,7 @@ mock.get(
         100,
         (() => {
             session = sessionData(true);
-            return jsonResponse(session);
+            return errorResponse(session, 401);
         })()
     )
 );
