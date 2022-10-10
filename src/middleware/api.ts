@@ -230,9 +230,9 @@ export function sendEventTilPortefolje(event: FrontendEvent) {
 }
 
 export const refreshAccessTokens = async (): Promise<SessionMeta> => {
-    return fetchToJson('/oauth2/session/refresh').then(data => Promise.resolve(data as SessionMeta));
+    return fetchToJson('/oauth2/session/refresh', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };
 
 export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
-    return fetchToJson('/oauth2/session').then(data => Promise.resolve(data as SessionMeta));
+    return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };

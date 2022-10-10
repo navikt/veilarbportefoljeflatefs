@@ -5,17 +5,22 @@ import {useBrukeraktivitetLytter} from './use-brukeraktivitet-lytter';
 
 const FEM_MINUTTER_I_MILLISEKUNDER = 5 * 60 * 1000;
 
-export const useBrukeraktivitetTokenRefresh = () => {
+export const useBrukeraktivitetTokenRefresh = (onUtlopt: () => void, onOppdatert: () => void) => {
     const [tokenUtloperTimestampMs, setTokenUtloperTimestampMs] = useState<number | null>(null);
     const [refreshTillattTimestampMs, setRefreshTillattTimestampMs] = useState<number | null>(null);
+    const [sesjonUtlopt, setSesjonUtlopt] = useState<boolean | null>(null);
 
-    const oppdaterTokenStatus = (sessionMeta: SessionMeta): void => {
-        const expireInSeconds = sessionMeta?.tokens?.expire_in_seconds;
-        const refreshCooldownSeconds = sessionMeta?.tokens?.refresh_cooldown_seconds;
+    const oppdaterSesjonStatus = (sessionMeta: SessionMeta): void => {
+        const tokensExpireInSeconds = sessionMeta?.tokens?.expire_in_seconds;
+        const tokensRefreshCooldownSeconds = sessionMeta?.tokens?.refresh_cooldown_seconds;
+        const sessionEndsInSeconds = sessionMeta?.session?.ends_in_seconds;
         const naaMs = Date.now();
 
-        setTokenUtloperTimestampMs(isDefined(expireInSeconds) ? naaMs + expireInSeconds * 1000 : null);
-        setRefreshTillattTimestampMs(isDefined(refreshCooldownSeconds) ? naaMs + refreshCooldownSeconds * 1000 : null);
+        setTokenUtloperTimestampMs(isDefined(tokensExpireInSeconds) ? naaMs + tokensExpireInSeconds * 1000 : null);
+        setRefreshTillattTimestampMs(
+            isDefined(tokensRefreshCooldownSeconds) ? naaMs + tokensRefreshCooldownSeconds * 1000 : null
+        );
+        setSesjonUtlopt(isDefined(sessionEndsInSeconds) ? sessionEndsInSeconds <= 0 : null);
     };
 
     const handleBrukeraktivitet = (): void => {
@@ -27,13 +32,21 @@ export const useBrukeraktivitetTokenRefresh = () => {
         const tokenUtloperSnart = naaMs + FEM_MINUTTER_I_MILLISEKUNDER >= tokenUtloperTimestampMs;
         const refreshTillatt = naaMs >= refreshTillattTimestampMs;
 
-        if (tokenUtloperSnart && refreshTillatt) {
-            refreshAccessTokens().then(oppdaterTokenStatus);
+        if (tokenUtloperSnart && refreshTillatt && !sesjonUtlopt) {
+            refreshAccessTokens()
+                .then((sesjon: SessionMeta) => {
+                    oppdaterSesjonStatus(sesjon);
+                    onOppdatert();
+                })
+                .catch(() => {
+                    setSesjonUtlopt(true);
+                    onUtlopt();
+                });
         }
     };
 
     useEffect(() => {
-        hentSesjonMetadata().then(oppdaterTokenStatus);
+        hentSesjonMetadata().then(oppdaterSesjonStatus);
     }, []);
 
     useBrukeraktivitetLytter(document, handleBrukeraktivitet);

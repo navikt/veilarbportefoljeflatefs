@@ -10,6 +10,7 @@ import {RedirectPortefolje} from './redirect-portefolje';
 import {Modal} from '@navikt/ds-react';
 import {erMock} from './utils/url-utils';
 import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
+import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjonsmelding';
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
@@ -19,7 +20,10 @@ moment.locale('nb');
 const store = createStore();
 
 function Application() {
-    useBrukeraktivitetTokenRefresh();
+    useBrukeraktivitetTokenRefresh(
+        () => store.dispatch(settSesjonStatusUtlopt()),
+        () => store.dispatch(settSesjonStatusGyldig())
+    );
 
     return (
         <Provider store={store}>
