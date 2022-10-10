@@ -34,6 +34,6 @@ export function jsonResponse(json: any): MockHandler {
     return (req: MockRequest, res: MockResponse, ctx: MockContext) => res(ctx.json(json));
 }
 
-export function errorResponse(json: any, status: number): MockHandler {
+export function errorResponse(status: number): MockHandler {
     return (req: MockRequest, res: MockResponse, ctx: MockContext) => res(ctx.status(status));
 }
