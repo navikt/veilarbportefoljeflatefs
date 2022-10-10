@@ -8,15 +8,16 @@ import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
 import features from './features';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import FetchMock, {MiddlewareUtils} from 'yet-another-fetch-mock';
-import {delayed, jsonResponse} from './utils';
+import FetchMock, {MiddlewareUtils, MockRequest, ResponseData} from 'yet-another-fetch-mock';
+import {delayed, errorResponse, jsonResponse} from './utils';
 import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
 import {foedelandListMockData} from './foedeland';
 import {tolkebehovSpraakMockData} from './tolkebehovSpraak';
-import sessionData from './session';
+import getSessionData, {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from './session';
+import {SessionMeta} from '../middleware/api';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -59,12 +60,35 @@ let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
 let foedeland = foedelandListMockData();
 let tolkebehovSpraak = tolkebehovSpraakMockData();
-let session = sessionData();
+let sessionBaseTimestamp = Date.now();
+let sessionDataMockConfig = defaultSessionDataMockConfig(sessionBaseTimestamp);
+let sessionData: SessionMeta | null = null;
 
 const mock = FetchMock.configure({
     enableFallback: true,
-    middleware: MiddlewareUtils.combine(MiddlewareUtils.delayMiddleware(500), MiddlewareUtils.loggingMiddleware())
+    middleware: MiddlewareUtils.combine(
+        MiddlewareUtils.delayMiddleware(500),
+        MiddlewareUtils.loggingMiddleware(),
+        (request: MockRequest, response: ResponseData) => {
+            if (sesjonUtlopt()) {
+                return {status: 401};
+            } else {
+                return response;
+            }
+        }
+    )
 });
+
+const sesjonUtlopt = () => {
+    return sessionData?.tokens?.expire_at && Date.now() >= new Date(sessionData?.tokens?.expire_at).getTime();
+};
+
+// situasjon-api
+function tildel(body: any) {
+    return {feilendeTilordninger: []}; //uten feilende brukere
+    //return {feilendeTilordninger: [body[0]]}; //noen feilende brukere
+    //return {feilendeTilordninger: body}; //alle feilende brukere
+}
 
 // Azure Ad
 mock.get(
@@ -182,13 +206,6 @@ mock.get('/veilarbportefolje/api/arbeidsliste/:fodselsnummer', (req, res, ctx) =
 
 mock.get('/veilarbportefolje/api/veileder/:veileder/moteplan', jsonResponse(hentMockPlan()));
 
-// situasjon-api
-function tildel(body: any) {
-    return {feilendeTilordninger: []}; //uten feilende brukere
-    //return {feilendeTilordninger: [body[0]]}; //noen feilende brukere
-    //return {feilendeTilordninger: body}; //alle feilende brukere
-}
-
 //veilarbvedtakstøtte
 mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
 
@@ -275,16 +292,25 @@ mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentS
 mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tolkSpraak', delayed(500, jsonResponse(tolkebehovSpraak)));
 
-mock.get('/oauth2/session', delayed(100, jsonResponse(session)));
+mock.get(
+    '/oauth2/session',
+    delayed(100, (req, res, ctx) => {
+        sessionData = getSessionData(sessionDataMockConfig);
+        return jsonResponse(sessionData)(req, res, ctx);
+    })
+);
+
 mock.get(
     '/oauth2/session/refresh',
-    delayed(
-        100,
-        (() => {
-            session = sessionData(true);
-            return jsonResponse(session);
-        })()
-    )
+    delayed(100, (req, res, ctx) => {
+        if (sesjonUtlopt()) {
+            return errorResponse(401)(req, res, ctx);
+        }
+
+        sessionDataMockConfig = defaultSessionDataMockConfig(Date.now(), DEFAULT_SESSION_LIFETIME_IN_SECONDS);
+        sessionData = getSessionData(sessionDataMockConfig);
+        return jsonResponse(sessionData)(req, res, ctx);
+    })
 );
 
 // websocket

@@ -223,3 +223,8 @@ export interface Systemmelding {
 export interface IdentParam {
     ident: string;
 }
+
+export enum SesjonStatus {
+    GYLDIG = 'GYLDIG',
+    UTLOPT = 'UTLØPT'
+}
