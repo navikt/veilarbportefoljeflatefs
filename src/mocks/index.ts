@@ -32,6 +32,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     const antallInt = isNaN(maybeAntal) ? alleBrukere.length : maybeAntal;
 
     const filtrerteBrukere = alleBrukere.slice(fraInt, fraInt + antallInt).map((bruker, index) => {
+        /*
         if (index < 2) {
             bruker.fnr = '';
             bruker.fornavn = '';
@@ -42,6 +43,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
         }
+
+       */
         return bruker;
     });
 

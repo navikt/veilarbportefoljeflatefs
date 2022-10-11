@@ -22,6 +22,12 @@ npm start
 
 P.S. Husk og kjøre en `npm i` før du bygger
 
+## Cypress
+kjør npm start
+kjør npm run cypress:open
+
+Cypress starter i eget vindu
+
 ### Watching
 
 For å watche uten mocking kjører man `npm run watch`.
