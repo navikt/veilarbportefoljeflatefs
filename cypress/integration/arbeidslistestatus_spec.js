@@ -43,7 +43,7 @@ describe('Filter min arbeidsliste', () => {
         cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
 
-        antallEtter = cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla');
+
 
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
             antallEtter = $tall.text();
