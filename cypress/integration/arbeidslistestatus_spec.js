@@ -10,8 +10,8 @@ describe('Filter min arbeidsliste', () => {
     let antallMedArbeidslisteEtterOppretting = 0;
     let tittel;
     let kommentar;
-    let antallFor = 0;
-    let antallEtter = 0;
+    let antallFor = '';
+    let antallEtter = '';
     const redigertTittel = 'Redigering av tittel';
     const redigertKommentar = 'Redigering av kommentar';
     let antallForSletting = 0;
@@ -22,7 +22,11 @@ describe('Filter min arbeidsliste', () => {
     beforeEach('Gå til Min oversikt', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
-        antallFor = cy.getByTestId('filter_checkboks-container_minArbeidsliste');
+
+        cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
+            antallFor = $tall.text();
+        });
+
     });
 
 
@@ -38,10 +42,27 @@ describe('Filter min arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
         cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-        antallEtter = cy.getByTestId('filter_checkboks-container_minArbeidsliste');
 
-                expect(antallEtter).to.be.equals(antallFor+1);
+        antallEtter = cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla');
+
+        cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
+            antallEtter = $tall.text();
+
+        });
+        console.log('antall før', antallFor.valueOf());
+        console.log('antall etter', antallEtter.valueOf());
+        cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla')
+
+          .then($tall => {
+              expect(antallFor).not.to.eq($tall.text());
+          });
+
+
+}); });
         /*
+        cy.getByTestId('antall-tiltak').then($navn => {
+  expect(antallTiltak).not.to.eq($navn.text());
+});
 
                                        cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
                                            antallFor += Cypress.$(ant).length;
@@ -67,6 +88,6 @@ describe('Filter min arbeidsliste', () => {
                                                      expect(antallEtter).to.be.equals(antallFor - 1);
                                                  });
 
-                                              */
+
 });
-});
+ */
