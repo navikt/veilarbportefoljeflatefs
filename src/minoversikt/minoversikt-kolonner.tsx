@@ -102,12 +102,12 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
             <TekstKolonne
-                className="col col-xs-2"
+                className="col col-xs-2 land-navn"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
             />
             <TekstKolonne
-                className="col col-xs-2"
+                className="col col-xs-2 land-navn"
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
                         ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)

@@ -149,5 +149,5 @@ export default combineReducers<AppState>({
     geografiskBosted: geografiskbostedListReducer,
     foedelandList: foedelandListReducer,
     tolkbehovSpraakList: tolkebehovListReducer,
-    esjonStatus: informasjonsmeldingReducer
+    sesjonStatus: informasjonsmeldingReducer
 });

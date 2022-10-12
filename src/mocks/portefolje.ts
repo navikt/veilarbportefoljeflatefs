@@ -236,7 +236,18 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
 }
 
 const hentLand = () => {
-    const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
+    const landListe = [
+        'NORGE',
+        'SVERIGE',
+        'FINLAND',
+        'DANMARK',
+        'ENGLAND',
+        'Saint Vincent og Grenadinene',
+        'ISLAND',
+        'HELLAS',
+        'Elfenbenskysten',
+        'Mikronesiaføderasjonen'
+    ];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
 };

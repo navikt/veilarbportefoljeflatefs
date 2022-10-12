@@ -130,6 +130,10 @@
 .veilarbportefoljeflatefs .valgt-sortering {
     font-weight: bold;
 }
+.veilarbportefoljeflatefs .land-navn {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .veilarbportefoljeflatefs .enhet-tabell {
     background-color: #f4f4f4;
     border-top-color: #fff;

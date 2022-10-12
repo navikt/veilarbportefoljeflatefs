@@ -228,7 +228,6 @@ export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]>
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/geografiskbosted`, MED_CREDENTIALS);
 }
 
-
 export function sendEventTilPortefolje(event: FrontendEvent) {
     const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
