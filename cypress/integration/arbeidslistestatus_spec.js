@@ -6,19 +6,7 @@ before('Start server', () => {
 });
 
 describe('Filter min arbeidsliste', () => {
-  let fornavn = '';
-  let antallMedArbeidsliste = 0;
-  let antallMedArbeidslisteEtterOppretting = 0;
-  let tittel;
-  let kommentar;
   let antallFor = '';
-  let antallEtter = '';
-  const redigertTittel = 'Redigering av tittel';
-  const redigertKommentar = 'Redigering av kommentar';
-  let antallForSletting = 0;
-  let antallEtterSletting = 0;
-  const nyTittel = 'Skal ikke lagres';
-  const nyKommentar = 'Kommentar skal heller ikke lagres';
 
   beforeEach('Gå til Min oversikt', () => {
     cy.gaTilOversikt('min-oversikt');
