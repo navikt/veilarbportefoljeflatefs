@@ -11,7 +11,6 @@ describe('Filter min arbeidsliste', () => {
     beforeEach('Gå til Min oversikt', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
-
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
             antallFor = $tall.text();
         });
@@ -28,11 +27,9 @@ describe('Filter min arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
         cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
-
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
             expect(antallFor).not.to.eq($tall.text());
         });
