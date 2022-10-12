@@ -31,6 +31,7 @@ import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui
 import {LagretFilterState} from './ducks/lagret-filter';
 import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
 import tolkebehovListReducer, {TolkebehovSpraakListState} from './ducks/tolkebehov';
+import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjonsmelding';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -79,6 +80,7 @@ export interface AppState {
     systemmeldinger: SystemmeldingState;
     foedelandList: FoedelandListState;
     tolkbehovSpraakList: TolkebehovSpraakListState;
+    sesjonStatus: SesjonStatusState;
 }
 
 export default combineReducers<AppState>({
@@ -143,5 +145,6 @@ export default combineReducers<AppState>({
     innloggetVeileder: innloggetVeilederReducer,
     systemmeldinger: systemmeldingerReducer,
     foedelandList: foedelandListReducer,
-    tolkbehovSpraakList: tolkebehovListReducer
+    tolkbehovSpraakList: tolkebehovListReducer,
+    sesjonStatus: informasjonsmeldingReducer
 });

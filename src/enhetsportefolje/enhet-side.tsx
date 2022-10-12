@@ -36,8 +36,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
-import {Systemmeldinger} from '../components/systemmeldinger';
-import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
+import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -135,8 +134,7 @@ export default function EnhetSide() {
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny oversiktType={oversiktType} />
-            <SesjonNotifikasjon />
-            <Systemmeldinger />
+            <Informasjonsmeldinger />
             <Innholdslaster avhengigheter={[statustall]}>
                 <div
                     className={classNames('oversikt-sideinnhold', isSidebarHidden && 'oversikt-sideinnhold__hidden')}

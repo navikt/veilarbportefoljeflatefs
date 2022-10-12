@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
@@ -9,7 +10,7 @@ import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.css';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
-import {getSidestorrelseFromUrl, getSideFromUrl} from '../utils/url-utils';
+import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
 import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
 import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
@@ -20,10 +21,8 @@ import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {Systemmeldinger} from '../components/systemmeldinger';
 import {Panel} from '@navikt/ds-react';
-import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
-import {useEffect} from 'react';
+import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -64,8 +63,7 @@ function VeiledereSide() {
             data-testid={`side-storrelse_${id}`}
         >
             <ToppMeny oversiktType={oversiktType} />
-            <SesjonNotifikasjon />
-            <Systemmeldinger />
+            <Informasjonsmeldinger />
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">

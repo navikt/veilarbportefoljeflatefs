@@ -28,7 +28,7 @@ function BarInputCheckbox({antall, checked, filterNavn, handleChange, labelTekst
                 {labelTekst}
             </Checkbox>
             {(antall || antall === 0) && (
-                <Label className="barlabel__antall" size="small">
+                <Label className="barlabel__antall" size="small" data-testid={`filter_checkboks-label_${filterNavn}`}>
                     {antall}
                 </Label>
             )}
