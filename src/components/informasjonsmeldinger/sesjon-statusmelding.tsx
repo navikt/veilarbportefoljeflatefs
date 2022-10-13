@@ -15,7 +15,7 @@ export const SesjonStatusmelding = () => {
     const LoginLenke = () => <Link href={loginUrl()}>Logg inn på nytt.</Link>;
 
     return (
-        <Alert variant="error" size="medium" fullWidth>
+        <Alert variant="warning" size="medium" fullWidth>
             Økten din er utløpt. <LoginLenke />
         </Alert>
     );
