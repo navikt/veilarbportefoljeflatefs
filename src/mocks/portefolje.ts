@@ -246,7 +246,11 @@ const hentLand = () => {
         'ISLAND',
         'HELLAS',
         'Elfenbenskysten',
-        'Mikronesiaføderasjonen'
+        'Mikronesiaføderasjonen',
+        'Den demokratiske republikken São Tomé og Príncipe',
+        'Storbritannia Storbritannia og Nord-Irland',
+        'Uavhengig og suveren republikken Kiribati',
+        'Den føderale demokratiske republikken Etiopia'
     ];
 
     return landListe[Math.floor(Math.random() * landListe.length)];

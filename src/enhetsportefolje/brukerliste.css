@@ -131,15 +131,10 @@
     font-weight: bold;
 }
 .veilarbportefoljeflatefs .land-navn {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    hyphens: auto;
+    overflow-wrap: break-word;
 }
-.veilarbportefoljeflatefs .land-navn:hover {
-    text-overflow: clip;
-    white-space: normal;
-    word-break: break-all;
-}
+
 .veilarbportefoljeflatefs .enhet-tabell {
     background-color: #f4f4f4;
     border-top-color: #fff;
