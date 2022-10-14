@@ -111,7 +111,7 @@ function LeggTilArbeidslisteForm({
 export function oppdaterState(
     res,
     liste: ArbeidslisteDataModell[],
-    props: {innloggetVeileder: VeilederModell; bruker: BrukerModell},
+    props: {innloggetVeileder: VeilederModell; bruker: BrukerModell; kategori: KategoriModell},
     dispatch
 ) {
     if (!res) {
@@ -138,6 +138,28 @@ export function oppdaterState(
     }
 
     leggTilStatustall('minArbeidsliste', brukereOK.length)(dispatch);
+
+    function oppdaterArbeidslisteKategoriTall(data: ArbeidslisteDataModell) {
+        switch (data.kategori) {
+            case KategoriModell.BLA: {
+                leggTilStatustall('minArbeidslisteBla', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.GRONN: {
+                leggTilStatustall('minArbeidslisteGronn', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.GUL: {
+                leggTilStatustall('minArbeidslisteGul', 1)(dispatch);
+                break;
+            }
+            case KategoriModell.LILLA:
+                leggTilStatustall('minArbeidslisteLilla', 1)(dispatch);
+        }
+    }
+
+    arbeidslisteToDispatch.forEach(oppdaterArbeidslisteKategoriTall);
+
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 
