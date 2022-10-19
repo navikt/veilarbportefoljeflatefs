@@ -30,8 +30,8 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
         innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
 
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-    const inneholderBrukerMedOgUtenArbeidsliste =
-        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
+    //    const inneholderBrukerMedOgUtenArbeidsliste =
+    //        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
 
     if (skalSkjules) {
         return null;
