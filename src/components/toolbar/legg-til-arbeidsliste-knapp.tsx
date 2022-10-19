@@ -30,6 +30,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
         innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
 
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBareBrukereMedArbeidsliste = valgteBrukere.every(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     //    const inneholderBrukerMedOgUtenArbeidsliste =
     //        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
 
@@ -50,7 +51,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 }
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
+                    {inneholderBareBrukereMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
                 </BodyShort>
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
