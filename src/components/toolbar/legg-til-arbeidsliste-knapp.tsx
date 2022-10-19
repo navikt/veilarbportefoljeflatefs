@@ -16,7 +16,7 @@ interface LeggTilArbeidslisteProps {
 
 function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
-    const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
+    let modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
     const innloggetVeileder = useIdentSelector();
     const dispatch = useDispatch();
 
@@ -44,11 +44,6 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 className="toolbar_btn"
                 icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
                 iconPosition="left"
-                disabled={
-                    valgteBrukere.length < 1 ||
-                    props.visesAnnenVeiledersPortefolje ||
-                    inneholderBrukerMedOgUtenArbeidsliste
-                }
                 onClick={() => dispatch(visArbeidslisteModal())}
                 data-testid={
                     inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'

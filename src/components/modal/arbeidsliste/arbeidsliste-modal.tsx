@@ -10,7 +10,7 @@ import {STATUS} from '../../../ducks/utils';
 import ModalHeader from '../modal-header';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import {BodyShort, Heading, Modal} from '@navikt/ds-react';
+import {Alert, BodyShort, Heading, Modal} from '@navikt/ds-react';
 import LasterModal from '../lastermodal/laster-modal';
 
 interface ArbeidslisteModalProps {
@@ -65,6 +65,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                                 </div>
                                 <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={lukkModal} />
                             </div>
+                            )
                         </VarselModal>
                     ) : (
                         <Modal
@@ -72,15 +73,24 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
-                            <ModalHeader tittel="Legg i arbeidsliste" />
-                            <div className="modal-innhold">
-                                <LeggTilArbeidslisteForm
-                                    valgteBrukere={valgteBrukere}
-                                    lukkModal={lukkModal}
-                                    innloggetVeileder={innloggetVeileder}
-                                    setFormIsDirty={() => setFormIsDirty(formIsDirty)}
-                                />
-                            </div>
+                            {valgteBrukere.length == 0 ? (
+                                <Alert variant="error" size="small" inline={true}>
+                                    Du må velge minst én bruker
+                                </Alert>
+                            ) : (
+                                <>
+                                    <ModalHeader tittel="Legg i arbeidsliste" />
+                                    <div className="modal-innhold">
+                                        <LeggTilArbeidslisteForm
+                                            valgteBrukere={valgteBrukere}
+                                            lukkModal={lukkModal}
+                                            innloggetVeileder={innloggetVeileder}
+                                            setFormIsDirty={() => setFormIsDirty(formIsDirty)}
+                                        />
+                                    </div>
+                                    ){' '}
+                                </>
+                            )}
                         </Modal>
                     )}
                 </>

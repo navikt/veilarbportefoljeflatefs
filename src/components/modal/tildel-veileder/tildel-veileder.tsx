@@ -9,7 +9,8 @@ import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {Button, Radio, RadioGroup} from '@navikt/ds-react';
+import {Alert, Button, Modal, Radio, RadioGroup} from '@navikt/ds-react';
+import {skjulModal} from '../../../ducks/modal';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -18,6 +19,7 @@ interface TildelVeilederProps {
 
 function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
@@ -43,19 +45,33 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
             doTildelTilVeileder(tilordninger, ident);
         }
     };
+    const lukkModal = () => {
+        setIsModalOpen(false);
+        dispatch(skjulModal());
+    };
 
     return (
-        <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
-            {data => (
-                <TildelVeilederRenderer
-                    ident={ident}
-                    onChange={setIdent}
-                    onSubmit={() => onSubmit()}
-                    data={data}
-                    btnOnClick={() => onSubmit()}
-                />
+        <>
+            {valgteBrukere.length == 0 ? (
+                <Modal open={isModalOpen} onClose={lukkModal}>
+                    <Alert variant="error" size="small" inline={true}>
+                        Du må velge minst én bruker
+                    </Alert>
+                </Modal>
+            ) : (
+                <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
+                    {data => (
+                        <TildelVeilederRenderer
+                            ident={ident}
+                            onChange={setIdent}
+                            onSubmit={() => onSubmit()}
+                            data={data}
+                            btnOnClick={() => onSubmit()}
+                        />
+                    )}
+                </SokFilter>
             )}
-        </SokFilter>
+        </>
     );
 }
 
