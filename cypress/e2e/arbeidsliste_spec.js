@@ -19,7 +19,7 @@ describe('Arbeidsliste', () => {
 
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         cy.gaTilOversikt('min-oversikt');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp')
@@ -64,7 +64,7 @@ describe('Arbeidsliste', () => {
     });
 
     it('Lag to nye arbeidslister', () => {
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
 
@@ -135,7 +135,7 @@ describe('Arbeidsliste', () => {
         cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
             antallFor += Cypress.$(ant).length;
         });
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
         cy.getByTestId('fjern-fra-arbeidsliste_knapp')
             .should('be.enabled')

@@ -18,7 +18,7 @@ describe('Filter min arbeidsliste', () => {
 
     it('Legg til person i lilla arbeidsliste', () => {
         cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.getByTestId('min-oversikt_brukerliste-checkbox').first().check();
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');

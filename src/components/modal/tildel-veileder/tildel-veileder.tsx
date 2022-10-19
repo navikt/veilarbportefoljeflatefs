@@ -52,7 +52,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
 
     return (
         <>
-            {valgteBrukere.length == 0 ? (
+            {valgteBrukere.length === 0 ? (
                 <Modal open={isModalOpen} onClose={lukkModal}>
                     <Alert variant="error" size="small" inline={true}>
                         Du må velge minst én bruker

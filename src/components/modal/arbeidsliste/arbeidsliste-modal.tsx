@@ -73,7 +73,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
-                            {valgteBrukere.length == 0 ? (
+                            {valgteBrukere.length === 0 ? (
                                 <Alert variant="error" size="small" inline={true}>
                                     Du må velge minst én bruker
                                 </Alert>
