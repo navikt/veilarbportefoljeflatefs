@@ -4,6 +4,8 @@ import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {BodyShort, Button} from '@navikt/ds-react';
+import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
+import {useDispatch} from 'react-redux';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -19,7 +21,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     const [isInputOpen, setInputOpen] = useState(false);
     const [isBtnClicked, setBtnClicked] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
-
+    const dispatch = useDispatch();
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         setInputOpen(setOpenTo);
     };
@@ -43,6 +45,9 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
 
     const klikk = () => {
         setInputOpen(true);
+        if (!props.aktiv) {
+            dispatch(oppdaterBrukerfeil());
+        }
     };
 
     const visChildren = () => {

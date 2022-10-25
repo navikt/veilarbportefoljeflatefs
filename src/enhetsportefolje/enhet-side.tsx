@@ -37,6 +37,7 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {Brukerfeilmelding} from '../components/brukerfeilmelding/brukerfeilmelding';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -118,6 +119,7 @@ export default function EnhetSide() {
                 setScrolling(false);
             }
         }
+
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
@@ -131,6 +133,8 @@ export default function EnhetSide() {
             .map(elem => elem.filterNavn)
             .toString();
 
+    const brFM = useSelector((state: AppState) => state.brukerfeilStatus);
+    const error = useSelector((state: AppState) => state.brukerfeilStatus.status);
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny oversiktType={oversiktType} />
@@ -186,23 +190,33 @@ export default function EnhetSide() {
                                         >
                                             <TabellOverskrift />
                                         </div>
-                                        <Toolbar
-                                            onPaginering={() =>
-                                                dispatch(
-                                                    hentPortefoljeForEnhet(
-                                                        enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
+                                        <div>
+                                            <Toolbar
+                                                onPaginering={() =>
+                                                    dispatch(
+                                                        hentPortefoljeForEnhet(
+                                                            enhetId,
+                                                            sorteringsrekkefolge,
+                                                            sorteringsfelt,
+                                                            filtervalg
+                                                        )
                                                     )
-                                                )
-                                            }
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises
-                                            antallTotalt={portefoljeData.antallTotalt}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
-                                        />
+                                                }
+                                                oversiktType={oversiktType}
+                                                sokVeilederSkalVises
+                                                antallTotalt={portefoljeData.antallTotalt}
+                                                scrolling={scrolling}
+                                                isSidebarHidden={isSidebarHidden}
+                                            />
+                                            {error && (
+                                                <Brukerfeilmelding
+                                                    variant="error"
+                                                    size="small"
+                                                    inline={true}
+                                                    text="Du må velge minst én bruker"
+                                                />
+                                            )}
+                                        </div>
                                         <EnhetTabellOverskrift />
                                     </div>
                                 </span>

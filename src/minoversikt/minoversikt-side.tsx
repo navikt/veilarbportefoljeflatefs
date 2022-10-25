@@ -43,6 +43,7 @@ import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {Brukerfeilmelding} from '../components/brukerfeilmelding/brukerfeilmelding';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -106,7 +107,8 @@ export default function MinoversiktSide() {
             .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
-
+    const error = true;
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
@@ -177,26 +179,36 @@ export default function MinoversiktSide() {
                                             </Alert>
                                         )}
                                     </div>
-                                    <Toolbar
-                                        onPaginering={() =>
-                                            dispatch(
-                                                hentPortefoljeForVeileder(
-                                                    enhetId,
-                                                    gjeldendeVeileder,
-                                                    sorteringsrekkefolge,
-                                                    sorteringsfelt,
-                                                    filtervalg
+                                    <div>
+                                        <Toolbar
+                                            onPaginering={() =>
+                                                dispatch(
+                                                    hentPortefoljeForVeileder(
+                                                        enhetId,
+                                                        gjeldendeVeileder,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
+                                                    )
                                                 )
-                                            )
-                                        }
-                                        oversiktType={oversiktType}
-                                        sokVeilederSkalVises={false}
-                                        antallTotalt={portefolje.data.antallTotalt}
-                                        gjeldendeVeileder={gjeldendeVeileder}
-                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                        scrolling={scrolling}
-                                        isSidebarHidden={isSidebarHidden}
-                                    />
+                                            }
+                                            oversiktType={oversiktType}
+                                            sokVeilederSkalVises={false}
+                                            antallTotalt={portefolje.data.antallTotalt}
+                                            gjeldendeVeileder={gjeldendeVeileder}
+                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                            scrolling={scrolling}
+                                            isSidebarHidden={isSidebarHidden}
+                                        />
+                                        {error && (
+                                            <Brukerfeilmelding
+                                                variant="error"
+                                                size="small"
+                                                inline={true}
+                                                text={brukerfeilMelding.data.message}
+                                            />
+                                        )}
+                                    </div>
                                     <MinoversiktTabellOverskrift
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         innloggetVeileder={innloggetVeilederIdent!.ident}
