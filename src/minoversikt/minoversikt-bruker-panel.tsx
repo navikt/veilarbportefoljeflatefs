@@ -16,6 +16,9 @@ import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {Checkbox, Tag} from '@navikt/ds-react';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppState} from '../reducer';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -58,6 +61,13 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
     const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
+    const dispatch = useDispatch();
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
+    };
 
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
@@ -87,7 +97,10 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
                         disabled={bruker.fnr === ''}
                         hideLabel
-                        onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        onChange={() => {
+                            settMarkert(bruker.fnr, !bruker.markert);
+                            fjernBrukerfeilmelding();
+                        }}
                         size="small"
                     >
                         {''}
@@ -132,7 +145,10 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     skalVises={arbeidslisteAktiv}
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    settMarkert={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                        fjernBrukerfeilmelding();
+                    }}
                     apen={apen}
                 />
             </Collapse>

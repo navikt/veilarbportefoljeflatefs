@@ -44,9 +44,10 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     };
 
     const klikk = () => {
-        setInputOpen(true);
         if (!props.aktiv) {
             dispatch(oppdaterBrukerfeil());
+        } else {
+            setInputOpen(true);
         }
     };
 

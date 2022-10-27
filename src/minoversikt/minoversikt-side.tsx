@@ -97,7 +97,7 @@ export default function MinoversiktSide() {
 
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
-    }, [scrolling]);
+    }, [scrolling, dispatch]);
 
     const {sisteValgtMineFilter} = useSelector((state: AppState) => state.mineFilterMinOversikt);
 
@@ -107,7 +107,6 @@ export default function MinoversiktSide() {
             .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
-    const error = true;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
@@ -200,12 +199,12 @@ export default function MinoversiktSide() {
                                             scrolling={scrolling}
                                             isSidebarHidden={isSidebarHidden}
                                         />
-                                        {error && (
+                                        {brukerfeilMelding.status && (
                                             <Brukerfeilmelding
                                                 variant="error"
                                                 size="small"
                                                 inline={true}
-                                                text={brukerfeilMelding.data.message}
+                                                text={brukerfeilMelding.message}
                                             />
                                         )}
                                     </div>

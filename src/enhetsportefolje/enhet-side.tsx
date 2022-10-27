@@ -133,8 +133,7 @@ export default function EnhetSide() {
             .map(elem => elem.filterNavn)
             .toString();
 
-    const brFM = useSelector((state: AppState) => state.brukerfeilStatus);
-    const error = useSelector((state: AppState) => state.brukerfeilStatus.status);
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny oversiktType={oversiktType} />
@@ -208,12 +207,12 @@ export default function EnhetSide() {
                                                 scrolling={scrolling}
                                                 isSidebarHidden={isSidebarHidden}
                                             />
-                                            {error && (
+                                            {brukerfeilMelding.status && (
                                                 <Brukerfeilmelding
                                                     variant="error"
                                                     size="small"
                                                     inline={true}
-                                                    text="Du må velge minst én bruker"
+                                                    text={brukerfeilMelding.message}
                                                 />
                                             )}
                                         </div>

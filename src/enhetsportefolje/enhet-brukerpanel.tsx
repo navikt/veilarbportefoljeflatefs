@@ -11,6 +11,9 @@ import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
 import {Checkbox} from '@navikt/ds-react';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppState} from '../reducer';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
@@ -34,6 +37,13 @@ function EnhetBrukerpanel({
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
 
+    const dispatch = useDispatch();
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
+    };
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xPos') || '0');
         const yPos = parseInt(localStorage.getItem('yPos') || '0');
@@ -58,7 +68,10 @@ function EnhetBrukerpanel({
                     className="brukerliste__checkbox"
                     disabled={bruker.fnr === ''}
                     hideLabel
-                    onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    onChange={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                        fjernBrukerfeilmelding();
+                    }}
                     size="small"
                 >
                     {''}

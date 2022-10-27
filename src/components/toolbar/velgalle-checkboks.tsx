@@ -1,9 +1,11 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.css';
 import {Checkbox} from '@navikt/ds-react';
+import {AppState} from '../../reducer';
+import {nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface VelgalleCheckboksProps {
     disabled: boolean;
@@ -13,7 +15,18 @@ interface VelgalleCheckboksProps {
 }
 
 function VelgAlleCheckboks({disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
-    const onClickHandler = () => markerAlle(!alleMarkert);
+    const dispatch = useDispatch();
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
+    };
+
+    const onClickHandler = () => {
+        markerAlle(!alleMarkert);
+        fjernBrukerfeilmelding();
+    };
 
     return (
         <Checkbox
