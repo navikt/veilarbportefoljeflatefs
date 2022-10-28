@@ -9,6 +9,8 @@ import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
 import {IdentParam} from '../../model-interfaces';
+import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
+import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -28,15 +30,26 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
 
     const skalSkjules =
         innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
+    const arbeidslisteValgt = useSelector((state: AppState) =>
+        state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
+    );
 
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-    const inneholderBareBrukereMedArbeidsliste = valgteBrukere.every(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
-    //    const inneholderBrukerMedOgUtenArbeidsliste =
-    //        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBareBrukereMedArbeidsliste =
+        arbeidslisteValgt ||
+        (valgteBrukere.length > 0 && valgteBrukere.every(bruker => bruker.arbeidsliste.arbeidslisteAktiv));
 
     if (skalSkjules) {
         return null;
     }
+
+    const klikk = () => {
+        if (valgteBrukere.length == 0) {
+            dispatch(oppdaterBrukerfeil());
+        } else {
+            dispatch(visArbeidslisteModal());
+        }
+    };
 
     return (
         <div className="toolbar_btnwrapper">
@@ -45,7 +58,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 className="toolbar_btn"
                 icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
                 iconPosition="left"
-                onClick={() => dispatch(visArbeidslisteModal())}
+                onClick={() => klikk()}
                 data-testid={
                     inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
@@ -58,4 +71,5 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
         </div>
     );
 }
+
 export default ArbeidslisteKnapp;

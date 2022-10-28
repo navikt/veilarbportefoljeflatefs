@@ -231,7 +231,6 @@ export enum SesjonStatus {
 }
 
 export interface Brukerfeilmeldinger {
-    type?: string;
     variant: 'error' | 'warning' | 'info' | 'success';
     size: 'medium' | 'small';
     inline: boolean;
