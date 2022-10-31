@@ -37,7 +37,6 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
-import {Brukerfeilmelding} from '../components/brukerfeilmelding/brukerfeilmelding';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -133,7 +132,6 @@ export default function EnhetSide() {
             .map(elem => elem.filterNavn)
             .toString();
 
-    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny oversiktType={oversiktType} />
@@ -189,33 +187,25 @@ export default function EnhetSide() {
                                         >
                                             <TabellOverskrift />
                                         </div>
-                                        <div>
-                                            <Toolbar
-                                                onPaginering={() =>
-                                                    dispatch(
-                                                        hentPortefoljeForEnhet(
-                                                            enhetId,
-                                                            sorteringsrekkefolge,
-                                                            sorteringsfelt,
-                                                            filtervalg
-                                                        )
+
+                                        <Toolbar
+                                            onPaginering={() =>
+                                                dispatch(
+                                                    hentPortefoljeForEnhet(
+                                                        enhetId,
+                                                        sorteringsrekkefolge,
+                                                        sorteringsfelt,
+                                                        filtervalg
                                                     )
-                                                }
-                                                oversiktType={oversiktType}
-                                                sokVeilederSkalVises
-                                                antallTotalt={portefoljeData.antallTotalt}
-                                                scrolling={scrolling}
-                                                isSidebarHidden={isSidebarHidden}
-                                            />
-                                            {brukerfeilMelding.status && (
-                                                <Brukerfeilmelding
-                                                    variant="error"
-                                                    size="small"
-                                                    inline={true}
-                                                    text={brukerfeilMelding.message}
-                                                />
-                                            )}
-                                        </div>
+                                                )
+                                            }
+                                            oversiktType={oversiktType}
+                                            sokVeilederSkalVises
+                                            antallTotalt={portefoljeData.antallTotalt}
+                                            scrolling={scrolling}
+                                            isSidebarHidden={isSidebarHidden}
+                                        />
+
                                         <EnhetTabellOverskrift />
                                     </div>
                                 </span>

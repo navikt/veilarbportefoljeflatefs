@@ -9,3 +9,9 @@
     grid-row: 1;
     padding: 1rem 0;
 }
+.veilarbportefoljeflatefs .tabelloverskrift__alternativ {
+    z-index: 1000;
+    margin-bottom: 0;
+    width: max-content;
+    padding: 0.1rem 0;
+}

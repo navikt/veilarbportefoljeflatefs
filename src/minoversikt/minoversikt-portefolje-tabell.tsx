@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
 import {settBrukerSomMarkert, hentArbeidslisteForBruker} from '../ducks/portefolje';
@@ -13,6 +13,7 @@ import './minoversikt.css';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -34,7 +35,15 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     });
 
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
+    };
+    useEffect(() => {
+        fjernBrukerfeilmelding();
+    }, [filtervalg]);
     return (
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div className={props.classNameWrapper}>

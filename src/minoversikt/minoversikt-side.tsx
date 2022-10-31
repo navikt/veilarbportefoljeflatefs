@@ -43,7 +43,6 @@ import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
-import {Brukerfeilmelding} from '../components/brukerfeilmelding/brukerfeilmelding';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -107,7 +106,7 @@ export default function MinoversiktSide() {
             .filter(elem => elem.filterId === filterId)
             .map(elem => elem.filterNavn)
             .toString();
-    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
@@ -178,36 +177,26 @@ export default function MinoversiktSide() {
                                             </Alert>
                                         )}
                                     </div>
-                                    <div>
-                                        <Toolbar
-                                            onPaginering={() =>
-                                                dispatch(
-                                                    hentPortefoljeForVeileder(
-                                                        enhetId,
-                                                        gjeldendeVeileder,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )
+                                    <Toolbar
+                                        onPaginering={() =>
+                                            dispatch(
+                                                hentPortefoljeForVeileder(
+                                                    enhetId,
+                                                    gjeldendeVeileder,
+                                                    sorteringsrekkefolge,
+                                                    sorteringsfelt,
+                                                    filtervalg
                                                 )
-                                            }
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises={false}
-                                            antallTotalt={portefolje.data.antallTotalt}
-                                            gjeldendeVeileder={gjeldendeVeileder}
-                                            visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
-                                        />
-                                        {brukerfeilMelding.status && (
-                                            <Brukerfeilmelding
-                                                variant="error"
-                                                size="small"
-                                                inline={true}
-                                                text={brukerfeilMelding.message}
-                                            />
-                                        )}
-                                    </div>
+                                            )
+                                        }
+                                        oversiktType={oversiktType}
+                                        sokVeilederSkalVises={false}
+                                        antallTotalt={portefolje.data.antallTotalt}
+                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                        scrolling={scrolling}
+                                        isSidebarHidden={isSidebarHidden}
+                                    />
                                     <MinoversiktTabellOverskrift
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         innloggetVeileder={innloggetVeilederIdent!.ident}

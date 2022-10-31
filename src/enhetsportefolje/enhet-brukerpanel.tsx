@@ -4,7 +4,7 @@ import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
-import {useEffect, useLayoutEffect} from 'react';
+import {useLayoutEffect} from 'react';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
@@ -55,9 +55,6 @@ function EnhetBrukerpanel({
             scrollToLastPos();
         }
     }, [varForrigeBruker]);
-    useEffect(() => {
-        fjernBrukerfeilmelding();
-    }, [filtervalg]);
 
     const classname = classNames('brukerliste__element', {
         'brukerliste--forrigeBruker': varForrigeBruker
