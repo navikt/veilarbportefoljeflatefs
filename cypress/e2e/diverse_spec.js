@@ -120,7 +120,7 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
     });
-
+/*
     it('Velg andre kolonner', () => {
         cy.getByTestId('alertstripe_filtrering').should('be.visible');
         cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({
@@ -141,7 +141,7 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
     });
-
+*/
     it('Tildel veileder', () => {
         cy.gaTilOversikt('min-oversikt');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
