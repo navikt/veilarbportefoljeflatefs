@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import EnhetBrukerpanel from './enhet-brukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
@@ -10,7 +10,6 @@ import './brukerliste.css';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
-import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
@@ -30,15 +29,6 @@ function EnhetTabell(props: EnhetTabellProps) {
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
 
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
-    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
-    const fjernBrukerfeilmelding = () => {
-        if (brukerfeilMelding.status) {
-            dispatch(nullstillBrukerfeil());
-        }
-    };
-    useEffect(() => {
-        fjernBrukerfeilmelding();
-    }, [filtervalg]);
 
     return (
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>

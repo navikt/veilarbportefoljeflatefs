@@ -13,6 +13,7 @@ import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filt
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import MineFilterTab from './mine-filter-tab';
+import {nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface SidevelgerProps {
     selectedTabData: Sidebarelement;
@@ -26,6 +27,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: Si
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(nullstillBrukerfeil());
     };
 
     if (!selectedTabData) {

@@ -15,6 +15,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../../konstanter';
 import {Label, RadioGroup} from '@navikt/ds-react';
 import './filtrering-status.css';
+import {nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -29,6 +30,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, props.oversiktType));
+        dispatch(nullstillBrukerfeil());
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {

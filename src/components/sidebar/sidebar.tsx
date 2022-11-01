@@ -22,6 +22,7 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
 import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
+import {nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 export interface Sidebarelement {
     type: SidebarTabType;
@@ -172,6 +173,7 @@ function Sidebar(props: SidebarProps) {
     }
 
     function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
+        dispatch(nullstillBrukerfeil());
         endreSideBar({
             dispatch: dispatch,
             requestedTab: tab.type,

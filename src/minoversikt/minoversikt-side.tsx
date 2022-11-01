@@ -43,6 +43,7 @@ import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -58,7 +59,8 @@ export default function MinoversiktSide() {
 
     useEffect(() => {
         document.title = 'Min oversikt';
-    }, []);
+        dispatch(nullstillBrukerfeil());
+    }, [dispatch]);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -80,6 +82,7 @@ export default function MinoversiktSide() {
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(nullstillBrukerfeil());
     };
 
     const [scrolling, setScrolling] = useState(false);

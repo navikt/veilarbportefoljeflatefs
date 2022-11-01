@@ -23,6 +23,7 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Panel} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 function VeiledereSide() {
     const statustall = useFetchStatusTall();
@@ -37,7 +38,8 @@ function VeiledereSide() {
 
     useEffect(() => {
         document.title = 'Veilederoversikt';
-    }, []);
+        dispatch(nullstillBrukerfeil());
+    }, [dispatch]);
 
     useSetEnhetIUrl();
 

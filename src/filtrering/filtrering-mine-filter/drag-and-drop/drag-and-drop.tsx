@@ -15,6 +15,7 @@ import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
+import {nullstillBrukerfeil} from '../../../ducks/brukerfeilmelding';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
@@ -62,7 +63,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         const filter: LagretFilter = dragAndDropOrder.find(
             sortertFilter => `${sortertFilter.filterId}` === filterId
         ) as LagretFilter;
-
+        dispatch(nullstillBrukerfeil());
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {},
