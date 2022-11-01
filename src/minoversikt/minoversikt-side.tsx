@@ -96,7 +96,7 @@ export default function MinoversiktSide() {
 
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
-    }, [scrolling, dispatch]);
+    }, [scrolling]);
 
     const {sisteValgtMineFilter} = useSelector((state: AppState) => state.mineFilterMinOversikt);
 

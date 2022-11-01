@@ -118,7 +118,6 @@ export default function EnhetSide() {
                 setScrolling(false);
             }
         }
-
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
@@ -187,7 +186,6 @@ export default function EnhetSide() {
                                         >
                                             <TabellOverskrift />
                                         </div>
-
                                         <Toolbar
                                             onPaginering={() =>
                                                 dispatch(
@@ -205,7 +203,6 @@ export default function EnhetSide() {
                                             scrolling={scrolling}
                                             isSidebarHidden={isSidebarHidden}
                                         />
-
                                         <EnhetTabellOverskrift />
                                     </div>
                                 </span>

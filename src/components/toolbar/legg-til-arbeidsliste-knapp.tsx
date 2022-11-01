@@ -44,7 +44,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     }
 
     const klikk = () => {
-        if (valgteBrukere.length == 0) {
+        if (valgteBrukere.length === 0) {
             dispatch(oppdaterBrukerfeil());
         } else {
             dispatch(visArbeidslisteModal());
