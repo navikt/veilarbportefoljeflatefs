@@ -21,6 +21,9 @@
         "jsx": "react",
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"],
+    "include": [
+      "src",
+      "node_modules/cypress/types/cypress-global-vars.d.ts"
+    ],
     "exclude": ["node_modules", "**/*-spec.js", "**/*-test.js", "**/*.less"]
 }
