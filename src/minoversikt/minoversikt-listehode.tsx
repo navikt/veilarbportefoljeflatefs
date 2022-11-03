@@ -168,15 +168,27 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
-                    sortering={Sorteringsfelt.CV_DELT_STATUS}
+                    sortering={Sorteringsfelt.CV_KAN_DELES_STATUS}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.CV_DELT_STATUS}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_KAN_DELES_STATUS}
                     tekst="CV kan deles"
                     className="col col-xs-2"
-                    skalVises={valgteKolonner.includes(Kolonne.CV_DELT_STATUS)}
+                    skalVises={valgteKolonner.includes(Kolonne.CV_KAN_DELES_STATUS)}
                     title="CV kan deles"
                     headerId="cv-kan-deles-status"
+                />
+
+                <SorteringHeader
+                    sortering={Sorteringsfelt.CV_SVARFRIST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
+                    tekst="CV svarfrist"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                    title="CV kan deles"
+                    headerId="cv-svarfrist"
                 />
 
                 <SorteringHeader

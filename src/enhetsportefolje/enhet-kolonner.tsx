@@ -84,6 +84,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
+    const cvKanDelesStatusJa = filtervalg.stillingFraNavFilter.at(0) === 'CV_KAN_DELES_STATUS_JA';
 
     return (
         <div className={className}>
@@ -134,8 +135,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.CV_DELT_STATUS)}
-                tekst={'JA'}
+                skalVises={valgteKolonner.includes(Kolonne.CV_KAN_DELES_STATUS)}
+                tekst={cvKanDelesStatusJa ? 'JA' : '-'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                tekst={filtervalg.stillingFraNavFilter?.at(1)}
             />
             <VeilederNavn
                 className="col col-xs-2"
