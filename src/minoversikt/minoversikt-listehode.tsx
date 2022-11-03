@@ -175,7 +175,7 @@ function MinOversiktListeHode({
                     tekst="CV kan deles"
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.CV_KAN_DELES_STATUS)}
-                    title="CV kan deles"
+                    title="CV kan deles status"
                     headerId="cv-kan-deles-status"
                 />
 
@@ -187,7 +187,7 @@ function MinOversiktListeHode({
                     tekst="CV svarfrist"
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                    title="CV kan deles"
+                    title="CV svarfrist for bruker"
                     headerId="cv-svarfrist"
                 />
 
