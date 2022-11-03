@@ -127,6 +127,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
             />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.CV_DELT_STATUS)}
+                tekst={'JA'}
+            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}

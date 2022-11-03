@@ -40,7 +40,8 @@ export enum Kolonne {
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
     TOLKEBEHOV = 'tolkebehov',
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
-    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert'
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
+    CV_DELT_STATUS = 'cv_delt_status'
 }
 
 export enum OversiktType {

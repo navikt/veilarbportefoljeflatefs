@@ -132,6 +132,11 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.CV_DELT_STATUS)}
+                tekst={'JA'}
+            />
             <VeilederNavn
                 className="col col-xs-2"
                 bruker={bruker}

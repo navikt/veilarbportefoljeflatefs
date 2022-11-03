@@ -168,6 +168,18 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
+                    sortering={Sorteringsfelt.CV_DELT_STATUS}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_DELT_STATUS}
+                    tekst="CV kan deles"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.CV_DELT_STATUS)}
+                    title="CV kan deles"
+                    headerId="cv-kan-deles-status"
+                />
+
+                <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
