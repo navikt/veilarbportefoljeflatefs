@@ -168,7 +168,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
-        .concat(addHvis(Kolonne.CV_KAN_DELES_STATUS, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

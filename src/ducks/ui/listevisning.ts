@@ -41,7 +41,6 @@ export enum Kolonne {
     TOLKEBEHOV = 'tolkebehov',
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
-    CV_KAN_DELES_STATUS = 'cv_kan_deles_status',
     CV_SVARFRIST = 'cv_svarfrist'
 }
 

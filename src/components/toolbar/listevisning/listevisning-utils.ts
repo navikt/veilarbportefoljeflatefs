@@ -33,5 +33,4 @@ alternativerConfig.set(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, {tekstlabel: 'Statsbo
 alternativerConfig.set(Kolonne.TOLKEBEHOV, {tekstlabel: 'Tolkebehov'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SPRAAK, {tekstlabel: 'Språk'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Sist oppdatert'});
-alternativerConfig.set(Kolonne.CV_KAN_DELES_STATUS, {tekstlabel: 'CV kan deles status'});
 alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'CV svarfrist'});
