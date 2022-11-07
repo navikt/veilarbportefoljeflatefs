@@ -175,7 +175,7 @@ function MinOversiktListeHode({
                     tekst="CV svarfrist"
                     className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                    title="CV svarfrist for bruker"
+                    title="Svarfrist for å svare ja til deling av CV"
                     headerId="cv-svarfrist"
                 />
 
