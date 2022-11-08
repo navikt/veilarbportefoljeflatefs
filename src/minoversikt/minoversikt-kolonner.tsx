@@ -130,7 +130,9 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                tekst={filtervalg.stillingFraNavFilter.at(1) || '-'}
+                tekst={
+                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"

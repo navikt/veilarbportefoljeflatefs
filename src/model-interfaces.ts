@@ -161,6 +161,7 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    nesteSvarfristCvStillingFraNav?: string;
 }
 
 interface Statsborgerskap {
