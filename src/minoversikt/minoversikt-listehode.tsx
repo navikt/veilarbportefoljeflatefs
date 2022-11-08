@@ -168,6 +168,18 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
+                    sortering={Sorteringsfelt.CV_SVARFRIST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
+                    tekst="CV svarfrist"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                    title="Svarfrist for å svare ja til deling av CV"
+                    headerId="cv-svarfrist"
+                />
+
+                <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}

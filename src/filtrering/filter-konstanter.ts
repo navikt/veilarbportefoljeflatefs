@@ -217,7 +217,7 @@ export const cvJobbprofil = {
 };
 
 export const stillingFraNavFilter = {
-    CV_KAN_DELES_STATUS_JA: 'CV kan deles Stilling fra NAV'
+    CV_KAN_DELES_STATUS_JA: 'Svart JA til deling av CV'
 };
 
 export const registreringstype = {
