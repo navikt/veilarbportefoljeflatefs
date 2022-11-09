@@ -42,7 +42,8 @@ export enum Sorteringsfelt {
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
-    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert'
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
+    CV_SVARFRIST = 'cv_svarfrist'
 }
 
 export interface FiltervalgModell {
@@ -160,6 +161,7 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    nesteSvarfristCvStillingFraNav?: string;
 }
 
 interface Statsborgerskap {

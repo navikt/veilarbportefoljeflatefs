@@ -227,7 +227,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         innflyttingTilNorgeFraLand: '',
         talespraaktolk: hentSpraak(),
         tegnspraaktolk: hentSpraak(),
-        tolkBehovSistOppdatert: randomDate({past: true})
+        tolkBehovSistOppdatert: randomDate({past: true}),
+        nesteSvarfristCvStillingFraNav: '2023-06-12'
     };
 }
 

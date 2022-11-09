@@ -276,7 +276,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
                 />
                 <Dropdown
-                    name="Stilling fra nav"
+                    name="Stilling fra Nav"
                     id="stillingFraNav"
                     hidden={!erStillingFraNavFeatureTogglePa}
                     render={() => (
