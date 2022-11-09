@@ -1153,7 +1153,7 @@ GRID
 }
 
 .col-xs-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
 }
 
 @media (min-width: 768px) {
@@ -1373,7 +1373,7 @@ GRID
     }
 
     .col-sm-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -1594,7 +1594,7 @@ GRID
     }
 
     .col-md-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -1815,7 +1815,7 @@ GRID
     }
 
     .col-lg-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -2112,7 +2112,7 @@ GRID
 .toolbar-container .toolbar {
     grid-column-start: 1;
     grid-column-end: 3;
-    grid-row: 2;
+    grid-row: 1;
     margin-top: 0.5rem;
 }
 
