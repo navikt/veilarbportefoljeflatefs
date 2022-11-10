@@ -69,6 +69,8 @@ export const initialState: FiltervalgModell = {
     utdanningBestatt: [],
     sisteEndringKategori: [],
     ulesteEndringer: null,
+    geografiskBosted: [],
+    visGeografiskBosted: [],
     tolkebehov: [],
     tolkBehovSpraak: [],
     stillingFraNavFilter: []

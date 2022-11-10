@@ -122,6 +122,36 @@ function EnhetListehode({
                     headerId="statsborgerskap_gyldig_fra"
                     skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
+                    tekst="Bosted"
+                    headerId="bosted_kommune"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_BYDEL}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
+                    tekst="Bosted detaljer"
+                    headerId="bosted_bydel"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    tekst="Bosted sist oppdatert"
+                    headerId="bosted_sist_oppdatert"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+                />
                 <Header
                     className="col col-xs-2"
                     title="Tolkebehov"

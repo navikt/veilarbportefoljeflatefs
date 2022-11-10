@@ -3,6 +3,7 @@ import {VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
+import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
 
@@ -221,6 +222,10 @@ export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
 
 export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]> {
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
+}
+
+export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/geografiskbosted`, MED_CREDENTIALS);
 }
 
 export function sendEventTilPortefolje(event: FrontendEvent) {

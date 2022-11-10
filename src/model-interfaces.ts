@@ -40,6 +40,9 @@ export enum Sorteringsfelt {
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    BOSTED_KOMMUNE = 'kommunenummer',
+    BOSTED_BYDEL = 'bydelsnummer',
+    BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
@@ -81,6 +84,8 @@ export interface FiltervalgModell {
     tolkebehov: string[];
     tolkBehovSpraak: string[];
     stillingFraNavFilter: string[];
+    geografiskBosted: string[];
+    visGeografiskBosted: string[];
 }
 
 export interface EnhetModell {
@@ -161,6 +166,11 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    bostedKommune?: string;
+    bostedBydel?: string;
+    bostedSistOppdatert?: string;
+    harUtelandsAddresse?: boolean;
+    harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
 }
 
