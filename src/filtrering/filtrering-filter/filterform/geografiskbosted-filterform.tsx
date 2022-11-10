@@ -25,7 +25,7 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
     useEffect(() => {
         setVisGeografiskBosted(filtervalg.visGeografiskBosted);
 
-        if (geografiskbostedListData != null && geografiskbostedListData.size > 0) {
+        if (geografiskbostedListData.size > 0) {
             let selectedValues: GeografiskBostedOptions[] = [];
             filtervalg.geografiskBosted.forEach(x => {
                 if (geografiskbostedListData.get(x) != null && geografiskbostedListData.get(x) !== undefined) {
