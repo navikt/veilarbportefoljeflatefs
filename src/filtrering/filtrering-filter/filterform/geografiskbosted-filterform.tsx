@@ -53,8 +53,8 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
         if (geografiskbostedListData.size > 0) {
             setGeografiskBostedOptions(
                 Array.from(geografiskbostedListData).map((bostedKodeNavn: [string, string]) => ({
-                    label: bostedKodeNavn[0],
-                    value: bostedKodeNavn[1]
+                    value: bostedKodeNavn[0],
+                    label: bostedKodeNavn[1]
                 }))
             );
         }
