@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
     aapRettighetsperiode,
+    bostedKommune,
     capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
@@ -86,15 +87,6 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     const geografiskbostedData = useGeografiskbostedSelector();
-    const bostedKommune = (bruker: BrukerModell) => {
-        if (bruker.bostedKommune) {
-            return geografiskbostedData.get(bruker.bostedKommune);
-        }
-        if (bruker.harUtelandsAddresse) {
-            return 'Utland';
-        }
-        return '-';
-    };
 
     return (
         <div className={className}>
@@ -142,7 +134,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommune(bruker)}
+                tekst={bostedKommune(bruker, geografiskbostedData)}
             />
             <TekstKolonne
                 className="col col-xs-2"

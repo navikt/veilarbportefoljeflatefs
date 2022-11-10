@@ -17,6 +17,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    bostedKommune,
     capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
@@ -87,18 +88,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     const geografiskbostedData = useGeografiskbostedSelector();
-    const bostedKommune = (bruker: BrukerModell) => {
-        if (bruker.bostedKommune) {
-            return geografiskbostedData.get(bruker.bostedKommune);
-        }
-        if (bruker.harUtelandsAddresse) {
-            return 'Utland';
-        }
-        if (bruker.harUkjentBosted) {
-            return 'Ukjent';
-        }
-        return '-';
-    };
 
     return (
         <div className={className}>
@@ -152,7 +141,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommune(bruker)}
+                tekst={bostedKommune(bruker, geografiskbostedData)}
             />
             <TekstKolonne
                 className="col col-xs-2"
