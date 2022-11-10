@@ -86,7 +86,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     return ([] as Kolonne[])
-        .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
         .concat(
@@ -95,6 +94,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0
             )
         )
+        .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
+        .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
@@ -173,8 +174,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
-        .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
-        .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, visGeografiskBosted()))
+        .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }
