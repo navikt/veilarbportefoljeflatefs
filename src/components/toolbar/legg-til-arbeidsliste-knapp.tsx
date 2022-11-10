@@ -34,7 +34,6 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
         state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
     );
 
-    const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     const inneholderBareBrukereMedArbeidsliste =
         arbeidslisteValgt ||
         (valgteBrukere.length > 0 && valgteBrukere.every(bruker => bruker.arbeidsliste.arbeidslisteAktiv));
@@ -60,7 +59,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 iconPosition="left"
                 onClick={() => klikk()}
                 data-testid={
-                    inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
+                    inneholderBareBrukereMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">

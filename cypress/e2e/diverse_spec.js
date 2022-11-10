@@ -3,6 +3,7 @@ before('Start server', () => {
 });
 
 describe('Diverse', () => {
+
     it('Verifiser tilbakemeldingsundersøkelse', () => {
         cy.getByTestId('tilbakemelding_modal').should('not.exist');
         cy.getByTestId('tilbakemelding_fab_knapp')
@@ -162,5 +163,18 @@ describe('Diverse', () => {
             .should('be.visible')
             .click();
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
+    });
+
+    it('Sjekk brukerfeilmelding', () => {
+        cy.gaTilOversikt('min-oversikt');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('tildel-veileder_dropdown').should('not.exist');
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
     });
 });
