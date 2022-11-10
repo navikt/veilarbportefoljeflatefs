@@ -178,6 +178,7 @@ describe('Diverse', () => {
     });
 
     it('Sjekk brukerfeilmelding forsvinner', () => {
+        cy.gaTilOversikt('enhetens-oversikt');
         cy.gaTilOversikt('min-oversikt');
 
         cy.getByTestId('tildel-veileder_knapp')
