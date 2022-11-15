@@ -939,18 +939,18 @@ describe('Filter', () => {
 
     it('fjern brukerfeilmelding velge minst en bruker', () => {
         cy.gaTilOversikt('min-oversikt');
-        cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({
+        cy.getByTestId('sidebar-tab_STATUS').click();
+        cy.getByTestId('filter_checkboks-container_nyeBrukere').check({
             force: true
         });
-        cy.getByTestId('filter_checkboks-container_ufordeltebruker').should('be.checked');
-        cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
-        cy.apneLukkeFilterDropdown('kjonn');
+        cy.getByTestId('filter_checkboks-container_nyeBrukere').should('be.checked');
+        cy.getByTestId('filtreringlabel_nye-brukere').should('be.visible');
+        cy.getByTestId('sidebar-tab_FILTER').click();
         cy.getByTestId('tildel-veileder_knapp')
             .should('be.enabled')
             .click({force: true});
         cy.getByTestId('brukerfeilmelding').should('be.visible');
-
-        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.apneLukkeFilterDropdown('kjonn');
         cy.checkbox('radio-valg_kvinne');
         cy.getByTestId('brukerfeilmelding').should('not.exist');
     })
