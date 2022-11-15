@@ -5,11 +5,12 @@ import Grid from '../../../components/grid/grid';
 import './filterform.css';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert, Tooltip, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
+import {CheckboxFilter} from '../../filter-konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
-    valg: Dictionary<string>;
+    valg: CheckboxFilter;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
@@ -61,19 +62,26 @@ function CheckboxFilterform({
                                         key={`tooltip-${filterKey}`}
                                     >
                                         {/* Wrapper i div for at Tooltip-en skal legge seg ved label-en og ikke rett ved checkbox-en */}
-                                        <div>
+                                        <div className={filterValue.className}>
                                             <Checkbox
                                                 data-testid={`filter_${filterKey}`}
+                                                indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
                                                 key={filterKey}
                                                 value={filterKey}
                                             >
-                                                {filterValue}
+                                                {filterValue.label}
                                             </Checkbox>
                                         </div>
                                     </Tooltip>
                                 ) : (
-                                    <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} value={filterKey}>
-                                        {filterValue}
+                                    <Checkbox
+                                        className={filterValue.className}
+                                        data-testid={`filter_${filterKey}`}
+                                        indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
+                                        key={filterKey}
+                                        value={filterKey}
+                                    >
+                                        {filterValue.label}
                                     </Checkbox>
                                 )
                             )}

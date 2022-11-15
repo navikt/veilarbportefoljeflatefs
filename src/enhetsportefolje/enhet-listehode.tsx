@@ -183,6 +183,14 @@ function EnhetListehode({
                     skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 />
 
+                <Header
+                    skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                    className="col col-xs-2"
+                    title="Avvik §14a-vedtak"
+                    headerId="avvik14avedtak"
+                >
+                    Avvik §14a-vedtak
+                </Header>
                 <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}

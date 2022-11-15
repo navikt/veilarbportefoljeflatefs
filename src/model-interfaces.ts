@@ -86,6 +86,7 @@ export interface FiltervalgModell {
     stillingFraNavFilter: string[];
     geografiskBosted: string[];
     visGeografiskBosted: string[];
+    avvik14aVedtak: string[];
 }
 
 export interface EnhetModell {
@@ -172,6 +173,7 @@ export interface BrukerModell {
     harUtelandsAddresse?: boolean;
     harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
+    avvik14aVedtak: string;
 }
 
 interface Statsborgerskap {

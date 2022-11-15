@@ -73,7 +73,8 @@ export const initialState: FiltervalgModell = {
     visGeografiskBosted: [],
     tolkebehov: [],
     tolkBehovSpraak: [],
-    stillingFraNavFilter: []
+    stillingFraNavFilter: [],
+    avvik14aVedtak: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {
