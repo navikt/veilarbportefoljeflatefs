@@ -76,26 +76,26 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         setBtnClicked(false);
         setInputOpen(false);
     }
+    if (isInputOpen) {
+        return (
+            <div className="toolbarknapp-input" ref={loggNode} onClick={klikk}>
+                {visChildren()}
+            </div>
+        );
+    }
 
     return (
-        <>
-            {isInputOpen && (
-                <div className="toolbarknapp-input" ref={loggNode} onClick={klikk}>
-                    {visChildren()}
-                </div>
-            )}
-            <Button
-                variant="tertiary"
-                type="button"
-                className="toolbar_btn"
-                icon={props.ikon}
-                onClick={klikk}
-                data-testid={props.testid}
-            >
-                <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {props.tittel}
-                </BodyShort>
-            </Button>
-        </>
+        <Button
+            variant="tertiary"
+            type="button"
+            className="toolbar_btn"
+            icon={props.ikon}
+            onClick={klikk}
+            data-testid={props.testid}
+        >
+            <BodyShort size="small" className="toolbar-knapp__tekst">
+                {props.tittel}
+            </BodyShort>
+        </Button>
     );
 }
