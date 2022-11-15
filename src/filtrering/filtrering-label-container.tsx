@@ -9,12 +9,13 @@ import FilterKonstanter, {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
+import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
+import {pagineringSetup} from '../ducks/paginering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
@@ -70,6 +71,7 @@ function FiltreringLabelContainer({
 
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
+    const geografiskBostedListData = useGeografiskbostedSelector();
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
@@ -162,6 +164,29 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
+            } else if (key === 'visGeografiskBosted' && value.length > 0) {
+                return [
+                    <FiltreringLabel
+                        key={`visGeografiskBosted-1`}
+                        label={`Vis geografisk bosted`}
+                        slettFilter={() => slettEnkelt(key, '1')}
+                    />
+                ];
+            } else if (key === 'geografiskBosted' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Bosted: ' +
+                                (geografiskBostedListData.has(singleValue)
+                                    ? geografiskBostedListData.get(singleValue)
+                                    : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (value === true) {
                 return [
                     <FiltreringLabel
@@ -172,31 +197,31 @@ function FiltreringLabelContainer({
                 ];
             } else if (key === 'foedeland') {
                 return value.map(singleValue => {
-                    if (foedelandListData.get(singleValue) != null) {
-                        return (
-                            <FiltreringLabel
-                                key={`${key}--${singleValue}`}
-                                label={'Fødeland: ' + foedelandListData.get(singleValue)}
-                                slettFilter={() => slettEnkelt(key, singleValue)}
-                            />
-                        );
-                    } else {
-                        return '';
-                    }
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Fødeland: ' +
+                                (foedelandListData.has(singleValue) ? foedelandListData.get(singleValue) : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
                 });
             } else if (key === 'tolkBehovSpraak') {
                 return value.map(singleValue => {
-                    if (tolkbehovSpraakListData.get(singleValue) != null) {
-                        return (
-                            <FiltreringLabel
-                                key={`${key}--${singleValue}`}
-                                label={'Tolkebehov språk: ' + tolkbehovSpraakListData.get(singleValue)}
-                                slettFilter={() => slettEnkelt(key, singleValue)}
-                            />
-                        );
-                    } else {
-                        return '';
-                    }
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Tolkebehov språk: ' +
+                                (tolkbehovSpraakListData.has(singleValue)
+                                    ? tolkbehovSpraakListData.get(singleValue)
+                                    : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
                 });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {

@@ -14,6 +14,7 @@ import {mineFilter} from './mine-filter';
 import {LagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {hentSystemmeldinger} from './systemmeldinger';
 import {endringsloggListe} from './endringslogg';
+import {geografiskBostedListMockData} from './geografiskBosted';
 import {foedelandListMockData} from './foedeland';
 import {tolkebehovSpraakMockData} from './tolkebehovSpraak';
 import getSessionData, {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from './session';
@@ -63,6 +64,8 @@ let tolkebehovSpraak = tolkebehovSpraakMockData();
 let sessionBaseTimestamp = Date.now();
 let sessionDataMockConfig = defaultSessionDataMockConfig(sessionBaseTimestamp);
 let sessionData: SessionMeta | null = null;
+
+let geografiskBosted = geografiskBostedListMockData();
 
 const mock = FetchMock.configure({
     enableFallback: true,
@@ -313,6 +316,7 @@ mock.get(
     })
 );
 
+mock.get('/veilarbportefolje/api/enhet/:enhetId/geografiskbosted', delayed(500, jsonResponse(geografiskBosted)));
 // websocket
 class MockWebSocket {
     constructor(uri: string) {
