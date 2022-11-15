@@ -50,7 +50,7 @@ describe('Mine filter', () => {
         });
 
         cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
-        
+
         cy.wait(500);
         cy.getByTestId('sidebar-tab_FILTER').click();
 
@@ -936,4 +936,22 @@ describe('Filter', () => {
             .should('be.visible')
             .contains('Du må gjøre en filtrering for å se brukere i listen.');
     });
+
+    it('fjern brukerfeilmelding velge minst en bruker', () => {
+        cy.gaTilOversikt('min-oversikt');
+        cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({
+            force: true
+        });
+        cy.getByTestId('filter_checkboks-container_ufordeltebruker').should('be.checked');
+        cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
+        cy.apneLukkeFilterDropdown('kjonn');
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.checkbox('radio-valg_kvinne');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+    })
 });
