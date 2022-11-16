@@ -103,9 +103,9 @@ function Toolbar(props: ToolbarProps) {
                         </div>
                     )}
                     {oversikt(oversiktType)}
+                    <Listevisning oversiktType={oversiktType} />
                 </div>
                 <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
-                    <Listevisning oversiktType={oversiktType} />
                     <Paginering
                         className="toolbar--skille-mellom-elementer"
                         onPaginering={onPaginering}
