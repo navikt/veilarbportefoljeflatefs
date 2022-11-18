@@ -86,10 +86,10 @@
 .veilarbportefoljeflatefs .dropdown__btnwrapper--disabled {
     color: #c9c9c9;
 }
-.veilarbportefoljeflatefs .dropdown__btn {
+.veilarbportefoljeflatefs .dropdown__btn_toolbar {
     text-align: left;
     width: 100%;
-    padding: 0.45rem 1.5em 0.45rem 0.45rem;
+    padding: 8px;
     background: #fff;
     border: 1px solid #6a6a6a;
     border-radius: 2px;
@@ -214,6 +214,7 @@
 .veilarbportefoljeflatefs .toolbar .sok-veileder-wrapper,
 .veilarbportefoljeflatefs .toolbar .tildel-veileder-wrapper {
     width: 186px;
+    max-height: 40px;
 }
 .veilarbportefoljeflatefs .toolbar .sok-veileder-wrapper .toolbarknapp-input .sokfilter .skjemaelement,
 .veilarbportefoljeflatefs .toolbar .tildel-veileder-wrapper .toolbarknapp-input .sokfilter .skjemaelement {

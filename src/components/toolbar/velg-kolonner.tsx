@@ -1,14 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
-import classNames from 'classnames';
+import './toolbar.css';
 import {useFocus} from '../../hooks/use-focus';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Table} from '@navikt/ds-icons';
 
+/*
 const btnCls = (props: VelgKolonnerProps, apen: boolean) =>
     classNames('dropdown', props.className, {
         'dropdown--apen': apen
     });
-
+*/
 interface VelgKolonnerProps {
     apen?: boolean;
     render: (lukkDropdown: () => void) => React.ReactChild;
@@ -55,7 +56,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
     }
 
     const innhold = !apen ? null : (
-        <div className="checkbox-filterform">
+        <div className="dropdown__btn_toolbar">
             <div
                 className="checkbox-filterform__valg"
                 id="velg-kolonner"
@@ -72,7 +73,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
     );
 
     return (
-        <div className={btnCls(props, apen)} ref={divRef}>
+        <div className="sok-veileder-wrapper" ref={divRef}>
             <Button
                 variant="tertiary"
                 type="button"
