@@ -182,7 +182,7 @@ describe('Diverse', () => {
         cy.getByTestId('brukerfeilmelding').should('be.visible');
         cy.getByTestId('filtrering-filter_container').scrollTo('top');
         cy.apneLukkeFilterDropdown('kjonn');
-        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
         cy.checkbox('radio-valg_kvinne');
         cy.getByTestId('brukerfeilmelding').should('not.exist');
 

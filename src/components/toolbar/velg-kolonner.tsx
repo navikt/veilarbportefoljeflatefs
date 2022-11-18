@@ -79,7 +79,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
                 className="toolbar_btn"
                 icon={<Table className="toolbar-knapp__ikon" id="velg-kolonner-ikon" />}
                 onClick={toggleVelgKolonner}
-                data-testid="velg-kolonner-knapp"
+                data-testid="dropdown-knapp_velg-kolonner"
                 ref={btnRef}
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">

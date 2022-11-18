@@ -59,7 +59,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 iconPosition="left"
                 onClick={() => klikk()}
                 data-testid={
-                    inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
+                    inneholderBrukerMedOgUtenArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">
