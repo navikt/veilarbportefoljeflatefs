@@ -37,7 +37,6 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
-import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -94,8 +93,7 @@ export default function EnhetSide() {
 
     useEffect(() => {
         document.title = 'Enhetens oversikt';
-        dispatch(nullstillBrukerfeil());
-    }, [dispatch]);
+    }, []);
 
     useSetStateFromUrl();
     useSyncStateMedUrl();
@@ -107,7 +105,6 @@ export default function EnhetSide() {
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
-        dispatch(nullstillBrukerfeil());
     };
 
     const [scrolling, setScrolling] = useState(false);

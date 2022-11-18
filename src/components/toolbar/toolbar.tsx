@@ -11,8 +11,7 @@ import ToolbarKnapp from './toolbar-knapp';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
-import {Heading} from '@navikt/ds-react';
-import {Brukerfeilmelding} from '../brukerfeilmelding/brukerfeilmelding';
+import {Alert, Heading} from '@navikt/ds-react';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -44,6 +43,7 @@ function Toolbar(props: ToolbarProps) {
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const feilmelding = 'Du må velge minst én bruker';
 
     const oversikt = side => {
         switch (side) {
@@ -103,9 +103,9 @@ function Toolbar(props: ToolbarProps) {
                         </div>
                     )}
                     {oversikt(oversiktType)}
-                    <Listevisning oversiktType={oversiktType} />
                 </div>
                 <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
+                    <Listevisning oversiktType={oversiktType} />
                     <Paginering
                         className="toolbar--skille-mellom-elementer"
                         onPaginering={onPaginering}
@@ -113,9 +113,17 @@ function Toolbar(props: ToolbarProps) {
                     />
                 </div>
             </div>
-            <div>
+            <div className="brukerfeilmelding">
                 {brukerfeilMelding.status && (
-                    <Brukerfeilmelding variant="error" size="small" inline={true} text={brukerfeilMelding.message} />
+                    <Alert
+                        variant="error"
+                        size="small"
+                        inline={true}
+                        aria-labelledby={feilmelding}
+                        data-testid={`brukerfeilmelding`}
+                    >
+                        {feilmelding}
+                    </Alert>
                 )}
             </div>
         </>

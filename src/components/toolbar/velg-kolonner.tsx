@@ -55,8 +55,19 @@ function VelgKolonner(props: VelgKolonnerProps) {
     }
 
     const innhold = !apen ? null : (
-        <div className="dropdown__innhold" id="velg-kolonner" ref={inputRef => (focusRef.current = inputRef)}>
-            {render(lukkVelgKolonner)}
+        <div className="checkbox-filterform">
+            <div
+                className="checkbox-filterform__valg"
+                id="velg-kolonner"
+                ref={inputRef => (focusRef.current = inputRef)}
+            >
+                {render(lukkVelgKolonner)}
+            </div>
+            <div className="filterform__under-valg">
+                <Button onClick={lukkVelgKolonner} data-testid={'lukk-velg-kolonner-knapp'}>
+                    Lukk
+                </Button>
+            </div>
         </div>
     );
 

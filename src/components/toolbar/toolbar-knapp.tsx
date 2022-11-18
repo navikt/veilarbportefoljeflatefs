@@ -4,8 +4,9 @@ import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {useDispatch} from 'react-redux';
+import {oppdaterBrukerfeil, nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -25,6 +26,12 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         setInputOpen(setOpenTo);
     };
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
+    };
 
     const handleClickOutside = e => {
         if (loggNode.current?.contains(e.target)) {
@@ -32,12 +39,16 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
+        fjernBrukerfeilmelding();
         if (isInputOpen) {
             requestSetOpenStatus(false);
         }
     };
 
     const escHandler = event => {
+        if (event.keyCode === 27) {
+            fjernBrukerfeilmelding();
+        }
         if (event.keyCode === 27 && isInputOpen) {
             requestSetOpenStatus(false);
         }

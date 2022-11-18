@@ -18,7 +18,7 @@ interface LeggTilArbeidslisteProps {
 
 function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
-    let modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
+    const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
     const innloggetVeileder = useIdentSelector();
     const dispatch = useDispatch();
 
@@ -33,10 +33,10 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const arbeidslisteValgt = useSelector((state: AppState) =>
         state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
     );
-
-    const inneholderBareBrukereMedArbeidsliste =
-        arbeidslisteValgt ||
-        (valgteBrukere.length > 0 && valgteBrukere.every(bruker => bruker.arbeidsliste.arbeidslisteAktiv));
+    const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
+    const inneholderBrukerMedOgUtenArbeidsliste =
+        (inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv)) ||
+        arbeidslisteValgt;
 
     if (skalSkjules) {
         return null;
@@ -51,7 +51,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     };
 
     return (
-        <div className="toolbar_btnwrapper">
+        <>
             <Button
                 variant="tertiary"
                 className="toolbar_btn"
@@ -59,15 +59,15 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                 iconPosition="left"
                 onClick={() => klikk()}
                 data-testid={
-                    inneholderBareBrukereMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
+                    inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {inneholderBareBrukereMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
+                    {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
                 </BodyShort>
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
-        </div>
+        </>
     );
 }
 
