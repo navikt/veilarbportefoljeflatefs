@@ -36,6 +36,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     const inneholderBrukerMedOgUtenArbeidsliste =
         (inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv)) ||
+        (!arbeidslisteValgt && valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv)) ||
         arbeidslisteValgt;
 
     if (skalSkjules) {
