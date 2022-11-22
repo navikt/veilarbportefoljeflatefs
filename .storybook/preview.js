@@ -8,6 +8,7 @@ import 'nav-frontend-skjema-style/dist/main.css';
 import 'nav-frontend-typografi-style/dist/main.css';
 import '@navikt/ds-css';
 import '../src/style.css';
+import '../src/mocks';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
