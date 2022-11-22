@@ -20,9 +20,7 @@
     background-color: #a0a0a0;
     border-color: #a0a0a0;
 }
-.veilarbportefoljeflatefs .ustilet {
-    padding: 1rem 0.5rem 0;
-}
+
 .veilarbportefoljeflatefs .toolbar__velg-kolonner {
     margin-right: 1rem;
     min-width: 11rem;
@@ -86,10 +84,13 @@
 .veilarbportefoljeflatefs .dropdown__btnwrapper--disabled {
     color: #c9c9c9;
 }
-.veilarbportefoljeflatefs .dropdown__btn_toolbar {
+.veilarbportefoljeflatefs .toolbar_btn__dropdown {
+    display: flex;
+    flex-direction: column;
+
     text-align: left;
     width: 100%;
-    padding: 8px;
+    padding: 0.5rem;
     background: #fff;
     border: 1px solid #6a6a6a;
     border-radius: 2px;
@@ -345,7 +346,7 @@
 .veilarbportefoljeflatefs .toolbar_btn {
     border: 1px solid transparent;
     padding: 0.5rem;
-    height: 100%;
+    height: 2.5rem;
     margin: 0 0.5rem 0 0;
     position: relative;
     text-align: inherit;
@@ -379,5 +380,10 @@
     box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-hover);
 }
 .veilarbportefoljeflatefs .brukerfeilmelding {
-    margin-left: 16px;
+    margin-left: 1rem;
+}
+
+.velg-kolonner__lukk-knapp {
+    width: fit-content;
+    align-self: end;
 }

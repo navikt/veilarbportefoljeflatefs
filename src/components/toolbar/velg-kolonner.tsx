@@ -56,7 +56,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
     }
 
     const innhold = !apen ? null : (
-        <div className="dropdown__btn_toolbar">
+        <div className="toolbar_btn__dropdown">
             <div
                 className="checkbox-filterform__valg"
                 id="velg-kolonner"
@@ -64,11 +64,14 @@ function VelgKolonner(props: VelgKolonnerProps) {
             >
                 {render(lukkVelgKolonner)}
             </div>
-            <div className="filterform__under-valg">
-                <Button onClick={lukkVelgKolonner} data-testid={'lukk-velg-kolonner-knapp'}>
-                    Lukk
-                </Button>
-            </div>
+            <Button
+                size="small"
+                className="velg-kolonner__lukk-knapp"
+                onClick={lukkVelgKolonner}
+                data-testid={'lukk-velg-kolonner-knapp'}
+            >
+                Lukk
+            </Button>
         </div>
     );
 

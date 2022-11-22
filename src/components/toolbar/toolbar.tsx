@@ -120,7 +120,7 @@ function Toolbar(props: ToolbarProps) {
                         size="small"
                         inline={true}
                         aria-labelledby={feilmelding}
-                        data-testid={`brukerfeilmelding`}
+                        data-testid={'brukerfeilmelding'}
                     >
                         {feilmelding}
                     </Alert>
