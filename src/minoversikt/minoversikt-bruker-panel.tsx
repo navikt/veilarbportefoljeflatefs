@@ -110,7 +110,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
                         {bruker.nyForVeileder && (
-                            <Tag variant="info" size="small">
+                            <Tag className="tabell-etikett" variant="info" size="small">
                                 Ny bruker
                             </Tag>
                         )}
