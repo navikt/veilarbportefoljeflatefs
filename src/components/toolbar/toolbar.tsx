@@ -43,7 +43,7 @@ function Toolbar(props: ToolbarProps) {
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
-    const feilmelding = 'Du må velge minst én bruker';
+    const feilmelding = brukerfeilMelding.message;
 
     const oversikt = side => {
         switch (side) {

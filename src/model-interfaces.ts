@@ -241,10 +241,3 @@ export enum SesjonStatus {
     GYLDIG = 'GYLDIG',
     UTLOPT = 'UTLØPT'
 }
-
-export interface Brukerfeilmeldinger {
-    variant: 'error' | 'warning' | 'info' | 'success';
-    size: 'medium' | 'small';
-    inline: boolean;
-    text: string;
-}

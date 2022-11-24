@@ -4,12 +4,6 @@ import {useFocus} from '../../hooks/use-focus';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Table} from '@navikt/ds-icons';
 
-/*
-const btnCls = (props: VelgKolonnerProps, apen: boolean) =>
-    classNames('dropdown', props.className, {
-        'dropdown--apen': apen
-    });
-*/
 interface VelgKolonnerProps {
     apen?: boolean;
     render: (lukkDropdown: () => void) => React.ReactChild;
