@@ -2297,7 +2297,7 @@ GRID
 }
 
 .veilarbportefoljeflatefs .side-storrelse > .informasjonsmeldinger:not(:last-child) {
-    margin-bottom: var(--navds-spacing-1);
+    margin-bottom: var(--a-spacing-1);
 }
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold {
