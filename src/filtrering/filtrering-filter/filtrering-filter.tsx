@@ -17,7 +17,6 @@ import {
     utdanning,
     ytelse
 } from '../filter-konstanter';
-import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
@@ -279,32 +278,16 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <OverskriftMedHjelpeTekst
-                    overskriftTekst="Aktivitet"
-                    hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                />
+                <Label size="small">Aktivitet</Label>
                 <Dropdown
-                    name="Stilling fra Nav"
-                    id="stillingFraNav"
-                    hidden={!erStillingFraNavFeatureTogglePa}
-                    render={() => (
-                        <CheckboxFilterform
-                            form="stillingFraNavFilter"
-                            valg={stillingFraNavFilter}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
-                    name="Aktivitet"
+                    name="Aktivitet (avtalt med NAV)"
                     id="aktivitet"
                     render={() => (
                         <AktivitetFilterformController filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown
-                    name="Tiltakstype"
+                    name="Tiltakstype (avtalt med NAV)"
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
@@ -314,6 +297,19 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             endreFiltervalg={endreFiltervalg}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Stilling fra NAV (dele CV med arbeidsgiver)"
+                    id="stillingFraNav"
+                    hidden={!erStillingFraNavFeatureTogglePa}
+                    render={() => (
+                        <CheckboxFilterform
+                            form="stillingFraNavFilter"
+                            valg={stillingFraNavFilter}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />
