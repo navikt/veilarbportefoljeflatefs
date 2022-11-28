@@ -17,7 +17,7 @@ const toggles = {
     [UTEN_KRR_FILTER]: true,
     [TVUNGEN_STEPPER]: false,
     [STILLING_FRA_NAV]: true,
-    [VIS_AVVIK_14A_VEDTAK_FILTER]: false
+    [VIS_AVVIK_14A_VEDTAK_FILTER]: true
 };
 
 export default toggles;

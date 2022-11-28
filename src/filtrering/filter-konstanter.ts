@@ -66,6 +66,8 @@ export const mapFilternavnTilFilterValue = {
     innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE
 };
 
+export const filterSomIkkeSkalSendesTilBackend = [mapFilternavnTilFilterValue.harAvvik];
+
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
         return {label: data};
