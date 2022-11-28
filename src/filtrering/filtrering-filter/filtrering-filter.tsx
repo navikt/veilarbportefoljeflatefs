@@ -24,7 +24,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -52,6 +52,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
     const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
+    const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -252,30 +253,32 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            <div className="filtrering-filter__kolonne">
-                <Label size="small">Utfasing av Arena</Label>
-                <Dropdown
-                    name="Avvik §14a-vedtak"
-                    id="arena-migrering"
-                    render={() => (
-                        <>
-                            {/* TODO: Bruke riktig lenke til Navet */}
-                            {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og iverksatte
-                                §14a-vedtak for de samme brukerne.{' '}
-                                <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
-                            </Alert>
-                            <CheckboxFilterform
-                                valg={avvik14aVedtakValg()}
-                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                filtervalg={filtervalg}
-                                form="avvik14aVedtak"
-                            />
-                        </>
-                    )}
-                />
-            </div>
+            {erAvvik14aVedtakFilterFeatureTogglePa && (
+                <div className="filtrering-filter__kolonne">
+                    <Label size="small">Utfasing av Arena</Label>
+                    <Dropdown
+                        name="Avvik §14a-vedtak"
+                        id="arena-migrering"
+                        render={() => (
+                            <>
+                                {/* TODO: Bruke riktig lenke til Navet */}
+                                {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
+                                <Alert variant="info" size="small" className="registrering-alert">
+                                    Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og
+                                    iverksatte §14a-vedtak for de samme brukerne.{' '}
+                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
+                                </Alert>
+                                <CheckboxFilterform
+                                    valg={avvik14aVedtakValg()}
+                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
+                                    filtervalg={filtervalg}
+                                    form="avvik14aVedtak"
+                                />
+                            </>
+                        )}
+                    />
+                </div>
+            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
                 <Dropdown

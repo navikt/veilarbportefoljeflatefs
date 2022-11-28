@@ -5,7 +5,8 @@ import {
     ALERTSTRIPE_FEILMELDING,
     UTEN_KRR_FILTER,
     TVUNGEN_STEPPER,
-    STILLING_FRA_NAV
+    STILLING_FRA_NAV,
+    VIS_AVVIK_14A_VEDTAK_FILTER
 } from '../konstanter';
 
 const toggles = {
@@ -15,7 +16,8 @@ const toggles = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [UTEN_KRR_FILTER]: true,
     [TVUNGEN_STEPPER]: false,
-    [STILLING_FRA_NAV]: true
+    [STILLING_FRA_NAV]: true,
+    [VIS_AVVIK_14A_VEDTAK_FILTER]: false
 };
 
 export default toggles;
