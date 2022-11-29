@@ -6,11 +6,11 @@ import './filterform.css';
 import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
-import {CheckboxFilter} from '../../filter-konstanter';
+import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 
 interface CheckboxFilterformProps {
     form: string;
-    valg: CheckboxFilter;
+    valg: CheckboxFilterMap;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
@@ -40,6 +40,27 @@ function CheckboxFilterform({
         endreFiltervalg(form, []);
     };
 
+    const checkBoxKomponent = ([filterKey, filterValue]: [string, CheckboxFilter | string]) => {
+        return typeof filterValue === 'string' ? (
+            <div>
+                <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} value={filterKey}>
+                    {filterValue}
+                </Checkbox>
+            </div>
+        ) : (
+            <div className={filterValue.className}>
+                <Checkbox
+                    data-testid={`filter_${filterKey}`}
+                    indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
+                    key={filterKey}
+                    value={filterKey}
+                >
+                    {filterValue.label}
+                </Checkbox>
+            </div>
+        );
+    };
+
     return (
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
@@ -52,7 +73,7 @@ function CheckboxFilterform({
                             size="small"
                             value={checkBoxValg}
                         >
-                            {Object.entries(valg).map(([filterKey, filterValue]) =>
+                            {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) =>
                                 tooltips && tooltips[filterKey] ? (
                                     <Tooltip
                                         content={tooltips[filterKey]}
@@ -61,28 +82,10 @@ function CheckboxFilterform({
                                         maxChar={999}
                                         key={`tooltip-${filterKey}`}
                                     >
-                                        {/* Wrapper i div for at Tooltip-en skal legge seg ved label-en og ikke rett ved checkbox-en */}
-                                        <div className={filterValue.className}>
-                                            <Checkbox
-                                                data-testid={`filter_${filterKey}`}
-                                                indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
-                                                key={filterKey}
-                                                value={filterKey}
-                                            >
-                                                {filterValue.label}
-                                            </Checkbox>
-                                        </div>
+                                        {checkBoxKomponent([filterKey, filterValue])}
                                     </Tooltip>
                                 ) : (
-                                    <Checkbox
-                                        className={filterValue.className}
-                                        data-testid={`filter_${filterKey}`}
-                                        indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
-                                        key={filterKey}
-                                        value={filterKey}
-                                    >
-                                        {filterValue.label}
-                                    </Checkbox>
+                                    checkBoxKomponent([filterKey, filterValue])
                                 )
                             )}
                         </CheckboxGroup>

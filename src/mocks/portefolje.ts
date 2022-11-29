@@ -242,7 +242,8 @@ const randomAvvik14aVedtak = () => {
         'HOVEDMAL_ULIK',
         'INNSATSGRUPPE_ULIK',
         'INNSATSGRUPPE_OG_HOVEDMAL_ULIK',
-        'INNSATSGRUPPE_MANGLER_I_NY_KILDE'
+        'INNSATSGRUPPE_MANGLER_I_NY_KILDE',
+        'INGEN_AVVIK'
     ];
 
     return avvikListe[Math.floor(Math.random() * avvikListe.length)];

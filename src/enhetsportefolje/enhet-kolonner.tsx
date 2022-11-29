@@ -148,7 +148,11 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
             />
             <TekstKolonne
-                tekst={bruker.avvik14aVedtak ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label : '-'}
+                tekst={
+                    avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
+                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
+                        : '-'
+                }
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                 className="col col-xs-2 avvik14avedtak-kolonne"
             />

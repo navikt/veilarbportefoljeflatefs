@@ -4,11 +4,12 @@ import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
 
-export type CheckboxFilter = Dictionary<{
+export type CheckboxFilter = {
     label: string;
     className?: string;
     indeterminate?: () => boolean;
-}>;
+};
+export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
