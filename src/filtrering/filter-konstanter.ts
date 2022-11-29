@@ -31,9 +31,9 @@ export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
 export const HAR_AVVIK = 'HAR_AVVIK';
-export const HOVEDMAL_ULIK = 'HOVEDMAL_ULIK';
+export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
-export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAL_ULIK';
+export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 
 export const mapFilternavnTilFilterValue = {
@@ -347,8 +347,11 @@ export const avvik14aVedtakHovedFilter = {
 };
 
 export const avvik14aVedtakAvhengigeFilter = {
-    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Innsatsgruppe ulik', className: skjemaelementInnrykkKlasse},
-    [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {label: 'Hovedmål ulik', className: skjemaelementInnrykkKlasse},
+    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulik', className: skjemaelementInnrykkKlasse},
+    [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {
+        label: 'Innsatsgruppe ulik',
+        className: skjemaelementInnrykkKlasse
+    },
     [mapFilternavnTilFilterValue.innsatsgruppeOgHovedmalUlik]: {
         label: 'Innsatsgruppe og hovedmål ulik',
         className: skjemaelementInnrykkKlasse
