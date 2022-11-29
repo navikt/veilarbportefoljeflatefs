@@ -52,7 +52,6 @@ function CheckboxFilterform({
                 <Checkbox
                     data-testid={`filter_${filterKey}`}
                     indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
-                    key={filterKey}
                     value={filterKey}
                 >
                     {filterValue.label}
@@ -73,21 +72,22 @@ function CheckboxFilterform({
                             size="small"
                             value={checkBoxValg}
                         >
-                            {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) =>
-                                tooltips && tooltips[filterKey] ? (
-                                    <Tooltip
-                                        content={tooltips[filterKey]}
-                                        placement="right"
-                                        offset={-130}
-                                        maxChar={999}
-                                        key={`tooltip-${filterKey}`}
-                                    >
-                                        {checkBoxKomponent([filterKey, filterValue])}
-                                    </Tooltip>
-                                ) : (
-                                    checkBoxKomponent([filterKey, filterValue])
-                                )
-                            )}
+                            {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
+                                <div key={filterKey}>
+                                    {tooltips && tooltips[filterKey] ? (
+                                        <Tooltip
+                                            content={tooltips[filterKey]}
+                                            placement="right"
+                                            offset={-130}
+                                            maxChar={999}
+                                        >
+                                            {checkBoxKomponent([filterKey, filterValue])}
+                                        </Tooltip>
+                                    ) : (
+                                        checkBoxKomponent([filterKey, filterValue])
+                                    )}
+                                </div>
+                            ))}
                         </CheckboxGroup>
                     </Grid>
                 </div>
