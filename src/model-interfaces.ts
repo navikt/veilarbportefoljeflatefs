@@ -46,7 +46,7 @@ export enum Sorteringsfelt {
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    CV_SVARFRIST = 'cv_svarfrist'
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
 }
 
 export interface FiltervalgModell {
