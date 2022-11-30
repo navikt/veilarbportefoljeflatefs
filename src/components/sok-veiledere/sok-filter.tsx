@@ -45,6 +45,7 @@ function SokFilter<T>(props: SokFilterProps<T>) {
                     onChange={e => setQuery(e.target.value)}
                     data-testid="sok-filter_input"
                     ref={sokKnapp}
+                    hideLabel
                 />
             </div>
             {harData ? (

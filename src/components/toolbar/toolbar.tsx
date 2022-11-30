@@ -81,7 +81,7 @@ function Toolbar(props: ToolbarProps) {
                 )}
                 id={id}
             >
-                <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
+                <div className="toolbar__element">
                     {oversiktType === OversiktType.veilederOversikt && (
                         <Heading size="small" level="2">
                             {antallTotalt === 0
@@ -104,13 +104,9 @@ function Toolbar(props: ToolbarProps) {
                     )}
                     {oversikt(oversiktType)}
                 </div>
-                <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
+                <div className="toolbar__element">
                     <Listevisning oversiktType={oversiktType} />
-                    <Paginering
-                        className="toolbar--skille-mellom-elementer"
-                        onPaginering={onPaginering}
-                        antallTotalt={antallTotalt}
-                    />
+                    <Paginering onPaginering={onPaginering} antallTotalt={antallTotalt} />
                 </div>
             </div>
             <div className="brukerfeilmelding">
