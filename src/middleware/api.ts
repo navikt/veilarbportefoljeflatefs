@@ -108,7 +108,7 @@ export function hentEnhetsVeiledere(enhetId) {
 }
 
 export function hentAktivBruker(): Promise<VeilederModell> {
-    return fetchToJson(`/veilarbveileder/api/veileder/v2/me`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
 export function hentEnhetsFilterGrupper(enhetId) {
@@ -217,11 +217,11 @@ export function hentMoteplan(veileder: string, enhet: string) {
 }
 
 export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
-    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
 }
 
 export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]> {
-    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
 export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]> {

@@ -62,7 +62,6 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         const filter: LagretFilter = dragAndDropOrder.find(
             sortertFilter => `${sortertFilter.filterId}` === filterId
         ) as LagretFilter;
-
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {},

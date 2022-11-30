@@ -9,6 +9,8 @@ import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
 import {IdentParam} from '../../model-interfaces';
+import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
+import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface LeggTilArbeidslisteProps {
     visesAnnenVeiledersPortefolje: boolean;
@@ -28,38 +30,46 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
 
     const skalSkjules =
         innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
-
+    const arbeidslisteValgt = useSelector((state: AppState) =>
+        state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
+    );
     const inneholderBrukerMedArbeidsliste = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
     const inneholderBrukerMedOgUtenArbeidsliste =
-        inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv);
+        (inneholderBrukerMedArbeidsliste && valgteBrukere.some(bruker => !bruker.arbeidsliste.arbeidslisteAktiv)) ||
+        (!arbeidslisteValgt && valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv)) ||
+        arbeidslisteValgt;
 
     if (skalSkjules) {
         return null;
     }
 
+    const klikk = () => {
+        if (valgteBrukere.length === 0) {
+            dispatch(oppdaterBrukerfeil());
+        } else {
+            dispatch(visArbeidslisteModal());
+        }
+    };
+
     return (
-        <div className="toolbar_btnwrapper">
+        <>
             <Button
                 variant="tertiary"
                 className="toolbar_btn"
                 icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
                 iconPosition="left"
-                disabled={
-                    valgteBrukere.length < 1 ||
-                    props.visesAnnenVeiledersPortefolje ||
-                    inneholderBrukerMedOgUtenArbeidsliste
-                }
-                onClick={() => dispatch(visArbeidslisteModal())}
+                onClick={() => klikk()}
                 data-testid={
-                    inneholderBrukerMedArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
+                    inneholderBrukerMedOgUtenArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
                 <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {inneholderBrukerMedArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
+                    {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
                 </BodyShort>
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
-        </div>
+        </>
     );
 }
+
 export default ArbeidslisteKnapp;

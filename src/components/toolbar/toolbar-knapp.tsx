@@ -4,6 +4,9 @@ import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {BodyShort, Button} from '@navikt/ds-react';
+import {oppdaterBrukerfeil, nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -19,9 +22,15 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     const [isInputOpen, setInputOpen] = useState(false);
     const [isBtnClicked, setBtnClicked] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
-
+    const dispatch = useDispatch();
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         setInputOpen(setOpenTo);
+    };
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const fjernBrukerfeilmelding = () => {
+        if (brukerfeilMelding.status) {
+            dispatch(nullstillBrukerfeil());
+        }
     };
 
     const handleClickOutside = e => {
@@ -30,19 +39,27 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             return;
         }
         // Klikket er utenfor, oppdater staten
+        fjernBrukerfeilmelding();
         if (isInputOpen) {
             requestSetOpenStatus(false);
         }
     };
 
     const escHandler = event => {
+        if (event.keyCode === 27) {
+            fjernBrukerfeilmelding();
+        }
         if (event.keyCode === 27 && isInputOpen) {
             requestSetOpenStatus(false);
         }
     };
 
     const klikk = () => {
-        setInputOpen(true);
+        if (!props.aktiv) {
+            dispatch(oppdaterBrukerfeil());
+        } else {
+            setInputOpen(true);
+        }
     };
 
     const visChildren = () => {
@@ -70,7 +87,6 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         setBtnClicked(false);
         setInputOpen(false);
     }
-
     if (isInputOpen) {
         return (
             <div className="toolbarknapp-input" ref={loggNode} onClick={klikk}>
@@ -85,7 +101,6 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             type="button"
             className="toolbar_btn"
             icon={props.ikon}
-            disabled={!props.aktiv}
             onClick={klikk}
             data-testid={props.testid}
         >

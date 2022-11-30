@@ -11,7 +11,7 @@ import ToolbarKnapp from './toolbar-knapp';
 import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
-import {Heading} from '@navikt/ds-react';
+import {Alert, Heading} from '@navikt/ds-react';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -42,6 +42,8 @@ function Toolbar(props: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
+    const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
+    const feilmelding = brukerfeilMelding.message;
 
     const oversikt = side => {
         switch (side) {
@@ -68,48 +70,63 @@ function Toolbar(props: ToolbarProps) {
 
     const windowWidth = useWindowWidth() < 1200;
     return (
-        <div
-            className={classNames(
-                'toolbar',
-                ((scrolling && isSidebarHidden && !windowWidth) ||
-                    (scrolling && windowWidth && !isSidebarHidden) ||
-                    (!isSidebarHidden && windowWidth)) &&
-                    'toolbar__hidden'
-            )}
-            id={id}
-        >
-            <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
-                {oversiktType === OversiktType.veilederOversikt && (
-                    <Heading size="small" level="2">
-                        {antallTotalt === 0
-                            ? `Ingen veiledere`
-                            : `Viser ${antallValgteVeiledere} av totalt ${antallTotalt} veiledere.`}
-                    </Heading>
+        <>
+            <div
+                className={classNames(
+                    'toolbar',
+                    ((scrolling && isSidebarHidden && !windowWidth) ||
+                        (scrolling && windowWidth && !isSidebarHidden) ||
+                        (!isSidebarHidden && windowWidth)) &&
+                        'toolbar__hidden'
                 )}
-                {oversiktType !== OversiktType.veilederOversikt && (
-                    <div className="tildel-veileder-wrapper">
-                        <ToolbarKnapp
-                            tittel="Tildel veileder"
-                            skalVises={oversiktType in OversiktType}
-                            aktiv={aktiv}
-                            tildelveileder
-                            testid="tildel-veileder_knapp"
-                            ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
-                            oversiktType={oversiktType}
-                        />
-                    </div>
+                id={id}
+            >
+                <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__knapperad">
+                    {oversiktType === OversiktType.veilederOversikt && (
+                        <Heading size="small" level="2">
+                            {antallTotalt === 0
+                                ? `Ingen veiledere`
+                                : `Viser ${antallValgteVeiledere} av totalt ${antallTotalt} veiledere.`}
+                        </Heading>
+                    )}
+                    {oversiktType !== OversiktType.veilederOversikt && (
+                        <div className="tildel-veileder-wrapper">
+                            <ToolbarKnapp
+                                tittel="Tildel veileder"
+                                skalVises={oversiktType in OversiktType}
+                                aktiv={aktiv}
+                                tildelveileder
+                                testid="tildel-veileder_knapp"
+                                ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
+                                oversiktType={oversiktType}
+                            />
+                        </div>
+                    )}
+                    {oversikt(oversiktType)}
+                </div>
+                <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
+                    <Listevisning oversiktType={oversiktType} />
+                    <Paginering
+                        className="toolbar--skille-mellom-elementer"
+                        onPaginering={onPaginering}
+                        antallTotalt={antallTotalt}
+                    />
+                </div>
+            </div>
+            <div className="brukerfeilmelding">
+                {brukerfeilMelding.status && (
+                    <Alert
+                        variant="error"
+                        size="small"
+                        inline={true}
+                        aria-labelledby={feilmelding}
+                        data-testid={'brukerfeilmelding'}
+                    >
+                        {feilmelding}
+                    </Alert>
                 )}
-                {oversikt(oversiktType)}
             </div>
-            <div className="toolbar__element toolbar--skille-mellom-elementer toolbar__paginering">
-                <Listevisning oversiktType={oversiktType} />
-                <Paginering
-                    className="toolbar--skille-mellom-elementer"
-                    onPaginering={onPaginering}
-                    antallTotalt={antallTotalt}
-                />
-            </div>
-        </div>
+        </>
     );
 }
 

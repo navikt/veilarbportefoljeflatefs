@@ -4,9 +4,8 @@ import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listevisning-rad';
 import './listevisning.css';
-import {ReactComponent as VelgKolonneIkon} from '../../ikoner/settings.svg';
-import Dropdown from '../../dropdown/dropdown';
 import {AppState} from '../../../reducer';
+import VelgKolonner from '../velg-kolonner';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
@@ -34,18 +33,8 @@ function Listevisning(props: ListevisningProps) {
         return null;
     }
 
-    const DropdownNavn = () => (
-        <>
-            <VelgKolonneIkon />
-            <span className="velg-kolonner__tekst">Velg kolonner</span>
-        </>
-    );
-
     return (
-        <Dropdown
-            name={<DropdownNavn />}
-            id="velg-kolonner"
-            disabled={muligeAlternativer.length <= 3}
+        <VelgKolonner
             className="dropdown--toolbar toolbar__velg-kolonner"
             render={() => (
                 <ul className="ustilet">
