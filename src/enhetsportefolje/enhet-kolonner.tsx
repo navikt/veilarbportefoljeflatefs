@@ -118,21 +118,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 className="col col-xs-2"
-                tekst={tolkBehov(filtervalg, bruker)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
                 tekst={bostedKommune(bruker, geografiskbostedData)}
             />
@@ -145,6 +130,21 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehov(filtervalg, bruker)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
             />
             <DatoKolonne
                 className="col col-xs-2"
