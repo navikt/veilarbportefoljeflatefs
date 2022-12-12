@@ -6,7 +6,6 @@ import {LagretFilter} from './lagret-filter';
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
-export const SLETT_FLERE_FILTER = 'filtrering/SLETT_FLERE_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 
@@ -81,33 +80,19 @@ export const initialState: FiltervalgModell = {
 function fjern(filterId, verdi, fjernVerdi) {
     if (typeof verdi === 'boolean') {
         return false;
-    }
-
-    if (Array.isArray(verdi)) {
-        if (Array.isArray(fjernVerdi)) {
-            return verdi.filter(enkeltVerdi => !fjernVerdi.includes(enkeltVerdi));
-        }
-
+    } else if (Array.isArray(verdi)) {
         return verdi.filter(enkeltVerdi => enkeltVerdi !== fjernVerdi);
-    }
-
-    if (filterId === 'aktiviteter') {
+    } else if (filterId === 'aktiviteter') {
         var tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
         return Object.assign({}, verdi, tomtVerdi);
-    }
-
-    if (fjernVerdi && typeof verdi === 'object') {
+    } else if (fjernVerdi && typeof verdi === 'object') {
         return Object.entries(verdi)
             .filter(([key]) => key !== fjernVerdi)
             .reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
-    }
-
-    if (fjernVerdi === null) {
+    } else if (fjernVerdi === null) {
         return null;
-    }
-
-    if (typeof verdi === 'string') {
+    } else if (typeof verdi === 'string') {
         return '';
     }
 
@@ -124,15 +109,6 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
                 [action.data.filterId]: action.data.filterVerdi
             };
         case SLETT_ENKELT_FILTER:
-            return {
-                ...state,
-                [action.data.filterId]: fjern(
-                    action.data.filterId,
-                    state[action.data.filterId],
-                    action.data.filterVerdi
-                )
-            };
-        case SLETT_FLERE_FILTER:
             return {
                 ...state,
                 [action.data.filterId]: fjern(
@@ -176,18 +152,6 @@ export function endreFiltervalg(
 export function slettEnkeltFilter(filterId, filterVerdi, oversiktType = OversiktType.enhetensOversikt) {
     return {
         type: SLETT_ENKELT_FILTER,
-        data: {filterId, filterVerdi},
-        name: oversiktType
-    };
-}
-
-export function slettFlereFilter(
-    filterId: string,
-    filterVerdi: unknown[],
-    oversiktType: OversiktType = OversiktType.enhetensOversikt
-) {
-    return {
-        type: SLETT_FLERE_FILTER,
         data: {filterId, filterVerdi},
         name: oversiktType
     };

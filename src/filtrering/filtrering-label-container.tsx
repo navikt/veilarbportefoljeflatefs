@@ -4,10 +4,9 @@ import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     aktiviteter,
-    avvik14aVedtak,
-    HAR_AVVIK,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
+    mapFilternavnTilFilterValue,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -17,13 +16,7 @@ import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {pagineringSetup} from '../ducks/paginering';
-import {
-    AktiviteterValg,
-    clearFiltervalg,
-    endreFiltervalg,
-    slettEnkeltFilter,
-    slettFlereFilter
-} from '../ducks/filtrering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
@@ -32,7 +25,6 @@ interface FiltreringLabelContainerProps {
     actions: {
         slettAlle: () => void;
         slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
-        slettFlere: (filterNavn: string, filterValue: string[]) => void;
     };
     filtervalg: FiltervalgModell;
     oversiktType: string;
@@ -64,7 +56,7 @@ function FiltreringLabelContainer({
     filtervalg,
     enhettiltak,
     listevisning,
-    actions: {slettAlle, slettEnkelt, slettFlere},
+    actions: {slettAlle, slettEnkelt},
     oversiktType,
     className
 }: FiltreringLabelContainerProps) {
@@ -232,15 +224,19 @@ function FiltreringLabelContainer({
                     );
                 });
             } else if (key === 'avvik14aVedtak') {
-                const fjernAlleAvvik14aVedtakFilterLabels = value.length <= 2;
-
                 return value.map(singleValue => {
+                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                        return null;
+                    }
+
+                    // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
+                    // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
+                    // filter-etiketter fjernes
+                    const fjernAvvik14aHovedFilter = value.length <= 2;
                     const slettAvvik14aVedtakFilter = () => {
-                        if (
-                            (typeof singleValue === 'string' && singleValue === HAR_AVVIK) ||
-                            fjernAlleAvvik14aVedtakFilterLabels
-                        ) {
-                            slettFlere(key, Object.keys(avvik14aVedtak));
+                        if (fjernAvvik14aHovedFilter) {
+                            slettEnkelt(key, singleValue);
+                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
                         } else {
                             slettEnkelt(key, singleValue);
                         }
@@ -333,10 +329,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
-        },
-        slettFlere: (filterKey: string, filterValue: string[]) => {
-            dispatch(pagineringSetup({side: 1}));
-            dispatch(slettFlereFilter(filterKey, filterValue, ownProps.oversiktType));
         }
     }
 });
