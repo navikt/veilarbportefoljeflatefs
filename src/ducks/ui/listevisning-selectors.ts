@@ -6,7 +6,7 @@ import {
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
     I_AVTALT_AKTIVITET,
-    mapFilternavnTilFilterValue,
+    HAR_AVVIK,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -87,7 +87,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     };
 
     function avvik14aVedtakErValgt() {
-        return filtervalg.avvik14aVedtak.includes(mapFilternavnTilFilterValue.harAvvik);
+        return filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
     }
 
     return ([] as Kolonne[])

@@ -318,7 +318,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 tekst={
                     avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
-                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak]?.label
+                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
                         : '-'
                 }
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}

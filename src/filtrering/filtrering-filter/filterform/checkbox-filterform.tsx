@@ -42,21 +42,18 @@ function CheckboxFilterform({
 
     const checkBoxKomponent = ([filterKey, filterValue]: [string, CheckboxFilter | string]) => {
         return typeof filterValue === 'string' ? (
-            <div>
-                <Checkbox data-testid={`filter_${filterKey}`} key={filterKey} value={filterKey}>
-                    {filterValue}
-                </Checkbox>
-            </div>
+            <Checkbox data-testid={`filter_${filterKey}`} value={filterKey}>
+                {filterValue}
+            </Checkbox>
         ) : (
-            <div className={filterValue.className}>
-                <Checkbox
-                    data-testid={`filter_${filterKey}`}
-                    indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
-                    value={filterKey}
-                >
-                    {filterValue.label}
-                </Checkbox>
-            </div>
+            <Checkbox
+                className={filterValue.className}
+                data-testid={`filter_${filterKey}`}
+                indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
+                value={filterKey}
+            >
+                {filterValue.label}
+            </Checkbox>
         );
     };
 
