@@ -1,11 +1,12 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
-import {VeilederModell} from '../model-interfaces';
+import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
+import {filterSomIkkeSkalSendesTilBackend} from '../filtrering/filter-konstanter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -60,15 +61,26 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
     return baseUrl;
 }
 
-export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filtervalg: {}, fra?: number, antall?: number) {
+export function hentEnhetsPortefolje(
+    enhet,
+    rekkefolge,
+    sorteringsfelt,
+    filtervalg: FiltervalgModell,
+    fra?: number,
+    antall?: number
+) {
     if (rekkefolge === 'stigende') {
         rekkefolge = 'ascending';
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
+    const filtrerteFiltervalg: FiltervalgModell = {
+        ...filtervalg,
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+    };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtrerteFiltervalg)};
     return fetchToJson(url, config);
 }
 
@@ -86,9 +98,13 @@ export function hentVeiledersPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
+    const filtrerteFiltervalg: FiltervalgModell = {
+        ...filtervalg,
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+    };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtrerteFiltervalg)};
     return fetchToJson(url, config);
 }
 

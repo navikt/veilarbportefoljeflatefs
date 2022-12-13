@@ -209,10 +209,9 @@ export function kebabCase(string: string | {label: string}) {
     return specialChar(string).replace(/\s+/g, '-');
 }
 
-export function kebabUtenSpesialtegn(string: string | {label: string}) {
-    string.toString();
+export function kebabUtenSpesialtegn(s: string | {label: string}) {
     const regExpr = /[^a-zA-Z0-9-. ]/g;
-    return kebabCase(string).replace(regExpr, '');
+    return kebabCase(typeof s === 'string' ? s : s.label).replace(regExpr, '');
 }
 
 export function capitalize(str: string) {

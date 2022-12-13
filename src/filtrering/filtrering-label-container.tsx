@@ -6,6 +6,7 @@ import FilterKonstanter, {
     aktiviteter,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
+    mapFilternavnTilFilterValue,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -219,6 +220,33 @@ function FiltreringLabelContainer({
                                     : 'ugyldig')
                             }
                             slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'avvik14aVedtak') {
+                return value.map(singleValue => {
+                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                        return null;
+                    }
+
+                    // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
+                    // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
+                    // filter-etiketter fjernes
+                    const fjernAvvik14aHovedFilter = value.length <= 2;
+                    const slettAvvik14aVedtakFilter = () => {
+                        if (fjernAvvik14aHovedFilter) {
+                            slettEnkelt(key, singleValue);
+                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
+                        } else {
+                            slettEnkelt(key, singleValue);
+                        }
+                    };
+
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={getLabel(singleValue, key, enhettiltak)}
+                            slettFilter={slettAvvik14aVedtakFilter}
                         />
                     );
                 });

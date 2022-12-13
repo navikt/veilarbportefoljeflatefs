@@ -6,6 +6,7 @@ import {
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
     I_AVTALT_AKTIVITET,
+    HAR_AVVIK,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -84,6 +85,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 filtervalg.tolkBehovSpraak.length > 0)
         );
     };
+
+    function avvik14aVedtakErValgt() {
+        return filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
+    }
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
@@ -172,6 +177,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, avvik14aVedtakErValgt()))
         .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))

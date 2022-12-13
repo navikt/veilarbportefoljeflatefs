@@ -3,6 +3,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -293,6 +294,15 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={
                     bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
                 }
+            />
+            <TekstKolonne
+                tekst={
+                    avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
+                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                className="col col-xs-2 avvik14avedtak-kolonne"
             />
         </div>
     );
