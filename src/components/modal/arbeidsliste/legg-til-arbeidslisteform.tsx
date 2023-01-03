@@ -84,10 +84,15 @@ function LeggTilArbeidslisteForm({
                         />
                         <div>
                             <div className="modal-footer">
-                                <Button className="knapp knapp--hoved" data-testid="modal_arbeidsliste_lagre-knapp">
+                                <Button
+                                    className="knapp knapp--hoved"
+                                    data-testid="modal_arbeidsliste_lagre-knapp"
+                                    size="small"
+                                >
                                     Lagre
                                 </Button>
                                 <Button
+                                    size="small"
                                     variant="secondary"
                                     className="knapp"
                                     data-testid="modal_arbeidsliste_avbryt-knapp"

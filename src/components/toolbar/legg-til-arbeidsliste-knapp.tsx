@@ -54,6 +54,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
     return (
         <>
             <Button
+                size="small"
                 variant="tertiary"
                 className="toolbar_btn"
                 icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}

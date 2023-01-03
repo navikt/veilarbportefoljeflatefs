@@ -83,6 +83,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
             </RadioGroup>
             <div className="filterform__under-valg">
                 <Button
+                    size="small"
                     onClick={btnOnClick}
                     className={classNames('knapp', 'knapp--mini', {
                         'knapp--hoved': ident

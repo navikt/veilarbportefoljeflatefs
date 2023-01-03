@@ -85,10 +85,11 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     data-testid="redigere-filter-navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Button type="submit" data-testid="rediger-filter_modal_lagre-knapp">
+                    <Button size="small" type="submit" data-testid="rediger-filter_modal_lagre-knapp">
                         Lagre
                     </Button>
                     <Button
+                        size="small"
                         variant="danger"
                         onClick={e => bekreftSletting(e)}
                         icon={<Delete />}

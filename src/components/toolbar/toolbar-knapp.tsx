@@ -97,6 +97,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
 
     return (
         <Button
+            size="small"
             variant="tertiary"
             type="button"
             className="toolbar_btn"

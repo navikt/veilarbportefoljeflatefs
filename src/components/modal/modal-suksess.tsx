@@ -30,7 +30,12 @@ function ModalSuksess(props: PropsWithChildren<ModalSuksessProps>) {
                 <BodyShort size="small">{props.tekst}</BodyShort>
                 {props.children}
             </div>
-            <Button type="submit" onClick={props.onRequestClose} data-testid={`modal-suksess_${props.testNavn}`}>
+            <Button
+                size="small"
+                type="submit"
+                onClick={props.onRequestClose}
+                data-testid={`modal-suksess_${props.testNavn}`}
+            >
                 {props.hovedknappTekst}
             </Button>
         </VarselModal>
