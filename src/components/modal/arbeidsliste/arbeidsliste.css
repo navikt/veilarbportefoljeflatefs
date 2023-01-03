@@ -68,6 +68,11 @@
 .arbeidsliste--rediger-lenke {
     margin-left: 1rem !important;
 }
+.fjern-arbeidsliste {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 .fjern-arbeidsliste .arbeidsliste-headertekst {
     text-align: center;
 }
