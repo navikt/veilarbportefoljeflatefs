@@ -52,6 +52,7 @@ function AktivitetFilterformForenklet({
             </CheckboxGroup>
             <div className="aktivitet-filterform__knappegruppe">
                 <Button
+                    size="small"
                     variant="tertiary"
                     onClick={klikkPaAvansertLenke}
                     className="filterknapp"

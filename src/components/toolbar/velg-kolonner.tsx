@@ -72,6 +72,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
     return (
         <div className="sok-veileder-wrapper" ref={divRef}>
             <Button
+                size="small"
                 variant="tertiary"
                 type="button"
                 className="toolbar_btn"

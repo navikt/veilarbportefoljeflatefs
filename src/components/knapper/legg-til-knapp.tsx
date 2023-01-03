@@ -11,6 +11,7 @@ export function LeggTilKnapp(props: {onClick: () => void}) {
             className="veiledergruppe-knapp"
             onClick={props.onClick}
             data-testid="veiledergruppe_ny-gruppe_knapp"
+            size="small"
         >
             <BodyShort size="small">Ny gruppe</BodyShort>
         </Button>

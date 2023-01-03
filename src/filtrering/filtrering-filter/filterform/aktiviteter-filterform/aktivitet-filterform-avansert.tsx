@@ -73,6 +73,7 @@ function AktivitetFilterformAvansert({
             </div>
             <div className="aktivitet-filterform__knappegruppe">
                 <Button
+                    size="small"
                     variant="tertiary"
                     onClick={klikkPaForenkletLenke}
                     className="filterknapp"

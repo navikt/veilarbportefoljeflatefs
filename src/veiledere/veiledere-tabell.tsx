@@ -63,6 +63,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                             <th scope="col" className="tabellheader">
                                 <div className="tabellheader__lenke">
                                     <Button
+                                        size="small"
                                         variant="tertiary"
                                         onClick={props.sorterPaaEtternavn}
                                         className={classNames('lenke lenke--frittstaende', {
@@ -90,6 +91,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                     data-testid="veilederoversikt_sortering_antall-brukere"
                                 >
                                     <Button
+                                        size="small"
                                         variant="tertiary"
                                         onClick={props.sorterPaaPortefoljestorrelse}
                                         className={classNames('lenke lenke--frittstaende tabellheader__tekst', {

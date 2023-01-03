@@ -50,6 +50,7 @@ function SorteringHeader({
         <Header skalVises={skalVises} className={className} headerId={headerId}>
             <span className="sorteringheader__lenke">
                 <Button
+                    size="small"
                     variant="tertiary"
                     onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
                     className={classNames(
