@@ -90,6 +90,7 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
             ) : (
                 <Formik
                     initialValues={initialValues}
+                    enableReinitialize={true}
                     onSubmit={values => {
                         setIsOpen(false);
                         dispatch(redigerArbeidsliste(values, {bruker, sistEndretAv, sistEndretDato, settMarkert}));
