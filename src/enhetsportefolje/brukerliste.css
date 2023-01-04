@@ -130,7 +130,8 @@
 .veilarbportefoljeflatefs .valgt-sortering {
     font-weight: bold;
 }
-.veilarbportefoljeflatefs .land-navn {
+
+.veilarbportefoljeflatefs .ord-brekk {
     hyphens: auto;
     overflow-wrap: break-word;
 }
@@ -142,10 +143,7 @@
     border-radius: 0 0 4px 4px;
     margin-bottom: 0;
 }
-.veilarbportefoljeflatefs .avvik14avedtak-kolonne {
-    hyphens: auto;
-    overflow-wrap: break-word;
-}
+
 @media (max-width: 1400px) {
     .veilarbportefoljeflatefs .brukerliste__etiketter {
         flex-direction: column;
