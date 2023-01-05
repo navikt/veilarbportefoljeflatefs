@@ -19,6 +19,7 @@ import {pagineringSetup} from '../ducks/paginering';
 import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -326,6 +327,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
             dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
