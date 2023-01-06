@@ -44,6 +44,7 @@
     width: 10rem;
 }
 .varsel-modal__innhold {
+    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 1rem;
