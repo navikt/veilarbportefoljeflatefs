@@ -95,12 +95,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
             <TekstKolonne
-                className="col col-xs-2 land-navn"
+                className="col col-xs-2"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
             />
             <TekstKolonne
-                className="col col-xs-2 land-navn"
+                className="col col-xs-2"
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
                         ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
@@ -302,7 +302,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                         : '-'
                 }
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
-                className="col col-xs-2 avvik14avedtak-kolonne"
+                className="col col-xs-2"
             />
         </div>
     );
