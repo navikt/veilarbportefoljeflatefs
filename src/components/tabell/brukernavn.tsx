@@ -3,7 +3,8 @@ import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.css';
-import {BodyShort, Link} from '@navikt/ds-react';
+import {Link} from '@navikt/ds-react';
+import {TekstKolonne} from './kolonner/tekstkolonne';
 
 interface BrukerNavnProps {
     className?: string;
@@ -28,7 +29,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                 href={getPersonUrl(bruker.fnr, '', enhetId)}
                 className={classnames('lenke lenke--frittstaende')}
             >
-                <BodyShort size="small">{settSammenNavn(bruker)}</BodyShort>
+                <TekstKolonne skalVises={true} tekst={settSammenNavn(bruker)} />
             </Link>
         </div>
     );

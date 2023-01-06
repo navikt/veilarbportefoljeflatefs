@@ -1,5 +1,6 @@
 import React from 'react';
 import {BodyShort} from '@navikt/ds-react';
+import classNames from 'classnames';
 
 interface TekstKolonneProps {
     tekst?: string;
@@ -13,7 +14,7 @@ export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
     }
 
     return (
-        <BodyShort size="small" className={className}>
+        <BodyShort size="small" className={classNames('ord-brekk', className)}>
             {tekst}
         </BodyShort>
     );
