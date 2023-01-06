@@ -64,9 +64,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                     inneholderBrukerMedOgUtenArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
-                <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
-                </BodyShort>
+                {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
         </>

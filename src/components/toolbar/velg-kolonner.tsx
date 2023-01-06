@@ -81,9 +81,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
                 data-testid="dropdown-knapp_velg-kolonner"
                 ref={btnRef}
             >
-                <BodyShort size="small" className="toolbar-knapp__tekst">
-                    Velg kolonner
-                </BodyShort>
+                Velg kolonner
             </Button>
 
             {innhold}

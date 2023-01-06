@@ -81,7 +81,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     icon={<Delete />}
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <BodyShort size="small">Fjern</BodyShort>
+                    Fjern
                 </Button>
             </div>
         </Form>

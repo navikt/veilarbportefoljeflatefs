@@ -13,7 +13,7 @@ export function LeggTilKnapp(props: {onClick: () => void}) {
             data-testid="veiledergruppe_ny-gruppe_knapp"
             size="small"
         >
-            <BodyShort size="small">Ny gruppe</BodyShort>
+            Ny gruppe
         </Button>
     );
 }

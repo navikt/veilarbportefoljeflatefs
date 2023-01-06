@@ -105,9 +105,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             onClick={klikk}
             data-testid={props.testid}
         >
-            <BodyShort size="small" className="toolbar-knapp__tekst">
-                {props.tittel}
-            </BodyShort>
+            {props.tittel}
         </Button>
     );
 }

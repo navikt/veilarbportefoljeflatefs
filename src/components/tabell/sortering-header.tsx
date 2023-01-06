@@ -66,7 +66,7 @@ function SorteringHeader({
                     }
                     title={title}
                 >
-                    <BodyShort size="small">{tekst}</BodyShort>
+                    {tekst}
                 </Button>
                 {sortering === 'etternavn' ? ', Fornavn' : null}
             </span>
