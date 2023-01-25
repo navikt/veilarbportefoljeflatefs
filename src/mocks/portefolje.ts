@@ -179,7 +179,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
-    const random_eggenAnsatt = Math.random() < 0.5;
+    const random_eggenAnsatt = erSkjermet();
 
     return {
         fnr: grunndata.fnr,
@@ -240,6 +240,16 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         avvik14aVedtak: randomAvvik14aVedtak()
     };
 }
+
+const erSkjermet = () => {
+    let randomArray = new Int8Array(1);
+    window.crypto.getRandomValues(randomArray);
+
+    if (randomArray[0] % 5 === 0) {
+        return true;
+    }
+    return false;
+};
 
 const randomAvvik14aVedtak = () => {
     const avvikListe = [
