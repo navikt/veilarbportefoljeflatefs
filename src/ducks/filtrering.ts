@@ -69,8 +69,12 @@ export const initialState: FiltervalgModell = {
     utdanningBestatt: [],
     sisteEndringKategori: [],
     ulesteEndringer: null,
+    geografiskBosted: [],
+    visGeografiskBosted: [],
     tolkebehov: [],
-    tolkBehovSpraak: []
+    tolkBehovSpraak: [],
+    stillingFraNavFilter: [],
+    avvik14aVedtak: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

@@ -17,6 +17,7 @@ function KnappPanel({disabled = false, selected = false, ariaLabel, ...props}: K
     });
     return (
         <Button
+            size="small"
             variant="tertiary"
             className={classes}
             aria-disabled={disabled}

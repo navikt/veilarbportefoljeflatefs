@@ -54,11 +54,16 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                     Vil du la filteret stå til det deltar brukere på tiltaket igjen, eller vil du slette det?
                 </BodyShort>
                 <div className="knappegruppe">
-                    <Button data-testid="la-sta-knapp" onClick={lukkModal}>
+                    <Button size="small" data-testid="la-sta-knapp" onClick={lukkModal}>
                         La stå
                     </Button>
-                    <Button variant="danger" onClick={e => bekreftSletting(e)} data-testid="slett-knapp">
-                        <Delete />
+                    <Button
+                        size="small"
+                        variant="danger"
+                        onClick={e => bekreftSletting(e)}
+                        icon={<Delete />}
+                        data-testid="slett-knapp"
+                    >
                         Slett
                     </Button>
                 </div>

@@ -29,8 +29,11 @@ import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
 import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
 import {LagretFilterState} from './ducks/lagret-filter';
+import geografiskbostedListReducer, {GeografiskBostedListState} from './ducks/geografiskBosted';
 import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
 import tolkebehovListReducer, {TolkebehovSpraakListState} from './ducks/tolkebehov';
+import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjonsmelding';
+import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -79,6 +82,9 @@ export interface AppState {
     systemmeldinger: SystemmeldingState;
     foedelandList: FoedelandListState;
     tolkbehovSpraakList: TolkebehovSpraakListState;
+    sesjonStatus: SesjonStatusState;
+    brukerfeilStatus: BrukerfeilState;
+    geografiskBosted: GeografiskBostedListState;
 }
 
 export default combineReducers<AppState>({
@@ -142,6 +148,9 @@ export default combineReducers<AppState>({
     toastReducer: toastReducer,
     innloggetVeileder: innloggetVeilederReducer,
     systemmeldinger: systemmeldingerReducer,
+    geografiskBosted: geografiskbostedListReducer,
     foedelandList: foedelandListReducer,
-    tolkbehovSpraakList: tolkebehovListReducer
+    tolkbehovSpraakList: tolkebehovListReducer,
+    sesjonStatus: informasjonsmeldingReducer,
+    brukerfeilStatus: brukerfeilReducer
 });

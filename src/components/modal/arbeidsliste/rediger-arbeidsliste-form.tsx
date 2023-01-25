@@ -49,6 +49,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
             </div>
             <div className="modal-footer">
                 <Button
+                    size="small"
                     type="submit"
                     className="knapp knapp--hoved"
                     data-testid="modal_rediger-arbeidsliste_lagre-knapp"
@@ -63,6 +64,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Lagre
                 </Button>
                 <Button
+                    size="small"
                     variant="secondary"
                     className="knapp knapp--avbryt"
                     onClick={props.lukkModal}
@@ -71,13 +73,14 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Avbryt
                 </Button>
                 <Button
+                    size="small"
+                    className="fjern--knapp"
                     variant="danger"
                     type="button"
                     onClick={fjernBruker}
-                    className="fjern--knapp"
+                    icon={<Delete />}
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <Delete />
                     <BodyShort size="small">Fjern</BodyShort>
                 </Button>
             </div>

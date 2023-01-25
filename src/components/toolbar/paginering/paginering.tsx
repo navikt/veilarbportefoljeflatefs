@@ -10,7 +10,7 @@ import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../..
 import {Pagination} from '@navikt/ds-react';
 
 interface PagineringProps {
-    className: string;
+    className?: string;
     antallTotalt: number;
     onPaginering?: () => void;
 }

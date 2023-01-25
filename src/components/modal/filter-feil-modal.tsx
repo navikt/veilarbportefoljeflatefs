@@ -35,7 +35,9 @@ export default function FilterFeilModal(props: FilterFeilModalProps) {
                 <br />
                 Prøv igjen senere.
             </BodyShort>
-            <Button onClick={lukkModal}>Ok</Button>
+            <Button size="small" onClick={lukkModal}>
+                Ok
+            </Button>
         </VarselModal>
     );
 }

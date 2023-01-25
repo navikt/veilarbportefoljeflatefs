@@ -43,14 +43,14 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                                 <div key={veileder.ident} className="veiledergruppe-modal__valgteveileder__elem">
                                     <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                                     <Button
+                                        size="small"
                                         variant="tertiary"
                                         className="fjern--knapp"
                                         type="button"
                                         onClick={() => props.fjernValgtVeileder(veileder.ident)}
+                                        icon={<Delete />}
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
-                                    >
-                                        <Delete />
-                                    </Button>
+                                    />
                                 </div>
                             ))}
                         </div>

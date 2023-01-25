@@ -41,9 +41,8 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
-import {Systemmeldinger} from '../components/systemmeldinger';
 import {IdentParam} from '../model-interfaces';
-import {SesjonNotifikasjon} from '../components/modal/sesjon-notifikasjon';
+import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -111,9 +110,7 @@ export default function MinoversiktSide() {
     return (
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
-            <SesjonNotifikasjon />
-            <Systemmeldinger />
-
+            <Informasjonsmeldinger />
             <Innholdslaster avhengigheter={[statustall]}>
                 <MinOversiktWrapper
                     className={classNames(

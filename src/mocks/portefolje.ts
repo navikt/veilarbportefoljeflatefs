@@ -22,6 +22,7 @@ let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
 
 let i = 123456;
+
 function lagGrunndata() {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
@@ -229,26 +230,83 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         foedeland: hentLand(),
         harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
         innflyttingTilNorgeFraLand: '',
+        bostedKommune: hentBostedKommune(),
+        bostedBydel: hentBostedBydel(),
+        bostedSistOppdatert: randomDate({past: true}),
         talespraaktolk: hentSpraak(),
         tegnspraaktolk: hentSpraak(),
-        tolkBehovSistOppdatert: randomDate({past: true})
+        tolkBehovSistOppdatert: randomDate({past: true}),
+        nesteSvarfristCvStillingFraNav: '2023-06-12',
+        avvik14aVedtak: randomAvvik14aVedtak()
     };
 }
 
+const randomAvvik14aVedtak = () => {
+    const avvikListe = [
+        'HOVEDMAL_ULIK',
+        'INNSATSGRUPPE_ULIK',
+        'INNSATSGRUPPE_OG_HOVEDMAL_ULIK',
+        'INNSATSGRUPPE_MANGLER_I_NY_KILDE',
+        'INGEN_AVVIK'
+    ];
+
+    return avvikListe[Math.floor(Math.random() * avvikListe.length)];
+};
+
 const hentLand = () => {
-    const landListe = ['NORGE', 'SVERIGE', 'FINLAND', 'DANMARK', 'ENGLAND', 'MONTENEGRO', 'ISLAND', 'HELLAS'];
+    const landListe = [
+        'NORGE',
+        'SVERIGE',
+        'FINLAND',
+        'DANMARK',
+        'ENGLAND',
+        'Saint Vincent og Grenadinene',
+        'ISLAND',
+        'HELLAS',
+        'Elfenbenskysten',
+        'Mikronesiaføderasjonen',
+        'Den demokratiske republikken São Tomé og Príncipe',
+        'Storbritannia Storbritannia og Nord-Irland',
+        'Uavhengig og suveren republikken Kiribati',
+        'Den føderale demokratiske republikken Etiopia'
+    ];
 
     return landListe[Math.floor(Math.random() * landListe.length)];
+};
+
+const hentBostedKommune = () => {
+    const spraakListe = ['0301', '1103'];
+
+    let x = Math.floor(Math.random() * 100);
+
+    if (x % 3 === 0) {
+        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    }
+    return '';
+};
+
+const hentBostedBydel = () => {
+    const bostedListe = ['030103', '110307'];
+
+    let randomArray = new Int8Array(2);
+    window.crypto.getRandomValues(randomArray);
+
+    if (randomArray[0] % 3 === 0) {
+        return bostedListe[Math.abs(randomArray[1] % bostedListe.length)];
+    }
+    return '';
 };
 
 const hentSpraak = () => {
     const spraakListe = ['AR', 'NB', 'ES', 'UK'];
 
-    let x = Math.floor(Math.random() * 100);
+    let randomArray = new Int8Array(2);
+    window.crypto.getRandomValues(randomArray);
 
-    if (x % 5 === 0) {
-        return spraakListe[Math.floor(Math.random() * spraakListe.length)];
+    if (randomArray[0] % 3 === 0) {
+        return spraakListe[Math.abs(randomArray[1] % spraakListe.length)];
     }
+
     return null;
 };
 

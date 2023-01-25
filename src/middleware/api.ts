@@ -1,10 +1,12 @@
 import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
-import {VeilederModell} from '../model-interfaces';
+import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
+import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
+import {filterSomIkkeSkalSendesTilBackend} from '../filtrering/filter-konstanter';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -16,6 +18,26 @@ const MED_CREDENTIALS: RequestInit = {
         'Content-Type': 'application/json'
     }
 };
+
+export interface Session {
+    created_at?: string;
+    ends_at?: string;
+    ends_in_seconds?: number;
+}
+
+export interface Tokens {
+    expire_at?: string;
+    expire_in_seconds?: number;
+    next_auto_refresh_in_seconds?: number;
+    refresh_cooldown?: boolean;
+    refresh_cooldown_seconds?: number;
+    refreshed_at?: string;
+}
+
+export interface SessionMeta {
+    session?: Session;
+    tokens?: Tokens;
+}
 
 export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
@@ -39,15 +61,26 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
     return baseUrl;
 }
 
-export function hentEnhetsPortefolje(enhet, rekkefolge, sorteringsfelt, filtervalg: {}, fra?: number, antall?: number) {
+export function hentEnhetsPortefolje(
+    enhet,
+    rekkefolge,
+    sorteringsfelt,
+    filtervalg: FiltervalgModell,
+    fra?: number,
+    antall?: number
+) {
     if (rekkefolge === 'stigende') {
         rekkefolge = 'ascending';
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
+    const filtrerteFiltervalg: FiltervalgModell = {
+        ...filtervalg,
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+    };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtrerteFiltervalg)};
     return fetchToJson(url, config);
 }
 
@@ -65,9 +98,13 @@ export function hentVeiledersPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
+    const filtrerteFiltervalg: FiltervalgModell = {
+        ...filtervalg,
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+    };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtervalg)};
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(filtrerteFiltervalg)};
     return fetchToJson(url, config);
 }
 
@@ -87,7 +124,7 @@ export function hentEnhetsVeiledere(enhetId) {
 }
 
 export function hentAktivBruker(): Promise<VeilederModell> {
-    return fetchToJson(`/veilarbveileder/api/veileder/v2/me`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
 export function hentEnhetsFilterGrupper(enhetId) {
@@ -196,25 +233,15 @@ export function hentMoteplan(veileder: string, enhet: string) {
 }
 
 export function hentFoedeland(enhet: string): Promise<Foedeland[]> {
-    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/foedeland`, MED_CREDENTIALS);
 }
 
 export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]> {
-    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
+    return fetchToJson(`${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/tolkSpraak`, MED_CREDENTIALS);
 }
 
-export async function hentResterendeSekunder(): Promise<number> {
-    return fetchToJson(AUTH_URL, MED_CREDENTIALS)
-        .then(data => {
-            const remainingSeconds = data?.remainingSeconds;
-            if (remainingSeconds && typeof remainingSeconds == 'number' && remainingSeconds > 0) {
-                return remainingSeconds;
-            }
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        })
-        .catch(e => {
-            return Promise.reject('Fant ikke forventet verdi av remainingSeconds på /auth/info');
-        });
+export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]> {
+    return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/geografiskbosted`, MED_CREDENTIALS);
 }
 
 export function sendEventTilPortefolje(event: FrontendEvent) {
@@ -222,3 +249,11 @@ export function sendEventTilPortefolje(event: FrontendEvent) {
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
     return fetch(url, config);
 }
+
+export const refreshAccessTokens = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session/refresh', {}, false).then(data => Promise.resolve(data as SessionMeta));
+};
+
+export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
+    return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
+};

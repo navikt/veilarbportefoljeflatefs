@@ -28,12 +28,11 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
     const hentArbeidslisteBruker = fnr => dispatch(hentArbeidslisteForBruker(fnr));
+    const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
     useOnUnmount(() => {
         updateLastPath();
     });
-
-    const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
     return (
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>

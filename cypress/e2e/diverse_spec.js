@@ -163,4 +163,55 @@ describe('Diverse', () => {
             .click();
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
     });
+
+    it('Sjekk brukerfeilmelding forsvinner', () => {
+        cy.gaTilOversikt('enhetens-oversikt');
+        cy.gaTilOversikt('min-oversikt');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('tildel-veileder_dropdown').should('not.exist');
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.klikkTab('FILTER');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.getByTestId('filtrering-filter_container').scrollTo('top');
+        cy.apneLukkeFilterDropdown('kjonn');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+        cy.checkbox('radio-valg_kvinne');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.klikkTab('STATUS');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+        cy.klikkTab('FILTER');
+        cy.apneLukkeFilterDropdown('alder');
+        cy.getByTestId('filter_0-19').check({force: true});
+        cy.apneLukkeFilterDropdown('er-utdanningen-godkjent-og-bestatt');
+        cy.getByTestId('filter_utdanningBestatt_JA').check({force: true});
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.getByTestId('filtreringlabel_nullstill-filtervalg')
+            .should('be.visible')
+            .click();
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+
+        cy.getByTestId('tildel-veileder_knapp')
+            .should('be.enabled')
+            .click({force: true});
+        cy.getByTestId('brukerfeilmelding').should('be.visible');
+        cy.klikkTab('MINE_FILTER');
+        cy.getByTestId('brukerfeilmelding').should('not.exist');
+    });
 });

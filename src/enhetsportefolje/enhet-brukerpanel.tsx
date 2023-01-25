@@ -58,7 +58,9 @@ function EnhetBrukerpanel({
                     className="brukerliste__checkbox"
                     disabled={bruker.fnr === ''}
                     hideLabel
-                    onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    onChange={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                    }}
                     size="small"
                 >
                     {''}

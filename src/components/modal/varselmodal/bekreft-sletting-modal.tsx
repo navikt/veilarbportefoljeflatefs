@@ -37,15 +37,16 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
             </div>
             <div className="bekreft-sletting-modal__knappegruppe">
                 <Button
+                    size="small"
                     variant="danger"
                     type="submit"
                     onClick={slettKnapp}
+                    icon={<Delete />}
                     data-testid="bekreft-sletting_modal_slett-knapp"
                 >
-                    <Delete />
                     Slett
                 </Button>
-                <Button variant="secondary" type="button" onClick={props.onRequestClose}>
+                <Button size="small" variant="secondary" type="button" onClick={props.onRequestClose}>
                     Avbryt
                 </Button>
             </div>

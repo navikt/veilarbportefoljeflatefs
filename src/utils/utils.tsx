@@ -1,5 +1,5 @@
-import { AktiviteterModell, BrukerModell, FiltervalgModell } from "../model-interfaces";
-import { Maybe } from "./types";
+import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {Maybe} from './types';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -209,14 +209,26 @@ export function kebabCase(string: string | {label: string}) {
     return specialChar(string).replace(/\s+/g, '-');
 }
 
-export function kebabUtenSpesialtegn(string: string | {label: string}) {
-    string.toString();
+export function kebabUtenSpesialtegn(s: string | {label: string}) {
     const regExpr = /[^a-zA-Z0-9-. ]/g;
-    return kebabCase(string).replace(regExpr, '');
+    return kebabCase(typeof s === 'string' ? s : s.label).replace(regExpr, '');
 }
 
 export function capitalize(str: string) {
     return str
         .toLowerCase()
         .replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());
+}
+
+export function bostedKommune(bruker: BrukerModell, geografiskbostedData) {
+    if (bruker.bostedKommune) {
+        return geografiskbostedData.get(bruker.bostedKommune);
+    }
+    if (bruker.harUtelandsAddresse) {
+        return 'Utland';
+    }
+    if (bruker.harUkjentBosted) {
+        return 'Ukjent';
+    }
+    return '-';
 }

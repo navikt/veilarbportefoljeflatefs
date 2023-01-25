@@ -7,11 +7,12 @@ export function LeggTilKnapp(props: {onClick: () => void}) {
     return (
         <Button
             variant="tertiary"
+            icon={<AddCircle className="ny-gruppe-knapp" />}
             className="veiledergruppe-knapp"
             onClick={props.onClick}
             data-testid="veiledergruppe_ny-gruppe_knapp"
+            size="small"
         >
-            <AddCircle className="ny-gruppe-knapp" />
             <BodyShort size="small">Ny gruppe</BodyShort>
         </Button>
     );

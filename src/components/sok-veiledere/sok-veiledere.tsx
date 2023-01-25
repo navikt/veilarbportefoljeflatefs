@@ -41,6 +41,7 @@ function SokVeiledere(props: SokVeiledereProps) {
                     </CheckboxGroup>
                     <div className=" filterform__under-valg">
                         <Button
+                            size="small"
                             onClick={props.btnOnClick}
                             data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
                         >

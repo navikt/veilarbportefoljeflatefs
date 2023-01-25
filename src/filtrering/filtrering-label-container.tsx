@@ -6,17 +6,20 @@ import FilterKonstanter, {
     aktiviteter,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
+    mapFilternavnTilFilterValue,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import {pagineringSetup} from '../ducks/paginering';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
+import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
+import {pagineringSetup} from '../ducks/paginering';
+import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -69,6 +72,7 @@ function FiltreringLabelContainer({
 
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
+    const geografiskBostedListData = useGeografiskbostedSelector();
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
@@ -161,6 +165,29 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
+            } else if (key === 'visGeografiskBosted' && value.length > 0) {
+                return [
+                    <FiltreringLabel
+                        key={`visGeografiskBosted-1`}
+                        label={`Vis geografisk bosted`}
+                        slettFilter={() => slettEnkelt(key, '1')}
+                    />
+                ];
+            } else if (key === 'geografiskBosted' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Bosted: ' +
+                                (geografiskBostedListData.has(singleValue)
+                                    ? geografiskBostedListData.get(singleValue)
+                                    : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (value === true) {
                 return [
                     <FiltreringLabel
@@ -171,42 +198,65 @@ function FiltreringLabelContainer({
                 ];
             } else if (key === 'foedeland') {
                 return value.map(singleValue => {
-                    if (foedelandListData.get(singleValue) != null) {
-                        return (
-                            <FiltreringLabel
-                                key={`${key}--${singleValue}`}
-                                label={'Fødeland: ' + foedelandListData.get(singleValue)}
-                                slettFilter={() => slettEnkelt(key, singleValue)}
-                            />
-                        );
-                    } else {
-                        return '';
-                    }
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Fødeland: ' +
+                                (foedelandListData.has(singleValue) ? foedelandListData.get(singleValue) : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
                 });
             } else if (key === 'tolkBehovSpraak') {
                 return value.map(singleValue => {
-                    if (tolkbehovSpraakListData.get(singleValue) != null) {
-                        return (
-                            <FiltreringLabel
-                                key={`${key}--${singleValue}`}
-                                label={'Tolkebehov språk: ' + tolkbehovSpraakListData.get(singleValue)}
-                                slettFilter={() => slettEnkelt(key, singleValue)}
-                            />
-                        );
-                    } else {
-                        return '';
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={
+                                'Tolkebehov språk: ' +
+                                (tolkbehovSpraakListData.has(singleValue)
+                                    ? tolkbehovSpraakListData.get(singleValue)
+                                    : 'ugyldig')
+                            }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'avvik14aVedtak') {
+                return value.map(singleValue => {
+                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                        return null;
                     }
+
+                    // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
+                    // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
+                    // filter-etiketter fjernes
+                    const fjernAvvik14aHovedFilter = value.length <= 2;
+                    const slettAvvik14aVedtakFilter = () => {
+                        if (fjernAvvik14aHovedFilter) {
+                            slettEnkelt(key, singleValue);
+                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
+                        } else {
+                            slettEnkelt(key, singleValue);
+                        }
+                    };
+
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={getLabel(singleValue, key, enhettiltak)}
+                            slettFilter={slettAvvik14aVedtakFilter}
+                        />
+                    );
                 });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
                             key={`${key}--${singleValue.key || singleValue}`}
-                            label={
-                                key === 'tiltakstyper'
-                                    ? enhettiltak[singleValue]
-                                    : singleValue.label || FilterKonstanter[key][singleValue] || singleValue
-                            }
+                            label={getLabel(singleValue, key, enhettiltak)}
                             slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         />
                     );
@@ -277,11 +327,28 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
             dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
         }
     }
 });
+
+function getLabel(singleValue: any, key: any, enhettiltak: any): string {
+    if (key === 'tiltakstyper') {
+        return enhettiltak[singleValue];
+    }
+    if (singleValue?.label) {
+        return singleValue.label;
+    }
+    if (FilterKonstanter[key] && FilterKonstanter[key][singleValue]) {
+        return FilterKonstanter[key][singleValue];
+    }
+    if (FilterKonstanter[singleValue]) {
+        return FilterKonstanter[singleValue];
+    }
+    return singleValue;
+}
 
 export default connect(null, mapDispatchToProps)(FiltreringLabelContainer);

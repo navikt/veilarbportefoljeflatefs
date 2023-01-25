@@ -6,6 +6,7 @@ import {
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
     I_AVTALT_AKTIVITET,
+    HAR_AVVIK,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -72,6 +73,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         );
     };
 
+    const geografiskBostedErValgt = () => {
+        return filtervalg.geografiskBosted.length > 0 || filtervalg.visGeografiskBosted.length > 0;
+    };
+
     const tolkBehovErValgt = () => {
         return (
             filtervalg.tolkebehov.length > 0 ||
@@ -80,6 +85,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 filtervalg.tolkBehovSpraak.length > 0)
         );
     };
+
+    function avvik14aVedtakErValgt() {
+        return filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
+    }
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0))
@@ -90,6 +99,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0
             )
         )
+        .concat(addHvis(Kolonne.BOSTED_KOMMUNE, geografiskBostedErValgt()))
+        .concat(addHvis(Kolonne.BOSTED_BYDEL, geografiskBostedErValgt()))
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
@@ -163,10 +174,13 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 oversiktType === OversiktType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
             )
         )
-        .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
-        .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
+        .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, avvik14aVedtakErValgt()))
+        .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
+        .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

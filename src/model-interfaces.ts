@@ -40,9 +40,13 @@ export enum Sorteringsfelt {
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    BOSTED_KOMMUNE = 'kommunenummer',
+    BOSTED_BYDEL = 'bydelsnummer',
+    BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
-    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert'
+    TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
 }
 
 export interface FiltervalgModell {
@@ -79,6 +83,10 @@ export interface FiltervalgModell {
     ulesteEndringer: null | string;
     tolkebehov: string[];
     tolkBehovSpraak: string[];
+    stillingFraNavFilter: string[];
+    geografiskBosted: string[];
+    visGeografiskBosted: string[];
+    avvik14aVedtak: string[];
 }
 
 export interface EnhetModell {
@@ -160,6 +168,13 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    bostedKommune?: string;
+    bostedBydel?: string;
+    bostedSistOppdatert?: string;
+    harUtelandsAddresse?: boolean;
+    harUkjentBosted?: boolean;
+    nesteSvarfristCvStillingFraNav?: string;
+    avvik14aVedtak: string;
 }
 
 interface Statsborgerskap {
@@ -212,6 +227,7 @@ export interface ArbeidslisteDataModell {
     fnr: string;
     kommentar: string;
     frist: string | null;
+    kategori: KategoriModell | null;
 }
 
 export interface Systemmelding {
@@ -227,4 +243,9 @@ export interface SkjermingTil {
 
 export interface IdentParam {
     ident: string;
+}
+
+export enum SesjonStatus {
+    GYLDIG = 'GYLDIG',
+    UTLOPT = 'UTLØPT'
 }

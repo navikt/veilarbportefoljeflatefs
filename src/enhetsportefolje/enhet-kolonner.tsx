@@ -3,6 +3,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -17,6 +18,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    bostedKommune,
     capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
@@ -42,6 +44,7 @@ import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
+import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 
 interface EnhetKolonnerProps {
@@ -85,10 +88,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
 
+    const geografiskbostedData = useGeografiskbostedSelector();
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2 fnr-kolonne" bruker={bruker} />
+            <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
@@ -111,6 +116,21 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+                tekst={bostedKommune(bruker, geografiskbostedData)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                tekst={bruker.bostedBydel ? geografiskbostedData.get(bruker.bostedBydel) : '-'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -267,6 +287,22 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                tekst={
+                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
+                }
+            />
+            <TekstKolonne
+                tekst={
+                    avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
+                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                className="col col-xs-2"
             />
         </div>
     );

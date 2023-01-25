@@ -69,7 +69,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                     data-testid="lagre-nytt-filter_modal_navn-input"
                 />
                 <div className="lagret-filter-knapp-wrapper">
-                    <Button type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
+                    <Button size="small" type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
                         Lagre
                     </Button>
                 </div>

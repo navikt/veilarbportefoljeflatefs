@@ -81,6 +81,7 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                 className="lenke lenke--frittstående arbeidsliste--rediger-lenke"
                 onClick={klikkRedigerknapp}
                 data-testid="min-oversikt_chevron-arbeidsliste_rediger-knapp"
+                size="small"
             >
                 Rediger
             </Button>
@@ -89,6 +90,7 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
             ) : (
                 <Formik
                     initialValues={initialValues}
+                    enableReinitialize={true}
                     onSubmit={values => {
                         setIsOpen(false);
                         dispatch(redigerArbeidsliste(values, {bruker, sistEndretAv, sistEndretDato, settMarkert}));

@@ -1,5 +1,5 @@
 import {OversiktType} from './ui/listevisning';
-import {logEvent} from '../utils/frontend-logger';
+import {loginUrl} from '../utils/url-utils';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -18,18 +18,12 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response) {
+export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
-    if (response.status === 401) {
-        if (!window.location.href.toString().includes('401.html')) {
-            const urlUtenFnr = response?.url?.replace(/\d{11}/, '');
-            logEvent('portefolje.logger.innlogging', {
-                url: urlUtenFnr
-            });
-            window.location.href = '/401.html';
-        }
+    if (response.status === 401 && redirectOnUnauthorized) {
+        window.location.href = loginUrl();
     }
     return Promise.reject(new FetchError(response.statusText, response));
 }
@@ -67,8 +61,10 @@ export function handterFeil(dispatch, action) {
     };
 }
 
-export function fetchToJson(url: string, config: RequestInit = {}) {
-    return fetch(url, config).then(sjekkStatuskode).then(toJson);
+export function fetchToJson(url: string, config: RequestInit = {}, redirectOnUnauthorized: Boolean = true) {
+    return fetch(url, config)
+        .then(res => sjekkStatuskode(res, redirectOnUnauthorized))
+        .then(toJson);
 }
 
 export function doThenDispatch(fn, {OK, FEILET, PENDING}) {

@@ -58,7 +58,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
     const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
-
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
@@ -87,7 +86,9 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
                         disabled={bruker.fnr === ''}
                         hideLabel
-                        onChange={() => settMarkert(bruker.fnr, !bruker.markert)}
+                        onChange={() => {
+                            settMarkert(bruker.fnr, !bruker.markert);
+                        }}
                         size="small"
                     >
                         {''}
@@ -109,7 +110,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
                         {bruker.nyForVeileder && (
-                            <Tag variant="info" size="small">
+                            <Tag className="tabell-etikett" variant="info" size="small">
                                 Ny bruker
                             </Tag>
                         )}
@@ -132,7 +133,9 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     skalVises={arbeidslisteAktiv}
                     bruker={bruker}
                     innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                    settMarkert={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                    }}
                     apen={apen}
                 />
             </Collapse>

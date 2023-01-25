@@ -3,7 +3,7 @@
     position: relative;
 }
 .collapse-header {
-    background-color: var(--navds-semantic-color-canvas-background-inverted);
+    background-color: var(--a-surface-inverted);
     color: white;
     padding: 1rem;
     border-top-left-radius: 6px;
@@ -52,7 +52,7 @@
 
 .endringslogg-content:focus {
     outline: none;
-    box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
+    box-shadow: 0 0 0 3px var(--a-border-focus);
 }
 
 .arrow-container::after {
@@ -64,7 +64,7 @@
     height: 0;
     border-left: 0.8125rem solid transparent;
     border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--navds-semantic-color-canvas-background-inverted);
+    border-bottom: 0.6875rem solid var(--a-surface-inverted);
 }
 .innhold-container {
     overflow-y: scroll;
@@ -86,7 +86,7 @@
     height: 0;
     border-left: 0.8125rem solid transparent;
     border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--navds-semantic-color-canvas-background-inverted);
+    border-bottom: 0.6875rem solid var(--a-surface-inverted);
 }
 
 .arrow-container-left:focus-within::before {
@@ -98,7 +98,7 @@
     height: 0;
     border-left: 0.8125rem solid transparent;
     border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--navds-semantic-color-focus);
+    border-bottom: 0.6875rem solid var(--a-border-focus);
     opacity: 0.78;
 }
 
@@ -111,12 +111,12 @@
     height: 0;
     border-left: 0.8125rem solid transparent;
     border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--navds-semantic-color-focus);
+    border-bottom: 0.6875rem solid var(--a-border-focus);
     opacity: 0.78;
 }
 
 .endringslogg-info-nye-notifikasjoner {
-    background-color: var(--navds-semantic-color-interaction-primary);
+    background-color: var(--a-surface-action);
     border-radius: 50%;
     display: inline-block;
 }
@@ -137,13 +137,13 @@
     margin-top: 0.2rem;
 }
 .endringslogg-dropDown:focus {
-    fill: var(--navds-semantic-color-interaction-primary);
-    box-shadow: 0 0 0 2.5px var(--navds-semantic-color-focus);
+    fill: var(--a-surface-action);
+    box-shadow: 0 0 0 2.5px var(--a-border-focus);
     border-radius: 2px;
 }
 
 .endringslogg-dropDown:focus #Outline {
-    fill: var(--navds-semantic-color-interaction-primary);
+    fill: var(--a-surface-action);
 }
 
 #alarm_svg {
@@ -151,7 +151,7 @@
     width: 2.5rem;
 }
 .endringslogg-dropDown:hover #Outline {
-    fill: var(--navds-semantic-color-interaction-primary);
+    fill: var(--a-surface-action);
 }
 .endringslogg-innhold {
     padding: 0 2rem 0 2rem;
@@ -197,7 +197,7 @@
     margin-left: 0.3em;
 }
 .hyperlink-ikon {
-    stroke: var(--navds-semantic-color-link);
+    stroke: var(--a-text-action);
 }
 .veiledergrupper-navet-tekst,
 .endringslogg_mine-filter {
@@ -211,12 +211,12 @@
 .circle {
     width: 0.875rem;
     height: 0.875rem;
-    background-color: var(--navds-semantic-color-interaction-primary);
+    background-color: var(--a-surface-action);
     border-radius: 50%;
     position: absolute;
 }
 .ringring {
-    border: 3px solid var(--navds-semantic-color-interaction-primary);
+    border: 3px solid var(--a-surface-action);
     -webkit-border-radius: 30px;
     height: 25px;
     width: 25px;
