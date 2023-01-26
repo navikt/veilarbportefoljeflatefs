@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY_GCP }}
 
 jobs:
   deploy-dev:
