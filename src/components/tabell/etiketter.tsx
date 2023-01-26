@@ -2,6 +2,7 @@ import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
 import hiddenIf from '../hidden-if/hidden-if';
 import {Tag} from '@navikt/ds-react';
+import {hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -10,6 +11,7 @@ interface EtiketterProps {
 
 function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
+    const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
     return (
         <>
             <HiddenEtikett variant="info" size="small" hidden={!bruker.erDoed} className="tabell-etikett etikett--doed">
@@ -26,9 +28,11 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
             <HiddenEtikett variant="warning" size="small" hidden={!bruker.diskresjonskode} className="tabell-etikett">
                 {`Kode ${bruker.diskresjonskode}`}
             </HiddenEtikett>
-            <HiddenEtikett variant="warning" size="small" hidden={!bruker.egenAnsatt} className="tabell-etikett">
-                Skjermet
-            </HiddenEtikett>
+            <HiddenEtikett
+                variant={skjermetInfo.type}
+                size="small"
+                hidden={skjermetInfo.hidden}
+            >{`${skjermetInfo.tittel}`}</HiddenEtikett>
             <HiddenEtikett
                 variant="info"
                 size="small"
