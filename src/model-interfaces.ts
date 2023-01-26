@@ -236,7 +236,8 @@ export interface Systemmelding {
     beskrivelse: any;
 }
 
-export interface SkjermingTil {
+export interface SkjermingEtikettConfig {
+    hidden: true | false;
     tittel: string | null;
     type: 'error' | 'warning' | 'info' | 'success';
 }

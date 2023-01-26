@@ -179,7 +179,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
-    const random_eggenAnsatt = erSkjermet();
+    const random_egenAnsatt = erSkjermet();
+    const random_harSkjermetTil = erSkjermet();
 
     return {
         fnr: grunndata.fnr,
@@ -194,8 +195,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
-        egenAnsatt,
-        skjermetTil: random_eggenAnsatt ? randomDateInNearFuture() : '',
+        egenAnsatt: random_egenAnsatt ? true : '',
+        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
         fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
         fodselsdato: grunndata.fodselsdato,

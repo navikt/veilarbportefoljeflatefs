@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {Maybe} from './types';
-import {SkjermingTil} from '../model-interfaces';
+import {SkjermingEtikettConfig} from '../model-interfaces';
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
@@ -199,28 +199,36 @@ export function dagFraDato(dato: Date): string {
     }
 }
 
-export function hentSkjermetTil(skjermetTil: string | undefined): SkjermingTil {
-    if (!skjermetTil) {
+export function hentSkjermetInfo(
+    egenAnsatt: boolean | undefined,
+    skjermetTil: string | undefined
+): SkjermingEtikettConfig {
+    if (!egenAnsatt) {
         return {
+            hidden: true,
             tittel: null,
             type: 'info'
         };
     }
+
     const daysUntil = moment(skjermetTil).diff(moment(), 'days');
-    const tittelVerdi = 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
+    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
 
     if (daysUntil < 5) {
         return {
+            hidden: false,
             tittel: tittelVerdi,
             type: 'error'
         };
     } else if (daysUntil <= 14) {
         return {
+            hidden: false,
             tittel: tittelVerdi,
             type: 'warning'
         };
     } else {
         return {
+            hidden: false,
             tittel: tittelVerdi,
             type: 'info'
         };
