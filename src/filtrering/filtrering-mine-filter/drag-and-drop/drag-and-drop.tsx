@@ -95,9 +95,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }, [stateFilterOrder]);
 
     useEffect(() => {
-        if (valgtMineFilter !== undefined && valgtMineFilter !== null) {
-            setValgtFilter(`${valgtMineFilter.filterId}`);
-        }
+        setValgtFilter(`${valgtMineFilter?.filterId ?? ''}`);
     }, [valgtMineFilter]);
 
     if (isDraggable) {

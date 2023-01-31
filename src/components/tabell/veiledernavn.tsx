@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {BrukerModell, VeilederModell} from '../../model-interfaces';
 import {BodyShort, Tag} from '@navikt/ds-react';
+import classNames from 'classnames';
 
 interface VeiledernavnProps {
     className?: string;
@@ -23,7 +24,7 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
     );
 
     return (
-        <div className={className}>
+        <div className={classNames('ord-brekk', className)}>
             <BodyShort size="small">{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
         </div>
     );
