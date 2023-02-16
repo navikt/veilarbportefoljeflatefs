@@ -14,6 +14,7 @@ import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
+    avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -94,12 +95,12 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
             <TekstKolonne
-                className="col col-xs-2 land-navn"
+                className="col col-xs-2"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
             />
             <TekstKolonne
-                className="col col-xs-2 land-navn"
+                className="col col-xs-2"
                 tekst={
                     bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
                         ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
@@ -145,13 +146,6 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                tekst={
-                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
-                }
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -313,6 +307,22 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}
                 skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                tekst={
+                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
+                }
+            />
+            <TekstKolonne
+                tekst={
+                    avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
+                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
+                        : '-'
+                }
+                skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                className="col col-xs-2"
             />
         </div>
     );

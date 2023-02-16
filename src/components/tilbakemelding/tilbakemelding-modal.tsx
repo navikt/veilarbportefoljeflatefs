@@ -139,6 +139,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                             </div>
                                         )}
                                         <Button
+                                            size="small"
                                             type="submit"
                                             className="knapp--hoved"
                                             data-testid="tilfredshet_send-knapp"
@@ -173,7 +174,12 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                                 >
                                     {feilmelding}
                                 </BodyShort>
-                                <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
+                                <Button
+                                    size="small"
+                                    type="submit"
+                                    className="knapp--hoved"
+                                    data-testid="tilfredshet_send-knapp"
+                                >
                                     Send
                                 </Button>
                             </form>

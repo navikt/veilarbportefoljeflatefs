@@ -1,5 +1,15 @@
 import {lag2Sifret, range} from '../utils/utils';
 import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import {Dictionary} from '../utils/types/types';
+
+const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
+
+export type CheckboxFilter = {
+    label: string;
+    className?: string;
+    indeterminate?: () => boolean;
+};
+export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
@@ -20,6 +30,11 @@ export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
+export const HAR_AVVIK = 'HAR_AVVIK';
+export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
+export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
+export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
+export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -44,8 +59,15 @@ export const mapFilternavnTilFilterValue = {
     aapYtelseUnntak: AAP_YTELSE_UNNTAK,
     underVurdering: UNDER_VURDERING,
     sisteEndring: SISTE_ENDRING,
-    sisteEndringDato: SISTE_ENDRING_DATO
+    sisteEndringDato: SISTE_ENDRING_DATO,
+    harAvvik: HAR_AVVIK,
+    hovedmalUlik: HOVEDMAL_ULIK,
+    innsatsgruppeUlik: INNSATSGRUPPE_ULIK,
+    innsatsgruppeOgHovedmalUlik: INNSATSGRUPPE_OG_HOVEDMAL_ULIK,
+    innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE
 };
+
+export const filterSomIkkeSkalSendesTilBackend = [mapFilternavnTilFilterValue.harAvvik];
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
@@ -103,61 +125,61 @@ export const kjonn = {
 };
 
 export const innsatsgruppe = {
-    IKVAL: 'Standardinnsats',
-    BFORM: 'Situasjonsbestemt innsats',
-    BATT: 'Spesielt tilpasset innsats',
-    VARIG: 'Varig tilpasset'
+    IKVAL: {label: 'Standardinnsats'},
+    BFORM: {label: 'Situasjonsbestemt innsats'},
+    BATT: {label: 'Spesielt tilpasset innsats'},
+    VARIG: {label: 'Varig tilpasset'}
 };
 
 export const hovedmal = {
-    SKAFFEA: 'Skaffe arbeid',
-    BEHOLDEA: 'Beholde arbeid',
-    OKEDELT: 'Øke deltakelse eller mål om arbeid'
+    SKAFFEA: {label: 'Skaffe arbeid'},
+    BEHOLDEA: {label: 'Beholde arbeid'},
+    OKEDELT: {label: 'Øke deltakelse eller mål om arbeid'}
 };
 
 export const formidlingsgruppe = {
-    ARBS: 'Arbeidssøker',
-    IARBS: 'Ikke arbeidssøker',
-    ISERV: 'Ikke servicebehov'
+    ARBS: {label: 'Arbeidssøker'},
+    IARBS: {label: 'Ikke arbeidssøker'},
+    ISERV: {label: 'Ikke servicebehov'}
 };
 
 export const servicegruppe = {
-    BKART: 'Behov for arbeidsevnevurdering',
-    IVURD: 'Ikke vurdert',
-    OPPFI: 'Helserelatert arbeidsrettet oppfølging i NAV',
-    VURDI: 'Sykmeldt oppfølging på arbeidsplassen',
-    VURDU: 'Sykmeldt uten arbeidsgiver'
+    BKART: {label: 'Behov for arbeidsevnevurdering'},
+    IVURD: {label: 'Ikke vurdert'},
+    OPPFI: {label: 'Helserelatert arbeidsrettet oppfølging i NAV'},
+    VURDI: {label: 'Sykmeldt oppfølging på arbeidsplassen'},
+    VURDU: {label: 'Sykmeldt uten arbeidsgiver'}
 };
 
 export const manuellBrukerStatus = {
-    MANUELL: 'Manuell oppfølging',
-    KRR: 'Reservert i KRR'
+    MANUELL: {label: 'Manuell oppfølging'},
+    KRR: {label: 'Reservert i KRR'}
 };
 export const manuellBrukerStatusUtenKRR = {
-    MANUELL: 'Manuell oppfølging'
+    MANUELL: {label: 'Manuell oppfølging'}
 };
 
 export const ytelse = {
     DAGPENGER: {label: 'Dagpenger'},
     ORDINARE_DAGPENGER: {
         label: 'Ordinære dagpenger',
-        className: 'skjemaelement--innrykk'
+        className: skjemaelementInnrykkKlasse
     },
     DAGPENGER_MED_PERMITTERING: {
         label: 'Dagpenger under permittering',
-        className: 'skjemaelement--innrykk'
+        className: skjemaelementInnrykkKlasse
     },
     DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: {
         label: 'Dagpenger v/perm fiskeindustri',
-        className: 'skjemaelement--innrykk'
+        className: skjemaelementInnrykkKlasse
     },
     LONNSGARANTIMIDLER_DAGPENGER: {
         label: 'Lønnsgarantimidler dagpenger',
-        className: 'skjemaelement--innrykk'
+        className: skjemaelementInnrykkKlasse
     },
     AAP: {label: 'AAP'},
-    AAP_MAXTID: {label: 'AAP maxtid', className: 'skjemaelement--innrykk'},
-    AAP_UNNTAK: {label: 'AAP unntak', className: 'skjemaelement--innrykk'},
+    AAP_MAXTID: {label: 'AAP maxtid', className: skjemaelementInnrykkKlasse},
+    AAP_UNNTAK: {label: 'AAP unntak', className: skjemaelementInnrykkKlasse},
     TILTAKSPENGER: {label: 'Tiltakspenger'}
 };
 
@@ -193,10 +215,10 @@ export const ytelseAapSortering = {
 };
 
 export const rettighetsgruppe = {
-    AAP: 'Arbeidsavklaringspenger',
-    DAGP: 'Dagpenger',
-    INDS: 'Tiltakspenger',
-    IYT: 'Ingen livsoppholdsytelser Arena'
+    AAP: {label: 'Arbeidsavklaringspenger'},
+    DAGP: {label: 'Dagpenger'},
+    INDS: {label: 'Tiltakspenger'},
+    IYT: {label: 'Ingen livsoppholdsytelser Arena'}
 };
 
 export const aktiviteter = {
@@ -217,20 +239,20 @@ export const cvJobbprofil = {
 };
 
 export const stillingFraNavFilter = {
-    CV_KAN_DELES_STATUS_JA: 'Svart JA til deling av CV'
+    CV_KAN_DELES_STATUS_JA: {label: 'Svart JA til å dele CV med arbeidsgiver'}
 };
 
 export const registreringstype = {
-    ER_PERMITTERT: 'Er permittert eller kommer til å bli permittert',
-    USIKKER_JOBBSITUASJON: 'Er usikker på jobbsituasjonen min',
-    MISTET_JOBBEN: 'Har mistet eller kommer til å miste jobben',
-    VIL_FORTSETTE_I_JOBB: 'Har jobb og ønsker å fortsette i den jobben jeg har',
-    DELTIDSJOBB_VIL_MER: 'Har deltidsjobb, men vil jobbe mer',
-    VIL_BYTTE_JOBB: 'Har jobb, men vil bytte',
-    AKKURAT_FULLFORT_UTDANNING: 'Har akkurat fullført utdanning, militærtjeneste eller annet',
-    HAR_SAGT_OPP: 'Har sagt opp eller kommer til å si opp',
-    ALDRI_HATT_JOBB: 'Har aldri vært i jobb',
-    JOBB_OVER_2_AAR: 'Har ikke vært i jobb de 2 siste årene'
+    ER_PERMITTERT: {label: 'Er permittert eller kommer til å bli permittert'},
+    USIKKER_JOBBSITUASJON: {label: 'Er usikker på jobbsituasjonen min'},
+    MISTET_JOBBEN: {label: 'Har mistet eller kommer til å miste jobben'},
+    VIL_FORTSETTE_I_JOBB: {label: 'Har jobb og ønsker å fortsette i den jobben jeg har'},
+    DELTIDSJOBB_VIL_MER: {label: 'Har deltidsjobb, men vil jobbe mer'},
+    VIL_BYTTE_JOBB: {label: 'Har jobb, men vil bytte'},
+    AKKURAT_FULLFORT_UTDANNING: {label: 'Har akkurat fullført utdanning, militærtjeneste eller annet'},
+    HAR_SAGT_OPP: {label: 'Har sagt opp eller kommer til å si opp'},
+    ALDRI_HATT_JOBB: {label: 'Har aldri vært i jobb'},
+    JOBB_OVER_2_AAR: {label: 'Har ikke vært i jobb de 2 siste årene'}
 };
 
 export const landgruppe = {
@@ -256,12 +278,12 @@ export const landgruppeTooltips = {
 };
 
 export const utdanning = {
-    INGEN_UTDANNING: 'Ingen utdanning',
-    GRUNNSKOLE: 'Grunnskole',
-    VIDEREGAENDE_GRUNNUTDANNING: 'Videregående grunnutdanning (1 til 2 år)',
-    VIDEREGAENDE_FAGBREV_SVENNEBREV: 'Videregående, fagbrev eller svennebrev (3 år eller mer)',
-    HOYERE_UTDANNING_1_TIL_4: 'Høyere utdanning (1 til 4 år)',
-    HOYERE_UTDANNING_5_ELLER_MER: 'Høyere utdanning (5 år eller mer)'
+    INGEN_UTDANNING: {label: 'Ingen utdanning'},
+    GRUNNSKOLE: {label: 'Grunnskole'},
+    VIDEREGAENDE_GRUNNUTDANNING: {label: 'Videregående grunnutdanning (1 til 2 år)'},
+    VIDEREGAENDE_FAGBREV_SVENNEBREV: {label: 'Videregående, fagbrev eller svennebrev (3 år eller mer)'},
+    HOYERE_UTDANNING_1_TIL_4: {label: 'Høyere utdanning (1 til 4 år)'},
+    HOYERE_UTDANNING_5_ELLER_MER: {label: 'Høyere utdanning (5 år eller mer)'}
 };
 
 export const utdanningGodkjent = {
@@ -320,6 +342,31 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
+export const avvik14aVedtakHovedFilter = {
+    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Har avvik'}
+};
+
+export const avvik14aVedtakAvhengigeFilter = {
+    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulik', className: skjemaelementInnrykkKlasse},
+    [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {
+        label: 'Innsatsgruppe ulik',
+        className: skjemaelementInnrykkKlasse
+    },
+    [mapFilternavnTilFilterValue.innsatsgruppeOgHovedmalUlik]: {
+        label: 'Innsatsgruppe og hovedmål ulik',
+        className: skjemaelementInnrykkKlasse
+    },
+    [mapFilternavnTilFilterValue.innsatsgruppeManglerINyKilde]: {
+        label: 'Innsatsgruppe mangler',
+        className: skjemaelementInnrykkKlasse
+    }
+};
+
+export const avvik14aVedtak = {
+    ...avvik14aVedtakHovedFilter,
+    ...avvik14aVedtakAvhengigeFilter
+};
+
 const filterKonstanter = {
     ytelseUtlopsSortering,
     ferdigfilterListe,
@@ -347,7 +394,8 @@ const filterKonstanter = {
     hendelserLabels,
     ulesteEndringer,
     tolkebehov,
-    stillingFraNavFilter
+    stillingFraNavFilter,
+    avvik14aVedtak
 };
 
 export default filterKonstanter;

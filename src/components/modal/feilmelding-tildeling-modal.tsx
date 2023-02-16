@@ -39,7 +39,7 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
                     </BodyShort>
                 </div>
             )}
-            <Button variant="secondary" onClick={props.onClose}>
+            <Button variant="secondary" size="small" onClick={props.onClose}>
                 Lukk
             </Button>
         </VarselModal>

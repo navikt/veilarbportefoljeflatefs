@@ -13,7 +13,9 @@ interface VelgalleCheckboksProps {
 }
 
 function VelgAlleCheckboks({disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
-    const onClickHandler = () => markerAlle(!alleMarkert);
+    const onClickHandler = () => {
+        markerAlle(!alleMarkert);
+    };
 
     return (
         <Checkbox

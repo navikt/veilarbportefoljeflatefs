@@ -26,7 +26,7 @@ function VeiledergruppeendringFeiletModal(props: VeiledergruppeendringFeiletProp
                 <BodyShort size="small">{props.tekst}</BodyShort>
             </div>
             <div className="veiledergruppe-feilet-modal__knappegruppe">
-                <Button type="submit" onClick={props.onRequestClose}>
+                <Button size="small" type="submit" onClick={props.onRequestClose}>
                     Ok
                 </Button>
             </div>

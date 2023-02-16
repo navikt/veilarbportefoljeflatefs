@@ -41,7 +41,7 @@ export function MineFilterVarselModal(props: {
                     Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
                 </BodyShort>
             )}
-            <Button className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
+            <Button size="small" className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
                 Lukk
             </Button>
         </VarselModal>

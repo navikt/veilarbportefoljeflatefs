@@ -27,7 +27,9 @@ function FeilmeldingBrukereModal(props: FeilmeldingBrukereModalProps) {
             </Heading>
             <BodyShort size="small">{props.infotekstTekst}</BodyShort>
             <FnrList listeMedFnr={props.fnrFeil} />
-            <Button onClick={props.onClose}>Ok</Button>
+            <Button onClick={props.onClose} size="small">
+                Ok
+            </Button>
         </VarselModal>
     );
 }

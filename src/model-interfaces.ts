@@ -46,7 +46,7 @@ export enum Sorteringsfelt {
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    CV_SVARFRIST = 'cv_svarfrist'
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
 }
 
 export interface FiltervalgModell {
@@ -86,6 +86,7 @@ export interface FiltervalgModell {
     stillingFraNavFilter: string[];
     geografiskBosted: string[];
     visGeografiskBosted: string[];
+    avvik14aVedtak: string[];
 }
 
 export interface EnhetModell {
@@ -119,6 +120,7 @@ export interface BrukerModell {
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
     egenAnsatt: boolean;
+    skjermetTil?: string;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
     trengerVurdering: boolean;
@@ -172,6 +174,7 @@ export interface BrukerModell {
     harUtelandsAddresse?: boolean;
     harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
+    avvik14aVedtak: string;
 }
 
 interface Statsborgerskap {
@@ -231,6 +234,12 @@ export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';
     beskrivelse: any;
+}
+
+export interface SkjermingEtikettConfig {
+    hidden: true | false;
+    tittel: string | null;
+    type: 'error' | 'warning' | 'info' | 'success';
 }
 
 export interface IdentParam {

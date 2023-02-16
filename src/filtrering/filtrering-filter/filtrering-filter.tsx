@@ -2,6 +2,8 @@ import * as React from 'react';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     alder,
+    avvik14aVedtak,
+    avvik14aVedtakAvhengigeFilter,
     cvJobbprofil,
     fodselsdagIMnd,
     formidlingsgruppe,
@@ -10,6 +12,7 @@ import {
     kjonn,
     manuellBrukerStatus,
     manuellBrukerStatusUtenKRR,
+    mapFilternavnTilFilterValue,
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
@@ -17,12 +20,11 @@ import {
     utdanning,
     ytelse
 } from '../filter-konstanter';
-import OverskriftMedHjelpeTekst from '../../components/overskrift-med-hjelpetekst';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -44,10 +46,86 @@ interface FiltreringFilterProps {
     oversiktType: OversiktType;
 }
 
+type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
+
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
     const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
+    const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
+
+    const avvik14aVedtakValg = () => {
+        const erIndeterminate = () => {
+            return () => {
+                const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
+
+                const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
+                    Object.keys(avhengigeFilter).includes(valgtFilter)
+                );
+
+                return (
+                    valgteAvhengigeFilter.length > 0 &&
+                    valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length
+                );
+            };
+        };
+
+        return {
+            ...avvik14aVedtak,
+            [mapFilternavnTilFilterValue.harAvvik]: {
+                ...avvik14aVedtak.HAR_AVVIK,
+                indeterminate: erIndeterminate()
+            }
+        };
+    };
+
+    const filterEndring = (filterNavn: string, forrigeFilter: string[], nyeFilter: string[]): FilterEndring => {
+        if (forrigeFilter.includes(filterNavn) && !nyeFilter.includes(filterNavn)) {
+            return 'FJERNET';
+        }
+
+        if (!forrigeFilter.includes(filterNavn) && nyeFilter.includes(filterNavn)) {
+            return 'LAGT_TIL';
+        }
+
+        return 'UENDRET';
+    };
+
+    const endreAvvik14aVedtakFilterValg = () => {
+        return (form: string, filterVerdi: string[]) => {
+            const filterForEndring: string[] = filtervalg.avvik14aVedtak;
+            const filterEtterEndring: string[] = filterVerdi;
+
+            const hovedfilterEndring: FilterEndring = filterEndring(
+                mapFilternavnTilFilterValue.harAvvik,
+                filterForEndring,
+                filterEtterEndring
+            );
+
+            if (hovedfilterEndring === 'FJERNET') {
+                return endreFiltervalg(form, []);
+            }
+
+            if (hovedfilterEndring === 'LAGT_TIL') {
+                return endreFiltervalg(form, Object.keys(avvik14aVedtak));
+            }
+
+            const ingenAvhengigeFilterValgt: boolean = !filterEtterEndring.some(f =>
+                Object.keys(avvik14aVedtakAvhengigeFilter).includes(f)
+            );
+
+            if (ingenAvhengigeFilterValgt) {
+                return endreFiltervalg(form, []);
+            }
+
+            return endreFiltervalg(
+                form,
+                filterVerdi.includes(mapFilternavnTilFilterValue.harAvvik)
+                    ? filterVerdi
+                    : [mapFilternavnTilFilterValue.harAvvik, ...filterVerdi]
+            );
+        };
+    };
 
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
@@ -175,6 +253,32 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
+            {erAvvik14aVedtakFilterFeatureTogglePa && (
+                <div className="filtrering-filter__kolonne">
+                    <Label size="small">Utfasing av Arena</Label>
+                    <Dropdown
+                        name="Avvik §14a-vedtak"
+                        id="arena-migrering"
+                        render={() => (
+                            <>
+                                {/* TODO: Bruke riktig lenke til Navet */}
+                                {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
+                                <Alert variant="info" size="small" className="registrering-alert">
+                                    Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og
+                                    iverksatte §14a-vedtak for de samme brukerne.{' '}
+                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
+                                </Alert>
+                                <CheckboxFilterform
+                                    valg={avvik14aVedtakValg()}
+                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
+                                    filtervalg={filtervalg}
+                                    form="avvik14aVedtak"
+                                />
+                            </>
+                        )}
+                    />
+                </div>
+            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
                 <Dropdown
@@ -279,32 +383,16 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <OverskriftMedHjelpeTekst
-                    overskriftTekst="Aktivitet"
-                    hjelpeTekst="Visning av aktiviteter og dato i liste gjelder kun avtalte aktiviteter bruker har med NAV."
-                />
+                <Label size="small">Aktivitet</Label>
                 <Dropdown
-                    name="Stilling fra Nav"
-                    id="stillingFraNav"
-                    hidden={!erStillingFraNavFeatureTogglePa}
-                    render={() => (
-                        <CheckboxFilterform
-                            form="stillingFraNavFilter"
-                            valg={stillingFraNavFilter}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
-                    name="Aktivitet"
+                    name="Aktivitet (avtalt med NAV)"
                     id="aktivitet"
                     render={() => (
                         <AktivitetFilterformController filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown
-                    name="Tiltakstype"
+                    name="Tiltakstype (avtalt med NAV)"
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
@@ -314,6 +402,19 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             endreFiltervalg={endreFiltervalg}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Stilling fra NAV (dele CV med arbeidsgiver)"
+                    id="stillingFraNav"
+                    hidden={!erStillingFraNavFeatureTogglePa}
+                    render={() => (
+                        <CheckboxFilterform
+                            form="stillingFraNavFilter"
+                            valg={stillingFraNavFilter}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />

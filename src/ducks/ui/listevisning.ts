@@ -44,7 +44,8 @@ export enum Kolonne {
     TOLKEBEHOV = 'tolkebehov',
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
-    CV_SVARFRIST = 'cv_svarfrist'
+    CV_SVARFRIST = 'cv_svarfrist',
+    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak'
 }
 
 export enum OversiktType {

@@ -27,6 +27,7 @@ function FiltreringLabelArbeidsliste({
     });
     return (
         <Button
+            size="small"
             title={`Arbeidslistekategori ${lagConfig(label).label}`}
             aria-label="Slett filter"
             className={buttonClassnames}

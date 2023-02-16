@@ -1,6 +1,6 @@
 .tour-modal {
     padding: 0 !important;
-    background-color: var(--navds-semantic-color-canvas-background-light);
+    background-color: var(--a-bg-default);
     display: flex;
     flex-direction: column;
     min-width: 33.25rem;

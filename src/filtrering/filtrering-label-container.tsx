@@ -6,6 +6,7 @@ import FilterKonstanter, {
     aktiviteter,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
+    mapFilternavnTilFilterValue,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -18,6 +19,7 @@ import {pagineringSetup} from '../ducks/paginering';
 import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -222,6 +224,33 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
+            } else if (key === 'avvik14aVedtak') {
+                return value.map(singleValue => {
+                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                        return null;
+                    }
+
+                    // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
+                    // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
+                    // filter-etiketter fjernes
+                    const fjernAvvik14aHovedFilter = value.length <= 2;
+                    const slettAvvik14aVedtakFilter = () => {
+                        if (fjernAvvik14aHovedFilter) {
+                            slettEnkelt(key, singleValue);
+                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
+                        } else {
+                            slettEnkelt(key, singleValue);
+                        }
+                    };
+
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={getLabel(singleValue, key, enhettiltak)}
+                            slettFilter={slettAvvik14aVedtakFilter}
+                        />
+                    );
+                });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (
@@ -298,6 +327,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
             dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }

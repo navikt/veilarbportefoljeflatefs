@@ -17,7 +17,7 @@ export default function SeFlereMoterKnapp({cssId, antalDager, maxAntallDager, se
         <Button
             id={cssId}
             variant="tertiary"
-            size="medium"
+            size="small"
             onClick={e => {
                 setMaxAntall(maxAntallDager + 1);
                 e.stopPropagation();

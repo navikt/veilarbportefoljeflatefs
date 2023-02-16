@@ -225,6 +225,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         >
                             <div className="veiledergruppe-modal__knappegruppe">
                                 <Button
+                                    size="small"
                                     className="veiledergruppe-modal__knappegruppe__lagre"
                                     type="submit"
                                     data-testid="veiledergruppe_modal_lagre-knapp"
@@ -232,6 +233,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                     {props.lagreKnappeTekst}
                                 </Button>
                                 <Button
+                                    size="small"
                                     variant="secondary"
                                     className="veiledergruppe-modal__knappegruppe__avbryt"
                                     type="button"
@@ -242,6 +244,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                 </Button>
                                 {props.onSlett && (
                                     <Button
+                                        size="small"
                                         className="veiledergruppe-modal__knappegruppe__slett"
                                         variant="danger"
                                         type="button"

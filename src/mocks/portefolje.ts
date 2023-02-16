@@ -3,6 +3,7 @@ import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {KategoriModell} from '../model-interfaces';
+import moment from 'moment';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -21,6 +22,7 @@ let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
 
 let i = 123456;
+
 function lagGrunndata() {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
@@ -177,6 +179,9 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
+    const random_egenAnsatt = erSkjermet();
+    const random_harSkjermetTil = erSkjermet();
+
     return {
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
@@ -190,7 +195,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
-        egenAnsatt,
+        egenAnsatt: random_egenAnsatt ? true : '',
+        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
         fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
         fodselsdato: grunndata.fodselsdato,
@@ -231,9 +237,32 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         talespraaktolk: hentSpraak(),
         tegnspraaktolk: hentSpraak(),
         tolkBehovSistOppdatert: randomDate({past: true}),
-        nesteSvarfristCvStillingFraNav: '2023-06-12'
+        nesteSvarfristCvStillingFraNav: '2023-06-12',
+        avvik14aVedtak: randomAvvik14aVedtak()
     };
 }
+
+const erSkjermet = () => {
+    let randomArray = new Int8Array(1);
+    window.crypto.getRandomValues(randomArray);
+
+    if (randomArray[0] % 5 === 0) {
+        return true;
+    }
+    return false;
+};
+
+const randomAvvik14aVedtak = () => {
+    const avvikListe = [
+        'HOVEDMAL_ULIK',
+        'INNSATSGRUPPE_ULIK',
+        'INNSATSGRUPPE_OG_HOVEDMAL_ULIK',
+        'INNSATSGRUPPE_MANGLER_I_NY_KILDE',
+        'INGEN_AVVIK'
+    ];
+
+    return avvikListe[Math.floor(Math.random() * avvikListe.length)];
+};
 
 const hentLand = () => {
     const landListe = [
@@ -305,6 +334,14 @@ const randomDate = ({past}) => {
         ar = -rnd(0, 4) + new Date().getFullYear();
     }
     return new Date(ar, mnd - 1, dag).toISOString();
+};
+
+const randomDateInNearFuture = () => {
+    return moment()
+        .add(rnd(0, 20), 'days')
+        .add(rnd(0, 23), 'hours')
+        .add(rnd(10, 50), 'minutes')
+        .format('YYYY-MM-DD HH:mm');
 };
 
 export function hentArbeidsliste() {
