@@ -12,6 +12,18 @@ interface EtiketterProps {
 function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
+    const adressebeskyttelseTekst = kode => {
+        switch (kode) {
+            case '6':
+                return 'Adressebeskyttet: strengt fortrolig';
+            case '7':
+                return 'Adressebeskyttet: fortrolig';
+            case '19':
+                return 'Adressebeskyttet: strengt fortrolig utland';
+            default:
+                return kode;
+        }
+    };
     return (
         <>
             <HiddenEtikett variant="info" size="small" hidden={!bruker.erDoed} className="tabell-etikett etikett--doed">
@@ -26,7 +38,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 Sikkerhetstiltak
             </HiddenEtikett>
             <HiddenEtikett variant="warning" size="small" hidden={!bruker.diskresjonskode} className="tabell-etikett">
-                {`Kode ${bruker.diskresjonskode}`}
+                {adressebeskyttelseTekst(bruker.diskresjonskode)}
             </HiddenEtikett>
             <HiddenEtikett
                 variant={skjermetInfo.type}
