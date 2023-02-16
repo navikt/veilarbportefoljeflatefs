@@ -31,7 +31,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
-                <div className="nav-input">
+                <div>
                     <ArbeidslisteInformasjonsmelding />
                     <Heading size="small" level="2">
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
