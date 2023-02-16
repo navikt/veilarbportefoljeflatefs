@@ -35,13 +35,6 @@
     top: 2.5rem;
     -webkit-backface-visibility: hidden;
 }
-.tabell .tabellheader__lenke {
-    display: flex;
-}
-.tabell .tabellheader__tekst {
-    width: max-content;
-    padding: 0.2rem;
-}
 .tabell .tabellheader__pil {
     width: 1rem;
     height: 1rem;

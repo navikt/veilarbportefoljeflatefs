@@ -6,7 +6,7 @@ import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
 import {IdentParam} from '../../model-interfaces';
 import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
@@ -64,9 +64,7 @@ function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
                     inneholderBrukerMedOgUtenArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
             >
-                <BodyShort size="small" className="toolbar-knapp__tekst">
-                    {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
-                </BodyShort>
+                {inneholderBrukerMedOgUtenArbeidsliste ? 'Fjern fra arbeidsliste' : 'Legg i arbeidsliste'}
             </Button>
             {modalSkalVises && <ArbeidslisteModal isOpen={modalSkalVises} valgteBrukere={valgteBrukere} />}
         </>
