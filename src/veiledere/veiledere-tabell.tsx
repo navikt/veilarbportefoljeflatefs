@@ -61,7 +61,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                     <thead>
                         <tr>
                             <th scope="col" className="tabellheader">
-                                <div className="tabellheader__lenke">
+                                <div className="tabellheader__lenke tabellheader__tekst">
                                     <Button
                                         size="small"
                                         variant="tertiary"
@@ -76,14 +76,14 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Etternavn, ingen sortering'
                                         }
                                     >
-                                        <BodyShort size="small">Etternavn</BodyShort>
+                                        Etternavn
                                     </Button>
-                                    <BodyShort size="small">, Fornavn</BodyShort>
+                                    , Fornavn
                                     {sorteringspil(sorterEtternavn)}
                                 </div>
                             </th>
-                            <th scope="col" className="tabellheader">
-                                <BodyShort size="small">NAV-ident</BodyShort>
+                            <th scope="col" className="tabellheader__tekst">
+                                NAV-ident
                             </th>
                             <th className="tabellheader tabell-element-center" scope="col">
                                 <div
@@ -104,7 +104,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                                 : 'Antall brukere, ingen sortering'
                                         }
                                     >
-                                        <BodyShort size="small">Antall brukere</BodyShort>
+                                        Antall brukere
                                     </Button>
                                     {sorteringspil(sorterPaaPortefoljeStr)}
                                 </div>

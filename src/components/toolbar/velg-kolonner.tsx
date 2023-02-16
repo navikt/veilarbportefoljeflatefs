@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './toolbar.css';
 import {useFocus} from '../../hooks/use-focus';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {Table} from '@navikt/ds-icons';
 
 interface VelgKolonnerProps {
@@ -81,9 +81,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
                 data-testid="dropdown-knapp_velg-kolonner"
                 ref={btnRef}
             >
-                <BodyShort size="small" className="toolbar-knapp__tekst">
-                    Velg kolonner
-                </BodyShort>
+                Velg kolonner
             </Button>
 
             {innhold}

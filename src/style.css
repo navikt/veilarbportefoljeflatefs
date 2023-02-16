@@ -44,11 +44,14 @@
 
 .tabell .tabellheader__lenke {
     display: flex;
-}
-
-.tabell .tabellheader__tekst {
     width: max-content;
-    padding: 0.2rem;
+    font-size: 14px;
+}
+.tabell .tabellheader__tekst {
+    font-size: 14px;
+}
+.tabell .tabellheader__tekst span {
+    font-weight: normal;
 }
 
 .tabell .tabellheader__pil {

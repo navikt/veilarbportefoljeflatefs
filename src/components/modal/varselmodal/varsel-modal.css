@@ -1,11 +1,6 @@
-.varsel-modal {
+.varsel-modal__ikon {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    padding: 1rem !important;
-}
-.varsel-modal__ikon {
-    align-items: center;
 }
 .varsel-modal__ikon svg {
     width: 4rem;

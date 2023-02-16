@@ -7,7 +7,7 @@ import './arbeidsliste.css';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
+import {Button, Detail, Heading} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
@@ -31,7 +31,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
-                <div className="nav-input">
+                <div>
                     <ArbeidslisteInformasjonsmelding />
                     <Heading size="small" level="2">
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
@@ -81,7 +81,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     icon={<Delete />}
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
-                    <BodyShort size="small">Fjern</BodyShort>
+                    Fjern
                 </Button>
             </div>
         </Form>

@@ -31,6 +31,7 @@ function FormikInput({name, index}: FormikInputProps) {
                 return (
                     <TextField
                         id={name}
+                        className="arbeidsliste-modal__tittel"
                         size="small"
                         label="Tittel"
                         onChange={form.handleChange}

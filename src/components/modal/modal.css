@@ -1,6 +1,5 @@
 .navds-modal {
-    width: 40rem;
-    padding: 1rem;
+    max-width: 40rem;
 }
 .navds-modal .modal-header {
     border-bottom: 1px solid #a0a0a0;

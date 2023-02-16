@@ -3,7 +3,7 @@ import {useEventListener} from '../../hooks/use-event-listener';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {oppdaterBrukerfeil, nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
@@ -105,9 +105,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             onClick={klikk}
             data-testid={props.testid}
         >
-            <BodyShort size="small" className="toolbar-knapp__tekst">
-                {props.tittel}
-            </BodyShort>
+            {props.tittel}
         </Button>
     );
 }
