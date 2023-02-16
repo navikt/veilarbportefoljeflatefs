@@ -44,7 +44,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant={skjermetInfo.type}
                 size="small"
                 hidden={skjermetInfo.hidden}
-            >{`${skjermetInfo.tittel} person`}</HiddenEtikett>
+            >{`${skjermetInfo.tittel}`}</HiddenEtikett>
             <HiddenEtikett
                 variant="info"
                 size="small"

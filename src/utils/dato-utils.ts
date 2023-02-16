@@ -212,7 +212,7 @@ export function hentSkjermetInfo(
     }
 
     const daysUntil = moment(skjermetTil).diff(moment(), 'days');
-    const tittelVerdi = !skjermetTil ? 'Skjermet' : 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
+    const tittelVerdi = !skjermetTil ? 'Skjermet person' : 'Skjermet til ' + moment(skjermetTil).format('DD.MM.YYYY');
 
     if (daysUntil < 5) {
         return {
