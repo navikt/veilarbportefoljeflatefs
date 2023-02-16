@@ -62,7 +62,6 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
         const filter: LagretFilter = dragAndDropOrder.find(
             sortertFilter => `${sortertFilter.filterId}` === filterId
         ) as LagretFilter;
-
         logEvent(
             'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
             {},
@@ -96,9 +95,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
     }, [stateFilterOrder]);
 
     useEffect(() => {
-        if (valgtMineFilter !== undefined && valgtMineFilter !== null) {
-            setValgtFilter(`${valgtMineFilter.filterId}`);
-        }
+        setValgtFilter(`${valgtMineFilter?.filterId ?? ''}`);
     }, [valgtMineFilter]);
 
     if (isDraggable) {

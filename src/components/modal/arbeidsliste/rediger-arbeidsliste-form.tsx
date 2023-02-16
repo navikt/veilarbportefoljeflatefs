@@ -31,7 +31,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
     return (
         <Form data-testid="modal_rediger-arbeidsliste_form">
             <div className="arbeidsliste__bruker">
-                <div className="nav-input">
+                <div>
                     <ArbeidslisteInformasjonsmelding />
                     <Heading size="small" level="2">
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
@@ -49,6 +49,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
             </div>
             <div className="modal-footer">
                 <Button
+                    size="small"
                     type="submit"
                     className="knapp knapp--hoved"
                     data-testid="modal_rediger-arbeidsliste_lagre-knapp"
@@ -63,6 +64,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Lagre
                 </Button>
                 <Button
+                    size="small"
                     variant="secondary"
                     className="knapp knapp--avbryt"
                     onClick={props.lukkModal}
@@ -71,6 +73,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     Avbryt
                 </Button>
                 <Button
+                    size="small"
                     className="fjern--knapp"
                     variant="danger"
                     type="button"

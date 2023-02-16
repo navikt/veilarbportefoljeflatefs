@@ -40,10 +40,13 @@ export enum Sorteringsfelt {
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    BOSTED_KOMMUNE = 'kommunenummer',
+    BOSTED_BYDEL = 'bydelsnummer',
+    BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    CV_SVARFRIST = 'cv_svarfrist'
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
 }
 
 export interface FiltervalgModell {
@@ -81,6 +84,9 @@ export interface FiltervalgModell {
     tolkebehov: string[];
     tolkBehovSpraak: string[];
     stillingFraNavFilter: string[];
+    geografiskBosted: string[];
+    visGeografiskBosted: string[];
+    avvik14aVedtak: string[];
 }
 
 export interface EnhetModell {
@@ -114,6 +120,7 @@ export interface BrukerModell {
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
     egenAnsatt: boolean;
+    skjermetTil?: string;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
     trengerVurdering: boolean;
@@ -161,7 +168,13 @@ export interface BrukerModell {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     tolkBehovSistOppdatert?: string;
+    bostedKommune?: string;
+    bostedBydel?: string;
+    bostedSistOppdatert?: string;
+    harUtelandsAddresse?: boolean;
+    harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
+    avvik14aVedtak: string;
 }
 
 interface Statsborgerskap {
@@ -221,6 +234,12 @@ export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';
     beskrivelse: any;
+}
+
+export interface SkjermingEtikettConfig {
+    hidden: true | false;
+    tittel: string | null;
+    type: 'error' | 'warning' | 'info' | 'success';
 }
 
 export interface IdentParam {

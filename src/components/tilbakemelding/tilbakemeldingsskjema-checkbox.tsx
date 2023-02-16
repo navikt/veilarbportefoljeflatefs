@@ -37,7 +37,7 @@ function TilbakemeldingsskjemaCheckbox({
                     data-testid="tilfredshet_kommentarfelt"
                 />
             </div>
-            <Button type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
+            <Button size="small" type="submit" className="knapp--hoved" data-testid="tilfredshet_send-knapp">
                 Send
             </Button>
         </form>

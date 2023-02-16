@@ -35,3 +35,7 @@
     width: fit-content;
     margin: auto 0 auto auto;
 }
+
+.veilarbportefoljeflatefs .tabell-etikett {
+    padding: 0.125rem 0.25rem;
+}

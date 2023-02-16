@@ -10,15 +10,21 @@ describe('Filter min arbeidsliste', () => {
 
     beforeEach('Gå til Min oversikt', () => {
         cy.gaTilOversikt('min-oversikt');
+    });
+
+    it('Sjekk tekst på legg til i / fjern fra arbeidslisteknapp', () => {
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
+        cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('not.exist');
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
+        cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled');
+    })
+
+    it('Legg til person i lilla arbeidsliste', () => {
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
             antallFor = $tall.text();
         });
-    });
-
-    it('Legg til person i lilla arbeidsliste', () => {
         cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.disabled');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.getByTestId('min-oversikt_brukerliste-checkbox').first().check();
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
@@ -34,4 +40,5 @@ describe('Filter min arbeidsliste', () => {
             expect(antallFor).not.to.eq($tall.text());
         });
     });
+
 });

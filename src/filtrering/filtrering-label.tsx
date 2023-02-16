@@ -41,6 +41,7 @@ function FiltreringLabel({
 
     return (
         <Button
+            size="small"
             variant="primary"
             title={lagConfig(label).label}
             aria-label={arialLabel}

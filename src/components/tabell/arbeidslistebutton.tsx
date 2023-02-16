@@ -17,6 +17,7 @@ interface ArbeidslisteButtonProps {
 const arbeidslisteButton = ({className, onClick, apen, dataTestid, skalVises}: ArbeidslisteButtonProps) =>
     skalVises ? (
         <Button
+            size="small"
             className={classnames('knapp brukerliste__arbeidslisteknapp', className)}
             variant="tertiary"
             onClick={onClick}

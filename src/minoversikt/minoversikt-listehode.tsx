@@ -168,15 +168,34 @@ function MinOversiktListeHode({
                 />
 
                 <SorteringHeader
-                    sortering={Sorteringsfelt.CV_SVARFRIST}
+                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
-                    tekst="CV svarfrist"
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
+                    tekst="Bosted"
                     className="col col-xs-2"
-                    skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                    title="Svarfrist for å svare ja til deling av CV"
-                    headerId="cv-svarfrist"
+                    headerId="bosted_kommune"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_BYDEL}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
+                    tekst="Bosted detaljer"
+                    className="col col-xs-2"
+                    headerId="bosted_bydel"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    tekst="Bosted sist oppdatert"
+                    headerId="bosted_sist_oppdatert"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 />
 
                 <SorteringHeader
@@ -456,6 +475,25 @@ function MinOversiktListeHode({
                     title="Dato siste endring"
                     headerId="dato-siste-endring"
                 />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.CV_SVARFRIST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
+                    tekst="CV svarfrist"
+                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                    title="Svarfrist for å svare ja til deling av CV"
+                    headerId="cv-svarfrist"
+                />
+                <Header
+                    skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                    className="col col-xs-2"
+                    title="Avvik §14a-vedtak"
+                    headerId="avvik14avedtak"
+                >
+                    Avvik §14a-vedtak
+                </Header>
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

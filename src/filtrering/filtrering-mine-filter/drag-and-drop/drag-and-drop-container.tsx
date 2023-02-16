@@ -182,6 +182,7 @@ function DragAndDropContainer({
             </ul>
             <div className="drag-and-drop-knapper">
                 <Button
+                    size="small"
                     className="drag-and-drop-knapp-lagre"
                     aria-label="Lagre sortering"
                     onClick={() => lagreRekkefolge()}
@@ -190,6 +191,7 @@ function DragAndDropContainer({
                     Lagre
                 </Button>
                 <Button
+                    size="small"
                     variant="secondary"
                     className="drag-and-drop-knapp-avbryt"
                     aria-label="Avbryt sortering"
@@ -199,6 +201,7 @@ function DragAndDropContainer({
                     Avbryt
                 </Button>
                 <Button
+                    size="small"
                     variant="tertiary"
                     className="drag-and-drop-knapp-nullstill"
                     aria-label="Nullstill til alfabetisk sortering"

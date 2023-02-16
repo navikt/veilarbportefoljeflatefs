@@ -6,6 +6,7 @@ import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {hentPortefoljeStorrelser} from '../../ducks/portefoljestorrelser';
 import {hentVeiledereForEnhet} from '../../ducks/veiledere';
 import {hentLagretFilterForEnhet} from '../../ducks/veiledergrupper_filter';
+import {hentGeografiskBosted} from '../../ducks/geografiskBosted';
 import {hentFoedelandList} from '../../ducks/foedeland';
 import {hentTolkebehovSpraak} from '../../ducks/tolkebehov';
 
@@ -25,6 +26,7 @@ export function useFetchPortefoljeData() {
             dispatch(hentLagretFilterForEnhet(enhet));
             dispatch(hentFoedelandList(enhet));
             dispatch(hentTolkebehovSpraak(enhet));
+            dispatch(hentGeografiskBosted(enhet));
         }
     }, [enhet, dispatch]);
 

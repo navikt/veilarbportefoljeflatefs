@@ -6,6 +6,7 @@ export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) 
     return (
         <div className="mine-filter-meny-modal__wrapper">
             <Button
+                size="small"
                 className="ny-knapp"
                 data-testid="lagre-nytt-filter_modal_knapp"
                 onClick={() => props.setValgtVisningstype(Visningstype.LAGRE_NYTT)}
@@ -18,6 +19,7 @@ export function Meny(props: {setValgtVisningstype: (visningstype: Visningstype) 
             </BodyShort>
 
             <Button
+                size="small"
                 variant="secondary"
                 className="eksisterende-knapp"
                 data-testid="oppdater-eksisterende-filter_modal_knapp"

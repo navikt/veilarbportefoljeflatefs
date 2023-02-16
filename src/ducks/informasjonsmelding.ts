@@ -1,7 +1,5 @@
 import {SesjonStatus} from '../model-interfaces';
-import {Action} from 'redux';
-
-type DataAction<T, D> = Action<T> & {data?: D};
+import {DataAction} from './types';
 
 type SesjonStatusDataAction = DataAction<SesjonStatusAction, SesjonStatus>;
 

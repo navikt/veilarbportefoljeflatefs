@@ -38,10 +38,14 @@ export enum Kolonne {
     FODELAND = 'fodeland',
     STATSBORGERSKAP = 'statsborgerskap',
     STATSBORGERSKAP_GYLDIG_FRA = 'statsborgerskap_gyldig_fra',
+    BOSTED_KOMMUNE = 'bosted_kommune',
+    BOSTED_BYDEL = 'bosted_bydel',
+    BOSTED_SIST_OPPDATERT = 'bosted_sist_oppdatert',
     TOLKEBEHOV = 'tolkebehov',
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
-    CV_SVARFRIST = 'cv_svarfrist'
+    CV_SVARFRIST = 'cv_svarfrist',
+    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak'
 }
 
 export enum OversiktType {
