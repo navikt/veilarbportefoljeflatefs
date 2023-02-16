@@ -1,6 +1,6 @@
 import React from 'react';
 import './knapper.css';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {AddCircle} from '@navikt/ds-icons';
 
 export function LeggTilKnapp(props: {onClick: () => void}) {

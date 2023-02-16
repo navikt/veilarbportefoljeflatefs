@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './toolbar.css';
 import {useFocus} from '../../hooks/use-focus';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {Table} from '@navikt/ds-icons';
 
 interface VelgKolonnerProps {

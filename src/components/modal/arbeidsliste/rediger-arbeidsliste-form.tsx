@@ -7,7 +7,7 @@ import './arbeidsliste.css';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
+import {Button, Detail, Heading} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 

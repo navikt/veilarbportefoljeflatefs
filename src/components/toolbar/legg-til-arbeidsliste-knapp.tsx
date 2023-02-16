@@ -6,7 +6,7 @@ import {useLocation, useParams} from 'react-router';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {Bookmark} from '@navikt/ds-icons';
 import {IdentParam} from '../../model-interfaces';
 import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';

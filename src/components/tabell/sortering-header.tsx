@@ -5,7 +5,7 @@ import Header, {HeaderProps} from './header';
 import './tabell.css';
 import {OrNothing} from '../../utils/types/types';
 import {Down, Up} from '@navikt/ds-icons';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
