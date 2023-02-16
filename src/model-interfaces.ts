@@ -118,6 +118,9 @@ export interface BrukerModell {
     oppfolgingStartdato: string; // dato
     veilederId?: string;
     sikkerhetstiltak: string[];
+    sikkerhetstiltak_gyldig_fra?: string;
+    sikkerhetstiltak_gyldig_til?: string;
+    sikkerhetstiltak_beskrivelse?: string;
     diskresjonskode?: string;
     egenAnsatt: boolean;
     skjermetTil?: string;
@@ -237,6 +240,12 @@ export interface Systemmelding {
 }
 
 export interface SkjermingEtikettConfig {
+    hidden: true | false;
+    tittel: string | null;
+    type: 'error' | 'warning' | 'info' | 'success';
+}
+
+export interface SikkerhetsTiltakEtikettConfig {
     hidden: true | false;
     tittel: string | null;
     type: 'error' | 'warning' | 'info' | 'success';

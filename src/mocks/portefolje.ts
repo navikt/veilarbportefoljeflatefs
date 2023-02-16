@@ -182,6 +182,13 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
 
+    const harSikkerhetsTiltak = Math.random() < 10 / 100;
+    const sikkerhetsTiltakCode = hentSikkerhetstiltak();
+
+    var sikkerhetsTiltakKoderMapper = new Map();
+    sikkerhetsTiltakKoderMapper.set('TOAN', 'To ansatte i samtale');
+    sikkerhetsTiltakKoderMapper.set('FYUS', 'Fysisk utestengelse');
+
     return {
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
@@ -191,7 +198,12 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         nyForVeileder,
         nyForEnhet,
         diskresjonskode: null,
-        sikkerhetstiltak,
+        sikkerhetstiltak: harSikkerhetsTiltak ? hentSikkerhetstiltak() : [],
+        sikkerhetstiltak_gyldig_fra: harSikkerhetsTiltak ? randomDate({past: true}) : null,
+        sikkerhetstiltak_gyldig_til: harSikkerhetsTiltak ? randomDate({past: false}) : null,
+        sikkerhetstiltak_beskrivelse: harSikkerhetsTiltak
+            ? sikkerhetsTiltakKoderMapper.get(sikkerhetsTiltakCode[0])
+            : null,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
@@ -319,6 +331,15 @@ const hentSpraak = () => {
     }
 
     return null;
+};
+
+const hentSikkerhetstiltak = () => {
+    const sikkerhetsTiltakKoder = ['TOAN', 'FYUS'];
+
+    let randomArray = new Int8Array(2);
+    window.crypto.getRandomValues(randomArray);
+
+    return [sikkerhetsTiltakKoder[Math.abs(randomArray[1] % sikkerhetsTiltakKoder.length)]];
 };
 
 const randomEndring = () => {

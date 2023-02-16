@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {Maybe} from './types';
-import {SkjermingEtikettConfig} from '../model-interfaces';
+import {SikkerhetsTiltakEtikettConfig, SkjermingEtikettConfig} from '../model-interfaces';
 
 export function fn(value) {
     return typeof value === 'function' ? value : () => value;
@@ -233,4 +233,32 @@ export function hentSkjermetInfo(
             type: 'info'
         };
     }
+}
+
+export function hentSikkerhetsTiltakInfo(
+    harSikkerhetsTiltak: boolean | undefined,
+    tiltakBeskrivelse: string | undefined,
+    tiltakFra: string | undefined,
+    tiltakTil: string | undefined
+): SikkerhetsTiltakEtikettConfig {
+    if (!harSikkerhetsTiltak) {
+        return {
+            hidden: true,
+            tittel: null,
+            type: 'info'
+        };
+    }
+
+    var tittelVerdi = 'Sikkerhetstiltak';
+    if (tiltakBeskrivelse && tiltakBeskrivelse.length > 0) {
+        tittelVerdi += ': ' + tiltakBeskrivelse;
+    }
+    if (tiltakFra && tiltakTil) {
+        tittelVerdi += ' (til ' + moment(tiltakTil).format('DD.MM.YYYY') + ')';
+    }
+    return {
+        hidden: false,
+        tittel: tittelVerdi,
+        type: 'error'
+    };
 }
