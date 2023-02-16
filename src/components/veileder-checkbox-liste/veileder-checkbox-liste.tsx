@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.css';
@@ -21,6 +22,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const formNavn = 'veiledere';
     const dispatch = useDispatch();
+    const innloggetVeileder = useIdentSelector();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);
@@ -57,14 +59,24 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
             .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
             .map((veileder, index) => {
                 return (
-                    <Checkbox
-                        data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
-                        key={veileder.ident}
-                        size="small"
-                        value={veileder.ident}
-                    >
-                        {veileder.navn}
-                    </Checkbox>
+                    <>
+                        <Checkbox
+                            data-testid={`veilederoversikt_sok-veileder_veilederliste_element_meg`}
+                            key={innloggetVeileder?.ident}
+                            size="small"
+                            value={innloggetVeileder?.ident}
+                        >
+                            {innloggetVeileder?.navn}
+                        </Checkbox>
+                        <Checkbox
+                            data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
+                            key={veileder.ident}
+                            size="small"
+                            value={veileder.ident}
+                        >
+                            {veileder.navn}
+                        </Checkbox>
+                    </>
                 );
             });
     };
