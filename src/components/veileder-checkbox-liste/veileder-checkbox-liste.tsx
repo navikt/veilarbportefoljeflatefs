@@ -28,6 +28,15 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
         setValgteVeiledere(filtervalg.veiledere);
     }, [filtervalg]);
 
+    const alleVeiledere = (input: VeilederModell[]): VeilederModell[] => {
+        input.sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1));
+        if (innloggetVeileder) {
+            input = input.filter(item => item.ident !== innloggetVeileder.ident);
+            input.unshift(innloggetVeileder);
+        }
+        return input;
+    };
+
     const getFiltrerteVeiledere = (): VeilederModell[] => {
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
@@ -55,30 +64,18 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
             return null;
         }
 
-        return veiledere
-            .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
-            .map((veileder, index) => {
-                return (
-                    <>
-                        <Checkbox
-                            data-testid={`veilederoversikt_sok-veileder_veilederliste_element_meg`}
-                            key={innloggetVeileder?.ident}
-                            size="small"
-                            value={innloggetVeileder?.ident}
-                        >
-                            {innloggetVeileder?.navn}
-                        </Checkbox>
-                        <Checkbox
-                            data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
-                            key={veileder.ident}
-                            size="small"
-                            value={veileder.ident}
-                        >
-                            {veileder.navn}
-                        </Checkbox>
-                    </>
-                );
-            });
+        return alleVeiledere(veiledere).map((veileder, index) => {
+            return (
+                <Checkbox
+                    data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
+                    key={veileder.ident}
+                    size="small"
+                    value={veileder.ident}
+                >
+                    {veileder.navn}
+                </Checkbox>
+            );
+        });
     };
 
     const valgCheckboxListe = mapToCheckboxList(getFiltrerteVeiledere());
