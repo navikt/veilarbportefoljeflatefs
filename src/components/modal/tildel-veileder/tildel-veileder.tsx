@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
+import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -21,11 +22,16 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const sorterVeiledere = veiledere.sort((a, b) =>
-        a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
-    );
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-
+    const innloggetVeileder = useIdentSelector();
+    const alleVeiledere = (input: VeilederModell[]): VeilederModell[] => {
+        input.sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1));
+        if (innloggetVeileder) {
+            input = input.filter(item => item.ident !== innloggetVeileder.ident);
+            input.unshift(innloggetVeileder);
+        }
+        return input;
+    };
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, oversiktType, gjeldendeVeileder));
     };
@@ -45,7 +51,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     };
 
     return (
-        <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
+        <SokFilter placeholder="Tildel veileder" data={alleVeiledere(veiledere)}>
             {data => (
                 <TildelVeilederRenderer
                     ident={ident}

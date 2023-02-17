@@ -5,6 +5,8 @@ import '../../filtrering/filtrering-filter/filterform/filterform.css';
 import '../../style.css';
 import SokFilter from './sok-filter';
 import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {VeilederModell} from '../../model-interfaces';
+import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 
 interface SokVeiledereProps {
     handterVeiledereValgt: (veilederIdenter: string[]) => void;
@@ -14,13 +16,18 @@ interface SokVeiledereProps {
 }
 
 function SokVeiledere(props: SokVeiledereProps) {
+    const innloggetVeileder = useIdentSelector();
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) =>
-        a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
-    );
-
+    const alleVeiledere = (input: VeilederModell[]): VeilederModell[] => {
+        input.sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1));
+        if (innloggetVeileder) {
+            input = input.filter(item => item.ident !== innloggetVeileder.ident);
+            input.unshift(innloggetVeileder);
+        }
+        return input;
+    };
     return (
-        <SokFilter placeholder="Søk veileder" data={sorterteVeilederePaEtterNavn}>
+        <SokFilter placeholder="Søk veileder" data={alleVeiledere(veilederePaEnheten)}>
             {liste => (
                 <div className="checkbox-filterform">
                     <CheckboxGroup
