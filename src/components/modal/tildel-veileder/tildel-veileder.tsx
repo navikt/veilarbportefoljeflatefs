@@ -24,7 +24,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector();
-    const alleVeiledere = (input: VeilederModell[]): VeilederModell[] => {
+    const sorterVeiledere = (input: VeilederModell[]): VeilederModell[] => {
         input.sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1));
         if (innloggetVeileder) {
             input = input.filter(item => item.ident !== innloggetVeileder.ident);
@@ -51,7 +51,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     };
 
     return (
-        <SokFilter placeholder="Tildel veileder" data={alleVeiledere(veiledere)}>
+        <SokFilter placeholder="Tildel veileder" data={sorterVeiledere(veiledere)}>
             {data => (
                 <TildelVeilederRenderer
                     ident={ident}

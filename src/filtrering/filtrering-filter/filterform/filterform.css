@@ -235,6 +235,9 @@
     z-index: 1000;
     margin-bottom: 0;
 }
+.veilarbportefoljeflatefs .radio-filterform__valg .navds-radio-buttons div:first-child {
+    border-bottom: 1px solid var(--a-border-divider);
+}
 .veilarbportefoljeflatefs .hendelser-filterform {
     padding: 0.5rem 0 0.5rem 0.5rem;
 }

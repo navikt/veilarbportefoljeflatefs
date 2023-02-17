@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.css';
@@ -22,20 +21,10 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const formNavn = 'veiledere';
     const dispatch = useDispatch();
-    const innloggetVeileder = useIdentSelector();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);
     }, [filtervalg]);
-
-    const alleVeiledere = (input: VeilederModell[]): VeilederModell[] => {
-        input.sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1));
-        if (innloggetVeileder) {
-            input = input.filter(item => item.ident !== innloggetVeileder.ident);
-            input.unshift(innloggetVeileder);
-        }
-        return input;
-    };
 
     const getFiltrerteVeiledere = (): VeilederModell[] => {
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
@@ -64,18 +53,22 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
             return null;
         }
 
-        return alleVeiledere(veiledere).map((veileder, index) => {
-            return (
-                <Checkbox
-                    data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
-                    key={veileder.ident}
-                    size="small"
-                    value={veileder.ident}
-                >
-                    {veileder.navn}
-                </Checkbox>
-            );
-        });
+        return veiledere
+            .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
+            .map((veileder, index) => {
+                return (
+                    <>
+                        <Checkbox
+                            data-testid={`veilederoversikt_sok-veileder_veilederliste_element_${index}`}
+                            key={veileder.ident}
+                            size="small"
+                            value={veileder.ident}
+                        >
+                            {veileder.navn}
+                        </Checkbox>
+                    </>
+                );
+            });
     };
 
     const valgCheckboxListe = mapToCheckboxList(getFiltrerteVeiledere());
