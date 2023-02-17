@@ -253,7 +253,7 @@ export function hentSikkerhetsTiltakInfo(
     if (tiltakBeskrivelse && tiltakBeskrivelse.length > 0) {
         tittelVerdi += ': ' + tiltakBeskrivelse;
     }
-    if (tiltakFra && tiltakTil) {
+    if (tiltakTil) {
         tittelVerdi += ' (til ' + moment(tiltakTil).format('DD.MM.YYYY') + ')';
     }
     return {
