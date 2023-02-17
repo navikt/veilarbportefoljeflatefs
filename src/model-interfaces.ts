@@ -246,7 +246,7 @@ export interface SkjermingEtikettConfig {
 }
 
 export interface SikkerhetsTiltakEtikettConfig {
-    hidden: true | false;
+    hidden: boolean;
     tittel: string | null;
     type: 'error' | 'warning' | 'info' | 'success';
 }
