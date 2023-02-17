@@ -249,7 +249,7 @@ export function hentSikkerhetsTiltakInfo(
         };
     }
 
-    var tittelVerdi = 'Sikkerhetstiltak';
+    let tittelVerdi = 'Sikkerhetstiltak';
     if (tiltakBeskrivelse && tiltakBeskrivelse.length > 0) {
         tittelVerdi += ': ' + tiltakBeskrivelse;
     }
