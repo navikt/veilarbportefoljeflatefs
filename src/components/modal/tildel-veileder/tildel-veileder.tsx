@@ -21,10 +21,14 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
-    const sorterVeiledere = veiledere.sort((a, b) =>
-        a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
-    );
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+
+    const sorterVeiledere = veiledere.sort((a, b) => {
+        if (a.ident == b.ident) return 0;
+        if (a.ident == gjeldendeVeileder) return -1;
+        if (b.ident == gjeldendeVeileder) return 1;
+        return a.etternavn.localeCompare(b.etternavn);
+    });
 
     const doTildelTilVeileder = (tilordninger, tilVeileder) => {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, oversiktType, gjeldendeVeileder));
