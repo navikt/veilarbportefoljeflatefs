@@ -24,9 +24,9 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
 
     const sorterVeiledere = veiledere.sort((a, b) => {
-        if (a.ident == b.ident) return 0;
-        if (a.ident == gjeldendeVeileder) return -1;
-        if (b.ident == gjeldendeVeileder) return 1;
+        if (a.ident === b.ident) return 0;
+        if (a.ident === gjeldendeVeileder) return -1;
+        if (b.ident === gjeldendeVeileder) return 1;
         return a.etternavn.localeCompare(b.etternavn);
     });
 
