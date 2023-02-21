@@ -104,26 +104,28 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                                 onClose={() => lukkModalConfirm(formikProps)}
                                 shouldCloseOnOverlayClick
                             >
-                                <ModalHeader tittel="Rediger arbeidsliste" />
-                                <div className="modal-innhold">
-                                    <RedigerArbeidslisteForm
-                                        laster={statusLaster}
-                                        sistEndretDato={sistEndretDato}
-                                        sistEndretAv={sistEndretAv}
-                                        lukkModal={() => lukkModal(formikProps)}
-                                        bruker={bruker}
-                                        fjernModal={() => dispatch(visFjernArbeidslisteModal())}
-                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                    />
-                                    {modalSkalVises && (
-                                        <FjernArbeidslisteModal
+                                <Modal.Content>
+                                    <ModalHeader tittel="Rediger arbeidsliste" />
+                                    <div className="modal-innhold">
+                                        <RedigerArbeidslisteForm
+                                            laster={statusLaster}
+                                            sistEndretDato={sistEndretDato}
+                                            sistEndretAv={sistEndretAv}
+                                            lukkModal={() => lukkModal(formikProps)}
                                             bruker={bruker}
-                                            isOpen={modalSkalVises}
-                                            valgteBrukere={valgteBrukere}
-                                            lukkModal={() => lukkFjernModal()}
+                                            fjernModal={() => dispatch(visFjernArbeidslisteModal())}
+                                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                         />
-                                    )}
-                                </div>
+                                        {modalSkalVises && (
+                                            <FjernArbeidslisteModal
+                                                bruker={bruker}
+                                                isOpen={modalSkalVises}
+                                                valgteBrukere={valgteBrukere}
+                                                lukkModal={() => lukkFjernModal()}
+                                            />
+                                        )}
+                                    </div>
+                                </Modal.Content>
                             </Modal>
                         </>
                     )}
