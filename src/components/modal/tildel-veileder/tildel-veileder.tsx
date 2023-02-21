@@ -23,11 +23,6 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const classNameOversikt = () => {
-        return oversiktType !== OversiktType.minOversikt
-            ? 'radio-filterform__valg'
-            : 'radio-filterform__valg__min-oversikt';
-    };
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -63,7 +58,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     onSubmit={() => onSubmit()}
                     data={data}
                     btnOnClick={() => onSubmit()}
-                    className={classNameOversikt()}
+                    oversiktType={oversiktType}
                 />
             )}
         </SokFilter>
@@ -76,13 +71,20 @@ interface TildelVeilederRendererProps {
     ident: string | null;
     onChange: (ident: string) => void;
     btnOnClick: () => void;
-    className: string;
+    oversiktType: string | undefined;
 }
 
-function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick, className}: TildelVeilederRendererProps) {
+function TildelVeilederRenderer({
+    data,
+    onSubmit,
+    ident,
+    onChange,
+    btnOnClick,
+    oversiktType
+}: TildelVeilederRendererProps) {
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
-            <RadioGroup hideLegend legend="" className={className} onChange={onChange}>
+            <RadioGroup hideLegend legend="" className="radio-filterform__valg" onChange={onChange}>
                 {data.map((veileder, index) => (
                     <Radio
                         data-testid={`tildel-veileder_valg_${index}`}
@@ -90,6 +92,11 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick, cl
                         name="veileder"
                         size="small"
                         value={veileder.ident}
+                        className={`${
+                            index === 0 && oversiktType === OversiktType.minOversikt
+                                ? 'navds-radio--disabled'
+                                : 'navds-radio'
+                        }`}
                     >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
             </RadioGroup>
