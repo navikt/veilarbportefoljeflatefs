@@ -72,15 +72,17 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
-                            <ModalHeader tittel="Legg i arbeidsliste" />
-                            <div className="modal-innhold">
-                                <LeggTilArbeidslisteForm
-                                    valgteBrukere={valgteBrukere}
-                                    lukkModal={lukkModal}
-                                    innloggetVeileder={innloggetVeileder}
-                                    setFormIsDirty={() => setFormIsDirty(formIsDirty)}
-                                />
-                            </div>
+                            <Modal.Content>
+                                <ModalHeader tittel="Legg i arbeidsliste" />
+                                <div className="modal-innhold">
+                                    <LeggTilArbeidslisteForm
+                                        valgteBrukere={valgteBrukere}
+                                        lukkModal={lukkModal}
+                                        innloggetVeileder={innloggetVeileder}
+                                        setFormIsDirty={() => setFormIsDirty(formIsDirty)}
+                                    />
+                                </div>
+                            </Modal.Content>
                         </Modal>
                     )}
                 </>
