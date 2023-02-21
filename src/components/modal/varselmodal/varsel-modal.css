@@ -1,3 +1,16 @@
+.varsel-modal__innhold {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+.varsel-modal__innhold .error-knapp {
+    margin-top: 1rem;
+}
+.varsel-modal__innhold .typo-normal {
+    word-break: break-word;
+}
 .varsel-modal__ikon {
     display: flex;
     justify-content: center;
