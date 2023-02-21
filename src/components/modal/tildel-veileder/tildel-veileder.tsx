@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -22,6 +23,11 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const classNameOversikt = () => {
+        return oversiktType !== OversiktType.minOversikt
+            ? 'radio-filterform__valg'
+            : 'radio-filterform__valg__min-oversikt';
+    };
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -57,6 +63,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     onSubmit={() => onSubmit()}
                     data={data}
                     btnOnClick={() => onSubmit()}
+                    className={classNameOversikt()}
                 />
             )}
         </SokFilter>
@@ -69,12 +76,13 @@ interface TildelVeilederRendererProps {
     ident: string | null;
     onChange: (ident: string) => void;
     btnOnClick: () => void;
+    className: string;
 }
 
-function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
+function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick, className}: TildelVeilederRendererProps) {
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
-            <RadioGroup hideLegend legend="" className="radio-filterform__valg" onChange={onChange}>
+            <RadioGroup hideLegend legend="" className={className} onChange={onChange}>
                 {data.map((veileder, index) => (
                     <Radio
                         data-testid={`tildel-veileder_valg_${index}`}
