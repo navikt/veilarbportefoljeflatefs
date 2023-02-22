@@ -203,60 +203,62 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         onClose={lukkModal}
                         className={classNames('veiledergruppe-modal', props.className)}
                     >
-                        <ModalHeader tittel={props.modalTittel} />
-                        {alertTekst.length !== 0 && (
-                            <Alert
-                                variant="warning"
-                                className="alerttext"
-                                data-testid="veiledergruppe_modal_alertstripe"
-                                size="small"
+                        <Modal.Content>
+                            <ModalHeader tittel={props.modalTittel} />
+                            {alertTekst.length !== 0 && (
+                                <Alert
+                                    variant="warning"
+                                    className="alerttext"
+                                    data-testid="veiledergruppe_modal_alertstripe"
+                                    size="small"
+                                >
+                                    {alertTekst}
+                                </Alert>
+                            )}
+                            <VeiledergruppeForm
+                                filterValg={filterValg}
+                                gruppeNavn={gruppeNavn}
+                                modalTittel={props.modalTittel}
+                                hanterVeilederChange={handleChange}
+                                setGruppeNavn={hanterGruppeNavnChange}
+                                onSubmit={lagreVeiledergruppeEndringer}
+                                errors={errors}
                             >
-                                {alertTekst}
-                            </Alert>
-                        )}
-                        <VeiledergruppeForm
-                            filterValg={filterValg}
-                            gruppeNavn={gruppeNavn}
-                            modalTittel={props.modalTittel}
-                            hanterVeilederChange={handleChange}
-                            setGruppeNavn={hanterGruppeNavnChange}
-                            onSubmit={lagreVeiledergruppeEndringer}
-                            errors={errors}
-                        >
-                            <div className="veiledergruppe-modal__knappegruppe">
-                                <Button
-                                    size="small"
-                                    className="veiledergruppe-modal__knappegruppe__lagre"
-                                    type="submit"
-                                    data-testid="veiledergruppe_modal_lagre-knapp"
-                                >
-                                    {props.lagreKnappeTekst}
-                                </Button>
-                                <Button
-                                    size="small"
-                                    variant="secondary"
-                                    className="veiledergruppe-modal__knappegruppe__avbryt"
-                                    type="button"
-                                    onClick={lukkModal}
-                                    data-testid="veiledergruppe_modal_avbryt-knapp"
-                                >
-                                    Avbryt
-                                </Button>
-                                {props.onSlett && (
+                                <div className="veiledergruppe-modal__knappegruppe">
                                     <Button
                                         size="small"
-                                        className="veiledergruppe-modal__knappegruppe__slett"
-                                        variant="danger"
-                                        type="button"
-                                        onClick={() => setSletteVeiledergruppeModal(true)}
-                                        icon={<Delete />}
-                                        data-testid="veiledergruppe_modal_slette-knapp"
+                                        className="veiledergruppe-modal__knappegruppe__lagre"
+                                        type="submit"
+                                        data-testid="veiledergruppe_modal_lagre-knapp"
                                     >
-                                        Slett gruppe
+                                        {props.lagreKnappeTekst}
                                     </Button>
-                                )}
-                            </div>
-                        </VeiledergruppeForm>
+                                    <Button
+                                        size="small"
+                                        variant="secondary"
+                                        className="veiledergruppe-modal__knappegruppe__avbryt"
+                                        type="button"
+                                        onClick={lukkModal}
+                                        data-testid="veiledergruppe_modal_avbryt-knapp"
+                                    >
+                                        Avbryt
+                                    </Button>
+                                    {props.onSlett && (
+                                        <Button
+                                            size="small"
+                                            className="veiledergruppe-modal__knappegruppe__slett"
+                                            variant="danger"
+                                            type="button"
+                                            onClick={() => setSletteVeiledergruppeModal(true)}
+                                            icon={<Delete />}
+                                            data-testid="veiledergruppe_modal_slette-knapp"
+                                        >
+                                            Slett gruppe
+                                        </Button>
+                                    )}
+                                </div>
+                            </VeiledergruppeForm>
+                        </Modal.Content>
                     </Modal>
                     <EndringerIkkeLagretModal
                         isOpen={visEndringerIkkeLagretModal}
