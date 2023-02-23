@@ -27,6 +27,9 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
+    adressebeskyttelseEllerSkjermingTotalt?: number;
+    adressebeskyttelseEllerSkjermingUfordelte?: number;
+    adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV?: number;
 }
 
 export interface StatustallState {

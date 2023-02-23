@@ -6,7 +6,8 @@ import {
     UTEN_KRR_FILTER,
     TVUNGEN_STEPPER,
     STILLING_FRA_NAV,
-    VIS_AVVIK_14A_VEDTAK_FILTER
+    VIS_AVVIK_14A_VEDTAK_FILTER,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
 } from '../konstanter';
 
 const toggles = {
@@ -17,7 +18,8 @@ const toggles = {
     [UTEN_KRR_FILTER]: true,
     [TVUNGEN_STEPPER]: false,
     [STILLING_FRA_NAV]: true,
-    [VIS_AVVIK_14A_VEDTAK_FILTER]: true
+    [VIS_AVVIK_14A_VEDTAK_FILTER]: true,
+    [VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING]: true
 };
 
 export default toggles;
