@@ -25,6 +25,9 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
+    const erPaEgenOversikt = (): boolean => {
+        return gjeldendeVeileder === innloggetVeileder;
+    };
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -61,6 +64,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     data={data}
                     btnOnClick={() => onSubmit()}
                     oversiktType={oversiktType}
+                    erPaEgenOversikt={erPaEgenOversikt()}
                 />
             )}
         </SokFilter>
@@ -74,6 +78,7 @@ interface TildelVeilederRendererProps {
     onChange: (ident: string) => void;
     btnOnClick: () => void;
     oversiktType: string | undefined;
+    erPaEgenOversikt: boolean;
 }
 
 function TildelVeilederRenderer({
@@ -82,7 +87,8 @@ function TildelVeilederRenderer({
     ident,
     onChange,
     btnOnClick,
-    oversiktType
+    oversiktType,
+    erPaEgenOversikt
 }: TildelVeilederRendererProps) {
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
@@ -95,7 +101,7 @@ function TildelVeilederRenderer({
                         size="small"
                         value={veileder.ident}
                         className={`${
-                            index === 0 && oversiktType === OversiktType.minOversikt
+                            index === 0 && oversiktType === OversiktType.minOversikt && erPaEgenOversikt
                                 ? 'navds-radio--disabled'
                                 : 'navds-radio'
                         }`}
