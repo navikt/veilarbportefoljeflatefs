@@ -26,7 +26,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
     const erPaEgenOversikt = (): boolean => {
-        return gjeldendeVeileder === innloggetVeileder;
+        return gjeldendeVeileder === innloggetVeileder && oversiktType === OversiktType.minOversikt;
     };
 
     const sorterVeiledere = veiledere.sort((a, b) => {
@@ -87,7 +87,6 @@ function TildelVeilederRenderer({
     ident,
     onChange,
     btnOnClick,
-    oversiktType,
     erPaEgenOversikt
 }: TildelVeilederRendererProps) {
     return (
@@ -100,11 +99,7 @@ function TildelVeilederRenderer({
                         name="veileder"
                         size="small"
                         value={veileder.ident}
-                        className={`${
-                            index === 0 && oversiktType === OversiktType.minOversikt && erPaEgenOversikt
-                                ? 'navds-radio--disabled'
-                                : 'navds-radio'
-                        }`}
+                        className={`${index === 0 && erPaEgenOversikt ? 'navds-radio--disabled' : 'navds-radio'}`}
                     >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
             </RadioGroup>
