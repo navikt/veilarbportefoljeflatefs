@@ -11,6 +11,7 @@ import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -23,11 +24,12 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const innloggetVeileder = useIdentSelector()?.ident;
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
-        if (a.ident === gjeldendeVeileder) return -1;
-        if (b.ident === gjeldendeVeileder) return 1;
+        if (a.ident === innloggetVeileder) return -1;
+        if (b.ident === innloggetVeileder) return 1;
         return a.etternavn.localeCompare(b.etternavn);
     });
 
