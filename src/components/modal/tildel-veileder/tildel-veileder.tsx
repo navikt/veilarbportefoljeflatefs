@@ -11,6 +11,7 @@ import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
 import {OversiktType} from '../../../ducks/ui/listevisning';
+import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -23,11 +24,15 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const innloggetVeileder = useIdentSelector()?.ident;
+    const erPaEgenOversikt = (): boolean => {
+        return gjeldendeVeileder === innloggetVeileder && oversiktType === OversiktType.minOversikt;
+    };
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
-        if (a.ident === gjeldendeVeileder) return -1;
-        if (b.ident === gjeldendeVeileder) return 1;
+        if (a.ident === innloggetVeileder) return -1;
+        if (b.ident === innloggetVeileder) return 1;
         return a.etternavn.localeCompare(b.etternavn);
     });
 
@@ -59,6 +64,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     data={data}
                     btnOnClick={() => onSubmit()}
                     oversiktType={oversiktType}
+                    erPaEgenOversikt={erPaEgenOversikt()}
                 />
             )}
         </SokFilter>
@@ -72,6 +78,7 @@ interface TildelVeilederRendererProps {
     onChange: (ident: string) => void;
     btnOnClick: () => void;
     oversiktType: string | undefined;
+    erPaEgenOversikt: boolean;
 }
 
 function TildelVeilederRenderer({
@@ -80,7 +87,7 @@ function TildelVeilederRenderer({
     ident,
     onChange,
     btnOnClick,
-    oversiktType
+    erPaEgenOversikt
 }: TildelVeilederRendererProps) {
     return (
         <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
@@ -92,11 +99,7 @@ function TildelVeilederRenderer({
                         name="veileder"
                         size="small"
                         value={veileder.ident}
-                        className={`${
-                            index === 0 && oversiktType === OversiktType.minOversikt
-                                ? 'navds-radio--disabled'
-                                : 'navds-radio'
-                        }`}
+                        className={`${index === 0 && erPaEgenOversikt ? 'navds-radio--disabled' : 'navds-radio'}`}
                     >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
                 ))}
             </RadioGroup>
