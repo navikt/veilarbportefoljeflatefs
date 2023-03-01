@@ -27,9 +27,9 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
-    adressebeskyttelseEllerSkjermingTotalt?: number;
-    adressebeskyttelseEllerSkjermingUfordelte?: number;
-    adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV?: number;
+    adressebeskyttelseEllerSkjermingTotalt: number;
+    adressebeskyttelseEllerSkjermingUfordelte: number;
+    adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV: number;
 }
 
 export interface StatustallState {
@@ -57,7 +57,10 @@ export const initalStatusState: StatustallState = {
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
-        underVurdering: 0
+        underVurdering: 0,
+        adressebeskyttelseEllerSkjermingTotalt: 0,
+        adressebeskyttelseEllerSkjermingUfordelte: 0,
+        adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV: 0
     }
 };
 

@@ -56,21 +56,24 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const visMeldingOmBrukereMedAdressebeskyttelseEllerSkjerming =
+    const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         props.oversiktType === OversiktType.enhetensOversikt &&
-        statusTall.adressebeskyttelseEllerSkjermingTotalt &&
         statusTall.adressebeskyttelseEllerSkjermingTotalt > 0;
 
     return (
         <div className="filtrering-oversikt panel">
             <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
-            {visMeldingOmBrukereMedAdressebeskyttelseEllerSkjerming && (
+            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && (
                 <ReadMore
                     header={`Adressebeskyttelse/skjerming (${statusTall.adressebeskyttelseEllerSkjermingTotalt})`}
                 >
-                    <Detail>{`Ufordelte brukere (${statusTall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
-                    <Detail>{`Venter på svar fra NAV (${statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
+                    {statusTall.adressebeskyttelseEllerSkjermingUfordelte > 0 && (
+                        <Detail>{`Ufordelte brukere (${statusTall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
+                    )}
+                    {statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV > 0 && (
+                        <Detail>{`Venter på svar fra NAV (${statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
+                    )}
                     <br />
                     <Detail>
                         Du må ha spesiell tilgang for å se disse brukerne, og de er ikke regnet med i statustallene
