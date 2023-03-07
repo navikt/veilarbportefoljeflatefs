@@ -45,7 +45,10 @@ export enum Kolonne {
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
     CV_SVARFRIST = 'cv_svarfrist',
-    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak'
+    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
+    ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
+    ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
+    ENSLIGE_FORSORGERE_OPPFOLGING = 'oppfolging'
 }
 
 export enum OversiktType {
