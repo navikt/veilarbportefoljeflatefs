@@ -3,7 +3,9 @@ import {
     aapRettighetsperiode,
     bostedKommune,
     capitalize,
+    mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
+    oppfolingsdato,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
@@ -73,6 +75,9 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
+        ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
+        : null;
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak: boolean =
@@ -322,6 +327,26 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                         : '-'
                 }
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
+                className="col col-xs-2"
+            />
+            <DatoKolonne
+                dato={overgangsstonadUtlopsdato}
+                skalVises={valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={mapOmAktivitetsPlikt(bruker.ensligeForsorgereOvergangsstonad?.harAktivitetsplikt)}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={oppfolingsdato(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING)}
                 className="col col-xs-2"
             />
         </div>

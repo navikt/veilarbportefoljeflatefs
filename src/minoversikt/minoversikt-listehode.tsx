@@ -494,6 +494,59 @@ function MinOversiktListeHode({
                 >
                     Avvik §14a-vedtak
                 </Header>
+                <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.UTLOP_YTELSE) && !!filtervalg.ensligeForsorgere.length}
+                    className="col col-xs-2"
+                    title="Utlopsdato for ytelsen"
+                    headerId="utlop_ytelse"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    tekst="Utløp ytelse"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Type vedtaksperiode"
+                    headerId="type_vedtaksperiode"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    tekst="Type vedtaksperiode"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Om bruker har aktivitetsplikt"
+                    headerId="om_aktivitetsplikt"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    tekst="Om aktivitetsplikt"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Dato når barnet er hhv 6 mnd/1 år gammelt"
+                    headerId="oppfolging"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OPPFOLGING}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OPPFOLGING}
+                    tekst="Oppfølging"
+                />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

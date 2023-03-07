@@ -5,8 +5,8 @@ import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
-    I_AVTALT_AKTIVITET,
     HAR_AVVIK,
+    I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     UNDER_VURDERING,
@@ -193,5 +193,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
-        .concat([Kolonne.OPPFOLGINGSTARTET]);
+        .concat([Kolonne.OPPFOLGINGSTARTET])
+        .concat(addHvis(Kolonne.UTLOP_YTELSE, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING, !!filtervalg.ensligeForsorgere.length));
 }
