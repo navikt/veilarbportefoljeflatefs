@@ -343,17 +343,17 @@ export const hendelserEtikett = {
 };
 
 export const avvik14aVedtakHovedFilter = {
-    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Har avvik'}
+    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Status'}
 };
 
 export const avvik14aVedtakAvhengigeFilter = {
-    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulik', className: skjemaelementInnrykkKlasse},
+    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
     [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {
         label: 'Innsatsgruppe ulik',
         className: skjemaelementInnrykkKlasse
     },
     [mapFilternavnTilFilterValue.innsatsgruppeOgHovedmalUlik]: {
-        label: 'Innsatsgruppe og hovedmål ulik',
+        label: 'Innsatsgruppe og hovedmål ulike',
         className: skjemaelementInnrykkKlasse
     },
     [mapFilternavnTilFilterValue.innsatsgruppeManglerINyKilde]: {
