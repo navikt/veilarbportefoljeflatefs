@@ -46,7 +46,11 @@ export enum Sorteringsfelt {
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav',
+    ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
+    ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
+    ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
+    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet'
 }
 
 export interface FiltervalgModell {
@@ -87,6 +91,7 @@ export interface FiltervalgModell {
     geografiskBosted: string[];
     visGeografiskBosted: string[];
     avvik14aVedtak: string[];
+    ensligeForsorgere: string[];
 }
 
 export interface EnhetModell {
@@ -175,8 +180,15 @@ export interface BrukerModell {
     harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
+    ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
 }
 
+interface EnsligeForsorgereOvergangsstonad {
+    vedtaksPeriodetype: string;
+    harAktivitetsplikt?: boolean | undefined;
+    utlopsDato: Date;
+    yngsteBarnsFødselsdato: Date;
+}
 interface Statsborgerskap {
     statsborgerskap: string;
     gyldigFra?: string;

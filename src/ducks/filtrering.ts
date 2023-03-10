@@ -74,7 +74,8 @@ export const initialState: FiltervalgModell = {
     tolkebehov: [],
     tolkBehovSpraak: [],
     stillingFraNavFilter: [],
-    avvik14aVedtak: []
+    avvik14aVedtak: [],
+    ensligeForsorgere: []
 };
 
 function fjern(filterId, verdi, fjernVerdi) {

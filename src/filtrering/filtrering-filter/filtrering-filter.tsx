@@ -5,6 +5,7 @@ import {
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
     cvJobbprofil,
+    ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
     hovedmal,
@@ -24,7 +25,13 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
+import {
+    GJEM_HOVEDMAL,
+    OVERGANGSSTONAD,
+    STILLING_FRA_NAV,
+    UTEN_KRR_FILTER,
+    VIS_AVVIK_14A_VEDTAK_FILTER
+} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -53,6 +60,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
     const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
     const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
+    const erFilterForOvergangsstonadTogglePa = useFeatureSelector()(OVERGANGSSTONAD);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -369,18 +377,47 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-                <Dropdown
-                    name="Ytelse"
-                    id="ytelse"
-                    render={() => (
-                        <RadioFilterform
-                            valg={ytelse}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            form="ytelse"
+                {erFilterForOvergangsstonadTogglePa ? (
+                    <>
+                        <Dropdown
+                            name="Dagpenger, AAP og tiltakspenger"
+                            id="ytelse"
+                            render={() => (
+                                <RadioFilterform
+                                    valg={ytelse}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    form="ytelse"
+                                />
+                            )}
                         />
-                    )}
-                />
+                        <Dropdown
+                            name="Enslige forsørgere"
+                            id="ensligeForsorgere"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="ensligeForsorgere"
+                                    valg={ensligeForsorgere}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
+                        />
+                    </>
+                ) : (
+                    <Dropdown
+                        name="Ytelse"
+                        id="ytelse"
+                        render={() => (
+                            <RadioFilterform
+                                valg={ytelse}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                form="ytelse"
+                            />
+                        )}
+                    />
+                )}
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Aktivitet</Label>

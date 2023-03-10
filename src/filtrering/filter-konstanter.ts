@@ -221,6 +221,10 @@ export const rettighetsgruppe = {
     IYT: {label: 'Ingen livsoppholdsytelser Arena'}
 };
 
+export const ensligeForsorgere = {
+    OVERGANGSSTØNAD: {label: 'Overgangsstønad'}
+};
+
 export const aktiviteter = {
     SOKEAVTALE: 'Avtale om å søke jobber',
     STILLING: 'Stilling bruker skal søke',
@@ -395,7 +399,8 @@ const filterKonstanter = {
     ulesteEndringer,
     tolkebehov,
     stillingFraNavFilter,
-    avvik14aVedtak
+    avvik14aVedtak,
+    ensligeForsorgere
 };
 
 export default filterKonstanter;
