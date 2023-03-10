@@ -40,4 +40,4 @@ alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'CV svarfrist'});
 alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {tekstlabel: 'Status §14a-vedtak'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: 'Om aktivitetsplikt'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode'});
-alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING, {tekstlabel: 'Oppfølging'});
+alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, {tekstlabel: 'Om barnet'});

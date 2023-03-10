@@ -48,7 +48,7 @@ export enum Kolonne {
     AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
-    ENSLIGE_FORSORGERE_OPPFOLGING = 'oppfolging'
+    ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet'
 }
 
 export enum OversiktType {

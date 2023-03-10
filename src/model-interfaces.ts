@@ -50,7 +50,7 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
     ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
-    ENSLIGE_FORSORGERE_OPPFOLGING = 'enslige_forsorgere_oppfolging'
+    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_oppfolging'
 }
 
 export interface FiltervalgModell {

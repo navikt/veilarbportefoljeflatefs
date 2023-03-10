@@ -425,7 +425,7 @@ function EnhetListehode({
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.UTLOP_YTELSE) && !!filtervalg.ensligeForsorgere.length}
                     className="col col-xs-2"
-                    title="Utlopsdato for ytelsen"
+                    title="Utløpsdato for ytelsen"
                     headerId="utlop_ytelse"
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
                     onClick={sorteringOnClick}
@@ -463,17 +463,17 @@ function EnhetListehode({
                 />
                 <SorteringHeader
                     skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING) &&
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
                     className="col col-xs-2"
                     title="Dato når barnet er hhv 6 mnd/1 år gammelt"
                     headerId="oppfolging"
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OPPFOLGING}
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OPPFOLGING}
-                    tekst="Oppfølging"
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
+                    tekst="Om barnet"
                 />
             </div>
             <div className="brukerliste__gutter-right" />

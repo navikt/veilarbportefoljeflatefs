@@ -20,14 +20,14 @@ import {
     aapRettighetsperiode,
     bostedKommune,
     capitalize,
+    mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
+    oppfolingsdatoEnsligeForsorgere,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
     utledValgteAktivitetsTyper,
-    utlopsdatoUker,
-    mapOmAktivitetsPlikt,
-    oppfolingsdatoEnsligeForsorgere
+    utlopsdatoUker
 } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
@@ -326,7 +326,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
-                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING)}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
                 className="col col-xs-2"
             />
         </div>
