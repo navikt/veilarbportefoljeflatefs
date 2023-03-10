@@ -1,6 +1,12 @@
 import 'babel-polyfill';
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker} from './utils';
-import {oppfolgingStartetDato} from './dato-utils';
+import {
+    nesteUtlopsdatoEllerNull,
+    oppfolingsdatoEnsligeForsorgere,
+    utledValgteAktivitetsTyper,
+    utlopsdatoUker
+} from './utils';
+import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
+import moment from 'moment';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {
@@ -73,6 +79,58 @@ describe('Date utils', () => {
         });
         it('skal returnere gitt dato', () => {
             expect(oppfolgingStartetDato('2019-02-01')).toEqual(new Date('2019-02-01'));
+        });
+    });
+
+    describe('sjekke oppfolingsdatoEnsligeForsorgere dato', () => {
+        it('barnet er under et halvt år skal returnere tilsvarene "1/2år tekst', () => {
+            const idag = moment();
+            const yngsteBarnFodselsdag = idag.clone().subtract(1, 'day');
+            const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months');
+
+            expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
+                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 1/2 år)`
+            );
+        });
+
+        it('barnet er et halvt år skal returnere tilsvarene "1/2år" tekst', () => {
+            const idag = moment();
+            const yngsteBarnFodselsdag = idag.clone();
+            const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months');
+
+            expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
+                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 1/2 år)`
+            );
+        });
+
+        it('barnet er over ett halvt år skal returnere tilsvarene "1år" tekst', () => {
+            const idag = moment();
+            const yngsteBarnFodselsdag = idag.clone().subtract({days: 1, months: 6});
+            const barnEttAar = yngsteBarnFodselsdag.clone().add({years: 1}).toDate();
+
+            expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
+                `${toDatePrettyPrint(barnEttAar)} (Barn 1 år)`
+            );
+        });
+
+        it('barnet er enda ikke født skal returnere tilsvarene "1/2år" tekst', () => {
+            const idag = moment();
+            const yngsteBarnFodselsdag = idag.clone().add({days: 1});
+            const barnEttAar = yngsteBarnFodselsdag.clone().add({months: 6}).toDate();
+
+            expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
+                `${toDatePrettyPrint(barnEttAar)} (Barn 1/2 år)`
+            );
+        });
+
+        it('barnet er over 1 år skal returnere tilsvarene "1år" tekst', () => {
+            const idag = moment();
+            const yngsteBarnFodselsdag = idag.clone().subtract({years: 1, months: 1});
+            const barnEttAar = yngsteBarnFodselsdag.clone().add({years: 1}).toDate();
+
+            expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
+                `${toDatePrettyPrint(barnEttAar)} (Barn 1 år)`
+            );
         });
     });
 });

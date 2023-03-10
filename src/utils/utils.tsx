@@ -242,18 +242,18 @@ export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
     return aktivitetsplikt ? 'Aktivitetsplikt' : 'Ikke aktivitetsplikt';
 };
 
-export const oppfolingsdato = (alderBarn?: Date) => {
+export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     if (!alderBarn) {
         return '';
     }
     const alderBarnMoment = moment(alderBarn);
 
-    if (moment().diff(alderBarnMoment, 'months') >= 6) {
-        const datoBarnSeksMnd = alderBarnMoment.add(6, 'months');
+    if (moment().diff(alderBarnMoment, 'months') < 6) {
+        const datoBarnSeksMnd = alderBarnMoment.add({months: 6}).toDate();
         const formatertDato = toDatePrettyPrint(datoBarnSeksMnd);
         return `${formatertDato} (Barn 1/2 år)`;
     }
-    const datoBarnEttAar = alderBarnMoment.add(1, 'year');
+    const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
     const formatertDato = toDatePrettyPrint(datoBarnEttAar);
     return `${formatertDato} (Barn 1 år)`;
 };

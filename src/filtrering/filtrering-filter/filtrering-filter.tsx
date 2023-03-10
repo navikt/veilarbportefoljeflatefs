@@ -265,15 +265,15 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <div className="filtrering-filter__kolonne">
                     <Label size="small">Utfasing av Arena</Label>
                     <Dropdown
-                        name="Avvik §14a-vedtak"
-                        id="arena-migrering"
+                        name="Status §14a-vedtak"
+                        id="status-14a-vedtak-filter"
                         render={() => (
                             <>
                                 {/* TODO: Bruke riktig lenke til Navet */}
                                 {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
                                 <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og
-                                    iverksatte §14a-vedtak for de samme brukerne.{' '}
+                                    Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
+                                    iverksatte §14a-vedtaket.{' '}
                                     <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
                                 </Alert>
                                 <CheckboxFilterform

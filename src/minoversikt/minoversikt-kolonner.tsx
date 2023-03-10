@@ -5,7 +5,7 @@ import {
     capitalize,
     mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
-    oppfolingsdato,
+    oppfolingsdatoEnsligeForsorgere,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
@@ -345,7 +345,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
             />
             <TekstKolonne
-                tekst={oppfolingsdato(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
+                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING)}
                 className="col col-xs-2"
             />

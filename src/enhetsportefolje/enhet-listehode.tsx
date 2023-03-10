@@ -417,10 +417,10 @@ function EnhetListehode({
                 <Header
                     skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                     className="col col-xs-2"
-                    title="Avvik §14a-vedtak"
-                    headerId="avvik14avedtak"
+                    title="Status §14a-vedtak"
+                    headerId="enhetsoversikt-status-14a-vedtak-kolonne-header"
                 >
-                    Avvik §14a-vedtak
+                    Status §14a-vedtak
                 </Header>
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.UTLOP_YTELSE) && !!filtervalg.ensligeForsorgere.length}

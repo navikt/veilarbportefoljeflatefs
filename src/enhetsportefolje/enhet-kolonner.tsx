@@ -27,7 +27,7 @@ import {
     utledValgteAktivitetsTyper,
     utlopsdatoUker,
     mapOmAktivitetsPlikt,
-    oppfolingsdato
+    oppfolingsdatoEnsligeForsorgere
 } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
@@ -325,7 +325,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
             />
             <TekstKolonne
-                tekst={oppfolingsdato(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
+                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OPPFOLGING)}
                 className="col col-xs-2"
             />
