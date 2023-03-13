@@ -467,7 +467,7 @@ function EnhetListehode({
                         !!filtervalg.ensligeForsorgere.length
                     }
                     className="col col-xs-3"
-                    title="Dato når barnet er hhv 6 mnd/1 år gammelt"
+                    title="Dato når barnet er 6 mnd/1 år gammelt"
                     headerId="oppfolging"
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     onClick={sorteringOnClick}

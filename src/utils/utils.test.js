@@ -83,23 +83,23 @@ describe('Date utils', () => {
     });
 
     describe('sjekke oppfolingsdatoEnsligeForsorgere dato', () => {
-        it('barnet er under et halvt år skal returnere tilsvarene "1/2år tekst', () => {
+        it('barnet er under et halvt år skal returnere tilsvarene "6 mnd" tekst', () => {
             const idag = moment();
             const yngsteBarnFodselsdag = idag.clone().subtract(1, 'day');
             const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
-                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 1/2 år)`
+                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 6 mnd)`
             );
         });
 
-        it('barnet er et halvt år skal returnere tilsvarene "1/2år" tekst', () => {
+        it('barnet er et halvt år skal returnere tilsvarene "6 mnd" tekst', () => {
             const idag = moment();
             const yngsteBarnFodselsdag = idag.clone();
             const barnEttHalvtAar = yngsteBarnFodselsdag.clone().add(6, 'months');
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
-                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 1/2 år)`
+                `${toDatePrettyPrint(barnEttHalvtAar)} (Barn 6 mnd)`
             );
         });
 
@@ -113,13 +113,13 @@ describe('Date utils', () => {
             );
         });
 
-        it('barnet er enda ikke født skal returnere tilsvarene "1/2år" tekst', () => {
+        it('barnet er enda ikke født skal returnere tilsvarene "6 mnd" tekst', () => {
             const idag = moment();
             const yngsteBarnFodselsdag = idag.clone().add({days: 1});
             const barnEttAar = yngsteBarnFodselsdag.clone().add({months: 6}).toDate();
 
             expect(oppfolingsdatoEnsligeForsorgere(yngsteBarnFodselsdag.toDate())).toBe(
-                `${toDatePrettyPrint(barnEttAar)} (Barn 1/2 år)`
+                `${toDatePrettyPrint(barnEttAar)} (Barn 6 mnd)`
             );
         });
 
