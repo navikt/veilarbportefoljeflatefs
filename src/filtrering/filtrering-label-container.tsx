@@ -282,7 +282,7 @@ function FiltreringLabelContainer({
                     return [<FiltreringLabel key={key} label={labelId} slettFilter={() => slettEnkelt(key, '')} />];
                 }
             } else if (value) {
-                kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
+                kolonne = key === 'ytelse' ? null : getKolonneFraLabel(value);
                 muligMenIkkeValgt =
                     kolonne === Kolonne.AVTALT_AKTIVITET && oversiktType === OversiktType.minOversikt
                         ? true

@@ -10,8 +10,14 @@ alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
 alternativerConfig.set(Kolonne.VENTER_SVAR, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
-alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Gjenstående uker vedtak'});
-alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Gjenstående uker rettighet'});
+alternativerConfig.set(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, {
+    tekstlabel: 'Gjenstående uker rettighet dagpenger'
+});
+alternativerConfig.set(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, {
+    tekstlabel: 'Gjenstående uker vedtak tiltakspenger'
+});
+alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Gjenstående uker vedtak AAP'});
+alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Gjenstående uker rettighet AAP'});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
@@ -38,6 +44,7 @@ alternativerConfig.set(Kolonne.TOLKEBEHOV_SPRAAK, {tekstlabel: 'Språk'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Sist oppdatert'});
 alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'CV svarfrist'});
 alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {tekstlabel: 'Status §14a-vedtak'});
-alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: 'Om aktivitetsplikt'});
-alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode'});
+alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, {tekstlabel: 'Utløp overgangsstønad'});
+alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: 'Om aktivitetsplikt overgangsstønad'});
+alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, {tekstlabel: 'Om barnet'});

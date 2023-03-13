@@ -68,7 +68,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
-    const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
@@ -92,9 +92,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
-
-    const erValgtOvergangsstonadEnsligeForsorgere =
-        filtervalg.ensligeForsorgere.length > 0 && filtervalg.ensligeForsorgere.includes('OVERGANGSSTØNAD');
 
     const geografiskbostedData = useGeografiskbostedSelector();
 
@@ -176,7 +173,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
                 skalVises={
-                    ytelseErValgtKolonne &&
+                    ytelseDagpengerErValgtKolonne &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
@@ -187,13 +184,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
+                skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
             <UkeKolonne
                 className="col col-xs-2"
@@ -211,7 +202,10 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.TILTAKSPENGER}
+                skalVises={
+                    ytelse === ytelsevalgIntl.TILTAKSPENGER &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -314,7 +308,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 dato={overgangsstonadUtlopsdato}
-                skalVises={erValgtOvergangsstonadEnsligeForsorgere && ytelseErValgtKolonne}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
                 className="col col-xs-2"
             />
             <TekstKolonne
