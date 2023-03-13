@@ -92,6 +92,9 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
 
+    const erValgtOvergangsstonadEnsligeForsorgere =
+        filtervalg.ensligeForsorgere.length > 0 && filtervalg.ensligeForsorgere.includes('OVERGANGSSTØNAD');
+
     const geografiskbostedData = useGeografiskbostedSelector();
 
     return (
@@ -331,7 +334,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             />
             <DatoKolonne
                 dato={overgangsstonadUtlopsdato}
-                skalVises={valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                skalVises={erValgtOvergangsstonadEnsligeForsorgere && ytelseErValgtKolonne}
                 className="col col-xs-2"
             />
             <TekstKolonne
@@ -347,7 +350,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
-                className="col col-xs-2"
+                className="col col-xs-3"
             />
         </div>
     );
