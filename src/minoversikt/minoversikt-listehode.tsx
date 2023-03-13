@@ -538,8 +538,8 @@ function MinOversiktListeHode({
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-2"
-                    title="Dato når barnet er hhv 6 mnd/1 år gammelt"
+                    className="col col-xs-3"
+                    title="Dato når barnet er 6 mnd/1 år gammelt"
                     headerId="oppfolging"
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     onClick={sorteringOnClick}

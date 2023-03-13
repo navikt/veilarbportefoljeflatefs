@@ -251,7 +251,7 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     if (moment().diff(alderBarnMoment, 'months') < 6) {
         const datoBarnSeksMnd = alderBarnMoment.add({months: 6}).toDate();
         const formatertDato = toDatePrettyPrint(datoBarnSeksMnd);
-        return `${formatertDato} (Barn 1/2 år)`;
+        return `${formatertDato} (Barn 6 mnd)`;
     }
     const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
     const formatertDato = toDatePrettyPrint(datoBarnEttAar);
