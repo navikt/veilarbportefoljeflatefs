@@ -2,6 +2,7 @@ import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import {
     DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
@@ -56,7 +57,8 @@ function EnhetListehode({
         DAGPENGER_YTELSE,
         DAGPENGER_YTELSE_ORDINARE,
         DAGPENGER_YTELSE_PERMITTERING,
-        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI
+        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+        DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';

@@ -4,6 +4,7 @@ import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} fr
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
     DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
@@ -58,7 +59,8 @@ function MinOversiktListeHode({
         DAGPENGER_YTELSE,
         DAGPENGER_YTELSE_ORDINARE,
         DAGPENGER_YTELSE_PERMITTERING,
-        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI
+        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+        DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
@@ -565,7 +567,7 @@ function MinOversiktListeHode({
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-3"
+                    className="col col-xs-2"
                     title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
                     headerId="oppfolging"
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
