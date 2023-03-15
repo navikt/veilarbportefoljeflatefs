@@ -19,6 +19,8 @@ import {
     servicegruppe,
     stillingFraNavFilter,
     utdanning,
+    utdanningBestatt,
+    utdanningGodkjent,
     ytelse
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
@@ -34,7 +36,6 @@ import {
 } from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
-import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
@@ -249,14 +250,36 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
                 <Dropdown
-                    name="Er utdanningen godkjent og bestått"
-                    id="er-utdanningen-godkjent-og-bestatt"
+                    name="Er utdanningen godkjent"
+                    id="er-utdanningen-godkjent"
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
                                 Svarene brukeren oppga på registreringstidspunktet.
                             </Alert>
-                            <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                            <CheckboxFilterform
+                                form="utdanningGodkjent"
+                                valg={utdanningGodkjent}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanningen bestått"
+                    id="er-utdanningen-bestatt"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Svarene brukeren oppga på registreringstidspunktet.
+                            </Alert>
+                            <CheckboxFilterform
+                                form="utdanningBestatt"
+                                valg={utdanningBestatt}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         </>
                     )}
                 />

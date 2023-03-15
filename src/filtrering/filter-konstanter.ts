@@ -262,7 +262,8 @@ export const registreringstype = {
     AKKURAT_FULLFORT_UTDANNING: {label: 'Har akkurat fullført utdanning, militærtjeneste eller annet'},
     HAR_SAGT_OPP: {label: 'Har sagt opp eller kommer til å si opp'},
     ALDRI_HATT_JOBB: {label: 'Har aldri vært i jobb'},
-    JOBB_OVER_2_AAR: {label: 'Har ikke vært i jobb de 2 siste årene'}
+    JOBB_OVER_2_AAR: {label: 'Har ikke vært i jobb de 2 siste årene'},
+    INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
 
 export const landgruppe = {
@@ -293,18 +294,21 @@ export const utdanning = {
     VIDEREGAENDE_GRUNNUTDANNING: {label: 'Videregående grunnutdanning (1 til 2 år)'},
     VIDEREGAENDE_FAGBREV_SVENNEBREV: {label: 'Videregående, fagbrev eller svennebrev (3 år eller mer)'},
     HOYERE_UTDANNING_1_TIL_4: {label: 'Høyere utdanning (1 til 4 år)'},
-    HOYERE_UTDANNING_5_ELLER_MER: {label: 'Høyere utdanning (5 år eller mer)'}
+    HOYERE_UTDANNING_5_ELLER_MER: {label: 'Høyere utdanning (5 år eller mer)'},
+    INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
 
 export const utdanningGodkjent = {
     JA: 'Ja',
     NEI: 'Nei',
-    VET_IKKE: 'Vet ikke'
+    VET_IKKE: 'Vet ikke',
+    INGEN_DATA: 'Ingen registreringsinformasjon'
 };
 
 export const utdanningBestatt = {
     JA: 'Ja',
-    NEI: 'Nei'
+    NEI: 'Nei',
+    INGEN_DATA: 'Ingen registreringsinformasjon'
 };
 
 export const ulesteEndringer = {
