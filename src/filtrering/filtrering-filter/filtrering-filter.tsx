@@ -265,7 +265,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <div className="filtrering-filter__kolonne">
                     <Label size="small">Utfasing av Arena</Label>
                     <Dropdown
-                        name="Status §14a-vedtak"
+                        name="Status § 14 a-vedtak"
                         id="status-14a-vedtak-filter"
                         render={() => (
                             <>
@@ -273,7 +273,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
                                 <Alert variant="info" size="small" className="registrering-alert">
                                     Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
-                                    iverksatte §14a-vedtaket.{' '}
+                                    iverksatte § 14 a-vedtaket.{' '}
                                     <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
                                 </Alert>
                                 <CheckboxFilterform
