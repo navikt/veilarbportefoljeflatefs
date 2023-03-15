@@ -41,10 +41,11 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label} from '@navikt/ds-react';
+import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -274,7 +275,14 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 <Alert variant="info" size="small" className="registrering-alert">
                                     Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
                                     iverksatte § 14 a-vedtaket.{' '}
-                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
+                                    <Link
+                                        href="https://navno.sharepoint.com/"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                    >
+                                        Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                    </Link>
+                                    .
                                 </Alert>
                                 <CheckboxFilterform
                                     valg={avvik14aVedtakValg()}
