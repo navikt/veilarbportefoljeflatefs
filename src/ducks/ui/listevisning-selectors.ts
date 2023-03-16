@@ -5,10 +5,16 @@ import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
-    I_AVTALT_AKTIVITET,
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     HAR_AVVIK,
+    I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSPENGER_YTELSE,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -126,13 +132,15 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
         .concat(
             addHvis(
-                Kolonne.UTLOP_YTELSE,
-                filtervalg.ytelse !== null &&
-                    filtervalg.ytelse !== AAP_YTELSE &&
-                    filtervalg.ytelse !== AAP_YTELSE_MAXTID &&
-                    filtervalg.ytelse !== AAP_YTELSE_UNNTAK
+                Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER,
+                filtervalg.ytelse === DAGPENGER_YTELSE ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_ORDINARE ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER
             )
         )
+        .concat(addHvis(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtervalg.ytelse === TILTAKSPENGER_YTELSE))
         .concat(
             addHvis(
                 Kolonne.VEDTAKSPERIODE,
@@ -190,6 +198,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 oversiktType === OversiktType.enhetensOversikt && !filtervalg.ferdigfilterListe.includes(MOTER_IDAG)
             )
         )
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, !!filtervalg.ensligeForsorgere.length))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))

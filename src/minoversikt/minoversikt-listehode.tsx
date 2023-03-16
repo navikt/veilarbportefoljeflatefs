@@ -1,9 +1,13 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import TittelValg from '../utils/utils';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -50,11 +54,15 @@ function MinOversiktListeHode({
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = erAapYtelse
-        ? ytelseAapSortering[ytelse!].vedtaksperiode
-        : ytelseUtlopsSortering[ytelse!];
-    const ytelseSorteringHeader =
-        ytelseUtlopsdatoNavn === 'utlopsdato' || erAapYtelse ? 'Gjenstående uker vedtak' : 'Gjenstående uker rettighet';
+    const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
+    const erDagpengerYtelse = [
+        DAGPENGER_YTELSE,
+        DAGPENGER_YTELSE_ORDINARE,
+        DAGPENGER_YTELSE_PERMITTERING,
+        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+        DAGPENGER_YTELSE_LONNSGARANTIMIDLER
+    ].some(y => y === ytelse!);
+    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const iAvtaltAktivitet =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
@@ -241,11 +249,13 @@ function MinOversiktListeHode({
                     sortering={ytelseUtlopsdatoNavn}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === ytelseUtlopsdatoNavn}
-                    tekst={ytelseSorteringHeader}
-                    skalVises={!!ytelse && valgteKolonner.includes(Kolonne.UTLOP_YTELSE)}
+                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                    tekst="Gjenstående uker rettighet dagpenger"
+                    skalVises={
+                        erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)
+                    }
                     className="col col-xs-2"
-                    title={TittelValg(ytelseSorteringHeader)}
+                    title="Gjenstående uker av rettighetsperioden for dagpenger"
                     headerId="ytelse-utlopsdato"
                 />
                 <SorteringHeader
@@ -253,10 +263,26 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    tekst="Gjenstående uker vedtak"
-                    skalVises={!!filtervalg.ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    tekst="Gjenstående uker vedtak tiltakspenger"
+                    skalVises={
+                        !!filtervalg.ytelse &&
+                        !erAapYtelse &&
+                        !erDagpengerYtelse &&
+                        valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
+                    }
                     className="col col-xs-2"
-                    title="Gjenstående uker på gjeldende vedtak"
+                    title="Gjenstående uker på gjeldende vedtak tiltakspenger"
+                    headerId="ytelse-utlopsdato"
+                />
+                <SorteringHeader
+                    sortering={aapVedtakssperiode}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={aapVedtakssperiode === sorteringsfelt}
+                    tekst="Gjenstående uker vedtak AAP"
+                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    className="col col-xs-2"
+                    title="Gjenstående uker på gjeldende vedtak AAP"
                     headerId="ytelse-utlopsdato-navn"
                 />
                 <SorteringHeader
@@ -264,10 +290,10 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
-                    tekst="Gjenstående uker rettighet"
+                    tekst="Gjenstående uker rettighet AAP"
                     skalVises={!!ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                     className="col col-xs-2"
-                    title="Gjenstående uker av rettighetsperioden for ytelsen"
+                    title="Gjenstående uker av rettighetsperioden for AAP"
                     headerId="rettighetsperiode-gjenstaende"
                 />
                 <SorteringHeader
@@ -489,11 +515,67 @@ function MinOversiktListeHode({
                 <Header
                     skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                     className="col col-xs-2"
-                    title="Avvik §14a-vedtak"
-                    headerId="avvik14avedtak"
+                    title="Status § 14 a-vedtak"
+                    headerId="minoversikt-status-14a-vedtak-kolonne-header"
                 >
-                    Avvik §14a-vedtak
+                    Status § 14 a-vedtak
                 </Header>
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Utløpsdato for overgangsstønad"
+                    headerId="utlop_overgangsstonad"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    tekst="Utløp overgangsstønad"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Type vedtaksperiode for overgangsstønad"
+                    headerId="type_vedtaksperiode"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    tekst="Type vedtaksperiode overgangsstønad"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Om bruker har aktivitetsplikt på overgangsstønad"
+                    headerId="om_aktivitetsplikt"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    tekst="Om aktivitetsplikt overgangsstønad"
+                />
+                <SorteringHeader
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
+                        !!filtervalg.ensligeForsorgere.length
+                    }
+                    className="col col-xs-2"
+                    title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
+                    headerId="oppfolging"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
+                    tekst="Om barnet"
+                />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

@@ -24,9 +24,15 @@ export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
+export const DAGPENGER_YTELSE = 'DAGPENGER';
+export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
+export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
+export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
+export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
 export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
+export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
@@ -221,6 +227,10 @@ export const rettighetsgruppe = {
     IYT: {label: 'Ingen livsoppholdsytelser Arena'}
 };
 
+export const ensligeForsorgere = {
+    OVERGANGSSTØNAD: {label: 'Overgangsstønad'}
+};
+
 export const aktiviteter = {
     SOKEAVTALE: 'Avtale om å søke jobber',
     STILLING: 'Stilling bruker skal søke',
@@ -343,17 +353,17 @@ export const hendelserEtikett = {
 };
 
 export const avvik14aVedtakHovedFilter = {
-    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Har avvik'}
+    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Status'}
 };
 
 export const avvik14aVedtakAvhengigeFilter = {
-    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulik', className: skjemaelementInnrykkKlasse},
+    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
     [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {
         label: 'Innsatsgruppe ulik',
         className: skjemaelementInnrykkKlasse
     },
     [mapFilternavnTilFilterValue.innsatsgruppeOgHovedmalUlik]: {
-        label: 'Innsatsgruppe og hovedmål ulik',
+        label: 'Innsatsgruppe og hovedmål ulike',
         className: skjemaelementInnrykkKlasse
     },
     [mapFilternavnTilFilterValue.innsatsgruppeManglerINyKilde]: {
@@ -395,7 +405,8 @@ const filterKonstanter = {
     ulesteEndringer,
     tolkebehov,
     stillingFraNavFilter,
-    avvik14aVedtak
+    avvik14aVedtak,
+    ensligeForsorgere
 };
 
 export default filterKonstanter;

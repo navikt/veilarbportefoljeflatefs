@@ -12,8 +12,8 @@ import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../../konstanter';
-import {Label, RadioGroup} from '@navikt/ds-react';
+import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
 
 interface FiltreringStatusProps {
@@ -56,9 +56,31 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
 
     const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
+        useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
+        props.oversiktType === OversiktType.enhetensOversikt &&
+        statusTall.adressebeskyttelseEllerSkjermingTotalt > 0;
+
     return (
         <div className="filtrering-oversikt panel">
             <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
+            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && (
+                <ReadMore
+                    header={`Adressebeskyttelse/skjerming (${statusTall.adressebeskyttelseEllerSkjermingTotalt})`}
+                >
+                    {statusTall.adressebeskyttelseEllerSkjermingUfordelte > 0 && (
+                        <Detail>{`Ufordelte brukere (${statusTall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
+                    )}
+                    {statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV > 0 && (
+                        <Detail>{`Venter på svar fra NAV (${statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
+                    )}
+                    <br />
+                    <Detail>
+                        Du må ha spesiell tilgang for å se disse brukerne, og de er ikke regnet med i statustallene
+                        under.
+                    </Detail>
+                </ReadMore>
+            )}
             <div className="filter-checkboks-container">
                 {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox

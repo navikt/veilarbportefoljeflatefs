@@ -238,7 +238,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         tegnspraaktolk: hentSpraak(),
         tolkBehovSistOppdatert: randomDate({past: true}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
-        avvik14aVedtak: randomAvvik14aVedtak()
+        avvik14aVedtak: randomAvvik14aVedtak(),
+        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
     };
 }
 
@@ -393,5 +394,34 @@ export function hentMockPlan() {
         {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
     ];
 }
+
+const lagRandomOvergangsstonadForEnsligForsorger = () => {
+    return {
+        vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
+        harAktivitetsplikt: hentRandomAktivitetsplikt(),
+        utlopsDato: new Date(randomDate({past: false})),
+        yngsteBarnsFødselsdato: new Date(randomDate({past: false}))
+    };
+};
+
+const hentRandomVedtaksperiodeType = () => {
+    const vedtaksperiodeTyper = [
+        'Forlengelse',
+        'Hovedperiode',
+        'Migrering fra Infotrygd',
+        'Sanksjon',
+        'Periode før fødsel',
+        'Utvidelse',
+        'Ny periode for nytt barn'
+    ];
+
+    return vedtaksperiodeTyper[Math.floor(Math.random() * vedtaksperiodeTyper.length)];
+};
+
+const hentRandomAktivitetsplikt = () => {
+    const aktivitetspliktUtfall = [true, false, undefined];
+
+    return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
+};
 
 export default new Array(123).fill(0).map(() => lagBruker());

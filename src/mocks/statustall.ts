@@ -1,6 +1,7 @@
 import portefolje from './portefolje';
+import {Statustall} from '../ducks/statustall';
 
-const statustall = {
+const statustall: Statustall = {
     totalt: portefolje.length,
     ufordelteBrukere: 2032,
     nyeBrukereForVeileder: 15,
@@ -18,7 +19,10 @@ const statustall = {
     erSykmeldtMedArbeidsgiver: 20,
     trengerVurdering: 42,
     moterMedNAVIdag: 40,
-    underVurdering: 14
+    underVurdering: 14,
+    adressebeskyttelseEllerSkjermingTotalt: 20,
+    adressebeskyttelseEllerSkjermingUfordelte: 10,
+    adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV: 10
 };
 
 export default statustall;
