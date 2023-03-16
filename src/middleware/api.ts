@@ -128,12 +128,12 @@ export function hentAktivBruker(): Promise<VeilederModell> {
 }
 
 export function hentEnhetsFilterGrupper(enhetId) {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentMineFilter() {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
