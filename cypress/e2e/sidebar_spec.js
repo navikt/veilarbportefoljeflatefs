@@ -594,6 +594,8 @@ describe('Filter', () => {
         cy.getByTestId('filter_NEI').check({force: true});
 
         cy.getByTestId('filtreringlabel_utdanning-godkjent-nei').should('be.visible');
+
+        cy.getByTestId('filter_NEI').uncheck({force: true});
     });
 
     it('Aktivitet-filterform', () => {
