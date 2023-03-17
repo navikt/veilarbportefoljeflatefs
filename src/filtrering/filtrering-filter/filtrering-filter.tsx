@@ -5,6 +5,7 @@ import {
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
     cvJobbprofil,
+    ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
     hovedmal,
@@ -24,7 +25,13 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
+import {
+    GJEM_HOVEDMAL,
+    OVERGANGSSTONAD,
+    STILLING_FRA_NAV,
+    UTEN_KRR_FILTER,
+    VIS_AVVIK_14A_VEDTAK_FILTER
+} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
@@ -34,10 +41,11 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label} from '@navikt/ds-react';
+import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -53,6 +61,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
     const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
     const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
+    const erFilterForOvergangsstonadTogglePa = useFeatureSelector()(OVERGANGSSTONAD);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -257,16 +266,23 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <div className="filtrering-filter__kolonne">
                     <Label size="small">Utfasing av Arena</Label>
                     <Dropdown
-                        name="Avvik §14a-vedtak"
-                        id="arena-migrering"
+                        name="Status § 14 a-vedtak"
+                        id="status-14a-vedtak-filter"
                         render={() => (
                             <>
                                 {/* TODO: Bruke riktig lenke til Navet */}
                                 {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
                                 <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og
-                                    iverksatte §14a-vedtak for de samme brukerne.{' '}
-                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
+                                    Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
+                                    iverksatte § 14 a-vedtaket.{' '}
+                                    <Link
+                                        href="https://navno.sharepoint.com/"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                    >
+                                        Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                    </Link>
+                                    .
                                 </Alert>
                                 <CheckboxFilterform
                                     valg={avvik14aVedtakValg()}
@@ -369,18 +385,47 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-                <Dropdown
-                    name="Ytelse"
-                    id="ytelse"
-                    render={() => (
-                        <RadioFilterform
-                            valg={ytelse}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            form="ytelse"
+                {erFilterForOvergangsstonadTogglePa ? (
+                    <>
+                        <Dropdown
+                            name="Dagpenger, AAP og tiltakspenger"
+                            id="ytelse"
+                            render={() => (
+                                <RadioFilterform
+                                    valg={ytelse}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    form="ytelse"
+                                />
+                            )}
                         />
-                    )}
-                />
+                        <Dropdown
+                            name="Enslige forsørgere"
+                            id="ensligeForsorgere"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="ensligeForsorgere"
+                                    valg={ensligeForsorgere}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
+                        />
+                    </>
+                ) : (
+                    <Dropdown
+                        name="Ytelse"
+                        id="ytelse"
+                        render={() => (
+                            <RadioFilterform
+                                valg={ytelse}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                form="ytelse"
+                            />
+                        )}
+                    />
+                )}
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Aktivitet</Label>
