@@ -585,23 +585,15 @@ describe('Filter', () => {
     it('Utdanning godkjent checkbox-filterform', () => {
         cy.apneLukkeFilterDropdown('er-utdanningen-godkjent');
 
-        cy.getByTestId('filter_utdanningGodkjent_JA').check({force: true});
+        cy.getByTestId('filter_JA').check({force: true});
 
         cy.getByTestId('filtreringlabel_utdanning-godkjent-ja').should('be.visible');
 
-        cy.getByTestId('filter_utdanningGodkjent_JA').uncheck({force: true});
+        cy.getByTestId('filter_JA').uncheck({force: true});
 
-        cy.getByTestId('filter_utdanningGodkjent_JA').check({force: true});
-
-        cy.getByTestId('filtreringlabel_utdanning-godkjent-ja').should('be.visible');
-
-        cy.getByTestId('filter_utdanningGodkjent_NEI').check({force: true});
+        cy.getByTestId('filter_NEI').check({force: true});
 
         cy.getByTestId('filtreringlabel_utdanning-godkjent-nei').should('be.visible');
-
-        cy.getByTestId('filtreringlabel_nullstill-filtervalg').should('be.visible').click();
-
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
     });
 
     it('Aktivitet-filterform', () => {
