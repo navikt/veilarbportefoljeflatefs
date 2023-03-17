@@ -515,10 +515,10 @@ function MinOversiktListeHode({
                 <Header
                     skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                     className="col col-xs-2"
-                    title="Status §14a-vedtak"
+                    title="Status § 14 a-vedtak"
                     headerId="minoversikt-status-14a-vedtak-kolonne-header"
                 >
-                    Status §14a-vedtak
+                    Status § 14 a-vedtak
                 </Header>
                 <SorteringHeader
                     skalVises={
