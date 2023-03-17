@@ -107,7 +107,7 @@ mock.get(
 mock.get('/veilarbportefoljeflatefs/api/feature', jsonResponse(features));
 
 //veiledergrupper
-mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeiledergrupper));
+mock.get('/veilarbfilter/api/enhet/:enhetId', jsonResponse(customVeiledergrupper));
 
 mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
     let oppdatertGruppe = {};
@@ -137,16 +137,16 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx
 });
 
 //mine filter
-mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter));
+mock.get('/veilarbfilter/api/minelagredefilter', jsonResponse(customMineFilter));
 
-mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
+mock.put('/veilarbfilter/api/minelagredefilter', ({body}, res, ctx) => {
     let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
     const aktiv = true;
     customMineFilter[filterIndex] = {...body, aktiv};
     return res(ctx.json(customMineFilter[filterIndex]));
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
+mock.post('/veilarbfilter/api/minelagredefilter', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
     const aktiv = true;
     customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
@@ -162,7 +162,7 @@ mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) =>
     return res(ctx.status(401));
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx) => {
+mock.post('/veilarbfilter/api/minelagredefilter/lagresortering', (req, res, ctx) => {
     const sorteringer = req.body as SorteringOgId[];
     sorteringer.forEach(elem => {
         const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
