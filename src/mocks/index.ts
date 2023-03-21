@@ -2,7 +2,7 @@ import innloggetVeileder from './innloggetVeileder';
 import me from './me';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
 import {veilederResponse} from './veiledere';
-import {statustallEnhet, statustallVeileder} from './statustallVeileder';
+import {statustallEnhet, statustallVeileder} from './statustall';
 import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';

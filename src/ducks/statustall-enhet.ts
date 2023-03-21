@@ -96,9 +96,23 @@ export default function statustallEnhetReducer(
             }
             return {...state, status: STATUS.PENDING};
         case FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return {
+                ...state,
+                status: STATUS.ERROR,
+                data: {
+                    medBrukerinnsyn: action.data.statustallMedBrukerinnsyn,
+                    utenBrukerinnsyn: action.data.statustallUtenBrukerinnsyn
+                }
+            };
         case OK: {
-            return {...state, status: STATUS.OK, data: action.data};
+            return {
+                ...state,
+                status: STATUS.OK,
+                data: {
+                    medBrukerinnsyn: action.data.statustallMedBrukerinnsyn,
+                    utenBrukerinnsyn: action.data.statustallUtenBrukerinnsyn
+                }
+            };
         }
         default:
             return state;

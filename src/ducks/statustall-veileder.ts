@@ -70,9 +70,9 @@ export default function statustallVeilederReducer(
             }
             return {...state, status: STATUS.PENDING};
         case FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return {...state, status: STATUS.ERROR, data: action.data.statustall};
         case OK: {
-            return {...state, status: STATUS.OK, data: action.data};
+            return {...state, status: STATUS.OK, data: action.data.statustall};
         }
         case LEGG_TIL_STATUSTALL: {
             return {

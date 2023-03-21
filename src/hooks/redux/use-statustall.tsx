@@ -7,11 +7,9 @@ const selectStatustallVeilederData = (state: AppState) => state.statustallVeiled
 const selectStatustallEnhetData = (state: AppState) => state.statustallEnhet.data;
 
 export function useStatustallVeilederSelector() {
-    const statustall = useSelector<AppState, StatustallVeileder>(state => selectStatustallVeilederData(state));
-    return statustall;
+    return useSelector<AppState, StatustallVeileder>(state => selectStatustallVeilederData(state));
 }
 
 export function useStatustallEnhetSelector() {
-    const statustall = useSelector<AppState, StatustallEnhet>(state => selectStatustallEnhetData(state));
-    return statustall;
+    return useSelector<AppState, StatustallEnhet>(state => selectStatustallEnhetData(state));
 }
