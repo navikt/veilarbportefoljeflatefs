@@ -1,0 +1,115 @@
+import * as Api from './../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
+import {OrNothing} from '../utils/types/types';
+
+// Actions
+export const OK = 'veilarbportefoljeflatefs/statustall-enhet/OK';
+export const FEILET = 'veilarbportefoljeflatefs/statustall-enhet/FEILET';
+export const PENDING = 'veilarbportefoljeflatefs/statustall-enhet/PENDING';
+
+interface StatustallInnhold {
+    totalt: number;
+    ufordelteBrukere: number;
+    inaktiveBrukere: number;
+    venterPaSvarFraNAV: number;
+    venterPaSvarFraBruker: number;
+    utlopteAktiviteter: number;
+    ikkeIavtaltAktivitet: number;
+    iavtaltAktivitet: number;
+    minArbeidsliste: number;
+    minArbeidslisteBla: number;
+    minArbeidslisteLilla: number;
+    minArbeidslisteGronn: number;
+    minArbeidslisteGul: number;
+    erSykmeldtMedArbeidsgiver: number;
+    moterMedNAVIdag: number;
+    trengerVurdering: number;
+    nyeBrukereForVeileder: number;
+    underVurdering: number;
+}
+
+export interface StatustallEnhet {
+    medBrukerinnsyn: StatustallInnhold;
+    utenBrukerinnsyn: StatustallInnhold;
+}
+
+export interface StatustallEnhetState {
+    status: string;
+    data: StatustallEnhet;
+}
+
+export const initalStatusState: StatustallEnhetState = {
+    status: STATUS.NOT_STARTED,
+    data: {
+        medBrukerinnsyn: {
+            totalt: 0,
+            ufordelteBrukere: 0,
+            inaktiveBrukere: 0,
+            venterPaSvarFraNAV: 0,
+            venterPaSvarFraBruker: 0,
+            utlopteAktiviteter: 0,
+            ikkeIavtaltAktivitet: 0,
+            iavtaltAktivitet: 0,
+            minArbeidsliste: 0,
+            minArbeidslisteBla: 0,
+            minArbeidslisteLilla: 0,
+            minArbeidslisteGronn: 0,
+            minArbeidslisteGul: 0,
+            erSykmeldtMedArbeidsgiver: 0,
+            nyeBrukereForVeileder: 0,
+            moterMedNAVIdag: 0,
+            trengerVurdering: 0,
+            underVurdering: 0
+        },
+        utenBrukerinnsyn: {
+            totalt: 0,
+            ufordelteBrukere: 0,
+            inaktiveBrukere: 0,
+            venterPaSvarFraNAV: 0,
+            venterPaSvarFraBruker: 0,
+            utlopteAktiviteter: 0,
+            ikkeIavtaltAktivitet: 0,
+            iavtaltAktivitet: 0,
+            minArbeidsliste: 0,
+            minArbeidslisteBla: 0,
+            minArbeidslisteLilla: 0,
+            minArbeidslisteGronn: 0,
+            minArbeidslisteGul: 0,
+            erSykmeldtMedArbeidsgiver: 0,
+            nyeBrukereForVeileder: 0,
+            moterMedNAVIdag: 0,
+            trengerVurdering: 0,
+            underVurdering: 0
+        }
+    }
+};
+
+// Reducer
+export default function statustallEnhetReducer(
+    state: StatustallEnhetState = initalStatusState,
+    action
+): StatustallEnhetState {
+    switch (action.type) {
+        case PENDING:
+            if (state.status === STATUS.OK) {
+                return {...state, status: STATUS.RELOADING};
+            }
+            return {...state, status: STATUS.PENDING};
+        case FEILET:
+            return {...state, status: STATUS.ERROR, data: action.data};
+        case OK: {
+            return {...state, status: STATUS.OK, data: action.data};
+        }
+        default:
+            return state;
+    }
+}
+
+// Action Creators
+export function hentStatustallForEnhet(enhet: OrNothing<string>) {
+    return doThenDispatch(() => Api.hentStatusTall(enhet), {
+        OK,
+        FEILET,
+        PENDING
+    });
+}

@@ -1,5 +1,5 @@
 import SidebarTab from './sidebar-tab';
-import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
+import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import React from 'react';
 import {useDispatch} from 'react-redux';
@@ -13,7 +13,6 @@ import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filt
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import MineFilterTab from './mine-filter-tab';
-import {Statustall} from '../../ducks/statustall';
 
 interface SidevelgerProps {
     selectedTabData: Sidebarelement;

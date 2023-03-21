@@ -8,14 +8,38 @@ import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../
 import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
-import {Statustall} from '../../ducks/statustall';
+
+export interface Statustall {
+    medBrukerinnsyn: StatustallInnhold;
+    utenBrukerinnsyn: StatustallInnhold | null;
+}
+
+interface StatustallInnhold {
+    totalt: number;
+    ufordelteBrukere: number;
+    inaktiveBrukere: number;
+    venterPaSvarFraNAV: number;
+    venterPaSvarFraBruker: number;
+    utlopteAktiviteter: number;
+    ikkeIavtaltAktivitet: number;
+    iavtaltAktivitet: number;
+    minArbeidsliste: number;
+    minArbeidslisteBla: number;
+    minArbeidslisteLilla: number;
+    minArbeidslisteGronn: number;
+    minArbeidslisteGul: number;
+    erSykmeldtMedArbeidsgiver: number;
+    moterMedNAVIdag: number;
+    trengerVurdering: number;
+    nyeBrukereForVeileder: number;
+    underVurdering: number;
+}
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
@@ -60,20 +84,21 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         props.oversiktType === OversiktType.enhetensOversikt &&
-        props.statustall.adressebeskyttelseEllerSkjermingTotalt > 0;
+        props.statustall.utenBrukerinnsyn !== null &&
+        props.statustall.utenBrukerinnsyn.totalt > 0;
 
     return (
         <div className="filtrering-oversikt panel">
-            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(props.statustall.totalt)}</Label>
-            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && (
-                <ReadMore
-                    header={`Adressebeskyttelse/skjerming (${props.statustall.adressebeskyttelseEllerSkjermingTotalt})`}
-                >
-                    {props.statustall.adressebeskyttelseEllerSkjermingUfordelte > 0 && (
-                        <Detail>{`Ufordelte brukere (${props.statustall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
+            <Label className="filtrering-oversikt__totalt-antall">
+                {tekstAntallBrukere(props.statustall.medBrukerinnsyn.totalt)}
+            </Label>
+            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && props.statustall.utenBrukerinnsyn !== null && (
+                <ReadMore header={`Adressebeskyttelse/skjerming (${props.statustall.utenBrukerinnsyn.totalt})`}>
+                    {props.statustall.utenBrukerinnsyn.ufordelteBrukere > 0 && (
+                        <Detail>{`Ufordelte brukere (${props.statustall.utenBrukerinnsyn.ufordelteBrukere})`}</Detail>
                     )}
-                    {props.statustall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV > 0 && (
-                        <Detail>{`Venter på svar fra NAV (${props.statustall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
+                    {props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV > 0 && (
+                        <Detail>{`Venter på svar fra NAV (${props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV})`}</Detail>
                     )}
                     <br />
                     <Detail>
@@ -86,7 +111,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox
                         filterNavn="nyeBrukere"
-                        antall={props.statustall.nyeBrukereForVeileder}
+                        antall={props.statustall.medBrukerinnsyn.nyeBrukereForVeileder}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
@@ -94,7 +119,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ) : (
                     <BarInputCheckbox
                         filterNavn="ufordeltebruker"
-                        antall={props.statustall.ufordelteBrukere}
+                        antall={props.statustall.medBrukerinnsyn.ufordelteBrukere}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
@@ -110,52 +135,52 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.trengerVurdering}
+                        antall={props.statustall.medBrukerinnsyn.trengerVurdering}
                     />
                     <BarInputRadio
                         filterNavn="erSykmeldtMedArbeidsgiver"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.erSykmeldtMedArbeidsgiver}
+                        antall={props.statustall.medBrukerinnsyn.erSykmeldtMedArbeidsgiver}
                     />
                     {erVedtaksStotteFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="underVurdering"
                             handleChange={handleRadioButtonChange}
-                            antall={props.statustall.underVurdering}
+                            antall={props.statustall.medBrukerinnsyn.underVurdering}
                         />
                     )}
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="venterPaSvarFraNAV"
-                        antall={props.statustall.venterPaSvarFraNAV}
+                        antall={props.statustall.medBrukerinnsyn.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="venterPaSvarFraBruker"
-                        antall={props.statustall.venterPaSvarFraBruker}
+                        antall={props.statustall.medBrukerinnsyn.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="avtaltMoteMedNav"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.moterMedNAVIdag}
+                        antall={props.statustall.medBrukerinnsyn.moterMedNAVIdag}
                     />
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
-                        antall={props.statustall.utlopteAktiviteter}
+                        antall={props.statustall.medBrukerinnsyn.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="ikkeIavtaltAktivitet"
-                        antall={props.statustall.ikkeIavtaltAktivitet}
+                        antall={props.statustall.medBrukerinnsyn.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="iavtaltAktivitet"
-                        antall={props.statustall.iavtaltAktivitet}
+                        antall={props.statustall.medBrukerinnsyn.iavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                 </div>
@@ -163,7 +188,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.inaktiveBrukere}
+                        antall={props.statustall.medBrukerinnsyn.inaktiveBrukere}
                     />
                 </div>
                 <FilterStatusMinArbeidsliste

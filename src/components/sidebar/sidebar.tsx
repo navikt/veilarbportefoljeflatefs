@@ -22,7 +22,7 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
 import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
-import {Statustall} from '../../ducks/statustall';
+import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 
 export interface Sidebarelement {
     type: SidebarTabType;

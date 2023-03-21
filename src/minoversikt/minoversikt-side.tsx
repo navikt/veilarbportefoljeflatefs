@@ -22,7 +22,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.css';
 import './minoversikt.css';
 import './../components/tabell-overskrift.css';
-import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
@@ -44,7 +44,7 @@ import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
-import {Statustall, StatustallState} from '../ducks/statustall';
+import {StatustallVeileder, StatustallVeilederState} from '../ducks/statustall-veileder';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -54,8 +54,8 @@ export default function MinoversiktSide() {
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const statustallFetchStatus: StatustallState = useFetchStatusTall(gjeldendeVeileder);
-    const statustall: Statustall = useStatustallVeilederSelector();
+    const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeileder);
+    const statustall: StatustallVeileder = useStatustallVeilederSelector();
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
@@ -128,7 +128,7 @@ export default function MinoversiktSide() {
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
                         isSidebarHidden={isSidebarHidden}
-                        statustall={statustall}
+                        statustall={{medBrukerinnsyn: statustall, utenBrukerinnsyn: null}}
                     />
                     <div className="sokefelt-knapp__container">
                         <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />

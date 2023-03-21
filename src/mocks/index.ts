@@ -2,7 +2,7 @@ import innloggetVeileder from './innloggetVeileder';
 import me from './me';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
 import {veilederResponse} from './veiledere';
-import statustall from './statustall';
+import {statustallEnhet, statustallVeileder} from './statustallVeileder';
 import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
@@ -191,7 +191,8 @@ mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veilederR
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
-mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustallVeileder)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/portefolje/statustall', delayed(500, jsonResponse(statustallEnhet)));
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
@@ -200,7 +201,11 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonRespo
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
 );
-mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustallVeileder)));
+mock.get(
+    '/veilarbportefolje/api/veileder/:veileder/portefolje/statustall',
+    delayed(500, jsonResponse(statustallVeileder))
+);
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 mock.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', jsonResponse(hentArbeidsliste()));
 mock.get('/veilarbportefolje/api/arbeidsliste/:fodselsnummer', (req, res, ctx) =>
@@ -317,6 +322,7 @@ mock.get(
 );
 
 mock.get('/veilarbportefolje/api/enhet/:enhetId/geografiskbosted', delayed(500, jsonResponse(geografiskBosted)));
+
 // websocket
 class MockWebSocket {
     constructor(uri: string) {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
-import {leggTilStatustall} from '../../../ducks/statustall';
+import {leggTilStatustall} from '../../../ducks/statustall-veileder';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {ArbeidslisteDataModell, BrukerModell, KategoriModell} from '../../../model-interfaces';

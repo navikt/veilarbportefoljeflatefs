@@ -7,7 +7,7 @@ import sorteringReducer from './ducks/sortering';
 import veiledereReducer, {VeiledereState} from './ducks/veiledere';
 import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
 import filtreringReducer, {initialState} from './ducks/filtrering';
-import statustallReducer, {StatustallState} from './ducks/statustall';
+import statustallVeilederReducer, {StatustallVeilederState} from './ducks/statustall-veileder';
 import systemmeldingerReducer, {SystemmeldingState} from './ducks/systemmeldinger';
 import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
@@ -34,6 +34,7 @@ import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
 import tolkebehovListReducer, {TolkebehovSpraakListState} from './ducks/tolkebehov';
 import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjonsmelding';
 import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
+import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-enhet';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -62,8 +63,8 @@ export interface AppState {
     sortering: any;
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
-    statustallVeileder: StatustallState;
-    statustallEnhet: StatustallState;
+    statustallVeileder: StatustallVeilederState;
+    statustallEnhet: StatustallEnhetState;
     filtreringEnhetensOversikt: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
@@ -121,8 +122,8 @@ export default combineReducers<AppState>({
     sortering: sorteringReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    statustallVeileder: statustallReducer,
-    statustallEnhet: statustallReducer,
+    statustallVeileder: statustallVeilederReducer,
+    statustallEnhet: statustallEnhetReducer,
     filtreringEnhetensOversikt: persistentReducer(
         'enhetsState',
         window.location,

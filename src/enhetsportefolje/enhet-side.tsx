@@ -20,7 +20,7 @@ import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import '../style.css';
-import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatustallForEnhet} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
@@ -38,7 +38,7 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
-import {Statustall, StatustallState} from '../ducks/statustall';
+import {StatustallEnhet, StatustallEnhetState} from '../ducks/statustall-enhet';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -70,10 +70,10 @@ const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export default function EnhetSide() {
-    const statustallFetchStatus: StatustallState = useFetchStatusTall();
-    const statustall: Statustall = useStatustallEnhetSelector();
     const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
         usePortefoljeSelector(oversiktType);
+    const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
+    const statustall: StatustallEnhet = useStatustallEnhetSelector();
     const dispatch = useDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =
@@ -121,6 +121,7 @@ export default function EnhetSide() {
                 setScrolling(false);
             }
         }
+
         window.addEventListener('scroll', onScroll);
         return window.addEventListener('scroll', onScroll);
     });
