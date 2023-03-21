@@ -221,8 +221,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar fra registrering. Det finnes ikke svar fra registreringen på alle, f. eks.
-                                sykmeldte.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="registreringstype"
@@ -240,8 +239,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar fra registrering. Det finnes ikke svar fra registreringen på alle, f. eks.
-                                sykmeldte.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
@@ -258,8 +256,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar fra registrering. Det finnes ikke svar fra registreringen på alle, f. eks.
-                                sykmeldte.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanningGodkjent"
@@ -276,8 +273,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar fra registrering. Det finnes ikke svar fra registreringen på alle, f. eks.
-                                sykmeldte.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanningBestatt"
