@@ -62,7 +62,8 @@ export interface AppState {
     sortering: any;
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
-    statustall: StatustallState;
+    statustallVeileder: StatustallState;
+    statustallEnhet: StatustallState;
     filtreringEnhetensOversikt: FiltervalgModell;
     filtreringMinoversikt: FiltervalgModell;
     filtreringVeilederoversikt: FiltervalgModell;
@@ -120,7 +121,8 @@ export default combineReducers<AppState>({
     sortering: sorteringReducer,
     veiledere: veiledereReducer,
     portefoljestorrelser: portefoljestorrelserReducer,
-    statustall: statustallReducer,
+    statustallVeileder: statustallReducer,
+    statustallEnhet: statustallReducer,
     filtreringEnhetensOversikt: persistentReducer(
         'enhetsState',
         window.location,

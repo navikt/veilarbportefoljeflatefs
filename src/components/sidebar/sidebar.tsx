@@ -22,6 +22,7 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
 import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
+import {Statustall} from '../../ducks/statustall';
 
 export interface Sidebarelement {
     type: SidebarTabType;
@@ -71,6 +72,7 @@ interface SidebarProps {
     enhettiltak: OrNothing<Tiltak>;
     oversiktType: OversiktType;
     isSidebarHidden: boolean;
+    statustall: Statustall;
 }
 
 function Sidebar(props: SidebarProps) {
@@ -241,6 +243,7 @@ function Sidebar(props: SidebarProps) {
                         oversiktType={props.oversiktType}
                         filtervalg={props.filtervalg}
                         enhettiltak={props.enhettiltak}
+                        statustall={props.statustall}
                     />
                 </div>
             )}

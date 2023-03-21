@@ -37,6 +37,8 @@ import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
+import {Statustall, StatustallState} from '../ducks/statustall';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -68,7 +70,8 @@ const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export default function EnhetSide() {
-    const statustall = useFetchStatusTall();
+    const statustallFetchStatus: StatustallState = useFetchStatusTall();
+    const statustall: Statustall = useStatustallEnhetSelector();
     const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
         usePortefoljeSelector(oversiktType);
     const dispatch = useDispatch();
@@ -135,7 +138,7 @@ export default function EnhetSide() {
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny oversiktType={oversiktType} />
             <Informasjonsmeldinger />
-            <Innholdslaster avhengigheter={[statustall]}>
+            <Innholdslaster avhengigheter={[statustallFetchStatus]}>
                 <div
                     className={classNames('oversikt-sideinnhold', isSidebarHidden && 'oversikt-sideinnhold__hidden')}
                     id={`oversikt-sideinnhold_${id}`}
@@ -145,6 +148,7 @@ export default function EnhetSide() {
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
                         isSidebarHidden={isSidebarHidden}
+                        statustall={statustall}
                     />
                     <div className="sokefelt-knapp__container">
                         <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />

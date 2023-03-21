@@ -8,7 +8,7 @@ export function useFetchStatusTall(gjeldendeVeileder?: string) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
 
-    const statustall = useSelector((state: AppState) => state.statustall);
+    const statustall = useSelector((state: AppState) => state.statustallVeileder);
 
     useEffect(() => {
         if (enhet) {

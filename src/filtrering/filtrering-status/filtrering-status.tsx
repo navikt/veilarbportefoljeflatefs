@@ -8,17 +8,19 @@ import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../
 import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
+import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
+import {Statustall} from '../../ducks/statustall';
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
+    statustall: Statustall;
 }
 
 export function FiltreringStatus(props: FiltreringStatusProps) {
@@ -54,25 +56,24 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         }
     }
 
-    const statusTall = useStatusTallSelector();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         props.oversiktType === OversiktType.enhetensOversikt &&
-        statusTall.adressebeskyttelseEllerSkjermingTotalt > 0;
+        props.statustall.adressebeskyttelseEllerSkjermingTotalt > 0;
 
     return (
         <div className="filtrering-oversikt panel">
-            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statusTall.totalt)}</Label>
+            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(props.statustall.totalt)}</Label>
             {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && (
                 <ReadMore
-                    header={`Adressebeskyttelse/skjerming (${statusTall.adressebeskyttelseEllerSkjermingTotalt})`}
+                    header={`Adressebeskyttelse/skjerming (${props.statustall.adressebeskyttelseEllerSkjermingTotalt})`}
                 >
-                    {statusTall.adressebeskyttelseEllerSkjermingUfordelte > 0 && (
-                        <Detail>{`Ufordelte brukere (${statusTall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
+                    {props.statustall.adressebeskyttelseEllerSkjermingUfordelte > 0 && (
+                        <Detail>{`Ufordelte brukere (${props.statustall.adressebeskyttelseEllerSkjermingUfordelte})`}</Detail>
                     )}
-                    {statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV > 0 && (
-                        <Detail>{`Venter på svar fra NAV (${statusTall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
+                    {props.statustall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV > 0 && (
+                        <Detail>{`Venter på svar fra NAV (${props.statustall.adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV})`}</Detail>
                     )}
                     <br />
                     <Detail>
@@ -85,7 +86,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 {props.oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox
                         filterNavn="nyeBrukere"
-                        antall={statusTall.nyeBrukereForVeileder}
+                        antall={props.statustall.nyeBrukereForVeileder}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
@@ -93,7 +94,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ) : (
                     <BarInputCheckbox
                         filterNavn="ufordeltebruker"
-                        antall={statusTall.ufordelteBrukere}
+                        antall={props.statustall.ufordelteBrukere}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
@@ -109,52 +110,52 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
-                        antall={statusTall.trengerVurdering}
+                        antall={props.statustall.trengerVurdering}
                     />
                     <BarInputRadio
                         filterNavn="erSykmeldtMedArbeidsgiver"
                         handleChange={handleRadioButtonChange}
-                        antall={statusTall.erSykmeldtMedArbeidsgiver}
+                        antall={props.statustall.erSykmeldtMedArbeidsgiver}
                     />
                     {erVedtaksStotteFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="underVurdering"
                             handleChange={handleRadioButtonChange}
-                            antall={statusTall.underVurdering}
+                            antall={props.statustall.underVurdering}
                         />
                     )}
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="venterPaSvarFraNAV"
-                        antall={statusTall.venterPaSvarFraNAV}
+                        antall={props.statustall.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="venterPaSvarFraBruker"
-                        antall={statusTall.venterPaSvarFraBruker}
+                        antall={props.statustall.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="avtaltMoteMedNav"
                         handleChange={handleRadioButtonChange}
-                        antall={statusTall.moterMedNAVIdag}
+                        antall={props.statustall.moterMedNAVIdag}
                     />
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
-                        antall={statusTall.utlopteAktiviteter}
+                        antall={props.statustall.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="ikkeIavtaltAktivitet"
-                        antall={statusTall.ikkeIavtaltAktivitet}
+                        antall={props.statustall.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="iavtaltAktivitet"
-                        antall={statusTall.iavtaltAktivitet}
+                        antall={props.statustall.iavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                 </div>
@@ -162,7 +163,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
-                        antall={statusTall.inaktiveBrukere}
+                        antall={props.statustall.inaktiveBrukere}
                     />
                 </div>
                 <FilterStatusMinArbeidsliste

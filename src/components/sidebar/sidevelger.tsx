@@ -13,15 +13,17 @@ import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filt
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import MineFilterTab from './mine-filter-tab';
+import {Statustall} from '../../ducks/statustall';
 
 interface SidevelgerProps {
     selectedTabData: Sidebarelement;
     oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
+    statustall: Statustall;
 }
 
-function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: SidevelgerProps) {
+function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
     const dispatch = useDispatch();
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
@@ -39,7 +41,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: Si
                 handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
             >
-                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} />
+                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Filter') {
