@@ -85,7 +85,8 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         props.oversiktType === OversiktType.enhetensOversikt &&
         props.statustall.utenBrukerinnsyn !== null &&
-        props.statustall.utenBrukerinnsyn.totalt > 0;
+        (props.statustall.utenBrukerinnsyn.ufordelteBrukere > 0 ||
+            props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
     return (
         <div className="filtrering-oversikt panel">
