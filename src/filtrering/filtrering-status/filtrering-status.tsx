@@ -88,10 +88,13 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         (props.statustall.utenBrukerinnsyn.ufordelteBrukere > 0 ||
             props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
+    const antallPortefoljebrukereTotalt =
+        props.statustall.medBrukerinnsyn.totalt + (props.statustall.utenBrukerinnsyn?.totalt ?? 0);
+
     return (
         <div className="filtrering-oversikt panel">
             <Label className="filtrering-oversikt__totalt-antall">
-                {tekstAntallBrukere(props.statustall.medBrukerinnsyn.totalt)}
+                {tekstAntallBrukere(antallPortefoljebrukereTotalt)}
             </Label>
             {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && props.statustall.utenBrukerinnsyn !== null && (
                 <ReadMore header={`Adressebeskyttelse/skjerming (${props.statustall.utenBrukerinnsyn.totalt})`}>
