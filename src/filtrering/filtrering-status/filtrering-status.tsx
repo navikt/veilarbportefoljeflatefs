@@ -47,14 +47,23 @@ interface FiltreringStatusProps {
     statustall: Statustall;
 }
 
-export function FiltreringStatus(props: FiltreringStatusProps) {
-    const ferdigfilterListe = props.filtervalg.ferdigfilterListe;
-    const kategoriliste = props.filtervalg.arbeidslisteKategori;
+export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
+    const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
+    const ferdigfilterListe = filtervalg.ferdigfilterListe;
+    const kategoriliste = filtervalg.arbeidslisteKategori;
+    const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
+        useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
+        oversiktType === OversiktType.enhetensOversikt &&
+        statustallUtenBrukerinnsyn !== null &&
+        (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
+
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, props.oversiktType));
+        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType));
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,7 +71,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
             : kategoriliste.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, props.oversiktType));
+        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -76,33 +85,20 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(endreFiltervalg('arbeidslisteKategori', [], props.oversiktType));
+            dispatch(endreFiltervalg('arbeidslisteKategori', [], oversiktType));
         }
     }
 
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
-        useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
-        props.oversiktType === OversiktType.enhetensOversikt &&
-        props.statustall.utenBrukerinnsyn !== null &&
-        (props.statustall.utenBrukerinnsyn.ufordelteBrukere > 0 ||
-            props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV > 0);
-
-    const antallPortefoljebrukereTotalt =
-        props.statustall.medBrukerinnsyn.totalt + (props.statustall.utenBrukerinnsyn?.totalt ?? 0);
-
     return (
         <div className="filtrering-oversikt panel">
-            <Label className="filtrering-oversikt__totalt-antall">
-                {tekstAntallBrukere(antallPortefoljebrukereTotalt)}
-            </Label>
-            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && props.statustall.utenBrukerinnsyn !== null && (
-                <ReadMore header={`Adressebeskyttelse/skjerming (${props.statustall.utenBrukerinnsyn.totalt})`}>
-                    {props.statustall.utenBrukerinnsyn.ufordelteBrukere > 0 && (
-                        <Detail>{`Ufordelte brukere (${props.statustall.utenBrukerinnsyn.ufordelteBrukere})`}</Detail>
+            <Label className="filtrering-oversikt__totalt-antall">{tekstAntallBrukere(statustallTotalt)}</Label>
+            {visBrukereMedAdressebeskyttelseEllerSkjermingStatus && statustallUtenBrukerinnsyn !== null && (
+                <ReadMore header={`Adressebeskyttelse/skjerming (${statustallUtenBrukerinnsyn.totalt})`}>
+                    {statustallUtenBrukerinnsyn.ufordelteBrukere > 0 && (
+                        <Detail>{`Ufordelte brukere (${statustallUtenBrukerinnsyn.ufordelteBrukere})`}</Detail>
                     )}
-                    {props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV > 0 && (
-                        <Detail>{`Venter på svar fra NAV (${props.statustall.utenBrukerinnsyn.venterPaSvarFraNAV})`}</Detail>
+                    {statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0 && (
+                        <Detail>{`Venter på svar fra NAV (${statustallUtenBrukerinnsyn.venterPaSvarFraNAV})`}</Detail>
                     )}
                     <br />
                     <Detail>
@@ -112,10 +108,10 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 </ReadMore>
             )}
             <div className="filter-checkboks-container">
-                {props.oversiktType === OversiktType.minOversikt ? (
+                {oversiktType === OversiktType.minOversikt ? (
                     <BarInputCheckbox
                         filterNavn="nyeBrukere"
-                        antall={props.statustall.medBrukerinnsyn.nyeBrukereForVeileder}
+                        antall={statustallMedBrukerinnsyn.nyeBrukereForVeileder}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
@@ -123,7 +119,7 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                 ) : (
                     <BarInputCheckbox
                         filterNavn="ufordeltebruker"
-                        antall={props.statustall.medBrukerinnsyn.ufordelteBrukere}
+                        antall={statustallMedBrukerinnsyn.ufordelteBrukere}
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
@@ -139,52 +135,52 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.medBrukerinnsyn.trengerVurdering}
+                        antall={statustallMedBrukerinnsyn.trengerVurdering}
                     />
                     <BarInputRadio
                         filterNavn="erSykmeldtMedArbeidsgiver"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.medBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                        antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
                     />
                     {erVedtaksStotteFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="underVurdering"
                             handleChange={handleRadioButtonChange}
-                            antall={props.statustall.medBrukerinnsyn.underVurdering}
+                            antall={statustallMedBrukerinnsyn.underVurdering}
                         />
                     )}
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="venterPaSvarFraNAV"
-                        antall={props.statustall.medBrukerinnsyn.venterPaSvarFraNAV}
+                        antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="venterPaSvarFraBruker"
-                        antall={props.statustall.medBrukerinnsyn.venterPaSvarFraBruker}
+                        antall={statustallMedBrukerinnsyn.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="avtaltMoteMedNav"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.medBrukerinnsyn.moterMedNAVIdag}
+                        antall={statustallMedBrukerinnsyn.moterMedNAVIdag}
                     />
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
-                        antall={props.statustall.medBrukerinnsyn.utlopteAktiviteter}
+                        antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="ikkeIavtaltAktivitet"
-                        antall={props.statustall.medBrukerinnsyn.ikkeIavtaltAktivitet}
+                        antall={statustallMedBrukerinnsyn.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                     <BarInputRadio
                         filterNavn="iavtaltAktivitet"
-                        antall={props.statustall.medBrukerinnsyn.iavtaltAktivitet}
+                        antall={statustallMedBrukerinnsyn.iavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                     />
                 </div>
@@ -192,15 +188,15 @@ export function FiltreringStatus(props: FiltreringStatusProps) {
                     <BarInputRadio
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
-                        antall={props.statustall.medBrukerinnsyn.inaktiveBrukere}
+                        antall={statustallMedBrukerinnsyn.inaktiveBrukere}
                     />
                 </div>
                 <FilterStatusMinArbeidsliste
                     ferdigfilterListe={kategoriliste}
                     handleChange={handleRadioButtonChange}
                     handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                    hidden={props.oversiktType !== OversiktType.minOversikt}
-                    filtervalg={props.filtervalg}
+                    hidden={oversiktType !== OversiktType.minOversikt}
+                    filtervalg={filtervalg}
                     endreFiltervalg={dispatchFiltreringStatusChanged}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
