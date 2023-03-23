@@ -89,8 +89,8 @@ export default function statustallVeilederReducer(
 }
 
 // Action Creators
-export function hentStatustallForVeileder(enhet: OrNothing<string>, veileder: string) {
-    return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veileder), {
+export function hentStatustallForVeileder(enhet: OrNothing<string>, veilederId: string) {
+    return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veilederId), {
         OK,
         FEILET,
         PENDING

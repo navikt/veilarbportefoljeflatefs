@@ -6,7 +6,7 @@ import {hentStatustallForVeileder} from '../../ducks/statustall-veileder';
 import {hentStatustallForEnhet} from '../../ducks/statustall-enhet';
 import {OrNothing} from '../../utils/types/types';
 
-export function useFetchStatustallForVeileder(gjeldendeVeileder: string) {
+export function useFetchStatustallForVeileder(veilederId: string) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
 
@@ -14,9 +14,9 @@ export function useFetchStatustallForVeileder(gjeldendeVeileder: string) {
 
     useEffect(() => {
         if (enhet) {
-            dispatch(hentStatustallForVeileder(enhet, gjeldendeVeileder));
+            dispatch(hentStatustallForVeileder(enhet, veilederId));
         }
-    }, [enhet, dispatch, gjeldendeVeileder]);
+    }, [enhet, dispatch, veilederId]);
 
     return statustall;
 }

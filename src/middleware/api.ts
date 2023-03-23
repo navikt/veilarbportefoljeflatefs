@@ -173,8 +173,8 @@ export function hentStatusTall(enhetId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentStatusTallForVeileder(enhetId, veileder) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/portefolje/statustall?enhet=${enhetId}`;
+export function hentStatusTallForVeileder(enhetId, veilederId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederId}/portefolje/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
