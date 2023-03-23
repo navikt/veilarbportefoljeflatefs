@@ -22,7 +22,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import '../style.css';
 import './minoversikt.css';
 import './../components/tabell-overskrift.css';
-import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
@@ -43,6 +43,8 @@ import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
+import {StatustallVeileder, StatustallVeilederState} from '../ducks/statustall-veileder';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -51,8 +53,9 @@ export default function MinoversiktSide() {
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
-    const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const statustall = useFetchStatusTall(gjeldendeVeileder);
+    const gjeldendeVeilederId = useSelectGjeldendeVeileder();
+    const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
+    const statustall: StatustallVeileder = useStatustallVeilederSelector();
     const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
@@ -66,7 +69,7 @@ export default function MinoversiktSide() {
     useFetchPortefolje(oversiktType);
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const visesAnnenVeiledersPortefolje = gjeldendeVeileder !== innloggetVeilederIdent!.ident;
+    const visesAnnenVeiledersPortefolje = gjeldendeVeilederId !== innloggetVeilederIdent!.ident;
     const antallBrukere =
         portefolje.data.antallReturnert > portefolje.data.antallTotalt
             ? portefolje.data.antallTotalt
@@ -111,7 +114,7 @@ export default function MinoversiktSide() {
         <div className="side-storrelse" id={`side-storrelse_${id}`} data-testid={`side-storrelse_${id}`}>
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
             <Informasjonsmeldinger />
-            <Innholdslaster avhengigheter={[statustall]}>
+            <Innholdslaster avhengigheter={[statustallFetchStatus]}>
                 <MinOversiktWrapper
                     className={classNames(
                         'oversikt-sideinnhold portefolje-side',
@@ -125,6 +128,7 @@ export default function MinoversiktSide() {
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
                         isSidebarHidden={isSidebarHidden}
+                        statustall={{medBrukerinnsyn: statustall, utenBrukerinnsyn: null}}
                     />
                     <div className="sokefelt-knapp__container">
                         <FiltreringNavnellerfnr filtervalg={filtervalg} endreFiltervalg={doEndreFiltervalg} />
@@ -182,7 +186,7 @@ export default function MinoversiktSide() {
                                             dispatch(
                                                 hentPortefoljeForVeileder(
                                                     enhetId,
-                                                    gjeldendeVeileder,
+                                                    gjeldendeVeilederId,
                                                     sorteringsrekkefolge,
                                                     sorteringsfelt,
                                                     filtervalg
@@ -192,7 +196,7 @@ export default function MinoversiktSide() {
                                         oversiktType={oversiktType}
                                         sokVeilederSkalVises={false}
                                         antallTotalt={portefolje.data.antallTotalt}
-                                        gjeldendeVeileder={gjeldendeVeileder}
+                                        gjeldendeVeileder={gjeldendeVeilederId}
                                         visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                         scrolling={scrolling}
                                         isSidebarHidden={isSidebarHidden}

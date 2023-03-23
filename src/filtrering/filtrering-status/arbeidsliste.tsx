@@ -1,6 +1,6 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
-import {useStatusTallSelector} from '../../hooks/redux/use-statustall';
+import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.css';
 import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
@@ -21,7 +21,7 @@ export interface FilterStatusMinArbeidslisteProps {
 }
 
 function FilterStatusMinArbeidsliste(props: FilterStatusMinArbeidslisteProps) {
-    const statusTall = useStatusTallSelector();
+    const statusTall = useStatustallVeilederSelector();
 
     return (
         <>

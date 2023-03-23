@@ -3,12 +3,12 @@ import {doThenDispatch, STATUS} from './utils';
 import {OrNothing} from '../utils/types/types';
 
 // Actions
-export const OK = 'veilarbportefoljeflatefs/statustall/OK';
-export const FEILET = 'veilarbportefoljeflatefs/statustall/FEILET';
-export const PENDING = 'veilarbportefoljeflatefs/statustall/PENDING';
-export const LEGG_TIL_STATUSTALL = 'LEGG_TIL_STATUSTALL';
+export const OK = 'veilarbportefoljeflatefs/statustall-veileder/OK';
+export const FEILET = 'veilarbportefoljeflatefs/statustall-veileder/FEILET';
+export const PENDING = 'veilarbportefoljeflatefs/statustall-veileder/PENDING';
+export const LEGG_TIL_STATUSTALL = 'veilarbportefoljeflatefs/statustall-veileder/LEGG_TIL_STATUSTALL';
 
-export interface Statustall {
+export interface StatustallVeileder {
     totalt: number;
     ufordelteBrukere: number;
     inaktiveBrukere: number;
@@ -27,17 +27,14 @@ export interface Statustall {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
-    adressebeskyttelseEllerSkjermingTotalt: number;
-    adressebeskyttelseEllerSkjermingUfordelte: number;
-    adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV: number;
 }
 
-export interface StatustallState {
+export interface StatustallVeilederState {
     status: string;
-    data: Statustall;
+    data: StatustallVeileder;
 }
 
-export const initalStatusState: StatustallState = {
+export const initalStatusState: StatustallVeilederState = {
     status: STATUS.NOT_STARTED,
     data: {
         totalt: 0,
@@ -57,15 +54,15 @@ export const initalStatusState: StatustallState = {
         nyeBrukereForVeileder: 0,
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
-        underVurdering: 0,
-        adressebeskyttelseEllerSkjermingTotalt: 0,
-        adressebeskyttelseEllerSkjermingUfordelte: 0,
-        adressebeskyttelseEllerSkjermingVenterPaSvarFraNAV: 0
+        underVurdering: 0
     }
 };
 
 // Reducer
-export default function statustallReducer(state: StatustallState = initalStatusState, action): StatustallState {
+export default function statustallVeilederReducer(
+    state: StatustallVeilederState = initalStatusState,
+    action
+): StatustallVeilederState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {
@@ -73,9 +70,9 @@ export default function statustallReducer(state: StatustallState = initalStatusS
             }
             return {...state, status: STATUS.PENDING};
         case FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
+            return {...state, status: STATUS.ERROR, data: action.data.statustall};
         case OK: {
-            return {...state, status: STATUS.OK, data: action.data};
+            return {...state, status: STATUS.OK, data: action.data.statustall};
         }
         case LEGG_TIL_STATUSTALL: {
             return {
@@ -92,15 +89,8 @@ export default function statustallReducer(state: StatustallState = initalStatusS
 }
 
 // Action Creators
-export function hentStatusTall(enhet: OrNothing<string>, veileder?: string) {
-    if (veileder == null) {
-        return doThenDispatch(() => Api.hentStatusTall(enhet), {
-            OK,
-            FEILET,
-            PENDING
-        });
-    }
-    return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veileder), {
+export function hentStatustallForVeileder(enhet: OrNothing<string>, veilederId: string) {
+    return doThenDispatch(() => Api.hentStatusTallForVeileder(enhet, veilederId), {
         OK,
         FEILET,
         PENDING
