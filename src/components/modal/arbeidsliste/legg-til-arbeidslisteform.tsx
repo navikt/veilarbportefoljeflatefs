@@ -4,7 +4,7 @@ import {postArbeidsliste} from '../../../ducks/arbeidsliste';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
-import {leggTilStatustall} from '../../../ducks/statustall';
+import {leggTilStatustall} from '../../../ducks/statustall-veileder';
 import {AppState} from '../../../reducer';
 import {Form, Formik} from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';

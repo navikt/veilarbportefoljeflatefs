@@ -169,12 +169,12 @@ export function slettVeiledergruppe(enhetId: string | undefined | null, filterId
 }
 
 export function hentStatusTall(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/statustall`;
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/portefolje/statustall`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentStatusTallForVeileder(enhetId, veileder) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/statustall?enhet=${enhetId}`;
+export function hentStatusTallForVeileder(enhetId, veilederId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederId}/portefolje/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

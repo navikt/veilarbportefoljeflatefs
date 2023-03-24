@@ -17,15 +17,17 @@ import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
-import {useFetchStatusTall} from '../hooks/portefolje/use-fetch-statustall';
+import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Panel} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
+import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 
 function VeiledereSide() {
-    const statustall = useFetchStatusTall();
+    const gjeldendeVeileder = useSelectGjeldendeVeileder();
+    const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
     const dispatch = useDispatch();

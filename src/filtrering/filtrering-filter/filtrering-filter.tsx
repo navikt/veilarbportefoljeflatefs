@@ -293,13 +293,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         id="status-14a-vedtak-filter"
                         render={() => (
                             <>
-                                {/* TODO: Bruke riktig lenke til Navet */}
-                                {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
                                 <Alert variant="info" size="small" className="registrering-alert">
                                     Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
                                     iverksatte § 14 a-vedtaket.{' '}
                                     <Link
-                                        href="https://navno.sharepoint.com/"
+                                        href="https://navno.sharepoint.com/sites/intranett-produktomrader-og-prosjekter/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak.aspx"
                                         target="_blank"
                                         rel="noreferrer noopener"
                                     >
