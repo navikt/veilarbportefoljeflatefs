@@ -143,7 +143,7 @@ export function fetchPortefoljeStorrelser(enhetId) {
 }
 
 export function tilordneVeileder(tilordninger) {
-    const url = `${VEILARBOPPFOLGING_URL}/api/tilordneveileder/`;
+    const url = `${VEILARBOPPFOLGING_URL}/api/tilordneveileder`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger)};
     return fetch(url, config).then(sjekkStatuskode);
 }
