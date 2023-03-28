@@ -217,7 +217,7 @@ mock.get('/veilarbportefolje/api/veileder/:veileder/moteplan', jsonResponse(hent
 //veilarbvedtakstøtte
 mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
 
-mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(ctx.json(tildel(body))));
+mock.post('/veilarboppfolging/api/tilordneveileder', ({body}, res, ctx) => res(ctx.json(tildel(body))));
 
 // arbeidsliste-api
 mock.post('/veilarbportefolje/api/arbeidsliste/', (req, res, ctx) =>
