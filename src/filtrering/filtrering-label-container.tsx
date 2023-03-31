@@ -12,13 +12,13 @@ import FilterKonstanter, {
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {pagineringSetup} from '../ducks/paginering';
 import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 
 interface FiltreringLabelContainerProps {
@@ -98,9 +98,37 @@ function FiltreringLabelContainer({
                 });
             } else if (key === 'utdanning') {
                 return value.map(singleValue => {
+                    if (singleValue === 'INGEN_DATA') {
+                        return (
+                            <FiltreringLabel
+                                key={`utdanning-${singleValue}`}
+                                label={`Utdanning: ${FilterKonstanter[key][singleValue].label}`}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    }
                     return (
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'registreringstype') {
+                return value.map(singleValue => {
+                    if (singleValue === 'INGEN_DATA') {
+                        return (
+                            <FiltreringLabel
+                                key={`situasjon-${singleValue}`}
+                                label={`Situasjon: ${FilterKonstanter[key][singleValue].label}`}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    }
+                    return (
+                        <FiltreringLabel
+                            key={`situasjon-${singleValue}`}
                             label={FilterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
@@ -282,7 +310,7 @@ function FiltreringLabelContainer({
                     return [<FiltreringLabel key={key} label={labelId} slettFilter={() => slettEnkelt(key, '')} />];
                 }
             } else if (value) {
-                kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
+                kolonne = key === 'ytelse' ? null : getKolonneFraLabel(value);
                 muligMenIkkeValgt =
                     kolonne === Kolonne.AVTALT_AKTIVITET && oversiktType === OversiktType.minOversikt
                         ? true

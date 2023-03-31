@@ -19,6 +19,8 @@ import {
     servicegruppe,
     stillingFraNavFilter,
     utdanning,
+    utdanningBestatt,
+    utdanningGodkjent,
     ytelse
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
@@ -34,17 +36,17 @@ import {
 } from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
-import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label} from '@navikt/ds-react';
+import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
+import {ExternalLink} from '@navikt/ds-icons';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -219,7 +221,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="registreringstype"
@@ -237,7 +239,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
@@ -249,14 +251,36 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
                 <Dropdown
-                    name="Er utdanningen godkjent og bestått"
-                    id="er-utdanningen-godkjent-og-bestatt"
+                    name="Er utdanningen godkjent"
+                    id="er-utdanningen-godkjent"
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
-                            <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                            <CheckboxFilterform
+                                form="utdanningGodkjent"
+                                valg={utdanningGodkjent}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanningen bestått"
+                    id="er-utdanningen-bestatt"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
+                            </Alert>
+                            <CheckboxFilterform
+                                form="utdanningBestatt"
+                                valg={utdanningBestatt}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         </>
                     )}
                 />
@@ -265,16 +289,21 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <div className="filtrering-filter__kolonne">
                     <Label size="small">Utfasing av Arena</Label>
                     <Dropdown
-                        name="Status §14a-vedtak"
+                        name="Status § 14 a-vedtak"
                         id="status-14a-vedtak-filter"
                         render={() => (
                             <>
-                                {/* TODO: Bruke riktig lenke til Navet */}
-                                {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
                                 <Alert variant="info" size="small" className="registrering-alert">
                                     Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
-                                    iverksatte §14a-vedtaket.{' '}
-                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
+                                    iverksatte § 14 a-vedtaket.{' '}
+                                    <Link
+                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak.aspx"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                    >
+                                        Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                    </Link>
+                                    .
                                 </Alert>
                                 <CheckboxFilterform
                                     valg={avvik14aVedtakValg()}

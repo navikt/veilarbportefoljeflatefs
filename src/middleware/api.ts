@@ -128,12 +128,12 @@ export function hentAktivBruker(): Promise<VeilederModell> {
 }
 
 export function hentEnhetsFilterGrupper(enhetId) {
-    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}/`;
+    const url = `${VEILARBFILTER_URL}/enhet/${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
 export function hentMineFilter() {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -143,7 +143,7 @@ export function fetchPortefoljeStorrelser(enhetId) {
 }
 
 export function tilordneVeileder(tilordninger) {
-    const url = `${VEILARBOPPFOLGING_URL}/api/tilordneveileder/`;
+    const url = `${VEILARBOPPFOLGING_URL}/api/tilordneveileder`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(tilordninger)};
     return fetch(url, config).then(sjekkStatuskode);
 }
@@ -169,12 +169,12 @@ export function slettVeiledergruppe(enhetId: string | undefined | null, filterId
 }
 
 export function hentStatusTall(enhetId) {
-    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/statustall`;
+    const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/portefolje/statustall`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentStatusTallForVeileder(enhetId, veileder) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/statustall?enhet=${enhetId}`;
+export function hentStatusTallForVeileder(enhetId, veilederId) {
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederId}/portefolje/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
@@ -198,13 +198,13 @@ export function hentVedtakstotteFeature(enhetId: string) {
 }
 
 export function redigerMineFilter(endringer: RedigerLagretFilter): Promise<RedigerLagretFilter> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(endringer)};
     return fetchToJson(url, config);
 }
 
 export function nyttMineFilter(nyttFilter: NyttLagretFilter): Promise<NyttLagretFilter> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(nyttFilter)};
     return fetchToJson(url, config);
 }
@@ -218,7 +218,7 @@ export function slettMineFilter(filterId: number): Promise<number> {
 }
 
 export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise<number> {
-    const url = `${VEILARBFILTER_URL}/minelagredefilter/lagresortering/`;
+    const url = `${VEILARBFILTER_URL}/minelagredefilter/lagresortering`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(sorteringOgIder)};
     return fetchToJson(url, config);
 }

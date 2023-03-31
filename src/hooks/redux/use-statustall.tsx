@@ -1,11 +1,15 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {Statustall} from '../../ducks/statustall';
+import {StatustallVeileder} from '../../ducks/statustall-veileder';
+import {StatustallEnhet} from '../../ducks/statustall-enhet';
 
-const selectStatusTallData = (state: AppState) => state.statustall.data;
+const selectStatustallVeilederData = (state: AppState) => state.statustallVeileder.data;
+const selectStatustallEnhetData = (state: AppState) => state.statustallEnhet.data;
 
-export function useStatusTallSelector() {
-    const statusTall: Statustall = useSelector<AppState, Statustall>(state => selectStatusTallData(state));
+export function useStatustallVeilederSelector() {
+    return useSelector<AppState, StatustallVeileder>(state => selectStatustallVeilederData(state));
+}
 
-    return statusTall;
+export function useStatustallEnhetSelector() {
+    return useSelector<AppState, StatustallEnhet>(state => selectStatustallEnhetData(state));
 }
