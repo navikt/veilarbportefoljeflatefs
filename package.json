@@ -40,7 +40,7 @@
     },
     "dependencies": {
         "@navikt/ds-css": "2.0.5",
-        "@navikt/ds-css-internal": "2.0.5",
+        "@navikt/ds-css-internal": "2.7.6",
         "@navikt/ds-icons": "2.0.5",
         "@navikt/ds-react": "2.0.5",
         "@navikt/ds-react-internal": "2.0.5",
