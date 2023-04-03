@@ -147,14 +147,9 @@ export default function MinoversiktSide() {
                     <div
                         className={classNames('oversikt__container', isSidebarHidden && 'oversikt__container__hidden')}
                     >
-                        <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                            <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                <div
-                                    className={classNames(
-                                        'toolbar-container',
-                                        antallBrukere < 4 && 'ikke-sticky__toolbar-container'
-                                    )}
-                                >
+                        <div className="sticky-container">
+                            <span className="sticky-skygge">
+                                <div className="toolbar-container">
                                     <div
                                         className={classNames(
                                             'tabellinfo',

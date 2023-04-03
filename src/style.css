@@ -2052,26 +2052,6 @@ GRID
 }
 
 .sticky-container {
-    z-index: 5;
-    background-color: #f4f4f4;
-}
-
-.ikke-sticky__skygge {
-    height: 16px;
-    top: -16px;
-}
-
-.ikke-sticky__toolbar-container {
-    position: sticky;
-    top: 0;
-    border-bottom: 1px solid #6a6a6a;
-    z-index: 3;
-}
-
-.ikke-sticky__container {
-    position: inherit;
-    top: 0;
-    z-index: 1;
     background-color: #f4f4f4;
 }
 
@@ -2105,6 +2085,7 @@ GRID
 
 .toolbar-container .tabellinfo__hidden {
     grid-column-start: 2;
+    margin-top: 0.75rem;
 }
 
 .toolbar-container .tabellinfo .tabelloverskrift {
