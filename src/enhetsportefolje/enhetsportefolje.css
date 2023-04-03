@@ -1,15 +1,7 @@
 .veilarbportefoljeflatefs .portefolje__container {
-    min-height: 100%;
     margin-bottom: 2rem;
     border-bottom: 1px solid #6a6a6a;
     border-radius: 4px;
-}
-.veilarbportefoljeflatefs .portefolje__container__tom-liste {
-    border-bottom: none;
-}
-.veilarbportefoljeflatefs .portefolje__container__sticky {
-    position: sticky;
-    top: 5rem;
 }
 .veilarbportefoljeflatefs .velgfiltermelding {
     text-align: center;
