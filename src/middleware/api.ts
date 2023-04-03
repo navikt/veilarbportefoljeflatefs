@@ -194,7 +194,7 @@ export function hentFeatures(featureQueryString: string) {
 }
 
 export function hentVedtakstotteFeature(enhetId: string) {
-    return fetchToJson(`${VEDTAKSTOTTE_FEATURE_URL}?enhetId=${enhetId}`);
+    return fetchToJson(`${VEDTAKSTOTTE_FEATURE_URL}?enhetId=${enhetId}`, MED_CREDENTIALS);
 }
 
 export function redigerMineFilter(endringer: RedigerLagretFilter): Promise<RedigerLagretFilter> {
