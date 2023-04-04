@@ -1,10 +1,6 @@
 name: Deploy to dev
 on:
     workflow_dispatch:
-    push:
-        branches:
-            - dev
-            - master
 env:
     CI: true
     TZ: Europe/Amsterdam
