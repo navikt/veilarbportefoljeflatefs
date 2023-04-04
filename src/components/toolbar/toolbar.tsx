@@ -109,19 +109,18 @@ function Toolbar(props: ToolbarProps) {
                     <Paginering onPaginering={onPaginering} antallTotalt={antallTotalt} />
                 </div>
             </div>
-            <div className="brukerfeilmelding">
-                {brukerfeilMelding.status && (
-                    <Alert
-                        variant="error"
-                        size="small"
-                        inline={true}
-                        aria-labelledby={feilmelding}
-                        data-testid={'brukerfeilmelding'}
-                    >
-                        {feilmelding}
-                    </Alert>
-                )}
-            </div>
+            {brukerfeilMelding.status && (
+                <Alert
+                    variant="error"
+                    size="small"
+                    inline={true}
+                    className="brukerfeilmelding"
+                    aria-labelledby={feilmelding}
+                    data-testid={'brukerfeilmelding'}
+                >
+                    {feilmelding}
+                </Alert>
+            )}
         </>
     );
 }

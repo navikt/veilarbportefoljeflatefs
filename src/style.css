@@ -2090,7 +2090,6 @@ GRID
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 4;
-    margin-top: -1rem;
     z-index: 1;
     background-color: #f4f4f4;
     box-shadow: inset 0 -1px var(--a-gray-700);
@@ -2100,6 +2099,7 @@ GRID
     position: sticky;
     display: block;
     grid-column: 1/3;
+    grid-row: 4;
     top: 11rem;
     height: 1rem;
     content: '';

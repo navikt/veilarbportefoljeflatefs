@@ -35,9 +35,7 @@ Cypress.Commands.add('configure', () => {
         method: 'GET',
         url: '/veilarbportefoljeflatefs/api/feature'
     });
-    cy.getByTestId('enhetens-oversikt')
-        .contains('Enhetens oversikt')
-        .should('exist');
+    cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt').should('exist');
 });
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => {
@@ -118,36 +116,22 @@ Cypress.Commands.add('klikkTab', tab => {
 });
 
 Cypress.Commands.add('checkbox', testid => {
-    cy.getByTestId(testid)
-        .should('not.be.checked')
-        .check({force: true});
+    cy.getByTestId(testid).should('not.be.checked').check({force: true});
     cy.getByTestId(testid).should('be.checked');
 });
 
 Cypress.Commands.add('checkboxFirst', testid => {
-    cy.getByTestId(testid)
-        .first()
-        .should('not.be.checked')
-        .check({force: true});
-    cy.getByTestId(testid)
-        .first()
-        .should('be.checked');
+    cy.getByTestId(testid).first().should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).first().should('be.checked');
 });
 
 Cypress.Commands.add('checkboxLast', testid => {
-    cy.getByTestId(testid)
-        .last()
-        .should('not.be.checked')
-        .check({force: true});
-    cy.getByTestId(testid)
-        .last()
-        .should('be.checked');
+    cy.getByTestId(testid).last().should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).last().should('be.checked');
 });
 
 Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
-    cy.getByTestId(`dropdown-knapp_${filternavn}`)
-        .should('be.visible')
-        .click();
+    cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible').click();
 });
 
 Cypress.Commands.add('apneArbeidslistePaPerson', () => {
