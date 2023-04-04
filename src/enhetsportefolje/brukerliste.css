@@ -12,10 +12,11 @@
     border-top: 1px solid #a0a0a0;
 }
 .veilarbportefoljeflatefs .brukerliste li:first-child {
-    border-top: none;
+    border-radius: var(--a-border-radius-medium) var(--a-border-radius-medium) 0 0;
 }
 .veilarbportefoljeflatefs .brukerliste li:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid #a0a0a0;
+    border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
 }
 .veilarbportefoljeflatefs .brukerliste__element {
     display: flex;

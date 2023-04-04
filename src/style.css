@@ -2059,8 +2059,6 @@ GRID
     grid-template-rows: auto auto auto auto;
     z-index: 3;
     background-color: #f4f4f4;
-    border-bottom: 1px solid #6a6a6a;
-    border-radius: 4px;
 }
 
 .toolbar-container .tabellinfo {
