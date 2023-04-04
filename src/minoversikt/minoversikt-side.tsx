@@ -147,61 +147,58 @@ export default function MinoversiktSide() {
                     <div
                         className={classNames('oversikt__container', isSidebarHidden && 'oversikt__container__hidden')}
                     >
-                        <span className="sticky-skygge">
-                            <div className="toolbar-container">
-                                <div
-                                    className={classNames(
-                                        'tabellinfo',
-                                        visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
-                                        ((scrolling && isSidebarHidden) ||
-                                            (scrolling && windowWidth < 1200) ||
-                                            (!isSidebarHidden && windowWidth < 1200)) &&
-                                            'tabellinfo__hidden'
-                                    )}
-                                >
-                                    <TabellOverskrift
-                                        className={
-                                            visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''
-                                        }
-                                    />
-                                    {visesAnnenVeiledersPortefolje && (
-                                        <Alert
-                                            variant="info"
-                                            className="alertstripe__annen-veileder-varsel"
-                                            data-testid="annen-veileder_infotekst"
-                                            size="small"
-                                        >
-                                            {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
-                                        </Alert>
-                                    )}
-                                </div>
-                                <Toolbar
-                                    onPaginering={() =>
-                                        dispatch(
-                                            hentPortefoljeForVeileder(
-                                                enhetId,
-                                                gjeldendeVeilederId,
-                                                sorteringsrekkefolge,
-                                                sorteringsfelt,
-                                                filtervalg
-                                            )
-                                        )
-                                    }
-                                    oversiktType={oversiktType}
-                                    sokVeilederSkalVises={false}
-                                    antallTotalt={portefolje.data.antallTotalt}
-                                    gjeldendeVeileder={gjeldendeVeilederId}
-                                    visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                    scrolling={scrolling}
-                                    isSidebarHidden={isSidebarHidden}
+                        <div className="toolbar-container">
+                            <div
+                                className={classNames(
+                                    'tabellinfo',
+                                    visesAnnenVeiledersPortefolje && 'tabellinfo__annen-veileder',
+                                    ((scrolling && isSidebarHidden) ||
+                                        (scrolling && windowWidth < 1200) ||
+                                        (!isSidebarHidden && windowWidth < 1200)) &&
+                                        'tabellinfo__hidden'
+                                )}
+                            >
+                                <TabellOverskrift
+                                    className={visesAnnenVeiledersPortefolje ? 'tabelloverskrift__annen-veileder' : ''}
                                 />
-                                <MinoversiktTabellOverskrift
-                                    visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                    innloggetVeileder={innloggetVeilederIdent!.ident}
-                                    settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                                />
+                                {visesAnnenVeiledersPortefolje && (
+                                    <Alert
+                                        variant="info"
+                                        className="alertstripe__annen-veileder-varsel"
+                                        data-testid="annen-veileder_infotekst"
+                                        size="small"
+                                    >
+                                        {`Du er inne på ${veilederFraUrl.fornavn} ${veilederFraUrl.etternavn} sin oversikt`}
+                                    </Alert>
+                                )}
                             </div>
-                        </span>
+                            <Toolbar
+                                onPaginering={() =>
+                                    dispatch(
+                                        hentPortefoljeForVeileder(
+                                            enhetId,
+                                            gjeldendeVeilederId,
+                                            sorteringsrekkefolge,
+                                            sorteringsfelt,
+                                            filtervalg
+                                        )
+                                    )
+                                }
+                                oversiktType={oversiktType}
+                                sokVeilederSkalVises={false}
+                                antallTotalt={portefolje.data.antallTotalt}
+                                gjeldendeVeileder={gjeldendeVeilederId}
+                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                scrolling={scrolling}
+                                isSidebarHidden={isSidebarHidden}
+                            />
+                            <MinoversiktTabellOverskrift
+                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
+                                innloggetVeileder={innloggetVeilederIdent!.ident}
+                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
+                            />
+                        </div>
+
                         <MinoversiktTabell
                             innloggetVeileder={innloggetVeilederIdent}
                             settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
