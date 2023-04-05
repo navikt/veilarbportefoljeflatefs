@@ -166,12 +166,7 @@ export default function EnhetSide() {
                         className="filtrering-label-container"
                     />
                     {harFilter ? (
-                        <div
-                            className={classNames(
-                                'oversikt__container',
-                                isSidebarHidden && 'oversikt__container__hidden'
-                            )}
-                        >
+                        <div className="oversikt__container">
                             <div className={classNames('toolbar-container')}>
                                 <div
                                     className={classNames(
@@ -203,11 +198,7 @@ export default function EnhetSide() {
                                 />
                                 <EnhetTabellOverskrift />
                             </div>
-                            <EnhetTabell
-                                classNameWrapper={
-                                    antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
-                                }
-                            />
+                            <EnhetTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
                         <Alert

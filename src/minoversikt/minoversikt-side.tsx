@@ -144,9 +144,7 @@ export default function MinoversiktSide() {
                             visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
                         )}
                     />
-                    <div
-                        className={classNames('oversikt__container', isSidebarHidden && 'oversikt__container__hidden')}
-                    >
+                    <div className="oversikt__container">
                         <div className="toolbar-container">
                             <div
                                 className={classNames(
