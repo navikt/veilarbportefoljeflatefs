@@ -47,6 +47,13 @@ spec:
       rules:
         - application: poao-unleash
           namespace: poao
+      external:
+        - host: veilarbportefolje.dev-fss-pub.nais.io
+        - host: veilarbfilter.dev-fss-pub.nais.io
+        - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
+        - host: veilarbveileder.dev-fss-pub.nais.io
+        - host: veilarboppfolging.dev-fss-pub.nais.io
+        - host: modiacontextholder-q1.dev-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
