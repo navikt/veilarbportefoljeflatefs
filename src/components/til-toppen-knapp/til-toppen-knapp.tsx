@@ -38,7 +38,6 @@ export const TilToppenKnapp = () => {
 
     return (
         <Button
-            size="small"
             className={classNames('til-toppen-knapp', 'knapp', !knappSkalVises && 'til-toppen-knapp--skjul')}
             variant="secondary"
             ref={knappRef}

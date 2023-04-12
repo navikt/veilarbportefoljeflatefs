@@ -166,57 +166,39 @@ export default function EnhetSide() {
                         className="filtrering-label-container"
                     />
                     {harFilter ? (
-                        <div
-                            className={classNames(
-                                'oversikt__container',
-                                isSidebarHidden && 'oversikt__container__hidden'
-                            )}
-                        >
-                            <div className={antallBrukere > 4 ? 'sticky-container' : 'ikke-sticky__container'}>
-                                <span className={antallBrukere > 4 ? 'sticky-skygge' : 'ikke-sticky__skygge'}>
-                                    <div
-                                        className={classNames(
-                                            'toolbar-container',
-                                            antallBrukere < 4 && 'ikke-sticky__toolbar-container'
-                                        )}
-                                    >
-                                        <div
-                                            className={classNames(
-                                                'tabellinfo',
-                                                ((scrolling && isSidebarHidden) ||
-                                                    (scrolling && windowWidth < 1200) ||
-                                                    (!isSidebarHidden && windowWidth < 1200)) &&
-                                                    'tabellinfo__hidden'
-                                            )}
-                                        >
-                                            <TabellOverskrift />
-                                        </div>
-                                        <Toolbar
-                                            onPaginering={() =>
-                                                dispatch(
-                                                    hentPortefoljeForEnhet(
-                                                        enhetId,
-                                                        sorteringsrekkefolge,
-                                                        sorteringsfelt,
-                                                        filtervalg
-                                                    )
-                                                )
-                                            }
-                                            oversiktType={oversiktType}
-                                            sokVeilederSkalVises
-                                            antallTotalt={portefoljeData.antallTotalt}
-                                            scrolling={scrolling}
-                                            isSidebarHidden={isSidebarHidden}
-                                        />
-                                        <EnhetTabellOverskrift />
-                                    </div>
-                                </span>
-                                <EnhetTabell
-                                    classNameWrapper={
-                                        antallBrukere > 0 ? 'portefolje__container' : 'portefolje__container__tom-liste'
+                        <div className="oversikt__container">
+                            <div className={classNames('toolbar-container')}>
+                                <div
+                                    className={classNames(
+                                        'tabellinfo',
+                                        ((scrolling && isSidebarHidden) ||
+                                            (scrolling && windowWidth < 1200) ||
+                                            (!isSidebarHidden && windowWidth < 1200)) &&
+                                            'tabellinfo__hidden'
+                                    )}
+                                >
+                                    <TabellOverskrift />
+                                </div>
+                                <Toolbar
+                                    onPaginering={() =>
+                                        dispatch(
+                                            hentPortefoljeForEnhet(
+                                                enhetId,
+                                                sorteringsrekkefolge,
+                                                sorteringsfelt,
+                                                filtervalg
+                                            )
+                                        )
                                     }
+                                    oversiktType={oversiktType}
+                                    sokVeilederSkalVises
+                                    antallTotalt={portefoljeData.antallTotalt}
+                                    scrolling={scrolling}
+                                    isSidebarHidden={isSidebarHidden}
                                 />
+                                <EnhetTabellOverskrift />
                             </div>
+                            <EnhetTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
                         <Alert

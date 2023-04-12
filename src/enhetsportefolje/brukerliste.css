@@ -15,7 +15,8 @@
     border-top: none;
 }
 .veilarbportefoljeflatefs .brukerliste li:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid #a0a0a0;
+    border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
 }
 .veilarbportefoljeflatefs .brukerliste__element {
     display: flex;
@@ -40,10 +41,6 @@
 }
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
     box-shadow: inset -1px 0 0 2px #6a6a6a, inset 1px 0 0 2px #a0a0a0;
-}
-.veilarbportefoljeflatefs .brukerliste__header {
-    z-index: 500;
-    background-color: #f4f4f4;
 }
 .veilarbportefoljeflatefs .brukerliste__overskriftheader {
     display: flex;
