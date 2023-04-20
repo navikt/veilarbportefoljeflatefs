@@ -83,8 +83,8 @@ export default function EnhetSide() {
     const harFilter = antallFilter(filtervalg) !== 0;
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const slettVeilederFilter = useCallback(
-        ident => dispatch(slettEnkeltFilter('veiledere', ident, OversiktType.enhetensOversikt)),
-        [dispatch]
+        ident => dispatch(slettEnkeltFilter('veiledere', ident, OversiktType.enhetensOversikt, filtervalg, dispatch)),
+        [dispatch, filtervalg]
     );
     const veilederLabel = useMemo(
         () => lagLablerTilVeiledereMedIdenter(filtervalg.veiledere, veilederliste, slettVeilederFilter),
@@ -107,7 +107,7 @@ export default function EnhetSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
     };
 
     const [scrolling, setScrolling] = useState(false);

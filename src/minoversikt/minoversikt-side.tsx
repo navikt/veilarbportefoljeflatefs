@@ -82,7 +82,7 @@ export default function MinoversiktSide() {
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
     };
 
     const [scrolling, setScrolling] = useState(false);

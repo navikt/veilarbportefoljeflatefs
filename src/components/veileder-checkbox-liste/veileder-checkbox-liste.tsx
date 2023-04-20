@@ -40,12 +40,12 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
 
     const handterValgteVeiledere = (valgteVeiledere: string[]) => {
         setValgteVeiledere(valgteVeiledere);
-        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt));
+        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt, filtervalg, dispatch));
     };
 
     const nullstillValg = () => {
         nullstillInputfelt();
-        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt));
+        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt, filtervalg, dispatch));
     };
 
     const mapToCheckboxList = (veiledere?: VeilederModell[]) => {

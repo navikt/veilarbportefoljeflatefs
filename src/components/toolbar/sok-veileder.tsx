@@ -18,7 +18,7 @@ interface SokVeilederProps {
 }
 
 interface DispatchProps {
-    sokEtterVeileder: (filterId: string, filterverdi: string[]) => void;
+    sokEtterVeileder: (filterId: string, filterverdi: string[], filtervalg: FiltervalgModell) => void;
     veilederSokt: () => void;
 }
 
@@ -40,7 +40,7 @@ function SokVeilederFilter(props: AllProps) {
     const createHandleOnSubmit = (filterverdi: string[]) => {
         props.onClick();
         if (harValg) {
-            props.sokEtterVeileder('veiledere', filterverdi);
+            props.sokEtterVeileder('veiledere', filterverdi, props.filtervalg);
             props.veilederSokt();
             setValgteVeileder([]);
         }
@@ -72,8 +72,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) =>
     bindActionCreators(
         {
-            sokEtterVeileder(filterId: string, filterverdi: string[]) {
-                return endreFiltervalg(filterId, filterverdi, ownProps.oversiktType);
+            sokEtterVeileder(filterId: string, filterverdi: string[], filterValg: FiltervalgModell) {
+                return endreFiltervalg(filterId, filterverdi, ownProps.oversiktType, filterValg, dispatch);
             },
             veilederSokt() {
                 return veilederSoktFraToolbar();

@@ -38,7 +38,17 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                     },
                     enhet
                 )
-            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType)));
+            ).then(resp =>
+                dispatch(
+                    endreFiltervalg(
+                        'veiledere',
+                        resp.data.filterValg.veiledere,
+                        oversiktType,
+                        resp.data.filterValg,
+                        dispatch
+                    )
+                )
+            );
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) =>

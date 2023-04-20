@@ -31,7 +31,8 @@ function VeiledereSide() {
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, oversiktType));
+    const slettVeilederFilter = ident =>
+        dispatch(slettEnkeltFilter('veiledere', ident, oversiktType, filtervalg, dispatch));
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
@@ -55,7 +56,7 @@ function VeiledereSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
     };
 
     return (

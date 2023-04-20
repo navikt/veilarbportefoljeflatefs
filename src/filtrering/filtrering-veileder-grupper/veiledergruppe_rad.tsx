@@ -38,7 +38,15 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType, e
             {},
             {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
         );
-        dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, oversiktType));
+        dispatch(
+            endreFiltervalg(
+                'veiledere',
+                veilederGruppe.filterValg.veiledere,
+                oversiktType,
+                veilederGruppe.filterValg,
+                dispatch
+            )
+        );
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
 
         if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {

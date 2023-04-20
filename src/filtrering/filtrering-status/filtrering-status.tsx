@@ -63,7 +63,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType));
+        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType, filtervalg, dispatch));
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -71,7 +71,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
             : kategoriliste.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType));
+        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType, filtervalg, dispatch));
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -85,7 +85,15 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(endreFiltervalg('arbeidslisteKategori', [], oversiktType));
+            dispatch(
+                endreFiltervalg(
+                    'arbeidslisteKategori',
+                    [],
+                    oversiktType,
+                    {...filtervalg, ferdigfilterListe: nyeFerdigfilterListe},
+                    dispatch
+                )
+            );
         }
     }
 

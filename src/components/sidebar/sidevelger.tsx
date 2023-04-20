@@ -26,7 +26,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, sta
     const dispatch = useDispatch();
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
     };
 
     if (!selectedTabData) {

@@ -82,7 +82,7 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
             dispatch(avmarkerValgtMineFilter(oversiktType));
         } else {
             dispatch(markerMineFilter(filter, oversiktType));
-            dispatch(velgMineFilter(filter, oversiktType));
+            dispatch(velgMineFilter(filter, oversiktType, dispatch));
         }
     };
 

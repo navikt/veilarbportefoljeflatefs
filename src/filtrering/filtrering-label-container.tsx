@@ -350,14 +350,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.oversiktType));
+            dispatch(clearFiltervalg(ownProps.oversiktType, dispatch));
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType, ownProps.filtervalg, dispatch));
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
-                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
+                dispatch(
+                    endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType, ownProps.filtervalg, dispatch)
+                );
             }
         }
     }

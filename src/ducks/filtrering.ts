@@ -1,7 +1,8 @@
 import {FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
-import {OversiktType} from './ui/listevisning';
+import {oppdaterAlternativer, OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
+import {Dispatch} from 'redux';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -127,7 +128,8 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
     }
 }
 
-export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: OversiktType) {
+export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: OversiktType, dispatch: Dispatch) {
+    oppdaterAlternativer(dispatch, filterVerdi.filterValg, oversiktType);
     return {
         type: VELG_MINE_FILTER,
         data: filterVerdi,
@@ -138,11 +140,15 @@ export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: Oversikt
 export function endreFiltervalg(
     filterId: string,
     filterVerdi: React.ReactNode,
-    oversiktType: OversiktType = OversiktType.enhetensOversikt
+    oversiktType: OversiktType = OversiktType.enhetensOversikt,
+    filterValg: FiltervalgModell,
+    dispatch: Dispatch
 ) {
     if (Array.isArray(filterVerdi)) {
         filterVerdi.sort();
     }
+    const updatertFiltervalg = {...filterValg, [filterId]: filterVerdi};
+    oppdaterAlternativer(dispatch, updatertFiltervalg, oversiktType);
     return {
         type: ENDRE_FILTER,
         data: {filterId, filterVerdi},
@@ -150,7 +156,15 @@ export function endreFiltervalg(
     };
 }
 
-export function slettEnkeltFilter(filterId, filterVerdi, oversiktType = OversiktType.enhetensOversikt) {
+export function slettEnkeltFilter(
+    filterId,
+    filterVerdi,
+    oversiktType = OversiktType.enhetensOversikt,
+    filterValg: FiltervalgModell,
+    dispatch: Dispatch
+) {
+    const updatertFiltervalg = {...filterValg, [filterId]: fjern(filterId, filterValg[filterId], filterVerdi)};
+    oppdaterAlternativer(dispatch, updatertFiltervalg, oversiktType);
     return {
         type: SLETT_ENKELT_FILTER,
         data: {filterId, filterVerdi},
@@ -158,7 +172,8 @@ export function slettEnkeltFilter(filterId, filterVerdi, oversiktType = Oversikt
     };
 }
 
-export function clearFiltervalg(oversiktType = OversiktType.enhetensOversikt) {
+export function clearFiltervalg(oversiktType = OversiktType.enhetensOversikt, dispatch: Dispatch) {
+    oppdaterAlternativer(dispatch, initialState, oversiktType);
     return {type: CLEAR_FILTER, name: oversiktType};
 }
 

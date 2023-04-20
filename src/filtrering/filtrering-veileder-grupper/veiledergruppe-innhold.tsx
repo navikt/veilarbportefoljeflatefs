@@ -70,7 +70,17 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     },
                     enhet
                 )
-            ).then(resp => dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.oversiktType)));
+            ).then(resp =>
+                dispatch(
+                    endreFiltervalg(
+                        'veiledere',
+                        resp.data.filterValg.veiledere,
+                        props.oversiktType,
+                        filterValg,
+                        dispatch
+                    )
+                )
+            );
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -80,7 +90,9 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
         valgtGruppe &&
             enhet &&
             dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
-                dispatch(endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt));
+                dispatch(
+                    endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt, valgtGruppe.filterValg, dispatch)
+                );
                 dispatch(hentMineFilterForVeileder());
             });
     };
