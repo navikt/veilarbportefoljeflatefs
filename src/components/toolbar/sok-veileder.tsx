@@ -8,7 +8,7 @@ import {VeiledereState} from '../../ducks/veiledere';
 import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
 import './toolbar.css';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;
@@ -73,7 +73,8 @@ const mapDispatchToProps = (dispatch, ownProps) =>
     bindActionCreators(
         {
             sokEtterVeileder(filterId: string, filterverdi: string[], filterValg: FiltervalgModell) {
-                return endreFiltervalg(filterId, filterverdi, ownProps.oversiktType, filterValg, dispatch);
+                oppdaterKolonneAlternativer(dispatch, {...filterValg, [filterId]: filterverdi}, ownProps.oversiktType);
+                return endreFiltervalg(filterId, filterverdi, ownProps.oversiktType);
             },
             veilederSokt() {
                 return veilederSoktFraToolbar();

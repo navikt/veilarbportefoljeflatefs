@@ -2,11 +2,11 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
@@ -63,7 +63,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType, filtervalg, dispatch));
+        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, ferdigfilterListe: ferdigFilterListe}, oversiktType);
     }
 
     function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -71,7 +72,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = e.target.checked
             ? [...kategoriliste, e.target.value]
             : kategoriliste.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType, filtervalg, dispatch));
+        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType));
+        oppdaterKolonneAlternativer(
+            dispatch,
+            {...filtervalg, arbeidslisteKategori: nyeFerdigfilterListe as KategoriModell[]},
+            oversiktType
+        );
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -85,16 +91,17 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(
-                endreFiltervalg(
-                    'arbeidslisteKategori',
-                    [],
-                    oversiktType,
-                    {...filtervalg, ferdigfilterListe: nyeFerdigfilterListe},
-                    dispatch
-                )
-            );
+            dispatch(endreFiltervalg('arbeidslisteKategori', [], oversiktType));
         }
+        oppdaterKolonneAlternativer(
+            dispatch,
+            {
+                ...filtervalg,
+                ferdigfilterListe: nyeFerdigfilterListe,
+                arbeidslisteKategori: e.target.value !== 'MIN_ARBEIDSLISTE' ? [] : filtervalg.arbeidslisteKategori
+            },
+            oversiktType
+        );
     }
 
     return (

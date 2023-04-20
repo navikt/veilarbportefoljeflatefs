@@ -139,7 +139,7 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
     name: oversiktType
 });
 
-export const oppdaterAlternativer = (
+export const oppdaterKolonneAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
     oversiktType: OversiktType

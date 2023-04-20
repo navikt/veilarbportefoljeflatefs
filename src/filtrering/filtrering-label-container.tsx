@@ -11,10 +11,17 @@ import FilterKonstanter, {
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
+import {Kolonne, ListevisningState, oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
+import {
+    AktiviteterValg,
+    clearFiltervalg,
+    endreFiltervalg,
+    fjern,
+    initialState,
+    slettEnkeltFilter
+} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
@@ -350,17 +357,23 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.oversiktType, dispatch));
+            dispatch(clearFiltervalg(ownProps.oversiktType));
+            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType);
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType, ownProps.filtervalg, dispatch));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
             if (filterValue === 'MIN_ARBEIDSLISTE') {
-                dispatch(
-                    endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType, ownProps.filtervalg, dispatch)
-                );
+                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
+            const oppdatertFiltervalg = {
+                ...ownProps.filtervalg,
+                [filterKey]: fjern(filterKey, ownProps.filtervalg[filterKey], filterValue),
+                arbeidslisteKategori:
+                    filterValue === 'MIN_ARBEIDSLISTE' ? [] : ownProps.filtervalg['arbeidslisteKategori']
+            };
+            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType);
         }
     }
 });

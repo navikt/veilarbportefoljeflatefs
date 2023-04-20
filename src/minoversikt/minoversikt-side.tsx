@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Innholdslaster from './../innholdslaster/innholdslaster';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import MinoversiktTabell from './minoversikt-portefolje-tabell';
@@ -82,7 +82,8 @@ export default function MinoversiktSide() {
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
 
     const [scrolling, setScrolling] = useState(false);

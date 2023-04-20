@@ -13,7 +13,7 @@ import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
@@ -70,17 +70,14 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                     },
                     enhet
                 )
-            ).then(resp =>
-                dispatch(
-                    endreFiltervalg(
-                        'veiledere',
-                        resp.data.filterValg.veiledere,
-                        props.oversiktType,
-                        filterValg,
-                        dispatch
-                    )
-                )
-            );
+            ).then(resp => {
+                oppdaterKolonneAlternativer(
+                    dispatch,
+                    {...filterValg, veiledere: resp.data.filterValg.veiledere},
+                    props.oversiktType
+                );
+                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.oversiktType));
+            });
         } else {
             dispatch(visIngenEndringerToast());
         }
@@ -90,10 +87,13 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
         valgtGruppe &&
             enhet &&
             dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
-                dispatch(
-                    endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt, valgtGruppe.filterValg, dispatch)
-                );
+                dispatch(endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt));
                 dispatch(hentMineFilterForVeileder());
+                oppdaterKolonneAlternativer(
+                    dispatch,
+                    {...valgtGruppe.filterValg, veiledere: []},
+                    OversiktType.enhetensOversikt
+                );
             });
     };
 

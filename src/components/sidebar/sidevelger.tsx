@@ -3,7 +3,7 @@ import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/f
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {Sidebarelement} from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -26,7 +26,8 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, sta
     const dispatch = useDispatch();
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType, filtervalg, dispatch));
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
 
     if (!selectedTabData) {

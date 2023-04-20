@@ -3,7 +3,7 @@ import React from 'react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {AppState} from '../../reducer';
@@ -38,16 +38,13 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType, e
             {},
             {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
         );
-        dispatch(
-            endreFiltervalg(
-                'veiledere',
-                veilederGruppe.filterValg.veiledere,
-                oversiktType,
-                veilederGruppe.filterValg,
-                dispatch
-            )
-        );
+        dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, oversiktType));
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
+        oppdaterKolonneAlternativer(
+            dispatch,
+            {...veilederGruppe.filterValg, veiledere: veilederGruppe.filterValg.veiledere},
+            oversiktType
+        );
 
         if (veilederGruppe.filterCleanup && erDetLikGruppe() !== undefined) {
             onClickRedigerKnapp();

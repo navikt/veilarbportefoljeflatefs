@@ -6,7 +6,7 @@ import MineFilterRad from '../mine-filter-rad';
 import {useDispatch, useSelector} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
-import {OversiktType} from '../../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
 import {RadioGroup} from '@navikt/ds-react';
@@ -82,7 +82,8 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
             dispatch(avmarkerValgtMineFilter(oversiktType));
         } else {
             dispatch(markerMineFilter(filter, oversiktType));
-            dispatch(velgMineFilter(filter, oversiktType, dispatch));
+            dispatch(velgMineFilter(filter, oversiktType));
+            oppdaterKolonneAlternativer(dispatch, filter.filterValg, oversiktType);
         }
     };
 

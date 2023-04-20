@@ -7,7 +7,7 @@ import './veileder-checkbox-liste.css';
 import {AppState} from '../../reducer';
 import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface VeilederCheckboxListeProps {
@@ -40,12 +40,18 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
 
     const handterValgteVeiledere = (valgteVeiledere: string[]) => {
         setValgteVeiledere(valgteVeiledere);
-        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt, filtervalg, dispatch));
+        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt));
+        oppdaterKolonneAlternativer(
+            dispatch,
+            {...filtervalg, [formNavn]: valgteVeiledere},
+            OversiktType.veilederOversikt
+        );
     };
 
     const nullstillValg = () => {
         nullstillInputfelt();
-        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt, filtervalg, dispatch));
+        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [formNavn]: []}, OversiktType.veilederOversikt);
     };
 
     const mapToCheckboxList = (veiledere?: VeilederModell[]) => {

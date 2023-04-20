@@ -7,7 +7,7 @@ import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
@@ -38,17 +38,14 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                     },
                     enhet
                 )
-            ).then(resp =>
-                dispatch(
-                    endreFiltervalg(
-                        'veiledere',
-                        resp.data.filterValg.veiledere,
-                        oversiktType,
-                        resp.data.filterValg,
-                        dispatch
-                    )
-                )
-            );
+            ).then(resp => {
+                oppdaterKolonneAlternativer(
+                    dispatch,
+                    {...filterValg, veiledere: resp.data.filterValg.veiledere},
+                    oversiktType
+                );
+                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType));
+            });
     };
 
     const sortertVeiledergruppe = lagretFilter.sort((a, b) =>
