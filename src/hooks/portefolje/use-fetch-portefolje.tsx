@@ -3,7 +3,7 @@ import {hentArbeidslisteforVeileder, hentPortefoljeForEnhet, hentPortefoljeForVe
 import {useDispatch} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {OversiktType, oppdaterAlternativer} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
 import {STATUS} from '../../ducks/utils';
@@ -42,8 +42,4 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
         }
     }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
-
-    useEffect(() => {
-        oppdaterAlternativer(dispatch, filtervalg, oversiktType);
-    }, [dispatch, filtervalg, oversiktType]);
 }
