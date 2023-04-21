@@ -159,4 +159,36 @@ describe('Diverse', () => {
         cy.klikkTab('MINE_FILTER');
         cy.getByTestId('brukerfeilmelding').should('not.exist');
     });
+
+	it('Sjekk at filter og kolonnevalg blir beholdt mellom oversiktene', () => {
+		cy.gaTilOversikt('enhetens-oversikt');
+		cy.klikkTab('FILTER');
+		cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
+		cy.apneLukkeFilterDropdown('ensligeForsorgere');
+		cy.getByTestId('filter_OVERGANGSSTØNAD').check({force: true});
+		cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
+		cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({ force: true });
+		cy.getByTestId('velg-kolonne-rad_veileder').uncheck({force: true});
+		cy.getByTestId('velg-kolonne-rad_om_barnet').check({force: true});
+		cy.getByTestId('lukk-velg-kolonner-knapp').click({force: true});
+		cy.getByTestId('sorteringheader_veileder').should('not.exist');
+		cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
+		cy.getByTestId('sorteringheader_oppfolging').should('be.visible'); //om barnet kolonne synlig
+
+		cy.gaTilOversikt('min-oversikt');
+		cy.klikkTab('STATUS');
+		cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({
+			force: true
+		});
+		cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
+
+		cy.gaTilOversikt('enhetens-oversikt');
+		cy.getByTestId('sorteringheader_veileder').should('not.exist');
+		cy.getByTestId('sorteringheader_oppfolging').should('be.visible');
+
+		cy.gaTilOversikt('min-oversikt');
+		cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
+
+	});
+
 });

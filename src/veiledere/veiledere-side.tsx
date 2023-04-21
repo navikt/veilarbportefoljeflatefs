@@ -6,7 +6,7 @@ import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
-import {endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
+import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import './veiledere.css';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
@@ -19,7 +19,7 @@ import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-sto
 import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
-import {OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Panel} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
@@ -31,7 +31,11 @@ function VeiledereSide() {
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
     const dispatch = useDispatch();
-    const slettVeilederFilter = ident => dispatch(slettEnkeltFilter('veiledere', ident, oversiktType));
+    const slettVeilederFilter = ident => {
+        const oppdatertFiltervalg = {...filtervalg, veiledere: fjern('veiledere', filtervalg['veiledere'], ident)};
+        oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, oversiktType);
+        return dispatch(slettEnkeltFilter('veiledere', ident, oversiktType));
+    };
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
@@ -55,6 +59,7 @@ function VeiledereSide() {
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
     };
 
