@@ -19,8 +19,6 @@ export const VIS_AVVIK_14A_VEDTAK_FILTER = 'veilarbportefolje.vis_avvik_14a_vedt
 export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefolje.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
 
-export const OVERGANGSSTONAD = 'veilarbportefolje.filter_for_overgangsstonad';
-
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
@@ -31,6 +29,5 @@ export const PORTEFOLJE_FEATURES = [
     TVUNGEN_STEPPER,
     STILLING_FRA_NAV,
     VIS_AVVIK_14A_VEDTAK_FILTER,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
-    OVERGANGSSTONAD
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
 ];
