@@ -178,19 +178,19 @@ export function hentStatusTallForVeileder(enhetId, veilederId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function _lagreArbeidsliste(arbeidsliste) {
+export function lagreArbeidsliste(arbeidsliste) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
     return fetchToJson(url, config);
 }
 
-export function _oppdaterArbeidsliste(arbeidsliste, fnr) {
+export function oppdaterArbeidsliste(arbeidsliste, fnr) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${fnr}`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(arbeidsliste)};
     return fetchToJson(url, config);
 }
 
-export function _slettArbeidsliste(arbeidsliste) {
+export function slettArbeidsliste(arbeidsliste) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
     return fetchToJson(url, config);

@@ -1,5 +1,5 @@
 import {doThenDispatch, STATUS} from './utils';
-import {_lagreArbeidsliste, _oppdaterArbeidsliste, _slettArbeidsliste} from '../middleware/api';
+import {lagreArbeidsliste, oppdaterArbeidsliste, slettArbeidsliste} from '../middleware/api';
 import {skjulModal} from './modal';
 import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {dateToISODate} from '../utils/dato-utils';
@@ -48,7 +48,7 @@ export default function arbeidslisteReducer(state = initialState, action) {
 }
 
 // Action Creators
-export function redigerArbeidsliste(formData, props) {
+export function redigerArbeidslisteAction(formData, props) {
     const arbeidsliste = {
         kommentar: formData.kommentar,
         overskrift: formData.overskrift,
@@ -57,7 +57,7 @@ export function redigerArbeidsliste(formData, props) {
     };
 
     return dispatch =>
-        putArbeidsliste(
+        oppdaterArbeidslisteAction(
             arbeidsliste,
             props.bruker.fnr
         )(dispatch)
@@ -67,24 +67,24 @@ export function redigerArbeidsliste(formData, props) {
             .then(() => dispatch(skjulModal()));
 }
 
-export function postArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => _lagreArbeidsliste(arbeidsliste), {
+export function lagreArbeidslisteAction(arbeidsliste) {
+    return doThenDispatch(() => lagreArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_LAGRE_OK,
         FEILET: ARBEIDSLISTE_LAGRE_FEILET,
         PENDING: ARBEIDSLISTE_LAGRE_PENDING
     });
 }
 
-export function slettArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => _slettArbeidsliste(arbeidsliste), {
+export function slettArbeidslisteAction(arbeidsliste) {
+    return doThenDispatch(() => slettArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_SLETT_OK,
         FEILET: ARBEIDSLISTE_SLETT_FEILET,
         PENDING: ARBEIDSLISTE_SLETT_PENDING
     });
 }
 
-export function putArbeidsliste(arbeidsliste, fnr) {
-    return doThenDispatch(() => _oppdaterArbeidsliste(arbeidsliste, fnr), {
+export function oppdaterArbeidslisteAction(arbeidsliste, fnr) {
+    return doThenDispatch(() => oppdaterArbeidsliste(arbeidsliste, fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING
