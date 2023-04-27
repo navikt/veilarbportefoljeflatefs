@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {slettArbeidsliste} from '../../../ducks/arbeidsliste';
+import {slettArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall-veileder';
 import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
@@ -116,7 +116,9 @@ const mapDispatchToProps = dispatch => ({
             frist: bruker.arbeidsliste.frist,
             kategori: bruker.arbeidsliste.kategori
         }));
-        slettArbeidsliste(arbeidsliste)(dispatch).then(res => oppdaterState(res, lukkModal, arbeidsliste, dispatch));
+        slettArbeidslisteAction(arbeidsliste)(dispatch).then(res =>
+            oppdaterState(res, lukkModal, arbeidsliste, dispatch)
+        );
     }
 });
 
