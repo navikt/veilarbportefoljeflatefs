@@ -1,8 +1,6 @@
 import {doThenDispatch, STATUS} from './utils';
 import {_lagreArbeidsliste, _oppdaterArbeidsliste, _slettArbeidsliste} from '../middleware/api';
 import {skjulModal} from './modal';
-import {markerAlleBrukere} from './portefolje';
-import {oppdaterState} from '../components/modal/arbeidsliste/legg-til-arbeidslisteform';
 import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {dateToISODate} from '../utils/dato-utils';
 
@@ -50,24 +48,6 @@ export default function arbeidslisteReducer(state = initialState, action) {
 }
 
 // Action Creators
-export function lagreArbeidsliste(arbeidsliste, props) {
-    const {valgteBrukere} = props;
-    const liste = arbeidsliste.map((elem, index) => ({
-        fnr: valgteBrukere[index].fnr,
-        overskrift: elem.overskrift,
-        kommentar: elem.kommentar,
-        frist: elem.frist,
-        kategori: elem.kategori
-    }));
-    return dispatch =>
-        postArbeidsliste(liste)(dispatch)
-            .then(res => oppdaterState(res, liste, props, dispatch))
-            .then(() => {
-                dispatch(skjulModal());
-                dispatch(markerAlleBrukere(false));
-            });
-}
-
 export function redigerArbeidsliste(formData, props) {
     const arbeidsliste = {
         kommentar: formData.kommentar,
