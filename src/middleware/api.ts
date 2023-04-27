@@ -178,9 +178,21 @@ export function hentStatusTallForVeileder(enhetId, veilederId) {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function httpArbeidsliste(arbeidsliste, method, additionalPath = '') {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${additionalPath}`;
-    const config = {...MED_CREDENTIALS, method, body: JSON.stringify(arbeidsliste)};
+export function _lagreArbeidsliste(arbeidsliste) {
+    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
+    return fetchToJson(url, config);
+}
+
+export function _oppdaterArbeidsliste(arbeidsliste, fnr) {
+    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${fnr}`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(arbeidsliste)};
+    return fetchToJson(url, config);
+}
+
+export function _slettArbeidsliste(arbeidsliste) {
+    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
     return fetchToJson(url, config);
 }
 
@@ -228,7 +240,7 @@ export function hentSystemmeldinger() {
 }
 
 export function hentMoteplan(veileder: string, enhet: string) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan/?enhet=${enhet}`;
+    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veileder}/moteplan?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 

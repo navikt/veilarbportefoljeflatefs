@@ -220,7 +220,7 @@ mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
 mock.post('/veilarboppfolging/api/tilordneveileder', ({body}, res, ctx) => res(ctx.json(tildel(body))));
 
 // arbeidsliste-api
-mock.post('/veilarbportefolje/api/arbeidsliste/', (req, res, ctx) =>
+mock.post('/veilarbportefolje/api/arbeidsliste', (req, res, ctx) =>
     res(ctx.json({error: [], data: req.body.map(arbeidsliste => arbeidsliste.fnr)}))
 );
 

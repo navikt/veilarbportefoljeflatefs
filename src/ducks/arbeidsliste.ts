@@ -1,5 +1,5 @@
-import {STATUS, doThenDispatch} from './utils';
-import {httpArbeidsliste} from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
+import {_lagreArbeidsliste, _oppdaterArbeidsliste, _slettArbeidsliste} from '../middleware/api';
 import {skjulModal} from './modal';
 import {markerAlleBrukere} from './portefolje';
 import {oppdaterState} from '../components/modal/arbeidsliste/legg-til-arbeidslisteform';
@@ -88,7 +88,7 @@ export function redigerArbeidsliste(formData, props) {
 }
 
 export function postArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
+    return doThenDispatch(() => _lagreArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_LAGRE_OK,
         FEILET: ARBEIDSLISTE_LAGRE_FEILET,
         PENDING: ARBEIDSLISTE_LAGRE_PENDING
@@ -96,7 +96,7 @@ export function postArbeidsliste(arbeidsliste) {
 }
 
 export function slettArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post', 'delete'), {
+    return doThenDispatch(() => _slettArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_SLETT_OK,
         FEILET: ARBEIDSLISTE_SLETT_FEILET,
         PENDING: ARBEIDSLISTE_SLETT_PENDING
@@ -104,7 +104,7 @@ export function slettArbeidsliste(arbeidsliste) {
 }
 
 export function putArbeidsliste(arbeidsliste, fnr) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'put', fnr), {
+    return doThenDispatch(() => _oppdaterArbeidsliste(arbeidsliste, fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING
