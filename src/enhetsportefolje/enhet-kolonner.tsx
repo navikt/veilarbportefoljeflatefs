@@ -18,6 +18,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    aapVurderingsfrist,
     bostedKommune,
     capitalize,
     mapOmAktivitetsPlikt,
@@ -69,12 +70,19 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
+    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const vurderingsfristAAP = aapVurderingsfrist(
+        ytelse,
+        bruker.aapmaxtidUke,
+        bruker.utlopsdato,
+        bruker.aapordinerutlopsdato
+    );
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
@@ -185,6 +193,11 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
                 skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
