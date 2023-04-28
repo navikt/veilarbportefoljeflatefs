@@ -7,7 +7,7 @@ import {Formik, FormikProps} from 'formik';
 import {STATUS} from '../../../ducks/utils';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
-import {redigerArbeidsliste} from '../../../ducks/arbeidsliste';
+import {redigerArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.css';
@@ -93,7 +93,9 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                     enableReinitialize={true}
                     onSubmit={values => {
                         setIsOpen(false);
-                        dispatch(redigerArbeidsliste(values, {bruker, sistEndretAv, sistEndretDato, settMarkert}));
+                        dispatch(
+                            redigerArbeidslisteAction(values, {bruker, sistEndretAv, sistEndretDato, settMarkert})
+                        );
                     }}
                 >
                     {formikProps => (

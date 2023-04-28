@@ -78,7 +78,7 @@ export const initialState: FiltervalgModell = {
     ensligeForsorgere: []
 };
 
-function fjern(filterId, verdi, fjernVerdi) {
+export function fjern(filterId, verdi, fjernVerdi) {
     if (typeof verdi === 'boolean') {
         return false;
     } else if (Array.isArray(verdi)) {
