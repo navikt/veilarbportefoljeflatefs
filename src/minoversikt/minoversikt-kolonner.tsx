@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
     aapRettighetsperiode,
+    aapVurderingsfrist,
     bostedKommune,
     capitalize,
     mapOmAktivitetsPlikt,
@@ -71,10 +72,17 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
+    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const vurderingsfristAAP = aapVurderingsfrist(
+        ytelse,
+        bruker.aapmaxtidUke,
+        bruker.utlopsdato,
+        bruker.aapordinerutlopsdato
+    );
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
@@ -190,6 +198,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
                 skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
