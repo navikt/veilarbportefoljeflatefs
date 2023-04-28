@@ -17,6 +17,7 @@ export enum Sorteringsfelt {
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
     AAP_MAXTID_UKE = 'aapmaxtiduke',
     AAP_UNNTAK_UKE = 'aapunntakukerigjen',
+    AAP_VURDERINGSFRIST = 'aap_vurderingsfrist',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
@@ -140,6 +141,7 @@ export interface BrukerModell {
     dagputlopUke?: number;
     permutlopUke?: number;
     aapmaxtidUke?: number;
+    aapordinerutlopsdato?: string; // dato
     arbeidsliste: ArbeidslisteModell;
     venterPaSvarFraNAV?: string;
     venterPaSvarFraBruker?: string;
