@@ -236,7 +236,7 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
-    return fetchToJson(`https://poao-sanity${erDev() ? '.dev' : ''}.intern.nav.no/systemmeldinger`, MED_CREDENTIALS);
+    return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
 
 export function hentMoteplan(veileder: string, enhet: string) {
