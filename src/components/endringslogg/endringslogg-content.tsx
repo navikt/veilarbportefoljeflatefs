@@ -22,7 +22,6 @@ export const EndringsloggLink = (props: {linkText: string; link: string; onClick
 };
 
 export const EndringsloggContent = (props: EndringsloggContentProps) => {
-    console.log(props.innleggsListe)
     const content = props.innleggsListe.map((endring, index) => {
         return (
             <EndringsloggEntry
