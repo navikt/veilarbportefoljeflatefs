@@ -15,6 +15,7 @@ const MED_CREDENTIALS: RequestInit = {
     credentials,
     headers: {
         'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
+        'Content-Type': 'application/json'
     }
 };
 
