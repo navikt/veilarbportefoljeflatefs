@@ -211,12 +211,12 @@ export const ytelseAapSortering = {
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
     AAP_MAXTID: {
-        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
+        vurderingsfrist: Sorteringsfelt.AAP_MAXTID_UKE,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE
     },
     AAP_UNNTAK: {
-        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
+        vurderingsfrist: Sorteringsfelt.UTLOPSDATO,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE
     }
