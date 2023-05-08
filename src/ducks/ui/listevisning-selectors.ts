@@ -141,30 +141,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             )
         )
         .concat(addHvis(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtervalg.ytelse === TILTAKSPENGER_YTELSE))
-        .concat(
-            addHvis(
-                Kolonne.VURDERINGSFRIST_YTELSE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
-        .concat(
-            addHvis(
-                Kolonne.VEDTAKSPERIODE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
-        .concat(
-            addHvis(
-                Kolonne.RETTIGHETSPERIODE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt() || forenkletAktivitetErValgt()))
         .concat(
             addHvis(
@@ -208,6 +184,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                     filtervalg.ytelse === AAP_YTELSE_UNNTAK
             )
         )
+        .concat(addHvis(Kolonne.TYPE_YTELSE, filtervalg.ytelse === AAP_YTELSE))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
         .concat(

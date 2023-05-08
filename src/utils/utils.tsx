@@ -72,6 +72,14 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
 }
 
+export function ytelsestypetekst(brukerytelse) {
+    if (brukerytelse === 'AAP_MAXTID') {
+        return 'Ordinær';
+    } else if (brukerytelse === 'AAP_UNNTAK') {
+        return 'Unntak';
+    }
+}
+
 export function aapVurderingsfrist(
     brukerYtelse: string | undefined,
     ordinerRettighetUker?: number,

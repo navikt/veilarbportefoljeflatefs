@@ -22,6 +22,7 @@ export enum Kolonne {
     GJENSTAENDE_UKER_RETTIGHET_DAGPENGER = 'gjenstaende_uker_rettighet_dagpenger',
     GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER = 'gjenstaende_uker_vedtak_tiltakspenger',
     VURDERINGSFRIST_YTELSE = 'vurderingsfrist_ytelse',
+    TYPE_YTELSE = 'type_ytelse',
     VEDTAKSPERIODE = 'vedtaksperiode',
     RETTIGHETSPERIODE = 'rettighetsperiode',
     UTLOP_AKTIVITET = 'utlopaktivitet',

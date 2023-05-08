@@ -207,6 +207,7 @@ export const ytelseUtlopsSortering = {
 
 export const ytelseAapSortering = {
     AAP: {
+        periodetype: Sorteringsfelt.AAP_TYPE,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },

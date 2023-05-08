@@ -18,6 +18,7 @@ export enum Sorteringsfelt {
     AAP_MAXTID_UKE = 'aapmaxtiduke',
     AAP_UNNTAK_UKE = 'aapunntakukerigjen',
     AAP_VURDERINGSFRIST = 'aap_vurderingsfrist',
+    AAP_TYPE = 'aap_type',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
