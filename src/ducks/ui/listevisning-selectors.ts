@@ -144,8 +144,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(
                 Kolonne.VURDERINGSFRIST_YTELSE,
-                // filtervalg.ytelse === AAP_YTELSE ||
-                filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK
+                filtervalg.ytelse === AAP_YTELSE ||
+                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
+                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
             )
         )
         .concat(
