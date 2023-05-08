@@ -78,7 +78,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
-        ytelse,
+        bruker.ytelse,
         bruker.aapmaxtidUke,
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato

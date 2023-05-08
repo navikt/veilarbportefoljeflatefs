@@ -78,7 +78,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
-        ytelse,
+        bruker.ytelse,
         bruker.aapmaxtidUke,
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato

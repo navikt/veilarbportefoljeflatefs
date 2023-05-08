@@ -73,13 +73,13 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
 }
 
 export function aapVurderingsfrist(
-    ytelse: string | null,
+    brukerYtelse: string | undefined,
     ordinerRettighetUker?: number,
     utlopsdatoVedtak?: string,
     utlopsdatoOrdinerRettighet?: string
 ): string | undefined {
     const iDag = new Date();
-    if (ytelse === 'AAP_MAXTID') {
+    if (brukerYtelse === 'AAP_MAXTID') {
         // makstid == ordinær rettighetsperiode
         if (!utlopsdatoOrdinerRettighet) {
             // midlertidig sjekk fram til meldekortmeldinger(oppdatering av ytelsen) om alle brukere har kommet inn og vi kan bruke kun utlopsdatoOrdinerRettighet. (burde være greit etter to uker??)
@@ -96,7 +96,7 @@ export function aapVurderingsfrist(
                 ? toDateString(utlopsdatoOrdinerRettighet)
                 : 'Frist utløpt';
         }
-    } else if (ytelse === 'AAP_UNNTAK') {
+    } else if (brukerYtelse === 'AAP_UNNTAK') {
         if (!utlopsdatoVedtak) {
             return undefined;
         }
