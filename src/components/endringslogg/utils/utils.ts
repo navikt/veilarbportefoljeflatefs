@@ -9,7 +9,7 @@ export const hentEndringsLoggEntries = async (
 ): Promise<Response> =>
     fetch(`${backendUrl}/endringslogg`, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -44,7 +44,7 @@ export const trackSessionDuration = async (
 ): Promise<Response> =>
     fetch(`${backendUrl}/analytics/session-duration`, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
