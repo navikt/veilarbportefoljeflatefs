@@ -71,7 +71,7 @@ export const erDev = () => window.location.host.includes('dev') || window.locati
 
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
+export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 
 export const loginUrl = () => {
     if (erMock()) {
