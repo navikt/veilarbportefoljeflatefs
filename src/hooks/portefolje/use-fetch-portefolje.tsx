@@ -1,18 +1,22 @@
 import {useEffect} from 'react';
 import {hentArbeidslisteforVeileder, hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
 import {STATUS} from '../../ducks/utils';
+import {AppState} from '../../reducer';
+import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
+import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt, portefolje} = usePortefoljeSelector(oversiktType);
+    const filtreringMinoversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
 
     useEffect(() => {
         if (enhet && sorteringsrekkefolge && sorteringsfelt) {
@@ -42,4 +46,13 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
         }
     }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
+
+    useEffect(() => {
+        if (
+            oversiktType === OversiktType.minOversikt &&
+            lagretFilterValgModellErLik(filtreringMinoversikt, filtreringsInitialState)
+        ) {
+            oppdaterKolonneAlternativer(dispatch, filtervalg, oversiktType);
+        }
+    }, [oversiktType, filtreringMinoversikt, filtervalg, dispatch]);
 }
