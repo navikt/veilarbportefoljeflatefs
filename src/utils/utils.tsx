@@ -90,19 +90,12 @@ export function aapVurderingsfrist(
     if (brukerYtelse === 'AAP_MAXTID') {
         // makstid == ordinær rettighetsperiode
         if (!utlopsdatoOrdinerRettighet) {
-            // midlertidig sjekk fram til meldekortmeldinger(oppdatering av ytelsen) om alle brukere har kommet inn og vi kan bruke kun utlopsdatoOrdinerRettighet. (burde være greit etter to uker??)
-            if (!ordinerRettighetUker) {
-                return undefined;
-            }
-            const vurderingsfristUker = ordinerRettighetUker - 6; // På grunn av mangel på nøyaktig dato settes fristen til 42 dager/6 uker fram til den nøyaktige datoen blir tilgjengelig
-            const vurderingsfrist = new Date('2023-05-01');
-            vurderingsfrist.setDate(vurderingsfrist.getDate() + vurderingsfristUker * 7);
-
-            return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist.toString()) : 'Frist utløpt';
+            // Det er noen tusen brukere som vi ikke har fått meldinger om fra Arena og de har derfor ikke fått utregnet noen ordinær utløpsdato. Vi vet ikke helt om disse egentlig får AAP, men de ligger allikevel i databasen.
+            return 'Mangler data';
         } else {
-            return dateGreater(new Date(utlopsdatoOrdinerRettighet), iDag)
-                ? toDateString(utlopsdatoOrdinerRettighet)
-                : 'Frist utløpt';
+            const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
+            vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
+            return dateGreater(vurderingsfrist, iDag) ? toDateString(utlopsdatoOrdinerRettighet) : 'Frist utløpt';
         }
     } else if (brukerYtelse === 'AAP_UNNTAK') {
         if (!utlopsdatoVedtak) {
