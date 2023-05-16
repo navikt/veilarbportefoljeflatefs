@@ -1,7 +1,7 @@
 import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Maybe} from './types';
 import moment from 'moment/moment';
-import {toDatePrettyPrint, toDateString, dateGreater} from './dato-utils';
+import {toDatePrettyPrint} from './dato-utils';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -70,48 +70,6 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     const millisDiff = utlopsdato.getTime() - now.getTime();
 
     return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
-}
-
-export function ytelsestypetekst(brukerytelse) {
-    if (brukerytelse === 'AAP_MAXTID') {
-        return 'Ordinær';
-    } else if (brukerytelse === 'AAP_UNNTAK') {
-        return 'Unntak';
-    }
-}
-
-export function aapVurderingsfrist(
-    brukerYtelse: string | undefined,
-    ordinerRettighetUker?: number,
-    utlopsdatoVedtak?: string,
-    utlopsdatoOrdinerRettighet?: string
-): string | undefined {
-    const iDag = new Date();
-    if (brukerYtelse === 'AAP_MAXTID') {
-        // makstid == ordinær rettighetsperiode
-        if (!utlopsdatoOrdinerRettighet) {
-            // midlertidig sjekk fram til meldekortmeldinger(oppdatering av ytelsen) om alle brukere har kommet inn og vi kan bruke kun utlopsdatoOrdinerRettighet. (burde være greit etter to uker??)
-            if (!ordinerRettighetUker) {
-                return undefined;
-            }
-            const vurderingsfristUker = ordinerRettighetUker - 6; // På grunn av mangel på nøyaktig dato settes fristen til 42 dager/6 uker fram til den nøyaktige datoen blir tilgjengelig
-            const vurderingsfrist = new Date('2023-05-01');
-            vurderingsfrist.setDate(vurderingsfrist.getDate() + vurderingsfristUker * 7);
-
-            return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist.toString()) : 'Frist utløpt';
-        } else {
-            return dateGreater(new Date(utlopsdatoOrdinerRettighet), iDag)
-                ? toDateString(utlopsdatoOrdinerRettighet)
-                : 'Frist utløpt';
-        }
-    } else if (brukerYtelse === 'AAP_UNNTAK') {
-        if (!utlopsdatoVedtak) {
-            return undefined;
-        }
-        const vurderingsfrist = new Date(utlopsdatoVedtak);
-        vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-        return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist) : 'Frist utløpt';
-    }
 }
 
 export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
