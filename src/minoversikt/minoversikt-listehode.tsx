@@ -53,6 +53,7 @@ function MinOversiktListeHode({
 }: MinOversiktListehodeProps) {
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
+    const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
@@ -274,6 +275,17 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                     title="Gjenstående uker på gjeldende vedtak tiltakspenger"
                     headerId="ytelse-utlopsdato"
+                />
+                <SorteringHeader
+                    sortering={aapPeriodetype}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === aapPeriodetype}
+                    tekst="Type AAP-periode"
+                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                    className="col col-xs-2"
+                    title="Type AAP-periode"
+                    headerId="type-aap"
                 />
                 <SorteringHeader
                     sortering={aapVurderingsfrist}

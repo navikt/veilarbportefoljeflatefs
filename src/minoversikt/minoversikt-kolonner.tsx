@@ -11,7 +11,8 @@ import {
     tolkBehov,
     tolkBehovSpraak,
     utledValgteAktivitetsTyper,
-    utlopsdatoUker
+    utlopsdatoUker,
+    ytelsestypetekst
 } from '../utils/utils';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
@@ -72,6 +73,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
+    const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
@@ -198,6 +200,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
                 skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
