@@ -25,8 +25,6 @@ import {
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import AlderFilterform from './filterform/alder-filterform';
@@ -51,8 +49,6 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -332,7 +328,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Hovedmål"
                     id="hovedmal"
-                    hidden={erGjemHovedmalFeatureTogglePa}
                     render={() => (
                         <CheckboxFilterform
                             form="hovedmal"
