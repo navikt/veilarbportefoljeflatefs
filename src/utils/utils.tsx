@@ -72,41 +72,6 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
 }
 
-export function ytelsestypetekst(brukerytelse) {
-    if (brukerytelse === 'AAP_MAXTID') {
-        return 'Ordinær';
-    } else if (brukerytelse === 'AAP_UNNTAK') {
-        return 'Unntak';
-    }
-}
-
-export function aapVurderingsfrist(
-    brukerYtelse: string | undefined,
-    ordinerRettighetUker?: number,
-    utlopsdatoVedtak?: string,
-    utlopsdatoOrdinerRettighet?: string
-): string | undefined {
-    const iDag = new Date();
-    if (brukerYtelse === 'AAP_MAXTID') {
-        // makstid == ordinær rettighetsperiode
-        if (!utlopsdatoOrdinerRettighet) {
-            // Det er noen tusen brukere som vi ikke har fått meldinger om fra Arena og de har derfor ikke fått utregnet noen ordinær utløpsdato. Vi vet ikke helt om disse egentlig får AAP, men de ligger allikevel i databasen.
-            return 'Mangler data';
-        } else {
-            const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
-            vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-            return dateGreater(vurderingsfrist, iDag) ? toDateString(utlopsdatoOrdinerRettighet) : 'Frist utløpt';
-        }
-    } else if (brukerYtelse === 'AAP_UNNTAK') {
-        if (!utlopsdatoVedtak) {
-            return undefined;
-        }
-        const vurderingsfrist = new Date(utlopsdatoVedtak);
-        vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-        return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist) : 'Frist utløpt';
-    }
-}
-
 export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
     if (ytelse === 'AAP') {
         return maxtidukerigjen !== -1 ? maxtidukerigjen : unntakukerigjen;
