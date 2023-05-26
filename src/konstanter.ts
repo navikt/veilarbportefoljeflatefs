@@ -12,7 +12,6 @@ export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const GJEM_HOVEDMAL = 'veilarbportfolje.gjem_hovedmal';
 export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
-export const VIS_AVVIK_14A_VEDTAK_FILTER = 'veilarbportefolje.vis_avvik_14a_vedtak_filter';
 export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefolje.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
 
@@ -22,6 +21,5 @@ export const PORTEFOLJE_FEATURES = [
     GJEM_HOVEDMAL,
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
-    VIS_AVVIK_14A_VEDTAK_FILTER,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
 ];

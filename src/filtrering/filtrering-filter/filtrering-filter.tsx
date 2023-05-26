@@ -26,7 +26,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import AlderFilterform from './filterform/alder-filterform';
@@ -52,7 +52,6 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-    const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -275,37 +274,35 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            {erAvvik14aVedtakFilterFeatureTogglePa && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Utfasing av Arena</Label>
-                    <Dropdown
-                        name="Status § 14 a-vedtak"
-                        id="status-14a-vedtak-filter"
-                        render={() => (
-                            <>
-                                <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
-                                    iverksatte § 14 a-vedtaket.{' '}
-                                    <Link
-                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                    >
-                                        Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
-                                    </Link>
-                                    .
-                                </Alert>
-                                <CheckboxFilterform
-                                    valg={avvik14aVedtakValg()}
-                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                    filtervalg={filtervalg}
-                                    form="avvik14aVedtak"
-                                />
-                            </>
-                        )}
-                    />
-                </div>
-            )}
+            <div className="filtrering-filter__kolonne">
+                <Label size="small">Utfasing av Arena</Label>
+                <Dropdown
+                    name="Status § 14 a-vedtak"
+                    id="status-14a-vedtak-filter"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det iverksatte §
+                                14 a-vedtaket.{' '}
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                >
+                                    Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                </Link>
+                                .
+                            </Alert>
+                            <CheckboxFilterform
+                                valg={avvik14aVedtakValg()}
+                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
+                                filtervalg={filtervalg}
+                                form="avvik14aVedtak"
+                            />
+                        </>
+                    )}
+                />
+            </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
                 <Dropdown
