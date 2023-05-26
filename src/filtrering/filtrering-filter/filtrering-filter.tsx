@@ -27,7 +27,7 @@ import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
+import {GJEM_HOVEDMAL, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
 import AlderFilterform from './filterform/alder-filterform';
@@ -54,7 +54,6 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
     const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
-    const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
     const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
 
     const avvik14aVedtakValg = () => {
@@ -450,7 +449,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Stilling fra NAV (dele CV med arbeidsgiver)"
                     id="stillingFraNav"
-                    hidden={!erStillingFraNavFeatureTogglePa}
                     render={() => (
                         <CheckboxFilterform
                             form="stillingFraNavFilter"
