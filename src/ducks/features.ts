@@ -6,8 +6,7 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER
+    UTEN_KRR_FILTER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -21,8 +20,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [UTEN_KRR_FILTER]: false,
-    [TVUNGEN_STEPPER]: false
+    [UTEN_KRR_FILTER]: false
 };
 
 // Reducer
