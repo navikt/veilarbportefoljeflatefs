@@ -92,6 +92,8 @@ export interface FiltervalgModell {
     visGeografiskBosted: string[];
     avvik14aVedtak: string[];
     ensligeForsorgere: string[];
+
+    barnUnder18Aar: string[];
 }
 
 export interface EnhetModell {
@@ -181,6 +183,8 @@ export interface BrukerModell {
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
+
+    barnUnder18AarData: BarnUnder18Aar[];
 }
 
 interface EnsligeForsorgereOvergangsstonad {
@@ -188,6 +192,10 @@ interface EnsligeForsorgereOvergangsstonad {
     harAktivitetsplikt?: boolean | undefined;
     utlopsDato: Date;
     yngsteBarnsFødselsdato: Date;
+}
+
+export interface BarnUnder18Aar {
+    alder: number;
 }
 interface Statsborgerskap {
     statsborgerskap: string;

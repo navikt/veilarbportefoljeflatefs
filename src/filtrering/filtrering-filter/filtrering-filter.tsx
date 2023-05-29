@@ -4,6 +4,7 @@ import {
     alder,
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
+    barnUnder18Aar,
     cvJobbprofil,
     ensligeForsorgere,
     fodselsdagIMnd,
@@ -161,6 +162,19 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             filtervalg={filtervalg}
                             form="kjonn"
                             gridColumns={2}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Har barn under 18 år"
+                    id="barnUnder18"
+                    render={() => (
+                        <CheckboxFilterform
+                            valg={barnUnder18Aar}
+                            endreFiltervalg={endreFiltervalg}
+                            filtervalg={filtervalg}
+                            form="barnUnder18Aar"
+                            gridColumns={1}
                         />
                     )}
                 />

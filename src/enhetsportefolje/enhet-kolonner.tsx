@@ -15,7 +15,7 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
     bostedKommune,
@@ -95,6 +95,22 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const geografiskbostedData = useGeografiskbostedSelector();
 
+    const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
+        const lf = new Intl.ListFormat('no');
+        var dataOmBarnSorted = dataOmBarn
+            .map(x => x.alder)
+            .sort((a, b) => (a < b ? -1 : 1))
+            .map(x => String(x));
+        return ' (' + lf.format(dataOmBarnSorted) + ' år)';
+    };
+
+    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18Aar[]) => {
+        if (dataOmBarn === null || dataOmBarn === undefined || (Array.isArray(dataOmBarn) && dataOmBarn.length === 0)) {
+            return '-';
+        }
+        return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
+    };
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -151,6 +167,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
+            />
+
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             />
             <DatoKolonne
                 className="col col-xs-2"

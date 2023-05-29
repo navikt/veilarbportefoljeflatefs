@@ -51,7 +51,9 @@ export enum Kolonne {
     ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD = 'utlop_overgangsstonad',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
-    ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet'
+    ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
+
+    HAR_BARN_UNDER_18 = 'har_barn_under_18'
 }
 
 export enum OversiktType {
