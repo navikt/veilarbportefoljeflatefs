@@ -130,6 +130,10 @@ export const kjonn = {
     M: {label: 'Mann'}
 };
 
+export const barnUnder18Aar = {
+    HAR_BARN_UNDER_18_AAR: {label: 'Har barn under 18 år'}
+};
+
 export const innsatsgruppe = {
     IKVAL: {label: 'Standardinnsats'},
     BFORM: {label: 'Situasjonsbestemt innsats'},
@@ -414,7 +418,8 @@ const filterKonstanter = {
     tolkebehov,
     stillingFraNavFilter,
     avvik14aVedtak,
-    ensligeForsorgere
+    ensligeForsorgere,
+    barnUnder18Aar
 };
 
 export default filterKonstanter;

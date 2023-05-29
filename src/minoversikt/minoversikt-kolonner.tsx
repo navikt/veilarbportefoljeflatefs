@@ -30,7 +30,7 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
@@ -107,6 +107,22 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
 
     const geografiskbostedData = useGeografiskbostedSelector();
 
+    const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
+        const lf = new Intl.ListFormat('no');
+        var dataOmBarnSorted = dataOmBarn
+            .map(x => x.alder)
+            .sort((a, b) => (a < b ? -1 : 1))
+            .map(x => String(x));
+        return ' (' + lf.format(dataOmBarnSorted) + ' år)';
+    };
+
+    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18Aar[]) => {
+        if (dataOmBarn === null || dataOmBarn === undefined || (Array.isArray(dataOmBarn) && dataOmBarn.length === 0)) {
+            return '-';
+        }
+        return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
+    };
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -164,6 +180,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
             <DatoKolonne
                 className="col col-xs-2"

@@ -2,7 +2,7 @@ import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {KategoriModell} from '../model-interfaces';
+import {BarnUnder18Aar, KategoriModell} from '../model-interfaces';
 import moment from 'moment';
 
 faker.seed(MOCK_CONFIG.seed);
@@ -246,7 +246,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         tolkBehovSistOppdatert: randomDate({past: true}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
-        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
+        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
+        barnUnder18AarData: hentBarnUnder18Aar()
     };
 }
 
@@ -327,6 +328,23 @@ const hentSpraak = () => {
     }
 
     return null;
+};
+
+const hentBarnUnder18Aar = () => {
+    var barnInfo: BarnUnder18Aar[] = [];
+    let randomArray = new Int8Array(10);
+    window.crypto.getRandomValues(randomArray);
+
+    let barnAntall = randomArray[0] % 3;
+
+    for (let i = 0; i <= barnAntall; i++) {
+        var singleObj: BarnUnder18Aar = {
+            alder: Math.abs(randomArray[i] % 18)
+        };
+        barnInfo.push(singleObj);
+    }
+
+    return barnInfo;
 };
 
 const randomEndring = () => {
