@@ -39,6 +39,8 @@ import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {ExternalLink} from '@navikt/ds-icons';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -123,6 +125,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         };
     };
 
+    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
+
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -165,19 +169,22 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-                <Dropdown
-                    name="Har barn under 18 år"
-                    id="barnUnder18"
-                    render={() => (
-                        <CheckboxFilterform
-                            valg={barnUnder18Aar}
-                            endreFiltervalg={endreFiltervalg}
-                            filtervalg={filtervalg}
-                            form="barnUnder18Aar"
-                            gridColumns={1}
-                        />
-                    )}
-                />
+
+                {erFilterForBarnUnder18UnderFeatureToggle && (
+                    <Dropdown
+                        name="Har barn under 18 år"
+                        id="barnUnder18"
+                        render={() => (
+                            <CheckboxFilterform
+                                valg={barnUnder18Aar}
+                                endreFiltervalg={endreFiltervalg}
+                                filtervalg={filtervalg}
+                                form="barnUnder18Aar"
+                                gridColumns={1}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Geografisk bosted"
                     id="bosted"
