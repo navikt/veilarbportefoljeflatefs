@@ -13,11 +13,13 @@ export const DARKMODE = 'veilarbportefolje.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefolje.alertstripe_feilmelding';
 export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefolje.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
+export const VIS_AAP_VURDERINGSFRISTKOLONNER = 'veilarbportefoljeflate.vis_kolonner_for_vurderingsfrist_aap';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
     SPOR_OM_TILBAKEMELDING,
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
+    VIS_AAP_VURDERINGSFRISTKOLONNER
 ];

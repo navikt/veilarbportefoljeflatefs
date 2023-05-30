@@ -21,6 +21,8 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE} from '../../konstanter';
+import {store} from '../../application';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
@@ -63,6 +65,8 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
+    const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
+
     const avansertAktivitetErValgt = () => {
         return (
             !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
@@ -179,12 +183,13 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(
                 Kolonne.VURDERINGSFRIST_YTELSE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
+                featureAAPkolonne &&
+                    (filtervalg.ytelse === AAP_YTELSE ||
+                        filtervalg.ytelse === AAP_YTELSE_MAXTID ||
+                        filtervalg.ytelse === AAP_YTELSE_UNNTAK)
             )
         )
-        .concat(addHvis(Kolonne.TYPE_YTELSE, filtervalg.ytelse === AAP_YTELSE))
+        .concat(addHvis(Kolonne.TYPE_YTELSE, featureAAPkolonne && filtervalg.ytelse === AAP_YTELSE))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
         .concat(
