@@ -49,6 +49,8 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -59,6 +61,7 @@ interface MinOversiktKolonnerProps {
 }
 
 function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -79,12 +82,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const vurderingsfristAAP = aapVurderingsfrist(
-        bruker.ytelse,
-        bruker.aapmaxtidUke,
-        bruker.utlopsdato,
-        bruker.aapordinerutlopsdato
-    );
+    const vurderingsfristAAP = aapVurderingsfrist(bruker.ytelse, bruker.utlopsdato, bruker.aapordinerutlopsdato);
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
@@ -201,16 +199,20 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 minVal={2}
                 skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
-                tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
-                tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
-            />
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                    tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+                />
+            )}
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                    tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
+                />
+            )}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
