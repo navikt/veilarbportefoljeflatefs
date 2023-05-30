@@ -52,7 +52,9 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
     ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
-    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet'
+    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
+
+    BARN_UNDER_18_AAR = 'barn_under_18_aar'
 }
 
 export interface FiltervalgModell {

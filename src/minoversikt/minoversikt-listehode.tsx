@@ -180,13 +180,16 @@ function MinOversiktListeHode({
                     skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 />
 
-                <Header
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
+                    tekst="Barn under 18 år"
                     className="col col-xs-2"
+                    headerId="barn_under_18"
                     skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
-                    headerId="harBarnUnder18"
-                >
-                    Barn under 18 år
-                </Header>
+                />
 
                 <SorteringHeader
                     sortering={Sorteringsfelt.BOSTED_KOMMUNE}
