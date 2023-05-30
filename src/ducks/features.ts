@@ -3,6 +3,7 @@ import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
 import {
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
+    FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE
@@ -18,7 +19,8 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false
+    [ALERTSTRIPE_FEILMELDING]: false,
+    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false
 };
 
 // Reducer
