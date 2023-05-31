@@ -13,7 +13,7 @@ const toggles = {
     [DARKMODE]: true,
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING]: true,
-    [VIS_AAP_VURDERINGSFRISTKOLONNER]: false
+    [VIS_AAP_VURDERINGSFRISTKOLONNER]: true
 };
 
 export default toggles;
