@@ -168,11 +168,6 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
             />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
-                tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
-            />
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
@@ -366,6 +361,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
                 className="col col-xs-2"
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
         </div>
     );

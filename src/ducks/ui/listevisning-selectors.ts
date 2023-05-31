@@ -191,7 +191,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
-        .concat(addHvis(Kolonne.HAR_BARN_UNDER_18, !!filtervalg.barnUnder18Aar.length))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, avvik14aVedtakErValgt()))
         .concat(
             addHvis(
@@ -206,5 +205,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
-        .concat([Kolonne.OPPFOLGINGSTARTET]);
+        .concat([Kolonne.OPPFOLGINGSTARTET])
+        .concat(addHvis(Kolonne.HAR_BARN_UNDER_18, !!filtervalg.barnUnder18Aar.length));
 }
