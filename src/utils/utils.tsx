@@ -90,7 +90,7 @@ export function aapVurderingsfrist(
         // makstid == ordinær rettighetsperiode
         if (!utlopsdatoOrdinerRettighet) {
             // Det er noen tusen brukere som vi ikke har fått meldinger om fra Arena og de har derfor ikke fått utregnet noen ordinær utløpsdato. Vi vet ikke helt om disse egentlig får AAP, men de ligger allikevel i databasen.
-            return 'Ikke situasjonsbestemt';
+            return 'Ikke spesielt tilpasset';
         } else {
             const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
             vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
