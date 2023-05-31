@@ -196,17 +196,6 @@ function EnhetListehode({
                     skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
-                    tekst="Barn under 18 år"
-                    className="col col-xs-2"
-                    headerId="barn_under_18"
-                    skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
-                />
-
-                <SorteringHeader
                     sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
@@ -544,6 +533,16 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     tekst="Om barnet"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
+                    tekst="Barn under 18 år"
+                    className="col col-xs-2"
+                    headerId="barn_under_18"
+                    skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
                 />
             </div>
             <div className="brukerliste__gutter-right" />
