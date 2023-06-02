@@ -131,7 +131,7 @@ export const kjonn = {
 };
 
 export const barnUnder18Aar = {
-    HAR_BARN_UNDER_18_AAR: {label: 'Har barn under 18 år'}
+    HAR_BARN_UNDER_18_AAR: 'Har barn under 18 år'
 };
 
 export const innsatsgruppe = {
