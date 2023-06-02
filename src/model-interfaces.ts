@@ -96,6 +96,7 @@ export interface FiltervalgModell {
     ensligeForsorgere: string[];
 
     barnUnder18Aar: string[];
+    barnUnder18AarAlder: string[];
 }
 
 export interface EnhetModell {
