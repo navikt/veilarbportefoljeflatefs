@@ -46,6 +46,11 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const submitCheckBoxValg = (checkboxValg: string[]) => {
         setFeil(false);
         setCheckBoxValg(checkboxValg);
+        if (checkboxValg.length > 0) {
+            setInputAlderFra('');
+            setInputAlderTil('');
+            endreFiltervalg(filterFormBarnAlder, []);
+        }
         endreFiltervalg(filterFormHarBarnUnder18, checkboxValg);
 
         logEvent('portefolje.metrikker.barn_under_18_filter', {
@@ -56,6 +61,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
 
     const onChangeInput = (e, til) => {
         setFeil(false);
+        setCheckBoxValg([]);
+
         if (til) {
             setInputAlderTil(e.target.value);
         } else {
@@ -67,6 +74,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
         e.preventDefault();
+
+        endreFiltervalg(filterFormHarBarnUnder18, []);
         if (!kanVelgeFilter) {
             closeDropdown();
         } else {
@@ -75,11 +84,13 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                 setFeilTekst('Fra-alder kan ikke være større enn til-alder.');
             } else if (inputFraNummer >= 18 && inputAlderTil.length === 0) {
                 setFeil(true);
-                setFeilTekst('Du må skrive et tall lavere enn 18 i fra-feltet hvis til-feltet står tomt.');
+                setFeilTekst('Du må skrive et tall lavere enn 18 i fra-feltet.');
+            } else if (inputTilNummer >= 18) {
+                setFeil(true);
+                setFeilTekst('Du må skrive et tall lavere enn 18 i til-feltet.');
             } else {
                 setFeil(false);
                 setFeilTekst('');
-                submitCheckBoxValg(['HAR_BARN_UNDER_18_AAR']);
                 if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
                     endreFiltervalg(filterFormBarnAlder, [0 + '-' + inputAlderTil]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
@@ -108,6 +119,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         endreFiltervalg(filterFormBarnAlder, []);
     };
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <form
             className="skjema checkbox-filterform"
@@ -134,6 +147,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                             </Grid>
                         </CheckboxGroup>
                     </div>
+
                     <hr className="alder-border" />
                     <label className="skjemaelement__label">Alder på barn</label>
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
@@ -176,6 +190,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                             Velg
                         </Button>
                     </div>
+
                     {feil && (
                         <BodyShort
                             size="small"
