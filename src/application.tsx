@@ -15,6 +15,7 @@ import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjo
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
 }
+
 moment.locale('nb');
 
 const store = createStore();
