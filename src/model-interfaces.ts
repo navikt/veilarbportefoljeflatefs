@@ -117,6 +117,13 @@ export enum VurderingsBehov {
     OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
+export enum Innsatsgruppe {
+    IKVAL = 'IKVAL',
+    BFORM = 'BFORM',
+    BATT = 'BATT',
+    VARIG = 'VARIG'
+}
+
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -132,6 +139,7 @@ export interface BrukerModell {
     nyForEnhet: boolean;
     trengerVurdering: boolean;
     vurderingsBehov?: VurderingsBehov;
+    innsatsgruppe: Innsatsgruppe;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato

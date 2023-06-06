@@ -82,7 +82,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
-    const vurderingsfristAAP = aapVurderingsfrist(bruker.ytelse, bruker.utlopsdato, bruker.aapordinerutlopsdato);
+    const vurderingsfristAAP = aapVurderingsfrist(
+        bruker.innsatsgruppe,
+        bruker.ytelse,
+        bruker.utlopsdato,
+        bruker.aapordinerutlopsdato
+    );
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;

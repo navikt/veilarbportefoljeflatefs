@@ -1,4 +1,4 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
 import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
@@ -81,6 +81,7 @@ export function ytelsestypetekst(brukerytelse: string) {
 }
 
 export function aapVurderingsfrist(
+    innsatsgruppe: Innsatsgruppe,
     brukerYtelse: string | undefined,
     utlopsdatoVedtak?: string,
     utlopsdatoOrdinerRettighet?: string
@@ -88,13 +89,16 @@ export function aapVurderingsfrist(
     const iDag = new Date();
     if (brukerYtelse === 'AAP_MAXTID') {
         // makstid == ordinær rettighetsperiode
-        if (!utlopsdatoOrdinerRettighet) {
-            // Det er noen tusen brukere som vi ikke har fått meldinger om fra Arena og de har derfor ikke fått utregnet noen ordinær utløpsdato. Vi vet ikke helt om disse egentlig får AAP, men de ligger allikevel i databasen.
-            return 'Ikke spesielt tilpasset';
-        } else {
+        if (utlopsdatoOrdinerRettighet) {
+            // Hvis utlopsdatoOrdinerRettighet eksisterer så er brukeren BATT (filtreres backend)
             const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
             vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
             return dateGreater(vurderingsfrist, iDag) ? toDateString(utlopsdatoOrdinerRettighet) : 'Frist utløpt';
+        } else if (innsatsgruppe === Innsatsgruppe.BATT) {
+            // Hvis bruker er BATT, så har vi ikke fått melding fra Arena som oppretter en ordinerutlopsdato
+            return 'Mangler data';
+        } else {
+            return 'Ikke spesielt tilpasset innsats';
         }
     } else if (brukerYtelse === 'AAP_UNNTAK') {
         if (!utlopsdatoVedtak) {
