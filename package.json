@@ -8,6 +8,7 @@
     "homepage": "/veilarbportefoljeflatefs",
     "scripts": {
         "start": "cross-env REACT_APP_MOCK=true react-scripts start",
+        "start:metrics": "cross-env REACT_APP_MOCK=true REACT_APP_DEPLOYMENT_ENV=local react-scripts start",
         "build": "react-scripts build",
         "eject": "react-scripts eject",
         "test": "react-scripts test --watchAll=false --transformIgnorePatterns",
@@ -16,7 +17,8 @@
         "cypress:open": "cypress open",
         "cy:run": "cypress run",
         "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true react-scripts build",
-        "build:gcp": "cross-env REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build",
+        "build:dev": "cross-env REACT_APP_DEPLOYMENT_ENV=development REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build",
+        "build:prod": "cross-env REACT_APP_DEPLOYMENT_ENV=production REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build",
         "prepare": "husky install",
         "pre-commit": "lint-staged --verbose"
     },
@@ -45,6 +47,7 @@
         "yet-another-fetch-mock": "4.2.1"
     },
     "dependencies": {
+        "@grafana/faro-web-sdk": "^1.0.5",
         "@navikt/ds-css": "2.8.12",
         "@navikt/ds-css-internal": "2.8.12",
         "@navikt/ds-icons": "2.8.12",
