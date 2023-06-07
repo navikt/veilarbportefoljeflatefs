@@ -79,7 +79,6 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
             } else {
                 setFeil(false);
                 setFeilTekst('');
-                submitCheckBoxValg(['HAR_BARN_UNDER_18_AAR']);
                 if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
                     endreFiltervalg(filterFormBarnAlder, [0 + '-' + inputAlderTil]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
