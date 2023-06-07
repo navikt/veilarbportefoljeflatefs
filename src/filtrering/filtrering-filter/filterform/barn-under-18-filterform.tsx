@@ -47,9 +47,9 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         setFeil(false);
         setCheckBoxValg(checkboxValg);
         if (checkboxValg.length > 0) {
-            endreFiltervalg(filterFormBarnAlder, []);
             setInputAlderFra('');
             setInputAlderTil('');
+            endreFiltervalg(filterFormBarnAlder, []);
         }
         endreFiltervalg(filterFormHarBarnUnder18, checkboxValg);
 
@@ -61,8 +61,9 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
 
     const onChangeInput = (e, til) => {
         setFeil(false);
-        endreFiltervalg(filterFormHarBarnUnder18, []);
         setCheckBoxValg([]);
+        endreFiltervalg(filterFormHarBarnUnder18, []);
+
         if (til) {
             setInputAlderTil(e.target.value);
         } else {
