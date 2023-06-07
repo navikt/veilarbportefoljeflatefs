@@ -46,6 +46,11 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const submitCheckBoxValg = (checkboxValg: string[]) => {
         setFeil(false);
         setCheckBoxValg(checkboxValg);
+        if (checkboxValg.length > 0) {
+            endreFiltervalg(filterFormBarnAlder, []);
+            setInputAlderFra('');
+            setInputAlderTil('');
+        }
         endreFiltervalg(filterFormHarBarnUnder18, checkboxValg);
 
         logEvent('portefolje.metrikker.barn_under_18_filter', {
@@ -56,6 +61,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
 
     const onChangeInput = (e, til) => {
         setFeil(false);
+        endreFiltervalg(filterFormHarBarnUnder18, []);
+        setCheckBoxValg([]);
         if (til) {
             setInputAlderTil(e.target.value);
         } else {
