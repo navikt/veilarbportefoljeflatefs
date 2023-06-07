@@ -301,7 +301,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`${key}--${singleValue}`}
-                            label={`Alder på barn:  ${singleValue} år`}
+                            label={`Har barn under 18 år:  ${singleValue} år`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
