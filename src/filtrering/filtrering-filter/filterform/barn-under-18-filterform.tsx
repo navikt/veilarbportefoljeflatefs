@@ -62,7 +62,6 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const onChangeInput = (e, til) => {
         setFeil(false);
         setCheckBoxValg([]);
-        endreFiltervalg(filterFormHarBarnUnder18, []);
 
         if (til) {
             setInputAlderTil(e.target.value);
@@ -75,6 +74,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
         e.preventDefault();
+
+        endreFiltervalg(filterFormHarBarnUnder18, []);
         if (!kanVelgeFilter) {
             closeDropdown();
         } else {
