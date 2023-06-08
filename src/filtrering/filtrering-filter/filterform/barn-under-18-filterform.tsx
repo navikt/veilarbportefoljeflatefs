@@ -116,6 +116,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         endreFiltervalg(filterFormBarnAlder, []);
     };
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <form
             className="skjema checkbox-filterform"
@@ -142,6 +144,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                             </Grid>
                         </CheckboxGroup>
                     </div>
+
                     <hr className="alder-border" />
                     <label className="skjemaelement__label">Alder på barn</label>
                     <div className={classNames('alder-input', feil && 'alder-input__validering')}>
@@ -184,6 +187,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                             Velg
                         </Button>
                     </div>
+
                     {feil && (
                         <BodyShort
                             size="small"
