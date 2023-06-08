@@ -2,7 +2,7 @@ import * as React from 'react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
 import hiddenIf from '../hidden-if/hidden-if';
 import {Tag} from '@navikt/ds-react';
-import {hentSkjermetInfo} from '../../utils/dato-utils';
+import {hentSikkerhetsTiltakInfo, hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
     bruker: BrukerModell;
@@ -12,19 +12,23 @@ interface EtiketterProps {
 function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
+    const sikkerhetTiltakInfo = hentSikkerhetsTiltakInfo(
+        bruker.sikkerhetstiltak.length > 0,
+        bruker.sikkerhetstiltak_beskrivelse,
+        bruker.sikkerhetstiltak_gyldig_fra,
+        bruker.sikkerhetstiltak_gyldig_til
+    );
     return (
         <>
             <HiddenEtikett variant="info" size="small" hidden={!bruker.erDoed} className="tabell-etikett etikett--doed">
                 Død
             </HiddenEtikett>
             <HiddenEtikett
-                variant="warning"
+                variant={sikkerhetTiltakInfo.type}
                 size="small"
-                hidden={!bruker.sikkerhetstiltak || bruker.sikkerhetstiltak.length === 0}
+                hidden={sikkerhetTiltakInfo.hidden}
                 className="tabell-etikett"
-            >
-                Sikkerhetstiltak
-            </HiddenEtikett>
+            >{`${sikkerhetTiltakInfo.tittel}`}</HiddenEtikett>
             <HiddenEtikett variant="warning" size="small" hidden={!bruker.diskresjonskode} className="tabell-etikett">
                 {`Kode ${bruker.diskresjonskode}`}
             </HiddenEtikett>
