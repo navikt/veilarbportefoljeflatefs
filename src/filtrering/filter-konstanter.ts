@@ -184,7 +184,7 @@ export const ytelse = {
         className: skjemaelementInnrykkKlasse
     },
     AAP: {label: 'AAP'},
-    AAP_MAXTID: {label: 'AAP maxtid', className: skjemaelementInnrykkKlasse},
+    AAP_MAXTID: {label: 'AAP ordinær', className: skjemaelementInnrykkKlasse},
     AAP_UNNTAK: {label: 'AAP unntak', className: skjemaelementInnrykkKlasse},
     TILTAKSPENGER: {label: 'Tiltakspenger'}
 };
@@ -207,14 +207,18 @@ export const ytelseUtlopsSortering = {
 
 export const ytelseAapSortering = {
     AAP: {
+        periodetype: Sorteringsfelt.AAP_TYPE,
+        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
     AAP_MAXTID: {
+        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE
     },
     AAP_UNNTAK: {
+        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE
     }

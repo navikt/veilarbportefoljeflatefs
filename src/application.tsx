@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 moment.locale('nb');
 
-const store = createStore();
+export const store = createStore();
 
 function Application() {
     useBrukeraktivitetTokenRefresh(

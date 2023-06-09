@@ -17,6 +17,8 @@ export enum Sorteringsfelt {
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
     AAP_MAXTID_UKE = 'aapmaxtiduke',
     AAP_UNNTAK_UKE = 'aapunntakukerigjen',
+    AAP_VURDERINGSFRIST = 'aap_vurderingsfrist',
+    AAP_TYPE = 'aap_type',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
@@ -115,6 +117,13 @@ export enum VurderingsBehov {
     OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
+export enum Innsatsgruppe {
+    IKVAL = 'IKVAL',
+    BFORM = 'BFORM',
+    BATT = 'BATT',
+    VARIG = 'VARIG'
+}
+
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -130,6 +139,7 @@ export interface BrukerModell {
     nyForEnhet: boolean;
     trengerVurdering: boolean;
     vurderingsBehov?: VurderingsBehov;
+    innsatsgruppe: Innsatsgruppe;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato
@@ -140,6 +150,7 @@ export interface BrukerModell {
     dagputlopUke?: number;
     permutlopUke?: number;
     aapmaxtidUke?: number;
+    aapordinerutlopsdato?: string; // dato
     arbeidsliste: ArbeidslisteModell;
     venterPaSvarFraNAV?: string;
     venterPaSvarFraBruker?: string;
