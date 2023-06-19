@@ -11,7 +11,7 @@ import 'nav-frontend-skjema-style/dist/main.css';
 import 'nav-frontend-typografi-style/dist/main.css';
 import '@navikt/ds-css';
 import './style.css';
-import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
+import {ErrorsInstrumentation, initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import {DeploymentEnvironment, erMock} from './utils/url-utils';
 
 if (!(window as any)._babelPolyfill) {
@@ -52,7 +52,7 @@ function settOppCoreWebVitalsMetrikkRapportering() {
 
     if (metrikkEndepunkt) {
         initializeFaro({
-            instrumentations: [new WebVitalsInstrumentation()],
+            instrumentations: [new WebVitalsInstrumentation(), new ErrorsInstrumentation()],
             url: metrikkEndepunkt,
             app: {
                 name: 'veilarbportefoljeflatefs',
