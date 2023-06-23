@@ -203,6 +203,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 oversiktType === OversiktType.enhetensOversikt && !filtervalg.ferdigfilterListe.includes(MOTER_IDAG)
             )
         )
+        .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, filtervalg.ytelse === AAP_YTELSE))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
         .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, !!filtervalg.ensligeForsorgere.length))
