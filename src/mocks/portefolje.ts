@@ -70,21 +70,27 @@ function lagYtelse() {
         ytelse,
         utlopsdato: '',
         aapmaxtidUke: '',
-        aapUnntakUkerIgjen: ''
+        aapUnntakUkerIgjen: '',
+        aapordinerutlopsdato: ''
     };
 
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
-    const ar = rnd(0, 4) + new Date().getFullYear();
+    const ar = rnd(0, 3) + new Date().getFullYear();
 
     if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
-        const rndDate = new Date(ar, mnd - 1, dag).getTime();
-        const todayDate = new Date().getTime();
+        const rndDate = new Date(ar, mnd - 1, dag);
+        const todayDate = new Date();
 
-        const aaptidUke = Math.round((rndDate - todayDate) / (1000 * 60 * 60 * 24 * 7));
+        const aaptidUke = Math.round((rndDate.getTime() - todayDate.getTime()) / (1000 * 60 * 60 * 24 * 7));
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapUnntakUkerIgjen = aaptidUke.toString();
+        if (ytelse === 'AAP_MAXTID') {
+            if (Math.random() > 0.5) {
+                out.aapordinerutlopsdato = rndDate.toString();
+            }
+        }
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
     }
@@ -208,6 +214,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         forrigeAktivitetStart: ytelse.utlopsdato,
         aapmaxtidUke: ytelse.aapmaxtidUke,
         aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
+        aapordinerutlopsdato: ytelse.aapordinerutlopsdato,
         arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,

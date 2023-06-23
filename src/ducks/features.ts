@@ -1,6 +1,7 @@
 import {AppState} from '../reducer';
 import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
 import {
+    VIS_AAP_VURDERINGSFRISTKOLONNER,
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
@@ -21,6 +22,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false
+    [VIS_AAP_VURDERINGSFRISTKOLONNER]: false
 };
 
 // Reducer

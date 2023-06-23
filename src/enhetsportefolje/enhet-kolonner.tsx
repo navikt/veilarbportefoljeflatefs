@@ -18,6 +18,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    aapVurderingsfrist,
     bostedKommune,
     capitalize,
     mapOmAktivitetsPlikt,
@@ -27,7 +28,8 @@ import {
     tolkBehov,
     tolkBehovSpraak,
     utledValgteAktivitetsTyper,
-    utlopsdatoUker
+    utlopsdatoUker,
+    ytelsestypetekst
 } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
@@ -48,6 +50,8 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -59,6 +63,7 @@ interface EnhetKolonnerProps {
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -69,12 +74,20 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
+    const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
+    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const vurderingsfristAAP = aapVurderingsfrist(
+        bruker.innsatsgruppe,
+        bruker.ytelse,
+        bruker.utlopsdato,
+        bruker.aapordinerutlopsdato
+    );
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
@@ -202,6 +215,20 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 minVal={2}
                 skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                    tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+                />
+            )}
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                    tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
+                />
+            )}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}

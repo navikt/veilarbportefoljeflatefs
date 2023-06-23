@@ -1,7 +1,7 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
 import moment from 'moment/moment';
-import {toDatePrettyPrint} from './dato-utils';
+import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -70,6 +70,44 @@ export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     const millisDiff = utlopsdato.getTime() - now.getTime();
 
     return Math.round(millisDiff / (7 * 24 * 3600 * 1000));
+}
+
+export function ytelsestypetekst(brukerytelse: string) {
+    if (brukerytelse === 'AAP_MAXTID') {
+        return 'Ordinær';
+    } else if (brukerytelse === 'AAP_UNNTAK') {
+        return 'Unntak';
+    }
+}
+
+export function aapVurderingsfrist(
+    innsatsgruppe: Innsatsgruppe,
+    brukerYtelse: string | undefined,
+    utlopsdatoVedtak?: string,
+    utlopsdatoOrdinerRettighet?: string
+): string | undefined {
+    const iDag = new Date();
+    if (brukerYtelse === 'AAP_MAXTID') {
+        // makstid == ordinær rettighetsperiode
+        if (utlopsdatoOrdinerRettighet) {
+            // Hvis utlopsdatoOrdinerRettighet eksisterer så er brukeren BATT (filtreres backend)
+            const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
+            vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
+            return dateGreater(vurderingsfrist, iDag) ? toDateString(utlopsdatoOrdinerRettighet) : 'Frist utløpt';
+        } else if (innsatsgruppe === Innsatsgruppe.BATT) {
+            // Hvis bruker er BATT, så har vi ikke fått melding fra Arena som oppretter en ordinerutlopsdato
+            return 'Mangler data';
+        } else {
+            return 'Ikke spesielt tilpasset innsats';
+        }
+    } else if (brukerYtelse === 'AAP_UNNTAK') {
+        if (!utlopsdatoVedtak) {
+            return undefined;
+        }
+        const vurderingsfrist = new Date(utlopsdatoVedtak);
+        vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
+        return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist) : 'Frist utløpt';
+    }
 }
 
 export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
