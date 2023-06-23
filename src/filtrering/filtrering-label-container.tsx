@@ -286,6 +286,26 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
+            } else if (key === 'barnUnder18Aar' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={`${FilterKonstanter[key][singleValue]}`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'barnUnder18AarAlder' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={`Har barn under 18 år:  ${singleValue} år`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (

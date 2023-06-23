@@ -213,5 +213,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
+        .concat(
+            addHvis(
+                Kolonne.HAR_BARN_UNDER_18,
+                !!filtervalg.barnUnder18Aar.length || !!filtervalg.barnUnder18AarAlder.length
+            )
+        )
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }
