@@ -4,6 +4,7 @@ import {
     alder,
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
+    barnUnder18Aar,
     cvJobbprofil,
     ensligeForsorgere,
     fodselsdagIMnd,
@@ -38,6 +39,9 @@ import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {ExternalLink} from '@navikt/ds-icons';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
+import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -122,6 +126,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         };
     };
 
+    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
+
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -164,6 +170,21 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
+
+                {erFilterForBarnUnder18UnderFeatureToggle && (
+                    <Dropdown
+                        name="Har barn under 18 år"
+                        id="barnUnder18"
+                        render={lukkDropdown => (
+                            <BarnUnder18FilterForm
+                                valg={barnUnder18Aar}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Geografisk bosted"
                     id="bosted"

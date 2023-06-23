@@ -52,7 +52,9 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
     ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
-    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet'
+    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
+
+    BARN_UNDER_18_AAR = 'barn_under_18_aar'
 }
 
 export interface FiltervalgModell {
@@ -94,6 +96,9 @@ export interface FiltervalgModell {
     visGeografiskBosted: string[];
     avvik14aVedtak: string[];
     ensligeForsorgere: string[];
+
+    barnUnder18Aar: string[];
+    barnUnder18AarAlder: string[];
 }
 
 export interface EnhetModell {
@@ -192,6 +197,8 @@ export interface BrukerModell {
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
+
+    barnUnder18AarData: BarnUnder18Aar[];
 }
 
 interface EnsligeForsorgereOvergangsstonad {
@@ -199,6 +206,10 @@ interface EnsligeForsorgereOvergangsstonad {
     harAktivitetsplikt?: boolean | undefined;
     utlopsDato: Date;
     yngsteBarnsFødselsdato: Date;
+}
+
+export interface BarnUnder18Aar {
+    alder: number;
 }
 interface Statsborgerskap {
     statsborgerskap: string;
