@@ -92,8 +92,10 @@ export function aapVurderingsfrist(
         if (utlopsdatoOrdinerRettighet) {
             // Hvis utlopsdatoOrdinerRettighet eksisterer så er brukeren BATT (filtreres backend)
             const vurderingsfrist = new Date(utlopsdatoOrdinerRettighet);
-            vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-            return dateGreater(vurderingsfrist, iDag) ? toDateString(utlopsdatoOrdinerRettighet) : 'Frist utløpt';
+            vurderingsfrist.setDate(vurderingsfrist.getDate() - 40); // 5 ukers frist er spesifisert av servicerutinen for AAP, på ordinær er den ikke nøyaktig på det vi får fra Arena, så setter den til 40 dager
+            return dateGreater(vurderingsfrist, iDag)
+                ? toDateString(vurderingsfrist)
+                : `Utløpt: ${toDateString(vurderingsfrist)}`;
         } else if (innsatsgruppe === Innsatsgruppe.BATT) {
             // Hvis bruker er BATT, så har vi ikke fått melding fra Arena som oppretter en ordinerutlopsdato
             return 'Mangler data';
@@ -106,7 +108,9 @@ export function aapVurderingsfrist(
         }
         const vurderingsfrist = new Date(utlopsdatoVedtak);
         vurderingsfrist.setDate(vurderingsfrist.getDate() - 35); // 35 dager/5 ukers frist er spesifisert av servicerutinen for AAP
-        return dateGreater(vurderingsfrist, iDag) ? toDateString(vurderingsfrist) : 'Frist utløpt';
+        return dateGreater(vurderingsfrist, iDag)
+            ? toDateString(vurderingsfrist)
+            : `Utløpt: ${toDateString(vurderingsfrist)}`;
     }
 }
 
