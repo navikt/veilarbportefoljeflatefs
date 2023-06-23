@@ -184,29 +184,27 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             addHvis(
                 Kolonne.VURDERINGSFRIST_YTELSE,
                 featureAAPkolonne &&
-                    (filtervalg.ytelse === AAP_YTELSE ||
-                        filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                        filtervalg.ytelse === AAP_YTELSE_UNNTAK)
+                    (filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK)
             )
         )
         .concat(addHvis(Kolonne.TYPE_YTELSE, featureAAPkolonne && filtervalg.ytelse === AAP_YTELSE))
-        .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
-        .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
+        .concat(
+            addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_UNNTAK)
+        )
+        .concat(
+            addHvis(
+                Kolonne.RETTIGHETSPERIODE,
+                filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID
+            )
+        )
         .concat(
             addHvis(
                 Kolonne.VEILEDER,
                 oversiktType === OversiktType.enhetensOversikt && !filtervalg.ferdigfilterListe.includes(MOTER_IDAG)
             )
         )
-        .concat(
-            addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID)
-        )
-        .concat(
-            addHvis(
-                Kolonne.RETTIGHETSPERIODE,
-                filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
+        .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
+        .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, !!filtervalg.ensligeForsorgere.length))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, !!filtervalg.ensligeForsorgere.length))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, !!filtervalg.ensligeForsorgere.length))
