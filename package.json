@@ -47,7 +47,7 @@
         "yet-another-fetch-mock": "4.2.1"
     },
     "dependencies": {
-        "@grafana/faro-web-sdk": "^1.0.5",
+        "@grafana/faro-web-sdk": "^1.1.0",
         "@navikt/ds-css": "2.9.8",
         "@navikt/ds-css-internal": "2.9.8",
         "@navikt/ds-icons": "2.9.8",
