@@ -54,7 +54,7 @@ export function utledValgteAktivitetsTyper(
 }
 
 export function erGithubPages() {
-    return window.location.host.includes('navikt.github.io');
+    return window.location.host === 'https://navikt.github.io';
 }
 
 export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
