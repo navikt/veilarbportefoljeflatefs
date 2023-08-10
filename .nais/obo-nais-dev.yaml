@@ -74,7 +74,7 @@ spec:
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
+              "toUrl": "https://internarbeidsflatedecorator-q1.intern.dev.nav.no",
               "preserveFromPath": true
             },
             {
