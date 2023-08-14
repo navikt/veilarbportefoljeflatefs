@@ -1,9 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import NAVSPA from '@navikt/navspa';
 import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-props';
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
+import {hentBrukerIKontekst} from './middleware/api';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -40,6 +41,11 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
 export function Decorator() {
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
+    const [brukerIKontekst, setBrukerIKontekst] = useState<string | null>(null);
+
+    useEffect(() => {
+        hentBrukerIKontekst().then(setBrukerIKontekst);
+    }, []);
 
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));
@@ -47,5 +53,15 @@ export function Decorator() {
 
     const config = useCallback(getConfig, [enhetId, velgEnhet])(enhetId, velgEnhet);
 
-    return <InternflateDecorator {...config} />;
+    return (
+        <InternflateDecorator
+            {...config}
+            fnr={{
+                display: FnrDisplay.SOKEFELT,
+                initialValue: brukerIKontekst,
+                ignoreWsEvents: true,
+                onChange: () => void 0
+            }}
+        />
+    );
 }

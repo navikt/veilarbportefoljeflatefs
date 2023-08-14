@@ -269,3 +269,38 @@ export const refreshAccessTokens = async (): Promise<SessionMeta> => {
 export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
     return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };
+
+export const settBrukerIKontekst = async (fnr: string): Promise<void> => {
+    const respons = await fetch('/modiacontextholder/api/context', {
+        ...MED_CREDENTIALS,
+        method: 'post',
+        body: JSON.stringify({verdi: fnr, eventType: 'NY_AKTIV_BRUKER'})
+    });
+
+    return sjekkStatuskode(respons);
+};
+
+export const hentBrukerIKontekst = async () => {
+    try {
+        const data = await fetchToJson('/modiacontextholder/api/context');
+
+        if (!data || typeof data.aktivBruker === 'undefined') {
+            console.error('Klarte ikke hente bruker fra kontekst. Grunn: responsen var tom.');
+            return null;
+        }
+
+        if (data.aktivBruker === null) {
+            return null;
+        }
+
+        if (typeof data.aktivBruker !== 'string') {
+            console.error('Klarte ikke hente bruker fra kontekst. Grunn: responstypen var på et uforventet format.');
+            return null;
+        }
+
+        return data.aktivBruker as string;
+    } catch (e) {
+        console.error('Klarte ikke hente bruker fra kontekst. Grunn: fikk uforventet statuskode.');
+        return null;
+    }
+};

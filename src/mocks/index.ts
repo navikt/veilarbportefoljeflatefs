@@ -295,6 +295,10 @@ mock.get(
     )
 );
 
+mock.post('/modiacontextholder/api/context', (req, res, ctx) => {
+    return res(ctx.status(200));
+});
+
 mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));
 
 mock.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', delayed(500, jsonResponse(foedeland)));

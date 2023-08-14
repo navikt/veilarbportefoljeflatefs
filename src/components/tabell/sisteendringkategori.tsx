@@ -1,10 +1,12 @@
 import * as React from 'react';
+import {useState} from 'react';
 import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
-import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
-import {BodyShort, Link} from '@navikt/ds-react';
+import {getPersonUrl} from '../../utils/url-utils';
+import {Alert, BodyShort, Button} from '@navikt/ds-react';
+import {settBrukerIKontekst} from '../../middleware/api';
 
 interface SisteEndringKategoriProps {
     className?: string;
@@ -14,6 +16,25 @@ interface SisteEndringKategoriProps {
 }
 
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
+    const [laster, setLaster] = useState(false);
+    const [harFeil, setHarFeil] = useState(false);
+    const url = getPersonUrl(null, `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId);
+
+    const oppdaterBrukerIKontekstOgNavigerTilLenke = async () => {
+        setHarFeil(false);
+        setLaster(true);
+
+        try {
+            await settBrukerIKontekst(bruker.fnr);
+            window.location.href = url;
+        } catch (e) {
+            setHarFeil(true);
+            console.error('Klarte ikke å sette bruker i kontekst. Konsekvens: kan ikke navigere til lenke.');
+        } finally {
+            setLaster(false);
+        }
+    };
+
     if (!skalVises) {
         return null;
     }
@@ -27,19 +48,20 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     }
     return (
         <div className={className}>
-            <Link
-                onClick={() => {
-                    setFraBrukerIUrl(bruker.fnr);
-                }}
-                href={getPersonUrl(
-                    bruker.fnr,
-                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
-                    enhetId
-                )}
+            <Button
                 className={classnames('lenke lenke--frittstaende')}
+                loading={laster}
+                onClick={oppdaterBrukerIKontekstOgNavigerTilLenke}
+                size="xsmall"
+                variant="tertiary"
             >
                 <BodyShort size="small">{sisteEndringKategori}</BodyShort>
-            </Link>
+            </Button>
+            {harFeil && (
+                <Alert inline variant="error">
+                    Det skjedde en feil.
+                </Alert>
+            )}
         </div>
     );
 }

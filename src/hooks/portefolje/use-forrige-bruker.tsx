@@ -1,13 +1,12 @@
 import {useEffect, useState} from 'react';
-import {getFraBrukerFraUrl} from '../../utils/url-utils';
 import {OrNothing} from '../../utils/types/types';
+import {hentBrukerIKontekst} from '../../middleware/api';
 
 export function useForrigeBruker() {
     const [forrigeBruker, setForrigeBruker] = useState<OrNothing<string>>(null);
 
     useEffect(() => {
-        const forrigeBrukerFraUrl = getFraBrukerFraUrl();
-        setForrigeBruker(forrigeBrukerFraUrl);
+        hentBrukerIKontekst().then(setForrigeBruker);
     }, [forrigeBruker]);
 
     return forrigeBruker;
