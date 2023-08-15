@@ -1,6 +1,11 @@
 name: Deploy to dev
 on:
     workflow_dispatch:
+      inputs:
+        skip_tests:
+          description: "Ignorer tester?"
+          required: false
+          type: boolean
 env:
     CI: true
     TZ: Europe/Amsterdam
@@ -20,6 +25,7 @@ jobs:
             - name: Install dependencies
               run: npm ci
             - name: Run tests
+              if: inputs.skip_tests == false
               run: npm run test
             - name: Build application
               run: npm run build:dev
