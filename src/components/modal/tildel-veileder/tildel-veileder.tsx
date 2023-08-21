@@ -9,9 +9,10 @@ import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {BodyShort, Button, Radio, RadioGroup, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, Modal, Radio, RadioGroup, TextField} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {ErrorModalType, MineFilterVarselModal} from '../mine-filter/varsel-modal';
+import {skjulModal} from '../../../ducks/modal';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -20,6 +21,7 @@ interface TildelVeilederProps {
 
 function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
+    const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const dispatch = useDispatch();
@@ -37,26 +39,13 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, oversiktType, gjeldendeVeileder));
     };
 
-    const visAdvarselSletteArbeidslista = (brukereFraNyEnhet, tilordninger, tilVeileder) => {
-        return (
-            <>
-                <form onSubmit={e => doTildelTilVeileder(tilordninger, tilVeileder)}>
-                    <BodyShort size="small">Advarsel.</BodyShort>
-                    <TextField label="Navn:" />
-                    <div className="lagret-filter-knapp-wrapper">
-                        <Button size="small" type="submit">
-                            Lagre
-                        </Button>
-                    </div>
-                </form>
-            </>
-        );
+    const lukkFjernModal = () => {
+        setVisAdvarselOmSletting(false);
     };
 
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
-        btnOnClick();
         if (ident) {
             const tilordninger = valgteBrukere.map(bruker => ({
                 fraVeilederId: bruker.veilederId,
@@ -65,31 +54,38 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
             }));
             const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
             if (brukereFraNyEnhet.length > 0) {
-                return visAdvarselSletteArbeidslista(brukereFraNyEnhet, tilordninger, ident);
+                setVisAdvarselOmSletting(true);
             } else {
                 doTildelTilVeileder(tilordninger, ident);
+                btnOnClick();
             }
+        } else {
+            btnOnClick();
         }
     };
 
     return (
-        <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
-            {data => (
-                <TildelVeilederRenderer
-                    ident={ident}
-                    onChange={setIdent}
-                    onSubmit={() => onSubmit()}
-                    data={data}
-                    btnOnClick={() => onSubmit()}
-                    oversiktType={oversiktType}
-                />
-            )}
-        </SokFilter>
+        <>
+            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className={classNames('varsel-modal')}>
+                <Modal.Content>Advarsel om sletting</Modal.Content>
+            </Modal>
+
+            <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
+                {data => (
+                    <TildelVeilederRenderer
+                        ident={ident}
+                        onChange={setIdent}
+                        data={data}
+                        btnOnClick={() => onSubmit()}
+                        oversiktType={oversiktType}
+                    />
+                )}
+            </SokFilter>
+        </>
     );
 }
 
 interface TildelVeilederRendererProps {
-    onSubmit: () => void;
     data: VeilederModell[];
     ident: string | null;
     onChange: (ident: string) => void;
@@ -97,13 +93,14 @@ interface TildelVeilederRendererProps {
     oversiktType: string | undefined;
 }
 
-function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
+function TildelVeilederRenderer({data, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
     return (
-        <form className="skjema radio-filterform" onSubmit={onSubmit} data-testid="tildel-veileder_dropdown">
+        <form className="skjema radio-filterform" data-testid="tildel-veileder_dropdown">
             <RadioGroup hideLegend legend="" className="radio-filterform__valg" onChange={onChange}>
                 {data.map((veileder, index) => (
                     <Radio
                         data-testid={`tildel-veileder_valg_${index}`}
+                        type={'button'}
                         key={veileder.ident}
                         name="veileder"
                         size="small"
@@ -119,7 +116,7 @@ function TildelVeilederRenderer({data, onSubmit, ident, onChange, btnOnClick}: T
                     className={classNames('knapp', 'knapp--mini', {
                         'knapp--hoved': ident
                     })}
-                    type={ident ? 'submit' : 'button'}
+                    type={'button'}
                     data-testid={ident ? 'tildel-veileder_velg-knapp' : 'tildel-veileder_lukk-knapp'}
                 >
                     {ident ? 'Velg' : 'Lukk'}
