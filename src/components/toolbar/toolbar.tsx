@@ -92,7 +92,7 @@ function Toolbar(props: ToolbarProps) {
                     {oversiktType !== OversiktType.veilederOversikt && (
                         <div className="tildel-veileder-wrapper">
                             <ToolbarKnapp
-                                tittel="Tildel veileder"
+                                tittel="Tildel veiledern"
                                 skalVises={oversiktType in OversiktType}
                                 aktiv={aktiv}
                                 tildelveileder

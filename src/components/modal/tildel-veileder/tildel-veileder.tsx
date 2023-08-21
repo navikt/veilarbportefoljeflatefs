@@ -9,8 +9,9 @@ import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {Button, Radio, RadioGroup} from '@navikt/ds-react';
+import {BodyShort, Button, Radio, RadioGroup, TextField} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
+import {ErrorModalType, MineFilterVarselModal} from '../mine-filter/varsel-modal';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -36,6 +37,22 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
         return dispatch(tildelVeileder(tilordninger, tilVeileder, oversiktType, gjeldendeVeileder));
     };
 
+    const visAdvarselSletteArbeidslista = (brukereFraNyEnhet, tilordninger, tilVeileder) => {
+        return (
+            <>
+                <form onSubmit={e => doTildelTilVeileder(tilordninger, tilVeileder)}>
+                    <BodyShort size="small">Advarsel.</BodyShort>
+                    <TextField label="Navn:" />
+                    <div className="lagret-filter-knapp-wrapper">
+                        <Button size="small" type="submit">
+                            Lagre
+                        </Button>
+                    </div>
+                </form>
+            </>
+        );
+    };
+
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
@@ -46,7 +63,12 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                 tilVeilederId: ident,
                 brukerFnr: bruker.fnr
             }));
-            doTildelTilVeileder(tilordninger, ident);
+            const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
+            if (brukereFraNyEnhet.length > 0) {
+                return visAdvarselSletteArbeidslista(brukereFraNyEnhet, tilordninger, ident);
+            } else {
+                doTildelTilVeileder(tilordninger, ident);
+            }
         }
     };
 
