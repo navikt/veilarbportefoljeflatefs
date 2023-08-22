@@ -9,10 +9,10 @@ import SokFilter from '../../sok-veiledere/sok-filter';
 import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {BodyShort, Button, Modal, Radio, RadioGroup, TextField} from '@navikt/ds-react';
+import {BodyShort, Button, Heading, Modal, Radio, RadioGroup} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
-import {ErrorModalType, MineFilterVarselModal} from '../mine-filter/varsel-modal';
-import {skjulModal} from '../../../ducks/modal';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
+import ModalHeader from '../modal-header';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -24,6 +24,9 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+    const [tilordninger2, setTilordninger] = useState<
+        {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
+    >([]);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
@@ -52,6 +55,13 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                 tilVeilederId: ident,
                 brukerFnr: bruker.fnr
             }));
+            setTilordninger(
+                valgteBrukere.map(bruker => ({
+                    fraVeilederId: bruker.veilederId,
+                    tilVeilederId: ident,
+                    brukerFnr: bruker.fnr
+                }))
+            );
             const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
             if (brukereFraNyEnhet.length > 0) {
                 setVisAdvarselOmSletting(true);
@@ -66,8 +76,36 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
 
     return (
         <>
-            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className={classNames('varsel-modal')}>
-                <Modal.Content>Advarsel om sletting</Modal.Content>
+            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal}>
+                <Modal.Content>
+                    <div className="modal-innhold">
+                        <div className="advarsel-modal">
+                            <Heading size="medium" level="1">
+                                Arbeidslistenotat blir slettet
+                            </Heading>
+                            <BodyShort size="small">
+                                {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
+                            </BodyShort>
+                            <BodyShort size="small">{`Ønsker du likevel å tildele veilederen?`}</BodyShort>
+                        </div>
+                        <div className="knapper">
+                            <Button variant="secondary" className="knapp" onClick={lukkFjernModal} size="small">
+                                Avbryt tildeling
+                            </Button>
+                            <Button
+                                type={'submit'}
+                                className="knapp knapp--hoved"
+                                size="small"
+                                onClick={() => {
+                                    doTildelTilVeileder(tilordninger2, ident);
+                                    lukkFjernModal();
+                                }}
+                            >
+                                Ja, tildel veilederen
+                            </Button>
+                        </div>
+                    </div>
+                </Modal.Content>
             </Modal>
 
             <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
