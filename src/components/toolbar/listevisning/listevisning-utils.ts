@@ -51,3 +51,4 @@ alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: '
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, {tekstlabel: 'Om barnet'});
 alternativerConfig.set(Kolonne.HAR_BARN_UNDER_18, {tekstlabel: 'Barn under 18 år'});
+alternativerConfig.set(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET, {tekstlabel: 'Dato endret situasjon'});

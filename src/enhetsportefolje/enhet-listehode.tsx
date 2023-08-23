@@ -544,6 +544,16 @@ function EnhetListehode({
                     headerId="barn_under_18"
                     skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
                 />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.BRUKERS_SITUASJON_SIST_ENDRET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BRUKERS_SITUASJON_SIST_ENDRET}
+                    tekst="Dato endret situasjon"
+                    className="col col-xs-2"
+                    headerId="dato-endret-situasjon"
+                    skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

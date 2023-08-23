@@ -10,6 +10,7 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    endringISituasjon,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
@@ -217,6 +218,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             addHvis(
                 Kolonne.HAR_BARN_UNDER_18,
                 !!filtervalg.barnUnder18Aar.length || !!filtervalg.barnUnder18AarAlder.length
+            )
+        )
+        .concat(
+            addHvis(
+                Kolonne.BRUKERS_SITUASJON_SIST_ENDRET,
+                filtervalg.registreringstype.some(regType => endringISituasjon[regType])
             )
         )
         .concat([Kolonne.OPPFOLGINGSTARTET]);

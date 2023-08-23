@@ -54,7 +54,8 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
 
-    BARN_UNDER_18_AAR = 'barn_under_18_aar'
+    BARN_UNDER_18_AAR = 'barn_under_18_aar',
+    BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret'
 }
 
 export interface FiltervalgModell {
@@ -199,6 +200,7 @@ export interface BrukerModell {
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
 
     barnUnder18AarData: BarnUnder18Aar[];
+    brukersSituasjonSistEndret: string;
 }
 
 interface EnsligeForsorgereOvergangsstonad {
