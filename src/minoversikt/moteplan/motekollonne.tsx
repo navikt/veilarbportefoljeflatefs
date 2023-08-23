@@ -25,7 +25,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
     const moteDato = new Date(mote.dato);
-    const url = getPersonUrl(null, '#visAktivitetsplanen', enhetId);
+    const url = getPersonUrl('#visAktivitetsplanen', enhetId);
 
     useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
 

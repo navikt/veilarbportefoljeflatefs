@@ -22,7 +22,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const [harFeil, setHarFeil] = useState(false);
     const [linkPopoverApen, setLinkPopoverApen] = useState(false);
 
-    const url = getPersonUrl(null, '', enhetId);
+    const url = getPersonUrl(null, enhetId);
     const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 

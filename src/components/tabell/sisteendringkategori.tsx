@@ -26,7 +26,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
-    const url = getPersonUrl(null, `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId);
+    const url = getPersonUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId);
 
     useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
 

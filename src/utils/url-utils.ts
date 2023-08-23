@@ -52,10 +52,14 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
-export function getPersonUrl(fnr: string | null, pathParam: string, enhet: string): string {
-    const enhetParam = enhet ? '?enhet=' + enhet : '';
-    const params = pathParam + enhetParam;
-    return `/veilarbpersonflatefs${fnr ? `/${fnr}` : ''}${params}`;
+export function getPersonUrl(pathParam: string | null, enhet: string): string {
+    const enhetParam = `?enhet=${enhet}`;
+
+    if (!pathParam || !pathParam.startsWith('/')) {
+        return `/veilarbpersonflatefs/${pathParam}${enhetParam}`;
+    }
+
+    return `/veilarbpersonflatefs${pathParam}${enhetParam}`;
 }
 
 export function updateLastPath() {
