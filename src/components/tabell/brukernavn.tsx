@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useRef, useState} from 'react';
 import {BrukerModell} from '../../model-interfaces';
-import {getPersonUrl} from '../../utils/url-utils';
+import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.css';
 import {Button, Popover} from '@navikt/ds-react';
 import {TekstKolonne} from './kolonner/tekstkolonne';
@@ -22,7 +22,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const [harFeil, setHarFeil] = useState(false);
     const [linkPopoverApen, setLinkPopoverApen] = useState(false);
 
-    const url = getPersonUrl(null, enhetId);
+    const url = getVeilarbpersonflateUrl(null, enhetId);
     const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 

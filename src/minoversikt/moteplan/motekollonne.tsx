@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useRef, useState} from 'react';
 import moment from 'moment';
 import {Button, Popover, Table} from '@navikt/ds-react';
-import {getPersonUrl} from '../../utils/url-utils';
+import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {capitalize} from '../../utils/utils';
 import {settBrukerIKontekst} from '../../middleware/api';
@@ -25,7 +25,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
     const moteDato = new Date(mote.dato);
-    const url = getPersonUrl('#visAktivitetsplanen', enhetId);
+    const url = getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId);
 
     useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
 

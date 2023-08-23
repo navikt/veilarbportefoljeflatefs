@@ -52,14 +52,16 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
-export function getPersonUrl(pathParam: string | null, enhet: string): string {
+export function getVeilarbpersonflateUrl(pathParam: string | null, enhet: string): string {
+    const basePath =
+        (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production'
+            ? 'https://veilarbpersonflate.intern.nav.no'
+            : 'https://veilarbpersonflate.intern.dev.nav.no';
+
+    const maybePathParam = pathParam ? pathParam : '';
     const enhetParam = `?enhet=${enhet}`;
 
-    if (!pathParam || !pathParam.startsWith('/')) {
-        return `/veilarbpersonflatefs/${pathParam}${enhetParam}`;
-    }
-
-    return `/veilarbpersonflatefs${pathParam}${enhetParam}`;
+    return `${basePath}${maybePathParam}${enhetParam}`;
 }
 
 export function updateLastPath() {

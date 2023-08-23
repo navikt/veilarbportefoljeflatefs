@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
-import {getPersonUrl} from '../../utils/url-utils';
+import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {BodyShort, Button, Popover} from '@navikt/ds-react';
 import {settBrukerIKontekst} from '../../middleware/api';
 import {useEventListener} from '../../hooks/use-event-listener';
@@ -26,7 +26,10 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
-    const url = getPersonUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId);
+    const url = getVeilarbpersonflateUrl(
+        `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
+        enhetId
+    );
 
     useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
 
