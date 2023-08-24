@@ -4,7 +4,7 @@ import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
-import {hentBrukerIKontekst} from './middleware/api';
+import {fjernBrukerIKontekst, hentBrukerIKontekst} from './middleware/api';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -44,7 +44,11 @@ export function Decorator() {
     const [brukerIKontekst, setBrukerIKontekst] = useState<string | null>(null);
 
     useEffect(() => {
-        hentBrukerIKontekst().then(setBrukerIKontekst);
+        if (window.location.href.includes('/tilbake')) {
+            hentBrukerIKontekst().then(setBrukerIKontekst);
+        } else {
+            fjernBrukerIKontekst();
+        }
     }, []);
 
     function velgEnhet(enhet: string) {

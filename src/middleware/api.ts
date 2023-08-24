@@ -304,3 +304,12 @@ export const hentBrukerIKontekst = async () => {
         return null;
     }
 };
+
+export const fjernBrukerIKontekst = async () => {
+    const respons = await fetch('/modiacontextholder/api/context/aktivbruker', {
+        ...MED_CREDENTIALS,
+        method: 'delete'
+    });
+
+    return sjekkStatuskode(respons);
+};
