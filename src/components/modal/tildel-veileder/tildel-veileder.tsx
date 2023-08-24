@@ -11,8 +11,7 @@ import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {BodyShort, Button, Heading, Modal, Radio, RadioGroup} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
-import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import ModalHeader from '../modal-header';
+import {Fnr, FnrList} from '../../fnr-list';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -27,6 +26,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
     const [tilordninger2, setTilordninger] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
+    const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
@@ -44,6 +44,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
 
     const lukkFjernModal = () => {
         setVisAdvarselOmSletting(false);
+        btnOnClick();
     };
 
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
@@ -62,7 +63,15 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                     brukerFnr: bruker.fnr
                 }))
             );
+
             const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
+
+            setFnrArbeidslisteBlirSlettet(
+                brukereFraNyEnhet.map(bruker => ({
+                    brukerFnr: bruker.fnr
+                }))
+            );
+
             if (brukereFraNyEnhet.length > 0) {
                 setVisAdvarselOmSletting(true);
             } else {
@@ -86,6 +95,7 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                             <BodyShort size="small">
                                 {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
                             </BodyShort>
+                            <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
                             <BodyShort size="small">{`Ønsker du likevel å tildele veilederen?`}</BodyShort>
                         </div>
                         <div className="knapper">
