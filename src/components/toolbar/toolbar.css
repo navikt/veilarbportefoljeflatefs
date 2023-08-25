@@ -365,3 +365,7 @@
     width: fit-content;
     align-self: end;
 }
+
+.advarsel-sletting-arbeidslista .knapp-avbryt-tildeling {
+    margin-right: 1rem;
+}

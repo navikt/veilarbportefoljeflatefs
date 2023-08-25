@@ -15,15 +15,15 @@ import {Fnr, FnrList} from '../../fnr-list';
 
 interface TildelVeilederProps {
     oversiktType?: string;
-    btnOnClick: () => void;
+    closeInput: () => void;
 }
 
-function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
+function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const [tilordninger2, setTilordninger] = useState<
+    const [tilordninger, setTilordninger] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
     const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
@@ -44,18 +44,13 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
 
     const lukkFjernModal = () => {
         setVisAdvarselOmSletting(false);
-        btnOnClick();
+        closeInput();
     };
 
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
         if (ident) {
-            const tilordninger = valgteBrukere.map(bruker => ({
-                fraVeilederId: bruker.veilederId,
-                tilVeilederId: ident,
-                brukerFnr: bruker.fnr
-            }));
             setTilordninger(
                 valgteBrukere.map(bruker => ({
                     fraVeilederId: bruker.veilederId,
@@ -76,44 +71,47 @@ function TildelVeileder({oversiktType, btnOnClick}: TildelVeilederProps) {
                 setVisAdvarselOmSletting(true);
             } else {
                 doTildelTilVeileder(tilordninger, ident);
-                btnOnClick();
+                closeInput();
             }
         } else {
-            btnOnClick();
+            closeInput();
         }
     };
 
     return (
         <>
-            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal}>
+            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
                 <Modal.Content>
-                    <div className="modal-innhold">
-                        <div className="advarsel-modal">
-                            <Heading size="medium" level="1">
-                                Arbeidslistenotat blir slettet
-                            </Heading>
-                            <BodyShort size="small">
-                                {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
-                            </BodyShort>
-                            <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
-                            <BodyShort size="small">{`Ønsker du likevel å tildele veilederen?`}</BodyShort>
-                        </div>
-                        <div className="knapper">
-                            <Button variant="secondary" className="knapp" onClick={lukkFjernModal} size="small">
-                                Avbryt tildeling
-                            </Button>
-                            <Button
-                                type={'submit'}
-                                className="knapp knapp--hoved"
-                                size="small"
-                                onClick={() => {
-                                    doTildelTilVeileder(tilordninger2, ident);
-                                    lukkFjernModal();
-                                }}
-                            >
-                                Ja, tildel veilederen
-                            </Button>
-                        </div>
+                    <div className="advarsel-modal">
+                        <Heading size="medium" level="1">
+                            Arbeidslistenotat blir slettet
+                        </Heading>
+                        <BodyShort size="small">
+                            {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
+                        </BodyShort>
+                        <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
+                        <BodyShort size="small">{`Ønsker du likevel å tildele veilederen?`}</BodyShort>
+                    </div>
+                    <div>
+                        <Button
+                            variant="secondary"
+                            className="knapp-avbryt-tildeling"
+                            onClick={lukkFjernModal}
+                            size="small"
+                        >
+                            Avbryt tildeling
+                        </Button>
+                        <Button
+                            type={'submit'}
+                            className="knapp"
+                            size="small"
+                            onClick={() => {
+                                doTildelTilVeileder(tilordninger, ident);
+                                lukkFjernModal();
+                            }}
+                        >
+                            Ja, tildel veilederen
+                        </Button>
                     </div>
                 </Modal.Content>
             </Modal>
