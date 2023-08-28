@@ -300,7 +300,7 @@ mock.post('/modiacontextholder/api/context', (req, res, ctx) => {
 });
 
 mock.get('/modiacontextholder/api/context', (req, res, ctx) => {
-    return res(ctx.json({aktivBruker: null, aktivEnhet: null}));
+    return res(ctx.json({aktivBruker: '00000123456', aktivEnhet: null}));
 });
 
 mock.get('https://poao-sanity.intern.nav.no/systemmeldinger', jsonResponse(hentSystemmeldinger()));

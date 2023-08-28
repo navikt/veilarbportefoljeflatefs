@@ -7,7 +7,7 @@ export function useForrigeBruker() {
 
     useEffect(() => {
         hentBrukerIKontekst().then(setForrigeBruker);
-    }, [forrigeBruker]);
+    }, []);
 
     return forrigeBruker;
 }

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import NAVSPA from '@navikt/navspa';
 import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-props';
 import {useDispatch} from 'react-redux';
@@ -16,11 +16,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             initialValue: RESET_VALUE,
             display: FnrDisplay.SOKEFELT,
             ignoreWsEvents: true,
-            onChange: value => {
-                if (value) {
-                    window.location.pathname = `veilarbpersonflatefs/${value}`;
-                }
-            }
+            onChange: () => {}
         },
         toggles: {
             visVeileder: true
@@ -55,16 +51,16 @@ export function Decorator() {
         dispatch(oppdaterValgtEnhet(enhet));
     }
 
-    const config = useCallback(getConfig, [enhetId, velgEnhet])(enhetId, velgEnhet);
+    const config = getConfig(enhetId, velgEnhet);
 
     return (
         <InternflateDecorator
             {...config}
             fnr={{
-                display: FnrDisplay.SOKEFELT,
                 initialValue: brukerIKontekst,
+                display: FnrDisplay.SOKEFELT,
                 ignoreWsEvents: true,
-                onChange: () => void 0
+                onChange: () => {}
             }}
         />
     );
