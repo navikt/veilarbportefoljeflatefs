@@ -43,12 +43,3 @@
 .feil-tiltak_modal .knappegruppe button {
     width: 10rem;
 }
-.varsel-modal__innhold {
-    text-align: center;
-}
-.varsel-modal__innhold .error-knapp {
-    margin-top: 1rem;
-}
-.varsel-modal__innhold .typo-normal {
-    word-break: break-word;
-}

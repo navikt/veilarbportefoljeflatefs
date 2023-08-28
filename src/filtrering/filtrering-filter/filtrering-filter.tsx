@@ -4,40 +4,44 @@ import {
     alder,
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
+    barnUnder18Aar,
     cvJobbprofil,
+    ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
     hovedmal,
     innsatsgruppe,
     kjonn,
     manuellBrukerStatus,
-    manuellBrukerStatusUtenKRR,
     mapFilternavnTilFilterValue,
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
     stillingFraNavFilter,
     utdanning,
+    utdanningBestatt,
+    utdanningGodkjent,
     ytelse
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
 import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {GJEM_HOVEDMAL, STILLING_FRA_NAV, UTEN_KRR_FILTER, VIS_AVVIK_14A_VEDTAK_FILTER} from '../../konstanter';
 import '../filtrering-skjema.css';
 import '../../components/sidebar/sidebar.css';
-import DoubleCheckboxFilterform from './filterform/double-checkbox-filterform';
 import AlderFilterform from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label} from '@navikt/ds-react';
+import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
+import {ExternalLink} from '@navikt/ds-icons';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
+import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -49,11 +53,6 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const erGjemHovedmalFeatureTogglePa = useFeatureSelector()(GJEM_HOVEDMAL);
-    const erKRRFilterFeatureTogglePa = useFeatureSelector()(UTEN_KRR_FILTER);
-    const erStillingFraNavFeatureTogglePa = useFeatureSelector()(STILLING_FRA_NAV);
-    const erAvvik14aVedtakFilterFeatureTogglePa = useFeatureSelector()(VIS_AVVIK_14A_VEDTAK_FILTER);
-
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -127,6 +126,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         };
     };
 
+    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
+
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -169,6 +170,21 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
+
+                {erFilterForBarnUnder18UnderFeatureToggle && (
+                    <Dropdown
+                        name="Har barn under 18 år"
+                        id="barnUnder18"
+                        render={lukkDropdown => (
+                            <BarnUnder18FilterForm
+                                valg={barnUnder18Aar}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Geografisk bosted"
                     id="bosted"
@@ -211,7 +227,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="registreringstype"
@@ -229,7 +245,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
@@ -241,44 +257,69 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
                 <Dropdown
-                    name="Er utdanningen godkjent og bestått"
-                    id="er-utdanningen-godkjent-og-bestatt"
+                    name="Er utdanningen godkjent"
+                    id="er-utdanningen-godkjent"
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svarene brukeren oppga på registreringstidspunktet.
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
-                            <DoubleCheckboxFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                            <CheckboxFilterform
+                                form="utdanningGodkjent"
+                                valg={utdanningGodkjent}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
+                    )}
+                />
+                <Dropdown
+                    name="Er utdanningen bestått"
+                    id="er-utdanningen-bestatt"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
+                            </Alert>
+                            <CheckboxFilterform
+                                form="utdanningBestatt"
+                                valg={utdanningBestatt}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         </>
                     )}
                 />
             </div>
-            {erAvvik14aVedtakFilterFeatureTogglePa && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Utfasing av Arena</Label>
-                    <Dropdown
-                        name="Avvik §14a-vedtak"
-                        id="arena-migrering"
-                        render={() => (
-                            <>
-                                {/* TODO: Bruke riktig lenke til Navet */}
-                                {/* TODO: Skal lenke til Navet åpnes i ny fane? */}
-                                <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser avvik mellom hovedmål/ innsatsgruppe for brukere i Arena, og
-                                    iverksatte §14a-vedtak for de samme brukerne.{' '}
-                                    <a href="https://navno.sharepoint.com/">Se mer informasjon på Navet</a>.
-                                </Alert>
-                                <CheckboxFilterform
-                                    valg={avvik14aVedtakValg()}
-                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                    filtervalg={filtervalg}
-                                    form="avvik14aVedtak"
-                                />
-                            </>
-                        )}
-                    />
-                </div>
-            )}
+            <div className="filtrering-filter__kolonne">
+                <Label size="small">Utfasing av Arena</Label>
+                <Dropdown
+                    name="Status § 14 a-vedtak"
+                    id="status-14a-vedtak-filter"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det iverksatte §
+                                14 a-vedtaket.{' '}
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                >
+                                    Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                </Link>
+                                .
+                            </Alert>
+                            <CheckboxFilterform
+                                valg={avvik14aVedtakValg()}
+                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
+                                filtervalg={filtervalg}
+                                form="avvik14aVedtak"
+                            />
+                        </>
+                    )}
+                />
+            </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
                 <Dropdown
@@ -308,7 +349,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Hovedmål"
                     id="hovedmal"
-                    hidden={erGjemHovedmalFeatureTogglePa}
                     render={() => (
                         <CheckboxFilterform
                             form="hovedmal"
@@ -348,7 +388,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <CheckboxFilterform
                             form="manuellBrukerStatus"
-                            valg={erKRRFilterFeatureTogglePa ? manuellBrukerStatusUtenKRR : manuellBrukerStatus}
+                            valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
@@ -370,7 +410,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
                 <Dropdown
-                    name="Ytelse"
+                    name="Dagpenger, AAP og tiltakspenger"
                     id="ytelse"
                     render={() => (
                         <RadioFilterform
@@ -378,6 +418,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             form="ytelse"
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Enslige forsørgere"
+                    id="ensligeForsorgere"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="ensligeForsorgere"
+                            valg={ensligeForsorgere}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
                         />
                     )}
                 />
@@ -408,7 +460,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 <Dropdown
                     name="Stilling fra NAV (dele CV med arbeidsgiver)"
                     id="stillingFraNav"
-                    hidden={!erStillingFraNavFeatureTogglePa}
                     render={() => (
                         <CheckboxFilterform
                             form="stillingFraNavFilter"

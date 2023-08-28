@@ -1,11 +1,19 @@
-.varsel-modal {
+.varsel-modal__innhold {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    padding: 1rem !important;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+.varsel-modal__innhold .error-knapp {
+    margin-top: 1rem;
+}
+.varsel-modal__innhold .typo-normal {
+    word-break: break-word;
 }
 .varsel-modal__ikon {
-    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 .varsel-modal__ikon svg {
     width: 4rem;

@@ -7,7 +7,7 @@ import {Formik, FormikProps} from 'formik';
 import {STATUS} from '../../../ducks/utils';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
-import {redigerArbeidsliste} from '../../../ducks/arbeidsliste';
+import {redigerArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.css';
@@ -93,7 +93,9 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                     enableReinitialize={true}
                     onSubmit={values => {
                         setIsOpen(false);
-                        dispatch(redigerArbeidsliste(values, {bruker, sistEndretAv, sistEndretDato, settMarkert}));
+                        dispatch(
+                            redigerArbeidslisteAction(values, {bruker, sistEndretAv, sistEndretDato, settMarkert})
+                        );
                     }}
                 >
                     {formikProps => (
@@ -104,26 +106,28 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                                 onClose={() => lukkModalConfirm(formikProps)}
                                 shouldCloseOnOverlayClick
                             >
-                                <ModalHeader tittel="Rediger arbeidsliste" />
-                                <div className="modal-innhold">
-                                    <RedigerArbeidslisteForm
-                                        laster={statusLaster}
-                                        sistEndretDato={sistEndretDato}
-                                        sistEndretAv={sistEndretAv}
-                                        lukkModal={() => lukkModal(formikProps)}
-                                        bruker={bruker}
-                                        fjernModal={() => dispatch(visFjernArbeidslisteModal())}
-                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                    />
-                                    {modalSkalVises && (
-                                        <FjernArbeidslisteModal
+                                <Modal.Content>
+                                    <ModalHeader tittel="Rediger arbeidsliste" />
+                                    <div className="modal-innhold">
+                                        <RedigerArbeidslisteForm
+                                            laster={statusLaster}
+                                            sistEndretDato={sistEndretDato}
+                                            sistEndretAv={sistEndretAv}
+                                            lukkModal={() => lukkModal(formikProps)}
                                             bruker={bruker}
-                                            isOpen={modalSkalVises}
-                                            valgteBrukere={valgteBrukere}
-                                            lukkModal={() => lukkFjernModal()}
+                                            fjernModal={() => dispatch(visFjernArbeidslisteModal())}
+                                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                         />
-                                    )}
-                                </div>
+                                        {modalSkalVises && (
+                                            <FjernArbeidslisteModal
+                                                bruker={bruker}
+                                                isOpen={modalSkalVises}
+                                                valgteBrukere={valgteBrukere}
+                                                lukkModal={() => lukkFjernModal()}
+                                            />
+                                        )}
+                                    </div>
+                                </Modal.Content>
                             </Modal>
                         </>
                     )}

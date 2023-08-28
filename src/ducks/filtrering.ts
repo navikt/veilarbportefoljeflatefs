@@ -74,10 +74,13 @@ export const initialState: FiltervalgModell = {
     tolkebehov: [],
     tolkBehovSpraak: [],
     stillingFraNavFilter: [],
-    avvik14aVedtak: []
+    avvik14aVedtak: [],
+    ensligeForsorgere: [],
+    barnUnder18Aar: [],
+    barnUnder18AarAlder: []
 };
 
-function fjern(filterId, verdi, fjernVerdi) {
+export function fjern(filterId, verdi, fjernVerdi) {
     if (typeof verdi === 'boolean') {
         return false;
     } else if (Array.isArray(verdi)) {

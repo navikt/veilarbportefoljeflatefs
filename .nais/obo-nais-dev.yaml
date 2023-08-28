@@ -11,7 +11,7 @@ spec:
   image: ghcr.io/navikt/poao-frontend/poao-frontend:2023.01.13_08.09-36c09678654f
   port: 8080
   ingresses:
-    - https://veilarbportefoljeflate.dev.intern.nav.no
+    - https://veilarbportefoljeflate.intern.dev.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
@@ -47,6 +47,13 @@ spec:
       rules:
         - application: poao-unleash
           namespace: poao
+      external:
+        - host: veilarbportefolje.dev-fss-pub.nais.io
+        - host: veilarbfilter.dev-fss-pub.nais.io
+        - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
+        - host: veilarbveileder.dev-fss-pub.nais.io
+        - host: veilarboppfolging.dev-fss-pub.nais.io
+        - host: modiacontextholder-q1.dev-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -67,12 +74,12 @@ spec:
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
+              "toUrl": "https://internarbeidsflatedecorator-q1.intern.dev.nav.no",
               "preserveFromPath": true
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
-              "toUrl": "https://veilarbpersonflate.dev.intern.nav.no",
+              "toUrl": "https://veilarbpersonflate.intern.dev.nav.no",
               "preserveFromPath": false
             }
           ],

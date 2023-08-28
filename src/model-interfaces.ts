@@ -17,6 +17,8 @@ export enum Sorteringsfelt {
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
     AAP_MAXTID_UKE = 'aapmaxtiduke',
     AAP_UNNTAK_UKE = 'aapunntakukerigjen',
+    AAP_VURDERINGSFRIST = 'aap_vurderingsfrist',
+    AAP_TYPE = 'aap_type',
     ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
     ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
@@ -46,7 +48,13 @@ export enum Sorteringsfelt {
     TOLKEBEHOV = 'tolkebehov',
     TOLKE_SPRAAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
-    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav'
+    CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav',
+    ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
+    ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
+    ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
+    ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
+
+    BARN_UNDER_18_AAR = 'barn_under_18_aar'
 }
 
 export interface FiltervalgModell {
@@ -87,6 +95,10 @@ export interface FiltervalgModell {
     geografiskBosted: string[];
     visGeografiskBosted: string[];
     avvik14aVedtak: string[];
+    ensligeForsorgere: string[];
+
+    barnUnder18Aar: string[];
+    barnUnder18AarAlder: string[];
 }
 
 export interface EnhetModell {
@@ -110,6 +122,13 @@ export enum VurderingsBehov {
     OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
+export enum Innsatsgruppe {
+    IKVAL = 'IKVAL',
+    BFORM = 'BFORM',
+    BATT = 'BATT',
+    VARIG = 'VARIG'
+}
+
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -125,6 +144,7 @@ export interface BrukerModell {
     nyForEnhet: boolean;
     trengerVurdering: boolean;
     vurderingsBehov?: VurderingsBehov;
+    innsatsgruppe: Innsatsgruppe;
     erDoed: boolean;
     fodselsdagIMnd: number;
     fodselsdato: string; // dato
@@ -135,6 +155,7 @@ export interface BrukerModell {
     dagputlopUke?: number;
     permutlopUke?: number;
     aapmaxtidUke?: number;
+    aapordinerutlopsdato?: string; // dato
     arbeidsliste: ArbeidslisteModell;
     venterPaSvarFraNAV?: string;
     venterPaSvarFraBruker?: string;
@@ -175,8 +196,21 @@ export interface BrukerModell {
     harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
+    ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
+
+    barnUnder18AarData: BarnUnder18Aar[];
 }
 
+interface EnsligeForsorgereOvergangsstonad {
+    vedtaksPeriodetype: string;
+    harAktivitetsplikt?: boolean | undefined;
+    utlopsDato: Date;
+    yngsteBarnsFødselsdato: Date;
+}
+
+export interface BarnUnder18Aar {
+    alder: number;
+}
 interface Statsborgerskap {
     statsborgerskap: string;
     gyldigFra?: string;

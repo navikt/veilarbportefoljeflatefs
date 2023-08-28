@@ -37,10 +37,12 @@ export function VarselModal({
             className={classNames('varsel-modal', portalClassName, dataTestClass)}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         >
-            <div className={classNames('varsel-modal__innhold', className)}>
-                <div className="varsel-modal__ikon">{getIkon(type)}</div>
-                {children}
-            </div>
+            <Modal.Content>
+                <div className={classNames('varsel-modal__innhold', className)}>
+                    <div className="varsel-modal__ikon">{getIkon(type)}</div>
+                    {children}
+                </div>
+            </Modal.Content>
         </Modal>
     );
 }

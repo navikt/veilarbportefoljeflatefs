@@ -19,6 +19,10 @@ export enum Kolonne {
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',
     UTLOP_YTELSE = 'utlopytelse',
+    GJENSTAENDE_UKER_RETTIGHET_DAGPENGER = 'gjenstaende_uker_rettighet_dagpenger',
+    GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER = 'gjenstaende_uker_vedtak_tiltakspenger',
+    VURDERINGSFRIST_YTELSE = 'vurderingsfrist_ytelse',
+    TYPE_YTELSE = 'type_ytelse',
     VEDTAKSPERIODE = 'vedtaksperiode',
     RETTIGHETSPERIODE = 'rettighetsperiode',
     UTLOP_AKTIVITET = 'utlopaktivitet',
@@ -45,7 +49,13 @@ export enum Kolonne {
     TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
     CV_SVARFRIST = 'cv_svarfrist',
-    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak'
+    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
+    ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD = 'utlop_overgangsstonad',
+    ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
+    ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
+    ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
+
+    HAR_BARN_UNDER_18 = 'har_barn_under_18'
 }
 
 export enum OversiktType {
@@ -133,7 +143,7 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
     name: oversiktType
 });
 
-export const oppdaterAlternativer = (
+export const oppdaterKolonneAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
     filterValg: FiltervalgModell,
     oversiktType: OversiktType

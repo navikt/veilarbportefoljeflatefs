@@ -1,8 +1,6 @@
-import {STATUS, doThenDispatch} from './utils';
-import {httpArbeidsliste} from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
+import {lagreArbeidsliste, oppdaterArbeidsliste, slettArbeidsliste} from '../middleware/api';
 import {skjulModal} from './modal';
-import {markerAlleBrukere} from './portefolje';
-import {oppdaterState} from '../components/modal/arbeidsliste/legg-til-arbeidslisteform';
 import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {dateToISODate} from '../utils/dato-utils';
 
@@ -50,25 +48,7 @@ export default function arbeidslisteReducer(state = initialState, action) {
 }
 
 // Action Creators
-export function lagreArbeidsliste(arbeidsliste, props) {
-    const {valgteBrukere} = props;
-    const liste = arbeidsliste.map((elem, index) => ({
-        fnr: valgteBrukere[index].fnr,
-        overskrift: elem.overskrift,
-        kommentar: elem.kommentar,
-        frist: elem.frist,
-        kategori: elem.kategori
-    }));
-    return dispatch =>
-        postArbeidsliste(liste)(dispatch)
-            .then(res => oppdaterState(res, liste, props, dispatch))
-            .then(() => {
-                dispatch(skjulModal());
-                dispatch(markerAlleBrukere(false));
-            });
-}
-
-export function redigerArbeidsliste(formData, props) {
+export function redigerArbeidslisteAction(formData, props) {
     const arbeidsliste = {
         kommentar: formData.kommentar,
         overskrift: formData.overskrift,
@@ -77,7 +57,7 @@ export function redigerArbeidsliste(formData, props) {
     };
 
     return dispatch =>
-        putArbeidsliste(
+        oppdaterArbeidslisteAction(
             arbeidsliste,
             props.bruker.fnr
         )(dispatch)
@@ -87,24 +67,24 @@ export function redigerArbeidsliste(formData, props) {
             .then(() => dispatch(skjulModal()));
 }
 
-export function postArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post'), {
+export function lagreArbeidslisteAction(arbeidsliste) {
+    return doThenDispatch(() => lagreArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_LAGRE_OK,
         FEILET: ARBEIDSLISTE_LAGRE_FEILET,
         PENDING: ARBEIDSLISTE_LAGRE_PENDING
     });
 }
 
-export function slettArbeidsliste(arbeidsliste) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'post', 'delete'), {
+export function slettArbeidslisteAction(arbeidsliste) {
+    return doThenDispatch(() => slettArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_SLETT_OK,
         FEILET: ARBEIDSLISTE_SLETT_FEILET,
         PENDING: ARBEIDSLISTE_SLETT_PENDING
     });
 }
 
-export function putArbeidsliste(arbeidsliste, fnr) {
-    return doThenDispatch(() => httpArbeidsliste(arbeidsliste, 'put', fnr), {
+export function oppdaterArbeidslisteAction(arbeidsliste, fnr) {
+    return doThenDispatch(() => oppdaterArbeidsliste(arbeidsliste, fnr), {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING

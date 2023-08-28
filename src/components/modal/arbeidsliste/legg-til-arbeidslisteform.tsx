@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {ArbeidslisteDataModell, BrukerModell, KategoriModell, Status, VeilederModell} from '../../../model-interfaces';
-import {postArbeidsliste} from '../../../ducks/arbeidsliste';
+import {lagreArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import {markerAlleBrukere, oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {LEGG_TIL_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
-import {leggTilStatustall} from '../../../ducks/statustall';
+import {leggTilStatustall} from '../../../ducks/statustall-veileder';
 import {AppState} from '../../../reducer';
 import {Form, Formik} from 'formik';
 import ArbeidslisteForm from './arbeidsliste-form';
@@ -182,7 +182,7 @@ const mapDispatchToProps = (dispatch, props) => ({
             frist: elem.frist ? dateToISODate(elem.frist) : null,
             kategori: elem.kategori
         }));
-        return postArbeidsliste(liste)(dispatch)
+        return lagreArbeidslisteAction(liste)(dispatch)
             .then(data => {
                 oppdaterState(data, liste, props, dispatch);
             })

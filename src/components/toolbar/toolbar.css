@@ -200,11 +200,6 @@
 .veilarbportefoljeflatefs .toolbar-knapp__ikon {
     min-width: 1.5rem;
     min-height: 1.5rem;
-    color: #000000;
-}
-.veilarbportefoljeflatefs .toolbar-knapp__tekst {
-    padding-right: 0.5rem;
-    color: #000000;
 }
 .veilarbportefoljeflatefs .toolbar__element {
     display: flex;
@@ -345,43 +340,25 @@
     display: none;
 }
 .veilarbportefoljeflatefs .toolbar_btn {
-    border: 1px solid transparent;
-    padding: 0.5rem;
     height: 2.5rem;
-    margin: 0 0.5rem 0 0;
-    position: relative;
-    text-align: inherit;
-    background-color: #f4f4f4;
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
-}
-.veilarbportefoljeflatefs .toolbar_btn:disabled #arbeidsliste-svg,
-.veilarbportefoljeflatefs .toolbar_btn:disabled #tildel-veileder-ikon,
-.veilarbportefoljeflatefs .toolbar_btn:disabled #sok-veileder-ikon {
-    opacity: 0.4;
-}
-.veilarbportefoljeflatefs .toolbar_btn:disabled:hover {
-    cursor: default;
-    box-shadow: none;
-    border-color: transparent;
-}
-.veilarbportefoljeflatefs .toolbar_btn:focus {
-    outline: none;
-    border-radius: 2px;
-    box-shadow: 0 0 0 3px #00347d;
-}
-.veilarbportefoljeflatefs .toolbar_btn:active:hover,
-.veilarbportefoljeflatefs .toolbar_btn:active {
-    background-color: transparent;
+    color: #000;
 }
 .veilarbportefoljeflatefs .toolbar_btn:hover {
-    border-color: #0067c5;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-hover);
+    color: #000;
+}
+.veilarbportefoljeflatefs .toolbar_btn:active {
+    color: #fff;
+}
+.veilarbportefoljeflatefs .toolbar_btn span {
+    font-weight: normal;
 }
 .veilarbportefoljeflatefs .brukerfeilmelding {
-    margin-left: 1rem;
+    grid-column: 1/3;
+    grid-row: 3;
+    display: flex;
+    align-items: baseline;
+    height: 2rem;
+    padding-left: 1rem;
 }
 
 .velg-kolonner__lukk-knapp {

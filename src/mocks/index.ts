@@ -2,7 +2,7 @@ import innloggetVeileder from './innloggetVeileder';
 import me from './me';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from './portefolje';
 import {veilederResponse} from './veiledere';
-import statustall from './statustall';
+import {statustallEnhet, statustallVeileder} from './statustall';
 import tiltak from './tiltak';
 import {veiledergrupper} from './veiledergrupper';
 import lagPortefoljeStorrelser from './portefoljestorrelser';
@@ -107,7 +107,7 @@ mock.get(
 mock.get('/veilarbportefoljeflatefs/api/feature', jsonResponse(features));
 
 //veiledergrupper
-mock.get('/veilarbfilter/api/enhet/:enhetId/', jsonResponse(customVeiledergrupper));
+mock.get('/veilarbfilter/api/enhet/:enhetId', jsonResponse(customVeiledergrupper));
 
 mock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
     let oppdatertGruppe = {};
@@ -137,16 +137,16 @@ mock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx
 });
 
 //mine filter
-mock.get('/veilarbfilter/api/minelagredefilter/', jsonResponse(customMineFilter));
+mock.get('/veilarbfilter/api/minelagredefilter', jsonResponse(customMineFilter));
 
-mock.put('/veilarbfilter/api/minelagredefilter/', ({body}, res, ctx) => {
+mock.put('/veilarbfilter/api/minelagredefilter', ({body}, res, ctx) => {
     let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
     const aktiv = true;
     customMineFilter[filterIndex] = {...body, aktiv};
     return res(ctx.json(customMineFilter[filterIndex]));
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/', (req, res, ctx) => {
+mock.post('/veilarbfilter/api/minelagredefilter', (req, res, ctx) => {
     const filterId = Math.floor(Math.random() * 100) + 500;
     const aktiv = true;
     customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
@@ -162,7 +162,7 @@ mock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) =>
     return res(ctx.status(401));
 });
 
-mock.post('/veilarbfilter/api/minelagredefilter/lagresortering/', (req, res, ctx) => {
+mock.post('/veilarbfilter/api/minelagredefilter/lagresortering', (req, res, ctx) => {
     const sorteringer = req.body as SorteringOgId[];
     sorteringer.forEach(elem => {
         const customMineFilterElem = customMineFilter.find(filter => elem.filterId === filter.filterId);
@@ -191,7 +191,8 @@ mock.get('/veilarbveileder/api/enhet/:enhetId/veiledere', jsonResponse(veilederR
 mock.get('/veilarbveileder/api/veileder/enhet/:enhetId/tilgangTilEnhet', jsonResponse(true));
 
 // portefolje-api
-mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/statustall', delayed(500, jsonResponse(statustallVeileder)));
+mock.get('/veilarbportefolje/api/enhet/:enhetId/portefolje/statustall', delayed(500, jsonResponse(statustallEnhet)));
 mock.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefolje(req.queryParams, req.pathParams.enhetId, brukere)))
 );
@@ -200,7 +201,11 @@ mock.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', jsonRespo
 mock.post('/veilarbportefolje/api/veileder/:ident/portefolje', (req, res, ctx) =>
     res(ctx.json(lagPortefoljeForVeileder(req.queryParams, brukere)))
 );
-mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustall)));
+mock.get('/veilarbportefolje/api/veileder/:veileder/statustall', delayed(500, jsonResponse(statustallVeileder)));
+mock.get(
+    '/veilarbportefolje/api/veileder/:veileder/portefolje/statustall',
+    delayed(500, jsonResponse(statustallVeileder))
+);
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 mock.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', jsonResponse(hentArbeidsliste()));
 mock.get('/veilarbportefolje/api/arbeidsliste/:fodselsnummer', (req, res, ctx) =>
@@ -212,10 +217,10 @@ mock.get('/veilarbportefolje/api/veileder/:veileder/moteplan', jsonResponse(hent
 //veilarbvedtakstøtte
 mock.get('/veilarbvedtaksstotte/api/utrulling/erUtrullet', jsonResponse(true));
 
-mock.post('/veilarboppfolging/api/tilordneveileder/', ({body}, res, ctx) => res(ctx.json(tildel(body))));
+mock.post('/veilarboppfolging/api/tilordneveileder', ({body}, res, ctx) => res(ctx.json(tildel(body))));
 
 // arbeidsliste-api
-mock.post('/veilarbportefolje/api/arbeidsliste/', (req, res, ctx) =>
+mock.post('/veilarbportefolje/api/arbeidsliste', (req, res, ctx) =>
     res(ctx.json({error: [], data: req.body.map(arbeidsliste => arbeidsliste.fnr)}))
 );
 
@@ -317,6 +322,7 @@ mock.get(
 );
 
 mock.get('/veilarbportefolje/api/enhet/:enhetId/geografiskbosted', delayed(500, jsonResponse(geografiskBosted)));
+
 // websocket
 class MockWebSocket {
     constructor(uri: string) {

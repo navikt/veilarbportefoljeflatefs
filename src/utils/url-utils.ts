@@ -67,11 +67,11 @@ export function updateLastPath() {
     }
 }
 
-export const erDev = () => window.location.host.includes('dev') || window.location.host.includes('q1');
+export const erDev = () => process.env.REACT_APP_DEPLOYMENT_ENV === 'development';
 
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg${erDev() ? '.dev' : ''}.intern.nav.no`;
+export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 
 export const loginUrl = () => {
     if (erMock()) {
@@ -79,3 +79,5 @@ export const loginUrl = () => {
     }
     return `${window.location.origin}/oauth2/login?redirect=${window.location.href}`;
 };
+
+export type DeploymentEnvironment = 'local' | 'development' | 'production';

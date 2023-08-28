@@ -5,16 +5,24 @@ import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
-    I_AVTALT_AKTIVITET,
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     HAR_AVVIK,
+    I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSPENGER_YTELSE,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE} from '../../konstanter';
+import {store} from '../../application';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
@@ -57,6 +65,8 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 }
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
+    const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
+
     const avansertAktivitetErValgt = () => {
         return (
             !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
@@ -104,6 +114,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtervalg.sisteEndringKategori.length > 0))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
+        .concat(
+            addHvis(
+                Kolonne.VEILEDER,
+                filtervalg.ferdigfilterListe.includes(MOTER_IDAG) && oversiktType === OversiktType.enhetensOversikt
+            )
+        )
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.MOTE_ER_AVTALT, filtervalg.ferdigfilterListe.includes(MOTER_IDAG)))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
@@ -120,29 +136,15 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtervalg.ferdigfilterListe.includes(UNDER_VURDERING)))
         .concat(
             addHvis(
-                Kolonne.UTLOP_YTELSE,
-                filtervalg.ytelse !== null &&
-                    filtervalg.ytelse !== AAP_YTELSE &&
-                    filtervalg.ytelse !== AAP_YTELSE_MAXTID &&
-                    filtervalg.ytelse !== AAP_YTELSE_UNNTAK
+                Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER,
+                filtervalg.ytelse === DAGPENGER_YTELSE ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_ORDINARE ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI ||
+                    filtervalg.ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER
             )
         )
-        .concat(
-            addHvis(
-                Kolonne.VEDTAKSPERIODE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
-        .concat(
-            addHvis(
-                Kolonne.RETTIGHETSPERIODE,
-                filtervalg.ytelse === AAP_YTELSE ||
-                    filtervalg.ytelse === AAP_YTELSE_MAXTID ||
-                    filtervalg.ytelse === AAP_YTELSE_UNNTAK
-            )
-        )
+        .concat(addHvis(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtervalg.ytelse === TILTAKSPENGER_YTELSE))
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt() || forenkletAktivitetErValgt()))
         .concat(
             addHvis(
@@ -178,9 +180,44 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, tolkBehovErValgt()))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, avvik14aVedtakErValgt()))
-        .concat(addHvis(Kolonne.VEILEDER, oversiktType === OversiktType.enhetensOversikt))
+        .concat(
+            addHvis(
+                Kolonne.VURDERINGSFRIST_YTELSE,
+                featureAAPkolonne &&
+                    (filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK)
+            )
+        )
+        .concat(addHvis(Kolonne.TYPE_YTELSE, featureAAPkolonne && filtervalg.ytelse === AAP_YTELSE))
+        .concat(
+            addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_UNNTAK)
+        )
+        .concat(
+            addHvis(
+                Kolonne.RETTIGHETSPERIODE,
+                filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID
+            )
+        )
+        .concat(
+            addHvis(
+                Kolonne.VEILEDER,
+                oversiktType === OversiktType.enhetensOversikt && !filtervalg.ferdigfilterListe.includes(MOTER_IDAG)
+            )
+        )
+        .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, featureAAPkolonne && filtervalg.ytelse === AAP_YTELSE))
+        .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtervalg.ytelse === AAP_YTELSE_MAXTID))
+        .concat(addHvis(Kolonne.RETTIGHETSPERIODE, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, !!filtervalg.ensligeForsorgere.length))
+        .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, !!filtervalg.ensligeForsorgere.length))
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, geografiskBostedErValgt()))
+        .concat(
+            addHvis(
+                Kolonne.HAR_BARN_UNDER_18,
+                !!filtervalg.barnUnder18Aar.length || !!filtervalg.barnUnder18AarAlder.length
+            )
+        )
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

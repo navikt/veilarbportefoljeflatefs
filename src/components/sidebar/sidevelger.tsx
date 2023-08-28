@@ -1,9 +1,9 @@
 import SidebarTab from './sidebar-tab';
-import {FiltreringStatus} from '../../filtrering/filtrering-status/filtrering-status';
+import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {Sidebarelement} from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -19,13 +19,15 @@ interface SidevelgerProps {
     oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
+    statustall: Statustall;
 }
 
-function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: SidevelgerProps) {
+function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
     const dispatch = useDispatch();
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
 
     if (!selectedTabData) {
@@ -39,7 +41,7 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak}: Si
                 handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                 tab={selectedTabData.type}
             >
-                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} />
+                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
             </SidebarTab>
         );
     } else if (selectedTabData.tittel === 'Filter') {

@@ -1,14 +1,13 @@
 import {AppState} from '../reducer';
 import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
 import {
+    VIS_AAP_VURDERINGSFRISTKOLONNER,
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
+    FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    UTEN_KRR_FILTER,
-    TVUNGEN_STEPPER,
-    STILLING_FRA_NAV
+    VEDTAKSTOTTE
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,9 +21,8 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [UTEN_KRR_FILTER]: false,
-    [TVUNGEN_STEPPER]: false,
-    [STILLING_FRA_NAV]: false
+    [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
+    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false
 };
 
 // Reducer

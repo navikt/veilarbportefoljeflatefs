@@ -2,7 +2,7 @@ import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
 import {MOCK_CONFIG, rnd} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {KategoriModell} from '../model-interfaces';
+import {BarnUnder18Aar, KategoriModell} from '../model-interfaces';
 import moment from 'moment';
 
 faker.seed(MOCK_CONFIG.seed);
@@ -70,21 +70,27 @@ function lagYtelse() {
         ytelse,
         utlopsdato: '',
         aapmaxtidUke: '',
-        aapUnntakUkerIgjen: ''
+        aapUnntakUkerIgjen: '',
+        aapordinerutlopsdato: ''
     };
 
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
-    const ar = rnd(0, 4) + new Date().getFullYear();
+    const ar = rnd(0, 3) + new Date().getFullYear();
 
     if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
-        const rndDate = new Date(ar, mnd - 1, dag).getTime();
-        const todayDate = new Date().getTime();
+        const rndDate = new Date(ar, mnd - 1, dag);
+        const todayDate = new Date();
 
-        const aaptidUke = Math.round((rndDate - todayDate) / (1000 * 60 * 60 * 24 * 7));
+        const aaptidUke = Math.round((rndDate.getTime() - todayDate.getTime()) / (1000 * 60 * 60 * 24 * 7));
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapUnntakUkerIgjen = aaptidUke.toString();
+        if (ytelse === 'AAP_MAXTID') {
+            if (Math.random() > 0.5) {
+                out.aapordinerutlopsdato = rndDate.toString();
+            }
+        }
     } else {
         out.utlopsdato = new Date(ar, mnd, dag).toISOString();
     }
@@ -208,6 +214,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         forrigeAktivitetStart: ytelse.utlopsdato,
         aapmaxtidUke: ytelse.aapmaxtidUke,
         aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
+        aapordinerutlopsdato: ytelse.aapordinerutlopsdato,
         arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,
@@ -238,7 +245,9 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         tegnspraaktolk: hentSpraak(),
         tolkBehovSistOppdatert: randomDate({past: true}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
-        avvik14aVedtak: randomAvvik14aVedtak()
+        avvik14aVedtak: randomAvvik14aVedtak(),
+        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
+        barnUnder18AarData: hentBarnUnder18Aar()
     };
 }
 
@@ -321,6 +330,23 @@ const hentSpraak = () => {
     return null;
 };
 
+const hentBarnUnder18Aar = () => {
+    var barnInfo: BarnUnder18Aar[] = [];
+    let randomArray = new Int8Array(10);
+    window.crypto.getRandomValues(randomArray);
+
+    let barnAntall = randomArray[0] % 3;
+
+    for (let i = 0; i <= barnAntall; i++) {
+        var singleObj: BarnUnder18Aar = {
+            alder: Math.abs(randomArray[i] % 18)
+        };
+        barnInfo.push(singleObj);
+    }
+
+    return barnInfo;
+};
+
 const randomEndring = () => {
     const keys = Object.keys(hendelserLabels);
     return keys[(keys.length * Math.random()) << 0];
@@ -393,5 +419,34 @@ export function hentMockPlan() {
         {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
     ];
 }
+
+const lagRandomOvergangsstonadForEnsligForsorger = () => {
+    return {
+        vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
+        harAktivitetsplikt: hentRandomAktivitetsplikt(),
+        utlopsDato: new Date(randomDate({past: false})),
+        yngsteBarnsFødselsdato: new Date(randomDate({past: false}))
+    };
+};
+
+const hentRandomVedtaksperiodeType = () => {
+    const vedtaksperiodeTyper = [
+        'Forlengelse',
+        'Hovedperiode',
+        'Migrering fra Infotrygd',
+        'Sanksjon',
+        'Periode før fødsel',
+        'Utvidelse',
+        'Ny periode for nytt barn'
+    ];
+
+    return vedtaksperiodeTyper[Math.floor(Math.random() * vedtaksperiodeTyper.length)];
+};
+
+const hentRandomAktivitetsplikt = () => {
+    const aktivitetspliktUtfall = [true, false, undefined];
+
+    return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
+};
 
 export default new Array(123).fill(0).map(() => lagBruker());

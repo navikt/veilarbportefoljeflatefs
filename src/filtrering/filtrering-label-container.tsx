@@ -11,14 +11,21 @@ import FilterKonstanter, {
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState, OversiktType} from '../ducks/ui/listevisning';
-import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import {Kolonne, ListevisningState, oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {pagineringSetup} from '../ducks/paginering';
-import {AktiviteterValg, clearFiltervalg, endreFiltervalg, slettEnkeltFilter} from '../ducks/filtrering';
+import {
+    AktiviteterValg,
+    clearFiltervalg,
+    endreFiltervalg,
+    fjern,
+    initialState,
+    slettEnkeltFilter
+} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 
 interface FiltreringLabelContainerProps {
@@ -98,9 +105,37 @@ function FiltreringLabelContainer({
                 });
             } else if (key === 'utdanning') {
                 return value.map(singleValue => {
+                    if (singleValue === 'INGEN_DATA') {
+                        return (
+                            <FiltreringLabel
+                                key={`utdanning-${singleValue}`}
+                                label={`Utdanning: ${FilterKonstanter[key][singleValue].label}`}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    }
                     return (
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
+                            label={FilterKonstanter[key][singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'registreringstype') {
+                return value.map(singleValue => {
+                    if (singleValue === 'INGEN_DATA') {
+                        return (
+                            <FiltreringLabel
+                                key={`situasjon-${singleValue}`}
+                                label={`Situasjon: ${FilterKonstanter[key][singleValue].label}`}
+                                slettFilter={() => slettEnkelt(key, singleValue)}
+                            />
+                        );
+                    }
+                    return (
+                        <FiltreringLabel
+                            key={`situasjon-${singleValue}`}
                             label={FilterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
@@ -251,6 +286,26 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
+            } else if (key === 'barnUnder18Aar' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={`${FilterKonstanter[key][singleValue]}`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'barnUnder18AarAlder' && value.length > 0) {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={`Har barn under 18 år:  ${singleValue} år`}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
             } else if (Array.isArray(value)) {
                 return value.map(singleValue => {
                     return (
@@ -282,7 +337,7 @@ function FiltreringLabelContainer({
                     return [<FiltreringLabel key={key} label={labelId} slettFilter={() => slettEnkelt(key, '')} />];
                 }
             } else if (value) {
-                kolonne = key === 'ytelse' ? Kolonne.UTLOP_YTELSE : getKolonneFraLabel(value);
+                kolonne = key === 'ytelse' ? null : getKolonneFraLabel(value);
                 muligMenIkkeValgt =
                     kolonne === Kolonne.AVTALT_AKTIVITET && oversiktType === OversiktType.minOversikt
                         ? true
@@ -323,6 +378,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
             dispatch(clearFiltervalg(ownProps.oversiktType));
+            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType);
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
@@ -331,6 +387,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
+            const oppdatertFiltervalg = {
+                ...ownProps.filtervalg,
+                [filterKey]: fjern(filterKey, ownProps.filtervalg[filterKey], filterValue),
+                arbeidslisteKategori:
+                    filterValue === 'MIN_ARBEIDSLISTE' ? [] : ownProps.filtervalg['arbeidslisteKategori']
+            };
+            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType);
         }
     }
 });

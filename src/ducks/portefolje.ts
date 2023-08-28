@@ -3,7 +3,7 @@ import {doThenDispatch, handterFeil, STATUS, toJson} from './utils';
 import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
-import {hentStatusTall} from './statustall';
+import {hentStatustallForVeileder} from './statustall-veileder';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
@@ -11,6 +11,7 @@ import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
+import {hentStatustallForEnhet} from './statustall-enhet';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -372,9 +373,9 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                 setTimeout(() => {
                     const enhet = getState().valgtEnhet.data.enhetId;
                     if (oversiktType === OversiktType.minOversikt) {
-                        hentStatusTall(enhet, veilederIdent)(dispatch);
+                        hentStatustallForVeileder(enhet, veilederIdent)(dispatch);
                     } else {
-                        hentStatusTall(enhet)(dispatch);
+                        hentStatustallForEnhet(enhet)(dispatch);
                     }
                 }, 2000);
             });

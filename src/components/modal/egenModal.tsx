@@ -14,8 +14,10 @@ interface ModalProps {
 function EgenModal({children, className, open = true, onClose, tittel}: ModalProps) {
     return (
         <Modal className={className} open={open} onClose={onClose}>
-            <ModalHeader tittel={tittel} />
-            <div className="modal-innhold">{children}</div>
+            <Modal.Content>
+                <ModalHeader tittel={tittel} />
+                <div className="modal-innhold">{children}</div>
+            </Modal.Content>
         </Modal>
     );
 }

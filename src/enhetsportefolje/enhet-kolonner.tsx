@@ -15,17 +15,21 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
+    aapVurderingsfrist,
     bostedKommune,
     capitalize,
+    mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
+    oppfolingsdatoEnsligeForsorgere,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
     utledValgteAktivitetsTyper,
-    utlopsdatoUker
+    utlopsdatoUker,
+    ytelsestypetekst
 } from '../utils/utils';
 import VeilederNavn from '../components/tabell/veiledernavn';
 import VeilederId from '../components/tabell/veilederid';
@@ -46,6 +50,8 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -57,6 +63,7 @@ interface EnhetKolonnerProps {
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -66,13 +73,24 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
-    const ytelseErValgtKolonne = valgteKolonner.includes(Kolonne.UTLOP_YTELSE);
+    const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
+    const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
+    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
+    const vurderingsfristAAP = aapVurderingsfrist(
+        bruker.innsatsgruppe,
+        bruker.ytelse,
+        bruker.utlopsdato,
+        bruker.aapordinerutlopsdato
+    );
+    const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
+        ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
+        : null;
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
@@ -89,6 +107,22 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     const geografiskbostedData = useGeografiskbostedSelector();
+
+    const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
+        const lf = new Intl.ListFormat('no');
+        var dataOmBarnSorted = dataOmBarn
+            .map(x => x.alder)
+            .sort((a, b) => (a < b ? -1 : 1))
+            .map(x => String(x));
+        return ' (' + lf.format(dataOmBarnSorted) + ' år)';
+    };
+
+    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18Aar[]) => {
+        if (dataOmBarn === null || dataOmBarn === undefined || (Array.isArray(dataOmBarn) && dataOmBarn.length === 0)) {
+            return '-';
+        }
+        return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
+    };
 
     return (
         <div className={className}>
@@ -168,7 +202,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
                 skalVises={
-                    ytelseErValgtKolonne &&
+                    ytelseDagpengerErValgtKolonne &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
@@ -179,14 +213,22 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+                skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
             />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={2}
-                skalVises={ytelseErValgtKolonne && erAapYtelse}
-            />
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                    tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+                />
+            )}
+            {vis_kolonner_for_vurderingsfrist_aap && (
+                <TekstKolonne
+                    className="col col-xs-2"
+                    skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                    tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
+                />
+            )}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
@@ -203,7 +245,10 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseErValgtKolonne && ytelse === ytelsevalgIntl.TILTAKSPENGER}
+                skalVises={
+                    ytelse === ytelsevalgIntl.TILTAKSPENGER &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -303,6 +348,31 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 }
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                 className="col col-xs-2"
+            />
+            <DatoKolonne
+                dato={overgangsstonadUtlopsdato}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={mapOmAktivitetsPlikt(bruker.ensligeForsorgereOvergangsstonad?.harAktivitetsplikt)}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
+                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
+                className="col col-xs-3"
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             />
         </div>
     );

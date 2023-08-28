@@ -66,7 +66,7 @@
 .dekorator .ReactModal__Body--open {
     overflow: hidden;
 }
-.navds-modal {
+/* .navds-modal {
     background-color: #fff;
     display: block;
     padding: 1rem;
@@ -95,7 +95,7 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-}
+}*/
 .navds-modal__overlay:active .navds-modal:not(:active) .modal__lukkknapp--shake {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg);

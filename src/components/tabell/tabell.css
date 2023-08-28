@@ -5,6 +5,9 @@
 .veilarbportefoljeflatefs .sorteringheader__lenke {
     grid-column: 1;
 }
+.veilarbportefoljeflatefs .sorteringheader__lenke button span {
+    font-weight: normal;
+}
 .veilarbportefoljeflatefs .sorteringheader__pil {
     width: 1rem;
     height: 1rem;
