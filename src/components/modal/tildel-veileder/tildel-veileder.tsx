@@ -23,7 +23,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const [tilordninger, setTilordninger] = useState<
+    const [tilordningerAlle, setTilordningerAlle] = useState<
+        {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
+    >([]);
+    const [tilordningerIkkeNyEnhet, setTilordningerIkkeNyEnhet] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
     const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
@@ -51,12 +54,22 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
     const onSubmit = () => {
         if (ident) {
-            setTilordninger(
+            setTilordningerAlle(
                 valgteBrukere.map(bruker => ({
                     fraVeilederId: bruker.veilederId,
                     tilVeilederId: ident,
                     brukerFnr: bruker.fnr
                 }))
+            );
+
+            setTilordningerIkkeNyEnhet(
+                valgteBrukere
+                    .filter(bruker => !bruker.nyForEnhet)
+                    .map(bruker => ({
+                        fraVeilederId: bruker.veilederId,
+                        tilVeilederId: ident,
+                        brukerFnr: bruker.fnr
+                    }))
             );
 
             const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
@@ -70,7 +83,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             if (brukereFraNyEnhet.length > 0) {
                 setVisAdvarselOmSletting(true);
             } else {
-                doTildelTilVeileder(tilordninger, ident);
+                doTildelTilVeileder(tilordningerAlle, ident);
                 closeInput();
             }
         } else {
@@ -83,30 +96,36 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
                 <Modal.Content>
                     <div className="advarsel-modal">
-                        <Heading size="medium" level="1">
+                        <Heading size="large" level="2">
                             Arbeidslistenotat blir slettet
                         </Heading>
-                        <BodyShort size="small">
+                        <BodyShort size="medium">
                             {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
                         </BodyShort>
                         <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
-                        <BodyShort size="small">{`Ønsker du likevel å tildele veilederen?`}</BodyShort>
+                        <BodyShort
+                            size="medium"
+                            className="sporsmal-likevel-tidele"
+                        >{`Ønsker du likevel å tildele veilederen til disse brukerne?`}</BodyShort>
                     </div>
-                    <div>
+                    <div className="sletting-arbeidslista-knapp-wrapper">
                         <Button
-                            variant="secondary"
+                            variant="tertiary"
                             className="knapp-avbryt-tildeling"
-                            onClick={lukkFjernModal}
-                            size="small"
+                            onClick={() => {
+                                doTildelTilVeileder(tilordningerIkkeNyEnhet, ident);
+                                lukkFjernModal();
+                            }}
+                            size="medium"
                         >
-                            Avbryt tildeling
+                            Avbryt tildeling for de aktuelle brukerne
                         </Button>
                         <Button
                             type={'submit'}
                             className="knapp"
-                            size="small"
+                            size="medium"
                             onClick={() => {
-                                doTildelTilVeileder(tilordninger, ident);
+                                doTildelTilVeileder(tilordningerAlle, ident);
                                 lukkFjernModal();
                             }}
                         >
