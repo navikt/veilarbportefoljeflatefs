@@ -72,7 +72,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                     }))
             );
 
-            const brukereFraNyEnhet = valgteBrukere.filter(bruker => bruker.nyForEnhet);
+            const brukereFraNyEnhet = valgteBrukere
+                .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
+                .filter(bruker => bruker.veilederId !== ident);
 
             setFnrArbeidslisteBlirSlettet(
                 brukereFraNyEnhet.map(bruker => ({
