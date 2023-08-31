@@ -5,10 +5,10 @@ import {Button, Popover, Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {capitalize} from '../../utils/utils';
-import {settBrukerIKontekst} from '../../middleware/api';
 import {useEventListener} from '../../hooks/use-event-listener';
 import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
 import {ReactComponent as XMarkOctagonIcon} from '../../components/ikoner/x_mark_octagon_icon.svg';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../components/tabell/sisteendringkategori';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -25,37 +25,31 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
     const moteDato = new Date(mote.dato);
-    const url = getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId);
 
-    useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
+    useEventListener('mousedown', e =>
+        vedKlikkUtenfor([feilmeldingKnappRef, popoverContainerRef], e.target, () => {
+            if (harFeil) {
+                setHarFeil(false);
+            }
+        })
+    );
 
-    function fjernFeilmeldingDersomKlikketUtenfor(event) {
-        // Klikk skjedde på selve feilmeldingen eller inne i popover-en - ikke fjern feilmelding
-        if (
-            feilmeldingKnappRef.current?.contains(event.target) ||
-            popoverContainerRef.current?.contains(event.target)
-        ) {
-            return;
-        }
-
-        if (harFeil) {
-            setHarFeil(false);
-        }
-    }
-
-    const oppdaterBrukerIKontekstOgNavigerTilLenke = async () => {
+    const handterKlikk = () => {
         setHarFeil(false);
         setLaster(true);
 
-        try {
-            await settBrukerIKontekst(mote.deltaker.fnr);
-            window.location.href = url;
-        } catch (e) {
-            setHarFeil(true);
-            console.error('Klarte ikke å sette bruker i kontekst. Konsekvens: kan ikke navigere til lenke.');
-        } finally {
-            setLaster(false);
-        }
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            mote.deltaker.fnr,
+            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId),
+            () => {
+                setHarFeil(false);
+                setLaster(false);
+            },
+            () => {
+                setHarFeil(true);
+                setLaster(false);
+            }
+        );
     };
 
     if (!moment(dato).isSame(moteDato, 'day')) {
@@ -69,12 +63,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
 
             <Table.DataCell className="moteplan_tabell_deltaker">
                 {mote.deltaker.fnr && (
-                    <Button
-                        loading={laster}
-                        onClick={oppdaterBrukerIKontekstOgNavigerTilLenke}
-                        size="xsmall"
-                        variant="tertiary"
-                    >
+                    <Button loading={laster} onClick={handterKlikk} size="xsmall" variant="tertiary">
                         {capitalize(mote.deltaker.etternavn)}, {capitalize(mote.deltaker.fornavn)}
                     </Button>
                 )}

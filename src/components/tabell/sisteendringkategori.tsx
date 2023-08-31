@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useRef, useState} from 'react';
+import {RefObject, useRef, useState} from 'react';
 import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
@@ -18,6 +18,26 @@ interface SisteEndringKategoriProps {
     skalVises: boolean;
 }
 
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
+    fnr: string,
+    lenke: string,
+    onSuksess: () => void,
+    onFeilet: () => void
+) => {
+    settBrukerIKontekst(fnr)
+        .then(() => {
+            onSuksess();
+            window.location.href = lenke;
+        })
+        .catch(onFeilet);
+};
+
+export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
+    if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
+        fn();
+    }
+};
+
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     const [laster, setLaster] = useState(false);
     const [harFeil, setHarFeil] = useState(false);
@@ -26,40 +46,30 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
     const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
     const popoverContainerRef = useRef<HTMLDivElement>(null);
 
-    const url = getVeilarbpersonflateUrl(
-        `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
-        enhetId
+    useEventListener('mousedown', e =>
+        vedKlikkUtenfor([feilmeldingKnappRef, popoverContainerRef], e.target, () => {
+            if (harFeil) {
+                setHarFeil(false);
+            }
+        })
     );
 
-    useEventListener('mousedown', fjernFeilmeldingDersomKlikketUtenfor);
-
-    function fjernFeilmeldingDersomKlikketUtenfor(event) {
-        // Klikk skjedde på selve feilmeldingen eller inne i popover-en - ikke fjern feilmelding
-        if (
-            feilmeldingKnappRef.current?.contains(event.target) ||
-            popoverContainerRef.current?.contains(event.target)
-        ) {
-            return;
-        }
-
-        if (harFeil) {
-            setHarFeil(false);
-        }
-    }
-
-    const oppdaterBrukerIKontekstOgNavigerTilLenke = async () => {
+    const handterKlikk = () => {
         setHarFeil(false);
         setLaster(true);
 
-        try {
-            await settBrukerIKontekst(bruker.fnr);
-            window.location.href = url;
-        } catch (e) {
-            setHarFeil(true);
-            console.error('Klarte ikke å sette bruker i kontekst. Konsekvens: kan ikke navigere til lenke.');
-        } finally {
-            setLaster(false);
-        }
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            bruker.fnr,
+            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId),
+            () => {
+                setHarFeil(false);
+                setLaster(false);
+            },
+            () => {
+                setHarFeil(true);
+                setLaster(false);
+            }
+        );
     };
 
     const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
@@ -81,7 +91,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
             <Button
                 className={classnames('lenke lenke--frittstaende')}
                 loading={laster}
-                onClick={oppdaterBrukerIKontekstOgNavigerTilLenke}
+                onClick={handterKlikk}
                 size="xsmall"
                 variant="tertiary"
             >
