@@ -1,7 +1,6 @@
-import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev} from '../utils/url-utils';
+import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
@@ -59,6 +58,39 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
         );
     }
     return baseUrl;
+}
+
+class FetchError extends Error {
+    public response: Response;
+
+    constructor(message: string, response: Response) {
+        super(message);
+        this.response = response;
+    }
+}
+
+export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
+    if (response.status >= 200 && response.status < 300 && response.ok) {
+        return response;
+    }
+    if (response.status === 401 && redirectOnUnauthorized) {
+        window.location.href = loginUrl();
+    }
+    return Promise.reject(new FetchError(response.statusText, response));
+}
+
+export function toJson(response) {
+    if (response.status !== 204) {
+        // No content
+        return response.json();
+    }
+    return response;
+}
+
+export function fetchToJson(url: string, config: RequestInit = {}, redirectOnUnauthorized: Boolean = true) {
+    return fetch(url, config)
+        .then(res => sjekkStatuskode(res, redirectOnUnauthorized))
+        .then(toJson);
 }
 
 export function hentEnhetsPortefolje(
