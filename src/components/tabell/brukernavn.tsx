@@ -9,7 +9,7 @@ import './brukernavn.css';
 import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
 import {useEventListener} from '../../hooks/use-event-listener';
 import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from './sisteendringkategori';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../utils/utils';
 
 interface BrukerNavnProps {
     className?: string;

@@ -4,11 +4,10 @@ import moment from 'moment';
 import {Button, Popover, Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
-import {capitalize} from '../../utils/utils';
+import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../utils/utils';
 import {useEventListener} from '../../hooks/use-event-listener';
 import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
 import {ReactComponent as XMarkOctagonIcon} from '../../components/ikoner/x_mark_octagon_icon.svg';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../components/tabell/sisteendringkategori';
 
 interface MoteKollonneProps {
     dato: Date;

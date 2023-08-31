@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {RefObject, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {BodyShort, Button, Popover} from '@navikt/ds-react';
-import {settBrukerIKontekst} from '../../middleware/api';
 import {useEventListener} from '../../hooks/use-event-listener';
 import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
 import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../utils/utils';
 
 interface SisteEndringKategoriProps {
     className?: string;
@@ -17,26 +17,6 @@ interface SisteEndringKategoriProps {
     enhetId: string;
     skalVises: boolean;
 }
-
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
-    fnr: string,
-    lenke: string,
-    onSuksess: () => void,
-    onFeilet: () => void
-) => {
-    settBrukerIKontekst(fnr)
-        .then(() => {
-            onSuksess();
-            window.location.href = lenke;
-        })
-        .catch(onFeilet);
-};
-
-export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
-    if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
-        fn();
-    }
-};
 
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     const [laster, setLaster] = useState(false);
