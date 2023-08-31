@@ -26,7 +26,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [tilordningerAlle, setTilordningerAlle] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
-    const [tilordningerIkkeNyEnhet, setTilordningerIkkeNyEnhet] = useState<
+    const [tilordningerIkkeSlettingArbeidslista, setTilordningerIkkeSlettingArbeidslista] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
     const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
@@ -62,7 +62,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 }))
             );
 
-            setTilordningerIkkeNyEnhet(
+            setTilordningerIkkeSlettingArbeidslista(
                 valgteBrukere
                     .filter(bruker => !bruker.nyForEnhet)
                     .map(bruker => ({
@@ -115,7 +115,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
                             onClick={() => {
-                                doTildelTilVeileder(tilordningerIkkeNyEnhet, ident);
+                                doTildelTilVeileder(tilordningerIkkeSlettingArbeidslista, ident);
                                 lukkFjernModal();
                             }}
                             size="medium"
