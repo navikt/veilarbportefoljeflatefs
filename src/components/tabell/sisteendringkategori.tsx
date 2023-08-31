@@ -5,11 +5,11 @@ import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {BodyShort, Button, Popover} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {useEventListener} from '../../hooks/use-event-listener';
-import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
 import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../utils/utils';
+import {KnappOgPopover} from '../knapp-og-popover';
 
 interface SisteEndringKategoriProps {
     className?: string;
@@ -21,13 +21,11 @@ interface SisteEndringKategoriProps {
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     const [laster, setLaster] = useState(false);
     const [harFeil, setHarFeil] = useState(false);
-    const [linkPopoverApen, setLinkPopoverApen] = useState(false);
 
-    const feilmeldingKnappRef = useRef<HTMLButtonElement>(null);
-    const popoverContainerRef = useRef<HTMLDivElement>(null);
+    const knappOgPopoverRef = useRef<HTMLDivElement>(null);
 
     useEventListener('mousedown', e =>
-        vedKlikkUtenfor([feilmeldingKnappRef, popoverContainerRef], e.target, () => {
+        vedKlikkUtenfor([knappOgPopoverRef], e.target, () => {
             if (harFeil) {
                 setHarFeil(false);
             }
@@ -78,30 +76,16 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
                 <BodyShort size="small">{sisteEndringKategori}</BodyShort>
             </Button>
             {harFeil && (
-                <>
-                    <Button
-                        className="juster-tekst-venstre"
-                        variant="tertiary-neutral"
-                        size="xsmall"
-                        onClick={() => setLinkPopoverApen(true)}
-                        ref={feilmeldingKnappRef}
-                        icon={<XMarkOctagonIcon />}
-                    >
-                        Feil i baksystem
-                    </Button>
-                    <Popover
-                        ref={popoverContainerRef}
-                        anchorEl={feilmeldingKnappRef.current}
-                        open={linkPopoverApen}
-                        onClose={() => setLinkPopoverApen(false)}
-                        placement="bottom"
-                        strategy="fixed"
-                    >
-                        <PopoverContent>
+                <KnappOgPopover
+                    ikon={<XMarkOctagonIcon />}
+                    knappTekst="Feil i baksystem"
+                    popoverInnhold={
+                        <>
                             Fikk ikke kontakt med baksystemet. <br /> Prøv å åpne aktivitetsplanen og søk opp personen.
-                        </PopoverContent>
-                    </Popover>
-                </>
+                        </>
+                    }
+                    innerRef={knappOgPopoverRef}
+                />
             )}
         </div>
     );
