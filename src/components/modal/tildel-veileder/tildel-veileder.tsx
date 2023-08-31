@@ -72,17 +72,17 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                     }))
             );
 
-            const brukereFraNyEnhet = valgteBrukere
+            const brukereArbeidslisteVilBliSlettet = valgteBrukere
                 .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
                 .filter(bruker => bruker.veilederId !== ident);
 
             setFnrArbeidslisteBlirSlettet(
-                brukereFraNyEnhet.map(bruker => ({
+                brukereArbeidslisteVilBliSlettet.map(bruker => ({
                     brukerFnr: bruker.fnr
                 }))
             );
 
-            if (brukereFraNyEnhet.length > 0) {
+            if (brukereArbeidslisteVilBliSlettet.length > 0) {
                 setVisAdvarselOmSletting(true);
             } else {
                 doTildelTilVeileder(tilordningerAlle, ident);
