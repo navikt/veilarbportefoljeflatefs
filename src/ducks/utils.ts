@@ -1,5 +1,4 @@
 import {OversiktType} from './ui/listevisning';
-import {loginUrl} from '../utils/url-utils';
 
 export const STATUS = {
     NOT_STARTED: 'NOT_STARTED',
@@ -8,33 +7,6 @@ export const STATUS = {
     RELOADING: 'RELOADING',
     ERROR: 'ERROR'
 };
-
-class FetchError extends Error {
-    public response: Response;
-
-    constructor(message: string, response: Response) {
-        super(message);
-        this.response = response;
-    }
-}
-
-export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
-    if (response.status >= 200 && response.status < 300 && response.ok) {
-        return response;
-    }
-    if (response.status === 401 && redirectOnUnauthorized) {
-        window.location.href = loginUrl();
-    }
-    return Promise.reject(new FetchError(response.statusText, response));
-}
-
-export function toJson(response) {
-    if (response.status !== 204) {
-        // No content
-        return response.json();
-    }
-    return response;
-}
 
 export function sendResultatTilDispatch(dispatch, action) {
     return (...data) => {
@@ -59,12 +31,6 @@ export function handterFeil(dispatch, action) {
             dispatch({type: action, data: error.toString()});
         }
     };
-}
-
-export function fetchToJson(url: string, config: RequestInit = {}, redirectOnUnauthorized: Boolean = true) {
-    return fetch(url, config)
-        .then(res => sjekkStatuskode(res, redirectOnUnauthorized))
-        .then(toJson);
 }
 
 export function doThenDispatch(fn, {OK, FEILET, PENDING}) {

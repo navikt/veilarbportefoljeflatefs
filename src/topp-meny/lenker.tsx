@@ -5,6 +5,7 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {NavLink} from 'react-router-dom';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
+import {fjernBrukerIKontekst} from '../middleware/api';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
@@ -24,6 +25,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
     return (
         <div className="oversikt-overskrifter" aria-label="Naviger mellom de forskjellige oversiktene.">
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/portefolje')) {
+                        fjernBrukerIKontekst();
+                    }
+                }}
                 to={{
                     pathname: '/portefolje',
                     search: '?sidestorrelse=' + sidestorrelse
@@ -40,6 +46,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Min oversikt
             </NavLink>
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/enhet')) {
+                        fjernBrukerIKontekst();
+                    }
+                }}
                 to={{
                     pathname: '/enhet',
                     search: '?sidestorrelse=' + sidestorrelse
@@ -55,6 +66,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Enhetens oversikt
             </NavLink>
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/veiledere')) {
+                        fjernBrukerIKontekst();
+                    }
+                }}
                 to={{
                     pathname: '/veiledere',
                     search: '?sidestorrelse=' + sidestorrelse
