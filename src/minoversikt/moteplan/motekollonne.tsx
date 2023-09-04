@@ -1,13 +1,10 @@
 import * as React from 'react';
-import {useRef, useState} from 'react';
 import moment from 'moment';
-import {Button, Table} from '@navikt/ds-react';
+import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
-import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke, vedKlikkUtenfor} from '../../utils/utils';
-import {useEventListener} from '../../hooks/use-event-listener';
-import {ReactComponent as XMarkOctagonIcon} from '../../components/ikoner/x_mark_octagon_icon.svg';
-import {KnappOgPopover} from '../../components/knapp-og-popover';
+import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
+import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -16,38 +13,13 @@ interface MoteKollonneProps {
 }
 
 function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
-    const [laster, setLaster] = useState(false);
-    const [harFeil, setHarFeil] = useState(false);
-
-    const knappOgPopoverRef = useRef<HTMLDivElement>(null);
-
     const moteDato = new Date(mote.dato);
 
-    useEventListener('mousedown', e =>
-        vedKlikkUtenfor([knappOgPopoverRef], e.target, () => {
-            if (harFeil) {
-                setHarFeil(false);
-            }
-        })
-    );
-
-    const handterKlikk = () => {
-        setHarFeil(false);
-        setLaster(true);
-
+    const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             mote.deltaker.fnr,
-            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId),
-            () => {
-                setHarFeil(false);
-                setLaster(false);
-            },
-            () => {
-                setHarFeil(true);
-                setLaster(false);
-            }
+            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId)
         );
-    };
 
     if (!moment(dato).isSame(moteDato, 'day')) {
         return <></>;
@@ -60,21 +32,9 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
 
             <Table.DataCell className="moteplan_tabell_deltaker">
                 {mote.deltaker.fnr && (
-                    <Button loading={laster} onClick={handterKlikk} size="xsmall" variant="tertiary">
-                        {capitalize(mote.deltaker.etternavn)}, {capitalize(mote.deltaker.fornavn)}
-                    </Button>
-                )}
-                {mote.deltaker.fnr && harFeil && (
-                    <KnappOgPopover
-                        ikon={<XMarkOctagonIcon />}
-                        knappTekst="Feil i baksystem"
-                        popoverInnhold={
-                            <>
-                                Fikk ikke kontakt med baksystemet. <br /> Prøv å åpne aktivitetsplanen og søk opp
-                                personen.
-                            </>
-                        }
-                        innerRef={knappOgPopoverRef}
+                    <AksjonKnappMedPopoverFeilmelding
+                        aksjon={handterKlikk}
+                        knappTekst={`${capitalize(mote.deltaker.etternavn)}, ${capitalize(mote.deltaker.fornavn)}`}
                     />
                 )}
             </Table.DataCell>

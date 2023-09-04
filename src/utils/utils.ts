@@ -302,19 +302,10 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     return `${formatertDato} (Barn 1 år)`;
 };
 
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
-    fnr: string,
-    lenke: string,
-    onSuksess: () => void,
-    onFeilet: () => void
-) => {
-    settBrukerIKontekst(fnr)
-        .then(() => {
-            onSuksess();
-            window.location.href = lenke;
-        })
-        .catch(onFeilet);
-};
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string) =>
+    settBrukerIKontekst(fnr).then(() => {
+        window.location.href = lenke;
+    });
 
 export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
     if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
