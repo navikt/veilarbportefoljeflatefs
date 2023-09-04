@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/veilarbportefoljeflatefs/static/css/main.45ac2261.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.b57e4b46.js",
+    "main.css": "/veilarbportefoljeflatefs/static/css/main.fc1f62c7.css",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.e41ea0eb.js",
     "static/media/tab_veiledergrupper.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.3d7005052409d33ff936c957a8934d9b.svg",
     "static/media/datepicker.less": "/veilarbportefoljeflatefs/static/media/datepicker.37f9a43e92e4c0f60401.less",
     "static/media/index.less": "/veilarbportefoljeflatefs/static/media/index.3becc3bc0aef6d6af903.less",
     "static/media/arbeidslisteikon_bla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_bla.b1f96319b765dbbb666e1f6177e9aa29.svg",
     "static/media/lukknapp-style.less": "/veilarbportefoljeflatefs/static/media/lukknapp-style.f636bb78e3a7b06cac04.less",
+    "static/media/x_mark_octagon_icon.svg": "/veilarbportefoljeflatefs/static/media/x_mark_octagon_icon.252c5a9ebaed2457dbc3b6db30334939.svg",
     "index.html": "/veilarbportefoljeflatefs/index.html",
     "static/media/arbeidslisteikon_gronn.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gronn.224ed17e96c832fc3a45ae3aff1a0dcf.svg",
     "static/media/arbeidslisteikon_lilla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_lilla.131212530fc3f8247477612badde3b60.svg",
@@ -17,11 +18,11 @@
     "static/media/tab_filter.svg": "/veilarbportefoljeflatefs/static/media/tab_filter.1be8f60a590dcc609f09372d123b0b02.svg",
     "static/media/tab_status.svg": "/veilarbportefoljeflatefs/static/media/tab_status.f58f279078f48af9ce888fd4d0840690.svg",
     "static/media/lenker-style.less": "/veilarbportefoljeflatefs/static/media/lenker-style.59b9d8fd90d389db0ed1.less",
-    "main.45ac2261.css.map": "/veilarbportefoljeflatefs/static/css/main.45ac2261.css.map",
-    "main.b57e4b46.js.map": "/veilarbportefoljeflatefs/static/js/main.b57e4b46.js.map"
+    "main.fc1f62c7.css.map": "/veilarbportefoljeflatefs/static/css/main.fc1f62c7.css.map",
+    "main.e41ea0eb.js.map": "/veilarbportefoljeflatefs/static/js/main.e41ea0eb.js.map"
   },
   "entrypoints": [
-    "static/css/main.45ac2261.css",
-    "static/js/main.b57e4b46.js"
+    "static/css/main.fc1f62c7.css",
+    "static/js/main.e41ea0eb.js"
   ]
 }
