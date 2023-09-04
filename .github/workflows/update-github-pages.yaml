@@ -5,6 +5,7 @@ on:
         branches:
             - master
 permissions:
+    contents: write
     pages: write
 jobs:
     update-gh-pages:
