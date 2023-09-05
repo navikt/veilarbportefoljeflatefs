@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
 import {hentSystemmeldinger} from '../ducks/systemmeldinger';
-import {hentBrukerIKontekstActionCreator} from '../ducks/bruker-i-kontekst';
+import {hentBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 
 function InitialDataProvider(props: PropsWithChildren<{}>) {
     const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);
@@ -18,7 +18,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
         dispatch(hentFeaturesFraUnleash());
         dispatch(hentInnloggetVeileder());
         dispatch(hentSystemmeldinger());
-        dispatch(hentBrukerIKontekstActionCreator());
+        dispatch(hentBrukerIKontekst());
     }, [dispatch]);
 
     useEffect(() => {

@@ -1,3 +1,3 @@
 import {Action} from 'redux';
 
-export type DataAction<T, D> = Action<T> & {data?: D};
+export type DataAction<ACTION_TYPE, DATA_TYPE> = Action<ACTION_TYPE> & {data?: DATA_TYPE};

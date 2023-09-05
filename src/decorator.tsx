@@ -4,9 +4,9 @@ import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
-import {fjernBrukerIKontekst} from './middleware/api';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
 import {erDev} from './utils/url-utils';
+import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
