@@ -1,11 +1,10 @@
 import * as React from 'react';
+import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
-import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {BodyShort} from '@navikt/ds-react';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding';
+import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
+import {BodyShort, Link} from '@navikt/ds-react';
 
 interface SisteEndringKategoriProps {
     className?: string;
@@ -15,18 +14,10 @@ interface SisteEndringKategoriProps {
 }
 
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
-    const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
-        );
-
-    const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
-
     if (!skalVises) {
         return null;
     }
-
+    const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
     if (bruker.sisteEndringAktivitetId === undefined || bruker.sisteEndringAktivitetId === null) {
         return (
             <BodyShort size="small" className={className}>
@@ -34,14 +25,21 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
             </BodyShort>
         );
     }
-
     return (
         <div className={className}>
-            <AksjonKnappMedPopoverFeilmelding
-                aksjon={handterKlikk}
-                knappStil="lenke lenke--frittstaende"
-                knappTekst={sisteEndringKategori}
-            />
+            <Link
+                onClick={() => {
+                    setFraBrukerIUrl(bruker.fnr);
+                }}
+                href={getPersonUrl(
+                    bruker.fnr,
+                    `/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`,
+                    enhetId
+                )}
+                className={classnames('lenke lenke--frittstaende')}
+            >
+                <BodyShort size="small">{sisteEndringKategori}</BodyShort>
+            </Link>
         </div>
     );
 }
