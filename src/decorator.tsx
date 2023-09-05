@@ -5,10 +5,10 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {fjernBrukerIKontekst, hentBrukerIKontekst} from './middleware/api';
+import {erDev} from './utils/url-utils';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
-
 function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorProps {
     return {
         appname: 'Arbeidsrettet oppfølging',
@@ -60,7 +60,10 @@ export function Decorator() {
                 initialValue: brukerIKontekst,
                 display: FnrDisplay.SOKEFELT,
                 ignoreWsEvents: true,
-                onChange: () => {}
+                onChange: () =>
+                    (window.location.href = erDev()
+                        ? 'https://veilarbpersonflate.intern.dev.nav.no'
+                        : 'https://veilarbpersonflate.intern.nav.no')
             }}
         />
     );
