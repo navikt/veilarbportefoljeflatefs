@@ -6,25 +6,30 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
 import {hentSystemmeldinger} from '../ducks/systemmeldinger';
+import {hentBrukerIKontekstActionCreator} from '../ducks/bruker-i-kontekst';
 
 function InitialDataProvider(props: PropsWithChildren<{}>) {
-    const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
-    const valgtEnhet = useSelector((state: AppState) => state.valgtEnhet.data.enhetId);
+    const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);
+    const brukerIKontekstState = useSelector((state: AppState) => state.brukerIKontekst);
+    const valgtEnhetId = useSelector((state: AppState) => state.valgtEnhet.data.enhetId);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(hentFeaturesFraUnleash());
         dispatch(hentInnloggetVeileder());
         dispatch(hentSystemmeldinger());
+        dispatch(hentBrukerIKontekstActionCreator());
     }, [dispatch]);
 
     useEffect(() => {
-        if (valgtEnhet) {
-            dispatch(hentFeatureForVedtaksstotte(valgtEnhet));
+        if (valgtEnhetId) {
+            dispatch(hentFeatureForVedtaksstotte(valgtEnhetId));
         }
-    }, [valgtEnhet, dispatch]);
+    }, [valgtEnhetId, dispatch]);
 
-    return <Innholdslaster avhengigheter={[innloggetVeileder]}>{props.children}</Innholdslaster>;
+    return (
+        <Innholdslaster avhengigheter={[innloggetVeilederState, brukerIKontekstState]}>{props.children}</Innholdslaster>
+    );
 }
 
 export default InitialDataProvider;

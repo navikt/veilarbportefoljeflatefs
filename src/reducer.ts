@@ -35,6 +35,7 @@ import tolkebehovListReducer, {TolkebehovSpraakListState} from './ducks/tolkebeh
 import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjonsmelding';
 import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
 import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-enhet';
+import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -87,6 +88,7 @@ export interface AppState {
     sesjonStatus: SesjonStatusState;
     brukerfeilStatus: BrukerfeilState;
     geografiskBosted: GeografiskBostedListState;
+    brukerIKontekst: BrukerIKontekstState;
 }
 
 export default combineReducers<AppState>({
@@ -155,5 +157,6 @@ export default combineReducers<AppState>({
     foedelandList: foedelandListReducer,
     tolkbehovSpraakList: tolkebehovListReducer,
     sesjonStatus: informasjonsmeldingReducer,
-    brukerfeilStatus: brukerfeilReducer
+    brukerfeilStatus: brukerfeilReducer,
+    brukerIKontekst: brukerIKontekstReducer
 });

@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import NAVSPA from '@navikt/navspa';
 import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-props';
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
-import {fjernBrukerIKontekst, hentBrukerIKontekst} from './middleware/api';
+import {fjernBrukerIKontekst} from './middleware/api';
+import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
+import {erDev} from './utils/url-utils';
 
 const RESET_VALUE = '\u0000';
 const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
@@ -16,7 +18,13 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             initialValue: RESET_VALUE,
             display: FnrDisplay.SOKEFELT,
             ignoreWsEvents: true,
-            onChange: () => {}
+            onChange: value => {
+                if (value) {
+                    window.location.href = erDev()
+                        ? 'https://veilarbpersonflate.intern.dev.nav.no'
+                        : 'https://veilarbpersonflate.intern.nav.no';
+                }
+            }
         },
         toggles: {
             visVeileder: true
@@ -37,15 +45,13 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
 export function Decorator() {
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
-    const [brukerIKontekst, setBrukerIKontekst] = useState<string | null>(null);
+    const brukerIKontekst = useBrukerIKontekstSelector();
 
     useEffect(() => {
-        if (window.location.href.includes('/tilbake')) {
-            hentBrukerIKontekst().then(setBrukerIKontekst);
-        } else {
+        if (brukerIKontekst && !window.location.href.includes('/tilbake')) {
             fjernBrukerIKontekst();
         }
-    }, []);
+    }, [brukerIKontekst]);
 
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));
@@ -53,15 +59,5 @@ export function Decorator() {
 
     const config = getConfig(enhetId, velgEnhet);
 
-    return (
-        <InternflateDecorator
-            {...config}
-            fnr={{
-                initialValue: brukerIKontekst,
-                display: FnrDisplay.SOKEFELT,
-                ignoreWsEvents: true,
-                onChange: () => {}
-            }}
-        />
-    );
+    return <InternflateDecorator {...config} />;
 }

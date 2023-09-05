@@ -1,10 +1,9 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import MinoversiktBrukerPanel from './minoversikt-bruker-panel';
-import {settBrukerSomMarkert, hentArbeidslisteForBruker} from '../ducks/portefolje';
+import {hentArbeidslisteForBruker, settBrukerSomMarkert} from '../ducks/portefolje';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
 import {OrNothing} from '../utils/types/types';
 import {VeilederModell} from '../model-interfaces';
 import {useOnUnmount} from '../hooks/use-on-unmount';
@@ -13,6 +12,7 @@ import './minoversikt.css';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
+import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
@@ -22,7 +22,7 @@ interface MinOversiktTabellProps {
 }
 
 function MinoversiktTabell(props: MinOversiktTabellProps) {
-    const forrigeBruker = useForrigeBruker();
+    const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
