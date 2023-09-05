@@ -2,8 +2,6 @@ import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '
 import {Maybe} from './types';
 import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
-import {RefObject} from 'react';
-import {settBrukerIKontekst} from '../middleware/api';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -300,15 +298,4 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
     const formatertDato = toDatePrettyPrint(datoBarnEttAar);
     return `${formatertDato} (Barn 1 år)`;
-};
-
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string) =>
-    settBrukerIKontekst(fnr).then(() => {
-        window.location.href = lenke;
-    });
-
-export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
-    if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
-        fn();
-    }
 };

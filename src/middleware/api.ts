@@ -1,6 +1,7 @@
+import {fetchToJson, sjekkStatuskode} from '../ducks/utils';
 import {FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev, loginUrl} from '../utils/url-utils';
+import {erDev} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
@@ -58,39 +59,6 @@ function buildUrl(baseUrl: string, queryParams?: {}): string {
         );
     }
     return baseUrl;
-}
-
-class FetchError extends Error {
-    public response: Response;
-
-    constructor(message: string, response: Response) {
-        super(message);
-        this.response = response;
-    }
-}
-
-export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
-    if (response.status >= 200 && response.status < 300 && response.ok) {
-        return response;
-    }
-    if (response.status === 401 && redirectOnUnauthorized) {
-        window.location.href = loginUrl();
-    }
-    return Promise.reject(new FetchError(response.statusText, response));
-}
-
-export function toJson(response) {
-    if (response.status !== 204) {
-        // No content
-        return response.json();
-    }
-    return response;
-}
-
-export function fetchToJson(url: string, config: RequestInit = {}, redirectOnUnauthorized: Boolean = true) {
-    return fetch(url, config)
-        .then(res => sjekkStatuskode(res, redirectOnUnauthorized))
-        .then(toJson);
 }
 
 export function hentEnhetsPortefolje(
@@ -300,48 +268,4 @@ export const refreshAccessTokens = async (): Promise<SessionMeta> => {
 
 export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
     return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
-};
-
-export const settBrukerIKontekst = async (fnr: string): Promise<void> => {
-    const respons = await fetch('/modiacontextholder/api/context', {
-        ...MED_CREDENTIALS,
-        method: 'post',
-        body: JSON.stringify({verdi: fnr, eventType: 'NY_AKTIV_BRUKER'})
-    });
-
-    return sjekkStatuskode(respons);
-};
-
-export const hentBrukerIKontekst = async () => {
-    try {
-        const data = await fetchToJson('/modiacontextholder/api/context');
-
-        if (!data || typeof data.aktivBruker === 'undefined') {
-            console.error('Klarte ikke hente bruker fra kontekst. Grunn: responsen var tom.');
-            return null;
-        }
-
-        if (data.aktivBruker === null) {
-            return null;
-        }
-
-        if (typeof data.aktivBruker !== 'string') {
-            console.error('Klarte ikke hente bruker fra kontekst. Grunn: responstypen var på et uforventet format.');
-            return null;
-        }
-
-        return data.aktivBruker as string;
-    } catch (e) {
-        console.error('Klarte ikke hente bruker fra kontekst. Grunn: fikk uforventet statuskode.');
-        return null;
-    }
-};
-
-export const fjernBrukerIKontekst = async () => {
-    const respons = await fetch('/modiacontextholder/api/context/aktivbruker', {
-        ...MED_CREDENTIALS,
-        method: 'delete'
-    });
-
-    return sjekkStatuskode(respons);
 };
