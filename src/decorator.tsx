@@ -38,6 +38,7 @@ export function Decorator() {
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
     const [brukerIKontekst, setBrukerIKontekst] = useState<string | null>(null);
+    const [ignorerDecoratorOnChange, setIgnorerDecoratorOnChange] = useState(true);
 
     useEffect(() => {
         if (window.location.href.includes('/tilbake')) {
@@ -60,10 +61,20 @@ export function Decorator() {
                 initialValue: brukerIKontekst,
                 display: FnrDisplay.SOKEFELT,
                 ignoreWsEvents: true,
-                onChange: () =>
-                    (window.location.href = erDev()
-                        ? 'https://veilarbpersonflate.intern.dev.nav.no'
-                        : 'https://veilarbpersonflate.intern.nav.no')
+                onChange: () => {
+                    // Denne onChange-funksjonen kalles hver gang fnr endres i kontekst
+                    // også første gang det settes gjennom initialValue.
+                    // For å unngå å trigge hopp når applikasjonen mountes
+                    // må vi gjøre en sjekk her. Dvs. vi ønsker bare å hoppe
+                    // når veileder aktivt søker opp en person gjennom søkefeltet.
+                    if (brukerIKontekst && ignorerDecoratorOnChange) {
+                        setIgnorerDecoratorOnChange(false);
+                    } else {
+                        window.location.href = erDev()
+                            ? 'https://veilarbpersonflate.intern.dev.nav.no'
+                            : 'https://veilarbpersonflate.intern.nav.no';
+                    }
+                }
             }}
         />
     );
