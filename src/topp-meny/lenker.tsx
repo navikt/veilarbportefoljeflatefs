@@ -5,7 +5,7 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {NavLink} from 'react-router-dom';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
-import {fjernBrukerIKontekst} from '../middleware/api';
+import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
