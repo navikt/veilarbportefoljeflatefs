@@ -17,7 +17,7 @@ export interface BrukerIKontekstState {
     data: BrukerIKontekst;
 }
 
-const initialState = {
+const initialState: BrukerIKontekstState = {
     status: STATUS.NOT_STARTED,
     data: null
 };
@@ -29,7 +29,7 @@ const brukerIKontekstReducer = (
 ) => {
     switch (action.type) {
         case BrukerIKontekstActionType.SETT_BRUKER:
-            return {...state, status: STATUS.OK, data: action.data};
+            return {...state, status: STATUS.OK, data: action.data ?? null};
         case BrukerIKontekstActionType.FJERN_BRUKER:
             return {...state, status: STATUS.OK, data: null};
         default:
