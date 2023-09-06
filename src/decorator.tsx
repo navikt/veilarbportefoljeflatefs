@@ -49,9 +49,9 @@ export function Decorator() {
 
     useEffect(() => {
         if (brukerIKontekst && !window.location.href.includes('/tilbake')) {
-            fjernBrukerIKontekst();
+            dispatch(fjernBrukerIKontekst());
         }
-    }, [brukerIKontekst]);
+    }, [brukerIKontekst, dispatch]);
 
     function velgEnhet(enhet: string) {
         dispatch(oppdaterValgtEnhet(enhet));

@@ -6,12 +6,14 @@ import {NavLink} from 'react-router-dom';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
+import {useDispatch} from 'react-redux';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
+    const dispatch = useDispatch();
 
     const erAktiv = id => {
         const elem = document.getElementById(id);
@@ -27,7 +29,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/portefolje')) {
-                        fjernBrukerIKontekst();
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{
@@ -48,7 +50,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/enhet')) {
-                        fjernBrukerIKontekst();
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{
@@ -68,7 +70,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/veiledere')) {
-                        fjernBrukerIKontekst();
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{
