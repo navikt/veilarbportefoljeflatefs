@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
-import {erDev} from './utils/url-utils';
+import {getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 
 const RESET_VALUE = '\u0000';
@@ -20,9 +20,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
             ignoreWsEvents: true,
             onChange: value => {
                 if (value) {
-                    window.location.href = erDev()
-                        ? 'https://veilarbpersonflate.intern.dev.nav.no'
-                        : 'https://veilarbpersonflate.intern.nav.no';
+                    window.location.href = getVeilarbpersonflateBasePath();
                 }
             }
         },

@@ -34,6 +34,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
                 {mote.deltaker.fnr && (
                     <AksjonKnappMedPopoverFeilmelding
                         aksjon={handterKlikk}
+                        knappStil="juster-tekst-venstre"
                         knappTekst={`${capitalize(mote.deltaker.etternavn)}, ${capitalize(mote.deltaker.fornavn)}`}
                     />
                 )}

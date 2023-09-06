@@ -36,11 +36,12 @@ export function getSorteringsRekkefolgeFromUrl() {
     return queryString.parse(window.location.search).sorteringsrekkefolge || IKKE_SATT;
 }
 
+export function getVeilarbpersonflateBasePath() {
+    return erDev() ? 'https://veilarbpersonflate.intern.dev.nav.no' : 'https://veilarbpersonflate.intern.nav.no';
+}
+
 export function getVeilarbpersonflateUrl(pathParam: string | null, enhet: string): string {
-    const basePath =
-        (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production'
-            ? 'https://veilarbpersonflate.intern.nav.no'
-            : 'https://veilarbpersonflate.intern.dev.nav.no';
+    const basePath = getVeilarbpersonflateBasePath();
 
     const maybePathParam = pathParam ? pathParam : '';
     const enhetParam = `?enhet=${enhet}`;
@@ -57,7 +58,7 @@ export function updateLastPath() {
     }
 }
 
-export const erDev = () => process.env.REACT_APP_DEPLOYMENT_ENV === 'development';
+export const erDev = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'development';
 
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
-import './brukernavn.css';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding';
@@ -27,7 +26,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
         <div className={className}>
             <AksjonKnappMedPopoverFeilmelding
                 aksjon={handterKlikk}
-                knappStil="brukernavn__knapp__tekst"
+                knappStil="juster-tekst-venstre"
                 knappTekst={`${settSammenNavn(bruker)}`}
             />
         </div>

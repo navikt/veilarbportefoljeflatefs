@@ -39,7 +39,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
         <div className={className}>
             <AksjonKnappMedPopoverFeilmelding
                 aksjon={handterKlikk}
-                knappStil="lenke lenke--frittstaende"
+                knappStil="juster-tekst-venstre"
                 knappTekst={sisteEndringKategori}
             />
         </div>
