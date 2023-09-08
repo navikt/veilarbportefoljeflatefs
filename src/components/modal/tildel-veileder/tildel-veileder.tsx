@@ -53,6 +53,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
+        // eslint-disable-next-line
+        console.log('Klikket submit');
         if (ident) {
             setTilordningerAlle(
                 valgteBrukere.map(bruker => ({
@@ -95,6 +97,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 closeInput();
             }
         } else {
+            // eslint-disable-next-line
+            console.log('closeInput()');
             closeInput();
         }
     };
