@@ -55,6 +55,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const onSubmit = () => {
         // eslint-disable-next-line
         console.log('Klikket submit');
+        // eslint-disable-next-line
+        console.log('Valgte brukere', valgteBrukere);
+
         if (ident) {
             setTilordningerAlle(
                 valgteBrukere.map(bruker => ({
