@@ -67,36 +67,39 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 brukerFnr: bruker.fnr
             }));
 
-            const ikkeSlettetTilordninger = valgteBrukere
-                .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
-                .filter(bruker => bruker.veilederId !== ident)
-                .map(bruker => ({
-                    fraVeilederId: bruker.veilederId,
-                    tilVeilederId: ident,
-                    brukerFnr: bruker.fnr
-                }));
+            const brukereArbeidslisteBlirIkkeSlettet = valgteBrukere.filter(
+                bruker => !bruker.nyForEnhet || !bruker.arbeidsliste.arbeidslisteAktiv || bruker.veilederId === ident
+            );
+
+            const tilordningerBrukereArbeidslisteBlirIkkeSlettet = brukereArbeidslisteBlirIkkeSlettet.map(bruker => ({
+                fraVeilederId: bruker.veilederId,
+                tilVeilederId: ident,
+                brukerFnr: bruker.fnr
+            }));
 
             setTilordningerAlle(alleTilordninger);
 
-            setTilordningerIkkeSlettingArbeidslista(ikkeSlettetTilordninger);
+            setTilordningerIkkeSlettingArbeidslista(tilordningerBrukereArbeidslisteBlirIkkeSlettet);
 
-            const brukereArbeidslisteVilBliSlettet = valgteBrukere
+            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere
                 .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
                 .filter(bruker => bruker.veilederId !== ident);
 
             setFnrArbeidslisteBlirSlettet(
-                brukereArbeidslisteVilBliSlettet.map(bruker => ({
+                fnrBrukereArbeidslisteVilBliSlettet.map(bruker => ({
                     brukerFnr: bruker.fnr
                 }))
             );
 
             const a = true;
 
-            if (brukereArbeidslisteVilBliSlettet.length > 0 || a) {
+            if (fnrBrukereArbeidslisteVilBliSlettet.length > 0 || a) {
                 // eslint-disable-next-line
-                console.log('Noen arbeidslister vil bli sletta', brukereArbeidslisteVilBliSlettet);
+                console.log('Noen arbeidslister vil bli sletta', fnrBrukereArbeidslisteVilBliSlettet);
                 // eslint-disable-next-line
-                console.log('Noen arbeidslister vil bli sletta', fnrArbeidslisteBlirSlettet);
+                console.log('Alle', alleTilordninger);
+                // eslint-disable-next-line
+                console.log('IkkeSlettes', tilordningerBrukereArbeidslisteBlirIkkeSlettet);
                 setVisAdvarselOmSletting(true);
                 // eslint-disable-next-line
                 console.log(visAdvarselOmSletting);
@@ -104,7 +107,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 // eslint-disable-next-line
                 console.log('Ingen arbeidslister vil bli sletta, tilordAlle', alleTilordninger);
                 // eslint-disable-next-line
-                console.log('Ingen arbeidslister vil bli sletta, tilordnIkkeSl', ikkeSlettetTilordninger);
+                console.log(
+                    'Ingen arbeidslister vil bli sletta, tilordnIkkeSl',
+                    tilordningerBrukereArbeidslisteBlirIkkeSlettet
+                );
                 doTildelTilVeileder(alleTilordninger, ident);
                 closeInput();
             }
