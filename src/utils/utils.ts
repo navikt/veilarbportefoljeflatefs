@@ -307,8 +307,19 @@ export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: str
         window.location.href = lenke;
     });
 
-export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
-    if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
-        fn();
+/**
+ * Utfør en handling dersom det klikkes utenfor et/flere element(er).
+ *
+ * @param elementer Et eller flere elementer som man ønsker å sjekke om det klikkes utenfor
+ * @param klikkTarget Elementet som trigget klikk-eventet
+ * @param callback Funksjonen som skal utføres dersom det klikkes utenfor
+ */
+export const vedKlikkUtenfor = (
+    elementer: RefObject<HTMLElement>[],
+    klikkTarget: Node | null,
+    callback: () => void
+) => {
+    if (!elementer.some(ref => ref.current?.contains(klikkTarget))) {
+        callback();
     }
 };
