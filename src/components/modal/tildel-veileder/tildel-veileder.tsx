@@ -83,8 +83,14 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             );
 
             if (brukereArbeidslisteVilBliSlettet.length > 0) {
+                // eslint-disable-next-line
+                console.log('Noen arbeidslister vil bli sletta', brukereArbeidslisteVilBliSlettet);
                 setVisAdvarselOmSletting(true);
             } else {
+                // eslint-disable-next-line
+                console.log('Ingen arbeidslister vil bli sletta, tilordAlle', tilordningerAlle);
+                // eslint-disable-next-line
+                console.log('Ingen arbeidslister vil bli sletta, tilordnIkkeSl', tilordningerIkkeSlettingArbeidslista);
                 doTildelTilVeileder(tilordningerAlle, ident);
                 closeInput();
             }
@@ -115,6 +121,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
                             onClick={() => {
+                                // eslint-disable-next-line
+                                console.log('Klikket avbryt, tilordnIkkeSl', tilordningerIkkeSlettingArbeidslista);
                                 doTildelTilVeileder(tilordningerIkkeSlettingArbeidslista, ident);
                                 lukkFjernModal();
                             }}
@@ -127,6 +135,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             className="knapp"
                             size="medium"
                             onClick={() => {
+                                // eslint-disable-next-line
+                                console.log('Klikket bekreft, tilordnAlle', tilordningerAlle);
                                 doTildelTilVeileder(tilordningerAlle, ident);
                                 lukkFjernModal();
                             }}
