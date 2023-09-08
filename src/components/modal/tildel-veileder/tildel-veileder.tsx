@@ -68,7 +68,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             }));
 
             const ikkeSlettetTilordninger = valgteBrukere
-                .filter(bruker => !bruker.nyForEnhet)
+                .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
+                .filter(bruker => bruker.veilederId !== ident)
                 .map(bruker => ({
                     fraVeilederId: bruker.veilederId,
                     tilVeilederId: ident,
