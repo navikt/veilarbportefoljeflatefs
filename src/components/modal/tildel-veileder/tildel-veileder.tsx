@@ -89,7 +89,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 }))
             );
 
-            if (brukereArbeidslisteVilBliSlettet.length > 0) {
+            const a = true;
+
+            if (brukereArbeidslisteVilBliSlettet.length > 0 || a) {
                 // eslint-disable-next-line
                 console.log('Noen arbeidslister vil bli sletta', brukereArbeidslisteVilBliSlettet);
                 // eslint-disable-next-line
