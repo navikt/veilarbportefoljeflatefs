@@ -99,9 +99,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 console.log(visAdvarselOmSletting);
             } else {
                 // eslint-disable-next-line
-                console.log('Ingen arbeidslister vil bli sletta, tilordAlle', tilordningerAlle);
+                console.log('Ingen arbeidslister vil bli sletta, tilordAlle', alleTilordninger);
                 // eslint-disable-next-line
-                console.log('Ingen arbeidslister vil bli sletta, tilordnIkkeSl', tilordningerIkkeSlettingArbeidslista);
+                console.log('Ingen arbeidslister vil bli sletta, tilordnIkkeSl', ikkeSlettetTilordninger);
                 doTildelTilVeileder(alleTilordninger, ident);
                 closeInput();
             }
