@@ -21,7 +21,6 @@ interface ToolbarKnappProps {
 export default function ToolbarKnapp(props: ToolbarKnappProps) {
     const [isInputOpen, setInputOpen] = useState(false);
     const [isBtnClicked, setBtnClicked] = useState(false);
-    const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const dispatch = useDispatch();
     const requestSetOpenStatus = (setOpenTo: boolean) => {
