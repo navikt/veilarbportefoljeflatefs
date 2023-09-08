@@ -57,25 +57,27 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         console.log('Klikket submit');
         // eslint-disable-next-line
         console.log('Valgte brukere', valgteBrukere);
+        // eslint-disable-next-line
+        console.log('ident', ident);
 
         if (ident) {
-            setTilordningerAlle(
-                valgteBrukere.map(bruker => ({
+            const alleTilordninger = valgteBrukere.map(bruker => ({
+                fraVeilederId: bruker.veilederId,
+                tilVeilederId: ident,
+                brukerFnr: bruker.fnr
+            }));
+
+            const ikkeSlettetTilordninger = valgteBrukere
+                .filter(bruker => !bruker.nyForEnhet)
+                .map(bruker => ({
                     fraVeilederId: bruker.veilederId,
                     tilVeilederId: ident,
                     brukerFnr: bruker.fnr
-                }))
-            );
+                }));
 
-            setTilordningerIkkeSlettingArbeidslista(
-                valgteBrukere
-                    .filter(bruker => !bruker.nyForEnhet)
-                    .map(bruker => ({
-                        fraVeilederId: bruker.veilederId,
-                        tilVeilederId: ident,
-                        brukerFnr: bruker.fnr
-                    }))
-            );
+            setTilordningerAlle(alleTilordninger);
+
+            setTilordningerIkkeSlettingArbeidslista(ikkeSlettetTilordninger);
 
             const brukereArbeidslisteVilBliSlettet = valgteBrukere
                 .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
@@ -90,13 +92,17 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             if (brukereArbeidslisteVilBliSlettet.length > 0) {
                 // eslint-disable-next-line
                 console.log('Noen arbeidslister vil bli sletta', brukereArbeidslisteVilBliSlettet);
+                // eslint-disable-next-line
+                console.log('Noen arbeidslister vil bli sletta', fnrArbeidslisteBlirSlettet);
                 setVisAdvarselOmSletting(true);
+                // eslint-disable-next-line
+                console.log(visAdvarselOmSletting);
             } else {
                 // eslint-disable-next-line
                 console.log('Ingen arbeidslister vil bli sletta, tilordAlle', tilordningerAlle);
                 // eslint-disable-next-line
                 console.log('Ingen arbeidslister vil bli sletta, tilordnIkkeSl', tilordningerIkkeSlettingArbeidslista);
-                doTildelTilVeileder(tilordningerAlle, ident);
+                doTildelTilVeileder(alleTilordninger, ident);
                 closeInput();
             }
         } else {
