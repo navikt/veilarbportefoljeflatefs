@@ -26,9 +26,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [tilordningerAlle, setTilordningerAlle] = useState<
         {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
     >([]);
-    const [tilordningerIkkeSlettingArbeidslista, setTilordningerIkkeSlettingArbeidslista] = useState<
-        {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
-    >([]);
+    const [tilordningerBrukereArbeidslisteBlirIkkeSlettet, setTilordningerBrukereArbeidslisteBlirIkkeSlettet] =
+        useState<{fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]>([]);
     const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -53,13 +52,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
 
     const onSubmit = () => {
-        // eslint-disable-next-line
-        console.log('Klikket submit');
-        // eslint-disable-next-line
-        console.log('Valgte brukere', valgteBrukere);
-        // eslint-disable-next-line
-        console.log('ident', ident);
-
         if (ident) {
             const alleTilordninger = valgteBrukere.map(bruker => ({
                 fraVeilederId: bruker.veilederId,
@@ -79,11 +71,11 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             setTilordningerAlle(alleTilordninger);
 
-            setTilordningerIkkeSlettingArbeidslista(tilordningerBrukereArbeidslisteBlirIkkeSlettet);
+            setTilordningerBrukereArbeidslisteBlirIkkeSlettet(tilordningerBrukereArbeidslisteBlirIkkeSlettet);
 
-            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere
-                .filter(bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv)
-                .filter(bruker => bruker.veilederId !== ident);
+            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(
+                bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv && bruker.veilederId !== ident
+            );
 
             setFnrArbeidslisteBlirSlettet(
                 fnrBrukereArbeidslisteVilBliSlettet.map(bruker => ({
@@ -91,32 +83,13 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 }))
             );
 
-            const a = true;
-
-            if (fnrBrukereArbeidslisteVilBliSlettet.length > 0 || a) {
-                // eslint-disable-next-line
-                console.log('Noen arbeidslister vil bli sletta', fnrBrukereArbeidslisteVilBliSlettet);
-                // eslint-disable-next-line
-                console.log('Alle', alleTilordninger);
-                // eslint-disable-next-line
-                console.log('IkkeSlettes', tilordningerBrukereArbeidslisteBlirIkkeSlettet);
+            if (fnrBrukereArbeidslisteVilBliSlettet.length > 0) {
                 setVisAdvarselOmSletting(true);
-                // eslint-disable-next-line
-                console.log(visAdvarselOmSletting);
             } else {
-                // eslint-disable-next-line
-                console.log('Ingen arbeidslister vil bli sletta, tilordAlle', alleTilordninger);
-                // eslint-disable-next-line
-                console.log(
-                    'Ingen arbeidslister vil bli sletta, tilordnIkkeSl',
-                    tilordningerBrukereArbeidslisteBlirIkkeSlettet
-                );
                 doTildelTilVeileder(alleTilordninger, ident);
                 closeInput();
             }
         } else {
-            // eslint-disable-next-line
-            console.log('closeInput()');
             closeInput();
         }
     };
@@ -144,8 +117,11 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             className="knapp-avbryt-tildeling"
                             onClick={() => {
                                 // eslint-disable-next-line
-                                console.log('Klikket avbryt, tilordnIkkeSl', tilordningerIkkeSlettingArbeidslista);
-                                doTildelTilVeileder(tilordningerIkkeSlettingArbeidslista, ident);
+                                console.log(
+                                    'Klikket avbryt, tilordnIkkeSl',
+                                    tilordningerBrukereArbeidslisteBlirIkkeSlettet
+                                );
+                                doTildelTilVeileder(tilordningerBrukereArbeidslisteBlirIkkeSlettet, ident);
                                 lukkFjernModal();
                             }}
                             size="medium"
