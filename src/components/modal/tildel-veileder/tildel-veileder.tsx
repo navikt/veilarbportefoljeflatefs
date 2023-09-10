@@ -116,11 +116,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
                             onClick={() => {
-                                // eslint-disable-next-line
-                                console.log(
-                                    'Klikket avbryt, tilordnIkkeSl',
-                                    tilordningerBrukereArbeidslisteBlirIkkeSlettet
-                                );
                                 doTildelTilVeileder(tilordningerBrukereArbeidslisteBlirIkkeSlettet, ident);
                                 lukkFjernModal();
                             }}
@@ -133,8 +128,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             className="knapp"
                             size="medium"
                             onClick={() => {
-                                // eslint-disable-next-line
-                                console.log('Klikket bekreft, tilordnAlle', tilordningerAlle);
                                 doTildelTilVeileder(tilordningerAlle, ident);
                                 lukkFjernModal();
                             }}
