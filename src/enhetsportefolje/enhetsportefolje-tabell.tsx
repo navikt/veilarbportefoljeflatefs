@@ -4,12 +4,12 @@ import EnhetBrukerpanel from './enhet-brukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {useForrigeBruker} from '../hooks/portefolje/use-forrige-bruker';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
+import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
@@ -18,7 +18,7 @@ interface EnhetTabellProps {
 }
 
 function EnhetTabell(props: EnhetTabellProps) {
-    const forrigeBruker = useForrigeBruker();
+    const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );

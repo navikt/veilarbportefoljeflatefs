@@ -1,10 +1,9 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import {BrukerModell} from '../../model-interfaces';
-import {getPersonUrl, setFraBrukerIUrl} from '../../utils/url-utils';
 import '../../topp-meny/lenker.css';
-import {Link} from '@navikt/ds-react';
-import {TekstKolonne} from './kolonner/tekstkolonne';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
+import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
+import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding';
 
 interface BrukerNavnProps {
     className?: string;
@@ -13,6 +12,9 @@ interface BrukerNavnProps {
 }
 
 const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+    const handterKlikk = () =>
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId));
+
     const settSammenNavn = bruker => {
         if (bruker.etternavn === '' && bruker.fornavn === '') {
             return '';
@@ -22,15 +24,11 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
 
     return (
         <div className={className}>
-            <Link
-                onClick={() => {
-                    setFraBrukerIUrl(bruker.fnr);
-                }}
-                href={getPersonUrl(bruker.fnr, '', enhetId)}
-                className={classnames('lenke lenke--frittstaende')}
-            >
-                <TekstKolonne skalVises={true} tekst={settSammenNavn(bruker)} />
-            </Link>
+            <AksjonKnappMedPopoverFeilmelding
+                aksjon={handterKlikk}
+                knappStil="juster-tekst-venstre"
+                knappTekst={`${settSammenNavn(bruker)}`}
+            />
         </div>
     );
 };
