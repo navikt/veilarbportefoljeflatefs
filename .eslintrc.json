@@ -1,7 +1,12 @@
 {
-  "extends": ["react-app"],
-  "rules": {
-    "no-debugger": "warn",
-    "no-console": "warn"
-  }
+    "extends": ["react-app"],
+    "rules": {
+        "no-debugger": "warn",
+        "no-console": [
+            "warn",
+            {
+                "allow": ["error"]
+            }
+        ]
+    }
 }

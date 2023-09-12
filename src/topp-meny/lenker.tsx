@@ -5,12 +5,15 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {NavLink} from 'react-router-dom';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
+import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
+import {useDispatch} from 'react-redux';
 
 export function Lenker(props: {erPaloggetVeileder: boolean}) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
+    const dispatch = useDispatch();
 
     const erAktiv = id => {
         const elem = document.getElementById(id);
@@ -24,6 +27,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
     return (
         <div className="oversikt-overskrifter" aria-label="Naviger mellom de forskjellige oversiktene.">
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/portefolje')) {
+                        dispatch(fjernBrukerIKontekst());
+                    }
+                }}
                 to={{
                     pathname: '/portefolje',
                     search: '?sidestorrelse=' + sidestorrelse
@@ -40,6 +48,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Min oversikt
             </NavLink>
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/enhet')) {
+                        dispatch(fjernBrukerIKontekst());
+                    }
+                }}
                 to={{
                     pathname: '/enhet',
                     search: '?sidestorrelse=' + sidestorrelse
@@ -55,6 +68,11 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 Enhetens oversikt
             </NavLink>
             <NavLink
+                onClick={() => {
+                    if (!window.location.pathname.startsWith('/veiledere')) {
+                        dispatch(fjernBrukerIKontekst());
+                    }
+                }}
                 to={{
                     pathname: '/veiledere',
                     search: '?sidestorrelse=' + sidestorrelse

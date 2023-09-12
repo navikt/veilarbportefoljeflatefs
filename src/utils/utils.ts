@@ -2,6 +2,8 @@ import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '
 import {Maybe} from './types';
 import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
+import {RefObject} from 'react';
+import {settBrukerIKontekst} from '../middleware/api';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -298,4 +300,26 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
     const formatertDato = toDatePrettyPrint(datoBarnEttAar);
     return `${formatertDato} (Barn 1 år)`;
+};
+
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string) =>
+    settBrukerIKontekst(fnr).then(() => {
+        window.location.href = lenke;
+    });
+
+/**
+ * Utfør en handling dersom det klikkes utenfor et/flere element(er).
+ *
+ * @param elementer Et eller flere elementer som man ønsker å sjekke om det klikkes utenfor
+ * @param klikkTarget Elementet som trigget klikk-eventet
+ * @param callback Funksjonen som skal utføres dersom det klikkes utenfor
+ */
+export const vedKlikkUtenfor = (
+    elementer: RefObject<HTMLElement>[],
+    klikkTarget: Node | null,
+    callback: () => void
+) => {
+    if (!elementer.some(ref => ref.current?.contains(klikkTarget))) {
+        callback();
+    }
 };

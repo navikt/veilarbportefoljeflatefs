@@ -1,5 +1,5 @@
 import * as Api from './../middleware/api';
-import {doThenDispatch, handterFeil, STATUS, toJson} from './utils';
+import {doThenDispatch, handterFeil, STATUS} from './utils';
 import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
@@ -12,6 +12,7 @@ import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall-enhet';
+import {toJson} from './../middleware/api';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';

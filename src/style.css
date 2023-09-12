@@ -1,3 +1,17 @@
+.veilarbportefoljeflatefs .ord-brekk {
+    hyphens: auto;
+    word-break: break-word;
+}
+
+.veilarbportefoljeflatefs .ord-brekk-alle {
+    hyphens: auto;
+    word-break: break-all;
+}
+
+.veilarbportefoljeflatefs .juster-tekst-venstre {
+    text-align: left;
+}
+
 .tabell {
     background-color: transparent;
     border-radius: 4px;
