@@ -3,7 +3,7 @@ import {BrukerModell} from '../../model-interfaces';
 import '../../topp-meny/lenker.css';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding';
+import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
 interface BrukerNavnProps {
     className?: string;
@@ -14,6 +14,9 @@ interface BrukerNavnProps {
 const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId));
+
+    const handterKlikkNyFane = () =>
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId), true);
 
     const settSammenNavn = bruker => {
         if (bruker.etternavn === '' && bruker.fornavn === '') {
@@ -26,8 +29,10 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
         <div className={className}>
             <AksjonKnappMedPopoverFeilmelding
                 aksjon={handterKlikk}
+                aksjonNyFane={handterKlikkNyFane}
                 knappStil="juster-tekst-venstre"
                 knappTekst={`${settSammenNavn(bruker)}`}
+                inkluderKnappForApningINyFane
             />
         </div>
     );
