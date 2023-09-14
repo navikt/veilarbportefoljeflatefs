@@ -13,7 +13,7 @@ interface BrukerNavnProps {
 
 const settSammenNavn = (bruker: BrukerModell) => {
     if (bruker.fornavn === '' && bruker.etternavn === '') {
-        return '';
+        return null;
     }
 
     if (bruker.fornavn === '') {
@@ -38,13 +38,15 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
 
     return (
         <div className={className}>
-            <AksjonKnappMedPopoverFeilmelding
-                aksjon={handterKlikk}
-                aksjonNyFane={handterKlikkNyFane}
-                knappStil="juster-tekst-venstre"
-                knappTekst={navn}
-                inkluderKnappForApningINyFane
-            />
+            {navn && (
+                <AksjonKnappMedPopoverFeilmelding
+                    aksjon={handterKlikk}
+                    aksjonNyFane={handterKlikkNyFane}
+                    knappStil="juster-tekst-venstre"
+                    knappTekst={navn}
+                    inkluderKnappForApningINyFane
+                />
+            )}
         </div>
     );
 };
