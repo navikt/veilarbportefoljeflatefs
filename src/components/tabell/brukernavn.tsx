@@ -4,6 +4,8 @@ import '../../topp-meny/lenker.css';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_KNAPP_FOR_APNE_BRUKER_NY_FANE} from '../../konstanter';
 
 interface BrukerNavnProps {
     className?: string;
@@ -36,6 +38,8 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const handterKlikkNyFane = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId), true);
 
+    const visKnappForApneBrukerNyFane = useFeatureSelector()(VIS_KNAPP_FOR_APNE_BRUKER_NY_FANE);
+
     return (
         <div className={className}>
             {navn && (
@@ -44,7 +48,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                     aksjonNyFane={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre"
                     knappTekst={navn}
-                    inkluderKnappForApningINyFane
+                    inkluderKnappForApningINyFane={visKnappForApneBrukerNyFane}
                 />
             )}
         </div>
