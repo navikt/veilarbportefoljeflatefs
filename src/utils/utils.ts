@@ -305,7 +305,6 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
 export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) =>
     settBrukerIKontekst(fnr).then(() => {
         if (apneNyFane) {
-            // TODO: Verifiser at "noopener,noreferrer" er lovlig format for "features"-parameteret
             window.open(lenke, '_blank', 'noopener,noreferrer');
         } else {
             window.location.href = lenke;
