@@ -4,7 +4,7 @@ import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.
 import {BodyShort, Button, Tooltip} from '@navikt/ds-react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import {vedKlikkUtenfor} from '../../utils/utils';
-import {ExternalLink} from '@navikt/ds-icons';
+import {TabsIcon} from '@navikt/aksel-icons';
 import classNames from 'classnames';
 import './aksjon-knapp-med-popover-feilmelding.css';
 
@@ -83,7 +83,7 @@ export const AksjonKnappMedPopoverFeilmelding = ({
                 <Tooltip content={'Åpne i ny fane'} placement="bottom">
                     <Button
                         aria-label="Åpne brukeren i Aktivitetsplanen (åpnes i ny fane)"
-                        icon={<ExternalLink />}
+                        icon={<TabsIcon />}
                         onClick={() => handterKlikk(aksjonNyFane)}
                         size="xsmall"
                         variant="tertiary-neutral"
