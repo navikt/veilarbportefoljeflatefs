@@ -23,35 +23,56 @@ export const AksjonKnappMedPopoverFeilmelding = ({
     knappStil,
     inkluderKnappForApningINyFane
 }: AksjonKnappMedPopoverFeilmeldingProps) => {
-    const [laster, setLaster] = useState(false);
-    const [harFeil, setHarFeil] = useState(false);
+    const [lasterAksjon, setLasterAksjon] = useState(false);
+    const [lasterAksjonNyFane, setLasterAksjonNyFane] = useState(false);
+    const [harFeilAksjon, setHarFeilAksjon] = useState(false);
+    const [harFeilAksjonNyFane, setHarFeilAksjonNyFane] = useState(false);
 
     const knappOgPopoverRef = useRef<HTMLDivElement>(null);
 
     useEventListener('mousedown', e =>
         vedKlikkUtenfor([knappOgPopoverRef], e.target, () => {
-            if (harFeil) {
-                setHarFeil(false);
+            if (harFeilAksjon) {
+                setHarFeilAksjon(false);
             }
         })
     );
 
-    const handterKlikk = async (aksjonSomSkalUtforesVedKlikk?: () => Promise<any>) => {
-        if (!aksjonSomSkalUtforesVedKlikk) {
+    const handterKlikkAksjon = async (aksjonVedKlikk?: () => Promise<any>) => {
+        if (!aksjonVedKlikk) {
             return;
         }
 
-        setHarFeil(false);
-        setLaster(true);
+        setHarFeilAksjon(false);
+        setLasterAksjon(true);
 
         try {
-            await aksjonSomSkalUtforesVedKlikk();
+            await aksjonVedKlikk();
 
-            setHarFeil(false);
+            setHarFeilAksjon(false);
         } catch {
-            setHarFeil(true);
+            setHarFeilAksjon(true);
         } finally {
-            setLaster(false);
+            setLasterAksjon(false);
+        }
+    };
+
+    const handterKlikkAksjonNyFane = async (aksjonVedKlikk?: () => Promise<any>) => {
+        if (!aksjonVedKlikk) {
+            return;
+        }
+
+        setHarFeilAksjonNyFane(false);
+        setLasterAksjonNyFane(true);
+
+        try {
+            await aksjonVedKlikk();
+
+            setHarFeilAksjonNyFane(false);
+        } catch {
+            setHarFeilAksjonNyFane(true);
+        } finally {
+            setLasterAksjonNyFane(false);
         }
     };
 
@@ -60,14 +81,14 @@ export const AksjonKnappMedPopoverFeilmelding = ({
             <Button
                 aria-label="Åpne brukeren i Aktivitetsplanen"
                 className={knappStil}
-                loading={laster}
-                onClick={() => handterKlikk(aksjon)}
+                loading={lasterAksjon}
+                onClick={() => handterKlikkAksjon(aksjon)}
                 size="xsmall"
                 variant="tertiary"
             >
                 <BodyShort size="small">{knappTekst}</BodyShort>
             </Button>
-            {harFeil && (
+            {(harFeilAksjon || harFeilAksjonNyFane) && (
                 <KnappOgPopover
                     ikon={<XMarkOctagonIcon />}
                     knappTekst="Feil i baksystem"
@@ -84,7 +105,8 @@ export const AksjonKnappMedPopoverFeilmelding = ({
                     <Button
                         aria-label="Åpne brukeren i Aktivitetsplanen (åpnes i ny fane)"
                         icon={<TabsIcon />}
-                        onClick={() => handterKlikk(aksjonNyFane)}
+                        loading={lasterAksjonNyFane}
+                        onClick={() => handterKlikkAksjonNyFane(aksjonNyFane)}
                         size="xsmall"
                         variant="tertiary-neutral"
                     />
