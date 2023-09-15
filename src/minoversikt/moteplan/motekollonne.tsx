@@ -33,7 +33,7 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
             <Table.DataCell className="moteplan_tabell_deltaker">
                 {mote.deltaker.fnr && (
                     <AksjonKnappMedPopoverFeilmelding
-                        aksjon={handterKlikk}
+                        klikkAksjon={handterKlikk}
                         knappStil="juster-tekst-venstre"
                         knappTekst={`${capitalize(mote.deltaker.etternavn)}, ${capitalize(mote.deltaker.fornavn)}`}
                     />

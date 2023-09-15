@@ -44,11 +44,10 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
         <div className={className}>
             {navn && (
                 <AksjonKnappMedPopoverFeilmelding
-                    aksjon={handterKlikk}
-                    aksjonNyFane={handterKlikkNyFane}
+                    klikkAksjon={handterKlikk}
+                    ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre"
                     knappTekst={navn}
-                    inkluderKnappForApningINyFane={visKnappForApneBrukerNyFane}
                 />
             )}
         </div>
