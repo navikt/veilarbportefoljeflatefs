@@ -296,7 +296,7 @@ mock.get(
 );
 
 mock.post('/modiacontextholder/api/context', (req, res, ctx) => {
-    return res(ctx.status(200));
+    return res(ctx.status(500));
 });
 
 mock.get('/modiacontextholder/api/context', (req, res, ctx) => {

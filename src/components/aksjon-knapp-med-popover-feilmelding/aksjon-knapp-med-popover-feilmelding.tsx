@@ -35,6 +35,10 @@ export const AksjonKnappMedPopoverFeilmelding = ({
             if (harFeilAksjon) {
                 setHarFeilAksjon(false);
             }
+
+            if (harFeilAksjonNyFane) {
+                setHarFeilAksjonNyFane(false);
+            }
         })
     );
 
@@ -88,18 +92,6 @@ export const AksjonKnappMedPopoverFeilmelding = ({
             >
                 <BodyShort size="small">{knappTekst}</BodyShort>
             </Button>
-            {(harFeilAksjon || harFeilAksjonNyFane) && (
-                <KnappOgPopover
-                    ikon={<XMarkOctagonIcon />}
-                    knappTekst="Feil i baksystem"
-                    popoverInnhold={
-                        <>
-                            Fikk ikke kontakt med baksystemet. <br /> Prøv å åpne aktivitetsplanen og søk opp personen.
-                        </>
-                    }
-                    innerRef={knappOgPopoverRef}
-                />
-            )}
             {inkluderKnappForApningINyFane && (
                 <Tooltip content={'Åpne i ny fane'} placement="bottom">
                     <Button
@@ -111,6 +103,18 @@ export const AksjonKnappMedPopoverFeilmelding = ({
                         variant="tertiary-neutral"
                     />
                 </Tooltip>
+            )}
+            {(harFeilAksjon || harFeilAksjonNyFane) && (
+                <KnappOgPopover
+                    ikon={<XMarkOctagonIcon />}
+                    knappTekst="Feil i baksystem"
+                    popoverInnhold={
+                        <>
+                            Fikk ikke kontakt med baksystemet. <br /> Prøv å åpne aktivitetsplanen og søk opp personen.
+                        </>
+                    }
+                    innerRef={knappOgPopoverRef}
+                />
             )}
         </div>
     );
