@@ -1,0 +1,6 @@
+.veilarbportefoljeflatefs .container--med-ny-fane-knapp {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}

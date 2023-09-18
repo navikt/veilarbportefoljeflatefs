@@ -47,6 +47,7 @@ function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
     }
 }
 
+// eslint-disable-next-line
 function settOppCoreWebVitalsMetrikkRapportering() {
     const metrikkEndepunkt = hentMetrikkEndepunkt(process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment);
 
@@ -68,6 +69,6 @@ function settOppCoreWebVitalsMetrikkRapportering() {
 }
 
 // Ved treghet/problemer relatert til rapportering av web vitals metrikker: fjern denne linjen og deploy på nytt
-settOppCoreWebVitalsMetrikkRapportering();
+//settOppCoreWebVitalsMetrikkRapportering();
 
 ReactDOM.render(<Application />, document.getElementById('mainapp'));

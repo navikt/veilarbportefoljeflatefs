@@ -4,7 +4,7 @@ import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding';
+import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
 interface MoteKollonneProps {
     dato: Date;

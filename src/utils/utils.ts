@@ -302,9 +302,13 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     return `${formatertDato} (Barn 1 år)`;
 };
 
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string) =>
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) =>
     settBrukerIKontekst(fnr).then(() => {
-        window.location.href = lenke;
+        if (apneNyFane) {
+            window.open(lenke, '_blank', 'noopener,noreferrer');
+        } else {
+            window.location.href = lenke;
+        }
     });
 
 /**

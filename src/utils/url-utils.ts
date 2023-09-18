@@ -37,7 +37,9 @@ export function getSorteringsRekkefolgeFromUrl() {
 }
 
 export function getVeilarbpersonflateBasePath() {
-    return erDev() ? 'https://veilarbpersonflate.intern.dev.nav.no' : 'https://veilarbpersonflate.intern.nav.no';
+    return erDev() || erMock()
+        ? 'https://veilarbpersonflate.intern.dev.nav.no'
+        : 'https://veilarbpersonflate.intern.nav.no';
 }
 
 export function getVeilarbpersonflateUrl(pathParam: string | null, enhet: string): string {
