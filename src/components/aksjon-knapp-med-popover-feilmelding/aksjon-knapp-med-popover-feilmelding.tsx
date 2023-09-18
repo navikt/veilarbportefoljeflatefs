@@ -54,7 +54,7 @@ export const AksjonKnappMedPopoverFeilmelding = ({
     return (
         <div>
             <Button
-                aria-label="Åpne brukeren i Aktivitetsplanen"
+                aria-label={knappTekst}
                 className={knappStil}
                 loading={lasterAksjon}
                 onClick={handterKlikkAksjon}
