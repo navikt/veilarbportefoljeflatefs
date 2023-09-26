@@ -24,14 +24,14 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('configure', () => {
-    cy.intercept();
+    cy.intercept('GET', '/');
     cy.visit('/');
     cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
     Cypress.on('uncaught:exception', err => {
         console.log(err);
         return false;
     });
-    cy.route({
+    cy.intercept({
         method: 'GET',
         url: '/veilarbportefoljeflatefs/api/feature'
     });
