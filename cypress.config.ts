@@ -11,7 +11,7 @@ export default defineConfig({
     runMode: 2,
   },
 
-  videoUploadOnPasses: false,
+//  videoUploadOnPasses: false,
 
   e2e: {
     // We've imported your old cypress plugins here.

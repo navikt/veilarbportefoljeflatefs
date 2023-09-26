@@ -24,7 +24,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('configure', () => {
-    cy.server();
+    cy.intercept();
     cy.visit('/');
     cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
     Cypress.on('uncaught:exception', err => {
