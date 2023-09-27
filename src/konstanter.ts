@@ -7,6 +7,8 @@ export const IKKE_SATT = 'ikke_satt';
 export const DEFAULT_PAGINERING_STORRELSE = 50;
 export const SE_FLERE_PAGINERING_STORRELSE = 200;
 
+export const NASJONAL_OPPFOLGINGSENHET = '4154';
+
 export const SPOR_OM_TILBAKEMELDING = 'veilarbportefolje.spor_om_tilbakemelding';
 export const VEDTAKSTOTTE = 'pto.vedtaksstotte.pilot';
 export const DARKMODE = 'veilarbportefolje.darkmode';

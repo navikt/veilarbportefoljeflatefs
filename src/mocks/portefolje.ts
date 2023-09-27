@@ -247,7 +247,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
-        barnUnder18AarData: hentBarnUnder18Aar()
+        barnUnder18AarData: hentBarnUnder18Aar(),
+        brukersSituasjonSistEndret: randomDate({past: false})
     };
 }
 

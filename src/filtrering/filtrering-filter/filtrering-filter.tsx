@@ -6,6 +6,7 @@ import {
     avvik14aVedtakAvhengigeFilter,
     barnUnder18Aar,
     cvJobbprofil,
+    endringISituasjon,
     ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
@@ -40,8 +41,9 @@ import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {ExternalLink} from '@navikt/ds-icons';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18, NASJONAL_OPPFOLGINGSENHET} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
+import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -53,6 +55,7 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const {enhetId} = usePortefoljeSelector(oversiktType);
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -239,6 +242,26 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         </>
                     )}
                 />
+                {NASJONAL_OPPFOLGINGSENHET === enhetId && (
+                    <Dropdown
+                        name="Endring i situasjon"
+                        id="endring-i-situasjon"
+                        render={() => (
+                            <>
+                                <Alert variant="info" size="small" className="registrering-alert">
+                                    Svar bruker oppga ved endring i brukers situasjon
+                                </Alert>
+                                <CheckboxFilterform
+                                    form="registreringstype"
+                                    valg={endringISituasjon}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    className="registreringstype"
+                                />
+                            </>
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Høyeste fullførte utdanning"
                     id="hoyeste-fullforte-utdanning"

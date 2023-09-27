@@ -55,7 +55,8 @@ export enum Kolonne {
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
 
-    HAR_BARN_UNDER_18 = 'har_barn_under_18'
+    HAR_BARN_UNDER_18 = 'har_barn_under_18',
+    BRUKERS_SITUASJON_SIST_ENDRET = 'brukers_situasjon_sist_endret'
 }
 
 export enum OversiktType {

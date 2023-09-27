@@ -133,10 +133,12 @@ function FiltreringLabelContainer({
                             />
                         );
                     }
+                    const label =
+                        FilterKonstanter['endringISituasjon'][singleValue] ?? FilterKonstanter[key][singleValue];
                     return (
                         <FiltreringLabel
                             key={`situasjon-${singleValue}`}
-                            label={FilterKonstanter[key][singleValue]}
+                            label={label}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );

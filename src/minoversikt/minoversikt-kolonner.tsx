@@ -91,6 +91,9 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
+    const brukersSituasjonSistEndret = bruker.brukersSituasjonSistEndret
+        ? new Date(bruker.brukersSituasjonSistEndret)
+        : null;
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak: boolean =
@@ -393,6 +396,11 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
                 tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
+            />
+            <DatoKolonne
+                dato={brukersSituasjonSistEndret}
+                skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                className="col col-xs-2"
             />
         </div>
     );

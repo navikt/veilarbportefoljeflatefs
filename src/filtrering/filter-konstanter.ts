@@ -274,6 +274,17 @@ export const registreringstype = {
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
 
+export const endringISituasjon = {
+    OPPSIGELSE: {label: 'Jeg har blitt sagt opp av arbeidsgiver'},
+    ENDRET_PERMITTERINGSPROSENT: {label: 'Arbeidsgiver har endret permitteringen min'},
+    TILBAKE_TIL_JOBB: {label: 'Jeg skal tilbake i jobb hos min nåværende arbeidsgiver'},
+    NY_JOBB: {label: 'Jeg skal begynne å jobbe hos en annen arbeidsgiver'},
+    MIDLERTIDIG_JOBB: {label: 'Jeg har fått midlertidig jobb hos en annen arbeidsgiver'},
+    KONKURS: {label: 'Arbeidsgiveren min er konkurs'},
+    SAGT_OPP: {label: 'Jeg har sagt opp jobben min'},
+    ANNET: {label: 'Situasjonen min har endret seg, men ingen av valgene passet'}
+};
+
 export const landgruppe = {
     LANDGRUPPE_0: 'Landgruppe 0',
     LANDGRUPPE_1: 'Landgruppe 1',
@@ -407,6 +418,7 @@ const filterKonstanter = {
     ytelseAapSortering,
     manuellBrukerStatus,
     registreringstype,
+    endringISituasjon,
     arbeidslisteKategori,
     cvJobbprofil,
     utdanning,
