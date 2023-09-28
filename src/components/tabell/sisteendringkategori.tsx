@@ -5,7 +5,7 @@ import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {BodyShort} from '@navikt/ds-react';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {AksjonKnappMedPopoverFeilmelding} from '@navikt/veilarbcontextholder';
 
 interface SisteEndringKategoriProps {
     className?: string;
