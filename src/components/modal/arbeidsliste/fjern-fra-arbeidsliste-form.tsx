@@ -9,6 +9,7 @@ import {ArbeidslisteDataModell, BrukerModell, KategoriModell} from '../../../mod
 import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {Button, Label} from '@navikt/ds-react';
+import {trackAmplitude} from '../../../amplitude/amplitude';
 
 function brukerLabel(bruker) {
     return (
@@ -33,6 +34,10 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBruker
             onSubmit={e => {
                 e.preventDefault();
                 logEvent('portefolje.metrikker.fjern_arbeidsliste');
+                trackAmplitude({
+                    name: 'knapp klikket',
+                    data: {knapptekst: 'Fjern arbeidsliste', effekt: 'Fjern bruker fra arbeidslista'}
+                });
                 onSubmit(valgteBrukere, lukkModal);
             }}
         >

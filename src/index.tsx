@@ -13,6 +13,7 @@ import '@navikt/ds-css';
 import './style.css';
 import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import {DeploymentEnvironment, erMock} from './utils/url-utils';
+import {initAmplitude} from './amplitude/amplitude';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill');
@@ -32,6 +33,8 @@ if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
     require('./mocks');
+} else {
+    initAmplitude();
 }
 
 function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
