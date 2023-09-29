@@ -18,6 +18,7 @@ import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
 import {Button, Modal} from '@navikt/ds-react';
 import LasterModal from '../lastermodal/laster-modal';
+import {trackAmplitude} from '../../../amplitude/amplitude';
 
 interface ArbeidslisteModalRedigerProps {
     bruker: BrukerModell;
@@ -95,6 +96,21 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                         setIsOpen(false);
                         dispatch(
                             redigerArbeidslisteAction(values, {bruker, sistEndretAv, sistEndretDato, settMarkert})
+                        );
+                        trackAmplitude(
+                            {
+                                name: 'skjema fullført',
+                                data: {
+                                    skjemanavn: 'Rediger arbeidsliste',
+                                    skjemaId: 'veilarbportefoljeflatefs-arbeidsliste'
+                                }
+                            },
+                            {
+                                kategori: values.kategori,
+                                overskriftslengde: values.overskrift.length,
+                                kommentarlengde: values.kommentar.length,
+                                fristSatt: !!values.frist.length
+                            }
                         );
                     }}
                 >

@@ -15,6 +15,7 @@ import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {BodyShort, Button} from '@navikt/ds-react';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
+import {trackAmplitude} from '../../../amplitude/amplitude';
 
 interface OwnProps {
     valgteBrukere: BrukerModell[];
@@ -60,12 +61,27 @@ function LeggTilArbeidslisteForm({
         <Formik
             initialValues={{arbeidsliste: initialValues}}
             onSubmit={values => {
-                values.arbeidsliste.map(value =>
+                values.arbeidsliste.forEach(value => {
                     logEvent('teamvoff.metrikker.arbeidslistekategori', {
                         kategori: value.kategori,
                         applikasjon: 'oversikt'
-                    })
-                );
+                    });
+                    trackAmplitude(
+                        {
+                            name: 'skjema fullført',
+                            data: {
+                                skjemanavn: 'Legg til arbeidsliste',
+                                skjemaId: 'veilarbportefoljeflatefs-arbeidsliste'
+                            }
+                        },
+                        {
+                            kategori: value.kategori,
+                            overskriftslengde: value.overskrift.length,
+                            kommentarlengde: value.kommentar.length,
+                            fristSatt: !!value.frist.length
+                        }
+                    );
+                });
 
                 onSubmit(values.arbeidsliste);
             }}
