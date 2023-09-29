@@ -74,7 +74,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             setTilordningerBrukereArbeidslisteBlirIkkeSlettet(tilordningerBrukereArbeidslisteBlirIkkeSlettet);
 
             const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(
-                bruker => bruker.nyForEnhet && bruker.arbeidsliste.arbeidslisteAktiv && bruker.veilederId !== ident
+                bruker =>
+                    bruker.nyForEnhet &&
+                    bruker.arbeidsliste.arbeidslisteAktiv &&
+                    (bruker.veilederId !== ident || bruker.veilederId === null)
             );
 
             setFnrArbeidslisteBlirSlettet(
