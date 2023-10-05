@@ -1,7 +1,7 @@
 import React from 'react';
 import 'cypress-wait-until';
 
-before('Start server', () => {
+beforeEach('Start server', () => {
     cy.configure();
 });
 
@@ -20,6 +20,7 @@ describe('Filter min arbeidsliste', () => {
     })
 
     it('Legg til person i lilla arbeidsliste', () => {
+    	cy.getByTestId('filter_checkboks-container_minArbeidsliste').click()
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
             antallFor = $tall.text();
         });

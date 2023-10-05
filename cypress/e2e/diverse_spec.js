@@ -1,4 +1,4 @@
-before('Start server', () => {
+beforeEach('Start server', () => {
     cy.configure();
 });
 
@@ -176,7 +176,6 @@ describe('Diverse', () => {
 		cy.getByTestId('sorteringheader_oppfolging').should('be.visible'); //om barnet kolonne synlig
 
 		cy.gaTilOversikt('min-oversikt');
-		cy.klikkTab('STATUS');
 		cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({
 			force: true
 		});

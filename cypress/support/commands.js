@@ -24,18 +24,14 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('configure', () => {
-    cy.server();
-    cy.visit('/');
-    cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
-    Cypress.on('uncaught:exception', err => {
-        console.log(err);
-        return false;
-    });
-    cy.route({
-        method: 'GET',
-        url: '/veilarbportefoljeflatefs/api/feature'
-    });
-    cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt').should('exist');
+	cy.visit('/');
+	cy.url().should('include', '/veilarbportefoljeflatefs/enhet');
+	Cypress.on('uncaught:exception', err => {
+		console.log(err);
+		return false;
+	});
+
+	cy.getByTestId('enhetens-oversikt').contains('Enhetens oversikt').should('exist');
 });
 
 Cypress.Commands.add('getByTestId', (selector, ...args) => {
@@ -164,4 +160,65 @@ Cypress.Commands.add('lukkeArbeidslistePaPerson', () => {
         .children()
         .should('have.class', 'expand')
         .first();
+});
+
+Cypress.Commands.add('apneArbeidslistepaaNyBruker', () => {
+	cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
+	cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+	cy.get('.legg-i-arbeidsliste').should('not.exist');
+	cy.getByTestId('legg-i-arbeidsliste_knapp')
+		.should('be.enabled')
+		.click();
+	cy.get('.legg-i-arbeidsliste').should('be.visible');
+});
+
+Cypress.Commands.add('lagreEtFilter', (filternavn) => {
+	cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({
+		force: true
+	});
+
+	cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
+
+	cy.wait(500);
+	cy.getByTestId('sidebar-tab_FILTER').click();
+
+	cy.apneLukkeFilterDropdown('alder');
+
+	cy.getByTestId('filter_0-19').check({force: true});
+
+	cy.getByTestId('filtreringlabel_-19-ar').should('be.visible');
+
+	cy.getByTestId('lagre-filter_knapp').click();
+
+	cy.getByTestId('lagre-nytt-filter_modal_knapp').click();
+
+	cy.getByTestId('lagre-nytt-filter_modal_navn-input').clear().type(filternavn);
+
+	cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
+
+});
+
+Cypress.Commands.add('lagreVeiledergruppe', (gruppenavn) => {
+	cy.klikkTab('VEILEDERGRUPPER');
+	cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
+
+	cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear();
+
+	cy.wait(1000);
+
+	cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type('Andersen');
+
+	cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
+		force: true
+	});
+
+	cy.getByTestId('veiledergruppe_modal_sok-veileder-input').clear().type('Johansen');
+
+	cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
+		force: true
+	});
+
+	cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear().type(gruppenavn);
+
+	cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
 });

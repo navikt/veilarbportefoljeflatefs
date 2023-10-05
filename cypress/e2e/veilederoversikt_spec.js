@@ -1,4 +1,4 @@
-before('Start server', () => {
+beforeEach('Start server', () => {
     cy.configure();
 });
 

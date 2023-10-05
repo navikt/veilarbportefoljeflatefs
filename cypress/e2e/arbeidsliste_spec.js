@@ -1,5 +1,6 @@
-before('Start server', () => {
+beforeEach('Start server', () => {
     cy.configure();
+    cy.gaTilOversikt('min-oversikt');
 });
 
 describe('Arbeidsliste', () => {
@@ -18,14 +19,7 @@ describe('Arbeidsliste', () => {
     const nyKommentar = 'Kommentar skal heller ikke lagres';
 
     it('Lag én ny arbeidsliste og sjekk validering', () => {
-        cy.gaTilOversikt('min-oversikt');
-        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.getByTestId('legg-i-arbeidsliste_knapp')
-            .should('be.enabled')
-            .click();
-        cy.get('.legg-i-arbeidsliste').should('be.visible');
+        cy.apneArbeidslistepaaNyBruker()
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en kommentar');
@@ -38,22 +32,28 @@ describe('Arbeidsliste', () => {
     });
 
     it('Lagre fornavn', () => {
+        fornavn = 'Testing Testesen';
+        cy.apneArbeidslistepaaNyBruker()
         cy.getByTestId('modal_legg-i-arbeidsliste_navn').then($navn => {
             fornavn = $navn.text().split(' ')[0];
         });
     });
 
     it('Lagre ny arbeidsliste', () => {
+        let fornavn = '';
+        cy.apneArbeidslistepaaNyBruker()
+        cy.getByTestId('modal_arbeidsliste_tittel').type('tittel');
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('kommentar');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
-            .contains(fornavn)
-            .first();
+        cy.getByTestId('brukerliste_element_arbeidsliste-GUL').first().should('contain.text', fornavn)
+
     });
 
     it('Lagre antall med arbeidsliste', () => {
+        antallMedArbeidsliste = 0;
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
                 antallMedArbeidsliste += Cypress.$(ant).length;
@@ -64,9 +64,16 @@ describe('Arbeidsliste', () => {
     });
 
     it('Lag to nye arbeidslister', () => {
+        antallMedArbeidsliste = 0;
+        antallMedArbeidslisteEtterOppretting = 0;
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
+
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]')
+            .then(ant => {
+                antallMedArbeidsliste += Cypress.$(ant).length;
+            })
 
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp')
@@ -229,7 +236,20 @@ describe('Arbeidsliste', () => {
     });
 
     it('Avbryt redigering, ingen endringer lagret', () => {
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        tittel = ''
+        kommentar = ''
+        cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+            .children()
+            .first()
+            .children()
+            .should('have.class', 'expand')
+            .click();
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
+            tittel = $tittel.text();
+        });
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
+            kommentar = $kommentar.text();
+        });
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
@@ -241,8 +261,8 @@ describe('Arbeidsliste', () => {
             .type(nyKommentar);
         cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
-        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain', kommentar);
+        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain.text', tittel);
+        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain.text', kommentar);
 
         cy.lukkeArbeidslistePaPerson();
     });
