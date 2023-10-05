@@ -22,9 +22,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.getByTestId('legg-i-arbeidsliste_knapp')
-            .should('be.enabled')
-            .click();
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en tittel');
@@ -48,9 +46,7 @@ describe('Arbeidsliste', () => {
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.getByTestId('brukerliste_element_arbeidsliste-GUL')
-            .contains(fornavn)
-            .first();
+        cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first();
     });
 
     it('Lagre antall med arbeidsliste', () => {
@@ -69,9 +65,7 @@ describe('Arbeidsliste', () => {
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
 
         cy.get('.legg-i-arbeidsliste').should('not.exist');
-        cy.getByTestId('legg-i-arbeidsliste_knapp')
-            .should('be.enabled')
-            .click();
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible');
 
         cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
@@ -106,21 +100,15 @@ describe('Arbeidsliste', () => {
 
         cy.get('.arbeidsliste-modal').should('not.exist');
 
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp')
-            .should('be.visible')
-            .click();
+        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').should('be.visible').click();
 
         cy.get('.arbeidsliste-modal').should('be.visible');
 
         cy.get('.modal-header').contains('Rediger arbeidsliste');
 
-        cy.getByTestId('modal_arbeidsliste_tittel')
-            .clear()
-            .type(redigertTittel);
+        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
 
-        cy.getByTestId('modal_arbeidsliste_kommentar')
-            .clear()
-            .type(redigertKommentar);
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(redigertKommentar);
 
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
 
@@ -137,12 +125,8 @@ describe('Arbeidsliste', () => {
         });
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
-        cy.getByTestId('fjern-fra-arbeidsliste_knapp')
-            .should('be.enabled')
-            .click();
-        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp')
-            .should('be.visible')
-            .click();
+        cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled').click();
+        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
@@ -171,9 +155,7 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_rediger-arbeidsliste_fjern-knapp').click();
 
-        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp')
-            .should('be.visible')
-            .click();
+        cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
 
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
 
@@ -233,12 +215,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
-        cy.getByTestId('modal_arbeidsliste_tittel')
-            .clear()
-            .type(nyTittel);
-        cy.getByTestId('modal_arbeidsliste_kommentar')
-            .clear()
-            .type(nyKommentar);
+        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
         cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
