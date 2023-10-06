@@ -11,7 +11,7 @@ jobs:
               uses: actions/checkout@v4
             - name: Install dependencies
               run: npm ci
-              with:
+              env:
                 READER_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Cypress run
               uses: cypress-io/github-action@v6
