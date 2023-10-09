@@ -12,6 +12,7 @@ import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-g
 import {BodyShort, Button, Heading, Modal, Radio, RadioGroup} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
+import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -32,6 +33,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
+    const enhet = useEnhetSelector();
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -77,8 +79,18 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 bruker =>
                     bruker.nyForEnhet &&
                     bruker.arbeidsliste.arbeidslisteAktiv &&
-                    (bruker.veilederId !== ident || bruker.veilederId === null)
+                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
+                    bruker.arbeidsliste.navkontorForArbeidsliste !== null &&
+                    bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
             );
+
+            // eslint-disable-next-line
+            console.log(
+                'Navkontor for arbeidsliste',
+                valgteBrukere.map(bruker => bruker.arbeidsliste.navkontorForArbeidsliste)
+            );
+            // eslint-disable-next-line
+            console.log('enhetId', enhet);
 
             setFnrArbeidslisteBlirSlettet(
                 fnrBrukereArbeidslisteVilBliSlettet.map(bruker => ({
