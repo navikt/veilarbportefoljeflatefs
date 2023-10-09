@@ -98,6 +98,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 valgteBrukere.map(bruker => bruker.arbeidsliste.navkontorForArbeidsliste !== enhet)
             );
 
+            // eslint-disable-next-line
+            console.log('Og');
+
             setFnrArbeidslisteBlirSlettet(
                 fnrBrukereArbeidslisteVilBliSlettet.map(bruker => ({
                     brukerFnr: bruker.fnr
