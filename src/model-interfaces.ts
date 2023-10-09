@@ -249,6 +249,7 @@ export interface ArbeidslisteModell {
     sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
     hentetKommentarOgTittel: boolean;
+    navkontorForArbeidsliste: string;
 }
 
 export enum Status {
