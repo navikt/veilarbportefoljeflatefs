@@ -213,6 +213,7 @@ interface EnsligeForsorgereOvergangsstonad {
 export interface BarnUnder18Aar {
     alder: number;
 }
+
 interface Statsborgerskap {
     statsborgerskap: string;
     gyldigFra?: string;
@@ -249,7 +250,7 @@ export interface ArbeidslisteModell {
     sistEndretAv: {veilederId: string};
     kategori: KategoriModell;
     hentetKommentarOgTittel: boolean;
-    navkontorForArbeidsliste: string;
+    navkontorForArbeidsliste?: string;
 }
 
 export enum Status {

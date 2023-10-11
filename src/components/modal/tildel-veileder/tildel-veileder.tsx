@@ -13,6 +13,7 @@ import {BodyShort, Button, Heading, Modal, Radio, RadioGroup} from '@navikt/ds-r
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
 import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
+import {trackAmplitude} from '../../../amplitude/amplitude';
 
 interface TildelVeilederProps {
     oversiktType?: string;
@@ -77,29 +78,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(
                 bruker =>
-                    bruker.nyForEnhet &&
                     bruker.arbeidsliste.arbeidslisteAktiv &&
                     (bruker.veilederId !== ident || bruker.veilederId === null) &&
                     bruker.arbeidsliste.navkontorForArbeidsliste !== null &&
                     bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
-            );
-
-            // eslint-disable-next-line
-            console.log(
-                'Navkontor for arbeidsliste',
-                valgteBrukere.map(bruker => bruker.arbeidsliste.navkontorForArbeidsliste)
-            );
-            // eslint-disable-next-line
-            console.log('enhetId', enhet);
-
-            // eslint-disable-next-line
-            console.log(
-                'Navkontor for arbeidsliste !== enhet',
-                valgteBrukere.map(
-                    bruker =>
-                        bruker.arbeidsliste.navkontorForArbeidsliste !== null &&
-                        bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
-                )
             );
 
             setFnrArbeidslisteBlirSlettet(
@@ -109,6 +91,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             );
 
             if (fnrBrukereArbeidslisteVilBliSlettet.length > 0) {
+                trackAmplitude(
+                    {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av arbeidsliste'}},
+                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+                );
                 setVisAdvarselOmSletting(true);
             } else {
                 doTildelTilVeileder(alleTilordninger, ident);
@@ -141,6 +127,16 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
                             onClick={() => {
+                                trackAmplitude(
+                                    {
+                                        name: 'knapp klikket',
+                                        data: {
+                                            knapptekst: 'Avbryt tildeling for de aktuelle brukerne',
+                                            effekt: 'Avbryter tildeling'
+                                        }
+                                    },
+                                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+                                );
                                 doTildelTilVeileder(tilordningerBrukereArbeidslisteBlirIkkeSlettet, ident);
                                 lukkFjernModal();
                             }}
@@ -153,6 +149,16 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             className="knapp"
                             size="medium"
                             onClick={() => {
+                                trackAmplitude(
+                                    {
+                                        name: 'knapp klikket',
+                                        data: {
+                                            knapptekst: 'Ja, tildel veilederen',
+                                            effekt: 'Fortsetter tildeling'
+                                        }
+                                    },
+                                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+                                );
                                 doTildelTilVeileder(tilordningerAlle, ident);
                                 lukkFjernModal();
                             }}
