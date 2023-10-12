@@ -17,11 +17,11 @@ jobs:
       if: github.event_name == 'pull_request'
       steps:
         - name: Checkout
-          uses: actions/checkout@v4
+          uses: actions/checkout@v3
         - name: Setup node
           uses: actions/setup-node@v3
           with:
-            node-version: 20
+            node-version: 16
             cache: npm
         - name: Install dependencies
           run: npm ci
@@ -36,11 +36,11 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v3
             - name: Setup node
               uses: actions/setup-node@v3
               with:
-                  node-version: 20
+                  node-version: 16
                   cache: npm
             - name: Install dependencies
               run: npm ci
@@ -50,10 +50,10 @@ jobs:
             - name: Build application
               run: npm run build:dev
             - name: Authenticate to Google Cloud
-              uses: google-github-actions/auth@v1
+              uses: google-github-actions/auth@v0
               with:
                   credentials_json: ${{ secrets.GCS_SA_KEY_DEV }}
             - name: Set up Cloud SDK
-              uses: google-github-actions/setup-gcloud@v1
+              uses: google-github-actions/setup-gcloud@v0
             - name: Upload files to GCS
               run: gsutil -m rsync -r build gs://obo-veilarbportefoljeflatefs-dev
