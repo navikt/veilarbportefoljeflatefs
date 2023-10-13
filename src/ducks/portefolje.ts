@@ -12,7 +12,7 @@ import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall-enhet';
-import {toJson} from './../middleware/api';
+import {toJson} from '../middleware/api';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -326,8 +326,8 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                     const feiledeFnr = feilendeTilordninger.map(f => f.brukerFnr);
 
                     const vellykkedeTilordninger = tilordninger
-                        .filter(tillordning => !feiledeFnr.includes(tillordning.brukerFnr))
-                        .map(tillordning => ({brukerFnr: tillordning.brukerFnr}));
+                        .filter(tilordning => !feiledeFnr.includes(tilordning.brukerFnr))
+                        .map(tilordning => ({brukerFnr: tilordning.brukerFnr}));
 
                     visFeiletModal({
                         aarsak: TILDELING_FEILET,
@@ -335,9 +335,7 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                         brukereOk: vellykkedeTilordninger
                     })(dispatch);
                 } else {
-                    dispatch(
-                        visTilordningOkModal(tilordninger.map(tillordning => ({brukerFnr: tillordning.brukerFnr})))
-                    );
+                    dispatch(visTilordningOkModal(tilordninger.map(tilordning => ({brukerFnr: tilordning.brukerFnr}))));
                     dispatch(pagineringSetup({side: 1}));
                 }
                 if (oversiktType === OversiktType.minOversikt) {
