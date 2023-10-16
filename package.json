@@ -47,7 +47,6 @@
         "yet-another-fetch-mock": "4.2.1"
     },
     "dependencies": {
-        "@amplitude/analytics-browser": "2.3.2",
         "@grafana/faro-web-sdk": "1.1.2",
         "@navikt/aksel-icons": "2.9.8",
         "@navikt/ds-css": "2.9.8",
