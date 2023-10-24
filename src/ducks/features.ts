@@ -7,8 +7,7 @@ import {
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    VIS_KNAPP_FOR_APNE_BRUKER_NY_FANE
+    VEDTAKSTOTTE
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -23,8 +22,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
-    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
-    [VIS_KNAPP_FOR_APNE_BRUKER_NY_FANE]: false
+    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false
 };
 
 // Reducer

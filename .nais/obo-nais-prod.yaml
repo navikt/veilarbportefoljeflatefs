@@ -43,8 +43,8 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: poao-unleash
-          namespace: poao
+        - application: obo-unleash
+          namespace: obo
       external:
         - host: veilarbportefolje.prod-fss-pub.nais.io
         - host: veilarbfilter.prod-fss-pub.nais.io
@@ -124,11 +124,11 @@ spec:
             },
             {
               "fromPath": "/veilarbportefoljeflatefs",
-              "toUrl": "http://poao-unleash.poao",
+              "toUrl": "http://obo-unleash.obo",
               "preserveFromPath": false,
               "toApp": {
-                "name": "poao-unleash",
-                "namespace": "poao",
+                "name": "obo-unleash",
+                "namespace": "obo",
                 "cluster": "prod-gcp"
               }
             },
