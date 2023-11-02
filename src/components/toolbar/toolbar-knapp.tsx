@@ -66,7 +66,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
         if (props.tildelveileder) {
             return (
                 <TildelVeileder
-                    btnOnClick={() => setBtnClicked(true)}
+                    closeInput={() => setBtnClicked(true)}
                     skalVises={props.skalVises}
                     oversiktType={props.oversiktType}
                 />

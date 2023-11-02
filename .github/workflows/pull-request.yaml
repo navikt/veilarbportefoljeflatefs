@@ -14,7 +14,7 @@ jobs:
               env:
                 READER_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Cypress run
-              uses: cypress-io/github-action@v6
+              uses: cypress-io/github-action@v5
               with:
                   browser: chrome
                   start: npm start cypress:run
