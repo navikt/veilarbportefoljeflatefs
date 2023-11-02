@@ -1,4 +1,3 @@
-import {erProd} from '../utils/url-utils';
 import {AmplitudeEvent} from './taxonomy-events';
 
 export function initAmplitude() {
