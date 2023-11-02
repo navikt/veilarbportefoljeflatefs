@@ -19,6 +19,7 @@ import {foedelandListMockData} from './foedeland';
 import {tolkebehovSpraakMockData} from './tolkebehovSpraak';
 import getSessionData, {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from './session';
 import {SessionMeta} from '../middleware/api';
+import {mockApiCalls} from '@navikt/veilarbcontextholder';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -249,39 +250,6 @@ mock.post('/veilarbportefolje/api/arbeidsliste/delete', ({body}, res, ctx) =>
 // modiacontextholder-api
 
 mock.get(
-    '/modiacontextholder/api/context/aktivenhet',
-    delayed(
-        500,
-        jsonResponse({
-            aktivBruker: null,
-            aktivEnhet: '1234'
-        })
-    )
-);
-
-mock.get(
-    '/modiacontextholder/api/context/aktivbruker',
-    delayed(
-        500,
-        jsonResponse({
-            aktivBruker: null,
-            aktivEnhet: null
-        })
-    )
-);
-
-mock.delete(
-    '/modiacontextholder/api/context/aktivbruker',
-    delayed(
-        500,
-        jsonResponse({
-            aktivBruker: null,
-            aktivEnhet: null
-        })
-    )
-);
-
-mock.get(
     '/modiacontextholder/api/decorator',
     delayed(
         500,
@@ -330,6 +298,8 @@ mock.get(
 );
 
 mock.get('/veilarbportefolje/api/enhet/:enhetId/geografiskbosted', delayed(500, jsonResponse(geografiskBosted)));
+
+mockApiCalls(mock);
 
 // websocket
 class MockWebSocket {

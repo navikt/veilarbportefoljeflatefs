@@ -21,6 +21,8 @@ jobs:
                   cache: 'npm'
             - name: Install dependencies
               run: npm ci
+              env:
+                READER_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Build mock application
               run: npm run build:mock
             - name: Legg til 404 fil
