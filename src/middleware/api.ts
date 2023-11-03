@@ -146,8 +146,9 @@ export function hentArbeidslisteForVeileder(enhet, veilederident) {
 }
 
 export function hentArbeidslisteForBruker(fodselsnummer) {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${fodselsnummer}`;
-    return fetchToJson(url, MED_CREDENTIALS);
+    const url = `${VEILARBPORTEFOLJE_URL}/v2/hent-arbeidsliste`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr: fodselsnummer})};
+    return fetchToJson(url, config);
 }
 
 export function hentEnhetsVeiledere(enhetId) {
@@ -217,8 +218,8 @@ export function lagreArbeidsliste(arbeidsliste) {
 }
 
 export function oppdaterArbeidsliste(arbeidsliste, fnr) {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/${fnr}`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(arbeidsliste)};
+    const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({...arbeidsliste, fnr})};
     return fetchToJson(url, config);
 }
 
