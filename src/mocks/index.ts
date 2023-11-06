@@ -208,7 +208,7 @@ mock.get(
 );
 mock.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', jsonResponse(tiltak));
 mock.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', jsonResponse(hentArbeidsliste()));
-mock.get('/veilarbportefolje/api/arbeidsliste/:fodselsnummer', (req, res, ctx) =>
+mock.post('/veilarbportefolje/api/v2/hent-arbeidsliste', (req, res, ctx) =>
     res(ctx.json(hentArbeidslisteForBruker(req.pathParams)))
 );
 
@@ -224,7 +224,7 @@ mock.post('/veilarbportefolje/api/arbeidsliste', (req, res, ctx) =>
     res(ctx.json({error: [], data: req.body.map(arbeidsliste => arbeidsliste.fnr)}))
 );
 
-mock.put('/veilarbportefolje/api/arbeidsliste/:fnr', ({body}, res, ctx) =>
+mock.put('/veilarbportefolje/api/v2/arbeidsliste', ({body}, res, ctx) =>
     res(
         ctx.json({
             sistEndretAv: {
