@@ -193,8 +193,8 @@ const mapDispatchToProps = (dispatch, props) => ({
         const {valgteBrukere} = props;
         const liste = arbeidsliste.map((elem, index) => ({
             fnr: valgteBrukere[index].fnr,
-            overskrift: elem.overskrift,
-            kommentar: elem.kommentar,
+            overskrift: elem.overskrift.length > 0 ? elem.overskrift : null,
+            kommentar: elem.kommentar.length > 0 ? elem.kommentar : null,
             frist: elem.frist ? dateToISODate(elem.frist) : null,
             kategori: elem.kategori
         }));

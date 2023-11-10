@@ -50,8 +50,8 @@ export default function arbeidslisteReducer(state = initialState, action) {
 // Action Creators
 export function redigerArbeidslisteAction(formData, props) {
     const arbeidsliste = {
-        kommentar: formData.kommentar,
-        overskrift: formData.overskrift,
+        kommentar: formData.kommentar.length ? formData.kommentar : null,
+        overskrift: formData.overskrift.length ? formData.overskrift : null,
         frist: formData.frist ? dateToISODate(formData.frist) : null,
         kategori: formData.kategori
     };

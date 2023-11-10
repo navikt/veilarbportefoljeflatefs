@@ -35,7 +35,13 @@ interface FormikPropsValues {
     kategori: KategoriModell;
 }
 
-function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMarkert}: ArbeidslisteModalRedigerProps) {
+function ArbeidslisteModalRediger({
+    bruker,
+    sistEndretAv,
+    sistEndretDato,
+    settMarkert,
+    innloggetVeileder
+}: ArbeidslisteModalRedigerProps) {
     const arbeidslisteStatus = useSelector((state: AppState) => state.arbeidsliste.status);
     const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus === STATUS.PENDING;
     const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +101,13 @@ function ArbeidslisteModalRediger({bruker, sistEndretAv, sistEndretDato, settMar
                     onSubmit={values => {
                         setIsOpen(false);
                         dispatch(
-                            redigerArbeidslisteAction(values, {bruker, sistEndretAv, sistEndretDato, settMarkert})
+                            redigerArbeidslisteAction(values, {
+                                bruker,
+                                sistEndretAv,
+                                sistEndretDato,
+                                settMarkert,
+                                innloggetVeileder
+                            })
                         );
                         trackAmplitude(
                             {
