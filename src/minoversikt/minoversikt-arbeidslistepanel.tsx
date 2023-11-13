@@ -25,7 +25,8 @@ export default function ArbeidslistePanel({
         bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId
             ? bruker.arbeidsliste.sistEndretAv.veilederId
             : String.fromCharCode(8212);
-    const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : String.fromCharCode(8212);
+    const overskrift = !!bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : 'Ingen tekst i tittel';
+    const kommentar = !!bruker.arbeidsliste.kommentar ? bruker.arbeidsliste.kommentar : 'Ingen tekst i kommentar';
 
     let arbeidslisteFristTekst;
     if (bruker.arbeidsliste.frist != null) {
@@ -44,7 +45,7 @@ export default function ArbeidslistePanel({
                         Arbeidsliste frist: {arbeidslisteFristTekst}
                     </Detail>
                     <BodyShort size="small" data-testid="chevron_arbeidslisteinnhold_kommentar">
-                        {bruker.arbeidsliste.kommentar}
+                        {kommentar}
                     </BodyShort>
                     {!bruker.arbeidsliste.hentetKommentarOgTittel && (
                         <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />

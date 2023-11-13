@@ -24,13 +24,17 @@ describe('Arbeidsliste', () => {
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
         cy.get('.legg-i-arbeidsliste').should('be.visible');
+        cy.getByTestId('modal_arbeidsliste_tittel').type('valideringstest på at det ikke er lov med tegn mer enn 30');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-        cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en tittel');
-        cy.getByTestId('modal_arbeidsliste_form').contains('Du må fylle ut en kommentar');
-        cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
-        cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
+        cy.getByTestId('modal_arbeidsliste_form').contains('Tittelen kan ikke være lenger enn 30 tegn.');
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
-        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar skal ikke være lengre enn 500 tegn, så her kommer litt lorum ipsum: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.');
+        cy.getByTestId('modal_arbeidsliste_form').contains('Du må korte ned teksten til 500 tegn');
+        cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en kommentar');
+        cy.getByTestId('modal_arbeidsliste_tittel').clear();
+        cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear();
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar')
         cy.get('#fristDatovelger').type('01.03.2066');
         cy.getByTestId('modal_arbeidslistekategori_GUL').click();
     });
@@ -184,19 +188,36 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
-        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
-        cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Du må fylle ut en tittel');
-        cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Du må fylle ut en kommentar');
-
-        cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
-        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
+        cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann her er det mer enn 30 tegn');
+        cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Tittelen kan ikke være lenger enn 30 tegn.');
         cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
-
+        cy.getByTestId('modal_arbeidsliste_tittel').clear();
+        cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         cy.lukkeArbeidslistePaPerson();
+    });
+
+    it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
+        cy.apneArbeidslistePaPerson();
+
+        cy.get('.arbeidsliste-modal').should('not.exist');
+
+        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+
+        cy.get('.arbeidsliste-modal').should('be.visible');
+
+        cy.getByTestId('modal_arbeidsliste_tittel').clear();
+        cy.getByTestId('modal_arbeidsliste_kommentar').clear();
+
+        cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
+
+        cy.get('.arbeidsliste-modal').should('not.exist');
+
+        cy.lukkeArbeidslistePaPerson();
+
     });
 
     it('Lagre tittel og kommentar', () => {

@@ -263,7 +263,7 @@ export enum Status {
 
 export interface ArbeidslisteDataModell {
     fnr: string;
-    kommentar: string;
+    kommentar: string | null;
     frist: string | null;
     kategori: KategoriModell | null;
 }
