@@ -208,7 +208,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     ytelseDagpengerErValgtKolonne &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI ||
                         ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
                 }
             />
@@ -216,7 +215,11 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
-                skalVises={ytelseDagpengerErValgtKolonne && ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING}
+                skalVises={
+                    ytelseDagpengerErValgtKolonne &&
+                    (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
+                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
+                }
             />
             {vis_kolonner_for_vurderingsfrist_aap && (
                 <TekstKolonne
