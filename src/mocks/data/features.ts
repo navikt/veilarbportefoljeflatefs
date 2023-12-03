@@ -6,7 +6,7 @@ import {
     ALERTSTRIPE_FEILMELDING,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAP_VURDERINGSFRISTKOLONNER
-} from '../konstanter';
+} from '../../konstanter';
 
 const toggles = {
     [SPOR_OM_TILBAKEMELDING]: true,

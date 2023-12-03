@@ -1,4 +1,4 @@
-import {SessionMeta} from '../middleware/api';
+import {SessionMeta} from '../../middleware/api';
 
 type SessionDataMockConfig = {
     createdAt: string;
