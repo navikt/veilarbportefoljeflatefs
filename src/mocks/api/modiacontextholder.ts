@@ -1,5 +1,5 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import innloggetVeileder from '../../mocks-old/data/innloggetVeileder';
+import innloggetVeileder from '../data/innloggetVeileder';
 
 export const modiacontextholderHandlers: RequestHandler[] = [
     http.get('/modiacontextholder/api/context/aktivenhet', async () => {

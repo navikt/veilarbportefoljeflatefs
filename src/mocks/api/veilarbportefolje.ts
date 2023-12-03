@@ -1,14 +1,14 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import innloggetVeileder from '../../mocks-old/data/innloggetVeileder';
-import me from '../../mocks-old/data/me';
+import innloggetVeileder from '../data/innloggetVeileder';
+import me from '../data/me';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {foedelandListMockData} from '../../mocks-old/data/foedeland';
-import {tolkebehovSpraakMockData} from '../../mocks-old/data/tolkebehovSpraak';
-import {geografiskBostedListMockData} from '../../mocks-old/data/geografiskBosted';
-import {statustallEnhet, statustallVeileder} from '../../mocks-old/data/statustall';
-import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from '../../mocks-old/data/portefolje';
-import lagPortefoljeStorrelser from '../../mocks-old/data/portefoljestorrelser';
-import tiltak from '../../mocks-old/data/tiltak';
+import {foedelandListMockData} from '../data/foedeland';
+import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
+import {geografiskBostedListMockData} from '../data/geografiskBosted';
+import {statustallEnhet, statustallVeileder} from '../data/statustall';
+import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from '../data/portefolje';
+import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
+import tiltak from '../data/tiltak';
 import {ArbeidslisteDataModell} from '../../model-interfaces';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {

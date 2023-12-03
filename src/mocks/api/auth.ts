@@ -1,7 +1,7 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from '../../mocks-old/data/session';
+import {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from '../data/session';
 import {SessionMeta} from '../../middleware/api';
-import getSessionData from '../../mocks-old/data/session';
+import getSessionData from '../data/session';
 
 let sessionBaseTimestamp = Date.now();
 let sessionDataMockConfig = defaultSessionDataMockConfig(sessionBaseTimestamp);

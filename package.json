@@ -44,8 +44,7 @@
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
     "msw": "^2.0.9",
-    "prettier": "2.8.8",
-    "yet-another-fetch-mock": "4.2.1"
+    "prettier": "2.8.8"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "2.3.2",

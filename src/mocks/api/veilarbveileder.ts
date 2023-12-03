@@ -1,5 +1,5 @@
-import innloggetVeileder from '../../mocks-old/data/innloggetVeileder';
-import {veilederResponse} from '../../mocks-old/data/veiledere';
+import innloggetVeileder from '../data/innloggetVeileder';
+import {veilederResponse} from '../data/veiledere';
 import {http, HttpResponse, RequestHandler} from 'msw';
 
 export const veilarbveilederHandlers: RequestHandler[] = [

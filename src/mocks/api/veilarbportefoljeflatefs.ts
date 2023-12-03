@@ -1,5 +1,5 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
-import features from '../../mocks-old/data/features';
+import features from '../data/features';
 
 export const veilarbportefoljeflatefsHandlers: RequestHandler[] = [
     http.get('/veilarbportefoljeflatefs/api/feature', async () => {

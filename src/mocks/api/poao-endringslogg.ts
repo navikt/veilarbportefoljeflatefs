@@ -1,5 +1,5 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
-import {endringsloggListe} from '../../mocks-old/data/endringslogg';
+import {endringsloggListe} from '../data/endringslogg';
 
 export const poaoEndringsloggHandlers: RequestHandler[] = [
     http.post('https://poao-endringslogg.intern.nav.no/analytics/session-duration', async () => {

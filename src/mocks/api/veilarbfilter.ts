@@ -1,7 +1,7 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
 import {LagretFilter, SorteringOgId} from '../../ducks/lagret-filter';
-import {veiledergrupper} from '../../mocks-old/data/veiledergrupper';
-import {mineFilter} from '../../mocks-old/data/mine-filter';
+import {veiledergrupper} from '../data/veiledergrupper';
+import {mineFilter} from '../data/mine-filter';
 
 let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
