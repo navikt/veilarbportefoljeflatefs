@@ -9,9 +9,7 @@ let customVeiledergrupper = veiledergrupper();
 let customMineFilter = mineFilter();
 
 export const veilarbfilterHandlers: FetchMockHandler[] = [
-    //veiledergrupper
     (fetchMock: FetchMock) => fetchMock.get('/veilarbfilter/api/enhet/:enhetId', jsonResponse(customVeiledergrupper)),
-
     (fetchMock: FetchMock) =>
         fetchMock.put('/veilarbfilter/api/enhet/:enhetId', ({body}, res, ctx) => {
             let oppdatertGruppe = {};
@@ -24,14 +22,12 @@ export const veilarbfilterHandlers: FetchMockHandler[] = [
             }) as LagretFilter[];
             return res(ctx.json(oppdatertGruppe));
         }),
-
     (fetchMock: FetchMock) =>
         fetchMock.post('/veilarbfilter/api/enhet/:enhetId', (req, res, ctx) => {
             const filterId = Math.floor(Math.random() * 100) + 500;
             customVeiledergrupper = [...customVeiledergrupper, {...req.body, filterId}];
             return res(ctx.json({...req.body, filterId}));
         }),
-
     (fetchMock: FetchMock) =>
         fetchMock.delete('/veilarbfilter/api/enhet/:enhetId/filter/:filterId', (req, res, ctx) => {
             const filterId = parseInt(req.pathParams.filterId);
@@ -41,10 +37,7 @@ export const veilarbfilterHandlers: FetchMockHandler[] = [
             }
             return res(ctx.status(401));
         }),
-
-    //mine filter
     (fetchMock: FetchMock) => fetchMock.get('/veilarbfilter/api/minelagredefilter', jsonResponse(customMineFilter)),
-
     (fetchMock: FetchMock) =>
         fetchMock.put('/veilarbfilter/api/minelagredefilter', ({body}, res, ctx) => {
             let filterIndex = customMineFilter.findIndex(elem => elem.filterId === body.filterId);
@@ -52,7 +45,6 @@ export const veilarbfilterHandlers: FetchMockHandler[] = [
             customMineFilter[filterIndex] = {...body, aktiv};
             return res(ctx.json(customMineFilter[filterIndex]));
         }),
-
     (fetchMock: FetchMock) =>
         fetchMock.post('/veilarbfilter/api/minelagredefilter', (req, res, ctx) => {
             const filterId = Math.floor(Math.random() * 100) + 500;
@@ -60,7 +52,6 @@ export const veilarbfilterHandlers: FetchMockHandler[] = [
             customMineFilter = [...customMineFilter, {...req.body, filterId, aktiv}];
             return res(ctx.json({...req.body, filterId, aktiv}));
         }),
-
     (fetchMock: FetchMock) =>
         fetchMock.delete('/veilarbfilter/api/minelagredefilter/:filterId', (req, res, ctx) => {
             const filterId = parseInt(req.pathParams.filterId);
@@ -70,7 +61,6 @@ export const veilarbfilterHandlers: FetchMockHandler[] = [
             }
             return res(ctx.status(401));
         }),
-
     (fetchMock: FetchMock) =>
         fetchMock.post('/veilarbfilter/api/minelagredefilter/lagresortering', (req, res, ctx) => {
             const sorteringer = req.body as SorteringOgId[];
