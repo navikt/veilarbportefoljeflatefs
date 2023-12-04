@@ -1,4 +1,5 @@
 import {http, HttpResponse, RequestHandler} from 'msw';
+import {withAuth} from './auth';
 
 function tildel(body: any) {
     return {feilendeTilordninger: []}; //uten feilende brukere
@@ -7,9 +8,12 @@ function tildel(body: any) {
 }
 
 export const veilarboppfolgingHandlers: RequestHandler[] = [
-    http.post('/veilarboppfolging/api/tilordneveileder', async ({request}) => {
-        const opprettTilordningRequest = await request.json();
+    http.post(
+        '/veilarboppfolging/api/tilordneveileder',
+        withAuth(async ({request}) => {
+            const opprettTilordningRequest = await request.json();
 
-        return HttpResponse.json(tildel(opprettTilordningRequest));
-    })
+            return HttpResponse.json(tildel(opprettTilordningRequest));
+        })
+    )
 ];

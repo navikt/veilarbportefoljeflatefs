@@ -10,6 +10,7 @@ import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
 import {ArbeidslisteDataModell} from '../../model-interfaces';
+import {withAuth} from './auth';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -49,102 +50,159 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
 }
 
 export const veilarbportefoljeHandlers: RequestHandler[] = [
-    http.get('/veilarbportefolje/api/enhet/:enhetId/statustall', async () => {
-        await delay(500);
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/statustall',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(statustallVeileder);
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/portefolje/statustall', async () => {
-        await delay(500);
+            return HttpResponse.json(statustallVeileder);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/portefolje/statustall',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(statustallEnhet);
-    }),
-    http.post('/veilarbportefolje/api/enhet/:enhetId/portefolje', async ({params, request}) => {
-        const queryParams = new URL(request.url).searchParams;
-        const portfolje = lagPortefolje(
-            {fra: queryParams.get('fra'), antall: queryParams.get('antall')},
-            params.enhetId as string,
-            brukere
-        );
+            return HttpResponse.json(statustallEnhet);
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/enhet/:enhetId/portefolje',
+        withAuth(async ({params, request}) => {
+            const queryParams = new URL(request.url).searchParams;
+            const portfolje = lagPortefolje(
+                {fra: queryParams.get('fra'), antall: queryParams.get('antall')},
+                params.enhetId as string,
+                brukere
+            );
 
-        return HttpResponse.json(portfolje);
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser', async () => {
-        return HttpResponse.json(lagPortefoljeStorrelser());
-    }),
-    http.post('/veilarbportefolje/api/veileder/:ident/portefolje', async ({request}) => {
-        const queryParams = new URL(request.url).searchParams;
-        const portefolje = lagPortefoljeForVeileder(
-            {fra: queryParams.get('fra'), antall: queryParams.get('antall')},
-            brukere
-        );
+            return HttpResponse.json(portfolje);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser',
+        withAuth(async () => {
+            return HttpResponse.json(lagPortefoljeStorrelser());
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/veileder/:ident/portefolje',
+        withAuth(async ({request}) => {
+            const queryParams = new URL(request.url).searchParams;
+            const portefolje = lagPortefoljeForVeileder(
+                {fra: queryParams.get('fra'), antall: queryParams.get('antall')},
+                brukere
+            );
 
-        return HttpResponse.json(portefolje);
-    }),
-    http.get('/veilarbportefolje/api/veileder/:veileder/statustall', async () => {
-        await delay(500);
+            return HttpResponse.json(portefolje);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/veileder/:veileder/statustall',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(statustallVeileder);
-    }),
-    http.get('/veilarbportefolje/api/veileder/:veileder/portefolje/statustall', async () => {
-        await delay(500);
+            return HttpResponse.json(statustallVeileder);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/veileder/:veileder/portefolje/statustall',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(statustallVeileder);
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/tiltak', async () => {
-        return HttpResponse.json(tiltak);
-    }),
-    http.get('/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder', async () => {
-        return HttpResponse.json(hentArbeidsliste());
-    }),
-    http.post('/veilarbportefolje/api/v2/hent-arbeidsliste', async ({request}) => {
-        const hentArbeidslisteRequest = (await request.json()) as {fnr: string};
+            return HttpResponse.json(statustallVeileder);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/tiltak',
+        withAuth(async () => {
+            return HttpResponse.json(tiltak);
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder',
+        withAuth(async () => {
+            return HttpResponse.json(hentArbeidsliste());
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/v2/hent-arbeidsliste',
+        withAuth(async ({request}) => {
+            const hentArbeidslisteRequest = (await request.json()) as {fnr: string};
 
-        return HttpResponse.json(hentArbeidslisteForBruker({fodselsnummer: hentArbeidslisteRequest.fnr}));
-    }),
-    http.get('/veilarbportefolje/api/veileder/:veileder/moteplan', async () => {
-        return HttpResponse.json(hentMockPlan());
-    }),
-    http.post('/veilarbportefolje/api/arbeidsliste', async ({request}) => {
-        const opprettArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell[];
+            return HttpResponse.json(hentArbeidslisteForBruker({fodselsnummer: hentArbeidslisteRequest.fnr}));
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/veileder/:veileder/moteplan',
+        withAuth(async () => {
+            return HttpResponse.json(hentMockPlan());
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/arbeidsliste',
+        withAuth(async ({request}) => {
+            const opprettArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell[];
 
-        return HttpResponse.json({error: [], data: opprettArbeidslisteRequest.map(arbeidsliste => arbeidsliste.fnr)});
-    }),
-    http.put('/veilarbportefolje/api/v2/arbeidsliste', async ({request}) => {
-        const oppdaterArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell & {overskrift: string};
+            return HttpResponse.json({
+                error: [],
+                data: opprettArbeidslisteRequest.map(arbeidsliste => arbeidsliste.fnr)
+            });
+        })
+    ),
+    http.put(
+        '/veilarbportefolje/api/v2/arbeidsliste',
+        withAuth(async ({request}) => {
+            const oppdaterArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell & {overskrift: string};
 
-        return HttpResponse.json({
-            sistEndretAv: {
-                veilederId: 'Z990007'
-            },
-            endringstidspunkt: '2018-06-21T10:39:17.153Z',
-            kommentar: `${oppdaterArbeidslisteRequest.kommentar}`,
-            overskrift: `${oppdaterArbeidslisteRequest.overskrift}`,
-            frist: `${oppdaterArbeidslisteRequest.frist}`,
-            kategori: `${oppdaterArbeidslisteRequest.kategori}`,
-            isOppfolgendeVeileder: true,
-            arbeidslisteAktiv: null,
-            harVeilederTilgang: true
-        });
-    }),
-    http.post('/veilarbportefolje/api/arbeidsliste/delete', async ({request}) => {
-        const slettArbeidslisterRequest = (await request.json()) as {fnr: string}[];
+            return HttpResponse.json({
+                sistEndretAv: {
+                    veilederId: 'Z990007'
+                },
+                endringstidspunkt: '2018-06-21T10:39:17.153Z',
+                kommentar: `${oppdaterArbeidslisteRequest.kommentar}`,
+                overskrift: `${oppdaterArbeidslisteRequest.overskrift}`,
+                frist: `${oppdaterArbeidslisteRequest.frist}`,
+                kategori: `${oppdaterArbeidslisteRequest.kategori}`,
+                isOppfolgendeVeileder: true,
+                arbeidslisteAktiv: null,
+                harVeilederTilgang: true
+            });
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/arbeidsliste/delete',
+        withAuth(async ({request}) => {
+            const slettArbeidslisterRequest = (await request.json()) as {fnr: string}[];
 
-        return HttpResponse.json({error: [], data: slettArbeidslisterRequest.map(arbeidsliste => arbeidsliste.fnr)});
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/foedeland', async () => {
-        await delay(500);
+            return HttpResponse.json({
+                error: [],
+                data: slettArbeidslisterRequest.map(arbeidsliste => arbeidsliste.fnr)
+            });
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/foedeland',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(foedelandListMockData());
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/tolkSpraak', async () => {
-        await delay(500);
+            return HttpResponse.json(foedelandListMockData());
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/tolkSpraak',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(tolkebehovSpraakMockData());
-    }),
-    http.get('/veilarbportefolje/api/enhet/:enhetId/geografiskbosted', async () => {
-        await delay(500);
+            return HttpResponse.json(tolkebehovSpraakMockData());
+        })
+    ),
+    http.get(
+        '/veilarbportefolje/api/enhet/:enhetId/geografiskbosted',
+        withAuth(async () => {
+            await delay(500);
 
-        return HttpResponse.json(geografiskBostedListMockData());
-    })
+            return HttpResponse.json(geografiskBostedListMockData());
+        })
+    )
 ];
