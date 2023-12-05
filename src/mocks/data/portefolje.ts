@@ -3,7 +3,8 @@ import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {BarnUnder18Aar, KategoriModell} from '../../model-interfaces';
 import moment from 'moment';
-import {MOCK_CONFIG, rnd} from '../utils';
+import {rnd} from '../utils';
+import {MOCK_CONFIG} from '../constants';
 
 faker.seed(MOCK_CONFIG.seed);
 

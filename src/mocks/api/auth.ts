@@ -2,6 +2,7 @@ import {delay, http, HttpResponse, RequestHandler} from 'msw';
 import {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from '../data/session';
 import {SessionMeta} from '../../middleware/api';
 import getSessionData from '../data/session';
+import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
 let sessionBaseTimestamp = Date.now();
 let sessionDataMockConfig = defaultSessionDataMockConfig(sessionBaseTimestamp);
@@ -25,7 +26,7 @@ export const authHandlers: RequestHandler[] = [
     http.get(
         '/oauth2/session',
         withAuth(async () => {
-            await delay(100);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(getSessionData(sessionDataMockConfig));
         })
@@ -33,7 +34,7 @@ export const authHandlers: RequestHandler[] = [
     http.get(
         '/oauth2/session/refresh',
         withAuth(async () => {
-            await delay(100);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             sessionDataMockConfig = defaultSessionDataMockConfig(Date.now(), DEFAULT_SESSION_LIFETIME_IN_SECONDS);
             sessionData = getSessionData(sessionDataMockConfig);

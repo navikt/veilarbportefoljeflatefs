@@ -11,6 +11,7 @@ import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
 import {ArbeidslisteDataModell} from '../../model-interfaces';
 import {withAuth} from './auth';
+import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -53,7 +54,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/statustall',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(statustallVeileder);
         })
@@ -61,7 +62,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/portefolje/statustall',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(statustallEnhet);
         })
@@ -100,7 +101,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/veileder/:veileder/statustall',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(statustallVeileder);
         })
@@ -108,7 +109,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/veileder/:veileder/portefolje/statustall',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(statustallVeileder);
         })
@@ -184,7 +185,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/foedeland',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(foedelandListMockData());
         })
@@ -192,7 +193,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/tolkSpraak',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(tolkebehovSpraakMockData());
         })
@@ -200,7 +201,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/geografiskbosted',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(geografiskBostedListMockData());
         })

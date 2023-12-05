@@ -1,12 +1,14 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
 import innloggetVeileder from '../data/innloggetVeileder';
 import {withAuth} from './auth';
+import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
 export const modiacontextholderHandlers: RequestHandler[] = [
     http.get(
         '/modiacontextholder/api/context/aktivenhet',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
             return HttpResponse.json({
                 aktivBruker: null,
                 aktivEnhet: '1234'
@@ -16,7 +18,8 @@ export const modiacontextholderHandlers: RequestHandler[] = [
     http.get(
         '/modiacontextholder/api/context/aktivbruker',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
             return HttpResponse.json({
                 aktivBruker: null,
                 aktivEnhet: null
@@ -26,7 +29,8 @@ export const modiacontextholderHandlers: RequestHandler[] = [
     http.delete(
         '/modiacontextholder/api/context/aktivbruker',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
             return HttpResponse.json({
                 aktivBruker: null,
                 aktivEnhet: null
@@ -36,7 +40,8 @@ export const modiacontextholderHandlers: RequestHandler[] = [
     http.get(
         '/modiacontextholder/api/decorator',
         withAuth(async () => {
-            await delay(500);
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
             return HttpResponse.json({
                 enheter: innloggetVeileder.enheter,
                 etternavn: innloggetVeileder.etternavn,
