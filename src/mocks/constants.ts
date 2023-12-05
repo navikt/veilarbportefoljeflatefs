@@ -3,4 +3,4 @@ export const MOCK_CONFIG = {
     seed: 9001
 };
 
-export const DEFAULT_DELAY_MILLISECONDS = 100;
+export const DEFAULT_DELAY_MILLISECONDS = 500;

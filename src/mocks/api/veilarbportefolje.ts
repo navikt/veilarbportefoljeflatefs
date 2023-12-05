@@ -176,6 +176,8 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         withAuth(async ({request}) => {
             const slettArbeidslisterRequest = (await request.json()) as {fnr: string}[];
 
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
             return HttpResponse.json({
                 error: [],
                 data: slettArbeidslisterRequest.map(arbeidsliste => arbeidsliste.fnr)
