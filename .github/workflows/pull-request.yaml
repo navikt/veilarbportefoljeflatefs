@@ -17,3 +17,9 @@ jobs:
                   wait-on: http://localhost:3000
                   wait-on-timeout: 90
                   record: false
+            - name: Upload screenshots
+              uses: actions/upload-artifact@v3
+              if: failure()
+              with:
+                name: cypress-screenshots
+                path: cypress/screenshots
