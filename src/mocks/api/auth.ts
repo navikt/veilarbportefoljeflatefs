@@ -1,7 +1,6 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from '../data/session';
+import getSessionData, {DEFAULT_SESSION_LIFETIME_IN_SECONDS, defaultSessionDataMockConfig} from '../data/session';
 import {SessionMeta} from '../../middleware/api';
-import getSessionData from '../data/session';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
 let sessionBaseTimestamp = Date.now();

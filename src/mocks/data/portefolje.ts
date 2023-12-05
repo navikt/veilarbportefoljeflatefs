@@ -333,14 +333,14 @@ const hentSpraak = () => {
 };
 
 const hentBarnUnder18Aar = () => {
-    var barnInfo: BarnUnder18Aar[] = [];
-    let randomArray = new Int8Array(10);
+    const barnInfo: BarnUnder18Aar[] = [];
+    const randomArray = new Int8Array(10);
     window.crypto.getRandomValues(randomArray);
 
     let barnAntall = randomArray[0] % 3;
 
     for (let i = 0; i <= barnAntall; i++) {
-        var singleObj: BarnUnder18Aar = {
+        const singleObj: BarnUnder18Aar = {
             alder: Math.abs(randomArray[i] % 18)
         };
         barnInfo.push(singleObj);

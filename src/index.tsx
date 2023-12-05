@@ -35,7 +35,6 @@ if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
 
-    // require('./mocks-old');
     const {worker} = require('./mocks/index');
     worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
 } else {
