@@ -11,6 +11,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {HelpText} from '@navikt/ds-react';
+import {trackAmplitude} from '../../amplitude/amplitude';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -74,6 +75,13 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}
                         onChange={() => {
+                            trackAmplitude({
+                                name: 'knapp klikket',
+                                data: {
+                                    knapptekst: 'Endre rekkefølge - mine filter',
+                                    effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
+                                }
+                            });
                             setIsMinefiltereDraggable(!isMinefiltereDraggable);
                         }}
                         ariaLabel="Endre rekkefølge"
