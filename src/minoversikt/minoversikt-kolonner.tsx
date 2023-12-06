@@ -94,6 +94,8 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const brukersSituasjonSistEndret = bruker.brukersSituasjonSistEndret
         ? new Date(bruker.brukersSituasjonSistEndret)
         : null;
+
+    const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak: boolean =
@@ -403,6 +405,16 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <DatoKolonne
                 dato={brukersSituasjonSistEndret}
                 skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
+                tekst={bruker.huskelapp?.kommentar || ' '}
+            />
+            <DatoKolonne
+                dato={huskeLappFrist}
+                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
                 className="col col-xs-2"
             />
         </div>

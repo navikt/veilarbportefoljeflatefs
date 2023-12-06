@@ -627,6 +627,26 @@ function MinOversiktListeHode({
                     headerId="dato-endret-situasjon"
                     skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
                 />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.HUSKELAPP}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                    tekst="Huskelapp"
+                    className="col col-xs-2"
+                    headerId="huskelapp"
+                    skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.HUSKELAPP_FRIST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_FRIST}
+                    tekst="Frist huskelapp"
+                    className="col col-xs-2"
+                    headerId="huskelapp-frist"
+                    skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
+                />
             </div>
         </div>
     );
