@@ -14,6 +14,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
+import {FilterStatusHuskelapper} from './FilterStatusHuskelapper';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
@@ -215,6 +216,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     endreFiltervalg={dispatchFiltreringStatusChanged}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
+                <FilterStatusHuskelapper oversiktType={oversiktType} />
             </RadioGroup>
         </div>
     );

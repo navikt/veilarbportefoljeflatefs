@@ -7,7 +7,8 @@ import {
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE
+    VEDTAKSTOTTE,
+    HUSKELAPP
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -22,7 +23,8 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
-    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false
+    [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
+    [HUSKELAPP]: false
 };
 
 // Reducer
