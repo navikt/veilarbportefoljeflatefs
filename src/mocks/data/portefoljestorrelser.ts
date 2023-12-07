@@ -1,5 +1,6 @@
 import {innloggetVeileder, lagTilfeldigVeilederId} from './veiledere';
-import {rnd} from './utils';
+
+import {rnd} from '../utils';
 
 function lagPortefoljeStorrelse() {
     return {

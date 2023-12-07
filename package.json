@@ -43,8 +43,8 @@
         "cypress-dark": "^1.8.3",
         "husky": "8.0.3",
         "lint-staged": "13.2.3",
-        "prettier": "2.8.8",
-        "yet-another-fetch-mock": "4.2.1"
+        "msw": "^2.0.10",
+        "prettier": "2.8.8"
     },
     "dependencies": {
         "@amplitude/analytics-browser": "2.3.2",
@@ -125,5 +125,8 @@
     ],
     "resolutions": {
         "react-error-overlay": "6.0.9"
+    },
+    "msw": {
+        "workerDirectory": "public"
     }
 }

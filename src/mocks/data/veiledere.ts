@@ -1,5 +1,6 @@
-import {rnd, MOCK_CONFIG} from './utils';
 import {faker} from '@faker-js/faker/locale/nb_NO';
+import {rnd} from '../utils';
+import {MOCK_CONFIG} from '../constants';
 
 faker.seed(MOCK_CONFIG.seed);
 

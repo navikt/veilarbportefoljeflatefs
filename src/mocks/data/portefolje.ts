@@ -1,9 +1,10 @@
 import {innloggetVeileder, veiledere} from './veiledere';
-import {aktiviteter, hendelserLabels} from '../filtrering/filter-konstanter';
-import {MOCK_CONFIG, rnd} from './utils';
+import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {BarnUnder18Aar, KategoriModell} from '../model-interfaces';
+import {BarnUnder18Aar, KategoriModell} from '../../model-interfaces';
 import moment from 'moment';
+import {rnd} from '../utils';
+import {MOCK_CONFIG} from '../constants';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -332,14 +333,14 @@ const hentSpraak = () => {
 };
 
 const hentBarnUnder18Aar = () => {
-    var barnInfo: BarnUnder18Aar[] = [];
-    let randomArray = new Int8Array(10);
+    const barnInfo: BarnUnder18Aar[] = [];
+    const randomArray = new Int8Array(10);
     window.crypto.getRandomValues(randomArray);
 
     let barnAntall = randomArray[0] % 3;
 
     for (let i = 0; i <= barnAntall; i++) {
-        var singleObj: BarnUnder18Aar = {
+        const singleObj: BarnUnder18Aar = {
             alder: Math.abs(randomArray[i] % 18)
         };
         barnInfo.push(singleObj);
@@ -375,7 +376,7 @@ export function hentArbeidsliste() {
     return arbeidsliste;
 }
 
-export function hentArbeidslisteForBruker(fnr) {
+export function hentArbeidslisteForBruker(fnr: {fodselsnummer: any}) {
     const {fodselsnummer} = fnr;
     const arbeidslisteForBruker = arbeidsliste.find(
         arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer

@@ -17,7 +17,7 @@ describe('Filter min arbeidsliste', () => {
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('not.exist');
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled');
-    })
+    });
 
     it('Legg til person i lilla arbeidsliste', () => {
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then($tall => {
@@ -25,7 +25,6 @@ describe('Filter min arbeidsliste', () => {
         });
         cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().check();
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.getByTestId('legg-i-arbeidsliste_knapp').click();
@@ -40,5 +39,4 @@ describe('Filter min arbeidsliste', () => {
             expect(antallFor).not.to.eq($tall.text());
         });
     });
-
 });

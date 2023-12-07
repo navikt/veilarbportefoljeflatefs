@@ -25,6 +25,8 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.removeItem('enhetsState');
 }
 
+const renderApp = () => ReactDOM.render(<Application />, document.getElementById('mainapp'));
+
 if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
@@ -32,9 +34,12 @@ if (erMock()) {
     console.log('======== MED MOCK ========');
     // eslint-disable-next-line no-console
     console.log('==========================');
-    require('./mocks');
+
+    const {worker} = require('./mocks/index');
+    worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
 } else {
     initAmplitude();
+    renderApp();
 }
 
 function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
@@ -73,5 +78,3 @@ function settOppCoreWebVitalsMetrikkRapportering() {
 
 // Ved treghet/problemer relatert til rapportering av web vitals metrikker: fjern denne linjen og deploy på nytt
 //settOppCoreWebVitalsMetrikkRapportering();
-
-ReactDOM.render(<Application />, document.getElementById('mainapp'));
