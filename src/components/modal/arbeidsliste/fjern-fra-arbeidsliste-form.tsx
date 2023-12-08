@@ -34,10 +34,13 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBruker
             onSubmit={e => {
                 e.preventDefault();
                 logEvent('portefolje.metrikker.fjern_arbeidsliste');
-                trackAmplitude({
-                    name: 'knapp klikket',
-                    data: {knapptekst: 'Fjern arbeidsliste', effekt: 'Fjern bruker fra arbeidslista'}
-                });
+                trackAmplitude(
+                    {
+                        name: 'knapp klikket',
+                        data: {knapptekst: 'Fjern fra arbeidsliste', effekt: 'Fjern brukere fra arbeidslista'}
+                    },
+                    {antallValgteBrukere: valgteBrukere?.length}
+                );
                 onSubmit(valgteBrukere, lukkModal);
             }}
         >
