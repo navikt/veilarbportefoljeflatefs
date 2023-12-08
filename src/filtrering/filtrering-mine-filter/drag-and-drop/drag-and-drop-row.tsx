@@ -2,6 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
 import FlyttKnappWrapper from './flytt-knapp-wrapper';
 import {kebabCase} from '../../../utils/utils';
+import {trackAmplitude} from '../../../amplitude/amplitude';
 
 export interface DragAndDropRowProps {
     idx: number;
@@ -48,8 +49,20 @@ function DragAndDropRow({
             <FlyttKnappWrapper
                 showUpBtn={idx !== 0}
                 showDownBtn={!isLastRow}
-                onClickUp={() => onClick(idx, idx - 1)}
-                onClickDown={() => onClick(idx, idx + 1)}
+                onClickUp={() => {
+                    trackAmplitude({
+                        name: 'knapp klikket',
+                        data: {knapptekst: 'Endre rekkefølge (pil) - mine filter', effekt: 'Flyttet filter opp'}
+                    });
+                    onClick(idx, idx - 1);
+                }}
+                onClickDown={() => {
+                    trackAmplitude({
+                        name: 'knapp klikket',
+                        data: {knapptekst: 'Endre rekkefølge (pil) - mine filter', effekt: 'Flyttet filter ned'}
+                    });
+                    onClick(idx, idx + 1);
+                }}
                 idx={idx}
             />
         </li>
