@@ -61,6 +61,13 @@ function LeggTilArbeidslisteForm({
         <Formik
             initialValues={{arbeidsliste: initialValues}}
             onSubmit={values => {
+                trackAmplitude(
+                    {
+                        name: 'knapp klikket',
+                        data: {knapptekst: 'Legg til i arbeidsliste', effekt: 'Legger personer inn i arbeidsliste'}
+                    },
+                    {antallValgteBrukere: values.arbeidsliste?.length}
+                );
                 values.arbeidsliste.forEach(value => {
                     logEvent('teamvoff.metrikker.arbeidslistekategori', {
                         kategori: value.kategori,
