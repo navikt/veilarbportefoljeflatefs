@@ -204,7 +204,7 @@ export interface BrukerModell {
 
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
-    huskelapp?: Huskelapp;
+    huskelapp?: HuskelappModell;
 }
 
 interface EnsligeForsorgereOvergangsstonad {
@@ -212,11 +212,6 @@ interface EnsligeForsorgereOvergangsstonad {
     harAktivitetsplikt?: boolean | undefined;
     utlopsDato: Date;
     yngsteBarnsFødselsdato: Date;
-}
-
-interface Huskelapp {
-    kommentar: string;
-    frist: Date;
 }
 
 export interface BarnUnder18Aar {
@@ -260,6 +255,14 @@ export interface ArbeidslisteModell {
     kategori: KategoriModell;
     hentetKommentarOgTittel: boolean;
     navkontorForArbeidsliste?: string;
+}
+
+export interface HuskelappModell {
+    huskelappId?: string | null;
+    frist?: Date | null;
+    kommentar?: string | null;
+    endretDato?: Date | null;
+    endretAv?: string | null;
 }
 
 export enum Status {
