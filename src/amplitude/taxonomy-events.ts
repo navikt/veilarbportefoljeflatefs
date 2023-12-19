@@ -4,4 +4,5 @@ export type AmplitudeEvent =
     | {name: 'navigere'; data: {lenketekst: string; destinasjon: string}}
     | {name: 'modal åpnet'; data: {tekst: string}}
     | {name: 'knapp klikket'; data: {knapptekst: string; effekt: string}}
+    | {name: 'alert vist'; data: {variant: string; tekst: string}}
     | {name: string; data: Record<string, unknown>};
