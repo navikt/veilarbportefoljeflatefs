@@ -18,6 +18,7 @@ import {Collapse} from 'react-collapse';
 import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
 import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
 import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
+import {HuskelappPanel} from './huskelapp/HuskelappPanel';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -128,7 +129,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         )}
                     </div>
                     <ArbeidslisteButton
-                        skalVises={arbeidslisteAktiv}
+                        skalVises={arbeidslisteAktiv || erHuskelappFeatureTogglePa}
                         apen={apen}
                         onClick={e => {
                             handleArbeidslisteButtonClick(e);
@@ -141,15 +142,19 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                 </div>
             </div>
             <Collapse isOpened={apen}>
-                <ArbeidslistePanel
-                    skalVises={arbeidslisteAktiv}
-                    bruker={bruker}
-                    innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
-                    settMarkert={() => {
-                        settMarkert(bruker.fnr, !bruker.markert);
-                    }}
-                    apen={apen}
-                />
+                {erHuskelappFeatureTogglePa ? (
+                    <HuskelappPanel bruker={bruker} />
+                ) : (
+                    <ArbeidslistePanel
+                        skalVises={arbeidslisteAktiv}
+                        bruker={bruker}
+                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                        settMarkert={() => {
+                            settMarkert(bruker.fnr, !bruker.markert);
+                        }}
+                        apen={apen}
+                    />
+                )}
             </Collapse>
         </li>
     );

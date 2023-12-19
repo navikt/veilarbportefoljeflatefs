@@ -1,0 +1,16 @@
+.huskelappPanel {
+    display: flex;
+}
+
+.lagHuskelappInngang {
+    padding: 10px 50px;
+    max-width: 500px;
+}
+
+.eksisterendeArbeidslisteVisning {
+    background: var(--a-gray-200);
+    max-width: 500px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
