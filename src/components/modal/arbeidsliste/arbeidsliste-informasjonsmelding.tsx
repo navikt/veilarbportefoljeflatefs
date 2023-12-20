@@ -6,7 +6,8 @@ import {trackAmplitude} from '../../../amplitude/amplitude';
 const ArbeidslisteInformasjonsmelding = () => (
     <Alert variant="info" className="arbeidsliste-alert" size="small">
         Arbeidslisten er ikke synlig for personen det gjelder. Derfor skal du ikke skrive sensitive opplysninger eller
-        annen informasjon som personen skal ha innsyn i her. Bruk arbeidslisten som huskelapp for deg selv.
+        annen informasjon som personen skal ha innsyn i her. Bruk arbeidslisten som huskelapp for deg selv. Innholdet
+        vil kunne utleveres ved innsynsbegjæring.
         <br />
         <b>
             <Link
