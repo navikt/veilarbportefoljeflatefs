@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
-import './huskelapp.css';
 import {trackAmplitude} from '../../amplitude/amplitude';
 import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
+import {BrukerModell, HuskelappModell} from '../../model-interfaces';
+import {LagHuskelappMedEksisterendeArbeidslisteModal} from './LagHuskelappMedEksisterendeArbeidslisteModal';
 
-export const LagHuskelappInngang = () => {
+export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
     const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
+    const [
+        modalLagHuskelappMedEksisterendeArbeidslisteSkalVises,
+        setModalLagHuskelappMedEksisterendeArbeidslisteSkalVises
+    ] = useState<boolean>(false);
     const onClick = () => {
         trackAmplitude({name: 'modal åpnet', data: {tekst: 'åpnet lag eller endre huskelappmodal'}});
-        setModalLagEllerEndreHuskelappSkalVises(true);
+        bruker?.arbeidsliste?.arbeidslisteAktiv
+            ? setModalLagHuskelappMedEksisterendeArbeidslisteSkalVises(true)
+            : setModalLagEllerEndreHuskelappSkalVises(true);
     };
+
     return (
         <div className="lagHuskelappInngang">
             <HuskelappInfoAlert />
@@ -23,7 +31,17 @@ export const LagHuskelappInngang = () => {
                         setModalLagEllerEndreHuskelappSkalVises(false);
                     }}
                     isModalOpen={modalLagEllerEndreHuskelappSkalVises}
-                    huskelapp={{frist: null, kommentar: null}}
+                    huskelapp={bruker?.huskelapp as HuskelappModell} /*TODO hente opp huskelappen og sende inn her */
+                />
+            )}
+            {modalLagHuskelappMedEksisterendeArbeidslisteSkalVises && (
+                <LagHuskelappMedEksisterendeArbeidslisteModal
+                    onModalClose={() => {
+                        setModalLagHuskelappMedEksisterendeArbeidslisteSkalVises(false);
+                    }}
+                    isModalOpen={modalLagHuskelappMedEksisterendeArbeidslisteSkalVises}
+                    arbeidsliste={bruker?.arbeidsliste}
+                    huskelapp={bruker?.huskelapp as HuskelappModell} /*TODO hente opp huskelappen og sende inn her */
                 />
             )}
         </div>

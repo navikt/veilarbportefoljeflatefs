@@ -1,3 +1,48 @@
+.HuskelappVisning::before {
+    /*flippen i top høyre*/
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #f4f4f4; /*TODO hvordan finner man bakgrunnsfargen som er på panelet truuu*/
+    border-width: 0 18px 18px 0;
+    border-style: solid;
+    border-color: hsl(64, 89%, 84%) transparent;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
+
+    /* Firefox 3.0 damage limitation */
+    display: block;
+    width: 0;
+}
+
+.HuskelappVisning {
+    background-color: #f9fccc;
+    max-height: 200px;
+    max-width: 215px;
+    padding: 10px 20px;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.HuskelappVisning .frist {
+    background: #d8f9ff;
+    border: 1px solid #368da8;
+    padding: 0 5px;
+    display: inline;
+}
+
+.HuskelappVisning .handlingsknapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.HuskelappVisning .handlingsknapper button {
+    margin-left: 5px;
+}
+
 .huskelappPanel {
     display: flex;
 }
@@ -24,5 +69,25 @@
     margin-right: 10px;
 }
 
-.huskelapp-lag-eller-endre-modal {
+.LagEllerEndreHuskelappModal.navds-modal {
+    max-width: 350px;
+}
+
+.LagEllerEndreHuskelappModal .navds-body-short,
+.LagEllerEndreHuskelappModal .navds-alert__wrapper,
+.lagHuskelappMedEksisterendeArbeidslisteModal .navds-body-short,
+.lagHuskelappMedEksisterendeArbeidslisteModal .navds-alert__wrapper {
+    font-size: 14px;
+    line-height: 1.25rem;
+}
+
+.lagHuskelappMedEksisterendeArbeidslisteModal.navds-modal {
+    min-width: 800px;
+}
+
+.lagHuskelappMedEksisterendeArbeidslisteModal .huskelapp-modal-content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 284px 1fr;
+    gap: 15px;
 }
