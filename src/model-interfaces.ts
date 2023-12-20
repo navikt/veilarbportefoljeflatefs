@@ -262,6 +262,14 @@ export interface ArbeidslisteModell {
     navkontorForArbeidsliste?: string;
 }
 
+export interface HuskelappModell {
+    huskelappId?: string | null;
+    frist: Date | null;
+    kommentar: string | null;
+    endretDato?: Date | null;
+    endretAv?: string | null;
+}
+
 export enum Status {
     NOT_STARTED = 'NOT_STARTED',
     PENDING = 'PENDING',

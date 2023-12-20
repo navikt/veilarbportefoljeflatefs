@@ -3,7 +3,7 @@
 }
 
 .lagHuskelappInngang {
-    padding: 10px 50px;
+    margin: 10px 50px;
     max-width: 500px;
 }
 
@@ -13,4 +13,16 @@
     padding: 16px;
     margin-bottom: 10px;
     border-radius: 4px;
+}
+
+.huskelappModalHeader {
+    display: flex;
+    align-items: center;
+}
+
+.huskelappModalHeader svg {
+    margin-right: 10px;
+}
+
+.huskelapp-lag-eller-endre-modal {
 }
