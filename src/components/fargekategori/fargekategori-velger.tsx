@@ -15,6 +15,28 @@ import {Button, Popover} from '@navikt/ds-react';
 export default function FargekategoriPopoverKnapp() {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
+    const [fargekategori, setFargekategori] = useState<FargekategoriModell>(FargekategoriModell.FARGEKATEGORI_INGEN);
+
+    const velgFargekategoriIkon = () => {
+        switch (fargekategori) {
+            case FargekategoriModell.FARGEKATEGORI_A:
+                return <ArbeidslisteikonBlaNy />;
+            case FargekategoriModell.FARGEKATEGORI_B:
+                return <ArbeidslisteikonGronnNy />;
+            case FargekategoriModell.FARGEKATEGORI_C:
+                return <ArbeidslisteikonGulNy />;
+            case FargekategoriModell.FARGEKATEGORI_D:
+                return <ArbeidslisteikonLillaNy />;
+            case FargekategoriModell.FARGEKATEGORI_E:
+                return <ArbeidslisteikonLimeNy />;
+            case FargekategoriModell.FARGEKATEGORI_F:
+                return <ArbeidslisteikonOransjeNy />;
+            case FargekategoriModell.FARGEKATEGORI_INGEN:
+                return <ArbeidslisteikonTomtNy />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <>
@@ -22,7 +44,7 @@ export default function FargekategoriPopoverKnapp() {
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
                 size="small"
-                icon={<ArbeidslisteikonGul />}
+                icon={<ArbeidslisteikonTomtNy />}
                 variant="tertiary"
             />
             <Popover
@@ -32,12 +54,13 @@ export default function FargekategoriPopoverKnapp() {
                 placement="right"
             >
                 <Popover.Content>
-                    <ArbeidslisteikonBlaNy />
-                    <ArbeidslisteikonGulNy />
-                    <ArbeidslisteikonLillaNy />
-                    <ArbeidslisteikonGronnNy />
-                    <ArbeidslisteikonLimeNy />
-                    <ArbeidslisteikonOransjeNy />
+                    <Button icon={<ArbeidslisteikonBlaNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonGulNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonLillaNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonGronnNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonLimeNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonOransjeNy />} size="small" variant="tertiary" />
+                    <Button icon={<ArbeidslisteikonTomtNy />} size="small" variant="tertiary" />
                 </Popover.Content>
             </Popover>
         </>
