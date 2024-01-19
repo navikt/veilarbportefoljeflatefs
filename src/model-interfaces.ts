@@ -233,6 +233,15 @@ export interface AktiviteterModell {
     gruppeaktivitet?: string;
 }
 
+export enum FargekategoriModell {
+    FARGEKATEGORI_A = 'BLA',
+    FARGEKATEGORI_B = 'GRONN',
+    FARGEKATEGORI_C = 'GUL',
+    FARGEKATEGORI_D = 'LILLA',
+    FARGEKATEGORI_E = 'LIMEGRONN',
+    FARGEKATEGORI_F = 'ORANSJE'
+}
+
 export enum KategoriModell {
     BLA = 'BLA',
     LILLA = 'LILLA',

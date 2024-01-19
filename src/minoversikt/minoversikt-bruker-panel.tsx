@@ -16,6 +16,7 @@ import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {Checkbox, Tag} from '@navikt/ds-react';
+import FargekategoriPopoverKnapp from '../components/fargekategori/fargekategori-velger';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -93,6 +94,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
+                    <FargekategoriPopoverKnapp />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}
