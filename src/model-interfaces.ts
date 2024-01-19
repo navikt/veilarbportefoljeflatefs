@@ -234,6 +234,7 @@ export interface AktiviteterModell {
 }
 
 export enum FargekategoriModell {
+    FARGEKATEGORI_INGEN = 'INGEN_KATEGORI',
     FARGEKATEGORI_A = 'BLA',
     FARGEKATEGORI_B = 'GRONN',
     FARGEKATEGORI_C = 'GUL',
