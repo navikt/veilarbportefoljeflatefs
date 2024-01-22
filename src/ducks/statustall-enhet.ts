@@ -26,6 +26,7 @@ interface StatustallInnhold {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
+    mineHuskelapper: number;
 }
 
 export interface StatustallEnhet {
@@ -59,7 +60,8 @@ export const initalStatusState: StatustallEnhetState = {
             nyeBrukereForVeileder: 0,
             moterMedNAVIdag: 0,
             trengerVurdering: 0,
-            underVurdering: 0
+            underVurdering: 0,
+            mineHuskelapper: 0
         },
         utenBrukerinnsyn: {
             totalt: 0,
@@ -79,7 +81,8 @@ export const initalStatusState: StatustallEnhetState = {
             nyeBrukereForVeileder: 0,
             moterMedNAVIdag: 0,
             trengerVurdering: 0,
-            underVurdering: 0
+            underVurdering: 0,
+            mineHuskelapper: 0
         }
     }
 };
