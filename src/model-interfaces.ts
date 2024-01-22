@@ -202,7 +202,7 @@ export interface BrukerModell {
 
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
-    fargekategori?: FargekategoriModell;
+    fargekategori: FargekategoriModell | null;
 }
 
 interface EnsligeForsorgereOvergangsstonad {
@@ -236,13 +236,12 @@ export interface AktiviteterModell {
 }
 
 export enum FargekategoriModell {
-    FARGEKATEGORI_INGEN = 'INGEN_KATEGORI',
-    FARGEKATEGORI_A = 'BLA',
-    FARGEKATEGORI_B = 'GRONN',
-    FARGEKATEGORI_C = 'GUL',
-    FARGEKATEGORI_D = 'LILLA',
-    FARGEKATEGORI_E = 'LIMEGRONN',
-    FARGEKATEGORI_F = 'ORANSJE'
+    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
+    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
+    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
+    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
+    FARGEKATEGORI_F = 'FARGEKATEGORI_F'
 }
 
 export enum KategoriModell {

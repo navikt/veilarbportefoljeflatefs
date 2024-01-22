@@ -1,37 +1,40 @@
 import React, {useRef, useState} from 'react';
-import {ReactComponent as ArbeidslisteikonBlaNy} from '../ikoner/fargekategorier/blaatt-bokmerke.svg';
-import {ReactComponent as ArbeidslisteikonGronnNy} from '../ikoner/fargekategorier/groenn-trekant.svg';
-import {ReactComponent as ArbeidslisteikonGulNy} from '../ikoner/fargekategorier/gul-sirkel.svg';
-import {ReactComponent as ArbeidslisteikonLillaNy} from '../ikoner/fargekategorier/lilla-firkant.svg';
-import {ReactComponent as ArbeidslisteikonLimeNy} from '../ikoner/fargekategorier/lime-halvsirkel.svg';
-import {ReactComponent as ArbeidslisteikonOransjeNy} from '../ikoner/fargekategorier/oransje-femkant.svg';
-import {ReactComponent as ArbeidslisteikonTomtNy} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
+import {ReactComponent as FargekategoriIkonBlattBokmerke} from '../ikoner/fargekategorier/blaatt-bokmerke.svg';
+import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/groenn-trekant.svg';
+import {ReactComponent as FargekategoriIkonGulSirkel} from '../ikoner/fargekategorier/gul-sirkel.svg';
+import {ReactComponent as FargekategoriIkonLillaFirkant} from '../ikoner/fargekategorier/lilla-firkant.svg';
+import {ReactComponent as FargekategoriIkonLimeHalvsirkel} from '../ikoner/fargekategorier/lime-halvsirkel.svg';
+import {ReactComponent as FargekategoriIkonOransjeFemkant} from '../ikoner/fargekategorier/oransje-femkant.svg';
+import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
 import {FargekategoriModell} from '../../model-interfaces';
 import {Button, Popover} from '@navikt/ds-react';
 
-export default function FargekategoriPopoverKnapp(fargekategori) {
+interface FargekategoriPopoverKnappProps {
+    fargekategori: FargekategoriModell | null;
+}
+
+export default function FargekategoriPopoverKnapp({fargekategori}: FargekategoriPopoverKnappProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
-    //    const [fargekategori, setFargekategori] = useState<FargekategoriModell>(FargekategoriModell.FARGEKATEGORI_INGEN);
 
-    const velgFargekategoriIkon = fargekategori => {
-        switch (fargekategori.fargekategori) {
+    const fargekategoriIkonMapper = fargekategori => {
+        switch (fargekategori) {
             case FargekategoriModell.FARGEKATEGORI_A:
-                return <ArbeidslisteikonBlaNy />;
+                return <FargekategoriIkonBlattBokmerke />;
             case FargekategoriModell.FARGEKATEGORI_B:
-                return <ArbeidslisteikonGronnNy />;
+                return <FargekategoriIkonGronnTrekant />;
             case FargekategoriModell.FARGEKATEGORI_C:
-                return <ArbeidslisteikonGulNy />;
+                return <FargekategoriIkonGulSirkel />;
             case FargekategoriModell.FARGEKATEGORI_D:
-                return <ArbeidslisteikonLillaNy />;
+                return <FargekategoriIkonLillaFirkant />;
             case FargekategoriModell.FARGEKATEGORI_E:
-                return <ArbeidslisteikonLimeNy />;
+                return <FargekategoriIkonLimeHalvsirkel />;
             case FargekategoriModell.FARGEKATEGORI_F:
-                return <ArbeidslisteikonOransjeNy />;
-            case FargekategoriModell.FARGEKATEGORI_INGEN:
-                return <ArbeidslisteikonTomtNy />;
+                return <FargekategoriIkonOransjeFemkant />;
+            case null:
+                return <FargekategoriIkonTomtBokmerke />;
             default:
-                return null;
+                return undefined;
         }
     };
 
@@ -41,7 +44,7 @@ export default function FargekategoriPopoverKnapp(fargekategori) {
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
                 size="small"
-                icon={velgFargekategoriIkon(fargekategori)}
+                icon={fargekategoriIkonMapper(fargekategori)}
                 variant="tertiary"
             />
             <Popover
@@ -51,13 +54,13 @@ export default function FargekategoriPopoverKnapp(fargekategori) {
                 placement="right"
             >
                 <Popover.Content>
-                    <Button icon={<ArbeidslisteikonBlaNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonGulNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonLillaNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonGronnNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonLimeNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonOransjeNy />} size="small" variant="tertiary" />
-                    <Button icon={<ArbeidslisteikonTomtNy />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonBlattBokmerke />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonGulSirkel />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonLillaFirkant />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonGronnTrekant />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonLimeHalvsirkel />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonOransjeFemkant />} size="small" variant="tertiary" />
+                    <Button icon={<FargekategoriIkonTomtBokmerke />} size="small" variant="tertiary" />
                 </Popover.Content>
             </Popover>
         </>

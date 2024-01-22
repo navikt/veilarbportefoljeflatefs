@@ -451,6 +451,7 @@ const hentRandomAktivitetsplikt = () => {
 
     return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
 };
+
 const lagFargekategori = () => {
     const fargekategoriType = rnd(1, 9);
     switch (fargekategoriType) {
@@ -467,7 +468,8 @@ const lagFargekategori = () => {
         case 6:
             return FargekategoriModell.FARGEKATEGORI_F;
         default:
-            return FargekategoriModell.FARGEKATEGORI_INGEN;
+            return null;
     }
 };
+
 export default new Array(123).fill(0).map(() => lagBruker());
