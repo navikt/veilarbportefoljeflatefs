@@ -201,6 +201,7 @@ export interface BrukerModell {
 
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
+    fargekategori?: FargekategoriModell;
 }
 
 interface EnsligeForsorgereOvergangsstonad {

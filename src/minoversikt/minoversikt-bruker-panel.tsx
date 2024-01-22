@@ -94,7 +94,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
-                    <FargekategoriPopoverKnapp />
+                    <FargekategoriPopoverKnapp fargekategori={bruker.fargekategori} />
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}

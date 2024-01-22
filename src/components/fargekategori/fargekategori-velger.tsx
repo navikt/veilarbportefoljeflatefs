@@ -6,20 +6,16 @@ import {ReactComponent as ArbeidslisteikonLillaNy} from '../ikoner/fargekategori
 import {ReactComponent as ArbeidslisteikonLimeNy} from '../ikoner/fargekategorier/lime-halvsirkel.svg';
 import {ReactComponent as ArbeidslisteikonOransjeNy} from '../ikoner/fargekategorier/oransje-femkant.svg';
 import {ReactComponent as ArbeidslisteikonTomtNy} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
-import {FargekategoriModell, KategoriModell} from '../../model-interfaces';
+import {FargekategoriModell} from '../../model-interfaces';
 import {Button, Popover} from '@navikt/ds-react';
-import {ReactComponent as ArbeidslisteikonBla} from '../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 
-export default function FargekategoriPopoverKnapp() {
+export default function FargekategoriPopoverKnapp(fargekategori) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
-    const [fargekategori, setFargekategori] = useState<FargekategoriModell>(FargekategoriModell.FARGEKATEGORI_INGEN);
+    //    const [fargekategori, setFargekategori] = useState<FargekategoriModell>(FargekategoriModell.FARGEKATEGORI_INGEN);
 
-    const velgFargekategoriIkon = () => {
-        switch (fargekategori) {
+    const velgFargekategoriIkon = fargekategori => {
+        switch (fargekategori.fargekategori) {
             case FargekategoriModell.FARGEKATEGORI_A:
                 return <ArbeidslisteikonBlaNy />;
             case FargekategoriModell.FARGEKATEGORI_B:
@@ -45,7 +41,7 @@ export default function FargekategoriPopoverKnapp() {
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
                 size="small"
-                icon={<ArbeidslisteikonTomtNy />}
+                icon={velgFargekategoriIkon(fargekategori)}
                 variant="tertiary"
             />
             <Popover

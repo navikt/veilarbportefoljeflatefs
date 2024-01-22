@@ -1,7 +1,7 @@
 import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {BarnUnder18Aar, KategoriModell} from '../../model-interfaces';
+import {BarnUnder18Aar, FargekategoriModell, KategoriModell} from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -249,7 +249,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
-        brukersSituasjonSistEndret: randomDate({past: false})
+        brukersSituasjonSistEndret: randomDate({past: false}),
+        fargekategori: lagFargekategori()
     };
 }
 
@@ -450,5 +451,23 @@ const hentRandomAktivitetsplikt = () => {
 
     return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
 };
-
+const lagFargekategori = () => {
+    const fargekategoriType = rnd(1, 9);
+    switch (fargekategoriType) {
+        case 1:
+            return FargekategoriModell.FARGEKATEGORI_A;
+        case 2:
+            return FargekategoriModell.FARGEKATEGORI_B;
+        case 3:
+            return FargekategoriModell.FARGEKATEGORI_C;
+        case 4:
+            return FargekategoriModell.FARGEKATEGORI_D;
+        case 5:
+            return FargekategoriModell.FARGEKATEGORI_E;
+        case 6:
+            return FargekategoriModell.FARGEKATEGORI_F;
+        default:
+            return FargekategoriModell.FARGEKATEGORI_INGEN;
+    }
+};
 export default new Array(123).fill(0).map(() => lagBruker());
