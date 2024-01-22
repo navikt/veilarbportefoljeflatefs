@@ -2,7 +2,6 @@ import * as React from 'react';
 import {MouseEvent, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import MinOversiktKolonner from './minoversikt-kolonner';
@@ -95,11 +94,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         {''}
                     </Checkbox>
                     <FargekategoriPopoverKnapp fargekategori={bruker.fargekategori} />
-                    <ArbeidslistekategoriVisning
-                        skalVises={arbeidslisteAktiv}
-                        kategori={bruker.arbeidsliste?.kategori}
-                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
-                    />
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

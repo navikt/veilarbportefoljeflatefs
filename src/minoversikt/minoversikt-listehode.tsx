@@ -85,13 +85,13 @@ function MinOversiktListeHode({
                     <VelgalleCheckboks className="velgalle-checkboks" />
                     <SorteringHeader
                         className="arbeidslistekategori__sorteringsheader"
-                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        sortering={Sorteringsfelt.FARGEKATEGORI}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
                         tekst={<ArbeidslisteikonBla />}
                         title="Sorter på farge"
-                        headerId="arbeidslistekategori"
+                        headerId="fargekategori"
                     />
                 </div>
                 <SorteringHeader

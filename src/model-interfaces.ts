@@ -37,6 +37,7 @@ export enum Sorteringsfelt {
     UTKAST_14A_STATUS_ENDRET = 'utkast_14a_status_endret',
     UTKAST_14A_ANSVARLIG_VEILEDER = 'utkast_14a_ansvarlig_veileder',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
+    FARGEKATEGORI = 'fargekategori',
     SISTE_ENDRING = 'siste_endring_kategori',
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt',
     FODELAND = 'fodeland',
