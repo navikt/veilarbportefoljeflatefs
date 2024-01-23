@@ -93,6 +93,16 @@ function MinOversiktListeHode({
                         title="Sorter på farge"
                         headerId="arbeidslistekategori"
                     />
+                    <SorteringHeader
+                        className="huskelapper__sorteringsheader"
+                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        tekst={<ArbeidslisteikonBla />}
+                        title="Sorter på farge"
+                        headerId="arbeidslistekategori"
+                    />
                 </div>
                 <SorteringHeader
                     className="col col-xs-2"
@@ -628,10 +638,10 @@ function MinOversiktListeHode({
                     skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.HUSKELAPP}
+                    sortering={Sorteringsfelt.HUSKELAPP_KOMMENTAR}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_KOMMENTAR}
                     tekst="Huskelapp"
                     className="col col-xs-2"
                     headerId="huskelapp"
