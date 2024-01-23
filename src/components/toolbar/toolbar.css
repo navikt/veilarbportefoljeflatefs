@@ -273,6 +273,14 @@
 .veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader .navds-button {
     min-width: 0;
 }
+.veilarbportefoljeflatefs .huskelapper__sorteringsheader {
+    min-width: 2rem;
+    max-width: 4rem;
+    margin-top: 6px;
+}
+.veilarbportefoljeflatefs .huskelapper__sorteringsheader .navds-button {
+    min-width: 0;
+}
 .veilarbportefoljeflatefs .dropdown--toolbar {
     border-radius: 4px;
     width: auto;
