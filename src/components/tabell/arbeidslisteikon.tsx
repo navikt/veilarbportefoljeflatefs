@@ -25,13 +25,13 @@ export default function ArbeidslistekategoriVisning({skalVises, kategori, dataTe
             case KategoriModell.GUL:
                 return <ArbeidslisteikonGul data-testid={dataTestid} />;
             default:
-                return null;
+                return <div className="tomt-arbeidslisteikon" />;
         }
     };
 
     return (
         <span className="arbeidsliste--ikon" data-testid="brukerliste_span_arbeidslisteikon">
-            {skalVises && velgArbeidslistekategori()}
+            {velgArbeidslistekategori()}
         </span>
     );
 }

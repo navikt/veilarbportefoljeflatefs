@@ -269,6 +269,7 @@
     min-width: 2rem;
     max-width: 4rem;
     margin-top: 6px;
+    margin-left: 6px;
 }
 .veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader .navds-button {
     min-width: 0;
@@ -277,6 +278,11 @@
     min-width: 2rem;
     max-width: 4rem;
     margin-top: 6px;
+    .lenke svg {
+        width: 1.3em;
+        height: 1.3em;
+        stroke: none;
+    }
 }
 .veilarbportefoljeflatefs .huskelapper__sorteringsheader .navds-button {
     min-width: 0;
