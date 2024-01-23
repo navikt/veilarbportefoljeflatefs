@@ -56,7 +56,7 @@ export enum Sorteringsfelt {
 
     BARN_UNDER_18_AAR = 'barn_under_18_aar',
     BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret',
-    HUSKELAPP = 'huskelapp_kommentar',
+    HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist'
 }
 
