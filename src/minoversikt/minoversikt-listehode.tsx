@@ -23,9 +23,10 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './minoversikt.css';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {HUSKELAPP, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -54,6 +55,7 @@ function MinOversiktListeHode({
     valgteKolonner
 }: MinOversiktListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const vis_kolonner_for_huskelapp = useFeatureSelector()(HUSKELAPP);
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
@@ -93,16 +95,18 @@ function MinOversiktListeHode({
                         title="Sorter på farge"
                         headerId="arbeidslistekategori"
                     />
-                    <SorteringHeader
-                        className="huskelapper__sorteringsheader"
-                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        onClick={sorteringOnClick}
-                        rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        tekst={<ArbeidslisteikonBla />}
-                        title="Sorter på farge"
-                        headerId="arbeidslistekategori"
-                    />
+                    {vis_kolonner_for_huskelapp && (
+                        <SorteringHeader
+                            className="huskelapper__sorteringsheader"
+                            sortering={Sorteringsfelt.HUSKELAPP}
+                            onClick={sorteringOnClick}
+                            rekkefolge={sorteringsrekkefolge}
+                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                            tekst={<HuskelappIkon />}
+                            title="Sorter på huskelapp"
+                            headerId="huskelapp"
+                        />
+                    )}
                 </div>
                 <SorteringHeader
                     className="col col-xs-2"
