@@ -223,6 +223,8 @@ export function oppdaterArbeidsliste(arbeidsliste, fnr) {
     return fetchToJson(url, config);
 }
 
+export function oppdaterFargekategori(fargekategori, fnr) {}
+
 export function slettArbeidsliste(arbeidsliste) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
