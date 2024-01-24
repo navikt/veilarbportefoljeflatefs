@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
 import {Alert, Heading} from '@navikt/ds-react';
+import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -48,7 +49,12 @@ function Toolbar(props: ToolbarProps) {
     const oversikt = side => {
         switch (side) {
             case OversiktType.minOversikt:
-                return <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />;
+                return (
+                    <>
+                        <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
+                        <FargekategoriToolbarKnapp />
+                    </>
+                );
             case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">
