@@ -2,6 +2,7 @@ import * as React from 'react';
 import {MouseEvent, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import MinOversiktKolonner from './minoversikt-kolonner';
@@ -11,10 +12,12 @@ import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../konstanter';
+import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Checkbox, Tag} from '@navikt/ds-react';
+import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
+import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
+import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
 import FargekategoriPopoverKnapp from '../components/fargekategori/fargekategori-velger';
 
 interface MinOversiktBrukerPanelProps {
@@ -32,6 +35,8 @@ interface MinOversiktBrukerPanelProps {
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xPos') || '0');
         const yPos = parseInt(localStorage.getItem('yPos') || '0');
@@ -94,6 +99,20 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         {''}
                     </Checkbox>
                     <FargekategoriPopoverKnapp fargekategori={bruker.fargekategori} />
+                    <ArbeidslistekategoriVisning
+                        skalVises={arbeidslisteAktiv}
+                        kategori={bruker.arbeidsliste?.kategori}
+                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
+                    />
+                    {erHuskelappFeatureTogglePa && (
+                        <BodyShort>
+                            {bruker.huskelapp ? (
+                                <HuskelappIkon className="huskelappikon" />
+                            ) : (
+                                <InaktivHuskelappIkon className="huskelappikon" />
+                            )}
+                        </BodyShort>
+                    )}
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

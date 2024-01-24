@@ -41,6 +41,7 @@ export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
+export const HUSKELAPP = 'MINE_HUSKELAPPER';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -70,7 +71,8 @@ export const mapFilternavnTilFilterValue = {
     hovedmalUlik: HOVEDMAL_ULIK,
     innsatsgruppeUlik: INNSATSGRUPPE_ULIK,
     innsatsgruppeOgHovedmalUlik: INNSATSGRUPPE_OG_HOVEDMAL_ULIK,
-    innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE
+    innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE,
+    huskelapp: HUSKELAPP
 };
 
 export const filterSomIkkeSkalSendesTilBackend = [mapFilternavnTilFilterValue.harAvvik];
@@ -95,7 +97,8 @@ export const ferdigfilterListe = {
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
-    MIN_ARBEIDSLISTE: 'Min arbeidsliste'
+    MIN_ARBEIDSLISTE: 'Min arbeidsliste',
+    MINE_HUSKELAPPER: 'Huskelapper'
 };
 
 export const arbeidslisteKategori = {
