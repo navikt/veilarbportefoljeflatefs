@@ -9,7 +9,7 @@ import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell} from '../../model-interfaces';
+import {ArbeidslisteDataModell, FargekategoriDataModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
@@ -206,6 +206,19 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(geografiskBostedListMockData());
+        })
+    ),
+    http.put(
+        '/veilarbportefolje/api/fargekategori',
+        withAuth(async ({request}) => {
+            const oppdaterFargekategoriRequest = (await request.json()) as FargekategoriDataModell;
+
+            return HttpResponse.json({
+                sistEndretAv: {
+                    veilederId: 'Z990007'
+                },
+                kategori: `${oppdaterFargekategoriRequest.fargekategori}`
+            });
         })
     )
 ];

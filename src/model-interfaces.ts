@@ -279,6 +279,11 @@ export interface ArbeidslisteDataModell {
     kategori: KategoriModell | null;
 }
 
+export interface FargekategoriDataModell {
+    fnr: string;
+    veilederIdent: string;
+    fargekategori: FargekategoriModell | null;
+}
 export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';

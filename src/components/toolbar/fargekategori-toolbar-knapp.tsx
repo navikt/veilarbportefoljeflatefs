@@ -7,10 +7,6 @@ export default function FargekategoriToolbarKnapp() {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
-    const handleFargekategoriValg = () => {
-        // TODO: send request to backend with fargekategori change for selected users
-    };
-
     return (
         <>
             <Button
@@ -27,7 +23,6 @@ export default function FargekategoriToolbarKnapp() {
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}
-                handleButtonClick={handleFargekategoriValg}
                 placement="top-start"
             />
         </>
