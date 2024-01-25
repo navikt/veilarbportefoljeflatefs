@@ -6,6 +6,7 @@ import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
 import {filterSomIkkeSkalSendesTilBackend} from '../filtrering/filter-konstanter';
+import {EndreHuskelapp, LagreHuskelapp} from '../ducks/huskelapp';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -226,6 +227,30 @@ export function oppdaterArbeidsliste(arbeidsliste, fnr) {
 export function slettArbeidsliste(arbeidsliste) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
+    return fetchToJson(url, config);
+}
+
+export function lagreHuskelapp(huskelapp: LagreHuskelapp) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(huskelapp)};
+    return fetchToJson(url, config);
+}
+
+export function endreHuskelapp(huskelapp: EndreHuskelapp) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(huskelapp)};
+    return fetchToJson(url, config);
+}
+
+export function hentHuskelappForBruker(fnr: string, enhetId: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr, enhetId})};
+    return fetchToJson(url, config);
+}
+
+export function slettHuskelapp(huskelappId: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({huskelappId})};
     return fetchToJson(url, config);
 }
 

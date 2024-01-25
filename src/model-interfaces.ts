@@ -264,8 +264,8 @@ export interface ArbeidslisteModell {
 
 export interface HuskelappModell {
     huskelappId?: string | null;
-    frist: Date | null;
-    kommentar: string | null;
+    frist?: Date | null;
+    kommentar?: string | null;
     endretDato?: Date | null;
     endretAv?: string | null;
 }

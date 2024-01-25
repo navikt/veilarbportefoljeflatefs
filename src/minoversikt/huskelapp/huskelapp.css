@@ -5,12 +5,12 @@
     top: 0;
     right: 0;
     background: #f4f4f4; /*TODO hvordan finner man bakgrunnsfargen som er på panelet truuu*/
-    border-width: 0 18px 18px 0;
+    border-width: 0 20px 20px 0;
     border-style: solid;
     border-color: hsl(64, 89%, 84%) transparent;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(113, 92, 40, 0.1);
+    -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(0, 0, 0, 0.1);
 
     /* Firefox 3.0 damage limitation */
     display: block;
@@ -20,26 +20,20 @@
 .HuskelappVisning {
     background-color: #f9fccc;
     max-height: 200px;
-    max-width: 215px;
-    padding: 10px 20px;
-    margin: 10px;
+    max-width: 200px;
+    padding: 0.75rem 0.5rem 0.5rem 0.75rem;
+    margin: 10px 50px;
     position: relative;
     overflow: hidden;
 }
 
-.HuskelappVisning .frist {
-    background: #d8f9ff;
-    border: 1px solid #368da8;
-    padding: 0 5px;
-    display: inline;
-}
-
-.HuskelappVisning .handlingsknapper {
+.huskelapp-handlingsknapper {
     display: flex;
     justify-content: flex-end;
 }
 
-.HuskelappVisning .handlingsknapper button {
+.huskelapp-handlingsknapper button {
+    margin-top: 0.5rem;
     margin-left: 5px;
 }
 

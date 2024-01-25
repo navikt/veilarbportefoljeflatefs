@@ -64,7 +64,7 @@ function FjernFraArbeidslisteForm({lukkModal, valgteBrukere, onSubmit, visBruker
     );
 }
 
-function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
+export function oppdaterState(res, lukkModal: () => void, arbeidsliste: ArbeidslisteDataModell[], dispatch) {
     lukkModal();
     if (!res) {
         return visServerfeilModal()(dispatch);

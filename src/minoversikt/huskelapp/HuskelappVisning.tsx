@@ -1,37 +1,37 @@
 import React, {useState} from 'react';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {HuskelappModell} from '../../model-interfaces';
+import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
+import {toDatePrettyPrint} from '../../utils/dato-utils';
 
 interface Props {
     huskelapp: HuskelappModell;
+    bruker: BrukerModell;
 }
-export const HuskelappVisning = ({huskelapp}: Props) => {
+export const HuskelappVisning = ({bruker, huskelapp}: Props) => {
     const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
 
     return (
         <>
             <div className="HuskelappVisning">
-                {huskelapp.frist && <BodyShort className="frist">Frist: {huskelapp.frist}</BodyShort>}
-                <BodyShort>{huskelapp.kommentar}</BodyShort>
-                <BodyShort>
-                    <i>Endret 03.01.2023 av Z945654</i>
+                <BodyShort as="div" size="small">
+                    <b>{huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}</b>
                 </BodyShort>
-                <div className="handlingsknapper">
-                    <Button
-                        type="button"
-                        size="xsmall"
-                        variant="secondary-neutral"
-                        onClick={() => {}}
-                        icon={<TrashIcon />}
-                    >
+                <BodyShort>{huskelapp?.kommentar}</BodyShort>
+                <BodyShort as="div" size="small">
+                    <i>
+                        Endret {toDatePrettyPrint(huskelapp?.endretDato)} av {huskelapp?.endretAv}
+                    </i>
+                </BodyShort>
+                <div className="huskelapp-handlingsknapper">
+                    <Button type="button" size="xsmall" variant="secondary" onClick={() => {}} icon={<TrashIcon />}>
                         Slett
                     </Button>
                     <Button
                         type="button"
                         size="xsmall"
-                        variant="primary-neutral"
+                        variant="primary"
                         onClick={() => setModalLagEllerEndreHuskelappSkalVises(true)}
                     >
                         Endre
@@ -45,6 +45,7 @@ export const HuskelappVisning = ({huskelapp}: Props) => {
                     }}
                     isModalOpen={modalLagEllerEndreHuskelappSkalVises}
                     huskelapp={huskelapp}
+                    bruker={bruker}
                 />
             )}
         </>

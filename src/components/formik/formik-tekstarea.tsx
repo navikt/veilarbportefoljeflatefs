@@ -8,9 +8,10 @@ interface FormikTekstAreaProps {
     label?: string;
     testId?: string;
     maxLengde: number;
+    className?: string;
 }
 
-function FormikTekstArea({name, index, label = '', testId, maxLengde}: FormikTekstAreaProps) {
+function FormikTekstArea({name, index, label = '', testId, maxLengde, className}: FormikTekstAreaProps) {
     const indexId = index ? `_${index}` : '';
 
     const validate = (value: string) => {
@@ -39,6 +40,7 @@ function FormikTekstArea({name, index, label = '', testId, maxLengde}: FormikTek
                         error={feil}
                         maxLength={maxLengde}
                         data-testid={`${testId}${indexId}`}
+                        className={className}
                     />
                 );
             }}

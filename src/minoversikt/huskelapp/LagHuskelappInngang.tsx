@@ -32,6 +32,7 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
                     }}
                     isModalOpen={modalLagEllerEndreHuskelappSkalVises}
                     huskelapp={bruker?.huskelapp as HuskelappModell} /*TODO hente opp huskelappen og sende inn her */
+                    bruker={bruker}
                 />
             )}
             {modalLagHuskelappMedEksisterendeArbeidslisteSkalVises && (
