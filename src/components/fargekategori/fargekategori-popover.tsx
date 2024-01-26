@@ -1,14 +1,16 @@
 import React from 'react';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
-import {FargekategoriModell} from '../../model-interfaces';
+import {BrukerModell, FargekategoriModell} from '../../model-interfaces';
+import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
+import {oppdaterFargekategori} from '../../ducks/portefolje';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
-    brukere?: string[];
+    bruker: BrukerModell;
     toolbarknapp?: boolean;
     placement?: 'right' | 'top-start';
 }
@@ -17,12 +19,23 @@ export default function FargekategoriPopover({
     buttonRef,
     openState,
     setOpenState,
-    brukere,
-    toolbarknapp,
+    bruker,
     placement = 'right'
 }: FargekategoriPopoverProps) {
-    const sendOppdaterFargekategori = (brukere, fargekategori) => {
-        //    console.log('knappen er trykka');
+    const dispatch = useDispatch();
+    const doOppdaterFargekategori = fargekategori => {
+        return dispatch(oppdaterFargekategori(fargekategori));
+    };
+
+    const sendOppdaterFargekategori = (bruker, fargekategori) => {
+        // eslint-disable-next-line
+        console.log('knappen er trykka');
+        const data = {
+            fnr: bruker.fnr,
+            veilederIdent: bruker.veilederIdent,
+            fargekategori: fargekategori
+        };
+        doOppdaterFargekategori(fargekategori);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -33,7 +46,7 @@ export default function FargekategoriPopover({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
-                    sendOppdaterFargekategori(brukere, fargekategori);
+                    sendOppdaterFargekategori(bruker, fargekategori);
                 }}
             />
         );

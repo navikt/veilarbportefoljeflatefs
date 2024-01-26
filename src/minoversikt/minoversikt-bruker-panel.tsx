@@ -58,6 +58,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
     const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
+
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
@@ -93,7 +94,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
-                    <FargekategoriPopoverKnapp fargekategori={bruker.fargekategori} />
+                    <FargekategoriPopoverKnapp bruker={bruker} />
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

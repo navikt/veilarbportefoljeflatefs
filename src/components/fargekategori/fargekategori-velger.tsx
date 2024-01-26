@@ -1,14 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {FargekategoriModell} from '../../model-interfaces';
+import {BrukerModell, FargekategoriModell} from '../../model-interfaces';
 import {Button} from '@navikt/ds-react';
 import FargekategoriPopover from './fargekategori-popover';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 
 interface FargekategoriPopoverKnappProps {
-    fargekategori: FargekategoriModell | null;
+    bruker: BrukerModell;
 }
 
-export default function FargekategoriPopoverKnapp({fargekategori}: FargekategoriPopoverKnappProps) {
+export default function FargekategoriPopoverKnapp({bruker}: FargekategoriPopoverKnappProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -18,10 +18,15 @@ export default function FargekategoriPopoverKnapp({fargekategori}: Fargekategori
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
                 size="small"
-                icon={fargekategoriIkonMapper(fargekategori)}
+                icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 variant="tertiary"
             />
-            <FargekategoriPopover buttonRef={buttonRef} openState={openState} setOpenState={setOpenState} />
+            <FargekategoriPopover
+                bruker={bruker}
+                buttonRef={buttonRef}
+                openState={openState}
+                setOpenState={setOpenState}
+            />
         </>
     );
 }

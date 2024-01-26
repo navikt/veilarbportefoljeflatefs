@@ -3,7 +3,7 @@ import {BookmarkIcon} from '@navikt/aksel-icons';
 import {Button} from '@navikt/ds-react';
 import FargekategoriPopover from '../fargekategori/fargekategori-popover';
 
-export default function FargekategoriToolbarKnapp() {
+export default function FargekategoriToolbarKnapp(bruker) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -20,6 +20,7 @@ export default function FargekategoriToolbarKnapp() {
                 Fargekategori
             </Button>
             <FargekategoriPopover
+                bruker={bruker}
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}

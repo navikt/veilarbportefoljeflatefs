@@ -30,6 +30,7 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
+const OPPDATER_FARGEKATEGORI = 'veilarbportefolje/portefolje/FARGEKATEGORI';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
@@ -409,4 +410,16 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
             });
         });
     };
+}
+
+export function oppdaterFargekategori(fargekategori) {
+    // eslint-disable-next-line
+    console.log('I oppdaterFargekategori i portefolje.ts');
+    return dispatch =>
+        Api.oppdaterFargekategori(fargekategori).then(fargekategori => {
+            dispatch({
+                type: OPPDATER_FARGEKATEGORI,
+                fargekategori
+            });
+        });
 }

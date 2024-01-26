@@ -229,6 +229,14 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
+export function oppdaterFargekategori(bruker) {
+    const url = `${VEILARBPORTEFOLJE_URL}/fargekategori`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({bruker})};
+    // eslint-disable-next-line
+    console.log('I oppdaterFargekategori i api.ts', bruker);
+    return fetchToJson(url, config);
+}
+
 export function hentEnhetTiltak(enhetId) {
     const url = `${VEILARBPORTEFOLJE_URL}/enhet/${enhetId}/tiltak`;
     return fetchToJson(url, MED_CREDENTIALS);
