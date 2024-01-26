@@ -230,7 +230,7 @@ export function slettArbeidsliste(arbeidsliste) {
 }
 
 export function oppdaterFargekategori(bruker) {
-    const url = `${VEILARBPORTEFOLJE_URL}/fargekategori`;
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({bruker})};
     // eslint-disable-next-line
     console.log('I oppdaterFargekategori i api.ts', bruker);

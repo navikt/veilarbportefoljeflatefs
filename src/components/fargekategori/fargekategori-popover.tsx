@@ -32,10 +32,9 @@ export default function FargekategoriPopover({
         console.log('knappen er trykka');
         const data = {
             fnr: bruker.fnr,
-            veilederIdent: bruker.veilederIdent,
             fargekategori: fargekategori
         };
-        doOppdaterFargekategori(fargekategori);
+        doOppdaterFargekategori(data);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {

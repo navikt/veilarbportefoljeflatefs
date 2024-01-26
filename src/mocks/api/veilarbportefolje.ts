@@ -209,15 +209,13 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         })
     ),
     http.put(
-        '/veilarbportefolje/api/fargekategori',
+        '/veilarbportefolje/api/v1/fargekategori',
         withAuth(async ({request}) => {
             const oppdaterFargekategoriRequest = (await request.json()) as FargekategoriDataModell;
 
             return HttpResponse.json({
-                sistEndretAv: {
-                    veilederId: 'Z990007'
-                },
-                kategori: `${oppdaterFargekategoriRequest.fargekategori}`
+                fnr: '11111111111',
+                fargekategori: 'FARGEKATEGORI_A'
             });
         })
     )
