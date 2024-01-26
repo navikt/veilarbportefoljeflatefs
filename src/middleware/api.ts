@@ -229,11 +229,11 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
-export function oppdaterFargekategori(bruker) {
+export function oppdaterFargekategori(fargekategori) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({bruker})};
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({fargekategori})};
     // eslint-disable-next-line
-    console.log('I oppdaterFargekategori i api.ts', bruker);
+    console.log('I oppdaterFargekategori i api.ts', fargekategori);
     return fetchToJson(url, config);
 }
 

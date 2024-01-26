@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
-import {BrukerModell, FargekategoriModell} from '../../model-interfaces';
+import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
@@ -19,22 +19,23 @@ export default function FargekategoriPopover({
     buttonRef,
     openState,
     setOpenState,
-    brukere,
+    bruker,
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch = useDispatch();
-    const doOppdaterFargekategori = fargekategori => {
-        return dispatch(oppdaterFargekategori(fargekategori));
-    };
 
-    const sendOppdaterFargekategori = (bruker, fargekategori) => {
-        // eslint-disable-next-line
-        console.log('knappen er trykka');
-        const data = {
-            fnr: bruker.fnr,
+    const doOppdaterFargekategori = (fnr, fargekategori) => {
+        const data: FargekategoriDataModell = {
+            fnr: fnr,
             fargekategori: fargekategori
         };
-        doOppdaterFargekategori(data);
+        return dispatch(oppdaterFargekategori(data));
+    };
+
+    const sendOppdaterFargekategori = fargekategori => {
+        // eslint-disable-next-line
+        console.log('knappen er trykka');
+        doOppdaterFargekategori(bruker.fnr, fargekategori);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -45,7 +46,7 @@ export default function FargekategoriPopover({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
-                    sendOppdaterFargekategori(bruker, fargekategori);
+                    sendOppdaterFargekategori(fargekategori);
                 }}
             />
         );
