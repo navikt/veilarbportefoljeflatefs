@@ -4,6 +4,12 @@ import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
 import {toDatePrettyPrint} from '../../utils/dato-utils';
+import {slettHuskelappAction} from '../../ducks/huskelapp';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../../reducer';
+import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
+import {leggTilStatustall} from '../../ducks/statustall-veileder';
 
 interface Props {
     huskelapp: HuskelappModell;
@@ -11,6 +17,13 @@ interface Props {
 }
 export const HuskelappVisning = ({bruker, huskelapp}: Props) => {
     const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+
+    const handleSlettHuskelapp = () => {
+        dispatch(slettHuskelappAction(huskelapp.huskelappId!!)).then(
+            dispatch(leggTilStatustall('mineHuskelapper', -1))
+        );
+    };
 
     return (
         <>
@@ -25,7 +38,13 @@ export const HuskelappVisning = ({bruker, huskelapp}: Props) => {
                     </i>
                 </BodyShort>
                 <div className="huskelapp-handlingsknapper">
-                    <Button type="button" size="xsmall" variant="secondary" onClick={() => {}} icon={<TrashIcon />}>
+                    <Button
+                        type="button"
+                        size="xsmall"
+                        variant="secondary"
+                        onClick={handleSlettHuskelapp}
+                        icon={<TrashIcon />}
+                    >
                         Slett
                     </Button>
                     <Button

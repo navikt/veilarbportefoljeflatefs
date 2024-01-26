@@ -1,11 +1,11 @@
 import React from 'react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
-import {Form, Formik} from 'formik';
+import {ErrorMessage, Form, Formik} from 'formik';
 import FormikTekstArea from '../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../components/formik/formik-datovelger/formik-datovelger';
 import {Button} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
-import {lagreHuskelappAction} from '../../ducks/huskelapp';
+import {endreHuskelappAction, lagreHuskelappAction} from '../../ducks/huskelapp';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {useDispatch} from 'react-redux';
@@ -14,6 +14,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
 import {hentHuskelappForBruker} from '../../ducks/portefolje';
+import {visServerfeilModal} from '../../ducks/modal-serverfeil';
 
 interface Props {
     huskelapp: HuskelappModell;
@@ -28,27 +29,44 @@ export const LagEllerEndreHuskelappForm = ({huskelapp, onModalClose, bruker}: Pr
             <HuskelappInfoAlert />
             <Formik
                 initialValues={{
+                    huskelappId: huskelapp?.huskelappId ?? null,
                     frist: huskelapp?.frist ?? '',
                     kommentar: huskelapp?.kommentar ?? ''
                 }}
-                onSubmit={values => {
+                validateOnBlur={false}
+                onSubmit={(values, formikHelpers) => {
+                    if (!values.frist && !values.kommentar) {
+                        return formikHelpers.setErrors({
+                            huskelappId: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
+                        });
+                    }
                     dispatch(
-                        lagreHuskelappAction({
-                            brukerFnr: bruker.fnr,
-                            enhetId: enhetId!!,
-                            frist: values.frist?.toString(), //TODO fikse her
-                            kommentar: values.kommentar
-                        })
+                        huskelapp.huskelappId
+                            ? lagreHuskelappAction({
+                                  brukerFnr: bruker.fnr,
+                                  enhetId: enhetId!!,
+                                  frist: values.frist?.toString(), //TODO fikse her
+                                  kommentar: values.kommentar
+                              })
+                            : endreHuskelappAction({
+                                  huskelappId: huskelapp.huskelappId!!,
+                                  brukerFnr: bruker.fnr,
+                                  enhetId: enhetId!!,
+                                  frist: values.frist?.toString(), //TODO fikse her
+                                  kommentar: values.kommentar
+                              })
                     )
                         .then(dispatch(hentHuskelappForBruker(bruker.fnr, enhetId!!)))
                         .then(dispatch(leggTilStatustall('mineHuskelapper', 1)))
-                        .then(onModalClose);
+                        .then(onModalClose)
+                        .catch(dispatch(visServerfeilModal()));
                 }}
             >
                 <Form>
                     <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
                     <FormikDatoVelger name="frist" />
                     <div className="huskelapp-handlingsknapper">
+                        <ErrorMessage name="huskelappId" />
                         <Button variant="primary" size="small" onClick={() => {}}>
                             Lagre
                         </Button>

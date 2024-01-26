@@ -21,6 +21,7 @@ const ytelser = [
 
 let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
+const huskelapp: any = {};
 
 let i = 123456;
 
@@ -171,7 +172,8 @@ function lagArbeidsliste(aktoerid, fnr) {
     return arbeidslisteElement;
 }
 
-const lagHuskelapp = () => ({
+const lagHuskelapp = fnr => ({
+    brukerFnr: fnr,
     kommentar: lagOverskrift(),
     frist: '2024-06-28'
 });
@@ -187,6 +189,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
     const arbeidsliste = lagArbeidsliste(aktoerid, grunndata.fnr);
+    const huskelapp = lagHuskelapp(grunndata.fnr);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
@@ -255,7 +258,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
         brukersSituasjonSistEndret: randomDate({past: false}),
-        huskelapp: lagHuskelapp()
+        huskelapp
     };
 }
 
@@ -392,6 +395,13 @@ export function hentArbeidslisteForBruker(fnr: {fodselsnummer: any}) {
         return arbeidslisteForBruker;
     }
     return lagArbeidsliste('1', fnr);
+}
+
+export function hentHuskelappForBruker(fnr: string, enhetId: string) {
+    if (huskelapp.fnr === fnr) {
+        return huskelapp;
+    }
+    return lagHuskelapp(fnr);
 }
 
 export function hentMockPlan() {

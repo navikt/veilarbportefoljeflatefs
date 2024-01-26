@@ -243,7 +243,7 @@ export function endreHuskelapp(huskelapp: EndreHuskelapp) {
 }
 
 export function hentHuskelappForBruker(fnr: string, enhetId: string) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/hent-huskelapp-for-bruker`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr, enhetId})};
     return fetchToJson(url, config);
 }
