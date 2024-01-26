@@ -2,10 +2,17 @@ import React, {useRef, useState} from 'react';
 import {BookmarkIcon} from '@navikt/aksel-icons';
 import {Button} from '@navikt/ds-react';
 import FargekategoriPopover from '../fargekategori/fargekategori-popover';
+import {BrukerModell} from '../../model-interfaces';
 
-export default function FargekategoriToolbarKnapp() {
+interface FargekategoriToolbarKnappProps {
+    valgteBrukere: BrukerModell[];
+}
+
+export default function FargekategoriToolbarKnapp({valgteBrukere}: FargekategoriToolbarKnappProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
+
+    const valgteBrukereFnr = valgteBrukere.map(bruker => bruker.fnr);
 
     return (
         <>
@@ -24,6 +31,7 @@ export default function FargekategoriToolbarKnapp() {
                 openState={openState}
                 setOpenState={setOpenState}
                 placement="top-start"
+                brukere={valgteBrukereFnr}
             />
         </>
     );

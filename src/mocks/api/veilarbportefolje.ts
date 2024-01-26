@@ -184,6 +184,19 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             });
         })
     ),
+    http.put(
+        '/veilarbportefolje/api/fargekategori',
+        withAuth(async ({request}) => {
+            const oppdaterFargekategoriRequest = (await request.json()) as FargekategoriDataModell;
+
+            return HttpResponse.json({
+                sistEndretAv: {
+                    veilederId: 'Z990007'
+                },
+                kategori: `${oppdaterFargekategoriRequest.fargekategori}`
+            });
+        })
+    ),
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/foedeland',
         withAuth(async () => {
@@ -206,19 +219,6 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             await delay(DEFAULT_DELAY_MILLISECONDS);
 
             return HttpResponse.json(geografiskBostedListMockData());
-        })
-    ),
-    http.put(
-        '/veilarbportefolje/api/fargekategori',
-        withAuth(async ({request}) => {
-            const oppdaterFargekategoriRequest = (await request.json()) as FargekategoriDataModell;
-
-            return HttpResponse.json({
-                sistEndretAv: {
-                    veilederId: 'Z990007'
-                },
-                kategori: `${oppdaterFargekategoriRequest.fargekategori}`
-            });
         })
     )
 ];

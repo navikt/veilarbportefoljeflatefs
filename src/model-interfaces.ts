@@ -54,7 +54,6 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE = 'enslige_forsorgere_vedtaksperiodetype',
     ENSLIGE_FORSORGERE_AKTIVITETSPLIKT = 'enslige_forsorgere_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
-
     BARN_UNDER_18_AAR = 'barn_under_18_aar',
     BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret'
 }
@@ -280,10 +279,11 @@ export interface ArbeidslisteDataModell {
 }
 
 export interface FargekategoriDataModell {
-    fnr: string;
+    fnr: string[];
     veilederIdent: string;
     fargekategori: FargekategoriModell | null;
 }
+
 export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';

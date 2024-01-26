@@ -8,8 +8,7 @@ interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
-    brukere?: string[];
-    toolbarknapp?: boolean;
+    brukere: string[];
     placement?: 'right' | 'top-start';
 }
 
@@ -18,11 +17,15 @@ export default function FargekategoriPopover({
     openState,
     setOpenState,
     brukere,
-    toolbarknapp,
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const sendOppdaterFargekategori = (brukere, fargekategori) => {
-        //    console.log('knappen er trykka');
+        // try {
+        //     console.log('Oppdater fargekategori for brukere', brukere, 'til', fargekategori);
+        //     setOpenState(false);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -47,7 +50,6 @@ export default function FargekategoriPopover({
             placement={placement}
         >
             <Popover.Content>
-                {/* {toolbarknapp && <div>Sett fargekategori for alle valgte brukere</div>} */}
                 {fargekategoriknapper}
                 <Button icon={<FargekategoriIkonTomtBokmerke />} size="small" variant="tertiary" />
             </Popover.Content>

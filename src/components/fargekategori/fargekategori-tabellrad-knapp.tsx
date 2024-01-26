@@ -6,9 +6,10 @@ import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 
 interface FargekategoriPopoverKnappProps {
     fargekategori: FargekategoriModell | null;
+    fnr: string;
 }
 
-export default function FargekategoriPopoverKnapp({fargekategori}: FargekategoriPopoverKnappProps) {
+export default function FargekategoriTabellradKnapp({fargekategori, fnr}: FargekategoriPopoverKnappProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -21,7 +22,12 @@ export default function FargekategoriPopoverKnapp({fargekategori}: Fargekategori
                 icon={fargekategoriIkonMapper(fargekategori)}
                 variant="tertiary"
             />
-            <FargekategoriPopover buttonRef={buttonRef} openState={openState} setOpenState={setOpenState} />
+            <FargekategoriPopover
+                buttonRef={buttonRef}
+                openState={openState}
+                setOpenState={setOpenState}
+                brukere={[fnr]}
+            />
         </>
     );
 }

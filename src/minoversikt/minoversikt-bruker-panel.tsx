@@ -15,7 +15,7 @@ import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {Checkbox, Tag} from '@navikt/ds-react';
-import FargekategoriPopoverKnapp from '../components/fargekategori/fargekategori-velger';
+import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -93,7 +93,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
-                    <FargekategoriPopoverKnapp fargekategori={bruker.fargekategori} />
+                    <FargekategoriTabellradKnapp fargekategori={bruker.fargekategori} fnr={bruker.fnr} />
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
