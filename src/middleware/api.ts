@@ -1,4 +1,4 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {FargekategoriModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';

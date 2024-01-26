@@ -15,7 +15,7 @@ import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {Checkbox, Tag} from '@navikt/ds-react';
-import FargekategoriPopoverKnapp from '../components/fargekategori/fargekategori-velger';
+import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -58,7 +58,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
     const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
-
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
         setOpen(!apen);
@@ -94,7 +93,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
-                    <FargekategoriPopoverKnapp bruker={bruker} />
+                    <FargekategoriTabellradKnapp fargekategori={bruker.fargekategori} fnr={bruker.fnr} />
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

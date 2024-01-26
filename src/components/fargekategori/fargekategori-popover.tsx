@@ -19,7 +19,7 @@ export default function FargekategoriPopover({
     buttonRef,
     openState,
     setOpenState,
-    bruker,
+    brukere,
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch = useDispatch();
@@ -59,7 +59,6 @@ export default function FargekategoriPopover({
             placement={placement}
         >
             <Popover.Content>
-                {/* {toolbarknapp && <div>Sett fargekategori for alle valgte brukere</div>} */}
                 {fargekategoriknapper}
                 <Button icon={<FargekategoriIkonTomtBokmerke />} size="small" variant="tertiary" />
             </Popover.Content>

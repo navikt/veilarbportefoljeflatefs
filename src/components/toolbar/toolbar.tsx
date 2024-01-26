@@ -52,7 +52,7 @@ function Toolbar(props: ToolbarProps) {
                 return (
                     <>
                         <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
-                        <FargekategoriToolbarKnapp />
+                        <FargekategoriToolbarKnapp valgteBrukere={valgteBrukere} />
                     </>
                 );
             case OversiktType.enhetensOversikt:
