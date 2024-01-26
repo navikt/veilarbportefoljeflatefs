@@ -9,7 +9,7 @@ import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell, FargekategoriDataModell} from '../../model-interfaces';
+import {ArbeidslisteDataModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
@@ -210,9 +210,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     ),
     http.put(
         '/veilarbportefolje/api/v1/fargekategori',
-        withAuth(async ({request}) => {
-            const oppdaterFargekategoriRequest = (await request.json()) as FargekategoriDataModell;
-
+        withAuth(async () => {
             return HttpResponse.json({
                 fnr: '11111111111',
                 fargekategori: 'FARGEKATEGORI_A'
