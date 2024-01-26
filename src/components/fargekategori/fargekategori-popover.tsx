@@ -27,7 +27,7 @@ export default function FargekategoriPopover({
     const doOppdaterFargekategori = (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
-            fargekategori: fargekategori
+            fargekategoriVerdi: fargekategori
         };
         return dispatch(oppdaterFargekategori(data));
     };

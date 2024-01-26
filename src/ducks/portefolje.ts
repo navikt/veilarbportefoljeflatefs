@@ -4,7 +4,7 @@ import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatustallForVeileder} from './statustall-veileder';
-import {BrukerModell, FargekategoriDataModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
@@ -412,7 +412,7 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
     };
 }
 
-export function oppdaterFargekategori(fargekategori: FargekategoriDataModell) {
+export function oppdaterFargekategori(fargekategori) {
     // eslint-disable-next-line
     console.log('I oppdaterFargekategori i portefolje.ts');
     return dispatch =>
