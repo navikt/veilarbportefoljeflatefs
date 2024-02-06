@@ -281,7 +281,7 @@ export interface ArbeidslisteDataModell {
 
 export interface FargekategoriDataModell {
     fnr: string;
-    fargekategoriVerdi: FargekategoriModell | null;
+    fargekategoriVerdi: FargekategoriModell;
 }
 
 export interface Systemmelding {

@@ -5,6 +5,8 @@ import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategori} from '../../ducks/portefolje';
+import {visServerfeilModal} from '../../ducks/modal-serverfeil';
+import {oppdaterFargekategoriAction} from '../../ducks/fargekategori';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -29,7 +31,9 @@ export default function FargekategoriPopover({
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
-        return dispatch(oppdaterFargekategori(data));
+        // eslint-disable-next-line
+        console.log('I fargekategori-popover', data.fargekategoriVerdi, data.fnr);
+        return dispatch(oppdaterFargekategoriAction(data));
     };
 
     const sendOppdaterFargekategori = fargekategori => {
@@ -65,4 +69,18 @@ export default function FargekategoriPopover({
             </Popover.Content>
         </Popover>
     );
+}
+
+export function oppdaterFargekategoriState(res, fargekategori, fnr, dispatch) {
+    if (!res) {
+        return visServerfeilModal()(dispatch);
+    }
+    // eslint-disable-next-line
+    console.log('I oppdaterFargekategoriState i fargekategori-popover.tsx');
+    const fargekategoriToDispatch = Array.of({
+        ...fargekategori,
+        fnr
+    });
+
+    return oppdaterFargekategori(fargekategoriToDispatch)(dispatch);
 }

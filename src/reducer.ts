@@ -36,6 +36,7 @@ import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjon
 import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
 import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-enhet';
 import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
+import fargekategoriReducer from './ducks/fargekategori';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -89,6 +90,7 @@ export interface AppState {
     brukerfeilStatus: BrukerfeilState;
     geografiskBosted: GeografiskBostedListState;
     brukerIKontekst: BrukerIKontekstState;
+    fargekategori: any;
 }
 
 export default combineReducers<AppState>({
@@ -158,5 +160,6 @@ export default combineReducers<AppState>({
     tolkbehovSpraakList: tolkebehovListReducer,
     sesjonStatus: informasjonsmeldingReducer,
     brukerfeilStatus: brukerfeilReducer,
-    brukerIKontekst: brukerIKontekstReducer
+    brukerIKontekst: brukerIKontekstReducer,
+    fargekategori: fargekategoriReducer
 });
