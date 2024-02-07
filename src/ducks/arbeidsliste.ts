@@ -3,7 +3,6 @@ import {lagreArbeidsliste, oppdaterArbeidsliste, slettArbeidsliste} from '../mid
 import {skjulModal} from './modal';
 import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {dateToISODate} from '../utils/dato-utils';
-import {FargekategoriModell} from '../model-interfaces';
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -17,10 +16,6 @@ const ARBEIDSLISTE_SLETT_PENDING = 'veilarbportefolje/slett_arbeidsliste/PENDING
 export const ARBEIDSLISTE_REDIGER_OK = 'veilarbportefolje/rediger_arbeidsliste/OK';
 const ARBEIDSLISTE_REDIGER_FEILET = 'veilarbportefolje/rediger_arbeidsliste/FEILET';
 const ARBEIDSLISTE_REDIGER_PENDING = 'veilarbportefolje/rediger_arbeidsliste/PENDING';
-
-export const FARGEKATEGORI_REDIGER_OK = 'veilarbportefolje/oppdater_fargekategori/OK';
-const FARGEKATEGORI_REDIGER_FEILET = 'veilarbportefolje/oppdater_fargekategori/FEILET';
-const FARGEKATEGORI_REDIGER_PENDING = 'veilarbportefolje/oppdater_fargekategori/PENDING';
 
 const initialState = {
     data: {}
@@ -46,12 +41,6 @@ export default function arbeidslisteReducer(state = initialState, action) {
         case ARBEIDSLISTE_REDIGER_FEILET:
             return {...state, status: STATUS.ERROR, data: action.data};
         case ARBEIDSLISTE_REDIGER_OK:
-            return {...state, status: STATUS.OK, data: action.data};
-        case FARGEKATEGORI_REDIGER_PENDING:
-            return {...state, status: STATUS.PENDING};
-        case FARGEKATEGORI_REDIGER_FEILET:
-            return {...state, status: STATUS.ERROR, data: action.data};
-        case FARGEKATEGORI_REDIGER_OK:
             return {...state, status: STATUS.OK, data: action.data};
         default:
             return state;
@@ -99,25 +88,5 @@ export function oppdaterArbeidslisteAction(arbeidsliste, fnr) {
         OK: ARBEIDSLISTE_REDIGER_OK,
         FEILET: ARBEIDSLISTE_REDIGER_FEILET,
         PENDING: ARBEIDSLISTE_REDIGER_PENDING
-    });
-}
-
-// export function redigerFargekategoriAction(fargekategori: FargekategoriModell, props) {
-//     return dispatch =>
-//         oppdaterArbeidslisteAction(
-//             fargekategori,
-//             props.bruker.fnr
-//         )(dispatch)
-//             .then(res =>
-//                 oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch)
-//             )
-//             .then(() => dispatch(skjulModal()));
-// }
-
-export function oppdaterFargekategoriAction(fargekategori: FargekategoriModell, fnr: string[]) {
-    return doThenDispatch(() => oppdaterArbeidsliste(fargekategori, fnr), {
-        OK: FARGEKATEGORI_REDIGER_OK,
-        FEILET: FARGEKATEGORI_REDIGER_FEILET,
-        PENDING: FARGEKATEGORI_REDIGER_PENDING
     });
 }

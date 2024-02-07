@@ -4,9 +4,9 @@ import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {oppdaterFargekategori} from '../../ducks/portefolje';
+import {oppdaterFargekategorien} from '../../ducks/portefolje';
 import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import {oppdaterFargekategoriAction} from '../../ducks/fargekategori';
+import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -33,7 +33,7 @@ export default function FargekategoriPopover({
         };
         // eslint-disable-next-line
         console.log('I fargekategori-popover', data.fargekategoriVerdi, data.fnr);
-        return dispatch(oppdaterFargekategoriAction(data));
+        return dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
     };
 
     const sendOppdaterFargekategori = fargekategori => {
@@ -76,11 +76,22 @@ export function oppdaterFargekategoriState(res, fargekategori, fnr, dispatch) {
         return visServerfeilModal()(dispatch);
     }
     // eslint-disable-next-line
-    console.log('I oppdaterFargekategoriState i fargekategori-popover.tsx');
-    const fargekategoriToDispatch = Array.of({
-        ...fargekategori,
-        fnr
-    });
+    console.log(
+        'I oppdaterFargekategoriState i fargekategori-popover.tsx, res, fargekategori, fnr, dispatch',
+        res,
+        fargekategori,
+        fnr,
+        dispatch
+    );
 
-    return oppdaterFargekategori(fargekategoriToDispatch)(dispatch);
+    const fargekategoriToDispatch = {
+        fargekategori,
+        fnr
+    };
+    // eslint-disable-next-line
+    console.log(
+        'I oppdaterFargekategoriState i fargekategori-popover.tsx, fargekategoriToDispatch',
+        fargekategoriToDispatch
+    );
+    return oppdaterFargekategorien(fargekategoriToDispatch)(dispatch);
 }
