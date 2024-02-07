@@ -30,7 +30,7 @@ export const EksisterendeArbeidslisteVisning = ({arbeidsliste, onSlett}: Props) 
         <BodyShort size="small" className="blokk-xxs">
             <i>
                 Oppdatert {arbeidsliste.endringstidspunkt ? toDatePrettyPrint(arbeidsliste.endringstidspunkt) : ''} av{' '}
-                {arbeidsliste?.sistEndretAv?.veilederId}
+                {arbeidsliste.sistEndretAv?.veilederId}
             </i>
         </BodyShort>
         {onSlett && (

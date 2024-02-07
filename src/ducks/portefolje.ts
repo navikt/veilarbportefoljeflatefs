@@ -124,7 +124,7 @@ function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
 
 function leggTilHuskelappForbruker(brukere, huskelapp) {
     return brukere.map(bruker => {
-        if (bruker.fnr === huskelapp.brukerFnr) {
+        if (bruker.fnr === huskelapp?.brukerFnr) {
             return {
                 ...bruker,
                 huskelapp: {
@@ -276,7 +276,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: leggTilHuskelappForbruker(state.data.brukere, action.hukelapp)
+                    brukere: leggTilHuskelappForbruker(state.data.brukere, action.huskelapp)
                 }
             };
         }

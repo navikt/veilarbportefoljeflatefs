@@ -6,7 +6,7 @@ import './huskelapp.css';
 import {HuskelappVisning} from './HuskelappVisning';
 import {slettArbeidslisteAction} from '../../ducks/arbeidsliste';
 import {useDispatch} from 'react-redux';
-import {oppdaterState} from '../../components/modal/arbeidsliste/fjern-fra-arbeidsliste-form';
+import {oppdaterStateVedSlettArbeidsliste} from './slettEksisterendeArbeidsliste';
 
 export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
     const dispatch = useDispatch();
@@ -18,17 +18,24 @@ export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
             kategori: bruker.arbeidsliste.kategori
         }));
         slettArbeidslisteAction(arbeidsliste)(dispatch).then(res =>
-            oppdaterState(res, () => {}, arbeidsliste, dispatch)
+            oppdaterStateVedSlettArbeidsliste(res, arbeidsliste, dispatch)
         );
     };
 
-    return bruker?.huskelapp?.kommentar ? (
-        <HuskelappVisning huskelapp={bruker?.huskelapp as HuskelappModell} bruker={bruker} />
-    ) : (
+    return (
         <div className="huskelappPanel">
-            <LagHuskelappInngang bruker={bruker} />
-            {bruker.arbeidsliste?.arbeidslisteAktiv && (
-                <EksisterendeArbeidslisteVisning arbeidsliste={bruker.arbeidsliste} onSlett={onSlettArbeidsliste} />
+            {bruker?.huskelapp ? (
+                <HuskelappVisning huskelapp={bruker.huskelapp as HuskelappModell} bruker={bruker} />
+            ) : (
+                <>
+                    <LagHuskelappInngang bruker={bruker} />
+                    {bruker.arbeidsliste?.arbeidslisteAktiv && (
+                        <EksisterendeArbeidslisteVisning
+                            arbeidsliste={bruker.arbeidsliste}
+                            onSlett={onSlettArbeidsliste}
+                        />
+                    )}
+                </>
             )}
         </div>
     );

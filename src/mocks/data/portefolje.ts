@@ -172,11 +172,18 @@ function lagArbeidsliste(aktoerid, fnr) {
     return arbeidslisteElement;
 }
 
-const lagHuskelapp = fnr => ({
-    brukerFnr: fnr,
-    kommentar: lagOverskrift(),
-    frist: '2024-06-28'
-});
+const lagHuskelapp = fnr => {
+    const maybeHuskelapp = rnd(0, 1);
+    if (maybeHuskelapp > 0.75) {
+        return null;
+    }
+    return {
+        huskelappId: lagOverskrift(),
+        brukerFnr: fnr,
+        kommentar: lagOverskrift(),
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+    };
+};
 
 function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
@@ -401,7 +408,12 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
     if (huskelapp.fnr === fnr) {
         return huskelapp;
     }
-    return lagHuskelapp(fnr);
+    return {
+        huskelappId: lagOverskrift(),
+        brukerFnr: fnr,
+        kommentar: lagOverskrift(),
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+    };
 }
 
 export function hentMockPlan() {

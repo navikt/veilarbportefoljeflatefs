@@ -10,19 +10,24 @@ import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {leggTilStatustall} from '../../ducks/statustall-veileder';
+import {hentHuskelappForBruker} from '../../ducks/portefolje';
+import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 interface Props {
     huskelapp: HuskelappModell;
     bruker: BrukerModell;
 }
+
 export const HuskelappVisning = ({bruker, huskelapp}: Props) => {
     const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
     const handleSlettHuskelapp = () => {
-        dispatch(slettHuskelappAction(huskelapp.huskelappId!!)).then(
-            dispatch(leggTilStatustall('mineHuskelapper', -1))
-        );
+        dispatch(slettHuskelappAction(huskelapp.huskelappId!!))
+            .then(dispatch(hentHuskelappForBruker(bruker.fnr, enhetId!!)))
+            .then(dispatch(leggTilStatustall('mineHuskelapper', -1)));
     };
 
     return (
