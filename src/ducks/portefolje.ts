@@ -130,7 +130,10 @@ function leggTilHuskelappForbruker(brukere, huskelapp) {
                 huskelapp: {
                     ...bruker.huskelapp,
                     kommentar: huskelapp.kommentar,
-                    huskelapp: huskelapp.frist
+                    huskelapp: huskelapp.frist,
+                    huskelappId: huskelapp.huskelappId,
+                    endretDato: huskelapp.endretDato,
+                    endretAv: huskelapp.endretAv
                 }
             };
         }
