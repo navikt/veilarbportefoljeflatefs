@@ -143,6 +143,21 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
     });
 }
 
+function updateFargekategoriForBrukere(brukere, fargekategori) {
+    // eslint-disable-next-line
+    console.log('I updateFargekategoriForBrukere i portefolje.ts, brukere og fargekategori:', brukere, fargekategori);
+    return brukere.map(bruker => {
+        const fargekategoriForBruker = fargekategori.find(a => a.fnr === bruker.fnr);
+        if (fargekategoriForBruker) {
+            return {
+                ...bruker,
+                fargekategori: {...bruker.fargekategori, ...fargekategoriForBruker}
+            };
+        }
+        return bruker;
+    });
+}
+
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
@@ -259,8 +274,16 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 }
             };
         }
-        case FARGEKATEGORI_REDIGER_OK: {
-            return {...state, tilordningerstatus: STATUS.OK};
+        case OPPDATER_FARGEKATEGORI: {
+            // eslint-disable-next-line
+            console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, action:', action.fargekategori);
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
+                }
+            };
         }
         default:
             return state;
@@ -390,8 +413,6 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
 }
 
 export function oppdaterArbeidslisteForBruker(arbeidsliste) {
-    // eslint-disable-next-line
-    console.log('I oppdaterArbeidslisteForBruker i portefolje.ts, arbeidsliste:', arbeidsliste);
     return dispatch =>
         dispatch({
             type: OPPDATER_ARBEIDSLISTE,
@@ -429,6 +450,7 @@ export function oppdaterFargekategoriAction(data, props) {
 
     // eslint-disable-next-line
     console.log('I oppdaterFargekategoriAction i portefolje.ts', fargekategori);
+
     return dispatch =>
         lagreFargekategoriAction(fargekategori)(dispatch)
             .then(res => oppdaterFargekategoriState(res, fargekategori.fargekategoriVerdi, fargekategori.fnr, dispatch))
@@ -438,21 +460,10 @@ export function oppdaterFargekategoriAction(data, props) {
 function lagreFargekategoriAction(fargekategori) {
     // eslint-disable-next-line
     console.log('I lagreFargekategoriAction i portefolje.ts, fargekategori:', fargekategori);
+
     return doThenDispatch(() => oppdaterFargekategori(fargekategori), {
         OK: FARGEKATEGORI_REDIGER_OK,
         FEILET: FARGEKATEGORI_REDIGER_FEILET,
         PENDING: FARGEKATEGORI_REDIGER_PENDING
     });
-}
-
-export function oppdaterFargekategorien(fargekategori) {
-    // eslint-disable-next-line
-    console.log('I oppdaterFargekategori i portefolje.ts, fargekategori:', fargekategori);
-    return dispatch =>
-        Api.oppdaterFargekategori(fargekategori).then(fargekategori => {
-            dispatch({
-                type: OPPDATER_FARGEKATEGORI,
-                fargekategori
-            });
-        });
 }

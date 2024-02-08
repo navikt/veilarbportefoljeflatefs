@@ -4,7 +4,6 @@ import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {oppdaterFargekategorien} from '../../ducks/portefolje';
 import {visServerfeilModal} from '../../ducks/modal-serverfeil';
 import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
 
@@ -31,14 +30,11 @@ export default function FargekategoriPopover({
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
-        // eslint-disable-next-line
-        console.log('I fargekategori-popover', data.fargekategoriVerdi, data.fnr);
+
         return dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
     };
 
     const sendOppdaterFargekategori = fargekategori => {
-        // eslint-disable-next-line
-        console.log('knappen er trykka');
         doOppdaterFargekategori(bruker.fnr, fargekategori);
     };
 
@@ -75,23 +71,4 @@ export function oppdaterFargekategoriState(res, fargekategori, fnr, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
-    // eslint-disable-next-line
-    console.log(
-        'I oppdaterFargekategoriState i fargekategori-popover.tsx, res, fargekategori, fnr, dispatch',
-        res,
-        fargekategori,
-        fnr,
-        dispatch
-    );
-
-    const fargekategoriToDispatch = {
-        fargekategori,
-        fnr
-    };
-    // eslint-disable-next-line
-    console.log(
-        'I oppdaterFargekategoriState i fargekategori-popover.tsx, fargekategoriToDispatch',
-        fargekategoriToDispatch
-    );
-    return oppdaterFargekategorien(fargekategoriToDispatch)(dispatch);
 }

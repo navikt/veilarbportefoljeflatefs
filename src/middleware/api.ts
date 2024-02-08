@@ -231,8 +231,6 @@ export function slettArbeidsliste(arbeidsliste) {
 export function oppdaterFargekategori(fargekategori) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fargekategori)};
-    // eslint-disable-next-line
-    console.log('I oppdaterFargekategori i api.ts', fargekategori);
     return fetchToJson(url, config);
 }
 

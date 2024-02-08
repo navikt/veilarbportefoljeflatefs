@@ -169,15 +169,6 @@ export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, 
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
-    // eslint-disable-next-line
-    console.log(
-        'I oppdaterArbeidslisteState i arbeidsliste-modal-rediger.tsx, res, arbeidsliste, innloggetVeileder, fnr, dispatch',
-        res,
-        arbeidsliste,
-        innloggetVeileder,
-        fnr,
-        dispatch
-    );
 
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
@@ -185,11 +176,7 @@ export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, 
         sistEndretAv: {veilederId: innloggetVeileder},
         endringstidspunkt: new Date().toISOString()
     });
-    // eslint-disable-next-line
-    console.log(
-        'I oppdaterArbeidslisteState i arbeidsliste-modal-rediger.tsx, arbeidslisteToDispatch',
-        arbeidslisteToDispatch
-    );
+
     return oppdaterArbeidslisteForBruker(arbeidslisteToDispatch)(dispatch);
 }
 

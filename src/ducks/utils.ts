@@ -34,8 +34,6 @@ export function handterFeil(dispatch, action) {
 }
 
 export function doThenDispatch(fn, {OK, FEILET, PENDING}) {
-    // eslint-disable-next-line
-    console.log('I doThenDispatch i utils.ts, fargekategori:', fn);
     return (dispatch, getState?) => {
         if (PENDING) {
             dispatch({type: PENDING});
