@@ -19,6 +19,11 @@ import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
 import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
 import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
 import {HuskelappPanel} from './huskelapp/HuskelappPanel';
+import {hentHuskelappForBruker} from '../ducks/portefolje';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../reducer';
+import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -34,6 +39,7 @@ interface MinOversiktBrukerPanelProps {
 
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
 
@@ -136,6 +142,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                             if (!bruker.arbeidsliste.hentetKommentarOgTittel) {
                                 hentArbeidslisteForBruker(bruker.fnr);
                             }
+                            dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
                         }}
                         dataTestid={`min-oversikt_brukerliste-chevron${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
