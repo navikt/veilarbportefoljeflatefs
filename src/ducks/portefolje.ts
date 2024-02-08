@@ -128,7 +128,6 @@ function leggTilHuskelappForbruker(brukere, huskelapp) {
             return {
                 ...bruker,
                 huskelapp: {
-                    ...bruker.huskelapp,
                     kommentar: huskelapp.kommentar,
                     huskelapp: huskelapp.frist,
                     huskelappId: huskelapp.huskelappId,

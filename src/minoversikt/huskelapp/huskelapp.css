@@ -17,6 +17,9 @@
     width: 0;
 }
 
+.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(odd) .HuskelappVisning::before {
+    background: white;
+}
 .HuskelappVisning {
     background-color: #f9fccc;
     max-height: 200px;

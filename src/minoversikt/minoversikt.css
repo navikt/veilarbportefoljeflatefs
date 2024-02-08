@@ -7,6 +7,7 @@
 }
 .veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(odd) {
     background-color: white;
+    --bakgrunnsfarge: white;
 }
 .veilarbportefoljeflatefs .tilbaketilveileder {
     display: inline-block;
