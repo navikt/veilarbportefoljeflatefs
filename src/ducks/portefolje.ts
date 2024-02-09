@@ -12,8 +12,7 @@ import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall-enhet';
-import {toJson, oppdaterFargekategori} from '../middleware/api';
-import {oppdaterFargekategoriState} from '../components/fargekategori/fargekategori-popover';
+import {toJson} from '../middleware/api';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -146,16 +145,18 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 function updateFargekategoriForBrukere(brukere, fargekategori) {
     // eslint-disable-next-line
     console.log('I updateFargekategoriForBrukere i portefolje.ts, brukere og fargekategori:', brukere, fargekategori);
-    return brukere.map(bruker => {
-        const fargekategoriForBruker = fargekategori.find(a => a.fnr === bruker.fnr);
-        if (fargekategoriForBruker) {
+    const tempBrukere = brukere.map(bruker => {
+        if (bruker.fnr === fargekategori.fnr) {
             return {
                 ...bruker,
-                fargekategori: {...bruker.fargekategori, ...fargekategoriForBruker}
+                fargekategori: fargekategori.fargekategoriVerdi
             };
         }
         return bruker;
     });
+    // eslint-disable-next-line
+    console.log('Etter updateFargekategoriForBrukere i portefolje.ts, brukere og fargekategori:', tempBrukere);
+    return tempBrukere;
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
@@ -276,7 +277,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
         }
         case OPPDATER_FARGEKATEGORI: {
             // eslint-disable-next-line
-            console.log('I OPPDATER_FARGEKATEGORI i portefolje.ts, action:', action.fargekategori);
+            console.log('I OPPDATER_FARGEKATEGORI i portefolje.ts, action:', action.fargekategori, state.data);
             return {
                 ...state,
                 data: {
@@ -287,15 +288,21 @@ export default function portefoljeReducer(state = initialState, action): Portefo
         }
         case FARGEKATEGORI_REDIGER_OK: {
             // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, action:', action.fargekategori);
-            return {
-                ...state,
-                data: {
-                    ...state.data,
-                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
-                }
-            };
+            console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, state.data:', state.data);
+            return {...state, status: STATUS.OK, data: action.data};
         }
+
+        case FARGEKATEGORI_REDIGER_PENDING: {
+            // eslint-disable-next-line
+            console.log('I FARGEKATEGORI_REDIGER_PENDING i portefolje.ts, state.data:', state.data);
+            return {...state, status: STATUS.PENDING};
+        }
+        case FARGEKATEGORI_REDIGER_FEILET: {
+            // eslint-disable-next-line
+            console.log('I FARGEKATEGORI_REDIGER_FEILET i portefolje.ts, state.data:', state.data);
+            return {...state, status: STATUS.ERROR};
+        }
+
         default:
             return state;
     }
@@ -471,16 +478,17 @@ export function oppdaterFargekategoriAction(data, props) {
     console.log('I oppdaterFargekategoriAction i portefolje.ts', fargekategori);
 
     return dispatch =>
-        lagreFargekategoriAction(fargekategori)(dispatch)
-            .then(res => oppdaterFargekategoriState(res, fargekategori.fargekategoriVerdi, fargekategori.fnr, dispatch))
-            .then(() => dispatch(skjulModal()));
+        dispatch({
+            type: OPPDATER_FARGEKATEGORI,
+            fargekategori
+        });
 }
 
-function lagreFargekategoriAction(fargekategori) {
+export function lagreFargekategoriAction(fargekategori) {
     // eslint-disable-next-line
     console.log('I lagreFargekategoriAction i portefolje.ts, fargekategori:', fargekategori);
 
-    return doThenDispatch(() => oppdaterFargekategori(fargekategori), {
+    return doThenDispatch(() => Api.oppdaterFargekategori(fargekategori), {
         OK: FARGEKATEGORI_REDIGER_OK,
         FEILET: FARGEKATEGORI_REDIGER_FEILET,
         PENDING: FARGEKATEGORI_REDIGER_PENDING

@@ -4,8 +4,10 @@ import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import {oppdaterFargekategoriAction, oppdaterFargekategoriForBruker} from '../../ducks/portefolje';
+import {lagreFargekategoriAction, oppdaterFargekategoriAction} from '../../ducks/portefolje';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../../reducer';
+import {AnyAction} from 'redux';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -23,7 +25,7 @@ export default function FargekategoriPopover({
     bruker,
     placement = 'right'
 }: FargekategoriPopoverProps) {
-    const dispatch = useDispatch();
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
 
     const doOppdaterFargekategori = (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
@@ -31,7 +33,9 @@ export default function FargekategoriPopover({
             fargekategoriVerdi: fargekategori
         };
 
-        return dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
+        dispatch(lagreFargekategoriAction(data)).then(
+            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr))
+        );
     };
 
     const sendOppdaterFargekategori = fargekategori => {
@@ -65,15 +69,4 @@ export default function FargekategoriPopover({
             </Popover.Content>
         </Popover>
     );
-}
-
-export function oppdaterFargekategoriState(res, fargekategori, fnr, dispatch) {
-    if (!res) {
-        return visServerfeilModal()(dispatch);
-    }
-    const fargekategoriToDispatch = Array.of({
-        ...fargekategori,
-        fnr
-    });
-    return oppdaterFargekategoriForBruker(fargekategoriToDispatch)(dispatch);
 }
