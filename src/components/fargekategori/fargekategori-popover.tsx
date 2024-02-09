@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
+import {oppdaterFargekategoriAction, oppdaterFargekategoriForBruker} from '../../ducks/portefolje';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -71,4 +71,9 @@ export function oppdaterFargekategoriState(res, fargekategori, fnr, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
+    const fargekategoriToDispatch = Array.of({
+        ...fargekategori,
+        fnr
+    });
+    return oppdaterFargekategoriForBruker(fargekategoriToDispatch)(dispatch);
 }

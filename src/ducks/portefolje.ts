@@ -276,6 +276,17 @@ export default function portefoljeReducer(state = initialState, action): Portefo
         }
         case OPPDATER_FARGEKATEGORI: {
             // eslint-disable-next-line
+            console.log('I OPPDATER_FARGEKATEGORI i portefolje.ts, action:', action.fargekategori);
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
+                }
+            };
+        }
+        case FARGEKATEGORI_REDIGER_OK: {
+            // eslint-disable-next-line
             console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, action:', action.fargekategori);
             return {
                 ...state,
@@ -417,6 +428,14 @@ export function oppdaterArbeidslisteForBruker(arbeidsliste) {
         dispatch({
             type: OPPDATER_ARBEIDSLISTE,
             arbeidsliste
+        });
+}
+
+export function oppdaterFargekategoriForBruker(fargekategori) {
+    return dispatch =>
+        dispatch({
+            type: OPPDATER_FARGEKATEGORI,
+            fargekategori
         });
 }
 
