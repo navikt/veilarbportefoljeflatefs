@@ -4,7 +4,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: #f4f4f4; /*TODO hvordan finner man bakgrunnsfargen som er på panelet truuu*/
+    background: #f4f4f4;
     border-width: 0 20px 20px 0;
     border-style: solid;
     border-color: hsl(64, 89%, 84%) transparent;
@@ -20,6 +20,7 @@
 .veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(odd) .HuskelappVisning::before {
     background: white;
 }
+
 .HuskelappVisning {
     background-color: #f9fccc;
     max-height: 200px;
