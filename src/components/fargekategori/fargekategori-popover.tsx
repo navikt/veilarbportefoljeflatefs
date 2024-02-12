@@ -4,7 +4,8 @@ import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {lagreFargekategoriAction, oppdaterFargekategoriAction} from '../../ducks/portefolje';
+import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
+import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';

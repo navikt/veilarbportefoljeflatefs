@@ -6,7 +6,7 @@ import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatustallForVeileder} from './statustall-veileder';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
-import {skjulModal, visTilordningOkModal} from './modal';
+import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
@@ -31,9 +31,6 @@ const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLIST
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
 const OPPDATER_FARGEKATEGORI = 'veilarbportefolje/portefolje/FARGEKATEGORI';
-const FARGEKATEGORI_REDIGER_OK = 'veilarbportefolje/oppdater_fargekategori/OK';
-const FARGEKATEGORI_REDIGER_FEILET = 'veilarbportefolje/oppdater_fargekategori/FEILET';
-const FARGEKATEGORI_REDIGER_PENDING = 'veilarbportefolje/oppdater_fargekategori/PENDING';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
@@ -286,22 +283,6 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 }
             };
         }
-        case FARGEKATEGORI_REDIGER_OK: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, state.data:', state.data);
-            return {...state, status: STATUS.OK, data: action.data};
-        }
-
-        case FARGEKATEGORI_REDIGER_PENDING: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_PENDING i portefolje.ts, state.data:', state.data);
-            return {...state, status: STATUS.PENDING};
-        }
-        case FARGEKATEGORI_REDIGER_FEILET: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_FEILET i portefolje.ts, state.data:', state.data);
-            return {...state, status: STATUS.ERROR};
-        }
 
         default:
             return state;
@@ -438,14 +419,6 @@ export function oppdaterArbeidslisteForBruker(arbeidsliste) {
         });
 }
 
-export function oppdaterFargekategoriForBruker(fargekategori) {
-    return dispatch =>
-        dispatch({
-            type: OPPDATER_FARGEKATEGORI,
-            fargekategori
-        });
-}
-
 export function hentArbeidslisteforVeileder(enhet, veileder) {
     return dispatch => {
         Api.hentArbeidslisteForVeileder(enhet, veileder).then(arbeidsliste => {
@@ -482,15 +455,4 @@ export function oppdaterFargekategoriAction(data, props) {
             type: OPPDATER_FARGEKATEGORI,
             fargekategori
         });
-}
-
-export function lagreFargekategoriAction(fargekategori) {
-    // eslint-disable-next-line
-    console.log('I lagreFargekategoriAction i portefolje.ts, fargekategori:', fargekategori);
-
-    return doThenDispatch(() => Api.oppdaterFargekategori(fargekategori), {
-        OK: FARGEKATEGORI_REDIGER_OK,
-        FEILET: FARGEKATEGORI_REDIGER_FEILET,
-        PENDING: FARGEKATEGORI_REDIGER_PENDING
-    });
 }
