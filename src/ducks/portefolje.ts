@@ -140,8 +140,6 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 }
 
 function updateFargekategoriForBrukere(brukere, fargekategori) {
-    // eslint-disable-next-line
-    console.log('I updateFargekategoriForBrukere i portefolje.ts, brukere og fargekategori:', brukere, fargekategori);
     const tempBrukere = brukere.map(bruker => {
         if (bruker.fnr === fargekategori.fnr) {
             return {
@@ -151,8 +149,6 @@ function updateFargekategoriForBrukere(brukere, fargekategori) {
         }
         return bruker;
     });
-    // eslint-disable-next-line
-    console.log('Etter updateFargekategoriForBrukere i portefolje.ts, brukere og fargekategori:', tempBrukere);
     return tempBrukere;
 }
 
@@ -273,8 +269,6 @@ export default function portefoljeReducer(state = initialState, action): Portefo
             };
         }
         case OPPDATER_FARGEKATEGORI: {
-            // eslint-disable-next-line
-            console.log('I OPPDATER_FARGEKATEGORI i portefolje.ts, action:', action.fargekategori, state.data);
             return {
                 ...state,
                 data: {
@@ -446,9 +440,6 @@ export function oppdaterFargekategoriAction(data, props) {
         fargekategoriVerdi: data,
         fnr: props
     };
-
-    // eslint-disable-next-line
-    console.log('I oppdaterFargekategoriAction i portefolje.ts', fargekategori);
 
     return dispatch =>
         dispatch({

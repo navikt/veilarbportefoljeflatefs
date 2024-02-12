@@ -14,19 +14,13 @@ const initialState = {
 export default function fargekategoriReducer(state = initialState, action) {
     switch (action.type) {
         case FARGEKATEGORI_REDIGER_OK: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_OK i portefolje.ts, state.data:', state.data);
             return {...state, status: STATUS.OK, data: action.data};
         }
 
         case FARGEKATEGORI_REDIGER_PENDING: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_PENDING i portefolje.ts, state.data:', state.data);
             return {...state, status: STATUS.PENDING};
         }
         case FARGEKATEGORI_REDIGER_FEILET: {
-            // eslint-disable-next-line
-            console.log('I FARGEKATEGORI_REDIGER_FEILET i portefolje.ts, state.data:', state.data);
             return {...state, status: STATUS.ERROR};
         }
 
@@ -38,9 +32,6 @@ export default function fargekategoriReducer(state = initialState, action) {
 // Action Creators
 
 export function lagreFargekategoriAction(fargekategori) {
-    // eslint-disable-next-line
-    console.log('I lagreFargekategoriAction i portefolje.ts, fargekategori:', fargekategori);
-
     return doThenDispatch(() => Api.oppdaterFargekategori(fargekategori), {
         OK: FARGEKATEGORI_REDIGER_OK,
         FEILET: FARGEKATEGORI_REDIGER_FEILET,

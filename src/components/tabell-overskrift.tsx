@@ -18,8 +18,6 @@ function TabellOverskrift(props: {className?: string}) {
     const tilIndex = fraIndex + antallReturnert;
 
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
-    // eslint-disable-next-line
-    console.log('Brukere', portefolje.brukere);
     const enEllerFlereBrukere =
         antallTotalt <= sidestorrelse
             ? `${maksBrukere}`
