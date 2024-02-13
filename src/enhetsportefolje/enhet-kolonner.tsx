@@ -129,7 +129,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerNavn className="brukernavn col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
             <TekstKolonne
                 className="col col-xs-2"
