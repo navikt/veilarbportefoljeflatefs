@@ -103,7 +103,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
                     {erHuskelappFeatureTogglePa && (
-                        <BodyShort>
+                        <BodyShort className="huskelappcontainer">
                             {bruker.huskelapp ? (
                                 <HuskelappIkon className="huskelappikon" />
                             ) : (
