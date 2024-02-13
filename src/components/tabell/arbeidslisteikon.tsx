@@ -8,12 +8,11 @@ import {ReactComponent as ArbeidslisteikonGul} from '../ikoner/arbeidsliste/arbe
 import {KategoriModell} from '../../model-interfaces';
 
 interface ArbeidslistekategoriProps {
-    skalVises: boolean;
     kategori: KategoriModell;
     dataTestid?: string;
 }
 
-export default function ArbeidslistekategoriVisning({skalVises, kategori, dataTestid}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({kategori, dataTestid}: ArbeidslistekategoriProps) {
     const velgArbeidslistekategori = () => {
         switch (kategori) {
             case KategoriModell.BLA:

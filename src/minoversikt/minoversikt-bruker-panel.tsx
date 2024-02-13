@@ -98,7 +98,6 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         {''}
                     </Checkbox>
                     <ArbeidslistekategoriVisning
-                        skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}
                         dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
