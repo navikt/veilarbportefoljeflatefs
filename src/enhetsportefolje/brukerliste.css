@@ -69,6 +69,10 @@
     width: 70%;
     display: flex;
 }
+.veilarbportefoljeflatefs .brukerliste__innhold .brukernavn button {
+    padding-left: 0;
+    padding-right: 0;
+}
 .veilarbportefoljeflatefs .brukerliste__gutter-right {
     display: flex;
     flex-grow: 1;
