@@ -55,7 +55,10 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
 
     BARN_UNDER_18_AAR = 'barn_under_18_aar',
-    BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret'
+    BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret',
+    HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
+    HUSKELAPP_FRIST = 'huskelapp_frist',
+    HUSKELAPP = 'huskelapp'
 }
 
 export interface FiltervalgModell {
@@ -201,6 +204,7 @@ export interface BrukerModell {
 
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
+    huskelapp?: Huskelapp;
 }
 
 interface EnsligeForsorgereOvergangsstonad {
@@ -208,6 +212,11 @@ interface EnsligeForsorgereOvergangsstonad {
     harAktivitetsplikt?: boolean | undefined;
     utlopsDato: Date;
     yngsteBarnsFødselsdato: Date;
+}
+
+interface Huskelapp {
+    kommentar: string;
+    frist: Date;
 }
 
 export interface BarnUnder18Aar {

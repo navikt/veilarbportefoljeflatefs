@@ -12,6 +12,7 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     endringISituasjon,
     HAR_AVVIK,
+    HUSKELAPP,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -226,5 +227,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
                 filtervalg.registreringstype.some(regType => endringISituasjon[regType])
             )
         )
+        .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtervalg.ferdigfilterListe.includes(HUSKELAPP)))
+        .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtervalg.ferdigfilterListe.includes(HUSKELAPP)))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

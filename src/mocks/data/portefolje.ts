@@ -171,6 +171,11 @@ function lagArbeidsliste(aktoerid, fnr) {
     return arbeidslisteElement;
 }
 
+const lagHuskelapp = () => ({
+    kommentar: lagOverskrift(),
+    frist: '2024-06-28'
+});
+
 function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
 
@@ -249,7 +254,8 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
-        brukersSituasjonSistEndret: randomDate({past: false})
+        brukersSituasjonSistEndret: randomDate({past: false}),
+        huskelapp: lagHuskelapp()
     };
 }
 

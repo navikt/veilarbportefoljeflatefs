@@ -8,12 +8,11 @@ import {ReactComponent as ArbeidslisteikonGul} from '../ikoner/arbeidsliste/arbe
 import {KategoriModell} from '../../model-interfaces';
 
 interface ArbeidslistekategoriProps {
-    skalVises: boolean;
     kategori: KategoriModell;
     dataTestid?: string;
 }
 
-export default function ArbeidslistekategoriVisning({skalVises, kategori, dataTestid}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({kategori, dataTestid}: ArbeidslistekategoriProps) {
     const velgArbeidslistekategori = () => {
         switch (kategori) {
             case KategoriModell.BLA:
@@ -25,13 +24,13 @@ export default function ArbeidslistekategoriVisning({skalVises, kategori, dataTe
             case KategoriModell.GUL:
                 return <ArbeidslisteikonGul data-testid={dataTestid} />;
             default:
-                return null;
+                return <div className="tomt-arbeidslisteikon" />;
         }
     };
 
     return (
         <span className="arbeidsliste--ikon" data-testid="brukerliste_span_arbeidslisteikon">
-            {skalVises && velgArbeidslistekategori()}
+            {velgArbeidslistekategori()}
         </span>
     );
 }

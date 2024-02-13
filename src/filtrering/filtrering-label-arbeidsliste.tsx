@@ -36,7 +36,7 @@ function FiltreringLabelArbeidsliste({
             iconPosition="right"
         >
             <span className="filtreringlabel__container">
-                <ArbeidslistekategoriVisning skalVises kategori={kategori} />
+                <ArbeidslistekategoriVisning kategori={kategori} />
                 {lagConfig(label).label}
             </span>
         </Button>

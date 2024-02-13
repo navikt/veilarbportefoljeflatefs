@@ -30,7 +30,10 @@
     padding-right: var(--a-spacing-2);
 }
 .veilarbportefoljeflatefs .brukerliste .arbeidsliste--ikon {
-    margin: 7px 5px 0;
+    margin-top: 7px;
+    margin-left: 5px;
+
+    min-width: calc(1.2rem + 1rem + 2px); /* Ikon-breidd (1.2rem) + plassen sorteringspil tek i header (1rem+2px) */
 }
 .veilarbportefoljeflatefs .brukerliste--borders {
     border-top: 1px solid #a0a0a0;
@@ -65,6 +68,10 @@
 .veilarbportefoljeflatefs .brukerliste__innhold {
     width: 70%;
     display: flex;
+}
+.veilarbportefoljeflatefs .brukerliste__innhold .brukernavn button {
+    padding-left: 0;
+    padding-right: 0;
 }
 .veilarbportefoljeflatefs .brukerliste__gutter-right {
     display: flex;

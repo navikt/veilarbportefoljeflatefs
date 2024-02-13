@@ -11,7 +11,7 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {HUSKELAPP, VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
 
@@ -39,6 +39,7 @@ interface StatustallInnhold {
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
+    mineHuskelapper: number;
 }
 
 interface FiltreringStatusProps {
@@ -53,6 +54,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const kategoriliste = filtervalg.arbeidslisteKategori;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -215,6 +217,15 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     endreFiltervalg={dispatchFiltreringStatusChanged}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
+                {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                    <div className="forsteBarlabelIGruppe">
+                        <BarInputRadio
+                            filterNavn="huskelapp"
+                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                            handleChange={handleRadioButtonChange}
+                        />
+                    </div>
+                )}
             </RadioGroup>
         </div>
     );

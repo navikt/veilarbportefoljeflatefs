@@ -56,7 +56,9 @@ export enum Kolonne {
     ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
 
     HAR_BARN_UNDER_18 = 'har_barn_under_18',
-    BRUKERS_SITUASJON_SIST_ENDRET = 'brukers_situasjon_sist_endret'
+    BRUKERS_SITUASJON_SIST_ENDRET = 'brukers_situasjon_sist_endret',
+    HUSKELAPP_FRIST = 'huskelapp_frist',
+    HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar'
 }
 
 export enum OversiktType {
