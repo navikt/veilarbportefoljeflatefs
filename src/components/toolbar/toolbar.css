@@ -266,7 +266,8 @@
     margin-bottom: inherit;
 }
 .veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader {
-    min-width: 2rem;
+    /* Min-width er summen av: ikon-breidd: 1.2rem, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
+    min-width: calc(1.2rem + 1rem + 2px);
     max-width: 4rem;
     margin-top: 6px;
     margin-left: 6px;
@@ -277,7 +278,8 @@
     margin-left: 5px;
 }
 .veilarbportefoljeflatefs .huskelapper__sorteringsheader {
-    min-width: 2rem;
+    /* Min-width er summen av: ikon-breidd: 1.3em, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
+    min-width: calc(1.3em + 1rem + 2px);
     max-width: 4rem;
     margin-top: 6px;
     margin-left: 5px;

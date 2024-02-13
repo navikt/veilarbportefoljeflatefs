@@ -12,6 +12,6 @@
     justify-content: flex-start !important;
 }
 .veilarbportefoljeflatefs .arbeidslisteikon__svg {
-    width: auto;
-    height: 1.2rem;
+    width: 1.2rem;
+    height: auto;
 }
