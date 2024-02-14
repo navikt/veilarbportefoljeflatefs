@@ -11,11 +11,14 @@ import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../konstanter';
+import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Checkbox, Tag} from '@navikt/ds-react';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
+import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
+import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
+import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -32,6 +35,8 @@ interface MinOversiktBrukerPanelProps {
 function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xPos') || '0');
         const yPos = parseInt(localStorage.getItem('yPos') || '0');
@@ -94,7 +99,24 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                     >
                         {''}
                     </Checkbox>
-                    <FargekategoriTabellradKnapp bruker={bruker} />
+                    {!erHuskelappFeatureTogglePa && (
+                        <ArbeidslistekategoriVisning
+                            kategori={bruker.arbeidsliste?.kategori}
+                            dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
+                        />
+                    )}
+                    {erHuskelappFeatureTogglePa && (
+                        <>
+                            <FargekategoriTabellradKnapp bruker={bruker} />
+                            <BodyShort className="huskelappcontainer">
+                                {bruker.huskelapp ? (
+                                    <HuskelappIkon className="huskelappikon" />
+                                ) : (
+                                    <InaktivHuskelappIkon className="huskelappikon" />
+                                )}
+                            </BodyShort>
+                        </>
+                    )}
                 </div>
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"

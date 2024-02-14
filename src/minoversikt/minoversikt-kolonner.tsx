@@ -51,6 +51,7 @@ import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-s
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {truncateTekst} from '../utils/tekst-utils';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -94,6 +95,8 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const brukersSituasjonSistEndret = bruker.brukersSituasjonSistEndret
         ? new Date(bruker.brukersSituasjonSistEndret)
         : null;
+
+    const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
     const iAvtaltAktivitet: boolean =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
     const avtaltAktivitetOgTiltak: boolean =
@@ -128,7 +131,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <BrukerNavn className="brukernavn col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
             <TekstKolonne
@@ -403,6 +406,16 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <DatoKolonne
                 dato={brukersSituasjonSistEndret}
                 skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
+                tekst={bruker.huskelapp?.kommentar ? truncateTekst(bruker.huskelapp.kommentar) : ' '}
+            />
+            <DatoKolonne
+                dato={huskeLappFrist}
+                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
                 className="col col-xs-2"
             />
         </div>
