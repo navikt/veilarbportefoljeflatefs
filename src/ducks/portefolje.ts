@@ -139,12 +139,12 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
     });
 }
 
-function updateFargekategoriForBrukere(brukere, fargekategori) {
+function updateFargekategoriForBrukere(brukere, fargekategoridata) {
     const tempBrukere = brukere.map(bruker => {
-        if (bruker.fnr === fargekategori.fnr) {
+        if (bruker.fnr === fargekategoridata.fnr) {
             return {
                 ...bruker,
-                fargekategori: fargekategori.fargekategoriVerdi
+                fargekategori: fargekategoridata.fargekategoriVerdi
             };
         }
         return bruker;
@@ -436,7 +436,7 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
 }
 
 export function oppdaterFargekategoriAction(data, props) {
-    const fargekategori = {
+    const fargekategoridata = {
         fargekategoriVerdi: data,
         fnr: props
     };
@@ -444,6 +444,6 @@ export function oppdaterFargekategoriAction(data, props) {
     return dispatch =>
         dispatch({
             type: OPPDATER_FARGEKATEGORI,
-            fargekategori
+            fargekategori: fargekategoridata
         });
 }

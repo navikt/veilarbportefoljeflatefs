@@ -45,6 +45,7 @@ function Toolbar(props: ToolbarProps) {
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     const feilmelding = brukerfeilMelding.message;
+    const valgteBrukereFnrs = valgteBrukere.map(bruker => bruker.fnr);
 
     const oversikt = side => {
         switch (side) {
@@ -52,7 +53,7 @@ function Toolbar(props: ToolbarProps) {
                 return (
                     <>
                         <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
-                        <FargekategoriToolbarKnapp valgteBrukere={valgteBrukere} />
+                        <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
                     </>
                 );
             case OversiktType.enhetensOversikt:

@@ -1,4 +1,4 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {FargekategoriDataModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
@@ -228,9 +228,9 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
-export function oppdaterFargekategori(fargekategori) {
+export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fargekategori)};
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
     return fetchToJson(url, config);
 }
 

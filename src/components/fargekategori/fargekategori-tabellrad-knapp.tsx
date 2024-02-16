@@ -8,7 +8,7 @@ interface FargekategoriPopoverKnappProps {
     bruker: BrukerModell;
 }
 
-export default function FargekategoriPopoverKnapp({bruker}: FargekategoriPopoverKnappProps) {
+export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -22,10 +22,10 @@ export default function FargekategoriPopoverKnapp({bruker}: FargekategoriPopover
                 variant="tertiary"
             />
             <FargekategoriPopover
-                bruker={bruker}
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}
+                fnrs={[bruker.fnr]}
             />
         </>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
-import {BrukerModell, FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
 import {useDispatch} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
@@ -14,7 +13,7 @@ interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
-    bruker: BrukerModell;
+    fnrs: string[];
     toolbarknapp?: boolean;
     placement?: 'right' | 'top-start';
 }
@@ -23,7 +22,7 @@ export default function FargekategoriPopover({
     buttonRef,
     openState,
     setOpenState,
-    bruker,
+    fnrs,
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -40,7 +39,8 @@ export default function FargekategoriPopover({
     };
 
     const sendOppdaterFargekategori = fargekategori => {
-        doOppdaterFargekategori(bruker.fnr, fargekategori);
+        // TODO: Fjern valg av første element i liste når det er klart
+        doOppdaterFargekategori(fnrs[0], fargekategori);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -52,6 +52,7 @@ export default function FargekategoriPopover({
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
                     sendOppdaterFargekategori(fargekategori);
+                    setOpenState(false);
                 }}
             />
         );
@@ -64,10 +65,13 @@ export default function FargekategoriPopover({
             onClose={() => setOpenState(false)}
             placement={placement}
         >
-            <Popover.Content>
-                {fargekategoriknapper}
-                <Button icon={<FargekategoriIkonTomtBokmerke />} size="small" variant="tertiary" />
-            </Popover.Content>
+            <Popover.Content>{fargekategoriknapper}</Popover.Content>
+            {/* <Popover.Content>
+                Vil du endre kategori for alle markerte brukere til: "valgtikon"
+                <Button size="small">Endre</Button>
+                <Button size="small" >Avbryt</Button>
+                - Eventuelt se på fjernarbeidslistemodal
+            </Popover.Content> */}
         </Popover>
     );
 }

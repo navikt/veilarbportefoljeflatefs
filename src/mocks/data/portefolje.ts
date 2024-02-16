@@ -459,7 +459,7 @@ const hentRandomAktivitetsplikt = () => {
 };
 
 const lagFargekategori = () => {
-    const fargekategoriType = rnd(1, 9);
+    const fargekategoriType = rnd(1, 11);
     switch (fargekategoriType) {
         case 1:
             return FargekategoriModell.FARGEKATEGORI_A;
@@ -473,6 +473,8 @@ const lagFargekategori = () => {
             return FargekategoriModell.FARGEKATEGORI_E;
         case 6:
             return FargekategoriModell.FARGEKATEGORI_F;
+        case 7:
+            return FargekategoriModell.INGEN_KATEGORI;
         default:
             return null;
     }
