@@ -1,11 +1,11 @@
 import {FargekategoriModell} from '../../model-interfaces';
-import {ReactComponent as FargekategoriIkonBlattBokmerke} from '../ikoner/fargekategorier/blaatt-bokmerke.svg';
-import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/groenn-trekant.svg';
-import {ReactComponent as FargekategoriIkonGulSirkel} from '../ikoner/fargekategorier/gul-sirkel.svg';
-import {ReactComponent as FargekategoriIkonLillaFirkant} from '../ikoner/fargekategorier/lilla-firkant.svg';
-import {ReactComponent as FargekategoriIkonLimeHalvsirkel} from '../ikoner/fargekategorier/lime-halvsirkel.svg';
-import {ReactComponent as FargekategoriIkonOransjeFemkant} from '../ikoner/fargekategorier/oransje-femkant.svg';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/tomt-bokmerke.svg';
+import {ReactComponent as FargekategoriIkonBlattBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_blatt_bokmerke.svg';
+import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
+import {ReactComponent as FargekategoriIkonGulSirkel} from '../ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
+import {ReactComponent as FargekategoriIkonLillaFirkant} from '../ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
+import {ReactComponent as FargekategoriIkonLyseblaFemkant} from '../ikoner/fargekategorier/Fargekategoriikon_lysebla_femkant.svg';
+import {ReactComponent as FargekategoriIkonOransjeDiamant} from '../ikoner/fargekategorier/Fargekategoriikon_oransje_diamant_v2.svg';
+import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_ingen_kategori.svg';
 import React from 'react';
 
 const fargekategoriIkonMapper = fargekategori => {
@@ -19,9 +19,10 @@ const fargekategoriIkonMapper = fargekategori => {
         case FargekategoriModell.FARGEKATEGORI_D:
             return <FargekategoriIkonLillaFirkant />;
         case FargekategoriModell.FARGEKATEGORI_E:
-            return <FargekategoriIkonLimeHalvsirkel />;
+            return <FargekategoriIkonLyseblaFemkant />;
         case FargekategoriModell.FARGEKATEGORI_F:
-            return <FargekategoriIkonOransjeFemkant />;
+            return <FargekategoriIkonOransjeDiamant />;
+        case FargekategoriModell.INGEN_KATEGORI:
         case null:
             return <FargekategoriIkonTomtBokmerke />;
         default:
