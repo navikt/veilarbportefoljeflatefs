@@ -5,6 +5,7 @@
 }
 .veilarbportefoljeflatefs .moteplan_popover {
     z-index: 1201 !important;
+    padding: 2px; /* Unngår at eventuell scrollbar legg seg over border på popover */
 }
 .veilarbportefoljeflatefs .moteplan_content {
     max-height: max(50vh, 25rem); /* Minst 400px-rem høg, max halve skjermhøgda. Relativt vilkårlege verdiar. */
