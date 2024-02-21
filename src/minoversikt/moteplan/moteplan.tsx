@@ -59,7 +59,9 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 open={erOpen}
                 onClose={() => setErOpen(false)}
                 anchorEl={buttonRef.current}
-                placement="left-start"
+                /* Placement kan bli "left-start" igjen når vi oppdaterer @navikt/ds-react til nyare enn v5.6.5
+                 * og kan ta i bruk "flip"-prop. */
+                placement="bottom"
             >
                 <Popover.Content className="moteplan_content">
                     {fetchError ? (
