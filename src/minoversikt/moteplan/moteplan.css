@@ -6,6 +6,10 @@
 .veilarbportefoljeflatefs .moteplan_popover {
     z-index: 1201 !important;
 }
+.veilarbportefoljeflatefs .moteplan_content {
+    max-height: max(50vh, 25rem); /* Minst 400px-rem høg, max halve skjermhøgda. Relativt vilkårlege verdiar. */
+    overflow-y: auto;
+}
 .veilarbportefoljeflatefs .moteplan_content div:first-child h3 {
     margin-top: 0;
 }
@@ -41,4 +45,5 @@
     float: right;
     margin-top: 0.3rem;
     margin-right: 0.3rem;
+    margin-top: 1rem;
 }
