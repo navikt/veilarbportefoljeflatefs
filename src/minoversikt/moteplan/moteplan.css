@@ -13,6 +13,11 @@
 .veilarbportefoljeflatefs .moteplan_content div:first-child h3 {
     margin-top: 0;
 }
+.veilarbportefoljeflatefs .moteplan_content > div:last-child {
+    /* Om eit møte er siste elementet i lista legg vi til litt luft under det
+     * så det er tydeleg for brukaren at dei kan sjå alle elementa. */
+    margin-bottom: 2rem;
+}
 .veilarbportefoljeflatefs .moteplan_tittel {
     margin-top: 0.5rem;
     margin-bottom: 0;
@@ -43,7 +48,6 @@
 }
 #seFlereMoterKnapp {
     float: right;
-    margin-top: 0.3rem;
     margin-right: 0.3rem;
     margin-top: 1rem;
 }
