@@ -5,13 +5,28 @@
 }
 .veilarbportefoljeflatefs .moteplan_popover {
     z-index: 1201 !important;
+    padding: 2px; /* Unngår at eventuell scrollbar legg seg over border på popover */
 }
-.veilarbportefoljeflatefs .moteplan_content div:first-child h3 {
-    margin-top: 0;
+.veilarbportefoljeflatefs .moteplan_content {
+    max-height: max(50vh, 25rem); /* Minst 400px-rem høg, max halve skjermhøgda. Relativt vilkårlege verdiar. */
+    overflow-y: auto;
+}
+.veilarbportefoljeflatefs .moteplan_content ol {
+    /* Nullstillar nettleser-styling av liste */
+    margin: 0;
+    padding: 0;
+}
+.veilarbportefoljeflatefs .moteplan_content li {
+    list-style-type: none; /* Nullstillar nettleserstyling av listeelement */
+    margin-bottom: 0.5rem;
+}
+.veilarbportefoljeflatefs .moteplan_content li:last-child {
+    margin-bottom: 0;
+}
+.veilarbportefoljeflatefs .moteplan_content ol:last-child {
+    margin-bottom: 2rem;
 }
 .veilarbportefoljeflatefs .moteplan_tittel {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
     margin-left: 0.75rem;
 }
 .veilarbportefoljeflatefs .moteplan_tabell_tittelrad th {
@@ -39,6 +54,6 @@
 }
 #seFlereMoterKnapp {
     float: right;
-    margin-top: 0.3rem;
     margin-right: 0.3rem;
+    margin-top: 1rem;
 }

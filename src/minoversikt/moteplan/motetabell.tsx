@@ -12,7 +12,7 @@ interface MoteTabellProps {
 
 function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
     return (
-        <div>
+        <li>
             <Heading className="moteplan_tittel" size="small" level="2">
                 {dagFraDato(dato)} {dato.getDate()}. {dato.toLocaleString('default', {month: 'long'})}
             </Heading>
@@ -36,7 +36,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
                         moter.map((mote, key) => <MoteKollonne dato={dato} mote={mote} enhetId={enhetId} key={key} />)}
                 </Table.Body>
             </Table>
-        </div>
+        </li>
     );
 }
 
