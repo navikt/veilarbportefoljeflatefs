@@ -1,4 +1,3 @@
-import {dagFraDato} from '../../utils/dato-utils';
 import {Heading, Loader, Table} from '@navikt/ds-react';
 import * as React from 'react';
 import {MoteData} from './moteplan';
@@ -14,7 +13,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
     return (
         <li>
             <Heading className="moteplan_tittel" size="small" level="2">
-                {dagFraDato(dato)} {dato.getDate()}. {dato.toLocaleString('default', {month: 'long'})}
+                {dato.toLocaleString(['no'], {weekday: 'long', day: 'numeric', month: 'long'})}
             </Heading>
             <Table size="small">
                 <Table.Header>

@@ -29,6 +29,9 @@
 .veilarbportefoljeflatefs .moteplan_tittel {
     margin-left: 0.75rem;
 }
+.veilarbportefoljeflatefs .moteplan_tittel:first-letter {
+    text-transform: capitalize;
+}
 .veilarbportefoljeflatefs .moteplan_tabell_tittelrad th {
     padding-bottom: 0 !important;
     font-size: 1rem;
