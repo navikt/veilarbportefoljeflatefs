@@ -60,7 +60,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 onClose={() => setErOpen(false)}
                 anchorEl={buttonRef.current}
                 /* Placement kan bli "left-start" igjen når vi oppdaterer @navikt/ds-react til nyare enn v5.6.5
-                 * og kan ta i bruk "flip"-prop. */
+                 * og kan ta i bruk "flip"-prop. - Ingrid, 2024-02-22 */
                 placement="bottom"
             >
                 <Popover.Content className="moteplan_content">
@@ -73,9 +73,11 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                             Ingen møter
                         </Alert>
                     ) : (
-                        dager
-                            .slice(0, maxAntallDager)
-                            .map((dag, key) => <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />)
+                        <ol>
+                            {dager.slice(0, maxAntallDager).map((dag, key) => (
+                                <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />
+                            ))}
+                        </ol>
                     )}
                     <SeFlereMoterKnapp
                         cssId={'seFlereMoterKnapp'}
