@@ -415,6 +415,10 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
 }
 
 export function hentMockPlan(): MoteData[] {
+    const deltaker1 = {fornavn: 'john', etternavn: 'johnson', fnr: '123'};
+    const deltaker2 = {fornavn: 'Mars', etternavn: 'Testson', fnr: '456'};
+    const deltaker3 = {fornavn: 'Ada', etternavn: 'Kadabra', fnr: '11223312345'};
+
     const now = new Date();
     const omToDager = new Date();
     omToDager.setDate(omToDager.getDate() + 4);
@@ -422,64 +426,52 @@ export function hentMockPlan(): MoteData[] {
     function randomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toString();
     }
+    function motedataRandomDager(antallMoter: Number): MoteData[] {
+        const moteliste: MoteData[] = [];
+        for (let i = 0; i < antallMoter; i++) {
+            const dato = randomDate(now, new Date(2025, 11, 30));
+            moteliste.push({
+                dato,
+                deltaker: deltaker3,
+                avtaltMedNav: false
+            });
+        }
+        return moteliste;
+    }
 
     return [
         {
             dato: now.toString(),
-            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-23T12:02:35.636Z',
-            deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'},
+            deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-25T15:02:35.636Z',
-            deltaker: {fornavn: 'john', etternavn: 'testson', fnr: '123'},
+            deltaker: deltaker2,
             avtaltMedNav: false
         },
         {
             dato: '2022-03-24T15:02:35.636Z',
-            deltaker: {fornavn: 'john', etternavn: 'tester', fnr: '123'},
+            deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-26T15:02:35.636Z',
-            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
+            deltaker: deltaker2,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-27T15:02:35.636Z',
-            deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
+            deltaker: deltaker2,
             avtaltMedNav: true
         },
-        {dato: omToDager.toString(), deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false},
-        {
-            dato: randomDate(now, new Date(2025, 11, 30)),
-            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
-            avtaltMedNav: false
-        },
-        {
-            dato: randomDate(now, new Date(2025, 11, 30)),
-            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
-            avtaltMedNav: false
-        },
-        {
-            dato: randomDate(now, new Date(2025, 11, 30)),
-            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
-            avtaltMedNav: false
-        },
-        {
-            dato: randomDate(now, new Date(2025, 11, 30)),
-            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
-            avtaltMedNav: false
-        },
-        {
-            dato: randomDate(now, new Date(2025, 11, 30)),
-            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
-            avtaltMedNav: false
-        }
+        {dato: omToDager.toString(), deltaker: deltaker3, avtaltMedNav: false},
+        ...motedataRandomDager(5)
     ];
 }
 
