@@ -426,7 +426,7 @@ export function hentMockPlan(): MoteData[] {
     function randomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toString();
     }
-    function motedataRandomDager(antallMoter: Number): MoteData[] {
+    function motedataRandomDager(antallMoter: number): MoteData[] {
         const moteliste: MoteData[] = [];
         for (let i = 0; i < antallMoter; i++) {
             const dato = randomDate(now, new Date(2025, 11, 30));
