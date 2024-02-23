@@ -1,7 +1,7 @@
 import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {BarnUnder18Aar, KategoriModell} from '../../model-interfaces';
+import {BarnUnder18Aar, EnsligeForsorgereOvergangsstonad, KategoriModell} from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -486,7 +486,7 @@ export function hentMockPlan(): MoteData[] {
     ];
 }
 
-const lagRandomOvergangsstonadForEnsligForsorger = () => {
+const lagRandomOvergangsstonadForEnsligForsorger = (): EnsligeForsorgereOvergangsstonad => {
     return {
         vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
         harAktivitetsplikt: hentRandomAktivitetsplikt(),
