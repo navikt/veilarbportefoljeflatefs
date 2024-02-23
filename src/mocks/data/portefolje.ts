@@ -186,7 +186,7 @@ const lagHuskelapp = fnr => {
     };
 };
 
-function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
+function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
@@ -274,10 +274,7 @@ const erSkjermet = () => {
     let randomArray = new Int8Array(1);
     window.crypto.getRandomValues(randomArray);
 
-    if (randomArray[0] % 5 === 0) {
-        return true;
-    }
-    return false;
+    return randomArray[0] % 5 === 0;
 };
 
 const randomAvvik14aVedtak = () => {
