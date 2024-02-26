@@ -9,7 +9,6 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
 import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import {OPPDATER_FARGEKATEGORI_FEILET, visFeiletModal} from '../../ducks/modal-feilmelding-brukere';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -35,9 +34,9 @@ export default function FargekategoriPopover({
             fargekategoriVerdi: fargekategori
         };
 
-        dispatch(lagreFargekategoriAction(data)).then(res =>
-            visServerfeil(res, [data], dispatch).then(() =>
-                dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr))
+        dispatch(lagreFargekategoriAction(data)).then(
+            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
+                dispatch(visServerfeilModal())
             )
         );
     };
@@ -78,28 +77,4 @@ export default function FargekategoriPopover({
             </Popover.Content> */}
         </Popover>
     );
-}
-
-function visServerfeil(res, liste: FargekategoriDataModell[], dispatch) {
-    if (!res) {
-        return visServerfeilModal()(dispatch);
-    }
-    const brukereOK = res.data.data;
-    const brukereError = res.data.error;
-    // eslint-disable-next-line
-    console.log('rad 100 ', res, brukereOK);
-    /*
-        const brukereSomSkalOppdateres = liste
-            .map(brukerliste => ({
-                ...brukerliste,
-                fargekategori: props.fargekategori
-            }))
-            .filter(bruker => brukereOK.includes(bruker.fnr));
-    */
-    if (brukereError.length > 0) {
-        visFeiletModal({
-            aarsak: OPPDATER_FARGEKATEGORI_FEILET,
-            brukereError
-        })(dispatch);
-    }
 }
