@@ -217,8 +217,11 @@ interface EnsligeForsorgereOvergangsstonad {
 }
 
 interface Huskelapp {
-    kommentar: string;
-    frist: Date;
+    huskelappId?: string | null;
+    frist?: Date | null;
+    kommentar?: string | null;
+    endretDato?: Date | null;
+    endretAv?: string | null;
 }
 
 export interface BarnUnder18Aar {
@@ -272,6 +275,14 @@ export interface ArbeidslisteModell {
     kategori: KategoriModell;
     hentetKommentarOgTittel: boolean;
     navkontorForArbeidsliste?: string;
+}
+
+export interface HuskelappModell {
+    huskelappId?: string | null;
+    frist?: Date | null;
+    kommentar?: string | null;
+    endretDato?: Date | null;
+    endretAv?: string | null;
 }
 
 export enum Status {
