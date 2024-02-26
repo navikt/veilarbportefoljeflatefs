@@ -34,11 +34,9 @@ export default function FargekategoriPopover({
             fargekategoriVerdi: fargekategori
         };
 
-        dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori})).then(
-            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
-                dispatch(visServerfeilModal())
-            )
-        );
+        dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}))
+            .then(dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)))
+            .catch(dispatch(visServerfeilModal()));
     };
 
     const sendOppdaterFargekategori = fargekategori => {
