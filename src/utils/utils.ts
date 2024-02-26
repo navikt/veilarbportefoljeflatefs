@@ -55,10 +55,6 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function erGithubPages() {
-    return window.location.host.includes('navikt.github.io');
-}
-
 export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
     if (!utlopsdatoStr) {
         return undefined;

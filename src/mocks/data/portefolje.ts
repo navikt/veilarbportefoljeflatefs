@@ -398,6 +398,10 @@ export function hentArbeidslisteForBruker(fnr: {fodselsnummer: any}) {
 export function hentMockPlan() {
     const omToDager = new Date();
     omToDager.setDate(omToDager.getDate() + 4);
+    function randomDate(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
     return [
         {dato: new Date(), deltaker: {fornavn: 'john', etternavn: 'johnson', fnr: '123'}, avtaltMedNav: true},
         {
@@ -425,7 +429,32 @@ export function hentMockPlan() {
             deltaker: {fornavn: 'Mars', etternavn: 'Johnson', fnr: '123'},
             avtaltMedNav: true
         },
-        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false}
+        {dato: omToDager, deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'}, avtaltMedNav: false},
+        {
+            dato: randomDate(new Date(), new Date(2025, 11, 30)),
+            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: randomDate(new Date(), new Date(2025, 11, 30)),
+            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: randomDate(new Date(), new Date(2025, 11, 30)),
+            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: randomDate(new Date(), new Date(2025, 11, 30)),
+            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
+            avtaltMedNav: false
+        },
+        {
+            dato: randomDate(new Date(), new Date(2025, 11, 30)),
+            deltaker: {fornavn: 'X', etternavn: 'tester4', fnr: '123'},
+            avtaltMedNav: false
+        }
     ];
 }
 
