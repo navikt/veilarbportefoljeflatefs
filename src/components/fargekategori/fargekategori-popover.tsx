@@ -1,6 +1,6 @@
 import React from 'react';
 import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
@@ -27,16 +27,23 @@ export default function FargekategoriPopover({
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-
+    const fargekategoriverdi = useSelector((state: AppState) => state.fargekategori);
+    //eslint-disable-next-line
+    console.log('FargekategoriPopover: ', fargekategoriverdi);
     const doOppdaterFargekategori = (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
 
-        dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}))
-            .then(dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)))
-            .catch(dispatch(visServerfeilModal()));
+        dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
+        if (fargekategoriverdi.status === 'ERROR') {
+            dispatch(visServerfeilModal());
+        } else {
+            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
+                dispatch(visServerfeilModal())
+            );
+        }
     };
 
     const sendOppdaterFargekategori = fargekategori => {
