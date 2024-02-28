@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
 import {useDispatch, useSelector} from 'react-redux';
-import {Button, Popover} from '@navikt/ds-react';
+import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
 import {lagreFargekategoriAction} from '../../ducks/fargekategori';
@@ -27,6 +27,7 @@ export default function FargekategoriPopover({
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const [visFeilVedOppdaterFargekategori, setVisFeilVedOppdaterFargekategori] = useState(false);
     const fargekategoriverdi = useSelector((state: AppState) => state.fargekategori);
     //eslint-disable-next-line
     console.log('FargekategoriPopover: ', fargekategoriverdi);
@@ -37,12 +38,12 @@ export default function FargekategoriPopover({
         };
 
         dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
-        if (fargekategoriverdi.status === 'ERROR') {
-            dispatch(visServerfeilModal());
-        } else {
+        if (fargekategoriverdi.status === 'SUCCESS') {
             dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
                 dispatch(visServerfeilModal())
             );
+        } else {
+            setVisFeilVedOppdaterFargekategori(true);
         }
     };
 
@@ -53,16 +54,20 @@ export default function FargekategoriPopover({
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
         return (
-            <Button
-                key={key}
-                size="small"
-                variant="tertiary"
-                icon={fargekategoriIkonMapper(fargekategori)}
-                onClick={() => {
-                    sendOppdaterFargekategori(fargekategori);
-                    setOpenState(false);
-                }}
-            />
+            <>
+                <Button
+                    key={key}
+                    size="small"
+                    variant="tertiary"
+                    icon={fargekategoriIkonMapper(fargekategori)}
+                    onClick={() => {
+                        sendOppdaterFargekategori(fargekategori);
+                        if (fargekategoriverdi.status === 'SUCCESS') {
+                            setOpenState(false);
+                        }
+                    }}
+                />
+            </>
         );
     });
 
@@ -70,10 +75,19 @@ export default function FargekategoriPopover({
         <Popover
             anchorEl={buttonRef.current}
             open={openState}
-            onClose={() => setOpenState(false)}
+            onClose={() => {
+                setOpenState(false);
+                setVisFeilVedOppdaterFargekategori(false);
+            }}
             placement={placement}
         >
-            <Popover.Content>{fargekategoriknapper}</Popover.Content>
+            <Popover.Content>
+                {fargekategoriverdi.status === 'ERROR' && visFeilVedOppdaterFargekategori ? (
+                    <Alert variant="error">Feil ved lagring av fargekategori</Alert>
+                ) : (
+                    fargekategoriknapper
+                )}
+            </Popover.Content>
             {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"
                 <Button size="small">Endre</Button>
