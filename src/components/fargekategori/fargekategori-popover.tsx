@@ -8,7 +8,6 @@ import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
-import {visServerfeilModal} from '../../ducks/modal-serverfeil';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -29,8 +28,7 @@ export default function FargekategoriPopover({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const [visFeilVedOppdaterFargekategori, setVisFeilVedOppdaterFargekategori] = useState(false);
     const fargekategoriverdi = useSelector((state: AppState) => state.fargekategori);
-    //eslint-disable-next-line
-    console.log('FargekategoriPopover: ', fargekategoriverdi);
+
     const doOppdaterFargekategori = (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
@@ -38,10 +36,10 @@ export default function FargekategoriPopover({
         };
 
         dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
+        //eslint-disable-next-line
+        console.log('FargekategoriPopover: ', fargekategoriverdi);
         if (fargekategoriverdi.status !== 'ERROR') {
-            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
-                dispatch(visServerfeilModal())
-            );
+            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
         } else {
             setVisFeilVedOppdaterFargekategori(true);
         }
@@ -49,7 +47,7 @@ export default function FargekategoriPopover({
 
     const sendOppdaterFargekategori = fargekategori => {
         // TODO: Fjern valg av første element i liste når det er klart
-        doOppdaterFargekategori(fnrs[0], fargekategori);
+        doOppdaterFargekategori(fnrs, fargekategori);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
