@@ -38,6 +38,7 @@ export interface SessionMeta {
     session?: Session;
     tokens?: Tokens;
 }
+
 export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
@@ -254,7 +255,7 @@ export function slettHuskelapp(huskelappId: string) {
 }
 
 export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
     return fetchToJson(url, config);
 }
