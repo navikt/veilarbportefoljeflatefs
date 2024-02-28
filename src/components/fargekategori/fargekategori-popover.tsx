@@ -38,7 +38,7 @@ export default function FargekategoriPopover({
         };
 
         dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
-        if (fargekategoriverdi.status === 'SUCCESS') {
+        if (fargekategoriverdi.status !== 'ERROR') {
             dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)).catch(
                 dispatch(visServerfeilModal())
             );
@@ -62,7 +62,7 @@ export default function FargekategoriPopover({
                     icon={fargekategoriIkonMapper(fargekategori)}
                     onClick={() => {
                         sendOppdaterFargekategori(fargekategori);
-                        if (fargekategoriverdi.status === 'SUCCESS') {
+                        if (fargekategoriverdi.status !== 'ERROR') {
                             setOpenState(false);
                         }
                     }}
