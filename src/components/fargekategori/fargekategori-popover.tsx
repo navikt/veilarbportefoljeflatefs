@@ -24,16 +24,16 @@ export default function FargekategoriPopover({
     fnrs,
     placement = 'right'
 }: FargekategoriPopoverProps) {
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    //    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const [visFeilVedOppdaterFargekategori, setVisFeilVedOppdaterFargekategori] = useState(false);
     const fargekategoriverdi = useSelector((state: AppState) => state.fargekategori);
 
     const doOppdaterFargekategori = (fnr, fargekategori) => {
-        const data: FargekategoriDataModell = {
-            fnr: fnr,
-            fargekategoriVerdi: fargekategori
-        };
-
+        /*       const data: FargekategoriDataModell = {
+                   fnr: fnr,
+                   fargekategoriVerdi: fargekategori
+               };
+       */
         const res = oppdaterFargekategori({fnr: fnr, fargekategoriVerdi: fargekategori});
         //eslint-disable-next-line
         console.log('FargekategoriPopover res: ', res);
