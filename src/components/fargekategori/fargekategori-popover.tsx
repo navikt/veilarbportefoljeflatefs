@@ -3,8 +3,7 @@ import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfac
 import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
-import {lagreFargekategoriAction} from '../../ducks/fargekategori';
+import {oppdaterFargekategori} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
@@ -35,12 +34,10 @@ export default function FargekategoriPopover({
             fargekategoriVerdi: fargekategori
         };
 
-        const res = dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
+        const res = oppdaterFargekategori({fnr: fnr, fargekategoriVerdi: fargekategori});
         //eslint-disable-next-line
         console.log('FargekategoriPopover res: ', res);
-        if (fargekategoriverdi.status !== 'ERROR') {
-            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
-        } else {
+        if (fargekategoriverdi.status === 'ERROR') {
             setVisFeilVedOppdaterFargekategori(true);
         }
     };

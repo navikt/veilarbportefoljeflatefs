@@ -254,7 +254,7 @@ export function slettHuskelapp(huskelappId: string) {
     return fetchToJson(url, config);
 }
 
-export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
+export function oppdaterFargekategorier(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
     return fetchToJson(url, config);
