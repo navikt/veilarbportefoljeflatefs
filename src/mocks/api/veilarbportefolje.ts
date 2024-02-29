@@ -215,10 +215,10 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         })
     ),
     http.put(
-        '/veilarbportefolje/api/v1/fargekategori',
+        '/veilarbportefolje/api/v1/fargekategorier',
         withAuth(async () => {
             return HttpResponse.json({
-                fnr: '11111111111',
+                fnrs: ['11111111111'],
                 fargekategori: 'FARGEKATEGORI_A'
             });
         })

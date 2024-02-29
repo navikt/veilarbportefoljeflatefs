@@ -35,9 +35,9 @@ export default function FargekategoriPopover({
             fargekategoriVerdi: fargekategori
         };
 
-        dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
+        const res = dispatch(lagreFargekategoriAction({fnr: fnr, fargekategoriVerdi: fargekategori}));
         //eslint-disable-next-line
-        console.log('FargekategoriPopover: ', fargekategoriverdi);
+        console.log('FargekategoriPopover res: ', res);
         if (fargekategoriverdi.status !== 'ERROR') {
             dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr));
         } else {
