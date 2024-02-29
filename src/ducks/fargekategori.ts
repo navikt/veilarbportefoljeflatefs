@@ -1,4 +1,4 @@
-import {doThenDispatch, handterFeil, STATUS} from './utils';
+import {handterFeil, STATUS} from './utils';
 import {toJson} from '../middleware/api';
 import {FargekategoriDataModell} from '../model-interfaces';
 import {AppState} from '../reducer';
@@ -33,7 +33,7 @@ export default function fargekategoriReducer(state = initialState, action) {
 }
 
 // Action Creators
-
+/*
 export function lagreFargekategoriAction(fargekategori: FargekategoriDataModell) {
     return doThenDispatch(() => oppdaterFargekategori(fargekategori), {
         OK: FARGEKATEGORI_REDIGER_OK,
@@ -41,7 +41,7 @@ export function lagreFargekategoriAction(fargekategori: FargekategoriDataModell)
         PENDING: FARGEKATEGORI_REDIGER_PENDING
     });
 }
-
+*/
 export function oppdaterFargekategori(fargekategori: FargekategoriDataModell) {
     return (dispatch, getState: () => AppState) => {
         //       dispatch({type: TILDEL_VEILEDER_RELOAD});
@@ -109,7 +109,10 @@ export function oppdaterFargekategori(fargekategori: FargekategoriDataModell) {
                         // Venter litt slik at indeks kan komme i sync
                         setTimeout(() => {
                             const enhet = getState().valgtEnhet.data.enhetId;
+                            //eslint-disable-next-line
+                            console.log('enhet', enhet);
                             /*
+
                                             if (oversiktType === OversiktType.minOversikt) {
                                                 hentStatustallForVeileder(enhet, veilederIdent)(dispatch);
                                             } else {
