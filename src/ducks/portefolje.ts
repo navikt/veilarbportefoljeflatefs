@@ -159,7 +159,7 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 }
 
 function updateFargekategoriForBrukere(brukere, fargekategoridata) {
-    const tempBrukere = brukere.map(bruker => {
+    return brukere.map(bruker => {
         if (bruker.fnr === fargekategoridata.fnr) {
             return {
                 ...bruker,
@@ -168,7 +168,6 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
         }
         return bruker;
     });
-    return tempBrukere;
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
