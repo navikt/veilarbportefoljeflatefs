@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
-import {useDispatch, useSelector} from 'react-redux';
+import {FargekategoriModell} from '../../model-interfaces';
+import {useSelector} from 'react-redux';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategori} from '../../ducks/fargekategori';
-import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
-import {AnyAction} from 'redux';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
