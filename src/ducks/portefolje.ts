@@ -144,7 +144,7 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
         if (bruker.fnr === fargekategoridata.fnr) {
             return {
                 ...bruker,
-                fargekategori: fargekategoridata.fargekategoriVerdi
+                fargekategori: fargekategoridata.fargekategori
             };
         }
         return bruker;
@@ -435,15 +435,31 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
     };
 }
 
-export function oppdaterFargekategoriAction(data, props) {
+export function oppdaterFargekategoriAction(fargekategori, brukerFnr) {
     const fargekategoridata = {
-        fargekategoriVerdi: data,
-        fnr: props
+        fargekategoriVerdi: fargekategori,
+        fnr: brukerFnr
     };
 
-    return dispatch =>
-        dispatch({
-            type: OPPDATER_FARGEKATEGORI,
-            fargekategori: fargekategoridata
-        });
+    return dispatch => {
+        Api.oppdaterFargekategori(fargekategoridata)
+            .then(res => {
+                dispatch({
+                    type: OPPDATER_FARGEKATEGORI,
+                    fargekategori: res
+                });
+            })
+            .catch(() => console.error('HJELP'));
+    };
+
+    // return doThenDispatch(() => Api.oppdaterFargekategori(fargekategoridata), {
+    //     OK: FARGEKATEGORI_REDIGER_OK,
+    // });
+
+    //
+    // return dispatch =>
+    //     dispatch({
+    //         type: OPPDATER_FARGEKATEGORI,
+    //         fargekategori: fargekategoridata
+    //     });
 }
