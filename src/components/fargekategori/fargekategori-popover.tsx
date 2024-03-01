@@ -1,13 +1,14 @@
-import React from 'react';
-import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import React, {useState} from 'react';
+import {FargekategoriModell} from '../../model-interfaces';
 import {useDispatch} from 'react-redux';
-import {Button, Popover} from '@navikt/ds-react';
+import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
-import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
+import * as Api from '../../middleware/api';
+import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -26,14 +27,24 @@ export default function FargekategoriPopover({
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const [harFeil, setHarFeil] = useState(false);
 
     const doOppdaterFargekategori = (fnr, fargekategori) => {
-        const data: FargekategoriDataModell = {
-            fnr: fnr,
-            fargekategoriVerdi: fargekategori
+        setHarFeil(false);
+        const fargekategoridata = {
+            fargekategoriVerdi: fargekategori,
+            fnr
         };
 
-        oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)(dispatch);
+        lagreFargekategoriAction(fargekategoridata)(dispatch);
+
+        //
+        // Api.oppdaterFargekategori(fargekategoridata)
+        //     .then(res => {
+        //         oppdaterFargekategoriAction(fargekategoridata.fargekategoriVerdi, fargekategoridata.fnr)(dispatch);
+        //         setOpenState(false);
+        //     })
+        //     .catch(() => setHarFeil(true));
     };
 
     const sendOppdaterFargekategori = fargekategori => {
@@ -50,7 +61,6 @@ export default function FargekategoriPopover({
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
                     sendOppdaterFargekategori(fargekategori);
-                    setOpenState(false);
                 }}
             />
         );
@@ -60,10 +70,16 @@ export default function FargekategoriPopover({
         <Popover
             anchorEl={buttonRef.current}
             open={openState}
-            onClose={() => setOpenState(false)}
+            onClose={() => {
+                setOpenState(false);
+                setHarFeil(false);
+            }}
             placement={placement}
         >
-            <Popover.Content>{fargekategoriknapper}</Popover.Content>
+            <Popover.Content>
+                {fargekategoriknapper}
+                {harFeil && <Alert variant="error">HJÆLP!</Alert>}
+            </Popover.Content>
             {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"
                 <Button size="small">Endre</Button>

@@ -435,31 +435,10 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
     };
 }
 
-export function oppdaterFargekategoriAction(fargekategori, brukerFnr) {
-    const fargekategoridata = {
-        fargekategoriVerdi: fargekategori,
-        fnr: brukerFnr
-    };
-
-    return dispatch => {
-        Api.oppdaterFargekategori(fargekategoridata)
-            .then(res => {
-                dispatch({
-                    type: OPPDATER_FARGEKATEGORI,
-                    fargekategori: res
-                });
-            })
-            .catch(() => console.error('HJELP'));
-    };
-
-    // return doThenDispatch(() => Api.oppdaterFargekategori(fargekategoridata), {
-    //     OK: FARGEKATEGORI_REDIGER_OK,
-    // });
-
-    //
-    // return dispatch =>
-    //     dispatch({
-    //         type: OPPDATER_FARGEKATEGORI,
-    //         fargekategori: fargekategoridata
-    //     });
+export function oppdaterFargekategoriAction(fargekategori, fnr) {
+    return dispatch =>
+        dispatch({
+            type: OPPDATER_FARGEKATEGORI,
+            fargekategori: {fnr, fargekategori}
+        });
 }
