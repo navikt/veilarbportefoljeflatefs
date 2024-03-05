@@ -16,8 +16,8 @@ import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
-import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
-import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
+import HuskelappIkon from './huskelapp.svg?react';
+import InaktivHuskelappIkon from './huskelapp-inaktiv.svg?react';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;

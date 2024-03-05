@@ -16,7 +16,7 @@ import {DeploymentEnvironment, erMock} from './utils/url-utils';
 import {initAmplitude} from './amplitude/amplitude';
 
 if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill');
+    import('babel-polyfill');
 }
 
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
@@ -35,8 +35,9 @@ if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
 
-    const {worker} = require('./mocks/index');
-    worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
+    import('./mocks/index').then(({worker}) =>
+        worker.start({serviceWorker: {url: import.meta.env.BASE_URL + 'mockServiceWorker.js'}}).then(() => renderApp())
+    );
 } else {
     initAmplitude();
     renderApp();

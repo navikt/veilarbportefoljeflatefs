@@ -6,10 +6,10 @@ import {
 } from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.css';
-import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
-import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
-import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
-import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
+import StatusIkon from '../ikoner/tab_status.svg?react';
+import FilterIkon from '../ikoner/tab_filter.svg?react';
+import VeiledergruppeIkon from '../ikoner/tab_veiledergrupper.svg?react';
+import MineFilterIkon from '../ikoner/tab_mine-filter.svg?react';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';

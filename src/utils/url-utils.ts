@@ -60,9 +60,9 @@ export function updateLastPath() {
     }
 }
 
-export const erDev = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'development';
-export const erProd = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production';
-export const erMock = () => process.env.REACT_APP_MOCK === 'true';
+export const erDev = () => import.meta.env.MODE === 'development';
+export const erProd = () => import.meta.env.MODE === 'production';
+export const erMock = () => import.meta.env.MODE === 'mock';
 
 export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 

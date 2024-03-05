@@ -1,10 +1,10 @@
 import * as React from 'react';
 import './arbeidsliste-kategori.css';
 import './arbeidsliste.css';
-import {ReactComponent as ArbeidslisteikonBla} from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+import ArbeidslisteikonBla from '../../ikoner/arbeidsliste/arbeidslisteikon_bla.svg?react';
+import ArbeidslisteikonGronn from '../../ikoner/arbeidsliste/arbeidslisteikon_gronn.svg?react';
+import ArbeidslisteikonLilla from '../../ikoner/arbeidsliste/arbeidslisteikon_lilla.svg?react';
+import ArbeidslisteikonGul from '../../ikoner/arbeidsliste/arbeidslisteikon_gul.svg?react';
 import Arbeidslistekategori from './arbeidslistekategori';
 import {Field} from 'formik';
 import {KategoriModell} from '../../../model-interfaces';

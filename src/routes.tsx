@@ -1,5 +1,5 @@
 import React from 'react';
-import 'moment/locale/nb';
+import 'moment/dist/locale/nb';
 import {Route, Switch} from 'react-router-dom';
 import MinoversiktSide from './minoversikt/minoversikt-side';
 import EnhetSide from './enhetsportefolje/enhet-side';

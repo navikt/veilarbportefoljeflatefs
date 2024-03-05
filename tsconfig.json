@@ -25,5 +25,5 @@
       "src",
       "node_modules/cypress/types/cypress-global-vars.d.ts"
     ],
-    "exclude": ["node_modules", "**/*-spec.js", "**/*-test.js", "**/*.less"]
+    "exclude": ["node_modules", "**/*-spec.js", "**/*-test.js", "**/*.less"],
 }
