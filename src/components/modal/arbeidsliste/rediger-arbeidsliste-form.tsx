@@ -37,7 +37,12 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                         {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
                     </Heading>
                     <FormikInput name="overskrift" />
-                    <FormikTekstArea name="kommentar" />
+                    <FormikTekstArea
+                        name="kommentar"
+                        label="Kommentar"
+                        maxLengde={500}
+                        testId="modal_arbeidsliste_kommentar"
+                    />
                     <Detail size="small" className="arbeidsliste--modal-redigering">
                         {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
                     </Detail>

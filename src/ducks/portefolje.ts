@@ -30,6 +30,7 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
+const OPPDATER_HUSKELAPP_BRUKER = 'veilarbportefolje/portefolje/HUSKELAPP_BRUKER';
 
 function lagBrukerGuid(bruker) {
     return bruker.fnr === '' ? `${Math.random()}`.slice(2) : bruker.fnr;
@@ -115,6 +116,26 @@ function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
                     kommentar: arbeidsliste.kommentar,
                     hentetKommentarOgTittel: true
                 }
+            };
+        }
+        return bruker;
+    });
+}
+
+function oppdaterHuskelappForbruker(brukere, huskelapp) {
+    return brukere.map(bruker => {
+        if (bruker.fnr === huskelapp?.brukerFnr) {
+            return {
+                ...bruker,
+                huskelapp: huskelapp.huskelappId
+                    ? {
+                          kommentar: huskelapp.kommentar,
+                          frist: huskelapp.frist,
+                          huskelappId: huskelapp.huskelappId,
+                          endretDato: huskelapp.endretDato,
+                          endretAv: huskelapp.endretAv
+                      }
+                    : null
             };
         }
         return bruker;
@@ -251,6 +272,15 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 data: {
                     ...state.data,
                     brukere: leggTilKommentarArbeidsliste(state.data.brukere, action.arbeidslisteForBruker)
+                }
+            };
+        }
+        case OPPDATER_HUSKELAPP_BRUKER: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: oppdaterHuskelappForbruker(state.data.brukere, action.huskelapp)
                 }
             };
         }
@@ -406,6 +436,17 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
             dispatch({
                 type: OPPDATER_ARBEIDSLISTE_BRUKER,
                 arbeidslisteForBruker
+            });
+        });
+    };
+}
+
+export function hentHuskelappForBruker(fodselsnummer: string, enhetId: string) {
+    return dispatch => {
+        Api.hentHuskelappForBruker(fodselsnummer, enhetId).then(huskelapp => {
+            dispatch({
+                type: OPPDATER_HUSKELAPP_BRUKER,
+                huskelapp: huskelapp ?? {brukerFnr: fodselsnummer}
             });
         });
     };
