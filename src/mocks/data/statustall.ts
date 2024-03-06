@@ -20,7 +20,14 @@ export const statustallVeileder = {
         trengerVurdering: 42,
         moterMedNAVIdag: 40,
         underVurdering: 14,
-        mineHuskelapper: 16
+        mineHuskelapper: 16,
+        fargekategoriA: 1,
+        fargekategoriB: 2,
+        fargekategoriC: 3,
+        fargekategoriD: 4,
+        fargekategoriE: 5,
+        fargekategoriF: 6,
+        fargekategoriIngenKategori: 7
     }
 };
 

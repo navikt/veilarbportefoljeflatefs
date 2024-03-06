@@ -173,7 +173,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'arbeidslisteKategori') {
+            } else if (key === 'arbeidslisteKategori' || key === 'fargekategorier') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabelArbeidsliste

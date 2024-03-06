@@ -42,6 +42,14 @@ export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const HUSKELAPP = 'MINE_HUSKELAPPER';
+export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
+export const FARGEKATEGORI_A = 'FARGEKATEGORI_A';
+export const FARGEKATEGORI_B = 'FARGEKATEGORI_B';
+export const FARGEKATEGORI_C = 'FARGEKATEGORI_C';
+export const FARGEKATEGORI_D = 'FARGEKATEGORI_D';
+export const FARGEKATEGORI_E = 'FARGEKATEGORI_E';
+export const FARGEKATEGORI_F = 'FARGEKATEGORI_F';
+export const FARGEKATEGORI_INGEN_KATEGORI = 'FARGEKATEGORI_INGEN_KATEGORI';
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -72,7 +80,15 @@ export const mapFilternavnTilFilterValue = {
     innsatsgruppeUlik: INNSATSGRUPPE_ULIK,
     innsatsgruppeOgHovedmalUlik: INNSATSGRUPPE_OG_HOVEDMAL_ULIK,
     innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE,
-    huskelapp: HUSKELAPP
+    huskelapp: HUSKELAPP,
+    mineFargekategorier: MINE_FARGEKATEGORIER,
+    mineFargekategorierA: FARGEKATEGORI_A,
+    mineFargekategorierB: FARGEKATEGORI_B,
+    mineFargekategorierC: FARGEKATEGORI_C,
+    mineFargekategorierD: FARGEKATEGORI_D,
+    mineFargekategorierE: FARGEKATEGORI_E,
+    mineFargekategorierF: FARGEKATEGORI_F,
+    mineFargekategorierIngenKategori: FARGEKATEGORI_INGEN_KATEGORI
 };
 
 export const filterSomIkkeSkalSendesTilBackend = [mapFilternavnTilFilterValue.harAvvik];
@@ -98,7 +114,15 @@ export const ferdigfilterListe = {
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    MINE_HUSKELAPPER: 'Huskelapper'
+    MINE_HUSKELAPPER: 'Huskelapper',
+    MINE_FARGEKATEGORIER: 'Kategorier',
+    FARGEKATEGORI_A: 'Blå',
+    FARGEKATEGORI_B: 'Grønn',
+    FARGEKATEGORI_C: 'Lilla',
+    FARGEKATEGORI_D: 'Gul',
+    FARGEKATEGORI_E: 'Oransje',
+    FARGEKATEGORI_F: 'Lyseblå',
+    FARGEKATEGORI_INGEN_KATEGORI: 'Ingen farge'
 };
 
 export const arbeidslisteKategori = {
@@ -106,6 +130,16 @@ export const arbeidslisteKategori = {
     LILLA: 'Lilla',
     GRONN: 'Grønn',
     GUL: 'Gul'
+};
+
+export const fargekategorier = {
+    FARGEKATEGORI_A: 'Blå',
+    FARGEKATEGORI_B: 'Grønn',
+    FARGEKATEGORI_C: 'Lilla',
+    FARGEKATEGORI_D: 'Gul',
+    FARGEKATEGORI_E: 'Lyseblå',
+    FARGEKATEGORI_F: 'Oransje',
+    FARGEKATEGORI_INGEN_KATEGORI: 'Ingen farge'
 };
 
 export const alder = {
@@ -436,7 +470,8 @@ const filterKonstanter = {
     stillingFraNavFilter,
     avvik14aVedtak,
     ensligeForsorgere,
-    barnUnder18Aar
+    barnUnder18Aar,
+    fargekategorier
 };
 
 export default filterKonstanter;

@@ -2,9 +2,14 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
+import {FargekategoriModell, FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
-import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../filter-konstanter';
+import {
+    MIN_ARBEIDSLISTE,
+    MINE_FARGEKATEGORIER,
+    NYE_BRUKERE_FOR_VEILEDER,
+    UFORDELTE_BRUKERE
+} from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
@@ -14,6 +19,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
+import FilterStatusMineFargekategorier from './fargekategori';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
@@ -52,6 +58,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const kategoriliste = filtervalg.arbeidslisteKategori;
+    const fargekategoriListe = filtervalg.fargekategorier;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -78,6 +85,19 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         oppdaterKolonneAlternativer(
             dispatch,
             {...filtervalg, arbeidslisteKategori: nyeFerdigfilterListe as KategoriModell[]},
+            oversiktType
+        );
+    }
+
+    function dispatchFargekategorierChange(e: React.ChangeEvent<HTMLInputElement>) {
+        dispatch(pagineringSetup({side: 1}));
+        const nyeFerdigfilterListe = e.target.checked
+            ? [...fargekategoriListe, e.target.value]
+            : fargekategoriListe.filter(elem => elem !== e.target.value);
+        dispatch(endreFiltervalg('fargekategorier', nyeFerdigfilterListe, oversiktType));
+        oppdaterKolonneAlternativer(
+            dispatch,
+            {...filtervalg, fargekategorier: nyeFerdigfilterListe as FargekategoriModell[]},
             oversiktType
         );
     }
@@ -216,13 +236,24 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
                 {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <div className="forsteBarlabelIGruppe">
-                        <BarInputRadio
-                            filterNavn="huskelapp"
-                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                            handleChange={handleRadioButtonChange}
+                    <>
+                        <div className="forsteBarlabelIGruppe">
+                            <BarInputRadio
+                                filterNavn="huskelapp"
+                                antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                                handleChange={handleRadioButtonChange}
+                            />
+                        </div>
+                        <FilterStatusMineFargekategorier
+                            ferdigfilterListe={fargekategoriListe}
+                            handleChange={handleCheckboxChange}
+                            handleChangeCheckbox={dispatchFargekategorierChange}
+                            hidden={oversiktType !== OversiktType.minOversikt}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={dispatchFiltreringStatusChanged}
+                            checked={ferdigfilterListe.includes(MINE_FARGEKATEGORIER)}
                         />
-                    </div>
+                    </>
                 )}
             </RadioGroup>
         </div>

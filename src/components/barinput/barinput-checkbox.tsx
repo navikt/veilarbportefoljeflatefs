@@ -4,7 +4,7 @@ import './bar.css';
 import {Checkbox, Label} from '@navikt/ds-react';
 
 interface BarInputCheckboxProps {
-    antall: number;
+    antall?: number;
     checked: boolean;
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;

@@ -28,6 +28,13 @@ export interface StatustallVeileder {
     nyeBrukereForVeileder: number;
     underVurdering: number;
     mineHuskelapper: number;
+    fargekategoriA: number;
+    fargekategoriB: number;
+    fargekategoriC: number;
+    fargekategoriD: number;
+    fargekategoriE: number;
+    fargekategoriF: number;
+    fargekategoriIngenKategori: number;
 }
 
 export interface StatustallVeilederState {
@@ -56,7 +63,14 @@ export const initalStatusState: StatustallVeilederState = {
         moterMedNAVIdag: 0,
         trengerVurdering: 0,
         underVurdering: 0,
-        mineHuskelapper: 0
+        mineHuskelapper: 0,
+        fargekategoriA: 0,
+        fargekategoriB: 0,
+        fargekategoriC: 0,
+        fargekategoriD: 0,
+        fargekategoriE: 0,
+        fargekategoriF: 0,
+        fargekategoriIngenKategori: 0
     }
 };
 
