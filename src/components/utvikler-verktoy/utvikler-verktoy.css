@@ -1,0 +1,9 @@
+.utvikler-verktøy {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.utvikler-verktøy__valg {
+    list-style: none;
+}

@@ -8,6 +8,7 @@ import TilbakemeldingModal, {Tilbakemelding, TilbakemeldingCheckboxProps} from '
 import {logEvent} from '../../utils/frontend-logger';
 import {useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
+import {erMock} from '../../utils/url-utils';
 
 // FAB = Floating Action Button
 interface TilbakemeldingFabProps {
@@ -79,7 +80,7 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     };
 
     const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
-    if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || harTidligereSendtTilbakemelding()) {
+    if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || harTidligereSendtTilbakemelding() || erMock()) {
         return null;
     }
 

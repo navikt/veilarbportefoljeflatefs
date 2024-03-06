@@ -11,6 +11,7 @@ import {Modal} from '@navikt/ds-react';
 import {erMock} from './utils/url-utils';
 import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
 import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjonsmelding';
+import {UtviklerVerktoy} from './components/utvikler-verktoy/utvikler-verktoy';
 
 if (process.env.NODE_ENV !== 'test') {
     Modal.setAppElement && Modal.setAppElement('#applikasjon');
@@ -27,16 +28,19 @@ function Application() {
     );
 
     return (
-        <Provider store={store}>
-            <BrowserRouter basename={erMock() ? '/veilarbportefoljeflatefs' : '/'}>
-                <InitialDataProvider>
-                    <RedirectPortefolje>
-                        <Decorator />
-                        <Routes />
-                    </RedirectPortefolje>
-                </InitialDataProvider>
-            </BrowserRouter>
-        </Provider>
+        <>
+            <Provider store={store}>
+                <BrowserRouter basename={erMock() ? '/veilarbportefoljeflatefs' : '/'}>
+                    <InitialDataProvider>
+                        <RedirectPortefolje>
+                            <Decorator />
+                            <Routes />
+                        </RedirectPortefolje>
+                    </InitialDataProvider>
+                </BrowserRouter>
+            </Provider>
+            {erMock() && <UtviklerVerktoy />}
+        </>
     );
 }
 
