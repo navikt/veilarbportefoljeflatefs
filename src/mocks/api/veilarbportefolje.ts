@@ -224,6 +224,15 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             });
         })
     ),
+    http.put(
+        '/veilarbportefolje/api/v1/fargekategorier',
+        withAuth(async () => {
+            return HttpResponse.json({
+                ok: ['00000123458'],
+                error: ['00000123459']
+            });
+        })
+    ),
     http.post(
         '/veilarbportefolje/api/v1/hent-huskelapp-for-bruker',
         withAuth(async ({request}) => {

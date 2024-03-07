@@ -1,13 +1,13 @@
 import React from 'react';
 import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
 import {useDispatch} from 'react-redux';
-import {Button, Popover} from '@navikt/ds-react';
+import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
-import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
+import {oppdaterFargekategori} from '../../middleware/api';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -26,16 +26,18 @@ export default function FargekategoriPopover({
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const [oppdaterFargekategoriFeilet, setOppdaterFargekategoriFeilet] = React.useState<boolean>(false);
 
     const doOppdaterFargekategori = (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
-
-        dispatch(lagreFargekategoriAction(data)).then(
-            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr))
-        );
+        oppdaterFargekategori(data)
+            .then(dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)))
+            .catch(() => {
+                setOppdaterFargekategoriFeilet(true);
+            });
     };
 
     const sendOppdaterFargekategori = fargekategori => {
@@ -62,10 +64,17 @@ export default function FargekategoriPopover({
         <Popover
             anchorEl={buttonRef.current}
             open={openState}
-            onClose={() => setOpenState(false)}
+            onClose={() => {
+                setOpenState(false);
+                setOppdaterFargekategoriFeilet(false);
+            }}
             placement={placement}
         >
-            <Popover.Content>{fargekategoriknapper}</Popover.Content>
+            <Popover.Content>
+                {oppdaterFargekategoriFeilet
+                    ? <Alert variant="error">Hjelp</Alert> && fargekategoriknapper
+                    : fargekategoriknapper}
+            </Popover.Content>
             {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"
                 <Button size="small">Endre</Button>

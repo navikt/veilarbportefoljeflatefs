@@ -17,7 +17,7 @@ const toggles = {
     [VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING]: true,
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: true,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: true,
-    [HUSKELAPP]: false
+    [HUSKELAPP]: true
 };
 
 export default toggles;

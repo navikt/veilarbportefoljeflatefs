@@ -236,6 +236,12 @@ export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriData
     return fetchToJson(url, config);
 }
 
+export function oppdaterFargekategorier(fnrlisteOgFargekategori: FargekategoriDataModell) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
+    return fetchToJson(url, config);
+}
+
 export function lagreHuskelapp(huskelapp: LagreHuskelapp) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(huskelapp)};

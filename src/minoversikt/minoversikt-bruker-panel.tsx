@@ -16,9 +16,7 @@ import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
-import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
-import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
-import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
+import {Checkbox, Tag} from '@navikt/ds-react';
 import {HuskelappPanel} from './huskelapp/HuskelappPanel';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import {ThunkDispatch} from 'redux-thunk';
@@ -119,18 +117,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                             dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                         />
                     )}
-                    {erHuskelappFeatureTogglePa && (
-                        <>
-                            <FargekategoriTabellradKnapp bruker={bruker} />
-                            <BodyShort className="huskelappcontainer">
-                                {bruker.huskelapp ? (
-                                    <HuskelappIkon className="huskelappikon" />
-                                ) : (
-                                    <InaktivHuskelappIkon className="huskelappikon" />
-                                )}
-                            </BodyShort>
-                        </>
-                    )}
+                    {erHuskelappFeatureTogglePa && <FargekategoriTabellradKnapp bruker={bruker} />}
                     {erHuskelappFeatureTogglePa && <HuskelappIkonInngang bruker={bruker} />}
                 </div>
                 <MinOversiktKolonner
