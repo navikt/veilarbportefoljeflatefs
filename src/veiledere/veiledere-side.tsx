@@ -24,6 +24,7 @@ import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Panel} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
+import {FilterId} from '../model-interfaces';
 
 function VeiledereSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -57,7 +58,7 @@ function VeiledereSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: FilterId, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));

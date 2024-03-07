@@ -1,11 +1,11 @@
 import React, {useRef} from 'react';
-import {FiltervalgModell} from '../model-interfaces';
+import {FilterId, FiltervalgModell} from '../model-interfaces';
 import {useEffect, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string) => void;
 }
 
 function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEllerFnrProps) {

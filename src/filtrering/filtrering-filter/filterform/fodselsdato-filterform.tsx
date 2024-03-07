@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell, FilterId} from '../../../model-interfaces';
 import './filterform.css';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
-    filterId: string;
+    filterId: FilterId;
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
 }
 
 function FodselsdatoFilterform({endreFiltervalg, valg, filterId, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId]);
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId] as string[]);
 
     const velgCheckBox = e => {
         e.persist();
@@ -28,7 +28,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, filterId, filtervalg}: Ch
     };
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[filterId]);
+        setCheckBoxValg(filtervalg[filterId] as string[]);
     }, [filtervalg, filterId]);
 
     const nullstillValg = () => {

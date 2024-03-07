@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {Sidebarelement} from './sidebar';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
@@ -24,7 +24,7 @@ interface SidevelgerProps {
 
 function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
     const dispatch = useDispatch();
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: FilterId, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
