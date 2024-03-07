@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {endreFiltervalg, veilederSoktFraToolbar} from '../../ducks/filtrering';
 import {nameToStateSliceMap} from '../../ducks/utils';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../model-interfaces';
 import {VeiledereState} from '../../ducks/veiledere';
 import {useEffect, useState} from 'react';
 import SokVeiledere from '../sok-veiledere/sok-veiledere';
@@ -18,7 +18,7 @@ interface SokVeilederProps {
 }
 
 interface DispatchProps {
-    sokEtterVeileder: (filterId: string, filterverdi: string[], filtervalg: FiltervalgModell) => void;
+    sokEtterVeileder: (filterId: FilterId, filterverdi: string[], filtervalg: FiltervalgModell) => void;
     veilederSokt: () => void;
 }
 
@@ -72,7 +72,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) =>
     bindActionCreators(
         {
-            sokEtterVeileder(filterId: string, filterverdi: string[], filterValg: FiltervalgModell) {
+            sokEtterVeileder(filterId: FilterId, filterverdi: string[], filterValg: FiltervalgModell) {
                 oppdaterKolonneAlternativer(dispatch, {...filterValg, [filterId]: filterverdi}, ownProps.oversiktType);
                 return endreFiltervalg(filterId, filterverdi, ownProps.oversiktType);
             },

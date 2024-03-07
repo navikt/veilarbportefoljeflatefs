@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
 import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
@@ -10,9 +10,9 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
-    filterId: string;
+    filterId: FilterId;
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
@@ -33,7 +33,7 @@ function AlderFilterform({
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
     useEffect(() => {
-        filtervalg[filterId].forEach(alder => {
+        (filtervalg[filterId] as string[]).forEach(alder => {
             if (
                 Object.entries(valg)
                     .map(([filterKey]) => filterKey)
@@ -41,7 +41,7 @@ function AlderFilterform({
             ) {
                 setInputAlderTil('');
                 setInputAlderFra('');
-                setCheckBoxValg(filtervalg[filterId]);
+                setCheckBoxValg(filtervalg[filterId] as string[]);
             } else {
                 const [alderFra, alderTil] = alder.split('-');
                 alderFra && setInputAlderFra(alderFra);

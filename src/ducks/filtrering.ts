@@ -1,4 +1,4 @@
-import {FiltervalgModell} from '../model-interfaces';
+import {FilterId, FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
@@ -138,7 +138,7 @@ export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: Oversikt
 }
 
 export function endreFiltervalg(
-    filterId: string,
+    filterId: FilterId,
     filterVerdi: React.ReactNode,
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {

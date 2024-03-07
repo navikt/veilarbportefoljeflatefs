@@ -1,12 +1,12 @@
 import * as React from 'react';
 import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
 import {useEffect, useRef, useState} from 'react';
-import {FiltervalgModell} from '../model-interfaces';
+import {FilterId, FiltervalgModell} from '../model-interfaces';
 import {TextField} from '@navikt/ds-react';
 
 interface FiltreringVeiledereProps {
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: string, filterVerdi: string) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string) => void;
 }
 
 export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVeiledereProps) {

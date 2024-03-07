@@ -104,6 +104,7 @@ export interface FiltervalgModell {
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
 }
+export type FilterId = keyof FiltervalgModell;
 
 export interface EnhetModell {
     enhetId: string;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import './filterform.css';
 import classNames from 'classnames';
@@ -9,9 +9,9 @@ import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 
 interface CheckboxFilterformProps {
-    filterId: string;
+    filterId: FilterId;
     valg: CheckboxFilterMap;
-    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     className?: string;
@@ -30,10 +30,10 @@ function CheckboxFilterform({
     tooltips
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId]);
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId] as string[]);
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[filterId]);
+        setCheckBoxValg(filtervalg[filterId] as string[]);
     }, [filtervalg, filterId]);
 
     const nullstillValg = () => {

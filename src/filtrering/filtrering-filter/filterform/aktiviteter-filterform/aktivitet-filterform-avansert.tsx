@@ -2,13 +2,13 @@ import React from 'react';
 import '../filterform.css';
 import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
-import {FiltervalgModell} from '../../../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../../../model-interfaces';
 import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: React.ReactNode) => void;
     klikkPaForenkletLenke: (e: any) => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;

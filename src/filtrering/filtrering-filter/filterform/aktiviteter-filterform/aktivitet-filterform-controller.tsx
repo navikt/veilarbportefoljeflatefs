@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../filterform.css';
-import {FiltervalgModell} from '../../../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../../../model-interfaces';
 import AktivitetFilterformForenklet from './aktivitet-filterform-forenklet';
 import {aktiviteter} from '../../../filter-konstanter';
 import AktivitetFilterformAvansert from './aktivitet-filterform-avansert';
@@ -10,7 +10,7 @@ import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 
 interface AktivitetFilterformProps {
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: string, filterVerdi: any) => void;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: any) => void;
 }
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FilterId, FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
@@ -10,9 +10,9 @@ import {OrNothing} from '../../../utils/types/types';
 import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
-    filterId: string;
-    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
-    endreCheckboxFiltervalg: (filterId: string, filterVerdi: OrNothing<string>) => void;
+    filterId: FilterId;
+    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
+    endreCheckboxFiltervalg: (filterId: FilterId, filterVerdi: OrNothing<string>) => void;
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
 }
@@ -34,7 +34,7 @@ export function HendelserFilterform({
 
     useEffect(() => {
         if (filtervalg[filterId]) {
-            setHendelserValg(filtervalg[filterId][0]);
+            setHendelserValg((filtervalg[filterId] as string[])[0]);
         } else {
             setHendelserValg('');
         }

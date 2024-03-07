@@ -41,7 +41,7 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
 import {Alert} from '@navikt/ds-react';
-import {IdentParam} from '../model-interfaces';
+import {FilterId, IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
 import {StatustallVeileder, StatustallVeilederState} from '../ducks/statustall-veileder';
@@ -80,7 +80,7 @@ export default function MinoversiktSide() {
     const {ident} = useParams<IdentParam>();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: FilterId, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
