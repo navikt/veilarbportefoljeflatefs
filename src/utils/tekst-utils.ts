@@ -16,4 +16,4 @@ export const tekstValgteBrukere = antallValgt => {
     return `${antallValgt} brukere valgt.`;
 };
 
-export const truncateTekst = (tekst: string) => (tekst.length > 15 ? `${tekst.substring(0, 15)}...` : tekst);
+export const truncateTekst = (tekst: string) => (tekst.length > 30 ? `${tekst.substring(0, 30)}...` : tekst);

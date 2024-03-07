@@ -6,12 +6,19 @@ import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
-import brukere, {hentArbeidsliste, hentArbeidslisteForBruker, hentMockPlan} from '../data/portefolje';
+import brukere, {
+    hentArbeidsliste,
+    hentArbeidslisteForBruker,
+    hentHuskelappForBruker,
+    hentMockPlan
+} from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
 import {ArbeidslisteDataModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
+import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
+import {rnd} from '../utils';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
@@ -214,6 +221,52 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             return HttpResponse.json({
                 fnr: '11111111111',
                 fargekategori: 'FARGEKATEGORI_A'
+            });
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/v1/hent-huskelapp-for-bruker',
+        withAuth(async ({request}) => {
+            const hentHuskelappRequest = (await request.json()) as {fnr: string; enhetId: string};
+            const randomize = rnd(0, 1);
+
+            return randomize > 0.5
+                ? HttpResponse.json(hentHuskelappForBruker(hentHuskelappRequest.fnr, hentHuskelappRequest.enhetId))
+                : new HttpResponse(null, {status: 200});
+        })
+    ),
+    http.post(
+        '/veilarbportefolje/api/v1/huskelapp',
+        withAuth(async ({request}) => {
+            (await request.json()) as LagreHuskelapp;
+
+            return HttpResponse.json('458b42ca-0f31-4041-a549-3a250a9ec291');
+        })
+    ),
+    http.put(
+        '/veilarbportefolje/api/v1/huskelapp',
+        withAuth(async ({request}) => {
+            const oppdaterHuskelappRequest = (await request.json()) as EndreHuskelapp;
+
+            return HttpResponse.json({
+                huskelappId: '458b42ca-0f31-4041-a549-3a250a9ec291',
+                frist: oppdaterHuskelappRequest.frist,
+                kommentar: oppdaterHuskelappRequest.kommentar,
+                endretDato: '2018-06-21T10:39:17.153Z',
+                endretAv: 'Z990007'
+            });
+        })
+    ),
+    http.delete(
+        '/veilarbportefolje/api/v1/huskelapp',
+        withAuth(async ({request}) => {
+            const slettHuskelappRequest = (await request.json()) as string;
+
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
+            return HttpResponse.json({
+                error: [],
+                data: slettHuskelappRequest
             });
         })
     )

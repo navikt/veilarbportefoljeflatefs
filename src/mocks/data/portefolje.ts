@@ -21,6 +21,7 @@ const ytelser = [
 
 let mockAktoeridLopenummer = 0;
 const arbeidsliste: any = [];
+const huskelapp: any = {};
 
 let i = 123456;
 
@@ -171,10 +172,18 @@ function lagArbeidsliste(aktoerid, fnr) {
     return arbeidslisteElement;
 }
 
-const lagHuskelapp = () => ({
-    kommentar: lagOverskrift(),
-    frist: '2024-06-28'
-});
+const lagHuskelapp = fnr => {
+    const maybeHuskelapp = rnd(0, 1);
+    if (maybeHuskelapp > 0.75) {
+        return null;
+    }
+    return {
+        huskelappId: lagOverskrift(),
+        brukerFnr: fnr,
+        kommentar: lagOverskrift(),
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+    };
+};
 
 function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const grunndata = lagGrunndata();
@@ -187,6 +196,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
     const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
     const arbeidsliste = lagArbeidsliste(aktoerid, grunndata.fnr);
+    const huskelapp = lagHuskelapp(grunndata.fnr);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
@@ -256,7 +266,7 @@ function lagBruker(sikkerhetstiltak = [], egenAnsatt = false) {
         barnUnder18AarData: hentBarnUnder18Aar(),
         brukersSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
-        huskelapp: lagHuskelapp()
+        huskelapp
     };
 }
 
@@ -393,6 +403,18 @@ export function hentArbeidslisteForBruker(fnr: {fodselsnummer: any}) {
         return arbeidslisteForBruker;
     }
     return lagArbeidsliste('1', fnr);
+}
+
+export function hentHuskelappForBruker(fnr: string, enhetId: string) {
+    if (huskelapp.fnr === fnr) {
+        return huskelapp;
+    }
+    return {
+        huskelappId: lagOverskrift(),
+        brukerFnr: fnr,
+        kommentar: lagOverskrift(),
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+    };
 }
 
 export function hentMockPlan() {

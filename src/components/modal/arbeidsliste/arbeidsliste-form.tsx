@@ -19,7 +19,13 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                     <div>
                         <legend data-testid="modal_legg-i-arbeidsliste_navn">{label(valgteBrukere[index])}</legend>
                         <FormikInput name={`arbeidsliste[${index}].overskrift`} index={index} />
-                        <FormikTekstArea name={`arbeidsliste[${index}].kommentar`} index={index} />
+                        <FormikTekstArea
+                            name={`arbeidsliste[${index}].kommentar`}
+                            index={index}
+                            label="Kommentar"
+                            maxLengde={500}
+                            testId="modal_arbeidsliste_kommentar"
+                        />
                     </div>
                     <div className="skjemaelement dato-kategori-wrapper">
                         <FormikDatoVelger name={`arbeidsliste[${index}].frist`} />

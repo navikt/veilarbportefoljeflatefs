@@ -40,11 +40,17 @@
     padding: 0.125rem 0.25rem;
 }
 
-.veilarbportefoljeflatefs .huskelappcontainer {
+.veilarbportefoljeflatefs .huskelapp-kolonne-container {
     margin-top: 8px;
-    margin-left: 5px;
+    margin-left: 6px;
+    display: flex;
+    justify-content: flex-start;
+    min-width: calc(1.3em + 1rem + 1px); /* Ikon-breidd (1.3em) + breidd av sorteringspil i header */
+}
 
-    min-width: calc(1.3em + 1rem + 2px); /* Ikon-breidd (1.3em) + breidd av sorteringspil i header */
+.veilarbportefoljeflatefs .huskelapp-kolonne-container .navds-button {
+    margin: 0;
+    padding: 0;
 }
 
 .veilarbportefoljeflatefs .huskelappikon {
