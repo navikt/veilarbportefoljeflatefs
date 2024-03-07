@@ -6,7 +6,7 @@ import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     klikkPaAvansertLenke: (e: any) => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;
@@ -64,7 +64,7 @@ function AktivitetFilterformForenklet({
                 <NullstillKnapp
                     dataTestId="aktivitet-filterform-forenklet"
                     nullstillValg={nullstillForenkledeAktiviteter}
-                    form="aktiviteterForenklet"
+                    filterId="aktiviteterForenklet"
                     disabled={valgteForenkledeAktiviteter.length <= 0}
                 />
             </div>

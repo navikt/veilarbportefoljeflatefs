@@ -10,14 +10,21 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
-    form: string;
+    filterId: string;
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
 }
-function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
+function AlderFilterform({
+    endreFiltervalg,
+    valg,
+    closeDropdown,
+    filterId,
+    filtervalg,
+    className
+}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
@@ -26,7 +33,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
     useEffect(() => {
-        filtervalg[form].forEach(alder => {
+        filtervalg[filterId].forEach(alder => {
             if (
                 Object.entries(valg)
                     .map(([filterKey]) => filterKey)
@@ -34,14 +41,14 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             ) {
                 setInputAlderTil('');
                 setInputAlderFra('');
-                setCheckBoxValg(filtervalg[form]);
+                setCheckBoxValg(filtervalg[filterId]);
             } else {
                 const [alderFra, alderTil] = alder.split('-');
                 alderFra && setInputAlderFra(alderFra);
                 alderTil && setInputAlderTil(alderTil);
             }
         });
-    }, [filtervalg, form, valg]);
+    }, [filtervalg, filterId, valg]);
 
     const submitCheckBoxValg = (checkboxValg: string[]) => {
         setInputAlderTil('');
@@ -49,7 +56,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         setFeil(false);
 
         setCheckBoxValg(checkboxValg);
-        endreFiltervalg(form, checkboxValg);
+        endreFiltervalg(filterId, checkboxValg);
 
         logEvent('portefolje.metrikker.aldersfilter', {
             checkbox: true,
@@ -70,7 +77,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
     const onSubmitCustomInput = e => {
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
-        endreFiltervalg(form, []);
+        endreFiltervalg(filterId, []);
         e.preventDefault();
         if (!kanVelgeFilter) {
             closeDropdown();
@@ -85,11 +92,11 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
                 setFeil(false);
                 setFeilTekst('');
                 if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(form, [0 + '-' + inputAlderTil]);
+                    endreFiltervalg(filterId, [0 + '-' + inputAlderTil]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                    endreFiltervalg(form, [inputAlderFra + '-' + 100]);
+                    endreFiltervalg(filterId, [inputAlderFra + '-' + 100]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(form, [inputAlderFra + '-' + inputAlderTil]);
+                    endreFiltervalg(filterId, [inputAlderFra + '-' + inputAlderTil]);
                 }
                 closeDropdown();
             }
@@ -108,7 +115,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
-        endreFiltervalg(form, []);
+        endreFiltervalg(filterId, []);
     };
 
     return (
@@ -192,7 +199,7 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
             <NullstillKnapp
                 dataTestId="alder-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
+                filterId={filterId}
                 disabled={!kanVelgeFilter}
             />
         </form>

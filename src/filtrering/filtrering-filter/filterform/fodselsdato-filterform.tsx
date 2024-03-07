@@ -6,33 +6,33 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
-    form: string;
+    filterId: string;
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: CheckboxFilterformProps) {
+function FodselsdatoFilterform({endreFiltervalg, valg, filterId, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId]);
 
     const velgCheckBox = e => {
         e.persist();
         return e.target.checked
-            ? endreFiltervalg(form, [...checkBoxValg, e.target.value])
+            ? endreFiltervalg(filterId, [...checkBoxValg, e.target.value])
             : endreFiltervalg(
-                  form,
+                  filterId,
                   checkBoxValg.filter(value => value !== e.target.value)
               );
     };
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[form]);
-    }, [filtervalg, form]);
+        setCheckBoxValg(filtervalg[filterId]);
+    }, [filtervalg, filterId]);
 
     const nullstillValg = () => {
-        endreFiltervalg(form, []);
+        endreFiltervalg(filterId, []);
     };
 
     return (
@@ -64,7 +64,7 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
             <NullstillKnapp
                 dataTestId="fodselsdato-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
+                filterId={filterId}
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (

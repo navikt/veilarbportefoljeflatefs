@@ -11,7 +11,7 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {MultiSelect} from 'react-multi-select-component';
 
 interface TolkebehovFilterformProps {
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
@@ -144,7 +144,7 @@ function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: To
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={'tolkbehov'}
+                    filterId={'tolkbehov'}
                     disabled={tolkebehovValg.length <= 0 && selectedTolkbehovSpraak.length <= 0}
                 />
             </form>

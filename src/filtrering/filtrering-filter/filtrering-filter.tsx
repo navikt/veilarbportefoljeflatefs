@@ -94,7 +94,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     };
 
     const endreAvvik14aVedtakFilterValg = () => {
-        return (form: string, filterVerdi: string[]) => {
+        return (filterId: string, filterVerdi: string[]) => {
             const filterForEndring: string[] = filtervalg.avvik14aVedtak;
             const filterEtterEndring: string[] = filterVerdi;
 
@@ -105,11 +105,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             );
 
             if (hovedfilterEndring === 'FJERNET') {
-                return endreFiltervalg(form, []);
+                return endreFiltervalg(filterId, []);
             }
 
             if (hovedfilterEndring === 'LAGT_TIL') {
-                return endreFiltervalg(form, Object.keys(avvik14aVedtak));
+                return endreFiltervalg(filterId, Object.keys(avvik14aVedtak));
             }
 
             const ingenAvhengigeFilterValgt: boolean = !filterEtterEndring.some(f =>
@@ -117,11 +117,11 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             );
 
             if (ingenAvhengigeFilterValgt) {
-                return endreFiltervalg(form, []);
+                return endreFiltervalg(filterId, []);
             }
 
             return endreFiltervalg(
-                form,
+                filterId,
                 filterVerdi.includes(mapFilternavnTilFilterValue.harAvvik)
                     ? filterVerdi
                     : [mapFilternavnTilFilterValue.harAvvik, ...filterVerdi]
@@ -140,7 +140,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="alder"
                     render={lukkDropdown => (
                         <AlderFilterform
-                            form="alder"
+                            filterId="alder"
                             valg={alder}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -153,7 +153,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="fodselsdato"
                     render={() => (
                         <FodselsdatoFilterform
-                            form="fodselsdagIMnd"
+                            filterId="fodselsdagIMnd"
                             valg={fodselsdagIMnd()}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -168,7 +168,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             valg={kjonn}
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
-                            form="kjonn"
+                            filterId="kjonn"
                             gridColumns={2}
                         />
                     )}
@@ -213,7 +213,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="sisteEndringKategori"
                     render={() => (
                         <HendelserFilterform
-                            form="sisteEndringKategori"
+                            filterId="sisteEndringKategori"
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             endreCheckboxFiltervalg={endreFiltervalg}
@@ -233,7 +233,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="registreringstype"
+                                filterId="registreringstype"
                                 valg={registreringstype}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -252,7 +252,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                     Svar bruker oppga ved endring i brukers situasjon
                                 </Alert>
                                 <CheckboxFilterform
-                                    form="registreringstype"
+                                    filterId="registreringstype"
                                     valg={endringISituasjon}
                                     filtervalg={filtervalg}
                                     endreFiltervalg={endreFiltervalg}
@@ -271,7 +271,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanning"
+                                filterId="utdanning"
                                 valg={utdanning}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -288,7 +288,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanningGodkjent"
+                                filterId="utdanningGodkjent"
                                 valg={utdanningGodkjent}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -305,7 +305,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanningBestatt"
+                                filterId="utdanningBestatt"
                                 valg={utdanningBestatt}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -337,7 +337,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 valg={avvik14aVedtakValg()}
                                 endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                                 filtervalg={filtervalg}
-                                form="avvik14aVedtak"
+                                filterId="avvik14aVedtak"
                             />
                         </>
                     )}
@@ -353,7 +353,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             valg={cvJobbprofil}
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
-                            form="cvJobbprofil"
+                            filterId="cvJobbprofil"
                         />
                     )}
                 />
@@ -362,7 +362,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="innsatsgruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="innsatsgruppe"
+                            filterId="innsatsgruppe"
                             valg={innsatsgruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -374,7 +374,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="hovedmal"
                     render={() => (
                         <CheckboxFilterform
-                            form="hovedmal"
+                            filterId="hovedmal"
                             valg={hovedmal}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -386,7 +386,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="formidlingsgruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="formidlingsgruppe"
+                            filterId="formidlingsgruppe"
                             valg={formidlingsgruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -398,7 +398,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="servicegruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="servicegruppe"
+                            filterId="servicegruppe"
                             valg={servicegruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -410,7 +410,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="manuell-oppfolging"
                     render={() => (
                         <CheckboxFilterform
-                            form="manuellBrukerStatus"
+                            filterId="manuellBrukerStatus"
                             valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -425,7 +425,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="rettighetsgruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="rettighetsgruppe"
+                            filterId="rettighetsgruppe"
                             valg={rettighetsgruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -440,7 +440,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             valg={ytelse}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
-                            form="ytelse"
+                            filterId="ytelse"
                         />
                     )}
                 />
@@ -449,7 +449,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="ensligeForsorgere"
                     render={() => (
                         <CheckboxFilterform
-                            form="ensligeForsorgere"
+                            filterId="ensligeForsorgere"
                             valg={ensligeForsorgere}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -471,7 +471,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
-                            form="tiltakstyper"
+                            filterId="tiltakstyper"
                             valg={enhettiltak}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -485,7 +485,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     id="stillingFraNav"
                     render={() => (
                         <CheckboxFilterform
-                            form="stillingFraNavFilter"
+                            filterId="stillingFraNavFilter"
                             valg={stillingFraNavFilter}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}

@@ -19,7 +19,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
-    const formNavn = 'veiledere';
+    const filterId = 'veiledere';
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -40,18 +40,18 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
 
     const handterValgteVeiledere = (valgteVeiledere: string[]) => {
         setValgteVeiledere(valgteVeiledere);
-        dispatch(endreFiltervalg(formNavn, valgteVeiledere, OversiktType.veilederOversikt));
+        dispatch(endreFiltervalg(filterId, valgteVeiledere, OversiktType.veilederOversikt));
         oppdaterKolonneAlternativer(
             dispatch,
-            {...filtervalg, [formNavn]: valgteVeiledere},
+            {...filtervalg, [filterId]: valgteVeiledere},
             OversiktType.veilederOversikt
         );
     };
 
     const nullstillValg = () => {
         nullstillInputfelt();
-        dispatch(endreFiltervalg(formNavn, [], OversiktType.veilederOversikt));
-        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [formNavn]: []}, OversiktType.veilederOversikt);
+        dispatch(endreFiltervalg(filterId, [], OversiktType.veilederOversikt));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: []}, OversiktType.veilederOversikt);
     };
 
     const mapToCheckboxList = (veiledere?: VeilederModell[]) => {
@@ -94,7 +94,7 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
                 <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={formNavn}
+                    filterId={filterId}
                     disabled={valgteVeiledere.length <= 0}
                     className="veilederoversikt-nullstill-knapp"
                 />
