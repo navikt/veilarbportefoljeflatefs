@@ -28,12 +28,13 @@ export default function FargekategoriPopover({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const [oppdaterFargekategoriFeilet, setOppdaterFargekategoriFeilet] = React.useState<boolean>(false);
 
-    const doOppdaterFargekategori = (fnr, fargekategori) => {
+    const doOppdaterFargekategori = async (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
-        oppdaterFargekategori(data)
+
+        await oppdaterFargekategori(data)
             .then(dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)))
             .catch(() => {
                 setOppdaterFargekategoriFeilet(true);
