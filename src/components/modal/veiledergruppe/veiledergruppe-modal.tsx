@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilter} from '../../../model-interfaces';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
 import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
@@ -22,18 +22,18 @@ import LasterModal from '../lastermodal/laster-modal';
 interface VeilederModalProps {
     initialVerdi: {
         gruppeNavn: string;
-        filterValg: FiltervalgModell;
+        filterValg: PortefoljeFilter;
         filterId: number;
         filterCleanup?: boolean;
     };
-    onSubmit: (gruppeNavn: string, filterValg: FiltervalgModell) => void;
+    onSubmit: (gruppeNavn: string, filterValg: PortefoljeFilter) => void;
     onSlett?: () => void;
     onRequestClose: () => void;
     isOpen: boolean;
     modalTittel: string;
     lagreKnappeTekst: string;
     validerGruppenavn?: (gruppenavn: string) => OrNothing<string>;
-    filterValg?: FiltervalgModell;
+    filterValg?: PortefoljeFilter;
     className?: string;
 }
 
@@ -43,7 +43,7 @@ interface VeiledergruppeErrors {
 }
 
 export function VeiledergruppeModal(props: VeilederModalProps) {
-    const [filterValg, setFilterValg] = useState<FiltervalgModell>(initialState);
+    const [filterValg, setFilterValg] = useState<PortefoljeFilter>(initialState);
     const [gruppeNavn, setGruppeNavn] = useState<string>('');
     const [errors, setErrors] = useState<VeiledergruppeErrors>({} as VeiledergruppeErrors);
     const [harForsoktSubmitte, setHarForsoktSubmitte] = useState(false);

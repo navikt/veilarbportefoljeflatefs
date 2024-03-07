@@ -10,7 +10,7 @@ import FilterKonstanter, {
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
+import {EnhetModell, PortefoljeFilter} from '../model-interfaces';
 import {Kolonne, ListevisningState, oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
@@ -34,7 +34,7 @@ interface FiltreringLabelContainerProps {
         slettAlle: () => void;
         slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
     };
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     oversiktType: string;
     listevisning?: ListevisningState;
     className: string;

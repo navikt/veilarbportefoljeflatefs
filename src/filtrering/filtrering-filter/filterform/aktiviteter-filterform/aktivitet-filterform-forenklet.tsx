@@ -3,11 +3,11 @@ import '../filterform.css';
 import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import {FilterId} from '../../../../model-interfaces';
+import {PortefoljeFilterAlternativ} from '../../../../model-interfaces';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: React.ReactNode) => void;
     klikkPaAvansertLenke: (e: any) => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;

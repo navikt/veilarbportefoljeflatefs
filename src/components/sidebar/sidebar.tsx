@@ -10,7 +10,7 @@ import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
 import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
 import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
 import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
-import {FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilter} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {useDispatch} from 'react-redux';
@@ -68,7 +68,7 @@ const sidebar: Sidebarelement[] = [
 ];
 
 interface SidebarProps {
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     enhettiltak: OrNothing<Tiltak>;
     oversiktType: OversiktType;
     isSidebarHidden: boolean;

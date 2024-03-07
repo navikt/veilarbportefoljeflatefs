@@ -39,7 +39,7 @@ import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
 import {StatustallEnhet, StatustallEnhetState} from '../ducks/statustall-enhet';
-import {FilterId} from '../model-interfaces';
+import {PortefoljeFilterAlternativ} from '../model-interfaces';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -110,7 +110,7 @@ export default function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: FilterId, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: PortefoljeFilterAlternativ, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);

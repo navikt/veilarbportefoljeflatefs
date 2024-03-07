@@ -5,7 +5,7 @@ import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
 import {harGjortEndringer} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
-import {FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilter} from '../../model-interfaces';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import '../../components/sidebar/sidebar.css';
@@ -22,7 +22,7 @@ import {RadioGroup} from '@navikt/ds-react';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
-    filterValg?: FiltervalgModell;
+    filterValg?: PortefoljeFilter;
     oversiktType: OversiktType;
 }
 
@@ -50,7 +50,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
 
     const modalTittel = 'Rediger veiledergruppe';
 
-    const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
+    const submitEndringer = (gruppeNavn: string, filterValg: PortefoljeFilter) => {
         if (
             valgtGruppe &&
             enhet &&

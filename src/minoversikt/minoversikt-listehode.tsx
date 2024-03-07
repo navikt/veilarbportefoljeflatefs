@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {BrukerModell, PortefoljeFilter, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
     DAGPENGER_YTELSE,
@@ -42,7 +42,7 @@ interface MinOversiktListehodeProps {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
 }

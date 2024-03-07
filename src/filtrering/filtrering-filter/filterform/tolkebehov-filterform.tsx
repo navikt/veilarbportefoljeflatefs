@@ -1,4 +1,4 @@
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
@@ -11,8 +11,8 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {MultiSelect} from 'react-multi-select-component';
 
 interface TolkebehovFilterformProps {
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
-    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
+    filtervalg: PortefoljeFilter;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
 }

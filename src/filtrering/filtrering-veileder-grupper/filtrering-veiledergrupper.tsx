@@ -4,7 +4,7 @@ import {AppState} from '../../reducer';
 import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
-import {FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilter} from '../../model-interfaces';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -28,7 +28,7 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
     const enhet = useEnhetSelector();
     const modalTittel = 'Ny veiledergruppe';
 
-    const submitEndringer = (gruppeNavn: string, filterValg: FiltervalgModell) => {
+    const submitEndringer = (gruppeNavn: string, filterValg: PortefoljeFilter) => {
         enhet &&
             dispatch(
                 lageNyGruppe(

@@ -61,7 +61,7 @@ export enum Sorteringsfelt {
     HUSKELAPP = 'huskelapp'
 }
 
-export interface FiltervalgModell {
+export interface PortefoljeFilter {
     ferdigfilterListe: string[];
     nyeBrukereForVeileder?: boolean;
     inaktiveBrukere?: boolean;
@@ -104,7 +104,7 @@ export interface FiltervalgModell {
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
 }
-export type FilterId = keyof FiltervalgModell;
+export type PortefoljeFilterAlternativ = keyof PortefoljeFilter;
 
 export interface EnhetModell {
     enhetId: string;

@@ -1,8 +1,8 @@
-import {FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilter} from '../../../model-interfaces';
 import {isEmptyArray, isObject} from 'formik';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 
-export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
+export function lagretFilterValgModellErLik(filter1?: PortefoljeFilter, filter2?: PortefoljeFilter): boolean {
     return deepEqual(filter1, filter2);
 }
 

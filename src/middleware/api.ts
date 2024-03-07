@@ -1,4 +1,4 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {PortefoljeFilter, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
@@ -98,7 +98,7 @@ export function hentEnhetsPortefolje(
     enhet,
     rekkefolge,
     sorteringsfelt,
-    filtervalg: FiltervalgModell,
+    filtervalg: PortefoljeFilter,
     fra?: number,
     antall?: number
 ) {
@@ -107,7 +107,7 @@ export function hentEnhetsPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const filtrerteFiltervalg: FiltervalgModell = {
+    const filtrerteFiltervalg: PortefoljeFilter = {
         ...filtervalg,
         avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };
@@ -131,7 +131,7 @@ export function hentVeiledersPortefolje(
     } else if (rekkefolge === 'synkende') {
         rekkefolge = 'descending';
     }
-    const filtrerteFiltervalg: FiltervalgModell = {
+    const filtrerteFiltervalg: PortefoljeFilter = {
         ...filtervalg,
         avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };

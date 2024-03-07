@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Etiketter from '../components/tabell/etiketter';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BrukerModell, PortefoljeFilter, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {useLayoutEffect} from 'react';
@@ -16,7 +16,7 @@ interface EnhetBrukerpanelProps {
     bruker: BrukerModell;
     settMarkert: (bruker: string, markert: boolean) => void;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
     forrigeBruker: OrNothing<string>;

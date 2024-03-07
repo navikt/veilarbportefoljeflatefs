@@ -1,4 +1,4 @@
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
@@ -11,8 +11,8 @@ import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
 import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
-    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
+    filtervalg: PortefoljeFilter;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
 }
