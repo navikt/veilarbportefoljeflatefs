@@ -12,22 +12,22 @@ interface ValgType {
 }
 
 interface RadioFilterformProps {
-    form: string;
-    endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
+    filterId: string;
+    endreFiltervalg: (filterId: string, filterVerdi: OrNothing<string>) => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
 }
-export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridColumns = 1}: RadioFilterformProps) {
-    const valgtFilterValg = filtervalg[form];
+export function RadioFilterform({filterId, endreFiltervalg, valg, filtervalg, gridColumns = 1}: RadioFilterformProps) {
+    const valgtFilterValg = filtervalg[filterId];
 
     const nullstillValg = () => {
-        endreFiltervalg(form, null);
+        endreFiltervalg(filterId, null);
     };
 
     const onChange = e => {
         e.persist();
-        endreFiltervalg(form, e.target.value);
+        endreFiltervalg(filterId, e.target.value);
     };
 
     return (
@@ -51,7 +51,7 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
+                filterId={filterId}
                 disabled={valgtFilterValg === '' || valgtFilterValg === null}
             />
         </form>

@@ -8,7 +8,7 @@ import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     klikkPaForenkletLenke: (e: any) => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;
@@ -85,7 +85,7 @@ function AktivitetFilterformAvansert({
                 <NullstillKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
-                    form="aktiviteter"
+                    filterId="aktiviteter"
                     disabled={!harAvanserteAktiviteter}
                 />
             </div>

@@ -11,7 +11,7 @@ import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-
 
 interface BarnUnder18Props {
     valg: Dictionary<string>;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     closeDropdown: () => void;
     filtervalg: FiltervalgModell;
     className?: string;
@@ -24,24 +24,24 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const [feilTekst, setFeilTekst] = useState<string>('');
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
-    let filterFormBarnAlder = 'barnUnder18AarAlder';
-    let filterFormHarBarnUnder18 = 'barnUnder18Aar';
+    let filterIdBarnAlder = 'barnUnder18AarAlder';
+    let filterIdHarBarnUnder18 = 'barnUnder18Aar';
     useEffect(() => {
-        filtervalg[filterFormHarBarnUnder18].forEach(barnFilterValg => {
+        filtervalg[filterIdHarBarnUnder18].forEach(barnFilterValg => {
             if (
                 Object.entries(valg)
                     .map(([filterKey]) => filterKey)
                     .includes(barnFilterValg)
             ) {
-                setCheckBoxValg(filtervalg[filterFormHarBarnUnder18]);
+                setCheckBoxValg(filtervalg[filterIdHarBarnUnder18]);
             }
         });
-        if (filtervalg[filterFormBarnAlder] != null && filtervalg[filterFormBarnAlder].length > 0) {
-            const [alderFra, alderTil] = filtervalg[filterFormBarnAlder][0].split('-');
+        if (filtervalg[filterIdBarnAlder] != null && filtervalg[filterIdBarnAlder].length > 0) {
+            const [alderFra, alderTil] = filtervalg[filterIdBarnAlder][0].split('-');
             alderFra && setInputAlderFra(alderFra);
             alderTil && setInputAlderTil(alderTil);
         }
-    }, [filtervalg, filterFormBarnAlder, filterFormHarBarnUnder18, valg]);
+    }, [filtervalg, filterIdBarnAlder, filterIdHarBarnUnder18, valg]);
 
     const submitCheckBoxValg = (checkboxValg: string[]) => {
         setFeil(false);
@@ -49,9 +49,9 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         if (checkboxValg.length > 0) {
             setInputAlderFra('');
             setInputAlderTil('');
-            endreFiltervalg(filterFormBarnAlder, []);
+            endreFiltervalg(filterIdBarnAlder, []);
         }
-        endreFiltervalg(filterFormHarBarnUnder18, checkboxValg);
+        endreFiltervalg(filterIdHarBarnUnder18, checkboxValg);
 
         logEvent('portefolje.metrikker.barn_under_18_filter', {
             checkbox: true,
@@ -75,7 +75,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         const inputTilNummer: number = parseInt(inputAlderTil);
         e.preventDefault();
 
-        endreFiltervalg(filterFormHarBarnUnder18, []);
+        endreFiltervalg(filterIdHarBarnUnder18, []);
         if (!kanVelgeFilter) {
             closeDropdown();
         } else {
@@ -92,11 +92,11 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
                 setFeil(false);
                 setFeilTekst('');
                 if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(filterFormBarnAlder, [0 + '-' + inputAlderTil]);
+                    endreFiltervalg(filterIdBarnAlder, [0 + '-' + inputAlderTil]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                    endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + 18]);
+                    endreFiltervalg(filterIdBarnAlder, [inputAlderFra + '-' + 18]);
                 } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + inputAlderTil]);
+                    endreFiltervalg(filterIdBarnAlder, [inputAlderFra + '-' + inputAlderTil]);
                 }
                 closeDropdown();
             }
@@ -115,8 +115,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         setInputAlderFra('');
         setInputAlderTil('');
         setCheckBoxValg([]);
-        endreFiltervalg(filterFormHarBarnUnder18, []);
-        endreFiltervalg(filterFormBarnAlder, []);
+        endreFiltervalg(filterIdHarBarnUnder18, []);
+        endreFiltervalg(filterIdBarnAlder, []);
     };
 
     // @ts-ignore
@@ -205,7 +205,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
             <NullstillKnapp
                 dataTestId="alder-filterform"
                 nullstillValg={nullstillValg}
-                form={filterFormBarnAlder}
+                filterId={filterIdBarnAlder}
                 disabled={!kanVelgeFilter}
             />
         </form>

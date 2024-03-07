@@ -10,15 +10,15 @@ import {OrNothing} from '../../../utils/types/types';
 import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
-    form: string;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
-    endreCheckboxFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
+    filterId: string;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
+    endreCheckboxFiltervalg: (filterId: string, filterVerdi: OrNothing<string>) => void;
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
 }
 
 export function HendelserFilterform({
-    form,
+    filterId,
     filtervalg,
     endreFiltervalg,
     endreCheckboxFiltervalg,
@@ -28,17 +28,17 @@ export function HendelserFilterform({
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
-        endreFiltervalg(form, []);
+        endreFiltervalg(filterId, []);
         endreCheckboxFiltervalg('ulesteEndringer', null);
     };
 
     useEffect(() => {
-        if (filtervalg[form]) {
-            setHendelserValg(filtervalg[form][0]);
+        if (filtervalg[filterId]) {
+            setHendelserValg(filtervalg[filterId][0]);
         } else {
             setHendelserValg('');
         }
-    }, [filtervalg, hendelserValg, form]);
+    }, [filtervalg, hendelserValg, filterId]);
 
     useEffect(() => {
         setCheckboxValg(filtervalg['ulesteEndringer']);
@@ -46,7 +46,7 @@ export function HendelserFilterform({
 
     const onRadioChange = e => {
         e.persist();
-        endreFiltervalg(form, [e.target.value]);
+        endreFiltervalg(filterId, [e.target.value]);
     };
 
     const onCheckboxChange = e => {
@@ -155,7 +155,7 @@ export function HendelserFilterform({
             <NullstillKnapp
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
+                filterId={filterId}
                 disabled={hendelserValg === undefined && checkboxValg === null}
             />
         </form>

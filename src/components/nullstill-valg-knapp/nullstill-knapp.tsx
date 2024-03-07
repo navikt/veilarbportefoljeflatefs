@@ -8,17 +8,17 @@ import {Button} from '@navikt/ds-react';
 interface Props {
     nullstillValg: () => void;
     dataTestId: string;
-    form: string;
+    filterId: string;
     disabled: boolean;
     className?: string;
 }
 
-function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
+function NullstillKnapp({nullstillValg, dataTestId, filterId, disabled, className}: Props) {
     const nullstille = e => {
         e.persist();
         logEvent('portefolje.metrikker.nullstill-knapp', {
             sideNavn: finnSideNavn(),
-            dropdown: form
+            dropdown: filterId
         });
         return nullstillValg();
     };

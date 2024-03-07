@@ -11,7 +11,7 @@ import {MultiSelect} from 'react-multi-select-component';
 import {isEmptyArray} from 'formik';
 
 interface GeografiskBostedFilterformProps {
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
@@ -129,7 +129,7 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
-                form={'landgruppe'}
+                filterId={'landgruppe'}
                 disabled={visGeografiskBosted.length <= 0 && selectedGeografiskBosted.length <= 0}
             />
         </form>

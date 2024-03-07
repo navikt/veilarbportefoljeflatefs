@@ -11,7 +11,7 @@ import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
 import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     emptyCheckboxFilterFormMessage?: string;
@@ -145,7 +145,7 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={'landgruppe'}
+                    filterId={'landgruppe'}
                     disabled={landgrupppeValg.length <= 0 && selectedFoedeland.length <= 0}
                 />
             </form>

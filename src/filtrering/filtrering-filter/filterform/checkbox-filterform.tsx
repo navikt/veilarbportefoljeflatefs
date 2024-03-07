@@ -9,9 +9,9 @@ import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 
 interface CheckboxFilterformProps {
-    form: string;
+    filterId: string;
     valg: CheckboxFilterMap;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
     className?: string;
@@ -22,7 +22,7 @@ interface CheckboxFilterformProps {
 function CheckboxFilterform({
     endreFiltervalg,
     valg,
-    form,
+    filterId,
     filtervalg,
     gridColumns = 1,
     className,
@@ -30,14 +30,14 @@ function CheckboxFilterform({
     tooltips
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[filterId]);
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[form]);
-    }, [filtervalg, form]);
+        setCheckBoxValg(filtervalg[filterId]);
+    }, [filtervalg, filterId]);
 
     const nullstillValg = () => {
-        endreFiltervalg(form, []);
+        endreFiltervalg(filterId, []);
     };
 
     const checkBoxKomponent = ([filterKey, filterValue]: [string, CheckboxFilter | string]) => {
@@ -65,7 +65,7 @@ function CheckboxFilterform({
                         <CheckboxGroup
                             hideLegend
                             legend=""
-                            onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
+                            onChange={(filtre: string[]) => endreFiltervalg(filterId, filtre)}
                             size="small"
                             value={checkBoxValg}
                         >
@@ -92,7 +92,7 @@ function CheckboxFilterform({
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
+                filterId={filterId}
                 disabled={checkBoxValg?.length <= 0}
             />
             {!harValg && (
