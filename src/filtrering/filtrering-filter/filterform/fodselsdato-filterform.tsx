@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell, FilterId} from '../../../model-interfaces';
+import {PortefoljeFilter, PortefoljeFilterAlternativ} from '../../../model-interfaces';
 import './filterform.css';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
-    filterId: FilterId;
+    filterId: PortefoljeFilterAlternativ;
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
-    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
+    filtervalg: PortefoljeFilter;
 }
 
 function FodselsdatoFilterform({endreFiltervalg, valg, filterId, filtervalg}: CheckboxFilterformProps) {

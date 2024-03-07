@@ -15,7 +15,7 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, PortefoljeFilter, VeilederModell} from '../model-interfaces';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -57,7 +57,7 @@ interface EnhetKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     valgteKolonner: Kolonne[];
     brukersVeileder?: VeilederModell;
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {VeiledereState} from '../../ducks/veiledere';
-import {FilterId, FiltervalgModell, VeilederModell} from '../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter, VeilederModell} from '../../model-interfaces';
 import './veileder-checkbox-liste.css';
 import {AppState} from '../../reducer';
 import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
@@ -15,11 +15,11 @@ interface VeilederCheckboxListeProps {
 }
 
 function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps) {
-    const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
+    const filtervalg: PortefoljeFilter = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
-    const filterId: FilterId = 'veiledere';
+    const filterId: PortefoljeFilterAlternativ = 'veiledere';
     const dispatch = useDispatch();
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Dictionary} from '../../../utils/types/types';
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import './filterform.css';
 import classNames from 'classnames';
@@ -9,10 +9,10 @@ import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 
 interface CheckboxFilterformProps {
-    filterId: FilterId;
+    filterId: PortefoljeFilterAlternativ;
     valg: CheckboxFilterMap;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
-    filtervalg: FiltervalgModell;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
+    filtervalg: PortefoljeFilter;
     gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;

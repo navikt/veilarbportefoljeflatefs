@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
+import {PortefoljeFilter, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
@@ -43,7 +43,7 @@ interface StatustallInnhold {
 }
 
 interface FiltreringStatusProps {
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     oversiktType: OversiktType;
     statustall: Statustall;
 }

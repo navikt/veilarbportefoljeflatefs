@@ -23,7 +23,7 @@ import listevisningReducer, {
 } from './ducks/ui/listevisning';
 import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
-import {FiltervalgModell} from './model-interfaces';
+import {PortefoljeFilter} from './model-interfaces';
 import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
 import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
@@ -67,9 +67,9 @@ export interface AppState {
     portefoljestorrelser: PortefoljeStorrelser;
     statustallVeileder: StatustallVeilederState;
     statustallEnhet: StatustallEnhetState;
-    filtreringEnhetensOversikt: FiltervalgModell;
-    filtreringMinoversikt: FiltervalgModell;
-    filtreringVeilederoversikt: FiltervalgModell;
+    filtreringEnhetensOversikt: PortefoljeFilter;
+    filtreringMinoversikt: PortefoljeFilter;
+    filtreringVeilederoversikt: PortefoljeFilter;
     modal: any;
     serverfeilModal: any;
     feilmeldingModal: any;

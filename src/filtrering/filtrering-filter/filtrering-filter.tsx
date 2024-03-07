@@ -34,7 +34,7 @@ import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
-import {FilterId, FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../model-interfaces';
 import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
@@ -46,8 +46,8 @@ import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 
 interface FiltreringFilterProps {
-    filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: React.ReactNode) => void;
+    filtervalg: PortefoljeFilter;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: React.ReactNode) => void;
     enhettiltak: any;
     oversiktType: OversiktType;
 }
@@ -94,7 +94,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     };
 
     const endreAvvik14aVedtakFilterValg = () => {
-        return (filterId: FilterId, filterVerdi: string[]) => {
+        return (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => {
             const filterForEndring: string[] = filtervalg.avvik14aVedtak;
             const filterEtterEndring: string[] = filterVerdi;
 

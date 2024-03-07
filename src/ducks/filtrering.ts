@@ -1,4 +1,4 @@
-import {FilterId, FiltervalgModell} from '../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
@@ -31,7 +31,7 @@ export type FiltreringAktiviteterValg = {
 };
 
 //  Reducer
-export const initialState: FiltervalgModell = {
+export const initialState: PortefoljeFilter = {
     ferdigfilterListe: [],
     alder: [],
     kjonn: null,
@@ -102,7 +102,7 @@ export function fjern(filterId, verdi, fjernVerdi) {
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
 }
 
-export default function filtreringReducer(state: FiltervalgModell = initialState, action): FiltervalgModell {
+export default function filtreringReducer(state: PortefoljeFilter = initialState, action): PortefoljeFilter {
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;
@@ -138,7 +138,7 @@ export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: Oversikt
 }
 
 export function endreFiltervalg(
-    filterId: FilterId,
+    filterId: PortefoljeFilterAlternativ,
     filterVerdi: React.ReactNode,
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {

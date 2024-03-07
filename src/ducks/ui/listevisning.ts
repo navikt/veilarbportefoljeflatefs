@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {getMuligeKolonner} from './listevisning-selectors';
-import {FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilter} from '../../model-interfaces';
 
 export enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',
@@ -148,7 +148,7 @@ export const lukkInfopanel = (oversiktType: OversiktType) => ({
 
 export const oppdaterKolonneAlternativer = (
     dispatch: Dispatch<OppdaterListevisningAction>,
-    filterValg: FiltervalgModell,
+    filterValg: PortefoljeFilter,
     oversiktType: OversiktType
 ) => {
     const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);

@@ -1,12 +1,12 @@
 import React, {PropsWithChildren} from 'react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilter} from '../../../model-interfaces';
 import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
 import './veiledergruppe-modal.css';
 import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
 import {BodyShort, TextField} from '@navikt/ds-react';
 
 interface VeiledergruppeFormProps {
-    filterValg: FiltervalgModell;
+    filterValg: PortefoljeFilter;
     handterVeilederChange: (veilederIdent: string[]) => void;
     gruppeNavn: string;
     setGruppeNavn: (nyttNavn: string) => void;

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BrukerModell, PortefoljeFilter, VeilederModell} from '../model-interfaces';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -27,7 +27,7 @@ interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     innloggetVeileder: OrNothing<VeilederModell>;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;

@@ -30,7 +30,7 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, PortefoljeFilter} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
@@ -57,7 +57,7 @@ interface MinOversiktKolonnerProps {
     className?: string;
     bruker: BrukerModell;
     enhetId: string;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     valgteKolonner: Kolonne[];
 }
 

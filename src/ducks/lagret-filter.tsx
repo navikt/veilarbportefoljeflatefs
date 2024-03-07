@@ -1,9 +1,9 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {PortefoljeFilter, VeilederModell} from '../model-interfaces';
 
 export interface LagretFilter {
     filterNavn: string;
     filterId: number;
-    filterValg: FiltervalgModell;
+    filterValg: PortefoljeFilter;
     opprettetDato: Date;
     sortOrder: number | null;
     filterCleanup: boolean;
@@ -30,13 +30,13 @@ export interface LagretFilterState {
 
 export interface RedigerLagretFilter {
     filterNavn: string;
-    filterValg: FiltervalgModell;
+    filterValg: PortefoljeFilter;
     filterId: number;
 }
 
 export interface NyttLagretFilter {
     filterNavn: string;
-    filterValg: FiltervalgModell;
+    filterValg: PortefoljeFilter;
 }
 
 export interface SorteringOgId {

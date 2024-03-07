@@ -22,7 +22,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../model-interfaces';
+import {PortefoljeFilter} from '../../model-interfaces';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE} from '../../konstanter';
 import {store} from '../../application';
 
@@ -55,7 +55,7 @@ function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boole
     return Object.entries(aktiviteter).filter(([_, value]) => value === AktiviteterValg.JA).length >= 1;
 }
 
-export function getFiltreringState(state: AppState, oversiktType: OversiktType): FiltervalgModell {
+export function getFiltreringState(state: AppState, oversiktType: OversiktType): PortefoljeFilter {
     switch (oversiktType) {
         case OversiktType.enhetensOversikt:
             return state.filtreringEnhetensOversikt;
@@ -66,7 +66,7 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
     }
 }
 
-export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
+export function getMuligeKolonner(filtervalg: PortefoljeFilter, oversiktType: OversiktType): Kolonne[] {
     const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
 
     const avansertAktivitetErValgt = () => {

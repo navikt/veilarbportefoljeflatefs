@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
 import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
@@ -11,9 +11,9 @@ import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-
 
 interface BarnUnder18Props {
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
     closeDropdown: () => void;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     className?: string;
 }
 function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg, className}: BarnUnder18Props) {
@@ -24,8 +24,8 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const [feilTekst, setFeilTekst] = useState<string>('');
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
-    let filterIdBarnAlder: FilterId = 'barnUnder18AarAlder';
-    let filterIdHarBarnUnder18: FilterId = 'barnUnder18Aar';
+    let filterIdBarnAlder: PortefoljeFilterAlternativ = 'barnUnder18AarAlder';
+    let filterIdHarBarnUnder18: PortefoljeFilterAlternativ = 'barnUnder18Aar';
     useEffect(() => {
         (filtervalg[filterIdHarBarnUnder18] as string[]).forEach(barnFilterValg => {
             if (

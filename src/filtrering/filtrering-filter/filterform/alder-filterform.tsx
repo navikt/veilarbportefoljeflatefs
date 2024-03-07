@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
 import Grid from '../../../components/grid/grid';
 import classNames from 'classnames';
@@ -10,11 +10,11 @@ import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-k
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 
 interface AlderFilterformProps {
-    filterId: FilterId;
+    filterId: PortefoljeFilterAlternativ;
     valg: Dictionary<string>;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
     closeDropdown: () => void;
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     className?: string;
 }
 function AlderFilterform({

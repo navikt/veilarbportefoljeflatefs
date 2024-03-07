@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {FilterId, FiltervalgModell} from '../../../model-interfaces';
+import {PortefoljeFilterAlternativ, PortefoljeFilter} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
@@ -10,10 +10,10 @@ import {OrNothing} from '../../../utils/types/types';
 import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 
 interface HendelserFilterformProps {
-    filterId: FilterId;
-    endreFiltervalg: (filterId: FilterId, filterVerdi: string[]) => void;
-    endreCheckboxFiltervalg: (filterId: FilterId, filterVerdi: OrNothing<string>) => void;
-    filtervalg: FiltervalgModell;
+    filterId: PortefoljeFilterAlternativ;
+    endreFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: string[]) => void;
+    endreCheckboxFiltervalg: (filterId: PortefoljeFilterAlternativ, filterVerdi: OrNothing<string>) => void;
+    filtervalg: PortefoljeFilter;
     oversiktType: OversiktType;
 }
 

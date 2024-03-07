@@ -3,7 +3,7 @@ import {AppState} from '../../reducer';
 import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
 import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
 import {createSelector} from 'reselect';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
+import {BrukerModell, PortefoljeFilter, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
@@ -42,7 +42,7 @@ interface UsePortefoljeSelector {
     enhetId: OrNothing<string>;
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     brukere: BrukerModell[];
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     listevisning: ListevisningState;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }

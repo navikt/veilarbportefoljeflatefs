@@ -15,7 +15,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {PortefoljeFilter, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
 import Header from '../components/tabell/header';
@@ -40,7 +40,7 @@ interface EnhetListehodeProps {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
     valgteKolonner: Kolonne[];
-    filtervalg: FiltervalgModell;
+    filtervalg: PortefoljeFilter;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 

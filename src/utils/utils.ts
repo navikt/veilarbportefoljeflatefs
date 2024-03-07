@@ -1,4 +1,4 @@
-import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, PortefoljeFilter, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
 import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
@@ -131,7 +131,7 @@ export default function TittelValg(ytelseSorteringHeader) {
     return '';
 }
 
-export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
+export function tolkBehov(filtervalg: PortefoljeFilter, bruker: BrukerModell) {
     const behov: string[] = [];
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
@@ -164,7 +164,7 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     return behov.join(', ');
 }
 
-function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
+function leggTilSpraakInfo(filtervalg: PortefoljeFilter) {
     return (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
         (filtervalg.tolkBehovSpraak.length > 0 && filtervalg.tolkebehov.length === 0)
@@ -183,7 +183,7 @@ function formatSpraakTekst(inputText: string, leggTilSpraak: boolean, tolkvehov:
 }
 
 export function tolkBehovSpraak(
-    filtervalg: FiltervalgModell,
+    filtervalg: PortefoljeFilter,
     bruker: BrukerModell,
     tolkbehovSpraakData: Map<string, string>
 ) {
