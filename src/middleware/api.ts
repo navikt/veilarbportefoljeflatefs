@@ -335,8 +335,7 @@ export const settBrukerIKontekst = async (fnr: string) => {
         method: 'post',
         body: JSON.stringify({verdi: fnr, eventType: 'NY_AKTIV_BRUKER'})
     });
-
-    return sjekkStatuskode(respons);
+    return await sjekkStatuskode(respons);
 };
 
 export const hentBrukerIKontekst = async () => {
@@ -369,6 +368,5 @@ export const fjernBrukerIKontekst = async () => {
         ...MED_CREDENTIALS,
         method: 'delete'
     });
-
-    return sjekkStatuskode(respons);
+    return await sjekkStatuskode(respons);
 };
