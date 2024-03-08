@@ -329,7 +329,7 @@ export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
     return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };
 
-export const settBrukerIKontekst = async (fnr: string): Promise<void> => {
+export const settBrukerIKontekst = async (fnr: string) => {
     const respons = await fetch('/modiacontextholder/api/context', {
         ...MED_CREDENTIALS,
         method: 'post',
