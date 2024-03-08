@@ -218,7 +218,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.put(
         '/veilarbportefolje/api/v1/fargekategori',
         withAuth(async ({request}) => {
-            const randomize = rnd(0, 1);
+            //    const randomize = rnd(0, 1);
             //returnerer feil
             // (await request.json()) as {fnr: string; fargekategori: string};
             // return new HttpResponse(null, {status: 403, statusText: 'Forbidden'});
