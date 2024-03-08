@@ -37,6 +37,7 @@ import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
 import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-enhet';
 import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 import huskelappReducer from './ducks/huskelapp';
+import fargekategoriReducer from './ducks/fargekategori';
 
 function named(name, reducer) {
     return (state, action) => {
@@ -75,6 +76,7 @@ export interface AppState {
     feilmeldingModal: any;
     arbeidsliste: any;
     huskelapp: any;
+    fargekategori: any;
     enhettiltak: EnhettiltakState;
     features: FeaturesState;
     veiledergrupper: LagretFilterState;
@@ -146,6 +148,7 @@ export default combineReducers<AppState>({
     feilmeldingModal: feilmedlingModalReducer,
     arbeidsliste: arbeidslisteReducer,
     huskelapp: huskelappReducer,
+    fargekategori: fargekategoriReducer,
     enhettiltak: enhetTiltakReducer,
     features: featuresReducer,
     veiledergrupper: veiledergrupperLagretFilterReducer,

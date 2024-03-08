@@ -94,14 +94,6 @@ export function fetchToJson(url: string, config: RequestInit = {}, redirectOnUna
         .then(toJson);
 }
 
-export async function asyncFetchToJson(url: string, config: RequestInit = {}, redirectOnUnauthorized: Boolean = true) {
-    let res = await fetch(url, config);
-    res = await sjekkStatuskode(res, redirectOnUnauthorized);
-    //eslint-disable-next-line
-    console.log('asyncFetchToJson res ', res);
-    return await res.json();
-}
-
 export function hentEnhetsPortefolje(
     enhet,
     rekkefolge,
@@ -238,16 +230,16 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
-export async function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
+export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
-    return asyncFetchToJson(url, config);
+    return fetchToJson(url, config);
 }
 
 export function oppdaterFargekategorier(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
-    return asyncFetchToJson(url, config);
+    return fetchToJson(url, config);
 }
 
 export function lagreHuskelapp(huskelapp: LagreHuskelapp) {

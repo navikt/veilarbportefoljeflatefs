@@ -217,11 +217,22 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     ),
     http.put(
         '/veilarbportefolje/api/v1/fargekategori',
-        withAuth(async () => {
-            return HttpResponse.json({
-                fnr: '11111111111',
-                fargekategori: 'FARGEKATEGORI_A'
-            });
+        withAuth(async ({request}) => {
+            const randomize = rnd(0, 1);
+            //returnerer feil
+            // (await request.json()) as {fnr: string; fargekategori: string};
+            // return new HttpResponse(null, {status: 403, statusText: 'Forbidden'});
+            //returnerer ok
+            const body = (await request.json()) as {fnr: string; fargekategoriVerdi: string};
+            return HttpResponse.json(body);
+            //returnerer blandind av feil og OK
+            //   if (randomize > 0.5) {
+            //       (await request.json()) as {fnr: string; fargekategoriVerdi: string};
+            //       return new HttpResponse(null, {status: 403, statusText: 'Forbidden'});
+            //   } else {
+            //       (await request.json()) as {fnr: string; fargekategoriVerdi: string};
+            //       return HttpResponse.json({fnr: request.fnr, fargekategoriVerdi: request.fargekategoriVerdi});
+            //   }
         })
     ),
     http.put(

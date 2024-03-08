@@ -1,13 +1,13 @@
 import React from 'react';
 import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
-import {oppdaterFargekategori} from '../../middleware/api';
+import {oppdaterFargekategoriThunk} from '../../minoversikt/oppdaterFargekategori';
+import {STATUS} from '../../ducks/utils';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -26,24 +26,16 @@ export default function FargekategoriPopover({
     placement = 'right'
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-    const [oppdaterFargekategoriFeilet, setOppdaterFargekategoriFeilet] = React.useState<boolean>(false);
+    const feilStatus = useSelector((state: AppState) => state.fargekategori.status);
 
-    const doOppdaterFargekategori = async (fnr, fargekategori) => {
+    // TODO: Hvis en bytter til v1/fargekategorier, må en sende med liste av fnr
+    const sendOppdaterFargekategori = async (fnr, fargekategori) => {
         const data: FargekategoriDataModell = {
             fnr: fnr,
             fargekategoriVerdi: fargekategori
         };
 
-        await oppdaterFargekategori(data)
-            .then(dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr)))
-            .catch(() => {
-                setOppdaterFargekategoriFeilet(true);
-            });
-    };
-
-    const sendOppdaterFargekategori = fargekategori => {
-        // TODO: Fjern valg av første element i liste når det er klart
-        doOppdaterFargekategori(fnrs[0], fargekategori);
+        await oppdaterFargekategoriThunk(dispatch, data);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -54,8 +46,10 @@ export default function FargekategoriPopover({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
-                    sendOppdaterFargekategori(fargekategori);
-                    setOpenState(false);
+                    sendOppdaterFargekategori(fnrs[0], fargekategori);
+                    if (feilStatus === STATUS.OK) {
+                        setOpenState(false);
+                    }
                 }}
             />
         );
@@ -67,14 +61,20 @@ export default function FargekategoriPopover({
             open={openState}
             onClose={() => {
                 setOpenState(false);
-                setOppdaterFargekategoriFeilet(false);
             }}
             placement={placement}
         >
             <Popover.Content>
-                {oppdaterFargekategoriFeilet
-                    ? <Alert variant="error">Hjelp</Alert> && fargekategoriknapper
-                    : fargekategoriknapper}
+                {feilStatus === STATUS.ERROR ? (
+                    <>
+                        <Alert variant="error" size="small">
+                            Oppdatering av fargekategori feilet
+                        </Alert>{' '}
+                        {fargekategoriknapper}
+                    </>
+                ) : (
+                    fargekategoriknapper
+                )}
             </Popover.Content>
             {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"

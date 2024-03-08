@@ -13,6 +13,7 @@ import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall-enhet';
 import {toJson} from '../middleware/api';
+import {FARGEKATEGORI_REDIGER_OK} from './fargekategori';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -161,7 +162,7 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 }
 
 function updateFargekategoriForBrukere(brukere, fargekategoridata) {
-    const tempBrukere = brukere.map(bruker => {
+    return brukere.map(bruker => {
         if (bruker.fnr === fargekategoridata.fnr) {
             return {
                 ...bruker,
@@ -170,7 +171,6 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
         }
         return bruker;
     });
-    return tempBrukere;
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
@@ -289,12 +289,12 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 }
             };
         }
-        case OPPDATER_FARGEKATEGORI: {
+        case FARGEKATEGORI_REDIGER_OK: {
             return {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
+                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.data)
                 }
             };
         }
@@ -470,7 +470,6 @@ export function oppdaterFargekategoriAction(data, props) {
         fargekategoriVerdi: data,
         fnr: props
     };
-
     return dispatch =>
         dispatch({
             type: OPPDATER_FARGEKATEGORI,
