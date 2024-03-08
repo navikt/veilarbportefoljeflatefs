@@ -70,12 +70,13 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
+export function sjekkStatuskode(response: Response, redirectOnUnauthorized: Boolean = true) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
-        return response;
+        return Promise.resolve(response);
     }
     if (response.status === 401 && redirectOnUnauthorized) {
         window.location.href = loginUrl();
+        return Promise.reject(new FetchError(response.statusText, response));
     }
     return Promise.reject(new FetchError(response.statusText, response));
 }
