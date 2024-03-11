@@ -26,14 +26,14 @@
 .veilarbportefoljeflatefs .brukerliste__innhold {
     align-items: center;
 }
-.veilarbportefoljeflatefs .brukerliste__innhold .velgalle-checkboks {
-    padding-right: var(--a-spacing-2);
+.veilarbportefoljeflatefs .velgalle-checkboks {
+    margin-right: 0.5rem;
+    margin-left: calc(1rem + 1px);
 }
 .veilarbportefoljeflatefs .brukerliste .arbeidsliste--ikon {
-    margin-top: 7px;
-    margin-left: 5px;
-
-    min-width: calc(1.2rem + 1rem + 2px); /* Ikon-breidd (1.2rem) + plassen sorteringspil tek i header (1rem+2px) */
+    display: flex;
+    margin-left: var(--a-spacing-2);
+    min-width: calc(2.2rem + 2px);
 }
 .veilarbportefoljeflatefs .brukerliste--borders {
     border-top: 1px solid #a0a0a0;
@@ -54,16 +54,12 @@
 }
 .veilarbportefoljeflatefs .brukerliste__sorteringheader {
     display: flex;
+    align-items: center;
     min-height: 3rem;
     padding: 0 0 0.5rem;
 }
-.veilarbportefoljeflatefs .brukerliste__gutter-left {
-    display: flex;
-    align-items: center;
-    margin-left: 1rem;
-}
 .veilarbportefoljeflatefs .brukerliste--min-width-minside {
-    min-width: 4rem;
+    min-width: 5.5rem;
 }
 .veilarbportefoljeflatefs .brukerliste__innhold {
     width: 70%;
@@ -79,9 +75,6 @@
     align-items: center;
     width: 4rem;
     margin-right: 8px;
-}
-.veilarbportefoljeflatefs .brukerliste__checkbox {
-    padding-right: var(--a-spacing-2);
 }
 .veilarbportefoljeflatefs .brukerliste__etiketter {
     width: 100%;

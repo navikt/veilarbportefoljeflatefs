@@ -1,5 +1,6 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
+import SorteringHeaderIkon from '../components/tabell/sortering-header-ikon';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
@@ -21,12 +22,13 @@ import {
 import {Kolonne} from '../ducks/ui/listevisning';
 import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import './minoversikt.css';
-import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
+import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/huskelapp-stroke.svg';
+import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -83,31 +85,42 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                    <VelgalleCheckboks className="velgalle-checkboks" />
+                <VelgalleCheckboks />
+                {!vis_kolonner_for_huskelapp && (
                     <SorteringHeader
                         className="arbeidslistekategori__sorteringsheader"
-                        sortering={Sorteringsfelt.FARGEKATEGORI}
+                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                         tekst={<ArbeidslisteikonBla />}
                         title="Sorter på farge"
-                        headerId="fargekategori"
+                        headerId="arbeidslistekategori"
                     />
-                    {vis_kolonner_for_huskelapp && (
-                        <SorteringHeader
-                            className="huskelapper__sorteringsheader"
-                            sortering={Sorteringsfelt.HUSKELAPP}
-                            onClick={sorteringOnClick}
+                )}
+                {vis_kolonner_for_huskelapp && (
+                    <div className="brukerliste__minoversikt-ikonknapper">
+                        <SorteringHeaderIkon
+                            ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
+                            erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                            sortering={Sorteringsfelt.FARGEKATEGORI}
                             rekkefolge={sorteringsrekkefolge}
-                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                            tekst={<HuskelappIkon />}
-                            title="Sorter på huskelapp"
-                            headerId="huskelapp"
+                            onClick={sorteringOnClick}
+                            headerId="fargekategori"
+                            title="Fargekategori-sortering"
                         />
-                    )}
-                </div>
+                        <SorteringHeaderIkon
+                            ikon={<HuskelappIkon aria-hidden />}
+                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                            sortering={Sorteringsfelt.HUSKELAPP}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            className="huskelapp__sorteringsheader"
+                            headerId="huskelapp"
+                            title="Huskelapp-sortering"
+                        />
+                    </div>
+                )}
                 <SorteringHeader
                     className="col col-xs-2"
                     sortering={Sorteringsfelt.ETTERNAVN}

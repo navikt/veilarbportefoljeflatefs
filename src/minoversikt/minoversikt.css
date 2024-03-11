@@ -35,9 +35,16 @@
     width: fit-content;
     margin: auto 0 auto auto;
 }
-
 .veilarbportefoljeflatefs .tabell-etikett {
     padding: 0.125rem 0.25rem;
+}
+.veilarbportefoljeflatefs .brukerliste__checkbox {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+}
+.veilarbportefoljeflatefs .brukerliste__minoversikt-ikonknapper {
+    min-width: 6.125rem;
+    display: flex;
 }
 .veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
     margin-right: 1rem;

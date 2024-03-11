@@ -52,20 +52,18 @@ function EnhetBrukerpanel({
 
     return (
         <li className={classname}>
-            <div className="brukerliste__gutter-left">
-                <Checkbox
-                    checked={bruker.markert}
-                    className="brukerliste__checkbox"
-                    disabled={bruker.fnr === ''}
-                    hideLabel
-                    onChange={() => {
-                        settMarkert(bruker.fnr, !bruker.markert);
-                    }}
-                    size="small"
-                >
-                    {''}
-                </Checkbox>
-            </div>
+            <Checkbox
+                checked={bruker.markert}
+                className="brukerliste__checkbox"
+                disabled={bruker.fnr === ''}
+                hideLabel
+                onChange={() => {
+                    settMarkert(bruker.fnr, !bruker.markert);
+                }}
+                size="small"
+            >
+                {''}
+            </Checkbox>
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"
                 bruker={bruker}

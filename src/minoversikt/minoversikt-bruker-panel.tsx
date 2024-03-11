@@ -9,16 +9,16 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
-import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
-import {BodyShort, Checkbox, Tag} from '@navikt/ds-react';
-import {ReactComponent as HuskelappIkon} from './huskelapp.svg';
-import {ReactComponent as InaktivHuskelappIkon} from './huskelapp-inaktiv.svg';
+import {Button, Checkbox, Tag} from '@navikt/ds-react';
+import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/huskelapp-fill.svg';
+import {ReactComponent as InaktivHuskelappIkon} from '../components/ikoner/huskelapp/huskelapp-empty.svg';
+import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -85,39 +85,35 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
             data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
         >
             <div className="brukerliste__element">
-                <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                    <Checkbox
-                        className="brukerliste__checkbox"
-                        checked={bruker.markert}
-                        data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
-                        disabled={bruker.fnr === ''}
-                        hideLabel
-                        onChange={() => {
-                            settMarkert(bruker.fnr, !bruker.markert);
-                        }}
-                        size="small"
-                    >
-                        {''}
-                    </Checkbox>
-                    {!erHuskelappFeatureTogglePa && (
-                        <ArbeidslistekategoriVisning
-                            kategori={bruker.arbeidsliste?.kategori}
-                            dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
-                        />
-                    )}
-                    {erHuskelappFeatureTogglePa && (
-                        <>
-                            <FargekategoriTabellradKnapp bruker={bruker} />
-                            <BodyShort className="huskelappcontainer">
-                                {bruker.huskelapp ? (
-                                    <HuskelappIkon className="huskelappikon" />
-                                ) : (
-                                    <InaktivHuskelappIkon className="huskelappikon" />
-                                )}
-                            </BodyShort>
-                        </>
-                    )}
-                </div>
+                <Checkbox
+                    className="brukerliste__checkbox"
+                    checked={bruker.markert}
+                    data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                    disabled={bruker.fnr === ''}
+                    hideLabel
+                    onChange={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                    }}
+                    size="small"
+                >
+                    {''}
+                </Checkbox>
+                {!erHuskelappFeatureTogglePa && (
+                    <ArbeidslistekategoriVisning
+                        kategori={bruker.arbeidsliste?.kategori}
+                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
+                    />
+                )}
+                {erHuskelappFeatureTogglePa && (
+                    <div className="brukerliste__minoversikt-ikonknapper">
+                        <FargekategoriTabellradKnapp bruker={bruker} />
+                        {bruker.huskelapp ? (
+                            <Button size="small" variant="tertiary" icon={<HuskelappIkon />} />
+                        ) : (
+                            <Button size="small" variant="tertiary" icon={<InaktivHuskelappIkon />} />
+                        )}
+                    </div>
+                )}
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
                     bruker={bruker}
