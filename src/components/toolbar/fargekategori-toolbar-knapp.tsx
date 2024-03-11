@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {ReactComponent as FargekategoriIkonBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
-import {Button} from '@navikt/ds-react';
-// import FargekategoriPopover from '../fargekategori/fargekategori-popover';
+import {BodyShort, Button} from '@navikt/ds-react';
+import FargekategoriPopover from '../fargekategori/fargekategori-popover';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];
@@ -15,21 +15,26 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
         <>
             <Button
                 size="small"
-                variant="tertiary-neutral"
+                variant="tertiary"
                 icon={<FargekategoriIkonBokmerke />}
                 title="Sett fargekategori for alle valgte brukere"
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
+                className="toolbar_btn"
             >
                 Fargekategori
             </Button>
-            {/* <FargekategoriPopover
+            <FargekategoriPopover
                 fnrs={valgteBrukereFnrs}
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}
-                placement="top-start"
-            /> */}
+                placement="bottom-start"
+            >
+                <BodyShort size="small" spacing>
+                    <b>Endre kategori for valgte brukere</b>
+                </BodyShort>
+            </FargekategoriPopover>
         </>
     );
 }

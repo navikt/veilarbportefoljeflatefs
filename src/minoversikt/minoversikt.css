@@ -39,15 +39,6 @@
 .veilarbportefoljeflatefs .tabell-etikett {
     padding: 0.125rem 0.25rem;
 }
-
-.veilarbportefoljeflatefs .huskelappcontainer {
-    margin-top: 8px;
-    margin-left: 5px;
-
-    min-width: calc(1.3em + 1rem + 2px); /* Ikon-breidd (1.3em) + breidd av sorteringspil i header */
-}
-
-.veilarbportefoljeflatefs .huskelappikon {
-    width: 1.3em;
-    height: 1.3em;
+.veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
+    margin-right: 1rem;
 }

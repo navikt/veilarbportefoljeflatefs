@@ -15,11 +15,12 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
     return (
         <>
             <Button
+                size="small"
+                variant="tertiary"
+                icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
-                size="small"
-                icon={fargekategoriIkonMapper(bruker.fargekategori)}
-                variant="tertiary"
+                className="fargekategori-tabellrad-knapp"
             />
             <FargekategoriPopover
                 buttonRef={buttonRef}

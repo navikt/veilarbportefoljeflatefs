@@ -1,21 +1,21 @@
 import React from 'react';
-import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
-import {Button, Popover} from '@navikt/ds-react';
-import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
-import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
-import {AnyAction} from 'redux';
+import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
+import {lagreFargekategoriAction} from '../../ducks/fargekategori';
+import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
+import {Button, Popover} from '@navikt/ds-react';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
     fnrs: string[];
-    toolbarknapp?: boolean;
-    placement?: 'right' | 'top-start';
+    placement?: 'right' | 'bottom-start';
+    children?: React.ReactNode;
 }
 
 export default function FargekategoriPopover({
@@ -23,7 +23,8 @@ export default function FargekategoriPopover({
     openState,
     setOpenState,
     fnrs,
-    placement = 'right'
+    placement = 'right',
+    children
 }: FargekategoriPopoverProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
 
@@ -65,7 +66,10 @@ export default function FargekategoriPopover({
             onClose={() => setOpenState(false)}
             placement={placement}
         >
-            <Popover.Content>{fargekategoriknapper}</Popover.Content>
+            <Popover.Content>
+                {children}
+                {fargekategoriknapper}
+            </Popover.Content>
             {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"
                 <Button size="small">Endre</Button>
