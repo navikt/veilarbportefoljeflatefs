@@ -18,7 +18,7 @@ import {
     ferdigfilterListeLabelTekst
 } from '../filter-konstanter';
 
-export interface FilterStatusMinArbeidslisteProps {
+export interface FilterStatusMineFargekategorierProps {
     valgteFargekategoriFilter: string[];
     handleChange: (e: any) => void;
     handleChangeCheckbox: (e: any) => void;
@@ -32,7 +32,7 @@ function FilterStatusMineFargekategorier({
     handleChangeCheckbox,
     checked,
     indeterminate
-}: FilterStatusMinArbeidslisteProps) {
+}: FilterStatusMineFargekategorierProps) {
     const statusTall = useStatustallVeilederSelector();
     const {
         fargekategoriA,
