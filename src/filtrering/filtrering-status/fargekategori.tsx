@@ -6,7 +6,6 @@ import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arb
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
-import {PortefoljeFilter} from '../../model-interfaces';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {
     FARGEKATEGORI_A,
@@ -23,8 +22,6 @@ export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
     handleChange: (e: any) => void;
     handleChangeCheckbox: (e: any) => void;
-    filtervalg: PortefoljeFilter;
-    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     checked: boolean;
     indeterminate: boolean;
 }
