@@ -100,7 +100,7 @@ export function lagConfig(data: any): any {
     return data;
 }
 
-export const ferdigfilterListe = {
+export const ferdigfilterListeLabelTekst = {
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     TRENGER_VURDERING: 'Trenger vurdering',
@@ -441,7 +441,7 @@ export const avvik14aVedtak = {
 
 const filterKonstanter = {
     ytelseUtlopsSortering,
-    ferdigfilterListe,
+    ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
     fodselsdagIMnd,
     kjonn,

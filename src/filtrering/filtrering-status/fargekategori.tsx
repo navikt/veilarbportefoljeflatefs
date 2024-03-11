@@ -16,7 +16,7 @@ import {
     FARGEKATEGORI_E,
     FARGEKATEGORI_F,
     FARGEKATEGORI_INGEN_KATEGORI,
-    ferdigfilterListe
+    ferdigfilterListeLabelTekst
 } from '../filter-konstanter';
 
 export interface FilterStatusMinArbeidslisteProps {
@@ -28,7 +28,12 @@ export interface FilterStatusMinArbeidslisteProps {
     checked: boolean;
 }
 
-function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps) {
+function FilterStatusMineFargekategorier({
+    ferdigfilterListe,
+    handleChange,
+    handleChangeCheckbox,
+    checked
+}: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
     const {
         fargekategoriA,
@@ -44,11 +49,11 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
         <>
             <BarInputCheckbox
                 filterNavn="mineFargekategorier"
-                handleChange={props.handleChange}
-                checked={props.checked}
-                labelTekst={ferdigfilterListe.MINE_FARGEKATEGORIER}
+                handleChange={handleChange}
+                checked={checked}
+                labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
             />
-            {props.checked && (
+            {checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <BarInputCheckbox
                         labelTekst={
@@ -59,8 +64,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierA"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_A)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_A)}
                         antall={fargekategoriA}
                     />
                     <BarInputCheckbox
@@ -72,8 +77,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierB"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_B)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_B)}
                         antall={fargekategoriB}
                     />
                     <BarInputCheckbox
@@ -85,8 +90,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierC"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_C)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_C)}
                         antall={fargekategoriC}
                     />
                     <BarInputCheckbox
@@ -98,8 +103,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierD"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_D)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_D)}
                         antall={fargekategoriD}
                     />
                     <BarInputCheckbox
@@ -111,8 +116,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierE"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_E)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_E)}
                         antall={fargekategoriE}
                     />
                     <BarInputCheckbox
@@ -124,8 +129,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierF"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_F)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_F)}
                         antall={fargekategoriF}
                     />
                     <BarInputCheckbox
@@ -137,8 +142,8 @@ function FilterStatusMineFargekategorier(props: FilterStatusMinArbeidslisteProps
                             </>
                         }
                         filterNavn="mineFargekategorierIngenKategori"
-                        handleChange={props.handleChangeCheckbox}
-                        checked={props.checked && props.ferdigfilterListe.includes(FARGEKATEGORI_INGEN_KATEGORI)}
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_INGEN_KATEGORI)}
                         antall={fargekategoriIngenKategori}
                     />
                 </div>
