@@ -19,7 +19,7 @@ import {
 } from '../filter-konstanter';
 
 export interface FilterStatusMinArbeidslisteProps {
-    ferdigfilterListe: string[];
+    valgteFargekategoriFilter: string[];
     handleChange: (e: any) => void;
     handleChangeCheckbox: (e: any) => void;
     checked: boolean;
@@ -27,7 +27,7 @@ export interface FilterStatusMinArbeidslisteProps {
 }
 
 function FilterStatusMineFargekategorier({
-    ferdigfilterListe,
+    valgteFargekategoriFilter,
     handleChange,
     handleChangeCheckbox,
     checked,
@@ -65,7 +65,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierA"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_A)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_A)}
                         antall={fargekategoriA}
                     />
                     <BarInputCheckbox
@@ -78,7 +78,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierB"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_B)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_B)}
                         antall={fargekategoriB}
                     />
                     <BarInputCheckbox
@@ -91,7 +91,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierC"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_C)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_C)}
                         antall={fargekategoriC}
                     />
                     <BarInputCheckbox
@@ -104,7 +104,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierD"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_D)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_D)}
                         antall={fargekategoriD}
                     />
                     <BarInputCheckbox
@@ -117,7 +117,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierE"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_E)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_E)}
                         antall={fargekategoriE}
                     />
                     <BarInputCheckbox
@@ -130,7 +130,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierF"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_F)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_F)}
                         antall={fargekategoriF}
                     />
                     <BarInputCheckbox
@@ -143,7 +143,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierIngenKategori"
                         handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(FARGEKATEGORI_INGEN_KATEGORI)}
+                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
                         antall={fargekategoriIngenKategori}
                     />
                 </div>
