@@ -806,7 +806,7 @@ describe('Filter', () => {
         cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
         cy.getByTestId('brukerfeilmelding').should('be.visible');
         cy.apneLukkeFilterDropdown('kjonn');
-        cy.checkbox('radio-valg_kvinne');
+        cy.getByTestId('radio-valg_kvinne').check({force: true});
         cy.getByTestId('brukerfeilmelding').should('not.exist');
     });
 });
