@@ -92,13 +92,18 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
 
     function dispatchFargekategorierChange(e: React.ChangeEvent<HTMLInputElement>) {
         dispatch(pagineringSetup({side: 1}));
-        const nyeFerdigfilterListe = e.target.checked
+        const nyValgteFargekategorierState = e.target.checked
             ? [...fargekategoriListe, e.target.value]
             : fargekategoriListe.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('fargekategorier', nyeFerdigfilterListe, oversiktType));
+        const ingenFargekategorierValgt = nyValgteFargekategorierState.length === 0;
+        dispatch(endreFiltervalg('fargekategorier', nyValgteFargekategorierState, oversiktType));
+        if (ingenFargekategorierValgt) {
+            const nyeFerdigfilterListe = fjernFerdigfilter(ferdigfilterListe!, MINE_FARGEKATEGORIER);
+            dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
+        }
         oppdaterKolonneAlternativer(
             dispatch,
-            {...filtervalg, fargekategorier: nyeFerdigfilterListe as FargekategoriModell[]},
+            {...filtervalg, fargekategorier: nyValgteFargekategorierState as FargekategoriModell[]},
             oversiktType
         );
     }
@@ -107,6 +112,10 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
+        const settAlleFargekategorierValgt = e.target.value === MINE_FARGEKATEGORIER;
+        if (settAlleFargekategorierValgt) {
+            dispatch(endreFiltervalg('fargekategorier', alleFargekategoriFilterAlternativer, oversiktType));
+        }
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
     }
 
