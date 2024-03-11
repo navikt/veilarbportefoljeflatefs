@@ -1,5 +1,5 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import {FargekategoriModell, KategoriModell, Sorteringsfelt} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
@@ -43,13 +43,22 @@ export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const HUSKELAPP = 'MINE_HUSKELAPPER';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
-export const FARGEKATEGORI_A = 'FARGEKATEGORI_A';
-export const FARGEKATEGORI_B = 'FARGEKATEGORI_B';
-export const FARGEKATEGORI_C = 'FARGEKATEGORI_C';
-export const FARGEKATEGORI_D = 'FARGEKATEGORI_D';
-export const FARGEKATEGORI_E = 'FARGEKATEGORI_E';
-export const FARGEKATEGORI_F = 'FARGEKATEGORI_F';
-export const FARGEKATEGORI_INGEN_KATEGORI = 'FARGEKATEGORI_INGEN_KATEGORI';
+export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
+export const FARGEKATEGORI_B = FargekategoriModell.FARGEKATEGORI_B;
+export const FARGEKATEGORI_C = FargekategoriModell.FARGEKATEGORI_C;
+export const FARGEKATEGORI_D = FargekategoriModell.FARGEKATEGORI_D;
+export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
+export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
+export const FARGEKATEGORI_INGEN_KATEGORI = FargekategoriModell.FARGEKATEGORI_INGEN_KATEGORI;
+export const alleFargekategoriFilterAlternativer = [
+    FARGEKATEGORI_A,
+    FARGEKATEGORI_B,
+    FARGEKATEGORI_C,
+    FARGEKATEGORI_D,
+    FARGEKATEGORI_E,
+    FARGEKATEGORI_F,
+    FARGEKATEGORI_INGEN_KATEGORI
+] as const;
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,

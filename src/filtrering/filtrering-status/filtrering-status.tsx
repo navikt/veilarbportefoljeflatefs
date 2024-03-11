@@ -5,6 +5,7 @@ import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-
 import {FargekategoriModell, FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    alleFargekategoriFilterAlternativer,
     MIN_ARBEIDSLISTE,
     MINE_FARGEKATEGORIER,
     NYE_BRUKERE_FOR_VEILEDER,
@@ -252,6 +253,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                             filtervalg={filtervalg}
                             endreFiltervalg={dispatchFiltreringStatusChanged}
                             checked={ferdigfilterListe.includes(MINE_FARGEKATEGORIER)}
+                            indeterminate={
+                                ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
+                                !alleFargekategoriFilterAlternativer.every(fargekategoriFilterAlternativ =>
+                                    fargekategoriListe.includes(fargekategoriFilterAlternativ)
+                                )
+                            }
                         />
                     </>
                 )}

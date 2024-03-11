@@ -26,13 +26,15 @@ export interface FilterStatusMinArbeidslisteProps {
     filtervalg: PortefoljeFilter;
     endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
     checked: boolean;
+    indeterminate: boolean;
 }
 
 function FilterStatusMineFargekategorier({
     ferdigfilterListe,
     handleChange,
     handleChangeCheckbox,
-    checked
+    checked,
+    indeterminate
 }: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
     const {
@@ -52,6 +54,7 @@ function FilterStatusMineFargekategorier({
                 handleChange={handleChange}
                 checked={checked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
+                indeterminate={indeterminate}
             />
             {checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
