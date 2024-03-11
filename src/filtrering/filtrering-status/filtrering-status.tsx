@@ -112,10 +112,15 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
-        const settAlleFargekategorierValgt = e.target.value === MINE_FARGEKATEGORIER;
-        if (settAlleFargekategorierValgt) {
-            dispatch(endreFiltervalg('fargekategorier', alleFargekategoriFilterAlternativer, oversiktType));
+
+        const erMineFargekategorierFilter = e.target.value === MINE_FARGEKATEGORIER;
+        if (erMineFargekategorierFilter) {
+            const mineFargekategorierBlirLagtTil = e.target.checked;
+            mineFargekategorierBlirLagtTil
+                ? dispatch(endreFiltervalg('fargekategorier', alleFargekategoriFilterAlternativer, oversiktType))
+                : dispatch(endreFiltervalg('fargekategorier', [], oversiktType));
         }
+
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
     }
 
