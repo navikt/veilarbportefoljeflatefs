@@ -1,7 +1,8 @@
 import {Tiltak} from '../../ducks/enhettiltak';
 import {OrNothing} from '../../utils/types/types';
+import {MINE_FARGEKATEGORIER} from '../filter-konstanter';
 
-export const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER'];
+export const CHECKBOX_FILTER = ['UFORDELTE_BRUKERE', 'NYE_BRUKERE_FOR_VEILEDER', MINE_FARGEKATEGORIER];
 
 export function leggTilFerdigFilter(filterListe: string[], filter: string): string[] {
     if (CHECKBOX_FILTER.includes(filter)) {
