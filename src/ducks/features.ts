@@ -8,7 +8,8 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    HUSKELAPP
+    HUSKELAPP,
+    FARGEKATEGORIER
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -24,7 +25,8 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
-    [HUSKELAPP]: false
+    [HUSKELAPP]: false,
+    [FARGEKATEGORIER]: false
 };
 
 // Reducer
