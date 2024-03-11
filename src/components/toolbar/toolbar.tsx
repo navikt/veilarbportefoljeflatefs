@@ -13,6 +13,8 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
 import {Alert, Heading} from '@navikt/ds-react';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -41,6 +43,7 @@ function Toolbar(props: ToolbarProps) {
         sokVeilederSkalVises
     } = props;
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -52,8 +55,12 @@ function Toolbar(props: ToolbarProps) {
             case OversiktType.minOversikt:
                 return (
                     <>
-                        <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
-                        <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
+                        {!erFargekategoriFeatureTogglePa && (
+                            <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
+                        )}
+                        {erFargekategoriFeatureTogglePa && (
+                            <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
+                        )}
                     </>
                 );
             case OversiktType.enhetensOversikt:
