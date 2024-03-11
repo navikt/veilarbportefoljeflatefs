@@ -16,8 +16,8 @@ import {Collapse} from 'react-collapse';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {Button, Checkbox, Tag} from '@navikt/ds-react';
-import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/huskelapp-fill.svg';
-import {ReactComponent as InaktivHuskelappIkon} from '../components/ikoner/huskelapp/huskelapp-empty.svg';
+import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkonTomt} from '../components/ikoner/huskelapp/huskelapp_stiplet.svg';
 import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
@@ -110,7 +110,7 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
                         {bruker.huskelapp ? (
                             <Button size="small" variant="tertiary" icon={<HuskelappIkon />} />
                         ) : (
-                            <Button size="small" variant="tertiary" icon={<InaktivHuskelappIkon />} />
+                            <Button size="small" variant="tertiary" icon={<HuskelappIkonTomt />} />
                         )}
                     </div>
                 )}
