@@ -109,7 +109,8 @@ export function hentEnhetsPortefolje(
     }
     const filtrerteFiltervalg: FiltervalgModell = {
         ...filtervalg,
-        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f)),
+        ferdigfilterListe: filtervalg.ferdigfilterListe.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
     const url = buildUrl(baseUrl, {fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
@@ -133,7 +134,8 @@ export function hentVeiledersPortefolje(
     }
     const filtrerteFiltervalg: FiltervalgModell = {
         ...filtervalg,
-        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
+        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f)),
+        ferdigfilterListe: filtervalg.ferdigfilterListe.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;
     const url = buildUrl(baseUrl, {enhet, fra, antall, sortDirection: rekkefolge, sortField: sorteringsfelt});
