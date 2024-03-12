@@ -18,7 +18,7 @@ function BrukerFnr({className, bruker}: BrukerFnrProps) {
                         text={bruker.fnr}
                         title="Fødselsnummer"
                         size="xsmall"
-                        // iconPosition="right"
+                        iconPosition="right"
                     />
                 </Tooltip>
             )}
