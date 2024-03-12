@@ -271,7 +271,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleHovedfilterEndret={handleCheckboxChange}
                         handleUnderfilterEndret={dispatchFargekategorierChange}
                         hidden={oversiktType !== OversiktType.minOversikt}
-                        checked={ferdigfilterListe.includes(MINE_FARGEKATEGORIER)}
+                        checked={
+                            ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
+                            alleFargekategoriFilterAlternativer.every(fargekategoriFilterAlternativ =>
+                                fargekategoriListe.includes(fargekategoriFilterAlternativ)
+                            )
+                        }
                         indeterminate={
                             ferdigfilterListe.includes(MINE_FARGEKATEGORIER) &&
                             !alleFargekategoriFilterAlternativer.every(fargekategoriFilterAlternativ =>
