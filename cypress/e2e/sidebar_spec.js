@@ -153,13 +153,11 @@ describe('Mine filter', () => {
 
         cy.klikkTab('MINE_FILTER');
 
-        cy.getByTestId('mine-filter_alertstripe')
-            .should('be.visible')
-            .contains(
-                "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
-            );
-
-        cy.getByTestId('mine-filter_alertstripe_knapp').should('be.visible').click();
+        cy.getByTestId('mine-filter_alertstripe').should('be.visible')
+            .within(() => {
+                cy.contains( "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet.");
+                cy.get('button').should('be.visible').click();
+            });
 
         cy.getByTestId('mine-filter_alertstripe').should('not.exist');
     });
