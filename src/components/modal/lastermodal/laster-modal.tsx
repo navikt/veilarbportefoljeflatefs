@@ -13,7 +13,6 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
             open={isOpenLoaderModal}
             onClose={() => setIsOpenLoaderModal(false)}
             closeButton={false}
-            shouldCloseOnOverlayClick={false}
             className="veilarbportefoljeflatefs-laster-modal"
         >
             <Loader size="2xlarge" />

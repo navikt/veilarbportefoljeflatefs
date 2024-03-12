@@ -203,7 +203,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         onClose={lukkModal}
                         className={classNames('veiledergruppe-modal', props.className)}
                     >
-                        <Modal.Content>
+                        <Modal.Body>
                             <ModalHeader tittel={props.modalTittel} />
                             {alertTekst.length !== 0 && (
                                 <Alert
@@ -258,7 +258,7 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                                     )}
                                 </div>
                             </VeiledergruppeForm>
-                        </Modal.Content>
+                        </Modal.Body>
                     </Modal>
                     <EndringerIkkeLagretModal
                         isOpen={visEndringerIkkeLagretModal}

@@ -36,7 +36,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
             open={isModalOpen}
             onClose={onModalClose}
         >
-            <Modal.Content>
+            <Modal.Body>
                 <HuskelappModalHeader />
                 <div className="huskelapp-modal-content">
                     <div>
@@ -104,7 +104,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                         {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
                     </Button>
                 </div>
-            </Modal.Content>
+            </Modal.Body>
         </Modal>
     );
 };

@@ -10,7 +10,6 @@ interface ModalSuksessProps {
     tittel: string;
     tekst: string;
     hovedknappTekst: string;
-    closeButton?: boolean;
     testNavn?: string;
 }
 
@@ -49,7 +48,6 @@ export function TildelingerOk(props: {isOpen: boolean; onRequestClose: () => voi
             onRequestClose={props.onRequestClose}
             tittel="Det tar litt tid å overføre informasjonen til oversikten"
             tekst="Følgende bruker(e) ble tildelt veileder:"
-            closeButton={false}
             hovedknappTekst="Lukk"
             testNavn="tildel-veileder"
         >

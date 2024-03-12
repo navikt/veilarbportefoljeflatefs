@@ -205,6 +205,7 @@ function Sidebar(props: SidebarProps) {
         return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
     };
 
+    /* TODO migrering bytt ut ReactModal__Body--open med navds-modal__document-body og test grudig */
     outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'ReactModal__Body--open') {
             logEvent('portefolje.metrikker.klikk-utenfor', {

@@ -132,9 +132,9 @@ function ArbeidslisteModalRediger({
                                 className="arbeidsliste-modal"
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
-                                shouldCloseOnOverlayClick
+                                // closeOnBackdropClick={true} //TODO kommenter inn i v5.8-ish når den får støtte
                             >
-                                <Modal.Content>
+                                <Modal.Body>
                                     <ModalHeader tittel="Rediger arbeidsliste" />
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
@@ -155,7 +155,7 @@ function ArbeidslisteModalRediger({
                                             />
                                         )}
                                     </div>
-                                </Modal.Content>
+                                </Modal.Body>
                             </Modal>
                         </>
                     )}
