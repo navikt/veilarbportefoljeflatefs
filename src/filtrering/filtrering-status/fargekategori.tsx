@@ -65,7 +65,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierA"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_A)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_A)}
                         antall={fargekategoriA}
                     />
                     <BarInputCheckbox
@@ -78,7 +78,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierB"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_B)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_B)}
                         antall={fargekategoriB}
                     />
                     <BarInputCheckbox
@@ -91,7 +91,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierC"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_C)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_C)}
                         antall={fargekategoriC}
                     />
                     <BarInputCheckbox
@@ -104,7 +104,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierD"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_D)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_D)}
                         antall={fargekategoriD}
                     />
                     <BarInputCheckbox
@@ -117,7 +117,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierE"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_E)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_E)}
                         antall={fargekategoriE}
                     />
                     <BarInputCheckbox
@@ -130,7 +130,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierF"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_F)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_F)}
                         antall={fargekategoriF}
                     />
                     <BarInputCheckbox
@@ -143,7 +143,7 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierIngenKategori"
                         handleChange={handleUnderfilterEndret}
-                        checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
+                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
                         antall={fargekategoriIngenKategori}
                     />
                 </div>
