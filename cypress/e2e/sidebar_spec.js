@@ -1,4 +1,3 @@
-import React from 'react';
 import {kebabCase} from '../../src/utils/utils';
 
 const mineFilterNavn = 'Voff';
@@ -24,6 +23,8 @@ let antallVeiledergrupper = 0;
 const navDsRadioButtonsSelector = '.navds-radio-buttons';
 
 before('Start server', () => {
+    cy.clearAllLocalStorage();
+    cy.clearAllSessionStorage();
     cy.configure();
 });
 
@@ -399,7 +400,6 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('timed-toast_gruppen-er-lagret').should('be.visible').contains('Gruppen er lagret');
 
-        //TODO funker denne?
         cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(aasen);
     });
 
