@@ -53,7 +53,7 @@ function FilterStatusMineFargekategorier({
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={indeterminate}
             />
-            {checked && (
+            {(checked || indeterminate) && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <BarInputCheckbox
                         labelTekst={
