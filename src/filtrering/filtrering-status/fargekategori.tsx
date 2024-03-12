@@ -20,16 +20,16 @@ import {
 
 export interface FilterStatusMineFargekategorierProps {
     valgteFargekategoriFilter: string[];
-    handleChange: (e: any) => void;
-    handleChangeCheckbox: (e: any) => void;
+    handleHovedfilterEndret: (e: any) => void;
+    handleUnderfilterEndret: (e: any) => void;
     checked: boolean;
     indeterminate: boolean;
 }
 
 function FilterStatusMineFargekategorier({
     valgteFargekategoriFilter,
-    handleChange,
-    handleChangeCheckbox,
+    handleHovedfilterEndret,
+    handleUnderfilterEndret,
     checked,
     indeterminate
 }: FilterStatusMineFargekategorierProps) {
@@ -48,7 +48,7 @@ function FilterStatusMineFargekategorier({
         <>
             <BarInputCheckbox
                 filterNavn="mineFargekategorier"
-                handleChange={handleChange}
+                handleChange={handleHovedfilterEndret}
                 checked={checked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={indeterminate}
@@ -64,7 +64,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierA"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_A)}
                         antall={fargekategoriA}
                     />
@@ -77,7 +77,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierB"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_B)}
                         antall={fargekategoriB}
                     />
@@ -90,7 +90,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierC"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_C)}
                         antall={fargekategoriC}
                     />
@@ -103,7 +103,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierD"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_D)}
                         antall={fargekategoriD}
                     />
@@ -116,7 +116,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierE"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_E)}
                         antall={fargekategoriE}
                     />
@@ -129,7 +129,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierF"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_F)}
                         antall={fargekategoriF}
                     />
@@ -142,7 +142,7 @@ function FilterStatusMineFargekategorier({
                             </>
                         }
                         filterNavn="mineFargekategorierIngenKategori"
-                        handleChange={handleChangeCheckbox}
+                        handleChange={handleUnderfilterEndret}
                         checked={checked && valgteFargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
                         antall={fargekategoriIngenKategori}
                     />

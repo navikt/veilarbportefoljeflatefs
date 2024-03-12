@@ -268,8 +268,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 {erFargekategorierFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
                     <FilterStatusMineFargekategorier
                         valgteFargekategoriFilter={fargekategoriListe}
-                        handleChange={handleCheckboxChange}
-                        handleChangeCheckbox={dispatchFargekategorierChange}
+                        handleHovedfilterEndret={handleCheckboxChange}
+                        handleUnderfilterEndret={dispatchFargekategorierChange}
                         hidden={oversiktType !== OversiktType.minOversikt}
                         checked={ferdigfilterListe.includes(MINE_FARGEKATEGORIER)}
                         indeterminate={
