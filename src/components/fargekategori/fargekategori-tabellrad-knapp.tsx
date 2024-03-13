@@ -17,6 +17,7 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
             <Button
                 ref={buttonRef}
                 onClick={() => setOpenState(!openState)}
+                style={{marginRight: '8px'}}
                 size="small"
                 icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 variant="tertiary"
