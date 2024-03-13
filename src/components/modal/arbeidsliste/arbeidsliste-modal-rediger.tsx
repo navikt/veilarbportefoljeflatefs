@@ -103,9 +103,6 @@ function ArbeidslisteModalRediger({
                         dispatch(
                             redigerArbeidslisteAction(values, {
                                 bruker,
-                                sistEndretAv,
-                                sistEndretDato,
-                                settMarkert,
                                 innloggetVeileder
                             })
                         );
