@@ -7,7 +7,7 @@ import {
     SLETTING_FEILET_MODAL,
     VIS_SERVERFEIL_MODAL
 } from '../../ducks/modal-serverfeil';
-import {TildelingerOk} from './modal-suksess';
+import {TildelingerOk} from './modal-tildelinger-ok';
 import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
 import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
 import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
