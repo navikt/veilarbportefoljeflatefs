@@ -15,16 +15,8 @@
 
 .tour-modal__header {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    padding: 1.125rem 0;
-}
-
-.tour-modal__header--wrapper {
-    position: relative;
-    margin-bottom: 2px;
-    box-shadow: 0 2px 0 rgba(120, 112, 106, 0.5);
+    padding-left: 3rem; /* For å plassere overskrifta i midten av headeren når vi har ein lukkeknapp i modalen */
 }
 
 .tour-modal__main--bilde {

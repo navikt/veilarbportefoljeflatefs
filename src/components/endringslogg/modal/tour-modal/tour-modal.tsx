@@ -41,15 +41,13 @@ const TourModal = (props: TourModalProps) => {
     const modalTittel = props.modal?.header ? props.modal.header : 'Ny oppdatering';
 
     return (
-        <Modal className={'tour-modal'} open={props.open} onClose={lukkModal}>
+        <Modal className={'tour-modal'} open={props.open} onClose={() => lukkModal()}>
+            <Modal.Header>
+                <Heading size="medium" level="1" className="tour-modal__header">
+                    {modalTittel}
+                </Heading>
+            </Modal.Header>
             <Modal.Body>
-                <div className={'tour-modal__header--wrapper'} data-testid="endringslogg_tour-modal">
-                    <header className={'tour-modal__header'}>
-                        <Heading size="medium" level="1">
-                            {modalTittel}
-                        </Heading>
-                    </header>
-                </div>
                 <main className={'tour-modal__main'}>
                     <div className={'tour-modal__main--bilde-wrapper'}>
                         {step.slideImage && (
