@@ -133,12 +133,12 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                         filterId: valgtGruppe.filterId,
                         filterCleanup: valgtGruppe.filterCleanup
                     }}
-                    isOpen={visEndreGruppeModal}
                     onSubmit={submitEndringer}
+                    onSlett={sletteKnapp}
+                    onRequestClose={() => setVisEndreGruppeModal(false)}
+                    isOpen={visEndreGruppeModal}
                     modalTittel={modalTittel}
                     lagreKnappeTekst="Lagre endringer"
-                    onRequestClose={() => setVisEndreGruppeModal(false)}
-                    onSlett={sletteKnapp}
                     className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
                 />
             )}
