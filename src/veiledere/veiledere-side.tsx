@@ -39,7 +39,6 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
-    const antallSynligeVeiledere = veiledere.data.veilederListe.length;
 
     useEffect(() => {
         document.title = 'Veilederoversikt';
@@ -98,7 +97,6 @@ function VeiledereSide() {
                             veiledere={veiledere.data.veilederListe}
                             portefoljestorrelser={portefoljestorrelser}
                             veilederFilter={filtervalg.veiledere}
-                            antallVeiledere={antallSynligeVeiledere}
                         />
                     </div>
                 </div>
