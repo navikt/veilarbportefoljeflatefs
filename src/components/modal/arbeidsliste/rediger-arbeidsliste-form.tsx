@@ -14,18 +14,24 @@ import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding'
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
     sistEndretAv?: string;
-    laster: boolean;
     lukkModal: () => void;
     bruker: BrukerModell;
     fjernModal?: any;
     settMarkert: (fnr: string, markert: boolean) => void;
 }
 
-function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
+function RedigerArbeidsliste({
+    sistEndretDato,
+    sistEndretAv,
+    lukkModal,
+    bruker,
+    fjernModal,
+    settMarkert
+}: RedigerArbeidslisteProps) {
     const fjernBruker = () => {
         logEvent('portefolje.metrikker.fjern-arbeidsliste-modal');
-        props.settMarkert(props.bruker.fnr, true);
-        props.fjernModal();
+        settMarkert(bruker.fnr, true);
+        fjernModal();
     };
 
     return (
@@ -34,7 +40,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                 <div>
                     <ArbeidslisteInformasjonsmelding />
                     <Heading size="small" level="2">
-                        {`${props.bruker.fornavn} ${props.bruker.etternavn}, ${props.bruker.fnr}`}
+                        {`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}
                     </Heading>
                     <FormikInput name="overskrift" />
                     <FormikTekstArea
@@ -44,7 +50,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                         testId="modal_arbeidsliste_kommentar"
                     />
                     <Detail size="small" className="arbeidsliste--modal-redigering">
-                        {`Oppdatert ${props.sistEndretDato.toLocaleDateString()} av ${props.sistEndretAv}`}
+                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                     </Detail>
                 </div>
                 <div className="dato-kategori-wrapper">
@@ -60,7 +66,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     data-testid="modal_rediger-arbeidsliste_lagre-knapp"
                     onClick={() => {
                         logEvent('teamvoff.metrikker.arbeidslistekategori', {
-                            kategori: props.bruker.arbeidsliste.kategori,
+                            kategori: bruker.arbeidsliste.kategori,
                             leggtil: false,
                             applikasjon: 'oversikt'
                         });
@@ -72,7 +78,7 @@ function RedigerArbeidsliste(props: RedigerArbeidslisteProps) {
                     size="small"
                     variant="secondary"
                     className="knapp knapp--avbryt"
-                    onClick={props.lukkModal}
+                    onClick={lukkModal}
                     data-testid="modal_rediger-arbeidsliste_avbryt-knapp"
                 >
                     Avbryt

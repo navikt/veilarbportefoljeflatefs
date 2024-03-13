@@ -1,27 +1,23 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.css';
-import {useState} from 'react';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FilterFeilModalProps {
     isOpen: boolean;
-    onClose?: () => void;
 }
 
-export default function FilterFeilModal(props: FilterFeilModalProps) {
-    const [isOpen, setIsOpen] = useState(props.isOpen);
+export default function FilterFeilModal({isOpen}: FilterFeilModalProps) {
+    const [erAapen, setErAapen] = useState(isOpen);
 
     const lukkModal = () => {
-        if (props.onClose) {
-            props.onClose();
-        }
-        setIsOpen(false);
+        setErAapen(false);
     };
 
     return (
         <VarselModal
-            isOpen={isOpen}
+            isOpen={erAapen}
             type={VarselModalType.FEIL}
             onClose={lukkModal}
             portalClassName="filter-feil-modal"

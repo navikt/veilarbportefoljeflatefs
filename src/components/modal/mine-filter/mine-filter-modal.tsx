@@ -38,9 +38,13 @@ const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter);
 const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil);
 
-export function MineFilterModal(props: {oversiktType: string}) {
+interface Props {
+    oversiktType: string;
+}
+
+export function MineFilterModal({oversiktType}: Props) {
     const {sisteValgtMineFilter, valgtMineFilter, erModalApen} = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt
+        oversiktType === OversiktType.minOversikt ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt
     );
     const data = useSelector((state: AppState) => state.mineFilter.data);
     const lagretFilterNavn = filterId =>
@@ -49,14 +53,14 @@ export function MineFilterModal(props: {oversiktType: string}) {
             .map(elem => elem.filterNavn)
             .toString();
     const filterValg = useSelector((state: AppState) =>
-        props.oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
+        oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY);
 
     const dispatch = useDispatch();
 
     const lukkModal = () => {
-        dispatch(lukkMineFilterModal(props.oversiktType));
+        dispatch(lukkMineFilterModal(oversiktType));
     };
 
     const mineFilterStatus = useSelector((state: AppState) => state.mineFilter.status);
@@ -86,14 +90,14 @@ export function MineFilterModal(props: {oversiktType: string}) {
                 <HiddenIfLagreNytt
                     hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
                     lukkModal={lukkModal}
-                    oversiktType={props.oversiktType}
+                    oversiktType={oversiktType}
                 />
                 <HiddenIfOppdaterFilter
                     hidden={valgtVisningstype !== Visningstype.OPPDATER}
                     gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
                     filterId={sisteValgtMineFilter!}
                     lukkModal={lukkModal}
-                    oversiktType={props.oversiktType}
+                    oversiktType={oversiktType}
                 />
                 <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
             </div>

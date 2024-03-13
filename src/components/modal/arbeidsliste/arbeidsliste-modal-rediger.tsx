@@ -1,7 +1,7 @@
 import * as React from 'react';
+import {useState} from 'react';
 import RedigerArbeidslisteForm from './rediger-arbeidsliste-form';
 import {BrukerModell, KategoriModell} from '../../../model-interfaces';
-import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Formik, FormikProps} from 'formik';
 import {STATUS} from '../../../ducks/utils';
@@ -135,7 +135,6 @@ function ArbeidslisteModalRediger({
                                     <ModalHeader tittel="Rediger arbeidsliste" />
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
-                                            laster={statusLaster}
                                             sistEndretDato={sistEndretDato}
                                             sistEndretAv={sistEndretAv}
                                             lukkModal={() => lukkModal(formikProps)}
