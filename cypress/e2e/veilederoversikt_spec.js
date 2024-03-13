@@ -1,4 +1,6 @@
 before('Start server', () => {
+    cy.clearAllLocalStorage();
+    cy.clearAllSessionStorage();
     cy.configure();
 });
 

@@ -2,7 +2,7 @@ import {initialState} from '../../ducks/filtrering';
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {LagretFilter} from '../../ducks/lagret-filter';
 
-export const mineFilter = () => {
+export const mineFilter = (): LagretFilter[] => {
     return [
         {
             filterNavn: '1. Unge arbeidsledige møter idag',

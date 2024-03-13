@@ -71,7 +71,9 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
             tab={selectedTabData.type}
             meta={
                 <>
-                    <HelpText placement="right">{hjelpeTekst(oversiktType)}</HelpText>
+                    <HelpText placement="right" strategy="fixed">
+                        {hjelpeTekst(oversiktType)}
+                    </HelpText>
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}
                         onChange={() => {
@@ -100,4 +102,5 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
         </SidebarTab>
     );
 }
+
 export default MineFilterTab;

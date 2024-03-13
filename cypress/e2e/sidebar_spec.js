@@ -1,4 +1,3 @@
-import React from 'react';
 import {kebabCase} from '../../src/utils/utils';
 
 const mineFilterNavn = 'Voff';
@@ -24,6 +23,8 @@ let antallVeiledergrupper = 0;
 const navDsRadioButtonsSelector = '.navds-radio-buttons';
 
 before('Start server', () => {
+    cy.clearAllLocalStorage();
+    cy.clearAllSessionStorage();
     cy.configure();
 });
 
@@ -152,13 +153,11 @@ describe('Mine filter', () => {
 
         cy.klikkTab('MINE_FILTER');
 
-        cy.getByTestId('mine-filter_alertstripe')
-            .should('be.visible')
-            .contains(
-                "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
-            );
-
-        cy.getByTestId('mine-filter_alertstripe_knapp').should('be.visible').click();
+        cy.getByTestId('mine-filter_alertstripe').should('be.visible')
+            .within(() => {
+                cy.contains( "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet.");
+                cy.get('button').should('be.visible').click();
+            });
 
         cy.getByTestId('mine-filter_alertstripe').should('not.exist');
     });
@@ -399,7 +398,6 @@ describe('Veiledergrupper', () => {
 
         cy.getByTestId('timed-toast_gruppen-er-lagret').should('be.visible').contains('Gruppen er lagret');
 
-        //TODO funker denne?
         cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(aasen);
     });
 
@@ -806,7 +804,7 @@ describe('Filter', () => {
         cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
         cy.getByTestId('brukerfeilmelding').should('be.visible');
         cy.apneLukkeFilterDropdown('kjonn');
-        cy.checkbox('radio-valg_kvinne');
+        cy.getByTestId('radio-valg_kvinne').check({force: true});
         cy.getByTestId('brukerfeilmelding').should('not.exist');
     });
 });

@@ -4,7 +4,6 @@ import '../../components/sidebar/sidebar.css';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
-import Lukknapp from 'nav-frontend-lukknapp';
 import {useDispatch} from 'react-redux';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
@@ -57,15 +56,12 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
                         className="mine-filter_alertstripe"
                         data-testid="mine-filter_alertstripe"
                         size="small"
+                        closeButton={true}
+                        onClose={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
                     >
                         {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${
                             inaktiveFilter()[0].note
                         }' er fjernet.`}
-                        <Lukknapp
-                            className="alertstripe_lukknapp"
-                            onClick={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
-                            data-testid="mine-filter_alertstripe_knapp"
-                        />
                     </Alert>
                 )}
                 <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
