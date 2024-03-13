@@ -6,23 +6,23 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     gap?: string;
 }
 
-function Grid(props: Props) {
-    const columns = new Array(props.columns).fill('1fr').join(props.gap ? ` ${props.gap} ` : ' ');
+function Grid({columns, gap, className, children}: Props) {
+    const templateColumns = new Array(columns).fill('1fr').join(gap ? ` ${gap} ` : ' ');
 
-    const rows = new Array(Math.ceil(React.Children.count(props.children) / props.columns))
+    const rows = new Array(Math.ceil(React.Children.count(children) / columns))
         .fill('auto')
-        .join(props.gap ? ` ${props.gap} ` : ' ');
+        .join(gap ? ` ${gap} ` : ' ');
 
     const style = {
-        gridTemplateColumns: columns,
+        gridTemplateColumns: templateColumns,
         gridTemplateRows: rows,
-        msGridColumns: columns,
+        msGridColumns: templateColumns,
         msGridRows: rows
     };
 
-    const placedChildren = React.Children.map(props.children, (child: any, index: number) => {
-        const rawRow = Math.floor(index / props.columns) + 1;
-        const rawColumn = (index % props.columns) + 1;
+    const placedChildren = React.Children.map(children, (child: any, index: number) => {
+        const rawRow = Math.floor(index / columns) + 1;
+        const rawColumn = (index % columns) + 1;
 
         const childStyle = {
             gridColumn: rawColumn,
@@ -37,7 +37,7 @@ function Grid(props: Props) {
     });
 
     return (
-        <div className={`grid ${props.className ? props.className : ''}`} style={style}>
+        <div className={`grid ${className ? className : ''}`} style={style}>
             {placedChildren}
         </div>
     );
