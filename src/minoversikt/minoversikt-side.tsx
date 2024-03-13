@@ -187,7 +187,6 @@ export default function MinoversiktSide() {
                                 sokVeilederSkalVises={false}
                                 antallTotalt={portefolje.data.antallTotalt}
                                 gjeldendeVeileder={gjeldendeVeilederId}
-                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                 scrolling={scrolling}
                                 isSidebarHidden={isSidebarHidden}
                             />
