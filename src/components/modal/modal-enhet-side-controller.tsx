@@ -47,21 +47,18 @@ export function ModalEnhetSideController() {
                 fnr={modal.brukere || []}
             />
             <VeiledergruppeendringFeiletModal
-                contentLabel="Sletting av veiledergruppe feilet"
                 isOpen={serverfeilModalSkalVises === SLETTING_FEILET_MODAL}
                 onRequestClose={closeServerfeilModal}
                 innholdstittel="Sletting feilet"
                 tekst="Beklager, men gruppen kunne ikke slettes. Prøv igjen senere."
             />
             <VeiledergruppeendringFeiletModal
-                contentLabel="Oppretting av veiledergruppe feilet"
                 isOpen={serverfeilModalSkalVises === NY_FEILET_MODAL}
                 onRequestClose={closeServerfeilModal}
                 innholdstittel="Oppretting av gruppe feilet"
                 tekst="Beklager, men gruppen kunne ikke opprettes."
             />
             <VeiledergruppeendringFeiletModal
-                contentLabel="Redigering av veiledergruppe feilet"
                 isOpen={serverfeilModalSkalVises === REDIGERING_FEILET_MODAL}
                 onRequestClose={closeServerfeilModal}
                 innholdstittel="Redigering feilet"
