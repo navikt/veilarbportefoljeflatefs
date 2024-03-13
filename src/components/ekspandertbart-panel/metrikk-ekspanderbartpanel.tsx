@@ -7,35 +7,30 @@ import '../toolbar/toolbar.css';
 import classNames from 'classnames';
 import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
 
-interface MetrikkEkspanderbartpanelProps {
+interface MetrikkEkspanderbartpanelProps extends EkspanderbartpanelBaseProps {
     lamellNavn: string;
-    apen: boolean;
-    skalVises?: boolean;
-    className?: string;
 }
 
-type AllProps = MetrikkEkspanderbartpanelProps & EkspanderbartpanelBaseProps;
-
-function MetrikkEkspanderbartpanel(props: PropsWithChildren<AllProps>) {
-    const [isApen, setIsApen] = useState(props.apen);
+function MetrikkEkspanderbartpanel({
+    lamellNavn,
+    tittel,
+    className,
+    children
+}: PropsWithChildren<MetrikkEkspanderbartpanelProps>) {
+    const [isApen, setIsApen] = useState(true);
 
     const handleOnClick = () => {
-        setIsApen(!isApen);
+        setIsApen(prevState => !prevState);
         logEvent('portefolje.metrikker.lamell', {
-            navn: props.lamellNavn,
+            navn: lamellNavn,
             apen: !isApen,
             sideNavn: finnSideNavn()
         });
     };
 
-    if (!!props.skalVises) {
-        return null;
-    }
-
-    const {children, lamellNavn, className, ...rest} = props;
     return (
         <div className={classNames('portefolje__ekspanderbarpanel', className)}>
-            <Ekspanderbartpanel border onClick={handleOnClick} {...rest} role="button">
+            <Ekspanderbartpanel tittel={tittel} border={true} onClick={handleOnClick} apen={isApen} role="button">
                 {children}
             </Ekspanderbartpanel>
         </div>
