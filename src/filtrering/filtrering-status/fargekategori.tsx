@@ -17,11 +17,12 @@ import {
     FARGEKATEGORI_INGEN_KATEGORI,
     ferdigfilterListeLabelTekst
 } from '../filter-konstanter';
+import {FargekategoriModell} from '../../model-interfaces';
 
 export interface FilterStatusMineFargekategorierProps {
-    valgteFargekategoriFilter: string[];
-    handleHovedfilterEndret: (e: any) => void;
-    handleUnderfilterEndret: (e: any) => void;
+    valgteFargekategoriFilter: FargekategoriModell[];
+    handleHovedfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleUnderfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
     checked: boolean;
     indeterminate: boolean;
 }
