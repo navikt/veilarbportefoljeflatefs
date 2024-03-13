@@ -36,8 +36,8 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
             open={isModalOpen}
             onClose={onModalClose}
         >
+            <HuskelappModalHeader />
             <Modal.Body>
-                <HuskelappModalHeader />
                 <div className="huskelapp-modal-content">
                     <div>
                         <HuskelappInfoAlert />

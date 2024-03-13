@@ -134,8 +134,8 @@ function ArbeidslisteModalRediger({
                                 onClose={() => lukkModalConfirm(formikProps)}
                                 // closeOnBackdropClick={true} //TODO kommenter inn i v5.8-ish når den får støtte
                             >
+                                <ModalHeader tittel="Rediger arbeidsliste" />
                                 <Modal.Body>
-                                    <ModalHeader tittel="Rediger arbeidsliste" />
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
                                             laster={statusLaster}

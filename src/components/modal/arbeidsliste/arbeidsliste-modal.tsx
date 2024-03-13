@@ -72,8 +72,8 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
+                            <ModalHeader tittel="Legg i arbeidsliste" />
                             <Modal.Body>
-                                <ModalHeader tittel="Legg i arbeidsliste" />
                                 <div className="modal-innhold">
                                     <LeggTilArbeidslisteForm
                                         valgteBrukere={valgteBrukere}

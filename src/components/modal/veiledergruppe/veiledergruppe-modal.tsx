@@ -203,8 +203,8 @@ export function VeiledergruppeModal(props: VeilederModalProps) {
                         onClose={lukkModal}
                         className={classNames('veiledergruppe-modal', props.className)}
                     >
+                        <ModalHeader tittel={props.modalTittel} />
                         <Modal.Body>
-                            <ModalHeader tittel={props.modalTittel} />
                             {alertTekst.length !== 0 && (
                                 <Alert
                                     variant="warning"

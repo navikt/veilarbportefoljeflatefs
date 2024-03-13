@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Heading} from '@navikt/ds-react';
+import {Heading, Modal} from '@navikt/ds-react';
 import './modal.css';
 
 interface OwnProps {
@@ -10,9 +10,11 @@ interface OwnProps {
 
 function ModalHeader({className, tittel}: OwnProps) {
     return (
-        <Heading size="large" level="1" className={classNames('modal-header', className)}>
-            {tittel}
-        </Heading>
+        <Modal.Header>
+            <Heading size="large" level="1" className={classNames('modal-header', className)}>
+                {tittel}
+            </Heading>
+        </Modal.Header>
     );
 }
 

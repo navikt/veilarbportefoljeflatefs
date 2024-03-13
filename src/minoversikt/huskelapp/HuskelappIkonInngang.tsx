@@ -55,8 +55,8 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
             )}
             {modalVisHuskelappSkalVises && (
                 <Modal open={modalVisHuskelappSkalVises} onClose={() => setModalVisHuskelappSkalVises(false)}>
+                    <HuskelappModalHeader />
                     <Modal.Body>
-                        <HuskelappModalHeader />
                         <Huskelapp huskelapp={bruker.huskelapp!!} className="huskelappModal" />
                         <div className="huskelapp-handlingsknapper">
                             <Button

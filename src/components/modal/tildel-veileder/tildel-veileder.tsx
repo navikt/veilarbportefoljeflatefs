@@ -108,11 +108,13 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     return (
         <>
             <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
+                <Modal.Header>
+                    <Heading size="large" level="2">
+                        Arbeidslistenotat blir slettet
+                    </Heading>
+                </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
-                        <Heading size="large" level="2">
-                            Arbeidslistenotat blir slettet
-                        </Heading>
                         <BodyShort size="medium">
                             {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
                         </BodyShort>
