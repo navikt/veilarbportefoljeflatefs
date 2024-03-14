@@ -12,7 +12,11 @@ import {AppState} from '../reducer';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
-export function LagredeFilterUIController(props: {oversiktType: OversiktType}) {
+interface Props {
+    oversiktType: OversiktType;
+}
+
+export function LagredeFilterUIController({oversiktType}: Props) {
     const dispatch = useDispatch();
 
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
@@ -24,9 +28,9 @@ export function LagredeFilterUIController(props: {oversiktType: OversiktType}) {
 
     useEffect(() => {
         const getFiltrering = () => {
-            if (props.oversiktType === OversiktType.veilederOversikt) return filtreringVeilederoversikt;
-            else if (props.oversiktType === OversiktType.minOversikt) return filtreringMinoversikt;
-            else if (props.oversiktType === OversiktType.enhetensOversikt) return filtreringEnhetensOversikt;
+            if (oversiktType === OversiktType.veilederOversikt) return filtreringVeilederoversikt;
+            else if (oversiktType === OversiktType.minOversikt) return filtreringMinoversikt;
+            else if (oversiktType === OversiktType.enhetensOversikt) return filtreringEnhetensOversikt;
         };
 
         const valgtMineFilter = lagretMineFilter.filter(elem =>
@@ -37,23 +41,23 @@ export function LagredeFilterUIController(props: {oversiktType: OversiktType}) {
         );
 
         if (erObjektValuesTomt(getFiltrering())) {
-            dispatch(avmarkerSisteValgtMineFilter(props.oversiktType));
+            dispatch(avmarkerSisteValgtMineFilter(oversiktType));
         }
 
         if (valgtMineFilter.length === 0) {
-            dispatch(avmarkerValgtMineFilter(props.oversiktType));
+            dispatch(avmarkerValgtMineFilter(oversiktType));
         } else if (valgtMineFilter.length === 1) {
-            dispatch(markerMineFilter(valgtMineFilter[0], props.oversiktType));
+            dispatch(markerMineFilter(valgtMineFilter[0], oversiktType));
         }
 
         if (valgtVeiledergruppe.length === 0) {
-            dispatch(avmarkerValgtVeiledergruppe(props.oversiktType));
+            dispatch(avmarkerValgtVeiledergruppe(oversiktType));
         } else if (valgtVeiledergruppe.length === 1) {
-            dispatch(markerValgtVeiledergruppe(valgtVeiledergruppe[0], props.oversiktType));
+            dispatch(markerValgtVeiledergruppe(valgtVeiledergruppe[0], oversiktType));
         }
     }, [
         dispatch,
-        props.oversiktType,
+        oversiktType,
         lagretMineFilter,
         lagretVeiledergrupper,
         filtreringEnhetensOversikt,

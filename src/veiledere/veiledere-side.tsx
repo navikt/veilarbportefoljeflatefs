@@ -39,7 +39,6 @@ function VeiledereSide() {
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
-    const antallSynligeVeiledere = veiledere.data.veilederListe.length;
 
     useEffect(() => {
         document.title = 'Veilederoversikt';
@@ -77,7 +76,7 @@ function VeiledereSide() {
                         <Panel className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Panel>
-                        <MetrikkEkspanderbartpanel apen lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                        <MetrikkEkspanderbartpanel lamellNavn="veiledergrupper" tittel="Veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                         </MetrikkEkspanderbartpanel>
                     </div>
@@ -98,7 +97,6 @@ function VeiledereSide() {
                             veiledere={veiledere.data.veilederListe}
                             portefoljestorrelser={portefoljestorrelser}
                             veilederFilter={filtervalg.veiledere}
-                            antallVeiledere={antallSynligeVeiledere}
                         />
                     </div>
                 </div>

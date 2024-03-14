@@ -30,13 +30,23 @@ interface MinOversiktBrukerPanelProps {
     enhetId: string;
     filtervalg: FiltervalgModell;
     innloggetVeileder: OrNothing<VeilederModell>;
-    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
     hentArbeidslisteForBruker: (fnr: string) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
+function MinoversiktBrukerPanel({
+    bruker,
+    settMarkert,
+    enhetId,
+    filtervalg,
+    innloggetVeileder,
+    valgteKolonner,
+    varForrigeBruker,
+    hentArbeidslisteForBruker,
+    onClick
+}: MinOversiktBrukerPanelProps) {
     const [apen, setApen] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
@@ -49,21 +59,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     };
 
     useLayoutEffect(() => {
-        if (props.varForrigeBruker) {
+        if (varForrigeBruker) {
             scrollToLastPos();
         }
-    }, [props.varForrigeBruker]);
+    }, [varForrigeBruker]);
 
-    const {
-        bruker,
-        enhetId,
-        filtervalg,
-        valgteKolonner,
-        innloggetVeileder,
-        settMarkert,
-        varForrigeBruker,
-        hentArbeidslisteForBruker
-    } = props;
     const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
@@ -79,8 +79,8 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         event.preventDefault();
         setApen(!apen);
         logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
-        if (props.onClick) {
-            props.onClick(event);
+        if (onClick) {
+            onClick(event);
         }
     }
 

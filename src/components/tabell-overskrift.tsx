@@ -6,7 +6,11 @@ import './tabell-overskrift.css';
 import classNames from 'classnames';
 import {Label} from '@navikt/ds-react';
 
-function TabellOverskrift(props: {className?: string}) {
+interface Props {
+    className?: string;
+}
+
+function TabellOverskrift({className}: Props) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const paginering = useSelector((state: AppState) => state.paginering);
 
@@ -26,12 +30,7 @@ function TabellOverskrift(props: {className?: string}) {
     const antallValgteBrukere = tekstValgteBrukere(brukere.filter(b => b.markert).length);
 
     return (
-        <Label
-            className={classNames('tabelloverskrift', props.className)}
-            aria-live="polite"
-            aria-atomic="true"
-            size="small"
-        >
+        <Label className={classNames('tabelloverskrift', className)} aria-live="polite" aria-atomic="true" size="small">
             {`Viser ${enEllerFlereBrukere} av totalt ${antallTotalt ? antallTotalt : '0'} ${brukereGrammatikk}. `}
             {antallValgteBrukere}
         </Label>

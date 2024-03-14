@@ -187,20 +187,16 @@ export default function MinoversiktSide() {
                                 sokVeilederSkalVises={false}
                                 antallTotalt={portefolje.data.antallTotalt}
                                 gjeldendeVeileder={gjeldendeVeilederId}
-                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
                                 scrolling={scrolling}
                                 isSidebarHidden={isSidebarHidden}
                             />
                             <MinoversiktTabellOverskrift
-                                visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje}
-                                innloggetVeileder={innloggetVeilederIdent!.ident}
                                 settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                             />
                         </div>
 
                         <MinoversiktTabell
                             innloggetVeileder={innloggetVeilederIdent}
-                            settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
                             classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''}
                         />
                         <MinOversiktModalController />

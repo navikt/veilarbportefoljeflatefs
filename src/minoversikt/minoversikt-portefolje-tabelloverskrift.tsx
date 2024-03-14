@@ -5,12 +5,10 @@ import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import './minoversikt.css';
 
 interface MinOversiktTabellProps {
-    innloggetVeileder: string;
-    visesAnnenVeiledersPortefolje?: boolean;
     settSorteringOgHentPortefolje: (sortering: string) => void;
 }
 
-function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
+function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversiktTabellProps) {
     const {brukere, filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.minOversikt
     );
@@ -18,7 +16,7 @@ function MinoversiktTabellOverskrift(props: MinOversiktTabellProps) {
     return (
         <MinOversiktListehode
             sorteringsrekkefolge={sorteringsrekkefolge}
-            sorteringOnClick={props.settSorteringOgHentPortefolje}
+            sorteringOnClick={settSorteringOgHentPortefolje}
             filtervalg={filtervalg}
             sorteringsfelt={sorteringsfelt}
             valgteKolonner={listevisning.valgte}

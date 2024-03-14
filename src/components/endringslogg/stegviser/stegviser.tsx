@@ -7,7 +7,7 @@ interface StegviserProps {
     valgtSteg: number;
 }
 
-const Stegviser = (props: StegviserProps) => {
+const Stegviser = ({antallSteg, valgtSteg}: StegviserProps) => {
     const mapTilSteg = (antall: number, selectedIdx: number) => {
         return new Array(antall).fill(0).map((_, i) => (
             <div
@@ -21,7 +21,7 @@ const Stegviser = (props: StegviserProps) => {
 
     return (
         <div className={'stegviser'} data-testid="endringslogg_stegviser">
-            {mapTilSteg(props.antallSteg, props.valgtSteg)}
+            {mapTilSteg(antallSteg, valgtSteg)}
         </div>
     );
 };

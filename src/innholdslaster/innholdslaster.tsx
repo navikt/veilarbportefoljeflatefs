@@ -6,12 +6,12 @@ import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 import {trackAmplitude} from '../amplitude/amplitude';
 
 interface InnholdslasterProps {
-    className?: string;
     avhengigheter: any;
+    className?: string;
     children: React.ReactNode;
 }
 
-function Innholdslaster(props: InnholdslasterProps) {
+function Innholdslaster({avhengigheter, className, children}: InnholdslasterProps) {
     const array = value => (Array.isArray(value) ? value : [value]);
     const harStatus =
         (...status) =>
@@ -43,23 +43,23 @@ function Innholdslaster(props: InnholdslasterProps) {
     };
 
     const renderChildren = () => {
-        if (typeof props.children === 'function') {
-            return <>{props.children(props.avhengigheter)}</>;
+        if (typeof children === 'function') {
+            return <>{children(avhengigheter)}</>;
         }
-        return <>{props.children}</>;
+        return <>{children}</>;
     };
 
-    if (alleLastet(props.avhengigheter)) {
+    if (alleLastet(avhengigheter)) {
         clearTimer();
         return renderChildren();
-    } else if (!timeout && alleLastetEllerReloading(props.avhengigheter)) {
+    } else if (!timeout && alleLastetEllerReloading(avhengigheter)) {
         setTimer();
         return renderChildren();
     }
 
-    if (noenHarFeil(props.avhengigheter)) {
+    if (noenHarFeil(avhengigheter)) {
         clearTimer();
-        const feilendeReducer = medFeil(props.avhengigheter);
+        const feilendeReducer = medFeil(avhengigheter);
 
         const feilmelding =
             getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
@@ -67,7 +67,7 @@ function Innholdslaster(props: InnholdslasterProps) {
         trackAmplitude({name: 'alert vist', data: {variant: 'error', tekst: feilmelding}});
 
         return (
-            <Alert variant="error" className={props.className} size="small">
+            <Alert variant="error" className={className} size="small">
                 <BodyShort size="small">{feilmelding}</BodyShort>
             </Alert>
         );

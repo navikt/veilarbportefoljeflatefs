@@ -12,11 +12,7 @@ import {IdentParam} from '../../model-interfaces';
 import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 
-interface LeggTilArbeidslisteProps {
-    visesAnnenVeiledersPortefolje: boolean;
-}
-
-function ArbeidslisteKnapp(props: LeggTilArbeidslisteProps) {
+function ArbeidslisteKnapp() {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const modalSkalVises = useSelector((state: AppState) => state.modal.modal) === VIS_ARBEIDSLISTE_MODAL;
     const innloggetVeileder = useIdentSelector();

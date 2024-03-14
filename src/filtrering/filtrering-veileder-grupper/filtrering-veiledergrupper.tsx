@@ -85,11 +85,11 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                     filterValg: initialState,
                     filterId: -1
                 }}
-                isOpen={visVeiledergruppeModal}
                 onSubmit={submitEndringer}
+                onRequestClose={() => setVeiledergruppeModal(false)}
+                isOpen={visVeiledergruppeModal}
                 modalTittel={modalTittel}
                 lagreKnappeTekst="Lagre"
-                onRequestClose={() => setVeiledergruppeModal(false)}
             />
         </>
     );

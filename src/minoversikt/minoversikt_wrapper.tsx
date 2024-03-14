@@ -12,7 +12,7 @@ interface MinOversiktWrapperProps {
     id: string;
 }
 
-export function MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChildren<{}>) {
+export function MinOversiktWrapper({className, id, children}: PropsWithChildren<MinOversiktWrapperProps>) {
     const {ident} = useParams<IdentParam>();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();
@@ -24,12 +24,12 @@ export function MinOversiktWrapper(props: MinOversiktWrapperProps & PropsWithChi
 
     return (
         <div
-            className={classNames(props.className, visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
+            className={classNames(className, visesAnnenVeiledersPortefolje ? 'annen-veileder' : '')}
             role="tabpanel"
-            aria-labelledby={props.id}
-            id={props.id}
+            aria-labelledby={id}
+            id={id}
         >
-            {props.children}
+            {children}
         </div>
     );
 }

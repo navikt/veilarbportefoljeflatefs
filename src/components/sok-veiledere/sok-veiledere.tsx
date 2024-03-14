@@ -13,7 +13,7 @@ interface SokVeiledereProps {
     valgteVeiledere: string[];
 }
 
-function SokVeiledere(props: SokVeiledereProps) {
+function SokVeiledere({handterVeiledereValgt, btnOnClick, harValg, valgteVeiledere}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) =>
         a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
@@ -27,8 +27,8 @@ function SokVeiledere(props: SokVeiledereProps) {
                         className="checkbox-filterform__valg"
                         hideLegend
                         legend=""
-                        onChange={props.handterVeiledereValgt}
-                        value={props.valgteVeiledere}
+                        onChange={handterVeiledereValgt}
+                        value={valgteVeiledere}
                     >
                         {liste.map((elem, index) => (
                             <Checkbox
@@ -42,10 +42,10 @@ function SokVeiledere(props: SokVeiledereProps) {
                     <div className=" filterform__under-valg">
                         <Button
                             size="small"
-                            onClick={props.btnOnClick}
-                            data-testid={props.harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
+                            onClick={btnOnClick}
+                            data-testid={harValg ? 'sok-veileder_velg-knapp' : 'sok-veileder_lukk-knapp'}
                         >
-                            {props.harValg ? 'Velg' : 'Lukk'}
+                            {harValg ? 'Velg' : 'Lukk'}
                         </Button>
                     </div>
                 </div>

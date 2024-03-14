@@ -22,7 +22,6 @@ import {RadioGroup} from '@navikt/ds-react';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
-    filterValg?: FiltervalgModell;
     oversiktType: OversiktType;
 }
 
@@ -30,7 +29,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
+function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -39,9 +38,7 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
         (state: AppState) => state.mineFilterVeilederOversikt.valgtVeiledergruppe
     );
     const valgtGruppe =
-        props.oversiktType === OversiktType.veilederOversikt
-            ? valgtGruppeVeilederOversikt
-            : valgtGruppeEnhetensOversikt;
+        oversiktType === OversiktType.veilederOversikt ? valgtGruppeVeilederOversikt : valgtGruppeEnhetensOversikt;
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
@@ -74,9 +71,9 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                 oppdaterKolonneAlternativer(
                     dispatch,
                     {...filterValg, veiledere: resp.data.filterValg.veiledere},
-                    props.oversiktType
+                    oversiktType
                 );
-                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, props.oversiktType));
+                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType));
             });
         } else {
             dispatch(visIngenEndringerToast());
@@ -113,13 +110,13 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                 defaultValue={valgtGruppe?.filterId}
                 size="small"
             >
-                {props.lagretFilter.map((veilederGruppe, index) => {
+                {lagretFilter.map((veilederGruppe, index) => {
                     return (
                         <VeiledergruppeRad
                             key={index}
                             veilederGruppe={veilederGruppe}
                             onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
-                            oversiktType={props.oversiktType}
+                            oversiktType={oversiktType}
                             erValgt={veilederGruppe.filterId === valgtGruppe?.filterId}
                         />
                     );
@@ -133,12 +130,12 @@ function VeiledergruppeInnhold(props: VeiledergruppeInnholdProps) {
                         filterId: valgtGruppe.filterId,
                         filterCleanup: valgtGruppe.filterCleanup
                     }}
-                    isOpen={visEndreGruppeModal}
                     onSubmit={submitEndringer}
+                    onSlett={sletteKnapp}
+                    onRequestClose={() => setVisEndreGruppeModal(false)}
+                    isOpen={visEndreGruppeModal}
                     modalTittel={modalTittel}
                     lagreKnappeTekst="Lagre endringer"
-                    onRequestClose={() => setVisEndreGruppeModal(false)}
-                    onSlett={sletteKnapp}
                     className={`veiledergruppe_modal_${kebabCase(modalTittel)}`}
                 />
             )}

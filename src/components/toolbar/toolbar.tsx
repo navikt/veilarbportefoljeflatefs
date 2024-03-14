@@ -20,7 +20,6 @@ interface ToolbarProps {
     oversiktType: OversiktType;
     onPaginering?: () => void;
     sokVeilederSkalVises?: boolean;
-    visesAnnenVeiledersPortefolje?: boolean;
     children?: React.ReactNode;
     gjeldendeVeileder?: string;
     antallTotalt: number;
@@ -30,18 +29,16 @@ interface ToolbarProps {
     isSidebarHidden?: boolean;
 }
 
-function Toolbar(props: ToolbarProps) {
-    const {
-        id,
-        oversiktType,
-        visesAnnenVeiledersPortefolje,
-        antallTotalt,
-        onPaginering,
-        scrolling = false,
-        isSidebarHidden = false,
-        antallValgteVeiledere,
-        sokVeilederSkalVises
-    } = props;
+function Toolbar({
+    id,
+    oversiktType,
+    antallTotalt,
+    onPaginering,
+    scrolling = false,
+    isSidebarHidden = false,
+    antallValgteVeiledere,
+    sokVeilederSkalVises
+}: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
@@ -55,9 +52,7 @@ function Toolbar(props: ToolbarProps) {
             case OversiktType.minOversikt:
                 return (
                     <>
-                        {!erFargekategoriFeatureTogglePa && (
-                            <ArbeidslisteKnapp visesAnnenVeiledersPortefolje={visesAnnenVeiledersPortefolje || false} />
-                        )}
+                        {!erFargekategoriFeatureTogglePa && <ArbeidslisteKnapp />}
                         {erFargekategoriFeatureTogglePa && (
                             <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
                         )}

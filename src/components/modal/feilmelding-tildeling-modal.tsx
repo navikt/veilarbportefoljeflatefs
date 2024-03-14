@@ -11,11 +11,11 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
 }
 
-function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
+function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
@@ -24,22 +24,22 @@ function FeilmeldingTildelingModal(props: FeilmeldingBrukereModalProps) {
                 Handling kan ikke utføres
             </Heading>
             <BodyShort size="small">Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>
-            <FnrList listeMedFnr={props.fnrFeil} />
+            <FnrList listeMedFnr={fnrFeil} />
             <BodyShort size="small">
                 Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
                 brukeren ikke er under oppfølging.
             </BodyShort>
 
-            {props.fnrSuksess?.length > 0 && (
+            {fnrSuksess?.length > 0 && (
                 <div className="tildeling-veileder-modal__vellykkedebrukere">
                     <BodyShort size="small">Tildeling av veileder lyktes for følgende bruker(e):</BodyShort>
-                    <FnrList listeMedFnr={props.fnrSuksess} />
+                    <FnrList listeMedFnr={fnrSuksess} />
                     <BodyShort size="small">
                         Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.
                     </BodyShort>
                 </div>
             )}
-            <Button variant="secondary" size="small" onClick={props.onClose}>
+            <Button variant="secondary" size="small" onClick={onClose}>
                 Lukk
             </Button>
         </VarselModal>
