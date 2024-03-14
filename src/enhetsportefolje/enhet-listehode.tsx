@@ -78,8 +78,8 @@ function EnhetListehode({
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
-            <VelgalleCheckboks />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
+                <VelgalleCheckboks />
                 <SorteringHeader
                     sortering={Sorteringsfelt.ETTERNAVN}
                     onClick={sorteringOnClick}
