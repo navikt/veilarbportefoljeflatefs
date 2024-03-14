@@ -145,8 +145,12 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const nyFargekategorier = underfilterAlleredeValgt
                 ? state.fargekategorier.filter(f => f !== filterVerdi)
                 : [...state.fargekategorier, filterVerdi];
+            const nyFerdigfilterListe =
+                nyFargekategorier.length === 0
+                    ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
+                    : state.ferdigfilterListe;
 
-            return {...state, fargekategorier: nyFargekategorier};
+            return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};
         }
         default:
             return state;

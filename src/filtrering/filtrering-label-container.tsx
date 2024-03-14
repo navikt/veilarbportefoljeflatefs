@@ -4,6 +4,7 @@ import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     aktiviteter,
+    alleFargekategoriFilterAlternativer,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
     mapFilternavnTilFilterValue,
@@ -380,19 +381,31 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.oversiktType));
-            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType);
+            dispatch(clearFiltervalg(ownProps.oversiktType as OversiktType));
+            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType as OversiktType);
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType as OversiktType));
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
 
             if (filterValue === 'MIN_ARBEIDSLISTE') {
-                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
+                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType as OversiktType));
             }
             if (filterValue === MINE_FARGEKATEGORIER) {
-                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType));
+                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType as OversiktType));
+            }
+            if (
+                alleFargekategoriFilterAlternativer.some(f => f === filterValue) &&
+                ownProps.filtervalg.fargekategorier.length === 1
+            ) {
+                dispatch(
+                    endreFiltervalg(
+                        'ferdigfilterListe',
+                        ownProps.filtervalg.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER),
+                        ownProps.oversiktType as OversiktType
+                    )
+                );
             }
 
             const oppdatertFiltervalg = {
@@ -401,7 +414,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
                 arbeidslisteKategori:
                     filterValue === 'MIN_ARBEIDSLISTE' ? [] : ownProps.filtervalg['arbeidslisteKategori']
             };
-            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType);
+            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType as OversiktType);
         }
     }
 });
