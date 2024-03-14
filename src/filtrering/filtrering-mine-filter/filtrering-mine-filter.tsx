@@ -3,21 +3,11 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {STATUS} from '../../ducks/utils';
 import './mine-filter_innhold.css';
-import MineFilterInnhold from './mine-filter_innhold';
-import {HandlingsType, LagretFilter} from '../../ducks/lagret-filter';
-import {OversiktType} from '../../ducks/ui/listevisning';
-import {OrNothing} from '../../utils/types/types';
-import {Tiltak} from '../../ducks/enhettiltak';
+import MineFilterInnhold, {LagredeFilterInnholdProps} from './mine-filter_innhold';
+import {HandlingsType} from '../../ducks/lagret-filter';
 import {Alert} from '@navikt/ds-react';
 
-function FiltreringMineFilter(props: {
-    oversiktType: OversiktType;
-    fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
-    sortertMineFilter;
-    isDraggable: boolean;
-    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
-    enhettiltak: OrNothing<Tiltak>;
-}) {
+function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterInnholdProps) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
 
     return (
@@ -27,14 +17,7 @@ function FiltreringMineFilter(props: {
                     Det oppsto en feil, og mine filter kunne ikke hentes fram. Prøv igjen senere.
                 </Alert>
             ) : (
-                <MineFilterInnhold
-                    lagretFilter={props.sortertMineFilter}
-                    oversiktType={props.oversiktType}
-                    isDraggable={props.isDraggable}
-                    fjernUtilgjengeligeFilter={props.fjernUtilgjengeligeFilter}
-                    setisDraggable={props.setisDraggable}
-                    enhettiltak={props.enhettiltak}
-                />
+                <MineFilterInnhold {...mineFilterInnholdProps} />
             )}
         </>
     );

@@ -11,17 +11,17 @@ interface ListevisningProps {
     oversiktType: OversiktType;
 }
 
-function Listevisning(props: ListevisningProps) {
-    const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, props.oversiktType));
-    const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, props.oversiktType));
+function Listevisning({oversiktType}: ListevisningProps) {
+    const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, oversiktType));
+    const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, oversiktType));
 
     const dispatch = useDispatch();
 
-    const handleChange = (oversiktType, checked) => {
+    const handleChange = (kolonne: Kolonne, checked: boolean) => {
         if (checked) {
-            dispatch(velgAlternativ(oversiktType, props.oversiktType));
+            dispatch(velgAlternativ(kolonne, oversiktType));
         } else {
-            dispatch(avvelgAlternativ(oversiktType, props.oversiktType));
+            dispatch(avvelgAlternativ(kolonne, oversiktType));
         }
     };
 
@@ -29,7 +29,7 @@ function Listevisning(props: ListevisningProps) {
         return valgteAlternativ.indexOf(kolonne) > -1;
     };
 
-    if (![OversiktType.minOversikt, OversiktType.enhetensOversikt].includes(props.oversiktType)) {
+    if (![OversiktType.minOversikt, OversiktType.enhetensOversikt].includes(oversiktType)) {
         return null;
     }
 
@@ -41,7 +41,7 @@ function Listevisning(props: ListevisningProps) {
                     {muligeAlternativer.map(kolonne => (
                         <ListevisningRad
                             key={kolonne}
-                            kolonneoverskrift={kolonne}
+                            kolonne={kolonne}
                             valgt={erValgt(kolonne)}
                             disabled={valgteAlternativ.length >= 3 && !erValgt(kolonne)}
                             onChange={handleChange}

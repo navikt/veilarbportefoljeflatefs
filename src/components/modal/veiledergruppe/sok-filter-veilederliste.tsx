@@ -13,8 +13,7 @@ function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
 }
 
-function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
-    const {data, limitSize, children} = props;
+function SokFilterVeilederliste<T>({data, label, placeholder, limitSize, children}: SokFilterProps<T>) {
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
@@ -32,8 +31,8 @@ function SokFilterVeilederliste<T>(props: SokFilterProps<T>) {
         <>
             <div className="sokfilter">
                 <TextField
-                    label={props.label}
-                    placeholder={props.placeholder}
+                    label={label}
+                    placeholder={placeholder}
                     value={query}
                     className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}

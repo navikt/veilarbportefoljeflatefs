@@ -2,6 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../toolbar/toolbar.css';
 import {Alert, TextField} from '@navikt/ds-react';
 
+function limit<T>(liste: T[], antall: number) {
+    return liste.slice(0, antall);
+}
+
 interface SokFilterProps<T> {
     data: T[];
     children: (filteredData: T[]) => React.ReactNode;
@@ -10,12 +14,7 @@ interface SokFilterProps<T> {
     limitSize?: number;
 }
 
-function limit<T>(liste: T[], antall: number) {
-    return liste.slice(0, antall);
-}
-
-function SokFilter<T>(props: SokFilterProps<T>) {
-    const {data, limitSize, children} = props;
+function SokFilter<T>({data, children, label, placeholder, limitSize}: SokFilterProps<T>) {
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
     const sokKnapp = useRef<HTMLInputElement>(null);
@@ -38,8 +37,8 @@ function SokFilter<T>(props: SokFilterProps<T>) {
         <>
             <div className="sokfilter">
                 <TextField
-                    label={props.label}
-                    placeholder={props.placeholder}
+                    label={label}
+                    placeholder={placeholder}
                     value={query}
                     className="sokfilter__input"
                     onChange={e => setQuery(e.target.value)}

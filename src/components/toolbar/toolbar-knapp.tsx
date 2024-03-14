@@ -4,7 +4,7 @@ import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {Button} from '@navikt/ds-react';
-import {oppdaterBrukerfeil, nullstillBrukerfeil} from '../../ducks/brukerfeilmelding';
+import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 
@@ -18,7 +18,15 @@ interface ToolbarKnappProps {
     oversiktType: OversiktType;
 }
 
-export default function ToolbarKnapp(props: ToolbarKnappProps) {
+export default function ToolbarKnapp({
+    skalVises,
+    aktiv,
+    tildelveileder,
+    ikon,
+    tittel,
+    testid,
+    oversiktType
+}: ToolbarKnappProps) {
     const [isInputOpen, setInputOpen] = useState(false);
     const [isBtnClicked, setBtnClicked] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
@@ -55,7 +63,7 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     };
 
     const klikk = () => {
-        if (!props.aktiv) {
+        if (!aktiv) {
             dispatch(oppdaterBrukerfeil());
         } else {
             setInputOpen(true);
@@ -63,23 +71,23 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
     };
 
     const visChildren = () => {
-        if (props.tildelveileder) {
+        if (tildelveileder) {
             return (
                 <TildelVeileder
                     closeInput={() => setBtnClicked(true)}
-                    skalVises={props.skalVises}
-                    oversiktType={props.oversiktType}
+                    skalVises={skalVises}
+                    oversiktType={oversiktType}
                 />
             );
         } else {
-            return <SokVeileder veileder={{}} onClick={() => setBtnClicked(true)} skalVises={props.skalVises} />;
+            return <SokVeileder veileder={{}} onClick={() => setBtnClicked(true)} skalVises={skalVises} />;
         }
     };
 
     useEventListener('mousedown', handleClickOutside);
     useEventListener('keydown', escHandler);
 
-    if (!props.skalVises) {
+    if (!skalVises) {
         return null;
     }
 
@@ -101,11 +109,11 @@ export default function ToolbarKnapp(props: ToolbarKnappProps) {
             variant="tertiary"
             type="button"
             className="toolbar_btn"
-            icon={props.ikon}
+            icon={ikon}
             onClick={klikk}
-            data-testid={props.testid}
+            data-testid={testid}
         >
-            {props.tittel}
+            {tittel}
         </Button>
     );
 }

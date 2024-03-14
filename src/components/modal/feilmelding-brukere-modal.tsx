@@ -10,24 +10,29 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
     tittelTekst: string;
     infotekstTekst: string;
-    merInfoTekst?: string;
 }
 
-function FeilmeldingBrukereModal(props: FeilmeldingBrukereModalProps) {
+function FeilmeldingBrukereModal({
+    isOpen,
+    fnrFeil,
+    onClose,
+    tittelTekst,
+    infotekstTekst
+}: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
             type={VarselModalType.FEIL}
             portalClassName="arbeidsliste-modal"
             className="arbeidsliste-modal__content"
         >
             <Heading size="small" level="1">
-                {props.tittelTekst}
+                {tittelTekst}
             </Heading>
-            <BodyShort size="small">{props.infotekstTekst}</BodyShort>
-            <FnrList listeMedFnr={props.fnrFeil} />
-            <Button onClick={props.onClose} size="small">
+            <BodyShort size="small">{infotekstTekst}</BodyShort>
+            <FnrList listeMedFnr={fnrFeil} />
+            <Button onClick={onClose} size="small">
                 Ok
             </Button>
         </VarselModal>

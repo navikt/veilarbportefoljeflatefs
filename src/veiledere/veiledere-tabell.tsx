@@ -16,8 +16,12 @@ interface VeiledereTabellProps {
     sorterPaaPortefoljestorrelse: () => void;
 }
 
-function VeilederTabell(props: VeiledereTabellProps) {
-    const {veiledere, currentSortering} = props;
+function VeilederTabell({
+    veiledere,
+    currentSortering,
+    sorterPaaEtternavn,
+    sorterPaaPortefoljestorrelse
+}: VeiledereTabellProps) {
     const sorterEtternavn = currentSortering.property === 'etternavn';
     const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
 
@@ -65,7 +69,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                     <Button
                                         size="small"
                                         variant="tertiary"
-                                        onClick={props.sorterPaaEtternavn}
+                                        onClick={sorterPaaEtternavn}
                                         className={classNames('lenke lenke--frittstaende', {
                                             'valgt-sortering': sorterEtternavn
                                         })}
@@ -93,7 +97,7 @@ function VeilederTabell(props: VeiledereTabellProps) {
                                     <Button
                                         size="small"
                                         variant="tertiary"
-                                        onClick={props.sorterPaaPortefoljestorrelse}
+                                        onClick={sorterPaaPortefoljestorrelse}
                                         className={classNames('lenke lenke--frittstaende tabellheader__tekst', {
                                             'valgt-sortering': sorterPaaPortefoljeStr
                                         })}

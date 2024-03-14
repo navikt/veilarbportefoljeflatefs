@@ -6,18 +6,34 @@ import './collapse-container-transition.css';
 import classNames from 'classnames';
 
 interface CollapseContainerProps {
-    children?: React.ReactNode;
     alignLeft?: boolean;
+    children?: React.ReactNode;
 }
+
+const CollapseContainer = ({alignLeft, children}: CollapseContainerProps) => {
+    const {focusRef} = useFocus();
+
+    return (
+        <div className={alignLeft ? classNames('align-left', 'collapse-container') : 'collapse-container'}>
+            <div
+                className={alignLeft ? 'arrow-container-left' : 'arrow-container'}
+                ref={inputRef => (focusRef.current = inputRef)}
+            >
+                <div className={'endringslogg-content'} tabIndex={-1}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 interface TransitionProps extends CollapseContainerProps {
     visible: boolean;
-    alignLeft?: boolean;
 }
 
-const TransitionContainer = (props: TransitionProps) => (
+const TransitionContainer = ({visible, alignLeft, children}: TransitionProps) => (
     <TransitionGroup component={null}>
-        {props.visible && (
+        {visible && (
             <CSSTransition
                 classNames={{
                     enter: 'collapse-container-enter',
@@ -27,25 +43,10 @@ const TransitionContainer = (props: TransitionProps) => (
                 }}
                 timeout={400}
             >
-                <CollapseContainer alignLeft={props.alignLeft}>{props.children}</CollapseContainer>
+                <CollapseContainer alignLeft={alignLeft}>{children}</CollapseContainer>
             </CSSTransition>
         )}
     </TransitionGroup>
 );
 
-const CollapseContainer = (props: CollapseContainerProps) => {
-    const {focusRef} = useFocus();
-    return (
-        <div className={props.alignLeft ? classNames('align-left', 'collapse-container') : 'collapse-container'}>
-            <div
-                className={props.alignLeft ? 'arrow-container-left' : 'arrow-container'}
-                ref={inputRef => (focusRef.current = inputRef)}
-            >
-                <div className={'endringslogg-content'} tabIndex={-1}>
-                    {props.children}
-                </div>
-            </div>
-        </div>
-    );
-};
 export default TransitionContainer;

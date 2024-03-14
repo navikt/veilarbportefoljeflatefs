@@ -12,11 +12,11 @@ interface TourModalProps {
     onClose: (e: boolean) => void;
 }
 
-const TourModal = (props: TourModalProps) => {
+const TourModal = ({modal, open, onClose}: TourModalProps) => {
     const [stepIndex, setStepIndex] = useState(0);
     const lukkModal = () => {
         setStepIndex(0);
-        props.onClose(isFinalStep);
+        onClose(isFinalStep);
     };
 
     const handlePreviousBtnClicked = () => {
@@ -27,7 +27,7 @@ const TourModal = (props: TourModalProps) => {
         setStepIndex(stepIndex + 1);
     };
 
-    const steps = props.modal.slides;
+    const steps = modal.slides;
     if (!steps) {
         return null;
     }
@@ -38,10 +38,10 @@ const TourModal = (props: TourModalProps) => {
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
 
-    const modalTittel = props.modal?.header ? props.modal.header : 'Ny oppdatering';
+    const modalTittel = modal?.header ? modal.header : 'Ny oppdatering';
 
     return (
-        <Modal className={'tour-modal'} open={props.open} onClose={lukkModal}>
+        <Modal className={'tour-modal'} open={open} onClose={lukkModal}>
             <Modal.Content>
                 <div className={'tour-modal__header--wrapper'} data-testid="endringslogg_tour-modal">
                     <header className={'tour-modal__header'}>

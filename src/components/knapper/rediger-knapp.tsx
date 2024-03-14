@@ -4,7 +4,13 @@ import './knapper.css';
 import {Edit, EditFilled} from '@navikt/ds-icons';
 import {Button} from '@navikt/ds-react';
 
-function RedigerKnapp(props: {aria: string; onClick: () => void; dataTestid?: string}) {
+interface Props {
+    aria: string;
+    onClick: () => void;
+    dataTestid?: string;
+}
+
+function RedigerKnapp({aria, onClick, dataTestid}: Props) {
     const [hover, setHover] = useState(false);
 
     return (
@@ -12,10 +18,10 @@ function RedigerKnapp(props: {aria: string; onClick: () => void; dataTestid?: st
             variant="tertiary"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            title={props.aria}
-            aria-describedby={props.aria}
-            onClick={props.onClick}
-            data-testid={props.dataTestid}
+            title={aria}
+            aria-describedby={aria}
+            onClick={onClick}
+            data-testid={dataTestid}
             size="small"
             icon={hover ? <EditFilled /> : <Edit />}
         ></Button>

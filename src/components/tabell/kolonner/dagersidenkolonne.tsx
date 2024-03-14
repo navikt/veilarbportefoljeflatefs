@@ -1,23 +1,29 @@
 import * as React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 
-export function DagerSidenKolonne(props: {skalVises: boolean; dato: number | null; className: string}) {
-    if (!props.skalVises || props.dato === null) {
+interface Props {
+    skalVises: boolean;
+    dato: number | null;
+    className: string;
+}
+
+export function DagerSidenKolonne({skalVises, dato, className}: Props) {
+    if (!skalVises || dato === null) {
         return null;
     }
 
     const datoTekst = () => {
-        if (props.dato === 0) {
+        if (dato === 0) {
             return 'I dag';
-        } else if (props.dato === 1) {
+        } else if (dato === 1) {
             return '1 dag siden';
         } else {
-            return `${props.dato} dager siden`;
+            return `${dato} dager siden`;
         }
     };
 
     return (
-        <BodyShort size="small" className={props.className}>
+        <BodyShort size="small" className={className}>
             {datoTekst()}
         </BodyShort>
     );
