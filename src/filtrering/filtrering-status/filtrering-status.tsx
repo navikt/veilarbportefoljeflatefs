@@ -2,15 +2,9 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FargekategoriModell, FiltervalgModell, KategoriModell} from '../../model-interfaces';
+import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
-import {
-    alleFargekategoriFilterAlternativer,
-    MIN_ARBEIDSLISTE,
-    MINE_FARGEKATEGORIER,
-    NYE_BRUKERE_FOR_VEILEDER,
-    UFORDELTE_BRUKERE
-} from '../filter-konstanter';
+import {MIN_ARBEIDSLISTE, NYE_BRUKERE_FOR_VEILEDER, UFORDELTE_BRUKERE} from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
@@ -64,7 +58,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const kategoriliste = filtervalg.arbeidslisteKategori;
-    const fargekategoriListe = filtervalg.fargekategorier;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -96,37 +89,10 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         );
     }
 
-    function dispatchFargekategorierChange(e: React.ChangeEvent<HTMLInputElement>) {
-        dispatch(pagineringSetup({side: 1}));
-        const nyValgteFargekategorierState = e.target.checked
-            ? [...fargekategoriListe, e.target.value]
-            : fargekategoriListe.filter(elem => elem !== e.target.value);
-        const ingenFargekategorierValgt = nyValgteFargekategorierState.length === 0;
-        dispatch(endreFiltervalg('fargekategorier', nyValgteFargekategorierState, oversiktType));
-        if (ingenFargekategorierValgt) {
-            const nyeFerdigfilterListe = fjernFerdigfilter(ferdigfilterListe!, MINE_FARGEKATEGORIER);
-            dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
-        }
-        oppdaterKolonneAlternativer(
-            dispatch,
-            {...filtervalg, fargekategorier: nyValgteFargekategorierState as FargekategoriModell[]},
-            oversiktType
-        );
-    }
-
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
-
-        const erMineFargekategorierFilter = e.target.value === MINE_FARGEKATEGORIER;
-        if (erMineFargekategorierFilter) {
-            const mineFargekategorierBlirLagtTil = e.target.checked;
-            mineFargekategorierBlirLagtTil
-                ? dispatch(endreFiltervalg('fargekategorier', alleFargekategoriFilterAlternativer, oversiktType))
-                : dispatch(endreFiltervalg('fargekategorier', [], oversiktType));
-        }
-
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
     }
 
@@ -266,11 +232,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     </div>
                 )}
                 {erFargekategorierFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <FilterStatusMineFargekategorier
-                        handleHovedfilterEndret={handleCheckboxChange}
-                        handleUnderfilterEndret={dispatchFargekategorierChange}
-                        hidden={oversiktType !== OversiktType.minOversikt}
-                    />
+                    <FilterStatusMineFargekategorier hidden={oversiktType !== OversiktType.minOversikt} />
                 )}
             </RadioGroup>
         </div>

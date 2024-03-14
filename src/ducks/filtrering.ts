@@ -1,13 +1,16 @@
-import {FiltervalgModell} from '../model-interfaces';
+import {FiltervalgModell, FargekategoriModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
+import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
 export const SLETT_ENKELT_FILTER = 'filtrering/SLETT_ENKELT_FILTER';
 export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
+export const FARGEKATEGORIER_HOVEDFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_HOVEDFILTER_KLIKK';
+export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UNDERFILTER_KLIKK';
 
 export enum AktiviteterValg {
     JA = 'JA',
@@ -125,6 +128,26 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             return {...action.data};
         case VELG_MINE_FILTER:
             return {...action.data.filterValg};
+        case FARGEKATEGORIER_HOVEDFILTER_KLIKK: {
+            const hovedfilterAlleredeValgt = state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
+
+            const nyFerdigfilterListe = hovedfilterAlleredeValgt
+                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
+                : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER];
+            const nyFargekategorier = hovedfilterAlleredeValgt ? [] : [...alleFargekategoriFilterAlternativer];
+
+            return {...state, ferdigfilterListe: nyFerdigfilterListe, fargekategorier: nyFargekategorier};
+        }
+        case FARGEKATEGORIER_UNDERFILTER_KLIKK: {
+            const filterVerdi = action.data as FargekategoriModell;
+            const underfilterAlleredeValgt = state.fargekategorier.includes(filterVerdi);
+
+            const nyFargekategorier = underfilterAlleredeValgt
+                ? state.fargekategorier.filter(f => f !== filterVerdi)
+                : [...state.fargekategorier, filterVerdi];
+
+            return {...state, fargekategorier: nyFargekategorier};
+        }
         default:
             return state;
     }

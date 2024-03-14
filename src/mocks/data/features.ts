@@ -19,7 +19,7 @@ const toggles = {
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: true,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: true,
     [HUSKELAPP]: false,
-    [FARGEKATEGORIER]: true
+    [FARGEKATEGORIER]: false
 };
 
 export default toggles;

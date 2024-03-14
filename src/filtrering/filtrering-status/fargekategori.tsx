@@ -21,16 +21,12 @@ import {
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import {useDispatch} from 'react-redux';
+import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
+import {FargekategoriModell} from '../../model-interfaces';
 
-export interface FilterStatusMineFargekategorierProps {
-    handleHovedfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleUnderfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-function FilterStatusMineFargekategorier({
-    handleHovedfilterEndret,
-    handleUnderfilterEndret
-}: FilterStatusMineFargekategorierProps) {
+function FilterStatusMineFargekategorier() {
+    const dispatch = useDispatch();
     const statusTall = useStatustallVeilederSelector();
     const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
     const ferdigfilter = filtervalg.ferdigfilterListe;
@@ -42,6 +38,18 @@ function FilterStatusMineFargekategorier({
     const hovedfilterIndeterminate =
         ferdigfilter.includes(MINE_FARGEKATEGORIER) &&
         !alleFargekategoriFilterAlternativer.every(f => fargekategoriFilter.includes(f));
+
+    function handleHovedfilterEndret() {
+        dispatch({type: FARGEKATEGORIER_HOVEDFILTER_KLIKK, name: OversiktType.minOversikt});
+    }
+
+    function handleUnderfilterEndret(e: React.ChangeEvent<HTMLInputElement>) {
+        dispatch({
+            type: FARGEKATEGORIER_UNDERFILTER_KLIKK,
+            name: OversiktType.minOversikt,
+            data: e.target.value as FargekategoriModell
+        });
+    }
 
     return (
         <>
