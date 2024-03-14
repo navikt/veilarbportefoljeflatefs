@@ -6,6 +6,7 @@ import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
 import {filterSomIkkeSkalSendesTilBackend} from '../filtrering/filter-konstanter';
+import {EndreHuskelapp, LagreHuskelapp} from '../ducks/huskelapp';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
@@ -81,7 +82,7 @@ export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true
 export function toJson(response) {
     if (response.status !== 204) {
         // No content
-        return response.json();
+        return response.text().then(res => (!!res.length ? JSON.parse(res) : null));
     }
     return response;
 }
@@ -231,6 +232,30 @@ export function slettArbeidsliste(arbeidsliste) {
 export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
+    return fetchToJson(url, config);
+}
+
+export function lagreHuskelapp(huskelapp: LagreHuskelapp) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(huskelapp)};
+    return fetchToJson(url, config);
+}
+
+export function endreHuskelapp(huskelapp: EndreHuskelapp) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(huskelapp)};
+    return fetchToJson(url, config);
+}
+
+export function hentHuskelappForBruker(fnr: string, enhetId: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/hent-huskelapp-for-bruker`;
+    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr, enhetId})};
+    return fetchToJson(url, config);
+}
+
+export function slettHuskelapp(huskelappId: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/huskelapp`;
+    const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({huskelappId})};
     return fetchToJson(url, config);
 }
 
