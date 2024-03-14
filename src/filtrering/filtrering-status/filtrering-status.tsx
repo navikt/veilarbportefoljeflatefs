@@ -213,8 +213,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     handleChange={handleRadioButtonChange}
                     handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
                     hidden={oversiktType !== OversiktType.minOversikt}
-                    filtervalg={filtervalg}
-                    endreFiltervalg={dispatchFiltreringStatusChanged}
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
                 {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (

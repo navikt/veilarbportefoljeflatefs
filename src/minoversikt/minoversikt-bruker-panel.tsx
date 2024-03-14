@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MouseEvent, useEffect, useState} from 'react';
+import {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
@@ -8,7 +8,6 @@ import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interface
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {useLayoutEffect} from 'react';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
@@ -30,13 +29,23 @@ interface MinOversiktBrukerPanelProps {
     enhetId: string;
     filtervalg: FiltervalgModell;
     innloggetVeileder: OrNothing<VeilederModell>;
-    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
     hentArbeidslisteForBruker: (fnr: string) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
+function MinoversiktBrukerPanel({
+    bruker,
+    settMarkert,
+    enhetId,
+    filtervalg,
+    innloggetVeileder,
+    valgteKolonner,
+    varForrigeBruker,
+    hentArbeidslisteForBruker,
+    onClick
+}: MinOversiktBrukerPanelProps) {
     const [apen, setOpen] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
@@ -49,21 +58,11 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
     };
 
     useLayoutEffect(() => {
-        if (props.varForrigeBruker) {
+        if (varForrigeBruker) {
             scrollToLastPos();
         }
-    }, [props.varForrigeBruker]);
+    }, [varForrigeBruker]);
 
-    const {
-        bruker,
-        enhetId,
-        filtervalg,
-        valgteKolonner,
-        innloggetVeileder,
-        settMarkert,
-        varForrigeBruker,
-        hentArbeidslisteForBruker
-    } = props;
     const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
     const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
     const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
@@ -79,8 +78,8 @@ function MinoversiktBrukerPanel(props: MinOversiktBrukerPanelProps) {
         event.preventDefault();
         setOpen(!apen);
         logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
-        if (props.onClick) {
-            props.onClick(event);
+        if (onClick) {
+            onClick(event);
         }
     }
 

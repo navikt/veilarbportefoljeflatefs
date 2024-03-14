@@ -17,7 +17,7 @@ interface EnhetTabellProps {
     classNameWrapper: string;
 }
 
-function EnhetTabell(props: EnhetTabellProps) {
+function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
     const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
@@ -32,7 +32,7 @@ function EnhetTabell(props: EnhetTabellProps) {
 
     return (
         <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
-            <div className={props.classNameWrapper}>
+            <div className={classNameWrapper}>
                 <div className="enhet-tabell">
                     <ul className="brukerliste">
                         {enhetId &&
