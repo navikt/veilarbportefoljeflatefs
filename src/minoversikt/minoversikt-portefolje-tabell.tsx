@@ -16,12 +16,10 @@ import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-s
 
 interface MinOversiktTabellProps {
     innloggetVeileder: OrNothing<VeilederModell>;
-    visesAnnenVeiledersPortefolje?: boolean;
-    settSorteringOgHentPortefolje: (sortering: string) => void;
     classNameWrapper: string;
 }
 
-function MinoversiktTabell(props: MinOversiktTabellProps) {
+function MinoversiktTabell({innloggetVeileder, classNameWrapper}: MinOversiktTabellProps) {
     const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
@@ -36,7 +34,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
 
     return (
         <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
-            <div className={props.classNameWrapper}>
+            <div className={classNameWrapper}>
                 <div className="minoversikt-liste__wrapper">
                     <ul className="brukerliste" data-testid="brukerliste">
                         {enhetId &&
@@ -49,7 +47,7 @@ function MinoversiktTabell(props: MinOversiktTabellProps) {
                                     varForrigeBruker={forrigeBruker === bruker.fnr}
                                     filtervalg={filtervalg}
                                     valgteKolonner={listevisning.valgte}
-                                    innloggetVeileder={props.innloggetVeileder}
+                                    innloggetVeileder={innloggetVeileder}
                                     hentArbeidslisteForBruker={hentArbeidslisteBruker}
                                 />
                             ))}
