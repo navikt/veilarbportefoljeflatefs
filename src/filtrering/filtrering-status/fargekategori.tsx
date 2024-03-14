@@ -8,6 +8,7 @@ import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/a
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {
+    alleFargekategoriFilterAlternativer,
     FARGEKATEGORI_A,
     FARGEKATEGORI_B,
     FARGEKATEGORI_C,
@@ -15,46 +16,43 @@ import {
     FARGEKATEGORI_E,
     FARGEKATEGORI_F,
     FARGEKATEGORI_INGEN_KATEGORI,
-    ferdigfilterListeLabelTekst
+    ferdigfilterListeLabelTekst,
+    MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
-import {FargekategoriModell} from '../../model-interfaces';
+import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
+import {OversiktType} from '../../ducks/ui/listevisning';
 
 export interface FilterStatusMineFargekategorierProps {
-    valgteFargekategoriFilter: FargekategoriModell[];
     handleHovedfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleUnderfilterEndret: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    checked: boolean;
-    indeterminate: boolean;
 }
 
 function FilterStatusMineFargekategorier({
-    valgteFargekategoriFilter,
     handleHovedfilterEndret,
-    handleUnderfilterEndret,
-    checked,
-    indeterminate
+    handleUnderfilterEndret
 }: FilterStatusMineFargekategorierProps) {
     const statusTall = useStatustallVeilederSelector();
-    const {
-        fargekategoriA,
-        fargekategoriB,
-        fargekategoriC,
-        fargekategoriD,
-        fargekategoriE,
-        fargekategoriF,
-        fargekategoriIngenKategori
-    } = statusTall;
+    const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
+    const ferdigfilter = filtervalg.ferdigfilterListe;
+    const fargekategoriFilter = filtervalg.fargekategorier;
+
+    const hovedfilterChecked =
+        ferdigfilter.includes(MINE_FARGEKATEGORIER) &&
+        alleFargekategoriFilterAlternativer.every(f => fargekategoriFilter.includes(f));
+    const hovedfilterIndeterminate =
+        ferdigfilter.includes(MINE_FARGEKATEGORIER) &&
+        !alleFargekategoriFilterAlternativer.every(f => fargekategoriFilter.includes(f));
 
     return (
         <>
             <BarInputCheckbox
                 filterNavn="mineFargekategorier"
                 handleChange={handleHovedfilterEndret}
-                checked={checked}
+                checked={hovedfilterChecked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
-                indeterminate={indeterminate}
+                indeterminate={hovedfilterIndeterminate}
             />
-            {(checked || indeterminate) && (
+            {(hovedfilterChecked || hovedfilterIndeterminate) && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
                     <BarInputCheckbox
                         labelTekst={
@@ -66,8 +64,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierA"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_A)}
-                        antall={fargekategoriA}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_A)}
+                        antall={statusTall.fargekategoriA}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -79,8 +77,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierB"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_B)}
-                        antall={fargekategoriB}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_B)}
+                        antall={statusTall.fargekategoriB}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -92,8 +90,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierC"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_C)}
-                        antall={fargekategoriC}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_C)}
+                        antall={statusTall.fargekategoriC}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -105,8 +103,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierD"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_D)}
-                        antall={fargekategoriD}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_D)}
+                        antall={statusTall.fargekategoriD}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -118,8 +116,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierE"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_E)}
-                        antall={fargekategoriE}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_E)}
+                        antall={statusTall.fargekategoriE}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -131,8 +129,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierF"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_F)}
-                        antall={fargekategoriF}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_F)}
+                        antall={statusTall.fargekategoriF}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -144,8 +142,8 @@ function FilterStatusMineFargekategorier({
                         }
                         filterNavn="mineFargekategorierIngenKategori"
                         handleChange={handleUnderfilterEndret}
-                        checked={valgteFargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
-                        antall={fargekategoriIngenKategori}
+                        checked={fargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
+                        antall={statusTall.fargekategoriIngenKategori}
                     />
                 </div>
             )}

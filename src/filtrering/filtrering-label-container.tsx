@@ -7,6 +7,7 @@ import FilterKonstanter, {
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
     mapFilternavnTilFilterValue,
+    MINE_FARGEKATEGORIER,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -386,9 +387,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dispatch(pagineringSetup({side: 1}));
             dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
+
             if (filterValue === 'MIN_ARBEIDSLISTE') {
                 dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
             }
+            if (filterValue === MINE_FARGEKATEGORIER) {
+                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType));
+            }
+
             const oppdatertFiltervalg = {
                 ...ownProps.filtervalg,
                 [filterKey]: fjern(filterKey, ownProps.filtervalg[filterKey], filterValue),
