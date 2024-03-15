@@ -110,7 +110,7 @@ describe('Arbeidsliste', () => {
 
         cy.get('.arbeidsliste-modal').should('be.visible');
 
-        cy.get('.modal-header').contains('Rediger arbeidsliste');
+        cy.getByTestId('modal-header').contains('Rediger arbeidsliste');
 
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
 

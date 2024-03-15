@@ -80,27 +80,25 @@ export function MineFilterModal({oversiktType}: Props) {
             onClose={lukkModal}
             tittel={VisningstypeToTittel.get(valgtVisningstype)}
         >
-            <div className="modal-visningstype">
-                <HiddenIfLasterModal hidden={!laster} isOpen={laster} />
-                <HiddenIfMeny
-                    hidden={valgtVisningstype !== Visningstype.MENY}
-                    setValgtVisningstype={setValgtVisningstype}
-                    sisteFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                />
-                <HiddenIfLagreNytt
-                    hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
-                    lukkModal={lukkModal}
-                    oversiktType={oversiktType}
-                />
-                <HiddenIfOppdaterFilter
-                    hidden={valgtVisningstype !== Visningstype.OPPDATER}
-                    gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                    filterId={sisteValgtMineFilter!}
-                    lukkModal={lukkModal}
-                    oversiktType={oversiktType}
-                />
-                <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
-            </div>
+            <HiddenIfLasterModal hidden={!laster} isOpen={laster} />
+            <HiddenIfMeny
+                hidden={valgtVisningstype !== Visningstype.MENY}
+                setValgtVisningstype={setValgtVisningstype}
+                sisteFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+            />
+            <HiddenIfLagreNytt
+                hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
+                lukkModal={lukkModal}
+                oversiktType={oversiktType}
+            />
+            <HiddenIfOppdaterFilter
+                hidden={valgtVisningstype !== Visningstype.OPPDATER}
+                gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+                filterId={sisteValgtMineFilter!}
+                lukkModal={lukkModal}
+                oversiktType={oversiktType}
+            />
+            <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
         </EgenModal>
     );
 }
