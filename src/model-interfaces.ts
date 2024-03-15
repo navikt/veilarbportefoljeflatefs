@@ -207,7 +207,7 @@ export interface BrukerModell {
     huskelapp?: HuskelappModell;
 }
 
-interface EnsligeForsorgereOvergangsstonad {
+export interface EnsligeForsorgereOvergangsstonad {
     vedtaksPeriodetype: string;
     harAktivitetsplikt?: boolean | undefined;
     utlopsDato: Date;
