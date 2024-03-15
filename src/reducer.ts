@@ -27,7 +27,7 @@ import {FiltervalgModell} from './model-interfaces';
 import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
 import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
-import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
+import lagretFilterUIStateReducer, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
 import {LagretFilterState} from './ducks/lagret-filter';
 import geografiskbostedListReducer, {GeografiskBostedListState} from './ducks/geografiskBosted';
 import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
@@ -161,9 +161,9 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupper: veiledergrupperLagretFilterReducer,
     mineFilter: mineFilterReducer,
-    mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIState),
-    mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIState),
-    mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIState),
+    mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIStateReducer),
+    mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIStateReducer),
+    mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIStateReducer),
     toastReducer: toastReducer,
     innloggetVeileder: innloggetVeilederReducer,
     systemmeldinger: systemmeldingerReducer,
