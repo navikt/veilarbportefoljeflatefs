@@ -3,7 +3,7 @@ import {useSetInitalEnhet} from './hooks/portefolje/use-set-enhet-hvis-enhet-i-u
 import React from 'react';
 import {Alert} from '@navikt/ds-react';
 
-export function RedirectPortefolje(props: React.PropsWithChildren<{}>) {
+export function RedirectPortefolje({children}: React.PropsWithChildren<{}>) {
     useRedirectOnMount();
 
     const {hasError} = useSetInitalEnhet();
@@ -16,5 +16,5 @@ export function RedirectPortefolje(props: React.PropsWithChildren<{}>) {
         );
     }
 
-    return <>{props.children}</>;
+    return <>{children}</>;
 }

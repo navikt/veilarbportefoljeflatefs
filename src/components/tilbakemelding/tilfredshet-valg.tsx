@@ -9,12 +9,12 @@ interface TilfredshetValgProps {
     className?: string;
 }
 
-function TilfredshetValg(props: TilfredshetValgProps) {
-    const [tilfredshet, setTilfredshet] = useState(props.defaultTilfredshet ? props.defaultTilfredshet : 0);
+function TilfredshetValg({onTilfredshetChanged, defaultTilfredshet, className}: TilfredshetValgProps) {
+    const [tilfredshet, setTilfredshet] = useState(defaultTilfredshet ? defaultTilfredshet : 0);
 
     const handleTilfredshetChanged = (tilfredshet: number) => {
         setTilfredshet(tilfredshet);
-        props.onTilfredshetChanged(tilfredshet);
+        onTilfredshetChanged(tilfredshet);
     };
 
     const hentKlasserForIkon = (ikonTilfredshet: number): any => {
@@ -27,7 +27,7 @@ function TilfredshetValg(props: TilfredshetValgProps) {
     };
 
     return (
-        <div className={classNames('tilfredshet-valg__wrapper', props.className)}>
+        <div className={classNames('tilfredshet-valg__wrapper', className)}>
             <img
                 alt="Veldigt lite tilfreds"
                 className={hentKlasserForIkon(1)}

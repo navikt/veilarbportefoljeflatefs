@@ -1,7 +1,7 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.css';
-import {useState} from 'react';
 import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface ServerFeilModalProps {
@@ -9,17 +9,17 @@ interface ServerFeilModalProps {
     onClose: () => void;
 }
 
-export default function ServerFeilModal(props: ServerFeilModalProps) {
-    const [isOpen, setIsOpen] = useState(props.isOpen);
+export default function ServerFeilModal({isOpen, onClose}: ServerFeilModalProps) {
+    const [erAapen, setErAapen] = useState(isOpen);
 
     const lukkModal = () => {
-        props.onClose();
-        setIsOpen(false);
+        onClose();
+        setErAapen(false);
     };
 
     return (
         <VarselModal
-            isOpen={isOpen}
+            isOpen={erAapen}
             onClose={lukkModal}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"

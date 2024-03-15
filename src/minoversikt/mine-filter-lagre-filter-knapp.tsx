@@ -7,13 +7,17 @@ import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {Button} from '@navikt/ds-react';
 
-export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
+interface Props {
+    oversiktType: string;
+}
+
+export function MineFilterLagreFilterKnapp({oversiktType}: Props) {
     const [erLagreKnappSkjult, setErLagreKnappSkjult] = useState(true);
     const filtreringMinOversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
 
-    const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
-    const erPaEnhetensOversikt = props.oversiktType === OversiktType.enhetensOversikt;
+    const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
+    const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
     const filtrering = useSelector((state: AppState) =>
         erPaMinOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
@@ -25,7 +29,7 @@ export function MineFilterLagreFilterKnapp(props: {oversiktType: string}) {
 
     function lagreFilterModal(event) {
         event.preventDefault();
-        dispatch(apneMineFilterModal(props.oversiktType));
+        dispatch(apneMineFilterModal(oversiktType));
     }
 
     useEffect(() => {

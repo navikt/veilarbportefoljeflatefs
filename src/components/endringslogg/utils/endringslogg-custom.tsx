@@ -23,12 +23,12 @@ export interface EndringsloggEntry {
     children?: React.ReactNode;
     featureToggleName?: string;
     modal?: ModalType;
-    forced: boolean;
+    forced: boolean /* Ikkje brukt i EndringsloggEntry, kan den slettast etter kvart? 2024-03-14, Ingrid */;
 }
 
 export interface EndringsloggEntryWithSeenStatus extends EndringsloggEntry {
     seen: boolean;
-    seenForced: boolean;
+    seenForced: boolean /* Ikkje brukt i EndringsloggEntry, kan den slettast etter kvart? 2024-03-14, Ingrid */;
 }
 
 export const setAllEntriesSeen = (endringsloggEntries: EndringsloggEntryWithSeenStatus[]) =>

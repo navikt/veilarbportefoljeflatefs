@@ -16,7 +16,12 @@ import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjelden
 import {OversiktType} from '../ducks/ui/listevisning';
 import Endringslogg from '../components/endringslogg';
 
-function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktType}) {
+interface Props {
+    erPaloggetVeileder?: boolean;
+    oversiktType: OversiktType;
+}
+
+function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
@@ -35,11 +40,11 @@ function ToppMeny(props: {erPaloggetVeileder?: boolean; oversiktType: OversiktTy
 
     return (
         <div className={classNames('topp-meny', erAlertstripeFeilmeldingFeatureTogglePa && 'topp-meny__alertstripe')}>
-            <Lenker erPaloggetVeileder={!!props.erPaloggetVeileder} />
+            <Lenker erPaloggetVeileder={erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
             <div className="moteendringsboks">
-                {props.oversiktType === OversiktType.minOversikt && enhet && (
+                {oversiktType === OversiktType.minOversikt && enhet && (
                     <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
                 )}
                 <Endringslogg

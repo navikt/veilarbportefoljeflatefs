@@ -11,7 +11,7 @@ interface TimedToastProps {
     fjernToast: any;
 }
 
-function TimedToast(props: TimedToastProps) {
+function TimedToast({toastTekst, alertstripe, fjernToast}: TimedToastProps) {
     const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
@@ -24,7 +24,7 @@ function TimedToast(props: TimedToastProps) {
     useEffect(() => {
         startTimer();
         const timer = setTimeout(() => {
-            dispatch(props.fjernToast);
+            dispatch(fjernToast);
         }, 6000);
         return () => clearTimeout(timer);
     });
@@ -32,13 +32,13 @@ function TimedToast(props: TimedToastProps) {
     return (
         <div className="timed-toast" ref={toastRef} tabIndex={0}>
             <Alert
-                variant={props.alertstripe}
+                variant={alertstripe}
                 className="timed-toast__alertstripe"
-                data-testid={`timed-toast_${kebabCase(props.toastTekst)}`}
+                data-testid={`timed-toast_${kebabCase(toastTekst)}`}
                 size="small"
             >
                 <BodyShort size="small" className="timed-toast__tekst">
-                    {props.toastTekst}
+                    {toastTekst}
                 </BodyShort>
             </Alert>
         </div>

@@ -9,11 +9,11 @@ interface EndringerIkkeLagretModalProps {
     onSubmit: () => void;
 }
 
-function EndringerIkkeLagretModal(props: EndringerIkkeLagretModalProps) {
+function EndringerIkkeLagretModal({isOpen, onRequestClose, onSubmit}: EndringerIkkeLagretModalProps) {
     return (
         <VarselModal
-            isOpen={props.isOpen}
-            onClose={props.onRequestClose}
+            isOpen={isOpen}
+            onClose={onRequestClose}
             className="endringer-ikke-lagret-modal"
             type={VarselModalType.ADVARSEL}
         >
@@ -21,7 +21,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModalProps) {
                 Endringene er ikke lagret
             </Heading>
             <div className="endringer-ikke-lagret-modal__knappegruppe">
-                <Button size="small" type="button" onClick={props.onRequestClose}>
+                <Button size="small" type="button" onClick={onRequestClose}>
                     Gå tilbake til redigering
                 </Button>
                 <Button
@@ -29,7 +29,7 @@ function EndringerIkkeLagretModal(props: EndringerIkkeLagretModalProps) {
                     variant="danger"
                     type="submit"
                     onClick={() => {
-                        props.onSubmit();
+                        onSubmit();
                     }}
                 >
                     Lukk uten å lagre

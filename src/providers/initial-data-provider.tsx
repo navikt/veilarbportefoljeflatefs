@@ -8,7 +8,7 @@ import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
 import {hentSystemmeldinger} from '../ducks/systemmeldinger';
 import {hentBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 
-function InitialDataProvider(props: PropsWithChildren<{}>) {
+function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);
     const brukerIKontekstState = useSelector((state: AppState) => state.brukerIKontekst);
     const valgtEnhetId = useSelector((state: AppState) => state.valgtEnhet.data.enhetId);
@@ -27,9 +27,7 @@ function InitialDataProvider(props: PropsWithChildren<{}>) {
         }
     }, [valgtEnhetId, dispatch]);
 
-    return (
-        <Innholdslaster avhengigheter={[innloggetVeilederState, brukerIKontekstState]}>{props.children}</Innholdslaster>
-    );
+    return <Innholdslaster avhengigheter={[innloggetVeilederState, brukerIKontekstState]}>{children}</Innholdslaster>;
 }
 
 export default InitialDataProvider;

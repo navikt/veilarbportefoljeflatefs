@@ -13,10 +13,10 @@ interface ValgtVeiledergruppeListeProps {
     feil?: string;
 }
 
-function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
+function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: ValgtVeiledergruppeListeProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const veiledere = veilederePaEnheten
-        .filter(veilederPaEnhet => props.valgteVeileder.includes(veilederPaEnhet.ident))
+        .filter(veilederPaEnhet => valgteVeileder.includes(veilederPaEnhet.ident))
         .sort((veileder1, veiledere2) => veileder1.etternavn.localeCompare(veiledere2.etternavn));
 
     const splitArrayITo = [
@@ -28,7 +28,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
         <>
             <div
                 className={classNames('veiledergruppe-modal__valgteveileder', {
-                    'skjemaelement__input--harFeil': props.feil
+                    'skjemaelement__input--harFeil': feil
                 })}
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
@@ -47,7 +47,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                                         variant="tertiary"
                                         className="fjern--knapp"
                                         type="button"
-                                        onClick={() => props.fjernValgtVeileder(veileder.ident)}
+                                        onClick={() => fjernValgtVeileder(veileder.ident)}
                                         icon={<Delete />}
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     />
@@ -57,7 +57,7 @@ function ValgtVeiledergruppeListe(props: ValgtVeiledergruppeListeProps) {
                     ))
                 )}
             </div>
-            <SkjemaelementFeilmelding>{props.feil}</SkjemaelementFeilmelding>
+            <SkjemaelementFeilmelding>{feil}</SkjemaelementFeilmelding>
         </>
     );
 }

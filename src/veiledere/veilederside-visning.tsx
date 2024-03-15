@@ -42,10 +42,9 @@ interface VeilederesideVisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
     portefoljestorrelser: PortefoljeStorrelser;
-    antallVeiledere: number;
 }
 
-function VeilederesideVisning(props: VeilederesideVisningProps) {
+function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}: VeilederesideVisningProps) {
     const dispatch = useDispatch();
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
@@ -53,11 +52,11 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
     const sortering = useSelector((state: AppState) => state.sortering);
 
     const veilederListe = useMemo(() => {
-        return props.veiledere
-            .filter(erValgtHvisFiltrering(props.veilederFilter))
-            .map(medPortefoljestorrelse(props.portefoljestorrelser))
+        return veiledere
+            .filter(erValgtHvisFiltrering(veilederFilter))
+            .map(medPortefoljestorrelse(portefoljestorrelser))
             .sort(propertySort(sortering));
-    }, [props.veilederFilter, props.portefoljestorrelser, props.veiledere, sortering]);
+    }, [veilederFilter, portefoljestorrelser, veiledere, sortering]);
 
     function getValgteVeiledere() {
         if (seAlle) {
@@ -70,7 +69,7 @@ function VeilederesideVisning(props: VeilederesideVisningProps) {
         <>
             <Toolbar
                 oversiktType={OversiktType.veilederOversikt}
-                antallTotalt={props.veiledere.length}
+                antallTotalt={veiledere.length}
                 sokVeilederSkalVises={false}
                 id="veilederside-toolbar"
                 antallValgteVeiledere={getValgteVeiledere().length}

@@ -3,6 +3,8 @@ import {lagreArbeidsliste, oppdaterArbeidsliste, slettArbeidsliste} from '../mid
 import {skjulModal} from './modal';
 import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {dateToISODate} from '../utils/dato-utils';
+import {BrukerModell} from '../model-interfaces';
+import {OrNothing} from '../utils/types/types';
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -47,8 +49,13 @@ export default function arbeidslisteReducer(state = initialState, action) {
     }
 }
 
+interface RedigerArbeidslisteAction {
+    bruker: BrukerModell;
+    innloggetVeileder: OrNothing<string>;
+}
+
 // Action Creators
-export function redigerArbeidslisteAction(formData, props) {
+export function redigerArbeidslisteAction(formData, {bruker, innloggetVeileder}: RedigerArbeidslisteAction) {
     const arbeidsliste = {
         kommentar: formData.kommentar.length ? formData.kommentar : null,
         overskrift: formData.overskrift.length ? formData.overskrift : null,
@@ -59,11 +66,9 @@ export function redigerArbeidslisteAction(formData, props) {
     return dispatch =>
         oppdaterArbeidslisteAction(
             arbeidsliste,
-            props.bruker.fnr
+            bruker.fnr
         )(dispatch)
-            .then(res =>
-                oppdaterArbeidsListeState(res, arbeidsliste, props.innloggetVeileder, props.bruker.fnr, dispatch)
-            )
+            .then(res => oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, bruker.fnr, dispatch))
             .then(() => dispatch(skjulModal()));
 }
 

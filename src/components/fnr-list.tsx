@@ -9,8 +9,8 @@ interface FnrListProps {
     listeMedFnr: Fnr[];
 }
 
-export function FnrList(props: FnrListProps) {
-    const listElements = props.listeMedFnr.map(tilordning => (
+export function FnrList({listeMedFnr}: FnrListProps) {
+    const listElements = listeMedFnr.map(tilordning => (
         <li key={tilordning.brukerFnr} className="fnr__listitem">
             {tilordning.brukerFnr}
         </li>

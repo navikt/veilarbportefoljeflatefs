@@ -14,34 +14,36 @@ const errorModalTypeToTittel = new Map<ErrorModalType, string>([
     [ErrorModalType.SLETTE, 'Filteret kunne ikke slettes']
 ]);
 
-export function MineFilterVarselModal(props: {
+interface Props {
     filterNavn: string;
     modalType: ErrorModalType;
     erApen: boolean;
     setErrorModalErApen;
-}) {
+}
+
+export function MineFilterVarselModal({filterNavn, modalType, erApen, setErrorModalErApen}: Props) {
     return (
-        <VarselModal onClose={() => props.setErrorModalErApen(false)} isOpen={props.erApen} type={VarselModalType.FEIL}>
+        <VarselModal onClose={() => setErrorModalErApen(false)} isOpen={erApen} type={VarselModalType.FEIL}>
             <Heading size="large" level="1">
-                {errorModalTypeToTittel.get(props.modalType)}
+                {errorModalTypeToTittel.get(modalType)}
             </Heading>
             <br />
-            {props.modalType === ErrorModalType.LAGRE && (
+            {modalType === ErrorModalType.LAGRE && (
                 <BodyShort size="small">
-                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke opprettes. Prøv igjen senere.
+                    Det oppsto en feil, og filteret <b>{filterNavn}</b> kunne ikke opprettes. Prøv igjen senere.
                 </BodyShort>
             )}
-            {props.modalType === ErrorModalType.OPPDATERE && (
+            {modalType === ErrorModalType.OPPDATERE && (
                 <BodyShort size="small">
-                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke lagres. Prøv igjen senere.
+                    Det oppsto en feil, og filteret <b>{filterNavn}</b> kunne ikke lagres. Prøv igjen senere.
                 </BodyShort>
             )}
-            {props.modalType === ErrorModalType.SLETTE && (
+            {modalType === ErrorModalType.SLETTE && (
                 <BodyShort size="small">
-                    Det oppsto en feil, og filteret <b>{props.filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
+                    Det oppsto en feil, og filteret <b>{filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
                 </BodyShort>
             )}
-            <Button size="small" className="error-knapp" onClick={() => props.setErrorModalErApen(false)}>
+            <Button size="small" className="error-knapp" onClick={() => setErrorModalErApen(false)}>
                 Lukk
             </Button>
         </VarselModal>

@@ -9,10 +9,9 @@ interface ModalStepperProps {
     modal: ModalType;
     id: string;
     buttonText?: string;
-    forced?: boolean;
 }
 
-export const TourModalButton = (props: ModalStepperProps) => {
+export const TourModalButton = ({modal, id, buttonText}: ModalStepperProps) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -24,12 +23,12 @@ export const TourModalButton = (props: ModalStepperProps) => {
                 size="small"
                 onClick={() => {
                     setOpen(true);
-                    trackModalOpen(props.id);
+                    trackModalOpen(id);
                 }}
             >
-                <b>{props.buttonText ? props.buttonText : 'Se hvordan'}</b>
+                <b>{buttonText ? buttonText : 'Se hvordan'}</b>
             </Button>
-            <TourModal open={open} modal={props.modal} onClose={() => setOpen(false)} />
+            <TourModal open={open} modal={modal} onClose={() => setOpen(false)} />
         </>
     );
 };

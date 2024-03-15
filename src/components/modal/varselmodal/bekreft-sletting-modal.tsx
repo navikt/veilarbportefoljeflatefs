@@ -13,26 +13,26 @@ interface BekreftSlettingModalProps {
     navn: string;
 }
 
-function BekreftSlettingModal(props: BekreftSlettingModalProps) {
+function BekreftSlettingModal({isOpen, onRequestClose, onSubmit, tittel, infoTekst, navn}: BekreftSlettingModalProps) {
     const slettKnapp = () => {
-        props.onSubmit();
-        props.onRequestClose();
+        onSubmit();
+        onRequestClose();
     };
 
     return (
         <VarselModal
-            isOpen={props.isOpen}
-            onClose={props.onRequestClose}
+            isOpen={isOpen}
+            onClose={onRequestClose}
             className="bekreft-sletting-modal"
             type={VarselModalType.ADVARSEL}
         >
             <div className="bekreft-sletting-modal__tekstgruppe">
                 <Heading size="large" level="1">
-                    {props.tittel}
+                    {tittel}
                 </Heading>
-                {props.infoTekst && <BodyShort size="small">{props.infoTekst}</BodyShort>}
+                {infoTekst && <BodyShort size="small">{infoTekst}</BodyShort>}
                 <BodyShort size="small">
-                    Er du sikker på at du vil slette <b>{props.navn}</b>?
+                    Er du sikker på at du vil slette <b>{navn}</b>?
                 </BodyShort>
             </div>
             <div className="bekreft-sletting-modal__knappegruppe">
@@ -46,7 +46,7 @@ function BekreftSlettingModal(props: BekreftSlettingModalProps) {
                 >
                     Slett
                 </Button>
-                <Button size="small" variant="secondary" type="button" onClick={props.onRequestClose}>
+                <Button size="small" variant="secondary" type="button" onClick={onRequestClose}>
                     Avbryt
                 </Button>
             </div>

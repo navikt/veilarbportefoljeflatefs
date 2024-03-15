@@ -94,7 +94,7 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
             <FiltreringMineFilter
                 oversiktType={oversiktType}
                 fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                sortertMineFilter={mineFilter.sort(sortMineFilter)}
+                lagretFilter={mineFilter.sort(sortMineFilter)}
                 isDraggable={isMinefiltereDraggable}
                 setisDraggable={setIsMinefiltereDraggable}
                 enhettiltak={enhettiltak}

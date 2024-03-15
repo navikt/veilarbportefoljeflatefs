@@ -12,26 +12,32 @@ interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];
     onOpen: () => void;
     onClose: () => void;
-    userId: string;
-    appId: string;
     appName: string;
     stil?: StilType;
     alignLeft?: boolean;
     errorMessage?: string;
 }
 
-export const EndringsloggContainer = (props: EndringsloggContainerProps) => {
+export const EndringsloggContainer = ({
+    content,
+    onOpen,
+    onClose,
+    appName,
+    stil,
+    alignLeft,
+    errorMessage
+}: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = props.content.some(element => !element.seen);
+    const overordnetNotifikasjon = content.some(element => !element.seen);
 
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         if (setOpenTo) {
-            props.onOpen();
+            onOpen();
         } else {
-            props.onClose();
+            onClose();
         }
         setEndringsloggApen(setOpenTo);
     };
@@ -76,14 +82,16 @@ export const EndringsloggContainer = (props: EndringsloggContainerProps) => {
                 open={endringsloggApen}
                 newNotifications={overordnetNotifikasjon}
                 buttonRef={buttonRef}
-                name={props.appName}
-                stil={props.stil}
+                name={appName}
+                stil={stil}
             />
-            <TransitionContainer visible={endringsloggApen} alignLeft={props.alignLeft}>
-                <EndringsloggHeader appName={props.appName} />
+            <TransitionContainer visible={endringsloggApen} alignLeft={alignLeft}>
+                <Heading size="small" level="1" className={'collapse-header'}>
+                    Nytt i {appName}
+                </Heading>
                 <div className={'innhold-container'} data-testid="endringslogg-innhold">
-                    <EndringsloggContent innleggsListe={props.content} />
-                    {props.errorMessage && <Label>{props.errorMessage}</Label>}
+                    <EndringsloggContent innleggsListe={content} />
+                    {errorMessage && <Label>{errorMessage}</Label>}
                 </div>
             </TransitionContainer>
         </div>
@@ -99,34 +107,33 @@ interface EndringsloggIconButtonProps {
     stil?: StilType;
 }
 
-const EndringsloggIconButton = (props: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({
+    buttonRef,
+    open,
+    newNotifications,
+    onClick,
+    name,
+    stil
+}: EndringsloggIconButtonProps) => {
     return (
         <button
-            aria-label={`Endringslogg for ${props.name}`}
-            ref={props.buttonRef}
+            aria-label={`Endringslogg for ${name}`}
+            ref={buttonRef}
             className={classNames(
                 'endringslogg-knapp',
                 'endringslogg-dropDown',
-                props.open && 'endringslogg-dropDown-active'
+                open && 'endringslogg-dropDown-active'
             )}
-            onClick={props.onClick}
+            onClick={onClick}
             data-testid="endringslogg-knapp"
         >
-            <EndringsloggIkon stil={props.stil} />
-            {props.newNotifications && (
+            <EndringsloggIkon stil={stil} />
+            {newNotifications && (
                 <div className={'ring-container'}>
                     <div className={'ringring'} />
                     <div className={'circle'} data-testid="endringslogg_nye-notifikasjoner" />
                 </div>
             )}
         </button>
-    );
-};
-
-const EndringsloggHeader = (props: {appName: string}) => {
-    return (
-        <Heading size="small" level="1" className={'collapse-header'}>
-            Nytt i {props.appName}
-        </Heading>
     );
 };

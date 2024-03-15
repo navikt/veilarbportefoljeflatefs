@@ -8,7 +8,11 @@ import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 import {useDispatch} from 'react-redux';
 
-export function Lenker(props: {erPaloggetVeileder: boolean}) {
+interface Props {
+    erPaloggetVeileder: boolean;
+}
+
+export function Lenker({erPaloggetVeileder}: Props) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
@@ -42,7 +46,7 @@ export function Lenker(props: {erPaloggetVeileder: boolean}) {
                 title="Her vises alle brukere som er tildelt deg"
                 aria-label="Min oversikt"
                 data-testid="min-oversikt"
-                hidden={!(harPortefolje || props.erPaloggetVeileder)}
+                hidden={!(harPortefolje || erPaloggetVeileder)}
                 aria-selected={erAktiv('min-oversikt')}
             >
                 Min oversikt

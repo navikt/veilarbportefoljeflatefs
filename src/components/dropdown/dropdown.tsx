@@ -4,8 +4,8 @@ import {useFocus} from '../../hooks/use-focus';
 import './dropdown.css';
 import {BodyShort} from '@navikt/ds-react';
 
-const btnCls = (props: DropdownProps, apen: boolean) =>
-    classNames('dropdown', props.className, {
+const btnCls = (apen: boolean, className?: string) =>
+    classNames('dropdown', className, {
         'dropdown--apen': apen
     });
 
@@ -13,20 +13,19 @@ const btnWrapperCls = (disabled?: boolean) =>
     classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 interface DropdownProps {
-    hoyre?: boolean;
-    apen?: boolean;
-    disabled?: boolean;
     name: React.ReactNode;
     id: string;
     render: (lukkDropdown: () => void) => React.ReactChild;
-    className?: string;
-    onLukk?: () => void;
+    open?: boolean;
+    onClose?: () => void;
+    hoyre?: boolean;
+    disabled?: boolean;
     hidden?: boolean;
+    className?: string;
 }
 
-function Dropdown(props: DropdownProps) {
-    const {name, disabled, render, hoyre, hidden, id} = props;
-    const [apen, setApen] = useState(props.apen || false);
+function Dropdown({name, id, render, open, onClose = () => {}, hoyre, disabled, hidden, className}: DropdownProps) {
+    const [apen, setApen] = useState(open || false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
     const {focusRef} = useFocus();
@@ -43,18 +42,16 @@ function Dropdown(props: DropdownProps) {
     });
 
     function toggleDropdown() {
-        const {onLukk = () => void 0} = props;
         if (apen) {
-            onLukk();
+            onClose();
         }
         setApen(!apen);
     }
 
     function lukkDropdown() {
-        const {onLukk = () => void 0} = props;
         setApen(false);
 
-        onLukk();
+        onClose();
     }
 
     if (hidden) {
@@ -76,7 +73,7 @@ function Dropdown(props: DropdownProps) {
     };
 
     return (
-        <div className={btnCls(props, apen)} ref={divRef}>
+        <div className={btnCls(apen, className)} ref={divRef}>
             <div className={btnWrapperCls(disabled)}>
                 <button
                     ref={btnRef}

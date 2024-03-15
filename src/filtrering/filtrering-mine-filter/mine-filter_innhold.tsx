@@ -10,7 +10,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {Alert, BodyShort} from '@navikt/ds-react';
 
-interface LagredeFilterInnholdProps {
+export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
     oversiktType: OversiktType;
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
@@ -23,11 +23,18 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function MineFilterInnhold(props: LagredeFilterInnholdProps) {
+function MineFilterInnhold({
+    lagretFilter,
+    oversiktType,
+    fjernUtilgjengeligeFilter,
+    isDraggable,
+    setisDraggable,
+    enhettiltak
+}: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
-        return props.lagretFilter.filter(elem => props.fjernUtilgjengeligeFilter(elem));
+        return lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem));
     };
 
     const aktiveFilter = () => {
@@ -67,10 +74,10 @@ function MineFilterInnhold(props: LagredeFilterInnholdProps) {
                 <div className="mine-filter__valgfelt" ref={outerDivRef} data-testid="mine-filter_radio-container">
                     <DragAndDrop
                         stateFilterOrder={aktiveFilter()}
-                        oversiktType={props.oversiktType}
-                        isDraggable={props.isDraggable}
-                        setisDraggable={props.setisDraggable}
-                        enhettiltak={props.enhettiltak}
+                        oversiktType={oversiktType}
+                        isDraggable={isDraggable}
+                        setisDraggable={setisDraggable}
+                        enhettiltak={enhettiltak}
                     />
                 </div>
             </>
