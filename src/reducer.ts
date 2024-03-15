@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {Action, combineReducers} from 'redux';
 import persistentReducer from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
@@ -49,8 +49,8 @@ import huskelappReducer from './ducks/huskelapp';
  * @param name Navnet på en oversikttype
  * @param reducer Reduceren som denne funksjonen brukes i kombinasjon med
  */
-function named(name: OversiktType, reducer: (action: {name: OversiktType} & any, type: any) => any) {
-    return (state: any, action: any) => {
+function named(name: OversiktType, reducer: (state: any, action: Action) => any) {
+    return (state: any, action: Action & {name: OversiktType}) => {
         if (state === undefined) {
             // For å få satt initialState
             return reducer(state, action);
