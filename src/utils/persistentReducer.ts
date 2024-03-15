@@ -1,4 +1,21 @@
-function read(scope) {
+import {Action} from 'redux';
+import {OversiktType} from '../ducks/ui/listevisning';
+
+/**
+ * Et scope er en unik nøkkel som brukes for å lagre state i LocalStorage.
+ *
+ * Eksempel: localStorage.getItem('minOversiktListevisningState').
+ */
+export enum LocalStorageScope {
+    MIN_OVERSIKT_LISTEVISNING_STATE = 'minOversiktListevisningState',
+    ENHETENS_OVERSIKT_LISTEVISNING_STATE = 'enhetensOversiktListevisningState',
+    MIN_OVERSIKT_SIDEBAR = 'minOversiktSidebar',
+    ENHETENS_OVERSIKT_SIDEBAR = 'enhetensOversiktSidebar',
+    ENHETS_STATE = 'enhetsState',
+    VEILEDER_STATE = 'veilederState'
+}
+
+function read(scope: LocalStorageScope) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return undefined;
@@ -6,11 +23,11 @@ function read(scope) {
     return JSON.parse(content);
 }
 
-function write(scope, content) {
+function write(scope: LocalStorageScope, content: any) {
     return localStorage.setItem(scope, JSON.stringify(content));
 }
 
-function erFiltreringEndret(scope, initialState) {
+function erFiltreringEndret(scope: LocalStorageScope, initialState) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return true;
@@ -24,8 +41,13 @@ function erFiltreringEndret(scope, initialState) {
     );
 }
 
-export default function persistentReducer(scope, location, reducer, initialFilterstate) {
-    return (state, action) => {
+export default function persistentReducer(
+    scope: LocalStorageScope,
+    location: Location,
+    reducer: (state: any, action: Action & {name: OversiktType}) => any,
+    initialFilterstate: any
+) {
+    return (state: any, action: Action & {name: OversiktType}) => {
         let nState = state;
         if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
             write(scope, undefined);

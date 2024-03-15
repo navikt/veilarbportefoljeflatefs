@@ -1,5 +1,5 @@
 import {Action, combineReducers} from 'redux';
-import persistentReducer from './utils/persistentReducer';
+import persistentReducer, {LocalStorageScope} from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
@@ -107,25 +107,25 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         listevisningMinOversikt: persistentReducer(
-            'minOversiktListevisningState',
+            LocalStorageScope.MIN_OVERSIKT_LISTEVISNING_STATE,
             window.location,
             named(OversiktType.minOversikt, listevisningReducer),
             initialStateMinOversikt
         ),
         listevisningEnhetensOversikt: persistentReducer(
-            'enhetensOversiktListevisningState',
+            LocalStorageScope.ENHETENS_OVERSIKT_LISTEVISNING_STATE,
             window.location,
             named(OversiktType.enhetensOversikt, listevisningReducer),
             initialStateEnhetensOversikt
         ),
         sidebarMinOversikt: persistentReducer(
-            'minOversiktSidebar',
+            LocalStorageScope.MIN_OVERSIKT_SIDEBAR,
             window.location,
             named(OversiktType.minOversikt, sidebarReducer),
             initialStateSidebar
         ),
         sidebarEnhetensOversikt: persistentReducer(
-            'enhetensOversiktSidebar',
+            LocalStorageScope.ENHETENS_OVERSIKT_SIDEBAR,
             window.location,
             named(OversiktType.enhetensOversikt, sidebarReducer),
             initialStateSidebar
@@ -140,13 +140,13 @@ export default combineReducers<AppState>({
     statustallVeileder: statustallVeilederReducer,
     statustallEnhet: statustallEnhetReducer,
     filtreringEnhetensOversikt: persistentReducer(
-        'enhetsState',
+        LocalStorageScope.ENHETS_STATE,
         window.location,
         named(OversiktType.enhetensOversikt, filtreringReducer),
         initialState
     ),
     filtreringMinoversikt: persistentReducer(
-        'veilederState',
+        LocalStorageScope.VEILEDER_STATE,
         window.location,
         named(OversiktType.minOversikt, filtreringReducer),
         initialState
