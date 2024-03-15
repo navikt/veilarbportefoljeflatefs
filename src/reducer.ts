@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux';
-import persistentReducer from './utils/persistentReducer';
+import {Action, combineReducers} from 'redux';
+import persistentReducer, {LocalStorageScope} from './utils/persistentReducer';
 import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
 import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
 import pagineringReducer from './ducks/paginering';
@@ -27,7 +27,7 @@ import {FiltervalgModell} from './model-interfaces';
 import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
 import sidebarReducer, {initialStateSidebar} from './ducks/sidebar-tab';
 import mineFilterReducer from './ducks/mine-filter';
-import lagretFilterUIState, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
+import lagretFilterUIStateReducer, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
 import {LagretFilterState} from './ducks/lagret-filter';
 import geografiskbostedListReducer, {GeografiskBostedListState} from './ducks/geografiskBosted';
 import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
@@ -38,8 +38,19 @@ import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-e
 import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 import huskelappReducer from './ducks/huskelapp';
 
-function named(name, reducer) {
-    return (state, action) => {
+/**
+ * Hjelpefunksjon for å conditionally kjøre reducere på en action
+ *
+ * Eksempel: `mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIStateReducer)`. Her har man en
+ * state-slice `mineFilterMinOversikt` og en tilhørende reducer `lagretFilterUIStateReducer`. I dette tilfellet er
+ * `lagretFilterUIStateReducer` en generell reducer som brukes for flere state-slices. Derfor ønsker man ikke at
+ * `mineFilterMinOversikt` skal oppdateres dersom valgt oversikttype er `OversiktType.enhetensOversikt`.
+ *
+ * @param name Navnet på en oversikttype
+ * @param reducer Reduceren som denne funksjonen brukes i kombinasjon med
+ */
+function named(name: OversiktType, reducer: (state: any, action: Action) => any) {
+    return (state: any, action: Action & {name: OversiktType}) => {
         if (state === undefined) {
             // For å få satt initialState
             return reducer(state, action);
@@ -96,25 +107,25 @@ export interface AppState {
 export default combineReducers<AppState>({
     ui: combineReducers({
         listevisningMinOversikt: persistentReducer(
-            'minOversiktListevisningState',
+            LocalStorageScope.MIN_OVERSIKT_LISTEVISNING_STATE,
             window.location,
             named(OversiktType.minOversikt, listevisningReducer),
             initialStateMinOversikt
         ),
         listevisningEnhetensOversikt: persistentReducer(
-            'enhetensOversiktListevisningState',
+            LocalStorageScope.ENHETENS_OVERSIKT_LISTEVISNING_STATE,
             window.location,
             named(OversiktType.enhetensOversikt, listevisningReducer),
             initialStateEnhetensOversikt
         ),
         sidebarMinOversikt: persistentReducer(
-            'minOversiktSidebar',
+            LocalStorageScope.MIN_OVERSIKT_SIDEBAR,
             window.location,
             named(OversiktType.minOversikt, sidebarReducer),
             initialStateSidebar
         ),
         sidebarEnhetensOversikt: persistentReducer(
-            'enhetensOversiktSidebar',
+            LocalStorageScope.ENHETENS_OVERSIKT_SIDEBAR,
             window.location,
             named(OversiktType.enhetensOversikt, sidebarReducer),
             initialStateSidebar
@@ -129,13 +140,13 @@ export default combineReducers<AppState>({
     statustallVeileder: statustallVeilederReducer,
     statustallEnhet: statustallEnhetReducer,
     filtreringEnhetensOversikt: persistentReducer(
-        'enhetsState',
+        LocalStorageScope.ENHETS_STATE,
         window.location,
         named(OversiktType.enhetensOversikt, filtreringReducer),
         initialState
     ),
     filtreringMinoversikt: persistentReducer(
-        'veilederState',
+        LocalStorageScope.VEILEDER_STATE,
         window.location,
         named(OversiktType.minOversikt, filtreringReducer),
         initialState
@@ -150,9 +161,9 @@ export default combineReducers<AppState>({
     features: featuresReducer,
     veiledergrupper: veiledergrupperLagretFilterReducer,
     mineFilter: mineFilterReducer,
-    mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIState),
-    mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIState),
-    mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIState),
+    mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIStateReducer),
+    mineFilterEnhetensOversikt: named(OversiktType.enhetensOversikt, lagretFilterUIStateReducer),
+    mineFilterVeilederOversikt: named(OversiktType.veilederOversikt, lagretFilterUIStateReducer),
     toastReducer: toastReducer,
     innloggetVeileder: innloggetVeilederReducer,
     systemmeldinger: systemmeldingerReducer,

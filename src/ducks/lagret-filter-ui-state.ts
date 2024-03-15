@@ -1,5 +1,6 @@
 import {OrNothing} from '../utils/types/types';
 import {LagretFilter} from './lagret-filter';
+import {OversiktType} from './ui/listevisning';
 
 // Actions
 export const VELG_MINE_FILTER = 'lagretfilter_velg/VELG_MINE_FILTER';
@@ -63,7 +64,7 @@ export default function lagretFilterReducer(state: LagretFilterUIState = initial
 }
 
 // Action Creators
-export function markerMineFilter(filterVerdi: LagretFilter, oversiktType: string) {
+export function markerMineFilter(filterVerdi: LagretFilter, oversiktType: OversiktType) {
     return {
         type: MARKER_MINE_FILTER,
         data: filterVerdi,
@@ -71,7 +72,7 @@ export function markerMineFilter(filterVerdi: LagretFilter, oversiktType: string
     };
 }
 
-export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, oversiktType: string) {
+export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, oversiktType: OversiktType) {
     return {
         type: MARKER_VEILEDER_GRUPPE,
         data: filterVerdi,
@@ -79,48 +80,48 @@ export function markerValgtVeiledergruppe(filterVerdi: LagretFilter, oversiktTyp
     };
 }
 
-export function avmarkerValgtMineFilter(oversiktType: string) {
+export function avmarkerValgtMineFilter(oversiktType: OversiktType) {
     return {
         type: AVMARKER_MINE_FILTER,
         name: oversiktType
     };
 }
 
-export function avmarkerValgtVeiledergruppe(oversiktType: string) {
+export function avmarkerValgtVeiledergruppe(oversiktType: OversiktType) {
     return {
         type: AVMARKER_VEILEDER_GRUPPE,
         name: oversiktType
     };
 }
 
-export function avmarkerSisteValgtMineFilter(oversiktType: string) {
+export function avmarkerSisteValgtMineFilter(oversiktType: OversiktType) {
     return {
         type: AVMARKER_SISTE_VALGT_MINE_FILTER,
         name: oversiktType
     };
 }
 
-export function apneMineFilterModal(oversiktType: string) {
+export function apneMineFilterModal(oversiktType: OversiktType) {
     return {
         type: APEN_MINE_FILTER_MODAL,
         name: oversiktType
     };
 }
 
-export function lukkMineFilterModal(oversiktType: string) {
+export function lukkMineFilterModal(oversiktType: OversiktType) {
     return {
         type: LUKK_MINE_FILTER_MODAL,
         name: oversiktType
     };
 }
-export function apneFeilTiltakModal(oversiktType: string) {
+export function apneFeilTiltakModal(oversiktType: OversiktType) {
     return {
         type: APNE_FEIL_TILTAK_MODAL,
         name: oversiktType
     };
 }
 
-export function lukkFeilTiltakModal(oversiktType: string) {
+export function lukkFeilTiltakModal(oversiktType: OversiktType) {
     return {
         type: LUKK_FEIL_TILTAK_MODAL,
         name: oversiktType
