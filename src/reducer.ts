@@ -38,8 +38,19 @@ import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-e
 import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 import huskelappReducer from './ducks/huskelapp';
 
-function named(name, reducer) {
-    return (state, action) => {
+/**
+ * Hjelpefunksjon for å conditionally kjøre reducere på en action
+ *
+ * Eksempel: `mineFilterMinOversikt: named(OversiktType.minOversikt, lagretFilterUIStateReducer)`. Her har man en
+ * state-slice `mineFilterMinOversikt` og en tilhørende reducer `lagretFilterUIStateReducer`. I dette tilfellet er
+ * `lagretFilterUIStateReducer` en generell reducer som brukes for flere state-slices. Derfor ønsker man ikke at
+ * `mineFilterMinOversikt` skal oppdateres dersom valgt oversikttype er `OversiktType.enhetensOversikt`.
+ *
+ * @param name Navnet på en oversikttype
+ * @param reducer Reduceren som denne funksjonen brukes i kombinasjon med
+ */
+function named(name: OversiktType, reducer: (action: {name: OversiktType} & any, type: any) => any) {
+    return (state: any, action: any) => {
         if (state === undefined) {
             // For å få satt initialState
             return reducer(state, action);
