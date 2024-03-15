@@ -83,7 +83,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.legg-i-arbeidsliste').should('not.exist');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
-        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+        cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.be.visible');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
                 antallMedArbeidslisteEtterOppretting += Cypress.$(ant).length;
@@ -104,7 +104,7 @@ describe('Arbeidsliste', () => {
             kommentar = $kommentar.text();
         });
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').should('be.visible').click();
 
@@ -118,7 +118,7 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.getByTestId('chevron_arbeidslisteinnhold_tittel').contains(redigertTittel);
 
@@ -153,7 +153,7 @@ describe('Arbeidsliste', () => {
 
         cy.apneArbeidslistePaPerson();
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
 
@@ -182,7 +182,7 @@ describe('Arbeidsliste', () => {
     it('Sjekk validering i rediger arbeidsliste-modal', () => {
         cy.apneArbeidslistePaPerson();
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
 
@@ -197,7 +197,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.lukkeArbeidslistePaPerson();
     });
@@ -205,7 +205,7 @@ describe('Arbeidsliste', () => {
     it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
         cy.apneArbeidslistePaPerson();
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
 
@@ -216,7 +216,7 @@ describe('Arbeidsliste', () => {
 
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
 
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
 
         cy.lukkeArbeidslistePaPerson();
 
@@ -234,7 +234,7 @@ describe('Arbeidsliste', () => {
     });
 
     it('Avbryt redigering, ingen endringer lagret', () => {
-        cy.get('.arbeidsliste-modal').should('not.exist');
+        cy.get('.arbeidsliste-modal').should('not.be.visible');
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
