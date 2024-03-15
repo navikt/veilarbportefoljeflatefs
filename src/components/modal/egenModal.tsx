@@ -1,7 +1,7 @@
 import React from 'react';
+import {Modal} from '@navikt/ds-react';
 import ModalHeader from './modal-header';
 import './modal.css';
-import {Modal} from '@navikt/ds-react';
 
 interface ModalProps {
     children: React.ReactNode;
@@ -14,10 +14,10 @@ interface ModalProps {
 function EgenModal({children, className, open = true, onClose, tittel}: ModalProps) {
     return (
         <Modal className={className} open={open} onClose={onClose}>
-            <Modal.Content>
+            <Modal.Body>
                 <ModalHeader tittel={tittel} />
                 <div className="modal-innhold">{children}</div>
-            </Modal.Content>
+            </Modal.Body>
         </Modal>
     );
 }

@@ -63,7 +63,6 @@ function MineFilterInnhold({
                         className="mine-filter_alertstripe"
                         data-testid="mine-filter_alertstripe"
                         size="small"
-                        closeButton={true}
                         onClose={() => dispatch(slettFilter(inaktiveFilter()[0].filterId))}
                     >
                         {`'${inaktiveFilter()[0].filterNavn}' er slettet fordi filteret '${

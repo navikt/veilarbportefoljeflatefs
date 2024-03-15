@@ -206,7 +206,7 @@ function Sidebar(props: SidebarProps) {
     };
 
     outsideClick(sidebarRef, () => {
-        if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'ReactModal__Body--open') {
+        if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()
             });
