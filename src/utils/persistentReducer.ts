@@ -15,6 +15,11 @@ export enum LocalStorageScope {
     VEILEDER_STATE = 'veilederState'
 }
 
+/**
+ * Leser data fra LocalStorage for et gitt scope.
+ *
+ * @param scope - Scope det skal leses fra.
+ */
 function read(scope: LocalStorageScope) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
@@ -23,6 +28,12 @@ function read(scope: LocalStorageScope) {
     return JSON.parse(content);
 }
 
+/**
+ * Skriver data til LocalStorage for et gitt scope.
+ *
+ * @param scope - Scope det skal skrives til.
+ * @param content - Data som skal skrives.
+ */
 function write(scope: LocalStorageScope, content: any) {
     return localStorage.setItem(scope, JSON.stringify(content));
 }
@@ -41,6 +52,17 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState) {
     );
 }
 
+/**
+ * Funksjon som forsøker å holde state for en gitt state-slice (gitt ved `reducer`-parameteret) i sync med LocalStorage.
+ * Dersom `state` (fra `reducer`-funksjonen) er `undefined`, vil den forsøke å lese fra LocalStorage. Dersom state endres
+ * (dvs. `reducer` returnerer en ny state), vil den forsøke å skrive dette til LocalStorage. Dersom `location.search`
+ * inneholder `clean` eller filtrering er endret, vil LocalStorage bli satt til `undefined`.
+ *
+ * @param scope - Scope det skal leses og skrives til i LocalStorage.
+ * @param location - URL-objektet som brukes for å sjekke om `clean` finnes i querystring.
+ * @param reducer - Reducer-funksjonen som skal brukes.
+ * @param initialFilterstate - Initial state for filtrering.
+ */
 export default function persistentReducer(
     scope: LocalStorageScope,
     location: Location,
@@ -48,20 +70,22 @@ export default function persistentReducer(
     initialFilterstate: any
 ) {
     return (state: any, action: Action & {name: OversiktType}) => {
-        let nState = state;
+        let eksisterendeState = state;
+
         if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {
             write(scope, undefined);
         }
+
         if (state === undefined) {
-            nState = read(scope);
+            eksisterendeState = read(scope);
         }
 
-        const rState = reducer(nState, action);
+        const stateResultatFraReducer = reducer(eksisterendeState, action);
 
-        if (rState !== nState) {
-            write(scope, rState);
+        if (stateResultatFraReducer !== eksisterendeState) {
+            write(scope, stateResultatFraReducer);
         }
 
-        return rState;
+        return stateResultatFraReducer;
     };
 }
