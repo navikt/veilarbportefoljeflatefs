@@ -194,9 +194,6 @@
 .veilarbportefoljeflatefs .toolbar .toggle__label {
     min-width: 3rem;
 }
-.veilarbportefoljeflatefs .toolbar #tildel-veileder-ikon {
-    margin-right: 0.3rem;
-}
 .veilarbportefoljeflatefs .toolbar-knapp__ikon {
     min-width: 1.5rem;
     min-height: 1.5rem;
@@ -256,41 +253,6 @@
     padding: 1rem 0.7rem;
     z-index: 2000;
     position: absolute;
-}
-.veilarbportefoljeflatefs .velgalle-checkboks {
-    color: #005b82;
-    padding: 0;
-    width: auto;
-}
-.veilarbportefoljeflatefs .velgalle-checkboks .skjemaelement__label {
-    margin-bottom: inherit;
-}
-.veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader {
-    /* Min-width er summen av: ikon-breidd: 1.2rem, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
-    min-width: calc(1.2rem + 1rem + 2px);
-    max-width: 4rem;
-    margin-top: 6px;
-    margin-left: 6px;
-}
-.veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader .navds-button {
-    min-width: 0;
-    width: 10px;
-    margin-left: 5px;
-}
-.veilarbportefoljeflatefs .huskelapper__sorteringsheader {
-    /* Min-width er summen av: ikon-breidd: 1.3em, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
-    min-width: calc(1.3em + 1rem + 2px);
-    max-width: 4rem;
-    margin-top: 6px;
-    margin-left: 5px;
-    .lenke svg {
-        width: 1.3em;
-        height: 1.3em;
-        stroke: none;
-    }
-}
-.veilarbportefoljeflatefs .huskelapper__sorteringsheader .navds-button {
-    min-width: 0;
 }
 .veilarbportefoljeflatefs .dropdown--toolbar {
     border-radius: 4px;

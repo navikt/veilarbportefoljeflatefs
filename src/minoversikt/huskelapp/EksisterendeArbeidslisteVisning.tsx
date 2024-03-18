@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const EksisterendeArbeidslisteVisning = ({arbeidsliste, onSlett}: Props) => (
-    <section className="eksisterendeArbeidslisteVisning">
+    <section className="eksisterende-arbeidslistevisning">
         <Heading size="small" level="1" className="blokk-xxs">
             Eksisterende arbeidslisteinnhold
         </Heading>

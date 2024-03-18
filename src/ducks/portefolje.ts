@@ -30,6 +30,7 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
+const OPPDATER_FARGEKATEGORI = 'veilarbportefolje/portefolje/FARGEKATEGORI';
 const OPPDATER_HUSKELAPP_BRUKER = 'veilarbportefolje/portefolje/HUSKELAPP_BRUKER';
 
 function lagBrukerGuid(bruker) {
@@ -159,6 +160,19 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
     });
 }
 
+function updateFargekategoriForBrukere(brukere, fargekategoridata) {
+    const tempBrukere = brukere.map(bruker => {
+        if (bruker.fnr === fargekategoridata.fnr) {
+            return {
+                ...bruker,
+                fargekategori: fargekategoridata.fargekategoriVerdi
+            };
+        }
+        return bruker;
+    });
+    return tempBrukere;
+}
+
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
@@ -275,6 +289,16 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 }
             };
         }
+        case OPPDATER_FARGEKATEGORI: {
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
+                }
+            };
+        }
+
         case OPPDATER_HUSKELAPP_BRUKER: {
             return {
                 ...state,
@@ -439,6 +463,19 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
             });
         });
     };
+}
+
+export function oppdaterFargekategoriAction(data, props) {
+    const fargekategoridata = {
+        fargekategoriVerdi: data,
+        fnr: props
+    };
+
+    return dispatch =>
+        dispatch({
+            type: OPPDATER_FARGEKATEGORI,
+            fargekategori: fargekategoridata
+        });
 }
 
 export function hentHuskelappForBruker(fodselsnummer: string, enhetId: string) {

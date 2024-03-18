@@ -37,6 +37,7 @@ export enum Sorteringsfelt {
     UTKAST_14A_STATUS_ENDRET = 'utkast_14a_status_endret',
     UTKAST_14A_ANSVARLIG_VEILEDER = 'utkast_14a_ansvarlig_veileder',
     ARBEIDSLISTEKATEGORI = 'arbeidslistekategori',
+    FARGEKATEGORI = 'fargekategori',
     SISTE_ENDRING = 'siste_endring_kategori',
     SISTE_ENDRING_DATO = 'siste_endring_tidspunkt',
     FODELAND = 'fodeland',
@@ -204,6 +205,7 @@ export interface BrukerModell {
 
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
+    fargekategori: FargekategoriModell | null;
     huskelapp?: HuskelappModell;
 }
 
@@ -235,6 +237,16 @@ export interface AktiviteterModell {
     mote?: string;
     tiltak?: string;
     gruppeaktivitet?: string;
+}
+
+export enum FargekategoriModell {
+    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
+    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
+    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
+    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
+    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
+    INGEN_KATEGORI = 'INGEN_KATEGORI'
 }
 
 export enum KategoriModell {
@@ -278,6 +290,11 @@ export interface ArbeidslisteDataModell {
     kommentar: string | null;
     frist: string | null;
     kategori: KategoriModell | null;
+}
+
+export interface FargekategoriDataModell {
+    fnr: string;
+    fargekategoriVerdi: FargekategoriModell;
 }
 
 export interface Systemmelding {

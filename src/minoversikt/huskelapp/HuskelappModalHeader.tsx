@@ -1,12 +1,10 @@
 import React from 'react';
 import {Heading} from '@navikt/ds-react';
-import {ReactComponent as HuskelappIkon} from './ikoner/huskelapp.svg';
+import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
 
 export const HuskelappModalHeader = () => (
-    <div className="huskelappModalHeader blokk-xs">
+    <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
         <HuskelappIkon />
-        <Heading size="medium" level="1">
-            Huskelapp
-        </Heading>
-    </div>
+        Huskelapp
+    </Heading>
 );
