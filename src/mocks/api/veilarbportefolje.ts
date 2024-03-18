@@ -14,7 +14,7 @@ import brukere, {
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell} from '../../model-interfaces';
+import {ArbeidslisteDataModell, FargekategoriModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
@@ -216,12 +216,27 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         })
     ),
     http.put(
-        '/veilarbportefolje/api/v1/fargekategori',
-        withAuth(async () => {
-            return HttpResponse.json({
-                fnr: '11111111111',
-                fargekategori: 'FARGEKATEGORI_A'
-            });
+        '/veilarbportefolje/api/v1/fargekategorier',
+        withAuth(async ({request}) => {
+            const oppdaterFargekategoriRequest = (await request.json()) as {
+                fnr: string[];
+                fargekategoriVerdi: FargekategoriModell;
+            };
+            const randomize = rnd(0, 1);
+            return randomize > 0.2
+                ? HttpResponse.json({
+                      data: oppdaterFargekategoriRequest.fnr,
+                      errors: [],
+                      fargekategoriVerdi: oppdaterFargekategoriRequest.fargekategoriVerdi
+                  })
+                : HttpResponse.json(
+                      {
+                          data: [],
+                          errors: oppdaterFargekategoriRequest.fnr,
+                          fargekategoriVerdi: oppdaterFargekategoriRequest.fargekategoriVerdi
+                      },
+                      {status: 403, statusText: 'Forbidden'}
+                  );
         })
     ),
     http.post(

@@ -3,8 +3,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
-import {oppdaterFargekategoriAction} from '../../ducks/portefolje';
-import {lagreFargekategoriAction} from '../../ducks/fargekategori';
+import {oppdaterFargekategoriAction, resetFargekategoriStateAction} from '../../ducks/fargekategori';
 import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {Button, Popover} from '@navikt/ds-react';
@@ -18,30 +17,24 @@ interface FargekategoriPopoverProps {
     children?: React.ReactNode;
 }
 
-export default function FargekategoriPopover({
+export const FargekategoriPopover = ({
     buttonRef,
     openState,
     setOpenState,
     fnrs,
     placement = 'right',
     children
-}: FargekategoriPopoverProps) {
+}: FargekategoriPopoverProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    //const {data: fargekategoriResponse} = useSelector((state: AppState) => state.fargekategori); //For å kunne hente ut feil og se hvilke fnr det feilet på
 
-    const doOppdaterFargekategori = (fnr, fargekategori) => {
+    const handleOppdaterFargekategori = (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
-            fnr: fnr,
+            fnr: fnrs,
             fargekategoriVerdi: fargekategori
         };
 
-        dispatch(lagreFargekategoriAction(data)).then(
-            dispatch(oppdaterFargekategoriAction(data.fargekategoriVerdi, data.fnr))
-        );
-    };
-
-    const sendOppdaterFargekategori = fargekategori => {
-        // TODO: Fjern valg av første element i liste når det er klart
-        doOppdaterFargekategori(fnrs[0], fargekategori);
+        oppdaterFargekategoriAction(data)(dispatch);
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {
@@ -52,7 +45,8 @@ export default function FargekategoriPopover({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 onClick={() => {
-                    sendOppdaterFargekategori(fargekategori);
+                    handleOppdaterFargekategori(fargekategori);
+                    dispatch(resetFargekategoriStateAction());
                     setOpenState(false);
                 }}
             />
@@ -63,7 +57,10 @@ export default function FargekategoriPopover({
         <Popover
             anchorEl={buttonRef.current}
             open={openState}
-            onClose={() => setOpenState(false)}
+            onClose={() => {
+                dispatch(resetFargekategoriStateAction());
+                setOpenState(false);
+            }}
             placement={placement}
         >
             <Popover.Content>
@@ -78,4 +75,4 @@ export default function FargekategoriPopover({
             </Popover.Content> */}
         </Popover>
     );
-}
+};

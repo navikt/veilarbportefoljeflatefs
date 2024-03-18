@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {ReactComponent as FargekategoriIkonBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {BodyShort, Button} from '@navikt/ds-react';
-import FargekategoriPopover from '../fargekategori/fargekategori-popover';
+import {FargekategoriPopover} from '../fargekategori/fargekategori-popover';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];
