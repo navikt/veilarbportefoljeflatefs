@@ -37,7 +37,7 @@ interface FiltreringLabelContainerProps {
         slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
     };
     filtervalg: FiltervalgModell;
-    oversiktType: string;
+    oversiktType: OversiktType;
     listevisning?: ListevisningState;
     className: string;
 }

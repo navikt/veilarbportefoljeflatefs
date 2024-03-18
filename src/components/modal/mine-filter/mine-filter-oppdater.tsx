@@ -17,7 +17,7 @@ import {Button, TextField} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 
 interface OppdaterMineFilterProps {
-    oversiktType: string;
+    oversiktType: OversiktType;
     lukkModal: () => void;
     gammeltFilterNavn: string;
     filterId: number;
