@@ -39,7 +39,7 @@ const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
 const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil);
 
 interface Props {
-    oversiktType: string;
+    oversiktType: OversiktType;
 }
 
 export function MineFilterModal({oversiktType}: Props) {
