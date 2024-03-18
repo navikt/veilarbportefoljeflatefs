@@ -505,3 +505,15 @@ const hentRandomAktivitetsplikt = () => {
 };
 
 export const brukere = new Array(123).fill(0).map(() => lagBruker());
+
+export const testperson_uten_arbeidsliste = lagBruker();
+testperson_uten_arbeidsliste.arbeidsliste = {
+    kommentar: null,
+    frist: null,
+    isOppfolgendeVeileder: null,
+    arbeidslisteAktiv: false,
+    sistEndretAv: {},
+    kategori: null
+};
+testperson_uten_arbeidsliste.fornavn = 'Aase';
+testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';
