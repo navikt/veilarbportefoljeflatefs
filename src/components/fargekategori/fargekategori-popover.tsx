@@ -1,13 +1,13 @@
 import React from 'react';
-import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import {FargekategorierDataModell, FargekategoriModell} from '../../model-interfaces';
 import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
-import {oppdaterFargekategoriThunk} from '../../minoversikt/oppdaterFargekategori';
 import {STATUS} from '../../ducks/utils';
+import {lagreFargekategoriAction} from '../../ducks/fargekategori';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -30,12 +30,12 @@ export default function FargekategoriPopover({
 
     // TODO: Hvis en bytter til v1/fargekategorier, må en sende med liste av fnr
     const sendOppdaterFargekategori = async (fnr, fargekategori) => {
-        const data: FargekategoriDataModell = {
-            fnr: fnr,
+        const data: FargekategorierDataModell = {
+            fnr: [fnr],
             fargekategoriVerdi: fargekategori
         };
 
-        await oppdaterFargekategoriThunk(dispatch, data);
+        dispatch(lagreFargekategoriAction(data));
     };
 
     const fargekategoriknapper = Object.entries(FargekategoriModell).map(([key, fargekategori]) => {

@@ -14,7 +14,7 @@ import brukere, {
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell} from '../../model-interfaces';
+import {ArbeidslisteDataModell, FargekategoriModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
@@ -237,10 +237,15 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     ),
     http.put(
         '/veilarbportefolje/api/v1/fargekategorier',
-        withAuth(async () => {
+        withAuth(async ({request}) => {
+            const oppdaterFargekategorierRequest = (await request.json()) as {
+                fnr: string[];
+                fargekategoriVerdi: FargekategoriModell.FARGEKATEGORI_A;
+            };
             return HttpResponse.json({
-                ok: ['00000123458'],
-                error: ['00000123459']
+                data: oppdaterFargekategorierRequest.fnr,
+                error: ['00000123459'],
+                fargekategoriVerdi: oppdaterFargekategorierRequest.fargekategoriVerdi
             });
         })
     ),

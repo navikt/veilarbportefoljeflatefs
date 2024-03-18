@@ -297,6 +297,11 @@ export interface FargekategoriDataModell {
     fargekategoriVerdi: FargekategoriModell;
 }
 
+export interface FargekategorierDataModell {
+    fnr: string[];
+    fargekategoriVerdi: FargekategoriModell;
+}
+
 export interface Systemmelding {
     tittel: string;
     type: 'error' | 'warning' | 'info' | 'success';

@@ -1,5 +1,5 @@
 import {doThenDispatch, STATUS} from './utils';
-import {oppdaterFargekategori} from '../middleware/api';
+import {oppdaterFargekategorier} from '../middleware/api';
 
 // Actions
 export const FARGEKATEGORI_REDIGER_OK = 'veilarbportefolje/oppdater_fargekategori/OK';
@@ -33,7 +33,7 @@ export default function fargekategoriReducer(state = initialState, action) {
 // Action Creators
 
 export function lagreFargekategoriAction(fargekategori) {
-    return doThenDispatch(() => oppdaterFargekategori(fargekategori), {
+    return doThenDispatch(() => oppdaterFargekategorier(fargekategori), {
         OK: FARGEKATEGORI_REDIGER_OK,
         FEILET: FARGEKATEGORI_REDIGER_FEILET,
         PENDING: FARGEKATEGORI_REDIGER_PENDING

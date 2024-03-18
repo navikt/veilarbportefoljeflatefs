@@ -10,7 +10,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
+import {FARGEKATEGORIER, HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
@@ -51,6 +51,7 @@ function MinoversiktBrukerPanel({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+    const erFargekategoriFeatureTogglePa = useFeatureSelector()(FARGEKATEGORIER);
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xPos') || '0');
@@ -110,13 +111,13 @@ function MinoversiktBrukerPanel({
                     >
                         {''}
                     </Checkbox>
-                    {!erHuskelappFeatureTogglePa && (
+                    {!erFargekategoriFeatureTogglePa && (
                         <ArbeidslistekategoriVisning
                             kategori={bruker.arbeidsliste?.kategori}
                             dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                         />
                     )}
-                    {erHuskelappFeatureTogglePa && <FargekategoriTabellradKnapp bruker={bruker} />}
+                    {erFargekategoriFeatureTogglePa && <FargekategoriTabellradKnapp bruker={bruker} />}
                     {erHuskelappFeatureTogglePa && <HuskelappIkonInngang bruker={bruker} />}
                 </div>
                 <MinOversiktKolonner

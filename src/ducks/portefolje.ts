@@ -163,7 +163,7 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 
 function updateFargekategoriForBrukere(brukere, fargekategoridata) {
     return brukere.map(bruker => {
-        if (bruker.fnr === fargekategoridata.fnr) {
+        if (fargekategoridata.data.some(f => f === bruker.fnr)) {
             return {
                 ...bruker,
                 fargekategori: fargekategoridata.fargekategoriVerdi
