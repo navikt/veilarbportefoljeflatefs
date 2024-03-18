@@ -1,27 +1,28 @@
-import * as React from 'react';
-import {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
+import React, {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import MinOversiktKolonner from './minoversikt-kolonner';
 import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {OrNothing} from '../utils/types/types';
-import './minoversikt.css';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {Collapse} from 'react-collapse';
-import {Checkbox, Tag} from '@navikt/ds-react';
-import {HuskelappPanel} from './huskelapp/HuskelappPanel';
-import {hentHuskelappForBruker} from '../ducks/portefolje';
-import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../reducer';
+
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../reducer';
+import {hentHuskelappForBruker} from '../ducks/portefolje';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
+import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
+import {HuskelappPanel} from './huskelapp/HuskelappPanel';
+import {Checkbox, Tag} from '@navikt/ds-react';
+import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -46,7 +47,7 @@ function MinoversiktBrukerPanel({
     hentArbeidslisteForBruker,
     onClick
 }: MinOversiktBrukerPanelProps) {
-    const [apen, setOpen] = useState<boolean>(false);
+    const [apen, setApen] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -70,13 +71,13 @@ function MinoversiktBrukerPanel({
 
     useEffect(() => {
         if (!(arbeidslisteAktiv || (erHuskelappFeatureTogglePa && !!bruker.huskelapp))) {
-            setOpen(false);
+            setApen(false);
         }
     }, [arbeidslisteAktiv, erHuskelappFeatureTogglePa, bruker.huskelapp]);
 
     function handleArbeidslisteButtonClick(event) {
         event.preventDefault();
-        setOpen(!apen);
+        setApen(!apen);
         logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
         if (onClick) {
             onClick(event);
@@ -95,26 +96,31 @@ function MinoversiktBrukerPanel({
             data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
         >
             <div className="brukerliste__element">
-                <div className="brukerliste__gutter-left brukerliste--min-width-minside">
-                    <Checkbox
-                        className="brukerliste__checkbox"
-                        checked={bruker.markert}
-                        data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
-                        disabled={bruker.fnr === ''}
-                        hideLabel
-                        onChange={() => {
-                            settMarkert(bruker.fnr, !bruker.markert);
-                        }}
-                        size="small"
-                    >
-                        {''}
-                    </Checkbox>
+                <Checkbox
+                    className="brukerliste__checkbox"
+                    checked={bruker.markert}
+                    data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                    disabled={bruker.fnr === ''}
+                    hideLabel
+                    onChange={() => {
+                        settMarkert(bruker.fnr, !bruker.markert);
+                    }}
+                    size="small"
+                >
+                    {''}
+                </Checkbox>
+                {!erHuskelappFeatureTogglePa && (
                     <ArbeidslistekategoriVisning
                         kategori={bruker.arbeidsliste?.kategori}
                         dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
-                    {erHuskelappFeatureTogglePa && <HuskelappIkonInngang bruker={bruker} />}
-                </div>
+                )}
+                {erHuskelappFeatureTogglePa && (
+                    <div className="brukerliste__minoversikt-ikonknapper">
+                        <FargekategoriTabellradKnapp bruker={bruker} />
+                        <HuskelappIkonInngang bruker={bruker} />
+                    </div>
+                )}
                 <MinOversiktKolonner
                     className="brukerliste__innhold flex flex--center"
                     bruker={bruker}

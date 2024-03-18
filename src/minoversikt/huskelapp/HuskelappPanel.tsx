@@ -23,7 +23,7 @@ export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
     };
 
     return (
-        <div className="huskelappPanel">
+        <div className="huskelapp-panel">
             {bruker.huskelapp ? (
                 <HuskelappPanelvisning huskelapp={bruker.huskelapp as HuskelappModell} bruker={bruker} />
             ) : (

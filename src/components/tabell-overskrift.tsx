@@ -22,7 +22,6 @@ function TabellOverskrift({className}: Props) {
     const tilIndex = fraIndex + antallReturnert;
 
     const maksBrukere = tilIndex > antallTotalt ? antallTotalt : tilIndex;
-
     const enEllerFlereBrukere =
         antallTotalt <= sidestorrelse
             ? `${maksBrukere}`

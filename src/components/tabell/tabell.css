@@ -2,10 +2,7 @@
     display: grid;
     grid-template-columns: fit-content(100%) auto;
 }
-.veilarbportefoljeflatefs .sorteringheader__lenke {
-    grid-column: 1;
-}
-.veilarbportefoljeflatefs .sorteringheader__lenke button span {
+.veilarbportefoljeflatefs .sorteringheader button span {
     font-weight: normal;
 }
 .veilarbportefoljeflatefs .sorteringheader__pil {
@@ -14,6 +11,21 @@
     grid-column: 2;
     float: left;
     margin: 2px 0 0 2px;
+}
+
+.veilarbportefoljeflatefs .sorteringspil {
+    color: var(--a-icon-default);
+    width: 0.667em;
+}
+
+.veilarbportefoljeflatefs .huskelapp__sorteringsheader .sorteringspil {
+    margin-left: var(--a-spacing-1);
+}
+
+.veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader {
+    /* Min-width er summen av: ikon-breidd: 1.2rem, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
+    min-width: calc(1.2rem + 1rem + 2px);
+    margin-left: var(--a-spacing-2);
 }
 
 .veilarbportefoljeflatefs .tomt-arbeidslisteikon {

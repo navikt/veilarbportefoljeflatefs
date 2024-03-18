@@ -1,4 +1,4 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {FargekategoriDataModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
@@ -39,7 +39,6 @@ export interface SessionMeta {
     tokens?: Tokens;
 }
 
-export const AUTH_URL = '/auth/info';
 export const VEILARBVEILEDER_URL = '/veilarbveileder';
 export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
@@ -229,6 +228,12 @@ export function oppdaterArbeidsliste(arbeidsliste, fnr) {
 export function slettArbeidsliste(arbeidsliste) {
     const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
     const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
+    return fetchToJson(url, config);
+}
+
+export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
+    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
     return fetchToJson(url, config);
 }
 
