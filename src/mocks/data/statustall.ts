@@ -1,4 +1,4 @@
-import portefolje from './portefolje';
+import {brukere as portefolje} from './portefolje';
 
 export const statustallVeileder = {
     statustall: {

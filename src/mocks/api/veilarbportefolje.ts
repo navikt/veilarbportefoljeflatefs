@@ -6,7 +6,8 @@ import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
-import brukere, {
+import {
+    brukere,
     hentArbeidsliste,
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,

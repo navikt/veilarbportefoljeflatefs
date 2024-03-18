@@ -504,4 +504,4 @@ const hentRandomAktivitetsplikt = () => {
     return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
 };
 
-export default new Array(123).fill(0).map(() => lagBruker());
+export const brukere = new Array(123).fill(0).map(() => lagBruker());
