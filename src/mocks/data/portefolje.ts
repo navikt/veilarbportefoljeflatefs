@@ -132,7 +132,7 @@ function lagVedtakUtkast() {
     };
 }
 
-const tomArbeidsliste = {
+export const tomArbeidsliste = {
     kommentar: null,
     frist: null,
     isOppfolgendeVeileder: null,
