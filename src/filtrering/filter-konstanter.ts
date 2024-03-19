@@ -134,7 +134,7 @@ export const ferdigfilterListeLabelTekst = {
     FARGEKATEGORI_D: 'Gul',
     FARGEKATEGORI_E: 'Oransje',
     FARGEKATEGORI_F: 'Lyseblå',
-    INGEN_KATEGORI: 'Ingen farge'
+    INGEN_KATEGORI: 'Ingen kategori'
 };
 
 export const arbeidslisteKategori = {
@@ -151,7 +151,7 @@ export const fargekategorier = {
     FARGEKATEGORI_D: 'Gul',
     FARGEKATEGORI_E: 'Lyseblå',
     FARGEKATEGORI_F: 'Oransje',
-    INGEN_KATEGORI: 'Ingen farge'
+    INGEN_KATEGORI: 'Ingen kategori'
 };
 
 export const alder = {

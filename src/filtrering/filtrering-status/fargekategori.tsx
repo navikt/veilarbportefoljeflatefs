@@ -141,7 +141,7 @@ function FilterStatusMineFargekategorier() {
                         labelTekst={
                             <span className="fargekategoriikon--label">
                                 <FargekategoriIngen className="fargekategoriikon" />
-                                <span>Ingen farge</span>
+                                <span>Ingen kategori</span>
                             </span>
                         }
                         filterNavn="mineFargekategorierIngenKategori"
