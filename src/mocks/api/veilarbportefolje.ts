@@ -6,11 +6,13 @@ import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
-import brukere, {
+import {
+    brukere,
     hentArbeidsliste,
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,
-    hentMockPlan
+    hentMockPlan,
+    testperson_uten_arbeidsliste
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
@@ -44,6 +46,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
+        } else if (index == 2) {
+            return testperson_uten_arbeidsliste;
         }
         return bruker;
     });
