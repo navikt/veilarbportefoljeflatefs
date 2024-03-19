@@ -55,16 +55,21 @@ describe('Arbeidsliste', () => {
         // Lagrar ikkje arbeidslista i denne testen
     });
 
-    it('Lagre fornavn', () => {
+    it('Lagre fornavn til valgt bruker', () => {
         cy.getByTestId('modal_legg-i-arbeidsliste_navn').then($navn => {
             fornavn = $navn.text().split(' ')[0];
         });
     });
 
     it('Lagre ny arbeidsliste', () => {
+        // Lagre innholdet som vart skrive inn i test "Lag én ny arbeidsliste og sjekk validering"
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
+
+        // Laster-modal
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+
+        // Sjekk at brukaren er i lista
         cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first();
     });
@@ -80,24 +85,35 @@ describe('Arbeidsliste', () => {
     });
 
     it('Lag to nye arbeidslister', () => {
+        // Vel fyrste og siste brukar i arbeidslista
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
 
+        // Opne legg-til-i-arbeidsliste-modal
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
         cy.get('.legg-i-arbeidsliste_modal').should('be.visible');
 
+        // Fyll ut innhald for fyrste brukar
         cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
         cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
 
+        // Fyll ut innhald for andre brukar
         cy.getByTestId('modal_arbeidsliste_tittel_1').type('heiheihei hallå');
         cy.getByTestId('modal_arbeidsliste_kommentar_1').type('Team Voff er best i test hehehe');
+
+        // Lagre arbeidslistene
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
+
+        // Sjekk at modal er lukka og laster-modal fungerer
         cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+
+        // Sjekk at det no er 2 fleire personar med arbeidsliste
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .then(ant => {
                 antallMedArbeidslisteEtterOppretting += Cypress.$(ant).length;
