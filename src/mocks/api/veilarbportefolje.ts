@@ -37,7 +37,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
     const antallInt = isNaN(maybeAntal) ? alleBrukere.length : maybeAntal;
 
     const filtrerteBrukere = alleBrukere.slice(fraInt, fraInt + antallInt).map((bruker, index) => {
-        iiif (index < 2) {
+        if (index < 2) {
             bruker.fnr = '';
             bruker.fornavn = '';
             bruker.etternavn = '';
