@@ -49,7 +49,7 @@ export const FARGEKATEGORI_C = FargekategoriModell.FARGEKATEGORI_C;
 export const FARGEKATEGORI_D = FargekategoriModell.FARGEKATEGORI_D;
 export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
 export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
-export const FARGEKATEGORI_INGEN_KATEGORI = FargekategoriModell.FARGEKATEGORI_INGEN_KATEGORI;
+export const INGEN_KATEGORI = FargekategoriModell.INGEN_KATEGORI;
 export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_A,
     FARGEKATEGORI_B,
@@ -57,7 +57,7 @@ export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_D,
     FARGEKATEGORI_E,
     FARGEKATEGORI_F,
-    FARGEKATEGORI_INGEN_KATEGORI
+    INGEN_KATEGORI
 ] as const;
 
 export const mapFilternavnTilFilterValue = {
@@ -97,7 +97,7 @@ export const mapFilternavnTilFilterValue = {
     mineFargekategorierD: FARGEKATEGORI_D,
     mineFargekategorierE: FARGEKATEGORI_E,
     mineFargekategorierF: FARGEKATEGORI_F,
-    mineFargekategorierIngenKategori: FARGEKATEGORI_INGEN_KATEGORI
+    mineFargekategorierIngenKategori: INGEN_KATEGORI
 };
 
 export const filterSomIkkeSkalSendesTilBackend = [
@@ -134,7 +134,7 @@ export const ferdigfilterListeLabelTekst = {
     FARGEKATEGORI_D: 'Gul',
     FARGEKATEGORI_E: 'Oransje',
     FARGEKATEGORI_F: 'Lyseblå',
-    FARGEKATEGORI_INGEN_KATEGORI: 'Ingen farge'
+    INGEN_KATEGORI: 'Ingen farge'
 };
 
 export const arbeidslisteKategori = {
@@ -151,7 +151,7 @@ export const fargekategorier = {
     FARGEKATEGORI_D: 'Gul',
     FARGEKATEGORI_E: 'Lyseblå',
     FARGEKATEGORI_F: 'Oransje',
-    FARGEKATEGORI_INGEN_KATEGORI: 'Ingen farge'
+    INGEN_KATEGORI: 'Ingen farge'
 };
 
 export const alder = {

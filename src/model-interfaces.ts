@@ -256,16 +256,6 @@ export enum KategoriModell {
     GUL = 'GUL'
 }
 
-export enum FargekategoriModell {
-    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
-    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
-    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
-    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
-    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
-    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
-    FARGEKATEGORI_INGEN_KATEGORI = 'FARGEKATEGORI_INGEN_KATEGORI'
-}
-
 export interface ArbeidslisteModell {
     kommentar?: string;
     overskrift?: string;

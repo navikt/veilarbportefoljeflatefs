@@ -15,7 +15,7 @@ import {
     FARGEKATEGORI_D,
     FARGEKATEGORI_E,
     FARGEKATEGORI_F,
-    FARGEKATEGORI_INGEN_KATEGORI,
+    INGEN_KATEGORI,
     ferdigfilterListeLabelTekst,
     MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
@@ -150,7 +150,7 @@ function FilterStatusMineFargekategorier() {
                         }
                         filterNavn="mineFargekategorierIngenKategori"
                         handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_INGEN_KATEGORI)}
+                        checked={fargekategoriFilter.includes(INGEN_KATEGORI)}
                         antall={statusTall.fargekategoriIngenKategori}
                     />
                 </div>
