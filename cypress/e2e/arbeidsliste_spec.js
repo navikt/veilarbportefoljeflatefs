@@ -194,6 +194,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Tittelen kan ikke være lenger enn 30 tegn.');
         cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
+        
         cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
