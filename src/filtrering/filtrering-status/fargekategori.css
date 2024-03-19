@@ -4,6 +4,10 @@
     margin-right: 0.5rem;
 }
 
-.veilarbportefoljeflatefs .fargekategoriikon--container {
+.veilarbportefoljeflatefs .fargekategoriikon--label {
     display: flex;
+}
+
+.veilarbportefoljeflatefs .fargekategorier--underfilter {
+    margin-left: 1.5rem;
 }

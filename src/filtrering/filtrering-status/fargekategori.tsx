@@ -64,13 +64,13 @@ function FilterStatusMineFargekategorier() {
                 indeterminate={hovedfilterIndeterminate}
             />
             {(hovedfilterChecked || hovedfilterIndeterminate) && (
-                <div className="minArbeidsliste__kategori-checkboxwrapper">
+                <div className="fargekategorier--underfilter">
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriBla className="fargekategoriikon" />
                                 <span>Blå</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierA"
                         handleChange={handleUnderfilterEndret}
@@ -79,10 +79,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriGronn className="fargekategoriikon" />
                                 <span>Grønn</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierB"
                         handleChange={handleUnderfilterEndret}
@@ -91,10 +91,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriLilla className="fargekategoriikon" />
                                 <span>Lilla</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierC"
                         handleChange={handleUnderfilterEndret}
@@ -103,10 +103,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriGul className="fargekategoriikon" />
                                 <span>Gul</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierD"
                         handleChange={handleUnderfilterEndret}
@@ -115,10 +115,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriLysebla className="fargekategoriikon" />
                                 <span>Lyseblå</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierE"
                         handleChange={handleUnderfilterEndret}
@@ -127,10 +127,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriOransje className="fargekategoriikon" />
                                 <span>Oransje</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierF"
                         handleChange={handleUnderfilterEndret}
@@ -139,10 +139,10 @@ function FilterStatusMineFargekategorier() {
                     />
                     <BarInputCheckbox
                         labelTekst={
-                            <>
+                            <span className="fargekategoriikon--label">
                                 <FargekategoriIngen className="fargekategoriikon" />
                                 <span>Ingen farge</span>
-                            </>
+                            </span>
                         }
                         filterNavn="mineFargekategorierIngenKategori"
                         handleChange={handleUnderfilterEndret}
