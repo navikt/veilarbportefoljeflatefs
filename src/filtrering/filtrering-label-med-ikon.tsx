@@ -1,34 +1,32 @@
-import React from 'react';
-import {lagConfig} from './filter-konstanter';
+import React, {MouseEvent} from 'react';
 import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter-ikon.svg';
-import {MouseEvent} from 'react';
 import classNames from 'classnames';
 import './filtrering-label.css';
 import './filtrering-skjema.css';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
-import {KategoriModell} from '../model-interfaces';
 import {Button} from '@navikt/ds-react';
 
-interface FiltreringLabelArbeidslisteProps {
-    label: string | {label: string};
+interface FiltreringLabelMedIkonProps {
+    label: string;
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
     harMuligMenIkkeValgtKolonne?: boolean;
-    kategori: KategoriModell;
+    ikon: React.ReactNode;
+    tittel: string;
 }
 
-function FiltreringLabelArbeidsliste({
+function FiltreringLabelMedIkon({
     label,
     slettFilter,
     harMuligMenIkkeValgtKolonne = false,
-    kategori
-}: FiltreringLabelArbeidslisteProps) {
+    ikon,
+    tittel
+}: FiltreringLabelMedIkonProps) {
     const buttonClassnames = classNames('filtreringlabel', {
         'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne
     });
     return (
         <Button
             size="small"
-            title={`Arbeidslistekategori ${lagConfig(label).label}`}
+            title={tittel}
             aria-label="Slett filter"
             className={buttonClassnames}
             onClick={slettFilter}
@@ -36,11 +34,11 @@ function FiltreringLabelArbeidsliste({
             iconPosition="right"
         >
             <span className="filtreringlabel__container">
-                <ArbeidslistekategoriVisning kategori={kategori} />
-                {lagConfig(label).label}
+                {ikon}
+                {label}
             </span>
         </Button>
     );
 }
 
-export default FiltreringLabelArbeidsliste;
+export default FiltreringLabelMedIkon;

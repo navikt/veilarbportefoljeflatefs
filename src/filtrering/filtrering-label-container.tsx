@@ -26,9 +26,11 @@ import {
 } from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
-import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
+import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -175,14 +177,27 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'arbeidslisteKategori' || key === 'fargekategorier') {
+            } else if (key === 'arbeidslisteKategori') {
                 return value.map(singleValue => {
                     return (
-                        <FiltreringLabelArbeidsliste
+                        <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={FilterKonstanter[key][singleValue]}
+                            label={FilterKonstanter.arbeidslisteKategori[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
-                            kategori={singleValue}
+                            ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
+                            tittel={`Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}`}
+                        />
+                    );
+                });
+            } else if (key === 'fargekategorier') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabelMedIkon
+                            key={singleValue}
+                            label={FilterKonstanter.fargekategorier[singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                            ikon={fargekategoriIkonMapper(singleValue, 'fargekategoriikon')}
+                            tittel={`Kategori ${FilterKonstanter.fargekategorier[singleValue]}`}
                         />
                     );
                 });
