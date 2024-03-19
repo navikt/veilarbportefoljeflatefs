@@ -293,7 +293,7 @@ export interface ArbeidslisteDataModell {
 }
 
 export interface FargekategoriDataModell {
-    fnr: string;
+    fnr: string[];
     fargekategoriVerdi: FargekategoriModell;
 }
 
