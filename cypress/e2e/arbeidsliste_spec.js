@@ -126,11 +126,12 @@ describe('Arbeidsliste', () => {
     it('Rediger arbeidsliste', () => {
         cy.apneArbeidslistePaPerson();
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
+
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then($tittel => {
             tittel = $tittel.text();
         });
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
         });
 
@@ -150,9 +151,9 @@ describe('Arbeidsliste', () => {
 
         cy.get('.arbeidsliste-modal').should('not.exist');
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').contains(redigertTittel);
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').contains(redigertTittel);
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').contains(redigertKommentar);
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').contains(redigertKommentar);
     });
 
     it('Slett arbeidsliste via fjern-knapp', () => {
@@ -255,10 +256,10 @@ describe('Arbeidsliste', () => {
     it('Lagre tittel og kommentar', () => {
         cy.apneArbeidslistePaPerson();
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').then($tittel => {
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then($tittel => {
             tittel = $tittel.text();
         });
-        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').then($kommentar => {
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then($kommentar => {
             kommentar = $kommentar.text();
         });
     });
@@ -272,8 +273,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
         cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
-        cy.getByTestId('chevron_arbeidslisteinnhold_tittel').should('contain', tittel);
-        cy.getByTestId('chevron_arbeidslisteinnhold_kommentar').should('contain', kommentar);
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittel);
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentar);
 
         cy.lukkeArbeidslistePaPerson();
     });
