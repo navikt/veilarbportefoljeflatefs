@@ -4,7 +4,7 @@ import {toDatePrettyPrint} from '../../utils/dato-utils';
 import {HuskelappModell} from '../../model-interfaces';
 import {BodyShort, Detail, Heading} from '@navikt/ds-react';
 
-interface Pourops {
+interface Props {
     huskelapp: HuskelappModell;
     className?: string;
     children?: React.ReactNode;
