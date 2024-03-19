@@ -109,7 +109,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     return (
         <>
             <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
-                <Modal.Content>
+                <Modal.Body>
                     <div className="advarsel-modal">
                         <Heading size="large" level="2">
                             Arbeidslistenotat blir slettet
@@ -167,7 +167,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             Ja, tildel veilederen
                         </Button>
                     </div>
-                </Modal.Content>
+                </Modal.Body>
             </Modal>
 
             <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>

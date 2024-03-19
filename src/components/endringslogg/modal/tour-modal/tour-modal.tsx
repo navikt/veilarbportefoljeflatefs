@@ -42,7 +42,7 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
 
     return (
         <Modal className={'tour-modal'} open={open} onClose={lukkModal}>
-            <Modal.Content>
+            <Modal.Body>
                 <div className={'tour-modal__header--wrapper'} data-testid="endringslogg_tour-modal">
                     <header className={'tour-modal__header'}>
                         <Heading size="medium" level="1">
@@ -94,7 +94,7 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
                         dataTestId={isFinalStep ? 'endringslogg_ferdig-knapp' : 'endringslogg_neste-knapp'}
                     />
                 </footer>
-            </Modal.Content>
+            </Modal.Body>
         </Modal>
     );
 };
