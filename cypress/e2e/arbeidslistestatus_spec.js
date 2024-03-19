@@ -25,12 +25,13 @@ describe('Filter min arbeidsliste', () => {
         });
 
         // Nullstill valg av filter "min arbeidsliste"
-        cy.scrollTo('top')
+        cy.scrollTo('top');
         cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
 
         // Vel ein brukar som skal leggast til i arbeidsliste
-        cy.scrollTo('top')
+        cy.scrollTo('top');
+        cy.wait(200);
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
 
         // Legg dei til i arbeidslista
