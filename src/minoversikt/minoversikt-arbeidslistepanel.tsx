@@ -40,11 +40,11 @@ export default function ArbeidslistePanel({
             <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
             {apen && (
                 <span className={'brukerliste__arbeidslisteinnhold flex--grow'}>
-                    <Label data-testid="chevron_arbeidslisteinnhold_tittel">{overskrift}</Label>
+                    <Label data-testid="arbeidslistepanel_arbeidslisteinnhold_tittel">{overskrift}</Label>
                     <Detail className="brukerliste__arbeidslisteinnhold_frist">
                         Arbeidsliste frist: {arbeidslisteFristTekst}
                     </Detail>
-                    <BodyShort size="small" data-testid="chevron_arbeidslisteinnhold_kommentar">
+                    <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
                         {kommentar}
                     </BodyShort>
                     {!bruker.arbeidsliste.hentetKommentarOgTittel && (

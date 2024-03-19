@@ -12,7 +12,9 @@ import {
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,
     hentMockPlan,
-    testperson_uten_arbeidsliste
+    testperson_uten_arbeidsliste,
+    testperson_uten_arbeidsliste2,
+    tomArbeidsliste
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
@@ -46,8 +48,11 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
+            bruker.arbeidsliste = tomArbeidsliste;
         } else if (index === 2) {
             return testperson_uten_arbeidsliste;
+        } else if (index === fraInt + antallInt - 1) {
+            return testperson_uten_arbeidsliste2;
         }
         return bruker;
     });
