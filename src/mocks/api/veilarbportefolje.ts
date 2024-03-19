@@ -6,15 +6,17 @@ import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
-import brukere, {
+import {
+    brukere,
     hentArbeidsliste,
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,
-    hentMockPlan
+    hentMockPlan,
+    testperson_uten_arbeidsliste
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell} from '../../model-interfaces';
+import {ArbeidslisteDataModell, FargekategoriModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
@@ -44,6 +46,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
+        } else if (index === 2) {
+            return testperson_uten_arbeidsliste;
         }
         return bruker;
     });
@@ -216,12 +220,27 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         })
     ),
     http.put(
-        '/veilarbportefolje/api/v1/fargekategori',
-        withAuth(async () => {
-            return HttpResponse.json({
-                fnr: '11111111111',
-                fargekategori: 'FARGEKATEGORI_A'
-            });
+        '/veilarbportefolje/api/v1/fargekategorier',
+        withAuth(async ({request}) => {
+            const oppdaterFargekategoriRequest = (await request.json()) as {
+                fnr: string[];
+                fargekategoriVerdi: FargekategoriModell;
+            };
+            const randomize = rnd(0, 1);
+            return randomize > 0.2
+                ? HttpResponse.json({
+                      data: oppdaterFargekategoriRequest.fnr,
+                      errors: [],
+                      fargekategoriVerdi: oppdaterFargekategoriRequest.fargekategoriVerdi
+                  })
+                : HttpResponse.json(
+                      {
+                          data: [],
+                          errors: oppdaterFargekategoriRequest.fnr,
+                          fargekategoriVerdi: oppdaterFargekategoriRequest.fargekategoriVerdi
+                      },
+                      {status: 403, statusText: 'Forbidden'}
+                  );
         })
     ),
     http.post(

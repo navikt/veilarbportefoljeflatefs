@@ -13,6 +13,7 @@ import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall-enhet';
 import {toJson} from '../middleware/api';
+import {FARGEKATEGORI_OPPDATER_OK} from './fargekategori';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';
@@ -30,7 +31,6 @@ const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_F
 const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
 const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
 const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
-const OPPDATER_FARGEKATEGORI = 'veilarbportefolje/portefolje/FARGEKATEGORI';
 const OPPDATER_HUSKELAPP_BRUKER = 'veilarbportefolje/portefolje/HUSKELAPP_BRUKER';
 
 function lagBrukerGuid(bruker) {
@@ -161,8 +161,8 @@ function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
 }
 
 function updateFargekategoriForBrukere(brukere, fargekategoridata) {
-    const tempBrukere = brukere.map(bruker => {
-        if (bruker.fnr === fargekategoridata.fnr) {
+    return brukere.map(bruker => {
+        if (fargekategoridata.data.some(f => f === bruker.fnr)) {
             return {
                 ...bruker,
                 fargekategori: fargekategoridata.fargekategoriVerdi
@@ -170,7 +170,6 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
         }
         return bruker;
     });
-    return tempBrukere;
 }
 
 export default function portefoljeReducer(state = initialState, action): PortefoljeState {
@@ -289,16 +288,15 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                 }
             };
         }
-        case OPPDATER_FARGEKATEGORI: {
+        case FARGEKATEGORI_OPPDATER_OK: {
             return {
                 ...state,
                 data: {
                     ...state.data,
-                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.fargekategori)
+                    brukere: updateFargekategoriForBrukere(state.data.brukere, action.data)
                 }
             };
         }
-
         case OPPDATER_HUSKELAPP_BRUKER: {
             return {
                 ...state,
@@ -463,19 +461,6 @@ export function hentArbeidslisteForBruker(fodselsnummer) {
             });
         });
     };
-}
-
-export function oppdaterFargekategoriAction(data, props) {
-    const fargekategoridata = {
-        fargekategoriVerdi: data,
-        fnr: props
-    };
-
-    return dispatch =>
-        dispatch({
-            type: OPPDATER_FARGEKATEGORI,
-            fargekategori: fargekategoridata
-        });
 }
 
 export function hentHuskelappForBruker(fodselsnummer: string, enhetId: string) {

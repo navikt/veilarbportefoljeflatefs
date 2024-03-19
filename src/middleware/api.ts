@@ -232,7 +232,7 @@ export function slettArbeidsliste(arbeidsliste) {
 }
 
 export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategori`;
+    const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
     return fetchToJson(url, config);
 }

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {BrukerModell} from '../../model-interfaces';
 import {Button} from '@navikt/ds-react';
-import FargekategoriPopover from './fargekategori-popover';
+import {FargekategoriPopover} from './fargekategori-popover';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 
 interface FargekategoriPopoverKnappProps {
