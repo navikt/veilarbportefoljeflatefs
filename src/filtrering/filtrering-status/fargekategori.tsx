@@ -1,11 +1,14 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
-import './arbeidsliste.css';
-import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+import './fargekategori.css';
+import {ReactComponent as FargekategoriBla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_blatt_bokmerke.svg';
+import {ReactComponent as FargekategoriGronn} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
+import {ReactComponent as FargekategoriLilla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
+import {ReactComponent as FargekategoriGul} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
+import {ReactComponent as FargekategoriOransje} from '../../components/ikoner/fargekategorier/Fargekategoriikon_oransje_diamant_v2.svg';
+import {ReactComponent as FargekategoriLysebla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_lysebla_femkant.svg';
+import {ReactComponent as FargekategoriIngen} from '../../components/ikoner/fargekategorier/Fargekategoriikon_ingen_kategori.svg';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {
     alleFargekategoriFilterAlternativer,
@@ -65,8 +68,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonBla />
+                                <FargekategoriBla className="fargekategoriikon" />
                                 <span>Blå</span>
                             </>
                         }
@@ -78,8 +80,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonGronn />
+                                <FargekategoriGronn className="fargekategoriikon" />
                                 <span>Grønn</span>
                             </>
                         }
@@ -91,8 +92,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonLilla />
+                                <FargekategoriLilla className="fargekategoriikon" />
                                 <span>Lilla</span>
                             </>
                         }
@@ -104,8 +104,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonGul />
+                                <FargekategoriGul className="fargekategoriikon" />
                                 <span>Gul</span>
                             </>
                         }
@@ -117,8 +116,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonBla />
+                                <FargekategoriLysebla className="fargekategoriikon" />
                                 <span>Lyseblå</span>
                             </>
                         }
@@ -130,8 +128,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonBla />
+                                <FargekategoriOransje className="fargekategoriikon" />
                                 <span>Oransje</span>
                             </>
                         }
@@ -143,8 +140,7 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                {/*TODO: Bruke riktig ikon når det er klart*/}
-                                <ArbeidslisteikonBla />
+                                <FargekategoriIngen className="fargekategoriikon" />
                                 <span>Ingen farge</span>
                             </>
                         }
