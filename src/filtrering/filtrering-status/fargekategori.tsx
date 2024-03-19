@@ -27,42 +27,50 @@ type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
     filterId: FargekategoriModell;
     filterNavn: string;
+    statustallId: string;
 };
 const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnderfilterKonfigurasjon[] = [
     {
         filterLabel: fargekategorier.FARGEKATEGORI_A,
         filterId: FARGEKATEGORI_A,
-        filterNavn: 'mineFargekategorierA'
+        filterNavn: 'mineFargekategorierA',
+        statustallId: 'fargekategoriA'
     },
     {
         filterLabel: fargekategorier.FARGEKATEGORI_B,
         filterId: FARGEKATEGORI_B,
-        filterNavn: 'mineFargekategorierB'
+        filterNavn: 'mineFargekategorierB',
+        statustallId: 'fargekategoriB'
     },
     {
         filterLabel: fargekategorier.FARGEKATEGORI_C,
         filterId: FARGEKATEGORI_C,
-        filterNavn: 'mineFargekategorierC'
+        filterNavn: 'mineFargekategorierC',
+        statustallId: 'fargekategoriC'
     },
     {
         filterLabel: fargekategorier.FARGEKATEGORI_D,
         filterId: FARGEKATEGORI_D,
-        filterNavn: 'mineFargekategorierD'
+        filterNavn: 'mineFargekategorierD',
+        statustallId: 'fargekategoriD'
     },
     {
         filterLabel: fargekategorier.FARGEKATEGORI_E,
         filterId: FARGEKATEGORI_E,
-        filterNavn: 'mineFargekategorierE'
+        filterNavn: 'mineFargekategorierE',
+        statustallId: 'fargekategoriE'
     },
     {
         filterLabel: fargekategorier.FARGEKATEGORI_F,
         filterId: FARGEKATEGORI_F,
-        filterNavn: 'mineFargekategorierF'
+        filterNavn: 'mineFargekategorierF',
+        statustallId: 'fargekategoriF'
     },
     {
         filterLabel: fargekategorier.INGEN_KATEGORI,
         filterId: INGEN_KATEGORI,
-        filterNavn: 'mineFargekategorierIngenKategori'
+        filterNavn: 'mineFargekategorierIngenKategori',
+        statustallId: 'fargekategoriIngenKategori'
     }
 ] as const;
 
@@ -114,7 +122,7 @@ function FilterStatusMineFargekategorier() {
                         filterNavn={fargekategori.filterNavn}
                         handleChange={handleUnderfilterEndret}
                         checked={fargekategoriFilter.includes(fargekategori.filterId)}
-                        antall={statusTall[fargekategori.filterId]}
+                        antall={statusTall[fargekategori.statustallId]}
                     />
                 ))}
             </div>
