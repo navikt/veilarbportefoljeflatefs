@@ -129,9 +129,8 @@ function ArbeidslisteModalRediger({
                                 className="arbeidsliste-modal"
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
-                                shouldCloseOnOverlayClick
                             >
-                                <Modal.Content>
+                                <Modal.Body>
                                     <ModalHeader tittel="Rediger arbeidsliste" />
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
@@ -151,7 +150,7 @@ function ArbeidslisteModalRediger({
                                             />
                                         )}
                                     </div>
-                                </Modal.Content>
+                                </Modal.Body>
                             </Modal>
                         </>
                     )}
