@@ -541,3 +541,8 @@ export const testperson_uten_arbeidsliste = lagBruker();
 testperson_uten_arbeidsliste.arbeidsliste = tomArbeidsliste;
 testperson_uten_arbeidsliste.fornavn = 'Aase';
 testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';
+
+export const testperson_uten_arbeidsliste2 = lagBruker();
+testperson_uten_arbeidsliste2.arbeidsliste = tomArbeidsliste;
+testperson_uten_arbeidsliste2.fornavn = 'Åse';
+testperson_uten_arbeidsliste2.etternavn = 'Uten Arbeidsliste';

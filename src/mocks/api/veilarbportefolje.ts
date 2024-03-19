@@ -12,7 +12,8 @@ import {
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,
     hentMockPlan,
-    testperson_uten_arbeidsliste
+    testperson_uten_arbeidsliste,
+    testperson_uten_arbeidsliste2
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
@@ -48,6 +49,8 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.erPermittertEtterNiendeMars = true;
         } else if (index === 2) {
             return testperson_uten_arbeidsliste;
+        } else if (index === fraInt + antallInt - 1) {
+            return testperson_uten_arbeidsliste2;
         }
         return bruker;
     });
