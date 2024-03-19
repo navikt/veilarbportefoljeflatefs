@@ -12,6 +12,9 @@ import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {AddPerson, Search} from '@navikt/ds-icons';
 import {Alert, Heading} from '@navikt/ds-react';
+import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -37,15 +40,24 @@ function Toolbar({
     sokVeilederSkalVises
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
     const feilmelding = brukerfeilMelding.message;
+    const valgteBrukereFnrs = valgteBrukere.map(bruker => bruker.fnr);
 
     const oversikt = side => {
         switch (side) {
             case OversiktType.minOversikt:
-                return <ArbeidslisteKnapp />;
+                return (
+                    <>
+                        {!erFargekategoriFeatureTogglePa && <ArbeidslisteKnapp />}
+                        {erFargekategoriFeatureTogglePa && (
+                            <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
+                        )}
+                    </>
+                );
             case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">

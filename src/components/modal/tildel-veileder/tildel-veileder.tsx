@@ -14,9 +14,10 @@ import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
 import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
 import {trackAmplitude} from '../../../amplitude/amplitude';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 
 interface TildelVeilederProps {
-    oversiktType?: string;
+    oversiktType?: OversiktType;
     closeInput: () => void;
 }
 
@@ -189,7 +190,7 @@ interface TildelVeilederRendererProps {
     ident: string | null;
     onChange: (ident: string) => void;
     btnOnClick: () => void;
-    oversiktType: string | undefined;
+    oversiktType: OversiktType | undefined;
 }
 
 function TildelVeilederRenderer({data, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {

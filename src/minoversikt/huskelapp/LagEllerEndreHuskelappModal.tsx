@@ -32,7 +32,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     return (
         <Modal
-            className={classNames('LagEllerEndreHuskelappModal', {medEksisterendeArbeidsliste: !!arbeidsliste})}
+            className={classNames('lag-eller-endre-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
         >

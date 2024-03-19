@@ -1,5 +1,3 @@
-import 'cypress-wait-until';
-
 before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();

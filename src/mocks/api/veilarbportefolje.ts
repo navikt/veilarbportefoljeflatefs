@@ -219,6 +219,15 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             return HttpResponse.json(geografiskBostedListMockData());
         })
     ),
+    http.put(
+        '/veilarbportefolje/api/v1/fargekategori',
+        withAuth(async () => {
+            return HttpResponse.json({
+                fnr: '11111111111',
+                fargekategori: 'FARGEKATEGORI_A'
+            });
+        })
+    ),
     http.post(
         '/veilarbportefolje/api/v1/hent-huskelapp-for-bruker',
         withAuth(async ({request}) => {

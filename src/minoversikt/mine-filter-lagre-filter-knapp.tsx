@@ -8,7 +8,7 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import {Button} from '@navikt/ds-react';
 
 interface Props {
-    oversiktType: string;
+    oversiktType: OversiktType;
 }
 
 export function MineFilterLagreFilterKnapp({oversiktType}: Props) {

@@ -32,7 +32,7 @@ export interface Sidebarelement {
 
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
-    currentOversiktType: OversiktType | string;
+    currentOversiktType: OversiktType;
     requestedTab: SidebarTabInfo;
 }
 
