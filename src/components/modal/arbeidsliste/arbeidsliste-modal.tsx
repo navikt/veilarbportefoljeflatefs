@@ -72,7 +72,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
-                            <Modal.Content>
+                            <Modal.Body>
                                 <ModalHeader tittel="Legg i arbeidsliste" />
                                 <div className="modal-innhold">
                                     <LeggTilArbeidslisteForm
@@ -82,7 +82,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                                         setFormIsDirty={() => setFormIsDirty(formIsDirty)}
                                     />
                                 </div>
-                            </Modal.Content>
+                            </Modal.Body>
                         </Modal>
                     )}
                 </>

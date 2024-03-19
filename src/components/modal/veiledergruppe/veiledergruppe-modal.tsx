@@ -206,7 +206,7 @@ export function VeiledergruppeModal({
             ) : (
                 <>
                     <Modal open={isOpen} onClose={lukkModal} className={classNames('veiledergruppe-modal', className)}>
-                        <Modal.Content>
+                        <Modal.Body>
                             <ModalHeader tittel={modalTittel} />
                             {alertTekst.length !== 0 && (
                                 <Alert
@@ -260,7 +260,7 @@ export function VeiledergruppeModal({
                                     )}
                                 </div>
                             </VeiledergruppeForm>
-                        </Modal.Content>
+                        </Modal.Body>
                     </Modal>
                     <EndringerIkkeLagretModal
                         isOpen={visEndringerIkkeLagretModal}
