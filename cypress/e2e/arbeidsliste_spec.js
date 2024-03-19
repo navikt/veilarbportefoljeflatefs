@@ -251,9 +251,6 @@ describe('Arbeidsliste', () => {
     });
 
     it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
-        cy.scrollTo('top')
-        cy.wait(200)
-
         // Opnar arbeidslistepanelet for fyrste person med arbeidsliste
         cy.apneForsteArbeidslistepanel();
 
@@ -287,15 +284,21 @@ describe('Arbeidsliste', () => {
     });
 
     it('Avbryt redigering, ingen endringer lagret', () => {
+        // Arbeidslistepanelet er allereie opent frå førre test
 
+        // Trykkar på rediger-knapp
         cy.get('.arbeidsliste-modal').should('not.exist');
         cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
+        // Skriv inn ny tekst i modalen
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
         cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
+
+        // Trykkar "Avbryt"
         cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
+        // Sjekkar at teksten ikkje vart endra
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittel);
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentar);
 
