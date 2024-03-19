@@ -133,7 +133,7 @@ Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
     cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible').click();
 });
 
-Cypress.Commands.add('apneArbeidslistePaPerson', () => {
+Cypress.Commands.add('apneForsteArbeidslistepanelOgValiderApning', () => {
     cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
@@ -149,7 +149,16 @@ Cypress.Commands.add('apneArbeidslistePaPerson', () => {
         .first();
 });
 
-Cypress.Commands.add('lukkeArbeidslistePaPerson', () => {
+Cypress.Commands.add('apneForsteArbeidslistepanel', () => {
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'expand')
+        .click();
+});
+
+Cypress.Commands.add('lukkForsteArbeidslistepanelOgValiderLukking', () => {
     cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
@@ -164,3 +173,13 @@ Cypress.Commands.add('lukkeArbeidslistePaPerson', () => {
         .should('have.class', 'expand')
         .first();
 });
+
+Cypress.Commands.add('lukkForsteArbeidslistepanel', () => {
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'collapse')
+        .click();
+});
+

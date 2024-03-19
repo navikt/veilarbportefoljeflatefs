@@ -2,6 +2,9 @@ before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
     cy.configure();
+
+    // Gå til Min oversikt-fana
+    cy.gaTilOversikt('min-oversikt');
 });
 
 describe('Arbeidsliste', () => {
@@ -20,8 +23,6 @@ describe('Arbeidsliste', () => {
     const nyKommentar = 'Kommentar skal heller ikke lagres';
 
     it('Lag én ny arbeidsliste og sjekk validering', () => {
-        cy.gaTilOversikt('min-oversikt');
-
         // Vel fyrste brukar i lista
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
@@ -38,7 +39,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
 
         // Testar validering av kommentar-input
-        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar skal ikke være lengre enn 500 tegn, så her kommer litt lorum ipsum: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.');
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar skal ikke være lengre enn 500 tegn, så her kommer litt lorum ipsum: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release...');
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må korte ned teksten til 500 tegn');
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en kommentar');
 
@@ -123,9 +124,17 @@ describe('Arbeidsliste', () => {
             });
     });
 
+    it('Sjekker åpning og lukking av arbeidslistepanel i oversikten', () => {
+        cy.apneForsteArbeidslistepanelOgValiderApning();
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('be.visible')
+
+        cy.lukkForsteArbeidslistepanelOgValiderLukking();
+    })
+
+
     it('Rediger arbeidsliste', () => {
         // Finn den fyrste personen med arbeidsliste, trykk på chevron og sjekk at det fungerte
-        cy.apneArbeidslistePaPerson();
+        cy.apneForsteArbeidslistepanel();
 
         // Trykk på redigerknapp
         cy.get('.arbeidsliste-modal').should('not.exist');
@@ -185,7 +194,7 @@ describe('Arbeidsliste', () => {
         });
 
         // Opne arbeidslistepanel for den fyrste brukaren som har arbeidsliste
-        cy.apneArbeidslistePaPerson();
+        cy.apneForsteArbeidslistepanel();
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Trykk på redigeringsknapp
@@ -214,7 +223,7 @@ describe('Arbeidsliste', () => {
 
     it('Sjekk validering i rediger arbeidsliste-modal', () => {
         // Opne arbeidslistepanelet for den fyrste personen med arbeidsliste
-        cy.apneArbeidslistePaPerson();
+        cy.apneForsteArbeidslistepanel();
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Trykk på redigeringsknapp
@@ -238,12 +247,16 @@ describe('Arbeidsliste', () => {
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Lukk arbeidslistepanelet
-        cy.lukkeArbeidslistePaPerson();
+        cy.lukkForsteArbeidslistepanel();
     });
 
     it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
+        cy.scrollTo('top')
+        cy.wait(200)
+
         // Opnar arbeidslistepanelet for fyrste person med arbeidsliste
-        cy.apneArbeidslistePaPerson();
+        cy.apneForsteArbeidslistepanel();
+
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Trykk på redigeringsknappen
@@ -259,11 +272,11 @@ describe('Arbeidsliste', () => {
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Lukk arbeidslistepanelet
-        cy.lukkeArbeidslistePaPerson();
+        cy.lukkForsteArbeidslistepanel();
     });
 
     it('Lagre tittel og kommentar', () => {
-        cy.apneArbeidslistePaPerson();
+        cy.apneForsteArbeidslistepanel();
 
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then($tittel => {
             tittel = $tittel.text();
@@ -286,6 +299,6 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittel);
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentar);
 
-        cy.lukkeArbeidslistePaPerson();
+        cy.lukkForsteArbeidslistepanel();
     });
 });
