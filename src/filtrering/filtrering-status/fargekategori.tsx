@@ -2,13 +2,6 @@ import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import './fargekategori.css';
-import {ReactComponent as FargekategoriBla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_blatt_bokmerke.svg';
-import {ReactComponent as FargekategoriGronn} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
-import {ReactComponent as FargekategoriLilla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
-import {ReactComponent as FargekategoriGul} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
-import {ReactComponent as FargekategoriOransje} from '../../components/ikoner/fargekategorier/Fargekategoriikon_oransje_diamant_v2.svg';
-import {ReactComponent as FargekategoriLysebla} from '../../components/ikoner/fargekategorier/Fargekategoriikon_lysebla_femkant.svg';
-import {ReactComponent as FargekategoriIngen} from '../../components/ikoner/fargekategorier/Fargekategoriikon_ingen_kategori.svg';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {
     alleFargekategoriFilterAlternativer,
@@ -18,8 +11,9 @@ import {
     FARGEKATEGORI_D,
     FARGEKATEGORI_E,
     FARGEKATEGORI_F,
-    INGEN_KATEGORI,
+    fargekategorier,
     ferdigfilterListeLabelTekst,
+    INGEN_KATEGORI,
     MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
@@ -27,6 +21,50 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import {useDispatch} from 'react-redux';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
 import {FargekategoriModell} from '../../model-interfaces';
+import fargekategoriIkonMapper from '../../components/fargekategori/fargekategori-ikon-mapper';
+
+type FargekategoriUnderfilterKonfigurasjon = {
+    filterLabel: string;
+    filterId: FargekategoriModell;
+    filterNavn: string;
+};
+const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnderfilterKonfigurasjon[] = [
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_A,
+        filterId: FARGEKATEGORI_A,
+        filterNavn: 'mineFargekategorierA'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_B,
+        filterId: FARGEKATEGORI_B,
+        filterNavn: 'mineFargekategorierB'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_C,
+        filterId: FARGEKATEGORI_C,
+        filterNavn: 'mineFargekategorierC'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_D,
+        filterId: FARGEKATEGORI_D,
+        filterNavn: 'mineFargekategorierD'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_E,
+        filterId: FARGEKATEGORI_E,
+        filterNavn: 'mineFargekategorierE'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_F,
+        filterId: FARGEKATEGORI_F,
+        filterNavn: 'mineFargekategorierF'
+    },
+    {
+        filterLabel: fargekategorier.INGEN_KATEGORI,
+        filterId: INGEN_KATEGORI,
+        filterNavn: 'mineFargekategorierIngenKategori'
+    }
+] as const;
 
 function FilterStatusMineFargekategorier() {
     const dispatch = useDispatch();
@@ -64,90 +102,21 @@ function FilterStatusMineFargekategorier() {
                 indeterminate={hovedfilterIndeterminate}
             />
             <div className="fargekategorier--underfilter">
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriBla className="fargekategoriikon" />
-                            <span>Blå</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierA"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_A)}
-                    antall={statusTall.fargekategoriA}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriGronn className="fargekategoriikon" />
-                            <span>Grønn</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierB"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_B)}
-                    antall={statusTall.fargekategoriB}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriGul className="fargekategoriikon" />
-                            <span>Gul</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierC"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_C)}
-                    antall={statusTall.fargekategoriC}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriLilla className="fargekategoriikon" />
-                            <span>Lilla</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierD"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_D)}
-                    antall={statusTall.fargekategoriD}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriLysebla className="fargekategoriikon" />
-                            <span>Lyseblå</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierE"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_E)}
-                    antall={statusTall.fargekategoriE}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriOransje className="fargekategoriikon" />
-                            <span>Oransje</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierF"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(FARGEKATEGORI_F)}
-                    antall={statusTall.fargekategoriF}
-                />
-                <BarInputCheckbox
-                    labelTekst={
-                        <span className="fargekategoriikon--label">
-                            <FargekategoriIngen className="fargekategoriikon" />
-                            <span>Ingen kategori</span>
-                        </span>
-                    }
-                    filterNavn="mineFargekategorierIngenKategori"
-                    handleChange={handleUnderfilterEndret}
-                    checked={fargekategoriFilter.includes(INGEN_KATEGORI)}
-                    antall={statusTall.fargekategoriIngenKategori}
-                />
+                {fargekategoriUnderfilterKonfigurasjoner.map(fargekategori => (
+                    <BarInputCheckbox
+                        key={fargekategori.filterId}
+                        labelTekst={
+                            <span className="fargekategoriikon--label">
+                                {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
+                                <span>{fargekategori.filterLabel}</span>
+                            </span>
+                        }
+                        filterNavn={fargekategori.filterNavn}
+                        handleChange={handleUnderfilterEndret}
+                        checked={fargekategoriFilter.includes(fargekategori.filterId)}
+                        antall={statusTall[fargekategori.filterId]}
+                    />
+                ))}
             </div>
         </>
     );
