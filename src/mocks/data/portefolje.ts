@@ -132,18 +132,21 @@ function lagVedtakUtkast() {
     };
 }
 
+const tomArbeidsliste = {
+    kommentar: null,
+    frist: null,
+    isOppfolgendeVeileder: null,
+    arbeidslisteAktiv: false,
+    sistEndretAv: {},
+    kategori: null
+};
+
 function lagArbeidsliste(aktoerid, fnr) {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
-        return {
-            kommentar: null,
-            frist: null,
-            isOppfolgendeVeileder: null,
-            arbeidslisteAktiv: false,
-            sistEndretAv: {},
-            kategori: null
-        };
+        return tomArbeidsliste;
     }
+
     const kategoriType = rnd(1, 4);
     let kategori;
     if (kategoriType === 1) {
@@ -532,4 +535,9 @@ const lagFargekategori = () => {
     }
 };
 
-export default new Array(123).fill(0).map(() => lagBruker());
+export const brukere = new Array(123).fill(0).map(() => lagBruker());
+
+export const testperson_uten_arbeidsliste = lagBruker();
+testperson_uten_arbeidsliste.arbeidsliste = tomArbeidsliste;
+testperson_uten_arbeidsliste.fornavn = 'Aase';
+testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';
