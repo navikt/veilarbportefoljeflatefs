@@ -130,8 +130,8 @@ export const ferdigfilterListeLabelTekst = {
     MINE_FARGEKATEGORIER: 'Kategorier',
     FARGEKATEGORI_A: 'Blå',
     FARGEKATEGORI_B: 'Grønn',
-    FARGEKATEGORI_C: 'Lilla',
-    FARGEKATEGORI_D: 'Gul',
+    FARGEKATEGORI_C: 'Gul',
+    FARGEKATEGORI_D: 'Lilla',
     FARGEKATEGORI_E: 'Oransje',
     FARGEKATEGORI_F: 'Lyseblå',
     INGEN_KATEGORI: 'Ingen kategori'
@@ -147,8 +147,8 @@ export const arbeidslisteKategori = {
 export const fargekategorier = {
     FARGEKATEGORI_A: 'Blå',
     FARGEKATEGORI_B: 'Grønn',
-    FARGEKATEGORI_C: 'Lilla',
-    FARGEKATEGORI_D: 'Gul',
+    FARGEKATEGORI_C: 'Gul',
+    FARGEKATEGORI_D: 'Lilla',
     FARGEKATEGORI_E: 'Lyseblå',
     FARGEKATEGORI_F: 'Oransje',
     INGEN_KATEGORI: 'Ingen kategori'

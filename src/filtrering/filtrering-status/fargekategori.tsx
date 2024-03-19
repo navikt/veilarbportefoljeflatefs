@@ -91,8 +91,8 @@ function FilterStatusMineFargekategorier() {
                 <BarInputCheckbox
                     labelTekst={
                         <span className="fargekategoriikon--label">
-                            <FargekategoriLilla className="fargekategoriikon" />
-                            <span>Lilla</span>
+                            <FargekategoriGul className="fargekategoriikon" />
+                            <span>Gul</span>
                         </span>
                     }
                     filterNavn="mineFargekategorierC"
@@ -103,8 +103,8 @@ function FilterStatusMineFargekategorier() {
                 <BarInputCheckbox
                     labelTekst={
                         <span className="fargekategoriikon--label">
-                            <FargekategoriGul className="fargekategoriikon" />
-                            <span>Gul</span>
+                            <FargekategoriLilla className="fargekategoriikon" />
+                            <span>Lilla</span>
                         </span>
                     }
                     filterNavn="mineFargekategorierD"
