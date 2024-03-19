@@ -134,14 +134,14 @@ Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
 });
 
 Cypress.Commands.add('apneArbeidslistePaPerson', () => {
-    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
         .should('have.class', 'expand')
         .click();
 
-    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
@@ -150,14 +150,14 @@ Cypress.Commands.add('apneArbeidslistePaPerson', () => {
 });
 
 Cypress.Commands.add('lukkeArbeidslistePaPerson', () => {
-    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
         .should('have.class', 'collapse')
         .click();
 
-    cy.getByTestId('min-oversikt_brukerliste-chevron_arbeidsliste')
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()

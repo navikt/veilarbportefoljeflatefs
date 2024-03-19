@@ -129,7 +129,7 @@ describe('Arbeidsliste', () => {
 
         // Trykk på redigerknapp
         cy.get('.arbeidsliste-modal').should('not.exist');
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').should('be.visible').click();
+        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').should('be.visible').click();
 
         // Modalen viser rett ting
         cy.get('.arbeidsliste-modal').should('be.visible');
@@ -189,7 +189,7 @@ describe('Arbeidsliste', () => {
         cy.get('.arbeidsliste-modal').should('not.exist');
 
         // Trykk på redigeringsknapp
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
         // Fjern arbeidslista
@@ -213,46 +213,53 @@ describe('Arbeidsliste', () => {
     });
 
     it('Sjekk validering i rediger arbeidsliste-modal', () => {
+        // Opne arbeidslistepanelet for den fyrste personen med arbeidsliste
         cy.apneArbeidslistePaPerson();
-
         cy.get('.arbeidsliste-modal').should('not.exist');
 
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-
+        // Trykk på redigeringsknapp
+        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
+        // Tøm tekstfelta i modalen
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
+
+        // Test validering av tittel
         cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann her er det mer enn 30 tegn');
         cy.getByTestId('modal_rediger-arbeidsliste_form').contains('Tittelen kan ikke være lenger enn 30 tegn.');
         cy.getByTestId('modal_rediger-arbeidsliste_form').should('not.contain', 'Du må fylle ut en tittel');
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_tittel').type('Heisann sveisann');
+
+        // Fyll inn ein gyldig kommentar og lagre
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
         cy.get('.arbeidsliste-modal').should('not.exist');
 
+        // Lukk arbeidslistepanelet
         cy.lukkeArbeidslistePaPerson();
     });
 
     it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
+        // Opnar arbeidslistepanelet for fyrste person med arbeidsliste
         cy.apneArbeidslistePaPerson();
-
         cy.get('.arbeidsliste-modal').should('not.exist');
 
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-
+        // Trykk på redigeringsknappen
+        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
+        // Nullstill tekstfelt
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
 
+        // Lagre og sjekk at det lukkar modalen
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
-
         cy.get('.arbeidsliste-modal').should('not.exist');
 
+        // Lukk arbeidslistepanelet
         cy.lukkeArbeidslistePaPerson();
-
     });
 
     it('Lagre tittel og kommentar', () => {
@@ -267,8 +274,9 @@ describe('Arbeidsliste', () => {
     });
 
     it('Avbryt redigering, ingen endringer lagret', () => {
+
         cy.get('.arbeidsliste-modal').should('not.exist');
-        cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
+        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
         cy.get('.arbeidsliste-modal').should('be.visible');
 
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
