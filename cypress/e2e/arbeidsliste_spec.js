@@ -46,7 +46,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
-        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar')
+        cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
 
         // Set ein frist og kategori
         cy.get('#fristDatovelger').type('01.03.2066');
@@ -124,49 +124,50 @@ describe('Arbeidsliste', () => {
     });
 
     it('Rediger arbeidsliste', () => {
+        // Finn den fyrste personen med arbeidsliste, trykk på chevron og sjekk at det fungerte
         cy.apneArbeidslistePaPerson();
 
-
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then($tittel => {
-            tittel = $tittel.text();
-        });
-
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then($kommentar => {
-            kommentar = $kommentar.text();
-        });
-
+        // Trykk på redigerknapp
         cy.get('.arbeidsliste-modal').should('not.exist');
-
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').should('be.visible').click();
 
+        // Modalen viser rett ting
         cy.get('.arbeidsliste-modal').should('be.visible');
-
         cy.get('.modal-header').contains('Rediger arbeidsliste');
 
+        // Skriv inn ny tekst for tittel og kommentar
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
-
         cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(redigertKommentar);
 
+        // Lagrar og lukkar modal
         cy.getByTestId('modal_rediger-arbeidsliste_lagre-knapp').click();
-
         cy.get('.arbeidsliste-modal').should('not.exist');
 
+        // Sjekkar at arbeidlista er oppdatert
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').contains(redigertTittel);
-
         cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').contains(redigertKommentar);
     });
 
     it('Slett arbeidsliste via fjern-knapp', () => {
+        // Tel kor mange arbeidslister det er
         cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
             antallFor += Cypress.$(ant).length;
         });
+
+        // Finn checkboksen til den fyrste personen med arbeidsliste
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
+
+        // Fjern personen frå arbeidslista
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled').click();
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
+
+        // Laster-modal oppfører seg som venta
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
+
+        // Sjekk at det er 1 færre arbeidslister no enn før slettinga
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .should('be.visible')
             .then(ant => {
@@ -178,28 +179,29 @@ describe('Arbeidsliste', () => {
     });
 
     it('Slett arbeidsliste via rediger-modal', () => {
+        // Tel kor mange arbeidslister det er
         cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(ant => {
             antallForSletting += Cypress.$(ant).length;
         });
 
+        // Opne arbeidslistepanel for den fyrste brukaren som har arbeidsliste
         cy.apneArbeidslistePaPerson();
-
         cy.get('.arbeidsliste-modal').should('not.exist');
 
+        // Trykk på redigeringsknapp
         cy.getByTestId('min-oversikt_chevron-arbeidsliste_rediger-knapp').click();
-
         cy.get('.arbeidsliste-modal').should('be.visible');
 
+        // Fjern arbeidslista
         cy.getByTestId('modal_rediger-arbeidsliste_fjern-knapp').click();
-
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
 
+        // Laster-modal oppfører seg som venta
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
-
         cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
-
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
+        // Sjekk at det er 1 færre arbeidslister no enn før slettinga
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
             .should('be.visible')
             .then(ant => {

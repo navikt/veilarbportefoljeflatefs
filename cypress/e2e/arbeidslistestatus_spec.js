@@ -12,9 +12,14 @@ describe('Filter min arbeidsliste', () => {
     });
 
     it('Sjekk tekst på legg til i / fjern fra arbeidslisteknapp', () => {
+        // Sjekkar at rett knapp er synleg frå start
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('not.exist');
+
+        // Vel "Min arbeidsliste"-filteret under Status i sidemenyen
         cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
+
+        // No skal "Fjern fra arbeidsliste"-knappen vere synleg
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled');
     });
 
