@@ -3,12 +3,18 @@ import {BrukerModell} from '../../model-interfaces';
 import {Button} from '@navikt/ds-react';
 import {FargekategoriPopover} from './fargekategori-popover';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
+import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../../reducer';
+import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
 
 interface FargekategoriPopoverKnappProps {
     bruker: BrukerModell;
 }
 
 export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -19,7 +25,10 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 ref={buttonRef}
-                onClick={() => setOpenState(!openState)}
+                onClick={() => {
+                    setOpenState(!openState);
+                    dispatch(resetFargekategoriStateAction());
+                }}
                 className="fargekategori-tabellrad-knapp"
             />
             <FargekategoriPopover
