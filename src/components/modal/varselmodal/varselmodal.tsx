@@ -13,7 +13,6 @@ export enum VarselModalType {
 interface VarselModalProps {
     isOpen: boolean;
     onClose: () => void;
-    shouldCloseOnOverlayClick?: boolean;
     className?: string;
     portalClassName?: string;
     type: VarselModalType;
@@ -25,18 +24,12 @@ export function VarselModal({
     isOpen,
     onClose,
     children,
-    shouldCloseOnOverlayClick,
     className,
     dataTestClass,
     portalClassName
 }: React.PropsWithChildren<VarselModalProps>) {
     return (
-        <Modal
-            open={isOpen}
-            onClose={onClose}
-            className={classNames('varsel-modal', portalClassName, dataTestClass)}
-            shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-        >
+        <Modal open={isOpen} onClose={onClose} className={classNames('varsel-modal', portalClassName, dataTestClass)}>
             <Modal.Content>
                 <div className={classNames('varsel-modal__innhold', className)}>
                     <div className="varsel-modal__ikon">{getIkon(type)}</div>
