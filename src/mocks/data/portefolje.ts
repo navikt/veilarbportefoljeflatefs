@@ -1,7 +1,12 @@
 import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {faker} from '@faker-js/faker/locale/nb_NO';
-import {BarnUnder18Aar, EnsligeForsorgereOvergangsstonad, KategoriModell} from '../../model-interfaces';
+import {
+    BarnUnder18Aar,
+    EnsligeForsorgereOvergangsstonad,
+    FargekategoriModell,
+    KategoriModell
+} from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -127,18 +132,21 @@ function lagVedtakUtkast() {
     };
 }
 
+const tomArbeidsliste = {
+    kommentar: null,
+    frist: null,
+    isOppfolgendeVeileder: null,
+    arbeidslisteAktiv: false,
+    sistEndretAv: {},
+    kategori: null
+};
+
 function lagArbeidsliste(aktoerid, fnr) {
     const maybeArbeidsliste = rnd(0, 1);
     if (maybeArbeidsliste > 0.5) {
-        return {
-            kommentar: null,
-            frist: null,
-            isOppfolgendeVeileder: null,
-            arbeidslisteAktiv: false,
-            sistEndretAv: {},
-            kategori: null
-        };
+        return tomArbeidsliste;
     }
+
     const kategoriType = rnd(1, 4);
     let kategori;
     if (kategoriType === 1) {
@@ -266,6 +274,7 @@ function lagBruker(sikkerhetstiltak = []) {
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
         brukersSituasjonSistEndret: randomDate({past: false}),
+        fargekategori: lagFargekategori(),
         huskelapp
     };
 }
@@ -504,4 +513,31 @@ const hentRandomAktivitetsplikt = () => {
     return aktivitetspliktUtfall[Math.floor(Math.random() * aktivitetspliktUtfall.length)];
 };
 
-export default new Array(123).fill(0).map(() => lagBruker());
+const lagFargekategori = () => {
+    const fargekategoriType = rnd(1, 11);
+    switch (fargekategoriType) {
+        case 1:
+            return FargekategoriModell.FARGEKATEGORI_A;
+        case 2:
+            return FargekategoriModell.FARGEKATEGORI_B;
+        case 3:
+            return FargekategoriModell.FARGEKATEGORI_C;
+        case 4:
+            return FargekategoriModell.FARGEKATEGORI_D;
+        case 5:
+            return FargekategoriModell.FARGEKATEGORI_E;
+        case 6:
+            return FargekategoriModell.FARGEKATEGORI_F;
+        case 7:
+            return FargekategoriModell.INGEN_KATEGORI;
+        default:
+            return null;
+    }
+};
+
+export const brukere = new Array(123).fill(0).map(() => lagBruker());
+
+export const testperson_uten_arbeidsliste = lagBruker();
+testperson_uten_arbeidsliste.arbeidsliste = tomArbeidsliste;
+testperson_uten_arbeidsliste.fornavn = 'Aase';
+testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';

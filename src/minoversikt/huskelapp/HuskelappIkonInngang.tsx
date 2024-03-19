@@ -1,9 +1,5 @@
-import {Button, Modal} from '@navikt/ds-react';
-import * as React from 'react';
+import React, {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
-import {ReactComponent as HuskelappIkon} from './ikoner/huskelapp.svg';
-import {ReactComponent as InaktivHuskelappIkon} from './ikoner/huskelapp-inaktiv.svg';
-import {useState} from 'react';
 import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
 import {HuskelappModalHeader} from './HuskelappModalHeader';
 import {Huskelapp} from './Huskelapp';
@@ -15,6 +11,9 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/huskelapp_stiplet.svg';
+import {Button, Modal} from '@navikt/ds-react';
 
 export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -23,22 +22,22 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
     const [modalVisHuskelappSkalVises, setModalVisHuskelappSkalVises] = useState<boolean>(false);
     return (
         <>
-            <div className="huskelapp-kolonne-container">
-                <Button
-                    variant="tertiary"
-                    onClick={() => {
-                        bruker.huskelapp
-                            ? setModalVisHuskelappSkalVises(true)
-                            : setModalLagEllerEndreHuskelappSkalVises(true);
-                    }}
-                >
-                    {bruker.huskelapp ? (
+            <Button
+                size="small"
+                variant="tertiary"
+                onClick={() => {
+                    bruker.huskelapp
+                        ? setModalVisHuskelappSkalVises(true)
+                        : setModalLagEllerEndreHuskelappSkalVises(true);
+                }}
+                icon={
+                    bruker.huskelapp ? (
                         <HuskelappIkon className="huskelappikon" />
                     ) : (
-                        <InaktivHuskelappIkon className="huskelappikon" />
-                    )}
-                </Button>
-            </div>
+                        <HuskelappIkonTomt className="huskelappikon" />
+                    )
+                }
+            />
             {modalLagEllerEndreHuskelappSkalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={() => {
@@ -57,7 +56,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                 <Modal open={modalVisHuskelappSkalVises} onClose={() => setModalVisHuskelappSkalVises(false)}>
                     <Modal.Body>
                         <HuskelappModalHeader />
-                        <Huskelapp huskelapp={bruker.huskelapp!!} className="huskelappModal" />
+                        <Huskelapp huskelapp={bruker.huskelapp!!} className="huskelapp-i-modal" />
                         <div className="huskelapp-handlingsknapper">
                             <Button
                                 type="button"

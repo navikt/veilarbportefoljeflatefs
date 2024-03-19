@@ -14,7 +14,7 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
     };
 
     return (
-        <div className="lagHuskelappInngang">
+        <div className="lag-huskelapp-inngang">
             <HuskelappInfoAlert />
             <Button size="xsmall" variant="primary-neutral" onClick={onClick}>
                 Lag huskelapp

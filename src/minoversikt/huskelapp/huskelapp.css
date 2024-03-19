@@ -1,4 +1,4 @@
-.HuskelappPostIt::before {
+.huskelapp__postit::before {
     /*flippen i top høyre*/
     content: '';
     position: absolute;
@@ -8,59 +8,45 @@
     border-width: 0 20px 20px 0;
     border-style: solid;
     border-color: hsl(64, 89%, 84%) transparent;
-    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(113, 92, 40, 0.1);
-    -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1), -2px 5px 6px rgba(0, 0, 0, 0.1);
-
-    /* Firefox 3.0 damage limitation */
-    display: block;
-    width: 0;
+    box-shadow: -3px 4px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.HuskelappPostIt {
+.huskelapp__postit {
     background-color: #f9fccc;
     max-height: 200px;
     max-width: 250px;
     padding: 0.75rem 1.25rem;
-    margin: 10px 50px;
+    margin: 0.5rem 6rem;
     position: relative;
-    overflow: hidden;
+    word-wrap: break-word;
 }
 
-.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .HuskelappPostIt::before {
+.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp__postit::before {
     background: #f4f4f4;
 }
 
-.huskelappModal {
+.huskelapp-i-modal {
     min-width: 250px;
-    margin-left: 0;
-    margin-right: 30px;
-}
-
-.huskelappModal .navds-body-short {
-    margin-top: var(--a-spacing-3);
+    margin: 0;
+    margin-bottom: 1rem;
 }
 
 .huskelapp-handlingsknapper {
     display: flex;
     justify-content: flex-end;
+    gap: 0.5rem;
 }
 
-.huskelapp-handlingsknapper button {
-    margin-top: 0.5rem;
-    margin-left: 5px;
-}
-
-.huskelappPanel {
+.huskelapp-panel {
     display: flex;
 }
 
-.lagHuskelappInngang {
-    margin: 10px 50px;
-    max-width: 500px;
+.lag-huskelapp-inngang {
+    margin: 0 1rem 1rem 6rem;
+    max-width: 31rem;
 }
 
-.eksisterendeArbeidslisteVisning {
+.eksisterende-arbeidslistevisning {
     background: var(--a-gray-200);
     max-width: 500px;
     min-width: 400px;
@@ -69,36 +55,42 @@
     border-radius: 4px;
 }
 
-.huskelappModalHeader {
+.huskelapp-modal__header {
     display: flex;
     align-items: center;
 }
 
-.huskelappModalHeader svg {
-    margin-right: 10px;
+.huskelapp-modal__header svg {
+    margin-right: 0.5rem;
 }
 
-.LagEllerEndreHuskelappModal.navds-modal {
-    max-width: 350px;
+.lag-eller-endre-huskelapp-modal.navds-modal {
+    max-width: 22rem;
 }
 
-.LagEllerEndreHuskelappModal .navds-body-short,
-.LagEllerEndreHuskelappModal .navds-alert__wrapper {
+.lag-eller-endre-huskelapp-modal .navds-body-short,
+.lag-eller-endre-huskelapp-modal .navds-alert__wrapper {
     font-size: 14px;
     line-height: 1.25rem;
 }
 
-.LagEllerEndreHuskelappModal.medEksisterendeArbeidsliste.navds-modal {
-    min-width: 800px;
+.lag-eller-endre-huskelapp-modal.med-eksisterende-arbeidsliste.navds-modal {
+    min-width: fit-content;
 }
 
-.medEksisterendeArbeidsliste .huskelapp-modal-content {
+.med-eksisterende-arbeidsliste .huskelapp-modal-content {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 284px 1fr;
-    gap: 15px;
+    grid-template-columns: 20rem 1fr;
+    gap: 1rem;
 }
 
-.LagEllerEndreHuskelappModal .nav-datovelger__kalender {
+.lag-eller-endre-huskelapp-modal .nav-datovelger__kalenderPortal {
     transform: translateY(-116%);
+}
+
+@media (max-width: 1000px) {
+    .lag-huskelapp-inngang {
+        margin: 0 0.5rem;
+    }
 }

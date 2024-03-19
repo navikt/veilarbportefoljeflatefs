@@ -9,22 +9,21 @@ interface VelgalleCheckboksProps {
     disabled: boolean;
     alleMarkert: boolean;
     markerAlle: (markert: boolean) => void;
-    className: string;
 }
 
-function VelgAlleCheckboks({disabled, markerAlle, alleMarkert, className}: VelgalleCheckboksProps) {
+function VelgAlleCheckboks({disabled, markerAlle, alleMarkert}: VelgalleCheckboksProps) {
     const onClickHandler = () => {
         markerAlle(!alleMarkert);
     };
 
     return (
         <Checkbox
-            className={className}
+            size="small"
             checked={alleMarkert}
             disabled={disabled}
             hideLabel
             onChange={onClickHandler}
-            size="small"
+            className="velgalle-checkboks"
         >
             Velg alle
         </Checkbox>

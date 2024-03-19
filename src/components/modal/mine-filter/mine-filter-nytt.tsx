@@ -14,7 +14,7 @@ import {endreSideBar} from '../../sidebar/sidebar';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
 interface LagreNyttMineFilterProps {
-    oversiktType: string;
+    oversiktType: OversiktType;
     lukkModal: () => void;
 }
 
