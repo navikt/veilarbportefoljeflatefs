@@ -63,94 +63,92 @@ function FilterStatusMineFargekategorier() {
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={hovedfilterIndeterminate}
             />
-            {(hovedfilterChecked || hovedfilterIndeterminate) && (
-                <div className="fargekategorier--underfilter">
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriBla className="fargekategoriikon" />
-                                <span>Blå</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierA"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_A)}
-                        antall={statusTall.fargekategoriA}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriGronn className="fargekategoriikon" />
-                                <span>Grønn</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierB"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_B)}
-                        antall={statusTall.fargekategoriB}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriLilla className="fargekategoriikon" />
-                                <span>Lilla</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierC"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_C)}
-                        antall={statusTall.fargekategoriC}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriGul className="fargekategoriikon" />
-                                <span>Gul</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierD"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_D)}
-                        antall={statusTall.fargekategoriD}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriLysebla className="fargekategoriikon" />
-                                <span>Lyseblå</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierE"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_E)}
-                        antall={statusTall.fargekategoriE}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriOransje className="fargekategoriikon" />
-                                <span>Oransje</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierF"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(FARGEKATEGORI_F)}
-                        antall={statusTall.fargekategoriF}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <span className="fargekategoriikon--label">
-                                <FargekategoriIngen className="fargekategoriikon" />
-                                <span>Ingen kategori</span>
-                            </span>
-                        }
-                        filterNavn="mineFargekategorierIngenKategori"
-                        handleChange={handleUnderfilterEndret}
-                        checked={fargekategoriFilter.includes(INGEN_KATEGORI)}
-                        antall={statusTall.fargekategoriIngenKategori}
-                    />
-                </div>
-            )}
+            <div className="fargekategorier--underfilter">
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriBla className="fargekategoriikon" />
+                            <span>Blå</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierA"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_A)}
+                    antall={statusTall.fargekategoriA}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriGronn className="fargekategoriikon" />
+                            <span>Grønn</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierB"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_B)}
+                    antall={statusTall.fargekategoriB}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriLilla className="fargekategoriikon" />
+                            <span>Lilla</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierC"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_C)}
+                    antall={statusTall.fargekategoriC}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriGul className="fargekategoriikon" />
+                            <span>Gul</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierD"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_D)}
+                    antall={statusTall.fargekategoriD}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriLysebla className="fargekategoriikon" />
+                            <span>Lyseblå</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierE"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_E)}
+                    antall={statusTall.fargekategoriE}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriOransje className="fargekategoriikon" />
+                            <span>Oransje</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierF"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(FARGEKATEGORI_F)}
+                    antall={statusTall.fargekategoriF}
+                />
+                <BarInputCheckbox
+                    labelTekst={
+                        <span className="fargekategoriikon--label">
+                            <FargekategoriIngen className="fargekategoriikon" />
+                            <span>Ingen kategori</span>
+                        </span>
+                    }
+                    filterNavn="mineFargekategorierIngenKategori"
+                    handleChange={handleUnderfilterEndret}
+                    checked={fargekategoriFilter.includes(INGEN_KATEGORI)}
+                    antall={statusTall.fargekategoriIngenKategori}
+                />
+            </div>
         </>
     );
 }

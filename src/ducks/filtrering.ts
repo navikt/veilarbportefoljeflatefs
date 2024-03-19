@@ -145,10 +145,14 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const nyFargekategorier = underfilterAlleredeValgt
                 ? state.fargekategorier.filter(f => f !== filterVerdi)
                 : [...state.fargekategorier, filterVerdi];
-            const nyFerdigfilterListe =
-                nyFargekategorier.length === 0
-                    ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
-                    : state.ferdigfilterListe;
+
+            const ingenFargekategorierValgt = nyFargekategorier.length === 0;
+            const mineFargekategorierIkkeValgt = !state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
+            const nyFerdigfilterListe = ingenFargekategorierValgt
+                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
+                : mineFargekategorierIkkeValgt
+                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER]
+                : state.ferdigfilterListe;
 
             return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};
         }
