@@ -27,9 +27,9 @@ describe('Arbeidsliste', () => {
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
 
         // Opne legg-i-arbeidsliste-modal
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
+        cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
-        cy.get('.legg-i-arbeidsliste').should('be.visible');
+        cy.get('.legg-i-arbeidsliste_modal').should('be.visible');
 
         // Testar validering av tittel-input
         cy.getByTestId('modal_arbeidsliste_tittel').type('valideringstest på at det ikke er lov med tegn mer enn 30');
@@ -65,7 +65,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
+        cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first();
     });
 
@@ -84,9 +84,9 @@ describe('Arbeidsliste', () => {
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.checkboxLast('min-oversikt_brukerliste-checkbox');
 
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
+        cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
-        cy.get('.legg-i-arbeidsliste').should('be.visible');
+        cy.get('.legg-i-arbeidsliste_modal').should('be.visible');
 
         cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
         cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
@@ -95,7 +95,7 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_tittel_1').type('heiheihei hallå');
         cy.getByTestId('modal_arbeidsliste_kommentar_1').type('Team Voff er best i test hehehe');
         cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-        cy.get('.legg-i-arbeidsliste').should('not.exist');
+        cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
         cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
         cy.get('[data-cy=brukerliste_element_arbeidsliste]')
