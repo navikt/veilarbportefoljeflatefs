@@ -4,9 +4,11 @@ import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import FilterKonstanter, {
     aktiviteter,
+    alleFargekategoriFilterAlternativer,
     hendelserEtikett,
     I_AVTALT_AKTIVITET,
     mapFilternavnTilFilterValue,
+    MINE_FARGEKATEGORIER,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER
 } from './filter-konstanter';
@@ -24,9 +26,11 @@ import {
 } from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
-import FiltreringLabelArbeidsliste from './filtrering-label-arbeidsliste';
+import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
+import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
+import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -176,11 +180,24 @@ function FiltreringLabelContainer({
             } else if (key === 'arbeidslisteKategori') {
                 return value.map(singleValue => {
                     return (
-                        <FiltreringLabelArbeidsliste
+                        <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={FilterKonstanter[key][singleValue]}
+                            label={FilterKonstanter.arbeidslisteKategori[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
-                            kategori={singleValue}
+                            ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
+                            tittel={`Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}`}
+                        />
+                    );
+                });
+            } else if (key === 'fargekategorier') {
+                return value.map(singleValue => {
+                    return (
+                        <FiltreringLabelMedIkon
+                            key={singleValue}
+                            label={FilterKonstanter.fargekategorier[singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                            ikon={fargekategoriIkonMapper(singleValue, 'fargekategoriikon')}
+                            tittel={`Kategori ${FilterKonstanter.fargekategorier[singleValue]}`}
                         />
                     );
                 });
@@ -379,23 +396,40 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     actions: {
         slettAlle: () => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(clearFiltervalg(ownProps.oversiktType));
-            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType);
+            dispatch(clearFiltervalg(ownProps.oversiktType as OversiktType));
+            oppdaterKolonneAlternativer(dispatch, initialState, ownProps.oversiktType as OversiktType);
         },
         slettEnkelt: (filterKey: string, filterValue: boolean | string | null) => {
             dispatch(pagineringSetup({side: 1}));
-            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType));
+            dispatch(slettEnkeltFilter(filterKey, filterValue, ownProps.oversiktType as OversiktType));
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
+
             if (filterValue === 'MIN_ARBEIDSLISTE') {
-                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType));
+                dispatch(endreFiltervalg('arbeidslisteKategori', [], ownProps.oversiktType as OversiktType));
             }
+            if (filterValue === MINE_FARGEKATEGORIER) {
+                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType as OversiktType));
+            }
+            if (
+                alleFargekategoriFilterAlternativer.some(f => f === filterValue) &&
+                ownProps.filtervalg.fargekategorier.length === 1
+            ) {
+                dispatch(
+                    endreFiltervalg(
+                        'ferdigfilterListe',
+                        ownProps.filtervalg.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER),
+                        ownProps.oversiktType as OversiktType
+                    )
+                );
+            }
+
             const oppdatertFiltervalg = {
                 ...ownProps.filtervalg,
                 [filterKey]: fjern(filterKey, ownProps.filtervalg[filterKey], filterValue),
                 arbeidslisteKategori:
                     filterValue === 'MIN_ARBEIDSLISTE' ? [] : ownProps.filtervalg['arbeidslisteKategori']
             };
-            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType);
+            oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, ownProps.oversiktType as OversiktType);
         }
     }
 });

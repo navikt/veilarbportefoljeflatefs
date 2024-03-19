@@ -1,5 +1,5 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import {FargekategoriModell, KategoriModell, Sorteringsfelt} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
@@ -42,6 +42,23 @@ export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const HUSKELAPP = 'MINE_HUSKELAPPER';
+export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
+export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
+export const FARGEKATEGORI_B = FargekategoriModell.FARGEKATEGORI_B;
+export const FARGEKATEGORI_C = FargekategoriModell.FARGEKATEGORI_C;
+export const FARGEKATEGORI_D = FargekategoriModell.FARGEKATEGORI_D;
+export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
+export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
+export const INGEN_KATEGORI = FargekategoriModell.INGEN_KATEGORI;
+export const alleFargekategoriFilterAlternativer = [
+    FARGEKATEGORI_A,
+    FARGEKATEGORI_B,
+    FARGEKATEGORI_C,
+    FARGEKATEGORI_D,
+    FARGEKATEGORI_E,
+    FARGEKATEGORI_F,
+    INGEN_KATEGORI
+] as const;
 
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
@@ -72,10 +89,21 @@ export const mapFilternavnTilFilterValue = {
     innsatsgruppeUlik: INNSATSGRUPPE_ULIK,
     innsatsgruppeOgHovedmalUlik: INNSATSGRUPPE_OG_HOVEDMAL_ULIK,
     innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE,
-    huskelapp: HUSKELAPP
+    huskelapp: HUSKELAPP,
+    mineFargekategorier: MINE_FARGEKATEGORIER,
+    mineFargekategorierA: FARGEKATEGORI_A,
+    mineFargekategorierB: FARGEKATEGORI_B,
+    mineFargekategorierC: FARGEKATEGORI_C,
+    mineFargekategorierD: FARGEKATEGORI_D,
+    mineFargekategorierE: FARGEKATEGORI_E,
+    mineFargekategorierF: FARGEKATEGORI_F,
+    mineFargekategorierIngenKategori: INGEN_KATEGORI
 };
 
-export const filterSomIkkeSkalSendesTilBackend = [mapFilternavnTilFilterValue.harAvvik];
+export const filterSomIkkeSkalSendesTilBackend = [
+    mapFilternavnTilFilterValue.harAvvik,
+    mapFilternavnTilFilterValue.mineFargekategorier
+];
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
@@ -84,7 +112,7 @@ export function lagConfig(data: any): any {
     return data;
 }
 
-export const ferdigfilterListe = {
+export const ferdigfilterListeLabelTekst = {
     UFORDELTE_BRUKERE: 'Ufordelte brukere',
     NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
     TRENGER_VURDERING: 'Trenger vurdering',
@@ -98,7 +126,15 @@ export const ferdigfilterListe = {
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    MINE_HUSKELAPPER: 'Huskelapper'
+    MINE_HUSKELAPPER: 'Huskelapper',
+    MINE_FARGEKATEGORIER: 'Kategorier',
+    FARGEKATEGORI_A: 'Blå',
+    FARGEKATEGORI_B: 'Grønn',
+    FARGEKATEGORI_C: 'Gul',
+    FARGEKATEGORI_D: 'Lilla',
+    FARGEKATEGORI_E: 'Oransje',
+    FARGEKATEGORI_F: 'Lyseblå',
+    INGEN_KATEGORI: 'Ingen kategori'
 };
 
 export const arbeidslisteKategori = {
@@ -106,6 +142,16 @@ export const arbeidslisteKategori = {
     LILLA: 'Lilla',
     GRONN: 'Grønn',
     GUL: 'Gul'
+};
+
+export const fargekategorier = {
+    FARGEKATEGORI_A: 'Blå',
+    FARGEKATEGORI_B: 'Grønn',
+    FARGEKATEGORI_C: 'Gul',
+    FARGEKATEGORI_D: 'Lilla',
+    FARGEKATEGORI_E: 'Lyseblå',
+    FARGEKATEGORI_F: 'Oransje',
+    INGEN_KATEGORI: 'Ingen kategori'
 };
 
 export const alder = {
@@ -407,7 +453,7 @@ export const avvik14aVedtak = {
 
 const filterKonstanter = {
     ytelseUtlopsSortering,
-    ferdigfilterListe,
+    ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
     fodselsdagIMnd,
     kjonn,
@@ -436,7 +482,8 @@ const filterKonstanter = {
     stillingFraNavFilter,
     avvik14aVedtak,
     ensligeForsorgere,
-    barnUnder18Aar
+    barnUnder18Aar,
+    fargekategorier
 };
 
 export default filterKonstanter;

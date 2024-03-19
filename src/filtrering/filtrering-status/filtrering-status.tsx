@@ -11,9 +11,15 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    FARGEKATEGORIER,
+    HUSKELAPP,
+    VEDTAKSTOTTE,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
+} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
+import FilterStatusMineFargekategorier from './fargekategori';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
@@ -55,6 +61,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+    const erFargekategorierFeatureTogglePa = useFeatureSelector()(FARGEKATEGORIER);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -223,6 +230,9 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                             handleChange={handleRadioButtonChange}
                         />
                     </div>
+                )}
+                {erFargekategorierFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                    <FilterStatusMineFargekategorier hidden={oversiktType !== OversiktType.minOversikt} />
                 )}
             </RadioGroup>
         </div>

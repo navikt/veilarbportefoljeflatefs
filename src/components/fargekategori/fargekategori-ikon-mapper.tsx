@@ -8,25 +8,23 @@ import {ReactComponent as FargekategoriIkonOransjeDiamant} from '../ikoner/farge
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_ingen_kategori.svg';
 import React from 'react';
 
-const fargekategoriIkonMapper = fargekategori => {
+const fargekategoriIkonMapper = (fargekategori: FargekategoriModell | null, ikonClassName: string = '') => {
     switch (fargekategori) {
         case FargekategoriModell.FARGEKATEGORI_A:
-            return <FargekategoriIkonBlattBokmerke />;
+            return <FargekategoriIkonBlattBokmerke className={ikonClassName} />;
         case FargekategoriModell.FARGEKATEGORI_B:
-            return <FargekategoriIkonGronnTrekant />;
+            return <FargekategoriIkonGronnTrekant className={ikonClassName} />;
         case FargekategoriModell.FARGEKATEGORI_C:
-            return <FargekategoriIkonGulSirkel />;
+            return <FargekategoriIkonGulSirkel className={ikonClassName} />;
         case FargekategoriModell.FARGEKATEGORI_D:
-            return <FargekategoriIkonLillaFirkant />;
+            return <FargekategoriIkonLillaFirkant className={ikonClassName} />;
         case FargekategoriModell.FARGEKATEGORI_E:
-            return <FargekategoriIkonLyseblaFemkant />;
+            return <FargekategoriIkonLyseblaFemkant className={ikonClassName} />;
         case FargekategoriModell.FARGEKATEGORI_F:
-            return <FargekategoriIkonOransjeDiamant />;
+            return <FargekategoriIkonOransjeDiamant className={ikonClassName} />;
         case FargekategoriModell.INGEN_KATEGORI:
         case null:
-            return <FargekategoriIkonTomtBokmerke />;
-        default:
-            return undefined;
+            return <FargekategoriIkonTomtBokmerke className={ikonClassName} />;
     }
 };
 

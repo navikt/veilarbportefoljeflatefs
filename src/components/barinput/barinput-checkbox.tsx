@@ -4,14 +4,22 @@ import './bar.css';
 import {Checkbox, Label} from '@navikt/ds-react';
 
 interface BarInputCheckboxProps {
-    antall: number;
+    antall?: number;
     checked: boolean;
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     labelTekst?: React.ReactNode;
+    indeterminate?: boolean;
 }
 
-function BarInputCheckbox({antall, checked, filterNavn, handleChange, labelTekst}: BarInputCheckboxProps) {
+function BarInputCheckbox({
+    antall,
+    checked,
+    filterNavn,
+    handleChange,
+    labelTekst,
+    indeterminate
+}: BarInputCheckboxProps) {
     const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
 
     return (
@@ -24,6 +32,7 @@ function BarInputCheckbox({antall, checked, filterNavn, handleChange, labelTekst
                 onChange={handleChange}
                 checked={checked}
                 size="small"
+                indeterminate={indeterminate}
             >
                 {labelTekst}
             </Checkbox>
