@@ -223,16 +223,16 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                 />
                 {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <div className="forsteBarlabelIGruppe">
-                        <BarInputRadio
-                            filterNavn="huskelapp"
-                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                            handleChange={handleRadioButtonChange}
-                        />
-                    </div>
+                    <BarInputRadio
+                        filterNavn="huskelapp"
+                        antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                        handleChange={handleRadioButtonChange}
+                    />
                 )}
                 {erFargekategorierFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <FilterStatusMineFargekategorier hidden={oversiktType !== OversiktType.minOversikt} />
+                    <div className="forsteBarlabelIGruppe">
+                        <FilterStatusMineFargekategorier hidden={oversiktType !== OversiktType.minOversikt} />
+                    </div>
                 )}
             </RadioGroup>
         </div>
