@@ -10,6 +10,7 @@ import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {Label} from '@navikt/ds-react';
+import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -33,6 +34,8 @@ function FilterStatusMinArbeidsliste({
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
                 antall={statusTall.minArbeidsliste}
+                filterVerdi={mapFilternavnTilFilterValue['minArbeidsliste']}
+                labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]}
             />
             {checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
