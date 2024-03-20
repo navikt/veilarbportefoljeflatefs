@@ -11,6 +11,8 @@ import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {Label} from '@navikt/ds-react';
 import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -26,16 +28,23 @@ function FilterStatusMinArbeidsliste({
     checked
 }: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
+    const erHuskelappFeatureTogglePaa = useFeatureSelector()(HUSKELAPP);
 
     return (
         <>
-            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
+            <Label className="minArbeidsliste__tittel">
+                {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
+            </Label>
             <BarInputRadio
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
                 antall={statusTall.minArbeidsliste}
                 filterVerdi={mapFilternavnTilFilterValue['minArbeidsliste']}
-                labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]}
+                labelTekst={
+                    erHuskelappFeatureTogglePaa
+                        ? 'Gamle arbeidslister'
+                        : ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]
+                }
             />
             {checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
