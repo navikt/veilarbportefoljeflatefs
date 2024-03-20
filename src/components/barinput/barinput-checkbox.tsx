@@ -1,5 +1,4 @@
 import React, {ChangeEventHandler} from 'react';
-import {mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './bar.css';
 import {Checkbox, Label} from '@navikt/ds-react';
 
@@ -10,6 +9,7 @@ interface BarInputCheckboxProps {
     handleChange: ChangeEventHandler<HTMLInputElement>;
     labelTekst: React.ReactNode;
     indeterminate?: boolean;
+    filterVerdi: string;
 }
 
 function BarInputCheckbox({
@@ -18,10 +18,9 @@ function BarInputCheckbox({
     filterNavn,
     handleChange,
     labelTekst,
-    indeterminate
+    indeterminate,
+    filterVerdi
 }: BarInputCheckboxProps) {
-    const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
-
     return (
         <div className="barinput-checkbox">
             <Checkbox

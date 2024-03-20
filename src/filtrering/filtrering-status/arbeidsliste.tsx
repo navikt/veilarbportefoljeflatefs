@@ -50,6 +50,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteBla']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -62,6 +63,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGronn']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -74,6 +76,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteLilla']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -86,6 +89,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGul']}
                     />
                 </div>
             )}

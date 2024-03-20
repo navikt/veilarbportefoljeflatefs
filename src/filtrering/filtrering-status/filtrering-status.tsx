@@ -145,6 +145,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
+                        filterVerdi={mapFilternavnTilFilterValue['nyeBrukere']}
                     />
                 ) : (
                     <BarInputCheckbox
@@ -153,6 +154,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
+                        filterVerdi={mapFilternavnTilFilterValue['ufordeltebruker']}
                     />
                 )}
             </div>

@@ -14,6 +14,7 @@ import {
     fargekategorier,
     ferdigfilterListeLabelTekst,
     INGEN_KATEGORI,
+    mapFilternavnTilFilterValue,
     MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
@@ -108,6 +109,7 @@ function FilterStatusMineFargekategorier() {
                 checked={hovedfilterChecked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={hovedfilterIndeterminate}
+                filterVerdi={mapFilternavnTilFilterValue['mineFargekategorier']}
             />
             <div className="fargekategorier--underfilter">
                 {fargekategoriUnderfilterKonfigurasjoner.map(fargekategori => (
@@ -123,6 +125,7 @@ function FilterStatusMineFargekategorier() {
                         handleChange={handleUnderfilterEndret}
                         checked={fargekategoriFilter.includes(fargekategori.filterId)}
                         antall={statusTall[fargekategori.statustallId]}
+                        filterVerdi={mapFilternavnTilFilterValue[fargekategori.filterNavn]}
                     />
                 ))}
             </div>
