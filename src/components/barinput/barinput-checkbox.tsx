@@ -8,7 +8,7 @@ interface BarInputCheckboxProps {
     checked: boolean;
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
-    labelTekst?: React.ReactNode;
+    labelTekst: React.ReactNode;
     indeterminate?: boolean;
 }
 
