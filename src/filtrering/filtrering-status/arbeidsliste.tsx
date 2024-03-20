@@ -9,10 +9,11 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {Label} from '@navikt/ds-react';
+import {Alert, BodyShort, Label, Link} from '@navikt/ds-react';
 import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../../konstanter';
+import {ExternalLink} from '@navikt/ds-icons';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -35,6 +36,18 @@ function FilterStatusMinArbeidsliste({
             <Label className="minArbeidsliste__tittel">
                 {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
             </Label>
+            {erHuskelappFeatureTogglePaa && (
+                <Alert variant={'info'} size="small">
+                    {/*TODO: Bruk riktig lenke*/}
+                    <Link href="">
+                        Om endringer i arbeidslista (Navet)
+                        <ExternalLink />
+                    </Link>
+                    <BodyShort>
+                        Gamle arbeidslister blir slettet <b>09.0x.2024</b>.
+                    </BodyShort>
+                </Alert>
+            )}
             <BarInputRadio
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
