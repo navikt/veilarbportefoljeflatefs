@@ -1,8 +1,8 @@
 import React from 'react';
+import {Button} from '@navikt/ds-react';
+import {ArrowDownIcon, ArrowsUpDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
-import {Down, Up, UpDown} from '@navikt/ds-icons';
-import {Button} from '@navikt/ds-react';
 import './tabell.css';
 
 interface SorteringHeaderIkonProps {
@@ -34,11 +34,11 @@ function SorteringHeaderIkon({
     const sorteringspil = () => {
         const className = 'sorteringspil';
         if (sorteringsrekkefolge === Sorteringsrekkefolge.stigende) {
-            return <Up className={className} aria-hidden />;
+            return <ArrowUpIcon title="Sortert stigende" className={className} aria-hidden />;
         } else if (sorteringsrekkefolge === Sorteringsrekkefolge.synkende) {
-            return <Down className={className} aria-hidden />;
+            return <ArrowDownIcon title="Sortert synkende" className={className} aria-hidden />;
         } else {
-            return <UpDown className={className} aria-hidden />;
+            return <ArrowsUpDownIcon title="Sorter" className={className} aria-hidden />;
         }
     };
 

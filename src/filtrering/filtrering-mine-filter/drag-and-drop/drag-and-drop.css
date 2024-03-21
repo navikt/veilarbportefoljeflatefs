@@ -30,11 +30,10 @@
     margin-top: 0.25rem;
 }
 .drag-and-drop-row {
-    height: 2rem;
-    padding: 0.2rem;
+    height: fit-content;
+    margin: 0.4rem 0.2rem;
     display: flex;
     align-items: center;
-    height: fit-content;
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
@@ -83,6 +82,7 @@
     display: grid;
     grid-template-columns: 2rem 2rem;
     margin-left: auto;
+    gap: 0.25rem;
 }
 .flytt-knapp_opp {
     grid-column: 1;
@@ -91,13 +91,15 @@
     grid-column: 2;
 }
 .flytt-knapp {
-    pointer-events: none;
     border-radius: 6px;
     border-style: solid;
     border-width: 2px;
     border-color: transparent;
     display: flex;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.4rem;
+}
+.flytt-knapp:hover {
+    background: var(--a-surface-hover);
 }
 .drag-and-drop-row #Symbols {
     visibility: hidden;

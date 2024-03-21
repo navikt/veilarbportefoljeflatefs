@@ -1,9 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import './veiledere.css';
-import {Down, Up} from '@navikt/ds-icons';
+import classNames from 'classnames';
 import {BodyShort, Button} from '@navikt/ds-react';
+import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
+import './veiledere.css';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -50,9 +50,17 @@ function VeilederTabell({
         const className = 'tabellheader__pil';
         if (sorterPaa) {
             if (currentSortering.direction === 'stigende') {
-                return <Up className={className} data-testid="sorteringspil_stigende" />;
+                return (
+                    <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
+                );
             } else if (currentSortering.direction === 'synkende') {
-                return <Down className={className} data-testid="sorteringspil_synkende" />;
+                return (
+                    <ArrowDownIcon
+                        title="Sortert synkende"
+                        className={className}
+                        data-testid="sorteringspil_synkende"
+                    />
+                );
             }
         }
         return null;
@@ -67,7 +75,7 @@ function VeilederTabell({
                             <th scope="col" className="tabellheader">
                                 <div className="tabellheader__lenke tabellheader__tekst">
                                     <Button
-                                        size="small"
+                                        size="xsmall"
                                         variant="tertiary"
                                         onClick={sorterPaaEtternavn}
                                         className={classNames('lenke lenke--frittstaende', {
@@ -95,7 +103,7 @@ function VeilederTabell({
                                     data-testid="veilederoversikt_sortering_antall-brukere"
                                 >
                                     <Button
-                                        size="small"
+                                        size="xsmall"
                                         variant="tertiary"
                                         onClick={sorterPaaPortefoljestorrelse}
                                         className={classNames('lenke lenke--frittstaende tabellheader__tekst', {
