@@ -257,7 +257,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 )}
                 {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
                     <div className="forsteBarlabelIGruppe">
-                        <FilterStatusMineFargekategorier hidden={oversiktType !== OversiktType.minOversikt} />
+                        <FilterStatusMineFargekategorier />
                     </div>
                 )}
             </RadioGroup>

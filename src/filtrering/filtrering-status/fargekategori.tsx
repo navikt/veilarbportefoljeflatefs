@@ -1,5 +1,4 @@
 import React from 'react';
-import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import './fargekategori.css';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
@@ -133,4 +132,4 @@ function FilterStatusMineFargekategorier() {
     );
 }
 
-export default hiddenIf(FilterStatusMineFargekategorier);
+export default FilterStatusMineFargekategorier;
