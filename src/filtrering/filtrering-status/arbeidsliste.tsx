@@ -38,12 +38,13 @@ function FilterStatusMinArbeidsliste({
             </Label>
             {erHuskelappFeatureTogglePaa && (
                 <Alert variant={'info'} size="small">
-                    {/*TODO: Bruk riktig lenke*/}
+                    {/*TODO 21.03.2024: Bruk riktig lenke*/}
                     <Link href="">
                         Om endringer i arbeidslista (Navet)
                         <ExternalLink />
                     </Link>
                     <BodyShort>
+                        {/*TODO 21.03.2024: Bruk riktig dato*/}
                         Gamle arbeidslister blir slettet <b>09.0x.2024</b>.
                     </BodyShort>
                 </Alert>
