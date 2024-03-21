@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.24fc541c.js",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.358340fc.js",
     "static/media/tab_veiledergrupper.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.3d7005052409d33ff936c957a8934d9b.svg",
     "static/media/huskelapp_stiplet.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_stiplet.fc4621194347dc686ef7a381f2a49dd9.svg",
     "static/media/datepicker.less": "/veilarbportefoljeflatefs/static/media/datepicker.37f9a43e92e4c0f60401.less",
@@ -29,10 +29,10 @@
     "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.fc2fe05862e605570c8c488b79cdcddb.svg",
     "static/media/lenker-style.less": "/veilarbportefoljeflatefs/static/media/lenker-style.59b9d8fd90d389db0ed1.less",
     "main.8ab23df4.css.map": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css.map",
-    "main.24fc541c.js.map": "/veilarbportefoljeflatefs/static/js/main.24fc541c.js.map"
+    "main.358340fc.js.map": "/veilarbportefoljeflatefs/static/js/main.358340fc.js.map"
   },
   "entrypoints": [
     "static/css/main.8ab23df4.css",
-    "static/js/main.24fc541c.js"
+    "static/js/main.358340fc.js"
   ]
 }
