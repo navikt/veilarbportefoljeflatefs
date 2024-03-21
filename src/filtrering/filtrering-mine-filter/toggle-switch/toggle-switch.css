@@ -63,7 +63,7 @@
 }
 .toggle-switch-las__apen {
     position: absolute;
-    top: 0.2rem;
+    top: 0.25rem;
     left: 0.4rem;
     bottom: 0.192rem;
     visibility: hidden;
@@ -71,7 +71,7 @@
 }
 .toggle-switch-las__lukked {
     position: absolute;
-    top: 0.2rem;
+    top: 0.25rem;
     left: 1.537rem;
     bottom: 0.192rem;
     visibility: hidden;
