@@ -51,11 +51,15 @@ function VeilederTabell({
         if (sorterPaa) {
             if (currentSortering.direction === 'stigende') {
                 return (
-                    <ArrowUpIcon title="Sorter stigende" className={className} data-testid="sorteringspil_stigende" />
+                    <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
                 );
             } else if (currentSortering.direction === 'synkende') {
                 return (
-                    <ArrowDownIcon title="Sorter synkende" className={className} data-testid="sorteringspil_synkende" />
+                    <ArrowDownIcon
+                        title="Sortert synkende"
+                        className={className}
+                        data-testid="sorteringspil_synkende"
+                    />
                 );
             }
         }

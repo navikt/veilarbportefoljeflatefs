@@ -49,7 +49,7 @@
 .toggle-switch-border {
     width: 100%;
     height: 100%;
-    top: 0px;
+    top: 0;
     position: absolute;
     border-radius: 1.6rem;
     box-sizing: border-box;
@@ -67,7 +67,6 @@
     left: 0.4rem;
     bottom: 0.192rem;
     visibility: hidden;
-    color: var(--a-text-on-inverted);
 }
 .toggle-switch-las__lukked {
     position: absolute;
