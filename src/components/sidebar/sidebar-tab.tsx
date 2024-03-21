@@ -1,9 +1,9 @@
 import React from 'react';
-import Lukknapp from 'nav-frontend-lukknapp';
+import {Button, Heading} from '@navikt/ds-react';
+import {XMarkIcon} from '@navikt/aksel-icons';
 import {SidebarTabInfo} from '../../store/sidebar/sidebar-view-store';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import {Heading} from '@navikt/ds-react';
 
 interface TabProps {
     tittel: string;
@@ -30,7 +30,12 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
 
                 {meta && <div className="sidebar-header__meta">{meta}</div>}
 
-                <Lukknapp onClick={lukkTab} className="sidebar-header__lukknapp" />
+                <Button
+                    onClick={lukkTab}
+                    variant="tertiary-neutral"
+                    size="small"
+                    icon={<XMarkIcon title="Lukk panel" fontSize="1.5rem" />}
+                />
             </div>
             {children}
         </>
