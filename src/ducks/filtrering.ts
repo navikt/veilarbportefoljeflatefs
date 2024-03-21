@@ -132,8 +132,8 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const hovedfilterAlleredeValgt = state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
 
             const nyFerdigfilterListe = hovedfilterAlleredeValgt
-                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
-                : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER];
+                ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort()
+                : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort();
             const nyFargekategorier = hovedfilterAlleredeValgt ? [] : [...alleFargekategoriFilterAlternativer];
 
             return {...state, ferdigfilterListe: nyFerdigfilterListe, fargekategorier: nyFargekategorier};
@@ -143,15 +143,15 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const underfilterAlleredeValgt = state.fargekategorier.includes(filterVerdi);
 
             const nyFargekategorier = underfilterAlleredeValgt
-                ? state.fargekategorier.filter(f => f !== filterVerdi)
-                : [...state.fargekategorier, filterVerdi];
+                ? [...state.fargekategorier.filter(f => f !== filterVerdi)].sort()
+                : [...state.fargekategorier, filterVerdi].sort();
 
             const ingenFargekategorierValgt = nyFargekategorier.length === 0;
             const mineFargekategorierIkkeValgt = !state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
             const nyFerdigfilterListe = ingenFargekategorierValgt
-                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
+                ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort()
                 : mineFargekategorierIkkeValgt
-                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER]
+                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort()
                 : state.ferdigfilterListe;
 
             return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};
