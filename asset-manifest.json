@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/veilarbportefoljeflatefs/static/css/main.7f3b80a5.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.57dfee17.js",
+    "main.css": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.24fc541c.js",
     "static/media/tab_veiledergrupper.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.3d7005052409d33ff936c957a8934d9b.svg",
     "static/media/huskelapp_stiplet.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_stiplet.fc4621194347dc686ef7a381f2a49dd9.svg",
     "static/media/datepicker.less": "/veilarbportefoljeflatefs/static/media/datepicker.37f9a43e92e4c0f60401.less",
     "static/media/Fargekategoriikon_ingen_kategori.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_ingen_kategori.35e903c4861f04c23c3bd54c2f3bc60a.svg",
     "static/media/index.less": "/veilarbportefoljeflatefs/static/media/index.3becc3bc0aef6d6af903.less",
     "static/media/arbeidslisteikon_bla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_bla.b1f96319b765dbbb666e1f6177e9aa29.svg",
-    "static/media/lukknapp-style.less": "/veilarbportefoljeflatefs/static/media/lukknapp-style.f636bb78e3a7b06cac04.less",
     "static/media/x_mark_octagon_icon.svg": "/veilarbportefoljeflatefs/static/media/x_mark_octagon_icon.252c5a9ebaed2457dbc3b6db30334939.svg",
     "static/media/huskelapp.svg": "/veilarbportefoljeflatefs/static/media/huskelapp.ad70c7e811d82a5e22947c507f13b8d9.svg",
     "index.html": "/veilarbportefoljeflatefs/index.html",
@@ -29,11 +28,11 @@
     "static/media/Fargekategoriikon_oransje_diamant_v2.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_oransje_diamant_v2.a4760c0ac1710e283ba12c9c36bf3cee.svg",
     "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.fc2fe05862e605570c8c488b79cdcddb.svg",
     "static/media/lenker-style.less": "/veilarbportefoljeflatefs/static/media/lenker-style.59b9d8fd90d389db0ed1.less",
-    "main.7f3b80a5.css.map": "/veilarbportefoljeflatefs/static/css/main.7f3b80a5.css.map",
-    "main.57dfee17.js.map": "/veilarbportefoljeflatefs/static/js/main.57dfee17.js.map"
+    "main.8ab23df4.css.map": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css.map",
+    "main.24fc541c.js.map": "/veilarbportefoljeflatefs/static/js/main.24fc541c.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f3b80a5.css",
-    "static/js/main.57dfee17.js"
+    "static/css/main.8ab23df4.css",
+    "static/js/main.24fc541c.js"
   ]
 }
