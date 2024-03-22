@@ -32,17 +32,12 @@ describe('Mine filter', () => {
 
     it('Finn antall filter', () => {
         cy.gaTilOversikt('enhetens-oversikt');
-
         cy.klikkTab('MINE_FILTER');
 
+        // Tel kor mange filter vi har i mine filter slik at vi kan samanlikne med etter vi har laga nye
         cy.get('[data-testid=mine-filter_rad-wrapper]').then(ant => {
             antallFilter += Cypress.$(ant).length;
         });
-    });
-
-    // Denne testen treng vi ikkje. På dette punktet er den berre "a = a" der vi brukar nøyaktig same metode til å finne a begge gongene.
-    it('Det skal være riktig antall filter i Mine filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilter);
     });
 
     it('Lagre nytt filter', () => {
