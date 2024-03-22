@@ -18,6 +18,7 @@ export function TildelingerOk({fnr, isOpen, onRequestClose}: Props) {
             portalClassName="tildeling-veileder-modal"
             className="tildeling-veileder-modal__content"
             type={VarselModalType.SUKSESS}
+            dataTestClass="modal-suksess_tildel-veileder" /* Denne utgåva av modal har ingen data-testid-prop, difor brukar vi klassenamn */
         >
             <div className="tildeling-veileder-modal__tekstgruppe">
                 <Heading size="large" level="1">
@@ -26,7 +27,7 @@ export function TildelingerOk({fnr, isOpen, onRequestClose}: Props) {
                 <BodyShort size="small">Følgende bruker(e) ble tildelt veileder:</BodyShort>
                 <FnrList listeMedFnr={fnr} />
             </div>
-            <Button size="small" type="submit" onClick={onRequestClose} data-testid={`modal-suksess_tildel-veileder`}>
+            <Button size="small" type="submit" onClick={onRequestClose}>
                 Lukk
             </Button>
         </VarselModal>

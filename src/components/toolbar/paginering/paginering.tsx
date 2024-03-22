@@ -45,7 +45,7 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
                 disabled={viserDefaultAntall && antallTotalt <= sidestorrelse}
                 selected={!viserDefaultAntall && antallTotalt <= sidestorrelse}
                 onClick={() => endreSidestorrelse(alternativSidestorrelse)}
-                data-testid={viserDefaultAntall ? 'se-flere_knapp' : 'se-faerre_knapp'}
+                data-testid={viserDefaultAntall ? 'vis-200-per-side_knapp' : 'vis-50-per-side_knapp'}
                 ariaLabel={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
                 tekst={viserDefaultAntall ? 'Vis 200 per side' : 'Vis 50 per side'}
             />
