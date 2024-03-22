@@ -18,7 +18,6 @@ export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
 export const VIS_AAP_VURDERINGSFRISTKOLONNER = 'veilarbportefoljeflatefs.vis_kolonner_for_vurderingsfrist_aap';
 export const FILTER_FOR_PERSONER_MED_BARN_UNDER_18 = 'veilarbportefoljeflatefs.filter_for_personer_med_barn_under_18';
 export const HUSKELAPP = 'veilarbportefoljeflatefs.huskelapp';
-export const FARGEKATEGORIER = 'veilarbportefoljeflatefs.fargekategorier';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -28,6 +27,5 @@ export const PORTEFOLJE_FEATURES = [
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAP_VURDERINGSFRISTKOLONNER,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
-    HUSKELAPP,
-    FARGEKATEGORIER
+    HUSKELAPP
 ];

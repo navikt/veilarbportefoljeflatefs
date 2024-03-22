@@ -1,5 +1,4 @@
 import React from 'react';
-import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import './fargekategori.css';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
@@ -14,6 +13,7 @@ import {
     fargekategorier,
     ferdigfilterListeLabelTekst,
     INGEN_KATEGORI,
+    mapFilternavnTilFilterValue,
     MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
@@ -108,6 +108,7 @@ function FilterStatusMineFargekategorier() {
                 checked={hovedfilterChecked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={hovedfilterIndeterminate}
+                filterVerdi={mapFilternavnTilFilterValue['mineFargekategorier']}
             />
             <div className="fargekategorier--underfilter">
                 {fargekategoriUnderfilterKonfigurasjoner.map(fargekategori => (
@@ -123,6 +124,7 @@ function FilterStatusMineFargekategorier() {
                         handleChange={handleUnderfilterEndret}
                         checked={fargekategoriFilter.includes(fargekategori.filterId)}
                         antall={statusTall[fargekategori.statustallId]}
+                        filterVerdi={mapFilternavnTilFilterValue[fargekategori.filterNavn]}
                     />
                 ))}
             </div>
@@ -130,4 +132,4 @@ function FilterStatusMineFargekategorier() {
     );
 }
 
-export default hiddenIf(FilterStatusMineFargekategorier);
+export default FilterStatusMineFargekategorier;
