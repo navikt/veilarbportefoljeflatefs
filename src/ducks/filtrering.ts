@@ -3,6 +3,7 @@ import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
 import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
+import {alfabetiskSammenligning} from '../utils/utils';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -132,8 +133,8 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const hovedfilterAlleredeValgt = state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
 
             const nyFerdigfilterListe = hovedfilterAlleredeValgt
-                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
-                : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER];
+                ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(alfabetiskSammenligning)
+                : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning);
             const nyFargekategorier = hovedfilterAlleredeValgt ? [] : [...alleFargekategoriFilterAlternativer];
 
             return {...state, ferdigfilterListe: nyFerdigfilterListe, fargekategorier: nyFargekategorier};
@@ -143,15 +144,15 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const underfilterAlleredeValgt = state.fargekategorier.includes(filterVerdi);
 
             const nyFargekategorier = underfilterAlleredeValgt
-                ? state.fargekategorier.filter(f => f !== filterVerdi)
-                : [...state.fargekategorier, filterVerdi];
+                ? [...state.fargekategorier.filter(f => f !== filterVerdi)].sort(alfabetiskSammenligning)
+                : [...state.fargekategorier, filterVerdi].sort(alfabetiskSammenligning);
 
             const ingenFargekategorierValgt = nyFargekategorier.length === 0;
             const mineFargekategorierIkkeValgt = !state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
             const nyFerdigfilterListe = ingenFargekategorierValgt
-                ? state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)
+                ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(alfabetiskSammenligning)
                 : mineFargekategorierIkkeValgt
-                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER]
+                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning)
                 : state.ferdigfilterListe;
 
             return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};

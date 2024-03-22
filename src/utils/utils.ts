@@ -323,3 +323,7 @@ export const vedKlikkUtenfor = (
         callback();
     }
 };
+
+export const alfabetiskSammenligning = (a: string, b: string) => {
+    return a.localeCompare(b);
+};

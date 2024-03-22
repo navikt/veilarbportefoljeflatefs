@@ -2,12 +2,19 @@ import React, {useRef, useState} from 'react';
 import {ReactComponent as FargekategoriIkonBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {FargekategoriPopover} from '../fargekategori/fargekategori-popover';
+import {ThunkDispatch} from 'redux-thunk';
+import {AppState} from '../../reducer';
+import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
+import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
+import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];
 }
 
 export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: FargekategoriToolbarKnappProps) {
+    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
 
@@ -19,7 +26,14 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                 icon={<FargekategoriIkonBokmerke />}
                 title="Sett fargekategori for alle valgte brukere"
                 ref={buttonRef}
-                onClick={() => setOpenState(!openState)}
+                onClick={() => {
+                    if (valgteBrukereFnrs.length === 0) {
+                        dispatch(oppdaterBrukerfeil());
+                    } else {
+                        setOpenState(!openState);
+                        dispatch(resetFargekategoriStateAction());
+                    }
+                }}
                 className="toolbar_btn"
             >
                 Fargekategori

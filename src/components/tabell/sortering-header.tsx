@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
+import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
 import './tabell.css';
 import {OrNothing} from '../../utils/types/types';
-import {Down, Up} from '@navikt/ds-icons';
-import {Button} from '@navikt/ds-react';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -34,9 +34,9 @@ function SorteringHeader({
     const sorteringspil = () => {
         const className = 'sorteringheader__pil';
         if (sorteringsrekkefolge === Sorteringsrekkefolge.stigende) {
-            return <Up className={className} />;
+            return <ArrowUpIcon title="Sortert stigende" className={className} aria-hidden />;
         } else if (sorteringsrekkefolge === Sorteringsrekkefolge.synkende) {
-            return <Down className={className} />;
+            return <ArrowDownIcon title="Sortert synkende" className={className} aria-hidden />;
         } else {
             return null;
         }
