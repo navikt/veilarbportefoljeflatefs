@@ -199,6 +199,10 @@ export function VeiledergruppeModal({
         setSletteVeiledergruppeModal(false);
     };
 
+    if (!isOpen) {
+        return null;
+    }
+
     return (
         <>
             {statusLaster ? (
