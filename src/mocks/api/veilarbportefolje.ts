@@ -12,7 +12,9 @@ import {
     hentArbeidslisteForBruker,
     hentHuskelappForBruker,
     hentMockPlan,
-    testperson_uten_arbeidsliste
+    testperson_uten_arbeidsliste,
+    testperson_uten_arbeidsliste2,
+    tomArbeidsliste
 } from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
@@ -46,8 +48,11 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
             bruker.erPermittertEtterNiendeMars = true;
+            bruker.arbeidsliste = tomArbeidsliste;
         } else if (index === 2) {
             return testperson_uten_arbeidsliste;
+        } else if (index === fraInt + antallInt - 1) {
+            return testperson_uten_arbeidsliste2;
         }
         return bruker;
     });
@@ -226,11 +231,24 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
                 fnr: string[];
                 fargekategoriVerdi: FargekategoriModell;
             };
-            const randomize = rnd(0, 1);
-            return randomize > 0.2
+            /**
+             * Mulige options fra backend er:
+             *  -status: 403, body: null  --> Finner ikke innlogget bruker
+             *  -status: 403, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom man ikke har tilgang til noen bruker, ikke oppdatert i db. data vil være tom.
+             *  -status: 400, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom ingen fnr er gyldige vil spørringen være ugyldig og derfor ikke oppdatere i db. data vil være tom.
+             *  -status: 500, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom noe gikk galt i oppdatering mot db (men validerong og autorisering har gått ok), har ikke oppdatert db. data vil være tom.
+             *  -status: 200, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom noen oppdateringer i db har gått bra. både data og errors kan være fylt.
+             */
+            const randomize = rnd(0, 10);
+            const okFnrs = oppdaterFargekategoriRequest.fnr.slice(0, randomize);
+            const errorFnrs = oppdaterFargekategoriRequest.fnr.slice(
+                randomize,
+                oppdaterFargekategoriRequest.fnr.length
+            );
+            return randomize > 2
                 ? HttpResponse.json({
-                      data: oppdaterFargekategoriRequest.fnr,
-                      errors: [],
+                      data: okFnrs,
+                      errors: errorFnrs,
                       fargekategoriVerdi: oppdaterFargekategoriRequest.fargekategoriVerdi
                   })
                 : HttpResponse.json(

@@ -10,12 +10,13 @@
     height: 1rem;
     grid-column: 2;
     float: left;
-    margin: 2px 0 0 2px;
+    align-self: center;
+    margin-left: 0.125rem;
 }
 
 .veilarbportefoljeflatefs .sorteringspil {
     color: var(--a-icon-default);
-    width: 0.667em;
+    width: 0.667em; /* Tilsvarer 1rem */
 }
 
 .veilarbportefoljeflatefs .huskelapp__sorteringsheader .sorteringspil {

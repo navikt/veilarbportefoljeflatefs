@@ -75,6 +75,7 @@
     margin-bottom: 1rem;
     justify-content: space-between;
     max-height: 320px;
+    column-gap: 0.25rem;
 }
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__tekst h2 {
     margin-bottom: 0;
@@ -86,10 +87,6 @@
 }
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__meta .toggle-switch {
     margin-left: 0.5rem;
-}
-.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__lukknapp {
-    width: 2.5rem;
-    border: none;
 }
 @media (max-height: 1250px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,

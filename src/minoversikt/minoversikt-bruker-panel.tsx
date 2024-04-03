@@ -149,7 +149,7 @@ function MinoversiktBrukerPanel({
                                 dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
                             }
                         }}
-                        dataTestid={`min-oversikt_brukerliste-chevron${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                        dataTestid={`min-oversikt_brukerliste-arbeidslistepanel${testIdArbeidslisteAktiv}${testIdDisabled}`}
                     />
                 </div>
             </div>

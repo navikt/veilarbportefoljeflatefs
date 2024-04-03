@@ -9,7 +9,11 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {Label} from '@navikt/ds-react';
+import {Alert, BodyShort, Label, Link} from '@navikt/ds-react';
+import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
+import {ExternalLink} from '@navikt/ds-icons';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -25,14 +29,36 @@ function FilterStatusMinArbeidsliste({
     checked
 }: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
+    const erHuskelappFeatureTogglePaa = useFeatureSelector()(HUSKELAPP);
 
     return (
         <>
-            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
+            <Label className="minArbeidsliste__tittel">
+                {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
+            </Label>
+            {erHuskelappFeatureTogglePaa && (
+                <Alert variant={'info'} size="small">
+                    {/*TODO 21.03.2024: Bruk riktig lenke*/}
+                    <Link href="">
+                        Om endringer i arbeidslista (Navet)
+                        <ExternalLink />
+                    </Link>
+                    <BodyShort>
+                        {/*TODO 21.03.2024: Bruk riktig dato*/}
+                        Gamle arbeidslister blir slettet <b>09.0x.2024</b>.
+                    </BodyShort>
+                </Alert>
+            )}
             <BarInputRadio
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
                 antall={statusTall.minArbeidsliste}
+                filterVerdi={mapFilternavnTilFilterValue['minArbeidsliste']}
+                labelTekst={
+                    erHuskelappFeatureTogglePaa
+                        ? 'Gamle arbeidslister'
+                        : ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]
+                }
             />
             {checked && (
                 <div className="minArbeidsliste__kategori-checkboxwrapper">
@@ -47,6 +73,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteBla']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -59,6 +86,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGronn']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -71,6 +99,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteLilla']}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -83,6 +112,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGul']}
                     />
                 </div>
             )}

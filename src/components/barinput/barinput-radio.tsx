@@ -1,5 +1,4 @@
 import React, {ChangeEventHandler} from 'react';
-import {ferdigfilterListe, mapFilternavnTilFilterValue} from '../../filtrering/filter-konstanter';
 import './bar.css';
 import {Label, Radio} from '@navikt/ds-react';
 
@@ -7,12 +6,11 @@ interface BarinputRadioProps {
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     antall: number;
+    labelTekst: string;
+    filterVerdi: string;
 }
 
-export const BarInputRadio = ({filterNavn, handleChange, antall}: BarinputRadioProps) => {
-    const filterVerdi = mapFilternavnTilFilterValue[filterNavn];
-    const labelTekst = ferdigfilterListe[filterVerdi];
-
+export const BarInputRadio = ({filterNavn, handleChange, antall, labelTekst, filterVerdi}: BarinputRadioProps) => {
     return (
         <div className="barinput-radio">
             <Radio

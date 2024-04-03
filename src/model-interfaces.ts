@@ -101,9 +101,9 @@ export interface FiltervalgModell {
     visGeografiskBosted: string[];
     avvik14aVedtak: string[];
     ensligeForsorgere: string[];
-
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
+    fargekategorier: FargekategoriModell[];
 }
 
 export interface EnhetModell {

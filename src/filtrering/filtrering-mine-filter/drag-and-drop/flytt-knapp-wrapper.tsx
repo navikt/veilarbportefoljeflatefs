@@ -1,5 +1,5 @@
 import React from 'react';
-import {Down, Up} from '@navikt/ds-icons';
+import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 
 export interface FlyttKnappWraperProps {
     showUpBtn: boolean;
@@ -20,7 +20,7 @@ function FlyttKnappWrapper({showUpBtn, showDownBtn, onClickUp, onClickDown, idx}
                     onClick={onClickUp}
                     data-testid={`flytt-knapp_opp_${idx}`}
                 >
-                    <Up />
+                    <ArrowUpIcon title="Flytt filter oppover" />
                 </div>
             ) : (
                 <></>
@@ -34,7 +34,7 @@ function FlyttKnappWrapper({showUpBtn, showDownBtn, onClickUp, onClickDown, idx}
                     onClick={onClickDown}
                     data-testid={`flytt-knapp_ned_${idx}`}
                 >
-                    <Down />
+                    <ArrowDownIcon title="Flytt filter nedover" />
                 </div>
             ) : (
                 <></>

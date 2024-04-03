@@ -21,10 +21,6 @@
 .veilarbportefoljeflatefs .til-toppen-knapp--skjul:hover {
     cursor: unset;
 }
-.veilarbportefoljeflatefs .til-toppen-knapp svg {
-    width: 22px;
-    height: 24px;
-}
 .veilarbportefoljeflatefs .til-toppen-knapp:focus {
     fill: #0074df;
 }
