@@ -92,9 +92,8 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </Button>
-            {statusLaster ? (
-                <LasterModal isOpen={statusLaster} />
-            ) : (
+            {statusLaster && <LasterModal isOpen={statusLaster} />}
+            {isOpen && !statusLaster && (
                 <Formik
                     initialValues={initialValues}
                     enableReinitialize={true}
@@ -126,9 +125,10 @@ function ArbeidslisteModalRediger({
                     {formikProps => (
                         <>
                             <Modal
-                                className="arbeidsliste-modal"
+                                className="arbeidsliste-modal" /* Klassenamn er tidlegare nytta som testid, kan kanskje fjernast */
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
+                                data-testid="arbeidsliste-rediger-modal"
                             >
                                 <Modal.Body>
                                     <ModalHeader tittel="Rediger arbeidsliste" />
