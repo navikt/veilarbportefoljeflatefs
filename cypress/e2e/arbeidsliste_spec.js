@@ -8,13 +8,6 @@ before('Start server', () => {
 });
 
 describe('Arbeidsliste', () => {
-    let tittel;
-    let kommentar;
-    const redigertTittel = 'Redigering av tittel';
-    const redigertKommentar = 'Redigering av kommentar';
-    const nyTittel = 'Skal ikke lagres';
-    const nyKommentar = 'Kommentar skal heller ikke lagres';
-
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         // Vel fyrste brukar i lista
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
@@ -118,6 +111,9 @@ describe('Arbeidsliste', () => {
 
 
     it('Rediger arbeidsliste', () => {
+        const redigertTittel = 'Redigering av tittel';
+        const redigertKommentar = 'Redigering av kommentar';
+
         // Finn den fyrste personen med arbeidsliste, trykk på chevron og sjekk at det fungerte
         cy.apneForsteArbeidslistepanel();
 
@@ -249,35 +245,33 @@ describe('Arbeidsliste', () => {
         cy.lukkForsteArbeidslistepanel();
     });
 
-    it('Lagre tittel og kommentar', () => {
+    it('Avbryt redigering, ingen endringer lagret', () => {
         cy.apneForsteArbeidslistepanel();
 
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then($tittel => {
-            tittel = $tittel.text();
+        // Finn tittel-elementet
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then(tittelForRedigering => {
+            // Finn kommentar-elementet også
+            cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then(kommentarForRedigering => {
+                const nyTittel = 'Skal ikke lagres';
+                const nyKommentar = 'Kommentar skal heller ikke lagres';
+
+                // Trykkar på rediger-knapp
+                cy.get('.arbeidsliste-modal').should('not.exist');
+                cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
+                cy.get('.arbeidsliste-modal').should('be.visible');
+
+                // Skriv inn ny tekst i modalen
+                cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
+                cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
+
+                // Trykkar "Avbryt"
+                cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
+
+                // Sjekkar at teksten ikkje vart endra
+                cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittelForRedigering.text());
+                cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentarForRedigering.text());
+            })
         });
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then($kommentar => {
-            kommentar = $kommentar.text();
-        });
-    });
-
-    it('Avbryt redigering, ingen endringer lagret', () => {
-        // Arbeidslistepanelet er allereie opent frå førre test
-
-        // Trykkar på rediger-knapp
-        cy.get('.arbeidsliste-modal').should('not.exist');
-        cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').click();
-        cy.get('.arbeidsliste-modal').should('be.visible');
-
-        // Skriv inn ny tekst i modalen
-        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
-        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
-
-        // Trykkar "Avbryt"
-        cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
-
-        // Sjekkar at teksten ikkje vart endra
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittel);
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentar);
 
         cy.lukkForsteArbeidslistepanel();
     });
