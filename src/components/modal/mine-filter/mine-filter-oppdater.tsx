@@ -99,13 +99,15 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     </Button>
                 </div>
             </form>
-            <BekreftSlettingModal
-                isOpen={visBekreftSlettModal}
-                onRequestClose={() => setVisBekreftSlettModal(false)}
-                onSubmit={doSlettFilter}
-                tittel="Slette lagret filter"
-                navn={gammeltFilterNavn}
-            />
+            {visBekreftSlettModal && (
+                <BekreftSlettingModal
+                    isOpen={visBekreftSlettModal}
+                    onRequestClose={() => setVisBekreftSlettModal(false)}
+                    onSubmit={doSlettFilter}
+                    tittel="Slette lagret filter"
+                    navn={gammeltFilterNavn}
+                />
+            )}
             <MineFilterVarselModal
                 filterNavn={nyttFilterNavn}
                 erApen={requestHandlerOppdater.errorModalErApen}

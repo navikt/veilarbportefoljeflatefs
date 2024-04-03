@@ -68,13 +68,15 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                     </Button>
                 </div>
             </EgenModal>
-            <BekreftSlettingModal
-                isOpen={visBekreftSlettModal}
-                onRequestClose={() => setVisBekreftSlettModal(false)}
-                onSubmit={doSlettFilter}
-                tittel="Slette lagret filter"
-                navn={gammeltFilterNavn}
-            />
+            {visBekreftSlettModal && (
+                <BekreftSlettingModal
+                    isOpen={visBekreftSlettModal}
+                    onRequestClose={() => setVisBekreftSlettModal(false)}
+                    onSubmit={doSlettFilter}
+                    tittel="Slette lagret filter"
+                    navn={gammeltFilterNavn}
+                />
+            )}
         </>
     );
 }
