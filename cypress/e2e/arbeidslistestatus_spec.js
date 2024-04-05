@@ -4,10 +4,11 @@ before('Start server', () => {
     cy.configure();
 });
 
-describe('Filter min arbeidsliste', () => {
-    beforeEach('Gå til Min oversikt', () => {
-        cy.gaTilOversikt('min-oversikt');
-    });
+beforeEach('Gå til Min oversikt', () => {
+    cy.gaTilOversikt('min-oversikt');
+});
+
+describe('Arbeidslistestatus', () => {
 
     it('Sjekk tekst på legg til i / fjern fra arbeidslisteknapp', () => {
         // Sjekkar at rett knapp er synleg frå start
