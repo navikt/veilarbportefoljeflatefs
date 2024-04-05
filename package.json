@@ -19,7 +19,7 @@
         "build:mock": "cross-env PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true react-scripts build",
         "build:dev": "cross-env REACT_APP_DEPLOYMENT_ENV=development REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build",
         "build:prod": "cross-env REACT_APP_DEPLOYMENT_ENV=production REACT_APP_MOCK=false PUBLIC_URL=/ react-scripts build",
-        "prepare": "husky install",
+        "prepare": "./strip-less.sh && husky install",
         "pre-commit": "lint-staged --verbose"
     },
     "devDependencies": {
