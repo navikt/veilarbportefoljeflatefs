@@ -56,7 +56,7 @@ describe('Veiledergrupper', () => {
             cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
             cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
 
-            // Sjekkar at den nye gruppa vart lagt til og at den er valgt
+            // Sjekkar at den nye gruppa vart lagt til og at den er vald
             cy.get('@veiledergrupper').should('have.length', veiledergrupperForOpprettNy.length + 1)
                 .contains(gruppenavn);
             cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');

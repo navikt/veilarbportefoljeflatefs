@@ -13,83 +13,85 @@ before('Start server', () => {
     cy.clearAllSessionStorage();
     cy.configure();
     cy.gaTilOversikt('enhetens-oversikt');
+    cy.klikkTab('MINE_FILTER');
+});
+
+beforeEach('Lag alias for Mine filter: @mineFilter', () => {
+    // Aliaset kan hentast med cy.get('@mineFilter').
+    // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
+    cy.getByTestId('mine-filter_rad-wrapper').as('mineFilter');
 });
 
 describe('Mine filter', () => {
     it('Lagre nytt filter', () => {
-        // Vel ufordelte brukarar, sjekkar at vi ser filter-tag etterpå
-        cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({force: true});
-        cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
+        cy.klikkTab('STATUS').then(() => {
+            // Vel ufordelte brukarar, sjekkar at vi ser filter-tag etterpå
+            cy.getByTestId('filter_checkboks-container_ufordeltebruker').check({force: true});
+            cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible');
 
-        // Vel aldersgruppe 0-19 år og sjekkar at filter-tag er synleg
-        cy.wait(500);
-        cy.getByTestId('sidebar-tab_FILTER').click();
-        cy.apneLukkeFilterDropdown('alder');
-        cy.getByTestId('filter_0-19').check({force: true});
-        cy.getByTestId('filtreringlabel_-19-ar').should('be.visible');
+            // Vel aldersgruppe 0-19 år og sjekkar at filter-tag er synleg
+            cy.wait(500);
+            cy.getByTestId('sidebar-tab_FILTER').click();
+            cy.apneLukkeFilterDropdown('alder');
+            cy.getByTestId('filter_0-19').check({force: true});
+            cy.getByTestId('filtreringlabel_-19-ar').should('be.visible');
 
-        // Lagrar nytt filter (i staden for å oppdatere eksisterande)
-        cy.getByTestId('lagre-filter_knapp').click();
-        cy.getByTestId('oppdater-eksisterende-filter_modal_knapp').should('exist');
-        cy.getByTestId('lagre-nytt-filter_modal_knapp').should('exist').click();
-    });
+            // Lagrar nytt filter (i staden for å oppdatere eksisterande)
+            cy.getByTestId('lagre-filter_knapp').click();
+            cy.getByTestId('oppdater-eksisterende-filter_modal_knapp').should('exist');
+            cy.getByTestId('lagre-nytt-filter_modal_knapp').should('exist').click();
 
+            /* Testar validering */
+            // Prøvar å lagre utan å ha skrive inn data, får feilmelding
+            cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
+            cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filteret mangler navn.');
 
-    /* Avhengig av førre test: open modal */
-    it('Validering', () => {
-        // Prøvar å lagre utan å ha skrive inn data, får feilmelding
-        cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
-        cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filteret mangler navn.');
+            // Skriv inn eit for langt namn, prøvar lagre, får feilmelding
+            cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(forLangtFilterNavn);
+            cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
+            cy.getByTestId('lagre-nytt-filter_modal_form').contains(
+                'Filternavn er for langt, kan ikke ha mer enn 255 bokstaver.'
+            );
 
-        // Skriv inn eit for langt namn, prøvar lagre, får feilmelding
-        cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(forLangtFilterNavn);
-        cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
-        cy.getByTestId('lagre-nytt-filter_modal_form').contains(
-            'Filternavn er for langt, kan ikke ha mer enn 255 bokstaver.'
-        );
+            // Skriv inn namn som allereie er i bruk, prøvar lagre, får feilmelding
+            cy.getByTestId('lagre-nytt-filter_modal_navn-input').clear().type(testFilterNavn);
+            cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
+            cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
 
-        // Skriv inn namn som allereie er i bruk, prøvar lagre, får feilmelding
-        cy.getByTestId('lagre-nytt-filter_modal_navn-input').clear().type(testFilterNavn);
-        cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
-        cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
-
-        // Lukkar modal, nullstillar test
-        cy.get('body').type('{esc}');
+            // Lukkar modal, nullstillar test
+            cy.get('body').type('{esc}');
+            cy.klikkTab('MINE_FILTER');
+        });
     });
 
     it('Lagring av riktig filternavn', () => {
-        cy.klikkTab('MINE_FILTER').then(() => {
-            // Hentar ut filtera før vi legg til den nye
-            cy.getByTestId('mine-filter_rad-wrapper').then(filterForLeggTil => {
-                // Åpnar lagre-modal, lagrar som nytt filter
-                cy.getByTestId('lagre-filter_knapp').click();
-                cy.getByTestId('lagre-nytt-filter_modal_knapp').should('exist').click();
+        // Hentar ut filtera før vi legg til den nye
+        cy.get('@mineFilter').then(filterForLeggTil => {
+            // Åpnar lagre-modal, lagrar som nytt filter
+            cy.getByTestId('lagre-filter_knapp').click();
+            cy.getByTestId('lagre-nytt-filter_modal_knapp').should('exist').click();
 
-                // Skriv inn eit gyldig namn, lagrar
-                cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(mineFilterNavn);
-                cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
+            // Skriv inn eit gyldig namn, lagrar
+            cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(mineFilterNavn);
+            cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
 
-                // Vi kan sjå rett fane, og det nye filteret vårt er synleg
-                cy.getByTestId('sidebar-tab_MINE_FILTER').should('have.class', 'sidebar__tab-valgt');
-                cy.getByTestId('mine-filter_rad-wrapper').contains(mineFilterNavn);
+            // Vi kan sjå rett fane, og det nye filteret vårt er synleg
+            cy.getByTestId('sidebar-tab_MINE_FILTER').should('have.class', 'sidebar__tab-valgt');
+            cy.get('@mineFilter').contains(mineFilterNavn);
 
-                // Nyfilteret vårt er valgt, og og begge filtertagsa som skal visast er synlege
-                cy.getByTestId(`mine-filter-rad_${kebabCase(mineFilterNavn)}`).should('be.checked');
-                cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
+            // Nyfilteret vårt er valgt, og og begge filtertagsa som skal visast er synlege
+            cy.getByTestId(`mine-filter-rad_${kebabCase(mineFilterNavn)}`).should('be.checked');
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
-                // Det er no eit meir filter enn det var før
-                cy.getByTestId('mine-filter_rad-wrapper').should('have.length', filterForLeggTil.length + 1);
-            });
+            // Det er no eit meir filter enn det var før
+            cy.get('@mineFilter').should('have.length', filterForLeggTil.length + 1);
         });
-
     });
 
-    it('Rediger filter', () => {
+    it('Rediger namn på filter', () => {
         // Finn kor mange filter burkaren har laga, så vi kan sjekke at det ikkje endrar seg gjennom testen
-        cy.getByTestId('mine-filter_rad-wrapper').then(mineFilterForRedigering => {
+        cy.get('@mineFilter').then(mineFilterForRedigering => {
             const antallFilterForRedigering = mineFilterForRedigering.length;
-
-            /* Del 1: endre namn på eksisterande filter */
 
             // Opne redigering for filter "Voff"
             cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavn)}`).click();
@@ -99,15 +101,18 @@ describe('Mine filter', () => {
             cy.getByTestId('rediger-filter_modal_lagre-knapp').click();
 
             // Sjekk at namnet er oppdatert etter lagring
-            cy.getByTestId('mine-filter_rad-wrapper').contains(mineFilterNavnRedigert);
+            cy.get('@mineFilter').contains(mineFilterNavnRedigert);
 
             // Sjekk at det er to filtertags, og at talet på filter er det same
             cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
-            cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilterForRedigering);
+            cy.get('@mineFilter').should('have.length', antallFilterForRedigering);
+        });
+    });
 
-
-            /* Del 2: Oppdatere kva filterverdiar filteret inneheld */
-
+    /* Avhengig av førre test: namn på redigert filter */
+    it('Rediger filterverdiar i filter', () => {
+        // Finn kor mange filter burkaren har laga, så vi kan sjekke at det ikkje endrar seg gjennom testen
+        cy.get('@mineFilter').then(mineFilterForRedigering => {
             // Vel ufordelte brukarar og status-fana
             cy.getByTestId('filtreringlabel_ufordelte-brukere').should('be.visible').click();
             cy.klikkTab('STATUS');
@@ -130,13 +135,13 @@ describe('Mine filter', () => {
 
             // Sjekk at vi kan sjå filtertag "møte med nav i dag" og at talet på filter framleis ikkje har endra seg
             cy.getByTestId('filtreringlabel_mote-med-nav-idag').should('be.visible');
-            cy.getByTestId('mine-filter_rad-wrapper').should('have.length', antallFilterForRedigering);
+            cy.get('@mineFilter').should('have.length', mineFilterForRedigering.length);
         });
     });
 
     /* Avhengig av førre test: namn på redigert filter */
     it('Slett filter', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').then(filterForSletting => {
+        cy.get('@mineFilter').then(filterForSletting => {
             // Opne redigering på filteret vi skal slette ("Mjau")
             cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavnRedigert)}`).as('filterSomSkalSlettes').click();
 
@@ -145,7 +150,7 @@ describe('Mine filter', () => {
             cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
 
             // Sjekk at vi no har færre filter
-            cy.getByTestId('mine-filter_rad-wrapper').should('have.length', filterForSletting.length - 1);
+            cy.get('@mineFilter').should('have.length', filterForSletting.length - 1);
             cy.get('@filterSomSkalSlettes').should('not.exist');
         });
     });
@@ -170,7 +175,7 @@ describe('Mine filter', () => {
         // Gå til enhetens oversikt
         cy.gaTilOversikt('enhetens-oversikt');
 
-        // Sjekk at vi ikkje kan sjå ting for endring av rekkefølge
+        // Sjekk at vi ikkje kan sjå ting for endring av rekkefølge når det ikkje er skrudd på
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
         cy.getByTestId('mine-filter_sortering_lagre-knapp').should('not.exist');
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').should('not.exist');
@@ -194,8 +199,8 @@ describe('Mine filter', () => {
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').should('not.exist');
         cy.getByTestId('mine-filter_sortering_nullstill-knapp').should('not.exist');
     });
-
     /* Avhengig av tidlegare testar: sikre plassering av element i lista */
+
     it('Drag and drop - Verifiser lagring', () => {
         // Skru på endring av rekkefølge
         cy.getByTestId('toggle-knapp').click();
@@ -209,7 +214,7 @@ describe('Mine filter', () => {
             .next()
             .contains(testFilterNavn);
 
-        // Finn testfilteret på plass 2 i lista. Flyttar den to hakk ned
+        // Finn testfilteret på plass 2 i lista (0-indeksert). Flyttar den to hakk ned.
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
             .contains(testFilterNavn)
             .should('have.value', 2)
@@ -276,7 +281,7 @@ describe('Mine filter', () => {
         cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
-        // Sjekk at testfilteret er på plass 2 i lista igjen
+        // Sjekk at testfilteret er på plass 2 i lista
         cy.getByTestId('mine-filter_radio-container')
             .get(navDsRadioButtonsSelector)
             .children()
@@ -284,14 +289,14 @@ describe('Mine filter', () => {
             .next()
             .contains(testFilterNavn);
 
-        // Fjern filter som var valgt (dette har lite med denne testen å gjere eigentleg)
+        // Fjern filter som var vald (dette har lite med denne testen å gjere eigentleg)
         cy.getByTestId('filtreringlabel_mote-med-nav-idag').should('be.visible').click();
     });
 
     it('Test oppførsel når et lagra filter bruker et tiltaksfilter som ikke finnes lenger', () => {
-        cy.getByTestId('mine-filter_rad-wrapper').then(filterraderForSletting => {
+        cy.get('@mineFilter').then(filterraderForSletting => {
             // Sjekkar at vi finn testfilteret vi skal bruke
-            cy.getByTestId('mine-filter_rad-wrapper').should('contain.text', testFilterNavn);
+            cy.get('@mineFilter').should('contain.text', testFilterNavn);
 
             // Vel eit lagra filter som inneheld tiltakstypar som ikkje lenger kan brukast
             cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
@@ -312,7 +317,7 @@ describe('Mine filter', () => {
             cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
 
             // Sjekkar at vi har færre filter enn i starten av testen
-            cy.getByTestId('mine-filter_rad-wrapper').should('have.length', filterraderForSletting.length - 1);
+            cy.get('@mineFilter').should('have.length', filterraderForSletting.length - 1);
         });
     });
 });

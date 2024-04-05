@@ -61,8 +61,8 @@ describe('Arbeidsliste', () => {
     });
 
     it('Lag to nye arbeidslister', () => {
-        // Finn alle brukarar som har arbeidslister før nye er oppretta
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(elementIArbeidslisteFor => {
+        // Finn alle brukarar som har arbeidslister frå før
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]').as('elementIArbeidsliste').then(elementIArbeidslisteFor => {
             // Sjekk at vi fann nokon element
             expect(elementIArbeidslisteFor.length).to.be.greaterThan(0);
 
@@ -95,7 +95,7 @@ describe('Arbeidsliste', () => {
             cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Samanlikn talet på brukarar med arbeidslister før og etter at ein har oppretta nye
-            cy.get('[data-cy=brukerliste_element_arbeidsliste]')
+            cy.get('@elementIArbeidsliste')
                 .then((elementIArbeidslisteEtter) => {
                     expect(elementIArbeidslisteEtter.length).to.equal(elementIArbeidslisteFor.length + 2);
                 });
@@ -140,7 +140,7 @@ describe('Arbeidsliste', () => {
 
     it('Slett arbeidsliste via fjern-knapp', () => {
         // Tel kor mange arbeidslister det er
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(antallArbeidslisterForSletting => {
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]').as('elementIArbeidsliste').then(antallArbeidslisterForSletting => {
             // Finn checkboksen til den fyrste personen med arbeidsliste
             cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
             cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
@@ -155,7 +155,7 @@ describe('Arbeidsliste', () => {
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
-            cy.get('[data-cy=brukerliste_element_arbeidsliste]')
+            cy.get('@elementIArbeidsliste')
                 .should('be.visible')
                 .then(antallArbeidslisterEtterSletting => {
                     expect(antallArbeidslisterEtterSletting.length)
@@ -166,7 +166,7 @@ describe('Arbeidsliste', () => {
 
     it('Slett arbeidsliste via rediger-modal', () => {
         // Hentar brukarane med arbeidslister før sletting
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]').then(antallArbeidslisterForSletting => {
+        cy.get('[data-cy=brukerliste_element_arbeidsliste]').as('elementIArbeidsliste').then(antallArbeidslisterForSletting => {
             // Opne arbeidslistepanel for den fyrste brukaren som har arbeidsliste
             cy.apneForsteArbeidslistepanel();
             cy.get('.arbeidsliste-modal').should('not.exist');
@@ -185,7 +185,7 @@ describe('Arbeidsliste', () => {
             cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
-            cy.get('[data-cy=brukerliste_element_arbeidsliste]')
+            cy.get('@elementIArbeidsliste')
                 .should('be.visible')
                 .then(antallArbeidslisterEtterSletting => {
                     expect(antallArbeidslisterEtterSletting.length)
@@ -249,9 +249,9 @@ describe('Arbeidsliste', () => {
         cy.apneForsteArbeidslistepanel();
 
         // Finn tittel-elementet
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').then(tittelForRedigering => {
+        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').as('tittel').then(tittelForRedigering => {
             // Finn kommentar-elementet også
-            cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').then(kommentarForRedigering => {
+            cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').as('kommentar').then(kommentarForRedigering => {
                 const nyTittel = 'Skal ikke lagres';
                 const nyKommentar = 'Kommentar skal heller ikke lagres';
 
@@ -268,8 +268,8 @@ describe('Arbeidsliste', () => {
                 cy.getByTestId('modal_rediger-arbeidsliste_avbryt-knapp').click();
 
                 // Sjekkar at teksten ikkje vart endra
-                cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('contain', tittelForRedigering.text());
-                cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').should('contain', kommentarForRedigering.text());
+                cy.get('@tittel').should('contain', tittelForRedigering.text());
+                cy.get('@kommentar').should('contain', kommentarForRedigering.text());
             })
         });
 

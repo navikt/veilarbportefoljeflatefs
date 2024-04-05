@@ -23,7 +23,7 @@ describe('Filter min arbeidsliste', () => {
 
     it('Legg til person i lilla arbeidsliste', () => {
         // Hentar ut kor mange som er i Lilla arbeidsliste i starten av testen
-        cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then(antallILillaArbeidslisteFor => {
+        cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').as('lillaArbeidslistetall').then(antallILillaArbeidslisteFor => {
             // Nullstill valg av filter "min arbeidsliste"
             cy.scrollTo('top');
             cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
@@ -35,10 +35,9 @@ describe('Filter min arbeidsliste', () => {
             cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
 
             // Legg dei til i arbeidslista
-            cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-            cy.getByTestId('legg-i-arbeidsliste_knapp').click();
+            cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
 
-            // Gjer ting i modal
+            // Gjer ting i modal og lagre det (tittel, kommentar, fargekategori = lilla)
             cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
             cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
             cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
@@ -50,7 +49,7 @@ describe('Filter min arbeidsliste', () => {
 
             // Sjekk at det no er ein meir person i lilla arbeidsliste
             cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
-            cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').then(antallILillaArbeidslisteEtter => {
+            cy.get('@lillaArbeidslistetall').then(antallILillaArbeidslisteEtter => {
                 expect(parseInt(antallILillaArbeidslisteEtter.text()))
                     .to.equal(parseInt(antallILillaArbeidslisteFor.text()) + 1);
             });
