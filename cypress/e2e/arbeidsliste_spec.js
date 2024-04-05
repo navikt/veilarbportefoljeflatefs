@@ -29,20 +29,22 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('modal_arbeidsliste_form').contains('Du må korte ned teksten til 500 tegn');
         cy.getByTestId('modal_arbeidsliste_form').should('not.contain', 'Du må fylle ut en kommentar');
 
+        cy.getByTestId('modal_arbeidsliste_avbryt-knapp').click();
+    });
+
+    it('Lagre ny arbeidsliste', () => {
+        // Opnar "Legg i arbeidsliste"-modal igjen
+        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+        cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
+
         // Nullstillar tittel og kommentar og skriv inn gyldig input
-        cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_tittel').type('validering');
-        cy.getByTestId('modal_arbeidsliste_kommentar').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').type('valideringskommentar');
 
         // Set ein frist og kategori
         cy.get('#fristDatovelger').type('01.03.2066');
         cy.getByTestId('modal_arbeidslistekategori_GUL').click();
 
-        // Lagrar ikkje arbeidslista i denne testen
-    });
-
-    it('Lagre ny arbeidsliste', () => {
         cy.getByTestId('modal_legg-i-arbeidsliste_navn').then(($navn) => {
             // Hugsar fornamnet til brukaren vi har valgt
             const fornavn = $navn.text().split(' ')[0];
@@ -270,7 +272,7 @@ describe('Arbeidsliste', () => {
                 // Sjekkar at teksten ikkje vart endra
                 cy.get('@tittel').should('contain', tittelForRedigering.text());
                 cy.get('@kommentar').should('contain', kommentarForRedigering.text());
-            })
+            });
         });
 
         cy.lukkForsteArbeidslistepanel();
