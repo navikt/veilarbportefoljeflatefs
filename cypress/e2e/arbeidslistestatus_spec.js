@@ -2,9 +2,6 @@ before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
     cy.configure();
-});
-
-beforeEach('Gå til Min oversikt', () => {
     cy.gaTilOversikt('min-oversikt');
 });
 
