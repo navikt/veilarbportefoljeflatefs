@@ -25,6 +25,7 @@ function SokVeiledereVeiledergrupper({handterVeiledereValgt, valgteVeiledere}: S
                     legend=""
                     onChange={handterVeiledereValgt}
                     value={valgteVeiledere}
+                    data-testid="sokfilter-veilederliste_veiledere"
                 >
                     {liste.map((elem, index) => (
                         <Checkbox

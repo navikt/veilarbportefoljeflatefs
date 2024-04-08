@@ -8,11 +8,11 @@ before('Start server', () => {
     cy.configure();
 });
 
-describe('Filter', () => {
-    beforeEach('Gå til filter-tab', () => {
-        cy.klikkTab('FILTER');
-    });
+beforeEach('Gå til filter-tab', () => {
+    cy.klikkTab('FILTER');
+});
 
+describe('Filter', () => {
     afterEach('Gå til status-tab', () => {
         cy.klikkTab('STATUS');
     });
