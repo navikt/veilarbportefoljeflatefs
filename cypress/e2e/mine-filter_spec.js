@@ -59,7 +59,9 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
 
             // Lukkar modal, nullstillar test
-            cy.get('body').type('{esc}');
+            cy.getByTestId('egenmodal_header').within(() => {
+                cy.get('button').click();
+            });
             cy.klikkTab('MINE_FILTER');
         });
     });
@@ -199,8 +201,8 @@ describe('Mine filter', () => {
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').should('not.exist');
         cy.getByTestId('mine-filter_sortering_nullstill-knapp').should('not.exist');
     });
-    /* Avhengig av tidlegare testar: sikre plassering av element i lista */
 
+    /* Avhengig av tidlegare testar: sikre plassering av element i lista */
     it('Drag and drop - Verifiser lagring', () => {
         // Skru på endring av rekkefølge
         cy.getByTestId('toggle-knapp').click();
