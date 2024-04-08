@@ -7,154 +7,150 @@ const andersen = 'Andersen';
 const johansen = 'Johansen';
 const aasen = 'Aasen';
 const minstEnVeileder = 'Du må legge til veiledere.';
-let antallVeiledergrupper = 0;
 
 before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
     cy.configure();
+
+    // Går til veiledergruppefana
+    cy.gaTilOversikt('enhetens-oversikt');
+    cy.klikkTab('VEILEDERGRUPPER');
+});
+
+beforeEach('Lag alias for veiledergrupper: @veiledergrupper', () => {
+    // Aliaset kan hentast med cy.get('@veiledergrupper').
+    // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
+    cy.getByTestId('veiledergruppe_rad-wrapper').as('veiledergrupper');
 });
 
 describe('Veiledergrupper', () => {
-    it('Verifiser antall grupper', () => {
-        cy.gaTilOversikt('enhetens-oversikt');
-
-        cy.klikkTab('VEILEDERGRUPPER');
-
-        cy.get('[data-testid=veiledergruppe_rad-wrapper]').then(ant => {
-            antallVeiledergrupper += Cypress.$(ant).length;
-        });
-    });
-
-    it('Det skal være riktig antall veiledergrupper ', () => {
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper);
-    });
-
     it('Lag ny veiledergruppe', () => {
-        cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
+        // Hentar veiledergrupper så vi kan samanlikne kor mange vi har før og etter opprettinga
+        cy.get('@veiledergrupper').then(veiledergrupperForOpprettNy => {
+            // Opne modal for å lage ny gruppe
+            cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
 
-        cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear();
+            // Søk etter brukar "Andersen" og vel den
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
+            cy.getByTestId('sokfilter-veilederliste_veiledere').as('veilederliste').should('contain', andersen);
+            cy.get('@veilederliste').should('not.contain', johansen);
+            cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
-        cy.wait(1000);
+            // Søk på enno ein brukar og vel den
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').clear().type(johansen);
+            cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
-        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
+            // Prøvar å lagre endringar utan gruppenamn, blir stoppa av validering
+            cy.getByTestId('veiledergruppe_modal_gruppenavn-input').should('have.value', '');
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('veiledergruppe_modal_form').contains('Gruppen mangler navn, legg inn gruppenavn.');
 
-        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').should('have.value', andersen);
+            // Testar validering på gruppenamn som allereie er i bruk
+            cy.getByTestId('veiledergruppe_modal_gruppenavn-input').type(eksisterendeGruppenavn);
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('veiledergruppe_modal_form').contains('Gruppenavn er allerede i bruk.');
 
-        cy.getByTestId('veiledergruppe_modal_gruppenavn-input').should('have.value', '');
+            // Skriv inn gyldig gruppnamn, lagrar, får bekrefting
+            cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear().type(gruppenavn);
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
 
-        cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
-            force: true
+            // Sjekkar at den nye gruppa vart lagt til og at den er vald
+            cy.get('@veiledergrupper').should('have.length', veiledergrupperForOpprettNy.length + 1)
+                .contains(gruppenavn);
+            cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');
+
+            // Sjekkar at brukarane vi la til i gruppa er synlege som filtertags
+            cy.getByTestId('filtrering_label-container').children().as('filtreringstags').contains(andersen);
+            cy.get('@filtreringstags').contains(johansen);
+
+            // Gruppa skal også finnast når vi går til vVeilederoversikten
+            cy.gaTilOversikt('veileder-oversikt');
+            cy.get('@veiledergrupper').contains(gruppenavn);
         });
 
-        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').clear().type(johansen);
-
-        cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
-            force: true
-        });
-
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-
-        cy.getByTestId('veiledergruppe_modal_form').contains('Gruppen mangler navn, legg inn gruppenavn.');
-
-        cy.getByTestId('veiledergruppe_modal_gruppenavn-input').type(eksisterendeGruppenavn);
-
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-
-        cy.getByTestId('veiledergruppe_modal_form').contains('Gruppenavn er allerede i bruk.');
-
-        cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear().type(gruppenavn);
-
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-
-        cy.getByTestId('timed-toast_gruppen-er-opprettet').contains('Gruppen er opprettet');
-
-        cy.getByTestId('filtrering_label-container').children().contains(andersen);
-
-        cy.getByTestId('filtrering_label-container').children().contains(johansen);
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').contains(gruppenavn);
-
-        cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');
-
-        cy.gaTilOversikt('veileder-oversikt');
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').contains(gruppenavn);
-
+        // Returnerar til Enhetens oversikt for neste test
         cy.gaTilOversikt('enhetens-oversikt');
     });
 
     it('Rediger gruppenavn', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavn)}`, {timeout: 5000}).click();
+        // Henter veiledergrupper så vi kan sjekke at det er like mange før og etter redigering
+        cy.get('@veiledergrupper').then(veiledergrupperForRedigering => {
+            // Finn knapp, vent 5sek, trykk på den???
+            cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavn)}`).click();
 
-        cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear().type(gruppenavnRedigert);
+            // Ta bort gamalt gruppenamn og skriv inn det nye
+            cy.getByTestId('veiledergruppe_modal_gruppenavn-input').clear().type(gruppenavnRedigert);
 
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            // Lagre og få bekrefting på lagring
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('timed-toast_gruppen-er-lagret').contains('Gruppen er lagret');
 
-        cy.getByTestId('timed-toast_gruppen-er-lagret').contains('Gruppen er lagret');
+            // Sjekk at nytt gruppenamn er i lista og at lista har like mange grupper som før
+            cy.get('@veiledergrupper').contains(gruppenavnRedigert);
+            cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
+        });
 
-        cy.getByTestId('veiledergruppe_rad-wrapper').contains(gruppenavnRedigert);
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
     });
 
     it('Rediger filtervalg', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
+        // Henter veiledergrupper så vi kan sjekke at det er like mange før og etter redigering
+        cy.get('@veiledergrupper').then(veiledergrupperForRedigering => {
+            // Opne redigering
+            cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
 
-        cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            // Ta bort begge dei valde veilederane
+            cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            cy.getByTestId('veiledergruppe_modal_antall-valgte-veiledere_0').should('exist');
+            cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains('Ingen veiledere lagt til i gruppen');
 
-        cy.getByTestId('veiledergruppe_modal_valgt-veileder_fjern-knapp').first().click();
+            // Prøv å lagre utan veiledarar, bli stoppa av validering
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
 
-        cy.getByTestId('veiledergruppe_modal_antall-valgte-veiledere_0').should('exist');
+            // Legg til ny veiledar ("Aasen")
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(aasen);
+            cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
-        cy.getByTestId('veiledergruppe_modal_valgte-veiledere_wrapper').contains('Ingen veiledere lagt til i gruppen');
+            // Lagre
+            cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
+            cy.getByTestId('timed-toast_gruppen-er-lagret').should('be.visible').contains('Gruppen er lagret');
 
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-
-        cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
-
-        cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(aasen);
-
-        cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({
-            force: true
+            // Sjekk at redigeringa fungerte
+            cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(aasen);
         });
-
-        cy.getByTestId('veiledergruppe_modal_lagre-knapp').click();
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper + 1);
-
-        cy.getByTestId('timed-toast_gruppen-er-lagret').should('be.visible').contains('Gruppen er lagret');
-
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(aasen);
     });
 
     it('Slett veiledergruppe', () => {
-        cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
+        cy.get('@veiledergrupper').then(veiledergrupperForSletting => {
+            // Opne redigering
+            cy.getByTestId(`rediger-veiledergruppe_knapp_${kebabCase(gruppenavnRedigert)}`).click();
 
-        cy.getByTestId('veiledergruppe_modal_slette-knapp').click();
+            // Slett og bekreft sletting
+            cy.getByTestId('veiledergruppe_modal_slette-knapp').click();
+            cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
 
-        cy.getByTestId('bekreft-sletting_modal_slett-knapp').click();
-
-        cy.getByTestId('veiledergruppe_rad-wrapper').should('have.length', antallVeiledergrupper);
-
-        cy.getByTestId('timed-toast_gruppen-er-slettet').should('be.visible').contains('Gruppen er slettet');
+            // Sjekk at vi får slettebekrefting og no har færre veiledergrupper i lista
+            cy.getByTestId('timed-toast_gruppen-er-slettet').should('be.visible').contains('Gruppen er slettet');
+            cy.get('@veiledergrupper').should('have.length', veiledergrupperForSletting.length - 1);
+        });
     });
 
     it('Veileder har byttet enhet', () => {
+        // Vel ei veiledergruppe, få opp modal med ein gong fordi det er noko i lista brukaren må ta stilling til
         cy.getByTestId(`veiledergruppe-rad_${kebabCase(eksisterendeGruppenavn)}`).click({force: true});
-
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('be.visible');
 
+        // Vi kan sjå feilmelding
         cy.getByTestId('veiledergruppe_modal_alertstripe')
             .should('be.visible')
             .contains('En eller flere veiledere i gruppen har ikke tilgang lenger, og gruppen er nå lik');
 
+        // Vi avbryt redigering, modalen lukkar seg
         cy.getByTestId('veiledergruppe_modal_avbryt-knapp').click();
-
         cy.get('.veiledergruppe_modal_rediger-veiledergruppe').should('not.exist');
-
-        cy.getByTestId('filtreringlabel_nullstill-filtervalg').should('be.visible').click();
     });
 });

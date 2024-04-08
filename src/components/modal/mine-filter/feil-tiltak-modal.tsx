@@ -41,7 +41,7 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
     return (
         <>
             <EgenModal
-                className="feil-tiltak_modal"
+                className="feil-tiltak_modal testid-feil-tiltak_modal"
                 open={erFeilTiltakModalApen}
                 onClose={lukkModal}
                 tittel="Tiltaksfilter finnes ikke"
