@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
-import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
+import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';

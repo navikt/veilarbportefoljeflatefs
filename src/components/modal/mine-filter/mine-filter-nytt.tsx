@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
-import {ErrorModalType, MineFilterVarselModal} from './varsel-modal';
+import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
 import {lagreNyttFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/listevisning';
