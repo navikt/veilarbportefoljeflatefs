@@ -1,7 +1,6 @@
 import React from 'react';
-import ModalHeader from './modal-header';
 import './modal.css';
-import {Modal} from '@navikt/ds-react';
+import {Heading, Modal} from '@navikt/ds-react';
 
 interface ModalProps {
     children: React.ReactNode;
@@ -9,13 +8,16 @@ interface ModalProps {
     open?: boolean;
     onClose: () => void;
     tittel?: string;
+    modalWidth?: 'small' | 'medium';
 }
 
-function EgenModal({children, className, open = true, onClose, tittel}: ModalProps) {
+export function EgenModal({children, className, open = true, onClose, tittel, modalWidth}: ModalProps) {
     return (
-        <Modal className={className} open={open} onClose={onClose}>
+        <Modal className={className} open={open} onClose={onClose} width={modalWidth}>
             <Modal.Header data-testid="egenmodal_header">
-                <ModalHeader tittel={tittel} />
+                <Heading size="medium" level="1" className={className}>
+                    {tittel}
+                </Heading>
             </Modal.Header>
             <Modal.Body>
                 <div className="modal-innhold">{children}</div>

@@ -40,13 +40,13 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
 
     return (
         <>
-            {' '}
             {erFeilTiltakModalApen && (
                 <EgenModal
                     className="feil-tiltak_modal testid-feil-tiltak_modal"
                     open={erFeilTiltakModalApen}
                     onClose={lukkModal}
                     tittel="Tiltaksfilter finnes ikke"
+                    modalWidth="small"
                 >
                     <BodyShort size="small">
                         En eller flere av tiltakstypene du har lagret finnes ikke lenger som filter. Det kan skyldes at
