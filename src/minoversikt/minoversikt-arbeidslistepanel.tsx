@@ -50,8 +50,10 @@ export default function ArbeidslistePanel({
                     {!bruker.arbeidsliste.hentetKommentarOgTittel && (
                         <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
                     )}
-                    <Detail className="brukerliste__arbeidslisteinnhold_footer">
-                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                    <div className="brukerliste__arbeidslisteinnhold_footer">
+                        <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
+                            {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                        </Detail>
                         <ArbeidslisteModalRediger
                             bruker={bruker}
                             innloggetVeileder={innloggetVeileder}
@@ -59,7 +61,7 @@ export default function ArbeidslistePanel({
                             sistEndretAv={sistEndretAv}
                             settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                         />
-                    </Detail>
+                    </div>
                 </span>
             )}
         </div>
