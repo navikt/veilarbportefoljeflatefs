@@ -104,12 +104,11 @@
 }
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
     color: #6a6a6a;
-    text-align: right;
+    float: right;
     font-style: italic;
 }
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer button {
+.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer > button {
     font-style: italic;
-    border: none;
 }
 .veilarbportefoljeflatefs .fnr-kolonne {
     display: flex;
