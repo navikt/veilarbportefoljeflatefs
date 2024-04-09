@@ -14,9 +14,9 @@ describe('Arbeidsliste', () => {
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
 
         // Opne legg-i-arbeidsliste_modal
-        cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
+        cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
-        cy.get('.legg-i-arbeidsliste_modal').should('be.visible');
+        cy.get('.testid_legg-i-arbeidsliste_modal').should('be.visible');
 
         // Testar validering av tittel-input
         cy.getByTestId('modal_arbeidsliste_tittel').type('valideringstest på at det ikke er lov med tegn mer enn 30');
@@ -57,7 +57,7 @@ describe('Arbeidsliste', () => {
             cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Sjekk at brukaren er i lista
-            cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
+            cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
             cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first();
         });
     });
@@ -75,9 +75,9 @@ describe('Arbeidsliste', () => {
 
             // Opne legg-til-i-arbeidsliste_modal
             cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-            cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
+            cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
             cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
-            cy.get('.legg-i-arbeidsliste_modal').should('be.visible');
+            cy.get('.testid_legg-i-arbeidsliste_modal').should('be.visible');
 
             // Fyll ut innhald for fyrste brukar
             cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
@@ -92,7 +92,7 @@ describe('Arbeidsliste', () => {
             cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
 
             // Sjekk at modal er lukka og laster-modal fungerer
-            cy.get('.legg-i-arbeidsliste_modal').should('not.exist');
+            cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
             cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
             cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
 

@@ -125,7 +125,7 @@ function ArbeidslisteModalRediger({
                     {formikProps => (
                         <>
                             <Modal
-                                className="arbeidsliste-modal" /* Klassenamn er tidlegare nytta som testid, kan kanskje fjernast */
+                                className="arbeidsliste-modal"
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
                                 data-testid="arbeidsliste-rediger-modal"

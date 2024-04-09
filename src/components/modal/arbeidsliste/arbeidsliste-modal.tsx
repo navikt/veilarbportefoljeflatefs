@@ -68,7 +68,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                         </VarselModal>
                     ) : (
                         <Modal
-                            className="arbeidsliste-modal legg-i-arbeidsliste_modal"
+                            className="arbeidsliste-modal testid_legg-i-arbeidsliste_modal"
                             open={isModalOpen}
                             onClose={lukkModal}
                         >
