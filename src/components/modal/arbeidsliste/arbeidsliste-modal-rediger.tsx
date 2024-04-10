@@ -12,7 +12,6 @@ import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
@@ -129,9 +128,9 @@ function ArbeidslisteModalRediger({
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
                                 data-testid="arbeidsliste-rediger-modal"
+                                header={{heading: 'Rediger arbeidsliste'}}
                             >
                                 <Modal.Body>
-                                    <ModalHeader tittel="Rediger arbeidsliste" />
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
                                             sistEndretDato={sistEndretDato}
