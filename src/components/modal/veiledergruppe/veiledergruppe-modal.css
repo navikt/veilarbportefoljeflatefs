@@ -2,11 +2,6 @@
     margin-bottom: 0.5rem;
 }
 
-.veiledergruppe-modal__form {
-    margin-top: 1rem;
-    padding: 0 1rem;
-}
-
 .veiledergruppe-modal__form .typo-feilmelding {
     max-width: 40rem;
 }

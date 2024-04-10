@@ -124,8 +124,8 @@ describe('Arbeidsliste', () => {
         cy.getByTestId('min-oversikt_arbeidslistepanel-arbeidsliste_rediger-knapp').should('be.visible').click();
 
         // Modalen viser rett ting
-        cy.getByTestId('arbeidsliste-rediger-modal').should('be.visible');
-        cy.get('.modal-header').contains('Rediger arbeidsliste');
+        cy.getByTestId('arbeidsliste-rediger-modal').should('be.visible')
+            .contains('Rediger arbeidsliste');
 
         // Skriv inn ny tekst for tittel og kommentar
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);

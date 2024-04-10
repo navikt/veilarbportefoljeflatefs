@@ -81,6 +81,7 @@ export function MineFilterModal({oversiktType}: Props) {
                     open={erModalApen}
                     onClose={lukkModal}
                     tittel={VisningstypeToTittel.get(valgtVisningstype)}
+                    modalWidth="small"
                 >
                     <div className="modal-visningstype">
                         <HiddenIfLasterModal hidden={!laster} isOpen={laster} />

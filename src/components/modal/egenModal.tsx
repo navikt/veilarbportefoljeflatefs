@@ -1,5 +1,4 @@
 import React from 'react';
-import './modal.css';
 import {Heading, Modal} from '@navikt/ds-react';
 
 interface ModalProps {
