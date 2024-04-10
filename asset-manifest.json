@@ -1,38 +1,38 @@
 {
   "files": {
     "main.css": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.0a174664.js",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.d6ee6d6f.js",
     "static/media/tab_veiledergrupper.svg": "/veilarbportefoljeflatefs/static/media/tab_veiledergrupper.3d7005052409d33ff936c957a8934d9b.svg",
-    "static/media/huskelapp_stiplet.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_stiplet.fc4621194347dc686ef7a381f2a49dd9.svg",
+    "static/media/huskelapp_stiplet.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_stiplet.dcbb5ec7983799660c105282e020530b.svg",
     "static/media/datepicker.less": "/veilarbportefoljeflatefs/static/media/datepicker.37f9a43e92e4c0f60401.less",
-    "static/media/Fargekategoriikon_ingen_kategori.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_ingen_kategori.35e903c4861f04c23c3bd54c2f3bc60a.svg",
+    "static/media/Fargekategoriikon_ingen_kategori.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_ingen_kategori.058c038e59ac3119c4ae0bf05175a0e7.svg",
     "static/media/index.less": "/veilarbportefoljeflatefs/static/media/index.3becc3bc0aef6d6af903.less",
     "static/media/arbeidslisteikon_bla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_bla.b1f96319b765dbbb666e1f6177e9aa29.svg",
     "static/media/x_mark_octagon_icon.svg": "/veilarbportefoljeflatefs/static/media/x_mark_octagon_icon.252c5a9ebaed2457dbc3b6db30334939.svg",
-    "static/media/huskelapp.svg": "/veilarbportefoljeflatefs/static/media/huskelapp.ad70c7e811d82a5e22947c507f13b8d9.svg",
+    "static/media/huskelapp.svg": "/veilarbportefoljeflatefs/static/media/huskelapp.8db5858c1ce1ed0f86ecdde53df55f52.svg",
+    "static/media/huskelapp_omriss.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_omriss.fe1b561389681a0595fdeb11a91e4eec.svg",
     "index.html": "/veilarbportefoljeflatefs/index.html",
-    "static/media/huskelapp_omriss.svg": "/veilarbportefoljeflatefs/static/media/huskelapp_omriss.9c398f48d43a8da6db611139c8760b78.svg",
     "static/media/arbeidslisteikon_gronn.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gronn.224ed17e96c832fc3a45ae3aff1a0dcf.svg",
     "static/media/arbeidslisteikon_lilla.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_lilla.131212530fc3f8247477612badde3b60.svg",
     "static/media/arbeidslisteikon_gul.svg": "/veilarbportefoljeflatefs/static/media/arbeidslisteikon_gul.308e65e05f8758bc1c4ac55930c716ec.svg",
     "static/media/dragIcon.svg": "/veilarbportefoljeflatefs/static/media/dragIcon.960f7e2f75f3c436d84adc87e31f3007.svg",
     "static/media/filter-ikon.svg": "/veilarbportefoljeflatefs/static/media/filter-ikon.3780765b6a9ff9601e778d557fc68ccd.svg",
+    "static/media/Fargekategoriikon_lysebla_femkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lysebla_femkant.1485b47f0ac4b82775af504e2d5f16e4.svg",
+    "static/media/Fargekategoriikon_blatt_bokmerke.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_blatt_bokmerke.99c380533ee97118398844cc1580fd01.svg",
+    "static/media/Fargekategoriikon_lilla_firkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lilla_firkant.e4ac40c1b8b5966d8fad3cbb459329dc.svg",
+    "static/media/Fargekategoriikon_gronn_trekant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gronn_trekant.4c1535769cd37c969b7cce2979caebe7.svg",
+    "static/media/Fargekategoriikon_oransje_diamant_v2.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_oransje_diamant_v2.319928d1e674008ac599e16415c7c970.svg",
     "static/media/tab_mine-filter.svg": "/veilarbportefoljeflatefs/static/media/tab_mine-filter.b52bcca09f1ec50567660b6314893fba.svg",
+    "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.8c998b9cc58854c2dd40c5dff574d038.svg",
     "static/media/tab_filter.svg": "/veilarbportefoljeflatefs/static/media/tab_filter.1be8f60a590dcc609f09372d123b0b02.svg",
     "static/media/tab_status.svg": "/veilarbportefoljeflatefs/static/media/tab_status.f58f279078f48af9ce888fd4d0840690.svg",
-    "static/media/Fargekategoriikon_lysebla_femkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lysebla_femkant.0ede9bb1dc5d4b55c069b11383ebdb91.svg",
-    "static/media/Fargekategoriikon_blatt_bokmerke.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_blatt_bokmerke.bd9b7599f8e2406f2a5c8438a112257f.svg",
-    "static/media/Fargekategoriikon_lilla_firkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lilla_firkant.7af8298ea80857f468139907ead6667d.svg",
     "static/media/Fargekategoriikon_bokmerke.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bokmerke.bc87deb0a0cff5cb5d9140e63236e864.svg",
-    "static/media/Fargekategoriikon_gronn_trekant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gronn_trekant.0ef2d410112c105c4a2b6046ad393356.svg",
-    "static/media/Fargekategoriikon_oransje_diamant_v2.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_oransje_diamant_v2.a4760c0ac1710e283ba12c9c36bf3cee.svg",
-    "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.fc2fe05862e605570c8c488b79cdcddb.svg",
     "static/media/lenker-style.less": "/veilarbportefoljeflatefs/static/media/lenker-style.59b9d8fd90d389db0ed1.less",
     "main.8ab23df4.css.map": "/veilarbportefoljeflatefs/static/css/main.8ab23df4.css.map",
-    "main.0a174664.js.map": "/veilarbportefoljeflatefs/static/js/main.0a174664.js.map"
+    "main.d6ee6d6f.js.map": "/veilarbportefoljeflatefs/static/js/main.d6ee6d6f.js.map"
   },
   "entrypoints": [
     "static/css/main.8ab23df4.css",
-    "static/js/main.0a174664.js"
+    "static/js/main.d6ee6d6f.js"
   ]
 }
