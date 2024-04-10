@@ -44,6 +44,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre"
                     knappTekst={navn}
+                    spinner={false}
                 />
             )}
         </div>

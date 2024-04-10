@@ -11,13 +11,15 @@ type AksjonKnappMedPopoverFeilmeldingProps = {
     ctrlklikkAksjon?: (...args) => Promise<void>;
     knappStil?: string;
     knappTekst: string;
+    spinner?: boolean;
 };
 
 export const AksjonKnappMedPopoverFeilmelding = ({
     klikkAksjon,
     ctrlklikkAksjon,
     knappTekst,
-    knappStil
+    knappStil,
+    spinner = true
 }: AksjonKnappMedPopoverFeilmeldingProps) => {
     const [lasterAksjon, setLasterAksjon] = useState(false);
     const [harFeilAksjon, setHarFeilAksjon] = useState(false);
@@ -56,7 +58,7 @@ export const AksjonKnappMedPopoverFeilmelding = ({
             <Button
                 aria-label={knappTekst}
                 className={knappStil}
-                loading={lasterAksjon}
+                loading={spinner && lasterAksjon}
                 onClick={handterKlikkAksjon}
                 size="xsmall"
                 variant="tertiary"
