@@ -7,7 +7,6 @@ import {BrukerModell} from '../../../model-interfaces';
 import './arbeidsliste.css';
 import {AppState} from '../../../reducer';
 import {STATUS} from '../../../ducks/utils';
-import ModalHeader from '../modal-header';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import {BodyShort, Heading, Modal} from '@navikt/ds-react';
@@ -71,9 +70,9 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             className="arbeidsliste-modal testid_legg-i-arbeidsliste_modal"
                             open={isModalOpen}
                             onClose={lukkModal}
+                            header={{heading: 'Legg i arbeidsliste'}}
                         >
                             <Modal.Body>
-                                <ModalHeader tittel="Legg i arbeidsliste" />
                                 <div className="modal-innhold">
                                     <LeggTilArbeidslisteForm
                                         valgteBrukere={valgteBrukere}
