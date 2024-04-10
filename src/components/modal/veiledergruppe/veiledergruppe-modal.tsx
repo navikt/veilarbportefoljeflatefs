@@ -11,9 +11,8 @@ import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './veiledergruppe-modal.css';
-import ModalHeader from '../modal-header';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
-import {Alert, Button, Modal} from '@navikt/ds-react';
+import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
 import classNames from 'classnames';
 import {STATUS} from '../../../ducks/utils';
@@ -209,9 +208,18 @@ export function VeiledergruppeModal({
                 <LasterModal isOpen={statusLaster} />
             ) : (
                 <>
-                    <Modal open={isOpen} onClose={lukkModal} className={classNames('veiledergruppe-modal', className)}>
+                    <Modal
+                        open={isOpen}
+                        onClose={lukkModal}
+                        className={classNames('veiledergruppe-modal', className)}
+                        width="medium"
+                    >
+                        <Modal.Header>
+                            <Heading size="medium" level="1">
+                                {modalTittel}
+                            </Heading>
+                        </Modal.Header>
                         <Modal.Body>
-                            <ModalHeader tittel={modalTittel} />
                             {alertTekst.length !== 0 && (
                                 <Alert
                                     variant="warning"
