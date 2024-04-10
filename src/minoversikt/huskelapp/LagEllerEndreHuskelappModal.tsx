@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Button, Modal} from '@navikt/ds-react';
-import {HuskelappModalHeader} from './HuskelappModalHeader';
+import {Button, Heading, Modal} from '@navikt/ds-react';
 import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../model-interfaces';
 import './huskelapp.css';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
@@ -18,6 +17,7 @@ import FormikDatoVelger from '../../components/formik/formik-datovelger/formik-d
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
+import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
 
 interface Props {
     onModalClose: () => void;
@@ -36,8 +36,13 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
             open={isModalOpen}
             onClose={onModalClose}
         >
+            <Modal.Header>
+                <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
+                    <HuskelappIkon />
+                    Huskelapp
+                </Heading>
+            </Modal.Header>
             <Modal.Body>
-                <HuskelappModalHeader />
                 <div className="huskelapp-modal-content">
                     <div>
                         <HuskelappInfoAlert />
