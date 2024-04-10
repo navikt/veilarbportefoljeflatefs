@@ -304,15 +304,15 @@ describe('Mine filter', () => {
             cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
 
             // Får opp ein modal som fortel at tiltakstypen ikkje kan brukast nett no.
-            cy.get('.testid-feil-tiltak_modal').should('be.visible');
+            cy.getByTestId('feil-tiltak_modal').should('be.visible');
 
             // Vel å la filteret vere i lista (lukkar modal)
             cy.getByTestId('la-sta-knapp').click();
-            cy.get('.testid-feil-tiltak_modal').should('not.exist');
+            cy.getByTestId('feil-tiltak_modal').should('not.exist');
 
             // Trykkar på tiltaksfilteret igjen og får opp same modalen
             cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
-            cy.get('.testid-feil-tiltak_modal').should('be.visible');
+            cy.getByTestId('feil-tiltak_modal').should('be.visible');
 
             // Denne gongen slettar vi filteret
             cy.getByTestId('slett-knapp').click();

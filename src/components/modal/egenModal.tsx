@@ -8,11 +8,12 @@ interface ModalProps {
     onClose: () => void;
     tittel?: string;
     modalWidth?: 'small' | 'medium';
+    testid?: string;
 }
 
-export function EgenModal({children, className, open = true, onClose, tittel, modalWidth}: ModalProps) {
+export function EgenModal({children, className, open = true, onClose, tittel, modalWidth, testid}: ModalProps) {
     return (
-        <Modal className={className} open={open} onClose={onClose} width={modalWidth}>
+        <Modal className={className} open={open} onClose={onClose} width={modalWidth} data-testid={testid}>
             <Modal.Header data-testid="egenmodal_header">
                 <Heading size="medium" level="1" className={className}>
                     {tittel}
