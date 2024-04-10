@@ -109,24 +109,27 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     return (
         <>
             <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
+                <Modal.Header>
+                    <Heading size="medium" level="2">
+                        Arbeidslistenotat blir slettet
+                    </Heading>
+                </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
-                        <Heading size="large" level="2">
-                            Arbeidslistenotat blir slettet
-                        </Heading>
                         <BodyShort size="medium">
-                            {`Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet ved tildeling av ny veileder:`}
+                            Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet
+                            ved tildeling av ny veileder:
                         </BodyShort>
                         <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
-                        <BodyShort
-                            size="medium"
-                            className="sporsmal-likevel-tidele"
-                        >{`Ønsker du likevel å tildele veilederen til disse brukerne?`}</BodyShort>
+                        <BodyShort size="medium" className="sporsmal-likevel-tidele">
+                            Ønsker du likevel å tildele veilederen til disse brukerne?
+                        </BodyShort>
                     </div>
                     <div className="sletting-arbeidslista-knapp-wrapper">
                         <Button
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
+                            size="medium"
                             onClick={() => {
                                 trackAmplitude(
                                     {
@@ -141,7 +144,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                                 doTildelTilVeileder(tilordningerBrukereArbeidslisteBlirIkkeSlettet, ident);
                                 lukkFjernModal();
                             }}
-                            size="medium"
                         >
                             Avbryt tildeling for de aktuelle brukerne
                         </Button>
