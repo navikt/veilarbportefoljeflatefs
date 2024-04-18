@@ -127,6 +127,7 @@ function ArbeidslisteModalRediger({
                                 className="arbeidsliste-modal"
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
+                                closeOnBackdropClick={true}
                                 data-testid="arbeidsliste-rediger-modal"
                                 header={{heading: 'Rediger arbeidsliste'}}
                             >

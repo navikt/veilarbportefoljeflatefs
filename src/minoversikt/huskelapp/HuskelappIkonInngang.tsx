@@ -52,7 +52,11 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                 />
             )}
             {modalVisHuskelappSkalVises && (
-                <Modal open={modalVisHuskelappSkalVises} onClose={() => setModalVisHuskelappSkalVises(false)}>
+                <Modal
+                    open={modalVisHuskelappSkalVises}
+                    onClose={() => setModalVisHuskelappSkalVises(false)}
+                    closeOnBackdropClick={true}
+                >
                     <Modal.Header>
                         <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
                             <HuskelappIkon />

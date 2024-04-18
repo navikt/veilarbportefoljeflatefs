@@ -41,7 +41,7 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
     const modalTittel = modal?.header ? modal.header : 'Ny oppdatering';
 
     return (
-        <Modal className={'tour-modal'} open={open} onClose={lukkModal}>
+        <Modal className={'tour-modal'} open={open} onClose={lukkModal} closeOnBackdropClick={true}>
             <Modal.Header data-testid="endringslogg_tour-modal">
                 <Heading size="medium" level="1">
                     {modalTittel}

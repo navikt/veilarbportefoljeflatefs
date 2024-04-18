@@ -211,6 +211,7 @@ export function VeiledergruppeModal({
                     <Modal
                         open={isOpen}
                         onClose={lukkModal}
+                        closeOnBackdropClick={true}
                         className={classNames('veiledergruppe-modal', className)}
                         width="medium"
                     >

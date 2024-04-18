@@ -12,7 +12,6 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
         <Modal
             open={isOpenLoaderModal}
             onClose={() => setIsOpenLoaderModal(false)}
-            // shouldCloseOnOverlayClick={false} // TODO Designsystemoppdatering: skal ikkje ha overlay når dei andre får det i seinare v5-utgåve. 2024-04-12 Ingrid og Klara
             className="veilarbportefoljeflatefs-laster-modal"
         >
             <Loader size="2xlarge" />

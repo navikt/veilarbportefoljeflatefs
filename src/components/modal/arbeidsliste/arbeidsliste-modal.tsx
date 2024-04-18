@@ -70,6 +70,7 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                             className="arbeidsliste-modal testid_legg-i-arbeidsliste_modal"
                             open={isModalOpen}
                             onClose={lukkModal}
+                            closeOnBackdropClick={true}
                             header={{heading: 'Legg i arbeidsliste'}}
                         >
                             <Modal.Body>
