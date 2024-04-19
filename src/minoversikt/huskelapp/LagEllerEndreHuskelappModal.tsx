@@ -35,6 +35,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
             className={classNames('lag-eller-endre-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
+            closeOnBackdropClick={true}
         >
             <Modal.Header>
                 <Heading size="medium" level="1" spacing className="huskelapp-modal__header">

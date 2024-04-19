@@ -29,7 +29,12 @@ export function VarselModal({
     portalClassName
 }: React.PropsWithChildren<VarselModalProps>) {
     return (
-        <Modal open={isOpen} onClose={onClose} className={classNames('varsel-modal', portalClassName, dataTestClass)}>
+        <Modal
+            open={isOpen}
+            onClose={onClose}
+            className={classNames('varsel-modal', portalClassName, dataTestClass)}
+            closeOnBackdropClick={true}
+        >
             <Modal.Body>
                 <div className={classNames('varsel-modal__innhold', className)}>
                     <div className="varsel-modal__ikon">{getIkon(type)}</div>

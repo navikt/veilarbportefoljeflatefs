@@ -108,7 +108,12 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
     return (
         <>
-            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} className="advarsel-sletting-arbeidslista">
+            <Modal
+                open={visAdvarselOmSletting}
+                onClose={lukkFjernModal}
+                closeOnBackdropClick={true}
+                className="advarsel-sletting-arbeidslista"
+            >
                 <Modal.Header>
                     <Heading size="medium" level="2">
                         Arbeidslistenotat blir slettet

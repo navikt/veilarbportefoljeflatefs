@@ -13,7 +13,14 @@ interface ModalProps {
 
 export function EgenModal({children, className, open = true, onClose, tittel, modalWidth, testid}: ModalProps) {
     return (
-        <Modal className={className} open={open} onClose={onClose} width={modalWidth} data-testid={testid}>
+        <Modal
+            className={className}
+            open={open}
+            onClose={onClose}
+            closeOnBackdropClick={true}
+            width={modalWidth}
+            data-testid={testid}
+        >
             <Modal.Header data-testid="egenmodal_header">
                 <Heading size="medium" level="1" className={className}>
                     {tittel}
