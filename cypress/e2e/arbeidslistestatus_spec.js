@@ -51,6 +51,7 @@ describe('Arbeidslistestatus', () => {
             // // Sjå laster-modal
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
 
             // Sjekk at det no er ein meir person i lilla arbeidsliste
             cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
