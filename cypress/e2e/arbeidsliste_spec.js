@@ -56,6 +56,7 @@ describe('Arbeidsliste', () => {
             // // Laster-modal
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
 
             // Sjekk at brukaren er i lista
             cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
@@ -97,6 +98,7 @@ describe('Arbeidsliste', () => {
             // Testinga av laster-modal er litt ustabil så vi kommenterer den ut. 2024-04-19 Ingrid og Klara
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
 
             // Samanlikn talet på brukarar med arbeidslister før og etter at ein har oppretta nye
             cy.get('@elementIArbeidsliste')
@@ -157,6 +159,7 @@ describe('Arbeidsliste', () => {
             // Testinga av laster-modal er litt ustabil så vi kommenterer den ut. 2024-04-19 Ingrid og Klara
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
@@ -188,6 +191,7 @@ describe('Arbeidsliste', () => {
             // Testinga av laster-modal er litt ustabil så vi kommenterer den ut. 2024-04-19 Ingrid og Klara
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
