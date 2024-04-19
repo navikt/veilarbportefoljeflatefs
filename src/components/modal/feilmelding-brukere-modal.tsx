@@ -21,15 +21,13 @@ function FeilmeldingBrukereModal({
 }: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
+            overskrift={tittelTekst}
             isOpen={isOpen}
             onClose={onClose}
             type={VarselModalType.FEIL}
             portalClassName="arbeidsliste-modal"
             className="arbeidsliste-modal__content"
         >
-            <Heading size="small" level="1">
-                {tittelTekst}
-            </Heading>
             <BodyShort size="small">{infotekstTekst}</BodyShort>
             <FnrList listeMedFnr={fnrFeil} />
             <Button onClick={onClose} size="small">

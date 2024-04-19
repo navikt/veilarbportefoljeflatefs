@@ -1,7 +1,7 @@
 import React from 'react';
-import {VarselModal, VarselModalType} from './varselmodal';
-import {BodyShort, Button, Heading} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {Delete} from '@navikt/ds-icons';
+import {VarselModal, VarselModalType} from './varselmodal';
 import './varsel-modal.css';
 
 interface BekreftSlettingModalProps {
@@ -21,15 +21,13 @@ function BekreftSlettingModal({isOpen, onRequestClose, onSubmit, tittel, infoTek
 
     return (
         <VarselModal
+            overskrift={tittel}
             isOpen={isOpen}
             onClose={onRequestClose}
             className="bekreft-sletting-modal"
             type={VarselModalType.ADVARSEL}
         >
             <div className="bekreft-sletting-modal__tekstgruppe">
-                <Heading size="large" level="1">
-                    {tittel}
-                </Heading>
                 {infoTekst && <BodyShort size="small">{infoTekst}</BodyShort>}
                 <BodyShort size="small">
                     Er du sikker på at du vil slette <b>{navn}</b>?
