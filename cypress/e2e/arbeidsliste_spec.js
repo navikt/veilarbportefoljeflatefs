@@ -53,8 +53,8 @@ describe('Arbeidsliste', () => {
             cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
 
             // Laster-modal
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Sjekk at brukaren er i lista
             cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
@@ -93,8 +93,8 @@ describe('Arbeidsliste', () => {
 
             // Sjekk at modal er lukka og laster-modal fungerer
             cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Samanlikn talet på brukarar med arbeidslister før og etter at ein har oppretta nye
             cy.get('@elementIArbeidsliste')
@@ -152,8 +152,8 @@ describe('Arbeidsliste', () => {
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
 
             // Laster-modal oppfører seg som venta
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
@@ -182,9 +182,9 @@ describe('Arbeidsliste', () => {
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('be.visible').click();
 
             // Laster-modal oppfører seg som venta
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('be.visible');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
-            cy.get('.veilarbportefoljeflatefs-laster-modal').should('not.exist');
+            cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
 
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
             cy.get('@elementIArbeidsliste')
