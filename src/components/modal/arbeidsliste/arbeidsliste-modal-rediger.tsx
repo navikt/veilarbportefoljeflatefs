@@ -12,7 +12,6 @@ import moment from 'moment';
 import {OrNothing} from '../../../utils/types/types';
 import './arbeidsliste.css';
 import {logEvent} from '../../../utils/frontend-logger';
-import ModalHeader from '../modal-header';
 import {skjulModal, VIS_FJERN_ARBEIDSLISTE_MODAL, visFjernArbeidslisteModal} from '../../../ducks/modal';
 import {AppState} from '../../../reducer';
 import FjernArbeidslisteModal from './fjern-fra-arbeidsliste-modal';
@@ -92,9 +91,8 @@ function ArbeidslisteModalRediger({
             >
                 Rediger
             </Button>
-            {statusLaster ? (
-                <LasterModal isOpen={statusLaster} />
-            ) : (
+            {statusLaster && <LasterModal isOpen={statusLaster} />}
+            {isOpen && !statusLaster && (
                 <Formik
                     initialValues={initialValues}
                     enableReinitialize={true}
@@ -129,10 +127,10 @@ function ArbeidslisteModalRediger({
                                 className="arbeidsliste-modal"
                                 open={isOpen}
                                 onClose={() => lukkModalConfirm(formikProps)}
-                                shouldCloseOnOverlayClick
+                                data-testid="arbeidsliste-rediger-modal"
+                                header={{heading: 'Rediger arbeidsliste'}}
                             >
-                                <Modal.Content>
-                                    <ModalHeader tittel="Rediger arbeidsliste" />
+                                <Modal.Body>
                                     <div className="modal-innhold">
                                         <RedigerArbeidslisteForm
                                             sistEndretDato={sistEndretDato}
@@ -151,7 +149,7 @@ function ArbeidslisteModalRediger({
                                             />
                                         )}
                                     </div>
-                                </Modal.Content>
+                                </Modal.Body>
                             </Modal>
                         </>
                     )}

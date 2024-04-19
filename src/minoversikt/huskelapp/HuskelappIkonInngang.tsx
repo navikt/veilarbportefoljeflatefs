@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
-import {HuskelappModalHeader} from './HuskelappModalHeader';
 import {Huskelapp} from './Huskelapp';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {handleSlettHuskelapp} from './slettHuskelapp';
@@ -13,7 +12,7 @@ import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
 import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/huskelapp_stiplet.svg';
-import {Button, Modal} from '@navikt/ds-react';
+import {Button, Heading, Modal} from '@navikt/ds-react';
 
 export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -54,8 +53,13 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
             )}
             {modalVisHuskelappSkalVises && (
                 <Modal open={modalVisHuskelappSkalVises} onClose={() => setModalVisHuskelappSkalVises(false)}>
-                    <Modal.Content>
-                        <HuskelappModalHeader />
+                    <Modal.Header>
+                        <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
+                            <HuskelappIkon />
+                            Huskelapp
+                        </Heading>
+                    </Modal.Header>
+                    <Modal.Body>
                         <Huskelapp huskelapp={bruker.huskelapp!!} className="huskelapp-i-modal" />
                         <div className="huskelapp-handlingsknapper">
                             <Button
@@ -84,7 +88,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                                 Endre
                             </Button>
                         </div>
-                    </Modal.Content>
+                    </Modal.Body>
                 </Modal>
             )}
         </>

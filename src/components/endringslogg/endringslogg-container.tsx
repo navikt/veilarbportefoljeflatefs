@@ -43,7 +43,10 @@ export const EndringsloggContainer = ({
     };
 
     const handleClickOutside = (event: any) => {
-        if (loggNode.current?.contains(event.target) || document.body.classList.contains('ReactModal__Body--open')) {
+        if (
+            loggNode.current?.contains(event.target) ||
+            document.body.classList.contains('navds-modal__document-body')
+        ) {
             // Klikket er inne i komponenten, eller modalen vises
             return;
         }

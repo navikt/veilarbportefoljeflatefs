@@ -2,9 +2,6 @@ before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
     cy.configure();
-});
-
-beforeEach('Gå til Min oversikt', () => {
     cy.gaTilOversikt('min-oversikt');
 });
 
@@ -20,9 +17,15 @@ describe('Arbeidslistestatus', () => {
 
         // No skal "Fjern fra arbeidsliste"-knappen vere synleg
         cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled');
+
+        // Nullstill filter etter test
+        cy.getByTestId('filtreringlabel_min-arbeidsliste').click();
     });
 
     it('Legg til person i lilla arbeidsliste', () => {
+        // Vel "Min arbeidsliste"-filteret under Status i sidemenyen
+        cy.getByTestId('filter_checkboks-container_minArbeidsliste').click();
+
         // Hentar ut kor mange som er i Lilla arbeidsliste i starten av testen
         cy.getByTestId('filter_checkboks-label_minArbeidslisteLilla').as('lillaArbeidslistetall').then(antallILillaArbeidslisteFor => {
             // Nullstill valg av filter "min arbeidsliste"

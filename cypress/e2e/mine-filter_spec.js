@@ -59,7 +59,9 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
 
             // Lukkar modal, nullstillar test
-            cy.get('body').type('{esc}');
+            cy.getByTestId('egenmodal_header').within(() => {
+                cy.get('button').click();
+            });
             cy.klikkTab('MINE_FILTER');
         });
     });
@@ -199,8 +201,8 @@ describe('Mine filter', () => {
         cy.getByTestId('mine-filter_sortering_avbryt-knapp').should('not.exist');
         cy.getByTestId('mine-filter_sortering_nullstill-knapp').should('not.exist');
     });
-    /* Avhengig av tidlegare testar: sikre plassering av element i lista */
 
+    /* Avhengig av tidlegare testar: sikre plassering av element i lista */
     it('Drag and drop - Verifiser lagring', () => {
         // Skru på endring av rekkefølge
         cy.getByTestId('toggle-knapp').click();
@@ -302,15 +304,15 @@ describe('Mine filter', () => {
             cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
 
             // Får opp ein modal som fortel at tiltakstypen ikkje kan brukast nett no.
-            cy.get('.testid-feil-tiltak_modal').should('be.visible');
+            cy.getByTestId('feil-tiltak_modal').should('be.visible');
 
             // Vel å la filteret vere i lista (lukkar modal)
             cy.getByTestId('la-sta-knapp').click();
-            cy.get('.testid-feil-tiltak_modal').should('not.exist');
+            cy.getByTestId('feil-tiltak_modal').should('not.exist');
 
             // Trykkar på tiltaksfilteret igjen og får opp same modalen
             cy.getByTestId('mine-filter-rad_tiltaksfilter').click({force: true});
-            cy.get('.testid-feil-tiltak_modal').should('be.visible');
+            cy.getByTestId('feil-tiltak_modal').should('be.visible');
 
             // Denne gongen slettar vi filteret
             cy.getByTestId('slett-knapp').click();
