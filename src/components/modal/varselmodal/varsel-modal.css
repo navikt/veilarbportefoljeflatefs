@@ -1,9 +1,7 @@
 .varsel-modal__innhold {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
-    text-align: center;
 }
 .varsel-modal__innhold .error-knapp {
     margin-top: 1rem;
@@ -14,6 +12,16 @@
 .varsel-modal__ikon {
     display: flex;
     justify-content: center;
+}
+.varsel-modal__header .varsel-modal__ikon {
+    display: flex;
+    justify-content: center;
+
+    /* Breidda av lukk-knappen (margin-left, padding i knapp x2, breidd på svg)*/
+    padding-left: calc(var(--a-spacing-4) + var(--a-spacing-1) + 1em + var(--a-spacing-1));
+
+    margin-top: -0.75rem; /* Trekk ikonet litt høgare opp i modalen for å spare plass */
+    margin-bottom: 1rem;
 }
 .varsel-modal__ikon svg {
     width: 4rem;

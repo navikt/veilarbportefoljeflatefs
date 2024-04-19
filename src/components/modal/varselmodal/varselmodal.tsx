@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './varsel-modal.css';
 import {ErrorFilled, SuccessFilled, WarningFilled} from '@navikt/ds-icons';
-import {Modal} from '@navikt/ds-react';
+import {Heading, Modal} from '@navikt/ds-react';
 
 export enum VarselModalType {
     ADVARSEL,
@@ -13,6 +13,7 @@ export enum VarselModalType {
 interface VarselModalProps {
     isOpen: boolean;
     onClose: () => void;
+    overskrift?: string;
     className?: string;
     portalClassName?: string;
     type: VarselModalType;
@@ -23,6 +24,7 @@ export function VarselModal({
     type,
     isOpen,
     onClose,
+    overskrift,
     children,
     className,
     dataTestClass,
@@ -35,9 +37,19 @@ export function VarselModal({
             className={classNames('varsel-modal', portalClassName, dataTestClass)}
             closeOnBackdropClick={true}
         >
+            {overskrift && ( // denne sjekken er berre medan eg migrerer ting
+                <Modal.Header className="varsel-modal__header">
+                    <div className="varsel-modal__ikon">{getIkon(type)}</div>
+                    <Heading size="medium">{overskrift}</Heading>
+                    {/*Til testing:*/}
+                    {/*<Heading size="medium">*/}
+                    {/*    {overskrift || "Overskrift :))"}*/}
+                    {/*</Heading>*/}
+                </Modal.Header>
+            )}
             <Modal.Body>
                 <div className={classNames('varsel-modal__innhold', className)}>
-                    <div className="varsel-modal__ikon">{getIkon(type)}</div>
+                    {!overskrift && <div className="varsel-modal__ikon">{getIkon(type)}</div>}
                     {children}
                 </div>
             </Modal.Body>
