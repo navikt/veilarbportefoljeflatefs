@@ -16,9 +16,9 @@
 .filter-feil-modal__vellykkedebrukere {
     margin: 1rem 0;
 }
-.server-feil-modal {
-    margin: 1rem;
-    text-align: center;
+.server-feil-modal__ok-knapp {
+    align-self: center;
+    min-width: 4rem;
 }
 .arbeidsliste-alert {
     margin-bottom: 0.5rem;
