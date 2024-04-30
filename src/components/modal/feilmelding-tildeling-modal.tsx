@@ -14,15 +14,12 @@ interface FeilmeldingBrukereModalProps {
 function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
+            overskrift="Handling kan ikke utføres"
             isOpen={isOpen}
             onClose={onClose}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"
-            className="tildeling-veileder-modal__content"
         >
-            <Heading size="large" level="1">
-                Handling kan ikke utføres
-            </Heading>
             <BodyShort size="small">Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>
             <FnrList listeMedFnr={fnrFeil} />
             <BodyShort size="small">
@@ -39,7 +36,12 @@ function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: Feilm
                     </BodyShort>
                 </div>
             )}
-            <Button variant="secondary" size="small" onClick={onClose}>
+            <Button
+                variant="secondary"
+                size="small"
+                onClick={onClose}
+                className="feilmelding-tildeling-modal__lukk-knapp"
+            >
                 Lukk
             </Button>
         </VarselModal>
