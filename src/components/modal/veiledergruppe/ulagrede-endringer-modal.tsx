@@ -12,29 +12,25 @@ interface EndringerIkkeLagretModalProps {
 function EndringerIkkeLagretModal({isOpen, onRequestClose, onSubmit}: EndringerIkkeLagretModalProps) {
     return (
         <VarselModal
+            overskrift="Endringene er ikke lagret"
             isOpen={isOpen}
             onClose={onRequestClose}
-            className="endringer-ikke-lagret-modal"
+            className="endringer-ikke-lagret-modal__knappegruppe"
             type={VarselModalType.ADVARSEL}
         >
-            <Heading size="large" level="1" className="endringer-ikke-lagret-modal__innholdstittel">
-                Endringene er ikke lagret
-            </Heading>
-            <div className="endringer-ikke-lagret-modal__knappegruppe">
-                <Button size="small" type="button" onClick={onRequestClose}>
-                    Gå tilbake til redigering
-                </Button>
-                <Button
-                    size="small"
-                    variant="danger"
-                    type="submit"
-                    onClick={() => {
-                        onSubmit();
-                    }}
-                >
-                    Lukk uten å lagre
-                </Button>
-            </div>
+            <Button size="small" type="button" onClick={onRequestClose}>
+                Gå tilbake til redigering
+            </Button>
+            <Button
+                size="small"
+                variant="danger"
+                type="submit"
+                onClick={() => {
+                    onSubmit();
+                }}
+            >
+                Lukk uten å lagre
+            </Button>
         </VarselModal>
     );
 }

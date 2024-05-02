@@ -141,10 +141,6 @@
     max-width: 448px;
 }
 
-.endringer-ikke-lagret-modal {
-    text-align: center;
-}
-
 .endringer-ikke-lagret-modal__knappegruppe {
     display: flex;
     justify-content: space-evenly;
