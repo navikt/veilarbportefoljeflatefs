@@ -13,7 +13,7 @@ export enum VarselModalType {
 interface VarselModalProps {
     isOpen: boolean;
     onClose: () => void;
-    overskrift?: string;
+    overskrift: string;
     className?: string;
     portalClassName?: string;
     type: VarselModalType;
@@ -37,23 +37,11 @@ export function VarselModal({
             className={classNames('varsel-modal', portalClassName, dataTestClass)}
             closeOnBackdropClick={true}
         >
-            {overskrift && ( // denne sjekken er berre medan eg migrerer ting
-                <Modal.Header className="varsel-modal__header">
-                    <div className="varsel-modal__ikon">{getIkon(type)}</div>
-                    <Heading size="medium">{overskrift}</Heading>
-                    {/*Til testing:*/}
-                    {/*<Heading size="medium">*/}
-                    {/*    {overskrift || "Overskrift :))"}*/}
-                    {/*</Heading>*/}
-                </Modal.Header>
-            )}
-            <Modal.Body>
-                {/*Flytt .varsel-modal__innhold-klassen til body  når migrering er ferdig */}
-                <div className={classNames('varsel-modal__innhold', className)}>
-                    {!overskrift && <div className="varsel-modal__ikon">{getIkon(type)}</div>}
-                    {children}
-                </div>
-            </Modal.Body>
+            <Modal.Header className="varsel-modal__header">
+                <div className="varsel-modal__ikon">{getIkon(type)}</div>
+                <Heading size="medium">{overskrift}</Heading>
+            </Modal.Header>
+            <Modal.Body className={classNames('varsel-modal__innhold', className)}>{children}</Modal.Body>
         </Modal>
     );
 }
