@@ -25,7 +25,7 @@ export default function ServerFeilModal({isOpen, onClose}: ServerFeilModalProps)
             type={VarselModalType.FEIL}
         >
             <BodyShort size="small">Noe gikk feil, prøv igjen senere.</BodyShort>
-            <Button variant="secondary" size="small" className="server-feil-modal__ok-knapp" onClick={lukkModal}>
+            <Button variant="secondary" size="small" onClick={lukkModal}>
                 Ok
             </Button>
         </VarselModal>

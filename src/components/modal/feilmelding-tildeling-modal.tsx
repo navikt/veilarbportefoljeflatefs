@@ -42,12 +42,7 @@ function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: Feilm
                     </BodyShort>
                 </div>
             )}
-            <Button
-                variant="secondary"
-                size="small"
-                onClick={onClose}
-                className="feilmelding-tildeling-modal__lukk-knapp"
-            >
+            <Button variant="secondary" size="small" onClick={onClose}>
                 Lukk
             </Button>
         </VarselModal>

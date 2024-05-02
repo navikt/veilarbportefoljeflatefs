@@ -21,12 +21,7 @@ export function TildelingerOk({fnr, isOpen, onRequestClose}: Props) {
         >
             <BodyShort size="small">Følgende bruker(e) ble tildelt veileder:</BodyShort>
             <FnrList listeMedFnr={fnr} />
-            <Button
-                size="small"
-                type="submit"
-                onClick={onRequestClose}
-                className="tildeling-veileder-modal__lukk-knapp"
-            >
+            <Button size="small" type="submit" onClick={onRequestClose}>
                 Lukk
             </Button>
         </VarselModal>

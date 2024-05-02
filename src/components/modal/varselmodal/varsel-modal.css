@@ -44,10 +44,9 @@
     justify-content: center;
     gap: 1rem;
 }
-.server-feil-modal__ok-knapp,
-.feilmelding-tildeling-modal__lukk-knapp,
-.tildeling-veileder-modal__lukk-knapp,
-.veiledergruppe-feilet-modal_ok-knapp {
+
+/* Midtstiller lukk- og ok-knappar */
+.varsel-modal .varsel-modal__innhold button:only-of-type {
     align-self: center;
     min-width: 4rem;
 }

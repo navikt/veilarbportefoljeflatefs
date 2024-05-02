@@ -19,12 +19,7 @@ function VeiledergruppeendringFeiletModal({
     return (
         <VarselModal overskrift={innholdstittel} isOpen={isOpen} onClose={onRequestClose} type={VarselModalType.FEIL}>
             <BodyShort size="small">{tekst}</BodyShort>
-            <Button
-                size="small"
-                type="submit"
-                onClick={onRequestClose}
-                className="veiledergruppe-feilet-modal_ok-knapp"
-            >
+            <Button size="small" type="submit" onClick={onRequestClose}>
                 Ok
             </Button>
         </VarselModal>
