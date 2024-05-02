@@ -1,9 +1,10 @@
 .modal-liste__lang {
     max-height: 20rem;
     overflow-y: scroll;
+    /* Legg til skugge i scrollbar boks slik at brukaren ser at det er noko å scrolle på */
     box-shadow:
         rgba(0, 0, 0, 0.06) 0 2px 4px 0 inset,
-        rgba(0, 0, 0, 0.06) 0 -2px 2px 0 inset; /* Skugge-verdiane er teken frå fargeboksane på design-tokensida til Aksel. */
+        rgba(0, 0, 0, 0.06) 0 -2px 2px 0 inset;
     padding-top: 0.5rem;
 }
 .modal-liste__lang,
