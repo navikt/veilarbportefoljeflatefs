@@ -1,13 +1,10 @@
-.tildeling-veileder-modal__tekstgruppe {
-    display: flex;
-    flex-direction: column;
-}
 .tildeling-veileder-modal__vellykkedebrukere,
 .filter-feil-modal__vellykkedebrukere {
     margin: 1rem 0;
 }
 .server-feil-modal__ok-knapp,
-.feilmelding-tildeling-modal__lukk-knapp {
+.feilmelding-tildeling-modal__lukk-knapp,
+.tildeling-veileder-modal__lukk-knapp {
     align-self: center;
     min-width: 4rem;
 }

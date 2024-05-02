@@ -48,6 +48,7 @@ export function VarselModal({
                 </Modal.Header>
             )}
             <Modal.Body>
+                {/*Flytt .varsel-modal__innhold-klassen til body  når migrering er ferdig */}
                 <div className={classNames('varsel-modal__innhold', className)}>
                     {!overskrift && <div className="varsel-modal__ikon">{getIkon(type)}</div>}
                     {children}
