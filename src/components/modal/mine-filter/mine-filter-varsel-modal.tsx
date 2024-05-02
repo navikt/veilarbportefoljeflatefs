@@ -50,7 +50,7 @@ export function MineFilterVarselModal({filterNavn, modalType, erApen, setErrorMo
                     Det oppsto en feil, og filteret <b>{filterNavn}</b> kunne ikke slettes. Prøv igjen senere.
                 </BodyShort>
             )}
-            <Button size="small" className="error-knapp" onClick={() => setErrorModalErApen(false)}>
+            <Button size="small" onClick={() => setErrorModalErApen(false)}>
                 Lukk
             </Button>
         </VarselModal>
