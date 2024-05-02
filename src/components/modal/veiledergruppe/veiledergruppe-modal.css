@@ -121,22 +121,6 @@
     margin-left: auto !important;
 }
 
-.veiledergruppe-modal .veiledergruppe-feilet-modal {
-    text-align: center;
-    padding: 2rem;
-}
-
-.veiledergruppe-modal .veiledergruppe-feilet-modal__tekstgruppe {
-    margin: 1rem 0 2rem 0 !important;
-}
-
-.veiledergruppe-modal .veiledergruppe-feilet-modal__knappegruppe {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    margin: 0.5rem 5rem 0;
-}
-
 .advarsel-modal .modal__overlay .ReactModal__Content {
     max-width: 448px;
 }

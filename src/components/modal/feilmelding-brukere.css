@@ -1,13 +1,12 @@
-.tildeling-veileder-modal__vellykkedebrukere,
-.filter-feil-modal__vellykkedebrukere {
-    margin: 1rem 0;
+.tildeling-veileder-statusinfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
-.server-feil-modal__ok-knapp,
-.feilmelding-tildeling-modal__lukk-knapp,
-.tildeling-veileder-modal__lukk-knapp {
-    align-self: center;
-    min-width: 4rem;
+.tildeling-veileder-statusinfo:not(:last-of-type) {
+    margin-bottom: 1rem;
 }
+
 .arbeidsliste-alert {
     margin-bottom: 0.5rem;
 }
