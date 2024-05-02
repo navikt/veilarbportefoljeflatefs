@@ -1,18 +1,12 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
-import {BodyShort, Button, Heading} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 export enum ErrorModalType {
     OPPDATERE,
     LAGRE,
     SLETTE
 }
-
-const errorModalTypeToTittel = new Map<ErrorModalType, string>([
-    [ErrorModalType.LAGRE, 'Filteret kunne ikke opprettes'],
-    [ErrorModalType.OPPDATERE, 'Filteret kunne ikke lagres'],
-    [ErrorModalType.SLETTE, 'Filteret kunne ikke slettes']
-]);
 
 const errorModaltypeTilTittel: {[key in ErrorModalType]: string} = {
     [ErrorModalType.LAGRE]: 'Filteret kunne ikke opprettes',
