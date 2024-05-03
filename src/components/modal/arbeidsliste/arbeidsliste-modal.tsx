@@ -9,7 +9,7 @@ import {AppState} from '../../../reducer';
 import {STATUS} from '../../../ducks/utils';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
-import {BodyShort, Heading, Modal} from '@navikt/ds-react';
+import {BodyShort, Modal} from '@navikt/ds-react';
 import LasterModal from '../lastermodal/laster-modal';
 
 interface ArbeidslisteModalProps {
@@ -46,22 +46,18 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                 <>
                     {fjerneBrukere ? (
                         <VarselModal
+                            overskrift="Fjern fra arbeidsliste"
                             isOpen={isModalOpen}
                             onClose={lukkModal}
                             type={VarselModalType.ADVARSEL}
                             dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
                         >
                             <div className="fjern-arbeidsliste">
-                                <div className="arbeidsliste-headertekst">
-                                    <Heading size="large" level="1">
-                                        Fjern fra arbeidsliste
-                                    </Heading>
-                                    <BodyShort size="small">
-                                        {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
-                                            brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
-                                        } fra arbeidslisten.`}
-                                    </BodyShort>
-                                </div>
+                                <BodyShort size="small">
+                                    {`Du har valgt å fjerne ${brukereSomSkalFjernes.length} ${
+                                        brukereSomSkalFjernes.length === 1 ? 'bruker' : 'brukere'
+                                    } fra arbeidslisten.`}
+                                </BodyShort>
                                 <FjernFraArbeidslisteForm valgteBrukere={brukereSomSkalFjernes} lukkModal={lukkModal} />
                             </div>
                         </VarselModal>

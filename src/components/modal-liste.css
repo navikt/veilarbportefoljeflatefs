@@ -1,12 +1,15 @@
 .modal-liste__lang {
     max-height: 20rem;
     overflow-y: scroll;
-    border-top: 1px solid #a0a0a0;
-    border-bottom: 1px solid #a0a0a0;
-    width: 40%;
-    margin: 1rem auto;
+    /* Legg til skugge i scrollbar boks slik at brukaren ser at det er noko å scrolle på */
+    box-shadow:
+        rgba(0, 0, 0, 0.06) 0 2px 4px 0 inset,
+        rgba(0, 0, 0, 0.06) 0 -2px 2px 0 inset;
+    padding-top: 0.5rem;
 }
 .modal-liste__lang,
 .modal-liste {
-    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 1.5rem;
 }

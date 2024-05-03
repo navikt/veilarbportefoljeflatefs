@@ -14,25 +14,28 @@ interface FeilmeldingBrukereModalProps {
 function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
+            overskrift="Handling kan ikke utføres"
             isOpen={isOpen}
             onClose={onClose}
             type={VarselModalType.FEIL}
             portalClassName="tildeling-veileder-modal"
-            className="tildeling-veileder-modal__content"
         >
-            <Heading size="large" level="1">
-                Handling kan ikke utføres
-            </Heading>
-            <BodyShort size="small">Tildeling av veileder til følgende bruker(e) feilet:</BodyShort>
-            <FnrList listeMedFnr={fnrFeil} />
-            <BodyShort size="small">
-                Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
-                brukeren ikke er under oppfølging.
-            </BodyShort>
+            <div className="tildeling-veileder-statusinfo">
+                <Heading level="2" size="xsmall">
+                    Tildeling av veileder til følgende bruker(e) feilet:
+                </Heading>
+                <FnrList listeMedFnr={fnrFeil} />
+                <BodyShort size="small">
+                    Det kan skyldes manglende tilgang til bruker, at veilederen allerede er tildelt brukeren, eller at
+                    brukeren ikke er under oppfølging.
+                </BodyShort>
+            </div>
 
             {fnrSuksess?.length > 0 && (
-                <div className="tildeling-veileder-modal__vellykkedebrukere">
-                    <BodyShort size="small">Tildeling av veileder lyktes for følgende bruker(e):</BodyShort>
+                <div className="tildeling-veileder-statusinfo">
+                    <Heading level="2" size="xsmall">
+                        Tildeling av veileder lyktes for følgende bruker(e):
+                    </Heading>
                     <FnrList listeMedFnr={fnrSuksess} />
                     <BodyShort size="small">
                         Det kan ta noe tid før oversikten blir oppdatert med tildelt veileder.

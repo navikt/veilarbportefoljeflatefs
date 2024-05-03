@@ -2,7 +2,7 @@ import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import FjernFraArbeidslisteForm from './fjern-fra-arbeidsliste-form';
 import React from 'react';
 import {BrukerModell} from '../../../model-interfaces';
-import {BodyShort, Heading} from '@navikt/ds-react';
+import {BodyShort} from '@navikt/ds-react';
 
 interface FjernFraArbeidslisteModalProps {
     isOpen: boolean;
@@ -18,18 +18,14 @@ function FjernArbeidslisteModal({isOpen, valgteBrukere, lukkModal, bruker}: Fjer
 
     return (
         <VarselModal
+            overskrift="Fjern fra arbeidsliste"
             isOpen={isOpen}
             onClose={lukkModal}
             type={VarselModalType.ADVARSEL}
             dataTestClass="modal_varsel_fjern-fra-arbeidsliste"
         >
             <div className="fjern-arbeidsliste">
-                <div className="arbeidsliste-headertekst">
-                    <Heading size="large" level="1">
-                        Fjern fra arbeidsliste
-                    </Heading>
-                    <BodyShort size="small">{`Du har valgt å fjerne ${navn} fra arbeidslisten.`}</BodyShort>
-                </div>
+                <BodyShort size="small">{`Du har valgt å fjerne ${navn} fra arbeidslisten.`}</BodyShort>
                 <FjernFraArbeidslisteForm
                     valgteBrukere={brukereSomSkalFjernes}
                     lukkModal={lukkModal}

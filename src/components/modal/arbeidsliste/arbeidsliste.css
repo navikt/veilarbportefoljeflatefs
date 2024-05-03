@@ -76,9 +76,6 @@
     flex-direction: column;
     gap: 1rem;
 }
-.fjern-arbeidsliste .arbeidsliste-headertekst {
-    text-align: center;
-}
 .fjern-arbeidsliste .arbeidsliste-listetekst {
     width: 60%;
     margin: 0 auto;

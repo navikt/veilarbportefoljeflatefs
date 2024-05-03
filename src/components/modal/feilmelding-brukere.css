@@ -1,25 +1,12 @@
-.tildeling-veileder-modal__tekstgruppe {
+.tildeling-veileder-statusinfo {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 }
-.tildeling-veileder-modal .modal-liste {
-    width: 40%;
-    margin: 1rem auto;
+.tildeling-veileder-statusinfo:not(:last-of-type) {
+    margin-bottom: 1rem;
 }
-.tildeling-veileder-modal .modal-liste__lang {
-    max-height: 20rem;
-    overflow-y: scroll;
-    border-top: 1px solid #a0a0a0;
-    border-bottom: 1px solid #a0a0a0;
-}
-.tildeling-veileder-modal__vellykkedebrukere,
-.filter-feil-modal__vellykkedebrukere {
-    margin: 1rem 0;
-}
-.server-feil-modal {
-    margin: 1rem;
-    text-align: center;
-}
+
 .arbeidsliste-alert {
     margin-bottom: 0.5rem;
 }

@@ -17,15 +17,13 @@ export default function FilterFeilModal({isOpen}: FilterFeilModalProps) {
 
     return (
         <VarselModal
+            overskrift="Det oppstod en teknisk feil"
             isOpen={erAapen}
             type={VarselModalType.FEIL}
             onClose={lukkModal}
             portalClassName="filter-feil-modal"
             className="filter-feil-modal__content"
         >
-            <Heading size="small" level="1">
-                Det oppstod en teknisk feil.
-            </Heading>
             <BodyShort size="small">
                 Det oppstod et problem med ett eller flere filter.
                 <br />

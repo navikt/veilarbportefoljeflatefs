@@ -1,32 +1,30 @@
 .varsel-modal__innhold {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
-    text-align: center;
 }
-.varsel-modal__innhold .error-knapp {
-    margin-top: 1rem;
-}
-.varsel-modal__innhold .typo-normal {
-    word-break: break-word;
-}
-.varsel-modal__ikon {
+.varsel-modal__header .varsel-modal__ikon {
     display: flex;
     justify-content: center;
+
+    /* Breidda av lukk-knappen (margin-left, padding i knapp x2, breidd på svg)*/
+    padding-left: calc(var(--a-spacing-4) + var(--a-spacing-1) + 1em + var(--a-spacing-1));
+
+    margin-top: -0.75rem; /* Trekk ikonet litt høgare opp i modalen for å spare plass */
+    margin-bottom: 1rem;
 }
 .varsel-modal__ikon svg {
     width: 4rem;
     height: auto;
 }
 .varsel-modal__ikon .warning-icon {
-    color: #ff9100;
+    color: var(--a-surface-warning);
 }
 .varsel-modal__ikon .error-icon {
-    color: #ba3a26;
+    color: var(--a-surface-danger);
 }
 .varsel-modal__ikon .success-icon {
-    color: green;
+    color: var(--a-surface-success);
 }
 .varsel-modal .bekreft-sletting-modal__tekstgruppe {
     margin-bottom: 1rem;
@@ -35,4 +33,10 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
+}
+
+/* Midtstiller lukk- og ok-knappar */
+.varsel-modal .varsel-modal__innhold button:only-of-type {
+    align-self: center;
+    min-width: 4rem;
 }
