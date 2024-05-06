@@ -1,7 +1,7 @@
 import React from 'react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './veiledergruppe-modal.css';
-import {Button, Heading} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 
 interface EndringerIkkeLagretModalProps {
     isOpen: boolean;

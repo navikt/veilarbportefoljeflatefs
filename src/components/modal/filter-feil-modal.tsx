@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.css';
-import {BodyShort, Button, Heading} from '@navikt/ds-react';
+import {BodyShort, Button} from '@navikt/ds-react';
 
 interface FilterFeilModalProps {
     isOpen: boolean;
