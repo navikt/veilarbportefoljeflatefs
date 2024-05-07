@@ -62,7 +62,7 @@
         "cross-env": "7.0.3",
         "formik": "^2.4.6",
         "lodash.throttle": "^4.1.1",
-        "moment": "2.29.4",
+        "moment": "2.30.1",
         "nav-datovelger": "12.6.0",
         "nav-frontend-chevron": "1.0.30",
         "nav-frontend-chevron-style": "^1.0.4",
