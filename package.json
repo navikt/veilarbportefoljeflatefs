@@ -58,7 +58,7 @@
         "@sanity/block-content-to-react": "^3.0.0",
         "babel-polyfill": "6.26.0",
         "browserslist": "4.21.9",
-        "classnames": "2.3.2",
+        "classnames": "2.5.1",
         "cross-env": "7.0.3",
         "formik": "^2.4.1",
         "lodash.throttle": "^4.1.1",
