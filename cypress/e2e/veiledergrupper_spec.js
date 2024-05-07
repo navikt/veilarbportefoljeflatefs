@@ -3,9 +3,9 @@ import {kebabCase} from '../../src/utils/utils';
 const gruppenavn = 'Voffvoff';
 const gruppenavnRedigert = 'Mjaumjau';
 const eksisterendeGruppenavn = 'Gruppen brukes til test la stå';
-const andersen = 'Andersen';
-const johansen = 'Johansen';
-const aasen = 'Aasen';
+const testnavn1 = 'Aalerud';
+const testnavn2 = 'Johansen';
+const testnavn3 = 'Aasen';
 const minstEnVeileder = 'Du må legge til veiledere.';
 
 before('Start server', () => {
@@ -32,13 +32,13 @@ describe('Veiledergrupper', () => {
             cy.getByTestId('veiledergruppe_ny-gruppe_knapp').click();
 
             // Søk etter brukar "Andersen" og vel den
-            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(andersen);
-            cy.getByTestId('sokfilter-veilederliste_veiledere').as('veilederliste').should('contain', andersen);
-            cy.get('@veilederliste').should('not.contain', johansen);
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(testnavn1);
+            cy.getByTestId('sokfilter-veilederliste_veiledere').as('veilederliste').should('contain', testnavn1);
+            cy.get('@veilederliste').should('not.contain', testnavn2);
             cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
             // Søk på enno ein brukar og vel den
-            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').clear().type(johansen);
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').clear().type(testnavn2);
             cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
             // Prøvar å lagre endringar utan gruppenamn, blir stoppa av validering
@@ -62,8 +62,8 @@ describe('Veiledergrupper', () => {
             cy.getByTestId(`veiledergruppe-rad_${kebabCase(gruppenavn)}`).should('be.checked');
 
             // Sjekkar at brukarane vi la til i gruppa er synlege som filtertags
-            cy.getByTestId('filtrering_label-container').children().as('filtreringstags').contains(andersen);
-            cy.get('@filtreringstags').contains(johansen);
+            cy.getByTestId('filtrering_label-container').children().as('filtreringstags').contains(testnavn1);
+            cy.get('@filtreringstags').contains(testnavn2);
 
             // Gruppa skal også finnast når vi går til vVeilederoversikten
             cy.gaTilOversikt('veileder-oversikt');
@@ -111,7 +111,7 @@ describe('Veiledergrupper', () => {
             cy.getByTestId('veiledergruppe_modal_form').contains(minstEnVeileder);
 
             // Legg til ny veiledar ("Aasen")
-            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(aasen);
+            cy.getByTestId('veiledergruppe_modal_sok-veileder-input').type(testnavn3);
             cy.getByTestId('veiledergruppe_modal_veileder-checkbox_0').check({force: true});
 
             // Lagre
@@ -120,7 +120,7 @@ describe('Veiledergrupper', () => {
 
             // Sjekk at redigeringa fungerte
             cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
-            cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(aasen);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(testnavn3);
         });
     });
 

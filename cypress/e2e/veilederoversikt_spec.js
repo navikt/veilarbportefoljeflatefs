@@ -23,20 +23,23 @@ describe('Annen veileder', () => {
             .should('contain', 'Du er inne på Testias Testesen sin oversikt');
     });
     it('Søk veileder i veilederoversikt', () => {
+        const veilederSomfinnes = 'Olstad';
+        const veilederSomIkkeFinnes = 'Olstadzzz';
+
         cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .get(".navds-checkboxes")
             .children()
             .should('have.length', 41);
-        cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
+        cy.getByTestId('veilederoversikt_sok-veileder-input').type(veilederSomIkkeFinnes);
         cy.getByTestId('veilederoversikt_alertstripe_info')
             .should('contain', 'Ingen veiledere funnet')
             .should('be.visible');
         cy.getByTestId('veilederoversikt_sok-veileder-input')
             .click()
             .clear()
-            .type('Glosli');
+            .type(veilederSomfinnes);
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
             .get(".navds-checkboxes")
             .children()
@@ -66,14 +69,14 @@ describe('Annen veileder', () => {
         // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
         //     .children()
         //     .should('have.length', 40);
-        // cy.getByTestId('veilederoversikt_sok-veileder-input').type('Gloslido');
+        // cy.getByTestId('veilederoversikt_sok-veileder-input').type(veilederSomIkkeFinnes);
         // cy.getByTestId('veilederoversikt_alertstripe_info')
         //     .should('contain', 'Ingen veiledere funnet')
         //     .should('be.visible');
         // cy.getByTestId('veilederoversikt_sok-veileder-input')
         //     .click()
         //     .clear()
-        //     .type('Glosli');
+        //     .type(veilederSomfinnes);
         // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
         //     .children()
         //     .should('have.length', 1);
@@ -91,7 +94,7 @@ describe('Annen veileder', () => {
         //     .should('have.length', 1);
         // cy.getByTestId('filtrering_label-container')
         //     .children()
-        //     .contains('Glosli, Kasper')
+        //     .contains(veilederSomFinnes)
         //     .click();
         // cy.getByTestId('veilederoversikt_sok-veileder-input')
         //     .click()
