@@ -1,6 +1,6 @@
 import {innloggetVeileder, veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
-import {faker} from '@faker-js/faker/locale/nb_NO';
+import {fakerNB_NO as faker} from '@faker-js/faker';
 import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
@@ -56,7 +56,7 @@ function lagGrunndata() {
             monthValue: mnd,
             year: 1900 + ar
         },
-        fornavn: faker.name.firstName(kjonn === 'K' ? 'female' : 'male'),
+        fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
         kjonn,
         erDoed,
@@ -109,7 +109,7 @@ function lagYtelse() {
 function lagOverskrift() {
     const maybeOverskrift = rnd(0, 1);
     if (maybeOverskrift > 0.5) {
-        return faker.random.word().substr(0, 12);
+        return faker.lorem.word().substring(0, 12);
     }
     return null;
 }
@@ -117,7 +117,7 @@ function lagOverskrift() {
 function lagVedtakUtkast() {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
-    const ansvarligVeileder = faker.name.firstName() + ' ' + faker.name.lastName();
+    const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
     if (maybeUtkast > 0.5) {
         return {
             utkast14aStatusEndret: randomDate({past: true}),
