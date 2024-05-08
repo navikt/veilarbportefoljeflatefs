@@ -1,8 +1,8 @@
-import {ArbeidslisteDataModell} from '../../model-interfaces';
-import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../ducks/modal-feilmelding-brukere';
-import {leggTilStatustall} from '../../ducks/statustall-veileder';
-import {oppdaterArbeidslisteForBruker} from '../../ducks/portefolje';
+import {ArbeidslisteDataModell} from '../../../model-interfaces';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import {FJERN_FRA_ARBEIDSLISTE_FEILET, visFeiletModal} from '../../../ducks/modal-feilmelding-brukere';
+import {leggTilStatustall} from '../../../ducks/statustall-veileder';
+import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 
 export const oppdaterStateVedSlettArbeidsliste = (res, arbeidsliste: ArbeidslisteDataModell[], dispatch) => {
     if (!res) {

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
-import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
-import {HuskelappInfoAlert} from './HuskelappInfoAlert';
+import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
+import {HuskelappInfoAlert} from './redigering/HuskelappInfoAlert';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 
 export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {

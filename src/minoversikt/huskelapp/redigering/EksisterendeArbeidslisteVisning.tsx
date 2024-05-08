@@ -1,8 +1,8 @@
 import React from 'react';
 import {Alert, BodyLong, BodyShort, Button, Heading} from '@navikt/ds-react';
-import {ArbeidslisteModell} from '../../model-interfaces';
+import {ArbeidslisteModell} from '../../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {toDatePrettyPrint} from '../../utils/dato-utils';
+import {toDatePrettyPrint} from '../../../utils/dato-utils';
 
 interface Props {
     arbeidsliste: ArbeidslisteModell;

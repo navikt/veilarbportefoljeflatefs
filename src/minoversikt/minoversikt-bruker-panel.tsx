@@ -20,7 +20,7 @@ import {hentHuskelappForBruker} from '../ducks/portefolje';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
-import {HuskelappPanel} from './huskelapp/HuskelappPanel';
+import {HuskelappPanel} from './huskelapp/panelvisning/HuskelappPanel';
 import {Checkbox, Tag} from '@navikt/ds-react';
 import './minoversikt.css';
 

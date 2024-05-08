@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
-import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
+import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
 import {Huskelapp} from './Huskelapp';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {handleSlettHuskelapp} from './slettHuskelapp';
+import {handleSlettHuskelapp} from './redigering/slettHuskelapp';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';

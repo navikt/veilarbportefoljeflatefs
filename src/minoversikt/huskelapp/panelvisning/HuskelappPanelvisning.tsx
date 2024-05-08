@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
-import {BrukerModell, HuskelappModell} from '../../model-interfaces';
+import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
+import {LagEllerEndreHuskelappModal} from '../redigering/LagEllerEndreHuskelappModal';
 import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../../reducer';
+import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
-import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../../ducks/ui/listevisning';
-import {Huskelapp} from './Huskelapp';
-import {handleSlettHuskelapp} from './slettHuskelapp';
+import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
+import {OversiktType} from '../../../ducks/ui/listevisning';
+import {Huskelapp} from '../Huskelapp';
+import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
 
 interface Props {
     huskelapp: HuskelappModell;

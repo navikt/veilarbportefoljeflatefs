@@ -1,23 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
 import {Button, Heading, Modal} from '@navikt/ds-react';
-import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../model-interfaces';
-import './huskelapp.css';
-import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../../ducks/ui/listevisning';
+import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
+import '../huskelapp.css';
+import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
+import {OversiktType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../../reducer';
+import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import {Form, Formik} from 'formik';
-import {visServerfeilModal} from '../../ducks/modal-serverfeil';
-import FormikTekstArea from '../../components/formik/formik-tekstarea';
-import FormikDatoVelger from '../../components/formik/formik-datovelger/formik-datovelger';
+import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
+import FormikTekstArea from '../../../components/formik/formik-tekstarea';
+import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
-import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 
 interface Props {
     onModalClose: () => void;
