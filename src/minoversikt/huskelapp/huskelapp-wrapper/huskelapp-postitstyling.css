@@ -10,9 +10,6 @@
     max-width: 24rem;
     background-color: var(--a-limegreen-100);
     word-wrap: break-word;
-    /*max-height: 200px;*/
-    /*padding: 0.75rem 1.25rem;*/
-    /*margin: 0.5rem 6rem;*/
 }
 
 .huskelapp__postit::before {
