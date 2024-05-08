@@ -38,7 +38,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
             closeOnBackdropClick={true}
         >
             <Modal.Header>
-                <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
+                <Heading size="medium" level="1" spacing className="huskelapp-modal__heading">
                     <HuskelappIkon />
                     Huskelapp
                 </Heading>

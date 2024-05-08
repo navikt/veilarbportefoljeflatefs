@@ -11,7 +11,6 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
 import {Huskelapp} from '../Huskelapp';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
-import './huskelappmodal.css';
 
 interface HuskelappModalParams {
     open: boolean;
@@ -41,8 +40,8 @@ export const HuskelappModal = ({
     return (
         <Modal open={open} onClose={onClose} closeOnBackdropClick={true}>
             <Modal.Header>
-                <Heading size="medium" level="1" spacing className="huskelapp-modal__header">
-                    <HuskelappIkon />
+                <Heading size="medium" level="1" spacing className="huskelapp-modal__heading">
+                    <HuskelappIkon aria-hidden={true} />
                     Huskelapp
                 </Heading>
             </Modal.Header>

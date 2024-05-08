@@ -55,12 +55,12 @@
     border-radius: 4px;
 }
 
-.huskelapp-modal__header {
+.huskelapp-modal__heading {
     display: flex;
     align-items: center;
 }
 
-.huskelapp-modal__header svg {
+.huskelapp-modal__heading svg {
     margin-right: 0.5rem;
 }
 
