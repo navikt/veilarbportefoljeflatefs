@@ -9,8 +9,8 @@ import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
-import {Huskelapp} from '../Huskelapp';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
+import {HuskelappForModal} from './HuskelappForModal';
 
 interface HuskelappModalParams {
     open: boolean;
@@ -46,7 +46,7 @@ export const HuskelappModal = ({
                 </Heading>
             </Modal.Header>
             <Modal.Body>
-                <Huskelapp huskelapp={bruker.huskelapp!!} className="huskelapp-i-modal" />
+                <HuskelappForModal huskelapp={bruker.huskelapp!!} className="huskelapp-i-modal" />
                 <div className="huskelapp-handlingsknapper">
                     <Button
                         type="button"

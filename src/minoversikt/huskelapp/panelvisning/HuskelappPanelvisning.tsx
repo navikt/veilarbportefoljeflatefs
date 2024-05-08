@@ -9,7 +9,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {Huskelapp} from '../Huskelapp';
+import {HuskelappForPanel} from './HuskelappForPanel';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
 
 interface Props {
@@ -23,7 +23,7 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     return (
         <>
-            <Huskelapp huskelapp={huskelapp}>
+            <HuskelappForPanel huskelapp={huskelapp}>
                 <div className="huskelapp-handlingsknapper">
                     <Button
                         type="button"
@@ -43,7 +43,7 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
                         Endre
                     </Button>
                 </div>
-            </Huskelapp>
+            </HuskelappForPanel>
             {modalLagEllerEndreHuskelappSkalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={() => {
