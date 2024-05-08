@@ -1,4 +1,4 @@
-import {faker} from '@faker-js/faker/locale/nb_NO';
+import {fakerNB_NO as faker} from '@faker-js/faker';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
 
@@ -11,8 +11,8 @@ export function lagTilfeldigVeilederId() {
 function lagVeileder() {
     const ident = lagTilfeldigVeilederId();
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const fornavn = faker.name.firstName(kjonn === 'K' ? 'female' : 'male');
-    const etternavn = faker.name.lastName(kjonn === 'K' ? 'female' : 'male');
+    const fornavn = faker.person.firstName(kjonn === 'K' ? 'female' : 'male');
+    const etternavn = faker.person.lastName(kjonn === 'K' ? 'female' : 'male');
     const navn = etternavn + ', ' + fornavn;
     return {
         ident,

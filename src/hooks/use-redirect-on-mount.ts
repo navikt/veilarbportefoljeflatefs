@@ -1,6 +1,6 @@
 import {useHistory, useLocation} from 'react-router';
 import {useOnMount} from './use-on-mount';
-import * as queryString from 'query-string';
+import queryString from 'query-string';
 import {settSortering} from '../ducks/portefolje';
 import {useDispatch} from 'react-redux';
 

@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import * as queryString from 'query-string';
+import queryString from 'query-string';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {useHistory, useLocation} from 'react-router';
 

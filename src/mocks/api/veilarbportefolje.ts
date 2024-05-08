@@ -1,7 +1,7 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
 import innloggetVeileder from '../data/innloggetVeileder';
 import me from '../data/me';
-import {faker} from '@faker-js/faker/locale/nb_NO';
+import {fakerNB_NO as faker} from '@faker-js/faker';
 import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
@@ -46,7 +46,7 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.kjonn = '';
             bruker.fodselsdato = null;
             bruker.diskresjonskode = index === 0 ? '6' : '7';
-            bruker.oppfolgingStartdato = faker.date.between(new Date('2015-01-01'), new Date());
+            bruker.oppfolgingStartdato = faker.date.between({from: new Date('2015-01-01'), to: new Date()});
             bruker.erPermittertEtterNiendeMars = true;
             bruker.arbeidsliste = tomArbeidsliste;
         } else if (index === 2) {
