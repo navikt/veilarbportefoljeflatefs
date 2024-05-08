@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const HuskelappForPanel = ({huskelapp, className, children: actionButtons}: Props) => (
-    <HuskelappPostitWrapper className={cls('huskelapp-i-panel', className)}>
+    <HuskelappPostitWrapper className={className}>
         <Heading level="3" size="xsmall" spacing>
             {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
         </Heading>

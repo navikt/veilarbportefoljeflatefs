@@ -1,30 +1,12 @@
-/* For å sikre at hjørnet på huskelappen blir "gjennomsiktig" i rader med mørk bakgrunn */
-.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp__postit::before {
-    background: #f4f4f4;
-}
-
 .huskelapp-i-modal {
     margin: 0;
     margin-bottom: 1rem;
-}
-
-.huskelapp-i-panel {
-    margin: 0.5rem 6rem;
 }
 
 .huskelapp-handlingsknapper {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-}
-
-.huskelapp-panel {
-    display: flex;
-}
-
-.lag-huskelapp-inngang {
-    margin: 0 1rem 1rem 6rem;
-    max-width: 31rem;
 }
 
 .eksisterende-arbeidslistevisning {
@@ -68,10 +50,4 @@
 
 .lag-eller-endre-huskelapp-modal .nav-datovelger__kalenderPortal {
     transform: translateY(-116%);
-}
-
-@media (max-width: 1000px) {
-    .lag-huskelapp-inngang {
-        margin: 0 0.5rem;
-    }
 }

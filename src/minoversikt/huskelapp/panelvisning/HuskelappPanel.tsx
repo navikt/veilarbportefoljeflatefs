@@ -7,6 +7,7 @@ import {HuskelappPanelvisning} from './HuskelappPanelvisning';
 import {slettArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import {useDispatch} from 'react-redux';
 import {oppdaterStateVedSlettArbeidsliste} from '../redigering/slettEksisterendeArbeidsliste';
+import './panelvisning.css';
 
 export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
     const dispatch = useDispatch();
