@@ -34,7 +34,13 @@ export const EksisterendeArbeidslisteVisning = ({arbeidsliste, onSlett}: Props) 
             </i>
         </BodyShort>
         {onSlett && (
-            <Button type="button" onClick={onSlett} variant="tertiary" size="xsmall" icon={<TrashIcon />}>
+            <Button
+                type="button"
+                onClick={onSlett}
+                variant="tertiary"
+                size="xsmall"
+                icon={<TrashIcon aria-hidden={true} />}
+            >
                 Slett
             </Button>
         )}

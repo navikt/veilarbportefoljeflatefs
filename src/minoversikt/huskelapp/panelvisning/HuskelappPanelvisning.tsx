@@ -30,7 +30,7 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
                         size="xsmall"
                         variant="secondary"
                         onClick={() => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!)}
-                        icon={<TrashIcon />}
+                        icon={<TrashIcon aria-hidden={true} />}
                     >
                         Slett
                     </Button>

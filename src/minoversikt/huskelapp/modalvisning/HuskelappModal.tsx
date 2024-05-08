@@ -53,7 +53,7 @@ export const HuskelappModal = ({
                         size="xsmall"
                         variant="secondary"
                         onClick={slettHuskelapp}
-                        icon={<TrashIcon />}
+                        icon={<TrashIcon aria-hidden={true} />}
                     >
                         Slett
                     </Button>
