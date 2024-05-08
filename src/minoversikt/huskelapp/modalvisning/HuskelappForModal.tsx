@@ -7,11 +7,10 @@ import {HuskelappPostitWrapper} from '../huskelapp-wrapper/HuskelappPostitWrappe
 
 interface Props {
     huskelapp: HuskelappModell;
-    className?: string;
 }
 
-export const HuskelappForModal = ({huskelapp, className}: Props) => (
-    <HuskelappPostitWrapper className={className}>
+export const HuskelappForModal = ({huskelapp}: Props) => (
+    <HuskelappPostitWrapper>
         <Heading level="3" size="xsmall" spacing>
             {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
         </Heading>

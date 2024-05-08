@@ -11,6 +11,7 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 import {HuskelappForModal} from './HuskelappForModal';
+import './modalvisning.css';
 
 interface HuskelappModalParams {
     open: boolean;
@@ -38,30 +39,30 @@ export const HuskelappModal = ({
     }
 
     return (
-        <Modal open={open} onClose={onClose} closeOnBackdropClick={true}>
+        <Modal open={open} onClose={onClose} closeOnBackdropClick={true} className="huskelappvisning-modal">
             <Modal.Header>
                 <Heading size="medium" level="1" spacing className="huskelapp-modal__heading">
                     <HuskelappIkon aria-hidden={true} />
                     Huskelapp
                 </Heading>
             </Modal.Header>
-            <Modal.Body>
-                <HuskelappForModal huskelapp={bruker.huskelapp!!} className="huskelapp-i-modal" />
-                <div className="huskelapp-handlingsknapper">
-                    <Button
-                        type="button"
-                        size="xsmall"
-                        variant="secondary"
-                        onClick={slettHuskelapp}
-                        icon={<TrashIcon aria-hidden={true} />}
-                    >
-                        Slett
-                    </Button>
-                    <Button type="button" size="xsmall" variant="primary" onClick={redigerHuskelapp}>
-                        Endre
-                    </Button>
-                </div>
+            <Modal.Body className="huskelappvisning-modal__body">
+                <HuskelappForModal huskelapp={bruker.huskelapp!!} />
             </Modal.Body>
+            <Modal.Footer>
+                <Button type="button" size="small" variant="primary" onClick={redigerHuskelapp}>
+                    Endre
+                </Button>
+                <Button
+                    type="button"
+                    size="small"
+                    variant="secondary"
+                    onClick={slettHuskelapp}
+                    icon={<TrashIcon aria-hidden={true} />}
+                >
+                    Slett
+                </Button>
+            </Modal.Footer>
         </Modal>
     );
 };
