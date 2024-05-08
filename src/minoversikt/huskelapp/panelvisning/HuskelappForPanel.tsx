@@ -3,6 +3,7 @@ import cls from 'classnames';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import {HuskelappModell} from '../../../model-interfaces';
 import {BodyShort, Detail, Heading} from '@navikt/ds-react';
+import '../huskelapp-postitstyling.css';
 
 interface Props {
     huskelapp: HuskelappModell;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export const HuskelappForPanel = ({huskelapp, className, children: actionButtons}: Props) => (
-    <div className={cls('huskelapp__postit', className)}>
+    <div className={cls('huskelapp__postit huskelapp__innhold huskelapp-i-panel', className)}>
         <Heading level="3" size="xsmall" spacing>
             {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
         </Heading>

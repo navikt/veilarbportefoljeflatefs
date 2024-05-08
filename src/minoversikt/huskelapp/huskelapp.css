@@ -1,34 +1,15 @@
-.huskelapp__postit::before {
-    /*flippen i top høyre*/
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: white;
-    border-width: 0 20px 20px 0;
-    border-style: solid;
-    border-color: hsl(64, 89%, 84%) transparent;
-    box-shadow: -3px 4px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.huskelapp__postit {
-    background-color: #f9fccc;
-    max-height: 200px;
-    max-width: 250px;
-    padding: 0.75rem 1.25rem;
-    margin: 0.5rem 6rem;
-    position: relative;
-    word-wrap: break-word;
-}
-
+/* For å sikre at hjørnet på huskelappen blir "gjennomsiktig" i rader med mørk bakgrunn */
 .veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp__postit::before {
     background: #f4f4f4;
 }
 
 .huskelapp-i-modal {
-    min-width: 250px;
     margin: 0;
     margin-bottom: 1rem;
+}
+
+.huskelapp-i-panel {
+    margin: 0.5rem 6rem;
 }
 
 .huskelapp-handlingsknapper {
