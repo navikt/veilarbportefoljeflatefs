@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {Button} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
-import {TrashIcon} from '@navikt/aksel-icons';
 import {LagEllerEndreHuskelappModal} from '../redigering/LagEllerEndreHuskelappModal';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
@@ -21,29 +19,17 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
     const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
+
+    const visRedigeringsmodal = () => setModalLagEllerEndreHuskelappSkalVises(true);
+    const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!);
+
     return (
         <>
-            <HuskelappForPanel huskelapp={huskelapp}>
-                <div className="huskelapp-handlingsknapper">
-                    <Button
-                        type="button"
-                        size="xsmall"
-                        variant="secondary"
-                        onClick={() => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!)}
-                        icon={<TrashIcon aria-hidden={true} />}
-                    >
-                        Slett
-                    </Button>
-                    <Button
-                        type="button"
-                        size="xsmall"
-                        variant="primary"
-                        onClick={() => setModalLagEllerEndreHuskelappSkalVises(true)}
-                    >
-                        Endre
-                    </Button>
-                </div>
-            </HuskelappForPanel>
+            <HuskelappForPanel
+                huskelapp={huskelapp}
+                onSlettHuskelapp={slettHuskelapp}
+                onEndreHuskelapp={visRedigeringsmodal}
+            />
             {modalLagEllerEndreHuskelappSkalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={() => {
