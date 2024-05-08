@@ -1,0 +1,26 @@
+.lag-eller-endre-huskelapp-modal.navds-modal {
+    max-width: 22rem;
+}
+
+.lag-eller-endre-huskelapp-modal .navds-body-short,
+.lag-eller-endre-huskelapp-modal .navds-alert__wrapper {
+    font-size: 14px;
+    line-height: 1.25rem;
+}
+
+.lag-eller-endre-huskelapp-modal.med-eksisterende-arbeidsliste.navds-modal {
+    min-width: fit-content;
+}
+
+.med-eksisterende-arbeidsliste .lag-eller-endre-huskelapp-modal__body {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 20rem 1fr;
+    gap: 1rem;
+
+    padding-bottom: 0;
+}
+
+.lag-eller-endre-huskelapp-modal .nav-datovelger__kalenderPortal {
+    transform: translateY(-116%);
+}

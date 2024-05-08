@@ -25,7 +25,7 @@ export const HuskelappForPanel = ({huskelapp, onSlettHuskelapp, onEndreHuskelapp
                 Endret {toDatePrettyPrint(huskelapp?.endretDato)} av {huskelapp?.endretAv}
             </i>
         </Detail>
-        <div className="huskelapp-handlingsknapper">
+        <div className="huskelapp-panelvisning__handlingsknapper">
             <Button
                 type="button"
                 size="xsmall"

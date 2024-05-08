@@ -21,3 +21,9 @@
 .lag-huskelapp-inngang {
     max-width: 31rem;
 }
+
+.huskelapp-panelvisning__handlingsknapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}

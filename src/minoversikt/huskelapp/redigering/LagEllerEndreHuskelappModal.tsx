@@ -18,6 +18,7 @@ import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
+import './rediger-huskelapp.css';
 
 interface Props {
     onModalClose: () => void;
@@ -43,74 +44,72 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                     Huskelapp
                 </Heading>
             </Modal.Header>
-            <Modal.Body>
-                <div className="huskelapp-modal-content">
-                    <div>
-                        <HuskelappInfoAlert />
-                        <Formik
-                            initialValues={{
-                                frist: huskelapp?.frist ?? '',
-                                kommentar: huskelapp?.kommentar ?? ''
-                            }}
-                            validateOnBlur={false}
-                            onSubmit={async (values, formikHelpers) => {
-                                if (!values.frist && !values.kommentar) {
-                                    return formikHelpers.setErrors({
-                                        frist: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen',
-                                        kommentar:
-                                            'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
-                                    });
+            <Modal.Body className="lag-eller-endre-huskelapp-modal__body">
+                <div>
+                    <HuskelappInfoAlert />
+                    <Formik
+                        initialValues={{
+                            frist: huskelapp?.frist ?? '',
+                            kommentar: huskelapp?.kommentar ?? ''
+                        }}
+                        validateOnBlur={false}
+                        onSubmit={async (values, formikHelpers) => {
+                            if (!values.frist && !values.kommentar) {
+                                return formikHelpers.setErrors({
+                                    frist: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen',
+                                    kommentar:
+                                        'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
+                                });
+                            }
+                            const arbeidslisteArray: ArbeidslisteDataModell[] = arbeidsliste
+                                ? [bruker].map(bruker => ({
+                                      fnr: bruker.fnr,
+                                      kommentar: bruker.arbeidsliste.kommentar ?? null,
+                                      frist: bruker.arbeidsliste.frist,
+                                      kategori: bruker.arbeidsliste.kategori
+                                  }))
+                                : [];
+                            try {
+                                if (huskelapp?.huskelappId) {
+                                    await endreHuskelapp(
+                                        dispatch,
+                                        values,
+                                        bruker,
+                                        enhetId!!,
+                                        onModalClose,
+                                        huskelapp.huskelappId
+                                    );
+                                } else {
+                                    await lagreHuskelapp(
+                                        dispatch,
+                                        values,
+                                        bruker,
+                                        enhetId!!,
+                                        onModalClose,
+                                        arbeidslisteArray
+                                    );
                                 }
-                                const arbeidslisteArray: ArbeidslisteDataModell[] = arbeidsliste
-                                    ? [bruker].map(bruker => ({
-                                          fnr: bruker.fnr,
-                                          kommentar: bruker.arbeidsliste.kommentar ?? null,
-                                          frist: bruker.arbeidsliste.frist,
-                                          kategori: bruker.arbeidsliste.kategori
-                                      }))
-                                    : [];
-                                try {
-                                    if (huskelapp?.huskelappId) {
-                                        await endreHuskelapp(
-                                            dispatch,
-                                            values,
-                                            bruker,
-                                            enhetId!!,
-                                            onModalClose,
-                                            huskelapp.huskelappId
-                                        );
-                                    } else {
-                                        await lagreHuskelapp(
-                                            dispatch,
-                                            values,
-                                            bruker,
-                                            enhetId!!,
-                                            onModalClose,
-                                            arbeidslisteArray
-                                        );
-                                    }
-                                } catch (error) {
-                                    dispatch(visServerfeilModal());
-                                }
-                            }}
-                        >
-                            <Form id="lagEllerEndreHuskelappForm">
-                                <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
-                                <FormikDatoVelger name="frist" />
-                            </Form>
-                        </Formik>
-                    </div>
-                    {arbeidsliste && <EksisterendeArbeidslisteVisning arbeidsliste={arbeidsliste} />}
+                            } catch (error) {
+                                dispatch(visServerfeilModal());
+                            }
+                        }}
+                    >
+                        <Form id="lagEllerEndreHuskelappForm">
+                            <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
+                            <FormikDatoVelger name="frist" />
+                        </Form>
+                    </Formik>
                 </div>
-                <div className="huskelapp-handlingsknapper">
-                    <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
-                        Avbryt
-                    </Button>
-                    <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">
-                        {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
-                    </Button>
-                </div>
+                {arbeidsliste && <EksisterendeArbeidslisteVisning arbeidsliste={arbeidsliste} />}
             </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">
+                    {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
+                </Button>
+                <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
+                    Avbryt
+                </Button>
+            </Modal.Footer>
         </Modal>
     );
 };

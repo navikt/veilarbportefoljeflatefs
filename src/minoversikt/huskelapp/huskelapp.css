@@ -1,9 +1,3 @@
-.huskelapp-handlingsknapper {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-}
-
 .eksisterende-arbeidslistevisning {
     background: var(--a-gray-200);
     max-width: 500px;
@@ -20,29 +14,4 @@
 
 .huskelapp-modal__heading svg {
     margin-right: 0.5rem;
-}
-
-.lag-eller-endre-huskelapp-modal.navds-modal {
-    max-width: 22rem;
-}
-
-.lag-eller-endre-huskelapp-modal .navds-body-short,
-.lag-eller-endre-huskelapp-modal .navds-alert__wrapper {
-    font-size: 14px;
-    line-height: 1.25rem;
-}
-
-.lag-eller-endre-huskelapp-modal.med-eksisterende-arbeidsliste.navds-modal {
-    min-width: fit-content;
-}
-
-.med-eksisterende-arbeidsliste .huskelapp-modal-content {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 20rem 1fr;
-    gap: 1rem;
-}
-
-.lag-eller-endre-huskelapp-modal .nav-datovelger__kalenderPortal {
-    transform: translateY(-116%);
 }
