@@ -51,6 +51,17 @@ export const modiacontextholderHandlers: RequestHandler[] = [
             });
         })
     ),
+    http.get('https://app.adeo.no/modiacontextholder/api/decorator', async () => {
+        await delay(DEFAULT_DELAY_MILLISECONDS);
+
+        return HttpResponse.json({
+            enheter: innloggetVeileder.enheter,
+            etternavn: innloggetVeileder.etternavn,
+            fornavn: innloggetVeileder.fornavn,
+            ident: innloggetVeileder.ident,
+            navn: innloggetVeileder.navn
+        });
+    }),
     http.post(
         '/modiacontextholder/api/context',
         withAuth(async () => {
