@@ -35,7 +35,7 @@
         "@types/react-router": "5.1.20",
         "@types/react-router-dom": "5.3.3",
         "@types/react-transition-group": "4.4.10",
-        "cypress": "13.8.1",
+        "cypress": "13.9.0",
         "husky": "8.0.3",
         "lint-staged": "15.2.2",
         "msw": "^2.2.14",
