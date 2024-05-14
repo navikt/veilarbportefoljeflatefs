@@ -7,15 +7,15 @@ import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huske
 import {HuskelappModal} from './modalvisning/HuskelappModal';
 
 export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
-    const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
+    const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
     const [modalVisHuskelappSkalVises, setModalVisHuskelappSkalVises] = useState<boolean>(false);
 
     function visEllerRedigerHuskelapp() {
-        bruker.huskelapp ? setModalVisHuskelappSkalVises(true) : setModalLagEllerEndreHuskelappSkalVises(true);
+        bruker.huskelapp ? setModalVisHuskelappSkalVises(true) : setSkalLagEllerEndreHuskelappModalVises(true);
     }
 
     function lukkRedigeringsmodal() {
-        setModalLagEllerEndreHuskelappSkalVises(false);
+        setSkalLagEllerEndreHuskelappModalVises(false);
         if (bruker.huskelapp) {
             setModalVisHuskelappSkalVises(true);
         }
@@ -23,7 +23,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
 
     function apneRedigeringsmodal() {
         setModalVisHuskelappSkalVises(false);
-        setModalLagEllerEndreHuskelappSkalVises(true);
+        setSkalLagEllerEndreHuskelappModalVises(true);
     }
 
     return (
@@ -40,10 +40,10 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                     )
                 }
             />
-            {modalLagEllerEndreHuskelappSkalVises && (
+            {skalLagEllerEndreHuskelappModalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={lukkRedigeringsmodal}
-                    isModalOpen={modalLagEllerEndreHuskelappSkalVises}
+                    isModalOpen={skalLagEllerEndreHuskelappModalVises}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}

@@ -16,11 +16,11 @@ interface Props {
 }
 
 export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
-    const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
+    const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
-    const visRedigeringsmodal = () => setModalLagEllerEndreHuskelappSkalVises(true);
+    const visRedigeringsmodal = () => setSkalLagEllerEndreHuskelappModalVises(true);
     const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!);
 
     return (
@@ -30,12 +30,12 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
                 onSlettHuskelapp={slettHuskelapp}
                 onEndreHuskelapp={visRedigeringsmodal}
             />
-            {modalLagEllerEndreHuskelappSkalVises && (
+            {skalLagEllerEndreHuskelappModalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={() => {
-                        setModalLagEllerEndreHuskelappSkalVises(false);
+                        setSkalLagEllerEndreHuskelappModalVises(false);
                     }}
-                    isModalOpen={modalLagEllerEndreHuskelappSkalVises}
+                    isModalOpen={skalLagEllerEndreHuskelappModalVises}
                     huskelapp={huskelapp}
                     bruker={bruker}
                 />
