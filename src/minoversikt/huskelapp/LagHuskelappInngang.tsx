@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
-import {LagEllerEndreHuskelappModal} from './LagEllerEndreHuskelappModal';
-import {HuskelappInfoAlert} from './HuskelappInfoAlert';
+import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
+import {HuskelappInfoAlert} from './redigering/HuskelappInfoAlert';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 
 export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
-    const [modalLagEllerEndreHuskelappSkalVises, setModalLagEllerEndreHuskelappSkalVises] = useState<boolean>(false);
+    const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
 
     const onClick = () => {
         trackAmplitude({name: 'modal åpnet', data: {tekst: 'åpnet lag eller endre huskelappmodal'}});
-        setModalLagEllerEndreHuskelappSkalVises(true);
+        setSkalLagEllerEndreHuskelappModalVises(true);
     };
 
     return (
@@ -19,12 +19,12 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
             <Button size="xsmall" variant="primary-neutral" onClick={onClick}>
                 Lag huskelapp
             </Button>
-            {modalLagEllerEndreHuskelappSkalVises && (
+            {skalLagEllerEndreHuskelappModalVises && (
                 <LagEllerEndreHuskelappModal
                     onModalClose={() => {
-                        setModalLagEllerEndreHuskelappSkalVises(false);
+                        setSkalLagEllerEndreHuskelappModalVises(false);
                     }}
-                    isModalOpen={modalLagEllerEndreHuskelappSkalVises}
+                    isModalOpen={skalLagEllerEndreHuskelappModalVises}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}

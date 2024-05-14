@@ -1,0 +1,29 @@
+.huskelapp-panel {
+    padding-left: 6rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .huskelapp-panel {
+        padding-left: 1rem;
+    }
+}
+
+/* For å sikre at hjørnet på huskelappen blir "gjennomsiktig" i rader med mørk bakgrunn */
+.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp__postit::before {
+    background: #f4f4f4;
+}
+
+.lag-huskelapp-inngang {
+    max-width: 31rem;
+}
+
+.huskelapp-panelvisning__handlingsknapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}

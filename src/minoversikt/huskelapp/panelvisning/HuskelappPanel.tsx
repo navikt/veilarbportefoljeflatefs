@@ -1,12 +1,13 @@
 import React from 'react';
-import {LagHuskelappInngang} from './LagHuskelappInngang';
-import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
-import {ArbeidslisteDataModell, BrukerModell, HuskelappModell} from '../../model-interfaces';
-import './huskelapp.css';
+import {LagHuskelappInngang} from '../LagHuskelappInngang';
+import {EksisterendeArbeidslisteVisning} from '../redigering/EksisterendeArbeidslisteVisning';
+import {ArbeidslisteDataModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
+import '../huskelapp.css';
 import {HuskelappPanelvisning} from './HuskelappPanelvisning';
-import {slettArbeidslisteAction} from '../../ducks/arbeidsliste';
+import {slettArbeidslisteAction} from '../../../ducks/arbeidsliste';
 import {useDispatch} from 'react-redux';
-import {oppdaterStateVedSlettArbeidsliste} from './slettEksisterendeArbeidsliste';
+import {oppdaterStateVedSlettArbeidsliste} from '../redigering/slettEksisterendeArbeidsliste';
+import './panelvisning.css';
 
 export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
     const dispatch = useDispatch();

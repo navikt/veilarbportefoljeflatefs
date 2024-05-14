@@ -1,8 +1,8 @@
 import React from 'react';
 import {Alert, BodyLong, BodyShort, Button, Heading} from '@navikt/ds-react';
-import {ArbeidslisteModell} from '../../model-interfaces';
+import {ArbeidslisteModell} from '../../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {toDatePrettyPrint} from '../../utils/dato-utils';
+import {toDatePrettyPrint} from '../../../utils/dato-utils';
 
 interface Props {
     arbeidsliste: ArbeidslisteModell;
@@ -34,7 +34,13 @@ export const EksisterendeArbeidslisteVisning = ({arbeidsliste, onSlett}: Props) 
             </i>
         </BodyShort>
         {onSlett && (
-            <Button type="button" onClick={onSlett} variant="tertiary" size="xsmall" icon={<TrashIcon />}>
+            <Button
+                type="button"
+                onClick={onSlett}
+                variant="tertiary"
+                size="xsmall"
+                icon={<TrashIcon aria-hidden={true} />}
+            >
                 Slett
             </Button>
         )}
