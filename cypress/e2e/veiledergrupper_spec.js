@@ -120,7 +120,7 @@ describe('Veiledergrupper', () => {
 
             // Sjekk at redigeringa fungerte
             cy.get('@veiledergrupper').should('have.length', veiledergrupperForRedigering.length);
-            cy.getByTestId('filtrering_label-container').children().should('have.length', 1).contains(testnavn3);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 2).contains(testnavn3);
         });
     });
 
