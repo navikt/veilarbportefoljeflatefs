@@ -1,6 +1,6 @@
 import React from 'react';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
+import {TrashIcon} from '@navikt/aksel-icons';
 import {VarselModal, VarselModalType} from './varselmodal';
 import './varsel-modal.css';
 
@@ -39,7 +39,7 @@ function BekreftSlettingModal({isOpen, onRequestClose, onSubmit, tittel, infoTek
                     variant="danger"
                     type="submit"
                     onClick={slettKnapp}
-                    icon={<Delete />}
+                    icon={<TrashIcon aria-hidden={true} />}
                     data-testid="bekreft-sletting_modal_slett-knapp"
                 >
                     Slett
