@@ -29,9 +29,22 @@
 }
 
 .tour-modal__footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2.5rem 1.5rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 'forrige stegviser neste';
+    justify-items: center;
+}
+
+.tour-modal__footer > button:first-child {
+    grid-area: forrige;
+}
+.tour-modal__footer > .stegviser {
+    grid-area: stegviser;
+}
+.tour-modal__footer > button:last-child {
+    grid-area: neste;
+}
+
+.tour-modal__footer > button {
+    width: fit-content;
 }

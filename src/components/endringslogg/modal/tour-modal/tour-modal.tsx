@@ -1,10 +1,10 @@
 import {default as React, useState} from 'react';
+import BlockContent from '@sanity/block-content-to-react';
+import {Button, Heading, Modal} from '@navikt/ds-react';
+import {ArrowLeftIcon, ArrowRightIcon} from '@navikt/aksel-icons';
 import './tour-modal.css';
-import ChevronLenke, {Direction} from '../../chevron-lenke/chevron-lenke';
 import Stegviser from '../../stegviser/stegviser';
 import {ModalType} from '../../utils/endringslogg-custom';
-import BlockContent from '@sanity/block-content-to-react';
-import {Heading, Modal} from '@navikt/ds-react';
 
 interface TourModalProps {
     modal: ModalType;
@@ -34,7 +34,7 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
     const step = steps[stepIndex];
     const isFinalStep = stepIndex === steps.length - 1;
 
-    const hidePrevBtn = stepIndex === 0;
+    const showPrevBtn = stepIndex !== 0;
     const nextBtnText = isFinalStep ? 'Ferdig' : 'Neste';
     const nextBtnHandleClick = isFinalStep ? lukkModal : handleNextBtnClicked;
 
@@ -73,20 +73,27 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
                     </div>
                 </main>
                 <footer className={'tour-modal__footer'}>
-                    <ChevronLenke
-                        retning={Direction.LEFT}
-                        tekst="Forrige"
-                        hide={hidePrevBtn}
-                        onClick={handlePreviousBtnClicked}
-                        dataTestId="endringslogg_forrige-knapp"
-                    />
+                    {showPrevBtn && (
+                        <Button
+                            icon={<ArrowLeftIcon aria-hidden={true} />}
+                            onClick={handlePreviousBtnClicked}
+                            data-testid="endringslogg_forrige-knapp"
+                            variant="tertiary"
+                            size="small"
+                        >
+                            Forrige
+                        </Button>
+                    )}
                     <Stegviser antallSteg={steps.length} valgtSteg={stepIndex} />
-                    <ChevronLenke
-                        retning={Direction.RIGHT}
-                        tekst={nextBtnText}
+                    <Button
+                        icon={<ArrowRightIcon aria-hidden={true} />}
                         onClick={nextBtnHandleClick}
-                        dataTestId={isFinalStep ? 'endringslogg_ferdig-knapp' : 'endringslogg_neste-knapp'}
-                    />
+                        data-testid={isFinalStep ? 'endringslogg_ferdig-knapp' : 'endringslogg_neste-knapp'}
+                        variant="tertiary"
+                        size="small"
+                    >
+                        {nextBtnText}
+                    </Button>
                 </footer>
             </Modal.Body>
         </Modal>
