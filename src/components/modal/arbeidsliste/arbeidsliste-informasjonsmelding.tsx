@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Alert, Link} from '@navikt/ds-react';
-import {ExternalLink} from '@navikt/ds-icons';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackAmplitude} from '../../../amplitude/amplitude';
 
 const ArbeidslisteInformasjonsmelding = () => (
@@ -20,7 +20,8 @@ const ArbeidslisteInformasjonsmelding = () => (
                     });
                 }}
             >
-                Les mer om hvordan bruke arbeidslisten på Navet <ExternalLink />
+                Les mer om hvordan bruke arbeidslisten på Navet{' '}
+                <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
             </Link>
         </b>
     </Alert>

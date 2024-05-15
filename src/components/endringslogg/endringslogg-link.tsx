@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from '@navikt/ds-react';
-import {ExternalLink} from '@navikt/ds-icons';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 
 interface EndringsloggLinkProps {
     linkText: string;
@@ -12,7 +12,7 @@ export const EndringsloggLink = ({linkText, link, onClick}: EndringsloggLinkProp
     return (
         <Link target="_blank" href={link} onClick={onClick}>
             {linkText ? linkText : link}
-            <ExternalLink />
+            <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
         </Link>
     );
 };
