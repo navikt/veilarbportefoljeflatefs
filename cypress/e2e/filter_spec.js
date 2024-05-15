@@ -86,8 +86,8 @@ describe('Filter', () => {
         cy.getByTestId('checkbox-filterform_velg-knapp').click();
         cy.getByTestId('alder-filterform').should('not.exist');
 
-        // Sjekk at vi har filtertag: 34-100 år
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 1); // TODO Ta høgd for nullstillfilter
+        // Sjekk at vi har filtertag: 34-100 år + Nullstill filtervalg
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
         // Fjern alder-filtertaggen, sjå at begge forsvinn
         cy.getByTestId('filtreringlabel_34-100-ar').should('be.visible').click();
@@ -140,7 +140,7 @@ describe('Filter', () => {
         // Sjå at filtertags dukkar opp
         cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('be.visible');
         cy.getByTestId('filtreringlabel_uleste-endringer-siste-endring-av-bruker').should('be.visible');
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 2); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Nullstill hendelsesfilteret
         cy.getByTestId('hendelser-filterform_nullstill-knapp').click();
@@ -163,7 +163,7 @@ describe('Filter', () => {
         cy.getByTestId('filter_JA').uncheck({force: true});
         cy.getByTestId('filter_NEI').check({force: true});
         cy.getByTestId('filtreringlabel_utdanning-godkjent-nei').should('be.visible');
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 1); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
         // Nullstill filterval før neste test
         cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
@@ -189,7 +189,7 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
 
         // Ser at talet på filtertags går frå 3 (inkl "nullstill filter") til 0 når ein nullstillar aktivitetsfiltera
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 2); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').click();
         cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
     })
@@ -202,7 +202,7 @@ describe('Filter', () => {
         // Vel nokre forenkla filter, får opp tags
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 2); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Opne Avansert filter, sjå at vi no ikkje kan nullstille
         cy.getByTestId('aktiviteter_avansert-filter_knapp').click();
@@ -213,8 +213,8 @@ describe('Filter', () => {
         // Vel eit filter: "Stilling bruker skal søke: Ja".
         cy.getByTestId('aktivitet-filterform-STILLING-ja').check({force: true});
 
-        // No skal vi berre ha "stilling bruker skal søke: ja"-filteret
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 1); // TODO Ta høgd for nullstillfilter
+        // No skal vi berre ha "stilling bruker skal søke: ja"-filteret (og "Nullstill filtervalg")
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
         cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.enabled');
         cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke-ja').should('be.visible');
 
@@ -314,7 +314,7 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel_spesielt-tilpasset-innsats').should('be.visible');
 
         // Sjekkar at vi har rett mengd filtertags
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 2); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Nullstiller med knapp i filterdropdown
         cy.getByTestId('checkbox-filterform_nullstill-knapp').click();
@@ -331,7 +331,7 @@ describe('Filter', () => {
         cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke').should('be.visible');
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
         cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
-        cy.getByTestId('filtrering_label-container').children().should('have.length', 2); // TODO Ta høgd for nullstillfilter
+        cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
         cy.apneLukkeFilterDropdown('aktivitet');
 
 
