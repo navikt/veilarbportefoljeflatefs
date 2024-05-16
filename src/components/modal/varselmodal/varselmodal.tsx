@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import './varsel-modal.css';
-import {ErrorFilled, SuccessFilled, WarningFilled} from '@navikt/ds-icons';
 import {Heading, Modal} from '@navikt/ds-react';
+import {CheckmarkCircleFillIcon, ExclamationmarkTriangleFillIcon, XMarkOctagonFillIcon} from '@navikt/aksel-icons';
+import './varsel-modal.css';
 
 export enum VarselModalType {
     ADVARSEL,
@@ -49,11 +49,11 @@ export function VarselModal({
 function getIkon(varselModalType: VarselModalType) {
     switch (varselModalType) {
         case VarselModalType.ADVARSEL:
-            return <WarningFilled className="warning-icon" />;
+            return <ExclamationmarkTriangleFillIcon title="Advarsel" className="warning-icon" />;
         case VarselModalType.FEIL:
-            return <ErrorFilled className="error-icon" />;
+            return <XMarkOctagonFillIcon title="Feil" className="error-icon" />;
         case VarselModalType.SUKSESS:
-            return <SuccessFilled className="success-icon" />;
+            return <CheckmarkCircleFillIcon title="Suksess" className="success-icon" />;
         default:
             return null;
     }
