@@ -4,6 +4,9 @@ import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsli
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
+import {LagHuskelappInngang} from './huskelapp/LagHuskelappInngang';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../konstanter';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -20,6 +23,8 @@ export default function ArbeidslistePanel({
     settMarkert,
     apen
 }: ArbeidslistePanelProps) {
+    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv =
         bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId
@@ -59,13 +64,17 @@ export default function ArbeidslistePanel({
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
                                     {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
-                                <ArbeidslisteModalRediger
-                                    bruker={bruker}
-                                    innloggetVeileder={innloggetVeileder}
-                                    sistEndretDato={sistEndretDato}
-                                    sistEndretAv={sistEndretAv}
-                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                />
+                                {erHuskelappFeatureTogglePa ? (
+                                    <LagHuskelappInngang bruker={bruker} />
+                                ) : (
+                                    <ArbeidslisteModalRediger
+                                        bruker={bruker}
+                                        innloggetVeileder={innloggetVeileder}
+                                        sistEndretDato={sistEndretDato}
+                                        sistEndretAv={sistEndretAv}
+                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                    />
+                                )}
                             </div>
                         </>
                     )}

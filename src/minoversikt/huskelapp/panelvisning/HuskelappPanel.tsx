@@ -1,43 +1,13 @@
 import React from 'react';
-import {LagHuskelappInngang} from '../LagHuskelappInngang';
-import {EksisterendeArbeidslisteVisning} from '../redigering/EksisterendeArbeidslisteVisning';
-import {ArbeidslisteDataModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
-import '../huskelapp.css';
+import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {HuskelappPanelvisning} from './HuskelappPanelvisning';
-import {slettArbeidslisteAction} from '../../../ducks/arbeidsliste';
-import {useDispatch} from 'react-redux';
-import {oppdaterStateVedSlettArbeidsliste} from '../redigering/slettEksisterendeArbeidsliste';
+import '../huskelapp.css';
 import './panelvisning.css';
 
 export const HuskelappPanel = ({bruker}: {bruker: BrukerModell}) => {
-    const dispatch = useDispatch();
-    const onSlettArbeidsliste = () => {
-        const arbeidsliste: ArbeidslisteDataModell[] = [bruker].map(bruker => ({
-            fnr: bruker.fnr,
-            kommentar: bruker.arbeidsliste.kommentar ?? null,
-            frist: bruker.arbeidsliste.frist,
-            kategori: bruker.arbeidsliste.kategori
-        }));
-        slettArbeidslisteAction(arbeidsliste)(dispatch).then(res =>
-            oppdaterStateVedSlettArbeidsliste(res, arbeidsliste, dispatch)
-        );
-    };
-
     return (
         <div className="huskelapp-panel">
-            {bruker.huskelapp ? (
-                <HuskelappPanelvisning huskelapp={bruker.huskelapp as HuskelappModell} bruker={bruker} />
-            ) : (
-                <>
-                    <LagHuskelappInngang bruker={bruker} />
-                    {bruker.arbeidsliste.arbeidslisteAktiv && (
-                        <EksisterendeArbeidslisteVisning
-                            arbeidsliste={bruker.arbeidsliste}
-                            onSlett={onSlettArbeidsliste}
-                        />
-                    )}
-                </>
-            )}
+            <HuskelappPanelvisning huskelapp={bruker.huskelapp as HuskelappModell} bruker={bruker} />
         </div>
     );
 };

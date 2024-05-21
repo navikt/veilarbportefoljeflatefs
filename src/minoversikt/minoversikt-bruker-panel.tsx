@@ -1,5 +1,10 @@
 import React, {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
+import {Checkbox, Tag} from '@navikt/ds-react';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
@@ -10,18 +15,12 @@ import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
-import {Collapse} from 'react-collapse';
-
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanel} from './huskelapp/panelvisning/HuskelappPanel';
-import {Checkbox, Tag} from '@navikt/ds-react';
 import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
@@ -154,7 +153,7 @@ function MinoversiktBrukerPanel({
                 </div>
             </div>
             <Collapse isOpened={apen}>
-                {erHuskelappFeatureTogglePa ? (
+                {erHuskelappFeatureTogglePa && bruker.huskelapp ? (
                     <HuskelappPanel bruker={bruker} />
                 ) : (
                     <ArbeidslistePanel
