@@ -44,32 +44,35 @@ export default function ArbeidslistePanel({
             <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
             {apen && (
                 <span className={'brukerliste__arbeidslisteinnhold flex--grow'}>
-                    <Label data-testid="arbeidslistepanel_arbeidslisteinnhold_tittel">{overskrift}</Label>
-                    <Detail className="brukerliste__arbeidslisteinnhold_frist">
-                        Arbeidsliste frist: {arbeidslisteFristTekst}
-                    </Detail>
-                    <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
-                        {kommentar}
-                    </BodyShort>
-                    {!bruker.arbeidsliste.hentetKommentarOgTittel && (
+                    {!bruker.arbeidsliste.hentetKommentarOgTittel ? (
                         <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
+                    ) : (
+                        <>
+                            <Label data-testid="arbeidslistepanel_arbeidslisteinnhold_tittel">{overskrift}</Label>
+                            <Detail className="brukerliste__arbeidslisteinnhold_frist">
+                                Arbeidsliste frist: {arbeidslisteFristTekst}
+                            </Detail>
+                            <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
+                                {kommentar}
+                            </BodyShort>
+                            <div className="brukerliste__arbeidslisteinnhold_footer">
+                                <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
+                                    {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                                </Detail>
+                                {erHuskelappFeatureTogglePa ? (
+                                    <NyHuskelappVedRedigerArbeidsliste bruker={bruker} />
+                                ) : (
+                                    <ArbeidslisteModalRediger
+                                        bruker={bruker}
+                                        innloggetVeileder={innloggetVeileder}
+                                        sistEndretDato={sistEndretDato}
+                                        sistEndretAv={sistEndretAv}
+                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                    />
+                                )}
+                            </div>
+                        </>
                     )}
-                    <div className="brukerliste__arbeidslisteinnhold_footer">
-                        <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
-                            {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
-                        </Detail>
-                        {erHuskelappFeatureTogglePa ? (
-                            <NyHuskelappVedRedigerArbeidsliste bruker={bruker} />
-                        ) : (
-                            <ArbeidslisteModalRediger
-                                bruker={bruker}
-                                innloggetVeileder={innloggetVeileder}
-                                sistEndretDato={sistEndretDato}
-                                sistEndretAv={sistEndretAv}
-                                settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                            />
-                        )}
-                    </div>
                 </span>
             )}
         </div>
