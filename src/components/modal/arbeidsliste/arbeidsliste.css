@@ -68,8 +68,8 @@
     width: 50%;
     background-color: #f1f1f1;
 }
-.arbeidsliste--rediger-lenke {
-    margin-left: 1rem !important;
+.brukerliste__arbeidslisteinnhold_footer .arbeidsliste--rediger-lenke {
+    margin-left: 1rem;
 }
 .fjern-arbeidsliste {
     display: flex;
