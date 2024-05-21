@@ -8,12 +8,15 @@ import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfac
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {Button, Popover} from '@navikt/ds-react';
 import {FargekategoriFeilhandtering} from './FargekategoriFeilhandtering';
+import {leggTilStatustall} from '../../ducks/statustall-veileder';
+import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
     fnrs: string[];
+    fargekategori?: FargekategoriModell | null;
     placement?: 'right' | 'bottom-start';
     children?: React.ReactNode;
 }
@@ -23,6 +26,7 @@ export const FargekategoriPopover = ({
     openState,
     setOpenState,
     fnrs,
+    fargekategori: gammelFargekategori,
     placement = 'right',
     children
 }: FargekategoriPopoverProps) => {
@@ -38,6 +42,15 @@ export const FargekategoriPopover = ({
         const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
 
         if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
+            const gammelStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                konfigurasjon => konfigurasjon.filterId === gammelFargekategori
+            )?.statustallId;
+            const nyStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                konfigurasjon => konfigurasjon.filterId === fargekategori
+            )?.statustallId;
+            await dispatch(leggTilStatustall(gammelStatustallId, -1));
+            await dispatch(leggTilStatustall(nyStatustallId, 1));
+
             setOpenState(false);
         }
     };
