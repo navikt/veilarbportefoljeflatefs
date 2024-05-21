@@ -54,7 +54,9 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
-    box-shadow: inset -1px 0 0 2px #6a6a6a, inset 1px 0 0 2px #a0a0a0;
+    box-shadow:
+        inset -1px 0 0 2px #6a6a6a,
+        inset 1px 0 0 2px #a0a0a0;
 }
 
 .veilarbportefoljeflatefs .brukerliste__overskriftheader {
@@ -133,10 +135,6 @@
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {
     color: #6a6a6a;
-    font-style: italic;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer > button {
     font-style: italic;
 }
 

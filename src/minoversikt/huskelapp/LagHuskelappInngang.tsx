@@ -14,7 +14,7 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
 
     return (
         <div className="lag-huskelapp-inngang">
-            <Button size="xsmall" variant="tertiary" onClick={onClick}>
+            <Button size="xsmall" variant="tertiary" onClick={onClick} className="arbeidsliste--rediger-lenke">
                 Rediger
             </Button>
             {skalLagEllerEndreHuskelappModalVises && (
