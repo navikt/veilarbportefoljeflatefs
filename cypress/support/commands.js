@@ -138,14 +138,14 @@ Cypress.Commands.add('apneForsteArbeidslistepanelOgValiderApning', () => {
         .children()
         .first()
         .children()
-        .should('have.class', 'expand')
+        .should('have.class', 'expand-testid')
         .click();
 
     cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
-        .should('have.class', 'collapse')
+        .should('have.class', 'collapse-testid')
         .first();
 });
 
@@ -154,7 +154,7 @@ Cypress.Commands.add('apneForsteArbeidslistepanel', () => {
         .children()
         .first()
         .children()
-        .should('have.class', 'expand')
+        .should('have.class', 'expand-testid')
         .click();
 });
 
@@ -163,14 +163,14 @@ Cypress.Commands.add('lukkForsteArbeidslistepanelOgValiderLukking', () => {
         .children()
         .first()
         .children()
-        .should('have.class', 'collapse')
+        .should('have.class', 'collapse-testid')
         .click();
 
     cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
-        .should('have.class', 'expand')
+        .should('have.class', 'expand-testid')
         .first();
 });
 
@@ -179,7 +179,7 @@ Cypress.Commands.add('lukkForsteArbeidslistepanel', () => {
         .children()
         .first()
         .children()
-        .should('have.class', 'collapse')
+        .should('have.class', 'collapse-testid')
         .click();
 });
 

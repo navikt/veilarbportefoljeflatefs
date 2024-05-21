@@ -1,11 +1,11 @@
-import {useSelector} from 'react-redux';
-import {AppState} from '../../../reducer';
 import React from 'react';
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
-import './veiledergruppe-modal.css';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 import {BodyShort, Button} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
+import {AppState} from '../../../reducer';
+import './veiledergruppe-modal.css';
+import {TrashIcon} from '@navikt/aksel-icons';
 
 interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
@@ -48,7 +48,11 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
                                         className="fjern--knapp"
                                         type="button"
                                         onClick={() => fjernValgtVeileder(veileder.ident)}
-                                        icon={<Delete />}
+                                        icon={
+                                            <TrashIcon
+                                                title={`Fjern "${veileder.etternavn}, ${veileder.fornavn}" fra gruppen`}
+                                            />
+                                        }
                                         data-testid="veiledergruppe_modal_valgt-veileder_fjern-knapp"
                                     />
                                 </div>

@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+import classNames from 'classnames';
+import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
 import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
-import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
 import VeiledergruppeForm from './veiledergruppe-form';
@@ -12,9 +15,6 @@ import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import './veiledergruppe-modal.css';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
-import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
-import classNames from 'classnames';
 import {STATUS} from '../../../ducks/utils';
 import LasterModal from '../lastermodal/laster-modal';
 
@@ -265,7 +265,7 @@ export function VeiledergruppeModal({
                                             variant="danger"
                                             type="button"
                                             onClick={() => setSletteVeiledergruppeModal(true)}
-                                            icon={<Delete />}
+                                            icon={<TrashIcon aria-hidden={true} />}
                                             data-testid="veiledergruppe_modal_slette-knapp"
                                         >
                                             Slett gruppe

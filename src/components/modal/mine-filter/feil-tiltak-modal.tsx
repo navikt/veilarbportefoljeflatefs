@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {BodyShort, Button} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
 import {slettFilter} from '../../../ducks/mine-filter';
@@ -8,8 +10,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import EgenModal from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import './mine-filter.css';
-import {BodyShort, Button} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
 
 export interface FeilTiltakModalProps {
     gammeltFilterNavn: string;
@@ -64,7 +64,7 @@ export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversik
                             size="small"
                             variant="danger"
                             onClick={e => bekreftSletting(e)}
-                            icon={<Delete />}
+                            icon={<TrashIcon aria-hidden={true} />}
                             data-testid="slett-knapp"
                         >
                             Slett

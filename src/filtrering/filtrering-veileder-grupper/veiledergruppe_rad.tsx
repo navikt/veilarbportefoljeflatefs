@@ -1,4 +1,4 @@
-import RedigerKnapp from '../../components/knapper/rediger-knapp';
+import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
 import React from 'react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';

@@ -1,4 +1,6 @@
 import React from 'react';
+import {Alert, BodyShort, Label, Link} from '@navikt/ds-react';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import './arbeidsliste.css';
@@ -9,11 +11,9 @@ import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arb
 import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {Alert, BodyShort, Label, Link} from '@navikt/ds-react';
 import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../../konstanter';
-import {ExternalLink} from '@navikt/ds-icons';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -41,7 +41,7 @@ function FilterStatusMinArbeidsliste({
                     {/*TODO 21.03.2024: Bruk riktig lenke*/}
                     <Link href="">
                         Om endringer i arbeidslista (Navet)
-                        <ExternalLink />
+                        <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
                     </Link>
                     <BodyShort>
                         {/*TODO 21.03.2024: Bruk riktig dato*/}
