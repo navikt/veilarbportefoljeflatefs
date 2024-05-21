@@ -8,8 +8,10 @@ import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfac
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {Button, Popover} from '@navikt/ds-react';
 import {FargekategoriFeilhandtering} from './FargekategoriFeilhandtering';
-import {leggTilStatustall} from '../../ducks/statustall-veileder';
+import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statustall-veileder';
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
+import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
+import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -32,7 +34,8 @@ export const FargekategoriPopover = ({
 }: FargekategoriPopoverProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
-
+    const enhet = useEnhetSelector();
+    const veilederIdent = useSelectGjeldendeVeileder();
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
             fnr: fnrs,
@@ -42,15 +45,19 @@ export const FargekategoriPopover = ({
         const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
 
         if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
-            const gammelStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
-                konfigurasjon => konfigurasjon.filterId === gammelFargekategori
-            )?.statustallId;
-            const nyStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
-                konfigurasjon => konfigurasjon.filterId === fargekategori
-            )?.statustallId;
-            await dispatch(leggTilStatustall(gammelStatustallId, -1));
-            await dispatch(leggTilStatustall(nyStatustallId, 1));
-
+            if (gammelFargekategori) {
+                const gammelStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                    konfigurasjon => konfigurasjon.filterId === gammelFargekategori
+                )?.statustallId;
+                const nyStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                    konfigurasjon => konfigurasjon.filterId === fargekategori
+                )?.statustallId;
+                await dispatch(leggTilStatustall(gammelStatustallId, -1));
+                await dispatch(leggTilStatustall(nyStatustallId, 1));
+            } else {
+                //hent statustall fra backend
+                dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+            }
             setOpenState(false);
         }
     };
