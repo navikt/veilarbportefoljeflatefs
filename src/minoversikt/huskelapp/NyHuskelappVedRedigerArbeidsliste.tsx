@@ -4,8 +4,7 @@ import {trackAmplitude} from '../../amplitude/amplitude';
 import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 
-// TODO rename
-export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
+export const NyHuskelappVedRedigerArbeidsliste = ({bruker}: {bruker: BrukerModell}) => {
     const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
 
     const onClick = () => {

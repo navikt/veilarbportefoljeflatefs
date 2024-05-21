@@ -4,7 +4,7 @@ import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
-import {LagHuskelappInngang} from './huskelapp/LagHuskelappInngang';
+import {NyHuskelappVedRedigerArbeidsliste} from './huskelapp/NyHuskelappVedRedigerArbeidsliste';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../konstanter';
 
@@ -59,7 +59,7 @@ export default function ArbeidslistePanel({
                             {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                         </Detail>
                         {erHuskelappFeatureTogglePa ? (
-                            <LagHuskelappInngang bruker={bruker} />
+                            <NyHuskelappVedRedigerArbeidsliste bruker={bruker} />
                         ) : (
                             <ArbeidslisteModalRediger
                                 bruker={bruker}
