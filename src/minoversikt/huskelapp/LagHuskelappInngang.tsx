@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
 import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
-import {HuskelappInfoAlert} from './redigering/HuskelappInfoAlert';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 
+// TODO rename
 export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
     const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
 
@@ -15,9 +15,8 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
 
     return (
         <div className="lag-huskelapp-inngang">
-            <HuskelappInfoAlert />
-            <Button size="xsmall" variant="primary-neutral" onClick={onClick}>
-                Lag huskelapp
+            <Button size="xsmall" variant="tertiary" onClick={onClick} className="arbeidsliste--rediger-lenke">
+                Rediger
             </Button>
             {skalLagEllerEndreHuskelappModalVises && (
                 <LagEllerEndreHuskelappModal
