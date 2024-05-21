@@ -1,9 +1,9 @@
 import * as React from 'react';
+import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
 import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
-import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -35,37 +35,42 @@ export default function ArbeidslistePanel({
         arbeidslisteFristTekst = 'Ingen valgt frist.';
     }
 
-    return skalVises ? (
+    if (!skalVises) {
+        return null;
+    }
+
+    return (
         <div className="brukerliste__arbeidslistepanel">
             <span className="brukerliste__gutter-left brukerliste--min-width-minside" />
             {apen && (
                 <span className={'brukerliste__arbeidslisteinnhold flex--grow'}>
-                    <Label data-testid="arbeidslistepanel_arbeidslisteinnhold_tittel">{overskrift}</Label>
-                    <Detail className="brukerliste__arbeidslisteinnhold_frist">
-                        Arbeidsliste frist: {arbeidslisteFristTekst}
-                    </Detail>
-                    <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
-                        {kommentar}
-                    </BodyShort>
-                    {!bruker.arbeidsliste.hentetKommentarOgTittel && (
+                    {!bruker.arbeidsliste.hentetKommentarOgTittel ? (
                         <Loader variant="neutral" size="xsmall" title="Henter arbeidsliste for bruker..." />
+                    ) : (
+                        <>
+                            <Label data-testid="arbeidslistepanel_arbeidslisteinnhold_tittel">{overskrift}</Label>
+                            <Detail className="brukerliste__arbeidslisteinnhold_frist">
+                                Arbeidsliste frist: {arbeidslisteFristTekst}
+                            </Detail>
+                            <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
+                                {kommentar}
+                            </BodyShort>
+                            <div className="brukerliste__arbeidslisteinnhold_footer">
+                                <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
+                                    {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                                </Detail>
+                                <ArbeidslisteModalRediger
+                                    bruker={bruker}
+                                    innloggetVeileder={innloggetVeileder}
+                                    sistEndretDato={sistEndretDato}
+                                    sistEndretAv={sistEndretAv}
+                                    settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
+                                />
+                            </div>
+                        </>
                     )}
-                    <div className="brukerliste__arbeidslisteinnhold_footer">
-                        <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
-                            {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
-                        </Detail>
-                        <ArbeidslisteModalRediger
-                            bruker={bruker}
-                            innloggetVeileder={innloggetVeileder}
-                            sistEndretDato={sistEndretDato}
-                            sistEndretAv={sistEndretAv}
-                            settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                        />
-                    </div>
                 </span>
             )}
         </div>
-    ) : (
-        <></>
     );
 }
