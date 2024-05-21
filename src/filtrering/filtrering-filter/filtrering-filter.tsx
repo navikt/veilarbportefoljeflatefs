@@ -329,10 +329,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                     target="_blank"
                                     rel="noreferrer noopener"
                                 >
-                                    Se mer informasjon på Navet{' '}
+                                    Se mer informasjon på Navet
                                     <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
                                 </Link>
-                                .
                             </Alert>
                             <CheckboxFilterform
                                 valg={avvik14aVedtakValg()}

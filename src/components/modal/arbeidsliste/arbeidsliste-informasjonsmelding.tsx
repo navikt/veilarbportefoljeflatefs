@@ -20,7 +20,7 @@ const ArbeidslisteInformasjonsmelding = () => (
                     });
                 }}
             >
-                Les mer om hvordan bruke arbeidslisten på Navet{' '}
+                Les mer om hvordan bruke arbeidslisten på Navet
                 <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
             </Link>
         </b>
