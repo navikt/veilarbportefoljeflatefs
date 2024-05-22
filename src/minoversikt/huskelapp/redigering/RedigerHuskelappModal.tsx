@@ -32,6 +32,47 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
 
+    async function validerOgLagreHuskelapp(values, formikHelpers) {
+        if (!values.frist && !values.kommentar) {
+            return formikHelpers.setErrors({
+                frist: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen',
+                kommentar:
+                    'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
+            });
+        }
+        const arbeidslisteSomSkalSlettes: ArbeidslisteDataModell | null = arbeidsliste
+            ? {
+                fnr: bruker.fnr,
+                kommentar: bruker.arbeidsliste.kommentar ?? null,
+                frist: bruker.arbeidsliste.frist,
+                kategori: bruker.arbeidsliste.kategori
+            }
+            : null;
+        try {
+            if (huskelapp?.huskelappId) {
+                await endreHuskelapp(
+                    dispatch,
+                    values,
+                    bruker,
+                    enhetId!!,
+                    onModalClose,
+                    huskelapp.huskelappId
+                );
+            } else {
+                await lagreHuskelapp(
+                    dispatch,
+                    values,
+                    bruker,
+                    enhetId!!,
+                    onModalClose,
+                    arbeidslisteSomSkalSlettes
+                );
+            }
+        } catch (error) {
+            dispatch(visServerfeilModal());
+        }
+    }
+
     return (
         <Modal
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
@@ -54,46 +95,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                             kommentar: huskelapp?.kommentar ?? ''
                         }}
                         validateOnBlur={false}
-                        onSubmit={async (values, formikHelpers) => {
-                            if (!values.frist && !values.kommentar) {
-                                return formikHelpers.setErrors({
-                                    frist: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen',
-                                    kommentar:
-                                        'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
-                                });
-                            }
-                            const arbeidslisteSomSkalSlettes: ArbeidslisteDataModell | null = arbeidsliste
-                                ? {
-                                      fnr: bruker.fnr,
-                                      kommentar: bruker.arbeidsliste.kommentar ?? null,
-                                      frist: bruker.arbeidsliste.frist,
-                                      kategori: bruker.arbeidsliste.kategori
-                                  }
-                                : null;
-                            try {
-                                if (huskelapp?.huskelappId) {
-                                    await endreHuskelapp(
-                                        dispatch,
-                                        values,
-                                        bruker,
-                                        enhetId!!,
-                                        onModalClose,
-                                        huskelapp.huskelappId
-                                    );
-                                } else {
-                                    await lagreHuskelapp(
-                                        dispatch,
-                                        values,
-                                        bruker,
-                                        enhetId!!,
-                                        onModalClose,
-                                        arbeidslisteSomSkalSlettes
-                                    );
-                                }
-                            } catch (error) {
-                                dispatch(visServerfeilModal());
-                            }
-                        }}
+                        onSubmit={validerOgLagreHuskelapp}
                     >
                         <Form id="lagEllerEndreHuskelappForm">
                             <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
