@@ -34,7 +34,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
 
     return (
         <Modal
-            className={classNames('lag-eller-endre-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
+            className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
             closeOnBackdropClick={true}
@@ -45,7 +45,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                     Huskelapp
                 </Heading>
             </Modal.Header>
-            <Modal.Body className="lag-eller-endre-huskelapp-modal__body">
+            <Modal.Body className="rediger-huskelapp-modal__body">
                 <div>
                     <HuskelappInfoAlert />
                     <Formik
