@@ -110,6 +110,7 @@ function MinoversiktBrukerPanel({
                 </Checkbox>
                 {!erHuskelappFeatureTogglePa && (
                     <ArbeidslistekategoriVisning
+                        skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}
                         dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
