@@ -9,17 +9,14 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
-import {HuskelappInfoAlert} from './HuskelappInfoAlert';
-import {Form, Formik} from 'formik';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
-import FormikTekstArea from '../../../components/formik/formik-tekstarea';
-import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 import './rediger-huskelapp.css';
 import {ArrowRightIcon} from '@navikt/aksel-icons';
+import {NyHuskelapp} from './NyHuskelapp';
 
 interface Props {
     onModalClose: () => void;
@@ -95,22 +92,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                         <ArrowRightIcon title="Pil mot høyre" className="rediger-huskelapp-modal-pil" fontSize="3rem" />
                     </>
                 )}
-                <div className="rediger-huskelapp-skjema">
-                    <HuskelappInfoAlert />
-                    <Formik
-                        initialValues={{
-                            frist: huskelapp?.frist ?? '',
-                            kommentar: huskelapp?.kommentar ?? ''
-                        }}
-                        validateOnBlur={false}
-                        onSubmit={validerOgLagreHuskelapp}
-                    >
-                        <Form id="lagEllerEndreHuskelappForm">
-                            <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
-                            <FormikDatoVelger name="frist" />
-                        </Form>
-                    </Formik>
-                </div>
+                <NyHuskelapp huskelapp={huskelapp} onSubmit={validerOgLagreHuskelapp} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">
