@@ -24,8 +24,8 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                 validateOnBlur={false}
                 onSubmit={onSubmit}
             >
-                <Form id="lagEllerEndreHuskelappForm">
-                    <FormikTekstArea name="kommentar" maxLengde={100} className="blokk-xs" />
+                <Form id="rediger-huskelapp-skjema" className="ny-huskelapp-form">
+                    <FormikTekstArea label="Tekst" name="kommentar" maxLengde={100} />
                     <FormikDatoVelger name="frist" />
                 </Form>
             </Formik>

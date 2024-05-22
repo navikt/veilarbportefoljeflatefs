@@ -34,5 +34,22 @@
     flex-grow: 1;
     max-width: 26rem;
 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     padding: var(--a-spacing-4);
+}
+
+.ny-huskelapp-form {
+    background-color: var(--a-bg-default);
+    padding: 1rem 0.5rem;
+}
+
+.ny-huskelapp form > :not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
+    /* !important er brukt for å overskrive hardkodinga av alle labels til 14px i style.css */
+    font-size: var(--a-font-size-medium) !important;
 }

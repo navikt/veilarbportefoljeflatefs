@@ -99,7 +99,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">
+                <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
                 </Button>
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
