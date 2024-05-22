@@ -13,14 +13,24 @@
 }
 
 .med-eksisterende-arbeidsliste .rediger-huskelapp-modal__body {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 20rem 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     padding-bottom: 0;
+    overflow: visible; /* Gjer at focus-stylinga ikkje vert kutta sjølv om padding-bottom er 0.*/
 }
 
 .rediger-huskelapp-modal .nav-datovelger__kalenderPortal {
     transform: translateY(-116%);
+}
+
+.rediger-huskelapp-modal-pil {
+    margin: auto;
+}
+
+.rediger-huskelapp-skjema {
+    flex-basis: 17.75rem;
+    flex-grow: 1;
+    max-width: 26rem;
 }

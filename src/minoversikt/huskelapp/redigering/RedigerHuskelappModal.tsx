@@ -19,6 +19,7 @@ import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 import './rediger-huskelapp.css';
+import {ArrowRightIcon} from '@navikt/aksel-icons';
 
 interface Props {
     onModalClose: () => void;
@@ -31,6 +32,7 @@ interface Props {
 export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
         if (!values.frist && !values.kommentar) {
@@ -87,7 +89,13 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                 </Heading>
             </Modal.Header>
             <Modal.Body className="rediger-huskelapp-modal__body">
-                <div>
+                {harArbeidsliste && (
+                    <>
+                        <GammelArbeidsliste arbeidsliste={arbeidsliste} />
+                        <ArrowRightIcon title="Pil mot høyre" className="rediger-huskelapp-modal-pil" fontSize="3rem" />
+                    </>
+                )}
+                <div className="rediger-huskelapp-skjema">
                     <HuskelappInfoAlert />
                     <Formik
                         initialValues={{
@@ -103,7 +111,6 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                         </Form>
                     </Formik>
                 </div>
-                {arbeidsliste && <GammelArbeidsliste arbeidsliste={arbeidsliste} />}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">
