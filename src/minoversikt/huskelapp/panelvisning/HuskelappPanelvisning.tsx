@@ -9,6 +9,8 @@ import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selecto
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {HuskelappForPanel} from './HuskelappForPanel';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
+import '../huskelapp.css';
+import './panelvisning.css';
 
 interface Props {
     huskelapp: HuskelappModell;
@@ -24,7 +26,7 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
     const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!);
 
     return (
-        <>
+        <div className="huskelapp-panel">
             <HuskelappForPanel
                 huskelapp={huskelapp}
                 onSlettHuskelapp={slettHuskelapp}
@@ -40,6 +42,6 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
                     bruker={bruker}
                 />
             )}
-        </>
+        </div>
     );
 };
