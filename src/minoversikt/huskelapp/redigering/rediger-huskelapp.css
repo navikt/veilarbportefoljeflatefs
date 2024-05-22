@@ -29,8 +29,10 @@
     margin: auto;
 }
 
-.rediger-huskelapp-skjema {
+.ny-huskelapp {
     flex-basis: 17.75rem;
     flex-grow: 1;
     max-width: 26rem;
+
+    padding: var(--a-spacing-4);
 }

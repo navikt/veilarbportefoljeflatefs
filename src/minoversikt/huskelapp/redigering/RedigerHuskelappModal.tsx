@@ -92,7 +92,11 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                         <ArrowRightIcon title="Pil mot høyre" className="rediger-huskelapp-modal-pil" fontSize="3rem" />
                     </>
                 )}
-                <NyHuskelapp huskelapp={huskelapp} onSubmit={validerOgLagreHuskelapp} />
+                <NyHuskelapp
+                    huskelapp={huskelapp}
+                    onSubmit={validerOgLagreHuskelapp}
+                    harArbeidsliste={harArbeidsliste}
+                />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">

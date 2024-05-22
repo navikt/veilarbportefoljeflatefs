@@ -4,16 +4,18 @@ import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import React from 'react';
 import {HuskelappModell} from '../../../model-interfaces';
+import {Heading} from '@navikt/ds-react';
 
 interface Props {
     huskelapp?: HuskelappModell;
     onSubmit: (values, formikHelpers) => Promise<any>;
+    harArbeidsliste: boolean;
 }
 
-export const NyHuskelapp = ({huskelapp, onSubmit}: Props) => {
+export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
     return (
-        <div className="rediger-huskelapp-skjema">
-            <HuskelappInfoAlert />
+        <div className="ny-huskelapp huskelapp__postit">
+            {harArbeidsliste && <Heading size="small">Ny huskelapp</Heading>}
             <Formik
                 initialValues={{
                     frist: huskelapp?.frist ?? '',
@@ -27,6 +29,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit}: Props) => {
                     <FormikDatoVelger name="frist" />
                 </Form>
             </Formik>
+            <HuskelappInfoAlert />
         </div>
     );
 };
