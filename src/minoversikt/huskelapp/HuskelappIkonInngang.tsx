@@ -10,6 +10,9 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
     const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
     const [modalVisHuskelappSkalVises, setModalVisHuskelappSkalVises] = useState<boolean>(false);
 
+    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
+    const harHuskelappEllerArbeidsliste = !!bruker.huskelapp || arbeidslisteAktiv;
+
     function visEllerRedigerHuskelapp() {
         bruker.huskelapp ? setModalVisHuskelappSkalVises(true) : setSkalLagEllerEndreHuskelappModalVises(true);
     }
@@ -33,7 +36,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                 variant="tertiary"
                 onClick={visEllerRedigerHuskelapp}
                 icon={
-                    bruker.huskelapp ? (
+                    harHuskelappEllerArbeidsliste ? (
                         <HuskelappIkon className="huskelappikon" />
                     ) : (
                         <HuskelappIkonTomt className="huskelappikon" />
