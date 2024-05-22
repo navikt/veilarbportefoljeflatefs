@@ -61,14 +61,14 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                                         'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
                                 });
                             }
-                            const arbeidslisteArray: ArbeidslisteDataModell[] = arbeidsliste
-                                ? [bruker].map(bruker => ({
+                            const arbeidslisteSomSkalSlettes: ArbeidslisteDataModell | null = arbeidsliste
+                                ? {
                                       fnr: bruker.fnr,
                                       kommentar: bruker.arbeidsliste.kommentar ?? null,
                                       frist: bruker.arbeidsliste.frist,
                                       kategori: bruker.arbeidsliste.kategori
-                                  }))
-                                : [];
+                                  }
+                                : null;
                             try {
                                 if (huskelapp?.huskelappId) {
                                     await endreHuskelapp(
@@ -86,7 +86,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                                         bruker,
                                         enhetId!!,
                                         onModalClose,
-                                        arbeidslisteArray
+                                        arbeidslisteSomSkalSlettes
                                     );
                                 }
                             } catch (error) {
