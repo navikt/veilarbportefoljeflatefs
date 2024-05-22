@@ -12,6 +12,8 @@ import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statusta
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
+import {delay} from 'msw';
+import {DEFAULT_DELAY_MILLISECONDS} from '../../mocks/constants';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -56,7 +58,8 @@ export const FargekategoriPopover = ({
                 await dispatch(leggTilStatustall(nyStatustallId, 1));
             } else {
                 //hent statustall fra backend
-                await dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+                await delay(DEFAULT_DELAY_MILLISECONDS);
+                dispatch(hentStatustallForVeileder(enhet, veilederIdent));
             }
             setOpenState(false);
         }
