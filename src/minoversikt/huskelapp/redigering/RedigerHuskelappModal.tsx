@@ -16,7 +16,7 @@ import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
-import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
+import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 import './rediger-huskelapp.css';
 
@@ -28,9 +28,10 @@ interface Props {
     arbeidsliste?: ArbeidslisteModell | null;
 }
 
-export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
+export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+
     return (
         <Modal
             className={classNames('lag-eller-endre-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
@@ -100,7 +101,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                         </Form>
                     </Formik>
                 </div>
-                {arbeidsliste && <EksisterendeArbeidslisteVisning arbeidsliste={arbeidsliste} />}
+                {arbeidsliste && <GammelArbeidsliste arbeidsliste={arbeidsliste} />}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" size="small" type="submit" form="lagEllerEndreHuskelappForm">

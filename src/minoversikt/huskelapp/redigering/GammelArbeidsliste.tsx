@@ -9,7 +9,7 @@ interface Props {
     onSlett?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const EksisterendeArbeidslisteVisning = ({arbeidsliste, onSlett}: Props) => (
+export const GammelArbeidsliste = ({arbeidsliste, onSlett}: Props) => (
     <section className="eksisterende-arbeidslistevisning">
         <Heading size="small" level="1" className="blokk-xxs">
             Eksisterende arbeidslisteinnhold

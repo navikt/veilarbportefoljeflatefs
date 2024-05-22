@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
-import {LagEllerEndreHuskelappModal} from '../redigering/LagEllerEndreHuskelappModal';
+import {RedigerHuskelappModal} from '../redigering/RedigerHuskelappModal';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
@@ -18,11 +18,11 @@ interface Props {
 }
 
 export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
-    const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
+    const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
-    const visRedigeringsmodal = () => setSkalLagEllerEndreHuskelappModalVises(true);
+    const visRedigeringsmodal = () => setSkalViseRedigerHuskelappModal(true);
     const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!);
 
     return (
@@ -32,12 +32,12 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
                 onSlettHuskelapp={slettHuskelapp}
                 onEndreHuskelapp={visRedigeringsmodal}
             />
-            {skalLagEllerEndreHuskelappModalVises && (
-                <LagEllerEndreHuskelappModal
+            {skalViseRedigerHuskelappModal && (
+                <RedigerHuskelappModal
                     onModalClose={() => {
-                        setSkalLagEllerEndreHuskelappModalVises(false);
+                        setSkalViseRedigerHuskelappModal(false);
                     }}
-                    isModalOpen={skalLagEllerEndreHuskelappModalVises}
+                    isModalOpen={skalViseRedigerHuskelappModal}
                     huskelapp={huskelapp}
                     bruker={bruker}
                 />
