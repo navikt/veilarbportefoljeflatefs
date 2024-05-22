@@ -56,7 +56,7 @@ export const FargekategoriPopover = ({
                 await dispatch(leggTilStatustall(nyStatustallId, 1));
             } else {
                 //hent statustall fra backend
-                dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+                await dispatch(hentStatustallForVeileder(enhet, veilederIdent));
             }
             setOpenState(false);
         }
