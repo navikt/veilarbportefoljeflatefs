@@ -62,7 +62,7 @@ function EnhetBrukerpanel({
                 }}
                 size="small"
             >
-                {''}
+                Velg bruker {bruker.etternavn}, {bruker.fornavn}
             </Checkbox>
             <EnhetKolonner
                 className="brukerliste__innhold flex flex--center"

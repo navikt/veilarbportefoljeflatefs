@@ -106,7 +106,7 @@ function MinoversiktBrukerPanel({
                     }}
                     size="small"
                 >
-                    {''}
+                    Velg bruker {bruker.etternavn}, {bruker.fornavn}
                 </Checkbox>
                 {!erHuskelappFeatureTogglePa && (
                     <ArbeidslistekategoriVisning
