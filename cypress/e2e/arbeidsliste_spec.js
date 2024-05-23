@@ -98,7 +98,7 @@ describe('Arbeidsliste', () => {
             // Testinga av laster-modal er litt ustabil så vi kommenterer den ut. 2024-04-19 Ingrid og Klara
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
-            cy.wait(300); // Ventar på at laster-modalen skal forsvinne
+            cy.wait(400); // Ventar på at laster-modalen skal forsvinne
 
             // Samanlikn talet på brukarar med arbeidslister før og etter at ein har oppretta nye
             cy.get('@elementIArbeidsliste')
@@ -197,6 +197,7 @@ describe('Arbeidsliste', () => {
             // Sjekk at det er 1 færre arbeidslister no enn før slettinga
             cy.get('@elementIArbeidsliste')
                 .should('be.visible')
+                .wait(200)
                 .then(antallArbeidslisterEtterSletting => {
                     expect(antallArbeidslisterEtterSletting.length)
                         .to.equal(antallArbeidslisterForSletting.length - 1);

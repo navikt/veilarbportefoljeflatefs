@@ -231,7 +231,7 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
-export function slettArbeidslisteUtenFargekategori(fnr: string) {
+export function slettArbeidslisteMenIkkeFargekategori(fnr: string) {
     const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste?slettFargekategori=false`;
     const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({fnr})};
     return fetchToJson(url, config);

@@ -6,7 +6,7 @@ import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
 import {ArbeidslisteDataModell, BrukerModell} from '../../../model-interfaces';
 import {FormikValues} from 'formik';
-import {slettArbeidslisteUtenFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
+import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
 
 export const lagreHuskelapp = async (
     dispatch: ThunkDispatch<AppState, any, AnyAction>,
@@ -19,15 +19,15 @@ export const lagreHuskelapp = async (
     await dispatch(
         lagreHuskelappAction({
             brukerFnr: bruker.fnr,
-            enhetId: enhetId!!,
+            enhetId: enhetId,
             frist: values.frist?.toString(),
             kommentar: values.kommentar
         })
     );
-    dispatch(hentHuskelappForBruker(bruker.fnr, enhetId!!));
+    dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
     await dispatch(leggTilStatustall('mineHuskelapper', 1));
     if (!!arbeidsliste) {
-        await slettArbeidslisteUtenFargekategoriOgOppdaterRedux(bruker, dispatch);
+        await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
     }
     onModalClose();
 };
