@@ -138,7 +138,8 @@ export const tomArbeidsliste = {
     isOppfolgendeVeileder: null,
     arbeidslisteAktiv: false,
     sistEndretAv: {},
-    kategori: null
+    kategori: null,
+    hentetKommentarOgTittel: true
 };
 
 function lagArbeidsliste(aktoerid, fnr) {
@@ -166,7 +167,8 @@ function lagArbeidsliste(aktoerid, fnr) {
         isOppfolgendeVeileder: true,
         arbeidslisteAktiv: true,
         sistEndretAv: {veilederId: innloggetVeileder.ident},
-        kategori
+        kategori,
+        hentetKommentarOgTittel: true
     };
 
     arbeidsliste.push({

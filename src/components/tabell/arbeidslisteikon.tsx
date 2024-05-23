@@ -10,9 +10,14 @@ import {KategoriModell} from '../../model-interfaces';
 interface ArbeidslistekategoriProps {
     kategori: KategoriModell;
     dataTestid?: string;
+    skalVises?: boolean;
 }
 
-export default function ArbeidslistekategoriVisning({kategori, dataTestid}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({
+    kategori,
+    skalVises = true,
+    dataTestid
+}: ArbeidslistekategoriProps) {
     const velgArbeidslistekategori = () => {
         switch (kategori) {
             case KategoriModell.BLA:
@@ -30,7 +35,7 @@ export default function ArbeidslistekategoriVisning({kategori, dataTestid}: Arbe
 
     return (
         <span className="arbeidsliste--ikon" data-testid="brukerliste_span_arbeidslisteikon">
-            {velgArbeidslistekategori()}
+            {skalVises ? velgArbeidslistekategori() : <div className="tomt-arbeidslisteikon" />}
         </span>
     );
 }

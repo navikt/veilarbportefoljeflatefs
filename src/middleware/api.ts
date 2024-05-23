@@ -231,6 +231,12 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
+export function slettArbeidslisteMenIkkeFargekategori(fnr: string) {
+    const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste?slettFargekategori=false`;
+    const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({fnr})};
+    return fetchToJson(url, config);
+}
+
 export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {
     const url = `${VEILARBPORTEFOLJE_URL}/v1/fargekategorier`;
     const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify(fnrlisteOgFargekategori)};
