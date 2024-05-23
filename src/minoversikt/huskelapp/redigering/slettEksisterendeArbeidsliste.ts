@@ -5,15 +5,15 @@ import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
-import {slettArbeidslisteUtenFargekategori} from '../../../middleware/api';
+import {slettArbeidslisteMenIkkeFargekategori} from '../../../middleware/api';
 
-export const slettArbeidslisteUtenFargekategoriOgOppdaterRedux = async (
+export const slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux = async (
     bruker: BrukerModell,
     dispatch: ThunkDispatch<AppState, any, AnyAction>
 ) => {
     try {
-        const arbeidslisteUtenFargekategori = await slettArbeidslisteUtenFargekategori(bruker.fnr);
-        const ikkeAktivArbeidsliste = {...arbeidslisteUtenFargekategori, arbeidslisteAktiv: false, fnr: bruker.fnr};
+        const slettetArbeidsliste = await slettArbeidslisteMenIkkeFargekategori(bruker.fnr);
+        const ikkeAktivArbeidsliste = {...slettetArbeidsliste, arbeidslisteAktiv: false, fnr: bruker.fnr};
         leggTilStatustall('minArbeidsliste', -1)(dispatch);
         oppdaterArbeidslisteForBruker([ikkeAktivArbeidsliste])(dispatch);
     } catch (error) {
