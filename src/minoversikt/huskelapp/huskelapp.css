@@ -1,12 +1,3 @@
-.eksisterende-arbeidslistevisning {
-    background: var(--a-gray-200);
-    max-width: 500px;
-    min-width: 400px;
-    padding: 16px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
 .huskelapp-modal__heading {
     display: flex;
     align-items: center;

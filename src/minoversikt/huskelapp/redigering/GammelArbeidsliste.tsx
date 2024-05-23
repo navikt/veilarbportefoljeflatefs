@@ -1,7 +1,7 @@
 import React from 'react';
-import {Alert, BodyLong, BodyShort, Button, Heading} from '@navikt/ds-react';
-import {ArbeidslisteModell} from '../../../model-interfaces';
+import {BodyLong, BodyShort, Button, Heading, List} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
+import {ArbeidslisteModell} from '../../../model-interfaces';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 
 interface Props {
@@ -10,24 +10,28 @@ interface Props {
 }
 
 export const GammelArbeidsliste = ({arbeidsliste, onSlett}: Props) => (
-    <section className="eksisterende-arbeidslistevisning">
-        <Heading size="small" level="1" className="blokk-xxs">
-            Eksisterende arbeidslisteinnhold
+    <section className="gammel-arbeidsliste">
+        <Heading size="small" level="2">
+            Gammel arbeidsliste
         </Heading>
-        <Alert variant="info" size="small" className="blokk-xxs">
-            Når du <b>lagrer</b> huskelapp første gang vil eksisterende arbeidslisteinnhold på denne personen automatisk
-            slettes. Alt eksisterende arbeidslisteinnhold blir slettet <b>{'< en dato for sletting >'}</b>
-        </Alert>
-        <BodyShort size="small" as="h2" className="blokk-xxs">
-            <b>{arbeidsliste?.overskrift}</b>
-        </BodyShort>
-        <BodyShort size="small" className="blokk-xxs">
-            <i>Arbeidsliste frist: {arbeidsliste.frist ? toDatePrettyPrint(arbeidsliste.frist) : 'Ingen frist'}</i>
-        </BodyShort>
-        <BodyLong size="small" className="navds-body-short blokk-xxs">
-            {arbeidsliste?.kommentar}
-        </BodyLong>
-        <BodyShort size="small" className="blokk-xxs">
+        <List size="small">
+            <List.Item>Kopier det du vil ha med fra gammel arbeidsliste, og legg i ny huskelapp.</List.Item>
+            <List.Item>
+                Gammel arbeidsliste slettes automatisk når du lagrer ny huskelapp, fargekategori beholdes.
+            </List.Item>
+        </List>
+        <div className="gammel-arbeidsliste-innhold">
+            <Heading level="3" size="xsmall">
+                {arbeidsliste?.overskrift}
+            </Heading>
+            <BodyLong size="small" spacing={true}>
+                {arbeidsliste?.kommentar}
+            </BodyLong>
+            <BodyShort size="small" spacing={true}>
+                <i>Arbeidslistefrist: {arbeidsliste.frist ? toDatePrettyPrint(arbeidsliste.frist) : 'Ingen frist'}</i>
+            </BodyShort>
+        </div>
+        <BodyShort size="small">
             <i>
                 Oppdatert {arbeidsliste.endringstidspunkt ? toDatePrettyPrint(arbeidsliste.endringstidspunkt) : ''} av{' '}
                 {arbeidsliste.sistEndretAv?.veilederId}

@@ -25,6 +25,32 @@
     transform: translateY(-116%);
 }
 
+.gammel-arbeidsliste {
+    flex: 10 18rem;
+    max-width: 22.5rem;
+
+    background-color: var(--a-bg-subtle);
+    padding: 1rem;
+    border-radius: var(--a-border-radius-medium);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.gammel-arbeidsliste-innhold {
+    background: var(--a-bg-default);
+    padding: var(--a-spacing-2);
+}
+
+.gammel-arbeidsliste-innhold h3 {
+    font-size: var(--a-font-size-medium); /*1rem, overskriv ds-styling for xsmall (1.125rem)*/
+}
+
+.gammel-arbeidsliste-innhold p {
+    font-size: var(--a-font-size-small); /* Overskriv styling i bodylong som brukar medium skriftstorleik */
+}
+
 .rediger-huskelapp-modal-pil {
     margin: auto;
 }
