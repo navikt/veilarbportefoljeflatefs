@@ -17,6 +17,7 @@ import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskel
 import './rediger-huskelapp.css';
 import {ArrowRightIcon} from '@navikt/aksel-icons';
 import {NyHuskelapp} from './NyHuskelapp';
+import {SlettArbeidsliste} from './SlettArbeidsliste';
 
 interface Props {
     onModalClose: () => void;
@@ -35,37 +36,22 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
         if (!values.frist && !values.kommentar) {
             return formikHelpers.setErrors({
                 frist: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen',
-                kommentar:
-                    'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
+                kommentar: 'Du må legge til enten frist eller kommentar for å kunne lagre huskelappen'
             });
         }
         const arbeidslisteSomSkalSlettes: ArbeidslisteDataModell | null = arbeidsliste
             ? {
-                fnr: bruker.fnr,
-                kommentar: bruker.arbeidsliste.kommentar ?? null,
-                frist: bruker.arbeidsliste.frist,
-                kategori: bruker.arbeidsliste.kategori
-            }
+                  fnr: bruker.fnr,
+                  kommentar: bruker.arbeidsliste.kommentar ?? null,
+                  frist: bruker.arbeidsliste.frist,
+                  kategori: bruker.arbeidsliste.kategori
+              }
             : null;
         try {
             if (huskelapp?.huskelappId) {
-                await endreHuskelapp(
-                    dispatch,
-                    values,
-                    bruker,
-                    enhetId!!,
-                    onModalClose,
-                    huskelapp.huskelappId
-                );
+                await endreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, huskelapp.huskelappId);
             } else {
-                await lagreHuskelapp(
-                    dispatch,
-                    values,
-                    bruker,
-                    enhetId!!,
-                    onModalClose,
-                    arbeidslisteSomSkalSlettes
-                );
+                await lagreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, arbeidslisteSomSkalSlettes);
             }
         } catch (error) {
             dispatch(visServerfeilModal());
@@ -105,6 +91,7 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt
                 </Button>
+                {arbeidsliste?.arbeidslisteAktiv && <SlettArbeidsliste bruker={bruker} />}
             </Modal.Footer>
         </Modal>
     );
