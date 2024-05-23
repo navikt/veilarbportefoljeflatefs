@@ -46,7 +46,7 @@ function EnhetBrukerpanel({
         }
     }, [varForrigeBruker]);
 
-    const classname = classNames('brukerliste__element', {
+    const classname = classNames('brukerliste__element', 'brukerliste_rad', {
         'brukerliste--forrigeBruker': varForrigeBruker
     });
 

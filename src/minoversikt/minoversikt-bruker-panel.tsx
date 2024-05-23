@@ -89,7 +89,7 @@ function MinoversiktBrukerPanel({
                 {
                     'brukerliste--forrigeBruker': varForrigeBruker
                 },
-                'brukerliste_element'
+                'brukerliste_rad'
             )}
             data-testid={`brukerliste_element${testIdArbeidslisteAktiv}${testIdArbeidslisteKategori}${testIdDisabled}`}
             data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
