@@ -39,7 +39,8 @@ function ArbeidslisteKnapp() {
         return null;
     }
 
-    const klikk = () => {
+    const klikk = e => {
+        e.preventDefault();
         if (valgteBrukere.length === 0) {
             dispatch(oppdaterBrukerfeil());
         } else {
@@ -55,7 +56,7 @@ function ArbeidslisteKnapp() {
                 className="toolbar_btn"
                 icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
                 iconPosition="left"
-                onClick={() => klikk()}
+                onClick={klikk}
                 data-testid={
                     inneholderBrukerMedOgUtenArbeidsliste ? 'fjern-fra-arbeidsliste_knapp' : 'legg-i-arbeidsliste_knapp'
                 }
