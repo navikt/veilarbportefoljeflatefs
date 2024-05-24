@@ -22,7 +22,7 @@ export const GammelArbeidsliste = ({arbeidsliste, onSlett}: Props) => (
         </List>
         <div className="gammel-arbeidsliste-innhold">
             <Heading level="3" size="xsmall">
-                {arbeidsliste?.overskrift}
+                {arbeidsliste?.overskrift ? arbeidsliste?.overskrift : 'Arbeidsliste uten tittel'}
             </Heading>
             <BodyLong size="small" spacing={true}>
                 {arbeidsliste?.kommentar}
