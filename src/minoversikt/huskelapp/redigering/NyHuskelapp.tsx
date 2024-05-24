@@ -25,7 +25,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                 onSubmit={onSubmit}
             >
                 <Form id="rediger-huskelapp-skjema" className="ny-huskelapp-form">
-                    <FormikTekstArea label="Tekst" name="kommentar" maxLengde={100} />
+                    <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
                     <FormikDatoVelger name="frist" />
                 </Form>
             </Formik>
