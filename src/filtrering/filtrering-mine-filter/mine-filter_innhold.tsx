@@ -57,6 +57,17 @@ function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
+                <Alert
+                    variant="info"
+                    className="mine-filter_alertstripe"
+                    data-testid="mine-filter_alertstripe-arbeidsliste"
+                    size="small"
+                >
+                    <b>Du har filter med arbeidsliste</b>
+                    <br />
+                    Disse kan vise færre brukere etterhvert som du migrerer til huskelapp. Det kan være lurt å lage nye
+                    filter som også henter inn brukere med fargekategorier.
+                </Alert>
                 {inaktiveFilter().length !== 0 && (
                     <Alert
                         variant="info"
