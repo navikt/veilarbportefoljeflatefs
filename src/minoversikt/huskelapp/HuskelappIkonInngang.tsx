@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
-import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/huskelapp.svg';
-import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/huskelapp_stiplet.svg';
+import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
+import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/Huskelappikon_stiplet.svg';
 import {HuskelappModal} from './modalvisning/HuskelappModal';
 
 export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
@@ -32,13 +32,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                 size="small"
                 variant="tertiary"
                 onClick={visEllerRedigerHuskelapp}
-                icon={
-                    bruker.huskelapp ? (
-                        <HuskelappIkon className="huskelappikon" />
-                    ) : (
-                        <HuskelappIkonTomt className="huskelappikon" />
-                    )
-                }
+                icon={bruker.huskelapp ? <HuskelappIkon /> : <HuskelappIkonTomt />}
             />
             {skalLagEllerEndreHuskelappModalVises && (
                 <LagEllerEndreHuskelappModal

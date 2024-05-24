@@ -17,7 +17,7 @@ import FormikDatoVelger from '../../../components/formik/formik-datovelger/formi
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {EksisterendeArbeidslisteVisning} from './EksisterendeArbeidslisteVisning';
-import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import './rediger-huskelapp.css';
 
 interface Props {

@@ -9,7 +9,7 @@ import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
-import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {HuskelappForModal} from './HuskelappForModal';
 import './modalvisning.css';
 

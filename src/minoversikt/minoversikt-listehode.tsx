@@ -27,7 +27,7 @@ import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
-import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/huskelapp_omriss.svg';
+import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
