@@ -25,7 +25,7 @@
     transform: translateY(-116%);
 }
 
-.gammel-arbeidsliste {
+.rediger-huskelapp-modal .gammel-arbeidsliste {
     flex: 10 18rem;
     max-width: 22.5rem;
 
@@ -38,24 +38,24 @@
     gap: 0.5rem;
 }
 
-.gammel-arbeidsliste-innhold {
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold {
     background: var(--a-bg-default);
     padding: var(--a-spacing-2);
 }
 
-.gammel-arbeidsliste-innhold h3 {
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold h3 {
     font-size: var(--a-font-size-medium); /*1rem, overskriv ds-styling for xsmall (1.125rem)*/
 }
 
-.gammel-arbeidsliste-innhold p {
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold p {
     font-size: var(--a-font-size-small); /* Overskriv styling i bodylong som brukar medium skriftstorleik */
 }
 
-.rediger-huskelapp-modal-pil {
+.rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
     margin: auto;
 }
 
-.ny-huskelapp {
+.rediger-huskelapp-modal .ny-huskelapp {
     flex-basis: 17.75rem;
     flex-grow: 1;
     max-width: 26rem;
@@ -66,13 +66,17 @@
     padding: var(--a-spacing-4);
 }
 
-.ny-huskelapp-form {
+.rediger-huskelapp-modal .ny-huskelapp-form {
     background-color: var(--a-bg-default);
     padding: 1rem 0.5rem;
 }
 
-.ny-huskelapp form > :not(:last-child) {
+.rediger-huskelapp-modal .ny-huskelapp form > :not(:last-child) {
     margin-bottom: 1rem;
+}
+
+.rediger-huskelapp-modal .rediger-huskelapp-modal__footer {
+    align-items: end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
 }
 
 .veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {

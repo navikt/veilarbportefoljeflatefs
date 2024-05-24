@@ -101,7 +101,7 @@ export const RedigerHuskelappModal = ({
                     harArbeidsliste={harArbeidsliste}
                 />
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="rediger-huskelapp-modal__footer">
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
                 </Button>
