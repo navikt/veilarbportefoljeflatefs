@@ -1,18 +1,16 @@
-.rediger-huskelapp-modal.navds-modal {
-    max-width: 22rem;
-}
-
 .rediger-huskelapp-modal .navds-body-short,
 .rediger-huskelapp-modal .navds-alert__wrapper {
     font-size: 14px;
     line-height: 1.25rem;
 }
 
-.rediger-huskelapp-modal.med-eksisterende-arbeidsliste.navds-modal {
+.rediger-huskelapp-modal {
+    /* max 60rem, men unngå at modalen treff kantane av vindauget på små skjermar*/
+    max-width: min(60rem, 100% - 2rem);
     min-width: fit-content;
 }
 
-.med-eksisterende-arbeidsliste .rediger-huskelapp-modal__body {
+.rediger-huskelapp-modal .rediger-huskelapp-modal__body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
