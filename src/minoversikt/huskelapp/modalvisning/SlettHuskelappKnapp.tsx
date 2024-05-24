@@ -1,13 +1,13 @@
-import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../../../reducer';
+import React from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {Button} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
+import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
-import {Button} from '@navikt/ds-react';
-import {TrashIcon} from '@navikt/aksel-icons';
-import React from 'react';
 import {BrukerModell} from '../../../model-interfaces';
 
 interface SlettHuskelappKnappProps {

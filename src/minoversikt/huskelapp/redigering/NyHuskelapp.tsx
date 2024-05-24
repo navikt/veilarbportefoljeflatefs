@@ -1,10 +1,10 @@
-import {HuskelappInfoAlert} from './HuskelappInfoAlert';
+import React from 'react';
 import {Form, Formik} from 'formik';
+import {Heading} from '@navikt/ds-react';
+import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
-import React from 'react';
 import {HuskelappModell} from '../../../model-interfaces';
-import {Heading} from '@navikt/ds-react';
 
 interface Props {
     huskelapp?: HuskelappModell;

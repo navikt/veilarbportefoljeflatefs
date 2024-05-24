@@ -1,24 +1,24 @@
 import React from 'react';
-import classNames from 'classnames';
-import {Button, Heading, Modal} from '@navikt/ds-react';
-import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
-import '../huskelapp.css';
-import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
-import {OversiktType} from '../../../ducks/ui/listevisning';
-import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../../../reducer';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import classNames from 'classnames';
+import {Button, Heading, Modal} from '@navikt/ds-react';
+import {ArrowRightIcon} from '@navikt/aksel-icons';
+import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
+import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
+import {OversiktType} from '../../../ducks/ui/listevisning';
+import {AppState} from '../../../reducer';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
-import './rediger-huskelapp.css';
-import {ArrowRightIcon} from '@navikt/aksel-icons';
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettArbeidsliste} from './SlettArbeidsliste';
 import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
+import '../huskelapp.css';
+import './rediger-huskelapp.css';
 
 interface Props {
     onModalClose: () => void;

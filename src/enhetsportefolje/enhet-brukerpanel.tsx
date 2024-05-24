@@ -1,16 +1,15 @@
-import * as React from 'react';
+import React, {useLayoutEffect} from 'react';
 import classNames from 'classnames';
+import {Checkbox} from '@navikt/ds-react';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
-import {useLayoutEffect} from 'react';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
-import {Checkbox} from '@navikt/ds-react';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 interface EnhetBrukerpanelProps {
     bruker: BrukerModell;

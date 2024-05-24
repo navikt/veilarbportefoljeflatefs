@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
+import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
 import {Alert, BodyShort, Button, Heading} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
 import {BrukerModell} from '../../../model-interfaces';
-import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
 
 interface SlettArbeidslisteProps {
     bruker: BrukerModell;
