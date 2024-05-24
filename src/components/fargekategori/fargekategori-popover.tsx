@@ -12,7 +12,6 @@ import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statusta
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
-import {delay} from 'msw';
 import {DEFAULT_DELAY_MILLISECONDS} from '../../mocks/constants';
 
 interface FargekategoriPopoverProps {
@@ -57,9 +56,8 @@ export const FargekategoriPopover = ({
                 await dispatch(leggTilStatustall(gammelStatustallId, -1));
                 await dispatch(leggTilStatustall(nyStatustallId, 1));
             } else {
-                //hent statustall fra backend
-                await delay(DEFAULT_DELAY_MILLISECONDS);
-                dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+                //hent statustall fra backend. Gi backend et halvt sekund på å oppdatere Opensearch.
+                setTimeout(dispatch(hentStatustallForVeileder(enhet, veilederIdent)), DEFAULT_DELAY_MILLISECONDS);
             }
             setOpenState(false);
         }
