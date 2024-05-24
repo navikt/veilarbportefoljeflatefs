@@ -50,6 +50,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}
+                    lukkVisHuskelappModal={() => setSkalViseHuskelappModal(false)}
                 />
             )}
             {skalViseHuskelappModal && (
@@ -58,7 +59,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                     onClose={() => setSkalViseHuskelappModal(false)}
                     bruker={bruker}
                     redigerHuskelapp={apneRedigeringsmodal}
-                    setModalVisHuskelappSkalVises={setSkalViseHuskelappModal}
+                    lukkHuskelappModal={() => setSkalViseHuskelappModal(false)}
                 />
             )}
         </>

@@ -18,6 +18,7 @@ import './rediger-huskelapp.css';
 import {ArrowRightIcon} from '@navikt/aksel-icons';
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettArbeidsliste} from './SlettArbeidsliste';
+import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
 
 interface Props {
     onModalClose: () => void;
@@ -25,12 +26,22 @@ interface Props {
     huskelapp?: HuskelappModell;
     bruker: BrukerModell;
     arbeidsliste?: ArbeidslisteModell | null;
+    /** For å kunne lukke visningsmodal om huskelappen blir sletta */
+    lukkVisHuskelappModal?: () => void;
 }
 
-export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
+export const RedigerHuskelappModal = ({
+    isModalOpen,
+    onModalClose,
+    huskelapp,
+    bruker,
+    arbeidsliste,
+    lukkVisHuskelappModal
+}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
+    const harHuskelapp = !!huskelapp?.huskelappId;
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
         if (!values.frist && !values.kommentar) {
@@ -57,6 +68,12 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
             dispatch(visServerfeilModal());
         }
     }
+
+    const lukkBeggeModalerEtterSletting = () => {
+        onModalClose();
+        /* Unngår å vise visningsmodal for huskelapp når den er sletta */
+        lukkVisHuskelappModal && lukkVisHuskelappModal();
+    };
 
     return (
         <Modal
@@ -91,7 +108,10 @@ export const RedigerHuskelappModal = ({isModalOpen, onModalClose, huskelapp, bru
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt
                 </Button>
-                {arbeidsliste?.arbeidslisteAktiv && <SlettArbeidsliste bruker={bruker} />}
+                {harArbeidsliste && <SlettArbeidsliste bruker={bruker} />}
+                {!harArbeidsliste && harHuskelapp && (
+                    <SlettHuskelappKnapp bruker={bruker} lukkModal={lukkBeggeModalerEtterSletting} variant="tertiary" />
+                )}
             </Modal.Footer>
         </Modal>
     );
