@@ -9,7 +9,6 @@ import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selecto
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {HuskelappForPanel} from './HuskelappForPanel';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
-import '../huskelapp.css';
 import './panelvisning.css';
 
 interface Props {

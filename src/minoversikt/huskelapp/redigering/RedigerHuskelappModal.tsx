@@ -3,7 +3,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import classNames from 'classnames';
-import {Button, Heading, Modal} from '@navikt/ds-react';
+import {Button, Modal} from '@navikt/ds-react';
 import {ArrowRightIcon} from '@navikt/aksel-icons';
 import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
@@ -17,7 +17,6 @@ import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskel
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettArbeidsliste} from './SlettArbeidsliste';
 import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
-import '../huskelapp.css';
 import './rediger-huskelapp.css';
 
 interface Props {
@@ -77,17 +76,18 @@ export const RedigerHuskelappModal = ({
 
     return (
         <Modal
+            header={{
+                icon: <HuskelappIkon aria-hidden />,
+                heading: arbeidsliste?.arbeidslisteAktiv
+                    ? 'Bytt fra gammel arbeidsliste til ny huskelapp'
+                    : 'Huskelapp',
+                size: 'small'
+            }}
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
             closeOnBackdropClick={true}
         >
-            <Modal.Header>
-                <Heading size="medium" level="1" spacing className="huskelapp-modal__heading">
-                    <HuskelappIkon aria-hidden={true} />
-                    Huskelapp
-                </Heading>
-            </Modal.Header>
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
                     <>
@@ -103,7 +103,7 @@ export const RedigerHuskelappModal = ({
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
-                    {arbeidsliste ? 'Lagre og slett eksisterende' : 'Lagre'}
+                    {arbeidsliste ? 'Lagre huskelapp og slett arbeidsliste' : 'Lagre'}
                 </Button>
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt

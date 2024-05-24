@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Heading, Modal} from '@navikt/ds-react';
+import {Button, Modal} from '@navikt/ds-react';
 import {BrukerModell} from '../../../model-interfaces';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
 import {HuskelappForModal} from './HuskelappForModal';
@@ -16,13 +16,17 @@ interface HuskelappModalParams {
 
 export const HuskelappModal = ({open, onClose, bruker, redigerHuskelapp, lukkHuskelappModal}: HuskelappModalParams) => {
     return (
-        <Modal open={open} onClose={onClose} closeOnBackdropClick={true} className="huskelappvisning-modal">
-            <Modal.Header>
-                <Heading size="medium" level="1" spacing className="huskelapp-modal__heading">
-                    <HuskelappIkon aria-hidden={true} />
-                    Huskelapp
-                </Heading>
-            </Modal.Header>
+        <Modal
+            header={{
+                icon: <HuskelappIkon aria-hidden />,
+                heading: 'Huskelapp',
+                size: 'small'
+            }}
+            open={open}
+            onClose={onClose}
+            closeOnBackdropClick={true}
+            className="huskelappvisning-modal"
+        >
             <Modal.Body className="huskelappvisning-modal__body">
                 <HuskelappForModal huskelapp={bruker.huskelapp!!} />
             </Modal.Body>

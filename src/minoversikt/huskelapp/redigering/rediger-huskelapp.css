@@ -49,6 +49,10 @@
     font-size: var(--a-font-size-small); /* Overskriv styling i bodylong som brukar medium skriftstorleik */
 }
 
+.rediger-huskelapp-modal .gammel-arbeidsliste li div {
+    font-size: var(--a-font-size-medium) !important; /* Overskriv stylinga '14px !important' frå style.css */
+}
+
 .rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
     margin: auto;
 }
