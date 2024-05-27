@@ -29,7 +29,7 @@ type FargekategoriUnderfilterKonfigurasjon = {
     filterNavn: string;
     statustallId: string;
 };
-const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnderfilterKonfigurasjon[] = [
+export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnderfilterKonfigurasjon[] = [
     {
         filterLabel: fargekategorier.FARGEKATEGORI_A,
         filterId: FARGEKATEGORI_A,
