@@ -78,12 +78,10 @@ export const RedigerHuskelappModal = ({
         <Modal
             header={{
                 icon: <HuskelappIkon aria-hidden />,
-                heading: arbeidsliste?.arbeidslisteAktiv
-                    ? 'Bytt fra gammel arbeidsliste til ny huskelapp'
-                    : 'Huskelapp',
+                heading: harArbeidsliste ? 'Bytt fra gammel arbeidsliste til ny huskelapp' : 'Huskelapp',
                 size: 'small'
             }}
-            className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': !!arbeidsliste})}
+            className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
             closeOnBackdropClick={true}

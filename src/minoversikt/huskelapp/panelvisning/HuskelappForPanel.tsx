@@ -32,6 +32,7 @@ export const HuskelappForPanel = ({huskelapp, onSlettHuskelapp, onEndreHuskelapp
                 variant="secondary"
                 onClick={onSlettHuskelapp}
                 icon={<TrashIcon aria-hidden={true} />}
+                className="huskelapp-panelvisning__slettknapp"
             >
                 Slett
             </Button>

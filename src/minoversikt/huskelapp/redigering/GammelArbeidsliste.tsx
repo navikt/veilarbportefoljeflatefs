@@ -1,15 +1,13 @@
 import React from 'react';
-import {BodyLong, BodyShort, Button, Heading, List} from '@navikt/ds-react';
-import {TrashIcon} from '@navikt/aksel-icons';
+import {BodyLong, BodyShort, Heading, List} from '@navikt/ds-react';
 import {ArbeidslisteModell} from '../../../model-interfaces';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 
 interface Props {
     arbeidsliste: ArbeidslisteModell;
-    onSlett?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const GammelArbeidsliste = ({arbeidsliste, onSlett}: Props) => (
+export const GammelArbeidsliste = ({arbeidsliste}: Props) => (
     <section className="gammel-arbeidsliste">
         <Heading size="small" level="2">
             Gammel arbeidsliste
@@ -37,16 +35,5 @@ export const GammelArbeidsliste = ({arbeidsliste, onSlett}: Props) => (
                 {arbeidsliste.sistEndretAv?.veilederId}
             </i>
         </BodyShort>
-        {onSlett && (
-            <Button
-                type="button"
-                onClick={onSlett}
-                variant="tertiary"
-                size="xsmall"
-                icon={<TrashIcon aria-hidden={true} />}
-            >
-                Slett
-            </Button>
-        )}
     </section>
 );

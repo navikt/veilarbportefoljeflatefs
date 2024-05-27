@@ -13,7 +13,7 @@ import {BrukerModell} from '../../../model-interfaces';
 interface SlettHuskelappKnappProps {
     bruker: BrukerModell;
     lukkModal: () => void;
-    variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+    variant?: 'secondary' | 'tertiary';
 }
 
 export const SlettHuskelappKnapp = ({bruker, lukkModal, variant = 'secondary'}: SlettHuskelappKnappProps) => {

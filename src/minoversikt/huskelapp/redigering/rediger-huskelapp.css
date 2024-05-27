@@ -5,8 +5,6 @@
 }
 
 .rediger-huskelapp-modal {
-    /* max 60rem, men unngå at modalen treff kantane av vindauget på små skjermar*/
-    max-width: min(60rem, 100% - 2rem);
     min-width: fit-content;
 }
 
@@ -39,6 +37,7 @@
 .rediger-huskelapp-modal .gammel-arbeidsliste-innhold {
     background: var(--a-bg-default);
     padding: var(--a-spacing-2);
+    word-break: break-word;
 }
 
 .rediger-huskelapp-modal .gammel-arbeidsliste-innhold h3 {
@@ -84,4 +83,18 @@
 .veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
     /* !important er brukt for å overskrive hardkodinga av alle labels til 14px i style.css */
     font-size: var(--a-font-size-medium) !important;
+}
+
+.rediger-huskelapp-modal .sletting-av-arbeidsliste-feilet {
+    margin-bottom: var(--a-spacing-4);
+}
+
+.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg {
+    margin-top: var(--a-spacing-2);
+    display: flex;
+    gap: 0.5rem;
+}
+.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg > button {
+    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
+    margin: 0;
 }

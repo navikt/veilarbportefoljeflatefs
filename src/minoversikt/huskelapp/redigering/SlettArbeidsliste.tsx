@@ -53,7 +53,7 @@ export const SlettArbeidsliste = ({bruker}: SlettArbeidslisteProps) => {
                         Er du sikker på at du vil slette eksisterende innhold?
                     </Heading>
                     <BodyShort size="small">Dette vil slette tittel, kommentar og frist for denne brukeren.</BodyShort>
-                    <div id="slett-arbeidsliste__knappevalg">
+                    <div className="slett-arbeidsliste__knappevalg">
                         <Button
                             variant="tertiary"
                             size="small"
