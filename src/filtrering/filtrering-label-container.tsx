@@ -29,6 +29,8 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../konstanter';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
 
@@ -74,7 +76,7 @@ function FiltreringLabelContainer({
 }: FiltreringLabelContainerProps) {
     let muligMenIkkeValgt: boolean;
     let kolonne: Kolonne | null;
-
+    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -182,7 +184,11 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={FilterKonstanter.arbeidslisteKategori[singleValue]}
+                            label={
+                                erFargekategoriFeatureTogglePa
+                                    ? FilterKonstanter.arbeidslisteKategoriGammel[singleValue]
+                                    : FilterKonstanter.arbeidslisteKategori[singleValue]
+                            }
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
                             tittel={`Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}`}

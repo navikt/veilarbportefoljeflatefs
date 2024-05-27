@@ -138,6 +138,13 @@ export const ferdigfilterListeLabelTekst = {
 };
 
 export const arbeidslisteKategori = {
+    BLA: 'Blå',
+    LILLA: 'Lilla',
+    GRONN: 'Grønn',
+    GUL: 'Gul'
+};
+
+export const arbeidslisteKategoriGammel = {
     BLA: 'Blå (gammel)',
     LILLA: 'Lilla (gammel)',
     GRONN: 'Grønn (gammel)',
@@ -471,6 +478,7 @@ const filterKonstanter = {
     registreringstype,
     endringISituasjon,
     arbeidslisteKategori,
+    arbeidslisteKategoriGammel,
     cvJobbprofil,
     utdanning,
     utdanningBestatt,
