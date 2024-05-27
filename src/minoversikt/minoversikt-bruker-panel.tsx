@@ -112,6 +112,7 @@ function MinoversiktBrukerPanel({
                 {!erHuskelappFeatureTogglePa && (
                     <ArbeidslistekategoriVisning
                         kategori={bruker.arbeidsliste?.kategori}
+                        className="brukerliste__arbeidslisteikon"
                         dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
                     />
                 )}

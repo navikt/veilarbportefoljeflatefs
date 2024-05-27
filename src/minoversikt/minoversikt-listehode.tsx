@@ -93,7 +93,7 @@ function MinOversiktListeHode({
                         onClick={sorteringOnClick}
                         rekkefolge={sorteringsrekkefolge}
                         erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        tekst={<ArbeidslisteikonBla />}
+                        tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
                         title="Sorter på farge"
                         headerId="arbeidslistekategori"
                     />

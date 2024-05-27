@@ -14,10 +14,11 @@ import '../../minoversikt/minoversikt.css';
 
 interface ArbeidslistekategoriProps {
     kategori: KategoriModell;
+    className?: string;
     dataTestid?: string;
 }
 
-export default function ArbeidslistekategoriVisning({kategori, dataTestid}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({kategori, className, dataTestid}: ArbeidslistekategoriProps) {
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     if (erFargekategoriFeatureTogglePa) {
         const velgArbeidslistekategori = () => {
@@ -39,13 +40,13 @@ export default function ArbeidslistekategoriVisning({kategori, dataTestid}: Arbe
         const velgArbeidslistekategori = () => {
             switch (kategori) {
                 case KategoriModell.BLA:
-                    return <ArbeidslisteikonBla data-testid={dataTestid} />;
+                    return <ArbeidslisteikonBla className={className} data-testid={dataTestid} width="1.2rem" />;
                 case KategoriModell.GRONN:
-                    return <ArbeidslisteikonGronn data-testid={dataTestid} />;
+                    return <ArbeidslisteikonGronn className={className} data-testid={dataTestid} width="1.2rem" />;
                 case KategoriModell.GUL:
-                    return <ArbeidslisteikonGul data-testid={dataTestid} />;
+                    return <ArbeidslisteikonGul className={className} data-testid={dataTestid} width="1.2rem" />;
                 case KategoriModell.LILLA:
-                    return <ArbeidslisteikonLilla data-testid={dataTestid} />;
+                    return <ArbeidslisteikonLilla className={className} data-testid={dataTestid} width="1.2rem" />;
                 default:
                     return <div className="tomt-arbeidslisteikon" />;
             }

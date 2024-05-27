@@ -1,19 +1,23 @@
 import React from 'react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
-import './arbeidsliste.css';
-import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
-import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
-import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {KategoriModell} from '../../model-interfaces';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
-import {Alert, BodyShort, Label, Link} from '@navikt/ds-react';
 import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../../konstanter';
+import {ReactComponent as FargekategoriIkonBlaHalvsirkel} from '../../components/ikoner/fargekategorier/Fargekategoriikon_bla_halvsirkel.svg';
+import {ReactComponent as FargekategoriIkonGronnTrekant} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
+import {ReactComponent as FargekategoriIkonGulSirkel} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
+import {ReactComponent as FargekategoriIkonLillaFirkant} from '../../components/ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
+import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
+import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
+import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
+import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
+import {Alert, Bleed, BodyShort, Label, Link} from '@navikt/ds-react';
 import {ExternalLink} from '@navikt/ds-icons';
+import './arbeidsliste.css';
 
 export interface FilterStatusMinArbeidslisteProps {
     ferdigfilterListe: string[];
@@ -65,8 +69,14 @@ function FilterStatusMinArbeidsliste({
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonBla />
-                                <span>Blå</span>
+                                <Bleed marginBlock="05" asChild>
+                                    {erHuskelappFeatureTogglePaa ? (
+                                        <FargekategoriIkonBlaHalvsirkel />
+                                    ) : (
+                                        <ArbeidslisteikonBla width="1.2rem" />
+                                    )}
+                                </Bleed>
+                                Blå
                             </>
                         }
                         filterNavn="minArbeidslisteBla"
@@ -78,8 +88,14 @@ function FilterStatusMinArbeidsliste({
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonGronn />
-                                <span>Grønn</span>
+                                <Bleed marginBlock="05" asChild>
+                                    {erHuskelappFeatureTogglePaa ? (
+                                        <FargekategoriIkonGronnTrekant />
+                                    ) : (
+                                        <ArbeidslisteikonGronn width="1.2rem" />
+                                    )}
+                                </Bleed>
+                                Grønn
                             </>
                         }
                         filterNavn="minArbeidslisteGronn"
@@ -91,21 +107,14 @@ function FilterStatusMinArbeidsliste({
                     <BarInputCheckbox
                         labelTekst={
                             <>
-                                <ArbeidslisteikonLilla />
-                                <span>Lilla</span>
-                            </>
-                        }
-                        filterNavn="minArbeidslisteLilla"
-                        handleChange={handleChangeCheckbox}
-                        checked={checked && ferdigfilterListe.includes(KategoriModell.LILLA)}
-                        antall={statusTall.minArbeidslisteLilla}
-                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteLilla']}
-                    />
-                    <BarInputCheckbox
-                        labelTekst={
-                            <>
-                                <ArbeidslisteikonGul />
-                                <span>Gul</span>
+                                <Bleed marginBlock="05" asChild>
+                                    {erHuskelappFeatureTogglePaa ? (
+                                        <FargekategoriIkonGulSirkel />
+                                    ) : (
+                                        <ArbeidslisteikonGul width="1.2rem" />
+                                    )}
+                                </Bleed>
+                                Gul
                             </>
                         }
                         filterNavn="minArbeidslisteGul"
@@ -113,6 +122,25 @@ function FilterStatusMinArbeidsliste({
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
                         filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGul']}
+                    />
+                    <BarInputCheckbox
+                        labelTekst={
+                            <>
+                                <Bleed marginBlock="05" asChild>
+                                    {erHuskelappFeatureTogglePaa ? (
+                                        <FargekategoriIkonLillaFirkant />
+                                    ) : (
+                                        <ArbeidslisteikonLilla width="1.2rem" />
+                                    )}
+                                </Bleed>
+                                Lilla
+                            </>
+                        }
+                        filterNavn="minArbeidslisteLilla"
+                        handleChange={handleChangeCheckbox}
+                        checked={checked && ferdigfilterListe.includes(KategoriModell.LILLA)}
+                        antall={statusTall.minArbeidslisteLilla}
+                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteLilla']}
                     />
                 </div>
             )}
