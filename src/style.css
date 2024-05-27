@@ -219,8 +219,6 @@ CLEARFIX
 html {
     line-height: 1.15;
     /* 1 */
-    -webkit-text-size-adjust: 100%;
-    /* 2 */
     font-family: sans-serif;
     /* 3 */
 }
@@ -754,10 +752,6 @@ body .blokk-xs {
     margin-bottom: 1rem;
 }
 
-@-ms-viewport {
-    width: device-width;
-}
-
 @media (max-width: 767px) {
     .hidden-xs {
         display: none !important;
@@ -1148,138 +1142,6 @@ GRID
 
 .skjemaelement {
     margin-bottom: 0.5rem;
-}
-
-.veilarbportefoljeflatefs .barinput-checkbox,
-.veilarbportefoljeflatefs .barinput-radio {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-.veilarbportefoljeflatefs .barinput-checkbox__input,
-.veilarbportefoljeflatefs .barinput-radio__input {
-    margin-right: 1rem;
-    align-self: center;
-    transform: scale(1.5);
-}
-
-.veilarbportefoljeflatefs .barinput-checkbox .arbeidslisteikon__svg,
-.veilarbportefoljeflatefs .barinput-radio .arbeidslisteikon__svg {
-    margin-right: 0.5rem;
-}
-
-.veilarbportefoljeflatefs .barlabel {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2px;
-}
-
-.veilarbportefoljeflatefs .barlabel__labeltext {
-    width: 100%;
-    padding-right: 0.5rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-}
-
-.veilarbportefoljeflatefs .barlabel__labeltext:hover {
-    color: #0067c5;
-}
-
-.veilarbportefoljeflatefs .barlabel__barwrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-basis: 45%;
-    flex-shrink: 0;
-    flex-grow: 0;
-}
-
-.veilarbportefoljeflatefs .barlabel__barwrapper .arbeidsliste {
-    flex-basis: 3rem;
-    display: inline-flex;
-    height: 2rem;
-}
-
-.veilarbportefoljeflatefs .barlabel__antall {
-    flex-basis: 3rem;
-    text-align: right;
-    align-self: center;
-    padding-right: 0.5rem;
-    font-weight: 800;
-    margin-top: -0.3rem;
-}
-
-.veilarbportefoljeflatefs .barlabel__bar {
-    position: relative;
-    height: 1rem;
-    flex-grow: 1;
-}
-
-.veilarbportefoljeflatefs .barlabel__bartrack {
-    display: block;
-    background-color: #f1f1f1;
-    height: 12px;
-    border-radius: 1rem;
-    width: 100%;
-}
-
-.veilarbportefoljeflatefs .barlabel__barface {
-    position: absolute;
-    display: block;
-    background-color: #7cdaf8;
-    height: 12px;
-    border-radius: 1rem;
-    transition: width cubic-bezier(0.4, 0, 0.2, 1) 1337ms;
-    left: 0;
-    top: 0;
-}
-
-.veilarbportefoljeflatefs .barlabel.ufordeltebrukere .barlabel__barface {
-    background-color: #8269a2;
-}
-
-.veilarbportefoljeflatefs .barlabel.venterPaSvarFraNAV .barlabel__barface {
-    background-color: #8269a2;
-}
-
-.veilarbportefoljeflatefs .barlabel.venterPaSvarFraBruker .barlabel__barface {
-    background-color: #c1cb33;
-}
-
-.veilarbportefoljeflatefs .barlabel.avtaltMoteMedNav .barlabel__barface {
-    background-color: #00243a;
-}
-
-.veilarbportefoljeflatefs .barlabel.utlopteAktiviteter .barlabel__barface {
-    background-color: #6a6a6a;
-}
-
-.veilarbportefoljeflatefs .barlabel.ikkeIAvtaltAktivitet .barlabel__barface {
-    background-color: #6a6a6a;
-}
-
-.veilarbportefoljeflatefs .barlabel.iAvtaltAktivitet .barlabel__barface {
-    background-color: #3380a5;
-}
-
-.veilarbportefoljeflatefs .barlabel.inaktiveBrukere .barlabel__barface {
-    background-color: #6a6a6a;
-}
-
-.veilarbportefoljeflatefs .barlabel.minArbeidsliste .barlabel__barface {
-    background-color: #6a6a6a;
-}
-
-.veilarbportefoljeflatefs .forsteBarlabelIGruppe {
-    padding-top: 1rem;
-    border-top: 1px solid #6a6a6a;
-    margin-top: 1rem;
-}
-
-.veilarbportefoljeflatefs .barlabel__barwrapper {
-    flex: none;
 }
 
 .veilarbportefoljeflatefs .ekspanderbartPanel__innhold {
