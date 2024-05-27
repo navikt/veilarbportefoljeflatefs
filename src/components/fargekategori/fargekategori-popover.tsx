@@ -40,7 +40,8 @@ export const FargekategoriPopover = ({
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
             fnr: fnrs,
-            fargekategoriVerdi: fargekategori
+            fargekategoriVerdi: fargekategori,
+            enhetId: enhet!
         };
 
         const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);

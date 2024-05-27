@@ -295,6 +295,7 @@ export interface ArbeidslisteDataModell {
 export interface FargekategoriDataModell {
     fnr: string[];
     fargekategoriVerdi: FargekategoriModell;
+    enhetId: string;
 }
 
 export interface Systemmelding {
