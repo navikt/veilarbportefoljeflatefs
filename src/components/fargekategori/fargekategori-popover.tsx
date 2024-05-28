@@ -12,8 +12,6 @@ import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statusta
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
-import {delay} from 'msw';
-import {DEFAULT_DELAY_MILLISECONDS} from '../../mocks/constants';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -38,6 +36,7 @@ export const FargekategoriPopover = ({
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
             fnr: fnrs,
@@ -58,7 +57,7 @@ export const FargekategoriPopover = ({
                 await dispatch(leggTilStatustall(nyStatustallId, 1));
             } else {
                 //Venter fordi det returneres FARGEKATEGORI_OPPDATER_OK før statustall er oppdatert i Opensearch
-                await delay(DEFAULT_DELAY_MILLISECONDS);
+                await delay(5000);
                 dispatch(hentStatustallForVeileder(enhet, veilederIdent));
             }
             setOpenState(false);
