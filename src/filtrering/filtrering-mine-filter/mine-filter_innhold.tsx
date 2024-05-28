@@ -45,11 +45,9 @@ function MineFilterInnhold({
         return filtrertListe().filter(elem => !elem.aktiv);
     };
     const alertArbeidslisteEllerKategori = () => {
-        if (filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (
+            filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0
+        );
     };
 
     const dispatch = useDispatch();
