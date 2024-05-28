@@ -191,7 +191,10 @@ function FiltreringLabelContainer({
                             }
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
-                            tittel={`Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}`}
+                            tittel={
+                                `Fjern filtervalg "Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}"` +
+                                (erFargekategoriFeatureTogglePa ? ' (gammel)' : '')
+                            }
                         />
                     );
                 });
@@ -203,7 +206,7 @@ function FiltreringLabelContainer({
                             label={FilterKonstanter.fargekategorier[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={fargekategoriIkonMapper(singleValue, 'fargekategoriikon')}
-                            tittel={`Kategori ${FilterKonstanter.fargekategorier[singleValue]}`}
+                            tittel={`Fjern filtervalg "Kategori ${FilterKonstanter.fargekategorier[singleValue]}"`}
                         />
                     );
                 });

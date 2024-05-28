@@ -38,12 +38,6 @@
     margin-left: calc(1rem + 1px);
 }
 
-.veilarbportefoljeflatefs .brukerliste .arbeidsliste--ikon {
-    display: flex;
-    margin-left: var(--a-spacing-2);
-    min-width: calc(2.2rem + 2px);
-}
-
 .veilarbportefoljeflatefs .brukerliste--borders {
     border-top: 1px solid #a0a0a0;
     border-bottom: 1px solid #a0a0a0;
@@ -54,7 +48,9 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste--forrigeBruker {
-    box-shadow: inset -1px 0 0 2px #6a6a6a, inset 1px 0 0 2px #a0a0a0;
+    box-shadow:
+        inset -1px 0 0 2px #6a6a6a,
+        inset 1px 0 0 2px #a0a0a0;
 }
 
 .veilarbportefoljeflatefs .brukerliste__overskriftheader {
