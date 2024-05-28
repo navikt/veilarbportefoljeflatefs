@@ -44,6 +44,11 @@ function MineFilterInnhold({
     const inaktiveFilter = () => {
         return filtrertListe().filter(elem => !elem.aktiv);
     };
+    const alertArbeidslisteEllerKategori = () => {
+        return (
+            filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0
+        );
+    };
 
     const dispatch = useDispatch();
 
@@ -57,6 +62,19 @@ function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
+                {alertArbeidslisteEllerKategori() && (
+                    <Alert
+                        variant="info"
+                        className="mine-filter_alertstripe"
+                        data-testid="mine-filter_alertstripe-arbeidsliste"
+                        size="small"
+                    >
+                        <b>Du har filter med arbeidsliste</b>
+                        <br />
+                        Disse kan vise færre brukere etter hvert som du migrerer til huskelapp. Det kan være lurt å lage
+                        nye filter som også henter inn brukere med fargekategorier.
+                    </Alert>
+                )}
                 {inaktiveFilter().length !== 0 && (
                     <Alert
                         variant="info"
