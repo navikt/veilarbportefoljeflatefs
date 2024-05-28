@@ -57,7 +57,7 @@ export const FargekategoriPopover = ({
                 await dispatch(leggTilStatustall(nyStatustallId, 1));
             } else {
                 //Venter fordi det returneres FARGEKATEGORI_OPPDATER_OK før statustall er oppdatert i Opensearch
-                await delay(5000);
+                await delay(500);
                 dispatch(hentStatustallForVeileder(enhet, veilederIdent));
             }
             setOpenState(false);
