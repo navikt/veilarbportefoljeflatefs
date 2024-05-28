@@ -5,6 +5,7 @@ tekster-built/
 *.iml
 *.ipr
 *.iws
+.hintrc
 
 **/node_modules/
 
