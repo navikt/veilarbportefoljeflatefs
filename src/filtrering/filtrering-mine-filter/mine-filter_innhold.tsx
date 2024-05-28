@@ -71,7 +71,7 @@ function MineFilterInnhold({
                     >
                         <b>Du har filter med arbeidsliste</b>
                         <br />
-                        Disse kan vise færre brukere etterhvert som du migrerer til huskelapp. Det kan være lurt å lage
+                        Disse kan vise færre brukere etter hvert som du migrerer til huskelapp. Det kan være lurt å lage
                         nye filter som også henter inn brukere med fargekategorier.
                     </Alert>
                 )}
