@@ -13,8 +13,8 @@
     }
 }
 
-/* For å sikre at hjørnet på huskelappen blir "gjennomsiktig" i rader med mørk bakgrunn */
-.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp__postit::before {
+/* For å sikre at hjørnet på huskelappen blir "gjennomsiktig" i rader med mørk bakgrunn (men ikkje i modalar i rada) */
+.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(even) .huskelapp-panel > .huskelapp__postit::before {
     background: #f4f4f4;
 }
 
@@ -22,8 +22,16 @@
     max-width: 31rem;
 }
 
+.huskelapp-panel > .huskelapp__innhold {
+    flex-basis: 26rem;
+}
+
 .huskelapp-panelvisning__handlingsknapper {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+}
+
+.huskelapp-panelvisning__handlingsknapper > .huskelapp-panelvisning__slettknapp {
+    background: var(--a-bg-default);
 }

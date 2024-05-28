@@ -187,6 +187,20 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
             });
         })
     ),
+    http.delete('/veilarbportefolje/api/v2/arbeidsliste', async () => {
+        await delay(500);
+        return HttpResponse.json({
+            arbeidslisteAktiv: null,
+            endringstidspunkt: null,
+            frist: null,
+            harVeilederTilgang: false,
+            isOppfolgendeVeileder: false,
+            kommentar: null,
+            overskrift: null,
+            sistEndretAv: null,
+            kategori: null
+        });
+    }),
     http.post(
         '/veilarbportefolje/api/arbeidsliste/delete',
         withAuth(async ({request}) => {

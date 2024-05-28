@@ -742,18 +742,6 @@ body .ustilet {
     list-style: none;
 }
 
-body .blokk {
-    margin-bottom: 2rem;
-}
-
-body .blokk-xxs {
-    margin-bottom: 0.5rem;
-}
-
-body .blokk-xs {
-    margin-bottom: 1rem;
-}
-
 @-ms-viewport {
     width: device-width;
 }
