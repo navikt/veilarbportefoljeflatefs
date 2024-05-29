@@ -9,6 +9,8 @@ import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {Alert, BodyShort} from '@navikt/ds-react';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -31,6 +33,7 @@ function MineFilterInnhold({
     setisDraggable,
     enhettiltak
 }: LagredeFilterInnholdProps) {
+    const isHuskelappToggleOn = useFeatureSelector()(HUSKELAPP);
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
@@ -62,7 +65,7 @@ function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-                {alertArbeidslisteEllerKategori() && (
+                {isHuskelappToggleOn && alertArbeidslisteEllerKategori() && (
                     <Alert
                         variant="info"
                         className="mine-filter_alertstripe"
