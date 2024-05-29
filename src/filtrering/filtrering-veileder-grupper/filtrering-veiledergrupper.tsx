@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {Alert, BodyShort, Button} from '@navikt/ds-react';
+import {PlusCircleIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../reducer';
-import {LeggTilKnapp} from '../../components/knapper/legg-til-knapp';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
 import {FiltervalgModell} from '../../model-interfaces';
@@ -9,10 +12,7 @@ import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import VeiledergruppeInnhold from './veiledergruppe-innhold';
-import {Alert, BodyShort} from '@navikt/ds-react';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
@@ -74,11 +74,17 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
     return (
         <>
             {lagretFilterState.status === STATUS.ERROR ? veilederGrupperError() : veilederGrupperOK()}
-            <LeggTilKnapp
+            <Button
+                variant="tertiary"
+                icon={<PlusCircleIcon aria-hidden={true} />}
                 onClick={() => {
                     setVeiledergruppeModal(true);
                 }}
-            />
+                data-testid="veiledergruppe_ny-gruppe_knapp"
+                size="small"
+            >
+                Ny gruppe
+            </Button>
             <VeiledergruppeModal
                 initialVerdi={{
                     gruppeNavn: '',

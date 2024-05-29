@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {Form} from 'formik';
+import {Button, Detail, Heading} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
 import FormikTekstArea from '../../formik/formik-tekstarea';
 import FormikInput from '../../formik/formik-input';
 import FormikDatoVelger from '../../formik/formik-datovelger/formik-datovelger';
@@ -7,8 +9,6 @@ import './arbeidsliste.css';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
-import {Button, Detail, Heading} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
 
 interface RedigerArbeidslisteProps {
@@ -89,7 +89,7 @@ function RedigerArbeidsliste({
                     variant="danger"
                     type="button"
                     onClick={fjernBruker}
-                    icon={<Delete />}
+                    icon={<TrashIcon aria-hidden={true} />}
                     data-testid="modal_rediger-arbeidsliste_fjern-knapp"
                 >
                     Fjern

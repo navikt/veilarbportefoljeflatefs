@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {Alert, Label, Link} from '@navikt/ds-react';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import CheckboxFilterform from './filterform/checkbox-filterform';
 import {
     alder,
@@ -35,11 +37,9 @@ import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import {Alert, Label, Link} from '@navikt/ds-react';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
-import {ExternalLink} from '@navikt/ds-icons';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18, NASJONAL_OPPFOLGINGSENHET} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
@@ -329,9 +329,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                     target="_blank"
                                     rel="noreferrer noopener"
                                 >
-                                    Se mer informasjon på Navet <ExternalLink title="Åpne lenken i ny fane" />
+                                    Se mer informasjon på Navet
+                                    <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
                                 </Link>
-                                .
                             </Alert>
                             <CheckboxFilterform
                                 valg={avvik14aVedtakValg()}

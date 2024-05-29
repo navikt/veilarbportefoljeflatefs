@@ -58,7 +58,7 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
             cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filternavn er allerede i bruk.');
 
-            // Lukkar modal, nullstillar test
+            // Lukkar modal, nullstiller test
             cy.getByTestId('egenmodal_header').within(() => {
                 cy.get('button').click();
             });
@@ -81,9 +81,9 @@ describe('Mine filter', () => {
             cy.getByTestId('sidebar-tab_MINE_FILTER').should('have.class', 'sidebar__tab-valgt');
             cy.get('@mineFilter').contains(mineFilterNavn);
 
-            // Nyfilteret vårt er valgt, og og begge filtertagsa som skal visast er synlege
+            // Nyfilteret vårt er valgt, og at begge filtertagsa (+ Nullstill filtervalg) som skal visast er synlege
             cy.getByTestId(`mine-filter-rad_${kebabCase(mineFilterNavn)}`).should('be.checked');
-            cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
             // Det er no eit meir filter enn det var før
             cy.get('@mineFilter').should('have.length', filterForLeggTil.length + 1);
@@ -105,8 +105,8 @@ describe('Mine filter', () => {
             // Sjekk at namnet er oppdatert etter lagring
             cy.get('@mineFilter').contains(mineFilterNavnRedigert);
 
-            // Sjekk at det er to filtertags, og at talet på filter er det same
-            cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
+            // Sjekk at det er to filtertags (+ "Nullstill filtervalg"), og at talet på filter er det same
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
             cy.get('@mineFilter').should('have.length', antallFilterForRedigering);
         });
     });
@@ -124,7 +124,7 @@ describe('Mine filter', () => {
 
             // Ta bort filtreringslabel for 0-19 år
             cy.getByTestId('filtreringlabel_-19-ar').should('be.visible').click();
-            cy.getByTestId('filtrering_label-container').children().should('have.length', 1);
+            cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
 
             // Trykk på lagre filter og få spørsmål om du vil oppdatere filteret

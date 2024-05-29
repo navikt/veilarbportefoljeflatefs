@@ -346,19 +346,17 @@ function FiltreringLabelContainer({
         })
         .reduce((acc, l) => [...acc, ...l], []);
 
-    const fjernAlle = (
-        <FiltreringLabel
-            key="slett-alle"
-            label="Nullstill filtervalg"
-            slettFilter={slettAlle}
-            skalHaKryssIkon={false}
-        />
-    );
-
     return (
         <div className={className} data-testid="filtrering_label-container">
             {filterElementer}
-            {filterElementer.length >= 3 ? fjernAlle : null}
+            {filterElementer.length > 0 && (
+                <FiltreringLabel
+                    key="slett-alle"
+                    label="Nullstill filtervalg"
+                    slettFilter={slettAlle}
+                    skalHaKryssIkon={false}
+                />
+            )}
         </div>
     );
 }

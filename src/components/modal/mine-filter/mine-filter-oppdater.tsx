@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {Button, TextField} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
@@ -9,12 +13,8 @@ import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
 import {endreSideBar} from '../../sidebar/sidebar';
-import {Button, TextField} from '@navikt/ds-react';
-import {Delete} from '@navikt/ds-icons';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;
@@ -92,7 +92,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                         size="small"
                         variant="danger"
                         onClick={e => bekreftSletting(e)}
-                        icon={<Delete />}
+                        icon={<TrashIcon aria-hidden={true} />}
                         data-testid="rediger-filter_modal_slett-knapp"
                     >
                         Slett

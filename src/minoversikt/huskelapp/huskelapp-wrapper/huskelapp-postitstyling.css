@@ -3,13 +3,13 @@
     flex-direction: column;
     padding: var(--a-spacing-4);
     min-width: 16rem;
+    max-width: 24rem;
+    word-wrap: break-word;
 }
 
 .huskelapp__postit {
     position: relative;
-    max-width: 24rem;
     background-color: var(--a-limegreen-100);
-    word-wrap: break-word;
 }
 
 .huskelapp__postit::before {

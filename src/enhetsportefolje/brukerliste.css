@@ -4,21 +4,21 @@
     padding: 0;
 }
 
-.veilarbportefoljeflatefs .brukerliste li:nth-child(odd) {
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:nth-child(odd) {
     background-color: #fff;
 }
 
-.veilarbportefoljeflatefs .brukerliste li {
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad {
     border-left: 1px solid #6a6a6a;
     border-right: 1px solid #6a6a6a;
     border-top: 1px solid #a0a0a0;
 }
 
-.veilarbportefoljeflatefs .brukerliste li:first-child {
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:first-child {
     border-top: none;
 }
 
-.veilarbportefoljeflatefs .brukerliste li:last-child {
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:last-child {
     border-bottom: 1px solid #a0a0a0;
     border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
 }
@@ -129,10 +129,6 @@
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {
     color: #6a6a6a;
-    font-style: italic;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer > button {
     font-style: italic;
 }
 

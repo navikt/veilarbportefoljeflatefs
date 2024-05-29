@@ -5,9 +5,6 @@
     border-radius: 0 0 4px 4px;
     margin-bottom: 0;
 }
-.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(odd) {
-    background-color: white;
-}
 .veilarbportefoljeflatefs .tilbaketilveileder {
     display: inline-block;
     position: relative;

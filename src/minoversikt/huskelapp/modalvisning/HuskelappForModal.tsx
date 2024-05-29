@@ -9,18 +9,22 @@ interface Props {
     huskelapp: HuskelappModell;
 }
 
-export const HuskelappForModal = ({huskelapp}: Props) => (
-    <HuskelappPostitWrapper>
-        <Heading level="3" size="xsmall" spacing>
-            {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
-        </Heading>
-        <BodyShort size="small" spacing>
-            {huskelapp?.kommentar}
-        </BodyShort>
-        <Detail spacing>
-            <i>
-                Endret {toDatePrettyPrint(huskelapp?.endretDato)} av {huskelapp?.endretAv}
-            </i>
-        </Detail>
-    </HuskelappPostitWrapper>
-);
+export const HuskelappForModal = ({huskelapp}: Props) => {
+    return (
+        <>
+            <HuskelappPostitWrapper>
+                <Heading level="3" size="xsmall" spacing>
+                    {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
+                </Heading>
+                <BodyShort size="small" spacing>
+                    {huskelapp?.kommentar}
+                </BodyShort>
+            </HuskelappPostitWrapper>
+            <Detail className="huskelapp-visning-modal__endret-av">
+                <i>
+                    Endret {toDatePrettyPrint(huskelapp?.endretDato)} av {huskelapp?.endretAv}
+                </i>
+            </Detail>
+        </>
+    );
+};

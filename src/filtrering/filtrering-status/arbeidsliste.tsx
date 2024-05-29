@@ -16,7 +16,7 @@ import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/a
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
 import {Alert, Bleed, BodyShort, Label, Link} from '@navikt/ds-react';
-import {ExternalLink} from '@navikt/ds-icons';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import './arbeidsliste.css';
 
 export interface FilterStatusMinArbeidslisteProps {
@@ -45,7 +45,7 @@ function FilterStatusMinArbeidsliste({
                     {/*TODO 21.03.2024: Bruk riktig lenke*/}
                     <Link href="">
                         Om endringer i arbeidslista (Navet)
-                        <ExternalLink />
+                        <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
                     </Link>
                     <BodyShort>
                         {/*TODO 21.03.2024: Bruk riktig dato*/}

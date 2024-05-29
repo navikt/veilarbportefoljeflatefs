@@ -37,6 +37,7 @@ export type FiltreringAktiviteterValg = {
 //  Reducer
 export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
+    arbeidslisteKategori: [],
     alder: [],
     kjonn: null,
     landgruppe: [],
@@ -45,8 +46,8 @@ export const initialState: FiltervalgModell = {
     innsatsgruppe: [],
     formidlingsgruppe: [],
     servicegruppe: [],
-    rettighetsgruppe: [],
     veiledere: [],
+    ytelse: null,
     aktiviteter: {
         BEHANDLING: AktiviteterValg.NA,
         EGEN: AktiviteterValg.NA,
@@ -60,24 +61,23 @@ export const initialState: FiltervalgModell = {
     } as FiltreringAktiviteterValg,
     aktiviteterForenklet: [],
     tiltakstyper: [],
-    ytelse: null,
-    manuellBrukerStatus: [],
     hovedmal: [],
     navnEllerFnrQuery: '',
+    rettighetsgruppe: [],
+    manuellBrukerStatus: [],
     veilederNavnQuery: '',
     registreringstype: [],
-    arbeidslisteKategori: [],
     cvJobbprofil: null,
     utdanning: [],
     utdanningGodkjent: [],
     utdanningBestatt: [],
     sisteEndringKategori: [],
     ulesteEndringer: null,
-    geografiskBosted: [],
-    visGeografiskBosted: [],
     tolkebehov: [],
     tolkBehovSpraak: [],
     stillingFraNavFilter: [],
+    geografiskBosted: [],
+    visGeografiskBosted: [],
     avvik14aVedtak: [],
     ensligeForsorgere: [],
     barnUnder18Aar: [],
@@ -152,8 +152,8 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
             const nyFerdigfilterListe = ingenFargekategorierValgt
                 ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(alfabetiskSammenligning)
                 : mineFargekategorierIkkeValgt
-                ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning)
-                : state.ferdigfilterListe;
+                  ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning)
+                  : state.ferdigfilterListe;
 
             return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};
         }

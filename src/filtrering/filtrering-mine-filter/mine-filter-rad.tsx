@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux';
 import {apneMineFilterModal} from '../../ducks/lagret-filter-ui-state';
-import RedigerKnapp from '../../components/knapper/rediger-knapp';
+import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
 import React from 'react';
 import './mine-filter_innhold.css';
 import {OversiktType} from '../../ducks/ui/listevisning';

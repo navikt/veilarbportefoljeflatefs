@@ -16,11 +16,14 @@ interface ArbeidslistekategoriProps {
     kategori: KategoriModell;
     className?: string;
     dataTestid?: string;
+    skalVises?: boolean;
 }
 
 export default function ArbeidslistekategoriVisning({
     kategori,
     className,
+
+    skalVises = true,
     dataTestid
 }: Readonly<ArbeidslistekategoriProps>) {
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -39,7 +42,7 @@ export default function ArbeidslistekategoriVisning({
                     return <div className="tomt-arbeidslisteikon" />;
             }
         };
-        return <>{velgArbeidslistekategori()}</>;
+        return <>{skalVises ? velgArbeidslistekategori() : <div className="tomt-arbeidslisteikon" />}</>;
     } else {
         const velgArbeidslistekategori = () => {
             switch (kategori) {
@@ -55,6 +58,6 @@ export default function ArbeidslistekategoriVisning({
                     return <div className="tomt-arbeidslisteikon" />;
             }
         };
-        return <>{velgArbeidslistekategori()}</>;
+        return <>{skalVises ? velgArbeidslistekategori() : <div className="tomt-arbeidslisteikon" />}</>;
     }
 }
