@@ -75,7 +75,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                                         dispatch,
                                         values,
                                         bruker,
-                                        enhetId!!,
+                                        enhetId!,
                                         onModalClose,
                                         huskelapp.huskelappId
                                     );
@@ -84,7 +84,7 @@ export const LagEllerEndreHuskelappModal = ({isModalOpen, onModalClose, huskelap
                                         dispatch,
                                         values,
                                         bruker,
-                                        enhetId!!,
+                                        enhetId!,
                                         onModalClose,
                                         arbeidslisteArray
                                     );

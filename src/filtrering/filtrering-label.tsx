@@ -11,11 +11,10 @@ import './filtrering-skjema.css';
 interface FiltreringLabelProps {
     label: string | {label: string};
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
-    markert?: boolean;
     skalHaKryssIkon?: boolean;
 }
 
-function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: FiltreringLabelProps) {
+function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
     const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : 'Nullstill filtervalg';
     const slettAlleFiltervalg = ariaLabel === 'Nullstill filtervalg';
     const buttonClassnames = classNames('filtreringlabel', {'filtreringlabel--slett-alle': slettAlleFiltervalg});

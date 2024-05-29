@@ -12,7 +12,7 @@ interface FiltreringLabelMedIkonProps {
     tittel: string;
 }
 
-function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: FiltreringLabelMedIkonProps) {
+function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<FiltreringLabelMedIkonProps>) {
     const buttonClassnames = classNames('filtreringlabel', 'filtreringlabel--ikon', {});
     return (
         <Button

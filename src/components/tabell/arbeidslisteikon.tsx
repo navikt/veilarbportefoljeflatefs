@@ -18,7 +18,11 @@ interface ArbeidslistekategoriProps {
     dataTestid?: string;
 }
 
-export default function ArbeidslistekategoriVisning({kategori, className, dataTestid}: ArbeidslistekategoriProps) {
+export default function ArbeidslistekategoriVisning({
+    kategori,
+    className,
+    dataTestid
+}: Readonly<ArbeidslistekategoriProps>) {
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     if (erFargekategoriFeatureTogglePa) {
         const velgArbeidslistekategori = () => {

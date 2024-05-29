@@ -33,7 +33,7 @@ export const HuskelappModal = ({
 
     function slettHuskelapp() {
         //todo varsel modal på at det kommer til å slettes
-        handleSlettHuskelapp(dispatch, bruker.huskelapp!!, bruker.fnr, enhetId!!).then(() =>
+        handleSlettHuskelapp(dispatch, bruker.huskelapp!, bruker.fnr, enhetId!).then(() =>
             setModalVisHuskelappSkalVises(false)
         );
     }
