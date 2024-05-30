@@ -59,9 +59,9 @@ export const RedigerHuskelappModal = ({
             : null;
         try {
             if (huskelapp?.huskelappId) {
-                await endreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, huskelapp.huskelappId);
+                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
             } else {
-                await lagreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, arbeidslisteSomSkalSlettes);
+                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes);
             }
         } catch (error) {
             dispatch(visServerfeilModal());

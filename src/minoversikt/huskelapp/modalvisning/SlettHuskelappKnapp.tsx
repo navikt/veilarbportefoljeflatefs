@@ -22,7 +22,7 @@ export const SlettHuskelappKnapp = ({bruker, lukkModal, variant = 'secondary'}: 
 
     function slettHuskelapp() {
         //todo varsel modal på at det kommer til å slettes
-        handleSlettHuskelapp(dispatch, bruker.huskelapp!!, bruker.fnr, enhetId!!).then(() => lukkModal());
+        handleSlettHuskelapp(dispatch, bruker.huskelapp!, bruker.fnr, enhetId!).then(() => lukkModal());
     }
 
     return (
