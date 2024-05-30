@@ -145,10 +145,10 @@ export const arbeidslisteKategori = {
 };
 
 export const arbeidslisteKategoriGammel = {
-    BLA: 'Blå (gammel)',
-    LILLA: 'Lilla (gammel)',
-    GRONN: 'Grønn (gammel)',
-    GUL: 'Gul (gammel)'
+    BLA: 'Blå (med arbeidsliste)',
+    LILLA: 'Lilla (med arbeidsliste)',
+    GRONN: 'Grønn (med arbeidsliste)',
+    GUL: 'Gul (med arbeidsliste)'
 };
 
 export const fargekategorier = {
