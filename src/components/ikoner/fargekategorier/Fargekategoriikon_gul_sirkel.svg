@@ -1,5 +1,3 @@
-<svg width="1em" height="1em" viewBox="-1 -1 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
-     aria-labelledby="title-id" role="img">
-    <title id="title-id">Kategori gul (sirkel)</title>
-    <circle cx="10" cy="10" r="8.75" fill="#F9FCCC" stroke="#23262A" stroke-width="1.5"/>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="8.75" fill="#F9FCCC" stroke="#23262A" stroke-width="1.5" />
 </svg>

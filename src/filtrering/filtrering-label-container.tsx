@@ -6,14 +6,11 @@ import FilterKonstanter, {
     aktiviteter,
     alleFargekategoriFilterAlternativer,
     hendelserEtikett,
-    I_AVTALT_AKTIVITET,
     mapFilternavnTilFilterValue,
-    MINE_FARGEKATEGORIER,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER
+    MINE_FARGEKATEGORIER
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
-import {Kolonne, ListevisningState, oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
+import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {
@@ -29,6 +26,8 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../konstanter';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
 
@@ -39,42 +38,16 @@ interface FiltreringLabelContainerProps {
         slettEnkelt: (filterNavn: string, filterValue: boolean | string | null) => void;
     };
     filtervalg: FiltervalgModell;
-    oversiktType: OversiktType;
-    listevisning?: ListevisningState;
     className: string;
-}
-
-function getKolonneFraLabel(label) {
-    switch (label) {
-        case VENTER_PA_SVAR_FRA_BRUKER:
-            return Kolonne.VENTER_SVAR;
-        case I_AVTALT_AKTIVITET:
-            return Kolonne.AVTALT_AKTIVITET;
-        case UTLOPTE_AKTIVITETER:
-            return Kolonne.UTLOPTE_AKTIVITETER;
-        default:
-            return null;
-    }
-}
-
-function harMuligMenIkkeValgtKolonne(listevisning, kolonne) {
-    if (listevisning?.mulige.indexOf(kolonne) >= 0) {
-        return listevisning.valgte.indexOf(kolonne) < 0;
-    }
-    return false;
 }
 
 function FiltreringLabelContainer({
     filtervalg,
     enhettiltak,
-    listevisning,
     actions: {slettAlle, slettEnkelt},
-    oversiktType,
     className
 }: FiltreringLabelContainerProps) {
-    let muligMenIkkeValgt: boolean;
-    let kolonne: Kolonne | null;
-
+    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -182,10 +155,17 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={FilterKonstanter.arbeidslisteKategori[singleValue]}
+                            label={
+                                erFargekategoriFeatureTogglePa
+                                    ? FilterKonstanter.arbeidslisteKategoriGammel[singleValue]
+                                    : FilterKonstanter.arbeidslisteKategori[singleValue]
+                            }
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
-                            tittel={`Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}`}
+                            tittel={
+                                `Fjern filtervalg "Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}"` +
+                                (erFargekategoriFeatureTogglePa ? ' (gammel)' : '')
+                            }
                         />
                     );
                 });
@@ -197,7 +177,7 @@ function FiltreringLabelContainer({
                             label={FilterKonstanter.fargekategorier[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={fargekategoriIkonMapper(singleValue, 'fargekategoriikon')}
-                            tittel={`Kategori ${FilterKonstanter.fargekategorier[singleValue]}`}
+                            tittel={`Fjern filtervalg "Kategori ${FilterKonstanter.fargekategorier[singleValue]}"`}
                         />
                     );
                 });
@@ -336,8 +316,7 @@ function FiltreringLabelContainer({
                     );
                 });
             } else if (value && typeof value === 'object') {
-                // value er aktiviteter
-                muligMenIkkeValgt = harMuligMenIkkeValgtKolonne(listevisning, Kolonne.UTLOP_AKTIVITET);
+                // key = aktiviteter
                 return Object.entries(value)
                     .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
                     .map(([aktivitetkey, aktivitetvalue]) => (
@@ -345,7 +324,6 @@ function FiltreringLabelContainer({
                             key={`aktivitet-${aktivitetkey}`}
                             label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
-                            harMuligMenIkkeValgtKolonne={muligMenIkkeValgt && aktivitetvalue === AktiviteterValg.JA}
                         />
                     ));
             } else if (key === 'navnEllerFnrQuery') {
@@ -356,17 +334,11 @@ function FiltreringLabelContainer({
                     return [<FiltreringLabel key={key} label={labelId} slettFilter={() => slettEnkelt(key, '')} />];
                 }
             } else if (value) {
-                kolonne = key === 'ytelse' ? null : getKolonneFraLabel(value);
-                muligMenIkkeValgt =
-                    kolonne === Kolonne.AVTALT_AKTIVITET && oversiktType === OversiktType.minOversikt
-                        ? true
-                        : harMuligMenIkkeValgtKolonne(listevisning, kolonne);
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
                         label={FilterKonstanter[key][value]}
                         slettFilter={() => slettEnkelt(key, null)}
-                        harMuligMenIkkeValgtKolonne={muligMenIkkeValgt}
                     />
                 ];
             }
@@ -382,7 +354,6 @@ function FiltreringLabelContainer({
                     key="slett-alle"
                     label="Nullstill filtervalg"
                     slettFilter={slettAlle}
-                    harMuligMenIkkeValgtKolonne={false}
                     skalHaKryssIkon={false}
                 />
             )}

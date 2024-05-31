@@ -12,7 +12,7 @@ export const handleSlettHuskelapp = async (
     fnr: string,
     enhetId: string
 ) => {
-    await dispatch(slettHuskelappAction(huskelapp.huskelappId!!));
+    await dispatch(slettHuskelappAction(huskelapp.huskelappId!));
     await dispatch(leggTilStatustall('mineHuskelapper', -1));
     await dispatch(hentHuskelappForBruker(fnr, enhetId));
 };

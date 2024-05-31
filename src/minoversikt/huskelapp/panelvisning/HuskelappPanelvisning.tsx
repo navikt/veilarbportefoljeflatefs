@@ -22,7 +22,7 @@ export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
     const visRedigeringsmodal = () => setSkalViseRedigerHuskelappModal(true);
-    const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!!);
+    const slettHuskelapp = () => handleSlettHuskelapp(dispatch, huskelapp, bruker.fnr, enhetId!);
 
     return (
         <div className="huskelapp-panel">

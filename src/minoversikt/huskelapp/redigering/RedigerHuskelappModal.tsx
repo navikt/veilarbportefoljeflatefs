@@ -13,7 +13,7 @@ import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
-import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/huskelapp.svg';
+import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettArbeidsliste} from './SlettArbeidsliste';
 import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
@@ -59,9 +59,9 @@ export const RedigerHuskelappModal = ({
             : null;
         try {
             if (huskelapp?.huskelappId) {
-                await endreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, huskelapp.huskelappId);
+                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
             } else {
-                await lagreHuskelapp(dispatch, values, bruker, enhetId!!, onModalClose, arbeidslisteSomSkalSlettes);
+                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes);
             }
         } catch (error) {
             dispatch(visServerfeilModal());

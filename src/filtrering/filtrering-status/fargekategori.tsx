@@ -22,6 +22,7 @@ import {useDispatch} from 'react-redux';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
 import {FargekategoriModell} from '../../model-interfaces';
 import fargekategoriIkonMapper from '../../components/fargekategori/fargekategori-ikon-mapper';
+import {Bleed} from '@navikt/ds-react';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -115,10 +116,12 @@ function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         key={fargekategori.filterId}
                         labelTekst={
-                            <span className="fargekategoriikon--label">
-                                {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
-                                <span>{fargekategori.filterLabel}</span>
-                            </span>
+                            <>
+                                <Bleed marginBlock="05" asChild>
+                                    {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
+                                </Bleed>
+                                {fargekategori.filterLabel}
+                            </>
                         }
                         filterNavn={fargekategori.filterNavn}
                         handleChange={handleUnderfilterEndret}
