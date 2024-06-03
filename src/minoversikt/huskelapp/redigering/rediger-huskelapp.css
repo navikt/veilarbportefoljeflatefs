@@ -1,26 +1,100 @@
-.lag-eller-endre-huskelapp-modal.navds-modal {
-    max-width: 22rem;
-}
-
-.lag-eller-endre-huskelapp-modal .navds-body-short,
-.lag-eller-endre-huskelapp-modal .navds-alert__wrapper {
+.rediger-huskelapp-modal .navds-body-short,
+.rediger-huskelapp-modal .navds-alert__wrapper {
     font-size: 14px;
     line-height: 1.25rem;
 }
 
-.lag-eller-endre-huskelapp-modal.med-eksisterende-arbeidsliste.navds-modal {
+.rediger-huskelapp-modal {
     min-width: fit-content;
 }
 
-.med-eksisterende-arbeidsliste .lag-eller-endre-huskelapp-modal__body {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 20rem 1fr;
-    gap: 1rem;
+.rediger-huskelapp-modal .rediger-huskelapp-modal__body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     padding-bottom: 0;
+    overflow: visible; /* Gjer at focus-stylinga ikkje vert kutta sjølv om padding-bottom er 0.*/
 }
 
-.lag-eller-endre-huskelapp-modal .nav-datovelger__kalenderPortal {
+.rediger-huskelapp-modal .nav-datovelger__kalenderPortal {
     transform: translateY(-116%);
+}
+
+.rediger-huskelapp-modal .gammel-arbeidsliste {
+    flex: 10 18rem;
+    max-width: 22.5rem;
+
+    background-color: var(--a-bg-subtle);
+    padding: 1rem;
+    border-radius: var(--a-border-radius-medium);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold {
+    background: var(--a-bg-default);
+    padding: var(--a-spacing-2);
+    word-break: break-word;
+}
+
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold h3 {
+    font-size: var(--a-font-size-medium); /*1rem, overskriv ds-styling for xsmall (1.125rem)*/
+}
+
+.rediger-huskelapp-modal .gammel-arbeidsliste-innhold p {
+    font-size: var(--a-font-size-small); /* Overskriv styling i bodylong som brukar medium skriftstorleik */
+}
+
+.rediger-huskelapp-modal .gammel-arbeidsliste li div {
+    font-size: var(--a-font-size-medium) !important; /* Overskriv stylinga '14px !important' frå style.css */
+}
+
+.rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
+    margin: auto;
+}
+
+.rediger-huskelapp-modal .ny-huskelapp {
+    flex-basis: 17.75rem;
+    flex-grow: 1;
+    max-width: 26rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: var(--a-spacing-4);
+}
+
+.rediger-huskelapp-modal .ny-huskelapp-form {
+    background-color: var(--a-bg-default);
+    padding: 1rem 0.5rem;
+}
+
+.rediger-huskelapp-modal .ny-huskelapp form > :not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.rediger-huskelapp-modal .rediger-huskelapp-modal__footer {
+    align-items: end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
+}
+
+.veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
+    /* !important er brukt for å overskrive hardkodinga av alle labels til 14px i style.css */
+    font-size: var(--a-font-size-medium) !important;
+}
+
+.rediger-huskelapp-modal .sletting-av-arbeidsliste-feilet {
+    margin-bottom: var(--a-spacing-4);
+}
+
+.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg {
+    margin-top: var(--a-spacing-2);
+    display: flex;
+    gap: 0.5rem;
+}
+.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg > button {
+    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
+    margin: 0;
 }

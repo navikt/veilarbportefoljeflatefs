@@ -1,3 +1,7 @@
 .huskelappvisning-modal .huskelappvisning-modal__body {
     padding-bottom: 0;
 }
+
+.huskelappvisning-modal .huskelapp-visning-modal__endret-av {
+    margin-top: var(--a-spacing-2);
+}

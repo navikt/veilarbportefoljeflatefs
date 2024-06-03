@@ -1,39 +1,23 @@
 import React, {MouseEvent} from 'react';
-import {lagConfig} from './filter-konstanter';
-import {ReactComponent as FilterIkon} from './filtrering-veileder-grupper/filter-ikon.svg';
 import classNames from 'classnames';
-import './filtrering-label.css';
-import './filtrering-skjema.css';
+import {lagConfig} from './filter-konstanter';
 import FilterFeilModal from '../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../utils/utils';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
+import {XMarkIcon} from '@navikt/aksel-icons';
+import './filtrering-label.css';
+import './filtrering-skjema.css';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
-    markert?: boolean;
-    harMuligMenIkkeValgtKolonne?: boolean;
     skalHaKryssIkon?: boolean;
 }
 
-function FiltreringLabel({
-    label,
-    slettFilter,
-    harMuligMenIkkeValgtKolonne = false,
-    markert = false,
-    skalHaKryssIkon = true
-}: FiltreringLabelProps) {
-    const className = classNames('filtreringlabel__label', {
-        'filtreringlabel-slett-filter': !skalHaKryssIkon
-    });
-    const arialLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : ' Nullstill filtervalg';
-    const slettAlleFiltervalg = arialLabel === ' Nullstill filtervalg';
-    const buttonClassnames = classNames(
-        'filtreringlabel',
-        {'filtreringlabel--markert': markert},
-        {'filtreringlabel--muligeKolonner': harMuligMenIkkeValgtKolonne},
-        {'slett-alle-filtervalg-knapp': slettAlleFiltervalg}
-    );
+function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
+    const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : 'Nullstill filtervalg';
+    const slettAlleFiltervalg = ariaLabel === 'Nullstill filtervalg';
+    const buttonClassnames = classNames('filtreringlabel', {'filtreringlabel--slett-alle': slettAlleFiltervalg});
 
     if (label === undefined) {
         return <FilterFeilModal isOpen={true} />;
@@ -42,18 +26,16 @@ function FiltreringLabel({
     return (
         <Button
             size="small"
-            variant="primary"
-            title={lagConfig(label).label}
-            aria-label={arialLabel}
-            className={buttonClassnames}
-            onClick={slettFilter}
-            data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
-            icon={skalHaKryssIkon && <FilterIkon />}
+            variant="primary-neutral"
+            icon={skalHaKryssIkon && <XMarkIcon />}
             iconPosition="right"
+            title={ariaLabel}
+            onClick={slettFilter}
+            className={buttonClassnames}
+            aria-label={ariaLabel}
+            data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
-            <BodyShort size="small" className={className}>
-                {lagConfig(label).label}
-            </BodyShort>
+            {lagConfig(label).label}
         </Button>
     );
 }

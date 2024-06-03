@@ -9,6 +9,8 @@ import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {Alert, BodyShort} from '@navikt/ds-react';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {HUSKELAPP} from '../../konstanter';
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -31,6 +33,7 @@ function MineFilterInnhold({
     setisDraggable,
     enhettiltak
 }: LagredeFilterInnholdProps) {
+    const isHuskelappToggleOn = useFeatureSelector()(HUSKELAPP);
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
@@ -43,6 +46,11 @@ function MineFilterInnhold({
 
     const inaktiveFilter = () => {
         return filtrertListe().filter(elem => !elem.aktiv);
+    };
+    const alertArbeidslisteEllerKategori = () => {
+        return (
+            filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0
+        );
     };
 
     const dispatch = useDispatch();
@@ -57,6 +65,19 @@ function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
+                {isHuskelappToggleOn && alertArbeidslisteEllerKategori() && (
+                    <Alert
+                        variant="info"
+                        className="mine-filter_alertstripe"
+                        data-testid="mine-filter_alertstripe-arbeidsliste"
+                        size="small"
+                    >
+                        <b>Du har filter med arbeidsliste</b>
+                        <br />
+                        Disse kan vise færre brukere etter hvert som du migrerer til huskelapp. Det kan være lurt å lage
+                        nye filter som også henter inn brukere med fargekategorier.
+                    </Alert>
+                )}
                 {inaktiveFilter().length !== 0 && (
                     <Alert
                         variant="info"

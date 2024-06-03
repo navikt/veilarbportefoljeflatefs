@@ -144,6 +144,13 @@ export const arbeidslisteKategori = {
     GUL: 'Gul'
 };
 
+export const arbeidslisteKategoriGammel = {
+    BLA: 'Blå (med arbeidsliste)',
+    LILLA: 'Lilla (med arbeidsliste)',
+    GRONN: 'Grønn (med arbeidsliste)',
+    GUL: 'Gul (med arbeidsliste)'
+};
+
 export const fargekategorier = {
     FARGEKATEGORI_A: 'Blå',
     FARGEKATEGORI_B: 'Grønn',
@@ -471,6 +478,7 @@ const filterKonstanter = {
     registreringstype,
     endringISituasjon,
     arbeidslisteKategori,
+    arbeidslisteKategoriGammel,
     cvJobbprofil,
     utdanning,
     utdanningBestatt,

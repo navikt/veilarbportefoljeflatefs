@@ -5,9 +5,6 @@
     border-radius: 0 0 4px 4px;
     margin-bottom: 0;
 }
-.veilarbportefoljeflatefs .minoversikt-liste__wrapper li:nth-child(odd) {
-    background-color: white;
-}
 .veilarbportefoljeflatefs .tilbaketilveileder {
     display: inline-block;
     position: relative;
@@ -48,4 +45,12 @@
 }
 .veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
     margin-right: 1rem;
+}
+.veilarbportefoljeflatefs #arbeidslisteikon__listehode {
+    font-size: 1.2rem;
+}
+.veilarbportefoljeflatefs .brukerliste__arbeidslisteikon,
+.tomt-arbeidslisteikon {
+    margin-left: 0.5rem;
+    margin-right: 1.125rem;
 }

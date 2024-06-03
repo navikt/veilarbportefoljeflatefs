@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
-import {LagEllerEndreHuskelappModal} from './redigering/LagEllerEndreHuskelappModal';
+import {RedigerHuskelappModal} from './redigering/RedigerHuskelappModal';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 
 export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
-    const [skalLagEllerEndreHuskelappModalVises, setSkalLagEllerEndreHuskelappModalVises] = useState<boolean>(false);
+    const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
 
     const onClick = () => {
         trackAmplitude({name: 'modal åpnet', data: {tekst: 'åpnet lag eller endre huskelappmodal'}});
-        setSkalLagEllerEndreHuskelappModalVises(true);
+        setSkalViseRedigerHuskelappModal(true);
     };
 
     return (
@@ -17,12 +17,12 @@ export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
             <Button size="xsmall" variant="tertiary" onClick={onClick} className="arbeidsliste--rediger-lenke">
                 Rediger
             </Button>
-            {skalLagEllerEndreHuskelappModalVises && (
-                <LagEllerEndreHuskelappModal
+            {skalViseRedigerHuskelappModal && (
+                <RedigerHuskelappModal
                     onModalClose={() => {
-                        setSkalLagEllerEndreHuskelappModalVises(false);
+                        setSkalViseRedigerHuskelappModal(false);
                     }}
-                    isModalOpen={skalLagEllerEndreHuskelappModalVises}
+                    isModalOpen={skalViseRedigerHuskelappModal}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}
