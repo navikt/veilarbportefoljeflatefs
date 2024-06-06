@@ -27,7 +27,7 @@
     position: absolute;
 }
 .arbeidslistekategori__container svg {
-    height: 25px;
+    height: calc(25 / 16 * 1rem); /* 25px */
     width: auto;
 }
 .arbeidslistekategori__container label::before {

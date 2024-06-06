@@ -10,8 +10,8 @@
     align-items: center;
 }
 input[type='checkbox'].dmcheck {
-    width: 40px;
-    height: 10px;
+    width: calc(40 / 16 * 1rem); /* 40px */
+    height: calc(10 / 16 * 1rem);
     background: #555;
     position: relative;
     border-radius: 5px;
@@ -30,8 +30,8 @@ input[type='checkbox'].dmcheck:focus-visible {
 }
 input[type='checkbox'].dmcheck + label {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: calc(18 / 16 * 1rem);
+    height: calc(18 / 16 * 1rem);
     border-radius: 50%;
     transition: all 0.3s ease;
     cursor: pointer;

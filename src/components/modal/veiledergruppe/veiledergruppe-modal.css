@@ -72,7 +72,7 @@
 
 .veiledergruppe-modal__valgteveileder__elem .fjern--knapp {
     border: none !important;
-    width: 20px;
+    width: 1.25rem; /* 20px */
     padding: 0 0 10px;
     color: black;
 }
@@ -122,7 +122,7 @@
 }
 
 .advarsel-modal .modal__overlay .ReactModal__Content {
-    max-width: 448px;
+    max-width: 28rem; /* 448px */
 }
 
 .endringer-ikke-lagret-modal__knappegruppe {
