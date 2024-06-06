@@ -10,9 +10,10 @@ import {AppState} from '../../../reducer';
 
 interface SlettArbeidslisteProps {
     bruker: BrukerModell;
+    lukkModal: () => void;
 }
 
-export const SlettArbeidsliste = ({bruker}: SlettArbeidslisteProps) => {
+export const SlettArbeidsliste = ({bruker, lukkModal}: SlettArbeidslisteProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const [visSlettebekreftelse, setVisSlettebekreftelse] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -24,7 +25,8 @@ export const SlettArbeidsliste = ({bruker}: SlettArbeidslisteProps) => {
         slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch)
             .then(() => setLoading(false))
             .catch(() => setError(true))
-            .then(() => setVisSlettebekreftelse(false));
+            .then(() => setVisSlettebekreftelse(false))
+            .then(() => lukkModal());
     };
 
     return (
