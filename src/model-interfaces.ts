@@ -56,7 +56,7 @@ export enum Sorteringsfelt {
     ENSLIGE_FORSORGERE_OM_BARNET = 'enslige_forsorgere_om_barnet',
 
     BARN_UNDER_18_AAR = 'barn_under_18_aar',
-    BRUKERS_SITUASJON_SIST_ENDRET = 'brukersSituasjonSistEndret',
+    UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanningOgSituasjonSistEndret',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP = 'huskelapp'
@@ -207,6 +207,7 @@ export interface BrukerModell {
     brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
     huskelapp?: HuskelappModell;
+    utdanningOgSituasjonSistEndret: string;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
