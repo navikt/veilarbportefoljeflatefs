@@ -40,6 +40,10 @@
     align-items: center;
     gap: 0.25rem;
 }
+.filtreringlabel--ikon svg:first-of-type {
+    height: 1.5rem;
+    width: 1.5rem;
+}
 .veilarbportefoljeflatefs .filtreringlabel--slett-alle {
     --ac-button-primary-neutral-bg: var(--a-gray-600);
     --ac-button-primary-neutral-text: var(--a-text-on-neutral);
