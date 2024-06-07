@@ -35,33 +35,39 @@ export const FargekategoriPopover = ({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
+    let systemfeil = false;
     const veilederIdent = useSelectGjeldendeVeileder();
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
-        const data: FargekategoriDataModell = {
-            fnr: fnrs,
-            fargekategoriVerdi: fargekategori,
-            enhetId: enhet!
-        };
+        if (enhet !== null) {
+            systemfeil = false;
+            const data: FargekategoriDataModell = {
+                fnr: fnrs,
+                fargekategoriVerdi: fargekategori,
+                enhetId: enhet
+            };
 
-        const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
+            const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
 
-        if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
-            if (gammelFargekategori) {
-                const gammelStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
-                    konfigurasjon => konfigurasjon.filterId === gammelFargekategori
-                )?.statustallId;
-                const nyStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
-                    konfigurasjon => konfigurasjon.filterId === fargekategori
-                )?.statustallId;
-                await dispatch(leggTilStatustall(gammelStatustallId, -1));
-                await dispatch(leggTilStatustall(nyStatustallId, 1));
-            } else {
-                //Venter fordi det returneres FARGEKATEGORI_OPPDATER_OK før statustall er oppdatert i Opensearch
-                await delay(500);
-                dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+            if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
+                if (gammelFargekategori) {
+                    const gammelStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                        konfigurasjon => konfigurasjon.filterId === gammelFargekategori
+                    )?.statustallId;
+                    const nyStatustallId = fargekategoriUnderfilterKonfigurasjoner.find(
+                        konfigurasjon => konfigurasjon.filterId === fargekategori
+                    )?.statustallId;
+                    await dispatch(leggTilStatustall(gammelStatustallId, -1));
+                    await dispatch(leggTilStatustall(nyStatustallId, 1));
+                } else {
+                    //Venter fordi det returneres FARGEKATEGORI_OPPDATER_OK før statustall er oppdatert i Opensearch
+                    await delay(500);
+                    dispatch(hentStatustallForVeileder(enhet, veilederIdent));
+                }
+                setOpenState(false);
             }
-            setOpenState(false);
+        } else {
+            systemfeil = true;
         }
     };
 
@@ -86,7 +92,7 @@ export const FargekategoriPopover = ({
         >
             <Popover.Content>
                 {children}
-                <FargekategoriFeilhandtering apiResponse={apiResponse}>
+                <FargekategoriFeilhandtering apiResponse={apiResponse} systemfeil={systemfeil}>
                     {fargekategoriknapper}
                 </FargekategoriFeilhandtering>
             </Popover.Content>

@@ -5,13 +5,16 @@ import {Status} from '../../model-interfaces';
 interface Props {
     children: React.ReactNode;
     apiResponse: {status: string; data: {response?: Response; data: string | {data: string[]; errors: string[]}}};
+    systemfeil: boolean;
 }
 
 function isString(data: string | {data: string[]; errors: string[]}): data is string {
     return typeof data === 'string';
 }
 
-const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | undefined) => {
+const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | undefined, systemfeil: boolean) => {
+    if (systemfeil) return `Noe gikk galt, prøv igjen senere.`;
+
     if (!okFnrs?.length) {
         if (status === 400) return `Kunne ikke oppdatere kategori. Fødselsnummer er ugyldig.`;
         if (status === 403) return `Du har ikke tilgang til å oppdatere kategori.`;
@@ -20,13 +23,11 @@ const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | 
 
     return (
         <List as="ul" size="small" title="Kunne ikke oppdatere kategori på følgende personer:">
-            {errorFnrs?.map(fnr => (
-                <List.Item key={useId()}>{fnr}</List.Item>
-            ))}
+            {errorFnrs?.map(fnr => <List.Item key={useId()}>{fnr}</List.Item>)}
         </List>
     );
 };
-export const FargekategoriFeilhandtering = ({children, apiResponse}: Props) => {
+export const FargekategoriFeilhandtering = ({children, apiResponse, systemfeil}: Props) => {
     const responseJson =
         apiResponse.status === Status.ERROR && isString(apiResponse.data.data)
             ? JSON.parse(apiResponse.data.data)
@@ -36,9 +37,9 @@ export const FargekategoriFeilhandtering = ({children, apiResponse}: Props) => {
 
     return (
         <>
-            {apiResponse.status === Status.ERROR || !!errorFnrs?.length ? (
+            {apiResponse.status === Status.ERROR || !!errorFnrs?.length || systemfeil ? (
                 <Alert size="small" variant="error">
-                    {mapErrorToText(okFnrs, errorFnrs, apiResponse.data.response?.status)}
+                    {mapErrorToText(okFnrs, errorFnrs, apiResponse.data.response?.status, systemfeil)}
                 </Alert>
             ) : (
                 children
