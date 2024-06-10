@@ -30,7 +30,7 @@ export const HuskelappModal = ({open, onClose, bruker, redigerHuskelapp, lukkHus
             <Modal.Body className="huskelappvisning-modal__body">
                 <HuskelappForModal huskelapp={bruker.huskelapp!} />
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="huskelappvisning-modal__footer">
                 <Button type="button" size="small" variant="primary" onClick={redigerHuskelapp}>
                     Endre
                 </Button>

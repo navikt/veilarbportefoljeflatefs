@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {Alert, BodyShort, Button, Heading} from '@navikt/ds-react';
+import './knapp-med-bekreft-handling.css';
 
 interface KnappMedBekreftHandlingProps {
     handlingsknapptekst: string;
+    variant?: 'secondary' | 'tertiary';
+    ikon?: React.ReactNode;
     bekreftelsesmelding: {
         overskrift: string;
         beskrivelse: string;
+        width?: string;
     };
     bekreftknapp: {
         tekst: string;
@@ -13,15 +17,15 @@ interface KnappMedBekreftHandlingProps {
         onClickThen?: () => any;
     };
     feilmelding: string;
-    ikon?: React.ReactNode;
 }
 
 export const KnappMedBekreftHandling = ({
     handlingsknapptekst,
+    variant = 'tertiary',
+    ikon,
     bekreftelsesmelding,
     bekreftknapp,
-    feilmelding,
-    ikon
+    feilmelding
 }: KnappMedBekreftHandlingProps) => {
     const [visSlettebekreftelse, setVisSlettebekreftelse] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -39,9 +43,9 @@ export const KnappMedBekreftHandling = ({
     };
 
     return (
-        <>
+        <div className="knapp-med-bekreft-handling">
             {error && (
-                <Alert variant="error" size="small" className="sletting-av-arbeidsliste-feilet">
+                <Alert variant="error" size="small" className="bekreft-handling-feilet">
                     {feilmelding}
                 </Alert>
             )}
@@ -53,7 +57,7 @@ export const KnappMedBekreftHandling = ({
                         setError(false);
                     }}
                     size="small"
-                    variant="tertiary"
+                    variant={variant}
                     icon={ikon}
                 >
                     {handlingsknapptekst}
@@ -61,12 +65,12 @@ export const KnappMedBekreftHandling = ({
             )}
 
             {visSlettebekreftelse && (
-                <div>
+                <div className="bekreft-handling" style={{width: bekreftelsesmelding.width}}>
                     <Heading size="xsmall" level="3">
                         {bekreftelsesmelding.overskrift}
                     </Heading>
                     <BodyShort size="small">{bekreftelsesmelding.beskrivelse}</BodyShort>
-                    <div className="slett-arbeidsliste__knappevalg">
+                    <div className="bekreft-handling__knapper">
                         <Button
                             variant="tertiary"
                             size="small"
@@ -87,6 +91,6 @@ export const KnappMedBekreftHandling = ({
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };

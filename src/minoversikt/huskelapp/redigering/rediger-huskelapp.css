@@ -84,17 +84,3 @@
     /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--a-font-size-medium) !important;
 }
-
-.rediger-huskelapp-modal .sletting-av-arbeidsliste-feilet {
-    margin-bottom: var(--a-spacing-4);
-}
-
-.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg {
-    margin-top: var(--a-spacing-2);
-    display: flex;
-    gap: 0.5rem;
-}
-.rediger-huskelapp-modal .slett-arbeidsliste__knappevalg > button {
-    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
-    margin: 0;
-}
