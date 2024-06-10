@@ -42,8 +42,6 @@
 }
 .filtreringlabel--ikon svg:first-of-type {
     flex-shrink: 0;
-    height: 1.5rem;
-    width: 1.5rem;
 }
 .veilarbportefoljeflatefs .filtreringlabel--slett-alle {
     --ac-button-primary-neutral-bg: var(--a-gray-600);
