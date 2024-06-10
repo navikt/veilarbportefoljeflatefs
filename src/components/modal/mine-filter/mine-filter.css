@@ -9,9 +9,6 @@
     margin-right: 0;
     margin-bottom: 2rem;
 }
-.mine-filter-meny-modal__wrapper .tekst {
-    font-size: calc(17 / 16 * 1rem); /* 17px */
-}
 .mine-filter-meny-modal__wrapper .eksisterende-knapp {
     margin-top: 1rem;
 }

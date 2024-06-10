@@ -26,10 +26,6 @@
 .arbeidslistekategori__container label::after {
     position: absolute;
 }
-.arbeidslistekategori__container svg {
-    height: calc(25 / 16 * 1rem); /* 25px */
-    width: auto;
-}
 .arbeidslistekategori__container label::before {
     content: '';
     height: 100%;
