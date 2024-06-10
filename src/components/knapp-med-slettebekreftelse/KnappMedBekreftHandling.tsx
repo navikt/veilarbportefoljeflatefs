@@ -55,15 +55,13 @@ export const KnappMedBekreftHandling = ({
                     size="small"
                     variant="tertiary"
                     icon={ikon}
-                    style={{display: 'none'}} // TODO ta bort teststyling
                 >
                     {handlingsknapptekst}
                 </Button>
             )}
 
             {visSlettebekreftelse && (
-                // TODO: Ta bort test-styling
-                <div style={{background: 'lightseagreen'}}>
+                <div>
                     <Heading size="xsmall" level="3">
                         {bekreftelsesmelding.overskrift}
                     </Heading>

@@ -15,7 +15,6 @@ import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {NyHuskelapp} from './NyHuskelapp';
-import {SlettArbeidsliste} from './SlettArbeidsliste';
 import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
@@ -114,10 +113,8 @@ export const RedigerHuskelappModal = ({
                 </Button>
                 {harArbeidsliste && (
                     <>
-                        <SlettArbeidsliste bruker={bruker} lukkModal={onModalClose} />
                         <KnappMedBekreftHandling
-                            // handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
-                            handlingsknapptekst="Slett (ny)"
+                            handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
                             bekreftelsesmelding={{
                                 overskrift: 'Er du sikker på at du vil slette eksisterende innhold?',
                                 beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne brukeren.'
