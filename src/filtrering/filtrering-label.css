@@ -25,7 +25,7 @@
     color: #fff;
 }
 .veilarbportefoljeflatefs .filtreringlabel span:first-of-type {
-    max-width: 10rem;
+    max-width: 11rem; /* Quick-fix: Denne skal eigentleg vere 10rem. Kan fiksast når arbeidsliste-filtera er fjerna. */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -41,6 +41,7 @@
     gap: 0.25rem;
 }
 .filtreringlabel--ikon svg:first-of-type {
+    flex-shrink: 0;
     height: 1.5rem;
     width: 1.5rem;
 }
