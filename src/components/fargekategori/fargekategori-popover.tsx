@@ -35,12 +35,10 @@ export const FargekategoriPopover = ({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
-    let systemfeil = false;
     const veilederIdent = useSelectGjeldendeVeileder();
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
-        if (enhet !== null) {
-            systemfeil = false;
+        if (enhet != null) {
             const data: FargekategoriDataModell = {
                 fnr: fnrs,
                 fargekategoriVerdi: fargekategori,
@@ -66,8 +64,6 @@ export const FargekategoriPopover = ({
                 }
                 setOpenState(false);
             }
-        } else {
-            systemfeil = true;
         }
     };
 
@@ -92,7 +88,7 @@ export const FargekategoriPopover = ({
         >
             <Popover.Content>
                 {children}
-                <FargekategoriFeilhandtering apiResponse={apiResponse} systemfeil={systemfeil}>
+                <FargekategoriFeilhandtering apiResponse={apiResponse}>
                     {fargekategoriknapper}
                 </FargekategoriFeilhandtering>
             </Popover.Content>
