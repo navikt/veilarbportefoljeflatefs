@@ -70,21 +70,6 @@
     max-height: fit-content;
 }
 
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp {
-    border: none !important;
-    width: 20px;
-    padding: 0 0 10px;
-    color: black;
-}
-
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp:hover {
-    box-shadow: none !important;
-}
-
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp:hover svg {
-    color: #0067c5;
-}
-
 .veiledergruppe-modal__sokefilter {
     margin-top: 1rem;
 }
@@ -119,10 +104,6 @@
 
 .veiledergruppe-modal__knappegruppe__slett {
     margin-left: auto !important;
-}
-
-.advarsel-modal .modal__overlay .ReactModal__Content {
-    max-width: 448px;
 }
 
 .endringer-ikke-lagret-modal__knappegruppe {

@@ -71,7 +71,7 @@ function FilterStatusMinArbeidsliste({
                             <>
                                 <Bleed marginBlock="05" asChild>
                                     {erHuskelappFeatureTogglePaa ? (
-                                        <FargekategoriIkonBlaHalvsirkel />
+                                        <FargekategoriIkonBlaHalvsirkel fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonBla width="1.2rem" />
                                     )}
@@ -90,7 +90,7 @@ function FilterStatusMinArbeidsliste({
                             <>
                                 <Bleed marginBlock="05" asChild>
                                     {erHuskelappFeatureTogglePaa ? (
-                                        <FargekategoriIkonGronnTrekant />
+                                        <FargekategoriIkonGronnTrekant fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonGronn width="1.2rem" />
                                     )}
@@ -109,7 +109,7 @@ function FilterStatusMinArbeidsliste({
                             <>
                                 <Bleed marginBlock="05" asChild>
                                     {erHuskelappFeatureTogglePaa ? (
-                                        <FargekategoriIkonGulSirkel />
+                                        <FargekategoriIkonGulSirkel fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonGul width="1.2rem" />
                                     )}
@@ -128,7 +128,7 @@ function FilterStatusMinArbeidsliste({
                             <>
                                 <Bleed marginBlock="05" asChild>
                                     {erHuskelappFeatureTogglePaa ? (
-                                        <FargekategoriIkonLillaFirkant />
+                                        <FargekategoriIkonLillaFirkant fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonLilla width="1.2rem" />
                                     )}

@@ -1,6 +1,6 @@
 .rediger-huskelapp-modal .navds-body-short,
 .rediger-huskelapp-modal .navds-alert__wrapper {
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.25rem;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .rediger-huskelapp-modal .gammel-arbeidsliste li div {
-    font-size: var(--a-font-size-medium) !important; /* Overskriv stylinga '14px !important' frå style.css */
+    font-size: var(--a-font-size-medium) !important; /* Overskriv stylinga '0.875rem !important' frå style.css */
 }
 
 .rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
@@ -81,7 +81,7 @@
 }
 
 .veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
-    /* !important er brukt for å overskrive hardkodinga av alle labels til 14px i style.css */
+    /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--a-font-size-medium) !important;
 }
 
