@@ -70,21 +70,6 @@
     max-height: fit-content;
 }
 
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp {
-    border: none !important;
-    width: 1.25rem; /* 20px */
-    padding: 0 0 10px;
-    color: black;
-}
-
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp:hover {
-    box-shadow: none !important;
-}
-
-.veiledergruppe-modal__valgteveileder__elem .fjern--knapp:hover svg {
-    color: #0067c5;
-}
-
 .veiledergruppe-modal__sokefilter {
     margin-top: 1rem;
 }
