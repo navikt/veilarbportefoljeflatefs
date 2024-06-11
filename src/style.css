@@ -1260,3 +1260,9 @@ GRID
         z-index: 1200;
     }
 }
+
+.veilarbportefoljeflatefs .navds-button--secondary {
+    /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
+     * (I designsystemet er dei gjennomsiktige.) */
+    background-color: var(--a-bg-default);
+}

@@ -1,18 +1,18 @@
 import React from 'react';
 import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
-import {HuskelappModell} from '../../../model-interfaces';
-import '../huskelapp-wrapper/huskelapp-postitstyling.css';
+import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {HuskelappPostitWrapper} from '../huskelapp-wrapper/HuskelappPostitWrapper';
-import {TrashIcon} from '@navikt/aksel-icons';
+import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
+import '../huskelapp-wrapper/huskelapp-postitstyling.css';
 
 interface Props {
     huskelapp: HuskelappModell;
-    onSlettHuskelapp: () => void;
+    bruker: BrukerModell;
     onEndreHuskelapp: () => void;
 }
 
-export const HuskelappForPanel = ({huskelapp, onSlettHuskelapp, onEndreHuskelapp}: Props) => (
+export const HuskelappForPanel = ({huskelapp, bruker, onEndreHuskelapp}: Props) => (
     <HuskelappPostitWrapper>
         <Heading level="3" size="xsmall" spacing>
             {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
@@ -26,16 +26,7 @@ export const HuskelappForPanel = ({huskelapp, onSlettHuskelapp, onEndreHuskelapp
             </i>
         </Detail>
         <div className="huskelapp-panelvisning__handlingsknapper">
-            <Button
-                type="button"
-                size="xsmall"
-                variant="secondary"
-                onClick={onSlettHuskelapp}
-                icon={<TrashIcon aria-hidden={true} />}
-                className="huskelapp-panelvisning__slettknapp"
-            >
-                Slett
-            </Button>
+            <SlettHuskelappKnapp bruker={bruker} size="xsmall" bekreftelsesmelding={{overskriftsnivaa: '4'}} />
             <Button type="button" size="xsmall" variant="primary" onClick={onEndreHuskelapp}>
                 Endre
             </Button>

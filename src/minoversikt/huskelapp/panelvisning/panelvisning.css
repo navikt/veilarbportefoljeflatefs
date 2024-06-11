@@ -29,9 +29,6 @@
 .huskelapp-panelvisning__handlingsknapper {
     display: flex;
     justify-content: flex-end;
+    align-items: end;
     gap: 1rem;
-}
-
-.huskelapp-panelvisning__handlingsknapper > .huskelapp-panelvisning__slettknapp {
-    background: var(--a-bg-default);
 }
