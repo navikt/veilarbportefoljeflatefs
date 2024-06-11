@@ -7,5 +7,5 @@
 }
 
 .huskelappvisning-modal .huskelappvisning-modal__footer {
-    align-items: end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
+    align-items: flex-end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
 }

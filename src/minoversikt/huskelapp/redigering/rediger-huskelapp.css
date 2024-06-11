@@ -77,7 +77,7 @@
 }
 
 .rediger-huskelapp-modal .rediger-huskelapp-modal__footer {
-    align-items: end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
+    align-items: flex-end; /* Dyttar knappane til botnen når slettebekreftinga er synleg */
 }
 
 .veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
