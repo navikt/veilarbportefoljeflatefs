@@ -14,9 +14,15 @@ interface SlettHuskelappKnappProps {
     bruker: BrukerModell;
     lukkModal: () => void;
     variant?: 'secondary' | 'tertiary';
+    bekreftelsesmeldingBredde?: string;
 }
 
-export const SlettHuskelappKnapp = ({bruker, lukkModal, variant = 'secondary'}: SlettHuskelappKnappProps) => {
+export const SlettHuskelappKnapp = ({
+    bruker,
+    lukkModal,
+    variant = 'secondary',
+    bekreftelsesmeldingBredde = '14rem'
+}: SlettHuskelappKnappProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
@@ -28,13 +34,13 @@ export const SlettHuskelappKnapp = ({bruker, lukkModal, variant = 'secondary'}: 
         <>
             <KnappMedBekreftHandling
                 handlingsknapptekst="Slett"
-                variant="secondary"
+                variant={variant}
                 ikon={<TrashIcon aria-hidden={true} />}
                 bekreftelsesmelding={{
                     overskrift: 'Er du sikker på at du vil slette huskelappen?',
                     beskrivelse:
                         'Huskelappen slettes, men kan utleveres ved innsynsbegjæring innenfor oppfølgingsperioden.',
-                    width: '14rem'
+                    width: bekreftelsesmeldingBredde
                 }}
                 bekreftknapp={{
                     tekst: 'Ja, slett huskelapp',
