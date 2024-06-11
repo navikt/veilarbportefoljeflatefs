@@ -112,22 +112,20 @@ export const RedigerHuskelappModal = ({
                     Avbryt
                 </Button>
                 {harArbeidsliste && (
-                    <>
-                        <KnappMedBekreftHandling
-                            handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
-                            bekreftelsesmelding={{
-                                overskrift: 'Er du sikker på at du vil slette eksisterende innhold?',
-                                beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne brukeren.'
-                            }}
-                            bekreftknapp={{
-                                tekst: 'Ja, slett arbeidslista',
-                                onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
-                                onClickThen: () => lukkRedigeringOgVisningsmodaler()
-                            }}
-                            feilmelding="Noe gikk galt ved sletting av arbeidslista."
-                            ikon={<TrashIcon aria-hidden />}
-                        />
-                    </>
+                    <KnappMedBekreftHandling
+                        handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
+                        bekreftelsesmelding={{
+                            overskrift: 'Er du sikker på at du vil slette eksisterende innhold?',
+                            beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne brukeren.'
+                        }}
+                        bekreftknapp={{
+                            tekst: 'Ja, slett arbeidslista',
+                            onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
+                            onClickThen: () => lukkRedigeringOgVisningsmodaler()
+                        }}
+                        feilmelding="Noe gikk galt ved sletting av arbeidslista."
+                        icon={<TrashIcon aria-hidden />}
+                    />
                 )}
                 {!harArbeidsliste && harHuskelapp && (
                     <SlettHuskelappKnapp

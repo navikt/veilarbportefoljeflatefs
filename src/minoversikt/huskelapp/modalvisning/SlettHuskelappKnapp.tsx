@@ -40,7 +40,7 @@ export const SlettHuskelappKnapp = ({
             handlingsknapptekst="Slett"
             variant={variant}
             size={size}
-            ikon={<TrashIcon aria-hidden={true} />}
+            icon={<TrashIcon aria-hidden={true} />}
             bekreftelsesmelding={{
                 overskrift: 'Er du sikker på at du vil slette huskelappen?',
                 beskrivelse:

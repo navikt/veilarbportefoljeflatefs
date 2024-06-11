@@ -6,7 +6,7 @@ interface KnappMedBekreftHandlingProps {
     handlingsknapptekst: string;
     variant?: 'secondary' | 'tertiary';
     size?: 'small' | 'xsmall';
-    ikon?: React.ReactNode;
+    icon?: React.ReactNode;
     bekreftelsesmelding: {
         overskrift: string;
         overskriftsnivaa?: '1' | '2' | '3' | '4' | '5' | '6';
@@ -25,7 +25,7 @@ export const KnappMedBekreftHandling = ({
     handlingsknapptekst,
     variant = 'tertiary',
     size = 'small',
-    ikon,
+    icon,
     bekreftelsesmelding,
     bekreftknapp,
     feilmelding
@@ -61,7 +61,7 @@ export const KnappMedBekreftHandling = ({
                     }}
                     size={size}
                     variant={variant}
-                    icon={ikon}
+                    icon={icon}
                 >
                     {handlingsknapptekst}
                 </Button>
@@ -69,10 +69,7 @@ export const KnappMedBekreftHandling = ({
 
             {visSlettebekreftelse && (
                 <div className="bekreft-handling" style={{width: bekreftelsesmelding.width}}>
-                    <Heading
-                        size="xsmall"
-                        level={bekreftelsesmelding.overskriftsnivaa ? bekreftelsesmelding.overskriftsnivaa : '3'}
-                    >
+                    <Heading size="xsmall" level={bekreftelsesmelding.overskriftsnivaa || '3'}>
                         {bekreftelsesmelding.overskrift}
                     </Heading>
                     <BodyShort size="small">{bekreftelsesmelding.beskrivelse}</BodyShort>
