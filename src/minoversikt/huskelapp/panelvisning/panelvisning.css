@@ -29,5 +29,6 @@
 .huskelapp-panelvisning__handlingsknapper {
     display: flex;
     justify-content: flex-end;
+    align-items: end;
     gap: 1rem;
 }

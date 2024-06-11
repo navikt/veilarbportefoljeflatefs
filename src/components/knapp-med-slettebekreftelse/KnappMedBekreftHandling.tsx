@@ -5,6 +5,7 @@ import './knapp-med-bekreft-handling.css';
 interface KnappMedBekreftHandlingProps {
     handlingsknapptekst: string;
     variant?: 'secondary' | 'tertiary';
+    size?: 'small' | 'xsmall';
     ikon?: React.ReactNode;
     bekreftelsesmelding: {
         overskrift: string;
@@ -22,6 +23,7 @@ interface KnappMedBekreftHandlingProps {
 export const KnappMedBekreftHandling = ({
     handlingsknapptekst,
     variant = 'tertiary',
+    size = 'small',
     ikon,
     bekreftelsesmelding,
     bekreftknapp,
@@ -56,7 +58,7 @@ export const KnappMedBekreftHandling = ({
                         setVisSlettebekreftelse(true);
                         setError(false);
                     }}
-                    size="small"
+                    size={size}
                     variant={variant}
                     icon={ikon}
                 >

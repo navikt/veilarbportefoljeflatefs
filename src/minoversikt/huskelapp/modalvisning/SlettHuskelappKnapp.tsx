@@ -12,8 +12,9 @@ import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekre
 
 interface SlettHuskelappKnappProps {
     bruker: BrukerModell;
-    lukkModal: () => void;
+    lukkModal?: () => void;
     variant?: 'secondary' | 'tertiary';
+    size?: 'small' | 'xsmall';
     bekreftelsesmeldingBredde?: string;
 }
 
@@ -21,6 +22,7 @@ export const SlettHuskelappKnapp = ({
     bruker,
     lukkModal,
     variant = 'secondary',
+    size,
     bekreftelsesmeldingBredde = '14rem'
 }: SlettHuskelappKnappProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -35,6 +37,7 @@ export const SlettHuskelappKnapp = ({
             <KnappMedBekreftHandling
                 handlingsknapptekst="Slett"
                 variant={variant}
+                size={size}
                 ikon={<TrashIcon aria-hidden={true} />}
                 bekreftelsesmelding={{
                     overskrift: 'Er du sikker på at du vil slette huskelappen?',
