@@ -9,6 +9,7 @@ interface KnappMedBekreftHandlingProps {
     ikon?: React.ReactNode;
     bekreftelsesmelding: {
         overskrift: string;
+        overskriftsnivaa?: '1' | '2' | '3' | '4' | '5' | '6';
         beskrivelse: string;
         width?: string;
     };
@@ -68,14 +69,17 @@ export const KnappMedBekreftHandling = ({
 
             {visSlettebekreftelse && (
                 <div className="bekreft-handling" style={{width: bekreftelsesmelding.width}}>
-                    <Heading size="xsmall" level="3">
+                    <Heading
+                        size="xsmall"
+                        level={bekreftelsesmelding.overskriftsnivaa ? bekreftelsesmelding.overskriftsnivaa : '3'}
+                    >
                         {bekreftelsesmelding.overskrift}
                     </Heading>
                     <BodyShort size="small">{bekreftelsesmelding.beskrivelse}</BodyShort>
                     <div className="bekreft-handling__knapper">
                         <Button
                             variant="tertiary"
-                            size="small"
+                            size={size}
                             type="button"
                             onClick={() => setVisSlettebekreftelse(false)}
                         >
@@ -84,7 +88,7 @@ export const KnappMedBekreftHandling = ({
                         <Button
                             loading={loading}
                             variant="secondary"
-                            size="small"
+                            size={size}
                             type="button"
                             onClick={bekreftHandling}
                         >

@@ -134,7 +134,7 @@ export const RedigerHuskelappModal = ({
                         bruker={bruker}
                         lukkModal={lukkRedigeringOgVisningsmodaler}
                         variant="tertiary"
-                        bekreftelsesmeldingBredde="15rem"
+                        bekreftelsesmelding={{width: '15rem', overskriftsnivaa: '2'}}
                     />
                 )}
             </Modal.Footer>

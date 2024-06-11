@@ -26,7 +26,7 @@ export const HuskelappForPanel = ({huskelapp, bruker, onEndreHuskelapp}: Props) 
             </i>
         </Detail>
         <div className="huskelapp-panelvisning__handlingsknapper">
-            <SlettHuskelappKnapp bruker={bruker} size="xsmall" />
+            <SlettHuskelappKnapp bruker={bruker} size="xsmall" bekreftelsesmelding={{overskriftsnivaa: '4'}} />
             <Button type="button" size="xsmall" variant="primary" onClick={onEndreHuskelapp}>
                 Endre
             </Button>
