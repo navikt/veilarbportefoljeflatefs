@@ -42,7 +42,7 @@ export const KnappMedBekreftHandling = ({
             .then(() => setLoading(false))
             .catch(() => setError(true))
             .then(() => setVisSlettebekreftelse(false))
-            .then(() => bekreftknapp.onClickThen && bekreftknapp.onClickThen());
+            .then(() => bekreftknapp.onClickThen?.());
     };
 
     return (
@@ -69,7 +69,7 @@ export const KnappMedBekreftHandling = ({
 
             {visSlettebekreftelse && (
                 <div className="bekreft-handling" style={{width: bekreftelsesmelding.width}}>
-                    <Heading size="xsmall" level={bekreftelsesmelding.overskriftsnivaa || '3'}>
+                    <Heading size="xsmall" level={bekreftelsesmelding.overskriftsnivaa ?? '3'}>
                         {bekreftelsesmelding.overskrift}
                     </Heading>
                     <BodyShort size="small">{bekreftelsesmelding.beskrivelse}</BodyShort>
