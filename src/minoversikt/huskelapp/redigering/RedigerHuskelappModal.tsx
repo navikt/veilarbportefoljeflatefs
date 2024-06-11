@@ -25,7 +25,7 @@ interface Props {
     huskelapp?: HuskelappModell;
     bruker: BrukerModell;
     arbeidsliste?: ArbeidslisteModell | null;
-    /** For å kunne lukke visningsmodal om huskelappen blir sletta */
+    /** For å kunne lukke visningsmodal etter at huskelappen er sletta */
     lukkVisHuskelappModal?: () => void;
 }
 
@@ -59,18 +59,22 @@ export const RedigerHuskelappModal = ({
             : null;
         try {
             if (huskelapp?.huskelappId) {
-                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
+                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId).then(
+                    lukkVisHuskelappModal
+                );
             } else {
-                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes);
+                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes).then(
+                    lukkVisHuskelappModal
+                );
             }
         } catch (error) {
             dispatch(visServerfeilModal());
         }
     }
 
-    const lukkBeggeModalerEtterSletting = () => {
+    const lukkRedigeringOgVisningsmodaler = () => {
         onModalClose();
-        /* Unngår å vise visningsmodal for huskelapp når den er sletta */
+        /* Unngår å vise visningsmodal for huskelapp etter sletting */
         lukkVisHuskelappModal && lukkVisHuskelappModal();
     };
 
@@ -106,9 +110,13 @@ export const RedigerHuskelappModal = ({
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt
                 </Button>
-                {harArbeidsliste && <SlettArbeidsliste bruker={bruker} />}
+                {harArbeidsliste && <SlettArbeidsliste bruker={bruker} lukkModal={onModalClose} />}
                 {!harArbeidsliste && harHuskelapp && (
-                    <SlettHuskelappKnapp bruker={bruker} lukkModal={lukkBeggeModalerEtterSletting} variant="tertiary" />
+                    <SlettHuskelappKnapp
+                        bruker={bruker}
+                        lukkModal={lukkRedigeringOgVisningsmodaler}
+                        variant="tertiary"
+                    />
                 )}
             </Modal.Footer>
         </Modal>
