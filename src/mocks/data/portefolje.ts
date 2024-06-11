@@ -275,7 +275,7 @@ function lagBruker(sikkerhetstiltak = []) {
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
-        brukersSituasjonSistEndret: randomDate({past: false}),
+        utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
         huskelapp
     };

@@ -645,14 +645,14 @@ function MinOversiktListeHode({
                     skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.BRUKERS_SITUASJON_SIST_ENDRET}
+                    sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BRUKERS_SITUASJON_SIST_ENDRET}
-                    tekst="Dato endret situasjon"
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
+                    tekst="Dato sist endret"
                     className="col col-xs-2"
-                    headerId="dato-endret-situasjon"
-                    skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                    headerId="dato-sist-endret-utdanning-situasjon"
+                    skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                 />
                 <SorteringHeader
                     sortering={Sorteringsfelt.HUSKELAPP_KOMMENTAR}

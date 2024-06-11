@@ -321,28 +321,19 @@ export const stillingFraNavFilter = {
 export const registreringstype = {
     ER_PERMITTERT: {label: 'Er permittert eller kommer til å bli permittert'},
     USIKKER_JOBBSITUASJON: {label: 'Er usikker på jobbsituasjonen min'},
-    MISTET_JOBBEN: {label: 'Har mistet eller kommer til å miste jobben'},
-    VIL_FORTSETTE_I_JOBB: {label: 'Har jobb og ønsker å fortsette i den jobben jeg har'},
+    HAR_BLITT_SAGT_OPP: {label: 'Jeg har blitt sagt opp av arbeidsgiver'},
     DELTIDSJOBB_VIL_MER: {label: 'Har deltidsjobb, men vil jobbe mer'},
     VIL_BYTTE_JOBB: {label: 'Har jobb, men vil bytte'},
     AKKURAT_FULLFORT_UTDANNING: {label: 'Har akkurat fullført utdanning, militærtjeneste eller annet'},
     HAR_SAGT_OPP: {label: 'Har sagt opp eller kommer til å si opp'},
     ALDRI_HATT_JOBB: {label: 'Har aldri vært i jobb'},
-    JOBB_OVER_2_AAR: {label: 'Har ikke vært i jobb de 2 siste årene'},
+    IKKE_VAERT_I_JOBB_SISTE_2_AAR: {label: 'Har ikke vært i jobb de siste 2 årene'},
+    KONKURS: {label: 'Arbeidsgiveren min er konkurs'},
+    MIDLERTIDIG_JOBB: {label: 'Jeg har fått midlertidig jobb hos en annen arbeidsgiver'},
+    NY_JOBB: {label: 'Jeg skal begynne å jobbe hos en annen arbeidsgiver'},
+    ANNET: {label: 'Ingen av situasjonene passer for meg'},
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
-
-export const endringISituasjon = {
-    OPPSIGELSE: {label: 'Jeg har blitt sagt opp av arbeidsgiver'},
-    ENDRET_PERMITTERINGSPROSENT: {label: 'Arbeidsgiver har endret permitteringen min'},
-    TILBAKE_TIL_JOBB: {label: 'Jeg skal tilbake i jobb hos min nåværende arbeidsgiver'},
-    NY_JOBB: {label: 'Jeg skal begynne å jobbe hos en annen arbeidsgiver'},
-    MIDLERTIDIG_JOBB: {label: 'Jeg har fått midlertidig jobb hos en annen arbeidsgiver'},
-    KONKURS: {label: 'Arbeidsgiveren min er konkurs'},
-    SAGT_OPP: {label: 'Jeg har sagt opp jobben min'},
-    ANNET: {label: 'Situasjonen min har endret seg, men ingen av valgene passet'}
-};
-
 export const landgruppe = {
     LANDGRUPPE_0: 'Landgruppe 0',
     LANDGRUPPE_1: 'Landgruppe 1',
@@ -476,7 +467,6 @@ const filterKonstanter = {
     ytelseAapSortering,
     manuellBrukerStatus,
     registreringstype,
-    endringISituasjon,
     arbeidslisteKategori,
     arbeidslisteKategoriGammel,
     cvJobbprofil,

@@ -15,7 +15,7 @@ interface FiltreringLabelProps {
 }
 
 function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
-    const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label).label}"` : 'Nullstill filtervalg';
+    const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label)?.label}"` : 'Nullstill filtervalg';
     const slettAlleFiltervalg = ariaLabel === 'Nullstill filtervalg';
     const buttonClassnames = classNames('filtreringlabel', {'filtreringlabel--slett-alle': slettAlleFiltervalg});
 
