@@ -31,7 +31,3 @@
     justify-content: flex-end;
     gap: 1rem;
 }
-
-.huskelapp-panelvisning__handlingsknapper > .huskelapp-panelvisning__slettknapp {
-    background: var(--a-bg-default);
-}
