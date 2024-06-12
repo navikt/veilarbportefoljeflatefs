@@ -29,11 +29,12 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
         setSkalViseRedigerHuskelappModal(true);
     }
 
-    const titletekst = bruker.huskelapp
-        ? 'Endre huskelapp'
-        : arbeidslisteAktiv
-          ? 'Migrer arbeidsliste'
-          : 'Opprett huskelapp';
+    const titletekst = () => {
+        if (bruker.huskelapp) {
+            return 'Endre huskelapp';
+        }
+        return arbeidslisteAktiv ? 'Migrer arbeidsliste' : 'Opprett huskelapp';
+    };
 
     return (
         <>
@@ -41,7 +42,7 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                 size="small"
                 variant="tertiary"
                 icon={harHuskelappEllerArbeidsliste ? <HuskelappIkon /> : <HuskelappIkonTomt />}
-                title={titletekst}
+                title={titletekst()}
                 onClick={visEllerRedigerHuskelapp}
             />
             {skalViseRedigerHuskelappModal && (
