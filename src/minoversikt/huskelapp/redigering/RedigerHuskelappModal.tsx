@@ -43,6 +43,18 @@ export const RedigerHuskelappModal = ({
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
     const harHuskelapp = !!huskelapp?.huskelappId;
 
+    const visAlertVedAvbryt = () => {
+        // eslint-disable-next-line no-console
+        console.log('før visAlertVedAvbryt', huskelapp?.kommentar, huskelapp?.frist);
+        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
+        if (!window.confirm(dialogTekst) && (huskelapp?.kommentar || huskelapp?.frist)) {
+            // eslint-disable-next-line no-console
+            console.log('i visAlertVedAvbryt', huskelapp?.kommentar, huskelapp?.frist);
+            window.confirm(dialogTekst) && onModalClose();
+        }
+        onModalClose();
+    };
+
     async function validerOgLagreHuskelapp(values, formikHelpers) {
         if (!values.frist && !values.kommentar) {
             return formikHelpers.setErrors({
@@ -108,7 +120,8 @@ export const RedigerHuskelappModal = ({
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre huskelapp og slett arbeidsliste' : 'Lagre'}
                 </Button>
-                <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
+
+                <Button size="small" variant="secondary" type="button" onClick={visAlertVedAvbryt}>
                     Avbryt
                 </Button>
                 {harArbeidsliste && (
