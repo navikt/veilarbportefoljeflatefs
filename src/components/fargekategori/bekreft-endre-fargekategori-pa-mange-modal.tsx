@@ -1,0 +1,53 @@
+import React from 'react';
+import {BodyShort, Button, Heading, List, Modal} from '@navikt/ds-react';
+import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
+import {FargekategoriModell} from '../../model-interfaces';
+import './bekreft-endre-fargekategori-pa-mange-modal.css';
+
+interface Props {
+    valgteBrukereFnrs: string[];
+    valgtFargekategori: FargekategoriModell;
+    onBekreft: () => void;
+    onAvbryt: () => void;
+}
+
+export const BekreftEndreFargekategoriPaMangeModal = ({
+    valgteBrukereFnrs,
+    valgtFargekategori,
+    onBekreft,
+    onAvbryt
+}: Props) => {
+    return (
+        <Modal
+            open={true} // Rendring styrt utanfrå
+            className="bekreft-fargekategori-pa-mange-modal"
+            closeOnBackdropClick={true}
+        >
+            <Modal.Header>
+                <Heading size="small" level="1">
+                    Er du sikker på at du vil endre kategori?
+                </Heading>
+            </Modal.Header>
+            <Modal.Body>
+                <BodyShort>
+                    Du har valgt {valgteBrukereFnrs.length} personer og kategorien{' '}
+                    {fargekategoriIkonMapper(valgtFargekategori, 'kategori-som-skal-bekreftes')}
+                </BodyShort>
+                <br />
+                <List as="ul" size="small" title="Valgte brukere:">
+                    {valgteBrukereFnrs.map(fnr => (
+                        <List.Item key={fnr}>{fnr}</List.Item>
+                    ))}
+                </List>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={onBekreft} size="small">
+                    Ja, jeg vil endre kategorier
+                </Button>
+                <Button onClick={onAvbryt} size="small" variant="secondary">
+                    Avbryt
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
+};

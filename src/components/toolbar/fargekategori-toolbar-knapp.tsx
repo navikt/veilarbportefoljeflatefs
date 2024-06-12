@@ -8,6 +8,8 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
+import {BekreftEndreFargekategoriPaMangeModal} from '../fargekategori/bekreft-endre-fargekategori-pa-mange-modal';
+import {FargekategoriModell} from '../../model-interfaces';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];
@@ -17,6 +19,7 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [openState, setOpenState] = useState(false);
+    const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
 
     return (
         <>
@@ -49,6 +52,14 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                     <b>Endre kategori for valgte brukere</b>
                 </BodyShort>
             </FargekategoriPopover>
+            {visBekreftMangeModal && (
+                <BekreftEndreFargekategoriPaMangeModal
+                    valgteBrukereFnrs={valgteBrukereFnrs}
+                    valgtFargekategori={FargekategoriModell.FARGEKATEGORI_C} // TODO få tak i den valgte fargen
+                    onBekreft={() => setVisBekreftMangeModal(false)}
+                    onAvbryt={() => setVisBekreftMangeModal(false)}
+                />
+            )}
         </>
     );
 }
