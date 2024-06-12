@@ -51,6 +51,19 @@ export const FargekategoriPopover = ({
         } else handleOppdaterFargekategori(fargekategori);
     };
 
+    const onPopoverClose = () => {
+        /* Unngå å lukke popover ved trykk på fargekategori når vi skal vise bekreft-mange-modal */
+        if (!visBekreftMangeModal) {
+            setOpenState(false);
+        }
+    };
+
+    const onBekreftHandling = (fargekategori: FargekategoriModell) => {
+        /* Lukk bekreftmodal etter at kategori er oppdatert.
+         * Om feil skal feilmelding vises i popover. */
+        handleOppdaterFargekategori(fargekategori).then(() => setVisBekreftMangeModal(false));
+    };
+
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
@@ -94,12 +107,7 @@ export const FargekategoriPopover = ({
 
     return (
         <>
-            <Popover
-                anchorEl={buttonRef.current}
-                open={openState}
-                onClose={() => setOpenState(false)}
-                placement={placement}
-            >
+            <Popover anchorEl={buttonRef.current} open={openState} onClose={onPopoverClose} placement={placement}>
                 <Popover.Content>
                     {children}
                     <FargekategoriFeilhandtering apiResponse={apiResponse}>
@@ -117,9 +125,7 @@ export const FargekategoriPopover = ({
                 <BekreftEndreFargekategoriPaMangeModal
                     valgteBrukereFnrs={fnrs}
                     valgtFargekategori={valgtFargekategori}
-                    onBekreft={() =>
-                        handleOppdaterFargekategori(valgtFargekategori).then(() => setVisBekreftMangeModal(false))
-                    }
+                    onBekreft={() => onBekreftHandling(valgtFargekategori)}
                     onAvbryt={() => setVisBekreftMangeModal(false)}
                 />
             )}
