@@ -39,9 +39,17 @@ export const FargekategoriPopover = ({
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
+    const antallFnrSomSkalGiBekreftelsesmelding = 2; // TODO Skal eigentleg vere 10, er 2 no for raskare testing
 
     const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
     const [valgtFargekategori, setValgtFargekategori] = useState<FargekategoriModell>();
+
+    const visBekreftModalEllerHandleOppdaterFargekategori = fargekategori => {
+        if (fnrs.length >= antallFnrSomSkalGiBekreftelsesmelding) {
+            setValgtFargekategori(fargekategori);
+            setVisBekreftMangeModal(true);
+        } else handleOppdaterFargekategori(fargekategori);
+    };
 
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
@@ -79,7 +87,7 @@ export const FargekategoriPopover = ({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 title={Fargekategorinavn[fargekategori]}
-                onClick={() => handleOppdaterFargekategori(fargekategori)}
+                onClick={() => visBekreftModalEllerHandleOppdaterFargekategori(fargekategori)}
             />
         );
     });
@@ -108,8 +116,10 @@ export const FargekategoriPopover = ({
             {bekreftHandling && visBekreftMangeModal && valgtFargekategori && (
                 <BekreftEndreFargekategoriPaMangeModal
                     valgteBrukereFnrs={fnrs}
-                    valgtFargekategori={valgtFargekategori} // TODO få tak i den valgte fargen
-                    onBekreft={() => setVisBekreftMangeModal(false)}
+                    valgtFargekategori={valgtFargekategori}
+                    onBekreft={() =>
+                        handleOppdaterFargekategori(valgtFargekategori).then(() => setVisBekreftMangeModal(false))
+                    }
                     onAvbryt={() => setVisBekreftMangeModal(false)}
                 />
             )}
