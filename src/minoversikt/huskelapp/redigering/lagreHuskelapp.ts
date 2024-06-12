@@ -1,4 +1,4 @@
-import {lagreHuskelappAction} from '../../../ducks/huskelapp';
+import {HUSKELAPP_LAGRE_OK, lagreHuskelappAction} from '../../../ducks/huskelapp';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall-veileder';
 import {ThunkDispatch} from 'redux-thunk';
@@ -16,7 +16,7 @@ export const lagreHuskelapp = async (
     onModalClose: () => void,
     arbeidsliste: ArbeidslisteDataModell | null
 ) => {
-    await dispatch(
+    const {type: responseAction} = await dispatch(
         lagreHuskelappAction({
             brukerFnr: bruker.fnr,
             enhetId: enhetId,
@@ -24,10 +24,12 @@ export const lagreHuskelapp = async (
             kommentar: values.kommentar
         })
     );
-    dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
-    await dispatch(leggTilStatustall('mineHuskelapper', 1));
-    if (!!arbeidsliste) {
-        await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
+    if (responseAction === HUSKELAPP_LAGRE_OK) {
+        dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
+        await dispatch(leggTilStatustall('mineHuskelapper', 1));
+        if (!!arbeidsliste) {
+            await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
+        }
+        onModalClose();
     }
-    onModalClose();
 };
