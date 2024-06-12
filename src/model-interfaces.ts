@@ -250,6 +250,16 @@ export enum FargekategoriModell {
     INGEN_KATEGORI = 'INGEN_KATEGORI'
 }
 
+export enum Fargekategorinavn {
+    FARGEKATEGORI_A = 'Blå halvsirkel',
+    FARGEKATEGORI_B = 'Grønn trekant',
+    FARGEKATEGORI_C = 'Gul sirkel',
+    FARGEKATEGORI_D = 'Lilla firkant',
+    FARGEKATEGORI_E = 'Lyseblå femkant',
+    FARGEKATEGORI_F = 'Oransje diamant',
+    INGEN_KATEGORI = 'Ingen kategori'
+}
+
 export enum KategoriModell {
     BLA = 'BLA',
     LILLA = 'LILLA',

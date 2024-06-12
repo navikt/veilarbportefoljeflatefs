@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell, Fargekategorinavn} from '../../model-interfaces';
 import {Button} from '@navikt/ds-react';
 import {FargekategoriPopover} from './fargekategori-popover';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
@@ -25,6 +25,7 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 ref={buttonRef}
+                title={(bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori') + ': endre'}
                 onClick={() => {
                     setOpenState(!openState);
                     dispatch(resetFargekategoriStateAction());
