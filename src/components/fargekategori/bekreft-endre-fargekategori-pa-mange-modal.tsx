@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BodyShort, Button, Heading, List, Modal} from '@navikt/ds-react';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {FargekategoriModell} from '../../model-interfaces';
@@ -17,6 +17,12 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
     onBekreft,
     onAvbryt
 }: Props) => {
+    const [loading, setLoading] = useState(false);
+    const onBekreftClick = () => {
+        onBekreft();
+        setLoading(true);
+    };
+
     return (
         <Modal
             open={true} // Rendring styrt utanfrå
@@ -41,7 +47,7 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
                 </List>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={onBekreft} size="small">
+                <Button onClick={onBekreftClick} size="small" loading={loading}>
                     Ja, jeg vil endre kategorier
                 </Button>
                 <Button onClick={onAvbryt} size="small" variant="secondary">
