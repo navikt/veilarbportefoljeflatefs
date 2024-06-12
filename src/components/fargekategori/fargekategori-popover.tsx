@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -12,6 +12,7 @@ import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statusta
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
+import {BekreftEndreFargekategoriPaMangeModal} from './bekreft-endre-fargekategori-pa-mange-modal';
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
@@ -20,6 +21,7 @@ interface FargekategoriPopoverProps {
     fnrs: string[];
     fargekategori?: FargekategoriModell | null;
     placement?: 'right' | 'bottom-start';
+    bekreftHandling?: boolean; // TODO gje betre namn
     children?: React.ReactNode;
 }
 
@@ -30,12 +32,17 @@ export const FargekategoriPopover = ({
     fnrs,
     fargekategori: gammelFargekategori,
     placement = 'right',
+    bekreftHandling = false,
     children
 }: FargekategoriPopoverProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
+
+    const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
+    const [valgtFargekategori, setValgtFargekategori] = useState<FargekategoriModell>();
+
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
@@ -78,24 +85,34 @@ export const FargekategoriPopover = ({
     });
 
     return (
-        <Popover
-            anchorEl={buttonRef.current}
-            open={openState}
-            onClose={() => setOpenState(false)}
-            placement={placement}
-        >
-            <Popover.Content>
-                {children}
-                <FargekategoriFeilhandtering apiResponse={apiResponse}>
-                    {fargekategoriknapper}
-                </FargekategoriFeilhandtering>
-            </Popover.Content>
-            {/* <Popover.Content>
+        <>
+            <Popover
+                anchorEl={buttonRef.current}
+                open={openState}
+                onClose={() => setOpenState(false)}
+                placement={placement}
+            >
+                <Popover.Content>
+                    {children}
+                    <FargekategoriFeilhandtering apiResponse={apiResponse}>
+                        {fargekategoriknapper}
+                    </FargekategoriFeilhandtering>
+                </Popover.Content>
+                {/* <Popover.Content>
                 Vil du endre kategori for alle markerte brukere til: "valgtikon"
                 <Button size="small">Endre</Button>
                 <Button size="small" >Avbryt</Button>
                 - Eventuelt se på fjernarbeidslistemodal
             </Popover.Content> */}
-        </Popover>
+            </Popover>
+            {bekreftHandling && visBekreftMangeModal && valgtFargekategori && (
+                <BekreftEndreFargekategoriPaMangeModal
+                    valgteBrukereFnrs={fnrs}
+                    valgtFargekategori={valgtFargekategori} // TODO få tak i den valgte fargen
+                    onBekreft={() => setVisBekreftMangeModal(false)}
+                    onAvbryt={() => setVisBekreftMangeModal(false)}
+                />
+            )}
+        </>
     );
 };
