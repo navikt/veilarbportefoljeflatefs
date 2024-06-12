@@ -39,13 +39,15 @@ export const FargekategoriPopover = ({
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
-    const antallFnrSomSkalGiBekreftelsesmelding = 2; // TODO Skal eigentleg vere 10, er 2 no for raskare testing
+
+    /** For å unngå at veileder endrar kategori på veldig mange personar med eit uhell viser vi ein bekreft-handling-modal.*/
+    const antallValgteBrukereForBekreftelsesmelding = 10;
 
     const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
     const [valgtFargekategori, setValgtFargekategori] = useState<FargekategoriModell>();
 
     const visBekreftModalEllerHandleOppdaterFargekategori = fargekategori => {
-        if (fnrs.length >= antallFnrSomSkalGiBekreftelsesmelding) {
+        if (fnrs.length >= antallValgteBrukereForBekreftelsesmelding) {
             setValgtFargekategori(fargekategori);
             setVisBekreftMangeModal(true);
         } else handleOppdaterFargekategori(fargekategori);
