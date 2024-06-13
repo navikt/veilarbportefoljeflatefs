@@ -44,7 +44,7 @@ export const SlettHuskelappKnapp = ({
             bekreftelsesmelding={{
                 overskrift: 'Er du sikker på at du vil slette huskelappen?',
                 beskrivelse:
-                    'Huskelappen slettes, men kan utleveres hvis personen ber om innsyn i denne oppfølgingsperioden.',
+                    'Huskelappen slettes, men kan utleveres hvis personen ber om innsyn i løpet av denne oppfølgingsperioden.',
                 width: bekreftelsesmelding?.width ?? '14rem',
                 overskriftsnivaa: bekreftelsesmelding?.overskriftsnivaa
             }}
