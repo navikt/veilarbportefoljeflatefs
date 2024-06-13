@@ -1,9 +1,11 @@
 .veilarbportefoljeflatefs .minArbeidsliste__tittel {
     margin: 1rem 0 0.5rem;
 }
+.veilarbportefoljeflatefs #minArbeidsliste__alert {
+    margin: var(--a-spacing-2) 0;
+}
 .veilarbportefoljeflatefs .minArbeidsliste__kategori-checkboxwrapper {
-    margin: 0 0 0 1.5rem;
-    padding-bottom: 0;
+    padding: 0 0 0 1.5rem;
 }
 .veilarbportefoljeflatefs .arbeidslistetekst {
     display: flex;
