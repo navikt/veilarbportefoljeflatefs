@@ -1,17 +1,32 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
-import {BrukerModell, HuskelappModell} from '../../model-interfaces';
+import {BrukerModell, HuskelappModell, VeilederModell} from '../../model-interfaces';
 import {RedigerHuskelappModal} from './redigering/RedigerHuskelappModal';
 import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/Huskelappikon_stiplet.svg';
 import {HuskelappModal} from './modalvisning/HuskelappModal';
+import {OrNothing} from '../../utils/types/types';
+import './huskelapp-inngang.css';
 
-export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
+interface Props {
+    bruker: BrukerModell;
+    innloggetVeileder: OrNothing<VeilederModell>;
+}
+
+export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
     const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
     const [skalViseHuskelappModal, setSkalViseHuskelappModal] = useState<boolean>(false);
 
     const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
     const harHuskelappEllerArbeidsliste = !!bruker.huskelapp || arbeidslisteAktiv;
+
+    if (bruker.veilederId != innloggetVeileder && !harHuskelappEllerArbeidsliste) {
+        return (
+            <div className="veileder-kan-ikke-opprette-huskelapp">
+                <HuskelappIkonTomt fontSize="1.5rem" title="Ingen huskelapp" />
+            </div>
+        );
+    }
 
     function visEllerRedigerHuskelapp() {
         bruker.huskelapp ? setSkalViseHuskelappModal(true) : setSkalViseRedigerHuskelappModal(true);

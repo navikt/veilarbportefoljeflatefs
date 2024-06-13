@@ -21,8 +21,8 @@ import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
-import './minoversikt.css';
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
+import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -125,7 +125,7 @@ function MinoversiktBrukerPanel({
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
                         {bruker.fnr ? (
-                            <HuskelappIkonInngang bruker={bruker} />
+                            <HuskelappIkonInngang bruker={bruker} innloggetVeileder={innloggetVeileder}/>
                         ) : (
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
