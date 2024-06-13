@@ -10,6 +10,7 @@ interface Props {
     huskelapp?: HuskelappModell;
     onSubmit: (values, formikHelpers) => Promise<any>;
     harArbeidsliste: boolean;
+    //   formIsDirty: boolean;
 }
 
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
@@ -24,10 +25,17 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                 validateOnBlur={false}
                 onSubmit={onSubmit}
             >
-                <Form id="rediger-huskelapp-skjema" className="ny-huskelapp-form">
-                    <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
-                    <FormikDatoVelger name="frist" />
-                </Form>
+                {formikProps => {
+                    //               formIsDirty = formikProps.dirty;
+                    // eslint-disable-next-line no-console
+                    console.log('formikProps.dirty: ', formikProps.dirty);
+                    return (
+                        <Form id="rediger-huskelapp-skjema" className="ny-huskelapp-form">
+                            <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
+                            <FormikDatoVelger name="frist" />
+                        </Form>
+                    );
+                }}
             </Formik>
             <HuskelappInfoAlert />
         </div>

@@ -28,6 +28,7 @@ interface Props {
     arbeidsliste?: ArbeidslisteModell | null;
     /** For å kunne lukke visningsmodal etter at huskelappen er sletta */
     lukkVisHuskelappModal?: () => void;
+    //   formikDirty?: boolean;
 }
 
 export const RedigerHuskelappModal = ({
@@ -37,19 +38,32 @@ export const RedigerHuskelappModal = ({
     bruker,
     arbeidsliste,
     lukkVisHuskelappModal
+    //    formikDirty
 }: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
     const harHuskelapp = !!huskelapp?.huskelappId;
-
+    //   const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
     const visAlertVedAvbryt = () => {
         // eslint-disable-next-line no-console
-        console.log('før visAlertVedAvbryt', huskelapp?.kommentar, huskelapp?.frist);
-        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
-        if (!window.confirm(dialogTekst) && (huskelapp?.kommentar || huskelapp?.frist)) {
+        const huskelappEndret = (): Boolean => {
+            return !!(huskelapp?.kommentar || huskelapp?.frist);
+        };
+        // eslint-disable-next-line no-console
+        console.log('før visAlertVedAvbryt, huskelappEndret: ', huskelappEndret());
+        /*    if (!huskelappEndret()) {
+                onModalClose();
+                return;
+            }
+            
+         */
+        const dialogTekst =
+            'Melding fra visAlertvedAvbryt: Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
+        //    if (!window.confirm(dialogTekst) && huskelappEndret())  {
+        if (!window.confirm(dialogTekst)) {
             // eslint-disable-next-line no-console
-            console.log('i visAlertVedAvbryt', huskelapp?.kommentar, huskelapp?.frist);
+            console.log('i visAlertVedAvbryt, huskelapp: ', huskelapp?.kommentar, huskelapp?.frist);
             window.confirm(dialogTekst) && onModalClose();
         }
         onModalClose();
@@ -114,6 +128,7 @@ export const RedigerHuskelappModal = ({
                     huskelapp={huskelapp}
                     onSubmit={validerOgLagreHuskelapp}
                     harArbeidsliste={harArbeidsliste}
+                    //                   setFormIsDirty={() => setFormIsDirty(formIsDirty)}
                 />
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
