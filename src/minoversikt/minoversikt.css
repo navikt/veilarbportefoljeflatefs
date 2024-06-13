@@ -54,3 +54,11 @@
     margin-left: 0.5rem;
     margin-right: 1.125rem;
 }
+
+.veilarbportefoljeflatefs .tomt-huskelapp-eller-fargekategori-felt {
+    margin-left: 0.5rem;
+    margin-right: 1.125rem;
+    width: calc(19 / 16 * 1rem);
+    height: calc(19 / 16 * 1rem);
+    display: block;
+}
