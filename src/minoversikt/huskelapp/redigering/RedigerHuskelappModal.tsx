@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -44,7 +44,7 @@ export const RedigerHuskelappModal = ({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
     const harHuskelapp = !!huskelapp?.huskelappId;
-    //   const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
+    const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
     const visAlertVedAvbryt = () => {
         // eslint-disable-next-line no-console
         const huskelappEndret = (): Boolean => {
@@ -106,6 +106,9 @@ export const RedigerHuskelappModal = ({
         lukkVisHuskelappModal && lukkVisHuskelappModal();
     };
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Modal
             header={{
@@ -130,6 +133,7 @@ export const RedigerHuskelappModal = ({
                     onSubmit={validerOgLagreHuskelapp}
                     harArbeidsliste={harArbeidsliste}
                     //                   setFormIsDirty={() => setFormIsDirty(formIsDirty)}
+                    setFormIsDirty={setFormIsDirty}
                 />
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
