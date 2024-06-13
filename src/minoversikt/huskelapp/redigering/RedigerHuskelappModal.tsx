@@ -89,7 +89,7 @@ export const RedigerHuskelappModal = ({
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
-            closeOnBackdropClick={true}
+            closeOnBackdropClick={false} // TODO sett til true når vi har avbryt-bekreftelse om ein har skrive tekst i felta
         >
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
