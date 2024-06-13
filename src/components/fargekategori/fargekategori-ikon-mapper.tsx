@@ -8,23 +8,27 @@ import {ReactComponent as FargekategoriIkonLyseblaFemkant} from '../ikoner/farge
 import {ReactComponent as FargekategoriIkonOransjeDiamant} from '../ikoner/fargekategorier/Fargekategoriikon_oransje_diamant.svg';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet.svg';
 
-const fargekategoriIkonMapper = (fargekategori: FargekategoriModell | null, ikonClassName: string = '') => {
+const fargekategoriIkonMapper = (
+    fargekategori: FargekategoriModell | null,
+    ikonClassName: string = '',
+    ikonTitle?: string
+) => {
     switch (fargekategori) {
         case FargekategoriModell.FARGEKATEGORI_A:
-            return <FargekategoriIkonBlaHalvsirkel className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonBlaHalvsirkel className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.FARGEKATEGORI_B:
-            return <FargekategoriIkonGronnTrekant className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonGronnTrekant className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.FARGEKATEGORI_C:
-            return <FargekategoriIkonGulSirkel className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonGulSirkel className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.FARGEKATEGORI_D:
-            return <FargekategoriIkonLillaFirkant className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonLillaFirkant className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.FARGEKATEGORI_E:
-            return <FargekategoriIkonLyseblaFemkant className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonLyseblaFemkant className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.FARGEKATEGORI_F:
-            return <FargekategoriIkonOransjeDiamant className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonOransjeDiamant className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.INGEN_KATEGORI:
         case null:
-            return <FargekategoriIkonTomtBokmerke className={ikonClassName} fontSize="1.5rem" />;
+            return <FargekategoriIkonTomtBokmerke className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
     }
 };
 

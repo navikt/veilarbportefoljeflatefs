@@ -144,8 +144,8 @@ export const RedigerHuskelappModal = ({
                     <KnappMedBekreftHandling
                         handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
                         bekreftelsesmelding={{
-                            overskrift: 'Er du sikker på at du vil slette eksisterende innhold?',
-                            beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne brukeren.'
+                            overskrift: 'Er du sikker på at du vil slette gammel arbeidsliste?',
+                            beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne personen.'
                         }}
                         bekreftknapp={{
                             tekst: 'Ja, slett arbeidslista',

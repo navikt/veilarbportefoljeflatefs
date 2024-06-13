@@ -2,7 +2,7 @@ import {doThenDispatch, STATUS} from './utils';
 import {endreHuskelapp, lagreHuskelapp, slettHuskelapp} from '../middleware/api';
 
 // Actions
-const HUSKELAPP_LAGRE_OK = 'veilarbportefolje/lagre_huskelapp/OK';
+export const HUSKELAPP_LAGRE_OK = 'veilarbportefolje/lagre_huskelapp/OK';
 const HUSKELAPP_LAGRE_FEILET = 'veilarbportefolje/lagre_huskelapp/FEILET';
 const HUSKELAPP_LAGRE_PENDING = 'veilarbportefolje/lagre_huskelapp/PENDING';
 

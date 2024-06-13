@@ -15,7 +15,7 @@ import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arb
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {Alert, Bleed, BodyShort, Label, Link} from '@navikt/ds-react';
+import {Alert, Bleed, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import './arbeidsliste.css';
 
@@ -41,16 +41,16 @@ function FilterStatusMinArbeidsliste({
                 {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
             </Label>
             {erHuskelappFeatureTogglePaa && (
-                <Alert variant={'info'} size="small">
-                    {/*TODO 21.03.2024: Bruk riktig lenke*/}
-                    <Link href="">
-                        Om endringer i arbeidslista (Navet)
-                        <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
+                <Alert variant="info" size="small" id="minArbeidsliste__alert">
+                    <Link
+                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
+                        target="_blank"
+                        rel="noopener"
+                        inlineText
+                    >
+                        Oppdatert info om personvern, sletting og innsyn for huskelapp
+                        <ExternalLinkIcon title="Ekstern lenke" />
                     </Link>
-                    <BodyShort>
-                        {/*TODO 21.03.2024: Bruk riktig dato*/}
-                        Gamle arbeidslister blir slettet <b>09.0x.2024</b>.
-                    </BodyShort>
                 </Alert>
             )}
             <BarInputRadio
