@@ -29,13 +29,21 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
         setSkalViseRedigerHuskelappModal(true);
     }
 
+    const titletekst = () => {
+        if (bruker.huskelapp) {
+            return 'Endre huskelapp';
+        }
+        return arbeidslisteAktiv ? 'Migrer arbeidsliste' : 'Opprett huskelapp';
+    };
+
     return (
         <>
             <Button
                 size="small"
                 variant="tertiary"
-                onClick={visEllerRedigerHuskelapp}
                 icon={harHuskelappEllerArbeidsliste ? <HuskelappIkon /> : <HuskelappIkonTomt />}
+                title={titletekst()}
+                onClick={visEllerRedigerHuskelapp}
             />
             {skalViseRedigerHuskelappModal && (
                 <RedigerHuskelappModal

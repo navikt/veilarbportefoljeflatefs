@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {FARGEKATEGORI_OPPDATER_OK, oppdaterFargekategoriAction} from '../../ducks/fargekategori';
-import {FargekategoriDataModell, FargekategoriModell} from '../../model-interfaces';
+import {FargekategoriDataModell, FargekategoriModell, Fargekategorinavn} from '../../model-interfaces';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {Button, Popover} from '@navikt/ds-react';
 import {FargekategoriFeilhandtering} from './FargekategoriFeilhandtering';
@@ -71,6 +71,7 @@ export const FargekategoriPopover = ({
                 size="small"
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
+                title={Fargekategorinavn[fargekategori]}
                 onClick={() => handleOppdaterFargekategori(fargekategori)}
             />
         );
