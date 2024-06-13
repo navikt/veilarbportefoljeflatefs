@@ -64,7 +64,8 @@ export const RedigerHuskelappModal = ({
         if (!window.confirm(dialogTekst)) {
             // eslint-disable-next-line no-console
             console.log('i visAlertVedAvbryt, huskelapp: ', huskelapp?.kommentar, huskelapp?.frist);
-            window.confirm(dialogTekst) && onModalClose();
+            //         window.confirm(dialogTekst) && onModalClose();
+            onModalClose();
         }
         onModalClose();
     };
@@ -114,7 +115,7 @@ export const RedigerHuskelappModal = ({
             }}
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
-            onClose={onModalClose}
+            onClose={visAlertVedAvbryt}
             closeOnBackdropClick={true}
         >
             <Modal.Body className="rediger-huskelapp-modal__body">
