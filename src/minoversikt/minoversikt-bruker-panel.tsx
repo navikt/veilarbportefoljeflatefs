@@ -22,6 +22,7 @@ import FargekategoriTabellradKnapp from '../components/fargekategori/fargekatego
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
 import './minoversikt.css';
+import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
 
 interface MinOversiktBrukerPanelProps {
     bruker: BrukerModell;
@@ -118,8 +119,16 @@ function MinoversiktBrukerPanel({
                 )}
                 {erHuskelappFeatureTogglePa && (
                     <div className="brukerliste__minoversikt-ikonknapper">
-                        <FargekategoriTabellradKnapp bruker={bruker} />
-                        <HuskelappIkonInngang bruker={bruker} />
+                        {bruker.fnr ? (
+                            <FargekategoriTabellradKnapp bruker={bruker} />
+                        ) : (
+                            <TomtHuskelappEllerFargekategoriFelt />
+                        )}
+                        {bruker.fnr ? (
+                            <HuskelappIkonInngang bruker={bruker} />
+                        ) : (
+                            <TomtHuskelappEllerFargekategoriFelt />
+                        )}
                     </div>
                 )}
                 <MinOversiktKolonner
