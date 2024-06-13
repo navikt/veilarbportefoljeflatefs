@@ -16,7 +16,7 @@ interface FargekategoriPopoverKnappProps {
 export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const [openState, setOpenState] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     return (
         <>
@@ -27,15 +27,15 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
                 ref={buttonRef}
                 title={(bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori') + ': endre'}
                 onClick={() => {
-                    setOpenState(!openState);
+                    setPopoverOpen(!popoverOpen);
                     dispatch(resetFargekategoriStateAction());
                 }}
                 className="fargekategori-tabellrad-knapp"
             />
             <FargekategoriPopover
                 buttonRef={buttonRef}
-                openState={openState}
-                setOpenState={setOpenState}
+                popoverOpen={popoverOpen}
+                setPopoverOpen={setPopoverOpen}
                 valgteBrukereFnrs={[bruker.fnr]}
                 fargekategori={bruker.fargekategori}
             />

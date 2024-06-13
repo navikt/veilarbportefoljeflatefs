@@ -16,8 +16,8 @@ import {BekreftEndreFargekategoriPaMangeModal} from './bekreft-endre-fargekatego
 
 interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
-    openState: boolean;
-    setOpenState: (openState: boolean) => void;
+    popoverOpen: boolean;
+    setPopoverOpen: (openState: boolean) => void;
     valgteBrukereFnrs: string[];
     fargekategori?: FargekategoriModell | null;
     placement?: 'right' | 'bottom-start';
@@ -27,8 +27,8 @@ interface FargekategoriPopoverProps {
 
 export const FargekategoriPopover = ({
     buttonRef,
-    openState,
-    setOpenState,
+    popoverOpen,
+    setPopoverOpen,
     valgteBrukereFnrs,
     fargekategori: gammelFargekategori,
     placement = 'right',
@@ -43,7 +43,7 @@ export const FargekategoriPopover = ({
     const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
     const [valgtFargekategori, setValgtFargekategori] = useState<FargekategoriModell>();
 
-    const visBekreftModalEllerHandleOppdaterFargekategori = fargekategori => {
+    const visBekreftMangeModalEllerHandleOppdaterFargekategori = fargekategori => {
         if (valgteBrukereFnrs.length >= 10) {
             setValgtFargekategori(fargekategori);
             setVisBekreftMangeModal(true);
@@ -53,7 +53,7 @@ export const FargekategoriPopover = ({
     const onPopoverClose = () => {
         /* Unngå å lukke popover ved trykk på fargekategori når vi skal vise bekreft-mange-modal */
         if (!visBekreftMangeModal) {
-            setOpenState(false);
+            setPopoverOpen(false);
         }
     };
 
@@ -87,7 +87,7 @@ export const FargekategoriPopover = ({
                 await delay(500);
                 dispatch(hentStatustallForVeileder(enhet, veilederIdent));
             }
-            setOpenState(false);
+            setPopoverOpen(false);
         }
     };
 
@@ -99,14 +99,14 @@ export const FargekategoriPopover = ({
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(fargekategori)}
                 title={Fargekategorinavn[fargekategori]}
-                onClick={() => visBekreftModalEllerHandleOppdaterFargekategori(fargekategori)}
+                onClick={() => visBekreftMangeModalEllerHandleOppdaterFargekategori(fargekategori)}
             />
         );
     });
 
     return (
         <>
-            <Popover anchorEl={buttonRef.current} open={openState} onClose={onPopoverClose} placement={placement}>
+            <Popover anchorEl={buttonRef.current} open={popoverOpen} onClose={onPopoverClose} placement={placement}>
                 <Popover.Content>
                     {children}
                     <FargekategoriFeilhandtering apiResponse={apiResponse}>
