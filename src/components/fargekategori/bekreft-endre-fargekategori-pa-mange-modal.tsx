@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {BodyShort, Button, Heading, List, Modal} from '@navikt/ds-react';
+import {FargekategoriModell, Fargekategorinavn} from '../../model-interfaces';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {FargekategoriModell} from '../../model-interfaces';
 import './bekreft-endre-fargekategori-pa-mange-modal.css';
 
 interface Props {
@@ -38,7 +38,11 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
             <Modal.Body>
                 <BodyShort spacing>
                     Du har valgt {valgteBrukereFnrs.length} personer og kategorien{' '}
-                    {fargekategoriIkonMapper(valgtFargekategori, 'kategori-som-skal-bekreftes')}
+                    {fargekategoriIkonMapper(
+                        valgtFargekategori,
+                        'kategori-som-skal-bekreftes',
+                        Fargekategorinavn[valgtFargekategori]
+                    )}
                 </BodyShort>
                 <List as="ul" size="small" title="Valgte brukere:">
                     {valgteBrukereFnrs.map(fnr => (
