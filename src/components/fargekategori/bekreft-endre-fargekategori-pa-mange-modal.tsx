@@ -27,6 +27,7 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
         <Modal
             open={true} // Rendring styrt utanfrå
             className="bekreft-fargekategori-pa-mange-modal"
+            onClose={onAvbryt}
             closeOnBackdropClick={true}
         >
             <Modal.Header>
