@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {tildelVeileder} from '../../../ducks/portefolje';
-import {VeilederModell} from '../../../model-interfaces';
+import {BrukerModell, VeilederModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
 import '../../toolbar/toolbar.css';
 import SokFilter from '../../sok-veiledere/sok-filter';
@@ -21,6 +21,15 @@ interface TildelVeilederProps {
     closeInput: () => void;
 }
 
+const fjernduplikatOgMapTilBrukerFnr = (brukereSomTildeles: BrukerModell[]) =>
+    brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
+        if (!arrayUtenDuplikater.some(b => b.brukerFnr === bruker.fnr))
+            arrayUtenDuplikater.push({
+                brukerFnr: bruker.fnr
+            });
+        return arrayUtenDuplikater;
+    }, []);
+
 function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
@@ -31,7 +40,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     >([]);
     const [tilordningerBrukereArbeidslisteBlirIkkeSlettet, setTilordningerBrukereArbeidslisteBlirIkkeSlettet] =
         useState<{fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]>([]);
-    const [fnrArbeidslisteBlirSlettet, setFnrArbeidslisteBlirSlettet] = useState<Fnr[]>([]);
+    const [fnrArbeidslisteHuskelappEllerKategoriBlirSlettet, setFnrArbeidslisteHuskelappEllerKategoriBlirSlettet] =
+        useState<Fnr[]>([]);
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
@@ -85,13 +95,33 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                     bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
             );
 
-            setFnrArbeidslisteBlirSlettet(
-                fnrBrukereArbeidslisteVilBliSlettet.map(bruker => ({
-                    brukerFnr: bruker.fnr
-                }))
+            const fnrBrukereHuskelappVilBliSlettet = valgteBrukere.filter(
+                bruker =>
+                    !!bruker.huskelapp &&
+                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
+                    bruker.huskelapp.enhetId !== null &&
+                    bruker.huskelapp.enhetId !== enhet
             );
 
-            if (fnrBrukereArbeidslisteVilBliSlettet.length > 0) {
+            const fnrBrukereKategoriVilBliSlettet = valgteBrukere.filter(
+                bruker =>
+                    bruker.fargekategori &&
+                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
+                    bruker.fargekategoriEnhetId !== null &&
+                    bruker.fargekategoriEnhetId !== enhet
+            );
+
+            const fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet = [
+                ...fnrBrukereHuskelappVilBliSlettet,
+                ...fnrBrukereArbeidslisteVilBliSlettet,
+                ...fnrBrukereKategoriVilBliSlettet
+            ];
+
+            setFnrArbeidslisteHuskelappEllerKategoriBlirSlettet(
+                fjernduplikatOgMapTilBrukerFnr(fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet)
+            );
+
+            if (fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet.length > 0) {
                 trackAmplitude(
                     {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av arbeidsliste'}},
                     {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
@@ -116,18 +146,18 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             >
                 <Modal.Header>
                     <Heading size="medium" level="2">
-                        Arbeidslistenotat blir slettet
+                        Arbeidslistenotat, huskelapp og kategori blir slettet
                     </Heading>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
                         <BodyShort size="medium">
-                            Arbeidslistenotat for følgende brukere ble opprettet på en annen enhet, og vil bli slettet
-                            ved tildeling av ny veileder:
+                            Arbeidslistenotat, huskelapp og kategori for følgende brukere ble opprettet på en annen
+                            enhet, og vil bli slettet ved tildeling av ny veileder:
                         </BodyShort>
-                        <FnrList listeMedFnr={fnrArbeidslisteBlirSlettet} />
+                        <FnrList listeMedFnr={fnrArbeidslisteHuskelappEllerKategoriBlirSlettet} />
                         <BodyShort size="medium" className="sporsmal-likevel-tidele">
-                            Ønsker du likevel å tildele veilederen til disse brukerne?
+                            Ønsker du likevel å tildele veilederen til følgende bruker(e)?
                         </BodyShort>
                     </div>
                     <div className="sletting-arbeidslista-knapp-wrapper">

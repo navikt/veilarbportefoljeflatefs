@@ -192,7 +192,8 @@ const lagHuskelapp = fnr => {
         huskelappId: lagOverskrift(),
         brukerFnr: fnr,
         kommentar: lagOverskrift(),
-        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
+        enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234'
     };
 };
 
@@ -277,6 +278,7 @@ function lagBruker(sikkerhetstiltak = []) {
         barnUnder18AarData: hentBarnUnder18Aar(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
+        fargekategoriEnhetId: '1234',
         huskelapp
     };
 }
