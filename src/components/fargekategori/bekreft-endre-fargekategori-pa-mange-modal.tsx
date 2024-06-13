@@ -35,11 +35,10 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
                 </Heading>
             </Modal.Header>
             <Modal.Body>
-                <BodyShort>
+                <BodyShort spacing>
                     Du har valgt {valgteBrukereFnrs.length} personer og kategorien{' '}
                     {fargekategoriIkonMapper(valgtFargekategori, 'kategori-som-skal-bekreftes')}
                 </BodyShort>
-                <br />
                 <List as="ul" size="small" title="Valgte brukere:">
                     {valgteBrukereFnrs.map(fnr => (
                         <List.Item key={fnr}>{fnr}</List.Item>

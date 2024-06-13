@@ -39,12 +39,12 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                 Fargekategori
             </Button>
             <FargekategoriPopover
-                fnrs={valgteBrukereFnrs}
+                valgteBrukereFnrs={valgteBrukereFnrs}
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}
                 placement="bottom-start"
-                bekreftHandling={true}
+                skalBekrefteFlereEnn10={true}
             >
                 <BodyShort size="small" spacing>
                     <b>Endre kategori for valgte brukere</b>

@@ -36,7 +36,7 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
                 buttonRef={buttonRef}
                 openState={openState}
                 setOpenState={setOpenState}
-                fnrs={[bruker.fnr]}
+                valgteBrukereFnrs={[bruker.fnr]}
                 fargekategori={bruker.fargekategori}
             />
         </>

@@ -18,10 +18,10 @@ interface FargekategoriPopoverProps {
     buttonRef: React.RefObject<HTMLButtonElement>;
     openState: boolean;
     setOpenState: (openState: boolean) => void;
-    fnrs: string[];
+    valgteBrukereFnrs: string[];
     fargekategori?: FargekategoriModell | null;
     placement?: 'right' | 'bottom-start';
-    bekreftHandling?: boolean; // TODO gje betre namn
+    skalBekrefteFlereEnn10?: boolean;
     children?: React.ReactNode;
 }
 
@@ -29,10 +29,10 @@ export const FargekategoriPopover = ({
     buttonRef,
     openState,
     setOpenState,
-    fnrs,
+    valgteBrukereFnrs,
     fargekategori: gammelFargekategori,
     placement = 'right',
-    bekreftHandling = false,
+    skalBekrefteFlereEnn10 = false,
     children
 }: FargekategoriPopoverProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
@@ -40,14 +40,11 @@ export const FargekategoriPopover = ({
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
 
-    /** For å unngå at veileder endrar kategori på veldig mange personar med eit uhell viser vi ein bekreft-handling-modal.*/
-    const antallValgteBrukereForBekreftelsesmelding = 10;
-
     const [visBekreftMangeModal, setVisBekreftMangeModal] = useState(false);
     const [valgtFargekategori, setValgtFargekategori] = useState<FargekategoriModell>();
 
     const visBekreftModalEllerHandleOppdaterFargekategori = fargekategori => {
-        if (fnrs.length >= antallValgteBrukereForBekreftelsesmelding) {
+        if (valgteBrukereFnrs.length >= 10) {
             setValgtFargekategori(fargekategori);
             setVisBekreftMangeModal(true);
         } else handleOppdaterFargekategori(fargekategori);
@@ -69,7 +66,7 @@ export const FargekategoriPopover = ({
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const handleOppdaterFargekategori = async (fargekategori: FargekategoriModell) => {
         const data: FargekategoriDataModell = {
-            fnr: fnrs,
+            fnr: valgteBrukereFnrs,
             fargekategoriVerdi: fargekategori
         };
 
@@ -116,16 +113,10 @@ export const FargekategoriPopover = ({
                         {fargekategoriknapper}
                     </FargekategoriFeilhandtering>
                 </Popover.Content>
-                {/* <Popover.Content>
-                Vil du endre kategori for alle markerte brukere til: "valgtikon"
-                <Button size="small">Endre</Button>
-                <Button size="small" >Avbryt</Button>
-                - Eventuelt se på fjernarbeidslistemodal
-            </Popover.Content> */}
             </Popover>
-            {bekreftHandling && visBekreftMangeModal && valgtFargekategori && (
+            {skalBekrefteFlereEnn10 && visBekreftMangeModal && valgtFargekategori && (
                 <BekreftEndreFargekategoriPaMangeModal
-                    valgteBrukereFnrs={fnrs}
+                    valgteBrukereFnrs={valgteBrukereFnrs}
                     valgtFargekategori={valgtFargekategori}
                     onBekreft={() => onBekreftHandling(valgtFargekategori)}
                     onAvbryt={() => setVisBekreftMangeModal(false)}
