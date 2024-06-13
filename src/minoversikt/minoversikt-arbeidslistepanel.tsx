@@ -65,7 +65,7 @@ export default function ArbeidslistePanel({
                                     {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
                                 {erHuskelappFeatureTogglePa ? (
-                                    <LagHuskelappInngang bruker={bruker} />
+                                    <LagHuskelappInngang bruker={bruker} innloggetVeileder={innloggetVeileder} />
                                 ) : (
                                     <ArbeidslisteModalRediger
                                         bruker={bruker}

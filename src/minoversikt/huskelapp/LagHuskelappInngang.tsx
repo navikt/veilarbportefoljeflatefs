@@ -3,9 +3,19 @@ import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
 import {RedigerHuskelappModal} from './redigering/RedigerHuskelappModal';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
+import {OrNothing} from '../../utils/types/types';
 
-export const LagHuskelappInngang = ({bruker}: {bruker: BrukerModell}) => {
+interface Props {
+    bruker: BrukerModell;
+    innloggetVeileder?: OrNothing<string>;
+}
+
+export const LagHuskelappInngang = ({bruker, innloggetVeileder}: Props) => {
     const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
+
+    if (bruker.veilederId !== innloggetVeileder) {
+        return null;
+    }
 
     const onClick = () => {
         trackAmplitude({name: 'modal åpnet', data: {tekst: 'åpnet lag eller endre huskelappmodal'}});

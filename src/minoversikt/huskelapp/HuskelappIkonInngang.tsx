@@ -20,7 +20,7 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
     const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
     const harHuskelappEllerArbeidsliste = !!bruker.huskelapp || arbeidslisteAktiv;
 
-    if (bruker.veilederId != innloggetVeileder && !harHuskelappEllerArbeidsliste) {
+    if (bruker.veilederId !== innloggetVeileder && !harHuskelappEllerArbeidsliste) {
         return (
             <div className="veileder-kan-ikke-opprette-huskelapp">
                 <HuskelappIkonTomt fontSize="1.5rem" title="Ingen huskelapp" />
