@@ -21,7 +21,7 @@ import {trackAmplitude} from '../../../amplitude/amplitude';
 
 interface ArbeidslisteModalRedigerProps {
     bruker: BrukerModell;
-    innloggetVeileder: OrNothing<string>;
+    innloggetVeilederIdent: OrNothing<string>;
     sistEndretDato: Date;
     sistEndretAv?: string;
     settMarkert: (fnr: string, markert: boolean) => void;
@@ -39,7 +39,7 @@ function ArbeidslisteModalRediger({
     sistEndretAv,
     sistEndretDato,
     settMarkert,
-    innloggetVeileder
+    innloggetVeilederIdent
 }: ArbeidslisteModalRedigerProps) {
     const arbeidslisteStatus = useSelector((state: AppState) => state.arbeidsliste.status);
     const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus === STATUS.PENDING;
@@ -101,7 +101,7 @@ function ArbeidslisteModalRediger({
                         dispatch(
                             redigerArbeidslisteAction(values, {
                                 bruker,
-                                innloggetVeileder
+                                innloggetVeilederIdent: innloggetVeilederIdent
                             })
                         );
                         trackAmplitude(
@@ -160,7 +160,7 @@ function ArbeidslisteModalRediger({
     );
 }
 
-export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, fnr, dispatch) {
+export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeilederIdent, fnr, dispatch) {
     if (!res) {
         return visServerfeilModal()(dispatch);
     }
@@ -168,7 +168,7 @@ export function oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, 
     const arbeidslisteToDispatch = Array.of({
         ...arbeidsliste,
         fnr,
-        sistEndretAv: {veilederId: innloggetVeileder},
+        sistEndretAv: {veilederId: innloggetVeilederIdent},
         endringstidspunkt: new Date().toISOString()
     });
 

@@ -51,11 +51,11 @@ export default function arbeidslisteReducer(state = initialState, action) {
 
 interface RedigerArbeidslisteAction {
     bruker: BrukerModell;
-    innloggetVeileder: OrNothing<string>;
+    innloggetVeilederIdent: OrNothing<string>;
 }
 
 // Action Creators
-export function redigerArbeidslisteAction(formData, {bruker, innloggetVeileder}: RedigerArbeidslisteAction) {
+export function redigerArbeidslisteAction(formData, {bruker, innloggetVeilederIdent}: RedigerArbeidslisteAction) {
     const arbeidsliste = {
         kommentar: formData.kommentar.length ? formData.kommentar : null,
         overskrift: formData.overskrift.length ? formData.overskrift : null,
@@ -68,7 +68,7 @@ export function redigerArbeidslisteAction(formData, {bruker, innloggetVeileder}:
             arbeidsliste,
             bruker.fnr
         )(dispatch)
-            .then(res => oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeileder, bruker.fnr, dispatch))
+            .then(res => oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeilederIdent, bruker.fnr, dispatch))
             .then(() => dispatch(skjulModal()));
 }
 
