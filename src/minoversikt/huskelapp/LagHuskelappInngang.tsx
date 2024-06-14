@@ -7,13 +7,13 @@ import {OrNothing} from '../../utils/types/types';
 
 interface Props {
     bruker: BrukerModell;
-    innloggetVeileder?: OrNothing<string>;
+    innloggetVeilederIdent?: OrNothing<string>;
 }
 
-export const LagHuskelappInngang = ({bruker, innloggetVeileder}: Props) => {
+export const LagHuskelappInngang = ({bruker, innloggetVeilederIdent}: Props) => {
     const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
 
-    if (bruker.veilederId !== innloggetVeileder) {
+    if (bruker.veilederId !== innloggetVeilederIdent) {
         return null;
     }
 

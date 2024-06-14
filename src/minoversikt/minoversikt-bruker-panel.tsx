@@ -125,7 +125,7 @@ function MinoversiktBrukerPanel({
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
                         {bruker.fnr ? (
-                            <HuskelappIkonInngang bruker={bruker} innloggetVeileder={innloggetVeileder}/>
+                            <HuskelappIkonInngang bruker={bruker} innloggetVeileder={innloggetVeileder} />
                         ) : (
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
@@ -170,7 +170,7 @@ function MinoversiktBrukerPanel({
                     <ArbeidslistePanel
                         skalVises={arbeidslisteAktiv}
                         bruker={bruker}
-                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                        innloggetVeilederIdent={innloggetVeileder && innloggetVeileder.ident}
                         settMarkert={() => {
                             settMarkert(bruker.fnr, !bruker.markert);
                         }}
