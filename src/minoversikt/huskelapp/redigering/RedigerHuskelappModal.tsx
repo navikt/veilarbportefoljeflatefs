@@ -40,7 +40,8 @@ export const RedigerHuskelappModal = ({
 }: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
+    const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
+    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
