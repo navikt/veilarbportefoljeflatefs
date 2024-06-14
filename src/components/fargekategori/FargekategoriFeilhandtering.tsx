@@ -13,7 +13,7 @@ function isString(data: string | {data: string[]; errors: string[]}): data is st
 
 const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | undefined) => {
     const ingenGikkBra = !okFnrs?.length;
-    const bareEnFeilet = errorFnrs.length == 1;
+    const bareEnFeilet = errorFnrs?.length === 1;
 
     if (ingenGikkBra) {
         if (status === 400) return `Kunne ikke oppdatere kategori. Fødselsnummer er ugyldig.`;
