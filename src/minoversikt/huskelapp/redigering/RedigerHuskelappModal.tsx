@@ -42,7 +42,8 @@ export const RedigerHuskelappModal = ({
 }: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
+    const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
+    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
     const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
     const visAlertVedAvbryt = () => {
@@ -56,7 +57,7 @@ export const RedigerHuskelappModal = ({
                 onModalClose();
                 return;
             }
-            
+
          */
         const dialogTekst =
             'Melding fra visAlertvedAvbryt: Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
@@ -106,9 +107,6 @@ export const RedigerHuskelappModal = ({
         lukkVisHuskelappModal && lukkVisHuskelappModal();
     };
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
         <Modal
             header={{
@@ -119,7 +117,7 @@ export const RedigerHuskelappModal = ({
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={visAlertVedAvbryt}
-            closeOnBackdropClick={true}
+            closeOnBackdropClick={false} // TODO sett til true når vi har avbryt-bekreftelse om ein har skrive tekst i felta
         >
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
@@ -140,8 +138,7 @@ export const RedigerHuskelappModal = ({
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre huskelapp og slett arbeidsliste' : 'Lagre'}
                 </Button>
-
-                <Button size="small" variant="secondary" type="button" onClick={visAlertVedAvbryt}>
+                <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt
                 </Button>
                 {harArbeidsliste && (

@@ -206,6 +206,7 @@ export interface BrukerModell {
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
+    fargekategoriEnhetId: String | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
 }
@@ -281,11 +282,12 @@ export interface ArbeidslisteModell {
 }
 
 export interface HuskelappModell {
-    huskelappId?: string | null;
+    huskelappId: string | null;
     frist?: Date | null;
     kommentar?: string | null;
-    endretDato?: Date | null;
-    endretAv?: string | null;
+    endretDato: Date | null;
+    endretAv: string | null;
+    enhetId: string | null;
 }
 
 export enum Status {

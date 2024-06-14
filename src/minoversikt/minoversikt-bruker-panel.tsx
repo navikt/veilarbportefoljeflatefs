@@ -21,6 +21,7 @@ import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
+import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
 import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
@@ -118,8 +119,16 @@ function MinoversiktBrukerPanel({
                 )}
                 {erHuskelappFeatureTogglePa && (
                     <div className="brukerliste__minoversikt-ikonknapper">
-                        <FargekategoriTabellradKnapp bruker={bruker} />
-                        <HuskelappIkonInngang bruker={bruker} />
+                        {bruker.fnr ? (
+                            <FargekategoriTabellradKnapp bruker={bruker} />
+                        ) : (
+                            <TomtHuskelappEllerFargekategoriFelt />
+                        )}
+                        {bruker.fnr ? (
+                            <HuskelappIkonInngang bruker={bruker} innloggetVeileder={innloggetVeileder} />
+                        ) : (
+                            <TomtHuskelappEllerFargekategoriFelt />
+                        )}
                     </div>
                 )}
                 <MinOversiktKolonner
@@ -161,7 +170,7 @@ function MinoversiktBrukerPanel({
                     <ArbeidslistePanel
                         skalVises={arbeidslisteAktiv}
                         bruker={bruker}
-                        innloggetVeileder={innloggetVeileder && innloggetVeileder.ident}
+                        innloggetVeilederIdent={innloggetVeileder && innloggetVeileder.ident}
                         settMarkert={() => {
                             settMarkert(bruker.fnr, !bruker.markert);
                         }}
