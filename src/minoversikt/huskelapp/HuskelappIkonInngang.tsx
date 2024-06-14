@@ -75,7 +75,6 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
                     open={skalViseHuskelappModal}
                     onClose={() => setSkalViseHuskelappModal(false)}
                     bruker={bruker}
-                    innloggetVeileder={innloggetVeileder}
                     redigerHuskelapp={apneRedigeringsmodal}
                     lukkHuskelappModal={() => setSkalViseHuskelappModal(false)}
                 />

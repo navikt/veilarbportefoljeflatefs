@@ -1,11 +1,10 @@
 import React from 'react';
 import {Button, Modal} from '@navikt/ds-react';
-import {BrukerModell, VeilederModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../model-interfaces';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {HuskelappForModal} from './HuskelappForModal';
 import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import './modalvisning.css';
-import {OrNothing} from '../../../utils/types/types';
 
 interface HuskelappModalParams {
     open: boolean;
@@ -13,19 +12,9 @@ interface HuskelappModalParams {
     bruker: BrukerModell;
     redigerHuskelapp: () => void;
     lukkHuskelappModal: () => void;
-    innloggetVeileder: OrNothing<VeilederModell>;
 }
 
-export const HuskelappModal = ({
-    open,
-    onClose,
-    bruker,
-    innloggetVeileder,
-    redigerHuskelapp,
-    lukkHuskelappModal
-}: HuskelappModalParams) => {
-    const erVeilederForBruker = bruker.veilederId === innloggetVeileder?.ident;
-
+export const HuskelappModal = ({open, onClose, bruker, redigerHuskelapp, lukkHuskelappModal}: HuskelappModalParams) => {
     return (
         <Modal
             header={{
@@ -45,7 +34,7 @@ export const HuskelappModal = ({
                 <Button type="button" size="small" variant="primary" onClick={redigerHuskelapp}>
                     Endre
                 </Button>
-                {erVeilederForBruker && <SlettHuskelappKnapp bruker={bruker} lukkModal={lukkHuskelappModal} />}
+                <SlettHuskelappKnapp bruker={bruker} lukkModal={lukkHuskelappModal} />
             </Modal.Footer>
         </Modal>
     );
