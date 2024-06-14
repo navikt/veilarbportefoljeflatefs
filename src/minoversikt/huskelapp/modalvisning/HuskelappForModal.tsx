@@ -2,8 +2,8 @@ import React from 'react';
 import {BodyShort, Detail, Heading} from '@navikt/ds-react';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import {HuskelappModell} from '../../../model-interfaces';
-import '../huskelapp-wrapper/huskelapp-postitstyling.css';
 import {HuskelappPostitWrapper} from '../huskelapp-wrapper/HuskelappPostitWrapper';
+import '../huskelapp-wrapper/huskelapp-postitstyling.css';
 
 interface Props {
     huskelapp: HuskelappModell;
@@ -16,7 +16,7 @@ export const HuskelappForModal = ({huskelapp}: Props) => {
                 <Heading level="3" size="xsmall" spacing>
                     {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
                 </Heading>
-                <BodyShort size="small" spacing>
+                <BodyShort size="small" spacing className="huskelapp-visning__kommentar">
                     {huskelapp?.kommentar}
                 </BodyShort>
             </HuskelappPostitWrapper>

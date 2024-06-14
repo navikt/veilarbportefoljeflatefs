@@ -422,7 +422,8 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
     return {
         huskelappId: lagOverskrift(),
         brukerFnr: fnr,
-        kommentar: lagOverskrift(),
+        kommentar:
+            '\n\n\n\n   HEIII   \nasdfølkjasdølfkajsdøflkajsdølfjaksdfølajskdøflajsdølfkjasødlfjaøsldjfølasjdølfjasøjldfjaøldf',
         frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
     };
 }
