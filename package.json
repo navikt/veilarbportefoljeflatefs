@@ -42,7 +42,7 @@
         "prettier": "3.2.5"
     },
     "dependencies": {
-        "@amplitude/analytics-browser": "2.3.2",
+        "@amplitude/analytics-browser": "2.9.0",
         "@grafana/faro-web-sdk": "1.7.2",
         "@navikt/aksel-icons": "5.8.0",
         "@navikt/ds-css": "5.8.0",
