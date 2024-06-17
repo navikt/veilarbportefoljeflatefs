@@ -24,7 +24,7 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                 size="small"
                 variant="tertiary"
                 icon={<FargekategoriIkonBokmerke />}
-                title="Sett fargekategori for alle valgte brukere"
+                title="Endre kategori for alle valgte brukere"
                 ref={buttonRef}
                 onClick={() => {
                     if (valgteBrukereFnrs.length === 0) {
@@ -36,7 +36,7 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                 }}
                 className="toolbar_btn"
             >
-                Fargekategori
+                Endre kategori
             </Button>
             <FargekategoriPopover
                 valgteBrukereFnrs={valgteBrukereFnrs}

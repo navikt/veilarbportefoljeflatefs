@@ -17,7 +17,7 @@ export const HuskelappForPanel = ({huskelapp, bruker, onEndreHuskelapp}: Props) 
         <Heading level="3" size="xsmall" spacing>
             {huskelapp?.frist ? `Frist: ${toDatePrettyPrint(huskelapp.frist)}` : 'Ingen frist satt'}
         </Heading>
-        <BodyShort size="small" spacing>
+        <BodyShort size="small" spacing className="huskelapp-visning__kommentar">
             {huskelapp?.kommentar}
         </BodyShort>
         <Detail spacing>

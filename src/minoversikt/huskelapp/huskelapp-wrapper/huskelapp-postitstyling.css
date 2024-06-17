@@ -7,6 +7,10 @@
     word-wrap: break-word;
 }
 
+.huskelapp-visning__kommentar {
+    white-space: pre-wrap;
+}
+
 .huskelapp__postit {
     position: relative;
     background-color: var(--a-limegreen-100);
