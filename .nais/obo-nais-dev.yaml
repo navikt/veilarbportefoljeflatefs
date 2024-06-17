@@ -53,7 +53,7 @@ spec:
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
-        - host: modiacontextholder-q1.dev-fss-pub.nais.io
+        - host: modiacontextholder.intern.dev.nav.no
   env:
     - name: JSON_CONFIG
       value: >
@@ -146,10 +146,10 @@ spec:
             },
             {
               "fromPath": "/modiacontextholder",
-              "toUrl": "https://modiacontextholder-q1.dev-fss-pub.nais.io",
+              "toUrl": "https://modiacontextholder.intern.dev.nav.no/modiacontextholder",
               "preserveFromPath": true,
               "toApp": {
-                "name": "modiacontextholder-q1",
+                "name": "modiacontextholder",
                 "namespace": "personoversikt",
                 "cluster": "dev-fss"
               }
