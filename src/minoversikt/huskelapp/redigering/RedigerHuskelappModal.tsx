@@ -64,7 +64,7 @@ export const RedigerHuskelappModal = ({
             // eslint-disable-next-line no-console
             console.log('i visAlertVedAvbryt, huskelapp: ', huskelapp?.kommentar, huskelapp?.frist);
             //         window.confirm(dialogTekst) && onModalClose();
-            onModalClose();
+            //          onModalClose();
         } else {
             // eslint-disable-next-line no-console
             console.log('window.confirm = true ');
