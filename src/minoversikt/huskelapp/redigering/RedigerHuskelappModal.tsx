@@ -28,7 +28,6 @@ interface Props {
     arbeidsliste?: ArbeidslisteModell | null;
     /** For å kunne lukke visningsmodal etter at huskelappen er sletta */
     lukkVisHuskelappModal?: () => void;
-    //   formikDirty?: boolean;
 }
 
 export const RedigerHuskelappModal = ({
@@ -38,37 +37,40 @@ export const RedigerHuskelappModal = ({
     bruker,
     arbeidsliste,
     lukkVisHuskelappModal
-    //    formikDirty
 }: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
-    const [formIsDirty, setFormIsDirty] = useState<boolean>(false);
+
+    const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
+    const handleHuskelappEndret = (endret: boolean) => {
+        setHuskelappEndret(endret);
+    };
+    const [avbryt, setAvbryt] = useState<boolean>(false);
+
     const visAlertVedAvbryt = () => {
         // eslint-disable-next-line no-console
-        const huskelappEndret = (): Boolean => {
-            return !!(huskelapp?.kommentar || huskelapp?.frist);
-        };
-        // eslint-disable-next-line no-console
-        console.log('før visAlertVedAvbryt, huskelappEndret: ', huskelappEndret());
-        /*    if (!huskelappEndret()) {
-                onModalClose();
-                return;
-            }
-
-         */
+        console.log('før visAlertVedAvbryt, huskelappEndret: ', huskelappEndret);
+        if (!huskelappEndret) {
+            onModalClose();
+            return;
+        }
         const dialogTekst =
             'Melding fra visAlertvedAvbryt: Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
-        //    if (!window.confirm(dialogTekst) && huskelappEndret())  {
         if (!window.confirm(dialogTekst)) {
+            isModalOpen = false;
             // eslint-disable-next-line no-console
             console.log('i visAlertVedAvbryt, huskelapp: ', huskelapp?.kommentar, huskelapp?.frist);
             //         window.confirm(dialogTekst) && onModalClose();
             onModalClose();
+        } else {
+            // eslint-disable-next-line no-console
+            console.log('window.confirm = true ');
+            setAvbryt(true);
+            onModalClose();
         }
-        onModalClose();
     };
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
@@ -126,19 +128,21 @@ export const RedigerHuskelappModal = ({
                         <ArrowRightIcon title="Pil mot høyre" className="rediger-huskelapp-modal-pil" fontSize="3rem" />
                     </>
                 )}
-                <NyHuskelapp
-                    huskelapp={huskelapp}
-                    onSubmit={validerOgLagreHuskelapp}
-                    harArbeidsliste={harArbeidsliste}
-                    //                   setFormIsDirty={() => setFormIsDirty(formIsDirty)}
-                    setFormIsDirty={setFormIsDirty}
-                />
+                {!avbryt && (
+                    <NyHuskelapp
+                        huskelapp={huskelapp}
+                        onSubmit={validerOgLagreHuskelapp}
+                        harArbeidsliste={harArbeidsliste}
+                        // setFormIsDirty={() => setFormIsDirty(formIsDirty)}
+                        setHuskelappEndret={handleHuskelappEndret}
+                    />
+                )}
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre huskelapp og slett arbeidsliste' : 'Lagre'}
                 </Button>
-                <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
+                <Button size="small" variant="secondary" type="button" onClick={visAlertVedAvbryt}>
                     Avbryt
                 </Button>
                 {harArbeidsliste && (
@@ -157,7 +161,7 @@ export const RedigerHuskelappModal = ({
                         icon={<TrashIcon aria-hidden />}
                     />
                 )}
-                {!harArbeidsliste && harHuskelapp && (
+                {!harArbeidsliste && !avbryt && harHuskelapp && (
                     <SlettHuskelappKnapp
                         bruker={bruker}
                         lukkModal={lukkRedigeringOgVisningsmodaler}
