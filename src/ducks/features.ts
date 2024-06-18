@@ -24,7 +24,7 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
-    [HUSKELAPP]: false
+    [HUSKELAPP]: true
 };
 
 // Reducer

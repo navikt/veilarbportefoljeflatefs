@@ -28,19 +28,15 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
         );
     }
 
-    function visEllerRedigerHuskelapp() {
-        bruker.huskelapp ? setSkalViseHuskelappModal(true) : setSkalViseRedigerHuskelappModal(true);
-    }
-
     function lukkRedigeringsmodal() {
         setSkalViseRedigerHuskelappModal(false);
-        if (bruker.huskelapp) {
+        /*if (bruker.huskelapp) {
             setSkalViseHuskelappModal(true);
-        }
+        }*/
     }
 
     function apneRedigeringsmodal() {
-        setSkalViseHuskelappModal(false);
+        //setSkalViseHuskelappModal(false);
         setSkalViseRedigerHuskelappModal(true);
     }
 
@@ -58,7 +54,7 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
                 variant="tertiary"
                 icon={harHuskelappEllerArbeidsliste ? <HuskelappIkon /> : <HuskelappIkonTomt />}
                 title={titletekst()}
-                onClick={visEllerRedigerHuskelapp}
+                onClick={() => setSkalViseRedigerHuskelappModal(true)}
             />
             {skalViseRedigerHuskelappModal && (
                 <RedigerHuskelappModal
@@ -67,16 +63,7 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}
-                    lukkVisHuskelappModal={() => setSkalViseHuskelappModal(false)}
-                />
-            )}
-            {skalViseHuskelappModal && (
-                <HuskelappModal
-                    open={skalViseHuskelappModal}
-                    onClose={() => setSkalViseHuskelappModal(false)}
-                    bruker={bruker}
-                    redigerHuskelapp={apneRedigeringsmodal}
-                    lukkHuskelappModal={() => setSkalViseHuskelappModal(false)}
+                    lukkVisHuskelappModal={() => setSkalViseRedigerHuskelappModal(false)}
                 />
             )}
         </>
