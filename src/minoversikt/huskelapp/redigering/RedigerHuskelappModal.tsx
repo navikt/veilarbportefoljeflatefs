@@ -51,23 +51,14 @@ export const RedigerHuskelappModal = ({
     const [avbryt, setAvbryt] = useState<boolean>(false);
 
     const visAlertVedAvbryt = () => {
-        // eslint-disable-next-line no-console
-        console.log('før visAlertVedAvbryt, huskelappEndret: ', huskelappEndret);
         if (!huskelappEndret) {
             onModalClose();
             return;
         }
-        const dialogTekst =
-            'Melding fra visAlertvedAvbryt: Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
+        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
         if (!window.confirm(dialogTekst)) {
             isModalOpen = false;
-            // eslint-disable-next-line no-console
-            console.log('i visAlertVedAvbryt, huskelapp: ', huskelapp?.kommentar, huskelapp?.frist);
-            //         window.confirm(dialogTekst) && onModalClose();
-            //          onModalClose();
         } else {
-            // eslint-disable-next-line no-console
-            console.log('window.confirm = true ');
             setAvbryt(true);
             onModalClose();
         }
@@ -133,7 +124,6 @@ export const RedigerHuskelappModal = ({
                         huskelapp={huskelapp}
                         onSubmit={validerOgLagreHuskelapp}
                         harArbeidsliste={harArbeidsliste}
-                        // setFormIsDirty={() => setFormIsDirty(formIsDirty)}
                         setHuskelappEndret={handleHuskelappEndret}
                     />
                 )}

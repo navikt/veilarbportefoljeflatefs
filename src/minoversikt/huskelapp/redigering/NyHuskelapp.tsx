@@ -8,9 +8,9 @@ import {HuskelappModell} from '../../../model-interfaces';
 
 interface Props {
     huskelapp?: HuskelappModell;
-    onSubmit: (values, formikHelpers) => Promise<any>;
+    onSubmit: (values: any, formikHelpers: any) => Promise<any>;
     harArbeidsliste: boolean;
-    setHuskelappEndret: (boolean) => void;
+    setHuskelappEndret: (arg0: boolean) => void;
 }
 
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappEndret}: Props) => {
@@ -26,8 +26,6 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappE
                 onSubmit={onSubmit}
             >
                 {formikProps => {
-                    // eslint-disable-next-line no-console
-                    console.log('formikProps.dirty: ', formikProps.dirty);
                     return (
                         <Form
                             id="rediger-huskelapp-skjema"
