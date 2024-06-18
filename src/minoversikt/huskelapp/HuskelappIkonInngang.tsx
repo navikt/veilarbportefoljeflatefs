@@ -48,7 +48,7 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
         if (bruker.huskelapp) {
             return 'Endre huskelapp';
         }
-        return arbeidslisteAktiv ? 'Migrer arbeidsliste' : 'Opprett huskelapp';
+        return arbeidslisteAktiv ? 'Bytt fra arbeidsliste til huskelapp' : 'Opprett huskelapp';
     };
 
     return (
