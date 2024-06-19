@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell, VeilederModell} from '../../model-interfaces';
-import {RedigerHuskelappModal} from './redigering/RedigerHuskelappModal';
+import {HuskelappModal} from './redigering/HuskelappModal';
 import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/Huskelappikon_stiplet.svg';
 import {OrNothing} from '../../utils/types/types';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
-    const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
+    const [skalViseHuskelappModal, setSkalViseHuskelappModal] = useState<boolean>(false);
 
     const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
     const harHuskelappEllerArbeidsliste = !!bruker.huskelapp || arbeidslisteAktiv;
@@ -26,12 +26,12 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
         );
     }
 
-    function lukkRedigeringsmodal() {
-        setSkalViseRedigerHuskelappModal(false);
+    function lukkeHuskelappmodal() {
+        setSkalViseHuskelappModal(false);
     }
 
-    function apneRedigeringsmodal() {
-        setSkalViseRedigerHuskelappModal(true);
+    function apneHuskelappmodal() {
+        setSkalViseHuskelappModal(true);
     }
 
     const titletekst = () => {
@@ -48,16 +48,15 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
                 variant="tertiary"
                 icon={harHuskelappEllerArbeidsliste ? <HuskelappIkon /> : <HuskelappIkonTomt />}
                 title={titletekst()}
-                onClick={apneRedigeringsmodal}
+                onClick={apneHuskelappmodal}
             />
-            {skalViseRedigerHuskelappModal && (
-                <RedigerHuskelappModal
-                    onModalClose={lukkRedigeringsmodal}
-                    isModalOpen={skalViseRedigerHuskelappModal}
+            {skalViseHuskelappModal && (
+                <HuskelappModal
+                    onModalClose={lukkeHuskelappmodal}
+                    isModalOpen={skalViseHuskelappModal}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}
-                    lukkVisHuskelappModal={lukkRedigeringsmodal}
                 />
             )}
         </>
