@@ -412,7 +412,12 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
-                tekst={bruker.huskelapp?.kommentar ? truncateTekst(bruker.huskelapp.kommentar) : ' '}
+                tekst={
+                    bruker.huskelapp?.kommentar
+                        ? // Fjerner eventuelle linjeskift før teksten og viser kun tekst fram til første linjeskift eller maks 30 tegn, ref. truncateTekst()
+                          truncateTekst(bruker.huskelapp.kommentar.trimStart().split('\n')[0])
+                        : ' '
+                }
             />
             <DatoKolonne
                 dato={huskeLappFrist}

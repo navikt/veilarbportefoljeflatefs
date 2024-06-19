@@ -206,7 +206,7 @@ export interface BrukerModell {
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
-    fargekategoriEnhetId: String | null;
+    fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
 }
