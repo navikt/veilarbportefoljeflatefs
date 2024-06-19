@@ -52,7 +52,7 @@ const id = 'min-oversikt';
 export default function MinoversiktSide() {
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
-    const innloggetVeilederIdent = useIdentSelector();
+    const innloggetVeileder = useIdentSelector();
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
@@ -69,7 +69,7 @@ export default function MinoversiktSide() {
     useFetchPortefolje(oversiktType);
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const visesAnnenVeiledersPortefolje = gjeldendeVeilederId !== innloggetVeilederIdent!.ident;
+    const visesAnnenVeiledersPortefolje = gjeldendeVeilederId !== innloggetVeileder!.ident;
     const antallBrukere =
         portefolje.data.antallReturnert > portefolje.data.antallTotalt
             ? portefolje.data.antallTotalt
@@ -196,7 +196,7 @@ export default function MinoversiktSide() {
                         </div>
 
                         <MinoversiktTabell
-                            innloggetVeileder={innloggetVeilederIdent}
+                            innloggetVeileder={innloggetVeileder}
                             classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''}
                         />
                         <MinOversiktModalController />

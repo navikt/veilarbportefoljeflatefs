@@ -9,6 +9,7 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
 import {BrukerModell} from '../../../model-interfaces';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
+import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 
 interface SlettHuskelappKnappProps {
     bruker: BrukerModell;
@@ -30,6 +31,11 @@ export const SlettHuskelappKnapp = ({
 }: SlettHuskelappKnappProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
+    const innloggetVeileder = useIdentSelector();
+
+    if (bruker.veilederId !== innloggetVeileder?.ident) {
+        return null;
+    }
 
     const slettHuskelapp = () => {
         return handleSlettHuskelapp(dispatch, bruker.huskelapp!, bruker.fnr, enhetId!);
