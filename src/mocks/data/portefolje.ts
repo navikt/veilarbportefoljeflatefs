@@ -191,7 +191,7 @@ const lagHuskelapp = fnr => {
     return {
         huskelappId: lagOverskrift(),
         brukerFnr: fnr,
-        kommentar: lagOverskrift(),
+        kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
         frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
         enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234'
     };
