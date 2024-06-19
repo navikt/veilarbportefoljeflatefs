@@ -3,7 +3,7 @@ import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {HuskelappPostitWrapper} from '../huskelapp-wrapper/HuskelappPostitWrapper';
-import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
+import {SlettHuskelappKnapp} from '../redigering/SlettHuskelappKnapp';
 import '../huskelapp-wrapper/huskelapp-postitstyling.css';
 
 interface Props {
