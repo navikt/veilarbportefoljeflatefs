@@ -13,7 +13,7 @@ interface Props {
 }
 
 const endretAv = huskelapp => {
-    return huskelapp?.endretAv ? `Sist endret av: ${huskelapp.endretAv}` : 'Her er det en feil, mangler endret av';
+    return huskelapp?.endretAv ? `${huskelapp.endretAv}` : 'Feil i baksystem, Endret av mangler';
 };
 
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
