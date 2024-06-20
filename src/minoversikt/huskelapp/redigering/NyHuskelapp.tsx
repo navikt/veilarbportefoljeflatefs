@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
 import './rediger-huskelapp.css';
-import {BodyShort, Detail, Heading} from '@navikt/ds-react';
+import {BodyShort, Heading} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
