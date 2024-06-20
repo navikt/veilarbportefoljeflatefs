@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
 import './rediger-huskelapp.css';
-import {BodyShort, Detail, Heading} from '@navikt/ds-react';
+import {Detail, Heading} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
@@ -14,7 +14,12 @@ interface Props {
 }
 
 const endretAv = huskelapp => {
-    return huskelapp?.endretAv ? `Endret ${huskelapp.endretDato.toLocaleDateString()} av ${huskelapp.endretAv}` : '';
+    if (!huskelapp) {
+        return '';
+    } else {
+        const sistEndretDato = new Date(huskelapp.endretDato);
+        return `Endret ${sistEndretDato.toLocaleDateString()} av ${huskelapp.endretAv}`;
+    }
 };
 
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
