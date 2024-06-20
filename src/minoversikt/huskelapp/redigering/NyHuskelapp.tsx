@@ -15,7 +15,7 @@ interface Props {
 }
 
 const endretAv = huskelapp => {
-    if (!huskelapp.endretDato) {
+    if (!huskelapp.huskelappId) {
         return '';
     }
     return `Endret ${toDatePrettyPrint(huskelapp?.endretDato)} av ${huskelapp.endretAv}`;
