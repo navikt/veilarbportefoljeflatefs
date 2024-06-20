@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
-import {Heading} from '@navikt/ds-react';
+import {BodyShort, Heading} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
@@ -12,10 +12,15 @@ interface Props {
     harArbeidsliste: boolean;
 }
 
+const endretAv = huskelapp => {
+    return huskelapp?.endretAv ? `Sist endret av: ${huskelapp.endretAv}` : 'Her er det en feil, mangler endret av';
+};
+
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
     return (
         <div className="ny-huskelapp huskelapp__postit">
             {harArbeidsliste && <Heading size="small">Ny huskelapp</Heading>}
+
             <Formik
                 initialValues={{
                     frist: huskelapp?.frist ?? '',
@@ -27,6 +32,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                 <Form id="rediger-huskelapp-skjema" className="ny-huskelapp-form">
                     <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
                     <FormikDatoVelger name="frist" />
+                    <BodyShort>{`Sist endret av: ${endretAv(huskelapp)}`}</BodyShort>
                 </Form>
             </Formik>
             <HuskelappInfoAlert />
