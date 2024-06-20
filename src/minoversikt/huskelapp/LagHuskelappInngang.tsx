@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
-import {RedigerHuskelappModal} from './redigering/RedigerHuskelappModal';
+import {HuskelappModal} from './redigering/HuskelappModal';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const LagHuskelappInngang = ({bruker, innloggetVeilederIdent}: Props) => {
-    const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
+    const [skalViseHuskelappModal, setSkalViseHuskelappModal] = useState<boolean>(false);
 
     if (bruker.veilederId !== innloggetVeilederIdent) {
         return null;
@@ -19,7 +19,7 @@ export const LagHuskelappInngang = ({bruker, innloggetVeilederIdent}: Props) => 
 
     const onClick = () => {
         trackAmplitude({name: 'modal åpnet', data: {tekst: 'åpnet lag eller endre huskelappmodal'}});
-        setSkalViseRedigerHuskelappModal(true);
+        setSkalViseHuskelappModal(true);
     };
 
     return (
@@ -27,12 +27,12 @@ export const LagHuskelappInngang = ({bruker, innloggetVeilederIdent}: Props) => 
             <Button size="xsmall" variant="tertiary" onClick={onClick} className="arbeidsliste--rediger-lenke">
                 Rediger
             </Button>
-            {skalViseRedigerHuskelappModal && (
-                <RedigerHuskelappModal
+            {skalViseHuskelappModal && (
+                <HuskelappModal
                     onModalClose={() => {
-                        setSkalViseRedigerHuskelappModal(false);
+                        setSkalViseHuskelappModal(false);
                     }}
-                    isModalOpen={skalViseRedigerHuskelappModal}
+                    isModalOpen={skalViseHuskelappModal}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
                     bruker={bruker}

@@ -6,7 +6,7 @@ import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {handleSlettHuskelapp} from '../redigering/slettHuskelapp';
+import {handleSlettHuskelapp} from './slettHuskelapp';
 import {BrukerModell} from '../../../model-interfaces';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 

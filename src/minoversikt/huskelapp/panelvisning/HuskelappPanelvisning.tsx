@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
-import {RedigerHuskelappModal} from '../redigering/RedigerHuskelappModal';
+import {HuskelappModal} from '../redigering/HuskelappModal';
 import {HuskelappForPanel} from './HuskelappForPanel';
 import './panelvisning.css';
 
@@ -10,18 +10,18 @@ interface Props {
 }
 
 export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
-    const [skalViseRedigerHuskelappModal, setSkalViseRedigerHuskelappModal] = useState<boolean>(false);
-    const visRedigeringsmodal = () => setSkalViseRedigerHuskelappModal(true);
+    const [skalViseHuskelappModal, setSkalViseHuskelappModal] = useState<boolean>(false);
+    const visRedigeringsmodal = () => setSkalViseHuskelappModal(true);
 
     return (
         <div className="huskelapp-panel">
             <HuskelappForPanel huskelapp={huskelapp} bruker={bruker} onEndreHuskelapp={visRedigeringsmodal} />
-            {skalViseRedigerHuskelappModal && (
-                <RedigerHuskelappModal
+            {skalViseHuskelappModal && (
+                <HuskelappModal
                     onModalClose={() => {
-                        setSkalViseRedigerHuskelappModal(false);
+                        setSkalViseHuskelappModal(false);
                     }}
-                    isModalOpen={skalViseRedigerHuskelappModal}
+                    isModalOpen={skalViseHuskelappModal}
                     huskelapp={huskelapp}
                     bruker={bruker}
                 />
