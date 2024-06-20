@@ -50,7 +50,7 @@ function RedigerArbeidsliste({
                         testId="modal_arbeidsliste_kommentar"
                     />
                     <Detail size="small" className="arbeidsliste--modal-redigering">
-                        {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                        {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                     </Detail>
                 </div>
                 <div className="dato-kategori-wrapper">

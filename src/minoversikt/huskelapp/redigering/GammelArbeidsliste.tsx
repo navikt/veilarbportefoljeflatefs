@@ -31,7 +31,7 @@ export const GammelArbeidsliste = ({arbeidsliste}: Props) => (
         </div>
         <BodyShort size="small">
             <i>
-                Oppdatert {arbeidsliste.endringstidspunkt ? toDatePrettyPrint(arbeidsliste.endringstidspunkt) : ''} av{' '}
+                Endret {arbeidsliste.endringstidspunkt ? toDatePrettyPrint(arbeidsliste.endringstidspunkt) : ''} av{' '}
                 {arbeidsliste.sistEndretAv?.veilederId}
             </i>
         </BodyShort>
