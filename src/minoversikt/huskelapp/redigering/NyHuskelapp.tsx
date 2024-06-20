@@ -14,18 +14,10 @@ interface Props {
     harArbeidsliste: boolean;
 }
 
-const endretAv = huskelapp => {
-    if (huskelapp.huskelappId === null || huskelapp.huskelappId === undefined) {
-        return '';
-    }
-    return `Endret ${toDatePrettyPrint(huskelapp?.endretDato)} av ${huskelapp.endretAv}`;
-};
-
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
     return (
         <div className="ny-huskelapp huskelapp__postit">
             {harArbeidsliste && <Heading size="small">Ny huskelapp</Heading>}
-
             <Formik
                 initialValues={{
                     frist: huskelapp?.frist ?? '',
@@ -39,9 +31,11 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                     <FormikDatoVelger name="frist" />
                 </Form>
             </Formik>
-            <Detail>
-                <i>{endretAv(huskelapp)}</i>
-            </Detail>
+            {huskelapp && (
+                <Detail>
+                    <i>{`Endret ${toDatePrettyPrint(huskelapp?.endretDato)} av ${huskelapp?.endretAv}`}</i>
+                </Detail>
+            )}
             <HuskelappInfoAlert />
         </div>
     );
