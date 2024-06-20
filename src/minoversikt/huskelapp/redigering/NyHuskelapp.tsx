@@ -1,11 +1,12 @@
 import React from 'react';
 import {Form, Formik} from 'formik';
 import './rediger-huskelapp.css';
-import {Detail, Heading} from '@navikt/ds-react';
+import {BodyShort, Detail, Heading} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {HuskelappModell} from '../../../model-interfaces';
+import {toDatePrettyPrint} from '../../../utils/dato-utils';
 
 interface Props {
     huskelapp?: HuskelappModell;
@@ -17,8 +18,7 @@ const endretAv = huskelapp => {
     if (!huskelapp) {
         return '';
     } else {
-        const sistEndretDato = new Date(huskelapp.endretDato);
-        return `Endret ${sistEndretDato.toLocaleDateString()} av ${huskelapp.endretAv}`;
+        return `Endret ${toDatePrettyPrint(huskelapp?.endretDato)} av ${huskelapp.endretAv}`;
     }
 };
 
@@ -40,7 +40,9 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste}: Props) => {
                     <FormikDatoVelger name="frist" />
                 </Form>
             </Formik>
-            <Detail className="endret-av">{endretAv(huskelapp)}</Detail>
+            <BodyShort size="small">
+                <i>{endretAv(huskelapp)}</i>
+            </BodyShort>
             <HuskelappInfoAlert />
         </div>
     );

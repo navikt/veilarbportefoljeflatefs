@@ -84,7 +84,3 @@
     /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--a-font-size-medium) !important;
 }
-
-.endret-av {
-    font-style: italic;
-}
