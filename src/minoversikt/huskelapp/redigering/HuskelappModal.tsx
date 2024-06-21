@@ -15,7 +15,7 @@ import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {NyHuskelapp} from './NyHuskelapp';
-import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
+import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
 import './rediger-huskelapp.css';
@@ -30,14 +30,7 @@ interface Props {
     lukkVisHuskelappModal?: () => void;
 }
 
-export const RedigerHuskelappModal = ({
-    isModalOpen,
-    onModalClose,
-    huskelapp,
-    bruker,
-    arbeidsliste,
-    lukkVisHuskelappModal
-}: Props) => {
+export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
@@ -61,23 +54,17 @@ export const RedigerHuskelappModal = ({
             : null;
         try {
             if (huskelapp?.huskelappId) {
-                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId).then(
-                    lukkVisHuskelappModal
-                );
+                await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
             } else {
-                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes).then(
-                    lukkVisHuskelappModal
-                );
+                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes);
             }
         } catch (error) {
             dispatch(visServerfeilModal());
         }
     }
 
-    const lukkRedigeringOgVisningsmodaler = () => {
+    const lukkHuskelappmodal = () => {
         onModalClose();
-        /* Unngår å vise visningsmodal for huskelapp etter sletting */
-        lukkVisHuskelappModal && lukkVisHuskelappModal();
     };
 
     return (
@@ -122,7 +109,7 @@ export const RedigerHuskelappModal = ({
                         bekreftknapp={{
                             tekst: 'Ja, slett arbeidslista',
                             onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
-                            onClickThen: () => lukkRedigeringOgVisningsmodaler()
+                            onClickThen: () => lukkHuskelappmodal()
                         }}
                         feilmelding="Noe gikk galt ved sletting av arbeidslista."
                         icon={<TrashIcon aria-hidden />}
@@ -131,7 +118,7 @@ export const RedigerHuskelappModal = ({
                 {!harArbeidsliste && harHuskelapp && (
                     <SlettHuskelappKnapp
                         bruker={bruker}
-                        lukkModal={lukkRedigeringOgVisningsmodaler}
+                        lukkModal={lukkHuskelappmodal}
                         variant="tertiary"
                         bekreftelsesmelding={{width: '15rem', overskriftsnivaa: '2'}}
                     />

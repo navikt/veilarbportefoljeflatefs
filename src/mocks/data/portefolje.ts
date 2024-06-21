@@ -185,15 +185,18 @@ function lagArbeidsliste(aktoerid, fnr) {
 
 const lagHuskelapp = fnr => {
     const maybeHuskelapp = rnd(0, 1);
+    const huskeklappId = rnd(1, 1000);
     if (maybeHuskelapp > 0.75) {
         return null;
     }
+
     return {
-        huskelappId: lagOverskrift(),
+        huskelappId: huskeklappId,
         brukerFnr: fnr,
-        kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
+        kommentar: '\n Dette er et mock kommentar \n',
         frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
-        enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234'
+        enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234',
+        sistEndretAv: 'Meg selv'
     };
 };
 
@@ -424,7 +427,8 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
         brukerFnr: fnr,
         kommentar:
             '\n\n\n\n   HEIII   \nasdfølkjasdølfkajsdøflkajsdølfjaksdfølajskdøflajsdølfkjasødlfjaøsldjfølasjdølfjasøjldfjaøldf',
-        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
+        endretAv: 'Meg selv'
     };
 }
 
@@ -440,6 +444,7 @@ export function hentMockPlan(): MoteData[] {
     function randomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toString();
     }
+
     function motedataRandomDager(antallMoter: number): MoteData[] {
         const moteliste: MoteData[] = [];
         for (let i = 0; i < antallMoter; i++) {
