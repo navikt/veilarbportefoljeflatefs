@@ -62,7 +62,7 @@ export default function ArbeidslistePanel({
                             </BodyShort>
                             <div className="brukerliste__arbeidslisteinnhold_footer">
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
-                                    {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                                    {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
                                 {erHuskelappFeatureTogglePa ? (
                                     <LagHuskelappInngang
