@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell, Fargekategorinavn} from '../../model-interfaces';
 import {Button} from '@navikt/ds-react';
 import {FargekategoriPopover} from './fargekategori-popover';
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
@@ -16,7 +16,7 @@ interface FargekategoriPopoverKnappProps {
 export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const [openState, setOpenState] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     return (
         <>
@@ -25,17 +25,18 @@ export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopov
                 variant="tertiary"
                 icon={fargekategoriIkonMapper(bruker.fargekategori)}
                 ref={buttonRef}
+                title={(bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori') + ': endre'}
                 onClick={() => {
-                    setOpenState(!openState);
+                    setPopoverOpen(!popoverOpen);
                     dispatch(resetFargekategoriStateAction());
                 }}
                 className="fargekategori-tabellrad-knapp"
             />
             <FargekategoriPopover
                 buttonRef={buttonRef}
-                openState={openState}
-                setOpenState={setOpenState}
-                fnrs={[bruker.fnr]}
+                popoverOpen={popoverOpen}
+                setPopoverOpen={setPopoverOpen}
+                valgteBrukereFnrs={[bruker.fnr]}
                 fargekategori={bruker.fargekategori}
             />
         </>

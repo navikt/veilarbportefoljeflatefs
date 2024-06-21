@@ -16,7 +16,7 @@ interface FargekategoriToolbarKnappProps {
 export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: FargekategoriToolbarKnappProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const [openState, setOpenState] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     return (
         <>
@@ -24,26 +24,27 @@ export default function FargekategoriToolbarKnapp({valgteBrukereFnrs}: Fargekate
                 size="small"
                 variant="tertiary"
                 icon={<FargekategoriIkonBokmerke />}
-                title="Sett fargekategori for alle valgte brukere"
+                title="Endre kategori for alle valgte brukere"
                 ref={buttonRef}
                 onClick={() => {
                     if (valgteBrukereFnrs.length === 0) {
                         dispatch(oppdaterBrukerfeil());
                     } else {
-                        setOpenState(!openState);
+                        setPopoverOpen(!popoverOpen);
                         dispatch(resetFargekategoriStateAction());
                     }
                 }}
                 className="toolbar_btn"
             >
-                Fargekategori
+                Endre kategori
             </Button>
             <FargekategoriPopover
-                fnrs={valgteBrukereFnrs}
+                valgteBrukereFnrs={valgteBrukereFnrs}
                 buttonRef={buttonRef}
-                openState={openState}
-                setOpenState={setOpenState}
+                popoverOpen={popoverOpen}
+                setPopoverOpen={setPopoverOpen}
                 placement="bottom-start"
+                skalBekrefteFlereEnn10={true}
             >
                 <BodyShort size="small" spacing>
                     <b>Endre kategori for valgte brukere</b>

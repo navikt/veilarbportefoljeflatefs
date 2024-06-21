@@ -1,0 +1,4 @@
+.bekreft-fargekategori-pa-mange-modal .kategori-som-skal-bekreftes {
+    /* Gjer ikonet midstilt til teksten den står saman med, også når teksten kjem på to linjer */
+    vertical-align: middle;
+}

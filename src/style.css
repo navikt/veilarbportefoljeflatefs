@@ -59,10 +59,10 @@
 .tabell .tabellheader__lenke {
     display: flex;
     width: max-content;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 .tabell .tabellheader__tekst {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 .tabell .tabellheader__tekst span {
     font-weight: normal;
@@ -151,7 +151,7 @@ table col[class*='col-'] {
 body {
     height: 100%;
     width: 100%;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     color: #262626;
     font-family: 'Source Sans Pro', Arial, sans-serif;
@@ -1236,19 +1236,19 @@ GRID
 }
 
 .veilarbportefoljeflatefs .navds-alert__wrapper {
-    font-size: 14px !important;
+    font-size: 0.875rem !important;
 }
 
 .veilarbportefoljeflatefs .navds-body-short {
-    font-size: 14px !important;
+    font-size: 0.875rem !important;
 }
 
 .veilarbportefoljeflatefs .skjemaelement__label {
-    font-size: 14px !important;
+    font-size: 0.875rem !important;
 }
 
 .veilarbportefoljeflatefs .navds-label {
-    font-size: 14px !important;
+    font-size: 0.875rem !important;
 }
 
 @media (max-width: 1200px) {
@@ -1259,4 +1259,10 @@ GRID
     .veilarbportefoljeflatefs .oversikt-sideinnhold .sidebar {
         z-index: 1200;
     }
+}
+
+.veilarbportefoljeflatefs .navds-button--secondary {
+    /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
+     * (I designsystemet er dei gjennomsiktige.) */
+    background-color: var(--a-bg-default);
 }

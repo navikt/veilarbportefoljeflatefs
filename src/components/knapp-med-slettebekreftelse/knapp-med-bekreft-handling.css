@@ -1,0 +1,25 @@
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling-feilet {
+    margin-bottom: var(--a-spacing-4);
+}
+
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling > button {
+    /* Motverker 'display: inline-flex' på knapp frå designsystemet, og gjer at alle knappane kjem på ei linje */
+    display: flex;
+}
+
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling {
+    margin-right: 1rem; /* For å unngå at knappar utanfor bekreft-handling kjem kliss oppi bekreftinga */
+    min-width: 14rem;
+    max-width: 30rem;
+}
+
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling .bekreft-handling__knapper {
+    margin-top: var(--a-spacing-2);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling .bekreft-handling__knapper > button {
+    /* Motverkar margin:auto frå designsystemet for knappar i modalfooter  */
+    margin: 0;
+}

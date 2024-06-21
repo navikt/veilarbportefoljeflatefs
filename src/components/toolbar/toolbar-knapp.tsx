@@ -112,6 +112,7 @@ export default function ToolbarKnapp({
             icon={ikon}
             onClick={klikk}
             data-testid={testid}
+            title={tittel}
         >
             {tittel}
         </Button>

@@ -78,6 +78,7 @@ function VelgKolonner(props: VelgKolonnerProps) {
                 className="toolbar_btn"
                 icon={<Table className="toolbar-knapp__ikon" id="velg-kolonner-ikon" />}
                 onClick={toggleVelgKolonner}
+                title="Velg synlige kolonner i tabellen"
                 data-testid="dropdown-knapp_velg-kolonner"
                 ref={btnRef}
             >

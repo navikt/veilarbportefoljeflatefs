@@ -10,7 +10,6 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    endringISituasjon,
     HAR_AVVIK,
     HUSKELAPP,
     I_AVTALT_AKTIVITET,
@@ -223,8 +222,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         )
         .concat(
             addHvis(
-                Kolonne.BRUKERS_SITUASJON_SIST_ENDRET,
-                filtervalg.registreringstype.some(regType => endringISituasjon[regType])
+                Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET,
+                filtervalg.registreringstype?.length > 0 ||
+                    filtervalg.utdanning.length > 0 ||
+                    filtervalg.utdanningGodkjent.length > 0 ||
+                    filtervalg.utdanningBestatt.length > 0
             )
         )
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtervalg.ferdigfilterListe.includes(HUSKELAPP)))

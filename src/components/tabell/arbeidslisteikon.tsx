@@ -31,13 +31,13 @@ export default function ArbeidslistekategoriVisning({
         const velgArbeidslistekategori = () => {
             switch (kategori) {
                 case KategoriModell.BLA:
-                    return <FargekategoriIkonBlaHalvsirkel data-testid={dataTestid} />;
+                    return <FargekategoriIkonBlaHalvsirkel data-testid={dataTestid} fontSize="1.5rem" />;
                 case KategoriModell.GRONN:
-                    return <FargekategoriIkonGronnTrekant data-testid={dataTestid} />;
+                    return <FargekategoriIkonGronnTrekant data-testid={dataTestid} fontSize="1.5rem" />;
                 case KategoriModell.GUL:
-                    return <FargekategoriIkonGulSirkel data-testid={dataTestid} />;
+                    return <FargekategoriIkonGulSirkel data-testid={dataTestid} fontSize="1.5rem" />;
                 case KategoriModell.LILLA:
-                    return <FargekategoriIkonLillaFirkant data-testid={dataTestid} />;
+                    return <FargekategoriIkonLillaFirkant data-testid={dataTestid} fontSize="1.5rem" />;
                 default:
                     return <div className="tomt-arbeidslisteikon" />;
             }

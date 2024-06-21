@@ -10,7 +10,7 @@ import {HUSKELAPP} from '../konstanter';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
-    innloggetVeileder: OrNothing<string>;
+    innloggetVeilederIdent: OrNothing<string>;
     skalVises: boolean;
     settMarkert: (fnr: string, markert: boolean) => void;
     apen: boolean;
@@ -18,7 +18,7 @@ interface ArbeidslistePanelProps {
 
 export default function ArbeidslistePanel({
     bruker,
-    innloggetVeileder,
+    innloggetVeilederIdent,
     skalVises,
     settMarkert,
     apen
@@ -62,14 +62,17 @@ export default function ArbeidslistePanel({
                             </BodyShort>
                             <div className="brukerliste__arbeidslisteinnhold_footer">
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
-                                    {`Oppdatert ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
+                                    {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
                                 {erHuskelappFeatureTogglePa ? (
-                                    <LagHuskelappInngang bruker={bruker} />
+                                    <LagHuskelappInngang
+                                        bruker={bruker}
+                                        innloggetVeilederIdent={innloggetVeilederIdent}
+                                    />
                                 ) : (
                                     <ArbeidslisteModalRediger
                                         bruker={bruker}
-                                        innloggetVeileder={innloggetVeileder}
+                                        innloggetVeilederIdent={innloggetVeilederIdent}
                                         sistEndretDato={sistEndretDato}
                                         sistEndretAv={sistEndretAv}
                                         settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}

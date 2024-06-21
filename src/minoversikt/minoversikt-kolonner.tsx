@@ -92,8 +92,9 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
-    const brukersSituasjonSistEndret = bruker.brukersSituasjonSistEndret
-        ? new Date(bruker.brukersSituasjonSistEndret)
+
+    const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
+        ? new Date(bruker.utdanningOgSituasjonSistEndret)
         : null;
 
     const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
@@ -404,14 +405,19 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
             <DatoKolonne
-                dato={brukersSituasjonSistEndret}
-                skalVises={valgteKolonner.includes(Kolonne.BRUKERS_SITUASJON_SIST_ENDRET)}
+                dato={brukersUtdanningOgSituasjonSistEndret}
+                skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                 className="col col-xs-2"
             />
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
-                tekst={bruker.huskelapp?.kommentar ? truncateTekst(bruker.huskelapp.kommentar) : ' '}
+                tekst={
+                    bruker.huskelapp?.kommentar
+                        ? // Fjerner eventuelle linjeskift før teksten og viser kun tekst fram til første linjeskift eller maks 30 tegn, ref. truncateTekst()
+                          truncateTekst(bruker.huskelapp.kommentar.trimStart().split('\n')[0])
+                        : ' '
+                }
             />
             <DatoKolonne
                 dato={huskeLappFrist}

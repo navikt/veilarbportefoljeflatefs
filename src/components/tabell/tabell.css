@@ -30,7 +30,7 @@
 }
 
 .veilarbportefoljeflatefs .tomt-arbeidslisteikon {
-    width: 19px;
-    height: 19px;
+    width: calc(19 / 16 * 1rem); /* 19px */
+    height: calc(19 / 16 * 1rem);
     display: block;
 }

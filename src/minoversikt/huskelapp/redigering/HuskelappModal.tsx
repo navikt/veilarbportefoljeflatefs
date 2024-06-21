@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import classNames from 'classnames';
 import {Button, Modal} from '@navikt/ds-react';
-import {ArrowRightIcon} from '@navikt/aksel-icons';
+import {ArrowRightIcon, TrashIcon} from '@navikt/aksel-icons';
 import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
@@ -15,8 +15,9 @@ import {endreHuskelapp} from './endreHuskelapp';
 import {GammelArbeidsliste} from './GammelArbeidsliste';
 import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {NyHuskelapp} from './NyHuskelapp';
-import {SlettArbeidsliste} from './SlettArbeidsliste';
-import {SlettHuskelappKnapp} from '../modalvisning/SlettHuskelappKnapp';
+import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
+import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
+import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
 import './rediger-huskelapp.css';
 
 interface Props {
@@ -25,21 +26,15 @@ interface Props {
     huskelapp?: HuskelappModell;
     bruker: BrukerModell;
     arbeidsliste?: ArbeidslisteModell | null;
-    /** For å kunne lukke visningsmodal om huskelappen blir sletta */
+    /** For å kunne lukke visningsmodal etter at huskelappen er sletta */
     lukkVisHuskelappModal?: () => void;
 }
 
-export const RedigerHuskelappModal = ({
-    isModalOpen,
-    onModalClose,
-    huskelapp,
-    bruker,
-    arbeidsliste,
-    lukkVisHuskelappModal
-}: Props) => {
+export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
-    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv;
+    const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
+    const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
@@ -68,10 +63,8 @@ export const RedigerHuskelappModal = ({
         }
     }
 
-    const lukkBeggeModalerEtterSletting = () => {
+    const lukkHuskelappmodal = () => {
         onModalClose();
-        /* Unngår å vise visningsmodal for huskelapp når den er sletta */
-        lukkVisHuskelappModal && lukkVisHuskelappModal();
     };
 
     return (
@@ -84,7 +77,7 @@ export const RedigerHuskelappModal = ({
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
-            closeOnBackdropClick={true}
+            closeOnBackdropClick={false} // TODO sett til true når vi har avbryt-bekreftelse om ein har skrive tekst i felta
         >
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
@@ -106,9 +99,29 @@ export const RedigerHuskelappModal = ({
                 <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
                     Avbryt
                 </Button>
-                {harArbeidsliste && <SlettArbeidsliste bruker={bruker} />}
+                {harArbeidsliste && (
+                    <KnappMedBekreftHandling
+                        handlingsknapptekst="Slett gammel arbeidsliste uten å lage ny huskelapp"
+                        bekreftelsesmelding={{
+                            overskrift: 'Er du sikker på at du vil slette gammel arbeidsliste?',
+                            beskrivelse: 'Dette vil slette tittel, kommentar og frist for denne personen.'
+                        }}
+                        bekreftknapp={{
+                            tekst: 'Ja, slett arbeidslista',
+                            onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
+                            onClickThen: () => lukkHuskelappmodal()
+                        }}
+                        feilmelding="Noe gikk galt ved sletting av arbeidslista."
+                        icon={<TrashIcon aria-hidden />}
+                    />
+                )}
                 {!harArbeidsliste && harHuskelapp && (
-                    <SlettHuskelappKnapp bruker={bruker} lukkModal={lukkBeggeModalerEtterSletting} variant="tertiary" />
+                    <SlettHuskelappKnapp
+                        bruker={bruker}
+                        lukkModal={lukkHuskelappmodal}
+                        variant="tertiary"
+                        bekreftelsesmelding={{width: '15rem', overskriftsnivaa: '2'}}
+                    />
                 )}
             </Modal.Footer>
         </Modal>

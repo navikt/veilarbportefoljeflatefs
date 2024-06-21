@@ -44,8 +44,7 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
                                     <BodyShort size="small">{`${veileder.etternavn}, ${veileder.fornavn}`}</BodyShort>
                                     <Button
                                         size="small"
-                                        variant="tertiary"
-                                        className="fjern--knapp"
+                                        variant="tertiary-neutral"
                                         type="button"
                                         onClick={() => fjernValgtVeileder(veileder.ident)}
                                         icon={
