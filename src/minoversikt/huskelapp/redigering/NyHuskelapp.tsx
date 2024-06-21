@@ -16,6 +16,12 @@ interface Props {
 }
 
 export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappEndret}: Props) => {
+    const handleChange = formikProps => {
+        return () => {
+            formikProps.dirty = true;
+            setHuskelappEndret(formikProps.dirty);
+        };
+    };
     return (
         <div className="ny-huskelapp huskelapp__postit">
             {harArbeidsliste && <Heading size="small">Ny huskelapp</Heading>}
@@ -32,7 +38,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappE
                         <Form
                             id="rediger-huskelapp-skjema"
                             className="ny-huskelapp-form"
-                            onChange={() => setHuskelappEndret(formikProps.dirty)}
+                            onChange={handleChange(formikProps)}
                         >
                             <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
                             <FormikDatoVelger name="frist" />
