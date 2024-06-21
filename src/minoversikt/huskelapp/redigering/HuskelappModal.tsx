@@ -48,7 +48,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
             onModalClose();
             return;
         }
-        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke siden?';
+        const dialogTekst = 'Alle endringer blir borte hvis du ikke lagrer. Er du sikker på at du vil lukke vinduet?';
         if (!window.confirm(dialogTekst)) {
             isModalOpen = false;
         } else {
