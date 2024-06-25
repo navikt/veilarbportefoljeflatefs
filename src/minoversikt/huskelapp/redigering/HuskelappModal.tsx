@@ -48,9 +48,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
     };
 
     const handleOnAvbryt = () => {
-        if (handleHuskelappEndret()) {
-            onModalClose();
-        } else if (!huskelappEndret) {
+        if (handleHuskelappEndret() || !huskelappEndret) {
             onModalClose();
         }
     };
