@@ -125,7 +125,7 @@ function MinoversiktBrukerPanel({
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
                         {bruker.fnr ? (
-                            <HuskelappIkonInngang bruker={bruker} innloggetVeileder={innloggetVeileder} />
+                            <HuskelappIkonInngang bruker={bruker} />
                         ) : (
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}

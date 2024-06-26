@@ -151,18 +151,18 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             >
                 <Modal.Header>
                     <Heading size="medium" level="2">
-                        Arbeidslistenotat, huskelapp og kategori blir slettet
+                        Arbeidslistenotat, huskelapp og/eller kategori blir slettet
                     </Heading>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
                         <BodyShort size="medium">
-                            Arbeidslistenotat, huskelapp og kategori for følgende brukere ble opprettet på en annen
-                            enhet, og vil bli slettet ved tildeling av ny veileder:
+                            Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
+                            annen enhet, og vil bli slettet ved tildeling av ny veileder:
                         </BodyShort>
                         <FnrList listeMedFnr={fnrIAdvarselslista} />
                         <BodyShort size="medium" className="sporsmal-likevel-tidele">
-                            Ønsker du likevel å tildele veilederen til følgende bruker(e)?
+                            Ønsker du likevel å tildele veilederen?
                         </BodyShort>
                     </div>
                     <div className="sletting-arbeidslista-knapp-wrapper">
@@ -187,7 +187,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                                 lukkFjernModal();
                             }}
                         >
-                            Avbryt tildeling for de aktuelle brukerne
+                            Avbryt tildeling for nevnte bruker(e)
                         </Button>
                         <Button
                             type={'submit'}
