@@ -25,7 +25,7 @@ const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | 
 
     return (
         <List as="ul" size="small" title="Kunne ikke oppdatere kategori på følgende personer:">
-            {errorFnrs?.map(fnr => <List.Item key={useId()}>{fnr}</List.Item>)}
+            {errorFnrs?.map(fnr => <List.Item key={fnr}>{fnr}</List.Item>)}
         </List>
     );
 };
