@@ -56,16 +56,16 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
         statustallId: 'fargekategoriD'
     },
     {
-        filterLabel: fargekategorier.FARGEKATEGORI_E,
-        filterId: FARGEKATEGORI_E,
-        filterNavn: 'mineFargekategorierE',
-        statustallId: 'fargekategoriE'
-    },
-    {
         filterLabel: fargekategorier.FARGEKATEGORI_F,
         filterId: FARGEKATEGORI_F,
         filterNavn: 'mineFargekategorierF',
         statustallId: 'fargekategoriF'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_E,
+        filterId: FARGEKATEGORI_E,
+        filterNavn: 'mineFargekategorierE',
+        statustallId: 'fargekategoriE'
     },
     {
         filterLabel: fargekategorier.INGEN_KATEGORI,

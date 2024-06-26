@@ -1,5 +1,5 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {FargekategoriModell, KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import {FargekategoriModell, Fargekategorinavn, KategoriModell, Sorteringsfelt} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
@@ -127,14 +127,7 @@ export const ferdigfilterListeLabelTekst = {
     INAKTIVE_BRUKERE: 'Ikke servicebehov',
     MIN_ARBEIDSLISTE: 'Min arbeidsliste',
     MINE_HUSKELAPPER: 'Huskelapper',
-    MINE_FARGEKATEGORIER: 'Kategorier',
-    FARGEKATEGORI_A: 'Blå',
-    FARGEKATEGORI_B: 'Grønn',
-    FARGEKATEGORI_C: 'Gul',
-    FARGEKATEGORI_D: 'Lilla',
-    FARGEKATEGORI_E: 'Oransje',
-    FARGEKATEGORI_F: 'Lyseblå',
-    INGEN_KATEGORI: 'Ingen kategori'
+    MINE_FARGEKATEGORIER: 'Kategorier'
 };
 
 export const arbeidslisteKategori = {
@@ -151,15 +144,7 @@ export const arbeidslisteKategoriGammel = {
     GUL: 'Gul (med arbeidsliste)'
 };
 
-export const fargekategorier = {
-    FARGEKATEGORI_A: 'Blå',
-    FARGEKATEGORI_B: 'Grønn',
-    FARGEKATEGORI_C: 'Gul',
-    FARGEKATEGORI_D: 'Lilla',
-    FARGEKATEGORI_E: 'Lyseblå',
-    FARGEKATEGORI_F: 'Oransje',
-    INGEN_KATEGORI: 'Ingen kategori'
-};
+export const fargekategorier = Fargekategorinavn;
 
 export const alder = {
     '0-19': '≤ 19 år',

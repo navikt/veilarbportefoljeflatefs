@@ -253,13 +253,12 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
              *  -status: 500, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom noe gikk galt i oppdatering mot db (men validerong og autorisering har gått ok), har ikke oppdatert db. data vil være tom.
              *  -status: 200, body: {data: string[], errors: [], fargekategoriVerdi: FargekategoriModell} --> Dersom noen oppdateringer i db har gått bra. både data og errors kan være fylt.
              */
-            const randomize = rnd(0, 10);
+            const fnrsLength = oppdaterFargekategoriRequest.fnr.length;
+            const randomize = rnd(0, fnrsLength);
             const okFnrs = oppdaterFargekategoriRequest.fnr.slice(0, randomize);
-            const errorFnrs = oppdaterFargekategoriRequest.fnr.slice(
-                randomize,
-                oppdaterFargekategoriRequest.fnr.length
-            );
-            return randomize > 2
+            const errorFnrs = oppdaterFargekategoriRequest.fnr.slice(randomize, fnrsLength);
+
+            return randomize > fnrsLength / 5
                 ? HttpResponse.json({
                       data: okFnrs,
                       errors: errorFnrs,
