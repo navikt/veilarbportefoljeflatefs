@@ -246,8 +246,8 @@ export enum FargekategoriModell {
     FARGEKATEGORI_B = 'FARGEKATEGORI_B',
     FARGEKATEGORI_C = 'FARGEKATEGORI_C',
     FARGEKATEGORI_D = 'FARGEKATEGORI_D',
-    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
     FARGEKATEGORI_F = 'FARGEKATEGORI_F',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
     INGEN_KATEGORI = 'INGEN_KATEGORI'
 }
 
@@ -256,8 +256,8 @@ export enum Fargekategorinavn {
     FARGEKATEGORI_B = 'Grønn trekant',
     FARGEKATEGORI_C = 'Gul sirkel',
     FARGEKATEGORI_D = 'Lilla firkant',
-    FARGEKATEGORI_E = 'Lyseblå femkant',
-    FARGEKATEGORI_F = 'Oransje diamant',
+    FARGEKATEGORI_E = 'Turkis femkant',
+    FARGEKATEGORI_F = 'Oransje rombe',
     INGEN_KATEGORI = 'Ingen kategori'
 }
 
