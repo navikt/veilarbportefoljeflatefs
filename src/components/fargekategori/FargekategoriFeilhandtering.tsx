@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, BodyShort, List, useId} from '@navikt/ds-react';
+import {Alert, BodyShort, List} from '@navikt/ds-react';
 import {Status} from '../../model-interfaces';
 
 interface Props {
