@@ -32,6 +32,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappE
                             id="rediger-huskelapp-skjema"
                             className="ny-huskelapp-form"
                             onKeyUp={() => setHuskelappEndret(dirty)}
+                            onBlur={() => setHuskelappEndret(dirty)}
                         >
                             <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
                             <FormikDatoVelger name="frist" />
