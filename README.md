@@ -1,16 +1,15 @@
 [![CircleCI](https://circleci.com/gh/navikt/veilarbportefoljeflatefs.svg?style=svg)](https://circleci.com/gh/navikt/veilarbportefoljeflatefs)
 
-# Portefølje-klientside / "Oversikten"
+**Installere pakker**
 
-Applikasjonen benytter seg av fetchmock-biblioteket for å kunne mocke ut avhengigheter. Se i `mocks/`.
+For å kunne hente ned @navikt/ds-icons (fram til vi får byttet ut de resterende ikonene) må du legge til en `.npmrc` fil i homemappen med følgende innhold:
 
-## Oppsett på internt utviklerimage
+```shell
+//npm.pkg.github.com/:_authToken=<TOKEN>
+@navikt:registry=https://npm.pkg.github.com
+```
 
-For å kunne laste ned avhengigheter internt, fjern alle interne url-er i din `~/.npmrc` og legg til webproxy i din `.bashrc`/`.zshrc`:
-
-Se proxy-oppsett for Linux i confluence som utgangspunkt (I Windows trenger du bare eksportere de samme miljøvariablene nevnt her):
-
-https://confluence.adeo.no/x/PQJ8DQ
+[Se navikt/frontend](https://github.com/navikt/frontend?tab=readme-ov-file#installere-pakker-lokalt) for å se hvordan du kan generere et token på github.
 
 ## Kjøre applikasjonen stand alone
 
