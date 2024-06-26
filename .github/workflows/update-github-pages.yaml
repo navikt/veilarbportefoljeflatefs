@@ -18,9 +18,12 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
-                  cache: 'npm'
+                  cache: npm
+                  registry-url: 'https://npm.pkg.github.com'
             - name: Install dependencies
               run: npm ci
+              env: # Kan nok fjernes igjen når vi ikke bruker ds-icons lenger
+                  NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Build mock application
               run: npm run build:mock
             - name: Legg til 404 fil
