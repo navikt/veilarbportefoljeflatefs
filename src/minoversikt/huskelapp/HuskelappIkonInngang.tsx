@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell, VeilederModell} from '../../model-interfaces';
 import {HuskelappModal} from './redigering/HuskelappModal';
@@ -26,14 +26,6 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
         );
     }
 
-    function lukkeHuskelappmodal() {
-        setSkalViseHuskelappModal(false);
-    }
-
-    function apneHuskelappmodal() {
-        setSkalViseHuskelappModal(true);
-    }
-
     const titletekst = () => {
         if (bruker.huskelapp) {
             return 'Endre huskelapp';
@@ -48,11 +40,11 @@ export const HuskelappIkonInngang = ({bruker, innloggetVeileder}: Props) => {
                 variant="tertiary"
                 icon={harHuskelappEllerArbeidsliste ? <HuskelappIkon /> : <HuskelappIkonTomt />}
                 title={titletekst()}
-                onClick={apneHuskelappmodal}
+                onClick={() => setSkalViseHuskelappModal(true)}
             />
             {skalViseHuskelappModal && (
                 <HuskelappModal
-                    onModalClose={lukkeHuskelappmodal}
+                    onModalClose={() => setSkalViseHuskelappModal(false)}
                     isModalOpen={skalViseHuskelappModal}
                     huskelapp={bruker.huskelapp as HuskelappModell}
                     arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}

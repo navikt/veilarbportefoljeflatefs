@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -32,10 +32,26 @@ interface Props {
 
 export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
+    const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+
     const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
+
+    const handleHuskelappEndret = () => {
+        if (huskelappEndret) {
+            return window.confirm(
+                'Alle endringer blir borte hvis du ikke lagrer. Trykk avbryt for å fortsette redigering eller OK for å lukke huskelappen.'
+            );
+        }
+    };
+
+    const handleOnAvbryt = () => {
+        if (handleHuskelappEndret() || !huskelappEndret) {
+            onModalClose();
+        }
+    };
 
     async function validerOgLagreHuskelapp(values, formikHelpers) {
         if (!values.frist && !values.kommentar) {
@@ -63,10 +79,6 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
         }
     }
 
-    const lukkHuskelappmodal = () => {
-        onModalClose();
-    };
-
     return (
         <Modal
             header={{
@@ -77,7 +89,8 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
-            closeOnBackdropClick={false} // TODO sett til true når vi har avbryt-bekreftelse om ein har skrive tekst i felta
+            onBeforeClose={handleHuskelappEndret}
+            closeOnBackdropClick={false} // TODO sett til true når arbeidslistene er migrert, antar det er mindre sjanse for å kopiere (uten å ha endret innholdet, som vil trigge bekreftelsesmelding)
         >
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
@@ -90,13 +103,14 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                     huskelapp={huskelapp}
                     onSubmit={validerOgLagreHuskelapp}
                     harArbeidsliste={harArbeidsliste}
+                    setHuskelappEndret={setHuskelappEndret}
                 />
             </Modal.Body>
             <Modal.Footer className="rediger-huskelapp-modal__footer">
                 <Button variant="primary" size="small" type="submit" form="rediger-huskelapp-skjema">
                     {arbeidsliste ? 'Lagre huskelapp og slett arbeidsliste' : 'Lagre'}
                 </Button>
-                <Button size="small" variant="secondary" type="button" onClick={onModalClose}>
+                <Button size="small" variant="secondary" type="button" onClick={handleOnAvbryt}>
                     Avbryt
                 </Button>
                 {harArbeidsliste && (
@@ -109,7 +123,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                         bekreftknapp={{
                             tekst: 'Ja, slett arbeidslista',
                             onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
-                            onClickThen: () => lukkHuskelappmodal()
+                            onClickThen: () => onModalClose()
                         }}
                         feilmelding="Noe gikk galt ved sletting av arbeidslista."
                         icon={<TrashIcon aria-hidden />}
@@ -118,7 +132,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                 {!harArbeidsliste && harHuskelapp && (
                     <SlettHuskelappKnapp
                         bruker={bruker}
-                        lukkModal={lukkHuskelappmodal}
+                        lukkModal={onModalClose}
                         variant="tertiary"
                         bekreftelsesmelding={{width: '15rem', overskriftsnivaa: '2'}}
                     />

@@ -11,11 +11,14 @@ interface Props {
 
 export const HuskelappPanelvisning = ({bruker, huskelapp}: Props) => {
     const [skalViseHuskelappModal, setSkalViseHuskelappModal] = useState<boolean>(false);
-    const visRedigeringsmodal = () => setSkalViseHuskelappModal(true);
 
     return (
         <div className="huskelapp-panel">
-            <HuskelappForPanel huskelapp={huskelapp} bruker={bruker} onEndreHuskelapp={visRedigeringsmodal} />
+            <HuskelappForPanel
+                huskelapp={huskelapp}
+                bruker={bruker}
+                onEndreHuskelapp={() => setSkalViseHuskelappModal(true)}
+            />
             {skalViseHuskelappModal && (
                 <HuskelappModal
                     onModalClose={() => {

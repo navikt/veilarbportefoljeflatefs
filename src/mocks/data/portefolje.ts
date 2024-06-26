@@ -109,7 +109,7 @@ function lagYtelse() {
 function lagOverskrift() {
     const maybeOverskrift = rnd(0, 1);
     if (maybeOverskrift > 0.5) {
-        return faker.lorem.word().substring(0, 12);
+        return faker.lorem.word();
     }
     return null;
 }
@@ -193,7 +193,7 @@ const lagHuskelapp = fnr => {
     return {
         huskelappId: huskeklappId,
         brukerFnr: fnr,
-        kommentar: '\n Dette er et mock kommentar \n',
+        kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
         frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
         enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234',
         sistEndretAv: 'Meg selv'
