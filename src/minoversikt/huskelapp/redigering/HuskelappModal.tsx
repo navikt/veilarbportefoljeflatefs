@@ -90,7 +90,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
         >
             <Modal.Header>
                 <div className="rediger-huskelapp-modal-header">
-                    <span className="navds-modal__header-icon">
+                    <span className="rediger-huskelapp-modal-header-ikon">
                         <HuskelappIkon aria-hidden />
                     </span>
                     <Heading

@@ -11,19 +11,22 @@
 .rediger-huskelapp-modal-header {
     display: flex;
     align-items: center;
+}
 
-    .navds-modal__header-icon {
-        min-width: 50px;
-        min-height: 50px;
-    }
+.rediger-huskelapp-modal-header .rediger-huskelapp-modal-header-ikon svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.3rem;
 }
 
 .rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral {
     color: var(--a-text-default);
-
-    .veilarbportefoljeflatefs .navds-label {
-        font-size: 2rem !important;
-    }
+    padding-right: 0;
+}
+.rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral .navds-copybutton__content span {
+    font-size: var(
+        --a-font-size-heading-xsmall
+    ) !important; /* Overskriv stylinga '0.875rem !important' frå style.css */
 }
 
 .rediger-huskelapp-modal-header-tekst {
