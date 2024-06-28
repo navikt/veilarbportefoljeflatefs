@@ -105,7 +105,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                         {`${bruker.fornavn} ${bruker.etternavn}`}
                     </Heading>
                     <CopyButton
-                        className="rediger-huskelapp-modal"
+                        className="rediger-huskelapp-modal-header-copybutton"
                         iconPosition="right"
                         copyText={bruker.fnr}
                         text={`F.nr.: ${bruker.fnr}`}

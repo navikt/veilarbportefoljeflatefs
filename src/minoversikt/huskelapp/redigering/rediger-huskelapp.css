@@ -11,6 +11,19 @@
 .rediger-huskelapp-modal-header {
     display: flex;
     align-items: center;
+
+    .navds-modal__header-icon {
+        min-width: 50px;
+        min-height: 50px;
+    }
+}
+
+.rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral {
+    color: var(--a-text-default);
+
+    .veilarbportefoljeflatefs .navds-label {
+        font-size: 2rem !important;
+    }
 }
 
 .rediger-huskelapp-modal-header-tekst {
