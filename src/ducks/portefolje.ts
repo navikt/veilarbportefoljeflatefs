@@ -134,7 +134,8 @@ function oppdaterHuskelappForbruker(brukere, huskelapp) {
                           frist: huskelapp.frist,
                           huskelappId: huskelapp.huskelappId,
                           endretDato: huskelapp.endretDato,
-                          endretAv: huskelapp.endretAv
+                          endretAv: huskelapp.endretAv,
+                          enhetId: huskelapp.enhetId
                       }
                     : null
             };
