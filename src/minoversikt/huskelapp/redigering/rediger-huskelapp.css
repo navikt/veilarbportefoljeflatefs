@@ -8,6 +8,15 @@
     min-width: fit-content;
 }
 
+.rediger-huskelapp-modal-header {
+    display: flex;
+    align-items: center;
+}
+
+.rediger-huskelapp-modal-header-tekst {
+    margin-left: 0.3rem;
+}
+
 .rediger-huskelapp-modal .rediger-huskelapp-modal__body {
     display: flex;
     flex-wrap: wrap;
