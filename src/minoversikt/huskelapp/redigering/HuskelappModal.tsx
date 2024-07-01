@@ -3,7 +3,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import classNames from 'classnames';
-import {Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
+import {BodyShort, Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
 import {ArrowRightIcon, TrashIcon} from '@navikt/aksel-icons';
 import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
@@ -101,9 +101,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                     </Heading>
                 </div>
                 <div className="rediger-huskelapp-modal-header">
-                    <Heading size="xsmall" level="3">
-                        {`${bruker.fornavn} ${bruker.etternavn}`}
-                    </Heading>
+                    <BodyShort weight="semibold">{`${bruker.fornavn} ${bruker.etternavn}`}</BodyShort>
                     <CopyButton
                         className="rediger-huskelapp-modal-header-copybutton"
                         iconPosition="right"
