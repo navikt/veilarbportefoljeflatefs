@@ -8,6 +8,26 @@
     min-width: fit-content;
 }
 
+.rediger-huskelapp-modal-header {
+    display: flex;
+    align-items: center;
+}
+
+.rediger-huskelapp-modal-header .rediger-huskelapp-modal-header-ikon svg {
+    width: 1.5rem;
+    height: 24px;
+    margin-right: 0.3rem;
+}
+
+.rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral {
+    color: var(--a-text-default);
+    padding-right: 0;
+}
+
+.rediger-huskelapp-modal-header-tekst {
+    margin-left: 0.3rem;
+}
+
 .rediger-huskelapp-modal .rediger-huskelapp-modal__body {
     display: flex;
     flex-wrap: wrap;

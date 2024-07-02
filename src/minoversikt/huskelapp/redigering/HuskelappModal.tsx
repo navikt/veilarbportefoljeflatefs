@@ -3,7 +3,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import classNames from 'classnames';
-import {Button, Modal} from '@navikt/ds-react';
+import {BodyShort, Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
 import {ArrowRightIcon, TrashIcon} from '@navikt/aksel-icons';
 import {ArbeidslisteDataModell, ArbeidslisteModell, BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
@@ -38,6 +38,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
     const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
     const harHuskelapp = !!huskelapp?.huskelappId;
+    const modalNavn = !harArbeidsliste ? 'Huskelapp' : 'Bytt fra gammel arbeidsliste til ny huskelapp';
 
     const handleHuskelappEndret = () => {
         if (huskelappEndret) {
@@ -81,17 +82,34 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
 
     return (
         <Modal
-            header={{
-                icon: <HuskelappIkon aria-hidden />,
-                heading: harArbeidsliste ? 'Bytt fra gammel arbeidsliste til ny huskelapp' : 'Huskelapp',
-                size: 'small'
-            }}
             className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
             open={isModalOpen}
             onClose={onModalClose}
             onBeforeClose={handleHuskelappEndret}
             closeOnBackdropClick={false} // TODO sett til true når arbeidslistene er migrert, antar det er mindre sjanse for å kopiere (uten å ha endret innholdet, som vil trigge bekreftelsesmelding)
         >
+            <Modal.Header>
+                <div className="rediger-huskelapp-modal-header">
+                    <span className="rediger-huskelapp-modal-header-ikon">
+                        <HuskelappIkon aria-hidden />
+                    </span>
+                    <Heading
+                        size="small"
+                        className="rediger-huskelapp-modal-header-tekst"
+                    >
+                        {modalNavn}
+                    </Heading>
+                </div>
+                <div className="rediger-huskelapp-modal-header">
+                    <BodyShort weight="semibold">{`${bruker.fornavn} ${bruker.etternavn}`}</BodyShort>
+                    <CopyButton
+                        className="rediger-huskelapp-modal-header-copybutton"
+                        iconPosition="right"
+                        copyText={bruker.fnr}
+                        text={`F.nr.: ${bruker.fnr}`}
+                    />
+                </div>
+            </Modal.Header>
             <Modal.Body className="rediger-huskelapp-modal__body">
                 {harArbeidsliste && (
                     <>
