@@ -95,7 +95,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                     </span>
                     <Heading
                         size="small"
-                        className="rediger-huskelapp-modal-header rediger-huskelapp-modal-header-tekst"
+                        className="rediger-huskelapp-modal-header-tekst"
                     >
                         {modalNavn}
                     </Heading>
