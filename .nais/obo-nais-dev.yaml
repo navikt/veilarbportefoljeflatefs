@@ -96,12 +96,12 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.dev-fss-pub.nais.io",
+              "toUrl": "https://veilarbfilter.intern.dev.nav.no",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
                 "namespace": "pto",
-                "cluster": "dev-fss"
+                "cluster": "dev-gcp"
               }
             },
             {
