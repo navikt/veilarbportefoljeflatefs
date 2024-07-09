@@ -96,7 +96,7 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.pto",
+              "toUrl": "https://veilarbfilter.dev-gcp.nav.cloud.nais.io",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
