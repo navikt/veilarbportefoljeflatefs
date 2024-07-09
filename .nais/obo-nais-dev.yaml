@@ -96,7 +96,7 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.intern.dev.nav.no",
+              "toUrl": "https://veilarbfilter.pto",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
