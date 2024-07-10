@@ -82,6 +82,9 @@ function MinOversiktListeHode({
     const forenkletAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
+    const tiltaksType =
+        harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
@@ -479,7 +482,7 @@ function MinOversiktListeHode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     tekst="Neste utløpsdato valgt aktivitet"
-                    skalVises={avansertAktivitet || forenkletAktivitet}
+                    skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"
