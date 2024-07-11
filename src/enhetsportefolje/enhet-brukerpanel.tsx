@@ -34,8 +34,8 @@ function EnhetBrukerpanel({
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
 
     const scrollToLastPos = () => {
-        const xPos = parseInt(localStorage.getItem('xPos') || '0');
-        const yPos = parseInt(localStorage.getItem('yPos') || '0');
+        const xPos = parseInt(localStorage.getItem('xScrollPos') || '0');
+        const yPos = parseInt(localStorage.getItem('yScrollPos') || '0');
         window.scrollTo(xPos, yPos);
     };
 
