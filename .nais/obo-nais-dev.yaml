@@ -49,7 +49,7 @@ spec:
           namespace: obo
       external:
         - host: veilarbportefolje.dev-fss-pub.nais.io
-        - host: veilarbfilter.intern.dev.nav.no
+        - host: veilarbfilter-gcp.intern.dev.nav.no
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
