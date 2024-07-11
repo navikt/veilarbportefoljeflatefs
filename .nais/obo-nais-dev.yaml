@@ -49,7 +49,7 @@ spec:
           namespace: obo
       external:
         - host: veilarbportefolje.dev-fss-pub.nais.io
-        - host: veilarbfilter.dev-fss-pub.nais.io
+        - host: veilarbfilter.intern.dev.nav.no
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
@@ -96,7 +96,7 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.dev-gcp.nav.cloud.nais.io",
+              "toUrl": "https://veilarbfilter.intern.dev.nav.no",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
