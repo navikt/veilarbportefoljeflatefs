@@ -47,6 +47,8 @@ spec:
       rules:
         - application: obo-unleash
           namespace: obo
+        - application: veilarbfilter
+          namespace: pto
       external:
         - host: veilarbportefolje.dev-fss-pub.nais.io
         - host: veilarbfilter.intern.dev.nav.no
