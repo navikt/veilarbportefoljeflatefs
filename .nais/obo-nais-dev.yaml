@@ -35,9 +35,6 @@ spec:
     application:
       allowAllUsers: true
       enabled: true
-      claims:
-        extra:
-          - "NAVident"
     sidecar:
       enabled: true
       autoLogin: true
@@ -100,7 +97,7 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.intern.dev.nav.no",
+              "toUrl": "http://veilarbfilter.pto",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
