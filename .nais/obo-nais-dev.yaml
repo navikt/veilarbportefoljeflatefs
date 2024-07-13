@@ -72,7 +72,7 @@ spec:
           },
           "header": {
             "csp": {
-              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no", "*.pto", "*.obo", ""*.poao"]
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no", "*.pto", "*.obo", "*.poao"]
              }
           },
           "redirects": [
