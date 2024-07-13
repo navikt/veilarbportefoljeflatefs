@@ -35,6 +35,9 @@ spec:
     application:
       allowAllUsers: true
       enabled: true
+      claims:
+        extra:
+          - "NAVident"
     sidecar:
       enabled: true
       autoLogin: true
