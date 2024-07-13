@@ -58,7 +58,6 @@ spec:
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
         - host: modiacontextholder-q1.dev-fss-pub.nais.io
-        - host: veilarbfilter.intern.dev.nav.no
   env:
     - name: JSON_CONFIG
       value: >
@@ -73,7 +72,7 @@ spec:
           },
           "header": {
             "csp": {
-              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no", "*.pto", "*.obo", ""*.poao"]
              }
           },
           "redirects": [
