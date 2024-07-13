@@ -72,7 +72,7 @@ spec:
           },
           "header": {
             "csp": {
-              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no", "*.pto", "*.obo", "*.poao"]
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
              }
           },
           "redirects": [
@@ -100,7 +100,7 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.pto",
+              "toUrl": "https://veilarbfilter.intern.dev.nav.no",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
