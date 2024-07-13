@@ -48,7 +48,7 @@ spec:
         - application: obo-unleash
           namespace: obo
         - application: veilarbfilter
-          namespace: pto
+          namespace: obo
       external:
         - host: veilarbportefolje.dev-fss-pub.nais.io
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
@@ -97,11 +97,11 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "http://veilarbfilter.pto",
+              "toUrl": "http://veilarbfilter.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
-                "namespace": "pto",
+                "namespace": "obo",
                 "cluster": "dev-gcp"
               }
             },
