@@ -45,9 +45,10 @@ spec:
       rules:
         - application: obo-unleash
           namespace: obo
+        - application: veilarbfilter
+          namespace: obo
       external:
         - host: veilarbportefolje.prod-fss-pub.nais.io
-        - host: veilarbfilter.prod-fss-pub.nais.io
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
         - host: veilarbveileder.prod-fss-pub.nais.io
         - host: veilarboppfolging.prod-fss-pub.nais.io
@@ -94,12 +95,12 @@ spec:
             },
             {
               "fromPath": "/veilarbfilter",
-              "toUrl": "https://veilarbfilter.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarbfilter.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbfilter",
-                "namespace": "pto",
-                "cluster": "prod-fss"
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             },
             {
