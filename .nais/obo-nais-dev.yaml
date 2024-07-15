@@ -49,6 +49,8 @@ spec:
           namespace: obo
         - application: veilarbfilter
           namespace: obo
+        - application: endringslogg
+          namespace: pto
       external:
         - host: veilarbportefolje.dev-fss-pub.nais.io
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
