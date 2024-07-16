@@ -1,3 +1,10 @@
+.veilarbportefoljeflatefs {
+    /* Styrer paddinga for innhaldet på sida
+     * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
+     * Howto: margin-left: -x, padding-left: x; og forelders padding-left: x */
+    --side-padding-x-akse: 3rem;
+}
+
 .veilarbportefoljeflatefs .ord-brekk {
     hyphens: auto;
     word-break: break-word;
@@ -155,33 +162,16 @@ body {
     font-weight: 400;
     color: #262626;
     font-family: 'Source Sans Pro', Arial, sans-serif;
+
+    /* Det som set grå bakgrunn på heile sida */
     background-color: #f4f4f4;
+
     filter: none;
 }
 
 @media print {
     body a[href]:after {
         content: none !important;
-    }
-}
-
-body #mainapp {
-    background-color: #fff;
-    margin: 0 auto;
-    height: 100%;
-    max-height: 8rem;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
-}
-
-@media (max-width: 870px) {
-    body #mainapp {
-        max-height: 10rem;
-    }
-}
-
-@media (max-width: 782px) {
-    body #mainapp {
-        max-height: 11rem;
     }
 }
 
@@ -1142,7 +1132,7 @@ GRID
 
 .veilarbportefoljeflatefs .side-storrelse {
     margin: 0 auto;
-    padding: 0 3rem;
+    padding: 0 var(--side-padding-x-akse);
     max-width: 1809px;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -1271,7 +1261,6 @@ GRID
     border: 0;
     padding: 0;
     text-decoration: none;
-    background: red;
 }
 
 .veilarbportefoljeflatefs .lenke--frittstaende:hover {

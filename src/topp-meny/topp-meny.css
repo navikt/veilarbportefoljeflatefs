@@ -2,12 +2,25 @@
     align-items: normal;
     display: grid;
     grid-template-columns: auto auto auto auto;
+
+    background: var(--a-bg-default);
+    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
+
+    /* Strekk bakgrunnsfargen heilt ut til kantane av sida med negativ margin,
+     *   og dyttar innhaldet tilsvarande inn att med padding */
+    margin-left: calc(var(--side-padding-x-akse) * -1);
+    margin-right: calc(var(--side-padding-x-akse) * -1);
+    padding-left: var(--side-padding-x-akse);
+    padding-right: var(--side-padding-x-akse);
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversikt-overskrifter {
     grid-column: 1;
     display: flex;
     flex-direction: row;
+    gap: 1rem;
+
+    margin-right: 1rem;
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversiktslenke {
@@ -17,7 +30,7 @@
     padding: 1rem 1.5rem 0.5rem;
     font-weight: 100;
     opacity: 0.8;
-    margin: 0.3rem 1rem 1rem 0;
+    margin-top: 0.3rem;
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversiktslenke:visited,
