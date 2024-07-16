@@ -82,7 +82,11 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
 
     return (
         <Modal
-            className={classNames('rediger-huskelapp-modal', {'med-eksisterende-arbeidsliste': harArbeidsliste})}
+            className={classNames(
+                'rediger-huskelapp-modal',
+                {'med-eksisterende-arbeidsliste': harArbeidsliste},
+                'fiks-for-gammel-datovelger'
+            )}
             open={isModalOpen}
             onClose={onModalClose}
             onBeforeClose={handleHuskelappEndret}
@@ -93,20 +97,18 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                     <span className="rediger-huskelapp-modal-header-ikon">
                         <HuskelappIkon aria-hidden />
                     </span>
-                    <Heading
-                        size="small"
-                        className="rediger-huskelapp-modal-header-tekst"
-                    >
+                    <Heading size="small" className="rediger-huskelapp-modal-header-tekst">
                         {modalNavn}
                     </Heading>
                 </div>
-                <div className="rediger-huskelapp-modal-header">
+                <div className="rediger-huskelapp-modal-personinfo">
                     <BodyShort weight="semibold">{`${bruker.fornavn} ${bruker.etternavn}`}</BodyShort>
                     <CopyButton
-                        className="rediger-huskelapp-modal-header-copybutton"
-                        iconPosition="right"
                         copyText={bruker.fnr}
                         text={`F.nr.: ${bruker.fnr}`}
+                        iconPosition="right"
+                        size="xsmall"
+                        className="rediger-huskelapp-modal-header-copybutton"
                     />
                 </div>
             </Modal.Header>

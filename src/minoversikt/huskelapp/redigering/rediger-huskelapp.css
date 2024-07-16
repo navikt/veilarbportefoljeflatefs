@@ -19,9 +19,16 @@
     margin-right: 0.3rem;
 }
 
-.rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral {
+.rediger-huskelapp-modal-personinfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.5rem;
+    row-gap: 0.1rem;
+}
+
+.rediger-huskelapp-modal-personinfo .rediger-huskelapp-modal-header-copybutton {
     color: var(--a-text-default);
-    padding-right: 0;
 }
 
 .rediger-huskelapp-modal-header-tekst {
@@ -103,4 +110,10 @@
 .veilarbportefoljeflatefs .ny-huskelapp-form .navds-label {
     /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--a-font-size-medium) !important;
+}
+
+.rediger-huskelapp-modal.fiks-for-gammel-datovelger {
+    /* Fiks som gjer heile datovelgaren synleg sjølv om han flyt ut over grensene til foreldremodalen. */
+    /* Denne kan fjernast når vi ikkje bruker Datepicker frå nav-datovelger meir */
+    overflow: visible;
 }
