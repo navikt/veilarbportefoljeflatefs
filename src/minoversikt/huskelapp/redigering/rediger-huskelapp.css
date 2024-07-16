@@ -104,3 +104,9 @@
     /* !important er brukt for å overskrive hardkodinga av alle labels til 0.875rem i style.css */
     font-size: var(--a-font-size-medium) !important;
 }
+
+.rediger-huskelapp-modal.fiks-for-gammel-datovelger {
+    /* Fiks som gjer heile datovelgaren synleg sjølv om han flyt ut over grensene til foreldremodalen. */
+    /* Denne kan fjernast når vi ikkje bruker Datepicker frå nav-datovelger meir */
+    overflow: visible;
+}
