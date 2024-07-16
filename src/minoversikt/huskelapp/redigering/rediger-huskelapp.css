@@ -19,9 +19,16 @@
     margin-right: 0.3rem;
 }
 
-.rediger-huskelapp-modal-header-copybutton.navds-copybutton--neutral {
+.rediger-huskelapp-modal-personinfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.5rem;
+    row-gap: 0.1rem;
+}
+
+.rediger-huskelapp-modal-personinfo .rediger-huskelapp-modal-header-copybutton {
     color: var(--a-text-default);
-    padding-right: 0;
 }
 
 .rediger-huskelapp-modal-header-tekst {
