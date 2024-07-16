@@ -1266,3 +1266,14 @@ GRID
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: var(--a-bg-default);
 }
+
+.veilarbportefoljeflatefs .lenke--frittstaende {
+    border: 0;
+    padding: 0;
+    text-decoration: none;
+    background: red;
+}
+
+.veilarbportefoljeflatefs .lenke--frittstaende:hover {
+    box-shadow: none;
+}

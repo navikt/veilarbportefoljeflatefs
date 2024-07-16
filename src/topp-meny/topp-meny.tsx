@@ -1,5 +1,5 @@
 import React from 'react';
-import './lenker.css';
+import './topp-meny.css';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
 import {useSelector} from 'react-redux';
