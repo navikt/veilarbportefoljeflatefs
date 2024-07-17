@@ -17,16 +17,20 @@
 .veilarbportefoljeflatefs .topp-meny .oversikt-overskrifter {
     display: flex;
     gap: 1rem;
+    margin-right: auto; /* Dyttar møteendringsboksen (og endringsloggen) lengst ut til høgre i toppmenyen */
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversiktslenke {
     border-bottom: 0.3rem solid transparent;
     text-decoration: none;
     color: var(--a-text-default);
-    padding: 1rem 1.5rem 0.5rem;
+    padding-top: 1.2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.9rem;
     font-weight: var(--a-font-weight-regular);
     opacity: 0.8;
-    margin-top: 0.3rem;
+    /*margin-top: 0.2rem;*/
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversiktslenke:visited,
@@ -59,13 +63,6 @@
     cursor: pointer;
 }
 
-.veilarbportefoljeflatefs .topp-meny .moteendringsboks {
-    margin-left: auto; /* Dyttar møteendringsboksen lengst ut til høgre i forelderen */
-    display: flex;
-    align-items: baseline; /* Sender baseline-alignment nedover slik at vi kan bruke den i møteplan-knappen */
-}
-
-.veilarbportefoljeflatefs .topp-meny .moteendringsboks .endringslogg {
-    margin-left: 2.5rem;
+.veilarbportefoljeflatefs .topp-meny .endringslogg {
     align-self: center;
 }
