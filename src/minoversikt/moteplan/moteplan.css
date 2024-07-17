@@ -1,7 +1,11 @@
 .veilarbportefoljeflatefs .moteplan_knapp {
     height: fit-content;
-    margin-top: 0.3125rem !important;
-    margin-right: 0.5rem;
+    align-items: baseline; /* Gjer at vi kan plassere teksten i knappen på linje med annan tekst i topp-meny */
+}
+
+.veilarbportefoljeflatefs .moteplan_knapp :first-child {
+    /* Midtstiller ikonet på knappen */
+    align-self: center;
 }
 
 .veilarbportefoljeflatefs .moteplan_popover {

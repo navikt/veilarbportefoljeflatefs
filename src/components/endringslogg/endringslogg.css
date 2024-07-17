@@ -134,7 +134,6 @@
     border: none;
     cursor: pointer;
     background-color: transparent;
-    margin-top: 0.2rem;
 }
 .endringslogg-dropDown:focus {
     fill: var(--a-surface-action);
