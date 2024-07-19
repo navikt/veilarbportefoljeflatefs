@@ -4,7 +4,6 @@ import {AnyAction} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
-import {Checkbox, Tag} from '@navikt/ds-react';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
@@ -22,6 +21,8 @@ import FargekategoriTabellradKnapp from '../components/fargekategori/fargekatego
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
+import {Checkbox, Tag} from '@navikt/ds-react';
 import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
@@ -104,6 +105,7 @@ function MinoversiktBrukerPanel({
                     hideLabel
                     onChange={() => {
                         settMarkert(bruker.fnr, !bruker.markert);
+                        dispatch(nullstillBrukerfeil());
                     }}
                     size="small"
                 >

@@ -1,12 +1,11 @@
 import {default as React, useRef, useState} from 'react';
-import {useEventListener} from '../../hooks/use-event-listener';
+import {useDispatch, useSelector} from 'react-redux';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {Button} from '@navikt/ds-react';
 import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
+import {Button, useEventListener} from '@navikt/ds-react';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -46,13 +45,13 @@ export default function ToolbarKnapp({
             // Klikket er inne i komponenten
             return;
         }
-        // Klikket er utenfor, oppdater staten
-        fjernBrukerfeilmelding();
+        if (!e.target.parentNode.className.includes('brukerliste__checkbox')) {
+            fjernBrukerfeilmelding();
+        }
         if (isInputOpen) {
             requestSetOpenStatus(false);
         }
     };
-
     const escHandler = event => {
         if (event.keyCode === 27) {
             fjernBrukerfeilmelding();
