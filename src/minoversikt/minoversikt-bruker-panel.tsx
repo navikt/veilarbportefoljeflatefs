@@ -1,4 +1,4 @@
-import React, {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
+import {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {AnyAction} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -54,8 +54,8 @@ function MinoversiktBrukerPanel({
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
 
     const scrollToLastPos = () => {
-        const xPos = parseInt(localStorage.getItem('xPos') || '0');
-        const yPos = parseInt(localStorage.getItem('yPos') || '0');
+        const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
+        const yPos = parseInt(localStorage.getItem('yScrollPos') ?? '0');
         window.scrollTo(xPos, yPos);
     };
 
