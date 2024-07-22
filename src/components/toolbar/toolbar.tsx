@@ -1,20 +1,20 @@
-import * as React from 'react';
-import Paginering from './paginering/paginering';
-import Listevisning from './listevisning/listevisning';
-import {OversiktType} from '../../ducks/ui/listevisning';
-import './toolbar.css';
-import '../../style.css';
+import React from 'react';
 import {useSelector} from 'react-redux';
+import classNames from 'classnames';
+import {AddPerson, Search} from '@navikt/ds-icons';
+import {Alert, Heading} from '@navikt/ds-react';
+import Paginering from './paginering/paginering';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
-import classNames from 'classnames';
 import {useWindowWidth} from '../../hooks/use-window-width';
-import {AddPerson, Search} from '@navikt/ds-icons';
-import {Alert, Heading} from '@navikt/ds-react';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../../konstanter';
+import VelgKolonner from './velg-kolonner';
+import './toolbar.css';
+import '../../style.css';
 
 interface ToolbarProps {
     oversiktType: OversiktType;
@@ -114,7 +114,7 @@ function Toolbar({
                     {oversikt(oversiktType)}
                 </div>
                 <div className="toolbar__element">
-                    <Listevisning oversiktType={oversiktType} />
+                    <VelgKolonner oversiktType={oversiktType} />
                     <Paginering onPaginering={onPaginering} antallTotalt={antallTotalt} />
                 </div>
             </div>

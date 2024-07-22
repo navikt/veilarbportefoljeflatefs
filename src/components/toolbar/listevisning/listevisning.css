@@ -20,29 +20,3 @@
     background-color: #a0a0a0;
     border-color: #a0a0a0;
 }
-
-.veilarbportefoljeflatefs .toolbar__velg-kolonner {
-    margin-right: 1rem;
-    min-width: 11rem;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown {
-    margin-bottom: 0;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btnwrapper--disabled svg {
-    opacity: 0.4;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btnwrapper--disabled:hover {
-    border: none;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btn {
-    background-color: var(--a-bg-subtle);
-    border: 1px solid transparent;
-    padding: 0.5rem 0.5rem 0 0.5rem !important;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner svg {
-    margin-right: 0.2rem;
-}
-.veilarbportefoljeflatefs .toolbar__velg-kolonner .velg-kolonner__tekst {
-    position: absolute;
-    top: 10px;
-}
