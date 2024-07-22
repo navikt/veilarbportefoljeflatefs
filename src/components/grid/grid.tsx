@@ -37,7 +37,7 @@ function Grid({columns, gap, className, children}: Props) {
     });
 
     return (
-        <div className={`grid ${className ? className : ''}`} style={style}>
+        <div className={`grid ${className || ''}`} style={style}>
             {placedChildren}
         </div>
     );

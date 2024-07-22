@@ -232,7 +232,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 <TekstKolonne
                     className="col col-xs-2"
                     skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
-                    tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
+                    tekst={vurderingsfristAAP || '–'}
                 />
             )}
             <UkeKolonne

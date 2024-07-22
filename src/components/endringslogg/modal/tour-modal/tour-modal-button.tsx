@@ -26,7 +26,7 @@ export const TourModalButton = ({modal, id, buttonText}: ModalStepperProps) => {
                     trackModalOpen(id);
                 }}
             >
-                <b>{buttonText ? buttonText : 'Se hvordan'}</b>
+                <b>{buttonText || 'Se hvordan'}</b>
             </Button>
             <TourModal open={open} modal={modal} onClose={() => setOpen(false)} />
         </>

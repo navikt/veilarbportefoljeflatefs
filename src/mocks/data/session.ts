@@ -27,7 +27,7 @@ export const sessionData = ({
                 nowTimestamp >= sessionExpireTimestamp ? 0 : Math.floor((sessionExpireTimestamp - nowTimestamp) / 1000)
         },
         tokens: {
-            refreshed_at: tokensRefreshedAt ? tokensRefreshedAt : createdAt,
+            refreshed_at: tokensRefreshedAt || createdAt,
             expire_at: new Date(Math.floor(tokensExpireTimestamp)).toISOString(),
             expire_in_seconds:
                 nowTimestamp >= tokensExpireTimestamp ? 0 : Math.floor((tokensExpireTimestamp - nowTimestamp) / 1000),
