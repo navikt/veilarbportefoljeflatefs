@@ -2,8 +2,8 @@ import {lagLablerTilVeiledereMedIdenter} from './utils';
 
 describe('Test lagLablerTilVeiledereMedIdenter', () => {
     it('Test when all veiledere are active', () => {
-        var identer = ['A1', 'A2', 'A3'];
-        var aktivVeiledere = [
+        const identer = ['A1', 'A2', 'A3'];
+        const aktivVeiledere = [
             {
                 ident: 'A1',
                 etternavn: 'TestName 1',
@@ -25,8 +25,8 @@ describe('Test lagLablerTilVeiledereMedIdenter', () => {
     });
 
     it('Test when some of veiledere are not active anymore', () => {
-        var identer = ['A1', 'A2', 'A3'];
-        var aktivVeiledere = [
+        const identer = ['A1', 'A2', 'A3'];
+        const aktivVeiledere = [
             {
                 ident: 'A1',
                 etternavn: 'TestName 1',
@@ -38,7 +38,7 @@ describe('Test lagLablerTilVeiledereMedIdenter', () => {
                 fornavn: 'TestLastName 3'
             }
         ];
-        let filteredVeileder = lagLablerTilVeiledereMedIdenter(identer, aktivVeiledere, () => {});
+        const filteredVeileder = lagLablerTilVeiledereMedIdenter(identer, aktivVeiledere, () => {});
         expect(filteredVeileder.length).toBe(2);
         filteredVeileder.forEach(item => {
             expect(item.label).toBeDefined();
@@ -47,15 +47,15 @@ describe('Test lagLablerTilVeiledereMedIdenter', () => {
     });
 
     it('Test when some of veiledere are not active anymore', () => {
-        var identer = ['A1', 'A2', 'A3'];
-        var aktivVeiledere = [
+        const identer = ['A1', 'A2', 'A3'];
+        const aktivVeiledere = [
             {
                 ident: 'A3',
                 etternavn: 'TestName 3',
                 fornavn: 'TestLastName 3'
             }
         ];
-        let filteredVeileder = lagLablerTilVeiledereMedIdenter(identer, aktivVeiledere, () => {});
+        const filteredVeileder = lagLablerTilVeiledereMedIdenter(identer, aktivVeiledere, () => {});
         expect(filteredVeileder.length).toBe(1);
         filteredVeileder.forEach(item => {
             expect(item.label).toBeDefined();

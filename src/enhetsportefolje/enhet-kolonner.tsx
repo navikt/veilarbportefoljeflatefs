@@ -113,7 +113,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
-        var dataOmBarnSorted = dataOmBarn
+        const dataOmBarnSorted = dataOmBarn
             .map(x => x.alder)
             .sort((a, b) => (a < b ? -1 : 1))
             .map(x => String(x));
