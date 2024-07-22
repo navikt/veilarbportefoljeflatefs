@@ -31,8 +31,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
                             </Table.DataCell>
                         </Table.Row>
                     )}
-                    {moter != null &&
-                        moter.map((mote, key) => <MoteKollonne dato={dato} mote={mote} enhetId={enhetId} key={key} />)}
+                    {moter?.map((mote, key) => <MoteKollonne dato={dato} mote={mote} enhetId={enhetId} key={key} />)}
                 </Table.Body>
             </Table>
         </li>

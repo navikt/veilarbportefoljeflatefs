@@ -143,7 +143,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={
-                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                    bruker.hovedStatsborgerskap?.statsborgerskap
                         ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
                         : '-'
                 }
@@ -153,7 +153,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
-                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                    bruker.hovedStatsborgerskap?.gyldigFra
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }

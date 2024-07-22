@@ -172,7 +172,7 @@ function MinoversiktBrukerPanel({
                     <ArbeidslistePanel
                         skalVises={arbeidslisteAktiv}
                         bruker={bruker}
-                        innloggetVeilederIdent={innloggetVeileder && innloggetVeileder.ident}
+                        innloggetVeilederIdent={innloggetVeileder?.ident}
                         settMarkert={() => {
                             settMarkert(bruker.fnr, !bruker.markert);
                         }}

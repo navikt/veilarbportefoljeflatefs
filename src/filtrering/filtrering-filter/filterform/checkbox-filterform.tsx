@@ -49,7 +49,7 @@ function CheckboxFilterform({
             <Checkbox
                 className={filterValue.className}
                 data-testid={`filter_${filterKey}`}
-                indeterminate={filterValue.indeterminate && filterValue.indeterminate()}
+                indeterminate={filterValue.indeterminate?.()}
                 value={filterKey}
             >
                 {filterValue.label}
@@ -71,7 +71,7 @@ function CheckboxFilterform({
                         >
                             {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
                                 <div key={filterKey}>
-                                    {tooltips && tooltips[filterKey] ? (
+                                    {tooltips?.[filterKey] ? (
                                         <Tooltip
                                             content={tooltips[filterKey]}
                                             placement="right"

@@ -26,10 +26,9 @@ export default function ArbeidslistePanel({
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
 
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
-    const sistEndretAv =
-        bruker.arbeidsliste.sistEndretAv && bruker.arbeidsliste.sistEndretAv.veilederId
-            ? bruker.arbeidsliste.sistEndretAv.veilederId
-            : String.fromCharCode(8212);
+    const sistEndretAv = bruker.arbeidsliste.sistEndretAv?.veilederId
+        ? bruker.arbeidsliste.sistEndretAv.veilederId
+        : String.fromCharCode(8212);
     const overskrift = bruker.arbeidsliste.overskrift ? bruker.arbeidsliste.overskrift : 'Ingen tekst i tittel';
     const kommentar = bruker.arbeidsliste.kommentar ? bruker.arbeidsliste.kommentar : 'Ingen tekst i kommentar';
 
