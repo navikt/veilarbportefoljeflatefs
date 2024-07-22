@@ -56,7 +56,7 @@
 }
 
 .tabell thead th {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border-bottom: 1px solid #6a6a6a;
     position: sticky;
     top: 2.5rem;
@@ -164,7 +164,7 @@ body {
     font-family: 'Source Sans Pro', Arial, sans-serif;
 
     /* Det som set grå bakgrunn på heile sida */
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
 
     filter: none;
 }
@@ -1070,7 +1070,7 @@ GRID
     grid-template-columns: 21.8rem auto;
     grid-template-rows: auto auto auto auto;
     z-index: 3;
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
 }
 
 .toolbar-container .tabellinfo {
@@ -1087,7 +1087,7 @@ GRID
 }
 
 .toolbar-container .tabellinfo .tabelloverskrift {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     grid-column: 1;
 }
 
@@ -1103,7 +1103,7 @@ GRID
     grid-column-end: 3;
     grid-row: 4;
     z-index: 1;
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     box-shadow: inset 0 -1px var(--a-gray-700);
 }
 

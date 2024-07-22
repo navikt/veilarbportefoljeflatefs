@@ -1,5 +1,5 @@
 .veilarbportefoljeflatefs .minoversikt-liste__wrapper {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border-top: none;
     border-bottom: none;
     border-radius: 0 0 4px 4px;

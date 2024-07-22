@@ -35,7 +35,7 @@
     border: none;
 }
 .veilarbportefoljeflatefs .toolbar__velg-kolonner .dropdown__btn {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border: 1px solid transparent;
     padding: 0.5rem 0.5rem 0 0.5rem !important;
 }

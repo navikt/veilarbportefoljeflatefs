@@ -153,7 +153,7 @@
 }
 
 .veilarbportefoljeflatefs .enhet-tabell {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border-top-color: #fff;
     border-bottom: none;
     border-radius: 0 0 4px 4px;
