@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import ListevisningRad from './listevisning-rad';
-import './listevisning.css';
 import {AppState} from '../../../reducer';
-import VelgKolonner from '../velg-kolonner';
+import './listevisning.css';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
@@ -34,21 +33,17 @@ function Listevisning({oversiktType}: ListevisningProps) {
     }
 
     return (
-        <VelgKolonner
-            render={() => (
-                <ul className="ustilet">
-                    {muligeAlternativer.map(kolonne => (
-                        <ListevisningRad
-                            key={kolonne}
-                            kolonne={kolonne}
-                            valgt={erValgt(kolonne)}
-                            disabled={valgteAlternativ.length >= 3 && !erValgt(kolonne)}
-                            onChange={handleChange}
-                        />
-                    ))}
-                </ul>
-            )}
-        />
+        <ul className="ustilet">
+            {muligeAlternativer.map(kolonne => (
+                <ListevisningRad
+                    key={kolonne}
+                    kolonne={kolonne}
+                    valgt={erValgt(kolonne)}
+                    disabled={valgteAlternativ.length >= 3 && !erValgt(kolonne)}
+                    onChange={handleChange}
+                />
+            ))}
+        </ul>
     );
 }
 

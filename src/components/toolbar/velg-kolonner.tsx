@@ -2,13 +2,15 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {Table} from '@navikt/ds-icons';
 import {useFocus} from '../../hooks/use-focus';
+import Listevisning from './listevisning/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.css';
 
 interface VelgKolonnerProps {
-    render: (lukkDropdown: () => void) => React.ReactChild;
+    oversiktType: OversiktType;
 }
 
-function VelgKolonner({render}: VelgKolonnerProps) {
+function VelgKolonner({oversiktType}: VelgKolonnerProps) {
     const [apen, setApen] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
@@ -56,7 +58,7 @@ function VelgKolonner({render}: VelgKolonnerProps) {
                         id="velg-kolonner"
                         ref={inputRef => (focusRef.current = inputRef)}
                     >
-                        {render(lukkVelgKolonner)}
+                        <Listevisning oversiktType={oversiktType} />
                     </div>
                     <Button
                         size="small"
