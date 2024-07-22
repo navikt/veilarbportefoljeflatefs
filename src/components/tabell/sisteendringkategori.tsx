@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
-import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {BodyShort} from '@navikt/ds-react';

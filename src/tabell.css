@@ -29,7 +29,7 @@
     border-left: none;
 }
 .tabell thead th {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border-bottom: 1px solid #6a6a6a;
     position: sticky;
     top: 2.5rem;
