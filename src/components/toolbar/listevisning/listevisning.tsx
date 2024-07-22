@@ -35,7 +35,6 @@ function Listevisning({oversiktType}: ListevisningProps) {
 
     return (
         <VelgKolonner
-            className="dropdown--toolbar toolbar__velg-kolonner"
             render={() => (
                 <ul className="ustilet">
                     {muligeAlternativer.map(kolonne => (
