@@ -81,7 +81,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
-    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
         bruker.innsatsgruppe,
@@ -345,7 +345,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 }
             />
             <TekstKolonne
-                tekst={!!bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)

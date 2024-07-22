@@ -36,7 +36,7 @@ export const FargekategoriFeilhandtering = ({children, apiResponse}: Props) => {
             ? JSON.parse(apiResponse.data.data)
             : apiResponse.data;
 
-    const {data: okFnrs, errors: errorFnrs} = !!responseJson ? responseJson : {data: [], errors: []};
+    const {data: okFnrs, errors: errorFnrs} = responseJson ? responseJson : {data: [], errors: []};
 
     return (
         <>

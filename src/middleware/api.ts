@@ -82,7 +82,7 @@ export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true
 export function toJson(response) {
     if (response.status !== 204) {
         // No content
-        return response.text().then(res => (!!res.length ? JSON.parse(res) : null));
+        return response.text().then(res => (res.length ? JSON.parse(res) : null));
     }
     return response;
 }

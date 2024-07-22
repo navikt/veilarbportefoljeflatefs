@@ -79,7 +79,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
@@ -321,7 +321,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 }
             />
             <TekstKolonne
-                tekst={!!bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
