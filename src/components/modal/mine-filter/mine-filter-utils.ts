@@ -1,5 +1,5 @@
-import {FiltervalgModell} from '../../../model-interfaces';
 import {isEmptyArray, isObject} from 'formik';
+import {FiltervalgModell} from '../../../model-interfaces';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 
 export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
@@ -38,16 +38,6 @@ function erValueTomt(value) {
     if (value instanceof Object) return erObjektValuesTomt(value);
     else if (Array.isArray(value)) return isEmptyArray(value);
     else return value === null || value === 'NA' || value === '' || erTomtObjekt(value);
-}
-
-export function antallFilter(filterValg) {
-    return Object.values(filterValg)
-        .filter(value => !erValueTomt(value))
-        .reduce(
-            (acc: number, filter) =>
-                isObject(filter) ? acc + antallFilter(filter) : Array.isArray(filter) ? acc + filter.length : acc + 1,
-            0
-        );
 }
 
 export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filterId?) {
