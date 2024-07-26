@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import classNames from 'classnames';
+import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
-import './filterform.css';
-import classNames from 'classnames';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
+import './filterform.css';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -97,7 +97,7 @@ function CheckboxFilterform({
             />
             {!harValg && (
                 <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
-                    {emptyCheckboxFilterFormMessage || 'Ingen veiledere funnet'}
+                    {emptyCheckboxFilterFormMessage ?? 'Ingen veiledere funnet'}
                 </Alert>
             )}
         </form>

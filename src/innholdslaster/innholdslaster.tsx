@@ -1,8 +1,7 @@
-import * as React from 'react';
-import {STATUS} from '../ducks/utils';
-import {useState} from 'react';
-import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
+import React, {useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
+import {STATUS} from '../ducks/utils';
+import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
 import {trackAmplitude} from '../amplitude/amplitude';
 
 interface InnholdslasterProps {
@@ -61,7 +60,7 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
         const feilendeReducer = medFeil(avhengigheter);
 
         const feilmelding =
-            getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
+            getFeilmeldingForReducer(feilendeReducer) ?? 'Det skjedde en feil ved innlastningen av data';
 
         trackAmplitude({name: 'alert vist', data: {variant: 'error', tekst: feilmelding}});
 
