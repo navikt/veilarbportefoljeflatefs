@@ -1,5 +1,5 @@
-import {Heading, Loader, Table} from '@navikt/ds-react';
 import * as React from 'react';
+import {Heading, Loader, Table} from '@navikt/ds-react';
 import {MoteData} from './moteplan';
 import MoteKollonne from './motekollonne';
 
@@ -31,7 +31,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
                             </Table.DataCell>
                         </Table.Row>
                     )}
-                    {moter?.map((mote, key) => <MoteKollonne dato={dato} mote={mote} enhetId={enhetId} key={key} />)}
+                    {moter?.map(mote => <MoteKollonne dato={dato} mote={mote} enhetId={enhetId} key={mote.dato} />)}
                 </Table.Body>
             </Table>
         </li>

@@ -166,7 +166,7 @@ function DragAndDropContainer({
             >
                 {dragAndDropOrder.map((filter, idx) => (
                     <DragAndDropRow
-                        key={idx}
+                        key={filter.filterId}
                         idx={idx}
                         filterNavn={filter.filterNavn}
                         isLastRow={idx === dragAndDropOrder.length - 1}

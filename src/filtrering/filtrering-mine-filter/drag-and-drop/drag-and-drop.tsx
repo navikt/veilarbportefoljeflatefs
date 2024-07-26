@@ -1,20 +1,20 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './drag-and-drop.css';
+import {useDispatch, useSelector} from 'react-redux';
+import {RadioGroup} from '@navikt/ds-react';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import DragAndDropContainer from './drag-and-drop-container';
 import MineFilterRad from '../mine-filter-rad';
-import {useDispatch, useSelector} from 'react-redux';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
-import {RadioGroup} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
+import './drag-and-drop.css';
 
 export interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
@@ -113,9 +113,9 @@ function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggabl
 
     return (
         <RadioGroup hideLegend legend="" onChange={velgFilter} value={valgtFilter} size="small">
-            {dragAndDropOrder.map((filter, idx) => (
+            {dragAndDropOrder.map(filter => (
                 <MineFilterRad
-                    key={idx}
+                    key={filter.filterId}
                     filter={filter}
                     oversiktType={oversiktType}
                     erValgt={valgtMineFilter?.filterId === filter.filterId}

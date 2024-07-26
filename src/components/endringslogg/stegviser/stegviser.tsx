@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import './stegviser.css';
 
@@ -9,11 +9,11 @@ interface StegviserProps {
 
 const Stegviser = ({antallSteg, valgtSteg}: StegviserProps) => {
     const mapTilSteg = (antall: number, selectedIdx: number) => {
-        return new Array(antall).fill(0).map((_, i) => (
+        return Array.from(Array(antall).keys()).map(stegnummer => (
             <div
-                key={i}
+                key={stegnummer}
                 className={classNames('stegviser__steg', {
-                    'stegviser__steg--selected': i === selectedIdx
+                    'stegviser__steg--selected': stegnummer === selectedIdx
                 })}
             />
         ));

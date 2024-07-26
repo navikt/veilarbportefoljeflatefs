@@ -470,6 +470,11 @@ export function hentMockPlan(): MoteData[] {
             avtaltMedNav: true
         },
         {
+            dato: '2022-03-23T13:00:00.636Z',
+            deltaker: deltaker2,
+            avtaltMedNav: false
+        },
+        {
             dato: '2022-03-25T15:02:35.636Z',
             deltaker: deltaker2,
             avtaltMedNav: false
