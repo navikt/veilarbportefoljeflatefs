@@ -21,7 +21,7 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
 
     const alleLastetEllerReloading = avhengigheter => avhengigheter?.every(harStatus(STATUS.OK, STATUS.RELOADING));
     const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
-    const [timeout, setLocalTimeout] = useState(false);
+    const [localTimeout, setLocalTimeout] = useState(false);
     let timer;
 
     const setTimer = () => {
@@ -50,7 +50,7 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
     if (alleLastet(avhengigheter)) {
         clearTimer();
         return renderChildren();
-    } else if (!timeout && alleLastetEllerReloading(avhengigheter)) {
+    } else if (!localTimeout && alleLastetEllerReloading(avhengigheter)) {
         setTimer();
         return renderChildren();
     }

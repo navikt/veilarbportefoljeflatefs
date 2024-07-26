@@ -17,7 +17,7 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     const TILBAKEMELDING_PREFIX = 'har_sendt_tilbakemelding';
     const TILBAKEMELDING_FEATURE_TAG = 'forhandsorientering'; // TODO: Husk å endre for hver nye feature
 
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const harSendtTilbakemelding = false;
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -25,8 +25,8 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         if (wrapperRef.current?.contains(e.target)) {
             return;
         }
-        if (isModalOpen) {
-            setModalOpen(false);
+        if (modalIsOpen) {
+            setModalIsOpen(false);
         }
     };
 
@@ -39,10 +39,10 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
     };
 
     const handleFabClicked = () => {
-        if (!isModalOpen) {
+        if (!modalIsOpen) {
             logEvent('portefolje.tilbakemelding_modal_apnet');
         }
-        setModalOpen(!isModalOpen);
+        setModalIsOpen(!modalIsOpen);
     };
 
     const handleTilfredshetsTilbakemeldingSendt = (tilbakemelding: Tilbakemelding) => {
@@ -84,22 +84,22 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         <div ref={wrapperRef}>
             <div
                 className={classNames('tilbakemelding-fab', {
-                    'tilbakemelding-fab__trykket': isModalOpen
+                    'tilbakemelding-fab__trykket': modalIsOpen
                 })}
                 onClick={handleFabClicked}
-                data-testid={isModalOpen ? 'tilbakemelding_fab_knapp_trykket' : 'tilbakemelding_fab_knapp'}
+                data-testid={modalIsOpen ? 'tilbakemelding_fab_knapp_trykket' : 'tilbakemelding_fab_knapp'}
             >
                 <img
                     alt="Åpne/Lukk tilbakemeldingform"
                     className={classNames({
-                        'tilbakemelding-fab__ikon--lukke': isModalOpen,
-                        'tilbakemelding-fab__ikon--apne': !isModalOpen
+                        'tilbakemelding-fab__ikon--lukke': modalIsOpen,
+                        'tilbakemelding-fab__ikon--apne': !modalIsOpen
                     })}
-                    src={isModalOpen ? lukkeIkon : apneIkon}
+                    src={modalIsOpen ? lukkeIkon : apneIkon}
                 />
             </div>
             <TilbakemeldingModal
-                open={isModalOpen}
+                open={modalIsOpen}
                 onTilbakemeldingSendt={handleTilfredshetsTilbakemeldingSendt}
                 onTilbakemeldingCheckboxSendt={handleCheckboxTilbakemeldingSendt}
             />

@@ -1,12 +1,12 @@
 import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
+import classNames from 'classnames';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {useEventListener} from '../../../hooks/use-event-listener';
 import DragAndDropRow from './drag-and-drop-row';
-import './drag-and-drop.css';
-import classNames from 'classnames';
 import {handleDragEnd, handleDragEnter, handleDragOver, handleDragStart} from './mouse-drag-event-listeners';
 import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 import {LagretFilter} from '../../../ducks/lagret-filter';
-import {BodyShort, Button} from '@navikt/ds-react';
+import './drag-and-drop.css';
 
 export interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
@@ -28,7 +28,7 @@ function DragAndDropContainer({
     const [dropIndex, setDropIndex] = useState(-1);
     const [requestRowInFocuse, setRequestRowInFocuse] = useState(0);
     const [ariaTekst, setAriaTekst] = useState('');
-    const [dragIsInsideElement, setdDragIsInsideElement] = useState(false);
+    const [dragIsInsideElement, setDragIsInsideElement] = useState(false);
     const dragContainer = useRef<HTMLUListElement>(null);
     const dragAndDropOrderRef = useRef(dragAndDropOrder);
 
@@ -93,7 +93,10 @@ function DragAndDropContainer({
     const eventIsInsideContainer = e => dragContainer.current !== null && dragContainer.current.contains(e.target);
 
     useEventListener('dragstart', handleDragStart({eventIsInsideContainer, setSrcIndex, setDropIndex}));
-    useEventListener('dragenter', handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement}));
+    useEventListener(
+        'dragenter',
+        handleDragEnter({eventIsInsideContainer, setdDragIsInsideElement: setDragIsInsideElement})
+    );
     useEventListener('dragover', handleDragOver({eventIsInsideContainer, setDestIndex}));
     useEventListener(
         'dragend',
