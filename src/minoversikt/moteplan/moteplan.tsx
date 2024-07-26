@@ -29,6 +29,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
     const buttonRef = useRef(null);
+    const ingenMoter = moter?.length === 0;
 
     const dager: Date[] = hentMoteplanDager(moter);
 
@@ -62,15 +63,17 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 placement="bottom"
             >
                 <Popover.Content className="moteplan_content">
-                    {fetchError ? (
+                    {fetchError && (
                         <Alert variant="error" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
-                    ) : moter?.length === 0 ? (
+                    )}
+                    {!fetchError && ingenMoter && (
                         <Alert variant="success" size="small">
                             Ingen møter
                         </Alert>
-                    ) : (
+                    )}
+                    {!fetchError && !ingenMoter && (
                         <ol>
                             {dager.slice(0, maxAntallDager).map(dag => (
                                 <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
