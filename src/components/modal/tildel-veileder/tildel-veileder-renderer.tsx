@@ -2,14 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
 import {VeilederModell} from '../../../model-interfaces';
-import {OversiktType} from '../../../ducks/ui/listevisning';
 
 interface TildelVeilederRendererProps {
     data: VeilederModell[];
     ident: string | null;
     onChange: (ident: string) => void;
     btnOnClick: () => void;
-    oversiktType: OversiktType | undefined;
 }
 
 export function TildelVeilederRenderer({data, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import SorteringHeaderIkon from '../components/tabell/sortering-header-ikon';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
     DAGPENGER_YTELSE,
@@ -45,15 +45,14 @@ interface MinOversiktListehodeProps {
     sorteringOnClick: (sortering: string) => void;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
     filtervalg: FiltervalgModell;
-    brukere: BrukerModell[];
     valgteKolonner: Kolonne[];
 }
 
 function MinOversiktListeHode({
     sorteringsrekkefolge,
     sorteringOnClick,
-    filtervalg,
     sorteringsfelt,
+    filtervalg,
     valgteKolonner
 }: MinOversiktListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);

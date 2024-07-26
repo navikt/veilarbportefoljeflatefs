@@ -1,13 +1,12 @@
-import * as React from 'react';
-import classNames from 'classnames';
+import React, {useRef, useState} from 'react';
 import {connect} from 'react-redux';
-import './tilbakemelding-fab.css';
+import classNames from 'classnames';
 import {sjekkFeature} from '../../ducks/features';
 import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
 import TilbakemeldingModal, {Tilbakemelding, TilbakemeldingCheckboxProps} from './tilbakemelding-modal';
 import {logEvent} from '../../utils/frontend-logger';
-import {useRef, useState} from 'react';
 import {useEventListener} from '../../hooks/use-event-listener';
+import './tilbakemelding-fab.css';
 
 // FAB = Floating Action Button
 interface TilbakemeldingFabProps {
@@ -20,7 +19,6 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
 
     const [isModalOpen, setModalOpen] = useState(false);
     const harSendtTilbakemelding = false;
-    const [ikkeVisIgjen, setIkkeVisIgjen] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = e => {
@@ -72,14 +70,8 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
         });
     };
 
-    const handleIkkeVisIgjen = () => {
-        window.localStorage.setItem(tilbakemeldingLocalStorageName, 'true');
-        logEvent('portefolje.ikke_vis_tilbakemelding_igjen');
-        setIkkeVisIgjen(true);
-    };
-
     const harRiktigFeatures = harFeature(SPOR_OM_TILBAKEMELDING); // NB: Husk å endre for hver feature
-    if (ikkeVisIgjen || !harRiktigFeatures || harSendtTilbakemelding || harTidligereSendtTilbakemelding()) {
+    if (!harRiktigFeatures || harSendtTilbakemelding || harTidligereSendtTilbakemelding()) {
         return null;
     }
 
@@ -110,7 +102,6 @@ function TilbakemeldingFab({harFeature}: TilbakemeldingFabProps) {
                 open={isModalOpen}
                 onTilbakemeldingSendt={handleTilfredshetsTilbakemeldingSendt}
                 onTilbakemeldingCheckboxSendt={handleCheckboxTilbakemeldingSendt}
-                onIkkeVisIgjen={handleIkkeVisIgjen}
             />
         </div>
     );

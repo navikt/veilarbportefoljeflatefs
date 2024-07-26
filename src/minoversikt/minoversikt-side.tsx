@@ -1,5 +1,8 @@
-import * as React from 'react';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router';
+import {useDispatch, useSelector} from 'react-redux';
+import classNames from 'classnames';
+import {Alert} from '@navikt/ds-react';
 import Innholdslaster from './../innholdslaster/innholdslaster';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
@@ -16,18 +19,13 @@ import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
-import {useDispatch, useSelector} from 'react-redux';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import '../style.css';
-import './minoversikt.css';
-import './../components/tabell-overskrift.css';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import Sidebar from '../components/sidebar/sidebar';
-import classNames from 'classnames';
 import {MinOversiktWrapper} from './minoversikt_wrapper';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
@@ -36,15 +34,16 @@ import Toolbar from '../components/toolbar/toolbar';
 import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
-import {useParams} from 'react-router';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {AppState} from '../reducer';
-import {Alert} from '@navikt/ds-react';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
 import {StatustallVeileder, StatustallVeilederState} from '../ducks/statustall-veileder';
+import '../style.css';
+import './minoversikt.css';
+import './../components/tabell-overskrift.css';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -186,7 +185,6 @@ export default function MinoversiktSide() {
                                 oversiktType={oversiktType}
                                 sokVeilederSkalVises={false}
                                 antallTotalt={portefolje.data.antallTotalt}
-                                gjeldendeVeileder={gjeldendeVeilederId}
                                 scrolling={scrolling}
                                 isSidebarHidden={isSidebarHidden}
                             />

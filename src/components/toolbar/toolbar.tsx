@@ -17,13 +17,11 @@ import './toolbar.css';
 import '../../style.css';
 
 interface ToolbarProps {
+    id?: string;
     oversiktType: OversiktType;
+    antallTotalt: number;
     onPaginering?: () => void;
     sokVeilederSkalVises?: boolean;
-    children?: React.ReactNode;
-    gjeldendeVeileder?: string;
-    antallTotalt: number;
-    id?: string;
     antallValgteVeiledere?: number;
     scrolling?: boolean;
     isSidebarHidden?: boolean;
@@ -34,10 +32,10 @@ function Toolbar({
     oversiktType,
     antallTotalt,
     onPaginering,
-    scrolling = false,
-    isSidebarHidden = false,
+    sokVeilederSkalVises,
     antallValgteVeiledere,
-    sokVeilederSkalVises
+    scrolling = false,
+    isSidebarHidden = false
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);

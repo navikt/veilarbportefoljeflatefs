@@ -220,7 +220,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                         onChange={setIdent}
                         data={data}
                         btnOnClick={() => onSubmit()}
-                        oversiktType={oversiktType}
                     />
                 )}
             </SokFilter>
