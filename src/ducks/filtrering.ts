@@ -91,7 +91,7 @@ export function fjern(filterId, verdi, fjernVerdi) {
     } else if (Array.isArray(verdi)) {
         return verdi.filter(enkeltVerdi => enkeltVerdi !== fjernVerdi);
     } else if (filterId === 'aktiviteter') {
-        var tomtVerdi = {};
+        let tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
         return Object.assign({}, verdi, tomtVerdi);
     } else if (fjernVerdi && typeof verdi === 'object') {

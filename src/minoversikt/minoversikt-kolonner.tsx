@@ -81,7 +81,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
-    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
         bruker.innsatsgruppe,
@@ -116,7 +116,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
 
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
-        var dataOmBarnSorted = dataOmBarn
+        const dataOmBarnSorted = dataOmBarn
             .map(x => x.alder)
             .sort((a, b) => (a < b ? -1 : 1))
             .map(x => String(x));
@@ -143,7 +143,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={
-                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.statsborgerskap
+                    bruker.hovedStatsborgerskap?.statsborgerskap
                         ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
                         : '-'
                 }
@@ -153,7 +153,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
-                    bruker.hovedStatsborgerskap && bruker.hovedStatsborgerskap.gyldigFra
+                    bruker.hovedStatsborgerskap?.gyldigFra
                         ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
                         : '-'
                 }
@@ -241,7 +241,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 <TekstKolonne
                     className="col col-xs-2"
                     skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
-                    tekst={vurderingsfristAAP ? vurderingsfristAAP : '–'}
+                    tekst={vurderingsfristAAP || '–'}
                 />
             )}
             <UkeKolonne
@@ -345,7 +345,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 }
             />
             <TekstKolonne
-                tekst={!!bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                     valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)

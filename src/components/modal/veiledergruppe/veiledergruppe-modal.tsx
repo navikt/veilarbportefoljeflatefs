@@ -13,10 +13,10 @@ import VeiledergruppeForm from './veiledergruppe-form';
 import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import './veiledergruppe-modal.css';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {STATUS} from '../../../ducks/utils';
 import LasterModal from '../lastermodal/laster-modal';
+import './veiledergruppe-modal.css';
 
 interface VeilederModalProps {
     initialVerdi: {
@@ -58,8 +58,8 @@ export function VeiledergruppeModal({
     const veiledergruppeStatus = useSelector((state: AppState) => state.veiledergrupper.status);
     const statusLaster = veiledergruppeStatus !== undefined && veiledergruppeStatus === STATUS.PENDING;
 
-    const [visSletteVeiledergruppeModal, setSletteVeiledergruppeModal] = useState(false);
-    const [visEndringerIkkeLagretModal, setEndringerIkkeLagretModal] = useState(false);
+    const [visSletteVeiledergruppeModal, setVisSletteVeiledergruppeModal] = useState(false);
+    const [visEndringerIkkeLagretModal, setVisEndringerIkkeLagretModal] = useState(false);
 
     useEffect(() => {
         setFilterValg(initialVerdi.filterValg);
@@ -97,7 +97,7 @@ export function VeiledergruppeModal({
                 gruppeNavn
             )
         ) {
-            setEndringerIkkeLagretModal(true);
+            setVisEndringerIkkeLagretModal(true);
             return;
         }
         setErrors({} as VeiledergruppeErrors);
@@ -128,12 +128,12 @@ export function VeiledergruppeModal({
     function slettVeiledergruppeOgLukkModaler() {
         logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, {sideNavn: finnSideNavn()});
         onSlett && onSlett();
-        setSletteVeiledergruppeModal(false);
+        setVisSletteVeiledergruppeModal(false);
         onRequestClose();
     }
 
     function endringerIkkeLagretOgLukkModaler() {
-        setEndringerIkkeLagretModal(false);
+        setVisEndringerIkkeLagretModal(false);
         setFilterValg(initialVerdi.filterValg);
         setGruppeNavn(initialVerdi.gruppeNavn);
         setErrors({} as VeiledergruppeErrors);
@@ -195,7 +195,7 @@ export function VeiledergruppeModal({
 
     const avbrytSletting = () => {
         logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, {sideNavn: finnSideNavn()});
-        setSletteVeiledergruppeModal(false);
+        setVisSletteVeiledergruppeModal(false);
     };
 
     if (!isOpen) {
@@ -264,7 +264,7 @@ export function VeiledergruppeModal({
                                             className="veiledergruppe-modal__knappegruppe__slett"
                                             variant="danger"
                                             type="button"
-                                            onClick={() => setSletteVeiledergruppeModal(true)}
+                                            onClick={() => setVisSletteVeiledergruppeModal(true)}
                                             icon={<TrashIcon aria-hidden={true} />}
                                             data-testid="veiledergruppe_modal_slette-knapp"
                                         >
@@ -277,7 +277,7 @@ export function VeiledergruppeModal({
                     </Modal>
                     <EndringerIkkeLagretModal
                         isOpen={visEndringerIkkeLagretModal}
-                        onRequestClose={() => setEndringerIkkeLagretModal(false)}
+                        onRequestClose={() => setVisEndringerIkkeLagretModal(false)}
                         onSubmit={endringerIkkeLagretOgLukkModaler}
                     />
                     {onSlett && (

@@ -1,12 +1,12 @@
 import React from 'react';
-import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
-import {useParams} from 'react-router';
-import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {NavLink} from 'react-router-dom';
+import {useParams} from 'react-router';
+import {useDispatch} from 'react-redux';
+import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
+import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
-import {useDispatch} from 'react-redux';
 
 interface Props {
     erPaloggetVeileder: boolean;
@@ -16,7 +16,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
     const veilederIdent = useIdentSelector();
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
-    const aktivLink = ident ? (veilederIdent!.ident === ident ? 'oversiktslenke--valgt' : '') : 'oversiktslenke--valgt';
+    const aktivLenkeKlasse = veilederIdent!.ident === ident || !ident ? 'oversiktslenke--valgt' : '';
     const dispatch = useDispatch();
 
     const erAktiv = id => {
@@ -41,7 +41,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
                     search: '?sidestorrelse=' + sidestorrelse
                 }}
                 className="oversiktslenke typo-undertittel"
-                activeClassName={aktivLink}
+                activeClassName={aktivLenkeKlasse}
                 id="min-oversikt"
                 title="Her vises alle brukere som er tildelt deg"
                 aria-label="Min oversikt"

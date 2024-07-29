@@ -1,8 +1,7 @@
-import * as React from 'react';
-import {STATUS} from '../ducks/utils';
-import {useState} from 'react';
-import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
+import React, {useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
+import {STATUS} from '../ducks/utils';
+import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
 import {trackAmplitude} from '../amplitude/amplitude';
 
 interface InnholdslasterProps {
@@ -17,13 +16,12 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
         (...status) =>
         element =>
             array(status).includes(element.status);
-    const noenHarFeil = avhengigheter => avhengigheter && avhengigheter.some(harStatus(STATUS.ERROR));
-    const alleLastet = avhengigheter => avhengigheter && avhengigheter.every(harStatus(STATUS.OK));
+    const noenHarFeil = avhengigheter => avhengigheter?.some(harStatus(STATUS.ERROR));
+    const alleLastet = avhengigheter => avhengigheter?.every(harStatus(STATUS.OK));
 
-    const alleLastetEllerReloading = avhengigheter =>
-        avhengigheter && avhengigheter.every(harStatus(STATUS.OK, STATUS.RELOADING));
+    const alleLastetEllerReloading = avhengigheter => avhengigheter?.every(harStatus(STATUS.OK, STATUS.RELOADING));
     const medFeil = avhengigheter => avhengigheter.find(harStatus(STATUS.ERROR));
-    const [timeout, setLocalTimeout] = useState(false);
+    const [localTimeout, setLocalTimeout] = useState(false);
     let timer;
 
     const setTimer = () => {
@@ -52,7 +50,7 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
     if (alleLastet(avhengigheter)) {
         clearTimer();
         return renderChildren();
-    } else if (!timeout && alleLastetEllerReloading(avhengigheter)) {
+    } else if (!localTimeout && alleLastetEllerReloading(avhengigheter)) {
         setTimer();
         return renderChildren();
     }
@@ -62,7 +60,7 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
         const feilendeReducer = medFeil(avhengigheter);
 
         const feilmelding =
-            getFeilmeldingForReducer(feilendeReducer) || 'Det skjedde en feil ved innlastningen av data';
+            getFeilmeldingForReducer(feilendeReducer) ?? 'Det skjedde en feil ved innlastningen av data';
 
         trackAmplitude({name: 'alert vist', data: {variant: 'error', tekst: feilmelding}});
 

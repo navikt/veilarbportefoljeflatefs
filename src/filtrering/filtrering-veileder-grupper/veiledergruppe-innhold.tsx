@@ -1,5 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
@@ -8,17 +11,14 @@ import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veilede
 import {FiltervalgModell} from '../../model-interfaces';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
-import '../../components/sidebar/sidebar.css';
-import './veiledergruppe.css';
-import '../filtrering-filter/filterform/filterform.css';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import VeiledergruppeRad from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
 import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
-import {RadioGroup} from '@navikt/ds-react';
+import '../../components/sidebar/sidebar.css';
+import './veiledergruppe.css';
+import '../filtrering-filter/filterform/filterform.css';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -110,10 +110,10 @@ function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnho
                 defaultValue={valgtGruppe?.filterId}
                 size="small"
             >
-                {lagretFilter.map((veilederGruppe, index) => {
+                {lagretFilter.map(veilederGruppe => {
                     return (
                         <VeiledergruppeRad
-                            key={index}
+                            key={veilederGruppe.filterId}
                             veilederGruppe={veilederGruppe}
                             onClickRedigerKnapp={() => setVisEndreGruppeModal(true)}
                             oversiktType={oversiktType}

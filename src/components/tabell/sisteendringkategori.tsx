@@ -20,7 +20,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
             getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
         );
 
-    const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
+    const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
 
     if (!skalVises) {
         return null;

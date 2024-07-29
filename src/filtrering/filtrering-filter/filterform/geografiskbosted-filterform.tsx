@@ -1,20 +1,18 @@
-import {FiltervalgModell} from '../../../model-interfaces';
-import * as React from 'react';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {isEmptyArray} from 'formik';
+import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
-import Grid from '../../../components/grid/grid';
 import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {FiltervalgModell} from '../../../model-interfaces';
+import Grid from '../../../components/grid/grid';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 import {GeografiskBostedOptions} from '../../../ducks/geografiskBosted';
-import {MultiSelect} from 'react-multi-select-component';
-import {isEmptyArray} from 'formik';
 
 interface GeografiskBostedFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
-    emptyCheckboxFilterFormMessage?: string;
 }
 
 function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: GeografiskBostedFilterformProps) {

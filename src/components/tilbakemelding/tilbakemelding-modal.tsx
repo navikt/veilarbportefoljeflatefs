@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import classNames from 'classnames/dedupe';
-import './tilbakemelding-modal.css';
-import {useState} from 'react';
+import {BodyShort, Button, Heading, Textarea} from '@navikt/ds-react';
 import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
 import TilfredshetValg from './tilfredshet-valg';
 import CheckboxValg from './checkbox-valg';
-import {BodyShort, Button, Heading, Textarea} from '@navikt/ds-react';
+import './tilbakemelding-modal.css';
 
 export interface Tilbakemelding {
     tilfredshet: number;
@@ -21,7 +20,6 @@ interface TilbakemeldingModalProps {
     open: boolean;
     onTilbakemeldingSendt: (tilbakemelding: Tilbakemelding) => void;
     onTilbakemeldingCheckboxSendt: (tilbakemelding: TilbakemeldingCheckboxProps) => void;
-    onIkkeVisIgjen: () => void;
 }
 
 function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheckboxSendt}: TilbakemeldingModalProps) {

@@ -21,13 +21,11 @@ import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksis
 import './rediger-huskelapp.css';
 
 interface Props {
-    onModalClose: () => void;
     isModalOpen: boolean;
+    onModalClose: () => void;
     huskelapp?: HuskelappModell;
     bruker: BrukerModell;
     arbeidsliste?: ArbeidslisteModell | null;
-    /** For å kunne lukke visningsmodal etter at huskelappen er sletta */
-    lukkVisHuskelappModal?: () => void;
 }
 
 export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, arbeidsliste}: Props) => {
