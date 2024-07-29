@@ -10,7 +10,6 @@ import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
 import {IdentParam} from '../../model-interfaces';
 import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {erMock} from '../../utils/url-utils';
 import './toolbar.css';
 
 function ArbeidslisteKnapp() {
