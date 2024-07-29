@@ -176,7 +176,7 @@ export function endreFiltervalg(
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {
     if (Array.isArray(filterVerdi)) {
-        filterVerdi.sort();
+        filterVerdi.sort(alfabetiskSammenligning);
     }
     return {
         type: ENDRE_FILTER,

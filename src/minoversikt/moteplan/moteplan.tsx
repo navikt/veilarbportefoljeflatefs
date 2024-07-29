@@ -92,11 +92,17 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
     );
 }
 
+const sorterStigendePaDato = (a: Date, b: Date) => {
+    return a.valueOf() - b.valueOf();
+};
+
 function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
         return [new Date()];
     }
-    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))].sort().map(dato => new Date(dato));
+    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
+        .map(dato => new Date(dato))
+        .sort(sorterStigendePaDato);
 }
 
 export default Moteplan;
