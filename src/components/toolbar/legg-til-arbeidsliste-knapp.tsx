@@ -25,7 +25,8 @@ function ArbeidslisteKnapp() {
 
     const valgteBrukere = portefolje.brukere.filter(bruker => bruker.markert === true);
 
-    const skalVises = innloggetVeileder && pathname === '/portefolje' && ident === innloggetVeileder.ident;
+    const rettIdentTilAaSeKnapp = !ident ? true : ident === innloggetVeileder?.ident;
+    const skalVises = innloggetVeileder && pathname === '/portefolje' ? rettIdentTilAaSeKnapp : false;
 
     const arbeidslisteValgt = useSelector((state: AppState) =>
         state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
@@ -36,7 +37,7 @@ function ArbeidslisteKnapp() {
         (!arbeidslisteValgt && valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv)) ||
         arbeidslisteValgt;
 
-    if (!skalVises && !erMock()) {
+    if (!skalVises) {
         return null;
     }
 
@@ -52,7 +53,6 @@ function ArbeidslisteKnapp() {
     return (
         <>
             <Button
-                style={{background: 'red'}}
                 size="small"
                 variant="tertiary"
                 className="toolbar_btn"
