@@ -213,9 +213,9 @@ export interface BrukerModell {
 
 export interface EnsligeForsorgereOvergangsstonad {
     vedtaksPeriodetype: string;
-    harAktivitetsplikt?: boolean | undefined;
+    harAktivitetsplikt?: boolean;
     utlopsDato: Date;
-    yngsteBarnsFødselsdato: Date;
+    yngsteBarnsFodselsdato: Date;
 }
 
 export interface BarnUnder18Aar {

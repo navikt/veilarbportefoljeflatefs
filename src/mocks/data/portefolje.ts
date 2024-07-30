@@ -504,7 +504,7 @@ const lagRandomOvergangsstonadForEnsligForsorger = (): EnsligeForsorgereOvergang
         vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
         harAktivitetsplikt: hentRandomAktivitetsplikt(),
         utlopsDato: new Date(randomDate({past: false})),
-        yngsteBarnsFødselsdato: new Date(randomDate({past: false}))
+        yngsteBarnsFodselsdato: new Date(randomDate({past: false}))
     };
 };
 
