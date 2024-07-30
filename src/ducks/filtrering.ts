@@ -1,4 +1,4 @@
-import {FiltervalgModell, FargekategoriModell} from '../model-interfaces';
+import {FargekategoriModell, FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
@@ -149,13 +149,20 @@ export default function filtreringReducer(state: FiltervalgModell = initialState
 
             const ingenFargekategorierValgt = nyFargekategorier.length === 0;
             const mineFargekategorierIkkeValgt = !state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
-            const nyFerdigfilterListe = ingenFargekategorierValgt
-                ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(alfabetiskSammenligning)
-                : mineFargekategorierIkkeValgt
-                  ? [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning)
-                  : state.ferdigfilterListe;
 
-            return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe};
+            const nyFerdigfilterListe = () => {
+                if (ingenFargekategorierValgt) {
+                    return [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(
+                        alfabetiskSammenligning
+                    );
+                } else if (mineFargekategorierIkkeValgt) {
+                    return [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning);
+                } else {
+                    return state.ferdigfilterListe;
+                }
+            };
+
+            return {...state, fargekategorier: nyFargekategorier, ferdigfilterListe: nyFerdigfilterListe()};
         }
         default:
             return state;
