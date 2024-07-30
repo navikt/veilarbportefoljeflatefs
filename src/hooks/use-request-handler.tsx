@@ -10,8 +10,7 @@ export function useRequestHandler(statusSelector: (state: AppState) => string, l
 
     useEffect(() => {
         if (saveRequestSent) {
-            if (status === STATUS.PENDING) {
-            } else if (status === STATUS.ERROR) {
+            if (status === STATUS.ERROR) {
                 setErrorModalErApen(true);
                 setSaveRequestSent(false);
             } else if (status === STATUS.OK) {
