@@ -213,6 +213,7 @@
 }
 .dekorator .typo-normal {
     font-weight: 400;
+    font-size: 1em;
 }
 .dekorator .typo-etikett-liten {
     line-height: 1.25rem;
@@ -418,6 +419,9 @@
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
     box-shadow: 0 3px 0 #d2cfcc;
+    color: #fff;
+    border-color: #0074df;
+    background-color: #0074df;
 }
 .dekorator .knapp--hoved:hover:before {
     bottom: -5px;
@@ -445,11 +449,6 @@
 .dekorator .knapp--hoved:focus {
     background-color: #fff;
     color: #0067c5;
-}
-.dekorator .knapp--hoved:hover {
-    color: #fff;
-    border-color: #0074df;
-    background-color: #0074df;
 }
 .dekorator .knapp--hoved:visited {
     color: #fff;
@@ -499,6 +498,9 @@
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
     box-shadow: 0 3px 0 #d2cfcc;
+    color: #fff;
+    border-color: #cf412a;
+    background-color: #cf412a;
 }
 .dekorator .knapp--fare:hover:before {
     bottom: -5px;
@@ -526,11 +528,6 @@
 .dekorator .knapp--fare:focus {
     background-color: #fff;
     color: #ba3a26;
-}
-.dekorator .knapp--fare:hover {
-    color: #fff;
-    border-color: #cf412a;
-    background-color: #cf412a;
 }
 .dekorator .knapp--fare:visited {
     color: #fff;
@@ -609,6 +606,8 @@ html {
     line-height: 1.15;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
     margin: 0;
@@ -631,7 +630,7 @@ body {
     display: block;
 }
 .dekorator figure {
-    margin: 1em 40px;
+    margin: 0;
 }
 .dekorator hr {
     box-sizing: content-box;
@@ -700,6 +699,7 @@ body {
 }
 .dekorator img {
     border-style: none;
+    vertical-align: middle;
 }
 .dekorator svg:not(:root) {
     overflow: hidden;
@@ -850,10 +850,6 @@ html .dekorator [type='button'] {
 .dekorator :before {
     box-sizing: border-box;
 }
-html {
-    font-size: 16px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
 .dekorator button,
 .dekorator input,
 .dekorator select,
@@ -861,12 +857,6 @@ html {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-}
-.dekorator figure {
-    margin: 0;
-}
-.dekorator img {
-    vertical-align: middle;
 }
 .dekorator .img-responsive {
     display: block;
@@ -1427,9 +1417,6 @@ body .dekorator .blokk-xl {
 }
 .dekorator * {
     box-sizing: border-box;
-}
-.dekorator .typo-normal {
-    font-size: 1em;
 }
 .dekorator h1.typo-element.dekorator__tittel {
     margin: 0.67em 0 0.67em 0.7em;
