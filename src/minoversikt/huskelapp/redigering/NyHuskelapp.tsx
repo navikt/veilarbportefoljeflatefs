@@ -4,7 +4,7 @@ import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
 import {HuskelappModell} from '../../../model-interfaces';
-import {toDatePrettyPrint} from '../../../utils/dato-utils';
+import {toDatePrettyPrint, validerFristFelt} from '../../../utils/dato-utils';
 import './rediger-huskelapp.css';
 
 interface Props {
@@ -35,7 +35,13 @@ export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappE
                             onBlur={() => setHuskelappEndret(dirty)}
                         >
                             <FormikTekstArea label="Tekst" name="kommentar" maxLengde={200} />
-                            <FormikDatoVelger name="frist" />
+                            <FormikDatoVelger
+                                name="frist"
+                                label="Frist"
+                                size="small"
+                                validate={validerFristFelt}
+                                ariaLabel="Frist for huskelapp"
+                            />
                         </Form>
                     );
                 }}

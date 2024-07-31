@@ -6,6 +6,7 @@ import FormikTekstArea from '../../formik/formik-tekstarea';
 import './arbeidsliste.css';
 import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {Heading} from '@navikt/ds-react';
+import {validerFristFelt} from '../../../utils/dato-utils';
 
 function label(bruker: BrukerModell): React.ReactNode {
     return <Heading size="small" level="2">{`${bruker.fornavn} ${bruker.etternavn}, ${bruker.fnr}`}</Heading>;
@@ -28,7 +29,13 @@ function ArbeidslisteForm({arbeidsliste, valgteBrukere}) {
                         />
                     </div>
                     <div className="skjemaelement dato-kategori-wrapper">
-                        <FormikDatoVelger name={`arbeidsliste[${index}].frist`} />
+                        <FormikDatoVelger
+                            name={`arbeidsliste[${index}].frist`}
+                            label={`arbeidsliste[${index}].frist`}
+                            size="small"
+                            validate={validerFristFelt}
+                            ariaLabel="Frist for arbeidsliste"
+                        />
                         <ArbeidslisteKategori name={`arbeidsliste[${index}].kategori`} index={index} />
                     </div>
                 </div>
