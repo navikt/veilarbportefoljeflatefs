@@ -19,7 +19,7 @@ interface FilteringVeiledergruppeProps {
 }
 
 function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
-    const [visVeiledergruppeModal, setVeiledergruppeModal] = useState(false);
+    const [visVeiledergruppeModal, setVisVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
     const lagretFilter = lagretFilterState.data;
@@ -78,7 +78,7 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                 variant="tertiary"
                 icon={<PlusCircleIcon aria-hidden={true} />}
                 onClick={() => {
-                    setVeiledergruppeModal(true);
+                    setVisVeiledergruppeModal(true);
                 }}
                 data-testid="veiledergruppe_ny-gruppe_knapp"
                 size="small"
@@ -92,7 +92,7 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
                     filterId: -1
                 }}
                 onSubmit={submitEndringer}
-                onRequestClose={() => setVeiledergruppeModal(false)}
+                onRequestClose={() => setVisVeiledergruppeModal(false)}
                 isOpen={visVeiledergruppeModal}
                 modalTittel={modalTittel}
                 lagreKnappeTekst="Lagre"

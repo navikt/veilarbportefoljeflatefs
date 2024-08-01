@@ -29,7 +29,7 @@ export function useSyncStateMedUrl() {
         if (sorteringsfelt) {
             const parsed = queryString.parse(window.location.search);
             parsed.sorteringsfelt = sorteringsfelt;
-            parsed.sorteringsrekkefolge = sorteringsrekkefolge ? sorteringsrekkefolge : '';
+            parsed.sorteringsrekkefolge = sorteringsrekkefolge || '';
 
             const stringified = queryString.stringify(parsed);
             history.replace({pathname, search: stringified});

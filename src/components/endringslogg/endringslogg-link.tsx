@@ -11,7 +11,7 @@ interface EndringsloggLinkProps {
 export const EndringsloggLink = ({linkText, link, onClick}: EndringsloggLinkProps) => {
     return (
         <Link target="_blank" href={link} onClick={onClick}>
-            {linkText ? linkText : link}
+            {linkText || link}
             <ExternalLinkIcon title="Ekstern lenke" fontSize="1.2em" />
         </Link>
     );

@@ -85,16 +85,11 @@ function Sidebar(props: SidebarProps) {
     const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
 
     const tabFocus = () => {
-        if (erPaMinOversikt) {
-            if (selectedTabData.type === 'STATUS') return 0;
-            else if (selectedTabData.type === 'MINE_FILTER') return 1;
-            else if (selectedTabData.type === 'FILTER') return 2;
-        } else {
-            if (selectedTabData.type === 'STATUS') return 0;
-            else if (selectedTabData.type === 'MINE_FILTER') return 1;
-            else if (selectedTabData.type === 'VEILEDERGRUPPER') return 2;
-            else if (selectedTabData.type === 'FILTER') return 3;
-        }
+        if (selectedTabData.type === 'STATUS') return 0;
+        else if (selectedTabData.type === 'MINE_FILTER') return 1;
+        else if (erPaMinOversikt && selectedTabData.type === 'FILTER') return 2;
+        else if (!erPaMinOversikt && selectedTabData.type === 'VEILEDERGRUPPER') return 2;
+        else if (!erPaMinOversikt && selectedTabData.type === 'FILTER') return 3;
         return 0;
     };
 

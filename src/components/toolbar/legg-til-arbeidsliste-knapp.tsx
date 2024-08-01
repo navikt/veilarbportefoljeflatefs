@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
-import './toolbar.css';
 import {useLocation, useParams} from 'react-router';
+import {Button} from '@navikt/ds-react';
+import {Bookmark} from '@navikt/ds-icons';
+import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
 import ArbeidslisteModal from '../modal/arbeidsliste/arbeidsliste-modal';
-import {Button} from '@navikt/ds-react';
-import {Bookmark} from '@navikt/ds-icons';
 import {IdentParam} from '../../model-interfaces';
 import {MIN_ARBEIDSLISTE} from '../../filtrering/filter-konstanter';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
+import './toolbar.css';
 
 function ArbeidslisteKnapp() {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
@@ -24,8 +24,9 @@ function ArbeidslisteKnapp() {
 
     const valgteBrukere = portefolje.brukere.filter(bruker => bruker.markert === true);
 
-    const skalSkjules =
-        innloggetVeileder && pathname === '/portefolje' ? (ident ? ident !== innloggetVeileder.ident : false) : true;
+    const rettIdentTilAaSeKnapp = !ident ? true : ident === innloggetVeileder?.ident;
+    const skalVises = innloggetVeileder && pathname === '/portefolje' ? rettIdentTilAaSeKnapp : false;
+
     const arbeidslisteValgt = useSelector((state: AppState) =>
         state.filtreringMinoversikt.ferdigfilterListe.includes(MIN_ARBEIDSLISTE)
     );
@@ -35,7 +36,7 @@ function ArbeidslisteKnapp() {
         (!arbeidslisteValgt && valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv)) ||
         arbeidslisteValgt;
 
-    if (skalSkjules) {
+    if (!skalVises) {
         return null;
     }
 

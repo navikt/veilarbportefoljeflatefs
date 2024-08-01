@@ -1,12 +1,10 @@
-import * as React from 'react';
-import {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
-
-import './moteplan.css';
+import {Calender} from '@navikt/ds-icons';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
-import {Calender} from '@navikt/ds-icons';
 import SeFlereMoterKnapp from './seFlereMoterKnapp';
+import './moteplan.css';
 
 export interface MoteData {
     dato: string;
@@ -31,6 +29,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
     const buttonRef = useRef(null);
+    const ingenMoter = moter?.length === 0;
 
     const dager: Date[] = hentMoteplanDager(moter);
 
@@ -64,18 +63,20 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 placement="bottom"
             >
                 <Popover.Content className="moteplan_content">
-                    {fetchError ? (
+                    {fetchError && (
                         <Alert variant="error" size="small">
                             Kunne ikke hente møteplan.
                         </Alert>
-                    ) : moter?.length === 0 ? (
+                    )}
+                    {!fetchError && ingenMoter && (
                         <Alert variant="success" size="small">
                             Ingen møter
                         </Alert>
-                    ) : (
+                    )}
+                    {!fetchError && !ingenMoter && (
                         <ol>
-                            {dager.slice(0, maxAntallDager).map((dag, key) => (
-                                <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={key} />
+                            {dager.slice(0, maxAntallDager).map(dag => (
+                                <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
                             ))}
                         </ol>
                     )}
@@ -91,11 +92,17 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
     );
 }
 
+const sorterStigendePaDato = (a: Date, b: Date) => {
+    return a.valueOf() - b.valueOf();
+};
+
 function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
         return [new Date()];
     }
-    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))].sort().map(dato => new Date(dato));
+    return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
+        .map(dato => new Date(dato))
+        .sort(sorterStigendePaDato);
 }
 
 export default Moteplan;

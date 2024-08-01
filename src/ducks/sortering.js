@@ -12,7 +12,7 @@ const initialState = {
 // Reducer
 export default function sorteringReducer(state = initialState, action) {
     switch (action.type) {
-        case SORTERT_PA:
+        case SORTERT_PA: {
             const {property} = action.data;
 
             let direction = RETNING.STIGENDE;
@@ -21,6 +21,7 @@ export default function sorteringReducer(state = initialState, action) {
             }
 
             return {property, direction};
+        }
         case RESET:
             return {...initialState};
         default:

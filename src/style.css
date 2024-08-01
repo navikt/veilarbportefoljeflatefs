@@ -1,3 +1,10 @@
+.veilarbportefoljeflatefs {
+    /* Styrer paddinga for innhaldet på sida
+     * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
+     * Howto: margin-left: -x, padding-left: x; og forelders padding-left: x */
+    --side-padding-x-akse: 3rem;
+}
+
 .veilarbportefoljeflatefs .ord-brekk {
     hyphens: auto;
     word-break: break-word;
@@ -49,7 +56,7 @@
 }
 
 .tabell thead th {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     border-bottom: 1px solid #6a6a6a;
     position: sticky;
     top: 2.5rem;
@@ -155,33 +162,19 @@ body {
     font-weight: 400;
     color: #262626;
     font-family: 'Source Sans Pro', Arial, sans-serif;
-    background-color: #f4f4f4;
+
+    /* Det som set grå bakgrunn på heile sida */
+    background-color: var(--a-bg-subtle);
+
     filter: none;
+
+    /* Remove the margin in all browsers. (From normalize.css) */
+    margin: 0;
 }
 
 @media print {
     body a[href]:after {
         content: none !important;
-    }
-}
-
-body #mainapp {
-    background-color: #fff;
-    margin: 0 auto;
-    height: 100%;
-    max-height: 8rem;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
-}
-
-@media (max-width: 870px) {
-    body #mainapp {
-        max-height: 10rem;
-    }
-}
-
-@media (max-width: 782px) {
-    body #mainapp {
-        max-height: 11rem;
     }
 }
 
@@ -195,6 +188,13 @@ body.annen-veileder {
 
 html {
     height: 100%;
+
+    font-size: 100%;
+    font-family: sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    /* Correct the line height in all browsers. (From normalize.css) */
+    line-height: 1.15;
 }
 
 /*!
@@ -210,28 +210,8 @@ CLEARFIX
 /* stylelint-disable */
 /* stylelint-enable */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
-/* Document
-   ========================================================================== */
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */
-html {
-    line-height: 1.15;
-    /* 1 */
-    font-family: sans-serif;
-    /* 3 */
-}
-
 /* Sections
    ========================================================================== */
-/**
- * Remove the margin in all browsers.
- */
-body {
-    margin: 0;
-}
-
 /**
  * Render the `main` element consistently in IE.
  */
@@ -268,7 +248,7 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-    font-family: monospace, monospace;
+    font-family: monospace;
     /* 1 */
     font-size: 1em;
     /* 2 */
@@ -311,7 +291,7 @@ strong {
 code,
 kbd,
 samp {
-    font-family: monospace, monospace;
+    font-family: monospace;
     /* 1 */
     font-size: 1em;
     /* 2 */
@@ -342,15 +322,6 @@ sub {
 
 sup {
     top: -0.5em;
-}
-
-/* Embedded content
-   ========================================================================== */
-/**
- * Remove the border on images inside links in IE 10.
- */
-img {
-    border-style: none;
 }
 
 /* Forms
@@ -622,12 +593,6 @@ template {
     box-sizing: border-box;
 }
 
-html {
-    font-size: 100%;
-    font-family: sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 input,
 button,
 select,
@@ -643,6 +608,9 @@ figure {
 
 img {
     vertical-align: middle;
+
+    /* Remove the border on images inside links in IE 10. (From normalize.css)*/
+    border-style: none;
 }
 
 .img-responsive {
@@ -832,11 +800,7 @@ GRID
     min-height: 1px;
     padding-left: 8px;
     padding-right: 8px;
-}
 
-.col-xs-2,
-.col-xs-2-5,
-.col-xs-3 {
     float: left;
 }
 
@@ -883,7 +847,6 @@ GRID
 }
 
 .ekspanderbartPanel__hode {
-    background-color: #fff;
     display: block;
     padding: 1rem 1rem 1rem 1rem;
     border-radius: 4px;
@@ -956,6 +919,8 @@ GRID
     height: 100%;
     width: 50%;
     background: currentColor;
+
+    transform: translateX(2px) rotate(45deg);
 }
 
 .ekspanderbartPanel--lukket .ekspanderbartPanel__indikator::after {
@@ -966,13 +931,7 @@ GRID
     height: 100%;
     width: 50%;
     background: currentColor;
-}
 
-.ekspanderbartPanel--lukket .ekspanderbartPanel__indikator::before {
-    transform: translateX(2px) rotate(45deg);
-}
-
-.ekspanderbartPanel--lukket .ekspanderbartPanel__indikator::after {
     transform: translateX(-2px) rotate(-45deg);
 }
 
@@ -1025,6 +984,8 @@ GRID
     height: 100%;
     width: 50%;
     background: currentColor;
+
+    transform: translateX(2px) rotate(-45deg);
 }
 
 .ekspanderbartPanel--apen > .ekspanderbartPanel__hode .ekspanderbartPanel__indikator::after {
@@ -1035,13 +996,7 @@ GRID
     height: 100%;
     width: 50%;
     background: currentColor;
-}
 
-.ekspanderbartPanel--apen > .ekspanderbartPanel__hode .ekspanderbartPanel__indikator::before {
-    transform: translateX(2px) rotate(-45deg);
-}
-
-.ekspanderbartPanel--apen > .ekspanderbartPanel__hode .ekspanderbartPanel__indikator::after {
     transform: translateX(-2px) rotate(45deg);
 }
 
@@ -1080,7 +1035,7 @@ GRID
     grid-template-columns: 21.8rem auto;
     grid-template-rows: auto auto auto auto;
     z-index: 3;
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
 }
 
 .toolbar-container .tabellinfo {
@@ -1097,7 +1052,7 @@ GRID
 }
 
 .toolbar-container .tabellinfo .tabelloverskrift {
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     grid-column: 1;
 }
 
@@ -1113,7 +1068,7 @@ GRID
     grid-column-end: 3;
     grid-row: 4;
     z-index: 1;
-    background-color: #f4f4f4;
+    background-color: var(--a-bg-subtle);
     box-shadow: inset 0 -1px var(--a-gray-700);
 }
 
@@ -1142,7 +1097,7 @@ GRID
 
 .veilarbportefoljeflatefs .side-storrelse {
     margin: 0 auto;
-    padding: 0 3rem;
+    padding: 0 var(--side-padding-x-akse);
     max-width: 1809px;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -1265,4 +1220,14 @@ GRID
     /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: var(--a-bg-default);
+}
+
+.veilarbportefoljeflatefs .lenke--frittstaende {
+    border: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.veilarbportefoljeflatefs .lenke--frittstaende:hover {
+    box-shadow: none;
 }

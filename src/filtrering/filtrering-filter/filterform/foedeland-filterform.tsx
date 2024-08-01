@@ -1,20 +1,18 @@
-import {FiltervalgModell} from '../../../model-interfaces';
-import * as React from 'react';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
-import Grid from '../../../components/grid/grid';
 import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
+import {FiltervalgModell} from '../../../model-interfaces';
+import Grid from '../../../components/grid/grid';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
 import {FoedelandOptions} from '../../../ducks/foedeland';
 import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
-import {MultiSelect} from 'react-multi-select-component';
 
 interface FoedelandFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
-    emptyCheckboxFilterFormMessage?: string;
 }
 
 function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
