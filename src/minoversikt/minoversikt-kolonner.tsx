@@ -395,7 +395,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
             />
             <TekstKolonne
-                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFødselsdato)}
+                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFodselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
                 className="col col-xs-2"
             />

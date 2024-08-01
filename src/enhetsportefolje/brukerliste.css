@@ -29,10 +29,6 @@
     padding: 0.5rem 0;
 }
 
-.veilarbportefoljeflatefs .brukerliste__innhold {
-    align-items: center;
-}
-
 .veilarbportefoljeflatefs .velgalle-checkboks {
     margin-right: 0.5rem;
     margin-left: calc(1rem + 1px);
@@ -75,6 +71,7 @@
 .veilarbportefoljeflatefs .brukerliste__innhold {
     width: 70%;
     display: flex;
+    align-items: center;
 }
 
 .veilarbportefoljeflatefs .brukerliste__innhold .brukernavn button {

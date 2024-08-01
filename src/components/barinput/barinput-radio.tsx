@@ -24,7 +24,7 @@ export const BarInputRadio = ({filterNavn, handleChange, antall, labelTekst, fil
             >
                 {labelTekst}
             </Radio>
-            {(antall || antall === 0) && (
+            {(!!antall || antall === 0) && (
                 <Label className="barlabel__antall" size="small">
                     {antall}
                 </Label>

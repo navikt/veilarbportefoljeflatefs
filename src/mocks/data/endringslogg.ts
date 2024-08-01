@@ -1,4 +1,4 @@
-export let endringsloggListe = [
+export const endringsloggListe = [
     {
         title: ' Endre info om søknadsprosessen',
         description: [
