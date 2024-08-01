@@ -4,8 +4,8 @@ import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import Header, {HeaderProps} from './header';
-import './tabell.css';
 import {OrNothing} from '../../utils/types/types';
+import './tabell.css';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;
@@ -52,7 +52,7 @@ function SorteringHeader({
                 <Button
                     size="small"
                     variant="tertiary"
-                    onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
+                    onClick={() => onClick(sortering ?? Sorteringsrekkefolge.ikke_satt)}
                     className={classNames(
                         'lenke lenke--frittstaende text--left',
                         {valgt: erValgt},

@@ -6,5 +6,5 @@ export function useSelectGjeldendeVeileder() {
     const {ident} = useParams<IdentParam>();
     const innloggetVeilederIdent = useIdentSelector();
 
-    return ident ? ident : innloggetVeilederIdent!.ident;
+    return ident || innloggetVeilederIdent!.ident;
 }

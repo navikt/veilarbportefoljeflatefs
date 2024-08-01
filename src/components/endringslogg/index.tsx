@@ -1,5 +1,5 @@
-import {EndringsloggContainer} from './endringslogg-container';
 import React, {useCallback, useEffect, useState} from 'react';
+import {EndringsloggContainer} from './endringslogg-container';
 import {EndringsloggEntryWithSeenStatus, mapRemoteToState, setAllEntriesSeen} from './utils/endringslogg-custom';
 import {
     hentEndringsLoggEntries,
@@ -43,8 +43,8 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
                 hentEndringsLoggEntries(
                     props.userId,
                     props.appId,
-                    props.dataset || 'production',
-                    props.maxEntries || DEFAULT_MAX_ENTRIES
+                    props.dataset ?? 'production',
+                    props.maxEntries ?? DEFAULT_MAX_ENTRIES
                 ).then(response =>
                     response
                         .json()
@@ -107,7 +107,7 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
                 onClose={onClose}
                 onOpen={onOpen}
                 stil={props.stil}
-                appName={props.appName || props.appId}
+                appName={props.appName ?? props.appId}
                 alignLeft={props.alignLeft}
                 errorMessage={errorMessage}
             />

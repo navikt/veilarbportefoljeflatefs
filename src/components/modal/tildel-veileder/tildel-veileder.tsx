@@ -1,25 +1,19 @@
-import * as React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
+import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
-import {BrukerModell, VeilederModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
-import '../../toolbar/toolbar.css';
 import SokFilter from '../../sok-veiledere/sok-filter';
-import classNames from 'classnames';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
-import {BodyShort, Button, Heading, Modal, Radio, RadioGroup} from '@navikt/ds-react';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
 import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
 import {trackAmplitude} from '../../../amplitude/amplitude';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-
-interface TildelVeilederProps {
-    oversiktType?: OversiktType;
-    closeInput: () => void;
-}
+import {TildelVeilederRenderer} from './tildel-veileder-renderer';
+import '../../toolbar/toolbar.css';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -31,6 +25,11 @@ const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
         });
         return arrayUtenDuplikater;
     }, []);
+
+interface TildelVeilederProps {
+    oversiktType?: OversiktType;
+    closeInput: () => void;
+}
 
 function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
@@ -151,18 +150,18 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             >
                 <Modal.Header>
                     <Heading size="medium" level="2">
-                        Arbeidslistenotat, huskelapp og kategori blir slettet
+                        Arbeidslistenotat, huskelapp og/eller kategori blir slettet
                     </Heading>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
                         <BodyShort size="medium">
-                            Arbeidslistenotat, huskelapp og kategori for følgende brukere ble opprettet på en annen
-                            enhet, og vil bli slettet ved tildeling av ny veileder:
+                            Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
+                            annen enhet, og vil bli slettet ved tildeling av ny veileder:
                         </BodyShort>
                         <FnrList listeMedFnr={fnrIAdvarselslista} />
                         <BodyShort size="medium" className="sporsmal-likevel-tidele">
-                            Ønsker du likevel å tildele veilederen til følgende bruker(e)?
+                            Ønsker du likevel å tildele veilederen?
                         </BodyShort>
                     </div>
                     <div className="sletting-arbeidslista-knapp-wrapper">
@@ -187,7 +186,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                                 lukkFjernModal();
                             }}
                         >
-                            Avbryt tildeling for de aktuelle brukerne
+                            Avbryt tildeling for nevnte bruker(e)
                         </Button>
                         <Button
                             type={'submit'}
@@ -221,52 +220,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                         onChange={setIdent}
                         data={data}
                         btnOnClick={() => onSubmit()}
-                        oversiktType={oversiktType}
                     />
                 )}
             </SokFilter>
         </>
-    );
-}
-
-interface TildelVeilederRendererProps {
-    data: VeilederModell[];
-    ident: string | null;
-    onChange: (ident: string) => void;
-    btnOnClick: () => void;
-    oversiktType: OversiktType | undefined;
-}
-
-function TildelVeilederRenderer({data, ident, onChange, btnOnClick}: TildelVeilederRendererProps) {
-    return (
-        <form className="skjema radio-filterform" data-testid="tildel-veileder_dropdown">
-            <RadioGroup hideLegend legend="" className="radio-filterform__valg" onChange={onChange}>
-                {data.map((veileder, index) => (
-                    <Radio
-                        data-testid={`tildel-veileder_valg_${index}`}
-                        type={'button'}
-                        key={veileder.ident}
-                        name="veileder"
-                        size="small"
-                        value={veileder.ident}
-                        className={'navds-radio'}
-                    >{`${veileder.etternavn}, ${veileder.fornavn}`}</Radio>
-                ))}
-            </RadioGroup>
-            <div className="filterform__under-valg">
-                <Button
-                    size="small"
-                    onClick={btnOnClick}
-                    className={classNames('knapp', 'knapp--mini', {
-                        'knapp--hoved': ident
-                    })}
-                    type={'button'}
-                    data-testid={ident ? 'tildel-veileder_velg-knapp' : 'tildel-veileder_lukk-knapp'}
-                >
-                    {ident ? 'Velg' : 'Lukk'}
-                </Button>
-            </div>
-        </form>
     );
 }
 

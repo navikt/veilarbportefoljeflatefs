@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
-import '../../topp-meny/lenker.css';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {BodyShort} from '@navikt/ds-react';
@@ -21,7 +20,7 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
             getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
         );
 
-    const sisteEndringKategori = !!bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
+    const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
 
     if (!skalVises) {
         return null;

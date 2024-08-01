@@ -1,20 +1,19 @@
-import {FiltervalgModell} from '../../../model-interfaces';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
+import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
+import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {FiltervalgModell} from '../../../model-interfaces';
 import Grid from '../../../components/grid/grid';
 import {tolkebehov} from '../../filter-konstanter';
 import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {MultiSelect} from 'react-multi-select-component';
 
 interface TolkebehovFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
-    emptyCheckboxFilterFormMessage?: string;
 }
 
 function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: TolkebehovFilterformProps) {

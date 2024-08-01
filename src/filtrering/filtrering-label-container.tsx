@@ -408,7 +408,7 @@ function getLabel(singleValue: any, key: any, enhettiltak: any): string {
     if (singleValue?.label) {
         return singleValue.label;
     }
-    if (FilterKonstanter[key] && FilterKonstanter[key][singleValue]) {
+    if (FilterKonstanter[key]?.[singleValue]) {
         return FilterKonstanter[key][singleValue];
     }
     if (FilterKonstanter[singleValue]) {

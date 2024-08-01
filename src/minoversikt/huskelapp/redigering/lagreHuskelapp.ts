@@ -27,7 +27,7 @@ export const lagreHuskelapp = async (
     if (responseAction === HUSKELAPP_LAGRE_OK) {
         dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
         await dispatch(leggTilStatustall('mineHuskelapper', 1));
-        if (!!arbeidsliste) {
+        if (arbeidsliste) {
             await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
         }
         onModalClose();

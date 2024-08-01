@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import {useLayoutEffect} from 'react';
 import classNames from 'classnames';
 import {Checkbox} from '@navikt/ds-react';
 import Etiketter from '../components/tabell/etiketter';
@@ -8,6 +8,8 @@ import EnhetKolonner from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VEDTAKSTOTTE} from '../konstanter';
+import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
+import {useDispatch} from 'react-redux';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -32,10 +34,11 @@ function EnhetBrukerpanel({
 }: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const dispatch = useDispatch();
 
     const scrollToLastPos = () => {
-        const xPos = parseInt(localStorage.getItem('xPos') || '0');
-        const yPos = parseInt(localStorage.getItem('yPos') || '0');
+        const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
+        const yPos = parseInt(localStorage.getItem('yScrollPos') ?? '0');
         window.scrollTo(xPos, yPos);
     };
 
@@ -58,6 +61,7 @@ function EnhetBrukerpanel({
                 hideLabel
                 onChange={() => {
                     settMarkert(bruker.fnr, !bruker.markert);
+                    dispatch(nullstillBrukerfeil());
                 }}
                 size="small"
             >

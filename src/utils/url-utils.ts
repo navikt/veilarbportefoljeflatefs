@@ -45,7 +45,7 @@ export function getVeilarbpersonflateBasePath() {
 export function getVeilarbpersonflateUrl(pathParam: string | null, enhet: string): string {
     const basePath = getVeilarbpersonflateBasePath();
 
-    const maybePathParam = pathParam ? pathParam : '';
+    const maybePathParam = pathParam || '';
     const enhetParam = `?enhet=${enhet}`;
 
     return `${basePath}${maybePathParam}${enhetParam}`;

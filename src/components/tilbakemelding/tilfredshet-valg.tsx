@@ -10,7 +10,7 @@ interface TilfredshetValgProps {
 }
 
 function TilfredshetValg({onTilfredshetChanged, defaultTilfredshet, className}: TilfredshetValgProps) {
-    const [tilfredshet, setTilfredshet] = useState(defaultTilfredshet ? defaultTilfredshet : 0);
+    const [tilfredshet, setTilfredshet] = useState(defaultTilfredshet || 0);
 
     const handleTilfredshetChanged = (tilfredshet: number) => {
         setTilfredshet(tilfredshet);

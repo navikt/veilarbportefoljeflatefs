@@ -27,23 +27,22 @@ export function handleKeyDown({
 }: HandleKeyDownProps) {
     return e => {
         if (eventIsInsideContainer(e)) {
-            if (e.keyCode === keyCodes.down || e.keyCode === keyCodes.up) {
+            if (e.keyCode === keyCodes.up) {
                 e.preventDefault();
-                if (e.keyCode === keyCodes.up) {
-                    if (e.shiftKey) {
-                        prepFlyttOpp(e.target.value);
-                    } else {
-                        requestFocus(e.target.value - 1);
-                    }
+                if (e.shiftKey) {
+                    prepFlyttOpp(e.target.value);
                 } else {
-                    if (e.shiftKey) {
-                        prepFlyttNed(e.target.value);
-                    } else {
-                        requestFocus(e.target.value + 1);
-                    }
+                    requestFocus(e.target.value - 1);
                 }
-                setDropIndex(-1);
+            } else if (e.keyCode === keyCodes.down) {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    prepFlyttNed(e.target.value);
+                } else {
+                    requestFocus(e.target.value + 1);
+                }
             }
+            setDropIndex(-1);
         }
     };
 }

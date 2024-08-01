@@ -470,6 +470,11 @@ export function hentMockPlan(): MoteData[] {
             avtaltMedNav: true
         },
         {
+            dato: '2022-03-23T13:00:00.636Z',
+            deltaker: deltaker2,
+            avtaltMedNav: false
+        },
+        {
             dato: '2022-03-25T15:02:35.636Z',
             deltaker: deltaker2,
             avtaltMedNav: false
@@ -499,7 +504,7 @@ const lagRandomOvergangsstonadForEnsligForsorger = (): EnsligeForsorgereOvergang
         vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
         harAktivitetsplikt: hentRandomAktivitetsplikt(),
         utlopsDato: new Date(randomDate({past: false})),
-        yngsteBarnsFødselsdato: new Date(randomDate({past: false}))
+        yngsteBarnsFodselsdato: new Date(randomDate({past: false}))
     };
 };
 
@@ -549,7 +554,7 @@ export const brukere = new Array(123).fill(0).map(() => lagBruker());
 
 export const testperson_uten_arbeidsliste = lagBruker();
 testperson_uten_arbeidsliste.arbeidsliste = tomArbeidsliste;
-testperson_uten_arbeidsliste.fornavn = 'Aase';
+testperson_uten_arbeidsliste.fornavn = 'Klara Margrethe';
 testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';
 
 export const testperson_uten_arbeidsliste2 = lagBruker();

@@ -1,5 +1,5 @@
+import React from 'react';
 import {Alert, Link} from '@navikt/ds-react';
-import * as React from 'react';
 import {useSesjonStatus} from '../../hooks/redux/use-informasjonsmelding';
 import {isDefined} from '../../utils/types/typeguards';
 import {SesjonStatus} from '../../model-interfaces';
@@ -12,11 +12,9 @@ export const SesjonStatusmelding = () => {
         return null;
     }
 
-    const LoginLenke = () => <Link href={loginUrl()}>Logg inn på nytt.</Link>;
-
     return (
         <Alert variant="warning" size="medium" fullWidth>
-            Økten din er utløpt. <LoginLenke />
+            Økten din er utløpt. <Link href={loginUrl()}>Logg inn på nytt.</Link>
         </Alert>
     );
 };

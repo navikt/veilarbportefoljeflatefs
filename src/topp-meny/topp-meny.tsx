@@ -1,5 +1,5 @@
 import React from 'react';
-import './lenker.css';
+import './topp-meny.css';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
 import {useSelector} from 'react-redux';
@@ -43,18 +43,16 @@ function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
             <Lenker erPaloggetVeileder={erPaloggetVeileder} />
             {harDarkModeFeatureToggle && <DarkModeToggle />}
             <Toasts />
-            <div className="moteendringsboks">
-                {oversiktType === OversiktType.minOversikt && enhet && (
-                    <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
-                )}
-                <Endringslogg
-                    userId={innloggetVeileder.data?.ident!}
-                    appId="afolg"
-                    backendUrl={getEndringsloggUrl()}
-                    appName="Arbeidsrettet oppfølging"
-                    alignLeft
-                />
-            </div>
+            {oversiktType === OversiktType.minOversikt && enhet && (
+                <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
+            )}
+            <Endringslogg
+                userId={innloggetVeileder.data?.ident!}
+                appId="afolg"
+                backendUrl={getEndringsloggUrl()}
+                appName="Arbeidsrettet oppfølging"
+                alignLeft
+            />
         </div>
     );
 }

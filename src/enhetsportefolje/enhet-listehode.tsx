@@ -66,7 +66,7 @@ function EnhetListehode({
         DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
-    const ferdigfilterListe = !!filtervalg ? filtervalg.ferdigfilterListe : '';
+    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const iAvtaltAktivitet =
         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
@@ -75,6 +75,9 @@ function EnhetListehode({
 
     const forenkletAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+
+    const tiltaksType =
+        harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
@@ -359,7 +362,7 @@ function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     tekst="Neste utløpsdato valgt aktivitet"
-                    skalVises={avansertAktivitet || forenkletAktivitet}
+                    skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
                     className="col col-xs-2"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"

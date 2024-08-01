@@ -52,7 +52,7 @@ function SorteringHeaderIkon({
                     {sorteringspil()}
                 </>
             }
-            onClick={() => onClick(sortering || Sorteringsrekkefolge.ikke_satt)}
+            onClick={() => onClick(sortering ?? Sorteringsrekkefolge.ikke_satt)}
             className={className}
             data-testid={`sorteringheader_${headerId}`}
             title={title}

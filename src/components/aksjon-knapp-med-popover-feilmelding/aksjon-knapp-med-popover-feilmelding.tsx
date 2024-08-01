@@ -32,7 +32,13 @@ export const AksjonKnappMedPopoverFeilmelding = ({
         })
     );
 
+    const setXYScrollPosition = () => {
+        localStorage.setItem('xScrollPos', window.scrollX.toString());
+        localStorage.setItem('yScrollPos', window.scrollY.toString());
+    };
+
     const handterKlikkAksjon = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        setXYScrollPosition();
         setHarFeilAksjon(false);
         setLasterAksjon(true);
 

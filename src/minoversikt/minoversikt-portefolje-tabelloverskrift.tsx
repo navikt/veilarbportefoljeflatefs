@@ -9,7 +9,7 @@ interface MinOversiktTabellProps {
 }
 
 function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversiktTabellProps) {
-    const {brukere, filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
+    const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.minOversikt
     );
 
@@ -20,7 +20,6 @@ function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversik
             filtervalg={filtervalg}
             sorteringsfelt={sorteringsfelt}
             valgteKolonner={listevisning.valgte}
-            brukere={brukere}
         />
     );
 }
