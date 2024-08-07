@@ -1,6 +1,6 @@
 import React from 'react';
+import {PadlockLockedIcon, PadlockUnlockedIcon} from '@navikt/aksel-icons';
 import './toggle-switch.css';
-import {Locked, Unlocked} from '@navikt/ds-icons';
 
 interface ToggleSwitchProps {
     onChange: () => void;
@@ -22,10 +22,10 @@ function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwit
             />
             <span className="switch-slider" />
             <div className="toggle-switch-las__lukked">
-                <Locked />
+                <PadlockLockedIcon title="Rekkefølge er låst" fontSize="1.2rem" />
             </div>
             <div className="toggle-switch-las__apen">
-                <Unlocked />
+                <PadlockUnlockedIcon title="Rekkefølge er ulåst" fontSize="1.2rem" />
             </div>
             <div className="toggle-switch-border" />
         </label>

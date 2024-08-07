@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
-import {Calender} from '@navikt/ds-icons';
+import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
 import MoteTabell from './motetabell';
 import SeFlereMoterKnapp from './seFlereMoterKnapp';
@@ -49,7 +49,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 ref={buttonRef}
                 variant="tertiary"
                 onClick={() => fetchMoteData()}
-                icon={<Calender title="møteplan" />}
+                icon={<CalendarIcon fontSize="1.6rem" />}
             >
                 Møteplan
             </Button>

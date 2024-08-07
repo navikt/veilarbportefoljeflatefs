@@ -25,8 +25,8 @@
     content: '';
     height: 1.216rem;
     width: 1.216rem;
-    left: 4px;
-    bottom: 3px;
+    left: 0.25rem;
+    bottom: 0.2rem;
     background-color: white;
     -webkit-transition: 0.4s;
     transition: 0.4s;
@@ -63,16 +63,14 @@
 }
 .toggle-switch-las__apen {
     position: absolute;
-    top: 0.25rem;
-    left: 0.4rem;
-    bottom: 0.192rem;
+    top: 0.2rem;
+    left: 0.25rem;
     visibility: hidden;
 }
 .toggle-switch-las__lukked {
     position: absolute;
-    top: 0.25rem;
-    left: 1.537rem;
-    bottom: 0.192rem;
+    top: 0.2rem;
+    right: 0.25rem;
     visibility: hidden;
 }
 .toggle-input:checked ~ .toggle-switch-las__apen {
