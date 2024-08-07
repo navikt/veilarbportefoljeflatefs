@@ -49,7 +49,7 @@ function Moteplan({veileder, enhet}: MoteplanProps) {
                 ref={buttonRef}
                 variant="tertiary"
                 onClick={() => fetchMoteData()}
-                icon={<CalendarIcon fontSize="1.6rem" />}
+                icon={<CalendarIcon aria-hidden={true} fontSize="1.6rem" />}
             >
                 Møteplan
             </Button>
