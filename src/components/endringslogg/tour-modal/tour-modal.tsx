@@ -3,8 +3,8 @@ import BlockContent from '@sanity/block-content-to-react';
 import {Button, Heading, Modal} from '@navikt/ds-react';
 import {ArrowLeftIcon, ArrowRightIcon} from '@navikt/aksel-icons';
 import './tour-modal.css';
-import Stegviser from '../../stegviser/stegviser';
-import {ModalType} from '../../utils/endringslogg-custom';
+import Stegviser from '../stegviser/stegviser';
+import {ModalType} from '../utils/endringslogg-custom';
 
 interface TourModalProps {
     modal: ModalType;
