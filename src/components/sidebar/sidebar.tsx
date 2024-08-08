@@ -24,12 +24,6 @@ import {kebabCase, keyCodes} from '../../utils/utils';
 import Sidevelger from './sidevelger';
 import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 
-export interface Sidebarelement {
-    type: SidebarTabType;
-    icon: React.ReactNode;
-    tittel: string;
-}
-
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
     currentOversiktType: OversiktType;
@@ -42,6 +36,16 @@ export function endreSideBar({dispatch, currentOversiktType, requestedTab}: Endr
         selectedTab: requestedTab,
         type: SIDEBAR_TAB_ENDRET
     });
+}
+
+export interface Sidebarelement {
+    type: SidebarTabType;
+    icon: React.ReactNode;
+    tittel: string;
+}
+
+function finnTab(viewType: SidebarTabType, tabs: Sidebarelement[]): Sidebarelement {
+    return tabs.find(t => t.type === viewType) as Sidebarelement;
 }
 
 const sidebar: Sidebarelement[] = [
@@ -84,6 +88,28 @@ function Sidebar(props: SidebarProps) {
     const windowWidth = useWindowWidth();
     const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
 
+    function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
+        endreSideBar({
+            dispatch: dispatch,
+            requestedTab: tab.type,
+            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
+        });
+
+        if (toggleSidebar) {
+            if (isSidebarHidden) {
+                dispatch(visSidebar(props.oversiktType));
+            } else if (tab.type === selectedTab.selectedTab) {
+                dispatch(skjulSidebar(props.oversiktType));
+            }
+        }
+
+        logEvent('portefolje.metrikker.sidebar-tab', {
+            tab: tab.type,
+            sideNavn: finnSideNavn(),
+            isSidebarHidden: isSidebarHidden
+        });
+    }
+
     const tabFocus = () => {
         if (selectedTabData.type === 'STATUS') return 0;
         else if (selectedTabData.type === 'MINE_FILTER') return 1;
@@ -96,32 +122,6 @@ function Sidebar(props: SidebarProps) {
     let tabFoc = tabFocus();
 
     const keyCode = e => e.which || e.keyCode;
-
-    function finnTab(viewType: SidebarTabType, tabs: Sidebarelement[]): Sidebarelement {
-        return tabs.find(t => t.type === viewType) as Sidebarelement;
-    }
-
-    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
-        return (
-            <button
-                key={key}
-                className={classNames('sidebar__tab', {
-                    'sidebar__tab-valgt': isSelected
-                })}
-                onClick={e => handleMouseClick(e, tab)}
-                role="tab"
-                aria-selected={!isSidebarHidden && isSelected}
-                aria-controls={kebabCase(`${tab.type}_tab`)}
-                id={kebabCase(`${tab.type}_tab`)}
-                tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={e => handleKeyUp(e, tab)}
-                data-testid={`sidebar-tab_${tab.type}`}
-                aria-label={tab.tittel}
-            >
-                <div className="sidebar__tab-ikon">{tab.icon}</div>
-            </button>
-        );
-    };
 
     function handleKeyUp(e, tab) {
         const sidebarTabs: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
@@ -168,36 +168,26 @@ function Sidebar(props: SidebarProps) {
         handleOnTabClicked(e, tab);
     }
 
-    function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
-        endreSideBar({
-            dispatch: dispatch,
-            requestedTab: tab.type,
-            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
-        });
-
-        if (toggleSidebar) {
-            if (isSidebarHidden) {
-                dispatch(visSidebar(props.oversiktType));
-            } else if (tab.type === selectedTab.selectedTab) {
-                dispatch(skjulSidebar(props.oversiktType));
-            }
-        }
-
-        logEvent('portefolje.metrikker.sidebar-tab', {
-            tab: tab.type,
-            sideNavn: finnSideNavn(),
-            isSidebarHidden: isSidebarHidden
-        });
-    }
-
-    const Tabs = () => {
-        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        if (erPaMinOversikt) {
-            return sidebar
-                .filter(tab => !visVeiledergrupper(tab))
-                .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
-        }
-        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
+    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
+        return (
+            <button
+                key={key}
+                className={classNames('sidebar__tab', {
+                    'sidebar__tab-valgt': isSelected
+                })}
+                onClick={e => handleMouseClick(e, tab)}
+                role="tab"
+                aria-selected={!isSidebarHidden && isSelected}
+                aria-controls={kebabCase(`${tab.type}_tab`)}
+                id={kebabCase(`${tab.type}_tab`)}
+                tabIndex={(!isSelected && -1) || 0}
+                onKeyUp={e => handleKeyUp(e, tab)}
+                data-testid={`sidebar-tab_${tab.type}`}
+                aria-label={tab.tittel}
+            >
+                <div className="sidebar__tab-ikon">{tab.icon}</div>
+            </button>
+        );
     };
 
     outsideClick(sidebarRef, () => {
@@ -208,6 +198,16 @@ function Sidebar(props: SidebarProps) {
             dispatch(skjulSidebar(props.oversiktType));
         }
     });
+
+    const Tabs = () => {
+        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        if (erPaMinOversikt) {
+            return sidebar
+                .filter(tab => !visVeiledergrupper(tab))
+                .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
+        }
+        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
+    };
 
     return (
         <div
