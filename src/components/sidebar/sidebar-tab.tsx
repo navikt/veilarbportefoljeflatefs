@@ -22,7 +22,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
         handleLukk();
     };
     return (
-        <>
+        <div className="testestest-sidebar-tab">
             <div className="sidebar-header" data-testid="sidebar-header">
                 <Heading size="medium" level="2" className="sidebar-header__tekst">
                     {tittel}
@@ -38,7 +38,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
                 />
             </div>
             {children}
-        </>
+        </div>
     );
 }
 

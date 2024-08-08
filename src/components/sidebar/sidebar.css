@@ -23,14 +23,14 @@
     cursor: pointer;
     opacity: 1;
 }
-.veilarbportefoljeflatefs .sidebar__tab-container {
-    grid-row: 1;
+
+.veilarbportefoljeflatefs .filterfaneliste {
+    background: var(--a-bg-default);
+    flex-grow: 1;
     display: flex;
     justify-content: space-around;
-    background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
-    margin-top: 0.5rem;
 }
+
 .veilarbportefoljeflatefs .sidebar__tab-valgt {
     border-bottom: 0.3rem solid #0067c5;
 }

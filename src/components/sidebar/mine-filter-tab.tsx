@@ -12,6 +12,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {HelpText} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
+import {SidebarTabInfo as SidebarTabType} from '../../store/sidebar/sidebar-view-store';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -27,12 +28,11 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
 }
 
 interface SidevelgerProps {
-    selectedTabData: Sidebarelement;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerProps) {
+function MineFilterTab({oversiktType, enhettiltak}: SidevelgerProps) {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -68,7 +68,7 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
         <SidebarTab
             tittel="Mine filter"
             handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-            tab={selectedTabData.type}
+            tab={SidebarTabType.MINE_FILTER}
             meta={
                 <>
                     <HelpText placement="right" strategy="fixed">
