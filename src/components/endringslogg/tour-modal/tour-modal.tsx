@@ -1,10 +1,10 @@
-import {default as React, useState} from 'react';
+import React, {useState} from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import {Button, Heading, Modal} from '@navikt/ds-react';
 import {ArrowLeftIcon, ArrowRightIcon} from '@navikt/aksel-icons';
+import Stegviser from '../stegviser/stegviser';
+import {ModalType} from '../utils/endringslogg-custom';
 import './tour-modal.css';
-import Stegviser from '../../stegviser/stegviser';
-import {ModalType} from '../../utils/endringslogg-custom';
 
 interface TourModalProps {
     modal: ModalType;
@@ -55,15 +55,6 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
                                 alt={step.altText}
                                 src={`data:image/jpeg;base64,${step.slideImage}`}
                                 className={'tour-modal__main--bilde'}
-                                onClick={() => {
-                                    const data = `data:image/png;base64,${step.slideImage}`;
-                                    const newWindow = window.open('about:blank');
-                                    const image = new Image();
-                                    image.src = data;
-                                    setTimeout(() => {
-                                        newWindow?.document?.write(image.outerHTML);
-                                    }, 0);
-                                }}
                             />
                         )}
                     </div>

@@ -168,10 +168,6 @@
 .veilarbportefoljeflatefs .toolbar .toggle__label {
     min-width: 3rem;
 }
-.veilarbportefoljeflatefs .toolbar-knapp__ikon {
-    min-width: 1.5rem;
-    min-height: 1.5rem;
-}
 .veilarbportefoljeflatefs .toolbar__element {
     display: flex;
     flex-direction: row;

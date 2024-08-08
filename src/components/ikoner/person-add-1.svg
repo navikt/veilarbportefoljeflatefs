@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="tildel-veileder-svg"  focusable="false">
-    <g stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none">
-        <path d="M12.5 14.5v-2.812M7.5 11.703v2.797l-5.009 1.789c-1.194.427-1.991 1.558-1.991 2.825v2.386h11"/>
-        <ellipse cx="9.988" cy="6.5" rx="5" ry="6"/>
-        <path d="M14.961 5.969l-.473.031c-1.703.328-2.797-.289-3.734-1.93-.563 1.078-2.321 1.93-3.766 1.93-.71 0-1.324-.146-1.936-.467"/>
-        <circle cx="18.5" cy="18.5" r="5"/>
-        <path stroke-linecap="round" d="M18.5 16v5M21 18.5h-5"/>
-    </g>
-</svg>
