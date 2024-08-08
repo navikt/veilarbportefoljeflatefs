@@ -49,12 +49,13 @@ spec:
           namespace: obo
         - application: endringslogg
           namespace: pto
+        - application: modiacontextholder
+          namespace: personoversikt
       external:
         - host: veilarbportefolje.prod-fss-pub.nais.io
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
         - host: veilarbveileder.prod-fss-pub.nais.io
         - host: veilarboppfolging.prod-fss-pub.nais.io
-        - host: modiacontextholder.prod-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -147,12 +148,12 @@ spec:
             },
             {
               "fromPath": "/modiacontextholder",
-              "toUrl": "https://modiacontextholder.prod-fss-pub.nais.io",
-              "preserveFromPath": true,
+              "toUrl": "http://modiacontextholder.personoversikt",
+              "preserveFromPath": false,
               "toApp": {
                 "name": "modiacontextholder",
                 "namespace": "personoversikt",
-                "cluster": "prod-fss"
+                "cluster": "prod-gcp"
               }
             }
           ]
