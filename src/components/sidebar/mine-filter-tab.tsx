@@ -4,7 +4,6 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
 import React, {useState} from 'react';
-import {Sidebarelement} from './sidebar';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
@@ -12,6 +11,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {HelpText} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
+import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -27,12 +27,13 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
 }
 
 interface SidevelgerProps {
-    selectedTabData: Sidebarelement;
+    valgtFane: SidebarTabs;
+    fanetittel: string;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerProps) {
+function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: SidevelgerProps) {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -66,9 +67,9 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
     };
     return (
         <SidebarTab
-            tittel="Mine filter"
+            tittel={fanetittel}
             handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-            tab={selectedTabData.type}
+            tab={valgtFane}
             meta={
                 <>
                     <HelpText placement="right" strategy="fixed">
