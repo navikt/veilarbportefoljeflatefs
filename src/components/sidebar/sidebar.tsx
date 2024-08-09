@@ -1,9 +1,5 @@
 import React, {Dispatch, useRef} from 'react';
-import {
-    SidebarTabInfo as SidebarTabType,
-    SidebarTabInfo,
-    useSidebarViewStore
-} from '../../store/sidebar/sidebar-view-store';
+import {SidebarTabs, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import './sidebar.css';
 import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
@@ -25,7 +21,7 @@ import Sidevelger from './sidevelger';
 import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 
 export interface Sidebarelement {
-    type: SidebarTabType;
+    type: SidebarTabs;
     icon: React.ReactNode;
     tittel: string;
 }
@@ -33,7 +29,7 @@ export interface Sidebarelement {
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
     currentOversiktType: OversiktType;
-    requestedTab: SidebarTabInfo;
+    requestedTab: SidebarTabs;
 }
 
 export function endreSideBar({dispatch, currentOversiktType, requestedTab}: EndreSideBarProps) {
@@ -46,22 +42,22 @@ export function endreSideBar({dispatch, currentOversiktType, requestedTab}: Endr
 
 const sidebar: Sidebarelement[] = [
     {
-        type: SidebarTabType.STATUS,
+        type: SidebarTabs.STATUS,
         icon: <StatusIkon />,
         tittel: 'Status'
     },
     {
-        type: SidebarTabType.MINE_FILTER,
+        type: SidebarTabs.MINE_FILTER,
         icon: <MineFilterIkon />,
         tittel: 'Mine filter'
     },
     {
-        type: SidebarTabType.VEILEDERGRUPPER,
+        type: SidebarTabs.VEILEDERGRUPPER,
         icon: <VeiledergruppeIkon />,
         tittel: 'Veiledergrupper'
     },
     {
-        type: SidebarTabType.FILTER,
+        type: SidebarTabs.FILTER,
         icon: <FilterIkon />,
         tittel: 'Filter'
     }
@@ -97,7 +93,7 @@ function Sidebar(props: SidebarProps) {
 
     const keyCode = e => e.which || e.keyCode;
 
-    function finnTab(viewType: SidebarTabType, tabs: Sidebarelement[]): Sidebarelement {
+    function finnTab(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
         return tabs.find(t => t.type === viewType) as Sidebarelement;
     }
 
@@ -152,11 +148,7 @@ function Sidebar(props: SidebarProps) {
             sidebarTabs[tabFoc].focus();
 
             if (erPaMinOversikt) {
-                handleOnTabClicked(
-                    e,
-                    sidebar.filter(tab => tab.type !== SidebarTabType.VEILEDERGRUPPER)[tabFoc],
-                    false
-                );
+                handleOnTabClicked(e, sidebar.filter(tab => tab.type !== SidebarTabs.VEILEDERGRUPPER)[tabFoc], false);
             } else {
                 handleOnTabClicked(e, sidebar[tabFoc], false);
             }
@@ -191,7 +183,7 @@ function Sidebar(props: SidebarProps) {
     }
 
     const Tabs = () => {
-        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
+        const visVeiledergrupper = tab => tab.type === SidebarTabs.VEILEDERGRUPPER;
         if (erPaMinOversikt) {
             return sidebar
                 .filter(tab => !visVeiledergrupper(tab))

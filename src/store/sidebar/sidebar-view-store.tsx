@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {OversiktType} from '../../ducks/ui/listevisning';
 
-export enum SidebarTabInfo {
+export enum SidebarTabs {
     STATUS = 'STATUS',
     FILTER = 'FILTER',
     VEILEDERGRUPPER = 'VEILEDERGRUPPER',
