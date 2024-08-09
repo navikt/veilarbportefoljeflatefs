@@ -24,7 +24,7 @@
     opacity: 1;
 }
 .veilarbportefoljeflatefs .sidebar__tab-container {
-    grid-row: 1;
+    flex-grow: 1;
     display: flex;
     justify-content: space-around;
     background-color: white;
@@ -47,6 +47,7 @@
     opacity: 1;
 }
 .veilarbportefoljeflatefs .sidebar__content-container {
+    margin-top: 0.25rem;
     grid-row: 2;
     height: fit-content;
     z-index: 5;
