@@ -72,21 +72,20 @@ interface SidebarProps {
 }
 
 function Sidebar(props: SidebarProps) {
+    const dispatch = useDispatch();
     const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
+    const windowWidth = useWindowWidth();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const sidebarState = useSidebarViewStore(
         erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
     );
 
-    function finnTab(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
+    const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
+    function finnTabElement(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
         return tabs.find(t => t.type === viewType) as Sidebarelement;
     }
-    const selectedTabElement = finnTab(sidebarState.selectedTab, sidebarTabElements);
 
-    const dispatch = useDispatch();
-    const windowWidth = useWindowWidth();
-
-    const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
+    const selectedTabElement = finnTabElement(sidebarState.selectedTab, sidebarTabElements);
 
     const tabFocus = () => {
         if (selectedTabElement.type === 'STATUS') return 0;
@@ -96,7 +95,6 @@ function Sidebar(props: SidebarProps) {
         else if (!erPaMinOversikt && selectedTabElement.type === 'FILTER') return 3;
         return 0;
     };
-
     let tabFoc = tabFocus();
 
     function handleOnTabClicked(tab: Sidebarelement) {
@@ -159,7 +157,7 @@ function Sidebar(props: SidebarProps) {
         }
     }
 
-    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
+    const knappForTab = (tab: Sidebarelement, isSelected: boolean, key: number) => {
         return (
             <button
                 key={key}
@@ -186,9 +184,9 @@ function Sidebar(props: SidebarProps) {
         if (erPaMinOversikt) {
             return sidebarTabElements
                 .filter(tab => !visVeiledergrupper(tab))
-                .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabElement.type, key));
+                .map((tab, key) => knappForTab(tab, tab.type === selectedTabElement.type, key));
         }
-        return sidebarTabElements.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabElement.type, key));
+        return sidebarTabElements.map((tab, key) => knappForTab(tab, tab.type === selectedTabElement.type, key));
     };
 
     outsideClick(sidebarRef, () => {
