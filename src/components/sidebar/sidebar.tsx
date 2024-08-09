@@ -63,6 +63,30 @@ const sidebarTabElements: Sidebarelement[] = [
     }
 ];
 
+interface Fane {
+    icon: React.ReactNode;
+    tittel: string;
+}
+
+const faner: {[key in SidebarTabs]: Fane} = {
+    [SidebarTabs.STATUS]: {
+        icon: <StatusIkon />,
+        tittel: 'Status'
+    },
+    [SidebarTabs.MINE_FILTER]: {
+        icon: <MineFilterIkon />,
+        tittel: 'Mine filter'
+    },
+    [SidebarTabs.VEILEDERGRUPPER]: {
+        icon: <VeiledergruppeIkon />,
+        tittel: 'Veiledergrupper'
+    },
+    [SidebarTabs.FILTER]: {
+        icon: <FilterIkon />,
+        tittel: 'Filter'
+    }
+};
+
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
@@ -81,11 +105,6 @@ function Sidebar(props: SidebarProps) {
     );
 
     const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
-    function finnTabElement(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
-        return tabs.find(t => t.type === viewType) as Sidebarelement;
-    }
-
-    const selectedTabElement = finnTabElement(sidebarState.selectedTab, sidebarTabElements);
 
     const tabFocus = () => {
         if (sidebarState.selectedTab === 'STATUS') return 0;
@@ -134,14 +153,14 @@ function Sidebar(props: SidebarProps) {
             if (keyCode(e) === keyCodes.right) {
                 tabFoc++;
                 // Hvis vi er i enden av tabpanelet, gå til starten
-                if (tabFoc >= TabsForOversiktstype().length) {
+                if (tabFoc >= TabKnapperForOversiktstype().length) {
                     tabFoc = 0;
                 }
             } else if (keyCode(e) === keyCodes.left) {
                 tabFoc--;
                 // Hvis vi er i starten av tabpanelet, gå til enden
                 if (tabFoc < 0) {
-                    tabFoc = TabsForOversiktstype().length - 1;
+                    tabFoc = TabKnapperForOversiktstype().length - 1;
                 }
             }
             sidebarTabsIDom[tabFoc].setAttribute('tabindex', '0');
@@ -157,36 +176,39 @@ function Sidebar(props: SidebarProps) {
         }
     }
 
-    const knappForTab = (tab: Sidebarelement, isSelected: boolean, key: number) => {
+    const knappForTab = (tab: SidebarTabs) => {
+        const tabForEvents: Sidebarelement = sidebarTabElements.find(tabElement => tabElement.type === tab)!; // "!" fordi alle verdiar frå SidebarTabs skal finnast i sidebarTabElements.
+        const isSelected = tab === sidebarState.selectedTab;
+
         return (
             <button
-                key={key}
+                key={tab}
                 className={classNames('sidebar__tab', {
                     'sidebar__tab-valgt': isSelected
                 })}
-                onClick={e => handleMouseClick(e, tab)}
+                onClick={e => handleMouseClick(e, tabForEvents)}
                 role="tab"
                 aria-selected={!isSidebarHidden && isSelected}
-                aria-controls={kebabCase(`${tab.type}_tab`)}
-                id={kebabCase(`${tab.type}_tab`)}
+                aria-controls={kebabCase(`${tab}_tab`)}
+                id={kebabCase(`${tab}_tab`)}
                 tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={e => handleKeyUp(e, tab)}
-                data-testid={`sidebar-tab_${tab.type}`}
-                aria-label={tab.tittel}
+                onKeyUp={e => handleKeyUp(e, tabForEvents)}
+                data-testid={`sidebar-tab_${tab}`}
+                aria-label={faner[tab].tittel}
             >
-                <div className="sidebar__tab-ikon">{tab.icon}</div>
+                <div className="sidebar__tab-ikon">{faner[tab].icon}</div>
             </button>
         );
     };
 
-    const TabsForOversiktstype = () => {
-        const visVeiledergrupper = tab => tab.type === SidebarTabs.VEILEDERGRUPPER;
+    const TabKnapperForOversiktstype = () => {
+        const faner = [SidebarTabs.STATUS, SidebarTabs.MINE_FILTER, SidebarTabs.VEILEDERGRUPPER, SidebarTabs.FILTER];
+        const visVeiledergrupper = tab => tab === SidebarTabs.VEILEDERGRUPPER;
+
         if (erPaMinOversikt) {
-            return sidebarTabElements
-                .filter(tab => !visVeiledergrupper(tab))
-                .map((tab, key) => knappForTab(tab, tab.type === sidebarState.selectedTab, key));
+            return faner.filter(tab => !visVeiledergrupper(tab)).map(tab => knappForTab(tab));
         }
-        return sidebarTabElements.map((tab, key) => knappForTab(tab, tab.type === sidebarState.selectedTab, key));
+        return faner.map(tab => knappForTab(tab));
     };
 
     outsideClick(sidebarRef, () => {
@@ -211,7 +233,7 @@ function Sidebar(props: SidebarProps) {
                 aria-label="Faner for filtrering. Du kan bruke piltastene for å navigere mellom de ulike fanene."
                 aria-labelledby={kebabCase(`${sidebarState.selectedTab}_tab`)}
             >
-                {TabsForOversiktstype()}
+                {TabKnapperForOversiktstype()}
             </div>
             {!isSidebarHidden && (
                 <div
@@ -223,7 +245,8 @@ function Sidebar(props: SidebarProps) {
                     tabIndex={0}
                 >
                     <Sidevelger
-                        selectedTabElement={selectedTabElement}
+                        valgtFane={sidebarState.selectedTab}
+                        fanetittel={faner[sidebarState.selectedTab].tittel}
                         oversiktType={props.oversiktType}
                         filtervalg={props.filtervalg}
                         enhettiltak={props.enhettiltak}
