@@ -77,9 +77,15 @@ function Sidebar(props: SidebarProps) {
     const sidebarState = useSidebarViewStore(
         erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
     );
+
+    function finnTab(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
+        return tabs.find(t => t.type === viewType) as Sidebarelement;
+    }
     const selectedTabElement = finnTab(sidebarState.selectedTab, sidebarTabElements);
+
     const dispatch = useDispatch();
     const windowWidth = useWindowWidth();
+
     const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
 
     const tabFocus = () => {
@@ -93,35 +99,31 @@ function Sidebar(props: SidebarProps) {
 
     let tabFoc = tabFocus();
 
-    const keyCode = e => e.which || e.keyCode;
+    function handleOnTabClicked(tab: Sidebarelement) {
+        endreValgtSidebarTab({
+            dispatch: dispatch,
+            requestedTab: tab.type,
+            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
+        });
 
-    function finnTab(viewType: SidebarTabs, tabs: Sidebarelement[]): Sidebarelement {
-        return tabs.find(t => t.type === viewType) as Sidebarelement;
+        if (isSidebarHidden) {
+            dispatch(visSidebar(props.oversiktType));
+        }
+
+        logEvent('portefolje.metrikker.sidebar-tab', {
+            tab: tab.type,
+            sideNavn: finnSideNavn(),
+            isSidebarHidden: isSidebarHidden
+        });
     }
 
-    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
-        return (
-            <button
-                key={key}
-                className={classNames('sidebar__tab', {
-                    'sidebar__tab-valgt': isSelected
-                })}
-                onClick={e => handleMouseClick(e, tab)}
-                role="tab"
-                aria-selected={!isSidebarHidden && isSelected}
-                aria-controls={kebabCase(`${tab.type}_tab`)}
-                id={kebabCase(`${tab.type}_tab`)}
-                tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={e => handleKeyUp(e, tab)}
-                data-testid={`sidebar-tab_${tab.type}`}
-                aria-label={tab.tittel}
-            >
-                <div className="sidebar__tab-ikon">{tab.icon}</div>
-            </button>
-        );
-    };
+    function handleMouseClick(e, tab: Sidebarelement) {
+        e.preventDefault();
+        handleOnTabClicked(tab);
+    }
 
     function handleKeyUp(e, tab) {
+        const keyCode = e => e.which || e.keyCode;
         const sidebarTabsIDom: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
         e.preventDefault();
 
@@ -157,28 +159,27 @@ function Sidebar(props: SidebarProps) {
         }
     }
 
-    function handleMouseClick(e, tab: Sidebarelement) {
-        e.preventDefault();
-        handleOnTabClicked(tab);
-    }
-
-    function handleOnTabClicked(tab: Sidebarelement) {
-        endreValgtSidebarTab({
-            dispatch: dispatch,
-            requestedTab: tab.type,
-            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
-        });
-
-        if (isSidebarHidden) {
-            dispatch(visSidebar(props.oversiktType));
-        }
-
-        logEvent('portefolje.metrikker.sidebar-tab', {
-            tab: tab.type,
-            sideNavn: finnSideNavn(),
-            isSidebarHidden: isSidebarHidden
-        });
-    }
+    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
+        return (
+            <button
+                key={key}
+                className={classNames('sidebar__tab', {
+                    'sidebar__tab-valgt': isSelected
+                })}
+                onClick={e => handleMouseClick(e, tab)}
+                role="tab"
+                aria-selected={!isSidebarHidden && isSelected}
+                aria-controls={kebabCase(`${tab.type}_tab`)}
+                id={kebabCase(`${tab.type}_tab`)}
+                tabIndex={(!isSelected && -1) || 0}
+                onKeyUp={e => handleKeyUp(e, tab)}
+                data-testid={`sidebar-tab_${tab.type}`}
+                aria-label={tab.tittel}
+            >
+                <div className="sidebar__tab-ikon">{tab.icon}</div>
+            </button>
+        );
+    };
 
     const TabsForOversiktstype = () => {
         const visVeiledergrupper = tab => tab.type === SidebarTabs.VEILEDERGRUPPER;
