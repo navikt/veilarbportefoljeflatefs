@@ -126,7 +126,7 @@ function Sidebar(props: SidebarProps) {
         e.preventDefault();
 
         if (keyCode(e) === keyCodes.space) {
-            handleOnTabClicked(e, tab);
+            handleOnTabClicked(tab);
         } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
             sidebarTabsIDom[tabFoc].setAttribute('tabindex', '-1');
             sidebarTabsIDom[tabFoc].setAttribute('className', 'sidebar__tab');
@@ -150,35 +150,27 @@ function Sidebar(props: SidebarProps) {
             sidebarTabsIDom[tabFoc].focus();
 
             if (erPaMinOversikt) {
-                handleOnTabClicked(
-                    e,
-                    sidebarTabElements.filter(tab => tab.type !== SidebarTabs.VEILEDERGRUPPER)[tabFoc],
-                    false
-                );
+                handleOnTabClicked(sidebarTabElements.filter(tab => tab.type !== SidebarTabs.VEILEDERGRUPPER)[tabFoc]);
             } else {
-                handleOnTabClicked(e, sidebarTabElements[tabFoc], false);
+                handleOnTabClicked(sidebarTabElements[tabFoc]);
             }
         }
     }
 
     function handleMouseClick(e, tab: Sidebarelement) {
         e.preventDefault();
-        handleOnTabClicked(e, tab);
+        handleOnTabClicked(tab);
     }
 
-    function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
+    function handleOnTabClicked(tab: Sidebarelement) {
         endreValgtSidebarTab({
             dispatch: dispatch,
             requestedTab: tab.type,
             currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
         });
 
-        if (toggleSidebar) {
-            if (isSidebarHidden) {
-                dispatch(visSidebar(props.oversiktType));
-            } else if (tab.type === sidebarState.selectedTab) {
-                dispatch(skjulSidebar(props.oversiktType));
-            }
+        if (isSidebarHidden) {
+            dispatch(visSidebar(props.oversiktType));
         }
 
         logEvent('portefolje.metrikker.sidebar-tab', {
