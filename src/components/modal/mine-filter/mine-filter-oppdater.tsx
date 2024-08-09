@@ -14,7 +14,7 @@ import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
-import {endreSideBar} from '../../sidebar/sidebar';
+import {endreValgtSidebarTab} from '../../sidebar/sidebar';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;
@@ -52,7 +52,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     filterId: filterId
                 })
             ).then(() => {
-                endreSideBar({
+                endreValgtSidebarTab({
                     dispatch: dispatch,
                     requestedTab: SidebarTabs.MINE_FILTER,
                     currentOversiktType: oversiktType

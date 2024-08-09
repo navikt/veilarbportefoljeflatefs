@@ -10,7 +10,7 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
-import {endreSideBar} from '../../sidebar/sidebar';
+import {endreValgtSidebarTab} from '../../sidebar/sidebar';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
 interface LagreNyttMineFilterProps {
@@ -43,7 +43,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                     filterValg: filterValg
                 })
             ).then(() => {
-                endreSideBar({
+                endreValgtSidebarTab({
                     dispatch: dispatch,
                     requestedTab: SidebarTabs.MINE_FILTER,
                     currentOversiktType: oversiktType
