@@ -88,11 +88,11 @@ function Sidebar(props: SidebarProps) {
     const selectedTabElement = finnTabElement(sidebarState.selectedTab, sidebarTabElements);
 
     const tabFocus = () => {
-        if (selectedTabElement.type === 'STATUS') return 0;
-        else if (selectedTabElement.type === 'MINE_FILTER') return 1;
-        else if (erPaMinOversikt && selectedTabElement.type === 'FILTER') return 2;
-        else if (!erPaMinOversikt && selectedTabElement.type === 'VEILEDERGRUPPER') return 2;
-        else if (!erPaMinOversikt && selectedTabElement.type === 'FILTER') return 3;
+        if (sidebarState.selectedTab === 'STATUS') return 0;
+        else if (sidebarState.selectedTab === 'MINE_FILTER') return 1;
+        else if (erPaMinOversikt && sidebarState.selectedTab === 'FILTER') return 2;
+        else if (!erPaMinOversikt && sidebarState.selectedTab === 'VEILEDERGRUPPER') return 2;
+        else if (!erPaMinOversikt && sidebarState.selectedTab === 'FILTER') return 3;
         return 0;
     };
     let tabFoc = tabFocus();
@@ -184,9 +184,9 @@ function Sidebar(props: SidebarProps) {
         if (erPaMinOversikt) {
             return sidebarTabElements
                 .filter(tab => !visVeiledergrupper(tab))
-                .map((tab, key) => knappForTab(tab, tab.type === selectedTabElement.type, key));
+                .map((tab, key) => knappForTab(tab, tab.type === sidebarState.selectedTab, key));
         }
-        return sidebarTabElements.map((tab, key) => knappForTab(tab, tab.type === selectedTabElement.type, key));
+        return sidebarTabElements.map((tab, key) => knappForTab(tab, tab.type === sidebarState.selectedTab, key));
     };
 
     outsideClick(sidebarRef, () => {
@@ -209,7 +209,7 @@ function Sidebar(props: SidebarProps) {
                 className="sidebar__tab-container"
                 role="tablist"
                 aria-label="Faner for filtrering. Du kan bruke piltastene for å navigere mellom de ulike fanene."
-                aria-labelledby={kebabCase(`${selectedTabElement.type}_tab`)}
+                aria-labelledby={kebabCase(`${sidebarState.selectedTab}_tab`)}
             >
                 {TabsForOversiktstype()}
             </div>
@@ -217,8 +217,8 @@ function Sidebar(props: SidebarProps) {
                 <div
                     className="sidebar__content-container"
                     role="tabpanel"
-                    aria-labelledby={kebabCase(`${selectedTabElement.type}_tab`)}
-                    id={selectedTabElement.type}
+                    aria-labelledby={kebabCase(`${sidebarState.selectedTab}_tab`)}
+                    id={sidebarState.selectedTab}
                     data-testid="sidebar_content-container"
                     tabIndex={0}
                 >
