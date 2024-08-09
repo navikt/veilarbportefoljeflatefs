@@ -127,7 +127,6 @@ export default function MinoversiktSide() {
                         filtervalg={filtervalg}
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
-                        isSidebarHidden={isSidebarHidden}
                         statustall={{medBrukerinnsyn: statustall, utenBrukerinnsyn: null}}
                     />
                     <div className="sokefelt-knapp__container">

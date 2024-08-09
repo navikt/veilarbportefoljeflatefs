@@ -67,27 +67,26 @@ interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     oversiktType: OversiktType;
-    isSidebarHidden: boolean;
     statustall: Statustall;
 }
 
-function Sidebar(props: SidebarProps) {
+function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) {
     const dispatch = useDispatch();
-    const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
+    const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const windowWidth = useWindowWidth();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const sidebarState = useSidebarViewStore(
         erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
     );
 
-    const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
+    const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
 
     outsideClick(sidebarRef, () => {
-        if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
+        if (windowWidth < 1200 && !isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()
             });
-            dispatch(skjulSidebar(props.oversiktType));
+            dispatch(skjulSidebar(oversiktType));
         }
     });
 
@@ -96,12 +95,12 @@ function Sidebar(props: SidebarProps) {
 
         endreValgtSidebarTab({
             dispatch: dispatch,
-            currentOversiktType: props.oversiktType,
+            currentOversiktType: oversiktType,
             requestedTab: fane
         });
 
         if (isSidebarHidden) {
-            dispatch(visSidebar(props.oversiktType));
+            dispatch(visSidebar(oversiktType));
         }
 
         logEvent('portefolje.metrikker.sidebar-tab', {
@@ -114,16 +113,16 @@ function Sidebar(props: SidebarProps) {
     // TODO Gje betre namn (flytta frå sidevelger.tsx)
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, props.oversiktType));
-        oppdaterKolonneAlternativer(dispatch, {...props.filtervalg, [filterId]: filterVerdi}, props.oversiktType);
+        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
+        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
 
     return (
         <div
             ref={sidebarRef}
-            aria-label={`Sidenavigasjon er nå ${props.isSidebarHidden ? 'lukket' : 'åpen'}`}
+            aria-label={`Sidenavigasjon er nå ${isSidebarHidden ? 'lukket' : 'åpen'}`}
             aria-live="polite"
-            className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}
+            className={classNames('sidebar', isSidebarHidden && 'sidebar__hidden', 'tabs')}
         >
             {
                 <Tabs value={sidebarState.selectedTab} onChange={onTabsChange}>
@@ -160,27 +159,27 @@ function Sidebar(props: SidebarProps) {
                             <Tabs.Panel value={SidebarTabs.STATUS}>
                                 <SidebarTab
                                     tittel={faner[SidebarTabs.STATUS].tittel}
-                                    handleLukk={() => dispatch(skjulSidebar(props.oversiktType))}
+                                    handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                                     tab={SidebarTabs.STATUS}
                                 >
                                     <FiltreringStatus
-                                        oversiktType={props.oversiktType}
-                                        filtervalg={props.filtervalg}
-                                        statustall={props.statustall}
+                                        oversiktType={oversiktType}
+                                        filtervalg={filtervalg}
+                                        statustall={statustall}
                                     />
                                 </SidebarTab>
                             </Tabs.Panel>
                             <Tabs.Panel value={SidebarTabs.MINE_FILTER}>
                                 <SidebarTab
                                     tittel={faner[SidebarTabs.MINE_FILTER].tittel}
-                                    handleLukk={() => dispatch(skjulSidebar(props.oversiktType))}
+                                    handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                                     tab={SidebarTabs.MINE_FILTER}
                                 >
                                     <FiltreringFilter
                                         endreFiltervalg={doEndreFiltervalg}
-                                        filtervalg={props.filtervalg}
-                                        enhettiltak={props.enhettiltak}
-                                        oversiktType={props.oversiktType}
+                                        filtervalg={filtervalg}
+                                        enhettiltak={enhettiltak}
+                                        oversiktType={oversiktType}
                                     />
                                 </SidebarTab>
                             </Tabs.Panel>
@@ -188,10 +187,10 @@ function Sidebar(props: SidebarProps) {
                                 <Tabs.Panel value={SidebarTabs.VEILEDERGRUPPER}>
                                     <SidebarTab
                                         tittel={faner[SidebarTabs.VEILEDERGRUPPER].tittel}
-                                        handleLukk={() => dispatch(skjulSidebar(props.oversiktType))}
+                                        handleLukk={() => dispatch(skjulSidebar(oversiktType))}
                                         tab={SidebarTabs.VEILEDERGRUPPER}
                                     >
-                                        <FilteringVeiledergrupper oversiktType={props.oversiktType} />
+                                        <FilteringVeiledergrupper oversiktType={oversiktType} />
                                     </SidebarTab>
                                 </Tabs.Panel>
                             )}
@@ -199,8 +198,8 @@ function Sidebar(props: SidebarProps) {
                                 <MineFilterTab
                                     valgtFane={sidebarState.selectedTab}
                                     fanetittel={faner[SidebarTabs.FILTER].tittel}
-                                    enhettiltak={props.enhettiltak}
-                                    oversiktType={props.oversiktType}
+                                    enhettiltak={enhettiltak}
+                                    oversiktType={oversiktType}
                                 />
                             </Tabs.Panel>
                         </div>

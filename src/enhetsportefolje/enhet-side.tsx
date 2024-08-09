@@ -153,7 +153,6 @@ export default function EnhetSide() {
                         filtervalg={filtervalg}
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
-                        isSidebarHidden={isSidebarHidden}
                         statustall={statustall}
                     />
                     <div className="sokefelt-knapp__container">
