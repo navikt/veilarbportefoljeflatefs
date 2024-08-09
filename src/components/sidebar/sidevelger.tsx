@@ -1,28 +1,29 @@
-import SidebarTab from './sidebar-tab';
-import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
-import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import SidebarTab from './sidebar-tab';
+import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
-import {Sidebarelement} from './sidebar';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import MineFilterTab from './mine-filter-tab';
+import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
+import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
+import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 
 interface SidevelgerProps {
-    selectedTabData: Sidebarelement;
+    valgtFane: SidebarTabs;
+    fanetittel: string;
     oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     statustall: Statustall;
 }
 
-function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
+function Sidevelger({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
     const dispatch = useDispatch();
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
@@ -30,51 +31,44 @@ function Sidevelger({selectedTabData, oversiktType, filtervalg, enhettiltak, sta
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
 
-    if (!selectedTabData) {
+    if (!valgtFane) {
         return null;
     }
 
-    if (selectedTabData.tittel === 'Status') {
-        return (
-            <SidebarTab
-                tittel="Status"
-                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                tab={selectedTabData.type}
-            >
-                <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
-            </SidebarTab>
-        );
-    } else if (selectedTabData.tittel === 'Filter') {
-        return (
-            <SidebarTab
-                tittel="Filter"
-                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                tab={selectedTabData.type}
-            >
-                <FiltreringFilter
-                    endreFiltervalg={doEndreFiltervalg}
-                    filtervalg={filtervalg}
+    switch (valgtFane) {
+        case SidebarTabs.STATUS:
+        case SidebarTabs.FILTER:
+        case SidebarTabs.VEILEDERGRUPPER:
+            return (
+                <SidebarTab tittel={fanetittel} handleLukk={() => dispatch(skjulSidebar(oversiktType))} tab={valgtFane}>
+                    {valgtFane === SidebarTabs.STATUS && (
+                        <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
+                    )}
+                    {valgtFane === SidebarTabs.FILTER && (
+                        <FiltreringFilter
+                            endreFiltervalg={doEndreFiltervalg}
+                            filtervalg={filtervalg}
+                            enhettiltak={enhettiltak}
+                            oversiktType={oversiktType}
+                        />
+                    )}
+                    {valgtFane === SidebarTabs.VEILEDERGRUPPER && (
+                        <FilteringVeiledergrupper oversiktType={oversiktType} />
+                    )}
+                </SidebarTab>
+            );
+        case SidebarTabs.MINE_FILTER:
+            return (
+                <MineFilterTab
+                    valgtFane={valgtFane}
+                    fanetittel={fanetittel}
                     enhettiltak={enhettiltak}
                     oversiktType={oversiktType}
                 />
-            </SidebarTab>
-        );
-    } else if (selectedTabData.tittel === 'Veiledergrupper') {
-        return (
-            <SidebarTab
-                tittel="Veiledergrupper"
-                handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                tab={selectedTabData.type}
-            >
-                <FilteringVeiledergrupper oversiktType={oversiktType} />
-            </SidebarTab>
-        );
-    } else if (selectedTabData.tittel === 'Mine filter') {
-        return (
-            <MineFilterTab oversiktType={oversiktType} selectedTabData={selectedTabData} enhettiltak={enhettiltak} />
-        );
+            );
+        default:
+            return null;
     }
-    return null;
 }
 
 export default Sidevelger;

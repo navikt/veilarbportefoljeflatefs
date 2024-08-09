@@ -1,10 +1,15 @@
-import {SidebarTabInfo} from '../store/sidebar/sidebar-view-store';
+import {SidebarTabs} from '../store/sidebar/sidebar-view-store';
 import {logEvent} from '../utils/frontend-logger';
 import {finnSideNavn} from '../middleware/metrics-middleware';
 import {OversiktType} from './ui/listevisning';
 
-export const initialStateSidebar = {
-    selectedTab: SidebarTabInfo.STATUS,
+export interface SidebarStateType {
+    selectedTab: SidebarTabs;
+    isSidebarHidden: boolean;
+}
+
+export const initialStateSidebar: SidebarStateType = {
+    selectedTab: SidebarTabs.STATUS,
     isSidebarHidden: false
 };
 
