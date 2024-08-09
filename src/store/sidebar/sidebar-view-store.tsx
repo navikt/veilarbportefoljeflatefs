@@ -1,6 +1,7 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {OversiktType} from '../../ducks/ui/listevisning';
+import {SidebarStateType} from '../../ducks/sidebar-tab';
 
 export enum SidebarTabs {
     STATUS = 'STATUS',
@@ -9,7 +10,7 @@ export enum SidebarTabs {
     MINE_FILTER = 'MINE_FILTER'
 }
 
-export function sidebarSelector(state: AppState, oversiktType: OversiktType) {
+export function sidebarSelector(state: AppState, oversiktType: OversiktType): SidebarStateType {
     if (oversiktType === OversiktType.minOversikt) {
         return state.ui.sidebarMinOversikt;
     }
