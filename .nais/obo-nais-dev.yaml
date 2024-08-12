@@ -53,8 +53,10 @@ spec:
           namespace: pto
         - application: modiacontextholder
           namespace: personoversikt
+        - application: veilarbportefolje
+          namespace: obo
+          cluster: dev-gcp
       external:
-        - host: veilarbportefolje.dev-fss-pub.nais.io
         - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
@@ -90,12 +92,12 @@ spec:
           "proxies": [
             {
               "fromPath": "/veilarbportefolje",
-              "toUrl": "https://veilarbportefolje.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbportefolje.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
