@@ -1110,7 +1110,7 @@ GRID
 .veilarbportefoljeflatefs .oversikt-sideinnhold {
     display: grid;
     column-gap: 1%;
-    grid-template-columns: 21rem auto;
+    grid-template-columns: 22rem auto;
     grid-template-rows: auto auto auto;
 }
 

@@ -9,5 +9,5 @@ interface Props {
 }
 
 export const Tab = ({fane, fanedetaljer}: Props) => {
-    return <Tabs.Tab value={fane} title={fanedetaljer.tittel} icon={fanedetaljer.icon} />;
+    return <Tabs.Tab value={fane} label={fanedetaljer.tittel} icon={fanedetaljer.icon} />;
 };

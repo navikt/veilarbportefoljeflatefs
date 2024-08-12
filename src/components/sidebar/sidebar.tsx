@@ -123,7 +123,7 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
             className={classNames('sidebar', isSidebarHidden && 'sidebar__hidden', 'tabs')}
         >
             {
-                <Tabs value={sidebarState.selectedTab} onChange={onTabsChange}>
+                <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top">
                     <Tabs.List className="sidebar__tab-container">
                         {fanerForSide.map(fane => (
                             <Tab fane={fane} fanedetaljer={faner[fane]} />
