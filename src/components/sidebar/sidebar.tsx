@@ -10,19 +10,14 @@ import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
-import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
-import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
-import {pagineringSetup} from '../../ducks/paginering';
-import {endreFiltervalg} from '../../ducks/filtrering';
-import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
-import MineFilterTab from './mine-filter-tab';
-import SidebarTab from './sidebar-tab';
+import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
+import {Fanevelger} from './fanevelger';
 import {Tab} from './Tab';
 import './sidebar.css';
 
@@ -120,13 +115,6 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
         });
     };
 
-    // TODO Gje betre namn (flytta frå sidevelger.tsx)
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
-        dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
-        oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
-    };
-
     return (
         <div
             ref={sidebarRef}
@@ -147,52 +135,18 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
                             data-testid="sidebar_content-container"
                             // id={sidebarState.selectedTab} // TODO: sjekk om id vert brukt nokon stad
                         >
-                            <Tabs.Panel value={SidebarTabs.STATUS}>
-                                <SidebarTab
-                                    tittel={faner[SidebarTabs.STATUS].tittel}
-                                    handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                                    tab={SidebarTabs.STATUS}
-                                >
-                                    <FiltreringStatus
+                            {fanerForSide.map(fane => (
+                                <Tabs.Panel value={fane}>
+                                    <Fanevelger
+                                        valgtFane={fane}
+                                        fanetittel={faner[fane].tittel}
                                         oversiktType={oversiktType}
-                                        filtervalg={filtervalg}
-                                        statustall={statustall}
-                                    />
-                                </SidebarTab>
-                            </Tabs.Panel>
-                            <Tabs.Panel value={SidebarTabs.MINE_FILTER}>
-                                <SidebarTab
-                                    tittel={faner[SidebarTabs.MINE_FILTER].tittel}
-                                    handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                                    tab={SidebarTabs.MINE_FILTER}
-                                >
-                                    <FiltreringFilter
-                                        endreFiltervalg={doEndreFiltervalg}
                                         filtervalg={filtervalg}
                                         enhettiltak={enhettiltak}
-                                        oversiktType={oversiktType}
+                                        statustall={statustall}
                                     />
-                                </SidebarTab>
-                            </Tabs.Panel>
-                            {!erPaMinOversikt && (
-                                <Tabs.Panel value={SidebarTabs.VEILEDERGRUPPER}>
-                                    <SidebarTab
-                                        tittel={faner[SidebarTabs.VEILEDERGRUPPER].tittel}
-                                        handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-                                        tab={SidebarTabs.VEILEDERGRUPPER}
-                                    >
-                                        <FilteringVeiledergrupper oversiktType={oversiktType} />
-                                    </SidebarTab>
                                 </Tabs.Panel>
-                            )}
-                            <Tabs.Panel value={SidebarTabs.FILTER}>
-                                <MineFilterTab
-                                    valgtFane={sidebarState.selectedTab}
-                                    fanetittel={faner[SidebarTabs.FILTER].tittel}
-                                    enhettiltak={enhettiltak}
-                                    oversiktType={oversiktType}
-                                />
-                            </Tabs.Panel>
+                            ))}
                         </div>
                     )}
                 </Tabs>

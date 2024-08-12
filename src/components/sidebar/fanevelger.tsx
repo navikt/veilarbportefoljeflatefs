@@ -23,17 +23,21 @@ interface SidevelgerProps {
     statustall: Statustall;
 }
 
-function Sidevelger({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: SidevelgerProps) {
+export function Fanevelger({
+    valgtFane,
+    fanetittel,
+    oversiktType,
+    filtervalg,
+    enhettiltak,
+    statustall
+}: SidevelgerProps) {
     const dispatch = useDispatch();
+
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
     };
-
-    if (!valgtFane) {
-        return null;
-    }
 
     switch (valgtFane) {
         case SidebarTabs.STATUS:
@@ -70,5 +74,3 @@ function Sidevelger({valgtFane, fanetittel, oversiktType, filtervalg, enhettilta
             return null;
     }
 }
-
-export default Sidevelger;
