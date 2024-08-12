@@ -4,64 +4,34 @@
     position: sticky;
     top: 0.5rem;
     z-index: 4;
-    display: grid;
-    grid-template-rows: auto auto;
-    row-gap: 5px;
+    box-shadow: var(--a-shadow-small);
+    background-color: white;
 }
-.veilarbportefoljeflatefs .sidebar__tab {
-    position: relative;
-    display: block;
-    background-color: transparent;
-    padding: 0.5rem 0.8rem 0;
-    height: auto;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-bottom: 0.3rem solid white;
-}
-.veilarbportefoljeflatefs .sidebar__tab:hover {
-    border-bottom: 0.3rem solid #0067c5;
-    cursor: pointer;
-    opacity: 1;
-}
+
 .veilarbportefoljeflatefs .sidebar__tab-container {
     flex-grow: 1;
     display: flex;
     justify-content: space-around;
-    background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
     margin-top: 0.5rem;
 }
-.veilarbportefoljeflatefs .sidebar__tab-valgt {
-    border-bottom: 0.3rem solid #0067c5;
-}
-.veilarbportefoljeflatefs .sidebar__tab-ikon {
-    width: 2.5rem;
-    height: 2rem;
-}
-.veilarbportefoljeflatefs .sidebar__hidden .sidebar__tab-valgt {
-    border-bottom: 0.3rem solid white;
-}
-.veilarbportefoljeflatefs .sidebar__hidden .sidebar__tab-valgt:hover {
-    border-bottom: 0.3rem solid #0067c5;
-    cursor: pointer;
-    opacity: 1;
-}
+
 .veilarbportefoljeflatefs .sidebar__content-container {
-    margin-top: 0.25rem;
-    grid-row: 2;
     height: fit-content;
     z-index: 5;
     background-color: white;
     padding: 0.5rem;
     position: absolute;
-    width: inherit;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
+    width: 100%;
+    box-shadow: var(--a-shadow-small);
 }
+
+/* Denne stylinga kunne budd i filtrering-filter-mappa i staden */
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter__kolonne {
     padding: 0;
     margin-bottom: 1rem;
 }
 
+/* Det som styrer høgda av sidemenyen + overflow */
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter,
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-oversikt,
 .veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt,
@@ -71,24 +41,24 @@
     padding: 0.5rem 0.5rem 0;
     max-height: 70vh;
 }
+
+/* Styling av header i faneinnhald */
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header {
     display: flex;
     margin-bottom: 1rem;
     justify-content: space-between;
-    max-height: 320px;
+    max-height: 20rem;
     column-gap: 0.25rem;
 }
-.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__tekst h2 {
-    margin-bottom: 0;
-}
+
+/* "meta" kan på sikt få bu saman med resten av overskrifta, om vi gjev heading margin-right: auto; i staden for space-between */
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__meta {
     display: inline-flex;
     align-items: center;
     margin-left: auto;
+    gap: 0.5rem;
 }
-.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__meta .toggle-switch {
-    margin-left: 0.5rem;
-}
+
 @media (max-height: 1250px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-oversikt,
@@ -97,6 +67,7 @@
         max-height: 75vh;
     }
 }
+
 @media (max-height: 1100px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-oversikt,
@@ -105,6 +76,7 @@
         max-height: 71vh;
     }
 }
+
 @media (max-height: 870px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-oversikt,
@@ -113,6 +85,7 @@
         max-height: 60vh;
     }
 }
+
 @media (max-height: 640px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-oversikt,
