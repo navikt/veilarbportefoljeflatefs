@@ -23,6 +23,7 @@ import {endreFiltervalg} from '../../ducks/filtrering';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import MineFilterTab from './mine-filter-tab';
 import SidebarTab from './sidebar-tab';
+import {Tab} from './Tab';
 import './sidebar.css';
 
 interface EndreSideBarProps {
@@ -39,12 +40,12 @@ export function endreValgtSidebarTab({dispatch, currentOversiktType, requestedTa
     });
 }
 
-interface Fane {
+export interface Fanedetaljer {
     icon: React.ReactNode;
     tittel: string;
 }
 
-const faner: {[key in SidebarTabs]: Fane} = {
+const faner: {[key in SidebarTabs]: Fanedetaljer} = {
     [SidebarTabs.STATUS]: {
         icon: <StatusIkon />,
         tittel: 'Status'
@@ -78,6 +79,15 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
     const sidebarState = useSidebarViewStore(
         erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
     );
+
+    const taBortVeiledergrupperPaMinOversikt = (fane: SidebarTabs) =>
+        !(erPaMinOversikt && fane === SidebarTabs.VEILEDERGRUPPER);
+    const fanerForSide: SidebarTabs[] = [
+        SidebarTabs.STATUS,
+        SidebarTabs.MINE_FILTER,
+        SidebarTabs.VEILEDERGRUPPER,
+        SidebarTabs.FILTER
+    ].filter(taBortVeiledergrupperPaMinOversikt);
 
     const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
 
@@ -127,28 +137,9 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
             {
                 <Tabs value={sidebarState.selectedTab} onChange={onTabsChange}>
                     <Tabs.List className="sidebar__tab-container">
-                        <Tabs.Tab
-                            value={SidebarTabs.STATUS}
-                            title={faner[SidebarTabs.STATUS].tittel}
-                            icon={faner[SidebarTabs.STATUS].icon}
-                        />
-                        <Tabs.Tab
-                            value={SidebarTabs.MINE_FILTER}
-                            title={faner[SidebarTabs.MINE_FILTER].tittel}
-                            icon={faner[SidebarTabs.MINE_FILTER].icon}
-                        />
-                        {!erPaMinOversikt && (
-                            <Tabs.Tab
-                                value={SidebarTabs.VEILEDERGRUPPER}
-                                title={faner[SidebarTabs.VEILEDERGRUPPER].tittel}
-                                icon={faner[SidebarTabs.VEILEDERGRUPPER].icon}
-                            />
-                        )}
-                        <Tabs.Tab
-                            value={SidebarTabs.FILTER}
-                            title={faner[SidebarTabs.FILTER].tittel}
-                            icon={faner[SidebarTabs.FILTER].icon}
-                        />
+                        {fanerForSide.map(fane => (
+                            <Tab fane={fane} fanedetaljer={faner[fane]} />
+                        ))}
                     </Tabs.List>
                     {!isSidebarHidden && (
                         <div
