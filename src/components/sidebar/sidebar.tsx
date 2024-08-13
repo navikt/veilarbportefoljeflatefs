@@ -1,12 +1,8 @@
 import React, {Dispatch, useRef} from 'react';
 import {useDispatch} from 'react-redux';
-import classNames from 'classnames';
 import {Tabs} from '@navikt/ds-react';
+import {FunnelIcon, PersonGroupIcon, StarIcon, VitalsIcon} from '@navikt/aksel-icons';
 import {SidebarTabs, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
-import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
-import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
-import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
-import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -42,19 +38,19 @@ export interface Fanedetaljer {
 
 const faner: {[key in SidebarTabs]: Fanedetaljer} = {
     [SidebarTabs.STATUS]: {
-        icon: <StatusIkon />,
+        icon: <VitalsIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Status'
     },
     [SidebarTabs.MINE_FILTER]: {
-        icon: <MineFilterIkon />,
+        icon: <StarIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Mine filter'
     },
     [SidebarTabs.VEILEDERGRUPPER]: {
-        icon: <VeiledergruppeIkon />,
+        icon: <PersonGroupIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Veiledergrupper'
     },
     [SidebarTabs.FILTER]: {
-        icon: <FilterIkon />,
+        icon: <FunnelIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Filter'
     }
 };
