@@ -78,7 +78,7 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
 
             // Rett fane er open (har rendra innhald), og det nye filteret vårt er synleg
-            cy.getByTestId('sidebar__tabinnhold-MINE_FILTER').children().should('have.length.at.least', 1);
+            cy.faneErApen('MINE_FILTER');
             cy.get('@mineFilter').contains(mineFilterNavn);
 
             // Nyfilteret vårt er valgt, og at begge filtertagsa (+ Nullstill filtervalg) som skal visast er synlege

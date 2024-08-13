@@ -78,36 +78,45 @@ Cypress.Commands.add('gaTilOversikt', side => {
     }
 });
 
+Cypress.Commands.add('faneErApen', tab => {
+    return (cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length.at.least', 1));
+})
+
+Cypress.Commands.add('faneErLukket', tab => {
+        return (cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length', 0));
+    }
+)
+
 Cypress.Commands.add('klikkTab', tab => {
     if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Veiledergrupper')) {
+        if (cy.faneErLukket('VEILEDERGRUPPER')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Veiledergrupper')
+                cy.faneErApen('VEILEDERGRUPPER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Mine filter')) {
+        if (cy.faneErLukket('MINE_FILTER')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Mine filter')
+                cy.faneErApen('MINE_FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Mine filter');
     } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Status')) {
+        if (cy.faneErLukket('STATUS')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Status')
+                cy.faneErApen('STATUS')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Status');
     } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Filter')) {
+        if (cy.faneErLukket('FILTER')) {
             return (
                 cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Filter')
+                cy.faneErApen('FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Filter');
