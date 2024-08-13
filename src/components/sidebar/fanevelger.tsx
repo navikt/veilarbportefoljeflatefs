@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -21,9 +20,18 @@ interface Props {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     statustall: Statustall;
+    lukkSidemeny: () => void;
 }
 
-export const Fanevelger = ({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: Props) => {
+export const Fanevelger = ({
+    valgtFane,
+    fanetittel,
+    oversiktType,
+    filtervalg,
+    enhettiltak,
+    statustall,
+    lukkSidemeny
+}: Props) => {
     const dispatch = useDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
@@ -37,7 +45,7 @@ export const Fanevelger = ({valgtFane, fanetittel, oversiktType, filtervalg, enh
         case SidebarTabs.FILTER:
         case SidebarTabs.VEILEDERGRUPPER:
             return (
-                <SidebarTab tittel={fanetittel} handleLukk={() => dispatch(skjulSidebar(oversiktType))} tab={valgtFane}>
+                <SidebarTab tittel={fanetittel} lukkSidemeny={lukkSidemeny} tab={valgtFane}>
                     {valgtFane === SidebarTabs.STATUS && (
                         <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
                     )}

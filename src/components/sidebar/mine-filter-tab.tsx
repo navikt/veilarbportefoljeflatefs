@@ -69,7 +69,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     return (
         <SidebarTab
             tittel={fanetittel}
-            handleLukk={() => dispatch(skjulSidebar(oversiktType))}
+            lukkSidemeny={() => dispatch(skjulSidebar(oversiktType))}
             tab={valgtFane}
             headingChildren={
                 <>

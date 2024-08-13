@@ -20,7 +20,7 @@ import './sidebar.css';
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
     currentOversiktType: OversiktType;
-    requestedTab: SidebarTabs;
+    requestedTab: SidebarTabs | '';
 }
 
 export function endreValgtSidebarTab({dispatch, currentOversiktType, requestedTab}: EndreSideBarProps) {
@@ -82,12 +82,21 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
 
     const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
 
+    const lukkSidemeny = () => {
+        dispatch(skjulSidebar(oversiktType));
+        endreValgtSidebarTab({
+            dispatch: dispatch,
+            currentOversiktType: oversiktType,
+            requestedTab: ''
+        });
+    };
+
     outsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()
             });
-            dispatch(skjulSidebar(oversiktType));
+            lukkSidemeny();
         }
     });
 
@@ -136,6 +145,7 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
                                         filtervalg={filtervalg}
                                         enhettiltak={enhettiltak}
                                         statustall={statustall}
+                                        lukkSidemeny={lukkSidemeny}
                                     />
                                 </Tabs.Panel>
                             ))}

@@ -8,18 +8,18 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 interface TabProps {
     tab: SidebarTabs;
     tittel: string;
-    handleLukk: () => void;
+    lukkSidemeny: () => void;
     headingChildren?: React.ReactNode;
     children: React.ReactNode;
 }
 
-export const SidebarTab = ({tab, tittel, handleLukk, headingChildren, children}: TabProps) => {
+export const SidebarTab = ({tab, tittel, lukkSidemeny, headingChildren, children}: TabProps) => {
     const lukkTab = () => {
         logEvent('portefolje.metrikker.lukk-pa-kryss', {
             tab: tab,
             sideNavn: finnSideNavn()
         });
-        handleLukk();
+        lukkSidemeny();
     };
 
     return (
