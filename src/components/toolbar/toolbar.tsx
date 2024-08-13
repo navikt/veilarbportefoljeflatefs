@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
-import {AddPerson, Search} from '@navikt/ds-icons';
 import {Alert, Heading} from '@navikt/ds-react';
+import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import Paginering from './paginering/paginering';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
@@ -65,7 +65,7 @@ function Toolbar({
                             aktiv
                             tildelveileder={false}
                             testid="sok-veileder_knapp"
-                            ikon={<Search className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
+                            ikon={<MagnifyingGlassIcon aria-hidden={true} fontSize="1.5rem" />}
                             oversiktType={oversiktType}
                         />
                     </div>
@@ -104,7 +104,7 @@ function Toolbar({
                                 aktiv={aktiv}
                                 tildelveileder
                                 testid="tildel-veileder_knapp"
-                                ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
+                                ikon={<PersonPlusIcon aria-hidden={true} fontSize="1.5rem" />}
                                 oversiktType={oversiktType}
                             />
                         </div>

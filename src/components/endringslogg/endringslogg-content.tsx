@@ -3,7 +3,7 @@ import React from 'react';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
 import BlockContent from '@sanity/block-content-to-react';
-import {TourModalButton} from './modal/tour-modal/tour-modal-button';
+import {TourModalButton} from './tour-modal/tour-modal-button';
 import {trackLinkClick} from './utils/utils';
 import {Heading, Label} from '@navikt/ds-react';
 import {EndringsloggLink} from './endringslogg-link';
