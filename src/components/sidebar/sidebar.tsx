@@ -120,7 +120,7 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
             ref={sidebarRef}
             aria-label={`Sidenavigasjon er nå ${isSidebarHidden ? 'lukket' : 'åpen'}`}
             aria-live="polite"
-            className={classNames('sidebar', isSidebarHidden && 'sidebar__hidden', 'tabs')}
+            className="sidebar"
         >
             {
                 <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top">
@@ -130,11 +130,7 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
                         ))}
                     </Tabs.List>
                     {!isSidebarHidden && (
-                        <div
-                            className="sidebar__content-container"
-                            data-testid="sidebar_content-container"
-                            // id={sidebarState.selectedTab} // TODO: sjekk om id vert brukt nokon stad
-                        >
+                        <div className="sidebar__content-container" data-testid="sidebar_content-container">
                             {fanerForSide.map(fane => (
                                 <Tabs.Panel value={fane} data-testid={`sidebar__tabinnhold-${fane}`}>
                                     <Fanevelger

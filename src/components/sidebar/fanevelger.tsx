@@ -14,7 +14,7 @@ import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 
-interface SidevelgerProps {
+interface Props {
     valgtFane: SidebarTabs;
     fanetittel: string;
     oversiktType: OversiktType;
@@ -23,14 +23,7 @@ interface SidevelgerProps {
     statustall: Statustall;
 }
 
-export function Fanevelger({
-    valgtFane,
-    fanetittel,
-    oversiktType,
-    filtervalg,
-    enhettiltak,
-    statustall
-}: SidevelgerProps) {
+export function Fanevelger({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: Props) {
     const dispatch = useDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {

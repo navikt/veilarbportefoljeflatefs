@@ -1,15 +1,15 @@
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {HelpText} from '@navikt/ds-react';
 import SidebarTab from './sidebar-tab';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {HelpText} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 
@@ -26,14 +26,14 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
 }
 
-interface SidevelgerProps {
+interface Props {
     valgtFane: SidebarTabs;
     fanetittel: string;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: SidevelgerProps) {
+function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Props) {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -65,6 +65,7 @@ function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Sidev
                 return ' ';
         }
     };
+
     return (
         <SidebarTab
             tittel={fanetittel}
@@ -85,7 +86,7 @@ function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Sidev
                                     effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
                                 }
                             });
-                            setIsMinefiltereDraggable(!isMinefiltereDraggable);
+                            setIsMinefiltereDraggable(prevState => !prevState);
                         }}
                         ariaLabel="Endre rekkefølge"
                     />

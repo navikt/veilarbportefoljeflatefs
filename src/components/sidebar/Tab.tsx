@@ -1,6 +1,6 @@
-import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
-import {Tabs} from '@navikt/ds-react';
 import React from 'react';
+import {Tabs} from '@navikt/ds-react';
+import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {Fanedetaljer} from './sidebar';
 
 interface Props {

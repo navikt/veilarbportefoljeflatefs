@@ -25,13 +25,11 @@
     box-shadow: var(--a-shadow-small);
 }
 
-/* Denne stylinga kunne budd i filtrering-filter-mappa i staden */
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter__kolonne {
     padding: 0;
     margin-bottom: 1rem;
 }
 
-/* Det som styrer høgda av sidemenyen + overflow */
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter,
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-oversikt,
 .veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt,
@@ -42,7 +40,6 @@
     max-height: 70vh;
 }
 
-/* Styling av header i faneinnhald */
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

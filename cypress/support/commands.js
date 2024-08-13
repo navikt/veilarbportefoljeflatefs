@@ -87,36 +87,36 @@ Cypress.Commands.add('faneErLukket', tab => {
     }
 )
 
-const klikkPaTab = (tab) => {
-    return cy.getByTestId(`sidebar-tab_${tab}`).click({force: true})
-}
+Cypress.Commands.add('klikkPaSidebarTab', tab => {
+    cy.getByTestId(`sidebar-tab_${tab}`).click({force: true})
+})
 
 Cypress.Commands.add('klikkTab', tab => {
     if (tab === 'VEILEDERGRUPPER') {
         if (cy.faneErLukket('VEILEDERGRUPPER')) {
             return (
-                klikkPaTab(tab) && cy.faneErApen('VEILEDERGRUPPER')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('VEILEDERGRUPPER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
         if (cy.faneErLukket('MINE_FILTER')) {
             return (
-                klikkPaTab(tab) && cy.faneErApen('MINE_FILTER')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('MINE_FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Mine filter');
     } else if (tab === 'STATUS') {
         if (cy.faneErLukket('STATUS')) {
             return (
-                klikkPaTab(tab) &&  cy.faneErApen('STATUS')
+                cy.klikkPaSidebarTab(tab) &&  cy.faneErApen('STATUS')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Status');
     } else if (tab === 'FILTER') {
         if (cy.faneErLukket('FILTER')) {
             return (
-                klikkPaTab(tab) && cy.faneErApen('FILTER')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Filter');
