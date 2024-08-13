@@ -44,19 +44,17 @@
 
 /* Styling av header i faneinnhald */
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+
     display: flex;
-    margin-bottom: 1rem;
-    justify-content: space-between;
-    max-height: 20rem;
-    column-gap: 0.25rem;
+    align-items: center;
+    column-gap: 0.5rem;
 }
 
-/* "meta" kan på sikt få bu saman med resten av overskrifta, om vi gjev heading margin-right: auto; i staden for space-between */
-.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header__meta {
-    display: inline-flex;
-    align-items: center;
-    margin-left: auto;
-    gap: 0.5rem;
+.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .sidebar-header__tekst {
+    margin-right: auto;
 }
 
 @media (max-height: 1250px) {

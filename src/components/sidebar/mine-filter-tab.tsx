@@ -70,7 +70,7 @@ function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Sidev
             tittel={fanetittel}
             handleLukk={() => dispatch(skjulSidebar(oversiktType))}
             tab={valgtFane}
-            meta={
+            headingChildren={
                 <>
                     <HelpText placement="right" strategy="fixed">
                         {hjelpeTekst(oversiktType)}

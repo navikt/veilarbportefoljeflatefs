@@ -6,14 +6,14 @@ import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 interface TabProps {
+    tab: SidebarTabs;
     tittel: string;
     handleLukk: () => void;
+    headingChildren?: React.ReactNode;
     children: React.ReactNode;
-    tab: SidebarTabs;
-    meta?: React.ReactNode;
 }
 
-function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
+function SidebarTab({tab, tittel, handleLukk, headingChildren, children}: TabProps) {
     const lukkTab = () => {
         logEvent('portefolje.metrikker.lukk-pa-kryss', {
             tab: tab,
@@ -21,6 +21,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
         });
         handleLukk();
     };
+
     return (
         <>
             <div className="sidebar-header" data-testid="sidebar-header">
@@ -28,7 +29,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
                     {tittel}
                 </Heading>
 
-                {meta && <div className="sidebar-header__meta">{meta}</div>}
+                {headingChildren}
 
                 <Button
                     onClick={lukkTab}
@@ -37,6 +38,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
                     icon={<XMarkIcon title="Lukk panel" fontSize="1.5rem" />}
                 />
             </div>
+
             {children}
         </>
     );
