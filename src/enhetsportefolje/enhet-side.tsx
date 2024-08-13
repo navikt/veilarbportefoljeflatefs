@@ -26,7 +26,7 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
-import Sidebar from '../components/sidebar/sidebar';
+import {Sidebar} from '../components/sidebar/sidebar';
 import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {useWindowWidth} from '../hooks/use-window-width';

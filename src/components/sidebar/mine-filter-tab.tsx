@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {HelpText} from '@navikt/ds-react';
-import SidebarTab from './sidebar-tab';
+import {SidebarTab} from './sidebar-tab';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
@@ -33,7 +33,7 @@ interface Props {
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Props) {
+export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}: Props) => {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -103,6 +103,4 @@ function MineFilterTab({valgtFane, fanetittel, oversiktType, enhettiltak}: Props
             />
         </SidebarTab>
     );
-}
-
-export default MineFilterTab;
+};

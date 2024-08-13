@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import SidebarTab from './sidebar-tab';
+import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
@@ -9,7 +9,7 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
-import MineFilterTab from './mine-filter-tab';
+import {MineFilterTab} from './mine-filter-tab';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
 import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
@@ -23,7 +23,7 @@ interface Props {
     statustall: Statustall;
 }
 
-export function Fanevelger({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: Props) {
+export const Fanevelger = ({valgtFane, fanetittel, oversiktType, filtervalg, enhettiltak, statustall}: Props) => {
     const dispatch = useDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
@@ -66,4 +66,4 @@ export function Fanevelger({valgtFane, fanetittel, oversiktType, filtervalg, enh
         default:
             return null;
     }
-}
+};

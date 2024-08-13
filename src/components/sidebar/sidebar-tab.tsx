@@ -13,7 +13,7 @@ interface TabProps {
     children: React.ReactNode;
 }
 
-function SidebarTab({tab, tittel, handleLukk, headingChildren, children}: TabProps) {
+export const SidebarTab = ({tab, tittel, handleLukk, headingChildren, children}: TabProps) => {
     const lukkTab = () => {
         logEvent('portefolje.metrikker.lukk-pa-kryss', {
             tab: tab,
@@ -42,6 +42,4 @@ function SidebarTab({tab, tittel, handleLukk, headingChildren, children}: TabPro
             {children}
         </>
     );
-}
-
-export default SidebarTab;
+};

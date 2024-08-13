@@ -62,7 +62,7 @@ interface SidebarProps {
     statustall: Statustall;
 }
 
-function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) {
+export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) => {
     const dispatch = useDispatch();
     const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const windowWidth = useWindowWidth();
@@ -145,6 +145,4 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
             }
         </div>
     );
-}
-
-export default Sidebar;
+};
