@@ -136,7 +136,7 @@ function Sidebar({filtervalg, enhettiltak, oversiktType, statustall}: SidebarPro
                             // id={sidebarState.selectedTab} // TODO: sjekk om id vert brukt nokon stad
                         >
                             {fanerForSide.map(fane => (
-                                <Tabs.Panel value={fane}>
+                                <Tabs.Panel value={fane} data-testid={`sidebar__tabinnhold-${fane}`}>
                                     <Fanevelger
                                         valgtFane={fane}
                                         fanetittel={faner[fane].tittel}
