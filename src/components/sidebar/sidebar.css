@@ -6,13 +6,13 @@
     z-index: 4;
     box-shadow: var(--a-shadow-small);
     background-color: white;
+    margin-top: 0.5rem;
 }
 
 .veilarbportefoljeflatefs .sidebar__tab-container {
     flex-grow: 1;
     display: flex;
     justify-content: space-around;
-    margin-top: 0.5rem;
 }
 
 .veilarbportefoljeflatefs .sidebar__content-container {

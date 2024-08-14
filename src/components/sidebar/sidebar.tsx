@@ -128,7 +128,7 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
             className="sidebar"
         >
             {
-                <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top">
+                <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top" size="small">
                     <Tabs.List className="sidebar__tab-container">
                         {fanerForSide.map(fane => (
                             <Tab fane={fane} fanedetaljer={faner[fane]} />
