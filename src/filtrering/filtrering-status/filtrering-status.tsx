@@ -33,6 +33,8 @@ interface StatustallInnhold {
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;
+    moterMedNAVIdag: number;
+    tiltakshendelser: number;
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
@@ -42,7 +44,6 @@ interface StatustallInnhold {
     minArbeidslisteGronn: number;
     minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
-    moterMedNAVIdag: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
@@ -205,6 +206,13 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         antall={statustallMedBrukerinnsyn.moterMedNAVIdag}
                         filterVerdi={mapFilternavnTilFilterValue['avtaltMoteMedNav']}
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['avtaltMoteMedNav']]}
+                    />
+                    <BarInputRadio
+                        filterNavn="tiltakshendelse"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.tiltakshendelser}
+                        filterVerdi={mapFilternavnTilFilterValue['tiltakshendelser']}
+                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['tiltakshendelser']]}
                     />
                 </div>
                 <div className="forsteBarlabelIGruppe">
