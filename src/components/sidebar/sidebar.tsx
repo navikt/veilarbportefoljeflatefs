@@ -131,13 +131,13 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
                 <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top" size="small">
                     <Tabs.List className="sidebar__tab-container">
                         {fanerForSide.map(fane => (
-                            <Tab fane={fane} fanedetaljer={faner[fane]} />
+                            <Tab fane={fane} fanedetaljer={faner[fane]} key={fane} />
                         ))}
                     </Tabs.List>
                     {!isSidebarHidden && (
                         <div className="sidebar__content-container" data-testid="sidebar_content-container">
                             {fanerForSide.map(fane => (
-                                <Tabs.Panel value={fane} data-testid={`sidebar__tabinnhold-${fane}`}>
+                                <Tabs.Panel value={fane} data-testid={`sidebar__tabinnhold-${fane}`} key={fane}>
                                     <Fanevelger
                                         valgtFane={fane}
                                         fanetittel={faner[fane].tittel}
