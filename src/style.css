@@ -3,6 +3,8 @@
      * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
      * Howto: margin-left: -x, padding-left: x; og forelders padding-left: x */
     --side-padding-x-akse: 3rem;
+    --sidebar-bredde: 22rem;
+    --gap-mellom-sidebar-og-sokefeltkolonner: 0.8rem;
 }
 
 .veilarbportefoljeflatefs .ord-brekk {
@@ -1032,7 +1034,7 @@ GRID
     position: sticky;
     top: 0;
     display: grid;
-    grid-template-columns: 21.8rem auto;
+    grid-template-columns: calc(var(--sidebar-bredde) + var(--gap-mellom-sidebar-og-sokefeltkolonner)) auto;
     grid-template-rows: auto auto auto auto;
     z-index: 3;
     background-color: var(--a-bg-subtle);
@@ -1109,8 +1111,8 @@ GRID
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold {
     display: grid;
-    column-gap: 1%;
-    grid-template-columns: 21rem auto;
+    column-gap: var(--gap-mellom-sidebar-og-sokefeltkolonner);
+    grid-template-columns: var(--sidebar-bredde) auto;
     grid-template-rows: auto auto auto;
 }
 
