@@ -166,8 +166,9 @@ describe('Diverse', () => {
 
         // Få opp bekreftelsesmodal med suksess-beskjed og lukk den
         cy.wait(500);
-        cy.get('.modal-suksess_tildel-veileder').should('be.visible')
-            .within( () => {
+        cy.get('.modal-suksess_tildel-veileder')
+            .should('be.visible')
+            .within(() => {
                 cy.get('button').last().click();
             });
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
@@ -222,7 +223,7 @@ describe('Diverse', () => {
         cy.apneLukkeFilterDropdown('alder');
         cy.getByTestId('filter_0-19').check({force: true}); // Her har vi 2 valgte filter
         cy.apneLukkeFilterDropdown('er-utdanningen-godkjent');
-        cy.getByTestId('filter_JA').check({force: true});  // Her har vi 3 valgte filter
+        cy.getByTestId('filter_JA').check({force: true}); // Her har vi 3 valgte filter
 
         // Trykkar på tildel veileder, får feilmelding, blir kvitt den med "Nullstill filter"
         cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
@@ -249,44 +250,44 @@ describe('Diverse', () => {
         cy.gaTilOversikt('enhetens-oversikt');
     });
 
-	it('Sjekk at filter og kolonnevalg blir beholdt mellom oversiktene', () => {
-		cy.gaTilOversikt('enhetens-oversikt');
+    it('Sjekk at filter og kolonnevalg blir beholdt mellom oversiktene', () => {
+        cy.gaTilOversikt('enhetens-oversikt');
 
         // Vel filter for overgangsstønad hos enlige forsørgere
-		cy.klikkTab('FILTER');
-		cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
-		cy.apneLukkeFilterDropdown('ensligeForsorgere');
-		cy.getByTestId('filter_OVERGANGSSTØNAD').check({force: true});
-		cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
+        cy.klikkTab('FILTER');
+        cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
+        cy.apneLukkeFilterDropdown('ensligeForsorgere');
+        cy.getByTestId('filter_OVERGANGSSTONAD').check({force: true});
+        cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
 
         // Skjular veileder-kolonne, visar "Om barnet", lukkar valmeny.
-		cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({ force: true });
-		cy.getByTestId('velg-kolonne-rad_veileder').uncheck({force: true});
-		cy.getByTestId('velg-kolonne-rad_om_barnet').check({force: true});
-		cy.getByTestId('lukk-velg-kolonner-knapp').click({force: true});
+        cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
+        cy.getByTestId('velg-kolonne-rad_veileder').uncheck({force: true});
+        cy.getByTestId('velg-kolonne-rad_om_barnet').check({force: true});
+        cy.getByTestId('lukk-velg-kolonner-knapp').click({force: true});
 
         // Sjekkar at rette kolonner er synlege (Om barnet, Utløp overgangsstønad, ikkje Veileder)
-		cy.getByTestId('sorteringheader_veileder').should('not.exist');
-		cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
-		cy.getByTestId('sorteringheader_oppfolging').should('be.visible'); //om barnet kolonne synlig
+        cy.getByTestId('sorteringheader_veileder').should('not.exist');
+        cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
+        cy.getByTestId('sorteringheader_oppfolging').should('be.visible'); //om barnet kolonne synlig
 
         // Går til Min oversikt
-		cy.gaTilOversikt('min-oversikt');
-		cy.klikkTab('STATUS');
+        cy.gaTilOversikt('min-oversikt');
+        cy.klikkTab('STATUS');
 
         // Vel filter "i avtalt aktivitet" og kan sjå tilhøyrande kolonne i tabellen
         // Kolonna har teksten "Neste utløpsdato aktivitet"
-		cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({force: true});
-		cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
+        cy.getByTestId('filter_checkboks-container_iavtaltAktivitet').check({force: true});
+        cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
 
         // Går attende til Enhetens oversikt.
         // Sjekkar at vi framleis ser Om barnet og Utløp overgangsnstønad
-		cy.gaTilOversikt('enhetens-oversikt');
-		cy.getByTestId('sorteringheader_veileder').should('not.exist');
-		cy.getByTestId('sorteringheader_oppfolging').should('be.visible');
+        cy.gaTilOversikt('enhetens-oversikt');
+        cy.getByTestId('sorteringheader_veileder').should('not.exist');
+        cy.getByTestId('sorteringheader_oppfolging').should('be.visible');
 
         // Går til Min oversikt igjen, der skal vi framleis sjå kolonne for "Neste utløpsdato aktivitet"
-		cy.gaTilOversikt('min-oversikt');
-		cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
-	});
+        cy.gaTilOversikt('min-oversikt');
+        cy.getByTestId('sorteringheader_i-avtalt-aktivitet').should('be.visible');
+    });
 });
