@@ -17,7 +17,12 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    HUSKELAPP,
+    VEDTAKSTOTTE,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
+    VIS_STATUSFILTER_TILTAKSHENDELSE
+} from '../../konstanter';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import './filtrering-status.css';
 import FilterStatusMineFargekategorier from './fargekategori';
@@ -33,6 +38,8 @@ interface StatustallInnhold {
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;
+    moterMedNAVIdag: number;
+    tiltakshendelser: number;
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
@@ -42,7 +49,6 @@ interface StatustallInnhold {
     minArbeidslisteGronn: number;
     minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
-    moterMedNAVIdag: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
@@ -62,6 +68,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+    const erStatusfilterTiltakshendelseFeatureTogglePa = useFeatureSelector()(VIS_STATUSFILTER_TILTAKSHENDELSE);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -206,6 +213,15 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterVerdi={mapFilternavnTilFilterValue['avtaltMoteMedNav']}
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['avtaltMoteMedNav']]}
                     />
+                    {erStatusfilterTiltakshendelseFeatureTogglePa && (
+                        <BarInputRadio
+                            filterNavn="tiltakshendelse"
+                            handleChange={handleRadioButtonChange}
+                            antall={statustallMedBrukerinnsyn.tiltakshendelser}
+                            filterVerdi={mapFilternavnTilFilterValue['tiltakshendelser']}
+                            labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['tiltakshendelser']]}
+                        />
+                    )}
                 </div>
                 <div className="forsteBarlabelIGruppe">
                     <BarInputRadio
