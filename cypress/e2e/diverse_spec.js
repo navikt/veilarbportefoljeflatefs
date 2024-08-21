@@ -257,7 +257,7 @@ describe('Diverse', () => {
         cy.klikkTab('FILTER');
         cy.getByTestId('filtrering-filter_container').scrollTo('bottom');
         cy.apneLukkeFilterDropdown('ensligeForsorgere');
-        cy.getByTestId('filter_OVERGANGSSTONAD').check({force: true});
+        cy.getByTestId('filter_OVERGANGSSTØNAD').check({force: true});
         cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
 
         // Skjular veileder-kolonne, visar "Om barnet", lukkar valmeny.
