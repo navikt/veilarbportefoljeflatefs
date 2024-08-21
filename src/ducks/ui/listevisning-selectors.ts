@@ -15,6 +15,7 @@ import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     TILTAKSPENGER_YTELSE,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
@@ -138,6 +139,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaHuskelapp = filtervalg.ferdigfilterListe.includes(HUSKELAPP);
 
+    const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
+
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtrertPaLandgruppeEllerFoedeland))
@@ -187,5 +190,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, filtrertPaUtdanningEllerSituasjonSomKanHaEndring))
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtrertPaHuskelapp))
+        .concat(addHvis(Kolonne.TILTAKSHENDELSE, filtrertPaTiltakshendelse))
+        .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
+        .concat(addHvis(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE, filtrertPaTiltakshendelse))
         .concat([Kolonne.OPPFOLGINGSTARTET]);
 }

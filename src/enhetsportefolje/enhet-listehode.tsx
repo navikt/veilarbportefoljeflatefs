@@ -8,6 +8,7 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -24,7 +25,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_STATUSFILTER_TILTAKSHENDELSE} from '../konstanter';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -52,6 +53,7 @@ function EnhetListehode({
     valgteKolonner
 }: EnhetListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const vis_kolonner_for_tiltakshendelser = useFeatureSelector()(VIS_STATUSFILTER_TILTAKSHENDELSE);
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
@@ -378,6 +380,7 @@ function EnhetListehode({
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
                 />
+                {}
                 <Header
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
@@ -556,6 +559,42 @@ function EnhetListehode({
                     headerId="dato-sist-endret-utdanning-og-situasjon"
                     skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                 />
+                {vis_kolonner_for_tiltakshendelser && (
+                    <SorteringHeader
+                        sortering={Sorteringsfelt.TILTAKSHENDELSE}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE}
+                        tekst="Hendelse"
+                        className="col col-xs-2"
+                        headerId="tiltakshendelse-lenke"
+                        skalVises={!!ferdigfilterListe?.includes(TILTAKSHENDELSER)}
+                    />
+                )}
+                {vis_kolonner_for_tiltakshendelser && (
+                    <SorteringHeader
+                        sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                        tekst="Dato"
+                        className="col col-xs-2"
+                        headerId="tiltakshendelse-dato-opprettet"
+                        skalVises={!!ferdigfilterListe?.includes(TILTAKSHENDELSER)}
+                    />
+                )}
+                {vis_kolonner_for_tiltakshendelser && (
+                    <SorteringHeader
+                        sortering={Sorteringsfelt.TILTAKSHENDELSE_TILTAKSTYPE}
+                        onClick={sorteringOnClick}
+                        rekkefolge={sorteringsrekkefolge}
+                        erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TILTAKSTYPE}
+                        tekst="Tiltakstype"
+                        className="col col-xs-2"
+                        headerId="tiltakshendelse-lenke"
+                        skalVises={!!ferdigfilterListe?.includes(TILTAKSHENDELSER)}
+                    />
+                )}
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

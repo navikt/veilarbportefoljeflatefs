@@ -59,7 +59,10 @@ export enum Sorteringsfelt {
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanningOgSituasjonSistEndret',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist',
-    HUSKELAPP = 'huskelapp'
+    HUSKELAPP = 'huskelapp',
+    TILTAKSHENDELSE = 'tiltakshendelse',
+    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
+    TILTAKSHENDELSE_TILTAKSTYPE = 'tiltakshendelse_tiltakstype'
 }
 
 export interface FiltervalgModell {
