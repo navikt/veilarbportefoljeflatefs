@@ -282,7 +282,7 @@ export const rettighetsgruppe = {
 };
 
 export const ensligeForsorgere = {
-    OVERGANGSSTØNAD: {label: 'Overgangsstønad'}
+    OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
 export const aktiviteter = {
