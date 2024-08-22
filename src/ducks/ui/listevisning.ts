@@ -59,7 +59,7 @@ export enum Kolonne {
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanning_og_situasjon_sist_endret',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
-    TILTAKSHENDELSE = 'tiltakshendelse',
+    TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
     TILTAKSHENDELSE_TILTAKSTYPE = 'tiltakshendelse_tiltakstype'
 }
