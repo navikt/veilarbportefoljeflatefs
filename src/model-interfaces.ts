@@ -300,7 +300,6 @@ export interface TiltakshendelseModell {
     hendelseTekst: string;
     hendelseLenke: string;
     tiltakstypeKode: string | null;
-    sistEndret: Date;
 }
 
 export enum Status {
