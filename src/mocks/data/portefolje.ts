@@ -200,6 +200,18 @@ const lagHuskelapp = fnr => {
     };
 };
 
+const lagTiltakshendelse = () => {
+    return [
+        {
+            hendelseId: '9384756932847569',
+            hendelseOpprettet: '2024-05-17',
+            hendelseTekst: 'Lenketekst',
+            hendelseLenke: 'https://www.nav.no',
+            tiltakstypeKode: 'AFT'
+        }
+    ];
+};
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -231,6 +243,7 @@ function lagBruker(sikkerhetstiltak = []) {
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
+        tiltakshendelser: lagTiltakshendelse(),
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt: random_egenAnsatt ? true : '',
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
