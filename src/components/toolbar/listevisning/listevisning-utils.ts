@@ -54,3 +54,6 @@ alternativerConfig.set(Kolonne.HAR_BARN_UNDER_18, {tekstlabel: 'Barn under 18 å
 alternativerConfig.set(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, {tekstlabel: 'Dato sist endret'});
 alternativerConfig.set(Kolonne.HUSKELAPP_KOMMENTAR, {tekstlabel: 'Huskelapp'});
 alternativerConfig.set(Kolonne.HUSKELAPP_FRIST, {tekstlabel: 'Frist huskelapp'});
+alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Tiltakshendelse lenke'});
+alternativerConfig.set(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Tiltakshendelse opprettet'});
+alternativerConfig.set(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE, {tekstlabel: 'Tiltakstype'});
