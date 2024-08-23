@@ -9,10 +9,10 @@ interface LenkeKolonneProps {
 }
 
 const LenkeKolonne = ({className, bruker, skalVises}: LenkeKolonneProps) => {
-    if (!skalVises || !bruker.tiltakshendelser) {
+    if (!skalVises || !bruker.tiltakshendelse) {
         return null;
     }
-    const tiltakshendelse = bruker.tiltakshendelser[0];
+    const tiltakshendelse = bruker.tiltakshendelse;
 
     const handterKlikk = () => oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, tiltakshendelse.hendelseLenke);
 

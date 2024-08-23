@@ -110,8 +110,6 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-    // Foreløpig tar vi bare inn én hendelse per person
-    const tiltakshendelser = bruker.tiltakshendelser ? bruker.tiltakshendelser[0] : null;
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
@@ -304,7 +302,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={tiltakshendelser ? new Date(tiltakshendelser.hendelseOpprettet) : null}
+                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.hendelseOpprettet) : null}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
@@ -316,7 +314,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE)
                 }
-                tekst={!tiltakshendelser ? '' : tiltakshendelser.tiltakstypeKode ?? ''}
+                tekst={!bruker.tiltakshendelse ? '' : bruker.tiltakshendelse.tiltakstypeKode ?? ''}
             />
             <DatoKolonne
                 className="col col-xs-2"

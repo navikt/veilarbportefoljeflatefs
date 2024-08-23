@@ -170,7 +170,7 @@ export interface BrukerModell {
     nyesteUtlopteAktivitet?: string; // dato
     veilederNavn?: string;
     brukertiltak?: string[];
-    tiltakshendelser?: TiltakshendelseModell[];
+    tiltakshendelse?: TiltakshendelseModell;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
     alleAktiviteter?: AktiviteterModell;
     aktivitetStart?: string; // dato
