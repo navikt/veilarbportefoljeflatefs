@@ -22,6 +22,7 @@ import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -52,6 +53,7 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
+import LenkeKolonne from '../components/tabell/kolonner/lenkekolonne';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -108,6 +110,8 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+    // Foreløpig tar vi bare inn én hendelse per person
+    const tiltakshendelser = bruker.tiltakshendelser ? bruker.tiltakshendelser[0] : null;
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
@@ -289,6 +293,30 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+            />
+            <LenkeKolonne
+                className="col col-xs-2"
+                bruker={bruker}
+                skalVises={
+                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                }
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={tiltakshendelser ? new Date(tiltakshendelser.hendelseOpprettet) : null}
+                skalVises={
+                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
+                }
+            />
+            <TekstKolonne
+                className="col col-cs-2"
+                skalVises={
+                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE)
+                }
+                tekst={!tiltakshendelser ? '' : tiltakshendelser.tiltakstypeKode ?? ''}
             />
             <DatoKolonne
                 className="col col-xs-2"
