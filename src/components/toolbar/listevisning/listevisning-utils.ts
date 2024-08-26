@@ -56,4 +56,3 @@ alternativerConfig.set(Kolonne.HUSKELAPP_KOMMENTAR, {tekstlabel: 'Huskelapp'});
 alternativerConfig.set(Kolonne.HUSKELAPP_FRIST, {tekstlabel: 'Frist huskelapp'});
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Tiltakshendelse lenke'});
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Tiltakshendelse opprettet'});
-alternativerConfig.set(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE, {tekstlabel: 'Tiltakstype'});

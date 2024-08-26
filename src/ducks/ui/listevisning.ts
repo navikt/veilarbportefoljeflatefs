@@ -60,8 +60,7 @@ export enum Kolonne {
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
-    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
-    TILTAKSHENDELSE_TILTAKSTYPE = 'tiltakshendelse_tiltakstype'
+    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
 export enum OversiktType {
