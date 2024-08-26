@@ -562,7 +562,7 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_LENKE}
-                    tekst="Hendelse"
+                    tekst="Hendelse på tiltak"
                     className="col col-xs-2"
                     headerId="tiltakshendelse-lenke"
                     title="Lenke til tiltaksdeltakelsen"
@@ -576,27 +576,13 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    tekst="Dato"
+                    tekst="Dato for hendelse"
                     className="col col-xs-2"
                     headerId="tiltakshendelse-dato-opprettet"
                     title="Dato hendelsen ble opprettet"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
-                    }
-                />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TILTAKSTYPE}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TILTAKSTYPE}
-                    tekst="Tiltakstype"
-                    className="col col-xs-2"
-                    headerId="tiltakshendelse-lenke"
-                    title="Type tiltak"
-                    skalVises={
-                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE)
                     }
                 />
             </div>

@@ -290,14 +290,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
                 }
             />
-            <TekstKolonne
-                className="col col-cs-2"
-                skalVises={
-                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_TILTAKSTYPE)
-                }
-                tekst={!bruker.tiltakshendelse ? '' : bruker.tiltakshendelse.tiltakstypeKode ?? ''}
-            />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
