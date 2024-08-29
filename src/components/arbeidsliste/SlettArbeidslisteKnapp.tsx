@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {slettArbeidslisteAction} from '../../ducks/arbeidsliste';
-import {leggTilStatustall} from '../../ducks/statustall-veileder';
-import {ArbeidslisteModell, BrukerModell} from '../../model-interfaces';
+import {BrukerModell} from '../../model-interfaces';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {KnappMedBekreftHandling} from '../knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
+import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from '../../minoversikt/huskelapp/redigering/slettEksisterendeArbeidsliste';
 
 interface SlettArbeidslisteKnappProps {
     bruker: BrukerModell;
@@ -21,19 +20,11 @@ interface SlettArbeidslisteKnappProps {
     };
 }
 
-const handleSlettArbeidsliste = async (
-    dispatch: ThunkDispatch<AppState, any, AnyAction>,
-    arbeidsliste: ArbeidslisteModell
-) => {
-    await dispatch(slettArbeidslisteAction(arbeidsliste));
-    await dispatch(leggTilStatustall('minArbeidsliste', -1));
-};
-
 export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKnappProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
 
     const slettArbeidsliste = () => {
-        return handleSlettArbeidsliste(dispatch, bruker.arbeidsliste);
+        return slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
     };
 
     return (
