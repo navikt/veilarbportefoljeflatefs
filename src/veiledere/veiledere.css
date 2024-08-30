@@ -44,7 +44,7 @@
 }
 .veilederoversikt__sticky-skygge::before {
     top: 61px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.3); /* horizontal length, vertical length, blur, spread-radius (offsets blur), color */
     margin: 0 4px;
 }
 .veilederoversikt__sticky-skygge::after {
