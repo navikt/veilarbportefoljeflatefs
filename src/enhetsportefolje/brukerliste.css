@@ -120,13 +120,18 @@
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
     display: flex;
+    padding-top: 5px;
     justify-content: flex-end;
-    align-items: baseline;
+    align-items: center;
 }
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {
     color: #6a6a6a;
     font-style: italic;
+}
+
+.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_sletteknapp {
+    margin-right: 5px;
 }
 
 .veilarbportefoljeflatefs .fnr-kolonne {
