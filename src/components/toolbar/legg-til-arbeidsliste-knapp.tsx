@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useLocation, useParams} from 'react-router';
 import {Button} from '@navikt/ds-react';
-import {Bookmark} from '@navikt/ds-icons';
+import {BookmarkIcon} from '@navikt/aksel-icons';
 import {VIS_ARBEIDSLISTE_MODAL, visArbeidslisteModal} from '../../ducks/modal';
 import {AppState} from '../../reducer';
 import {useIdentSelector} from '../../hooks/redux/use-innlogget-ident';
@@ -55,7 +55,7 @@ function ArbeidslisteKnapp() {
                 size="small"
                 variant="tertiary"
                 className="toolbar_btn"
-                icon={<Bookmark className="toolbar-knapp__ikon" id="arbeidsliste-svg" />}
+                icon={<BookmarkIcon aria-hidden={true} fontSize="1.5rem" />}
                 iconPosition="left"
                 onClick={klikk}
                 data-testid={

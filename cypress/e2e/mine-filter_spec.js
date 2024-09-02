@@ -3,7 +3,7 @@ import {kebabCase} from '../../src/utils/utils';
 const mineFilterNavn = 'Voff';
 const mineFilterNavnRedigert = 'Mjau';
 const forLangtFilterNavn =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.';
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
 const testFilterNavn = 'Denne brukes til test la stå';
 
 const navDsRadioButtonsSelector = '.navds-radio-buttons';
@@ -77,8 +77,8 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(mineFilterNavn);
             cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
 
-            // Vi kan sjå rett fane, og det nye filteret vårt er synleg
-            cy.getByTestId('sidebar-tab_MINE_FILTER').should('have.class', 'sidebar__tab-valgt');
+            // Rett fane er open (har rendra innhald), og det nye filteret vårt er synleg
+            cy.faneErApen('MINE_FILTER');
             cy.get('@mineFilter').contains(mineFilterNavn);
 
             // Nyfilteret vårt er valgt, og at begge filtertagsa (+ Nullstill filtervalg) som skal visast er synlege
@@ -126,7 +126,6 @@ describe('Mine filter', () => {
             cy.getByTestId('filtreringlabel_-19-ar').should('be.visible').click();
             cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
-
             // Trykk på lagre filter og få spørsmål om du vil oppdatere filteret
             cy.getByTestId('lagre-filter_knapp').click();
             cy.getByTestId('mine-filter_modal_oppdater-filter-tekst').contains(mineFilterNavnRedigert);
@@ -136,7 +135,7 @@ describe('Mine filter', () => {
             cy.getByTestId('rediger-filter_modal_lagre-knapp').click();
 
             // Sjekk at vi kan sjå filtertag "møte med nav i dag" og at talet på filter framleis ikkje har endra seg
-            cy.getByTestId('filtreringlabel_mote-med-nav-idag').should('be.visible');
+            cy.getByTestId('filtreringlabel_mote-med-nav-i-dag').should('be.visible');
             cy.get('@mineFilter').should('have.length', mineFilterForRedigering.length);
         });
     });
@@ -145,7 +144,9 @@ describe('Mine filter', () => {
     it('Slett filter', () => {
         cy.get('@mineFilter').then(filterForSletting => {
             // Opne redigering på filteret vi skal slette ("Mjau")
-            cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavnRedigert)}`).as('filterSomSkalSlettes').click();
+            cy.getByTestId(`rediger-filter_knapp_${kebabCase(mineFilterNavnRedigert)}`)
+                .as('filterSomSkalSlettes')
+                .click();
 
             // Slett filteret
             cy.getByTestId('rediger-filter_modal_slett-knapp').click();
@@ -163,9 +164,12 @@ describe('Mine filter', () => {
         cy.klikkTab('MINE_FILTER');
 
         // Sjekk at vi får eit varsel om at filter er fjerna. Lukk varselet.
-        cy.getByTestId('mine-filter_alertstripe').should('be.visible')
+        cy.getByTestId('mine-filter_alertstripe')
+            .should('be.visible')
             .within(() => {
-                cy.contains('\'Permitterte filter\' er slettet fordi filteret \'Alle utenom permitterte etter 09.03.2020\' er fjernet.');
+                cy.contains(
+                    "'Permitterte filter' er slettet fordi filteret 'Alle utenom permitterte etter 09.03.2020' er fjernet."
+                );
                 cy.get('button').should('be.visible').click();
             });
 
@@ -292,7 +296,8 @@ describe('Mine filter', () => {
             .contains(testFilterNavn);
 
         // Fjern filter som var vald (dette har lite med denne testen å gjere eigentleg)
-        cy.getByTestId('filtreringlabel_mote-med-nav-idag').should('be.visible').click();
+
+        cy.getByTestId('filtreringlabel_mote-med-nav-i-dag').should('be.visible').click();
     });
 
     it('Test oppførsel når et lagra filter bruker et tiltaksfilter som ikke finnes lenger', () => {

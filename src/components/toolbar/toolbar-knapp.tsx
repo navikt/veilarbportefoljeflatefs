@@ -45,7 +45,7 @@ export default function ToolbarKnapp({
             // Klikket er inne i komponenten
             return;
         }
-        if (!e.target.parentNode.className.includes('brukerliste__checkbox')) {
+        if (!e.target.parentNode.classList.contains('brukerliste__checkbox')) {
             fjernBrukerfeilmelding();
         }
         if (inputIsOpen) {

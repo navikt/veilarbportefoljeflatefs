@@ -1,42 +1,29 @@
 import React, {Dispatch, useRef} from 'react';
-import {
-    SidebarTabInfo as SidebarTabType,
-    SidebarTabInfo,
-    useSidebarViewStore
-} from '../../store/sidebar/sidebar-view-store';
-import classNames from 'classnames';
-import './sidebar.css';
-import {ReactComponent as StatusIkon} from '../ikoner/tab_status.svg';
-import {ReactComponent as FilterIkon} from '../ikoner/tab_filter.svg';
-import {ReactComponent as VeiledergruppeIkon} from '../ikoner/tab_veiledergrupper.svg';
-import {ReactComponent as MineFilterIkon} from '../ikoner/tab_mine-filter.svg';
+import {useDispatch} from 'react-redux';
+import {Tabs} from '@navikt/ds-react';
+import {FunnelIcon, PersonGroupIcon, StarIcon, VitalsIcon} from '@navikt/aksel-icons';
+import {SidebarTabs, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {useDispatch} from 'react-redux';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
-import {kebabCase, keyCodes} from '../../utils/utils';
-import Sidevelger from './sidevelger';
 import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
-
-export interface Sidebarelement {
-    type: SidebarTabType;
-    icon: React.ReactNode;
-    tittel: string;
-}
+import {Fanevelger} from './fanevelger';
+import {Tab} from './Tab';
+import './sidebar.css';
 
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
     currentOversiktType: OversiktType;
-    requestedTab: SidebarTabInfo;
+    requestedTab: SidebarTabs | '';
 }
 
-export function endreSideBar({dispatch, currentOversiktType, requestedTab}: EndreSideBarProps) {
+export function endreValgtSidebarTab({dispatch, currentOversiktType, requestedTab}: EndreSideBarProps) {
     dispatch({
         name: currentOversiktType,
         selectedTab: requestedTab,
@@ -44,206 +31,128 @@ export function endreSideBar({dispatch, currentOversiktType, requestedTab}: Endr
     });
 }
 
-const sidebar: Sidebarelement[] = [
-    {
-        type: SidebarTabType.STATUS,
-        icon: <StatusIkon />,
+export interface Fanedetaljer {
+    icon: React.ReactNode;
+    tittel: string;
+}
+
+const faner: {[key in SidebarTabs]: Fanedetaljer} = {
+    [SidebarTabs.STATUS]: {
+        icon: <VitalsIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Status'
     },
-    {
-        type: SidebarTabType.MINE_FILTER,
-        icon: <MineFilterIkon />,
+    [SidebarTabs.MINE_FILTER]: {
+        icon: <StarIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Mine filter'
     },
-    {
-        type: SidebarTabType.VEILEDERGRUPPER,
-        icon: <VeiledergruppeIkon />,
+    [SidebarTabs.VEILEDERGRUPPER]: {
+        icon: <PersonGroupIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Veiledergrupper'
     },
-    {
-        type: SidebarTabType.FILTER,
-        icon: <FilterIkon />,
+    [SidebarTabs.FILTER]: {
+        icon: <FunnelIcon aria-hidden={true} fontSize="1.5rem" />,
         tittel: 'Filter'
     }
-];
+};
 
 interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     oversiktType: OversiktType;
-    isSidebarHidden: boolean;
     statustall: Statustall;
 }
 
-function Sidebar(props: SidebarProps) {
-    const erPaMinOversikt = props.oversiktType === OversiktType.minOversikt;
-    const sidebarRef = useRef<HTMLDivElement>(null);
-    const selectedTab = useSidebarViewStore(erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt);
-    const selectedTabData = finnTab(selectedTab.selectedTab, sidebar);
+export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) => {
     const dispatch = useDispatch();
+    const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const windowWidth = useWindowWidth();
-    const isSidebarHidden = useSidebarViewStore(props.oversiktType).isSidebarHidden;
+    const sidebarRef = useRef<HTMLDivElement>(null);
+    const sidebarState = useSidebarViewStore(
+        erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
+    );
 
-    const tabFocus = () => {
-        if (selectedTabData.type === 'STATUS') return 0;
-        else if (selectedTabData.type === 'MINE_FILTER') return 1;
-        else if (erPaMinOversikt && selectedTabData.type === 'FILTER') return 2;
-        else if (!erPaMinOversikt && selectedTabData.type === 'VEILEDERGRUPPER') return 2;
-        else if (!erPaMinOversikt && selectedTabData.type === 'FILTER') return 3;
-        return 0;
-    };
+    const taBortVeiledergrupperPaMinOversikt = (fane: SidebarTabs) =>
+        !(erPaMinOversikt && fane === SidebarTabs.VEILEDERGRUPPER);
+    const fanerForSide: SidebarTabs[] = [
+        SidebarTabs.STATUS,
+        SidebarTabs.MINE_FILTER,
+        SidebarTabs.VEILEDERGRUPPER,
+        SidebarTabs.FILTER
+    ].filter(taBortVeiledergrupperPaMinOversikt);
 
-    let tabFoc = tabFocus();
+    const isSidebarHidden = useSidebarViewStore(oversiktType).isSidebarHidden;
 
-    const keyCode = e => e.which || e.keyCode;
-
-    function finnTab(viewType: SidebarTabType, tabs: Sidebarelement[]): Sidebarelement {
-        return tabs.find(t => t.type === viewType) as Sidebarelement;
-    }
-
-    const mapTabTilView = (tab: Sidebarelement, isSelected: boolean, key: number) => {
-        return (
-            <button
-                key={key}
-                className={classNames('sidebar__tab', {
-                    'sidebar__tab-valgt': isSelected
-                })}
-                onClick={e => handleMouseClick(e, tab)}
-                role="tab"
-                aria-selected={!isSidebarHidden && isSelected}
-                aria-controls={kebabCase(`${tab.type}_tab`)}
-                id={kebabCase(`${tab.type}_tab`)}
-                tabIndex={(!isSelected && -1) || 0}
-                onKeyUp={e => handleKeyUp(e, tab)}
-                data-testid={`sidebar-tab_${tab.type}`}
-                aria-label={tab.tittel}
-            >
-                <div className="sidebar__tab-ikon">{tab.icon}</div>
-            </button>
-        );
-    };
-
-    function handleKeyUp(e, tab) {
-        const sidebarTabs: NodeListOf<HTMLDivElement> = document.querySelectorAll('button.sidebar__tab');
-        e.preventDefault();
-
-        if (keyCode(e) === keyCodes.space) {
-            handleOnTabClicked(e, tab);
-        } else if (keyCode(e) === keyCodes.right || keyCode(e) === keyCodes.left) {
-            sidebarTabs[tabFoc].setAttribute('tabindex', '-1');
-            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab');
-            sidebarTabs[tabFoc].setAttribute('aria-selected', 'false');
-            if (keyCode(e) === keyCodes.right) {
-                tabFoc++;
-                // Hvis vi er i enden av tabpanelet, gå til starten
-                if (tabFoc >= Tabs().length) {
-                    tabFoc = 0;
-                }
-            } else if (keyCode(e) === keyCodes.left) {
-                tabFoc--;
-                // Hvis vi er i starten av tabpanelet, gå til enden
-                if (tabFoc < 0) {
-                    tabFoc = Tabs().length - 1;
-                }
-            }
-            sidebarTabs[tabFoc].setAttribute('tabindex', '0');
-            sidebarTabs[tabFoc].setAttribute('className', 'sidebar__tab sidebar__tab-valgt');
-            sidebarTabs[tabFoc].setAttribute('aria-selected', 'true');
-            sidebarTabs[tabFoc].focus();
-
-            if (erPaMinOversikt) {
-                handleOnTabClicked(
-                    e,
-                    sidebar.filter(tab => tab.type !== SidebarTabType.VEILEDERGRUPPER)[tabFoc],
-                    false
-                );
-            } else {
-                handleOnTabClicked(e, sidebar[tabFoc], false);
-            }
-        }
-    }
-
-    function handleMouseClick(e, tab: Sidebarelement) {
-        e.preventDefault();
-        handleOnTabClicked(e, tab);
-    }
-
-    function handleOnTabClicked(e, tab: Sidebarelement, toggleSidebar: boolean = true) {
-        endreSideBar({
+    const lukkSidemeny = () => {
+        dispatch(skjulSidebar(oversiktType));
+        endreValgtSidebarTab({
             dispatch: dispatch,
-            requestedTab: tab.type,
-            currentOversiktType: erPaMinOversikt ? OversiktType.minOversikt : OversiktType.enhetensOversikt
+            currentOversiktType: oversiktType,
+            requestedTab: ''
         });
-
-        if (toggleSidebar) {
-            if (isSidebarHidden) {
-                dispatch(visSidebar(props.oversiktType));
-            } else if (tab.type === selectedTab.selectedTab) {
-                dispatch(skjulSidebar(props.oversiktType));
-            }
-        }
-
-        logEvent('portefolje.metrikker.sidebar-tab', {
-            tab: tab.type,
-            sideNavn: finnSideNavn(),
-            isSidebarHidden: isSidebarHidden
-        });
-    }
-
-    const Tabs = () => {
-        const visVeiledergrupper = tab => tab.type === SidebarTabType.VEILEDERGRUPPER;
-        if (erPaMinOversikt) {
-            return sidebar
-                .filter(tab => !visVeiledergrupper(tab))
-                .map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
-        }
-        return sidebar.map((tab, key) => mapTabTilView(tab, tab.type === selectedTabData.type, key));
     };
 
     outsideClick(sidebarRef, () => {
-        if (windowWidth < 1200 && !props.isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
+        if (windowWidth < 1200 && !isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()
             });
-            dispatch(skjulSidebar(props.oversiktType));
+            lukkSidemeny();
         }
     });
+
+    const onTabsChange = (valgtFane: string) => {
+        const fane: SidebarTabs = SidebarTabs[valgtFane];
+
+        endreValgtSidebarTab({
+            dispatch: dispatch,
+            currentOversiktType: oversiktType,
+            requestedTab: fane
+        });
+
+        if (isSidebarHidden) {
+            dispatch(visSidebar(oversiktType));
+        }
+
+        logEvent('portefolje.metrikker.sidebar-tab', {
+            tab: valgtFane,
+            sideNavn: finnSideNavn(),
+            isSidebarHidden: isSidebarHidden
+        });
+    };
 
     return (
         <div
             ref={sidebarRef}
-            aria-label={`Sidenavigasjon er nå ${props.isSidebarHidden ? 'lukket' : 'åpen'}`}
+            aria-label={`Sidenavigasjon er nå ${isSidebarHidden ? 'lukket' : 'åpen'}`}
             aria-live="polite"
-            className={classNames('sidebar', props.isSidebarHidden && 'sidebar__hidden', 'tabs')}
+            className="sidebar"
         >
-            <div
-                className="sidebar__tab-container"
-                role="tablist"
-                aria-label="Faner for filtrering. Du kan bruke piltastene for å navigere mellom de ulike fanene."
-                aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
-            >
-                {Tabs()}
-            </div>
-            {!isSidebarHidden && (
-                <div
-                    className="sidebar__content-container"
-                    role="tabpanel"
-                    aria-labelledby={kebabCase(`${selectedTabData.type}_tab`)}
-                    id={selectedTabData.type}
-                    data-testid="sidebar_content-container"
-                    tabIndex={0}
-                >
-                    <Sidevelger
-                        selectedTabData={selectedTabData}
-                        oversiktType={props.oversiktType}
-                        filtervalg={props.filtervalg}
-                        enhettiltak={props.enhettiltak}
-                        statustall={props.statustall}
-                    />
-                </div>
-            )}
+            {
+                <Tabs value={sidebarState.selectedTab} onChange={onTabsChange} iconPosition="top" size="small">
+                    <Tabs.List className="sidebar__tab-container">
+                        {fanerForSide.map(fane => (
+                            <Tab fane={fane} fanedetaljer={faner[fane]} key={fane} />
+                        ))}
+                    </Tabs.List>
+                    {!isSidebarHidden && (
+                        <div className="sidebar__content-container" data-testid="sidebar_content-container">
+                            {fanerForSide.map(fane => (
+                                <Tabs.Panel value={fane} data-testid={`sidebar__tabinnhold-${fane}`} key={fane}>
+                                    <Fanevelger
+                                        valgtFane={fane}
+                                        fanetittel={faner[fane].tittel}
+                                        oversiktType={oversiktType}
+                                        filtervalg={filtervalg}
+                                        enhettiltak={enhettiltak}
+                                        statustall={statustall}
+                                        lukkSidemeny={lukkSidemeny}
+                                    />
+                                </Tabs.Panel>
+                            ))}
+                        </div>
+                    )}
+                </Tabs>
+            }
         </div>
     );
-}
-
-export default Sidebar;
+};

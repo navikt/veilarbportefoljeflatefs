@@ -23,6 +23,7 @@ export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const MOTER_IDAG = 'MOTER_IDAG';
+export const TILTAKSHENDELSER = 'TILTAKSHENDELSER';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
 export const DAGPENGER_YTELSE = 'DAGPENGER';
 export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
@@ -68,6 +69,7 @@ export const mapFilternavnTilFilterValue = {
     venterPaSvarFraNAV: VENTER_PA_SVAR_FRA_NAV,
     venterPaSvarFraBruker: VENTER_PA_SVAR_FRA_BRUKER,
     avtaltMoteMedNav: MOTER_IDAG,
+    tiltakshendelser: TILTAKSHENDELSER,
     utlopteAktiviteter: UTLOPTE_AKTIVITETER,
     ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
     iavtaltAktivitet: I_AVTALT_AKTIVITET,
@@ -120,7 +122,8 @@ export const ferdigfilterListeLabelTekst = {
     UNDER_VURDERING: 'Under vurdering',
     VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
     VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
-    MOTER_IDAG: 'Møte med NAV idag',
+    MOTER_IDAG: 'Møte med NAV i dag',
+    TILTAKSHENDELSER: 'Tiltaksdeltakelse',
     UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
     IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
     I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
@@ -279,7 +282,7 @@ export const rettighetsgruppe = {
 };
 
 export const ensligeForsorgere = {
-    OVERGANGSSTØNAD: {label: 'Overgangsstønad'}
+    OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
 export const aktiviteter = {

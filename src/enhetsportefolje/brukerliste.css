@@ -121,7 +121,9 @@
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
     display: flex;
     justify-content: flex-end;
-    align-items: baseline;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 5px;
 }
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {

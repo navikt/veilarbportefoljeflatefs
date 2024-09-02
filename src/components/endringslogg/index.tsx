@@ -9,7 +9,7 @@ import {
     trackSessionDuration
 } from './utils/utils';
 import {useTimer} from './hooks/use-timer';
-import TourModal from './modal/tour-modal/tour-modal';
+import TourModal from './tour-modal/tour-modal';
 import {StilType} from './icons/endringslogg-icon';
 
 const DEFAULT_MAX_ENTRIES = 50;
