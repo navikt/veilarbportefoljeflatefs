@@ -121,7 +121,7 @@
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
     display: flex;
     padding-top: 5px;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -131,7 +131,7 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_sletteknapp {
-    margin-right: auto;
+    margin-right: 5px;
 }
 
 .veilarbportefoljeflatefs .fnr-kolonne {
