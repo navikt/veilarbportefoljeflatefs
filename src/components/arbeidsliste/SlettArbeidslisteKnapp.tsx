@@ -29,8 +29,9 @@ export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKna
 
     return (
         <KnappMedBekreftHandling
-            handlingsknapptekst="Slett gammel arbeidsliste"
-            size="small"
+            handlingsknapptekst="Slett arbeidsliste"
+            size="xsmall"
+            variant="secondary"
             icon={<TrashIcon aria-hidden={true} />}
             bekreftelsesmelding={{
                 overskrift: 'Er du sikker på at du vil slette arbeidslista?',
