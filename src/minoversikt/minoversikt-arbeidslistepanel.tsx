@@ -62,9 +62,6 @@ export default function ArbeidslistePanel({
                             </BodyShort>
 
                             <div className="brukerliste__arbeidslisteinnhold_footer">
-                                <Detail className="brukerliste__arbeidslisteinnhold_sletteknapp">
-                                    <SlettArbeidslisteKnapp bruker={bruker} />
-                                </Detail>
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
                                     {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
@@ -82,6 +79,7 @@ export default function ArbeidslistePanel({
                                         settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                     />
                                 )}
+                                <SlettArbeidslisteKnapp bruker={bruker} />
                             </div>
                         </>
                     )}

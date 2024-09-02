@@ -12,12 +12,6 @@ import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from '../../minove
 interface SlettArbeidslisteKnappProps {
     bruker: BrukerModell;
     lukkModal?: () => void;
-    variant?: 'secondary' | 'tertiary';
-    size?: 'small' | 'xsmall';
-    bekreftelsesmelding?: {
-        width?: string;
-        overskriftsnivaa?: '1' | '2' | '3' | '4' | '5' | '6';
-    };
 }
 
 export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKnappProps) => {
@@ -29,8 +23,9 @@ export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKna
 
     return (
         <KnappMedBekreftHandling
-            handlingsknapptekst="Slett gammel arbeidsliste"
-            size="small"
+            handlingsknapptekst="Slett arbeidsliste"
+            size="xsmall"
+            variant="secondary"
             icon={<TrashIcon aria-hidden={true} />}
             bekreftelsesmelding={{
                 overskrift: 'Er du sikker på at du vil slette arbeidslista?',
