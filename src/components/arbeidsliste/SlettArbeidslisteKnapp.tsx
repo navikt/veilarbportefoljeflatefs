@@ -12,12 +12,6 @@ import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from '../../minove
 interface SlettArbeidslisteKnappProps {
     bruker: BrukerModell;
     lukkModal?: () => void;
-    variant?: 'secondary' | 'tertiary';
-    size?: 'small' | 'xsmall';
-    bekreftelsesmelding?: {
-        width?: string;
-        overskriftsnivaa?: '1' | '2' | '3' | '4' | '5' | '6';
-    };
 }
 
 export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKnappProps) => {
