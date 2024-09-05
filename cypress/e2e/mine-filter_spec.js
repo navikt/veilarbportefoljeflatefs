@@ -17,6 +17,7 @@ before('Start server', () => {
 });
 
 beforeEach('Lag alias for Mine filter: @mineFilter', () => {
+    Cypress.cy.state("jQuery", Cypress.$);
     // Aliaset kan hentast med cy.get('@mineFilter').
     // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
     cy.getByTestId('mine-filter_rad-wrapper').as('mineFilter');

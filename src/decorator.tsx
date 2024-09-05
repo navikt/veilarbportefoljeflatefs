@@ -1,42 +1,45 @@
 import React, {useEffect} from 'react';
 import NAVSPA from '@navikt/navspa';
-import {DecoratorProps, EnhetDisplay, FnrDisplay} from './utils/types/decorator-props';
 import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
-import {getVeilarbpersonflateBasePath} from './utils/url-utils';
+import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
+import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 
-const RESET_VALUE = '\u0000';
-const InternflateDecorator = NAVSPA.importer<DecoratorProps>('internarbeidsflatefs');
+const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
-function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorProps {
+function getDecoratorEnv(): Environment {
+    const env = getEnv();
+    if (env.type === EnvType.prod) {
+        return 'prod';
+    } else {
+        return 'q2';
+    }
+}
+
+function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
     return {
-        appname: 'Arbeidsrettet oppfølging',
-        fnr: {
-            initialValue: RESET_VALUE,
-            display: FnrDisplay.SOKEFELT,
-            ignoreWsEvents: true,
-            onChange: value => {
-                if (value) {
-                    window.location.href = getVeilarbpersonflateBasePath();
-                }
+        appName: 'Arbeidsrettet oppfølging',
+        fnr: undefined,
+        onFnrChanged: value => {
+            if (value) {
+                window.location.href = getVeilarbpersonflateBasePath();
             }
         },
-        toggles: {
-            visVeileder: true
-        },
-        enhet: {
-            initialValue: enhet,
-            display: EnhetDisplay.ENHET_VALG,
-            onChange: value => {
-                if (value) {
-                    settValgtEnhet(value);
-                }
+        showSearchArea: true,
+        enhet: enhet ?? undefined,
+        showEnheter: true,
+        onEnhetChanged: value => {
+            if (value) {
+                settValgtEnhet(value);
             }
         },
-        useProxy: true
+        proxy: '/modiacontextholder',
+        environment: getDecoratorEnv(),
+        showHotkeys: false,
+        urlFormat: getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO'
     };
 }
 
