@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import moment from 'moment';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
@@ -43,17 +44,16 @@ import {
     toDateString
 } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
-import LenkeKolonne from '../components/tabell/kolonner/lenkekolonne';
+import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -274,7 +274,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />
-            <LenkeKolonne
+            <TiltakshendelseLenkeKolonne
                 className="col col-xs-2"
                 bruker={bruker}
                 skalVises={

@@ -4,13 +4,13 @@ import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-f
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 
 interface LenkeKolonneProps {
-    className?: string;
     bruker: BrukerModell;
     skalVises: boolean;
     enhetId: string;
+    className?: string;
 }
 
-const LenkeKolonne = ({className, bruker, skalVises, enhetId}: LenkeKolonneProps) => {
+export const TiltakshendelseLenkeKolonne = ({bruker, skalVises, enhetId, className}: LenkeKolonneProps) => {
     if (!skalVises || !bruker.tiltakshendelse) {
         return null;
     }
@@ -40,5 +40,3 @@ const LenkeKolonne = ({className, bruker, skalVises, enhetId}: LenkeKolonneProps
         </div>
     );
 };
-
-export default LenkeKolonne;

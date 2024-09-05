@@ -378,7 +378,6 @@ function EnhetListehode({
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
                 />
-                {}
                 <Header
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)

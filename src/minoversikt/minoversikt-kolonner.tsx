@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -43,17 +44,16 @@ import {
     toDateString
 } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import './minoversikt.css';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
-import LenkeKolonne from '../components/tabell/kolonner/lenkekolonne';
+import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -292,7 +292,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
-            <LenkeKolonne
+            <TiltakshendelseLenkeKolonne
                 className="col col-xs-2"
                 bruker={bruker}
                 skalVises={

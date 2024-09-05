@@ -202,11 +202,11 @@ const lagHuskelapp = fnr => {
 };
 
 const lagTiltakshendelse = (): TiltakshendelseModell => ({
-    id: '9384756932847569',
+    id: '54f06061-4383-417d-a063-1c4fc4701a78',
     opprettet: new Date(),
-    tekst: 'Lenketekst',
+    tekst: 'Utkast til påmelding',
     lenke: 'https://www.nav.no',
-    tiltakstype: 'AFT'
+    tiltakstype: 'ARBFORB'
 });
 
 function lagBruker(sikkerhetstiltak = []) {
