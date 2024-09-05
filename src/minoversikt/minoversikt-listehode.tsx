@@ -677,34 +677,28 @@ function MinOversiktListeHode({
                     headerId="huskelapp-frist"
                     skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
                 />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_LENKE}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_LENKE}
-                    tekst="Hendelse på tiltak"
+                <Header
                     className="col col-xs-2"
+                    title="Lenke til hendelsen"
                     headerId="tiltakshendelse-lenke"
-                    title="Lenke til tiltaksdeltakelsen"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                     }
-                />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    tekst="Dato for hendelse"
+                >
+                    Hendelse på tiltak
+                </Header>
+                <Header
                     className="col col-xs-2"
+                    title="Dato da hendelsen ble opprettet"
                     headerId="tiltakshendelse-dato-opprettet"
-                    title="Dato hendelsen ble opprettet"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
                     }
-                />
+                >
+                    Dato for hendelse
+                </Header>
             </div>
         </div>
     );
