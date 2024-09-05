@@ -5,7 +5,8 @@ import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
-    KategoriModell
+    KategoriModell,
+    TiltakshendelseModell
 } from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
@@ -200,6 +201,14 @@ const lagHuskelapp = fnr => {
     };
 };
 
+const lagTiltakshendelse = (): TiltakshendelseModell => ({
+    id: '54f06061-4383-417d-a063-1c4fc4701a78',
+    opprettet: new Date(),
+    tekst: 'Utkast til påmelding',
+    lenke: 'https://www.nav.no',
+    tiltakstype: 'ARBFORB'
+});
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -231,6 +240,7 @@ function lagBruker(sikkerhetstiltak = []) {
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
+        tiltakshendelse: lagTiltakshendelse(),
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt: random_egenAnsatt ? true : '',
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',

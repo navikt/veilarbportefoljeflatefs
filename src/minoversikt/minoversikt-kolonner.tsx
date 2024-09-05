@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -22,6 +23,7 @@ import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -42,16 +44,16 @@ import {
     toDateString
 } from '../utils/dato-utils';
 import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
-import './minoversikt.css';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
-import moment from 'moment';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
+import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
     className?: string;
@@ -289,6 +291,23 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 className="col col-xs-2"
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+            />
+            <TiltakshendelseLenkeKolonne
+                className="col col-xs-2"
+                bruker={bruker}
+                skalVises={
+                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                }
+                enhetId={enhetId}
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
+                skalVises={
+                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"

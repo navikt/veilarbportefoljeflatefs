@@ -58,7 +58,9 @@ export enum Kolonne {
     HAR_BARN_UNDER_18 = 'har_barn_under_18',
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanning_og_situasjon_sist_endret',
     HUSKELAPP_FRIST = 'huskelapp_frist',
-    HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar'
+    HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
+    TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
+    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
 export enum OversiktType {

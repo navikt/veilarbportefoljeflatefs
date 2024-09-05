@@ -15,6 +15,7 @@ import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     TILTAKSPENGER_YTELSE,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
@@ -138,6 +139,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaHuskelapp = filtervalg.ferdigfilterListe.includes(HUSKELAPP);
 
+    const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
+
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtrertPaLandgruppeEllerFoedeland))
@@ -153,6 +156,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
         .concat(addHvis(Kolonne.VENTER_SVAR, filtrertPaVenterSvarFraNavEllerBruker))
+        .concat(addHvis(Kolonne.TILTAKSHENDELSE_LENKE, filtrertPaTiltakshendelse))
+        .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))

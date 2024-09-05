@@ -8,6 +8,7 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -125,7 +126,6 @@ function EnhetListehode({
                     headerId="statsborgerskap"
                     skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
                 />
-
                 <SorteringHeader
                     sortering={Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
                     onClick={sorteringOnClick}
@@ -556,6 +556,28 @@ function EnhetListehode({
                     headerId="dato-sist-endret-utdanning-og-situasjon"
                     skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                 />
+                <Header
+                    className="col col-xs-2"
+                    title="Lenke til hendelsen"
+                    headerId="tiltakshendelse-lenke"
+                    skalVises={
+                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                    }
+                >
+                    Hendelse på tiltak
+                </Header>
+                <Header
+                    className="col col-xs-2"
+                    title="Dato da hendelsen ble opprettet"
+                    headerId="tiltakshendelse-dato-opprettet"
+                    skalVises={
+                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
+                    }
+                >
+                    Dato for hendelse
+                </Header>
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

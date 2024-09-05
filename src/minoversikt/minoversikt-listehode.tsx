@@ -12,6 +12,7 @@ import {
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
+    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -676,6 +677,28 @@ function MinOversiktListeHode({
                     headerId="huskelapp-frist"
                     skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
                 />
+                <Header
+                    className="col col-xs-2"
+                    title="Lenke til hendelsen"
+                    headerId="tiltakshendelse-lenke"
+                    skalVises={
+                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                    }
+                >
+                    Hendelse på tiltak
+                </Header>
+                <Header
+                    className="col col-xs-2"
+                    title="Dato da hendelsen ble opprettet"
+                    headerId="tiltakshendelse-dato-opprettet"
+                    skalVises={
+                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
+                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
+                    }
+                >
+                    Dato for hendelse
+                </Header>
             </div>
         </div>
     );

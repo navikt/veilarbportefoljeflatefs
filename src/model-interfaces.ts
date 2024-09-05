@@ -59,7 +59,9 @@ export enum Sorteringsfelt {
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanningOgSituasjonSistEndret',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist',
-    HUSKELAPP = 'huskelapp'
+    HUSKELAPP = 'huskelapp',
+    TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
+    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
 export interface FiltervalgModell {
@@ -167,7 +169,7 @@ export interface BrukerModell {
     nyesteUtlopteAktivitet?: string; // dato
     veilederNavn?: string;
     brukertiltak?: string[];
-    tiltakshendelser?: TiltakshendelseModell[];
+    tiltakshendelse: TiltakshendelseModell | null;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
     alleAktiviteter?: AktiviteterModell;
     aktivitetStart?: string; // dato
@@ -292,12 +294,11 @@ export interface HuskelappModell {
 }
 
 export interface TiltakshendelseModell {
-    hendelseId: string;
-    hendelseOpprettet: Date;
-    hendelseTekst: string;
-    hendelseLenke: string;
-    tiltakstypeKode: string | null;
-    sistEndret: Date;
+    id: string;
+    opprettet: Date;
+    tekst: string;
+    lenke: string;
+    tiltakstype: string | null;
 }
 
 export enum Status {
