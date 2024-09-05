@@ -299,6 +299,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                 }
+                enhetId={enhetId}
             />
             <DatoKolonne
                 className="col col-xs-2"

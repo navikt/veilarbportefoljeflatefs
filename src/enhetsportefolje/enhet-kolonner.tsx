@@ -281,6 +281,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                 }
+                enhetId={enhetId}
             />
             <DatoKolonne
                 className="col col-xs-2"
