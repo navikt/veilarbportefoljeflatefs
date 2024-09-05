@@ -14,10 +14,9 @@ const LenkeKolonne = ({className, bruker, skalVises}: LenkeKolonneProps) => {
     }
     const tiltakshendelse = bruker.tiltakshendelse;
 
-    const handterKlikk = () => oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, tiltakshendelse.hendelseLenke);
+    const handterKlikk = () => oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, tiltakshendelse.lenke);
 
-    const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, tiltakshendelse.hendelseLenke, true);
+    const handterKlikkNyFane = () => oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, tiltakshendelse.lenke, true);
 
     return (
         <div className={className}>
@@ -26,7 +25,7 @@ const LenkeKolonne = ({className, bruker, skalVises}: LenkeKolonneProps) => {
                     klikkAksjon={handterKlikk}
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre"
-                    knappTekst={tiltakshendelse.hendelseTekst}
+                    knappTekst={tiltakshendelse.tekst}
                 />
             )}
         </div>

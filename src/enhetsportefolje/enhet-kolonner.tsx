@@ -284,7 +284,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.hendelseOpprettet) : null}
+                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)

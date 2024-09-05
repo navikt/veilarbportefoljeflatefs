@@ -5,7 +5,8 @@ import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
-    KategoriModell
+    KategoriModell,
+    TiltakshendelseModell
 } from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
@@ -200,15 +201,13 @@ const lagHuskelapp = fnr => {
     };
 };
 
-const lagTiltakshendelse = () => {
-    return {
-        hendelseId: '9384756932847569',
-        hendelseOpprettet: '2024-05-17',
-        hendelseTekst: 'Lenketekst',
-        hendelseLenke: 'https://www.nav.no',
-        tiltakstypeKode: 'AFT'
-    };
-};
+const lagTiltakshendelse = (): TiltakshendelseModell => ({
+    id: '9384756932847569',
+    opprettet: new Date(),
+    tekst: 'Lenketekst',
+    lenke: 'https://www.nav.no',
+    tiltakstype: 'AFT'
+});
 
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();

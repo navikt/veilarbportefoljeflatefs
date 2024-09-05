@@ -170,7 +170,7 @@ export interface BrukerModell {
     nyesteUtlopteAktivitet?: string; // dato
     veilederNavn?: string;
     brukertiltak?: string[];
-    tiltakshendelse?: TiltakshendelseModell;
+    tiltakshendelse: TiltakshendelseModell | null;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
     alleAktiviteter?: AktiviteterModell;
     aktivitetStart?: string; // dato
@@ -295,11 +295,11 @@ export interface HuskelappModell {
 }
 
 export interface TiltakshendelseModell {
-    hendelseId: string;
-    hendelseOpprettet: Date;
-    hendelseTekst: string;
-    hendelseLenke: string;
-    tiltakstypeKode: string | null;
+    id: string;
+    opprettet: Date;
+    tekst: string;
+    lenke: string;
+    tiltakstype: string | null;
 }
 
 export enum Status {
