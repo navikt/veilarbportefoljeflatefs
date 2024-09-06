@@ -25,12 +25,12 @@ export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, cla
 
     return (
         <div className={className}>
-            {lenketekst && (
+            {(lenketekst || lenke) && (
                 <AksjonKnappMedPopoverFeilmelding
                     klikkAksjon={handterKlikk}
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre knapp-uten-padding"
-                    knappTekst={lenketekst}
+                    knappTekst={lenketekst === '' ? lenke.substring(0, 20) + '...' : lenketekst}
                 />
             )}
         </div>
