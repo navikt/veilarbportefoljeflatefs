@@ -33,7 +33,7 @@ export const TiltakshendelseLenkeKolonne = ({bruker, skalVises, enhetId, classNa
                 <AksjonKnappMedPopoverFeilmelding
                     klikkAksjon={handterKlikk}
                     ctrlklikkAksjon={handterKlikkNyFane}
-                    knappStil="juster-tekst-venstre"
+                    knappStil="juster-tekst-venstre knapp-uten-padding"
                     knappTekst={tiltakshendelse.tekst}
                 />
             )}
