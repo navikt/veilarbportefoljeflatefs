@@ -52,7 +52,7 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
-import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -292,14 +292,16 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
-            <TiltakshendelseLenkeKolonne
+            <LenkeKolonne
                 className="col col-xs-2"
                 bruker={bruker}
+                lenke={bruker.tiltakshendelse?.lenke || ''}
+                lenketekst={bruker.tiltakshendelse?.tekst || ''}
+                enhetId={enhetId}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                 }
-                enhetId={enhetId}
             />
             <DatoKolonne
                 className="col col-xs-2"

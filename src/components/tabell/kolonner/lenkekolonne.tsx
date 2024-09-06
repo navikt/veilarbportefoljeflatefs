@@ -5,36 +5,32 @@ import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 
 interface LenkeKolonneProps {
     bruker: BrukerModell;
-    skalVises: boolean;
+    lenke: string;
+    lenketekst: string;
     enhetId: string;
+    skalVises: boolean;
     className?: string;
 }
 
-export const TiltakshendelseLenkeKolonne = ({bruker, skalVises, enhetId, className}: LenkeKolonneProps) => {
-    if (!skalVises || !bruker.tiltakshendelse) {
+export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, className}: LenkeKolonneProps) => {
+    if (!skalVises) {
         return null;
     }
 
-    const tiltakshendelse = bruker.tiltakshendelse;
-
     const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(tiltakshendelse.lenke, enhetId));
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId));
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(tiltakshendelse.lenke, enhetId),
-            true
-        );
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId), true);
 
     return (
         <div className={className}>
-            {tiltakshendelse && (
+            {lenketekst && (
                 <AksjonKnappMedPopoverFeilmelding
                     klikkAksjon={handterKlikk}
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre knapp-uten-padding"
-                    knappTekst={tiltakshendelse.tekst}
+                    knappTekst={lenketekst}
                 />
             )}
         </div>
