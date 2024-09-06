@@ -277,8 +277,8 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <LenkeKolonne
                 className="col col-xs-2"
                 bruker={bruker}
-                lenke={bruker.tiltakshendelse?.lenke || ''}
-                lenketekst={bruker.tiltakshendelse?.tekst || ''}
+                lenke={bruker.tiltakshendelse?.lenke ?? ''}
+                lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
                 enhetId={enhetId}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
