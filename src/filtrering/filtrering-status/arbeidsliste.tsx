@@ -41,14 +41,14 @@ function FilterStatusMinArbeidsliste({
                 {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
             </Label>
             {erHuskelappFeatureTogglePaa && (
-                <Alert variant="info" size="small" id="minArbeidsliste__alert">
+                <Alert variant="warning" size="small" id="minArbeidsliste__alert">
                     <Link
                         href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
                         target="_blank"
                         rel="noopener"
                         inlineText
                     >
-                        Oppdatert info om personvern, sletting og innsyn for huskelapp
+                        Gamle arbeidslister blir slettet 1. oktober
                         <ExternalLinkIcon title="Ekstern lenke" />
                     </Link>
                 </Alert>
