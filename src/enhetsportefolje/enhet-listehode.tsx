@@ -556,17 +556,20 @@ function EnhetListehode({
                     headerId="dato-sist-endret-utdanning-og-situasjon"
                     skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                 />
-                <Header
-                    className="col col-xs-2"
+                <SorteringHeader
+                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    tekst="Hendelse på tiltak"
                     title="Lenke til hendelsen"
+                    className="col col-xs-2"
                     headerId="tiltakshendelse-lenke"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                     }
-                >
-                    Hendelse på tiltak
-                </Header>
+                />
                 <SorteringHeader
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     onClick={sorteringOnClick}
