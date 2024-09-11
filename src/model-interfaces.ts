@@ -60,7 +60,7 @@ export enum Sorteringsfelt {
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP = 'huskelapp',
-    TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
+    TILTAKSHENDELSE_TEKST = 'tiltakshendelse_tekst',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
