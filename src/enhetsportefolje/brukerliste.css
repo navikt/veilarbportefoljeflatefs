@@ -74,7 +74,7 @@
     align-items: center;
 }
 
-.veilarbportefoljeflatefs .brukerliste__innhold .brukernavn button {
+.veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
     padding-left: 0;
     padding-right: 0;
 }
