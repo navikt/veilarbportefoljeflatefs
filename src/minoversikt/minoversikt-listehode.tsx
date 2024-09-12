@@ -677,28 +677,34 @@ function MinOversiktListeHode({
                     headerId="huskelapp-frist"
                     skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
                 />
-                <Header
-                    className="col col-xs-2"
+                <SorteringHeader
+                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    tekst="Hendelse på tiltak"
                     title="Lenke til hendelsen"
+                    className="col col-xs-2"
                     headerId="tiltakshendelse-lenke"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                     }
-                >
-                    Hendelse på tiltak
-                </Header>
-                <Header
-                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                    tekst="Dato for hendelse"
                     title="Dato da hendelsen ble opprettet"
+                    className="col col-xs-2"
                     headerId="tiltakshendelse-dato-opprettet"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
                     }
-                >
-                    Dato for hendelse
-                </Header>
+                />
             </div>
         </div>
     );
