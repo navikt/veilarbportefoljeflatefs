@@ -170,7 +170,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, filtrertPaArbeidslisteIMinOversikt))
         .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, filtrertPaArbeidslisteIMinOversikt))
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
-        .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, filtrertPaTolkBehov))
+        .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, filtrertPaYtelseMedVurderingsfrist))

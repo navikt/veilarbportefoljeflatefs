@@ -47,7 +47,7 @@ export enum Sorteringsfelt {
     BOSTED_BYDEL = 'bydelsnummer',
     BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
     TOLKEBEHOV = 'tolkebehov',
-    TOLKE_SPRAAK = 'tolkespraak',
+    TOLKESPRAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
     CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav',
     ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',

@@ -46,7 +46,7 @@ export enum Kolonne {
     BOSTED_BYDEL = 'bosted_bydel',
     BOSTED_SIST_OPPDATERT = 'bosted_sist_oppdatert',
     TOLKEBEHOV = 'tolkebehov',
-    TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
+    TOLKESPRAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
     CV_SVARFRIST = 'cv_svarfrist',
     AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',

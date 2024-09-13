@@ -179,7 +179,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
             />
             <TekstKolonne
                 className="col col-xs-2"

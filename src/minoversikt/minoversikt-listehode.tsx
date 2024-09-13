@@ -31,6 +31,16 @@ import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/iko
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import './minoversikt.css';
 import {Navn} from '../components/tabell/headerceller/Navn';
+import {Fnr} from '../components/tabell/headerceller/Fnr';
+import {Fodeland} from '../components/tabell/headerceller/Fodeland';
+import {Statsborgerskap} from '../components/tabell/headerceller/Statsborgerskap';
+import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/StatsborgerskapGyldigFra';
+import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
+import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
+import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
+import {BostedKommune} from '../components/tabell/headerceller/BostedKommune';
+import {BostedBydel} from '../components/tabell/headerceller/BostedBydel';
+import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -133,112 +143,19 @@ function MinOversiktListeHode({
             )}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.FODSELSNUMMER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Fødselsnr."
-                    title="Fødselsnummer"
-                    headerId="fnr"
-                    className="col col-xs-2-5"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
-                    sortering={Sorteringsfelt.FODELAND}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FODELAND}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Fødeland"
-                    title="Fødeland"
-                    headerId="fodeland"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
-                    sortering={Sorteringsfelt.STATSBORGERSKAP}
-                    erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Statsborgerskap"
-                    title="Statsborgerskap"
-                    headerId="statsborgerskap"
-                    className="col col-xs-2"
-                />
+                <Fnr {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
-                    sortering={Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
-                    erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gyldig fra"
-                    title="Statsborgerskap gyldig fra"
-                    headerId="statsborgerskap_gyldig_fra"
-                    className="col col-xs-2"
-                />
+                <Fodeland {...sorteringTilHeadercelle} />
+                <Statsborgerskap {...sorteringTilHeadercelle} />
+                <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
 
-                <Header
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-                    title="Tolkebehov"
-                    headerId="tolkebehov"
-                    className="col col-xs-2"
-                >
-                    Tolkebehov
-                </Header>
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
-                    sortering={Sorteringsfelt.TOLKE_SPRAAK}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKE_SPRAAK}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    title="Tolk behov språk"
-                    tekst="Språk"
-                    headerId="tolkespraak"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                    sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Sist oppdatert"
-                    title="Tolkebehov sist oppdatert"
-                    headerId="tolkbehovsistoppdatert"
-                    className="col col-xs-2"
-                />
+                <Tolkebehov {...sorteringTilHeadercelle} />
+                <Tolkesprak {...sorteringTilHeadercelle} />
+                <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Bosted"
-                    headerId="bosted_kommune"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
-                    sortering={Sorteringsfelt.BOSTED_BYDEL}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Bosted detaljer"
-                    headerId="bosted_bydel"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
-                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Bosted sist oppdatert"
-                    headerId="bosted_sist_oppdatert"
-                    className="col col-xs-2"
-                />
+                <BostedKommune {...sorteringTilHeadercelle} />
+                <BostedBydel {...sorteringTilHeadercelle} />
+                <BostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
