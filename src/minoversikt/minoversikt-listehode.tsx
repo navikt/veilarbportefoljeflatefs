@@ -30,6 +30,7 @@ import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeid
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import './minoversikt.css';
+import {Navn} from '../components/tabell/headerceller/Navn';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -85,6 +86,13 @@ function MinOversiktListeHode({
     const tiltaksType =
         harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
+    const sorteringTilHeadercelle = {
+        gjeldendeSorteringsfelt: sorteringsfelt,
+        valgteKolonner: valgteKolonner,
+        rekkefolge: sorteringsrekkefolge,
+        onClick: sorteringOnClick
+    };
+
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
@@ -124,16 +132,7 @@ function MinOversiktListeHode({
                 </div>
             )}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <SorteringHeader
-                    className="col col-xs-2"
-                    sortering={Sorteringsfelt.ETTERNAVN}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                    tekst="Etternavn"
-                    title="Etternavn"
-                    headerId="etternavn"
-                />
+                <Navn {...sorteringTilHeadercelle} />
                 <SorteringHeader
                     className="col col-xs-2-5"
                     sortering={Sorteringsfelt.FODSELSNUMMER}

@@ -26,6 +26,7 @@ import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {Navn} from '../components/tabell/headerceller/Navn';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -80,27 +81,25 @@ function EnhetListehode({
     const tiltaksType =
         harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
 
+    const sorteringTilHeadercelle = {
+        gjeldendeSorteringsfelt: sorteringsfelt,
+        valgteKolonner: valgteKolonner,
+        rekkefolge: sorteringsrekkefolge,
+        onClick: sorteringOnClick
+    };
+
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
+                <Navn {...sorteringTilHeadercelle} />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.ETTERNAVN}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ETTERNAVN}
-                    tekst="Etternavn"
-                    className="col col-xs-2"
-                    title="Etternavn"
-                    headerId="etternavn"
-                />
-                <SorteringHeader
+                    className="col col-xs-2-5"
                     sortering={Sorteringsfelt.FODSELSNUMMER}
                     onClick={sorteringOnClick}
                     rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
                     tekst="Fødselsnr."
-                    className="col col-xs-2-5"
                     title="Fødselsnummer"
                     headerId="fnr"
                 />
