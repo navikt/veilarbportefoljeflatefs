@@ -96,487 +96,487 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-            {!vis_kolonner_for_huskelapp && (
-                <SorteringHeader
-                    className="arbeidslistekategori__sorteringsheader"
-                    sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                    onClick={sorteringOnClick}
+                {!vis_kolonner_for_huskelapp && (
+                    <SorteringHeader
+                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                    tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
-                    title="Sorter på farge"
-                    headerId="arbeidslistekategori"
-                />
-            )}
-            {vis_kolonner_for_huskelapp && (
-                <div className="brukerliste__minoversikt-ikonknapper">
-                    <SorteringHeaderIkon
-                        ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                        sortering={Sorteringsfelt.FARGEKATEGORI}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        headerId="fargekategori"
-                        title="Fargekategori-sortering"
+                    onClick={sorteringOnClick}
+                        tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
+                        title="Sorter på farge"
+                        headerId="arbeidslistekategori"
+                        className="arbeidslistekategori__sorteringsheader"
+                    />
+                )}
+                {vis_kolonner_for_huskelapp && (
+                    <div className="brukerliste__minoversikt-ikonknapper">
+                        <SorteringHeaderIkon
+                            ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
+                            sortering={Sorteringsfelt.FARGEKATEGORI}
+                            erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            title="Fargekategori-sortering"
+                            headerId="fargekategori"
                     />
                     <SorteringHeaderIkon
                         ikon={<HuskelappIkon aria-hidden />}
-                        erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
                         sortering={Sorteringsfelt.HUSKELAPP}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        className="huskelapp__sorteringsheader"
+                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            title="Huskelapp-sortering"
                         headerId="huskelapp"
-                        title="Huskelapp-sortering"
+                        className="huskelapp__sorteringsheader"
                     />
                 </div>
             )}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <SorteringHeader
-                    className="col col-xs-2-5"
                     sortering={Sorteringsfelt.FODSELSNUMMER}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODSELSNUMMER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Fødselsnr."
                     title="Fødselsnummer"
                     headerId="fnr"
+                    className="col col-xs-2-5"
                 />
                 <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
                     sortering={Sorteringsfelt.FODELAND}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.FODELAND}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Fødeland"
-                    className="col col-xs-2"
                     title="Fødeland"
                     headerId="fodeland"
-                    skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
                     sortering={Sorteringsfelt.STATSBORGERSKAP}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Statsborgerskap"
-                    className="col col-xs-2"
                     title="Statsborgerskap"
                     headerId="statsborgerskap"
-                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+                    className="col col-xs-2"
                 />
 
                 <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                     sortering={Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Gyldig fra"
-                    className="col col-xs-2"
                     title="Statsborgerskap gyldig fra"
                     headerId="statsborgerskap_gyldig_fra"
-                    skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
+                    className="col col-xs-2"
                 />
 
                 <Header
-                    className="col col-xs-2"
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
                     title="Tolkebehov"
                     headerId="tolkebehov"
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+                    className="col col-xs-2"
                 >
                     Tolkebehov
                 </Header>
                 <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
                     sortering={Sorteringsfelt.TOLKE_SPRAAK}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.TOLKE_SPRAAK}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     title="Tolk behov språk"
-                    className="col col-xs-2"
                     tekst="Språk"
                     headerId="tolkespraak"
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                     sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
                     erValgt={sorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Sist oppdatert"
-                    className="col col-xs-2"
                     title="Tolkebehov sist oppdatert"
                     headerId="tolkbehovsistoppdatert"
-                    skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
+                    className="col col-xs-2"
                 />
 
                 <SorteringHeader
-                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
-                    tekst="Bosted"
-                    className="col col-xs-2"
-                    headerId="bosted_kommune"
                     skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                />
-                <SorteringHeader
-                    sortering={Sorteringsfelt.BOSTED_BYDEL}
-                    onClick={sorteringOnClick}
+                    sortering={Sorteringsfelt.BOSTED_KOMMUNE}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_KOMMUNE}
                     rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
-                    tekst="Bosted detaljer"
+                    onClick={sorteringOnClick}
+                    tekst="Bosted"
+                    headerId="bosted_kommune"
                     className="col col-xs-2"
-                    headerId="bosted_bydel"
-                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
-                    onClick={sorteringOnClick}
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
+                    sortering={Sorteringsfelt.BOSTED_BYDEL}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_BYDEL}
                     rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Bosted detaljer"
+                    headerId="bosted_bydel"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+                    sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
                     erValgt={sorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Bosted sist oppdatert"
                     headerId="bosted_sist_oppdatert"
                     className="col col-xs-2"
-                    skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
                 />
 
                 <SorteringHeader
-                    sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
-                    tekst="Oppfølging startet"
-                    className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                    sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Oppfølging startet"
                     title="Startdato for pågående oppfølgingsperiode"
                     headerId="oppfolgingstartet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                    tekst="Arbeidsliste frist"
                     skalVises={
                         !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
                         valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Arbeidsliste frist"
                     title="Fristdato som er satt i arbeidslisten"
                     headerId="arbeidsliste-frist"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    tekst="Arbeidsliste tittel"
                     skalVises={
                         !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
                         valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Arbeidsliste tittel"
                     title="Tittel som er skrevet i arbeidslisten"
                     headerId="arbeidsliste-overskrift"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={ytelseUtlopsdatoNavn}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    tekst="Gjenstående uker rettighet dagpenger"
                     skalVises={
                         erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)
                     }
-                    className="col col-xs-2"
+                    sortering={ytelseUtlopsdatoNavn}
+                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Gjenstående uker rettighet dagpenger"
                     title="Gjenstående uker av rettighetsperioden for dagpenger"
                     headerId="ytelse-utlopsdato"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={ytelseUtlopsdatoNavn}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    tekst="Gjenstående uker vedtak tiltakspenger"
                     skalVises={
                         !!filtervalg.ytelse &&
                         !erAapYtelse &&
                         !erDagpengerYtelse &&
                         valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
                     }
-                    className="col col-xs-2"
+                    sortering={ytelseUtlopsdatoNavn}
+                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Gjenstående uker vedtak tiltakspenger"
                     title="Gjenstående uker på gjeldende vedtak tiltakspenger"
                     headerId="ytelse-utlopsdato"
+                    className="col col-xs-2"
                 />
                 {vis_kolonner_for_vurderingsfrist_aap && (
                     <SorteringHeader
-                        sortering={aapPeriodetype}
-                        onClick={sorteringOnClick}
-                        rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === aapPeriodetype}
-                        tekst="Type AAP-periode"
                         skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
-                        className="col col-xs-2"
+                        sortering={aapPeriodetype}
+                        erValgt={sorteringsfelt === aapPeriodetype}
+                        rekkefolge={sorteringsrekkefolge}
+                        onClick={sorteringOnClick}
+                        tekst="Type AAP-periode"
                         title="Type AAP-periode"
                         headerId="type-aap"
+                        className="col col-xs-2"
                     />
                 )}
                 {vis_kolonner_for_vurderingsfrist_aap && (
                     <SorteringHeader
-                        sortering={aapVurderingsfrist}
-                        onClick={sorteringOnClick}
-                        rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === aapVurderingsfrist}
-                        tekst="Frist vurdering rett AAP"
                         skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
-                        className="col col-xs-2"
+                        sortering={aapVurderingsfrist}
+                        erValgt={sorteringsfelt === aapVurderingsfrist}
+                        rekkefolge={sorteringsrekkefolge}
+                        onClick={sorteringOnClick}
+                        tekst="Frist vurdering rett AAP"
                         title="Omtrentlig frist for ny vurdering av AAP"
                         headerId="frist-vurdering-aap"
+                        className="col col-xs-2"
                     />
                 )}
                 <SorteringHeader
-                    sortering={aapVedtakssperiode}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === aapVedtakssperiode}
-                    tekst="Gjenstående uker vedtak AAP"
                     skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
-                    className="col col-xs-2"
+                    sortering={aapVedtakssperiode}
+                    erValgt={sorteringsfelt === aapVedtakssperiode}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Gjenstående uker vedtak AAP"
                     title="Gjenstående uker på gjeldende vedtak AAP"
                     headerId="gjenstaende-uker-vedtak-aap"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={aapRettighetsperiode}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === aapRettighetsperiode}
-                    tekst="Gjenstående uker rettighet AAP"
                     skalVises={!!ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
-                    className="col col-xs-2"
+                    sortering={aapRettighetsperiode}
+                    erValgt={sorteringsfelt === aapRettighetsperiode}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Gjenstående uker rettighet AAP"
                     title="Gjenstående uker av rettighetsperioden for AAP"
                     headerId="rettighetsperiode-gjenstaende"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
-                    tekst="Dato på melding"
                     skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato på melding"
                     title='Dato på meldingen som er merket "Venter på svar fra NAV"'
                     headerId="venter-pa-svar-fra-nav"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
-                    tekst="Dato på melding"
                     skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato på melding"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     headerId="venter-pa-svar-fra-bruker"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
-                    tekst="Utløpsdato aktivitet"
                     skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Utløpsdato aktivitet"
                     title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="utlopte-aktiviteter"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
-                    tekst="Neste utløpsdato aktivitet"
                     skalVises={iAvtaltAktivitet}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Neste utløpsdato aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="i-avtalt-aktivitet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.MOTER_IDAG}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
-                    tekst="Klokkeslett møte"
                     skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.MOTER_IDAG}
+                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Klokkeslett møte"
                     title="Tidspunktet møtet starter"
                     headerId="moter-idag"
+                    className="col col-xs-2"
                 />
                 <Header
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
                     }
-                    className="col col-xs-2"
                     title="Varighet på møtet"
                     headerId="varighet-mote"
+                    className="col col-xs-2"
                 >
                     Varighet møte
                 </Header>
                 <SorteringHeader
-                    sortering={Sorteringsfelt.MOTESTATUS}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     skalVises={
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.MOTESTATUS}
+                    erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     title="Møtestatus"
                     tekst="Avtalt med NAV"
                     headerId="avtalt-mote"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                     }
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
                     tekst="Status § 14a-vedtak"
-                    className="col col-xs-2"
                     title="Status oppfølgingvedtak"
                     headerId="vedtakstatus"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    tekst="Dager siden status"
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dager siden status"
                     title="Dager siden status"
                     headerId="vedtakstatus-endret"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    tekst="Ansvarlig for vedtak"
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
                         valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Ansvarlig for vedtak"
                     title="Ansvarlig veileder for vedtak"
                     headerId="vedtakstatus-endret"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    tekst="Neste utløpsdato valgt aktivitet"
                     skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
+                    erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Neste utløpsdato valgt aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="valgte-aktiviteter"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
-                    tekst="Startdato aktivitet"
                     skalVises={
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Startdato aktivitet"
                     title='Startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="start-dato-for-avtalt-aktivitet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
-                    tekst="Neste startdato aktivitet"
                     skalVises={
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Neste startdato aktivitet"
                     title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="neste-start-dato-for-avtalt-aktivitet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    tekst="Passert startdato aktivitet"
                     skalVises={
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Passert startdato aktivitet"
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="forrige-dato-for-avtalt-aktivitet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    tekst="Passert startdato aktivitet"
                     skalVises={
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Passert startdato aktivitet"
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     headerId="forrige-dato-for-avtalt-aktivitet"
+                    className="col col-xs-2"
                 />
                 <Header
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    className="col col-xs-2"
                     title="Siste endring"
                     headerId="siste-endring"
+                    className="col col-xs-2"
                 >
                     Siste endring
                 </Header>
                 <SorteringHeader
-                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
-                    tekst="Dato siste endring"
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato siste endring"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.CV_SVARFRIST}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
-                    tekst="CV svarfrist"
-                    className="col col-xs-2"
                     skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
+                    sortering={Sorteringsfelt.CV_SVARFRIST}
+                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="CV svarfrist"
                     title="Svarfrist for å svare ja til deling av CV"
                     headerId="cv-svarfrist"
+                    className="col col-xs-2"
                 />
                 <Header
                     skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
-                    className="col col-xs-2"
                     title="Status § 14 a-vedtak"
                     headerId="minoversikt-status-14a-vedtak-kolonne-header"
+                    className="col col-xs-2"
                 >
                     Status § 14 a-vedtak
                 </Header>
@@ -585,124 +585,124 @@ function MinOversiktListeHode({
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Utløp overgangsstønad"
                     title="Utløpsdato for overgangsstønad"
                     headerId="utlop_overgangsstonad"
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
-                    tekst="Utløp overgangsstønad"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
                     skalVises={
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Type vedtaksperiode overgangsstønad"
                     title="Type vedtaksperiode for overgangsstønad"
                     headerId="type_vedtaksperiode"
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
-                    tekst="Type vedtaksperiode overgangsstønad"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
                     skalVises={
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Om aktivitetsplikt overgangsstønad"
                     title="Om bruker har aktivitetsplikt på overgangsstønad"
                     headerId="om_aktivitetsplikt"
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
-                    tekst="Om aktivitetsplikt overgangsstønad"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
                     skalVises={
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    className="col col-xs-2"
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Om barnet"
                     title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
                     headerId="oppfolging"
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
-                    tekst="Om barnet"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
-                    tekst="Barn under 18 år"
-                    className="col col-xs-2"
-                    headerId="barn_under_18"
                     skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
+                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Barn under 18 år"
+                    headerId="barn_under_18"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
-                    tekst="Dato sist endret"
-                    className="col col-xs-2"
-                    headerId="dato-sist-endret-utdanning-situasjon"
                     skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
+                    sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato sist endret"
+                    headerId="dato-sist-endret-utdanning-situasjon"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.HUSKELAPP_KOMMENTAR}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_KOMMENTAR}
-                    tekst="Huskelapp"
-                    className="col col-xs-2"
-                    headerId="huskelapp"
                     skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
+                    sortering={Sorteringsfelt.HUSKELAPP_KOMMENTAR}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_KOMMENTAR}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Huskelapp"
+                    headerId="huskelapp"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.HUSKELAPP_FRIST}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_FRIST}
-                    tekst="Frist huskelapp"
-                    className="col col-xs-2"
-                    headerId="huskelapp-frist"
                     skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
+                    sortering={Sorteringsfelt.HUSKELAPP_FRIST}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP_FRIST}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Frist huskelapp"
+                    headerId="huskelapp-frist"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    tekst="Hendelse på tiltak"
-                    title="Lenke til hendelsen"
-                    className="col col-xs-2"
-                    headerId="tiltakshendelse-lenke"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                     }
+                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Hendelse på tiltak"
+                    title="Lenke til hendelsen"
+                    headerId="tiltakshendelse-lenke"
+                    className="col col-xs-2"
                 />
                 <SorteringHeader
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    onClick={sorteringOnClick}
-                    rekkefolge={sorteringsrekkefolge}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    tekst="Dato for hendelse"
-                    title="Dato da hendelsen ble opprettet"
-                    className="col col-xs-2"
-                    headerId="tiltakshendelse-dato-opprettet"
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                         valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
                     }
+                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato for hendelse"
+                    title="Dato da hendelsen ble opprettet"
+                    headerId="tiltakshendelse-dato-opprettet"
+                    className="col col-xs-2"
                 />
             </div>
             <div className="brukerliste__gutter-right" />
