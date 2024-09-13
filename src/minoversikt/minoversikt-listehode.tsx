@@ -41,6 +41,7 @@ import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/Tolkebe
 import {BostedKommune} from '../components/tabell/headerceller/BostedKommune';
 import {BostedBydel} from '../components/tabell/headerceller/BostedBydel';
 import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
+import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -157,17 +158,8 @@ function MinOversiktListeHode({
                 <BostedBydel {...sorteringTilHeadercelle} />
                 <BostedSistOppdatert {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
-                    sortering={Sorteringsfelt.OPPFOLGINGSTARTET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.OPPFOLGINGSTARTET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Oppfølging startet"
-                    title="Startdato for pågående oppfølgingsperiode"
-                    headerId="oppfolgingstartet"
-                    className="col col-xs-2"
-                />
+                <OppfolgingStartet {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&

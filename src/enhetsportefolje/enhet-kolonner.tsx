@@ -188,7 +188,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <VeilederNavn

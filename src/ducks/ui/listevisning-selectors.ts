@@ -192,5 +192,5 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, filtrertPaUtdanningEllerSituasjonSomKanHaEndring))
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtrertPaHuskelapp))
-        .concat([Kolonne.OPPFOLGINGSTARTET]);
+        .concat([Kolonne.OPPFOLGING_STARTET]);
 }
