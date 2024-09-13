@@ -56,8 +56,9 @@ spec:
         - application: veilarbportefolje
           namespace: obo
           cluster: dev-gcp
+        - application: veilarbvedtaksstotte
+          namespace: obo
       external:
-        - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
   env:
@@ -115,12 +116,12 @@ spec:
             },
             {
               "fromPath": "/veilarbvedtaksstotte",
-              "toUrl": "https://veilarbvedtaksstotte.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbvedtaksstotte.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbvedtaksstotte",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
