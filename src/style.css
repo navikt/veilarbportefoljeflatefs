@@ -1010,8 +1010,10 @@ GRID
     position: absolute;
 }
 
-.decorator-context-modal {
-    padding: 1rem;
+.veilarbportefoljeflatefs .dekorator {
+    .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
+        font-weight: var(--a-font-weight-bold);
+    }
 }
 
 .flex {

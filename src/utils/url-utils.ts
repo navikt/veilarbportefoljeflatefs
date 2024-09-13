@@ -64,6 +64,32 @@ export const erDev = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEn
 export const erProd = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production';
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
 
+export const getEnv = (): EnvConfig => {
+    const {hostname} = window.location;
+    if (hostname.includes('intern.dev.nav.no')) return Env.dev;
+    if (hostname.includes('ansatt.dev.nav.no')) return Env.ansattDev;
+    if (hostname.includes('intern.nav.no')) return Env.prod;
+    return Env.local;
+};
+
+interface EnvConfig {
+    ingressType: 'ansatt' | 'intern';
+    type: EnvType;
+}
+
+export enum EnvType {
+    prod = 'prod',
+    dev = 'dev',
+    local = 'local'
+}
+
+const Env = {
+    ansattDev: {ingressType: 'ansatt', type: EnvType.dev},
+    dev: {ingressType: 'intern', type: EnvType.dev},
+    prod: {ingressType: 'intern', type: EnvType.prod},
+    local: {ingressType: 'intern', type: EnvType.local}
+} as const;
+
 export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 
 export const loginUrl = () => {
