@@ -38,6 +38,9 @@ import {BostedKommune} from '../components/tabell/headerceller/BostedKommune';
 import {BostedBydel} from '../components/tabell/headerceller/BostedBydel';
 import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
+import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
+import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
+import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -373,25 +376,9 @@ function EnhetListehode({
                     headerId="dato-siste-endring"
                     className="col col-xs-2"
                 />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                    sortering={Sorteringsfelt.CV_SVARFRIST}
-                    erValgt={sorteringsfelt === Sorteringsfelt.CV_SVARFRIST}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="CV svarfrist"
-                    title="Svarfrist for å svare ja til deling av CV"
-                    headerId="cv-svarfrist"
-                    className="col col-xs-2"
-                />
-                <Header
-                    skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
-                    title="Status § 14 a-vedtak"
-                    headerId="enhetsoversikt-status-14a-vedtak-kolonne-header"
-                    className="col col-xs-2"
-                >
-                    Status § 14 a-vedtak
-                </Header>
+                <SvarfristCv {...sorteringTilHeadercelle} />
+                <Status14AVedtak {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
@@ -448,16 +435,9 @@ function EnhetListehode({
                     headerId="oppfolging"
                     className="col col-xs-3"
                 />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
-                    sortering={Sorteringsfelt.BARN_UNDER_18_AAR}
-                    erValgt={sorteringsfelt === Sorteringsfelt.BARN_UNDER_18_AAR}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Barn under 18 år"
-                    headerId="barn_under_18"
-                    className="col col-xs-2"
-                />
+
+                <BarnUnder18Aar {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
                     sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}

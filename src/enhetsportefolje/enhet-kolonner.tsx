@@ -398,7 +398,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             />
             <DatoKolonne

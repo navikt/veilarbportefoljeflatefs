@@ -55,7 +55,7 @@ export enum Kolonne {
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
 
-    HAR_BARN_UNDER_18 = 'har_barn_under_18',
+    BARN_UNDER_18_AAR = 'har_barn_under_18',
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanning_og_situasjon_sist_endret',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
