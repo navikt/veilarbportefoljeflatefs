@@ -41,6 +41,7 @@ import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingSta
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
 import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
 import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
+import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -438,16 +439,8 @@ function EnhetListehode({
 
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
-                    sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato sist endret"
-                    headerId="dato-sist-endret-utdanning-og-situasjon"
-                    className="col col-xs-2"
-                />
+                <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
