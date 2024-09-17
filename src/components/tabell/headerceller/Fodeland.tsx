@@ -11,7 +11,7 @@ export const Fodeland = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, o
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Fødeland"
-        title="Fødeland"
+        title="Landet personen er født i"
         headerId="fodeland"
         className="col col-xs-2"
     />

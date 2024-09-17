@@ -4,7 +4,6 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import SorteringHeader from '../sortering-header';
 
 export const OppfolgingStartet = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
-    // TODO: Sjå over titteltekst
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
         sortering={Sorteringsfelt.OPPFOLGING_STARTET}

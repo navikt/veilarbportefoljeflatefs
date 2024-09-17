@@ -9,15 +9,14 @@ export const TolkebehovSistOppdatert = ({
     rekkefolge,
     onClick
 }: HeadercelleProps) => (
-    // TODO: Sjå over titteltekst
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
         sortering={Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TOLKEBEHOV_SIST_OPPDATERT}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Sist oppdatert"
-        title="Tolkebehov sist oppdatert"
+        tekst="Tolkebehov oppdatert"
+        title="Dato for siste oppdatering av tolkebehov"
         headerId="tolkbehovsistoppdatert"
         className="col col-xs-2"
     />

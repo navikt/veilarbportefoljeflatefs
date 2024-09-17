@@ -10,8 +10,8 @@ export const Tolkesprak = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge,
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TOLKESPRAK}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Språk"
-        title="Tolkespråk"
+        tekst="Tolkespråk"
+        title="Hvilket språk tolken må kunne"
         headerId="tolkespraak"
         className="col col-xs-2"
     />

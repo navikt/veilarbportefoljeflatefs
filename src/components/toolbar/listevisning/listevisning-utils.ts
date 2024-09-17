@@ -31,10 +31,14 @@ alternativerConfig.set(Kolonne.MOTER_VARIGHET, {tekstlabel: 'Varighet møte'});
 alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med NAV'});
 alternativerConfig.set(Kolonne.ARBEIDSLISTE_FRIST, {tekstlabel: 'Arbeidsliste frist'});
 alternativerConfig.set(Kolonne.ARBEIDSLISTE_OVERSKRIFT, {tekstlabel: 'Arbeidsliste tittel'});
-alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status oppfølgingsvedtak'});
-alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {tekstlabel: 'Oppfølgingsvedtak status tidspunkt'});
-alternativerConfig.set(Kolonne.SISTE_ENDRING, {tekstlabel: 'Siste endring'});
-alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {tekstlabel: 'Siste endring dato'});
+alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status § 14 a-vedtak (ny løsning)'});
+alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {
+    tekstlabel: 'Tidspunkt for endring av status § 14 a-vedtak (ny løsning)'
+});
+alternativerConfig.set(Kolonne.SISTE_ENDRING, {tekstlabel: 'Siste endring personen har gjort på aktivitet/mål'});
+alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {
+    tekstlabel: 'Dato for siste endring personen har gjort på aktivitet/mål'
+});
 alternativerConfig.set(Kolonne.FODELAND, {tekstlabel: 'Fødeland'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP, {tekstlabel: 'Statsborgerskap'});
 alternativerConfig.set(Kolonne.STATSBORGERSKAP_GYLDIG_FRA, {tekstlabel: 'Statsborgerskap gyldig fra'});
@@ -42,16 +46,18 @@ alternativerConfig.set(Kolonne.BOSTED_KOMMUNE, {tekstlabel: 'Geografisk bosted'}
 alternativerConfig.set(Kolonne.BOSTED_BYDEL, {tekstlabel: 'Bosted detaljer'});
 alternativerConfig.set(Kolonne.BOSTED_SIST_OPPDATERT, {tekstlabel: 'Bosted sist oppdatert'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV, {tekstlabel: 'Tolkebehov'});
-alternativerConfig.set(Kolonne.TOLKESPRAK, {tekstlabel: 'Språk'});
-alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Sist oppdatert'});
-alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'CV svarfrist'});
-alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {tekstlabel: 'Status § 14 a-vedtak'});
+alternativerConfig.set(Kolonne.TOLKESPRAK, {tekstlabel: 'Tolkespråk'});
+alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Tolkebehov sist oppdatert'});
+alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'Frist deling av CV'});
+alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {
+    tekstlabel: 'Status § 14 a-vedtak (sammenligning mellom Arena og ny løsning)'
+});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, {tekstlabel: 'Utløp overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: 'Om aktivitetsplikt overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, {tekstlabel: 'Om barnet'});
 alternativerConfig.set(Kolonne.BARN_UNDER_18_AAR, {tekstlabel: 'Barn under 18 år'});
-alternativerConfig.set(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, {tekstlabel: 'Dato sist endret'});
+alternativerConfig.set(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, {tekstlabel: 'Situasjon/utdanning sist endret'});
 alternativerConfig.set(Kolonne.HUSKELAPP_KOMMENTAR, {tekstlabel: 'Huskelapp'});
 alternativerConfig.set(Kolonne.HUSKELAPP_FRIST, {tekstlabel: 'Frist huskelapp'});
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Tiltakshendelse lenke'});

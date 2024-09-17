@@ -9,7 +9,6 @@ export const UtdanningOgSituasjonSistEndret = ({
     rekkefolge,
     onClick
 }: HeadercelleProps) => (
-    // TODO: Sjå over titteltekst
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
         sortering={Sorteringsfelt.UTDANNING_OG_SITUASJON_SIST_ENDRET}
@@ -17,7 +16,7 @@ export const UtdanningOgSituasjonSistEndret = ({
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Dato sist endret"
-        title="Dato for siste endring av utdanning og situasjon"
+        title="Dato da personen ga informasjon om situasjon eller utdanning"
         headerId="dato-sist-endret-utdanning-og-situasjon"
         className="col col-xs-2"
     />

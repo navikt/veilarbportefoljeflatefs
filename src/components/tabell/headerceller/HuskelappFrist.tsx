@@ -11,7 +11,7 @@ export const HuskelappFrist = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefo
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Frist huskelapp"
-        title="Frist huskelapp"
+        title="Fristen som er satt på huskelappen"
         headerId="huskelapp-frist"
         className="col col-xs-2"
     />

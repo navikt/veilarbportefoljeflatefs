@@ -34,8 +34,8 @@ import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/Statsb
 import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
-import {BostedKommune} from '../components/tabell/headerceller/BostedKommune';
-import {BostedBydel} from '../components/tabell/headerceller/BostedBydel';
+import {Bosted} from '../components/tabell/headerceller/Bosted';
+import {BostedDetaljer} from '../components/tabell/headerceller/BostedDetaljer';
 import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
@@ -114,8 +114,8 @@ function EnhetListehode({
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
 
-                <BostedKommune {...sorteringTilHeadercelle} />
-                <BostedBydel {...sorteringTilHeadercelle} />
+                <Bosted {...sorteringTilHeadercelle} />
+                <BostedDetaljer {...sorteringTilHeadercelle} />
                 <BostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <Tolkebehov {...sorteringTilHeadercelle} />
@@ -312,8 +312,8 @@ function EnhetListehode({
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
-                    title="Møtestatus"
                     tekst="Avtalt med NAV"
+                    title="Møtestatus"
                     headerId="avtalt-mote"
                     className="col col-xs-2"
                 />
@@ -359,21 +359,23 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <Header
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    title="Siste endring"
+                    title="Personens siste endring av aktiviteter/mål"
                     headerId="siste-endring"
                     className="col col-xs-2"
                 >
                     Siste endring
                 </Header>
                 <SorteringHeader
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Dato siste endring"
-                    title="Dato siste endring"
+                    title="Dato personen sist gjorde endring i aktiviteter/mål"
                     headerId="dato-siste-endring"
                     className="col col-xs-2"
                 />

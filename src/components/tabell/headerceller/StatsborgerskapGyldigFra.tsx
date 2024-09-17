@@ -16,7 +16,7 @@ export const StatsborgerskapGyldigFra = ({
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Gyldig fra"
-        title="Statsborgerskap gyldig fra"
+        title="Dato statsborgerskapet er gyldig fra"
         headerId="statsborgerskap_gyldig_fra"
         className="col col-xs-2"
     />

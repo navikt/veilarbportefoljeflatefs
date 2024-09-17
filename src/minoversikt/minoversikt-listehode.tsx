@@ -38,8 +38,8 @@ import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/Statsb
 import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
-import {BostedKommune} from '../components/tabell/headerceller/BostedKommune';
-import {BostedBydel} from '../components/tabell/headerceller/BostedBydel';
+import {Bosted} from '../components/tabell/headerceller/Bosted';
+import {BostedDetaljer} from '../components/tabell/headerceller/BostedDetaljer';
 import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
@@ -113,36 +113,36 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-                {!vis_kolonner_for_huskelapp && (
-                    <SorteringHeader
-                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+            {!vis_kolonner_for_huskelapp && (
+                <SorteringHeader
+                    sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
-                        tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
-                        title="Sorter på farge"
-                        headerId="arbeidslistekategori"
-                        className="arbeidslistekategori__sorteringsheader"
-                    />
-                )}
-                {vis_kolonner_for_huskelapp && (
-                    <div className="brukerliste__minoversikt-ikonknapper">
-                        <SorteringHeaderIkon
-                            ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                            sortering={Sorteringsfelt.FARGEKATEGORI}
-                            erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            title="Fargekategori-sortering"
-                            headerId="fargekategori"
+                    tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
+                    title="Sorter på farge"
+                    headerId="arbeidslistekategori"
+                    className="arbeidslistekategori__sorteringsheader"
+                />
+            )}
+            {vis_kolonner_for_huskelapp && (
+                <div className="brukerliste__minoversikt-ikonknapper">
+                    <SorteringHeaderIkon
+                        ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
+                        sortering={Sorteringsfelt.FARGEKATEGORI}
+                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                        rekkefolge={sorteringsrekkefolge}
+                        onClick={sorteringOnClick}
+                        title="Fargekategori-sortering"
+                        headerId="fargekategori"
                     />
                     <SorteringHeaderIkon
                         ikon={<HuskelappIkon aria-hidden />}
                         sortering={Sorteringsfelt.HUSKELAPP}
-                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            title="Huskelapp-sortering"
+                        erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                        rekkefolge={sorteringsrekkefolge}
+                        onClick={sorteringOnClick}
+                        title="Huskelapp-sortering"
                         headerId="huskelapp"
                         className="huskelapp__sorteringsheader"
                     />
@@ -160,8 +160,8 @@ function MinOversiktListeHode({
                 <Tolkesprak {...sorteringTilHeadercelle} />
                 <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
 
-                <BostedKommune {...sorteringTilHeadercelle} />
-                <BostedBydel {...sorteringTilHeadercelle} />
+                <Bosted {...sorteringTilHeadercelle} />
+                <BostedDetaljer {...sorteringTilHeadercelle} />
                 <BostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
@@ -344,8 +344,8 @@ function MinOversiktListeHode({
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
-                    title="Møtestatus"
                     tekst="Avtalt med NAV"
+                    title="Møtestatus"
                     headerId="avtalt-mote"
                     className="col col-xs-2"
                 />
@@ -458,20 +458,22 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <Header
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    title="Siste endring"
+                    title="Personens siste endring av aktiviteter/mål"
                     headerId="siste-endring"
                     className="col col-xs-2"
                 >
                     Siste endring
                 </Header>
                 <SorteringHeader
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
-                    tekst="Dato siste endring"
+                    tekst="Dato personen sist gjorde endring i aktiviteter/mål"
                     title="Dato siste endring"
                     headerId="dato-siste-endring"
                     className="col col-xs-2"

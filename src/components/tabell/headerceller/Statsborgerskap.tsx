@@ -11,7 +11,7 @@ export const Statsborgerskap = ({gjeldendeSorteringsfelt, valgteKolonner, rekkef
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Statsborgerskap"
-        title="Statsborgerskap"
+        title="Statsborgerskap personen har"
         headerId="statsborgerskap"
         className="col col-xs-2"
     />

@@ -3,8 +3,7 @@ import {Sorteringsfelt} from '../../../model-interfaces';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import SorteringHeader from '../sortering-header';
 
-export const BostedBydel = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
-    // TODO: Sjå over titteltekst og sjekk at det faktisk er "bydel" som vert vist for alle innbyggarar
+export const BostedDetaljer = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
         sortering={Sorteringsfelt.BOSTED_BYDEL}
@@ -12,7 +11,7 @@ export const BostedBydel = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Bosted detaljer"
-        title="Bydelen personen bor i"
+        title="Detaljer om hvor personen bor, for eksempel bydel"
         headerId="bosted_bydel"
         className="col col-xs-2"
     />
