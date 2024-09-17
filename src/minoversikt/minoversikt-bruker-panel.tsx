@@ -87,12 +87,7 @@ function MinoversiktBrukerPanel({
 
     return (
         <li
-            className={classNames(
-                {
-                    'brukerliste--forrigeBruker': varForrigeBruker
-                },
-                'brukerliste_rad'
-            )}
+            className={classNames({'brukerliste--forrigeBruker': varForrigeBruker}, 'brukerliste_rad')}
             data-testid={`brukerliste_element${testIdArbeidslisteAktiv}${testIdArbeidslisteKategori}${testIdDisabled}`}
             data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
         >
@@ -134,7 +129,6 @@ function MinoversiktBrukerPanel({
                     </div>
                 )}
                 <MinOversiktKolonner
-                    className="brukerliste__innhold flex flex--center"
                     bruker={bruker}
                     enhetId={enhetId}
                     filtervalg={filtervalg}

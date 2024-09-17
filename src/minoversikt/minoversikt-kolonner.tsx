@@ -56,14 +56,13 @@ import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
-    className?: string;
     bruker: BrukerModell;
     enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
 }
 
-function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
@@ -133,7 +132,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     };
 
     return (
-        <div className={className}>
+        <div className="brukerliste__innhold flex flex--center">
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 

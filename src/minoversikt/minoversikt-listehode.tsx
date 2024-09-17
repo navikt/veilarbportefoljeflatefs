@@ -87,43 +87,43 @@ function MinOversiktListeHode({
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
-            <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <VelgalleCheckboks />
-                {!vis_kolonner_for_huskelapp && (
-                    <SorteringHeader
-                        className="arbeidslistekategori__sorteringsheader"
-                        sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        onClick={sorteringOnClick}
+            <VelgalleCheckboks />
+            {!vis_kolonner_for_huskelapp && (
+                <SorteringHeader
+                    className="arbeidslistekategori__sorteringsheader"
+                    sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                    onClick={sorteringOnClick}
+                    rekkefolge={sorteringsrekkefolge}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
+                    tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
+                    title="Sorter på farge"
+                    headerId="arbeidslistekategori"
+                />
+            )}
+            {vis_kolonner_for_huskelapp && (
+                <div className="brukerliste__minoversikt-ikonknapper">
+                    <SorteringHeaderIkon
+                        ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
+                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                        sortering={Sorteringsfelt.FARGEKATEGORI}
                         rekkefolge={sorteringsrekkefolge}
-                        erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
-                        tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
-                        title="Sorter på farge"
-                        headerId="arbeidslistekategori"
+                        onClick={sorteringOnClick}
+                        headerId="fargekategori"
+                        title="Fargekategori-sortering"
                     />
-                )}
-                {vis_kolonner_for_huskelapp && (
-                    <div className="brukerliste__minoversikt-ikonknapper">
-                        <SorteringHeaderIkon
-                            ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                            erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                            sortering={Sorteringsfelt.FARGEKATEGORI}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            headerId="fargekategori"
-                            title="Fargekategori-sortering"
-                        />
-                        <SorteringHeaderIkon
-                            ikon={<HuskelappIkon aria-hidden />}
-                            erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                            sortering={Sorteringsfelt.HUSKELAPP}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            className="huskelapp__sorteringsheader"
-                            headerId="huskelapp"
-                            title="Huskelapp-sortering"
-                        />
-                    </div>
-                )}
+                    <SorteringHeaderIkon
+                        ikon={<HuskelappIkon aria-hidden />}
+                        erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                        sortering={Sorteringsfelt.HUSKELAPP}
+                        rekkefolge={sorteringsrekkefolge}
+                        onClick={sorteringOnClick}
+                        className="huskelapp__sorteringsheader"
+                        headerId="huskelapp"
+                        title="Huskelapp-sortering"
+                    />
+                </div>
+            )}
+            <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <SorteringHeader
                     className="col col-xs-2"
                     sortering={Sorteringsfelt.ETTERNAVN}
@@ -706,6 +706,7 @@ function MinOversiktListeHode({
                     }
                 />
             </div>
+            <div className="brukerliste__gutter-right" />
         </div>
     );
 }
