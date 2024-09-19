@@ -69,7 +69,7 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
+export function sjekkStatuskode(response: Response, redirectOnUnauthorized: Boolean = true) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
@@ -341,7 +341,7 @@ export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
     return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };
 
-export const settBrukerIKontekst = async (fnr: string): Promise<void> => {
+export const settBrukerIKontekst = async (fnr: string): Promise<Response> => {
     const respons = await fetch('/modiacontextholder/api/context', {
         ...MED_CREDENTIALS,
         method: 'post',
