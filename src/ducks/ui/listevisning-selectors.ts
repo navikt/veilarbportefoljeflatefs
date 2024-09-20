@@ -170,7 +170,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, filtrertPaArbeidslisteIMinOversikt))
         .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, filtrertPaArbeidslisteIMinOversikt))
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
-        .concat(addHvis(Kolonne.TOLKEBEHOV_SPRAAK, filtrertPaTolkBehov))
+        .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, filtrertPaYtelseMedVurderingsfrist))
@@ -188,9 +188,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, filtrertPaGeografiskBosted))
-        .concat(addHvis(Kolonne.HAR_BARN_UNDER_18, filtrertPaBarnUnder18Ar))
+        .concat(addHvis(Kolonne.BARN_UNDER_18_AAR, filtrertPaBarnUnder18Ar))
         .concat(addHvis(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, filtrertPaUtdanningEllerSituasjonSomKanHaEndring))
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtrertPaHuskelapp))
-        .concat([Kolonne.OPPFOLGINGSTARTET]);
+        .concat([Kolonne.OPPFOLGING_STARTET]);
 }
