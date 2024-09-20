@@ -95,8 +95,17 @@ export function Lenker({erPaloggetVeileder}: Props) {
                 Veilederoversikt
             </NavLink>
             {erTestLenkeSomlenkeFeaturetogglePa && (
-                <a href="https://http.cat">Ingrid si testlenke (bak feature-toggle)</a>
+                <a href="https://http.cat" onClick={onClickIngridSiTestlenke}>
+                    Ingrid si testlenke (bak feature-toggle)
+                </a>
             )}
         </div>
     );
 }
+
+const onClickIngridSiTestlenke = () => {
+    // eslint-disable-next-line no-console
+    console.log('Lenker, onClickIngridSiTestlenke');
+
+    return false;
+};
