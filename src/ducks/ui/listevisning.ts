@@ -12,7 +12,7 @@ export enum ActionTypeKeys {
 }
 
 export enum Kolonne {
-    OPPFOLGINGSTARTET = 'oppfolgingstartet',
+    OPPFOLGING_STARTET = 'oppfolgingstartet',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
@@ -46,7 +46,7 @@ export enum Kolonne {
     BOSTED_BYDEL = 'bosted_bydel',
     BOSTED_SIST_OPPDATERT = 'bosted_sist_oppdatert',
     TOLKEBEHOV = 'tolkebehov',
-    TOLKEBEHOV_SPRAAK = 'tolkebehov_spraak',
+    TOLKESPRAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
     CV_SVARFRIST = 'cv_svarfrist',
     AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
@@ -55,7 +55,7 @@ export enum Kolonne {
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
 
-    HAR_BARN_UNDER_18 = 'har_barn_under_18',
+    BARN_UNDER_18_AAR = 'har_barn_under_18',
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanning_og_situasjon_sist_endret',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
