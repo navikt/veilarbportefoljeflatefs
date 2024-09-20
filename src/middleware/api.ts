@@ -342,13 +342,11 @@ export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
 };
 
 export const settBrukerIKontekst = async (fnr: string): Promise<Response> => {
-    const respons = await fetch('/modiacontextholder/api/context', {
+    return fetch('/modiacontextholder/api/context', {
         ...MED_CREDENTIALS,
         method: 'post',
         body: JSON.stringify({verdi: fnr, eventType: 'NY_AKTIV_BRUKER'})
-    });
-
-    return sjekkStatuskode(respons);
+    }).then(respons => sjekkStatuskode(respons));
 };
 
 export const hentBrukerIKontekst = async () => {
