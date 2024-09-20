@@ -1,14 +1,15 @@
 import {AppState} from '../reducer';
 import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
 import {
-    VIS_AAP_VURDERINGSFRISTKOLONNER,
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
+    HUSKELAPP,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
+    TEST_BRUK_LENKE_SOM_LENKE,
     VEDTAKSTOTTE,
-    HUSKELAPP,
+    VIS_AAP_VURDERINGSFRISTKOLONNER,
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../konstanter';
 
@@ -26,7 +27,8 @@ const initalState: FeaturesState = {
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
     [HUSKELAPP]: false,
-    [VIS_STATUSFILTER_TILTAKSHENDELSE]: false
+    [VIS_STATUSFILTER_TILTAKSHENDELSE]: false,
+    [TEST_BRUK_LENKE_SOM_LENKE]: false
 };
 
 // Reducer
