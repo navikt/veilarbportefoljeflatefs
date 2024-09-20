@@ -16,7 +16,7 @@ export const UtdanningOgSituasjonSistEndret = ({
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Dato sist endret"
-        title="Dato da personen ga informasjon om situasjon eller utdanning"
+        title="Dato personen sist ga informasjon om situasjon eller utdanning"
         headerId="dato-sist-endret-utdanning-og-situasjon"
         className="col col-xs-2"
     />

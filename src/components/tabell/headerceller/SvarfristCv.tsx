@@ -11,7 +11,7 @@ export const SvarfristCv = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Frist deling av CV"
-        title="Frist for at personen skal svare ja til deling av CV"
+        title="Frist for at personen skal svare ja til deling av CV med arbeidsgiver"
         headerId="cv-svarfrist"
         className="col col-xs-2"
     />

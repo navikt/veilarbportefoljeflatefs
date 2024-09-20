@@ -11,7 +11,7 @@ export const Bosted = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onC
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Bosted"
-        title="Stedet personen bor, oftest kommunenummer"
+        title="Kommunen personen bor i"
         headerId="bosted_kommune"
         className="col col-xs-2"
     />
