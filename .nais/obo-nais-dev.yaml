@@ -58,6 +58,8 @@ spec:
           cluster: dev-gcp
         - application: veilarbvedtaksstotte
           namespace: obo
+        - application: veilarboppfolging
+          namespace: poao
       external:
         - host: veilarbveileder.dev-fss-pub.nais.io
         - host: veilarboppfolging.dev-fss-pub.nais.io
@@ -146,12 +148,12 @@ spec:
             },
             {
               "fromPath": "/veilarboppfolging",
-              "toUrl": "https://veilarboppfolging.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarboppfolging.poao",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarboppfolging",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "poao",
+                "cluster": "dev-gcp"
               }
             },
             {
