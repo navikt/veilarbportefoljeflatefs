@@ -7,6 +7,8 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
+import {TEST_BRUK_LENKE_SOM_LENKE} from '../konstanter';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 
 interface Props {
     erPaloggetVeileder: boolean;
@@ -18,6 +20,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLenkeKlasse = veilederIdent!.ident === ident || !ident ? 'oversiktslenke--valgt' : '';
     const dispatch = useDispatch();
+    const erTestLenkeSomlenkeFeaturetogglePa = useFeatureSelector()(TEST_BRUK_LENKE_SOM_LENKE);
 
     const erAktiv = id => {
         const elem = document.getElementById(id);
@@ -91,6 +94,9 @@ export function Lenker({erPaloggetVeileder}: Props) {
             >
                 Veilederoversikt
             </NavLink>
+            {erTestLenkeSomlenkeFeaturetogglePa && (
+                <a href="https://http.cat">Ingrid si testlenke (bak feature-toggle)</a>
+            )}
         </div>
     );
 }

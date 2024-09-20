@@ -21,5 +21,5 @@ export const mockFeatureToggles = {
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: true,
     [HUSKELAPP]: true,
     [VIS_STATUSFILTER_TILTAKSHENDELSE]: true,
-    [TEST_BRUK_LENKE_SOM_LENKE]: true
+    [TEST_BRUK_LENKE_SOM_LENKE]: true // TODO: bytt til false før merge så lenka ikkje er synleg på github pages
 };
