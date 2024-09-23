@@ -4,9 +4,11 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
-import {EnvType, getEnv} from './utils/url-utils';
+import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
+import {useFeatureSelector} from './hooks/redux/use-feature-selector';
+import {MIDLERTIDIG_FIKS_FNR_I_KONTEKST} from './konstanter';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -20,6 +22,30 @@ function getDecoratorEnv(): Environment {
 }
 
 function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
+    return {
+        appName: 'Arbeidsrettet oppfølging',
+        fnr: undefined,
+        onFnrChanged: value => {
+            if (value) {
+                window.location.href = getVeilarbpersonflateBasePath();
+            }
+        },
+        showSearchArea: true,
+        enhet: enhet ?? undefined,
+        showEnheter: true,
+        onEnhetChanged: value => {
+            if (value) {
+                settValgtEnhet(value);
+            }
+        },
+        proxy: '/modiacontextholder',
+        environment: getDecoratorEnv(),
+        showHotkeys: false,
+        urlFormat: getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO'
+    };
+}
+
+function getConfigMedFeatureToggle(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
     return {
         appName: 'Arbeidsrettet oppfølging',
         fnr: undefined,
@@ -46,6 +72,8 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
 }
 
 export function Decorator() {
+    const erMidlertidigFiksFnrIKontekstFeatureTogglePa = useFeatureSelector()(MIDLERTIDIG_FIKS_FNR_I_KONTEKST);
+
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
     const brukerIKontekst = useBrukerIKontekstSelector();
@@ -60,7 +88,9 @@ export function Decorator() {
         dispatch(oppdaterValgtEnhet(enhet));
     }
 
-    const config = getConfig(enhetId, velgEnhet);
+    const config = erMidlertidigFiksFnrIKontekstFeatureTogglePa
+        ? getConfigMedFeatureToggle(enhetId, velgEnhet)
+        : getConfig(enhetId, velgEnhet);
 
     return <InternflateDecorator {...config} />;
 }
