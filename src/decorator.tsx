@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
-import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
+import {EnvType, getEnv} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 
@@ -25,7 +25,9 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
         fnr: undefined,
         onFnrChanged: value => {
             if (value) {
-                window.location.href = getVeilarbpersonflateBasePath();
+                // window.location.href = getVeilarbpersonflateBasePath();
+                // eslint-disable-next-line no-alert
+                window.alert(`Dette skjer på onFnrChanged, value: ${value}`);
             }
         },
         showSearchArea: true,
