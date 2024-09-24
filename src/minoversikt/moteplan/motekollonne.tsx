@@ -5,6 +5,7 @@ import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {useDispatch} from 'react-redux';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -14,11 +15,13 @@ interface MoteKollonneProps {
 
 function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
+    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
 
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             mote.deltaker.fnr,
-            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId)
+            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId),
+            dispatchForSidenavigeringMidlertidigFiks
         );
 
     if (!moment(dato).isSame(moteDato, 'day')) {

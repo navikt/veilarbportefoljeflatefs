@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import NAVSPA from '@navikt/navspa';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
@@ -9,6 +9,7 @@ import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {MIDLERTIDIG_FIKS_FNR_I_KONTEKST} from './konstanter';
+import {AppState} from './reducer';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -45,17 +46,33 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
     };
 }
 
-function getConfigMedFeatureToggle(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
+const onFnrChangedMedFeatureToggle = (fnr, fnrForSidenavigeringMidlertidigFiks: string | null) => {
+    /* TODO dokumenter smutthol/edge-case der ein søkar på brukar som allereie er i context */
+    if (fnr) {
+        if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
+            // eslint-disable-next-line no-alert
+            window.alert(
+                `onFnrChangedMedFeatureToggle: ulike fnr! 🎉 Fnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
+            );
+            window.location.href = getVeilarbpersonflateBasePath();
+            return;
+        }
+        // eslint-disable-next-line no-alert
+        window.alert(
+            `onFnrChangedMedFeatureToggle: like fnr. Fnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
+        );
+    }
+};
+
+function getConfigMedFeatureToggle(
+    enhet: string | null,
+    settValgtEnhet: (enhet) => void,
+    fnrForSidenavigeringMidlertidigFiks: string | null
+): DecoratorPropsV3 {
     return {
         appName: 'Arbeidsrettet oppfølging',
         fnr: undefined,
-        onFnrChanged: value => {
-            if (value) {
-                // window.location.href = getVeilarbpersonflateBasePath();
-                // eslint-disable-next-line no-alert
-                window.alert(`Dette skjer på onFnrChanged, value: ${value}`);
-            }
-        },
+        onFnrChanged: value => onFnrChangedMedFeatureToggle(value, fnrForSidenavigeringMidlertidigFiks),
         showSearchArea: true,
         enhet: enhet ?? undefined,
         showEnheter: true,
@@ -73,6 +90,9 @@ function getConfigMedFeatureToggle(enhet: string | null, settValgtEnhet: (enhet)
 
 export function Decorator() {
     const erMidlertidigFiksFnrIKontekstFeatureTogglePa = useFeatureSelector()(MIDLERTIDIG_FIKS_FNR_I_KONTEKST);
+    const fnrForSidenavigeringMidlertidigFiks = useSelector(
+        (state: AppState) => state.fnrForSidenavigeringMidlertidigFiks.fnr
+    );
 
     const dispatch = useDispatch();
     const enhetId = useEnhetSelector();
@@ -89,7 +109,7 @@ export function Decorator() {
     }
 
     const config = erMidlertidigFiksFnrIKontekstFeatureTogglePa
-        ? getConfigMedFeatureToggle(enhetId, velgEnhet)
+        ? getConfigMedFeatureToggle(enhetId, velgEnhet, fnrForSidenavigeringMidlertidigFiks)
         : getConfig(enhetId, velgEnhet);
 
     return <InternflateDecorator {...config} />;

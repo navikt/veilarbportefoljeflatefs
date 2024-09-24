@@ -4,6 +4,8 @@ import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 import {RefObject} from 'react';
 import {settBrukerIKontekst} from '../middleware/api';
+import {Dispatch} from 'redux';
+import {FnrForMidlertidigFiksSidenavigeringActionType} from '../ducks/fnr-for-sidenavigering-midlertidig-fiks';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -298,14 +300,22 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     return `${formatertDato} (Barn 1 år)`;
 };
 
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) =>
-    settBrukerIKontekst(fnr).then(() => {
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
+    fnr: string,
+    lenke: string,
+    dispatch: Dispatch,
+    apneNyFane?: boolean
+) => {
+    dispatch({type: FnrForMidlertidigFiksSidenavigeringActionType.SETT_FNR_MIDLERTIDIG_FIKS_SIDENAVIGERING, fnr: fnr});
+
+    return settBrukerIKontekst(fnr).then(() => {
         if (apneNyFane) {
             window.open(lenke, '_blank', 'noopener,noreferrer');
         } else {
             window.location.href = lenke;
         }
     });
+};
 
 /**
  * Utfør en handling dersom det klikkes utenfor et/flere element(er).
