@@ -51,15 +51,20 @@ const onFnrChangedMedFeatureToggle = (fnr, fnrForSidenavigeringMidlertidigFiks: 
     if (fnr) {
         if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
             // eslint-disable-next-line no-alert
-            window.alert(
-                `onFnrChangedMedFeatureToggle: ulike fnr! 🎉 Fnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
+            const sendMegVidare = window.confirm(
+                `onFnrChangedMedFeatureToggle: ulike fnr! 🎉 
+                \nFnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}
+                \nDu blir sendt videre til ei anna side`
             );
-            window.location.href = getVeilarbpersonflateBasePath();
+            if (sendMegVidare) {
+                window.location.href = getVeilarbpersonflateBasePath();
+            }
             return;
         }
         // eslint-disable-next-line no-alert
         window.alert(
-            `onFnrChangedMedFeatureToggle: like fnr. Fnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
+            `onFnrChangedMedFeatureToggle: like fnr 🎉
+            \nFnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
         );
     }
 };
@@ -72,7 +77,7 @@ function getConfigMedFeatureToggle(
     return {
         appName: 'Arbeidsrettet oppfølging',
         fnr: undefined,
-        onFnrChanged: value => onFnrChangedMedFeatureToggle(value, fnrForSidenavigeringMidlertidigFiks),
+        onFnrChanged: fnr => onFnrChangedMedFeatureToggle(fnr, fnrForSidenavigeringMidlertidigFiks),
         showSearchArea: true,
         enhet: enhet ?? undefined,
         showEnheter: true,
@@ -108,9 +113,14 @@ export function Decorator() {
         dispatch(oppdaterValgtEnhet(enhet));
     }
 
-    const config = erMidlertidigFiksFnrIKontekstFeatureTogglePa
-        ? getConfigMedFeatureToggle(enhetId, velgEnhet, fnrForSidenavigeringMidlertidigFiks)
-        : getConfig(enhetId, velgEnhet);
+    const configToggle = getConfigMedFeatureToggle(enhetId, velgEnhet, fnrForSidenavigeringMidlertidigFiks);
+    const configVanlig = getConfig(enhetId, velgEnhet);
+    const onFnrChangedToggle = fnr => onFnrChangedMedFeatureToggle(fnr, fnrForSidenavigeringMidlertidigFiks);
 
-    return <InternflateDecorator {...config} />;
+    const valgtConfig = erMidlertidigFiksFnrIKontekstFeatureTogglePa ? configToggle : configVanlig;
+
+    if (erMidlertidigFiksFnrIKontekstFeatureTogglePa) {
+        return <InternflateDecorator {...valgtConfig} onFnrChanged={value => onFnrChangedToggle(value)} />;
+    }
+    return <InternflateDecorator {...valgtConfig} />;
 }
