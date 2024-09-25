@@ -69,9 +69,9 @@ class FetchError extends Error {
     }
 }
 
-export function sjekkStatuskode(response, redirectOnUnauthorized: Boolean = true) {
+export function sjekkStatuskode(response: Response, redirectOnUnauthorized: Boolean = true): Promise<Response> {
     if (response.status >= 200 && response.status < 300 && response.ok) {
-        return response;
+        return Promise.resolve(response);
     }
     if (response.status === 401 && redirectOnUnauthorized) {
         window.location.href = loginUrl();
@@ -341,14 +341,12 @@ export const hentSesjonMetadata = async (): Promise<SessionMeta> => {
     return fetchToJson('/oauth2/session', {}, false).then(data => Promise.resolve(data as SessionMeta));
 };
 
-export const settBrukerIKontekst = async (fnr: string): Promise<void> => {
-    const respons = await fetch('/modiacontextholder/api/context', {
+export const settBrukerIKontekst = async (fnr: string): Promise<Response> => {
+    return fetch('/modiacontextholder/api/context', {
         ...MED_CREDENTIALS,
         method: 'post',
         body: JSON.stringify({verdi: fnr, eventType: 'NY_AKTIV_BRUKER'})
-    });
-
-    return sjekkStatuskode(respons);
+    }).then(respons => sjekkStatuskode(respons));
 };
 
 export const hentBrukerIKontekst = async () => {

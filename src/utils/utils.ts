@@ -299,14 +299,26 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
 };
 
 export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) =>
-    settBrukerIKontekst(fnr).then(() => {
-        if (apneNyFane) {
-            window.open(lenke, '_blank', 'noopener,noreferrer');
-        } else {
-            window.location.href = lenke;
-        }
-    });
-
+    settBrukerIKontekst(fnr)
+        .then(response => {
+            // eslint-disable-next-line no-console
+            console.log(
+                'oppdaterBrukerIKontekstOgNavigerTilLenke, settBrukerIKontekst gjekk bra, response.status: ',
+                response.status
+            );
+            if (apneNyFane) {
+                window.open(lenke, '_blank', 'noopener,noreferrer');
+            } else {
+                window.location.href = lenke;
+            }
+        })
+        .catch((e: Error) => {
+            // eslint-disable-next-line no-console
+            console.log(
+                'oppdaterBrukerIKontekstOgNavigerTilLenke, settBrukerIKontekst feila, error.message: ',
+                e.message
+            );
+        });
 /**
  * Utfør en handling dersom det klikkes utenfor et/flere element(er).
  *
