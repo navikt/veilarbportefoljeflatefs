@@ -1,3 +1,4 @@
+import {useDispatch} from 'react-redux';
 import {BrukerModell} from '../../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
@@ -13,15 +14,26 @@ interface LenkeKolonneProps {
 }
 
 export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, className}: LenkeKolonneProps) => {
+    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+
     if (!skalVises) {
         return null;
     }
 
     const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId));
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            bruker.fnr,
+            getVeilarbpersonflateUrl(lenke, enhetId),
+            dispatchForSidenavigeringMidlertidigFiks
+        );
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId), true);
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            bruker.fnr,
+            getVeilarbpersonflateUrl(lenke, enhetId),
+            dispatchForSidenavigeringMidlertidigFiks,
+            true
+        );
 
     return (
         <div className={className}>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
@@ -14,11 +15,13 @@ interface MoteKollonneProps {
 
 function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
+    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
 
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             mote.deltaker.fnr,
-            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId)
+            getVeilarbpersonflateUrl('#visAktivitetsplanen', enhetId),
+            dispatchForSidenavigeringMidlertidigFiks
         );
 
     if (!moment(dato).isSame(moteDato, 'day')) {

@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
+import {BodyShort} from '@navikt/ds-react';
 import {BrukerModell} from '../../model-interfaces';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {BodyShort} from '@navikt/ds-react';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
@@ -14,10 +15,13 @@ interface SisteEndringKategoriProps {
 }
 
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
+    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
-            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
+            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId),
+            dispatchForSidenavigeringMidlertidigFiks
         );
 
     const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';

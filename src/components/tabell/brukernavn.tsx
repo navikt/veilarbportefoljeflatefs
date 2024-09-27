@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 import {BrukerModell} from '../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
@@ -27,13 +28,24 @@ const settSammenNavn = (bruker: BrukerModell) => {
 };
 
 const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId));
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            bruker.fnr,
+            getVeilarbpersonflateUrl(null, enhetId),
+            dispatchForSidenavigeringMidlertidigFiks
+        );
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId), true);
+        oppdaterBrukerIKontekstOgNavigerTilLenke(
+            bruker.fnr,
+            getVeilarbpersonflateUrl(null, enhetId),
+            dispatchForSidenavigeringMidlertidigFiks,
+            true
+        );
 
     return (
         <div className={className}>
