@@ -56,10 +56,10 @@ spec:
           cluster: prod-gcp
         - application: veilarboppfolging
           namespace: poao
+        - application: veilarbveileder
+          namespace: obo
       external:
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
-        - host: veilarbveileder.prod-fss-pub.nais.io
-        - host: veilarboppfolging.prod-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -125,12 +125,12 @@ spec:
             },
             {
               "fromPath": "/veilarbveileder",
-              "toUrl": "https://veilarbveileder.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbveileder",
-                "namespace": "pto",
-                "cluster": "prod-fss"
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             },
             {
