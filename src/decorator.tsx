@@ -52,22 +52,9 @@ const onFnrChangedMedFeatureToggle = fnr => {
 
     if (fnr) {
         if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
-            // eslint-disable-next-line no-alert
-            const sendMegVidare = window.confirm(
-                `onFnrChangedMedFeatureToggle: ulike fnr! 🎉 
-                \nFnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}
-                \nDu blir sendt videre til ei anna side`
-            );
-            if (sendMegVidare) {
-                window.location.href = getVeilarbpersonflateBasePath();
-            }
-            return;
+            window.location.href = getVeilarbpersonflateBasePath();
         }
-        // eslint-disable-next-line no-alert
-        window.alert(
-            `onFnrChangedMedFeatureToggle: like fnr 🎉
-            \nFnr: ${fnr}, fnr frå state: ${fnrForSidenavigeringMidlertidigFiks}`
-        );
+        return;
     }
 };
 
