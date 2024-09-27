@@ -5,7 +5,7 @@ import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '
 import {Maybe} from './types';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
-import {FnrForMidlertidigFiksSidenavigeringActionType} from '../ducks/fnr-for-sidenavigering-midlertidig-fiks';
+import {fnrForSidenavigeringMidlertidigFiksSessionStorageKey} from '../decorator';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -306,7 +306,8 @@ export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
     dispatch: Dispatch,
     apneNyFane?: boolean
 ) => {
-    dispatch({type: FnrForMidlertidigFiksSidenavigeringActionType.SETT_FNR_MIDLERTIDIG_FIKS_SIDENAVIGERING, fnr: fnr});
+    // dispatch({type: FnrForMidlertidigFiksSidenavigeringActionType.SETT_FNR_MIDLERTIDIG_FIKS_SIDENAVIGERING, fnr: fnr});
+    sessionStorage.setItem(fnrForSidenavigeringMidlertidigFiksSessionStorageKey, fnr);
 
     return settBrukerIKontekst(fnr).then(() => {
         if (apneNyFane) {

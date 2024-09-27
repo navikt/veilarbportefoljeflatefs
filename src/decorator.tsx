@@ -9,7 +9,6 @@ import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {MIDLERTIDIG_FIKS_FNR_I_KONTEKST} from './konstanter';
-import {store} from './application';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -46,6 +45,10 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
     };
 }
 
+export const fnrForSidenavigeringMidlertidigFiksSessionStorageKey = 'fiks_av_sidenavigering';
+
+// TODO få det til å køyre lokalt igjen :))
+
 const onFnrChangedMedFeatureToggle = fnr => {
     /* Skildring av edge-case og kjende problem med denne fiksen.*/
 
@@ -77,13 +80,22 @@ const onFnrChangedMedFeatureToggle = fnr => {
      *
      * 2024-09-27, Ingrid
      * */
-    const fnrForSidenavigeringMidlertidigFiks = store.getState().fnrForSidenavigeringMidlertidigFiks.fnr;
+
+    // const fnrForSidenavigeringMidlertidigFiks = store.getState().fnrForSidenavigeringMidlertidigFiks.fnr;
+    const fnrForSidenavigeringMidlertidigFiksSessionStorage = sessionStorage.getItem(
+        fnrForSidenavigeringMidlertidigFiksSessionStorageKey
+    );
 
     if (fnr) {
-        if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
+        if (fnr !== fnrForSidenavigeringMidlertidigFiksSessionStorage) {
             window.location.href = getVeilarbpersonflateBasePath();
         }
     }
+    // if (fnr) {
+    //     if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
+    //         window.location.href = getVeilarbpersonflateBasePath();
+    //     }
+    // }
 };
 
 export function Decorator() {
