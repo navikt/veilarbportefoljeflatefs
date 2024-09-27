@@ -1,11 +1,11 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {MoteData} from './moteplan';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
-import {useDispatch} from 'react-redux';
 
 interface MoteKollonneProps {
     dato: Date;

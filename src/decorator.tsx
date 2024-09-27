@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import NAVSPA from '@navikt/navspa';
 import {useDispatch} from 'react-redux';
+import NAVSPA from '@navikt/navspa';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
@@ -52,15 +52,16 @@ const onFnrChangedMedFeatureToggle = fnr => {
     /* Oppførsel med fiks:
      *
      * Case: Berre ei open fane
-     * Oppsummert: forventa oppførsel. Opning i ny fane: opnar ny fane og blir ståande på oversikten. Resten navigerer til brukarside.
+     * Oppsummert: forventa oppførsel. Opning i ny fane opnar ei ny fane i bakgrunnen og blir ståande på oversikten. Resten navigerer til brukarside.
      *
-     * Case: To opne vindauge med oversikten, begge er "heilt ferske". Fane 1 er den du står på, fane 2 er open i bakgrunnen/anna vindauge.
+     * Case: To opne faner med oversikten, begge er nyopna og ein har ikkje gjort noko på dei enno. Fane 1 er den du står på, fane 2 er open i bakgrunnen/anna vindauge.
      *   1) Du navigerer direkte til person i den eine. -> Begge oversiktsfaner navigerer til personen.
      *   2) Du opnar ein person i ny fane. -> Fane 1 blir verande på oversikten, fane 2 navigerer til personen.
      *   3) Du søkar på ein person i personsøket. -> Begge oversiktsfaner navigerer til personen.
      * Oppsummert: Fane 1 har forventa oppførsel. Fane 2 navigerer til personen i alle tilfelle (i staden for å halde seg på oversikten i alle tilfelle).
      *
-     * Case: To opne vindauge med oversikten. Fane 1 er den du står på, fane 2 har tidlegare opna brukar med ctrl+klikk
+     * Case: To opne faner med oversikten. Fane 1 er den du står på, fane 2 har tidlegare opna brukar med ctrl+klikk.
+     * (For å teste: opne fane 2, opne ein person i ny fane, opne ny fane på oversikten som blir fane 1. Bruk ein anna person til å teste med frå fane 1 og resett begge faner mellom kvart steg.)
      *   1) Du navigerer direkte til person i den eine (frå fane 1). -> Fane navigerer til personen. Fane 2 forblir på oversikten, men får melding om endring av bruker i kontekst.
      *   2) Du opnar ein person i ny fane (frå fane 1). -> Fane 1 forblir på oversikten. Fane 2 forblir på oversikten, men får melding om endring av bruker i kontekst.
      *   3) Du søkar på ein person i personsøket (frå fane 1). -> Fane 1 navigerer til personen. Fane 2 forblir på oversikten, men får melding om endring av bruker i kontekst.
@@ -73,6 +74,8 @@ const onFnrChangedMedFeatureToggle = fnr => {
      *   - Skriv inn personnummer på nytt, prøvar å søke igjen. Skjer framleis ingenting.
      * Dette er eit edge-case vi visste om då vi valde fiksen. Vi trur ikkje det vil skje ofte, fiksen i sum er betre enn ingenting.
      *
+     *
+     * 2024-09-27, Ingrid
      * */
     const fnrForSidenavigeringMidlertidigFiks = store.getState().fnrForSidenavigeringMidlertidigFiks.fnr;
 
@@ -80,7 +83,6 @@ const onFnrChangedMedFeatureToggle = fnr => {
         if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
             window.location.href = getVeilarbpersonflateBasePath();
         }
-        return;
     }
 };
 

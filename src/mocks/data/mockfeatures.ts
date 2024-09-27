@@ -21,5 +21,5 @@ export const mockFeatureToggles = {
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: true,
     [HUSKELAPP]: true,
     [VIS_STATUSFILTER_TILTAKSHENDELSE]: true,
-    [MIDLERTIDIG_FIKS_FNR_I_KONTEKST]: false
+    [MIDLERTIDIG_FIKS_FNR_I_KONTEKST]: true
 };

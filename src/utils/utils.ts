@@ -1,10 +1,10 @@
+import {RefObject} from 'react';
+import {Dispatch} from 'redux';
+import moment from 'moment/moment';
 import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
-import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
-import {RefObject} from 'react';
 import {settBrukerIKontekst} from '../middleware/api';
-import {Dispatch} from 'redux';
 import {FnrForMidlertidigFiksSidenavigeringActionType} from '../ducks/fnr-for-sidenavigering-midlertidig-fiks';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {

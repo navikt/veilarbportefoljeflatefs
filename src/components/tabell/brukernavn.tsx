@@ -1,9 +1,9 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
 import {BrukerModell} from '../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
-import {useDispatch} from 'react-redux';
 
 interface BrukerNavnProps {
     className?: string;

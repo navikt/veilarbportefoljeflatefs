@@ -1,11 +1,11 @@
 import * as React from 'react';
+import {useDispatch} from 'react-redux';
+import {BodyShort} from '@navikt/ds-react';
 import {BrukerModell} from '../../model-interfaces';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {BodyShort} from '@navikt/ds-react';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
-import {useDispatch} from 'react-redux';
 
 interface SisteEndringKategoriProps {
     className?: string;
