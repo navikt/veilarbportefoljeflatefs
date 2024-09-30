@@ -9,7 +9,6 @@ import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 import {useFeatureSelector} from './hooks/redux/use-feature-selector';
 import {MIDLERTIDIG_FIKS_FNR_I_KONTEKST} from './konstanter';
-import {store} from './application';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -77,10 +76,11 @@ const onFnrChangedMedFeatureToggle = fnr => {
      *
      * 2024-09-27, Ingrid
      * */
-    const fnrForSidenavigeringMidlertidigFiks = store.getState().fnrForSidenavigeringMidlertidigFiks.fnr;
+    // const fnrForSidenavigeringMidlertidigFiks = store.getState().fnrForSidenavigeringMidlertidigFiks.fnr;
+    const fnrLocalStorage = localStorage.getItem('fiks_av_sidenavigering');
 
     if (fnr) {
-        if (fnr !== fnrForSidenavigeringMidlertidigFiks) {
+        if (fnr !== fnrLocalStorage) {
             window.location.href = getVeilarbpersonflateBasePath();
         }
     }
