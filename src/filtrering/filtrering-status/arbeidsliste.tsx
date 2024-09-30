@@ -48,7 +48,7 @@ function FilterStatusMinArbeidsliste({
                         rel="noopener"
                         inlineText
                     >
-                        Gamle arbeidslister blir slettet 1. oktober
+                        Gamle arbeidslister blir slettet 25. oktober
                         <ExternalLinkIcon title="Ekstern lenke" />
                     </Link>
                 </Alert>
