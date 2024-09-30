@@ -1226,6 +1226,12 @@ GRID
     background-color: var(--a-bg-default);
 }
 
+.veilarbportefoljeflatefs .dekorator .navds-button--secondary {
+    /* Unngår at søk-knappen i dekoratøren (og andre knappar i dekoratøren) får kvit bakgrunn.
+     * (I designsystemet er dei gjennomsiktige.) */
+    background-color: initial;
+}
+
 .veilarbportefoljeflatefs .lenke--frittstaende {
     border: 0;
     padding: 0;
