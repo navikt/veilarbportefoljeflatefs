@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {BrukerModell} from '../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
@@ -27,25 +27,17 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+    const lenke = getVeilarbpersonflateUrl(null, enhetId);
 
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(null, enhetId),
-            dispatchForSidenavigeringMidlertidigFiks
-        );
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenke, dispatchForSidenavigeringMidlertidigFiks);
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(null, enhetId),
-            dispatchForSidenavigeringMidlertidigFiks,
-            true
-        );
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenke, dispatchForSidenavigeringMidlertidigFiks, true);
 
     return (
         <div className={className}>
@@ -55,10 +47,9 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre knapp-uten-padding"
                     knappTekst={navn}
+                    tooltipTekst={lenke}
                 />
             )}
         </div>
     );
 };
-
-export default BrukerNavn;

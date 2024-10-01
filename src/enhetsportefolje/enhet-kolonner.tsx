@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import BrukerNavn from '../components/tabell/brukernavn';
+import {BrukerNavn} from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {

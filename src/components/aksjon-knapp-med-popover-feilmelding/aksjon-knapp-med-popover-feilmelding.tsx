@@ -1,23 +1,25 @@
 import React, {useRef, useState} from 'react';
 import {KnappOgPopover} from '../knapp-og-popover';
 import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {BodyShort, Button, Tooltip} from '@navikt/ds-react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import {vedKlikkUtenfor} from '../../utils/utils';
 import './aksjon-knapp-med-popover-feilmelding.css';
 
-type AksjonKnappMedPopoverFeilmeldingProps = {
+interface AksjonKnappMedPopoverFeilmeldingProps {
     klikkAksjon: (...args) => Promise<void>;
     ctrlklikkAksjon?: (...args) => Promise<void>;
     knappStil?: string;
     knappTekst: string;
-};
+    tooltipTekst?: string;
+}
 
 export const AksjonKnappMedPopoverFeilmelding = ({
     klikkAksjon,
     ctrlklikkAksjon,
     knappTekst,
-    knappStil
+    knappStil,
+    tooltipTekst
 }: AksjonKnappMedPopoverFeilmeldingProps) => {
     const [lasterAksjon, setLasterAksjon] = useState(false);
     const [harFeilAksjon, setHarFeilAksjon] = useState(false);
@@ -59,16 +61,32 @@ export const AksjonKnappMedPopoverFeilmelding = ({
 
     return (
         <div>
-            <Button
-                aria-label={knappTekst}
-                className={knappStil}
-                loading={lasterAksjon}
-                onClick={handterKlikkAksjon}
-                size="xsmall"
-                variant="tertiary"
-            >
-                <BodyShort size="small">{knappTekst}</BodyShort>
-            </Button>
+            {tooltipTekst && (
+                <Tooltip content={tooltipTekst}>
+                    <Button
+                        aria-label={knappTekst}
+                        className={knappStil}
+                        loading={lasterAksjon}
+                        onClick={handterKlikkAksjon}
+                        size="xsmall"
+                        variant="tertiary"
+                    >
+                        <BodyShort size="small">{knappTekst}</BodyShort>
+                    </Button>
+                </Tooltip>
+            )}
+            {!tooltipTekst && (
+                <Button
+                    aria-label={knappTekst}
+                    className={knappStil}
+                    loading={lasterAksjon}
+                    onClick={handterKlikkAksjon}
+                    size="xsmall"
+                    variant="tertiary"
+                >
+                    <BodyShort size="small">{knappTekst}</BodyShort>
+                </Button>
+            )}
             {harFeilAksjon && (
                 <KnappOgPopover
                     ikon={<XMarkOctagonIcon />}
