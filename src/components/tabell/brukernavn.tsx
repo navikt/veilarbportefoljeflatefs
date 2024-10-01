@@ -47,6 +47,7 @@ export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                     ctrlklikkAksjon={handterKlikkNyFane}
                     knappStil="juster-tekst-venstre knapp-uten-padding"
                     knappTekst={navn}
+                    tooltipTekst={lenke}
                 />
             )}
         </div>

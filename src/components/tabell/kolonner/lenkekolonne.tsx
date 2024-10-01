@@ -43,6 +43,7 @@ export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, cla
                 ctrlklikkAksjon={handterKlikkNyFane}
                 knappStil="juster-tekst-venstre knapp-uten-padding"
                 knappTekst={!!lenketekst ? lenketekst : lenke.substring(0, 20) + '...'}
+                tooltipTekst={fullstendigLenke}
             />
         </div>
     );
