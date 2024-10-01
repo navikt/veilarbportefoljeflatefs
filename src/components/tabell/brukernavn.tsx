@@ -29,23 +29,15 @@ const settSammenNavn = (bruker: BrukerModell) => {
 
 const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+    const lenke = getVeilarbpersonflateUrl(null, enhetId);
 
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(null, enhetId),
-            dispatchForSidenavigeringMidlertidigFiks
-        );
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenke, dispatchForSidenavigeringMidlertidigFiks);
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(
-            bruker.fnr,
-            getVeilarbpersonflateUrl(null, enhetId),
-            dispatchForSidenavigeringMidlertidigFiks,
-            true
-        );
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenke, dispatchForSidenavigeringMidlertidigFiks, true);
 
     return (
         <div className={className}>

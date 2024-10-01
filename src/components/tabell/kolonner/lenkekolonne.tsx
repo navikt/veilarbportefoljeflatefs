@@ -15,6 +15,7 @@ interface LenkeKolonneProps {
 
 export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, className}: LenkeKolonneProps) => {
     const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
+    const fullstendigLenke = getVeilarbpersonflateUrl(lenke, enhetId);
 
     if (!skalVises) {
         return null;
@@ -23,14 +24,14 @@ export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, cla
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
-            getVeilarbpersonflateUrl(lenke, enhetId),
+            fullstendigLenke,
             dispatchForSidenavigeringMidlertidigFiks
         );
 
     const handterKlikkNyFane = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
-            getVeilarbpersonflateUrl(lenke, enhetId),
+            fullstendigLenke,
             dispatchForSidenavigeringMidlertidigFiks,
             true
         );
