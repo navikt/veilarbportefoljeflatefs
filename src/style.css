@@ -1210,6 +1210,16 @@ GRID
     font-size: 0.875rem !important;
 }
 
+/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
+.veilarbportefoljeflatefs .dekorator .navds-body-short {
+    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-body-short" */
+}
+
+/* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
+.veilarbportefoljeflatefs .dekorator .navds-label {
+    font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-label" */
+}
+
 @media (max-width: 1200px) {
     .veilarbportefoljeflatefs .oversikt-sideinnhold .oversikt__container {
         grid-column-start: 1;
