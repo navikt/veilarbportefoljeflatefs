@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {BrukerModell} from '../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
@@ -27,7 +27,7 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
     const lenke = getVeilarbpersonflateUrl(null, enhetId);
 
@@ -52,5 +52,3 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
         </div>
     );
 };
-
-export default BrukerNavn;
