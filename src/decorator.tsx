@@ -31,6 +31,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
                 window.location.href = getVeilarbpersonflateBasePath();
             }
         },
+        fnrSyncMode: 'writeOnly',
         showSearchArea: true,
         enhet: enhet ?? undefined,
         showEnheter: true,
