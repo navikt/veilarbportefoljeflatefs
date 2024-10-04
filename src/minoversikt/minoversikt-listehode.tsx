@@ -557,7 +557,7 @@ function MinOversiktListeHode({
                     tekst="Hendelse på tiltak"
                     title="Lenke til hendelsen"
                     headerId="tiltakshendelse-lenke"
-                    className="col col-xs-2"
+                    className="col col-xs-3"
                 />
                 <SorteringHeader
                     skalVises={

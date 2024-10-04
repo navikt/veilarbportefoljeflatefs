@@ -275,7 +275,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 }
             />
             <LenkeKolonne
-                className="col col-xs-2"
+                className="col col-xs-3 col-break-word"
                 bruker={bruker}
                 lenke={bruker.tiltakshendelse?.lenke ?? ''}
                 lenketekst={bruker.tiltakshendelse?.tekst ?? ''}

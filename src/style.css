@@ -795,6 +795,10 @@ GRID
     clear: both;
 }
 
+.col-break-word {
+    word-break: break-word; /* Knekk ord i to om dei elles ville gjeve overflow.*/
+}
+
 .col-xs-2,
 .col-xs-2-5,
 .col-xs-3 {
