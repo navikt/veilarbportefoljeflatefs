@@ -25,7 +25,6 @@ function getDecoratorEnv(): Environment {
 function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
     return {
         appName: 'Arbeidsrettet oppfølging',
-        fnr: undefined,
         onFnrChanged: value => {
             if (value) {
                 window.location.href = getVeilarbpersonflateBasePath();
@@ -107,7 +106,13 @@ export function Decorator() {
     const config = getConfig(enhetId, velgEnhet);
 
     if (erMidlertidigFiksFnrIKontekstFeatureTogglePa) {
-        return <InternflateDecorator {...config} onFnrChanged={fnr => onFnrChangedMedFeatureToggle(fnr)} />;
+        return (
+            <InternflateDecorator
+                {...config}
+                onFnrChanged={fnr => onFnrChangedMedFeatureToggle(fnr)}
+                fnrSyncMode={undefined} // Slik at vi kan skru av/på permanentfiks med feature-toggle
+            />
+        );
     }
     return <InternflateDecorator {...config} />;
 }
