@@ -1,11 +1,9 @@
 import {RefObject} from 'react';
-import {Dispatch} from 'redux';
 import moment from 'moment/moment';
 import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
-import {FnrForMidlertidigFiksSidenavigeringActionType} from '../ducks/fnr-for-sidenavigering-midlertidig-fiks';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -300,14 +298,7 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     return `${formatertDato} (Barn 1 år)`;
 };
 
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (
-    fnr: string,
-    lenke: string,
-    dispatch: Dispatch,
-    apneNyFane?: boolean
-) => {
-    dispatch({type: FnrForMidlertidigFiksSidenavigeringActionType.SETT_FNR_MIDLERTIDIG_FIKS_SIDENAVIGERING, fnr: fnr});
-
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) => {
     return settBrukerIKontekst(fnr).then(() => {
         if (apneNyFane) {
             window.open(lenke, '_blank', 'noopener,noreferrer');
