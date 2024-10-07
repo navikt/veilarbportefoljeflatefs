@@ -9,8 +9,7 @@ import {
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     HUSKELAPP,
-    VIS_STATUSFILTER_TILTAKSHENDELSE,
-    MIDLERTIDIG_FIKS_FNR_I_KONTEKST
+    VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -27,8 +26,7 @@ const initalState: FeaturesState = {
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: false,
     [HUSKELAPP]: false,
-    [VIS_STATUSFILTER_TILTAKSHENDELSE]: false,
-    [MIDLERTIDIG_FIKS_FNR_I_KONTEKST]: false
+    [VIS_STATUSFILTER_TILTAKSHENDELSE]: false
 };
 
 // Reducer

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useDispatch} from 'react-redux';
 import {BodyShort} from '@navikt/ds-react';
 import {BrukerModell} from '../../model-interfaces';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
@@ -15,13 +14,10 @@ interface SisteEndringKategoriProps {
 }
 
 function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
-    const dispatchForSidenavigeringMidlertidigFiks = useDispatch();
-
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
-            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId),
-            dispatchForSidenavigeringMidlertidigFiks
+            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
         );
 
     const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';

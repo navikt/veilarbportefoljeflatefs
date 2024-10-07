@@ -17,7 +17,6 @@ export const VIS_AAP_VURDERINGSFRISTKOLONNER = 'veilarbportefoljeflatefs.vis_kol
 export const FILTER_FOR_PERSONER_MED_BARN_UNDER_18 = 'veilarbportefoljeflatefs.filter_for_personer_med_barn_under_18';
 export const HUSKELAPP = 'veilarbportefoljeflatefs.huskelapp';
 export const VIS_STATUSFILTER_TILTAKSHENDELSE = 'veilarbportefoljeflatefs.vis_statusfilter_tiltakshendelse';
-export const MIDLERTIDIG_FIKS_FNR_I_KONTEKST = 'veilarbportefoljeflatefs.midlertidig-fiks-fnr-i-kontekst';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -28,6 +27,5 @@ export const PORTEFOLJE_FEATURES = [
     VIS_AAP_VURDERINGSFRISTKOLONNER,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     HUSKELAPP,
-    VIS_STATUSFILTER_TILTAKSHENDELSE,
-    MIDLERTIDIG_FIKS_FNR_I_KONTEKST
+    VIS_STATUSFILTER_TILTAKSHENDELSE
 ];

@@ -38,10 +38,6 @@ import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall-e
 import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 import huskelappReducer from './ducks/huskelapp';
 import fargekategoriReducer from './ducks/fargekategori';
-import {
-    fnrForSidenavigeringMidlertidigFiksReducer,
-    FnrForMidlertidigFiksSidenavigeringState
-} from './ducks/fnr-for-sidenavigering-midlertidig-fiks';
 
 /**
  * Hjelpefunksjon for å conditionally kjøre reducere på en action
@@ -108,7 +104,6 @@ export interface AppState {
     brukerfeilStatus: BrukerfeilState;
     geografiskBosted: GeografiskBostedListState;
     brukerIKontekst: BrukerIKontekstState;
-    fnrForSidenavigeringMidlertidigFiks: FnrForMidlertidigFiksSidenavigeringState;
 }
 
 export default combineReducers<AppState>({
@@ -180,6 +175,5 @@ export default combineReducers<AppState>({
     tolkbehovSpraakList: tolkebehovListReducer,
     sesjonStatus: informasjonsmeldingReducer,
     brukerfeilStatus: brukerfeilReducer,
-    brukerIKontekst: brukerIKontekstReducer,
-    fnrForSidenavigeringMidlertidigFiks: fnrForSidenavigeringMidlertidigFiksReducer
+    brukerIKontekst: brukerIKontekstReducer
 });
