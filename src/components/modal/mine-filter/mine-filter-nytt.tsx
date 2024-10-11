@@ -67,6 +67,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
                     error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="lagre-nytt-filter_modal_navn-input"
+                    size="small"
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Button size="small" type="submit" data-testid="lagre-nytt-filter_modal_lagre-knapp">
