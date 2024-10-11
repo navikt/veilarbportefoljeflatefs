@@ -1234,13 +1234,15 @@ GRID
     }
 }
 
-.veilarbportefoljeflatefs .navds-button--secondary {
+.veilarbportefoljeflatefs .navds-button--secondary,
+.veilarbportefoljeflatefs .navds-button--secondary-neutral {
     /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: var(--a-bg-default);
 }
 
-.veilarbportefoljeflatefs .dekorator .navds-button--secondary {
+.veilarbportefoljeflatefs .dekorator .navds-button--secondary,
+.veilarbportefoljeflatefs .dekorator .navds-button--secondary-neutral {
     /* Unngår at søk-knappen i dekoratøren (og andre knappar i dekoratøren) får kvit bakgrunn.
      * (I designsystemet er dei gjennomsiktige.) */
     background-color: initial;
