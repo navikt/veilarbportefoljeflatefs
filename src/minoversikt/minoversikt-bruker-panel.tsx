@@ -12,7 +12,7 @@ import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
+import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
@@ -52,6 +52,7 @@ function MinoversiktBrukerPanel({
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
@@ -144,7 +145,10 @@ function MinoversiktBrukerPanel({
                         )}
                     </div>
                     <ArbeidslisteButton
-                        skalVises={arbeidslisteAktiv || (erHuskelappFeatureTogglePa && !!bruker.huskelapp)}
+                        skalVises={
+                            (arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises) ||
+                            (erHuskelappFeatureTogglePa && !!bruker.huskelapp)
+                        }
                         apen={apen}
                         onClick={e => {
                             handleArbeidslisteButtonClick(e);
