@@ -168,7 +168,7 @@ function MinoversiktBrukerPanel({
                     <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />
                 ) : (
                     <ArbeidslistePanel
-                        skalVises={arbeidslisteAktiv}
+                        skalVises={arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises}
                         bruker={bruker}
                         innloggetVeilederIdent={innloggetVeileder?.ident}
                         settMarkert={() => {
