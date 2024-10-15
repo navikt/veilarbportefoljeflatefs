@@ -120,11 +120,13 @@ function MinoversiktBrukerPanel({
                         {bruker.fnr ? (
                             <FargekategoriTabellradKnapp bruker={bruker} />
                         ) : (
+                            // TODO: Treng vi dette? I kva tilfelle har vi ikkje fnr for brukar?
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
                         {bruker.fnr ? (
                             <HuskelappIkonInngang bruker={bruker} />
                         ) : (
+                            // TODO: Treng vi dette? I kva tilfelle har vi ikkje fnr for brukar?
                             <TomtHuskelappEllerFargekategoriFelt />
                         )}
                     </div>
