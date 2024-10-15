@@ -117,18 +117,20 @@ function MinoversiktBrukerPanel({
                 )}
                 {erHuskelappFeatureTogglePa && (
                     <div className="brukerliste__minoversikt-ikonknapper">
-                        {bruker.fnr ? (
-                            <FargekategoriTabellradKnapp bruker={bruker} />
-                        ) : (
-                            // TODO: Treng vi dette? I kva tilfelle har vi ikkje fnr for brukar?
-                            <TomtHuskelappEllerFargekategoriFelt />
-                        )}
-                        {bruker.fnr ? (
-                            <HuskelappIkonInngang bruker={bruker} />
-                        ) : (
-                            // TODO: Treng vi dette? I kva tilfelle har vi ikkje fnr for brukar?
-                            <TomtHuskelappEllerFargekategoriFelt />
-                        )}
+                        {
+                            // TODO: Treng vi denne sjekken? I kva tilfelle manglar vi fnr for brukar (og kan dei tilfella heller løysast med loading-state)? Ingrid, 2024-10-15
+                            bruker.fnr ? (
+                                <>
+                                    <FargekategoriTabellradKnapp bruker={bruker} />
+                                    <HuskelappIkonInngang bruker={bruker} />
+                                </>
+                            ) : (
+                                <>
+                                    <TomtHuskelappEllerFargekategoriFelt />
+                                    <TomtHuskelappEllerFargekategoriFelt />
+                                </>
+                            )
+                        }
                     </div>
                 )}
                 <MinOversiktKolonner
