@@ -54,6 +54,7 @@ import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
+import {trackAmplitude} from '../amplitude/amplitude';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -300,6 +301,15 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                }
+                onClick={() =>
+                    trackAmplitude({
+                        name: 'navigere',
+                        data: {
+                            lenketekst: bruker.tiltakshendelse?.tekst ?? 'tiltakshendelse',
+                            effekt: 'Går til tiltakshendelse fra min oversikt'
+                        }
+                    })
                 }
             />
             <DatoKolonne

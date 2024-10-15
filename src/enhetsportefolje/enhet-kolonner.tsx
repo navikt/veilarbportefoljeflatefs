@@ -54,6 +54,7 @@ import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {trackAmplitude} from '../amplitude/amplitude';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -283,6 +284,15 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
+                }
+                onClick={() =>
+                    trackAmplitude({
+                        name: 'navigere',
+                        data: {
+                            lenketekst: bruker.tiltakshendelse?.tekst ?? 'tiltakshendelse',
+                            effekt: 'Går til tiltakshendelse fra enhetens oversikt'
+                        }
+                    })
                 }
             />
             <DatoKolonne

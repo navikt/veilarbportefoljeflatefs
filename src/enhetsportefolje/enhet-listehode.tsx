@@ -42,6 +42,7 @@ import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
 import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
 import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
+import {trackAmplitude} from '../amplitude/amplitude';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -451,7 +452,16 @@ function EnhetListehode({
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
+                    onClick={(sortering: string) => {
+                        trackAmplitude({
+                            name: 'knapp klikket',
+                            data: {
+                                knapptekst: 'Hendelse på tiltak',
+                                effekt: `Sorterer på hendelse på tiltak i ${sorteringsrekkefolge} rekkefølge`
+                            }
+                        });
+                        sorteringOnClick(sortering);
+                    }}
                     tekst="Hendelse på tiltak"
                     title="Lenke til hendelsen"
                     headerId="tiltakshendelse-lenke"
@@ -465,7 +475,16 @@ function EnhetListehode({
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
+                    onClick={(sortering: string) => {
+                        trackAmplitude({
+                            name: 'knapp klikket',
+                            data: {
+                                knapptekst: 'Dato for hendelse (tiltakshendelse)',
+                                effekt: `Sorterer på hendelse på dato for tiltakshendelse i ${sortering} rekkefølge`
+                            }
+                        });
+                        sorteringOnClick(sortering);
+                    }}
                     tekst="Dato for hendelse"
                     title="Dato da hendelsen ble opprettet"
                     headerId="tiltakshendelse-dato-opprettet"

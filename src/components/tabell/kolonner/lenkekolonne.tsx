@@ -10,18 +10,31 @@ interface LenkeKolonneProps {
     enhetId: string;
     skalVises: boolean;
     className?: string;
+    onClick?: () => void;
 }
 
-export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, className}: LenkeKolonneProps) => {
+export const LenkeKolonne = ({
+    bruker,
+    lenke,
+    lenketekst,
+    enhetId,
+    skalVises,
+    onClick,
+    className
+}: LenkeKolonneProps) => {
     if (!skalVises) {
         return null;
     }
 
-    const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId));
+    const handterKlikk = () => {
+        onClick?.();
+        return oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId));
+    };
 
-    const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId), true);
+    const handterKlikkNyFane = () => {
+        onClick?.();
+        return oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId), true);
+    };
 
     return (
         <div className={className}>
