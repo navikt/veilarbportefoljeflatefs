@@ -9,7 +9,7 @@ export const HuskelappInfoAlert = () => (
             rel="noopener"
             inlineText
         >
-            Gamle arbeidslister blir slettet 1. oktober
+            Gamle arbeidslister blir slettet 25. oktober
         </Link>{' '}
         (åpnes i ny fane)
     </Alert>

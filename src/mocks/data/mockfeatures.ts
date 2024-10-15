@@ -10,7 +10,7 @@ import {
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
 
-const toggles = {
+export const mockFeatureToggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
     [DARKMODE]: true,
@@ -21,5 +21,3 @@ const toggles = {
     [HUSKELAPP]: true,
     [VIS_STATUSFILTER_TILTAKSHENDELSE]: true
 };
-
-export default toggles;

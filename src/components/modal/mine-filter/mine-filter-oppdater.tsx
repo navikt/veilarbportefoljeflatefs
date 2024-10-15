@@ -83,6 +83,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="redigere-filter-navn-input"
+                    size="small"
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Button size="small" type="submit" data-testid="rediger-filter_modal_lagre-knapp">

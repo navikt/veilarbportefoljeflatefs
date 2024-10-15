@@ -167,7 +167,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -191,7 +191,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <DatoKolonne
@@ -292,7 +292,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
             <LenkeKolonne
-                className="col col-xs-2"
+                className="col col-xs-3 col-break-word"
                 bruker={bruker}
                 lenke={bruker.tiltakshendelse?.lenke ?? ''}
                 lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
@@ -421,7 +421,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
             <DatoKolonne
