@@ -19,6 +19,8 @@ import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from './slettEksisterendeArbeidsliste';
 import './rediger-huskelapp.css';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../../konstanter';
 
 interface Props {
     isModalOpen: boolean;
@@ -32,6 +34,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const erSkjulArbeidslistefunksjonalitetTogglePa = useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const arbeidslisteErTom = !arbeidsliste?.overskrift && !arbeidsliste?.kommentar && !arbeidsliste?.frist;
     const harArbeidsliste = !!arbeidsliste?.arbeidslisteAktiv && !arbeidslisteErTom;
@@ -71,7 +74,15 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
             if (huskelapp?.huskelappId) {
                 await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
             } else {
-                await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, arbeidslisteSomSkalSlettes);
+                await lagreHuskelapp(
+                    dispatch,
+                    values,
+                    bruker,
+                    enhetId!,
+                    onModalClose,
+                    arbeidslisteSomSkalSlettes,
+                    erSkjulArbeidslistefunksjonalitetTogglePa
+                );
             }
         } catch (error) {
             dispatch(visServerfeilModal());
@@ -140,7 +151,12 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker, ar
                         }}
                         bekreftknapp={{
                             tekst: 'Ja, slett arbeidslista',
-                            onClick: () => slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch),
+                            onClick: () =>
+                                slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(
+                                    bruker,
+                                    dispatch,
+                                    erSkjulArbeidslistefunksjonalitetTogglePa
+                                ),
                             onClickThen: () => onModalClose()
                         }}
                         feilmelding="Noe gikk galt ved sletting av arbeidslista."

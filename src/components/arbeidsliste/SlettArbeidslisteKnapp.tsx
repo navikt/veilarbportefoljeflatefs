@@ -8,6 +8,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../reducer';
 import {AnyAction} from 'redux';
 import {slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux} from '../../minoversikt/huskelapp/redigering/slettEksisterendeArbeidsliste';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../konstanter';
 
 interface SlettArbeidslisteKnappProps {
     bruker: BrukerModell;
@@ -16,9 +18,14 @@ interface SlettArbeidslisteKnappProps {
 
 export const SlettArbeidslisteKnapp = ({bruker, lukkModal}: SlettArbeidslisteKnappProps) => {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const erSkjulArbeidslistefunksjonalitetTogglePa = useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const slettArbeidsliste = () => {
-        return slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
+        return slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(
+            bruker,
+            dispatch,
+            erSkjulArbeidslistefunksjonalitetTogglePa
+        );
     };
 
     return (
