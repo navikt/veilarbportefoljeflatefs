@@ -19,7 +19,9 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
         if (bruker.huskelapp) {
             return 'Endre huskelapp';
         }
-        return arbeidslisteAktiv ? 'Bytt fra arbeidsliste til huskelapp' : 'Opprett huskelapp';
+        return arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises
+            ? 'Bytt fra arbeidsliste til huskelapp'
+            : 'Opprett huskelapp';
     };
 
     return (
@@ -36,7 +38,11 @@ export const HuskelappIkonInngang = ({bruker}: {bruker: BrukerModell}) => {
                     onModalClose={() => setSkalViseHuskelappModal(false)}
                     isModalOpen={skalViseHuskelappModal}
                     huskelapp={bruker.huskelapp as HuskelappModell}
-                    arbeidsliste={bruker.arbeidsliste.arbeidslisteAktiv ? bruker.arbeidsliste : null}
+                    arbeidsliste={
+                        bruker.arbeidsliste.arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises
+                            ? bruker.arbeidsliste
+                            : null
+                    }
                     bruker={bruker}
                 />
             )}
