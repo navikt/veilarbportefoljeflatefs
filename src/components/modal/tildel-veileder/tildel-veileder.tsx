@@ -40,9 +40,9 @@ interface TildelVeilederProps {
 function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
+    const [fnrIAdvarselslista, setFnrIAdvarselslista] = useState<Fnr[]>([]);
     const [tilordningerAlle, setTilordningerAlle] = useState<Tilordning[]>([]);
     const [tilordningerBrukereBlirIkkeSlettet, setTilordningerBrukereBlirIkkeSlettet] = useState<Tilordning[]>([]);
-    const [fnrIAdvarselslista, setFnrIAdvarselslista] = useState<Fnr[]>([]);
 
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -80,7 +80,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             const brukereVilIkkeBliSlettet = valgteBrukere.filter(
                 bruker =>
                     bruker.veilederId === ident ||
-                    (!bruker.arbeidsliste.arbeidslisteAktiv &&
+                    ((!bruker.arbeidsliste.arbeidslisteAktiv ||
+                        bruker.arbeidsliste.navkontorForArbeidsliste === enhet) &&
                         (!bruker.huskelapp || bruker.huskelapp?.enhetId === enhet) &&
                         (!bruker.fargekategori || bruker.fargekategoriEnhetId === enhet))
             );
@@ -97,9 +98,13 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(
                 bruker =>
+                    // har arbeidsliste å slette
                     bruker.arbeidsliste.arbeidslisteAktiv &&
+                    // endring av veileder eller ingen veileder frå før
                     (bruker.veilederId !== ident || bruker.veilederId === null) &&
+                    // har kontor for arbeidslista
                     bruker.arbeidsliste.navkontorForArbeidsliste !== null &&
+                    // endring i kontor frå det i arbeidslista
                     bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
             );
 
