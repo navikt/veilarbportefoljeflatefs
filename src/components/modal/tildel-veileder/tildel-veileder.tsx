@@ -26,6 +26,12 @@ const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
         return arrayUtenDuplikater;
     }, []);
 
+interface Tilordning {
+    fraVeilederId: string | undefined;
+    tilVeilederId: string;
+    brukerFnr: string;
+}
+
 interface TildelVeilederProps {
     oversiktType?: OversiktType;
     closeInput: () => void;
@@ -34,19 +40,16 @@ interface TildelVeilederProps {
 function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
-    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
-    const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const [tilordningerAlle, setTilordningerAlle] = useState<
-        {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
-    >([]);
-    const [tilordningerBrukereBlirIkkeSlettet, setTilordningerBrukereBlirIkkeSlettet] = useState<
-        {fraVeilederId: string | undefined; tilVeilederId: string; brukerFnr: string}[]
-    >([]);
+    const [tilordningerAlle, setTilordningerAlle] = useState<Tilordning[]>([]);
+    const [tilordningerBrukereBlirIkkeSlettet, setTilordningerBrukereBlirIkkeSlettet] = useState<Tilordning[]>([]);
     const [fnrIAdvarselslista, setFnrIAdvarselslista] = useState<Fnr[]>([]);
+
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
     const enhet = useEnhetSelector();
+    const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
