@@ -79,9 +79,10 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             const brukereVilIkkeBliSlettet = valgteBrukere.filter(
                 bruker =>
-                    (!bruker.arbeidsliste.arbeidslisteAktiv || bruker.veilederId === ident) &&
-                    (!bruker.huskelapp || bruker.huskelapp?.enhetId === enhet || bruker.veilederId === ident) &&
-                    (!bruker.fargekategori || bruker.fargekategoriEnhetId === enhet || bruker.veilederId === ident)
+                    bruker.veilederId === ident ||
+                    (!bruker.arbeidsliste.arbeidslisteAktiv &&
+                        (!bruker.huskelapp || bruker.huskelapp?.enhetId === enhet) &&
+                        (!bruker.fargekategori || bruker.fargekategoriEnhetId === enhet))
             );
 
             const tilordningerBrukereBlirIkkeSlettet = brukereVilIkkeBliSlettet.map(bruker => ({
