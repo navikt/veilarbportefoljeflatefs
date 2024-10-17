@@ -48,7 +48,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const [fnrIAdvarselslista, setFnrIAdvarselslista] = useState<Fnr[]>([]);
     const [tilordningerAlle, setTilordningerAlle] = useState<Tilordning[]>([]);
-    const [tilordningerBrukereBlirIkkeSlettet, setTilordningerBrukereBlirIkkeSlettet] = useState<Tilordning[]>([]);
+    const [tilordningerBrukereUtenTingSomVilBliSlettet, setTilordningerBrukereUtenTingSomVilBliSlettet] = useState<
+        Tilordning[]
+    >([]);
 
     const dispatch = useDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -83,7 +85,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 brukerFnr: bruker.fnr
             }));
 
-            const brukereVilIkkeBliSlettet = valgteBrukere.filter(bruker =>
+            const brukereUtenTingSomVilBliSlettet = valgteBrukere.filter(bruker =>
                 ingentingHosBrukerVilBliSlettet({
                     tilVeileder: ident,
                     fraVeileder: bruker.veilederId,
@@ -96,7 +98,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 })
             );
 
-            const tilordningerBrukereBlirIkkeSlettet = brukereVilIkkeBliSlettet.map(bruker => ({
+            const tilordningerBrukereUtenTingSomVilBliSlettet = brukereUtenTingSomVilBliSlettet.map(bruker => ({
                 fraVeilederId: bruker.veilederId,
                 tilVeilederId: ident,
                 brukerFnr: bruker.fnr
@@ -104,7 +106,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             setTilordningerAlle(alleTilordninger);
 
-            setTilordningerBrukereBlirIkkeSlettet(tilordningerBrukereBlirIkkeSlettet);
+            setTilordningerBrukereUtenTingSomVilBliSlettet(tilordningerBrukereUtenTingSomVilBliSlettet);
 
             const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
                 harArbeidslisteSomVilBliSlettetFilter({
@@ -190,7 +192,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             className="knapp-avbryt-tildeling"
                             size="medium"
                             onClick={() => {
-                                if (tilordningerBrukereBlirIkkeSlettet.length > 0) {
+                                if (tilordningerBrukereUtenTingSomVilBliSlettet.length > 0) {
                                     trackAmplitude(
                                         {
                                             name: 'knapp klikket',
@@ -201,7 +203,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                                         },
                                         {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
                                     );
-                                    doTildelTilVeileder(tilordningerBrukereBlirIkkeSlettet, ident);
+                                    doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
                                 }
                                 lukkFjernModal();
                             }}
