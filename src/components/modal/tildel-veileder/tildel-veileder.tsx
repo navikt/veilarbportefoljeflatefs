@@ -47,7 +47,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const [ident, setIdent] = useState<string | null>(null);
     const [visAdvarselOmSletting, setVisAdvarselOmSletting] = useState<boolean>(false);
     const [fnrIAdvarselslista, setFnrIAdvarselslista] = useState<Fnr[]>([]);
-    const [tilordningerAlle, setTilordningerAlle] = useState<Tilordning[]>([]);
+    const [tilordningerAlleBrukere, setTilordningerAlleBrukere] = useState<Tilordning[]>([]);
     const [tilordningerBrukereUtenTingSomVilBliSlettet, setTilordningerBrukereUtenTingSomVilBliSlettet] = useState<
         Tilordning[]
     >([]);
@@ -104,7 +104,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 brukerFnr: bruker.fnr
             }));
 
-            setTilordningerAlle(alleTilordninger);
+            setTilordningerAlleBrukere(alleTilordninger);
 
             setTilordningerBrukereUtenTingSomVilBliSlettet(tilordningerBrukereUtenTingSomVilBliSlettet);
 
@@ -160,6 +160,38 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         }
     };
 
+    function tildelVeiledereForBrukereDerIngentingBlirSlettet() {
+        if (tilordningerBrukereUtenTingSomVilBliSlettet.length > 0) {
+            trackAmplitude(
+                {
+                    name: 'knapp klikket',
+                    data: {
+                        knapptekst: 'Avbryt tildeling for de aktuelle brukerne',
+                        effekt: 'Avbryter tildeling'
+                    }
+                },
+                {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+            );
+            doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
+        }
+        lukkFjernModal();
+    }
+
+    const tildelVeilederForAlleValgteBrukere = () => () => {
+        trackAmplitude(
+            {
+                name: 'knapp klikket',
+                data: {
+                    knapptekst: 'Ja, tildel veilederen',
+                    effekt: 'Fortsetter tildeling'
+                }
+            },
+            {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+        );
+        doTildelTilVeileder(tilordningerAlleBrukere, ident);
+        lukkFjernModal();
+    };
+
     return (
         <>
             <Modal
@@ -189,22 +221,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
                             size="medium"
-                            onClick={() => {
-                                if (tilordningerBrukereUtenTingSomVilBliSlettet.length > 0) {
-                                    trackAmplitude(
-                                        {
-                                            name: 'knapp klikket',
-                                            data: {
-                                                knapptekst: 'Avbryt tildeling for de aktuelle brukerne',
-                                                effekt: 'Avbryter tildeling'
-                                            }
-                                        },
-                                        {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
-                                    );
-                                    doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
-                                }
-                                lukkFjernModal();
-                            }}
+                            onClick={tildelVeiledereForBrukereDerIngentingBlirSlettet}
                         >
                             Avbryt tildeling for nevnte bruker(e)
                         </Button>
@@ -212,20 +229,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             type={'submit'}
                             className="knapp"
                             size="medium"
-                            onClick={() => {
-                                trackAmplitude(
-                                    {
-                                        name: 'knapp klikket',
-                                        data: {
-                                            knapptekst: 'Ja, tildel veilederen',
-                                            effekt: 'Fortsetter tildeling'
-                                        }
-                                    },
-                                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
-                                );
-                                doTildelTilVeileder(tilordningerAlle, ident);
-                                lukkFjernModal();
-                            }}
+                            onClick={tildelVeilederForAlleValgteBrukere}
                         >
                             Ja, tildel veilederen
                         </Button>
