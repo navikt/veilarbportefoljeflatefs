@@ -14,6 +14,12 @@ import {trackAmplitude} from '../../../amplitude/amplitude';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {TildelVeilederRenderer} from './tildel-veileder-renderer';
 import '../../toolbar/toolbar.css';
+import {
+    harArbeidslisteSomVilBliSlettetFilter,
+    harFargekategoriSomVilBliSlettetFilter,
+    harHuskelappSomVilBliSlettetFilter,
+    ingentingHosBrukerVilBliSlettet
+} from './tildel-veileder-utils';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -77,13 +83,17 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 brukerFnr: bruker.fnr
             }));
 
-            const brukereVilIkkeBliSlettet = valgteBrukere.filter(
-                bruker =>
-                    bruker.veilederId === ident ||
-                    ((!bruker.arbeidsliste.arbeidslisteAktiv ||
-                        bruker.arbeidsliste.navkontorForArbeidsliste === enhet) &&
-                        (!bruker.huskelapp || bruker.huskelapp?.enhetId === enhet) &&
-                        (!bruker.fargekategori || bruker.fargekategoriEnhetId === enhet))
+            const brukereVilIkkeBliSlettet = valgteBrukere.filter(bruker =>
+                ingentingHosBrukerVilBliSlettet({
+                    tilVeileder: ident,
+                    fraVeileder: bruker.veilederId,
+                    tilEnhet: enhet,
+                    arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
+                    navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
+                    huskelapp: bruker.huskelapp,
+                    fargekategori: bruker.fargekategori,
+                    fargekategoriEnhetId: bruker.fargekategoriEnhetId
+                })
             );
 
             const tilordningerBrukereBlirIkkeSlettet = brukereVilIkkeBliSlettet.map(bruker => ({
@@ -96,32 +106,33 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             setTilordningerBrukereBlirIkkeSlettet(tilordningerBrukereBlirIkkeSlettet);
 
-            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(
-                bruker =>
-                    // har arbeidsliste å slette
-                    bruker.arbeidsliste.arbeidslisteAktiv &&
-                    // endring av veileder eller ingen veileder frå før
-                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
-                    // har kontor for arbeidslista
-                    bruker.arbeidsliste.navkontorForArbeidsliste !== null &&
-                    // endring i kontor frå det i arbeidslista
-                    bruker.arbeidsliste.navkontorForArbeidsliste !== enhet
+            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
+                harArbeidslisteSomVilBliSlettetFilter({
+                    tilVeileder: ident,
+                    fraVeileder: bruker.veilederId,
+                    tilEnhet: enhet,
+                    arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
+                    navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste
+                })
             );
 
-            const fnrBrukereHuskelappVilBliSlettet = valgteBrukere.filter(
-                bruker =>
-                    !!bruker.huskelapp &&
-                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
-                    bruker.huskelapp.enhetId !== null &&
-                    bruker.huskelapp.enhetId !== enhet
+            const fnrBrukereHuskelappVilBliSlettet = valgteBrukere.filter(bruker =>
+                harHuskelappSomVilBliSlettetFilter({
+                    tilVeileder: ident,
+                    fraVeileder: bruker.veilederId,
+                    tilEnhet: enhet,
+                    huskelapp: bruker.huskelapp
+                })
             );
 
-            const fnrBrukereKategoriVilBliSlettet = valgteBrukere.filter(
-                bruker =>
-                    bruker.fargekategori &&
-                    (bruker.veilederId !== ident || bruker.veilederId === null) &&
-                    bruker.fargekategoriEnhetId !== null &&
-                    bruker.fargekategoriEnhetId !== enhet
+            const fnrBrukereKategoriVilBliSlettet = valgteBrukere.filter(bruker =>
+                harFargekategoriSomVilBliSlettetFilter({
+                    tilVeileder: ident,
+                    fraVeileder: bruker.veilederId,
+                    tilEnhet: enhet,
+                    fargekategori: bruker.fargekategori,
+                    fargekategoriEnhetId: bruker.fargekategoriEnhetId
+                })
             );
 
             const fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet = [
