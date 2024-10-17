@@ -2,10 +2,6 @@ import queryString from 'query-string';
 import {basename} from '../history';
 import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
 
-export function getFraBrukerFraUrl(): string {
-    return queryString.parse(window.location.search).fraBruker as string;
-}
-
 export function getSideFromUrl() {
     return parseInt((queryString.parse(window.location.search).side as string) || '1', 10);
 }
@@ -37,6 +33,9 @@ export function getSorteringsRekkefolgeFromUrl() {
 }
 
 export function getVeilarbpersonflateBasePath() {
+    if (erDev() && getEnv() === Env.ansattDev) {
+        return 'https://veilarbpersonflate.ansatt.dev.nav.no';
+    }
     return erDev() || erMock()
         ? 'https://veilarbpersonflate.intern.dev.nav.no'
         : 'https://veilarbpersonflate.intern.nav.no';
