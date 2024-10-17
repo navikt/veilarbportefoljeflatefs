@@ -1,4 +1,4 @@
-import {BrukerModell, FargekategoriModell, HuskelappModell} from '../../../model-interfaces';
+import {FargekategoriModell, HuskelappModell} from '../../../model-interfaces';
 import {
     harArbeidslisteSomVilBliSlettetFilter,
     harFargekategoriSomVilBliSlettetFilter,
@@ -6,8 +6,9 @@ import {
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
 
+/** Minifisert utgåve av BrukerModell der vi berre har med felta som er relevant i testane */
 interface MiniBrukerModell {
-    veilederId?: string | undefined;
+    veilederId?: string;
     arbeidsliste: {
         arbeidslisteAktiv: boolean;
         navkontorForArbeidsliste: string | undefined;
@@ -17,19 +18,6 @@ interface MiniBrukerModell {
     fargekategoriEnhetId: string | null;
     fnr: string;
 }
-
-const brukereSomIkkeSkalSlettesFilter = (
-    bruker: MiniBrukerModell | BrukerModell,
-    ident: string,
-    enhet: string | null
-) => {
-    return (
-        bruker.veilederId === ident ||
-        ((!bruker.arbeidsliste.arbeidslisteAktiv || bruker.arbeidsliste.navkontorForArbeidsliste === enhet) &&
-            (!bruker.huskelapp || bruker.huskelapp?.enhetId === enhet) &&
-            (!bruker.fargekategori || bruker.fargekategoriEnhetId === enhet))
-    );
-};
 
 describe('Testar logikk for tildeling av veileder', () => {
     it('Sjekk om vi kan få mismatch mellom brukarar der arbeidslister vert sletta og der det ikkje blir sletta', () => {
@@ -172,7 +160,16 @@ describe('Testar logikk for tildeling av veileder', () => {
         ];
 
         const brukereDerIngentingSkalSlettast: MiniBrukerModell[] = brukere.filter(bruker =>
-            brukereSomIkkeSkalSlettesFilter(bruker, ident, enhet)
+            ingentingHosBrukerVilBliSlettet({
+                tilVeileder: ident,
+                fraVeileder: bruker.veilederId,
+                tilEnhet: enhet,
+                arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
+                navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
+                huskelapp: bruker.huskelapp,
+                fargekategori: bruker.fargekategori,
+                fargekategoriEnhetId: bruker.fargekategoriEnhetId
+            })
         );
         const brukereSomSkalSletteHuskelapp: MiniBrukerModell[] = brukere.filter(bruker =>
             harHuskelappSomVilBliSlettetFilter({
@@ -240,7 +237,16 @@ describe('Testar logikk for tildeling av veileder', () => {
         ];
 
         const brukereDerIngentingSkalSlettast: MiniBrukerModell[] = brukere.filter(bruker =>
-            brukereSomIkkeSkalSlettesFilter(bruker, ident, enhet)
+            ingentingHosBrukerVilBliSlettet({
+                tilVeileder: ident,
+                fraVeileder: bruker.veilederId,
+                tilEnhet: enhet,
+                arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
+                navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
+                huskelapp: bruker.huskelapp,
+                fargekategori: bruker.fargekategori,
+                fargekategoriEnhetId: bruker.fargekategoriEnhetId
+            })
         );
         const brukereSomSkalSletteHuskelapp: MiniBrukerModell[] = brukere.filter(bruker =>
             harFargekategoriSomVilBliSlettetFilter({

@@ -84,6 +84,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 tilVeilederId: ident,
                 brukerFnr: bruker.fnr
             }));
+            setTilordningerAlleBrukere(alleTilordninger);
 
             const brukereUtenTingSomVilBliSlettet = valgteBrukere.filter(bruker =>
                 ingentingHosBrukerVilBliSlettet({
@@ -103,9 +104,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 tilVeilederId: ident,
                 brukerFnr: bruker.fnr
             }));
-
-            setTilordningerAlleBrukere(alleTilordninger);
-
             setTilordningerBrukereUtenTingSomVilBliSlettet(tilordningerBrukereUtenTingSomVilBliSlettet);
 
             const brukereDerArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
@@ -137,15 +135,14 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 })
             );
 
-            const fnrBrukereMedTingSomVilBliSlettetVedTildeling = [
+            const brukereMedTingSomVilBliSlettetVedTildeling = [
                 ...brukereDerHuskelappVilBliSlettet,
                 ...brukereDerArbeidslisteVilBliSlettet,
                 ...brukereDerFargekategoriVilBliSlettet
             ];
+            setFnrIAdvarselslista(fjernduplikatOgMapTilFnrArray(brukereMedTingSomVilBliSlettetVedTildeling));
 
-            setFnrIAdvarselslista(fjernduplikatOgMapTilFnrArray(fnrBrukereMedTingSomVilBliSlettetVedTildeling));
-
-            if (fnrBrukereMedTingSomVilBliSlettetVedTildeling.length > 0) {
+            if (brukereMedTingSomVilBliSlettetVedTildeling.length > 0) {
                 trackAmplitude(
                     {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av arbeidsliste'}},
                     {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
