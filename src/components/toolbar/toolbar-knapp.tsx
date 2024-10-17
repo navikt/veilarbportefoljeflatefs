@@ -1,4 +1,4 @@
-import {default as React, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, useEventListener} from '@navikt/ds-react';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
@@ -69,20 +69,6 @@ export default function ToolbarKnapp({
         }
     };
 
-    const visChildren = () => {
-        if (tildelveileder) {
-            return (
-                <TildelVeileder
-                    closeInput={() => setButtonIsClicked(true)}
-                    skalVises={skalVises}
-                    oversiktType={oversiktType}
-                />
-            );
-        } else {
-            return <SokVeileder veileder={{}} onClick={() => setButtonIsClicked(true)} skalVises={skalVises} />;
-        }
-    };
-
     useEventListener('mousedown', handleClickOutside);
     useEventListener('keydown', escHandler);
 
@@ -94,10 +80,19 @@ export default function ToolbarKnapp({
         setButtonIsClicked(false);
         setInputIsOpen(false);
     }
+
     if (inputIsOpen) {
         return (
             <div className="toolbarknapp-input" ref={loggNode} onClick={klikk}>
-                {visChildren()}
+                {tildelveileder ? (
+                    <TildelVeileder
+                        closeInput={() => setButtonIsClicked(true)}
+                        skalVises={skalVises}
+                        oversiktType={oversiktType}
+                    />
+                ) : (
+                    <SokVeileder veileder={{}} onClick={() => setButtonIsClicked(true)} skalVises={skalVises} />
+                )}
             </div>
         );
     }
