@@ -26,7 +26,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const enhet = '1234';
         const ulikEnhet = '4321';
 
-        const brukerMedArbeidslisteSomSkalSlettast: MiniBrukerModell = {
+        const brukerMedArbeidslisteSomSkalSlettes: MiniBrukerModell = {
             fnr: '1',
             veilederId: ulikIdent, // eller null
             arbeidsliste: {
@@ -38,7 +38,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukerMedArbeidslisteSomIkkjeSkalSlettast: MiniBrukerModell = {
+        const brukerMedArbeidslisteSomIkkeSkalSlettes: MiniBrukerModell = {
             fnr: '2',
             veilederId: ulikIdent, // eller null
             arbeidsliste: {
@@ -50,7 +50,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukerUtanArbeidsliste: MiniBrukerModell = {
+        const brukerUtenArbeidsliste: MiniBrukerModell = {
             fnr: '3',
             veilederId: ulikIdent, // eller null
             arbeidsliste: {
@@ -63,23 +63,17 @@ describe('Testar logikk for tildeling av veileder', () => {
         };
 
         const brukere = [
-            brukerMedArbeidslisteSomSkalSlettast,
-            brukerMedArbeidslisteSomIkkjeSkalSlettast,
-            brukerUtanArbeidsliste
+            brukerMedArbeidslisteSomSkalSlettes,
+            brukerMedArbeidslisteSomIkkeSkalSlettes,
+            brukerUtenArbeidsliste
         ];
 
-        const brukereDerIngentingSkalSlettast: MiniBrukerModell[] = brukere.filter(bruker =>
-            ingentingHosBrukerVilBliSlettet({
-                tilVeileder: ident,
-                fraVeileder: bruker.veilederId,
-                tilEnhet: enhet,
-                arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
-                navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
-                huskelapp: bruker.huskelapp,
-                fargekategori: bruker.fargekategori,
-                fargekategoriEnhetId: bruker.fargekategoriEnhetId
-            })
+        const brukereDerIngentingSkalSlettes: MiniBrukerModell[] = finnBrukereDerIngentingSkalSlettes(
+            brukere,
+            ident,
+            enhet
         );
+
         const brukereSomSkalSletteArbeidsliste: MiniBrukerModell[] = brukere.filter(bruker =>
             harArbeidslisteSomVilBliSlettetFilter({
                 tilVeileder: ident,
@@ -92,14 +86,14 @@ describe('Testar logikk for tildeling av veileder', () => {
 
         // Ikkje overlapp i dei som skal slettast og ikkje
         expect(
-            brukereDerIngentingSkalSlettast.some(bruker => brukereSomSkalSletteArbeidsliste.includes(bruker))
+            brukereDerIngentingSkalSlettes.some(bruker => brukereSomSkalSletteArbeidsliste.includes(bruker))
         ).toBeFalsy();
         expect(
-            brukereSomSkalSletteArbeidsliste.some(bruker => brukereDerIngentingSkalSlettast.includes(bruker))
+            brukereSomSkalSletteArbeidsliste.some(bruker => brukereDerIngentingSkalSlettes.includes(bruker))
         ).toBeFalsy();
 
         // Alle brukarane skal anten slette noko eller ikkje slette noko
-        expect(brukereDerIngentingSkalSlettast.concat(brukereSomSkalSletteArbeidsliste).length).toEqual(brukere.length);
+        expect(brukereDerIngentingSkalSlettes.concat(brukereSomSkalSletteArbeidsliste).length).toEqual(brukere.length);
     });
 
     it('Sjekk om vi kan få mismatch mellom brukarar der huskelapp vert sletta og ikkje blir sletta', () => {
@@ -120,7 +114,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             endretAv: 'Z111111'
         };
 
-        const brukerMedHuskelappSomSkalSlettast: MiniBrukerModell = {
+        const brukerMedHuskelappSomSkalSlettes: MiniBrukerModell = {
             fnr: '1',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -132,7 +126,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukerMedHuskelappSomIkkjeSkalSlettast: MiniBrukerModell = {
+        const brukerMedHuskelappSomIkkeSkalSlettes: MiniBrukerModell = {
             fnr: '2',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -144,7 +138,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukerUtanHuskelapp: MiniBrukerModell = {
+        const brukerUtenHuskelapp: MiniBrukerModell = {
             fnr: '3',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -153,24 +147,14 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukere = [
-            brukerMedHuskelappSomSkalSlettast,
-            brukerMedHuskelappSomIkkjeSkalSlettast,
-            brukerUtanHuskelapp
-        ];
+        const brukere = [brukerMedHuskelappSomSkalSlettes, brukerMedHuskelappSomIkkeSkalSlettes, brukerUtenHuskelapp];
 
-        const brukereDerIngentingSkalSlettast: MiniBrukerModell[] = brukere.filter(bruker =>
-            ingentingHosBrukerVilBliSlettet({
-                tilVeileder: ident,
-                fraVeileder: bruker.veilederId,
-                tilEnhet: enhet,
-                arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
-                navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
-                huskelapp: bruker.huskelapp,
-                fargekategori: bruker.fargekategori,
-                fargekategoriEnhetId: bruker.fargekategoriEnhetId
-            })
+        const brukereDerIngentingSkalSlettes: MiniBrukerModell[] = finnBrukereDerIngentingSkalSlettes(
+            brukere,
+            ident,
+            enhet
         );
+
         const brukereSomSkalSletteHuskelapp: MiniBrukerModell[] = brukere.filter(bruker =>
             harHuskelappSomVilBliSlettetFilter({
                 tilVeileder: ident,
@@ -182,14 +166,14 @@ describe('Testar logikk for tildeling av veileder', () => {
 
         // Ikkje overlapp i dei som skal slettast og ikkje
         expect(
-            brukereDerIngentingSkalSlettast.some(bruker => brukereSomSkalSletteHuskelapp.includes(bruker))
+            brukereDerIngentingSkalSlettes.some(bruker => brukereSomSkalSletteHuskelapp.includes(bruker))
         ).toBeFalsy();
         expect(
-            brukereSomSkalSletteHuskelapp.some(bruker => brukereDerIngentingSkalSlettast.includes(bruker))
+            brukereSomSkalSletteHuskelapp.some(bruker => brukereDerIngentingSkalSlettes.includes(bruker))
         ).toBeFalsy();
 
         // Alle brukarane skal anten slette noko eller ikkje slette noko
-        expect(brukereDerIngentingSkalSlettast.concat(brukereSomSkalSletteHuskelapp).length).toEqual(brukere.length);
+        expect(brukereDerIngentingSkalSlettes.concat(brukereSomSkalSletteHuskelapp).length).toEqual(brukere.length);
     });
 
     it('Sjekk om vi kan få mismatch mellom brukarar der fargekategori vert sletta og ikkje blir sletta', () => {
@@ -203,7 +187,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             navkontorForArbeidsliste: undefined
         };
 
-        const brukerMedHuskelappSomSkalSlettast: MiniBrukerModell = {
+        const brukerMedHuskelappSomSkalSlettes: MiniBrukerModell = {
             fnr: '1',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -212,7 +196,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: ulikEnhet
         };
 
-        const brukerMedHuskelappSomIkkjeSkalSlettast: MiniBrukerModell = {
+        const brukerMedHuskelappSomIkkeSkalSlettes: MiniBrukerModell = {
             fnr: '2',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -221,7 +205,7 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: enhet
         };
 
-        const brukerUtanHuskelapp: MiniBrukerModell = {
+        const brukerUtenHuskelapp: MiniBrukerModell = {
             fnr: '3',
             veilederId: ulikIdent, // eller null
             arbeidsliste: ingenArbeidsliste,
@@ -230,24 +214,14 @@ describe('Testar logikk for tildeling av veileder', () => {
             fargekategoriEnhetId: null
         };
 
-        const brukere = [
-            brukerMedHuskelappSomSkalSlettast,
-            brukerMedHuskelappSomIkkjeSkalSlettast,
-            brukerUtanHuskelapp
-        ];
+        const brukere = [brukerMedHuskelappSomSkalSlettes, brukerMedHuskelappSomIkkeSkalSlettes, brukerUtenHuskelapp];
 
-        const brukereDerIngentingSkalSlettast: MiniBrukerModell[] = brukere.filter(bruker =>
-            ingentingHosBrukerVilBliSlettet({
-                tilVeileder: ident,
-                fraVeileder: bruker.veilederId,
-                tilEnhet: enhet,
-                arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
-                navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
-                huskelapp: bruker.huskelapp,
-                fargekategori: bruker.fargekategori,
-                fargekategoriEnhetId: bruker.fargekategoriEnhetId
-            })
+        const brukereDerIngentingSkalSlettes: MiniBrukerModell[] = finnBrukereDerIngentingSkalSlettes(
+            brukere,
+            ident,
+            enhet
         );
+
         const brukereSomSkalSletteHuskelapp: MiniBrukerModell[] = brukere.filter(bruker =>
             harFargekategoriSomVilBliSlettetFilter({
                 tilVeileder: ident,
@@ -260,13 +234,28 @@ describe('Testar logikk for tildeling av veileder', () => {
 
         // Ikkje overlapp i dei som skal slettast og ikkje
         expect(
-            brukereDerIngentingSkalSlettast.some(bruker => brukereSomSkalSletteHuskelapp.includes(bruker))
+            brukereDerIngentingSkalSlettes.some(bruker => brukereSomSkalSletteHuskelapp.includes(bruker))
         ).toBeFalsy();
         expect(
-            brukereSomSkalSletteHuskelapp.some(bruker => brukereDerIngentingSkalSlettast.includes(bruker))
+            brukereSomSkalSletteHuskelapp.some(bruker => brukereDerIngentingSkalSlettes.includes(bruker))
         ).toBeFalsy();
 
         // Alle brukarane skal anten slette noko eller ikkje slette noko
-        expect(brukereDerIngentingSkalSlettast.concat(brukereSomSkalSletteHuskelapp).length).toEqual(brukere.length);
+        expect(brukereDerIngentingSkalSlettes.concat(brukereSomSkalSletteHuskelapp).length).toEqual(brukere.length);
     });
 });
+
+const finnBrukereDerIngentingSkalSlettes = (brukere: MiniBrukerModell[], ident, enhet) => {
+    return brukere.filter(bruker =>
+        ingentingHosBrukerVilBliSlettet({
+            tilVeileder: ident,
+            fraVeileder: bruker.veilederId,
+            tilEnhet: enhet,
+            arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
+            navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
+            huskelapp: bruker.huskelapp,
+            fargekategori: bruker.fargekategori,
+            fargekategoriEnhetId: bruker.fargekategoriEnhetId
+        })
+    );
+};
