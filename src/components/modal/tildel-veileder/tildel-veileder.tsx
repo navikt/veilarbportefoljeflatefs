@@ -108,7 +108,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             setTilordningerBrukereUtenTingSomVilBliSlettet(tilordningerBrukereUtenTingSomVilBliSlettet);
 
-            const fnrBrukereArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
+            const brukereDerArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
                 harArbeidslisteSomVilBliSlettetFilter({
                     tilVeileder: ident,
                     fraVeileder: bruker.veilederId,
@@ -118,7 +118,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 })
             );
 
-            const fnrBrukereHuskelappVilBliSlettet = valgteBrukere.filter(bruker =>
+            const brukereDerHuskelappVilBliSlettet = valgteBrukere.filter(bruker =>
                 harHuskelappSomVilBliSlettetFilter({
                     tilVeileder: ident,
                     fraVeileder: bruker.veilederId,
@@ -127,7 +127,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 })
             );
 
-            const fnrBrukereKategoriVilBliSlettet = valgteBrukere.filter(bruker =>
+            const brukereDerFargekategoriVilBliSlettet = valgteBrukere.filter(bruker =>
                 harFargekategoriSomVilBliSlettetFilter({
                     tilVeileder: ident,
                     fraVeileder: bruker.veilederId,
@@ -137,17 +137,15 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 })
             );
 
-            const fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet = [
-                ...fnrBrukereHuskelappVilBliSlettet,
-                ...fnrBrukereArbeidslisteVilBliSlettet,
-                ...fnrBrukereKategoriVilBliSlettet
+            const fnrBrukereMedTingSomVilBliSlettetVedTildeling = [
+                ...brukereDerHuskelappVilBliSlettet,
+                ...brukereDerArbeidslisteVilBliSlettet,
+                ...brukereDerFargekategoriVilBliSlettet
             ];
 
-            setFnrIAdvarselslista(
-                fjernduplikatOgMapTilFnrArray(fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet)
-            );
+            setFnrIAdvarselslista(fjernduplikatOgMapTilFnrArray(fnrBrukereMedTingSomVilBliSlettetVedTildeling));
 
-            if (fnrBrukereArbeidslisteHuskelappEllerFargekategoriVilBliSlettet.length > 0) {
+            if (fnrBrukereMedTingSomVilBliSlettetVedTildeling.length > 0) {
                 trackAmplitude(
                     {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av arbeidsliste'}},
                     {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
