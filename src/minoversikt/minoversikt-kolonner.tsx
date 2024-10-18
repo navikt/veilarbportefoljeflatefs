@@ -52,18 +52,17 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
-import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
-    className?: string;
     bruker: BrukerModell;
     enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
 }
 
-function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
@@ -133,7 +132,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
     };
 
     return (
-        <div className={className}>
+        <div className="brukerliste__innhold flex flex--center">
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
@@ -168,7 +167,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -192,7 +191,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             />
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <DatoKolonne
@@ -292,14 +291,16 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
-            <TiltakshendelseLenkeKolonne
-                className="col col-xs-2"
+            <LenkeKolonne
+                className="col col-xs-3 col-break-word"
                 bruker={bruker}
+                lenke={bruker.tiltakshendelse?.lenke ?? ''}
+                lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
+                enhetId={enhetId}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                 }
-                enhetId={enhetId}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -420,7 +421,7 @@ function MinoversiktDatokolonner({className, bruker, enhetId, filtervalg, valgte
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
             <DatoKolonne

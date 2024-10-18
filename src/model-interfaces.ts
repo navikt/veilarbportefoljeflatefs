@@ -11,7 +11,7 @@ export enum Sorteringsfelt {
     VALGTE_AKTIVITETER = 'valgteaktiviteter',
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
-    OPPFOLGINGSTARTET = 'oppfolging_startdato',
+    OPPFOLGING_STARTET = 'oppfolging_startdato',
     UTLOPSDATO = 'utlopsdato',
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
@@ -47,7 +47,7 @@ export enum Sorteringsfelt {
     BOSTED_BYDEL = 'bydelsnummer',
     BOSTED_SIST_OPPDATERT = 'bostedSistOppdatert',
     TOLKEBEHOV = 'tolkebehov',
-    TOLKE_SPRAAK = 'tolkespraak',
+    TOLKESPRAK = 'tolkespraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sistoppdatert',
     CV_SVARFRIST = 'neste_svarfrist_stilling_fra_nav',
     ENSLIGE_FORSORGERE_UTLOPS_YTELSE = 'enslige_forsorgere_utlop_ytelse',
@@ -60,7 +60,7 @@ export enum Sorteringsfelt {
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP = 'huskelapp',
-    TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
+    TILTAKSHENDELSE_TEKST = 'tiltakshendelse_tekst',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 

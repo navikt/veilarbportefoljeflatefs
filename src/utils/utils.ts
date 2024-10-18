@@ -1,8 +1,8 @@
+import {RefObject} from 'react';
+import moment from 'moment/moment';
 import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
-import moment from 'moment/moment';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
-import {RefObject} from 'react';
 import {settBrukerIKontekst} from '../middleware/api';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -298,14 +298,15 @@ export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
     return `${formatertDato} (Barn 1 år)`;
 };
 
-export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) =>
-    settBrukerIKontekst(fnr).then(() => {
+export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) => {
+    return settBrukerIKontekst(fnr).then(() => {
         if (apneNyFane) {
             window.open(lenke, '_blank', 'noopener,noreferrer');
         } else {
             window.location.href = lenke;
         }
     });
+};
 
 /**
  * Utfør en handling dersom det klikkes utenfor et/flere element(er).

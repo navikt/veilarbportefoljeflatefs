@@ -204,8 +204,8 @@ const lagHuskelapp = fnr => {
 const lagTiltakshendelse = (): TiltakshendelseModell => ({
     id: '54f06061-4383-417d-a063-1c4fc4701a78',
     opprettet: new Date(),
-    tekst: 'Utkast til påmelding',
-    lenke: 'https://www.nav.no',
+    tekst: 'Forslag: Avslutt deltakelse',
+    lenke: 'https://www.nav.no/54f06061-4383-417d-a063-1c4fc4701a78',
     tiltakstype: 'ARBFORB'
 });
 
