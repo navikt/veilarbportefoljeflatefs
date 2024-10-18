@@ -51,7 +51,7 @@ import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-s
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
-import {TiltakshendelseLenkeKolonne} from '../components/tabell/kolonner/tiltakshendelse-lenke-kolonne';
+import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -179,7 +179,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SPRAAK)}
+                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -188,7 +188,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGINGSTARTET)}
+                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
             <VeilederNavn
@@ -274,14 +274,16 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />
-            <TiltakshendelseLenkeKolonne
-                className="col col-xs-2"
+            <LenkeKolonne
+                className="col col-xs-3 col-break-word"
                 bruker={bruker}
+                lenke={bruker.tiltakshendelse?.lenke ?? ''}
+                lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
+                enhetId={enhetId}
                 skalVises={
                     !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
                     valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
                 }
-                enhetId={enhetId}
             />
             <DatoKolonne
                 className="col col-xs-2"
@@ -396,7 +398,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HAR_BARN_UNDER_18)}
+                skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             />
             <DatoKolonne

@@ -95,6 +95,9 @@ describe('Filter', () => {
     });
 
     it('Hendelser-filterform - Enhetens oversikt', () => {
+        // Kolonner ved starten av testen: Etternavn, Fødselsnr, Oppfølging startet, Siste endring, Dato siste endring
+        const tallPaKolonnerVedStart = 5;
+
         // Opne filterdropdown for siste-endring-kategori
         cy.getByTestId('dropdown-knapp_sisteEndringKategori').click();
 
@@ -103,7 +106,7 @@ describe('Filter', () => {
 
         // Sjekk at vi får rett tal kolonner. Dei to siste skal vere "Siste endring" og "Dato siste endring"
         cy.getByTestId('brukerliste_innhold').children().as('kolonneoverskrifter')
-            .should('have.length', 6);
+            .should('have.length', tallPaKolonnerVedStart);
         cy.get('@kolonneoverskrifter').last().prev().contains('Siste endring');
         cy.get('@kolonneoverskrifter').last().contains('Dato siste endring');
 
@@ -112,11 +115,11 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
         cy.getByTestId('velg-kolonne-rad_siste_endring').should('be.checked').uncheck({force: true});
         cy.getByTestId('velg-kolonne-rad_veileder').check({force: true});
-        cy.get('@kolonneoverskrifter').should('have.length', 5).last().prev().contains('Veileder');
+        cy.get('@kolonneoverskrifter').should('have.length', tallPaKolonnerVedStart - 1 ).last().prev().contains('Veileder');
 
-        // Tek bort kolonna for "Sist endret dato". Skal no ha 4 kolonner, "Veileder" er sist.
+        // Tek bort kolonna for "Sist endret dato". Skal no ha 3 kolonner, "Veileder" er sist.
         cy.getByTestId('velg-kolonne-rad_siste_endring_dato').should('be.checked').uncheck({force: true});
-        cy.getByTestId('brukerliste_innhold').children().should('have.length', 4).last().contains('Veileder');
+        cy.getByTestId('brukerliste_innhold').children().should('have.length', tallPaKolonnerVedStart - 2).last().contains('Veileder');
 
         // Lukk kolonnevalg
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});

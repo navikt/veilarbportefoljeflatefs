@@ -14,7 +14,8 @@ export const lagreHuskelapp = async (
     bruker: BrukerModell,
     enhetId: string,
     onModalClose: () => void,
-    arbeidsliste: ArbeidslisteDataModell | null
+    arbeidsliste: ArbeidslisteDataModell | null,
+    erSkjulArbeidslistefunksjonalitetTogglePa: boolean
 ) => {
     const {type: responseAction} = await dispatch(
         lagreHuskelappAction({
@@ -28,7 +29,11 @@ export const lagreHuskelapp = async (
         dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
         await dispatch(leggTilStatustall('mineHuskelapper', 1));
         if (arbeidsliste) {
-            await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(bruker, dispatch);
+            await slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux(
+                bruker,
+                dispatch,
+                erSkjulArbeidslistefunksjonalitetTogglePa
+            );
         }
         onModalClose();
     }

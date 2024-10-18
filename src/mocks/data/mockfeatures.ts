@@ -3,6 +3,7 @@ import {
     DARKMODE,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     HUSKELAPP,
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
     VIS_AAP_VURDERINGSFRISTKOLONNER,
@@ -10,7 +11,7 @@ import {
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
 
-const toggles = {
+export const mockFeatureToggles = {
     [SPOR_OM_TILBAKEMELDING]: true,
     [VEDTAKSTOTTE]: true,
     [DARKMODE]: true,
@@ -19,7 +20,6 @@ const toggles = {
     [VIS_AAP_VURDERINGSFRISTKOLONNER]: true,
     [FILTER_FOR_PERSONER_MED_BARN_UNDER_18]: true,
     [HUSKELAPP]: true,
+    [SKJUL_ARBEIDSLISTEFUNKSJONALITET]: false,
     [VIS_STATUSFILTER_TILTAKSHENDELSE]: true
 };
-
-export default toggles;

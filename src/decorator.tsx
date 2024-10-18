@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import NAVSPA from '@navikt/navspa';
 import {useDispatch} from 'react-redux';
+import NAVSPA from '@navikt/navspa';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
@@ -22,12 +22,12 @@ function getDecoratorEnv(): Environment {
 function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): DecoratorPropsV3 {
     return {
         appName: 'Arbeidsrettet oppfølging',
-        fnr: undefined,
         onFnrChanged: value => {
             if (value) {
                 window.location.href = getVeilarbpersonflateBasePath();
             }
         },
+        fnrSyncMode: 'writeOnly',
         showSearchArea: true,
         enhet: enhet ?? undefined,
         showEnheter: true,

@@ -12,6 +12,7 @@ spec:
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.dev.nav.no
+    - https://veilarbportefoljeflate.ansatt.dev.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
@@ -49,6 +50,8 @@ spec:
           namespace: obo
         - application: veilarbfilter
           namespace: obo
+        - application: veilarbveileder
+          namespace: obo
         - application: endringslogg
           namespace: pto
         - application: modiacontextholder
@@ -58,9 +61,8 @@ spec:
           cluster: dev-gcp
         - application: veilarbvedtaksstotte
           namespace: obo
-      external:
-        - host: veilarbveileder.dev-fss-pub.nais.io
-        - host: veilarboppfolging.dev-fss-pub.nais.io
+        - application: veilarboppfolging
+          namespace: poao
   env:
     - name: JSON_CONFIG
       value: >
@@ -126,12 +128,12 @@ spec:
             },
             {
               "fromPath": "/veilarbveileder",
-              "toUrl": "https://veilarbveileder.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbveileder",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
@@ -146,12 +148,12 @@ spec:
             },
             {
               "fromPath": "/veilarboppfolging",
-              "toUrl": "https://veilarboppfolging.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarboppfolging.poao",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarboppfolging",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "poao",
+                "cluster": "dev-gcp"
               }
             },
             {
