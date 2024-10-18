@@ -124,6 +124,26 @@ export function dagerSiden(dato) {
     return moment().diff(hentDato, 'days');
 }
 
+function safeFormat(date: any, format: string): string | undefined {
+    return date && date.isValid() ? date.format(format) : undefined;
+}
+
+export function toReversedDateStr(dato: string | Date | undefined): string | undefined {
+    return safeFormat(moment(dato || undefined), 'YYYY-MM-DD');
+}
+
+export const validerFristFelt = (input: string): string | undefined => {
+    let error;
+    const inputDato = moment(input);
+    const fraDato = moment();
+    if (input && !erGyldigISODato(input)) {
+        error = 'Ugyldig dato';
+    } else if (inputDato && fraDato.isAfter(inputDato, 'day')) {
+        error = 'Fristen må være i dag eller senere';
+    }
+    return error;
+};
+
 export function validerDatoField(input, intl, alternativer, valgfritt) {
     const {fra} = alternativer;
     const inputDato = moment(input);

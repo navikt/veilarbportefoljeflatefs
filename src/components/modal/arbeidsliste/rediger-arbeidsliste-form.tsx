@@ -10,6 +10,7 @@ import ArbeidslisteKategori from './arbeidsliste-kategori';
 import {BrukerModell} from '../../../model-interfaces';
 import {logEvent} from '../../../utils/frontend-logger';
 import ArbeidslisteInformasjonsmelding from './arbeidsliste-informasjonsmelding';
+import {validerFristFelt} from '../../../utils/dato-utils';
 
 interface RedigerArbeidslisteProps {
     sistEndretDato: Date;
@@ -54,7 +55,13 @@ function RedigerArbeidsliste({
                     </Detail>
                 </div>
                 <div className="dato-kategori-wrapper">
-                    <FormikDatoVelger name="frist" />
+                    <FormikDatoVelger
+                        name="frist"
+                        label="frist"
+                        size="small"
+                        validate={validerFristFelt}
+                        ariaLabel="Frist for arbeidsliste"
+                    />
                     <ArbeidslisteKategori name="kategori" index="" />
                 </div>
             </div>
