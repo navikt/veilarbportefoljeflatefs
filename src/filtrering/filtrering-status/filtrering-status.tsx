@@ -1,5 +1,7 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import {Alert, Detail, Label, Link, RadioGroup, ReadMore} from '@navikt/ds-react';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
@@ -24,9 +26,8 @@ import {
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
-import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
-import './filtrering-status.css';
 import FilterStatusMineFargekategorier from './fargekategori';
+import './filtrering-status.css';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
@@ -257,29 +258,63 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['inaktiveBrukere']]}
                     />
                 </div>
-                <div className="forsteBarlabelIGruppe">
-                    {arbeidslistefunksjonalitetSkalVises && (
-                        <FilterStatusMinArbeidsliste
-                            ferdigfilterListe={kategoriliste}
-                            handleChange={handleRadioButtonChange}
-                            handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                            hidden={oversiktType !== OversiktType.minOversikt}
-                            checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
-                        />
-                    )}
-                    {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                        <BarInputRadio
-                            filterNavn="huskelapp"
-                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                            handleChange={handleRadioButtonChange}
-                            filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
-                            labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
-                        />
-                    )}
-                    {!arbeidslistefunksjonalitetSkalVises &&
-                        erHuskelappFeatureTogglePa &&
-                        oversiktType === OversiktType.minOversikt && <FilterStatusMineFargekategorier />}
-                </div>
+                {oversiktType === OversiktType.minOversikt && (
+                    <div className="forsteBarlabelIGruppe">
+                        {erHuskelappFeatureTogglePa && (
+                            <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
+                        )}
+                        {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
+                            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
+                        )}
+                        {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
+                            <Alert variant="warning" size="small" className="minArbeidsliste__alert">
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
+                                    target="_blank"
+                                    rel="noopener"
+                                    inlineText
+                                >
+                                    Gamle arbeidslister blir slettet 25. oktober
+                                    <ExternalLinkIcon title="Ekstern lenke" />
+                                </Link>
+                            </Alert>
+                        )}
+                        {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
+                            <Alert variant="info" size="small" className="minArbeidsliste__alert">
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
+                                    target="_blank"
+                                    rel="noopener"
+                                    inlineText
+                                >
+                                    Oppdaterte retningslinjer for huskelapp
+                                    <ExternalLinkIcon title="Ekstern lenke" />
+                                </Link>
+                            </Alert>
+                        )}
+                        {arbeidslistefunksjonalitetSkalVises && (
+                            <FilterStatusMinArbeidsliste
+                                ferdigfilterListe={kategoriliste}
+                                handleChange={handleRadioButtonChange}
+                                handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
+                                hidden={oversiktType !== OversiktType.minOversikt}
+                                checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            />
+                        )}
+                        {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                            <BarInputRadio
+                                filterNavn="huskelapp"
+                                antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                                handleChange={handleRadioButtonChange}
+                                filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
+                                labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
+                            />
+                        )}
+                        {!arbeidslistefunksjonalitetSkalVises &&
+                            erHuskelappFeatureTogglePa &&
+                            oversiktType === OversiktType.minOversikt && <FilterStatusMineFargekategorier />}
+                    </div>
+                )}
                 {arbeidslistefunksjonalitetSkalVises &&
                     erHuskelappFeatureTogglePa &&
                     oversiktType === OversiktType.minOversikt && (
