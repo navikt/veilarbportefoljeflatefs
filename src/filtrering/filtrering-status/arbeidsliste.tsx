@@ -6,7 +6,7 @@ import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {ferdigfilterListeLabelTekst, mapFilternavnTilFilterValue} from '../filter-konstanter';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../../konstanter';
+import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../konstanter';
 import {ReactComponent as FargekategoriIkonBlaHalvsirkel} from '../../components/ikoner/fargekategorier/Fargekategoriikon_bla_halvsirkel.svg';
 import {ReactComponent as FargekategoriIkonGronnTrekant} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
 import {ReactComponent as FargekategoriIkonGulSirkel} from '../../components/ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
@@ -34,6 +34,9 @@ function FilterStatusMinArbeidsliste({
 }: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
     const erHuskelappFeatureTogglePaa = useFeatureSelector()(HUSKELAPP);
+    const erSkjulArbeidslistefunksjonalitetTogglePa = useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
+
+    if (erSkjulArbeidslistefunksjonalitetTogglePa) return null;
 
     return (
         <>
