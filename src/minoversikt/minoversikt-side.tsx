@@ -25,7 +25,7 @@ import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statu
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
-import Sidebar from '../components/sidebar/sidebar';
+import {Sidebar} from '../components/sidebar/sidebar';
 import {MinOversiktWrapper} from './minoversikt_wrapper';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
@@ -127,7 +127,6 @@ export default function MinoversiktSide() {
                         filtervalg={filtervalg}
                         oversiktType={oversiktType}
                         enhettiltak={tiltak}
-                        isSidebarHidden={isSidebarHidden}
                         statustall={{medBrukerinnsyn: statustall, utenBrukerinnsyn: null}}
                     />
                     <div className="sokefelt-knapp__container">

@@ -13,6 +13,8 @@ interface StatustallInnhold {
     inaktiveBrukere: number;
     venterPaSvarFraNAV: number;
     venterPaSvarFraBruker: number;
+    moterMedNAVIdag: number;
+    tiltakshendelser: number;
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
@@ -22,7 +24,6 @@ interface StatustallInnhold {
     minArbeidslisteGronn: number;
     minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
-    moterMedNAVIdag: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
@@ -48,6 +49,8 @@ export const initalStatusState: StatustallEnhetState = {
             inaktiveBrukere: 0,
             venterPaSvarFraNAV: 0,
             venterPaSvarFraBruker: 0,
+            moterMedNAVIdag: 0,
+            tiltakshendelser: 0,
             utlopteAktiviteter: 0,
             ikkeIavtaltAktivitet: 0,
             iavtaltAktivitet: 0,
@@ -58,7 +61,6 @@ export const initalStatusState: StatustallEnhetState = {
             minArbeidslisteGul: 0,
             erSykmeldtMedArbeidsgiver: 0,
             nyeBrukereForVeileder: 0,
-            moterMedNAVIdag: 0,
             trengerVurdering: 0,
             underVurdering: 0,
             mineHuskelapper: 0
@@ -69,6 +71,8 @@ export const initalStatusState: StatustallEnhetState = {
             inaktiveBrukere: 0,
             venterPaSvarFraNAV: 0,
             venterPaSvarFraBruker: 0,
+            moterMedNAVIdag: 0,
+            tiltakshendelser: 0,
             utlopteAktiviteter: 0,
             ikkeIavtaltAktivitet: 0,
             iavtaltAktivitet: 0,
@@ -79,7 +83,6 @@ export const initalStatusState: StatustallEnhetState = {
             minArbeidslisteGul: 0,
             erSykmeldtMedArbeidsgiver: 0,
             nyeBrukereForVeileder: 0,
-            moterMedNAVIdag: 0,
             trengerVurdering: 0,
             underVurdering: 0,
             mineHuskelapper: 0

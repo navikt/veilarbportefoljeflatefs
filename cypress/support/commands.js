@@ -78,36 +78,45 @@ Cypress.Commands.add('gaTilOversikt', side => {
     }
 });
 
+Cypress.Commands.add('faneErApen', tab => {
+    return (cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length.at.least', 1));
+})
+
+Cypress.Commands.add('faneErLukket', tab => {
+        return (cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length', 0));
+    }
+)
+
+Cypress.Commands.add('klikkPaSidebarTab', tab => {
+    cy.getByTestId(`sidebar-tab_${tab}`).click({force: true})
+})
+
 Cypress.Commands.add('klikkTab', tab => {
     if (tab === 'VEILEDERGRUPPER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Veiledergrupper')) {
+        if (cy.faneErLukket('VEILEDERGRUPPER')) {
             return (
-                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Veiledergrupper')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('VEILEDERGRUPPER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
     } else if (tab === 'MINE_FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Mine filter')) {
+        if (cy.faneErLukket('MINE_FILTER')) {
             return (
-                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Mine filter')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('MINE_FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Mine filter');
     } else if (tab === 'STATUS') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Status')) {
+        if (cy.faneErLukket('STATUS')) {
             return (
-                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Status')
+                cy.klikkPaSidebarTab(tab) &&  cy.faneErApen('STATUS')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Status');
     } else if (tab === 'FILTER') {
-        if (cy.getByTestId('sidebar-header').should('not.equal', 'Filter')) {
+        if (cy.faneErLukket('FILTER')) {
             return (
-                cy.getByTestId(`sidebar-tab_${tab}`).click({force: true}) &&
-                cy.getByTestId('sidebar-header').contains('Filter')
+                cy.klikkPaSidebarTab(tab) && cy.faneErApen('FILTER')
             );
         }
         return cy.getByTestId('sidebar-header').contains('Filter');
@@ -115,41 +124,22 @@ Cypress.Commands.add('klikkTab', tab => {
 });
 
 Cypress.Commands.add('checkbox', testid => {
-    cy.getByTestId(testid).should('not.be.checked').check({force: true});
-    cy.getByTestId(testid).should('be.checked');
+    cy.getByTestId(testid).as('checkbox').should('not.be.checked').check({force: true});
+    cy.get('@checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('checkboxFirst', testid => {
-    cy.getByTestId(testid).first().should('not.be.checked').check({force: true});
-    cy.getByTestId(testid).first().should('be.checked');
+    cy.getByTestId(testid).first().as('first-checkbox').should('not.be.checked').check({force: true});
+    cy.get('@first-checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('checkboxLast', testid => {
-    cy.getByTestId(testid).last().should('not.be.checked').check({force: true});
-    cy.getByTestId(testid).last().should('be.checked');
+    cy.getByTestId(testid).last().as('last-checkbox').should('not.be.checked').check({force: true});
+    cy.get('@last-checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
     cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible').click();
-});
-
-Cypress.Commands.add('apneForsteArbeidslistepanelOgValiderApning', () => {
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .as('arbeidsliste-chevron')
-        .children()
-        .first()
-        .should('have.class', 'expand-testid');
-
-    cy.get('@arbeidsliste-chevron').click();
-
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .children()
-        .should('have.class', 'collapse-testid')
-        .first();
 });
 
 Cypress.Commands.add('apneForsteArbeidslistepanel', () => {
@@ -164,19 +154,14 @@ Cypress.Commands.add('apneForsteArbeidslistepanel', () => {
     cy.get('@arbeidsliste-chevron').click();
 });
 
-Cypress.Commands.add('lukkForsteArbeidslistepanelOgValiderLukking', () => {
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .children()
-        .should('have.class', 'collapse-testid')
-        .click();
+Cypress.Commands.add('apneForsteArbeidslistepanelOgValiderApning', () => {
+    cy.apneForsteArbeidslistepanel();
 
     cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
         .children()
         .first()
         .children()
-        .should('have.class', 'expand-testid')
+        .should('have.class', 'collapse-testid')
         .first();
 });
 
@@ -187,4 +172,15 @@ Cypress.Commands.add('lukkForsteArbeidslistepanel', () => {
         .children()
         .should('have.class', 'collapse-testid')
         .click();
+});
+
+Cypress.Commands.add('lukkForsteArbeidslistepanelOgValiderLukking', () => {
+    cy.lukkForsteArbeidslistepanel();
+
+    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
+        .children()
+        .first()
+        .children()
+        .should('have.class', 'expand-testid')
+        .first();
 });

@@ -6,6 +6,7 @@ import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {Button} from '@navikt/ds-react';
+import {StarIcon} from '@navikt/aksel-icons';
 
 interface Props {
     oversiktType: OversiktType;
@@ -56,12 +57,13 @@ export function MineFilterLagreFilterKnapp({oversiktType}: Props) {
 
     return (
         <Button
-            variant="secondary"
+            variant="secondary-neutral"
             size="small"
             className="lagre-filter-knapp"
             hidden={erLagreKnappSkjult}
             data-testid="lagre-filter_knapp"
             onClick={event => lagreFilterModal(event)}
+            icon={<StarIcon aria-hidden={true} fontSize="1.2rem" />}
         >
             Lagre filter
         </Button>

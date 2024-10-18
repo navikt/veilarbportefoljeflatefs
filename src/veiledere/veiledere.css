@@ -31,20 +31,23 @@
     margin: 0.5rem 0 1rem;
 }
 .veilederoversikt__toolbar-container {
+    --hoyde-sticky-skygge: 16px;
+    --hoyde-toolbar-og-tabelloverskrift: 77px; /* Hardkoda verdi, uvisst opphav. -Ingrid, 2024-08-30 */
+
     position: relative;
     top: 0;
-    margin-top: -18px;
+    margin-top: calc(var(--hoyde-sticky-skygge) * -1);
 }
 .veilederoversikt__sticky-skygge::before,
 .veilederoversikt__sticky-skygge::after {
     content: '';
     display: block;
-    height: 16px;
+    height: var(--hoyde-sticky-skygge);
     position: sticky;
 }
 .veilederoversikt__sticky-skygge::before {
-    top: 61px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    top: calc(var(--hoyde-toolbar-og-tabelloverskrift) - var(--hoyde-sticky-skygge));
+    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.3); /* horizontal length, vertical length, blur, spread-radius (offsets blur), color */
     margin: 0 4px;
 }
 .veilederoversikt__sticky-skygge::after {

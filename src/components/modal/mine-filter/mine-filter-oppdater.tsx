@@ -13,8 +13,8 @@ import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {SidebarTabInfo} from '../../../store/sidebar/sidebar-view-store';
-import {endreSideBar} from '../../sidebar/sidebar';
+import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
+import {endreValgtSidebarTab} from '../../sidebar/sidebar';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;
@@ -52,9 +52,9 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     filterId: filterId
                 })
             ).then(() => {
-                endreSideBar({
+                endreValgtSidebarTab({
                     dispatch: dispatch,
-                    requestedTab: SidebarTabInfo.MINE_FILTER,
+                    requestedTab: SidebarTabs.MINE_FILTER,
                     currentOversiktType: oversiktType
                 });
             });
@@ -83,6 +83,7 @@ export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, over
                     error={feilmelding.filterNavn}
                     autoFocus
                     data-testid="redigere-filter-navn-input"
+                    size="small"
                 />
                 <div className="lagret-filter-knapp-wrapper">
                     <Button size="small" type="submit" data-testid="rediger-filter_modal_lagre-knapp">

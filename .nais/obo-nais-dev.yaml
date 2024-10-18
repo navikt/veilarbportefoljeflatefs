@@ -8,10 +8,11 @@ metadata:
   annotations:
     wonderwall.nais.io/beta: "true"
 spec:
-  image: ghcr.io/navikt/poao-frontend/poao-frontend:2023.01.13_08.09-36c09678654f
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2024.08.30_10.15-9c1569b22e37
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.dev.nav.no
+    - https://veilarbportefoljeflate.ansatt.dev.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
@@ -49,15 +50,19 @@ spec:
           namespace: obo
         - application: veilarbfilter
           namespace: obo
+        - application: veilarbveileder
+          namespace: obo
         - application: endringslogg
           namespace: pto
         - application: modiacontextholder
           namespace: personoversikt
-      external:
-        - host: veilarbportefolje.dev-fss-pub.nais.io
-        - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
-        - host: veilarbveileder.dev-fss-pub.nais.io
-        - host: veilarboppfolging.dev-fss-pub.nais.io
+        - application: veilarbportefolje
+          namespace: obo
+          cluster: dev-gcp
+        - application: veilarbvedtaksstotte
+          namespace: obo
+        - application: veilarboppfolging
+          namespace: poao
   env:
     - name: JSON_CONFIG
       value: >
@@ -73,13 +78,16 @@ spec:
           "header": {
             "csp": {
               "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
-             }
+            },
+            "corp": {
+              "policy": "cross-origin"
+            }
           },
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator-q1.intern.dev.nav.no",
-              "preserveFromPath": true
+              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev",
+              "preserveFromPath": false
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
@@ -90,12 +98,12 @@ spec:
           "proxies": [
             {
               "fromPath": "/veilarbportefolje",
-              "toUrl": "https://veilarbportefolje.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbportefolje.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
@@ -110,22 +118,22 @@ spec:
             },
             {
               "fromPath": "/veilarbvedtaksstotte",
-              "toUrl": "https://veilarbvedtaksstotte.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbvedtaksstotte.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbvedtaksstotte",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
               "fromPath": "/veilarbveileder",
-              "toUrl": "https://veilarbveileder.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbveileder",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             },
             {
@@ -140,12 +148,12 @@ spec:
             },
             {
               "fromPath": "/veilarboppfolging",
-              "toUrl": "https://veilarboppfolging.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarboppfolging.poao",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarboppfolging",
-                "namespace": "pto",
-                "cluster": "dev-fss"
+                "namespace": "poao",
+                "cluster": "dev-gcp"
               }
             },
             {

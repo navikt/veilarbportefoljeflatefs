@@ -1,29 +1,10 @@
-name: Sjekk PR-kode
+name: Install, build, run Cypress on PR
 
 on: pull_request
 
 jobs:
-    build-application:
-        name: Build application
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Setup node
-            uses: actions/setup-node@v4
-            with:
-                node-version: '20'
-                cache: npm
-                registry-url: 'https://npm.pkg.github.com'
-          - name: Install dependencies
-            run: npm ci
-            env: # Kan nok fjernes igjen når vi ikke bruker ds-icons lenger
-              NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-          - name: Build application
-            run: npm run build:mock
     cypress-run:
-        name: Cypress run
+        name: Install, build, run Cypress tests
         runs-on: ubuntu-latest
         timeout-minutes: 15
         steps:
@@ -32,19 +13,21 @@ jobs:
             - name: Setup node
               uses: actions/setup-node@v4
               with:
-                  node-version: '20'
+                  node-version: 20
                   cache: npm
                   registry-url: 'https://npm.pkg.github.com'
             - name: Install dependencies
               run: npm ci
-              env: # Kan nok fjernes igjen når vi ikke bruker ds-icons lenger
+              env:
                   NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+            - name: Build application
+              run: npm run build:mock
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
                   install: false
                   browser: chrome
-                  start: npm start cypress:run
+                  start: npm start
                   wait-on: http://localhost:3000
                   wait-on-timeout: 90
                   record: false

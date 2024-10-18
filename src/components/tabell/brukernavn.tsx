@@ -41,7 +41,7 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
                 <AksjonKnappMedPopoverFeilmelding
                     klikkAksjon={handterKlikk}
                     ctrlklikkAksjon={handterKlikkNyFane}
-                    knappStil="juster-tekst-venstre"
+                    knappStil="juster-tekst-venstre knapp-uten-padding"
                     knappTekst={navn}
                 />
             )}

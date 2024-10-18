@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
-import {AddPerson, Search} from '@navikt/ds-icons';
 import {Alert, Heading} from '@navikt/ds-react';
+import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import Paginering from './paginering/paginering';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
@@ -11,7 +11,7 @@ import ToolbarKnapp from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../../konstanter';
+import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../konstanter';
 import VelgKolonner from './velg-kolonner';
 import './toolbar.css';
 import '../../style.css';
@@ -39,6 +39,7 @@ function Toolbar({
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
+    const skalViseArbeidslistefunksjonalitet = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -50,7 +51,7 @@ function Toolbar({
             case OversiktType.minOversikt:
                 return (
                     <>
-                        {!erFargekategoriFeatureTogglePa && <ArbeidslisteKnapp />}
+                        {skalViseArbeidslistefunksjonalitet && !erFargekategoriFeatureTogglePa && <ArbeidslisteKnapp />}
                         {erFargekategoriFeatureTogglePa && (
                             <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
                         )}
@@ -65,7 +66,7 @@ function Toolbar({
                             aktiv
                             tildelveileder={false}
                             testid="sok-veileder_knapp"
-                            ikon={<Search className="toolbar-knapp__ikon" id="sok-veileder-ikon" />}
+                            ikon={<MagnifyingGlassIcon aria-hidden={true} fontSize="1.5rem" />}
                             oversiktType={oversiktType}
                         />
                     </div>
@@ -102,9 +103,9 @@ function Toolbar({
                                 tittel="Tildel veileder"
                                 skalVises={oversiktType in OversiktType}
                                 aktiv={aktiv}
-                                tildelveileder
+                                tildelveileder={true}
                                 testid="tildel-veileder_knapp"
-                                ikon={<AddPerson className="toolbar-knapp__ikon" id="tildel-veileder-ikon" />}
+                                ikon={<PersonPlusIcon aria-hidden={true} fontSize="1.5rem" />}
                                 oversiktType={oversiktType}
                             />
                         </div>

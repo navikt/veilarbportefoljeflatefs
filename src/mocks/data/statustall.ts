@@ -8,6 +8,8 @@ export const statustallVeileder = {
         inaktiveBrukere: 23,
         venterPaSvarFraNAV: 150,
         venterPaSvarFraBruker: 231,
+        moterMedNAVIdag: 40,
+        tiltakshendelser: 20,
         utlopteAktiviteter: 123,
         ikkeIavtaltAktivitet: 1231,
         iavtaltAktivitet: 2323,
@@ -18,7 +20,6 @@ export const statustallVeileder = {
         minArbeidslisteGul: 5,
         erSykmeldtMedArbeidsgiver: 20,
         trengerVurdering: 42,
-        moterMedNAVIdag: 40,
         underVurdering: 14,
         mineHuskelapper: 16,
         fargekategoriA: 1,
@@ -39,6 +40,8 @@ export const statustallEnhet = {
         inaktiveBrukere: 23,
         venterPaSvarFraNAV: 150,
         venterPaSvarFraBruker: 231,
+        moterMedNAVIdag: 40,
+        tiltakshendelser: 20,
         utlopteAktiviteter: 123,
         ikkeIavtaltAktivitet: 1231,
         iavtaltAktivitet: 2323,
@@ -49,7 +52,6 @@ export const statustallEnhet = {
         minArbeidslisteGul: 5,
         erSykmeldtMedArbeidsgiver: 20,
         trengerVurdering: 42,
-        moterMedNAVIdag: 40,
         underVurdering: 14
     },
     statustallUtenBrukerinnsyn: {
@@ -59,6 +61,8 @@ export const statustallEnhet = {
         inaktiveBrukere: 2,
         venterPaSvarFraNAV: 2,
         venterPaSvarFraBruker: 2,
+        moterMedNAVIdag: 2,
+        tiltakshendelser: 2,
         utlopteAktiviteter: 2,
         ikkeIavtaltAktivitet: 2,
         iavtaltAktivitet: 2,
@@ -69,7 +73,6 @@ export const statustallEnhet = {
         minArbeidslisteGul: 2,
         erSykmeldtMedArbeidsgiver: 2,
         trengerVurdering: 2,
-        moterMedNAVIdag: 2,
         underVurdering: 2
     }
 };

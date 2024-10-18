@@ -1,17 +1,17 @@
-import SidebarTab from './sidebar-tab';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {HelpText} from '@navikt/ds-react';
+import {SidebarTab} from './sidebar-tab';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
-import React, {useState} from 'react';
-import {Sidebarelement} from './sidebar';
-import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {HelpText} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
+import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -26,13 +26,14 @@ function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     return a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true});
 }
 
-interface SidevelgerProps {
-    selectedTabData: Sidebarelement;
+interface Props {
+    valgtFane: SidebarTabs;
+    fanetittel: string;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerProps) {
+export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}: Props) => {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -64,12 +65,13 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
                 return ' ';
         }
     };
+
     return (
         <SidebarTab
-            tittel="Mine filter"
-            handleLukk={() => dispatch(skjulSidebar(oversiktType))}
-            tab={selectedTabData.type}
-            meta={
+            tittel={fanetittel}
+            lukkSidemeny={() => dispatch(skjulSidebar(oversiktType))}
+            tab={valgtFane}
+            headingChildren={
                 <>
                     <HelpText placement="right" strategy="fixed">
                         {hjelpeTekst(oversiktType)}
@@ -84,7 +86,7 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
                                     effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
                                 }
                             });
-                            setIsMinefiltereDraggable(!isMinefiltereDraggable);
+                            setIsMinefiltereDraggable(prevState => !prevState);
                         }}
                         ariaLabel="Endre rekkefølge"
                     />
@@ -101,6 +103,4 @@ function MineFilterTab({selectedTabData, oversiktType, enhettiltak}: SidevelgerP
             />
         </SidebarTab>
     );
-}
-
-export default MineFilterTab;
+};

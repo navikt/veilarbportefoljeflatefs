@@ -74,7 +74,7 @@
     align-items: center;
 }
 
-.veilarbportefoljeflatefs .brukerliste__innhold .brukernavn button {
+.veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
     padding-left: 0;
     padding-right: 0;
 }
@@ -84,20 +84,19 @@
     flex-grow: 1;
     align-items: center;
     width: 4rem;
-    margin-right: 8px;
+    gap: 0.2rem;
 }
 
 .veilarbportefoljeflatefs .brukerliste__etiketter {
-    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 0.2rem;
 }
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteknapp {
+    margin-left: auto; /* Dyttar arbeidslisteknappen heilt ut til høgre av containaren. */
     cursor: pointer;
     padding: 0;
-    margin-left: 1rem;
     background-color: transparent;
     min-width: 2rem;
     color: #262626;
@@ -121,7 +120,9 @@
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
     display: flex;
     justify-content: flex-end;
-    align-items: baseline;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 5px;
 }
 
 .veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {

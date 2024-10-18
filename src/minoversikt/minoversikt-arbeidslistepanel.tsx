@@ -7,6 +7,7 @@ import './minoversikt.css';
 import {LagHuskelappInngang} from './huskelapp/LagHuskelappInngang';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../konstanter';
+import {SlettArbeidslisteKnapp} from '../components/arbeidsliste/SlettArbeidslisteKnapp';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
@@ -59,6 +60,7 @@ export default function ArbeidslistePanel({
                             <BodyShort size="small" data-testid="arbeidslistepanel_arbeidslisteinnhold_kommentar">
                                 {kommentar}
                             </BodyShort>
+
                             <div className="brukerliste__arbeidslisteinnhold_footer">
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
                                     {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
@@ -77,6 +79,7 @@ export default function ArbeidslistePanel({
                                         settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
                                     />
                                 )}
+                                <SlettArbeidslisteKnapp bruker={bruker} />
                             </div>
                         </>
                     )}

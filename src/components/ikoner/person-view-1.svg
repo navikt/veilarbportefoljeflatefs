@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="sok-veileder-svg" focusable="false">
-    <g stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none">
-        <path d="M12.5 14.5v-2.844M7.5 11.703v2.797l-5.01 1.789c-1.193.426-1.99 1.558-1.99 2.825v2.386h12"/>
-        <ellipse cx="9.988" cy="6.5" rx="5" ry="6"/>
-        <path d="M14.969 5.963l-.48.037c-1.703.329-2.797-.289-3.734-1.93-.564 1.079-2.321 1.93-3.767 1.93-.711 0-1.334-.153-1.946-.475"/>
-        <circle cx="18" cy="18" r="3.5"/>
-        <path stroke-linecap="round" d="M23.5 23.5l-3-3"/>
-    </g>
-</svg>

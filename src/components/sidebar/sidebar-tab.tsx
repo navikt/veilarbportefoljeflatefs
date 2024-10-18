@@ -1,26 +1,27 @@
 import React from 'react';
 import {Button, Heading} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
-import {SidebarTabInfo} from '../../store/sidebar/sidebar-view-store';
+import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 
 interface TabProps {
+    tab: SidebarTabs;
     tittel: string;
-    handleLukk: () => void;
+    lukkSidemeny: () => void;
+    headingChildren?: React.ReactNode;
     children: React.ReactNode;
-    tab: SidebarTabInfo;
-    meta?: React.ReactNode;
 }
 
-function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
+export const SidebarTab = ({tab, tittel, lukkSidemeny, headingChildren, children}: TabProps) => {
     const lukkTab = () => {
         logEvent('portefolje.metrikker.lukk-pa-kryss', {
             tab: tab,
             sideNavn: finnSideNavn()
         });
-        handleLukk();
+        lukkSidemeny();
     };
+
     return (
         <>
             <div className="sidebar-header" data-testid="sidebar-header">
@@ -28,7 +29,7 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
                     {tittel}
                 </Heading>
 
-                {meta && <div className="sidebar-header__meta">{meta}</div>}
+                {headingChildren}
 
                 <Button
                     onClick={lukkTab}
@@ -37,9 +38,8 @@ function SidebarTab({tittel, handleLukk, meta, children, tab}: TabProps) {
                     icon={<XMarkIcon title="Lukk panel" fontSize="1.5rem" />}
                 />
             </div>
+
             {children}
         </>
     );
-}
-
-export default SidebarTab;
+};

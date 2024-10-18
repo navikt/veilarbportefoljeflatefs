@@ -9,10 +9,14 @@ import {slettArbeidslisteMenIkkeFargekategori} from '../../../middleware/api';
 
 export const slettArbeidslisteMenIkkeFargekategoriOgOppdaterRedux = async (
     bruker: BrukerModell,
-    dispatch: ThunkDispatch<AppState, any, AnyAction>
+    dispatch: ThunkDispatch<AppState, any, AnyAction>,
+    erSkjulArbeidslistefunksjonalitetTogglePa: boolean
 ) => {
     try {
-        const slettetArbeidsliste = await slettArbeidslisteMenIkkeFargekategori(bruker.fnr);
+        const slettetArbeidsliste = await slettArbeidslisteMenIkkeFargekategori(
+            bruker.fnr,
+            erSkjulArbeidslistefunksjonalitetTogglePa
+        );
         const ikkeAktivArbeidsliste = {...slettetArbeidsliste, arbeidslisteAktiv: false, fnr: bruker.fnr};
         leggTilStatustall('minArbeidsliste', -1)(dispatch);
         oppdaterArbeidslisteForBruker([ikkeAktivArbeidsliste])(dispatch);

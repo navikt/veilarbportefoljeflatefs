@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: ghcr.io/navikt/poao-frontend/poao-frontend:2023.01.13_08.09-36c09678654f
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2024.08.30_10.15-9c1569b22e37
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.nav.no
@@ -51,11 +51,15 @@ spec:
           namespace: pto
         - application: modiacontextholder
           namespace: personoversikt
+        - application: veilarbportefolje
+          namespace: obo
+          cluster: prod-gcp
+        - application: veilarboppfolging
+          namespace: poao
+        - application: veilarbveileder
+          namespace: obo
       external:
-        - host: veilarbportefolje.prod-fss-pub.nais.io
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
-        - host: veilarbveileder.prod-fss-pub.nais.io
-        - host: veilarboppfolging.prod-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -71,13 +75,16 @@ spec:
           "header": {
             "csp": {
               "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
-             }
+            },
+            "corp": {
+              "policy": "cross-origin"
+            }
           },
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator.intern.nav.no",
-              "preserveFromPath": true
+              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/prod",
+              "preserveFromPath": false
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
@@ -88,12 +95,12 @@ spec:
           "proxies": [
             {
               "fromPath": "/veilarbportefolje",
-              "toUrl": "https://veilarbportefolje.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarbportefolje.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbportefolje",
-                "namespace": "pto",
-                "cluster": "prod-fss"
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             },
             {
@@ -118,12 +125,12 @@ spec:
             },
             {
               "fromPath": "/veilarbveileder",
-              "toUrl": "https://veilarbveileder.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbveileder",
-                "namespace": "pto",
-                "cluster": "prod-fss"
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             },
             {
@@ -138,12 +145,12 @@ spec:
             },
             {
               "fromPath": "/veilarboppfolging",
-              "toUrl": "https://veilarboppfolging.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarboppfolging.poao",
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarboppfolging",
-                "namespace": "pto",
-                "cluster": "prod-fss"
+                "namespace": "poao",
+                "cluster": "prod-gcp"
               }
             },
             {

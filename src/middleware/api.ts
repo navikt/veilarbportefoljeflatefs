@@ -231,7 +231,12 @@ export function slettArbeidsliste(arbeidsliste) {
     return fetchToJson(url, config);
 }
 
-export function slettArbeidslisteMenIkkeFargekategori(fnr: string) {
+export function slettArbeidslisteMenIkkeFargekategori(fnr: string, skjulArbeidslistefunksjonalitetToggle: boolean) {
+    if (skjulArbeidslistefunksjonalitetToggle) {
+        // Ikkje slett arbeidslister om funksjonaliteten for arbeidslister er skjult.
+        return Promise.resolve();
+    }
+
     const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste?slettFargekategori=false`;
     const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({fnr})};
     return fetchToJson(url, config);

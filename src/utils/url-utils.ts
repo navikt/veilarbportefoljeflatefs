@@ -2,10 +2,6 @@ import queryString from 'query-string';
 import {basename} from '../history';
 import {DEFAULT_PAGINERING_STORRELSE, IKKE_SATT} from '../konstanter';
 
-export function getFraBrukerFraUrl(): string {
-    return queryString.parse(window.location.search).fraBruker as string;
-}
-
 export function getSideFromUrl() {
     return parseInt((queryString.parse(window.location.search).side as string) || '1', 10);
 }
@@ -37,6 +33,9 @@ export function getSorteringsRekkefolgeFromUrl() {
 }
 
 export function getVeilarbpersonflateBasePath() {
+    if (erDev() && getEnv() === Env.ansattDev) {
+        return 'https://veilarbpersonflate.ansatt.dev.nav.no';
+    }
     return erDev() || erMock()
         ? 'https://veilarbpersonflate.intern.dev.nav.no'
         : 'https://veilarbpersonflate.intern.nav.no';
@@ -63,6 +62,32 @@ export function updateLastPath() {
 export const erDev = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'development';
 export const erProd = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production';
 export const erMock = () => process.env.REACT_APP_MOCK === 'true';
+
+export const getEnv = (): EnvConfig => {
+    const {hostname} = window.location;
+    if (hostname.includes('intern.dev.nav.no')) return Env.dev;
+    if (hostname.includes('ansatt.dev.nav.no')) return Env.ansattDev;
+    if (hostname.includes('intern.nav.no')) return Env.prod;
+    return Env.local;
+};
+
+interface EnvConfig {
+    ingressType: 'ansatt' | 'intern';
+    type: EnvType;
+}
+
+export enum EnvType {
+    prod = 'prod',
+    dev = 'dev',
+    local = 'local'
+}
+
+const Env = {
+    ansattDev: {ingressType: 'ansatt', type: EnvType.dev},
+    dev: {ingressType: 'intern', type: EnvType.dev},
+    prod: {ingressType: 'intern', type: EnvType.prod},
+    local: {ingressType: 'intern', type: EnvType.local}
+} as const;
 
 export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 

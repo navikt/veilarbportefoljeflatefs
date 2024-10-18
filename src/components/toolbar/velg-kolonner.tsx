@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Button} from '@navikt/ds-react';
-import {Table} from '@navikt/ds-icons';
+import {TableIcon} from '@navikt/aksel-icons';
 import {useFocus} from '../../hooks/use-focus';
 import Listevisning from './listevisning/listevisning';
 import {OversiktType} from '../../ducks/ui/listevisning';
@@ -42,7 +42,7 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
                 variant="tertiary"
                 type="button"
                 className="toolbar_btn"
-                icon={<Table className="toolbar-knapp__ikon" id="velg-kolonner-ikon" />}
+                icon={<TableIcon aria-hidden={true} fontSize="1.5rem" />}
                 onClick={toggleVelgKolonner}
                 title="Velg synlige kolonner i tabellen"
                 data-testid="dropdown-knapp_velg-kolonner"
