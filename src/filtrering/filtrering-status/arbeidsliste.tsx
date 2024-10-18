@@ -15,8 +15,7 @@ import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arb
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {Alert, Bleed, Label, Link} from '@navikt/ds-react';
-import {ExternalLinkIcon} from '@navikt/aksel-icons';
+import {Bleed} from '@navikt/ds-react';
 import './arbeidsliste.css';
 
 export interface FilterStatusMinArbeidslisteProps {
@@ -33,36 +32,20 @@ function FilterStatusMinArbeidsliste({
     checked
 }: FilterStatusMinArbeidslisteProps) {
     const statusTall = useStatustallVeilederSelector();
-    const erHuskelappFeatureTogglePaa = useFeatureSelector()(HUSKELAPP);
+    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const erSkjulArbeidslistefunksjonalitetTogglePa = useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     if (erSkjulArbeidslistefunksjonalitetTogglePa) return null;
 
     return (
         <>
-            <Label className="minArbeidsliste__tittel">
-                {erHuskelappFeatureTogglePaa ? 'Huskelapper og kategorier' : 'Arbeidsliste'}
-            </Label>
-            {erHuskelappFeatureTogglePaa && (
-                <Alert variant="warning" size="small" id="minArbeidsliste__alert">
-                    <Link
-                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
-                        target="_blank"
-                        rel="noopener"
-                        inlineText
-                    >
-                        Gamle arbeidslister blir slettet 25. oktober
-                        <ExternalLinkIcon title="Ekstern lenke" />
-                    </Link>
-                </Alert>
-            )}
             <BarInputRadio
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
                 antall={statusTall.minArbeidsliste}
                 filterVerdi={mapFilternavnTilFilterValue['minArbeidsliste']}
                 labelTekst={
-                    erHuskelappFeatureTogglePaa
+                    erHuskelappFeatureTogglePa
                         ? 'Gamle arbeidslister'
                         : ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]
                 }
@@ -73,7 +56,7 @@ function FilterStatusMinArbeidsliste({
                         labelTekst={
                             <>
                                 <Bleed marginBlock="05" asChild>
-                                    {erHuskelappFeatureTogglePaa ? (
+                                    {erHuskelappFeatureTogglePa ? (
                                         <FargekategoriIkonBlaHalvsirkel fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonBla width="1.2rem" />
@@ -92,7 +75,7 @@ function FilterStatusMinArbeidsliste({
                         labelTekst={
                             <>
                                 <Bleed marginBlock="05" asChild>
-                                    {erHuskelappFeatureTogglePaa ? (
+                                    {erHuskelappFeatureTogglePa ? (
                                         <FargekategoriIkonGronnTrekant fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonGronn width="1.2rem" />
@@ -111,7 +94,7 @@ function FilterStatusMinArbeidsliste({
                         labelTekst={
                             <>
                                 <Bleed marginBlock="05" asChild>
-                                    {erHuskelappFeatureTogglePaa ? (
+                                    {erHuskelappFeatureTogglePa ? (
                                         <FargekategoriIkonGulSirkel fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonGul width="1.2rem" />
@@ -130,7 +113,7 @@ function FilterStatusMinArbeidsliste({
                         labelTekst={
                             <>
                                 <Bleed marginBlock="05" asChild>
-                                    {erHuskelappFeatureTogglePaa ? (
+                                    {erHuskelappFeatureTogglePa ? (
                                         <FargekategoriIkonLillaFirkant fontSize="1.5rem" />
                                     ) : (
                                         <ArbeidslisteikonLilla width="1.2rem" />
