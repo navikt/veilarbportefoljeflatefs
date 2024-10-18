@@ -19,6 +19,7 @@ import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {
     HUSKELAPP,
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
     VEDTAKSTOTTE,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_STATUSFILTER_TILTAKSHENDELSE
@@ -74,6 +75,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         oversiktType === OversiktType.enhetensOversikt &&
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const dispatch = useDispatch();
 
@@ -255,27 +257,36 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['inaktiveBrukere']]}
                     />
                 </div>
-                <FilterStatusMinArbeidsliste
-                    ferdigfilterListe={kategoriliste}
-                    handleChange={handleRadioButtonChange}
-                    handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                    hidden={oversiktType !== OversiktType.minOversikt}
-                    checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
-                />
-                {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <BarInputRadio
-                        filterNavn="huskelapp"
-                        antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                        handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
-                    />
-                )}
-                {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <div className="forsteBarlabelIGruppe">
-                        <FilterStatusMineFargekategorier />
-                    </div>
-                )}
+                <div className="forsteBarlabelIGruppe">
+                    {arbeidslistefunksjonalitetSkalVises && (
+                        <FilterStatusMinArbeidsliste
+                            ferdigfilterListe={kategoriliste}
+                            handleChange={handleRadioButtonChange}
+                            handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
+                            hidden={oversiktType !== OversiktType.minOversikt}
+                            checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                        />
+                    )}
+                    {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                        <BarInputRadio
+                            filterNavn="huskelapp"
+                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                            handleChange={handleRadioButtonChange}
+                            filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
+                            labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
+                        />
+                    )}
+                    {!arbeidslistefunksjonalitetSkalVises &&
+                        erHuskelappFeatureTogglePa &&
+                        oversiktType === OversiktType.minOversikt && <FilterStatusMineFargekategorier />}
+                </div>
+                {arbeidslistefunksjonalitetSkalVises &&
+                    erHuskelappFeatureTogglePa &&
+                    oversiktType === OversiktType.minOversikt && (
+                        <div className="forsteBarlabelIGruppe">
+                            <FilterStatusMineFargekategorier />
+                        </div>
+                    )}
             </RadioGroup>
         </div>
     );
