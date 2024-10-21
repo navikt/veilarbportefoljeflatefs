@@ -126,16 +126,6 @@ spec:
               }
             },
             {
-              "fromPath": "/veilarbvedtaksstotte",
-              "toUrl": "http://veilarbvedtaksstotte.obo",
-              "preserveFromPath": true,
-              "toApp": {
-                "name": "veilarbvedtaksstotte",
-                "namespace": "obo",
-                "cluster": "prod-gcp"
-              }
-            },
-            {
               "fromPath": "/veilarbveileder",
               "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
