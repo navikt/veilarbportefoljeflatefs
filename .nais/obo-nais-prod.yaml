@@ -58,6 +58,8 @@ spec:
           namespace: poao
         - application: veilarbveileder
           namespace: obo
+        - application: veilarbvedtaksstotte
+          namespace: obo
       external:
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
   env:
