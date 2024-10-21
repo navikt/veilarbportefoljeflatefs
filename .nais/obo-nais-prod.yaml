@@ -58,6 +58,8 @@ spec:
           namespace: poao
         - application: veilarbveileder
           namespace: obo
+        - application: veilarbvedtaksstotte
+          namespace: obo
       external:
         - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
   env:
@@ -121,6 +123,16 @@ spec:
                 "name": "veilarbvedtaksstotte",
                 "namespace": "pto",
                 "cluster": "prod-fss"
+              }
+            },
+            {
+              "fromPath": "/veilarbvedtaksstotte",
+              "toUrl": "http://veilarbvedtaksstotte.obo",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             },
             {
