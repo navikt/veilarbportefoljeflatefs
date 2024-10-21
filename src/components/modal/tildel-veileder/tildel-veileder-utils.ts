@@ -81,7 +81,7 @@ export const ingentingHosBrukerVilBliSlettet = ({
 }: SjekkOmIngentingSkalSlettesProps) => {
     return (
         fraVeileder === tilVeileder ||
-        ((!arbeidslisteAktiv || navkontorForArbeidsliste === tilEnhet) &&
+        (!arbeidslisteAktiv &&
             (!huskelapp || huskelapp?.enhetId === tilEnhet) &&
             (!fargekategori || fargekategoriEnhetId === tilEnhet))
     );
