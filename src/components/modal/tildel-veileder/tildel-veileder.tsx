@@ -61,7 +61,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
-    const skalArbeidslisteFunksjonalitetVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -208,7 +208,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
-                        {skalArbeidslisteFunksjonalitetVises ? (
+                        {arbeidslistefunksjonalitetSkalVises ? (
                             <BodyShort size="medium">
                                 Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
                                 annen enhet, og vil bli slettet ved tildeling av ny veileder:

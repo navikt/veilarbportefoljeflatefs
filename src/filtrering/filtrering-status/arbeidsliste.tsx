@@ -1,4 +1,5 @@
 import React from 'react';
+import {Bleed} from '@navikt/ds-react';
 import hiddenIf from '../../components/hidden-if/hidden-if';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {KategoriModell} from '../../model-interfaces';
@@ -15,7 +16,6 @@ import {ReactComponent as ArbeidslisteikonBla} from '../../components/ikoner/arb
 import {ReactComponent as ArbeidslisteikonGronn} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gronn.svg';
 import {ReactComponent as ArbeidslisteikonGul} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_gul.svg';
 import {ReactComponent as ArbeidslisteikonLilla} from '../../components/ikoner/arbeidsliste/arbeidslisteikon_lilla.svg';
-import {Bleed} from '@navikt/ds-react';
 import './arbeidsliste.css';
 
 export interface FilterStatusMinArbeidslisteProps {

@@ -39,7 +39,7 @@ function Toolbar({
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
-    const skalViseArbeidslistefunksjonalitet = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -51,7 +51,9 @@ function Toolbar({
             case OversiktType.minOversikt:
                 return (
                     <>
-                        {skalViseArbeidslistefunksjonalitet && !erFargekategoriFeatureTogglePa && <ArbeidslisteKnapp />}
+                        {arbeidslistefunksjonalitetSkalVises && !erFargekategoriFeatureTogglePa && (
+                            <ArbeidslisteKnapp />
+                        )}
                         {erFargekategoriFeatureTogglePa && (
                             <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
                         )}

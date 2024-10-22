@@ -71,7 +71,7 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
     const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
-    const skalViseArbeidslistefunksjonalitet = !store.getState().features[SKJUL_ARBEIDSLISTEFUNKSJONALITET];
+    const arbeidslistefunksjonalitetSkalVises = !store.getState().features[SKJUL_ARBEIDSLISTEFUNKSJONALITET];
 
     const filtrertPaLandgruppeEllerFoedeland = filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0;
 
@@ -108,7 +108,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         oversiktType === OversiktType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET);
 
     const filtrertPaArbeidslisteIMinOversikt =
-        skalViseArbeidslistefunksjonalitet &&
+        arbeidslistefunksjonalitetSkalVises &&
         oversiktType === OversiktType.minOversikt &&
         filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE);
 

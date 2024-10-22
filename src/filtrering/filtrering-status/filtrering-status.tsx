@@ -260,24 +260,24 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forsteBarlabelIGruppe">
-                        {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
-                            <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
-                        )}
                         {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
                             <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
                         )}
                         {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
-                            <Alert variant="warning" size="small" className="minArbeidsliste__alert">
-                                <Link
-                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
-                                    target="_blank"
-                                    rel="noopener"
-                                    inlineText
-                                >
-                                    Gamle arbeidslister blir slettet 25. oktober
-                                    <ExternalLinkIcon title="Ekstern lenke" />
-                                </Link>
-                            </Alert>
+                            <>
+                                <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
+                                <Alert variant="warning" size="small" className="minArbeidsliste__alert">
+                                    <Link
+                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
+                                        target="_blank"
+                                        rel="noopener"
+                                        inlineText
+                                    >
+                                        Gamle arbeidslister blir slettet 25. oktober
+                                        <ExternalLinkIcon title="Ekstern lenke" />
+                                    </Link>
+                                </Alert>
+                            </>
                         )}
                         {arbeidslistefunksjonalitetSkalVises && (
                             <FilterStatusMinArbeidsliste
@@ -288,7 +288,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
                             />
                         )}
-                        {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
+                        {erHuskelappFeatureTogglePa && (
                             <BarInputRadio
                                 filterNavn="huskelapp"
                                 antall={statustallMedBrukerinnsyn.mineHuskelapper}
@@ -297,9 +297,9 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
                             />
                         )}
-                        {!arbeidslistefunksjonalitetSkalVises &&
-                            erHuskelappFeatureTogglePa &&
-                            oversiktType === OversiktType.minOversikt && <FilterStatusMineFargekategorier />}
+                        {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
+                            <FilterStatusMineFargekategorier />
+                        )}
                     </div>
                 )}
                 {arbeidslistefunksjonalitetSkalVises &&
