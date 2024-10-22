@@ -22,6 +22,8 @@ jobs:
                   NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Build application
               run: npm run build:mock
+            - name: Run tests
+              run: npm run test
             - name: Cypress run
               uses: cypress-io/github-action@v6
               with:
