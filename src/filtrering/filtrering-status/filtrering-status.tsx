@@ -260,7 +260,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forsteBarlabelIGruppe">
-                        {erHuskelappFeatureTogglePa && (
+                        {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
                             <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
                         )}
                         {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
@@ -275,19 +275,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                     inlineText
                                 >
                                     Gamle arbeidslister blir slettet 25. oktober
-                                    <ExternalLinkIcon title="Ekstern lenke" />
-                                </Link>
-                            </Alert>
-                        )}
-                        {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
-                            <Alert variant="info" size="small" className="minArbeidsliste__alert">
-                                <Link
-                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
-                                    target="_blank"
-                                    rel="noopener"
-                                    inlineText
-                                >
-                                    Oppdaterte retningslinjer for huskelapp
                                     <ExternalLinkIcon title="Ekstern lenke" />
                                 </Link>
                             </Alert>
