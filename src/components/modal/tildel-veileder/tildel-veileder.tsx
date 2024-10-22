@@ -157,7 +157,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         }
     };
 
-    function tildelVeiledereForBrukereDerIngentingBlirSlettet() {
+    const tildelVeiledereForBrukereDerIngentingBlirSlettet = () => {
         if (tilordningerBrukereUtenTingSomVilBliSlettet.length > 0) {
             trackAmplitude(
                 {
@@ -172,9 +172,9 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
         }
         lukkFjernModal();
-    }
+    };
 
-    const tildelVeilederForAlleValgteBrukere = () => () => {
+    const tildelVeilederForAlleValgteBrukere = () => {
         trackAmplitude(
             {
                 name: 'knapp klikket',
