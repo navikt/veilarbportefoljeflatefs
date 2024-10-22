@@ -174,7 +174,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         lukkFjernModal();
     }
 
-    const tildelVeilederForAlleValgteBrukere = () => () => {
+    const tildelVeilederForAlleValgteBrukere = () => {
         trackAmplitude(
             {
                 name: 'knapp klikket',
