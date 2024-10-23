@@ -414,7 +414,7 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     tekst="Om barnet"
                     title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
-                    headerTestId="sorteringheader_oppfolging" // TODO betre test-id her
+                    headerTestId="sorteringheader_enslige-forsorgere-om-barnet"
                     className="col col-xs-3"
                 />
 
