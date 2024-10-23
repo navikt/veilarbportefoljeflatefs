@@ -23,7 +23,10 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE} from '../../konstanter';
+import {
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
+    VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE
+} from '../../konstanter';
 import {store} from '../../application';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
@@ -68,6 +71,7 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
     const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
+    const arbeidslistefunksjonalitetSkalVises = !store.getState().features[SKJUL_ARBEIDSLISTEFUNKSJONALITET];
 
     const filtrertPaLandgruppeEllerFoedeland = filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0;
 
@@ -104,7 +108,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         oversiktType === OversiktType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET);
 
     const filtrertPaArbeidslisteIMinOversikt =
-        oversiktType === OversiktType.minOversikt && filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE);
+        arbeidslistefunksjonalitetSkalVises &&
+        oversiktType === OversiktType.minOversikt &&
+        filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE);
 
     const filtrertPaTolkBehov =
         filtervalg.tolkebehov.length > 0 ||

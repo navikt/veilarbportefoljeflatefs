@@ -20,6 +20,8 @@ import {
     harHuskelappSomVilBliSlettetFilter,
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../../konstanter';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -58,6 +60,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const enhet = useEnhetSelector();
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
+
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
@@ -204,10 +208,17 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
-                        <BodyShort size="medium">
-                            Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
-                            annen enhet, og vil bli slettet ved tildeling av ny veileder:
-                        </BodyShort>
+                        {arbeidslistefunksjonalitetSkalVises ? (
+                            <BodyShort size="medium">
+                                Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
+                                annen enhet, og vil bli slettet ved tildeling av ny veileder:
+                            </BodyShort>
+                        ) : (
+                            <BodyShort size="medium">
+                                Huskelapp og/eller kategori for følgende brukere ble opprettet på en annen enhet, og vil
+                                bli slettet ved tildeling av ny veileder:
+                            </BodyShort>
+                        )}
                         <FnrList listeMedFnr={fnrIAdvarselslista} />
                         <BodyShort size="medium" className="sporsmal-likevel-tidele">
                             Ønsker du likevel å tildele veilederen?
