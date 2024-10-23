@@ -17,7 +17,6 @@ export const UtdanningOgSituasjonSistEndret = ({
         onClick={onClick}
         tekst="Dato sist endret"
         title="Dato personen sist ga informasjon om situasjon eller utdanning"
-        headerId="dato-sist-endret-utdanning-og-situasjon"
         className="col col-xs-2"
     />
 );
