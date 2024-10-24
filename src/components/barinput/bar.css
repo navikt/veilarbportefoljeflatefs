@@ -16,8 +16,8 @@
 .barlabel__antall {
     padding-right: 0.5rem;
 }
-.forsteBarlabelIGruppe {
+.forste-barlabel-i-gruppe {
     padding-top: 1rem;
-    border-top: 1px solid #6a6a6a;
+    border-top: 1px solid var(--a-border-divider);
     margin-top: 1rem;
 }

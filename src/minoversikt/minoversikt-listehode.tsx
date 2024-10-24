@@ -25,7 +25,7 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
@@ -76,6 +76,7 @@ function MinOversiktListeHode({
 }: MinOversiktListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const vis_kolonner_for_huskelapp = useFeatureSelector()(HUSKELAPP);
+    const visKolonnerForArbeidsliste = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
@@ -113,7 +114,7 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-            {!vis_kolonner_for_huskelapp && (
+            {visKolonnerForArbeidsliste && !vis_kolonner_for_huskelapp && (
                 <SorteringHeader
                     sortering={Sorteringsfelt.ARBEIDSLISTEKATEGORI}
                     erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTEKATEGORI}
@@ -165,35 +166,38 @@ function MinOversiktListeHode({
                 <BostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
-
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                        valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
-                    }
-                    sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Arbeidsliste frist"
-                    title="Fristdato som er satt i arbeidslisten"
-                    headerId="arbeidsliste-frist"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                        valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
-                    }
-                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Arbeidsliste tittel"
-                    title="Tittel som er skrevet i arbeidslisten"
-                    headerId="arbeidsliste-overskrift"
-                    className="col col-xs-2"
-                />
+                {visKolonnerForArbeidsliste && (
+                    <>
+                        <SorteringHeader
+                            skalVises={
+                                !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                                valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
+                            }
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_FRIST}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Arbeidsliste frist"
+                            title="Fristdato som er satt i arbeidslisten"
+                            headerId="arbeidsliste-frist"
+                            className="col col-xs-2"
+                        />
+                        <SorteringHeader
+                            skalVises={
+                                !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                                valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
+                            }
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Arbeidsliste tittel"
+                            title="Tittel som er skrevet i arbeidslisten"
+                            headerId="arbeidsliste-overskrift"
+                            className="col col-xs-2"
+                        />
+                    </>
+                )}
                 <SorteringHeader
                     skalVises={
                         erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)

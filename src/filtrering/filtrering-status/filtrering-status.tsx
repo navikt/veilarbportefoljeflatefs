@@ -1,5 +1,7 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import {Alert, Detail, Label, Link, RadioGroup, ReadMore} from '@navikt/ds-react';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
@@ -19,13 +21,13 @@ import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {
     HUSKELAPP,
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
     VEDTAKSTOTTE,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
-import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
-import './filtrering-status.css';
 import FilterStatusMineFargekategorier from './fargekategori';
+import './filtrering-status.css';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
@@ -74,6 +76,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         oversiktType === OversiktType.enhetensOversikt &&
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
+    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const dispatch = useDispatch();
 
@@ -164,7 +167,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 legend=""
                 value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0] ?? ''}
             >
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
@@ -191,7 +194,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         />
                     )}
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="venterPaSvarFraNAV"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
@@ -223,7 +226,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         />
                     )}
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
@@ -246,7 +249,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['iavtaltAktivitet']]}
                     />
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
@@ -255,27 +258,57 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['inaktiveBrukere']]}
                     />
                 </div>
-                <FilterStatusMinArbeidsliste
-                    ferdigfilterListe={kategoriliste}
-                    handleChange={handleRadioButtonChange}
-                    handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                    hidden={oversiktType !== OversiktType.minOversikt}
-                    checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
-                />
-                {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <BarInputRadio
-                        filterNavn="huskelapp"
-                        antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                        handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
-                    />
-                )}
-                {erHuskelappFeatureTogglePa && oversiktType === OversiktType.minOversikt && (
-                    <div className="forsteBarlabelIGruppe">
-                        <FilterStatusMineFargekategorier />
+                {oversiktType === OversiktType.minOversikt && (
+                    <div className="forste-barlabel-i-gruppe">
+                        {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
+                            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
+                        )}
+                        {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
+                            <>
+                                <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
+                                <Alert variant="warning" size="small" className="minArbeidsliste__alert">
+                                    <Link
+                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
+                                        target="_blank"
+                                        rel="noopener"
+                                        inlineText
+                                    >
+                                        Gamle arbeidslister blir slettet 25. oktober
+                                        <ExternalLinkIcon title="Ekstern lenke" />
+                                    </Link>
+                                </Alert>
+                            </>
+                        )}
+                        {arbeidslistefunksjonalitetSkalVises && (
+                            <FilterStatusMinArbeidsliste
+                                ferdigfilterListe={kategoriliste}
+                                handleChange={handleRadioButtonChange}
+                                handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
+                                hidden={oversiktType !== OversiktType.minOversikt}
+                                checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
+                            />
+                        )}
+                        {erHuskelappFeatureTogglePa && (
+                            <BarInputRadio
+                                filterNavn="huskelapp"
+                                antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                                handleChange={handleRadioButtonChange}
+                                filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
+                                labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
+                            />
+                        )}
+                        {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
+                            <FilterStatusMineFargekategorier />
+                        )}
                     </div>
                 )}
+                {arbeidslistefunksjonalitetSkalVises &&
+                    erHuskelappFeatureTogglePa &&
+                    oversiktType === OversiktType.minOversikt && (
+                        <div className="forste-barlabel-i-gruppe">
+                            <FilterStatusMineFargekategorier />
+                        </div>
+                    )}
             </RadioGroup>
         </div>
     );

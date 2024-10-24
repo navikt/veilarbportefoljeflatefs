@@ -107,7 +107,7 @@ function MinoversiktBrukerPanel({
                 >
                     Velg bruker {bruker.etternavn}, {bruker.fornavn}
                 </Checkbox>
-                {!erHuskelappFeatureTogglePa && (
+                {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
                     <ArbeidslistekategoriVisning
                         skalVises={arbeidslisteAktiv}
                         kategori={bruker.arbeidsliste?.kategori}
