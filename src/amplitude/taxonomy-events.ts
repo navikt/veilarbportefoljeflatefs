@@ -5,4 +5,5 @@ export type AmplitudeEvent =
     | {name: 'modal åpnet'; data: {tekst: string}}
     | {name: 'knapp klikket'; data: {knapptekst: string; effekt: string}}
     | {name: 'alert vist'; data: {variant: string; tekst: string}}
+    | {name: 'filtervalg'; data: {kategori: string; filternavn: string}}
     | {name: string; data: Record<string, unknown>};
