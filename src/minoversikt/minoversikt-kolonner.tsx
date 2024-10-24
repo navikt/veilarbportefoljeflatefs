@@ -50,7 +50,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {SKJUL_ARBEIDSLISTEFUNKSJONALITET, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
@@ -64,6 +64,7 @@ interface MinOversiktKolonnerProps {
 
 function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const visKolonnerForArbeidsliste = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -194,22 +195,26 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={arbeidslisteFrist}
-                skalVises={
-                    !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                    valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
-                }
-            />
-            <ArbeidslisteOverskrift
-                className="col col-xs-2"
-                bruker={bruker}
-                skalVises={
-                    !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                    valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
-                }
-            />
+            {visKolonnerForArbeidsliste && (
+                <>
+                    <DatoKolonne
+                        className="col col-xs-2"
+                        dato={arbeidslisteFrist}
+                        skalVises={
+                            !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                            valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
+                        }
+                    />
+                    <ArbeidslisteOverskrift
+                        className="col col-xs-2"
+                        bruker={bruker}
+                        skalVises={
+                            !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                            valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
+                        }
+                    />
+                </>
+            )}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
