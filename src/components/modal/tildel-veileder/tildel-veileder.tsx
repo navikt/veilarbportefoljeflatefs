@@ -202,9 +202,15 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 className="advarsel-sletting-arbeidslista"
             >
                 <Modal.Header>
-                    <Heading size="medium" level="2">
-                        Arbeidslistenotat, huskelapp og/eller kategori blir slettet
-                    </Heading>
+                    {arbeidslistefunksjonalitetSkalVises ? (
+                        <Heading size="medium" level="2">
+                            Arbeidslistenotat, huskelapp og/eller kategori blir slettet
+                        </Heading>
+                    ) : (
+                        <Heading size="medium" level="2">
+                            Huskelapp og/eller kategori blir slettet
+                        </Heading>
+                    )}
                 </Modal.Header>
                 <Modal.Body>
                     <div className="advarsel-modal">
@@ -220,6 +226,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                             </BodyShort>
                         )}
                         <FnrList listeMedFnr={fnrIAdvarselslista} />
+                        <br />
                         <BodyShort size="medium" className="sporsmal-likevel-tidele">
                             Ønsker du likevel å tildele veilederen?
                         </BodyShort>
@@ -228,7 +235,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                         <Button
                             variant="tertiary"
                             className="knapp-avbryt-tildeling"
-                            size="medium"
+                            size="small"
                             onClick={tildelVeiledereForBrukereDerIngentingBlirSlettet}
                         >
                             Avbryt tildeling for nevnte bruker(e)
@@ -236,7 +243,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                         <Button
                             type={'submit'}
                             className="knapp"
-                            size="medium"
+                            size="small"
                             onClick={tildelVeilederForAlleValgteBrukere}
                         >
                             Ja, tildel veilederen
