@@ -17,7 +17,6 @@ export const HuskelappKommentar = ({
         onClick={onClick}
         tekst="Huskelapp"
         title="Huskelapp"
-        headerId="huskelapp"
         className="col col-xs-2"
     />
 );

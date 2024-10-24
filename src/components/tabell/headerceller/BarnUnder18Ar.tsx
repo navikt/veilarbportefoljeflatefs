@@ -12,7 +12,6 @@ export const BarnUnder18Aar = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefo
         onClick={onClick}
         tekst="Barn under 18 år"
         title="Antall og alder på barn under 18 år"
-        headerId="barn_under_18"
         className="col col-xs-2"
     />
 );

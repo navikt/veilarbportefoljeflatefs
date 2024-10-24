@@ -14,7 +14,7 @@ interface SorteringHeaderProps extends HeaderProps {
     erValgt: boolean;
     tekst: React.ReactNode;
     title?: string;
-    headerId: string;
+    headerTestId?: string;
 }
 
 function SorteringHeader({
@@ -26,7 +26,7 @@ function SorteringHeader({
     skalVises,
     className = '',
     title,
-    headerId
+    headerTestId
 }: SorteringHeaderProps) {
     const sorteringsrekkefolge =
         erValgt && rekkefolge !== Sorteringsrekkefolge.ikke_satt ? rekkefolge : 'ingen sortering';
@@ -47,8 +47,8 @@ function SorteringHeader({
     };
 
     return (
-        <Header skalVises={skalVises} className={className} headerId={headerId}>
-            <span className="sorteringheader__lenke">
+        <Header skalVises={skalVises} className={className} headerTestId={headerTestId}>
+            <span>
                 <Button
                     size="small"
                     variant="tertiary"

@@ -12,7 +12,6 @@ export const Tolkesprak = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge,
         onClick={onClick}
         tekst="Tolkespråk"
         title="Hvilket språk tolken må kunne"
-        headerId="tolkespraak"
         className="col col-xs-2"
     />
 );

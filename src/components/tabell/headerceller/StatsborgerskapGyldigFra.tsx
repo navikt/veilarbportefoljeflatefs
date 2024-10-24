@@ -17,7 +17,6 @@ export const StatsborgerskapGyldigFra = ({
         onClick={onClick}
         tekst="Gyldig fra"
         title="Dato statsborgerskapet er gyldig fra"
-        headerId="statsborgerskap_gyldig_fra"
         className="col col-xs-2"
     />
 );

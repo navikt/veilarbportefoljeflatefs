@@ -17,7 +17,6 @@ export const BostedSistOppdatert = ({
         onClick={onClick}
         tekst="Bosted oppdatert"
         title="Dato for siste oppdatering av bosted"
-        headerId="bosted_sist_oppdatert"
         className="col col-xs-2"
     />
 );

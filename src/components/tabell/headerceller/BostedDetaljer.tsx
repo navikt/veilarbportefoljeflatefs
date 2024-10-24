@@ -12,7 +12,6 @@ export const BostedDetaljer = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefo
         onClick={onClick}
         tekst="Bosted detaljer"
         title="Bydelen personen bor i (om det finnes en)"
-        headerId="bosted_bydel"
         className="col col-xs-2"
     />
 );

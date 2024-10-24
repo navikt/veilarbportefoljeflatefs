@@ -122,7 +122,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst={<ArbeidslisteikonBla id="arbeidslisteikon__listehode" />}
                     title="Sorter på farge"
-                    headerId="arbeidslistekategori"
                     className="arbeidslistekategori__sorteringsheader"
                 />
             )}
@@ -179,21 +178,19 @@ function MinOversiktListeHode({
                             onClick={sorteringOnClick}
                             tekst="Arbeidsliste frist"
                             title="Fristdato som er satt i arbeidslisten"
-                            headerId="arbeidsliste-frist"
                             className="col col-xs-2"
-                        />
-                        <SorteringHeader
-                            skalVises={
-                                !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                                valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
-                            }
-                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Arbeidsliste tittel"
-                            title="Tittel som er skrevet i arbeidslisten"
-                            headerId="arbeidsliste-overskrift"
+                />
+                <SorteringHeader
+                    skalVises={
+                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                        valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
+                    }
+                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Arbeidsliste tittel"
+                    title="Tittel som er skrevet i arbeidslisten"
                             className="col col-xs-2"
                         />
                     </>
@@ -208,7 +205,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker rettighet dagpenger"
                     title="Gjenstående uker av rettighetsperioden for dagpenger"
-                    headerId="ytelse-utlopsdato"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -224,7 +220,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker vedtak tiltakspenger"
                     title="Gjenstående uker på gjeldende vedtak tiltakspenger"
-                    headerId="ytelse-utlopsdato"
                     className="col col-xs-2"
                 />
                 {vis_kolonner_for_vurderingsfrist_aap && (
@@ -236,7 +231,6 @@ function MinOversiktListeHode({
                         onClick={sorteringOnClick}
                         tekst="Type AAP-periode"
                         title="Type AAP-periode"
-                        headerId="type-aap"
                         className="col col-xs-2"
                     />
                 )}
@@ -249,7 +243,6 @@ function MinOversiktListeHode({
                         onClick={sorteringOnClick}
                         tekst="Frist vurdering rett AAP"
                         title="Omtrentlig frist for ny vurdering av AAP"
-                        headerId="frist-vurdering-aap"
                         className="col col-xs-2"
                     />
                 )}
@@ -261,7 +254,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker vedtak AAP"
                     title="Gjenstående uker på gjeldende vedtak AAP"
-                    headerId="gjenstaende-uker-vedtak-aap"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -272,7 +264,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker rettighet AAP"
                     title="Gjenstående uker av rettighetsperioden for AAP"
-                    headerId="rettighetsperiode-gjenstaende"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -283,7 +274,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Dato på melding"
                     title='Dato på meldingen som er merket "Venter på svar fra NAV"'
-                    headerId="venter-pa-svar-fra-nav"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -294,7 +284,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Dato på melding"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
-                    headerId="venter-pa-svar-fra-bruker"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -305,7 +294,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Utløpsdato aktivitet"
                     title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="utlopte-aktiviteter"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -316,7 +304,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Neste utløpsdato aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="i-avtalt-aktivitet"
+                    headerTestId="sorteringheader_i-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -327,7 +315,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Klokkeslett møte"
                     title="Tidspunktet møtet starter"
-                    headerId="moter-idag"
                     className="col col-xs-2"
                 />
                 <Header
@@ -335,7 +322,6 @@ function MinOversiktListeHode({
                         !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
                     }
                     title="Varighet på møtet"
-                    headerId="varighet-mote"
                     className="col col-xs-2"
                 >
                     Varighet møte
@@ -350,7 +336,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Avtalt med NAV"
                     title="Møtestatus"
-                    headerId="avtalt-mote"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -363,7 +348,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Status § 14a-vedtak"
                     title="Status oppfølgingvedtak"
-                    headerId="vedtakstatus"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -377,7 +361,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Dager siden status"
                     title="Dager siden status"
-                    headerId="vedtakstatus-endret"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -391,7 +374,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Ansvarlig for vedtak"
                     title="Ansvarlig veileder for vedtak"
-                    headerId="vedtakstatus-endret"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -402,7 +384,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Neste utløpsdato valgt aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="valgte-aktiviteter"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -416,7 +397,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Startdato aktivitet"
                     title='Startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="start-dato-for-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -430,7 +410,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Neste startdato aktivitet"
                     title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="neste-start-dato-for-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -444,7 +423,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Passert startdato aktivitet"
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="forrige-dato-for-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -458,14 +436,12 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Passert startdato aktivitet"
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerId="forrige-dato-for-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
                 <Header
                     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
                     skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     title="Personens siste endring av aktiviteter/mål"
-                    headerId="siste-endring"
                     className="col col-xs-2"
                 >
                     Siste endring
@@ -479,7 +455,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Dato personen sist gjorde endring i aktiviteter/mål"
                     title="Dato siste endring"
-                    headerId="dato-siste-endring"
                     className="col col-xs-2"
                 />
 
@@ -497,7 +472,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Utløp overgangsstønad"
                     title="Utløpsdato for overgangsstønad"
-                    headerId="utlop_overgangsstonad"
+                    headerTestId="sorteringheader_utlop_overgangsstonad"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -511,7 +486,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Type vedtaksperiode overgangsstønad"
                     title="Type vedtaksperiode for overgangsstønad"
-                    headerId="type_vedtaksperiode"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -525,7 +499,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Om aktivitetsplikt overgangsstønad"
                     title="Om bruker har aktivitetsplikt på overgangsstønad"
-                    headerId="om_aktivitetsplikt"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -539,7 +512,7 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Om barnet"
                     title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
-                    headerId="oppfolging"
+                    headerTestId="sorteringheader_enslige-forsorgere-om-barnet"
                     className="col col-xs-2"
                 />
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
@@ -560,7 +533,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Hendelse på tiltak"
                     title="Lenke til hendelsen"
-                    headerId="tiltakshendelse-lenke"
                     className="col col-xs-3"
                 />
                 <SorteringHeader
@@ -574,7 +546,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Dato for hendelse"
                     title="Dato da hendelsen ble opprettet"
-                    headerId="tiltakshendelse-dato-opprettet"
                     className="col col-xs-2"
                 />
             </div>

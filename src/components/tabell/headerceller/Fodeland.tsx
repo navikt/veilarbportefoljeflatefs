@@ -12,7 +12,6 @@ export const Fodeland = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, o
         onClick={onClick}
         tekst="Fødeland"
         title="Landet personen er født i"
-        headerId="fodeland"
         className="col col-xs-2"
     />
 );

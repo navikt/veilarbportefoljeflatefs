@@ -10,7 +10,6 @@ export const Navn = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: Headercelle
         rekkefolge={rekkefolge}
         tekst="Etternavn"
         title="Etternavn"
-        headerId="etternavn"
         className="col col-xs-2"
     />
 );

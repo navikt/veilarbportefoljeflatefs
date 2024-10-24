@@ -269,7 +269,7 @@ describe('Diverse', () => {
         // Sjekkar at rette kolonner er synlege (Om barnet, Utløp overgangsstønad, ikkje Veileder)
         cy.getByTestId('sorteringheader_veileder').should('not.exist');
         cy.getByTestId('sorteringheader_utlop_overgangsstonad').should('be.visible');
-        cy.getByTestId('sorteringheader_oppfolging').should('be.visible'); //om barnet kolonne synlig
+        cy.getByTestId('sorteringheader_enslige-forsorgere-om-barnet').should('be.visible');
 
         // Går til Min oversikt
         cy.gaTilOversikt('min-oversikt');
@@ -284,7 +284,7 @@ describe('Diverse', () => {
         // Sjekkar at vi framleis ser Om barnet og Utløp overgangsnstønad
         cy.gaTilOversikt('enhetens-oversikt');
         cy.getByTestId('sorteringheader_veileder').should('not.exist');
-        cy.getByTestId('sorteringheader_oppfolging').should('be.visible');
+        cy.getByTestId('sorteringheader_enslige-forsorgere-om-barnet').should('be.visible');
 
         // Går til Min oversikt igjen, der skal vi framleis sjå kolonne for "Neste utløpsdato aktivitet"
         cy.gaTilOversikt('min-oversikt');
