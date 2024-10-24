@@ -167,7 +167,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 legend=""
                 value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0] ?? ''}
             >
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
@@ -194,7 +194,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         />
                     )}
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="venterPaSvarFraNAV"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
@@ -226,7 +226,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         />
                     )}
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
@@ -249,7 +249,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['iavtaltAktivitet']]}
                     />
                 </div>
-                <div className="forsteBarlabelIGruppe">
+                <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
@@ -259,7 +259,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     />
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
-                    <div className="forsteBarlabelIGruppe">
+                    <div className="forste-barlabel-i-gruppe">
                         {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
                             <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
                         )}
@@ -305,7 +305,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 {arbeidslistefunksjonalitetSkalVises &&
                     erHuskelappFeatureTogglePa &&
                     oversiktType === OversiktType.minOversikt && (
-                        <div className="forsteBarlabelIGruppe">
+                        <div className="forste-barlabel-i-gruppe">
                             <FilterStatusMineFargekategorier />
                         </div>
                     )}
