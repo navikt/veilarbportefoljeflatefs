@@ -10,7 +10,6 @@ export const Fnr = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeadercelleP
         onClick={onClick}
         tekst="Fødselsnr."
         title="Fødselsnummer"
-        headerId="fnr"
         className="col col-xs-2-5"
     />
 );
