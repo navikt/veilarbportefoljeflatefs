@@ -17,7 +17,6 @@ export const TolkebehovSistOppdatert = ({
         onClick={onClick}
         tekst="Tolkebehov oppdatert"
         title="Dato for siste oppdatering av tolkebehov"
-        headerId="tolkbehovsistoppdatert"
         className="col col-xs-2"
     />
 );

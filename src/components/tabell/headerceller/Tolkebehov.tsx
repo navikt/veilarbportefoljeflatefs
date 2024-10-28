@@ -6,7 +6,6 @@ export const Tolkebehov = ({valgteKolonner}: HeadercelleProps) => (
     <Header
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
         title="Hvilke tolkebehov personen har"
-        headerId="tolkebehov"
         className="col col-xs-2"
     >
         Tolkebehov
