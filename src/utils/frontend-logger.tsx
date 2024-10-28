@@ -62,18 +62,14 @@ export const logEvent = (logTag: string, fields?: Fields, tags?: {}): void => {
                     });
                     break;
                 default:
+                    trackAmplitude({
+                        name: 'filtervalg',
+                        data: {
+                            filternavn: fields.filter,
+                            kategori: fields.verdi
+                        }
+                    });
                     break;
-            }
-            if (fields?.filter === 'innsatsgruppe') {
-                // eslint-disable-next-line no-console
-                console.log('Amplitude data ', fields.filter, fields.verdi);
-                trackAmplitude({
-                    name: 'filtervalg',
-                    data: {
-                        filternavn: fields?.filter,
-                        kategori: innsatsgruppe[fields.verdi]?.label
-                    }
-                });
             }
         }
 
