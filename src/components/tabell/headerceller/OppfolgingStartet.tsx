@@ -12,7 +12,7 @@ export const OppfolgingStartet = ({gjeldendeSorteringsfelt, valgteKolonner, rekk
         onClick={onClick}
         tekst="Oppfølging startet"
         title="Startdato for pågående oppfølgingsperiode"
-        headerId="oppfolging-startet"
+        headerTestId="sorteringheader_oppfolging-startet"
         className="col col-xs-2"
     />
 );
