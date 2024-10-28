@@ -151,9 +151,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
                 tekst={
-                    bruker.hovedStatsborgerskap?.gyldigFra
-                        ? toDateString(bruker.hovedStatsborgerskap.gyldigFra)!.toString()
-                        : '-'
+                    bruker.hovedStatsborgerskap?.gyldigFra ? toDateString(bruker.hovedStatsborgerskap.gyldigFra) : '-'
                 }
             />
             <TekstKolonne
@@ -169,7 +167,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
-                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert)!.toString() : '-'}
+                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert) : '-'}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -184,7 +182,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert)!.toString() : '-'}
+                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert) : '-'}
             />
             <DatoKolonne
                 className="col col-xs-2"

@@ -54,7 +54,7 @@ export function toDatePrettyPrint(dato): Maybe<string> {
     return `${days}.${months}.${years}`;
 }
 
-export const toDateString = dato =>
+export const toDateString = (dato): string =>
     new Date(dato).toLocaleDateString(['nb-no', 'nn-no', 'en-gb', 'en-us'], {
         day: '2-digit',
         month: '2-digit',
