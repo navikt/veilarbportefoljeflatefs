@@ -1,8 +1,5 @@
 import {erMock} from './url-utils';
-import {trackAmplitude} from '../amplitude/amplitude';
-import {innsatsgruppe, hovedmal, formidlingsgruppe, servicegruppe} from '../filtrering/filter-konstanter';
-
-export type FilterFields = {sideNavn: string; filter: string; verdi: string; veilederIdent: string};
+import {FilterFields, filtermalinger} from '../amplitude/filter-malinger';
 
 type Fields = FilterFields | {} | undefined;
 
@@ -20,60 +17,8 @@ export const logEvent = (logTag: string, fields?: Fields, tags?: {}): void => {
     if (erMock()) {
         // eslint-disable-next-line no-console
         console.log('Event', logTag, 'Fields:', fields, 'Tags:', tags);
-    } else {
-        if (isFilterFields(fields)) {
-            // eslint-disable-next-line no-console
-            console.log('Amplitude data ', fields.filter, fields.verdi);
-            switch (fields.filter) {
-                case 'hovedmal':
-                    trackAmplitude({
-                        name: 'filtervalg',
-                        data: {
-                            filternavn: fields.filter,
-                            kategori: hovedmal[fields.verdi]?.label
-                        }
-                    });
-                    break;
-                case 'servicegruppe':
-                    trackAmplitude({
-                        name: 'filtervalg',
-                        data: {
-                            filternavn: fields.filter,
-                            kategori: servicegruppe[fields.verdi]?.label
-                        }
-                    });
-                    break;
-                case 'formidlingsgruppe':
-                    trackAmplitude({
-                        name: 'filtervalg',
-                        data: {
-                            filternavn: fields.filter,
-                            kategori: formidlingsgruppe[fields.verdi]?.label
-                        }
-                    });
-                    break;
-                case 'innsatsgruppe':
-                    trackAmplitude({
-                        name: 'filtervalg',
-                        data: {
-                            filternavn: fields.filter,
-                            kategori: innsatsgruppe[fields.verdi]?.label
-                        }
-                    });
-                    break;
-                default:
-                    trackAmplitude({
-                        name: 'filtervalg',
-                        data: {
-                            filternavn: fields.filter,
-                            kategori: fields.verdi
-                        }
-                    });
-                    break;
-            }
-        }
-
-        // Funker ikke etter vi flytta til GCP på grunn av influx som bare er i fss?
-        // sendEventTilPortefolje({name: logTag, fields: fields, tags: tags});
+    } else if (isFilterFields(fields)) {
+        filtermalinger(fields);
     }
+    // Influxdb virker ikke i GCP. Målinger flyttes til Amplitude i stedet.
 };
