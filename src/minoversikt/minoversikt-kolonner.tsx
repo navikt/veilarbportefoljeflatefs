@@ -3,8 +3,9 @@ import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
-    bostedKommune,
+    bostedKommuneUtlandEllerUkjent,
     capitalize,
+    bostedBydelEllerUkjent,
     mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
     oppfolingsdatoEnsligeForsorgere,
@@ -176,12 +177,12 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommune(bruker, geografiskbostedData)}
+                tekst={bostedKommuneUtlandEllerUkjent(bruker, geografiskbostedData)}
             />
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
-                tekst={bruker.bostedBydel ? geografiskbostedData.get(bruker.bostedBydel) : '-'}
+                tekst={bruker.bostedBydel ? bostedBydelEllerUkjent(bruker.bostedBydel, geografiskbostedData) : '-'}
             />
             <TekstKolonne
                 className="col col-xs-2"
@@ -353,7 +354,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 }
             />
             <TekstKolonne
-                tekst={bruker.utkast14aStatus}
+                tekst={bruker.utkast14aStatus ?? '-'}
                 skalVises={
                     !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
                 }
@@ -408,7 +409,7 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 className="col col-xs-2"
             />
             <TekstKolonne
-                tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype}
+                tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype ?? '-'}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
                 className="col col-xs-2"
             />

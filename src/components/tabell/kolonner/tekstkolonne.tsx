@@ -3,13 +3,14 @@ import {BodyShort} from '@navikt/ds-react';
 import classNames from 'classnames';
 
 interface TekstKolonneProps {
-    tekst?: string;
+    /** Send inn "-" om det ikkje er noko tekst å vise */
+    tekst: string;
     skalVises: boolean;
     className?: string;
 }
 
 export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
-    if (!skalVises || !tekst) {
+    if (!skalVises) {
         return null;
     }
 
