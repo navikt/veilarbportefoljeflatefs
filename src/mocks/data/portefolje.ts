@@ -212,15 +212,11 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
     tiltakstype: 'ARBFORB'
 });
 
-const lag14aVedtak = (): Vedtak14aDataModell => {
+const lag14aVedtak = (): Vedtak14aDataModell | null => {
     const maybe14aVedtak = rnd(0, 1);
     const today = new Date();
     if (maybe14aVedtak > 0.75) {
-        return {
-            innsatsgruppe: null,
-            hovedmal: null,
-            fattetDato: null
-        };
+        return null;
     }
     if (maybe14aVedtak > 0.6) {
         return {
@@ -257,11 +253,7 @@ const lag14aVedtak = (): Vedtak14aDataModell => {
             fattetDato: new Date(today.setMonth(today.getDay() - 20))
         };
     }
-    return {
-        innsatsgruppe: null,
-        hovedmal: null,
-        fattetDato: null
-    };
+    return null;
 };
 
 function lagBruker(sikkerhetstiltak = []) {
