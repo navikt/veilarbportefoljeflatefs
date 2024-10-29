@@ -18,6 +18,7 @@ export const FILTER_FOR_PERSONER_MED_BARN_UNDER_18 = 'veilarbportefoljeflatefs.f
 export const HUSKELAPP = 'veilarbportefoljeflatefs.huskelapp';
 export const SKJUL_ARBEIDSLISTEFUNKSJONALITET = 'veilarbportefoljeflatefs.skjul_arbeidslistefunksjonalitet';
 export const VIS_STATUSFILTER_TILTAKSHENDELSE = 'veilarbportefoljeflatefs.vis_statusfilter_tiltakshendelse';
+export const VIS_FILTER_14A_FRA_VEDTAKSSTOTTE = 'veilarbportefoljeflatefs.vis_filter_14a_fra_vedtaksstotte';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -29,5 +30,6 @@ export const PORTEFOLJE_FEATURES = [
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     HUSKELAPP,
     SKJUL_ARBEIDSLISTEFUNKSJONALITET,
-    VIS_STATUSFILTER_TILTAKSHENDELSE
+    VIS_STATUSFILTER_TILTAKSHENDELSE,
+    VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
 ];

@@ -82,7 +82,8 @@ export const initialState: FiltervalgModell = {
     ensligeForsorgere: [],
     barnUnder18Aar: [],
     barnUnder18AarAlder: [],
-    fargekategorier: []
+    fargekategorier: [],
+    gjeldende14aVedtakVedtaksstotte: null
 };
 
 export function fjern(filterId, verdi, fjernVerdi) {

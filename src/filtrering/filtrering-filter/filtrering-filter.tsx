@@ -11,6 +11,7 @@ import {
     ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
+    gjeldende14aVedtakVedtaksstotte,
     hovedmal,
     innsatsgruppe,
     kjonn,
@@ -40,7 +41,7 @@ import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
@@ -127,7 +128,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
     };
 
     const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
-
+    const erFilter14AFraVedtaksstotteFeatureTogglePa = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -292,6 +293,23 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
+            {erFilter14AFraVedtaksstotteFeatureTogglePa && (
+                <div className="filtrering-filter__kolonne">
+                    <Label size="small">Oppfølgingsvedtak(§ 14 a)</Label>
+                    <Dropdown
+                        name="Gjeldende vedtak (§ 14 a)"
+                        id="14a-vedtak-vedtaksstotte"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="gjeldende14avedtakvedtaksstotte"
+                                valg={gjeldende14aVedtakVedtaksstotte}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                </div>
+            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Utfasing av Arena</Label>
                 <Dropdown

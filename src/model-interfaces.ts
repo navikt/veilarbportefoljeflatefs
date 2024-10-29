@@ -1,4 +1,5 @@
 import {FiltreringAktiviteterValg} from './ducks/filtrering';
+import {gjeldende14aVedtakVedtaksstotte} from './filtrering/filter-konstanter';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
@@ -106,6 +107,7 @@ export interface FiltervalgModell {
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
     fargekategorier: FargekategoriModell[];
+    gjeldende14aVedtakVedtaksstotte: null | string;
 }
 
 export interface EnhetModell {
