@@ -454,7 +454,7 @@ export const avvik14aVedtak = {
     ...avvik14aVedtakAvhengigeFilter
 };
 
-const filterKonstanter = {
+export const filterKonstanter = {
     ytelseUtlopsSortering,
     ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
@@ -488,5 +488,3 @@ const filterKonstanter = {
     barnUnder18Aar,
     fargekategorier
 };
-
-export default filterKonstanter;
