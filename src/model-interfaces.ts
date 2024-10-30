@@ -278,6 +278,7 @@ export enum Fargekategorinavn {
     INGEN_KATEGORI = 'Ingen kategori'
 }
 
+/** OpenSearch-verdiar for å filtrere på arbeidslista sine fargekategoriar */
 export enum KategoriModell {
     BLA = 'BLA',
     LILLA = 'LILLA',
