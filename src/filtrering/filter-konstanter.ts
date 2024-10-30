@@ -442,8 +442,8 @@ export const avvik14aVedtak = {
 };
 
 export const gjeldende14aVedtakVedtaksstotte = {
-    HAR14AVEDTAK: {label: 'Har gjeldende vedtak (§ 14 a)'},
-    HARIKKE14AVEDTAK: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
+    HAR_14A_VEDTAK: {label: 'Har gjeldende vedtak (§ 14 a)'},
+    HAR_IKKE_14A_VEDTAK: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
 
 const filterKonstanter = {
