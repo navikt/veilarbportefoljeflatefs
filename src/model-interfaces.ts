@@ -136,6 +136,19 @@ export enum Innsatsgruppe {
     VARIG = 'VARIG'
 }
 
+export enum InnsatsgruppeOppfolgingsvedtak {
+    STANDARD_INNSATS = 'STANDARD_INNSATS',
+    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
+    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
+    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
+    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
+}
+
+export enum Hovedmal {
+    SKAFFE_ARBEID = 'SKAFFE_ARBEID',
+    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
+}
+
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -212,6 +225,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
+    oppfolgingsvedtak14a: Vedtak14aDataModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
@@ -340,4 +354,10 @@ export interface IdentParam {
 export enum SesjonStatus {
     GYLDIG = 'GYLDIG',
     UTLOPT = 'UTLØPT'
+}
+
+export interface Vedtak14aDataModell {
+    innsatsgruppe: InnsatsgruppeOppfolgingsvedtak;
+    hovedmal: Hovedmal;
+    fattetDato: Date;
 }

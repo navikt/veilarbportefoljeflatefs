@@ -5,8 +5,11 @@ import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
+    Hovedmal,
+    InnsatsgruppeOppfolgingsvedtak,
     KategoriModell,
-    TiltakshendelseModell
+    TiltakshendelseModell,
+    Vedtak14aDataModell
 } from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
@@ -209,6 +212,47 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
     tiltakstype: 'ARBFORB'
 });
 
+const lag14aVedtak = (): Vedtak14aDataModell | null => {
+    const maybe14aVedtak = rnd(0, 1);
+    const today = new Date();
+    if (maybe14aVedtak < 0.15) {
+        return {
+            innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.GRADERT_VARIG_TILPASSET_INNSATS,
+            hovedmal: Hovedmal.BEHOLDE_ARBEID,
+            fattetDato: new Date(today.setMonth(today.getDay() - 5))
+        };
+    }
+    if (maybe14aVedtak < 0.3) {
+        return {
+            innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.SPESIELT_TILPASSET_INNSATS,
+            hovedmal: Hovedmal.BEHOLDE_ARBEID,
+            fattetDato: new Date(today.setMonth(today.getDay() - 14))
+        };
+    }
+    if (maybe14aVedtak < 0.45) {
+        return {
+            innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.SITUASJONSBESTEMT_INNSATS,
+            hovedmal: Hovedmal.SKAFFE_ARBEID,
+            fattetDato: new Date(today.setMonth(today.getDay() - 9))
+        };
+    }
+    if (maybe14aVedtak < 0.6) {
+        return {
+            innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.STANDARD_INNSATS,
+            hovedmal: Hovedmal.SKAFFE_ARBEID,
+            fattetDato: new Date(today.setMonth(today.getDay() - 7))
+        };
+    }
+    if (maybe14aVedtak < 0.75) {
+        return {
+            innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.VARIG_TILPASSET_INNSATS,
+            hovedmal: Hovedmal.SKAFFE_ARBEID,
+            fattetDato: new Date(today.setMonth(today.getDay() - 20))
+        };
+    }
+    return null;
+};
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -292,7 +336,8 @@ function lagBruker(sikkerhetstiltak = []) {
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
-        huskelapp
+        huskelapp,
+        vedtak14a: lag14aVedtak()
     };
 }
 
