@@ -1,5 +1,4 @@
 import {FiltreringAktiviteterValg} from './ducks/filtrering';
-import {gjeldende14aVedtakVedtaksstotte} from './filtrering/filter-konstanter';
 
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
