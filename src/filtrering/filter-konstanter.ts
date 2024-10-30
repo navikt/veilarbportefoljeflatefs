@@ -11,29 +11,24 @@ export type CheckboxFilter = {
 };
 export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 
+/* Konstantar for filternamna brukt i OpenSearch (og som vert mappa i mapFilternavnTilFilterValue) */
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
 export const TRENGER_VURDERING = 'TRENGER_VURDERING';
-export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
+export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
 export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
+export const MOTER_IDAG = 'MOTER_IDAG';
+export const TILTAKSHENDELSER = 'TILTAKSHENDELSER';
 export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
+export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
-export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
-export const MOTER_IDAG = 'MOTER_IDAG';
-export const TILTAKSHENDELSER = 'TILTAKSHENDELSER';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
-export const DAGPENGER_YTELSE = 'DAGPENGER';
-export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
-export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
-export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
-export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
 export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
-export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
@@ -51,6 +46,15 @@ export const FARGEKATEGORI_D = FargekategoriModell.FARGEKATEGORI_D;
 export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
 export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
 export const INGEN_KATEGORI = FargekategoriModell.INGEN_KATEGORI;
+
+/* Konstantar for filternamna brukt i OpenSearch (ikkje mappa i mapFilternavnTilFilterValue) */
+export const DAGPENGER_YTELSE = 'DAGPENGER';
+export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
+export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
+export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
+export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
+export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
+
 export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_A,
     FARGEKATEGORI_B,
@@ -61,6 +65,19 @@ export const alleFargekategoriFilterAlternativer = [
     INGEN_KATEGORI
 ] as const;
 
+/**
+ * Dette objektet mappar:
+ *      - eit sett nøklar
+ *     til
+ *      - eit sett konstantar som kodar for kva filtera heiter i OpenSearch
+ *
+ * Ikkje alle OpenSearch-konstantane er gjenbrukt i denne mappinga per 2024-10-30.
+ *
+ * Objektet får inn ein hardkoda streng frå filtrering-status.tsx og mappar det om til filterverdi.
+ * (I staden for å berre sende inn filter-konstantane direkte.)
+ *
+ * Den vert også brukt til å lage enkelte av filter-til-label-mapparane.
+ * */
 export const mapFilternavnTilFilterValue = {
     ufordeltebruker: UFORDELTE_BRUKERE,
     nyeBrukere: NYE_BRUKERE_FOR_VEILEDER,
