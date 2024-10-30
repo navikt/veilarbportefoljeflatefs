@@ -1,5 +1,5 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {FargekategoriModell, Fargekategorinavn, KategoriModell, Sorteringsfelt} from '../model-interfaces';
+import {FargekategoriModell, Fargekategorinavn, Sorteringsfelt} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
@@ -11,7 +11,7 @@ export type CheckboxFilter = {
 };
 export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 
-/* Konstantar for filternamna brukt i OpenSearch (og som vert mappa i mapFilternavnTilFilterValue) */
+/* Konstantar for filternamna brukt i OpenSearch */
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
 export const TRENGER_VURDERING = 'TRENGER_VURDERING';
@@ -26,6 +26,12 @@ export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
+export const DAGPENGER_YTELSE = 'DAGPENGER';
+export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
+export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
+export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
+export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
+export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
 export const AAP_YTELSE = 'AAP';
 export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
 export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
@@ -47,14 +53,6 @@ export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
 export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
 export const INGEN_KATEGORI = FargekategoriModell.INGEN_KATEGORI;
 
-/* Konstantar for filternamna brukt i OpenSearch (ikkje mappa i mapFilternavnTilFilterValue) */
-export const DAGPENGER_YTELSE = 'DAGPENGER';
-export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
-export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
-export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
-export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
-export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
-
 export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_A,
     FARGEKATEGORI_B,
@@ -64,60 +62,6 @@ export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_F,
     INGEN_KATEGORI
 ] as const;
-
-/**
- * Dette objektet mappar:
- *      - eit sett nøklar
- *     til
- *      - eit sett konstantar som kodar for kva filtera heiter i OpenSearch
- *
- * Ikkje alle OpenSearch-konstantane er gjenbrukt i denne mappinga per 2024-10-30.
- *
- * Objektet får inn ein hardkoda streng frå filtrering-status.tsx og mappar det om til filterverdi.
- * (I staden for å berre sende inn filter-konstantane direkte.)
- *
- * Den vert også brukt til å lage enkelte av filter-til-label-mapparane.
- * */
-export const mapFilternavnTilFilterValue = {
-    ufordeltebruker: UFORDELTE_BRUKERE,
-    nyeBrukere: NYE_BRUKERE_FOR_VEILEDER,
-    trengerVurdering: TRENGER_VURDERING,
-    erSykmeldtMedArbeidsgiver: ER_SYKMELDT_MED_ARBEIDSGIVER,
-    venterPaSvarFraNAV: VENTER_PA_SVAR_FRA_NAV,
-    venterPaSvarFraBruker: VENTER_PA_SVAR_FRA_BRUKER,
-    avtaltMoteMedNav: MOTER_IDAG,
-    tiltakshendelser: TILTAKSHENDELSER,
-    utlopteAktiviteter: UTLOPTE_AKTIVITETER,
-    ikkeIavtaltAktivitet: IKKE_I_AVTALT_AKTIVITET,
-    iavtaltAktivitet: I_AVTALT_AKTIVITET,
-    inaktiveBrukere: INAKTIVE_BRUKERE,
-    minArbeidsliste: MIN_ARBEIDSLISTE,
-    minArbeidslisteBla: KategoriModell.BLA,
-    minArbeidslisteLilla: KategoriModell.LILLA,
-    minArbeidslisteGronn: KategoriModell.GRONN,
-    minArbeidslisteGul: KategoriModell.GUL,
-    utlopYtelse: UTLOP_YTELSE,
-    aapYtelse: AAP_YTELSE,
-    aapYtelseMaxtid: AAP_YTELSE_MAXTID,
-    aapYtelseUnntak: AAP_YTELSE_UNNTAK,
-    underVurdering: UNDER_VURDERING,
-    sisteEndring: SISTE_ENDRING,
-    sisteEndringDato: SISTE_ENDRING_DATO,
-    harAvvik: HAR_AVVIK,
-    hovedmalUlik: HOVEDMAL_ULIK,
-    innsatsgruppeUlik: INNSATSGRUPPE_ULIK,
-    innsatsgruppeOgHovedmalUlik: INNSATSGRUPPE_OG_HOVEDMAL_ULIK,
-    innsatsgruppeManglerINyKilde: INNSATSGRUPPE_MANGLER_I_NY_KILDE,
-    huskelapp: HUSKELAPP,
-    mineFargekategorier: MINE_FARGEKATEGORIER,
-    mineFargekategorierA: FARGEKATEGORI_A,
-    mineFargekategorierB: FARGEKATEGORI_B,
-    mineFargekategorierC: FARGEKATEGORI_C,
-    mineFargekategorierD: FARGEKATEGORI_D,
-    mineFargekategorierE: FARGEKATEGORI_E,
-    mineFargekategorierF: FARGEKATEGORI_F,
-    mineFargekategorierIngenKategori: INGEN_KATEGORI
-};
 
 export const filterSomIkkeSkalSendesTilBackend = [HAR_AVVIK, MINE_FARGEKATEGORIER];
 
