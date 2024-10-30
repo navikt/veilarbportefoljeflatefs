@@ -43,11 +43,11 @@ function FilterStatusMinArbeidsliste({
                 filterNavn="minArbeidsliste"
                 handleChange={handleChange}
                 antall={statusTall.minArbeidsliste}
-                filterVerdi={mapFilternavnTilFilterValue['minArbeidsliste']}
+                filterVerdi={mapFilternavnTilFilterValue.minArbeidsliste}
                 labelTekst={
                     erHuskelappFeatureTogglePa
                         ? 'Gamle arbeidslister'
-                        : ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['minArbeidsliste']]
+                        : ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue.minArbeidsliste]
                 }
             />
             {checked && (
@@ -69,7 +69,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.BLA)}
                         antall={statusTall.minArbeidslisteBla}
-                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteBla']}
+                        filterVerdi={mapFilternavnTilFilterValue.minArbeidslisteBla}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -88,7 +88,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GRONN)}
                         antall={statusTall.minArbeidslisteGronn}
-                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGronn']}
+                        filterVerdi={mapFilternavnTilFilterValue.minArbeidslisteGronn}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -107,7 +107,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.GUL)}
                         antall={statusTall.minArbeidslisteGul}
-                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteGul']}
+                        filterVerdi={mapFilternavnTilFilterValue.minArbeidslisteGul}
                     />
                     <BarInputCheckbox
                         labelTekst={
@@ -126,7 +126,7 @@ function FilterStatusMinArbeidsliste({
                         handleChange={handleChangeCheckbox}
                         checked={checked && ferdigfilterListe.includes(KategoriModell.LILLA)}
                         antall={statusTall.minArbeidslisteLilla}
-                        filterVerdi={mapFilternavnTilFilterValue['minArbeidslisteLilla']}
+                        filterVerdi={mapFilternavnTilFilterValue.minArbeidslisteLilla}
                     />
                 </div>
             )}

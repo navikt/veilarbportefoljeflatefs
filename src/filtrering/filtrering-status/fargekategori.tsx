@@ -109,7 +109,7 @@ function FilterStatusMineFargekategorier() {
                 checked={hovedfilterChecked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={hovedfilterIndeterminate}
-                filterVerdi={mapFilternavnTilFilterValue['mineFargekategorier']}
+                filterVerdi={mapFilternavnTilFilterValue.mineFargekategorier}
             />
             <div className="fargekategorier--underfilter">
                 {fargekategoriUnderfilterKonfigurasjoner.map(fargekategori => (
