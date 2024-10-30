@@ -11,11 +11,11 @@ import {
     ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
+    HAR_AVVIK,
     hovedmal,
     innsatsgruppe,
     kjonn,
     manuellBrukerStatus,
-    mapFilternavnTilFilterValue,
     registreringstype,
     rettighetsgruppe,
     servicegruppe,
@@ -71,7 +71,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
 
         return {
             ...avvik14aVedtak,
-            [mapFilternavnTilFilterValue.harAvvik]: {
+            [HAR_AVVIK]: {
                 ...avvik14aVedtak.HAR_AVVIK,
                 indeterminate: erIndeterminate()
             }
@@ -95,11 +95,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             const filterForEndring: string[] = filtervalg.avvik14aVedtak;
             const filterEtterEndring: string[] = filterVerdi;
 
-            const hovedfilterEndring: FilterEndring = filterEndring(
-                mapFilternavnTilFilterValue.harAvvik,
-                filterForEndring,
-                filterEtterEndring
-            );
+            const hovedfilterEndring: FilterEndring = filterEndring(HAR_AVVIK, filterForEndring, filterEtterEndring);
 
             if (hovedfilterEndring === 'FJERNET') {
                 return endreFiltervalg(form, []);
@@ -117,12 +113,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 return endreFiltervalg(form, []);
             }
 
-            return endreFiltervalg(
-                form,
-                filterVerdi.includes(mapFilternavnTilFilterValue.harAvvik)
-                    ? filterVerdi
-                    : [mapFilternavnTilFilterValue.harAvvik, ...filterVerdi]
-            );
+            return endreFiltervalg(form, filterVerdi.includes(HAR_AVVIK) ? filterVerdi : [HAR_AVVIK, ...filterVerdi]);
         };
     };
 

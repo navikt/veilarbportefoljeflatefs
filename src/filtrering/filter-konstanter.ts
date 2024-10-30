@@ -119,10 +119,7 @@ export const mapFilternavnTilFilterValue = {
     mineFargekategorierIngenKategori: INGEN_KATEGORI
 };
 
-export const filterSomIkkeSkalSendesTilBackend = [
-    mapFilternavnTilFilterValue.harAvvik,
-    mapFilternavnTilFilterValue.mineFargekategorier
-];
+export const filterSomIkkeSkalSendesTilBackend = [HAR_AVVIK, MINE_FARGEKATEGORIER];
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {

@@ -3,11 +3,11 @@ import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import {
-    filterKonstanter,
     aktiviteter,
     alleFargekategoriFilterAlternativer,
+    filterKonstanter,
+    HAR_AVVIK,
     hendelserEtikett,
-    mapFilternavnTilFilterValue,
     MINE_FARGEKATEGORIER
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
@@ -259,7 +259,7 @@ function FiltreringLabelContainer({
                 });
             } else if (key === 'avvik14aVedtak') {
                 return value.map(singleValue => {
-                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                    if (singleValue === HAR_AVVIK) {
                         return null;
                     }
 
@@ -270,7 +270,7 @@ function FiltreringLabelContainer({
                     const slettAvvik14aVedtakFilter = () => {
                         if (fjernAvvik14aHovedFilter) {
                             slettEnkelt(key, singleValue);
-                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
+                            slettEnkelt(key, HAR_AVVIK);
                         } else {
                             slettEnkelt(key, singleValue);
                         }
