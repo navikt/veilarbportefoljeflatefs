@@ -131,23 +131,28 @@ export function lagConfig(data: any): any {
     return data;
 }
 
+/** Mappar filternamn i OpenSearch til filterlabel for filter i ferdigFilterListe
+ *
+ * Notasjonen [konstantnamn] hentar ut verdien i konstanten og gjer det
+ * lettare å finne ut kvar verdien av konstanten har blitt brukt.
+ * */
 export const ferdigfilterListeLabelTekst = {
-    UFORDELTE_BRUKERE: 'Ufordelte brukere',
-    NYE_BRUKERE_FOR_VEILEDER: 'Nye brukere',
-    TRENGER_VURDERING: 'Trenger vurdering',
-    ER_SYKMELDT_MED_ARBEIDSGIVER: 'Sykmeldt med arbeidsgiver',
-    UNDER_VURDERING: 'Under vurdering',
-    VENTER_PA_SVAR_FRA_NAV: 'Venter på svar fra NAV',
-    VENTER_PA_SVAR_FRA_BRUKER: 'Venter på svar fra bruker',
-    MOTER_IDAG: 'Møte med NAV i dag',
-    TILTAKSHENDELSER: 'Hendelser på tiltak',
-    UTLOPTE_AKTIVITETER: 'Utløpte aktiviteter',
-    IKKE_I_AVTALT_AKTIVITET: 'Ikke i avtalt aktivitet',
-    I_AVTALT_AKTIVITET: 'I avtalt aktivitet',
-    INAKTIVE_BRUKERE: 'Ikke servicebehov',
-    MIN_ARBEIDSLISTE: 'Min arbeidsliste',
-    MINE_HUSKELAPPER: 'Huskelapper',
-    MINE_FARGEKATEGORIER: 'Kategorier'
+    [UFORDELTE_BRUKERE]: 'Ufordelte brukere',
+    [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
+    [TRENGER_VURDERING]: 'Trenger vurdering',
+    [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
+    [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra NAV',
+    [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
+    [MOTER_IDAG]: 'Møte med NAV i dag',
+    [TILTAKSHENDELSER]: 'Hendelser på tiltak',
+    [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
+    [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',
+    [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
+    [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
+    [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
+    [UNDER_VURDERING]: 'Under vurdering',
+    [HUSKELAPP]: 'Huskelapper',
+    [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
 
 export const arbeidslisteKategori = {
@@ -430,20 +435,20 @@ export const hendelserEtikett = {
 };
 
 export const avvik14aVedtakHovedFilter = {
-    [mapFilternavnTilFilterValue.harAvvik]: {label: 'Status'}
+    [HAR_AVVIK]: {label: 'Status'}
 };
 
 export const avvik14aVedtakAvhengigeFilter = {
-    [mapFilternavnTilFilterValue.hovedmalUlik]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
-    [mapFilternavnTilFilterValue.innsatsgruppeUlik]: {
+    [HOVEDMAL_ULIK]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
+    [INNSATSGRUPPE_ULIK]: {
         label: 'Innsatsgruppe ulik',
         className: skjemaelementInnrykkKlasse
     },
-    [mapFilternavnTilFilterValue.innsatsgruppeOgHovedmalUlik]: {
+    [INNSATSGRUPPE_OG_HOVEDMAL_ULIK]: {
         label: 'Innsatsgruppe og hovedmål ulike',
         className: skjemaelementInnrykkKlasse
     },
-    [mapFilternavnTilFilterValue.innsatsgruppeManglerINyKilde]: {
+    [INNSATSGRUPPE_MANGLER_I_NY_KILDE]: {
         label: 'Innsatsgruppe mangler',
         className: skjemaelementInnrykkKlasse
     }
