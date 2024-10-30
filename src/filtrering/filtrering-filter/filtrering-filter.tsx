@@ -301,7 +301,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         id="14a-vedtak-vedtaksstotte"
                         render={() => (
                             <CheckboxFilterform
-                                form="gjeldende14avedtakvedtaksstotte"
+                                form="gjeldende14aVedtakVedtaksstotte"
                                 valg={gjeldende14aVedtakVedtaksstotte}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
