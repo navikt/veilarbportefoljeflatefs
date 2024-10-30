@@ -225,7 +225,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
-    oppfolgingsvedtak14a?: Vedtak14aDataModell;
+    oppfolgingsvedtak14a: Vedtak14aDataModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
@@ -357,7 +357,7 @@ export enum SesjonStatus {
 }
 
 export interface Vedtak14aDataModell {
-    innsatsgruppe: InnsatsgruppeOppfolgingsvedtak | null;
-    hovedmal: Hovedmal | null;
-    fattetDato: Date | null;
+    innsatsgruppe: InnsatsgruppeOppfolgingsvedtak;
+    hovedmal: Hovedmal;
+    fattetDato: Date;
 }

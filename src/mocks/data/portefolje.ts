@@ -271,7 +271,6 @@ function lagBruker(sikkerhetstiltak = []) {
 
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
-    const vedtak14a = lag14aVedtak();
 
     return {
         fnr: grunndata.fnr,
@@ -338,7 +337,7 @@ function lagBruker(sikkerhetstiltak = []) {
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp,
-        vedtak14a
+        vedtak14a: lag14aVedtak()
     };
 }
 
