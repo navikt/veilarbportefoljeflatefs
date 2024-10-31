@@ -43,7 +43,7 @@ export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
-export const HUSKELAPP = 'MINE_HUSKELAPPER';
+export const MINE_HUSKELAPPER = 'MINE_HUSKELAPPER';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
 export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
 export const FARGEKATEGORI_B = FargekategoriModell.FARGEKATEGORI_B;
@@ -92,7 +92,7 @@ export const ferdigfilterListeLabelTekst = {
     [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
     [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
     [UNDER_VURDERING]: 'Under vurdering',
-    [HUSKELAPP]: 'Huskelapper',
+    [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
 
