@@ -44,8 +44,8 @@ export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const MINE_HUSKELAPPER = 'MINE_HUSKELAPPER';
-export const VEDTAK14A_VEDTAKSSTOTTE_HAR_VEDTAK = 'VEDTAK14A_VEDTAKSSTOTTE_HAR_VEDTAK';
-export const VEDTAK14A_VEDTAKSSTOTTE_HAR_IKKE_VEDTAK = 'VEDTAK14A_VEDTAKSSTOTTE_HAR_IKKE_VEDTAK';
+export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
+export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
 export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
 export const FARGEKATEGORI_B = FargekategoriModell.FARGEKATEGORI_B;
@@ -403,8 +403,8 @@ export const avvik14aVedtak = {
 };
 
 export const gjeldende14aVedtakVedtaksstotte = {
-    HAR_14A_VEDTAK: {label: 'Har gjeldende vedtak (§ 14 a)'},
-    HAR_IKKE_14A_VEDTAK: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
+    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
+    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
 
 export const filterKonstanter = {
