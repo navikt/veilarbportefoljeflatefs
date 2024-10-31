@@ -11,10 +11,11 @@ export type CheckboxFilter = {
 };
 export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 
+/* Konstantar for filternamna brukt i OpenSearch */
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
 export const TRENGER_VURDERING = 'TRENGER_VURDERING';
-
+export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
 export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
 export const MOTER_IDAG = 'MOTER_IDAG';
@@ -24,7 +25,6 @@ export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
-export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
 export const DAGPENGER_YTELSE = 'DAGPENGER';
 export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
@@ -43,7 +43,7 @@ export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
-export const HUSKELAPP = 'MINE_HUSKELAPPER';
+export const MINE_HUSKELAPPER = 'MINE_HUSKELAPPER';
 export const VEDTAK14A_VEDTAKSSTOTTE_HAR_VEDTAK = 'VEDTAK14A_VEDTAKSSTOTTE_HAR_VEDTAK';
 export const VEDTAK14A_VEDTAKSSTOTTE_HAR_IKKE_VEDTAK = 'VEDTAK14A_VEDTAKSSTOTTE_HAR_IKKE_VEDTAK';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
@@ -54,6 +54,7 @@ export const FARGEKATEGORI_D = FargekategoriModell.FARGEKATEGORI_D;
 export const FARGEKATEGORI_E = FargekategoriModell.FARGEKATEGORI_E;
 export const FARGEKATEGORI_F = FargekategoriModell.FARGEKATEGORI_F;
 export const INGEN_KATEGORI = FargekategoriModell.INGEN_KATEGORI;
+
 export const alleFargekategoriFilterAlternativer = [
     FARGEKATEGORI_A,
     FARGEKATEGORI_B,
@@ -93,7 +94,7 @@ export const ferdigfilterListeLabelTekst = {
     [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
     [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
     [UNDER_VURDERING]: 'Under vurdering',
-    [HUSKELAPP]: 'Huskelapper',
+    [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
 
