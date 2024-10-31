@@ -17,7 +17,14 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {
+    BarnUnder18Aar,
+    BrukerModell,
+    FiltervalgModell,
+    VeilederModell,
+    InnsatsgruppeNavn,
+    HovedmalNavn
+} from '../model-interfaces';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -50,7 +57,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
@@ -129,10 +136,37 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
     };
 
+    const vedtak14aInnsatsgruppe = (bruker: BrukerModell) => {
+        if (bruker.vedtak14a?.innsatsgruppe) {
+            return InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe as keyof typeof InnsatsgruppeNavn].toString();
+        } else return '-';
+    };
+
+    const vedtak14aHovedmal = (bruker: BrukerModell) => {
+        if (bruker.vedtak14a?.hovedmal) {
+            return HovedmalNavn[bruker.vedtak14a.hovedmal as keyof typeof HovedmalNavn].toString();
+        } else return '-';
+    };
+
+    const vedtak14aFattetDato = (bruker: BrukerModell) => {
+        if (bruker.vedtak14a?.innsatsgruppe) {
+            return toDateString(bruker.vedtak14a?.fattetDato);
+        } else return '-';
+    };
+
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
+            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aInnsatsgruppe(bruker)} />
+            )}
+            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aHovedmal(bruker)} />
+            )}
+            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aFattetDato(bruker)} />
+            )}
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}

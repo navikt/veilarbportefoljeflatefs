@@ -213,7 +213,7 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
 });
 
 const lag14aVedtak = (): Vedtak14aDataModell | null => {
-    const maybe14aVedtak = rnd(0, 1);
+    const maybe14aVedtak = Math.random();
     const today = new Date();
     if (maybe14aVedtak < 0.15) {
         return {

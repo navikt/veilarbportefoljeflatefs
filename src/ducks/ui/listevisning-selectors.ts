@@ -147,6 +147,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
+    const filtrertPa14aVedtak = filtervalg.gjeldende14aVedtakVedtaksstotte.length > 0;
+
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtrertPaLandgruppeEllerFoedeland))
@@ -198,5 +200,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET, filtrertPaUtdanningEllerSituasjonSomKanHaEndring))
         .concat(addHvis(Kolonne.HUSKELAPP_KOMMENTAR, filtrertPaHuskelapp))
         .concat(addHvis(Kolonne.HUSKELAPP_FRIST, filtrertPaHuskelapp))
+        .concat(addHvis(Kolonne.INNSATSGRUPPE, filtrertPa14aVedtak))
+        .concat(addHvis(Kolonne.HOVEDMAL, filtrertPa14aVedtak))
+        .concat(addHvis(Kolonne.VEDTAKSDATO, filtrertPa14aVedtak))
         .concat([Kolonne.OPPFOLGING_STARTET]);
 }

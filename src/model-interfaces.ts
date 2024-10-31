@@ -145,9 +145,22 @@ export enum InnsatsgruppeOppfolgingsvedtak {
     VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
 }
 
+export enum InnsatsgruppeNavn {
+    STANDARD_INNSATS = 'Gode muligheter',
+    SITUASJONSBESTEMT_INNSATS = 'Trenger veiledning',
+    SPESIELT_TILPASSET_INNSATS = 'Trenger veiledning, nedsatt arbeidsevne',
+    GRADERT_VARIG_TILPASSET_INNSATS = 'Jobbe delvis',
+    VARIG_TILPASSET_INNSATS = 'Liten mulighet til å jobbe'
+}
+
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
     BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
+}
+
+export enum HovedmalNavn {
+    SKAFFE_ARBEID = 'Skaffe arbeid',
+    BEHOLDE_ARBEID = 'Beholde arbeid'
 }
 
 export interface BrukerModell {
@@ -226,7 +239,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
-    oppfolgingsvedtak14a: Vedtak14aDataModell | null;
+    vedtak14a: Vedtak14aDataModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {

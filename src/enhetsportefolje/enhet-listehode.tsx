@@ -25,7 +25,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -109,7 +109,21 @@ function EnhetListehode({
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
-
+                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                    <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
+                        Innsatsgruppe
+                    </Header>
+                )}
+                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                    <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
+                        Hovedmål
+                    </Header>
+                )}
+                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                    <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
+                        Vedtaksdato
+                    </Header>
+                )}
                 <Fodeland {...sorteringTilHeadercelle} />
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
