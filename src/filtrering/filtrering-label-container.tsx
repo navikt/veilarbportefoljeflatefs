@@ -2,11 +2,12 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
-import FilterKonstanter, {
+import {
     aktiviteter,
     alleFargekategoriFilterAlternativer,
+    filterKonstanter,
+    HAR_AVVIK,
     hendelserEtikett,
-    mapFilternavnTilFilterValue,
     MINE_FARGEKATEGORIER
 } from './filter-konstanter';
 import {EnhetModell, FiltervalgModell} from '../model-interfaces';
@@ -65,7 +66,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanningBestatt-${singleValue}`}
-                            label={`Utdanning bestått: ${FilterKonstanter[key][singleValue]}`}
+                            label={`Utdanning bestått: ${filterKonstanter[key][singleValue]}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -75,7 +76,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanningGodkjent-${singleValue}`}
-                            label={`Utdanning godkjent: ${FilterKonstanter[key][singleValue]}`}
+                            label={`Utdanning godkjent: ${filterKonstanter[key][singleValue]}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -86,7 +87,7 @@ function FiltreringLabelContainer({
                         return (
                             <FiltreringLabel
                                 key={`utdanning-${singleValue}`}
-                                label={`Utdanning: ${FilterKonstanter[key][singleValue].label}`}
+                                label={`Utdanning: ${filterKonstanter[key][singleValue].label}`}
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
@@ -94,7 +95,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`utdanning-${singleValue}`}
-                            label={FilterKonstanter[key][singleValue]}
+                            label={filterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -105,7 +106,7 @@ function FiltreringLabelContainer({
                         return (
                             <FiltreringLabel
                                 key={`situasjon-${singleValue}`}
-                                label={`Situasjon: ${FilterKonstanter[key][singleValue].label}`}
+                                label={`Situasjon: ${filterKonstanter[key][singleValue].label}`}
                                 slettFilter={() => slettEnkelt(key, singleValue)}
                             />
                         );
@@ -113,7 +114,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`situasjon-${singleValue}`}
-                            label={FilterKonstanter[key][singleValue]}
+                            label={filterKonstanter[key][singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -143,7 +144,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`${key}--${singleValue.key || singleValue}`}
-                            label={FilterKonstanter[key][singleValue] || singleValue + ' år'}
+                            label={filterKonstanter[key][singleValue] || singleValue + ' år'}
                             slettFilter={() => slettEnkelt(key, singleValue.key || singleValue)}
                         />
                     );
@@ -155,13 +156,13 @@ function FiltreringLabelContainer({
                             key={singleValue}
                             label={
                                 erFargekategoriFeatureTogglePa
-                                    ? FilterKonstanter.arbeidslisteKategoriGammel[singleValue]
-                                    : FilterKonstanter.arbeidslisteKategori[singleValue]
+                                    ? filterKonstanter.arbeidslisteKategoriGammel[singleValue]
+                                    : filterKonstanter.arbeidslisteKategori[singleValue]
                             }
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
                             tittel={
-                                `Fjern filtervalg "Arbeidslistekategori ${FilterKonstanter.arbeidslisteKategori[singleValue]}"` +
+                                `Fjern filtervalg "Arbeidslistekategori ${filterKonstanter.arbeidslisteKategori[singleValue]}"` +
                                 (erFargekategoriFeatureTogglePa ? ' (gammel)' : '')
                             }
                         />
@@ -172,10 +173,10 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={FilterKonstanter.fargekategorier[singleValue]}
+                            label={filterKonstanter.fargekategorier[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={fargekategoriIkonMapper(singleValue, 'fargekategoriikon')}
-                            tittel={`Fjern filtervalg "Kategori ${FilterKonstanter.fargekategorier[singleValue]}"`}
+                            tittel={`Fjern filtervalg "Kategori ${filterKonstanter.fargekategorier[singleValue]}"`}
                         />
                     );
                 });
@@ -224,7 +225,7 @@ function FiltreringLabelContainer({
                 return [
                     <FiltreringLabel
                         key={key}
-                        label={FilterKonstanter[key]}
+                        label={filterKonstanter[key]}
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
@@ -258,7 +259,7 @@ function FiltreringLabelContainer({
                 });
             } else if (key === 'avvik14aVedtak') {
                 return value.map(singleValue => {
-                    if (singleValue === mapFilternavnTilFilterValue.harAvvik) {
+                    if (singleValue === HAR_AVVIK) {
                         return null;
                     }
 
@@ -269,7 +270,7 @@ function FiltreringLabelContainer({
                     const slettAvvik14aVedtakFilter = () => {
                         if (fjernAvvik14aHovedFilter) {
                             slettEnkelt(key, singleValue);
-                            slettEnkelt(key, mapFilternavnTilFilterValue.harAvvik);
+                            slettEnkelt(key, HAR_AVVIK);
                         } else {
                             slettEnkelt(key, singleValue);
                         }
@@ -288,7 +289,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={`${key}--${singleValue}`}
-                            label={`${FilterKonstanter[key][singleValue]}`}
+                            label={`${filterKonstanter[key][singleValue]}`}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
@@ -320,7 +321,7 @@ function FiltreringLabelContainer({
                     .map(([aktivitetkey, aktivitetvalue]) => (
                         <FiltreringLabel
                             key={`aktivitet-${aktivitetkey}`}
-                            label={`${FilterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
+                            label={`${filterKonstanter[key][aktivitetkey]}: ${aktivitetvalue}`}
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                         />
                     ));
@@ -335,7 +336,7 @@ function FiltreringLabelContainer({
                 return [
                     <FiltreringLabel
                         key={`${key}--${value}`}
-                        label={FilterKonstanter[key][value]}
+                        label={filterKonstanter[key][value]}
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
@@ -408,11 +409,11 @@ function getLabel(singleValue: any, key: any, enhettiltak: any): string {
     if (singleValue?.label) {
         return singleValue.label;
     }
-    if (FilterKonstanter[key]?.[singleValue]) {
-        return FilterKonstanter[key][singleValue];
+    if (filterKonstanter[key]?.[singleValue]) {
+        return filterKonstanter[key][singleValue];
     }
-    if (FilterKonstanter[singleValue]) {
-        return FilterKonstanter[singleValue];
+    if (filterKonstanter[singleValue]) {
+        return filterKonstanter[singleValue];
     }
     return singleValue;
 }
