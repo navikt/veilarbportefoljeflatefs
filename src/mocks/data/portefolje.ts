@@ -213,7 +213,11 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
 });
 
 const lag14aVedtak = (): Vedtak14aDataModell | null => {
-    const maybe14aVedtak = Math.random();
+    const crypto = window.crypto || window.msCrypto;
+    var array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+
+    const maybe14aVedtak = array[0] / 0xffffffff;
     const today = new Date();
     if (maybe14aVedtak < 0.15) {
         return {
