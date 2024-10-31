@@ -11,7 +11,7 @@ import {
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     HAR_AVVIK,
-    HUSKELAPP,
+    MINE_HUSKELAPPER,
     I_AVTALT_AKTIVITET,
     MIN_ARBEIDSLISTE,
     MOTER_IDAG,
@@ -143,7 +143,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtervalg.utdanningGodkjent.length > 0 ||
         filtervalg.utdanningBestatt.length > 0;
 
-    const filtrertPaHuskelapp = filtervalg.ferdigfilterListe.includes(HUSKELAPP);
+    const filtrertPaHuskelapp = filtervalg.ferdigfilterListe.includes(MINE_HUSKELAPPER);
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 

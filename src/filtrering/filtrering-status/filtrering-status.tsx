@@ -9,7 +9,7 @@ import {pagineringSetup} from '../../ducks/paginering';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,
     ferdigfilterListeLabelTekst,
-    HUSKELAPP as HUSKELAPP_FILTER,
+    MINE_HUSKELAPPER,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
@@ -302,8 +302,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 filterNavn="huskelapp"
                                 antall={statustallMedBrukerinnsyn.mineHuskelapper}
                                 handleChange={handleRadioButtonChange}
-                                filterVerdi={HUSKELAPP_FILTER}
-                                labelTekst={ferdigfilterListeLabelTekst[HUSKELAPP_FILTER]}
+                                filterVerdi={MINE_HUSKELAPPER}
+                                labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
                             />
                         )}
                         {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
