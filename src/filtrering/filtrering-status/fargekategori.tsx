@@ -13,7 +13,6 @@ import {
     fargekategorier,
     ferdigfilterListeLabelTekst,
     INGEN_KATEGORI,
-    mapFilternavnTilFilterValue,
     MINE_FARGEKATEGORIER
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
@@ -56,16 +55,16 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
         statustallId: 'fargekategoriD'
     },
     {
-        filterLabel: fargekategorier.FARGEKATEGORI_F,
-        filterId: FARGEKATEGORI_F,
-        filterNavn: 'mineFargekategorierF',
-        statustallId: 'fargekategoriF'
-    },
-    {
         filterLabel: fargekategorier.FARGEKATEGORI_E,
         filterId: FARGEKATEGORI_E,
         filterNavn: 'mineFargekategorierE',
         statustallId: 'fargekategoriE'
+    },
+    {
+        filterLabel: fargekategorier.FARGEKATEGORI_F,
+        filterId: FARGEKATEGORI_F,
+        filterNavn: 'mineFargekategorierF',
+        statustallId: 'fargekategoriF'
     },
     {
         filterLabel: fargekategorier.INGEN_KATEGORI,
@@ -109,7 +108,7 @@ function FilterStatusMineFargekategorier() {
                 checked={hovedfilterChecked}
                 labelTekst={ferdigfilterListeLabelTekst.MINE_FARGEKATEGORIER}
                 indeterminate={hovedfilterIndeterminate}
-                filterVerdi={mapFilternavnTilFilterValue['mineFargekategorier']}
+                filterVerdi={MINE_FARGEKATEGORIER}
             />
             <div className="fargekategorier--underfilter">
                 {fargekategoriUnderfilterKonfigurasjoner.map(fargekategori => (
@@ -127,7 +126,7 @@ function FilterStatusMineFargekategorier() {
                         handleChange={handleUnderfilterEndret}
                         checked={fargekategoriFilter.includes(fargekategori.filterId)}
                         antall={statusTall[fargekategori.statustallId]}
-                        filterVerdi={mapFilternavnTilFilterValue[fargekategori.filterNavn]}
+                        filterVerdi={fargekategori.filterId}
                     />
                 ))}
             </div>

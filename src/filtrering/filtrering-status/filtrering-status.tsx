@@ -7,11 +7,21 @@ import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-
 import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
+    ER_SYKMELDT_MED_ARBEIDSGIVER,
     ferdigfilterListeLabelTekst,
-    mapFilternavnTilFilterValue,
+    I_AVTALT_AKTIVITET,
+    IKKE_I_AVTALT_AKTIVITET,
+    INAKTIVE_BRUKERE,
     MIN_ARBEIDSLISTE,
+    MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
-    UFORDELTE_BRUKERE
+    TILTAKSHENDELSER,
+    TRENGER_VURDERING,
+    UFORDELTE_BRUKERE,
+    UNDER_VURDERING,
+    UTLOPTE_AKTIVITETER,
+    VENTER_PA_SVAR_FRA_BRUKER,
+    VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
 import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -149,7 +159,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(NYE_BRUKERE_FOR_VEILEDER)}
                         labelTekst={'Nye brukere'}
-                        filterVerdi={mapFilternavnTilFilterValue['nyeBrukere']}
+                        filterVerdi={NYE_BRUKERE_FOR_VEILEDER}
                     />
                 ) : (
                     <BarInputCheckbox
@@ -158,7 +168,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleCheckboxChange}
                         checked={ferdigfilterListe.includes(UFORDELTE_BRUKERE)}
                         labelTekst={'Ufordelte brukere'}
-                        filterVerdi={mapFilternavnTilFilterValue['ufordeltebruker']}
+                        filterVerdi={UFORDELTE_BRUKERE}
                     />
                 )}
             </div>
@@ -172,25 +182,23 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterNavn="trengerVurdering"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.trengerVurdering}
-                        filterVerdi={mapFilternavnTilFilterValue['trengerVurdering']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['trengerVurdering']]}
+                        filterVerdi={TRENGER_VURDERING}
+                        labelTekst={ferdigfilterListeLabelTekst[TRENGER_VURDERING]}
                     />
                     <BarInputRadio
                         filterNavn="erSykmeldtMedArbeidsgiver"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
-                        filterVerdi={mapFilternavnTilFilterValue['erSykmeldtMedArbeidsgiver']}
-                        labelTekst={
-                            ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['erSykmeldtMedArbeidsgiver']]
-                        }
+                        filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                        labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
                     />
                     {erVedtaksStotteFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="underVurdering"
                             handleChange={handleRadioButtonChange}
                             antall={statustallMedBrukerinnsyn.underVurdering}
-                            filterVerdi={mapFilternavnTilFilterValue['underVurdering']}
-                            labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['underVurdering']]}
+                            filterVerdi={UNDER_VURDERING}
+                            labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
                         />
                     )}
                 </div>
@@ -199,30 +207,30 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterNavn="venterPaSvarFraNAV"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['venterPaSvarFraNAV']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['venterPaSvarFraNAV']]}
+                        filterVerdi={VENTER_PA_SVAR_FRA_NAV}
+                        labelTekst={ferdigfilterListeLabelTekst[VENTER_PA_SVAR_FRA_NAV]}
                     />
                     <BarInputRadio
                         filterNavn="venterPaSvarFraBruker"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['venterPaSvarFraBruker']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['venterPaSvarFraBruker']]}
+                        filterVerdi={VENTER_PA_SVAR_FRA_BRUKER}
+                        labelTekst={ferdigfilterListeLabelTekst[VENTER_PA_SVAR_FRA_BRUKER]}
                     />
                     <BarInputRadio
                         filterNavn="avtaltMoteMedNav"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.moterMedNAVIdag}
-                        filterVerdi={mapFilternavnTilFilterValue['avtaltMoteMedNav']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['avtaltMoteMedNav']]}
+                        filterVerdi={MOTER_IDAG}
+                        labelTekst={ferdigfilterListeLabelTekst[MOTER_IDAG]}
                     />
                     {erStatusfilterTiltakshendelseFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="tiltakshendelse"
                             handleChange={handleRadioButtonChange}
                             antall={statustallMedBrukerinnsyn.tiltakshendelser}
-                            filterVerdi={mapFilternavnTilFilterValue['tiltakshendelser']}
-                            labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['tiltakshendelser']]}
+                            filterVerdi={TILTAKSHENDELSER}
+                            labelTekst={ferdigfilterListeLabelTekst[TILTAKSHENDELSER]}
                         />
                     )}
                 </div>
@@ -231,22 +239,22 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterNavn="utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['utlopteAktiviteter']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['utlopteAktiviteter']]}
+                        filterVerdi={UTLOPTE_AKTIVITETER}
+                        labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
                     />
                     <BarInputRadio
                         filterNavn="ikkeIavtaltAktivitet"
                         antall={statustallMedBrukerinnsyn.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['ikkeIavtaltAktivitet']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['ikkeIavtaltAktivitet']]}
+                        filterVerdi={IKKE_I_AVTALT_AKTIVITET}
+                        labelTekst={ferdigfilterListeLabelTekst[IKKE_I_AVTALT_AKTIVITET]}
                     />
                     <BarInputRadio
                         filterNavn="iavtaltAktivitet"
                         antall={statustallMedBrukerinnsyn.iavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
-                        filterVerdi={mapFilternavnTilFilterValue['iavtaltAktivitet']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['iavtaltAktivitet']]}
+                        filterVerdi={I_AVTALT_AKTIVITET}
+                        labelTekst={ferdigfilterListeLabelTekst[I_AVTALT_AKTIVITET]}
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
@@ -254,8 +262,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterNavn="inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.inaktiveBrukere}
-                        filterVerdi={mapFilternavnTilFilterValue['inaktiveBrukere']}
-                        labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['inaktiveBrukere']]}
+                        filterVerdi={INAKTIVE_BRUKERE}
+                        labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
                     />
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
@@ -293,8 +301,8 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 filterNavn="huskelapp"
                                 antall={statustallMedBrukerinnsyn.mineHuskelapper}
                                 handleChange={handleRadioButtonChange}
-                                filterVerdi={mapFilternavnTilFilterValue['huskelapp']}
-                                labelTekst={ferdigfilterListeLabelTekst[mapFilternavnTilFilterValue['huskelapp']]}
+                                filterVerdi={HUSKELAPP}
+                                labelTekst={ferdigfilterListeLabelTekst[HUSKELAPP]}
                             />
                         )}
                         {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
