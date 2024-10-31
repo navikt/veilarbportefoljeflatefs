@@ -38,14 +38,14 @@ export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
+export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
+export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
 export const HAR_AVVIK = 'HAR_AVVIK';
 export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const MINE_HUSKELAPPER = 'MINE_HUSKELAPPER';
-export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
-export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
 export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
 export const FARGEKATEGORI_B = FargekategoriModell.FARGEKATEGORI_B;
@@ -377,6 +377,11 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
+export const gjeldende14aVedtakVedtaksstotte = {
+    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
+    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
+};
+
 export const avvik14aVedtakHovedFilter = {
     [HAR_AVVIK]: {label: 'Status'}
 };
@@ -400,11 +405,6 @@ export const avvik14aVedtakAvhengigeFilter = {
 export const avvik14aVedtak = {
     ...avvik14aVedtakHovedFilter,
     ...avvik14aVedtakAvhengigeFilter
-};
-
-export const gjeldende14aVedtakVedtaksstotte = {
-    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
-    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
 
 export const filterKonstanter = {
@@ -436,9 +436,9 @@ export const filterKonstanter = {
     ulesteEndringer,
     tolkebehov,
     stillingFraNavFilter,
+    gjeldende14aVedtakVedtaksstotte,
     avvik14aVedtak,
     ensligeForsorgere,
     barnUnder18Aar,
-    fargekategorier,
-    gjeldende14aVedtakVedtaksstotte
+    fargekategorier
 };

@@ -54,6 +54,9 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
+    const erFilter14AFraVedtaksstotteFeatureTogglePa = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -118,8 +121,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         };
     };
 
-    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
-    const erFilter14AFraVedtaksstotteFeatureTogglePa = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -286,10 +287,10 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             </div>
             {erFilter14AFraVedtaksstotteFeatureTogglePa && (
                 <div className="filtrering-filter__kolonne">
-                    <Label size="small">Oppfølgingsvedtak(§ 14 a)</Label>
+                    <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
                     <Dropdown
                         name="Gjeldende vedtak (§ 14 a)"
-                        id="14a-vedtak-vedtaksstotte"
+                        id="gjeldende-vedtak-14a"
                         render={() => (
                             <CheckboxFilterform
                                 form="gjeldende14aVedtakVedtaksstotte"
