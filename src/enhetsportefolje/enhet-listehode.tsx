@@ -69,6 +69,8 @@ function EnhetListehode({
     valgteKolonner
 }: EnhetListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
@@ -303,7 +305,7 @@ function EnhetListehode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
-                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                {visFilter14aFraVedtaksstotte && (
                     <>
                         <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
                             Innsatsgruppe

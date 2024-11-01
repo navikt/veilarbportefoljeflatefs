@@ -21,9 +21,9 @@ import {
     BarnUnder18Aar,
     BrukerModell,
     FiltervalgModell,
-    VeilederModell,
+    HovedmalNavn,
     InnsatsgruppeNavn,
-    HovedmalNavn
+    VeilederModell
 } from '../model-interfaces';
 import {
     aapRettighetsperiode,
@@ -61,7 +61,6 @@ import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from 
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
-import Header from '../components/tabell/header';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -74,6 +73,8 @@ interface EnhetKolonnerProps {
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -352,7 +353,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
-            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+            {visFilter14aFraVedtaksstotte && (
                 <>
                     <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aInnsatsgruppe(bruker)} />
                     <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aHovedmal(bruker)} />

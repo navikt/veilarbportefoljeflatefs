@@ -55,7 +55,7 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
-    const erFilter14AFraVedtaksstotteFeatureTogglePa = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -285,7 +285,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            {erFilter14AFraVedtaksstotteFeatureTogglePa && (
+            {visFilter14aFraVedtaksstotte && (
                 <div className="filtrering-filter__kolonne">
                     <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
                     <Dropdown
