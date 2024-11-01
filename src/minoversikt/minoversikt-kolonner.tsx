@@ -32,7 +32,7 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, InnsatsgruppeNavn} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
@@ -50,7 +50,11 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {SKJUL_ARBEIDSLISTEFUNKSJONALITET, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
+    VIS_AAP_VURDERINGSFRISTKOLONNER,
+    VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
+} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
@@ -65,6 +69,8 @@ interface MinOversiktKolonnerProps {
 function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visKolonnerForArbeidsliste = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -296,6 +302,27 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+            {visFilter14aFraVedtaksstotte && (
+                <>
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={
+                            bruker.vedtak14a?.innsatsgruppe ? InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe] : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={bruker.vedtak14a?.hovedmal ? HovedmalNavn[bruker.vedtak14a.hovedmal] : '-'}
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={bruker.vedtak14a?.innsatsgruppe ? toDateString(bruker.vedtak14a?.fattetDato) : '-'}
+                        className="col col-xs-2"
+                    />
+                </>
+            )}
             <LenkeKolonne
                 className="col col-xs-3 col-break-word"
                 bruker={bruker}

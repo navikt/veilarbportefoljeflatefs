@@ -25,7 +25,12 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET, VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {
+    HUSKELAPP,
+    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
+    VIS_AAP_VURDERINGSFRISTKOLONNER,
+    VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
+} from '../konstanter';
 import {ReactComponent as ArbeidslisteikonBla} from '../components/ikoner/arbeidsliste/arbeidslisteikon_bla.svg';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
@@ -77,6 +82,8 @@ function MinOversiktListeHode({
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const vis_kolonner_for_huskelapp = useFeatureSelector()(HUSKELAPP);
     const visKolonnerForArbeidsliste = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
@@ -179,18 +186,18 @@ function MinOversiktListeHode({
                             tekst="Arbeidsliste frist"
                             title="Fristdato som er satt i arbeidslisten"
                             className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                        valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
-                    }
-                    sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Arbeidsliste tittel"
-                    title="Tittel som er skrevet i arbeidslisten"
+                        />
+                        <SorteringHeader
+                            skalVises={
+                                !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
+                                valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
+                            }
+                            sortering={Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            erValgt={sorteringsfelt === Sorteringsfelt.ARBEIDSLISTE_OVERSKRIFT}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Arbeidsliste tittel"
+                            title="Tittel som er skrevet i arbeidslisten"
                             className="col col-xs-2"
                         />
                     </>
@@ -338,6 +345,19 @@ function MinOversiktListeHode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
+                {visFilter14aFraVedtaksstotte && (
+                    <>
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                            Innsatsgruppe
+                        </Header>
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                            Hovedmål
+                        </Header>
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                            Vedtaksdato
+                        </Header>
+                    </>
+                )}
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
