@@ -239,7 +239,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
-    vedtak14a: Vedtak14aDataModell | null;
+    gjeldendeVedtak14a: Vedtak14aDataModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {

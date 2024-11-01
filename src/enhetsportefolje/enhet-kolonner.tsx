@@ -340,18 +340,26 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                     <TekstKolonne
                         skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
                         tekst={
-                            bruker.vedtak14a?.innsatsgruppe ? InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe] : '-'
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? InnsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                                : '-'
                         }
                         className="col col-xs-2"
                     />
                     <TekstKolonne
                         skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
-                        tekst={bruker.vedtak14a?.hovedmal ? HovedmalNavn[bruker.vedtak14a.hovedmal] : '-'}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'
+                        }
                         className="col col-xs-2"
                     />
                     <TekstKolonne
                         skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
-                        tekst={bruker.vedtak14a?.innsatsgruppe ? toDateString(bruker.vedtak14a?.fattetDato) : '-'}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
+                                : '-'
+                        }
                         className="col col-xs-2"
                     />
                 </>
