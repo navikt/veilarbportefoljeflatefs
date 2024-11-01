@@ -49,21 +49,20 @@ export enum Kolonne {
     TOLKESPRAK = 'tolkebehov_spraak',
     TOLKEBEHOV_SIST_OPPDATERT = 'tolkebehov_sist_oppdatert',
     CV_SVARFRIST = 'cv_svarfrist',
+    INNSATSGRUPPE = 'innsatsgruppe',
+    HOVEDMAL = 'hovedmal',
+    VEDTAKSDATO = 'vedtaksdato',
     AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
     ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD = 'utlop_overgangsstonad',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
     ENSLIGE_FORSORGERE_OM_BARNET = 'om_barnet',
-
     BARN_UNDER_18_AAR = 'har_barn_under_18',
     UTDANNING_OG_SITUASJON_SIST_ENDRET = 'utdanning_og_situasjon_sist_endret',
     HUSKELAPP_FRIST = 'huskelapp_frist',
     HUSKELAPP_KOMMENTAR = 'huskelapp_kommentar',
     TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
-    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
-    INNSATSGRUPPE = 'innsatsgruppe',
-    HOVEDMAL = 'hovedmal',
-    VEDTAKSDATO = 'vedtaksdato'
+    TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
 export enum OversiktType {

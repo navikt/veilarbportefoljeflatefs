@@ -61,6 +61,7 @@ import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from 
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import Header from '../components/tabell/header';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -158,13 +159,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
-            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
-                <>
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aInnsatsgruppe(bruker)} />
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aHovedmal(bruker)} />
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aFattetDato(bruker)} />
-                </>
-            )}
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
@@ -358,6 +352,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+            {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                <>
+                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aInnsatsgruppe(bruker)} />
+                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aHovedmal(bruker)} />
+                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aFattetDato(bruker)} />
+                </>
+            )}
             <TekstKolonne
                 tekst={bruker.utkast14aStatus}
                 skalVises={

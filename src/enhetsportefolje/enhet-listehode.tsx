@@ -109,19 +109,7 @@ function EnhetListehode({
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
-                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
-                    <>
-                        <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
-                            Innsatsgruppe
-                        </Header>
-                        <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
-                            Hovedmål
-                        </Header>
-                        <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
-                            Vedtaksdato
-                        </Header>
-                    </>
-                )}
+
                 <Fodeland {...sorteringTilHeadercelle} />
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
@@ -315,6 +303,19 @@ function EnhetListehode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
+                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
+                    <>
+                        <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
+                            Innsatsgruppe
+                        </Header>
+                        <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
+                            Hovedmål
+                        </Header>
+                        <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
+                            Vedtaksdato
+                        </Header>
+                    </>
+                )}
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
