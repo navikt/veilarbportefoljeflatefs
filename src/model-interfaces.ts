@@ -145,23 +145,23 @@ export enum InnsatsgruppeOppfolgingsvedtak {
     VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
 }
 
-export enum InnsatsgruppeNavn {
-    STANDARD_INNSATS = 'Gode muligheter',
-    SITUASJONSBESTEMT_INNSATS = 'Trenger veiledning',
-    SPESIELT_TILPASSET_INNSATS = 'Trenger veiledning, nedsatt arbeidsevne',
-    GRADERT_VARIG_TILPASSET_INNSATS = 'Jobbe delvis',
-    VARIG_TILPASSET_INNSATS = 'Liten mulighet til å jobbe'
-}
+export const InnsatsgruppeNavn: {[key in InnsatsgruppeOppfolgingsvedtak]: string} = {
+    [InnsatsgruppeOppfolgingsvedtak.STANDARD_INNSATS]: 'Gode muligheter',
+    [InnsatsgruppeOppfolgingsvedtak.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
+    [InnsatsgruppeOppfolgingsvedtak.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
+    [InnsatsgruppeOppfolgingsvedtak.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
+    [InnsatsgruppeOppfolgingsvedtak.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
+};
 
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
     BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
 }
 
-export enum HovedmalNavn {
-    SKAFFE_ARBEID = 'Skaffe arbeid',
-    BEHOLDE_ARBEID = 'Beholde arbeid'
-}
+export const HovedmalNavn: {[key in Hovedmal]: string} = {
+    [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
+    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid'
+};
 
 export interface BrukerModell {
     fnr: string;

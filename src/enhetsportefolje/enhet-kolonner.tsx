@@ -138,13 +138,13 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
 
     const vedtak14aInnsatsgruppe = (bruker: BrukerModell) => {
         if (bruker.vedtak14a?.innsatsgruppe) {
-            return InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe as keyof typeof InnsatsgruppeNavn].toString();
+            return InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe];
         } else return '-';
     };
 
     const vedtak14aHovedmal = (bruker: BrukerModell) => {
         if (bruker.vedtak14a?.hovedmal) {
-            return HovedmalNavn[bruker.vedtak14a.hovedmal as keyof typeof HovedmalNavn].toString();
+            return HovedmalNavn[bruker.vedtak14a.hovedmal];
         } else return '-';
     };
 
