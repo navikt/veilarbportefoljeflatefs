@@ -110,19 +110,17 @@ function EnhetListehode({
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
                 {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
-                    <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
-                        Innsatsgruppe
-                    </Header>
-                )}
-                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
-                    <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
-                        Hovedmål
-                    </Header>
-                )}
-                {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE && (
-                    <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
-                        Vedtaksdato
-                    </Header>
+                    <>
+                        <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
+                            Innsatsgruppe
+                        </Header>
+                        <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
+                            Hovedmål
+                        </Header>
+                        <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
+                            Vedtaksdato
+                        </Header>
+                    </>
                 )}
                 <Fodeland {...sorteringTilHeadercelle} />
                 <Statsborgerskap {...sorteringTilHeadercelle} />
