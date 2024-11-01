@@ -213,12 +213,9 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
 });
 
 const lag14aVedtak = (): Vedtak14aDataModell | null => {
-    const crypto = window.crypto || window.msCrypto;
-    var array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-
-    const maybe14aVedtak = array[0] / 0xffffffff;
+    const maybe14aVedtak = rnd(0, 1);
     const today = new Date();
+
     if (maybe14aVedtak < 0.15) {
         return {
             innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.GRADERT_VARIG_TILPASSET_INNSATS,
