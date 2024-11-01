@@ -138,24 +138,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
     };
 
-    const vedtak14aInnsatsgruppe = (bruker: BrukerModell) => {
-        if (bruker.vedtak14a?.innsatsgruppe) {
-            return InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe];
-        } else return '-';
-    };
-
-    const vedtak14aHovedmal = (bruker: BrukerModell) => {
-        if (bruker.vedtak14a?.hovedmal) {
-            return HovedmalNavn[bruker.vedtak14a.hovedmal];
-        } else return '-';
-    };
-
-    const vedtak14aFattetDato = (bruker: BrukerModell) => {
-        if (bruker.vedtak14a?.innsatsgruppe) {
-            return toDateString(bruker.vedtak14a?.fattetDato);
-        } else return '-';
-    };
-
     return (
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -355,9 +337,23 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             {visFilter14aFraVedtaksstotte && (
                 <>
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aInnsatsgruppe(bruker)} />
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aHovedmal(bruker)} />
-                    <TekstKolonne skalVises={true} className="col col-xs-2" tekst={vedtak14aFattetDato(bruker)} />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={
+                            bruker.vedtak14a?.innsatsgruppe ? InnsatsgruppeNavn[bruker.vedtak14a.innsatsgruppe] : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={bruker.vedtak14a?.hovedmal ? HovedmalNavn[bruker.vedtak14a.hovedmal] : '-'}
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)}
+                        tekst={bruker.vedtak14a?.innsatsgruppe ? toDateString(bruker.vedtak14a?.fattetDato) : '-'}
+                        className="col col-xs-2"
+                    />
                 </>
             )}
             <TekstKolonne

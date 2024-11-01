@@ -307,13 +307,13 @@ function EnhetListehode({
                 />
                 {visFilter14aFraVedtaksstotte && (
                     <>
-                        <Header skalVises={true} headerTestId="header-innsatsgruppe" className="col col-xs-2">
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
                             Innsatsgruppe
                         </Header>
-                        <Header skalVises={true} headerTestId="header-hovedmal" className="col col-xs-2">
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
                             Hovedmål
                         </Header>
-                        <Header skalVises={true} headerTestId="header-vedtaksdato" className="col col-xs-2">
+                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
                             Vedtaksdato
                         </Header>
                     </>
