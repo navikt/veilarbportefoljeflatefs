@@ -12,7 +12,7 @@ import {
     fodselsdagIMnd,
     formidlingsgruppe,
     HAR_AVVIK,
-    gjeldende14aVedtakVedtaksstotte,
+    gjeldendeVedtak14a,
     hovedmal,
     innsatsgruppe,
     kjonn,
@@ -293,8 +293,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         id="gjeldende-vedtak-14a"
                         render={() => (
                             <CheckboxFilterform
-                                form="gjeldende14aVedtakVedtaksstotte"
-                                valg={gjeldende14aVedtakVedtaksstotte}
+                                form="gjeldendeVedtak14a"
+                                valg={gjeldendeVedtak14a}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />

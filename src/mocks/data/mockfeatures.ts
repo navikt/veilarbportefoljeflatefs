@@ -23,5 +23,5 @@ export const mockFeatureToggles = {
     [HUSKELAPP]: true,
     [SKJUL_ARBEIDSLISTEFUNKSJONALITET]: true,
     [VIS_STATUSFILTER_TILTAKSHENDELSE]: true,
-    [VIS_FILTER_14A_FRA_VEDTAKSSTOTTE]: false
+    [VIS_FILTER_14A_FRA_VEDTAKSSTOTTE]: true
 };

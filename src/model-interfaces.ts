@@ -106,7 +106,7 @@ export interface FiltervalgModell {
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
     fargekategorier: FargekategoriModell[];
-    gjeldende14aVedtakVedtaksstotte: string[];
+    gjeldendeVedtak14a: string[];
 }
 
 export interface EnhetModell {

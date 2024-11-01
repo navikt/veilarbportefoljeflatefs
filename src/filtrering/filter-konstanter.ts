@@ -377,7 +377,7 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
-export const gjeldende14aVedtakVedtaksstotte = {
+export const gjeldendeVedtak14a = {
     [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
@@ -436,7 +436,7 @@ export const filterKonstanter = {
     ulesteEndringer,
     tolkebehov,
     stillingFraNavFilter,
-    gjeldende14aVedtakVedtaksstotte,
+    gjeldendeVedtak14a,
     avvik14aVedtak,
     ensligeForsorgere,
     barnUnder18Aar,

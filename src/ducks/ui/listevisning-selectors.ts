@@ -147,7 +147,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
-    const filtrertPa14aVedtak = filtervalg.gjeldende14aVedtakVedtaksstotte.length > 0;
+    const filtrertPa14aVedtak = filtervalg.gjeldendeVedtak14a.length > 0;
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
