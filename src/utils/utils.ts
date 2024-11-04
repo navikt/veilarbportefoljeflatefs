@@ -276,7 +276,7 @@ export function bostedKommuneUtlandEllerUkjent(bruker: BrukerModell, geografiskb
 }
 
 export const bostedBydelEllerUkjent = (bostedBydel: string, geografiskbostedData: Map<string, string>): string => {
-    return geografiskbostedData.get(bostedBydel) || 'Ukjent';
+    return geografiskbostedData.get(bostedBydel) ?? '–';
 };
 
 export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
