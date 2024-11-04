@@ -347,13 +347,22 @@ function MinOversiktListeHode({
                 />
                 {visFilter14aFraVedtaksstotte && (
                     <>
-                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                        <Header
+                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+                            className="col col-xs-2"
+                        >
                             Innsatsgruppe
                         </Header>
-                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                        <Header
+                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
+                            className="col col-xs-2"
+                        >
                             Hovedmål
                         </Header>
-                        <Header skalVises={valgteKolonner.includes(Kolonne.INNSATSGRUPPE)} className="col col-xs-2">
+                        <Header
+                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
+                            className="col col-xs-2"
+                        >
                             Vedtaksdato
                         </Header>
                     </>
