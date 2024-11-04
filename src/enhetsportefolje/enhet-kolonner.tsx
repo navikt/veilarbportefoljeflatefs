@@ -17,7 +17,14 @@ import {
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {
+    BarnUnder18Aar,
+    BrukerModell,
+    FiltervalgModell,
+    HovedmalNavn,
+    InnsatsgruppeNavn,
+    VeilederModell
+} from '../model-interfaces';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -51,7 +58,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
@@ -67,6 +74,8 @@ interface EnhetKolonnerProps {
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -325,6 +334,35 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+            {visFilter14aFraVedtaksstotte && (
+                <>
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? InnsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                                : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
+                                : '-'
+                        }
+                        className="col col-xs-2-5"
+                    />
+                </>
+            )}
             <TekstKolonne
                 tekst={bruker.utkast14aStatus ?? '-'}
                 skalVises={

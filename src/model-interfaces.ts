@@ -106,6 +106,7 @@ export interface FiltervalgModell {
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
     fargekategorier: FargekategoriModell[];
+    gjeldendeVedtak14a: string[];
 }
 
 export interface EnhetModell {
@@ -144,10 +145,23 @@ export enum InnsatsgruppeOppfolgingsvedtak {
     VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
 }
 
+export const InnsatsgruppeNavn: {[key in InnsatsgruppeOppfolgingsvedtak]: string} = {
+    [InnsatsgruppeOppfolgingsvedtak.STANDARD_INNSATS]: 'Gode muligheter',
+    [InnsatsgruppeOppfolgingsvedtak.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
+    [InnsatsgruppeOppfolgingsvedtak.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
+    [InnsatsgruppeOppfolgingsvedtak.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
+    [InnsatsgruppeOppfolgingsvedtak.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
+};
+
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
     BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
 }
+
+export const HovedmalNavn: {[key in Hovedmal]: string} = {
+    [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
+    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid'
+};
 
 export interface BrukerModell {
     fnr: string;
@@ -225,7 +239,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
-    oppfolgingsvedtak14a: Vedtak14aDataModell | null;
+    gjeldendeVedtak14a: Vedtak14aDataModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {

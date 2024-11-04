@@ -38,6 +38,8 @@ export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
+export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
+export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
 export const HAR_AVVIK = 'HAR_AVVIK';
 export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
@@ -379,6 +381,11 @@ export const hendelserEtikett = {
     AVBRUTT_SOKEAVTALE: 'Aktivitet avbrutt: Avtale om å søke jobber'
 };
 
+export const gjeldendeVedtak14a = {
+    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
+    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
+};
+
 export const avvik14aVedtakHovedFilter = {
     [HAR_AVVIK]: {label: 'Status'}
 };
@@ -433,6 +440,7 @@ export const filterKonstanter = {
     ulesteEndringer,
     tolkebehov,
     stillingFraNavFilter,
+    gjeldendeVedtak14a,
     avvik14aVedtak,
     ensligeForsorgere,
     barnUnder18Aar,

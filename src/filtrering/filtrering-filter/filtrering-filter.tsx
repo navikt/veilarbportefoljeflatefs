@@ -12,6 +12,7 @@ import {
     fodselsdagIMnd,
     formidlingsgruppe,
     HAR_AVVIK,
+    gjeldendeVedtak14a,
     hovedmal,
     innsatsgruppe,
     kjonn,
@@ -40,7 +41,7 @@ import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18} from '../../konstanter';
+import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
@@ -53,6 +54,9 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
+    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -116,8 +120,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             return endreFiltervalg(form, filterVerdi.includes(HAR_AVVIK) ? filterVerdi : [HAR_AVVIK, ...filterVerdi]);
         };
     };
-
-    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
 
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
@@ -283,6 +285,23 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
+            {visFilter14aFraVedtaksstotte && (
+                <div className="filtrering-filter__kolonne">
+                    <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
+                    <Dropdown
+                        name="Gjeldende vedtak (§ 14 a)"
+                        id="gjeldende-vedtak-14a"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="gjeldendeVedtak14a"
+                                valg={gjeldendeVedtak14a}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                </div>
+            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Utfasing av Arena</Label>
                 <Dropdown
