@@ -359,7 +359,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                                 ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
                                 : '-'
                         }
-                        className="col col-xs-2"
+                        className="col col-xs-2-5"
                     />
                 </>
             )}

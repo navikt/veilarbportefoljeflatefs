@@ -361,7 +361,7 @@ function MinOversiktListeHode({
                         </Header>
                         <Header
                             skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                            className="col col-xs-2"
+                            className="col col-xs-2-5"
                         >
                             Vedtaksdato
                         </Header>
