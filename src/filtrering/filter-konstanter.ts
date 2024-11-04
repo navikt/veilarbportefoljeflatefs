@@ -74,10 +74,14 @@ export function lagConfig(data: any): any {
     return data;
 }
 
-/** Mappar filternamn i OpenSearch til filterlabel for filter i ferdigFilterListe
+/**
+ * Mappar filternamn i OpenSearch til filterlabel for filter i ferdigFilterListe
  *
  * Notasjonen [konstantnamn] hentar ut verdien i konstanten og gjer det
  * lettare å finne ut kvar verdien av konstanten har blitt brukt.
+ *
+ * [key]-notasjonen heiter "Computed property names" i JavaScript.
+ * Les meir her: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
  * */
 export const ferdigfilterListeLabelTekst = {
     [UFORDELTE_BRUKERE]: 'Ufordelte brukere',

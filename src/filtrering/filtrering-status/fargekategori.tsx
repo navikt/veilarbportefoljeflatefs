@@ -55,16 +55,17 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
         statustallId: 'fargekategoriD'
     },
     {
-        filterLabel: fargekategorier.FARGEKATEGORI_E,
-        filterId: FARGEKATEGORI_E,
-        filterNavn: 'mineFargekategorierE',
-        statustallId: 'fargekategoriE'
-    },
-    {
         filterLabel: fargekategorier.FARGEKATEGORI_F,
         filterId: FARGEKATEGORI_F,
         filterNavn: 'mineFargekategorierF',
         statustallId: 'fargekategoriF'
+    },
+    {
+        // Denne må liggje nedst for at farge-namna ("turkis", "gul") skal visast alfabetisk
+        filterLabel: fargekategorier.FARGEKATEGORI_E,
+        filterId: FARGEKATEGORI_E,
+        filterNavn: 'mineFargekategorierE',
+        statustallId: 'fargekategoriE'
     },
     {
         filterLabel: fargekategorier.INGEN_KATEGORI,
