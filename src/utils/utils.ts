@@ -75,7 +75,7 @@ export function ytelsestypetekst(brukerytelse: string) {
         return 'Ordinær';
     } else if (brukerytelse === 'AAP_UNNTAK') {
         return 'Unntak';
-    }
+    } else return '-';
 }
 
 export function aapVurderingsfrist(
@@ -186,7 +186,7 @@ export function tolkBehovSpraak(
     filtervalg: FiltervalgModell,
     bruker: BrukerModell,
     tolkbehovSpraakData: Map<string, string>
-) {
+): string {
     const behovSpraak: string[] = [];
     let leggTilSpraak = leggTilSpraakInfo(filtervalg);
 
@@ -262,7 +262,7 @@ export function capitalize(str: string) {
         .replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());
 }
 
-export function bostedKommune(bruker: BrukerModell, geografiskbostedData) {
+export function bostedKommuneUtlandEllerUkjent(bruker: BrukerModell, geografiskbostedData) {
     if (bruker.bostedKommune) {
         return geografiskbostedData.get(bruker.bostedKommune);
     }
@@ -274,6 +274,10 @@ export function bostedKommune(bruker: BrukerModell, geografiskbostedData) {
     }
     return '-';
 }
+
+export const bostedBydelEllerUkjent = (bostedBydel: string, geografiskbostedData: Map<string, string>): string => {
+    return geografiskbostedData.get(bostedBydel) ?? '–';
+};
 
 export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
     if (aktivitetsplikt === undefined) {
