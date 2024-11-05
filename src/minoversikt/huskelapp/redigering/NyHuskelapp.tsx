@@ -1,5 +1,5 @@
 import {Form, Formik} from 'formik';
-import {Detail, Heading} from '@navikt/ds-react';
+import {Detail} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import FormikTekstArea from '../../../components/formik/formik-tekstarea';
 import FormikDatoVelger from '../../../components/formik/formik-datovelger/formik-datovelger';
@@ -10,14 +10,12 @@ import './rediger-huskelapp.css';
 interface Props {
     huskelapp?: HuskelappModell;
     onSubmit: (values: any, formikHelpers: any) => Promise<any>;
-    harArbeidsliste: boolean;
     setHuskelappEndret: (endret: boolean) => void;
 }
 
-export const NyHuskelapp = ({huskelapp, onSubmit, harArbeidsliste, setHuskelappEndret}: Props) => {
+export const NyHuskelapp = ({huskelapp, onSubmit, setHuskelappEndret}: Props) => {
     return (
         <div className="ny-huskelapp huskelapp__postit">
-            {harArbeidsliste && <Heading size="small">Ny huskelapp</Heading>}
             <Formik
                 initialValues={{
                     frist: huskelapp?.frist ?? '',
