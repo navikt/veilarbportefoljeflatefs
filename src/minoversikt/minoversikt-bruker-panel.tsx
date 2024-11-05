@@ -8,7 +8,7 @@ import {Checkbox, Tag} from '@navikt/ds-react';
 import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
 import Etiketter from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell} from '../model-interfaces';
-import MinOversiktKolonner from './minoversikt-kolonner';
+import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';

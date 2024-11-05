@@ -3,9 +3,9 @@ import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
+    bostedBydelEllerUkjent,
     bostedKommuneUtlandEllerUkjent,
     capitalize,
-    bostedBydelEllerUkjent,
     mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
     oppfolingsdatoEnsligeForsorgere,
@@ -22,7 +22,6 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
-    MIN_ARBEIDSLISTE,
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
@@ -35,7 +34,6 @@ import {
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, InnsatsgruppeNavn} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import ArbeidslisteOverskrift from '../components/tabell/arbeidslisteoverskrift';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {
     dagerSiden,
@@ -51,11 +49,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {
-    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
-    VIS_AAP_VURDERINGSFRISTKOLONNER,
-    VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
-} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
@@ -67,9 +61,8 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
 }
 
-function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
-    const visKolonnerForArbeidsliste = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
 
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
@@ -80,7 +73,6 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const arbeidslisteFrist = bruker.arbeidsliste?.frist ? new Date(bruker.arbeidsliste.frist) : null;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
@@ -200,26 +192,6 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
                 dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
             />
-            {visKolonnerForArbeidsliste && (
-                <>
-                    <DatoKolonne
-                        className="col col-xs-2"
-                        dato={arbeidslisteFrist}
-                        skalVises={
-                            !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                            valgteKolonner.includes(Kolonne.ARBEIDSLISTE_FRIST)
-                        }
-                    />
-                    <ArbeidslisteOverskrift
-                        className="col col-xs-2"
-                        bruker={bruker}
-                        skalVises={
-                            !!ferdigfilterListe?.includes(MIN_ARBEIDSLISTE) &&
-                            valgteKolonner.includes(Kolonne.ARBEIDSLISTE_OVERSKRIFT)
-                        }
-                    />
-                </>
-            )}
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -486,5 +458,3 @@ function MinoversiktDatokolonner({bruker, enhetId, filtervalg, valgteKolonner}: 
         </div>
     );
 }
-
-export default MinoversiktDatokolonner;

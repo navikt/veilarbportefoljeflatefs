@@ -11,9 +11,8 @@ import {
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     HAR_AVVIK,
-    MINE_HUSKELAPPER,
     I_AVTALT_AKTIVITET,
-    MIN_ARBEIDSLISTE,
+    MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
     TILTAKSPENGER_YTELSE,
@@ -23,10 +22,7 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../model-interfaces';
-import {
-    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
-    VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE
-} from '../../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER as AAP_VURDERINGSFRIST_TOGGLE} from '../../konstanter';
 import {store} from '../../application';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
@@ -71,7 +67,6 @@ export function getFiltreringState(state: AppState, oversiktType: OversiktType):
 
 export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: OversiktType): Kolonne[] {
     const featureAAPkolonne = store.getState().features[AAP_VURDERINGSFRIST_TOGGLE];
-    const arbeidslistefunksjonalitetSkalVises = !store.getState().features[SKJUL_ARBEIDSLISTEFUNKSJONALITET];
 
     const filtrertPaLandgruppeEllerFoedeland = filtervalg.landgruppe.length > 0 || filtervalg.foedeland.length > 0;
 
@@ -106,11 +101,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaIAvtaltAktivitetIMinOversikt =
         oversiktType === OversiktType.minOversikt && filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET);
-
-    const filtrertPaArbeidslisteIMinOversikt =
-        arbeidslistefunksjonalitetSkalVises &&
-        oversiktType === OversiktType.minOversikt &&
-        filtervalg.ferdigfilterListe.includes(MIN_ARBEIDSLISTE);
 
     const filtrertPaTolkBehov =
         filtervalg.tolkebehov.length > 0 ||
@@ -175,8 +165,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
         .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
-        .concat(addHvis(Kolonne.ARBEIDSLISTE_FRIST, filtrertPaArbeidslisteIMinOversikt))
-        .concat(addHvis(Kolonne.ARBEIDSLISTE_OVERSKRIFT, filtrertPaArbeidslisteIMinOversikt))
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))

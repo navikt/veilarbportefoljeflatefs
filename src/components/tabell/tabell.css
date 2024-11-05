@@ -23,12 +23,6 @@
     margin-left: var(--a-spacing-1);
 }
 
-.veilarbportefoljeflatefs .arbeidslistekategori__sorteringsheader {
-    /* Min-width er summen av: ikon-breidd: 1.2rem, sorteringspil-breidd: 1rem, sorteringspil-margin: 2px */
-    min-width: calc(1.2rem + 1rem + 2px);
-    margin-left: var(--a-spacing-2);
-}
-
 .veilarbportefoljeflatefs .tomt-arbeidslisteikon {
     width: calc(19 / 16 * 1rem); /* 19px */
     height: calc(19 / 16 * 1rem);
