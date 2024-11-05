@@ -5,13 +5,12 @@ import {Alert, Heading} from '@navikt/ds-react';
 import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import Paginering from './paginering/paginering';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../konstanter';
+import {HUSKELAPP} from '../../konstanter';
 import VelgKolonner from './velg-kolonner';
 import './toolbar.css';
 import '../../style.css';
@@ -39,7 +38,6 @@ function Toolbar({
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
-    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -51,9 +49,6 @@ function Toolbar({
             case OversiktType.minOversikt:
                 return (
                     <>
-                        {arbeidslistefunksjonalitetSkalVises && !erFargekategoriFeatureTogglePa && (
-                            <ArbeidslisteKnapp />
-                        )}
                         {erFargekategoriFeatureTogglePa && (
                             <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
                         )}
