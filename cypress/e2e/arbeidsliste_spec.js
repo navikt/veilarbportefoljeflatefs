@@ -8,18 +8,9 @@
 });
 
 describe('Arbeidsliste', () => {
-    it('Sjekker åpning og lukking av arbeidslistepanel i oversikten', () => {
-        cy.apneForsteArbeidslistepanelOgValiderApning();
-
-        cy.lukkForsteArbeidslistepanelOgValiderLukking();
-    });
-
     it('Rediger arbeidsliste', () => {
         const redigertTittel = 'Redigering av tittel';
         const redigertKommentar = 'Redigering av kommentar';
-
-        // Finn den fyrste personen med arbeidsliste, trykk på chevron og sjekk at det fungerte
-        cy.apneForsteArbeidslistepanel();
 
         // Skriv inn ny tekst for tittel og kommentar
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
@@ -28,12 +19,10 @@ describe('Arbeidsliste', () => {
 
     it('Slett arbeidsliste via fjern-knapp', () => {
         // Tel kor mange arbeidslister det er
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]')
-            .as('elementIArbeidsliste')
+
             .then(antallArbeidslisterForSletting => {
                 // Finn checkboksen til den fyrste personen med arbeidsliste
                 cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-                cy.checkboxFirst('min-oversikt_brukerliste-checkbox_arbeidsliste');
 
                 // Fjern personen frå arbeidslista
                 cy.getByTestId('fjern-fra-arbeidsliste_knapp').should('be.enabled').click();
@@ -46,25 +35,12 @@ describe('Arbeidsliste', () => {
                 cy.wait(300); // Ventar på at laster-modalen skal forsvinne
                 cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
-                // Sjekk at det er 1 færre arbeidslister no enn før slettinga
-                cy.get('@elementIArbeidsliste')
-                    .should('be.visible')
-                    .then(antallArbeidslisterEtterSletting => {
-                        expect(antallArbeidslisterEtterSletting.length).to.equal(
-                            antallArbeidslisterForSletting.length - 1
-                        );
-                    });
             });
     });
 
     it('Slett arbeidsliste via rediger-modal', () => {
         // Hentar brukarane med arbeidslister før sletting
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]')
-            .as('elementIArbeidsliste')
             .then(antallArbeidslisterForSletting => {
-                // Opne arbeidslistepanel for den fyrste brukaren som har arbeidsliste
-                cy.apneForsteArbeidslistepanel();
-
                 // Trykk på redigeringsknapp
 
                 // Fjern arbeidslista
@@ -77,22 +53,10 @@ describe('Arbeidsliste', () => {
                 cy.wait(300); // Ventar på at laster-modalen skal forsvinne
                 cy.getByTestId('modal_varsel_fjern-fra-arbeidsliste_bekreft-knapp').should('not.exist');
 
-                // Sjekk at det er 1 færre arbeidslister no enn før slettinga
-                cy.get('@elementIArbeidsliste')
-                    .should('be.visible')
-                    .wait(200)
-                    .then(antallArbeidslisterEtterSletting => {
-                        expect(antallArbeidslisterEtterSletting.length).to.equal(
-                            antallArbeidslisterForSletting.length - 1
-                        );
-                    });
             });
     });
 
     it('Sjekk validering i rediger arbeidsliste-modal', () => {
-        // Opne arbeidslistepanelet for den fyrste personen med arbeidsliste
-        cy.apneForsteArbeidslistepanel();
-
         // Tøm tekstfelta i modalen
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
@@ -105,31 +69,18 @@ describe('Arbeidsliste', () => {
         // Fyll inn ein gyldig kommentar og lagre
         cy.getByTestId('modal_arbeidsliste_kommentar').type('Her er en kjempefin kommentar truddelu');
 
-        // Lukk arbeidslistepanelet
-        cy.lukkForsteArbeidslistepanel();
     });
 
     it('Sjekk at man kan redigere til tom tittel og tom kommentar ', () => {
-        // Opnar arbeidslistepanelet for fyrste person med arbeidsliste
-        cy.apneForsteArbeidslistepanel();
-
         // Nullstill tekstfelt
         cy.getByTestId('modal_arbeidsliste_tittel').clear();
         cy.getByTestId('modal_arbeidsliste_kommentar').clear();
 
-        // Lukk arbeidslistepanelet
-        cy.lukkForsteArbeidslistepanel();
     });
 
-    it('Avbryt redigering, ingen endringer lagret', () => {
-        cy.apneForsteArbeidslistepanel();
-
-        cy.lukkForsteArbeidslistepanel();
-    });
     it('Lag én ny arbeidsliste og sjekk validering', () => {
         // Vel fyrste brukar i lista
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
 
         // Opne legg-i-arbeidsliste_modal
         cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
@@ -154,7 +105,6 @@ describe('Arbeidsliste', () => {
 
     it('Lagre ny arbeidsliste', () => {
         // Opnar "Legg i arbeidsliste"-modal igjen
-        cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
         cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
 
         // Nullstillar tittel og kommentar og skriv inn gyldig input
@@ -180,22 +130,14 @@ describe('Arbeidsliste', () => {
 
             // Sjekk at brukaren er i lista
             cy.get('.testid_legg-i-arbeidsliste_modal').should('not.exist');
-            cy.getByTestId('brukerliste_element_arbeidsliste-GUL').contains(fornavn).first();
         });
     });
 
     it('Lag to nye arbeidslister', () => {
         // Finn alle brukarar som har arbeidslister frå før
-        cy.get('[data-cy=brukerliste_element_arbeidsliste]')
-            .as('elementIArbeidsliste')
-            .then(elementIArbeidslisteFor => {
-                // Sjekk at vi fann nokon element
-                expect(elementIArbeidslisteFor.length).to.be.greaterThan(0);
 
                 // Vel fyrste og siste brukar i arbeidslista
                 cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
-                cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
-                cy.checkboxLast('min-oversikt_brukerliste-checkbox');
 
                 // Opne legg-til-i-arbeidsliste_modal
                 cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled');
@@ -220,12 +162,7 @@ describe('Arbeidsliste', () => {
                 // Testinga av laster-modal er litt ustabil så vi kommenterer den ut. 2024-04-19 Ingrid og Klara
                 // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');
                 // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('not.exist');
-                cy.wait(400); // Ventar på at laster-modalen skal forsvinne
 
-                // Samanlikn talet på brukarar med arbeidslister før og etter at ein har oppretta nye
-                cy.get('@elementIArbeidsliste').then(elementIArbeidslisteEtter => {
-                    expect(elementIArbeidslisteEtter.length).to.equal(elementIArbeidslisteFor.length + 2);
-                });
             });
     });
 });*/

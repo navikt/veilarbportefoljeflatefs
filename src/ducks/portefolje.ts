@@ -453,17 +453,6 @@ export function hentArbeidslisteforVeileder(enhet, veileder) {
     };
 }
 
-export function hentArbeidslisteForBruker(fodselsnummer) {
-    return dispatch => {
-        Api.hentArbeidslisteForBruker(fodselsnummer).then(arbeidslisteForBruker => {
-            dispatch({
-                type: OPPDATER_ARBEIDSLISTE_BRUKER,
-                arbeidslisteForBruker
-            });
-        });
-    };
-}
-
 export function hentHuskelappForBruker(fodselsnummer: string, enhetId: string) {
     return dispatch => {
         Api.hentHuskelappForBruker(fodselsnummer, enhetId).then(huskelapp => {

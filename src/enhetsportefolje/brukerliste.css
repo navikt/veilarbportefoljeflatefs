@@ -89,7 +89,7 @@
     gap: 0.2rem;
 }
 
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteknapp {
+.veilarbportefoljeflatefs .brukerliste__brukerpanelknapp {
     margin-left: auto; /* Dyttar arbeidslisteknappen heilt ut til høgre av containaren. */
     cursor: pointer;
     padding: 0;
