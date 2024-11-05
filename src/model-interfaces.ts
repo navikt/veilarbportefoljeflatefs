@@ -64,6 +64,14 @@ export enum Sorteringsfelt {
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet'
 }
 
+/**
+ * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
+ * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
+ * Begge repoa må deployast samstundes, elles knekk ein Mine filter i prod.                        *
+ *                                                                                                 *
+ * Relevant fil: https://github.com/navikt/veilarbfilter/blob/dev/src/main/java/no/nav/pto/veilarbfilter/domene/PortefoljeFilter.java (2024-11-05)
+ * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     ferdigfilterListe: string[];
     nyeBrukereForVeileder?: boolean;
