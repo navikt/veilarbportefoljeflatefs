@@ -1,10 +1,5 @@
 import {doThenDispatch, STATUS} from './utils';
 import {lagreArbeidsliste, oppdaterArbeidsliste, slettArbeidsliste} from '../middleware/api';
-import {skjulModal} from './modal';
-import {oppdaterArbeidsListeState} from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
-import {dateToISODate} from '../utils/dato-utils';
-import {BrukerModell} from '../model-interfaces';
-import {OrNothing} from '../utils/types/types';
 
 // Actions
 export const ARBEIDSLISTE_LAGRE_OK = 'veilarbportefolje/lagre_arbeidsliste/OK';
@@ -49,29 +44,7 @@ export default function arbeidslisteReducer(state = initialState, action) {
     }
 }
 
-interface RedigerArbeidslisteAction {
-    bruker: BrukerModell;
-    innloggetVeilederIdent: OrNothing<string>;
-}
-
 // Action Creators
-export function redigerArbeidslisteAction(formData, {bruker, innloggetVeilederIdent}: RedigerArbeidslisteAction) {
-    const arbeidsliste = {
-        kommentar: formData.kommentar.length ? formData.kommentar : null,
-        overskrift: formData.overskrift.length ? formData.overskrift : null,
-        frist: formData.frist ? dateToISODate(formData.frist) : null,
-        kategori: formData.kategori
-    };
-
-    return dispatch =>
-        oppdaterArbeidslisteAction(
-            arbeidsliste,
-            bruker.fnr
-        )(dispatch)
-            .then(res => oppdaterArbeidsListeState(res, arbeidsliste, innloggetVeilederIdent, bruker.fnr, dispatch))
-            .then(() => dispatch(skjulModal()));
-}
-
 export function lagreArbeidslisteAction(arbeidsliste) {
     return doThenDispatch(() => lagreArbeidsliste(arbeidsliste), {
         OK: ARBEIDSLISTE_LAGRE_OK,

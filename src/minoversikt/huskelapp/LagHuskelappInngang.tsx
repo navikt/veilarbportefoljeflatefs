@@ -4,6 +4,7 @@ import {trackAmplitude} from '../../amplitude/amplitude';
 import {HuskelappModal} from './redigering/HuskelappModal';
 import {BrukerModell, HuskelappModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
+import './huskelapp.css';
 
 interface Props {
     bruker: BrukerModell;
@@ -24,7 +25,7 @@ export const LagHuskelappInngang = ({bruker, innloggetVeilederIdent}: Props) => 
 
     return (
         <div className="lag-huskelapp-inngang">
-            <Button size="xsmall" variant="tertiary" onClick={onClick} className="arbeidsliste--rediger-lenke">
+            <Button size="xsmall" variant="tertiary" onClick={onClick} className="huskelapp--rediger-lenke">
                 Rediger
             </Button>
             {skalViseHuskelappModal && (

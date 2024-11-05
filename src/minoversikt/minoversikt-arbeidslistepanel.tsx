@@ -1,31 +1,19 @@
 import * as React from 'react';
 import {BodyShort, Detail, Label, Loader} from '@navikt/ds-react';
-import ArbeidslisteModalRediger from '../components/modal/arbeidsliste/arbeidsliste-modal-rediger';
 import {BrukerModell} from '../model-interfaces';
 import {OrNothing} from '../utils/types/types';
 import './minoversikt.css';
 import {LagHuskelappInngang} from './huskelapp/LagHuskelappInngang';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../konstanter';
 import {SlettArbeidslisteKnapp} from '../components/arbeidsliste/SlettArbeidslisteKnapp';
 
 interface ArbeidslistePanelProps {
     bruker: BrukerModell;
     innloggetVeilederIdent: OrNothing<string>;
     skalVises: boolean;
-    settMarkert: (fnr: string, markert: boolean) => void;
     apen: boolean;
 }
 
-export default function ArbeidslistePanel({
-    bruker,
-    innloggetVeilederIdent,
-    skalVises,
-    settMarkert,
-    apen
-}: ArbeidslistePanelProps) {
-    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
-
+export default function ArbeidslistePanel({bruker, innloggetVeilederIdent, skalVises, apen}: ArbeidslistePanelProps) {
     const sistEndretDato = new Date(bruker.arbeidsliste.endringstidspunkt);
     const sistEndretAv = bruker.arbeidsliste.sistEndretAv?.veilederId
         ? bruker.arbeidsliste.sistEndretAv.veilederId
@@ -65,20 +53,7 @@ export default function ArbeidslistePanel({
                                 <Detail className="brukerliste__arbeidslisteinnhold_oppdatert_dato">
                                     {`Endret ${sistEndretDato.toLocaleDateString()} av ${sistEndretAv}`}
                                 </Detail>
-                                {erHuskelappFeatureTogglePa ? (
-                                    <LagHuskelappInngang
-                                        bruker={bruker}
-                                        innloggetVeilederIdent={innloggetVeilederIdent}
-                                    />
-                                ) : (
-                                    <ArbeidslisteModalRediger
-                                        bruker={bruker}
-                                        innloggetVeilederIdent={innloggetVeilederIdent}
-                                        sistEndretDato={sistEndretDato}
-                                        sistEndretAv={sistEndretAv}
-                                        settMarkert={() => settMarkert(bruker.fnr, !bruker.markert)}
-                                    />
-                                )}
+                                <LagHuskelappInngang bruker={bruker} innloggetVeilederIdent={innloggetVeilederIdent} />
                                 <SlettArbeidslisteKnapp bruker={bruker} />
                             </div>
                         </>

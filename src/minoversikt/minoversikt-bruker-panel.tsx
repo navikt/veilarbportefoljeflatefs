@@ -175,9 +175,6 @@ function MinoversiktBrukerPanel({
                         skalVises={arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises}
                         bruker={bruker}
                         innloggetVeilederIdent={innloggetVeileder?.ident}
-                        settMarkert={() => {
-                            settMarkert(bruker.fnr, !bruker.markert);
-                        }}
                         apen={apen}
                     />
                 )}
