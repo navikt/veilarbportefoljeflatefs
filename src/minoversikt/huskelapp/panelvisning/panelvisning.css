@@ -18,10 +18,6 @@
     background: var(--a-bg-subtle);
 }
 
-.lag-huskelapp-inngang {
-    max-width: 31rem;
-}
-
 .huskelapp-panel > .huskelapp__innhold {
     flex-basis: 26rem;
 }

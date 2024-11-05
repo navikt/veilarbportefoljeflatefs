@@ -10,7 +10,6 @@
 describe('Arbeidsliste', () => {
     it('Sjekker åpning og lukking av arbeidslistepanel i oversikten', () => {
         cy.apneForsteArbeidslistepanelOgValiderApning();
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').should('be.visible');
 
         cy.lukkForsteArbeidslistepanelOgValiderLukking();
     });
@@ -25,10 +24,6 @@ describe('Arbeidsliste', () => {
         // Skriv inn ny tekst for tittel og kommentar
         cy.getByTestId('modal_arbeidsliste_tittel').clear().type(redigertTittel);
         cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(redigertKommentar);
-
-        // Sjekkar at arbeidlista er oppdatert
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel').contains(redigertTittel);
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar').contains(redigertKommentar);
     });
 
     it('Slett arbeidsliste via fjern-knapp', () => {
@@ -128,27 +123,6 @@ describe('Arbeidsliste', () => {
 
     it('Avbryt redigering, ingen endringer lagret', () => {
         cy.apneForsteArbeidslistepanel();
-
-        // Finn tittel-elementet
-        cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_tittel')
-            .as('tittel')
-            .then(tittelForRedigering => {
-                // Finn kommentar-elementet også
-                cy.getByTestId('arbeidslistepanel_arbeidslisteinnhold_kommentar')
-                    .as('kommentar')
-                    .then(kommentarForRedigering => {
-                        const nyTittel = 'Skal ikke lagres';
-                        const nyKommentar = 'Kommentar skal heller ikke lagres';
-
-                        // Skriv inn ny tekst i modalen
-                        cy.getByTestId('modal_arbeidsliste_tittel').clear().type(nyTittel);
-                        cy.getByTestId('modal_arbeidsliste_kommentar').clear().type(nyKommentar);
-
-                        // Sjekkar at teksten ikkje vart endra
-                        cy.get('@tittel').should('contain', tittelForRedigering.text());
-                        cy.get('@kommentar').should('contain', kommentarForRedigering.text());
-                    });
-            });
 
         cy.lukkForsteArbeidslistepanel();
     });

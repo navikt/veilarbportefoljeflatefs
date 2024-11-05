@@ -6,11 +6,9 @@ import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
 import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
 import Etiketter from '../components/tabell/etiketter';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import MinOversiktKolonner from './minoversikt-kolonner';
-import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
@@ -30,19 +28,17 @@ interface MinOversiktBrukerPanelProps {
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
     filtervalg: FiltervalgModell;
-    innloggetVeileder: OrNothing<VeilederModell>;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
     hentArbeidslisteForBruker: (fnr: string) => void;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function MinoversiktBrukerPanel({
+export function MinoversiktBrukerPanel({
     bruker,
     settMarkert,
     enhetId,
     filtervalg,
-    innloggetVeileder,
     valgteKolonner,
     varForrigeBruker,
     hentArbeidslisteForBruker,
@@ -168,19 +164,10 @@ function MinoversiktBrukerPanel({
                 </div>
             </div>
             <Collapse isOpened={apen}>
-                {erHuskelappFeatureTogglePa && bruker.huskelapp ? (
+                {erHuskelappFeatureTogglePa && bruker.huskelapp && (
                     <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />
-                ) : (
-                    <ArbeidslistePanel
-                        skalVises={arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises}
-                        bruker={bruker}
-                        innloggetVeilederIdent={innloggetVeileder?.ident}
-                        apen={apen}
-                    />
                 )}
             </Collapse>
         </li>
     );
 }
-
-export default MinoversiktBrukerPanel;

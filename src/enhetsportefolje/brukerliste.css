@@ -64,10 +64,6 @@
     padding: 0 0 0.5rem;
 }
 
-.veilarbportefoljeflatefs .brukerliste--min-width-minside {
-    min-width: 5.5rem;
-}
-
 .veilarbportefoljeflatefs .brukerliste__innhold {
     width: 70%;
     display: flex;
@@ -101,33 +97,6 @@
     min-width: 2rem;
     color: #262626;
     border: none;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslistepanel {
-    display: flex;
-    padding: 8px;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold {
-    padding-right: 3rem;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_frist {
-    color: #4f4f4f;
-    font-style: italic;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
-    padding-top: 5px;
-}
-
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteinnhold_footer .brukerliste__arbeidslisteinnhold_oppdatert_dato {
-    color: #6a6a6a;
-    font-style: italic;
 }
 
 .veilarbportefoljeflatefs .fnr-kolonne {

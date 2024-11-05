@@ -1028,10 +1028,6 @@ GRID
     align-items: center;
 }
 
-.flex--grow {
-    flex-grow: 1;
-}
-
 .text--left {
     text-align: left !important;
 }
