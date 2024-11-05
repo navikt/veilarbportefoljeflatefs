@@ -36,12 +36,6 @@ describe('Arbeidslistestatus', () => {
             // Legg dei til i arbeidslista
             cy.getByTestId('legg-i-arbeidsliste_knapp').should('be.enabled').click();
 
-            // Gjer ting i modal og lagre det (tittel, kommentar, fargekategori = lilla)
-            cy.getByTestId('modal_arbeidsliste_tittel').type('arbeidslistetittel');
-            cy.getByTestId('modal_arbeidsliste_kommentar').type('arbeidslistekommentar');
-            cy.getByTestId('modal_arbeidslistekategori_LILLA').click();
-            cy.getByTestId('modal_arbeidsliste_lagre-knapp').click();
-
             // Desse testane er litt ustabile så vi kommenterer dei ut. 2024-04-19 Ingrid og Klara
             // // Sjå laster-modal
             // cy.getByTestId('veilarbportefoljeflatefs-laster-modal').should('be.visible');

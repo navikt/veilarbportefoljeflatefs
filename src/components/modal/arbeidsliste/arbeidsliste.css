@@ -15,17 +15,6 @@
     border-bottom: 1px solid #fff;
     text-decoration: none;
 }
-.arbeidsliste-modal .modal-innhold .arbeidsliste__info-tekst {
-    margin-bottom: 0;
-    font-style: italic;
-}
-.arbeidsliste-modal .modal-innhold .arbeidsliste__bruker {
-    border-bottom: 1px solid #a0a0a0;
-    margin-bottom: 1rem;
-}
-.arbeidsliste-modal .modal-innhold .arbeidsliste__bruker .arbeidsliste-modal__tittel {
-    width: 30rem;
-}
 .arbeidsliste-modal .modal-innhold .typo-undertittel {
     margin-bottom: 0.5rem;
 }
@@ -87,12 +76,4 @@
     justify-content: center;
     margin: 0.5rem 0 0;
     gap: 1rem;
-}
-.dato-kategori-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin: 0.5rem 0;
-}
-.dato-kategori-wrapper .datovelger {
-    margin: 0 0 auto 0;
 }

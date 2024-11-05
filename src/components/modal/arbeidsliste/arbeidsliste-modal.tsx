@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {skjulModal} from '../../../ducks/modal';
 import {markerAlleBrukere} from '../../../ducks/portefolje';
-import LeggTilArbeidslisteForm from './legg-til-arbeidslisteform';
 import {BrukerModell} from '../../../model-interfaces';
 import './arbeidsliste.css';
 import {AppState} from '../../../reducer';
@@ -19,7 +18,6 @@ interface ArbeidslisteModalProps {
 
 const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
     const arbeidslisteStatus = useSelector((state: AppState) => state.arbeidsliste.status);
-    const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder.data!.ident);
 
     const statusLaster = arbeidslisteStatus !== undefined && arbeidslisteStatus === STATUS.PENDING;
     const fjerneBrukere = valgteBrukere.some(bruker => bruker.arbeidsliste.arbeidslisteAktiv);
@@ -63,22 +61,13 @@ const ArbeidslisteModal = ({isOpen, valgteBrukere}: ArbeidslisteModalProps) => {
                         </VarselModal>
                     ) : (
                         <Modal
-                            className="arbeidsliste-modal testid_legg-i-arbeidsliste_modal"
+                            className="arbeidsliste-modal"
                             open={isModalOpen}
                             onClose={lukkModal}
                             closeOnBackdropClick={true}
                             header={{heading: 'Legg i arbeidsliste'}}
                         >
-                            <Modal.Body>
-                                <div className="modal-innhold">
-                                    <LeggTilArbeidslisteForm
-                                        valgteBrukere={valgteBrukere}
-                                        lukkModal={lukkModal}
-                                        innloggetVeileder={innloggetVeileder}
-                                        setFormIsDirty={() => setFormIsDirty(formIsDirty)}
-                                    />
-                                </div>
-                            </Modal.Body>
+                            (Her var legg-i-arbeidsliste, men no er det sletta.)
                         </Modal>
                     )}
                 </>

@@ -6,7 +6,3 @@
 .tildeling-veileder-statusinfo:not(:last-of-type) {
     margin-bottom: 1rem;
 }
-
-.arbeidsliste-alert {
-    margin-bottom: 0.5rem;
-}
