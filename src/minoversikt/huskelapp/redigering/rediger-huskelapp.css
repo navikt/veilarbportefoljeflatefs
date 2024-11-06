@@ -36,10 +36,6 @@
 }
 
 .rediger-huskelapp-modal .rediger-huskelapp-modal__body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
     padding-bottom: 0;
     overflow: visible; /* Gjer at focus-stylinga ikkje vert kutta sjølv om padding-bottom er 0.*/
 }
@@ -48,43 +44,11 @@
     transform: translateY(-116%);
 }
 
-.rediger-huskelapp-modal .gammel-arbeidsliste {
-    flex: 10 18rem;
-    max-width: 22.5rem;
-
-    background-color: var(--a-bg-subtle);
-    padding: 1rem;
-    border-radius: var(--a-border-radius-medium);
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.rediger-huskelapp-modal .gammel-arbeidsliste-innhold {
-    background: var(--a-bg-default);
-    padding: var(--a-spacing-2);
-    word-break: break-word;
-}
-
-.rediger-huskelapp-modal .gammel-arbeidsliste-innhold h3 {
-    font-size: var(--a-font-size-medium); /*1rem, overskriv ds-styling for xsmall (1.125rem)*/
-}
-
-.rediger-huskelapp-modal .gammel-arbeidsliste-innhold p {
-    font-size: var(--a-font-size-small); /* Overskriv styling i bodylong som brukar medium skriftstorleik */
-}
-
-.rediger-huskelapp-modal .gammel-arbeidsliste li div {
-    font-size: var(--a-font-size-medium) !important; /* Overskriv stylinga '0.875rem !important' frå style.css */
-}
-
 .rediger-huskelapp-modal .rediger-huskelapp-modal-pil {
     margin: auto;
 }
 
 .rediger-huskelapp-modal .ny-huskelapp {
-    flex-basis: 17.75rem;
     flex-grow: 1;
     max-width: 26rem;
 

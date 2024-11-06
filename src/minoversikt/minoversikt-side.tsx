@@ -7,7 +7,7 @@ import Innholdslaster from './../innholdslaster/innholdslaster';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
-import MinoversiktTabell from './minoversikt-portefolje-tabell';
+import {MinoversiktTabell} from './minoversikt-portefolje-tabell';
 import MinoversiktTabellOverskrift from './minoversikt-portefolje-tabelloverskrift';
 import TabellOverskrift from '../components/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
@@ -48,7 +48,7 @@ import './../components/tabell-overskrift.css';
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
-export default function MinoversiktSide() {
+export function MinoversiktSide() {
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
@@ -192,10 +192,7 @@ export default function MinoversiktSide() {
                             />
                         </div>
 
-                        <MinoversiktTabell
-                            innloggetVeileder={innloggetVeilederIdent}
-                            classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''}
-                        />
+                        <MinoversiktTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         <MinOversiktModalController />
                     </div>
                 </MinOversiktWrapper>

@@ -5,13 +5,12 @@ import {Alert, Heading} from '@navikt/ds-react';
 import {MagnifyingGlassIcon, PersonPlusIcon} from '@navikt/aksel-icons';
 import Paginering from './paginering/paginering';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import ArbeidslisteKnapp from './legg-til-arbeidsliste-knapp';
 import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../konstanter';
+import {HUSKELAPP} from '../../konstanter';
 import VelgKolonner from './velg-kolonner';
 import './toolbar.css';
 import '../../style.css';
@@ -39,7 +38,6 @@ function Toolbar({
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
-    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -49,16 +47,10 @@ function Toolbar({
     const oversikt = side => {
         switch (side) {
             case OversiktType.minOversikt:
-                return (
-                    <>
-                        {arbeidslistefunksjonalitetSkalVises && !erFargekategoriFeatureTogglePa && (
-                            <ArbeidslisteKnapp />
-                        )}
-                        {erFargekategoriFeatureTogglePa && (
-                            <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
-                        )}
-                    </>
-                );
+                if (erFargekategoriFeatureTogglePa) {
+                    return <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />;
+                }
+                return null;
             case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">
@@ -74,23 +66,18 @@ function Toolbar({
                     </div>
                 );
             case OversiktType.veilederOversikt:
-                return <></>;
+                return null;
         }
     };
 
     const windowWidth = useWindowWidth() < 1200;
+    const shouldHaveToolbarHiddenClassName: boolean =
+        (scrolling && isSidebarHidden && !windowWidth) ||
+        (scrolling && windowWidth && !isSidebarHidden) ||
+        (!isSidebarHidden && windowWidth);
     return (
         <>
-            <div
-                className={classNames(
-                    'toolbar',
-                    ((scrolling && isSidebarHidden && !windowWidth) ||
-                        (scrolling && windowWidth && !isSidebarHidden) ||
-                        (!isSidebarHidden && windowWidth)) &&
-                        'toolbar__hidden'
-                )}
-                id={id}
-            >
+            <div className={classNames('toolbar', shouldHaveToolbarHiddenClassName && 'toolbar__hidden')} id={id}>
                 <div className="toolbar__element">
                     {oversiktType === OversiktType.veilederOversikt && (
                         <Heading size="small" level="2">

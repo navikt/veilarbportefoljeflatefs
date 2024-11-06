@@ -6,26 +6,6 @@ interface SjekkOmNoeSkalSlettesProps {
     tilEnhet: string | null;
 }
 
-interface SjekkOmArebeidslisteSkalSlettesProps extends SjekkOmNoeSkalSlettesProps {
-    arbeidslisteAktiv: boolean;
-    navkontorForArbeidsliste: string | undefined;
-}
-
-export const harArbeidslisteSomVilBliSlettetFilter = ({
-    tilVeileder,
-    fraVeileder,
-    tilEnhet,
-    arbeidslisteAktiv,
-    navkontorForArbeidsliste
-}: SjekkOmArebeidslisteSkalSlettesProps): boolean => {
-    return (
-        arbeidslisteAktiv &&
-        (fraVeileder !== tilVeileder || fraVeileder === null) &&
-        navkontorForArbeidsliste !== null &&
-        navkontorForArbeidsliste !== tilEnhet
-    );
-};
-
 interface SjekkOmHuskelappSkalSlettesProps extends SjekkOmNoeSkalSlettesProps {
     huskelapp: HuskelappModell | undefined;
 }
@@ -65,24 +45,19 @@ export const harFargekategoriSomVilBliSlettetFilter = ({
 };
 
 interface SjekkOmIngentingSkalSlettesProps
-    extends SjekkOmArebeidslisteSkalSlettesProps,
-        SjekkOmHuskelappSkalSlettesProps,
+    extends SjekkOmHuskelappSkalSlettesProps,
         SjekkOmFargekategoriSkalSlettesProps {}
 
 export const ingentingHosBrukerVilBliSlettet = ({
     tilVeileder,
     fraVeileder,
     tilEnhet,
-    arbeidslisteAktiv,
-    navkontorForArbeidsliste,
     huskelapp,
     fargekategori,
     fargekategoriEnhetId
 }: SjekkOmIngentingSkalSlettesProps) => {
     return (
         fraVeileder === tilVeileder ||
-        ((!arbeidslisteAktiv || navkontorForArbeidsliste === tilEnhet) &&
-            (!huskelapp || huskelapp?.enhetId === tilEnhet) &&
-            (!fargekategori || fargekategoriEnhetId === tilEnhet))
+        ((!huskelapp || huskelapp?.enhetId === tilEnhet) && (!fargekategori || fargekategoriEnhetId === tilEnhet))
     );
 };

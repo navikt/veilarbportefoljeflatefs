@@ -16,7 +16,6 @@ export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
 export const VIS_AAP_VURDERINGSFRISTKOLONNER = 'veilarbportefoljeflatefs.vis_kolonner_for_vurderingsfrist_aap';
 export const FILTER_FOR_PERSONER_MED_BARN_UNDER_18 = 'veilarbportefoljeflatefs.filter_for_personer_med_barn_under_18';
 export const HUSKELAPP = 'veilarbportefoljeflatefs.huskelapp';
-export const SKJUL_ARBEIDSLISTEFUNKSJONALITET = 'veilarbportefoljeflatefs.skjul_arbeidslistefunksjonalitet';
 export const VIS_STATUSFILTER_TILTAKSHENDELSE = 'veilarbportefoljeflatefs.vis_statusfilter_tiltakshendelse';
 export const VIS_FILTER_14A_FRA_VEDTAKSSTOTTE = 'veilarbportefoljeflatefs.vis_filter_14a_fra_vedtaksstotte';
 
@@ -29,7 +28,6 @@ export const PORTEFOLJE_FEATURES = [
     VIS_AAP_VURDERINGSFRISTKOLONNER,
     FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     HUSKELAPP,
-    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
     VIS_STATUSFILTER_TILTAKSHENDELSE,
     VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
 ];

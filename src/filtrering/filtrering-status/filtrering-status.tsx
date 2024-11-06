@@ -1,19 +1,17 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {Alert, Detail, Label, Link, RadioGroup, ReadMore} from '@navikt/ds-react';
-import {ExternalLinkIcon} from '@navikt/aksel-icons';
+import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell, KategoriModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../model-interfaces';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,
     ferdigfilterListeLabelTekst,
-    MINE_HUSKELAPPER,
     I_AVTALT_AKTIVITET,
     IKKE_I_AVTALT_AKTIVITET,
     INAKTIVE_BRUKERE,
-    MIN_ARBEIDSLISTE,
+    MINE_HUSKELAPPER,
     MOTER_IDAG,
     NYE_BRUKERE_FOR_VEILEDER,
     TILTAKSHENDELSER,
@@ -24,7 +22,6 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
-import FilterStatusMinArbeidsliste from './arbeidsliste';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
@@ -32,7 +29,6 @@ import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {
     HUSKELAPP,
-    SKJUL_ARBEIDSLISTEFUNKSJONALITET,
     VEDTAKSTOTTE,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_STATUSFILTER_TILTAKSHENDELSE
@@ -77,7 +73,6 @@ interface FiltreringStatusProps {
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
-    const kategoriliste = filtervalg.arbeidslisteKategori;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -87,7 +82,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         oversiktType === OversiktType.enhetensOversikt &&
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
-    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const dispatch = useDispatch();
 
@@ -95,19 +89,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, ferdigfilterListe: ferdigFilterListe}, oversiktType);
-    }
-
-    function dispatchArbeidslisteKategoriChange(e: React.ChangeEvent<HTMLInputElement>) {
-        dispatch(pagineringSetup({side: 1}));
-        const nyeFerdigfilterListe = e.target.checked
-            ? [...kategoriliste, e.target.value]
-            : kategoriliste.filter(elem => elem !== e.target.value);
-        dispatch(endreFiltervalg('arbeidslisteKategori', nyeFerdigfilterListe, oversiktType));
-        oppdaterKolonneAlternativer(
-            dispatch,
-            {...filtervalg, arbeidslisteKategori: nyeFerdigfilterListe as KategoriModell[]},
-            oversiktType
-        );
     }
 
     function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -269,34 +250,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forste-barlabel-i-gruppe">
-                        {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
-                            <Label className="minArbeidsliste__tittel">Arbeidsliste</Label>
-                        )}
-                        {arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
-                            <>
-                                <Label className="minArbeidsliste__tittel">Huskelapper og kategorier</Label>
-                                <Alert variant="warning" size="small" className="minArbeidsliste__alert">
-                                    <Link
-                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Arbeidslisten-i-Oversikten-i-Modia.aspx"
-                                        target="_blank"
-                                        rel="noopener"
-                                        inlineText
-                                    >
-                                        Gamle arbeidslister blir slettet 25. oktober
-                                        <ExternalLinkIcon title="Ekstern lenke" />
-                                    </Link>
-                                </Alert>
-                            </>
-                        )}
-                        {arbeidslistefunksjonalitetSkalVises && (
-                            <FilterStatusMinArbeidsliste
-                                ferdigfilterListe={kategoriliste}
-                                handleChange={handleRadioButtonChange}
-                                handleChangeCheckbox={dispatchArbeidslisteKategoriChange}
-                                hidden={oversiktType !== OversiktType.minOversikt}
-                                checked={ferdigfilterListe.includes(MIN_ARBEIDSLISTE)}
-                            />
-                        )}
                         {erHuskelappFeatureTogglePa && (
                             <BarInputRadio
                                 filterNavn="huskelapp"
@@ -306,18 +259,9 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
                             />
                         )}
-                        {!arbeidslistefunksjonalitetSkalVises && erHuskelappFeatureTogglePa && (
-                            <FilterStatusMineFargekategorier />
-                        )}
+                        {erHuskelappFeatureTogglePa && <FilterStatusMineFargekategorier />}
                     </div>
                 )}
-                {arbeidslistefunksjonalitetSkalVises &&
-                    erHuskelappFeatureTogglePa &&
-                    oversiktType === OversiktType.minOversikt && (
-                        <div className="forste-barlabel-i-gruppe">
-                            <FilterStatusMineFargekategorier />
-                        </div>
-                    )}
             </RadioGroup>
         </div>
     );

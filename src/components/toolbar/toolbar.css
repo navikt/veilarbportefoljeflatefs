@@ -249,18 +249,3 @@
     width: fit-content;
     align-self: end;
 }
-
-.advarsel-sletting-arbeidslista .knapp-avbryt-tildeling {
-    margin-right: 1rem;
-}
-
-.advarsel-sletting-arbeidslista .sletting-arbeidslista-knapp-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    border-top: 1px;
-    margin-top: 1rem;
-}
-
-.advarsel-sletting-arbeidslista .sporsmal-likevel-tidele {
-    font-weight: bold;
-}

@@ -129,58 +129,15 @@ Cypress.Commands.add('checkbox', testid => {
 });
 
 Cypress.Commands.add('checkboxFirst', testid => {
-    cy.getByTestId(testid).first().as('first-checkbox').should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).not(':disabled').first().as('first-checkbox').should('not.be.checked').check({force: true});
     cy.get('@first-checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('checkboxLast', testid => {
-    cy.getByTestId(testid).last().as('last-checkbox').should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).not(':disabled').last().as('last-checkbox').should('not.be.checked').check({force: true});
     cy.get('@last-checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
     cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible').click();
-});
-
-Cypress.Commands.add('apneForsteArbeidslistepanel', () => {
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .as('arbeidsliste-chevron')
-        .children()
-        .first()
-        .should('have.class', 'expand-testid');
-
-    cy.get('@arbeidsliste-chevron').click();
-});
-
-Cypress.Commands.add('apneForsteArbeidslistepanelOgValiderApning', () => {
-    cy.apneForsteArbeidslistepanel();
-
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .children()
-        .should('have.class', 'collapse-testid')
-        .first();
-});
-
-Cypress.Commands.add('lukkForsteArbeidslistepanel', () => {
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .children()
-        .should('have.class', 'collapse-testid')
-        .click();
-});
-
-Cypress.Commands.add('lukkForsteArbeidslistepanelOgValiderLukking', () => {
-    cy.lukkForsteArbeidslistepanel();
-
-    cy.getByTestId('min-oversikt_brukerliste-arbeidslistepanel_arbeidsliste')
-        .children()
-        .first()
-        .children()
-        .should('have.class', 'expand-testid')
-        .first();
 });

@@ -4,25 +4,22 @@ import {AnyAction} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
-import ArbeidslisteButton from '../components/tabell/arbeidslistebutton';
+import {Checkbox, Tag} from '@navikt/ds-react';
+import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
 import Etiketter from '../components/tabell/etiketter';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
-import MinOversiktKolonner from './minoversikt-kolonner';
-import ArbeidslistePanel from './minoversikt-arbeidslistepanel';
+import {BrukerModell, FiltervalgModell} from '../model-interfaces';
+import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, SKJUL_ARBEIDSLISTEFUNKSJONALITET, VEDTAKSTOTTE} from '../konstanter';
+import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
-import {Checkbox, Tag} from '@navikt/ds-react';
 import './minoversikt.css';
 
 interface MinOversiktBrukerPanelProps {
@@ -30,29 +27,24 @@ interface MinOversiktBrukerPanelProps {
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
     filtervalg: FiltervalgModell;
-    innloggetVeileder: OrNothing<VeilederModell>;
     valgteKolonner: Kolonne[];
     varForrigeBruker?: boolean;
-    hentArbeidslisteForBruker: (fnr: string) => void;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function MinoversiktBrukerPanel({
+export function MinoversiktBrukerPanel({
     bruker,
     settMarkert,
     enhetId,
     filtervalg,
-    innloggetVeileder,
     valgteKolonner,
     varForrigeBruker,
-    hentArbeidslisteForBruker,
     onClick
 }: MinOversiktBrukerPanelProps) {
-    const [apen, setApen] = useState<boolean>(false);
+    const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
-    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
@@ -66,37 +58,32 @@ function MinoversiktBrukerPanel({
         }
     }, [varForrigeBruker]);
 
-    const arbeidslisteAktiv = bruker.arbeidsliste?.arbeidslisteAktiv;
-    const testIdArbeidslisteAktiv = arbeidslisteAktiv ? `_arbeidsliste` : '';
-    const testIdArbeidslisteKategori = arbeidslisteAktiv ? `-${bruker.arbeidsliste.kategori}` : '';
-    const testIdDisabled = bruker.fnr === '' ? '_disabled' : '';
-
     useEffect(() => {
-        if (!(arbeidslisteAktiv || (erHuskelappFeatureTogglePa && !!bruker.huskelapp))) {
-            setApen(false);
+        if (!erHuskelappFeatureTogglePa || !bruker.huskelapp) {
+            setBrukerpanelApent(false);
         }
-    }, [arbeidslisteAktiv, erHuskelappFeatureTogglePa, bruker.huskelapp]);
+    }, [erHuskelappFeatureTogglePa, bruker.huskelapp]);
 
-    function handleArbeidslisteButtonClick(event) {
+    function handleBrukerpanelKnappClick(event) {
         event.preventDefault();
-        setApen(!apen);
-        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
+        setBrukerpanelApent(!brukerpanelApent);
+        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !brukerpanelApent});
         if (onClick) {
             onClick(event);
+        }
+
+        if (!brukerpanelApent) {
+            dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
         }
     }
 
     return (
-        <li
-            className={classNames({'brukerliste--forrigeBruker': varForrigeBruker}, 'brukerliste_rad')}
-            data-testid={`brukerliste_element${testIdArbeidslisteAktiv}${testIdArbeidslisteKategori}${testIdDisabled}`}
-            data-cy={`brukerliste_element${testIdArbeidslisteAktiv}`}
-        >
+        <li className={classNames({'brukerliste--forrigeBruker': varForrigeBruker}, 'brukerliste_rad')}>
             <div className="brukerliste__element">
                 <Checkbox
                     className="brukerliste__checkbox"
                     checked={bruker.markert}
-                    data-testid={`min-oversikt_brukerliste-checkbox${testIdArbeidslisteAktiv}${testIdDisabled}`}
+                    data-testid="min-oversikt_brukerliste-checkbox"
                     disabled={bruker.fnr === ''}
                     hideLabel
                     onChange={() => {
@@ -107,14 +94,7 @@ function MinoversiktBrukerPanel({
                 >
                     Velg bruker {bruker.etternavn}, {bruker.fornavn}
                 </Checkbox>
-                {arbeidslistefunksjonalitetSkalVises && !erHuskelappFeatureTogglePa && (
-                    <ArbeidslistekategoriVisning
-                        skalVises={arbeidslisteAktiv}
-                        kategori={bruker.arbeidsliste?.kategori}
-                        className="brukerliste__arbeidslisteikon"
-                        dataTestid={`brukerliste-arbeidslisteikon_${bruker.arbeidsliste?.kategori}`}
-                    />
-                )}
+
                 {erHuskelappFeatureTogglePa && (
                     <div className="brukerliste__minoversikt-ikonknapper">
                         {
@@ -148,42 +128,16 @@ function MinoversiktBrukerPanel({
                             </Tag>
                         )}
                     </div>
-                    <ArbeidslisteButton
-                        skalVises={
-                            (arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises) ||
-                            (erHuskelappFeatureTogglePa && !!bruker.huskelapp)
-                        }
-                        apen={apen}
-                        onClick={e => {
-                            handleArbeidslisteButtonClick(e);
-                            if (!bruker.arbeidsliste.hentetKommentarOgTittel) {
-                                hentArbeidslisteForBruker(bruker.fnr);
-                            }
-                            if (!apen) {
-                                dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
-                            }
-                        }}
-                        dataTestid={`min-oversikt_brukerliste-arbeidslistepanel${testIdArbeidslisteAktiv}${testIdDisabled}`}
-                    />
+                    {erHuskelappFeatureTogglePa && !!bruker.huskelapp && (
+                        <BrukerpanelKnapp apen={brukerpanelApent} onClick={handleBrukerpanelKnappClick} />
+                    )}
                 </div>
             </div>
-            <Collapse isOpened={apen}>
-                {erHuskelappFeatureTogglePa && bruker.huskelapp ? (
+            <Collapse isOpened={brukerpanelApent}>
+                {erHuskelappFeatureTogglePa && bruker.huskelapp && (
                     <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />
-                ) : (
-                    <ArbeidslistePanel
-                        skalVises={arbeidslisteAktiv && arbeidslistefunksjonalitetSkalVises}
-                        bruker={bruker}
-                        innloggetVeilederIdent={innloggetVeileder?.ident}
-                        settMarkert={() => {
-                            settMarkert(bruker.fnr, !bruker.markert);
-                        }}
-                        apen={apen}
-                    />
                 )}
             </Collapse>
         </li>
     );
 }
-
-export default MinoversiktBrukerPanel;

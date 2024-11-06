@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
@@ -13,15 +13,12 @@ import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
 import {trackAmplitude} from '../../../amplitude/amplitude';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {TildelVeilederRenderer} from './tildel-veileder-renderer';
-import '../../toolbar/toolbar.css';
 import {
-    harArbeidslisteSomVilBliSlettetFilter,
     harFargekategoriSomVilBliSlettetFilter,
     harHuskelappSomVilBliSlettetFilter,
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
-import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
-import {SKJUL_ARBEIDSLISTEFUNKSJONALITET} from '../../../konstanter';
+import '../../toolbar/toolbar.css';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -61,8 +58,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
-    const arbeidslistefunksjonalitetSkalVises = !useFeatureSelector()(SKJUL_ARBEIDSLISTEFUNKSJONALITET);
-
     const sorterVeiledere = veiledere.sort((a, b) => {
         if (a.ident === b.ident) return 0;
         if (a.ident === innloggetVeileder) return -1;
@@ -95,8 +90,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                     tilVeileder: ident,
                     fraVeileder: bruker.veilederId,
                     tilEnhet: enhet,
-                    arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
-                    navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste,
                     huskelapp: bruker.huskelapp,
                     fargekategori: bruker.fargekategori,
                     fargekategoriEnhetId: bruker.fargekategoriEnhetId
@@ -109,16 +102,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                 brukerFnr: bruker.fnr
             }));
             setTilordningerBrukereUtenTingSomVilBliSlettet(tilordningerBrukereUtenTingSomVilBliSlettet);
-
-            const brukereDerArbeidslisteVilBliSlettet = valgteBrukere.filter(bruker =>
-                harArbeidslisteSomVilBliSlettetFilter({
-                    tilVeileder: ident,
-                    fraVeileder: bruker.veilederId,
-                    tilEnhet: enhet,
-                    arbeidslisteAktiv: bruker.arbeidsliste.arbeidslisteAktiv,
-                    navkontorForArbeidsliste: bruker.arbeidsliste.navkontorForArbeidsliste
-                })
-            );
 
             const brukereDerHuskelappVilBliSlettet = valgteBrukere.filter(bruker =>
                 harHuskelappSomVilBliSlettetFilter({
@@ -141,7 +124,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             const brukereMedTingSomVilBliSlettetVedTildeling = [
                 ...brukereDerHuskelappVilBliSlettet,
-                ...brukereDerArbeidslisteVilBliSlettet,
                 ...brukereDerFargekategoriVilBliSlettet
             ];
             setFnrIAdvarselslista(fjernduplikatOgMapTilFnrArray(brukereMedTingSomVilBliSlettetVedTildeling));
@@ -195,61 +177,29 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
     return (
         <>
-            <Modal
-                open={visAdvarselOmSletting}
-                onClose={lukkFjernModal}
-                closeOnBackdropClick={true}
-                className="advarsel-sletting-arbeidslista"
-            >
+            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} closeOnBackdropClick={true}>
                 <Modal.Header>
-                    {arbeidslistefunksjonalitetSkalVises ? (
-                        <Heading size="medium" level="2">
-                            Arbeidslistenotat, huskelapp og/eller kategori blir slettet
-                        </Heading>
-                    ) : (
-                        <Heading size="medium" level="2">
-                            Huskelapp og/eller kategori blir slettet
-                        </Heading>
-                    )}
+                    <Heading size="medium" level="2">
+                        Huskelapp og/eller kategori blir slettet
+                    </Heading>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="advarsel-modal">
-                        {arbeidslistefunksjonalitetSkalVises ? (
-                            <BodyShort size="medium">
-                                Arbeidslistenotat, huskelapp og/eller kategori for følgende brukere ble opprettet på en
-                                annen enhet, og vil bli slettet ved tildeling av ny veileder:
-                            </BodyShort>
-                        ) : (
-                            <BodyShort size="medium">
-                                Huskelapp og/eller kategori for følgende brukere ble opprettet på en annen enhet, og vil
-                                bli slettet ved tildeling av ny veileder:
-                            </BodyShort>
-                        )}
-                        <FnrList listeMedFnr={fnrIAdvarselslista} />
-                        <br />
-                        <BodyShort size="medium" className="sporsmal-likevel-tidele">
-                            Ønsker du likevel å tildele veilederen?
-                        </BodyShort>
-                    </div>
-                    <div className="sletting-arbeidslista-knapp-wrapper">
-                        <Button
-                            variant="tertiary"
-                            className="knapp-avbryt-tildeling"
-                            size="small"
-                            onClick={tildelVeiledereForBrukereDerIngentingBlirSlettet}
-                        >
-                            Avbryt tildeling for nevnte bruker(e)
-                        </Button>
-                        <Button
-                            type={'submit'}
-                            className="knapp"
-                            size="small"
-                            onClick={tildelVeilederForAlleValgteBrukere}
-                        >
-                            Ja, tildel veilederen
-                        </Button>
-                    </div>
+                    <BodyShort>
+                        Huskelapp og/eller kategori for følgende brukere ble opprettet på en annen enhet, og vil bli
+                        slettet ved tildeling av ny veileder:
+                    </BodyShort>
+                    <FnrList listeMedFnr={fnrIAdvarselslista} />
+                    <br />
+                    <BodyShort weight="semibold">Ønsker du likevel å tildele veilederen?</BodyShort>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button type="submit" size="small" onClick={tildelVeilederForAlleValgteBrukere}>
+                        Ja, tildel veilederen
+                    </Button>
+                    <Button variant="tertiary" size="small" onClick={tildelVeiledereForBrukereDerIngentingBlirSlettet}>
+                        Avbryt tildeling for nevnte bruker(e)
+                    </Button>
+                </Modal.Footer>
             </Modal>
 
             <SokFilter placeholder="Tildel veileder" data={sorterVeiledere}>
