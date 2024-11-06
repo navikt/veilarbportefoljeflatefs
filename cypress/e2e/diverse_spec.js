@@ -242,9 +242,9 @@ describe('Diverse', () => {
         cy.getByTestId('brukerfeilmelding').should('be.visible');
         cy.scrollTo('top');
         cy.wait(100);
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should('not.be.checked').click();
+        cy.getByTestId('min-oversikt_brukerliste-checkbox').not(':disabled').first().should('not.be.checked').click();
         cy.getByTestId('brukerfeilmelding').should('not.exist');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').first().should('be.checked');
+        cy.getByTestId('min-oversikt_brukerliste-checkbox').not(':disabled').first().should('be.checked');
 
         // Går tilbake til startsida (nullstiller til neste test)
         cy.gaTilOversikt('enhetens-oversikt');

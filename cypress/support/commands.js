@@ -129,12 +129,12 @@ Cypress.Commands.add('checkbox', testid => {
 });
 
 Cypress.Commands.add('checkboxFirst', testid => {
-    cy.getByTestId(testid).first().as('first-checkbox').should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).not(':disabled').first().as('first-checkbox').should('not.be.checked').check({force: true});
     cy.get('@first-checkbox').should('be.checked');
 });
 
 Cypress.Commands.add('checkboxLast', testid => {
-    cy.getByTestId(testid).last().as('last-checkbox').should('not.be.checked').check({force: true});
+    cy.getByTestId(testid).not(':disabled').last().as('last-checkbox').should('not.be.checked').check({force: true});
     cy.get('@last-checkbox').should('be.checked');
 });
 
