@@ -90,7 +90,7 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste__brukerpanelknapp {
-    margin-left: auto; /* Dyttar arbeidslisteknappen heilt ut til høgre av containaren. */
+    margin-left: auto; /* Dyttar brukerpanelknappen heilt ut til høgre av containaren. */
     cursor: pointer;
     padding: 0;
     background-color: transparent;
