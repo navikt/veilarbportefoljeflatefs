@@ -213,7 +213,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label>Siste svar fra registrering</Label>
+                <Label>Siste svar fra registrering i Arbeidssøkerregisteret</Label>
                 <Dropdown
                     name="Situasjon"
                     id="situasjon"
@@ -239,7 +239,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
+                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanning"
@@ -256,7 +257,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
+                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanningGodkjent"
@@ -273,7 +275,8 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     render={() => (
                         <>
                             <Alert variant="info" size="small" className="registrering-alert">
-                                Svar bruker oppga ved registrering. Det finnes ikke svar for alle, f.eks. sykmeldte.
+                                Siste svar bruker oppga via arbeidssøkerregistreringen. Det finnes ikke svar for alle,
+                                f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
                                 form="utdanningBestatt"
