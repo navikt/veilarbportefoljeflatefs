@@ -47,13 +47,10 @@ function Toolbar({
     const oversikt = side => {
         switch (side) {
             case OversiktType.minOversikt:
-                return (
-                    <>
-                        {erFargekategoriFeatureTogglePa && (
-                            <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />
-                        )}
-                    </>
-                );
+                if (erFargekategoriFeatureTogglePa) {
+                    return <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />;
+                }
+                return null;
             case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">
@@ -69,23 +66,18 @@ function Toolbar({
                     </div>
                 );
             case OversiktType.veilederOversikt:
-                return <></>;
+                return null;
         }
     };
 
     const windowWidth = useWindowWidth() < 1200;
+    const shouldHaveToolbarHiddenClassName: boolean =
+        (scrolling && isSidebarHidden && !windowWidth) ||
+        (scrolling && windowWidth && !isSidebarHidden) ||
+        (!isSidebarHidden && windowWidth);
     return (
         <>
-            <div
-                className={classNames(
-                    'toolbar',
-                    ((scrolling && isSidebarHidden && !windowWidth) ||
-                        (scrolling && windowWidth && !isSidebarHidden) ||
-                        (!isSidebarHidden && windowWidth)) &&
-                        'toolbar__hidden'
-                )}
-                id={id}
-            >
+            <div className={classNames('toolbar', shouldHaveToolbarHiddenClassName && 'toolbar__hidden')} id={id}>
                 <div className="toolbar__element">
                     {oversiktType === OversiktType.veilederOversikt && (
                         <Heading size="small" level="2">

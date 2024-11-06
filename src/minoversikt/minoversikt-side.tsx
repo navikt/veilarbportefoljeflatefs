@@ -48,7 +48,7 @@ import './../components/tabell-overskrift.css';
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
-export default function MinoversiktSide() {
+export function MinoversiktSide() {
     const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();

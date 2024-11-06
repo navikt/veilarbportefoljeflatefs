@@ -54,6 +54,8 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
             if (huskelapp?.huskelappId) {
                 await endreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, huskelapp.huskelappId);
             } else {
+                // Hardkodar verdiar for arbeidsliste og feature-toggle i funksjonen under til å vere "null" (arbeidsliste) og "true" (skjul arbeidslistefunksjonalitet)
+                // Desse felta skal fjernast frå funksjonen i neste del av arbeidslisteopprydding.
                 await lagreHuskelapp(dispatch, values, bruker, enhetId!, onModalClose, null, true);
             }
         } catch (error) {

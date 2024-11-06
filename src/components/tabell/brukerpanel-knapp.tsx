@@ -15,13 +15,7 @@ export const BrukerpanelKnapp = ({apen, onClick}: BrukerpanelKnappProps) => (
         className="brukerliste__brukerpanelknapp"
         variant="tertiary"
         onClick={onClick}
-        icon={
-            apen ? (
-                <ChevronUpIcon title="Vis mindre" className="collapse-testid" />
-            ) : (
-                <ChevronDownIcon title="Vis mer" className="expand-testid" />
-            )
-        }
+        icon={apen ? <ChevronUpIcon title="Vis mindre" /> : <ChevronDownIcon title="Vis mer" />}
         aria-expanded={apen}
     />
 );

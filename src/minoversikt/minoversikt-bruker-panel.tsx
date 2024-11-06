@@ -41,7 +41,7 @@ export function MinoversiktBrukerPanel({
     varForrigeBruker,
     onClick
 }: MinOversiktBrukerPanelProps) {
-    const [apen, setApen] = useState<boolean>(false);
+    const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
@@ -60,19 +60,19 @@ export function MinoversiktBrukerPanel({
 
     useEffect(() => {
         if (!erHuskelappFeatureTogglePa || !bruker.huskelapp) {
-            setApen(false);
+            setBrukerpanelApent(false);
         }
     }, [erHuskelappFeatureTogglePa, bruker.huskelapp]);
 
     function handleBrukerpanelKnappClick(event) {
         event.preventDefault();
-        setApen(!apen);
-        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !apen});
+        setBrukerpanelApent(!brukerpanelApent);
+        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !brukerpanelApent});
         if (onClick) {
             onClick(event);
         }
 
-        if (!apen) {
+        if (!brukerpanelApent) {
             dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
         }
     }
@@ -129,16 +129,11 @@ export function MinoversiktBrukerPanel({
                         )}
                     </div>
                     {erHuskelappFeatureTogglePa && !!bruker.huskelapp && (
-                        <BrukerpanelKnapp
-                            apen={apen}
-                            onClick={e => {
-                                handleBrukerpanelKnappClick(e);
-                            }}
-                        />
+                        <BrukerpanelKnapp apen={brukerpanelApent} onClick={handleBrukerpanelKnappClick} />
                     )}
                 </div>
             </div>
-            <Collapse isOpened={apen}>
+            <Collapse isOpened={brukerpanelApent}>
                 {erHuskelappFeatureTogglePa && bruker.huskelapp && (
                     <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />
                 )}
