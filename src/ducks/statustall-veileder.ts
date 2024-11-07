@@ -1,6 +1,7 @@
 import * as Api from './../middleware/api';
 import {doThenDispatch, STATUS} from './utils';
 import {OrNothing} from '../utils/types/types';
+import {StatustallInnhold} from './statustall-enhet';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall-veileder/OK';
@@ -8,27 +9,8 @@ export const FEILET = 'veilarbportefoljeflatefs/statustall-veileder/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall-veileder/PENDING';
 export const LEGG_TIL_STATUSTALL = 'veilarbportefoljeflatefs/statustall-veileder/LEGG_TIL_STATUSTALL';
 
-export interface StatustallVeileder {
-    totalt: number;
-    ufordelteBrukere: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-    tiltakshendelser: number;
-    utlopteAktiviteter: number;
-    ikkeIavtaltAktivitet: number;
-    iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
-    erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
-    nyeBrukereForVeileder: number;
-    underVurdering: number;
-    mineHuskelapper: number;
+/** Statustall-felt som er unike for veileder, i tillegg til dei som er felles med Enhet-statustalla */
+export interface StatustallVeileder extends StatustallInnhold {
     fargekategoriA: number;
     fargekategoriB: number;
     fargekategoriC: number;

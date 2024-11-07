@@ -34,34 +34,12 @@ import {
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
+import {StatustallInnhold} from '../../ducks/statustall-enhet';
 import './filtrering-status.css';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;
     utenBrukerinnsyn: StatustallInnhold | null;
-}
-
-interface StatustallInnhold {
-    totalt: number;
-    ufordelteBrukere: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-    tiltakshendelser: number;
-    utlopteAktiviteter: number;
-    ikkeIavtaltAktivitet: number;
-    iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
-    erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
-    nyeBrukereForVeileder: number;
-    underVurdering: number;
-    mineHuskelapper: number;
 }
 
 interface FiltreringStatusProps {

@@ -7,7 +7,9 @@ export const OK = 'veilarbportefoljeflatefs/statustall-enhet/OK';
 export const FEILET = 'veilarbportefoljeflatefs/statustall-enhet/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall-enhet/PENDING';
 
-interface StatustallInnhold {
+/** Felt som er felles for ulike statustall-typar
+ * som til dømes dei for enhet og dei for veileder (min oversikt) */
+export interface StatustallInnhold {
     totalt: number;
     ufordelteBrukere: number;
     inaktiveBrukere: number;
