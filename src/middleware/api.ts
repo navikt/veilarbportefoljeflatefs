@@ -1,7 +1,6 @@
 import {FargekategoriDataModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev, loginUrl} from '../utils/url-utils';
-import {FrontendEvent} from '../utils/frontend-logger';
+import {erDev, getEnv, loginUrl} from '../utils/url-utils';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
@@ -145,12 +144,6 @@ export function hentVeiledersPortefolje(
 export function hentArbeidslisteForVeileder(enhet, veilederident) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/hentArbeidslisteForVeileder?enhet=${enhet}`;
     return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function hentArbeidslisteForBruker(fodselsnummer) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v2/hent-arbeidsliste`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr: fodselsnummer})};
-    return fetchToJson(url, config);
 }
 
 export function hentEnhetsVeiledere(enhetId) {
@@ -312,6 +305,9 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
+    if (getEnv().ingressType == 'ansatt') {
+        return fetchToJson(`https://poao-sanity.ansatt.dev.nav.no/systemmeldinger`, MED_CREDENTIALS);
+    }
     return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
 
@@ -330,12 +326,6 @@ export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]>
 
 export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]> {
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/geografiskbosted`, MED_CREDENTIALS);
-}
-
-export function sendEventTilPortefolje(event: FrontendEvent) {
-    const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
-    return fetch(url, config);
 }
 
 export const refreshAccessTokens = async (): Promise<SessionMeta> => {
