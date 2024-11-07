@@ -8,7 +8,7 @@ import {FargekategoriDataModell, FargekategoriModell, Fargekategorinavn} from '.
 import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
 import {Button, Popover} from '@navikt/ds-react';
 import {FargekategoriFeilhandtering} from './FargekategoriFeilhandtering';
-import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statustall-veileder';
+import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statustall/statustall-veileder';
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';

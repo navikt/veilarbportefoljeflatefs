@@ -38,7 +38,7 @@ import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
-import {StatustallEnhet, StatustallEnhetState} from '../ducks/statustall-enhet';
+import {StatustallEnhet, StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {

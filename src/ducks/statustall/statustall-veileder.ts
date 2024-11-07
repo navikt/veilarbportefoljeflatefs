@@ -1,6 +1,6 @@
-import * as Api from './../middleware/api';
-import {doThenDispatch, STATUS} from './utils';
-import {OrNothing} from '../utils/types/types';
+import * as Api from '../../middleware/api';
+import {doThenDispatch, STATUS} from '../utils';
+import {OrNothing} from '../../utils/types/types';
 import {StatustallInnhold} from './statustall-enhet';
 
 // Actions

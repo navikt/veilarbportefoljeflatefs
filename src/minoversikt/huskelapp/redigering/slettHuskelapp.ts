@@ -1,5 +1,5 @@
 import {slettHuskelappAction} from '../../../ducks/huskelapp';
-import {leggTilStatustall} from '../../../ducks/statustall-veileder';
+import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
