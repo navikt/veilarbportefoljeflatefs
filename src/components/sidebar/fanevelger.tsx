@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {SidebarTab} from './sidebar-tab';
-import {FiltreringStatus, Statustall} from '../../filtrering/filtrering-status/filtrering-status';
+import {FiltreringStatus, StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
@@ -19,7 +19,7 @@ interface Props {
     oversiktType: OversiktType;
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
-    statustall: Statustall;
+    statustall: StatustallForStatusfane;
     lukkSidemeny: () => void;
 }
 

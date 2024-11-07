@@ -1,6 +1,6 @@
 import {BrukerModell} from '../../../model-interfaces';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
-import {leggTilStatustall} from '../../../ducks/statustall-veileder';
+import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {oppdaterArbeidslisteForBruker} from '../../../ducks/portefolje';
 import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';

@@ -35,39 +35,20 @@ import {
 } from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import './filtrering-status.css';
+import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 
-export interface Statustall {
+/** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.
+ * Dersom vi er i Min oversikt får vi inn StatustallVeileder og utenBrukerinnsyn vil vere `null`.
+ * På Enhetens oversikt får vi inn StatustallEnhet og har data for begge nøklar i objektet. */
+export interface StatustallForStatusfane {
     medBrukerinnsyn: StatustallInnhold;
     utenBrukerinnsyn: StatustallInnhold | null;
-}
-
-interface StatustallInnhold {
-    totalt: number;
-    ufordelteBrukere: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-    tiltakshendelser: number;
-    utlopteAktiviteter: number;
-    ikkeIavtaltAktivitet: number;
-    iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
-    erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
-    nyeBrukereForVeileder: number;
-    underVurdering: number;
-    mineHuskelapper: number;
 }
 
 interface FiltreringStatusProps {
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
-    statustall: Statustall;
+    statustall: StatustallForStatusfane;
 }
 
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {

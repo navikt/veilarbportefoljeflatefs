@@ -3,7 +3,7 @@ import {doThenDispatch, handterFeil, STATUS} from './utils';
 import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
-import {hentStatustallForVeileder} from './statustall-veileder';
+import {hentStatustallForVeileder} from './statustall/statustall-veileder';
 import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
@@ -11,7 +11,7 @@ import {AppState} from '../reducer';
 import {OrNothing} from '../utils/types/types';
 import {OversiktType} from './ui/listevisning';
 import {capitalize} from '../utils/utils';
-import {hentStatustallForEnhet} from './statustall-enhet';
+import {hentStatustallForEnhet} from './statustall/statustall-enhet';
 import {toJson} from '../middleware/api';
 import {FARGEKATEGORI_OPPDATER_OK} from './fargekategori';
 

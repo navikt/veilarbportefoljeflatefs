@@ -1,6 +1,8 @@
 import {brukere as portefolje} from './portefolje';
 
-export const statustallVeileder = {
+import {StatustallInnhold, StatustallVeileder} from '../../ducks/statustall/statustall-typer';
+
+export const statustallVeileder: {statustall: StatustallVeileder} = {
     statustall: {
         totalt: portefolje.length,
         ufordelteBrukere: 2032,
@@ -32,7 +34,10 @@ export const statustallVeileder = {
     }
 };
 
-export const statustallEnhet = {
+export const statustallEnhet: {
+    statustallMedBrukerinnsyn: StatustallInnhold;
+    statustallUtenBrukerinnsyn: StatustallInnhold;
+} = {
     statustallMedBrukerinnsyn: {
         totalt: portefolje.length,
         ufordelteBrukere: 2032,
@@ -52,7 +57,8 @@ export const statustallEnhet = {
         minArbeidslisteGul: 5,
         erSykmeldtMedArbeidsgiver: 20,
         trengerVurdering: 42,
-        underVurdering: 14
+        underVurdering: 14,
+        mineHuskelapper: 16
     },
     statustallUtenBrukerinnsyn: {
         totalt: portefolje.length,
@@ -73,6 +79,7 @@ export const statustallEnhet = {
         minArbeidslisteGul: 2,
         erSykmeldtMedArbeidsgiver: 2,
         trengerVurdering: 2,
-        underVurdering: 2
+        underVurdering: 2,
+        mineHuskelapper: 16
     }
 };

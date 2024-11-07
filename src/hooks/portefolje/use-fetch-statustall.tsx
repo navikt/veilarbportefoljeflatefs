@@ -2,8 +2,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {AppState} from '../../reducer';
 import {useEffect} from 'react';
-import {hentStatustallForVeileder} from '../../ducks/statustall-veileder';
-import {hentStatustallForEnhet} from '../../ducks/statustall-enhet';
+import {hentStatustallForVeileder} from '../../ducks/statustall/statustall-veileder';
+import {hentStatustallForEnhet} from '../../ducks/statustall/statustall-enhet';
 import {OrNothing} from '../../utils/types/types';
 
 export function useFetchStatustallForVeileder(veilederId: string) {

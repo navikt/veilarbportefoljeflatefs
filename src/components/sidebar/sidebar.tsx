@@ -12,7 +12,7 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import outsideClick from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
-import {Statustall} from '../../filtrering/filtrering-status/filtrering-status';
+import {StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
 import {Fanevelger} from './fanevelger';
 import {Tab} from './Tab';
 import './sidebar.css';
@@ -59,7 +59,7 @@ interface SidebarProps {
     filtervalg: FiltervalgModell;
     enhettiltak: OrNothing<Tiltak>;
     oversiktType: OversiktType;
-    statustall: Statustall;
+    statustall: StatustallForStatusfane;
 }
 
 export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) => {

@@ -1,42 +1,13 @@
-import * as Api from './../middleware/api';
-import {doThenDispatch, STATUS} from './utils';
-import {OrNothing} from '../utils/types/types';
+import * as Api from '../../middleware/api';
+import {doThenDispatch, STATUS} from '../utils';
+import {OrNothing} from '../../utils/types/types';
+import {StatustallVeileder} from './statustall-typer';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall-veileder/OK';
 export const FEILET = 'veilarbportefoljeflatefs/statustall-veileder/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall-veileder/PENDING';
 export const LEGG_TIL_STATUSTALL = 'veilarbportefoljeflatefs/statustall-veileder/LEGG_TIL_STATUSTALL';
-
-export interface StatustallVeileder {
-    totalt: number;
-    ufordelteBrukere: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-    tiltakshendelser: number;
-    utlopteAktiviteter: number;
-    ikkeIavtaltAktivitet: number;
-    iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
-    erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
-    nyeBrukereForVeileder: number;
-    underVurdering: number;
-    mineHuskelapper: number;
-    fargekategoriA: number;
-    fargekategoriB: number;
-    fargekategoriC: number;
-    fargekategoriD: number;
-    fargekategoriE: number;
-    fargekategoriF: number;
-    fargekategoriIngenKategori: number;
-}
 
 export interface StatustallVeilederState {
     status: string;
