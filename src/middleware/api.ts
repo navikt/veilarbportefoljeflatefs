@@ -305,7 +305,7 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
-    if (getEnv().ingressType == 'ansatt') {
+    if (getEnv().ingressType === 'ansatt') {
         return fetchToJson(`https://poao-sanity.ansatt.dev.nav.no/systemmeldinger`, MED_CREDENTIALS);
     }
     return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
