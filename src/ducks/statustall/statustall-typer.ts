@@ -22,7 +22,8 @@ export interface StatustallInnhold {
     mineHuskelapper: number;
 }
 
-/** Statustall-felt som er unike for veileder, i tillegg til dei som er felles med Enhet-statustalla. */
+/** Statustall for veileder.
+ *  Same felt som dei vi har på enhet, pluss nokre som er unike for veileder / Min oversikt. */
 export interface StatustallVeileder extends StatustallInnhold {
     fargekategoriA: number;
     fargekategoriB: number;
