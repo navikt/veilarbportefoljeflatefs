@@ -34,8 +34,8 @@ import {
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
-import {StatustallInnhold} from '../../ducks/statustall/statustall-enhet';
 import './filtrering-status.css';
+import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 
 export interface Statustall {
     medBrukerinnsyn: StatustallInnhold;

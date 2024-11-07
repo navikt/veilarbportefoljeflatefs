@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {StatustallVeileder} from '../../ducks/statustall/statustall-veileder';
-import {StatustallEnhet} from '../../ducks/statustall/statustall-enhet';
+
+import {StatustallEnhet, StatustallVeileder} from '../../ducks/statustall/statustall-typer';
 
 const selectStatustallVeilederData = (state: AppState) => state.statustallVeileder.data;
 const selectStatustallEnhetData = (state: AppState) => state.statustallEnhet.data;

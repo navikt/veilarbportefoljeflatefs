@@ -1,41 +1,12 @@
 import * as Api from '../../middleware/api';
 import {doThenDispatch, STATUS} from '../utils';
 import {OrNothing} from '../../utils/types/types';
+import {StatustallEnhet} from './statustall-typer';
 
 // Actions
 export const OK = 'veilarbportefoljeflatefs/statustall-enhet/OK';
 export const FEILET = 'veilarbportefoljeflatefs/statustall-enhet/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/statustall-enhet/PENDING';
-
-/** Felt som er felles for ulike statustall-typar
- * som til dømes dei for enhet og dei for veileder (min oversikt) */
-export interface StatustallInnhold {
-    totalt: number;
-    ufordelteBrukere: number;
-    inaktiveBrukere: number;
-    venterPaSvarFraNAV: number;
-    venterPaSvarFraBruker: number;
-    moterMedNAVIdag: number;
-    tiltakshendelser: number;
-    utlopteAktiviteter: number;
-    ikkeIavtaltAktivitet: number;
-    iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
-    erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
-    nyeBrukereForVeileder: number;
-    underVurdering: number;
-    mineHuskelapper: number;
-}
-
-export interface StatustallEnhet {
-    medBrukerinnsyn: StatustallInnhold;
-    utenBrukerinnsyn: StatustallInnhold;
-}
 
 export interface StatustallEnhetState {
     status: string;
