@@ -143,8 +143,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                         ...bruker,
                         guid: lagBrukerGuid(bruker),
                         fornavn: capitalize(bruker.fornavn),
-                        etternavn: capitalize(bruker.etternavn),
-                        arbeidsliste: {...bruker.arbeidsliste, hentetKommentarOgTittel: false}
+                        etternavn: capitalize(bruker.etternavn)
                     }))
                 }
             };
