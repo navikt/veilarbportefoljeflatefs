@@ -1,4 +1,4 @@
-import {innloggetVeileder, veiledere} from './veiledere';
+import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {
@@ -7,7 +7,6 @@ import {
     FargekategoriModell,
     Hovedmal,
     InnsatsgruppeOppfolgingsvedtak,
-    KategoriModell,
     TiltakshendelseModell,
     Vedtak14aDataModell
 } from '../../model-interfaces';
@@ -30,7 +29,6 @@ const ytelser = [
 ];
 
 let mockAktoeridLopenummer = 0;
-const arbeidsliste: any = [];
 const huskelapp: any = {};
 
 let i = 123456;
@@ -136,57 +134,6 @@ function lagVedtakUtkast() {
     };
 }
 
-export const tomArbeidsliste = {
-    kommentar: null,
-    frist: null,
-    isOppfolgendeVeileder: null,
-    arbeidslisteAktiv: false,
-    sistEndretAv: {},
-    kategori: null,
-    hentetKommentarOgTittel: true
-};
-
-function lagArbeidsliste(aktoerid, fnr) {
-    const maybeArbeidsliste = rnd(0, 1);
-    if (maybeArbeidsliste > 0.5) {
-        return tomArbeidsliste;
-    }
-
-    const kategoriType = rnd(1, 4);
-    let kategori;
-    if (kategoriType === 1) {
-        kategori = KategoriModell.BLA;
-    } else if (kategoriType === 2) {
-        kategori = KategoriModell.GRONN;
-    } else if (kategoriType === 3) {
-        kategori = KategoriModell.GUL;
-    } else {
-        kategori = KategoriModell.LILLA;
-    }
-
-    const arbeidslisteElement = {
-        overskrift: null,
-        kommentar: null,
-        frist: new Date(),
-        isOppfolgendeVeileder: true,
-        arbeidslisteAktiv: true,
-        sistEndretAv: {veilederId: innloggetVeileder.ident},
-        kategori,
-        hentetKommentarOgTittel: true
-    };
-
-    arbeidsliste.push({
-        ...arbeidslisteElement,
-        aktoerid: aktoerid,
-        fodselsnummer: fnr,
-        overskrift: lagOverskrift(),
-        kommentar:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do'
-    });
-
-    return arbeidslisteElement;
-}
-
 const lagHuskelapp = fnr => {
     const maybeHuskelapp = rnd(0, 1);
     const huskeklappId = rnd(1, 1000);
@@ -264,7 +211,6 @@ function lagBruker(sikkerhetstiltak = []) {
 
     const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
-    const arbeidsliste = lagArbeidsliste(aktoerid, grunndata.fnr);
     const huskelapp = lagHuskelapp(grunndata.fnr);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
@@ -301,7 +247,6 @@ function lagBruker(sikkerhetstiltak = []) {
         aapmaxtidUke: ytelse.aapmaxtidUke,
         aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
         aapordinerutlopsdato: ytelse.aapordinerutlopsdato,
-        arbeidsliste,
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
@@ -458,22 +403,6 @@ const randomDateInNearFuture = () => {
         .format('YYYY-MM-DD HH:mm');
 };
 
-export function hentArbeidsliste() {
-    return arbeidsliste;
-}
-
-export function hentArbeidslisteForBruker(fnr: {fodselsnummer: any}) {
-    const {fodselsnummer} = fnr;
-    const arbeidslisteForBruker = arbeidsliste.find(
-        arbeidslisteForBruker => arbeidslisteForBruker.fodselsnummer === fodselsnummer
-    );
-
-    if (arbeidslisteForBruker) {
-        return arbeidslisteForBruker;
-    }
-    return lagArbeidsliste('1', fnr);
-}
-
 export function hentHuskelappForBruker(fnr: string, enhetId: string) {
     if (huskelapp.fnr === fnr) {
         return huskelapp;
@@ -607,13 +536,3 @@ const lagFargekategori = () => {
 };
 
 export const brukere = new Array(123).fill(0).map(() => lagBruker());
-
-export const testperson_uten_arbeidsliste = lagBruker();
-testperson_uten_arbeidsliste.arbeidsliste = tomArbeidsliste;
-testperson_uten_arbeidsliste.fornavn = 'Klara Margrethe';
-testperson_uten_arbeidsliste.etternavn = 'Uten Arbeidsliste';
-
-export const testperson_uten_arbeidsliste2 = lagBruker();
-testperson_uten_arbeidsliste2.arbeidsliste = tomArbeidsliste;
-testperson_uten_arbeidsliste2.fornavn = 'Åse';
-testperson_uten_arbeidsliste2.etternavn = 'Uten Arbeidsliste';
