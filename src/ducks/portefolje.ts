@@ -28,7 +28,6 @@ const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
-const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
 const OPPDATER_HUSKELAPP_BRUKER = 'veilarbportefolje/portefolje/HUSKELAPP_BRUKER';
 
 function lagBrukerGuid(bruker) {
@@ -86,22 +85,6 @@ function updateBrukerInArray(brukere, action) {
             return {
                 ...bruker,
                 markert: action.markert
-            };
-        }
-        return bruker;
-    });
-}
-
-function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
-    return brukere.map(bruker => {
-        if (bruker.aktoerid === arbeidsliste.aktoerid) {
-            return {
-                ...bruker,
-                arbeidsliste: {
-                    ...bruker.arbeidsliste,
-                    kommentar: arbeidsliste.kommentar,
-                    hentetKommentarOgTittel: true
-                }
             };
         }
         return bruker;
@@ -227,15 +210,6 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                         }
                         return {...bruker};
                     })
-                }
-            };
-        }
-        case OPPDATER_ARBEIDSLISTE_BRUKER: {
-            return {
-                ...state,
-                data: {
-                    ...state.data,
-                    brukere: leggTilKommentarArbeidsliste(state.data.brukere, action.arbeidslisteForBruker)
                 }
             };
         }
