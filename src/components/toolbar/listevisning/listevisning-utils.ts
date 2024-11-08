@@ -29,8 +29,6 @@ alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstlabel: 'Passe
 alternativerConfig.set(Kolonne.MOTER_IDAG, {tekstlabel: 'Klokkeslett møte'});
 alternativerConfig.set(Kolonne.MOTER_VARIGHET, {tekstlabel: 'Varighet møte'});
 alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med NAV'});
-alternativerConfig.set(Kolonne.ARBEIDSLISTE_FRIST, {tekstlabel: 'Arbeidsliste frist'});
-alternativerConfig.set(Kolonne.ARBEIDSLISTE_OVERSKRIFT, {tekstlabel: 'Arbeidsliste tittel'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status § 14 a-vedtak (ny løsning)'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {
     tekstlabel: 'Tidspunkt for endring av status § 14 a-vedtak (ny løsning)'

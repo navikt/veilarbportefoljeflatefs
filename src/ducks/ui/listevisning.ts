@@ -32,8 +32,6 @@ export enum Kolonne {
     MOTER_IDAG = 'moterMedNavIdag',
     MOTER_VARIGHET = 'moter_varighet',
     MOTE_ER_AVTALT = 'mote_avtalt',
-    ARBEIDSLISTE_FRIST = 'arbeidslistefrist',
-    ARBEIDSLISTE_OVERSKRIFT = 'arbeidsliste_overskrift',
     VEDTAKSTATUS_ENDRET = 'vedtakstatus_endret',
     VEDTAKSTATUS = 'vedtakstatus',
     ANSVARLIG_VEILEDER_FOR_VEDTAK = 'ansvarlig_veileder_for_vedtak',
