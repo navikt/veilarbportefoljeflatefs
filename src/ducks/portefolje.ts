@@ -28,9 +28,6 @@ const TILDEL_VEILEDER_OK = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_OK';
 const TILDEL_VEILEDER_FEILET = 'veilarbportefolje/portefolje/TILDEL_VEILEDER_FEILET';
 const OPPDATER_ANTALL = 'veilarbportefolje/portefolje/OPPDATER_ANTALL';
 const NULLSTILL_FEILENDE_TILDELINGER = 'veilarbportefolje/portefolje/NULLSTILL_FEILENDE_TILDELINGER';
-const OPPDATER_ARBEIDSLISTE = 'veilarbportefolje/portefolje/OPPDATER_ARBEIDSLISTE';
-const OPPDATER_ARBEIDSLISTE_VEILEDER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_VEILEDER';
-const OPPDATER_ARBEIDSLISTE_BRUKER = 'veilarbportefolje/portefolje/ARBEIDSLISTE_BRUKER';
 const OPPDATER_HUSKELAPP_BRUKER = 'veilarbportefolje/portefolje/HUSKELAPP_BRUKER';
 
 function lagBrukerGuid(bruker) {
@@ -94,35 +91,6 @@ function updateBrukerInArray(brukere, action) {
     });
 }
 
-function updateArbeidslisteForBrukere(brukere, arbeidsliste) {
-    return brukere.map(bruker => {
-        const arbeidslisteForBruker = arbeidsliste.find(a => a.fnr === bruker.fnr);
-        if (arbeidslisteForBruker) {
-            return {
-                ...bruker,
-                arbeidsliste: {...bruker.arbeidsliste, ...arbeidslisteForBruker}
-            };
-        }
-        return bruker;
-    });
-}
-
-function leggTilKommentarArbeidsliste(brukere, arbeidsliste) {
-    return brukere.map(bruker => {
-        if (bruker.aktoerid === arbeidsliste.aktoerid) {
-            return {
-                ...bruker,
-                arbeidsliste: {
-                    ...bruker.arbeidsliste,
-                    kommentar: arbeidsliste.kommentar,
-                    hentetKommentarOgTittel: true
-                }
-            };
-        }
-        return bruker;
-    });
-}
-
 function oppdaterHuskelappForbruker(brukere, huskelapp) {
     return brukere.map(bruker => {
         if (bruker.fnr === huskelapp?.brukerFnr) {
@@ -138,23 +106,6 @@ function oppdaterHuskelappForbruker(brukere, huskelapp) {
                           enhetId: huskelapp.enhetId
                       }
                     : null
-            };
-        }
-        return bruker;
-    });
-}
-
-function leggTilOverskriftOgTittelArbeidsliste(brukere, arbeidsliste) {
-    return brukere.map(bruker => {
-        const arbeidslisteForBruker = arbeidsliste.find(a => a.aktoerid === bruker.aktoerid);
-        if (arbeidslisteForBruker) {
-            return {
-                ...bruker,
-                arbeidsliste: {
-                    ...bruker.arbeidsliste,
-                    overskrift: arbeidslisteForBruker.overskrift,
-                    kommentar: arbeidslisteForBruker.kommentar
-                }
             };
         }
         return bruker;
@@ -192,8 +143,7 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                         ...bruker,
                         guid: lagBrukerGuid(bruker),
                         fornavn: capitalize(bruker.fornavn),
-                        etternavn: capitalize(bruker.etternavn),
-                        arbeidsliste: {...bruker.arbeidsliste, hentetKommentarOgTittel: false}
+                        etternavn: capitalize(bruker.etternavn)
                     }))
                 }
             };
@@ -259,33 +209,6 @@ export default function portefoljeReducer(state = initialState, action): Portefo
                         }
                         return {...bruker};
                     })
-                }
-            };
-        }
-        case OPPDATER_ARBEIDSLISTE: {
-            return {
-                ...state,
-                data: {
-                    ...state.data,
-                    brukere: updateArbeidslisteForBrukere(state.data.brukere, action.arbeidsliste)
-                }
-            };
-        }
-        case OPPDATER_ARBEIDSLISTE_VEILEDER: {
-            return {
-                ...state,
-                data: {
-                    ...state.data,
-                    brukere: leggTilOverskriftOgTittelArbeidsliste(state.data.brukere, action.arbeidsliste)
-                }
-            };
-        }
-        case OPPDATER_ARBEIDSLISTE_BRUKER: {
-            return {
-                ...state,
-                data: {
-                    ...state.data,
-                    brukere: leggTilKommentarArbeidsliste(state.data.brukere, action.arbeidslisteForBruker)
                 }
             };
         }
@@ -431,25 +354,6 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                     }
                 }, 2000);
             });
-    };
-}
-
-export function oppdaterArbeidslisteForBruker(arbeidsliste) {
-    return dispatch =>
-        dispatch({
-            type: OPPDATER_ARBEIDSLISTE,
-            arbeidsliste
-        });
-}
-
-export function hentArbeidslisteforVeileder(enhet, veileder) {
-    return dispatch => {
-        Api.hentArbeidslisteForVeileder(enhet, veileder).then(arbeidsliste => {
-            dispatch({
-                type: OPPDATER_ARBEIDSLISTE_VEILEDER,
-                arbeidsliste
-            });
-        });
     };
 }
 

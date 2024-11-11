@@ -1,12 +1,11 @@
 import {useEffect} from 'react';
-import {hentArbeidslisteforVeileder, hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
+import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetsportefolje/enhet-side';
-import {STATUS} from '../../ducks/utils';
 import {AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
@@ -15,7 +14,7 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
-    const {sorteringsrekkefolge, filtervalg, sorteringsfelt, portefolje} = usePortefoljeSelector(oversiktType);
+    const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);
     const filtreringMinoversikt = useSelector((state: AppState) => state.filtreringMinoversikt);
 
     useEffect(() => {
@@ -35,17 +34,6 @@ export function useFetchPortefolje(oversiktType: OversiktType) {
             }
         }
     }, [dispatch, enhet, sorteringsfelt, sorteringsrekkefolge, filtervalg, gjeldendeVeileder, oversiktType]);
-
-    useEffect(() => {
-        if (
-            enhet &&
-            gjeldendeVeileder &&
-            portefolje.status === STATUS.OK &&
-            oversiktType === OversiktType.minOversikt
-        ) {
-            dispatch(hentArbeidslisteforVeileder(enhet, gjeldendeVeileder));
-        }
-    }, [dispatch, enhet, gjeldendeVeileder, oversiktType, portefolje.status]);
 
     useEffect(() => {
         if (

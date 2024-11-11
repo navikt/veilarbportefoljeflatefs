@@ -3,7 +3,6 @@ import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
 import {ActionTypeKeys, Kolonne, OversiktType} from '../ducks/ui/listevisning';
-import {VIS_ARBEIDSLISTE_MODAL} from '../ducks/modal';
 import {SORTERT_PA} from '../ducks/sortering';
 import {NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL} from '../ducks/modal-serverfeil';
 import {
@@ -117,9 +116,6 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
             break;
         case ActionTypeKeys.AVVELG_ALTERNATIV:
             loggAvvelgListevalg(sideNavn, kolonne);
-            break;
-        case VIS_ARBEIDSLISTE_MODAL:
-            loggArbeidslisteApne(sideNavn);
             break;
         case SORTERT_PA:
             loggEndreSortering(sideNavn, data.property, '');
@@ -259,10 +255,6 @@ const loggEndreListevisning = (sideNavn: SideNavn, kolonne: Kolonne) => {
 
 const loggAvvelgListevalg = (sideNavn: SideNavn, kolonne: Kolonne) => {
     logEvent('portefolje.metrikker.listevisning_avvelget', {sideNavn, kolonne});
-};
-
-const loggArbeidslisteApne = (sideNavn: SideNavn) => {
-    logEvent('portefolje.metrikker.arbeidsliste_apne', {sideNavn});
 };
 
 const loggEndreSortering = (sideNavn: SideNavn, sorteringsfelt: string, rekkefolge: string) => {

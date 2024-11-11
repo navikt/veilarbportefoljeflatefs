@@ -13,7 +13,6 @@ import modalReducer from './ducks/modal';
 import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer from './ducks/veiledergrupper_filter';
-import arbeidslisteReducer from './ducks/arbeidsliste';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import listevisningReducer, {
     initialStateEnhetensOversikt,
@@ -85,7 +84,6 @@ export interface AppState {
     modal: any;
     serverfeilModal: any;
     feilmeldingModal: any;
-    arbeidsliste: any;
     huskelapp: any;
     fargekategori: any;
     enhettiltak: EnhettiltakState;
@@ -157,7 +155,6 @@ export default combineReducers<AppState>({
     modal: modalReducer,
     serverfeilModal: serverfeilModalReducer,
     feilmeldingModal: feilmedlingModalReducer,
-    arbeidsliste: arbeidslisteReducer,
     huskelapp: huskelappReducer,
     fargekategori: fargekategoriReducer,
     enhettiltak: enhetTiltakReducer,

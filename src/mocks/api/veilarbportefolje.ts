@@ -6,19 +6,10 @@ import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
-import {
-    brukere,
-    hentArbeidsliste,
-    hentArbeidslisteForBruker,
-    hentHuskelappForBruker,
-    hentMockPlan,
-    testperson_uten_arbeidsliste,
-    testperson_uten_arbeidsliste2,
-    tomArbeidsliste
-} from '../data/portefolje';
+import {brukere, hentHuskelappForBruker, hentMockPlan} from '../data/portefolje';
 import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
 import tiltak from '../data/tiltak';
-import {ArbeidslisteDataModell, FargekategoriModell} from '../../model-interfaces';
+import {FargekategoriModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';
@@ -48,11 +39,6 @@ function lagPortefolje(queryParams, enhet, alleBrukere) {
             bruker.diskresjonskode = index === 0 ? '6' : '7';
             bruker.oppfolgingStartdato = faker.date.between({from: new Date('2015-01-01'), to: new Date()});
             bruker.erPermittertEtterNiendeMars = true;
-            bruker.arbeidsliste = tomArbeidsliste;
-        } else if (index === 2) {
-            return testperson_uten_arbeidsliste;
-        } else if (index === fraInt + antallInt - 1) {
-            return testperson_uten_arbeidsliste2;
         }
         return bruker;
     });
@@ -137,81 +123,9 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
         })
     ),
     http.get(
-        '/veilarbportefolje/api/veileder/:veileder/hentArbeidslisteForVeileder',
-        withAuth(async () => {
-            return HttpResponse.json(hentArbeidsliste());
-        })
-    ),
-    http.post(
-        '/veilarbportefolje/api/v2/hent-arbeidsliste',
-        withAuth(async ({request}) => {
-            const hentArbeidslisteRequest = (await request.json()) as {fnr: string};
-
-            return HttpResponse.json(hentArbeidslisteForBruker({fodselsnummer: hentArbeidslisteRequest.fnr}));
-        })
-    ),
-    http.get(
         '/veilarbportefolje/api/veileder/:veileder/moteplan',
         withAuth(async () => {
             return HttpResponse.json(hentMockPlan());
-        })
-    ),
-    http.post(
-        '/veilarbportefolje/api/arbeidsliste',
-        withAuth(async ({request}) => {
-            const opprettArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell[];
-
-            return HttpResponse.json({
-                error: [],
-                data: opprettArbeidslisteRequest.map(arbeidsliste => arbeidsliste.fnr)
-            });
-        })
-    ),
-    http.put(
-        '/veilarbportefolje/api/v2/arbeidsliste',
-        withAuth(async ({request}) => {
-            const oppdaterArbeidslisteRequest = (await request.json()) as ArbeidslisteDataModell & {overskrift: string};
-
-            return HttpResponse.json({
-                sistEndretAv: {
-                    veilederId: 'Z990007'
-                },
-                endringstidspunkt: '2018-06-21T10:39:17.153Z',
-                kommentar: `${oppdaterArbeidslisteRequest.kommentar}`,
-                overskrift: `${oppdaterArbeidslisteRequest.overskrift}`,
-                frist: `${oppdaterArbeidslisteRequest.frist}`,
-                kategori: `${oppdaterArbeidslisteRequest.kategori}`,
-                isOppfolgendeVeileder: true,
-                arbeidslisteAktiv: null,
-                harVeilederTilgang: true
-            });
-        })
-    ),
-    http.delete('/veilarbportefolje/api/v2/arbeidsliste', async () => {
-        await delay(500);
-        return HttpResponse.json({
-            arbeidslisteAktiv: null,
-            endringstidspunkt: null,
-            frist: null,
-            harVeilederTilgang: false,
-            isOppfolgendeVeileder: false,
-            kommentar: null,
-            overskrift: null,
-            sistEndretAv: null,
-            kategori: null
-        });
-    }),
-    http.post(
-        '/veilarbportefolje/api/arbeidsliste/delete',
-        withAuth(async ({request}) => {
-            const slettArbeidslisterRequest = (await request.json()) as {fnr: string}[];
-
-            await delay(DEFAULT_DELAY_MILLISECONDS);
-
-            return HttpResponse.json({
-                error: [],
-                data: slettArbeidslisterRequest.map(arbeidsliste => arbeidsliste.fnr)
-            });
         })
     ),
     http.get(

@@ -46,11 +46,7 @@
 .veilarbportefoljeflatefs .fargekategori-tabellrad-knapp {
     margin-right: 1rem;
 }
-.veilarbportefoljeflatefs #arbeidslisteikon__listehode {
-    font-size: 1.2rem;
-}
-.veilarbportefoljeflatefs .brukerliste__arbeidslisteikon,
-.tomt-arbeidslisteikon {
+.veilarbportefoljeflatefs .tomt-arbeidslisteikon {
     margin-left: 0.5rem;
     margin-right: 1.125rem;
 }
