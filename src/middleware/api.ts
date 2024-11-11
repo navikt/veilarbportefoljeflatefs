@@ -12,6 +12,13 @@ const credentials = 'same-origin';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials,
+    headers: {
+        'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
+        'Content-Type': 'application/json'
+    }
+};
+const MED_CREDENTIALS_ANSATT: RequestInit = {
+    credentials,
     mode: 'no-cors',
     headers: {
         'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
@@ -273,7 +280,7 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 
 export function hentSystemmeldinger() {
     if (getEnv().ingressType === 'ansatt') {
-        return fetchToJson(`https://poao-sanity.ansatt.dev.nav.no/systemmeldinger`, MED_CREDENTIALS);
+        return fetchToJson(`https://poao-sanity.ansatt.dev.nav.no/systemmeldinger`, MED_CREDENTIALS_ANSATT);
     }
     return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
