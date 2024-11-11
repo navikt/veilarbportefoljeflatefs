@@ -12,6 +12,7 @@ const credentials = 'same-origin';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials,
+    mode: 'no-cors',
     headers: {
         'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
         'Content-Type': 'application/json'
