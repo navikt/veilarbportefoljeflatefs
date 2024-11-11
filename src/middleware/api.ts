@@ -142,17 +142,6 @@ export function hentVeiledersPortefolje(
     return fetchToJson(url, config);
 }
 
-export function hentArbeidslisteForVeileder(enhet, veilederident) {
-    const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/hentArbeidslisteForVeileder?enhet=${enhet}`;
-    return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function hentArbeidslisteForBruker(fodselsnummer) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v2/hent-arbeidsliste`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify({fnr: fodselsnummer})};
-    return fetchToJson(url, config);
-}
-
 export function hentEnhetsVeiledere(enhetId) {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);
@@ -211,35 +200,6 @@ export function hentStatusTall(enhetId) {
 export function hentStatusTallForVeileder(enhetId, veilederId) {
     const url = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederId}/portefolje/statustall?enhet=${enhetId}`;
     return fetchToJson(url, MED_CREDENTIALS);
-}
-
-export function lagreArbeidsliste(arbeidsliste) {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
-    return fetchToJson(url, config);
-}
-
-export function oppdaterArbeidsliste(arbeidsliste, fnr) {
-    const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste`;
-    const config = {...MED_CREDENTIALS, method: 'put', body: JSON.stringify({...arbeidsliste, fnr})};
-    return fetchToJson(url, config);
-}
-
-export function slettArbeidsliste(arbeidsliste) {
-    const url = `${VEILARBPORTEFOLJE_URL}/arbeidsliste/delete`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(arbeidsliste)};
-    return fetchToJson(url, config);
-}
-
-export function slettArbeidslisteMenIkkeFargekategori(fnr: string, skjulArbeidslistefunksjonalitetToggle: boolean) {
-    if (skjulArbeidslistefunksjonalitetToggle) {
-        // Ikkje slett arbeidslister om funksjonaliteten for arbeidslister er skjult.
-        return Promise.resolve();
-    }
-
-    const url = `${VEILARBPORTEFOLJE_URL}/v2/arbeidsliste?slettFargekategori=false`;
-    const config = {...MED_CREDENTIALS, method: 'delete', body: JSON.stringify({fnr})};
-    return fetchToJson(url, config);
 }
 
 export function oppdaterFargekategori(fnrlisteOgFargekategori: FargekategoriDataModell) {

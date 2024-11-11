@@ -10,11 +10,6 @@ export interface StatustallInnhold {
     utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
-    minArbeidsliste: number;
-    minArbeidslisteBla: number;
-    minArbeidslisteLilla: number;
-    minArbeidslisteGronn: number;
-    minArbeidslisteGul: number;
     erSykmeldtMedArbeidsgiver: number;
     trengerVurdering: number;
     nyeBrukereForVeileder: number;
