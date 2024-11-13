@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
-export interface Alternativ {
+interface Alternativ {
     tekstlabel: string;
 }
 

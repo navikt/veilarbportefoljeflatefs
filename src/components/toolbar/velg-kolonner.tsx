@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {TableIcon} from '@navikt/aksel-icons';
 import {useFocus} from '../../hooks/use-focus';
-import Listevisning from './listevisning/listevisning';
+import {VelgKolonnerListe} from './velg-kolonner/velg-kolonner-liste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.css';
 
@@ -10,7 +10,7 @@ interface VelgKolonnerProps {
     oversiktType: OversiktType;
 }
 
-function VelgKolonner({oversiktType}: VelgKolonnerProps) {
+export function VelgKolonner({oversiktType}: VelgKolonnerProps) {
     const [apen, setApen] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
@@ -52,19 +52,15 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
             </Button>
 
             {apen && (
-                <div className="toolbar_btn__dropdown">
-                    <div
-                        className="checkbox-filterform__valg"
-                        id="velg-kolonner"
-                        ref={inputRef => (focusRef.current = inputRef)}
-                    >
-                        <Listevisning oversiktType={oversiktType} />
+                <div className="velg-kolonner-dropdown">
+                    <div className="checkbox-filterform__valg" ref={inputRef => (focusRef.current = inputRef)}>
+                        <VelgKolonnerListe oversiktType={oversiktType} />
                     </div>
                     <Button
                         size="small"
                         className="velg-kolonner__lukk-knapp"
                         onClick={lukkVelgKolonner}
-                        data-testid={'lukk-velg-kolonner-knapp'}
+                        data-testid="lukk-velg-kolonner-knapp"
                     >
                         Lukk
                     </Button>
@@ -73,5 +69,3 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
         </div>
     );
 }
-
-export default VelgKolonner;

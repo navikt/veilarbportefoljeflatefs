@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import classNames from 'classnames';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
@@ -27,9 +26,7 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
     return (
         <>
             <div
-                className={classNames('veiledergruppe-modal__valgteveileder', {
-                    'skjemaelement__input--harFeil': feil
-                })}
+                className="veiledergruppe-modal__valgteveileder"
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (

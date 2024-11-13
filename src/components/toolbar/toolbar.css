@@ -1,26 +1,3 @@
-.veilarbportefoljeflatefs .typo-normal {
-    width: 100%;
-}
-.veilarbportefoljeflatefs .listevisning--infopanel {
-    display: flex;
-    width: 100%;
-    position: relative;
-}
-.veilarbportefoljeflatefs .listevisning--infopanel__lukkKnapp {
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    right: -0.25rem;
-    top: -0.25rem;
-}
-.veilarbportefoljeflatefs .skjemaelement__input:disabled + label {
-    cursor: default;
-}
-.veilarbportefoljeflatefs .skjemaelement__input:disabled + label::before {
-    background-color: #a0a0a0;
-    border-color: #a0a0a0;
-}
-
 .veilarbportefoljeflatefs .dropdown {
     position: relative;
     margin-bottom: 0.5rem;
@@ -59,7 +36,7 @@
 .veilarbportefoljeflatefs .dropdown__btnwrapper--disabled {
     color: #c9c9c9;
 }
-.veilarbportefoljeflatefs .toolbar_btn__dropdown {
+.veilarbportefoljeflatefs .velg-kolonner-dropdown {
     display: flex;
     flex-direction: column;
 
@@ -135,10 +112,6 @@
     border-bottom: 1px solid #fff;
     padding-bottom: 1rem;
 }
-.veilarbportefoljeflatefs .dropdown--alignright .dropdown__innhold {
-    right: 0;
-    border-radius: 2px 0 2px 2px;
-}
 .veilarbportefoljeflatefs .dropdown .knapperad {
     padding: 0;
 }
@@ -163,9 +136,6 @@
     max-height: 2.5rem;
     margin-bottom: 0.5rem;
     border-bottom: none;
-}
-.veilarbportefoljeflatefs .toolbar .toggle__label {
-    min-width: 3rem;
 }
 .veilarbportefoljeflatefs .toolbar__element {
     display: flex;

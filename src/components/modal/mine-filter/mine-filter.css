@@ -15,9 +15,6 @@
 .mine-filter-meny-modal .fnr-feil {
     margin: 1rem 0;
 }
-.mine-filter-meny-modal .typo-normal {
-    word-break: break-word;
-}
 .lagret-filter-knapp-wrapper {
     display: flex;
     justify-content: space-between;

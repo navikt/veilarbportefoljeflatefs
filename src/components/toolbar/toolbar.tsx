@@ -11,9 +11,9 @@ import {useWindowWidth} from '../../hooks/use-window-width';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {HUSKELAPP} from '../../konstanter';
-import VelgKolonner from './velg-kolonner';
-import './toolbar.css';
+import {VelgKolonner} from './velg-kolonner';
 import '../../style.css';
+import './toolbar.css';
 
 interface ToolbarProps {
     id?: string;
