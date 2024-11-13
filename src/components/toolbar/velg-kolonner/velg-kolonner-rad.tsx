@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ChangeEvent} from 'react';
 import {Checkbox} from '@navikt/ds-react';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {alternativerConfig} from './listevisning-utils';
+import {alternativerConfig} from './velg-kolonner-config';
 
 interface ListevisningRadProps {
     kolonne: Kolonne;
@@ -11,7 +11,7 @@ interface ListevisningRadProps {
     onChange: (name: Kolonne, checked: boolean) => void;
 }
 
-function ListevisningRad({kolonne, disabled, valgt, onChange}: ListevisningRadProps) {
+function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: ListevisningRadProps) {
     const alternativ = alternativerConfig.get(kolonne);
     const kolonneoverskrift = kolonne.toString();
 
@@ -35,4 +35,4 @@ function ListevisningRad({kolonne, disabled, valgt, onChange}: ListevisningRadPr
     );
 }
 
-export default ListevisningRad;
+export default VelgKolonnerRad;

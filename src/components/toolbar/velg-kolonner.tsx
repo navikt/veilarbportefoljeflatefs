@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {TableIcon} from '@navikt/aksel-icons';
 import {useFocus} from '../../hooks/use-focus';
-import Listevisning from './listevisning/listevisning';
+import VelgKolonnerListe from './velg-kolonner/velg-kolonner-liste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.css';
 
@@ -58,7 +58,7 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
                         id="velg-kolonner"
                         ref={inputRef => (focusRef.current = inputRef)}
                     >
-                        <Listevisning oversiktType={oversiktType} />
+                        <VelgKolonnerListe oversiktType={oversiktType} />
                     </div>
                     <Button
                         size="small"
