@@ -50,7 +50,7 @@ const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
 
 export function MinoversiktSide() {
-    const {portefolje, filtervalg, listevisning, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
+    const {portefolje, filtervalg, valgteKolonner, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak} =
         usePortefoljeSelector(oversiktType);
     const innloggetVeilederIdent = useIdentSelector();
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
@@ -138,7 +138,7 @@ export function MinoversiktSide() {
                         filtervalg={filtervalg}
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
-                        listevisning={listevisning}
+                        listevisning={valgteKolonner}
                         className={classNames(
                             'filtrering-label-container',
                             visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'

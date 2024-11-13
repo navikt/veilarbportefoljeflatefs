@@ -19,7 +19,7 @@ interface EnhetTabellProps {
 
 function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
+    const {brukere, filtervalg, enhetId, valgteKolonner, portefolje} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );
     const veiledere = useSelector((state: AppState) => state.veiledere);
@@ -43,7 +43,7 @@ function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
                                     enhetId={enhetId}
                                     settMarkert={settMarkert}
                                     filtervalg={filtervalg}
-                                    valgteKolonner={listevisning.valgte}
+                                    valgteKolonner={valgteKolonner.valgte}
                                     brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
                                     forrigeBruker={forrigeBruker}
                                 />

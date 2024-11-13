@@ -7,7 +7,7 @@ import './brukerliste.css';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 
 function EnhetTabellOverskrift() {
-    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
+    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, valgteKolonner} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
@@ -18,7 +18,7 @@ function EnhetTabellOverskrift() {
             sorteringOnClick={settSorteringOgHentPortefolje}
             filtervalg={filtervalg}
             sorteringsfelt={sorteringsfelt}
-            valgteKolonner={listevisning.valgte}
+            valgteKolonner={valgteKolonner.valgte}
         />
     );
 }

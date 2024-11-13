@@ -18,7 +18,7 @@ interface MinOversiktTabellProps {
 
 export function MinoversiktTabell({classNameWrapper}: MinOversiktTabellProps) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
+    const {brukere, enhetId, filtervalg, valgteKolonner} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
@@ -42,7 +42,7 @@ export function MinoversiktTabell({classNameWrapper}: MinOversiktTabellProps) {
                                     settMarkert={settMarkert}
                                     varForrigeBruker={forrigeBruker === bruker.fnr}
                                     filtervalg={filtervalg}
-                                    valgteKolonner={listevisning.valgte}
+                                    valgteKolonner={valgteKolonner.valgte}
                                 />
                             ))}
                     </ul>

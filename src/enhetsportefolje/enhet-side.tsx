@@ -71,7 +71,7 @@ const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
 export default function EnhetSide() {
-    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
+    const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, valgteKolonner} =
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
@@ -167,7 +167,7 @@ export default function EnhetSide() {
                         }}
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
-                        listevisning={listevisning}
+                        listevisning={valgteKolonner}
                         className="filtrering-label-container"
                     />
                     {harFilter ? (

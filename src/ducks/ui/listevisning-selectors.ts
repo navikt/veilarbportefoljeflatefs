@@ -1,5 +1,5 @@
 import {AppState} from '../../reducer';
-import {Kolonne, ListevisningState, OversiktType} from './listevisning';
+import {Kolonne, ValgteKolonnerState, OversiktType} from './listevisning';
 import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
 import {
     AAP_YTELSE,
@@ -27,23 +27,23 @@ import {store} from '../../application';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.mulige;
+        return state.ui.valgteKolonnerMinOversikt.mulige;
     }
-    return state.ui.listevisningEnhetensOversikt.mulige;
+    return state.ui.valgteKolonnerEnhetensOversikt.mulige;
 }
 
 export function selectValgteAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt.valgte;
+        return state.ui.valgteKolonnerMinOversikt.valgte;
     }
-    return state.ui.listevisningEnhetensOversikt.valgte;
+    return state.ui.valgteKolonnerEnhetensOversikt.valgte;
 }
 
-export function selectListeVisning(state: AppState, oversiktType: OversiktType): ListevisningState {
+export function selectValgteKolonner(state: AppState, oversiktType: OversiktType): ValgteKolonnerState {
     if (oversiktType === OversiktType.minOversikt) {
-        return state.ui.listevisningMinOversikt;
+        return state.ui.valgteKolonnerMinOversikt;
     }
-    return state.ui.listevisningEnhetensOversikt;
+    return state.ui.valgteKolonnerEnhetensOversikt;
 }
 
 function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {

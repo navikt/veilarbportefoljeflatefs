@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
-import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
+import {getFiltreringState, selectValgteKolonner} from '../../ducks/ui/listevisning-selectors';
+import {ValgteKolonnerState, OversiktType} from '../../ducks/ui/listevisning';
 import {createSelector} from 'reselect';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
@@ -22,16 +22,16 @@ const selectPortefoljeTabell = createSelector(
     selectSorteringsrekkefolge,
     selectBrukere,
     (state, listevisningType) => getFiltreringState(state, listevisningType),
-    (state, listevisningType) => selectListeVisning(state, listevisningType),
+    (state, listevisningType) => selectValgteKolonner(state, listevisningType),
     selectSorteringsFeldt,
-    (enhettiltak, portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, listevisning, sorteringsfelt) => ({
+    (enhettiltak, portefolje, enhetId, sorteringsrekkefolge, brukere, filtervalg, valgteKolonner, sorteringsfelt) => ({
         enhettiltak,
         portefolje,
         enhetId,
         sorteringsrekkefolge,
         brukere,
         filtervalg,
-        listevisning,
+        valgteKolonner,
         sorteringsfelt
     })
 );
@@ -43,7 +43,7 @@ interface UsePortefoljeSelector {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     brukere: BrukerModell[];
     filtervalg: FiltervalgModell;
-    listevisning: ListevisningState;
+    valgteKolonner: ValgteKolonnerState;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 

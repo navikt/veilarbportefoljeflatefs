@@ -93,19 +93,19 @@ type VelgKolonnerActions =
     | LukkVelgKolonnerDropdownAction
     | OtherAction;
 
-export interface ListevisningState {
+export interface ValgteKolonnerState {
     valgte: Kolonne[];
     mulige: Kolonne[];
     lukketInfopanel: boolean;
 }
 
-export const initialStateEnhetensOversikt: ListevisningState = {
+export const initialStateEnhetensOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
 };
 
-export const initialStateMinOversikt: ListevisningState = {
+export const initialStateMinOversikt: ValgteKolonnerState = {
     valgte: [],
     mulige: [],
     lukketInfopanel: false
