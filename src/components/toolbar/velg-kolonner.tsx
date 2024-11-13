@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {TableIcon} from '@navikt/aksel-icons';
 import {useFocus} from '../../hooks/use-focus';
-import VelgKolonnerListe from './velg-kolonner/velg-kolonner-liste';
+import {VelgKolonnerListe} from './velg-kolonner/velg-kolonner-liste';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import './toolbar.css';
 
@@ -10,7 +10,7 @@ interface VelgKolonnerProps {
     oversiktType: OversiktType;
 }
 
-function VelgKolonner({oversiktType}: VelgKolonnerProps) {
+export function VelgKolonner({oversiktType}: VelgKolonnerProps) {
     const [apen, setApen] = useState(false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
@@ -69,5 +69,3 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
         </div>
     );
 }
-
-export default VelgKolonner;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import classNames from 'classnames';
 import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';

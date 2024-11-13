@@ -11,7 +11,7 @@ interface ListevisningRadProps {
     onChange: (name: Kolonne, checked: boolean) => void;
 }
 
-function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: ListevisningRadProps) {
+export function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: ListevisningRadProps) {
     const alternativ = alternativerConfig.get(kolonne);
     const kolonneoverskrift = kolonne.toString();
 
@@ -34,5 +34,3 @@ function VelgKolonnerRad({kolonne, disabled, valgt, onChange}: ListevisningRadPr
         </li>
     );
 }
-
-export default VelgKolonnerRad;
