@@ -52,19 +52,15 @@ function VelgKolonner({oversiktType}: VelgKolonnerProps) {
             </Button>
 
             {apen && (
-                <div className="toolbar_btn__dropdown">
-                    <div
-                        className="checkbox-filterform__valg"
-                        id="velg-kolonner"
-                        ref={inputRef => (focusRef.current = inputRef)}
-                    >
+                <div className="velg-kolonner-dropdown">
+                    <div className="checkbox-filterform__valg" ref={inputRef => (focusRef.current = inputRef)}>
                         <VelgKolonnerListe oversiktType={oversiktType} />
                     </div>
                     <Button
                         size="small"
                         className="velg-kolonner__lukk-knapp"
                         onClick={lukkVelgKolonner}
-                        data-testid={'lukk-velg-kolonner-knapp'}
+                        data-testid="lukk-velg-kolonner-knapp"
                     >
                         Lukk
                     </Button>

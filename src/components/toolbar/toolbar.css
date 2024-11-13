@@ -59,7 +59,7 @@
 .veilarbportefoljeflatefs .dropdown__btnwrapper--disabled {
     color: #c9c9c9;
 }
-.veilarbportefoljeflatefs .toolbar_btn__dropdown {
+.veilarbportefoljeflatefs .velg-kolonner-dropdown {
     display: flex;
     flex-direction: column;
 
