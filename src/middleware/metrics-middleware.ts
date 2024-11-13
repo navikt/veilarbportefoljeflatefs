@@ -111,10 +111,10 @@ export const metricsMiddleWare = (store: any) => (next: any) => (action: any) =>
         case TILDEL_VEILEDER:
             loggTildelVeileder(sideNavn);
             break;
-        case ActionTypeKeys.VELG_ALTERNATIV:
+        case ActionTypeKeys.VELG_KOLONNE:
             loggEndreListevisning(sideNavn, kolonne);
             break;
-        case ActionTypeKeys.AVVELG_ALTERNATIV:
+        case ActionTypeKeys.AVVELG_KOLONNE:
             loggAvvelgListevalg(sideNavn, kolonne);
             break;
         case SORTERT_PA:

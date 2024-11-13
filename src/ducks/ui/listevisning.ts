@@ -3,11 +3,11 @@ import {getMuligeKolonner} from './listevisning-selectors';
 import {FiltervalgModell} from '../../model-interfaces';
 
 export enum ActionTypeKeys {
-    VELG_ALTERNATIV = 'listevisning/velg_alternativ',
-    AVVELG_ALTERNATIV = 'listevisning/avvelg_alternativ',
-    OPPDATER_VALGTE_ALTERNATIV = 'listevisning/oppdater_valgte_alternativ',
-    OPPDATER_MULIGE_ALTERNATIV = 'listevisning/oppdater_mulige_alternativ',
-    LUKK_INFOPANEL = 'listevisning/lukk_infopanel',
+    VELG_KOLONNE = 'listevisning/velg_alternativ',
+    AVVELG_KOLONNE = 'listevisning/avvelg_alternativ',
+    OPPDATER_VALGTE_KOLONNER = 'listevisning/oppdater_valgte_alternativ',
+    OPPDATER_MULIGE_KOLONNER = 'listevisning/oppdater_mulige_alternativ',
+    LUKK_VELG_KOLONNER_DROPDOWN = 'listevisning/lukk_infopanel',
     OTHER_ACTION = '__OTHER_ACTION__'
 }
 
@@ -70,17 +70,17 @@ export enum OversiktType {
 }
 
 interface VelgKolonnerAction {
-    type: ActionTypeKeys.VELG_ALTERNATIV | ActionTypeKeys.AVVELG_ALTERNATIV;
+    type: ActionTypeKeys.VELG_KOLONNE | ActionTypeKeys.AVVELG_KOLONNE;
     kolonne: Kolonne;
 }
 
 interface OppdaterValgteKolonnerAction {
-    type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV | ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV;
+    type: ActionTypeKeys.OPPDATER_VALGTE_KOLONNER | ActionTypeKeys.OPPDATER_MULIGE_KOLONNER;
     kolonner: Kolonne[];
 }
 
 interface LukkVelgKolonnerDropdownAction {
-    type: ActionTypeKeys.LUKK_INFOPANEL;
+    type: ActionTypeKeys.LUKK_VELG_KOLONNER_DROPDOWN;
 }
 
 interface OtherAction {
@@ -120,15 +120,15 @@ function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
 
 export function listevisningReducer(state = initialStateMinOversikt, action: VelgKolonnerActions) {
     switch (action.type) {
-        case ActionTypeKeys.VELG_ALTERNATIV:
+        case ActionTypeKeys.VELG_KOLONNE:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};
-        case ActionTypeKeys.AVVELG_ALTERNATIV:
+        case ActionTypeKeys.AVVELG_KOLONNE:
             return {...state, valgte: state.valgte.filter(alternativ => alternativ !== action.kolonne)};
-        case ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV:
+        case ActionTypeKeys.OPPDATER_VALGTE_KOLONNER:
             return {...state, valgte: action.kolonner};
-        case ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV:
+        case ActionTypeKeys.OPPDATER_MULIGE_KOLONNER:
             return {...state, mulige: action.kolonner};
-        case ActionTypeKeys.LUKK_INFOPANEL:
+        case ActionTypeKeys.LUKK_VELG_KOLONNER_DROPDOWN:
             return {...state, lukketInfopanel: true};
         default:
             return state;
@@ -138,17 +138,17 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Vel
 export default listevisningReducer;
 
 export const velgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
-    type: ActionTypeKeys.VELG_ALTERNATIV,
+    type: ActionTypeKeys.VELG_KOLONNE,
     kolonne,
     name: oversiktType
 });
 export const avvelgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
-    type: ActionTypeKeys.AVVELG_ALTERNATIV,
+    type: ActionTypeKeys.AVVELG_KOLONNE,
     kolonne,
     name: oversiktType
 });
 export const lukkInfopanel = (oversiktType: OversiktType) => ({
-    type: ActionTypeKeys.LUKK_INFOPANEL,
+    type: ActionTypeKeys.LUKK_VELG_KOLONNER_DROPDOWN,
     name: oversiktType
 });
 
@@ -160,20 +160,20 @@ export const oppdaterKolonneAlternativer = (
     const nyeMuligeAlternativer = getMuligeKolonner(filterValg, oversiktType);
 
     dispatch({
-        type: ActionTypeKeys.OPPDATER_MULIGE_ALTERNATIV,
+        type: ActionTypeKeys.OPPDATER_MULIGE_KOLONNER,
         kolonner: nyeMuligeAlternativer,
         name: oversiktType
     });
 
     if (nyeMuligeAlternativer.length <= 3) {
         dispatch({
-            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+            type: ActionTypeKeys.OPPDATER_VALGTE_KOLONNER,
             kolonner: nyeMuligeAlternativer,
             name: oversiktType
         });
     } else {
         dispatch({
-            type: ActionTypeKeys.OPPDATER_VALGTE_ALTERNATIV,
+            type: ActionTypeKeys.OPPDATER_VALGTE_KOLONNER,
             name: oversiktType,
             kolonner: nyeMuligeAlternativer.slice(0, 3)
         });
