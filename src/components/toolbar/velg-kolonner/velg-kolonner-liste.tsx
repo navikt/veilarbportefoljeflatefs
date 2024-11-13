@@ -4,7 +4,6 @@ import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import VelgKolonnerRad from './velg-kolonner-rad';
 import {AppState} from '../../../reducer';
-import './listevisning.css';
 
 interface ListevisningProps {
     oversiktType: OversiktType;

@@ -27,9 +27,7 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
     return (
         <>
             <div
-                className={classNames('veiledergruppe-modal__valgteveileder', {
-                    'skjemaelement__input--harFeil': feil
-                })}
+                className="veiledergruppe-modal__valgteveileder"
                 data-testid="veiledergruppe_modal_valgte-veiledere_wrapper"
             >
                 {veiledere.length === 0 ? (

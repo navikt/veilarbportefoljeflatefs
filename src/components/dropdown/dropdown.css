@@ -109,10 +109,6 @@
     border-bottom: 1px solid #fff;
     padding-bottom: 1rem;
 }
-.veilarbportefoljeflatefs .dropdown--alignright .dropdown__innhold {
-    right: 0;
-    border-radius: 2px 0 2px 2px;
-}
 .veilarbportefoljeflatefs .dropdown .knapperad {
     padding: 0;
 }
