@@ -32,7 +32,7 @@ export function VelgKolonnerListe({oversiktType}: ListevisningProps) {
     }
 
     return (
-        <ul className="unordered-list-uten-listepunkt">
+        <ul className="liste-uten-listepunkt">
             {muligeAlternativer.map(kolonne => (
                 <VelgKolonnerRad
                     key={kolonne}
