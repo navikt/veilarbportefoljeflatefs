@@ -118,7 +118,7 @@ function addIfNotExists(kolonne: Kolonne, kolonner: Kolonne[]): Kolonne[] {
     return [...kolonner, kolonne];
 }
 
-export function listevisningReducer(state = initialStateMinOversikt, action: VelgKolonnerActions) {
+export function valgteKolonnerReducer(state = initialStateMinOversikt, action: VelgKolonnerActions) {
     switch (action.type) {
         case ActionTypeKeys.VELG_KOLONNE:
             return {...state, valgte: addIfNotExists(action.kolonne, state.valgte)};

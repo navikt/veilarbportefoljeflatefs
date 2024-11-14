@@ -17,7 +17,7 @@ import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
 import {
     initialStateEnhetensOversikt,
     initialStateMinOversikt,
-    listevisningReducer,
+    valgteKolonnerReducer,
     OversiktType,
     ValgteKolonnerState
 } from './ducks/ui/listevisning';
@@ -110,13 +110,13 @@ export default combineReducers<AppState>({
         valgteKolonnerMinOversikt: persistentReducer(
             LocalStorageScope.MIN_OVERSIKT_LISTEVISNING_STATE,
             window.location,
-            named(OversiktType.minOversikt, listevisningReducer),
+            named(OversiktType.minOversikt, valgteKolonnerReducer),
             initialStateMinOversikt
         ),
         valgteKolonnerEnhetensOversikt: persistentReducer(
             LocalStorageScope.ENHETENS_OVERSIKT_LISTEVISNING_STATE,
             window.location,
-            named(OversiktType.enhetensOversikt, listevisningReducer),
+            named(OversiktType.enhetensOversikt, valgteKolonnerReducer),
             initialStateEnhetensOversikt
         ),
         sidebarMinOversikt: persistentReducer(
