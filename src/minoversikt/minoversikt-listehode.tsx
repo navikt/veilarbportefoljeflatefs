@@ -46,6 +46,9 @@ import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 import {HuskelappKommentar} from '../components/tabell/headerceller/HuskelappKommentar';
 import {HuskelappFrist} from '../components/tabell/headerceller/HuskelappFrist';
+import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
+import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
+import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -299,36 +302,9 @@ function MinOversiktListeHode({
                 />
                 {visFilter14aFraVedtaksstotte && (
                     <>
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
-                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
-                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Innsatsgruppe"
-                            title="Innsatsgruppe for gjeldende vedtak § 14 a"
-                            className="col col-xs-2"
-                        />
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
-                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_HOVEDMAL}
-                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_HOVEDMAL}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Hovedmål"
-                            title="Hovedmål for gjeldende vedtak § 14 a"
-                            className="col col-xs-2"
-                        />
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_VEDTAKSDATO}
-                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_VEDTAKSDATO}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Vedtaksdato"
-                            title="Vedtaksdato for gjeldende vedtak § 14 a"
-                            className="col col-xs-2-5"
-                        />
+                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
                     </>
                 )}
                 <SorteringHeader
