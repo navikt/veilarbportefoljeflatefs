@@ -47,9 +47,9 @@ alternativerConfig.set(Kolonne.TOLKEBEHOV, {tekstlabel: 'Tolkebehov'});
 alternativerConfig.set(Kolonne.TOLKESPRAK, {tekstlabel: 'Tolkespråk'});
 alternativerConfig.set(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, {tekstlabel: 'Tolkebehov sist oppdatert'});
 alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'Frist deling av CV'});
-alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, {tekstlabel: 'Innsatsgruppe $ 14 a-vedtak'});
-alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, {tekstlabel: 'Hovedmål $ 14 a-vedtak'});
-alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, {tekstlabel: 'Vedtaksdato $ 14 a-vedtak'});
+alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, {tekstlabel: 'Innsatsgruppe § 14 a-vedtak'});
+alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, {tekstlabel: 'Hovedmål § 14 a-vedtak'});
+alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, {tekstlabel: 'Vedtaksdato § 14 a-vedtak'});
 alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {
     tekstlabel: 'Status § 14 a-vedtak (sammenligning mellom Arena og ny løsning)'
 });
