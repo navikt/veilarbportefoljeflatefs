@@ -299,24 +299,36 @@ function MinOversiktListeHode({
                 />
                 {visFilter14aFraVedtaksstotte && (
                     <>
-                        <Header
+                        <SorteringHeader
                             skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
+                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Innsatsgruppe"
+                            title="Innsatsgruppe for gjeldende vedtak § 14 a"
                             className="col col-xs-2"
-                        >
-                            Innsatsgruppe
-                        </Header>
-                        <Header
+                        />
+                        <SorteringHeader
                             skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
+                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_HOVEDMAL}
+                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_HOVEDMAL}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Hovedmål"
+                            title="Hovedmål for gjeldende vedtak § 14 a"
                             className="col col-xs-2"
-                        >
-                            Hovedmål
-                        </Header>
-                        <Header
+                        />
+                        <SorteringHeader
                             skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
+                            sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_VEDTAKSDATO}
+                            erValgt={sorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_VEDTAKSDATO}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Vedtaksdato"
+                            title="Vedtaksdato for gjeldende vedtak § 14 a"
                             className="col col-xs-2-5"
-                        >
-                            Vedtaksdato
-                        </Header>
+                        />
                     </>
                 )}
                 <SorteringHeader
