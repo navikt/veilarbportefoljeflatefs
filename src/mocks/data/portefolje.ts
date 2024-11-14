@@ -283,7 +283,7 @@ function lagBruker(sikkerhetstiltak = []) {
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp,
-        vedtak14a: lag14aVedtak()
+        gjeldendeVedtak14a: lag14aVedtak()
     };
 }
 
