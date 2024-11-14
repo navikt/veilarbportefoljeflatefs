@@ -14,11 +14,12 @@ import serverfeilModalReducer from './ducks/modal-serverfeil';
 import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
 import veiledergrupperLagretFilterReducer from './ducks/veiledergrupper_filter';
 import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
-import listevisningReducer, {
+import {
     initialStateEnhetensOversikt,
     initialStateMinOversikt,
-    ValgteKolonnerState,
-    OversiktType
+    listevisningReducer,
+    OversiktType,
+    ValgteKolonnerState
 } from './ducks/ui/listevisning';
 import featuresReducer, {FeaturesState} from './ducks/features';
 import toastReducer, {ToastState} from './store/toast/reducer';
