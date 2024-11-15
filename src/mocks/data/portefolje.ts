@@ -173,7 +173,7 @@ const lag14aVedtak = (): Vedtak14aDataModell | null => {
     if (maybe14aVedtak < 0.3) {
         return {
             innsatsgruppe: InnsatsgruppeOppfolgingsvedtak.SPESIELT_TILPASSET_INNSATS,
-            hovedmal: Hovedmal.BEHOLDE_ARBEID,
+            hovedmal: Hovedmal.OKE_DELTAKELSE,
             fattetDato: new Date(today.setMonth(today.getDay() - 14))
         };
     }

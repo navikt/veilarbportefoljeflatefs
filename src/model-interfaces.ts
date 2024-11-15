@@ -163,12 +163,14 @@ export const InnsatsgruppeNavn: {[key in InnsatsgruppeOppfolgingsvedtak]: string
 
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
-    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
+    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
+    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
 }
 
 export const HovedmalNavn: {[key in Hovedmal]: string} = {
     [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
-    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid'
+    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid',
+    [Hovedmal.OKE_DELTAKELSE]: 'Øke deltakelse'
 };
 
 export interface BrukerModell {
