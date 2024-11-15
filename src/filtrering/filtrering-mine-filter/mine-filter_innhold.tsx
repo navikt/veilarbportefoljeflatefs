@@ -1,16 +1,14 @@
-import React, {useEffect, useRef} from 'react';
-import './mine-filter_innhold.css';
-import '../../components/sidebar/sidebar.css';
+import {useEffect, useRef} from 'react';
+import {useDispatch} from 'react-redux';
+import {Alert, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import DragAndDrop from './drag-and-drop/drag-and-drop';
-import {useDispatch} from 'react-redux';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {Alert, BodyShort} from '@navikt/ds-react';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../../konstanter';
+import './mine-filter_innhold.css';
+import '../../components/sidebar/sidebar.css';
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -33,7 +31,6 @@ function MineFilterInnhold({
     setisDraggable,
     enhettiltak
 }: LagredeFilterInnholdProps) {
-    const isHuskelappToggleOn = useFeatureSelector()(HUSKELAPP);
     const outerDivRef = useRef<HTMLDivElement>(null);
 
     const filtrertListe = () => {
@@ -65,7 +62,7 @@ function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-                {isHuskelappToggleOn && alertArbeidslisteEllerKategori() && (
+                {alertArbeidslisteEllerKategori() && (
                     <Alert
                         variant="info"
                         className="mine-filter_alertstripe"

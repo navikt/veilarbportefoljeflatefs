@@ -11,7 +11,7 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VEDTAKSTOTTE} from '../konstanter';
+import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
@@ -44,7 +44,6 @@ export function MinoversiktBrukerPanel({
     const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
@@ -59,10 +58,10 @@ export function MinoversiktBrukerPanel({
     }, [varForrigeBruker]);
 
     useEffect(() => {
-        if (!erHuskelappFeatureTogglePa || !bruker.huskelapp) {
+        if (!bruker.huskelapp) {
             setBrukerpanelApent(false);
         }
-    }, [erHuskelappFeatureTogglePa, bruker.huskelapp]);
+    }, [bruker.huskelapp]);
 
     function handleBrukerpanelKnappClick(event) {
         event.preventDefault();
@@ -95,24 +94,22 @@ export function MinoversiktBrukerPanel({
                     Velg bruker {bruker.etternavn}, {bruker.fornavn}
                 </Checkbox>
 
-                {erHuskelappFeatureTogglePa && (
-                    <div className="brukerliste__minoversikt-ikonknapper">
-                        {
-                            // TODO: Treng vi denne sjekken? I kva tilfelle manglar vi fnr for brukar (og kan dei tilfella heller løysast med loading-state)? Ingrid, 2024-10-15
-                            bruker.fnr ? (
-                                <>
-                                    <FargekategoriTabellradKnapp bruker={bruker} />
-                                    <HuskelappIkonInngang bruker={bruker} />
-                                </>
-                            ) : (
-                                <>
-                                    <TomtHuskelappEllerFargekategoriFelt />
-                                    <TomtHuskelappEllerFargekategoriFelt />
-                                </>
-                            )
-                        }
-                    </div>
-                )}
+                <div className="brukerliste__minoversikt-ikonknapper">
+                    {
+                        // TODO: Treng vi denne sjekken? I kva tilfelle manglar vi fnr for brukar (og kan dei tilfella heller løysast med loading-state)? Ingrid, 2024-10-15
+                        bruker.fnr ? (
+                            <>
+                                <FargekategoriTabellradKnapp bruker={bruker} />
+                                <HuskelappIkonInngang bruker={bruker} />
+                            </>
+                        ) : (
+                            <>
+                                <TomtHuskelappEllerFargekategoriFelt />
+                                <TomtHuskelappEllerFargekategoriFelt />
+                            </>
+                        )
+                    }
+                </div>
                 <MinOversiktKolonner
                     bruker={bruker}
                     enhetId={enhetId}
@@ -128,15 +125,13 @@ export function MinoversiktBrukerPanel({
                             </Tag>
                         )}
                     </div>
-                    {erHuskelappFeatureTogglePa && !!bruker.huskelapp && (
+                    {!!bruker.huskelapp && (
                         <BrukerpanelKnapp apen={brukerpanelApent} onClick={handleBrukerpanelKnappClick} />
                     )}
                 </div>
             </div>
             <Collapse isOpened={brukerpanelApent}>
-                {erHuskelappFeatureTogglePa && bruker.huskelapp && (
-                    <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />
-                )}
+                {bruker.huskelapp && <HuskelappPanelvisning huskelapp={bruker.huskelapp} bruker={bruker} />}
             </Collapse>
         </li>
     );
