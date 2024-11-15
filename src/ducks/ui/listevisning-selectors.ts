@@ -10,6 +10,7 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
     MINE_HUSKELAPPER,
@@ -137,7 +138,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
-    const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.length > 0;
+    const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))

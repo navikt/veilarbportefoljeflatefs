@@ -46,6 +46,9 @@ import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 import {HuskelappKommentar} from '../components/tabell/headerceller/HuskelappKommentar';
 import {HuskelappFrist} from '../components/tabell/headerceller/HuskelappFrist';
+import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
+import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
+import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -299,24 +302,9 @@ function MinOversiktListeHode({
                 />
                 {visFilter14aFraVedtaksstotte && (
                     <>
-                        <Header
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
-                            className="col col-xs-2"
-                        >
-                            Innsatsgruppe
-                        </Header>
-                        <Header
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
-                            className="col col-xs-2"
-                        >
-                            Hovedmål
-                        </Header>
-                        <Header
-                            skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                            className="col col-xs-2-5"
-                        >
-                            Vedtaksdato
-                        </Header>
+                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
                     </>
                 )}
                 <SorteringHeader

@@ -31,6 +31,9 @@ export enum Sorteringsfelt {
     VEILEDER = 'veileder_navn',
     MOTER_IDAG = 'moterMedNAVIdag',
     MOTESTATUS = 'motestatus',
+    GJELDENDE_VEDTAK_14A_INNSATSGRUPPE = 'gjeldende_vedtak_14a_innsatsgruppe',
+    GJELDENDE_VEDTAK_14A_HOVEDMAL = 'gjeldende_vedtak_14a_hovedmal',
+    GJELDENDE_VEDTAK_14A_VEDTAKSDATO = 'gjeldende_vedtak_14a_vedtaksdato',
     UTKAST_14A_STATUS = 'utkast_14a_status',
     UTKAST_14A_STATUS_ENDRET = 'utkast_14a_status_endret',
     UTKAST_14A_ANSVARLIG_VEILEDER = 'utkast_14a_ansvarlig_veileder',
@@ -160,12 +163,14 @@ export const InnsatsgruppeNavn: {[key in InnsatsgruppeOppfolgingsvedtak]: string
 
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
-    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID'
+    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
+    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
 }
 
 export const HovedmalNavn: {[key in Hovedmal]: string} = {
     [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
-    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid'
+    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid',
+    [Hovedmal.OKE_DELTAKELSE]: 'Øke deltakelse'
 };
 
 export interface BrukerModell {
