@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch} from 'react-redux';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -28,14 +27,13 @@ import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {
-    HUSKELAPP,
     VEDTAKSTOTTE,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_STATUSFILTER_TILTAKSHENDELSE
 } from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
-import './filtrering-status.css';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
+import './filtrering-status.css';
 
 /** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.
  * Dersom vi er i Min oversikt får vi inn StatustallVeileder og utenBrukerinnsyn vil vere `null`.
@@ -56,7 +54,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erHuskelappFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const erStatusfilterTiltakshendelseFeatureTogglePa = useFeatureSelector()(VIS_STATUSFILTER_TILTAKSHENDELSE);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
@@ -231,16 +228,14 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forste-barlabel-i-gruppe">
-                        {erHuskelappFeatureTogglePa && (
-                            <BarInputRadio
-                                filterNavn="huskelapp"
-                                antall={statustallMedBrukerinnsyn.mineHuskelapper}
-                                handleChange={handleRadioButtonChange}
-                                filterVerdi={MINE_HUSKELAPPER}
-                                labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
-                            />
-                        )}
-                        {erHuskelappFeatureTogglePa && <FilterStatusMineFargekategorier />}
+                        <BarInputRadio
+                            filterNavn="huskelapp"
+                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                            handleChange={handleRadioButtonChange}
+                            filterVerdi={MINE_HUSKELAPPER}
+                            labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
+                        />
+                        <FilterStatusMineFargekategorier />
                     </div>
                 )}
             </RadioGroup>

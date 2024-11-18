@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
@@ -27,8 +26,6 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../konstanter';
 import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
 import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
 
@@ -48,7 +45,6 @@ function FiltreringLabelContainer({
     actions: {slettAlle, slettEnkelt},
     className
 }: FiltreringLabelContainerProps) {
-    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -154,17 +150,10 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabelMedIkon
                             key={singleValue}
-                            label={
-                                erFargekategoriFeatureTogglePa
-                                    ? filterKonstanter.arbeidslisteKategoriGammel[singleValue]
-                                    : filterKonstanter.arbeidslisteKategori[singleValue]
-                            }
+                            label={filterKonstanter.arbeidslisteKategoriGammel[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                             ikon={<ArbeidslistekategoriVisning kategori={singleValue} />}
-                            tittel={
-                                `Fjern filtervalg "Arbeidslistekategori ${filterKonstanter.arbeidslisteKategori[singleValue]}"` +
-                                (erFargekategoriFeatureTogglePa ? ' (gammel)' : '')
-                            }
+                            tittel={`Fjern filtervalg "Arbeidslistekategori ${filterKonstanter.arbeidslisteKategori[singleValue]}" (gammel)`}
                         />
                     );
                 });

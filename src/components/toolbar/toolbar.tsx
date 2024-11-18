@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Heading} from '@navikt/ds-react';
@@ -9,8 +8,6 @@ import {AppState} from '../../reducer';
 import ToolbarKnapp from './toolbar-knapp';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import FargekategoriToolbarKnapp from './fargekategori-toolbar-knapp';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {HUSKELAPP} from '../../konstanter';
 import {VelgKolonner} from './velg-kolonner';
 import '../../style.css';
 import './toolbar.css';
@@ -37,7 +34,6 @@ function Toolbar({
     isSidebarHidden = false
 }: ToolbarProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
-    const erFargekategoriFeatureTogglePa = useFeatureSelector()(HUSKELAPP);
     const valgteBrukere = brukere.filter(bruker => bruker.markert === true);
     const aktiv = valgteBrukere.length > 0;
     const brukerfeilMelding = useSelector((state: AppState) => state.brukerfeilStatus);
@@ -47,10 +43,7 @@ function Toolbar({
     const oversikt = side => {
         switch (side) {
             case OversiktType.minOversikt:
-                if (erFargekategoriFeatureTogglePa) {
-                    return <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />;
-                }
-                return null;
+                return <FargekategoriToolbarKnapp valgteBrukereFnrs={valgteBrukereFnrs} />;
             case OversiktType.enhetensOversikt:
                 return (
                     <div className="sok-veileder-wrapper">

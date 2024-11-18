@@ -1,4 +1,3 @@
-import * as React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import SorteringHeaderIkon from '../components/tabell/sortering-header-ikon';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
@@ -24,10 +23,9 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {HUSKELAPP, VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
-import './minoversikt.css';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -49,6 +47,7 @@ import {HuskelappFrist} from '../components/tabell/headerceller/HuskelappFrist';
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
 import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
+import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -76,7 +75,6 @@ function MinOversiktListeHode({
     valgteKolonner
 }: MinOversiktListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
-    const vis_kolonner_for_huskelapp = useFeatureSelector()(HUSKELAPP);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
 
     const {ytelse} = filtervalg;
@@ -116,29 +114,27 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-            {vis_kolonner_for_huskelapp && (
-                <div className="brukerliste__minoversikt-ikonknapper">
-                    <SorteringHeaderIkon
-                        ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                        sortering={Sorteringsfelt.FARGEKATEGORI}
-                        erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        title="Fargekategori-sortering"
-                        headerId="fargekategori"
-                    />
-                    <SorteringHeaderIkon
-                        ikon={<HuskelappIkon aria-hidden />}
-                        sortering={Sorteringsfelt.HUSKELAPP}
-                        erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        title="Huskelapp-sortering"
-                        headerId="huskelapp"
-                        className="huskelapp__sorteringsheader"
-                    />
-                </div>
-            )}
+            <div className="brukerliste__minoversikt-ikonknapper">
+                <SorteringHeaderIkon
+                    ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
+                    sortering={Sorteringsfelt.FARGEKATEGORI}
+                    erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    title="Fargekategori-sortering"
+                    headerId="fargekategori"
+                />
+                <SorteringHeaderIkon
+                    ikon={<HuskelappIkon aria-hidden />}
+                    sortering={Sorteringsfelt.HUSKELAPP}
+                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    title="Huskelapp-sortering"
+                    headerId="huskelapp"
+                    className="huskelapp__sorteringsheader"
+                />
+            </div>
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
