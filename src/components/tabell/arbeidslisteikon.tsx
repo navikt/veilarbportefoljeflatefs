@@ -10,20 +10,16 @@ interface ArbeidslistekategoriProps {
 }
 
 export default function ArbeidslistekategoriVisning({kategori}: Readonly<ArbeidslistekategoriProps>) {
-    const velgArbeidslistekategori = () => {
-        switch (kategori) {
-            case KategoriModell.BLA:
-                return <FargekategoriIkonBlaHalvsirkel fontSize="1.5rem" />;
-            case KategoriModell.GRONN:
-                return <FargekategoriIkonGronnTrekant fontSize="1.5rem" />;
-            case KategoriModell.GUL:
-                return <FargekategoriIkonGulSirkel fontSize="1.5rem" />;
-            case KategoriModell.LILLA:
-                return <FargekategoriIkonLillaFirkant fontSize="1.5rem" />;
-            default:
-                return <div className="tomt-arbeidslisteikon" />;
-        }
-    };
-
-    return velgArbeidslistekategori();
+    switch (kategori) {
+        case KategoriModell.BLA:
+            return <FargekategoriIkonBlaHalvsirkel fontSize="1.5rem" />;
+        case KategoriModell.GRONN:
+            return <FargekategoriIkonGronnTrekant fontSize="1.5rem" />;
+        case KategoriModell.GUL:
+            return <FargekategoriIkonGulSirkel fontSize="1.5rem" />;
+        case KategoriModell.LILLA:
+            return <FargekategoriIkonLillaFirkant fontSize="1.5rem" />;
+        default:
+            return <div className="tomt-arbeidslisteikon" />;
+    }
 }
