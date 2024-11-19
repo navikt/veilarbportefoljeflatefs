@@ -25,7 +25,7 @@ import {
     utdanningBestatt,
     utdanningGodkjent,
     ytelse,
-    innstansgruppeGjeldendeVedtak14a
+    innsatsgruppeGjeldendeVedtak14a
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
@@ -314,7 +314,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             render={() => (
                                 <CheckboxFilterform
                                     form="innsatsgruppeGjeldendeVedtak14a"
-                                    valg={innstansgruppeGjeldendeVedtak14a}
+                                    valg={innsatsgruppeGjeldendeVedtak14a}
                                     filtervalg={filtervalg}
                                     endreFiltervalg={endreFiltervalg}
                                 />

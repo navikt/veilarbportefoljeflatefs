@@ -1,5 +1,10 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {FargekategoriModell, Fargekategorinavn, Sorteringsfelt} from '../model-interfaces';
+import {
+    FargekategoriModell,
+    Fargekategorinavn,
+    InnsatsgruppeGjeldendeVedtak14a,
+    Sorteringsfelt
+} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
@@ -386,7 +391,15 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
 
-export const innstansgruppeGjeldendeVedtak14a = {};
+export const innsatsgruppeGjeldendeVedtak14a = {
+    [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter (standard)',
+    [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning (situasjonsbestemt)',
+    [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]:
+        'Trenger veiledning, nedsatt arbeidsevne (spesielt tilpasset)',
+    [InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS]:
+        'Jobbe delvis (delvis varig tilpasset, kun ny løsning)',
+    [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe (varig tilpasset)'
+};
 
 export const avvik14aVedtakHovedFilter = {
     [HAR_AVVIK]: {label: 'Status'}
