@@ -24,7 +24,8 @@ import {
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    ytelse
+    ytelse,
+    innstansgruppeGjeldendeVedtak14a
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
@@ -289,21 +290,38 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                 />
             </div>
             {visFilter14aFraVedtaksstotte && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
-                    <Dropdown
-                        name="Gjeldende vedtak (§ 14 a)"
-                        id="gjeldende-vedtak-14a"
-                        render={() => (
-                            <CheckboxFilterform
-                                form="gjeldendeVedtak14a"
-                                valg={gjeldendeVedtak14a}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                </div>
+                <>
+                    <div className="filtrering-filter__kolonne">
+                        <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
+                        <Dropdown
+                            name="Gjeldende vedtak (§ 14 a)"
+                            id="gjeldende-vedtak-14a"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="gjeldendeVedtak14a"
+                                    valg={gjeldendeVedtak14a}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
+                        />
+                    </div>
+                    <div className="filtrering-filter__kolonne">
+                        <Label size="small">Innsatsgruppe (§ 14 a)</Label>
+                        <Dropdown
+                            name="Innsatsgruppe (§ 14 a)"
+                            id="innsatsgruppe-gjeldende-vedtak-14a"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="innsatsgruppeGjeldendeVedtak14a"
+                                    valg={innstansgruppeGjeldendeVedtak14a}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
+                        />
+                    </div>
+                </>
             )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Utfasing av Arena</Label>
