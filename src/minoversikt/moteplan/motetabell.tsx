@@ -13,7 +13,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
     return (
         <li>
             <Heading className="moteplan_tittel" size="small" level="2">
-                {dato.toLocaleString(['no'], {weekday: 'long', day: 'numeric', month: 'long'})}
+                {dato.toLocaleString(['no'], {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'})}
             </Heading>
             <Table size="small">
                 <Table.Header>
