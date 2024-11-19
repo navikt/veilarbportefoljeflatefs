@@ -145,7 +145,7 @@ export enum Innsatsgruppe {
     VARIG = 'VARIG'
 }
 
-export enum InnsatsgruppeOppfolgingsvedtak {
+export enum InnsatsgruppeGjeldendeVedtak14a {
     STANDARD_INNSATS = 'STANDARD_INNSATS',
     SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
     SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
@@ -153,12 +153,12 @@ export enum InnsatsgruppeOppfolgingsvedtak {
     VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
 }
 
-export const InnsatsgruppeNavn: {[key in InnsatsgruppeOppfolgingsvedtak]: string} = {
-    [InnsatsgruppeOppfolgingsvedtak.STANDARD_INNSATS]: 'Gode muligheter',
-    [InnsatsgruppeOppfolgingsvedtak.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
-    [InnsatsgruppeOppfolgingsvedtak.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
-    [InnsatsgruppeOppfolgingsvedtak.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
-    [InnsatsgruppeOppfolgingsvedtak.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
+export const InnsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
+    [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter',
+    [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
+    [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
+    [InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
+    [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
 };
 
 export enum Hovedmal {
@@ -249,7 +249,7 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
-    gjeldendeVedtak14a: Vedtak14aDataModell | null;
+    gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
@@ -381,8 +381,8 @@ export enum SesjonStatus {
     UTLOPT = 'UTLØPT'
 }
 
-export interface Vedtak14aDataModell {
-    innsatsgruppe: InnsatsgruppeOppfolgingsvedtak;
+export interface GjeldendeVedtak14aModell {
+    innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
     hovedmal: Hovedmal;
     fattetDato: Date;
 }
