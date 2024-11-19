@@ -139,6 +139,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
+    const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
+    const filtrertPaEtGjeldendeVedtak14aFilter =
+        filtrertPaGjeldendeVedtak14a || filtrertPaInnsatsgruppeGjeldendeVedtak14a;
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
@@ -169,9 +172,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
-        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, filtrertPaGjeldendeVedtak14a))
-        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, filtrertPaGjeldendeVedtak14a))
-        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaGjeldendeVedtak14a))
+        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, filtrertPaEtGjeldendeVedtak14aFilter))
+        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, filtrertPaEtGjeldendeVedtak14aFilter))
+        .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, filtrertPaYtelseMedVurderingsfrist))
         .concat(addHvis(Kolonne.TYPE_YTELSE, filtrertPaAAPYtelse))
