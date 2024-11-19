@@ -391,7 +391,7 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
 };
 
-export const innsatsgruppeGjeldendeVedtak14a = {
+export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
     [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter (standard)',
     [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning (situasjonsbestemt)',
     [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]:
