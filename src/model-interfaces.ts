@@ -147,11 +147,11 @@ export enum Innsatsgruppe {
 }
 
 export enum InnsatsgruppeGjeldendeVedtak14a {
-    STANDARD_INNSATS = 'STANDARD_INNSATS',
-    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
-    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
-    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
-    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
+    STANDARD_INNSATS = 'Gode muligheter',
+    SITUASJONSBESTEMT_INNSATS = 'Trenger veiledning',
+    SPESIELT_TILPASSET_INNSATS = 'Trenger veiledning, nedsatt arbeidsevne',
+    GRADERT_VARIG_TILPASSET_INNSATS = 'Jobbe delvis',
+    VARIG_TILPASSET_INNSATS = 'Liten mulighet til å jobbe'
 }
 
 export const InnsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {

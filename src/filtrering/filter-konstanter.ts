@@ -459,5 +459,6 @@ export const filterKonstanter = {
     avvik14aVedtak,
     ensligeForsorgere,
     barnUnder18Aar,
-    fargekategorier
+    fargekategorier,
+    innsatsgruppeGjeldendeVedtak14a
 };
