@@ -154,7 +154,7 @@ export enum InnsatsgruppeGjeldendeVedtak14a {
     VARIG_TILPASSET_INNSATS = 'Liten mulighet til å jobbe'
 }
 
-export const InnsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
+export const innsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
     [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter',
     [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
     [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',

@@ -22,7 +22,7 @@ import {
     BrukerModell,
     FiltervalgModell,
     HovedmalNavn,
-    InnsatsgruppeNavn,
+    innsatsgruppeNavn,
     VeilederModell
 } from '../model-interfaces';
 import {
@@ -340,7 +340,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                         skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
                         tekst={
                             bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? InnsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                                ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
                                 : '-'
                         }
                         className="col col-xs-2"
