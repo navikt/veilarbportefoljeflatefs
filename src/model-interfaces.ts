@@ -116,6 +116,7 @@ export interface FiltervalgModell {
     fargekategorier: FargekategoriModell[];
     gjeldendeVedtak14a: string[];
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
+    hovedmalGjeldendeVedtak14a: Hovedmal[];
 }
 
 export interface EnhetModell {
@@ -146,7 +147,7 @@ export enum Innsatsgruppe {
     VARIG = 'VARIG'
 }
 
-/** Namn på filter for innsatsgruppe i backend */
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
 export enum InnsatsgruppeGjeldendeVedtak14a {
     STANDARD_INNSATS = 'STANDARD_INNSATS',
     SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
@@ -165,6 +166,7 @@ export const innsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: strin
     [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
 };
 
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
 export enum Hovedmal {
     SKAFFE_ARBEID = 'SKAFFE_ARBEID',
     BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
