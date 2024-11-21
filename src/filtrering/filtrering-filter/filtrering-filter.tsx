@@ -361,30 +361,34 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-                <Dropdown
-                    name="Innsatsgruppe"
-                    id="innsatsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="innsatsgruppe"
-                            valg={innsatsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
+                {!visFilter14aFraVedtaksstotte && (
+                    <>
+                        <Dropdown
+                            name="Innsatsgruppe"
+                            id="innsatsgruppe"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="innsatsgruppe"
+                                    valg={innsatsgruppe}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
                         />
-                    )}
-                />
-                <Dropdown
-                    name="Hovedmål"
-                    id="hovedmal"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="hovedmal"
-                            valg={hovedmal}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
+                        <Dropdown
+                            name="Hovedmål"
+                            id="hovedmal"
+                            render={() => (
+                                <CheckboxFilterform
+                                    form="hovedmal"
+                                    valg={hovedmal}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            )}
                         />
-                    )}
-                />
+                    </>
+                )}
                 <Dropdown
                     name="Formidlingsgruppe"
                     id="formidlingsgruppe"
