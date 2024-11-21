@@ -2,6 +2,7 @@ import {lag2Sifret, range} from '../utils/utils';
 import {
     FargekategoriModell,
     Fargekategorinavn,
+    Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     Sorteringsfelt
 } from '../model-interfaces';
@@ -401,6 +402,12 @@ export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVed
     [InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS]:
         'Jobbe delvis (delvis varig tilpasset, kun ny løsning)',
     [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe (varig tilpasset)'
+};
+
+export const hovedmalGjeldendeVedtak14a = {
+    [Hovedmal.SKAFFE_ARBEID]: {label: 'Skaffe arbeid'},
+    [Hovedmal.BEHOLDE_ARBEID]: {label: 'Beholde arbeid'},
+    [Hovedmal.OKE_DELTAKELSE]: {label: 'Øke deltakelse eller mål om arbeid (kun Arena)'}
 };
 
 export const avvik14aVedtakHovedFilter = {
