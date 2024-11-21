@@ -24,7 +24,8 @@ import {
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    ytelse
+    ytelse,
+    innsatsgruppeGjeldendeVedtak14a
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
@@ -298,6 +299,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             <CheckboxFilterform
                                 form="gjeldendeVedtak14a"
                                 valg={gjeldendeVedtak14a}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                    <Dropdown
+                        name="Innsatsgruppe (§ 14 a)"
+                        id="innsatsgruppe-gjeldende-vedtak-14a"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="innsatsgruppeGjeldendeVedtak14a"
+                                valg={innsatsgruppeGjeldendeVedtak14a}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />

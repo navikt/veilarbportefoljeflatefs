@@ -32,7 +32,7 @@ import {
     ytelsevalg
 } from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
-import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, InnsatsgruppeNavn} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import TidKolonne from '../components/tabell/kolonner/tidkolonne';
 import {
@@ -279,7 +279,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                         skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
                         tekst={
                             bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? InnsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                                ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
                                 : '-'
                         }
                         className="col col-xs-2"
