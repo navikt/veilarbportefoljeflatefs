@@ -146,6 +146,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
         filtrertPaHovedmålGjeldendeVedtak14a;
 
+    /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
+     * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
+     * Rekkefølga til kolonnene i tabellen er styrt av rekkefølgja på deira JSX-element i *-kolonner.tsx og *-listehode.tsx
+     * 2024-11-22, Ingrid */
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))
         .concat(addHvis(Kolonne.STATSBORGERSKAP, filtrertPaLandgruppeEllerFoedeland))
@@ -175,10 +179,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
+        .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
-        .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.VURDERINGSFRIST_YTELSE, filtrertPaYtelseMedVurderingsfrist))
         .concat(addHvis(Kolonne.TYPE_YTELSE, filtrertPaAAPYtelse))
         .concat(addHvis(Kolonne.VEDTAKSPERIODE, filtrertPaYtelseMedVedtaksperiode))

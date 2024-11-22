@@ -296,13 +296,6 @@ function MinOversiktListeHode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
-                {visFilter14aFraVedtaksstotte && (
-                    <>
-                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
-                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
-                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
-                    </>
-                )}
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
@@ -424,7 +417,15 @@ function MinOversiktListeHode({
                 />
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
+
                 <Status14AVedtak {...sorteringTilHeadercelle} />
+                {visFilter14aFraVedtaksstotte && (
+                    <>
+                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
+                    </>
+                )}
 
                 <SorteringHeader
                     skalVises={

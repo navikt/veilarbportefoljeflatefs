@@ -308,13 +308,6 @@ function EnhetListehode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
-                {visFilter14aFraVedtaksstotte && (
-                    <>
-                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
-                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
-                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
-                    </>
-                )}
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
@@ -372,8 +365,17 @@ function EnhetListehode({
                     title="Dato personen sist gjorde endring i aktiviteter/mål"
                     className="col col-xs-2"
                 />
+
                 <SvarfristCv {...sorteringTilHeadercelle} />
+
                 <Status14AVedtak {...sorteringTilHeadercelle} />
+                {visFilter14aFraVedtaksstotte && (
+                    <>
+                        <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
+                        <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
+                    </>
+                )}
 
                 <SorteringHeader
                     skalVises={
