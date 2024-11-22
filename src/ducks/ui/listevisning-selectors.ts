@@ -140,8 +140,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
+    const filtrertPaHovedmålGjeldendeVedtak14a = filtervalg.hovedmalGjeldendeVedtak14a.length > 0;
     const filtrertPaEtGjeldendeVedtak14aFilter =
-        filtrertPaGjeldendeVedtak14a || filtrertPaInnsatsgruppeGjeldendeVedtak14a;
+        filtrertPaGjeldendeVedtak14a ||
+        filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
+        filtrertPaHovedmålGjeldendeVedtak14a;
 
     return ([] as Kolonne[])
         .concat(addHvis(Kolonne.FODELAND, filtrertPaLandgruppeEllerFoedeland))

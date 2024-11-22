@@ -25,7 +25,8 @@ import {
     utdanningBestatt,
     utdanningGodkjent,
     ytelse,
-    innsatsgruppeGjeldendeVedtak14a
+    innsatsgruppeGjeldendeVedtak14a,
+    hovedmalGjeldendeVedtak14a
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
@@ -316,7 +317,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                             />
                         )}
                     />
-                    {/* Mellom her kjem det nye hovedmål-filteret */}
+                    <Dropdown
+                        name="Hovedmål (§ 14 a)"
+                        id="hovedmal-gjeldende-vedtak-14a"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="hovedmalGjeldendeVedtak14a"
+                                valg={hovedmalGjeldendeVedtak14a}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
                     <Dropdown
                         name="Sammenlign gjeldende vedtak og Arena"
                         id="status-14a-vedtak-filter"
