@@ -26,11 +26,7 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    VEDTAKSTOTTE,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
-    VIS_STATUSFILTER_TILTAKSHENDELSE
-} from '../../konstanter';
+import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -54,7 +50,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erStatusfilterTiltakshendelseFeatureTogglePa = useFeatureSelector()(VIS_STATUSFILTER_TILTAKSHENDELSE);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -184,15 +179,13 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterVerdi={MOTER_IDAG}
                         labelTekst={ferdigfilterListeLabelTekst[MOTER_IDAG]}
                     />
-                    {erStatusfilterTiltakshendelseFeatureTogglePa && (
-                        <BarInputRadio
-                            filterNavn="tiltakshendelse"
-                            handleChange={handleRadioButtonChange}
-                            antall={statustallMedBrukerinnsyn.tiltakshendelser}
-                            filterVerdi={TILTAKSHENDELSER}
-                            labelTekst={ferdigfilterListeLabelTekst[TILTAKSHENDELSER]}
-                        />
-                    )}
+                    <BarInputRadio
+                        filterNavn="tiltakshendelse"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.tiltakshendelser}
+                        filterVerdi={TILTAKSHENDELSER}
+                        labelTekst={ferdigfilterListeLabelTekst[TILTAKSHENDELSER]}
+                    />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
