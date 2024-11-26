@@ -299,8 +299,8 @@ function EnhetListehode({
                 />
                 <SorteringHeader
                     skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-                    sortering={Sorteringsfelt.MOTER_IDAG}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                    sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
+                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Klokkeslett møte"
@@ -402,8 +402,8 @@ function EnhetListehode({
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Utløp overgangsstønad"
