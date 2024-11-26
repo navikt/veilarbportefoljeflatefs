@@ -27,6 +27,7 @@ export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
 export const MOTER_IDAG = 'MOTER_IDAG';
 export const TILTAKSHENDELSER = 'TILTAKSHENDELSER';
 export const UTLOPTE_AKTIVITETER = 'UTLOPTE_AKTIVITETER';
+export const UTGATTE_VARSEL = 'UTGATTE_VARSEL';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
@@ -98,6 +99,7 @@ export const ferdigfilterListeLabelTekst = {
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
     [MOTER_IDAG]: 'Møte med NAV i dag',
     [TILTAKSHENDELSER]: 'Hendelser på tiltak',
+    [UTGATTE_VARSEL]: 'Utgåtte varsel',
     [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
     [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',

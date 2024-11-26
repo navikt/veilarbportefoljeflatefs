@@ -18,6 +18,7 @@ import {
     UFORDELTE_BRUKERE,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
+    UTGATTE_VARSEL,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
@@ -195,6 +196,13 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     )}
                 </div>
                 <div className="forste-barlabel-i-gruppe">
+                    <BarInputRadio
+                        filterNavn="utgatteVarsel"
+                        antall={statustallMedBrukerinnsyn.utgatteVarsel}
+                        handleChange={handleRadioButtonChange}
+                        filterVerdi={UTGATTE_VARSEL}
+                        labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
+                    />
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}

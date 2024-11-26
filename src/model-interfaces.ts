@@ -256,6 +256,7 @@ export interface BrukerModell {
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
+    utgattVarsel: UtgattVarselModell | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
@@ -391,4 +392,22 @@ export interface GjeldendeVedtak14aModell {
     innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
     hovedmal: Hovedmal;
     fattetDato: Date;
+}
+
+export interface UtgattVarselModell {
+    personID: string;
+    avsender: string;
+    kategori: Kategori;
+    hendelse: HendelsesInfo;
+}
+
+export interface Kategori {
+    UTGATTE_VARSEL;
+}
+
+export interface HendelsesInfo {
+    navn: string;
+    dato: string;
+    lenke: string;
+    detaljer: string;
 }
