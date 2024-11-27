@@ -10,6 +10,7 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
+    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -241,6 +242,30 @@ function EnhetListehode({
                     onClick={sorteringOnClick}
                     tekst="Dato på melding"
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={
+                        !!ferdigfilterListe?.includes(UTGATTE_VARSEL) && valgteKolonner.includes(Kolonne.UTGATTE_VARSEL)
+                    }
+                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Hendelse"
+                    title="Lenke til hendelsen"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={
+                        !!ferdigfilterListe?.includes(UTGATTE_VARSEL) && valgteKolonner.includes(Kolonne.UTGATTE_VARSEL)
+                    }
+                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato for hendelse"
+                    title="Dato da hendelsen ble opprettet"
                     className="col col-xs-2"
                 />
                 <SorteringHeader

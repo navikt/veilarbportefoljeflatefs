@@ -7,8 +7,8 @@ export interface StatustallInnhold {
     venterPaSvarFraBruker: number;
     moterMedNAVIdag: number;
     tiltakshendelser: number;
-    utlopteAktiviteter: number;
     utgatteVarsel: number;
+    utlopteAktiviteter: number;
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
     erSykmeldtMedArbeidsgiver: number;

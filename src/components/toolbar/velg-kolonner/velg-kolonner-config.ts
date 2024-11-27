@@ -20,6 +20,7 @@ alternativerConfig.set(Kolonne.VURDERINGSFRIST_YTELSE, {tekstlabel: 'Frist vurde
 alternativerConfig.set(Kolonne.TYPE_YTELSE, {tekstlabel: 'Type AAP-periode'});
 alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Gjenstående uker vedtak AAP'});
 alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Gjenstående uker rettighet AAP'});
+alternativerConfig.set(Kolonne.UTGATTE_VARSEL, {tekstlabel: 'Utgåtte varsel'});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});

@@ -12,6 +12,7 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
+    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -245,6 +246,26 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
+                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Hendelse"
+                    title="Lenke til hendelsen"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato for hendelse"
+                    title="Dato da hendelsen ble opprettet"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
                     skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
@@ -375,19 +396,6 @@ function MinOversiktListeHode({
                     onClick={sorteringOnClick}
                     tekst="Neste startdato aktivitet"
                     title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                        valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
-                    }
-                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Passert startdato aktivitet"
-                    title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
                 <SorteringHeader
