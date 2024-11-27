@@ -61,7 +61,7 @@ export const statustallEnhet: {
         venterPaSvarFraBruker: 2,
         moterMedNAVIdag: 2,
         tiltakshendelser: 2,
-        utgatteVarsel: 1,
+        utgatteVarsel: 2,
         utlopteAktiviteter: 2,
         ikkeIavtaltAktivitet: 2,
         iavtaltAktivitet: 2,

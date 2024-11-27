@@ -245,9 +245,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UTGATTE_VARSEL) && valgteKolonner.includes(Kolonne.UTGATTE_VARSEL)
-                    }
+                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                     sortering={Sorteringsfelt.UTGATTE_VARSEL}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
                     rekkefolge={sorteringsrekkefolge}
@@ -257,9 +255,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UTGATTE_VARSEL) && valgteKolonner.includes(Kolonne.UTGATTE_VARSEL)
-                    }
+                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                     sortering={Sorteringsfelt.UTGATTE_VARSEL}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
                     rekkefolge={sorteringsrekkefolge}
