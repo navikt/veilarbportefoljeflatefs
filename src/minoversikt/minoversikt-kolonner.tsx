@@ -273,35 +273,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
                 skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
-            {visFilter14aFraVedtaksstotte && (
-                <>
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
-                                : '-'
-                        }
-                        className="col col-xs-2"
-                    />
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'
-                        }
-                        className="col col-xs-2"
-                    />
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
-                                : '-'
-                        }
-                        className="col col-xs-2-5"
-                    />
-                </>
-            )}
             <LenkeKolonne
                 className="col col-xs-3 col-break-word"
                 bruker={bruker}
@@ -401,6 +372,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                     bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
                 }
             />
+
             <TekstKolonne
                 tekst={
                     avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
@@ -410,6 +382,36 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                 className="col col-xs-2"
             />
+            {visFilter14aFraVedtaksstotte && (
+                <>
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                                : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'
+                        }
+                        className="col col-xs-2"
+                    />
+                    <TekstKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
+                        tekst={
+                            bruker.gjeldendeVedtak14a?.innsatsgruppe
+                                ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
+                                : '-'
+                        }
+                        className="col col-xs-2-5"
+                    />
+                </>
+            )}
+
             <DatoKolonne
                 dato={overgangsstonadUtlopsdato}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
