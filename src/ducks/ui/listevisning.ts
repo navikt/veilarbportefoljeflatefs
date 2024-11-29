@@ -15,7 +15,6 @@ export enum Kolonne {
     OPPFOLGING_STARTET = 'oppfolgingstartet',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
-    UTGATTE_VARSEL = 'utgatteVarsel',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
     AVTALT_AKTIVITET = 'avtaltaktivitet',
     VENTER_SVAR = 'ventersvar',

@@ -244,26 +244,20 @@ function EnhetListehode({
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     className="col col-xs-2"
                 />
-                <SorteringHeader
+                <Header
                     skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Hendelse"
                     title="Lenke til hendelsen"
                     className="col col-xs-2"
-                />
-                <SorteringHeader
+                >
+                    Hendelse
+                </Header>
+                <Header
                     skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    sortering={Sorteringsfelt.UTGATTE_VARSEL}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTGATTE_VARSEL}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato for hendelse"
                     title="Dato da hendelsen ble opprettet"
                     className="col col-xs-2"
-                />
+                >
+                    Dato for hendelse
+                </Header>
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&

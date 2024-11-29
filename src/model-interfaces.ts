@@ -21,7 +21,6 @@ export enum Sorteringsfelt {
     AAP_TYPE = 'aap_type',
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
-    UTGATTE_VARSEL = 'utgatteVarsel',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',
     I_AVTALT_AKTIVITET = 'iavtaltaktivitet',
     START_DATO_FOR_AVTALT_AKTIVITET = 'aktivitet_start',
