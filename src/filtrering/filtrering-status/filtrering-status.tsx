@@ -57,7 +57,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
     const erStatusfilterTiltakshendelseFeatureTogglePa = useFeatureSelector()(VIS_STATUSFILTER_TILTAKSHENDELSE);
-    const erHendelsesFilterTogglepa = useFeatureSelector()(VIS_HENDELSESFILTER);
+    const erHendelsesfilterFeatureTogglePa = useFeatureSelector()(VIS_HENDELSESFILTER);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -198,7 +198,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     )}
                 </div>
                 <div className="forste-barlabel-i-gruppe">
-                    {erHendelsesFilterTogglepa && (
+                    {erHendelsesfilterFeatureTogglePa && (
                         <BarInputRadio
                             filterNavn="utgatteVarsel"
                             antall={statustallMedBrukerinnsyn.utgatteVarsel}
