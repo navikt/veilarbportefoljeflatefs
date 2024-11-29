@@ -268,17 +268,17 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
+                dato={venterPaSvarFraNAV}
                 skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={venterPaSvarFraNAV}
+                dato={venterPaSvarFraBruker}
                 skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
                     valgteKolonner.includes(Kolonne.VENTER_SVAR)
                 }
             />

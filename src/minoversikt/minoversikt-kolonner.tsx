@@ -250,13 +250,13 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                dato={venterPaSvarFraNAV}
+                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={venterPaSvarFraNAV}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
+                dato={venterPaSvarFraBruker}
+                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
             />
             <TidKolonne
                 className="col col-xs-2"
