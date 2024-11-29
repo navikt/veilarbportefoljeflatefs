@@ -397,15 +397,15 @@ export interface GjeldendeVedtak14aModell {
 export interface UtgattVarselModell {
     personIdent: string;
     avsender: string;
-    kategori: Kategori;
-    hendelse: HendelsesInfo;
+    kategori: UtgattVarselKategori;
+    hendelse: UtgattVarselHendelse;
 }
 
-export interface Kategori {
-    UTGATT_VARSEL;
+enum UtgattVarselKategori {
+    UTGATT_VARSEL = 'UTGATT_VARSEL'
 }
 
-export interface HendelsesInfo {
+interface UtgattVarselHendelse {
     beskrivelse: string;
     dato: string;
     lenke: string;
