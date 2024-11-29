@@ -268,7 +268,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                         lenketekst={bruker.utgattVarsel?.hendelse.beskrivelse ?? ''}
                         enhetId={enhetId}
                         skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                        className="col col-xs-2"
+                        className="col col-xs-2-5"
                     />
                     <DatoKolonne
                         dato={bruker.utgattVarsel?.hendelse.dato ? new Date(bruker.utgattVarsel?.hendelse.dato) : null}

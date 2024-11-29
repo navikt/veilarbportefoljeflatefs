@@ -252,7 +252,7 @@ function MinOversiktListeHode({
                         <Header
                             skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                             title="Lenke til hendelsen"
-                            className="col col-xs-2"
+                            className="col col-xs-2-5"
                         >
                             Hendelse
                         </Header>
