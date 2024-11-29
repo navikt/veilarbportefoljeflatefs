@@ -24,7 +24,7 @@ import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Navn} from '../components/tabell/headerceller/Navn';
@@ -49,6 +49,7 @@ import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller
 import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 import './minoversikt.css';
+import React from 'react';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -77,6 +78,7 @@ function MinOversiktListeHode({
 }: MinOversiktListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+    const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -245,20 +247,24 @@ function MinOversiktListeHode({
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     className="col col-xs-2"
                 />
-                <Header
-                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    title="Lenke til hendelsen"
-                    className="col col-xs-2"
-                >
-                    Hendelse
-                </Header>
-                <Header
-                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    title="Dato da hendelsen ble opprettet"
-                    className="col col-xs-2"
-                >
-                    Dato for hendelse
-                </Header>
+                {visKolonnerForHendelsesfilter && (
+                    <>
+                        <Header
+                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            title="Lenke til hendelsen"
+                            className="col col-xs-2"
+                        >
+                            Hendelse
+                        </Header>
+                        <Header
+                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            title="Dato da hendelsen ble opprettet"
+                            className="col col-xs-2"
+                        >
+                            Dato for hendelse
+                        </Header>
+                    </>
+                )}
                 <SorteringHeader
                     skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}

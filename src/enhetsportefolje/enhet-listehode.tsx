@@ -26,7 +26,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -74,6 +74,7 @@ function EnhetListehode({
 }: EnhetListehodeProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+    const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -244,20 +245,24 @@ function EnhetListehode({
                     title='Dato på meldingen som er merket "Venter på svar fra bruker"'
                     className="col col-xs-2"
                 />
-                <Header
-                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    title="Lenke til hendelsen"
-                    className="col col-xs-2"
-                >
-                    Hendelse
-                </Header>
-                <Header
-                    skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                    title="Dato da hendelsen ble opprettet"
-                    className="col col-xs-2"
-                >
-                    Dato for hendelse
-                </Header>
+                {visKolonnerForHendelsesfilter && (
+                    <>
+                        <Header
+                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            title="Lenke til hendelsen"
+                            className="col col-xs-2"
+                        >
+                            Hendelse
+                        </Header>
+                        <Header
+                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            title="Dato da hendelsen ble opprettet"
+                            className="col col-xs-2"
+                        >
+                            Dato for hendelse
+                        </Header>
+                    </>
+                )}
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
