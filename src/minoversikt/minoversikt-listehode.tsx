@@ -288,8 +288,8 @@ function MinOversiktListeHode({
                 />
                 <SorteringHeader
                     skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-                    sortering={Sorteringsfelt.MOTER_IDAG}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_IDAG}
+                    sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
+                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Klokkeslett møte"
@@ -370,8 +370,8 @@ function MinOversiktListeHode({
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
                     }
-                    sortering={Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.START_DATO_FOR_AVTALT_AKTIVITET}
+                    sortering={Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Startdato aktivitet"
@@ -383,8 +383,8 @@ function MinOversiktListeHode({
                         !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
                         valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
                     }
-                    sortering={Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.NESTE_START_DATO_FOR_AVTALT_AKTIVITET}
+                    sortering={Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Neste startdato aktivitet"
@@ -440,8 +440,8 @@ function MinOversiktListeHode({
                         valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
                         !!filtervalg.ensligeForsorgere.length
                     }
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOPS_YTELSE}
+                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
+                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Utløp overgangsstønad"

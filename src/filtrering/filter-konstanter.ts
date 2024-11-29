@@ -247,7 +247,7 @@ export const ytelseAapSortering = {
     AAP_UNNTAK: {
         vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
-        rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKE
+        rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKER_IGJEN
     }
 };
 
