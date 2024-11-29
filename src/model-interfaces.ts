@@ -396,18 +396,18 @@ export interface GjeldendeVedtak14aModell {
 }
 
 export interface UtgattVarselModell {
-    personID: string;
+    personIdent: string;
     avsender: string;
     kategori: Kategori;
     hendelse: HendelsesInfo;
 }
 
 export interface Kategori {
-    UTGATTE_VARSEL;
+    UTGATT_VARSEL;
 }
 
 export interface HendelsesInfo {
-    navn: string;
+    beskrivelse: string;
     dato: string;
     lenke: string;
     detaljer: string;
