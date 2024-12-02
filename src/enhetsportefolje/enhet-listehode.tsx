@@ -45,6 +45,8 @@ import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
 import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
+import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
+import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -246,20 +248,8 @@ function EnhetListehode({
                 />
                 {visKolonnerForHendelsesfilter && (
                     <>
-                        <Header
-                            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
-                            title="Lenke til hendelsen"
-                            className="col col-xs-2-5"
-                        >
-                            Hendelse
-                        </Header>
-                        <Header
-                            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-                            title="Dato da hendelsen ble opprettet"
-                            className="col col-xs-2"
-                        >
-                            Dato for hendelse
-                        </Header>
+                        <FilterhendelseLenke {...sorteringTilHeadercelle} />
+                        <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
                     </>
                 )}
                 <SorteringHeader
