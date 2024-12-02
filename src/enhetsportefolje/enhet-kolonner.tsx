@@ -290,6 +290,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                         bruker={bruker}
                         lenke={bruker.utgattVarsel?.hendelse.lenke ?? ''}
                         lenketekst={bruker.utgattVarsel?.hendelse.beskrivelse ?? ''}
+                        erAbsoluttLenke={true}
                         enhetId={enhetId}
                         skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                         className="col col-xs-2-5"
