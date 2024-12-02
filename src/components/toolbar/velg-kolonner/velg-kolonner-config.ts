@@ -63,3 +63,5 @@ alternativerConfig.set(Kolonne.HUSKELAPP_KOMMENTAR, {tekstlabel: 'Huskelapp'});
 alternativerConfig.set(Kolonne.HUSKELAPP_FRIST, {tekstlabel: 'Frist huskelapp'});
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Hendelse på tiltak (lenke)'});
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse på tiltak'});
+alternativerConfig.set(Kolonne.FILTERHENDELSE_LENKE, {tekstlabel: 'Hendelse (lenke)'});
+alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse'});

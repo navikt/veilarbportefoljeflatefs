@@ -10,7 +10,6 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
-    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -248,14 +247,14 @@ function EnhetListehode({
                 {visKolonnerForHendelsesfilter && (
                     <>
                         <Header
-                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
                             title="Lenke til hendelsen"
                             className="col col-xs-2-5"
                         >
                             Hendelse
                         </Header>
                         <Header
-                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                            skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
                             title="Dato da hendelsen ble opprettet"
                             className="col col-xs-2"
                         >
