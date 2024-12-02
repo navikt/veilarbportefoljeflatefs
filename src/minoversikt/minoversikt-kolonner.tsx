@@ -23,7 +23,6 @@ import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
-    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -298,18 +297,12 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 lenke={bruker.tiltakshendelse?.lenke ?? ''}
                 lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
                 enhetId={enhetId}
-                skalVises={
-                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
-                skalVises={
-                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
             />
             <DatoKolonne
                 className="col col-xs-2"

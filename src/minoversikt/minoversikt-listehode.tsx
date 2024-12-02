@@ -10,7 +10,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
-    TILTAKSHENDELSER,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -425,10 +424,7 @@ function MinOversiktListeHode({
                 )}
 
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     rekkefolge={sorteringsrekkefolge}
@@ -439,10 +435,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
                     rekkefolge={sorteringsrekkefolge}
@@ -452,10 +445,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
                     rekkefolge={sorteringsrekkefolge}
@@ -465,10 +455,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     rekkefolge={sorteringsrekkefolge}
@@ -486,10 +473,7 @@ function MinOversiktListeHode({
                 <HuskelappFrist {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     rekkefolge={sorteringsrekkefolge}
@@ -499,10 +483,7 @@ function MinOversiktListeHode({
                     className="col col-xs-3"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     rekkefolge={sorteringsrekkefolge}
