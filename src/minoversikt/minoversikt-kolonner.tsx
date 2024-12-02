@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import {
     aapRettighetsperiode,
@@ -22,7 +21,6 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -276,21 +274,23 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                     />
                 </>
             )}
+
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+
             <LenkeKolonne
                 className="col col-xs-3 col-break-word"
                 bruker={bruker}

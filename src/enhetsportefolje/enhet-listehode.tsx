@@ -1,4 +1,3 @@
-import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import {
     DAGPENGER_YTELSE,
@@ -7,7 +6,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -284,8 +282,9 @@ function EnhetListehode({
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
+
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                     sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     rekkefolge={sorteringsrekkefolge}
@@ -295,18 +294,14 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <Header
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                     title="Varighet på møtet"
                     className="col col-xs-2"
                 >
                     Varighet møte
                 </Header>
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
                     sortering={Sorteringsfelt.MOTESTATUS}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     rekkefolge={sorteringsrekkefolge}
@@ -315,6 +310,7 @@ function EnhetListehode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
+
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                     sortering={Sorteringsfelt.UTKAST_14A_STATUS}

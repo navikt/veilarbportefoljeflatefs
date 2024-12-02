@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
@@ -6,7 +5,6 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -330,21 +328,23 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
+
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+
             <TekstKolonne
                 tekst={bruker.utkast14aStatus ?? '-'}
                 skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}

@@ -9,7 +9,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
     UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
@@ -274,8 +273,9 @@ function MinOversiktListeHode({
                     headerTestId="sorteringheader_i-avtalt-aktivitet"
                     className="col col-xs-2"
                 />
+
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                     sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     rekkefolge={sorteringsrekkefolge}
@@ -285,18 +285,14 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <Header
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                     title="Varighet på møtet"
                     className="col col-xs-2"
                 >
                     Varighet møte
                 </Header>
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
                     sortering={Sorteringsfelt.MOTESTATUS}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     rekkefolge={sorteringsrekkefolge}
