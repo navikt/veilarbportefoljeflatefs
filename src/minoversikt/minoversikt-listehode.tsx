@@ -12,7 +12,6 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
-    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -50,6 +49,8 @@ import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/Gjel
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 import './minoversikt.css';
 import React from 'react';
+import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
+import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -249,20 +250,8 @@ function MinOversiktListeHode({
                 />
                 {visKolonnerForHendelsesfilter && (
                     <>
-                        <Header
-                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                            title="Lenke til hendelsen"
-                            className="col col-xs-2-5"
-                        >
-                            Hendelse
-                        </Header>
-                        <Header
-                            skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
-                            title="Dato da hendelsen ble opprettet"
-                            className="col col-xs-2"
-                        >
-                            Dato for hendelse
-                        </Header>
+                        <FilterhendelseLenke {...sorteringTilHeadercelle} />
+                        <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
                     </>
                 )}
                 <SorteringHeader

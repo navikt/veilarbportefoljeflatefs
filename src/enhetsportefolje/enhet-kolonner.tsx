@@ -9,7 +9,6 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
-    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -287,17 +286,17 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             {visKolonnerForHendelsesfilter && (
                 <>
                     <LenkeKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
                         bruker={bruker}
                         lenke={bruker.utgattVarsel?.hendelse.lenke ?? ''}
                         lenketekst={bruker.utgattVarsel?.hendelse.beskrivelse ?? ''}
                         erAbsoluttLenke={true}
                         enhetId={enhetId}
-                        skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                         className="col col-xs-2-5"
                     />
                     <DatoKolonne
+                        skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
                         dato={bruker.utgattVarsel?.hendelse.dato ? new Date(bruker.utgattVarsel?.hendelse.dato) : null}
-                        skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
                         className="col col-xs-2"
                     />
                 </>
