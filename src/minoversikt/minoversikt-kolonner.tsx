@@ -343,40 +343,40 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                     valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
                 }
             />
-            <TekstKolonne
-                tekst={bruker.utkast14aStatus ?? '-'}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                }
-                className="col col-xs-2"
-            />
-            <DagerSidenKolonne
-                className="col col-xs-2"
-                dato={dagerSiden(bruker.utkast14aStatusEndret)}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                }
-            />
-            <TekstKolonne
-                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                }
-                className="col col-xs-2"
-            />
-            <SisteEndringKategori
-                bruker={bruker}
-                enhetId={enhetId}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                className="col col-xs-2"
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={sisteEndringTidspunkt}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-            />
+            {!!ferdigfilterListe?.includes(UNDER_VURDERING) && (
+                <>
+                    <TekstKolonne
+                        tekst={bruker.utkast14aStatus ?? '-'}
+                        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                        className="col col-xs-2"
+                    />
+                    <DagerSidenKolonne
+                        className="col col-xs-2"
+                        dato={dagerSiden(bruker.utkast14aStatusEndret)}
+                        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                    />
+                    <TekstKolonne
+                        tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                        skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
+                        className="col col-xs-2"
+                    />
+                </>
+            )}
+            {!!filtervalg.sisteEndringKategori && (
+                <>
+                    <SisteEndringKategori
+                        bruker={bruker}
+                        enhetId={enhetId}
+                        skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                        className="col col-xs-2"
+                    />
+                    <DatoKolonne
+                        className="col col-xs-2"
+                        dato={sisteEndringTidspunkt}
+                        skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    />
+                </>
+            )}
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}

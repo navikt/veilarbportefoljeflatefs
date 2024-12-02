@@ -305,44 +305,42 @@ function MinOversiktListeHode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                    }
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Status § 14a-vedtak"
-                    title="Status oppfølgingvedtak"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                    }
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dager siden status"
-                    title="Dager siden status"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                    }
-                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Ansvarlig for vedtak"
-                    title="Ansvarlig veileder for vedtak"
-                    className="col col-xs-2"
-                />
+
+                {!!ferdigfilterListe?.includes(UNDER_VURDERING) && (
+                    <>
+                        <SorteringHeader
+                            skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                            sortering={Sorteringsfelt.UTKAST_14A_STATUS}
+                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Status § 14a-vedtak"
+                            title="Status oppfølgingvedtak"
+                            className="col col-xs-2"
+                        />
+                        <SorteringHeader
+                            skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                            sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Dager siden status"
+                            title="Dager siden status"
+                            className="col col-xs-2"
+                        />
+                        <SorteringHeader
+                            skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
+                            sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Ansvarlig for vedtak"
+                            title="Ansvarlig veileder for vedtak"
+                            className="col col-xs-2"
+                        />
+                    </>
+                )}
+
                 <SorteringHeader
                     skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
@@ -392,25 +390,29 @@ function MinOversiktListeHode({
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
-                <Header
-                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    title="Personens siste endring av aktiviteter/mål"
-                    className="col col-xs-2"
-                >
-                    Siste endring
-                </Header>
-                <SorteringHeader
-                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
-                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato personen sist gjorde endring i aktiviteter/mål"
-                    title="Dato siste endring"
-                    className="col col-xs-2"
-                />
+                {!!filtervalg.sisteEndringKategori && (
+                    <>
+                        <Header
+                            // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
+                            skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                            title="Personens siste endring av aktiviteter/mål"
+                            className="col col-xs-2"
+                        >
+                            Siste endring
+                        </Header>
+                        <SorteringHeader
+                            // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
+                            skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                            sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
+                            erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
+                            rekkefolge={sorteringsrekkefolge}
+                            onClick={sorteringOnClick}
+                            tekst="Dato personen sist gjorde endring i aktiviteter/mål"
+                            title="Dato siste endring"
+                            className="col col-xs-2"
+                        />
+                    </>
+                )}
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 

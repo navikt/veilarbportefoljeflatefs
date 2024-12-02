@@ -7,7 +7,6 @@ import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
-    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -348,37 +347,29 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
             <TekstKolonne
                 tekst={bruker.utkast14aStatus ?? '-'}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                 className="col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
                 dato={dagerSiden(bruker.utkast14aStatusEndret)}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
             <TekstKolonne
                 tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
                 className="col col-xs-2"
             />
             <SisteEndringKategori
                 bruker={bruker}
                 enhetId={enhetId}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
             />
             <TekstKolonne
                 className="col col-xs-2"

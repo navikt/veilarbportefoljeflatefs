@@ -8,7 +8,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     MOTER_IDAG,
-    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -317,9 +316,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                     sortering={Sorteringsfelt.UTKAST_14A_STATUS}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
                     rekkefolge={sorteringsrekkefolge}
@@ -329,10 +326,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
                     sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     rekkefolge={sorteringsrekkefolge}
@@ -342,10 +336,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
                     sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     rekkefolge={sorteringsrekkefolge}
@@ -356,7 +347,7 @@ function EnhetListehode({
                 />
                 <Header
                     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     title="Personens siste endring av aktiviteter/mål"
                     className="col col-xs-2"
                 >
@@ -364,7 +355,7 @@ function EnhetListehode({
                 </Header>
                 <SorteringHeader
                     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     rekkefolge={sorteringsrekkefolge}
