@@ -420,7 +420,7 @@ export interface UtgattVarselModell {
     hendelse: UtgattVarselHendelse;
 }
 
-enum UtgattVarselKategori {
+export enum UtgattVarselKategori {
     UTGATT_VARSEL = 'UTGATT_VARSEL'
 }
 
@@ -428,5 +428,5 @@ interface UtgattVarselHendelse {
     beskrivelse: string;
     dato: string;
     lenke: string;
-    detaljer: string;
+    detaljer?: string;
 }

@@ -25,6 +25,7 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     UNDER_VURDERING,
+    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
@@ -49,7 +50,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
+import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
@@ -64,6 +65,7 @@ interface MinOversiktKolonnerProps {
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
+    const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
@@ -250,14 +252,32 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             />
             <DatoKolonne
                 className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
                 skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
             />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={venterPaSvarFraBruker}
+                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+            />
+            {visKolonnerForHendelsesfilter && (
+                <>
+                    <LenkeKolonne
+                        bruker={bruker}
+                        lenke={bruker.utgattVarsel?.hendelse.lenke ?? ''}
+                        lenketekst={bruker.utgattVarsel?.hendelse.beskrivelse ?? ''}
+                        erAbsoluttLenke={true}
+                        enhetId={enhetId}
+                        skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                        className="col col-xs-2-5"
+                    />
+                    <DatoKolonne
+                        dato={bruker.utgattVarsel?.hendelse.dato ? new Date(bruker.utgattVarsel?.hendelse.dato) : null}
+                        skalVises={!!ferdigfilterListe?.includes(UTGATTE_VARSEL)}
+                        className="col col-xs-2"
+                    />
+                </>
+            )}
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}

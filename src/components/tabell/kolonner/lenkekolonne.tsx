@@ -7,21 +7,31 @@ interface LenkeKolonneProps {
     bruker: BrukerModell;
     lenke: string;
     lenketekst: string;
+    erAbsoluttLenke?: boolean;
     enhetId: string;
     skalVises: boolean;
     className?: string;
 }
 
-export const LenkeKolonne = ({bruker, lenke, lenketekst, enhetId, skalVises, className}: LenkeKolonneProps) => {
+export const LenkeKolonne = ({
+    bruker,
+    lenke,
+    lenketekst,
+    erAbsoluttLenke = false,
+    enhetId,
+    skalVises,
+    className
+}: LenkeKolonneProps) => {
     if (!skalVises) {
         return null;
     }
 
-    const handterKlikk = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId));
+    const lenkeDetSkalNavigeresTil = erAbsoluttLenke ? lenke : getVeilarbpersonflateUrl(lenke, enhetId);
+
+    const handterKlikk = () => oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenkeDetSkalNavigeresTil);
 
     const handterKlikkNyFane = () =>
-        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(lenke, enhetId), true);
+        oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, lenkeDetSkalNavigeresTil, true);
 
     return (
         <div className={className}>

@@ -5,10 +5,12 @@ import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
+    GjeldendeVedtak14aModell,
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
-    GjeldendeVedtak14aModell
+    UtgattVarselKategori,
+    UtgattVarselModell
 } from '../../model-interfaces';
 import moment from 'moment';
 import {rnd} from '../utils';
@@ -201,6 +203,33 @@ const lag14aVedtak = (): GjeldendeVedtak14aModell | null => {
     return null;
 };
 
+const lagUtgattVarsel = (personIdent: string): UtgattVarselModell | null => {
+    const maybeUtgattVarsel = rnd(0, 1);
+
+    if (maybeUtgattVarsel < 0.5) {
+        return {
+            personIdent: personIdent,
+            avsender: 'veilarbdialog',
+            kategori: UtgattVarselKategori.UTGATT_VARSEL,
+            hendelse: {
+                beskrivelse: 'Bruker har et utgått varsel',
+                dato: '2024-11-29T09:40:00.052559441+01:00',
+                lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
+            }
+        };
+    }
+    return {
+        personIdent: personIdent,
+        avsender: 'veilarbdialog',
+        kategori: UtgattVarselKategori.UTGATT_VARSEL,
+        hendelse: {
+            beskrivelse: 'Bruker har et utgått varsel',
+            dato: new Date().toISOString(),
+            lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
+        }
+    };
+};
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -283,7 +312,8 @@ function lagBruker(sikkerhetstiltak = []) {
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp,
-        gjeldendeVedtak14a: lag14aVedtak()
+        gjeldendeVedtak14a: lag14aVedtak(),
+        utgattVarsel: lagUtgattVarsel(grunndata.fnr)
     };
 }
 
