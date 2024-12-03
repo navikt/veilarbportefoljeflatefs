@@ -42,10 +42,9 @@ import {HuskelappFrist} from '../components/tabell/headerceller/HuskelappFrist';
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
 import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
-import './minoversikt.css';
-import React from 'react';
 import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
 import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
+import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -91,8 +90,6 @@ function MinOversiktListeHode({
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
     const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
-    const iAvtaltAktivitet =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avansertAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
@@ -260,7 +257,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={iAvtaltAktivitet}
+                    skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                     sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}

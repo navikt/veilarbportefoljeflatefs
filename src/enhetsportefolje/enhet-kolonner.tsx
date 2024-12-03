@@ -2,12 +2,7 @@ import moment from 'moment';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
-import {
-    avvik14aVedtakAvhengigeFilter,
-    I_AVTALT_AKTIVITET,
-    ytelseAapSortering,
-    ytelsevalg
-} from '../filtrering/filter-konstanter';
+import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {
@@ -85,7 +80,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
@@ -100,8 +94,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
         ? new Date(bruker.utdanningOgSituasjonSistEndret)
         : null;
-    const iAvtaltAktivitet: boolean =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
@@ -309,7 +301,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || undefined)}
-                skalVises={iAvtaltAktivitet}
+                skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"

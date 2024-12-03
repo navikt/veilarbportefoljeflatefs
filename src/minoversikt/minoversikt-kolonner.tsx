@@ -94,8 +94,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         : null;
 
     const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
-    const iAvtaltAktivitet: boolean =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
+
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
         filtervalg.tiltakstyper.length === 0 &&
@@ -304,7 +303,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
-                skalVises={iAvtaltAktivitet}
+                skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"

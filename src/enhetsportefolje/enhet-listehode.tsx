@@ -5,7 +5,6 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    I_AVTALT_AKTIVITET,
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
@@ -84,9 +83,6 @@ function EnhetListehode({
         DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
-    const iAvtaltAktivitet =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avansertAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
@@ -250,7 +246,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={iAvtaltAktivitet}
+                    skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                     sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
