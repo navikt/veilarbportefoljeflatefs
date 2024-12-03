@@ -340,21 +340,18 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 className="col col-xs-2"
             />
 
-            {!!filtervalg.sisteEndringKategori && (
-                <>
-                    <SisteEndringKategori
-                        bruker={bruker}
-                        enhetId={enhetId}
-                        skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                        className="col col-xs-2"
-                    />
-                    <DatoKolonne
-                        className="col col-xs-2"
-                        dato={sisteEndringTidspunkt}
-                        skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-                    />
-                </>
-            )}
+            <SisteEndringKategori
+                bruker={bruker}
+                enhetId={enhetId}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                className="col col-xs-2"
+            />
+            <DatoKolonne
+                className="col col-xs-2"
+                dato={sisteEndringTidspunkt}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+            />
+
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}

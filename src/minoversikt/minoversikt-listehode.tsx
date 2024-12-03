@@ -364,29 +364,26 @@ function MinOversiktListeHode({
                     title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
-                {!!filtervalg.sisteEndringKategori && (
-                    <>
-                        <Header
-                            // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                            skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                            title="Personens siste endring av aktiviteter/mål"
-                            className="col col-xs-2"
-                        >
-                            Siste endring
-                        </Header>
-                        <SorteringHeader
-                            // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                            skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-                            sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
-                            erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Dato personen sist gjorde endring i aktiviteter/mål"
-                            title="Dato siste endring"
-                            className="col col-xs-2"
-                        />
-                    </>
-                )}
+
+                <Header
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    title="Personens siste endring av aktiviteter/mål"
+                    className="col col-xs-2"
+                >
+                    Siste endring
+                </Header>
+                <SorteringHeader
+                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
+                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dato personen sist gjorde endring i aktiviteter/mål"
+                    title="Dato siste endring"
+                    className="col col-xs-2"
+                />
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 
