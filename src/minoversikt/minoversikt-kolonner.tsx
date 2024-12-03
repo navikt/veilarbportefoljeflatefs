@@ -22,7 +22,6 @@ import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
@@ -312,7 +311,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
+                skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"

@@ -5,7 +5,6 @@ import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
-    UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
@@ -313,10 +312,7 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
-                    valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"

@@ -10,7 +10,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
@@ -253,7 +252,7 @@ function MinOversiktListeHode({
                     </>
                 )}
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER)}
+                    skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     rekkefolge={sorteringsrekkefolge}
