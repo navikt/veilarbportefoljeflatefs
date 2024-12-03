@@ -42,6 +42,8 @@ import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/Gjel
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
 import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
+import {TiltakshendelseDatoOpprettet} from '../components/tabell/headerceller/TiltakshendelseDatoOpprettet';
+import {TiltakshendelseLenke} from '../components/tabell/headerceller/TiltakshendelseLenke';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -445,26 +447,8 @@ function MinOversiktListeHode({
                 <HuskelappKommentar {...sorteringTilHeadercelle} />
                 <HuskelappFrist {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Hendelse på tiltak"
-                    title="Lenke til hendelsen"
-                    className="col col-xs-3"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato for hendelse"
-                    title="Dato da hendelsen ble opprettet"
-                    className="col col-xs-2"
-                />
+                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
