@@ -8,7 +8,6 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    UNDER_VURDERING,
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
@@ -88,7 +87,6 @@ function MinOversiktListeHode({
         DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
 
     const avansertAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
@@ -295,40 +293,36 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
 
-                {!!ferdigfilterListe?.includes(UNDER_VURDERING) && (
-                    <>
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                            sortering={Sorteringsfelt.UTKAST_14A_STATUS}
-                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Status § 14a-vedtak"
-                            title="Status oppfølgingvedtak"
-                            className="col col-xs-2"
-                        />
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-                            sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Dager siden status"
-                            title="Dager siden status"
-                            className="col col-xs-2"
-                        />
-                        <SorteringHeader
-                            skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                            sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                            erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                            rekkefolge={sorteringsrekkefolge}
-                            onClick={sorteringOnClick}
-                            tekst="Ansvarlig for vedtak"
-                            title="Ansvarlig veileder for vedtak"
-                            className="col col-xs-2"
-                        />
-                    </>
-                )}
+                <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Status § 14a-vedtak"
+                    title="Status oppfølgingvedtak"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Dager siden status"
+                    title="Dager siden status"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
+                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Ansvarlig for vedtak"
+                    title="Ansvarlig veileder for vedtak"
+                    className="col col-xs-2"
+                />
 
                 <SorteringHeader
                     skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}

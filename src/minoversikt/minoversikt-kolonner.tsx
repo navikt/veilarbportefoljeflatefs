@@ -18,12 +18,7 @@ import {
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
-import {
-    avvik14aVedtakAvhengigeFilter,
-    UNDER_VURDERING,
-    ytelseAapSortering,
-    ytelsevalg
-} from '../filtrering/filter-konstanter';
+import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -76,7 +71,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
         bruker.innsatsgruppe,
@@ -329,25 +323,23 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
-            {!!ferdigfilterListe?.includes(UNDER_VURDERING) && (
-                <>
-                    <TekstKolonne
-                        tekst={bruker.utkast14aStatus ?? '-'}
-                        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                        className="col col-xs-2"
-                    />
-                    <DagerSidenKolonne
-                        className="col col-xs-2"
-                        dato={dagerSiden(bruker.utkast14aStatusEndret)}
-                        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-                    />
-                    <TekstKolonne
-                        tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
-                        skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                        className="col col-xs-2"
-                    />
-                </>
-            )}
+
+            <TekstKolonne
+                tekst={bruker.utkast14aStatus ?? '-'}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+                className="col col-xs-2"
+            />
+            <DagerSidenKolonne
+                className="col col-xs-2"
+                dato={dagerSiden(bruker.utkast14aStatusEndret)}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+            />
+            <TekstKolonne
+                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
+                className="col col-xs-2"
+            />
+
             {!!filtervalg.sisteEndringKategori && (
                 <>
                     <SisteEndringKategori
