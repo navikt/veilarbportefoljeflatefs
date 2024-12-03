@@ -228,7 +228,7 @@ function MinOversiktListeHode({
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                        valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)
                     }
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
@@ -241,7 +241,7 @@ function MinOversiktListeHode({
                 <SorteringHeader
                     skalVises={
                         !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                        valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)
                     }
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}

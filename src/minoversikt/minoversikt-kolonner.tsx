@@ -250,7 +250,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 dato={venterPaSvarFraNAV}
                 skalVises={
                     !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                    valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)
                 }
             />
             <DatoKolonne
@@ -258,7 +258,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 dato={venterPaSvarFraBruker}
                 skalVises={
                     !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                    valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)
                 }
             />
             {visKolonnerForHendelsesfilter && (
