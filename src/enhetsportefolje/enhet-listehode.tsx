@@ -1,4 +1,3 @@
-import React from 'react';
 import SorteringHeader from '../components/tabell/sortering-header';
 import {
     DAGPENGER_YTELSE,
@@ -6,13 +5,6 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
-    TILTAKSHENDELSER,
-    UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
@@ -91,9 +83,6 @@ function EnhetListehode({
         DAGPENGER_YTELSE_LONNSGARANTIMIDLER
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
-    const iAvtaltAktivitet =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avansertAktivitet =
         harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
@@ -221,10 +210,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     rekkefolge={sorteringsrekkefolge}
@@ -234,10 +220,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     rekkefolge={sorteringsrekkefolge}
@@ -253,10 +236,7 @@ function EnhetListehode({
                     </>
                 )}
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
-                        valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
                     sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
                     rekkefolge={sorteringsrekkefolge}
@@ -266,7 +246,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={iAvtaltAktivitet}
+                    skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
                     sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
@@ -286,8 +266,9 @@ function EnhetListehode({
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
+
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
                     sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
                     rekkefolge={sorteringsrekkefolge}
@@ -297,18 +278,14 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <Header
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
                     title="Varighet på møtet"
                     className="col col-xs-2"
                 >
                     Varighet møte
                 </Header>
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
                     sortering={Sorteringsfelt.MOTESTATUS}
                     erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
                     rekkefolge={sorteringsrekkefolge}
@@ -317,10 +294,9 @@ function EnhetListehode({
                     title="Møtestatus"
                     className="col col-xs-2"
                 />
+
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                     sortering={Sorteringsfelt.UTKAST_14A_STATUS}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
                     rekkefolge={sorteringsrekkefolge}
@@ -330,10 +306,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
                     sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
                     rekkefolge={sorteringsrekkefolge}
@@ -343,10 +316,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                        valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
                     sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
                     rekkefolge={sorteringsrekkefolge}
@@ -357,7 +327,7 @@ function EnhetListehode({
                 />
                 <Header
                     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                     title="Personens siste endring av aktiviteter/mål"
                     className="col col-xs-2"
                 >
@@ -365,7 +335,7 @@ function EnhetListehode({
                 </Header>
                 <SorteringHeader
                     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
                     sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
                     erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
                     rekkefolge={sorteringsrekkefolge}
@@ -387,10 +357,7 @@ function EnhetListehode({
                 )}
 
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
                     rekkefolge={sorteringsrekkefolge}
@@ -401,10 +368,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
                     rekkefolge={sorteringsrekkefolge}
@@ -414,10 +378,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
                     rekkefolge={sorteringsrekkefolge}
@@ -427,10 +388,7 @@ function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET) &&
-                        !!filtervalg.ensligeForsorgere.length
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
                     sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
                     rekkefolge={sorteringsrekkefolge}
@@ -446,10 +404,7 @@ function EnhetListehode({
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
                     rekkefolge={sorteringsrekkefolge}
@@ -459,10 +414,7 @@ function EnhetListehode({
                     className="col col-xs-3"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                        valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
                     sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
                     rekkefolge={sorteringsrekkefolge}

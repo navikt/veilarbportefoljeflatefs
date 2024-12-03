@@ -79,9 +79,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaMoterIDag = filtervalg.ferdigfilterListe.includes(MOTER_IDAG);
 
-    const filtrertPaVenterSvarFraNavEllerBruker =
-        filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER) ||
-        filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV);
+    const filtrertPaVenterPaSvarFraNav = filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_NAV);
+    const filtrertPaVenterPaSvarFraBruker = filtervalg.ferdigfilterListe.includes(VENTER_PA_SVAR_FRA_BRUKER);
 
     const filtrertPaUnderVurdering = filtervalg.ferdigfilterListe.includes(UNDER_VURDERING);
 
@@ -142,11 +141,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
-    const filtrertPaHovedmålGjeldendeVedtak14a = filtervalg.hovedmalGjeldendeVedtak14a.length > 0;
+    const filtrertPaHovedmalGjeldendeVedtak14a = filtervalg.hovedmalGjeldendeVedtak14a.length > 0;
     const filtrertPaEtGjeldendeVedtak14aFilter =
         filtrertPaGjeldendeVedtak14a ||
         filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
-        filtrertPaHovedmålGjeldendeVedtak14a;
+        filtrertPaHovedmalGjeldendeVedtak14a;
 
     /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
      * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
@@ -166,7 +165,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.MOTE_ER_AVTALT, filtrertPaMoterIDag))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
         .concat(addHvis(Kolonne.AVTALT_AKTIVITET, filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET)))
-        .concat(addHvis(Kolonne.VENTER_SVAR, filtrertPaVenterSvarFraNavEllerBruker))
+        .concat(addHvis(Kolonne.VENTER_SVAR_FRA_NAV_DATO, filtrertPaVenterPaSvarFraNav))
+        .concat(addHvis(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO, filtrertPaVenterPaSvarFraBruker))
         .concat(addHvis(Kolonne.TILTAKSHENDELSE_LENKE, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_LENKE, filtrertPaUtgattVarsel))

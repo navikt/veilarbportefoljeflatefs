@@ -1,20 +1,8 @@
-import React from 'react';
 import moment from 'moment';
 import BrukerNavn from '../components/tabell/brukernavn';
 import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
-import {
-    avvik14aVedtakAvhengigeFilter,
-    I_AVTALT_AKTIVITET,
-    MOTER_IDAG,
-    TILTAKSHENDELSER,
-    UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
-    ytelseAapSortering,
-    ytelsevalg
-} from '../filtrering/filter-konstanter';
+import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import DatoKolonne from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {
@@ -92,7 +80,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
     const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const ferdigfilterListe = filtervalg ? filtervalg.ferdigfilterListe : '';
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
@@ -107,8 +94,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
     const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
         ? new Date(bruker.utdanningOgSituasjonSistEndret)
         : null;
-    const iAvtaltAktivitet: boolean =
-        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) && valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET);
 
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
@@ -270,18 +255,12 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
             />
             {visKolonnerForHendelsesfilter && (
                 <>
@@ -307,85 +286,70 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 lenke={bruker.tiltakshendelse?.lenke ?? ''}
                 lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
                 enhetId={enhetId}
-                skalVises={
-                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
-                skalVises={
-                    !!ferdigfilterListe?.includes(TILTAKSHENDELSER) &&
-                    valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nyesteUtlopteAktivitet}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UTLOPTE_AKTIVITETER) &&
-                    valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || undefined)}
-                skalVises={iAvtaltAktivitet}
+                skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
+
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             />
             <VarighetKolonne
                 className="col col-xs-2"
                 dato={varighet}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             />
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
-                skalVises={!!ferdigfilterListe?.includes(MOTER_IDAG) && valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
+                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
+
             <TekstKolonne
                 tekst={bruker.utkast14aStatus ?? '-'}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) && valgteKolonner.includes(Kolonne.VEDTAKSTATUS)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                 className="col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
                 dato={dagerSiden(bruker.utkast14aStatusEndret)}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
             <TekstKolonne
                 tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
-                skalVises={
-                    !!ferdigfilterListe?.includes(UNDER_VURDERING) &&
-                    valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
                 className="col col-xs-2"
             />
             <SisteEndringKategori
                 bruker={bruker}
                 enhetId={enhetId}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
                 className="col col-xs-2"
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={sisteEndringTidspunkt}
-                skalVises={!!filtervalg.sisteEndringKategori && valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
             />
             <TekstKolonne
                 className="col col-xs-2"
