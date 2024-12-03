@@ -141,11 +141,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
-    const filtrertPaHovedmålGjeldendeVedtak14a = filtervalg.hovedmalGjeldendeVedtak14a.length > 0;
+    const filtrertPaHovedmalGjeldendeVedtak14a = filtervalg.hovedmalGjeldendeVedtak14a.length > 0;
     const filtrertPaEtGjeldendeVedtak14aFilter =
         filtrertPaGjeldendeVedtak14a ||
         filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
-        filtrertPaHovedmålGjeldendeVedtak14a;
+        filtrertPaHovedmalGjeldendeVedtak14a;
 
     /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
      * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
