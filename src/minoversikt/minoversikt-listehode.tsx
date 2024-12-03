@@ -226,7 +226,10 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
+                    skalVises={
+                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
+                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                    }
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     rekkefolge={sorteringsrekkefolge}
@@ -236,7 +239,10 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                    skalVises={
+                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
+                        valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                    }
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     rekkefolge={sorteringsrekkefolge}

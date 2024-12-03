@@ -248,12 +248,18 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV)}
+                skalVises={
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
+                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                }
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={!!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER)}
+                skalVises={
+                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
+                    valgteKolonner.includes(Kolonne.VENTER_SVAR)
+                }
             />
             {visKolonnerForHendelsesfilter && (
                 <>
