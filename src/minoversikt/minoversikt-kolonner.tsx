@@ -22,8 +22,6 @@ import {
     avvik14aVedtakAvhengigeFilter,
     I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelsevalg
 } from '../filtrering/filter-konstanter';
@@ -248,18 +246,12 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraNAV}
-                skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={venterPaSvarFraBruker}
-                skalVises={
-                    !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                    valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
             />
             {visKolonnerForHendelsesfilter && (
                 <>

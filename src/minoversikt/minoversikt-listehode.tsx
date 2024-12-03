@@ -10,8 +10,6 @@ import {
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
     I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
-    VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
@@ -226,10 +224,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_NAV) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
                     rekkefolge={sorteringsrekkefolge}
@@ -239,10 +234,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(VENTER_PA_SVAR_FRA_BRUKER) &&
-                        valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
                     sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
                     rekkefolge={sorteringsrekkefolge}
