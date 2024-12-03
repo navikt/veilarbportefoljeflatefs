@@ -8,7 +8,6 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
     ytelseAapSortering,
     ytelseUtlopsSortering
@@ -342,10 +341,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                        valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                     sortering={Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
@@ -355,10 +351,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                        valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
                     sortering={Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}
@@ -368,10 +361,7 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                        valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
                     sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     erValgt={sorteringsfelt === Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
                     rekkefolge={sorteringsrekkefolge}

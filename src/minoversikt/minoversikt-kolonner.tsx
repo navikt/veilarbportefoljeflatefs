@@ -20,7 +20,6 @@ import BrukerFnr from '../components/tabell/brukerfnr';
 import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
 import {
     avvik14aVedtakAvhengigeFilter,
-    I_AVTALT_AKTIVITET,
     UNDER_VURDERING,
     ytelseAapSortering,
     ytelsevalg
@@ -318,26 +317,17 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
-                skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                    valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
-                skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                    valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
             />
             <DatoKolonne
                 className="col col-xs-2"
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
-                skalVises={
-                    !!ferdigfilterListe?.includes(I_AVTALT_AKTIVITET) &&
-                    valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
             {!!ferdigfilterListe?.includes(UNDER_VURDERING) && (
                 <>
