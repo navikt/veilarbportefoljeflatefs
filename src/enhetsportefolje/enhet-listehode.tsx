@@ -54,6 +54,9 @@ import {AvtaltAktivitet} from '../components/tabell/headerceller/AvtaltAktivitet
 import {MoterIDag} from '../components/tabell/headerceller/MoterIDag';
 import {MoteVarighet} from '../components/tabell/headerceller/MoteVarighet';
 import {Motestatus} from '../components/tabell/headerceller/Motestatus';
+import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
+import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
+import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -253,36 +256,9 @@ function EnhetListehode({
                 <MoteVarighet {...sorteringTilHeadercelle} />
                 <Motestatus {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Status § 14a-vedtak"
-                    title="Status oppfølgingvedtak"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Statusendring"
-                    title="Dager siden fikk status"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Ansvarlig for vedtak"
-                    title="Ansvarlig veileder for vedtak"
-                    className="col col-xs-2"
-                />
+                <UnderVurderingVedtaksstatus {...sorteringTilHeadercelle} />
+                <UnderVurderingVedtaksstatusEndret {...sorteringTilHeadercelle} />
+                <UnderVurderingAnsvarligVeileder {...sorteringTilHeadercelle} />
 
                 <SisteEndring {...sorteringTilHeadercelle} />
                 <SisteEndringDato {...sorteringTilHeadercelle} />
