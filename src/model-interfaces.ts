@@ -275,7 +275,7 @@ export interface BrukerModell {
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string;
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
-    utgattVarsel: UtgattVarselModell | null;
+    utgattVarsel: UtgattVarselHendelse | null;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {

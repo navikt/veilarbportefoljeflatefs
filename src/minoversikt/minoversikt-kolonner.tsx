@@ -250,15 +250,15 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                     <LenkeKolonne
                         skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
                         bruker={bruker}
-                        lenke={bruker.utgattVarsel?.hendelse.lenke ?? ''}
-                        lenketekst={bruker.utgattVarsel?.hendelse.beskrivelse ?? ''}
+                        lenke={bruker.utgattVarsel?.lenke ?? ''}
+                        lenketekst={bruker.utgattVarsel?.beskrivelse ?? ''}
                         erAbsoluttLenke={true}
                         enhetId={enhetId}
                         className="col col-xs-2-5"
                     />
                     <DatoKolonne
                         skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-                        dato={bruker.utgattVarsel?.hendelse.dato ? new Date(bruker.utgattVarsel?.hendelse.dato) : null}
+                        dato={bruker.utgattVarsel?.dato ? new Date(bruker.utgattVarsel?.dato) : null}
                         className="col col-xs-2"
                     />
                 </>
