@@ -11,7 +11,6 @@ import {
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {AktiviteterValg} from '../ducks/filtrering';
-import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.css';
 import './brukerliste.css';
@@ -57,6 +56,8 @@ import {Motestatus} from '../components/tabell/headerceller/Motestatus';
 import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
 import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
 import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
+import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
+import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -139,23 +140,9 @@ function EnhetListehode({
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
 
-                <Header
-                    skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                    headerTestId="sorteringheader_veileder"
-                    className="col col-xs-2"
-                >
-                    Veileder
-                </Header>
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-                    sortering={Sorteringsfelt.NAVIDENT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.NAVIDENT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="NAV-ident"
-                    title="NAV-ident på tildelt veileder"
-                    className="header__veilederident col col-xs-2"
-                />
+                <VeilederNavn {...sorteringTilHeadercelle} />
+                <VeilederNavident {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={
                         erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)

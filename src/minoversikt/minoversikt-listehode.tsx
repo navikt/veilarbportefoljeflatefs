@@ -1,5 +1,4 @@
 import SorteringHeader from '../components/tabell/sortering-header';
-import SorteringHeaderIkon from '../components/tabell/sortering-header-ikon';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
@@ -16,8 +15,6 @@ import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
-import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -59,6 +56,8 @@ import {Motestatus} from '../components/tabell/headerceller/Motestatus';
 import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
 import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
 import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
+import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
+import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -124,27 +123,12 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
+
             <div className="brukerliste__minoversikt-ikonknapper">
-                <SorteringHeaderIkon
-                    ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                    sortering={Sorteringsfelt.FARGEKATEGORI}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    title="Fargekategori-sortering"
-                    headerId="fargekategori"
-                />
-                <SorteringHeaderIkon
-                    ikon={<HuskelappIkon aria-hidden />}
-                    sortering={Sorteringsfelt.HUSKELAPP}
-                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    title="Huskelapp-sortering"
-                    headerId="huskelapp"
-                    className="huskelapp__sorteringsheader"
-                />
+                <Fargekategori {...sorteringTilHeadercelle} />
+                <Huskelapp {...sorteringTilHeadercelle} />
             </div>
+
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
