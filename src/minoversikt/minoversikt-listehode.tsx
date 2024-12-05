@@ -1,5 +1,4 @@
 import SorteringHeader from '../components/tabell/sortering-header';
-import SorteringHeaderIkon from '../components/tabell/sortering-header-ikon';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {AktiviteterValg} from '../ducks/filtrering';
 import {
@@ -12,13 +11,10 @@ import {
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
 import {Kolonne} from '../ducks/ui/listevisning';
-import Header from '../components/tabell/header';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
-import {ReactComponent as HuskelappIkon} from '../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -42,6 +38,26 @@ import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/Gjel
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
 import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
 import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
+import {TiltakshendelseDatoOpprettet} from '../components/tabell/headerceller/TiltakshendelseDatoOpprettet';
+import {TiltakshendelseLenke} from '../components/tabell/headerceller/TiltakshendelseLenke';
+import {EnsligeForsorgereOmBarnet} from '../components/tabell/headerceller/EnsligeForsorgereOmBarnet';
+import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/headerceller/EnsligeForsorgereAktivitetsplikt';
+import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/headerceller/EnsligeForsorgereVedtaksperiode';
+import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/headerceller/EnsligeForsorgereUtlopOvergangsstonad';
+import {SisteEndringDato} from '../components/tabell/headerceller/SisteEndringDato';
+import {SisteEndring} from '../components/tabell/headerceller/SisteEndring';
+import {VenterPaSvarFraNav} from '../components/tabell/headerceller/VenterPaSvarFraNav';
+import {VenterPaSvarFraBruker} from '../components/tabell/headerceller/VenterPaSvarFraBruker';
+import {UtlopteAktiviteter} from '../components/tabell/headerceller/UtlopteAktiviteter';
+import {AvtaltAktivitet} from '../components/tabell/headerceller/AvtaltAktivitet';
+import {MoterIDag} from '../components/tabell/headerceller/MoterIDag';
+import {MoteVarighet} from '../components/tabell/headerceller/MoteVarighet';
+import {Motestatus} from '../components/tabell/headerceller/Motestatus';
+import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
+import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
+import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
+import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
+import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -107,27 +123,12 @@ function MinOversiktListeHode({
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
+
             <div className="brukerliste__minoversikt-ikonknapper">
-                <SorteringHeaderIkon
-                    ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}
-                    sortering={Sorteringsfelt.FARGEKATEGORI}
-                    erValgt={sorteringsfelt === Sorteringsfelt.FARGEKATEGORI}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    title="Fargekategori-sortering"
-                    headerId="fargekategori"
-                />
-                <SorteringHeaderIkon
-                    ikon={<HuskelappIkon aria-hidden />}
-                    sortering={Sorteringsfelt.HUSKELAPP}
-                    erValgt={sorteringsfelt === Sorteringsfelt.HUSKELAPP}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    title="Huskelapp-sortering"
-                    headerId="huskelapp"
-                    className="huskelapp__sorteringsheader"
-                />
+                <Fargekategori {...sorteringTilHeadercelle} />
+                <Huskelapp {...sorteringTilHeadercelle} />
             </div>
+
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <Navn {...sorteringTilHeadercelle} />
                 <Fnr {...sorteringTilHeadercelle} />
@@ -217,112 +218,27 @@ function MinOversiktListeHode({
                     title="Gjenstående uker av rettighetsperioden for AAP"
                     className="col col-xs-2"
                 />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
-                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_NAV}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato på melding"
-                    title='Dato på meldingen som er merket "Venter på svar fra NAV"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
-                    sortering={Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VENTER_PA_SVAR_FRA_BRUKER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato på melding"
-                    title='Dato på meldingen som er merket "Venter på svar fra bruker"'
-                    className="col col-xs-2"
-                />
+
+                <VenterPaSvarFraNav {...sorteringTilHeadercelle} />
+                <VenterPaSvarFraBruker {...sorteringTilHeadercelle} />
+
                 {visKolonnerForHendelsesfilter && (
                     <>
                         <FilterhendelseLenke {...sorteringTilHeadercelle} />
                         <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
                     </>
                 )}
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
-                    sortering={Sorteringsfelt.UTLOPTE_AKTIVITETER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTLOPTE_AKTIVITETER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Utløpsdato aktivitet"
-                    title='Utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
-                    sortering={Sorteringsfelt.I_AVTALT_AKTIVITET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.I_AVTALT_AKTIVITET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Neste utløpsdato aktivitet"
-                    title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    headerTestId="sorteringheader_i-avtalt-aktivitet"
-                    className="col col-xs-2"
-                />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-                    sortering={Sorteringsfelt.MOTER_MED_NAV_IDAG}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTER_MED_NAV_IDAG}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Klokkeslett møte"
-                    title="Tidspunktet møtet starter"
-                    className="col col-xs-2"
-                />
-                <Header
-                    skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-                    title="Varighet på møtet"
-                    className="col col-xs-2"
-                >
-                    Varighet møte
-                </Header>
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
-                    sortering={Sorteringsfelt.MOTESTATUS}
-                    erValgt={sorteringsfelt === Sorteringsfelt.MOTESTATUS}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Avtalt med NAV"
-                    title="Møtestatus"
-                    className="col col-xs-2"
-                />
+                <UtlopteAktiviteter {...sorteringTilHeadercelle} />
+                <AvtaltAktivitet {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Status § 14a-vedtak"
-                    title="Status oppfølgingvedtak"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-                    sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dager siden status"
-                    title="Dager siden status"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                    sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Ansvarlig for vedtak"
-                    title="Ansvarlig veileder for vedtak"
-                    className="col col-xs-2"
-                />
+                <MoterIDag {...sorteringTilHeadercelle} />
+                <MoteVarighet {...sorteringTilHeadercelle} />
+                <Motestatus {...sorteringTilHeadercelle} />
+
+                <UnderVurderingVedtaksstatus {...sorteringTilHeadercelle} />
+                <UnderVurderingVedtaksstatusEndret {...sorteringTilHeadercelle} />
+                <UnderVurderingAnsvarligVeileder {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
@@ -365,25 +281,8 @@ function MinOversiktListeHode({
                     className="col col-xs-2"
                 />
 
-                <Header
-                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                    title="Personens siste endring av aktiviteter/mål"
-                    className="col col-xs-2"
-                >
-                    Siste endring
-                </Header>
-                <SorteringHeader
-                    // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
-                    skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-                    sortering={Sorteringsfelt.SISTE_ENDRING_DATO}
-                    erValgt={sorteringsfelt === Sorteringsfelt.SISTE_ENDRING_DATO}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato personen sist gjorde endring i aktiviteter/mål"
-                    title="Dato siste endring"
-                    className="col col-xs-2"
-                />
+                <SisteEndring {...sorteringTilHeadercelle} />
+                <SisteEndringDato {...sorteringTilHeadercelle} />
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 
@@ -396,48 +295,11 @@ function MinOversiktListeHode({
                     </>
                 )}
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_UTLOP_YTELSE}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Utløp overgangsstønad"
-                    title="Utløpsdato for overgangsstønad"
-                    headerTestId="sorteringheader_utlop_overgangsstonad"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_VEDTAKSPERIODETYPE}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Type vedtaksperiode overgangsstønad"
-                    title="Type vedtaksperiode for overgangsstønad"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_AKTIVITETSPLIKT}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Om aktivitetsplikt overgangsstønad"
-                    title="Om bruker har aktivitetsplikt på overgangsstønad"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
-                    sortering={Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.ENSLIGE_FORSORGERE_OM_BARNET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Om barnet"
-                    title="Dato når barnet er hhv. 6 mnd/1 år gammelt"
-                    headerTestId="sorteringheader_enslige-forsorgere-om-barnet"
-                    className="col col-xs-2"
-                />
+                <EnsligeForsorgereUtlopOvergangsstonad {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereVedtaksperiode {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereAktivitetsplikt {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereOmBarnet {...sorteringTilHeadercelle} />
+
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
 
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
@@ -445,26 +307,8 @@ function MinOversiktListeHode({
                 <HuskelappKommentar {...sorteringTilHeadercelle} />
                 <HuskelappFrist {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_TEKST}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Hendelse på tiltak"
-                    title="Lenke til hendelsen"
-                    className="col col-xs-3"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
-                    sortering={Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    erValgt={sorteringsfelt === Sorteringsfelt.TILTAKSHENDELSE_DATO_OPPRETTET}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Dato for hendelse"
-                    title="Dato da hendelsen ble opprettet"
-                    className="col col-xs-2"
-                />
+                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

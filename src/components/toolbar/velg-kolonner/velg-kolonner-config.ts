@@ -32,7 +32,10 @@ alternativerConfig.set(Kolonne.MOTER_VARIGHET, {tekstlabel: 'Varighet møte'});
 alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med NAV'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status § 14 a-vedtak (ny løsning)'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {
-    tekstlabel: 'Tidspunkt for endring av status § 14 a-vedtak (ny løsning)'
+    tekstlabel: 'Dager siden statusendring på utkast for § 14 a-vedtak (ny løsning)'
+});
+alternativerConfig.set(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, {
+    tekstlabel: 'Ansvarlig veileder på utkast for § 14 a-vedtak (ny løsning)'
 });
 alternativerConfig.set(Kolonne.SISTE_ENDRING, {tekstlabel: 'Siste endring personen har gjort på aktivitet/mål'});
 alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {
