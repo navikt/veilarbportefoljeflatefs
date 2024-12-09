@@ -292,9 +292,9 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             </div>
             {visFilter14aFraVedtaksstotte && (
                 <div className="filtrering-filter__kolonne">
-                    <Label size="small">Oppfølgingsvedtak (§ 14 a)</Label>
+                    <Label size="small">Oppfølgingsvedtak § 14 a</Label>
                     <Dropdown
-                        name="Gjeldende vedtak (§ 14 a)"
+                        name="Gjeldende vedtak § 14 a"
                         id="gjeldende-vedtak-14a"
                         render={() => (
                             <CheckboxFilterform
@@ -306,7 +306,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         )}
                     />
                     <Dropdown
-                        name="Innsatsgruppe (§ 14 a)"
+                        name="Innsatsgruppe"
                         id="innsatsgruppe-gjeldende-vedtak-14a"
                         render={() => (
                             <CheckboxFilterform
@@ -318,7 +318,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         )}
                     />
                     <Dropdown
-                        name="Hovedmål (§ 14 a)"
+                        name="Hovedmål"
                         id="hovedmal-gjeldende-vedtak-14a"
                         render={() => (
                             <CheckboxFilterform
