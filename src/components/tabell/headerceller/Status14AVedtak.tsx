@@ -1,7 +1,6 @@
 import {HeadercelleProps} from './HeadercelleProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import Header from '../header';
-import * as React from 'react';
 
 export const Status14AVedtak = ({valgteKolonner}: HeadercelleProps) => (
     // Dette er den som samanliknar gjeldande vedtak og "den i Arena". Viser om det er skilnad mellom kjeldene.

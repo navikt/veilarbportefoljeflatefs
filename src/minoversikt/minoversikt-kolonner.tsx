@@ -417,7 +417,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <TekstKolonne
                 tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFodselsdato)}
                 skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
-                className="col col-xs-2"
+                className="col col-xs-3"
             />
             <TekstKolonne
                 className="col col-xs-2"
