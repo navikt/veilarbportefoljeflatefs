@@ -412,6 +412,12 @@ export const hovedmalGjeldendeVedtak14a = {
     [Hovedmal.OKE_DELTAKELSE]: {label: 'Øke deltakelse eller mål om arbeid (kun Arena)'}
 };
 
+export const hovedmalGjeldendeVedtak14aFiltertagtekst = {
+    [Hovedmal.SKAFFE_ARBEID]: {label: 'Skaffe arbeid § 14 a'},
+    [Hovedmal.BEHOLDE_ARBEID]: {label: 'Beholde arbeid § 14 a'},
+    [Hovedmal.OKE_DELTAKELSE]: {label: 'Øke deltakelse eller mål om arbeid (kun Arena)'}
+};
+
 export const avvik14aVedtakHovedFilter = {
     [HAR_AVVIK]: {label: 'Status'}
 };
@@ -472,5 +478,5 @@ export const filterKonstanter = {
     barnUnder18Aar,
     fargekategorier,
     innsatsgruppeGjeldendeVedtak14a,
-    hovedmalGjeldendeVedtak14a
+    hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst
 };
