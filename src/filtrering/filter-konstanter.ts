@@ -390,8 +390,8 @@ export const hendelserEtikett = {
 };
 
 export const gjeldendeVedtak14a = {
-    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak (§ 14 a)'},
-    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak (§ 14 a)'}
+    [HAR_14A_VEDTAK]: {label: 'Har gjeldende vedtak § 14 a'},
+    [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak § 14 a'}
 };
 
 /** Lange namn på innsatsgrupper.
