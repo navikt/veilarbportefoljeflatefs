@@ -55,11 +55,11 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
         <div className="filtrering-veiledere" ref={wrapperRef}>
             <TextField
                 label="Søk veileder"
-                placeholder="Navn eller NAV-ident"
+                placeholder="Navn eller Nav-ident"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVeilederNavnQuery(e.target.value)}
                 value={veilederNavnQuery}
                 data-testid="veilederoversikt_sok-veileder-input"
-                aria-label="Navn eller NAV-ident"
+                aria-label="Navn eller Nav-ident"
             />
             <VeilederCheckboxListe nullstillInputfelt={nullstillInputfelt} />
         </div>

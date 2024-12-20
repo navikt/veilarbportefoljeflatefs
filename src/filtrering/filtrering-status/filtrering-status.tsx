@@ -103,7 +103,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         <Detail>{`Ufordelte brukere (${statustallUtenBrukerinnsyn.ufordelteBrukere})`}</Detail>
                     )}
                     {statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0 && (
-                        <Detail>{`Venter på svar fra NAV (${statustallUtenBrukerinnsyn.venterPaSvarFraNAV})`}</Detail>
+                        <Detail>{`Venter på svar fra Nav (${statustallUtenBrukerinnsyn.venterPaSvarFraNAV})`}</Detail>
                     )}
                     <br />
                     <Detail>

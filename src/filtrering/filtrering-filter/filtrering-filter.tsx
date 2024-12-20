@@ -509,14 +509,14 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Aktivitet</Label>
                 <Dropdown
-                    name="Aktivitet (avtalt med NAV)"
+                    name="Aktivitet (avtalt med Nav)"
                     id="aktivitet"
                     render={() => (
                         <AktivitetFilterformController filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown
-                    name="Tiltakstype (avtalt med NAV)"
+                    name="Tiltakstype (avtalt med Nav)"
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
@@ -530,7 +530,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
                 <Dropdown
-                    name="Stilling fra NAV (dele CV med arbeidsgiver)"
+                    name="Stilling fra Nav (dele CV med arbeidsgiver)"
                     id="stillingFraNav"
                     render={() => (
                         <CheckboxFilterform

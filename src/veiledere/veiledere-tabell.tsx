@@ -95,7 +95,7 @@ function VeilederTabell({
                                 </div>
                             </th>
                             <th scope="col" className="tabellheader__tekst">
-                                NAV-ident
+                                Nav-ident
                             </th>
                             <th className="tabellheader tabell-element-center" scope="col">
                                 <div

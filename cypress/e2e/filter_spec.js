@@ -187,7 +187,7 @@ describe('Filter', () => {
         // No skal ein kunne nullstille aktivitetfilter
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').should('be.enabled');
 
-        // Vel filter "Tiltak gjennom NAV", får opp filtertag
+        // Vel filter "Tiltak gjennom Nav", får opp filtertag
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
         cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
 
@@ -221,11 +221,11 @@ describe('Filter', () => {
         cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.enabled');
         cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke-ja').should('be.visible');
 
-        // Hukar av for "ja" på "Tiltak gjennom NAV" også, får rett filtertag
+        // Hukar av for "ja" på "Tiltak gjennom Nav" også, får rett filtertag
         cy.getByTestId('aktivitet-filterform-TILTAK-ja').check({force: true});
         cy.getByTestId('filtreringlabel_tiltak-gjennom-nav-ja').should('be.visible');
 
-        // Hukar av for "ja" på "Møte med NAV", får rett filtertag
+        // Hukar av for "ja" på "Møte med Nav", får rett filtertag
         cy.getByTestId('aktivitet-filterform-MOTE-ja').check({force: true});
         cy.getByTestId('filtreringlabel_mote-med-nav-ja').should('be.visible');
 

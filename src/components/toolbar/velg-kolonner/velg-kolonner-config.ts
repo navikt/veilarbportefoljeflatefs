@@ -7,7 +7,7 @@ interface Alternativ {
 export const alternativerConfig = new Map<Kolonne, Alternativ>();
 alternativerConfig.set(Kolonne.OPPFOLGING_STARTET, {tekstlabel: 'Oppfølging startet'});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
-alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'NAV-ident'});
+alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'Nav-ident'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_NAV_DATO, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
@@ -29,7 +29,7 @@ alternativerConfig.set(Kolonne.NESTE_START_DATO_AKTIVITET, {tekstlabel: 'Neste s
 alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstlabel: 'Passert startdato aktivitet'});
 alternativerConfig.set(Kolonne.MOTER_IDAG, {tekstlabel: 'Klokkeslett møte'});
 alternativerConfig.set(Kolonne.MOTER_VARIGHET, {tekstlabel: 'Varighet møte'});
-alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med NAV'});
+alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med Nav'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status § 14 a-vedtak (ny løsning)'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {
     tekstlabel: 'Dager siden statusendring på utkast for § 14 a-vedtak (ny løsning)'

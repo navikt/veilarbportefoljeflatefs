@@ -39,5 +39,5 @@ export const innloggetVeileder = veiledere[0];
 
 export const veilederResponse = {
     veilederListe: veiledere,
-    enhet: {enhetId: '1234', navn: 'NAV Testheim'}
+    enhet: {enhetId: '1234', navn: 'Nav Testheim'}
 };

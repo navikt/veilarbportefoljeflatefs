@@ -80,7 +80,7 @@ export const endringsloggListe = [
                         _key: '62917a3a33040',
                         _type: 'span',
                         marks: [],
-                        text: 'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra\nNAV» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller\nnei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.'
+                        text: 'Du kan nå gå til kandidatlisten i rekrutteringsbistand, og opprette et nytt aktivitetskort «stilling fra\nNav» som legger seg i brukers aktivitetsplan. Bruker blir varslet på sms/epost og kan da svare ja eller\nnei på om de ønsker at CV-en skal bli delt med arbeidsgiver. Svaret sendes tilbake til kandidatlisten.'
                     }
                 ],
                 markDefs: [],
@@ -368,7 +368,7 @@ export const endringsloggListe = [
                         _key: '7f364989f5c2',
                         _type: 'span',
                         marks: [],
-                        text: 'Alle møter vises også i filteret "Møter med NAV i dag" på Min oversikt og Enhetens oversikt, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
+                        text: 'Alle møter vises også i filteret "Møter med Nav i dag" på Min oversikt og Enhetens oversikt, ikke bare de som er markert "Avtalt med Nav" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med Nav", og kolonnen kan sorteres på.'
                     }
                 ],
                 level: 1,
@@ -397,7 +397,7 @@ export const endringsloggListe = [
                                     _key: '972a0d76c3bf',
                                     _type: 'span',
                                     marks: [],
-                                    text: 'I øvre høyre hjørne finner du møteplanen, og du kan klikke deg inn på de brukerne du har planlagt møter med. En egen kolonne viser om møtet er markert "Avtalt med NAV" eller ikke.'
+                                    text: 'I øvre høyre hjørne finner du møteplanen, og du kan klikke deg inn på de brukerne du har planlagt møter med. En egen kolonne viser om møtet er markert "Avtalt med Nav" eller ikke.'
                                 }
                             ],
                             markDefs: [],
@@ -406,7 +406,7 @@ export const endringsloggListe = [
                     ]
                 },
                 {
-                    slideHeader: 'Alle møter også i filteret "Møte med NAV i dag"',
+                    slideHeader: 'Alle møter også i filteret "Møte med Nav i dag"',
                     slideDescription: [
                         {
                             _key: '33d5318a43d9',
@@ -416,7 +416,7 @@ export const endringsloggListe = [
                                     _key: '2542620d5a23',
                                     _type: 'span',
                                     marks: [],
-                                    text: 'Alle møter vises i filteret "Møter med NAV i dag" nå, ikke bare de som er markert "Avtalt med NAV" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med NAV", og kolonnen kan sorteres på.'
+                                    text: 'Alle møter vises i filteret "Møter med Nav i dag" nå, ikke bare de som er markert "Avtalt med Nav" i aktivitetsplanen. En egen kolonne viser om møtet er "Avtalt med Nav", og kolonnen kan sorteres på.'
                                 }
                             ],
                             markDefs: [],
@@ -574,7 +574,7 @@ export const endringsloggListe = [
                         _key: 'c93928c899010',
                         _type: 'span',
                         marks: [],
-                        text: 'Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom NAV” fra aktivitetsfilteret.'
+                        text: 'Du kan nå filtrere direkte på tiltakstyper uten først å måtte velge “Tiltak gjennom Nav” fra aktivitetsfilteret.'
                     }
                 ],
                 markDefs: [],
@@ -630,7 +630,7 @@ export const endringsloggListe = [
                         _key: 'b59fdb452024',
                         _type: 'span',
                         marks: [],
-                        text: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med NAV. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.'
+                        text: 'Nå kan du filtrere på brukere som har/ikke har delt CV og jobbprofil med Nav. Da blir det enklere å identifisere og prioritere hvilke brukere som kan ha behov for råd og veiledning i registrering av CV og jobbprofil på arbeidsplassen.no.'
                     }
                 ],
                 markDefs: [],
@@ -737,7 +737,7 @@ export const endringsloggListe = [
                         _key: '1c4ebe6a67c4',
                         _type: 'span',
                         marks: [],
-                        text: 'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt NAV om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen. '
+                        text: 'Fra mandag 3. august vil noen brukere få notifikasjon på forsiden av Ditt Nav om utfylling av CV og jobbprofil. Vi tester ut om flere brukere da legger inn sin CV raskere. Dersom resultatene er gode, får alle brukere denne notifikasjonen. '
                     }
                 ],
                 markDefs: [],
