@@ -46,7 +46,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
+import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
@@ -61,7 +61,6 @@ interface EnhetKolonnerProps {
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
-    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
     const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
@@ -217,20 +216,16 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
                 }
             />
-            {vis_kolonner_for_vurderingsfrist_aap && (
-                <TekstKolonne
-                    className="col col-xs-2"
-                    skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
-                    tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
-                />
-            )}
-            {vis_kolonner_for_vurderingsfrist_aap && (
-                <TekstKolonne
-                    className="col col-xs-2"
-                    skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
-                    tekst={vurderingsfristAAP || '–'}
-                />
-            )}
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                tekst={vurderingsfristAAP || '–'}
+            />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
