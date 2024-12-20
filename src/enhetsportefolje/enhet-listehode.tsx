@@ -16,7 +16,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
+import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -85,7 +85,6 @@ function EnhetListehode({
     valgteKolonner
 }: EnhetListehodeProps) {
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
-    const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
     const {ytelse} = filtervalg;
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -213,12 +212,8 @@ function EnhetListehode({
                 <VenterPaSvarFraNav {...sorteringTilHeadercelle} />
                 <VenterPaSvarFraBruker {...sorteringTilHeadercelle} />
 
-                {visKolonnerForHendelsesfilter && (
-                    <>
-                        <FilterhendelseLenke {...sorteringTilHeadercelle} />
-                        <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
-                    </>
-                )}
+                <FilterhendelseLenke {...sorteringTilHeadercelle} />
+                <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
 
                 <UtlopteAktiviteter {...sorteringTilHeadercelle} />
                 <AvtaltAktivitet {...sorteringTilHeadercelle} />
