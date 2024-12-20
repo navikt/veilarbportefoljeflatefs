@@ -16,7 +16,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
+import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
 import {Fodeland} from '../components/tabell/headerceller/Fodeland';
@@ -84,7 +84,6 @@ function EnhetListehode({
     sorteringsfelt,
     valgteKolonner
 }: EnhetListehodeProps) {
-    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
     const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
@@ -170,30 +169,26 @@ function EnhetListehode({
                     title="Gjenstående uker på gjeldende vedtak tiltakspenger"
                     className="col col-xs-2"
                 />
-                {vis_kolonner_for_vurderingsfrist_aap && (
-                    <SorteringHeader
-                        skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
-                        sortering={aapPeriodetype}
-                        erValgt={sorteringsfelt === aapPeriodetype}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        tekst="Type AAP-periode"
-                        title="Type AAP-periode"
-                        className="col col-xs-2"
-                    />
-                )}
-                {vis_kolonner_for_vurderingsfrist_aap && (
-                    <SorteringHeader
-                        skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
-                        sortering={aapVurderingsfrist}
-                        erValgt={sorteringsfelt === aapVurderingsfrist}
-                        rekkefolge={sorteringsrekkefolge}
-                        onClick={sorteringOnClick}
-                        tekst="Frist vurdering rett AAP"
-                        title="Omtrentlig frist for ny vurdering av AAP"
-                        className="col col-xs-2"
-                    />
-                )}
+                <SorteringHeader
+                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                    sortering={aapPeriodetype}
+                    erValgt={sorteringsfelt === aapPeriodetype}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Type AAP-periode"
+                    title="Type AAP-periode"
+                    className="col col-xs-2"
+                />
+                <SorteringHeader
+                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
+                    sortering={aapVurderingsfrist}
+                    erValgt={sorteringsfelt === aapVurderingsfrist}
+                    rekkefolge={sorteringsrekkefolge}
+                    onClick={sorteringOnClick}
+                    tekst="Frist vurdering rett AAP"
+                    title="Omtrentlig frist for ny vurdering av AAP"
+                    className="col col-xs-2"
+                />
                 <SorteringHeader
                     skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                     sortering={aapVedtakssperiode}

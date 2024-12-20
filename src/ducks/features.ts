@@ -6,7 +6,6 @@ import {
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
     VEDTAKSTOTTE,
-    VIS_AAP_VURDERINGSFRISTKOLONNER,
     VIS_FILTER_14A_FRA_VEDTAKSSTOTTE
 } from '../konstanter';
 
@@ -21,7 +20,6 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [VIS_AAP_VURDERINGSFRISTKOLONNER]: false,
     [VIS_FILTER_14A_FRA_VEDTAKSSTOTTE]: false
 };
 
