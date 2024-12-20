@@ -17,8 +17,8 @@ import {
     TRENGER_VURDERING,
     UFORDELTE_BRUKERE,
     UNDER_VURDERING,
-    UTLOPTE_AKTIVITETER,
     UTGATTE_VARSEL,
+    UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
@@ -27,11 +27,7 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    VEDTAKSTOTTE,
-    VIS_HENDELSESFILTER,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
-} from '../../konstanter';
+import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -51,11 +47,11 @@ interface FiltreringStatusProps {
 }
 
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
+    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erHendelsesfilterFeatureTogglePa = useFeatureSelector()(VIS_HENDELSESFILTER);
     const visBrukereMedAdressebeskyttelseEllerSkjermingStatus =
         useFeatureSelector()(VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING) &&
         oversiktType === OversiktType.enhetensOversikt &&
@@ -194,16 +190,13 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
-                    {erHendelsesfilterFeatureTogglePa && (
-                        <BarInputRadio
-                            filterNavn="utgatteVarsel"
-                            antall={statustallMedBrukerinnsyn.utgatteVarsel}
-                            handleChange={handleRadioButtonChange}
-                            filterVerdi={UTGATTE_VARSEL}
-                            labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
-                        />
-                    )}
-
+                    <BarInputRadio
+                        filterNavn="utgatteVarsel"
+                        antall={statustallMedBrukerinnsyn.utgatteVarsel}
+                        handleChange={handleRadioButtonChange}
+                        filterVerdi={UTGATTE_VARSEL}
+                        labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
+                    />
                     <BarInputRadio
                         filterNavn="utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
