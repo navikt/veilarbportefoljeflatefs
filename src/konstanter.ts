@@ -14,7 +14,6 @@ export const ALERTSTRIPE_FEILMELDING = 'veilarbportefoljeflatefs.alertstripe_fei
 export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefoljeflatefs.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
 export const VIS_AAP_VURDERINGSFRISTKOLONNER = 'veilarbportefoljeflatefs.vis_kolonner_for_vurderingsfrist_aap';
-export const FILTER_FOR_PERSONER_MED_BARN_UNDER_18 = 'veilarbportefoljeflatefs.filter_for_personer_med_barn_under_18';
 export const VIS_FILTER_14A_FRA_VEDTAKSSTOTTE = 'veilarbdetaljerfs.vis_innsatsgruppe_hovedmal_fra_veilarbvedtaksstotte';
 export const VIS_HENDELSESFILTER = 'veilarbportefoljeflatefs.vis_hendelsesfilter';
 
@@ -25,7 +24,6 @@ export const PORTEFOLJE_FEATURES = [
     ALERTSTRIPE_FEILMELDING,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAP_VURDERINGSFRISTKOLONNER,
-    FILTER_FOR_PERSONER_MED_BARN_UNDER_18,
     VIS_FILTER_14A_FRA_VEDTAKSSTOTTE,
     VIS_HENDELSESFILTER
 ];
