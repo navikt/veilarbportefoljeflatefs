@@ -95,9 +95,9 @@ export const ferdigfilterListeLabelTekst = {
     [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
     [TRENGER_VURDERING]: 'Trenger vurdering',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
-    [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra NAV',
+    [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra Nav',
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
-    [MOTER_IDAG]: 'Møte med NAV i dag',
+    [MOTER_IDAG]: 'Møte med Nav i dag',
     [TILTAKSHENDELSER]: 'Hendelser på tiltak',
     [UTGATTE_VARSEL]: 'Utgåtte varsel',
     [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
@@ -177,7 +177,7 @@ export const formidlingsgruppe = {
 export const servicegruppe = {
     BKART: {label: 'Behov for arbeidsevnevurdering'},
     IVURD: {label: 'Ikke vurdert'},
-    OPPFI: {label: 'Helserelatert arbeidsrettet oppfølging i NAV'},
+    OPPFI: {label: 'Helserelatert arbeidsrettet oppfølging i Nav'},
     VURDI: {label: 'Sykmeldt oppfølging på arbeidsplassen'},
     VURDU: {label: 'Sykmeldt uten arbeidsgiver'}
 };
@@ -266,17 +266,17 @@ export const aktiviteter = {
     SOKEAVTALE: 'Avtale om å søke jobber',
     STILLING: 'Stilling bruker skal søke',
     BEHANDLING: 'Medisinsk behandling',
-    TILTAK: 'Tiltak gjennom NAV',
+    TILTAK: 'Tiltak gjennom Nav',
     EGEN: 'Jobbrettet egenaktivitet',
     IJOBB: 'Jobb bruker har nå',
-    MOTE: 'Møte med NAV',
+    MOTE: 'Møte med Nav',
     GRUPPEAKTIVITET: 'Gruppeaktivitet',
     UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
 
 export const cvJobbprofil = {
-    HAR_DELT_CV: {label: 'CV delt med NAV'},
-    HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med NAV'}
+    HAR_DELT_CV: {label: 'CV delt med Nav'},
+    HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med Nav'}
 };
 
 export const stillingFraNavFilter = {

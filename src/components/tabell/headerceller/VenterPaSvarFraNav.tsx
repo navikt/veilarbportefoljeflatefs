@@ -16,7 +16,7 @@ export const VenterPaSvarFraNav = ({
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Dato på melding"
-        title='Dato på meldingen som er merket "Venter på svar fra NAV"'
+        title='Dato på meldingen som er merket "Venter på svar fra Nav"'
         className="col col-xs-2"
     />
 );

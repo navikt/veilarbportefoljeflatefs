@@ -20,7 +20,7 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
                     <Table.Row className="moteplan_tabell_tittelrad">
                         <Table.HeaderCell>Klokkeslett</Table.HeaderCell>
                         <Table.HeaderCell>Deltaker</Table.HeaderCell>
-                        <Table.HeaderCell>Avtalt med NAV</Table.HeaderCell>
+                        <Table.HeaderCell>Avtalt med Nav</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>

@@ -10,7 +10,7 @@ export const Motestatus = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge,
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.MOTESTATUS}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Avtalt med NAV"
+        tekst="Avtalt med Nav"
         title="Møtestatus"
         className="col col-xs-2"
     />

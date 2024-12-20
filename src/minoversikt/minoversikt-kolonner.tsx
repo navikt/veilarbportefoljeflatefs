@@ -276,7 +276,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             />
             <TekstKolonne
                 className="col col-xs-2"
-                tekst={moteErAvtaltMedNAV ? 'Avtalt med NAV' : '-'}
+                tekst={moteErAvtaltMedNAV ? 'Avtalt med Nav' : '-'}
                 skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
 

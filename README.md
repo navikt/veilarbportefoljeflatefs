@@ -53,7 +53,7 @@ ignore-fil med riktig navn i det gitte git prosjektet du står i. Se forøvrig g
 
 `git config --global --unset blame.ignoreRevsFile`
 
-## For NAV-ansatte
+## For Nav-ansatte
 
 Interne henvendelser kan sendes via Slack i kanalen #team-obo-poao.
 

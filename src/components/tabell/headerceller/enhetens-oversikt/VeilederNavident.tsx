@@ -10,8 +10,8 @@ export const VeilederNavident = ({gjeldendeSorteringsfelt, valgteKolonner, rekke
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.NAVIDENT}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="NAV-ident"
-        title="NAV-ident på tildelt veileder"
+        tekst="Nav-ident"
+        title="Nav-ident på tildelt veileder"
         className="header__veilederident col col-xs-2"
     />
 );

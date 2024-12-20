@@ -106,7 +106,7 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
                             Tilbakemelding
                         </Heading>
                         <BodyShort size="small" className="tilbakemelding-modal__ingress">
-                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med NAV" og
+                            Vi gjør en anonym kartlegging. Hvordan synes du det fungerer med "Avtalt med Nav" og
                             forhåndsorientering i aktivitetsplanen?
                         </BodyShort>
                         {visTilfredshet ? (

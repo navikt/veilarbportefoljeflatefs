@@ -3,7 +3,7 @@ const tiltak = {
         VV: 'Varig vernet arbeid (VVA)',
         OPPLT2AAR: '2-årig opplæringstiltak',
         TILPERBED: 'Tilretteleggingstilskudd for arbeidssøker',
-        UTVAOONAV: 'Utvidet oppfølging i NAV',
+        UTVAOONAV: 'Utvidet oppfølging i Nav',
         TILRTILSK: 'Forebyggings- og tilretteleggingstilskudd IA virksomheter og BHT-honorar',
         AMOY: 'Arbeidsmarkedsopplæring (AMO) yrkeshemmede',
         FUNKSJASS: 'Funksjonsassistanse',
