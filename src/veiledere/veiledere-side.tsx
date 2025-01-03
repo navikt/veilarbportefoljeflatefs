@@ -76,7 +76,7 @@ function VeiledereSide() {
                         <Panel className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Panel>
-                        <MetrikkEkspanderbartpanel lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                        <MetrikkEkspanderbartpanel tittel="Veiledergrupper" lamellNavnForLogging="veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                         </MetrikkEkspanderbartpanel>
                     </div>

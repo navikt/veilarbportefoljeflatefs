@@ -7,12 +7,12 @@ import {finnSideNavn} from '../../middleware/metrics-middleware';
 import '../toolbar/toolbar.css';
 
 interface MetrikkEkspanderbartpanelProps extends EkspanderbartpanelBaseProps {
-    lamellNavn: string;
+    lamellNavnForLogging: string;
 }
 
 export function MetrikkEkspanderbartpanel({
-    lamellNavn,
     tittel,
+    lamellNavnForLogging,
     className,
     children
 }: PropsWithChildren<MetrikkEkspanderbartpanelProps>) {
@@ -21,7 +21,7 @@ export function MetrikkEkspanderbartpanel({
     const handleOnClick = () => {
         setIsApen(prevState => !prevState);
         logEvent('portefolje.metrikker.lamell', {
-            navn: lamellNavn,
+            navn: lamellNavnForLogging,
             apen: !isApen,
             sideNavn: finnSideNavn()
         });
