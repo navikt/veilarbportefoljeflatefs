@@ -37,7 +37,7 @@ import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_AAP_VURDERINGSFRISTKOLONNER, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE, VIS_HENDELSESFILTER} from '../konstanter';
+import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './minoversikt.css';
@@ -50,9 +50,7 @@ interface MinOversiktKolonnerProps {
 }
 
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
-    const vis_kolonner_for_vurderingsfrist_aap = useFeatureSelector()(VIS_AAP_VURDERINGSFRISTKOLONNER);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
-    const visKolonnerForHendelsesfilter = useFeatureSelector()(VIS_HENDELSESFILTER);
 
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
@@ -200,20 +198,16 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
                 }
             />
-            {vis_kolonner_for_vurderingsfrist_aap && (
-                <TekstKolonne
-                    className="col col-xs-2"
-                    skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
-                    tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
-                />
-            )}
-            {vis_kolonner_for_vurderingsfrist_aap && (
-                <TekstKolonne
-                    className="col col-xs-2"
-                    skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
-                    tekst={vurderingsfristAAP || '–'}
-                />
-            )}
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+            />
+            <TekstKolonne
+                className="col col-xs-2"
+                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                tekst={vurderingsfristAAP || '–'}
+            />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
@@ -245,25 +239,20 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 dato={venterPaSvarFraBruker}
                 skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
             />
-            {visKolonnerForHendelsesfilter && (
-                <>
-                    <LenkeKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
-                        bruker={bruker}
-                        lenke={bruker.utgattVarsel?.lenke ?? ''}
-                        lenketekst={bruker.utgattVarsel?.beskrivelse ?? ''}
-                        erAbsoluttLenke={true}
-                        enhetId={enhetId}
-                        className="col col-xs-2-5"
-                    />
-                    <DatoKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-                        dato={bruker.utgattVarsel?.dato ? new Date(bruker.utgattVarsel?.dato) : null}
-                        className="col col-xs-2"
-                    />
-                </>
-            )}
-
+            <LenkeKolonne
+                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
+                bruker={bruker}
+                lenke={bruker.utgattVarsel?.lenke ?? ''}
+                lenketekst={bruker.utgattVarsel?.beskrivelse ?? ''}
+                erAbsoluttLenke={true}
+                enhetId={enhetId}
+                className="col col-xs-2-5"
+            />
+            <DatoKolonne
+                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
+                dato={bruker.utgattVarsel?.dato ? new Date(bruker.utgattVarsel?.dato) : null}
+                className="col col-xs-2"
+            />
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
