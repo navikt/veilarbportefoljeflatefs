@@ -30,10 +30,9 @@ interface Props {
     fanetittel: string;
     oversiktType: OversiktType;
     enhettiltak: OrNothing<Tiltak>;
-    lukkSidemeny: () => void;
 }
 
-export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak, lukkSidemeny}: Props) => {
+export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}: Props) => {
     const [isMinefiltereDraggable, setIsMinefiltereDraggable] = useState(false);
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
     const mineFilter = mineFilterState.data;
@@ -68,8 +67,8 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak,
     return (
         <SidebarTab
             tittel={fanetittel}
-            lukkSidemeny={lukkSidemeny}
             tab={valgtFane}
+            oversiktType={oversiktType}
             headingChildren={
                 <>
                     <HelpText placement="right" strategy="fixed">

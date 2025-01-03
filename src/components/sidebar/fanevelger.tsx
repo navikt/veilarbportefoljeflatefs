@@ -45,7 +45,7 @@ export const Fanevelger = ({
         case SidebarTabs.FILTER:
         case SidebarTabs.VEILEDERGRUPPER:
             return (
-                <SidebarTab tittel={fanetittel} lukkSidemeny={lukkSidemeny} tab={valgtFane}>
+                <SidebarTab tittel={fanetittel} tab={valgtFane} oversiktType={oversiktType}>
                     {valgtFane === SidebarTabs.STATUS && (
                         <FiltreringStatus oversiktType={oversiktType} filtervalg={filtervalg} statustall={statustall} />
                     )}
@@ -69,7 +69,6 @@ export const Fanevelger = ({
                     fanetittel={fanetittel}
                     enhettiltak={enhettiltak}
                     oversiktType={oversiktType}
-                    lukkSidemeny={lukkSidemeny}
                 />
             );
         default:
