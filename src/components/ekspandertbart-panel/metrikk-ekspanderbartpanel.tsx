@@ -1,24 +1,24 @@
 import {PropsWithChildren, useState} from 'react';
 import {ExpansionCard} from '@navikt/ds-react';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
+import {trackAmplitude} from '../../amplitude/amplitude';
 import '../toolbar/toolbar.css';
 
 interface Props {
     tittel: string;
-    lamellNavnForLogging: string;
 }
 
-export function MetrikkEkspanderbartpanel({tittel, lamellNavnForLogging, children}: PropsWithChildren<Props>) {
+export function MetrikkEkspanderbartpanel({tittel, children}: PropsWithChildren<Props>) {
     const [isApen, setIsApen] = useState(true);
 
     const handleOnClick = () => {
-        setIsApen(prevState => !prevState);
-        logEvent('portefolje.metrikker.lamell', {
-            navn: lamellNavnForLogging,
-            apen: !isApen,
-            sideNavn: finnSideNavn()
+        trackAmplitude({
+            name: isApen ? 'accordion lukket' : 'accordion åpnet',
+            data: {
+                tekst: tittel
+            }
         });
+
+        setIsApen(prevState => !prevState);
     };
 
     return (
