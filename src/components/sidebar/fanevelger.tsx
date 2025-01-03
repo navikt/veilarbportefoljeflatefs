@@ -69,6 +69,7 @@ export const Fanevelger = ({
                     fanetittel={fanetittel}
                     enhettiltak={enhettiltak}
                     oversiktType={oversiktType}
+                    lukkSidemeny={lukkSidemeny}
                 />
             );
         default:
