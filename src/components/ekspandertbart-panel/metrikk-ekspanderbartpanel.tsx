@@ -1,17 +1,16 @@
-import React, {PropsWithChildren, useState} from 'react';
+import {PropsWithChildren, useState} from 'react';
+import classNames from 'classnames';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import hiddenIf from '../hidden-if/hidden-if';
 import '../toolbar/toolbar.css';
-import classNames from 'classnames';
-import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
 
 interface MetrikkEkspanderbartpanelProps extends EkspanderbartpanelBaseProps {
     lamellNavn: string;
 }
 
-function MetrikkEkspanderbartpanel({
+export function MetrikkEkspanderbartpanel({
     lamellNavn,
     tittel,
     className,
@@ -36,5 +35,3 @@ function MetrikkEkspanderbartpanel({
         </div>
     );
 }
-
-export default hiddenIf(MetrikkEkspanderbartpanel);
