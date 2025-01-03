@@ -1,21 +1,15 @@
 import {PropsWithChildren, useState} from 'react';
-import classNames from 'classnames';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
+import {ExpansionCard} from '@navikt/ds-react';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import '../toolbar/toolbar.css';
 
-interface MetrikkEkspanderbartpanelProps extends EkspanderbartpanelBaseProps {
+interface Props {
+    tittel: string;
     lamellNavnForLogging: string;
 }
 
-export function MetrikkEkspanderbartpanel({
-    tittel,
-    lamellNavnForLogging,
-    className,
-    children
-}: PropsWithChildren<MetrikkEkspanderbartpanelProps>) {
+export function MetrikkEkspanderbartpanel({tittel, lamellNavnForLogging, children}: PropsWithChildren<Props>) {
     const [isApen, setIsApen] = useState(true);
 
     const handleOnClick = () => {
@@ -28,10 +22,13 @@ export function MetrikkEkspanderbartpanel({
     };
 
     return (
-        <div className={classNames('portefolje__ekspanderbarpanel', className)}>
-            <Ekspanderbartpanel tittel={tittel} border={true} onClick={handleOnClick} apen={isApen} role="button">
-                {children}
-            </Ekspanderbartpanel>
-        </div>
+        <ExpansionCard aria-labelledby="expancion-card-title" size="small" open={isApen}>
+            <ExpansionCard.Header onClick={handleOnClick}>
+                <ExpansionCard.Title id="expancion-card-title" size="small">
+                    {tittel}
+                </ExpansionCard.Title>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>{children}</ExpansionCard.Content>
+        </ExpansionCard>
     );
 }
