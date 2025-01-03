@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useState} from 'react';
+import {useSelector} from 'react-redux';
 import {HelpText} from '@navikt/ds-react';
 import {SidebarTab} from './sidebar-tab';
-import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import ToggleSwitch from '../../filtrering/filtrering-mine-filter/toggle-switch/toggle-switch';
 import FiltreringMineFilter from '../../filtrering/filtrering-mine-filter/filtrering-mine-filter';
@@ -39,7 +38,6 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     const mineFilter = mineFilterState.data;
     const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
-    const dispatch = useDispatch();
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
@@ -69,8 +67,8 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     return (
         <SidebarTab
             tittel={fanetittel}
-            lukkSidemeny={() => dispatch(skjulSidebar(oversiktType))}
             tab={valgtFane}
+            oversiktType={oversiktType}
             headingChildren={
                 <>
                     <HelpText placement="right" strategy="fixed">
