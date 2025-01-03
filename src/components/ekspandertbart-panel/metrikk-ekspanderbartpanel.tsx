@@ -1,7 +1,6 @@
 import {PropsWithChildren, useState} from 'react';
 import {ExpansionCard} from '@navikt/ds-react';
 import {trackAmplitude} from '../../amplitude/amplitude';
-import '../toolbar/toolbar.css';
 
 interface Props {
     tittel: string;
