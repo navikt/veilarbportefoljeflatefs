@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import CheckboxFilterform from './filterform/checkbox-filterform';
@@ -11,10 +10,12 @@ import {
     ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
-    HAR_AVVIK,
     gjeldendeVedtak14a,
+    HAR_AVVIK,
     hovedmal,
+    hovedmalGjeldendeVedtak14a,
     innsatsgruppe,
+    innsatsgruppeGjeldendeVedtak14a,
     kjonn,
     manuellBrukerStatus,
     registreringstype,
@@ -24,9 +25,7 @@ import {
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    ytelse,
-    innsatsgruppeGjeldendeVedtak14a,
-    hovedmalGjeldendeVedtak14a
+    ytelse
 } from '../filter-konstanter';
 import Dropdown from '../../components/dropdown/dropdown';
 import './filterform/filterform.css';
@@ -43,7 +42,7 @@ import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {FILTER_FOR_PERSONER_MED_BARN_UNDER_18, VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../../konstanter';
+import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
@@ -56,7 +55,6 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const erFilterForBarnUnder18UnderFeatureToggle = useFeatureSelector()(FILTER_FOR_PERSONER_MED_BARN_UNDER_18);
     const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
 
     const avvik14aVedtakValg = () => {
@@ -165,21 +163,18 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-
-                {erFilterForBarnUnder18UnderFeatureToggle && (
-                    <Dropdown
-                        name="Har barn under 18 år"
-                        id="barnUnder18"
-                        render={lukkDropdown => (
-                            <BarnUnder18FilterForm
-                                valg={barnUnder18Aar}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                                closeDropdown={lukkDropdown}
-                            />
-                        )}
-                    />
-                )}
+                <Dropdown
+                    name="Har barn under 18 år"
+                    id="barnUnder18"
+                    render={lukkDropdown => (
+                        <BarnUnder18FilterForm
+                            valg={barnUnder18Aar}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                            closeDropdown={lukkDropdown}
+                        />
+                    )}
+                />
                 <Dropdown
                     name="Geografisk bosted"
                     id="bosted"
