@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './application';
 import 'nav-frontend-chevron-style/dist/main.css';
-import 'nav-frontend-ekspanderbartpanel-style/dist/main.css';
 import 'nav-frontend-grid-style/dist/main.css';
 import 'nav-frontend-lenker-style/dist/main.css';
 import 'nav-frontend-paneler-style/dist/main.css';

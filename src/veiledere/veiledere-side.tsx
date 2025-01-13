@@ -18,7 +18,7 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
-import MetrikkEkspanderbartpanel from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
+import {MetrikkEkspanderbartpanel} from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
 import {Panel} from '@navikt/ds-react';
@@ -76,7 +76,7 @@ function VeiledereSide() {
                         <Panel className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Panel>
-                        <MetrikkEkspanderbartpanel lamellNavn="veiledergrupper" tittel="Veiledergrupper">
+                        <MetrikkEkspanderbartpanel tittel="Veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                         </MetrikkEkspanderbartpanel>
                     </div>

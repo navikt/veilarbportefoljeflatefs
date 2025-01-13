@@ -1,40 +1,33 @@
-import React, {PropsWithChildren, useState} from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
-import hiddenIf from '../hidden-if/hidden-if';
-import '../toolbar/toolbar.css';
-import classNames from 'classnames';
-import {EkspanderbartpanelBaseProps} from 'nav-frontend-ekspanderbartpanel/lib/ekspanderbartpanel-base';
+import {PropsWithChildren, useState} from 'react';
+import {ExpansionCard} from '@navikt/ds-react';
+import {trackAmplitude} from '../../amplitude/amplitude';
 
-interface MetrikkEkspanderbartpanelProps extends EkspanderbartpanelBaseProps {
-    lamellNavn: string;
+interface Props {
+    tittel: string;
 }
 
-function MetrikkEkspanderbartpanel({
-    lamellNavn,
-    tittel,
-    className,
-    children
-}: PropsWithChildren<MetrikkEkspanderbartpanelProps>) {
+export function MetrikkEkspanderbartpanel({tittel, children}: PropsWithChildren<Props>) {
     const [isApen, setIsApen] = useState(true);
 
     const handleOnClick = () => {
-        setIsApen(prevState => !prevState);
-        logEvent('portefolje.metrikker.lamell', {
-            navn: lamellNavn,
-            apen: !isApen,
-            sideNavn: finnSideNavn()
+        trackAmplitude({
+            name: isApen ? 'accordion lukket' : 'accordion åpnet',
+            data: {
+                tekst: tittel
+            }
         });
+
+        setIsApen(prevState => !prevState);
     };
 
     return (
-        <div className={classNames('portefolje__ekspanderbarpanel', className)}>
-            <Ekspanderbartpanel tittel={tittel} border={true} onClick={handleOnClick} apen={isApen} role="button">
-                {children}
-            </Ekspanderbartpanel>
-        </div>
+        <ExpansionCard aria-labelledby="expancion-card-title" size="small" open={isApen}>
+            <ExpansionCard.Header onClick={handleOnClick}>
+                <ExpansionCard.Title id="expancion-card-title" size="small">
+                    {tittel}
+                </ExpansionCard.Title>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>{children}</ExpansionCard.Content>
+        </ExpansionCard>
     );
 }
-
-export default hiddenIf(MetrikkEkspanderbartpanel);
