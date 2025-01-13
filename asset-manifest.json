@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/veilarbportefoljeflatefs/static/css/main.1140850b.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.8705b74c.js",
+    "main.css": "/veilarbportefoljeflatefs/static/css/main.04392d86.css",
+    "main.js": "/veilarbportefoljeflatefs/static/js/main.8e5c5632.js",
     "static/media/datepicker.less": "/veilarbportefoljeflatefs/static/media/datepicker.37f9a43e92e4c0f60401.less",
     "static/media/Huskelappikon_stiplet.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon_stiplet.f7fac33e61583c46072ff59d3268a59e.svg",
     "static/media/Fargekategoriikon_bokmerke_stiplet.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bokmerke_stiplet.302d9e8ca2e72e12ba6877918b9485c9.svg",
-    "static/media/index.less": "/veilarbportefoljeflatefs/static/media/index.3becc3bc0aef6d6af903.less",
     "static/media/x_mark_octagon_icon.svg": "/veilarbportefoljeflatefs/static/media/x_mark_octagon_icon.252c5a9ebaed2457dbc3b6db30334939.svg",
     "index.html": "/veilarbportefoljeflatefs/index.html",
     "static/media/Huskelappikon_bakgrunnsfarge.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon_bakgrunnsfarge.41263d0029714b8ca66c772325f85606.svg",
+    "static/media/index.less": "/veilarbportefoljeflatefs/static/media/index.3becc3bc0aef6d6af903.less",
     "static/media/Huskelappikon.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon.8274f635de855c12305c7383d4d9298f.svg",
     "static/media/Fargekategoriikon_bla_halvsirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bla_halvsirkel.c6f1abc23119441bf41297a772eb32b9.svg",
     "static/media/dragIcon.svg": "/veilarbportefoljeflatefs/static/media/dragIcon.960f7e2f75f3c436d84adc87e31f3007.svg",
@@ -19,11 +19,11 @@
     "static/media/Fargekategoriikon_lilla_firkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lilla_firkant.f183bf6c23eda69c8c000ae157e5b4f0.svg",
     "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.9ac18e243f6f697b58ffc1ab47c5f762.svg",
     "static/media/lenker-style.less": "/veilarbportefoljeflatefs/static/media/lenker-style.59b9d8fd90d389db0ed1.less",
-    "main.1140850b.css.map": "/veilarbportefoljeflatefs/static/css/main.1140850b.css.map",
-    "main.8705b74c.js.map": "/veilarbportefoljeflatefs/static/js/main.8705b74c.js.map"
+    "main.04392d86.css.map": "/veilarbportefoljeflatefs/static/css/main.04392d86.css.map",
+    "main.8e5c5632.js.map": "/veilarbportefoljeflatefs/static/js/main.8e5c5632.js.map"
   },
   "entrypoints": [
-    "static/css/main.1140850b.css",
-    "static/js/main.8705b74c.js"
+    "static/css/main.04392d86.css",
+    "static/js/main.8e5c5632.js"
   ]
 }
