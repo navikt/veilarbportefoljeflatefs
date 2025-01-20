@@ -20,7 +20,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [VIS_FILTER_14A_FRA_VEDTAKSSTOTTE]: false
+    [VIS_FILTER_14A_FRA_VEDTAKSSTOTTE]: true
 };
 
 // Reducer

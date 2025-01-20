@@ -45,8 +45,6 @@ import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import SisteEndringKategori from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../konstanter';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import './enhetsportefolje.css';
 import './brukerliste.css';
@@ -61,8 +59,6 @@ interface EnhetKolonnerProps {
 }
 
 function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
-    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
-
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -358,35 +354,28 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
                 skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
                 className="col col-xs-2"
             />
-            {visFilter14aFraVedtaksstotte && (
-                <>
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
-                                : '-'
-                        }
-                        className="col col-xs-2"
-                    />
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'
-                        }
-                        className="col col-xs-2"
-                    />
-                    <TekstKolonne
-                        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                        tekst={
-                            bruker.gjeldendeVedtak14a?.innsatsgruppe
-                                ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato)
-                                : '-'
-                        }
-                        className="col col-xs-2-5"
-                    />
-                </>
-            )}
+
+            <TekstKolonne
+                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+                tekst={
+                    bruker.gjeldendeVedtak14a?.innsatsgruppe
+                        ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
+                        : '-'
+                }
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
+                tekst={bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'}
+                className="col col-xs-2"
+            />
+            <TekstKolonne
+                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
+                tekst={
+                    bruker.gjeldendeVedtak14a?.innsatsgruppe ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato) : '-'
+                }
+                className="col col-xs-2-5"
+            />
 
             <DatoKolonne
                 dato={overgangsstonadUtlopsdato}
