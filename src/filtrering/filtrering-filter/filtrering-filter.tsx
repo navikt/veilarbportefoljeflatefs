@@ -12,9 +12,7 @@ import {
     formidlingsgruppe,
     gjeldendeVedtak14a,
     HAR_AVVIK,
-    hovedmal,
     hovedmalGjeldendeVedtak14a,
-    innsatsgruppe,
     innsatsgruppeGjeldendeVedtak14a,
     kjonn,
     manuellBrukerStatus,
@@ -41,8 +39,6 @@ import {FiltervalgModell} from '../../model-interfaces';
 import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
 import FoedelandFilterform from './filterform/foedeland-filterform';
 import TolkebehovFilterform from './filterform/tolkebehov-filterform';
-import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_FILTER_14A_FRA_VEDTAKSSTOTTE} from '../../konstanter';
 import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
 
 interface FiltreringFilterProps {
@@ -55,8 +51,6 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const visFilter14aFraVedtaksstotte = useFeatureSelector()(VIS_FILTER_14A_FRA_VEDTAKSSTOTTE);
-
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -285,104 +279,71 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     )}
                 />
             </div>
-            {visFilter14aFraVedtaksstotte && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Oppfølgingsvedtak § 14 a</Label>
-                    <Dropdown
-                        name="Gjeldende vedtak § 14 a"
-                        id="gjeldende-vedtak-14a"
-                        render={() => (
+            <div className="filtrering-filter__kolonne">
+                <Label size="small">Oppfølgingsvedtak § 14 a</Label>
+                <Dropdown
+                    name="Gjeldende vedtak § 14 a"
+                    id="gjeldende-vedtak-14a"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="gjeldendeVedtak14a"
+                            valg={gjeldendeVedtak14a}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Innsatsgruppe"
+                    id="innsatsgruppe-gjeldende-vedtak-14a"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="innsatsgruppeGjeldendeVedtak14a"
+                            valg={innsatsgruppeGjeldendeVedtak14a}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Hovedmål"
+                    id="hovedmal-gjeldende-vedtak-14a"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="hovedmalGjeldendeVedtak14a"
+                            valg={hovedmalGjeldendeVedtak14a}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Sammenlign gjeldende vedtak og Arena"
+                    id="status-14a-vedtak-filter"
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det iverksatte §
+                                14 a-vedtaket.{' '}
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                >
+                                    Se mer informasjon på Navet
+                                    <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
+                                </Link>
+                            </Alert>
                             <CheckboxFilterform
-                                form="gjeldendeVedtak14a"
-                                valg={gjeldendeVedtak14a}
+                                valg={avvik14aVedtakValg()}
+                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                                 filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
+                                form="avvik14aVedtak"
                             />
-                        )}
-                    />
-                    <Dropdown
-                        name="Innsatsgruppe"
-                        id="innsatsgruppe-gjeldende-vedtak-14a"
-                        render={() => (
-                            <CheckboxFilterform
-                                form="innsatsgruppeGjeldendeVedtak14a"
-                                valg={innsatsgruppeGjeldendeVedtak14a}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                    <Dropdown
-                        name="Hovedmål"
-                        id="hovedmal-gjeldende-vedtak-14a"
-                        render={() => (
-                            <CheckboxFilterform
-                                form="hovedmalGjeldendeVedtak14a"
-                                valg={hovedmalGjeldendeVedtak14a}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                    <Dropdown
-                        name="Sammenlign gjeldende vedtak og Arena"
-                        id="status-14a-vedtak-filter"
-                        render={() => (
-                            <>
-                                <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
-                                    iverksatte § 14 a-vedtaket.{' '}
-                                    <Link
-                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                    >
-                                        Se mer informasjon på Navet
-                                        <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
-                                    </Link>
-                                </Alert>
-                                <CheckboxFilterform
-                                    valg={avvik14aVedtakValg()}
-                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                    filtervalg={filtervalg}
-                                    form="avvik14aVedtak"
-                                />
-                            </>
-                        )}
-                    />
-                </div>
-            )}
-            {!visFilter14aFraVedtaksstotte && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Utfasing av Arena</Label>
-                    <Dropdown
-                        name="Status § 14 a-vedtak"
-                        id="status-14a-vedtak-filter"
-                        render={() => (
-                            <>
-                                <Alert variant="info" size="small" className="registrering-alert">
-                                    Filteret viser brukere der hovedmål/ innsatsgruppe er ulikt i Arena og det
-                                    iverksatte § 14 a-vedtaket.{' '}
-                                    <Link
-                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                    >
-                                        Se mer informasjon på Navet
-                                        <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
-                                    </Link>
-                                </Alert>
-                                <CheckboxFilterform
-                                    valg={avvik14aVedtakValg()}
-                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                    filtervalg={filtervalg}
-                                    form="avvik14aVedtak"
-                                />
-                            </>
-                        )}
-                    />
-                </div>
-            )}
+                        </>
+                    )}
+                />
+            </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
                 <Dropdown
@@ -397,34 +358,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                         />
                     )}
                 />
-                {!visFilter14aFraVedtaksstotte && (
-                    <>
-                        <Dropdown
-                            name="Innsatsgruppe"
-                            id="innsatsgruppe"
-                            render={() => (
-                                <CheckboxFilterform
-                                    form="innsatsgruppe"
-                                    valg={innsatsgruppe}
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
-                            )}
-                        />
-                        <Dropdown
-                            name="Hovedmål"
-                            id="hovedmal"
-                            render={() => (
-                                <CheckboxFilterform
-                                    form="hovedmal"
-                                    valg={hovedmal}
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
-                            )}
-                        />
-                    </>
-                )}
                 <Dropdown
                     name="Formidlingsgruppe"
                     id="formidlingsgruppe"
