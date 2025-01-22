@@ -95,7 +95,7 @@ function Toolbar({
                     {oversikt(oversiktType)}
                 </div>
                 <div className="toolbar__element">
-                    <VelgKolonner oversiktType={oversiktType} />
+                    {oversiktType !== OversiktType.veilederOversikt && <VelgKolonner oversiktType={oversiktType} />}
                     <Paginering onPaginering={onPaginering} antallTotalt={antallTotalt} />
                 </div>
             </div>
