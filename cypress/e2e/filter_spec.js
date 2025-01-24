@@ -1,3 +1,7 @@
+import {InnsatsgruppeGjeldendeVedtak14a} from "../../src/model-interfaces";
+import {innsatsgruppeGjeldendeVedtak14a} from "../../src/filtrering/filter-konstanter";
+import {kebabUtenSpesialtegn} from "../../src/utils/utils";
+
 const fraAlder = '2';
 const tilAlder = '34';
 const hoyAlder = '109';
@@ -115,7 +119,7 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
         cy.getByTestId('velg-kolonne-rad_siste_endring').should('be.checked').uncheck({force: true});
         cy.getByTestId('velg-kolonne-rad_veileder').check({force: true});
-        cy.get('@kolonneoverskrifter').should('have.length', tallPaKolonnerVedStart - 1 ).last().prev().contains('Veileder');
+        cy.get('@kolonneoverskrifter').should('have.length', tallPaKolonnerVedStart - 1).last().prev().contains('Veileder');
 
         // Tek bort kolonna for "Sist endret dato". Skal no ha 3 kolonner, "Veileder" er sist.
         cy.getByTestId('velg-kolonne-rad_siste_endring_dato').should('be.checked').uncheck({force: true});
@@ -301,20 +305,24 @@ describe('Filter', () => {
         cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
     });
 
-    it('Checkbox-filterform: Innsatsgruppe', () => {
+    it('Checkbox-filterform: Innsatsgruppe gjeldende vedtak § 14 a', () => {
         // Opnar filterdropdown for innsatsgruppe, sjekkar at rette ting er synleg/deaktivert
-        cy.apneLukkeFilterDropdown('innsatsgruppe');
+        cy.apneLukkeFilterDropdown('innsatsgruppe-gjeldende-vedtak-14a');
         cy.getByTestId('checkbox-filterform').should('exist');
         cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.disabled');
 
-        // Vel filter for Standardinnsats (IKVAL), får opp filtertag. Nullstill skal vere synleg.
-        cy.checkbox('filter_IKVAL');
-        cy.getByTestId('filtreringlabel_standardinnsats').should('be.visible');
+        // Vel filter for Standardinnsats (aka Gode muligheter), får opp filtertag. Nullstill skal vere synleg.
+        cy.checkbox(`filter_${InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS}`);
+        cy.getByTestId(`filtreringlabel_${
+            kebabUtenSpesialtegn(innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS])
+        }`).should('be.visible');
         cy.getByTestId('checkbox-filterform_nullstill-knapp').should('be.enabled');
 
-        // Vel eit filter til, no Spesielt tilpasset innsats (BATT)
-        cy.checkbox('filter_BATT');
-        cy.getByTestId('filtreringlabel_spesielt-tilpasset-innsats').should('be.visible');
+        // Vel eit filter til, no Spesielt tilpasset innsats (aka Trenger veiledning, nedsatt arbeidsevne)
+        cy.checkbox(`filter_${InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS}`);
+        cy.getByTestId(`filtreringlabel_${
+            kebabUtenSpesialtegn(innsatsgruppeGjeldendeVedtak14a[InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS])
+        }`).should('be.visible');
 
         // Sjekkar at vi har rett mengd filtertags
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
