@@ -1,21 +1,24 @@
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
 import {AktiviteterAvtaltMedNav} from '../../../filtrering/filter-konstanter';
+import {AktiviteterValg} from '../../../ducks/filtrering';
 
 describe('Mine filter utils', () => {
+    const ingenValgteAktiviteter = {
+        [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
+    };
+
     describe('Er objekt values tomt', () => {
         it('sjekk minoversikt', () => {
             const filtervalgModell = {
-                aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'NA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
-                },
+                aktiviteter: ingenValgteAktiviteter,
                 alder: [],
                 ferdigfilterListe: [],
                 fodselsdagIMnd: [],
@@ -43,17 +46,7 @@ describe('Mine filter utils', () => {
     describe('Er objekt lik', () => {
         it('Same', () => {
             const model1 = {
-                aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'NA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
-                },
+                aktiviteter: ingenValgteAktiviteter,
                 alder: [],
                 ferdigfilterListe: [],
                 fodselsdagIMnd: [],
@@ -89,17 +82,7 @@ describe('Mine filter utils', () => {
                 tiltakstyper: [],
                 veilederNavnQuery: '',
                 veiledere: [],
-                aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'NA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
-                },
+                aktiviteter: ingenValgteAktiviteter,
                 ytelse: null,
                 registreringstype: [],
                 cvJobbprofil: null,
@@ -111,17 +94,7 @@ describe('Mine filter utils', () => {
 
         it('Kjonn er ikke lik', () => {
             const model1 = {
-                aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'NA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
-                },
+                aktiviteter: ingenValgteAktiviteter,
                 alder: [],
                 ferdigfilterListe: [],
                 fodselsdagIMnd: [],
@@ -158,15 +131,8 @@ describe('Mine filter utils', () => {
                 veilederNavnQuery: '',
                 veiledere: [],
                 aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'JA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
+                    ...ingenValgteAktiviteter,
+                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.JA
                 },
                 ytelse: null,
                 registreringstype: [],
@@ -180,15 +146,8 @@ describe('Mine filter utils', () => {
         it('Aktiviteter verdi er lik', () => {
             const model1 = {
                 aktiviteter: {
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'JA',
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
+                    ...ingenValgteAktiviteter,
+                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.JA
                 },
                 alder: [],
                 ferdigfilterListe: [],
@@ -226,15 +185,8 @@ describe('Mine filter utils', () => {
                 veilederNavnQuery: '',
                 veiledere: [],
                 aktiviteter: {
-                    [AktiviteterAvtaltMedNav.BEHANDLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.EGEN]: 'NA',
-                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'JA',
-                    [AktiviteterAvtaltMedNav.IJOBB]: 'NA',
-                    [AktiviteterAvtaltMedNav.MOTE]: 'NA',
-                    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'NA',
-                    [AktiviteterAvtaltMedNav.STILLING]: 'NA',
-                    [AktiviteterAvtaltMedNav.TILTAK]: 'NA',
-                    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'NA'
+                    ...ingenValgteAktiviteter,
+                    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.JA
                 },
                 ytelse: null,
                 registreringstype: [],
