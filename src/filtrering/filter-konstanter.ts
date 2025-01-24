@@ -262,16 +262,28 @@ export const ensligeForsorgere = {
     OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
-export const aktiviteter = {
-    SOKEAVTALE: 'Avtale om å søke jobber',
-    STILLING: 'Stilling bruker skal søke',
-    BEHANDLING: 'Medisinsk behandling',
-    TILTAK: 'Tiltak gjennom Nav',
-    EGEN: 'Jobbrettet egenaktivitet',
-    IJOBB: 'Jobb bruker har nå',
-    MOTE: 'Møte med Nav',
-    GRUPPEAKTIVITET: 'Gruppeaktivitet',
-    UTDANNINGAKTIVITET: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
+export enum AktiviteterAvtaltMedNav {
+    SOKEAVTALE = 'SOKEAVTALE',
+    STILLING = 'STILLING',
+    BEHANDLING = 'BEHANDLING',
+    TILTAK = 'TILTAK',
+    EGEN = 'EGEN',
+    IJOBB = 'IJOBB',
+    MOTE = 'MOTE',
+    GRUPPEAKTIVITET = 'GRUPPEAKTIVITET',
+    UTDANNINGAKTIVITET = 'UTDANNINGAKTIVITET'
+}
+
+export const aktiviteter: {[key in AktiviteterAvtaltMedNav]: string} = {
+    [AktiviteterAvtaltMedNav.SOKEAVTALE]: 'Avtale om å søke jobber',
+    [AktiviteterAvtaltMedNav.STILLING]: 'Stilling bruker skal søke',
+    [AktiviteterAvtaltMedNav.BEHANDLING]: 'Medisinsk behandling',
+    [AktiviteterAvtaltMedNav.TILTAK]: 'Tiltak gjennom Nav',
+    [AktiviteterAvtaltMedNav.EGEN]: 'Jobbrettet egenaktivitet',
+    [AktiviteterAvtaltMedNav.IJOBB]: 'Jobb bruker har nå',
+    [AktiviteterAvtaltMedNav.MOTE]: 'Møte med Nav',
+    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: 'Gruppeaktivitet',
+    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
 
 export const cvJobbprofil = {
