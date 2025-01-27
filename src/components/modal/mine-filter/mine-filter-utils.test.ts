@@ -1,7 +1,7 @@
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
 import {AktiviteterAvtaltMedNav} from '../../../filtrering/filter-konstanter';
 import {AktiviteterValg, initialState} from '../../../ducks/filtrering';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell, InnsatsgruppeGjeldendeVedtak14a} from '../../../model-interfaces';
 
 describe('Mine filter utils', () => {
     const ingenValgteAktiviteter = {
@@ -18,16 +18,28 @@ describe('Mine filter utils', () => {
 
     const ingenValgteFilter: FiltervalgModell = initialState;
 
-    describe('Er objekt values tomt', () => {
-        it('sjekk minoversikt', () => {
+    describe('Skal kunne oppdage om en filtermodell er tom', () => {
+        it('når alle felt er tomme', () => {
             const filtervalgModell = ingenValgteFilter;
 
             expect(erObjektValuesTomt(filtervalgModell)).toBe(true);
         });
+
+        it('når ikke alle felt er tomme', () => {
+            const filtervalgModell = {
+                ...ingenValgteFilter,
+                innsatsgruppeGjeldendeVedtak14a: [
+                    InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS,
+                    InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS
+                ]
+            };
+
+            expect(erObjektValuesTomt(filtervalgModell)).toBe(false);
+        });
     });
 
-    describe('Er objekt lik', () => {
-        it('Same', () => {
+    describe('Skal kunne sjekke om to filtermodeller er like', () => {
+        it('når filterene har samme felt, men ulik rekkefølge', () => {
             const ingenValgteFilterVanligRekkefolge = ingenValgteFilter;
 
             const ingenValgteFilterAlfabetiskRekkefolge = {
@@ -78,7 +90,7 @@ describe('Mine filter utils', () => {
             ).toBe(true);
         });
 
-        it('Kjonn er ikke lik', () => {
+        it('når kjønn er ulikt', () => {
             const model1: FiltervalgModell = ingenValgteFilter;
 
             const model2 = {
@@ -89,7 +101,7 @@ describe('Mine filter utils', () => {
             expect(lagretFilterValgModellErLik(model1, model2)).toBe(false);
         });
 
-        it('Aktiviteter verdi er lik', () => {
+        it('når verdi for aktiviteter er lik', () => {
             const model1 = {
                 ...ingenValgteFilter,
                 aktiviteter: {
@@ -109,7 +121,7 @@ describe('Mine filter utils', () => {
             expect(lagretFilterValgModellErLik(model1, model2)).toBe(true);
         });
 
-        it('Aktiviteter verdi er ulik', () => {
+        it('når verdi for aktiviteter er ulik', () => {
             const model1 = {
                 ...ingenValgteFilter,
                 aktiviteter: {
