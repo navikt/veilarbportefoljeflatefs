@@ -4,6 +4,7 @@ import FiltreringLabel from './filtrering-label';
 import {
     aktiviteter,
     AktiviteterAvtaltMedNav,
+    AktiviteterValg,
     alleFargekategoriFilterAlternativer,
     filterKonstanter,
     HAR_AVVIK,
@@ -14,14 +15,7 @@ import {EnhetModell, FiltervalgModell} from '../model-interfaces';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {
-    AktiviteterValg,
-    clearFiltervalg,
-    endreFiltervalg,
-    fjern,
-    initialState,
-    slettEnkeltFilter
-} from '../ducks/filtrering';
+import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import FiltreringLabelMedIkon from './filtrering-label-med-ikon';

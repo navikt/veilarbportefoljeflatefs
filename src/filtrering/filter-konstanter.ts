@@ -286,6 +286,13 @@ export const aktiviteter: {[key in AktiviteterAvtaltMedNav]: string} = {
     [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: 'Utdanning og kurs (for enslige forsørgere eller egenfinansiert)'
 };
 
+/** Til avanserte filtervalg for AktiviteterAvtaltMedNav */
+export enum AktiviteterValg {
+    JA = 'JA',
+    NEI = 'NEI',
+    NA = 'NA'
+}
+
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med Nav'},
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med Nav'}

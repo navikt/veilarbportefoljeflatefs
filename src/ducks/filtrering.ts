@@ -4,6 +4,7 @@ import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
 import {
     AktiviteterAvtaltMedNav,
+    AktiviteterValg,
     alleFargekategoriFilterAlternativer,
     MINE_FARGEKATEGORIER
 } from '../filtrering/filter-konstanter';
@@ -16,12 +17,6 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 export const FARGEKATEGORIER_HOVEDFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_HOVEDFILTER_KLIKK';
 export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UNDERFILTER_KLIKK';
-
-export enum AktiviteterValg {
-    JA = 'JA',
-    NEI = 'NEI',
-    NA = 'NA'
-}
 
 export type FiltreringAktiviteterValg = {
     [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;

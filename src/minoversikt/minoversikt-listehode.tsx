@@ -1,7 +1,7 @@
 import SorteringHeader from '../components/tabell/sortering-header';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
-import {AktiviteterValg} from '../ducks/filtrering';
 import {
+    AktiviteterValg,
     DAGPENGER_YTELSE,
     DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,

@@ -15,7 +15,7 @@ import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {useDispatch, useSelector} from 'react-redux';
-import {AktiviteterValg, endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
+import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -40,6 +40,7 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
 import {StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 import {StatustallEnhet} from '../ducks/statustall/statustall-typer';
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {

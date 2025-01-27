@@ -7,7 +7,8 @@ import {
     utlopsdatoUker
 } from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
-import {AktiviteterValg} from '../ducks/filtrering';
+
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {

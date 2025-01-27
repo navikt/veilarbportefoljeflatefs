@@ -1,6 +1,6 @@
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
-import {AktiviteterAvtaltMedNav} from '../../../filtrering/filter-konstanter';
-import {AktiviteterValg, initialState} from '../../../ducks/filtrering';
+import {AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filtrering/filter-konstanter';
+import {initialState} from '../../../ducks/filtrering';
 import {FiltervalgModell, InnsatsgruppeGjeldendeVedtak14a} from '../../../model-interfaces';
 
 describe('Mine filter utils', () => {
