@@ -1,6 +1,6 @@
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
 import {AktiviteterAvtaltMedNav} from '../../../filtrering/filter-konstanter';
-import {AktiviteterValg} from '../../../ducks/filtrering';
+import {AktiviteterValg, initialState} from '../../../ducks/filtrering';
 import {FiltervalgModell} from '../../../model-interfaces';
 
 describe('Mine filter utils', () => {
@@ -16,48 +16,7 @@ describe('Mine filter utils', () => {
         [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
     };
 
-    const ingenValgteFilter: FiltervalgModell = {
-        ferdigfilterListe: [],
-        arbeidslisteKategori: [],
-        alder: [],
-        kjonn: null,
-        landgruppe: [],
-        foedeland: [],
-        fodselsdagIMnd: [],
-        innsatsgruppe: [],
-        formidlingsgruppe: [],
-        servicegruppe: [],
-        veiledere: [],
-        ytelse: null,
-        aktiviteter: ingenValgteAktiviteter,
-        aktiviteterForenklet: [],
-        tiltakstyper: [],
-        hovedmal: [],
-        navnEllerFnrQuery: '',
-        rettighetsgruppe: [],
-        manuellBrukerStatus: [],
-        veilederNavnQuery: '',
-        registreringstype: [],
-        cvJobbprofil: null,
-        utdanning: [],
-        utdanningGodkjent: [],
-        utdanningBestatt: [],
-        sisteEndringKategori: [],
-        ulesteEndringer: null,
-        tolkebehov: [],
-        tolkBehovSpraak: [],
-        stillingFraNavFilter: [],
-        geografiskBosted: [],
-        visGeografiskBosted: [],
-        avvik14aVedtak: [],
-        ensligeForsorgere: [],
-        barnUnder18Aar: [],
-        barnUnder18AarAlder: [],
-        fargekategorier: [],
-        gjeldendeVedtak14a: [],
-        innsatsgruppeGjeldendeVedtak14a: [],
-        hovedmalGjeldendeVedtak14a: []
-    };
+    const ingenValgteFilter: FiltervalgModell = initialState;
 
     describe('Er objekt values tomt', () => {
         it('sjekk minoversikt', () => {
