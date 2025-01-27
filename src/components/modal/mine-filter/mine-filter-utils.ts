@@ -1,6 +1,7 @@
 import {isEmptyArray, isObject} from 'formik';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {LagretFilterValideringsError} from './mine-filter-modal';
+import {AktiviteterValg} from '../../../ducks/filtrering';
 
 export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {
     return deepEqual(filter1, filter2);
@@ -37,7 +38,7 @@ export function erObjektValuesTomt(minOversiktObjekt): boolean {
 function erValueTomt(value) {
     if (value instanceof Object) return erObjektValuesTomt(value);
     else if (Array.isArray(value)) return isEmptyArray(value);
-    else return value === null || value === 'NA' || value === '' || erTomtObjekt(value);
+    else return value === null || value === AktiviteterValg.NA || value === '' || erTomtObjekt(value);
 }
 
 export function feilValidering(filterNavn, filterValg, eksisterendeFilter, filterId?) {

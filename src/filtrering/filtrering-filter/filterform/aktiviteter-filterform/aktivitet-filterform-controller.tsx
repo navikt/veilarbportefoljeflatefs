@@ -32,15 +32,15 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
     });
 
     const harAvanserteAktiviteter =
-        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
-        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
-        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
-        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
-        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
-        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
-        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
-        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
-        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+        valgteAvanserteAktiviteter.BEHANDLING !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.EGEN !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.IJOBB !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.MOTE !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.SOKEAVTALE !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.STILLING !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.TILTAK !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== AktiviteterValg.NA;
 
     const [erForenkletFilterSynlig, setErForenkletFilterSynlig] = useState(!harAvanserteAktiviteter);
     const [valgteForenkledeAktiviteter, setValgteForenkledeAktiviteter] = useState<string[]>(

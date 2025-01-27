@@ -15,7 +15,7 @@ import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {useDispatch, useSelector} from 'react-redux';
-import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
+import {AktiviteterValg, endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -45,7 +45,7 @@ export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
         return Object.entries(value)
             .map(([_, verdi]) => {
-                if (verdi === 'NA') return 0;
+                if (verdi === AktiviteterValg.NA) return 0;
                 return 1;
             })
             .reduce((a: number, b: number) => a + b, 0);
