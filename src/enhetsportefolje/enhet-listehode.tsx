@@ -1,5 +1,6 @@
 import SorteringHeader from '../components/tabell/sortering-header';
 import {
+    AktiviteterValg,
     DAGPENGER_YTELSE,
     DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,
@@ -10,7 +11,6 @@ import {
 } from '../filtrering/filter-konstanter';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {AktiviteterValg} from '../ducks/filtrering';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import './enhetsportefolje.css';
 import './brukerliste.css';

@@ -1,6 +1,12 @@
-import {InnsatsgruppeGjeldendeVedtak14a} from "../../src/model-interfaces";
-import {innsatsgruppeGjeldendeVedtak14a} from "../../src/filtrering/filter-konstanter";
+import {
+    aktiviteter,
+    alder,
+    hendelserEtikett,
+    innsatsgruppeGjeldendeVedtak14a
+} from "../../src/filtrering/filter-konstanter";
 import {kebabUtenSpesialtegn} from "../../src/utils/utils";
+
+import {InnsatsgruppeGjeldendeVedtak14a} from "../../src/model-interfaces";
 
 const fraAlder = '2';
 const tilAlder = '34';
@@ -53,7 +59,7 @@ describe('Filter', () => {
         cy.getByTestId('alder-filterform').should('not.exist');
 
         // Kan sjå filtreringslabel
-        cy.getByTestId('filtreringlabel_2-34-ar').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${fraAlder}-${tilAlder}-ar`).should('be.visible');
 
         // Opnar filterdropdown igjen
         cy.getByTestId('filtrering-filter_container').scrollTo('top');
@@ -71,7 +77,7 @@ describe('Filter', () => {
         cy.getByTestId('checkbox-filterform_velg-knapp').should('be.disabled');
 
         // Vi nullar det valde filteret ved å trykke på filtreringslabel
-        cy.getByTestId('filtreringlabel_40-49-ar').should('be.visible').click();
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(alder['40-49'])}`).should('be.visible').click();
 
         // Opnar filterdropdown igjen. Ser at filter ikkje er valt
         cy.apneLukkeFilterDropdown('alder');
@@ -94,7 +100,7 @@ describe('Filter', () => {
         cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
 
         // Fjern alder-filtertaggen, sjå at begge forsvinn
-        cy.getByTestId('filtreringlabel_34-100-ar').should('be.visible').click();
+        cy.getByTestId(`filtreringlabel_${tilAlder}-100-ar`).should('be.visible').click();
         cy.getByTestId('filtrering_label-container').children().should('have.length', 0);
     });
 
@@ -129,7 +135,7 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
 
         // Nullstill filtertags
-        cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('exist').click();
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])} `).should('exist').click();
     });
 
     it('Hendelser-filterform - Min oversikt', () => {
@@ -145,8 +151,8 @@ describe('Filter', () => {
         cy.checkbox('filter_uleste-endringer');
 
         // Sjå at filtertags dukkar opp
-        cy.getByTestId('filtreringlabel_aktivitet-lagt-til-jobb-jeg-har-na').should('be.visible');
-        cy.getByTestId('filtreringlabel_uleste-endringer-siste-endring-av-bruker').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])}`).should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["ULESTE_ENDRINGER"])}`).should('be.visible');
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
 
         // Nullstill hendelsesfilteret
@@ -186,14 +192,14 @@ describe('Filter', () => {
 
         // Vel filter "Stilling bruker skal søke", får opp filtertag
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
-        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.STILLING)}`).should('be.visible');
 
         // No skal ein kunne nullstille aktivitetfilter
         cy.getByTestId('aktivitet-filterform-forenklet_nullstill-knapp').should('be.enabled');
 
         // Vel filter "Tiltak gjennom Nav", får opp filtertag
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
-        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.TILTAK)}`).should('be.visible');
 
         // Ser at talet på filtertags går frå 3 (inkl "nullstill filter") til 0 når ein nullstillar aktivitetsfiltera
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
@@ -223,15 +229,15 @@ describe('Filter', () => {
         // No skal vi berre ha "stilling bruker skal søke: ja"-filteret (og "Nullstill filtervalg")
         cy.getByTestId('filtrering_label-container').children().should('have.length', 2);
         cy.getByTestId('aktivitet-filterform_nullstill-knapp').should('be.enabled');
-        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke-ja').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.STILLING)}-ja`).should('be.visible');
 
         // Hukar av for "ja" på "Tiltak gjennom Nav" også, får rett filtertag
         cy.getByTestId('aktivitet-filterform-TILTAK-ja').check({force: true});
-        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav-ja').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.TILTAK)}-ja`).should('be.visible');
 
         // Hukar av for "ja" på "Møte med Nav", får rett filtertag
         cy.getByTestId('aktivitet-filterform-MOTE-ja').check({force: true});
-        cy.getByTestId('filtreringlabel_mote-med-nav-ja').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.MOTE)}-ja`).should('be.visible');
 
         // Går til Forenklet filter igjen
         cy.getByTestId('aktiviteter_forenklet-filter_knapp').click();
@@ -339,9 +345,9 @@ describe('Filter', () => {
         // Vel eit par aktivitetsfilter
         cy.apneLukkeFilterDropdown('aktivitet');
         cy.getByTestId('aktivitet-forenklet_STILLING').check({force: true});
-        cy.getByTestId('filtreringlabel_stilling-bruker-skal-soke').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.STILLING)}`).should('be.visible');
         cy.getByTestId('aktivitet-forenklet_TILTAK').check({force: true});
-        cy.getByTestId('filtreringlabel_tiltak-gjennom-nav').should('be.visible');
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(aktiviteter.TILTAK)}`).should('be.visible');
         cy.getByTestId('filtrering_label-container').children().should('have.length', 3);
         cy.apneLukkeFilterDropdown('aktivitet');
 

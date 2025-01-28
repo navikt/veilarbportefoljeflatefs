@@ -40,12 +40,13 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
 import {StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 import {StatustallEnhet} from '../ducks/statustall/statustall-typer';
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
         return Object.entries(value)
             .map(([_, verdi]) => {
-                if (verdi === 'NA') return 0;
+                if (verdi === AktiviteterValg.NA) return 0;
                 return 1;
             })
             .reduce((a: number, b: number) => a + b, 0);

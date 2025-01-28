@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import '../filterform.css';
 import {FiltervalgModell} from '../../../../model-interfaces';
 import AktivitetFilterformForenklet from './aktivitet-filterform-forenklet';
-import {aktiviteter} from '../../../filter-konstanter';
+import {aktiviteter, AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filter-konstanter';
 import AktivitetFilterformAvansert from './aktivitet-filterform-avansert';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../../../../ducks/filtrering';
+import {FiltreringAktiviteterValg} from '../../../../ducks/filtrering';
 import {logEvent} from '../../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 
@@ -14,15 +14,15 @@ interface AktivitetFilterformProps {
 }
 
 const aktivitetInitialState: FiltreringAktiviteterValg = {
-    BEHANDLING: AktiviteterValg.NA,
-    EGEN: AktiviteterValg.NA,
-    GRUPPEAKTIVITET: AktiviteterValg.NA,
-    IJOBB: AktiviteterValg.NA,
-    MOTE: AktiviteterValg.NA,
-    SOKEAVTALE: AktiviteterValg.NA,
-    STILLING: AktiviteterValg.NA,
-    TILTAK: AktiviteterValg.NA,
-    UTDANNINGAKTIVITET: AktiviteterValg.NA
+    [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
 };
 
 function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetFilterformProps) {
@@ -32,15 +32,15 @@ function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetF
     });
 
     const harAvanserteAktiviteter =
-        valgteAvanserteAktiviteter.BEHANDLING !== 'NA' ||
-        valgteAvanserteAktiviteter.EGEN !== 'NA' ||
-        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== 'NA' ||
-        valgteAvanserteAktiviteter.IJOBB !== 'NA' ||
-        valgteAvanserteAktiviteter.MOTE !== 'NA' ||
-        valgteAvanserteAktiviteter.SOKEAVTALE !== 'NA' ||
-        valgteAvanserteAktiviteter.STILLING !== 'NA' ||
-        valgteAvanserteAktiviteter.TILTAK !== 'NA' ||
-        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== 'NA';
+        valgteAvanserteAktiviteter.BEHANDLING !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.EGEN !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.GRUPPEAKTIVITET !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.IJOBB !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.MOTE !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.SOKEAVTALE !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.STILLING !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.TILTAK !== AktiviteterValg.NA ||
+        valgteAvanserteAktiviteter.UTDANNINGAKTIVITET !== AktiviteterValg.NA;
 
     const [erForenkletFilterSynlig, setErForenkletFilterSynlig] = useState(!harAvanserteAktiviteter);
     const [valgteForenkledeAktiviteter, setValgteForenkledeAktiviteter] = useState<string[]>(

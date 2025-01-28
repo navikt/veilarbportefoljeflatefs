@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import moment from 'moment';
 import {
     nesteUtlopsdatoEllerNull,
     oppfolingsdatoEnsligeForsorgere,
@@ -6,7 +7,7 @@ import {
     utlopsdatoUker
 } from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
-import moment from 'moment';
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {
@@ -32,7 +33,7 @@ describe('Date utils', () => {
 
     describe('Utledning av valgte aktiviteter', () => {
         it('skal utlede navn på valg aktivitet', () => {
-            const aktivitetFiltervalg = {a1: 'NEI', a2: 'JA', a3: 'NA'};
+            const aktivitetFiltervalg = {a1: AktiviteterValg.NEI, a2: AktiviteterValg.JA, a3: AktiviteterValg.NA};
             const brukerAktiviteter = {
                 a1: '2050-08-20T13:22:00Z',
                 a2: '2050-08-21T13:22:00Z',
@@ -48,7 +49,7 @@ describe('Date utils', () => {
             expect(utledValgteAktivitetsTyper({}, {})).toBeNull();
         });
         it('skal returnere null dersom ingen har status JA', () => {
-            const aktivitetFiltervalg = {a1: 'NEI', a2: 'NA', a3: 'NA'};
+            const aktivitetFiltervalg = {a1: AktiviteterValg.NEI, a2: AktiviteterValg.NA, a3: AktiviteterValg.NA};
             expect(utledValgteAktivitetsTyper(null, aktivitetFiltervalg)).toBeNull();
         });
     });

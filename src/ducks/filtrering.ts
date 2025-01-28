@@ -2,7 +2,12 @@ import {FargekategoriModell, FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
-import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
+import {
+    AktiviteterAvtaltMedNav,
+    AktiviteterValg,
+    alleFargekategoriFilterAlternativer,
+    MINE_FARGEKATEGORIER
+} from '../filtrering/filter-konstanter';
 import {alfabetiskSammenligning} from '../utils/utils';
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
@@ -13,25 +18,8 @@ export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 export const FARGEKATEGORIER_HOVEDFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_HOVEDFILTER_KLIKK';
 export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UNDERFILTER_KLIKK';
 
-export enum AktiviteterValg {
-    JA = 'JA',
-    NEI = 'NEI',
-    NA = 'NA'
-}
-
-type AktivititetNokkel =
-    | 'BEHANDLING'
-    | 'EGEN'
-    | 'GRUPPEAKTIVITET'
-    | 'IJOBB'
-    | 'MOTE'
-    | 'SOKEAVTALE'
-    | 'STILLING'
-    | 'TILTAK'
-    | 'UTDANNINGAKTIVITET';
-
 export type FiltreringAktiviteterValg = {
-    [aktivitet in AktivititetNokkel]: AktiviteterValg;
+    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
 };
 
 //  Reducer
@@ -49,15 +37,15 @@ export const initialState: FiltervalgModell = {
     veiledere: [],
     ytelse: null,
     aktiviteter: {
-        BEHANDLING: AktiviteterValg.NA,
-        EGEN: AktiviteterValg.NA,
-        GRUPPEAKTIVITET: AktiviteterValg.NA,
-        IJOBB: AktiviteterValg.NA,
-        MOTE: AktiviteterValg.NA,
-        SOKEAVTALE: AktiviteterValg.NA,
-        STILLING: AktiviteterValg.NA,
-        TILTAK: AktiviteterValg.NA,
-        UTDANNINGAKTIVITET: AktiviteterValg.NA
+        [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+        [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
     } as FiltreringAktiviteterValg,
     aktiviteterForenklet: [],
     tiltakstyper: [],

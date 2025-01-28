@@ -5,6 +5,8 @@ import {Maybe} from './types';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
 
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
+
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
 }
@@ -47,7 +49,7 @@ export function utledValgteAktivitetsTyper(
         return null;
     }
     return Object.entries(avanserteAktiviteterFiltervalg)
-        .filter(([_, value]) => value === 'JA')
+        .filter(([_, value]) => value === AktiviteterValg.JA)
         .map(([key, _]) => key.toLowerCase())
         .reduce((obj, key) => {
             obj[key] = brukerAktiviteter[key];

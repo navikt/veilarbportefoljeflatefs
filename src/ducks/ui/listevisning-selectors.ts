@@ -1,10 +1,11 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
-import {AktiviteterValg, FiltreringAktiviteterValg} from '../filtrering';
+import {FiltreringAktiviteterValg} from '../filtrering';
 import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
+    AktiviteterValg,
     DAGPENGER_YTELSE,
     DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,
