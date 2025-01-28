@@ -7,7 +7,6 @@ import {
     utlopsdatoUker
 } from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
-
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 describe('Date utils', () => {

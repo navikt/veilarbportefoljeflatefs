@@ -3,7 +3,6 @@ import {connect, useDispatch} from 'react-redux';
 import FiltreringLabel from './filtrering-label';
 import {
     aktiviteter,
-    AktiviteterAvtaltMedNav,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
     filterKonstanter,
@@ -169,7 +168,7 @@ function FiltreringLabelContainer({
                     return (
                         <FiltreringLabel
                             key={singleValue}
-                            label={aktiviteter[singleValue as AktiviteterAvtaltMedNav]}
+                            label={aktiviteter[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );
