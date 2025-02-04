@@ -24,5 +24,5 @@ export const endreHuskelapp = async (
         })
     );
     await dispatch(hentHuskelappForBruker(bruker.fnr, enhetId));
-    await onModalClose();
+    onModalClose();
 };
