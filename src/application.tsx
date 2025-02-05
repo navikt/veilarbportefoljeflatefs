@@ -13,6 +13,10 @@ import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjo
 
 moment.locale('nb');
 
+moment.updateLocale('nb', {
+    monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
+});
+
 export const store = createStore();
 
 function Application() {
