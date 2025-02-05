@@ -19,7 +19,6 @@ before('Start server', () => {
 });
 
 beforeEach('Lag alias for veiledergrupper: @veiledergrupper', () => {
-    Cypress.cy.state("jQuery", Cypress.$);
     // Aliaset kan hentast med cy.get('@veiledergrupper').
     // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
     cy.getByTestId('veiledergruppe_rad-wrapper').as('veiledergrupper');
