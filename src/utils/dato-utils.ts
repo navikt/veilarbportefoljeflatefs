@@ -71,10 +71,6 @@ export const dateToISODate = dato => {
     return dato && parsetDato.isValid() ? parsetDato.toISOString() : '';
 };
 
-moment.updateLocale('nb', {
-    monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
-});
-
 export function dateLess(date1, date2) {
     const year1 = date1.getFullYear();
     const year2 = date2.getFullYear();

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
+import classNames from 'classnames';
+import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
 import Grid from '../../../components/grid/grid';
-import classNames from 'classnames';
-import './filterform.css';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
+import './filterform.css';
 
 interface BarnUnder18Props {
     valg: Dictionary<string>;
@@ -16,6 +16,7 @@ interface BarnUnder18Props {
     filtervalg: FiltervalgModell;
     className?: string;
 }
+
 function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg, className}: BarnUnder18Props) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
@@ -26,6 +27,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
     let filterFormBarnAlder = 'barnUnder18AarAlder';
     let filterFormHarBarnUnder18 = 'barnUnder18Aar';
+
     useEffect(() => {
         filtervalg[filterFormHarBarnUnder18].forEach(barnFilterValg => {
             if (
@@ -70,6 +72,16 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         }
     };
 
+    const endreFiltervalgForGyldigeVerdier = () => {
+        if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
+            endreFiltervalg(filterFormBarnAlder, [0 + '-' + inputAlderTil]);
+        } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
+            endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + 18]);
+        } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
+            endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + inputAlderTil]);
+        }
+    };
+
     const onSubmitCustomInput = e => {
         const inputFraNummer: number = parseInt(inputAlderFra);
         const inputTilNummer: number = parseInt(inputAlderTil);
@@ -91,13 +103,7 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
             } else {
                 setFeil(false);
                 setFeilTekst('');
-                if (inputAlderFra.length === 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(filterFormBarnAlder, [0 + '-' + inputAlderTil]);
-                } else if (inputAlderFra.length > 0 && inputAlderTil.length === 0) {
-                    endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + 18]);
-                } else if (inputAlderFra.length > 0 && inputAlderTil.length > 0) {
-                    endreFiltervalg(filterFormBarnAlder, [inputAlderFra + '-' + inputAlderTil]);
-                }
+                endreFiltervalgForGyldigeVerdier();
                 closeDropdown();
             }
             logEvent('portefolje.metrikker.barn_under_18_filter', {
