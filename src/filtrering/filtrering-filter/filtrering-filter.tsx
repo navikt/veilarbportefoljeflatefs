@@ -62,14 +62,12 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         return valgteAvhengigeFilter.length > 0 && valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length;
     };
 
-    const avvik14aVedtakValg = (): CheckboxFilterMap => {
-        return {
-            ...avvik14aVedtak,
-            [HAR_AVVIK]: {
-                ...avvik14aVedtak.HAR_AVVIK,
-                indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt
-            }
-        };
+    const avvik14aVedtakValg: CheckboxFilterMap = {
+        ...avvik14aVedtak,
+        [HAR_AVVIK]: {
+            ...avvik14aVedtak.HAR_AVVIK,
+            indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt
+        }
     };
 
     const filterEndring = (filterNavn: string, forrigeFilter: string[], nyeFilter: string[]): FilterEndring => {
@@ -331,7 +329,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 </Link>
                             </Alert>
                             <CheckboxFilterform
-                                valg={avvik14aVedtakValg()}
+                                valg={avvik14aVedtakValg}
                                 endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                                 filtervalg={filtervalg}
                                 form="avvik14aVedtak"
