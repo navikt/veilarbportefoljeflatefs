@@ -39,13 +39,13 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
         setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
     }
 
-    const setEndringsloggstateFraRemoteState = (jsonResponse: any) => {
+    function setEndringsloggstateFraRemoteState(jsonResponse: any) {
         const entries = mapRemoteToState(jsonResponse);
         setEndringsloggEntries(entries);
         setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
-    };
+    }
 
-    const behandleHentedeEndringsloggdata = (response: Response) => {
+    function behandleHentedeEndringsloggdata(response: Response) {
         return response
             .json()
             .then((jsonResponse: any) => {
@@ -54,7 +54,7 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
             .catch(() => {
                 setErrorMessage('Kunne ikke hente data for endringslogg');
             });
-    };
+    }
 
     const fetchData = useCallback(() => {
         if (!loadData) {
