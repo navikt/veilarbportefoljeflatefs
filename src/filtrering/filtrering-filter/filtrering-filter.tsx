@@ -52,24 +52,22 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) => {
+    const erNoenMenIkkeAlleAvvik14afilterValgt = () => {
+        const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
+
+        const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
+            Object.keys(avhengigeFilter).includes(valgtFilter)
+        );
+
+        return valgteAvhengigeFilter.length > 0 && valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length;
+    };
+
     const avvik14aVedtakValg = (): CheckboxFilterMap => {
-        const erIndeterminate = () => {
-            const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
-
-            const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
-                Object.keys(avhengigeFilter).includes(valgtFilter)
-            );
-
-            return (
-                valgteAvhengigeFilter.length > 0 && valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length
-            );
-        };
-
         return {
             ...avvik14aVedtak,
             [HAR_AVVIK]: {
                 ...avvik14aVedtak.HAR_AVVIK,
-                indeterminate: erIndeterminate
+                indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt
             }
         };
     };
