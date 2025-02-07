@@ -66,7 +66,7 @@ const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         ...avvik14aVedtak,
         [HAR_AVVIK]: {
             ...avvik14aVedtak.HAR_AVVIK,
-            indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt
+            indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt()
         }
     };
 
