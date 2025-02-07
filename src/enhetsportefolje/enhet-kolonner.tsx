@@ -58,7 +58,14 @@ interface EnhetKolonnerProps {
     brukersVeileder?: VeilederModell;
 }
 
-function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+const EnhetKolonner = ({
+    className,
+    bruker,
+    enhetId,
+    filtervalg,
+    valgteKolonner,
+    brukersVeileder
+}: EnhetKolonnerProps) => {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -409,6 +416,6 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
             />
         </div>
     );
-}
+};
 
 export default EnhetKolonner;

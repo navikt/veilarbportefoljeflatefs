@@ -50,7 +50,7 @@ interface FiltreringFilterProps {
 
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
-function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) => {
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -472,6 +472,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             </div>
         </div>
     );
-}
+};
 
 export default FiltreringFilter;
