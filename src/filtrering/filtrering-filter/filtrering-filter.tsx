@@ -6,6 +6,7 @@ import {
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
     barnUnder18Aar,
+    CheckboxFilterMap,
     cvJobbprofil,
     ensligeForsorgere,
     fodselsdagIMnd,
@@ -51,27 +52,24 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) => {
-    const avvik14aVedtakValg = () => {
+    const avvik14aVedtakValg = (): CheckboxFilterMap => {
         const erIndeterminate = () => {
-            return () => {
-                const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
+            const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
 
-                const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
-                    Object.keys(avhengigeFilter).includes(valgtFilter)
-                );
+            const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
+                Object.keys(avhengigeFilter).includes(valgtFilter)
+            );
 
-                return (
-                    valgteAvhengigeFilter.length > 0 &&
-                    valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length
-                );
-            };
+            return (
+                valgteAvhengigeFilter.length > 0 && valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length
+            );
         };
 
         return {
             ...avvik14aVedtak,
             [HAR_AVVIK]: {
                 ...avvik14aVedtak.HAR_AVVIK,
-                indeterminate: erIndeterminate()
+                indeterminate: erIndeterminate
             }
         };
     };
