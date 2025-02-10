@@ -285,12 +285,25 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     name="Gjeldende vedtak § 14 a"
                     id="gjeldende-vedtak-14a"
                     render={() => (
-                        <CheckboxFilterform
-                            form="gjeldendeVedtak14a"
-                            valg={gjeldendeVedtak14a}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Gjeldende vedtak før desember 2017 bør sjekkes.
+                                <Link
+                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Filter-for-gjeldende-%C2%A714-a-vedtak.aspx"
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                >
+                                    Se mer informasjon på Navet
+                                    <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
+                                </Link>
+                            </Alert>
+                            <CheckboxFilterform
+                                form="gjeldendeVedtak14a"
+                                valg={gjeldendeVedtak14a}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        </>
                     )}
                 />
                 <Dropdown
