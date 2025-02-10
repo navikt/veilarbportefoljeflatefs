@@ -97,9 +97,9 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
             } else if (inputFraNummer >= 18 && inputAlderTil.length === 0) {
                 setFeil(true);
                 setFeilTekst('Du må skrive et tall lavere enn 18 i fra-feltet.');
-            } else if (inputTilNummer >= 18) {
+            } else if (inputTilNummer > 18) {
                 setFeil(true);
-                setFeilTekst('Du må skrive et tall lavere enn 18 i til-feltet.');
+                setFeilTekst('Du kan ikke skrive større tall enn 18 i til-feltet.');
             } else {
                 setFeil(false);
                 setFeilTekst('');
