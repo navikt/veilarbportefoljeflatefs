@@ -34,33 +34,45 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
     const [errorMessage, setErrorMessage] = useState('');
     const [forcedEndringsloggEntries, setForcedEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
 
+    function settEndringsloggdataFraLokalState(props) {
+        setEndringsloggEntries(props.localData);
+        setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
+    }
+
+    function setEndringsloggstateFraRemoteState(jsonResponse: any) {
+        const entries = mapRemoteToState(jsonResponse);
+        setEndringsloggEntries(entries);
+        setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
+    }
+
+    function behandleHentedeEndringsloggdata(response: Response) {
+        return response
+            .json()
+            .then((jsonResponse: any) => {
+                setEndringsloggstateFraRemoteState(jsonResponse);
+            })
+            .catch(() => {
+                setErrorMessage('Kunne ikke hente data for endringslogg');
+            });
+    }
+
     const fetchData = useCallback(() => {
-        if (loadData) {
-            setLoadData(false);
-            setErrorMessage('');
-            if (!props.localData) {
-                setBackendUrl(props.backendUrl);
-                hentEndringsLoggEntries(
-                    props.userId,
-                    props.appId,
-                    props.dataset ?? 'production',
-                    props.maxEntries ?? DEFAULT_MAX_ENTRIES
-                ).then(response =>
-                    response
-                        .json()
-                        .then((jsonResponse: any) => {
-                            const entries = mapRemoteToState(jsonResponse);
-                            setEndringsloggEntries(entries);
-                            setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
-                        })
-                        .catch(() => {
-                            setErrorMessage('Kunne ikke hente data for endringslogg');
-                        })
-                );
-            } else {
-                setEndringsloggEntries(props.localData);
-                setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
-            }
+        if (!loadData) {
+            return;
+        }
+        setLoadData(false);
+        setErrorMessage('');
+
+        if (!props.localData) {
+            setBackendUrl(props.backendUrl);
+            hentEndringsLoggEntries(
+                props.userId,
+                props.appId,
+                props.dataset ?? 'production',
+                props.maxEntries ?? DEFAULT_MAX_ENTRIES
+            ).then(response => behandleHentedeEndringsloggdata(response));
+        } else {
+            settEndringsloggdataFraLokalState(props);
         }
     }, [props, loadData, endringsloggEntries]);
 

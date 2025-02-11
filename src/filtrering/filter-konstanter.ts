@@ -13,7 +13,7 @@ const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
 export type CheckboxFilter = {
     label: string;
     className?: string;
-    indeterminate?: () => boolean;
+    indeterminate?: boolean;
 };
 export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 

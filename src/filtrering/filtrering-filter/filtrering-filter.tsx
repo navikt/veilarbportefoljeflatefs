@@ -6,6 +6,7 @@ import {
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
     barnUnder18Aar,
+    CheckboxFilterMap,
     cvJobbprofil,
     ensligeForsorgere,
     fodselsdagIMnd,
@@ -50,30 +51,23 @@ interface FiltreringFilterProps {
 
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
-function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const avvik14aVedtakValg = () => {
-        const erIndeterminate = () => {
-            return () => {
-                const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
+const FiltreringFilter = ({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) => {
+    const erNoenMenIkkeAlleAvvik14afilterValgt = () => {
+        const {HAR_AVVIK, ...avhengigeFilter} = avvik14aVedtak;
 
-                const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
-                    Object.keys(avhengigeFilter).includes(valgtFilter)
-                );
+        const valgteAvhengigeFilter = filtervalg.avvik14aVedtak.filter(valgtFilter =>
+            Object.keys(avhengigeFilter).includes(valgtFilter)
+        );
 
-                return (
-                    valgteAvhengigeFilter.length > 0 &&
-                    valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length
-                );
-            };
-        };
+        return valgteAvhengigeFilter.length > 0 && valgteAvhengigeFilter.length < Object.keys(avhengigeFilter).length;
+    };
 
-        return {
-            ...avvik14aVedtak,
-            [HAR_AVVIK]: {
-                ...avvik14aVedtak.HAR_AVVIK,
-                indeterminate: erIndeterminate()
-            }
-        };
+    const avvik14aVedtakValg: CheckboxFilterMap = {
+        ...avvik14aVedtak,
+        [HAR_AVVIK]: {
+            ...avvik14aVedtak.HAR_AVVIK,
+            indeterminate: erNoenMenIkkeAlleAvvik14afilterValgt()
+        }
     };
 
     const filterEndring = (filterNavn: string, forrigeFilter: string[], nyeFilter: string[]): FilterEndring => {
@@ -335,7 +329,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                                 </Link>
                             </Alert>
                             <CheckboxFilterform
-                                valg={avvik14aVedtakValg()}
+                                valg={avvik14aVedtakValg}
                                 endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                                 filtervalg={filtervalg}
                                 form="avvik14aVedtak"
@@ -472,6 +466,6 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
             </div>
         </div>
     );
-}
+};
 
 export default FiltreringFilter;

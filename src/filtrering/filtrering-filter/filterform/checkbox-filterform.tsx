@@ -49,7 +49,7 @@ function CheckboxFilterform({
             <Checkbox
                 className={filterValue.className}
                 data-testid={`filter_${filterKey}`}
-                indeterminate={filterValue.indeterminate?.()}
+                indeterminate={filterValue.indeterminate}
                 value={filterKey}
             >
                 {filterValue.label}
