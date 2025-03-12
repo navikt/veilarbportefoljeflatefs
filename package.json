@@ -43,7 +43,7 @@
     },
     "dependencies": {
         "@amplitude/analytics-browser": "2.9.3",
-        "@grafana/faro-web-sdk": "1.7.2",
+        "@grafana/faro-web-sdk": "1.14.1",
         "@navikt/aksel-icons": "5.17.0",
         "@navikt/ds-css": "5.17.0",
         "@navikt/ds-react": "5.17.0",
