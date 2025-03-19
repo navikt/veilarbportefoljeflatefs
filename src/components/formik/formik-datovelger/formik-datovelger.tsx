@@ -1,11 +1,10 @@
 import React from 'react';
 import {Field, FieldProps, getIn} from 'formik';
+import {ErrorMessage, Label} from '@navikt/ds-react';
 import {Datepicker} from 'nav-datovelger';
 import {validerDatoFeldt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
 import 'nav-datovelger/lib/styles/main.css';
-import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
-import {Label} from '@navikt/ds-react';
 
 interface FormikDatepickerProps {
     name: string;
@@ -37,7 +36,7 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
                                 className: 'datovelger__DayPicker'
                             }}
                         />
-                        <SkjemaelementFeilmelding>{error}</SkjemaelementFeilmelding>
+                        {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
                 );
             }}

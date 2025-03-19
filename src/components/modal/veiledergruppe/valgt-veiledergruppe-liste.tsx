@@ -1,10 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {SkjemaelementFeilmelding} from 'nav-frontend-skjema';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {BodyShort, Button, ErrorMessage} from '@navikt/ds-react';
+import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
 import './veiledergruppe-modal.css';
-import {TrashIcon} from '@navikt/aksel-icons';
 
 interface ValgtVeiledergruppeListeProps {
     valgteVeileder: string[];
@@ -57,7 +56,7 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
                     ))
                 )}
             </div>
-            <SkjemaelementFeilmelding>{feil}</SkjemaelementFeilmelding>
+            {feil && <ErrorMessage showIcon>{feil}</ErrorMessage>}
         </>
     );
 }
