@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
@@ -214,9 +214,10 @@ export function VeiledergruppeModal({
                         closeOnBackdropClick={true}
                         className={classNames('veiledergruppe-modal', className)}
                         width="medium"
+                        aria-labelledby="veiledergruppe-modal-overskrift"
                     >
                         <Modal.Header>
-                            <Heading size="medium" level="1">
+                            <Heading id="veiledergruppe-modal-overskrift" size="medium" level="1">
                                 {modalTittel}
                             </Heading>
                         </Modal.Header>
