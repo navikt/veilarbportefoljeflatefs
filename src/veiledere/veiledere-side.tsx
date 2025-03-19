@@ -1,13 +1,12 @@
-import * as React from 'react';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {Box} from '@navikt/ds-react';
 import VeiledersideVisning from './veilederside-visning';
 import Innholdslaster from '../innholdslaster/innholdslaster';
 import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
-import './veiledere.css';
 import ToppMeny from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
@@ -21,9 +20,9 @@ import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statu
 import {MetrikkEkspanderbartpanel} from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {Panel} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
+import './veiledere.css';
 
 function VeiledereSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -73,9 +72,9 @@ function VeiledereSide() {
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">
-                        <Panel className="sok-veileder" role="search">
+                        <Box className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
-                        </Panel>
+                        </Box>
                         <MetrikkEkspanderbartpanel tittel="Veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                         </MetrikkEkspanderbartpanel>
