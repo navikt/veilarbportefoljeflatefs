@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import './laster-modal.css';
+import {useState} from 'react';
 import {Loader, Modal} from '@navikt/ds-react';
+import './laster-modal.css';
 
 interface LasterModalProps {
     isOpen: boolean;
@@ -14,6 +14,7 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
             onClose={() => setIsOpenLoaderModal(false)}
             className="veilarbportefoljeflatefs-laster-modal"
             data-testid="veilarbportefoljeflatefs-laster-modal"
+            aria-label="Laster..."
         >
             <Loader size="2xlarge" />
         </Modal>

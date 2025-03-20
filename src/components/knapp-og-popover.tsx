@@ -1,7 +1,5 @@
-import {Button, Popover} from '@navikt/ds-react';
-import PopoverContent from '@navikt/ds-react/esm/popover/PopoverContent';
-import * as React from 'react';
 import {RefObject, useRef, useState} from 'react';
+import {Button, Popover} from '@navikt/ds-react';
 
 type KnappOgPopoverProps = {
     ikon: JSX.Element;
@@ -33,7 +31,7 @@ export const KnappOgPopover = ({ikon, knappTekst, popoverInnhold, innerRef}: Kna
                 placement="bottom"
                 strategy="fixed"
             >
-                <PopoverContent>{popoverInnhold}</PopoverContent>
+                <Popover.Content>{popoverInnhold}</Popover.Content>
             </Popover>
         </div>
     );

@@ -177,9 +177,14 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
     return (
         <>
-            <Modal open={visAdvarselOmSletting} onClose={lukkFjernModal} closeOnBackdropClick={true}>
+            <Modal
+                open={visAdvarselOmSletting}
+                onClose={lukkFjernModal}
+                closeOnBackdropClick={true}
+                aria-labelledby="sletting-ved-kontorbytte-overskrift"
+            >
                 <Modal.Header>
-                    <Heading size="medium" level="2">
+                    <Heading id="sletting-ved-kontorbytte-overskrift" size="medium" level="2">
                         Huskelapp og/eller kategori blir slettet
                     </Heading>
                 </Modal.Header>

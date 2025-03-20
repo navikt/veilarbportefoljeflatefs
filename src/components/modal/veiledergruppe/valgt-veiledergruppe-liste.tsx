@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import {BodyShort, Button, ErrorMessage} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
@@ -56,7 +55,7 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
                     ))
                 )}
             </div>
-            {feil && <ErrorMessage showIcon>{feil}</ErrorMessage>}
+            {feil && <ErrorMessage>{feil}</ErrorMessage>}
         </>
     );
 }
