@@ -5,7 +5,8 @@ import {
     DARKMODE,
     PORTEFOLJE_FEATURES,
     SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE
+    VEDTAKSTOTTE,
+    VIS_VEDTAKSLOSNING_14A
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -18,7 +19,8 @@ const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false
+    [ALERTSTRIPE_FEILMELDING]: false,
+    [VIS_VEDTAKSLOSNING_14A]: false
 };
 
 // Reducer

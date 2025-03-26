@@ -27,7 +27,11 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {
+    VEDTAKSTOTTE,
+    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
+    VIS_VEDTAKSLOSNING_14A
+} from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -48,6 +52,8 @@ interface FiltreringStatusProps {
 
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erToggleVisVedtakslosning14aPa = useFeatureSelector()(VIS_VEDTAKSLOSNING_14A);
+    const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
 
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
@@ -149,7 +155,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
                         labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
                     />
-                    {erVedtaksStotteFeatureTogglePa && (
+                    {visInnholdForNyVedtakslosning14a && (
                         <BarInputRadio
                             filterNavn="underVurdering"
                             handleChange={handleRadioButtonChange}

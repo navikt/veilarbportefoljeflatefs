@@ -7,7 +7,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../konstanter';
+import {VEDTAKSTOTTE, VIS_VEDTAKSLOSNING_14A} from '../konstanter';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import {useDispatch} from 'react-redux';
 import './enhetsportefolje.css';
@@ -34,6 +34,8 @@ function EnhetBrukerpanel({
 }: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erToggleVisVedtakslosning14aPa = useFeatureSelector()(VIS_VEDTAKSLOSNING_14A);
+    const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
     const dispatch = useDispatch();
 
     const scrollToLastPos = () => {
@@ -77,7 +79,7 @@ function EnhetBrukerpanel({
             />
             <div className="brukerliste__gutter-right">
                 <div className="brukerliste__etiketter">
-                    <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                    <Etiketter bruker={bruker} visInnholdForNyVedtakslosning14a={visInnholdForNyVedtakslosning14a} />
                 </div>
             </div>
         </li>
