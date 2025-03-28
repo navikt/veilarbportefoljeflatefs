@@ -6,12 +6,13 @@ import {hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
     bruker: BrukerModell;
-    erVedtakStotteFeatureTogglePa: boolean;
+    visInnholdForNyVedtakslosning14a: boolean;
 }
 
-function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
+function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
+
     return (
         <>
             <HiddenEtikett variant="info" size="small" hidden={!bruker.erDoed} className="tabell-etikett etikett--doed">
@@ -37,7 +38,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    erVedtakStotteFeatureTogglePa
+                    visInnholdForNyVedtakslosning14a
                         ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
                         : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
                 }
@@ -49,7 +50,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    erVedtakStotteFeatureTogglePa
+                    visInnholdForNyVedtakslosning14a
                         ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
                         : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
                 }
@@ -61,7 +62,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    !erVedtakStotteFeatureTogglePa ||
+                    !visInnholdForNyVedtakslosning14a ||
                     !bruker.trengerVurdering ||
                     bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER
                 }
@@ -73,7 +74,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    !erVedtakStotteFeatureTogglePa ||
+                    !visInnholdForNyVedtakslosning14a ||
                     !bruker.trengerVurdering ||
                     bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER
                 }
@@ -85,7 +86,7 @@ function Etiketter({bruker, erVedtakStotteFeatureTogglePa}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    !erVedtakStotteFeatureTogglePa ||
+                    !visInnholdForNyVedtakslosning14a ||
                     !bruker.trengerVurdering ||
                     bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING
                 }

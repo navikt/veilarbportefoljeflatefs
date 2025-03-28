@@ -11,7 +11,7 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../konstanter';
+import {VEDTAKSTOTTE, VIS_VEDTAKSLOSNING_14A} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
@@ -44,6 +44,8 @@ export function MinoversiktBrukerPanel({
     const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
+    const erToggleVisVedtakslosning14aPa = useFeatureSelector()(VIS_VEDTAKSLOSNING_14A);
+    const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');
@@ -118,7 +120,10 @@ export function MinoversiktBrukerPanel({
                 />
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
-                        <Etiketter bruker={bruker} erVedtakStotteFeatureTogglePa={erVedtaksStotteFeatureTogglePa} />
+                        <Etiketter
+                            bruker={bruker}
+                            visInnholdForNyVedtakslosning14a={visInnholdForNyVedtakslosning14a}
+                        />
                         {bruker.nyForVeileder && (
                             <Tag className="tabell-etikett" variant="info" size="small">
                                 Ny bruker
