@@ -102,9 +102,6 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
             >
                 Sykmeldt
             </HiddenEtikett>
-            <HiddenEtikett variant="info" size="small" hidden={!bruker.trengerRevurdering} className="tabell-etikett">
-                Revurdering
-            </HiddenEtikett>
         </>
     );
 }
