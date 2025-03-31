@@ -249,7 +249,6 @@ export interface BrukerModell {
     utkast14aStatus?: string;
     utkast14aStatusEndret?: string;
     utkast14aAnsvarligVeileder?: string;
-    trengerRevurdering: boolean;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
