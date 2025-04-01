@@ -20,7 +20,7 @@ const initalState: FeaturesState = {
     [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [VIS_VEDTAKSLOSNING_14A]: false
+    [VIS_VEDTAKSLOSNING_14A]: true
 };
 
 // Reducer
