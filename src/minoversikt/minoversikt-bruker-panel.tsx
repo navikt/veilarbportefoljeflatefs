@@ -11,7 +11,7 @@ import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE, VIS_VEDTAKSLOSNING_14A} from '../konstanter';
+import {VEDTAKSTOTTE} from '../konstanter';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
@@ -44,7 +44,7 @@ export function MinoversiktBrukerPanel({
     const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erToggleVisVedtakslosning14aPa = useFeatureSelector()(VIS_VEDTAKSLOSNING_14A);
+    const erToggleVisVedtakslosning14aPa = true;
     const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
 
     const scrollToLastPos = () => {
