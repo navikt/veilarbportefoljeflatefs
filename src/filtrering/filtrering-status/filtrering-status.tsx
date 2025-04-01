@@ -27,11 +27,7 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    VEDTAKSTOTTE,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
-    VIS_VEDTAKSLOSNING_14A
-} from '../../konstanter';
+import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -52,7 +48,7 @@ interface FiltreringStatusProps {
 
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
     const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erToggleVisVedtakslosning14aPa = useFeatureSelector()(VIS_VEDTAKSLOSNING_14A);
+    const erToggleVisVedtakslosning14aPa = true;
     const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
 
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
