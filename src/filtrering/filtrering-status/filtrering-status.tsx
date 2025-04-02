@@ -27,7 +27,7 @@ import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE, VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
+import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import FilterStatusMineFargekategorier from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -47,10 +47,6 @@ interface FiltreringStatusProps {
 }
 
 export function FiltreringStatus({filtervalg, oversiktType, statustall}: FiltreringStatusProps) {
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erToggleVisVedtakslosning14aPa = true;
-    const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
-
     const {utenBrukerinnsyn: statustallUtenBrukerinnsyn, medBrukerinnsyn: statustallMedBrukerinnsyn} = statustall;
     const ferdigfilterListe = filtervalg.ferdigfilterListe;
     const statustallTotalt = statustallMedBrukerinnsyn.totalt + (statustallUtenBrukerinnsyn?.totalt ?? 0);
@@ -151,15 +147,13 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
                         labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
                     />
-                    {visInnholdForNyVedtakslosning14a && (
-                        <BarInputRadio
-                            filterNavn="underVurdering"
-                            handleChange={handleRadioButtonChange}
-                            antall={statustallMedBrukerinnsyn.underVurdering}
-                            filterVerdi={UNDER_VURDERING}
-                            labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
-                        />
-                    )}
+                    <BarInputRadio
+                        filterNavn="underVurdering"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.underVurdering}
+                        filterVerdi={UNDER_VURDERING}
+                        labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
+                    />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio

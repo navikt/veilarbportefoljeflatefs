@@ -6,8 +6,6 @@ import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interface
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
-import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
-import {VEDTAKSTOTTE} from '../konstanter';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import {useDispatch} from 'react-redux';
 import './enhetsportefolje.css';
@@ -33,9 +31,6 @@ function EnhetBrukerpanel({
     forrigeBruker
 }: EnhetBrukerpanelProps) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
-    const erVedtaksStotteFeatureTogglePa = useFeatureSelector()(VEDTAKSTOTTE);
-    const erToggleVisVedtakslosning14aPa = true;
-    const visInnholdForNyVedtakslosning14a = erVedtaksStotteFeatureTogglePa || erToggleVisVedtakslosning14aPa;
     const dispatch = useDispatch();
 
     const scrollToLastPos = () => {
@@ -79,7 +74,7 @@ function EnhetBrukerpanel({
             />
             <div className="brukerliste__gutter-right">
                 <div className="brukerliste__etiketter">
-                    <Etiketter bruker={bruker} visInnholdForNyVedtakslosning14a={visInnholdForNyVedtakslosning14a} />
+                    <Etiketter bruker={bruker} />
                 </div>
             </div>
         </li>

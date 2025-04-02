@@ -1,15 +1,13 @@
-import * as React from 'react';
+import {Tag} from '@navikt/ds-react';
 import {BrukerModell, VurderingsBehov} from '../../model-interfaces';
 import hiddenIf from '../hidden-if/hidden-if';
-import {Tag} from '@navikt/ds-react';
 import {hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
     bruker: BrukerModell;
-    visInnholdForNyVedtakslosning14a: boolean;
 }
 
-function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
+function Etiketter({bruker}: EtiketterProps) {
     const HiddenEtikett = hiddenIf(Tag);
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
 
@@ -37,11 +35,7 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
             <HiddenEtikett
                 variant="info"
                 size="small"
-                hidden={
-                    visInnholdForNyVedtakslosning14a
-                        ? bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
-                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT
-                }
+                hidden={bruker.vurderingsBehov !== VurderingsBehov.IKKE_VURDERT}
                 className="tabell-etikett"
             >
                 Trenger vurdering
@@ -49,11 +43,7 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
             <HiddenEtikett
                 variant="info"
                 size="small"
-                hidden={
-                    visInnholdForNyVedtakslosning14a
-                        ? bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
-                        : !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING
-                }
+                hidden={bruker.vurderingsBehov !== VurderingsBehov.ARBEIDSEVNE_VURDERING}
                 className="tabell-etikett"
             >
                 Behov for AEV
@@ -61,11 +51,7 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
             <HiddenEtikett
                 variant="info"
                 size="small"
-                hidden={
-                    !visInnholdForNyVedtakslosning14a ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER
-                }
+                hidden={!bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.OPPGITT_HINDRINGER}
                 className="tabell-etikett"
             >
                 Oppgitt hindringer
@@ -73,11 +59,7 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
             <HiddenEtikett
                 variant="info"
                 size="small"
-                hidden={
-                    !visInnholdForNyVedtakslosning14a ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER
-                }
+                hidden={!bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_GODE_MULIGHETER}
                 className="tabell-etikett"
             >
                 Antatt gode muligheter
@@ -86,9 +68,7 @@ function Etiketter({bruker, visInnholdForNyVedtakslosning14a}: EtiketterProps) {
                 variant="info"
                 size="small"
                 hidden={
-                    !visInnholdForNyVedtakslosning14a ||
-                    !bruker.trengerVurdering ||
-                    bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING
+                    !bruker.trengerVurdering || bruker.vurderingsBehov !== VurderingsBehov.ANTATT_BEHOV_FOR_VEILEDNING
                 }
                 className="tabell-etikett"
             >
