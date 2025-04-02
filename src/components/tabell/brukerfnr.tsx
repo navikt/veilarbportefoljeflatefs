@@ -1,6 +1,5 @@
-import * as React from 'react';
-import {BrukerModell} from '../../model-interfaces';
 import {BodyShort, CopyButton, Tooltip} from '@navikt/ds-react';
+import {BrukerModell} from '../../model-interfaces';
 import '../../enhetsportefolje/brukerliste.css';
 
 interface BrukerFnrProps {
@@ -8,7 +7,7 @@ interface BrukerFnrProps {
     bruker: BrukerModell;
 }
 
-function BrukerFnr({className, bruker}: BrukerFnrProps) {
+export function BrukerFnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (
@@ -25,5 +24,3 @@ function BrukerFnr({className, bruker}: BrukerFnrProps) {
         </BodyShort>
     );
 }
-
-export default BrukerFnr;

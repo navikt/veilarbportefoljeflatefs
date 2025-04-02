@@ -1,4 +1,4 @@
-import React from 'react';
+import {ReactNode} from 'react';
 import {useDispatch} from 'react-redux';
 import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
@@ -10,8 +10,8 @@ import {pagineringSetup} from '../../ducks/paginering';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {MineFilterTab} from './mine-filter-tab';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
-import FiltreringFilter from '../../filtrering/filtrering-filter/filtrering-filter';
-import FilteringVeiledergrupper from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
+import {FiltreringFilter} from '../../filtrering/filtrering-filter/filtrering-filter';
+import {FilteringVeiledergrupper} from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 
 interface Props {
     valgtFane: SidebarTabs;
@@ -34,7 +34,7 @@ export const Fanevelger = ({
 }: Props) => {
     const dispatch = useDispatch();
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);

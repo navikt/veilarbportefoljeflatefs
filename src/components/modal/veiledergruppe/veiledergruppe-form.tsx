@@ -1,9 +1,9 @@
-import React, {PropsWithChildren} from 'react';
-import {FiltervalgModell} from '../../../model-interfaces';
-import ValgtVeiledergruppeListe from './valgt-veiledergruppe-liste';
-import './veiledergruppe-modal.css';
-import SokVeiledereVeiledergrupper from './søk-veiledere-veiledergrupper';
+import {PropsWithChildren} from 'react';
 import {BodyShort, TextField} from '@navikt/ds-react';
+import {FiltervalgModell} from '../../../model-interfaces';
+import {ValgtVeiledergruppeListe} from './valgt-veiledergruppe-liste';
+import {SokVeiledereVeiledergrupper} from './søk-veiledere-veiledergrupper';
+import './veiledergruppe-modal.css';
 
 interface VeiledergruppeFormProps {
     filterValg: FiltervalgModell;
@@ -14,7 +14,7 @@ interface VeiledergruppeFormProps {
     errors: any;
 }
 
-function VeiledergruppeForm({
+export function VeiledergruppeForm({
     filterValg,
     handterVeilederChange,
     gruppeNavn,
@@ -63,5 +63,3 @@ function VeiledergruppeForm({
         </form>
     );
 }
-
-export default VeiledergruppeForm;

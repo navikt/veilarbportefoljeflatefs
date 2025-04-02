@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AnyAction} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -18,7 +18,7 @@ interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
 }
 
-function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
+export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) {
     const [visVeiledergruppeModal, setVisVeiledergruppeModal] = useState(false);
 
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
@@ -100,5 +100,3 @@ function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppeProps) 
         </>
     );
 }
-
-export default FilteringVeiledergrupper;

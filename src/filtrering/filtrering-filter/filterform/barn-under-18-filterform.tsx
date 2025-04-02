@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
-import Grid from '../../../components/grid/grid';
+import {Grid} from '../../../components/grid/grid';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
 
 interface BarnUnder18Props {
@@ -17,7 +17,7 @@ interface BarnUnder18Props {
     className?: string;
 }
 
-function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg, className}: BarnUnder18Props) {
+export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg, className}: BarnUnder18Props) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
@@ -217,5 +217,3 @@ function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, filtervalg
         </form>
     );
 }
-
-export default BarnUnder18FilterForm;

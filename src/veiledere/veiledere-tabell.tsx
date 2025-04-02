@@ -1,4 +1,3 @@
-import React from 'react';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import {BodyShort, Button} from '@navikt/ds-react';
@@ -16,7 +15,7 @@ interface VeiledereTabellProps {
     sorterPaaPortefoljestorrelse: () => void;
 }
 
-function VeilederTabell({
+export function VeilederTabell({
     veiledere,
     currentSortering,
     sorterPaaEtternavn,
@@ -130,5 +129,3 @@ function VeilederTabell({
         </div>
     );
 }
-
-export default VeilederTabell;

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import {ReactNode} from 'react';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
-import Header, {HeaderProps} from './header';
+import {Header, HeaderProps} from './header';
 import {OrNothing} from '../../utils/types/types';
 import './tabell.css';
 
@@ -12,12 +12,12 @@ interface SorteringHeaderProps extends HeaderProps {
     onClick: (sortering: string) => void;
     rekkefolge: OrNothing<Sorteringsrekkefolge>;
     erValgt: boolean;
-    tekst: React.ReactNode;
+    tekst: ReactNode;
     title?: string;
     headerTestId?: string;
 }
 
-function SorteringHeader({
+export function SorteringHeader({
     sortering,
     onClick,
     rekkefolge,
@@ -74,5 +74,3 @@ function SorteringHeader({
         </Header>
     );
 }
-
-export default SorteringHeader;

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Heading, Modal} from '@navikt/ds-react';
 
 interface ModalProps {
@@ -32,5 +31,3 @@ export function EgenModal({children, className, open = true, onClose, tittel, mo
         </Modal>
     );
 }
-
-export default EgenModal;

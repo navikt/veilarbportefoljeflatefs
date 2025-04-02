@@ -1,15 +1,14 @@
-import * as React from 'react';
-import VeilederCheckboxListe from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import {useEffect, useRef, useState} from 'react';
-import {FiltervalgModell} from '../model-interfaces';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
+import {VeilederCheckboxListe} from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
+import {FiltervalgModell} from '../model-interfaces';
 
 interface FiltreringVeiledereProps {
     filtervalg: FiltervalgModell;
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVeiledereProps) {
+export function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVeiledereProps) {
     const [veilederNavnQuery, setVeilederNavnQuery] = useState(filtervalg.veilederNavnQuery);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const isInitialMount = useRef(true);
@@ -56,7 +55,7 @@ export default function FiltreringVeiledere({endreFiltervalg, filtervalg}: Filtr
             <TextField
                 label="Søk veileder"
                 placeholder="Navn eller Nav-ident"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVeilederNavnQuery(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setVeilederNavnQuery(e.target.value)}
                 value={veilederNavnQuery}
                 data-testid="veilederoversikt_sok-veileder-input"
                 aria-label="Navn eller Nav-ident"

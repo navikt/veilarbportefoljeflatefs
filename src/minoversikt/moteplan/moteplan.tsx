@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
@@ -23,7 +23,7 @@ interface MoteplanProps {
     enhet: string;
 }
 
-function Moteplan({veileder, enhet}: MoteplanProps) {
+export function Moteplan({veileder, enhet}: MoteplanProps) {
     const [maxAntallDager, setMaxAntallDager] = useState<number>(5);
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
@@ -104,5 +104,3 @@ function hentMoteplanDager(moter: MoteData[] | null): Date[] {
         .map(dato => new Date(dato))
         .sort(sorterStigendePaDato);
 }
-
-export default Moteplan;

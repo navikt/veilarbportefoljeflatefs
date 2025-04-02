@@ -1,46 +1,45 @@
-import * as React from 'react';
-import {useCallback, useEffect, useMemo, useState} from 'react';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import TabellOverskrift from '../components/tabell-overskrift';
+import {ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import classNames from 'classnames';
+import {Alert} from '@navikt/ds-react';
+import {Innholdslaster} from '../innholdslaster/innholdslaster';
+import {TabellOverskrift} from '../components/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
-import EnhetTabell from './enhetsportefolje-tabell';
-import EnhetTabellOverskrift from './enhetsportefolje-tabelloverskrift';
-import './enhetsportefolje.css';
-import './brukerliste.css';
-import ToppMeny from '../topp-meny/topp-meny';
+import {EnhetTabell} from './enhetsportefolje-tabell';
+import {EnhetTabellOverskrift} from './enhetsportefolje-tabelloverskrift';
+import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
-import {useDispatch, useSelector} from 'react-redux';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import '../style.css';
 import {useFetchStatustallForEnhet} from '../hooks/portefolje/use-fetch-statustall';
 import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
-import classNames from 'classnames';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import {Sidebar} from '../components/sidebar/sidebar';
 import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {useWindowWidth} from '../hooks/use-window-width';
-import Toolbar from '../components/toolbar/toolbar';
-import FiltreringNavnellerfnr from '../filtrering/filtrering-navnellerfnr';
-import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
+import {Toolbar} from '../components/toolbar/toolbar';
+import {FiltreringNavnellerfnr} from '../filtrering/filtrering-navnellerfnr';
+import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
-import {Alert} from '@navikt/ds-react';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallEnhetSelector} from '../hooks/redux/use-statustall';
 import {StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 import {StatustallEnhet} from '../ducks/statustall/statustall-typer';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
+import '../style.css';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -71,7 +70,7 @@ export function antallFilter(filtervalg) {
 const oversiktType = OversiktType.enhetensOversikt;
 const id = 'enhetens-oversikt';
 
-export default function EnhetSide() {
+export function EnhetSide() {
     const {portefolje, filtervalg, enhetId, sorteringsrekkefolge, sorteringsfelt, enhettiltak, listevisning} =
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
@@ -111,7 +110,7 @@ export default function EnhetSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);

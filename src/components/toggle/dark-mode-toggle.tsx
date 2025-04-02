@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import './dark-mode-toggle.css';
+import {useEffect, useState} from 'react';
 import {Switch} from '@navikt/ds-react';
+import './dark-mode-toggle.css';
 
-function DarkModeToggle() {
+export function DarkModeToggle() {
     const [darkmode, setDarkmode] = useState(localStorage.getItem('darkmode') === 'true');
 
     useEffect(() => {
@@ -18,5 +18,3 @@ function DarkModeToggle() {
         </div>
     );
 }
-
-export default DarkModeToggle;

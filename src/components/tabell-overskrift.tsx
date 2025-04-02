@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Label} from '@navikt/ds-react';
@@ -10,7 +9,7 @@ interface Props {
     className?: string;
 }
 
-function TabellOverskrift({className}: Props) {
+export function TabellOverskrift({className}: Props) {
     const portefolje = useSelector((state: AppState) => state.portefolje.data);
     const paginering = useSelector((state: AppState) => state.paginering);
 
@@ -36,5 +35,3 @@ function TabellOverskrift({className}: Props) {
         </Label>
     );
 }
-
-export default TabellOverskrift;

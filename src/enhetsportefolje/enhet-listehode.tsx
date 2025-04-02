@@ -1,4 +1,4 @@
-import SorteringHeader from '../components/tabell/sortering-header';
+import {SorteringHeader} from '../components/tabell/sortering-header';
 import {
     AktiviteterValg,
     DAGPENGER_YTELSE,
@@ -12,8 +12,6 @@ import {
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {OrNothing} from '../utils/types/types';
 import {Navn} from '../components/tabell/headerceller/Navn';
 import {Fnr} from '../components/tabell/headerceller/Fnr';
@@ -56,6 +54,8 @@ import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headercell
 import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
 import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -75,7 +75,7 @@ interface EnhetListehodeProps {
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-function EnhetListehode({
+export function EnhetListehode({
     sorteringsrekkefolge,
     sorteringOnClick,
     filtervalg,
@@ -260,5 +260,3 @@ function EnhetListehode({
         </div>
     );
 }
-
-export default EnhetListehode;

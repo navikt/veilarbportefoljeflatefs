@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
-import './mine-filter.css';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
 import {OrNothing} from '../../../utils/types/types';
@@ -10,9 +9,10 @@ import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import EgenModal from '../egenModal';
-import LasterModal from '../lastermodal/laster-modal';
+import {EgenModal} from '../egenModal';
+import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
+import './mine-filter.css';
 
 export enum Visningstype {
     MENY,

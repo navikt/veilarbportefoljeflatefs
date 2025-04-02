@@ -1,12 +1,11 @@
-import React from 'react';
-import EnhetListehode from './enhet-listehode';
+import {EnhetListehode} from './enhet-listehode';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import './enhetsportefolje.css';
 import './brukerliste.css';
-import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 
-function EnhetTabellOverskrift() {
+export function EnhetTabellOverskrift() {
     const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );
@@ -22,5 +21,3 @@ function EnhetTabellOverskrift() {
         />
     );
 }
-
-export default EnhetTabellOverskrift;

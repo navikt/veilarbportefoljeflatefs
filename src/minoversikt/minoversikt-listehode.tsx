@@ -1,4 +1,4 @@
-import SorteringHeader from '../components/tabell/sortering-header';
+import {SorteringHeader} from '../components/tabell/sortering-header';
 import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
 import {
     AktiviteterValg,
@@ -76,7 +76,7 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-function MinOversiktListeHode({
+export function MinOversiktListehode({
     sorteringsrekkefolge,
     sorteringOnClick,
     sorteringsfelt,
@@ -297,5 +297,3 @@ function MinOversiktListeHode({
         </div>
     );
 }
-
-export default MinOversiktListeHode;

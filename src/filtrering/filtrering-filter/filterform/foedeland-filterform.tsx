@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../model-interfaces';
-import Grid from '../../../components/grid/grid';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Grid} from '../../../components/grid/grid';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
 import {FoedelandOptions} from '../../../ducks/foedeland';
 import {landgruppe, landgruppeTooltips} from '../../filter-konstanter';
@@ -15,7 +15,7 @@ interface FoedelandFilterformProps {
     gridColumns?: number;
 }
 
-function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
+export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: FoedelandFilterformProps) {
     const [landgrupppeValg, setLandgrupppeValg] = useState<string[]>(filtervalg.landgruppe);
     const [selectedFoedeland, setSelectedFoedeland] = useState<FoedelandOptions[]>([]);
     const [foedelandSelectOptions, setFoedelandSelectOptions] = useState<FoedelandOptions[]>([]);
@@ -150,5 +150,3 @@ function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: Foe
         </>
     );
 }
-
-export default FoedelandFilterform;

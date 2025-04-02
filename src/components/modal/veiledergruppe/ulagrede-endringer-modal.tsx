@@ -1,7 +1,6 @@
-import React from 'react';
+import {Button} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './veiledergruppe-modal.css';
-import {Button} from '@navikt/ds-react';
 
 interface EndringerIkkeLagretModalProps {
     isOpen: boolean;
@@ -9,7 +8,7 @@ interface EndringerIkkeLagretModalProps {
     onSubmit: () => void;
 }
 
-function EndringerIkkeLagretModal({isOpen, onRequestClose, onSubmit}: EndringerIkkeLagretModalProps) {
+export function EndringerIkkeLagretModal({isOpen, onRequestClose, onSubmit}: EndringerIkkeLagretModalProps) {
     return (
         <VarselModal
             overskrift="Endringene er ikke lagret"
@@ -34,5 +33,3 @@ function EndringerIkkeLagretModal({isOpen, onRequestClose, onSubmit}: EndringerI
         </VarselModal>
     );
 }
-
-export default EndringerIkkeLagretModal;

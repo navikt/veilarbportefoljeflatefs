@@ -1,11 +1,10 @@
-import React from 'react';
-import './filterform.css';
+import {Radio, RadioGroup} from '@navikt/ds-react';
 import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../model-interfaces';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {OrNothing} from '../../../utils/types/types';
-import {Radio, RadioGroup} from '@navikt/ds-react';
-import Grid from '../../../components/grid/grid';
+import {Grid} from '../../../components/grid/grid';
+import './filterform.css';
 
 interface ValgType {
     [key: string]: {label: string; className?: string};
@@ -18,6 +17,7 @@ interface RadioFilterformProps {
     filtervalg: FiltervalgModell;
     gridColumns?: number;
 }
+
 export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridColumns = 1}: RadioFilterformProps) {
     const valgtFilterValg = filtervalg[form];
 

@@ -1,6 +1,5 @@
-import * as React from 'react';
-import {Maybe} from '../../../utils/types';
 import {BodyShort} from '@navikt/ds-react';
+import {Maybe} from '../../../utils/types';
 
 interface DatokolonneProps {
     className?: string;
@@ -8,7 +7,7 @@ interface DatokolonneProps {
     skalVises: boolean;
 }
 
-function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
+export function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
     if (!skalVises) {
         return null;
     }
@@ -29,5 +28,3 @@ function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
         </BodyShort>
     );
 }
-
-export default DatoKolonne;

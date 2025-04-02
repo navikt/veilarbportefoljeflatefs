@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import './laster-modal.css';
+import {useState} from 'react';
 import {Loader, Modal} from '@navikt/ds-react';
+import './laster-modal.css';
 
 interface LasterModalProps {
     isOpen: boolean;
 }
 
-const LasterModal = ({isOpen}: LasterModalProps) => {
+export const LasterModal = ({isOpen}: LasterModalProps) => {
     const [isOpenLoaderModal, setIsOpenLoaderModal] = useState<boolean>(isOpen);
     return (
         <Modal
@@ -19,5 +19,3 @@ const LasterModal = ({isOpen}: LasterModalProps) => {
         </Modal>
     );
 };
-
-export default LasterModal;

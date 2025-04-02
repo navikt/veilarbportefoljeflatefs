@@ -1,14 +1,13 @@
-import * as React from 'react';
-import {useEffect} from 'react';
+import {ReactNode, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import VeiledersideVisning from './veilederside-visning';
-import Innholdslaster from '../innholdslaster/innholdslaster';
-import FiltreringVeiledere from '../filtrering/filtrering-veiledere';
+import {Panel} from '@navikt/ds-react';
+import {VeilederesideVisning} from './veilederside-visning';
+import {Innholdslaster} from '../innholdslaster/innholdslaster';
+import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
-import './veiledere.css';
-import ToppMeny from '../topp-meny/topp-meny';
+import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
 import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
@@ -16,16 +15,16 @@ import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
-import FilteringVeiledergrupper from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
+import {FilteringVeiledergrupper} from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
 import {MetrikkEkspanderbartpanel} from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
-import LagredeFilterUIController from '../filtrering/lagrede-filter-controller';
-import {Panel} from '@navikt/ds-react';
+import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
+import './veiledere.css';
 
-function VeiledereSide() {
+export function VeiledereSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
@@ -56,7 +55,7 @@ function VeiledereSide() {
     useSetLocalStorageOnUnmount();
     LagredeFilterUIController({oversiktType: oversiktType});
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
@@ -93,7 +92,7 @@ function VeiledereSide() {
                             className="filtrering-label-container"
                             role="listitem"
                         />
-                        <VeiledersideVisning
+                        <VeilederesideVisning
                             veiledere={veiledere.data.veilederListe}
                             portefoljestorrelser={portefoljestorrelser}
                             veilederFilter={filtervalg.veiledere}
@@ -104,5 +103,3 @@ function VeiledereSide() {
         </div>
     );
 }
-
-export default VeiledereSide;

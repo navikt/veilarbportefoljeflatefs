@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
 import {BodyShort, Button, ErrorMessage} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
@@ -11,7 +10,7 @@ interface ValgtVeiledergruppeListeProps {
     feil?: string;
 }
 
-function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: ValgtVeiledergruppeListeProps) {
+export function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: ValgtVeiledergruppeListeProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const veiledere = veilederePaEnheten
         .filter(veilederPaEnhet => valgteVeileder.includes(veilederPaEnhet.ident))
@@ -60,5 +59,3 @@ function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: Va
         </>
     );
 }
-
-export default ValgtVeiledergruppeListe;

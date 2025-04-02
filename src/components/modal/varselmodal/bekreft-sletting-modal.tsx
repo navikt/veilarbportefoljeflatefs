@@ -1,4 +1,3 @@
-import React from 'react';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {VarselModal, VarselModalType} from './varselmodal';
@@ -13,7 +12,14 @@ interface BekreftSlettingModalProps {
     navn: string;
 }
 
-function BekreftSlettingModal({isOpen, onRequestClose, onSubmit, tittel, infoTekst, navn}: BekreftSlettingModalProps) {
+export function BekreftSlettingModal({
+    isOpen,
+    onRequestClose,
+    onSubmit,
+    tittel,
+    infoTekst,
+    navn
+}: BekreftSlettingModalProps) {
     const slettKnapp = () => {
         onSubmit();
         onRequestClose();
@@ -51,5 +57,3 @@ function BekreftSlettingModal({isOpen, onRequestClose, onSubmit, tittel, infoTek
         </VarselModal>
     );
 }
-
-export default BekreftSlettingModal;

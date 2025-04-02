@@ -1,7 +1,6 @@
-import * as React from 'react';
-import {BrukerModell, VeilederModell} from '../../model-interfaces';
-import {BodyShort, Tag} from '@navikt/ds-react';
 import classNames from 'classnames';
+import {BodyShort, Tag} from '@navikt/ds-react';
+import {BrukerModell, VeilederModell} from '../../model-interfaces';
 
 interface VeiledernavnProps {
     className?: string;
@@ -10,7 +9,7 @@ interface VeiledernavnProps {
     veileder?: VeilederModell;
 }
 
-function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProps) {
+export function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProps) {
     if (!skalVises) {
         return null;
     }
@@ -29,5 +28,3 @@ function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProp
         </div>
     );
 }
-
-export default VeilederNavn;

@@ -1,6 +1,6 @@
 import {HeadercelleProps} from '../HeadercelleProps';
 import {Kolonne} from '../../../../ducks/ui/listevisning';
-import Header from '../../header';
+import {Header} from '../../header';
 
 export const VeilederNavn = ({valgteKolonner}: HeadercelleProps) => (
     <Header

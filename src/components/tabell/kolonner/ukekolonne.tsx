@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 
 interface UkekolonneProps {
@@ -17,7 +16,7 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
+export function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }
@@ -27,5 +26,3 @@ function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) 
         </BodyShort>
     );
 }
-
-export default UkeKolonne;

@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {ReactChild, ReactNode, useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
+import {BodyShort} from '@navikt/ds-react';
 import {useFocus} from '../../hooks/use-focus';
 import './dropdown.css';
-import {BodyShort} from '@navikt/ds-react';
 
 const btnCls = (apen: boolean, className?: string) =>
     classNames('dropdown', className, {
@@ -13,9 +13,9 @@ const btnWrapperCls = (disabled?: boolean) =>
     classNames('dropdown__btnwrapper', {'dropdown__btnwrapper--disabled': disabled});
 
 interface DropdownProps {
-    name: React.ReactNode;
+    name: ReactNode;
     id: string;
-    render: (lukkDropdown: () => void) => React.ReactChild;
+    render: (lukkDropdown: () => void) => ReactChild;
     open?: boolean;
     onClose?: () => void;
     hoyre?: boolean;
@@ -24,7 +24,17 @@ interface DropdownProps {
     className?: string;
 }
 
-function Dropdown({name, id, render, open, onClose = () => {}, hoyre, disabled, hidden, className}: DropdownProps) {
+export function Dropdown({
+    name,
+    id,
+    render,
+    open,
+    onClose = () => {},
+    hoyre,
+    disabled,
+    hidden,
+    className
+}: DropdownProps) {
     const [apen, setApen] = useState(open || false);
     const btnRef = useRef<HTMLButtonElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
@@ -94,5 +104,3 @@ function Dropdown({name, id, render, open, onClose = () => {}, hoyre, disabled, 
         </div>
     );
 }
-
-export default Dropdown;

@@ -1,20 +1,19 @@
-import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
 import {FiltervalgModell, VeilederModell} from '../../model-interfaces';
-import './veileder-checkbox-liste.css';
 import {AppState} from '../../reducer';
-import NullstillKnapp from '../nullstill-valg-knapp/nullstill-knapp';
+import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import './veileder-checkbox-liste.css';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
 }
 
-function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps) {
+export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps) {
     const filtervalg: FiltervalgModell = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
@@ -113,5 +112,3 @@ function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxListeProps)
         );
     }
 }
-
-export default VeilederCheckboxListe;

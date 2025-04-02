@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {isEmptyArray} from 'formik';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../model-interfaces';
-import Grid from '../../../components/grid/grid';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Grid} from '../../../components/grid/grid';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 import {GeografiskBostedOptions} from '../../../ducks/geografiskBosted';
 
@@ -15,7 +15,11 @@ interface GeografiskBostedFilterformProps {
     gridColumns?: number;
 }
 
-function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 1}: GeografiskBostedFilterformProps) {
+export function GeografiskBostedFilterform({
+    endreFiltervalg,
+    filtervalg,
+    gridColumns = 1
+}: GeografiskBostedFilterformProps) {
     const [visGeografiskBosted, setVisGeografiskBosted] = useState<string[]>(filtervalg.visGeografiskBosted);
     const [selectedGeografiskBosted, setSelectedGeografiskBosted] = useState<GeografiskBostedOptions[]>([]);
     const [geografiskBostedOptions, setGeografiskBostedOptions] = useState<GeografiskBostedOptions[]>([]);
@@ -133,5 +137,3 @@ function GeografiskBostedFilterform({endreFiltervalg, filtervalg, gridColumns = 
         </form>
     );
 }
-
-export default GeografiskBostedFilterform;

@@ -1,16 +1,15 @@
-import React from 'react';
 import {Field, FieldProps, getIn} from 'formik';
+import classNames from 'classnames';
 import {ErrorMessage, Label} from '@navikt/ds-react';
 import {Datepicker} from 'nav-datovelger';
 import {validerDatoFeldt} from '../../../utils/dato-utils';
-import classNames from 'classnames';
 import 'nav-datovelger/lib/styles/main.css';
 
 interface FormikDatepickerProps {
     name: string;
 }
 
-function FormikDatoVelger({name}: FormikDatepickerProps) {
+export function FormikDatoVelger({name}: FormikDatepickerProps) {
     return (
         <Field validate={(value: string) => validerDatoFeldt(value, new Date(), true)} name={name} id={name}>
             {({field, form: {errors, setFieldValue}}: FieldProps) => {
@@ -43,5 +42,3 @@ function FormikDatoVelger({name}: FormikDatepickerProps) {
         </Field>
     );
 }
-
-export default FormikDatoVelger;

@@ -1,27 +1,26 @@
-import React from 'react';
-import './topp-meny.css';
+import {useSelector} from 'react-redux';
+import classNames from 'classnames';
 import Toasts from '../components/toast/toast';
 import {Lenker} from './lenker';
-import {useSelector} from 'react-redux';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
-import DarkModeToggle from '../components/toggle/dark-mode-toggle';
+import {DarkModeToggle} from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
-import classNames from 'classnames';
 import {getEndringsloggUrl} from '../utils/url-utils';
-import Moteplan from '../minoversikt/moteplan/moteplan';
+import {Moteplan} from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/listevisning';
-import Endringslogg from '../components/endringslogg';
+import {Endringslogg} from '../components/endringslogg';
+import './topp-meny.css';
 
 interface Props {
     erPaloggetVeileder?: boolean;
     oversiktType: OversiktType;
 }
 
-function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
+export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
     //VENTER PÅ ATT HENTE PORTEFOLJESTORRELSER FØR ATT VETA OM VI SKA VISA MIN OVERSIKT LENKEN ELLER EJ
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const innloggetVeileder = useSelector((state: AppState) => state.innloggetVeileder);
@@ -56,5 +55,3 @@ function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
         </div>
     );
 }
-
-export default ToppMeny;

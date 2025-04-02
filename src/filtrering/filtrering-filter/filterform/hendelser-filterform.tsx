@@ -1,13 +1,12 @@
-import * as React from 'react';
 import {useEffect, useState} from 'react';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
-import './filterform.css';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
-import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
+import './filterform.css';
 
 interface HendelserFilterformProps {
     form: string;

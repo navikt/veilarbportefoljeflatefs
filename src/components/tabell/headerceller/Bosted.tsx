@@ -1,7 +1,7 @@
 import {HeadercelleProps} from './HeadercelleProps';
 import {Sorteringsfelt} from '../../../model-interfaces';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import SorteringHeader from '../sortering-header';
+import {SorteringHeader} from '../sortering-header';
 
 /** Denne viser kommune, "Utland eller "Ukjent". */
 export const Bosted = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (

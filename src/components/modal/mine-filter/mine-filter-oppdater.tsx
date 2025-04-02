@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AnyAction} from 'redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -8,7 +8,7 @@ import {AppState} from '../../../reducer';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal';
-import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
+import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {lagreEndringer, slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';

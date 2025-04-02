@@ -1,4 +1,3 @@
-import React from 'react';
 import {Field, getIn} from 'formik';
 import {Textarea} from '@navikt/ds-react';
 
@@ -11,7 +10,7 @@ interface FormikTekstAreaProps {
     className?: string;
 }
 
-function FormikTekstArea({name, index, label = '', testId, maxLengde, className}: FormikTekstAreaProps) {
+export function FormikTekstArea({name, index, label = '', testId, maxLengde, className}: FormikTekstAreaProps) {
     const indexId = index ? `_${index}` : '';
 
     const validate = (value: string) => {
@@ -47,5 +46,3 @@ function FormikTekstArea({name, index, label = '', testId, maxLengde, className}
         </Field>
     );
 }
-
-export default FormikTekstArea;
