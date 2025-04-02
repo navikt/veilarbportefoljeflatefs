@@ -7,7 +7,6 @@ import {veilarbfilterHandlers} from './veilarbfilter';
 import {veilarboppfolgingHandlers} from './veilarboppfolging';
 import {veilarbportefoljeHandlers} from './veilarbportefolje';
 import {veilarbportefoljeflatefsHandlers} from './veilarbportefoljeflatefs';
-import {veilarbvedtaksstotteHandlers} from './veilarbvedtaksstotte';
 import {veilarbveilederHandlers} from './veilarbveileder';
 
 export const allHandlers: RequestHandler[] = [
@@ -19,6 +18,5 @@ export const allHandlers: RequestHandler[] = [
     ...veilarboppfolgingHandlers,
     ...veilarbportefoljeHandlers,
     ...veilarbportefoljeflatefsHandlers,
-    ...veilarbvedtaksstotteHandlers,
     ...veilarbveilederHandlers
 ];

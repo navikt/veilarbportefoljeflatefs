@@ -44,7 +44,6 @@ export const VEILARBPORTEFOLJE_URL = '/veilarbportefolje/api';
 export const VEILARBOPPFOLGING_URL = '/veilarboppfolging';
 export const VEILARBFILTER_URL = '/veilarbfilter/api';
 export const FEATURE_URL = '/feature';
-export const VEDTAKSTOTTE_FEATURE_URL = '/veilarbvedtaksstotte/api/utrulling/erUtrullet';
 
 function buildUrl(baseUrl: string, queryParams?: {}): string {
     if (queryParams) {
@@ -239,10 +238,6 @@ export function hentEnhetTiltak(enhetId) {
 
 export function hentFeatures(featureQueryString: string) {
     return fetchToJson(`${API_BASE_URL}${FEATURE_URL}?${featureQueryString}`);
-}
-
-export function hentVedtakstotteFeature(enhetId: string) {
-    return fetchToJson(`${VEDTAKSTOTTE_FEATURE_URL}?enhetId=${enhetId}`, MED_CREDENTIALS);
 }
 
 export function redigerMineFilter(endringer: RedigerLagretFilter): Promise<RedigerLagretFilter> {

@@ -1,13 +1,6 @@
 import {AppState} from '../reducer';
-import {hentFeatures, hentVedtakstotteFeature} from '../middleware/api';
-import {
-    ALERTSTRIPE_FEILMELDING,
-    DARKMODE,
-    PORTEFOLJE_FEATURES,
-    SPOR_OM_TILBAKEMELDING,
-    VEDTAKSTOTTE,
-    VIS_VEDTAKSLOSNING_14A
-} from '../konstanter';
+import {hentFeatures} from '../middleware/api';
+import {ALERTSTRIPE_FEILMELDING, DARKMODE, PORTEFOLJE_FEATURES, SPOR_OM_TILBAKEMELDING} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -17,10 +10,8 @@ export interface FeaturesState {
 
 const initalState: FeaturesState = {
     [SPOR_OM_TILBAKEMELDING]: false,
-    [VEDTAKSTOTTE]: false,
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false,
-    [VIS_VEDTAKSLOSNING_14A]: false
+    [ALERTSTRIPE_FEILMELDING]: false
 };
 
 // Reducer
@@ -44,17 +35,6 @@ export function hentFeaturesFraUnleash() {
             dispatch({
                 type: ADD_FEATURE,
                 features: json
-            })
-        );
-    };
-}
-
-export function hentFeatureForVedtaksstotte(enhetId: string) {
-    return dispatch => {
-        hentVedtakstotteFeature(enhetId).then(json =>
-            dispatch({
-                type: ADD_FEATURE,
-                features: {[VEDTAKSTOTTE]: json}
             })
         );
     };
