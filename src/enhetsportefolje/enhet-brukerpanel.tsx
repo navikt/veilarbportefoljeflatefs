@@ -1,7 +1,7 @@
 import {useLayoutEffect} from 'react';
 import classNames from 'classnames';
 import {Checkbox} from '@navikt/ds-react';
-import Etiketter from '../components/tabell/etiketter';
+import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import EnhetKolonner from './enhet-kolonner';

@@ -6,7 +6,7 @@ import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
 import {Checkbox, Tag} from '@navikt/ds-react';
 import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
-import Etiketter from '../components/tabell/etiketter';
+import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell} from '../model-interfaces';
 import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';

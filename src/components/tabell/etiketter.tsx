@@ -6,7 +6,7 @@ interface EtiketterProps {
     bruker: BrukerModell;
 }
 
-function Etiketter({bruker}: EtiketterProps) {
+export const Etiketter = ({bruker}: EtiketterProps) => {
     const skjermetInfo = hentSkjermetInfo(bruker.egenAnsatt, bruker.skjermetTil);
 
     return (
@@ -63,6 +63,4 @@ function Etiketter({bruker}: EtiketterProps) {
             )}
         </>
     );
-}
-
-export default Etiketter;
+};
