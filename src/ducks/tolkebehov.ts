@@ -1,6 +1,6 @@
 // Actions
-import {doThenDispatch, STATUS} from './utils';
 import * as Api from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
 
 export const OK = 'veilarbportefoljeflatefs/tolkebehov/OK';
 export const FEILET = 'veilarbportefoljeflatefs/tolkebehov/FEILET';
@@ -28,7 +28,7 @@ const initalState: TolkebehovSpraakListState = {
 };
 
 // Reducer
-export default function tolkebehovListReducer(state: TolkebehovSpraakListState = initalState, action) {
+export function tolkebehovListReducer(state: TolkebehovSpraakListState = initalState, action) {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

@@ -29,7 +29,7 @@ const initialState = {
     data: {}
 };
 
-export default function huskelappReducer(state = initialState, action) {
+export function huskelappReducer(state = initialState, action) {
     switch (action.type) {
         case HUSKELAPP_SLETT_PENDING:
         case HUSKELAPP_ENDRE_PENDING:

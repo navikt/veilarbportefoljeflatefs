@@ -1,10 +1,10 @@
 import {ComponentType} from 'react';
 
-export interface HiddenProps {
+interface HiddenProps {
     hidden?: boolean;
 }
 
-export default function hiddenIf<PROPS>(Component: ComponentType<PROPS>): ComponentType<PROPS & HiddenProps> {
+export function hiddenIf<PROPS>(Component: ComponentType<PROPS>): ComponentType<PROPS & HiddenProps> {
     return (props: PROPS & HiddenProps) => {
         const {hidden, ...rest} = props as any;
         if (hidden) {

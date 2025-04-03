@@ -17,7 +17,7 @@ export enum SesjonStatusAction {
 }
 
 // Reducer
-export default function reducer(
+export function informasjonsmeldingReducer(
     state: SesjonStatusState = initalStatusState,
     action: SesjonStatusDataAction
 ): SesjonStatusState {

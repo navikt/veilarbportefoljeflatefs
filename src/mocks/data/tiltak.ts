@@ -1,4 +1,4 @@
-const tiltak = {
+export const tiltak = {
     tiltak: {
         VV: 'Varig vernet arbeid (VVA)',
         OPPLT2AAR: '2-årig opplæringstiltak',
@@ -36,5 +36,3 @@ const tiltak = {
         ENKELAMO: 'Enkeltplass AMO'
     }
 };
-
-export default tiltak;

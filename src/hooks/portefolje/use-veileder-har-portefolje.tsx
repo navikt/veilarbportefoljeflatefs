@@ -1,5 +1,5 @@
-import {useIdentSelector} from '../redux/use-innlogget-ident';
 import {useSelector} from 'react-redux';
+import {useIdentSelector} from '../redux/use-innlogget-ident';
 import {AppState} from '../../reducer';
 
 export function useVeilederHarPortefolje() {

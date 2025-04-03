@@ -24,7 +24,7 @@ const feilBrukerfeilState: BrukerfeilState = {
 };
 
 // Reducer
-export default function reducer(state = initialBrukerfeilState, action: BrukerfeilDataAction): BrukerfeilState {
+export function brukerfeilReducer(state = initialBrukerfeilState, action: BrukerfeilDataAction): BrukerfeilState {
     switch (action.type) {
         case BrukerfeilAction.SETT_BRUKERFEILSTATE:
             action.data = feilBrukerfeilState;

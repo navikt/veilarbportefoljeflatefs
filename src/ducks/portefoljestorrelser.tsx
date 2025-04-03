@@ -1,5 +1,5 @@
 import {fetchPortefoljeStorrelser} from '../middleware/api';
-import {STATUS, doThenDispatch} from './utils';
+import {doThenDispatch, STATUS} from './utils';
 
 // Actions
 const OK = 'veilarbportefolje/portefoljestorrelser/OK';
@@ -26,7 +26,7 @@ const initialState: PortefoljeStorrelser = {
 };
 
 //  Reducer
-export default function portefoljestorrelserReducer(state = initialState, action) {
+export function portefoljestorrelserReducer(state = initialState, action) {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};

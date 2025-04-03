@@ -1,5 +1,5 @@
-import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import {BodyShort, Button} from '@navikt/ds-react';
+import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 
 export enum ErrorModalType {
     OPPDATERE,

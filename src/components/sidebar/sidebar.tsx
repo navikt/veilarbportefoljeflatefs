@@ -9,7 +9,7 @@ import {Tiltak} from '../../ducks/enhettiltak';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
-import outsideClick from '../../hooks/use-outside-click';
+import {useOutsideClick} from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
 import {StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
@@ -91,7 +91,7 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
         });
     };
 
-    outsideClick(sidebarRef, () => {
+    useOutsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
             logEvent('portefolje.metrikker.klikk-utenfor', {
                 sideNavn: finnSideNavn()

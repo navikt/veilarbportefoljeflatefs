@@ -9,7 +9,7 @@ const initalState = {
 };
 
 // Reducer
-export default function modalReducer(state = initalState, action) {
+export function modalReducer(state = initalState, action) {
     switch (action.type) {
         case SKJUL_MODAL:
             return initalState;

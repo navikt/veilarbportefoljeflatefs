@@ -1,4 +1,4 @@
-function getFeilmeldingForReducer(feilendeReducer) {
+export function getFeilmeldingForReducer(feilendeReducer) {
     const status = feilendeReducer?.data?.response?.status;
     if (status >= 500) {
         return 'Vi har dessverre tekniske problemer. Gjerne meld sak i Porten om problemet varer lenge.';
@@ -7,5 +7,3 @@ function getFeilmeldingForReducer(feilendeReducer) {
     }
     return null;
 }
-
-export default getFeilmeldingForReducer;

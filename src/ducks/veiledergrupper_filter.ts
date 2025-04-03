@@ -26,7 +26,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function veiledergrupperLagretFilterReducer(state: LagretFilterState = initialState, action) {
+export function veiledergrupperLagretFilterReducer(state: LagretFilterState = initialState, action) {
     switch (action.type) {
         case HENT_VEILEDERGRUPPER_PENDING:
         case NY_VEILEDERGRUPPER_PENDING:

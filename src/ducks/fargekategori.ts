@@ -1,5 +1,5 @@
-import {doThenDispatch, STATUS} from './utils';
 import * as Api from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
 
 // Actions
 export const FARGEKATEGORI_OPPDATER_OK = 'veilarbportefolje/oppdater_fargekategori/OK';
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function fargekategoriReducer(state = initialState, action) {
+export function fargekategoriReducer(state = initialState, action) {
     switch (action.type) {
         case FARGEKATEGORI_OPPDATER_OK:
         case FARGEKATEGORI_RESET: {

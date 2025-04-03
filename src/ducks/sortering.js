@@ -10,7 +10,7 @@ const initialState = {
 };
 
 // Reducer
-export default function sorteringReducer(state = initialState, action) {
+export function sorteringReducer(state = initialState, action) {
     switch (action.type) {
         case SORTERT_PA: {
             const {property} = action.data;

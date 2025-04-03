@@ -19,7 +19,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function innloggetVeilederReducer(state: InnloggetVeilederState = initialState, action) {
+export function innloggetVeilederReducer(state: InnloggetVeilederState = initialState, action) {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};

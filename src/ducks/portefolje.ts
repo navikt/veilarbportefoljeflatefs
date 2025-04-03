@@ -124,7 +124,7 @@ function updateFargekategoriForBrukere(brukere, fargekategoridata) {
     });
 }
 
-export default function portefoljeReducer(state = initialState, action): PortefoljeState {
+export function portefoljeReducer(state = initialState, action): PortefoljeState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

@@ -7,7 +7,7 @@ import {
     fjernSorteringToast,
     ToastActionType
 } from '../../store/toast/actions';
-import hiddenIf from '../hidden-if/hidden-if';
+import {hiddenIf} from '../hidden-if/hidden-if';
 import {AppState} from '../../reducer';
 import {OrNothing} from '../../utils/types/types';
 import {TimedToast} from './timed-toast';

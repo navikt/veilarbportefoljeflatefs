@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
+import {useHistory, useLocation} from 'react-router';
 import queryString from 'query-string';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
-import {useHistory, useLocation} from 'react-router';
 
 export function useSetEnhetIUrl() {
     const enhet = useEnhetSelector();

@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
-import {hentEnhetTiltak} from '../../ducks/enhettiltak';
 import {useDispatch, useSelector} from 'react-redux';
+import {hentEnhetTiltak} from '../../ducks/enhettiltak';
 import {AppState} from '../../reducer';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {hentPortefoljeStorrelser} from '../../ducks/portefoljestorrelser';

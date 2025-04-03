@@ -15,9 +15,7 @@ const alternativEnhet2 = {
     navn: 'Nav Brummedal'
 };
 
-const innloggetVeileder = {
+export const innloggetVeileder = {
     ...iv,
     enheter: [innloggetEnhet, alternativEnhet, alternativEnhet2]
 };
-
-export default innloggetVeileder;

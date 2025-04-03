@@ -1,5 +1,5 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import innloggetVeileder from '../data/innloggetVeileder';
+import {innloggetVeileder} from '../data/innloggetVeileder';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 

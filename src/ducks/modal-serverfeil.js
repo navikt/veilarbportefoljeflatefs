@@ -11,7 +11,7 @@ const initalState = {
     brukereError: []
 };
 
-export default function serverfeilModalReducer(state = initalState, action) {
+export function serverfeilModalReducer(state = initalState, action) {
     switch (action.type) {
         case SKJUL_SERVERFEIL_MODAL:
             return {...initalState};

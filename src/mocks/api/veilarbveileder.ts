@@ -1,6 +1,6 @@
-import innloggetVeileder from '../data/innloggetVeileder';
-import {veilederResponse} from '../data/veiledere';
 import {http, HttpResponse, RequestHandler} from 'msw';
+import {innloggetVeileder} from '../data/innloggetVeileder';
+import {veilederResponse} from '../data/veiledere';
 import {withAuth} from './auth';
 
 export const veilarbveilederHandlers: RequestHandler[] = [
