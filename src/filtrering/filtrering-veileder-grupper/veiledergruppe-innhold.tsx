@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useRef, useState} from 'react';
 import {AnyAction} from 'redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -13,7 +13,7 @@ import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
-import VeiledergruppeRad from './veiledergruppe_rad';
+import {VeiledergruppeRad} from './veiledergruppe_rad';
 import {kebabCase} from '../../utils/utils';
 import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import '../../components/sidebar/sidebar.css';
@@ -29,7 +29,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
+export function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnholdProps) {
     const [visEndreGruppeModal, setVisEndreGruppeModal] = useState(false);
     const valgtGruppeEnhetensOversikt = useSelector(
         (state: AppState) => state.mineFilterEnhetensOversikt.valgtVeiledergruppe
@@ -142,5 +142,3 @@ function VeiledergruppeInnhold({lagretFilter, oversiktType}: VeiledergruppeInnho
         </div>
     );
 }
-
-export default VeiledergruppeInnhold;

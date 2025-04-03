@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {ReactNode, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, useEventListener} from '@navikt/ds-react';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
@@ -11,13 +11,13 @@ interface ToolbarKnappProps {
     skalVises?: boolean;
     aktiv: boolean;
     tildelveileder: boolean;
-    ikon: React.ReactNode;
+    ikon: ReactNode;
     tittel: string;
     testid: string;
     oversiktType: OversiktType;
 }
 
-export default function ToolbarKnapp({
+export function ToolbarKnapp({
     skalVises,
     aktiv,
     tildelveileder,

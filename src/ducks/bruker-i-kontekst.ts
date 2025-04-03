@@ -1,7 +1,7 @@
 // Actions
+import {Dispatch} from 'redux';
 import {STATUS} from './utils';
 import * as Api from '../middleware/api';
-import {Dispatch} from 'redux';
 import {DataAction} from './types';
 
 enum BrukerIKontekstActionType {

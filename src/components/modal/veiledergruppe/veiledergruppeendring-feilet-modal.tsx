@@ -1,7 +1,6 @@
-import React from 'react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from '../varselmodal/varselmodal';
 import './veiledergruppe-modal.css';
-import {BodyShort, Button} from '@navikt/ds-react';
 
 interface VeiledergruppeendringFeiletProps {
     isOpen: boolean;
@@ -10,7 +9,7 @@ interface VeiledergruppeendringFeiletProps {
     tekst: string;
 }
 
-function VeiledergruppeendringFeiletModal({
+export function VeiledergruppeendringFeiletModal({
     isOpen,
     onRequestClose,
     innholdstittel,
@@ -25,5 +24,3 @@ function VeiledergruppeendringFeiletModal({
         </VarselModal>
     );
 }
-
-export default VeiledergruppeendringFeiletModal;

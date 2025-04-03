@@ -1,4 +1,4 @@
-import React from 'react';
+import {PropsWithChildren} from 'react';
 import classNames from 'classnames';
 import {Heading, Modal} from '@navikt/ds-react';
 import {CheckmarkCircleFillIcon, ExclamationmarkTriangleFillIcon, XMarkOctagonFillIcon} from '@navikt/aksel-icons';
@@ -29,7 +29,7 @@ export function VarselModal({
     className,
     dataTestClass,
     portalClassName
-}: React.PropsWithChildren<VarselModalProps>) {
+}: PropsWithChildren<VarselModalProps>) {
     return (
         <Modal
             open={isOpen}

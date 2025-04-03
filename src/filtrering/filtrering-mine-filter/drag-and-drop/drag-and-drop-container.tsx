@@ -1,4 +1,4 @@
-import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
+import {Dispatch, MutableRefObject, SetStateAction, useCallback, useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {useEventListener} from '../../../hooks/use-event-listener';
@@ -8,15 +8,15 @@ import {handleKeyDown, handleKeyUp} from './keyboard-event-listeners';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import './drag-and-drop.css';
 
-export interface DragAndDropContainerProps {
+interface DragAndDropContainerProps {
     dragAndDropOrder: LagretFilter[];
-    setDragAndDropOrder: React.Dispatch<React.SetStateAction<LagretFilter[]>>;
+    setDragAndDropOrder: Dispatch<SetStateAction<LagretFilter[]>>;
     lagreRekkefolge: () => void;
     avbryt: () => void;
     onUnmount: MutableRefObject<() => void>;
 }
 
-function DragAndDropContainer({
+export function DragAndDropContainer({
     dragAndDropOrder,
     setDragAndDropOrder,
     lagreRekkefolge,
@@ -223,5 +223,3 @@ function flyttElementIArray(arr: any[], fromIndex: number, toIndex: number) {
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, verdiSomFlyttes);
 }
-
-export default DragAndDropContainer;

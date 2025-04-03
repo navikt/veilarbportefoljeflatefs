@@ -1,7 +1,7 @@
-import React, {useRef, useState} from 'react';
+import {MouseEvent, useRef, useState} from 'react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {KnappOgPopover} from '../knapp-og-popover';
 import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
-import {BodyShort, Button} from '@navikt/ds-react';
 import {useEventListener} from '../../hooks/use-event-listener';
 import {vedKlikkUtenfor} from '../../utils/utils';
 import './aksjon-knapp-med-popover-feilmelding.css';
@@ -37,7 +37,7 @@ export const AksjonKnappMedPopoverFeilmelding = ({
         localStorage.setItem('yScrollPos', window.scrollY.toString());
     };
 
-    const handterKlikkAksjon = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handterKlikkAksjon = async (e: MouseEvent<HTMLButtonElement>) => {
         setXYScrollPosition();
         setHarFeilAksjon(false);
         setLasterAksjon(true);

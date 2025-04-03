@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import './stegviser.css';
 
@@ -7,7 +6,7 @@ interface StegviserProps {
     valgtSteg: number;
 }
 
-const Stegviser = ({antallSteg, valgtSteg}: StegviserProps) => {
+export const Stegviser = ({antallSteg, valgtSteg}: StegviserProps) => {
     const mapTilSteg = (antall: number, selectedIdx: number) => {
         return Array.from(Array(antall).keys()).map(stegnummer => (
             <div
@@ -25,5 +24,3 @@ const Stegviser = ({antallSteg, valgtSteg}: StegviserProps) => {
         </div>
     );
 };
-
-export default Stegviser;

@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import {ReactNode, RefObject, useState} from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
+import {Button, Popover} from '@navikt/ds-react';
 import {AppState} from '../../reducer';
 import {FARGEKATEGORI_OPPDATER_OK, oppdaterFargekategoriAction} from '../../ducks/fargekategori';
 import {FargekategoriDataModell, FargekategoriModell, Fargekategorinavn} from '../../model-interfaces';
-import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {Button, Popover} from '@navikt/ds-react';
+import {fargekategoriIkonMapper} from './fargekategori-ikon-mapper';
 import {FargekategoriFeilhandtering} from './FargekategoriFeilhandtering';
 import {hentStatustallForVeileder, leggTilStatustall} from '../../ducks/statustall/statustall-veileder';
 import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtrering-status/fargekategori';
@@ -15,14 +15,14 @@ import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjel
 import {BekreftEndreFargekategoriPaMangeModal} from './bekreft-endre-fargekategori-pa-mange-modal';
 
 interface FargekategoriPopoverProps {
-    buttonRef: React.RefObject<HTMLButtonElement>;
+    buttonRef: RefObject<HTMLButtonElement>;
     popoverOpen: boolean;
     setPopoverOpen: (openState: boolean) => void;
     valgteBrukereFnrs: string[];
     fargekategori?: FargekategoriModell | null;
     placement?: 'right' | 'bottom-start';
     skalBekrefteFlereEnn10?: boolean;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export const FargekategoriPopover = ({

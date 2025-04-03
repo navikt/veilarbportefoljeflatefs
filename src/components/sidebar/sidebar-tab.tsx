@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {useDispatch} from 'react-redux';
 import {Button, Heading} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
@@ -12,8 +13,8 @@ interface TabProps {
     tab: SidebarTabs;
     tittel: string;
     oversiktType: OversiktType;
-    headingChildren?: React.ReactNode;
-    children: React.ReactNode;
+    headingChildren?: ReactNode;
+    children: ReactNode;
 }
 
 export const SidebarTab = ({tab, tittel, oversiktType, headingChildren, children}: TabProps) => {

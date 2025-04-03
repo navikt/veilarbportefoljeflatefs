@@ -1,7 +1,6 @@
-import * as React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 
-function TilbakemeldingTakkModal() {
+export function TilbakemeldingTakkModal() {
     return (
         <div className="tilbakemelding-modal__takk-melding">
             <img
@@ -15,5 +14,3 @@ function TilbakemeldingTakkModal() {
         </div>
     );
 }
-
-export default TilbakemeldingTakkModal;

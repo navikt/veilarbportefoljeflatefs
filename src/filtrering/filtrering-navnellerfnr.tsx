@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
 import {FiltervalgModell} from '../model-interfaces';
 
@@ -50,7 +50,7 @@ export function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: Filtrering
                 label=""
                 hideLabel
                 placeholder="Søk etter navn eller fødselsnummer"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setNavnEllerFnrQuery(e.target.value)}
                 value={navnEllerFnrQuery}
                 data-testid="sok-navn-fnr_input"
                 id="sok-navn-fnr_input"

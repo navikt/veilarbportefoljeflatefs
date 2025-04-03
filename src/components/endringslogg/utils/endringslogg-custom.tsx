@@ -1,4 +1,4 @@
-import React from 'react';
+import {ReactNode} from 'react';
 
 export type BlockContentType = any;
 export type ModalType = {
@@ -20,7 +20,7 @@ export interface EndringsloggEntry {
     date?: string;
     linkText?: string;
     link?: string;
-    children?: React.ReactNode;
+    children?: ReactNode;
     featureToggleName?: string;
     modal?: ModalType;
     forced: boolean /* Ikkje brukt i EndringsloggEntry, kan den slettast etter kvart? 2024-03-14, Ingrid */;

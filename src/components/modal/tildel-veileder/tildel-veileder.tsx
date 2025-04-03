@@ -4,7 +4,7 @@ import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
 import {BrukerModell} from '../../../model-interfaces';
 import {AppState} from '../../../reducer';
-import SokFilter from '../../sok-veiledere/sok-filter';
+import {SokFilter} from '../../sok-veiledere/sok-filter';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';

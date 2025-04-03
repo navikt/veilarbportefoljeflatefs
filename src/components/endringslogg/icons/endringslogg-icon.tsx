@@ -1,8 +1,8 @@
-import * as React from 'react';
+import {FC} from 'react';
 
 export type StilType = 'mørk' | 'lys';
 
-export interface Props {
+interface Props {
     className?: string;
     height?: string;
     width?: string;
@@ -14,7 +14,7 @@ const farger = {
     lys: '#f1f1f1'
 };
 
-const EndringsloggIkon: React.FC<Props> = ({className, height, width, stil = 'mørk'}) => (
+export const EndringsloggIkon: FC<Props> = ({className, height, width, stil = 'mørk'}) => (
     <svg
         data-name="Layer 1"
         className={className}
@@ -43,5 +43,3 @@ const EndringsloggIkon: React.FC<Props> = ({className, height, width, stil = 'm�
         />
     </svg>
 );
-
-export default EndringsloggIkon;

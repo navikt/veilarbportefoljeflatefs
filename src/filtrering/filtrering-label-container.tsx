@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
-import FiltreringLabel from './filtrering-label';
+import {FiltreringLabel} from './filtrering-label';
 import {
     aktiviteter,
     AktiviteterValg,
@@ -17,11 +17,11 @@ import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-s
 import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../ducks/filtrering';
 import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
-import FiltreringLabelMedIkon from './filtrering-label-med-ikon';
+import {FiltreringLabelMedIkon} from './filtrering-label-med-ikon';
 import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
-import ArbeidslistekategoriVisning from '../components/tabell/arbeidslisteikon';
-import fargekategoriIkonMapper from '../components/fargekategori/fargekategori-ikon-mapper';
+import {ArbeidslistekategoriVisning} from '../components/tabell/arbeidslisteikon';
+import {fargekategoriIkonMapper} from '../components/fargekategori/fargekategori-ikon-mapper';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;

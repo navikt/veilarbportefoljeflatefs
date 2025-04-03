@@ -1,7 +1,6 @@
-import * as React from 'react';
 import {Heading, Loader, Table} from '@navikt/ds-react';
 import {MoteData} from './moteplan';
-import MoteKollonne from './motekollonne';
+import {MoteKollonne} from './motekollonne';
 
 interface MoteTabellProps {
     dato: Date;
@@ -9,7 +8,7 @@ interface MoteTabellProps {
     enhetId: string;
 }
 
-function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
+export function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
     return (
         <li>
             <Heading className="moteplan_tittel" size="small" level="2">
@@ -37,5 +36,3 @@ function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
         </li>
     );
 }
-
-export default MoteTabell;

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Alert, Link} from '@navikt/ds-react';
 import {useSesjonStatus} from '../../hooks/redux/use-informasjonsmelding';
 import {isDefined} from '../../utils/types/typeguards';

@@ -1,7 +1,7 @@
-import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
-import React from 'react';
-import {endreFiltervalg} from '../../ducks/filtrering';
 import {useDispatch, useSelector} from 'react-redux';
+import {Radio} from '@navikt/ds-react';
+import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
+import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {logEvent} from '../../utils/frontend-logger';
@@ -10,7 +10,6 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
-import {Radio} from '@navikt/ds-react';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
@@ -19,7 +18,12 @@ interface VeiledergruppeRadProps {
     erValgt: boolean;
 }
 
-function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType, erValgt}: VeiledergruppeRadProps) {
+export function VeiledergruppeRad({
+    veilederGruppe,
+    onClickRedigerKnapp,
+    oversiktType,
+    erValgt
+}: VeiledergruppeRadProps) {
     const dispatch = useDispatch();
 
     const lagredeGrupper = useSelector((state: AppState) =>
@@ -72,5 +76,3 @@ function VeiledergruppeRad({veilederGruppe, onClickRedigerKnapp, oversiktType, e
         </div>
     );
 }
-
-export default VeiledergruppeRad;

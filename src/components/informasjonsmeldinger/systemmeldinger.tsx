@@ -1,8 +1,7 @@
-import * as React from 'react';
-import '../modal/feilmelding-brukere.css';
-import {Alert, Heading} from '@navikt/ds-react';
 import BlockContent from '@sanity/block-content-to-react';
+import {Alert, Heading} from '@navikt/ds-react';
 import {useSystemmeldingerSelector} from '../../hooks/redux/use-systemmeldinger';
+import '../modal/feilmelding-brukere.css';
 
 export const Systemmeldinger = () => {
     const systemmeldinger = useSystemmeldingerSelector();

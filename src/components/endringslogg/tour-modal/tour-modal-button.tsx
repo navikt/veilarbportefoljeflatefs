@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {default as TourModal} from './tour-modal';
-import '../endringslogg.css';
-import {trackModalOpen} from '../utils/utils';
+import {useState} from 'react';
 import {Button} from '@navikt/ds-react';
+import {TourModal} from './tour-modal';
+import {trackModalOpen} from '../utils/utils';
 import {ModalType} from '../utils/endringslogg-custom';
+import '../endringslogg.css';
 
 interface ModalStepperProps {
     modal: ModalType;

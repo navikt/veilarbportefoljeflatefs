@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {ReactNode, useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 import {STATUS} from '../ducks/utils';
 import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
@@ -7,7 +7,7 @@ import {trackAmplitude} from '../amplitude/amplitude';
 interface InnholdslasterProps {
     avhengigheter: any;
     className?: string;
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export function Innholdslaster({avhengigheter, className, children}: InnholdslasterProps) {

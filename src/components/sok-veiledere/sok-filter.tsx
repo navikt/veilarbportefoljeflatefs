@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import '../toolbar/toolbar.css';
+import {ReactNode, useEffect, useRef, useState} from 'react';
 import {Alert, TextField} from '@navikt/ds-react';
+import '../toolbar/toolbar.css';
 
 function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
@@ -8,13 +8,13 @@ function limit<T>(liste: T[], antall: number) {
 
 interface SokFilterProps<T> {
     data: T[];
-    children: (filteredData: T[]) => React.ReactNode;
+    children: (filteredData: T[]) => ReactNode;
     label?: string;
     placeholder: string;
     limitSize?: number;
 }
 
-function SokFilter<T>({data, children, label, placeholder, limitSize}: SokFilterProps<T>) {
+export function SokFilter<T>({data, children, label, placeholder, limitSize}: SokFilterProps<T>) {
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
     const sokKnapp = useRef<HTMLInputElement>(null);
@@ -57,5 +57,3 @@ function SokFilter<T>({data, children, label, placeholder, limitSize}: SokFilter
         </>
     );
 }
-
-export default SokFilter;

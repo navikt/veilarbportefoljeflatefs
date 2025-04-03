@@ -1,11 +1,10 @@
-import * as React from 'react';
 import {PropsWithChildren} from 'react';
+import classNames from 'classnames';
 import {Redirect, useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
-import classNames from 'classnames';
-import './minoversikt.css';
 import {IdentParam} from '../model-interfaces';
+import './minoversikt.css';
 
 interface MinOversiktWrapperProps {
     className: string;

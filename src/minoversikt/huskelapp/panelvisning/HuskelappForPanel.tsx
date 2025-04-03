@@ -1,4 +1,3 @@
-import React from 'react';
 import {BodyShort, Button, Detail, Heading} from '@navikt/ds-react';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';

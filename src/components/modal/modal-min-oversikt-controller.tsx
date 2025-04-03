@@ -1,9 +1,9 @@
 import {TILDELING_FEILET} from '../../ducks/modal-feilmelding-brukere';
-import ServerFeilModal from './server-feil-modal';
+import {ServerFeilModal} from './server-feil-modal';
 import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
 import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
 import {NY_FEILET_MODAL} from '../../ducks/modal-serverfeil';
-import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
+import {FeilmeldingTildelingModal} from './feilmelding-tildeling-modal';
 import {TildelingerOk} from './modal-tildelinger-ok';
 import {logEvent} from '../../utils/frontend-logger';
 import './feilmelding-brukere.css';

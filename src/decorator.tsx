@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import NAVSPA from '@navikt/navspa';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';

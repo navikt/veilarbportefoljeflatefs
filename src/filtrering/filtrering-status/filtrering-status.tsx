@@ -1,3 +1,4 @@
+import {ChangeEvent} from 'react';
 import {useDispatch} from 'react-redux';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -23,12 +24,12 @@ import {
     VENTER_PA_SVAR_FRA_NAV
 } from '../filter-konstanter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
+import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
-import FilterStatusMineFargekategorier from './fargekategori';
+import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
 
@@ -64,14 +65,14 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, ferdigfilterListe: ferdigFilterListe}, oversiktType);
     }
 
-    function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = e.target.checked
             ? leggTilFerdigFilter(ferdigfilterListe!, e.target.value)
             : fjernFerdigfilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
     }
 
-    function handleRadioButtonChange(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleRadioButtonChange(e: ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
         if (e.target.value !== 'MIN_ARBEIDSLISTE') {

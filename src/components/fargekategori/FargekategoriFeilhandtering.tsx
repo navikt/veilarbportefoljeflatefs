@@ -1,9 +1,9 @@
-import React from 'react';
+import {ReactNode} from 'react';
 import {Alert, BodyShort, List} from '@navikt/ds-react';
 import {Status} from '../../model-interfaces';
 
 interface Props {
-    children: React.ReactNode;
+    children: ReactNode;
     apiResponse: {status: string; data: {response?: Response; data: string | {data: string[]; errors: string[]}}};
 }
 

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import {Button, Heading, Modal} from '@navikt/ds-react';
 import {ArrowLeftIcon, ArrowRightIcon} from '@navikt/aksel-icons';
-import Stegviser from '../stegviser/stegviser';
+import {Stegviser} from '../stegviser/stegviser';
 import {ModalType} from '../utils/endringslogg-custom';
 import './tour-modal.css';
 
@@ -12,7 +12,7 @@ interface TourModalProps {
     onClose: (e: boolean) => void;
 }
 
-const TourModal = ({modal, open, onClose}: TourModalProps) => {
+export const TourModal = ({modal, open, onClose}: TourModalProps) => {
     const [stepIndex, setStepIndex] = useState(0);
     const lukkModal = () => {
         setStepIndex(0);
@@ -90,5 +90,3 @@ const TourModal = ({modal, open, onClose}: TourModalProps) => {
         </Modal>
     );
 };
-
-export default TourModal;

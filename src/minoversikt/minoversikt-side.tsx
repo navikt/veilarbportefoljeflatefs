@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
@@ -80,7 +80,7 @@ export function MinoversiktSide() {
     const {ident} = useParams<IdentParam>();
     const veiledere = useVeilederListeSelector();
     const veilederFraUrl = veiledere.find(veileder => veileder.ident === ident) || {fornavn: '', etternavn: ''};
-    const doEndreFiltervalg = (filterId: string, filterVerdi: React.ReactNode) => {
+    const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [filterId]: filterVerdi}, oversiktType);

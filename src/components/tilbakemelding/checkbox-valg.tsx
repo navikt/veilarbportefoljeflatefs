@@ -1,6 +1,5 @@
-import * as React from 'react';
-import {kebabCase} from '../../utils/utils';
 import {useState} from 'react';
+import {kebabCase} from '../../utils/utils';
 
 export enum Meldepliktverdier {
     HAR_MELDEPLIKT = 'Om personen har meldeplikt eller ikke',
@@ -17,7 +16,7 @@ interface CheckboxValgProps {
     onCheckboxChanged: (verdi) => void;
 }
 
-function CheckboxValg({onCheckboxChanged}: CheckboxValgProps) {
+export function CheckboxValg({onCheckboxChanged}: CheckboxValgProps) {
     const [checkboxListe, setCheckboxListe] = useState<number[]>([]);
 
     const handleCheckboxChanged = (e, verdi: number) => {
@@ -160,4 +159,3 @@ function CheckboxValg({onCheckboxChanged}: CheckboxValgProps) {
         </div>
     );
 }
-export default CheckboxValg;

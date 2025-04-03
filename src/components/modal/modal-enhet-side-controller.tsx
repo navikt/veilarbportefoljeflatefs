@@ -1,6 +1,5 @@
-import React from 'react';
 import {TILDELING_FEILET} from '../../ducks/modal-feilmelding-brukere';
-import ServerFeilModal from './server-feil-modal';
+import {ServerFeilModal} from './server-feil-modal';
 import {
     NY_FEILET_MODAL,
     REDIGERING_FEILET_MODAL,
@@ -9,9 +8,9 @@ import {
 } from '../../ducks/modal-serverfeil';
 import {TildelingerOk} from './modal-tildelinger-ok';
 import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
-import FeilmeldingTildelingModal from './feilmelding-tildeling-modal';
+import {FeilmeldingTildelingModal} from './feilmelding-tildeling-modal';
 import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
-import VeiledergruppeendringFeiletModal from './veiledergruppe/veiledergruppeendring-feilet-modal';
+import {VeiledergruppeendringFeiletModal} from './veiledergruppe/veiledergruppeendring-feilet-modal';
 import {logEvent} from '../../utils/frontend-logger';
 import './feilmelding-brukere.css';
 

@@ -1,14 +1,13 @@
-import * as React from 'react';
 import {useState} from 'react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.css';
-import {BodyShort, Button} from '@navikt/ds-react';
 
 interface FilterFeilModalProps {
     isOpen: boolean;
 }
 
-export default function FilterFeilModal({isOpen}: FilterFeilModalProps) {
+export function FilterFeilModal({isOpen}: FilterFeilModalProps) {
     const [erAapen, setErAapen] = useState(isOpen);
 
     const lukkModal = () => {

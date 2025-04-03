@@ -1,4 +1,4 @@
-import React from 'react';
+import {ReactNode} from 'react';
 import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowsUpDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
@@ -10,14 +10,14 @@ interface SorteringHeaderIkonProps {
     onClick: (sortering: string) => void;
     rekkefolge?: OrNothing<Sorteringsrekkefolge>;
     erValgt?: boolean;
-    ikon: React.ReactNode;
+    ikon: ReactNode;
     title: string;
     headerId: string;
     skalVises?: boolean;
     className?: string;
 }
 
-function SorteringHeaderIkon({
+export function SorteringHeaderIkon({
     sortering,
     onClick,
     rekkefolge,
@@ -65,5 +65,3 @@ function SorteringHeaderIkon({
         ></Button>
     );
 }
-
-export default SorteringHeaderIkon;

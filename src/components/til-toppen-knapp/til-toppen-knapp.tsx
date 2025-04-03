@@ -1,11 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 import {ArrowUpIcon} from '@navikt/aksel-icons';
-import './til-toppen-knapp.css';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
+import './til-toppen-knapp.css';
 
 export const TilToppenKnapp = () => {
     const [scrollPosition, setScrollPosition] = useState<number | undefined>();

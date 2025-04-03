@@ -1,4 +1,3 @@
-import React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 
 export function MineFilterFnrFeil() {

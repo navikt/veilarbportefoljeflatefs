@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {PencilFillIcon, PencilIcon} from '@navikt/aksel-icons';
 import hiddenIf from '../hidden-if/hidden-if';

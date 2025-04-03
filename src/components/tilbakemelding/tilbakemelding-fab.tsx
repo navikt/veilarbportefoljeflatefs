@@ -1,9 +1,9 @@
-import React, {useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {sjekkFeature} from '../../ducks/features';
 import {SPOR_OM_TILBAKEMELDING} from '../../konstanter';
-import TilbakemeldingModal, {Tilbakemelding, TilbakemeldingCheckboxProps} from './tilbakemelding-modal';
+import {TilbakemeldingModal, Tilbakemelding, TilbakemeldingCheckboxProps} from './tilbakemelding-modal';
 import {logEvent} from '../../utils/frontend-logger';
 import {useEventListener} from '../../hooks/use-event-listener';
 import './tilbakemelding-fab.css';

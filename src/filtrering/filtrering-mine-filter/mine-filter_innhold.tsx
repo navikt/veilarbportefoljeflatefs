@@ -1,9 +1,9 @@
-import {useEffect, useRef} from 'react';
+import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {useDispatch} from 'react-redux';
 import {Alert, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import DragAndDrop from './drag-and-drop/drag-and-drop';
+import {DragAndDrop} from './drag-and-drop/drag-and-drop';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
@@ -15,7 +15,7 @@ export interface LagredeFilterInnholdProps {
     oversiktType: OversiktType;
     fjernUtilgjengeligeFilter: (elem: LagretFilter) => void;
     isDraggable: boolean;
-    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+    setisDraggable: Dispatch<SetStateAction<boolean>>;
     enhettiltak: OrNothing<Tiltak>;
 }
 
@@ -23,7 +23,7 @@ function isOverflown(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
 
-function MineFilterInnhold({
+export function MineFilterInnhold({
     lagretFilter,
     oversiktType,
     fjernUtilgjengeligeFilter,
@@ -114,5 +114,3 @@ function MineFilterInnhold({
 
     return filtrertListe().length > 0 ? hentFiltrertListeinnhold() : getEmptyState();
 }
-
-export default MineFilterInnhold;

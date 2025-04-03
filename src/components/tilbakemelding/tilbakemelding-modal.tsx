@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import classNames from 'classnames/dedupe';
 import {BodyShort, Button, Heading, Textarea} from '@navikt/ds-react';
-import TilbakemeldingTakkModal from './tilbakemelding-takk-modal';
-import TilfredshetValg from './tilfredshet-valg';
-import CheckboxValg from './checkbox-valg';
+import {TilbakemeldingTakkModal} from './tilbakemelding-takk-modal';
+import {TilfredshetValg} from './tilfredshet-valg';
+import {CheckboxValg} from './checkbox-valg';
 import './tilbakemelding-modal.css';
 
 export interface Tilbakemelding {
@@ -22,7 +22,11 @@ interface TilbakemeldingModalProps {
     onTilbakemeldingCheckboxSendt: (tilbakemelding: TilbakemeldingCheckboxProps) => void;
 }
 
-function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheckboxSendt}: TilbakemeldingModalProps) {
+export function TilbakemeldingModal({
+    open,
+    onTilbakemeldingSendt,
+    onTilbakemeldingCheckboxSendt
+}: TilbakemeldingModalProps) {
     const KOMMENTAR_MAX_CHAR = 750;
     const KOMMENTAR_ROWS = 5;
 
@@ -188,5 +192,3 @@ function TilbakemeldingModal({open, onTilbakemeldingSendt, onTilbakemeldingCheck
         </div>
     );
 }
-
-export default TilbakemeldingModal;

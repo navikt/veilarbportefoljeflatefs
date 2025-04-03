@@ -1,7 +1,6 @@
-import * as React from 'react';
+import {useState} from 'react';
 import classNames from 'classnames/dedupe';
 import './tilfredshet-valg.css';
-import {useState} from 'react';
 
 interface TilfredshetValgProps {
     onTilfredshetChanged: (tilfredshet: number) => void;
@@ -9,7 +8,7 @@ interface TilfredshetValgProps {
     className?: string;
 }
 
-function TilfredshetValg({onTilfredshetChanged, defaultTilfredshet, className}: TilfredshetValgProps) {
+export function TilfredshetValg({onTilfredshetChanged, defaultTilfredshet, className}: TilfredshetValgProps) {
     const [tilfredshet, setTilfredshet] = useState(defaultTilfredshet || 0);
 
     const handleTilfredshetChanged = (tilfredshet: number) => {
@@ -66,5 +65,3 @@ function TilfredshetValg({onTilfredshetChanged, defaultTilfredshet, className}: 
         </div>
     );
 }
-
-export default TilfredshetValg;

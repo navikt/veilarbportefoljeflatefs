@@ -1,9 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RadioGroup} from '@navikt/ds-react';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
-import DragAndDropContainer from './drag-and-drop-container';
-import MineFilterRad from '../mine-filter-rad';
+import {DragAndDropContainer} from './drag-and-drop-container';
+import {MineFilterRad} from '../mine-filter-rad';
 import {useOnlyOnUnmount} from './use-only-onUnmount-hook';
 import {LagretFilter} from '../../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/listevisning';
@@ -16,15 +16,21 @@ import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '..
 import {velgMineFilter} from '../../../ducks/filtrering';
 import './drag-and-drop.css';
 
-export interface DragAndDropProps {
+interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
     oversiktType: OversiktType;
     isDraggable: boolean;
-    setisDraggable: React.Dispatch<React.SetStateAction<boolean>>;
+    setisDraggable: Dispatch<SetStateAction<boolean>>;
     enhettiltak: OrNothing<Tiltak>;
 }
 
-function DragAndDrop({stateFilterOrder, oversiktType, isDraggable, setisDraggable, enhettiltak}: DragAndDropProps) {
+export function DragAndDrop({
+    stateFilterOrder,
+    oversiktType,
+    isDraggable,
+    setisDraggable,
+    enhettiltak
+}: DragAndDropProps) {
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const [valgtFilter, setValgtFilter] = useState('');
@@ -133,5 +139,3 @@ function harEndretRekkefolge(a: LagretFilter[], b: LagretFilter[]) {
         a.every((val, index) => val.filterNavn === b[index].filterNavn)
     );
 }
-
-export default DragAndDrop;

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Systemmeldinger} from './systemmeldinger';
 import {SesjonStatusmelding} from './sesjon-statusmelding';
 import './informasjonsmeldinger.css';

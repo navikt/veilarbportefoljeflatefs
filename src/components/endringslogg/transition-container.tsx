@@ -1,13 +1,13 @@
-import React from 'react';
+import {ReactNode} from 'react';
+import classNames from 'classnames';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import {useFocus} from './hooks/use-focus';
 import './endringslogg.css';
 import './collapse-container-transition.css';
-import classNames from 'classnames';
 
 interface CollapseContainerProps {
     alignLeft?: boolean;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 const CollapseContainer = ({alignLeft, children}: CollapseContainerProps) => {
@@ -31,7 +31,7 @@ interface TransitionProps extends CollapseContainerProps {
     visible: boolean;
 }
 
-const TransitionContainer = ({visible, alignLeft, children}: TransitionProps) => (
+export const TransitionContainer = ({visible, alignLeft, children}: TransitionProps) => (
     <TransitionGroup component={null}>
         {visible && (
             <CSSTransition
@@ -48,5 +48,3 @@ const TransitionContainer = ({visible, alignLeft, children}: TransitionProps) =>
         )}
     </TransitionGroup>
 );
-
-export default TransitionContainer;

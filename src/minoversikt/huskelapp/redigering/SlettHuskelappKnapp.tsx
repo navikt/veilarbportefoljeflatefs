@@ -1,4 +1,3 @@
-import React from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';

@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
@@ -43,7 +44,7 @@ import './filterform/filterform.css';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (filterId: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (filterId: string, filterVerdi: ReactNode) => void;
     enhettiltak: any;
     oversiktType: OversiktType;
 }

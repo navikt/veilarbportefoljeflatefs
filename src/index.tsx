@@ -1,6 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
+import {DeploymentEnvironment, erMock} from './utils/url-utils';
+import {initAmplitude} from './amplitude/amplitude';
 import 'nav-frontend-chevron-style/dist/main.css';
 import 'nav-frontend-grid-style/dist/main.css';
 import 'nav-frontend-lenker-style/dist/main.css';
@@ -8,9 +10,6 @@ import 'nav-frontend-paneler-style/dist/main.css';
 import 'nav-frontend-typografi-style/dist/main.css';
 import '@navikt/ds-css';
 import './style.css';
-import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
-import {DeploymentEnvironment, erMock} from './utils/url-utils';
-import {initAmplitude} from './amplitude/amplitude';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill');

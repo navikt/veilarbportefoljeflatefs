@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import './toast.css';
+import {useEffect, useRef} from 'react';
 import {useDispatch} from 'react-redux';
+import {Alert, BodyShort} from '@navikt/ds-react';
 import {useTimer} from '../../hooks/use-timer';
 import {kebabCase} from '../../utils/utils';
-import {Alert, BodyShort} from '@navikt/ds-react';
+import './toast.css';
 
 interface TimedToastProps {
     toastTekst: string;
@@ -11,7 +11,7 @@ interface TimedToastProps {
     fjernToast: any;
 }
 
-function TimedToast({toastTekst, alertstripe, fjernToast}: TimedToastProps) {
+export function TimedToast({toastTekst, alertstripe, fjernToast}: TimedToastProps) {
     const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
@@ -44,5 +44,3 @@ function TimedToast({toastTekst, alertstripe, fjernToast}: TimedToastProps) {
         </div>
     );
 }
-
-export default TimedToast;

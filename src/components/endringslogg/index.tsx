@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import {FC, useCallback, useEffect, useState} from 'react';
 import {EndringsloggContainer} from './endringslogg-container';
 import {EndringsloggEntryWithSeenStatus, mapRemoteToState, setAllEntriesSeen} from './utils/endringslogg-custom';
 import {
@@ -9,12 +9,12 @@ import {
     trackSessionDuration
 } from './utils/utils';
 import {useTimer} from './hooks/use-timer';
-import TourModal from './tour-modal/tour-modal';
+import {TourModal} from './tour-modal/tour-modal';
 import {StilType} from './icons/endringslogg-icon';
 
 const DEFAULT_MAX_ENTRIES = 50;
 
-export interface EndringsloggProps {
+interface EndringsloggProps {
     userId: string;
     appId: string;
     backendUrl: string;
@@ -27,7 +27,7 @@ export interface EndringsloggProps {
     localData?: EndringsloggEntryWithSeenStatus[];
 }
 
-export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = (props: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);

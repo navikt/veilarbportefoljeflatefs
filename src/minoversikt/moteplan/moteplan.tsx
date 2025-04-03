@@ -2,8 +2,8 @@ import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
-import MoteTabell from './motetabell';
-import SeFlereMoterKnapp from './seFlereMoterKnapp';
+import {MoteTabell} from './motetabell';
+import {SeFlereMoterKnapp} from './seFlereMoterKnapp';
 import './moteplan.css';
 
 export interface MoteData {
@@ -12,7 +12,7 @@ export interface MoteData {
     avtaltMedNav: boolean;
 }
 
-export interface Deltaker {
+interface Deltaker {
     fornavn: string;
     etternavn: string;
     fnr: string;

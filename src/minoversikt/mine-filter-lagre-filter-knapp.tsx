@@ -1,12 +1,11 @@
-import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {useDispatch, useSelector} from 'react-redux';
+import {Button} from '@navikt/ds-react';
+import {StarIcon} from '@navikt/aksel-icons';
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {Button} from '@navikt/ds-react';
-import {StarIcon} from '@navikt/aksel-icons';
 
 interface Props {
     oversiktType: OversiktType;

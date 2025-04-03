@@ -1,21 +1,21 @@
-import React from 'react';
+import {Dispatch, MouseEvent, SetStateAction} from 'react';
 import {keyCodes} from '../../../utils/utils';
 
-export interface HandleKeyDownProps {
-    eventIsInsideContainer: (e: React.MouseEvent) => boolean;
-    setDropIndex: React.Dispatch<React.SetStateAction<number>>;
+interface HandleKeyDownProps {
+    eventIsInsideContainer: (e: MouseEvent) => boolean;
+    setDropIndex: Dispatch<SetStateAction<number>>;
     prepFlyttOpp: (index: number) => void;
     prepFlyttNed: (index: number) => void;
     requestFocus: (index: number) => void;
 }
 
-export interface HandleKeyUpProps {
-    eventIsInsideContainer: (e: React.MouseEvent) => boolean;
+interface HandleKeyUpProps {
+    eventIsInsideContainer: (e: MouseEvent) => boolean;
     requestNewOrder: (from: number, to: number) => void;
     lagreRekkefolge: () => void;
     avbryt: () => void;
-    setDestIndex: React.Dispatch<React.SetStateAction<number>>;
-    setSrcIndex: React.Dispatch<React.SetStateAction<number>>;
+    setDestIndex: Dispatch<SetStateAction<number>>;
+    setSrcIndex: Dispatch<SetStateAction<number>>;
 }
 
 export function handleKeyDown({

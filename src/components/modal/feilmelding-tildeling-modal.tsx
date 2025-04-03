@@ -1,8 +1,7 @@
-import * as React from 'react';
+import {BodyShort, Button, Heading} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.css';
-import {BodyShort, Button, Heading} from '@navikt/ds-react';
 
 interface FeilmeldingBrukereModalProps {
     isOpen: boolean;
@@ -11,7 +10,7 @@ interface FeilmeldingBrukereModalProps {
     onClose: () => void;
 }
 
-function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: FeilmeldingBrukereModalProps) {
+export function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: FeilmeldingBrukereModalProps) {
     return (
         <VarselModal
             overskrift="Handling kan ikke utføres"
@@ -48,5 +47,3 @@ function FeilmeldingTildelingModal({isOpen, fnrFeil, fnrSuksess, onClose}: Feilm
         </VarselModal>
     );
 }
-
-export default FeilmeldingTildelingModal;

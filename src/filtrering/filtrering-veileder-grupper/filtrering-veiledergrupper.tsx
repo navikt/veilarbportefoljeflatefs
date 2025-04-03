@@ -12,7 +12,7 @@ import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
-import VeiledergruppeInnhold from './veiledergruppe-innhold';
+import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
