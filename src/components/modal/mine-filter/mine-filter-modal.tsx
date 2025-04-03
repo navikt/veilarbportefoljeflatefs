@@ -4,7 +4,6 @@ import {AppState} from '../../../reducer';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
 import {OrNothing} from '../../../utils/types/types';
-import {hiddenIf} from '../../hidden-if/hidden-if';
 import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';
@@ -31,12 +30,6 @@ const VisningstypeToTittel = new Map<Visningstype, string>([
     [Visningstype.MENY, 'Lagre filter'],
     [Visningstype.FNR_FEIL, 'Lagre filter']
 ]);
-
-const HiddenIfLasterModal = hiddenIf(LasterModal);
-const HiddenIfMeny = hiddenIf(Meny);
-const HiddenIfLagreNytt = hiddenIf(LagreNyttMineFilter);
-const HiddenIfOppdaterFilter = hiddenIf(OppdaterMineFilter);
-const HiddenIfFnrFeil = hiddenIf(MineFilterFnrFeil);
 
 interface Props {
     oversiktType: OversiktType;
@@ -84,25 +77,25 @@ export function MineFilterModal({oversiktType}: Props) {
                     modalWidth="small"
                 >
                     <div className="modal-visningstype">
-                        <HiddenIfLasterModal hidden={!laster} isOpen={laster} />
-                        <HiddenIfMeny
-                            hidden={valgtVisningstype !== Visningstype.MENY}
-                            setValgtVisningstype={setValgtVisningstype}
-                            sisteFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                        />
-                        <HiddenIfLagreNytt
-                            hidden={valgtVisningstype !== Visningstype.LAGRE_NYTT}
-                            lukkModal={lukkModal}
-                            oversiktType={oversiktType}
-                        />
-                        <HiddenIfOppdaterFilter
-                            hidden={valgtVisningstype !== Visningstype.OPPDATER}
-                            gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
-                            filterId={sisteValgtMineFilter!}
-                            lukkModal={lukkModal}
-                            oversiktType={oversiktType}
-                        />
-                        <HiddenIfFnrFeil hidden={valgtVisningstype !== Visningstype.FNR_FEIL} />
+                        {laster && <LasterModal isOpen={laster} />}
+                        {valgtVisningstype === Visningstype.MENY && (
+                            <Meny
+                                setValgtVisningstype={setValgtVisningstype}
+                                sisteFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+                            />
+                        )}
+                        {valgtVisningstype === Visningstype.LAGRE_NYTT && (
+                            <LagreNyttMineFilter lukkModal={lukkModal} oversiktType={oversiktType} />
+                        )}
+                        {valgtVisningstype === Visningstype.OPPDATER && (
+                            <OppdaterMineFilter
+                                gammeltFilterNavn={lagretFilterNavn(sisteValgtMineFilter!)}
+                                filterId={sisteValgtMineFilter!}
+                                lukkModal={lukkModal}
+                                oversiktType={oversiktType}
+                            />
+                        )}
+                        {valgtVisningstype === Visningstype.FNR_FEIL && <MineFilterFnrFeil />}
                     </div>
                 </EgenModal>
             )}

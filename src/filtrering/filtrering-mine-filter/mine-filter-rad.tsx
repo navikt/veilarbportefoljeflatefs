@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
 import {apneMineFilterModal} from '../../ducks/lagret-filter-ui-state';
-import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
+import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
@@ -29,12 +29,13 @@ export function MineFilterRad({filter, oversiktType, erValgt}: MineFilterRadProp
             >
                 {filter.filterNavn}
             </Radio>
-            <RedigerKnapp
-                hidden={!erValgt}
-                aria="Rediger mitt filter"
-                onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-filter_knapp_${kebabCase(filter.filterNavn)}`}
-            />
+            {erValgt && (
+                <RedigerKnapp
+                    aria="Rediger mitt filter"
+                    onClick={onClickRedigerKnapp}
+                    dataTestid={`rediger-filter_knapp_${kebabCase(filter.filterNavn)}`}
+                />
+            )}
         </div>
     );
 }

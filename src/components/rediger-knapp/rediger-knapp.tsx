@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {Button} from '@navikt/ds-react';
 import {PencilFillIcon, PencilIcon} from '@navikt/aksel-icons';
-import {hiddenIf} from '../hidden-if/hidden-if';
 
 interface Props {
     aria: string;
@@ -9,7 +8,7 @@ interface Props {
     dataTestid?: string;
 }
 
-function RedigerKnapp({aria, onClick, dataTestid}: Props) {
+export function RedigerKnapp({aria, onClick, dataTestid}: Props) {
     const [hover, setHover] = useState(false);
 
     return (
@@ -26,5 +25,3 @@ function RedigerKnapp({aria, onClick, dataTestid}: Props) {
         ></Button>
     );
 }
-
-export default hiddenIf(RedigerKnapp);
