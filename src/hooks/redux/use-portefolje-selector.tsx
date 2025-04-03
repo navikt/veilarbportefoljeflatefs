@@ -1,8 +1,8 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
+import {createSelector} from 'reselect';
 import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
 import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
-import {createSelector} from 'reselect';
 import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';

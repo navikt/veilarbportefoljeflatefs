@@ -1,6 +1,6 @@
 // Actions
-import {doThenDispatch, STATUS} from './utils';
 import * as Api from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
 
 export const OK = 'veilarbportefoljeflatefs/geografiskbosted/OK';
 export const FEILET = 'veilarbportefoljeflatefs/geografiskbosted/FEILET';
@@ -28,7 +28,7 @@ const initalState: GeografiskBostedListState = {
 };
 
 // Reducer
-export default function geografiskbostedListReducer(state: GeografiskBostedListState = initalState, action) {
+export function geografiskbostedListReducer(state: GeografiskBostedListState = initalState, action) {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

@@ -1,6 +1,7 @@
+import moment from 'moment';
+import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
-import {fakerNB_NO as faker} from '@faker-js/faker';
 import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
@@ -11,7 +12,6 @@ import {
     TiltakshendelseModell,
     UtgattVarselHendelse
 } from '../../model-interfaces';
-import moment from 'moment';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
 import {MoteData} from '../../minoversikt/moteplan/moteplan';

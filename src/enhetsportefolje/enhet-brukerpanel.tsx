@@ -1,4 +1,5 @@
 import {useLayoutEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import classNames from 'classnames';
 import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
@@ -7,7 +8,6 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {EnhetKolonner} from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
-import {useDispatch} from 'react-redux';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 

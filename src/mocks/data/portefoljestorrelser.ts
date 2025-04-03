@@ -1,5 +1,4 @@
 import {innloggetVeileder, lagTilfeldigVeilederId} from './veiledere';
-
 import {rnd} from '../utils';
 
 function lagPortefoljeStorrelse() {
@@ -9,7 +8,7 @@ function lagPortefoljeStorrelse() {
     };
 }
 
-export default function lagPortefoljeStorrelser() {
+export function lagPortefoljeStorrelser() {
     return {
         facetResults: new Array(40)
             .fill(lagPortefoljeStorrelse())

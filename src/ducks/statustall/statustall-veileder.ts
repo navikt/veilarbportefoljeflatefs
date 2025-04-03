@@ -44,7 +44,7 @@ export const initalStatusState: StatustallVeilederState = {
 };
 
 // Reducer
-export default function statustallVeilederReducer(
+export function statustallVeilederReducer(
     state: StatustallVeilederState = initalStatusState,
     action
 ): StatustallVeilederState {

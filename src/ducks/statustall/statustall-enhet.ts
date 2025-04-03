@@ -56,10 +56,7 @@ export const initalStatusState: StatustallEnhetState = {
 };
 
 // Reducer
-export default function statustallEnhetReducer(
-    state: StatustallEnhetState = initalStatusState,
-    action
-): StatustallEnhetState {
+export function statustallEnhetReducer(state: StatustallEnhetState = initalStatusState, action): StatustallEnhetState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

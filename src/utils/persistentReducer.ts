@@ -63,7 +63,7 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState) {
  * @param reducer - Reducer-funksjonen som skal brukes.
  * @param initialFilterstate - Initial state for filtrering.
  */
-export default function persistentReducer(
+export function persistentReducer(
     scope: LocalStorageScope,
     location: Location,
     reducer: (state: any, action: Action & {name: OversiktType}) => any,

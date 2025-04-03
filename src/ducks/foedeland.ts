@@ -1,6 +1,6 @@
 // Actions
-import {doThenDispatch, STATUS} from './utils';
 import * as Api from '../middleware/api';
+import {doThenDispatch, STATUS} from './utils';
 
 export const OK = 'veilarbportefoljeflatefs/foedeland/OK';
 export const FEILET = 'veilarbportefoljeflatefs/foedeland/FEILET';
@@ -28,7 +28,7 @@ const initalState: FoedelandListState = {
 };
 
 // Reducer
-export default function foedelandListReducer(state: FoedelandListState = initalState, action) {
+export function foedelandListReducer(state: FoedelandListState = initalState, action) {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

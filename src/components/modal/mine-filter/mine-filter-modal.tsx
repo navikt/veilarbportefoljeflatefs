@@ -4,7 +4,7 @@ import {AppState} from '../../../reducer';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
 import {OrNothing} from '../../../utils/types/types';
-import hiddenIf from '../../hidden-if/hidden-if';
+import {hiddenIf} from '../../hidden-if/hidden-if';
 import {Meny} from './mine-filter-meny';
 import {MineFilterFnrFeil} from './mine-filter-fnr-feil';
 import {lukkMineFilterModal} from '../../../ducks/lagret-filter-ui-state';

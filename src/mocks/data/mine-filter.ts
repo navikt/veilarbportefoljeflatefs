@@ -1,5 +1,5 @@
-import {initialState} from '../../ducks/filtrering';
 import {faker} from '@faker-js/faker/locale/nb_NO';
+import {initialState} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 
 export const mineFilter = (): LagretFilter[] => {

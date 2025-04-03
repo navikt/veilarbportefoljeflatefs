@@ -1,7 +1,3 @@
-import {OrNothing} from '../types/types';
-import {VeilederModell} from '../../model-interfaces';
-import {logEvent} from '../frontend-logger';
-import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 import {
     fullBrowserVersion,
     isChrome,
@@ -13,6 +9,10 @@ import {
     isOpera,
     isSafari
 } from 'react-device-detect';
+import {OrNothing} from '../types/types';
+import {VeilederModell} from '../../model-interfaces';
+import {logEvent} from '../frontend-logger';
+import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 
 function getBrowserAgent(): string {
     let agent;

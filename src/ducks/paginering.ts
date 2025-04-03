@@ -14,7 +14,7 @@ const initialState: PagineringState = {
 };
 
 // Reducer
-export default function pagineringReducer(state = initialState, action) {
+export function pagineringReducer(state = initialState, action) {
     switch (action.type) {
         case SETUP:
             return {...state, ...action.data};

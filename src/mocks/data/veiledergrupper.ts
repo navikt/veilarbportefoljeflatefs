@@ -1,6 +1,6 @@
+import {fakerNB_NO as faker} from '@faker-js/faker';
 import {initialState} from '../../ducks/filtrering';
 import {veiledere} from './veiledere';
-import {fakerNB_NO as faker} from '@faker-js/faker';
 import {LagretFilter} from '../../ducks/lagret-filter';
 
 export const veiledergrupper = () => {

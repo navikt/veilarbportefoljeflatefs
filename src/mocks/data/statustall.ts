@@ -1,5 +1,4 @@
 import {brukere as portefolje} from './portefolje';
-
 import {StatustallInnhold, StatustallVeileder} from '../../ducks/statustall/statustall-typer';
 
 export const statustallVeileder: {statustall: StatustallVeileder} = {

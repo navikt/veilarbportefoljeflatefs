@@ -1,14 +1,13 @@
 import {delay, http, HttpResponse, RequestHandler} from 'msw';
-import innloggetVeileder from '../data/innloggetVeileder';
-import me from '../data/me';
 import {fakerNB_NO as faker} from '@faker-js/faker';
+import {innloggetVeileder} from '../data/innloggetVeileder';
 import {foedelandListMockData} from '../data/foedeland';
 import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import {brukere, hentHuskelappForBruker, hentMockPlan} from '../data/portefolje';
-import lagPortefoljeStorrelser from '../data/portefoljestorrelser';
-import tiltak from '../data/tiltak';
+import {lagPortefoljeStorrelser} from '../data/portefoljestorrelser';
+import {tiltak} from '../data/tiltak';
 import {FargekategoriModell} from '../../model-interfaces';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
@@ -17,7 +16,7 @@ import {rnd} from '../utils';
 
 function lagPortefoljeForVeileder(queryParams, alleBrukere) {
     const enhetportefolje = lagPortefolje(queryParams, innloggetVeileder.enheter[0].enhetId, alleBrukere);
-    enhetportefolje.brukere.forEach(bruker => (bruker.veilederId = me.ident));
+    enhetportefolje.brukere.forEach(bruker => (bruker.veilederId = innloggetVeileder.ident));
     return enhetportefolje;
 }
 

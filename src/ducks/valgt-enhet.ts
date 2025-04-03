@@ -24,7 +24,7 @@ const initialState: ValgtEnhetState = {
 };
 
 //  Reducer
-export default function valgtEnhetReducer(state: ValgtEnhetState = initialState, action): ValgtEnhetState {
+export function valgtEnhetReducer(state: ValgtEnhetState = initialState, action): ValgtEnhetState {
     switch (action.type) {
         case PENDING:
             return {...state, status: STATUS.PENDING};

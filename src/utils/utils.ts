@@ -4,7 +4,6 @@ import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '
 import {Maybe} from './types';
 import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
-
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -122,15 +121,6 @@ export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
     } else if (ytelse === 'AAP_UNNTAK') {
         return unntakukerigjen;
     }
-}
-
-export default function TittelValg(ytelseSorteringHeader) {
-    if (ytelseSorteringHeader === 'Gjenstående uker vedtak') {
-        return 'Gjenstående uker på gjeldende vedtak';
-    } else if (ytelseSorteringHeader === 'Gjenstående uker rettighet') {
-        return 'Gjenstående uker av rettighetsperioden for ytelsen';
-    }
-    return '';
 }
 
 export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {

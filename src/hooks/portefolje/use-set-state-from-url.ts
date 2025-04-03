@@ -1,12 +1,12 @@
+import {useCallback} from 'react';
+import {useDispatch} from 'react-redux';
+import {useLocation, useParams} from 'react-router';
 import {loggSkjermMetrikker, Side} from '../../utils/metrikker/skjerm-metrikker';
 import {loggSideVisning} from '../../utils/metrikker/side-visning-metrikker';
 import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
 import {settSortering} from '../../ducks/portefolje';
 import {useIdentSelector} from '../redux/use-innlogget-ident';
-import {useDispatch} from 'react-redux';
-import {useCallback} from 'react';
-import {useLocation, useParams} from 'react-router';
 import {useOnMount} from '../use-on-mount';
 import {logBrowserMetrikker} from '../../utils/metrikker/browser-metrikker';
 import {IdentParam} from '../../model-interfaces';

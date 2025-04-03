@@ -1,7 +1,6 @@
 import {isEmptyArray, isObject} from 'formik';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {LagretFilterValideringsError} from './mine-filter-modal';
-
 import {AktiviteterValg} from '../../../filtrering/filter-konstanter';
 
 export function lagretFilterValgModellErLik(filter1?: FiltervalgModell, filter2?: FiltervalgModell): boolean {

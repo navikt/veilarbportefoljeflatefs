@@ -100,7 +100,7 @@ export function fjern(filterId, verdi, fjernVerdi) {
     throw new Error(`Kan ikke håndtere fjerning av ${fjernVerdi} fra ${verdi}`);
 }
 
-export default function filtreringReducer(state: FiltervalgModell = initialState, action): FiltervalgModell {
+export function filtreringReducer(state: FiltervalgModell = initialState, action): FiltervalgModell {
     switch (action.type) {
         case CLEAR_FILTER:
             return initialState;

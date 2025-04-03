@@ -1,5 +1,5 @@
-import {AppState} from '../../reducer';
 import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 const selectFoedelandData = (state: AppState) => state.foedelandList.data;
 

@@ -28,5 +28,3 @@ export const toastReducer = (state: ToastState = initialState, action: ToastActi
             return state;
     }
 };
-
-export default toastReducer;

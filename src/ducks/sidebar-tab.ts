@@ -17,7 +17,7 @@ export const SIDEBAR_TAB_ENDRET = 'sidebarTabEndret';
 export const SIDEBAR_SKJULT = 'sidebarSkjult';
 export const SIDEBAR_VISES = 'sidebarVises';
 
-export default function sidebarReducer(state = initialStateSidebar, action) {
+export function sidebarReducer(state = initialStateSidebar, action) {
     switch (action.type) {
         case SIDEBAR_TAB_ENDRET:
             return {...state, selectedTab: action.selectedTab};

@@ -1,42 +1,43 @@
 import {Action, combineReducers} from 'redux';
-import persistentReducer, {LocalStorageScope} from './utils/persistentReducer';
-import valgtEnhetReducer, {ValgtEnhetState} from './ducks/valgt-enhet';
-import portefoljeReducer, {PortefoljeState} from './ducks/portefolje';
-import pagineringReducer from './ducks/paginering';
-import sorteringReducer from './ducks/sortering';
-import veiledereReducer, {VeiledereState} from './ducks/veiledere';
-import portefoljestorrelserReducer, {PortefoljeStorrelser} from './ducks/portefoljestorrelser';
-import filtreringReducer, {initialState} from './ducks/filtrering';
-import statustallVeilederReducer, {StatustallVeilederState} from './ducks/statustall/statustall-veileder';
-import systemmeldingerReducer, {SystemmeldingState} from './ducks/systemmeldinger';
-import modalReducer from './ducks/modal';
-import serverfeilModalReducer from './ducks/modal-serverfeil';
-import feilmedlingModalReducer from './ducks/modal-feilmelding-brukere';
-import veiledergrupperLagretFilterReducer from './ducks/veiledergrupper_filter';
-import enhetTiltakReducer, {EnhettiltakState} from './ducks/enhettiltak';
-import listevisningReducer, {
+import {persistentReducer, LocalStorageScope} from './utils/persistentReducer';
+import {valgtEnhetReducer, ValgtEnhetState} from './ducks/valgt-enhet';
+import {portefoljeReducer, PortefoljeState} from './ducks/portefolje';
+import {pagineringReducer} from './ducks/paginering';
+import {sorteringReducer} from './ducks/sortering';
+import {veiledereReducer, VeiledereState} from './ducks/veiledere';
+import {PortefoljeStorrelser, portefoljestorrelserReducer} from './ducks/portefoljestorrelser';
+import {filtreringReducer, initialState} from './ducks/filtrering';
+import {statustallVeilederReducer, StatustallVeilederState} from './ducks/statustall/statustall-veileder';
+import {systemmeldingerReducer, SystemmeldingState} from './ducks/systemmeldinger';
+import {modalReducer} from './ducks/modal';
+import {serverfeilModalReducer} from './ducks/modal-serverfeil';
+import {feilmedlingModalReducer} from './ducks/modal-feilmelding-brukere';
+import {veiledergrupperLagretFilterReducer} from './ducks/veiledergrupper_filter';
+import {enhetTiltakReducer, EnhettiltakState} from './ducks/enhettiltak';
+import {
     initialStateEnhetensOversikt,
     initialStateMinOversikt,
+    listevisningReducer,
     ListevisningState,
     OversiktType
 } from './ducks/ui/listevisning';
-import featuresReducer, {FeaturesState} from './ducks/features';
-import toastReducer, {ToastState} from './store/toast/reducer';
+import {featuresReducer, FeaturesState} from './ducks/features';
+import {toastReducer, ToastState} from './store/toast/reducer';
 import {FiltervalgModell} from './model-interfaces';
-import innloggetVeilederReducer, {InnloggetVeilederState} from './ducks/innlogget-veileder';
-import sidebarReducer, {initialStateSidebar, SidebarStateType} from './ducks/sidebar-tab';
-import mineFilterReducer from './ducks/mine-filter';
-import lagretFilterUIStateReducer, {LagretFilterUIState} from './ducks/lagret-filter-ui-state';
+import {innloggetVeilederReducer, InnloggetVeilederState} from './ducks/innlogget-veileder';
+import {initialStateSidebar, sidebarReducer, SidebarStateType} from './ducks/sidebar-tab';
+import {mineFilterReducer} from './ducks/mine-filter';
+import {LagretFilterUIState, lagretFilterUIStateReducer} from './ducks/lagret-filter-ui-state';
 import {LagretFilterState} from './ducks/lagret-filter';
-import geografiskbostedListReducer, {GeografiskBostedListState} from './ducks/geografiskBosted';
-import foedelandListReducer, {FoedelandListState} from './ducks/foedeland';
-import tolkebehovListReducer, {TolkebehovSpraakListState} from './ducks/tolkebehov';
-import informasjonsmeldingReducer, {SesjonStatusState} from './ducks/informasjonsmelding';
-import brukerfeilReducer, {BrukerfeilState} from './ducks/brukerfeilmelding';
-import statustallEnhetReducer, {StatustallEnhetState} from './ducks/statustall/statustall-enhet';
-import brukerIKontekstReducer, {BrukerIKontekstState} from './ducks/bruker-i-kontekst';
-import huskelappReducer from './ducks/huskelapp';
-import fargekategoriReducer from './ducks/fargekategori';
+import {geografiskbostedListReducer, GeografiskBostedListState} from './ducks/geografiskBosted';
+import {foedelandListReducer, FoedelandListState} from './ducks/foedeland';
+import {tolkebehovListReducer, TolkebehovSpraakListState} from './ducks/tolkebehov';
+import {informasjonsmeldingReducer, SesjonStatusState} from './ducks/informasjonsmelding';
+import {brukerfeilReducer, BrukerfeilState} from './ducks/brukerfeilmelding';
+import {statustallEnhetReducer, StatustallEnhetState} from './ducks/statustall/statustall-enhet';
+import {brukerIKontekstReducer, BrukerIKontekstState} from './ducks/bruker-i-kontekst';
+import {huskelappReducer} from './ducks/huskelapp';
+import {fargekategoriReducer} from './ducks/fargekategori';
 
 /**
  * Hjelpefunksjon for å conditionally kjøre reducere på en action

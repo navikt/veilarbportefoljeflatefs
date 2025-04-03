@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
-import {useSelector} from 'react-redux';
 
 export function useRequestHandler(statusSelector: (state: AppState) => string, lukkModal: () => void) {
     const [saveRequestSent, setSaveRequestSent] = useState(false);

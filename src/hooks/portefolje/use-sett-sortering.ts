@@ -1,6 +1,6 @@
+import {useDispatch} from 'react-redux';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {useDispatch} from 'react-redux';
 import {STIGENDE, SYNKENDE} from '../../konstanter';
 import {settSortering} from '../../ducks/portefolje';
 

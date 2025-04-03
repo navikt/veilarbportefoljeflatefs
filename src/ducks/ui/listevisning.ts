@@ -134,8 +134,6 @@ export function listevisningReducer(state = initialStateMinOversikt, action: Lis
     }
 }
 
-export default listevisningReducer;
-
 export const velgAlternativ = (kolonne: Kolonne, oversiktType: OversiktType) => ({
     type: ActionTypeKeys.VELG_ALTERNATIV,
     kolonne,

@@ -18,7 +18,7 @@ export const FEILET = 'veilarbportefoljeflatefs/systemmeldinger/FEILET';
 export const PENDING = 'veilarbportefoljeflatefs/systemmeldinger/PENDING';
 
 // Reducer
-export default function reducer(state: SystemmeldingState = initalStatusState, action): SystemmeldingState {
+export function systemmeldingerReducer(state: SystemmeldingState = initalStatusState, action): SystemmeldingState {
     switch (action.type) {
         case PENDING:
             if (state.status === STATUS.OK) {

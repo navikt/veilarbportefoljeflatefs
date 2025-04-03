@@ -1,9 +1,9 @@
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
 import {slettHuskelappAction} from '../../../ducks/huskelapp';
 import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
-import {ThunkDispatch} from 'redux-thunk';
 import {AppState} from '../../../reducer';
-import {AnyAction} from 'redux';
 import {HuskelappModell} from '../../../model-interfaces';
 
 export const handleSlettHuskelapp = async (

@@ -1,7 +1,7 @@
 // Actions
 import {Dispatch} from 'redux';
-import {STATUS} from './utils';
 import * as Api from '../middleware/api';
+import {STATUS} from './utils';
 import {DataAction} from './types';
 
 enum BrukerIKontekstActionType {
@@ -23,7 +23,7 @@ const initialState: BrukerIKontekstState = {
 };
 
 //  Reducer
-const brukerIKontekstReducer = (
+export const brukerIKontekstReducer = (
     state: BrukerIKontekstState = initialState,
     action: DataAction<BrukerIKontekstActionType, BrukerIKontekst>
 ) => {
@@ -51,5 +51,3 @@ export const fjernBrukerIKontekst = () => {
     return (dispatch: Dispatch<BrukerIKontekstDataAction>) =>
         Api.fjernBrukerIKontekst().then(() => dispatch(fjernBruker()));
 };
-
-export default brukerIKontekstReducer;

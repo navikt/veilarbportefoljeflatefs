@@ -34,7 +34,7 @@ const initialState = {
 };
 
 //  Reducer
-export default function lagretFilterReducer(state: LagretFilterUIState = initialState, action): LagretFilterUIState {
+export function lagretFilterUIStateReducer(state: LagretFilterUIState = initialState, action): LagretFilterUIState {
     switch (action.type) {
         case MARKER_MINE_FILTER:
             return {
