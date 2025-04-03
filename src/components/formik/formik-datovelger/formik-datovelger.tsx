@@ -1,44 +1,69 @@
 import {Field, FieldProps, getIn} from 'formik';
+import {DateInputProps, ErrorMessage, useDatepicker, DatePicker} from '@navikt/ds-react';
+import {dateToISODate, validerDatoFelt} from '../../../utils/dato-utils';
 import classNames from 'classnames';
-import {ErrorMessage, Label} from '@navikt/ds-react';
-import {Datepicker} from 'nav-datovelger';
-import {validerDatoFeldt} from '../../../utils/dato-utils';
-import 'nav-datovelger/lib/styles/main.css';
 
-interface FormikDatepickerProps {
+interface DatoVelgerProps {
+    formikProps: FieldProps;
+    size: DateInputProps['size'];
+    label: string;
     name: string;
 }
 
-export function FormikDatoVelger({name}: FormikDatepickerProps) {
+const DatoVelger = ({formikProps, size, label, name}: DatoVelgerProps) => {
+    const {
+        field,
+        form: {setFieldValue, setFieldError}
+    } = formikProps;
+
+    const {datepickerProps, inputProps} = useDatepicker({
+        defaultSelected: field.value ? new Date(field.value) : undefined,
+        onDateChange: (date?: Date) => setFieldValue(field.name, dateToISODate(date)),
+        inputFormat: 'dd.MM.yyyy',
+        fromDate: new Date(),
+        onValidate: val => {
+            if (val.isBefore) {
+                setFieldError(field.name, 'Fristen må være i dag eller senere');
+            } else if (!val.isValidDate && !val.isEmpty) {
+                setFieldError(field.name, 'Datoen du har oppgitt er ikke en gyldig dato');
+            } else {
+                formikProps.form.setFieldError(field.name, undefined);
+            }
+        }
+    });
+
+    const datepickerInputProps = {
+        ...inputProps,
+        label,
+        size,
+        name,
+        id: name,
+        className: 'skjemaelement__label',
+        placeholder: 'dd.mm.åååå'
+    };
+
     return (
-        <Field validate={(value: string) => validerDatoFeldt(value, new Date(), true)} name={name} id={name}>
-            {({field, form: {errors, setFieldValue}}: FieldProps) => {
-                const error = getIn(errors, name);
+        <DatePicker {...datepickerProps} showWeekNumber={true}>
+            <DatePicker.Input {...datepickerInputProps} />
+        </DatePicker>
+    );
+};
+
+export const FormikDatoVelger = ({name}: {name: string}) => {
+    return (
+        <Field validate={(value: string) => validerDatoFelt(value, new Date(), true)} name={name} id={name}>
+            {(props: FieldProps) => {
+                const error = getIn(props.form.errors, name);
                 const datePickerClassName = classNames('skjemaelement', 'datovelger', {
                     'datovelger--harFeil': error
                 });
                 return (
                     <div className={datePickerClassName}>
-                        <Label className="skjemaelement__label" size="small">
-                            Frist
-                        </Label>
-                        <Datepicker
-                            inputId="fristDatovelger"
-                            inputProps={{
-                                name: 'frist',
-                                placeholder: 'dd.mm.åååå'
-                            }}
-                            onChange={(date?: string) => setFieldValue(field.name, date)}
-                            calendarSettings={{showWeekNumbers: true, position: 'responsive'}}
-                            value={field.value}
-                            dayPickerProps={{
-                                className: 'datovelger__DayPicker'
-                            }}
-                        />
+                        <DatoVelger formikProps={props} size="small" label="Frist" name={name} />
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
                 );
             }}
         </Field>
     );
-}
+};
