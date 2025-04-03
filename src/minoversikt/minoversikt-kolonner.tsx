@@ -15,14 +15,14 @@ import {
     utlopsdatoUker,
     ytelsestypetekst
 } from '../utils/utils';
-import BrukerNavn from '../components/tabell/brukernavn';
-import BrukerFnr from '../components/tabell/brukerfnr';
-import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
+import {BrukerNavn} from '../components/tabell/brukernavn';
+import {BrukerFnr} from '../components/tabell/brukerfnr';
+import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
-import DatoKolonne from '../components/tabell/kolonner/datokolonne';
+import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {BarnUnder18Aar, BrukerModell, FiltervalgModell, HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import TidKolonne from '../components/tabell/kolonner/tidkolonne';
+import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
 import {
     dagerSiden,
     klokkeslettTilMinutter,
@@ -30,10 +30,10 @@ import {
     oppfolgingStartetDato,
     toDateString
 } from '../utils/dato-utils';
-import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
-import SisteEndringKategori from '../components/tabell/sisteendringkategori';
+import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {truncateTekst} from '../utils/tekst-utils';

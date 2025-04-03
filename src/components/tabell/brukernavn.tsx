@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {BrukerModell} from '../../model-interfaces';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
@@ -26,7 +25,7 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
@@ -48,5 +47,3 @@ const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
         </div>
     );
 };
-
-export default BrukerNavn;

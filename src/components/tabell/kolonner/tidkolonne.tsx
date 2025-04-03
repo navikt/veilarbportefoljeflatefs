@@ -1,4 +1,3 @@
-import * as React from 'react';
 import moment from 'moment';
 import {BodyShort} from '@navikt/ds-react';
 
@@ -8,7 +7,7 @@ interface TidKolonneProps {
     skalVises: boolean;
 }
 
-function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
+export function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -28,5 +27,3 @@ function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
 
     return <BodyShort size="small" className={className}>{`${timmerString}:${minutterString}`}</BodyShort>;
 }
-
-export default TidKolonne;

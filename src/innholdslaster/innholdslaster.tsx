@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 import {STATUS} from '../ducks/utils';
 import getFeilmeldingForReducer from './get-feilmelding-for-reducer';
@@ -10,7 +10,7 @@ interface InnholdslasterProps {
     children: React.ReactNode;
 }
 
-function Innholdslaster({avhengigheter, className, children}: InnholdslasterProps) {
+export function Innholdslaster({avhengigheter, className, children}: InnholdslasterProps) {
     const array = value => (Array.isArray(value) ? value : [value]);
     const harStatus =
         (...status) =>
@@ -73,5 +73,3 @@ function Innholdslaster({avhengigheter, className, children}: InnholdslasterProp
 
     return <Loader size="2xlarge" />;
 }
-
-export default Innholdslaster;

@@ -1,6 +1,6 @@
 import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
-import CheckboxFilterform from './filterform/checkbox-filterform';
+import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
     alder,
     avvik14aVedtak,
@@ -25,21 +25,21 @@ import {
     utdanningGodkjent,
     ytelse
 } from '../filter-konstanter';
-import Dropdown from '../../components/dropdown/dropdown';
-import './filterform/filterform.css';
-import FodselsdatoFilterform from './filterform/fodselsdato-filterform';
-import '../filtrering-skjema.css';
-import '../../components/sidebar/sidebar.css';
-import AlderFilterform from './filterform/alder-filterform';
+import {Dropdown} from '../../components/dropdown/dropdown';
+import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
+import {AlderFilterform} from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import AktivitetFilterformController from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
+import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {FiltervalgModell} from '../../model-interfaces';
-import GeografiskbostedFilterform from './filterform/geografiskbosted-filterform';
-import FoedelandFilterform from './filterform/foedeland-filterform';
-import TolkebehovFilterform from './filterform/tolkebehov-filterform';
-import BarnUnder18FilterForm from './filterform/barn-under-18-filterform';
+import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';
+import {FoedelandFilterform} from './filterform/foedeland-filterform';
+import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
+import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
+import '../../components/sidebar/sidebar.css';
+import '../filtrering-skjema.css';
+import './filterform/filterform.css';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -50,7 +50,7 @@ interface FiltreringFilterProps {
 
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
-function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -173,7 +173,7 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
                     name="Geografisk bosted"
                     id="bosted"
                     render={() => (
-                        <GeografiskbostedFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                        <GeografiskBostedFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
                     )}
                 />
                 <Dropdown
@@ -473,5 +473,3 @@ function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktTyp
         </div>
     );
 }
-
-export default FiltreringFilter;

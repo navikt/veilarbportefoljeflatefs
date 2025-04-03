@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
+import {Alert} from '@navikt/ds-react';
 import {Dictionary} from '../../../utils/types/types';
 import {FiltervalgModell} from '../../../model-interfaces';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Alert} from '@navikt/ds-react';
 
 interface CheckboxFilterformProps {
     form: string;
@@ -12,7 +12,7 @@ interface CheckboxFilterformProps {
     filtervalg: FiltervalgModell;
 }
 
-function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: CheckboxFilterformProps) {
+export function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
 
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -75,4 +75,3 @@ function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}: Checkb
         </form>
     );
 }
-export default FodselsdatoFilterform;

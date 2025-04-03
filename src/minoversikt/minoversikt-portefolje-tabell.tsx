@@ -1,4 +1,3 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {MinoversiktBrukerPanel} from './minoversikt-bruker-panel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
@@ -6,11 +5,11 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useOnUnmount} from '../hooks/use-on-unmount';
 import {updateLastPath} from '../utils/url-utils';
-import './minoversikt.css';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
+import './minoversikt.css';
 
 interface MinOversiktTabellProps {
     classNameWrapper: string;

@@ -4,7 +4,7 @@ import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
-import EnhetKolonner from './enhet-kolonner';
+import {EnhetKolonner} from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import {useDispatch} from 'react-redux';
@@ -21,7 +21,7 @@ interface EnhetBrukerpanelProps {
     forrigeBruker: OrNothing<string>;
 }
 
-function EnhetBrukerpanel({
+export function EnhetBrukerpanel({
     bruker,
     settMarkert,
     enhetId,
@@ -80,5 +80,3 @@ function EnhetBrukerpanel({
         </li>
     );
 }
-
-export default EnhetBrukerpanel;

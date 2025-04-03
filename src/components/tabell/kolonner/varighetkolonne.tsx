@@ -1,4 +1,3 @@
-import * as React from 'react';
 import moment from 'moment';
 import {BodyShort} from '@navikt/ds-react';
 
@@ -8,7 +7,7 @@ interface VarighetKolonneProps {
     skalVises: boolean;
 }
 
-function VarighetKolonne({className, dato, skalVises}: VarighetKolonneProps) {
+export function VarighetKolonne({className, dato, skalVises}: VarighetKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }
@@ -30,5 +29,3 @@ function VarighetKolonne({className, dato, skalVises}: VarighetKolonneProps) {
 
     return <BodyShort size="small" className={className}>{`${timerString}${kolonn}${minutterString}`}</BodyShort>;
 }
-
-export default VarighetKolonne;

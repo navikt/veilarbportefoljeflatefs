@@ -1,14 +1,13 @@
-import React, {useRef} from 'react';
-import {FiltervalgModell} from '../model-interfaces';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
+import {FiltervalgModell} from '../model-interfaces';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
     endreFiltervalg: (filterId: string, filterVerdi: string) => void;
 }
 
-function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEllerFnrProps) {
+export function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEllerFnrProps) {
     const [navnEllerFnrQuery, setNavnEllerFnrQuery] = useState(filtervalg.navnEllerFnrQuery);
     const isInitialMount = useRef(true);
     const timer = useRef<number | undefined>();
@@ -60,4 +59,3 @@ function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEll
         </div>
     );
 }
-export default FiltreringNavnellerfnr;

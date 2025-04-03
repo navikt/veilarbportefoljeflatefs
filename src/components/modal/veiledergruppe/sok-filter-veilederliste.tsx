@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert, BodyShort, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
@@ -13,7 +13,7 @@ function limit<T>(liste: T[], antall: number) {
     return liste.slice(0, antall);
 }
 
-function SokFilterVeilederliste<T>({data, label, placeholder, limitSize, children}: SokFilterProps<T>) {
+export function SokFilterVeilederliste<T>({data, label, placeholder, limitSize, children}: SokFilterProps<T>) {
     const [query, setQuery] = useState('');
     const [rawfilteredData, setRawfilteredData] = useState(data);
 
@@ -52,5 +52,3 @@ function SokFilterVeilederliste<T>({data, label, placeholder, limitSize, childre
         </>
     );
 }
-
-export default SokFilterVeilederliste;

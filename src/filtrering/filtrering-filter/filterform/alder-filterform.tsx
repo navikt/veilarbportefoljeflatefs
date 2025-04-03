@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
+import classNames from 'classnames';
+import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {Dictionary} from '../../../utils/types/types';
-import Grid from '../../../components/grid/grid';
-import classNames from 'classnames';
-import './filterform.css';
+import {Grid} from '../../../components/grid/grid';
 import {logEvent} from '../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
-import NullstillKnapp from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
+import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
+import './filterform.css';
 
 interface AlderFilterformProps {
     form: string;
@@ -17,7 +17,15 @@ interface AlderFilterformProps {
     filtervalg: FiltervalgModell;
     className?: string;
 }
-function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg, className}: AlderFilterformProps) {
+
+export function AlderFilterform({
+    endreFiltervalg,
+    valg,
+    closeDropdown,
+    form,
+    filtervalg,
+    className
+}: AlderFilterformProps) {
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>([]);
     const [inputAlderFra, setInputAlderFra] = useState<string>('');
     const [inputAlderTil, setInputAlderTil] = useState<string>('');
@@ -198,5 +206,3 @@ function AlderFilterform({endreFiltervalg, valg, closeDropdown, form, filtervalg
         </form>
     );
 }
-
-export default AlderFilterform;

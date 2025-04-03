@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {FiltervalgModell} from '../../../model-interfaces';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
-import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
-import EndringerIkkeLagretModal from './ulagrede-endringer-modal';
+import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
+import {EndringerIkkeLagretModal} from './ulagrede-endringer-modal';
 import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
-import VeiledergruppeForm from './veiledergruppe-form';
+import {VeiledergruppeForm} from './veiledergruppe-form';
 import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
 import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {STATUS} from '../../../ducks/utils';
-import LasterModal from '../lastermodal/laster-modal';
+import {LasterModal} from '../lastermodal/laster-modal';
 import './veiledergruppe-modal.css';
 
 interface VeilederModalProps {

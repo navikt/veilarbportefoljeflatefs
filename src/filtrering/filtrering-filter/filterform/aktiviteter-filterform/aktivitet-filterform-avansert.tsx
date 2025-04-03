@@ -1,9 +1,8 @@
-import React from 'react';
-import '../filterform.css';
-import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
+import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {FiltervalgModell} from '../../../../model-interfaces';
-import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
+import '../filterform.css';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -16,7 +15,7 @@ interface AktivitetFilterformProps {
     harAvanserteAktiviteter: boolean;
 }
 
-function AktivitetFilterformAvansert({
+export function AktivitetFilterformAvansert({
     valg,
     filtervalg,
     endreFiltervalg,
@@ -92,4 +91,3 @@ function AktivitetFilterformAvansert({
         </form>
     );
 }
-export default AktivitetFilterformAvansert;

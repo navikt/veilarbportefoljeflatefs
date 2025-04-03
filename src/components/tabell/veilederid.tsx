@@ -1,6 +1,5 @@
-import * as React from 'react';
-import {BrukerModell} from '../../model-interfaces';
 import {BodyShort} from '@navikt/ds-react';
+import {BrukerModell} from '../../model-interfaces';
 
 interface VeilederidProps {
     className?: string;
@@ -8,7 +7,7 @@ interface VeilederidProps {
     skalVises: boolean;
 }
 
-function VeilederId({className, skalVises, bruker}: VeilederidProps) {
+export function VeilederId({className, skalVises, bruker}: VeilederidProps) {
     if (!skalVises) {
         return null;
     }
@@ -19,5 +18,3 @@ function VeilederId({className, skalVises, bruker}: VeilederidProps) {
         </div>
     );
 }
-
-export default VeilederId;

@@ -1,15 +1,15 @@
 import 'moment/locale/nb';
 import {Route, Switch} from 'react-router-dom';
 import {MinoversiktSide} from './minoversikt/minoversikt-side';
-import EnhetSide from './enhetsportefolje/enhet-side';
-import VeiledereSide from './veiledere/veiledere-side';
+import {EnhetSide} from './enhetsportefolje/enhet-side';
+import {VeiledereSide} from './veiledere/veiledere-side';
 import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
-import Innholdslaster from './innholdslaster/innholdslaster';
+import {Innholdslaster} from './innholdslaster/innholdslaster';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.css';
 
-function Routes() {
+export function Routes() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
 
     return (
@@ -29,5 +29,3 @@ function Routes() {
         </div>
     );
 }
-
-export default Routes;

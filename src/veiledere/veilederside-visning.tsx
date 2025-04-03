@@ -1,15 +1,15 @@
-import React, {useMemo} from 'react';
+import {useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Toolbar from './../components/toolbar/toolbar';
-import VeiledereTabell from './veiledere-tabell';
+import {Toolbar} from '../components/toolbar/toolbar';
+import {VeilederTabell} from './veiledere-tabell';
 import {sortBy} from '../ducks/sortering';
 import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
-import './veiledere.css';
 import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
+import './veiledere.css';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {
@@ -44,7 +44,7 @@ interface VeilederesideVisningProps {
     portefoljestorrelser: PortefoljeStorrelser;
 }
 
-function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}: VeilederesideVisningProps) {
+export function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}: VeilederesideVisningProps) {
     const dispatch = useDispatch();
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
@@ -74,7 +74,7 @@ function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}:
                 id="veilederside-toolbar"
                 antallValgteVeiledere={getValgteVeiledere().length}
             />
-            <VeiledereTabell
+            <VeilederTabell
                 veiledere={getValgteVeiledere()}
                 currentSortering={sortering}
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
@@ -83,5 +83,3 @@ function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}:
         </>
     );
 }
-
-export default VeilederesideVisning;

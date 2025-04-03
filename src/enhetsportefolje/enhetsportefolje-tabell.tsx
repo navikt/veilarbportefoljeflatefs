@@ -1,15 +1,14 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import EnhetBrukerpanel from './enhet-brukerpanel';
+import {EnhetBrukerpanel} from './enhet-brukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
-import './enhetsportefolje.css';
-import './brukerliste.css';
-import Innholdslaster from '../innholdslaster/innholdslaster';
+import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
@@ -17,7 +16,7 @@ interface EnhetTabellProps {
     classNameWrapper: string;
 }
 
-function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
+export function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
     const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
@@ -54,5 +53,3 @@ function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
         </Innholdslaster>
     );
 }
-
-export default EnhetTabell;

@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
-import BekreftSlettingModal from '../varselmodal/bekreft-sletting-modal';
+import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {useDispatch, useSelector} from 'react-redux';
-import EgenModal from '../egenModal';
+import {EgenModal} from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import './mine-filter.css';
 

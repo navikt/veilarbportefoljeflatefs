@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {EndringsloggContainer} from './endringslogg-container';
 import {EndringsloggEntryWithSeenStatus, mapRemoteToState, setAllEntriesSeen} from './utils/endringslogg-custom';
 import {
@@ -121,5 +121,3 @@ export const Endringslogg: React.FC<EndringsloggProps> = (props: EndringsloggPro
         </>
     );
 };
-
-export default Endringslogg;

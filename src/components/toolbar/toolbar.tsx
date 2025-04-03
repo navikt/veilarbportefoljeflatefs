@@ -23,7 +23,7 @@ interface ToolbarProps {
     isSidebarHidden?: boolean;
 }
 
-function Toolbar({
+export function Toolbar({
     id,
     oversiktType,
     antallTotalt,
@@ -114,5 +114,3 @@ function Toolbar({
         </>
     );
 }
-
-export default Toolbar;

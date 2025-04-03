@@ -1,7 +1,7 @@
 import {HeadercelleProps} from './HeadercelleProps';
 import {Sorteringsfelt} from '../../../model-interfaces';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import SorteringHeader from '../sortering-header';
+import {SorteringHeader} from '../sortering-header';
 
 export const Statsborgerskap = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
     <SorteringHeader

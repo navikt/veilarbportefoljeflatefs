@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {ReactNode} from 'react';
 import classNames from 'classnames';
 import {BodyShort} from '@navikt/ds-react';
 import './tabell.css';
@@ -6,12 +6,12 @@ import './tabell.css';
 export interface HeaderProps {
     skalVises?: boolean | null;
     className?: string;
-    children?: React.ReactNode;
+    children?: ReactNode;
     title?: string;
     headerTestId?: string;
 }
 
-function Header({children, skalVises = true, className = '', title, headerTestId}: HeaderProps) {
+export function Header({children, skalVises = true, className = '', title, headerTestId}: HeaderProps) {
     if (!skalVises) {
         return null;
     }
@@ -26,5 +26,3 @@ function Header({children, skalVises = true, className = '', title, headerTestId
         </BodyShort>
     );
 }
-
-export default Header;

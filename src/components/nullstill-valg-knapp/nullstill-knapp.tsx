@@ -1,9 +1,8 @@
-import React from 'react';
+import classNames from 'classnames';
+import {Button} from '@navikt/ds-react';
 import {logEvent} from '../../utils/frontend-logger';
 import {finnSideNavn} from '../../middleware/metrics-middleware';
 import './nullstill-knapp.css';
-import classNames from 'classnames';
-import {Button} from '@navikt/ds-react';
 
 interface Props {
     nullstillValg: () => void;
@@ -13,7 +12,7 @@ interface Props {
     className?: string;
 }
 
-function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
+export function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
     const nullstille = e => {
         e.persist();
         logEvent('portefolje.metrikker.nullstill-knapp', {
@@ -39,5 +38,3 @@ function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: 
         </div>
     );
 }
-
-export default NullstillKnapp;

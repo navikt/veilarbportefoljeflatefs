@@ -1,9 +1,9 @@
 import moment from 'moment';
-import BrukerNavn from '../components/tabell/brukernavn';
-import BrukerFnr from '../components/tabell/brukerfnr';
-import UkeKolonne from '../components/tabell/kolonner/ukekolonne';
+import {BrukerNavn} from '../components/tabell/brukernavn';
+import {BrukerFnr} from '../components/tabell/brukerfnr';
+import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
-import DatoKolonne from '../components/tabell/kolonner/datokolonne';
+import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {
     BarnUnder18Aar,
@@ -29,9 +29,9 @@ import {
     utlopsdatoUker,
     ytelsestypetekst
 } from '../utils/utils';
-import VeilederNavn from '../components/tabell/veiledernavn';
-import VeilederId from '../components/tabell/veilederid';
-import TidKolonne from '../components/tabell/kolonner/tidkolonne';
+import {VeilederNavn} from '../components/tabell/veiledernavn';
+import {VeilederId} from '../components/tabell/veilederid';
+import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
 import {
     dagerSiden,
     klokkeslettTilMinutter,
@@ -39,10 +39,10 @@ import {
     oppfolgingStartetDato,
     toDateString
 } from '../utils/dato-utils';
-import VarighetKolonne from '../components/tabell/kolonner/varighetkolonne';
+import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
-import SisteEndringKategori from '../components/tabell/sisteendringkategori';
+import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
@@ -58,7 +58,14 @@ interface EnhetKolonnerProps {
     brukersVeileder?: VeilederModell;
 }
 
-function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, brukersVeileder}: EnhetKolonnerProps) {
+export function EnhetKolonner({
+    className,
+    bruker,
+    enhetId,
+    filtervalg,
+    valgteKolonner,
+    brukersVeileder
+}: EnhetKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -410,5 +417,3 @@ function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner, 
         </div>
     );
 }
-
-export default EnhetKolonner;

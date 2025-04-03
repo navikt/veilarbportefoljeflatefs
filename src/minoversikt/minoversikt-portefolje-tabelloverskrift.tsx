@@ -1,5 +1,4 @@
-import React from 'react';
-import MinOversiktListehode from './minoversikt-listehode';
+import {MinOversiktListehode} from './minoversikt-listehode';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import './minoversikt.css';
@@ -8,7 +7,7 @@ interface MinOversiktTabellProps {
     settSorteringOgHentPortefolje: (sortering: string) => void;
 }
 
-function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversiktTabellProps) {
+export function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversiktTabellProps) {
     const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.minOversikt
     );
@@ -23,5 +22,3 @@ function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: MinOversik
         />
     );
 }
-
-export default MinoversiktTabellOverskrift;

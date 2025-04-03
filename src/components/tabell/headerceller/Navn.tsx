@@ -1,6 +1,6 @@
 import {HeadercelleProps} from './HeadercelleProps';
 import {Sorteringsfelt} from '../../../model-interfaces';
-import SorteringHeader from '../sortering-header';
+import {SorteringHeader} from '../sortering-header';
 
 export const Navn = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeadercelleProps) => (
     <SorteringHeader

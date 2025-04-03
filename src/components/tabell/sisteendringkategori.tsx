@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 import {BrukerModell} from '../../model-interfaces';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
@@ -13,7 +12,7 @@ interface SisteEndringKategoriProps {
     skalVises: boolean;
 }
 
-function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
+export function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
@@ -44,5 +43,3 @@ function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndr
         </div>
     );
 }
-
-export default SisteEndringKategori;

@@ -1,8 +1,7 @@
-import React from 'react';
-import '../filterform.css';
-import NullstillKnapp from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Dictionary} from '../../../../utils/types/types';
 import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
+import {Dictionary} from '../../../../utils/types/types';
+import '../filterform.css';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -14,7 +13,7 @@ interface AktivitetFilterformProps {
     harAvanserteAktiviteter: boolean;
 }
 
-function AktivitetFilterformForenklet({
+export function AktivitetFilterformForenklet({
     valg,
     endreFiltervalg,
     klikkPaAvansertLenke,
@@ -71,4 +70,3 @@ function AktivitetFilterformForenklet({
         </form>
     );
 }
-export default AktivitetFilterformForenklet;
