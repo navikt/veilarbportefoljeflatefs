@@ -1,4 +1,3 @@
-import React from 'react';
 import {FargekategoriModell} from '../../model-interfaces';
 import {ReactComponent as FargekategoriIkonBlaHalvsirkel} from '../ikoner/fargekategorier/Fargekategoriikon_bla_halvsirkel.svg';
 import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
@@ -8,7 +7,7 @@ import {ReactComponent as FargekategoriIkonTurkisFemkant} from '../ikoner/fargek
 import {ReactComponent as FargekategoriIkonOransjeRombe} from '../ikoner/fargekategorier/Fargekategoriikon_oransje_rombe.svg';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet.svg';
 
-const fargekategoriIkonMapper = (
+export const fargekategoriIkonMapper = (
     fargekategori: FargekategoriModell | null,
     ikonClassName: string = '',
     ikonTitle?: string
@@ -31,5 +30,3 @@ const fargekategoriIkonMapper = (
             return <FargekategoriIkonTomtBokmerke className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
     }
 };
-
-export default fargekategoriIkonMapper;

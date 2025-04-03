@@ -1,4 +1,3 @@
-import React from 'react';
 import {Alert, Link} from '@navikt/ds-react';
 
 export const HuskelappInfoAlert = () => (

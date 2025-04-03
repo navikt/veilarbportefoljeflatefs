@@ -1,15 +1,14 @@
-import * as React from 'react';
 import {useState} from 'react';
+import {BodyShort, Button} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
 import './feilmelding-brukere.css';
-import {BodyShort, Button} from '@navikt/ds-react';
 
 interface ServerFeilModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-export default function ServerFeilModal({isOpen, onClose}: ServerFeilModalProps) {
+export function ServerFeilModal({isOpen, onClose}: ServerFeilModalProps) {
     const [erAapen, setErAapen] = useState(isOpen);
 
     const lukkModal = () => {

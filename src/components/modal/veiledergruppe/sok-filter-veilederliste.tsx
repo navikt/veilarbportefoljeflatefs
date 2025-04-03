@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {Alert, BodyShort, TextField} from '@navikt/ds-react';
 
 interface SokFilterProps<T> {
     data: T[];
-    children: (filteredData: T[]) => React.ReactNode;
+    children: (filteredData: T[]) => ReactNode;
     label: string;
     placeholder: string;
     limitSize?: number;

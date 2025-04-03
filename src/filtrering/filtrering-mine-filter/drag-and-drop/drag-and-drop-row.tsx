@@ -1,10 +1,10 @@
-import React, {useRef, useEffect} from 'react';
+import {useRef, useEffect, memo} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
-import FlyttKnappWrapper from './flytt-knapp-wrapper';
+import {FlyttKnappWrapper} from './flytt-knapp-wrapper';
 import {kebabCase} from '../../../utils/utils';
 import {trackAmplitude} from '../../../amplitude/amplitude';
 
-export interface DragAndDropRowProps {
+interface DragAndDropRowProps {
     idx: number;
     filterNavn: string;
     isLastRow: boolean;
@@ -69,4 +69,4 @@ function DragAndDropRow({
     );
 }
 
-export default React.memo(DragAndDropRow);
+export default memo(DragAndDropRow);

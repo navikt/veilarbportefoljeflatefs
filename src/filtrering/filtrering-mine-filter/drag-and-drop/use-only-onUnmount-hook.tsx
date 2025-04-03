@@ -1,12 +1,10 @@
-import React, {useEffect, useMemo, useRef} from 'react';
+import {MutableRefObject, useEffect, useMemo, useRef} from 'react';
 
-function generateSetOnUnmount(onUnmountRef: React.MutableRefObject<() => void>) {
+function generateSetOnUnmount(onUnmountRef: MutableRefObject<() => void>) {
     return (newAction: () => void) => (onUnmountRef.current = newAction);
 }
 
-export function useOnlyOnUnmount(
-    onUnmount?: () => void
-): [React.MutableRefObject<() => void>, (newAction: any) => any] {
+export function useOnlyOnUnmount(onUnmount?: () => void): [MutableRefObject<() => void>, (newAction: any) => any] {
     const onUnmountNotNull = useMemo(() => {
         return onUnmount ? onUnmount : () => null;
     }, [onUnmount]);

@@ -1,7 +1,8 @@
+import {ReactNode} from 'react';
 import {Heading, Modal} from '@navikt/ds-react';
 
 interface ModalProps {
-    children: React.ReactNode;
+    children: ReactNode;
     className?: string;
     open?: boolean;
     onClose: () => void;

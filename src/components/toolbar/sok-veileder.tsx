@@ -1,14 +1,13 @@
-import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {endreFiltervalg, veilederSoktFraToolbar} from '../../ducks/filtrering';
 import {nameToStateSliceMap} from '../../ducks/utils';
 import {FiltervalgModell} from '../../model-interfaces';
 import {VeiledereState} from '../../ducks/veiledere';
-import {useEffect, useState} from 'react';
-import SokVeiledere from '../sok-veiledere/sok-veiledere';
-import './toolbar.css';
+import {SokVeiledere} from '../sok-veiledere/sok-veiledere';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import './toolbar.css';
 
 interface SokVeilederProps {
     filtervalg: FiltervalgModell;

@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
 import {VeilederModell} from '../../../model-interfaces';

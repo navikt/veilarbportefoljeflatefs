@@ -1,13 +1,12 @@
-import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
-import KnappPanel from './knapp-panel';
+import {Pagination} from '@navikt/ds-react';
+import {KnappPanel} from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSide, selectSidestorrelse} from './paginering-selector';
-import './paginering.css';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
-import {Pagination} from '@navikt/ds-react';
+import './paginering.css';
 
 interface PagineringProps {
     className?: string;
@@ -15,7 +14,7 @@ interface PagineringProps {
     onPaginering?: () => void;
 }
 
-function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
+export function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
     const dispatch = useDispatch();
     const side = useSelector((state: AppState) => selectSide(state));
     const sidestorrelseRedux = useSelector((state: AppState) => selectSidestorrelse(state));
@@ -63,5 +62,3 @@ function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
         </div>
     );
 }
-
-export default Paginering;

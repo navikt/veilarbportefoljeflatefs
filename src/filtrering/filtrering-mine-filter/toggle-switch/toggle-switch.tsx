@@ -1,4 +1,3 @@
-import React from 'react';
 import {PadlockLockedIcon, PadlockUnlockedIcon} from '@navikt/aksel-icons';
 import './toggle-switch.css';
 
@@ -9,7 +8,7 @@ interface ToggleSwitchProps {
     ariaLabel?: string;
 }
 
-function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwitchProps) {
+export function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwitchProps) {
     return (
         <label className="toggle-switch" data-testid="toggle-knapp">
             <input
@@ -31,5 +30,3 @@ function ToggleSwitch({onChange, defaultChecked, checked, ariaLabel}: ToggleSwit
         </label>
     );
 }
-
-export default ToggleSwitch;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
 import {HuskelappModal} from '../redigering/HuskelappModal';
 import {HuskelappForPanel} from './HuskelappForPanel';

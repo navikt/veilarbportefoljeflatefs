@@ -1,6 +1,5 @@
-import React from 'react';
-import {BodyShort} from '@navikt/ds-react';
 import classNames from 'classnames';
+import {BodyShort} from '@navikt/ds-react';
 
 interface TekstKolonneProps {
     /** Send inn "-" om det ikkje er noko tekst å vise */

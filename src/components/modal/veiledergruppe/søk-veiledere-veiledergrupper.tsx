@@ -1,5 +1,5 @@
-import {CheckboxGroup, Checkbox} from '@navikt/ds-react';
 import {useSelector} from 'react-redux';
+import {CheckboxGroup, Checkbox} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {SokFilterVeilederliste} from './sok-filter-veilederliste';
 import '../../../style.css';

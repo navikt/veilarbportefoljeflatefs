@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {ChangeEvent} from 'react';
 import {Checkbox} from '@navikt/ds-react';
 import {Kolonne} from '../../../ducks/ui/listevisning';

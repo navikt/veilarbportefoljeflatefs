@@ -1,12 +1,12 @@
-import {default as React, RefObject, useRef, useState} from 'react';
-import EndringsloggIkon, {StilType} from './icons/endringslogg-icon';
+import {RefObject, useRef, useState} from 'react';
+import classNames from 'classnames';
+import {Label, Heading} from '@navikt/ds-react';
+import {EndringsloggIkon, StilType} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
-import TransitionContainer from './transition-container';
+import {TransitionContainer} from './transition-container';
 import {useEventListener} from './hooks/use-event-listener';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
-import classNames from 'classnames';
-import {Label, Heading} from '@navikt/ds-react';
 
 interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];

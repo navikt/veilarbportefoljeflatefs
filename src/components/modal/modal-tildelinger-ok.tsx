@@ -1,8 +1,7 @@
+import {BodyShort, Button} from '@navikt/ds-react';
 import {VarselModal, VarselModalType} from './varselmodal/varselmodal';
-import React from 'react';
 import {Fnr, FnrList} from '../fnr-list';
 import './feilmelding-brukere.css';
-import {BodyShort, Button} from '@navikt/ds-react';
 
 interface Props {
     fnr: Fnr[];

@@ -1,19 +1,19 @@
-import React, {useRef, useState} from 'react';
-import {BrukerModell, Fargekategorinavn} from '../../model-interfaces';
-import {Button} from '@navikt/ds-react';
-import {FargekategoriPopover} from './fargekategori-popover';
-import fargekategoriIkonMapper from './fargekategori-ikon-mapper';
-import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
-import {ThunkDispatch} from 'redux-thunk';
-import {AppState} from '../../reducer';
+import {useRef, useState} from 'react';
 import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {Button} from '@navikt/ds-react';
+import {BrukerModell, Fargekategorinavn} from '../../model-interfaces';
+import {FargekategoriPopover} from './fargekategori-popover';
+import {fargekategoriIkonMapper} from './fargekategori-ikon-mapper';
+import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
+import {AppState} from '../../reducer';
 
 interface FargekategoriPopoverKnappProps {
     bruker: BrukerModell;
 }
 
-export default function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
+export function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [popoverOpen, setPopoverOpen] = useState(false);

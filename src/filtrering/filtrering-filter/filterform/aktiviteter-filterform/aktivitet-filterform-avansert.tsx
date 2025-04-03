@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
@@ -7,7 +8,7 @@ import '../filterform.css';
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
     filtervalg: FiltervalgModell;
-    endreFiltervalg: (form: string, filterVerdi: React.ReactNode) => void;
+    endreFiltervalg: (form: string, filterVerdi: ReactNode) => void;
     klikkPaForenkletLenke: (e: any) => void;
     nullstillAvanserteAktiviteter: () => void;
     nullstillForenkledeAktiviteter: () => void;

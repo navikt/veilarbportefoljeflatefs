@@ -1,4 +1,3 @@
-import * as React from 'react';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 
@@ -10,7 +9,7 @@ interface KnappPanelProps {
     ariaLabel: string;
 }
 
-function KnappPanel({disabled = false, selected = false, ariaLabel, ...props}: KnappPanelProps) {
+export function KnappPanel({disabled = false, selected = false, ariaLabel, ...props}: KnappPanelProps) {
     const classes = classNames('paginering__knapp', {
         disabled,
         'paginering__knapp--pressed': selected
@@ -31,5 +30,3 @@ function KnappPanel({disabled = false, selected = false, ariaLabel, ...props}: K
         </Button>
     );
 }
-
-export default KnappPanel;

@@ -1,6 +1,6 @@
-import React, {ChangeEventHandler} from 'react';
-import './bar.css';
+import {ChangeEventHandler} from 'react';
 import {Label, Radio} from '@navikt/ds-react';
+import './bar.css';
 
 interface BarinputRadioProps {
     filterNavn: string;

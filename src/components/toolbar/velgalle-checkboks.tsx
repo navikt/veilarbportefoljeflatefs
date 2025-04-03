@@ -1,9 +1,8 @@
-import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {Checkbox} from '@navikt/ds-react';
 import {markerAlleBrukere} from '../../ducks/portefolje';
 import './toolbar.css';
-import {Checkbox} from '@navikt/ds-react';
 
 interface VelgalleCheckboksProps {
     disabled: boolean;

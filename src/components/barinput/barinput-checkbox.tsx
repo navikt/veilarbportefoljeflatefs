@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler} from 'react';
+import {ChangeEventHandler, ReactNode} from 'react';
 import {Checkbox, Label} from '@navikt/ds-react';
 import './bar.css';
 
@@ -7,12 +7,12 @@ interface BarInputCheckboxProps {
     checked: boolean;
     filterNavn: string;
     handleChange: ChangeEventHandler<HTMLInputElement>;
-    labelTekst: React.ReactNode;
+    labelTekst: ReactNode;
     indeterminate?: boolean;
     filterVerdi: string;
 }
 
-function BarInputCheckbox({
+export function BarInputCheckbox({
     antall,
     checked,
     filterNavn,
@@ -43,5 +43,3 @@ function BarInputCheckbox({
         </div>
     );
 }
-
-export default BarInputCheckbox;

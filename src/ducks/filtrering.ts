@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {FargekategoriModell, FiltervalgModell} from '../model-interfaces';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
@@ -9,6 +10,7 @@ import {
     MINE_FARGEKATEGORIER
 } from '../filtrering/filter-konstanter';
 import {alfabetiskSammenligning} from '../utils/utils';
+
 // Actions
 export const ENDRE_FILTER = 'filtrering/ENDRE_FILTER';
 export const SETT_FILTERVALG = 'filtrering/SETT_FILTERVALG';
@@ -170,7 +172,7 @@ export function velgMineFilter(filterVerdi: LagretFilter, oversiktType: Oversikt
 
 export function endreFiltervalg(
     filterId: string,
-    filterVerdi: React.ReactNode,
+    filterVerdi: ReactNode,
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {
     if (Array.isArray(filterVerdi)) {

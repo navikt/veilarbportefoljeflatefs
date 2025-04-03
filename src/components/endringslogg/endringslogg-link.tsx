@@ -1,4 +1,3 @@
-import React from 'react';
 import {Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 

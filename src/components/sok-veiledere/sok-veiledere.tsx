@@ -1,10 +1,9 @@
-import React from 'react';
+import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import '../../filtrering/filtrering-filter/filterform/filterform.css';
+import {SokFilter} from './sok-filter';
 import '../../style.css';
-import SokFilter from './sok-filter';
-import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import '../../filtrering/filtrering-filter/filterform/filterform.css';
 
 interface SokVeiledereProps {
     handterVeiledereValgt: (veilederIdenter: string[]) => void;
@@ -13,7 +12,7 @@ interface SokVeiledereProps {
     valgteVeiledere: string[];
 }
 
-function SokVeiledere({handterVeiledereValgt, btnOnClick, harValg, valgteVeiledere}: SokVeiledereProps) {
+export function SokVeiledere({handterVeiledereValgt, btnOnClick, harValg, valgteVeiledere}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) =>
         a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
@@ -53,5 +52,3 @@ function SokVeiledere({handterVeiledereValgt, btnOnClick, harValg, valgteVeilede
         </SokFilter>
     );
 }
-
-export default SokVeiledere;

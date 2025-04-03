@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {ReactNode, useState} from 'react';
 import {Alert, BodyShort, Button, Heading} from '@navikt/ds-react';
 import './knapp-med-bekreft-handling.css';
 
@@ -6,7 +6,7 @@ interface KnappMedBekreftHandlingProps {
     handlingsknapptekst: string;
     variant?: 'secondary' | 'tertiary';
     size?: 'small' | 'xsmall';
-    icon?: React.ReactNode;
+    icon?: ReactNode;
     bekreftelsesmelding: {
         overskrift: string;
         overskriftsnivaa?: '1' | '2' | '3' | '4' | '5' | '6';

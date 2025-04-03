@@ -1,4 +1,4 @@
-import React, {MouseEvent} from 'react';
+import {MouseEvent, ReactNode} from 'react';
 import classNames from 'classnames';
 import {Bleed, Button} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
@@ -8,11 +8,11 @@ import './filtrering-skjema.css';
 interface FiltreringLabelMedIkonProps {
     label: string;
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
-    ikon: React.ReactNode;
+    ikon: ReactNode;
     tittel: string;
 }
 
-function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<FiltreringLabelMedIkonProps>) {
+export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<FiltreringLabelMedIkonProps>) {
     const buttonClassnames = classNames('filtreringlabel', 'filtreringlabel--ikon', {});
     return (
         <Button
@@ -32,5 +32,3 @@ function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<Fil
         </Button>
     );
 }
-
-export default FiltreringLabelMedIkon;

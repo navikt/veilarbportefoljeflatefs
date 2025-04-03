@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
 import {useDispatch, useSelector} from 'react-redux';
+import {BodyShort, Button, TextField} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
 import {LagretFilterValideringsError} from './mine-filter-modal';
@@ -7,11 +10,8 @@ import {ErrorModalType, MineFilterVarselModal} from './mine-filter-varsel-modal'
 import {lagreNyttFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-import {BodyShort, Button, TextField} from '@navikt/ds-react';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;

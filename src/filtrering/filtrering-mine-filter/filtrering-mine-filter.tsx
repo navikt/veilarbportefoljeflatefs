@@ -1,13 +1,12 @@
-import React from 'react';
 import {useSelector} from 'react-redux';
+import {Alert} from '@navikt/ds-react';
 import {AppState} from '../../reducer';
 import {STATUS} from '../../ducks/utils';
-import './mine-filter_innhold.css';
-import MineFilterInnhold, {LagredeFilterInnholdProps} from './mine-filter_innhold';
+import {MineFilterInnhold, LagredeFilterInnholdProps} from './mine-filter_innhold';
 import {HandlingsType} from '../../ducks/lagret-filter';
-import {Alert} from '@navikt/ds-react';
+import './mine-filter_innhold.css';
 
-function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterInnholdProps) {
+export function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterInnholdProps) {
     const mineFilterState = useSelector((state: AppState) => state.mineFilter);
 
     return (
@@ -22,5 +21,3 @@ function FiltreringMineFilter({...mineFilterInnholdProps}: LagredeFilterInnholdP
         </>
     );
 }
-
-export default FiltreringMineFilter;

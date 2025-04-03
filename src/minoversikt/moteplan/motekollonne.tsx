@@ -1,4 +1,3 @@
-import * as React from 'react';
 import moment from 'moment';
 import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
@@ -12,7 +11,7 @@ interface MoteKollonneProps {
     enhetId: string;
 }
 
-function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
+export function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
 
     const handterKlikk = () =>
@@ -45,5 +44,3 @@ function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
         </Table.Row>
     );
 }
-
-export default MoteKollonne;

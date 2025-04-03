@@ -1,4 +1,4 @@
-import React, {Dispatch, useRef} from 'react';
+import {Dispatch, ReactNode, useRef} from 'react';
 import {useDispatch} from 'react-redux';
 import {Tabs} from '@navikt/ds-react';
 import {FunnelIcon, PersonGroupIcon, StarIcon, VitalsIcon} from '@navikt/aksel-icons';
@@ -32,7 +32,7 @@ export function endreValgtSidebarTab({dispatch, currentOversiktType, requestedTa
 }
 
 export interface Fanedetaljer {
-    icon: React.ReactNode;
+    icon: ReactNode;
     tittel: string;
 }
 

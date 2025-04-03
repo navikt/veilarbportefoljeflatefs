@@ -1,10 +1,10 @@
-import React, {MouseEvent} from 'react';
+import {MouseEvent} from 'react';
 import classNames from 'classnames';
-import {lagConfig} from './filter-konstanter';
-import FilterFeilModal from '../components/modal/filter-feil-modal';
-import {kebabUtenSpesialtegn} from '../utils/utils';
 import {Button} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
+import {lagConfig} from './filter-konstanter';
+import {FilterFeilModal} from '../components/modal/filter-feil-modal';
+import {kebabUtenSpesialtegn} from '../utils/utils';
 import './filtrering-label.css';
 import './filtrering-skjema.css';
 
@@ -14,7 +14,7 @@ interface FiltreringLabelProps {
     skalHaKryssIkon?: boolean;
 }
 
-function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
+export function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
     const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label)?.label}"` : 'Nullstill filtervalg';
     const slettAlleFiltervalg = ariaLabel === 'Nullstill filtervalg';
     const buttonClassnames = classNames('filtreringlabel', {'filtreringlabel--slett-alle': slettAlleFiltervalg});
@@ -39,5 +39,3 @@ function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<
         </Button>
     );
 }
-
-export default FiltreringLabel;

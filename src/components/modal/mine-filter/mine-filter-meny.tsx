@@ -1,6 +1,5 @@
-import React from 'react';
-import {Visningstype} from './mine-filter-modal';
 import {BodyShort, Button} from '@navikt/ds-react';
+import {Visningstype} from './mine-filter-modal';
 
 interface Props {
     setValgtVisningstype: (visningstype: Visningstype) => void;

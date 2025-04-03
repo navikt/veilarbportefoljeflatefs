@@ -1,6 +1,6 @@
 import {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {AnyAction} from 'redux';
+import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
@@ -13,7 +13,7 @@ import {Kolonne} from '../ducks/ui/listevisning';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
-import FargekategoriTabellradKnapp from '../components/fargekategori/fargekategori-tabellrad-knapp';
+import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
 import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisning';
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';

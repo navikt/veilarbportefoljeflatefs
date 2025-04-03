@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {BodyShort} from '@navikt/ds-react';
 
 interface Props {

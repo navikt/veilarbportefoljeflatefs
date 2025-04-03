@@ -1,4 +1,3 @@
-import React from 'react';
 import './modal-liste.css';
 
 export interface Fnr {

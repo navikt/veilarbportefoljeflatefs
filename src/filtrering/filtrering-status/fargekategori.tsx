@@ -1,7 +1,8 @@
-import React from 'react';
+import {ChangeEvent} from 'react';
+import {useDispatch} from 'react-redux';
+import {Bleed} from '@navikt/ds-react';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
-import './fargekategori.css';
-import BarInputCheckbox from '../../components/barinput/barinput-checkbox';
+import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {
     alleFargekategoriFilterAlternativer,
     FARGEKATEGORI_A,
@@ -17,11 +18,10 @@ import {
 } from '../filter-konstanter';
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {useDispatch} from 'react-redux';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
 import {FargekategoriModell} from '../../model-interfaces';
-import fargekategoriIkonMapper from '../../components/fargekategori/fargekategori-ikon-mapper';
-import {Bleed} from '@navikt/ds-react';
+import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
+import './fargekategori.css';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -29,6 +29,7 @@ type FargekategoriUnderfilterKonfigurasjon = {
     filterNavn: string;
     statustallId: string;
 };
+
 export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnderfilterKonfigurasjon[] = [
     {
         filterLabel: fargekategorier.FARGEKATEGORI_A,
@@ -75,7 +76,7 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
     }
 ] as const;
 
-function FilterStatusMineFargekategorier() {
+export function FilterStatusMineFargekategorier() {
     const dispatch = useDispatch();
     const statusTall = useStatustallVeilederSelector();
     const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
@@ -93,7 +94,7 @@ function FilterStatusMineFargekategorier() {
         dispatch({type: FARGEKATEGORIER_HOVEDFILTER_KLIKK, name: OversiktType.minOversikt});
     }
 
-    function handleUnderfilterEndret(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleUnderfilterEndret(e: ChangeEvent<HTMLInputElement>) {
         dispatch({
             type: FARGEKATEGORIER_UNDERFILTER_KLIKK,
             name: OversiktType.minOversikt,
@@ -134,5 +135,3 @@ function FilterStatusMineFargekategorier() {
         </>
     );
 }
-
-export default FilterStatusMineFargekategorier;

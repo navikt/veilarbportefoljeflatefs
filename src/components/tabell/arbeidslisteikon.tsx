@@ -9,7 +9,7 @@ interface ArbeidslistekategoriProps {
     kategori: KategoriModell;
 }
 
-export default function ArbeidslistekategoriVisning({kategori}: Readonly<ArbeidslistekategoriProps>) {
+export function ArbeidslistekategoriVisning({kategori}: Readonly<ArbeidslistekategoriProps>) {
     switch (kategori) {
         case KategoriModell.BLA:
             return <FargekategoriIkonBlaHalvsirkel fontSize="1.5rem" />;
