@@ -142,11 +142,6 @@
     white-space: pre-wrap;
 }
 
-.tabell-kompakt th,
-.tabell-kompakt td {
-    padding: 5px;
-}
-
 table .tabell-element-center {
     text-align: center;
 }
