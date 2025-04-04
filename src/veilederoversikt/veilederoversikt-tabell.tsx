@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
-import './veiledere.css';
+import './veilederoversikt.css';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -15,7 +15,7 @@ interface VeiledereTabellProps {
     sorterPaaPortefoljestorrelse: () => void;
 }
 
-export function VeilederTabell({
+export function VeilederoversiktTabell({
     veiledere,
     currentSortering,
     sorterPaaEtternavn,
