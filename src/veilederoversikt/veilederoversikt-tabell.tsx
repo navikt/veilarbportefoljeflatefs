@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import './veilederoversikt.css';
+import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -23,27 +24,6 @@ export function VeilederoversiktTabell({
 }: VeiledereTabellProps) {
     const sorterEtternavn = currentSortering.property === 'etternavn';
     const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
-
-    const veilederElementer = veiledere.map(veileder => (
-        <tr key={veileder.ident}>
-            <td>
-                <Link
-                    to={`/portefolje/${veileder.ident}`}
-                    className="lenke lenke--frittstaende"
-                    data-testid="veilederoversikt_navn_lenke"
-                >
-                    <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
-                </Link>
-            </td>
-            <td>
-                <BodyShort size="small">{`${veileder.ident}`}</BodyShort>
-            </td>
-            <td className="tabell-element-center">
-                <BodyShort size="small">{veileder.portefoljestorrelse}</BodyShort>
-            </td>
-            <td />
-        </tr>
-    ));
 
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
@@ -123,7 +103,11 @@ export function VeilederoversiktTabell({
                             <th />
                         </tr>
                     </thead>
-                    <tbody data-testid="veilederoversikt_veilederliste_tbody">{veilederElementer}</tbody>
+                    <tbody data-testid="veilederoversikt_veilederliste_tbody">
+                        {veiledere.map((veileder: any) => (
+                            <VeilederoversiktTabellrad veileder={veileder} />
+                        ))}
+                    </tbody>
                 </table>
             </span>
         </div>
