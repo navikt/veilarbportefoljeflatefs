@@ -1,7 +1,7 @@
 import {useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
-import {VeilederTabell} from './veiledere-tabell';
+import {VeilederoversiktTabell} from './veilederoversikt-tabell';
 import {sortBy} from '../ducks/sortering';
 import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
@@ -9,7 +9,7 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import {VeilederModell} from '../model-interfaces';
 import {AppState} from '../reducer';
-import './veiledere.css';
+import './veilederoversikt.css';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {
@@ -38,13 +38,17 @@ function propertySort({property, direction}) {
     return sorter(property, direction);
 }
 
-interface VeilederesideVisningProps {
+interface VeilederoversiktSidevisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
     portefoljestorrelser: PortefoljeStorrelser;
 }
 
-export function VeilederesideVisning({veilederFilter, veiledere, portefoljestorrelser}: VeilederesideVisningProps) {
+export function VeilederoversiktSidevisning({
+    veilederFilter,
+    veiledere,
+    portefoljestorrelser
+}: VeilederoversiktSidevisningProps) {
     const dispatch = useDispatch();
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
@@ -74,7 +78,7 @@ export function VeilederesideVisning({veilederFilter, veiledere, portefoljestorr
                 id="veilederside-toolbar"
                 antallValgteVeiledere={getValgteVeiledere().length}
             />
-            <VeilederTabell
+            <VeilederoversiktTabell
                 veiledere={getValgteVeiledere()}
                 currentSortering={sortering}
                 sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}

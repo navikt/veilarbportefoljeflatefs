@@ -28,3 +28,29 @@
     height: calc(19 / 16 * 1rem);
     display: block;
 }
+
+.veilarbportefoljeflatefs .fnr-kolonne {
+    display: flex;
+    align-items: center;
+}
+
+.veilarbportefoljeflatefs .fnr-kolonne :first-child {
+    padding-left: 0;
+    color: var(--a-text-default);
+    font-weight: normal;
+}
+
+.veilarbportefoljeflatefs .fnr-kolonne svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+.veilarbportefoljeflatefs .brukerliste__brukerpanelknapp {
+    margin-left: auto; /* Dyttar brukerpanelknappen heilt ut til høgre av containaren. */
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    min-width: 2rem;
+    color: #262626;
+    border: none;
+}
