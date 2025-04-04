@@ -68,7 +68,7 @@ export function VeilederoversiktTabell({
     return (
         <div className="veilederoversikt__toolbar-container">
             <span className="veilederoversikt__sticky-skygge">
-                <table className="tabell veileder-tabell portefolje-tabell ">
+                <table className="veileder-tabell">
                     <thead>
                         <tr>
                             <th scope="col" className="tabellheader">
