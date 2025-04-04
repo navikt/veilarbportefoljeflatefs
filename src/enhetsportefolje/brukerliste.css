@@ -89,16 +89,6 @@
     gap: 0.2rem;
 }
 
-.veilarbportefoljeflatefs .brukerliste__brukerpanelknapp {
-    margin-left: auto; /* Dyttar brukerpanelknappen heilt ut til høgre av containaren. */
-    cursor: pointer;
-    padding: 0;
-    background-color: transparent;
-    min-width: 2rem;
-    color: #262626;
-    border: none;
-}
-
 .veilarbportefoljeflatefs .valgt-sortering {
     font-weight: bold;
 }
