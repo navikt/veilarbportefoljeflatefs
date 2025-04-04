@@ -28,3 +28,19 @@
     height: calc(19 / 16 * 1rem);
     display: block;
 }
+
+.veilarbportefoljeflatefs .fnr-kolonne {
+    display: flex;
+    align-items: center;
+}
+
+.veilarbportefoljeflatefs .fnr-kolonne :first-child {
+    padding-left: 0;
+    color: var(--a-text-default);
+    font-weight: normal;
+}
+
+.veilarbportefoljeflatefs .fnr-kolonne svg {
+    height: 1rem;
+    width: 1rem;
+}

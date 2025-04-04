@@ -99,22 +99,6 @@
     border: none;
 }
 
-.veilarbportefoljeflatefs .fnr-kolonne {
-    display: flex;
-    align-items: center;
-}
-
-.veilarbportefoljeflatefs .fnr-kolonne svg {
-    height: 1rem;
-    width: 1rem;
-}
-
-.veilarbportefoljeflatefs .fnr-kolonne :first-child {
-    padding-left: 0;
-    color: var(--a-text-default);
-    font-weight: normal;
-}
-
 .veilarbportefoljeflatefs .valgt-sortering {
     font-weight: bold;
 }
