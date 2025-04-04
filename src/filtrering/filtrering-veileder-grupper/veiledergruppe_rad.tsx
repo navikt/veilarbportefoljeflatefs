@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
-import RedigerKnapp from '../../components/rediger-knapp/rediger-knapp';
+import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -67,12 +67,13 @@ export function VeiledergruppeRad({
             >
                 {veilederGruppe.filterNavn}
             </Radio>
-            <RedigerKnapp
-                hidden={!erValgt}
-                aria="Rediger veiledergruppe"
-                onClick={onClickRedigerKnapp}
-                dataTestid={`rediger-veiledergruppe_knapp_${kebabCase(veilederGruppe.filterNavn)}`}
-            />
+            {erValgt && (
+                <RedigerKnapp
+                    aria="Rediger veiledergruppe"
+                    onClick={onClickRedigerKnapp}
+                    dataTestid={`rediger-veiledergruppe_knapp_${kebabCase(veilederGruppe.filterNavn)}`}
+                />
+            )}
         </div>
     );
 }
