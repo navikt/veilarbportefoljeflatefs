@@ -1,8 +1,8 @@
-import {Link} from 'react-router-dom';
 import classNames from 'classnames';
-import {BodyShort, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
-import './veiledere.css';
+import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
+import './veilederoversikt.css';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -15,7 +15,7 @@ interface VeiledereTabellProps {
     sorterPaaPortefoljestorrelse: () => void;
 }
 
-export function VeilederTabell({
+export function VeilederoversiktTabell({
     veiledere,
     currentSortering,
     sorterPaaEtternavn,
@@ -23,27 +23,6 @@ export function VeilederTabell({
 }: VeiledereTabellProps) {
     const sorterEtternavn = currentSortering.property === 'etternavn';
     const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
-
-    const veilederElementer = veiledere.map(veileder => (
-        <tr key={veileder.ident}>
-            <td>
-                <Link
-                    to={`/portefolje/${veileder.ident}`}
-                    className="lenke lenke--frittstaende"
-                    data-testid="veilederoversikt_navn_lenke"
-                >
-                    <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
-                </Link>
-            </td>
-            <td>
-                <BodyShort size="small">{`${veileder.ident}`}</BodyShort>
-            </td>
-            <td className="tabell-element-center">
-                <BodyShort size="small">{veileder.portefoljestorrelse}</BodyShort>
-            </td>
-            <td />
-        </tr>
-    ));
 
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
@@ -68,7 +47,7 @@ export function VeilederTabell({
     return (
         <div className="veilederoversikt__toolbar-container">
             <span className="veilederoversikt__sticky-skygge">
-                <table className="tabell veileder-tabell portefolje-tabell ">
+                <table className="veileder-tabell">
                     <thead>
                         <tr>
                             <th scope="col" className="tabellheader">
@@ -123,7 +102,11 @@ export function VeilederTabell({
                             <th />
                         </tr>
                     </thead>
-                    <tbody data-testid="veilederoversikt_veilederliste_tbody">{veilederElementer}</tbody>
+                    <tbody data-testid="veilederoversikt_veilederliste_tbody">
+                        {veiledere.map((veileder: any) => (
+                            <VeilederoversiktTabellrad veileder={veileder} key={veileder.ident} />
+                        ))}
+                    </tbody>
                 </table>
             </span>
         </div>

@@ -1,6 +1,5 @@
 import {BodyShort, CopyButton, Tooltip} from '@navikt/ds-react';
 import {BrukerModell} from '../../model-interfaces';
-import '../../enhetsportefolje/brukerliste.css';
 
 interface BrukerFnrProps {
     className?: string;

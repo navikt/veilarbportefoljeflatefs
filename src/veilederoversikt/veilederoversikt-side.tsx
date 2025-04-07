@@ -1,7 +1,7 @@
 import {ReactNode, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Panel} from '@navikt/ds-react';
-import {VeilederesideVisning} from './veilederside-visning';
+import {VeilederoversiktSidevisning} from './veilederoversikt-sidevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
@@ -22,9 +22,9 @@ import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisnin
 import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
-import './veiledere.css';
+import './veilederoversikt.css';
 
-export function VeiledereSide() {
+export function VeilederoversiktSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
@@ -92,7 +92,7 @@ export function VeiledereSide() {
                             className="filtrering-label-container"
                             role="listitem"
                         />
-                        <VeilederesideVisning
+                        <VeilederoversiktSidevisning
                             veiledere={veiledere.data.veilederListe}
                             portefoljestorrelser={portefoljestorrelser}
                             veilederFilter={filtervalg.veiledere}

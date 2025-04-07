@@ -12,7 +12,7 @@ import {Moteplan} from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {Endringslogg} from '../components/endringslogg';
+import {Endringslogg} from '../components/endringslogg/endringslogg';
 import './topp-meny.css';
 
 interface Props {
