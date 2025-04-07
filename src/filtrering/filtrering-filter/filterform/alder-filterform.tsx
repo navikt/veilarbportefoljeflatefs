@@ -33,7 +33,13 @@ export function AlderFilterform({
     const [feilTekst, setFeilTekst] = useState<string>('');
     const harValg = Object.keys(valg).length > 0;
     const kanVelgeFilter = checkBoxValg.length > 0 || inputAlderFra.length > 0 || inputAlderTil.length > 0;
+
     useEffect(() => {
+        /* Sikrar at vi nullar checkbox-valg når ein har kryssa ut siste checkbox-valg, sjølv når sidemenyen/filterdropdown forblir open. */
+        if (filtervalg[form].length === 0) {
+            setCheckBoxValg([]);
+        }
+
         filtervalg[form].forEach(alder => {
             if (
                 Object.entries(valg)

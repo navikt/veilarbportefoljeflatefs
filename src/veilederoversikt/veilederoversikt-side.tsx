@@ -1,6 +1,6 @@
 import {ReactNode, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Panel} from '@navikt/ds-react';
+import {Box} from '@navikt/ds-react';
 import {VeilederoversiktSidevisning} from './veilederoversikt-sidevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
@@ -72,9 +72,9 @@ export function VeilederoversiktSide() {
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">
-                        <Panel className="sok-veileder" role="search">
+                        <Box className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
-                        </Panel>
+                        </Box>
                         <MetrikkEkspanderbartpanel tittel="Veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
                         </MetrikkEkspanderbartpanel>
