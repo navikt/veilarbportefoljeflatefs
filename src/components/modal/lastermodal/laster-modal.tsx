@@ -14,6 +14,7 @@ export const LasterModal = ({isOpen}: LasterModalProps) => {
             onClose={() => setIsOpenLoaderModal(false)}
             className="veilarbportefoljeflatefs-laster-modal"
             data-testid="veilarbportefoljeflatefs-laster-modal"
+            aria-label="Laster..."
         >
             <Loader size="2xlarge" />
         </Modal>

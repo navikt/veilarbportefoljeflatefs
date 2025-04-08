@@ -29,9 +29,10 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
             className="bekreft-fargekategori-pa-mange-modal"
             onClose={onAvbryt}
             closeOnBackdropClick={true}
+            aria-labelledby="bekreft-fargekategori-pa-mange-modal-overskrift"
         >
             <Modal.Header>
-                <Heading size="small" level="1">
+                <Heading id="bekreft-fargekategori-pa-mange-modal-overskrift" size="small" level="1">
                     Er du sikker på at du vil endre kategori?
                 </Heading>
             </Modal.Header>

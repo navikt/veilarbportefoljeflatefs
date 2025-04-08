@@ -41,9 +41,15 @@ export const TourModal = ({modal, open, onClose}: TourModalProps) => {
     const modalTittel = modal?.header ? modal.header : 'Ny oppdatering';
 
     return (
-        <Modal className={'tour-modal'} open={open} onClose={lukkModal} closeOnBackdropClick={true}>
+        <Modal
+            className="tour-modal"
+            open={open}
+            onClose={lukkModal}
+            closeOnBackdropClick={true}
+            aria-labelledby="tour-modal-overskrift"
+        >
             <Modal.Header data-testid="endringslogg_tour-modal">
-                <Heading size="medium" level="1">
+                <Heading id="tour-modal-overskrift" size="medium" level="1">
                     {modalTittel}
                 </Heading>
             </Modal.Header>

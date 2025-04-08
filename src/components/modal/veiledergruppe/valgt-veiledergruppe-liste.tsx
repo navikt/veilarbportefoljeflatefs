@@ -55,7 +55,7 @@ export function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, fe
                     ))
                 )}
             </div>
-            {feil && <ErrorMessage showIcon>{feil}</ErrorMessage>}
+            {feil && <ErrorMessage>{feil}</ErrorMessage>}
         </>
     );
 }

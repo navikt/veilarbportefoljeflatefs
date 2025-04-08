@@ -29,12 +29,14 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
 
     const harHuskelapp = !!huskelapp?.huskelappId;
 
-    const handleHuskelappEndret = () => {
+    // Returnerer true dersom modalen skal lukkast, false om den skal fortsette å vere open.
+    const handleHuskelappEndret = (): boolean => {
         if (huskelappEndret) {
             return window.confirm(
                 'Alle endringer blir borte hvis du ikke lagrer. Trykk avbryt for å fortsette redigering eller OK for å lukke huskelappen.'
             );
         }
+        return true;
     };
 
     const handleOnAvbryt = () => {
@@ -68,13 +70,18 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
             onClose={onModalClose}
             onBeforeClose={handleHuskelappEndret}
             closeOnBackdropClick={false} // TODO sett til true når arbeidslistene er migrert, antar det er mindre sjanse for å kopiere (uten å ha endret innholdet, som vil trigge bekreftelsesmelding)
+            aria-labelledby="huskelappmodal-overskrift"
         >
             <Modal.Header>
                 <div className="rediger-huskelapp-modal-header">
                     <span className="rediger-huskelapp-modal-header-ikon">
                         <HuskelappIkon aria-hidden />
                     </span>
-                    <Heading size="small" className="rediger-huskelapp-modal-header-tekst">
+                    <Heading
+                        id="huskelappmodal-overskrift"
+                        size="small"
+                        className="rediger-huskelapp-modal-header-tekst"
+                    >
                         Huskelapp
                     </Heading>
                 </div>

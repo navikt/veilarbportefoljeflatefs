@@ -20,9 +20,10 @@ export function EgenModal({children, className, open = true, onClose, tittel, mo
             closeOnBackdropClick={true}
             width={modalWidth}
             data-testid={testid}
+            aria-labelledby="egenmodal-overskrift"
         >
             <Modal.Header data-testid="egenmodal_header">
-                <Heading size="medium" level="1" className={className}>
+                <Heading id="egenmodal-overskrift" size="medium" level="1" className={className}>
                     {tittel}
                 </Heading>
             </Modal.Header>
