@@ -25,11 +25,15 @@
 .veileder__hide {
     display: none;
 }
-.sok-veileder {
-    border: 1px solid #6a6a6a;
-    border-radius: 4px;
+
+.status-filter-kolonne .sok-veileder {
     margin: 0.5rem 0 1rem;
+    border: 1px solid var(--a-border-default);
+    border-radius: var(--a-border-radius-small);
+    background: var(--a-surface-default);
+    padding: var(--a-spacing-4);
 }
+
 .veilederoversikt__toolbar-container {
     --hoyde-sticky-skygge: 16px;
     --hoyde-toolbar-og-tabelloverskrift: 77px; /* Hardkoda verdi, uvisst opphav. -Ingrid, 2024-08-30 */
