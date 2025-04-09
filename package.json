@@ -79,10 +79,6 @@
         "react-device-detect": "2.2.3",
         "@grafana/faro-web-sdk": "1.14.1",
 
-        "nav-frontend-grid-style": "1.0.3",
-        "nav-frontend-ikoner-assets": "^3.0.1",
-        "nav-frontend-knapper-style": "2.1.2",
-
         "nav-frontend-paneler": "3.0.2",
         "nav-frontend-paneler-style": "2.0.2",
 
