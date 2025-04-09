@@ -196,9 +196,6 @@
     height: 0.668rem;
     margin-left: 0.3em;
 }
-.hyperlink-ikon {
-    stroke: var(--a-text-action);
-}
 .veiledergrupper-navet-tekst,
 .endringslogg_mine-filter {
     margin-top: 0.5rem;

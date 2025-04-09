@@ -36,10 +36,13 @@ export function VarselModal({
             onClose={onClose}
             className={classNames('varsel-modal', portalClassName, dataTestClass)}
             closeOnBackdropClick={true}
+            aria-labelledby="varselmodal-overskrift"
         >
             <Modal.Header className="varsel-modal__header">
                 <div className="varsel-modal__ikon">{getIkon(type)}</div>
-                <Heading size="medium">{overskrift}</Heading>
+                <Heading id="varselmodal-overskrift" size="medium">
+                    {overskrift}
+                </Heading>
             </Modal.Header>
             <Modal.Body className={classNames('varsel-modal__innhold', className)}>{children}</Modal.Body>
         </Modal>
