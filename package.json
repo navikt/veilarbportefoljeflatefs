@@ -39,8 +39,7 @@
         "prettier": "3.3.2",
 
         "@types/react-collapse": "5.0.4",
-        "@types/react-transition-group": "4.4.10",
-        "@types/prop-types": "15.7.12"
+        "@types/react-transition-group": "4.4.10"
     },
     "dependencies": {
         "@amplitude/analytics-browser": "2.9.3",
@@ -77,9 +76,7 @@
         "react-collapse": "5.1.1",
         "react-multi-select-component": "4.3.4",
         "react-device-detect": "2.2.3",
-        "@grafana/faro-web-sdk": "1.14.1",
-
-        "prop-types": "^15.8.1"
+        "@grafana/faro-web-sdk": "1.14.1"
     },
     "lint-staged": {
         "src/**/*.{json,less,css,md}": [
