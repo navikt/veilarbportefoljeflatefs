@@ -22,6 +22,7 @@ export const NyHuskelapp = ({huskelapp, onSubmit, setHuskelappEndret}: Props) =>
                     kommentar: huskelapp?.kommentar ?? ''
                 }}
                 validateOnBlur={false}
+                validateOnChange={false}
                 onSubmit={onSubmit}
             >
                 {({dirty}) => {
