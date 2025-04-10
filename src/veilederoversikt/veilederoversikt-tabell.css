@@ -1,0 +1,15 @@
+.veileder-tabell {
+    table-layout: fixed;
+    background: var(--a-bg-default);
+}
+
+.veileder-tabell .veiledertabell__sorteringskolonne {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.veileder-tabell .veiledertabell__sorteringskolonne button {
+    padding-left: 0;
+    padding-right: 0;
+}
