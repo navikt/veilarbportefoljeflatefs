@@ -430,6 +430,95 @@ export const endringsloggListe = [
         apiHost: 'https://cdn.sanity.io'
     },
     {
+        title: 'Test av melding med både liste og tekst',
+        description: [
+            {
+                _key: '982adb1b7735',
+                _type: 'block',
+                children: [
+                    {
+                        _key: '049d66f716bf',
+                        _type: 'span',
+                        marks: [],
+                        text: 'Her er et listepunkt med tekst, '
+                    },
+                    {
+                        _key: 'a9358b76cc0d',
+                        _type: 'span',
+                        marks: ['strong'],
+                        text: 'der dette er uthevet'
+                    },
+                    {
+                        _key: 'd52ddf32708f',
+                        _type: 'span',
+                        marks: [],
+                        text: ', og dette er vanlig tekst igjen. '
+                    }
+                ],
+                level: 1,
+                listItem: 'bullet',
+                markDefs: [],
+                style: 'normal'
+            },
+            {
+                _key: '018e7d8c404f',
+                _type: 'block',
+                children: [
+                    {
+                        _key: '7f36a989f5c2',
+                        _type: 'span',
+                        marks: [],
+                        text: 'Ennå et listepunkt. Her står det flere linjer med tekst. Tekst tekst teksttekst tekstteksttekst te kst teksttekst tekstteksttekstteksttekst.'
+                    }
+                ],
+                level: 1,
+                listItem: 'bullet',
+                markDefs: [],
+                style: 'normal'
+            },
+            {
+                _key: '7a2d0298e8ec',
+                _type: 'block',
+                children: [
+                    {
+                        _key: '02fb2e97a74a',
+                        _type: 'span',
+                        marks: [],
+                        text: 'Dette er et nytt avsnitt etter listepunktene. Her er det bare vanlig tekst.'
+                    }
+                ],
+                markDefs: [],
+                style: 'normal'
+            },
+            {
+                _key: 'd005c3a2f3c6',
+                _type: 'block',
+                children: [
+                    {
+                        _key: '4bcbe7cb0a61',
+                        _type: 'span',
+                        marks: [],
+                        text: 'Dette er ennå et nytt avsnitt. Her er det mer informasjon spredt ut over flere linjer, sannsynligvis. Det er fint med mye tekst. Det er fint med lite tekst også.'
+                    }
+                ],
+                markDefs: [],
+                style: 'normal'
+            }
+        ],
+        date: '2022-04-28',
+        linkAttributes: {
+            link: 'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Viktige-endring-i-Modia-arbeidsrettet-oppf%C3%B8lging.aspx',
+            linkText: 'Se mer informasjon på Navet'
+        },
+        _id: '50ff8c23-d3d6-42a9-92e2-338ea1ac8c22',
+        seen: true,
+        seenForced: false,
+        forcedModal: false,
+        modal: null,
+        projectId: 'li581mqu',
+        apiHost: 'https://cdn.sanity.io'
+    },
+    {
         title: ' Ny aktivitet for brukere og nye filter i oversikten',
         description: [
             {
