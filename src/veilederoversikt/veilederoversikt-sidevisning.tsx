@@ -1,8 +1,7 @@
 import {useMemo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {VeilederoversiktTabell} from './veilederoversikt-tabell';
-import {sortBy} from '../ducks/sortering';
 import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
@@ -49,7 +48,6 @@ export function VeilederoversiktSidevisning({
     veiledere,
     portefoljestorrelser
 }: VeilederoversiktSidevisningProps) {
-    const dispatch = useDispatch();
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
     const seAlle = useSelector(selectSeFlere);
@@ -78,12 +76,7 @@ export function VeilederoversiktSidevisning({
                 id="veilederside-toolbar"
                 antallValgteVeiledere={getValgteVeiledere().length}
             />
-            <VeilederoversiktTabell
-                veiledere={getValgteVeiledere()}
-                currentSortering={sortering}
-                sorterPaaEtternavn={() => dispatch(sortBy('etternavn'))}
-                sorterPaaPortefoljestorrelse={() => dispatch(sortBy('portefoljestorrelse'))}
-            />
+            <VeilederoversiktTabell veiledere={getValgteVeiledere()} currentSortering={sortering} />
         </>
     );
 }

@@ -1,7 +1,9 @@
 import classNames from 'classnames';
+import {useDispatch} from 'react-redux';
 import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
+import {sortBy} from '../ducks/sortering';
 import './veilederoversikt-tabell.css';
 
 interface VeiledereTabellProps {
@@ -10,19 +12,15 @@ interface VeiledereTabellProps {
         property: string;
         direction: string;
     };
-
-    sorterPaaEtternavn: () => void;
-    sorterPaaPortefoljestorrelse: () => void;
 }
 
-export function VeilederoversiktTabell({
-    veiledere,
-    currentSortering,
-    sorterPaaEtternavn,
-    sorterPaaPortefoljestorrelse
-}: VeiledereTabellProps) {
-    const sorterEtternavn = currentSortering.property === 'etternavn';
-    const sorterPaaPortefoljeStr = currentSortering.property === 'portefoljestorrelse';
+export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
+    const dispatch = useDispatch();
+    const sorterPaaEtternavn = () => dispatch(sortBy('etternavn'));
+    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy('portefoljestorrelse'));
+
+    const gjeldendeSorteringErEtternavn = currentSortering.property === 'etternavn';
+    const gjeldendeSorteringErPortefoljestorrelse = currentSortering.property === 'portefoljestorrelse';
 
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
@@ -54,10 +52,10 @@ export function VeilederoversiktTabell({
                                 size="xsmall"
                                 variant="tertiary"
                                 onClick={sorterPaaEtternavn}
-                                className={classNames({'valgt-sortering': sorterEtternavn})}
-                                aria-pressed={sorterEtternavn}
+                                className={classNames({'valgt-sortering': gjeldendeSorteringErEtternavn})}
+                                aria-pressed={gjeldendeSorteringErEtternavn}
                                 aria-label={
-                                    sorterEtternavn
+                                    gjeldendeSorteringErEtternavn
                                         ? `Etternavn, ${currentSortering.direction} rekkefølge`
                                         : 'Etternavn, ingen sortering'
                                 }
@@ -65,7 +63,7 @@ export function VeilederoversiktTabell({
                                 Etternavn
                             </Button>
                             , Fornavn
-                            {sorteringspil(sorterEtternavn)}
+                            {sorteringspil(gjeldendeSorteringErEtternavn)}
                         </div>
                     </Table.HeaderCell>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
@@ -78,17 +76,17 @@ export function VeilederoversiktTabell({
                                 size="xsmall"
                                 variant="tertiary"
                                 onClick={sorterPaaPortefoljestorrelse}
-                                className={classNames({'valgt-sortering': sorterPaaPortefoljeStr})}
-                                aria-pressed={sorterPaaPortefoljeStr}
+                                className={classNames({'valgt-sortering': gjeldendeSorteringErPortefoljestorrelse})}
+                                aria-pressed={gjeldendeSorteringErPortefoljestorrelse}
                                 aria-label={
-                                    sorterPaaPortefoljeStr
+                                    gjeldendeSorteringErPortefoljestorrelse
                                         ? `Antall brukere, ${currentSortering.direction} rekkefølge`
                                         : 'Antall brukere, ingen sortering'
                                 }
                             >
                                 Antall brukere
                             </Button>
-                            {sorteringspil(sorterPaaPortefoljeStr)}
+                            {sorteringspil(gjeldendeSorteringErPortefoljestorrelse)}
                         </div>
                     </Table.HeaderCell>
                 </Table.Row>
