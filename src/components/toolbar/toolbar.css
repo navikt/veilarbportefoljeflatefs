@@ -127,6 +127,8 @@
     border: none;
     background-color: var(--a-bg-subtle);
     justify-content: space-between;
+    min-height: var(--veilederside-toolbar-height);
+    max-height: fit-content;
 }
 .veilarbportefoljeflatefs .toolbar {
     z-index: 1000;
