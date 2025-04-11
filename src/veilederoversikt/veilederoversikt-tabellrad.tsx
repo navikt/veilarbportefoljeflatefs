@@ -8,11 +8,11 @@ interface Props {
 export const VeilederoversiktTabellrad = ({veileder}: Props) => {
     return (
         <Table.Row key={veileder.ident}>
-            <Table.DataCell>
+            <Table.HeaderCell>
                 <Link to={`/portefolje/${veileder.ident}`} data-testid="veilederoversikt_navn_lenke">
                     <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
                 </Link>
-            </Table.DataCell>
+            </Table.HeaderCell>
             <Table.DataCell>
                 <BodyShort size="small">{`${veileder.ident}`}</BodyShort>
             </Table.DataCell>
