@@ -44,7 +44,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
 
     return (
         <Table className="veileder-tabell" zebraStripes={true}>
-            <Table.Header>
+            <Table.Header className="sticky-tabelloverskrift">
                 <Table.Row>
                     <Table.HeaderCell>
                         <div className="veiledertabell__sorteringskolonne">

@@ -39,6 +39,11 @@
     position: sticky;
     top: 0.5rem;
 }
+
+.oversikt-sideinnhold-veilederside {
+    --veilederside-toolbar-height: 3.5rem; /* Burde fiksast så den tek høgd for tekstbryting på små skjermar */
+}
+
 @media (max-width: 900px) {
     .oversikt-sideinnhold-veilederside {
         display: flex;
