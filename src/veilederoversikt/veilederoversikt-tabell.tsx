@@ -43,7 +43,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
     };
 
     return (
-        <Table className="veileder-tabell" zebraStripes={true}>
+        <Table className="veileder-tabell" zebraStripes={true} data-testid="veilederoversikt-tabell">
             <Table.Header className="sticky-tabelloverskrift">
                 <Table.Row>
                     <Table.HeaderCell>

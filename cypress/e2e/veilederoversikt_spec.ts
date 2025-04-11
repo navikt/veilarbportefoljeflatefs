@@ -4,15 +4,24 @@ before('Start server', () => {
     cy.configure();
 });
 
+beforeEach('Gå til veilederoversikten', () => {
+    cy.gaTilOversikt('veileder-oversikt');
+});
+
 describe('Annen veileder', () => {
     it('Gå inn til annen veileders oversikt via tabellen', () => {
-        cy.gaTilOversikt('veileder-oversikt');
+        cy.getByTestId('veilederoversikt-tabell').should('be.visible');
         cy.getByTestId('sorteringspil_synkende').should('not.exist');
+
+        // Sjekk at sorteringspilene er born av rette celler, den pila ein finn under her er på Etternamn.
+        // Testen feilar fordi sorteringsknappen ikkje vert klikka på av cypress (??)
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_stigende').should('be.visible');
+
         cy.getByTestId('veilederoversikt_sortering_antall-brukere').click();
         cy.getByTestId('sorteringspil_stigende').should('not.exist');
         cy.getByTestId('sorteringspil_synkende').should('be.visible');
+
         cy.getByTestId('vis-200-per-side_knapp').should('be.disabled');
 
         cy.getByTestId('veilederoversikt_navn_lenke')
@@ -22,14 +31,14 @@ describe('Annen veileder', () => {
             .should('be.visible')
             .should('contain', 'Du er inne på Testias Testesen sin oversikt');
     });
+
     it('Søk veileder i veilederoversikt', () => {
         const veilederSomfinnes = 'Olstad';
         const veilederSomIkkeFinnes = 'Olstadzzz';
 
-        cy.gaTilOversikt('veileder-oversikt');
         cy.getByTestId('veilederoversikt_sok-veileder-input').click();
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
-            .get(".navds-checkboxes")
+            .get('.navds-checkboxes')
             .children()
             .should('have.length', 41);
         cy.getByTestId('veilederoversikt_sok-veileder-input').type(veilederSomIkkeFinnes);
@@ -41,7 +50,7 @@ describe('Annen veileder', () => {
             .clear()
             .type(veilederSomfinnes);
         cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
-            .get(".navds-checkboxes")
+            .get('.navds-checkboxes')
             .children()
             .should('have.length', 1);
         cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');
