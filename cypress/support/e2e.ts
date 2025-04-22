@@ -35,6 +35,15 @@ declare global {
             getByTestId(testid: string): Chainable<JQuery<HTMLElement>>;
 
             /**
+             * Henter DOM-elementet som har ein bestemt test-id
+             * og er inni det førre DOM-elementet i "kjeda".
+             * Kan brukast til å finne element inni andre element, sjølv når dei ikkje er direkte etterkommarar
+             * av det ytste elementet.
+             * @example cy.get('selector-for-forelder').findByTestId('testid-for-eit-element')
+             */
+            findByTestId(testid: string): Chainable<JQuery<HTMLElement>>;
+
+            /**
              * Navigerer til ei av oversiktssidene ved å trykke på "fana". Sjekker at den kom fram.
              * (Denne har per 2025-02-05 mykje spanande logikk eg trur ikkje er strengt naudsynt,
              * sjå kommentarar i "Cypress.Commands.add"-funksjonen for detaljer. - Ingrid)

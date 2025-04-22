@@ -12,10 +12,10 @@ describe('Annen veileder', () => {
     it('Gå inn til annen veileders oversikt via tabellen', () => {
         cy.getByTestId('veilederoversikt-tabell').should('be.visible');
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .find('[data-testid=sorteringspil_synkende]')
+            .findByTestId('sorteringspil_synkende')
             .should('not.exist');
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .find('[data-testid=sorteringspil_stigende]')
+            .findByTestId('sorteringspil_stigende')
             .should('not.exist');
 
         // Sjekk at sorteringspilene er born av rette celler, den pila ein finn under her er på Etternamn.
@@ -24,17 +24,17 @@ describe('Annen veileder', () => {
             .find('button')
             .click();
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .find('[data-testid=sorteringspil_stigende]')
+            .findByTestId('sorteringspil_stigende')
             .should('be.visible');
 
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
             .find('button')
             .click();
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .find('[data-testid=sorteringspil_stigende]')
+            .findByTestId('sorteringspil_stigende')
             .should('not.exist');
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .find('[data-testid=sorteringspil_synkende]')
+            .findByTestId('sorteringspil_synkende')
             .should('be.visible');
 
         cy.getByTestId('vis-200-per-side_knapp').should('be.disabled');
