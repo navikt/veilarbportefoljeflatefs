@@ -1,4 +1,6 @@
 .oversikt-sideinnhold-veilederside {
+    --veilederside-toolbar-height: 3.5rem; /* Burde fiksast så den tek høgd for tekstbryting på små skjermar */
+
     display: grid;
     grid-template-columns: 21rem auto;
     column-gap: 1rem;
@@ -38,10 +40,6 @@
     height: fit-content;
     position: sticky;
     top: 0.5rem;
-}
-
-.oversikt-sideinnhold-veilederside {
-    --veilederside-toolbar-height: 3.5rem; /* Burde fiksast så den tek høgd for tekstbryting på små skjermar */
 }
 
 @media (max-width: 900px) {
