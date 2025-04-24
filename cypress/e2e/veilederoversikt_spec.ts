@@ -9,8 +9,11 @@ beforeEach('Gå til veilederoversikten', () => {
 });
 
 describe('Annen veileder', () => {
-    it('Gå inn til annen veileders oversikt via tabellen', () => {
+    it('Kan sortere tabellen på Antall brukere', () => {
+        // Sjekk at veilederoversikten er ferdig med å laste
         cy.getByTestId('veilederoversikt-tabell').should('be.visible');
+
+        // Sjekk at det ikkje er sortert på Antall brukere frå før
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
             .findByTestId('sorteringspil_synkende')
             .should('not.exist');
@@ -18,8 +21,7 @@ describe('Annen veileder', () => {
             .findByTestId('sorteringspil_stigende')
             .should('not.exist');
 
-        // Sjekk at sorteringspilene er born av rette celler, den pila ein finn under her er på Etternamn.
-        // Testen feilar fordi sorteringsknappen ikkje vert klikka på av cypress (??)
+        // Trykk på Antall brukere, sjekk at det er blitt sortert stigende
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
             .find('button')
             .click();
@@ -27,6 +29,7 @@ describe('Annen veileder', () => {
             .findByTestId('sorteringspil_stigende')
             .should('be.visible');
 
+        // Trykk på Antall brukere igjen, no skal det vere sortert synkande
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
             .find('button')
             .click();
@@ -36,9 +39,16 @@ describe('Annen veileder', () => {
         cy.getByTestId('veiledertabell__antall-brukere-overskrift')
             .findByTestId('sorteringspil_synkende')
             .should('be.visible');
+    });
 
+    it('Gå inn til annen veileders oversikt via tabellen', () => {
+        // Sjekk at veilederoversikten er ferdig med å laste
+        cy.getByTestId('veilederoversikt-tabell').should('be.visible');
+
+        // Det er for få brukarar til å vise 200 per side, så knappen er deaktivert
         cy.getByTestId('vis-200-per-side_knapp').should('be.disabled');
 
+        // Trykk på ein veileder, då skal ein sjå oversikten til den veiledaren
         cy.getByTestId('veilederoversikt_navn_lenke')
             .contains('Testesen, Testias')
             .click();
@@ -86,42 +96,5 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt_veilederliste_tbody')
             .children()
             .should('have.length', 41);
-
-        //TODO fjern denne når søk veileder er ferdig i pilotering
-        // cy.gaTilOversikt('veileder-oversikt');
-        // cy.getByTestId('veilederoversikt_sok-veileder-input').click();
-        // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
-        //     .children()
-        //     .should('have.length', 40);
-        // cy.getByTestId('veilederoversikt_sok-veileder-input').type(veilederSomIkkeFinnes);
-        // cy.getByTestId('veilederoversikt_alertstripe_info')
-        //     .should('contain', 'Ingen veiledere funnet')
-        //     .should('be.visible');
-        // cy.getByTestId('veilederoversikt_sok-veileder-input')
-        //     .click()
-        //     .clear()
-        //     .type(veilederSomfinnes);
-        // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste')
-        //     .children()
-        //     .should('have.length', 1);
-        // cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.disabled');
-        // cy.getByTestId('veilederoversikt_veilederliste_tbody')
-        //     .children()
-        //     .should('have.length', 20);
-        // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0')
-        //     .should('not.be.checked')
-        //     .check({force: true});
-        // cy.getByTestId('veilederoversikt_sok-veileder_veilederliste_element_0').should('be.checked');
-        // cy.getByTestId('veileder-checkbox-filterform_nullstill-knapp').should('be.enabled');
-        // cy.getByTestId('veilederoversikt_veilederliste_tbody')
-        //     .children()
-        //     .should('have.length', 1);
-        // cy.getByTestId('filtrering_label-container')
-        //     .children()
-        //     .contains(veilederSomFinnes)
-        //     .click();
-        // cy.getByTestId('veilederoversikt_sok-veileder-input')
-        //     .click()
-        //     .clear();
     });
 });
