@@ -41,6 +41,10 @@ Cypress.Commands.add('getByTestId', (selector) => {
     return cy.get(`[data-testid=${selector}]`);
 });
 
+Cypress.Commands.add('findByTestId', {prevSubject: true}, (subject, selector) => {
+    return subject.find(`[data-testid=${selector}]`);
+});
+
 /* Ting eg ikkje forstår med denne funksjonen (2025-02-05, Ingrid)
 * - Kvifor forventer vi loader når vi allereie er på ei side? Vi har ikkje trykka på noko her.
 * - Kvifor returnerer vi kalla, i staden for å berre kalle dei? Vi bruker ikkje funksjonen i nøsting uansett.

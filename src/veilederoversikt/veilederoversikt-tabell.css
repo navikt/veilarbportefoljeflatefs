@@ -1,0 +1,24 @@
+.oversikt-sideinnhold-veilederside .veileder-tabell {
+    table-layout: fixed;
+    background: var(--a-bg-default);
+    position: relative; /* Slik at sticky-tabelloverskrift har noko å klistre seg til */
+    border-collapse: separate; /* Slik at border-bottom i sticky-tabelloverskrift er synleg når ein scrollar */
+    border-spacing: 0; /* Slik at vi ikkje får kvite mellomrom mellom kolonner/rader når vi har border-collapse: separate */
+}
+
+.oversikt-sideinnhold-veilederside .veileder-tabell .veiledertabell__sorteringskolonne {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.oversikt-sideinnhold-veilederside .veileder-tabell .veiledertabell__sorteringskolonne button {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.oversikt-sideinnhold-veilederside .veileder-tabell thead.sticky-tabelloverskrift th {
+    position: sticky;
+    top: var(--veilederside-toolbar-height);
+    background: var(--a-bg-default); /* Gjer at rad-innhald ikkje er synleg bak teksten i tabelloverskrifta */
+}
