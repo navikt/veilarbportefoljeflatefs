@@ -3,7 +3,6 @@ import {Route, Switch} from 'react-router-dom';
 import {MinoversiktSide} from './minoversikt/minoversikt-side';
 import {EnhetSide} from './enhetsportefolje/enhet-side';
 import {VeilederoversiktSide} from './veilederoversikt/veilederoversikt-side';
-import TilbakemeldingFab from './components/tilbakemelding/tilbakemelding-fab';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import {Innholdslaster} from './innholdslaster/innholdslaster';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
@@ -22,7 +21,6 @@ export function Routes() {
                         <Route path="/portefolje/:ident" component={MinoversiktSide} />
                         <Route path="/portefolje" component={MinoversiktSide} />
                     </Switch>
-                    <TilbakemeldingFab />
                     <TilToppenKnapp />
                 </Innholdslaster>
             </div>
