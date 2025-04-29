@@ -138,7 +138,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0] ?? ''}
             >
                 <div className="forste-barlabel-i-gruppe">
-                    {useFeatureSelector()[BRUK_NY_KILDE_FOR_TRENGER_VURDERING] ? (
+                    {useFeatureSelector()(BRUK_NY_KILDE_FOR_TRENGER_VURDERING) ? (
                         <BarInputRadio
                             filterNavn="trengerOppfolgingsvedtak"
                             handleChange={handleRadioButtonChange}
