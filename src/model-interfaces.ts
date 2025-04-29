@@ -161,6 +161,14 @@ export enum VurderingsBehov {
     OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
+export enum Profileringsresultat {
+    UKJENT_VERDI = 'UKJENT_VERDI',
+    UDEFINERT = 'UDEFINERT',
+    ANTATT_GODE_MULIGHETER = 'ANTATT_GODE_MULIGHETER',
+    ANTATT_BEHOV_FOR_VEILEDNING = 'ANTATT_BEHOV_FOR_VEILEDNING',
+    OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
+}
+
 export enum Innsatsgruppe {
     IKVAL = 'IKVAL',
     BFORM = 'BFORM',
@@ -214,7 +222,9 @@ export interface BrukerModell {
     nyForVeileder: boolean;
     nyForEnhet: boolean;
     trengerVurdering: boolean;
+    trengerOppfolgingsvedtak: boolean;
     vurderingsBehov?: VurderingsBehov;
+    profileringResultat?: Profileringsresultat;
     innsatsgruppe: Innsatsgruppe;
     erDoed: boolean;
     fodselsdagIMnd: number;
