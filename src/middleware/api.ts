@@ -344,3 +344,21 @@ export const fjernBrukerIKontekst = async () => {
 
     return sjekkStatuskode(respons);
 };
+
+export const hentEnhetIKontekst = async () => {
+    try {
+        const data = await fetchToJson('/modiacontextholder/api/context/v2/aktivenhet');
+
+        if (data.aktivEnhet === null) {
+            return null;
+        }
+
+        if (typeof data.aktivEnhet !== 'string') {
+            return null;
+        }
+
+        return data.aktivEnhet as string;
+    } catch {
+        return null;
+    }
+};

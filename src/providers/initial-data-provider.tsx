@@ -6,10 +6,12 @@ import {AppState} from '../reducer';
 import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
 import {hentSystemmeldinger} from '../ducks/systemmeldinger';
 import {hentBrukerIKontekst} from '../ducks/bruker-i-kontekst';
+import {hentEnhetIKontekst} from '../ducks/valgt-enhet';
 
 export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);
     const brukerIKontekstState = useSelector((state: AppState) => state.brukerIKontekst);
+    const enhetIKontekstState = useSelector((state: AppState) => state.valgtEnhet);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,7 +19,12 @@ export function InitialDataProvider({children}: PropsWithChildren<{}>) {
         dispatch(hentInnloggetVeileder());
         dispatch(hentSystemmeldinger());
         dispatch(hentBrukerIKontekst());
+        dispatch(hentEnhetIKontekst());
     }, [dispatch]);
 
-    return <Innholdslaster avhengigheter={[innloggetVeilederState, brukerIKontekstState]}>{children}</Innholdslaster>;
+    return (
+        <Innholdslaster avhengigheter={[innloggetVeilederState, brukerIKontekstState, enhetIKontekstState]}>
+            {children}
+        </Innholdslaster>
+    );
 }
