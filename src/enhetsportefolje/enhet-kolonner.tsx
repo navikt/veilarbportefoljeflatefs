@@ -19,9 +19,7 @@ import {
     bostedBydelEllerUkjent,
     bostedKommuneUtlandEllerUkjent,
     capitalize,
-    mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
-    oppfolingsdatoEnsligeForsorgere,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
@@ -46,6 +44,7 @@ import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
+import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 

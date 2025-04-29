@@ -5,9 +5,7 @@ import {
     bostedBydelEllerUkjent,
     bostedKommuneUtlandEllerUkjent,
     capitalize,
-    mapOmAktivitetsPlikt,
     nesteUtlopsdatoEllerNull,
-    oppfolingsdatoEnsligeForsorgere,
     parseDatoString,
     tolkBehov,
     tolkBehovSpraak,
@@ -38,6 +36,7 @@ import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-s
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
+import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
