@@ -21,6 +21,7 @@ export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
 export const TRENGER_VURDERING = 'TRENGER_VURDERING';
+export const TRENGER_OPPFOLGINGSVEDTAK = 'TRENGER_OPPFOLGINGSVEDTAK';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
 export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
@@ -94,6 +95,7 @@ export const ferdigfilterListeLabelTekst = {
     [UFORDELTE_BRUKERE]: 'Ufordelte brukere',
     [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
     [TRENGER_VURDERING]: 'Trenger vurdering',
+    [TRENGER_OPPFOLGINGSVEDTAK]: 'Trenger oppfølgingsvedtak § 14a',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
     [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra Nav',
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
