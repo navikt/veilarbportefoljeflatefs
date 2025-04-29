@@ -1,8 +1,7 @@
 import {RefObject} from 'react';
-import moment from 'moment/moment';
 import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
 import {Maybe} from './types';
-import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
+import {dateGreater, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
@@ -269,29 +268,6 @@ export function bostedKommuneUtlandEllerUkjent(bruker: BrukerModell, geografiskb
 
 export const bostedBydelEllerUkjent = (bostedBydel: string, geografiskbostedData: Map<string, string>): string => {
     return geografiskbostedData.get(bostedBydel) ?? '–';
-};
-
-export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
-    if (aktivitetsplikt === undefined) {
-        return 'Ukjent';
-    }
-    return aktivitetsplikt ? 'Aktivitetsplikt' : 'Ikke aktivitetsplikt';
-};
-
-export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
-    if (!alderBarn) {
-        return '';
-    }
-    const alderBarnMoment = moment(alderBarn);
-
-    if (moment().diff(alderBarnMoment, 'months') < 6) {
-        const datoBarnSeksMnd = alderBarnMoment.add({months: 6}).toDate();
-        const formatertDato = toDatePrettyPrint(datoBarnSeksMnd);
-        return `${formatertDato} (Barn 6 mnd)`;
-    }
-    const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
-    const formatertDato = toDatePrettyPrint(datoBarnEttAar);
-    return `${formatertDato} (Barn 1 år)`;
 };
 
 export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) => {
