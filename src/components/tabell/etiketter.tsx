@@ -40,19 +40,19 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                             Trenger oppfølgingsvedtak § 14 a
                         </Tag>
                     )}
-                    {!bruker.trengerOppfolgingsvedtak &&
+                    {bruker.trengerOppfolgingsvedtak &&
                         bruker.profileringResultat === Profileringsresultat.OPPGITT_HINDRINGER && (
                             <Tag variant="info" size="small" className="tabell-etikett">
                                 Oppgitt hindringer
                             </Tag>
                         )}
-                    {!bruker.trengerOppfolgingsvedtak &&
+                    {bruker.trengerOppfolgingsvedtak &&
                         bruker.profileringResultat === Profileringsresultat.ANTATT_GODE_MULIGHETER && (
                             <Tag variant="info" size="small" className="tabell-etikett">
                                 Antatt gode muligheter
                             </Tag>
                         )}
-                    {!bruker.trengerOppfolgingsvedtak &&
+                    {bruker.trengerOppfolgingsvedtak &&
                         bruker.profileringResultat === Profileringsresultat.ANTATT_BEHOV_FOR_VEILEDNING && (
                             <Tag variant="info" size="small" className="tabell-etikett">
                                 Antatt behov for veiledning
