@@ -37,7 +37,7 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                 <>
                     {bruker.trengerOppfolgingsvedtak && (
                         <Tag variant="info" size="small" className="tabell-etikett">
-                            Trenger oppfølgingsvedtak
+                            Trenger oppfølgingsvedtak § 14 a
                         </Tag>
                     )}
                     {bruker.trengerOppfolgingsvedtak &&
