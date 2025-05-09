@@ -162,6 +162,10 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                                 handleChange={handleRadioButtonChange}
                                 antall={statustallMedBrukerinnsyn.underVurdering}
                                 filterVerdi={UNDER_VURDERING}
+                                /* TODO: Når vi fjernar BRUK_NY_KILDE_FOR_TRENGER_VURDERING-featuretogglen gjer følgande:
+                                 *   * endre teksten som høyrer til [UNDER_VURDERING] til "Utkast oppfølgingsvedtak § 14 a"
+                                 *   * referer til ferdigfilterListeLabelTekst[UNDER_VURDERING] i staden for ferdigfilterListeLabelTekst['UTKAST_OPPFOLGINGSVEDTAK']
+                                 */
                                 labelTekst={ferdigfilterListeLabelTekst['UTKAST_OPPFOLGINGSVEDTAK']}
                             />
                             <BarInputRadio

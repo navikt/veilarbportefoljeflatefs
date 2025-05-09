@@ -97,7 +97,7 @@ export const ferdigfilterListeLabelTekst = {
     [TRENGER_VURDERING]: 'Trenger vurdering',
     [TRENGER_OPPFOLGINGSVEDTAK]: 'Trenger oppfølgingsvedtak § 14 a',
     [UNDER_VURDERING]: 'Under vurdering',
-    ['UTKAST_OPPFOLGINGSVEDTAK']: 'Utkast oppfølgingsvedtak § 14 a',
+    UTKAST_OPPFOLGINGSVEDTAK: 'Utkast oppfølgingsvedtak § 14 a',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
     [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra Nav',
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
