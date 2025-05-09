@@ -155,20 +155,41 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                             labelTekst={ferdigfilterListeLabelTekst[TRENGER_VURDERING]}
                         />
                     )}
-                    <BarInputRadio
-                        filterNavn="erSykmeldtMedArbeidsgiver"
-                        handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
-                        filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
-                        labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
-                    />
-                    <BarInputRadio
-                        filterNavn="underVurdering"
-                        handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.underVurdering}
-                        filterVerdi={UNDER_VURDERING}
-                        labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
-                    />
+                    {useFeatureSelector()(BRUK_NY_KILDE_FOR_TRENGER_VURDERING) ? (
+                        <>
+                            <BarInputRadio
+                                filterNavn="underVurdering"
+                                handleChange={handleRadioButtonChange}
+                                antall={statustallMedBrukerinnsyn.underVurdering}
+                                filterVerdi={UNDER_VURDERING}
+                                labelTekst={ferdigfilterListeLabelTekst['UTKAST_OPPFOLGINGSVEDTAK']}
+                            />
+                            <BarInputRadio
+                                filterNavn="erSykmeldtMedArbeidsgiver"
+                                handleChange={handleRadioButtonChange}
+                                antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                                filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                                labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <BarInputRadio
+                                filterNavn="erSykmeldtMedArbeidsgiver"
+                                handleChange={handleRadioButtonChange}
+                                antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                                filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                                labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
+                            />
+                            <BarInputRadio
+                                filterNavn="underVurdering"
+                                handleChange={handleRadioButtonChange}
+                                antall={statustallMedBrukerinnsyn.underVurdering}
+                                filterVerdi={UNDER_VURDERING}
+                                labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
+                            />
+                        </>
+                    )}
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio

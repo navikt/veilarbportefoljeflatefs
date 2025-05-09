@@ -96,6 +96,8 @@ export const ferdigfilterListeLabelTekst = {
     [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
     [TRENGER_VURDERING]: 'Trenger vurdering',
     [TRENGER_OPPFOLGINGSVEDTAK]: 'Trenger oppfølgingsvedtak § 14 a',
+    [UNDER_VURDERING]: 'Under vurdering',
+    ['UTKAST_OPPFOLGINGSVEDTAK']: 'Utkast oppfølgingsvedtak § 14 a',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
     [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra Nav',
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
@@ -107,7 +109,6 @@ export const ferdigfilterListeLabelTekst = {
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
     [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
     [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
-    [UNDER_VURDERING]: 'Under vurdering',
     [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };

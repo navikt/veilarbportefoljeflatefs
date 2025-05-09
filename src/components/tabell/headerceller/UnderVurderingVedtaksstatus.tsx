@@ -15,8 +15,8 @@ export const UnderVurderingVedtaksstatus = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Status § 14 a-vedtak"
-        title="Status oppfølgingvedtak"
+        tekst="Status oppfølgingsvedtak"
+        title="Status oppfølgingsvedtak § 14 a"
         className="col col-xs-2"
     />
 );

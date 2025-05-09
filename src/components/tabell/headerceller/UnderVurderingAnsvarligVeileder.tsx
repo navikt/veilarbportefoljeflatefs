@@ -15,8 +15,8 @@ export const UnderVurderingAnsvarligVeileder = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Ansvarlig for vedtak"
-        title="Ansvarlig veileder for utkast til § 14 a-vedtak"
+        tekst="Ansvarlig for oppfølgingsvedtak"
+        title="Ansvarlig veileder for utkast til oppfølgingsvedtak § 14 a"
         className="col col-xs-2"
     />
 );
