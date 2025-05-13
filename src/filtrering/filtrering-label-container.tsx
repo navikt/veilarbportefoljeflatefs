@@ -64,7 +64,7 @@ function FiltreringLabelContainer({
                     <FiltreringLabel
                         key={`${key}--${value}`}
                         label={filterKonstanter[key]['UTKAST_OPPFOLGINGSVEDTAK']}
-                        slettFilter={() => slettEnkelt(key, null)}
+                        slettFilter={() => slettEnkelt(key, 'UNDER_VURDERING')}
                     />
                 ];
             } else if (key === 'utdanningBestatt') {
