@@ -9,6 +9,7 @@ export const filtermalinger = (fields: FilterFields) => {
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
+                    sidenavn: fields.sideNavn,
                     filternavn: fields.filter,
                     kategori: hovedmal[fields.verdi]?.label
                 }
@@ -18,6 +19,7 @@ export const filtermalinger = (fields: FilterFields) => {
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
+                    sidenavn: fields.sideNavn,
                     filternavn: fields.filter,
                     kategori: servicegruppe[fields.verdi]?.label
                 }
@@ -27,6 +29,7 @@ export const filtermalinger = (fields: FilterFields) => {
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
+                    sidenavn: fields.sideNavn,
                     filternavn: fields.filter,
                     kategori: formidlingsgruppe[fields.verdi]?.label
                 }
@@ -36,6 +39,7 @@ export const filtermalinger = (fields: FilterFields) => {
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
+                    sidenavn: fields.sideNavn,
                     filternavn: fields.filter,
                     kategori: innsatsgruppe[fields.verdi]?.label
                 }
@@ -48,6 +52,7 @@ export const filtermalinger = (fields: FilterFields) => {
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
+                    sidenavn: fields.sideNavn,
                     filternavn: fields.filter,
                     kategori: fields.verdi
                 }
