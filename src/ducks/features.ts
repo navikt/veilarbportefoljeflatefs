@@ -1,11 +1,6 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
-import {
-    ALERTSTRIPE_FEILMELDING,
-    BRUK_NY_KILDE_FOR_TRENGER_VURDERING,
-    DARKMODE,
-    PORTEFOLJE_FEATURES
-} from '../konstanter';
+import {ALERTSTRIPE_FEILMELDING, DARKMODE, PORTEFOLJE_FEATURES} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -15,8 +10,7 @@ export interface FeaturesState {
 
 const initalState: FeaturesState = {
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false,
-    [BRUK_NY_KILDE_FOR_TRENGER_VURDERING]: false
+    [ALERTSTRIPE_FEILMELDING]: false
 };
 
 // Reducer
