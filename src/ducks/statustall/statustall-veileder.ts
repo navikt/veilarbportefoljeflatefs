@@ -31,6 +31,7 @@ export const initalStatusState: StatustallVeilederState = {
         erSykmeldtMedArbeidsgiver: 0,
         nyeBrukereForVeileder: 0,
         trengerVurdering: 0,
+        trengerOppfolgingsvedtak: 0,
         underVurdering: 0,
         mineHuskelapper: 0,
         fargekategoriA: 0,

@@ -22,6 +22,8 @@ import {pagineringSetup} from '../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
 import {ArbeidslistekategoriVisning} from '../components/tabell/arbeidslisteikon';
 import {fargekategoriIkonMapper} from '../components/fargekategori/fargekategori-ikon-mapper';
+import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
+import {BRUK_NY_KILDE_FOR_TRENGER_VURDERING} from '../konstanter';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -40,6 +42,7 @@ function FiltreringLabelContainer({
     className
 }: FiltreringLabelContainerProps) {
     const dispatch = useDispatch();
+    const erBrukNyKildeForTrengerVurderingTogglePaa = useFeatureSelector()(BRUK_NY_KILDE_FOR_TRENGER_VURDERING);
 
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
@@ -51,7 +54,20 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'utdanningBestatt') {
+            if (
+                erBrukNyKildeForTrengerVurderingTogglePaa &&
+                key === 'ferdigfilterListe' &&
+                value[0] === 'UNDER_VURDERING'
+            ) {
+                // TODO fjern heile denne blokka når vi rydder bort featuretoggle for Under vurdering
+                return [
+                    <FiltreringLabel
+                        key={`${key}--${value}`}
+                        label={filterKonstanter[key]['UTKAST_OPPFOLGINGSVEDTAK']}
+                        slettFilter={() => slettEnkelt(key, 'UNDER_VURDERING')}
+                    />
+                ];
+            } else if (key === 'utdanningBestatt') {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel

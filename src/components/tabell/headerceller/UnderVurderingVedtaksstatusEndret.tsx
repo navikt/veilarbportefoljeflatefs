@@ -15,8 +15,8 @@ export const UnderVurderingVedtaksstatusEndret = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Statusendring"
-        title="Dager siden statusendring på utkast for § 14 a-vedtak"
+        tekst="Dager siden statusendring"
+        title="Dager siden statusendring på utkast for oppfølgingsvedtak § 14 a"
         className="col col-xs-2"
     />
 );

@@ -30,12 +30,12 @@ alternativerConfig.set(Kolonne.FORRIGE_START_DATO_AKTIVITET, {tekstlabel: 'Passe
 alternativerConfig.set(Kolonne.MOTER_IDAG, {tekstlabel: 'Klokkeslett møte'});
 alternativerConfig.set(Kolonne.MOTER_VARIGHET, {tekstlabel: 'Varighet møte'});
 alternativerConfig.set(Kolonne.MOTE_ER_AVTALT, {tekstlabel: 'Møte er avtalt med Nav'});
-alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status § 14 a-vedtak (ny løsning)'});
+alternativerConfig.set(Kolonne.VEDTAKSTATUS, {tekstlabel: 'Status oppfølgingsvedtak § 14 a'});
 alternativerConfig.set(Kolonne.VEDTAKSTATUS_ENDRET, {
-    tekstlabel: 'Dager siden statusendring på utkast for § 14 a-vedtak (ny løsning)'
+    tekstlabel: 'Dager siden statusendring på utkast for oppfølgingsvedtak § 14 a'
 });
 alternativerConfig.set(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, {
-    tekstlabel: 'Ansvarlig veileder på utkast for § 14 a-vedtak (ny løsning)'
+    tekstlabel: 'Ansvarlig veileder på utkast for oppfølgingsvedtak § 14 a'
 });
 alternativerConfig.set(Kolonne.SISTE_ENDRING, {tekstlabel: 'Siste endring personen har gjort på aktivitet/mål'});
 alternativerConfig.set(Kolonne.SISTE_ENDRING_DATO, {
