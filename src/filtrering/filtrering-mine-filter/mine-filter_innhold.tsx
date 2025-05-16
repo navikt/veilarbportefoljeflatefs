@@ -1,27 +1,26 @@
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {useDispatch} from 'react-redux';
-import {Alert, AlertProps, BodyShort} from '@navikt/ds-react';
+import {Alert, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {DragAndDrop} from './drag-and-drop/drag-and-drop';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
+import {AlertVistLoggdata, loggVisningAvAlert} from '../../amplitude/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
-import {loggVisningAvAlert} from '../../amplitude/logg-visning-av-alert';
 
-interface alertdetaljerTilLogging {
-    tekst: string;
-    variant: AlertProps['variant'];
-}
-
-const alerterMedLogging: {[key: string]: alertdetaljerTilLogging} = {
+const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
     filterMedArbeidsliste: {
         tekst: 'Du har filter med arbeidsliste',
         variant: 'info'
+    },
+    harInaktiveFilter: {
+        tekst: '[Navn på lagret filter] er slettet fordi filteret [filterverdi] er fjernet',
+        variant: 'info'
     }
-};
+} as const;
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -45,6 +44,7 @@ export function MineFilterInnhold({
     enhettiltak
 }: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     const filtrertListe = () => {
         return lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem));
@@ -57,20 +57,24 @@ export function MineFilterInnhold({
     const inaktiveFilter = () => {
         return filtrertListe().filter(elem => !elem.aktiv);
     };
-    const alertArbeidslisteEllerKategori = () => {
+
+    const visArbeidslisteEllerKategoriAlertOgLoggTilAmplitude = () => {
         const harArbeidslisteEllerKategori =
             filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0;
 
         if (harArbeidslisteEllerKategori) {
-            loggVisningAvAlert({
-                variant: alerterMedLogging.filterMedArbeidsliste.variant,
-                tekst: alerterMedLogging.filterMedArbeidsliste.tekst
-            });
+            loggVisningAvAlert(loggdataForAlerter.filterMedArbeidsliste);
         }
         return harArbeidslisteEllerKategori;
     };
 
-    const dispatch = useDispatch();
+    function visHarInaktiveFilterAlertOgLoggTilAmplitude() {
+        const harInaktiveFilter = inaktiveFilter().length !== 0;
+        if (harInaktiveFilter) {
+            loggVisningAvAlert(loggdataForAlerter.harInaktiveFilter);
+        }
+        return harInaktiveFilter;
+    }
 
     useEffect(() => {
         if (outerDivRef.current && isOverflown(outerDivRef.current)) {
@@ -82,22 +86,22 @@ export function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-                {alertArbeidslisteEllerKategori() && (
+                {visArbeidslisteEllerKategoriAlertOgLoggTilAmplitude() && (
                     <Alert
-                        variant={alerterMedLogging.filterMedArbeidsliste.variant}
+                        variant={loggdataForAlerter.filterMedArbeidsliste.variant}
                         className="mine-filter_alertstripe"
                         data-testid="mine-filter_alertstripe-arbeidsliste"
                         size="small"
                     >
-                        <b>{alerterMedLogging.filterMedArbeidsliste.tekst}</b>
+                        <b>{loggdataForAlerter.filterMedArbeidsliste.tekst}</b>
                         <br />
                         Disse kan vise færre brukere etter hvert som du bytter til ny huskelapp og nye kategorier. Det
                         kan være lurt å lage filtrene på nytt.
                     </Alert>
                 )}
-                {inaktiveFilter().length !== 0 && (
+                {visHarInaktiveFilterAlertOgLoggTilAmplitude() && (
                     <Alert
-                        variant="info"
+                        variant={loggdataForAlerter.harInaktiveFilter.variant}
                         className="mine-filter_alertstripe"
                         data-testid="mine-filter_alertstripe"
                         size="small"

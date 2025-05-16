@@ -1,12 +1,12 @@
 import {AlertProps} from '@navikt/ds-react';
 import {trackAmplitude} from './amplitude';
 
-interface alertVistData {
+export interface AlertVistLoggdata {
     variant: AlertProps['variant'];
     tekst: string;
 }
 
-export const loggVisningAvAlert = (data: alertVistData) => {
+export const loggVisningAvAlert = (data: AlertVistLoggdata) => {
     return trackAmplitude({
         name: 'alert vist',
         data: data
