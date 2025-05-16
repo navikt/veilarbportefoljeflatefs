@@ -2,7 +2,7 @@ import {ReactNode, useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 import {STATUS} from '../ducks/utils';
 import {getFeilmeldingForReducer} from './get-feilmelding-for-reducer';
-import {trackAmplitude} from '../amplitude/amplitude';
+import {loggVisningAvAlert} from '../amplitude/logg-visning-av-alert';
 
 interface InnholdslasterProps {
     avhengigheter: any;
@@ -62,7 +62,7 @@ export function Innholdslaster({avhengigheter, className, children}: Innholdslas
         const feilmelding =
             getFeilmeldingForReducer(feilendeReducer) ?? 'Det skjedde en feil ved innlastningen av data';
 
-        trackAmplitude({name: 'alert vist', data: {variant: 'error', tekst: feilmelding}});
+        loggVisningAvAlert({variant: 'error', tekst: feilmelding});
 
         return (
             <Alert variant="error" className={className} size="small">
