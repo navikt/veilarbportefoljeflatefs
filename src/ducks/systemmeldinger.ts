@@ -1,6 +1,11 @@
 import * as Api from '../middleware/api';
-import {Systemmelding} from '../model-interfaces';
 import {doThenDispatch, STATUS} from './utils';
+
+export interface Systemmelding {
+    tittel: string;
+    type: 'error' | 'warning' | 'info' | 'success';
+    beskrivelse: any;
+}
 
 export interface SystemmeldingState {
     status: string;
