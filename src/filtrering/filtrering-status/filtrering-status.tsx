@@ -16,10 +16,9 @@ import {
     NYE_BRUKERE_FOR_VEILEDER,
     TILTAKSHENDELSER,
     TRENGER_OPPFOLGINGSVEDTAK,
-    TRENGER_VURDERING,
     UFORDELTE_BRUKERE,
-    UNDER_VURDERING,
     UTGATTE_VARSEL,
+    UNDER_VURDERING,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
@@ -29,10 +28,7 @@ import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    BRUK_NY_KILDE_FOR_TRENGER_VURDERING,
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING
-} from '../../konstanter';
+import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -138,62 +134,27 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 value={ferdigfilterListe.filter(ferdigFilter => !CHECKBOX_FILTER.includes(ferdigFilter))[0] ?? ''}
             >
                 <div className="forste-barlabel-i-gruppe">
-                    {useFeatureSelector()(BRUK_NY_KILDE_FOR_TRENGER_VURDERING) ? (
-                        <BarInputRadio
-                            filterNavn="trengerOppfolgingsvedtak"
-                            handleChange={handleRadioButtonChange}
-                            antall={statustallMedBrukerinnsyn.trengerOppfolgingsvedtak}
-                            filterVerdi={TRENGER_OPPFOLGINGSVEDTAK}
-                            labelTekst={ferdigfilterListeLabelTekst[TRENGER_OPPFOLGINGSVEDTAK]}
-                        />
-                    ) : (
-                        <BarInputRadio
-                            filterNavn="trengerVurdering"
-                            handleChange={handleRadioButtonChange}
-                            antall={statustallMedBrukerinnsyn.trengerVurdering}
-                            filterVerdi={TRENGER_VURDERING}
-                            labelTekst={ferdigfilterListeLabelTekst[TRENGER_VURDERING]}
-                        />
-                    )}
-                    {useFeatureSelector()(BRUK_NY_KILDE_FOR_TRENGER_VURDERING) ? (
-                        <>
-                            <BarInputRadio
-                                filterNavn="underVurdering"
-                                handleChange={handleRadioButtonChange}
-                                antall={statustallMedBrukerinnsyn.underVurdering}
-                                filterVerdi={UNDER_VURDERING}
-                                /* TODO: Når vi fjernar BRUK_NY_KILDE_FOR_TRENGER_VURDERING-featuretogglen gjer følgande:
-                                 *   * endre teksten som høyrer til [UNDER_VURDERING] til "Utkast oppfølgingsvedtak § 14 a"
-                                 *   * referer til ferdigfilterListeLabelTekst[UNDER_VURDERING] i staden for ferdigfilterListeLabelTekst['UTKAST_OPPFOLGINGSVEDTAK']
-                                 */
-                                labelTekst={ferdigfilterListeLabelTekst['UTKAST_OPPFOLGINGSVEDTAK']}
-                            />
-                            <BarInputRadio
-                                filterNavn="erSykmeldtMedArbeidsgiver"
-                                handleChange={handleRadioButtonChange}
-                                antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
-                                filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
-                                labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <BarInputRadio
-                                filterNavn="erSykmeldtMedArbeidsgiver"
-                                handleChange={handleRadioButtonChange}
-                                antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
-                                filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
-                                labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
-                            />
-                            <BarInputRadio
-                                filterNavn="underVurdering"
-                                handleChange={handleRadioButtonChange}
-                                antall={statustallMedBrukerinnsyn.underVurdering}
-                                filterVerdi={UNDER_VURDERING}
-                                labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
-                            />
-                        </>
-                    )}
+                    <BarInputRadio
+                        filterNavn="trengerOppfolgingsvedtak"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.trengerOppfolgingsvedtak}
+                        filterVerdi={TRENGER_OPPFOLGINGSVEDTAK}
+                        labelTekst={ferdigfilterListeLabelTekst[TRENGER_OPPFOLGINGSVEDTAK]}
+                    />
+                    <BarInputRadio
+                        filterNavn="underVurdering"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.underVurdering}
+                        filterVerdi={UNDER_VURDERING}
+                        labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
+                    />
+                    <BarInputRadio
+                        filterNavn="erSykmeldtMedArbeidsgiver"
+                        handleChange={handleRadioButtonChange}
+                        antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                        filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
+                        labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
+                    />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
