@@ -412,15 +412,6 @@ export interface ArbeidslisteDataModell {
 
 /* Anna */
 
-/** Duplikat av enum STATUS som vert brukt andre stadan enn fargekategori*/
-export enum Status {
-    NOT_STARTED = 'NOT_STARTED',
-    PENDING = 'PENDING',
-    OK = 'OK',
-    RELOADING = 'RELOADING',
-    ERROR = 'ERROR'
-}
-
 export interface FargekategoriDataModell {
     fnr: string[];
     fargekategoriVerdi: FargekategoriModell;
