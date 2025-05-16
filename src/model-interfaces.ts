@@ -221,7 +221,6 @@ export interface BrukerModell {
     skjermetTil?: string;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
-    trengerVurdering: boolean;
     trengerOppfolgingsvedtak: boolean;
     vurderingsBehov?: VurderingsBehov;
     profileringResultat?: Profileringsresultat;
