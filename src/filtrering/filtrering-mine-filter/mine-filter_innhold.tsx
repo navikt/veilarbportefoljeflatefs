@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {useDispatch} from 'react-redux';
-import {Alert, BodyShort} from '@navikt/ds-react';
+import {Alert, AlertProps, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {DragAndDrop} from './drag-and-drop/drag-and-drop';
@@ -9,6 +9,19 @@ import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
+import {loggVisningAvAlert} from '../../amplitude/logg-visning-av-alert';
+
+interface alertdetaljerTilLogging {
+    tekst: string;
+    variant: AlertProps['variant'];
+}
+
+const alerterMedLogging: {[key: string]: alertdetaljerTilLogging} = {
+    filterMedArbeidsliste: {
+        tekst: 'Du har filter med arbeidsliste',
+        variant: 'info'
+    }
+};
 
 export interface LagredeFilterInnholdProps {
     lagretFilter: LagretFilter[];
@@ -45,9 +58,16 @@ export function MineFilterInnhold({
         return filtrertListe().filter(elem => !elem.aktiv);
     };
     const alertArbeidslisteEllerKategori = () => {
-        return (
-            filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0
-        );
+        const harArbeidslisteEllerKategori =
+            filtrertListe().filter(elem => elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE')).length > 0;
+
+        if (harArbeidslisteEllerKategori) {
+            loggVisningAvAlert({
+                variant: alerterMedLogging.filterMedArbeidsliste.variant,
+                tekst: alerterMedLogging.filterMedArbeidsliste.tekst
+            });
+        }
+        return harArbeidslisteEllerKategori;
     };
 
     const dispatch = useDispatch();
@@ -64,12 +84,12 @@ export function MineFilterInnhold({
             <>
                 {alertArbeidslisteEllerKategori() && (
                     <Alert
-                        variant="info"
+                        variant={alerterMedLogging.filterMedArbeidsliste.variant}
                         className="mine-filter_alertstripe"
                         data-testid="mine-filter_alertstripe-arbeidsliste"
                         size="small"
                     >
-                        <b>Du har filter med arbeidsliste</b>
+                        <b>{alerterMedLogging.filterMedArbeidsliste.tekst}</b>
                         <br />
                         Disse kan vise færre brukere etter hvert som du bytter til ny huskelapp og nye kategorier. Det
                         kan være lurt å lage filtrene på nytt.
