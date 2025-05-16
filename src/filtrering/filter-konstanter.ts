@@ -20,7 +20,6 @@ export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 /* Konstantar for filternamna brukt i OpenSearch */
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
-export const TRENGER_VURDERING = 'TRENGER_VURDERING';
 export const TRENGER_OPPFOLGINGSVEDTAK = 'TRENGER_OPPFOLGINGSVEDTAK';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
@@ -94,7 +93,6 @@ export function lagConfig(data: any): any {
 export const ferdigfilterListeLabelTekst = {
     [UFORDELTE_BRUKERE]: 'Ufordelte brukere',
     [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
-    [TRENGER_VURDERING]: 'Trenger vurdering',
     [TRENGER_OPPFOLGINGSVEDTAK]: 'Trenger oppfølgingsvedtak § 14 a',
     [UNDER_VURDERING]: 'Utkast oppfølgingsvedtak § 14 a',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',

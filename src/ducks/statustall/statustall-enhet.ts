@@ -30,7 +30,6 @@ export const initalStatusState: StatustallEnhetState = {
             iavtaltAktivitet: 0,
             erSykmeldtMedArbeidsgiver: 0,
             nyeBrukereForVeileder: 0,
-            trengerVurdering: 0,
             trengerOppfolgingsvedtak: 0,
             underVurdering: 0,
             mineHuskelapper: 0
@@ -49,7 +48,6 @@ export const initalStatusState: StatustallEnhetState = {
             iavtaltAktivitet: 0,
             erSykmeldtMedArbeidsgiver: 0,
             nyeBrukereForVeileder: 0,
-            trengerVurdering: 0,
             trengerOppfolgingsvedtak: 0,
             underVurdering: 0,
             mineHuskelapper: 0
