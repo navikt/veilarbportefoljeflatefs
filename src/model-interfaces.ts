@@ -1,5 +1,7 @@
 import {FiltreringAktiviteterValg} from './ducks/filtrering';
 
+/* Sortering */
+
 export enum Sorteringsrekkefolge {
     ikke_satt = 'ikke_satt',
     stigende = 'stigende',
@@ -85,6 +87,8 @@ export enum Sorteringsfelt {
     FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet'
 }
 
+/* Filtervalg*/
+
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
  * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
@@ -140,6 +144,8 @@ export interface FiltervalgModell {
     hovedmalGjeldendeVedtak14a: Hovedmal[];
 }
 
+/* Enhet og veileder */
+
 export interface EnhetModell {
     enhetId: string;
     navn?: string;
@@ -152,6 +158,64 @@ export interface VeilederModell {
     etternavn: string;
     enheter: EnhetModell[];
 }
+
+/* Både i filtervalg og brukarmodell */
+
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
+export enum InnsatsgruppeGjeldendeVedtak14a {
+    STANDARD_INNSATS = 'STANDARD_INNSATS',
+    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
+    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
+    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
+    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
+}
+
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
+export enum Hovedmal {
+    SKAFFE_ARBEID = 'SKAFFE_ARBEID',
+    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
+    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
+}
+
+export enum FargekategoriModell {
+    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
+    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
+    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
+    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
+    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
+    INGEN_KATEGORI = 'INGEN_KATEGORI'
+}
+
+/* Visningstekstar */
+
+/** Korte visningsnavn for innsatsgrupper.
+ *  Brukt til visning av innsatsgruppe i tabellrad for bruker. */
+export const innsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
+    [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter',
+    [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
+    [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
+    [InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
+    [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
+};
+
+export const HovedmalNavn: {[key in Hovedmal]: string} = {
+    [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
+    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid',
+    [Hovedmal.OKE_DELTAKELSE]: 'Øke deltakelse'
+};
+
+export enum Fargekategorinavn {
+    FARGEKATEGORI_A = 'Blå halvsirkel',
+    FARGEKATEGORI_B = 'Grønn trekant',
+    FARGEKATEGORI_C = 'Gul sirkel',
+    FARGEKATEGORI_D = 'Lilla firkant',
+    FARGEKATEGORI_E = 'Turkis femkant',
+    FARGEKATEGORI_F = 'Oransje rombe',
+    INGEN_KATEGORI = 'Ingen kategori'
+}
+
+/* Brukermodell */
 
 export enum VurderingsBehov {
     ARBEIDSEVNE_VURDERING = 'ARBEIDSEVNE_VURDERING',
@@ -169,6 +233,7 @@ export enum Profileringsresultat {
     OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
 }
 
+/** Innsatsgruppe frå Arena */
 export enum Innsatsgruppe {
     IKVAL = 'IKVAL',
     BFORM = 'BFORM',
@@ -176,37 +241,65 @@ export enum Innsatsgruppe {
     VARIG = 'VARIG'
 }
 
-/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
-export enum InnsatsgruppeGjeldendeVedtak14a {
-    STANDARD_INNSATS = 'STANDARD_INNSATS',
-    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
-    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
-    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
-    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
+export interface EnsligeForsorgereOvergangsstonad {
+    vedtaksPeriodetype: string;
+    harAktivitetsplikt?: boolean;
+    utlopsDato: Date;
+    yngsteBarnsFodselsdato: Date;
 }
 
-/** Korte visningsnavn for innsatsgrupper.
- *  Brukt til visning av innsatsgruppe i tabellrad for bruker. */
-export const innsatsgruppeNavn: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
-    [InnsatsgruppeGjeldendeVedtak14a.STANDARD_INNSATS]: 'Gode muligheter',
-    [InnsatsgruppeGjeldendeVedtak14a.SITUASJONSBESTEMT_INNSATS]: 'Trenger veiledning',
-    [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS]: 'Trenger veiledning, nedsatt arbeidsevne',
-    [InnsatsgruppeGjeldendeVedtak14a.GRADERT_VARIG_TILPASSET_INNSATS]: 'Jobbe delvis',
-    [InnsatsgruppeGjeldendeVedtak14a.VARIG_TILPASSET_INNSATS]: 'Liten mulighet til å jobbe'
-};
-
-/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
-export enum Hovedmal {
-    SKAFFE_ARBEID = 'SKAFFE_ARBEID',
-    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
-    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
+export interface BarnUnder18Aar {
+    alder: number;
 }
 
-export const HovedmalNavn: {[key in Hovedmal]: string} = {
-    [Hovedmal.SKAFFE_ARBEID]: 'Skaffe arbeid',
-    [Hovedmal.BEHOLDE_ARBEID]: 'Beholde arbeid',
-    [Hovedmal.OKE_DELTAKELSE]: 'Øke deltakelse'
-};
+interface Statsborgerskap {
+    statsborgerskap: string;
+    gyldigFra?: string;
+    gyldigTil?: string;
+}
+
+// TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen? 2017-09-27 Korsveien
+export interface AktiviteterModell {
+    egen?: string;
+    stilling?: string;
+    sokeavtale?: string;
+    behandling?: string;
+    ijobb?: string;
+    samtalereferat?: string;
+    mote?: string;
+    tiltak?: string;
+    gruppeaktivitet?: string;
+}
+
+export interface HuskelappModell {
+    huskelappId: string | null;
+    frist?: Date | null;
+    kommentar?: string | null;
+    endretDato: Date | null;
+    endretAv: string | null;
+    enhetId: string | null;
+}
+
+export interface TiltakshendelseModell {
+    id: string;
+    opprettet: Date;
+    tekst: string;
+    lenke: string;
+    tiltakstype: string | null;
+}
+
+export interface GjeldendeVedtak14aModell {
+    innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
+    hovedmal: Hovedmal;
+    fattetDato: Date;
+}
+
+export interface UtgattVarselHendelse {
+    beskrivelse: string;
+    dato: string;
+    lenke: string;
+    detaljer?: string;
+}
 
 export interface BrukerModell {
     fnr: string;
@@ -288,56 +381,7 @@ export interface BrukerModell {
     utgattVarsel: UtgattVarselHendelse | null;
 }
 
-export interface EnsligeForsorgereOvergangsstonad {
-    vedtaksPeriodetype: string;
-    harAktivitetsplikt?: boolean;
-    utlopsDato: Date;
-    yngsteBarnsFodselsdato: Date;
-}
-
-export interface BarnUnder18Aar {
-    alder: number;
-}
-
-interface Statsborgerskap {
-    statsborgerskap: string;
-    gyldigFra?: string;
-    gyldigTil?: string;
-}
-
-// TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen?
-export interface AktiviteterModell {
-    egen?: string;
-    stilling?: string;
-    sokeavtale?: string;
-    behandling?: string;
-    ijobb?: string;
-    samtalereferat?: string;
-    mote?: string;
-    tiltak?: string;
-    gruppeaktivitet?: string;
-}
-
-export enum FargekategoriModell {
-    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
-    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
-    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
-    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
-    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
-    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
-    INGEN_KATEGORI = 'INGEN_KATEGORI'
-}
-
-export enum Fargekategorinavn {
-    FARGEKATEGORI_A = 'Blå halvsirkel',
-    FARGEKATEGORI_B = 'Grønn trekant',
-    FARGEKATEGORI_C = 'Gul sirkel',
-    FARGEKATEGORI_D = 'Lilla firkant',
-    FARGEKATEGORI_E = 'Turkis femkant',
-    FARGEKATEGORI_F = 'Oransje rombe',
-    INGEN_KATEGORI = 'Ingen kategori'
-}
-
+/* Arbeidsliste */
 /** OpenSearch-verdiar for å filtrere på arbeidslista sine fargekategoriar */
 export enum KategoriModell {
     BLA = 'BLA',
@@ -359,23 +403,16 @@ export interface ArbeidslisteModell {
     navkontorForArbeidsliste?: string;
 }
 
-export interface HuskelappModell {
-    huskelappId: string | null;
-    frist?: Date | null;
-    kommentar?: string | null;
-    endretDato: Date | null;
-    endretAv: string | null;
-    enhetId: string | null;
+export interface ArbeidslisteDataModell {
+    fnr: string;
+    kommentar: string | null;
+    frist: string | null;
+    kategori: KategoriModell | null;
 }
 
-export interface TiltakshendelseModell {
-    id: string;
-    opprettet: Date;
-    tekst: string;
-    lenke: string;
-    tiltakstype: string | null;
-}
+/* Anna */
 
+/** Duplikat av enum STATUS som vert brukt andre stadan enn fargekategori*/
 export enum Status {
     NOT_STARTED = 'NOT_STARTED',
     PENDING = 'PENDING',
@@ -384,22 +421,16 @@ export enum Status {
     ERROR = 'ERROR'
 }
 
-export interface ArbeidslisteDataModell {
-    fnr: string;
-    kommentar: string | null;
-    frist: string | null;
-    kategori: KategoriModell | null;
+/* Flytt til systemmelding-fila*/
+export interface Systemmelding {
+    tittel: string;
+    type: 'error' | 'warning' | 'info' | 'success';
+    beskrivelse: any;
 }
 
 export interface FargekategoriDataModell {
     fnr: string[];
     fargekategoriVerdi: FargekategoriModell;
-}
-
-export interface Systemmelding {
-    tittel: string;
-    type: 'error' | 'warning' | 'info' | 'success';
-    beskrivelse: any;
 }
 
 export interface SkjermingEtikettConfig {
@@ -415,17 +446,4 @@ export interface IdentParam {
 export enum SesjonStatus {
     GYLDIG = 'GYLDIG',
     UTLOPT = 'UTLØPT'
-}
-
-export interface GjeldendeVedtak14aModell {
-    innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
-    hovedmal: Hovedmal;
-    fattetDato: Date;
-}
-
-export interface UtgattVarselHendelse {
-    beskrivelse: string;
-    dato: string;
-    lenke: string;
-    detaljer?: string;
 }
