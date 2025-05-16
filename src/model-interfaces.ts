@@ -421,13 +421,6 @@ export enum Status {
     ERROR = 'ERROR'
 }
 
-/* Flytt til systemmelding-fila*/
-export interface Systemmelding {
-    tittel: string;
-    type: 'error' | 'warning' | 'info' | 'success';
-    beskrivelse: any;
-}
-
 export interface FargekategoriDataModell {
     fnr: string[];
     fargekategoriVerdi: FargekategoriModell;
