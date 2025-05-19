@@ -24,7 +24,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 
 export function selectMuligeAlternativer(state: AppState, oversiktType: OversiktType): Kolonne[] {
     if (oversiktType === OversiktType.minOversikt) {

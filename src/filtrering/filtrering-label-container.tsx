@@ -10,7 +10,8 @@ import {
     hendelserEtikett,
     MINE_FARGEKATEGORIER
 } from './filter-konstanter';
-import {EnhetModell, FiltervalgModell} from '../model-interfaces';
+import {EnhetModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';

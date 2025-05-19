@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
 import {Dictionary} from '../../../utils/types/types';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';

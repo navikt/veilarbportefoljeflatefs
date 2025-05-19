@@ -33,7 +33,7 @@ import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';
 import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';

@@ -1,4 +1,5 @@
-import {FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {VeilederModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 export interface LagretFilter {
     filterNavn: string;

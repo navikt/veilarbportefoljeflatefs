@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {Tabs} from '@navikt/ds-react';
 import {FunnelIcon, PersonGroupIcon, StarIcon, VitalsIcon} from '@navikt/aksel-icons';
 import {SidebarTabs, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {OversiktType} from '../../ducks/ui/listevisning';

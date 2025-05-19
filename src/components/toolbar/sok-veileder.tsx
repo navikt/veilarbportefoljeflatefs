@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {endreFiltervalg, veilederSoktFraToolbar} from '../../ducks/filtrering';
 import {nameToStateSliceMap} from '../../ducks/utils';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {VeiledereState} from '../../ducks/veiledere';
 import {SokVeiledere} from '../sok-veiledere/sok-veiledere';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';

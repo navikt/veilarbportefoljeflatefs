@@ -1,5 +1,6 @@
 import {RefObject} from 'react';
-import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, Innsatsgruppe} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Maybe} from './types';
 import {dateGreater, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';

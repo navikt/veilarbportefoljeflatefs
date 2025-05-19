@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,

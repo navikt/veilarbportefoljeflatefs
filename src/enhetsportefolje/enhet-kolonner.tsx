@@ -5,14 +5,8 @@ import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {
-    BarnUnder18Aar,
-    BrukerModell,
-    FiltervalgModell,
-    HovedmalNavn,
-    innsatsgruppeNavn,
-    VeilederModell
-} from '../model-interfaces';
+import {BarnUnder18Aar, BrukerModell, HovedmalNavn, innsatsgruppeNavn, VeilederModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../../../model-interfaces';
+import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import {AktivitetFilterformForenklet} from './aktivitet-filterform-forenklet';
 import {aktiviteter, AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filter-konstanter';
 import {AktivitetFilterformAvansert} from './aktivitet-filterform-avansert';

@@ -23,7 +23,7 @@ import {
 } from './ducks/ui/listevisning';
 import {featuresReducer, FeaturesState} from './ducks/features';
 import {toastReducer, ToastState} from './store/toast/reducer';
-import {FiltervalgModell} from './model-interfaces';
+import {FiltervalgModell} from './typer/filtervalg-modell';
 import {innloggetVeilederReducer, InnloggetVeilederState} from './ducks/innlogget-veileder';
 import {initialStateSidebar, sidebarReducer, SidebarStateType} from './ducks/sidebar-tab';
 import {mineFilterReducer} from './ducks/mine-filter';
