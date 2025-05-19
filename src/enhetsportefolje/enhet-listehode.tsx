@@ -9,7 +9,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {FiltervalgModell} from '../model-interfaces';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
@@ -56,6 +56,7 @@ import {VeilederNavident} from '../components/tabell/headerceller/enhetens-overs
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {

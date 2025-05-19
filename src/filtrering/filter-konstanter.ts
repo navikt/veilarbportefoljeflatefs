@@ -1,12 +1,7 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {
-    FargekategoriModell,
-    Fargekategorinavn,
-    Hovedmal,
-    InnsatsgruppeGjeldendeVedtak14a,
-    Sorteringsfelt
-} from '../model-interfaces';
+import {FargekategoriModell, Fargekategorinavn, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../model-interfaces';
 import {Dictionary} from '../utils/types/types';
+import {Sorteringsfelt} from '../typer/kolonnesortering';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
 

@@ -1,7 +1,7 @@
 import {HeadercelleProps} from './HeadercelleProps';
-import {Sorteringsfelt} from '../../../model-interfaces';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
+import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
 export const HuskelappFrist = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
     <SorteringHeader
