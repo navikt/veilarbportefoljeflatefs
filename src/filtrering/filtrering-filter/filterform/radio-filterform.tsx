@@ -1,6 +1,6 @@
 import {Radio, RadioGroup} from '@navikt/ds-react';
 import {kebabCase} from '../../../utils/utils';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {OrNothing} from '../../../utils/types/types';
 import {Grid} from '../../../components/grid/grid';

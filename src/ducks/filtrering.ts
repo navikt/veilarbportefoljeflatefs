@@ -1,5 +1,6 @@
 import {ReactNode} from 'react';
-import {FargekategoriModell, FiltervalgModell} from '../model-interfaces';
+import {FargekategoriModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';

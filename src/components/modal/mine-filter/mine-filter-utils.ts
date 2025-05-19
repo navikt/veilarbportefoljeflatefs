@@ -1,5 +1,5 @@
 import {isEmptyArray, isObject} from 'formik';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {LagretFilterValideringsError} from './mine-filter-modal';
 import {AktiviteterValg} from '../../../filtrering/filter-konstanter';
 

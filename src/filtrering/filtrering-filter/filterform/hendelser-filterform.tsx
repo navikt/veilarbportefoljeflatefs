@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';

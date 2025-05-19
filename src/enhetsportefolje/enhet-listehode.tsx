@@ -9,7 +9,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';

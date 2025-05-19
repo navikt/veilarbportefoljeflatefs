@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {getMuligeKolonner} from './listevisning-selectors';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 
 export enum ActionTypeKeys {
     VELG_ALTERNATIV = 'listevisning/velg_alternativ',

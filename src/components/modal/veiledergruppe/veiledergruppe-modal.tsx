@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert, Button, Heading, Modal} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {harGjortEndringer, veilederlisterErLik} from './veileder-gruppe-utils';
 import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {EndringerIkkeLagretModal} from './ulagrede-endringer-modal';

@@ -1,5 +1,6 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {FiltervalgModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {
     AktiviteterValg,
     DAGPENGER_YTELSE,
@@ -57,7 +58,6 @@ import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller
 import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
