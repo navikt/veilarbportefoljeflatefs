@@ -1,3 +1,5 @@
+import {ArbeidslisteModell} from './typer/arbeidsliste';
+
 /* Enhet og veileder */
 
 export interface EnhetModell {
@@ -233,28 +235,6 @@ export interface BrukerModell {
     utdanningOgSituasjonSistEndret: string;
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     utgattVarsel: UtgattVarselHendelse | null;
-}
-
-/* Arbeidsliste */
-/** OpenSearch-verdiar for å filtrere på arbeidslista sine fargekategoriar */
-export enum KategoriModell {
-    BLA = 'BLA',
-    LILLA = 'LILLA',
-    GRONN = 'GRONN',
-    GUL = 'GUL'
-}
-
-export interface ArbeidslisteModell {
-    kommentar?: string;
-    overskrift?: string;
-    frist: string;
-    arbeidslisteAktiv: boolean;
-    endringstidspunkt: string; // dato
-    isOppfolgendeVeileder: boolean;
-    sistEndretAv: {veilederId: string};
-    kategori: KategoriModell;
-    hentetKommentarOgTittel: boolean;
-    navkontorForArbeidsliste?: string;
 }
 
 /* Anna */
