@@ -2,10 +2,10 @@ import {ReactNode} from 'react';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {Header, HeaderProps} from './header';
 import {OrNothing} from '../../utils/types/types';
 import './tabell.css';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
 
 interface SorteringHeaderProps extends HeaderProps {
     sortering: OrNothing<Sorteringsfelt>;

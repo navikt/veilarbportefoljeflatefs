@@ -3,10 +3,11 @@ import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
 import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
 import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
-import {BrukerModell, FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
+import {BrukerModell, FiltervalgModell} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
