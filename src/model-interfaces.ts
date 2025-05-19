@@ -257,13 +257,6 @@ export interface ArbeidslisteModell {
     navkontorForArbeidsliste?: string;
 }
 
-export interface ArbeidslisteDataModell {
-    fnr: string;
-    kommentar: string | null;
-    frist: string | null;
-    kategori: KategoriModell | null;
-}
-
 /* Anna */
 
 export interface FargekategoriDataModell {
