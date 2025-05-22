@@ -1,6 +1,6 @@
-import {FiltreringAktiviteterValg} from '../ducks/filtrering';
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
 import {KategoriModell} from './arbeidsliste';
+import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
@@ -27,7 +27,7 @@ export interface FiltervalgModell {
     servicegruppe?: string[];
     veiledere: string[];
     ytelse: null | string;
-    aktiviteter?: FiltreringAktiviteterValg;
+    aktiviteter?: AktiviteterFilternokler;
     aktiviteterForenklet: string[];
     tiltakstyper: string[];
     hovedmal?: string[];
