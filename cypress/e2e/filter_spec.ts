@@ -3,10 +3,9 @@ import {
     alder,
     hendelserEtikett,
     innsatsgruppeGjeldendeVedtak14a
-} from "../../src/filtrering/filter-konstanter";
-import {kebabUtenSpesialtegn} from "../../src/utils/utils";
-
-import {InnsatsgruppeGjeldendeVedtak14a} from "../../src/model-interfaces";
+} from '../../src/filtrering/filter-konstanter';
+import {kebabUtenSpesialtegn} from '../../src/utils/utils';
+import {InnsatsgruppeGjeldendeVedtak14a} from '../../src/typer/bruker-modell';
 
 const fraAlder = '2';
 const tilAlder = '34';

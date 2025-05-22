@@ -8,7 +8,7 @@ import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import {brukere, hentHuskelappForBruker, hentMockPlan} from '../data/portefolje';
 import {lagPortefoljeStorrelser} from '../data/portefoljestorrelser';
 import {tiltak} from '../data/tiltak';
-import {FargekategoriModell} from '../../model-interfaces';
+import {FargekategoriModell} from '../../typer/bruker-modell';
 import {withAuth} from './auth';
 import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 import {EndreHuskelapp, LagreHuskelapp} from '../../ducks/huskelapp';

@@ -1,5 +1,4 @@
-import {FargekategoriModell} from '../../../model-interfaces';
-import {HuskelappModell} from '../../../typer/bruker-modell';
+import {FargekategoriModell, HuskelappModell} from '../../../typer/bruker-modell';
 
 interface SjekkOmNoeSkalSlettesProps {
     tilVeileder: string;

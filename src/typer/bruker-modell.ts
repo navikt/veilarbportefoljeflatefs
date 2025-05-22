@@ -1,5 +1,4 @@
 import {ArbeidslisteModell} from './arbeidsliste';
-import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../model-interfaces';
 
 export interface BrukerModell {
     fnr: string;
@@ -143,6 +142,16 @@ export interface BarnUnder18Aar {
     alder: number;
 }
 
+export enum FargekategoriModell {
+    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
+    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
+    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
+    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
+    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
+    INGEN_KATEGORI = 'INGEN_KATEGORI'
+}
+
 export interface HuskelappModell {
     huskelappId: string | null;
     frist?: Date | null;
@@ -156,6 +165,22 @@ export interface GjeldendeVedtak14aModell {
     innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
     hovedmal: Hovedmal;
     fattetDato: Date;
+}
+
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
+export enum InnsatsgruppeGjeldendeVedtak14a {
+    STANDARD_INNSATS = 'STANDARD_INNSATS',
+    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
+    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
+    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
+    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
+}
+
+/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
+export enum Hovedmal {
+    SKAFFE_ARBEID = 'SKAFFE_ARBEID',
+    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
+    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
 }
 
 export interface UtgattVarselHendelse {
