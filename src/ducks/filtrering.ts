@@ -5,10 +5,9 @@ import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
 import {
-    AktiviteterAvtaltMedNav,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
-    FiltreringAktiviteterValg,
+    initialStateAktiviteterFiltervalg,
     MINE_FARGEKATEGORIER
 } from '../filtrering/filter-konstanter';
 import {alfabetiskSammenligning} from '../utils/utils';
@@ -36,17 +35,7 @@ export const initialState: FiltervalgModell = {
     servicegruppe: [],
     veiledere: [],
     ytelse: null,
-    aktiviteter: {
-        [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
-    } as FiltreringAktiviteterValg,
+    aktiviteter: initialStateAktiviteterFiltervalg,
     aktiviteterForenklet: [],
     tiltakstyper: [],
     hovedmal: [],

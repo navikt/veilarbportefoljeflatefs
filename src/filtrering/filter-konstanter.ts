@@ -293,6 +293,18 @@ export enum AktiviteterValg {
     NA = 'NA'
 }
 
+export const initialStateAktiviteterFiltervalg: FiltreringAktiviteterValg = {
+    [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
+};
+
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med Nav'},
     HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med Nav'}
