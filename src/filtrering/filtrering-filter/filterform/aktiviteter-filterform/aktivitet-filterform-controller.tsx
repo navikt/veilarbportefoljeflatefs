@@ -5,7 +5,7 @@ import {
     aktiviteter,
     AktiviteterAvtaltMedNav,
     AktiviteterValg,
-    FiltreringAktiviteterValg
+    AktiviteterFilternokler
 } from '../../../filter-konstanter';
 import {AktivitetFilterformAvansert} from './aktivitet-filterform-avansert';
 import {logEvent} from '../../../../utils/frontend-logger';
@@ -17,7 +17,7 @@ interface AktivitetFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: any) => void;
 }
 
-const aktivitetInitialState: FiltreringAktiviteterValg = {
+const aktivitetInitialState: AktiviteterFilternokler = {
     [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
     [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
     [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
@@ -30,7 +30,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 export function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetFilterformProps) {
-    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<FiltreringAktiviteterValg>({
+    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<AktiviteterFilternokler>({
         ...aktivitetInitialState,
         ...filtervalg.aktiviteter
     });
