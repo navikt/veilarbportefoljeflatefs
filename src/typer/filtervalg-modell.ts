@@ -1,6 +1,6 @@
-import {FiltreringAktiviteterValg} from '../ducks/filtrering';
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
 import {KategoriModell} from './arbeidsliste';
+import {FiltreringAktiviteterValg} from '../filtrering/filter-konstanter';
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
