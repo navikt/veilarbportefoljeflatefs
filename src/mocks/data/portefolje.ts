@@ -2,11 +2,13 @@ import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
-import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../../model-interfaces';
 import {
     BarnUnder18Aar,
     EnsligeForsorgereOvergangsstonad,
+    FargekategoriModell,
     GjeldendeVedtak14aModell,
+    Hovedmal,
+    InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
     UtgattVarselHendelse
 } from '../../typer/bruker-modell';

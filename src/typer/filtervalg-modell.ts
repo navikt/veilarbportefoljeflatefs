@@ -1,5 +1,5 @@
 import {FiltreringAktiviteterValg} from '../ducks/filtrering';
-import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../model-interfaces';
+import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
 import {KategoriModell} from './arbeidsliste';
 
 /**

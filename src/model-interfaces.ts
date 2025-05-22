@@ -1,3 +1,5 @@
+import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './typer/bruker-modell';
+
 /* Enhet og veileder */
 
 export interface EnhetModell {
@@ -11,34 +13,6 @@ export interface VeilederModell {
     fornavn: string;
     etternavn: string;
     enheter: EnhetModell[];
-}
-
-/* Både i filtervalg og brukarmodell */
-
-/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
-export enum InnsatsgruppeGjeldendeVedtak14a {
-    STANDARD_INNSATS = 'STANDARD_INNSATS',
-    SITUASJONSBESTEMT_INNSATS = 'SITUASJONSBESTEMT_INNSATS',
-    SPESIELT_TILPASSET_INNSATS = 'SPESIELT_TILPASSET_INNSATS',
-    GRADERT_VARIG_TILPASSET_INNSATS = 'GRADERT_VARIG_TILPASSET_INNSATS',
-    VARIG_TILPASSET_INNSATS = 'VARIG_TILPASSET_INNSATS'
-}
-
-/** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */
-export enum Hovedmal {
-    SKAFFE_ARBEID = 'SKAFFE_ARBEID',
-    BEHOLDE_ARBEID = 'BEHOLDE_ARBEID',
-    OKE_DELTAKELSE = 'OKE_DELTAKELSE'
-}
-
-export enum FargekategoriModell {
-    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
-    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
-    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
-    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
-    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
-    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
-    INGEN_KATEGORI = 'INGEN_KATEGORI'
 }
 
 /* Visningstekstar */

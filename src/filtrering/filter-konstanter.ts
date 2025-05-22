@@ -1,5 +1,6 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {FargekategoriModell, Fargekategorinavn, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../model-interfaces';
+import {Fargekategorinavn} from '../model-interfaces';
+import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../typer/bruker-modell';
 import {Dictionary} from '../utils/types/types';
 import {Sorteringsfelt} from '../typer/kolonnesortering';
 
