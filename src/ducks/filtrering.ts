@@ -8,6 +8,7 @@ import {
     AktiviteterAvtaltMedNav,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
+    FiltreringAktiviteterValg,
     MINE_FARGEKATEGORIER
 } from '../filtrering/filter-konstanter';
 import {alfabetiskSammenligning} from '../utils/utils';
@@ -20,10 +21,6 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 export const FARGEKATEGORIER_HOVEDFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_HOVEDFILTER_KLIKK';
 export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UNDERFILTER_KLIKK';
-
-export type FiltreringAktiviteterValg = {
-    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
-};
 
 //  Reducer
 export const initialState: FiltervalgModell = {

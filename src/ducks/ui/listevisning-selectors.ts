@@ -1,6 +1,5 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
-import {FiltreringAktiviteterValg} from '../filtrering';
 import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
@@ -11,6 +10,7 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    FiltreringAktiviteterValg,
     HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,

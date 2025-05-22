@@ -1,9 +1,13 @@
 import {useEffect, useState} from 'react';
 import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import {AktivitetFilterformForenklet} from './aktivitet-filterform-forenklet';
-import {aktiviteter, AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filter-konstanter';
+import {
+    aktiviteter,
+    AktiviteterAvtaltMedNav,
+    AktiviteterValg,
+    FiltreringAktiviteterValg
+} from '../../../filter-konstanter';
 import {AktivitetFilterformAvansert} from './aktivitet-filterform-avansert';
-import {FiltreringAktiviteterValg} from '../../../../ducks/filtrering';
 import {logEvent} from '../../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 import '../filterform.css';

@@ -258,6 +258,10 @@ export const ensligeForsorgere = {
     OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
+export type FiltreringAktiviteterValg = {
+    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
+};
+
 export enum AktiviteterAvtaltMedNav {
     SOKEAVTALE = 'SOKEAVTALE',
     STILLING = 'STILLING',
