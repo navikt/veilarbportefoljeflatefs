@@ -56,3 +56,5 @@ export interface FiltervalgModell {
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
     hovedmalGjeldendeVedtak14a: Hovedmal[];
 }
+
+// Typane her skal heite "filternøkkel/nøklar" for å skilje dei frå brukardata
