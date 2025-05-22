@@ -3,7 +3,7 @@ import {AppState} from '../../reducer';
 import {createSelector} from 'reselect';
 import {getFiltreringState, selectListeVisning} from '../../ducks/ui/listevisning-selectors';
 import {ListevisningState, OversiktType} from '../../ducks/ui/listevisning';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell} from '../../typer/bruker-modell';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import {Checkbox, Tag} from '@navikt/ds-react';
 import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
 import {Etiketter} from '../components/tabell/etiketter';
-import {BrukerModell} from '../model-interfaces';
+import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {MinOversiktKolonner} from './minoversikt-kolonner';
 import {Kolonne} from '../ducks/ui/listevisning';

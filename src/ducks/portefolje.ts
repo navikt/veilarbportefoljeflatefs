@@ -4,7 +4,7 @@ import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatustallForVeileder} from './statustall/statustall-veileder';
-import {BrukerModell} from '../model-interfaces';
+import {BrukerModell} from '../typer/bruker-modell';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';

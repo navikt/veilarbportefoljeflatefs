@@ -5,7 +5,7 @@ import {HUSKELAPP_LAGRE_OK, lagreHuskelappAction} from '../../../ducks/huskelapp
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {AppState} from '../../../reducer';
-import {BrukerModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../typer/bruker-modell';
 
 export const lagreHuskelapp = async (
     dispatch: ThunkDispatch<AppState, any, AnyAction>,

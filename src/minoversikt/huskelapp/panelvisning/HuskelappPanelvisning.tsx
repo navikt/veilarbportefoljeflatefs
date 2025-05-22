@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
+import {BrukerModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {HuskelappModal} from '../redigering/HuskelappModal';
 import {HuskelappForPanel} from './HuskelappForPanel';
 import './panelvisning.css';
