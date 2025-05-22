@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
-import {BrukerModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../typer/bruker-modell';
 import {AppState} from '../../../reducer';
 import {SokFilter} from '../../sok-veiledere/sok-filter';
 import {nameToStateSliceMap} from '../../../ducks/utils';

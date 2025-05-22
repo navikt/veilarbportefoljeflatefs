@@ -6,7 +6,7 @@ import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from './slettHuskelapp';
-import {BrukerModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../typer/bruker-modell';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
 
 interface SlettHuskelappKnappProps {

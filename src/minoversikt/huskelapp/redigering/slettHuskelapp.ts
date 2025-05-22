@@ -4,7 +4,7 @@ import {slettHuskelappAction} from '../../../ducks/huskelapp';
 import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {AppState} from '../../../reducer';
-import {HuskelappModell} from '../../../model-interfaces';
+import {HuskelappModell} from '../../../typer/bruker-modell';
 
 export const handleSlettHuskelapp = async (
     dispatch: ThunkDispatch<AppState, any, AnyAction>,

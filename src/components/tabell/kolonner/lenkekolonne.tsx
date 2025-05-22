@@ -1,4 +1,4 @@
-import {BrukerModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../typer/bruker-modell';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';

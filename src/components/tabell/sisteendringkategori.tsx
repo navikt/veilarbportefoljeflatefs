@@ -1,5 +1,5 @@
 import {BodyShort} from '@navikt/ds-react';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell} from '../../typer/bruker-modell';
 import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';

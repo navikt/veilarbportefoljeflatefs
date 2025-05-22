@@ -3,7 +3,7 @@ import {Detail} from '@navikt/ds-react';
 import {HuskelappInfoAlert} from './HuskelappInfoAlert';
 import {FormikTekstArea} from '../../../components/formik/formik-tekstarea';
 import {FormikDatoVelger} from '../../../components/formik/formik-datovelger/formik-datovelger';
-import {HuskelappModell} from '../../../model-interfaces';
+import {HuskelappModell} from '../../../typer/bruker-modell';
 import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import './rediger-huskelapp.css';
 

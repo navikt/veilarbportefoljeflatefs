@@ -1,5 +1,5 @@
 import {RefObject} from 'react';
-import {AktiviteterModell, BrukerModell, Innsatsgruppe} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, Innsatsgruppe} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Maybe} from './types';
 import {dateGreater, toDateString} from './dato-utils';

@@ -3,7 +3,7 @@ import {AnyAction} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {BodyShort, Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
-import {BrukerModell, HuskelappModell} from '../../../model-interfaces';
+import {BrukerModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {AppState} from '../../../reducer';
