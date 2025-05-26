@@ -1,4 +1,4 @@
-import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
+import {Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
 import {KategoriModell} from './arbeidsliste';
 import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
 
@@ -51,8 +51,18 @@ export interface FiltervalgModell {
     ensligeForsorgere: string[];
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
-    fargekategorier: FargekategoriModell[];
+    fargekategorier: FargekategoriFilternokkel[];
     gjeldendeVedtak14a: string[];
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
     hovedmalGjeldendeVedtak14a: Hovedmal[];
+}
+
+export enum FargekategoriFilternokkel {
+    FARGEKATEGORI_A = 'FARGEKATEGORI_A',
+    FARGEKATEGORI_B = 'FARGEKATEGORI_B',
+    FARGEKATEGORI_C = 'FARGEKATEGORI_C',
+    FARGEKATEGORI_D = 'FARGEKATEGORI_D',
+    FARGEKATEGORI_F = 'FARGEKATEGORI_F',
+    FARGEKATEGORI_E = 'FARGEKATEGORI_E',
+    INGEN_KATEGORI = 'INGEN_KATEGORI'
 }

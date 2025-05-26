@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {FargekategoriModell} from '../typer/bruker-modell';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {FargekategoriFilternokkel, FiltervalgModell} from '../typer/filtervalg-modell';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
@@ -115,7 +115,9 @@ export function filtreringReducer(state: FiltervalgModell = initialState, action
             const nyFerdigfilterListe = hovedfilterAlleredeValgt
                 ? [...state.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER)].sort(alfabetiskSammenligning)
                 : [...state.ferdigfilterListe, MINE_FARGEKATEGORIER].sort(alfabetiskSammenligning);
-            const nyFargekategorier = hovedfilterAlleredeValgt ? [] : [...alleFargekategoriFilterAlternativer];
+            const nyFargekategorier: FargekategoriFilternokkel = hovedfilterAlleredeValgt
+                ? []
+                : [...alleFargekategoriFilterAlternativer];
 
             return {...state, ferdigfilterListe: nyFerdigfilterListe, fargekategorier: nyFargekategorier};
         }
