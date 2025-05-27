@@ -10,7 +10,7 @@ import {
     hendelserEtikett,
     MINE_FARGEKATEGORIER
 } from './filter-konstanter';
-import {EnhetModell} from '../model-interfaces';
+import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';

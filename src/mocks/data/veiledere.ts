@@ -1,7 +1,7 @@
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
-import {VeilederePaEnhetModell, VeilederUtenEnhetModell} from '../../model-interfaces';
+import {VeilederePaEnhetModell, VeilederUtenEnhetModell} from '../../typer/enhet-og-veiledere-modeller';
 
 faker.seed(MOCK_CONFIG.seed);
 

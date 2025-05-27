@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
-import {VeilederModell} from '../../model-interfaces';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {AppState} from '../../reducer';
 import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';

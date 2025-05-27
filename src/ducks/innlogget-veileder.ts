@@ -1,6 +1,6 @@
 import {hentAktivBruker} from '../middleware/api';
 import {STATUS, doThenDispatch} from './utils';
-import {VeilederModell} from '../model-interfaces';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {OrNothing} from '../utils/types/types';
 
 // Actions

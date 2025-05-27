@@ -1,7 +1,7 @@
 import {logEvent} from '../frontend-logger';
 import {Side} from './skjerm-metrikker';
 import {OrNothing} from '../types/types';
-import {VeilederModell} from '../../model-interfaces';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {getCrypto} from './crypto';
 
 export const loggSideVisning = (veilederIdent: OrNothing<VeilederModell>, side: Side): void => {

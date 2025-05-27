@@ -1,4 +1,5 @@
-import {FargekategoriDataModell, VeilederePaEnhetModell, VeilederModell} from '../model-interfaces';
+import {FargekategoriDataModell} from '../model-interfaces';
+import {VeilederePaEnhetModell, VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';

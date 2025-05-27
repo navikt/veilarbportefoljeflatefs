@@ -1,5 +1,5 @@
 import {innloggetVeileder as innloggetVeilederFraVeiledereliste} from './veiledere';
-import {EnhetModell, VeilederModell} from '../../model-interfaces';
+import {EnhetModell, VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 
 export const innloggetEnhet: EnhetModell = {
     enhetId: '1234',
