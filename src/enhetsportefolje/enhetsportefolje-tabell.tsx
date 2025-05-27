@@ -10,8 +10,6 @@ import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-s
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
-const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
-
 interface EnhetTabellProps {
     classNameWrapper: string;
 }
@@ -43,7 +41,6 @@ export function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
                                     settMarkert={settMarkert}
                                     filtervalg={filtervalg}
                                     valgteKolonner={listevisning.valgte}
-                                    brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
                                     forrigeBruker={forrigeBruker}
                                 />
                             ))}

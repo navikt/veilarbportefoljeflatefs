@@ -6,7 +6,6 @@ import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
-import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {
@@ -50,17 +49,9 @@ interface EnhetKolonnerProps {
     enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    brukersVeileder?: VeilederModell;
 }
 
-export function EnhetKolonner({
-    className,
-    bruker,
-    enhetId,
-    filtervalg,
-    valgteKolonner,
-    brukersVeileder
-}: EnhetKolonnerProps) {
+export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
     const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
     const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
@@ -185,7 +176,6 @@ export function EnhetKolonner({
                 className="col col-xs-2"
                 bruker={bruker}
                 skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-                veileder={brukersVeileder}
             />
             <VeilederId
                 className="col col-xs-2"

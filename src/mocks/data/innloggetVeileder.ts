@@ -1,5 +1,5 @@
 import {innloggetVeileder as innloggetVeilederFraVeiledereliste} from './veiledere';
-import {EnhetModell, VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
+import {EnhetModell, InnloggetVeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 
 export const innloggetEnhet: EnhetModell = {
     enhetId: '1234',
@@ -16,7 +16,7 @@ const alternativEnhet2: EnhetModell = {
     navn: 'Nav Brummedal'
 };
 
-export const innloggetVeileder: VeilederModell = {
+export const innloggetVeileder: InnloggetVeilederModell = {
     ...innloggetVeilederFraVeiledereliste,
     enheter: [innloggetEnhet, alternativEnhet, alternativEnhet2]
 };

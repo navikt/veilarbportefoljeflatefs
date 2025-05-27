@@ -1,5 +1,5 @@
 import {hentEnhetsVeiledere} from '../middleware/api';
-import {STATUS, doThenDispatch} from './utils';
+import {doThenDispatch, STATUS} from './utils';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 
 // Actions

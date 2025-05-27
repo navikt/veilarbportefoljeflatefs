@@ -1,5 +1,5 @@
 import {FargekategoriDataModell} from '../model-interfaces';
-import {VeilederePaEnhetModell, VeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
@@ -148,8 +148,7 @@ export function hentEnhetsVeiledere(enhetId): Promise<VeilederePaEnhetModell> {
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-/** Henter innlogget veileder */
-export function hentAktivBruker(): Promise<VeilederModell> {
+export function hentAktivBruker(): Promise<InnloggetVeilederModell> {
     return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 

@@ -1,21 +1,25 @@
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {BodyShort, Tag} from '@navikt/ds-react';
 import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../typer/bruker-modell';
+import {AppState} from '../../reducer';
 
 interface VeiledernavnProps {
     className?: string;
     bruker: BrukerModell;
     skalVises: boolean;
-    veileder?: VeilederModell;
 }
 
-export function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProps) {
+export function VeilederNavn({className, bruker, skalVises}: VeiledernavnProps) {
+    const veiledere = useSelector((state: AppState) => state.veiledere);
+
     if (!skalVises) {
         return null;
     }
 
-    const veilederNavn = veileder ? `${veileder.etternavn}, ${veileder.fornavn}` : '';
+    const brukersVeileder = finnBrukersVeileder(veiledere.data.veilederListe, bruker);
+    const veilederNavn = brukersVeileder ? `${brukersVeileder.etternavn}, ${brukersVeileder.fornavn}` : '';
 
     const ufordeltBrukerEtikett = (
         <Tag className="tabell-etikett" size="small" variant="info" hidden={!bruker.nyForEnhet}>
@@ -29,3 +33,7 @@ export function VeilederNavn({className, bruker, skalVises, veileder}: Veiledern
         </div>
     );
 }
+
+const finnBrukersVeileder = (veiledere: VeilederModell[], bruker: BrukerModell) => {
+    return veiledere.find(veileder => veileder.ident === bruker.veilederId);
+};
