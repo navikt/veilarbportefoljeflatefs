@@ -1,21 +1,9 @@
-import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 export interface LagretFilter {
     filterNavn: string;
     filterId: number;
     filterValg: FiltervalgModell;
-    opprettetDato: Date;
-    sortOrder: number | null;
-    filterCleanup: boolean;
-    aktiv: boolean;
-    note: string;
-}
-
-export interface LagretVeiledergruppe {
-    filterNavn: string;
-    filterId: number;
-    filterValg: InnloggetVeilederModell;
     opprettetDato: Date;
     sortOrder: number | null;
     filterCleanup: boolean;
