@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
-import {InnloggetVeilederModell} from '../../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {AppState} from '../../reducer';
 import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
@@ -26,7 +26,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
         setValgteVeiledere(filtervalg.veiledere);
     }, [filtervalg]);
 
-    const getFiltrerteVeiledere = (): InnloggetVeilederModell[] => {
+    const getFiltrerteVeiledere = (): VeilederModell[] => {
         const query = veilederNavnQuery ? veilederNavnQuery.toLowerCase().trim() : '';
 
         return veiledere.data.veilederListe
@@ -54,7 +54,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, [formNavn]: []}, OversiktType.veilederOversikt);
     };
 
-    const mapToCheckboxList = (veiledere?: InnloggetVeilederModell[]) => {
+    const mapToCheckboxList = (veiledere?: VeilederModell[]) => {
         if (!veiledere) {
             return null;
         }

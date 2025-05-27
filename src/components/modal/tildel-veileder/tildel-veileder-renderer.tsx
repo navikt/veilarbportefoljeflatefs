@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
-import {InnloggetVeilederModell} from '../../../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../../../typer/enhet-og-veiledere-modeller';
 
 interface TildelVeilederRendererProps {
-    data: InnloggetVeilederModell[];
+    data: VeilederModell[];
     ident: string | null;
     onChange: (ident: string) => void;
     btnOnClick: () => void;

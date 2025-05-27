@@ -6,7 +6,7 @@ import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
-import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import './veilederoversikt.css';
 
@@ -39,7 +39,7 @@ function propertySort({property, direction}) {
 
 interface VeilederoversiktSidevisningProps {
     veilederFilter: string[];
-    veiledere: InnloggetVeilederModell[];
+    veiledere: VeilederModell[];
     portefoljestorrelser: PortefoljeStorrelser;
 }
 

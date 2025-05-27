@@ -1,6 +1,6 @@
 import {hentEnhetsVeiledere} from '../middleware/api';
-import {STATUS, doThenDispatch} from './utils';
-import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {doThenDispatch, STATUS} from './utils';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 
 // Actions
 export const OK = 'veilarbveileder/veiledere/OK';
@@ -10,7 +10,7 @@ export const PENDING = 'veilarbveileder/veiledere/PENDING';
 export interface VeiledereState {
     status: string;
     data: {
-        veilederListe: InnloggetVeilederModell[];
+        veilederListe: VeilederModell[];
     };
 }
 
