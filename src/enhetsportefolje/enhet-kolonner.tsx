@@ -6,7 +6,7 @@ import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
-import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {
@@ -50,7 +50,7 @@ interface EnhetKolonnerProps {
     enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
-    brukersVeileder?: InnloggetVeilederModell;
+    brukersVeileder?: VeilederModell;
 }
 
 export function EnhetKolonner({

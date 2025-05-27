@@ -7,10 +7,13 @@ import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {BrukerModell} from '../typer/bruker-modell';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
-const finnBrukersVeileder = (veiledere, bruker) => veiledere.find(veileder => veileder.ident === bruker.veilederId);
+const finnBrukersVeileder = (veiledere: VeilederModell[], bruker: BrukerModell) =>
+    veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
 interface EnhetTabellProps {
     classNameWrapper: string;
