@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import {BodyShort, Tag} from '@navikt/ds-react';
-import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
+import {InnloggetVeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../typer/bruker-modell';
 
 interface VeiledernavnProps {
     className?: string;
     bruker: BrukerModell;
     skalVises: boolean;
-    veileder?: VeilederModell;
+    veileder?: InnloggetVeilederModell;
 }
 
 export function VeilederNavn({className, bruker, skalVises, veileder}: VeiledernavnProps) {

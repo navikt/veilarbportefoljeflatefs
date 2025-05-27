@@ -1,4 +1,4 @@
-import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 export interface LagretFilter {
@@ -15,7 +15,7 @@ export interface LagretFilter {
 export interface LagretVeiledergruppe {
     filterNavn: string;
     filterId: number;
-    filterValg: VeilederModell;
+    filterValg: InnloggetVeilederModell;
     opprettetDato: Date;
     sortOrder: number | null;
     filterCleanup: boolean;

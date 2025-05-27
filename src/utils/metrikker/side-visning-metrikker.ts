@@ -1,10 +1,10 @@
 import {logEvent} from '../frontend-logger';
 import {Side} from './skjerm-metrikker';
 import {OrNothing} from '../types/types';
-import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
+import {InnloggetVeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {getCrypto} from './crypto';
 
-export const loggSideVisning = (veilederIdent: OrNothing<VeilederModell>, side: Side): void => {
+export const loggSideVisning = (veilederIdent: OrNothing<InnloggetVeilederModell>, side: Side): void => {
     if (veilederIdent) {
         krypterVeilederident(veilederIdent.ident).then(buffer => {
             const identHash = hexString(buffer);
