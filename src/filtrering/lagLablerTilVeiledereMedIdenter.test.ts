@@ -1,4 +1,4 @@
-import {lagLablerTilVeiledereMedIdenter} from './utils';
+import {lagLablerTilVeiledereMedIdenter} from './lagLablerTilVeiledereMedIdenter';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 
 describe('Test lagLablerTilVeiledereMedIdenter', () => {

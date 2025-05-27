@@ -5,7 +5,7 @@ import {VeilederoversiktSidevisning} from './veilederoversikt-sidevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {FiltreringVeiledere} from '../filtrering/filtrering-veiledere';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/lagLablerTilVeiledereMedIdenter';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
