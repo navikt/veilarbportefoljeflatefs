@@ -1,6 +1,5 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
-import {FiltreringAktiviteterValg} from '../filtrering';
 import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
@@ -11,6 +10,7 @@ import {
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    AktiviteterFilternokler,
     HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
@@ -51,7 +51,7 @@ function addHvis(kolonne: Kolonne, add: boolean): Kolonne[] {
     return add ? [kolonne] : [];
 }
 
-function harValgtMinstEnAktivitet(aktiviteter: FiltreringAktiviteterValg): boolean {
+function harValgtMinstEnAktivitet(aktiviteter: AktiviteterFilternokler): boolean {
     return Object.entries(aktiviteter).filter(([_, value]) => value === AktiviteterValg.JA).length >= 1;
 }
 

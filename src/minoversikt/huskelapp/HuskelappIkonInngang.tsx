@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button} from '@navikt/ds-react';
-import {BrukerModell} from '../../model-interfaces';
+import {BrukerModell} from '../../typer/bruker-modell';
 import {HuskelappModal} from './redigering/HuskelappModal';
 import {ReactComponent as HuskelappIkon} from '../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
 import {ReactComponent as HuskelappIkonTomt} from '../../components/ikoner/huskelapp/Huskelappikon_stiplet.svg';

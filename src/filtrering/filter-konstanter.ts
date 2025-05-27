@@ -1,5 +1,6 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {FargekategoriModell, Fargekategorinavn, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../model-interfaces';
+import {Fargekategorinavn} from '../model-interfaces';
+import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../typer/bruker-modell';
 import {Dictionary} from '../utils/types/types';
 import {Sorteringsfelt} from '../typer/kolonnesortering';
 
@@ -257,6 +258,10 @@ export const ensligeForsorgere = {
     OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
+export type AktiviteterFilternokler = {
+    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
+};
+
 export enum AktiviteterAvtaltMedNav {
     SOKEAVTALE = 'SOKEAVTALE',
     STILLING = 'STILLING',
@@ -287,6 +292,18 @@ export enum AktiviteterValg {
     NEI = 'NEI',
     NA = 'NA'
 }
+
+export const initialStateAktiviteterFiltervalg: AktiviteterFilternokler = {
+    [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
+};
 
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med Nav'},

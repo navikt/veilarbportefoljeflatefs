@@ -11,7 +11,7 @@ import {
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
     UtgattVarselHendelse
-} from '../../model-interfaces';
+} from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
 import {MoteData} from '../../minoversikt/moteplan/moteplan';

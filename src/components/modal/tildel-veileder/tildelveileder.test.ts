@@ -1,4 +1,4 @@
-import {FargekategoriModell, HuskelappModell} from '../../../model-interfaces';
+import {FargekategoriModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {
     harFargekategoriSomVilBliSlettetFilter,
     harHuskelappSomVilBliSlettetFilter,

@@ -19,7 +19,7 @@ import {
 import {usePortefoljeSelector} from '../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
-import {FargekategoriModell} from '../../model-interfaces';
+import {FargekategoriModell} from '../../typer/bruker-modell';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
 import './fargekategori.css';
 

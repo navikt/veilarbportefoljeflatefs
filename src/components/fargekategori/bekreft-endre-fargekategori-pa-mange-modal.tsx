@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {BodyShort, Button, Heading, List, Modal} from '@navikt/ds-react';
-import {FargekategoriModell, Fargekategorinavn} from '../../model-interfaces';
+import {FargekategoriModell} from '../../typer/bruker-modell';
+import {Fargekategorinavn} from '../../model-interfaces';
 import {fargekategoriIkonMapper} from './fargekategori-ikon-mapper';
 import './bekreft-endre-fargekategori-pa-mange-modal.css';
 

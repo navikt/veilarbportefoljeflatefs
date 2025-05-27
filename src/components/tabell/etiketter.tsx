@@ -1,5 +1,5 @@
 import {Tag} from '@navikt/ds-react';
-import {BrukerModell, Profileringsresultat, VurderingsBehov} from '../../model-interfaces';
+import {BrukerModell, Profileringsresultat, VurderingsBehov} from '../../typer/bruker-modell';
 import {hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
