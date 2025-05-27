@@ -7,13 +7,8 @@ import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
-import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
-import {BrukerModell} from '../typer/bruker-modell';
 import './enhetsportefolje.css';
 import './brukerliste.css';
-
-const finnBrukersVeileder = (veiledere: VeilederModell[], bruker: BrukerModell) =>
-    veiledere.find(veileder => veileder.ident === bruker.veilederId);
 
 interface EnhetTabellProps {
     classNameWrapper: string;
@@ -46,7 +41,6 @@ export function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
                                     settMarkert={settMarkert}
                                     filtervalg={filtervalg}
                                     valgteKolonner={listevisning.valgte}
-                                    brukersVeileder={finnBrukersVeileder(veiledere.data.veilederListe, bruker)}
                                     forrigeBruker={forrigeBruker}
                                 />
                             ))}
