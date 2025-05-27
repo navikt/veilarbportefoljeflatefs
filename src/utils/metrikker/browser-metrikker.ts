@@ -10,7 +10,7 @@ import {
     isSafari
 } from 'react-device-detect';
 import {OrNothing} from '../types/types';
-import {VeilederModell} from '../../model-interfaces';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {logEvent} from '../frontend-logger';
 import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 

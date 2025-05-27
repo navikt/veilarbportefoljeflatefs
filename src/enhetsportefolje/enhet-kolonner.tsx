@@ -5,7 +5,8 @@ import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {HovedmalNavn, innsatsgruppeNavn, VeilederModell} from '../model-interfaces';
+import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {

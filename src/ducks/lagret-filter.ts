@@ -1,4 +1,4 @@
-import {VeilederModell} from '../model-interfaces';
+import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 export interface LagretFilter {

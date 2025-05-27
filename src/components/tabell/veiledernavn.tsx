@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {BodyShort, Tag} from '@navikt/ds-react';
-import {VeilederModell} from '../../model-interfaces';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../typer/bruker-modell';
 
 interface VeiledernavnProps {

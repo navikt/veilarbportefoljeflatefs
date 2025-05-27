@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {Button, Radio, RadioGroup} from '@navikt/ds-react';
-import {VeilederModell} from '../../../model-interfaces';
+import {VeilederModell} from '../../../typer/enhet-og-veiledere-modeller';
 
 interface TildelVeilederRendererProps {
     data: VeilederModell[];
