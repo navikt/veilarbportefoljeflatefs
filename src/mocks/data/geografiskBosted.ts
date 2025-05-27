@@ -1,4 +1,6 @@
-export const geografiskBostedListMockData = () => {
+import {GeografiskBosted} from '../../ducks/geografiskBosted';
+
+export const geografiskBostedListMockData = (): GeografiskBosted[] => {
     return [
         {code: '0301', navn: '0301 Oslo'},
         {code: '030103', navn: '030103 Sagene'},
