@@ -24,7 +24,7 @@ export const BarInputRadio = ({
             <Radio
                 className="mine-filter__filternavn"
                 data-testid={testId}
-                key={filterNavn}
+                key={filterVerdi}
                 name="ferdigfilter"
                 onChange={handleChange}
                 value={filterVerdi}
