@@ -3,30 +3,30 @@ import {Label, Radio} from '@navikt/ds-react';
 import './bar.css';
 
 interface BarinputRadioProps {
-    filterNavn: string;
-    handleChange: ChangeEventHandler<HTMLInputElement>;
-    antall: number;
-    labelTekst: string;
     filterVerdi: string;
+    handleChange: ChangeEventHandler<HTMLInputElement>;
+    labelTekst: string;
+    statustall: number;
+    testId?: string;
 }
 
-export const BarInputRadio = ({filterNavn, handleChange, antall, labelTekst, filterVerdi}: BarinputRadioProps) => {
+export const BarInputRadio = ({filterVerdi, handleChange, labelTekst, statustall, testId}: BarinputRadioProps) => {
     return (
         <div className="barinput-radio">
             <Radio
-                className="mine-filter__filternavn"
-                data-testid={`filter_checkboks-container_${filterNavn}`}
-                key={filterNavn}
                 name="ferdigfilter"
-                onChange={handleChange}
                 value={filterVerdi}
+                onChange={handleChange}
+                data-testid={testId}
+                key={filterVerdi}
+                className="mine-filter__filternavn"
                 size="small"
             >
                 {labelTekst}
             </Radio>
-            {(!!antall || antall === 0) && (
+            {(!!statustall || statustall === 0) && (
                 <Label className="barlabel__antall" size="small">
-                    {antall}
+                    {statustall}
                 </Label>
             )}
         </div>
