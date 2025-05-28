@@ -136,32 +136,32 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.trengerOppfolgingsvedtak}
+                        statustall={statustallMedBrukerinnsyn.trengerOppfolgingsvedtak}
                         filterVerdi={TRENGER_OPPFOLGINGSVEDTAK}
                         labelTekst={ferdigfilterListeLabelTekst[TRENGER_OPPFOLGINGSVEDTAK]}
                     />
                     <BarInputRadio
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.underVurdering}
+                        statustall={statustallMedBrukerinnsyn.underVurdering}
                         filterVerdi={UNDER_VURDERING}
                         labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
                     />
                     <BarInputRadio
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
+                        statustall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
                         filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
                         labelTekst={ferdigfilterListeLabelTekst[ER_SYKMELDT_MED_ARBEIDSGIVER]}
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
+                        statustall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={VENTER_PA_SVAR_FRA_NAV}
                         labelTekst={ferdigfilterListeLabelTekst[VENTER_PA_SVAR_FRA_NAV]}
                     />
                     <BarInputRadio
-                        antall={statustallMedBrukerinnsyn.venterPaSvarFraBruker}
+                        statustall={statustallMedBrukerinnsyn.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={VENTER_PA_SVAR_FRA_BRUKER}
                         labelTekst={ferdigfilterListeLabelTekst[VENTER_PA_SVAR_FRA_BRUKER]}
@@ -169,39 +169,39 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                     <BarInputRadio
                         testId="filter_checkboks-container_avtaltMoteMedNav"
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.moterMedNAVIdag}
+                        statustall={statustallMedBrukerinnsyn.moterMedNAVIdag}
                         filterVerdi={MOTER_IDAG}
                         labelTekst={ferdigfilterListeLabelTekst[MOTER_IDAG]}
                     />
                     <BarInputRadio
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.tiltakshendelser}
+                        statustall={statustallMedBrukerinnsyn.tiltakshendelser}
                         filterVerdi={TILTAKSHENDELSER}
                         labelTekst={ferdigfilterListeLabelTekst[TILTAKSHENDELSER]}
                     />
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        antall={statustallMedBrukerinnsyn.utgatteVarsel}
+                        statustall={statustallMedBrukerinnsyn.utgatteVarsel}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={UTGATTE_VARSEL}
                         labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
                     />
                     <BarInputRadio
-                        antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
+                        statustall={statustallMedBrukerinnsyn.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={UTLOPTE_AKTIVITETER}
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
                     />
                     <BarInputRadio
-                        antall={statustallMedBrukerinnsyn.ikkeIavtaltAktivitet}
+                        statustall={statustallMedBrukerinnsyn.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={IKKE_I_AVTALT_AKTIVITET}
                         labelTekst={ferdigfilterListeLabelTekst[IKKE_I_AVTALT_AKTIVITET]}
                     />
                     <BarInputRadio
                         testId="filter_checkboks-container_iavtaltAktivitet"
-                        antall={statustallMedBrukerinnsyn.iavtaltAktivitet}
+                        statustall={statustallMedBrukerinnsyn.iavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={I_AVTALT_AKTIVITET}
                         labelTekst={ferdigfilterListeLabelTekst[I_AVTALT_AKTIVITET]}
@@ -210,7 +210,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
                         handleChange={handleRadioButtonChange}
-                        antall={statustallMedBrukerinnsyn.inaktiveBrukere}
+                        statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
                         filterVerdi={INAKTIVE_BRUKERE}
                         labelTekst={ferdigfilterListeLabelTekst[INAKTIVE_BRUKERE]}
                     />
@@ -218,7 +218,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forste-barlabel-i-gruppe">
                         <BarInputRadio
-                            antall={statustallMedBrukerinnsyn.mineHuskelapper}
+                            statustall={statustallMedBrukerinnsyn.mineHuskelapper}
                             handleChange={handleRadioButtonChange}
                             filterVerdi={MINE_HUSKELAPPER}
                             labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}

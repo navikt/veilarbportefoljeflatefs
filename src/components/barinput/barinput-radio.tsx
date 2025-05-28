@@ -4,13 +4,13 @@ import './bar.css';
 
 interface BarinputRadioProps {
     handleChange: ChangeEventHandler<HTMLInputElement>;
-    antall: number;
+    statustall: number;
     labelTekst: string;
     filterVerdi: string;
     testId?: string;
 }
 
-export const BarInputRadio = ({handleChange, antall, labelTekst, filterVerdi, testId}: BarinputRadioProps) => {
+export const BarInputRadio = ({handleChange, statustall, labelTekst, filterVerdi, testId}: BarinputRadioProps) => {
     return (
         <div className="barinput-radio">
             <Radio
@@ -24,9 +24,9 @@ export const BarInputRadio = ({handleChange, antall, labelTekst, filterVerdi, te
             >
                 {labelTekst}
             </Radio>
-            {(!!antall || antall === 0) && (
+            {(!!statustall || statustall === 0) && (
                 <Label className="barlabel__antall" size="small">
-                    {antall}
+                    {statustall}
                 </Label>
             )}
         </div>
