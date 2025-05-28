@@ -135,21 +135,18 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
             >
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        testId="filter_checkboks-container_trengerOppfolgingsvedtak"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.trengerOppfolgingsvedtak}
                         filterVerdi={TRENGER_OPPFOLGINGSVEDTAK}
                         labelTekst={ferdigfilterListeLabelTekst[TRENGER_OPPFOLGINGSVEDTAK]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_underVurdering"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.underVurdering}
                         filterVerdi={UNDER_VURDERING}
                         labelTekst={ferdigfilterListeLabelTekst[UNDER_VURDERING]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_erSykmeldtMedArbeidsgiver"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.erSykmeldtMedArbeidsgiver}
                         filterVerdi={ER_SYKMELDT_MED_ARBEIDSGIVER}
@@ -158,14 +155,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        testId="filter_checkboks-container_venterPaSvarFraNAV"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraNAV}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={VENTER_PA_SVAR_FRA_NAV}
                         labelTekst={ferdigfilterListeLabelTekst[VENTER_PA_SVAR_FRA_NAV]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_venterPaSvarFraBruker"
                         antall={statustallMedBrukerinnsyn.venterPaSvarFraBruker}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={VENTER_PA_SVAR_FRA_BRUKER}
@@ -179,7 +174,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[MOTER_IDAG]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_tiltakshendelse"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.tiltakshendelser}
                         filterVerdi={TILTAKSHENDELSER}
@@ -188,21 +182,18 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        testId="filter_checkboks-container_utgatteVarsel"
                         antall={statustallMedBrukerinnsyn.utgatteVarsel}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={UTGATTE_VARSEL}
                         labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_utlopteAktiviteter"
                         antall={statustallMedBrukerinnsyn.utlopteAktiviteter}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={UTLOPTE_AKTIVITETER}
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
                     />
                     <BarInputRadio
-                        testId="filter_checkboks-container_ikkeIavtaltAktivitet"
                         antall={statustallMedBrukerinnsyn.ikkeIavtaltAktivitet}
                         handleChange={handleRadioButtonChange}
                         filterVerdi={IKKE_I_AVTALT_AKTIVITET}
@@ -218,7 +209,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 </div>
                 <div className="forste-barlabel-i-gruppe">
                     <BarInputRadio
-                        testId="filter_checkboks-container_inaktiveBrukere"
                         handleChange={handleRadioButtonChange}
                         antall={statustallMedBrukerinnsyn.inaktiveBrukere}
                         filterVerdi={INAKTIVE_BRUKERE}
@@ -228,7 +218,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                 {oversiktType === OversiktType.minOversikt && (
                     <div className="forste-barlabel-i-gruppe">
                         <BarInputRadio
-                            testId="filter_checkboks-container_huskelapp"
                             antall={statustallMedBrukerinnsyn.mineHuskelapper}
                             handleChange={handleRadioButtonChange}
                             filterVerdi={MINE_HUSKELAPPER}

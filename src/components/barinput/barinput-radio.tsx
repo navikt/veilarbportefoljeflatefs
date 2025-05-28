@@ -7,7 +7,7 @@ interface BarinputRadioProps {
     antall: number;
     labelTekst: string;
     filterVerdi: string;
-    testId: string;
+    testId?: string;
 }
 
 export const BarInputRadio = ({handleChange, antall, labelTekst, filterVerdi, testId}: BarinputRadioProps) => {
