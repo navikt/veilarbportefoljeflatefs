@@ -2,6 +2,14 @@ import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './
 import {KategoriModell} from './arbeidsliste';
 import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
 
+export const FiltervalgModellNokler: Record<string, FiltervalgModellProperty> = {
+    FERDIGFILTERLISTE: 'ferdigfilterListe',
+    NYE_BRUKERE_FOR_VEILEDER: 'nyeBrukereForVeileder',
+    KATEGORI: 'arbeidslisteKategori'
+} as const;
+
+export type FiltervalgModellProperty = keyof FiltervalgModell;
+
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
  * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
@@ -13,8 +21,8 @@ import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
 export interface FiltervalgModell {
     ferdigfilterListe: string[];
     nyeBrukereForVeileder?: boolean;
-    inaktiveBrukere?: boolean;
-    venterPaSvarFraNAV?: boolean;
+    inaktiveBrukere?: boolean; // Ikkje i bruk? Verdien blir satt i ferdigfilterListe
+    venterPaSvarFraNAV?: boolean; // Ikkje i bruk? Verdien blir satt i ferdigfilterListe
     venterPaSvarFraBruker?: boolean;
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];

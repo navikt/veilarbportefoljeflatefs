@@ -11,7 +11,7 @@ import {
     MINE_FARGEKATEGORIER
 } from './filter-konstanter';
 import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {FiltervalgModell, FiltervalgModellNokler} from '../typer/filtervalg-modell';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
@@ -368,7 +368,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             ) {
                 dispatch(
                     endreFiltervalg(
-                        'ferdigfilterListe',
+                        FiltervalgModellNokler.FERDIGFILTERLISTE,
                         ownProps.filtervalg.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER),
                         ownProps.oversiktType as OversiktType
                     )
