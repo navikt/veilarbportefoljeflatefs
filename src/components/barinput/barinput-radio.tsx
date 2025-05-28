@@ -8,14 +8,22 @@ interface BarinputRadioProps {
     antall: number;
     labelTekst: string;
     filterVerdi: string;
+    testId: string;
 }
 
-export const BarInputRadio = ({filterNavn, handleChange, antall, labelTekst, filterVerdi}: BarinputRadioProps) => {
+export const BarInputRadio = ({
+    filterNavn,
+    handleChange,
+    antall,
+    labelTekst,
+    filterVerdi,
+    testId
+}: BarinputRadioProps) => {
     return (
         <div className="barinput-radio">
             <Radio
                 className="mine-filter__filternavn"
-                data-testid={`filter_checkboks-container_${filterNavn}`}
+                data-testid={testId}
                 key={filterNavn}
                 name="ferdigfilter"
                 onChange={handleChange}
