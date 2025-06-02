@@ -12,17 +12,17 @@ import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     ferdigfilterListe: string[];
-    nyeBrukereForVeileder?: boolean;
-    inaktiveBrukere?: boolean;
-    venterPaSvarFraNAV?: boolean;
-    venterPaSvarFraBruker?: boolean;
+    nyeBrukereForVeileder?: boolean; // Dette filteret finst berre her
+    inaktiveBrukere?: boolean; // Dette filteret finst berre her
+    venterPaSvarFraNAV?: boolean; // Dette filteret finst berre her
+    venterPaSvarFraBruker?: boolean; // Dette filteret finst berre her
     arbeidslisteKategori: KategoriModell[];
     alder?: string[];
     kjonn?: null | string;
     landgruppe: string[];
     foedeland: string[];
     fodselsdagIMnd?: string[];
-    innsatsgruppe?: string[];
+    innsatsgruppe?: string[]; // Arena-innsatsgruppe
     formidlingsgruppe?: string[];
     servicegruppe?: string[];
     veiledere: string[];
@@ -30,11 +30,11 @@ export interface FiltervalgModell {
     aktiviteter?: AktiviteterFilternokler;
     aktiviteterForenklet: string[];
     tiltakstyper: string[];
-    hovedmal?: string[];
+    hovedmal?: string[]; // Arena-hovedmål
     navnEllerFnrQuery: string;
     rettighetsgruppe?: string[];
     manuellBrukerStatus?: string[];
-    veilederNavnQuery: string;
+    veilederNavnQuery: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
     registreringstype: string[];
     cvJobbprofil: null | string;
     utdanning: string[];
@@ -46,7 +46,7 @@ export interface FiltervalgModell {
     tolkBehovSpraak: string[];
     stillingFraNavFilter: string[];
     geografiskBosted: string[];
-    visGeografiskBosted: string[];
+    visGeografiskBosted: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
     avvik14aVedtak: string[];
     ensligeForsorgere: string[];
     barnUnder18Aar: string[];
