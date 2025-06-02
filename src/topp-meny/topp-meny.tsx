@@ -45,12 +45,7 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
             {oversiktType === OversiktType.minOversikt && enhet && (
                 <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
             )}
-            <Endringslogg
-                userId={innloggetVeileder.data?.ident!}
-                appId="afolg"
-                backendUrl={getEndringsloggUrl()}
-                appName="Arbeidsrettet oppfølging"
-            />
+            <Endringslogg userId={innloggetVeileder.data?.ident!} backendUrl={getEndringsloggUrl()} />
         </div>
     );
 }

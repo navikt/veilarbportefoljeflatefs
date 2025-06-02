@@ -12,17 +12,10 @@ interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];
     onOpen: () => void;
     onClose: () => void;
-    appName: string;
     errorMessage?: string;
 }
 
-export const EndringsloggContainer = ({
-    content,
-    onOpen,
-    onClose,
-    appName,
-    errorMessage
-}: EndringsloggContainerProps) => {
+export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const overordnetNotifikasjon = content.some(element => !element.seen);
 
@@ -81,11 +74,10 @@ export const EndringsloggContainer = ({
                 open={endringsloggApen}
                 newNotifications={overordnetNotifikasjon}
                 buttonRef={buttonRef}
-                name={appName}
             />
             <TransitionContainer visible={endringsloggApen}>
                 <Heading size="small" level="1" className={'collapse-header'}>
-                    Nytt i {appName}
+                    Nytt i Arbeidsrettet oppfølging
                 </Heading>
                 <div className={'innhold-container'} data-testid="endringslogg-innhold">
                     <EndringsloggContent innleggsListe={content} />
@@ -101,13 +93,12 @@ interface EndringsloggIconButtonProps {
     open: boolean;
     newNotifications: boolean;
     onClick: (e?: any) => void;
-    name: string;
 }
 
-const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick, name}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: EndringsloggIconButtonProps) => {
     return (
         <button
-            aria-label={`Endringslogg for ${name}`}
+            aria-label={`Endringslogg for Arbeidsrettet oppfølging`}
             ref={buttonRef}
             className={classNames(
                 'endringslogg-knapp',

@@ -12,15 +12,14 @@ import {useTimer} from './hooks/use-timer';
 import {TourModal} from './tour-modal/tour-modal';
 
 const MAX_ENTRIES = 50;
+const APP_ID_FOR_ENDRINGSLOGG = 'afolg';
 
 interface EndringsloggProps {
     userId: string;
-    appId: string;
     backendUrl: string;
-    appName?: string;
 }
 
-export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, appName}: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = ({userId, backendUrl}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
@@ -32,7 +31,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
             setLoadData(false);
             setErrorMessage('');
             setBackendUrl(backendUrl);
-            hentEndringsLoggEntries(userId, appId, 'production', MAX_ENTRIES).then(response =>
+            hentEndringsLoggEntries(userId, APP_ID_FOR_ENDRINGSLOGG, 'production', MAX_ENTRIES).then(response =>
                 response
                     .json()
                     .then((jsonResponse: any) => {
@@ -45,7 +44,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
                     })
             );
         }
-    }, [backendUrl, userId, appId, loadData]);
+    }, [backendUrl, userId, loadData]);
 
     useEffect(() => {
         fetchData();
@@ -53,7 +52,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
 
     const onClose = () => {
         const ulesteFelter = endringsloggEntries.filter(endringsloggEntry => !endringsloggEntry.seen);
-        trackSessionDuration(userId, appId, stopTimer(), ulesteFelter.length);
+        trackSessionDuration(userId, APP_ID_FOR_ENDRINGSLOGG, stopTimer(), ulesteFelter.length);
         if (ulesteFelter.length > 0) {
             const newList = setAllEntriesSeen(endringsloggEntries);
             setEndringsloggEntries(newList);
@@ -66,7 +65,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
         if (ulesteFelter.length > 0) {
             trackSeenStatus(
                 userId,
-                appId,
+                APP_ID_FOR_ENDRINGSLOGG,
                 ulesteFelter.map(entry => entry._id)
             );
         }
@@ -83,7 +82,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
                 content={endringsloggEntries}
                 onClose={onClose}
                 onOpen={onOpen}
-                appName={appName ?? appId}
                 errorMessage={errorMessage}
             />
             {forcedEndringsloggEntries.length > 0 && (
