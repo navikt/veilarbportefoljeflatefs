@@ -7,7 +7,6 @@ import {STATUS} from '../ducks/utils';
 import {DarkModeToggle} from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
-import {getEndringsloggUrl} from '../utils/url-utils';
 import {Moteplan} from '../minoversikt/moteplan/moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
@@ -45,7 +44,7 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
             {oversiktType === OversiktType.minOversikt && enhet && (
                 <Moteplan veileder={gjeldendeVeileder} enhet={enhet} />
             )}
-            <Endringslogg userId={innloggetVeileder.data?.ident!} backendUrl={getEndringsloggUrl()} />
+            <Endringslogg userId={innloggetVeileder.data?.ident!} />
         </div>
     );
 }

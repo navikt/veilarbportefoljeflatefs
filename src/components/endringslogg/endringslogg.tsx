@@ -10,21 +10,23 @@ import {
 } from './utils/utils';
 import {useTimer} from './hooks/use-timer';
 import {TourModal} from './tour-modal/tour-modal';
+import {getEndringsloggUrl} from '../../utils/url-utils';
 
 const MAX_ENTRIES = 50;
 const APP_ID_FOR_ENDRINGSLOGG = 'afolg';
 
 interface EndringsloggProps {
     userId: string;
-    backendUrl: string;
 }
 
-export const Endringslogg: FC<EndringsloggProps> = ({userId, backendUrl}: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [forcedEndringsloggEntries, setForcedEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
+
+    const backendUrl = getEndringsloggUrl();
 
     const fetchData = useCallback(() => {
         if (loadData) {
