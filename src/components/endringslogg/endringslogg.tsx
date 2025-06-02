@@ -19,7 +19,6 @@ interface EndringsloggProps {
     appId: string;
     backendUrl: string;
     stil?: StilType;
-    dataset?: string;
     dataFetchingIntervalSeconds?: number;
     appName?: string;
     localData?: EndringsloggEntryWithSeenStatus[];
@@ -30,7 +29,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({
     appId,
     backendUrl,
     stil,
-    dataset,
     dataFetchingIntervalSeconds,
     appName,
     localData
@@ -47,7 +45,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({
             setErrorMessage('');
             if (!localData) {
                 setBackendUrl(backendUrl);
-                hentEndringsLoggEntries(userId, appId, dataset ?? 'production', DEFAULT_MAX_ENTRIES).then(response =>
+                hentEndringsLoggEntries(userId, appId, 'production', DEFAULT_MAX_ENTRIES).then(response =>
                     response
                         .json()
                         .then((jsonResponse: any) => {
@@ -64,7 +62,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({
                 setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
             }
         }
-    }, [localData, backendUrl, userId, appId, dataset, loadData, endringsloggEntries]);
+    }, [localData, backendUrl, userId, appId, loadData, endringsloggEntries]);
 
     useEffect(() => {
         fetchData();
