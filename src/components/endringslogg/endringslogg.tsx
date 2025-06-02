@@ -20,17 +20,9 @@ interface EndringsloggProps {
     backendUrl: string;
     stil?: StilType;
     appName?: string;
-    localData?: EndringsloggEntryWithSeenStatus[];
 }
 
-export const Endringslogg: FC<EndringsloggProps> = ({
-    userId,
-    appId,
-    backendUrl,
-    stil,
-    appName,
-    localData
-}: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, stil, appName}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
@@ -41,26 +33,21 @@ export const Endringslogg: FC<EndringsloggProps> = ({
         if (loadData) {
             setLoadData(false);
             setErrorMessage('');
-            if (!localData) {
-                setBackendUrl(backendUrl);
-                hentEndringsLoggEntries(userId, appId, 'production', DEFAULT_MAX_ENTRIES).then(response =>
-                    response
-                        .json()
-                        .then((jsonResponse: any) => {
-                            const entries = mapRemoteToState(jsonResponse);
-                            setEndringsloggEntries(entries);
-                            setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
-                        })
-                        .catch(() => {
-                            setErrorMessage('Kunne ikke hente data for endringslogg');
-                        })
-                );
-            } else {
-                setEndringsloggEntries(localData);
-                setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
-            }
+            setBackendUrl(backendUrl);
+            hentEndringsLoggEntries(userId, appId, 'production', DEFAULT_MAX_ENTRIES).then(response =>
+                response
+                    .json()
+                    .then((jsonResponse: any) => {
+                        const entries = mapRemoteToState(jsonResponse);
+                        setEndringsloggEntries(entries);
+                        setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
+                    })
+                    .catch(() => {
+                        setErrorMessage('Kunne ikke hente data for endringslogg');
+                    })
+            );
         }
-    }, [localData, backendUrl, userId, appId, loadData, endringsloggEntries]);
+    }, [backendUrl, userId, appId, loadData]);
 
     useEffect(() => {
         fetchData();
