@@ -12,7 +12,7 @@ import {useTimer} from './hooks/use-timer';
 import {TourModal} from './tour-modal/tour-modal';
 import {StilType} from './icons/endringslogg-icon';
 
-const DEFAULT_MAX_ENTRIES = 50;
+const MAX_ENTRIES = 50;
 
 interface EndringsloggProps {
     userId: string;
@@ -34,7 +34,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
             setLoadData(false);
             setErrorMessage('');
             setBackendUrl(backendUrl);
-            hentEndringsLoggEntries(userId, appId, 'production', DEFAULT_MAX_ENTRIES).then(response =>
+            hentEndringsLoggEntries(userId, appId, 'production', MAX_ENTRIES).then(response =>
                 response
                     .json()
                     .then((jsonResponse: any) => {
