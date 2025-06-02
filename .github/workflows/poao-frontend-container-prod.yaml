@@ -18,6 +18,8 @@ env:
 
 jobs:
   deploy-prod:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
