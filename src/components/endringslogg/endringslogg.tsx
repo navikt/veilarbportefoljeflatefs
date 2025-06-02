@@ -27,7 +27,18 @@ interface EndringsloggProps {
     localData?: EndringsloggEntryWithSeenStatus[];
 }
 
-export const Endringslogg: FC<EndringsloggProps> = (props: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = ({
+    userId,
+    appId,
+    backendUrl,
+    stil,
+    dataset,
+    maxEntries,
+    dataFetchingIntervalSeconds,
+    appName,
+    alignLeft,
+    localData
+}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
@@ -38,45 +49,43 @@ export const Endringslogg: FC<EndringsloggProps> = (props: EndringsloggProps) =>
         if (loadData) {
             setLoadData(false);
             setErrorMessage('');
-            if (!props.localData) {
-                setBackendUrl(props.backendUrl);
-                hentEndringsLoggEntries(
-                    props.userId,
-                    props.appId,
-                    props.dataset ?? 'production',
-                    props.maxEntries ?? DEFAULT_MAX_ENTRIES
-                ).then(response =>
-                    response
-                        .json()
-                        .then((jsonResponse: any) => {
-                            const entries = mapRemoteToState(jsonResponse);
-                            setEndringsloggEntries(entries);
-                            setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
-                        })
-                        .catch(() => {
-                            setErrorMessage('Kunne ikke hente data for endringslogg');
-                        })
+            if (!localData) {
+                setBackendUrl(backendUrl);
+                hentEndringsLoggEntries(userId, appId, dataset ?? 'production', maxEntries ?? DEFAULT_MAX_ENTRIES).then(
+                    response =>
+                        response
+                            .json()
+                            .then((jsonResponse: any) => {
+                                const entries = mapRemoteToState(jsonResponse);
+                                setEndringsloggEntries(entries);
+                                setForcedEndringsloggEntries(
+                                    entries.filter(entry => entry.forced && !entry.seenForced)
+                                );
+                            })
+                            .catch(() => {
+                                setErrorMessage('Kunne ikke hente data for endringslogg');
+                            })
                 );
             } else {
-                setEndringsloggEntries(props.localData);
+                setEndringsloggEntries(localData);
                 setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
             }
         }
-    }, [props, loadData, endringsloggEntries]);
+    }, [localData, backendUrl, userId, appId, dataset, maxEntries, loadData, endringsloggEntries]);
 
     useEffect(() => {
         fetchData();
-        if (props.dataFetchingIntervalSeconds) {
+        if (dataFetchingIntervalSeconds) {
             const interval = setInterval(() => {
                 setLoadData(true);
-            }, 1000 * props.dataFetchingIntervalSeconds);
+            }, 1000 * dataFetchingIntervalSeconds);
             return () => clearInterval(interval);
         }
-    }, [props.appId, props.dataFetchingIntervalSeconds, fetchData]);
+    }, [appId, dataFetchingIntervalSeconds, fetchData]);
 
     const onClose = () => {
         const ulesteFelter = endringsloggEntries.filter(endringsloggEntry => !endringsloggEntry.seen);
-        trackSessionDuration(props.userId, props.appId, stopTimer(), ulesteFelter.length);
+        trackSessionDuration(userId, appId, stopTimer(), ulesteFelter.length);
         if (ulesteFelter.length > 0) {
             const newList = setAllEntriesSeen(endringsloggEntries);
             setEndringsloggEntries(newList);
@@ -88,15 +97,15 @@ export const Endringslogg: FC<EndringsloggProps> = (props: EndringsloggProps) =>
         const ulesteFelter = endringsloggEntries.filter(endringsloggEntry => !endringsloggEntry.seen);
         if (ulesteFelter.length > 0) {
             trackSeenStatus(
-                props.userId,
-                props.appId,
+                userId,
+                appId,
                 ulesteFelter.map(entry => entry._id)
             );
         }
     };
 
     const onCloseForcedModal = () => {
-        trackSeenForcedModal(props.userId, [forcedEndringsloggEntries[forcedEndringsloggEntries.length - 1]._id]);
+        trackSeenForcedModal(userId, [forcedEndringsloggEntries[forcedEndringsloggEntries.length - 1]._id]);
         setForcedEndringsloggEntries(forcedEndringsloggEntries.slice(0, -1));
     };
 
@@ -106,9 +115,9 @@ export const Endringslogg: FC<EndringsloggProps> = (props: EndringsloggProps) =>
                 content={endringsloggEntries}
                 onClose={onClose}
                 onOpen={onOpen}
-                stil={props.stil}
-                appName={props.appName ?? props.appId}
-                alignLeft={props.alignLeft}
+                stil={stil}
+                appName={appName ?? appId}
+                alignLeft={alignLeft}
                 errorMessage={errorMessage}
             />
             {forcedEndringsloggEntries.length > 0 && (
