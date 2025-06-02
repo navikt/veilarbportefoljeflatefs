@@ -1,7 +1,7 @@
 import {RefObject, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {Heading, Label} from '@navikt/ds-react';
-import {EndringsloggIkon, StilType} from './icons/endringslogg-icon';
+import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
 import {TransitionContainer} from './transition-container';
 import {useEventListener} from './hooks/use-event-listener';
@@ -13,7 +13,6 @@ interface EndringsloggContainerProps {
     onOpen: () => void;
     onClose: () => void;
     appName: string;
-    stil?: StilType;
     errorMessage?: string;
 }
 
@@ -22,7 +21,6 @@ export const EndringsloggContainer = ({
     onOpen,
     onClose,
     appName,
-    stil,
     errorMessage
 }: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
@@ -84,7 +82,6 @@ export const EndringsloggContainer = ({
                 newNotifications={overordnetNotifikasjon}
                 buttonRef={buttonRef}
                 name={appName}
-                stil={stil}
             />
             <TransitionContainer visible={endringsloggApen}>
                 <Heading size="small" level="1" className={'collapse-header'}>
@@ -105,17 +102,9 @@ interface EndringsloggIconButtonProps {
     newNotifications: boolean;
     onClick: (e?: any) => void;
     name: string;
-    stil?: StilType;
 }
 
-const EndringsloggIconButton = ({
-    buttonRef,
-    open,
-    newNotifications,
-    onClick,
-    name,
-    stil
-}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick, name}: EndringsloggIconButtonProps) => {
     return (
         <button
             aria-label={`Endringslogg for ${name}`}
@@ -128,7 +117,7 @@ const EndringsloggIconButton = ({
             onClick={onClick}
             data-testid="endringslogg-knapp"
         >
-            <EndringsloggIkon stil={stil} />
+            <EndringsloggIkon />
             {newNotifications && (
                 <div className={'ring-container'}>
                     <div className={'ringring'} />

@@ -10,7 +10,6 @@ import {
 } from './utils/utils';
 import {useTimer} from './hooks/use-timer';
 import {TourModal} from './tour-modal/tour-modal';
-import {StilType} from './icons/endringslogg-icon';
 
 const MAX_ENTRIES = 50;
 
@@ -18,11 +17,10 @@ interface EndringsloggProps {
     userId: string;
     appId: string;
     backendUrl: string;
-    stil?: StilType;
     appName?: string;
 }
 
-export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, stil, appName}: EndringsloggProps) => {
+export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, appName}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
     const [loadData, setLoadData] = useState(true);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
@@ -85,7 +83,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId, appId, backendUrl, 
                 content={endringsloggEntries}
                 onClose={onClose}
                 onOpen={onOpen}
-                stil={stil}
                 appName={appName ?? appId}
                 errorMessage={errorMessage}
             />
