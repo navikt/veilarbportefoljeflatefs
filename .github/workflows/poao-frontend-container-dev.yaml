@@ -19,6 +19,8 @@ env:
 
 jobs:
   deploy-dev:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:

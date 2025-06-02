@@ -1,2 +1,0 @@
-not dependabot: # Slack godtar ikke understrek i labelnavn
-    - head-branch: ['^(?!dependabot).*'] # Branch does not start with dependabot
