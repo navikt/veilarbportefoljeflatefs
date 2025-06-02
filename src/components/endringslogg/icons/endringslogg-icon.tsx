@@ -1,22 +1,7 @@
-import {FC} from 'react';
-
-interface Props {
-    className?: string;
-    height?: string;
-    width?: string;
-}
-
 const ikonfarge = '--a-gray-800';
 
-export const EndringsloggIkon: FC<Props> = ({className, height, width}) => (
-    <svg
-        data-name="Layer 1"
-        className={className}
-        height={height || '40'}
-        width={width || '40'}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 32 32"
-    >
+export const EndringsloggIkon = () => (
+    <svg data-name="Layer 1" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
         <title>{'Nytt i saksbehandlingsløsningen'}</title>
         <path
             d="M28 3.79a3.93 3.93 0 0 1 4 4v14a3.92 3.92 0 0 1-4 4H17.08v2h5.06a1.07 1.07 0 1 1 0 2.13h-12a1.07 1.07 0 1 1 0-2.13h5.06v-2H4a3.92 3.92 0 0 1-4-4v-5.93a1 1 0 0 1 1-1.2 1.17 1.17 0 0 1 1 1.2v3.92h28v-12a2.05 2.05 0 0 0-2-2H15.21a1.07 1.07 0 0 1 0-2.13Zm0 20a2 2 0 0 0 2-2H2a2 2 0 0 0 2 2Z"
