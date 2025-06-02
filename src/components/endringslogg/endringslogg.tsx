@@ -19,7 +19,6 @@ interface EndringsloggProps {
     appId: string;
     backendUrl: string;
     stil?: StilType;
-    dataFetchingIntervalSeconds?: number;
     appName?: string;
     localData?: EndringsloggEntryWithSeenStatus[];
 }
@@ -29,7 +28,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({
     appId,
     backendUrl,
     stil,
-    dataFetchingIntervalSeconds,
     appName,
     localData
 }: EndringsloggProps) => {
@@ -66,13 +64,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({
 
     useEffect(() => {
         fetchData();
-        if (dataFetchingIntervalSeconds) {
-            const interval = setInterval(() => {
-                setLoadData(true);
-            }, 1000 * dataFetchingIntervalSeconds);
-            return () => clearInterval(interval);
-        }
-    }, [appId, dataFetchingIntervalSeconds, fetchData]);
+    }, [fetchData]);
 
     const onClose = () => {
         const ulesteFelter = endringsloggEntries.filter(endringsloggEntry => !endringsloggEntry.seen);
