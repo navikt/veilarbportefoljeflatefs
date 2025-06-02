@@ -20,7 +20,6 @@ interface EndringsloggProps {
     backendUrl: string;
     stil?: StilType;
     dataset?: string;
-    maxEntries?: number;
     dataFetchingIntervalSeconds?: number;
     appName?: string;
     localData?: EndringsloggEntryWithSeenStatus[];
@@ -32,7 +31,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({
     backendUrl,
     stil,
     dataset,
-    maxEntries,
     dataFetchingIntervalSeconds,
     appName,
     localData
@@ -49,27 +47,24 @@ export const Endringslogg: FC<EndringsloggProps> = ({
             setErrorMessage('');
             if (!localData) {
                 setBackendUrl(backendUrl);
-                hentEndringsLoggEntries(userId, appId, dataset ?? 'production', maxEntries ?? DEFAULT_MAX_ENTRIES).then(
-                    response =>
-                        response
-                            .json()
-                            .then((jsonResponse: any) => {
-                                const entries = mapRemoteToState(jsonResponse);
-                                setEndringsloggEntries(entries);
-                                setForcedEndringsloggEntries(
-                                    entries.filter(entry => entry.forced && !entry.seenForced)
-                                );
-                            })
-                            .catch(() => {
-                                setErrorMessage('Kunne ikke hente data for endringslogg');
-                            })
+                hentEndringsLoggEntries(userId, appId, dataset ?? 'production', DEFAULT_MAX_ENTRIES).then(response =>
+                    response
+                        .json()
+                        .then((jsonResponse: any) => {
+                            const entries = mapRemoteToState(jsonResponse);
+                            setEndringsloggEntries(entries);
+                            setForcedEndringsloggEntries(entries.filter(entry => entry.forced && !entry.seenForced));
+                        })
+                        .catch(() => {
+                            setErrorMessage('Kunne ikke hente data for endringslogg');
+                        })
                 );
             } else {
                 setEndringsloggEntries(localData);
                 setForcedEndringsloggEntries(endringsloggEntries.filter(entry => entry.forced && !entry.seenForced));
             }
         }
-    }, [localData, backendUrl, userId, appId, dataset, maxEntries, loadData, endringsloggEntries]);
+    }, [localData, backendUrl, userId, appId, dataset, loadData, endringsloggEntries]);
 
     useEffect(() => {
         fetchData();
