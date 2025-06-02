@@ -23,7 +23,6 @@ interface EndringsloggProps {
     maxEntries?: number;
     dataFetchingIntervalSeconds?: number;
     appName?: string;
-    alignLeft?: boolean;
     localData?: EndringsloggEntryWithSeenStatus[];
 }
 
@@ -36,7 +35,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({
     maxEntries,
     dataFetchingIntervalSeconds,
     appName,
-    alignLeft,
     localData
 }: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
@@ -117,7 +115,6 @@ export const Endringslogg: FC<EndringsloggProps> = ({
                 onOpen={onOpen}
                 stil={stil}
                 appName={appName ?? appId}
-                alignLeft={alignLeft}
                 errorMessage={errorMessage}
             />
             {forcedEndringsloggEntries.length > 0 && (

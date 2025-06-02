@@ -1,6 +1,6 @@
 import {RefObject, useRef, useState} from 'react';
 import classNames from 'classnames';
-import {Label, Heading} from '@navikt/ds-react';
+import {Heading, Label} from '@navikt/ds-react';
 import {EndringsloggIkon, StilType} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
 import {TransitionContainer} from './transition-container';
@@ -14,7 +14,6 @@ interface EndringsloggContainerProps {
     onClose: () => void;
     appName: string;
     stil?: StilType;
-    alignLeft?: boolean;
     errorMessage?: string;
 }
 
@@ -24,7 +23,6 @@ export const EndringsloggContainer = ({
     onClose,
     appName,
     stil,
-    alignLeft,
     errorMessage
 }: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
@@ -88,7 +86,7 @@ export const EndringsloggContainer = ({
                 name={appName}
                 stil={stil}
             />
-            <TransitionContainer visible={endringsloggApen} alignLeft={alignLeft}>
+            <TransitionContainer visible={endringsloggApen}>
                 <Heading size="small" level="1" className={'collapse-header'}>
                     Nytt i {appName}
                 </Heading>

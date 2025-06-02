@@ -50,7 +50,6 @@ export function ToppMeny({erPaloggetVeileder = false, oversiktType}: Props) {
                 appId="afolg"
                 backendUrl={getEndringsloggUrl()}
                 appName="Arbeidsrettet oppfølging"
-                alignLeft
             />
         </div>
     );
