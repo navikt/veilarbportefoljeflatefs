@@ -291,9 +291,11 @@ function lagBruker(sikkerhetstiltak = []) {
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedSistOppdatert: randomDate({past: true}),
-        talespraaktolk: hentSpraak(),
-        tegnspraaktolk: hentSpraak(),
-        tolkBehovSistOppdatert: randomDate({past: true}),
+        tolkebehov: {
+            talespraaktolk: hentSpraak(),
+            tegnspraaktolk: hentSpraak(),
+            sistOppdatert: randomDate({past: true})
+        },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
