@@ -9,7 +9,7 @@ export const hentEndringsLoggEntries = async (
 ): Promise<Response> =>
     fetch(`${backendUrl}/endringslogg`, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -19,7 +19,7 @@ export const hentEndringsLoggEntries = async (
 export const trackSeenStatus = async (userId: string, appId: string, documentIds: string[]): Promise<Response> =>
     fetch(`${backendUrl}/analytics/sett-endringer`, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -29,7 +29,7 @@ export const trackSeenStatus = async (userId: string, appId: string, documentIds
 export const trackSeenForcedModal = async (userId: string, documentIds: string[]): Promise<Response> =>
     fetch(`${backendUrl}/analytics/seen-forced-modal`, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -44,7 +44,7 @@ export const trackSessionDuration = async (
 ): Promise<Response> =>
     fetch(`${backendUrl}/analytics/session-duration`, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -54,7 +54,7 @@ export const trackSessionDuration = async (
 export const trackLinkClick = async (documentId: string): Promise<Response> =>
     fetch(`${backendUrl}/analytics/link-click`, {
         method: 'PATCH',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -64,7 +64,7 @@ export const trackLinkClick = async (documentId: string): Promise<Response> =>
 export const trackModalOpen = async (documentId: string): Promise<Response> =>
     fetch(`${backendUrl}/analytics/modal-open`, {
         method: 'PATCH',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
