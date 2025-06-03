@@ -68,7 +68,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
     useEventListener('keydown', escHandler);
 
     return (
-        <div ref={loggNode} className={'endringslogg'}>
+        <div ref={loggNode} className="endringslogg">
             <EndringsloggIconButton
                 onClick={click}
                 open={endringsloggApen}
@@ -76,10 +76,10 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
                 buttonRef={buttonRef}
             />
             <TransitionContainer visible={endringsloggApen}>
-                <Heading size="small" level="1" className={'collapse-header'}>
+                <Heading size="small" level="1" className="collapse-header">
                     Nytt i Arbeidsrettet oppfølging
                 </Heading>
-                <div className={'innhold-container'} data-testid="endringslogg-innhold">
+                <div className="innhold-container" data-testid="endringslogg-innhold">
                     <EndringsloggContent innleggsListe={content} />
                     {errorMessage && <Label>{errorMessage}</Label>}
                 </div>
@@ -98,7 +98,7 @@ interface EndringsloggIconButtonProps {
 const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: EndringsloggIconButtonProps) => {
     return (
         <button
-            aria-label={`Endringslogg for Arbeidsrettet oppfølging`}
+            aria-label="Endringslogg for Arbeidsrettet oppfølging"
             ref={buttonRef}
             className={classNames(
                 'endringslogg-knapp',
@@ -110,9 +110,9 @@ const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: En
         >
             <EndringsloggIkon />
             {newNotifications && (
-                <div className={'ring-container'}>
-                    <div className={'ringring'} />
-                    <div className={'circle'} data-testid="endringslogg_nye-notifikasjoner" />
+                <div className="ring-container">
+                    <div className="ringring" />
+                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
                 </div>
             )}
         </button>

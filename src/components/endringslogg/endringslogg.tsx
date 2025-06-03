@@ -27,6 +27,8 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps)
     const [forcedEndringsloggEntries, setForcedEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
 
     const backendUrl = getEndringsloggUrl();
+    const finnSisteForcedEndringsloggEntry = () =>
+        forcedEndringsloggEntries[forcedEndringsloggEntries.length - 1].modal!; // Vi bruker "!" fordi det alltid vil finnast element i lista der funksjonen blir kalla.
 
     const fetchData = useCallback(() => {
         if (loadData) {
@@ -89,7 +91,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps)
             {forcedEndringsloggEntries.length > 0 && (
                 <TourModal
                     open={true}
-                    modal={forcedEndringsloggEntries[forcedEndringsloggEntries.length - 1].modal!}
+                    modal={finnSisteForcedEndringsloggEntry()}
                     onClose={() => onCloseForcedModal()}
                 />
             )}
