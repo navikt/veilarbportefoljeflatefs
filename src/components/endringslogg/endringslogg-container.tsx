@@ -1,7 +1,7 @@
 import {RefObject, useRef, useState} from 'react';
 import classNames from 'classnames';
-import {Label, Heading} from '@navikt/ds-react';
-import {EndringsloggIkon, StilType} from './icons/endringslogg-icon';
+import {Heading, Label} from '@navikt/ds-react';
+import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
 import {TransitionContainer} from './transition-container';
 import {useEventListener} from './hooks/use-event-listener';
@@ -12,21 +12,10 @@ interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];
     onOpen: () => void;
     onClose: () => void;
-    appName: string;
-    stil?: StilType;
-    alignLeft?: boolean;
     errorMessage?: string;
 }
 
-export const EndringsloggContainer = ({
-    content,
-    onOpen,
-    onClose,
-    appName,
-    stil,
-    alignLeft,
-    errorMessage
-}: EndringsloggContainerProps) => {
+export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const overordnetNotifikasjon = content.some(element => !element.seen);
 
@@ -79,20 +68,18 @@ export const EndringsloggContainer = ({
     useEventListener('keydown', escHandler);
 
     return (
-        <div ref={loggNode} className={'endringslogg'}>
+        <div ref={loggNode} className="endringslogg">
             <EndringsloggIconButton
                 onClick={click}
                 open={endringsloggApen}
                 newNotifications={overordnetNotifikasjon}
                 buttonRef={buttonRef}
-                name={appName}
-                stil={stil}
             />
-            <TransitionContainer visible={endringsloggApen} alignLeft={alignLeft}>
-                <Heading size="small" level="1" className={'collapse-header'}>
-                    Nytt i {appName}
+            <TransitionContainer visible={endringsloggApen}>
+                <Heading size="small" level="1" className="collapse-header">
+                    Nytt i Arbeidsrettet oppfølging
                 </Heading>
-                <div className={'innhold-container'} data-testid="endringslogg-innhold">
+                <div className="innhold-container" data-testid="endringslogg-innhold">
                     <EndringsloggContent innleggsListe={content} />
                     {errorMessage && <Label>{errorMessage}</Label>}
                 </div>
@@ -106,21 +93,12 @@ interface EndringsloggIconButtonProps {
     open: boolean;
     newNotifications: boolean;
     onClick: (e?: any) => void;
-    name: string;
-    stil?: StilType;
 }
 
-const EndringsloggIconButton = ({
-    buttonRef,
-    open,
-    newNotifications,
-    onClick,
-    name,
-    stil
-}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: EndringsloggIconButtonProps) => {
     return (
         <button
-            aria-label={`Endringslogg for ${name}`}
+            aria-label="Endringslogg for Arbeidsrettet oppfølging"
             ref={buttonRef}
             className={classNames(
                 'endringslogg-knapp',
@@ -130,11 +108,11 @@ const EndringsloggIconButton = ({
             onClick={onClick}
             data-testid="endringslogg-knapp"
         >
-            <EndringsloggIkon stil={stil} />
+            <EndringsloggIkon />
             {newNotifications && (
-                <div className={'ring-container'}>
-                    <div className={'ringring'} />
-                    <div className={'circle'} data-testid="endringslogg_nye-notifikasjoner" />
+                <div className="ring-container">
+                    <div className="ringring" />
+                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
                 </div>
             )}
         </button>

@@ -35,9 +35,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
-.arrow-container {
-    padding-top: 0.95rem;
-}
+
 .arrow-container-left {
     padding-top: 0.95rem;
 }
@@ -56,17 +54,6 @@
     box-shadow: 0 0 0 3px var(--a-border-focus);
 }
 
-.arrow-container::after {
-    content: '';
-    position: absolute;
-    top: 0.3rem;
-    left: 0.7rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-surface-inverted);
-}
 .innhold-container {
     overflow-y: scroll;
     max-height: 30rem;
