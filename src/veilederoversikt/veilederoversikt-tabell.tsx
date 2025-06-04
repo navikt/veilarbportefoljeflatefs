@@ -47,7 +47,8 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
             <Table.Header className="sticky-tabelloverskrift">
                 <Table.Row>
                     <Table.HeaderCell>
-                        <div className="veiledertabell__sorteringskolonne">
+                        <div className="veiledertabell__sorteringskolonne navnkolonne">
+                            Fornavn
                             <Button
                                 size="xsmall"
                                 variant="tertiary"
@@ -62,7 +63,6 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                             >
                                 Etternavn
                             </Button>
-                            , Fornavn
                             {sorteringspil(gjeldendeSorteringErEtternavn)}
                         </div>
                     </Table.HeaderCell>

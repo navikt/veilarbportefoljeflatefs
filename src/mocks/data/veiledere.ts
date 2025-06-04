@@ -14,7 +14,7 @@ function lagVeileder(): VeilederModell {
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
     const fornavn = faker.person.firstName(kjonn === 'K' ? 'female' : 'male');
     const etternavn = faker.person.lastName(kjonn === 'K' ? 'female' : 'male');
-    const navn = etternavn + ', ' + fornavn;
+    const navn = fornavn + ' ' + etternavn;
     return {
         ident,
         navn,
