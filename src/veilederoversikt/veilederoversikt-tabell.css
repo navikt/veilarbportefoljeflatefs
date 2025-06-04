@@ -12,6 +12,10 @@
     justify-content: flex-start;
 }
 
+.oversikt-sideinnhold-veilederside .veileder-tabell .navnkolonne > button {
+    margin-left: 4px;
+}
+
 .oversikt-sideinnhold-veilederside .veileder-tabell .veiledertabell__sorteringskolonne button {
     padding-left: 0;
     padding-right: 0;
