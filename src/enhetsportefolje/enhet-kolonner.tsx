@@ -165,7 +165,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert) : '-'}
+                tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
             />
             <DatoKolonne
                 className="col col-xs-2"

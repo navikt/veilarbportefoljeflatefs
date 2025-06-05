@@ -152,7 +152,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkBehovSistOppdatert ? toDateString(bruker.tolkBehovSistOppdatert) : '-'}
+                tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
             />
             <TekstKolonne
                 className="col col-xs-2"

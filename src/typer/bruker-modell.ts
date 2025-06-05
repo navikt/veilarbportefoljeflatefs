@@ -58,9 +58,7 @@ export interface BrukerModell {
     harFlereStatsborgerskap: boolean;
     innflyttingTilNorgeFraLand: string;
     foedeland?: string;
-    talespraaktolk?: string;
-    tegnspraaktolk?: string;
-    tolkBehovSistOppdatert?: string;
+    tolkebehov: Tolkebehov;
     bostedKommune?: string;
     bostedBydel?: string;
     bostedSistOppdatert?: string;
@@ -69,7 +67,6 @@ export interface BrukerModell {
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
-
     barnUnder18AarData: BarnUnder18Aar[];
     brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
@@ -188,4 +185,10 @@ export interface UtgattVarselHendelse {
     dato: string;
     lenke: string;
     detaljer?: string;
+}
+
+interface Tolkebehov {
+    talespraaktolk?: string;
+    tegnspraaktolk?: string;
+    sistOppdatert?: string; // LocalDate i backend
 }

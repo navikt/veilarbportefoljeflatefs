@@ -291,9 +291,11 @@ function lagBruker(sikkerhetstiltak = []) {
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedSistOppdatert: randomDate({past: true}),
-        talespraaktolk: hentSpraak(),
-        tegnspraaktolk: hentSpraak(),
-        tolkBehovSistOppdatert: randomDate({past: true}),
+        tolkebehov: {
+            talespraaktolk: hentSpraak(),
+            tegnspraaktolk: hentSpraak(),
+            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
@@ -405,14 +407,26 @@ const randomEndring = () => {
     return keys[(keys.length * Math.random()) << 0];
 };
 
-const randomDate = ({past}) => {
+interface RandomDateProps {
+    past: boolean;
+    /** Returns a date without timestamp, formatted as YYYY-MM-DD*/
+    withoutTimestamp?: boolean;
+}
+
+const randomDate = ({past, withoutTimestamp = false}: RandomDateProps) => {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     let ar = rnd(0, 4) + new Date().getFullYear();
     if (past) {
         ar = -rnd(0, 4) + new Date().getFullYear();
     }
-    return new Date(ar, mnd - 1, dag).toISOString();
+    const date = new Date(ar, mnd - 1, dag).toISOString();
+
+    if (withoutTimestamp) {
+        return date.slice(0, 10); // End slice at 10 to only get the "YYYY-MM-DD"-part of the ISO-date-string
+    }
+
+    return date;
 };
 
 const randomDateInNearFuture = () => {
