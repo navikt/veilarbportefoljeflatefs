@@ -1,7 +1,7 @@
-import {BrukerModell} from '../../typer/bruker-modell';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {BrukerModell} from '../../../typer/bruker-modell';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
+import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
+import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
 interface BrukerNavnProps {
     className?: string;

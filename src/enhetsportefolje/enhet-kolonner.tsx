@@ -1,6 +1,5 @@
-import moment from 'moment';
-import {BrukerNavn} from '../components/tabell/brukernavn';
-import {BrukerFnr} from '../components/tabell/brukerfnr';
+import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
+import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
@@ -11,35 +10,39 @@ import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
-    bostedBydelEllerUkjent,
-    bostedKommuneUtlandEllerUkjent,
-    capitalize,
-    nesteUtlopsdatoEllerNull,
     parseDatoString,
-    tolkBehov,
-    tolkBehovSpraak,
     utledValgteAktivitetsTyper,
     utlopsdatoUker,
     ytelsestypetekst
 } from '../utils/utils';
-import {VeilederNavn} from '../components/tabell/veiledernavn';
-import {VeilederId} from '../components/tabell/veilederid';
-import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
-import {
-    dagerSiden,
-    klokkeslettTilMinutter,
-    minuttDifferanse,
-    oppfolgingStartetDato,
-    toDateString
-} from '../utils/dato-utils';
-import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
+import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
+import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
+import {dagerSiden, toDateString} from '../utils/dato-utils';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
-import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
-import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
+import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
+import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
+import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
+import {Bosted} from '../components/tabell/innholdsceller/Bosted';
+import {BostedDetaljer} from '../components/tabell/innholdsceller/BostedDetaljer';
+import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSistOppdatert';
+import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
+import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
+import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
+import {OppfolgingStartet} from '../components/tabell/innholdsceller/OppfolgingStartet';
+import {VenterPaSvarFraNav} from '../components/tabell/innholdsceller/VenterPaSvarFraNav';
+import {VenterPaSvarFraBruker} from '../components/tabell/innholdsceller/VenterPaSvarFraBruker';
+import {FilterhendelseLenke} from '../components/tabell/innholdsceller/FilterhendelseLenke';
+import {FilterhendelseDatoOpprettet} from '../components/tabell/innholdsceller/FilterhendelseDatoOpprettet';
+import {TiltakshendelseLenke} from '../components/tabell/innholdsceller/TiltakshendelseLenke';
+import {TiltakshendelseDatoOpprettet} from '../components/tabell/innholdsceller/TiltakshendelseDatoOpprettet';
+import {UtlopteAktiviteter} from '../components/tabell/innholdsceller/UtlopteAktiviteter';
+import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivitet';
+import {MoterIDag} from '../components/tabell/innholdsceller/MoterIDag';
+import {MoteVarighet} from '../components/tabell/innholdsceller/MoteVarighet';
+import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -52,15 +55,9 @@ interface EnhetKolonnerProps {
 }
 
 export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
-    const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
-    const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
-    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
-    const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
-    const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
-    const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
     const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
@@ -92,9 +89,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
-    const tolkbehovSpraakData = useTolkbehovSelector();
-
-    const geografiskbostedData = useGeografiskbostedSelector();
 
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
@@ -116,72 +110,24 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         <div className={className}>
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
-                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={
-                    bruker.hovedStatsborgerskap?.statsborgerskap
-                        ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
-                        : '-'
-                }
-                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
-                tekst={
-                    bruker.hovedStatsborgerskap?.gyldigFra ? toDateString(bruker.hovedStatsborgerskap.gyldigFra) : '-'
-                }
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommuneUtlandEllerUkjent(bruker, geografiskbostedData)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
-                tekst={bruker.bostedBydel ? bostedBydelEllerUkjent(bruker.bostedBydel, geografiskbostedData) : '-'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
-                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert) : '-'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={tolkBehov(filtervalg, bruker)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
-                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
-            />
-            <VeilederNavn
-                className="col col-xs-2"
-                bruker={bruker}
-                skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-            />
-            <VeilederId
-                className="col col-xs-2"
-                bruker={bruker}
-                skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-            />
+
+            <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
+            <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <Bosted bruker={bruker} valgteKolonner={valgteKolonner} />
+            <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
+            <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <Tolkebehov bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
+            <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
+            <TolkebehovSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <VeilederNavn bruker={bruker} valgteKolonner={valgteKolonner} />
+            <VeilederId bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
@@ -234,74 +180,28 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                     valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
                 }
             />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={venterPaSvarFraNAV}
-                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
-                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
-            />
-            <LenkeKolonne
-                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
-                bruker={bruker}
-                lenke={bruker.utgattVarsel?.lenke ?? ''}
-                lenketekst={bruker.utgattVarsel?.beskrivelse ?? ''}
-                erAbsoluttLenke={true}
-                enhetId={enhetId}
-                className="col col-xs-2-5"
-            />
-            <DatoKolonne
-                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-                dato={bruker.utgattVarsel?.dato ? new Date(bruker.utgattVarsel?.dato) : null}
-                className="col col-xs-2"
-            />
-            <LenkeKolonne
-                className="col col-xs-3 col-break-word"
-                bruker={bruker}
-                lenke={bruker.tiltakshendelse?.lenke ?? ''}
-                lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
-                enhetId={enhetId}
-                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
-                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={nyesteUtlopteAktivitet}
-                skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter || undefined)}
-                skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
-            />
+
+            <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
+            <VenterPaSvarFraBruker bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <FilterhendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
+            <FilterhendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
+            <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoKolonne
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
 
-            <TidKolonne
-                className="col col-xs-2"
-                dato={moteStartTid}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-            />
-            <VarighetKolonne
-                className="col col-xs-2"
-                dato={varighet}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={moteErAvtaltMedNAV ? 'Avtalt med Nav' : '-'}
-                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
-            />
+            <MoterIDag bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TekstKolonne
                 tekst={bruker.utkast14a?.status ?? '-'}
