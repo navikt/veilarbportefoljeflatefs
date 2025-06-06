@@ -18,13 +18,7 @@ import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
-import {
-    dagerSiden,
-    klokkeslettTilMinutter,
-    minuttDifferanse,
-    oppfolgingStartetDato,
-    toDateString
-} from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, toDateString} from '../utils/dato-utils';
 import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -41,6 +35,7 @@ import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSis
 import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
+import {OppfolgingStartet} from '../components/tabell/innholdsceller/OppfolgingStartet';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -129,11 +124,8 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
             <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
-                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
-            />
+            <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
