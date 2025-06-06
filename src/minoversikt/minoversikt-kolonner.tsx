@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
@@ -16,9 +15,7 @@ import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, toDateString} from '../utils/dato-utils';
-import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
+import {dagerSiden, toDateString} from '../utils/dato-utils';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
@@ -42,6 +39,9 @@ import {TiltakshendelseLenke} from '../components/tabell/innholdsceller/Tiltaksh
 import {TiltakshendelseDatoOpprettet} from '../components/tabell/innholdsceller/TiltakshendelseDatoOpprettet';
 import {UtlopteAktiviteter} from '../components/tabell/innholdsceller/UtlopteAktiviteter';
 import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivitet';
+import {MoterIDag} from '../components/tabell/innholdsceller/MoterIDag';
+import {MoteVarighet} from '../components/tabell/innholdsceller/MoteVarighet';
+import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -52,10 +52,6 @@ interface MinOversiktKolonnerProps {
 }
 
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
-    const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
-    const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
-    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
-
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
@@ -188,21 +184,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <FilterhendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <FilterhendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TidKolonne
-                className="col col-xs-2"
-                dato={moteStartTid}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-            />
-            <VarighetKolonne
-                className="col col-xs-2"
-                dato={varighet}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={moteErAvtaltMedNAV ? 'Avtalt med Nav' : '-'}
-                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
-            />
+            <MoterIDag bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
