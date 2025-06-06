@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
 import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
@@ -18,9 +17,7 @@ import {
 } from '../utils/utils';
 import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
 import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
-import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
-import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, toDateString} from '../utils/dato-utils';
-import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
+import {dagerSiden, toDateString} from '../utils/dato-utils';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
@@ -43,6 +40,9 @@ import {TiltakshendelseLenke} from '../components/tabell/innholdsceller/Tiltaksh
 import {TiltakshendelseDatoOpprettet} from '../components/tabell/innholdsceller/TiltakshendelseDatoOpprettet';
 import {UtlopteAktiviteter} from '../components/tabell/innholdsceller/UtlopteAktiviteter';
 import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivitet';
+import {MoterIDag} from '../components/tabell/innholdsceller/MoterIDag';
+import {MoteVarighet} from '../components/tabell/innholdsceller/MoteVarighet';
+import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -55,9 +55,6 @@ interface EnhetKolonnerProps {
 }
 
 export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
-    const moteStartTid = klokkeslettTilMinutter(bruker.alleMoterStartTid);
-    const varighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
-    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
@@ -202,21 +199,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
 
-            <TidKolonne
-                className="col col-xs-2"
-                dato={moteStartTid}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
-            />
-            <VarighetKolonne
-                className="col col-xs-2"
-                dato={varighet}
-                skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={moteErAvtaltMedNAV ? 'Avtalt med Nav' : '-'}
-                skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
-            />
+            <MoterIDag bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TekstKolonne
                 tekst={bruker.utkast14a?.status ?? '-'}
