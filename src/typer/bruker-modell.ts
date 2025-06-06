@@ -47,9 +47,7 @@ export interface BrukerModell {
     moteSluttTid: string; // kun avtalte moter
     alleMoterStartTid?: string;
     alleMoterSluttTid?: string;
-    utkast14aStatus?: string;
-    utkast14aStatusEndret?: string;
-    utkast14aAnsvarligVeileder?: string;
+    utkast14a: Utkast14a | null;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
@@ -120,6 +118,12 @@ export interface AktiviteterModell {
     mote?: string;
     tiltak?: string;
     gruppeaktivitet?: string;
+}
+
+export interface Utkast14a {
+    status?: string;
+    statusEndret?: string; // LocalDateTime frå backend
+    ansvarligVeileder?: string;
 }
 
 interface Statsborgerskap {

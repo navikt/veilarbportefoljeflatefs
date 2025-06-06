@@ -304,17 +304,17 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             />
 
             <TekstKolonne
-                tekst={bruker.utkast14aStatus ?? '-'}
+                tekst={bruker.utkast14a?.status ?? '-'}
                 skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
                 className="col col-xs-2"
             />
             <DagerSidenKolonne
                 className="col col-xs-2"
-                dato={dagerSiden(bruker.utkast14aStatusEndret)}
+                dato={dagerSiden(bruker.utkast14a?.statusEndret)}
                 skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
             />
             <TekstKolonne
-                tekst={bruker.utkast14aAnsvarligVeileder ? bruker.utkast14aAnsvarligVeileder : ' '}
+                tekst={bruker.utkast14a?.ansvarligVeileder ? bruker.utkast14a.ansvarligVeileder : ' '}
                 skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
                 className="col col-xs-2"
             />
