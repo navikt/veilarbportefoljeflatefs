@@ -125,16 +125,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <VeilederNavn
-                className="col col-xs-2"
-                bruker={bruker}
-                skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
-            />
-            <VeilederId
-                className="col col-xs-2"
-                bruker={bruker}
-                skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
-            />
+            <VeilederNavn bruker={bruker} valgteKolonner={valgteKolonner} />
+            <VeilederId bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={bruker.dagputlopUke}
