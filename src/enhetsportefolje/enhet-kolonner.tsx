@@ -20,13 +20,7 @@ import {
 import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
 import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
 import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
-import {
-    dagerSiden,
-    klokkeslettTilMinutter,
-    minuttDifferanse,
-    oppfolgingStartetDato,
-    toDateString
-} from '../utils/dato-utils';
+import {dagerSiden, klokkeslettTilMinutter, minuttDifferanse, toDateString} from '../utils/dato-utils';
 import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -42,6 +36,7 @@ import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSis
 import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
+import {OppfolgingStartet} from '../components/tabell/innholdsceller/OppfolgingStartet';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -128,11 +123,8 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
             <TolkebehovSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
-                dato={oppfolgingStartetDato(bruker.oppfolgingStartdato)}
-            />
+            <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <VeilederNavn
                 className="col col-xs-2"
                 bruker={bruker}
