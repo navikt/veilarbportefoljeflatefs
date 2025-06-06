@@ -2,8 +2,6 @@ import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
-    bostedBydelEllerUkjent,
-    bostedKommuneUtlandEllerUkjent,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
     tolkBehov,
@@ -33,7 +31,6 @@ import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
-import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
 import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
@@ -41,6 +38,9 @@ import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/en
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
+import {Bosted} from '../components/tabell/innholdsceller/Bosted';
+import {BostedDetaljer} from '../components/tabell/innholdsceller/BostedDetaljer';
+import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSistOppdatert';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -97,8 +97,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
     const tolkbehovSpraakData = useTolkbehovSelector();
 
-    const geografiskbostedData = useGeografiskbostedSelector();
-
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
         const dataOmBarnSorted = dataOmBarn
@@ -139,21 +137,11 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
                 tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
             />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
-                tekst={bostedKommuneUtlandEllerUkjent(bruker, geografiskbostedData)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
-                tekst={bruker.bostedBydel ? bostedBydelEllerUkjent(bruker.bostedBydel, geografiskbostedData) : '-'}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
-                tekst={bruker.bostedSistOppdatert ? toDateString(bruker.bostedSistOppdatert) : '-'}
-            />
+
+            <Bosted bruker={bruker} valgteKolonner={valgteKolonner} />
+            <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
+            <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
