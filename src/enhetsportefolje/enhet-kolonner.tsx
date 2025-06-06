@@ -13,8 +13,6 @@ import {
     aapVurderingsfrist,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
-    tolkBehov,
-    tolkBehovSpraak,
     utledValgteAktivitetsTyper,
     utlopsdatoUker,
     ytelsestypetekst
@@ -33,7 +31,6 @@ import {VarighetKolonne} from '../components/tabell/kolonner/varighetkolonne';
 import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
-import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
@@ -42,6 +39,9 @@ import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/Stat
 import {Bosted} from '../components/tabell/innholdsceller/Bosted';
 import {BostedDetaljer} from '../components/tabell/innholdsceller/BostedDetaljer';
 import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSistOppdatert';
+import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
+import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
+import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -94,7 +94,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
-    const tolkbehovSpraakData = useTolkbehovSelector();
 
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
@@ -125,21 +124,10 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
             <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={tolkBehov(filtervalg, bruker)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
-                skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}
-                tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
-            />
+            <Tolkebehov bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
+            <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
+            <TolkebehovSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
