@@ -1,19 +1,15 @@
 import {useSelector} from 'react-redux';
-import classNames from 'classnames';
 import {BodyShort, Tag} from '@navikt/ds-react';
 import {VeilederModell} from '../../../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../../../typer/bruker-modell';
 import {AppState} from '../../../../reducer';
+import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {InnholdscelleProps} from '../InnholdscelleProps';
 
-interface VeiledernavnProps {
-    className?: string;
-    bruker: BrukerModell;
-    skalVises: boolean;
-}
-
-export function VeilederNavn({className, bruker, skalVises}: VeiledernavnProps) {
+export function VeilederNavn({bruker, valgteKolonner}: InnholdscelleProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
+    const skalVises = valgteKolonner.includes(Kolonne.VEILEDER);
     if (!skalVises) {
         return null;
     }
@@ -28,7 +24,7 @@ export function VeilederNavn({className, bruker, skalVises}: VeiledernavnProps) 
     );
 
     return (
-        <div className={classNames('ord-brekk', className)}>
+        <div className="col col-xs-2 ord-brekk">
             <BodyShort size="small">{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
         </div>
     );

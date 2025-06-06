@@ -1,19 +1,14 @@
 import {BodyShort} from '@navikt/ds-react';
-import {BrukerModell} from '../../../../typer/bruker-modell';
+import {InnholdscelleProps} from '../InnholdscelleProps';
+import {Kolonne} from '../../../../ducks/ui/listevisning';
 
-interface VeilederidProps {
-    className?: string;
-    bruker: BrukerModell;
-    skalVises: boolean;
-}
-
-export function VeilederId({className, skalVises, bruker}: VeilederidProps) {
-    if (!skalVises) {
+export function VeilederId({bruker, valgteKolonner}: InnholdscelleProps) {
+    if (!valgteKolonner.includes(Kolonne.NAVIDENT)) {
         return null;
     }
 
     return (
-        <div className={className}>
+        <div className="col col-xs-2">
             <BodyShort size="small">{bruker.veilederId}</BodyShort>
         </div>
     );
