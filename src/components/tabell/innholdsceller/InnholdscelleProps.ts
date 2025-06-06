@@ -5,3 +5,7 @@ export interface InnholdscelleProps {
     bruker: BrukerModell;
     valgteKolonner: Kolonne[];
 }
+
+export interface InnholdscelleMedLenkeProps extends InnholdscelleProps {
+    enhetId: string;
+}
