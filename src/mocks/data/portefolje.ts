@@ -10,7 +10,8 @@ import {
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
-    UtgattVarselHendelse
+    UtgattVarselHendelse,
+    Utkast14a
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -117,22 +118,18 @@ function lagOverskrift() {
     return null;
 }
 
-function lagVedtakUtkast() {
+function lagVedtakUtkast(): Utkast14a | null {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
     const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
     if (maybeUtkast > 0.5) {
         return {
-            utkast14aStatusEndret: randomDate({past: true}),
-            utkast14aStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
-            utkast14aAnsvarligVeileder: ansvarligVeileder
+            status: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
+            statusEndret: randomDate({past: true}),
+            ansvarligVeileder: ansvarligVeileder
         };
     }
-    return {
-        utkast14aStatusEndret: null,
-        utkast14aStatus: null,
-        utkast14aAnsvarligVeileder: ''
-    };
+    return null;
 }
 
 const lagHuskelapp = fnr => {
@@ -273,9 +270,7 @@ function lagBruker(sikkerhetstiltak = []) {
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        utkast14aStatus: vedtakUtkast.utkast14aStatus,
-        utkast14aStatusEndret: vedtakUtkast.utkast14aStatusEndret,
-        utkast14aAnsvarligVeileder: vedtakUtkast.utkast14aAnsvarligVeileder,
+        utkast14a: vedtakUtkast,
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
