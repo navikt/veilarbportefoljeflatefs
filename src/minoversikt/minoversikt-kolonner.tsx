@@ -13,8 +13,8 @@ import {
     utlopsdatoUker,
     ytelsestypetekst
 } from '../utils/utils';
-import {BrukerNavn} from '../components/tabell/brukernavn';
-import {BrukerFnr} from '../components/tabell/brukerfnr';
+import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
+import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';

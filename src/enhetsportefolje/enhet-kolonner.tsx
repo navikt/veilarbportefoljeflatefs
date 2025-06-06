@@ -1,6 +1,6 @@
 import moment from 'moment';
-import {BrukerNavn} from '../components/tabell/brukernavn';
-import {BrukerFnr} from '../components/tabell/brukerfnr';
+import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
+import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
@@ -22,8 +22,8 @@ import {
     utlopsdatoUker,
     ytelsestypetekst
 } from '../utils/utils';
-import {VeilederNavn} from '../components/tabell/veiledernavn';
-import {VeilederId} from '../components/tabell/veilederid';
+import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
+import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
 import {TidKolonne} from '../components/tabell/kolonner/tidkolonne';
 import {
     dagerSiden,

@@ -1,9 +1,9 @@
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {BodyShort, Tag} from '@navikt/ds-react';
-import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
-import {BrukerModell} from '../../typer/bruker-modell';
-import {AppState} from '../../reducer';
+import {VeilederModell} from '../../../../typer/enhet-og-veiledere-modeller';
+import {BrukerModell} from '../../../../typer/bruker-modell';
+import {AppState} from '../../../../reducer';
 
 interface VeiledernavnProps {
     className?: string;

@@ -1,5 +1,5 @@
 import {BodyShort} from '@navikt/ds-react';
-import {BrukerModell} from '../../typer/bruker-modell';
+import {BrukerModell} from '../../../../typer/bruker-modell';
 
 interface VeilederidProps {
     className?: string;
