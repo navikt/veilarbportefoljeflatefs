@@ -4,7 +4,6 @@ import {
     aapVurderingsfrist,
     bostedBydelEllerUkjent,
     bostedKommuneUtlandEllerUkjent,
-    capitalize,
     nesteUtlopsdatoEllerNull,
     parseDatoString,
     tolkBehov,
@@ -39,6 +38,9 @@ import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector'
 import {truncateTekst} from '../utils/tekst-utils';
 import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
+import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
+import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
+import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -118,27 +120,10 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
-                skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                tekst={
-                    bruker.hovedStatsborgerskap?.statsborgerskap
-                        ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap)
-                        : '-'
-                }
-                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
-            />
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
-                tekst={
-                    bruker.hovedStatsborgerskap?.gyldigFra ? toDateString(bruker.hovedStatsborgerskap.gyldigFra) : '-'
-                }
-            />
+            <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
+            <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <TekstKolonne
                 className="col col-xs-2"
                 tekst={tolkBehov(filtervalg, bruker)}
