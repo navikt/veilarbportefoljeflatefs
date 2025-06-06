@@ -24,7 +24,6 @@ import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {truncateTekst} from '../utils/tekst-utils';
-import {LenkeKolonne} from '../components/tabell/kolonner/lenkekolonne';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
@@ -40,6 +39,8 @@ import {VenterPaSvarFraNav} from '../components/tabell/innholdsceller/VenterPaSv
 import {VenterPaSvarFraBruker} from '../components/tabell/innholdsceller/VenterPaSvarFraBruker';
 import {FilterhendelseLenke} from '../components/tabell/innholdsceller/FilterhendelseLenke';
 import {FilterhendelseDatoOpprettet} from '../components/tabell/innholdsceller/FilterhendelseDatoOpprettet';
+import {TiltakshendelseLenke} from '../components/tabell/innholdsceller/TiltakshendelseLenke';
+import {TiltakshendelseDatoOpprettet} from '../components/tabell/innholdsceller/TiltakshendelseDatoOpprettet';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -203,19 +204,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             />
 
-            <LenkeKolonne
-                className="col col-xs-3 col-break-word"
-                bruker={bruker}
-                lenke={bruker.tiltakshendelse?.lenke ?? ''}
-                lenketekst={bruker.tiltakshendelse?.tekst ?? ''}
-                enhetId={enhetId}
-                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_LENKE)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
-                skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
-            />
+            <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
+            <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoKolonne
                 className="col col-xs-2"
                 dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
