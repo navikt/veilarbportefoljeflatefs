@@ -36,6 +36,8 @@ import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/innholdsceller/OppfolgingStartet';
+import {VenterPaSvarFraNav} from '../components/tabell/innholdsceller/VenterPaSvarFraNav';
+import {VenterPaSvarFraBruker} from '../components/tabell/innholdsceller/VenterPaSvarFraBruker';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -55,8 +57,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
-    const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
-    const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
     const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
@@ -178,16 +178,10 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                     valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
                 }
             />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={venterPaSvarFraNAV}
-                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={venterPaSvarFraBruker}
-                skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
-            />
+
+            <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
+            <VenterPaSvarFraBruker bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <LenkeKolonne
                 skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
                 bruker={bruker}
