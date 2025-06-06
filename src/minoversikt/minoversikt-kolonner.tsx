@@ -38,6 +38,8 @@ import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/Tolke
 import {OppfolgingStartet} from '../components/tabell/innholdsceller/OppfolgingStartet';
 import {VenterPaSvarFraNav} from '../components/tabell/innholdsceller/VenterPaSvarFraNav';
 import {VenterPaSvarFraBruker} from '../components/tabell/innholdsceller/VenterPaSvarFraBruker';
+import {FilterhendelseLenke} from '../components/tabell/innholdsceller/FilterhendelseLenke';
+import {FilterhendelseDatoOpprettet} from '../components/tabell/innholdsceller/FilterhendelseDatoOpprettet';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -182,20 +184,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
             <VenterPaSvarFraBruker bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <LenkeKolonne
-                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
-                bruker={bruker}
-                lenke={bruker.utgattVarsel?.lenke ?? ''}
-                lenketekst={bruker.utgattVarsel?.beskrivelse ?? ''}
-                erAbsoluttLenke={true}
-                enhetId={enhetId}
-                className="col col-xs-2-5"
-            />
-            <DatoKolonne
-                skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-                dato={bruker.utgattVarsel?.dato ? new Date(bruker.utgattVarsel?.dato) : null}
-                className="col col-xs-2"
-            />
+            <FilterhendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
+            <FilterhendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <TidKolonne
                 className="col col-xs-2"
                 dato={moteStartTid}
