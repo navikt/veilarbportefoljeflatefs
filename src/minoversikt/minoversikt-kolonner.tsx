@@ -2,7 +2,6 @@ import moment from 'moment';
 import {
     aapRettighetsperiode,
     aapVurderingsfrist,
-    nesteUtlopsdatoEllerNull,
     parseDatoString,
     utledValgteAktivitetsTyper,
     utlopsdatoUker,
@@ -41,6 +40,8 @@ import {FilterhendelseLenke} from '../components/tabell/innholdsceller/Filterhen
 import {FilterhendelseDatoOpprettet} from '../components/tabell/innholdsceller/FilterhendelseDatoOpprettet';
 import {TiltakshendelseLenke} from '../components/tabell/innholdsceller/TiltakshendelseLenke';
 import {TiltakshendelseDatoOpprettet} from '../components/tabell/innholdsceller/TiltakshendelseDatoOpprettet';
+import {UtlopteAktiviteter} from '../components/tabell/innholdsceller/UtlopteAktiviteter';
+import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivitet';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -60,7 +61,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
-    const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
     const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
     const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
     const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
@@ -207,16 +207,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
-                skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={nyesteUtlopteAktivitet}
-                skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
-            />
+            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoKolonne
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
