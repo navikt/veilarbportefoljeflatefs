@@ -9,13 +9,11 @@ import {
 import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
 import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {avvik14aVedtakAvhengigeFilter, ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
+import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
-import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {toDateString} from '../utils/dato-utils';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
 import {truncateTekst} from '../utils/tekst-utils';
@@ -45,8 +43,12 @@ import {Utkast14aVedtaksstatus} from '../components/tabell/innholdsceller/Utkast
 import {Utkast14aVedtaksstatusEndret} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatusEndret';
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Utkast14aAnsvarligVeileder';
 import {SisteEndringDato} from '../components/tabell/innholdsceller/SisteEndringDato';
-import './minoversikt.css';
 import {SvarfristCv} from '../components/tabell/innholdsceller/SvarfristCv';
+import {Status14aVedtak} from '../components/tabell/innholdsceller/Status14aVedtak';
+import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/innholdsceller/GjeldendeVedtak14aInnsatsgruppe';
+import {GjeldendeVedtak14aHovedmal} from '../components/tabell/innholdsceller/GjeldendeVedtak14aHovedmal';
+import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/innholdsceller/GjeldendeVedtak14aVedtaksdato';
+import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -226,37 +228,11 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
             <SvarfristCv bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                tekst={
-                    avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)
-                        ? avvik14aVedtakAvhengigeFilter[bruker.avvik14aVedtak].label
-                        : '-'
-                }
-                skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}
-                className="col col-xs-2"
-            />
+            <Status14aVedtak bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
-                tekst={
-                    bruker.gjeldendeVedtak14a?.innsatsgruppe
-                        ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe]
-                        : '-'
-                }
-                className="col col-xs-2"
-            />
-            <TekstKolonne
-                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL)}
-                tekst={bruker.gjeldendeVedtak14a?.hovedmal ? HovedmalNavn[bruker.gjeldendeVedtak14a.hovedmal] : '-'}
-                className="col col-xs-2"
-            />
-            <TekstKolonne
-                skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO)}
-                tekst={
-                    bruker.gjeldendeVedtak14a?.innsatsgruppe ? toDateString(bruker.gjeldendeVedtak14a?.fattetDato) : '-'
-                }
-                className="col col-xs-2-5"
-            />
+            <GjeldendeVedtak14aInnsatsgruppe bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GjeldendeVedtak14aHovedmal bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GjeldendeVedtak14aVedtaksdato bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <DatoKolonne
                 dato={overgangsstonadUtlopsdato}
