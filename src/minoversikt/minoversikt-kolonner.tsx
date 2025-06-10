@@ -46,6 +46,7 @@ import {Utkast14aVedtaksstatusEndret} from '../components/tabell/innholdsceller/
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Utkast14aAnsvarligVeileder';
 import {SisteEndringDato} from '../components/tabell/innholdsceller/SisteEndringDato';
 import './minoversikt.css';
+import {SvarfristCv} from '../components/tabell/innholdsceller/SvarfristCv';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -223,13 +224,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <SisteEndring bruker={bruker} enhetId={enhetId} valgteKolonner={valgteKolonner} />
             <SisteEndringDato bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                tekst={
-                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
-                }
-            />
+            <SvarfristCv bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TekstKolonne
                 tekst={

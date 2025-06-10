@@ -48,6 +48,7 @@ import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Ut
 import {SisteEndringDato} from '../components/tabell/innholdsceller/SisteEndringDato';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {SvarfristCv} from '../components/tabell/innholdsceller/SvarfristCv';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -211,13 +212,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <SisteEndring bruker={bruker} enhetId={enhetId} valgteKolonner={valgteKolonner} />
             <SisteEndringDato bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
-                tekst={
-                    bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'
-                }
-            />
+            <SvarfristCv bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TekstKolonne
                 tekst={
