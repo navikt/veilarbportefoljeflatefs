@@ -11,7 +11,7 @@ import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
-import {BarnUnder18AarModell, BrukerModell} from '../typer/bruker-modell';
+import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -52,6 +52,7 @@ import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdscell
 import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
+import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -90,22 +91,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-
-    const barnAlderTilStr = (dataOmBarn: BarnUnder18AarModell[]) => {
-        const lf = new Intl.ListFormat('no');
-        const dataOmBarnSorted = dataOmBarn
-            .map(x => x.alder)
-            .sort((a, b) => (a < b ? -1 : 1))
-            .map(x => String(x));
-        return ' (' + lf.format(dataOmBarnSorted) + ' år)';
-    };
-
-    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18AarModell[]) => {
-        if (dataOmBarn === null || dataOmBarn === undefined || (Array.isArray(dataOmBarn) && dataOmBarn.length === 0)) {
-            return '-';
-        }
-        return dataOmBarn.length + barnAlderTilStr(dataOmBarn);
-    };
 
     return (
         <div className="brukerliste__innhold flex flex--center">
@@ -236,11 +221,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <EnsligeForsorgereAktivitetsplikt bruker={bruker} valgteKolonner={valgteKolonner} />
             <EnsligeForsorgereOmBarnet bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
-                tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
-            />
+            <BarnUnder18Aar bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
 
