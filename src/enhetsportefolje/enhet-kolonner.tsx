@@ -19,7 +19,7 @@ import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversik
 import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
 import {toDateString} from '../utils/dato-utils';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
-import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
+import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
@@ -45,6 +45,7 @@ import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
 import {Utkast14aVedtaksstatus} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatus';
 import {Utkast14aVedtaksstatusEndret} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatusEndret';
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Utkast14aAnsvarligVeileder';
+import {SisteEndringDato} from '../components/tabell/innholdsceller/SisteEndringDato';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -89,8 +90,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-
-    const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
         const lf = new Intl.ListFormat('no');
@@ -209,17 +208,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <SisteEndringKategori
-                bruker={bruker}
-                enhetId={enhetId}
-                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING)}
-                className="col col-xs-2"
-            />
-            <DatoKolonne
-                className="col col-xs-2"
-                dato={sisteEndringTidspunkt}
-                skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
-            />
+            <SisteEndring bruker={bruker} enhetId={enhetId} valgteKolonner={valgteKolonner} />
+            <SisteEndringDato bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
