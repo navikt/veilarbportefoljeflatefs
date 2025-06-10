@@ -15,8 +15,7 @@ import {HovedmalNavn, innsatsgruppeNavn} from '../model-interfaces';
 import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {dagerSiden, toDateString} from '../utils/dato-utils';
-import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
+import {toDateString} from '../utils/dato-utils';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {truncateTekst} from '../utils/tekst-utils';
@@ -42,6 +41,9 @@ import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivit
 import {MoterIDag} from '../components/tabell/innholdsceller/MoterIDag';
 import {MoteVarighet} from '../components/tabell/innholdsceller/MoteVarighet';
 import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
+import {Utkast14aVedtaksstatus} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatus';
+import {Utkast14aVedtaksstatusEndret} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatusEndret';
+import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Utkast14aAnsvarligVeileder';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -215,21 +217,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
 
-            <TekstKolonne
-                tekst={bruker.utkast14a?.status ?? '-'}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                className="col col-xs-2"
-            />
-            <DagerSidenKolonne
-                className="col col-xs-2"
-                dato={dagerSiden(bruker.utkast14a?.statusEndret)}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-            />
-            <TekstKolonne
-                tekst={bruker.utkast14a?.ansvarligVeileder ? bruker.utkast14a.ansvarligVeileder : ' '}
-                skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                className="col col-xs-2"
-            />
+            <Utkast14aVedtaksstatus bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <SisteEndringKategori
                 bruker={bruker}

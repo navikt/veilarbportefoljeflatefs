@@ -17,8 +17,7 @@ import {
 } from '../utils/utils';
 import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
 import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
-import {dagerSiden, toDateString} from '../utils/dato-utils';
-import {DagerSidenKolonne} from '../components/tabell/kolonner/dagersidenkolonne';
+import {toDateString} from '../utils/dato-utils';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndringKategori} from '../components/tabell/sisteendringkategori';
 import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
@@ -43,6 +42,9 @@ import {AvtaltAktivitet} from '../components/tabell/innholdsceller/AvtaltAktivit
 import {MoterIDag} from '../components/tabell/innholdsceller/MoterIDag';
 import {MoteVarighet} from '../components/tabell/innholdsceller/MoteVarighet';
 import {Motestatus} from '../components/tabell/innholdsceller/Motestatus';
+import {Utkast14aVedtaksstatus} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatus';
+import {Utkast14aVedtaksstatusEndret} from '../components/tabell/innholdsceller/Utkast14aVedtaksstatusEndret';
+import {Utkast14aAnsvarligVeileder} from '../components/tabell/innholdsceller/Utkast14aAnsvarligVeileder';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -203,21 +205,10 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
             <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                tekst={bruker.utkast14a?.status ?? '-'}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
-                className="col col-xs-2"
-            />
-            <DagerSidenKolonne
-                className="col col-xs-2"
-                dato={dagerSiden(bruker.utkast14a?.statusEndret)}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-            />
-            <TekstKolonne
-                tekst={bruker.utkast14a?.ansvarligVeileder ? bruker.utkast14a.ansvarligVeileder : ' '}
-                skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-                className="col col-xs-2"
-            />
+            <Utkast14aVedtaksstatus bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <SisteEndringKategori
                 bruker={bruker}
                 enhetId={enhetId}
