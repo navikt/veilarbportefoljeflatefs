@@ -25,7 +25,7 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const Navn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>

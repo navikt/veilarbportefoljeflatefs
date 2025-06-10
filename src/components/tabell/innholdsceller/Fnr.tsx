@@ -6,7 +6,7 @@ interface BrukerFnrProps {
     bruker: BrukerModell;
 }
 
-export function BrukerFnr({className, bruker}: BrukerFnrProps) {
+export function Fnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (

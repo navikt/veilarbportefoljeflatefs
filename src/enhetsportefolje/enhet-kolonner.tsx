@@ -1,5 +1,5 @@
-import {BrukerNavn} from '../components/tabell/innholdsceller/brukernavn';
-import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
+import {Navn} from '../components/tabell/innholdsceller/Navn';
+import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
@@ -94,8 +94,8 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
     return (
         <div className={className}>
-            <BrukerNavn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <BrukerFnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
+            <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
+            <Fnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
             <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
