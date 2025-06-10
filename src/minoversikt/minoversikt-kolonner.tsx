@@ -11,7 +11,7 @@ import {BrukerFnr} from '../components/tabell/innholdsceller/brukerfnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
-import {BarnUnder18Aar, BrukerModell} from '../typer/bruker-modell';
+import {BarnUnder18AarModell, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
@@ -91,7 +91,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
-    const barnAlderTilStr = (dataOmBarn: BarnUnder18Aar[]) => {
+    const barnAlderTilStr = (dataOmBarn: BarnUnder18AarModell[]) => {
         const lf = new Intl.ListFormat('no');
         const dataOmBarnSorted = dataOmBarn
             .map(x => x.alder)
@@ -100,7 +100,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         return ' (' + lf.format(dataOmBarnSorted) + ' år)';
     };
 
-    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18Aar[]) => {
+    const brukerBarnUnder18AarInfo = (dataOmBarn: BarnUnder18AarModell[]) => {
         if (dataOmBarn === null || dataOmBarn === undefined || (Array.isArray(dataOmBarn) && dataOmBarn.length === 0)) {
             return '-';
         }

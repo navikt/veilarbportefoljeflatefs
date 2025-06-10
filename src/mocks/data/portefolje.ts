@@ -3,7 +3,7 @@ import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
-    BarnUnder18Aar,
+    BarnUnder18AarModell,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
     GjeldendeVedtak14aModell,
@@ -381,14 +381,14 @@ const hentSpraak = () => {
 };
 
 const hentBarnUnder18Aar = () => {
-    const barnInfo: BarnUnder18Aar[] = [];
+    const barnInfo: BarnUnder18AarModell[] = [];
     const randomArray = new Int8Array(10);
     window.crypto.getRandomValues(randomArray);
 
     let barnAntall = randomArray[0] % 3;
 
     for (let i = 0; i <= barnAntall; i++) {
-        const singleObj: BarnUnder18Aar = {
+        const singleObj: BarnUnder18AarModell = {
             alder: Math.abs(randomArray[i] % 18)
         };
         barnInfo.push(singleObj);

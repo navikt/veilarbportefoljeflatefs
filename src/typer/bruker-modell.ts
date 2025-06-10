@@ -65,7 +65,7 @@ export interface BrukerModell {
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
-    barnUnder18AarData: BarnUnder18Aar[];
+    barnUnder18AarData: BarnUnder18AarModell[];
     brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
@@ -139,7 +139,7 @@ export interface EnsligeForsorgereOvergangsstonad {
     yngsteBarnsFodselsdato: Date;
 }
 
-export interface BarnUnder18Aar {
+export interface BarnUnder18AarModell {
     alder: number;
 }
 
