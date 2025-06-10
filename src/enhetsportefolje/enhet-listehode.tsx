@@ -26,7 +26,7 @@ import {BostedDetaljer} from '../components/tabell/headerceller/BostedDetaljer';
 import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
-import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
+import {Status14aVedtak} from '../components/tabell/headerceller/Status14aVedtak';
 import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
@@ -239,7 +239,7 @@ export function EnhetListehode({
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 
-                <Status14AVedtak {...sorteringTilHeadercelle} />
+                <Status14aVedtak {...sorteringTilHeadercelle} />
 
                 <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
                 <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
