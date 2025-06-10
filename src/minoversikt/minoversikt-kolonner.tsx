@@ -16,7 +16,6 @@ import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
-import {truncateTekst} from '../utils/tekst-utils';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
@@ -53,6 +52,8 @@ import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdscel
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
+import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversikt/HuskelappKommentar';
+import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -80,8 +81,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato
     );
-
-    const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
 
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
@@ -225,21 +224,8 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
             <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TekstKolonne
-                className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
-                tekst={
-                    bruker.huskelapp?.kommentar
-                        ? // Fjerner eventuelle linjeskift før teksten og viser kun tekst fram til første linjeskift eller maks 30 tegn, ref. truncateTekst()
-                          truncateTekst(bruker.huskelapp.kommentar.trimStart().split('\n')[0])
-                        : ' '
-                }
-            />
-            <DatoKolonne
-                dato={huskeLappFrist}
-                skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_FRIST)}
-                className="col col-xs-2"
-            />
+            <HuskelappKommentar bruker={bruker} valgteKolonner={valgteKolonner} />
+            <HuskelappFrist bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
