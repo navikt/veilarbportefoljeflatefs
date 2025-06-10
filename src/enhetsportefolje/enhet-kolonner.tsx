@@ -18,7 +18,6 @@ import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversik
 import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
-import {mapOmAktivitetsPlikt, oppfolingsdatoEnsligeForsorgere} from '../utils/enslig-forsorger';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
@@ -49,6 +48,10 @@ import {Status14aVedtak} from '../components/tabell/innholdsceller/Status14aVedt
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/innholdsceller/GjeldendeVedtak14aInnsatsgruppe';
 import {GjeldendeVedtak14aHovedmal} from '../components/tabell/innholdsceller/GjeldendeVedtak14aHovedmal';
 import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/innholdsceller/GjeldendeVedtak14aVedtaksdato';
+import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/innholdsceller/EnsligeForsorgereUtlopOvergangsstonad';
+import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdsceller/EnsligeForsorgereVedtaksperiode';
+import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
+import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -78,9 +81,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato
     );
-    const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
-        ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
-        : null;
     const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
         ? new Date(bruker.utdanningOgSituasjonSistEndret)
         : null;
@@ -222,26 +222,11 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <GjeldendeVedtak14aHovedmal bruker={bruker} valgteKolonner={valgteKolonner} />
             <GjeldendeVedtak14aVedtaksdato bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
-                dato={overgangsstonadUtlopsdato}
-                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD)}
-                className="col col-xs-2"
-            />
-            <TekstKolonne
-                tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype ?? '-'}
-                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
-                className="col col-xs-2"
-            />
-            <TekstKolonne
-                tekst={mapOmAktivitetsPlikt(bruker.ensligeForsorgereOvergangsstonad?.harAktivitetsplikt)}
-                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
-                className="col col-xs-2"
-            />
-            <TekstKolonne
-                tekst={oppfolingsdatoEnsligeForsorgere(bruker.ensligeForsorgereOvergangsstonad?.yngsteBarnsFodselsdato)}
-                skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET)}
-                className="col col-xs-3"
-            />
+            <EnsligeForsorgereUtlopOvergangsstonad bruker={bruker} valgteKolonner={valgteKolonner} />
+            <EnsligeForsorgereVedtaksperiode bruker={bruker} valgteKolonner={valgteKolonner} />
+            <EnsligeForsorgereAktivitetsplikt bruker={bruker} valgteKolonner={valgteKolonner} />
+            <EnsligeForsorgereOmBarnet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
