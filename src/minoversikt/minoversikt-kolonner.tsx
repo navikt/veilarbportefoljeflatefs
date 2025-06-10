@@ -51,6 +51,7 @@ import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/innhol
 import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdsceller/EnsligeForsorgereVedtaksperiode';
 import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
+import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -78,9 +79,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato
     );
-    const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
-        ? new Date(bruker.utdanningOgSituasjonSistEndret)
-        : null;
 
     const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
 
@@ -243,11 +241,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={bruker.barnUnder18AarData ? brukerBarnUnder18AarInfo(bruker.barnUnder18AarData) : '-'}
             />
-            <DatoKolonne
-                dato={brukersUtdanningOgSituasjonSistEndret}
-                skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
-                className="col col-xs-2"
-            />
+
+            <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}

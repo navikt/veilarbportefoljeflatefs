@@ -52,6 +52,7 @@ import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/innhol
 import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdsceller/EnsligeForsorgereVedtaksperiode';
 import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
+import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -81,10 +82,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         bruker.utlopsdato,
         bruker.aapordinerutlopsdato
     );
-    const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
-        ? new Date(bruker.utdanningOgSituasjonSistEndret)
-        : null;
-
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
         filtervalg.tiltakstyper.length === 0 &&
@@ -232,11 +229,8 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
                 tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             />
-            <DatoKolonne
-                dato={brukersUtdanningOgSituasjonSistEndret}
-                skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
-                className="col col-xs-2"
-            />
+
+            <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
