@@ -52,9 +52,9 @@ import {AvtaltAktivitet} from '../components/tabell/headerceller/AvtaltAktivitet
 import {MoterIDag} from '../components/tabell/headerceller/MoterIDag';
 import {MoteVarighet} from '../components/tabell/headerceller/MoteVarighet';
 import {Motestatus} from '../components/tabell/headerceller/Motestatus';
-import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
-import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
-import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
+import {Utkast14aVedtaksstatus} from '../components/tabell/headerceller/Utkast14aVedtaksstatus';
+import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Utkast14aVedtaksstatusEndret';
+import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
 import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
@@ -223,9 +223,9 @@ export function MinOversiktListehode({
                 <MoteVarighet {...sorteringTilHeadercelle} />
                 <Motestatus {...sorteringTilHeadercelle} />
 
-                <UnderVurderingVedtaksstatus {...sorteringTilHeadercelle} />
-                <UnderVurderingVedtaksstatusEndret {...sorteringTilHeadercelle} />
-                <UnderVurderingAnsvarligVeileder {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatus {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatusEndret {...sorteringTilHeadercelle} />
+                <Utkast14aAnsvarligVeileder {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
