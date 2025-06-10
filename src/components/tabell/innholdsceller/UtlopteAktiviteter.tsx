@@ -7,9 +7,9 @@ export const UtlopteAktiviteter = ({bruker, valgteKolonner}: InnholdscelleProps)
 
     return (
         <DatoKolonne
-            className="col col-xs-2"
             dato={nyesteUtlopteAktivitet}
             skalVises={valgteKolonner.includes(Kolonne.UTLOPTE_AKTIVITETER)}
+            className="col col-xs-2"
         />
     );
 };

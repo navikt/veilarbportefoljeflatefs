@@ -7,9 +7,9 @@ export const VenterPaSvarFraNav = ({bruker, valgteKolonner}: InnholdscelleProps)
 
     return (
         <DatoKolonne
-            className="col col-xs-2"
             dato={venterPaSvarFraNAV}
             skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_NAV_DATO)}
+            className="col col-xs-2"
         />
     );
 };

@@ -7,9 +7,9 @@ export const SisteEndringDato = ({bruker, valgteKolonner}: InnholdscelleProps) =
 
     return (
         <DatoKolonne
-            className="col col-xs-2"
             dato={sisteEndringTidspunkt}
             skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}
+            className="col col-xs-2"
         />
     );
 };

@@ -22,9 +22,9 @@ export const BarnUnder18Aar = ({bruker, valgteKolonner}: InnholdscelleProps) => 
 
     return (
         <TekstKolonne
-            className="col col-xs-2"
-            skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
             tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
+            skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
+            className="col col-xs-2"
         />
     );
 };

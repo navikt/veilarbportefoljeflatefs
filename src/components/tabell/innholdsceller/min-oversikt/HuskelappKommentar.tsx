@@ -9,9 +9,9 @@ export const HuskelappKommentar = ({bruker, valgteKolonner}: InnholdscelleProps)
 
     return (
         <TekstKolonne
-            className="col col-xs-2"
-            skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
             tekst={bruker.huskelapp?.kommentar ? hentForhandsvisningAvHuskelapp(bruker.huskelapp.kommentar) : ' '}
+            skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
+            className="col col-xs-2"
         />
     );
 };

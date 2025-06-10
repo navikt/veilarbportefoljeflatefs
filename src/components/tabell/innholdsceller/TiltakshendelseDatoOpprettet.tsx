@@ -4,8 +4,8 @@ import {DatoKolonne} from '../kolonner/datokolonne';
 
 export const TiltakshendelseDatoOpprettet = ({bruker, valgteKolonner}: InnholdscelleProps) => (
     <DatoKolonne
-        className="col col-xs-2"
         dato={bruker.tiltakshendelse ? new Date(bruker.tiltakshendelse.opprettet) : null}
         skalVises={valgteKolonner.includes(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET)}
+        className="col col-xs-2"
     />
 );

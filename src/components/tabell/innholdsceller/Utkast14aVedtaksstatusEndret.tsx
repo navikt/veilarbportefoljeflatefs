@@ -5,8 +5,8 @@ import {DagerSidenKolonne} from '../kolonner/dagersidenkolonne';
 
 export const Utkast14aVedtaksstatusEndret = ({bruker, valgteKolonner}: InnholdscelleProps) => (
     <DagerSidenKolonne
-        className="col col-xs-2"
         dato={dagerSiden(bruker.utkast14a?.statusEndret)}
         skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
+        className="col col-xs-2"
     />
 );

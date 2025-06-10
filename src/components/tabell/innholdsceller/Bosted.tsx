@@ -9,9 +9,9 @@ export const Bosted = ({bruker, valgteKolonner}: InnholdscelleProps) => {
 
     return (
         <TekstKolonne
-            className="col col-xs-2"
-            skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
             tekst={bostedKommuneUtlandEllerUkjent(bruker, geografiskbostedData)}
+            skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
+            className="col col-xs-2"
         />
     );
 };

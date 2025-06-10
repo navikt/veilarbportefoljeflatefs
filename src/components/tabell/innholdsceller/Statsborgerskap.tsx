@@ -5,10 +5,10 @@ import {InnholdscelleProps} from './InnholdscelleProps';
 
 export const Statsborgerskap = ({bruker, valgteKolonner}: InnholdscelleProps) => (
     <TekstKolonne
-        className="col col-xs-2"
         tekst={
             bruker.hovedStatsborgerskap?.statsborgerskap ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap) : '-'
         }
         skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP)}
+        className="col col-xs-2"
     />
 );

@@ -8,9 +8,9 @@ export const MoterIDag = ({bruker, valgteKolonner}: InnholdscelleProps) => {
 
     return (
         <TidKolonne
-            className="col col-xs-2"
             dato={moteStartTid}
             skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
+            className="col col-xs-2"
         />
     );
 };

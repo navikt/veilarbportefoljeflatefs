@@ -5,8 +5,8 @@ import {InnholdscelleProps} from './InnholdscelleProps';
 
 export const Foedeland = ({bruker, valgteKolonner}: InnholdscelleProps) => (
     <TekstKolonne
-        className="col col-xs-2"
         tekst={bruker.foedeland ? capitalize(bruker.foedeland) : '-'}
         skalVises={valgteKolonner.includes(Kolonne.FODELAND)}
+        className="col col-xs-2"
     />
 );

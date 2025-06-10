@@ -9,9 +9,9 @@ export const Tolkesprak = ({bruker, valgteKolonner, filtervalg}: TolkebehovProps
 
     return (
         <TekstKolonne
-            className="col col-xs-2"
             tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
             skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
+            className="col col-xs-2"
         />
     );
 };

@@ -10,8 +10,8 @@ export interface TolkebehovProps extends InnholdscelleProps {
 
 export const Tolkebehov = ({bruker, valgteKolonner, filtervalg}: TolkebehovProps) => (
     <TekstKolonne
-        className="col col-xs-2"
         tekst={tolkBehov(filtervalg, bruker)}
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}
+        className="col col-xs-2"
     />
 );
