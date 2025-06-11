@@ -3,7 +3,7 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const BostedSistOppdatert = ({
+export const GeografiskBostedSistOppdatert = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,

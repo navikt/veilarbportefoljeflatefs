@@ -4,7 +4,7 @@ import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
 /** Denne viser kommune, "Utland eller "Ukjent". */
-export const Bosted = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
+export const GeografiskBosted = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.BOSTED_KOMMUNE)}
         sortering={Sorteringsfelt.BOSTED_KOMMUNE}
