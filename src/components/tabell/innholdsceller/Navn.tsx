@@ -1,7 +1,7 @@
-import {BrukerModell} from '../../typer/bruker-modell';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {BrukerModell} from '../../../typer/bruker-modell';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
+import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
+import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
 interface BrukerNavnProps {
     className?: string;
@@ -25,7 +25,7 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-export const BrukerNavn = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const Navn = ({className, bruker, enhetId}: BrukerNavnProps) => {
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
