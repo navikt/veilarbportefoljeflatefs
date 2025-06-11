@@ -2,7 +2,7 @@ import {BodyShort} from '@navikt/ds-react';
 import {InnholdscelleProps} from '../InnholdscelleProps';
 import {Kolonne} from '../../../../ducks/ui/listevisning';
 
-export function VeilederId({bruker, valgteKolonner}: InnholdscelleProps) {
+export function VeilederNavident({bruker, valgteKolonner}: InnholdscelleProps) {
     if (!valgteKolonner.includes(Kolonne.NAVIDENT)) {
         return null;
     }

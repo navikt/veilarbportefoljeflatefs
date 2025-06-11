@@ -16,7 +16,7 @@ import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
-import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
+import {Fodeland} from '../components/tabell/innholdsceller/Fodeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
 import {GeografiskBosted} from '../components/tabell/innholdsceller/GeografiskBosted';
@@ -96,7 +96,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <Fnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
-            <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Fodeland bruker={bruker} valgteKolonner={valgteKolonner} />
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
 

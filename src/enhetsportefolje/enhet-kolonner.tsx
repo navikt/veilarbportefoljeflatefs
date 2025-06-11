@@ -15,10 +15,10 @@ import {
     ytelsestypetekst
 } from '../utils/utils';
 import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
-import {VeilederId} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederid';
+import {VeilederNavident} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederNavident';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
-import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
+import {Fodeland} from '../components/tabell/innholdsceller/Fodeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
 import {GeografiskBosted} from '../components/tabell/innholdsceller/GeografiskBosted';
@@ -97,7 +97,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <Fnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
-            <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Fodeland bruker={bruker} valgteKolonner={valgteKolonner} />
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
 
@@ -112,7 +112,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <VeilederNavn bruker={bruker} valgteKolonner={valgteKolonner} />
-            <VeilederId bruker={bruker} valgteKolonner={valgteKolonner} />
+            <VeilederNavident bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UkeKolonne
                 className="col col-xs-2"
