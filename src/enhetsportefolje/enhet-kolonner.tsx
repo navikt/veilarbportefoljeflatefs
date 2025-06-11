@@ -53,9 +53,9 @@ import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdscell
 import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
+import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import './enhetsportefolje.css';
 import './brukerliste.css';
-import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -69,11 +69,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
     const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
-    const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
-    const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
-    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
-    const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
-    const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const erAapYtelse = !!ytelse && Object.keys(ytelseAapSortering).includes(ytelse);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
@@ -119,7 +114,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
                 skalVises={
-                    ytelseDagpengerErValgtKolonne &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
                         ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
@@ -130,32 +125,32 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
                 skalVises={
-                    ytelseDagpengerErValgtKolonne &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
                     (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
                 }
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE) && erAapYtelse}
                 tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE) && erAapYtelse}
                 tekst={vurderingsfristAAP || '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE) && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
