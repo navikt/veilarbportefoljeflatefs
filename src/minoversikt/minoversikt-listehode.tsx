@@ -27,7 +27,7 @@ import {GeografiskBostedDetaljer} from '../components/tabell/headerceller/Geogra
 import {GeografiskBostedSistOppdatert} from '../components/tabell/headerceller/GeografiskBostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
-import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
+import {Status14aVedtak} from '../components/tabell/headerceller/Status14aVedtak';
 import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 import {HuskelappKommentar} from '../components/tabell/headerceller/HuskelappKommentar';
@@ -273,7 +273,7 @@ export function MinOversiktListehode({
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 
-                <Status14AVedtak {...sorteringTilHeadercelle} />
+                <Status14aVedtak {...sorteringTilHeadercelle} />
 
                 <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
                 <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
