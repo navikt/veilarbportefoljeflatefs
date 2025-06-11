@@ -21,9 +21,9 @@ import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
-import {Bosted} from '../components/tabell/innholdsceller/Bosted';
-import {BostedDetaljer} from '../components/tabell/innholdsceller/BostedDetaljer';
-import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSistOppdatert';
+import {GeografiskBosted} from '../components/tabell/innholdsceller/GeografiskBosted';
+import {GeografiskBostedDetaljer} from '../components/tabell/innholdsceller/GeografiskBostedDetaljer';
+import {GeografiskBostedSistOppdatert} from '../components/tabell/innholdsceller/GeografiskBostedSistOppdatert';
 import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
@@ -51,11 +51,11 @@ import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/innholdsceller
 import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/innholdsceller/EnsligeForsorgereUtlopOvergangsstonad';
 import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/innholdsceller/EnsligeForsorgereVedtaksperiode';
 import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdsceller/EnsligeForsorgereAktivitetsplikt';
-import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -101,9 +101,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <Bosted bruker={bruker} valgteKolonner={valgteKolonner} />
-            <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
-            <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBosted bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <Tolkebehov bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
             <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />

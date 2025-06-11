@@ -19,9 +19,9 @@ import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
 import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
-import {Bosted} from '../components/tabell/innholdsceller/Bosted';
-import {BostedDetaljer} from '../components/tabell/innholdsceller/BostedDetaljer';
-import {BostedSistOppdatert} from '../components/tabell/innholdsceller/BostedSistOppdatert';
+import {GeografiskBosted} from '../components/tabell/innholdsceller/GeografiskBosted';
+import {GeografiskBostedDetaljer} from '../components/tabell/innholdsceller/GeografiskBostedDetaljer';
+import {GeografiskBostedSistOppdatert} from '../components/tabell/innholdsceller/GeografiskBostedSistOppdatert';
 import {Tolkebehov} from '../components/tabell/innholdsceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/innholdsceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/innholdsceller/TolkebehovSistOppdatert';
@@ -104,9 +104,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
             <TolkebehovSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <Bosted bruker={bruker} valgteKolonner={valgteKolonner} />
-            <BostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
-            <BostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBosted bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
 

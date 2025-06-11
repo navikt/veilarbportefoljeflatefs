@@ -22,9 +22,9 @@ import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/Statsb
 import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
-import {Bosted} from '../components/tabell/headerceller/Bosted';
-import {BostedDetaljer} from '../components/tabell/headerceller/BostedDetaljer';
-import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
+import {GeografiskBosted} from '../components/tabell/headerceller/GeografiskBosted';
+import {GeografiskBostedDetaljer} from '../components/tabell/headerceller/GeografiskBostedDetaljer';
+import {GeografiskBostedSistOppdatert} from '../components/tabell/headerceller/GeografiskBostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
 import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
@@ -136,9 +136,9 @@ export function MinOversiktListehode({
                 <Tolkesprak {...sorteringTilHeadercelle} />
                 <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
 
-                <Bosted {...sorteringTilHeadercelle} />
-                <BostedDetaljer {...sorteringTilHeadercelle} />
-                <BostedSistOppdatert {...sorteringTilHeadercelle} />
+                <GeografiskBosted {...sorteringTilHeadercelle} />
+                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
+                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
 

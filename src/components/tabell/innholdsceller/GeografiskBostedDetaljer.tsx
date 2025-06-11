@@ -4,7 +4,7 @@ import {TekstKolonne} from '../kolonner/tekstkolonne';
 import {InnholdscelleProps} from './InnholdscelleProps';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 
-export const BostedDetaljer = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const GeografiskBostedDetaljer = ({bruker, valgteKolonner}: InnholdscelleProps) => {
     const geografiskbostedData = useGeografiskbostedSelector();
 
     return (
