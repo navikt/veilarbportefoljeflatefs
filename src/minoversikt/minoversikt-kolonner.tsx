@@ -16,7 +16,7 @@ import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {TekstKolonne} from '../components/tabell/kolonner/tekstkolonne';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
-import {Foedeland} from '../components/tabell/innholdsceller/Foedeland';
+import {Fodeland} from '../components/tabell/innholdsceller/Fodeland';
 import {Statsborgerskap} from '../components/tabell/innholdsceller/Statsborgerskap';
 import {StatsborgerskapGyldigFra} from '../components/tabell/innholdsceller/StatsborgerskapGyldigFra';
 import {GeografiskBosted} from '../components/tabell/innholdsceller/GeografiskBosted';
@@ -69,11 +69,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
-    const ytelseDagpengerErValgtKolonne = valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER);
-    const ytelseAapTypeErValgtKolonne = valgteKolonner.includes(Kolonne.TYPE_YTELSE);
-    const ytelseAapVurderingsfristErValgtKolonne = valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE);
-    const ytelseAapVedtaksperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.VEDTAKSPERIODE);
-    const ytelseAapRettighetsperiodeErValgtKolonne = valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
     const vurderingsfristAAP = aapVurderingsfrist(
         bruker.innsatsgruppe,
@@ -96,7 +91,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
             <Fnr className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
 
-            <Foedeland bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Fodeland bruker={bruker} valgteKolonner={valgteKolonner} />
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
 
@@ -115,7 +110,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 ukerIgjen={bruker.dagputlopUke}
                 minVal={2}
                 skalVises={
-                    ytelseDagpengerErValgtKolonne &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
                         ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
@@ -125,33 +120,34 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 className="col col-xs-2"
                 ukerIgjen={bruker.permutlopUke}
                 minVal={2}
+                /* Eg trur kolonnevalget er feil her eller i tilsvarande headercelle, sidan visningslogikk der har "Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER". 2025-06-11, Ingrid */
                 skalVises={
-                    ytelseDagpengerErValgtKolonne &&
+                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
                     (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
                 }
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={ytelseAapTypeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE) && erAapYtelse}
                 tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={ytelseAapVurderingsfristErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE) && erAapYtelse}
                 tekst={vurderingsfristAAP || '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={ytelseAapVedtaksperiodeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={ytelseAapRettighetsperiodeErValgtKolonne && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE) && erAapYtelse}
             />
             <UkeKolonne
                 className="col col-xs-2"
