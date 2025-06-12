@@ -216,6 +216,9 @@ export function MinOversiktListehode({
                 <FilterhendelseLenke {...sorteringTilHeadercelle} />
                 <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
 
+                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
+
                 <UtlopteAktiviteter {...sorteringTilHeadercelle} />
                 <AvtaltAktivitet {...sorteringTilHeadercelle} />
 
@@ -290,9 +293,6 @@ export function MinOversiktListehode({
 
                 <HuskelappKommentar {...sorteringTilHeadercelle} />
                 <HuskelappFrist {...sorteringTilHeadercelle} />
-
-                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
-                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

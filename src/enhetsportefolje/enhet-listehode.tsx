@@ -125,13 +125,13 @@ export function EnhetListehode({
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
 
-                <GeografiskBosted {...sorteringTilHeadercelle} />
-                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
-                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
-
                 <Tolkebehov {...sorteringTilHeadercelle} />
                 <Tolkesprak {...sorteringTilHeadercelle} />
                 <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
+
+                <GeografiskBosted {...sorteringTilHeadercelle} />
+                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
+                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
 
@@ -212,6 +212,9 @@ export function EnhetListehode({
                 <FilterhendelseLenke {...sorteringTilHeadercelle} />
                 <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
 
+                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
+
                 <UtlopteAktiviteter {...sorteringTilHeadercelle} />
                 <AvtaltAktivitet {...sorteringTilHeadercelle} />
 
@@ -253,9 +256,6 @@ export function EnhetListehode({
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
 
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
-
-                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
-                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

@@ -165,15 +165,19 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <FilterhendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <FilterhendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
 
+            <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
+            <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <MoterIDag bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
             <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
-            <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
-
-            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
-            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aVedtaksstatus bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <DatoKolonne
                 className="col col-xs-2"
@@ -195,10 +199,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
-
-            <Utkast14aVedtaksstatus bruker={bruker} valgteKolonner={valgteKolonner} />
-            <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
-            <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <SisteEndring bruker={bruker} enhetId={enhetId} valgteKolonner={valgteKolonner} />
             <SisteEndringDato bruker={bruker} valgteKolonner={valgteKolonner} />
