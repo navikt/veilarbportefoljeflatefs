@@ -168,6 +168,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <TiltakshendelseLenke bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettet bruker={bruker} valgteKolonner={valgteKolonner} />
 
+            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <MoterIDag bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteVarighet bruker={bruker} valgteKolonner={valgteKolonner} />
             <Motestatus bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -175,9 +178,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <Utkast14aVedtaksstatus bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aVedtaksstatusEndret bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aAnsvarligVeileder bruker={bruker} valgteKolonner={valgteKolonner} />
-
-            <AvtaltAktivitet bruker={bruker} valgteKolonner={valgteKolonner} />
-            <UtlopteAktiviteter bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <DatoKolonne
                 className="col col-xs-2"
