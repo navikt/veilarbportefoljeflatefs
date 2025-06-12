@@ -96,13 +96,13 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <Statsborgerskap bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapGyldigFra bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <GeografiskBosted bruker={bruker} valgteKolonner={valgteKolonner} />
-            <GeografiskBostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
-            <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
-
             <Tolkebehov bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
             <Tolkesprak bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
             <TolkebehovSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <GeografiskBosted bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedDetaljer bruker={bruker} valgteKolonner={valgteKolonner} />
+            <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
 

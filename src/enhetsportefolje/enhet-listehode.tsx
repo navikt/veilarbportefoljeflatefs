@@ -125,13 +125,13 @@ export function EnhetListehode({
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
 
-                <GeografiskBosted {...sorteringTilHeadercelle} />
-                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
-                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
-
                 <Tolkebehov {...sorteringTilHeadercelle} />
                 <Tolkesprak {...sorteringTilHeadercelle} />
                 <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
+
+                <GeografiskBosted {...sorteringTilHeadercelle} />
+                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
+                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
 
