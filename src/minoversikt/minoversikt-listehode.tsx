@@ -99,14 +99,11 @@ export function MinOversiktListehode({
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
 
-    const avansertAktivitet =
-        harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
-    const forenkletAktivitet =
-        harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
 
-    const tiltaksType =
-        harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
 
     const sorteringTilHeadercelle = {
         gjeldendeSorteringsfelt: sorteringsfelt,
@@ -231,7 +228,10 @@ export function MinOversiktListehode({
                 <Utkast14aAnsvarligVeileder {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+                        (avansertAktivitet || forenkletAktivitet || tiltaksType)
+                    }
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     rekkefolge={sorteringsrekkefolge}
