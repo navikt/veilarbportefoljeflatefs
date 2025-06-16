@@ -89,7 +89,13 @@ const Env = {
     local: {ingressType: 'intern', type: EnvType.local}
 } as const;
 
-export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
+export const getEndringsloggUrl = () => {
+    if (erDev() && getEnv() === Env.ansattDev) {
+        return 'https://poao-endringslogg.ansatt.dev.nav.no';
+    } else {
+        return `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
+    }
+};
 
 export const loginUrl = () => {
     if (erMock()) {

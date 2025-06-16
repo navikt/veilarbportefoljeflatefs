@@ -2,8 +2,7 @@ import {FargekategoriDataModell} from '../model-interfaces';
 import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev, loginUrl} from '../utils/url-utils';
-import {FrontendEvent} from '../utils/frontend-logger';
+import {erDev, getEnv, loginUrl} from '../utils/url-utils';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
 import {TolkebehovSpraak} from '../ducks/tolkebehov';
@@ -15,6 +14,14 @@ const credentials = 'same-origin';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials,
+    headers: {
+        'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
+        'Content-Type': 'application/json'
+    }
+};
+const MED_CREDENTIALS_ANSATT: RequestInit = {
+    credentials,
+    mode: 'no-cors',
     headers: {
         'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
         'Content-Type': 'application/json'
@@ -269,6 +276,9 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
+    if (getEnv().ingressType === 'ansatt') {
+        return fetchToJson(`https://poao-sanity.ansatt.dev.nav.no/systemmeldinger`, MED_CREDENTIALS_ANSATT);
+    }
     return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
 }
 
@@ -287,12 +297,6 @@ export function hentTolkebehovSpraak(enhet: string): Promise<TolkebehovSpraak[]>
 
 export function hentGeografiskBosted(enhet: string): Promise<GeografiskBosted[]> {
     return fetchToJson(`/veilarbportefolje/api/enhet/${enhet}/geografiskbosted`, MED_CREDENTIALS);
-}
-
-export function sendEventTilPortefolje(event: FrontendEvent) {
-    const url = `${VEILARBPORTEFOLJE_URL}/logger/event`;
-    const config = {...MED_CREDENTIALS, method: 'post', body: JSON.stringify(event)};
-    return fetch(url, config);
 }
 
 export const refreshAccessTokens = async (): Promise<SessionMeta> => {
