@@ -1,5 +1,3 @@
-import {ArbeidslisteModell} from './arbeidsliste';
-
 export interface BrukerModell {
     fnr: string;
     guid: string;
@@ -13,38 +11,29 @@ export interface BrukerModell {
     skjermetTil?: string;
     nyForVeileder: boolean;
     nyForEnhet: boolean;
-    trengerOppfolgingsvedtak: boolean;
     vurderingsBehov?: VurderingsBehov;
+    trengerOppfolgingsvedtak: boolean;
     profileringResultat?: Profileringsresultat;
     innsatsgruppe: Innsatsgruppe;
     erDoed: boolean;
-    fodselsdagIMnd: number;
-    fodselsdato: string; // dato
-    kjonn: string; // enum
     ytelse?: string;
     utlopsdato?: string; // dato
-    aapUnntakUkerIgjen?: number;
     dagputlopUke?: number;
     permutlopUke?: number;
     aapmaxtidUke?: number;
+    aapUnntakUkerIgjen?: number;
     aapordinerutlopsdato?: string; // dato
-    arbeidsliste: ArbeidslisteModell;
-    venterPaSvarFraNAV?: string;
-    venterPaSvarFraBruker?: string;
+    venterPaSvarFraNAV?: string; // dato
+    venterPaSvarFraBruker?: string; // dato
     nyesteUtlopteAktivitet?: string; // dato
-    veilederNavn?: string;
-    brukertiltak?: string[];
     tiltakshendelse: TiltakshendelseModell | null;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
-    alleAktiviteter?: AktiviteterModell;
     aktivitetStart?: string; // dato
     nesteAktivitetStart?: string; // dato
     forrigeAktivitetStart?: string; // dato
     markert?: boolean;
-    manuellBrukerStatus: string;
     erSykmeldtMedArbeidsgiver: boolean;
-    moteStartTid: string; // kun avtalte moter
-    moteSluttTid: string; // kun avtalte moter
+    moteStartTid: string; // kun avtalte moter, // moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
     alleMoterStartTid?: string;
     alleMoterSluttTid?: string;
     utkast14a: Utkast14a | null;
@@ -53,8 +42,6 @@ export interface BrukerModell {
     sisteEndringAktivitetId?: string;
     nesteUtlopsdatoAktivitet?: string;
     hovedStatsborgerskap: Statsborgerskap;
-    harFlereStatsborgerskap: boolean;
-    innflyttingTilNorgeFraLand: string;
     foedeland?: string;
     tolkebehov: Tolkebehov;
     bostedKommune?: string;
@@ -66,11 +53,10 @@ export interface BrukerModell {
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
     barnUnder18AarData: BarnUnder18AarModell[];
-    brukersSituasjonSistEndret: string;
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
-    utdanningOgSituasjonSistEndret: string;
+    utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     utgattVarsel: UtgattVarselHendelse | null;
 }
