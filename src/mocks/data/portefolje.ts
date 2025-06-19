@@ -36,8 +36,6 @@ const huskelapp: any = {};
 let i = 123456;
 
 function lagGrunndata() {
-    const dag = rnd(1, 31);
-    const mnd = rnd(1, 12);
     const ar = rnd(0, 99);
     const erDoed = Math.random() < (100 - ar * 20) / 100;
 
@@ -55,21 +53,14 @@ function lagGrunndata() {
 
     return {
         fnr: String(i++).padStart(11, '0'),
-        fodselsdato: {
-            dayOfMonth: dag,
-            monthValue: mnd,
-            year: 1900 + ar
-        },
         fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
-        kjonn,
         erDoed,
         nesteUtlopteAktivitet,
         venterPaSvarFraBruker,
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
-        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + 15 * 60 * 1000),
         alleMoterStartTid,
         alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + 45 * 60 * 1000)
     };
@@ -252,9 +243,6 @@ function lagBruker(sikkerhetstiltak = []) {
         egenAnsatt: random_egenAnsatt ? true : '',
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
-        fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
-        fodselsdato: grunndata.fodselsdato,
-        kjonn: grunndata.kjonn,
         ytelse: ytelse.ytelse,
         utlopsdato: ytelse.utlopsdato,
         aktivitetStart: ytelse.utlopsdato,
@@ -266,7 +254,6 @@ function lagBruker(sikkerhetstiltak = []) {
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
-        moteSluttTid: grunndata.moteSluttTid,
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
@@ -281,8 +268,6 @@ function lagBruker(sikkerhetstiltak = []) {
             gyldigTil: ''
         },
         foedeland: hentLand(),
-        harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
-        innflyttingTilNorgeFraLand: '',
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedSistOppdatert: randomDate({past: true}),
