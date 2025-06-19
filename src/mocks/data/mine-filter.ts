@@ -61,6 +61,44 @@ export const mineFilter = (): LagretFilter[] => {
             note: ''
         },
         {
+            filterNavn: 'Enda et filter med arbeidsliste',
+            filterId: 13,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: ['MIN_ARBEIDSLISTE'],
+                arbeidslisteKategori: [
+                    KategoriModell.GUL,
+                    KategoriModell.BLA,
+                    KategoriModell.LILLA,
+                    KategoriModell.GRONN
+                ]
+            },
+            opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
+            sortOrder: null,
+            aktiv: true,
+            note: ''
+        },
+        {
+            filterNavn: 'Alle arbeidslistekategorier',
+            filterId: 14,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: ['MIN_ARBEIDSLISTE'],
+                arbeidslisteKategori: [
+                    KategoriModell.GUL,
+                    KategoriModell.BLA,
+                    KategoriModell.LILLA,
+                    KategoriModell.GRONN
+                ]
+            },
+            opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
+            sortOrder: null,
+            aktiv: true,
+            note: ''
+        },
+        {
             filterNavn: 'GUL',
             filterId: 5,
             filterValg: {...initialState, arbeidslisteKategori: [KategoriModell.GUL]},
