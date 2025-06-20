@@ -47,7 +47,7 @@ describe('Mine filter', () => {
             cy.getByTestId('lagre-nytt-filter_modal_form').contains('Filteret mangler navn.');
 
             // Skriv inn eit for langt namn, prøvar lagre, får feilmelding
-            cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(forLangtFilterNavn);
+            cy.getByTestId('lagre-nytt-filter_modal_navn-input').type(forLangtFilterNavn, {delay: 0});
             cy.getByTestId('lagre-nytt-filter_modal_lagre-knapp').click();
             cy.getByTestId('lagre-nytt-filter_modal_form').contains(
                 'Filternavn er for langt, kan ikke ha mer enn 255 bokstaver.'
