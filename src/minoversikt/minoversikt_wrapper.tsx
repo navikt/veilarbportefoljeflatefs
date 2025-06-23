@@ -1,6 +1,6 @@
 import {PropsWithChildren} from 'react';
 import classNames from 'classnames';
-import {Redirect, useParams} from 'react-router';
+import {Navigate, useParams} from 'react-router';
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {IdentParam} from '../model-interfaces';
@@ -18,7 +18,7 @@ export function MinOversiktWrapper({className, id, children}: PropsWithChildren<
     const visesAnnenVeiledersPortefolje = ident ? ident !== innloggetVeileder!.ident : false;
 
     if (ident && veiledere.findIndex(v => v.ident === ident) < 0) {
-        return <Redirect to="/enhet" />;
+        return <Navigate to="/enhet" />;
     }
 
     return (
