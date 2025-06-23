@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
-import {useHistory, useLocation} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import queryString from 'query-string';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 
 export function useSetEnhetIUrl() {
     const enhet = useEnhetSelector();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     const pathname = location.pathname;
@@ -15,7 +15,7 @@ export function useSetEnhetIUrl() {
             const parsed = queryString.parse(window.location.search);
             parsed.enhet = enhet;
             const stringified = queryString.stringify(parsed);
-            history.replace({pathname, search: stringified});
+            navigate({pathname: pathname, search: stringified}, {replace: true});
         }
-    }, [history, enhet, pathname]);
+    }, [navigate, enhet, pathname]);
 }
