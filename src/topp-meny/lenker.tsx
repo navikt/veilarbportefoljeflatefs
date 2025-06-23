@@ -39,8 +39,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
                     pathname: '/portefolje',
                     search: '?sidestorrelse=' + sidestorrelse
                 }}
-                className="oversiktslenke typo-undertittel"
-                activeClassName={aktivLenkeKlasse}
+                className={({isActive}) => 'oversiktslenke typo-undertittel' + (isActive ? ` ${aktivLenkeKlasse}` : '')}
                 id="min-oversikt"
                 title="Her vises alle brukere som er tildelt deg"
                 aria-label="Min oversikt"
@@ -60,8 +59,9 @@ export function Lenker({erPaloggetVeileder}: Props) {
                     pathname: '/enhet',
                     search: '?sidestorrelse=' + sidestorrelse
                 }}
-                className="oversiktslenke typo-undertittel"
-                activeClassName="oversiktslenke--valgt"
+                className={({isActive}) =>
+                    'oversiktslenke typo-undertittel' + (isActive ? ' oversiktslenke--valgt' : '')
+                }
                 id="enhetens-oversikt"
                 title="Her vises alle brukere som tilhører enheten"
                 aria-label="Enhetens oversikt"
@@ -80,8 +80,9 @@ export function Lenker({erPaloggetVeileder}: Props) {
                     pathname: '/veiledere',
                     search: '?sidestorrelse=' + sidestorrelse
                 }}
-                className="oversiktslenke typo-undertittel"
-                activeClassName="oversiktslenke--valgt"
+                className={({isActive}) =>
+                    'oversiktslenke typo-undertittel' + (isActive ? ' oversiktslenke--valgt' : '')
+                }
                 title="Her vises alle veilederne som tilhører enheten"
                 id="veileder-oversikt"
                 aria-label="Veilederoversikt"
