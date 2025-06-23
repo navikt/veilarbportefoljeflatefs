@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import {BrowserRouter} from 'react-router-dom';
-import {Routes} from './routes';
+import {Routing} from './routing';
 import {Provider} from 'react-redux';
 import createStore from './store';
 import {Decorator} from './decorator';
@@ -30,7 +30,7 @@ function Application() {
                 <InitialDataProvider>
                     <RedirectPortefolje>
                         <Decorator />
-                        <Routes />
+                        <Routing />
                     </RedirectPortefolje>
                 </InitialDataProvider>
             </BrowserRouter>
