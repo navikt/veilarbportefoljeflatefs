@@ -43,9 +43,9 @@ export interface SkjermingEtikettConfig {
     type: 'error' | 'warning' | 'info' | 'success';
 }
 
-export interface IdentParam {
+export type IdentParam = {
     ident: string;
-}
+};
 
 export enum SesjonStatus {
     GYLDIG = 'GYLDIG',
