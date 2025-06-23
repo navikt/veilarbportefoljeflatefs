@@ -1,12 +1,12 @@
 import {useEffect} from 'react';
 import queryString from 'query-string';
-import {useHistory, useLocation} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {useSetEnhetIUrl} from './use-set-enhet-i-url';
 
 export function useSyncStateMedUrl() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const {side, sidestorrelse} = useSelector((state: AppState) => state.paginering);
     const {sorteringsrekkefolge, sorteringsfelt} = useSelector((state: AppState) => state.portefolje);
@@ -21,9 +21,9 @@ export function useSyncStateMedUrl() {
             parsed.side = side;
             parsed.sidestorrelse = sidestorrelse;
             const stringified = queryString.stringify(parsed);
-            history.replace({pathname, search: stringified});
+            navigate({pathname: pathname, search: stringified}, {replace: true});
         }
-    }, [history, side, pathname, sidestorrelse, dispatch]);
+    }, [navigate, side, pathname, sidestorrelse, dispatch]);
 
     useEffect(() => {
         if (sorteringsfelt) {
@@ -32,9 +32,9 @@ export function useSyncStateMedUrl() {
             parsed.sorteringsrekkefolge = sorteringsrekkefolge || '';
 
             const stringified = queryString.stringify(parsed);
-            history.replace({pathname, search: stringified});
+            navigate({pathname: pathname, search: stringified}, {replace: true});
         }
-    }, [sorteringsrekkefolge, sorteringsfelt, history, pathname]);
+    }, [sorteringsrekkefolge, sorteringsfelt, navigate, pathname]);
 
     useSetEnhetIUrl();
 }
