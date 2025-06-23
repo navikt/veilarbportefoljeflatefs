@@ -8,7 +8,7 @@ import {Innholdslaster} from './innholdslaster/innholdslaster';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.css';
 
-export function Routes() {
+export function Routing() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
 
     return (
