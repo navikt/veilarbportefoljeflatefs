@@ -16,10 +16,18 @@ export function Routes() {
             <div className="maincontent side-innhold">
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
                     <Switch>
-                        <Route path="/enhet" component={EnhetSide} />
-                        <Route path="/veiledere" component={VeilederoversiktSide} />
-                        <Route path="/portefolje/:ident" component={MinoversiktSide} />
-                        <Route path="/portefolje" component={MinoversiktSide} />
+                        <Route path="/enhet">
+                            <EnhetSide />
+                        </Route>
+                        <Route path="/veiledere">
+                            <VeilederoversiktSide />
+                        </Route>
+                        <Route path="/portefolje/:ident">
+                            <MinoversiktSide />
+                        </Route>
+                        <Route path="/portefolje">
+                            <MinoversiktSide />
+                        </Route>
                     </Switch>
                     <TilToppenKnapp />
                 </Innholdslaster>
