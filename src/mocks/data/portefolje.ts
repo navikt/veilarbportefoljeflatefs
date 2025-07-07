@@ -3,14 +3,15 @@ import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
-    BarnUnder18Aar,
+    BarnUnder18AarModell,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
     GjeldendeVedtak14aModell,
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
-    UtgattVarselHendelse
+    UtgattVarselHendelse,
+    Utkast14a
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -35,8 +36,6 @@ const huskelapp: any = {};
 let i = 123456;
 
 function lagGrunndata() {
-    const dag = rnd(1, 31);
-    const mnd = rnd(1, 12);
     const ar = rnd(0, 99);
     const erDoed = Math.random() < (100 - ar * 20) / 100;
 
@@ -54,21 +53,14 @@ function lagGrunndata() {
 
     return {
         fnr: String(i++).padStart(11, '0'),
-        fodselsdato: {
-            dayOfMonth: dag,
-            monthValue: mnd,
-            year: 1900 + ar
-        },
         fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
-        kjonn,
         erDoed,
         nesteUtlopteAktivitet,
         venterPaSvarFraBruker,
         venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
-        moteSluttTid: moteStartTid && new Date(moteStartTid.getTime() + 15 * 60 * 1000),
         alleMoterStartTid,
         alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + 45 * 60 * 1000)
     };
@@ -117,22 +109,18 @@ function lagOverskrift() {
     return null;
 }
 
-function lagVedtakUtkast() {
+function lagVedtakUtkast(): Utkast14a | null {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
     const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
     if (maybeUtkast > 0.5) {
         return {
-            utkast14aStatusEndret: randomDate({past: true}),
-            utkast14aStatus: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
-            utkast14aAnsvarligVeileder: ansvarligVeileder
+            status: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
+            statusEndret: randomDate({past: true}),
+            ansvarligVeileder: ansvarligVeileder
         };
     }
-    return {
-        utkast14aStatusEndret: null,
-        utkast14aStatus: null,
-        utkast14aAnsvarligVeileder: ''
-    };
+    return null;
 }
 
 const lagHuskelapp = fnr => {
@@ -255,9 +243,6 @@ function lagBruker(sikkerhetstiltak = []) {
         egenAnsatt: random_egenAnsatt ? true : '',
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
-        fodselsdagIMnd: grunndata.fodselsdato.dayOfMonth,
-        fodselsdato: grunndata.fodselsdato,
-        kjonn: grunndata.kjonn,
         ytelse: ytelse.ytelse,
         utlopsdato: ytelse.utlopsdato,
         aktivitetStart: ytelse.utlopsdato,
@@ -269,13 +254,10 @@ function lagBruker(sikkerhetstiltak = []) {
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,
-        moteSluttTid: grunndata.moteSluttTid,
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        utkast14aStatus: vedtakUtkast.utkast14aStatus,
-        utkast14aStatusEndret: vedtakUtkast.utkast14aStatusEndret,
-        utkast14aAnsvarligVeileder: vedtakUtkast.utkast14aAnsvarligVeileder,
+        utkast14a: vedtakUtkast,
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
@@ -286,14 +268,14 @@ function lagBruker(sikkerhetstiltak = []) {
             gyldigTil: ''
         },
         foedeland: hentLand(),
-        harFlereStatsborgerskap: Boolean(Math.random() > 0.5),
-        innflyttingTilNorgeFraLand: '',
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedSistOppdatert: randomDate({past: true}),
-        talespraaktolk: hentSpraak(),
-        tegnspraaktolk: hentSpraak(),
-        tolkBehovSistOppdatert: randomDate({past: true}),
+        tolkebehov: {
+            talespraaktolk: hentSpraak(),
+            tegnspraaktolk: hentSpraak(),
+            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
@@ -384,14 +366,14 @@ const hentSpraak = () => {
 };
 
 const hentBarnUnder18Aar = () => {
-    const barnInfo: BarnUnder18Aar[] = [];
+    const barnInfo: BarnUnder18AarModell[] = [];
     const randomArray = new Int8Array(10);
     window.crypto.getRandomValues(randomArray);
 
     let barnAntall = randomArray[0] % 3;
 
     for (let i = 0; i <= barnAntall; i++) {
-        const singleObj: BarnUnder18Aar = {
+        const singleObj: BarnUnder18AarModell = {
             alder: Math.abs(randomArray[i] % 18)
         };
         barnInfo.push(singleObj);
@@ -405,14 +387,26 @@ const randomEndring = () => {
     return keys[(keys.length * Math.random()) << 0];
 };
 
-const randomDate = ({past}) => {
+interface RandomDateProps {
+    past: boolean;
+    /** Returns a date without timestamp, formatted as YYYY-MM-DD*/
+    withoutTimestamp?: boolean;
+}
+
+const randomDate = ({past, withoutTimestamp = false}: RandomDateProps) => {
     const dag = rnd(1, 31);
     const mnd = rnd(1, 12);
     let ar = rnd(0, 4) + new Date().getFullYear();
     if (past) {
         ar = -rnd(0, 4) + new Date().getFullYear();
     }
-    return new Date(ar, mnd - 1, dag).toISOString();
+    const date = new Date(ar, mnd - 1, dag).toISOString();
+
+    if (withoutTimestamp) {
+        return date.slice(0, 10); // End slice at 10 to only get the "YYYY-MM-DD"-part of the ISO-date-string
+    }
+
+    return date;
 };
 
 const randomDateInNearFuture = () => {

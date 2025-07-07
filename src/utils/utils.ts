@@ -127,20 +127,22 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.talespraaktolk !== undefined &&
-            bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk.length > 0) ||
-        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk.length > 0) ||
+        (bruker.tolkebehov.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
     ) {
         behov.push('Talespråktolk');
     }
 
     if (
         (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tegnspraaktolk !== undefined &&
-            bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk.length > 0) ||
-        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        (bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
     ) {
         if (behov.length > 0) {
             behov.push('tegnspråktolk');
@@ -184,28 +186,28 @@ export function tolkBehovSpraak(
 
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.talespraaktolk !== undefined &&
-            bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk.length > 0) ||
-        (bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk.length > 0) ||
+        (bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
     ) {
         behovSpraak.push(
-            formatSpraakTekst(tolkbehovSpraakData.get(bruker.talespraaktolk)!, leggTilSpraak, 'tale', false)
+            formatSpraakTekst(tolkbehovSpraakData.get(bruker.tolkebehov.talespraaktolk)!, leggTilSpraak, 'tale', false)
         );
     }
 
     if (
         (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tegnspraaktolk !== undefined &&
-            bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk.length > 0) ||
-        (bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        (bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
     ) {
-        let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
+        let spraak = tolkbehovSpraakData.get(bruker.tolkebehov.tegnspraaktolk);
         let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;
 
         behovSpraak.push(formatSpraakTekst(spraak!, leggTilSpraak, 'tegn', convertToLowerCase));

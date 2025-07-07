@@ -3,7 +3,12 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const BostedDetaljer = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
+export const GeografiskBostedDetaljer = ({
+    gjeldendeSorteringsfelt,
+    valgteKolonner,
+    rekkefolge,
+    onClick
+}: HeadercelleProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
         sortering={Sorteringsfelt.BOSTED_BYDEL}

@@ -3,20 +3,20 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const UnderVurderingVedtaksstatusEndret = ({
+export const Utkast14aVedtaksstatus = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,
     onClick
 }: HeadercelleProps) => (
     <SorteringHeader
-        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
-        sortering={Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
-        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS_ENDRET}
+        skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS)}
+        sortering={Sorteringsfelt.UTKAST_14A_STATUS}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_STATUS}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Dager siden statusendring"
-        title="Dager siden statusendring på utkast for oppfølgingsvedtak § 14 a"
+        tekst="Status oppfølgingsvedtak"
+        title="Status oppfølgingsvedtak § 14 a"
         className="col col-xs-2"
     />
 );

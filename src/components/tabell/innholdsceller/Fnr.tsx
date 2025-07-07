@@ -1,12 +1,12 @@
 import {BodyShort, CopyButton, Tooltip} from '@navikt/ds-react';
-import {BrukerModell} from '../../typer/bruker-modell';
+import {BrukerModell} from '../../../typer/bruker-modell';
 
 interface BrukerFnrProps {
     className?: string;
     bruker: BrukerModell;
 }
 
-export function BrukerFnr({className, bruker}: BrukerFnrProps) {
+export function Fnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (

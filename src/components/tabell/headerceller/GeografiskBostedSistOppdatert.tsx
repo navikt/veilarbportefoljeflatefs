@@ -3,20 +3,20 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const UnderVurderingAnsvarligVeileder = ({
+export const GeografiskBostedSistOppdatert = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,
     onClick
 }: HeadercelleProps) => (
     <SorteringHeader
-        skalVises={valgteKolonner.includes(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK)}
-        sortering={Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
-        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTKAST_14A_ANSVARLIG_VEILEDER}
+        skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
+        sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.BOSTED_SIST_OPPDATERT}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Ansvarlig for oppfølgingsvedtak"
-        title="Ansvarlig veileder for utkast til oppfølgingsvedtak § 14 a"
+        tekst="Bosted oppdatert"
+        title="Dato for siste oppdatering av bosted"
         className="col col-xs-2"
     />
 );

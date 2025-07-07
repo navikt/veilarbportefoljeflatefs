@@ -12,7 +12,7 @@ import {useTimer} from './hooks/use-timer';
 import {TourModal} from './tour-modal/tour-modal';
 import {getEndringsloggUrl} from '../../utils/url-utils';
 
-const MAX_ENTRIES = 50;
+const MAX_ENTRIES = 60;
 const APP_ID_FOR_ENDRINGSLOGG = 'afolg';
 
 interface EndringsloggProps {

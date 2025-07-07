@@ -1,18 +1,12 @@
 import {BodyShort} from '@navikt/ds-react';
-import {BrukerModell} from '../../typer/bruker-modell';
-import {hendelserLabels} from '../../filtrering/filter-konstanter';
-import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
-import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
-import {AksjonKnappMedPopoverFeilmelding} from '../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {hendelserLabels} from '../../../filtrering/filter-konstanter';
+import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
+import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
+import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
+import {Kolonne} from '../../../ducks/ui/listevisning';
+import {InnholdscelleMedLenkeProps} from './InnholdscelleProps';
 
-interface SisteEndringKategoriProps {
-    className?: string;
-    bruker: BrukerModell;
-    enhetId: string;
-    skalVises: boolean;
-}
-
-export function SisteEndringKategori({className, bruker, enhetId, skalVises}: SisteEndringKategoriProps) {
+export function SisteEndring({bruker, enhetId, valgteKolonner}: InnholdscelleMedLenkeProps) {
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
@@ -21,20 +15,21 @@ export function SisteEndringKategori({className, bruker, enhetId, skalVises}: Si
 
     const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
 
+    const skalVises = valgteKolonner.includes(Kolonne.SISTE_ENDRING);
     if (!skalVises) {
         return null;
     }
 
     if (bruker.sisteEndringAktivitetId === undefined || bruker.sisteEndringAktivitetId === null) {
         return (
-            <BodyShort size="small" className={className}>
+            <BodyShort size="small" className="col col-xs-2">
                 {sisteEndringKategori}
             </BodyShort>
         );
     }
 
     return (
-        <div className={className}>
+        <div className="col col-xs-2">
             <AksjonKnappMedPopoverFeilmelding
                 klikkAksjon={handterKlikk}
                 knappStil="juster-tekst-venstre"
