@@ -105,8 +105,8 @@ export function Toolbar({
                     size="small"
                     inline={true}
                     className="brukerfeilmelding"
-                    aria-labelledby={feilmelding}
                     data-testid={'brukerfeilmelding'}
+                    role="alert"
                 >
                     {feilmelding}
                 </Alert>
