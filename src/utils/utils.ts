@@ -181,7 +181,16 @@ export function tolkBehovSpraak(
 ): string {
     const behovSpraak: string[] = [];
     let leggTilSpraak = leggTilSpraakInfo(filtervalg);
-
+    console.log(
+        'filtervalg.tolkebehov:',
+        filtervalg.tolkebehov,
+        ' fnr:',
+        bruker.fnr,
+        ' talespraaktolk:',
+        bruker.talespraaktolk,
+        ' tegnspraaktolk:',
+        bruker.tegnspraaktolk
+    );
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
             bruker.talespraaktolk !== undefined &&
