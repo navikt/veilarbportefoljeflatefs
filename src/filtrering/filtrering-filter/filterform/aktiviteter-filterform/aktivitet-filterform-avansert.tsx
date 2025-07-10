@@ -2,7 +2,7 @@ import {ReactNode} from 'react';
 import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
-import {FiltervalgModell} from '../../../../model-interfaces';
+import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import '../filterform.css';
 
 interface AktivitetFilterformProps {

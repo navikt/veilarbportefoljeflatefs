@@ -1,7 +1,8 @@
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from './mine-filter-utils';
 import {AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filtrering/filter-konstanter';
 import {initialState} from '../../../ducks/filtrering';
-import {FiltervalgModell, InnsatsgruppeGjeldendeVedtak14a} from '../../../model-interfaces';
+import {InnsatsgruppeGjeldendeVedtak14a} from '../../../typer/bruker-modell';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 
 describe('Mine filter utils', () => {
     const ingenValgteAktiviteter = {

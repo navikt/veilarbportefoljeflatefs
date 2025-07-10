@@ -10,7 +10,7 @@ import {
     isSafari
 } from 'react-device-detect';
 import {OrNothing} from '../types/types';
-import {VeilederModell} from '../../model-interfaces';
+import {InnloggetVeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {logEvent} from '../frontend-logger';
 import {mapVeilederIdentTilNonsens} from '../../middleware/metrics-middleware';
 
@@ -45,7 +45,7 @@ function getBrowserZoom(): number {
     return Math.round(window.devicePixelRatio * 100);
 }
 
-export const logBrowserMetrikker = (veilederIdent: OrNothing<VeilederModell>): void => {
+export const logBrowserMetrikker = (veilederIdent: OrNothing<InnloggetVeilederModell>): void => {
     const browserAgent = getBrowserAgent();
     const browserVersion = getBrowserVersion();
 

@@ -1,9 +1,9 @@
 import {ReactNode} from 'react';
 import {Button} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowsUpDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../../model-interfaces';
 import {OrNothing} from '../../utils/types/types';
 import './tabell.css';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
 
 interface SorteringHeaderIkonProps {
     sortering?: OrNothing<Sorteringsfelt>;

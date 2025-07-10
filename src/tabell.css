@@ -89,9 +89,6 @@
     width: 7rem;
     white-space: pre-wrap;
 }
-table .tabell-element-center {
-    text-align: center;
-}
 table col[class*='col-'] {
     position: static;
     float: none;

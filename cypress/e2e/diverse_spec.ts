@@ -5,62 +5,6 @@ before('Start server', () => {
 });
 
 describe('Diverse', () => {
-    it('Verifiser tilbakemeldingsundersøkelse', () => {
-        // Opne modal for tilbakemelding
-        cy.getByTestId('tilbakemelding_modal').should('not.exist');
-        cy.getByTestId('tilbakemelding_fab_knapp').should('be.visible').click();
-        cy.getByTestId('tilbakemelding_modal').should('be.visible');
-
-        // TODO toggle hvis tilbakemeldingsundersøkelsen er checkboxer/tilfredshet
-        /* Hvis checkbox */
-        // cy.getByTestId('tilfredshet_send-knapp')
-        //     .click({force: true});
-        //
-        // cy.getByTestId('tilfredshet_feilmelding')
-        //     .should('be.visible');
-        //
-        // cy.checkbox('checkboxvalg_1');
-        // cy.checkbox('checkboxvalg_4');
-        // cy.checkbox('checkboxvalg_7');
-        // cy.checkbox('checkboxvalg_8');
-        //
-        // cy.getByTestId('checkboxvalg_2').should('be.disabled');
-        // cy.getByTestId('checkboxvalg_3').should('be.disabled');
-        // cy.getByTestId('checkboxvalg_5').should('be.disabled');
-        // cy.getByTestId('checkboxvalg_6').should('be.disabled');
-
-        /* Hvis tilfredshet */
-        // Trykk på "5" på tilfredshetskala, berre den skal vere valt
-        cy.getByTestId('tilfredshet-ikon_5').should('be.visible').click();
-        cy.getByTestId('tilfredshet-ikon_5').should('have.class', 'tilfredshet-valg__ikon--valgt');
-        cy.getByTestId('tilfredshet-ikon_4').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_3').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_2').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-        cy.getByTestId('tilfredshet-ikon_1').should('have.class', 'tilfredshet-valg__ikon--ikke-valgt');
-
-        // Fyll ut kommentar
-        cy.getByTestId('tilfredshet_kommentarfelt')
-            .should('be.empty')
-            .click()
-            .type('How do you throw a space party? You planet!');
-
-        // Send tilbakemelding
-        cy.getByTestId('tilfredshet_send-knapp').click();
-        cy.getByTestId('tilfredshet_send-knapp').should('not.exist');
-        cy.getByTestId('tilbakemelding_modal_takk').should('be.visible');
-        cy.getByTestId('tilbakemelding_modal').should('not.exist');
-        cy.getByTestId('tilbakemelding_fab_knapp_trykket').should('be.visible').click();
-
-        // Trykkar utanfor modalen, den skal lukke seg
-        // Funfact:
-        cy.get('body').click(20, 500);
-        cy.getByTestId('tilbakemelding_fab_knapp').should('not.exist');
-        cy.getByTestId('tilbakemelding_modal_takk').should('not.exist');
-
-        //
-        cy.clearLocalStorage('har_sendt_tilbakemelding');
-    });
-
     it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
 

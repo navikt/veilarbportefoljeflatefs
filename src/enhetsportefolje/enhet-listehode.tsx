@@ -9,7 +9,7 @@ import {
     ytelseAapSortering,
     ytelseUtlopsSortering
 } from '../filtrering/filter-konstanter';
-import {FiltervalgModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
@@ -21,12 +21,12 @@ import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/Statsb
 import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
 import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
 import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
-import {Bosted} from '../components/tabell/headerceller/Bosted';
-import {BostedDetaljer} from '../components/tabell/headerceller/BostedDetaljer';
-import {BostedSistOppdatert} from '../components/tabell/headerceller/BostedSistOppdatert';
+import {GeografiskBosted} from '../components/tabell/headerceller/GeografiskBosted';
+import {GeografiskBostedDetaljer} from '../components/tabell/headerceller/GeografiskBostedDetaljer';
+import {GeografiskBostedSistOppdatert} from '../components/tabell/headerceller/GeografiskBostedSistOppdatert';
 import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
 import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
-import {Status14AVedtak} from '../components/tabell/headerceller/Status14AVedtak';
+import {Status14aVedtak} from '../components/tabell/headerceller/Status14aVedtak';
 import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
 import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
@@ -49,13 +49,14 @@ import {AvtaltAktivitet} from '../components/tabell/headerceller/AvtaltAktivitet
 import {MoterIDag} from '../components/tabell/headerceller/MoterIDag';
 import {MoteVarighet} from '../components/tabell/headerceller/MoteVarighet';
 import {Motestatus} from '../components/tabell/headerceller/Motestatus';
-import {UnderVurderingVedtaksstatus} from '../components/tabell/headerceller/UnderVurderingVedtaksstatus';
-import {UnderVurderingVedtaksstatusEndret} from '../components/tabell/headerceller/UnderVurderingVedtaksstatusEndret';
-import {UnderVurderingAnsvarligVeileder} from '../components/tabell/headerceller/UnderVurderingAnsvarligVeileder';
+import {Utkast14aVedtaksstatus} from '../components/tabell/headerceller/Utkast14aVedtaksstatus';
+import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Utkast14aVedtaksstatusEndret';
+import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
 import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -97,14 +98,11 @@ export function EnhetListehode({
     ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
 
-    const avansertAktivitet =
-        harValgteAktiviteter(filtervalg.aktiviteter) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
-    const forenkletAktivitet =
-        harValgteAktiviteter(filtervalg.aktiviteterForenklet) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
 
-    const tiltaksType =
-        harValgteAktiviteter(filtervalg.tiltakstyper) && valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
+    const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
 
     const sorteringTilHeadercelle = {
         gjeldendeSorteringsfelt: sorteringsfelt,
@@ -124,13 +122,13 @@ export function EnhetListehode({
                 <Statsborgerskap {...sorteringTilHeadercelle} />
                 <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
 
-                <Bosted {...sorteringTilHeadercelle} />
-                <BostedDetaljer {...sorteringTilHeadercelle} />
-                <BostedSistOppdatert {...sorteringTilHeadercelle} />
-
                 <Tolkebehov {...sorteringTilHeadercelle} />
                 <Tolkesprak {...sorteringTilHeadercelle} />
                 <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
+
+                <GeografiskBosted {...sorteringTilHeadercelle} />
+                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
+                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
 
@@ -211,11 +209,17 @@ export function EnhetListehode({
                 <FilterhendelseLenke {...sorteringTilHeadercelle} />
                 <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
 
+                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
+
                 <UtlopteAktiviteter {...sorteringTilHeadercelle} />
                 <AvtaltAktivitet {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={avansertAktivitet || forenkletAktivitet || tiltaksType}
+                    skalVises={
+                        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+                        (avansertAktivitet || forenkletAktivitet || tiltaksType)
+                    }
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     rekkefolge={sorteringsrekkefolge}
@@ -229,16 +233,16 @@ export function EnhetListehode({
                 <MoteVarighet {...sorteringTilHeadercelle} />
                 <Motestatus {...sorteringTilHeadercelle} />
 
-                <UnderVurderingVedtaksstatus {...sorteringTilHeadercelle} />
-                <UnderVurderingVedtaksstatusEndret {...sorteringTilHeadercelle} />
-                <UnderVurderingAnsvarligVeileder {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatus {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatusEndret {...sorteringTilHeadercelle} />
+                <Utkast14aAnsvarligVeileder {...sorteringTilHeadercelle} />
 
                 <SisteEndring {...sorteringTilHeadercelle} />
                 <SisteEndringDato {...sorteringTilHeadercelle} />
 
                 <SvarfristCv {...sorteringTilHeadercelle} />
 
-                <Status14AVedtak {...sorteringTilHeadercelle} />
+                <Status14aVedtak {...sorteringTilHeadercelle} />
 
                 <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
                 <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
@@ -252,9 +256,6 @@ export function EnhetListehode({
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
 
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
-
-                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
-                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

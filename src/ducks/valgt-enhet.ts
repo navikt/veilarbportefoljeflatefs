@@ -3,15 +3,24 @@ import {Action, Dispatch} from 'redux';
 import {AppState} from '../reducer';
 import {pagineringSetup} from './paginering';
 import {DEFAULT_PAGINERING_STORRELSE} from '../konstanter';
+import * as Api from '../middleware/api';
+import {DataAction} from './types';
 
 // Actions
 const PENDING = 'veilarbportefolje/enheter/PENDING';
 const OK = 'VELG_ENHET';
 const INIT = 'INIT_VELG_ENHET';
 
+enum EnhetIKontekstActionType {
+    SETT_ENHET = 'EnhetIKontekst/SETT_ENHET'
+}
+
+type EnhetIKontekst = string | null;
+type EnhetIKontekstDataAction = DataAction<EnhetIKontekstActionType, EnhetIKontekst>;
+
 export interface ValgtEnhetState {
     data: {
-        enhetId: string | null;
+        enhetId: EnhetIKontekst;
     };
     status: string;
 }
@@ -31,6 +40,7 @@ export function valgtEnhetReducer(state: ValgtEnhetState = initialState, action)
         case INIT:
             return {...state, data: {enhetId: action.valgtEnhet}};
         case OK:
+        case EnhetIKontekstActionType.SETT_ENHET:
             return {
                 ...state,
                 data: {enhetId: action.valgtEnhet},
@@ -60,3 +70,11 @@ export function oppdaterValgtEnhet(nyEnhet: string) {
         dispatch(pagineringSetup({side: 1, sidestorrelse: DEFAULT_PAGINERING_STORRELSE}));
     };
 }
+
+const settEnhet = (data: EnhetIKontekst) => ({type: EnhetIKontekstActionType.SETT_ENHET, valgtEnhet: data});
+
+// Side effects
+export const hentEnhetIKontekst = () => {
+    return (dispatch: Dispatch<EnhetIKontekstDataAction>) =>
+        Api.hentEnhetIKontekst().then(data => dispatch(settEnhet(data)));
+};

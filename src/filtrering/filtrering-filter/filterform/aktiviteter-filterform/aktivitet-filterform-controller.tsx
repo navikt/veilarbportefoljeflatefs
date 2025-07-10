@@ -1,9 +1,13 @@
 import {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../../../model-interfaces';
+import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import {AktivitetFilterformForenklet} from './aktivitet-filterform-forenklet';
-import {aktiviteter, AktiviteterAvtaltMedNav, AktiviteterValg} from '../../../filter-konstanter';
+import {
+    aktiviteter,
+    AktiviteterAvtaltMedNav,
+    AktiviteterValg,
+    AktiviteterFilternokler
+} from '../../../filter-konstanter';
 import {AktivitetFilterformAvansert} from './aktivitet-filterform-avansert';
-import {FiltreringAktiviteterValg} from '../../../../ducks/filtrering';
 import {logEvent} from '../../../../utils/frontend-logger';
 import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 import '../filterform.css';
@@ -13,7 +17,7 @@ interface AktivitetFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: any) => void;
 }
 
-const aktivitetInitialState: FiltreringAktiviteterValg = {
+const aktivitetInitialState: AktiviteterFilternokler = {
     [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
     [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
     [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
@@ -26,7 +30,7 @@ const aktivitetInitialState: FiltreringAktiviteterValg = {
 };
 
 export function AktivitetFilterformController({filtervalg, endreFiltervalg}: AktivitetFilterformProps) {
-    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<FiltreringAktiviteterValg>({
+    const [valgteAvanserteAktiviteter, setValgteAvanserteAktiviteter] = useState<AktiviteterFilternokler>({
         ...aktivitetInitialState,
         ...filtervalg.aktiviteter
     });

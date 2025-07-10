@@ -3,7 +3,7 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - master
+            - main
 env:
     CI: true
     TZ: Europe/Amsterdam
@@ -11,6 +11,8 @@ env:
 jobs:
     deploy-prod:
         name: Deploy application to prod
+        permissions:
+          contents: read
         runs-on: ubuntu-latest
         steps:
             - name: Checkout

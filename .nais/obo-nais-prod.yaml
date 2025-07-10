@@ -27,6 +27,11 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   secureLogs:
     enabled: true
   azure:

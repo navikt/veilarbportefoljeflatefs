@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import {FiltervalgModell} from '../../model-interfaces';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {pagineringSetup} from '../../ducks/paginering';

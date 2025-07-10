@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
 import {VeilederCheckboxListe} from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import {FiltervalgModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 interface FiltreringVeiledereProps {
     filtervalg: FiltervalgModell;

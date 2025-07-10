@@ -1,12 +1,13 @@
 import {ReactNode} from 'react';
-import {FargekategoriModell, FiltervalgModell} from '../model-interfaces';
+import {FargekategoriModell} from '../typer/bruker-modell';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
 import {
-    AktiviteterAvtaltMedNav,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
+    initialStateAktiviteterFiltervalg,
     MINE_FARGEKATEGORIER
 } from '../filtrering/filter-konstanter';
 import {alfabetiskSammenligning} from '../utils/utils';
@@ -19,10 +20,6 @@ export const CLEAR_FILTER = 'filtrering/CLEAR_FILTER';
 export const VEILEDER_SOKT_FRA_TOOLBAR = 'filtrering/VEILEDER_SOKT_FRA_TOOLBAR';
 export const FARGEKATEGORIER_HOVEDFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_HOVEDFILTER_KLIKK';
 export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UNDERFILTER_KLIKK';
-
-export type FiltreringAktiviteterValg = {
-    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
-};
 
 //  Reducer
 export const initialState: FiltervalgModell = {
@@ -38,17 +35,7 @@ export const initialState: FiltervalgModell = {
     servicegruppe: [],
     veiledere: [],
     ytelse: null,
-    aktiviteter: {
-        [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
-        [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
-    } as FiltreringAktiviteterValg,
+    aktiviteter: initialStateAktiviteterFiltervalg,
     aktiviteterForenklet: [],
     tiltakstyper: [],
     hovedmal: [],

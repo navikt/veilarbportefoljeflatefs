@@ -13,7 +13,7 @@ import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisnin
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
-import {lagLablerTilVeiledereMedIdenter} from '../filtrering/utils';
+import {lagLablerTilVeiledereMedIdenter} from '../filtrering/lagLablerTilVeiledereMedIdenter';
 import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';

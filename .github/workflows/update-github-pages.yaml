@@ -3,13 +3,13 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - master
-permissions:
-    contents: write
-    pages: write
+            - main
 jobs:
     update-gh-pages:
         name: Update GitHub pages
+        permissions:
+          contents: write
+          pages: write
         runs-on: ubuntu-latest
         steps:
             - name: Checkout

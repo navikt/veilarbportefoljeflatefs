@@ -3,7 +3,7 @@ name: paoa frontend container prod
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - '.github/workflows/poao-frontend-container-prod.yaml'
       - '.nais/obo-nais-prod.yaml'
@@ -18,6 +18,8 @@ env:
 
 jobs:
   deploy-prod:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:

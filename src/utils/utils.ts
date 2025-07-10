@@ -1,8 +1,8 @@
 import {RefObject} from 'react';
-import moment from 'moment/moment';
-import {AktiviteterModell, BrukerModell, FiltervalgModell, Innsatsgruppe} from '../model-interfaces';
+import {AktiviteterModell, BrukerModell, Innsatsgruppe} from '../typer/bruker-modell';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Maybe} from './types';
-import {dateGreater, toDatePrettyPrint, toDateString} from './dato-utils';
+import {dateGreater, toDateString} from './dato-utils';
 import {settBrukerIKontekst} from '../middleware/api';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
@@ -127,20 +127,22 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.talespraaktolk !== undefined &&
-            bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk.length > 0) ||
-        (bruker.talespraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk.length > 0) ||
+        (bruker.tolkebehov.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
     ) {
         behov.push('Talespråktolk');
     }
 
     if (
         (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tegnspraaktolk !== undefined &&
-            bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk.length > 0) ||
-        (bruker.tegnspraaktolk !== undefined && filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        (bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
     ) {
         if (behov.length > 0) {
             behov.push('tegnspråktolk');
@@ -193,28 +195,28 @@ export function tolkBehovSpraak(
     );
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.talespraaktolk !== undefined &&
-            bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk.length > 0) ||
-        (bruker.talespraaktolk !== null &&
-            bruker.talespraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.talespraaktolk))
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk.length > 0) ||
+        (bruker.tolkebehov.talespraaktolk !== null &&
+            bruker.tolkebehov.talespraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
     ) {
         behovSpraak.push(
-            formatSpraakTekst(tolkbehovSpraakData.get(bruker.talespraaktolk)!, leggTilSpraak, 'tale', false)
+            formatSpraakTekst(tolkbehovSpraakData.get(bruker.tolkebehov.talespraaktolk)!, leggTilSpraak, 'tale', false)
         );
     }
 
     if (
         (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tegnspraaktolk !== undefined &&
-            bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk.length > 0) ||
-        (bruker.tegnspraaktolk !== null &&
-            bruker.tegnspraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tegnspraaktolk))
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        (bruker.tolkebehov.tegnspraaktolk !== null &&
+            bruker.tolkebehov.tegnspraaktolk !== undefined &&
+            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
     ) {
-        let spraak = tolkbehovSpraakData.get(bruker.tegnspraaktolk);
+        let spraak = tolkbehovSpraakData.get(bruker.tolkebehov.tegnspraaktolk);
         let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;
 
         behovSpraak.push(formatSpraakTekst(spraak!, leggTilSpraak, 'tegn', convertToLowerCase));
@@ -278,29 +280,6 @@ export function bostedKommuneUtlandEllerUkjent(bruker: BrukerModell, geografiskb
 
 export const bostedBydelEllerUkjent = (bostedBydel: string, geografiskbostedData: Map<string, string>): string => {
     return geografiskbostedData.get(bostedBydel) ?? '–';
-};
-
-export const mapOmAktivitetsPlikt = (aktivitetsplikt?: boolean): string => {
-    if (aktivitetsplikt === undefined) {
-        return 'Ukjent';
-    }
-    return aktivitetsplikt ? 'Aktivitetsplikt' : 'Ikke aktivitetsplikt';
-};
-
-export const oppfolingsdatoEnsligeForsorgere = (alderBarn?: Date) => {
-    if (!alderBarn) {
-        return '';
-    }
-    const alderBarnMoment = moment(alderBarn);
-
-    if (moment().diff(alderBarnMoment, 'months') < 6) {
-        const datoBarnSeksMnd = alderBarnMoment.add({months: 6}).toDate();
-        const formatertDato = toDatePrettyPrint(datoBarnSeksMnd);
-        return `${formatertDato} (Barn 6 mnd)`;
-    }
-    const datoBarnEttAar = alderBarnMoment.add({years: 1}).toDate();
-    const formatertDato = toDatePrettyPrint(datoBarnEttAar);
-    return `${formatertDato} (Barn 1 år)`;
 };
 
 export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: string, apneNyFane?: boolean) => {

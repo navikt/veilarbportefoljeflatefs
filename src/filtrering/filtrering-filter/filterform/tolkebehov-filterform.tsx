@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {tolkebehov} from '../../filter-konstanter';
 import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';

@@ -1,6 +1,6 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
-import {FiltervalgModell} from '../model-interfaces';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;

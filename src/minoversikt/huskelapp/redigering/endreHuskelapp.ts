@@ -4,7 +4,7 @@ import {FormikValues} from 'formik';
 import {endreHuskelappAction} from '../../../ducks/huskelapp';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {AppState} from '../../../reducer';
-import {BrukerModell} from '../../../model-interfaces';
+import {BrukerModell} from '../../../typer/bruker-modell';
 
 export const endreHuskelapp = async (
     dispatch: ThunkDispatch<AppState, any, AnyAction>,

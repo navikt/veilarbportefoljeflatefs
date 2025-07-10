@@ -3,7 +3,8 @@ import {useDispatch} from 'react-redux';
 import classNames from 'classnames';
 import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
-import {BrukerModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {BrukerModell} from '../typer/bruker-modell';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {EnhetKolonner} from './enhet-kolonner';
 import {OrNothing} from '../utils/types/types';
@@ -16,7 +17,6 @@ interface EnhetBrukerpanelProps {
     settMarkert: (bruker: string, markert: boolean) => void;
     enhetId: string;
     filtervalg: FiltervalgModell;
-    brukersVeileder?: VeilederModell;
     valgteKolonner: Kolonne[];
     forrigeBruker: OrNothing<string>;
 }
@@ -26,7 +26,6 @@ export function EnhetBrukerpanel({
     settMarkert,
     enhetId,
     filtervalg,
-    brukersVeileder,
     valgteKolonner,
     forrigeBruker
 }: EnhetBrukerpanelProps) {
@@ -70,7 +69,6 @@ export function EnhetBrukerpanel({
                 enhetId={enhetId}
                 filtervalg={filtervalg}
                 valgteKolonner={valgteKolonner}
-                brukersVeileder={brukersVeileder}
             />
             <div className="brukerliste__gutter-right">
                 <div className="brukerliste__etiketter">

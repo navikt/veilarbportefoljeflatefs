@@ -12,7 +12,7 @@ export interface StatustallInnhold {
     ikkeIavtaltAktivitet: number;
     iavtaltAktivitet: number;
     erSykmeldtMedArbeidsgiver: number;
-    trengerVurdering: number;
+    trengerOppfolgingsvedtak: number;
     nyeBrukereForVeileder: number;
     underVurdering: number;
     mineHuskelapper: number;

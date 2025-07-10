@@ -1,6 +1,7 @@
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {initialState} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
+import {KategoriModell} from '../../typer/arbeidsliste';
 
 export const mineFilter = (): LagretFilter[] => {
     const datointervall = {
@@ -19,6 +20,7 @@ export const mineFilter = (): LagretFilter[] => {
                 tiltakstyper: ['UTDYRK']
             },
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -33,6 +35,7 @@ export const mineFilter = (): LagretFilter[] => {
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: 'delete filter'
@@ -42,6 +45,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 3,
             filterValg: {...initialState, kjonn: 'K', formidlingsgruppe: ['ARBS']},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -51,6 +55,45 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 4,
             filterValg: {...initialState, ferdigfilterListe: ['MIN_ARBEIDSLISTE']},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
+            sortOrder: null,
+            aktiv: true,
+            note: ''
+        },
+        {
+            filterNavn: 'Enda et filter med arbeidsliste',
+            filterId: 13,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: ['MIN_ARBEIDSLISTE'],
+                arbeidslisteKategori: [
+                    KategoriModell.GUL,
+                    KategoriModell.BLA,
+                    KategoriModell.LILLA,
+                    KategoriModell.GRONN
+                ]
+            },
+            opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
+            sortOrder: null,
+            aktiv: true,
+            note: ''
+        },
+        {
+            filterNavn: 'Alle arbeidslistekategorier',
+            filterId: 14,
+            filterValg: {
+                ...initialState,
+                ferdigfilterListe: ['MIN_ARBEIDSLISTE'],
+                arbeidslisteKategori: [
+                    KategoriModell.GUL,
+                    KategoriModell.BLA,
+                    KategoriModell.LILLA,
+                    KategoriModell.GRONN
+                ]
+            },
+            opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -58,8 +101,9 @@ export const mineFilter = (): LagretFilter[] => {
         {
             filterNavn: 'GUL',
             filterId: 5,
-            filterValg: {...initialState, arbeidslisteKategori: ['GUL']},
+            filterValg: {...initialState, arbeidslisteKategori: [KategoriModell.GUL]},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -69,6 +113,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 6,
             filterValg: {...initialState, kjonn: 'K'},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -76,8 +121,9 @@ export const mineFilter = (): LagretFilter[] => {
         {
             filterNavn: 'LILLA',
             filterId: 7,
-            filterValg: {...initialState, arbeidslisteKategori: ['LILLA']},
+            filterValg: {...initialState, arbeidslisteKategori: [KategoriModell.LILLA]},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: 3,
             aktiv: true,
             note: ''
@@ -85,8 +131,9 @@ export const mineFilter = (): LagretFilter[] => {
         {
             filterNavn: 'GRØNN',
             filterId: 8,
-            filterValg: {...initialState, arbeidslisteKategori: ['GRONN']},
+            filterValg: {...initialState, arbeidslisteKategori: [KategoriModell.GRONN]},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: null,
             aktiv: true,
             note: ''
@@ -96,10 +143,11 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 9,
             filterValg: {
                 ...initialState,
-                arbeidslisteKategori: ['BLA'],
+                arbeidslisteKategori: [KategoriModell.BLA],
                 alder: ['20-24']
             },
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: 2,
             aktiv: true,
             note: ''
@@ -111,6 +159,7 @@ export const mineFilter = (): LagretFilter[] => {
                 ...initialState,
                 ferdigfilterListe: ['NYE_BRUKERE_FOR_VEILEDER']
             },
+            filterCleanup: false,
             opprettetDato: faker.date.between(datointervall),
             sortOrder: null,
             aktiv: true,
@@ -121,6 +170,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 11,
             filterValg: {...initialState, ferdigfilterListe: ['UFORDELTE_BRUKERE']},
             opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
             sortOrder: 1,
             aktiv: true,
             note: ''
@@ -132,8 +182,11 @@ export const mineFilter = (): LagretFilter[] => {
                 ...initialState,
                 ferdigfilterListe: ['ER_SYKMELDT_MED_ARBEIDSGIVER', 'NYE_BRUKERE_FOR_VEILEDER']
             },
+            opprettetDato: faker.date.between(datointervall),
+            filterCleanup: false,
+            sortOrder: null,
             aktiv: false,
             note: 'Alle utenom permitterte etter 09.03.2020'
         }
-    ] as LagretFilter[];
+    ];
 };

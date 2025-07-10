@@ -1,4 +1,6 @@
-import {FargekategoriDataModell, FiltervalgModell, VeilederModell} from '../model-interfaces';
+import {FargekategoriDataModell} from '../model-interfaces';
+import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
@@ -141,12 +143,12 @@ export function hentVeiledersPortefolje(
     return fetchToJson(url, config);
 }
 
-export function hentEnhetsVeiledere(enhetId) {
+export function hentEnhetsVeiledere(enhetId): Promise<VeilederePaEnhetModell> {
     const url = `${VEILARBVEILEDER_URL}/api/enhet/${enhetId}/veiledere`;
     return fetchToJson(url, MED_CREDENTIALS);
 }
 
-export function hentAktivBruker(): Promise<VeilederModell> {
+export function hentAktivBruker(): Promise<InnloggetVeilederModell> {
     return fetchToJson(`${VEILARBVEILEDER_URL}/api/veileder/v2/me`, MED_CREDENTIALS);
 }
 
@@ -343,4 +345,22 @@ export const fjernBrukerIKontekst = async () => {
     });
 
     return sjekkStatuskode(respons);
+};
+
+export const hentEnhetIKontekst = async () => {
+    try {
+        const data = await fetchToJson('/modiacontextholder/api/context/v2/aktivenhet');
+
+        if (data.aktivEnhet === null) {
+            return null;
+        }
+
+        if (typeof data.aktivEnhet !== 'string') {
+            return null;
+        }
+
+        return data.aktivEnhet as string;
+    } catch {
+        return null;
+    }
 };

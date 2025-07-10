@@ -2,7 +2,7 @@ import {ReactComponent as FargekategoriIkonBlaHalvsirkel} from '../ikoner/fargek
 import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
 import {ReactComponent as FargekategoriIkonGulSirkel} from '../ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
 import {ReactComponent as FargekategoriIkonLillaFirkant} from '../ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
-import {KategoriModell} from '../../model-interfaces';
+import {KategoriModell} from '../../typer/arbeidsliste';
 import '../../minoversikt/minoversikt.css';
 
 interface ArbeidslistekategoriProps {

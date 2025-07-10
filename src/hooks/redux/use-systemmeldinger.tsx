@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
-import {Systemmelding} from '../../model-interfaces';
+import {Systemmelding} from '../../ducks/systemmeldinger';
 
 const selectSystemmeldingerData = (state: AppState) => state.systemmeldinger.data;
 

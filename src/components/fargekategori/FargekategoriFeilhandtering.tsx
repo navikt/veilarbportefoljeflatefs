@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {Alert, BodyShort, List} from '@navikt/ds-react';
-import {Status} from '../../model-interfaces';
+import {STATUS} from '../../ducks/utils';
 
 interface Props {
     children: ReactNode;
@@ -32,7 +32,7 @@ const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | 
 
 export const FargekategoriFeilhandtering = ({children, apiResponse}: Props) => {
     const responseJson =
-        apiResponse.status === Status.ERROR && isString(apiResponse.data.data)
+        apiResponse.status === STATUS.ERROR && isString(apiResponse.data.data)
             ? JSON.parse(apiResponse.data.data)
             : apiResponse.data;
 
@@ -40,7 +40,7 @@ export const FargekategoriFeilhandtering = ({children, apiResponse}: Props) => {
 
     return (
         <>
-            {apiResponse.status === Status.ERROR || !!errorFnrs?.length ? (
+            {apiResponse.status === STATUS.ERROR || !!errorFnrs?.length ? (
                 <Alert size="small" variant="error">
                     {mapErrorToText(okFnrs, errorFnrs, apiResponse.data.response?.status)}
                 </Alert>

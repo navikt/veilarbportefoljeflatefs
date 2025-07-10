@@ -1,12 +1,8 @@
 import {lag2Sifret, range} from '../utils/utils';
-import {
-    FargekategoriModell,
-    Fargekategorinavn,
-    Hovedmal,
-    InnsatsgruppeGjeldendeVedtak14a,
-    Sorteringsfelt
-} from '../model-interfaces';
+import {Fargekategorinavn} from '../model-interfaces';
+import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../typer/bruker-modell';
 import {Dictionary} from '../utils/types/types';
+import {Sorteringsfelt} from '../typer/kolonnesortering';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
 
@@ -20,7 +16,7 @@ export type CheckboxFilterMap = Dictionary<CheckboxFilter> | Dictionary<string>;
 /* Konstantar for filternamna brukt i OpenSearch */
 export const UFORDELTE_BRUKERE = 'UFORDELTE_BRUKERE';
 export const NYE_BRUKERE_FOR_VEILEDER = 'NYE_BRUKERE_FOR_VEILEDER';
-export const TRENGER_VURDERING = 'TRENGER_VURDERING';
+export const TRENGER_OPPFOLGINGSVEDTAK = 'TRENGER_OPPFOLGINGSVEDTAK';
 export const ER_SYKMELDT_MED_ARBEIDSGIVER = 'ER_SYKMELDT_MED_ARBEIDSGIVER';
 export const VENTER_PA_SVAR_FRA_NAV = 'VENTER_PA_SVAR_FRA_NAV';
 export const VENTER_PA_SVAR_FRA_BRUKER = 'VENTER_PA_SVAR_FRA_BRUKER';
@@ -93,7 +89,8 @@ export function lagConfig(data: any): any {
 export const ferdigfilterListeLabelTekst = {
     [UFORDELTE_BRUKERE]: 'Ufordelte brukere',
     [NYE_BRUKERE_FOR_VEILEDER]: 'Nye brukere',
-    [TRENGER_VURDERING]: 'Trenger vurdering',
+    [TRENGER_OPPFOLGINGSVEDTAK]: 'Trenger oppfølgingsvedtak § 14 a',
+    [UNDER_VURDERING]: 'Utkast oppfølgingsvedtak § 14 a',
     [ER_SYKMELDT_MED_ARBEIDSGIVER]: 'Sykmeldt med arbeidsgiver',
     [VENTER_PA_SVAR_FRA_NAV]: 'Venter på svar fra Nav',
     [VENTER_PA_SVAR_FRA_BRUKER]: 'Venter på svar fra bruker',
@@ -105,7 +102,6 @@ export const ferdigfilterListeLabelTekst = {
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
     [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
     [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
-    [UNDER_VURDERING]: 'Under vurdering',
     [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
@@ -262,6 +258,10 @@ export const ensligeForsorgere = {
     OVERGANGSSTONAD: {label: 'Overgangsstønad'}
 };
 
+export type AktiviteterFilternokler = {
+    [aktivitet in AktiviteterAvtaltMedNav]: AktiviteterValg;
+};
+
 export enum AktiviteterAvtaltMedNav {
     SOKEAVTALE = 'SOKEAVTALE',
     STILLING = 'STILLING',
@@ -292,6 +292,18 @@ export enum AktiviteterValg {
     NEI = 'NEI',
     NA = 'NA'
 }
+
+export const initialStateAktiviteterFiltervalg: AktiviteterFilternokler = {
+    [AktiviteterAvtaltMedNav.BEHANDLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.EGEN]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.GRUPPEAKTIVITET]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.IJOBB]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.MOTE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.SOKEAVTALE]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.STILLING]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.TILTAK]: AktiviteterValg.NA,
+    [AktiviteterAvtaltMedNav.UTDANNINGAKTIVITET]: AktiviteterValg.NA
+};
 
 export const cvJobbprofil = {
     HAR_DELT_CV: {label: 'CV delt med Nav'},

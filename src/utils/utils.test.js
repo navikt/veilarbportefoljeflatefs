@@ -1,13 +1,9 @@
 import 'babel-polyfill';
 import moment from 'moment';
-import {
-    nesteUtlopsdatoEllerNull,
-    oppfolingsdatoEnsligeForsorgere,
-    utledValgteAktivitetsTyper,
-    utlopsdatoUker
-} from './utils';
+import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker} from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
+import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
 
 describe('Date utils', () => {
     describe('Utlopsdato aktiviteter', () => {

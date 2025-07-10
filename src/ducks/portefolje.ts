@@ -4,7 +4,7 @@ import {pagineringSetup} from './paginering';
 import {TILDELING_FEILET, visFeiletModal} from './modal-feilmelding-brukere';
 import {visServerfeilModal} from './modal-serverfeil';
 import {hentStatustallForVeileder} from './statustall/statustall-veileder';
-import {BrukerModell, Sorteringsfelt, Sorteringsrekkefolge} from '../model-interfaces';
+import {BrukerModell} from '../typer/bruker-modell';
 import {selectFraIndex, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {visTilordningOkModal} from './modal';
 import {AppState} from '../reducer';
@@ -14,6 +14,7 @@ import {capitalize} from '../utils/utils';
 import {hentStatustallForEnhet} from './statustall/statustall-enhet';
 import {toJson} from '../middleware/api';
 import {FARGEKATEGORI_OPPDATER_OK} from './fargekategori';
+import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 
 // Actions
 const OK = 'veilarbportefolje/portefolje/OK';

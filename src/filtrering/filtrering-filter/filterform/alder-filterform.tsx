@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../model-interfaces';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Dictionary} from '../../../utils/types/types';
 import {Grid} from '../../../components/grid/grid';
 import {logEvent} from '../../../utils/frontend-logger';

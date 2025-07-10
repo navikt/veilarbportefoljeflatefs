@@ -1,6 +1,6 @@
 import {hentAktivBruker} from '../middleware/api';
 import {STATUS, doThenDispatch} from './utils';
-import {VeilederModell} from '../model-interfaces';
+import {InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {OrNothing} from '../utils/types/types';
 
 // Actions
@@ -10,7 +10,7 @@ export const PENDING = 'veilarbveileder/me/PENDING';
 
 export interface InnloggetVeilederState {
     status: any;
-    data: OrNothing<VeilederModell>;
+    data: OrNothing<InnloggetVeilederModell>;
 }
 
 const initialState = {
