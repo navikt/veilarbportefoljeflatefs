@@ -189,9 +189,9 @@ export function tolkBehovSpraak(
         ' fnr:',
         bruker.fnr,
         ' talespraaktolk:',
-        bruker.talespraaktolk,
+        bruker.tolkebehov.talespraaktolk,
         ' tegnspraaktolk:',
-        bruker.tegnspraaktolk
+        bruker.tolkebehov.tegnspraaktolk
     );
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
