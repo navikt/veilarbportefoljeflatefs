@@ -125,6 +125,32 @@ export function aapRettighetsperiode(ytelse, maxtidukerigjen, unntakukerigjen) {
 
 export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
+    console.log(
+        'filtervalg.tolkebehov:',
+        filtervalg.tolkebehov,
+        ' fnr:',
+        bruker.fnr,
+        ' talespraaktolk:',
+        bruker.tolkebehov.talespraaktolk,
+        ' tegnspraaktolk:',
+        bruker.tolkebehov.tegnspraaktolk
+    );
+
+    console.log(
+        filtervalg.tolkebehov.includes('TALESPRAAKTOLK'),
+        ' ',
+        bruker.tolkebehov.talespraaktolk !== undefined,
+        ' ',
+        bruker.tolkebehov.talespraaktolk !== null,
+        ' ',
+        bruker.tolkebehov.talespraaktolk,
+        ' ',
+        bruker.tolkebehov.talespraaktolk ? bruker.tolkebehov.talespraaktolk.length > 0 : false,
+        ' ',
+        bruker.tolkebehov.talespraaktolk !== undefined,
+        ' ',
+        bruker.tolkebehov.talespraaktolk ? filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk) : false
+    );
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
             bruker.tolkebehov.talespraaktolk !== undefined &&
@@ -134,7 +160,23 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
             filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
     ) {
         behov.push('Talespråktolk');
+        console.log("behov.push('Talespråktolk')");
     }
+    console.log(
+        filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK'),
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk !== undefined,
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk !== null,
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk,
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk ? bruker.tolkebehov.tegnspraaktolk.length > 0 : false,
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk !== undefined,
+        ' ',
+        bruker.tolkebehov.tegnspraaktolk ? filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk) : false
+    );
 
     if (
         (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
@@ -146,14 +188,17 @@ export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     ) {
         if (behov.length > 0) {
             behov.push('tegnspråktolk');
+            console.log("behov.push('tegnspråktolk')");
         } else {
             behov.push('Tegnspråktolk');
+            console.log("behov.push('Tegnspråktolk')");
         }
     }
 
     if (behov.length === 0) {
         return '-';
     }
+    console.log('behov: ', behov);
 
     return behov.join(', ');
 }
@@ -183,16 +228,6 @@ export function tolkBehovSpraak(
 ): string {
     const behovSpraak: string[] = [];
     let leggTilSpraak = leggTilSpraakInfo(filtervalg);
-    console.log(
-        'filtervalg.tolkebehov:',
-        filtervalg.tolkebehov,
-        ' fnr:',
-        bruker.fnr,
-        ' talespraaktolk:',
-        bruker.tolkebehov.talespraaktolk,
-        ' tegnspraaktolk:',
-        bruker.tolkebehov.tegnspraaktolk
-    );
     if (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
             bruker.tolkebehov.talespraaktolk !== undefined &&
@@ -226,6 +261,7 @@ export function tolkBehovSpraak(
         return '-';
     }
 
+    console.log('behovSpraak: ', behovSpraak);
     return behovSpraak.join(', ');
 }
 
