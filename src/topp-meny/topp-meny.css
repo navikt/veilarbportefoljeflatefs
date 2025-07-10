@@ -1,17 +1,24 @@
 .veilarbportefoljeflatefs .topp-meny {
+    position: relative;
     display: flex;
     align-items: baseline; /* Plasserer barne-element slik at teksten deira er på éi linje */
     column-gap: 1rem;
+    z-index: 1;
+}
 
+.veilarbportefoljeflatefs .topp-meny::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
     background: var(--a-bg-default);
     box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
 
-    /* Strekk bakgrunnsfargen heilt ut til kantane av sida med negativ margin,
-     *   og dyttar innhaldet tilsvarande inn att med padding */
-    margin-left: calc(var(--side-padding-x-akse) * -1);
-    margin-right: calc(var(--side-padding-x-akse) * -1);
-    padding-left: var(--side-padding-x-akse);
-    padding-right: var(--side-padding-x-akse);
+    /* strekker bakgrunnen helt ut til kantene */
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1; /* legger bakgrunnen bak innholdet */
 }
 
 .veilarbportefoljeflatefs .topp-meny .oversikt-overskrifter {
