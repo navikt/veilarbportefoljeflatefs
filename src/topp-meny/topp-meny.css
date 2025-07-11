@@ -3,7 +3,6 @@
     display: flex;
     align-items: baseline; /* Plasserer barne-element slik at teksten deira er på éi linje */
     column-gap: 1rem;
-    z-index: 1;
 }
 
 .veilarbportefoljeflatefs .topp-meny::before {
