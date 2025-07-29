@@ -69,7 +69,7 @@ export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: P
             open={isModalOpen}
             onClose={onModalClose}
             onBeforeClose={handleHuskelappEndret}
-            closeOnBackdropClick={false} // TODO sett til true når arbeidslistene er migrert, antar det er mindre sjanse for å kopiere (uten å ha endret innholdet, som vil trigge bekreftelsesmelding)
+            closeOnBackdropClick={true}
             aria-labelledby="huskelappmodal-overskrift"
         >
             <Modal.Header>
