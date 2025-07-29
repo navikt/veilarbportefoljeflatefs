@@ -9,17 +9,17 @@ import './filterform.css';
 interface CheckboxFilterformProps {
     form: string;
     valg: CheckboxFilterMap;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
 }
 
 export function CheckboxFilterform({
-    endreFiltervalg,
-    valg,
     form,
+    valg,
     filtervalg,
+    endreFiltervalg,
     className,
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
