@@ -1,5 +1,5 @@
 import 'moment/locale/nb';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {MinoversiktSide} from './minoversikt/minoversikt-side';
 import {EnhetSide} from './enhetsportefolje/enhet-side';
 import {VeilederoversiktSide} from './veilederoversikt/veilederoversikt-side';
@@ -8,19 +8,19 @@ import {Innholdslaster} from './innholdslaster/innholdslaster';
 import {TilToppenKnapp} from './components/til-toppen-knapp/til-toppen-knapp';
 import './style.css';
 
-export function Routes() {
+export function Routing() {
     const {enhettiltak, veiledere, portefoljestorrelser} = useFetchPortefoljeData();
 
     return (
         <div className="portefolje">
             <div className="maincontent side-innhold">
                 <Innholdslaster avhengigheter={[enhettiltak, veiledere, portefoljestorrelser]}>
-                    <Switch>
-                        <Route path="/enhet" component={EnhetSide} />
-                        <Route path="/veiledere" component={VeilederoversiktSide} />
-                        <Route path="/portefolje/:ident" component={MinoversiktSide} />
-                        <Route path="/portefolje" component={MinoversiktSide} />
-                    </Switch>
+                    <Routes>
+                        <Route path="/enhet" element={<EnhetSide />} />
+                        <Route path="/veiledere" element={<VeilederoversiktSide />} />
+                        <Route path="/portefolje/:ident" element={<MinoversiktSide />} />
+                        <Route path="/portefolje" element={<MinoversiktSide />} />
+                    </Routes>
                     <TilToppenKnapp />
                 </Innholdslaster>
             </div>
