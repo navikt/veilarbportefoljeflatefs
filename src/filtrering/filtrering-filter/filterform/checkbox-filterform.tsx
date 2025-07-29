@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 import './filterform.css';
@@ -12,7 +11,6 @@ interface CheckboxFilterformProps {
     valg: CheckboxFilterMap;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
 }
@@ -22,7 +20,6 @@ export function CheckboxFilterform({
     valg,
     form,
     filtervalg,
-    gridColumns = 1,
     className,
     emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
@@ -58,19 +55,17 @@ export function CheckboxFilterform({
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
-                    <Grid columns={gridColumns}>
-                        <CheckboxGroup
-                            hideLegend
-                            legend=""
-                            onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
-                            size="small"
-                            value={checkBoxValg}
-                        >
-                            {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
-                                <div key={filterKey}>{checkBoxKomponent([filterKey, filterValue])}</div>
-                            ))}
-                        </CheckboxGroup>
-                    </Grid>
+                    <CheckboxGroup
+                        hideLegend
+                        legend=""
+                        onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
+                        size="small"
+                        value={checkBoxValg}
+                    >
+                        {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
+                            <div key={filterKey}>{checkBoxKomponent([filterKey, filterValue])}</div>
+                        ))}
+                    </CheckboxGroup>
                 </div>
             )}
             <NullstillKnapp
