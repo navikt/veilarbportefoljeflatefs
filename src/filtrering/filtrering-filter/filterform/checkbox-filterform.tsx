@@ -81,7 +81,8 @@ export function CheckboxFilterform({
             />
             {!harValg && (
                 <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
-                    {emptyCheckboxFilterFormMessage ?? 'Ingen veiledere funnet'}
+                    {emptyCheckboxFilterFormMessage ??
+                        'Får ikke til å vise avhukingsbokser. Meld sak i Porten om problemet varer lenge.'}
                 </Alert>
             )}
         </form>
