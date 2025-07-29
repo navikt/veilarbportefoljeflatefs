@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
-import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
-import {Dictionary} from '../../../utils/types/types';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
@@ -16,7 +15,6 @@ interface CheckboxFilterformProps {
     gridColumns?: number;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
-    tooltips?: Dictionary<string>;
 }
 
 export function CheckboxFilterform({
@@ -26,8 +24,7 @@ export function CheckboxFilterform({
     filtervalg,
     gridColumns = 1,
     className,
-    emptyCheckboxFilterFormMessage,
-    tooltips
+    emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -70,20 +67,7 @@ export function CheckboxFilterform({
                             value={checkBoxValg}
                         >
                             {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
-                                <div key={filterKey}>
-                                    {tooltips?.[filterKey] ? (
-                                        <Tooltip
-                                            content={tooltips[filterKey]}
-                                            placement="right"
-                                            offset={-130}
-                                            maxChar={999}
-                                        >
-                                            {checkBoxKomponent([filterKey, filterValue])}
-                                        </Tooltip>
-                                    ) : (
-                                        checkBoxKomponent([filterKey, filterValue])
-                                    )}
-                                </div>
+                                <div key={filterKey}>{checkBoxKomponent([filterKey, filterValue])}</div>
                             ))}
                         </CheckboxGroup>
                     </Grid>
