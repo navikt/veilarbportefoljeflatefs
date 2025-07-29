@@ -1,9 +1,7 @@
 import {useEffect, useState} from 'react';
 import classNames from 'classnames';
-import {Alert, Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
-import {Dictionary} from '../../../utils/types/types';
+import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
-import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {CheckboxFilter, CheckboxFilterMap} from '../../filter-konstanter';
 import './filterform.css';
@@ -11,23 +9,19 @@ import './filterform.css';
 interface CheckboxFilterformProps {
     form: string;
     valg: CheckboxFilterMap;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     filtervalg: FiltervalgModell;
-    gridColumns?: number;
+    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     className?: string;
     emptyCheckboxFilterFormMessage?: string;
-    tooltips?: Dictionary<string>;
 }
 
 export function CheckboxFilterform({
-    endreFiltervalg,
-    valg,
     form,
+    valg,
     filtervalg,
-    gridColumns = 1,
+    endreFiltervalg,
     className,
-    emptyCheckboxFilterFormMessage,
-    tooltips
+    emptyCheckboxFilterFormMessage
 }: CheckboxFilterformProps) {
     const harValg = Object.keys(valg).length > 0;
     const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
@@ -61,32 +55,17 @@ export function CheckboxFilterform({
         <form className="skjema checkbox-filterform" data-testid="checkbox-filterform">
             {harValg && (
                 <div className={classNames('checkbox-filterform__valg', className)}>
-                    <Grid columns={gridColumns}>
-                        <CheckboxGroup
-                            hideLegend
-                            legend=""
-                            onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
-                            size="small"
-                            value={checkBoxValg}
-                        >
-                            {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
-                                <div key={filterKey}>
-                                    {tooltips?.[filterKey] ? (
-                                        <Tooltip
-                                            content={tooltips[filterKey]}
-                                            placement="right"
-                                            offset={-130}
-                                            maxChar={999}
-                                        >
-                                            {checkBoxKomponent([filterKey, filterValue])}
-                                        </Tooltip>
-                                    ) : (
-                                        checkBoxKomponent([filterKey, filterValue])
-                                    )}
-                                </div>
-                            ))}
-                        </CheckboxGroup>
-                    </Grid>
+                    <CheckboxGroup
+                        hideLegend
+                        legend=""
+                        onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
+                        size="small"
+                        value={checkBoxValg}
+                    >
+                        {Object.entries(valg).map(([filterKey, filterValue]: [string, CheckboxFilter | string]) => (
+                            <div key={filterKey}>{checkBoxKomponent([filterKey, filterValue])}</div>
+                        ))}
+                    </CheckboxGroup>
                 </div>
             )}
             <NullstillKnapp
@@ -97,7 +76,8 @@ export function CheckboxFilterform({
             />
             {!harValg && (
                 <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
-                    {emptyCheckboxFilterFormMessage ?? 'Ingen veiledere funnet'}
+                    {emptyCheckboxFilterFormMessage ??
+                        'Får ikke til å vise avhukingsbokser. Meld sak i Porten om problemet varer lenge.'}
                 </Alert>
             )}
         </form>

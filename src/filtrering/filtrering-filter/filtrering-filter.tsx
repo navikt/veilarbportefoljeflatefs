@@ -336,10 +336,10 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 </Link>
                             </Alert>
                             <CheckboxFilterform
-                                valg={avvik14aVedtakValg()}
-                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                                filtervalg={filtervalg}
                                 form="avvik14aVedtak"
+                                valg={avvik14aVedtakValg()}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                             />
                         </>
                     )}
