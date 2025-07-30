@@ -10,7 +10,11 @@ export function Fnr({className, bruker}: BrukerFnrProps) {
     return (
         <BodyShort as="div" size="small" className={className}>
             {bruker.fnr && (
-                <Tooltip content="Kopier fødselsnr" placement="right">
+                <Tooltip
+                    describesChild // Gjer at innhaldet vert lese opp, ikkje berre tooltip-teksten
+                    content="Kopier fødselsnr"
+                    placement="right"
+                >
                     <CopyButton
                         copyText={bruker.fnr}
                         text={bruker.fnr}
