@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {Alert, BodyShort, List} from '@navikt/ds-react';
+import {Alert, BodyShort, Heading, List} from '@navikt/ds-react';
 import {STATUS} from '../../ducks/utils';
 
 interface Props {
@@ -24,9 +24,14 @@ const mapErrorToText = (okFnrs: string[], errorFnrs: string[], status: number | 
     }
 
     return (
-        <List as="ul" size="small" title="Kunne ikke oppdatere kategori på følgende personer:">
-            {errorFnrs?.map(fnr => <List.Item key={fnr}>{fnr}</List.Item>)}
-        </List>
+        <>
+            <Heading size="xsmall" level="3">
+                Kunne ikke oppdatere kategori på følgende personer:
+            </Heading>
+            <List as="ul" size="small">
+                {errorFnrs?.map(fnr => <List.Item key={fnr}>{fnr}</List.Item>)}
+            </List>
+        </>
     );
 };
 

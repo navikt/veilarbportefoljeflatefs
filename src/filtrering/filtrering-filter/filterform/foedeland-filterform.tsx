@@ -84,6 +84,7 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
                         >
                             {Object.entries(landgruppe).map(([filterKey, filterValue]) => (
                                 <Tooltip
+                                    describesChild // Gjer at innhaldet vert lese opp, ikkje berre tooltip-teksten. Fungerer ikkje med skjermleser grunna div-en inni, og div-en trengs for at det skal fungere for visuelle brukarar, per 2025-07-30. - Ingrid
                                     content={landgruppeTooltips[filterKey]}
                                     placement="right"
                                     offset={-130}

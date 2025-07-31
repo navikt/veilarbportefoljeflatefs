@@ -46,7 +46,10 @@ export const BekreftEndreFargekategoriPaMangeModal = ({
                         Fargekategorinavn[valgtFargekategori]
                     )}
                 </BodyShort>
-                <List as="ul" size="small" title="Valgte brukere:">
+                <Heading level="2" size="xsmall">
+                    Valgte brukere:
+                </Heading>
+                <List as="ul" size="small">
                     {valgteBrukereFnrs.map(fnr => (
                         <List.Item key={fnr}>{fnr}</List.Item>
                     ))}
