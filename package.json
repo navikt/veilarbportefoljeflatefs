@@ -42,9 +42,9 @@
     },
     "dependencies": {
         "@amplitude/analytics-browser": "2.20.1",
-        "@navikt/aksel-icons": "7.12.2",
-        "@navikt/ds-css": "7.12.2",
-        "@navikt/ds-react": "7.12.2",
+        "@navikt/aksel-icons": "7.16.1",
+        "@navikt/ds-css": "7.16.1",
+        "@navikt/ds-react": "7.16.1",
         "@navikt/navspa": "5.0.1",
         "@sanity/block-content-to-react": "^3.0.0",
         "classnames": "2.5.1",
