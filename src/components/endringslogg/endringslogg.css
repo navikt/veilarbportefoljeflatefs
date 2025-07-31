@@ -110,30 +110,21 @@
     margin-top: 0.3rem;
     float: left;
 }
-.endringslogg-dropDown {
+
+.endringslogg-knapp {
     padding: 0.2rem;
     outline: transparent;
     border: none;
     cursor: pointer;
     background-color: transparent;
 }
-.endringslogg-dropDown:focus {
+
+.endringslogg-knapp:focus {
     fill: var(--a-surface-action);
     box-shadow: 0 0 0 2.5px var(--a-border-focus);
     border-radius: 2px;
 }
 
-.endringslogg-dropDown:focus #Outline {
-    fill: var(--a-surface-action);
-}
-
-#alarm_svg {
-    height: 2.5rem;
-    width: 2.5rem;
-}
-.endringslogg-dropDown:hover #Outline {
-    fill: var(--a-surface-action);
-}
 .endringslogg-innhold {
     padding: 0 2rem 0 2rem;
     width: 100%;

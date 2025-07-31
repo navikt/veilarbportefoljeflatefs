@@ -1,5 +1,4 @@
 import {RefObject, useRef, useState} from 'react';
-import classNames from 'classnames';
 import {Heading, Label} from '@navikt/ds-react';
 import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
@@ -79,7 +78,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
                 <Heading size="small" level="1" className="collapse-header">
                     Nytt i Arbeidsrettet oppfølging
                 </Heading>
-                <div className="innhold-container" data-testid="endringslogg-innhold">
+                <div className="innhold-container">
                     <EndringsloggContent innleggsListe={content} />
                     {errorMessage && <Label>{errorMessage}</Label>}
                 </div>
@@ -100,19 +99,14 @@ const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: En
         <button
             aria-label="Endringslogg for Arbeidsrettet oppfølging"
             ref={buttonRef}
-            className={classNames(
-                'endringslogg-knapp',
-                'endringslogg-dropDown',
-                open && 'endringslogg-dropDown-active'
-            )}
+            className="endringslogg-knapp"
             onClick={onClick}
-            data-testid="endringslogg-knapp"
         >
             <EndringsloggIkon />
             {newNotifications && (
                 <div className="ring-container">
                     <div className="ringring" />
-                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
+                    <div className="circle" />
                 </div>
             )}
         </button>
