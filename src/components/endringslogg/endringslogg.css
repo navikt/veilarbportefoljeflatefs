@@ -15,20 +15,26 @@
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content {
     padding: 0;
+    font-size: 1rem;
 }
 
-.collapse-header {
+.endringslogg .endringslogg-overskrift {
     background-color: var(--endringslogg-popover-header-background-color);
-    color: white;
+    color: var(--a-text-on-inverted);
     padding: 1rem;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     height: 3rem;
     min-height: fit-content;
     text-align: center;
-    font-size: 1.1rem;
-    width: 100%;
 }
+
+.endringslogg .endringslogg-popover .endringslogg-popover-content .innhold-container {
+    overflow-y: scroll;
+    max-height: 30rem;
+}
+
+/* ------ Start gamal endringslogg-styling ------- */
 .collapse-container {
     top: 3rem;
     position: absolute;
@@ -39,16 +45,6 @@
 
 .align-left {
     margin-left: -50.25rem; /* For å kunne teste ny og gamal popover attmed kvarandre */
-}
-
-.collapse-container ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 10px;
-}
-.collapse-container ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .arrow-container-left {
@@ -67,11 +63,6 @@
 .endringslogg-content:focus {
     outline: none;
     box-shadow: 0 0 0 3px var(--a-border-focus);
-}
-
-.innhold-container {
-    overflow-y: scroll;
-    max-height: 30rem;
 }
 
 .arrow-container-left::after {
@@ -98,6 +89,10 @@
     border-bottom: 0.6875rem solid var(--a-border-focus);
     opacity: 0.78;
 }
+
+/* ------ End gamal endringslogg-styling ------- */
+
+/* Styling for innhald/postar i endringsloggen */
 
 .endringslogg-info-nye-notifikasjoner {
     background-color: var(--a-surface-action);

@@ -74,7 +74,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
                 aria-expanded={endringsloggApen}
             />
             {/*<TransitionContainer visible={endringsloggApen}>*/}
-            {/*    <Heading size="small" level="1" className="collapse-header">*/}
+            {/*    <Heading size="small" level="1" className="endringslogg-overskrift">*/}
             {/*        Nytt i Arbeidsrettet oppfølging*/}
             {/*    </Heading>*/}
             {/*    <div className="innhold-container">*/}
@@ -90,7 +90,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
                 className="endringslogg-popover"
             >
                 <Popover.Content className="endringslogg-popover-content">
-                    <Heading size="small" level="1" className="collapse-header">
+                    <Heading size="small" level="1" className="endringslogg-overskrift">
                         Nytt i Arbeidsrettet oppfølging
                     </Heading>
                     <div className="innhold-container">
