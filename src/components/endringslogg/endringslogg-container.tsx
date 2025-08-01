@@ -1,8 +1,7 @@
 import {RefObject, useRef, useState} from 'react';
-import {Button, Heading, Label} from '@navikt/ds-react';
+import {Button, Heading, Label, Popover} from '@navikt/ds-react';
 import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
-import {TransitionContainer} from './transition-container';
 import {useEventListener} from './hooks/use-event-listener';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
@@ -68,16 +67,38 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
 
     return (
         <div ref={loggNode} className="endringslogg">
-            <EndringsloggIconButton onClick={click} newNotifications={overordnetNotifikasjon} buttonRef={buttonRef} />
-            <TransitionContainer visible={endringsloggApen}>
-                <Heading size="small" level="1" className="collapse-header">
-                    Nytt i Arbeidsrettet oppfølging
-                </Heading>
-                <div className="innhold-container">
-                    <EndringsloggContent innleggsListe={content} />
-                    {errorMessage && <Label>{errorMessage}</Label>}
-                </div>
-            </TransitionContainer>
+            <EndringsloggIconButton
+                onClick={click}
+                newNotifications={overordnetNotifikasjon}
+                buttonRef={buttonRef}
+                aria-expanded={endringsloggApen}
+            />
+            {/*<TransitionContainer visible={endringsloggApen}>*/}
+            {/*    <Heading size="small" level="1" className="collapse-header">*/}
+            {/*        Nytt i Arbeidsrettet oppfølging*/}
+            {/*    </Heading>*/}
+            {/*    <div className="innhold-container">*/}
+            {/*        <EndringsloggContent innleggsListe={content} />*/}
+            {/*        {errorMessage && <Label>{errorMessage}</Label>}*/}
+            {/*    </div>*/}
+            {/*</TransitionContainer>*/}
+            <Popover
+                anchorEl={buttonRef.current}
+                open={endringsloggApen}
+                onClose={() => setEndringsloggApen(false)}
+                placement="bottom-end"
+                className="endringslogg-popover"
+            >
+                <Popover.Content className="endringslogg-popover-content">
+                    <Heading size="small" level="1" className="collapse-header">
+                        Nytt i Arbeidsrettet oppfølging
+                    </Heading>
+                    <div className="innhold-container">
+                        <EndringsloggContent innleggsListe={content} />
+                        {errorMessage && <Label>{errorMessage}</Label>}
+                    </div>
+                </Popover.Content>
+            </Popover>
         </div>
     );
 };
