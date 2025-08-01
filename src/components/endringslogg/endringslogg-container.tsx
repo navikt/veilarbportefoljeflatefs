@@ -20,7 +20,7 @@ export const EndringsloggContainer = ({
 }: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const overordnetNotifikasjon = content.some(element => !element.seen);
+    const harUsetteMeldinger = content.some(element => !element.seen);
 
     const apneEndringslogg = () => {
         onOpenPopover();
@@ -44,7 +44,7 @@ export const EndringsloggContainer = ({
         <div className="endringslogg">
             <EndringsloggIconButton
                 onClick={onButtonClick}
-                newNotifications={overordnetNotifikasjon}
+                visVarselprikk={harUsetteMeldinger}
                 buttonRef={buttonRef}
                 aria-expanded={endringsloggApen}
             />
@@ -71,11 +71,11 @@ export const EndringsloggContainer = ({
 
 interface EndringsloggIconButtonProps {
     buttonRef: RefObject<HTMLButtonElement>;
-    newNotifications: boolean;
+    visVarselprikk: boolean;
     onClick: (e?: any) => void;
 }
 
-const EndringsloggIconButton = ({buttonRef, newNotifications, onClick}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, visVarselprikk, onClick}: EndringsloggIconButtonProps) => {
     return (
         <Button
             aria-label="Endringslogg for Arbeidsrettet oppfølging"
@@ -85,10 +85,10 @@ const EndringsloggIconButton = ({buttonRef, newNotifications, onClick}: Endrings
             size="small"
         >
             <EndringsloggIkon />
-            {newNotifications && (
-                <div className="ring-container">
-                    <div className="ringring" />
-                    <div className="circle" />
+            {visVarselprikk && (
+                <div className="uleste-meldinger-varsel">
+                    <div className="uleste-endringer-varsel-ringring" />
+                    <div className="uleste-endringer-varsel-prikk" />
                 </div>
             )}
         </Button>

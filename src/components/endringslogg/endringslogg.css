@@ -90,14 +90,13 @@
     clear: both;
 }
 
-/* Varsel-ikon-prikk for nye endringslogg-meldinger */
-.ring-container {
+.uleste-meldinger-varsel {
     position: relative;
     bottom: 46px;
     left: 31px;
 }
 
-.circle {
+.uleste-endringer-varsel-prikk {
     width: 0.875rem;
     height: 0.875rem;
     background-color: var(--a-surface-action);
@@ -105,7 +104,7 @@
     position: absolute;
 }
 
-.ringring {
+.uleste-endringer-varsel-ringring {
     border: 3px solid var(--a-surface-action);
     -webkit-border-radius: 30px;
     height: 25px;
