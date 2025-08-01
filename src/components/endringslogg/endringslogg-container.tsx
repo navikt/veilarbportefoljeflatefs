@@ -2,7 +2,6 @@ import {RefObject, useRef, useState} from 'react';
 import {Button, Heading, Label, Popover} from '@navikt/ds-react';
 import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
-import {useEventListener} from './hooks/use-event-listener';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
 
@@ -29,29 +28,6 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
         setEndringsloggApen(setOpenTo);
     };
 
-    const handleClickOutside = (event: any) => {
-        if (
-            loggNode.current?.contains(event.target) ||
-            document.body.classList.contains('navds-modal__document-body')
-        ) {
-            // Klikket er inne i komponenten, eller modalen vises
-            return;
-        }
-        // Klikket er utenfor, oppdater staten
-        if (endringsloggApen) {
-            requestSetOpenStatus(false);
-        }
-    };
-
-    const escHandler = (event: any) => {
-        if (event.keyCode === 27 && endringsloggApen) {
-            requestSetOpenStatus(false);
-            if (buttonRef.current) {
-                buttonRef.current.focus();
-            }
-        }
-    };
-
     const click = (event: any) => {
         event.stopPropagation();
         requestSetOpenStatus(!endringsloggApen);
@@ -61,9 +37,6 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
             }
         }
     };
-
-    useEventListener('mousedown', handleClickOutside);
-    useEventListener('keydown', escHandler);
 
     return (
         <div ref={loggNode} className="endringslogg">
@@ -76,7 +49,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
             <Popover
                 anchorEl={buttonRef.current}
                 open={endringsloggApen}
-                onClose={() => setEndringsloggApen(false)}
+                onClose={() => requestSetOpenStatus(false)}
                 placement="bottom-end"
                 className="endringslogg-popover"
             >
