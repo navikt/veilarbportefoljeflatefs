@@ -29,7 +29,7 @@ export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, fil
     let filterFormHarBarnUnder18 = 'barnUnder18Aar';
 
     useEffect(() => {
-        /* Sikrar at vi nullar filtervalga når ein har kryssa ut filtervalg-etiketten, sjølv når sidemenyen/filterdropdown forblir open. */
+        /* Sikrar at vi nullar filtervalga når ein har kryssa ut filtervalg-etiketten. */
         if (filtervalg[filterFormHarBarnUnder18].length === 0 && filtervalg[filterFormBarnAlder].length === 0) {
             setCheckBoxValg([]);
         }
