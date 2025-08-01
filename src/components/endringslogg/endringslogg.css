@@ -99,19 +99,6 @@
     opacity: 0.78;
 }
 
-.arrow-container:focus-within::before {
-    content: '';
-    position: absolute;
-    top: 0.1rem;
-    left: 0.7rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-border-focus);
-    opacity: 0.78;
-}
-
 .endringslogg-info-nye-notifikasjoner {
     background-color: var(--a-surface-action);
     border-radius: 50%;
@@ -131,14 +118,6 @@
 }
 .endringslogg-datolinje {
     padding-top: 1rem;
-}
-.endringslogg-title {
-    margin-right: auto;
-    margin-left: 0.2rem;
-    padding-right: 0.5rem;
-}
-.endringslogg-liste-punkt-topp {
-    margin-bottom: 1rem;
 }
 .endringslogg-kolonne {
     float: left;
@@ -173,20 +152,14 @@
     display: table;
     clear: both;
 }
-#external_link {
-    width: 0.668rem;
-    height: 0.668rem;
-    margin-left: 0.3em;
-}
-.veiledergrupper-navet-tekst,
-.endringslogg_mine-filter {
-    margin-top: 0.5rem;
-}
+
+/* Varsel-ikon-prikk for nye endringslogg-meldinger */
 .ring-container {
     position: relative;
     bottom: 46px;
     left: 31px;
 }
+
 .circle {
     width: 0.875rem;
     height: 0.875rem;
@@ -194,6 +167,7 @@
     border-radius: 50%;
     position: absolute;
 }
+
 .ringring {
     border: 3px solid var(--a-surface-action);
     -webkit-border-radius: 30px;
@@ -206,6 +180,7 @@
     animation: pulsate 2.5s ease-out infinite;
     opacity: 0;
 }
+
 @keyframes pulsate {
     0% {
         -webkit-transform: scale(0.1, 0.1);
@@ -219,6 +194,7 @@
         opacity: 0;
     }
 }
+
 @-webkit-keyframes pulsate {
     0% {
         -webkit-transform: scale(0.1, 0.1);
