@@ -7,30 +7,41 @@ import './endringslogg.css';
 
 interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];
-    onOpen: () => void;
-    onClose: () => void;
+    onOpenPopover: () => void;
+    onClosePopover: () => void;
     errorMessage?: string;
 }
 
-export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: EndringsloggContainerProps) => {
+export const EndringsloggContainer = ({
+    content,
+    onOpenPopover,
+    onClosePopover,
+    errorMessage
+}: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
     const overordnetNotifikasjon = content.some(element => !element.seen);
 
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const requestSetOpenStatus = (setOpenTo: boolean) => {
-        if (setOpenTo) {
-            onOpen();
-        } else {
-            onClose();
-        }
-        setEndringsloggApen(setOpenTo);
+    const apneEndringslogg = () => {
+        onOpenPopover();
+        setEndringsloggApen(true);
+    };
+
+    const lukkEndingslogg = () => {
+        onClosePopover();
+        setEndringsloggApen(false);
     };
 
     const click = (event: any) => {
         event.stopPropagation();
-        requestSetOpenStatus(!endringsloggApen);
+        if (endringsloggApen) {
+            lukkEndingslogg();
+        } else {
+            apneEndringslogg();
+        }
+
         if (!endringsloggApen) {
             if (buttonRef.current) {
                 buttonRef.current.focus();
@@ -49,7 +60,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
             <Popover
                 anchorEl={buttonRef.current}
                 open={endringsloggApen}
-                onClose={() => requestSetOpenStatus(false)}
+                onClose={lukkEndingslogg}
                 placement="bottom-end"
                 className="endringslogg-popover"
             >
