@@ -1,5 +1,5 @@
 import {RefObject, useRef, useState} from 'react';
-import {Heading, Label} from '@navikt/ds-react';
+import {Button, Heading, Label} from '@navikt/ds-react';
 import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
 import {TransitionContainer} from './transition-container';
@@ -68,12 +68,7 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
 
     return (
         <div ref={loggNode} className="endringslogg">
-            <EndringsloggIconButton
-                onClick={click}
-                open={endringsloggApen}
-                newNotifications={overordnetNotifikasjon}
-                buttonRef={buttonRef}
-            />
+            <EndringsloggIconButton onClick={click} newNotifications={overordnetNotifikasjon} buttonRef={buttonRef} />
             <TransitionContainer visible={endringsloggApen}>
                 <Heading size="small" level="1" className="collapse-header">
                     Nytt i Arbeidsrettet oppfølging
@@ -89,18 +84,18 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
 
 interface EndringsloggIconButtonProps {
     buttonRef: RefObject<HTMLButtonElement>;
-    open: boolean;
     newNotifications: boolean;
     onClick: (e?: any) => void;
 }
 
-const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, newNotifications, onClick}: EndringsloggIconButtonProps) => {
     return (
-        <button
+        <Button
             aria-label="Endringslogg for Arbeidsrettet oppfølging"
             ref={buttonRef}
-            className="endringslogg-knapp"
             onClick={onClick}
+            variant="tertiary"
+            size="small"
         >
             <EndringsloggIkon />
             {newNotifications && (
@@ -109,6 +104,6 @@ const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: En
                     <div className="circle" />
                 </div>
             )}
-        </button>
+        </Button>
     );
 };

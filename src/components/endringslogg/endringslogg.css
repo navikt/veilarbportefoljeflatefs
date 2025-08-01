@@ -23,7 +23,7 @@
 }
 
 .align-left {
-    margin-left: -23.75rem;
+    margin-left: -23.25rem;
 }
 
 .collapse-container ::-webkit-scrollbar {
@@ -110,21 +110,6 @@
     margin-top: 0.3rem;
     float: left;
 }
-
-.endringslogg-knapp {
-    padding: 0.2rem;
-    outline: transparent;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.endringslogg-knapp:focus {
-    fill: var(--a-surface-action);
-    box-shadow: 0 0 0 2.5px var(--a-border-focus);
-    border-radius: 2px;
-}
-
 .endringslogg-innhold {
     padding: 0 2rem 0 2rem;
     width: 100%;
