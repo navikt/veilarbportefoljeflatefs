@@ -19,10 +19,8 @@ export const EndringsloggContainer = ({
     errorMessage
 }: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = content.some(element => !element.seen);
-
-    const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const overordnetNotifikasjon = content.some(element => !element.seen);
 
     const apneEndringslogg = () => {
         onOpenPopover();
@@ -34,25 +32,18 @@ export const EndringsloggContainer = ({
         setEndringsloggApen(false);
     };
 
-    const click = (event: any) => {
-        event.stopPropagation();
+    const onButtonClick = () => {
         if (endringsloggApen) {
             lukkEndingslogg();
         } else {
             apneEndringslogg();
         }
-
-        if (!endringsloggApen) {
-            if (buttonRef.current) {
-                buttonRef.current.focus();
-            }
-        }
     };
 
     return (
-        <div ref={loggNode} className="endringslogg">
+        <div className="endringslogg">
             <EndringsloggIconButton
-                onClick={click}
+                onClick={onButtonClick}
                 newNotifications={overordnetNotifikasjon}
                 buttonRef={buttonRef}
                 aria-expanded={endringsloggApen}
