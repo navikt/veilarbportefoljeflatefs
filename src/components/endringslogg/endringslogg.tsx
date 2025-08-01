@@ -84,8 +84,8 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps)
         <>
             <EndringsloggContainer
                 content={endringsloggEntries}
-                onClose={onClose}
-                onOpen={onOpen}
+                onClosePopover={onClose}
+                onOpenPopover={onOpen}
                 errorMessage={errorMessage}
             />
             {forcedEndringsloggEntries.length > 0 && (

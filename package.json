@@ -38,8 +38,7 @@
         "eslint": "8.57.1",
         "eslint-config-react-app": "^7.0.1",
 
-        "@types/react-collapse": "5.0.4",
-        "@types/react-transition-group": "4.4.12"
+        "@types/react-collapse": "5.0.4"
     },
     "dependencies": {
         "@amplitude/analytics-browser": "2.20.1",
@@ -72,7 +71,6 @@
         "browserslist": "4.25.0",
         "babel-polyfill": "6.26.0",
 
-        "react-transition-group": "4.4.5",
         "react-collapse": "5.1.1",
         "react-multi-select-component": "4.3.4",
         "react-device-detect": "2.2.3",
