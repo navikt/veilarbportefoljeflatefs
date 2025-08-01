@@ -34,64 +34,6 @@
     max-height: 30rem;
 }
 
-/* ------ Start gamal endringslogg-styling ------- */
-.collapse-container {
-    top: 3rem;
-    position: absolute;
-    max-width: 30rem;
-    width: 30rem;
-    z-index: 1337;
-}
-
-.align-left {
-    margin-left: -50.25rem; /* For å kunne teste ny og gamal popover attmed kvarandre */
-}
-
-.arrow-container-left {
-    padding-top: 0.95rem;
-}
-
-.endringslogg-content {
-    overflow: hidden;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
-    background-color: white;
-    border-radius: 6px;
-    max-width: 27rem;
-    font-size: 1rem;
-}
-
-.endringslogg-content:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--a-border-focus);
-}
-
-.arrow-container-left::after {
-    content: '';
-    position: absolute;
-    top: 0.3rem;
-    right: 4rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--endringslogg-popover-header-background-color);
-}
-
-.arrow-container-left:focus-within::before {
-    content: '';
-    position: absolute;
-    top: 0.1rem;
-    right: 4rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-border-focus);
-    opacity: 0.78;
-}
-
-/* ------ End gamal endringslogg-styling ------- */
-
 /* Styling for innhald/postar i endringsloggen */
 
 .endringslogg-info-nye-notifikasjoner {

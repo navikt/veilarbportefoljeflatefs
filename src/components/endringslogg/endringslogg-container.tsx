@@ -73,15 +73,6 @@ export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: 
                 buttonRef={buttonRef}
                 aria-expanded={endringsloggApen}
             />
-            {/*<TransitionContainer visible={endringsloggApen}>*/}
-            {/*    <Heading size="small" level="1" className="endringslogg-overskrift">*/}
-            {/*        Nytt i Arbeidsrettet oppfølging*/}
-            {/*    </Heading>*/}
-            {/*    <div className="innhold-container">*/}
-            {/*        <EndringsloggContent innleggsListe={content} />*/}
-            {/*        {errorMessage && <Label>{errorMessage}</Label>}*/}
-            {/*    </div>*/}
-            {/*</TransitionContainer>*/}
             <Popover
                 anchorEl={buttonRef.current}
                 open={endringsloggApen}
