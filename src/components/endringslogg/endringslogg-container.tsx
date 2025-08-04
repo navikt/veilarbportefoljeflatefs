@@ -1,120 +1,96 @@
 import {RefObject, useRef, useState} from 'react';
-import classNames from 'classnames';
-import {Heading, Label} from '@navikt/ds-react';
+import {Button, Heading, Label, Popover} from '@navikt/ds-react';
 import {EndringsloggIkon} from './icons/endringslogg-icon';
 import {EndringsloggContent} from './endringslogg-content';
-import {TransitionContainer} from './transition-container';
-import {useEventListener} from './hooks/use-event-listener';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import './endringslogg.css';
 
 interface EndringsloggContainerProps {
     content: EndringsloggEntryWithSeenStatus[];
-    onOpen: () => void;
-    onClose: () => void;
+    onOpenPopover: () => void;
+    onClosePopover: () => void;
     errorMessage?: string;
 }
 
-export const EndringsloggContainer = ({content, onOpen, onClose, errorMessage}: EndringsloggContainerProps) => {
+export const EndringsloggContainer = ({
+    content,
+    onOpenPopover,
+    onClosePopover,
+    errorMessage
+}: EndringsloggContainerProps) => {
     const [endringsloggApen, setEndringsloggApen] = useState(false);
-    const overordnetNotifikasjon = content.some(element => !element.seen);
-
-    const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const harUsetteMeldinger = content.some(element => !element.seen);
 
-    const requestSetOpenStatus = (setOpenTo: boolean) => {
-        if (setOpenTo) {
-            onOpen();
-        } else {
-            onClose();
-        }
-        setEndringsloggApen(setOpenTo);
+    const apneEndringslogg = () => {
+        onOpenPopover();
+        setEndringsloggApen(true);
     };
 
-    const handleClickOutside = (event: any) => {
-        if (
-            loggNode.current?.contains(event.target) ||
-            document.body.classList.contains('navds-modal__document-body')
-        ) {
-            // Klikket er inne i komponenten, eller modalen vises
-            return;
-        }
-        // Klikket er utenfor, oppdater staten
+    const lukkEndingslogg = () => {
+        onClosePopover();
+        setEndringsloggApen(false);
+    };
+
+    const onButtonClick = () => {
         if (endringsloggApen) {
-            requestSetOpenStatus(false);
+            lukkEndingslogg();
+        } else {
+            apneEndringslogg();
         }
     };
-
-    const escHandler = (event: any) => {
-        if (event.keyCode === 27 && endringsloggApen) {
-            requestSetOpenStatus(false);
-            if (buttonRef.current) {
-                buttonRef.current.focus();
-            }
-        }
-    };
-
-    const click = (event: any) => {
-        event.stopPropagation();
-        requestSetOpenStatus(!endringsloggApen);
-        if (!endringsloggApen) {
-            if (buttonRef.current) {
-                buttonRef.current.focus();
-            }
-        }
-    };
-
-    useEventListener('mousedown', handleClickOutside);
-    useEventListener('keydown', escHandler);
 
     return (
-        <div ref={loggNode} className="endringslogg">
+        <div className="endringslogg">
             <EndringsloggIconButton
-                onClick={click}
-                open={endringsloggApen}
-                newNotifications={overordnetNotifikasjon}
+                onClick={onButtonClick}
+                visVarselprikk={harUsetteMeldinger}
                 buttonRef={buttonRef}
+                aria-expanded={endringsloggApen}
             />
-            <TransitionContainer visible={endringsloggApen}>
-                <Heading size="small" level="1" className="collapse-header">
-                    Nytt i Arbeidsrettet oppfølging
-                </Heading>
-                <div className="innhold-container" data-testid="endringslogg-innhold">
-                    <EndringsloggContent innleggsListe={content} />
-                    {errorMessage && <Label>{errorMessage}</Label>}
-                </div>
-            </TransitionContainer>
+            <Popover
+                anchorEl={buttonRef.current}
+                open={endringsloggApen}
+                onClose={lukkEndingslogg}
+                placement="bottom-end"
+                className="endringslogg-popover"
+            >
+                <Popover.Content className="endringslogg-popover-content">
+                    <Heading size="small" level="1" className="endringslogg-overskrift">
+                        Nytt i Arbeidsrettet oppfølging
+                    </Heading>
+                    <div className="innhold-container">
+                        <EndringsloggContent innleggsListe={content} />
+                        {errorMessage && <Label>{errorMessage}</Label>}
+                    </div>
+                </Popover.Content>
+            </Popover>
         </div>
     );
 };
 
 interface EndringsloggIconButtonProps {
     buttonRef: RefObject<HTMLButtonElement>;
-    open: boolean;
-    newNotifications: boolean;
+    visVarselprikk: boolean;
     onClick: (e?: any) => void;
 }
 
-const EndringsloggIconButton = ({buttonRef, open, newNotifications, onClick}: EndringsloggIconButtonProps) => {
+const EndringsloggIconButton = ({buttonRef, visVarselprikk, onClick}: EndringsloggIconButtonProps) => {
     return (
-        <button
+        <Button
             aria-label="Endringslogg for Arbeidsrettet oppfølging"
             ref={buttonRef}
-            className={classNames(
-                'endringslogg-knapp',
-                'endringslogg-dropDown',
-                open && 'endringslogg-dropDown-active'
-            )}
             onClick={onClick}
-            data-testid="endringslogg-knapp"
+            variant="tertiary"
+            size="small"
         >
             <EndringsloggIkon />
-            {newNotifications && (
-                <div className="ring-container">
-                    <div className="ringring" />
-                    <div className="circle" data-testid="endringslogg_nye-notifikasjoner" />
+            {visVarselprikk && (
+                <div className="uleste-meldinger-varsel">
+                    <div className="uleste-endringer-varsel-ringring" />
+                    <div className="uleste-endringer-varsel-prikk" />
                 </div>
             )}
-        </button>
+        </Button>
     );
 };

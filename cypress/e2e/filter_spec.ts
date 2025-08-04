@@ -78,7 +78,8 @@ describe('Filter', () => {
         // Vi nullar det valde filteret ved å trykke på filtreringslabel
         cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(alder['40-49'])}`).should('be.visible').click();
 
-        // Filterdropdown skal framleis vere open. Ser at filter ikkje er valt
+        // Opnar filterdropdown igjen. Ser at filter ikkje er valt
+        cy.apneLukkeFilterDropdown('alder');
         cy.getByTestId('filter_40-49').should('not.be.checked');
 
         // Testar validering: kan ikkje ha frå-feltet over 100 om til-feltet er tomt

@@ -1,101 +1,39 @@
 .endringslogg {
     width: fit-content;
     position: relative;
-}
-.collapse-header {
-    background-color: var(--a-surface-inverted);
-    color: white;
-    padding: 1rem;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    height: 3rem;
-    min-height: fit-content;
-    text-align: center;
-    font-size: 1.1rem;
-    width: 100%;
-}
-.collapse-container {
-    top: 3rem;
-    position: absolute;
-    max-width: 30rem;
-    width: 30rem;
-    z-index: 1337;
+    --endringslogg-popover-header-background-color: var(--a-surface-inverted);
 }
 
-.align-left {
-    margin-left: -23.75rem;
+.endringslogg .endringslogg-popover {
+    width: 27rem;
 }
 
-.collapse-container ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 10px;
-}
-.collapse-container ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+/* Overskriv styling frå Aksel for å få pila til popover-boksen same farge som bakgrunnen på overskrifta. */
+.endringslogg .endringslogg-popover .navds-popover__arrow {
+    background-color: var(--endringslogg-popover-header-background-color);
 }
 
-.arrow-container-left {
-    padding-top: 0.95rem;
-}
-
-.endringslogg-content {
-    overflow: hidden;
-    box-shadow: 0 2px 4px 0 rgba(183, 177, 169, 0.5);
-    background-color: white;
-    border-radius: 6px;
-    max-width: 27rem;
+.endringslogg .endringslogg-popover .endringslogg-popover-content {
+    padding: 0;
     font-size: 1rem;
 }
 
-.endringslogg-content:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--a-border-focus);
+.endringslogg .endringslogg-overskrift {
+    background-color: var(--endringslogg-popover-header-background-color);
+    color: var(--a-text-on-inverted);
+    padding: 1rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    min-height: fit-content;
+    text-align: center;
 }
 
-.innhold-container {
+.endringslogg .endringslogg-popover .endringslogg-popover-content .innhold-container {
     overflow-y: scroll;
     max-height: 30rem;
 }
 
-.arrow-container-left::after {
-    content: '';
-    position: absolute;
-    top: 0.3rem;
-    right: 4rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-surface-inverted);
-}
-
-.arrow-container-left:focus-within::before {
-    content: '';
-    position: absolute;
-    top: 0.1rem;
-    right: 4rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-border-focus);
-    opacity: 0.78;
-}
-
-.arrow-container:focus-within::before {
-    content: '';
-    position: absolute;
-    top: 0.1rem;
-    left: 0.7rem;
-    width: 0;
-    height: 0;
-    border-left: 0.8125rem solid transparent;
-    border-right: 0.8125rem solid transparent;
-    border-bottom: 0.6875rem solid var(--a-border-focus);
-    opacity: 0.78;
-}
+/* Styling for innhald/postar i endringsloggen */
 
 .endringslogg-info-nye-notifikasjoner {
     background-color: var(--a-surface-action);
@@ -110,44 +48,12 @@
     margin-top: 0.3rem;
     float: left;
 }
-.endringslogg-dropDown {
-    padding: 0.2rem;
-    outline: transparent;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
-.endringslogg-dropDown:focus {
-    fill: var(--a-surface-action);
-    box-shadow: 0 0 0 2.5px var(--a-border-focus);
-    border-radius: 2px;
-}
-
-.endringslogg-dropDown:focus #Outline {
-    fill: var(--a-surface-action);
-}
-
-#alarm_svg {
-    height: 2.5rem;
-    width: 2.5rem;
-}
-.endringslogg-dropDown:hover #Outline {
-    fill: var(--a-surface-action);
-}
 .endringslogg-innhold {
     padding: 0 2rem 0 2rem;
     width: 100%;
 }
 .endringslogg-datolinje {
     padding-top: 1rem;
-}
-.endringslogg-title {
-    margin-right: auto;
-    margin-left: 0.2rem;
-    padding-right: 0.5rem;
-}
-.endringslogg-liste-punkt-topp {
-    margin-bottom: 1rem;
 }
 .endringslogg-kolonne {
     float: left;
@@ -182,28 +88,22 @@
     display: table;
     clear: both;
 }
-#external_link {
-    width: 0.668rem;
-    height: 0.668rem;
-    margin-left: 0.3em;
-}
-.veiledergrupper-navet-tekst,
-.endringslogg_mine-filter {
-    margin-top: 0.5rem;
-}
-.ring-container {
+
+.uleste-meldinger-varsel {
     position: relative;
     bottom: 46px;
     left: 31px;
 }
-.circle {
+
+.uleste-endringer-varsel-prikk {
     width: 0.875rem;
     height: 0.875rem;
     background-color: var(--a-surface-action);
     border-radius: 50%;
     position: absolute;
 }
-.ringring {
+
+.uleste-endringer-varsel-ringring {
     border: 3px solid var(--a-surface-action);
     -webkit-border-radius: 30px;
     height: 25px;
@@ -215,6 +115,7 @@
     animation: pulsate 2.5s ease-out infinite;
     opacity: 0;
 }
+
 @keyframes pulsate {
     0% {
         -webkit-transform: scale(0.1, 0.1);
@@ -228,6 +129,7 @@
         opacity: 0;
     }
 }
+
 @-webkit-keyframes pulsate {
     0% {
         -webkit-transform: scale(0.1, 0.1);
