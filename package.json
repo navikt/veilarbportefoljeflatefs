@@ -30,11 +30,13 @@
         "@types/react": "17.0.80",
         "@types/react-dom": "17.0.25",
         "@types/react-redux": "7.1.33",
+        "@vitejs/plugin-react": "4.7.0",
         "cypress": "14.5.3",
         "husky": "9.1.7",
         "lint-staged": "16.1.2",
         "msw": "2.10.2",
         "prettier": "3.5.3",
+        "vite": "7.0.6",
 
         "@types/react-collapse": "5.0.4"
     },
