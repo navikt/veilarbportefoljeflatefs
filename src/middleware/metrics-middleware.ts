@@ -2,7 +2,7 @@ import {ENDRE_FILTER, VEILEDER_SOKT_FRA_TOOLBAR} from '../ducks/filtrering';
 import {logEvent} from '../utils/frontend-logger';
 import {SETUP} from '../ducks/paginering';
 import {SETT_MARKERT_BRUKER_ALLE, SETT_SORTERING, TILDEL_VEILEDER} from '../ducks/portefolje';
-import {ActionTypeKeys, Kolonne, OversiktType} from '../ducks/ui/listevisning';
+import {ActionTypeKeys, Kolonne} from '../ducks/ui/listevisning';
 import {SORTERT_PA} from '../ducks/sortering';
 import {NY_FEILET_MODAL, REDIGERING_FEILET_MODAL, SLETTING_FEILET_MODAL} from '../ducks/modal-serverfeil';
 import {
@@ -84,17 +84,6 @@ function finnSlettetGruppe(store: any, filterId: number) {
         return lagretGruppe.opprettetDato;
     }
     return undefined;
-}
-
-export function finnOversiktType(sideNavn) {
-    if (sideNavn === 'MIN_OVERSIKT') {
-        return OversiktType.minOversikt;
-    } else if (sideNavn === 'ENHETENS_OVERSIKT') {
-        return OversiktType.enhetensOversikt;
-    } else if (sideNavn === 'VEILEDER_OVERSIKT') {
-        return OversiktType.veilederOversikt;
-    }
-    return '';
 }
 
 export const metricsMiddleWare = (store: any) => (next: any) => (action: any) => {

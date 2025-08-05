@@ -2,16 +2,6 @@ import moment from 'moment';
 import {Maybe} from './types';
 import {SkjermingEtikettConfig} from '../model-interfaces';
 
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-        .toString()
-        .substring(1);
-}
-
-export function guid() {
-    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-}
-
 export const erGyldigISODato = isoDato => isoDato && moment(isoDato, moment.ISO_8601).isValid();
 
 function erLocalDate(dato): boolean {
