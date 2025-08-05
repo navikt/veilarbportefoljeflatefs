@@ -39,7 +39,7 @@ export const LenkeKolonne = ({
                 klikkAksjon={handterKlikk}
                 ctrlklikkAksjon={handterKlikkNyFane}
                 knappStil="juster-tekst-venstre knapp-uten-padding"
-                knappTekst={lenketekst ? lenketekst : lenke.substring(0, 20) + '...'}
+                knappTekst={lenketekst || lenke.substring(0, 20) + '...'}
             />
         </div>
     );
