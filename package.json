@@ -66,7 +66,6 @@
         "react-redux": "7.2.9",
         "react-router": "6.30.1",
         "react-router-dom": "6.30.1",
-        "react-scripts": "5.0.1",
         "redux": "4.2.1",
         "redux-thunk": "2.4.2",
         "reselect": "4.1.8",
