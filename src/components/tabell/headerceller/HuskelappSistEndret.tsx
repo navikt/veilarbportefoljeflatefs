@@ -15,7 +15,7 @@ export const HuskelappSistEndret = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.HUSKELAPP_SIST_ENDRET}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Sist endret"
+        tekst="Huskelapp sist endret"
         title="Datoen huskelappen er opprettet eller sist endret"
         className="col col-xs-2"
     />
