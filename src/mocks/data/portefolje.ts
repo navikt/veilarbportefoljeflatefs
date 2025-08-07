@@ -136,7 +136,8 @@ const lagHuskelapp = fnr => {
         kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
         frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
         enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234',
-        sistEndretAv: 'Meg selv'
+        sistEndretAv: 'Meg selv',
+        endretDato: moment().subtract(rnd(0, 20), 'days').subtract(rnd(0, 23), 'hours').format('YYYY-MM-DD')
     };
 };
 

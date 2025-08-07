@@ -55,6 +55,7 @@ import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar
 import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversikt/HuskelappKommentar';
 import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
 import './minoversikt.css';
+import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -222,6 +223,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
             <HuskelappKommentar bruker={bruker} valgteKolonner={valgteKolonner} />
             <HuskelappFrist bruker={bruker} valgteKolonner={valgteKolonner} />
+            <HuskelappSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

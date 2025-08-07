@@ -58,6 +58,7 @@ import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utka
 import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
+import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -293,6 +294,7 @@ export function MinOversiktListehode({
 
                 <HuskelappKommentar {...sorteringTilHeadercelle} />
                 <HuskelappFrist {...sorteringTilHeadercelle} />
+                <HuskelappSistEndret {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
