@@ -95,7 +95,7 @@ const sorterStigendePaDato = (a: Date, b: Date) => {
 
 function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
-        return [new Date()];
+        return [];
     }
     return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
         .map(dato => new Date(dato))
