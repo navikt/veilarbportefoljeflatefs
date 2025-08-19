@@ -3,8 +3,9 @@ import {Alert, Button, Popover} from '@navikt/ds-react';
 import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
 import {MoteTabell} from './motetabell';
-import {SeFlereMoterKnapp} from './seFlereMoterKnapp';
+import {VisFlereMoterKnapp} from './vis-flere-moter-knapp';
 import './moteplan.css';
+import {VisAlleMoterKnapp} from './vis-alle-moter-knapp';
 
 export interface MoteData {
     dato: string;
@@ -78,11 +79,18 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                             ))}
                         </ol>
                     )}
-                    <SeFlereMoterKnapp
-                        totaltAntallDagerMedMoter={dager.length}
-                        antallDagerSomSkalVises={antallDagerSomSkalVises}
-                        setAntallDagerSomSkalVises={setAntallDagerSomSkalVises}
-                    />
+                    <div className="vis-flere-moter-knapper">
+                        <VisFlereMoterKnapp
+                            totaltAntallDagerMedMoter={dager.length}
+                            antallDagerSomSkalVises={antallDagerSomSkalVises}
+                            setAntallDagerSomSkalVises={setAntallDagerSomSkalVises}
+                        />
+                        <VisAlleMoterKnapp
+                            totaltAntallDagerMedMoter={dager.length}
+                            antallDagerSomSkalVises={antallDagerSomSkalVises}
+                            setAntallDagerSomSkalVises={setAntallDagerSomSkalVises}
+                        />
+                    </div>
                 </Popover.Content>
             </Popover>
         </>

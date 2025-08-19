@@ -6,7 +6,7 @@ interface Props {
     setAntallDagerSomSkalVises: (number) => void;
 }
 
-export function SeFlereMoterKnapp({
+export function VisFlereMoterKnapp({
     totaltAntallDagerMedMoter,
     antallDagerSomSkalVises,
     setAntallDagerSomSkalVises
@@ -23,8 +23,8 @@ export function SeFlereMoterKnapp({
     };
 
     return (
-        <Button id="se-flere-moter-knapp" variant="tertiary" size="small" onClick={visFlereDagerIMoteplan}>
-            Se flere møter
+        <Button variant="tertiary" size="small" onClick={visFlereDagerIMoteplan}>
+            Vis flere møter
         </Button>
     );
 }
