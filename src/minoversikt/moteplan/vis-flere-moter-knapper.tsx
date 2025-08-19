@@ -6,12 +6,12 @@ interface Props {
     setAntallDagerSomSkalVises: (number) => void;
 }
 
-export function VisFlereMoterKnapp({
+export const VisFlereMoterKnapper = ({
     totaltAntallDagerMedMoter,
     antallDagerSomSkalVises,
     setAntallDagerSomSkalVises
-}: Props) {
-    /* Ikkje vis knapp om alle møtedagar allereie er synleg. */
+}: Props) => {
+    /* Ikkje vis knappar om alle møtedagar allereie er synlege. */
     if (antallDagerSomSkalVises >= totaltAntallDagerMedMoter) {
         return null;
     }
@@ -19,12 +19,20 @@ export function VisFlereMoterKnapp({
     /* Viser 5 fleire dagar i møteplanen, heilt til vi viser alle møtedagane. */
     const visFlereDagerIMoteplan = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setAntallDagerSomSkalVises(Math.min(totaltAntallDagerMedMoter, antallDagerSomSkalVises + 5));
-        e.stopPropagation();
+    };
+
+    const visAlleDagerIMoteplan = () => {
+        setAntallDagerSomSkalVises(totaltAntallDagerMedMoter);
     };
 
     return (
-        <Button variant="tertiary" size="small" onClick={visFlereDagerIMoteplan}>
-            Vis flere møter
-        </Button>
+        <div className="vis-flere-moter-knapper">
+            <Button variant="tertiary" size="small" onClick={visFlereDagerIMoteplan}>
+                Vis flere møter
+            </Button>
+            <Button variant="tertiary" size="small" onClick={visAlleDagerIMoteplan}>
+                Vis alle
+            </Button>
+        </div>
     );
-}
+};
