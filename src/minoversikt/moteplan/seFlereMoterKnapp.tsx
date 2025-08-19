@@ -1,18 +1,22 @@
 import {Button} from '@navikt/ds-react';
 
 interface Props {
-    antallDager: number;
-    maxAntallDager: number;
-    setMaxAntall: (number) => void;
+    totaltAntallDagerMedMoter: number;
+    antallDagerSomSkalVises: number;
+    setAntallDagerSomSkalVises: (number) => void;
 }
 
-export function SeFlereMoterKnapp({antallDager, maxAntallDager, setMaxAntall}: Props) {
-    if (maxAntallDager >= antallDager) {
+export function SeFlereMoterKnapp({
+    totaltAntallDagerMedMoter,
+    antallDagerSomSkalVises,
+    setAntallDagerSomSkalVises
+}: Props) {
+    if (antallDagerSomSkalVises >= totaltAntallDagerMedMoter) {
         return null;
     }
 
     const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        setMaxAntall(maxAntallDager + 1);
+        setAntallDagerSomSkalVises(antallDagerSomSkalVises + 1);
         e.stopPropagation();
     };
 

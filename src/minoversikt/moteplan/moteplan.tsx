@@ -24,7 +24,7 @@ interface MoteplanProps {
 }
 
 export function Moteplan({veileder, enhet}: MoteplanProps) {
-    const [maxAntallDager, setMaxAntallDager] = useState<number>(5);
+    const [antallDagerSomSkalVises, setAntallDagerSomSkalVises] = useState<number>(5);
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -73,15 +73,15 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                     )}
                     {!fetchError && !ingenMoter && (
                         <ol>
-                            {dager.slice(0, maxAntallDager).map(dag => (
+                            {dager.slice(0, antallDagerSomSkalVises).map(dag => (
                                 <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
                             ))}
                         </ol>
                     )}
                     <SeFlereMoterKnapp
-                        antallDager={dager.length}
-                        maxAntallDager={maxAntallDager}
-                        setMaxAntall={setMaxAntallDager}
+                        totaltAntallDagerMedMoter={dager.length}
+                        antallDagerSomSkalVises={antallDagerSomSkalVises}
+                        setAntallDagerSomSkalVises={setAntallDagerSomSkalVises}
                     />
                 </Popover.Content>
             </Popover>
