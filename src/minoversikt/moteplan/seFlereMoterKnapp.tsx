@@ -12,16 +12,13 @@ export function SeFlereMoterKnapp({cssId, antalDager, maxAntallDager, setMaxAnta
         return <></>;
     }
 
+    const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        setMaxAntall(maxAntallDager + 1);
+        e.stopPropagation();
+    };
+
     return (
-        <Button
-            id={cssId}
-            variant="tertiary"
-            size="small"
-            onClick={e => {
-                setMaxAntall(maxAntallDager + 1);
-                e.stopPropagation();
-            }}
-        >
+        <Button id={cssId} variant="tertiary" size="small" onClick={onClick}>
             Se flere møter
         </Button>
     );
