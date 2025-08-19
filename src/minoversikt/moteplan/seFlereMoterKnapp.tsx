@@ -1,15 +1,14 @@
 import {Button} from '@navikt/ds-react';
 
-interface SeFlereMoterKnappProps {
-    cssId?: string;
-    antalDager: number;
+interface Props {
+    antallDager: number;
     maxAntallDager: number;
     setMaxAntall: (number) => void;
 }
 
-export function SeFlereMoterKnapp({cssId, antalDager, maxAntallDager, setMaxAntall}: SeFlereMoterKnappProps) {
-    if (antalDager <= maxAntallDager) {
-        return <></>;
+export function SeFlereMoterKnapp({antallDager, maxAntallDager, setMaxAntall}: Props) {
+    if (maxAntallDager >= antallDager) {
+        return null;
     }
 
     const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -18,7 +17,7 @@ export function SeFlereMoterKnapp({cssId, antalDager, maxAntallDager, setMaxAnta
     };
 
     return (
-        <Button id={cssId} variant="tertiary" size="small" onClick={onClick}>
+        <Button id="se-flere-moter-knapp" variant="tertiary" size="small" onClick={onClick}>
             Se flere møter
         </Button>
     );

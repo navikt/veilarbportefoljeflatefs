@@ -79,8 +79,7 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                         </ol>
                     )}
                     <SeFlereMoterKnapp
-                        cssId={'seFlereMoterKnapp'}
-                        antalDager={dager.length}
+                        antallDager={dager.length}
                         maxAntallDager={maxAntallDager}
                         setMaxAntall={setMaxAntallDager}
                     />
