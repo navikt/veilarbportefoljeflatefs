@@ -3,7 +3,7 @@ import {Alert, Button, Popover} from '@navikt/ds-react';
 import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
 import {MoteTabell} from './motetabell';
-import {SeFlereMoterKnapp} from './seFlereMoterKnapp';
+import {VisFlereMoterKnapper} from './vis-flere-moter-knapper';
 import './moteplan.css';
 
 export interface MoteData {
@@ -24,7 +24,7 @@ interface MoteplanProps {
 }
 
 export function Moteplan({veileder, enhet}: MoteplanProps) {
-    const [maxAntallDager, setMaxAntallDager] = useState<number>(5);
+    const [antallDagerSomSkalVises, setAntallDagerSomSkalVises] = useState<number>(5);
     const [erOpen, setErOpen] = useState<boolean>(false);
     const [moter, setMoter] = useState<MoteData[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
@@ -58,9 +58,7 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                 open={erOpen}
                 onClose={() => setErOpen(false)}
                 anchorEl={buttonRef.current}
-                /* Placement kan bli "left-start" igjen når vi oppdaterer @navikt/ds-react til nyare enn v5.6.5
-                 * og kan ta i bruk "flip"-prop. - Ingrid, 2024-02-22 */
-                placement="bottom"
+                placement="bottom-end"
             >
                 <Popover.Content className="moteplan_content">
                     {fetchError && (
@@ -75,16 +73,15 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                     )}
                     {!fetchError && !ingenMoter && (
                         <ol>
-                            {dager.slice(0, maxAntallDager).map(dag => (
+                            {dager.slice(0, antallDagerSomSkalVises).map(dag => (
                                 <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
                             ))}
                         </ol>
                     )}
-                    <SeFlereMoterKnapp
-                        cssId={'seFlereMoterKnapp'}
-                        antalDager={dager.length}
-                        maxAntallDager={maxAntallDager}
-                        setMaxAntall={setMaxAntallDager}
+                    <VisFlereMoterKnapper
+                        totaltAntallDagerMedMoter={dager.length}
+                        antallDagerSomSkalVises={antallDagerSomSkalVises}
+                        setAntallDagerSomSkalVises={setAntallDagerSomSkalVises}
                     />
                 </Popover.Content>
             </Popover>
@@ -98,7 +95,7 @@ const sorterStigendePaDato = (a: Date, b: Date) => {
 
 function hentMoteplanDager(moter: MoteData[] | null): Date[] {
     if (moter === null) {
-        return [new Date()];
+        return [];
     }
     return [...new Set(moter.map(mote => new Date(mote.dato).setHours(0, 0, 0, 0)))]
         .map(dato => new Date(dato))
