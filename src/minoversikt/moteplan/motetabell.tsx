@@ -18,6 +18,7 @@ export function MoteTabell({dato, moter, enhetId}: MoteTabellProps) {
                 <Table.Header>
                     <Table.Row className="moteplan_tabell_tittelrad">
                         <Table.HeaderCell>Klokkeslett</Table.HeaderCell>
+                        <Table.HeaderCell>Varighet</Table.HeaderCell>
                         <Table.HeaderCell>Deltaker</Table.HeaderCell>
                         <Table.HeaderCell>Avtalt med Nav</Table.HeaderCell>
                     </Table.Row>

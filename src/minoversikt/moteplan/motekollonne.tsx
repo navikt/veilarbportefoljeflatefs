@@ -4,6 +4,7 @@ import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 import {MoteplanModell} from '../../typer/moteplan';
+import {formaterVarighetSomTimerOgMinutt} from '../../utils/dato-utils';
 
 interface MoteKollonneProps {
     dato: Date;
@@ -28,7 +29,7 @@ export function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
             <Table.DataCell className="moteplan_tabell_klokkeslett">
                 {moteDato.getHours().toString().padStart(2, '0')}:{moteDato.getMinutes().toString().padStart(2, '0')}
             </Table.DataCell>
-
+            <Table.DataCell>{formaterVarighetSomTimerOgMinutt(mote.varighetMinutter)}</Table.DataCell>
             <Table.DataCell className="moteplan_tabell_deltaker">
                 {mote.deltaker.fnr && (
                     <AksjonKnappMedPopoverFeilmelding
