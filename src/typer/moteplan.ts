@@ -1,4 +1,4 @@
-export interface MoteData {
+export interface MoteplanModell {
     dato: string;
     deltaker: Deltaker;
     avtaltMedNav: boolean;

@@ -1,10 +1,10 @@
 import {Heading, Loader, Table} from '@navikt/ds-react';
 import {MoteKollonne} from './motekollonne';
-import {MoteData} from '../../typer/moteplan';
+import {MoteplanModell} from '../../typer/moteplan';
 
 interface MoteTabellProps {
     dato: Date;
-    moter: MoteData[] | null;
+    moter: MoteplanModell[] | null;
     enhetId: string;
 }
 

@@ -15,7 +15,7 @@ import {
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
-import {MoteData} from '../../typer/moteplan';
+import {MoteplanModell} from '../../typer/moteplan';
 
 faker.seed(MOCK_CONFIG.seed);
 
@@ -432,7 +432,7 @@ export function hentHuskelappForBruker(fnr: string, enhetId: string) {
     };
 }
 
-export function hentMockPlan(): MoteData[] {
+export function hentMockPlan(): MoteplanModell[] {
     const deltaker1 = {fornavn: 'john', etternavn: 'johnson', fnr: '123'};
     const deltaker2 = {fornavn: 'Mars', etternavn: 'Testson', fnr: '456'};
     const deltaker3 = {fornavn: 'Ada', etternavn: 'Kadabra', fnr: '11223312345'};
@@ -445,8 +445,8 @@ export function hentMockPlan(): MoteData[] {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toString();
     }
 
-    function motedataRandomDager(antallMoter: number): MoteData[] {
-        const moteliste: MoteData[] = [];
+    function motedataRandomDager(antallMoter: number): MoteplanModell[] {
+        const moteliste: MoteplanModell[] = [];
         for (let i = 0; i < antallMoter; i++) {
             const dato = randomDate(now, new Date(2025, 11, 30));
             moteliste.push({

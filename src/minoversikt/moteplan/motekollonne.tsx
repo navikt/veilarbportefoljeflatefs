@@ -3,11 +3,11 @@ import {Table} from '@navikt/ds-react';
 import {getVeilarbpersonflateUrl} from '../../utils/url-utils';
 import {capitalize, oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../components/aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
-import {MoteData} from '../../typer/moteplan';
+import {MoteplanModell} from '../../typer/moteplan';
 
 interface MoteKollonneProps {
     dato: Date;
-    mote: MoteData;
+    mote: MoteplanModell;
     enhetId: string;
 }
 
