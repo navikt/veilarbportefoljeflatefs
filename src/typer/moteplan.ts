@@ -1,5 +1,6 @@
 export interface MoteplanModell {
     dato: string;
+    varighetMinutter: number;
     deltaker: Deltaker;
     avtaltMedNav: boolean;
 }

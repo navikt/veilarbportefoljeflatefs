@@ -418,6 +418,13 @@ const randomDateInNearFuture = () => {
         .format('YYYY-MM-DD HH:mm');
 };
 
+/** Returnerer ei møtevarigheit mellom 15 minutt og 7,5 timar
+ *  Talet vil alltid vere runda til eit heilt kvarter. */
+const randomMotevarighet = () => {
+    const base = rnd(1, 30); // Mellom 1 og 30 kvarter (7,5 timar)
+    return base * 15; // Møtevarighet i minutt
+};
+
 export function hentHuskelappForBruker(fnr: string, enhetId: string) {
     if (huskelapp.fnr === fnr) {
         return huskelapp;
@@ -447,10 +454,14 @@ export function hentMockPlan(): MoteplanModell[] {
 
     function motedataRandomDager(antallMoter: number): MoteplanModell[] {
         const moteliste: MoteplanModell[] = [];
+
         for (let i = 0; i < antallMoter; i++) {
             const dato = randomDate(now, new Date(2025, 11, 30));
+            const varighetMinutter = randomMotevarighet();
+
             moteliste.push({
                 dato,
+                varighetMinutter,
                 deltaker: deltaker3,
                 avtaltMedNav: false
             });
@@ -461,40 +472,52 @@ export function hentMockPlan(): MoteplanModell[] {
     return [
         {
             dato: now.toString(),
+            varighetMinutter: 105,
             deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-23T12:02:35.636Z',
+            varighetMinutter: 15,
             deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-23T13:00:00.636Z',
+            varighetMinutter: 60,
             deltaker: deltaker2,
             avtaltMedNav: false
         },
         {
-            dato: '2022-03-25T15:02:35.636Z',
-            deltaker: deltaker2,
-            avtaltMedNav: false
-        },
-        {
-            dato: '2022-03-24T15:02:35.636Z',
+            dato: '2022-03-24T15:00:00.636Z',
+            varighetMinutter: 75,
             deltaker: deltaker1,
             avtaltMedNav: true
         },
         {
+            dato: '2022-03-25T15:02:35.636Z',
+            varighetMinutter: 315,
+            deltaker: deltaker2,
+            avtaltMedNav: false
+        },
+        {
             dato: '2022-03-26T15:02:35.636Z',
+            varighetMinutter: 75,
             deltaker: deltaker2,
             avtaltMedNav: true
         },
         {
             dato: '2022-03-27T15:02:35.636Z',
+            varighetMinutter: 15,
             deltaker: deltaker2,
             avtaltMedNav: true
         },
-        {dato: omToDager.toString(), deltaker: deltaker3, avtaltMedNav: false},
+        {
+            dato: omToDager.toString(),
+            varighetMinutter: 30,
+            deltaker: deltaker3,
+            avtaltMedNav: false
+        },
         ...motedataRandomDager(5)
     ];
 }
