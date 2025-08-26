@@ -62,7 +62,7 @@ function lagGrunndata() {
         aktiviteter: brukerAktiviteter,
         moteStartTid,
         alleMoterStartTid,
-        alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + 45 * 60 * 1000)
+        alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + randomMotevarighet() * 60 * 1000)
     };
 }
 
