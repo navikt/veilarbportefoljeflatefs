@@ -15,7 +15,7 @@ import {
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
-import {MoteData} from '../../minoversikt/moteplan/moteplan';
+import {MoteData} from '../../typer/moteplan';
 
 faker.seed(MOCK_CONFIG.seed);
 

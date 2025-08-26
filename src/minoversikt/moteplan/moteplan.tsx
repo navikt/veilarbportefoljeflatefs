@@ -4,19 +4,8 @@ import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
 import {MoteTabell} from './motetabell';
 import {VisFlereMoterKnapper} from './vis-flere-moter-knapper';
+import {MoteData} from '../../typer/moteplan';
 import './moteplan.css';
-
-export interface MoteData {
-    dato: string;
-    deltaker: Deltaker;
-    avtaltMedNav: boolean;
-}
-
-interface Deltaker {
-    fornavn: string;
-    etternavn: string;
-    fnr: string;
-}
 
 interface MoteplanProps {
     veileder: string;

@@ -1,6 +1,6 @@
 import {Heading, Loader, Table} from '@navikt/ds-react';
-import {MoteData} from './moteplan';
 import {MoteKollonne} from './motekollonne';
+import {MoteData} from '../../typer/moteplan';
 
 interface MoteTabellProps {
     dato: Date;
