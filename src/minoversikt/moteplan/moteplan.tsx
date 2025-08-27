@@ -4,19 +4,8 @@ import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
 import {MoteTabell} from './motetabell';
 import {VisFlereMoterKnapper} from './vis-flere-moter-knapper';
+import {MoteplanModell} from '../../typer/moteplan';
 import './moteplan.css';
-
-export interface MoteData {
-    dato: string;
-    deltaker: Deltaker;
-    avtaltMedNav: boolean;
-}
-
-interface Deltaker {
-    fornavn: string;
-    etternavn: string;
-    fnr: string;
-}
 
 interface MoteplanProps {
     veileder: string;
@@ -26,7 +15,7 @@ interface MoteplanProps {
 export function Moteplan({veileder, enhet}: MoteplanProps) {
     const [antallDagerSomSkalVises, setAntallDagerSomSkalVises] = useState<number>(5);
     const [erOpen, setErOpen] = useState<boolean>(false);
-    const [moter, setMoter] = useState<MoteData[] | null>(null);
+    const [moter, setMoter] = useState<MoteplanModell[] | null>(null);
     const [fetchError, setFetchError] = useState(false);
     const buttonRef = useRef(null);
     const ingenMoter = moter?.length === 0;
@@ -93,7 +82,7 @@ const sorterStigendePaDato = (a: Date, b: Date) => {
     return a.valueOf() - b.valueOf();
 };
 
-function hentMoteplanDager(moter: MoteData[] | null): Date[] {
+function hentMoteplanDager(moter: MoteplanModell[] | null): Date[] {
     if (moter === null) {
         return [];
     }

@@ -8,7 +8,7 @@ export const MoteVarighet = ({bruker, valgteKolonner}: InnholdscelleProps) => {
 
     return (
         <VarighetKolonne
-            dato={motevarighet}
+            varighetMinutter={motevarighet}
             skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             className="col col-xs-2"
         />

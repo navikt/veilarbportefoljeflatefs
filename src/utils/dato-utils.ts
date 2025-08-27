@@ -69,6 +69,27 @@ export function minuttDifferanse(klokkeslett2, klokkeslett1) {
     return moment.duration(moment(klokkeslett2).diff(klokkeslett1)).asMinutes();
 }
 
+/**
+ * Returnerer varighet (minutt) som tekst på formatet "[timer]t [minutt]min".
+ *
+ * Dersom [timer] eller [minutt] er 0 vert ikkje dette leddet vist i teksten.
+ *
+ * Eksempel:
+ *   15 min -> "15min"
+ *   60 min -> "1t"
+ *   75 min -> "1t 15min"
+ * */
+export function formaterVarighetSomTimerOgMinutt(varighetMinutter: number) {
+    const timer = Math.floor(varighetMinutter / 60);
+    const minutter = varighetMinutter % 60;
+
+    const timerString = timer > 0 ? `${timer}t` : '';
+    const minutterString = minutter > 0 ? `${minutter}min` : '';
+    const mellomrom = timer > 0 && minutter > 0 ? ' ' : '';
+
+    return timerString + mellomrom + minutterString;
+}
+
 export function dagerSiden(dato) {
     if (!dato) {
         return null;
