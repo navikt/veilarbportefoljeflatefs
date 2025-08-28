@@ -30,7 +30,7 @@
         "@types/react": "17.0.80",
         "@types/react-dom": "17.0.25",
         "@types/react-redux": "7.1.33",
-        "cypress": "14.5.3",
+        "cypress": "14.5.4",
         "husky": "9.1.7",
         "lint-staged": "16.1.2",
         "msw": "2.10.2",
