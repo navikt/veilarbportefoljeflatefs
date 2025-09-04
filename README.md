@@ -1,6 +1,16 @@
-[![CircleCI](https://circleci.com/gh/navikt/veilarbportefoljeflatefs.svg?style=svg)](https://circleci.com/gh/navikt/veilarbportefoljeflatefs)
+# Veilarbportefoljeflatefs
 
-**Installere pakker**
+Veilederverktøy for å se og filtrere porteføljer av brukere. Frontend for [`veilarbportefolje`](https://github.com/navikt/veilarbportefolje).  
+
+Hovedelementer i løsningen er Min oversikt (veileders portefølje), Enhetens oversikt (enhetsportefølje), Veilederoversikt (viser veiledere på enheten), Møteplan (veileders kommende møter) og Endringslogg (oppdateringer om nye endringer i løsningen).  
+
+
+Demoversjon av løsningen: https://navikt.github.io/veilarbportefoljeflatefs
+
+![Skermutklipp av hvordan veilarbportefoljeflatefs ser ut i frontend.](readme_illustrasjon_portefolje.png)
+
+
+## Installere pakker
 
 For å kunne hente ned @navikt/ds-icons (fram til vi får byttet ut de resterende ikonene) må du legge til en `.npmrc` fil i homemappen med følgende innhold:
 
