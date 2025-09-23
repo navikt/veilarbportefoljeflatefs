@@ -2,6 +2,8 @@ import {useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import {FiltreringLabel} from './filtrering-label';
 import {
+    AAPFilterKelvin,
+    aapIKelvinFilter,
     aktiviteter,
     AktiviteterValg,
     alleFargekategoriFilterAlternativer,
@@ -237,6 +239,16 @@ function FiltreringLabelContainer({
                                     ? tolkbehovSpraakListData.get(singleValue)
                                     : 'ugyldig')
                             }
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'ytelseAapKelvin') {
+                return value.map((singleValue: AAPFilterKelvin) => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={aapIKelvinFilter[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );

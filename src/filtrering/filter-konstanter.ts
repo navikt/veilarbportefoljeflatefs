@@ -425,6 +425,16 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak § 14 a'}
 };
 
+export enum AAPFilterKelvin {
+    HAR_AAP_I_KELVIN = 'HAR_AAP',
+    HAR_IKKE_AAP_I_KELVIN = 'HAR_IKKE_AAP'
+}
+
+export const aapIKelvinFilter = {
+    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP'},
+    [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP'}
+};
+
 /** Lange namn på innsatsgrupper.
  * Brukt i nedtrekksmeny for filtervalg + filtertags. */
 export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
@@ -509,5 +519,6 @@ export const filterKonstanter = {
     barnUnder18Aar,
     fargekategorier,
     innsatsgruppeGjeldendeVedtak14a,
-    hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst
+    hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst,
+    ytelseAapKelvin: aapIKelvinFilter
 };

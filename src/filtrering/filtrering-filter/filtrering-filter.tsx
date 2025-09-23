@@ -3,6 +3,7 @@ import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
+    aapIKelvinFilter,
     alder,
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
@@ -38,6 +39,8 @@ import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterfo
 import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_AAPFILTER_MED_KELVINDATA} from '../../konstanter';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
@@ -52,6 +55,8 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
+
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -435,6 +440,23 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
             </div>
+            {skalViseAAPfilterMedKelvindata && (
+                <div className="filtrering-filter__kolonne">
+                    <Label size="small">Ytelser utenfor Arena</Label>
+                    <Dropdown
+                        name="AAP i Kelvin"
+                        id="ytelser-aap-utenfor-arena"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                </div>
+            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Aktivitet</Label>
                 <Dropdown
