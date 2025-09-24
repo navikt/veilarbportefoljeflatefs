@@ -415,6 +415,20 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
+                {skalViseAAPfilterMedKelvindata && (
+                    <Dropdown
+                        name="AAP i Kelvin"
+                        id="ytelser-aap-utenfor-arena"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Enslige forsørgere"
                     id="ensligeForsorgere"
@@ -440,23 +454,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
             </div>
-            {skalViseAAPfilterMedKelvindata && (
-                <div className="filtrering-filter__kolonne">
-                    <Label size="small">Ytelser utenfor Arena</Label>
-                    <Dropdown
-                        name="AAP i Kelvin"
-                        id="ytelser-aap-utenfor-arena"
-                        render={() => (
-                            <CheckboxFilterform
-                                form="ytelseAapKelvin"
-                                valg={aapIKelvinFilter}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                </div>
-            )}
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Aktivitet</Label>
                 <Dropdown
