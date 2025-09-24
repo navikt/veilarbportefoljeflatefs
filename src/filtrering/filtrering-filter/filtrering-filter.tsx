@@ -19,13 +19,13 @@ import {
     kjonn,
     manuellBrukerStatus,
     registreringstype,
-    rettighetsgruppe,
+    rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    ytelse
+    ytelseArena
 } from '../filter-konstanter';
 import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
@@ -408,7 +408,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="ytelse"
                     render={() => (
                         <RadioFilterform
-                            valg={ytelse}
+                            valg={ytelseArena}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             form="ytelse"
@@ -447,7 +447,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <CheckboxFilterform
                             form="rettighetsgruppe"
-                            valg={rettighetsgruppe}
+                            valg={rettighetsgruppeArena}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />

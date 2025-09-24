@@ -186,32 +186,32 @@ export const manuellBrukerStatusUtenKRR = {
     MANUELL: {label: 'Manuell oppfølging'}
 };
 
-export const ytelse = {
-    DAGPENGER: {label: 'Dagpenger'},
+export const ytelseArena = {
+    DAGPENGER: {label: 'Dagpenger (Arena)'},
     ORDINARE_DAGPENGER: {
-        label: 'Ordinære dagpenger',
+        label: 'Ordinære dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
     DAGPENGER_MED_PERMITTERING: {
-        label: 'Dagpenger under permittering',
+        label: 'Dagpenger under permittering (Arena)',
         className: skjemaelementInnrykkKlasse
     },
     DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: {
-        label: 'Dagpenger v/perm fiskeindustri',
+        label: 'Dagpenger v/perm fiskeindustri (Arena)',
         className: skjemaelementInnrykkKlasse
     },
     LONNSGARANTIMIDLER_DAGPENGER: {
-        label: 'Lønnsgarantimidler dagpenger',
+        label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
     AAP: {label: 'AAP'},
-    AAP_MAXTID: {label: 'AAP ordinær', className: skjemaelementInnrykkKlasse},
-    AAP_UNNTAK: {label: 'AAP unntak', className: skjemaelementInnrykkKlasse},
-    TILTAKSPENGER: {label: 'Tiltakspenger'}
+    AAP_MAXTID: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
+    AAP_UNNTAK: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
+    TILTAKSPENGER: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () =>
-    Object.keys(ytelse).reduce(
+    Object.keys(ytelseArena).reduce(
         (acc, val) => ({
             ...acc,
             [val]: val
@@ -247,11 +247,11 @@ export const ytelseAapSortering = {
     }
 };
 
-export const rettighetsgruppe = {
-    AAP: {label: 'Arbeidsavklaringspenger'},
-    DAGP: {label: 'Dagpenger'},
-    INDS: {label: 'Tiltakspenger'},
-    IYT: {label: 'Ingen livsoppholdsytelser Arena'}
+export const rettighetsgruppeArena = {
+    AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
+    DAGP: {label: 'Dagpenger (Arena)'},
+    INDS: {label: 'Tiltakspenger (Arena)'},
+    IYT: {label: 'Ingen livsoppholdsytelser (Arena)'}
 };
 
 export const ensligeForsorgere = {
@@ -495,9 +495,9 @@ export const filterKonstanter = {
     hovedmal,
     formidlingsgruppe,
     servicegruppe,
-    ytelse,
+    ytelse: ytelseArena,
     ytelsevalg,
-    rettighetsgruppe,
+    rettighetsgruppe: rettighetsgruppeArena,
     aktiviteter,
     ytelseAapSortering,
     manuellBrukerStatus,
