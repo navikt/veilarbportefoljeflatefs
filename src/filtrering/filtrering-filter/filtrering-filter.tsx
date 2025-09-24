@@ -402,9 +402,9 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Rettighetsgruppe og ytelse</Label>
+                <Label size="small">Ytelse</Label>
                 <Dropdown
-                    name="Dagpenger, AAP og tiltakspenger"
+                    name="Dagpenger, AAP og tiltakspenger (Arena)"
                     id="ytelse"
                     render={() => (
                         <RadioFilterform
@@ -417,7 +417,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
                 {skalViseAAPfilterMedKelvindata && (
                     <Dropdown
-                        name="AAP i Kelvin"
+                        name="AAP (Kelvin)"
                         id="ytelser-aap-utenfor-arena"
                         render={() => (
                             <CheckboxFilterform
@@ -442,7 +442,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
-                    name="Rettighetsgruppe"
+                    name="Rettighetsgruppe (Arena)"
                     id="rettighetsgruppe"
                     render={() => (
                         <CheckboxFilterform

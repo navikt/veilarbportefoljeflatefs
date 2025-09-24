@@ -431,8 +431,8 @@ export enum AAPFilterKelvin {
 }
 
 export const aapIKelvinFilter = {
-    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP'},
-    [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP'}
+    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP (Kelvin)'},
+    [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP (Kelvin)'}
 };
 
 /** Lange namn på innsatsgrupper.
