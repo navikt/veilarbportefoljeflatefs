@@ -404,18 +404,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Rettighetsgruppe og ytelse</Label>
                 <Dropdown
-                    name="Rettighetsgruppe"
-                    id="rettighetsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="rettighetsgruppe"
-                            valg={rettighetsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
                     name="Dagpenger, AAP og tiltakspenger"
                     id="ytelse"
                     render={() => (
@@ -434,6 +422,18 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         <CheckboxFilterform
                             form="ensligeForsorgere"
                             valg={ensligeForsorgere}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Rettighetsgruppe"
+                    id="rettighetsgruppe"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="rettighetsgruppe"
+                            valg={rettighetsgruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
