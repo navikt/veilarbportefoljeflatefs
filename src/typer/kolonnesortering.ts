@@ -10,6 +10,7 @@ export enum Sorteringsfelt {
     ETTERNAVN = 'etternavn',
     FODSELSNUMMER = 'fodselsnummer',
     OPPFOLGING_STARTET = 'oppfolging_startdato',
+    TILDELINGSDATO = 'tildelingsdato',
     UTLOPSDATO = 'utlopsdato',
 
     NAVIDENT = 'veileder_id',

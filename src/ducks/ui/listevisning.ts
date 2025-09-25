@@ -64,7 +64,8 @@ export enum Kolonne {
     TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
     FILTERHENDELSE_LENKE = 'filterhendelse_lenke',
-    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet'
+    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
+    TILDELINGSDATO = 'tildelingsdato'
 }
 
 export enum OversiktType {

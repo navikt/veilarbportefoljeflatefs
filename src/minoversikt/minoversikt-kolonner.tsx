@@ -56,6 +56,7 @@ import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversi
 import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
 import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
+import {Tildelingsdato} from '../components/tabell/innholdsceller/Tildelingsdato';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -105,6 +106,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <Tildelingsdato bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UkeKolonne
                 className="col col-xs-2"

@@ -59,6 +59,7 @@ import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Farg
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
+import {Tildelingsdato} from '../components/tabell/headerceller/Tildelingsdato';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -139,6 +140,7 @@ export function MinOversiktListehode({
                 <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
+                <Tildelingsdato {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={

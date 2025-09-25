@@ -102,6 +102,14 @@ export function oppfolgingStartetDato(dato: string): Maybe<Date> {
     return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
 }
 
+export function tildelingsdato(dato?: string): Maybe<Date> {
+    if (!dato) {
+        return null;
+    }
+
+    return new Date(dato);
+}
+
 export function hentSkjermetInfo(
     egenAnsatt: boolean | undefined,
     skjermetTil: string | undefined
