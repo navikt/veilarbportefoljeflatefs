@@ -146,7 +146,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker rettighet dagpenger"
-                    title="Gjenstående uker av rettighetsperioden for dagpenger"
+                    title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -161,7 +161,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker vedtak tiltakspenger"
-                    title="Gjenstående uker på gjeldende vedtak tiltakspenger"
+                    title="Gjenstående uker på gjeldende vedtak tiltakspenger (Arena)"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -171,7 +171,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Type AAP-periode"
-                    title="Type AAP-periode"
+                    title="Type AAP-periode (Arena)"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -181,7 +181,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Frist vurdering rett AAP"
-                    title="Omtrentlig frist for ny vurdering av AAP"
+                    title="Omtrentlig frist for ny vurdering av AAP (Arena)"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -191,7 +191,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker vedtak AAP"
-                    title="Gjenstående uker på gjeldende vedtak AAP"
+                    title="Gjenstående uker på gjeldende vedtak AAP (Arena)"
                     className="col col-xs-2"
                 />
                 <SorteringHeader
@@ -201,7 +201,7 @@ export function EnhetListehode({
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker rettighet AAP"
-                    title="Gjenstående uker av rettighetsperioden for AAP"
+                    title="Gjenstående uker av rettighetsperioden for AAP (Arena)"
                     className="col col-xs-2"
                 />
 
