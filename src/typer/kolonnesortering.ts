@@ -23,7 +23,7 @@ export enum Sorteringsfelt {
     AAP_ARENA_MAXTID_UKE = 'aapmaxtiduke',
     AAP_ARENA_UNNTAK_UKER_IGJEN = 'aapunntakukerigjen',
 
-    AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kevin_vedtak_tom_dato',
+    AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kelvin_vedtak_tom_dato',
     AAP_KELVIN_RETTIGHETSTYPE = 'aap_kelvin_rettighetstype',
 
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
