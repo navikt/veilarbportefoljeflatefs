@@ -70,5 +70,5 @@ alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Hendelse på
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse på tiltak'});
 alternativerConfig.set(Kolonne.FILTERHENDELSE_LENKE, {tekstlabel: 'Hendelse (lenke)'});
 alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse'});
-alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'Vedtak til og med'});
-alternativerConfig.set(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, {tekstlabel: 'Rettighetstype'});
+alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'AAP-vedtak til og med (Kelvin)'});
+alternativerConfig.set(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, {tekstlabel: 'Rettighetstype AAP (Kelvin)'});
