@@ -16,7 +16,7 @@ export const AapKelvinVedtakTilOgMedDato = ({
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Vedtak til og med"
-        title="Vedtak til og med"
+        title="AAP-vedtak til og med (Kelvin)"
         headerTestId="sorteringheader_vedtak_til_og_med"
         className="col col-xs-2"
     />
