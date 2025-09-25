@@ -4,13 +4,14 @@ import {
     AAP_YTELSE,
     AAP_YTELSE_MAXTID,
     AAP_YTELSE_UNNTAK,
+    AAPFilterKelvin,
+    AktiviteterFilternokler,
     AktiviteterValg,
     DAGPENGER_YTELSE,
     DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
     DAGPENGER_YTELSE_ORDINARE,
     DAGPENGER_YTELSE_PERMITTERING,
     DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    AktiviteterFilternokler,
     HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
@@ -144,6 +145,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
         filtrertPaHovedmalGjeldendeVedtak14a;
 
+    const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
+
     /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
      * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
      * Rekkefølga til kolonnene i tabellen er styrt av rekkefølgja på deira JSX-element i *-kolonner.tsx og *-listehode.tsx
@@ -204,5 +207,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
+        .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
         .concat([Kolonne.OPPFOLGING_STARTET]);
 }

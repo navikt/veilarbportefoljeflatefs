@@ -56,6 +56,8 @@ import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversi
 import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
 import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
+import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
+import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -224,6 +226,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <HuskelappKommentar bruker={bruker} valgteKolonner={valgteKolonner} />
             <HuskelappFrist bruker={bruker} valgteKolonner={valgteKolonner} />
             <HuskelappSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

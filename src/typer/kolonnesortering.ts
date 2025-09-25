@@ -18,10 +18,13 @@ export enum Sorteringsfelt {
     DAGPENGER_UTLOP_UKE = 'dagputlopuke',
     DAGPENGER_PERM_UTLOP_UKE = 'permutlopuke',
 
-    AAP_TYPE = 'aap_type',
-    AAP_VURDERINGSFRIST = 'aap_vurderingsfrist',
-    AAP_MAXTID_UKE = 'aapmaxtiduke',
-    AAP_UNNTAK_UKER_IGJEN = 'aapunntakukerigjen',
+    AAP_ARENA_TYPE = 'aap_type',
+    AAP_ARENA_VURDERINGSFRIST = 'aap_vurderingsfrist',
+    AAP_ARENA_MAXTID_UKE = 'aapmaxtiduke',
+    AAP_ARENA_UNNTAK_UKER_IGJEN = 'aapunntakukerigjen',
+
+    AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kevin_vedtak_tom_dato',
+    AAP_KELVIN_RETTIGHETSTYPE = 'aap_kelvin_rettighetstype',
 
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',

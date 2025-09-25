@@ -64,7 +64,9 @@ export enum Kolonne {
     TILTAKSHENDELSE_LENKE = 'tiltakshendelse_lenke',
     TILTAKSHENDELSE_DATO_OPPRETTET = 'tiltakshendelse_dato_opprettet',
     FILTERHENDELSE_LENKE = 'filterhendelse_lenke',
-    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet'
+    FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
+    AAP_KELVIN_TOM_VEDTAKSDATO = 'aap_kevin_tom_vedtaksdato',
+    AAP_KELVIN_RETTIGHETSTYPE = 'aap_kelvin_rettighetstype'
 }
 
 export enum OversiktType {

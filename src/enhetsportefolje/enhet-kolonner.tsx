@@ -56,6 +56,8 @@ import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
+import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -207,6 +209,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <BarnUnder18Aar bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

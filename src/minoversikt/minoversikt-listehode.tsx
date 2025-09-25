@@ -59,6 +59,8 @@ import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Farg
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
+import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
+import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -295,6 +297,9 @@ export function MinOversiktListehode({
                 <HuskelappKommentar {...sorteringTilHeadercelle} />
                 <HuskelappFrist {...sorteringTilHeadercelle} />
                 <HuskelappSistEndret {...sorteringTilHeadercelle} />
+
+                <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
+                <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

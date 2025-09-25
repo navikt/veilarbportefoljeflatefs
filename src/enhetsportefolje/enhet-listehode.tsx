@@ -57,6 +57,8 @@ import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/
 import './enhetsportefolje.css';
 import './brukerliste.css';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
+import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
+import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -256,6 +258,9 @@ export function EnhetListehode({
                 <BarnUnder18Aar {...sorteringTilHeadercelle} />
 
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
+
+                <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
+                <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
