@@ -415,20 +415,20 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {/*{skalViseAAPfilterMedKelvindata && (*/}
-                <Dropdown
-                    name="AAP (Kelvin)"
-                    id="ytelser-aap-utenfor-arena"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="ytelseAapKelvin"
-                            valg={aapIKelvinFilter}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                {/*)}*/}
+                {skalViseAAPfilterMedKelvindata && (
+                    <Dropdown
+                        name="AAP (Kelvin)"
+                        id="ytelser-aap-utenfor-arena"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Enslige forsørgere"
                     id="ensligeForsorgere"
