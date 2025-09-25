@@ -230,20 +230,20 @@ export const ytelseUtlopsSortering = {
 
 export const ytelseAapSortering = {
     AAP: {
-        periodetype: Sorteringsfelt.AAP_TYPE,
-        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
+        periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
+        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
     AAP_MAXTID: {
-        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
+        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
-        rettighetsperiode: Sorteringsfelt.AAP_MAXTID_UKE
+        rettighetsperiode: Sorteringsfelt.AAP_ARENA_MAXTID_UKE
     },
     AAP_UNNTAK: {
-        vurderingsfrist: Sorteringsfelt.AAP_VURDERINGSFRIST,
+        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
-        rettighetsperiode: Sorteringsfelt.AAP_UNNTAK_UKER_IGJEN
+        rettighetsperiode: Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN
     }
 };
 
