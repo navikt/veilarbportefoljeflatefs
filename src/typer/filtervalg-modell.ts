@@ -1,6 +1,6 @@
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
 import {KategoriModell} from './arbeidsliste';
-import {AktiviteterFilternokler} from '../filtrering/filter-konstanter';
+import {AAPFilterKelvin, AktiviteterFilternokler} from '../filtrering/filter-konstanter';
 
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
@@ -55,4 +55,5 @@ export interface FiltervalgModell {
     gjeldendeVedtak14a: string[];
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
     hovedmalGjeldendeVedtak14a: Hovedmal[];
+    ytelseAapKelvin: AAPFilterKelvin[];
 }

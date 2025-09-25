@@ -3,6 +3,7 @@ import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
+    aapIKelvinFilter,
     alder,
     avvik14aVedtak,
     avvik14aVedtakAvhengigeFilter,
@@ -18,13 +19,13 @@ import {
     kjonn,
     manuellBrukerStatus,
     registreringstype,
-    rettighetsgruppe,
+    rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
-    ytelse
+    ytelseArena
 } from '../filter-konstanter';
 import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
@@ -38,6 +39,8 @@ import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterfo
 import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_AAPFILTER_MED_KELVINDATA} from '../../konstanter';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
@@ -52,6 +55,8 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
+
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
             return () => {
@@ -397,31 +402,33 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
             </div>
             <div className="filtrering-filter__kolonne">
-                <Label size="small">Rettighetsgruppe og ytelse</Label>
+                <Label size="small">Ytelse</Label>
                 <Dropdown
-                    name="Rettighetsgruppe"
-                    id="rettighetsgruppe"
-                    render={() => (
-                        <CheckboxFilterform
-                            form="rettighetsgruppe"
-                            valg={rettighetsgruppe}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
-                    name="Dagpenger, AAP og tiltakspenger"
+                    name="Dagpenger, AAP og tiltakspenger (Arena)"
                     id="ytelse"
                     render={() => (
                         <RadioFilterform
-                            valg={ytelse}
+                            valg={ytelseArena}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             form="ytelse"
                         />
                     )}
                 />
+                {skalViseAAPfilterMedKelvindata && (
+                    <Dropdown
+                        name="AAP (Kelvin)"
+                        id="ytelser-aap-utenfor-arena"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="Enslige forsørgere"
                     id="ensligeForsorgere"
@@ -429,6 +436,18 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         <CheckboxFilterform
                             form="ensligeForsorgere"
                             valg={ensligeForsorgere}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Rettighetsgruppe (Arena)"
+                    id="rettighetsgruppe"
+                    render={() => (
+                        <CheckboxFilterform
+                            form="rettighetsgruppe"
+                            valg={rettighetsgruppeArena}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />

@@ -62,7 +62,8 @@ export const initialState: FiltervalgModell = {
     fargekategorier: [],
     gjeldendeVedtak14a: [],
     innsatsgruppeGjeldendeVedtak14a: [],
-    hovedmalGjeldendeVedtak14a: []
+    hovedmalGjeldendeVedtak14a: [],
+    ytelseAapKelvin: []
 };
 
 export function fjern(filterId, verdi, fjernVerdi) {

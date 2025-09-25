@@ -43,7 +43,7 @@ describe('Mine filter utils', () => {
         it('når filterene har samme felt, men ulik rekkefølge', () => {
             const ingenValgteFilterVanligRekkefolge = ingenValgteFilter;
 
-            const ingenValgteFilterAlfabetiskRekkefolge = {
+            const ingenValgteFilterAlfabetiskRekkefolge: FiltervalgModell = {
                 alder: [],
                 arbeidslisteKategori: [],
                 aktiviteter: ingenValgteAktiviteter,
@@ -83,7 +83,8 @@ describe('Mine filter utils', () => {
                 visGeografiskBosted: [],
                 veiledere: [],
                 veilederNavnQuery: '',
-                ytelse: null
+                ytelse: null,
+                ytelseAapKelvin: []
             };
 
             expect(
