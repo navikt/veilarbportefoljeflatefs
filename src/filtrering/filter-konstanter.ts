@@ -204,7 +204,7 @@ export const ytelseArena = {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    AAP: {label: 'AAP'},
+    AAP: {label: 'AAP (Arena)'},
     AAP_MAXTID: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
     AAP_UNNTAK: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
     TILTAKSPENGER: {label: 'Tiltakspenger (Arena)'}
