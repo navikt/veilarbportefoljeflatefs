@@ -61,6 +61,7 @@ export interface BrukerModell {
     utgattVarsel: UtgattVarselHendelse | null;
     aapKelvinTomVedtaksdato?: string; // dato
     aapKelvinRettighetstype?: string;
+    aapKelvin: AapKelvinData | null;
 }
 
 export enum VurderingsBehov {
@@ -183,4 +184,9 @@ interface Tolkebehov {
     talespraaktolk?: string;
     tegnspraaktolk?: string;
     sistOppdatert?: string; // LocalDate i backend
+}
+
+interface AapKelvinData {
+    vedtaksdatoTilOgMed?: string; // dato
+    rettighetstype?: string;
 }
