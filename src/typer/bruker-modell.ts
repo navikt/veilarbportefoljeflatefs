@@ -186,7 +186,7 @@ interface Tolkebehov {
     sistOppdatert?: string; // LocalDate i backend
 }
 
-interface AapKelvinData {
+export interface AapKelvinData {
     vedtaksdatoTilOgMed?: string; // dato
     rettighetstype?: string;
 }

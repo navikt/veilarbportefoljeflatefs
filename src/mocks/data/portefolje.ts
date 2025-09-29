@@ -3,6 +3,7 @@ import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
+    AapKelvinData,
     BarnUnder18AarModell,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
@@ -209,6 +210,21 @@ const lagUtgattVarsel = (): UtgattVarselHendelse | null => {
     };
 };
 
+const lagAapKelvinData = (): AapKelvinData | null => {
+    const randomRettighetstype = rnd(0, 1);
+    const tilfeldigRettighetstype = () => {
+        // Det finst fleire rettigheitstypar enn desse to i verkelegheita
+        if (randomRettighetstype < 0.5) {
+            return 'SYKEPENGEERSTATNING';
+        } else return 'BISTANDSBEHOV';
+    };
+
+    return {
+        vedtaksdatoTilOgMed: randomDate({past: true, withoutTimestamp: true}),
+        rettighetstype: tilfeldigRettighetstype()
+    };
+};
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -286,7 +302,8 @@ function lagBruker(sikkerhetstiltak = []) {
         fargekategoriEnhetId: '1234',
         huskelapp,
         gjeldendeVedtak14a: lag14aVedtak(),
-        utgattVarsel: lagUtgattVarsel()
+        utgattVarsel: lagUtgattVarsel(),
+        aapKelvin: lagAapKelvinData()
     };
 }
 
