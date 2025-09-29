@@ -59,8 +59,6 @@ export interface BrukerModell {
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     utgattVarsel: UtgattVarselHendelse | null;
-    aapKelvinTomVedtaksdato?: string; // dato
-    aapKelvinRettighetstype?: string;
     aapKelvin: AapKelvinData | null;
 }
 
@@ -186,7 +184,7 @@ interface Tolkebehov {
     sistOppdatert?: string; // LocalDate i backend
 }
 
-interface AapKelvinData {
+export interface AapKelvinData {
     vedtaksdatoTilOgMed?: string; // dato
     rettighetstype?: string;
 }
