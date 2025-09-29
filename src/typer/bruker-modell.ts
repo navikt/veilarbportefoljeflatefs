@@ -59,8 +59,6 @@ export interface BrukerModell {
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     utgattVarsel: UtgattVarselHendelse | null;
-    aapKelvinTomVedtaksdato?: string; // dato
-    aapKelvinRettighetstype?: string;
     aapKelvin: AapKelvinData | null;
 }
 
