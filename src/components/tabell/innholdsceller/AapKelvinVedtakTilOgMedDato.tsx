@@ -3,7 +3,9 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
 export const AapKelvinVedtakTilOgMedDato = ({bruker, valgteKolonner}: InnholdscelleProps) => {
-    const tilOgMedVedtaksdato = bruker.aapKelvinTomVedtaksdato ? new Date(bruker.aapKelvinTomVedtaksdato) : null;
+    const tilOgMedVedtaksdato = bruker.aapKelvin?.vedtaksdatoTilOgMed
+        ? new Date(bruker.aapKelvin.vedtaksdatoTilOgMed)
+        : null;
 
     return (
         <DatoKolonne
