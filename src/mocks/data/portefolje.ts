@@ -251,6 +251,7 @@ function lagBruker(sikkerhetstiltak = []) {
         veilederId,
         nyForVeileder,
         nyForEnhet,
+        tildelingstidspunkt: randomDate({past: true}),
         diskresjonskode: null,
         sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,

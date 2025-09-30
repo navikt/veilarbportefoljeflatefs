@@ -209,5 +209,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
+        .concat([Kolonne.TILDELINGSDATO])
         .concat([Kolonne.OPPFOLGING_STARTET]);
 }

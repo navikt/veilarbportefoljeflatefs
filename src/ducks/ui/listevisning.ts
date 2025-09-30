@@ -13,6 +13,7 @@ export enum ActionTypeKeys {
 
 export enum Kolonne {
     OPPFOLGING_STARTET = 'oppfolgingstartet',
+    TILDELINGSDATO = 'tildelingsdato',
     VEILEDER = 'veileder',
     NAVIDENT = 'navident',
     UTLOPTE_AKTIVITETER = 'utlopteaktiviteter',

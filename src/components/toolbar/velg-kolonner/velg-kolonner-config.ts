@@ -5,6 +5,7 @@ interface Alternativ {
 }
 
 export const alternativerConfig = new Map<Kolonne, Alternativ>();
+alternativerConfig.set(Kolonne.TILDELINGSDATO, {tekstlabel: 'Tildelingsdato'});
 alternativerConfig.set(Kolonne.OPPFOLGING_STARTET, {tekstlabel: 'Oppfølging startet'});
 alternativerConfig.set(Kolonne.VEILEDER, {tekstlabel: 'Veileder'});
 alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'Nav-ident'});

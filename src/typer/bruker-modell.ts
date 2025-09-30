@@ -4,6 +4,7 @@ export interface BrukerModell {
     fornavn: string;
     etternavn: string;
     oppfolgingStartdato: string; // dato
+    tildelingstidspunkt: string; // datetime
     veilederId?: string;
     sikkerhetstiltak: string[];
     diskresjonskode?: string;
