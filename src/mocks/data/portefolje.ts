@@ -211,12 +211,16 @@ const lagUtgattVarsel = (): UtgattVarselHendelse | null => {
 };
 
 const lagAapKelvinData = (): AapKelvinData | null => {
-    const randomRettighetstype = rnd(0, 1);
+    const muligeRettighetstyper = [
+        'Bistandsbehov',
+        'Sykepengeerstatning',
+        'Student',
+        'Arbeidssøker',
+        'Vurderes for uføretrygd'
+    ];
+
     const tilfeldigRettighetstype = () => {
-        // Det finst fleire rettigheitstypar enn desse to i verkelegheita
-        if (randomRettighetstype < 0.5) {
-            return 'SYKEPENGEERSTATNING';
-        } else return 'BISTANDSBEHOV';
+        return muligeRettighetstyper[Math.round(Math.random() * muligeRettighetstyper.length)];
     };
 
     return {
