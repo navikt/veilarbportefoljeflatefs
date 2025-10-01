@@ -3,7 +3,7 @@ import {DatoKolonne} from '../kolonner/datokolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export const TildeltTidspunkt = ({bruker, valgteKolonner}: InnholdscelleProps) => {
-    const tildelingstidspunkt = bruker.tildelingstidspunkt ? new Date(bruker.tildelingstidspunkt) : null;
+    const tildelingstidspunkt = bruker.tildeltTidspunkt ? new Date(bruker.tildeltTidspunkt) : null;
 
     return (
         <DatoKolonne
