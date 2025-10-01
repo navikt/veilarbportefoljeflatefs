@@ -283,14 +283,6 @@ export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: str
     });
 };
 
-export const enumTilLesbarTekst = (input?: string): string =>
-    input
-        ? input
-              .toLowerCase()
-              .replace(/_/g, ' ')
-              .replace(/^./, c => c.toUpperCase())
-        : '';
-
 /**
  * Utfør en handling dersom det klikkes utenfor et/flere element(er).
  *
