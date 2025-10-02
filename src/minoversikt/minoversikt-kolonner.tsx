@@ -158,10 +158,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={
-                    ytelse === ytelsevalgIntl.TILTAKSPENGER &&
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
             />
 
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />

@@ -157,12 +157,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!filtervalg.ytelse &&
-                        !erAapYtelse &&
-                        !erDagpengerYtelse &&
-                        valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}
