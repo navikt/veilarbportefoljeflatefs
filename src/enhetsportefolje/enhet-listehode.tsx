@@ -1,14 +1,5 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {
-    AktiviteterValg,
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_PERMITTERING,
-    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    ytelseAapSortering,
-    ytelseUtlopsSortering
-} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering, ytelseUtlopsSortering} from '../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -92,13 +83,6 @@ export function EnhetListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const erDagpengerYtelse = [
-        DAGPENGER_YTELSE,
-        DAGPENGER_YTELSE_ORDINARE,
-        DAGPENGER_YTELSE_PERMITTERING,
-        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-        DAGPENGER_YTELSE_LONNSGARANTIMIDLER
-    ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
@@ -140,9 +124,7 @@ export function EnhetListehode({
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={
-                        erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}

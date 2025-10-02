@@ -129,14 +129,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 className="col col-xs-2"
                 ukerIgjen={ukerIgjenBasertPaDagpengetype()}
                 minVal={2}
-                skalVises={
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
-                    (ytelse === ytelsevalgIntl.DAGPENGER ||
-                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
-                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
             <TekstKolonne
                 className="col col-xs-2"
