@@ -9,7 +9,7 @@ import {
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
+import {ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -70,7 +70,6 @@ interface MinOversiktKolonnerProps {
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
@@ -134,25 +133,25 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
                 tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
                 tekst={vurderingsfristAAP || '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
             />
             <UkeKolonne
                 className="col col-xs-2"

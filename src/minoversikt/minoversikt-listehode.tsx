@@ -167,7 +167,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
                     sortering={aapPeriodetype}
                     erValgt={sorteringsfelt === aapPeriodetype}
                     rekkefolge={sorteringsrekkefolge}
@@ -177,7 +177,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
                     sortering={aapVurderingsfrist}
                     erValgt={sorteringsfelt === aapVurderingsfrist}
                     rekkefolge={sorteringsrekkefolge}
@@ -187,7 +187,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                     sortering={aapVedtakssperiode}
                     erValgt={sorteringsfelt === aapVedtakssperiode}
                     rekkefolge={sorteringsrekkefolge}
@@ -197,7 +197,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={!!ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                     sortering={aapRettighetsperiode}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     rekkefolge={sorteringsrekkefolge}
