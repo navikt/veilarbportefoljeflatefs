@@ -89,6 +89,22 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
+    const ukerIgjenBasertPaDagpengetype = () => {
+        // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
+        if (
+            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
+            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI
+        ) {
+            return bruker.permutlopUke;
+        } else if (
+            ytelse === ytelsevalgIntl.DAGPENGER ||
+            ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+            ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+        ) {
+            return bruker.dagputlopUke;
+        }
+    };
+
     return (
         <div className={className}>
             <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -114,22 +130,14 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.dagputlopUke}
+                ukerIgjen={ukerIgjenBasertPaDagpengetype()}
                 minVal={2}
                 skalVises={
                     valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
                     (ytelse === ytelsevalgIntl.DAGPENGER ||
                         ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
-                }
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={bruker.permutlopUke}
-                minVal={2}
-                skalVises={
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
-                    (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
+                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER ||
+                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
                         ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
                 }
             />
