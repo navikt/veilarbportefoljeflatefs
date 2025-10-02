@@ -58,6 +58,7 @@ import './enhetsportefolje.css';
 import './brukerliste.css';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
+import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -110,6 +111,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
             <VeilederNavn bruker={bruker} valgteKolonner={valgteKolonner} />
             <VeilederNavident bruker={bruker} valgteKolonner={valgteKolonner} />
+            <TildeltTidspunkt bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UkeKolonne
                 className="col col-xs-2"

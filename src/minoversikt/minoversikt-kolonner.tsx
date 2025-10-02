@@ -58,6 +58,7 @@ import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
+import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -107,6 +108,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <GeografiskBostedSistOppdatert bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
+            <TildeltTidspunkt bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UkeKolonne
                 className="col col-xs-2"

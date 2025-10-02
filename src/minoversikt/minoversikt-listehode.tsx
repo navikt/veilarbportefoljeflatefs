@@ -61,6 +61,7 @@ import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
+import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -141,6 +142,7 @@ export function MinOversiktListehode({
                 <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
 
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
+                <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={
