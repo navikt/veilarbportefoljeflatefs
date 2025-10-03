@@ -1,7 +1,13 @@
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {ytelsevalg} from '../filtrering/filter-konstanter';
+import {
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI
+} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
@@ -54,11 +60,11 @@ import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdscel
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -69,7 +75,6 @@ interface EnhetKolonnerProps {
 }
 
 export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
-    const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
@@ -91,15 +96,12 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
     const ukerIgjenBasertPaDagpengetype = () => {
         // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
-        if (
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI
-        ) {
+        if (ytelse === DAGPENGER_YTELSE_PERMITTERING || ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI) {
             return bruker.permutlopUke;
         } else if (
-            ytelse === ytelsevalgIntl.DAGPENGER ||
-            ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-            ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+            ytelse === DAGPENGER_YTELSE ||
+            ytelse === DAGPENGER_YTELSE_ORDINARE ||
+            ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER
         ) {
             return bruker.dagputlopUke;
         }

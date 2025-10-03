@@ -9,7 +9,13 @@ import {
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {ytelsevalg} from '../filtrering/filter-konstanter';
+import {
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI
+} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -54,11 +60,11 @@ import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdscelle
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversikt/HuskelappKommentar';
 import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
-import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
+import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -69,7 +75,6 @@ interface MinOversiktKolonnerProps {
 
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
-    const ytelsevalgIntl = ytelsevalg();
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
@@ -91,15 +96,12 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
     const ukerIgjenBasertPaDagpengetype = () => {
         // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
-        if (
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI
-        ) {
+        if (ytelse === DAGPENGER_YTELSE_PERMITTERING || ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI) {
             return bruker.permutlopUke;
         } else if (
-            ytelse === ytelsevalgIntl.DAGPENGER ||
-            ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-            ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+            ytelse === DAGPENGER_YTELSE ||
+            ytelse === DAGPENGER_YTELSE_ORDINARE ||
+            ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER
         ) {
             return bruker.dagputlopUke;
         }
