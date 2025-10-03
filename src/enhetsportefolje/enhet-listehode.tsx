@@ -1,5 +1,5 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {AktiviteterValg, ytelseAapSortering, ytelseUtlopsSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering, dagpengerYtelseUtlopsSortering} from '../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -83,7 +83,7 @@ export function EnhetListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
+    const ytelseUtlopsdatoNavn = dagpengerYtelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 

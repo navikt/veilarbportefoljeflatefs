@@ -187,27 +187,27 @@ export const manuellBrukerStatusUtenKRR = {
 };
 
 export const ytelseArena = {
-    DAGPENGER: {label: 'Dagpenger (Arena)'},
-    ORDINARE_DAGPENGER: {
+    [DAGPENGER_YTELSE]: {label: 'Dagpenger (Arena)'},
+    [DAGPENGER_YTELSE_ORDINARE]: {
         label: 'Ordinære dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    DAGPENGER_MED_PERMITTERING: {
+    [DAGPENGER_YTELSE_PERMITTERING]: {
         label: 'Dagpenger under permittering (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: {
+    [DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI]: {
         label: 'Dagpenger v/perm fiskeindustri (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    LONNSGARANTIMIDLER_DAGPENGER: {
+    [DAGPENGER_YTELSE_LONNSGARANTIMIDLER]: {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    AAP: {label: 'AAP (Arena)'},
-    AAP_MAXTID: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
-    AAP_UNNTAK: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
-    TILTAKSPENGER: {label: 'Tiltakspenger (Arena)'}
+    [AAP_YTELSE]: {label: 'AAP (Arena)'},
+    [AAP_YTELSE_MAXTID]: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
+    [AAP_YTELSE_UNNTAK]: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
+    [TILTAKSPENGER_YTELSE]: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () =>
@@ -219,13 +219,13 @@ export const ytelsevalg: () => {[id: string]: string} = () =>
         {}
     );
 
-export const ytelseUtlopsSortering = {
-    DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    ORDINARE_DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    DAGPENGER_MED_PERMITTERING: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    LONNSGARANTIMIDLER_DAGPENGER: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    TILTAKSPENGER: Sorteringsfelt.UTLOPSDATO
+export const dagpengerYtelseUtlopsSortering = {
+    [DAGPENGER_YTELSE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [DAGPENGER_YTELSE_ORDINARE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [DAGPENGER_YTELSE_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    [DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    [DAGPENGER_YTELSE_LONNSGARANTIMIDLER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [TILTAKSPENGER_YTELSE]: Sorteringsfelt.UTLOPSDATO
 };
 
 export const ytelseAapSortering = {
@@ -485,7 +485,7 @@ export const avvik14aVedtak = {
 };
 
 export const filterKonstanter = {
-    ytelseUtlopsSortering,
+    ytelseUtlopsSortering: dagpengerYtelseUtlopsSortering,
     ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
     fodselsdagIMnd,
