@@ -1,24 +1,24 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
 import {
-    AAP_YTELSE,
-    AAP_YTELSE_MAXTID,
-    AAP_YTELSE_UNNTAK,
+    YTELSE_ARENA_AAP,
+    YTELSE_ARENA_AAP_ORDINAR,
+    YTELSE_ARENA_AAP_UNNTAK,
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_PERMITTERING,
-    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
     HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
-    TILTAKSPENGER_YTELSE,
+    YTELSE_ARENA_TILTAKSPENGER,
     UNDER_VURDERING,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
@@ -83,11 +83,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaUnderVurdering = filtervalg.ferdigfilterListe.includes(UNDER_VURDERING);
 
     const filtrertPaYtelseMedDagpengerettigheter =
-        filtervalg.ytelse === DAGPENGER_YTELSE ||
-        filtervalg.ytelse === DAGPENGER_YTELSE_ORDINARE ||
-        filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING ||
-        filtervalg.ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI ||
-        filtervalg.ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER;
+        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER ||
+        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_ORDINARE ||
+        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
+        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI ||
+        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER;
 
     const avansertAktivitetErValgt =
         !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
@@ -110,15 +110,15 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
     const filtrertPaYtelseMedVurderingsfrist =
-        filtervalg.ytelse === AAP_YTELSE_MAXTID || filtervalg.ytelse === AAP_YTELSE_UNNTAK;
+        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR || filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
 
-    const filtrertPaAAPYtelse = filtervalg.ytelse === AAP_YTELSE;
+    const filtrertPaAAPYtelse = filtervalg.ytelse === YTELSE_ARENA_AAP;
 
     const filtrertPaYtelseMedVedtaksperiode =
-        filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_UNNTAK;
+        filtervalg.ytelse === YTELSE_ARENA_AAP || filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
 
     const filtrertPaYtelseMedRettighetsperiode =
-        filtervalg.ytelse === AAP_YTELSE || filtervalg.ytelse === AAP_YTELSE_MAXTID;
+        filtervalg.ytelse === YTELSE_ARENA_AAP || filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR;
 
     const ikkeFiltrertPaMoterIDagIMinOversikt = oversiktType === OversiktType.enhetensOversikt && !filtrertPaMoterIDag;
 
@@ -180,7 +180,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(
                 Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER,
-                filtervalg.ytelse === TILTAKSPENGER_YTELSE
+                filtervalg.ytelse === YTELSE_ARENA_TILTAKSPENGER
             )
         )
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt || forenkletAktivitetErValgt))
@@ -197,8 +197,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaYtelseMedRettighetsperiode))
         .concat(addHvis(Kolonne.VEILEDER, ikkeFiltrertPaMoterIDagIMinOversikt))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPYtelse))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtervalg.ytelse === AAP_YTELSE_MAXTID))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtervalg.ytelse === AAP_YTELSE_UNNTAK))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, filtrertPaEnsligForsorger))

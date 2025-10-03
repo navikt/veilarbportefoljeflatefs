@@ -29,15 +29,15 @@ export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
-export const DAGPENGER_YTELSE = 'DAGPENGER';
-export const DAGPENGER_YTELSE_ORDINARE = 'ORDINARE_DAGPENGER';
-export const DAGPENGER_YTELSE_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
-export const DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
-export const DAGPENGER_YTELSE_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
-export const TILTAKSPENGER_YTELSE = 'TILTAKSPENGER';
-export const AAP_YTELSE = 'AAP';
-export const AAP_YTELSE_MAXTID = 'AAP_MAXTID';
-export const AAP_YTELSE_UNNTAK = 'AAP_UNNTAK';
+export const YTELSE_ARENA_DAGPENGER = 'DAGPENGER';
+export const YTELSE_ARENA_DAGPENGER_ORDINARE = 'ORDINARE_DAGPENGER';
+export const YTELSE_ARENA_DAGPENGER_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
+export const YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
+export const YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
+export const YTELSE_ARENA_TILTAKSPENGER = 'TILTAKSPENGER';
+export const YTELSE_ARENA_AAP = 'AAP';
+export const YTELSE_ARENA_AAP_ORDINAR = 'AAP_MAXTID';
+export const YTELSE_ARENA_AAP_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
@@ -187,27 +187,27 @@ export const manuellBrukerStatusUtenKRR = {
 };
 
 export const ytelseArena = {
-    [DAGPENGER_YTELSE]: {label: 'Dagpenger (Arena)'},
-    [DAGPENGER_YTELSE_ORDINARE]: {
+    [YTELSE_ARENA_DAGPENGER]: {label: 'Dagpenger (Arena)'},
+    [YTELSE_ARENA_DAGPENGER_ORDINARE]: {
         label: 'Ordinære dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    [DAGPENGER_YTELSE_PERMITTERING]: {
+    [YTELSE_ARENA_DAGPENGER_PERMITTERING]: {
         label: 'Dagpenger under permittering (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    [DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI]: {
+    [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: {
         label: 'Dagpenger v/perm fiskeindustri (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    [DAGPENGER_YTELSE_LONNSGARANTIMIDLER]: {
+    [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    [AAP_YTELSE]: {label: 'AAP (Arena)'},
-    [AAP_YTELSE_MAXTID]: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
-    [AAP_YTELSE_UNNTAK]: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
-    [TILTAKSPENGER_YTELSE]: {label: 'Tiltakspenger (Arena)'}
+    [YTELSE_ARENA_AAP]: {label: 'AAP (Arena)'},
+    [YTELSE_ARENA_AAP_ORDINAR]: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
+    [YTELSE_ARENA_AAP_UNNTAK]: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
+    [YTELSE_ARENA_TILTAKSPENGER]: {label: 'Tiltakspenger (Arena)'}
 };
 
 export const ytelsevalg: () => {[id: string]: string} = () =>
@@ -220,27 +220,27 @@ export const ytelsevalg: () => {[id: string]: string} = () =>
     );
 
 export const dagpengerYtelseUtlopsSortering = {
-    [DAGPENGER_YTELSE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [DAGPENGER_YTELSE_ORDINARE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [DAGPENGER_YTELSE_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [DAGPENGER_YTELSE_LONNSGARANTIMIDLER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [TILTAKSPENGER_YTELSE]: Sorteringsfelt.UTLOPSDATO
+    [YTELSE_ARENA_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [YTELSE_ARENA_DAGPENGER_ORDINARE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [YTELSE_ARENA_DAGPENGER_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
+    [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
+    [YTELSE_ARENA_TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
 };
 
 export const ytelseAapSortering = {
-    [AAP_YTELSE]: {
+    [YTELSE_ARENA_AAP]: {
         periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
-    [AAP_YTELSE_MAXTID]: {
+    [YTELSE_ARENA_AAP_ORDINAR]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_MAXTID_UKE
     },
-    [AAP_YTELSE_UNNTAK]: {
+    [YTELSE_ARENA_AAP_UNNTAK]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN

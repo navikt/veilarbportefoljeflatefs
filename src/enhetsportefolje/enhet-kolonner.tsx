@@ -2,11 +2,11 @@ import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
 import {
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_PERMITTERING,
-    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
 } from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -96,12 +96,15 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
     const ukerIgjenBasertPaDagpengetype = () => {
         // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
-        if (ytelse === DAGPENGER_YTELSE_PERMITTERING || ytelse === DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI) {
+        if (
+            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
+            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
+        ) {
             return bruker.permutlopUke;
         } else if (
-            ytelse === DAGPENGER_YTELSE ||
-            ytelse === DAGPENGER_YTELSE_ORDINARE ||
-            ytelse === DAGPENGER_YTELSE_LONNSGARANTIMIDLER
+            ytelse === YTELSE_ARENA_DAGPENGER ||
+            ytelse === YTELSE_ARENA_DAGPENGER_ORDINARE ||
+            ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
         ) {
             return bruker.dagputlopUke;
         }

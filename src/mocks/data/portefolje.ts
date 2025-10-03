@@ -2,16 +2,16 @@ import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {
-    AAP_YTELSE_MAXTID,
-    AAP_YTELSE_UNNTAK,
+    YTELSE_ARENA_AAP_ORDINAR,
+    YTELSE_ARENA_AAP_UNNTAK,
     aktiviteter,
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_PERMITTERING,
-    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
     hendelserLabels,
-    TILTAKSPENGER_YTELSE
+    YTELSE_ARENA_TILTAKSPENGER
 } from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
@@ -31,16 +31,19 @@ import {MoteplanModell} from '../../typer/moteplan';
 
 faker.seed(MOCK_CONFIG.seed);
 
-const dagpengerYtelserMedPermittering = [DAGPENGER_YTELSE_PERMITTERING, DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI];
+const dagpengerYtelserMedPermittering = [
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
+];
 
 const dagpengerYtelser = [
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     ...dagpengerYtelserMedPermittering
 ];
 
-const ytelser = [...dagpengerYtelser, AAP_YTELSE_MAXTID, AAP_YTELSE_UNNTAK, TILTAKSPENGER_YTELSE];
+const ytelser = [...dagpengerYtelser, YTELSE_ARENA_AAP_ORDINAR, YTELSE_ARENA_AAP_UNNTAK, YTELSE_ARENA_TILTAKSPENGER];
 
 let mockAktoeridLopenummer = 0;
 const huskelapp: any = {};
@@ -95,7 +98,7 @@ function lagYtelse() {
     const mnd = rnd(1, 12);
     const ar = rnd(0, 3) + new Date().getFullYear();
 
-    if (ytelse === AAP_YTELSE_MAXTID || ytelse === AAP_YTELSE_UNNTAK) {
+    if (ytelse === YTELSE_ARENA_AAP_ORDINAR || ytelse === YTELSE_ARENA_AAP_UNNTAK) {
         const rndDate = new Date(ar, mnd - 1, dag);
         const todayDate = new Date();
 
@@ -103,7 +106,7 @@ function lagYtelse() {
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapUnntakUkerIgjen = aaptidUke.toString();
-        if (ytelse === AAP_YTELSE_MAXTID) {
+        if (ytelse === YTELSE_ARENA_AAP_ORDINAR) {
             if (Math.random() > 0.5) {
                 out.aapordinerutlopsdato = rndDate.toString();
             }
