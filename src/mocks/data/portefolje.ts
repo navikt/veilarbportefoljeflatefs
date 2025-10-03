@@ -1,7 +1,18 @@
 import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
-import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
+import {
+    AAP_YTELSE_MAXTID,
+    AAP_YTELSE_UNNTAK,
+    aktiviteter,
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_PERMITTERING,
+    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
+    hendelserLabels,
+    TILTAKSPENGER_YTELSE
+} from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
     BarnUnder18AarModell,
@@ -20,16 +31,16 @@ import {MoteplanModell} from '../../typer/moteplan';
 
 faker.seed(MOCK_CONFIG.seed);
 
-const ytelser = [
-    'ORDINARE_DAGPENGER',
-    'DAGPENGER_MED_PERMITTERING',
-    'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
-    'LONNSGARANTIMIDLER_DAGPENGER',
-    'DAGPENGER_OVRIGE',
-    'AAP_MAXTID',
-    'AAP_UNNTAK',
-    'TILTAKSPENGER'
+const dagpengerYtelserMedPermittering = [DAGPENGER_YTELSE_PERMITTERING, DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI];
+
+const dagpengerYtelser = [
+    DAGPENGER_YTELSE,
+    DAGPENGER_YTELSE_ORDINARE,
+    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
+    ...dagpengerYtelserMedPermittering
 ];
+
+const ytelser = [...dagpengerYtelser, AAP_YTELSE_MAXTID, AAP_YTELSE_UNNTAK, TILTAKSPENGER_YTELSE];
 
 let mockAktoeridLopenummer = 0;
 const huskelapp: any = {};
@@ -75,7 +86,9 @@ function lagYtelse() {
         utlopsdato: '',
         aapmaxtidUke: '',
         aapUnntakUkerIgjen: '',
-        aapordinerutlopsdato: ''
+        aapordinerutlopsdato: '',
+        dagputlopUke: '24',
+        permutlopUke: '10'
     };
 
     const dag = rnd(1, 31);
@@ -265,14 +278,7 @@ function lagBruker(sikkerhetstiltak = []) {
         egenAnsatt: random_egenAnsatt ? true : '',
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
         erDoed: grunndata.erDoed,
-        ytelse: ytelse.ytelse,
-        utlopsdato: ytelse.utlopsdato,
-        aktivitetStart: ytelse.utlopsdato,
-        nesteAktivitetStart: ytelse.utlopsdato,
-        forrigeAktivitetStart: ytelse.utlopsdato,
-        aapmaxtidUke: ytelse.aapmaxtidUke,
-        aapUnntakUkerIgjen: ytelse.aapUnntakUkerIgjen,
-        aapordinerutlopsdato: ytelse.aapordinerutlopsdato,
+        ...ytelse,
         aktiviteter: grunndata.aktiviteter,
         erSykmeldtMedArbeidsgiver,
         moteStartTid: grunndata.moteStartTid,

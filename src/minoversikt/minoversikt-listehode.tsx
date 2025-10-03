@@ -1,16 +1,7 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
-import {
-    AktiviteterValg,
-    DAGPENGER_YTELSE,
-    DAGPENGER_YTELSE_LONNSGARANTIMIDLER,
-    DAGPENGER_YTELSE_ORDINARE,
-    DAGPENGER_YTELSE_PERMITTERING,
-    DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-    ytelseAapSortering,
-    ytelseUtlopsSortering
-} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering, ytelseUtlopsSortering} from '../filtrering/filter-konstanter';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
@@ -94,13 +85,6 @@ export function MinOversiktListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const erDagpengerYtelse = [
-        DAGPENGER_YTELSE,
-        DAGPENGER_YTELSE_ORDINARE,
-        DAGPENGER_YTELSE_PERMITTERING,
-        DAGPENGER_YTELSE_PERMITTERING_FISKEINDUSTRI,
-        DAGPENGER_YTELSE_LONNSGARANTIMIDLER
-    ].some(y => y === ytelse!);
     const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
@@ -145,9 +129,7 @@ export function MinOversiktListehode({
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={
-                        erDagpengerYtelse && valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}
@@ -157,12 +139,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={
-                        !!filtervalg.ytelse &&
-                        !erAapYtelse &&
-                        !erDagpengerYtelse &&
-                        valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
-                    }
+                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}
@@ -172,7 +149,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
                     sortering={aapPeriodetype}
                     erValgt={sorteringsfelt === aapPeriodetype}
                     rekkefolge={sorteringsrekkefolge}
@@ -182,7 +159,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
                     sortering={aapVurderingsfrist}
                     erValgt={sorteringsfelt === aapVurderingsfrist}
                     rekkefolge={sorteringsrekkefolge}
@@ -192,7 +169,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={erAapYtelse && valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
                     sortering={aapVedtakssperiode}
                     erValgt={sorteringsfelt === aapVedtakssperiode}
                     rekkefolge={sorteringsrekkefolge}
@@ -202,7 +179,7 @@ export function MinOversiktListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={!!ytelse && erAapYtelse && valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
                     sortering={aapRettighetsperiode}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     rekkefolge={sorteringsrekkefolge}

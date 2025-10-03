@@ -9,7 +9,7 @@ import {
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {ytelseAapSortering, ytelsevalg} from '../filtrering/filter-konstanter';
+import {ytelsevalg} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -70,7 +70,6 @@ interface MinOversiktKolonnerProps {
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const ytelsevalgIntl = ytelsevalg();
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const rettighetsPeriode = aapRettighetsperiode(ytelse, bruker.aapmaxtidUke, bruker.aapUnntakUkerIgjen);
@@ -89,6 +88,22 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
     const forenkletAktivitetOgTiltak =
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
+
+    const ukerIgjenBasertPaDagpengetype = () => {
+        // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
+        if (
+            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
+            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI
+        ) {
+            return bruker.permutlopUke;
+        } else if (
+            ytelse === ytelsevalgIntl.DAGPENGER ||
+            ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
+            ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+        ) {
+            return bruker.dagputlopUke;
+        }
+    };
 
     return (
         <div className="brukerliste__innhold flex flex--center">
@@ -112,56 +127,37 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
             <UkeKolonne
                 className="col col-xs-2"
-                ukerIgjen={bruker.dagputlopUke}
+                ukerIgjen={ukerIgjenBasertPaDagpengetype()}
                 minVal={2}
-                skalVises={
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
-                    (ytelse === ytelsevalgIntl.DAGPENGER ||
-                        ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-                        ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER)
-                }
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={bruker.permutlopUke}
-                minVal={2}
-                /* Eg trur kolonnevalget er feil her eller i tilsvarande headercelle, sidan visningslogikk der har "Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER". 2025-06-11, Ingrid */
-                skalVises={
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER) &&
-                    (ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
-                        ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
                 tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
                 tekst={vurderingsfristAAP || '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE) && erAapYtelse}
+                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={
-                    ytelse === ytelsevalgIntl.TILTAKSPENGER &&
-                    valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)
-                }
+                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
             />
 
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
