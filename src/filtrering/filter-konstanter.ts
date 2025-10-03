@@ -229,18 +229,18 @@ export const dagpengerYtelseUtlopsSortering = {
 };
 
 export const ytelseAapSortering = {
-    AAP: {
+    [AAP_YTELSE]: {
         periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
-    AAP_MAXTID: {
+    [AAP_YTELSE_MAXTID]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_MAXTID_UKE
     },
-    AAP_UNNTAK: {
+    [AAP_YTELSE_UNNTAK]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
         vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN

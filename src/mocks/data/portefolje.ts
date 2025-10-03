@@ -95,7 +95,7 @@ function lagYtelse() {
     const mnd = rnd(1, 12);
     const ar = rnd(0, 3) + new Date().getFullYear();
 
-    if (ytelse === 'AAP_MAXTID' || ytelse === 'AAP_UNNTAK') {
+    if (ytelse === AAP_YTELSE_MAXTID || ytelse === AAP_YTELSE_UNNTAK) {
         const rndDate = new Date(ar, mnd - 1, dag);
         const todayDate = new Date();
 
@@ -103,7 +103,7 @@ function lagYtelse() {
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapUnntakUkerIgjen = aaptidUke.toString();
-        if (ytelse === 'AAP_MAXTID') {
+        if (ytelse === AAP_YTELSE_MAXTID) {
             if (Math.random() > 0.5) {
                 out.aapordinerutlopsdato = rndDate.toString();
             }
