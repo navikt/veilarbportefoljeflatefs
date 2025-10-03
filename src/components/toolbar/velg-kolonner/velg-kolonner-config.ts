@@ -12,16 +12,18 @@ alternativerConfig.set(Kolonne.NAVIDENT, {tekstlabel: 'Nav-ident'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_NAV_DATO, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO, {tekstlabel: 'Dato på melding'});
 alternativerConfig.set(Kolonne.UTLOP_YTELSE, {tekstlabel: 'Utløp ytelse'});
-alternativerConfig.set(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, {
+alternativerConfig.set(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, {
     tekstlabel: 'Gjenstående uker rettighet dagpenger (Arena)'
 });
-alternativerConfig.set(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, {
+alternativerConfig.set(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, {
     tekstlabel: 'Gjenstående uker vedtak tiltakspenger (Arena)'
 });
-alternativerConfig.set(Kolonne.VURDERINGSFRIST_YTELSE, {tekstlabel: 'Frist vurdering rett AAP (Arena)'});
-alternativerConfig.set(Kolonne.TYPE_YTELSE, {tekstlabel: 'Type AAP-periode (Arena)'});
-alternativerConfig.set(Kolonne.VEDTAKSPERIODE, {tekstlabel: 'Gjenstående uker vedtak AAP (Arena)'});
-alternativerConfig.set(Kolonne.RETTIGHETSPERIODE, {tekstlabel: 'Gjenstående uker rettighet AAP (Arena)'});
+alternativerConfig.set(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, {tekstlabel: 'Frist vurdering rett AAP (Arena)'});
+alternativerConfig.set(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, {tekstlabel: 'Type AAP-periode (Arena)'});
+alternativerConfig.set(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, {tekstlabel: 'Gjenstående uker vedtak AAP (Arena)'});
+alternativerConfig.set(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, {
+    tekstlabel: 'Gjenstående uker rettighet AAP (Arena)'
+});
 alternativerConfig.set(Kolonne.UTLOP_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.UTLOPTE_AKTIVITETER, {tekstlabel: 'Utløpsdato aktivitet'});
 alternativerConfig.set(Kolonne.AVTALT_AKTIVITET, {tekstlabel: 'Neste utløpsdato aktivitet'});
