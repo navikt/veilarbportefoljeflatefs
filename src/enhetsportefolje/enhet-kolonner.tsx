@@ -1,7 +1,13 @@
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {ytelsevalg} from '../filtrering/filter-konstanter';
+import {
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
+} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
@@ -54,11 +60,11 @@ import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/innholdscel
 import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdsceller/UtdanningOgSituasjonSistEndret';
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -69,7 +75,6 @@ interface EnhetKolonnerProps {
 }
 
 export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
-    const ytelsevalgIntl = ytelsevalg();
     const {ytelse} = filtervalg;
     const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
@@ -92,14 +97,14 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
     const ukerIgjenBasertPaDagpengetype = () => {
         // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
         if (
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING ||
-            ytelse === ytelsevalgIntl.DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI
+            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
+            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
         ) {
             return bruker.permutlopUke;
         } else if (
-            ytelse === ytelsevalgIntl.DAGPENGER ||
-            ytelse === ytelsevalgIntl.ORDINARE_DAGPENGER ||
-            ytelse === ytelsevalgIntl.LONNSGARANTIMIDLER_DAGPENGER
+            ytelse === YTELSE_ARENA_DAGPENGER ||
+            ytelse === YTELSE_ARENA_DAGPENGER_ORDINARE ||
+            ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
         ) {
             return bruker.dagputlopUke;
         }
@@ -132,35 +137,35 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 className="col col-xs-2"
                 ukerIgjen={ukerIgjenBasertPaDagpengetype()}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
                 tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
             />
             <TekstKolonne
                 className="col col-xs-2"
-                skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP)}
                 tekst={vurderingsfristAAP || '–'}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP)}
             />
             <UkeKolonne
                 className="col col-xs-2"
                 ukerIgjen={utlopsdatoUkerIgjen}
                 minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
             />
 
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />

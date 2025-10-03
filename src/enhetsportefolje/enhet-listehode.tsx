@@ -1,5 +1,5 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {AktiviteterValg, ytelseAapSortering, ytelseUtlopsSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering, dagpengerYtelseUtlopsSortering} from '../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -83,7 +83,7 @@ export function EnhetListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = ytelseUtlopsSortering[ytelse!];
+    const ytelseUtlopsdatoNavn = dagpengerYtelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
@@ -124,7 +124,7 @@ export function EnhetListehode({
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}
@@ -134,7 +134,7 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
                     sortering={ytelseUtlopsdatoNavn}
                     erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
                     rekkefolge={sorteringsrekkefolge}
@@ -144,7 +144,7 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.TYPE_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
                     sortering={aapPeriodetype}
                     erValgt={sorteringsfelt === aapPeriodetype}
                     rekkefolge={sorteringsrekkefolge}
@@ -154,7 +154,7 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VURDERINGSFRIST_YTELSE)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP)}
                     sortering={aapVurderingsfrist}
                     erValgt={sorteringsfelt === aapVurderingsfrist}
                     rekkefolge={sorteringsrekkefolge}
@@ -164,7 +164,7 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.VEDTAKSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP)}
                     sortering={aapVedtakssperiode}
                     erValgt={sorteringsfelt === aapVedtakssperiode}
                     rekkefolge={sorteringsrekkefolge}
@@ -174,7 +174,7 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
                 <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.RETTIGHETSPERIODE)}
+                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP)}
                     sortering={aapRettighetsperiode}
                     erValgt={sorteringsfelt === aapRettighetsperiode}
                     rekkefolge={sorteringsrekkefolge}
