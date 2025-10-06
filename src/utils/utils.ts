@@ -55,7 +55,7 @@ export function utledValgteAktivitetsTyper(
         }, {});
 }
 
-export function utlopsdatoUker(utlopsdatoStr?: string): number | undefined {
+export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {
     if (!utlopsdatoStr) {
         return undefined;
     }
