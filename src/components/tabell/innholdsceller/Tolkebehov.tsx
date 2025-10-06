@@ -1,14 +1,9 @@
 import {tolkBehov} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
-import {FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 
-export interface TolkebehovProps extends InnholdscelleProps {
-    filtervalg: FiltervalgModell;
-}
-
-export const Tolkebehov = ({bruker, valgteKolonner, filtervalg}: TolkebehovProps) => (
+export const Tolkebehov = ({bruker, valgteKolonner, filtervalg}: InnholdscelleMedDataBasertPaFiltervalgProps) => (
     <TekstKolonne
         tekst={tolkBehov(filtervalg, bruker)}
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import moment from 'moment';
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, utlopsdatoUker} from './utils';
+import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, ukerIgjenTilUtlopsdato} from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
@@ -52,9 +52,9 @@ describe('Date utils', () => {
 
     describe('utlopsdatoUker', () => {
         it('skal håndtere null verdier', () => {
-            expect(utlopsdatoUker(null)).toBeUndefined();
-            expect(utlopsdatoUker(undefined)).toBeUndefined();
-            expect(utlopsdatoUker('ikke gyldig datostreng')).toBeUndefined();
+            expect(ukerIgjenTilUtlopsdato(null)).toBeUndefined();
+            expect(ukerIgjenTilUtlopsdato(undefined)).toBeUndefined();
+            expect(ukerIgjenTilUtlopsdato('ikke gyldig datostreng')).toBeUndefined();
         });
 
         it('skal regne ut antall uker', () => {
@@ -63,8 +63,8 @@ describe('Date utils', () => {
             const fremtiden = new Date(now + 2 * uker);
             const fortiden = new Date(now - 2 * uker);
 
-            expect(utlopsdatoUker(`${fremtiden}`)).toBe(2);
-            expect(utlopsdatoUker(`${fortiden}`)).toBe(-2);
+            expect(ukerIgjenTilUtlopsdato(`${fremtiden}`)).toBe(2);
+            expect(ukerIgjenTilUtlopsdato(`${fortiden}`)).toBe(-2);
         });
     });
 
