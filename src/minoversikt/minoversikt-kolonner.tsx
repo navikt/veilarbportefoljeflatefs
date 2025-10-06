@@ -1,4 +1,4 @@
-import {parseDatoString, utledValgteAktivitetsTyper, utlopsdatoUker} from '../utils/utils';
+import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
 import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
@@ -60,6 +60,7 @@ import {AapArenaYtelsestype} from '../components/tabell/innholdsceller/AapArenaY
 import {AapArenaVurderingsfrist} from '../components/tabell/innholdsceller/AapArenaVurderingsfrist';
 import {AapArenaVedtaksperiode} from '../components/tabell/innholdsceller/AapArenaVedtaksperiode';
 import {AapArenaRettighetsperiode} from '../components/tabell/innholdsceller/AapArenaRettighetsperiode';
+import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/innholdsceller/TiltakspengerArenaGjenstaendeUkerVedtak';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -72,7 +73,6 @@ interface MinOversiktKolonnerProps {
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const {ytelse} = filtervalg;
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-    const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
 
     const avtaltAktivitetOgTiltak: boolean =
         !!valgteAktivitetstyper &&
@@ -125,12 +125,8 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
                 minVal={2}
                 skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
-            />
+
+            <TiltakspengerArenaGjenstaendeUkerVedtak bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapArenaYtelsestype bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapArenaVurderingsfrist bruker={bruker} valgteKolonner={valgteKolonner} />

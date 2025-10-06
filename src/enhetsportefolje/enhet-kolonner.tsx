@@ -12,7 +12,7 @@ import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {parseDatoString, utledValgteAktivitetsTyper, utlopsdatoUker} from '../utils/utils';
+import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {VeilederNavn} from '../components/tabell/innholdsceller/enhetens-oversikt/veiledernavn';
 import {VeilederNavident} from '../components/tabell/innholdsceller/enhetens-oversikt/veilederNavident';
 import {SisteEndring} from '../components/tabell/innholdsceller/SisteEndring';
@@ -59,6 +59,7 @@ import {AapArenaYtelsestype} from '../components/tabell/innholdsceller/AapArenaY
 import {AapArenaVurderingsfrist} from '../components/tabell/innholdsceller/AapArenaVurderingsfrist';
 import {AapArenaVedtaksperiode} from '../components/tabell/innholdsceller/AapArenaVedtaksperiode';
 import {AapArenaRettighetsperiode} from '../components/tabell/innholdsceller/AapArenaRettighetsperiode';
+import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/innholdsceller/TiltakspengerArenaGjenstaendeUkerVedtak';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -72,7 +73,6 @@ interface EnhetKolonnerProps {
 
 export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
     const {ytelse} = filtervalg;
-    const utlopsdatoUkerIgjen = utlopsdatoUker(bruker.utlopsdato);
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     const avtaltAktivitetOgTiltak: boolean =
@@ -129,12 +129,8 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 minVal={2}
                 skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
-            />
+
+            <TiltakspengerArenaGjenstaendeUkerVedtak bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapArenaYtelsestype bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapArenaVurderingsfrist bruker={bruker} valgteKolonner={valgteKolonner} />
