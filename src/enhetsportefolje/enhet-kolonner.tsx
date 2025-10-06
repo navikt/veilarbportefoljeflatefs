@@ -139,6 +139,12 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 minVal={2}
                 skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
             />
+            <UkeKolonne
+                className="col col-xs-2"
+                ukerIgjen={utlopsdatoUkerIgjen}
+                minVal={2}
+                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
+            />
             <TekstKolonne
                 className="col col-xs-2"
                 skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
@@ -160,12 +166,6 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
                 ukerIgjen={rettighetsPeriode}
                 minVal={2}
                 skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP)}
-            />
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={utlopsdatoUkerIgjen}
-                minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
             />
 
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
