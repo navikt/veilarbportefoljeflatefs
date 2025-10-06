@@ -9,3 +9,7 @@ export interface InnholdscelleProps {
 export interface InnholdscelleMedLenkeProps extends InnholdscelleProps {
     enhetId: string;
 }
+
+export interface InnholdscelleArenaytelseProps extends InnholdscelleProps {
+    arenaytelsefilter: string | null;
+}
