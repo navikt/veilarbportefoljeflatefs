@@ -64,7 +64,6 @@ interface MinOversiktKolonnerProps {
 }
 
 export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
-    const {ytelse} = filtervalg;
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     const avtaltAktivitetOgTiltak: boolean =
@@ -99,7 +98,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <DagpengerArenaGjenstaendeUkerRettighet
                 bruker={bruker}
                 valgteKolonner={valgteKolonner}
-                arenaytelsefilter={ytelse}
+                filtervalg={filtervalg}
             />
 
             <TiltakspengerArenaGjenstaendeUkerVedtak bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -107,7 +106,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <AapArenaYtelsestype bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapArenaVurderingsfrist bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapArenaVedtaksperiode bruker={bruker} valgteKolonner={valgteKolonner} />
-            <AapArenaRettighetsperiode bruker={bruker} valgteKolonner={valgteKolonner} arenaytelsefilter={ytelse} />
+            <AapArenaRettighetsperiode bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
 
             <VenterPaSvarFraNav bruker={bruker} valgteKolonner={valgteKolonner} />
             <VenterPaSvarFraBruker bruker={bruker} valgteKolonner={valgteKolonner} />

@@ -7,17 +7,15 @@ import {
     YTELSE_ARENA_AAP_UNNTAK
 } from '../../../filtrering/filter-konstanter';
 
-export const AapArenaRettighetsperiode = ({
-    bruker,
-    valgteKolonner,
-    arenaytelsefilter
-}: InnholdscelleArenaytelseProps) => {
+export const AapArenaRettighetsperiode = ({bruker, valgteKolonner, filtervalg}: InnholdscelleArenaytelseProps) => {
+    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
+
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {
-        if (arenaytelsefilter === YTELSE_ARENA_AAP) {
+        if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP) {
             return bruker.aapmaxtidUke !== 0 ? bruker.aapmaxtidUke : bruker.aapUnntakUkerIgjen;
-        } else if (arenaytelsefilter === YTELSE_ARENA_AAP_ORDINAR) {
+        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_ORDINAR) {
             return bruker.aapmaxtidUke;
-        } else if (arenaytelsefilter === YTELSE_ARENA_AAP_UNNTAK) {
+        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_UNNTAK) {
             return bruker.aapUnntakUkerIgjen;
         }
     };

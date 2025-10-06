@@ -12,19 +12,21 @@ import {
 export const DagpengerArenaGjenstaendeUkerRettighet = ({
     bruker,
     valgteKolonner,
-    arenaytelsefilter
+    filtervalg
 }: InnholdscelleArenaytelseProps) => {
+    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
+
     const ukerIgjenBasertPaDagpengetype = () => {
         // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
         if (
-            arenaytelsefilter === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
-            arenaytelsefilter === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
+            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
+            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
         ) {
             return bruker.permutlopUke;
         } else if (
-            arenaytelsefilter === YTELSE_ARENA_DAGPENGER ||
-            arenaytelsefilter === YTELSE_ARENA_DAGPENGER_ORDINARE ||
-            arenaytelsefilter === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
+            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER ||
+            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_ORDINARE ||
+            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
         ) {
             return bruker.dagputlopUke;
         }
