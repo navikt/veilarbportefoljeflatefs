@@ -1,14 +1,6 @@
 import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {Navn} from '../components/tabell/innholdsceller/Navn';
 import {Fnr} from '../components/tabell/innholdsceller/Fnr';
-import {UkeKolonne} from '../components/tabell/kolonner/ukekolonne';
-import {
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-} from '../filtrering/filter-konstanter';
 import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -61,6 +53,7 @@ import {AapArenaVurderingsfrist} from '../components/tabell/innholdsceller/AapAr
 import {AapArenaVedtaksperiode} from '../components/tabell/innholdsceller/AapArenaVedtaksperiode';
 import {AapArenaRettighetsperiode} from '../components/tabell/innholdsceller/AapArenaRettighetsperiode';
 import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/innholdsceller/TiltakspengerArenaGjenstaendeUkerVedtak';
+import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/innholdsceller/DagpengerArenaGjenstaendeUkerRettighet';
 import './minoversikt.css';
 
 interface MinOversiktKolonnerProps {
@@ -83,22 +76,6 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
         valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
         (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
 
-    const ukerIgjenBasertPaDagpengetype = () => {
-        // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
-        if (
-            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
-            ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-        ) {
-            return bruker.permutlopUke;
-        } else if (
-            ytelse === YTELSE_ARENA_DAGPENGER ||
-            ytelse === YTELSE_ARENA_DAGPENGER_ORDINARE ||
-            ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
-        ) {
-            return bruker.dagputlopUke;
-        }
-    };
-
     return (
         <div className="brukerliste__innhold flex flex--center">
             <Navn className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
@@ -119,11 +96,10 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <OppfolgingStartet bruker={bruker} valgteKolonner={valgteKolonner} />
             <TildeltTidspunkt bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <UkeKolonne
-                className="col col-xs-2"
-                ukerIgjen={ukerIgjenBasertPaDagpengetype()}
-                minVal={2}
-                skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
+            <DagpengerArenaGjenstaendeUkerRettighet
+                bruker={bruker}
+                valgteKolonner={valgteKolonner}
+                arenaytelsefilter={ytelse}
             />
 
             <TiltakspengerArenaGjenstaendeUkerVedtak bruker={bruker} valgteKolonner={valgteKolonner} />
