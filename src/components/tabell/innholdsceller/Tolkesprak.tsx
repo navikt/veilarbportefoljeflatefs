@@ -1,10 +1,10 @@
 import {tolkBehovSpraak} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {TolkebehovProps} from './Tolkebehov';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
+import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 
-export const Tolkesprak = ({bruker, valgteKolonner, filtervalg}: TolkebehovProps) => {
+export const Tolkesprak = ({bruker, valgteKolonner, filtervalg}: InnholdscelleMedDataBasertPaFiltervalgProps) => {
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     return (

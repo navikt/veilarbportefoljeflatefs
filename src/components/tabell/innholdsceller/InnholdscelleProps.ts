@@ -11,6 +11,6 @@ export interface InnholdscelleMedLenkeProps extends InnholdscelleProps {
     enhetId: string;
 }
 
-export interface InnholdscelleArenaytelseProps extends InnholdscelleProps {
+export interface InnholdscelleMedDataBasertPaFiltervalgProps extends InnholdscelleProps {
     filtervalg: FiltervalgModell;
 }

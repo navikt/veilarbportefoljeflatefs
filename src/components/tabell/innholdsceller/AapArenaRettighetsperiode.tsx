@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleArenaytelseProps} from './InnholdscelleProps';
+import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {
     YTELSE_ARENA_AAP,
@@ -7,7 +7,11 @@ import {
     YTELSE_ARENA_AAP_UNNTAK
 } from '../../../filtrering/filter-konstanter';
 
-export const AapArenaRettighetsperiode = ({bruker, valgteKolonner, filtervalg}: InnholdscelleArenaytelseProps) => {
+export const AapArenaRettighetsperiode = ({
+    bruker,
+    valgteKolonner,
+    filtervalg
+}: InnholdscelleMedDataBasertPaFiltervalgProps) => {
     const {ytelse: valgtArenaytelsesfilter} = filtervalg;
 
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {

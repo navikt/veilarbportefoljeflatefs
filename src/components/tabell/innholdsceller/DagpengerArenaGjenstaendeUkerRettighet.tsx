@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleArenaytelseProps} from './InnholdscelleProps';
+import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {
     YTELSE_ARENA_DAGPENGER,
@@ -13,7 +13,7 @@ export const DagpengerArenaGjenstaendeUkerRettighet = ({
     bruker,
     valgteKolonner,
     filtervalg
-}: InnholdscelleArenaytelseProps) => {
+}: InnholdscelleMedDataBasertPaFiltervalgProps) => {
     const {ytelse: valgtArenaytelsesfilter} = filtervalg;
 
     const ukerIgjenBasertPaDagpengetype = () => {
