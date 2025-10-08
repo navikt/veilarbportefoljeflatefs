@@ -225,24 +225,24 @@ export const dagpengerYtelseUtlopsSortering = {
     [YTELSE_ARENA_DAGPENGER_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
     [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
     [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [YTELSE_ARENA_TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO
+    [YTELSE_ARENA_TILTAKSPENGER]: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA
 };
 
 export const ytelseAapSortering = {
     [YTELSE_ARENA_AAP]: {
         periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
         rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
     },
     [YTELSE_ARENA_AAP_ORDINAR]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_MAXTID_UKE
     },
     [YTELSE_ARENA_AAP_UNNTAK]: {
         vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO,
+        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
         rettighetsperiode: Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN
     }
 };
