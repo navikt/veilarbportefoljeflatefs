@@ -1,5 +1,5 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {AktiviteterValg, dagpengerYtelseUtlopsSortering, ytelseAapSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering} from '../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -45,12 +45,13 @@ import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Ut
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
 import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
+import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -83,7 +84,6 @@ export function EnhetListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = dagpengerYtelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
@@ -123,16 +123,8 @@ export function EnhetListehode({
                 <VeilederNavident {...sorteringTilHeadercelle} />
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
-                    sortering={ytelseUtlopsdatoNavn}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker rettighet dagpenger"
-                    title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
-                    className="col col-xs-2"
-                />
+                <DagpengerArenaGjenstaendeUkerRettighet {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
                     sortering={Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}

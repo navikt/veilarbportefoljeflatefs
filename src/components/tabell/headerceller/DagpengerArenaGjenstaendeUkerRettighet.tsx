@@ -1,6 +1,7 @@
+import {HeadercelleMedSorteringBasertPaFiltervalgProps} from './HeadercelleProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
-import {UkeKolonne} from '../kolonner/ukekolonne';
+import {SorteringHeader} from '../sortering-header';
+import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
@@ -10,34 +11,40 @@ import {
 } from '../../../filtrering/filter-konstanter';
 
 export const DagpengerArenaGjenstaendeUkerRettighet = ({
-    bruker,
+    gjeldendeSorteringsfelt,
     valgteKolonner,
+    rekkefolge,
+    onClick,
     filtervalg
-}: InnholdscelleMedDataBasertPaFiltervalgProps) => {
+}: HeadercelleMedSorteringBasertPaFiltervalgProps) => {
     const {ytelse: valgtArenaytelsesfilter} = filtervalg;
 
-    // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
-    const ukerIgjenBasertPaDagpengetype = () => {
+    // Bruk ulikt sorteringsfelt i OpenSearch for "ukerIgjen" basert på kva dagpengetype det er filtrert på
+    const sorteringsfeltBasertPaDagpengetype = () => {
         if (
             valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
             valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
         ) {
-            return bruker.permutlopUke;
+            return Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE;
         } else if (
             valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER ||
             valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_ORDINARE ||
             valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
         ) {
-            return bruker.dagputlopUke;
+            return Sorteringsfelt.DAGPENGER_UTLOP_UKE;
         }
     };
 
     return (
-        <UkeKolonne
-            className="col col-xs-2"
-            ukerIgjen={ukerIgjenBasertPaDagpengetype()}
-            minVal={2}
+        <SorteringHeader
             skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
+            sortering={sorteringsfeltBasertPaDagpengetype()}
+            erValgt={gjeldendeSorteringsfelt === sorteringsfeltBasertPaDagpengetype()}
+            rekkefolge={rekkefolge}
+            onClick={onClick}
+            tekst="Gjenstående uker rettighet dagpenger"
+            title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
+            className="col col-xs-2"
         />
     );
 };

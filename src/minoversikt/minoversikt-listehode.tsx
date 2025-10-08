@@ -1,7 +1,7 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
-import {AktiviteterValg, dagpengerYtelseUtlopsSortering, ytelseAapSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, ytelseAapSortering} from '../filtrering/filter-konstanter';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
@@ -48,11 +48,12 @@ import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Ut
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
 import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Fargekategori';
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
-import './minoversikt.css';
 import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
+import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
+import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -85,7 +86,6 @@ export function MinOversiktListehode({
     const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
     const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
     const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = dagpengerYtelseUtlopsSortering[ytelse!];
 
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
@@ -128,16 +128,8 @@ export function MinOversiktListehode({
                 <OppfolgingStartet {...sorteringTilHeadercelle} />
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
-                    sortering={ytelseUtlopsdatoNavn}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker rettighet dagpenger"
-                    title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
-                    className="col col-xs-2"
-                />
+                <DagpengerArenaGjenstaendeUkerRettighet {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
                     sortering={Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}

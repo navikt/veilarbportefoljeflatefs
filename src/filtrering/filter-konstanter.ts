@@ -219,14 +219,6 @@ export const ytelsevalg: () => {[id: string]: string} = () =>
         {}
     );
 
-export const dagpengerYtelseUtlopsSortering = {
-    [YTELSE_ARENA_DAGPENGER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [YTELSE_ARENA_DAGPENGER_ORDINARE]: Sorteringsfelt.DAGPENGER_UTLOP_UKE,
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE,
-    [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: Sorteringsfelt.DAGPENGER_UTLOP_UKE
-};
-
 export const ytelseAapSortering = {
     [YTELSE_ARENA_AAP]: {
         periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
