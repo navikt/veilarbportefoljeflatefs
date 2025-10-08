@@ -2,7 +2,6 @@ import {lag2Sifret, range} from '../utils/utils';
 import {Fargekategorinavn} from '../model-interfaces';
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../typer/bruker-modell';
 import {Dictionary} from '../utils/types/types';
-import {Sorteringsfelt} from '../typer/kolonnesortering';
 
 const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
 
@@ -218,25 +217,6 @@ export const ytelsevalg: () => {[id: string]: string} = () =>
         }),
         {}
     );
-
-export const ytelseAapSortering = {
-    [YTELSE_ARENA_AAP]: {
-        periodetype: Sorteringsfelt.AAP_ARENA_TYPE,
-        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
-        rettighetsperiode: Sorteringsfelt.AAP_RETTIGHETSPERIODE
-    },
-    [YTELSE_ARENA_AAP_ORDINAR]: {
-        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
-        rettighetsperiode: Sorteringsfelt.AAP_ARENA_MAXTID_UKE
-    },
-    [YTELSE_ARENA_AAP_UNNTAK]: {
-        vurderingsfrist: Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST,
-        vedtaksperiode: Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA,
-        rettighetsperiode: Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN
-    }
-};
 
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
@@ -489,7 +469,6 @@ export const filterKonstanter = {
     ytelsevalg,
     rettighetsgruppe: rettighetsgruppeArena,
     aktiviteter,
-    ytelseAapSortering,
     manuellBrukerStatus,
     registreringstype,
     arbeidslisteKategori,
