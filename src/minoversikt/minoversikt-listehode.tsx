@@ -53,6 +53,7 @@ import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/Aap
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
 import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
+import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/headerceller/TiltakspengerArenaGjenstaendeUkerVedtak';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -130,16 +131,8 @@ export function MinOversiktListehode({
 
                 <DagpengerArenaGjenstaendeUkerRettighet {...sorteringTilHeadercelle} filtervalg={filtervalg} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
-                    sortering={Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}
-                    erValgt={sorteringsfelt === Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker vedtak tiltakspenger"
-                    title="Gjenstående uker på gjeldende vedtak tiltakspenger (Arena)"
-                    className="col col-xs-2"
-                />
+                <TiltakspengerArenaGjenstaendeUkerVedtak {...sorteringTilHeadercelle} />
+
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
                     sortering={aapPeriodetype}
