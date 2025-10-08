@@ -485,7 +485,6 @@ export const avvik14aVedtak = {
 };
 
 export const filterKonstanter = {
-    ytelseUtlopsSortering: dagpengerYtelseUtlopsSortering,
     ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
     fodselsdagIMnd,
