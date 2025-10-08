@@ -1,7 +1,7 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
-import {AktiviteterValg, ytelseAapSortering, dagpengerYtelseUtlopsSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg, dagpengerYtelseUtlopsSortering, ytelseAapSortering} from '../filtrering/filter-konstanter';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
@@ -140,8 +140,8 @@ export function MinOversiktListehode({
                 />
                 <SorteringHeader
                     skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
-                    sortering={ytelseUtlopsdatoNavn}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
+                    sortering={Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}
+                    erValgt={sorteringsfelt === Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}
                     rekkefolge={sorteringsrekkefolge}
                     onClick={sorteringOnClick}
                     tekst="Gjenstående uker vedtak tiltakspenger"
