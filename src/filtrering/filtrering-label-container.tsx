@@ -10,7 +10,9 @@ import {
     filterKonstanter,
     HAR_AVVIK,
     hendelserEtikett,
-    MINE_FARGEKATEGORIER
+    MINE_FARGEKATEGORIER,
+    TiltakspengerFilter,
+    tiltakspengerFilter
 } from './filter-konstanter';
 import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -249,6 +251,16 @@ function FiltreringLabelContainer({
                         <FiltreringLabel
                             key={`${key}--${singleValue}`}
                             label={aapIKelvinFilter[singleValue]}
+                            slettFilter={() => slettEnkelt(key, singleValue)}
+                        />
+                    );
+                });
+            } else if (key === 'ytelseTiltakspenger') {
+                return value.map((singleValue: TiltakspengerFilter) => {
+                    return (
+                        <FiltreringLabel
+                            key={`${key}--${singleValue}`}
+                            label={tiltakspengerFilter[singleValue]}
                             slettFilter={() => slettEnkelt(key, singleValue)}
                         />
                     );

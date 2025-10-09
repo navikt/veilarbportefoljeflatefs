@@ -435,6 +435,16 @@ export const aapIKelvinFilter = {
     [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP (Kelvin)'}
 };
 
+export enum TiltakspengerFilter {
+    HAR_TILTAKSPENGER = 'HAR_TILTAKSPENGER',
+    HAR_IKKE_TILTAKSPENGER = 'HAR_IKKE_TILTAKSPENGER'
+}
+
+export const tiltakspengerFilter = {
+    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'},
+    [TiltakspengerFilter.HAR_IKKE_TILTAKSPENGER]: {label: 'Har ikke tiltakspenger (TPSAK)'}
+};
+
 /** Lange namn på innsatsgrupper.
  * Brukt i nedtrekksmeny for filtervalg + filtertags. */
 export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
@@ -520,5 +530,6 @@ export const filterKonstanter = {
     fargekategorier,
     innsatsgruppeGjeldendeVedtak14a,
     hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst,
-    ytelseAapKelvin: aapIKelvinFilter
+    ytelseAapKelvin: aapIKelvinFilter,
+    ytelseTiltakspenger: tiltakspengerFilter
 };

@@ -22,6 +22,7 @@ import {
     rettighetsgruppeArena,
     servicegruppe,
     stillingFraNavFilter,
+    tiltakspengerFilter,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent,
@@ -40,7 +41,7 @@ import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_AAPFILTER_MED_KELVINDATA} from '../../konstanter';
+import {VIS_AAPFILTER_MED_KELVINDATA, VIS_TILTAKSPENGER_MED_TPSAKDATA} from '../../konstanter';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
@@ -56,6 +57,7 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
+    const skalViseTiltaksepngerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -423,6 +425,20 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             <CheckboxFilterform
                                 form="ytelseAapKelvin"
                                 valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
+                {skalViseTiltaksepngerfilterMedTPSAKdata && (
+                    <Dropdown
+                        name="Tiltakspenger (TPSAK)"
+                        id="ytelser-tiltakspenger-utenfor-arena"
+                        render={() => (
+                            <CheckboxFilterform
+                                form="ytelseTiltakspenger"
+                                valg={tiltakspengerFilter}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
