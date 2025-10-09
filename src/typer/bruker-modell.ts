@@ -61,6 +61,7 @@ export interface BrukerModell {
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     utgattVarsel: UtgattVarselHendelse | null;
     aapKelvin: AapKelvinData | null;
+    tiltakspenger: TiltakspengerData | null;
 }
 
 export enum VurderingsBehov {
@@ -188,4 +189,9 @@ interface Tolkebehov {
 export interface AapKelvinData {
     vedtaksdatoTilOgMed?: string; // dato
     rettighetstype?: string;
+}
+
+export interface TiltakspengerData {
+    vedtaksdatoTilOgMed?: string; // dato
+    rettighet?: string;
 }

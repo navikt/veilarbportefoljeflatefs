@@ -55,6 +55,8 @@ import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/innh
 import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/innholdsceller/DagpengerArenaGjenstaendeUkerRettighet';
 import './enhetsportefolje.css';
 import './brukerliste.css';
+import {TiltakspengerVedtakTilOgMedDatoInnhold} from '../components/tabell/innholdsceller/TiltakspengerVedtakTilOgMedDatoInnhold';
+import {TiltakspengerRettighetInnhold} from '../components/tabell/innholdsceller/TiltakspengerRettighetInnhold';
 
 interface EnhetKolonnerProps {
     className?: string;
@@ -160,6 +162,9 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
             <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <TiltakspengerVedtakTilOgMedDatoInnhold bruker={bruker} valgteKolonner={valgteKolonner} />
+            <TiltakspengerRettighetInnhold bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

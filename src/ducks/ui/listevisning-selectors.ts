@@ -1,29 +1,30 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
 import {
-    YTELSE_ARENA_AAP,
-    YTELSE_ARENA_AAP_ORDINAR,
-    YTELSE_ARENA_AAP_UNNTAK,
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
     HAR_14A_VEDTAK,
     HAR_AVVIK,
     I_AVTALT_AKTIVITET,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
     TILTAKSHENDELSER,
-    YTELSE_ARENA_TILTAKSPENGER,
+    TiltakspengerFilter,
     UNDER_VURDERING,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV
+    VENTER_PA_SVAR_FRA_NAV,
+    YTELSE_ARENA_AAP,
+    YTELSE_ARENA_AAP_ORDINAR,
+    YTELSE_ARENA_AAP_UNNTAK,
+    YTELSE_ARENA_DAGPENGER,
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    YTELSE_ARENA_DAGPENGER_ORDINARE,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
+    YTELSE_ARENA_TILTAKSPENGER
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 
@@ -146,6 +147,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtrertPaHovedmalGjeldendeVedtak14a;
 
     const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
+    const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
 
     /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
      * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
@@ -216,6 +218,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
+        .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat([Kolonne.OPPFOLGING_STARTET])
         .concat([Kolonne.TILDELT_TIDSPUNKT]);
 }

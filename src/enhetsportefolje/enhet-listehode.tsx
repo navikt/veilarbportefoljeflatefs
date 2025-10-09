@@ -51,6 +51,8 @@ import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
+import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/headerceller/TiltakspengerVedtakTilOgMedDato';
+import {TiltakspengerRettighet} from '../components/tabell/headerceller/TiltakspengerRettighet';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -240,6 +242,9 @@ export function EnhetListehode({
 
                 <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
                 <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
+
+                <TiltakspengerVedtakTilOgMedDato {...sorteringTilHeadercelle} />
+                <TiltakspengerRettighet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
