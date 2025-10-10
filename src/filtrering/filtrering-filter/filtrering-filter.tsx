@@ -431,7 +431,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         )}
                     />
                 )}
-                {skalViseTiltaksepngerfilterMedTPSAKdata && (
+                {skalViseTiltakspengerfilterMedTPSAKdata && (
                     <Dropdown
                         name="Tiltakspenger (TPSAK)"
                         id="ytelser-tiltakspenger-utenfor-arena"
