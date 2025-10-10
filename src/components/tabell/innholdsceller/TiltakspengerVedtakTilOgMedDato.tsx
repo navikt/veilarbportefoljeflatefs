@@ -2,7 +2,7 @@ import {InnholdscelleProps} from './InnholdscelleProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
-export const TiltakspengerVedtakTilOgMedDatoInnhold = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const TiltakspengerVedtakTilOgMedDato = ({bruker, valgteKolonner}: InnholdscelleProps) => {
     const tilOgMedVedtaksdato = bruker.tiltakspenger?.vedtaksdatoTilOgMed
         ? new Date(bruker.tiltakspenger.vedtaksdatoTilOgMed)
         : null;

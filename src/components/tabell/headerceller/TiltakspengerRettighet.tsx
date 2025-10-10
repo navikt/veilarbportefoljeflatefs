@@ -17,7 +17,6 @@ export const TiltakspengerRettighet = ({
         onClick={onClick}
         tekst="Rettighet"
         title="Rettighet tiltakspenger (TPSAK)"
-        headerTestId="sorteringheader_rettighet_tiltakspenger"
         className="col col-xs-2"
     />
 );

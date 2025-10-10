@@ -17,7 +17,6 @@ export const AapKelvinRettighetstype = ({
         onClick={onClick}
         tekst="Rettighetstype"
         title="Rettighetstype AAP (Kelvin)"
-        headerTestId="sorteringheader_rettighetstype"
         className="col col-xs-2"
     />
 );

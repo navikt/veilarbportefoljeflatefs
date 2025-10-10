@@ -17,7 +17,6 @@ export const TiltakspengerVedtakTilOgMedDato = ({
         onClick={onClick}
         tekst="Vedtak til og med"
         title="Tiltakspenger vedtak til og med (TPSAK)"
-        headerTestId="sorteringheader_vedtak_til_og_med_tiltakspenger"
         className="col col-xs-2"
     />
 );
