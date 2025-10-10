@@ -11,7 +11,7 @@ export enum Sorteringsfelt {
     FODSELSNUMMER = 'fodselsnummer',
     OPPFOLGING_STARTET = 'oppfolging_startdato',
     TILDELT_TIDSPUNKT = 'tildelt_tidspunkt',
-    UTLOPSDATO = 'utlopsdato',
+    UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA = 'utlopsdato',
 
     NAVIDENT = 'veileder_id',
     VEILEDER = 'veileder_navn',
