@@ -22,6 +22,7 @@ import {
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
+    TiltakspengerData,
     UtgattVarselHendelse,
     Utkast14a
 } from '../../typer/bruker-modell';
@@ -245,6 +246,19 @@ const lagAapKelvinData = (): AapKelvinData | null => {
     };
 };
 
+const lagTiltakspengerData = (): TiltakspengerData | null => {
+    const muligeRettigheter = ['Tiltakspenger', 'Tiltakspenger og barnetillegg'];
+
+    const tilfeldigRettigheter = () => {
+        return muligeRettigheter[Math.round(Math.random() * muligeRettigheter.length)];
+    };
+
+    return {
+        vedtaksdatoTilOgMed: randomDate({past: true, withoutTimestamp: true}),
+        rettighet: tilfeldigRettigheter()
+    };
+};
+
 function lagBruker(sikkerhetstiltak = []) {
     const grunndata = lagGrunndata();
 
@@ -317,7 +331,8 @@ function lagBruker(sikkerhetstiltak = []) {
         huskelapp,
         gjeldendeVedtak14a: lag14aVedtak(),
         utgattVarsel: lagUtgattVarsel(),
-        aapKelvin: lagAapKelvinData()
+        aapKelvin: lagAapKelvinData(),
+        tiltakspenger: lagTiltakspengerData()
     };
 }
 

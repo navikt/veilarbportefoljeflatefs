@@ -49,6 +49,8 @@ import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
+import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/headerceller/TiltakspengerVedtakTilOgMedDato';
+import {TiltakspengerRettighet} from '../components/tabell/headerceller/TiltakspengerRettighet';
 import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
 import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/headerceller/TiltakspengerArenaGjenstaendeUkerVedtak';
 import {AapArenaYtelsestype} from '../components/tabell/headerceller/AapArenaYtelsestype';
@@ -186,6 +188,9 @@ export function EnhetListehode({
 
                 <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
                 <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
+
+                <TiltakspengerVedtakTilOgMedDato {...sorteringTilHeadercelle} />
+                <TiltakspengerRettighet {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

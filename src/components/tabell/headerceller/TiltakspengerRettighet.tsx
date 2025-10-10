@@ -3,20 +3,20 @@ import {SorteringHeader} from '../sortering-header';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const AapKelvinRettighetstype = ({
+export const TiltakspengerRettighet = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,
     onClick
 }: HeadercelleProps) => (
     <SorteringHeader
-        skalVises={valgteKolonner.includes(Kolonne.AAP_KELVIN_RETTIGHETSTYPE)}
-        sortering={Sorteringsfelt.AAP_KELVIN_RETTIGHETSTYPE}
-        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.AAP_KELVIN_RETTIGHETSTYPE}
+        skalVises={valgteKolonner.includes(Kolonne.TILTAKSPENGER_RETTIGHET)}
+        sortering={Sorteringsfelt.TILTAKSPENGER_RETTIGHET}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TILTAKSPENGER_RETTIGHET}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Rettighetstype"
-        title="Rettighetstype AAP (Kelvin)"
+        tekst="Rettighet"
+        title="Rettighet tiltakspenger (TPSAK)"
         className="col col-xs-2"
     />
 );

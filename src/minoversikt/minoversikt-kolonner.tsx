@@ -55,6 +55,8 @@ import {AapArenaRettighetsperiode} from '../components/tabell/innholdsceller/Aap
 import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/innholdsceller/TiltakspengerArenaGjenstaendeUkerVedtak';
 import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/innholdsceller/DagpengerArenaGjenstaendeUkerRettighet';
 import './minoversikt.css';
+import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/innholdsceller/TiltakspengerVedtakTilOgMedDato';
+import {TiltakspengerRettighet} from '../components/tabell/innholdsceller/TiltakspengerRettighet';
 
 interface MinOversiktKolonnerProps {
     bruker: BrukerModell;
@@ -175,6 +177,9 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
             <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <TiltakspengerVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
+            <TiltakspengerRettighet bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
