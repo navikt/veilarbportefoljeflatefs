@@ -57,7 +57,7 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
-    const skalViseTiltaksepngerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
+    const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -431,7 +431,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         )}
                     />
                 )}
-                {skalViseTiltaksepngerfilterMedTPSAKdata && (
+                {skalViseTiltakspengerfilterMedTPSAKdata && (
                     <Dropdown
                         name="Tiltakspenger (TPSAK)"
                         id="ytelser-tiltakspenger-utenfor-arena"
