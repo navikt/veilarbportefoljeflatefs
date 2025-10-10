@@ -1,5 +1,5 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {AktiviteterValg, ytelseAapSortering, dagpengerYtelseUtlopsSortering} from '../filtrering/filter-konstanter';
+import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
@@ -45,12 +45,18 @@ import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Ut
 import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
 import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
-import './enhetsportefolje.css';
-import './brukerliste.css';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
 import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
+import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
+import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/headerceller/TiltakspengerArenaGjenstaendeUkerVedtak';
+import {AapArenaYtelsestype} from '../components/tabell/headerceller/AapArenaYtelsestype';
+import {AapArenaVurderingsfrist} from '../components/tabell/headerceller/AapArenaVurderingsfrist';
+import {AapArenaVedtaksperiode} from '../components/tabell/headerceller/AapArenaVedtaksperiode';
+import {AapArenaRettighetsperiode} from '../components/tabell/headerceller/AapArenaRettighetsperiode';
+import './enhetsportefolje.css';
+import './brukerliste.css';
 
 function harValgteAktiviteter(aktiviteter) {
     if (aktiviteter && Object.keys(aktiviteter).length > 0) {
@@ -77,14 +83,6 @@ export function EnhetListehode({
     sorteringsfelt,
     valgteKolonner
 }: EnhetListehodeProps) {
-    const {ytelse} = filtervalg;
-    const erAapYtelse = Object.keys(ytelseAapSortering).includes(ytelse!);
-    const aapPeriodetype = erAapYtelse ? ytelseAapSortering[ytelse!].periodetype : '';
-    const aapVurderingsfrist = erAapYtelse ? ytelseAapSortering[ytelse!].vurderingsfrist : '';
-    const aapVedtakssperiode = erAapYtelse ? ytelseAapSortering[ytelse!].vedtaksperiode : '';
-    const aapRettighetsperiode = erAapYtelse ? ytelseAapSortering[ytelse!].rettighetsperiode : '';
-    const ytelseUtlopsdatoNavn = dagpengerYtelseUtlopsSortering[ytelse!];
-
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
@@ -123,66 +121,14 @@ export function EnhetListehode({
                 <VeilederNavident {...sorteringTilHeadercelle} />
                 <TildeltTidspunkt {...sorteringTilHeadercelle} />
 
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER)}
-                    sortering={ytelseUtlopsdatoNavn}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker rettighet dagpenger"
-                    title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER)}
-                    sortering={ytelseUtlopsdatoNavn}
-                    erValgt={ytelseUtlopsdatoNavn === sorteringsfelt}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker vedtak tiltakspenger"
-                    title="Gjenstående uker på gjeldende vedtak tiltakspenger (Arena)"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
-                    sortering={aapPeriodetype}
-                    erValgt={sorteringsfelt === aapPeriodetype}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Type AAP-periode"
-                    title="Type AAP-periode (Arena)"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP)}
-                    sortering={aapVurderingsfrist}
-                    erValgt={sorteringsfelt === aapVurderingsfrist}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Frist vurdering rett AAP"
-                    title="Omtrentlig frist for ny vurdering av AAP (Arena)"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP)}
-                    sortering={aapVedtakssperiode}
-                    erValgt={sorteringsfelt === aapVedtakssperiode}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker vedtak AAP"
-                    title="Gjenstående uker på gjeldende vedtak AAP (Arena)"
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP)}
-                    sortering={aapRettighetsperiode}
-                    erValgt={sorteringsfelt === aapRettighetsperiode}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
-                    tekst="Gjenstående uker rettighet AAP"
-                    title="Gjenstående uker av rettighetsperioden for AAP (Arena)"
-                    className="col col-xs-2"
-                />
+                <DagpengerArenaGjenstaendeUkerRettighet {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+
+                <TiltakspengerArenaGjenstaendeUkerVedtak {...sorteringTilHeadercelle} />
+
+                <AapArenaYtelsestype {...sorteringTilHeadercelle} />
+                <AapArenaVurderingsfrist {...sorteringTilHeadercelle} />
+                <AapArenaVedtaksperiode {...sorteringTilHeadercelle} />
+                <AapArenaRettighetsperiode {...sorteringTilHeadercelle} filtervalg={filtervalg} />
 
                 <VenterPaSvarFraNav {...sorteringTilHeadercelle} />
                 <VenterPaSvarFraBruker {...sorteringTilHeadercelle} />
