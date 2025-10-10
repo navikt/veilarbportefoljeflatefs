@@ -1,6 +1,12 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
-import {ALERTSTRIPE_FEILMELDING, DARKMODE, PORTEFOLJE_FEATURES, VIS_AAPFILTER_MED_KELVINDATA} from '../konstanter';
+import {
+    ALERTSTRIPE_FEILMELDING,
+    DARKMODE,
+    PORTEFOLJE_FEATURES,
+    VIS_AAPFILTER_MED_KELVINDATA,
+    VIS_TILTAKSPENGER_MED_TPSAKDATA
+} from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
 
@@ -11,7 +17,8 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [VIS_AAPFILTER_MED_KELVINDATA]: false
+    [VIS_AAPFILTER_MED_KELVINDATA]: false,
+    [VIS_TILTAKSPENGER_MED_TPSAKDATA]: false
 };
 
 // Reducer

@@ -63,7 +63,8 @@ export const initialState: FiltervalgModell = {
     gjeldendeVedtak14a: [],
     innsatsgruppeGjeldendeVedtak14a: [],
     hovedmalGjeldendeVedtak14a: [],
-    ytelseAapKelvin: []
+    ytelseAapKelvin: [],
+    ytelseTiltakspenger: []
 };
 
 export function fjern(filterId, verdi, fjernVerdi) {
