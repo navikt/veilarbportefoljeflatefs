@@ -121,7 +121,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaYtelseMedRettighetsperiode =
         filtervalg.ytelse === YTELSE_ARENA_AAP || filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR;
 
-    const ikkeFiltrertPaMoterIDagIMinOversikt = oversiktType === OversiktType.enhetensOversikt && !filtrertPaMoterIDag;
+    const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
+
+    const erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag = erPaEnhetensOversikt && !filtrertPaMoterIDag;
 
     const filtrertPaEnsligForsorger = !!filtervalg.ensligeForsorgere.length;
 
@@ -162,7 +164,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.SISTE_ENDRING, filtrertPaSisteEndringKategori))
         .concat(addHvis(Kolonne.SISTE_ENDRING_DATO, filtrertPaSisteEndringKategori))
         .concat(addHvis(Kolonne.MOTER_IDAG, filtrertPaMoterIDag))
-        .concat(addHvis(Kolonne.VEILEDER, filtrertPaMoterIDag && oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.VEILEDER, filtrertPaMoterIDag && erPaEnhetensOversikt))
         .concat(addHvis(Kolonne.MOTER_VARIGHET, filtrertPaMoterIDag))
         .concat(addHvis(Kolonne.MOTE_ER_AVTALT, filtrertPaMoterIDag))
         .concat(addHvis(Kolonne.UTLOPTE_AKTIVITETER, filtervalg.ferdigfilterListe.includes(UTLOPTE_AKTIVITETER)))
@@ -197,7 +199,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaAAPYtelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaYtelseMedVedtaksperiode))
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaYtelseMedRettighetsperiode))
-        .concat(addHvis(Kolonne.VEILEDER, ikkeFiltrertPaMoterIDagIMinOversikt))
+        .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
+        .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
+        .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPYtelse))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR))
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK))
@@ -205,7 +211,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_OM_BARNET, filtrertPaEnsligForsorger))
-        .concat(addHvis(Kolonne.NAVIDENT, oversiktType === OversiktType.enhetensOversikt))
+        .concat(addHvis(Kolonne.NAVIDENT, erPaEnhetensOversikt))
         .concat(addHvis(Kolonne.CV_SVARFRIST, filtervalg.stillingFraNavFilter.length !== 0))
         .concat(addHvis(Kolonne.BOSTED_SIST_OPPDATERT, filtrertPaGeografiskBosted))
         .concat(addHvis(Kolonne.BARN_UNDER_18_AAR, filtrertPaBarnUnder18Ar))
@@ -216,10 +222,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, filtrertPaEtGjeldendeVedtak14aFilter))
         .concat(addHvis(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, filtrertPaEtGjeldendeVedtak14aFilter))
-        .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
-        .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
-        .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
-        .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat([Kolonne.OPPFOLGING_STARTET])
         .concat([Kolonne.TILDELT_TIDSPUNKT]);
 }
