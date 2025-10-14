@@ -396,6 +396,17 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak § 14 a'}
 };
 
+/** Dette er det "nye" AAP-Arena-filteret, det som er separat fra "ytelse" */
+export enum AAPFilterArena {
+    HAR_AAP_ORDINAR_I_ARENA = 'HAR_AAP_ORDINAR',
+    HAR_AAP_UNNTAK_I_ARENA = 'HAR_AAP_UNNTAK'
+}
+
+export const aapIArenaFilter = {
+    [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
+    [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
+};
+
 export enum AAPFilterKelvin {
     HAR_AAP_I_KELVIN = 'HAR_AAP',
     HAR_IKKE_AAP_I_KELVIN = 'HAR_IKKE_AAP'
@@ -499,6 +510,7 @@ export const filterKonstanter = {
     fargekategorier,
     innsatsgruppeGjeldendeVedtak14a,
     hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst,
+    ytelseAapArena: aapIArenaFilter,
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspenger: tiltakspengerFilter
 };

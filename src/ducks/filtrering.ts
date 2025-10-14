@@ -63,6 +63,7 @@ export const initialState: FiltervalgModell = {
     gjeldendeVedtak14a: [],
     innsatsgruppeGjeldendeVedtak14a: [],
     hovedmalGjeldendeVedtak14a: [],
+    ytelseAapArena: [],
     ytelseAapKelvin: [],
     ytelseTiltakspenger: []
 };
