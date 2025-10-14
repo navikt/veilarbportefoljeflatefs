@@ -2,7 +2,7 @@ import {FargekategoriDataModell} from '../model-interfaces';
 import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev, loginUrl} from '../utils/url-utils';
+import {erDev, getEnv, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
@@ -269,7 +269,14 @@ export function lagreSorteringFiltere(sorteringOgIder: SorteringOgId[]): Promise
 }
 
 export function hentSystemmeldinger() {
-    return fetchToJson(`https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`, MED_CREDENTIALS);
+    const env = getEnv();
+    let baseUrl;
+    if (env === Env.ansattDev) {
+        baseUrl = 'https://poao-sanity.ansatt.dev.nav.no/systemmeldinger';
+    } else {
+        baseUrl = `https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`;
+    }
+    return fetchToJson(baseUrl, MED_CREDENTIALS);
 }
 
 export function hentMoteplan(veileder: string, enhet: string) {
