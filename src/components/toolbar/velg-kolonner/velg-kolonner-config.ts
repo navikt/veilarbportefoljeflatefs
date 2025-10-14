@@ -73,9 +73,9 @@ alternativerConfig.set(Kolonne.TILTAKSHENDELSE_LENKE, {tekstlabel: 'Hendelse på
 alternativerConfig.set(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse på tiltak'});
 alternativerConfig.set(Kolonne.FILTERHENDELSE_LENKE, {tekstlabel: 'Hendelse (lenke)'});
 alternativerConfig.set(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, {tekstlabel: 'Dato for hendelse'});
-alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'AAP-vedtak til og med (Kelvin)'});
+alternativerConfig.set(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, {tekstlabel: 'Vedtak AAP til og med-dato (Kelvin)'});
 alternativerConfig.set(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, {tekstlabel: 'Rettighet AAP (Kelvin)'});
 alternativerConfig.set(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, {
-    tekstlabel: 'Tiltakspenger vedtaksdato til og med (TPSAK)'
+    tekstlabel: 'Vedtak tiltakspenger til og med-dato (TPSAK)'
 });
 alternativerConfig.set(Kolonne.TILTAKSPENGER_RETTIGHET, {tekstlabel: 'Rettighet tiltakspenger (TPSAK)'});
