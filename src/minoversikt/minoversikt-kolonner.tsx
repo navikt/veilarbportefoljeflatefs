@@ -46,7 +46,7 @@ import {HuskelappKommentar} from '../components/tabell/innholdsceller/min-oversi
 import {HuskelappFrist} from '../components/tabell/innholdsceller/min-oversikt/HuskelappFrist';
 import {HuskelappSistEndret} from '../components/tabell/innholdsceller/min-oversikt/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
-import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
+import {AapKelvinRettighet} from '../components/tabell/innholdsceller/AapKelvinRettighet';
 import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
 import {AapArenaYtelsestype} from '../components/tabell/innholdsceller/AapArenaYtelsestype';
 import {AapArenaVurderingsfrist} from '../components/tabell/innholdsceller/AapArenaVurderingsfrist';
@@ -176,7 +176,7 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <HuskelappSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
-            <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinRettighet bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighet bruker={bruker} valgteKolonner={valgteKolonner} />

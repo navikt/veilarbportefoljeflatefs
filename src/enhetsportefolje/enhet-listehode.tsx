@@ -47,7 +47,7 @@ import {VeilederNavident} from '../components/tabell/headerceller/enhetens-overs
 import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
-import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
+import {AapKelvinRettighet} from '../components/tabell/headerceller/AapKelvinRettighet';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
 import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/headerceller/TiltakspengerVedtakTilOgMedDato';
 import {TiltakspengerRettighet} from '../components/tabell/headerceller/TiltakspengerRettighet';
@@ -187,7 +187,7 @@ export function EnhetListehode({
                 <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
 
                 <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
-                <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
+                <AapKelvinRettighet {...sorteringTilHeadercelle} />
 
                 <TiltakspengerVedtakTilOgMedDato {...sorteringTilHeadercelle} />
                 <TiltakspengerRettighet {...sorteringTilHeadercelle} />

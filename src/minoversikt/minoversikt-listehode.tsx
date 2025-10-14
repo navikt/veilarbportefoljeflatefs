@@ -50,7 +50,7 @@ import {Fargekategori} from '../components/tabell/headerceller/min-oversikt/Farg
 import {Huskelapp} from '../components/tabell/headerceller/min-oversikt/Huskelapp';
 import {HuskelappSistEndret} from '../components/tabell/headerceller/HuskelappSistEndret';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
-import {AapKelvinRettighetstype} from '../components/tabell/headerceller/AapKelvinRettighetstype';
+import {AapKelvinRettighet} from '../components/tabell/headerceller/AapKelvinRettighet';
 import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
 import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/headerceller/TiltakspengerVedtakTilOgMedDato';
 import {TiltakspengerRettighet} from '../components/tabell/headerceller/TiltakspengerRettighet';
@@ -226,7 +226,7 @@ export function MinOversiktListehode({
                 <HuskelappSistEndret {...sorteringTilHeadercelle} />
 
                 <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
-                <AapKelvinRettighetstype {...sorteringTilHeadercelle} />
+                <AapKelvinRettighet {...sorteringTilHeadercelle} />
 
                 <TiltakspengerVedtakTilOgMedDato {...sorteringTilHeadercelle} />
                 <TiltakspengerRettighet {...sorteringTilHeadercelle} />
