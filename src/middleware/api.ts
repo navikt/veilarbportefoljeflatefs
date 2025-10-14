@@ -2,7 +2,7 @@ import {FargekategoriDataModell} from '../model-interfaces';
 import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
-import {erDev, getEnv, loginUrl} from '../utils/url-utils';
+import {Env, erDev, getEnv, loginUrl} from '../utils/url-utils';
 import {FrontendEvent} from '../utils/frontend-logger';
 import {GeografiskBosted} from '../ducks/geografiskBosted';
 import {Foedeland} from '../ducks/foedeland';
@@ -12,9 +12,17 @@ import {EndreHuskelapp, LagreHuskelapp} from '../ducks/huskelapp';
 
 export const API_BASE_URL = '/veilarbportefoljeflatefs/api';
 const credentials = 'same-origin';
+const corsCredentials = 'include';
 
 const MED_CREDENTIALS: RequestInit = {
     credentials,
+    headers: {
+        'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
+        'Content-Type': 'application/json'
+    }
+};
+const MED_CROSS_ORIGIN_CREDENTIALS: RequestInit = {
+    credentials: corsCredentials,
     headers: {
         'Nav-Consumer-Id': 'veilarbportefoljeflatefs',
         'Content-Type': 'application/json'
@@ -273,10 +281,11 @@ export function hentSystemmeldinger() {
     let baseUrl;
     if (env === Env.ansattDev) {
         baseUrl = 'https://poao-sanity.ansatt.dev.nav.no/systemmeldinger';
+        return fetchToJson(baseUrl, MED_CROSS_ORIGIN_CREDENTIALS);
     } else {
         baseUrl = `https://poao-sanity.intern${erDev() ? '.dev' : ''}.nav.no/systemmeldinger`;
+        return fetchToJson(baseUrl, MED_CREDENTIALS);
     }
-    return fetchToJson(baseUrl, MED_CREDENTIALS);
 }
 
 export function hentMoteplan(veileder: string, enhet: string) {
