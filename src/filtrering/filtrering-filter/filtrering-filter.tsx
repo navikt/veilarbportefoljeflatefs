@@ -3,6 +3,7 @@ import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
+    aapIArenaFilter,
     aapIKelvinFilter,
     alder,
     avvik14aVedtak,
@@ -41,7 +42,11 @@ import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_AAPFILTER_MED_KELVINDATA, VIS_TILTAKSPENGER_MED_TPSAKDATA} from '../../konstanter';
+import {
+    BRUK_NYTT_ARENA_AAP_FILTER,
+    VIS_AAPFILTER_MED_KELVINDATA,
+    VIS_TILTAKSPENGER_MED_TPSAKDATA
+} from '../../konstanter';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
@@ -58,6 +63,7 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
     const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
+    const skalBrukeNyttArenaAapfilter = useFeatureSelector()(BRUK_NYTT_ARENA_AAP_FILTER);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -419,15 +425,25 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
                 {skalViseAAPfilterMedKelvindata && (
                     <Dropdown
-                        name="AAP (Kelvin)"
+                        name={skalBrukeNyttArenaAapfilter ? 'AAP' : 'AAP (Kelvin)'}
                         id="ytelser-aap-utenfor-arena"
                         render={() => (
-                            <CheckboxFilterform
-                                form="ytelseAapKelvin"
-                                valg={aapIKelvinFilter}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
+                            <>
+                                <CheckboxFilterform
+                                    form="ytelseAapKelvin"
+                                    valg={aapIKelvinFilter}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                                {skalBrukeNyttArenaAapfilter && (
+                                    <CheckboxFilterform
+                                        form="ytelseAapArena"
+                                        valg={aapIArenaFilter}
+                                        filtervalg={filtervalg}
+                                        endreFiltervalg={endreFiltervalg}
+                                    />
+                                )}
+                            </>
                         )}
                     />
                 )}
