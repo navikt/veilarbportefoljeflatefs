@@ -15,7 +15,7 @@ export const TiltakspengerRettighet = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TILTAKSPENGER_RETTIGHET}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Rettighet"
+        tekst="Rettighet tiltakspenger"
         title="Rettighet tiltakspenger (TPSAK)"
         className="col col-xs-2"
     />

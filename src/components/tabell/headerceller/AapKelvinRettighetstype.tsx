@@ -15,8 +15,8 @@ export const AapKelvinRettighetstype = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.AAP_KELVIN_RETTIGHETSTYPE}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Rettighetstype"
-        title="Rettighetstype AAP (Kelvin)"
+        tekst="Rettighet AAP"
+        title="Rettighet AAP (Kelvin)"
         className="col col-xs-2"
     />
 );
