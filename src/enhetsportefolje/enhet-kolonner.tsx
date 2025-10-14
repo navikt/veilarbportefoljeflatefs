@@ -45,7 +45,7 @@ import {UtdanningOgSituasjonSistEndret} from '../components/tabell/innholdscelle
 import {BarnUnder18Aar} from '../components/tabell/innholdsceller/BarnUnder18Aar';
 import {EnsligeForsorgereOmBarnet} from '../components/tabell/innholdsceller/EnsligeForsorgereOmBarnet';
 import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/innholdsceller/AapKelvinVedtakTilOgMedDato';
-import {AapKelvinRettighetstype} from '../components/tabell/innholdsceller/AapKelvinRettighetstype';
+import {AapKelvinRettighet} from '../components/tabell/innholdsceller/AapKelvinRettighet';
 import {TildeltTidspunkt} from '../components/tabell/innholdsceller/TildeltTidspunkt';
 import {AapArenaYtelsestype} from '../components/tabell/innholdsceller/AapArenaYtelsestype';
 import {AapArenaVurderingsfrist} from '../components/tabell/innholdsceller/AapArenaVurderingsfrist';
@@ -161,7 +161,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <UtdanningOgSituasjonSistEndret bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <AapKelvinVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
-            <AapKelvinRettighetstype bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AapKelvinRettighet bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDato bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighet bruker={bruker} valgteKolonner={valgteKolonner} />

@@ -15,7 +15,7 @@ export const TiltakspengerVedtakTilOgMedDato = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TILTAKSPENGER_VEDTAKSDATO_TOM}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Vedtak til og med"
+        tekst="Vedtak t.o.m. (tiltakspenger)"
         title="Tiltakspenger vedtak til og med (TPSAK)"
         className="col col-xs-2"
     />

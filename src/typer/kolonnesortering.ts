@@ -25,7 +25,7 @@ export enum Sorteringsfelt {
     AAP_ARENA_UNNTAK_UKER_IGJEN = 'aapunntakukerigjen',
 
     AAP_KEVLIN_VEDTAK_TOM_DATO = 'aap_kelvin_vedtak_tom_dato',
-    AAP_KELVIN_RETTIGHETSTYPE = 'aap_kelvin_rettighetstype',
+    AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
 
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',

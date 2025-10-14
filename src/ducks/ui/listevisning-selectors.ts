@@ -200,7 +200,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaYtelseMedVedtaksperiode))
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaYtelseMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
-        .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHETSTYPE, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))

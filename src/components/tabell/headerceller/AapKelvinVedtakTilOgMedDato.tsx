@@ -15,7 +15,7 @@ export const AapKelvinVedtakTilOgMedDato = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.AAP_KEVLIN_VEDTAK_TOM_DATO}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Vedtak til og med"
+        tekst="Vedtak t.o.m. (AAP)"
         title="AAP-vedtak til og med (Kelvin)"
         className="col col-xs-2"
     />
