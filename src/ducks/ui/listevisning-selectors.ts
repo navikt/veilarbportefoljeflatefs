@@ -1,6 +1,7 @@
 import {AppState} from '../../reducer';
 import {Kolonne, ListevisningState, OversiktType} from './listevisning';
 import {
+    AAPFilterArena,
     AAPFilterKelvin,
     AktiviteterFilternokler,
     AktiviteterValg,
@@ -110,16 +111,42 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
-    const filtrertPaYtelseMedVurderingsfrist =
-        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR || filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
+    /** ordinar AND unntak */
+    const filtrertPaBeggeAAPYtelserArena =
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA) &&
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
 
-    const filtrertPaAAPYtelse = filtervalg.ytelse === YTELSE_ARENA_AAP;
+    /** ordinar OR unntak */
+    const filtrertPaMinstEnAAPYtelseArena =
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA) ||
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
+
+    /** ordinar XOR unntak*/
+    const filtrertPaAAPYtelseArenaMenIkkeBegge = filtrertPaMinstEnAAPYtelseArena && !filtrertPaBeggeAAPYtelserArena;
+
+    const filtrertPaYtelseMedVurderingsfrist =
+        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
+        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
+        filtrertPaAAPYtelseArenaMenIkkeBegge;
+
+    const filtrertPaAAPYtelse = filtervalg.ytelse === YTELSE_ARENA_AAP || filtrertPaBeggeAAPYtelserArena;
+
+    const filtrertPaAAPOrdinar =
+        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
+    const filtrertPaAAPUnntak =
+        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
 
     const filtrertPaYtelseMedVedtaksperiode =
-        filtervalg.ytelse === YTELSE_ARENA_AAP || filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
+        filtervalg.ytelse === YTELSE_ARENA_AAP ||
+        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
 
     const filtrertPaYtelseMedRettighetsperiode =
-        filtervalg.ytelse === YTELSE_ARENA_AAP || filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR;
+        filtervalg.ytelse === YTELSE_ARENA_AAP ||
+        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
+        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
 
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
@@ -205,8 +232,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPYtelse))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaAAPOrdinar))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPUnntak))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, filtrertPaEnsligForsorger))
