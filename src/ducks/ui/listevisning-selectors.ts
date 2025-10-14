@@ -111,20 +111,17 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
-    /** ordinar AND unntak */
     const filtrertPaBeggeAAPYtelserArena =
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA) &&
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
 
-    /** ordinar OR unntak */
     const filtrertPaMinstEnAAPYtelseArena =
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA) ||
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
 
-    /** ordinar XOR unntak*/
     const filtrertPaAAPYtelseArenaMenIkkeBegge = filtrertPaMinstEnAAPYtelseArena && !filtrertPaBeggeAAPYtelserArena;
 
-    const filtrertPaYtelseMedVurderingsfrist =
+    const filtrertPaAAPMedVurderingsfrist =
         filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
         filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
         filtrertPaAAPYtelseArenaMenIkkeBegge;
@@ -138,12 +135,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
 
-    const filtrertPaYtelseMedVedtaksperiode =
+    const filtrertPaAAPMedVedtaksperiode =
         filtervalg.ytelse === YTELSE_ARENA_AAP ||
         filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
 
-    const filtrertPaYtelseMedRettighetsperiode =
+    const filtrertPaAAPMedRettighetsperiode =
         filtervalg.ytelse === YTELSE_ARENA_AAP ||
         filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
         filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
@@ -222,10 +219,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaYtelseMedVurderingsfrist))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPMedVurderingsfrist))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaAAPYtelse))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaYtelseMedVedtaksperiode))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaYtelseMedRettighetsperiode))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaAAPMedVedtaksperiode))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
