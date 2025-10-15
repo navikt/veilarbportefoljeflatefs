@@ -111,14 +111,14 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
-    /* Hjelpeverdier for nye Arena-AAP-filter */
+    /* Hjelpeverdiar for nye Arena-AAP-filter */
     const ordinarAapArena = filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
     const unntakAapArena = filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
     const beggeAapArena = unntakAapArena && ordinarAapArena;
     const minstEnAapArena = ordinarAapArena || unntakAapArena;
     const aapArenaMenIkkeBegge = minstEnAapArena && !beggeAapArena;
 
-    /* Hjelpeverdier for gamle AAP-ytelsesfilter */
+    /* Hjelpeverdiar for gamle AAP-ytelsesfilter */
     const ordinarAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR;
     const unntakAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
     const beggeAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP;
