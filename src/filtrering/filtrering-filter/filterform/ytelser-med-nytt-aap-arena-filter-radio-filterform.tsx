@@ -28,7 +28,8 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
     const valgtFilterValg = filtervalg[form];
 
     const nullstillValg = () => {
-        endreFiltervalg(form, null);
+        endreFiltervalg('ytelse', null);
+        endreFiltervalg('ytelseAapArena', null);
     };
 
     const onChange = e => {
