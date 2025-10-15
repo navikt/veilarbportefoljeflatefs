@@ -111,39 +111,27 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
-    const filtrertPaBeggeAAPYtelserArena =
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA) &&
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
+    /* Hjelpeverdier for nye Arena-AAP-filter */
+    const ordinarAapArena = filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
+    const unntakAapArena = filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
+    const beggeAapArena = unntakAapArena && ordinarAapArena;
+    const minstEnAapArena = ordinarAapArena || unntakAapArena;
+    const aapArenaMenIkkeBegge = minstEnAapArena && !beggeAapArena;
 
-    const filtrertPaMinstEnAAPYtelseArena =
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA) ||
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
+    /* Hjelpeverdier for gamle AAP-ytelsesfilter */
+    const ordinarAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR;
+    const unntakAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK;
+    const beggeAapYtelsesfilterArena = filtervalg.ytelse === YTELSE_ARENA_AAP;
 
-    const filtrertPaAAPYtelseArenaMenIkkeBegge = filtrertPaMinstEnAAPYtelseArena && !filtrertPaBeggeAAPYtelserArena;
-
+    /* Nye og gamle AAP-filter i parallell så vi får same oppførsel i kolonnevisninga */
+    const filtrertPaAAPYtelse = beggeAapYtelsesfilterArena || beggeAapArena;
+    const filtrertPaAAPOrdinar = ordinarAapYtelsesfilterArena || ordinarAapArena;
+    const filtrertPaAAPUnntak = unntakAapYtelsesfilterArena || unntakAapArena;
     const filtrertPaAAPMedVurderingsfrist =
-        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
-        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
-        filtrertPaAAPYtelseArenaMenIkkeBegge;
-
-    const filtrertPaAAPYtelse = filtervalg.ytelse === YTELSE_ARENA_AAP || filtrertPaBeggeAAPYtelserArena;
-
-    const filtrertPaAAPOrdinar =
-        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
-    const filtrertPaAAPUnntak =
-        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
-
-    const filtrertPaAAPMedVedtaksperiode =
-        filtervalg.ytelse === YTELSE_ARENA_AAP ||
-        filtervalg.ytelse === YTELSE_ARENA_AAP_UNNTAK ||
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA);
-
+        ordinarAapYtelsesfilterArena || unntakAapYtelsesfilterArena || aapArenaMenIkkeBegge;
+    const filtrertPaAAPMedVedtaksperiode = beggeAapYtelsesfilterArena || unntakAapYtelsesfilterArena || unntakAapArena;
     const filtrertPaAAPMedRettighetsperiode =
-        filtervalg.ytelse === YTELSE_ARENA_AAP ||
-        filtervalg.ytelse === YTELSE_ARENA_AAP_ORDINAR ||
-        filtervalg.ytelseAapArena.includes(AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA);
+        beggeAapYtelsesfilterArena || ordinarAapYtelsesfilterArena || ordinarAapArena;
 
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
