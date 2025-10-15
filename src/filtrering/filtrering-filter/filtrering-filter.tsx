@@ -50,6 +50,7 @@ import {
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
+import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -415,12 +416,23 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     name="Dagpenger, AAP og tiltakspenger (Arena)"
                     id="ytelse"
                     render={() => (
-                        <RadioFilterform
-                            valg={ytelseArena}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            form="ytelse"
-                        />
+                        <>
+                            {skalBrukeNyttArenaAapfilter ? (
+                                <YtelserMedNyttAapArenaFilterRadioFilterform
+                                    valg={ytelseArena}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    form="ytelse"
+                                />
+                            ) : (
+                                <RadioFilterform
+                                    valg={ytelseArena}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    form="ytelse"
+                                />
+                            )}
+                        </>
                     )}
                 />
                 {skalViseAAPfilterMedKelvindata && (
