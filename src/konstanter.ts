@@ -13,7 +13,6 @@ export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefoljeflatefs.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
 export const VIS_AAPFILTER_MED_KELVINDATA = 'veilarbportefoljeflatefs.ytelser-vis-aap-filter-med-kelvindata';
 export const VIS_TILTAKSPENGER_MED_TPSAKDATA = 'veilarbportefoljeflatefs.ytelser-vis-tiltakspenger-med-tpsakdata';
-export const BRUK_NYTT_ARENA_AAP_FILTER = 'veilarbportefoljeflatefs.ytelser-bruk-nytt-arena-aap-filter';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -21,6 +20,5 @@ export const PORTEFOLJE_FEATURES = [
     ALERTSTRIPE_FEILMELDING,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAPFILTER_MED_KELVINDATA,
-    VIS_TILTAKSPENGER_MED_TPSAKDATA,
-    BRUK_NYTT_ARENA_AAP_FILTER
+    VIS_TILTAKSPENGER_MED_TPSAKDATA
 ];
