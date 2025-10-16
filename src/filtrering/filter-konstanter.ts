@@ -34,9 +34,6 @@ export const YTELSE_ARENA_DAGPENGER_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
 export const YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
 export const YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
 export const YTELSE_ARENA_TILTAKSPENGER = 'TILTAKSPENGER';
-export const YTELSE_ARENA_AAP = 'AAP';
-export const YTELSE_ARENA_AAP_ORDINAR = 'AAP_MAXTID';
-export const YTELSE_ARENA_AAP_UNNTAK = 'AAP_UNNTAK';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const SISTE_ENDRING = 'SISTE_ENDRING';
 export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
@@ -203,9 +200,6 @@ export const ytelseArena = {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     },
-    [YTELSE_ARENA_AAP]: {label: 'AAP (Arena)'},
-    [YTELSE_ARENA_AAP_ORDINAR]: {label: 'AAP ordinær (Arena)', className: skjemaelementInnrykkKlasse},
-    [YTELSE_ARENA_AAP_UNNTAK]: {label: 'AAP unntak (Arena)', className: skjemaelementInnrykkKlasse},
     [YTELSE_ARENA_TILTAKSPENGER]: {label: 'Tiltakspenger (Arena)'}
 };
 

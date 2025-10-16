@@ -2,15 +2,13 @@ import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
 import {
-    YTELSE_ARENA_AAP_ORDINAR,
-    YTELSE_ARENA_AAP_UNNTAK,
     aktiviteter,
+    hendelserLabels,
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     YTELSE_ARENA_DAGPENGER_ORDINARE,
     YTELSE_ARENA_DAGPENGER_PERMITTERING,
     YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
-    hendelserLabels,
     YTELSE_ARENA_TILTAKSPENGER
 } from '../../filtrering/filter-konstanter';
 import {
@@ -44,7 +42,13 @@ const dagpengerYtelser = [
     ...dagpengerYtelserMedPermittering
 ];
 
-const ytelser = [...dagpengerYtelser, YTELSE_ARENA_AAP_ORDINAR, YTELSE_ARENA_AAP_UNNTAK, YTELSE_ARENA_TILTAKSPENGER];
+/* I sjølve koden (utanfor mock) er dette ikkje typa, det er berre hardkoda strengar */
+enum AapYtelseData {
+    ORDINAR_AAP = 'AAP_MAXTID',
+    UNNTAK_AAP = 'AAP_UNNTAK'
+}
+
+const ytelser = [...dagpengerYtelser, AapYtelseData.ORDINAR_AAP, AapYtelseData.UNNTAK_AAP, YTELSE_ARENA_TILTAKSPENGER];
 
 let mockAktoeridLopenummer = 0;
 const huskelapp: any = {};
@@ -99,7 +103,7 @@ function lagYtelse() {
     const mnd = rnd(1, 12);
     const ar = rnd(0, 3) + new Date().getFullYear();
 
-    if (ytelse === YTELSE_ARENA_AAP_ORDINAR || ytelse === YTELSE_ARENA_AAP_UNNTAK) {
+    if (ytelse === AapYtelseData.ORDINAR_AAP || ytelse === AapYtelseData.UNNTAK_AAP) {
         const rndDate = new Date(ar, mnd - 1, dag);
         const todayDate = new Date();
 
@@ -107,7 +111,7 @@ function lagYtelse() {
 
         out.aapmaxtidUke = aaptidUke.toString();
         out.aapUnntakUkerIgjen = aaptidUke.toString();
-        if (ytelse === YTELSE_ARENA_AAP_ORDINAR) {
+        if (ytelse === AapYtelseData.ORDINAR_AAP) {
             if (Math.random() > 0.5) {
                 out.aapordinerutlopsdato = rndDate.toString();
             }
