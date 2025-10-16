@@ -87,9 +87,8 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         }
     };
 
-    // TODO ta bort bakgrunnsfargen når vi er ferdige med testing.
     return (
-        <form className="skjema radio-filterform" data-testid="radio-filterform" style={{background: 'PaleGoldenrod'}}>
+        <form className="skjema radio-filterform" data-testid="radio-filterform">
             <RadioGroup hideLegend legend="" value={valgtFiltervalg()} size="small">
                 <Grid columns={gridColumns} className="radio-filterform__valg">
                     <Radio

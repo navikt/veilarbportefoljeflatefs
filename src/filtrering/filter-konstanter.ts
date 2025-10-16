@@ -416,11 +416,11 @@ export enum AAPFilterArenaBegge {
 export const aapIArenaFilterBeggeAlternativ = {
     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {
         label: 'AAP ordinær (Arena)',
-        className: skjemaelementInnrykkKlasse + ' ny-arena'
+        className: skjemaelementInnrykkKlasse
     },
     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {
         label: 'AAP unntak (Arena)',
-        className: skjemaelementInnrykkKlasse + ' ny-arena'
+        className: skjemaelementInnrykkKlasse
     },
     [AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK]: {
         label: 'AAP (Arena)'
