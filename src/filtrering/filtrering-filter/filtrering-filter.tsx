@@ -418,10 +418,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         <>
                             {skalBrukeNyttArenaAapfilter ? (
                                 <YtelserMedNyttAapArenaFilterRadioFilterform
-                                    valg={ytelseArena}
                                     filtervalg={filtervalg}
                                     endreFiltervalg={endreFiltervalg}
-                                    form="ytelse"
                                 />
                             ) : (
                                 <RadioFilterform

@@ -1,3 +1,4 @@
+import {ChangeEvent} from 'react';
 import {Radio, RadioGroup} from '@navikt/ds-react';
 import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
@@ -16,23 +17,15 @@ import {
     YTELSE_ARENA_TILTAKSPENGER,
     ytelseArena
 } from '../../filter-konstanter';
-import {ChangeEvent} from 'react';
 import './filterform.css';
 
-interface ValgType {
-    [key: string]: {label: string; className?: string};
-}
-
 interface RadioFilterformProps {
-    form: string;
     endreFiltervalg: (form: string, filterVerdi: OrNothing<string> | string[]) => void;
-    valg: ValgType;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
 }
 
 export function YtelserMedNyttAapArenaFilterRadioFilterform({
-    form,
     endreFiltervalg,
     filtervalg,
     gridColumns = 1
@@ -174,8 +167,8 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
-                disabled={valgtFiltervalg() === '' || valgtFiltervalg() === null}
+                form={[Filter.YTELSE, Filter.YTELSE_AAP_ARENA]}
+                disabled={valgtFiltervalg() === ''}
             />
         </form>
     );
