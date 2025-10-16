@@ -25,7 +25,7 @@ interface ValgType {
 
 interface RadioFilterformProps {
     form: string;
-    endreFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
+    endreFiltervalg: (form: string, filterVerdi: OrNothing<string> | string[]) => void;
     valg: ValgType;
     filtervalg: FiltervalgModell;
     gridColumns?: number;
@@ -39,14 +39,33 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
 }: RadioFilterformProps) {
     const valgtFilterValg = filtervalg[form];
 
+    enum Filter {
+        YTELSE = 'ytelse',
+        YTELSE_AAP_ARENA = 'ytelseAapArena'
+    }
+
     const nullstillValg = () => {
-        endreFiltervalg('ytelse', null);
-        endreFiltervalg('ytelseAapArena', null);
+        endreFiltervalg(Filter.YTELSE, null);
+        endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
     };
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>, filter: Filter) => {
         e.persist();
-        endreFiltervalg(form, e.target.value);
+
+        switch (filter) {
+            case Filter.YTELSE: {
+                endreFiltervalg(Filter.YTELSE, e.target.value);
+                endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
+                return;
+            }
+            case Filter.YTELSE_AAP_ARENA: {
+                endreFiltervalg(Filter.YTELSE, []);
+                endreFiltervalg(Filter.YTELSE_AAP_ARENA, e.target.value);
+                return;
+            }
+            default:
+                throw new Error('Ugyldig verdi for filter i onChange i radio-filterform for ytelser');
+        }
     };
 
     // TODO ta bort bakgrunnsfargen når vi er ferdige med testing.
@@ -57,7 +76,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     <Radio
                         value={YTELSE_ARENA_DAGPENGER}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER].label}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER].label}
@@ -66,7 +85,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_DAGPENGER_ORDINARE}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
@@ -75,7 +94,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_DAGPENGER_PERMITTERING}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
@@ -84,7 +103,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
@@ -93,7 +112,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
@@ -101,7 +120,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     <Radio
                         value={YTELSE_ARENA_AAP}
                         name={ytelseArena[YTELSE_ARENA_AAP].label}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_AAP].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_AAP].label}
@@ -110,7 +129,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_AAP_ORDINAR}
                         name={ytelseArena[YTELSE_ARENA_AAP_ORDINAR].label}
                         className={ytelseArena[YTELSE_ARENA_AAP_ORDINAR].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_AAP_ORDINAR].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_AAP_ORDINAR].label}
@@ -119,7 +138,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_AAP_UNNTAK}
                         name={ytelseArena[YTELSE_ARENA_AAP_UNNTAK].label}
                         className={ytelseArena[YTELSE_ARENA_AAP_UNNTAK].className}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_AAP_UNNTAK].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_AAP_UNNTAK].label}
@@ -127,7 +146,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     <Radio
                         value={YTELSE_ARENA_TILTAKSPENGER}
                         name={ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
-                        onChange={v => onChange(v)}
+                        onChange={v => onChange(v, Filter.YTELSE)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
