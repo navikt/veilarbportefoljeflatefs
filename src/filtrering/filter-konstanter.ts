@@ -412,6 +412,17 @@ export const aapIArenaFilter = {
         className: skjemaelementInnrykkKlasse + ' ny-arena'
     }
 };
+// Dette er ikkje eit ekte filter mot backend,
+// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
+// som, når valgt, sender både UNNTAK og ORDINAR til backend.
+export enum AAPFilterArenaBegge {
+    HAR_ORDINAR_ELLER_UNNTAK = 'HAR_ORDINAR_ELLER_UNNTAK'
+}
+export const aapIArenaFilterBeggeAlternativ = {
+    [AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK]: {
+        label: 'AAP (Arena)'
+    }
+};
 
 export enum AAPFilterKelvin {
     HAR_AAP_I_KELVIN = 'HAR_AAP',

@@ -6,8 +6,9 @@ import {OrNothing} from '../../../utils/types/types';
 import {Grid} from '../../../components/grid/grid';
 import {
     AAPFilterArena,
+    AAPFilterArenaBegge,
     aapIArenaFilter,
-    YTELSE_ARENA_AAP,
+    aapIArenaFilterBeggeAlternativ,
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     YTELSE_ARENA_DAGPENGER_ORDINARE,
@@ -50,7 +51,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             return filtervalg[Filter.YTELSE_AAP_ARENA][0];
         }
         if (filtervalg[Filter.YTELSE_AAP_ARENA].length === 2) {
-            return YTELSE_ARENA_AAP;
+            return AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK;
         }
         return '';
     };
@@ -70,7 +71,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 return;
             }
             case Filter.YTELSE_AAP_ARENA: {
-                if (e.target.value === YTELSE_ARENA_AAP) {
+                if (e.target.value === AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK) {
                     endreFiltervalg(Filter.YTELSE, null);
                     endreFiltervalg(Filter.YTELSE_AAP_ARENA, [
                         AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
@@ -137,12 +138,12 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
                     </Radio>
                     <Radio
-                        value={YTELSE_ARENA_AAP}
-                        name={ytelseArena[YTELSE_ARENA_AAP].label}
+                        value={AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK}
+                        name={aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_AAP].label)}`}
+                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label)}`}
                     >
-                        {ytelseArena[YTELSE_ARENA_AAP].label}
+                        {aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label}
                     </Radio>
                     <Radio
                         value={AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA}
