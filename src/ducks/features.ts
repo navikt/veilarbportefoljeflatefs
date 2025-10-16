@@ -20,7 +20,7 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAPFILTER_MED_KELVINDATA]: false,
     [VIS_TILTAKSPENGER_MED_TPSAKDATA]: false,
-    [BRUK_NYTT_ARENA_AAP_FILTER]: false
+    [BRUK_NYTT_ARENA_AAP_FILTER]: true
 };
 
 // Reducer
