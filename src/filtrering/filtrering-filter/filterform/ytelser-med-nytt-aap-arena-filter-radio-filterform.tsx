@@ -49,6 +49,9 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         if (filtervalg[Filter.YTELSE_AAP_ARENA].length === 1) {
             return filtervalg[Filter.YTELSE_AAP_ARENA][0];
         }
+        if (filtervalg[Filter.YTELSE_AAP_ARENA].length === 2) {
+            return YTELSE_ARENA_AAP;
+        }
         return '';
     };
 
@@ -67,8 +70,16 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 return;
             }
             case Filter.YTELSE_AAP_ARENA: {
-                endreFiltervalg(Filter.YTELSE, null);
-                endreFiltervalg(Filter.YTELSE_AAP_ARENA, [e.target.value]);
+                if (e.target.value === YTELSE_ARENA_AAP) {
+                    endreFiltervalg(Filter.YTELSE, null);
+                    endreFiltervalg(Filter.YTELSE_AAP_ARENA, [
+                        AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
+                        AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA
+                    ]);
+                } else {
+                    endreFiltervalg(Filter.YTELSE, null);
+                    endreFiltervalg(Filter.YTELSE_AAP_ARENA, [e.target.value]);
+                }
                 return;
             }
             default:
@@ -128,7 +139,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     <Radio
                         value={YTELSE_ARENA_AAP}
                         name={ytelseArena[YTELSE_ARENA_AAP].label}
-                        onChange={v => onChange(v, Filter.YTELSE)}
+                        onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
                         data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_AAP].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_AAP].label}
