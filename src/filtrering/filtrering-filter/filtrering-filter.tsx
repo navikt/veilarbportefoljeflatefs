@@ -3,7 +3,6 @@ import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
-    aapIArenaFilter,
     aapIKelvinFilter,
     alder,
     avvik14aVedtak,
@@ -437,25 +436,15 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 />
                 {skalViseAAPfilterMedKelvindata && (
                     <Dropdown
-                        name={skalBrukeNyttArenaAapfilter ? 'AAP' : 'AAP (Kelvin)'}
+                        name="AAP (Kelvin)"
                         id="ytelser-aap-utenfor-arena"
                         render={() => (
-                            <>
-                                <CheckboxFilterform
-                                    form="ytelseAapKelvin"
-                                    valg={aapIKelvinFilter}
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
-                                {skalBrukeNyttArenaAapfilter && (
-                                    <CheckboxFilterform
-                                        form="ytelseAapArena"
-                                        valg={aapIArenaFilter}
-                                        filtervalg={filtervalg}
-                                        endreFiltervalg={endreFiltervalg}
-                                    />
-                                )}
-                            </>
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         )}
                     />
                 )}

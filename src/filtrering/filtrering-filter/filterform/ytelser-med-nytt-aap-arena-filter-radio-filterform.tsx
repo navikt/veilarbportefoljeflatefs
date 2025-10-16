@@ -7,7 +7,6 @@ import {Grid} from '../../../components/grid/grid';
 import {
     AAPFilterArena,
     AAPFilterArenaBegge,
-    aapIArenaFilter,
     aapIArenaFilterBeggeAlternativ,
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
@@ -147,21 +146,21 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     </Radio>
                     <Radio
                         value={AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA}
-                        name={aapIArenaFilter[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
-                        className={aapIArenaFilter[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].className}
+                        name={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
+                        className={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].className}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(aapIArenaFilter[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label)}`}
+                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label)}`}
                     >
-                        {aapIArenaFilter[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
+                        {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
                     </Radio>
                     <Radio
                         value={AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA}
-                        name={aapIArenaFilter[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
-                        className={aapIArenaFilter[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].className}
+                        name={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
+                        className={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].className}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(aapIArenaFilter[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label)}`}
+                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label)}`}
                     >
-                        {aapIArenaFilter[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
+                        {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
                     </Radio>
                     <Radio
                         value={YTELSE_ARENA_TILTAKSPENGER}
