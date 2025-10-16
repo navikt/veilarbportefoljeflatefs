@@ -403,8 +403,14 @@ export enum AAPFilterArena {
 }
 
 export const aapIArenaFilter = {
-    [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
-    [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
+    [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {
+        label: 'AAP ordinær (Arena)',
+        className: skjemaelementInnrykkKlasse + ' ny-arena'
+    },
+    [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {
+        label: 'AAP unntak (Arena)',
+        className: skjemaelementInnrykkKlasse + ' ny-arena'
+    }
 };
 
 export enum AAPFilterKelvin {
