@@ -406,6 +406,26 @@ export const aapIArenaFilter = {
     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
 };
+// Dette er ikkje eit ekte filter mot backend,
+// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
+// som, når valgt, sender både UNNTAK og ORDINAR til backend.
+export enum AAPFilterArenaBegge {
+    HAR_ORDINAR_ELLER_UNNTAK = 'HAR_ORDINAR_ELLER_UNNTAK'
+}
+
+export const aapIArenaFilterBeggeAlternativ = {
+    [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {
+        label: 'AAP ordinær (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {
+        label: 'AAP unntak (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK]: {
+        label: 'AAP (Arena)'
+    }
+};
 
 export enum AAPFilterKelvin {
     HAR_AAP_I_KELVIN = 'HAR_AAP',

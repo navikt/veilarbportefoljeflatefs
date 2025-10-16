@@ -3,7 +3,6 @@ import {Alert, Label, Link} from '@navikt/ds-react';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import {
-    aapIArenaFilter,
     aapIKelvinFilter,
     alder,
     avvik14aVedtak,
@@ -50,6 +49,7 @@ import {
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
+import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -415,35 +415,34 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     name="Dagpenger, AAP og tiltakspenger (Arena)"
                     id="ytelse"
                     render={() => (
-                        <RadioFilterform
-                            valg={ytelseArena}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            form="ytelse"
-                        />
+                        <>
+                            {skalBrukeNyttArenaAapfilter ? (
+                                <YtelserMedNyttAapArenaFilterRadioFilterform
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                />
+                            ) : (
+                                <RadioFilterform
+                                    valg={ytelseArena}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreFiltervalg}
+                                    form="ytelse"
+                                />
+                            )}
+                        </>
                     )}
                 />
                 {skalViseAAPfilterMedKelvindata && (
                     <Dropdown
-                        name={skalBrukeNyttArenaAapfilter ? 'AAP' : 'AAP (Kelvin)'}
+                        name="AAP (Kelvin)"
                         id="ytelser-aap-utenfor-arena"
                         render={() => (
-                            <>
-                                <CheckboxFilterform
-                                    form="ytelseAapKelvin"
-                                    valg={aapIKelvinFilter}
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
-                                {skalBrukeNyttArenaAapfilter && (
-                                    <CheckboxFilterform
-                                        form="ytelseAapArena"
-                                        valg={aapIArenaFilter}
-                                        filtervalg={filtervalg}
-                                        endreFiltervalg={endreFiltervalg}
-                                    />
-                                )}
-                            </>
+                            <CheckboxFilterform
+                                form="ytelseAapKelvin"
+                                valg={aapIKelvinFilter}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
                         )}
                     />
                 )}
