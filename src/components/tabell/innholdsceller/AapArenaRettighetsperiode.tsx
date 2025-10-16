@@ -2,24 +2,22 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {
-    YTELSE_ARENA_AAP,
-    YTELSE_ARENA_AAP_ORDINAR,
-    YTELSE_ARENA_AAP_UNNTAK
-} from '../../../filtrering/filter-konstanter';
+    filtrertPaAAPOrdinarINyttEllerGammeltFilter,
+    filtrertPaAAPUnntakINyttEllerGammeltFilter,
+    filtrertPaAAPYtelseINyttEllerGammeltFilter
+} from '../../../utils/AapFiltermigreringUtils';
 
 export const AapArenaRettighetsperiode = ({
     bruker,
     valgteKolonner,
     filtervalg
 }: InnholdscelleMedDataBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
-
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {
-        if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP) {
+        if (filtrertPaAAPYtelseINyttEllerGammeltFilter(filtervalg)) {
             return bruker.aapmaxtidUke !== 0 ? bruker.aapmaxtidUke : bruker.aapUnntakUkerIgjen;
-        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_ORDINAR) {
+        } else if (filtrertPaAAPOrdinarINyttEllerGammeltFilter(filtervalg)) {
             return bruker.aapmaxtidUke;
-        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_UNNTAK) {
+        } else if (filtrertPaAAPUnntakINyttEllerGammeltFilter(filtervalg)) {
             return bruker.aapUnntakUkerIgjen;
         }
     };

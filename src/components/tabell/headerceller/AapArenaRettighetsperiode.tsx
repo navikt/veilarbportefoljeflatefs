@@ -1,12 +1,12 @@
 import {HeadercelleMedSorteringBasertPaFiltervalgProps} from './HeadercelleProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
-import {
-    YTELSE_ARENA_AAP,
-    YTELSE_ARENA_AAP_ORDINAR,
-    YTELSE_ARENA_AAP_UNNTAK
-} from '../../../filtrering/filter-konstanter';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
+import {
+    filtrertPaAAPOrdinarINyttEllerGammeltFilter,
+    filtrertPaAAPUnntakINyttEllerGammeltFilter,
+    filtrertPaAAPYtelseINyttEllerGammeltFilter
+} from '../../../utils/AapFiltermigreringUtils';
 
 export const AapArenaRettighetsperiode = ({
     gjeldendeSorteringsfelt,
@@ -15,14 +15,12 @@ export const AapArenaRettighetsperiode = ({
     onClick,
     filtervalg
 }: HeadercelleMedSorteringBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
-
     const sorteringsfeltBasertPaAapFiltrering = () => {
-        if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP) {
+        if (filtrertPaAAPYtelseINyttEllerGammeltFilter(filtervalg)) {
             return Sorteringsfelt.AAP_RETTIGHETSPERIODE;
-        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_ORDINAR) {
+        } else if (filtrertPaAAPOrdinarINyttEllerGammeltFilter(filtervalg)) {
             return Sorteringsfelt.AAP_ARENA_MAXTID_UKE;
-        } else if (valgtArenaytelsesfilter === YTELSE_ARENA_AAP_UNNTAK) {
+        } else if (filtrertPaAAPUnntakINyttEllerGammeltFilter(filtervalg)) {
             return Sorteringsfelt.AAP_ARENA_UNNTAK_UKER_IGJEN;
         }
     };

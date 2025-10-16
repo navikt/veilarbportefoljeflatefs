@@ -84,6 +84,7 @@ describe('Mine filter utils', () => {
                 veiledere: [],
                 veilederNavnQuery: '',
                 ytelse: null,
+                ytelseAapArena: [],
                 ytelseAapKelvin: [],
                 ytelseTiltakspenger: []
             };
