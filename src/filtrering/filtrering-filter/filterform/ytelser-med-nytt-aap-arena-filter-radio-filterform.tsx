@@ -1,6 +1,5 @@
 import {ChangeEvent} from 'react';
 import {Radio, RadioGroup} from '@navikt/ds-react';
-import {kebabCase} from '../../../utils/utils';
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {OrNothing} from '../../../utils/types/types';
@@ -9,12 +8,13 @@ import {
     AAPFilterArena,
     AAPFilterArenaBegge,
     aapIArenaFilterBeggeAlternativ,
+    tiltakspengerFilterArena,
+    TiltakspengerFilterArena,
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     YTELSE_ARENA_DAGPENGER_ORDINARE,
     YTELSE_ARENA_DAGPENGER_PERMITTERING,
     YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
-    YTELSE_ARENA_TILTAKSPENGER,
     ytelseArena
 } from '../../filter-konstanter';
 import './filterform.css';
@@ -32,7 +32,8 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
 }: RadioFilterformProps) {
     enum Filter {
         YTELSE = 'ytelse',
-        YTELSE_AAP_ARENA = 'ytelseAapArena'
+        YTELSE_AAP_ARENA = 'ytelseAapArena',
+        YTELSE_TILTAKSPENGER_ARENA = 'ytelseTiltakspengerArena'
     }
 
     const valgtFiltervalg = () => {
@@ -45,12 +46,16 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         if (filtervalg[Filter.YTELSE_AAP_ARENA].length === 2) {
             return AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK;
         }
+        if (filtervalg[Filter.YTELSE_TILTAKSPENGER_ARENA].length === 1) {
+            return filtervalg[Filter.YTELSE_AAP_ARENA][0];
+        }
         return '';
     };
 
     const nullstillValg = () => {
         endreFiltervalg(Filter.YTELSE, null);
         endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
+        endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
     };
 
     const onChange = (e: ChangeEvent<HTMLInputElement>, filter: Filter) => {
@@ -60,6 +65,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             case Filter.YTELSE: {
                 endreFiltervalg(Filter.YTELSE, e.target.value);
                 endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
+                endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
                 return;
             }
             case Filter.YTELSE_AAP_ARENA: {
@@ -69,10 +75,18 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
                         AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA
                     ]);
+                    endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
                 } else {
                     endreFiltervalg(Filter.YTELSE, null);
                     endreFiltervalg(Filter.YTELSE_AAP_ARENA, [e.target.value]);
+                    endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
                 }
+                return;
+            }
+            case Filter.YTELSE_TILTAKSPENGER_ARENA: {
+                endreFiltervalg(Filter.YTELSE, null);
+                endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
+                endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, [e.target.value]);
                 return;
             }
             default:
@@ -155,19 +169,19 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
                     </Radio>
                     <Radio
-                        value={YTELSE_ARENA_TILTAKSPENGER}
-                        name={ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
-                        onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label)}`}
+                        value={TiltakspengerFilterArena.HAR_TILTAKSPENGER}
+                        name={tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
+                        onChange={v => onChange(v, Filter.YTELSE_TILTAKSPENGER_ARENA)}
+                        data-testid={`radio-valg_${kebabCase(tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label)}`}
                     >
-                        {ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
+                        {tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
                     </Radio>
                 </Grid>
             </RadioGroup>
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={[Filter.YTELSE, Filter.YTELSE_AAP_ARENA]}
+                form={[Filter.YTELSE, Filter.YTELSE_AAP_ARENA, Filter.YTELSE_TILTAKSPENGER_ARENA]}
                 disabled={valgtFiltervalg() === ''}
             />
         </form>
