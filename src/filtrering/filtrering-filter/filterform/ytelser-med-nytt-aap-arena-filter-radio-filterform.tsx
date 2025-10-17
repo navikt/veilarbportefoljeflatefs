@@ -102,7 +102,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={YTELSE_ARENA_DAGPENGER}
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER].label}
                         onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER].label}
                     </Radio>
@@ -111,7 +110,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].className}
                         onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
                     </Radio>
@@ -120,7 +118,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].className}
                         onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
                     </Radio>
@@ -129,7 +126,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].className}
                         onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
                     </Radio>
@@ -138,7 +134,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
                         className={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].className}
                         onChange={v => onChange(v, Filter.YTELSE)}
-                        data-testid={`radio-valg_${kebabCase(ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label)}`}
                     >
                         {ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
                     </Radio>
@@ -146,7 +141,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK}
                         name={aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label)}`}
                     >
                         {aapIArenaFilterBeggeAlternativ[AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK].label}
                     </Radio>
@@ -155,7 +149,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
                         className={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].className}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label)}`}
                     >
                         {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA].label}
                     </Radio>
@@ -164,7 +157,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         name={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
                         className={aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].className}
                         onChange={v => onChange(v, Filter.YTELSE_AAP_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label)}`}
                     >
                         {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
                     </Radio>
@@ -172,7 +164,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         value={TiltakspengerFilterArena.HAR_TILTAKSPENGER}
                         name={tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
                         onChange={v => onChange(v, Filter.YTELSE_TILTAKSPENGER_ARENA)}
-                        data-testid={`radio-valg_${kebabCase(tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label)}`}
                     >
                         {tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
                     </Radio>
