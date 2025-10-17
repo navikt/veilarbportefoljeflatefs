@@ -11,6 +11,7 @@ import {
     MOTER_IDAG,
     TILTAKSHENDELSER,
     TiltakspengerFilter,
+    TiltakspengerFilterArena,
     UNDER_VURDERING,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
@@ -123,6 +124,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaAAPMedVedtaksperiode = unntakAapArena;
     const filtrertPaAAPMedRettighetsperiode = ordinarAapArena;
 
+    const filtrertPaTiltakspengerArena =
+        filtervalg.ytelse === YTELSE_ARENA_TILTAKSPENGER ||
+        filtervalg.ytelseTiltakspengerArena.includes(TiltakspengerFilterArena.HAR_TILTAKSPENGER);
+
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
     const erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag = erPaEnhetensOversikt && !filtrertPaMoterIDag;
@@ -183,12 +188,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(
             addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, filtrertPaYtelseMedDagpengerettigheter)
         )
-        .concat(
-            addHvis(
-                Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER,
-                filtervalg.ytelse === YTELSE_ARENA_TILTAKSPENGER
-            )
-        )
+        .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtrertPaTiltakspengerArena))
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt || forenkletAktivitetErValgt))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
