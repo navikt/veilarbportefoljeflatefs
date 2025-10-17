@@ -431,6 +431,14 @@ export const aapIKelvinFilter = {
     [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP (Kelvin)'}
 };
 
+export enum TiltakspengerFilterArena {
+    HAR_TILTAKSPENGER = 'HAR_TILTAKSPENGER'
+}
+
+export const tiltakspengerFilterArena = {
+    [TiltakspengerFilterArena.HAR_TILTAKSPENGER]: {label: 'Tiltakspenger (Arena)'}
+};
+
 export enum TiltakspengerFilter {
     HAR_TILTAKSPENGER = 'HAR_TILTAKSPENGER',
     HAR_IKKE_TILTAKSPENGER = 'HAR_IKKE_TILTAKSPENGER'
@@ -526,5 +534,6 @@ export const filterKonstanter = {
     hovedmalGjeldendeVedtak14a: hovedmalGjeldendeVedtak14aFiltertagtekst,
     ytelseAapArena: aapIArenaFilter,
     ytelseAapKelvin: aapIKelvinFilter,
+    ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter
 };
