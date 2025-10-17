@@ -2,7 +2,6 @@ import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
     ALERTSTRIPE_FEILMELDING,
-    BRUK_NYTT_ARENA_AAP_FILTER,
     DARKMODE,
     PORTEFOLJE_FEATURES,
     VIS_AAPFILTER_MED_KELVINDATA,
@@ -19,8 +18,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAPFILTER_MED_KELVINDATA]: false,
-    [VIS_TILTAKSPENGER_MED_TPSAKDATA]: false,
-    [BRUK_NYTT_ARENA_AAP_FILTER]: true
+    [VIS_TILTAKSPENGER_MED_TPSAKDATA]: false
 };
 
 // Reducer

@@ -2,9 +2,9 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {
-    filtrertPaAAPOrdinarINyttEllerGammeltFilter,
-    filtrertPaAAPUnntakINyttEllerGammeltFilter,
-    filtrertPaAAPYtelseINyttEllerGammeltFilter
+    filtrertPaBeggeAapFilterArena,
+    filtrertPaOrdinarAapFilterArena,
+    filtrertPaUnntakAapFilterArena
 } from '../../../utils/AapFiltermigreringUtils';
 
 export const AapArenaRettighetsperiode = ({
@@ -13,11 +13,11 @@ export const AapArenaRettighetsperiode = ({
     filtervalg
 }: InnholdscelleMedDataBasertPaFiltervalgProps) => {
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {
-        if (filtrertPaAAPYtelseINyttEllerGammeltFilter(filtervalg)) {
+        if (filtrertPaBeggeAapFilterArena(filtervalg)) {
             return bruker.aapmaxtidUke !== 0 ? bruker.aapmaxtidUke : bruker.aapUnntakUkerIgjen;
-        } else if (filtrertPaAAPOrdinarINyttEllerGammeltFilter(filtervalg)) {
+        } else if (filtrertPaOrdinarAapFilterArena(filtervalg)) {
             return bruker.aapmaxtidUke;
-        } else if (filtrertPaAAPUnntakINyttEllerGammeltFilter(filtervalg)) {
+        } else if (filtrertPaUnntakAapFilterArena(filtervalg)) {
             return bruker.aapUnntakUkerIgjen;
         }
     };

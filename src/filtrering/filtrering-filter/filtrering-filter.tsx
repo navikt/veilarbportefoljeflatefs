@@ -25,8 +25,7 @@ import {
     tiltakspengerFilter,
     utdanning,
     utdanningBestatt,
-    utdanningGodkjent,
-    ytelseArena
+    utdanningGodkjent
 } from '../filter-konstanter';
 import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
@@ -41,15 +40,11 @@ import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    BRUK_NYTT_ARENA_AAP_FILTER,
-    VIS_AAPFILTER_MED_KELVINDATA,
-    VIS_TILTAKSPENGER_MED_TPSAKDATA
-} from '../../konstanter';
+import {VIS_AAPFILTER_MED_KELVINDATA, VIS_TILTAKSPENGER_MED_TPSAKDATA} from '../../konstanter';
+import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
-import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -63,7 +58,6 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
     const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
-    const skalBrukeNyttArenaAapfilter = useFeatureSelector()(BRUK_NYTT_ARENA_AAP_FILTER);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -415,21 +409,10 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     name="Dagpenger, AAP og tiltakspenger (Arena)"
                     id="ytelse"
                     render={() => (
-                        <>
-                            {skalBrukeNyttArenaAapfilter ? (
-                                <YtelserMedNyttAapArenaFilterRadioFilterform
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                />
-                            ) : (
-                                <RadioFilterform
-                                    valg={ytelseArena}
-                                    filtervalg={filtervalg}
-                                    endreFiltervalg={endreFiltervalg}
-                                    form="ytelse"
-                                />
-                            )}
-                        </>
+                        <YtelserMedNyttAapArenaFilterRadioFilterform
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
                     )}
                 />
                 {skalViseAAPfilterMedKelvindata && (
