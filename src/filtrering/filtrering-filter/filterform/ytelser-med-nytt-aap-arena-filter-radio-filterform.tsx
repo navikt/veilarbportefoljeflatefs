@@ -15,9 +15,12 @@ import {
     YTELSE_ARENA_DAGPENGER_ORDINARE,
     YTELSE_ARENA_DAGPENGER_PERMITTERING,
     YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
+    YTELSE_ARENA_TILTAKSPENGER,
     ytelseArena
 } from '../../filter-konstanter';
 import './filterform.css';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER} from '../../../konstanter';
 
 interface RadioFilterformProps {
     endreFiltervalg: (form: string, filterVerdi: OrNothing<string> | string[]) => void;
@@ -30,6 +33,8 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
     filtervalg,
     gridColumns = 1
 }: RadioFilterformProps) {
+    const skalBrukeNyttArenaTiltakspengerfilter = useFeatureSelector()(BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER);
+
     enum Filter {
         YTELSE = 'ytelse',
         YTELSE_AAP_ARENA = 'ytelseAapArena',
@@ -46,7 +51,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         if (filtervalg[Filter.YTELSE_AAP_ARENA].length === 2) {
             return AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK;
         }
-        if (filtervalg[Filter.YTELSE_TILTAKSPENGER_ARENA].length === 1) {
+        if (filtervalg[Filter.YTELSE_TILTAKSPENGER_ARENA].length === 1 && skalBrukeNyttArenaTiltakspengerfilter) {
             return filtervalg[Filter.YTELSE_AAP_ARENA][0];
         }
         return '';
@@ -160,19 +165,33 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     >
                         {aapIArenaFilterBeggeAlternativ[AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA].label}
                     </Radio>
-                    <Radio
-                        value={TiltakspengerFilterArena.HAR_TILTAKSPENGER}
-                        name={tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
-                        onChange={v => onChange(v, Filter.YTELSE_TILTAKSPENGER_ARENA)}
-                    >
-                        {tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
-                    </Radio>
+                    {skalBrukeNyttArenaTiltakspengerfilter ? (
+                        <Radio
+                            value={TiltakspengerFilterArena.HAR_TILTAKSPENGER}
+                            name={tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
+                            onChange={v => onChange(v, Filter.YTELSE_TILTAKSPENGER_ARENA)}
+                        >
+                            {tiltakspengerFilterArena[TiltakspengerFilterArena.HAR_TILTAKSPENGER].label}
+                        </Radio>
+                    ) : (
+                        <Radio
+                            value={YTELSE_ARENA_TILTAKSPENGER}
+                            name={ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
+                            onChange={v => onChange(v, Filter.YTELSE)}
+                        >
+                            {ytelseArena[YTELSE_ARENA_TILTAKSPENGER].label}
+                        </Radio>
+                    )}
                 </Grid>
             </RadioGroup>
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={[Filter.YTELSE, Filter.YTELSE_AAP_ARENA, Filter.YTELSE_TILTAKSPENGER_ARENA]}
+                form={
+                    skalBrukeNyttArenaTiltakspengerfilter
+                        ? [Filter.YTELSE, Filter.YTELSE_AAP_ARENA, Filter.YTELSE_TILTAKSPENGER_ARENA]
+                        : [Filter.YTELSE, Filter.YTELSE_AAP_ARENA]
+                }
                 disabled={valgtFiltervalg() === ''}
             />
         </form>
