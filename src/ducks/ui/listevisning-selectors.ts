@@ -120,9 +120,17 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaBeggeAapArena = filtrertPaBeggeAapFilterArena(filtervalg);
     const aapArenaMenIkkeBegge = filtrertPaAapFilterArenaMenIkkeBegge(filtervalg);
 
+    // Ulik rekkefølgje på vurderingsfrist-kolonne basert på filtervalg
     const filtrertPaAAPMedVurderingsfrist = aapArenaMenIkkeBegge;
-    const filtrertPaAAPMedVedtaksperiode = unntakAapArena;
-    const filtrertPaAAPMedRettighetsperiode = ordinarAapArena;
+    const filtrertPaAAPUtenVurderingsfrist = filtrertPaBeggeAapArena;
+
+    // Ulik rekkefølgje på vedtaksperiode-kolonne basert på filtervalg
+    const filtrertPaAAPMedVedtaksperiode = unntakAapArena || filtrertPaBeggeAapArena;
+    const filtrertPaBareOrdinarAapArena = ordinarAapArena && !unntakAapArena;
+
+    // Ulik rekkefølgje på rettighetsperiode-kolonne basert på filtervalg
+    const filtrertPaAAPMedRettighetsperiode = ordinarAapArena || filtrertPaBeggeAapArena;
+    const filtrertPaBareAapUnntakArena = unntakAapArena && !ordinarAapArena;
 
     const filtrertPaTiltakspengerArena =
         filtervalg.ytelse === YTELSE_ARENA_TILTAKSPENGER ||
@@ -206,9 +214,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaBeggeAapArena))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, ordinarAapArena))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, unntakAapArena))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPUtenVurderingsfrist))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaBareOrdinarAapArena))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaBareAapUnntakArena))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, filtrertPaEnsligForsorger))
         .concat(addHvis(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, filtrertPaEnsligForsorger))
