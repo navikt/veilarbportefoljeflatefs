@@ -68,23 +68,23 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
 
         switch (filter) {
             case Filter.YTELSE: {
-                endreFiltervalg(Filter.YTELSE, e.target.value);
                 endreFiltervalg(Filter.YTELSE_AAP_ARENA, []);
                 endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
+                endreFiltervalg(Filter.YTELSE, e.target.value);
                 return;
             }
             case Filter.YTELSE_AAP_ARENA: {
                 if (e.target.value === AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK) {
                     endreFiltervalg(Filter.YTELSE, null);
+                    endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
                     endreFiltervalg(Filter.YTELSE_AAP_ARENA, [
                         AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
                         AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA
                     ]);
-                    endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
                 } else {
                     endreFiltervalg(Filter.YTELSE, null);
-                    endreFiltervalg(Filter.YTELSE_AAP_ARENA, [e.target.value]);
                     endreFiltervalg(Filter.YTELSE_TILTAKSPENGER_ARENA, []);
+                    endreFiltervalg(Filter.YTELSE_AAP_ARENA, [e.target.value]);
                 }
                 return;
             }
