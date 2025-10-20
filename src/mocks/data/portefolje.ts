@@ -8,8 +8,7 @@ import {
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     YTELSE_ARENA_DAGPENGER_ORDINARE,
     YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
-    YTELSE_ARENA_TILTAKSPENGER
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
 } from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
@@ -48,7 +47,16 @@ enum AapYtelseData {
     UNNTAK_AAP = 'AAP_UNNTAK'
 }
 
-const ytelser = [...dagpengerYtelser, AapYtelseData.ORDINAR_AAP, AapYtelseData.UNNTAK_AAP, YTELSE_ARENA_TILTAKSPENGER];
+enum TiltakspengerYtelseData {
+    TILTAKSPENGER = 'TILTAKSPENGER'
+}
+
+const ytelser = [
+    ...dagpengerYtelser,
+    AapYtelseData.ORDINAR_AAP,
+    AapYtelseData.UNNTAK_AAP,
+    TiltakspengerYtelseData.TILTAKSPENGER
+];
 
 let mockAktoeridLopenummer = 0;
 const huskelapp: any = {};

@@ -86,6 +86,7 @@ describe('Mine filter utils', () => {
                 ytelse: null,
                 ytelseAapArena: [],
                 ytelseAapKelvin: [],
+                ytelseTiltakspengerArena: [],
                 ytelseTiltakspenger: []
             };
 
