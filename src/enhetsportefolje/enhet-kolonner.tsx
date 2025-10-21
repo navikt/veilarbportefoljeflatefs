@@ -80,8 +80,8 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
 
     return (
         <div className={className}>
-            <NavnData className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <FnrData className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
+            <NavnData bruker={bruker} enhetId={enhetId} />
+            <FnrData bruker={bruker} />
 
             <FodelandData bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapData bruker={bruker} valgteKolonner={valgteKolonner} />

@@ -3,8 +3,7 @@ import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 
-interface BrukerNavnProps {
-    className?: string;
+interface Props {
     bruker: BrukerModell;
     enhetId: string;
 }
@@ -25,7 +24,7 @@ const settSammenNavn = (bruker: BrukerModell) => {
     return `${bruker.etternavn}, ${bruker.fornavn}`;
 };
 
-export const NavnData = ({className, bruker, enhetId}: BrukerNavnProps) => {
+export const NavnData = ({bruker, enhetId}: Props) => {
     const navn = settSammenNavn(bruker);
 
     const handterKlikk = () =>
@@ -35,7 +34,7 @@ export const NavnData = ({className, bruker, enhetId}: BrukerNavnProps) => {
         oppdaterBrukerIKontekstOgNavigerTilLenke(bruker.fnr, getVeilarbpersonflateUrl(null, enhetId), true);
 
     return (
-        <div className={className}>
+        <div className="col col-xs-2">
             {navn && (
                 <AksjonKnappMedPopoverFeilmelding
                     klikkAksjon={handterKlikk}

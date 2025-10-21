@@ -79,8 +79,8 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
 
     return (
         <div className="brukerliste__innhold flex flex--center">
-            <NavnData className="col col-xs-2" bruker={bruker} enhetId={enhetId} />
-            <FnrData className="col col-xs-2-5 fnr-kolonne" bruker={bruker} />
+            <NavnData bruker={bruker} enhetId={enhetId} />
+            <FnrData bruker={bruker} />
 
             <FodelandData bruker={bruker} valgteKolonner={valgteKolonner} />
             <StatsborgerskapData bruker={bruker} valgteKolonner={valgteKolonner} />
