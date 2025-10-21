@@ -1,8 +1,8 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const FnrHeader = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeadercelleProps) => (
+export const FnrHeader = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeader
         sortering={Sorteringsfelt.FODSELSNUMMER}
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.FODSELSNUMMER}

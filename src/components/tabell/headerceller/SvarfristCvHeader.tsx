@@ -1,9 +1,9 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const SvarfristCvHeader = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeadercelleProps) => (
+export const SvarfristCvHeader = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}
         sortering={Sorteringsfelt.CV_SVARFRIST}

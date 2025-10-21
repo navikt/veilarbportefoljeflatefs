@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const GeografiskBostedSistOppdatertHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.BOSTED_SIST_OPPDATERT)}
         sortering={Sorteringsfelt.BOSTED_SIST_OPPDATERT}

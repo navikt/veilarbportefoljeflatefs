@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const OppfolgingStartetHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.OPPFOLGING_STARTET)}
         sortering={Sorteringsfelt.OPPFOLGING_STARTET}

@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {SorteringHeader} from '../sortering-header';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const AapKelvinVedtakTilOgMedDatoHeaderHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO)}
         sortering={Sorteringsfelt.AAP_KEVLIN_VEDTAK_TOM_DATO}

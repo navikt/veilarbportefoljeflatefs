@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const AapArenaVedtaksperiodeHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP)}
         sortering={Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}

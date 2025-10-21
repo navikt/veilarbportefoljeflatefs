@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const StatsborgerskapGyldigFraHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.STATSBORGERSKAP_GYLDIG_FRA)}
         sortering={Sorteringsfelt.STATSBORGERSKAP_GYLDIG_FRA}

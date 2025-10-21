@@ -1,4 +1,4 @@
-import {HeadercelleMedSorteringBasertPaFiltervalgProps} from './HeadercelleProps';
+import {HeaderCellMedSorteringBasertPaFiltervalgProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -16,7 +16,7 @@ export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
     rekkefolge,
     onClick,
     filtervalg
-}: HeadercelleMedSorteringBasertPaFiltervalgProps) => {
+}: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
     const {ytelse: valgtArenaytelsesfilter} = filtervalg;
 
     // Bruk ulikt sorteringsfelt i OpenSearch for "ukerIgjen" basert på kva dagpengetype det er filtrert på

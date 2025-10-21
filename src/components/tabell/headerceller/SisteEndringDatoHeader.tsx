@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const SisteEndringDatoHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     // Dette er siste endring frå under "Hendelser", i aktiviteter personen sjølv har oppretta.
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.SISTE_ENDRING_DATO)}

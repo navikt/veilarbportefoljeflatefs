@@ -1,4 +1,4 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {SorteringHeader} from '../sortering-header';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -8,7 +8,7 @@ export const HuskelappSistEndretHeader = ({
     valgteKolonner,
     rekkefolge,
     onClick
-}: HeadercelleProps) => (
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_SIST_ENDRET)}
         sortering={Sorteringsfelt.HUSKELAPP_SIST_ENDRET}

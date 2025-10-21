@@ -1,8 +1,8 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {Header} from '../header';
 
-export const MoteVarighetHeader = ({valgteKolonner}: HeadercelleProps) => (
+export const MoteVarighetHeader = ({valgteKolonner}: HeaderCellProps) => (
     <Header
         skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
         title="Varighet på møtet"

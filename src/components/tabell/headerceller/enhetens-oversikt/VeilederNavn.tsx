@@ -1,8 +1,8 @@
-import {HeadercelleProps} from '../HeadercelleProps';
+import {HeaderCellProps} from '../HeaderCellProps';
 import {Kolonne} from '../../../../ducks/ui/listevisning';
 import {Header} from '../../header';
 
-export const VeilederNavn = ({valgteKolonner}: HeadercelleProps) => (
+export const VeilederNavn = ({valgteKolonner}: HeaderCellProps) => (
     <Header
         skalVises={valgteKolonner.includes(Kolonne.VEILEDER)}
         headerTestId="sorteringheader_veileder"

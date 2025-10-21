@@ -1,8 +1,8 @@
-import {HeadercelleProps} from './HeadercelleProps';
+import {HeaderCellProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {Header} from '../header';
 
-export const Status14aVedtakHeader = ({valgteKolonner}: HeadercelleProps) => (
+export const Status14aVedtakHeader = ({valgteKolonner}: HeaderCellProps) => (
     // Dette er den som samanliknar gjeldande vedtak og "den i Arena". Viser om det er skilnad mellom kjeldene.
     <Header
         skalVises={valgteKolonner.includes(Kolonne.AVVIK_14A_VEDTAK)}

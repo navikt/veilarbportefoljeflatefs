@@ -1,4 +1,4 @@
-import {HeadercelleMedSorteringBasertPaFiltervalgProps} from './HeadercelleProps';
+import {HeaderCellMedSorteringBasertPaFiltervalgProps} from './HeaderCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
@@ -14,7 +14,7 @@ export const AapArenaRettighetsperiodeHeader = ({
     rekkefolge,
     onClick,
     filtervalg
-}: HeadercelleMedSorteringBasertPaFiltervalgProps) => {
+}: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
     const sorteringsfeltBasertPaAapFiltrering = () => {
         if (filtrertPaBeggeAapFilterArena(filtervalg)) {
             return Sorteringsfelt.AAP_RETTIGHETSPERIODE;

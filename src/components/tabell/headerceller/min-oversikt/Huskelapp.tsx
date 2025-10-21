@@ -1,9 +1,9 @@
-import {HeadercelleProps} from '../HeadercelleProps';
+import {HeaderCellProps} from '../HeaderCellProps';
 import {SorteringHeaderIkon} from '../../sortering-header-ikon';
 import {ReactComponent as HuskelappIkon} from '../../../../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
-export const Huskelapp = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeadercelleProps) => (
+export const Huskelapp = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeaderIkon
         ikon={<HuskelappIkon aria-hidden />}
         sortering={Sorteringsfelt.HUSKELAPP}
