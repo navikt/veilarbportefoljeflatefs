@@ -1,12 +1,12 @@
 import {BodyShort} from '@navikt/ds-react';
 
 interface Props {
-    skalVises: boolean;
     dato: number | null;
+    skalVises: boolean;
     className: string;
 }
 
-export function DagerSidenDataCellType({skalVises, dato, className}: Props) {
+export function DagerSidenDataCellType({dato, skalVises, className}: Props) {
     if (!skalVises || dato === null) {
         return null;
     }

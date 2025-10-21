@@ -1,12 +1,5 @@
 import {BodyShort} from '@navikt/ds-react';
 
-interface UkekolonneProps {
-    className?: string;
-    ukerIgjen?: number;
-    minVal: number;
-    skalVises: boolean;
-}
-
 function lagUkerTekst(ukerIgjen, minVal) {
     if (ukerIgjen < 0 || ukerIgjen === undefined) {
         return null;
@@ -16,7 +9,14 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-export function UkeDataCellType({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
+interface Props {
+    ukerIgjen?: number;
+    minVal: number;
+    skalVises: boolean;
+    className?: string;
+}
+
+export function UkeDataCellType({ukerIgjen, minVal, skalVises, className}: Props) {
     if (!skalVises) {
         return null;
     }

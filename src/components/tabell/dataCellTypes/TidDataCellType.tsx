@@ -1,13 +1,13 @@
 import moment from 'moment';
 import {BodyShort} from '@navikt/ds-react';
 
-interface TidKolonneProps {
-    className?: string;
+interface Props {
     dato: number | null;
     skalVises: boolean;
+    className?: string;
 }
 
-export function TidDataCellType({className, dato, skalVises}: TidKolonneProps) {
+export function TidDataCellType({dato, skalVises, className}: Props) {
     if (!skalVises || !dato) {
         return null;
     }

@@ -1,13 +1,13 @@
 import {BodyShort} from '@navikt/ds-react';
 import {Maybe} from '../../../utils/types';
 
-interface DatokolonneProps {
-    className?: string;
+interface Props {
     dato: Maybe<Date>;
     skalVises: boolean;
+    className?: string;
 }
 
-export function DatoDataCellType({className, dato, skalVises = true}: DatokolonneProps) {
+export function DatoDataCellType({dato, skalVises = true, className}: Props) {
     if (!skalVises) {
         return null;
     }
