@@ -3,14 +3,14 @@ import {BodyShort} from '@navikt/ds-react';
 import {DataCellTypeProps} from './DataCellTypeProps';
 
 interface Props extends DataCellTypeProps {
-    dato: number | null;
+    tidSomMinutter: number | null;
 }
 
-export function TidDataCellType({dato, skalVises, className}: Props) {
-    if (!skalVises || !dato) {
+export function TidDataCellType({tidSomMinutter, skalVises, className}: Props) {
+    if (!skalVises || !tidSomMinutter) {
         return null;
     }
-    const duration = moment.duration(dato, 'minutes');
+    const duration = moment.duration(tidSomMinutter, 'minutes');
     const minutes = duration.get('minutes');
     const hours = duration.get('hours');
     let minutterString = minutes.toString();

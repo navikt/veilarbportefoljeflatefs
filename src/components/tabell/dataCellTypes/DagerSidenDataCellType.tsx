@@ -2,21 +2,21 @@ import {BodyShort} from '@navikt/ds-react';
 import {DataCellTypeProps} from './DataCellTypeProps';
 
 interface Props extends DataCellTypeProps {
-    dato: number | null;
+    dagerSiden: number | null;
 }
 
-export function DagerSidenDataCellType({dato, skalVises, className}: Props) {
-    if (!skalVises || dato === null) {
+export function DagerSidenDataCellType({dagerSiden, skalVises, className}: Props) {
+    if (!skalVises || dagerSiden === null) {
         return null;
     }
 
     const datoTekst = () => {
-        if (dato === 0) {
+        if (dagerSiden === 0) {
             return 'I dag';
-        } else if (dato === 1) {
+        } else if (dagerSiden === 1) {
             return '1 dag siden';
         } else {
-            return `${dato} dager siden`;
+            return `${dagerSiden} dager siden`;
         }
     };
 

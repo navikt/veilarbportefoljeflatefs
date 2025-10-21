@@ -8,7 +8,7 @@ export const MoterIDagData = ({bruker, valgteKolonner}: DataCellProps) => {
 
     return (
         <TidDataCellType
-            dato={moteStartTid}
+            tidSomMinutter={moteStartTid}
             skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             className="col col-xs-2"
         />
