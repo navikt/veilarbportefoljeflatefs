@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
 import {DataCellProps} from './DataCellProps';
 
 export const Utkast14aAnsvarligVeilederData = ({bruker, valgteKolonner}: DataCellProps) => (

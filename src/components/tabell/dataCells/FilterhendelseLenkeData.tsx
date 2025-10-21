@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedLenkeProps} from './DataCellProps';
-import {LenkeKolonne} from '../kolonner/lenkekolonne';
+import {LenkeKolonne} from '../dataCellTypes/lenkekolonne';
 
 export const FilterhendelseLenkeData = ({bruker, valgteKolonner, enhetId}: DataCellMedLenkeProps) => (
     <LenkeKolonne

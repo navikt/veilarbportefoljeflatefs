@@ -1,5 +1,5 @@
 import {DataCellProps} from './DataCellProps';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export const TiltakspengerRettighetData = ({bruker, valgteKolonner}: DataCellProps) => (

@@ -1,7 +1,7 @@
 import {ytelsestypetekst} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
 
 export const AapArenaYtelsestypeData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne

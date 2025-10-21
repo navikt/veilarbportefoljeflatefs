@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
-import {UkeKolonne} from '../kolonner/ukekolonne';
+import {UkeKolonne} from '../dataCellTypes/ukekolonne';
 import {
     filtrertPaBeggeAapFilterArena,
     filtrertPaOrdinarAapFilterArena,

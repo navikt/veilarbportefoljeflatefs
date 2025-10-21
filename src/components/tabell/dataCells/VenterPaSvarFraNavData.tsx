@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 
 export const VenterPaSvarFraNavData = ({bruker, valgteKolonner}: DataCellProps) => {
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;

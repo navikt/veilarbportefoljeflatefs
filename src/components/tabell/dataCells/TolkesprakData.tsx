@@ -1,6 +1,6 @@
 import {tolkBehovSpraak} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 

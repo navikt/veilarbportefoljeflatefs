@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {VarighetKolonne} from '../kolonner/varighetkolonne';
+import {VarighetKolonne} from '../dataCellTypes/varighetkolonne';
 import {minuttDifferanse} from '../../../utils/dato-utils';
 
 export const MoteVarighetData = ({bruker, valgteKolonner}: DataCellProps) => {

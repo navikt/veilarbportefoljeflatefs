@@ -1,7 +1,7 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
 import {oppfolgingStartetDato} from '../../../utils/dato-utils';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 
 export const OppfolgingStartetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoKolonne

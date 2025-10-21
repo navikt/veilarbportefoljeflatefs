@@ -1,5 +1,5 @@
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export const TiltakspengerVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {

@@ -1,7 +1,7 @@
 import {nesteUtlopsdatoEllerNull} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 
 export const AvtaltAktivitetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoKolonne

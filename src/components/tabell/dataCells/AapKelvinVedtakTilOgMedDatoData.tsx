@@ -1,6 +1,6 @@
 import {DataCellProps} from './DataCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 
 export const AapKelvinVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
     const tilOgMedVedtaksdato = bruker.aapKelvin?.vedtaksdatoTilOgMed

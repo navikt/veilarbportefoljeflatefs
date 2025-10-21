@@ -1,7 +1,7 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
 import {dagerSiden} from '../../../utils/dato-utils';
-import {DagerSidenKolonne} from '../kolonner/dagersidenkolonne';
+import {DagerSidenKolonne} from '../dataCellTypes/dagersidenkolonne';
 
 export const Utkast14aVedtaksstatusEndretData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DagerSidenKolonne

@@ -1,6 +1,6 @@
 import {bostedBydelEllerUkjent} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
 import {DataCellProps} from './DataCellProps';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 

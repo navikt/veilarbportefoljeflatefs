@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoKolonne} from '../dataCellTypes/datokolonne';
 
 export const TiltakshendelseDatoOpprettetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoKolonne

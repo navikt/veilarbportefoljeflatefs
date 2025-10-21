@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {UkeKolonne} from '../kolonner/ukekolonne';
+import {UkeKolonne} from '../dataCellTypes/ukekolonne';
 import {ukerIgjenTilUtlopsdato} from '../../../utils/utils';
 
 export const TiltakspengerArenaGjenstaendeUkerVedtakData = ({bruker, valgteKolonner}: DataCellProps) => {
