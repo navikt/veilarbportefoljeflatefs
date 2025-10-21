@@ -1,7 +1,7 @@
-import {HeaderCellProps} from './HeaderCellProps';
-import {SorteringHeader} from '../sortering-header';
-import {Kolonne} from '../../../ducks/ui/listevisning';
-import {Sorteringsfelt} from '../../../typer/kolonnesortering';
+import {HeaderCellProps} from '../HeaderCellProps';
+import {SorteringHeader} from '../../sortering-header';
+import {Kolonne} from '../../../../ducks/ui/listevisning';
+import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
 export const HuskelappSistEndretHeader = ({
     gjeldendeSorteringsfelt,
