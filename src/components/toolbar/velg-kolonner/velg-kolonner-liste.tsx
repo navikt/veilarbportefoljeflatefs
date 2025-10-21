@@ -3,14 +3,23 @@ import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import {VelgKolonnerRad} from './velg-kolonner-rad';
 import {AppState} from '../../../reducer';
+import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
+import {LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG} from '../../../konstanter';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
 }
 
 export function VelgKolonnerListe({oversiktType}: ListevisningProps) {
+    const laVeilederViseFlereEnnTreKolonnerSamtidig = useFeatureSelector()(
+        LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG
+    );
+
     const valgteAlternativ = useSelector((state: AppState) => selectValgteAlternativer(state, oversiktType));
     const muligeAlternativer = useSelector((state: AppState) => selectMuligeAlternativer(state, oversiktType));
+    const harLovTilAVelgeFlereKolonner = laVeilederViseFlereEnnTreKolonnerSamtidig
+        ? valgteAlternativ.length >= 10
+        : valgteAlternativ.length >= 3;
 
     const dispatch = useDispatch();
 
@@ -37,7 +46,7 @@ export function VelgKolonnerListe({oversiktType}: ListevisningProps) {
                     key={kolonne}
                     kolonne={kolonne}
                     valgt={erValgt(kolonne)}
-                    disabled={valgteAlternativ.length >= 3 && !erValgt(kolonne)}
+                    disabled={harLovTilAVelgeFlereKolonner && !erValgt(kolonne)}
                     onChange={handleChange}
                 />
             ))}
