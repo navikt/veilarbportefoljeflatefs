@@ -1,10 +1,9 @@
 import moment from 'moment';
 import {BodyShort} from '@navikt/ds-react';
+import {DataCellTypeProps} from './DataCellTypeProps';
 
-interface Props {
+interface Props extends DataCellTypeProps {
     dato: number | null;
-    skalVises: boolean;
-    className?: string;
 }
 
 export function TidDataCellType({dato, skalVises, className}: Props) {

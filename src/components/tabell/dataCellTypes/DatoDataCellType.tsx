@@ -1,10 +1,9 @@
 import {BodyShort} from '@navikt/ds-react';
+import {DataCellTypeProps} from './DataCellTypeProps';
 import {Maybe} from '../../../utils/types';
 
-interface Props {
+interface Props extends DataCellTypeProps {
     dato: Maybe<Date>;
-    skalVises: boolean;
-    className?: string;
 }
 
 export function DatoDataCellType({dato, skalVises = true, className}: Props) {

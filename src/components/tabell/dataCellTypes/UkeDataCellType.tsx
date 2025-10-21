@@ -1,4 +1,5 @@
 import {BodyShort} from '@navikt/ds-react';
+import {DataCellTypeProps} from './DataCellTypeProps';
 
 function lagUkerTekst(ukerIgjen, minVal) {
     if (ukerIgjen < 0 || ukerIgjen === undefined) {
@@ -9,11 +10,9 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-interface Props {
+interface Props extends DataCellTypeProps {
     ukerIgjen?: number;
     minVal: number;
-    skalVises: boolean;
-    className?: string;
 }
 
 export function UkeDataCellType({ukerIgjen, minVal, skalVises, className}: Props) {
