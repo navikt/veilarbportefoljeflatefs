@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, {Duration} from 'moment';
 import {BodyShort} from '@navikt/ds-react';
 import {DataCellTypeProps} from './DataCellTypeProps';
 
@@ -10,19 +10,32 @@ export function TidDataCellType({tidSomMinutter, skalVises, className}: Props) {
     if (!skalVises || !tidSomMinutter) {
         return null;
     }
+
     const duration = moment.duration(tidSomMinutter, 'minutes');
-    const minutes = duration.get('minutes');
-    const hours = duration.get('hours');
-    let minutterString = minutes.toString();
-    let timmerString = hours.toString();
 
-    if (minutes < 10) {
-        minutterString = '0' + minutterString;
-    }
+    const minutter = (duration: Duration): string => {
+        const minutter = duration.get('minutes');
 
-    if (hours < 10) {
-        timmerString = '0' + timmerString;
-    }
+        if (minutter < 10) {
+            return '0' + minutter.toString();
+        }
+        return minutter.toString();
+    };
 
-    return <BodyShort size="small" className={className}>{`${timmerString}:${minutterString}`}</BodyShort>;
+    const timer = (duration: Duration): string => {
+        const timer = duration.get('minutes');
+
+        if (timer < 10) {
+            return '0' + timer.toString();
+        }
+        return timer.toString();
+    };
+
+    const timerMinutterString = `${timer(duration)}:${minutter(duration)}`;
+
+    return (
+        <BodyShort size="small" className={className}>
+            {timerMinutterString}
+        </BodyShort>
+    );
 }
