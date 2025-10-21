@@ -1,8 +1,8 @@
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
-export const TiltakspengerRettighet = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const TiltakspengerRettighet = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne
         tekst={bruker.tiltakspenger?.rettighet ?? '-'}
         skalVises={valgteKolonner.includes(Kolonne.TILTAKSPENGER_RETTIGHET)}

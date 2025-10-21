@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const UtlopteAktiviteter = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const UtlopteAktiviteter = ({bruker, valgteKolonner}: DataCellProps) => {
     const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
 
     return (

@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './../InnholdscelleProps';
+import {DataCellProps} from '../DataCellProps';
 import {DatoKolonne} from '../../kolonner/datokolonne';
 
-export const HuskelappFrist = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const HuskelappFrist = ({bruker, valgteKolonner}: DataCellProps) => {
     const huskeLappFrist = bruker.huskelapp?.frist ? new Date(bruker.huskelapp.frist) : null;
 
     return (

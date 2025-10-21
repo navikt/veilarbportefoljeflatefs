@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const UtdanningOgSituasjonSistEndret = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const UtdanningOgSituasjonSistEndret = ({bruker, valgteKolonner}: DataCellProps) => {
     const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
         ? new Date(bruker.utdanningOgSituasjonSistEndret)
         : null;

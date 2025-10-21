@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {ukerIgjenTilUtlopsdato} from '../../../utils/utils';
 
-export const TiltakspengerArenaGjenstaendeUkerVedtak = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const TiltakspengerArenaGjenstaendeUkerVedtak = ({bruker, valgteKolonner}: DataCellProps) => {
     const ukerIgjen = ukerIgjenTilUtlopsdato(bruker.utlopsdato);
 
     return (

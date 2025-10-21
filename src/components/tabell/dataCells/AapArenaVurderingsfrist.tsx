@@ -1,10 +1,10 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
 import {Innsatsgruppe} from '../../../typer/bruker-modell';
 import {dateGreater, toDateString} from '../../../utils/dato-utils';
 
-export const AapArenaVurderingsfrist = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const AapArenaVurderingsfrist = ({bruker, valgteKolonner}: DataCellProps) => {
     const vurderingsfristAAP = aapVurderingsfrist(
         bruker.innsatsgruppe,
         bruker.ytelse,

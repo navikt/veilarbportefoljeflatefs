@@ -1,8 +1,8 @@
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
-export const TildeltTidspunkt = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const TildeltTidspunkt = ({bruker, valgteKolonner}: DataCellProps) => {
     const tildelingstidspunkt = bruker.tildeltTidspunkt ? new Date(bruker.tildeltTidspunkt) : null;
 
     return (

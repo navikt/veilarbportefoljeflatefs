@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {toDateString} from '../../../utils/dato-utils';
 
-export const SvarfristCv = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const SvarfristCv = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne
         tekst={bruker.nesteSvarfristCvStillingFraNav ? toDateString(bruker.nesteSvarfristCvStillingFraNav) : '-'}
         skalVises={valgteKolonner.includes(Kolonne.CV_SVARFRIST)}

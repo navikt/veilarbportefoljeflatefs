@@ -4,9 +4,9 @@ import {VeilederModell} from '../../../../typer/enhet-og-veiledere-modeller';
 import {BrukerModell} from '../../../../typer/bruker-modell';
 import {AppState} from '../../../../reducer';
 import {Kolonne} from '../../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from '../InnholdscelleProps';
+import {DataCellProps} from '../DataCellProps';
 
-export function VeilederNavn({bruker, valgteKolonner}: InnholdscelleProps) {
+export function VeilederNavn({bruker, valgteKolonner}: DataCellProps) {
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
     const skalVises = valgteKolonner.includes(Kolonne.VEILEDER);

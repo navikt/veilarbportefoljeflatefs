@@ -1,10 +1,10 @@
 import {bostedKommuneUtlandEllerUkjent} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
 
-export const GeografiskBosted = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const GeografiskBosted = ({bruker, valgteKolonner}: DataCellProps) => {
     const geografiskbostedData = useGeografiskbostedSelector();
 
     return (

@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {BarnUnder18AarModell} from '../../../typer/bruker-modell';
 
-export const BarnUnder18Aar = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const BarnUnder18Aar = ({bruker, valgteKolonner}: DataCellProps) => {
     const barnAlderTilStr = (dataOmBarn: BarnUnder18AarModell[]) => {
         const lf = new Intl.ListFormat('no');
         const dataOmBarnSorted = dataOmBarn

@@ -1,8 +1,8 @@
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
 
-export const AapKelvinRettighet = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const AapKelvinRettighet = ({bruker, valgteKolonner}: DataCellProps) => {
     return (
         <TekstKolonne
             tekst={bruker.aapKelvin?.rettighetstype ?? '-'}

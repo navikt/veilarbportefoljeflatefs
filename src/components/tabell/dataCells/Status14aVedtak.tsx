@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {avvik14aVedtakAvhengigeFilter} from '../../../filtrering/filter-konstanter';
 
-export const Status14aVedtak = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const Status14aVedtak = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne
         tekst={
             avvik14aVedtakAvhengigeFilter.hasOwnProperty(bruker.avvik14aVedtak)

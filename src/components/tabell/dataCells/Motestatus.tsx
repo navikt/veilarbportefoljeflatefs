@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import moment from 'moment/moment';
 
-export const Motestatus = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const Motestatus = ({bruker, valgteKolonner}: DataCellProps) => {
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
 
     return (

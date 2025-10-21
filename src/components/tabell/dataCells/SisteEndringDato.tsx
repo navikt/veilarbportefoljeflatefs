@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const SisteEndringDato = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const SisteEndringDato = ({bruker, valgteKolonner}: DataCellProps) => {
     const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
 
     return (

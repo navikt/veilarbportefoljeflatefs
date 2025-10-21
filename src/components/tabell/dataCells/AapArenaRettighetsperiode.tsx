@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
+import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 import {UkeKolonne} from '../kolonner/ukekolonne';
 import {
     filtrertPaBeggeAapFilterArena,
@@ -11,7 +11,7 @@ export const AapArenaRettighetsperiode = ({
     bruker,
     valgteKolonner,
     filtervalg
-}: InnholdscelleMedDataBasertPaFiltervalgProps) => {
+}: DataCellMedInnholdBasertPaFiltervalgProps) => {
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {
         if (filtrertPaBeggeAapFilterArena(filtervalg)) {
             return bruker.aapmaxtidUke !== 0 ? bruker.aapmaxtidUke : bruker.aapUnntakUkerIgjen;

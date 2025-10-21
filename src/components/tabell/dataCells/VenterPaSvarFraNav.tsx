@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const VenterPaSvarFraNav = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const VenterPaSvarFraNav = ({bruker, valgteKolonner}: DataCellProps) => {
     const venterPaSvarFraNAV = bruker.venterPaSvarFraNAV ? new Date(bruker.venterPaSvarFraNAV) : null;
 
     return (

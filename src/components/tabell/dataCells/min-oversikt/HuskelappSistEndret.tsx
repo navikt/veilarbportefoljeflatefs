@@ -1,8 +1,8 @@
-import {InnholdscelleProps} from '../InnholdscelleProps';
+import {DataCellProps} from '../DataCellProps';
 import {DatoKolonne} from '../../kolonner/datokolonne';
 import {Kolonne} from '../../../../ducks/ui/listevisning';
 
-export const HuskelappSistEndret = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const HuskelappSistEndret = ({bruker, valgteKolonner}: DataCellProps) => {
     const huskelappSistEndret = bruker.huskelapp?.endretDato ? new Date(bruker.huskelapp.endretDato) : null;
 
     return (

@@ -1,9 +1,9 @@
 import {nesteUtlopsdatoEllerNull} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const AvtaltAktivitet = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const AvtaltAktivitet = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoKolonne
         dato={nesteUtlopsdatoEllerNull(bruker.aktiviteter)}
         skalVises={valgteKolonner.includes(Kolonne.AVTALT_AKTIVITET)}

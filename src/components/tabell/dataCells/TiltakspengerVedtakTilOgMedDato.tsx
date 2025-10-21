@@ -1,8 +1,8 @@
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
-export const TiltakspengerVedtakTilOgMedDato = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const TiltakspengerVedtakTilOgMedDato = ({bruker, valgteKolonner}: DataCellProps) => {
     const tilOgMedVedtaksdato = bruker.tiltakspenger?.vedtaksdatoTilOgMed
         ? new Date(bruker.tiltakspenger.vedtaksdatoTilOgMed)
         : null;

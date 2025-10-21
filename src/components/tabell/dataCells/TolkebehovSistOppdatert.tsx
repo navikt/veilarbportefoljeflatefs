@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {toDateString} from '../../../utils/dato-utils';
 
-export const TolkebehovSistOppdatert = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const TolkebehovSistOppdatert = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne
         tekst={bruker.tolkebehov.sistOppdatert ? toDateString(bruker.tolkebehov.sistOppdatert) : '-'}
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV_SIST_OPPDATERT)}

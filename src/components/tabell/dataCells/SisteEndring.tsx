@@ -4,9 +4,9 @@ import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleMedLenkeProps} from './InnholdscelleProps';
+import {DataCellMedLenkeProps} from './DataCellProps';
 
-export function SisteEndring({bruker, enhetId, valgteKolonner}: InnholdscelleMedLenkeProps) {
+export function SisteEndring({bruker, enhetId, valgteKolonner}: DataCellMedLenkeProps) {
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,

@@ -1,9 +1,9 @@
 import {tolkBehov} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleMedDataBasertPaFiltervalgProps} from './InnholdscelleProps';
+import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 
-export const Tolkebehov = ({bruker, valgteKolonner, filtervalg}: InnholdscelleMedDataBasertPaFiltervalgProps) => (
+export const Tolkebehov = ({bruker, valgteKolonner, filtervalg}: DataCellMedInnholdBasertPaFiltervalgProps) => (
     <TekstKolonne
         tekst={tolkBehov(filtervalg, bruker)}
         skalVises={valgteKolonner.includes(Kolonne.TOLKEBEHOV)}

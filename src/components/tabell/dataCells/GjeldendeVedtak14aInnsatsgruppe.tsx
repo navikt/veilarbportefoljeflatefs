@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {TekstKolonne} from '../kolonner/tekstkolonne';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {innsatsgruppeNavn} from '../../../model-interfaces';
 
-export const GjeldendeVedtak14aInnsatsgruppe = ({bruker, valgteKolonner}: InnholdscelleProps) => (
+export const GjeldendeVedtak14aInnsatsgruppe = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstKolonne
         tekst={
             bruker.gjeldendeVedtak14a?.innsatsgruppe ? innsatsgruppeNavn[bruker.gjeldendeVedtak14a.innsatsgruppe] : '-'

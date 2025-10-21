@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {VarighetKolonne} from '../kolonner/varighetkolonne';
 import {minuttDifferanse} from '../../../utils/dato-utils';
 
-export const MoteVarighet = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const MoteVarighet = ({bruker, valgteKolonner}: DataCellProps) => {
     const motevarighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
 
     return (

@@ -1,8 +1,8 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {InnholdscelleProps} from './InnholdscelleProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoKolonne} from '../kolonner/datokolonne';
 
-export const EnsligeForsorgereUtlopOvergangsstonad = ({bruker, valgteKolonner}: InnholdscelleProps) => {
+export const EnsligeForsorgereUtlopOvergangsstonad = ({bruker, valgteKolonner}: DataCellProps) => {
     const overgangsstonadUtlopsdato = bruker.ensligeForsorgereOvergangsstonad?.utlopsDato
         ? new Date(bruker.ensligeForsorgereOvergangsstonad?.utlopsDato)
         : null;
