@@ -46,8 +46,8 @@ import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeade
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
 import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
-import {Fargekategori} from '../components/tabell/headerCells/min-oversikt/Fargekategori';
-import {Huskelapp} from '../components/tabell/headerCells/min-oversikt/Huskelapp';
+import {FargekategoriHeader} from '../components/tabell/headerCells/min-oversikt/FargekategoriHeader';
+import {HuskelappHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappHeader';
 import {HuskelappSistEndretHeader} from '../components/tabell/headerCells/HuskelappSistEndretHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
@@ -105,8 +105,8 @@ export function MinOversiktListehode({
             <VelgalleCheckboks />
 
             <div className="brukerliste__minoversikt-ikonknapper">
-                <Fargekategori {...sorteringTilHeadercelle} />
-                <Huskelapp {...sorteringTilHeadercelle} />
+                <FargekategoriHeader {...sorteringTilHeadercelle} />
+                <HuskelappHeader {...sorteringTilHeadercelle} />
             </div>
 
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">

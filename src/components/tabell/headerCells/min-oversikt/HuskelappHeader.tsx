@@ -3,7 +3,7 @@ import {SorteringHeaderIkon} from '../../sortering-header-ikon';
 import {ReactComponent as HuskelappIkon} from '../../../../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
-export const Huskelapp = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
+export const HuskelappHeader = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeaderIkon
         ikon={<HuskelappIkon aria-hidden />}
         sortering={Sorteringsfelt.HUSKELAPP}

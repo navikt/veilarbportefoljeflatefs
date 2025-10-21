@@ -43,8 +43,8 @@ import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeade
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
 import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
-import {VeilederNavident} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavident';
-import {VeilederNavn} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavn';
+import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
+import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
@@ -119,8 +119,8 @@ export function EnhetListehode({
 
                 <OppfolgingStartetHeader {...sorteringTilHeadercelle} />
 
-                <VeilederNavn {...sorteringTilHeadercelle} />
-                <VeilederNavident {...sorteringTilHeadercelle} />
+                <VeilederNavnHeader {...sorteringTilHeadercelle} />
+                <VeilederNavidentHeader {...sorteringTilHeadercelle} />
                 <TildeltTidspunktHeader {...sorteringTilHeadercelle} />
 
                 <DagpengerArenaGjenstaendeUkerRettighetHeader {...sorteringTilHeadercelle} filtervalg={filtervalg} />

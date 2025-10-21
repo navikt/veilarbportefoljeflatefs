@@ -3,7 +3,12 @@ import {Kolonne} from '../../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../../sortering-header';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
-export const VeilederNavident = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeaderCellProps) => (
+export const VeilederNavidentHeader = ({
+    gjeldendeSorteringsfelt,
+    valgteKolonner,
+    rekkefolge,
+    onClick
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.NAVIDENT)}
         sortering={Sorteringsfelt.NAVIDENT}
