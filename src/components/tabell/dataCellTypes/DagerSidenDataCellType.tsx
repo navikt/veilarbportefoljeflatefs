@@ -6,7 +6,7 @@ interface Props {
     className: string;
 }
 
-export function DagerSidenKolonne({skalVises, dato, className}: Props) {
+export function DagerSidenDataCellType({skalVises, dato, className}: Props) {
     if (!skalVises || dato === null) {
         return null;
     }

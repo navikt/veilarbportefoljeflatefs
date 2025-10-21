@@ -1,5 +1,5 @@
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../dataCellTypes/datokolonne';
+import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export const TiltakspengerVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
@@ -8,7 +8,7 @@ export const TiltakspengerVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: Da
         : null;
 
     return (
-        <DatoKolonne
+        <DatoDataCellType
             dato={tilOgMedVedtaksdato}
             skalVises={valgteKolonner.includes(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM)}
             className="col col-xs-2"

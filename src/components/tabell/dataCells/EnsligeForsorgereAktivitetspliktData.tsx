@@ -1,10 +1,10 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 import {mapOmAktivitetsPlikt} from '../../../utils/enslig-forsorger';
 
 export const EnsligeForsorgereAktivitetspliktData = ({bruker, valgteKolonner}: DataCellProps) => (
-    <TekstKolonne
+    <TekstDataCellType
         tekst={mapOmAktivitetsPlikt(bruker.ensligeForsorgereOvergangsstonad?.harAktivitetsplikt)}
         skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT)}
         className="col col-xs-2"

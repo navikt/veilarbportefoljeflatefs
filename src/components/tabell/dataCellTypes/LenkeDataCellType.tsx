@@ -13,7 +13,7 @@ interface LenkeKolonneProps {
     className?: string;
 }
 
-export const LenkeKolonne = ({
+export const LenkeDataCellType = ({
     bruker,
     lenke,
     lenketekst,

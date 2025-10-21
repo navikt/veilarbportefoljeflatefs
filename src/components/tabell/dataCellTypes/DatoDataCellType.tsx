@@ -7,7 +7,7 @@ interface DatokolonneProps {
     skalVises: boolean;
 }
 
-export function DatoKolonne({className, dato, skalVises = true}: DatokolonneProps) {
+export function DatoDataCellType({className, dato, skalVises = true}: DatokolonneProps) {
     if (!skalVises) {
         return null;
     }

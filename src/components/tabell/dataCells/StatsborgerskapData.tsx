@@ -1,10 +1,10 @@
 import {capitalize} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 
 export const StatsborgerskapData = ({bruker, valgteKolonner}: DataCellProps) => (
-    <TekstKolonne
+    <TekstDataCellType
         tekst={
             bruker.hovedStatsborgerskap?.statsborgerskap ? capitalize(bruker.hovedStatsborgerskap.statsborgerskap) : '-'
         }

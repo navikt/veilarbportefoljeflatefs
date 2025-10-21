@@ -7,7 +7,7 @@ interface TidKolonneProps {
     skalVises: boolean;
 }
 
-export function TidKolonne({className, dato, skalVises}: TidKolonneProps) {
+export function TidDataCellType({className, dato, skalVises}: TidKolonneProps) {
     if (!skalVises || !dato) {
         return null;
     }

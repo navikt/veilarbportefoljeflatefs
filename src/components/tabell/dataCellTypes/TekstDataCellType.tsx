@@ -8,7 +8,7 @@ interface TekstKolonneProps {
     className?: string;
 }
 
-export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
+export function TekstDataCellType({tekst, skalVises, className}: TekstKolonneProps) {
     if (!skalVises) {
         return null;
     }

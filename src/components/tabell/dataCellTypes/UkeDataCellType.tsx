@@ -16,7 +16,7 @@ function lagUkerTekst(ukerIgjen, minVal) {
     return `${ukerIgjen} uker`;
 }
 
-export function UkeKolonne({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
+export function UkeDataCellType({className, ukerIgjen, minVal, skalVises}: UkekolonneProps) {
     if (!skalVises) {
         return null;
     }

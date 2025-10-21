@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
-import {UkeKolonne} from '../dataCellTypes/ukekolonne';
+import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {
     filtrertPaBeggeAapFilterArena,
     filtrertPaOrdinarAapFilterArena,
@@ -23,7 +23,7 @@ export const AapArenaRettighetsperiodeData = ({
     };
 
     return (
-        <UkeKolonne
+        <UkeDataCellType
             className="col col-xs-2"
             ukerIgjen={ukerIgjenForYtelsenDetErFiltrertPa()}
             minVal={2}

@@ -7,7 +7,7 @@ interface VarighetKolonneProps {
     skalVises: boolean;
 }
 
-export function VarighetKolonne({className, varighetMinutter, skalVises}: VarighetKolonneProps) {
+export function VarighetDataCellType({className, varighetMinutter, skalVises}: VarighetKolonneProps) {
     if (!skalVises || !varighetMinutter) {
         return null;
     }

@@ -1,6 +1,6 @@
 import {tolkBehovSpraak} from '../../../utils/utils';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {useTolkbehovSelector} from '../../../hooks/redux/use-tolkbehovspraak-selector';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 
@@ -8,7 +8,7 @@ export const TolkesprakData = ({bruker, valgteKolonner, filtervalg}: DataCellMed
     const tolkbehovSpraakData = useTolkbehovSelector();
 
     return (
-        <TekstKolonne
+        <TekstDataCellType
             tekst={tolkBehovSpraak(filtervalg, bruker, tolkbehovSpraakData)}
             skalVises={valgteKolonner.includes(Kolonne.TOLKESPRAK)}
             className="col col-xs-2"

@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../dataCellTypes/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 import {BarnUnder18AarModell} from '../../../typer/bruker-modell';
 
@@ -21,7 +21,7 @@ export const BarnUnder18AarData = ({bruker, valgteKolonner}: DataCellProps) => {
     };
 
     return (
-        <TekstKolonne
+        <TekstDataCellType
             tekst={brukerBarnUnder18AarInfo(bruker.barnUnder18AarData)}
             skalVises={valgteKolonner.includes(Kolonne.BARN_UNDER_18_AAR)}
             className="col col-xs-2"
