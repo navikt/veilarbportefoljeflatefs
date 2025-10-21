@@ -4,59 +4,59 @@ import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {OrNothing} from '../utils/types/types';
-import {Navn} from '../components/tabell/headerceller/Navn';
-import {Fnr} from '../components/tabell/headerceller/Fnr';
-import {Fodeland} from '../components/tabell/headerceller/Fodeland';
-import {Statsborgerskap} from '../components/tabell/headerceller/Statsborgerskap';
-import {StatsborgerskapGyldigFra} from '../components/tabell/headerceller/StatsborgerskapGyldigFra';
-import {Tolkebehov} from '../components/tabell/headerceller/Tolkebehov';
-import {Tolkesprak} from '../components/tabell/headerceller/Tolkesprak';
-import {TolkebehovSistOppdatert} from '../components/tabell/headerceller/TolkebehovSistOppdatert';
-import {GeografiskBosted} from '../components/tabell/headerceller/GeografiskBosted';
-import {GeografiskBostedDetaljer} from '../components/tabell/headerceller/GeografiskBostedDetaljer';
-import {GeografiskBostedSistOppdatert} from '../components/tabell/headerceller/GeografiskBostedSistOppdatert';
-import {OppfolgingStartet} from '../components/tabell/headerceller/OppfolgingStartet';
-import {SvarfristCv} from '../components/tabell/headerceller/SvarfristCv';
-import {Status14aVedtak} from '../components/tabell/headerceller/Status14aVedtak';
-import {BarnUnder18Aar} from '../components/tabell/headerceller/BarnUnder18Ar';
-import {UtdanningOgSituasjonSistEndret} from '../components/tabell/headerceller/UtdanningOgSituasjonSistEndret';
-import {GjeldendeVedtak14aInnsatsgruppe} from '../components/tabell/headerceller/GjeldendeVedtak14aInnsatsgruppe';
-import {GjeldendeVedtak14aHovedmal} from '../components/tabell/headerceller/GjeldendeVedtak14aHovedmal';
-import {GjeldendeVedtak14aVedtaksdato} from '../components/tabell/headerceller/GjeldendeVedtak14aVedtaksdato';
-import {FilterhendelseLenke} from '../components/tabell/headerceller/FilterhendelseLenke';
-import {FilterhendelseDatoOpprettet} from '../components/tabell/headerceller/FilterhendelseDatoOpprettet';
-import {TiltakshendelseDatoOpprettet} from '../components/tabell/headerceller/TiltakshendelseDatoOpprettet';
-import {TiltakshendelseLenke} from '../components/tabell/headerceller/TiltakshendelseLenke';
-import {EnsligeForsorgereOmBarnet} from '../components/tabell/headerceller/EnsligeForsorgereOmBarnet';
-import {EnsligeForsorgereAktivitetsplikt} from '../components/tabell/headerceller/EnsligeForsorgereAktivitetsplikt';
-import {EnsligeForsorgereVedtaksperiode} from '../components/tabell/headerceller/EnsligeForsorgereVedtaksperiode';
-import {EnsligeForsorgereUtlopOvergangsstonad} from '../components/tabell/headerceller/EnsligeForsorgereUtlopOvergangsstonad';
-import {SisteEndringDato} from '../components/tabell/headerceller/SisteEndringDato';
-import {SisteEndring} from '../components/tabell/headerceller/SisteEndring';
-import {VenterPaSvarFraNav} from '../components/tabell/headerceller/VenterPaSvarFraNav';
-import {VenterPaSvarFraBruker} from '../components/tabell/headerceller/VenterPaSvarFraBruker';
-import {UtlopteAktiviteter} from '../components/tabell/headerceller/UtlopteAktiviteter';
-import {AvtaltAktivitet} from '../components/tabell/headerceller/AvtaltAktivitet';
-import {MoterIDag} from '../components/tabell/headerceller/MoterIDag';
-import {MoteVarighet} from '../components/tabell/headerceller/MoteVarighet';
-import {Motestatus} from '../components/tabell/headerceller/Motestatus';
-import {Utkast14aVedtaksstatus} from '../components/tabell/headerceller/Utkast14aVedtaksstatus';
-import {Utkast14aVedtaksstatusEndret} from '../components/tabell/headerceller/Utkast14aVedtaksstatusEndret';
-import {Utkast14aAnsvarligVeileder} from '../components/tabell/headerceller/Utkast14aAnsvarligVeileder';
-import {VeilederNavident} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavident';
-import {VeilederNavn} from '../components/tabell/headerceller/enhetens-oversikt/VeilederNavn';
+import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
+import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
+import {FodelandHeader} from '../components/tabell/headerCells/FodelandHeader';
+import {StatsborgerskapHeader} from '../components/tabell/headerCells/StatsborgerskapHeader';
+import {StatsborgerskapGyldigFraHeader} from '../components/tabell/headerCells/StatsborgerskapGyldigFraHeader';
+import {TolkebehovHeader} from '../components/tabell/headerCells/TolkebehovHeader';
+import {TolkesprakHeader} from '../components/tabell/headerCells/TolkesprakHeader';
+import {TolkebehovSistOppdatertHeader} from '../components/tabell/headerCells/TolkebehovSistOppdatertHeader';
+import {GeografiskBostedHeader} from '../components/tabell/headerCells/GeografiskBostedHeader';
+import {GeografiskBostedDetaljerHeader} from '../components/tabell/headerCells/GeografiskBostedDetaljerHeader';
+import {GeografiskBostedSistOppdatertHeader} from '../components/tabell/headerCells/GeografiskBostedSistOppdatertHeader';
+import {OppfolgingStartetHeader} from '../components/tabell/headerCells/OppfolgingStartetHeader';
+import {SvarfristCvHeader} from '../components/tabell/headerCells/SvarfristCvHeader';
+import {Status14aVedtakHeader} from '../components/tabell/headerCells/Status14aVedtakHeader';
+import {BarnUnder18AarHeader} from '../components/tabell/headerCells/BarnUnder18AarHeader';
+import {UtdanningOgSituasjonSistEndretHeader} from '../components/tabell/headerCells/UtdanningOgSituasjonSistEndretHeader';
+import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aInnsatsgruppeHeader';
+import {GjeldendeVedtak14aHovedmalHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aHovedmalHeader';
+import {GjeldendeVedtak14aVedtaksdatoHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aVedtaksdatoHeader';
+import {FilterhendelseLenkeHeader} from '../components/tabell/headerCells/FilterhendelseLenkeHeader';
+import {FilterhendelseDatoOpprettetHeaderHeader} from '../components/tabell/headerCells/FilterhendelseDatoOpprettetHeaderHeader';
+import {TiltakshendelseDatoOpprettetHeader} from '../components/tabell/headerCells/TiltakshendelseDatoOpprettetHeader';
+import {TiltakshendelseLenkeHeader} from '../components/tabell/headerCells/TiltakshendelseLenkeHeader';
+import {EnsligeForsorgereOmBarnetHeader} from '../components/tabell/headerCells/EnsligeForsorgereOmBarnetHeader';
+import {EnsligeForsorgereAktivitetspliktHeader} from '../components/tabell/headerCells/EnsligeForsorgereAktivitetspliktHeader';
+import {EnsligeForsorgereVedtaksperiodeHeader} from '../components/tabell/headerCells/EnsligeForsorgereVedtaksperiodeHeader';
+import {EnsligeForsorgereUtlopOvergangsstonadHeader} from '../components/tabell/headerCells/EnsligeForsorgereUtlopOvergangsstonadHeader';
+import {SisteEndringDatoHeader} from '../components/tabell/headerCells/SisteEndringDatoHeader';
+import {SisteEndringHeader} from '../components/tabell/headerCells/SisteEndringHeader';
+import {VenterPaSvarFraNavHeader} from '../components/tabell/headerCells/VenterPaSvarFraNavHeader';
+import {VenterPaSvarFraBrukerHeader} from '../components/tabell/headerCells/VenterPaSvarFraBrukerHeader';
+import {UtlopteAktiviteterHeader} from '../components/tabell/headerCells/UtlopteAktiviteterHeader';
+import {AvtaltAktivitetHeader} from '../components/tabell/headerCells/AvtaltAktivitetHeader';
+import {MoterIDagHeader} from '../components/tabell/headerCells/MoterIDagHeader';
+import {MoteVarighetHeader} from '../components/tabell/headerCells/MoteVarighetHeader';
+import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeader';
+import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
+import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
+import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
+import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
+import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
-import {AapKelvinVedtakTilOgMedDato} from '../components/tabell/headerceller/AapKelvinVedtakTilOgMedDato';
-import {AapKelvinRettighet} from '../components/tabell/headerceller/AapKelvinRettighet';
-import {TildeltTidspunkt} from '../components/tabell/headerceller/TildeltTidspunkt';
-import {TiltakspengerVedtakTilOgMedDato} from '../components/tabell/headerceller/TiltakspengerVedtakTilOgMedDato';
-import {TiltakspengerRettighet} from '../components/tabell/headerceller/TiltakspengerRettighet';
-import {DagpengerArenaGjenstaendeUkerRettighet} from '../components/tabell/headerceller/DagpengerArenaGjenstaendeUkerRettighet';
-import {TiltakspengerArenaGjenstaendeUkerVedtak} from '../components/tabell/headerceller/TiltakspengerArenaGjenstaendeUkerVedtak';
-import {AapArenaYtelsestype} from '../components/tabell/headerceller/AapArenaYtelsestype';
-import {AapArenaVurderingsfrist} from '../components/tabell/headerceller/AapArenaVurderingsfrist';
-import {AapArenaVedtaksperiode} from '../components/tabell/headerceller/AapArenaVedtaksperiode';
-import {AapArenaRettighetsperiode} from '../components/tabell/headerceller/AapArenaRettighetsperiode';
+import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
+import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
+import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
+import {TiltakspengerVedtakTilOgMedDatoHeader} from '../components/tabell/headerCells/TiltakspengerVedtakTilOgMedDatoHeader';
+import {TiltakspengerRettighetHeader} from '../components/tabell/headerCells/TiltakspengerRettighetHeader';
+import {DagpengerArenaGjenstaendeUkerRettighetHeader} from '../components/tabell/headerCells/DagpengerArenaGjenstaendeUkerRettighetHeader';
+import {TiltakspengerArenaGjenstaendeUkerVedtakHeader} from '../components/tabell/headerCells/TiltakspengerArenaGjenstaendeUkerVedtakHeader';
+import {AapArenaYtelsestypeHeader} from '../components/tabell/headerCells/AapArenaYtelsestypeHeader';
+import {AapArenaVurderingsfristHeader} from '../components/tabell/headerCells/AapArenaVurderingsfristHeader';
+import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/AapArenaVedtaksperiodeHeader';
+import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -102,47 +102,47 @@ export function EnhetListehode({
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <Navn {...sorteringTilHeadercelle} />
-                <Fnr {...sorteringTilHeadercelle} />
+                <NavnHeader {...sorteringTilHeadercelle} />
+                <FnrHeader {...sorteringTilHeadercelle} />
 
-                <Fodeland {...sorteringTilHeadercelle} />
-                <Statsborgerskap {...sorteringTilHeadercelle} />
-                <StatsborgerskapGyldigFra {...sorteringTilHeadercelle} />
+                <FodelandHeader {...sorteringTilHeadercelle} />
+                <StatsborgerskapHeader {...sorteringTilHeadercelle} />
+                <StatsborgerskapGyldigFraHeader {...sorteringTilHeadercelle} />
 
-                <Tolkebehov {...sorteringTilHeadercelle} />
-                <Tolkesprak {...sorteringTilHeadercelle} />
-                <TolkebehovSistOppdatert {...sorteringTilHeadercelle} />
+                <TolkebehovHeader {...sorteringTilHeadercelle} />
+                <TolkesprakHeader {...sorteringTilHeadercelle} />
+                <TolkebehovSistOppdatertHeader {...sorteringTilHeadercelle} />
 
-                <GeografiskBosted {...sorteringTilHeadercelle} />
-                <GeografiskBostedDetaljer {...sorteringTilHeadercelle} />
-                <GeografiskBostedSistOppdatert {...sorteringTilHeadercelle} />
+                <GeografiskBostedHeader {...sorteringTilHeadercelle} />
+                <GeografiskBostedDetaljerHeader {...sorteringTilHeadercelle} />
+                <GeografiskBostedSistOppdatertHeader {...sorteringTilHeadercelle} />
 
-                <OppfolgingStartet {...sorteringTilHeadercelle} />
+                <OppfolgingStartetHeader {...sorteringTilHeadercelle} />
 
-                <VeilederNavn {...sorteringTilHeadercelle} />
-                <VeilederNavident {...sorteringTilHeadercelle} />
-                <TildeltTidspunkt {...sorteringTilHeadercelle} />
+                <VeilederNavnHeader {...sorteringTilHeadercelle} />
+                <VeilederNavidentHeader {...sorteringTilHeadercelle} />
+                <TildeltTidspunktHeader {...sorteringTilHeadercelle} />
 
-                <DagpengerArenaGjenstaendeUkerRettighet {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+                <DagpengerArenaGjenstaendeUkerRettighetHeader {...sorteringTilHeadercelle} filtervalg={filtervalg} />
 
-                <TiltakspengerArenaGjenstaendeUkerVedtak {...sorteringTilHeadercelle} />
+                <TiltakspengerArenaGjenstaendeUkerVedtakHeader {...sorteringTilHeadercelle} />
 
-                <AapArenaYtelsestype {...sorteringTilHeadercelle} />
-                <AapArenaVurderingsfrist {...sorteringTilHeadercelle} />
-                <AapArenaVedtaksperiode {...sorteringTilHeadercelle} />
-                <AapArenaRettighetsperiode {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+                <AapArenaYtelsestypeHeader {...sorteringTilHeadercelle} />
+                <AapArenaVurderingsfristHeader {...sorteringTilHeadercelle} />
+                <AapArenaVedtaksperiodeHeader {...sorteringTilHeadercelle} />
+                <AapArenaRettighetsperiodeHeader {...sorteringTilHeadercelle} filtervalg={filtervalg} />
 
-                <VenterPaSvarFraNav {...sorteringTilHeadercelle} />
-                <VenterPaSvarFraBruker {...sorteringTilHeadercelle} />
+                <VenterPaSvarFraNavHeader {...sorteringTilHeadercelle} />
+                <VenterPaSvarFraBrukerHeader {...sorteringTilHeadercelle} />
 
-                <FilterhendelseLenke {...sorteringTilHeadercelle} />
-                <FilterhendelseDatoOpprettet {...sorteringTilHeadercelle} />
+                <FilterhendelseLenkeHeader {...sorteringTilHeadercelle} />
+                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeadercelle} />
 
-                <TiltakshendelseLenke {...sorteringTilHeadercelle} />
-                <TiltakshendelseDatoOpprettet {...sorteringTilHeadercelle} />
+                <TiltakshendelseLenkeHeader {...sorteringTilHeadercelle} />
+                <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeadercelle} />
 
-                <UtlopteAktiviteter {...sorteringTilHeadercelle} />
-                <AvtaltAktivitet {...sorteringTilHeadercelle} />
+                <UtlopteAktiviteterHeader {...sorteringTilHeadercelle} />
+                <AvtaltAktivitetHeader {...sorteringTilHeadercelle} />
 
                 <SorteringHeader
                     skalVises={
@@ -158,39 +158,39 @@ export function EnhetListehode({
                     className="col col-xs-2"
                 />
 
-                <MoterIDag {...sorteringTilHeadercelle} />
-                <MoteVarighet {...sorteringTilHeadercelle} />
-                <Motestatus {...sorteringTilHeadercelle} />
+                <MoterIDagHeader {...sorteringTilHeadercelle} />
+                <MoteVarighetHeader {...sorteringTilHeadercelle} />
+                <MotestatusHeader {...sorteringTilHeadercelle} />
 
-                <Utkast14aVedtaksstatus {...sorteringTilHeadercelle} />
-                <Utkast14aVedtaksstatusEndret {...sorteringTilHeadercelle} />
-                <Utkast14aAnsvarligVeileder {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatusHeader {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeadercelle} />
+                <Utkast14aAnsvarligVeilederHeader {...sorteringTilHeadercelle} />
 
-                <SisteEndring {...sorteringTilHeadercelle} />
-                <SisteEndringDato {...sorteringTilHeadercelle} />
+                <SisteEndringHeader {...sorteringTilHeadercelle} />
+                <SisteEndringDatoHeader {...sorteringTilHeadercelle} />
 
-                <SvarfristCv {...sorteringTilHeadercelle} />
+                <SvarfristCvHeader {...sorteringTilHeadercelle} />
 
-                <Status14aVedtak {...sorteringTilHeadercelle} />
+                <Status14aVedtakHeader {...sorteringTilHeadercelle} />
 
-                <GjeldendeVedtak14aInnsatsgruppe {...sorteringTilHeadercelle} />
-                <GjeldendeVedtak14aHovedmal {...sorteringTilHeadercelle} />
-                <GjeldendeVedtak14aVedtaksdato {...sorteringTilHeadercelle} />
+                <GjeldendeVedtak14aInnsatsgruppeHeader {...sorteringTilHeadercelle} />
+                <GjeldendeVedtak14aHovedmalHeader {...sorteringTilHeadercelle} />
+                <GjeldendeVedtak14aVedtaksdatoHeader {...sorteringTilHeadercelle} />
 
-                <EnsligeForsorgereUtlopOvergangsstonad {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereVedtaksperiode {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereAktivitetsplikt {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereOmBarnet {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereUtlopOvergangsstonadHeader {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereVedtaksperiodeHeader {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereAktivitetspliktHeader {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereOmBarnetHeader {...sorteringTilHeadercelle} />
 
-                <BarnUnder18Aar {...sorteringTilHeadercelle} />
+                <BarnUnder18AarHeader {...sorteringTilHeadercelle} />
 
-                <UtdanningOgSituasjonSistEndret {...sorteringTilHeadercelle} />
+                <UtdanningOgSituasjonSistEndretHeader {...sorteringTilHeadercelle} />
 
-                <AapKelvinVedtakTilOgMedDato {...sorteringTilHeadercelle} />
-                <AapKelvinRettighet {...sorteringTilHeadercelle} />
+                <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeadercelle} />
+                <AapKelvinRettighetHeader {...sorteringTilHeadercelle} />
 
-                <TiltakspengerVedtakTilOgMedDato {...sorteringTilHeadercelle} />
-                <TiltakspengerRettighet {...sorteringTilHeadercelle} />
+                <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeadercelle} />
+                <TiltakspengerRettighetHeader {...sorteringTilHeadercelle} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

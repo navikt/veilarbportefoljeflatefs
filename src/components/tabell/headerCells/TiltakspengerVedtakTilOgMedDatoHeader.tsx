@@ -1,0 +1,22 @@
+import {HeaderCellProps} from './HeaderCellProps';
+import {SorteringHeader} from '../sortering-header';
+import {Kolonne} from '../../../ducks/ui/listevisning';
+import {Sorteringsfelt} from '../../../typer/kolonnesortering';
+
+export const TiltakspengerVedtakTilOgMedDatoHeader = ({
+    gjeldendeSorteringsfelt,
+    valgteKolonner,
+    rekkefolge,
+    onClick
+}: HeaderCellProps) => (
+    <SorteringHeader
+        skalVises={valgteKolonner.includes(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM)}
+        sortering={Sorteringsfelt.TILTAKSPENGER_VEDTAKSDATO_TOM}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.TILTAKSPENGER_VEDTAKSDATO_TOM}
+        rekkefolge={rekkefolge}
+        onClick={onClick}
+        tekst="Vedtak t.o.m. (tiltakspenger)"
+        title="Tiltakspenger vedtak til og med (TPSAK)"
+        className="col col-xs-2"
+    />
+);

@@ -1,0 +1,22 @@
+import {HeaderCellProps} from './HeaderCellProps';
+import {Kolonne} from '../../../ducks/ui/listevisning';
+import {SorteringHeader} from '../sortering-header';
+import {Sorteringsfelt} from '../../../typer/kolonnesortering';
+
+export const GjeldendeVedtak14aInnsatsgruppeHeader = ({
+    gjeldendeSorteringsfelt,
+    valgteKolonner,
+    rekkefolge,
+    onClick
+}: HeaderCellProps) => (
+    <SorteringHeader
+        skalVises={valgteKolonner.includes(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE)}
+        sortering={Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE}
+        rekkefolge={rekkefolge}
+        onClick={onClick}
+        tekst="Innsatsgruppe"
+        title="Innsatsgruppe for gjeldende vedtak § 14 a"
+        className="col col-xs-2"
+    />
+);
