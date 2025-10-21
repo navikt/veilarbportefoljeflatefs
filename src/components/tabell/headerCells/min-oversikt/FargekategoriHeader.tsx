@@ -3,6 +3,8 @@ import {SorteringHeaderIkon} from '../../sortering-header-ikon';
 import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../../../../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
+/* Dette er header for fargekategori-ikon-kolonna.
+ *  Per 2025-10-21 har ikkje tilsvarande data-celle ein eigen komponent */
 export const FargekategoriHeader = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeaderIkon
         ikon={<FargekategoriIkonTomtBokmerke aria-hidden />}

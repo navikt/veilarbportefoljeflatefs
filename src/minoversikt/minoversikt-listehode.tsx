@@ -21,8 +21,8 @@ import {SvarfristCvHeader} from '../components/tabell/headerCells/SvarfristCvHea
 import {Status14aVedtakHeader} from '../components/tabell/headerCells/Status14aVedtakHeader';
 import {BarnUnder18AarHeader} from '../components/tabell/headerCells/BarnUnder18AarHeader';
 import {UtdanningOgSituasjonSistEndretHeader} from '../components/tabell/headerCells/UtdanningOgSituasjonSistEndretHeader';
-import {HuskelappKommentarHeader} from '../components/tabell/headerCells/HuskelappKommentarHeader';
-import {HuskelappFristHeader} from '../components/tabell/headerCells/HuskelappFristHeader';
+import {HuskelappKommentarHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappKommentarHeader';
+import {HuskelappFristHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappFristHeader';
 import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aInnsatsgruppeHeader';
 import {GjeldendeVedtak14aHovedmalHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aHovedmalHeader';
 import {GjeldendeVedtak14aVedtaksdatoHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aVedtaksdatoHeader';
@@ -48,7 +48,7 @@ import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCel
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
 import {FargekategoriHeader} from '../components/tabell/headerCells/min-oversikt/FargekategoriHeader';
 import {HuskelappHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappHeader';
-import {HuskelappSistEndretHeader} from '../components/tabell/headerCells/HuskelappSistEndretHeader';
+import {HuskelappSistEndretHeader} from '../components/tabell/headerCells/min-oversikt/HuskelappSistEndretHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';

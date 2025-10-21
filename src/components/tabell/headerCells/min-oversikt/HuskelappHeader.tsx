@@ -3,6 +3,8 @@ import {SorteringHeaderIkon} from '../../sortering-header-ikon';
 import {ReactComponent as HuskelappIkon} from '../../../../components/ikoner/huskelapp/Huskelappikon.svg';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
+/* Dette er header for huskelapp-ikon-knapp-kolonna.
+ *  Per 2025-10-21 har ikkje tilsvarande data-celle ein eigen komponent */
 export const HuskelappHeader = ({gjeldendeSorteringsfelt, rekkefolge, onClick}: HeaderCellProps) => (
     <SorteringHeaderIkon
         ikon={<HuskelappIkon aria-hidden />}
