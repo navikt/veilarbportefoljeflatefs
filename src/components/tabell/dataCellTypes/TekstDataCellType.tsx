@@ -1,14 +1,13 @@
 import classNames from 'classnames';
 import {BodyShort} from '@navikt/ds-react';
+import {DataCellTypeProps} from './DataCellTypeProps';
 
-interface TekstKolonneProps {
+interface Props extends DataCellTypeProps {
     /** Send inn "-" om det ikkje er noko tekst å vise */
     tekst: string;
-    skalVises: boolean;
-    className?: string;
 }
 
-export function TekstKolonne({tekst, skalVises, className}: TekstKolonneProps) {
+export function TekstDataCellType({tekst, skalVises, className}: Props) {
     if (!skalVises) {
         return null;
     }

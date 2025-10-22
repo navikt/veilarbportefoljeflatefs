@@ -1,6 +1,6 @@
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
-import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
+import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellType';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -126,7 +126,7 @@ export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKol
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AvtaltAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
+            <DatoDataCellType
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}

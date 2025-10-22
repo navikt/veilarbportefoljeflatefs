@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const UtdanningOgSituasjonSistEndretData = ({bruker, valgteKolonner}: DataCellProps) => {
     const brukersUtdanningOgSituasjonSistEndret = bruker.utdanningOgSituasjonSistEndret
@@ -8,7 +8,7 @@ export const UtdanningOgSituasjonSistEndretData = ({bruker, valgteKolonner}: Dat
         : null;
 
     return (
-        <DatoKolonne
+        <DatoDataCellType
             dato={brukersUtdanningOgSituasjonSistEndret}
             skalVises={valgteKolonner.includes(Kolonne.UTDANNING_OG_SITUASJON_SIST_ENDRET)}
             className="col col-xs-2"

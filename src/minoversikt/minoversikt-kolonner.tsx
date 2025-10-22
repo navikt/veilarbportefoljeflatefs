@@ -1,7 +1,7 @@
 import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
-import {DatoKolonne} from '../components/tabell/kolonner/datokolonne';
+import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellType';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -130,22 +130,22 @@ export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner
             <Utkast14aVedtaksstatusEndretData bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aAnsvarligVeilederData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoKolonne
+            <DatoDataCellType
                 className="col col-xs-2"
                 dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
                 skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
             />
-            <DatoKolonne
+            <DatoDataCellType
                 className="col col-xs-2"
                 dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
                 skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
             />
-            <DatoKolonne
+            <DatoDataCellType
                 className="col col-xs-2"
                 dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
                 skalVises={valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
             />
-            <DatoKolonne
+            <DatoDataCellType
                 className="col col-xs-2"
                 dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
                 skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}

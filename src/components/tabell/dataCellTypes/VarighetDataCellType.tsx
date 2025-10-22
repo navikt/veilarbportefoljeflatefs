@@ -1,13 +1,12 @@
 import {BodyShort} from '@navikt/ds-react';
+import {DataCellTypeProps} from './DataCellTypeProps';
 import {formaterVarighetSomTimerOgMinutt} from '../../../utils/dato-utils';
 
-interface VarighetKolonneProps {
-    className?: string;
+interface Props extends DataCellTypeProps {
     varighetMinutter: number | null;
-    skalVises: boolean;
 }
 
-export function VarighetKolonne({className, varighetMinutter, skalVises}: VarighetKolonneProps) {
+export function VarighetDataCellType({varighetMinutter, skalVises, className}: Props) {
     if (!skalVises || !varighetMinutter) {
         return null;
     }

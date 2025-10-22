@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
-import {UkeKolonne} from '../kolonner/ukekolonne';
+import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {
     YTELSE_ARENA_DAGPENGER,
     YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
@@ -33,7 +33,7 @@ export const DagpengerArenaGjenstaendeUkerRettighetData = ({
     };
 
     return (
-        <UkeKolonne
+        <UkeDataCellType
             className="col col-xs-2"
             ukerIgjen={ukerIgjenBasertPaDagpengetype()}
             minVal={2}

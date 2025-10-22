@@ -1,19 +1,18 @@
+import {DataCellTypeProps} from './DataCellTypeProps';
 import {BrukerModell} from '../../../typer/bruker-modell';
 import {oppdaterBrukerIKontekstOgNavigerTilLenke} from '../../../utils/utils';
 import {AksjonKnappMedPopoverFeilmelding} from '../../aksjon-knapp-med-popover-feilmelding/aksjon-knapp-med-popover-feilmelding';
 import {getVeilarbpersonflateUrl} from '../../../utils/url-utils';
 
-interface LenkeKolonneProps {
+interface Props extends DataCellTypeProps {
     bruker: BrukerModell;
     lenke: string;
     lenketekst: string;
     erAbsoluttLenke?: boolean;
     enhetId: string;
-    skalVises: boolean;
-    className?: string;
 }
 
-export const LenkeKolonne = ({
+export const LenkeDataCellType = ({
     bruker,
     lenke,
     lenketekst,
@@ -21,7 +20,7 @@ export const LenkeKolonne = ({
     enhetId,
     skalVises,
     className
-}: LenkeKolonneProps) => {
+}: Props) => {
     if (!skalVises) {
         return null;
     }

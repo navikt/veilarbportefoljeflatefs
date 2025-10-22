@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 import moment from 'moment/moment';
 
@@ -7,7 +7,7 @@ export const MotestatusData = ({bruker, valgteKolonner}: DataCellProps) => {
     const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
 
     return (
-        <TekstKolonne
+        <TekstDataCellType
             tekst={moteErAvtaltMedNAV ? 'Avtalt med Nav' : '-'}
             skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
             className="col col-xs-2"

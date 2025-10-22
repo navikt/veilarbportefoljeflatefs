@@ -1,9 +1,9 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from './DataCellProps';
 
 export const EnsligeForsorgereVedtaksperiodeData = ({bruker, valgteKolonner}: DataCellProps) => (
-    <TekstKolonne
+    <TekstDataCellType
         tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype ?? '-'}
         skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
         className="col col-xs-2"

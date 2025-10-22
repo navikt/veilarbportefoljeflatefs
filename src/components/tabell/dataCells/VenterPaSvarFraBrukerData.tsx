@@ -1,12 +1,12 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const VenterPaSvarFraBrukerData = ({bruker, valgteKolonner}: DataCellProps) => {
     const venterPaSvarFraBruker = bruker.venterPaSvarFraBruker ? new Date(bruker.venterPaSvarFraBruker) : null;
 
     return (
-        <DatoKolonne
+        <DatoDataCellType
             dato={venterPaSvarFraBruker}
             skalVises={valgteKolonner.includes(Kolonne.VENTER_SVAR_FRA_BRUKER_DATO)}
             className="col col-xs-2"

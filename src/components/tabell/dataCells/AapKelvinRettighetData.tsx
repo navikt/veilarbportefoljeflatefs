@@ -1,10 +1,10 @@
 import {DataCellProps} from './DataCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
 export const AapKelvinRettighetData = ({bruker, valgteKolonner}: DataCellProps) => {
     return (
-        <TekstKolonne
+        <TekstDataCellType
             tekst={bruker.aapKelvin?.rettighetstype ?? '-'}
             skalVises={valgteKolonner.includes(Kolonne.AAP_KELVIN_RETTIGHET)}
             className="col col-xs-2"

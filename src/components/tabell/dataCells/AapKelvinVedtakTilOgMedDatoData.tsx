@@ -1,6 +1,6 @@
 import {DataCellProps} from './DataCellProps';
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {DatoKolonne} from '../kolonner/datokolonne';
+import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const AapKelvinVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
     const tilOgMedVedtaksdato = bruker.aapKelvin?.vedtaksdatoTilOgMed
@@ -8,7 +8,7 @@ export const AapKelvinVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCe
         : null;
 
     return (
-        <DatoKolonne
+        <DatoDataCellType
             dato={tilOgMedVedtaksdato}
             skalVises={valgteKolonner.includes(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO)}
             className="col col-xs-2"

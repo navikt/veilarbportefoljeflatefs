@@ -1,13 +1,13 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {UkeKolonne} from '../kolonner/ukekolonne';
+import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {ukerIgjenTilUtlopsdato} from '../../../utils/utils';
 
 export const TiltakspengerArenaGjenstaendeUkerVedtakData = ({bruker, valgteKolonner}: DataCellProps) => {
     const ukerIgjen = ukerIgjenTilUtlopsdato(bruker.utlopsdato);
 
     return (
-        <UkeKolonne
+        <UkeDataCellType
             className="col col-xs-2"
             ukerIgjen={ukerIgjen}
             minVal={2}

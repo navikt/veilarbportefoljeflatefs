@@ -1,5 +1,5 @@
 import {Kolonne} from '../../../../ducks/ui/listevisning';
-import {TekstKolonne} from '../../kolonner/tekstkolonne';
+import {TekstDataCellType} from '../../dataCellTypes/TekstDataCellType';
 import {DataCellProps} from '../DataCellProps';
 import {truncateTekst} from '../../../../utils/tekst-utils';
 
@@ -8,7 +8,7 @@ export const HuskelappKommentarData = ({bruker, valgteKolonner}: DataCellProps) 
     const hentForhandsvisningAvHuskelapp = (kommentar: string) => truncateTekst(kommentar.trimStart().split('\n')[0]);
 
     return (
-        <TekstKolonne
+        <TekstDataCellType
             tekst={bruker.huskelapp?.kommentar ? hentForhandsvisningAvHuskelapp(bruker.huskelapp.kommentar) : ' '}
             skalVises={valgteKolonner.includes(Kolonne.HUSKELAPP_KOMMENTAR)}
             className="col col-xs-2"

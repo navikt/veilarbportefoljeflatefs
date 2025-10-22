@@ -1,6 +1,6 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {TekstKolonne} from '../kolonner/tekstkolonne';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 import {Innsatsgruppe} from '../../../typer/bruker-modell';
 import {dateGreater, toDateString} from '../../../utils/dato-utils';
 
@@ -13,7 +13,7 @@ export const AapArenaVurderingsfristData = ({bruker, valgteKolonner}: DataCellPr
     );
 
     return (
-        <TekstKolonne
+        <TekstDataCellType
             className="col col-xs-2"
             skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP)}
             tekst={vurderingsfristAAP || '–'}
