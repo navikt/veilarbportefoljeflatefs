@@ -1,9 +1,7 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import {OrNothing} from '../utils/types/types';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
 import {FodelandHeader} from '../components/tabell/headerCells/FodelandHeader';
@@ -45,7 +43,7 @@ import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCel
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
 import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
+import {Sorteringsfelt} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
@@ -57,6 +55,8 @@ import {AapArenaYtelsestypeHeader} from '../components/tabell/headerCells/AapAre
 import {AapArenaVurderingsfristHeader} from '../components/tabell/headerCells/AapArenaVurderingsfristHeader';
 import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/AapArenaVedtaksperiodeHeader';
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import './enhetsportefolje.css';
 import './brukerliste.css';
 
@@ -70,32 +70,22 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-interface Props {
-    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
-    sorteringOnClick: (sortering: string) => void;
-    valgteKolonner: Kolonne[];
-    filtervalg: FiltervalgModell;
-    sorteringsfelt: OrNothing<Sorteringsfelt>;
-}
+export function EnhetTableHeader() {
+    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
+        OversiktType.enhetensOversikt
+    );
+    const valgteKolonner = listevisning.valgte;
+    const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
-export function EnhetTableHeader({
-    sorteringsrekkefolge,
-    sorteringOnClick,
-    filtervalg,
-    sorteringsfelt,
-    valgteKolonner
-}: Props) {
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
-
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
-
     const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
 
     const sorteringTilHeadercelle = {
         gjeldendeSorteringsfelt: sorteringsfelt,
         valgteKolonner: valgteKolonner,
         rekkefolge: sorteringsrekkefolge,
-        onClick: sorteringOnClick
+        onClick: settSorteringOgHentPortefolje
     };
 
     return (
@@ -152,7 +142,7 @@ export function EnhetTableHeader({
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
+                    onClick={settSorteringOgHentPortefolje}
                     tekst="Neste utløpsdato valgt aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"

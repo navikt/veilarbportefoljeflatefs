@@ -6,7 +6,7 @@ import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {TabellOverskrift} from '../components/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import {EnhetTabell} from './enhetsportefolje-tabell';
-import {EnhetTabellOverskrift} from './enhetsportefolje-tabelloverskrift';
+import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
@@ -201,7 +201,7 @@ export function EnhetSide() {
                                     scrolling={scrolling}
                                     isSidebarHidden={isSidebarHidden}
                                 />
-                                <EnhetTabellOverskrift />
+                                <EnhetTableHeader />
                             </div>
                             <EnhetTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
