@@ -12,7 +12,7 @@ interface MoteKollonneProps {
     enhetId: string;
 }
 
-export function MoteKollonne({dato, mote, enhetId}: MoteKollonneProps) {
+export function MoteDataRow({dato, mote, enhetId}: MoteKollonneProps) {
     const moteDato = new Date(mote.dato);
 
     const handterKlikk = () =>

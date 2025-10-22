@@ -2,8 +2,8 @@ import {useRef, useState} from 'react';
 import {Alert, Button, Popover} from '@navikt/ds-react';
 import {CalendarIcon} from '@navikt/aksel-icons';
 import {hentMoteplan} from '../../middleware/api';
-import {MoteTabell} from './motetabell';
-import {VisFlereMoterKnapper} from './vis-flere-moter-knapper';
+import {MoteTableForDato} from './MoteTableForDato';
+import {VisFlereMoterKnapper} from './VisFlereMoterKnapper';
 import {MoteplanModell} from '../../typer/moteplan';
 import './moteplan.css';
 
@@ -63,7 +63,7 @@ export function Moteplan({veileder, enhet}: MoteplanProps) {
                     {!fetchError && !ingenMoter && (
                         <ol>
                             {dager.slice(0, antallDagerSomSkalVises).map(dag => (
-                                <MoteTabell dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
+                                <MoteTableForDato dato={dag} moter={moter} enhetId={enhet} key={dag.toISOString()} />
                             ))}
                         </ol>
                     )}

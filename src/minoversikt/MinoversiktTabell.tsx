@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {MinoversiktBrukerPanel} from './minoversikt-bruker-panel';
+import {MinoversiktBrukerpanel} from './MinoversiktBrukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
@@ -34,7 +34,7 @@ export function MinoversiktTabell({classNameWrapper}: MinOversiktTabellProps) {
                     <ul className="brukerliste" data-testid="brukerliste">
                         {enhetId &&
                             brukere.map(bruker => (
-                                <MinoversiktBrukerPanel
+                                <MinoversiktBrukerpanel
                                     key={bruker.fnr || bruker.guid}
                                     bruker={bruker}
                                     enhetId={enhetId}

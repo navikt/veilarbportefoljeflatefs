@@ -65,7 +65,7 @@ interface MinOversiktKolonnerProps {
     valgteKolonner: Kolonne[];
 }
 
-export function MinOversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+export function MinoversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     const avtaltAktivitetOgTiltak: boolean =

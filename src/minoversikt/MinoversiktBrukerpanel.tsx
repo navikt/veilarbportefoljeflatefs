@@ -9,7 +9,7 @@ import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
 import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {MinOversiktKolonner} from './minoversikt-kolonner';
+import {MinoversiktKolonner} from './MinoversiktKolonner';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
@@ -31,7 +31,7 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function MinoversiktBrukerPanel({
+export function MinoversiktBrukerpanel({
     bruker,
     settMarkert,
     enhetId,
@@ -108,7 +108,7 @@ export function MinoversiktBrukerPanel({
                         )
                     }
                 </div>
-                <MinOversiktKolonner
+                <MinoversiktKolonner
                     bruker={bruker}
                     enhetId={enhetId}
                     filtervalg={filtervalg}

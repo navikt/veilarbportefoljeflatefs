@@ -24,7 +24,7 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import {Sidebar} from '../components/sidebar/sidebar';
-import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
+import {MineFilterLagreFilterKnapp} from '../minoversikt/MineFilterLagreFilterKnapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {useWindowWidth} from '../hooks/use-window-width';
 import {Toolbar} from '../components/toolbar/toolbar';

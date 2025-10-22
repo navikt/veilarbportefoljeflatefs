@@ -7,7 +7,7 @@ import {STATUS} from '../ducks/utils';
 import {DarkModeToggle} from '../components/toggle/dark-mode-toggle';
 import {useFeatureSelector} from '../hooks/redux/use-feature-selector';
 import {ALERTSTRIPE_FEILMELDING, DARKMODE} from '../konstanter';
-import {Moteplan} from '../minoversikt/moteplan/moteplan';
+import {Moteplan} from '../minoversikt/moteplan/Moteplan';
 import {useEnhetSelector} from '../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {OversiktType} from '../ducks/ui/listevisning';
