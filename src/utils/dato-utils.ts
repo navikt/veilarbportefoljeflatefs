@@ -90,14 +90,6 @@ export function formaterVarighetSomTimerOgMinutt(varighetMinutter: number) {
     return timerString + mellomrom + minutterString;
 }
 
-export function dagerSiden(dato) {
-    if (!dato) {
-        return null;
-    }
-    const hentDato = moment(dato, 'YYYY-MM-DD');
-    return moment().diff(hentDato, 'days');
-}
-
 export function validerDatoFelt(input, fra, valgfritt) {
     let error;
     const inputDato = moment(input);

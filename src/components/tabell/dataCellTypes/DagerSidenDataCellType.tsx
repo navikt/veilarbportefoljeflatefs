@@ -1,16 +1,23 @@
 import {BodyShort} from '@navikt/ds-react';
 import {DataCellTypeProps} from './DataCellTypeProps';
+import moment from 'moment/moment';
 
 interface Props extends DataCellTypeProps {
-    dagerSiden: number | null;
+    dato: string | undefined;
 }
 
-export function DagerSidenDataCellType({dagerSiden, skalVises, className}: Props) {
-    if (!skalVises || dagerSiden === null) {
+export function DagerSidenDataCellType({dato, skalVises, className}: Props) {
+    if (!skalVises || dato === undefined || dato === '') {
         return null;
     }
 
-    const datoTekst = () => {
+    const finnDagerSidenDato = (dato: string): number => {
+        const hentDato = moment(dato, 'YYYY-MM-DD');
+        return moment().diff(hentDato, 'days');
+    };
+    const dagerSiden = finnDagerSidenDato(dato);
+
+    const dagerSidenTekst = () => {
         if (dagerSiden === 0) {
             return 'I dag';
         } else if (dagerSiden === 1) {
@@ -22,7 +29,7 @@ export function DagerSidenDataCellType({dagerSiden, skalVises, className}: Props
 
     return (
         <BodyShort size="small" className={className}>
-            {datoTekst()}
+            {dagerSidenTekst()}
         </BodyShort>
     );
 }
