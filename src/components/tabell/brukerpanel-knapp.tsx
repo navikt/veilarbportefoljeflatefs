@@ -2,7 +2,7 @@ import {MouseEvent} from 'react';
 import {Button} from '@navikt/ds-react';
 import {ChevronDownIcon, ChevronUpIcon} from '@navikt/aksel-icons';
 import './tabell.css';
-import '../../enhetsportefolje/brukerliste.css';
+import '../../enhetensoversikt/brukerliste.css';
 
 interface BrukerpanelKnappProps {
     apen: boolean;

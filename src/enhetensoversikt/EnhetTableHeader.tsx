@@ -57,7 +57,7 @@ import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/Aap
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 function harValgteAktiviteter(aktiviteter) {

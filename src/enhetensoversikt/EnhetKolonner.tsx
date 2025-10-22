@@ -53,7 +53,7 @@ import {AapArenaVedtaksperiodeData} from '../components/tabell/dataCells/AapAren
 import {AapArenaRettighetsperiodeData} from '../components/tabell/dataCells/AapArenaRettighetsperiodeData';
 import {TiltakspengerArenaGjenstaendeUkerVedtakData} from '../components/tabell/dataCells/TiltakspengerArenaGjenstaendeUkerVedtakData';
 import {DagpengerArenaGjenstaendeUkerRettighetData} from '../components/tabell/dataCells/DagpengerArenaGjenstaendeUkerRettighetData';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';

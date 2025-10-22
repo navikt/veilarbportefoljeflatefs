@@ -5,7 +5,7 @@ import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
-import {EnhetTabell} from './enhetsportefolje-tabell';
+import {EnhetTabell} from './EnhetTabell';
 import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
@@ -38,7 +38,7 @@ import {StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 import {StatustallEnhet} from '../ducks/statustall/statustall-typer';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import '../style.css';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 export function antallFilter(filtervalg) {

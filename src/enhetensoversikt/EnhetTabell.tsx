@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {EnhetBrukerpanel} from './enhet-brukerpanel';
+import {EnhetBrukerpanel} from './EnhetBrukerpanel';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
@@ -7,7 +7,7 @@ import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 interface EnhetTabellProps {

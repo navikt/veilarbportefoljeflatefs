@@ -6,10 +6,10 @@ import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {EnhetKolonner} from './enhet-kolonner';
+import {EnhetKolonner} from './EnhetKolonner';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 interface EnhetBrukerpanelProps {
