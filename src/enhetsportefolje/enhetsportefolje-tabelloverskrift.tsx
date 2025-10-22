@@ -1,4 +1,4 @@
-import {EnhetListehode} from './enhet-listehode';
+import {EnhetTableHeader} from './EnhetTableHeader';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
@@ -12,7 +12,7 @@ export function EnhetTabellOverskrift() {
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
     return (
-        <EnhetListehode
+        <EnhetTableHeader
             sorteringsrekkefolge={sorteringsrekkefolge}
             sorteringOnClick={settSorteringOgHentPortefolje}
             filtervalg={filtervalg}

@@ -70,7 +70,7 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-interface EnhetListehodeProps {
+interface Props {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
     valgteKolonner: Kolonne[];
@@ -78,13 +78,13 @@ interface EnhetListehodeProps {
     sorteringsfelt: OrNothing<Sorteringsfelt>;
 }
 
-export function EnhetListehode({
+export function EnhetTableHeader({
     sorteringsrekkefolge,
     sorteringOnClick,
     filtervalg,
     sorteringsfelt,
     valgteKolonner
-}: EnhetListehodeProps) {
+}: Props) {
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);

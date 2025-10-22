@@ -72,7 +72,7 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-interface MinOversiktListehodeProps {
+interface Props {
     sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
     sorteringOnClick: (sortering: string) => void;
     sorteringsfelt: OrNothing<Sorteringsfelt>;
@@ -80,13 +80,13 @@ interface MinOversiktListehodeProps {
     valgteKolonner: Kolonne[];
 }
 
-export function MinOversiktListehode({
+export function MinOversiktTableHeader({
     sorteringsrekkefolge,
     sorteringOnClick,
     sorteringsfelt,
     filtervalg,
     valgteKolonner
-}: MinOversiktListehodeProps) {
+}: Props) {
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
 
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);

@@ -1,4 +1,4 @@
-import {MinOversiktListehode} from './minoversikt-listehode';
+import {MinOversiktTableHeader} from './MinOversiktTableHeader';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import './minoversikt.css';
@@ -13,7 +13,7 @@ export function MinoversiktTabellOverskrift({settSorteringOgHentPortefolje}: Min
     );
 
     return (
-        <MinOversiktListehode
+        <MinOversiktTableHeader
             sorteringsrekkefolge={sorteringsrekkefolge}
             sorteringOnClick={settSorteringOgHentPortefolje}
             filtervalg={filtervalg}
