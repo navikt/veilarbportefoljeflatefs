@@ -11,7 +11,7 @@ interface Props {
     id: string;
 }
 
-export function MinOversiktSideInnholdswrapper({className, id, children}: PropsWithChildren<Props>) {
+export function MinoversiktSideInnholdswrapper({className, id, children}: PropsWithChildren<Props>) {
     const {ident} = useParams<IdentParam>();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();

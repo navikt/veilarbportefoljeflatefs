@@ -72,7 +72,7 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-export function MinOversiktTableHeader() {
+export function MinoversiktTableHeader() {
     const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
         OversiktType.minOversikt
     );
