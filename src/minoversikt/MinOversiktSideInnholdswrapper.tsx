@@ -6,12 +6,12 @@ import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {IdentParam} from '../model-interfaces';
 import './minoversikt.css';
 
-interface MinOversiktWrapperProps {
+interface Props {
     className: string;
     id: string;
 }
 
-export function MinOversiktWrapper({className, id, children}: PropsWithChildren<MinOversiktWrapperProps>) {
+export function MinOversiktSideInnholdswrapper({className, id, children}: PropsWithChildren<Props>) {
     const {ident} = useParams<IdentParam>();
     const innloggetVeileder = useIdentSelector();
     const veiledere = useVeilederListeSelector();

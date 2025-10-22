@@ -58,7 +58,7 @@ import './brukerliste.css';
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';
 
-interface EnhetKolonnerProps {
+interface Props {
     className?: string;
     bruker: BrukerModell;
     enhetId: string;
@@ -66,7 +66,7 @@ interface EnhetKolonnerProps {
     valgteKolonner: Kolonne[];
 }
 
-export function EnhetKolonner({className, bruker, enhetId, filtervalg, valgteKolonner}: EnhetKolonnerProps) {
+export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, valgteKolonner}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     const avtaltAktivitetOgTiltak: boolean =

@@ -1,47 +1,47 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {MinoversiktBrukerpanel} from './MinoversiktBrukerpanel';
+import {EnhetTableRow} from './EnhetTableRow';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
-import {OversiktType} from '../ducks/ui/listevisning';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
-import {useOnUnmount} from '../hooks/use-on-unmount';
-import {updateLastPath} from '../utils/url-utils';
+import {OversiktType} from '../ducks/ui/listevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
+import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
-import './minoversikt.css';
+import './enhetensoversikt.css';
+import './brukerliste.css';
 
-interface MinOversiktTabellProps {
+interface Props {
     classNameWrapper: string;
 }
 
-export function MinoversiktTabell({classNameWrapper}: MinOversiktTabellProps) {
+export function EnhetTableBody({classNameWrapper}: Props) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
-    const portefolje = useSelector((state: AppState) => state.portefolje);
+    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
+        OversiktType.enhetensOversikt
+    );
+    const veiledere = useSelector((state: AppState) => state.veiledere);
+
     const dispatch = useDispatch();
+
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
+
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
-    useOnUnmount(() => {
-        updateLastPath();
-    });
-
     return (
-        <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
+        <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
             <div className={classNameWrapper}>
-                <div className="minoversikt-liste__wrapper">
-                    <ul className="brukerliste" data-testid="brukerliste">
+                <div className="enhet-tabell">
+                    <ul className="brukerliste">
                         {enhetId &&
                             brukere.map(bruker => (
-                                <MinoversiktBrukerpanel
+                                <EnhetTableRow
                                     key={bruker.fnr || bruker.guid}
                                     bruker={bruker}
                                     enhetId={enhetId}
                                     settMarkert={settMarkert}
-                                    varForrigeBruker={forrigeBruker === bruker.fnr}
                                     filtervalg={filtervalg}
                                     valgteKolonner={listevisning.valgte}
+                                    forrigeBruker={forrigeBruker}
                                 />
                             ))}
                     </ul>

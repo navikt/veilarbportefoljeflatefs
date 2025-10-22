@@ -58,14 +58,14 @@ import './minoversikt.css';
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';
 
-interface MinOversiktKolonnerProps {
+interface Props {
     bruker: BrukerModell;
     enhetId: string;
     filtervalg: FiltervalgModell;
     valgteKolonner: Kolonne[];
 }
 
-export function MinoversiktKolonner({bruker, enhetId, filtervalg, valgteKolonner}: MinOversiktKolonnerProps) {
+export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKolonner}: Props) {
     const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
 
     const avtaltAktivitetOgTiltak: boolean =

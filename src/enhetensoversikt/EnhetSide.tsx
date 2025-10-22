@@ -5,7 +5,7 @@ import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
-import {EnhetTabell} from './EnhetTabell';
+import {EnhetTableBody} from './EnhetTableBody';
 import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
@@ -203,7 +203,7 @@ export function EnhetSide() {
                                 />
                                 <EnhetTableHeader />
                             </div>
-                            <EnhetTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
+                            <EnhetTableBody classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
                         <Alert
