@@ -1,10 +1,8 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
+import {Sorteringsfelt} from '../typer/kolonnesortering';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import {OrNothing} from '../utils/types/types';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
 import {FodelandHeader} from '../components/tabell/headerCells/FodelandHeader';
@@ -60,6 +58,8 @@ import {AapArenaYtelsestypeHeader} from '../components/tabell/headerCells/AapAre
 import {AapArenaVurderingsfristHeader} from '../components/tabell/headerCells/AapArenaVurderingsfristHeader';
 import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/AapArenaVedtaksperiodeHeader';
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import './minoversikt.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -72,21 +72,13 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-interface Props {
-    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
-    sorteringOnClick: (sortering: string) => void;
-    sorteringsfelt: OrNothing<Sorteringsfelt>;
-    filtervalg: FiltervalgModell;
-    valgteKolonner: Kolonne[];
-}
+export function MinOversiktTableHeader() {
+    const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
+        OversiktType.minOversikt
+    );
+    const valgteKolonner = listevisning.valgte;
+    const settSorteringogHentPortefolje = useSetPortefoljeSortering(OversiktType.minOversikt);
 
-export function MinOversiktTableHeader({
-    sorteringsrekkefolge,
-    sorteringOnClick,
-    sorteringsfelt,
-    filtervalg,
-    valgteKolonner
-}: Props) {
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
     const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
@@ -95,7 +87,7 @@ export function MinOversiktTableHeader({
         gjeldendeSorteringsfelt: sorteringsfelt,
         valgteKolonner: valgteKolonner,
         rekkefolge: sorteringsrekkefolge,
-        onClick: sorteringOnClick
+        onClick: settSorteringogHentPortefolje
     };
 
     return (

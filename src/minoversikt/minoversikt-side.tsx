@@ -8,13 +8,12 @@ import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisnin
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import {MinoversiktTabell} from './minoversikt-portefolje-tabell';
-import {MinoversiktTabellOverskrift} from './minoversikt-portefolje-tabelloverskrift';
+import {MinOversiktTableHeader} from './MinOversiktTableHeader';
 import {TabellOverskrift} from '../components/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
-import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
@@ -56,7 +55,6 @@ export function MinoversiktSide() {
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
-    const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -188,9 +186,7 @@ export function MinoversiktSide() {
                                 scrolling={scrolling}
                                 isSidebarHidden={isSidebarHidden}
                             />
-                            <MinoversiktTabellOverskrift
-                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                            />
+                            <MinOversiktTableHeader />
                         </div>
 
                         <MinoversiktTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
