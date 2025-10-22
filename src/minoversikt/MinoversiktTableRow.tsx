@@ -9,7 +9,7 @@ import {BrukerpanelKnapp} from '../components/tabell/brukerpanel-knapp';
 import {Etiketter} from '../components/tabell/etiketter';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {MinOversiktKolonner} from './minoversikt-kolonner';
+import {MinoversiktTableDataCells} from './MinoversiktTableDataCells';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
@@ -21,7 +21,7 @@ import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekate
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import './minoversikt.css';
 
-interface MinOversiktBrukerPanelProps {
+interface Props {
     bruker: BrukerModell;
     settMarkert: (fnr: string, markert: boolean) => void;
     enhetId: string;
@@ -31,7 +31,7 @@ interface MinOversiktBrukerPanelProps {
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function MinoversiktBrukerPanel({
+export function MinoversiktTableRow({
     bruker,
     settMarkert,
     enhetId,
@@ -39,7 +39,7 @@ export function MinoversiktBrukerPanel({
     valgteKolonner,
     varForrigeBruker,
     onClick
-}: MinOversiktBrukerPanelProps) {
+}: Props) {
     const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
     const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
 
@@ -108,7 +108,7 @@ export function MinoversiktBrukerPanel({
                         )
                     }
                 </div>
-                <MinOversiktKolonner
+                <MinoversiktTableDataCells
                     bruker={bruker}
                     enhetId={enhetId}
                     filtervalg={filtervalg}

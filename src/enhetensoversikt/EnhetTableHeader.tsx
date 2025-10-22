@@ -1,9 +1,7 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Kolonne} from '../ducks/ui/listevisning';
+import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
-import {OrNothing} from '../utils/types/types';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
 import {FodelandHeader} from '../components/tabell/headerCells/FodelandHeader';
@@ -45,7 +43,7 @@ import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCel
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
 import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
-import {Sorteringsfelt, Sorteringsrekkefolge} from '../typer/kolonnesortering';
+import {Sorteringsfelt} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
@@ -57,7 +55,9 @@ import {AapArenaYtelsestypeHeader} from '../components/tabell/headerCells/AapAre
 import {AapArenaVurderingsfristHeader} from '../components/tabell/headerCells/AapArenaVurderingsfristHeader';
 import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/AapArenaVedtaksperiodeHeader';
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
-import './enhetsportefolje.css';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 function harValgteAktiviteter(aktiviteter) {
@@ -70,127 +70,117 @@ function harValgteAktiviteter(aktiviteter) {
     return false;
 }
 
-interface EnhetListehodeProps {
-    sorteringsrekkefolge: OrNothing<Sorteringsrekkefolge>;
-    sorteringOnClick: (sortering: string) => void;
-    valgteKolonner: Kolonne[];
-    filtervalg: FiltervalgModell;
-    sorteringsfelt: OrNothing<Sorteringsfelt>;
-}
+export function EnhetTableHeader() {
+    const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
+        OversiktType.enhetensOversikt
+    );
+    const valgteKolonner = listevisning.valgte;
+    const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
 
-export function EnhetListehode({
-    sorteringsrekkefolge,
-    sorteringOnClick,
-    filtervalg,
-    sorteringsfelt,
-    valgteKolonner
-}: EnhetListehodeProps) {
     const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
-
     const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
-
     const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
 
-    const sorteringTilHeadercelle = {
+    const sorteringTilHeaderCell = {
         gjeldendeSorteringsfelt: sorteringsfelt,
         valgteKolonner: valgteKolonner,
         rekkefolge: sorteringsrekkefolge,
-        onClick: sorteringOnClick
+        onClick: settSorteringOgHentPortefolje
     };
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
-                <NavnHeader {...sorteringTilHeadercelle} />
-                <FnrHeader {...sorteringTilHeadercelle} />
+                <NavnHeader {...sorteringTilHeaderCell} />
+                <FnrHeader {...sorteringTilHeaderCell} />
 
-                <FodelandHeader {...sorteringTilHeadercelle} />
-                <StatsborgerskapHeader {...sorteringTilHeadercelle} />
-                <StatsborgerskapGyldigFraHeader {...sorteringTilHeadercelle} />
+                <FodelandHeader {...sorteringTilHeaderCell} />
+                <StatsborgerskapHeader {...sorteringTilHeaderCell} />
+                <StatsborgerskapGyldigFraHeader {...sorteringTilHeaderCell} />
 
-                <TolkebehovHeader {...sorteringTilHeadercelle} />
-                <TolkesprakHeader {...sorteringTilHeadercelle} />
-                <TolkebehovSistOppdatertHeader {...sorteringTilHeadercelle} />
+                <TolkebehovHeader {...sorteringTilHeaderCell} />
+                <TolkesprakHeader {...sorteringTilHeaderCell} />
+                <TolkebehovSistOppdatertHeader {...sorteringTilHeaderCell} />
 
-                <GeografiskBostedHeader {...sorteringTilHeadercelle} />
-                <GeografiskBostedDetaljerHeader {...sorteringTilHeadercelle} />
-                <GeografiskBostedSistOppdatertHeader {...sorteringTilHeadercelle} />
+                <GeografiskBostedHeader {...sorteringTilHeaderCell} />
+                <GeografiskBostedDetaljerHeader {...sorteringTilHeaderCell} />
+                <GeografiskBostedSistOppdatertHeader {...sorteringTilHeaderCell} />
 
-                <OppfolgingStartetHeader {...sorteringTilHeadercelle} />
+                <OppfolgingStartetHeader {...sorteringTilHeaderCell} />
 
-                <VeilederNavnHeader {...sorteringTilHeadercelle} />
-                <VeilederNavidentHeader {...sorteringTilHeadercelle} />
-                <TildeltTidspunktHeader {...sorteringTilHeadercelle} />
+                <VeilederNavnHeader {...sorteringTilHeaderCell} />
+                <VeilederNavidentHeader {...sorteringTilHeaderCell} />
+                <TildeltTidspunktHeader {...sorteringTilHeaderCell} />
 
-                <DagpengerArenaGjenstaendeUkerRettighetHeader {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+                <DagpengerArenaGjenstaendeUkerRettighetHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
-                <TiltakspengerArenaGjenstaendeUkerVedtakHeader {...sorteringTilHeadercelle} />
+                <TiltakspengerArenaGjenstaendeUkerVedtakHeader {...sorteringTilHeaderCell} />
 
-                <AapArenaYtelsestypeHeader {...sorteringTilHeadercelle} />
-                <AapArenaVurderingsfristHeader {...sorteringTilHeadercelle} />
-                <AapArenaVedtaksperiodeHeader {...sorteringTilHeadercelle} />
-                <AapArenaRettighetsperiodeHeader {...sorteringTilHeadercelle} filtervalg={filtervalg} />
+                <AapArenaYtelsestypeHeader {...sorteringTilHeaderCell} />
+                <AapArenaVurderingsfristHeader {...sorteringTilHeaderCell} />
+                <AapArenaVedtaksperiodeHeader {...sorteringTilHeaderCell} />
+                <AapArenaRettighetsperiodeHeader {...sorteringTilHeaderCell} filtervalg={filtervalg} />
 
-                <VenterPaSvarFraNavHeader {...sorteringTilHeadercelle} />
-                <VenterPaSvarFraBrukerHeader {...sorteringTilHeadercelle} />
+                <VenterPaSvarFraNavHeader {...sorteringTilHeaderCell} />
+                <VenterPaSvarFraBrukerHeader {...sorteringTilHeaderCell} />
 
-                <FilterhendelseLenkeHeader {...sorteringTilHeadercelle} />
-                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeadercelle} />
+                <FilterhendelseLenkeHeader {...sorteringTilHeaderCell} />
+                <FilterhendelseDatoOpprettetHeaderHeader {...sorteringTilHeaderCell} />
 
-                <TiltakshendelseLenkeHeader {...sorteringTilHeadercelle} />
-                <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeadercelle} />
+                <TiltakshendelseLenkeHeader {...sorteringTilHeaderCell} />
+                <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />
 
-                <UtlopteAktiviteterHeader {...sorteringTilHeadercelle} />
-                <AvtaltAktivitetHeader {...sorteringTilHeadercelle} />
+                <UtlopteAktiviteterHeader {...sorteringTilHeaderCell} />
+                <AvtaltAktivitetHeader {...sorteringTilHeaderCell} />
 
                 <SorteringHeader
                     skalVises={
-                        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
+                        sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
                         (avansertAktivitet || forenkletAktivitet || tiltaksType)
                     }
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
-                    erValgt={sorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    rekkefolge={sorteringsrekkefolge}
-                    onClick={sorteringOnClick}
+                    erValgt={sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
+                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
+                    onClick={sorteringTilHeaderCell.onClick}
                     tekst="Neste utløpsdato valgt aktivitet"
                     title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
                     className="col col-xs-2"
                 />
 
-                <MoterIDagHeader {...sorteringTilHeadercelle} />
-                <MoteVarighetHeader {...sorteringTilHeadercelle} />
-                <MotestatusHeader {...sorteringTilHeadercelle} />
+                <MoterIDagHeader {...sorteringTilHeaderCell} />
+                <MoteVarighetHeader {...sorteringTilHeaderCell} />
+                <MotestatusHeader {...sorteringTilHeaderCell} />
 
-                <Utkast14aVedtaksstatusHeader {...sorteringTilHeadercelle} />
-                <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeadercelle} />
-                <Utkast14aAnsvarligVeilederHeader {...sorteringTilHeadercelle} />
+                <Utkast14aVedtaksstatusHeader {...sorteringTilHeaderCell} />
+                <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeaderCell} />
+                <Utkast14aAnsvarligVeilederHeader {...sorteringTilHeaderCell} />
 
-                <SisteEndringHeader {...sorteringTilHeadercelle} />
-                <SisteEndringDatoHeader {...sorteringTilHeadercelle} />
+                <SisteEndringHeader {...sorteringTilHeaderCell} />
+                <SisteEndringDatoHeader {...sorteringTilHeaderCell} />
 
-                <SvarfristCvHeader {...sorteringTilHeadercelle} />
+                <SvarfristCvHeader {...sorteringTilHeaderCell} />
 
-                <Status14aVedtakHeader {...sorteringTilHeadercelle} />
+                <Status14aVedtakHeader {...sorteringTilHeaderCell} />
 
-                <GjeldendeVedtak14aInnsatsgruppeHeader {...sorteringTilHeadercelle} />
-                <GjeldendeVedtak14aHovedmalHeader {...sorteringTilHeadercelle} />
-                <GjeldendeVedtak14aVedtaksdatoHeader {...sorteringTilHeadercelle} />
+                <GjeldendeVedtak14aInnsatsgruppeHeader {...sorteringTilHeaderCell} />
+                <GjeldendeVedtak14aHovedmalHeader {...sorteringTilHeaderCell} />
+                <GjeldendeVedtak14aVedtaksdatoHeader {...sorteringTilHeaderCell} />
 
-                <EnsligeForsorgereUtlopOvergangsstonadHeader {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereVedtaksperiodeHeader {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereAktivitetspliktHeader {...sorteringTilHeadercelle} />
-                <EnsligeForsorgereOmBarnetHeader {...sorteringTilHeadercelle} />
+                <EnsligeForsorgereUtlopOvergangsstonadHeader {...sorteringTilHeaderCell} />
+                <EnsligeForsorgereVedtaksperiodeHeader {...sorteringTilHeaderCell} />
+                <EnsligeForsorgereAktivitetspliktHeader {...sorteringTilHeaderCell} />
+                <EnsligeForsorgereOmBarnetHeader {...sorteringTilHeaderCell} />
 
-                <BarnUnder18AarHeader {...sorteringTilHeadercelle} />
+                <BarnUnder18AarHeader {...sorteringTilHeaderCell} />
 
-                <UtdanningOgSituasjonSistEndretHeader {...sorteringTilHeadercelle} />
+                <UtdanningOgSituasjonSistEndretHeader {...sorteringTilHeaderCell} />
 
-                <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeadercelle} />
-                <AapKelvinRettighetHeader {...sorteringTilHeadercelle} />
+                <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
+                <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
 
-                <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeadercelle} />
-                <TiltakspengerRettighetHeader {...sorteringTilHeadercelle} />
+                <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
+                <TiltakspengerRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

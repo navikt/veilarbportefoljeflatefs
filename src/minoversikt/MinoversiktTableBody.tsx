@@ -1,47 +1,47 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {EnhetBrukerpanel} from './enhet-brukerpanel';
+import {MinoversiktTableRow} from './MinoversiktTableRow';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
-import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
+import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
+import {useOnUnmount} from '../hooks/use-on-unmount';
+import {updateLastPath} from '../utils/url-utils';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
+import {AppState} from '../reducer';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
-import './enhetsportefolje.css';
-import './brukerliste.css';
+import './minoversikt.css';
 
-interface EnhetTabellProps {
+interface Props {
     classNameWrapper: string;
 }
 
-export function EnhetTabell({classNameWrapper}: EnhetTabellProps) {
+export function MinoversiktTableBody({classNameWrapper}: Props) {
     const forrigeBruker = useBrukerIKontekstSelector();
-    const {brukere, filtervalg, enhetId, listevisning, portefolje} = usePortefoljeSelector(
-        OversiktType.enhetensOversikt
-    );
-    const veiledere = useSelector((state: AppState) => state.veiledere);
-
+    const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
+    const portefolje = useSelector((state: AppState) => state.portefolje);
     const dispatch = useDispatch();
-
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
-
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 
+    useOnUnmount(() => {
+        updateLastPath();
+    });
+
     return (
-        <Innholdslaster avhengigheter={[portefolje, veiledere, {status: tilordningerStatus}]}>
+        <Innholdslaster avhengigheter={[portefolje, {status: tilordningerStatus}]}>
             <div className={classNameWrapper}>
-                <div className="enhet-tabell">
-                    <ul className="brukerliste">
+                <div className="minoversikt-liste__wrapper">
+                    <ul className="brukerliste" data-testid="brukerliste">
                         {enhetId &&
                             brukere.map(bruker => (
-                                <EnhetBrukerpanel
+                                <MinoversiktTableRow
                                     key={bruker.fnr || bruker.guid}
                                     bruker={bruker}
                                     enhetId={enhetId}
                                     settMarkert={settMarkert}
+                                    varForrigeBruker={forrigeBruker === bruker.fnr}
                                     filtervalg={filtervalg}
                                     valgteKolonner={listevisning.valgte}
-                                    forrigeBruker={forrigeBruker}
                                 />
                             ))}
                     </ul>

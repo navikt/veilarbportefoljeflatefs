@@ -1,8 +1,8 @@
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Label} from '@navikt/ds-react';
-import {tekstValgteBrukere} from '../utils/tekst-utils';
-import {AppState} from '../reducer';
+import {tekstValgteBrukere} from '../../utils/tekst-utils';
+import {AppState} from '../../reducer';
 import './tabell-overskrift.css';
 
 interface Props {

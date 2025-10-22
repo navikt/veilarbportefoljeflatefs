@@ -7,14 +7,13 @@ import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
-import {MinoversiktTabell} from './minoversikt-portefolje-tabell';
-import {MinoversiktTabellOverskrift} from './minoversikt-portefolje-tabelloverskrift';
-import {TabellOverskrift} from '../components/tabell-overskrift';
+import {MinoversiktTableBody} from './MinoversiktTableBody';
+import {MinoversiktTableHeader} from './MinoversiktTableHeader';
+import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
-import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
@@ -26,9 +25,9 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {pagineringSetup} from '../ducks/paginering';
 import {endreFiltervalg} from '../ducks/filtrering';
 import {Sidebar} from '../components/sidebar/sidebar';
-import {MinOversiktWrapper} from './minoversikt_wrapper';
+import {MinoversiktSideInnholdswrapper} from './MinoversiktSideInnholdswrapper';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
-import {MineFilterLagreFilterKnapp} from './mine-filter-lagre-filter-knapp';
+import {MineFilterLagreFilterKnapp} from './MineFilterLagreFilterKnapp';
 import {useWindowWidth} from '../hooks/use-window-width';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {FiltreringNavnellerfnr} from '../filtrering/filtrering-navnellerfnr';
@@ -44,7 +43,7 @@ import {StatustallVeilederState} from '../ducks/statustall/statustall-veileder';
 import {StatustallVeileder} from '../ducks/statustall/statustall-typer';
 import '../style.css';
 import './minoversikt.css';
-import './../components/tabell-overskrift.css';
+import '../components/tabell/tabell-overskrift.css';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -56,7 +55,6 @@ export function MinoversiktSide() {
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
-    const settSorteringogHentPortefolje = useSetPortefoljeSortering(oversiktType);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -116,7 +114,7 @@ export function MinoversiktSide() {
             <ToppMeny erPaloggetVeileder={!visesAnnenVeiledersPortefolje} oversiktType={oversiktType} />
             <Informasjonsmeldinger />
             <Innholdslaster avhengigheter={[statustallFetchStatus]}>
-                <MinOversiktWrapper
+                <MinoversiktSideInnholdswrapper
                     className={classNames(
                         'oversikt-sideinnhold portefolje-side',
                         isSidebarHidden && 'oversikt-sideinnhold__hidden',
@@ -188,15 +186,13 @@ export function MinoversiktSide() {
                                 scrolling={scrolling}
                                 isSidebarHidden={isSidebarHidden}
                             />
-                            <MinoversiktTabellOverskrift
-                                settSorteringOgHentPortefolje={settSorteringogHentPortefolje}
-                            />
+                            <MinoversiktTableHeader />
                         </div>
 
-                        <MinoversiktTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
+                        <MinoversiktTableBody classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         <MinOversiktModalController />
                     </div>
-                </MinOversiktWrapper>
+                </MinoversiktSideInnholdswrapper>
             </Innholdslaster>
             <MineFilterModal oversiktType={oversiktType} />
             <FeilTiltakModal

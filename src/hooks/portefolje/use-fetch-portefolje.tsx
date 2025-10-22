@@ -5,7 +5,7 @@ import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
-import {antallFilter} from '../../enhetsportefolje/enhet-side';
+import {antallFilter} from '../../enhetensoversikt/EnhetSide';
 import {AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';

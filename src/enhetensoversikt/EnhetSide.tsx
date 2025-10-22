@@ -3,10 +3,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {TabellOverskrift} from '../components/tabell-overskrift';
+import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
-import {EnhetTabell} from './enhetsportefolje-tabell';
-import {EnhetTabellOverskrift} from './enhetsportefolje-tabelloverskrift';
+import {EnhetTableBody} from './EnhetTableBody';
+import {EnhetTableHeader} from './EnhetTableHeader';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
@@ -24,7 +24,7 @@ import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
 import {Sidebar} from '../components/sidebar/sidebar';
-import {MineFilterLagreFilterKnapp} from '../minoversikt/mine-filter-lagre-filter-knapp';
+import {MineFilterLagreFilterKnapp} from '../minoversikt/MineFilterLagreFilterKnapp';
 import {MineFilterModal} from '../components/modal/mine-filter/mine-filter-modal';
 import {useWindowWidth} from '../hooks/use-window-width';
 import {Toolbar} from '../components/toolbar/toolbar';
@@ -38,7 +38,7 @@ import {StatustallEnhetState} from '../ducks/statustall/statustall-enhet';
 import {StatustallEnhet} from '../ducks/statustall/statustall-typer';
 import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import '../style.css';
-import './enhetsportefolje.css';
+import './enhetensoversikt.css';
 import './brukerliste.css';
 
 export function antallFilter(filtervalg) {
@@ -201,9 +201,9 @@ export function EnhetSide() {
                                     scrolling={scrolling}
                                     isSidebarHidden={isSidebarHidden}
                                 />
-                                <EnhetTabellOverskrift />
+                                <EnhetTableHeader />
                             </div>
-                            <EnhetTabell classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
+                            <EnhetTableBody classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
                         <Alert

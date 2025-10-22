@@ -1,7 +1,7 @@
 import 'moment/locale/nb';
 import {Route, Routes} from 'react-router-dom';
-import {MinoversiktSide} from './minoversikt/minoversikt-side';
-import {EnhetSide} from './enhetsportefolje/enhet-side';
+import {MinoversiktSide} from './minoversikt/MinoversiktSide';
+import {EnhetSide} from './enhetensoversikt/EnhetSide';
 import {VeilederoversiktSide} from './veilederoversikt/veilederoversikt-side';
 import {useFetchPortefoljeData} from './hooks/portefolje/use-fetch-portefolje-data';
 import {Innholdslaster} from './innholdslaster/innholdslaster';
