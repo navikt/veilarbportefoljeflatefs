@@ -9,7 +9,7 @@ import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {MinOversiktModalController} from '../components/modal/modal-min-oversikt-controller';
 import {MinoversiktTabell} from './minoversikt-portefolje-tabell';
 import {MinOversiktTableHeader} from './MinOversiktTableHeader';
-import {TabellOverskrift} from '../components/tabell-overskrift';
+import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
@@ -43,7 +43,7 @@ import {StatustallVeilederState} from '../ducks/statustall/statustall-veileder';
 import {StatustallVeileder} from '../ducks/statustall/statustall-typer';
 import '../style.css';
 import './minoversikt.css';
-import './../components/tabell-overskrift.css';
+import '../components/tabell/tabell-overskrift.css';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';

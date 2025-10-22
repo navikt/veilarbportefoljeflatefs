@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {TabellOverskrift} from '../components/tabell-overskrift';
+import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
 import {EnhetTabell} from './enhetsportefolje-tabell';
 import {EnhetTableHeader} from './EnhetTableHeader';
