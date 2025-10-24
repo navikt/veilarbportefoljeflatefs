@@ -51,9 +51,9 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     const hjelpeTekst = oversiktType => {
         switch (oversiktType) {
             case OversiktType.minOversikt:
-                return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
+                return 'Filter som inneholder Veiledergrupper eller Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
             case OversiktType.enhetensOversikt:
-                return 'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.';
+                return 'Filter som inneholder Huskelapper, Kategorier eller Nye brukere er ikke tilgjengelig i Enhetens oversikt.';
             default:
                 return ' ';
         }
