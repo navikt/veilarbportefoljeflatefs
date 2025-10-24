@@ -1,11 +1,10 @@
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from './bruker-modell';
-import {KategoriModell} from './arbeidsliste';
 import {
     AAPFilterArena,
     AAPFilterKelvin,
     AktiviteterFilternokler,
-    TiltakspengerFilterArena,
-    TiltakspengerFilter
+    TiltakspengerFilter,
+    TiltakspengerFilterArena
 } from '../filtrering/filter-konstanter';
 
 /**
@@ -22,7 +21,6 @@ export interface FiltervalgModell {
     inaktiveBrukere?: boolean; // Dette filteret finst berre her
     venterPaSvarFraNAV?: boolean; // Dette filteret finst berre her
     venterPaSvarFraBruker?: boolean; // Dette filteret finst berre her
-    arbeidslisteKategori: KategoriModell[];
     alder?: string[];
     kjonn?: null | string;
     landgruppe: string[];

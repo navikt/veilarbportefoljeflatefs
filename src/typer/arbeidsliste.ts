@@ -7,17 +7,3 @@ export enum KategoriModell {
     GRONN = 'GRONN',
     GUL = 'GUL'
 }
-
-/* Denne modellen finst framleis fordi vi framleis får Arbeidslister på brukermodellen frå OpenSearch. 2025-05-19, Ingrid. */
-export interface ArbeidslisteModell {
-    kommentar?: string;
-    overskrift?: string;
-    frist: string;
-    arbeidslisteAktiv: boolean;
-    endringstidspunkt: string; // dato
-    isOppfolgendeVeileder: boolean;
-    sistEndretAv: {veilederId: string};
-    kategori: KategoriModell;
-    hentetKommentarOgTittel: boolean;
-    navkontorForArbeidsliste?: string;
-}

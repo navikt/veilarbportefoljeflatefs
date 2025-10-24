@@ -102,20 +102,6 @@ export const ferdigfilterListeLabelTekst = {
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
 
-export const arbeidslisteKategori = {
-    BLA: 'Blå',
-    LILLA: 'Lilla',
-    GRONN: 'Grønn',
-    GUL: 'Gul'
-};
-
-export const arbeidslisteKategoriGammel = {
-    BLA: 'Blå (med arbeidsliste)',
-    LILLA: 'Lilla (med arbeidsliste)',
-    GRONN: 'Grønn (med arbeidsliste)',
-    GUL: 'Gul (med arbeidsliste)'
-};
-
 export const fargekategorier = Fargekategorinavn;
 
 export const alder = {
@@ -514,8 +500,6 @@ export const filterKonstanter = {
     aktiviteter,
     manuellBrukerStatus,
     registreringstype,
-    arbeidslisteKategori,
-    arbeidslisteKategoriGammel,
     cvJobbprofil,
     utdanning,
     utdanningBestatt,

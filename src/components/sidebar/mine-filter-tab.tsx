@@ -41,14 +41,13 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
         const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
 
         const veiledergrupper = elem.filterValg.veiledere.length > 0;
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes('UFORDELTE_BRUKERE');
 
         return !(
-            (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
+            (erPaEnhetensOversikt && (arbeidsliste || nyeBrukere)) ||
             (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
         );
     };
