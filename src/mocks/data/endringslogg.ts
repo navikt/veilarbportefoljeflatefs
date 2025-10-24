@@ -681,7 +681,7 @@ export const endringsloggListe = [
         apiHost: 'https://cdn.sanity.io'
     },
     {
-        title: ' Justering av arbeidslisteikoner',
+        title: ' Justering av kategori-ikoner',
         description: [
             {
                 _key: 'c1fc8c0577bf',
@@ -691,7 +691,7 @@ export const endringsloggListe = [
                         _key: '01da3facd137',
                         _type: 'span',
                         marks: [],
-                        text: 'Det er gjort justeringer av farge og form på arbeidslisteikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
+                        text: 'Det er gjort justeringer av farge og form på kategori-ikoner for å gi mer universell utforming, og gjøre det lettere å skille fargene fra hverandre.'
                     }
                 ],
                 markDefs: [],

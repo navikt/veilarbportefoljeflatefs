@@ -75,15 +75,11 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
     function handleRadioButtonChange(e: ChangeEvent<HTMLInputElement>) {
         const nyeFerdigfilterListe = leggTilFerdigFilter(ferdigfilterListe!, e.target.value);
         dispatchFiltreringStatusChanged(nyeFerdigfilterListe);
-        if (e.target.value !== 'MIN_ARBEIDSLISTE') {
-            dispatch(endreFiltervalg('arbeidslisteKategori', [], oversiktType));
-        }
         oppdaterKolonneAlternativer(
             dispatch,
             {
                 ...filtervalg,
-                ferdigfilterListe: nyeFerdigfilterListe,
-                arbeidslisteKategori: e.target.value !== 'MIN_ARBEIDSLISTE' ? [] : filtervalg.arbeidslisteKategori
+                ferdigfilterListe: nyeFerdigfilterListe
             },
             oversiktType
         );

@@ -64,7 +64,7 @@ export function MinoversiktTableRow({
     function handleBrukerpanelKnappClick(event) {
         event.preventDefault();
         setBrukerpanelApent(!brukerpanelApent);
-        logEvent('portefolje.metrikker.ekspander-arbeidsliste', {apen: !brukerpanelApent});
+        logEvent('portefolje.metrikker.ekspander-brukerpanel', {apen: !brukerpanelApent});
         if (onClick) {
             onClick(event);
         }

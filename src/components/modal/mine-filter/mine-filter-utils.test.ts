@@ -45,7 +45,6 @@ describe('Mine filter utils', () => {
 
             const ingenValgteFilterAlfabetiskRekkefolge: FiltervalgModell = {
                 alder: [],
-                arbeidslisteKategori: [],
                 aktiviteter: ingenValgteAktiviteter,
                 aktiviteterForenklet: [],
                 avvik14aVedtak: [],

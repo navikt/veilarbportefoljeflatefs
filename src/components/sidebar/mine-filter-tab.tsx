@@ -40,25 +40,20 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
     const fjernUtilgjengeligeFilter = (elem: LagretFilter) => {
-        const arbeidsliste = elem.filterValg.ferdigfilterListe.includes('MIN_ARBEIDSLISTE');
-        const arbeidslisteKategori = elem.filterValg.arbeidslisteKategori.length > 0;
         const nyeBrukere = elem.filterValg.ferdigfilterListe.includes('NYE_BRUKERE_FOR_VEILEDER');
 
         const veiledergrupper = elem.filterValg.veiledere.length > 0;
         const ufordelteBrukere = elem.filterValg.ferdigfilterListe.includes('UFORDELTE_BRUKERE');
 
-        return !(
-            (erPaEnhetensOversikt && (arbeidsliste || arbeidslisteKategori || nyeBrukere)) ||
-            (erPaMinOversikt && (veiledergrupper || ufordelteBrukere))
-        );
+        return !((erPaEnhetensOversikt && nyeBrukere) || (erPaMinOversikt && (veiledergrupper || ufordelteBrukere)));
     };
 
     const hjelpeTekst = oversiktType => {
         switch (oversiktType) {
             case OversiktType.minOversikt:
-                return 'Filter som inneholder Veiledergrupper og Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
+                return 'Filter som inneholder Veiledergrupper eller Ufordelte brukere er ikke tilgjengelig i Min oversikt.';
             case OversiktType.enhetensOversikt:
-                return 'Filter som inneholder Arbeidslisten og Nye brukere er ikke tilgjengelig i Enhetens oversikt.';
+                return 'Filter som inneholder Huskelapper, Kategorier eller Nye brukere er ikke tilgjengelig i Enhetens oversikt.';
             default:
                 return ' ';
         }

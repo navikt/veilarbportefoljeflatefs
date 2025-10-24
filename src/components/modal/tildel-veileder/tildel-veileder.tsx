@@ -130,8 +130,8 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
             if (brukereMedTingSomVilBliSlettetVedTildeling.length > 0) {
                 trackAmplitude(
-                    {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av arbeidsliste'}},
-                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+                    {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av ting ved tildeling av veileder'}},
+                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
                 );
                 setVisAdvarselOmSletting(true);
             } else {
@@ -153,7 +153,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                         effekt: 'Avbryter tildeling'
                     }
                 },
-                {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+                {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
             );
             doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
         }
@@ -169,7 +169,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
                     effekt: 'Fortsetter tildeling'
                 }
             },
-            {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvArbeidsliste'}
+            {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
         );
         doTildelTilVeileder(tilordningerAlleBrukere, ident);
         lukkFjernModal();

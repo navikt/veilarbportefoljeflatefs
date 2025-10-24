@@ -24,7 +24,6 @@ export const FARGEKATEGORIER_UNDERFILTER_KLIKK = 'filtrering/FARGEKATEGORIER_UND
 //  Reducer
 export const initialState: FiltervalgModell = {
     ferdigfilterListe: [],
-    arbeidslisteKategori: [],
     alder: [],
     kjonn: null,
     landgruppe: [],

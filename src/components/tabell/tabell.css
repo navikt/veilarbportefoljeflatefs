@@ -23,12 +23,6 @@
     margin-left: var(--a-spacing-1);
 }
 
-.veilarbportefoljeflatefs .tomt-arbeidslisteikon {
-    width: calc(19 / 16 * 1rem); /* 19px */
-    height: calc(19 / 16 * 1rem);
-    display: block;
-}
-
 .veilarbportefoljeflatefs .fnr-kolonne {
     display: flex;
     align-items: center;
