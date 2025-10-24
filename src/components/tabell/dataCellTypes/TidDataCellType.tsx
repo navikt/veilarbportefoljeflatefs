@@ -23,7 +23,7 @@ export function TidDataCellType({tidSomMinutter, skalVises, className}: Props) {
     };
 
     const timer = (duration: Duration): string => {
-        const timer = duration.get('minutes');
+        const timer = duration.get('hours');
 
         if (timer < 10) {
             return '0' + timer.toString();
