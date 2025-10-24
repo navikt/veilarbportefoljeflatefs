@@ -12,10 +12,6 @@ import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
 
 const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
-    filterMedArbeidsliste: {
-        tekst: 'Du har filter med gammel arbeidsliste',
-        variant: 'warning'
-    },
     harInaktiveFilter: {
         tekst: '[Navn på lagret filter] er slettet fordi filteret [filterverdi] er fjernet',
         variant: 'info'

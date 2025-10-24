@@ -39,15 +39,3 @@
     display: flex;
     justify-content: space-between;
 }
-.veilarbportefoljeflatefs .mine-filter_alertstripe.filter-med-arbeidsliste-alert h3.filter-med-arbeidsliste-heading {
-    font-size: 1rem;
-}
-
-.veilarbportefoljeflatefs .mine-filter_alertstripe.filter-med-arbeidsliste-alert h4.filter-med-arbeidsliste-heading {
-    font-size: 0.875rem;
-    font-weight: normal;
-}
-.veilarbportefoljeflatefs .mine-filter_alertstripe.filter-med-arbeidsliste-alert .filter-med-arbeidsliste-list * {
-    margin-top: 0;
-    margin-bottom: 0;
-}
