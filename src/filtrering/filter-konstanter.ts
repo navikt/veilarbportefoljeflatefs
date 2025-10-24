@@ -26,7 +26,6 @@ export const UTGATTE_VARSEL = 'UTGATTE_VARSEL';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
-export const MIN_ARBEIDSLISTE = 'MIN_ARBEIDSLISTE';
 export const UTLOP_YTELSE = 'UTLOP_YTELSE';
 export const YTELSE_ARENA_DAGPENGER = 'DAGPENGER';
 export const YTELSE_ARENA_DAGPENGER_ORDINARE = 'ORDINARE_DAGPENGER';
@@ -97,7 +96,6 @@ export const ferdigfilterListeLabelTekst = {
     [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
     [INAKTIVE_BRUKERE]: 'Ikke servicebehov',
-    [MIN_ARBEIDSLISTE]: 'Min arbeidsliste',
     [MINE_HUSKELAPPER]: 'Huskelapper',
     [MINE_FARGEKATEGORIER]: 'Kategorier'
 };
