@@ -33,17 +33,17 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
     type Arenaytelsesfilter = Filtervalg.ytelse | Filtervalg.ytelseAapArena | Filtervalg.ytelseTiltakspengerArena;
 
     const valgtFiltervalg = () => {
-        if (filtervalg[Filtervalg.ytelse] != null) {
-            return filtervalg[Filtervalg.ytelse];
+        if (filtervalg.ytelse != null) {
+            return filtervalg.ytelse;
         }
-        if (filtervalg[Filtervalg.ytelseAapArena].length === 1) {
-            return filtervalg[Filtervalg.ytelseAapArena][0];
+        if (filtervalg.ytelseAapArena.length === 1) {
+            return filtervalg.ytelseAapArena[0];
         }
-        if (filtervalg[Filtervalg.ytelseAapArena].length === 2) {
+        if (filtervalg.ytelseAapArena.length === 2) {
             return AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK;
         }
-        if (filtervalg[Filtervalg.ytelseTiltakspengerArena].length === 1) {
-            return filtervalg[Filtervalg.ytelseAapArena][0];
+        if (filtervalg.ytelseTiltakspengerArena.length === 1) {
+            return filtervalg.ytelseAapArena[0];
         }
         return '';
     };

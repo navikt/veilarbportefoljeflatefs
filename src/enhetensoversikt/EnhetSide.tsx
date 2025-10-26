@@ -89,7 +89,7 @@ export function EnhetSide() {
             dispatch(slettEnkeltFilter(Filtervalg.veiledere, ident, OversiktType.enhetensOversikt));
             const oppdatertFiltervalg = {
                 ...filtervalg,
-                veiledere: fjern(Filtervalg.veiledere, filtervalg[Filtervalg.veiledere], ident)
+                veiledere: fjern(Filtervalg.veiledere, filtervalg.veiledere, ident)
             };
             oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, oversiktType);
         },
