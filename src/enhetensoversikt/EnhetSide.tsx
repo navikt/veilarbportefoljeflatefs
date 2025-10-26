@@ -40,6 +40,7 @@ import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -85,8 +86,11 @@ export function EnhetSide() {
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const slettVeilederFilter = useCallback(
         ident => {
-            dispatch(slettEnkeltFilter('veiledere', ident, OversiktType.enhetensOversikt));
-            const oppdatertFiltervalg = {...filtervalg, veiledere: fjern('veiledere', filtervalg['veiledere'], ident)};
+            dispatch(slettEnkeltFilter(Filtervalg.veiledere, ident, OversiktType.enhetensOversikt));
+            const oppdatertFiltervalg = {
+                ...filtervalg,
+                veiledere: fjern(Filtervalg.veiledere, filtervalg[Filtervalg.veiledere], ident)
+            };
             oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, oversiktType);
         },
         [dispatch, filtervalg]

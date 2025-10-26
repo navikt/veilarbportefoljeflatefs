@@ -15,7 +15,8 @@ export enum Filtervalg {
     foedeland = 'foedeland',
     fodselsdagIMnd = 'fodselsdagIMnd',
     formidlingsgruppe = 'formidlingsgruppe',
-    servicegruppe = 'servicegruppe'
+    servicegruppe = 'servicegruppe',
+    veiledere = 'veiledere'
 }
 
 /**
@@ -40,7 +41,7 @@ export interface FiltervalgModell {
     innsatsgruppe?: string[]; // Arena-innsatsgruppe // Er dette filteret i bruk meir? Eg ser det ikkje i frontenden. Det pleidde bu saman med Status og brukergrupper. Ingrid, 2025-10-26
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
-    veiledere: string[];
+    [Filtervalg.veiledere]: string[];
     ytelse: null | string;
     aktiviteter?: AktiviteterFilternokler;
     aktiviteterForenklet: string[];

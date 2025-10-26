@@ -47,7 +47,7 @@ export const filtermalinger = (fields: FilterFields) => {
             });
             break;
         case 'navnEllerFnrQuery':
-        case 'veiledere':
+        case Filtervalg.veiledere:
             break;
         default:
             trackAmplitude({
