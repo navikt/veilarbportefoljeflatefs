@@ -25,6 +25,20 @@ export enum Filtervalg {
     rettighetsgruppe = 'rettighetsgruppe',
     manuellBrukerStatus = 'manuellBrukerStatus',
     veilederNavnQuery = 'veilederNavnQuery',
+    registreringstype = 'registreringstype',
+    cvJobbprofil = 'cvJobbprofil',
+    utdanning = 'utdanning',
+    utdanningGodkjent = 'utdanningGodkjent',
+    utdanningBestatt = 'utdanningBestatt',
+    sisteEndringKategori = 'sisteEndringKategori',
+    ulesteEndringer = 'ulesteEndringer',
+    tolkebehov = 'tolkebehov',
+    tolkBehovSpraak = 'tolkBehovSpraak',
+    stillingFraNavFilter = 'stillingFraNavFilter',
+    geografiskBosted = 'geografiskBosted',
+    visGeografiskBosted = 'visGeografiskBosted',
+    avvik14aVedtak = 'avvik14aVedtak',
+    ensligeForsorgere = 'ensligeForsorgere',
 
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
@@ -64,20 +78,20 @@ export interface FiltervalgModell {
     [Filtervalg.rettighetsgruppe]?: string[];
     [Filtervalg.manuellBrukerStatus]?: string[];
     [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
-    registreringstype: string[];
-    cvJobbprofil: null | string;
-    utdanning: string[];
-    utdanningGodkjent: string[];
-    utdanningBestatt: string[];
-    sisteEndringKategori: string[];
-    ulesteEndringer: null | string;
-    tolkebehov: string[];
-    tolkBehovSpraak: string[];
-    stillingFraNavFilter: string[];
-    geografiskBosted: string[];
-    visGeografiskBosted: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
-    avvik14aVedtak: string[];
-    ensligeForsorgere: string[];
+    [Filtervalg.registreringstype]: string[];
+    [Filtervalg.cvJobbprofil]: null | string;
+    [Filtervalg.utdanning]: string[];
+    [Filtervalg.utdanningGodkjent]: string[];
+    [Filtervalg.utdanningBestatt]: string[];
+    [Filtervalg.sisteEndringKategori]: string[];
+    [Filtervalg.ulesteEndringer]: null | string;
+    [Filtervalg.tolkebehov]: string[];
+    [Filtervalg.tolkBehovSpraak]: string[];
+    [Filtervalg.stillingFraNavFilter]: string[];
+    [Filtervalg.geografiskBosted]: string[];
+    [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.avvik14aVedtak]: string[];
+    [Filtervalg.ensligeForsorgere]: string[];
     barnUnder18Aar: string[];
     barnUnder18AarAlder: string[];
     fargekategorier: FargekategoriModell[];

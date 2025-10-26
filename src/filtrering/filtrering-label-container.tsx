@@ -55,7 +55,7 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'utdanningBestatt') {
+            if (key === Filtervalg.utdanningBestatt) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -65,7 +65,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'utdanningGodkjent') {
+            } else if (key === Filtervalg.utdanningGodkjent) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -75,7 +75,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'utdanning') {
+            } else if (key === Filtervalg.utdanning) {
                 return value.map(singleValue => {
                     if (singleValue === 'INGEN_DATA') {
                         return (
@@ -94,7 +94,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'registreringstype') {
+            } else if (key === Filtervalg.registreringstype) {
                 return value.map(singleValue => {
                     if (singleValue === 'INGEN_DATA') {
                         return (
@@ -113,7 +113,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'sisteEndringKategori') {
+            } else if (key === Filtervalg.sisteEndringKategori) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -165,7 +165,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ulesteEndringer' && value === 'ULESTE_ENDRINGER') {
+            } else if (key === Filtervalg.ulesteEndringer && value === 'ULESTE_ENDRINGER') {
                 return [
                     <FiltreringLabel
                         key={key}
@@ -173,7 +173,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
-            } else if (key === 'visGeografiskBosted' && value.length > 0) {
+            } else if (key === Filtervalg.visGeografiskBosted && value.length > 0) {
                 return [
                     <FiltreringLabel
                         key={`visGeografiskBosted-1`}
@@ -181,7 +181,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, '1')}
                     />
                 ];
-            } else if (key === 'geografiskBosted' && value.length > 0) {
+            } else if (key === Filtervalg.geografiskBosted && value.length > 0) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -217,7 +217,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'tolkBehovSpraak') {
+            } else if (key === Filtervalg.tolkBehovSpraak) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -252,7 +252,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'avvik14aVedtak') {
+            } else if (key === Filtervalg.avvik14aVedtak) {
                 return value.map(singleValue => {
                     if (singleValue === HAR_AVVIK) {
                         return null;

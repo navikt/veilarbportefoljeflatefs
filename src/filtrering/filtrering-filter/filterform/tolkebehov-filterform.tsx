@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {tolkebehov} from '../../filter-konstanter';
 import {TolkebehovSpraakOptions} from '../../../ducks/tolkebehov';
@@ -41,7 +41,7 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
         setSelectedTolkbehovSpraak(data);
 
         endreFiltervalg(
-            'tolkBehovSpraak',
+            Filtervalg.tolkBehovSpraak,
             data.map(x => x.value)
         );
     };
@@ -69,11 +69,11 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
     };
 
     const nullstillBehovValg = () => {
-        endreFiltervalg('tolkebehov', []);
+        endreFiltervalg(Filtervalg.tolkebehov, []);
     };
 
     const nullstillSpraakValg = () => {
-        endreFiltervalg('tolkBehovSpraak', []);
+        endreFiltervalg(Filtervalg.tolkBehovSpraak, []);
     };
 
     return (
@@ -85,7 +85,7 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
                             <CheckboxGroup
                                 hideLegend
                                 legend=""
-                                onChange={(filtre: string[]) => endreFiltervalg('tolkebehov', filtre)}
+                                onChange={(filtre: string[]) => endreFiltervalg(Filtervalg.tolkebehov, filtre)}
                                 size="small"
                                 value={tolkebehovValg}
                             >

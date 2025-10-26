@@ -202,7 +202,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="sisteEndringKategori"
                     render={() => (
                         <HendelserFilterform
-                            form="sisteEndringKategori"
+                            form={Filtervalg.sisteEndringKategori}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             endreCheckboxFiltervalg={endreFiltervalg}
@@ -223,7 +223,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="registreringstype"
+                                form={Filtervalg.registreringstype}
                                 valg={registreringstype}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -242,7 +242,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanning"
+                                form={Filtervalg.utdanning}
                                 valg={utdanning}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -260,7 +260,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanningGodkjent"
+                                form={Filtervalg.utdanningGodkjent}
                                 valg={utdanningGodkjent}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -278,7 +278,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 f.eks. sykmeldte.
                             </Alert>
                             <CheckboxFilterform
-                                form="utdanningBestatt"
+                                form={Filtervalg.utdanningBestatt}
                                 valg={utdanningBestatt}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -343,7 +343,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 </Link>
                             </Alert>
                             <CheckboxFilterform
-                                form="avvik14aVedtak"
+                                form={Filtervalg.avvik14aVedtak}
                                 valg={avvik14aVedtakValg()}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreAvvik14aVedtakFilterValg()}
@@ -362,7 +362,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             valg={cvJobbprofil}
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
-                            form="cvJobbprofil"
+                            form={Filtervalg.cvJobbprofil}
                         />
                     )}
                 />
@@ -448,7 +448,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="ensligeForsorgere"
                     render={() => (
                         <CheckboxFilterform
-                            form="ensligeForsorgere"
+                            form={Filtervalg.ensligeForsorgere}
                             valg={ensligeForsorgere}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -496,7 +496,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="stillingFraNav"
                     render={() => (
                         <CheckboxFilterform
-                            form="stillingFraNavFilter"
+                            form={Filtervalg.stillingFraNavFilter}
                             valg={stillingFraNavFilter}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}

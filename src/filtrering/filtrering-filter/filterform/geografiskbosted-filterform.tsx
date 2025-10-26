@@ -46,7 +46,7 @@ export function GeografiskBostedFilterform({
 
     const velgGeografiskBosted = data => {
         endreFiltervalg(
-            'geografiskBosted',
+            Filtervalg.geografiskBosted,
             data.map(x => x.value)
         );
     };
@@ -63,8 +63,8 @@ export function GeografiskBostedFilterform({
     }, [geografiskbostedListData]);
 
     const nullstillValg = () => {
-        endreFiltervalg('geografiskBosted', []);
-        endreFiltervalg('visGeografiskBosted', []);
+        endreFiltervalg(Filtervalg.geografiskBosted, []);
+        endreFiltervalg(Filtervalg.visGeografiskBosted, []);
     };
 
     return (
@@ -75,7 +75,7 @@ export function GeografiskBostedFilterform({
                         hideLegend
                         legend=""
                         onChange={(filtre: string[]) => {
-                            endreFiltervalg('visGeografiskBosted', filtre);
+                            endreFiltervalg(Filtervalg.visGeografiskBosted, filtre);
                         }}
                         size="small"
                         value={visGeografiskBosted}

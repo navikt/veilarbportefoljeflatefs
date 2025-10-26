@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
 import {kebabCase} from '../../../utils/utils';
 import {OversiktType} from '../../../ducks/ui/listevisning';
@@ -28,7 +28,7 @@ export function HendelserFilterform({
 
     const nullstillValg = () => {
         endreFiltervalg(form, []);
-        endreCheckboxFiltervalg('ulesteEndringer', null);
+        endreCheckboxFiltervalg(Filtervalg.ulesteEndringer, null);
     };
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export function HendelserFilterform({
     }, [filtervalg, hendelserValg, form]);
 
     useEffect(() => {
-        setCheckboxValg(filtervalg['ulesteEndringer']);
+        setCheckboxValg(filtervalg.ulesteEndringer);
     }, [filtervalg]);
 
     const onRadioChange = e => {
@@ -51,8 +51,8 @@ export function HendelserFilterform({
     const onCheckboxChange = e => {
         e.persist();
         return e.target.checked
-            ? endreCheckboxFiltervalg('ulesteEndringer', e.target.value)
-            : endreCheckboxFiltervalg('ulesteEndringer', null);
+            ? endreCheckboxFiltervalg(Filtervalg.ulesteEndringer, e.target.value)
+            : endreCheckboxFiltervalg(Filtervalg.ulesteEndringer, null);
     };
 
     const lagtTilAvBruker = ['NY_STILLING', 'NY_IJOBB', 'NY_EGEN', 'NY_BEHANDLING'];
