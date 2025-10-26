@@ -7,6 +7,13 @@ import {
     TiltakspengerFilterArena
 } from '../filtrering/filter-konstanter';
 
+/* Vi bruker nøklane i FiltervalgModell til å knyte saman
+ * - val i filter i frontenden (checkboksar, radioknappar, inputfelt)
+ * - lokal state (redux)
+ * - kall til backend for filtrering
+ *
+ * For å gjere det lettare å sjå koplinga mellom desse har vi laga typar for felta. Då kan dei gjenbrukast i mellom anna "form" på input-element, "filtertag" som viser gjledande filterval, og redux som handterer endringar i filtreringstilstanden.
+ * */
 export enum Filtervalg {
     ferdigfilterListe = 'ferdigfilterListe',
     alder = 'alder',
