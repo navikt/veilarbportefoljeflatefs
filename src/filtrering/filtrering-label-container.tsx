@@ -155,7 +155,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'aktiviteterForenklet') {
+            } else if (key === Filtervalg.aktiviteterForenklet) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel

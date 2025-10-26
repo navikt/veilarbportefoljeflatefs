@@ -18,6 +18,9 @@ export enum Filtervalg {
     servicegruppe = 'servicegruppe',
     veiledere = 'veiledere',
     ytelse = 'ytelse',
+    aktiviteter = 'aktiviteter',
+    aktiviteterForenklet = 'aktiviteterForenklet',
+
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
@@ -48,8 +51,8 @@ export interface FiltervalgModell {
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
     [Filtervalg.ytelse]: null | string;
-    aktiviteter?: AktiviteterFilternokler;
-    aktiviteterForenklet: string[];
+    [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
+    [Filtervalg.aktiviteterForenklet]: string[];
     tiltakstyper: string[];
     hovedmal?: string[]; // Arena-hovedmål
     navnEllerFnrQuery: string;

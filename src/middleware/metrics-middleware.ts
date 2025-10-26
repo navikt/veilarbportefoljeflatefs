@@ -21,6 +21,7 @@ import {
     SORTER_MINEFILTER_FEILET,
     SORTER_MINEFILTER_OK
 } from '../ducks/mine-filter';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 interface FilterEndringData {
     filterId: string;
@@ -191,7 +192,7 @@ export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, sto
     if (data.filterId === 'veilederNavnQuery') {
         return;
     }
-    if (data.filterId === 'aktiviteter') {
+    if (data.filterId === Filtervalg.aktiviteter) {
         return loggEndreAktivitetFilter(sideNavn, data);
     }
 

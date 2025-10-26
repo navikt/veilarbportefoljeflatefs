@@ -58,7 +58,7 @@ export function antallFilter(filtervalg) {
                 return 1;
             } else if (Array.isArray(value)) {
                 return value.length;
-            } else if (filter === 'aktiviteter') {
+            } else if (filter === Filtervalg.aktiviteter) {
                 return mapAktivitetFilter(value);
             } else if (typeof value === 'object') {
                 return value ? Object.entries(value).length : 0;

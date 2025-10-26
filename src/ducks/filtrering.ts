@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {FargekategoriModell} from '../typer/bruker-modell';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 import {VELG_MINE_FILTER} from './lagret-filter-ui-state';
 import {OversiktType} from './ui/listevisning';
 import {LagretFilter} from './lagret-filter';
@@ -73,7 +73,7 @@ export function fjern(filterId, verdi, fjernVerdi) {
         return false;
     } else if (Array.isArray(verdi)) {
         return verdi.filter(enkeltVerdi => enkeltVerdi !== fjernVerdi);
-    } else if (filterId === 'aktiviteter') {
+    } else if (filterId === Filtervalg.aktiviteter) {
         let tomtVerdi = {};
         tomtVerdi[fjernVerdi] = AktiviteterValg.NA;
         return Object.assign({}, verdi, tomtVerdi);

@@ -3,6 +3,7 @@ import {Button, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import '../filterform.css';
+import {Filtervalg} from '../../../../typer/filtervalg-modell';
 
 interface AktivitetFilterformProps {
     valg: Dictionary<string>;
@@ -27,7 +28,7 @@ export function AktivitetFilterformForenklet({
         if (harAvanserteAktiviteter) {
             nullstillAvanserteAktiviteter();
         }
-        endreFiltervalg('aktiviteterForenklet', filtre);
+        endreFiltervalg(Filtervalg.aktiviteterForenklet, filtre);
     };
 
     return (
@@ -64,7 +65,7 @@ export function AktivitetFilterformForenklet({
                 <NullstillKnapp
                     dataTestId="aktivitet-filterform-forenklet"
                     nullstillValg={nullstillForenkledeAktiviteter}
-                    form="aktiviteterForenklet"
+                    form={Filtervalg.aktiviteterForenklet}
                     disabled={valgteForenkledeAktiviteter.length <= 0}
                 />
             </div>
