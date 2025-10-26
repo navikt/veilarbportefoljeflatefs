@@ -41,7 +41,10 @@ export enum Filtervalg {
     ensligeForsorgere = 'ensligeForsorgere',
     barnUnder18Aar = 'barnUnder18Aar',
     barnUnder18AarAlder = 'barnUnder18AarAlder',
-
+    fargekategorier = 'fargekategorier',
+    gjeldendeVedtak14a = 'gjeldendeVedtak14a',
+    innsatsgruppeGjeldendeVedtak14a = 'innsatsgruppeGjeldendeVedtak14a',
+    hovedmalGjeldendeVedtak14a = 'hovedmalGjeldendeVedtak14a',
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
@@ -96,10 +99,10 @@ export interface FiltervalgModell {
     [Filtervalg.ensligeForsorgere]: string[];
     [Filtervalg.barnUnder18Aar]: string[];
     [Filtervalg.barnUnder18AarAlder]: string[];
-    fargekategorier: FargekategoriModell[];
-    gjeldendeVedtak14a: string[];
-    innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
-    hovedmalGjeldendeVedtak14a: Hovedmal[];
+    [Filtervalg.fargekategorier]: FargekategoriModell[];
+    [Filtervalg.gjeldendeVedtak14a]: string[];
+    [Filtervalg.innsatsgruppeGjeldendeVedtak14a]: InnsatsgruppeGjeldendeVedtak14a[];
+    [Filtervalg.hovedmalGjeldendeVedtak14a]: Hovedmal[];
     [Filtervalg.ytelseAapArena]: AAPFilterArena[];
     [Filtervalg.ytelseAapKelvin]: AAPFilterKelvin[];
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];

@@ -143,7 +143,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'fargekategorier') {
+            } else if (key === Filtervalg.fargekategorier) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabelMedIkon
@@ -368,7 +368,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
 
             if (filterValue === MINE_FARGEKATEGORIER) {
-                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType as OversiktType));
+                dispatch(endreFiltervalg(Filtervalg.fargekategorier, [], ownProps.oversiktType as OversiktType));
             }
             if (
                 alleFargekategoriFilterAlternativer.some(f => f === filterValue) &&

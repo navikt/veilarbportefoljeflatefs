@@ -294,7 +294,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="gjeldende-vedtak-14a"
                     render={() => (
                         <CheckboxFilterform
-                            form="gjeldendeVedtak14a"
+                            form={Filtervalg.gjeldendeVedtak14a}
                             valg={gjeldendeVedtak14a}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -306,7 +306,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="innsatsgruppe-gjeldende-vedtak-14a"
                     render={() => (
                         <CheckboxFilterform
-                            form="innsatsgruppeGjeldendeVedtak14a"
+                            form={Filtervalg.innsatsgruppeGjeldendeVedtak14a}
                             valg={innsatsgruppeGjeldendeVedtak14a}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -318,7 +318,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="hovedmal-gjeldende-vedtak-14a"
                     render={() => (
                         <CheckboxFilterform
-                            form="hovedmalGjeldendeVedtak14a"
+                            form={Filtervalg.hovedmalGjeldendeVedtak14a}
                             valg={hovedmalGjeldendeVedtak14a}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
