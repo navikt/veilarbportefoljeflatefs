@@ -320,7 +320,7 @@ function FiltreringLabelContainer({
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                         />
                     ));
-            } else if (key === 'navnEllerFnrQuery') {
+            } else if (key === Filtervalg.navnEllerFnrQuery) {
                 const trimmedQuery = value.trim();
                 if (trimmedQuery !== '') {
                     const isFnr = !isNaN(parseInt(trimmedQuery, 10));
@@ -393,7 +393,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 function getLabel(singleValue: any, key: any, enhettiltak: any): string {
-    if (key === 'tiltakstyper') {
+    if (key === Filtervalg.tiltakstyper) {
         return enhettiltak[singleValue];
     }
     if (singleValue?.label) {

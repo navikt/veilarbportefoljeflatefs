@@ -20,6 +20,11 @@ export enum Filtervalg {
     ytelse = 'ytelse',
     aktiviteter = 'aktiviteter',
     aktiviteterForenklet = 'aktiviteterForenklet',
+    tiltakstyper = 'tiltakstyper',
+    navnEllerFnrQuery = 'navnEllerFnrQuery',
+    rettighetsgruppe = 'rettighetsgruppe',
+    manuellBrukerStatus = 'manuellBrukerStatus',
+    veilederNavnQuery = 'veilederNavnQuery',
 
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
@@ -53,12 +58,12 @@ export interface FiltervalgModell {
     [Filtervalg.ytelse]: null | string;
     [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];
-    tiltakstyper: string[];
-    hovedmal?: string[]; // Arena-hovedmål
-    navnEllerFnrQuery: string;
-    rettighetsgruppe?: string[];
-    manuellBrukerStatus?: string[];
-    veilederNavnQuery: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
+    [Filtervalg.tiltakstyper]: string[];
+    hovedmal?: string[]; // Arena-hovedmål // Er dette filteret i bruk meir? Eg ser det ikkje i frontenden. Eg trur det var "søskenfilter" for innsatsgruppe over her. Ingrid, 2025-10-26
+    [Filtervalg.navnEllerFnrQuery]: string;
+    [Filtervalg.rettighetsgruppe]?: string[];
+    [Filtervalg.manuellBrukerStatus]?: string[];
+    [Filtervalg.veilederNavnQuery]: string; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
     registreringstype: string[];
     cvJobbprofil: null | string;
     utdanning: string[];

@@ -1,6 +1,6 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 
 interface FiltreringNavnEllerFnrProps {
     filtervalg: FiltervalgModell;
@@ -15,7 +15,7 @@ export function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: Filtrering
 
     useEffect(() => {
         // @ts-ignore
-        savedCallback.current = filterverdi => endreFiltervalg('navnEllerFnrQuery', filterverdi);
+        savedCallback.current = filterverdi => endreFiltervalg(Filtervalg.navnEllerFnrQuery, filterverdi);
     }, [endreFiltervalg]);
 
     useEffect(() => {

@@ -46,7 +46,7 @@ export const filtermalinger = (fields: FilterFields) => {
                 }
             });
             break;
-        case 'navnEllerFnrQuery':
+        case Filtervalg.navnEllerFnrQuery:
         case Filtervalg.veiledere:
             break;
         default:

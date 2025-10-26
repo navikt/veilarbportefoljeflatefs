@@ -395,7 +395,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="manuell-oppfolging"
                     render={() => (
                         <CheckboxFilterform
-                            form="manuellBrukerStatus"
+                            form={Filtervalg.manuellBrukerStatus}
                             valg={manuellBrukerStatus}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -460,7 +460,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="rettighetsgruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="rettighetsgruppe"
+                            form={Filtervalg.rettighetsgruppe}
                             valg={rettighetsgruppeArena}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -482,7 +482,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="tiltakstype"
                     render={() => (
                         <CheckboxFilterform
-                            form="tiltakstyper"
+                            form={Filtervalg.tiltakstyper}
                             valg={enhettiltak}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
