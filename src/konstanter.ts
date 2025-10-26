@@ -13,8 +13,6 @@ export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefoljeflatefs.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
 export const VIS_AAPFILTER_MED_KELVINDATA = 'veilarbportefoljeflatefs.ytelser-vis-aap-filter-med-kelvindata';
 export const VIS_TILTAKSPENGER_MED_TPSAKDATA = 'veilarbportefoljeflatefs.ytelser-vis-tiltakspenger-med-tpsakdata';
-export const BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER =
-    'veilarbportefoljeflatefs.ytelser-bruk-nytt-arena-tiltakspenger-filter';
 export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
     'veilarbportefoljeflatefs.la-veileder-vise-flere-enn-tre-kolonner-samtidig';
 
@@ -25,6 +23,5 @@ export const PORTEFOLJE_FEATURES = [
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAPFILTER_MED_KELVINDATA,
     VIS_TILTAKSPENGER_MED_TPSAKDATA,
-    BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG
 ];
