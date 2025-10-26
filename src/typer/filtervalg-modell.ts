@@ -19,7 +19,9 @@ export enum Filtervalg {
     veiledere = 'veiledere',
     ytelse = 'ytelse',
     ytelseAapArena = 'ytelseAapArena',
-    ytelseTiltakspengerArena = 'ytelseTiltakspengerArena'
+    ytelseAapKelvin = 'ytelseAapKelvin',
+    ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
+    ytelseTiltakspenger = 'ytelseTiltakspenger'
 }
 
 /**
@@ -75,9 +77,9 @@ export interface FiltervalgModell {
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
     hovedmalGjeldendeVedtak14a: Hovedmal[];
     [Filtervalg.ytelseAapArena]: AAPFilterArena[];
-    ytelseAapKelvin: AAPFilterKelvin[];
+    [Filtervalg.ytelseAapKelvin]: AAPFilterKelvin[];
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
-    ytelseTiltakspenger: TiltakspengerFilter[];
+    [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
 }
 
 /**

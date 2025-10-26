@@ -421,7 +421,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         id="ytelser-aap-utenfor-arena"
                         render={() => (
                             <CheckboxFilterform
-                                form="ytelseAapKelvin"
+                                form={Filtervalg.ytelseAapKelvin}
                                 valg={aapIKelvinFilter}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
@@ -435,7 +435,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         id="ytelser-tiltakspenger-utenfor-arena"
                         render={() => (
                             <CheckboxFilterform
-                                form="ytelseTiltakspenger"
+                                form={Filtervalg.ytelseTiltakspenger}
                                 valg={tiltakspengerFilter}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}

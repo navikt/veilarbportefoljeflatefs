@@ -232,7 +232,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ytelseAapKelvin') {
+            } else if (key === Filtervalg.ytelseAapKelvin) {
                 return value.map((singleValue: AAPFilterKelvin) => {
                     return (
                         <FiltreringLabel
@@ -242,7 +242,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ytelseTiltakspenger') {
+            } else if (key === Filtervalg.ytelseTiltakspenger) {
                 return value.map((singleValue: TiltakspengerFilter) => {
                     return (
                         <FiltreringLabel
