@@ -16,7 +16,10 @@ export enum Filtervalg {
     fodselsdagIMnd = 'fodselsdagIMnd',
     formidlingsgruppe = 'formidlingsgruppe',
     servicegruppe = 'servicegruppe',
-    veiledere = 'veiledere'
+    veiledere = 'veiledere',
+    ytelse = 'ytelse',
+    ytelseAapArena = 'ytelseAapArena',
+    ytelseTiltakspengerArena = 'ytelseTiltakspengerArena'
 }
 
 /**
@@ -42,7 +45,7 @@ export interface FiltervalgModell {
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
-    ytelse: null | string;
+    [Filtervalg.ytelse]: null | string;
     aktiviteter?: AktiviteterFilternokler;
     aktiviteterForenklet: string[];
     tiltakstyper: string[];
@@ -71,9 +74,9 @@ export interface FiltervalgModell {
     gjeldendeVedtak14a: string[];
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
     hovedmalGjeldendeVedtak14a: Hovedmal[];
-    ytelseAapArena: AAPFilterArena[];
+    [Filtervalg.ytelseAapArena]: AAPFilterArena[];
     ytelseAapKelvin: AAPFilterKelvin[];
-    ytelseTiltakspengerArena: TiltakspengerFilterArena[];
+    [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
     ytelseTiltakspenger: TiltakspengerFilter[];
 }
 
