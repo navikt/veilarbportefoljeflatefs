@@ -1,5 +1,6 @@
 import {trackAmplitude} from './amplitude';
 import {formidlingsgruppe, hovedmal, innsatsgruppe, servicegruppe} from '../filtrering/filter-konstanter';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 export type FilterFields = {sideNavn: string; filter: string; verdi: string; veilederIdent: string};
 
@@ -15,7 +16,7 @@ export const filtermalinger = (fields: FilterFields) => {
                 }
             });
             break;
-        case 'servicegruppe':
+        case Filtervalg.servicegruppe:
             trackAmplitude({
                 name: 'filtervalg',
                 data: {
@@ -25,7 +26,7 @@ export const filtermalinger = (fields: FilterFields) => {
                 }
             });
             break;
-        case 'formidlingsgruppe':
+        case Filtervalg.formidlingsgruppe:
             trackAmplitude({
                 name: 'filtervalg',
                 data: {

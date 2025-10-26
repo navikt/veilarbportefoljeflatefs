@@ -34,7 +34,7 @@ import {RadioFilterform} from './filterform/radio-filterform';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {GeografiskBostedFilterform} from './filterform/geografiskbosted-filterform';
 import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
@@ -132,7 +132,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="alder"
                     render={lukkDropdown => (
                         <AlderFilterform
-                            form="alder"
+                            form={Filtervalg.alder}
                             valg={alder}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -145,7 +145,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="fodselsdato"
                     render={() => (
                         <FodselsdatoFilterform
-                            form="fodselsdagIMnd"
+                            form={Filtervalg.fodselsdagIMnd}
                             valg={fodselsdagIMnd()}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -160,7 +160,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                             valg={kjonn}
                             endreFiltervalg={endreFiltervalg}
                             filtervalg={filtervalg}
-                            form="kjonn"
+                            form={Filtervalg.kjonn}
                             gridColumns={2}
                         />
                     )}
@@ -371,7 +371,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="formidlingsgruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="formidlingsgruppe"
+                            form={Filtervalg.formidlingsgruppe}
                             valg={formidlingsgruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
@@ -383,7 +383,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     id="servicegruppe"
                     render={() => (
                         <CheckboxFilterform
-                            form="servicegruppe"
+                            form={Filtervalg.servicegruppe}
                             valg={servicegruppe}
                             filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}

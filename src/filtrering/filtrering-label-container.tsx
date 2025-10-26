@@ -15,7 +15,7 @@ import {
     tiltakspengerFilter
 } from './filter-konstanter';
 import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
@@ -123,7 +123,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'fodselsdagIMnd') {
+            } else if (key === Filtervalg.fodselsdagIMnd) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -133,7 +133,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'alder') {
+            } else if (key === Filtervalg.alder) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -204,7 +204,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
-            } else if (key === 'foedeland') {
+            } else if (key === Filtervalg.foedeland) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -376,7 +376,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             ) {
                 dispatch(
                     endreFiltervalg(
-                        'ferdigfilterListe',
+                        Filtervalg.ferdigfilterListe,
                         ownProps.filtervalg.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER),
                         ownProps.oversiktType as OversiktType
                     )

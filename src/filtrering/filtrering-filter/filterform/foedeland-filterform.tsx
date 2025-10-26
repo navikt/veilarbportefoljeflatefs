@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useFoedelandSelector} from '../../../hooks/redux/use-foedeland-selector';
@@ -38,7 +38,7 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
     const velgFoedeland = data => {
         nullstillLandgruppeValg();
         endreFiltervalg(
-            'foedeland',
+            Filtervalg.foedeland,
             data.map(x => x.value)
         );
     };
@@ -60,11 +60,11 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
     };
 
     const nullstillLandgruppeValg = () => {
-        endreFiltervalg('landgruppe', []);
+        endreFiltervalg(Filtervalg.landgruppe, []);
     };
 
     const nullstillFoedelandValg = () => {
-        endreFiltervalg('foedeland', []);
+        endreFiltervalg(Filtervalg.foedeland, []);
     };
 
     return (
@@ -77,7 +77,7 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
                             legend=""
                             onChange={(filtre: string[]) => {
                                 nullstillFoedelandValg();
-                                endreFiltervalg('landgruppe', filtre);
+                                endreFiltervalg(Filtervalg.landgruppe, filtre);
                             }}
                             size="small"
                             value={landgrupppeValg}
@@ -144,7 +144,7 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={'landgruppe'}
+                    form={Filtervalg.landgruppe}
                     disabled={landgrupppeValg.length <= 0 && selectedFoedeland.length <= 0}
                 />
             </form>

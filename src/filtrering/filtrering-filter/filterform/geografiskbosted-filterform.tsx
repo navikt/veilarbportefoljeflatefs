@@ -3,7 +3,7 @@ import {isEmptyArray} from 'formik';
 import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
 import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
-import {FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {useGeografiskbostedSelector} from '../../../hooks/redux/use-geografiskbosted-selector';
@@ -131,7 +131,7 @@ export function GeografiskBostedFilterform({
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
-                form={'landgruppe'}
+                form={Filtervalg.landgruppe}
                 disabled={visGeografiskBosted.length <= 0 && selectedGeografiskBosted.length <= 0}
             />
         </form>

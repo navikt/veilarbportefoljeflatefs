@@ -7,6 +7,17 @@ import {
     TiltakspengerFilterArena
 } from '../filtrering/filter-konstanter';
 
+export enum Filtervalg {
+    ferdigfilterListe = 'ferdigfilterListe',
+    alder = 'alder',
+    kjonn = 'kjonn',
+    landgruppe = 'landgruppe',
+    foedeland = 'foedeland',
+    fodselsdagIMnd = 'fodselsdagIMnd',
+    formidlingsgruppe = 'formidlingsgruppe',
+    servicegruppe = 'servicegruppe'
+}
+
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
  * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
@@ -16,19 +27,19 @@ import {
  * Eksempel-PR frå huskelapp: https://github.com/navikt/veilarbfilter/pull/283                     *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
-    ferdigfilterListe: string[];
+    [Filtervalg.ferdigfilterListe]: string[];
     nyeBrukereForVeileder?: boolean; // Dette filteret finst berre her
     inaktiveBrukere?: boolean; // Dette filteret finst berre her
     venterPaSvarFraNAV?: boolean; // Dette filteret finst berre her
     venterPaSvarFraBruker?: boolean; // Dette filteret finst berre her
-    alder?: string[];
-    kjonn?: null | string;
-    landgruppe: string[];
-    foedeland: string[];
-    fodselsdagIMnd?: string[];
-    innsatsgruppe?: string[]; // Arena-innsatsgruppe
-    formidlingsgruppe?: string[];
-    servicegruppe?: string[];
+    [Filtervalg.alder]?: string[];
+    [Filtervalg.kjonn]?: null | string;
+    [Filtervalg.landgruppe]: string[];
+    [Filtervalg.foedeland]: string[];
+    [Filtervalg.fodselsdagIMnd]?: string[];
+    innsatsgruppe?: string[]; // Arena-innsatsgruppe // Er dette filteret i bruk meir? Eg ser det ikkje i frontenden. Det pleidde bu saman med Status og brukergrupper. Ingrid, 2025-10-26
+    [Filtervalg.formidlingsgruppe]?: string[];
+    [Filtervalg.servicegruppe]?: string[];
     veiledere: string[];
     ytelse: null | string;
     aktiviteter?: AktiviteterFilternokler;
@@ -64,6 +75,7 @@ export interface FiltervalgModell {
     ytelseTiltakspengerArena: TiltakspengerFilterArena[];
     ytelseTiltakspenger: TiltakspengerFilter[];
 }
+
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
  * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *
