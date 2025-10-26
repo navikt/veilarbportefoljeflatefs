@@ -39,6 +39,7 @@ export enum Filtervalg {
     visGeografiskBosted = 'visGeografiskBosted',
     avvik14aVedtak = 'avvik14aVedtak',
     ensligeForsorgere = 'ensligeForsorgere',
+    barnUnder18Aar = 'barnUnder18Aar',
 
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
@@ -92,7 +93,7 @@ export interface FiltervalgModell {
     [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
     [Filtervalg.avvik14aVedtak]: string[];
     [Filtervalg.ensligeForsorgere]: string[];
-    barnUnder18Aar: string[];
+    [Filtervalg.barnUnder18Aar]: string[];
     barnUnder18AarAlder: string[];
     fargekategorier: FargekategoriModell[];
     gjeldendeVedtak14a: string[];

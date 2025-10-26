@@ -279,7 +279,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'barnUnder18Aar' && value.length > 0) {
+            } else if (key === Filtervalg.barnUnder18Aar && value.length > 0) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
