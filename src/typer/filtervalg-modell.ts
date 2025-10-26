@@ -40,6 +40,7 @@ export enum Filtervalg {
     avvik14aVedtak = 'avvik14aVedtak',
     ensligeForsorgere = 'ensligeForsorgere',
     barnUnder18Aar = 'barnUnder18Aar',
+    barnUnder18AarAlder = 'barnUnder18AarAlder',
 
     ytelseAapArena = 'ytelseAapArena',
     ytelseAapKelvin = 'ytelseAapKelvin',
@@ -94,7 +95,7 @@ export interface FiltervalgModell {
     [Filtervalg.avvik14aVedtak]: string[];
     [Filtervalg.ensligeForsorgere]: string[];
     [Filtervalg.barnUnder18Aar]: string[];
-    barnUnder18AarAlder: string[];
+    [Filtervalg.barnUnder18AarAlder]: string[];
     fargekategorier: FargekategoriModell[];
     gjeldendeVedtak14a: string[];
     innsatsgruppeGjeldendeVedtak14a: InnsatsgruppeGjeldendeVedtak14a[];
