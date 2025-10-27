@@ -2,7 +2,6 @@ import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
     ALERTSTRIPE_FEILMELDING,
-    BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES,
@@ -21,7 +20,6 @@ const initalState: FeaturesState = {
     [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_AAPFILTER_MED_KELVINDATA]: false,
     [VIS_TILTAKSPENGER_MED_TPSAKDATA]: false,
-    [BRUK_NYTT_ARENA_TILTAKSPENGER_FILTER]: true,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false
 };
 
