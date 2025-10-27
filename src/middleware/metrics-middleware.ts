@@ -21,6 +21,7 @@ import {
     SORTER_MINEFILTER_FEILET,
     SORTER_MINEFILTER_OK
 } from '../ducks/mine-filter';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 interface FilterEndringData {
     filterId: string;
@@ -188,10 +189,10 @@ export function mapVeilederIdentTilNonsens(veilederIdent: string) {
 
 export const loggEndreFilter = (sideNavn: SideNavn, data: FilterEndringData, store: any) => {
     const veilederIdent = mapVeilederIdentTilNonsens(store.getState().innloggetVeileder.data.ident);
-    if (data.filterId === 'veilederNavnQuery') {
+    if (data.filterId === Filtervalg.veilederNavnQuery) {
         return;
     }
-    if (data.filterId === 'aktiviteter') {
+    if (data.filterId === Filtervalg.aktiviteter) {
         return loggEndreAktivitetFilter(sideNavn, data);
     }
 

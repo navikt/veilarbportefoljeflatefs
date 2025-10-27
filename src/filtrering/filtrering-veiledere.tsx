@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {TextField} from '@navikt/ds-react';
 import {VeilederCheckboxListe} from '../components/veileder-checkbox-liste/veileder-checkbox-liste';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 
 interface FiltreringVeiledereProps {
     filtervalg: FiltervalgModell;
@@ -17,7 +17,7 @@ export function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVei
 
     useEffect(() => {
         // @ts-ignore
-        savedCallback.current = filterverdi => endreFiltervalg('veilederNavnQuery', filterverdi);
+        savedCallback.current = filterverdi => endreFiltervalg(Filtervalg.veilederNavnQuery, filterverdi);
     }, [endreFiltervalg]);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVei
 
     const nullstillInputfelt = () => {
         setVeilederNavnQuery('');
-        endreFiltervalg('veilederNavnQuery', '');
+        endreFiltervalg(Filtervalg.veilederNavnQuery, '');
     };
 
     return (

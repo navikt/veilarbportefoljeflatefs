@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import {AktivitetFilterformForenklet} from './aktivitet-filterform-forenklet';
 import {
     aktiviteter,
@@ -48,7 +48,7 @@ export function AktivitetFilterformController({filtervalg, endreFiltervalg}: Akt
 
     const [erForenkletFilterSynlig, setErForenkletFilterSynlig] = useState(!harAvanserteAktiviteter);
     const [valgteForenkledeAktiviteter, setValgteForenkledeAktiviteter] = useState<string[]>(
-        filtervalg['aktiviteterForenklet']
+        filtervalg.aktiviteterForenklet
     );
 
     useEffect(() => {
@@ -61,12 +61,12 @@ export function AktivitetFilterformController({filtervalg, endreFiltervalg}: Akt
 
     const nullstillAvanserteAktiviteter = () => {
         setValgteAvanserteAktiviteter(aktivitetInitialState);
-        endreFiltervalg('aktiviteter', aktivitetInitialState);
+        endreFiltervalg(Filtervalg.aktiviteter, aktivitetInitialState);
     };
 
     const nullstillForenkledeAktiviteter = () => {
         setValgteForenkledeAktiviteter([]);
-        endreFiltervalg('aktiviteterForenklet', []);
+        endreFiltervalg(Filtervalg.aktiviteterForenklet, []);
     };
 
     const klikkPaLenke = erForenkletLenke => {

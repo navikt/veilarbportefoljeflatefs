@@ -23,6 +23,7 @@ import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import './veilederoversikt.css';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 export function VeilederoversiktSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
@@ -31,9 +32,12 @@ export function VeilederoversiktSide() {
     const oversiktType = OversiktType.veilederOversikt;
     const dispatch = useDispatch();
     const slettVeilederFilter = ident => {
-        const oppdatertFiltervalg = {...filtervalg, veiledere: fjern('veiledere', filtervalg['veiledere'], ident)};
+        const oppdatertFiltervalg = {
+            ...filtervalg,
+            veiledere: fjern(Filtervalg.veiledere, filtervalg.veiledere, ident)
+        };
         oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, oversiktType);
-        return dispatch(slettEnkeltFilter('veiledere', ident, oversiktType));
+        return dispatch(slettEnkeltFilter(Filtervalg.veiledere, ident, oversiktType));
     };
     const veiledere = useSelector((state: AppState) => state.veiledere);
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);

@@ -2,7 +2,7 @@ import {ReactNode} from 'react';
 import {BodyShort, Button, Label, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
-import {FiltervalgModell} from '../../../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
 import '../filterform.css';
 
 interface AktivitetFilterformProps {
@@ -30,7 +30,7 @@ export function AktivitetFilterformAvansert({
         if (filtervalg.aktiviteterForenklet && filtervalg.aktiviteterForenklet.length > 0) {
             nullstillForenkledeAktiviteter();
         }
-        endreFiltervalg('aktiviteter', {
+        endreFiltervalg(Filtervalg.aktiviteter, {
             ...valgteAvanserteAktiviteter,
             [aktivitetKey]: verdi
         });
@@ -85,7 +85,7 @@ export function AktivitetFilterformAvansert({
                 <NullstillKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
-                    form="aktiviteter"
+                    form={Filtervalg.aktiviteter}
                     disabled={!harAvanserteAktiviteter}
                 />
             </div>

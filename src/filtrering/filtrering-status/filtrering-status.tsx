@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {pagineringSetup} from '../../ducks/paginering';
 import {
     ER_SYKMELDT_MED_ARBEIDSGIVER,
@@ -61,7 +61,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));
-        dispatch(endreFiltervalg('ferdigfilterListe', ferdigFilterListe, oversiktType));
+        dispatch(endreFiltervalg(Filtervalg.ferdigfilterListe, ferdigFilterListe, oversiktType));
         oppdaterKolonneAlternativer(dispatch, {...filtervalg, ferdigfilterListe: ferdigFilterListe}, oversiktType);
     }
 

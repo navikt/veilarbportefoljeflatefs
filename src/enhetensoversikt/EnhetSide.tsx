@@ -40,6 +40,7 @@ import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {Filtervalg} from '../typer/filtervalg-modell';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -57,7 +58,7 @@ export function antallFilter(filtervalg) {
                 return 1;
             } else if (Array.isArray(value)) {
                 return value.length;
-            } else if (filter === 'aktiviteter') {
+            } else if (filter === Filtervalg.aktiviteter) {
                 return mapAktivitetFilter(value);
             } else if (typeof value === 'object') {
                 return value ? Object.entries(value).length : 0;
@@ -85,8 +86,11 @@ export function EnhetSide() {
     const veilederliste = useSelector((state: AppState) => state.veiledere.data.veilederListe);
     const slettVeilederFilter = useCallback(
         ident => {
-            dispatch(slettEnkeltFilter('veiledere', ident, OversiktType.enhetensOversikt));
-            const oppdatertFiltervalg = {...filtervalg, veiledere: fjern('veiledere', filtervalg['veiledere'], ident)};
+            dispatch(slettEnkeltFilter(Filtervalg.veiledere, ident, OversiktType.enhetensOversikt));
+            const oppdatertFiltervalg = {
+                ...filtervalg,
+                veiledere: fjern(Filtervalg.veiledere, filtervalg.veiledere, ident)
+            };
             oppdaterKolonneAlternativer(dispatch, oppdatertFiltervalg, oversiktType);
         },
         [dispatch, filtervalg]

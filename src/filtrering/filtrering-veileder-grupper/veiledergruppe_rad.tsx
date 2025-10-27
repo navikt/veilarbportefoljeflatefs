@@ -10,6 +10,7 @@ import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
+import {Filtervalg} from '../../typer/filtervalg-modell';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
@@ -42,7 +43,7 @@ export function VeiledergruppeRad({
             {},
             {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
         );
-        dispatch(endreFiltervalg('veiledere', veilederGruppe.filterValg.veiledere, oversiktType));
+        dispatch(endreFiltervalg(Filtervalg.veiledere, veilederGruppe.filterValg.veiledere, oversiktType));
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
         oppdaterKolonneAlternativer(
             dispatch,

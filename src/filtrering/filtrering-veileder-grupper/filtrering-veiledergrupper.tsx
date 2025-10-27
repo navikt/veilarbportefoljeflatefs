@@ -7,7 +7,7 @@ import {PlusCircleIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../reducer';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
 import {endreFiltervalg, initialState} from '../../ducks/filtrering';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {lageNyGruppe} from '../../ducks/veiledergrupper_filter';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -44,7 +44,7 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
                     {...filterValg, veiledere: resp.data.filterValg.veiledere},
                     oversiktType
                 );
-                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType));
+                return dispatch(endreFiltervalg(Filtervalg.veiledere, resp.data.filterValg.veiledere, oversiktType));
             });
     };
 

@@ -8,7 +8,7 @@ import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
 import {AppState} from '../../reducer';
 import {harGjortEndringer} from '../../components/modal/veiledergruppe/veileder-gruppe-utils';
 import {VeiledergruppeModal} from '../../components/modal/veiledergruppe/veiledergruppe-modal';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {visIngenEndringerToast} from '../../store/toast/actions';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -73,7 +73,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
                     {...filterValg, veiledere: resp.data.filterValg.veiledere},
                     oversiktType
                 );
-                return dispatch(endreFiltervalg('veiledere', resp.data.filterValg.veiledere, oversiktType));
+                return dispatch(endreFiltervalg(Filtervalg.veiledere, resp.data.filterValg.veiledere, oversiktType));
             });
         } else {
             dispatch(visIngenEndringerToast());
@@ -84,7 +84,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
         valgtGruppe &&
             enhet &&
             dispatch(slettGruppe(enhet, valgtGruppe.filterId)).then(() => {
-                dispatch(endreFiltervalg('veiledere', [], OversiktType.enhetensOversikt));
+                dispatch(endreFiltervalg(Filtervalg.veiledere, [], OversiktType.enhetensOversikt));
                 dispatch(hentMineFilterForVeileder());
                 oppdaterKolonneAlternativer(
                     dispatch,

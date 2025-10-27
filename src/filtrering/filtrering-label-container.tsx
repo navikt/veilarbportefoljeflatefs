@@ -15,7 +15,7 @@ import {
     tiltakspengerFilter
 } from './filter-konstanter';
 import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
-import {FiltervalgModell} from '../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {hentMineFilterForVeileder} from '../ducks/mine-filter';
 import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
@@ -55,7 +55,7 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            if (key === 'utdanningBestatt') {
+            if (key === Filtervalg.utdanningBestatt) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -65,7 +65,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'utdanningGodkjent') {
+            } else if (key === Filtervalg.utdanningGodkjent) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -75,7 +75,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'utdanning') {
+            } else if (key === Filtervalg.utdanning) {
                 return value.map(singleValue => {
                     if (singleValue === 'INGEN_DATA') {
                         return (
@@ -94,7 +94,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'registreringstype') {
+            } else if (key === Filtervalg.registreringstype) {
                 return value.map(singleValue => {
                     if (singleValue === 'INGEN_DATA') {
                         return (
@@ -113,7 +113,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'sisteEndringKategori') {
+            } else if (key === Filtervalg.sisteEndringKategori) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -123,7 +123,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'fodselsdagIMnd') {
+            } else if (key === Filtervalg.fodselsdagIMnd) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -133,7 +133,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'alder') {
+            } else if (key === Filtervalg.alder) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -143,7 +143,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'fargekategorier') {
+            } else if (key === Filtervalg.fargekategorier) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabelMedIkon
@@ -155,7 +155,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'aktiviteterForenklet') {
+            } else if (key === Filtervalg.aktiviteterForenklet) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -165,7 +165,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ulesteEndringer' && value === 'ULESTE_ENDRINGER') {
+            } else if (key === Filtervalg.ulesteEndringer && value === 'ULESTE_ENDRINGER') {
                 return [
                     <FiltreringLabel
                         key={key}
@@ -173,7 +173,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, null)}
                     />
                 ];
-            } else if (key === 'visGeografiskBosted' && value.length > 0) {
+            } else if (key === Filtervalg.visGeografiskBosted && value.length > 0) {
                 return [
                     <FiltreringLabel
                         key={`visGeografiskBosted-1`}
@@ -181,7 +181,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, '1')}
                     />
                 ];
-            } else if (key === 'geografiskBosted' && value.length > 0) {
+            } else if (key === Filtervalg.geografiskBosted && value.length > 0) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -204,7 +204,7 @@ function FiltreringLabelContainer({
                         slettFilter={() => slettEnkelt(key, false)}
                     />
                 ];
-            } else if (key === 'foedeland') {
+            } else if (key === Filtervalg.foedeland) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -217,7 +217,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'tolkBehovSpraak') {
+            } else if (key === Filtervalg.tolkBehovSpraak) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -232,7 +232,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ytelseAapKelvin') {
+            } else if (key === Filtervalg.ytelseAapKelvin) {
                 return value.map((singleValue: AAPFilterKelvin) => {
                     return (
                         <FiltreringLabel
@@ -242,7 +242,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'ytelseTiltakspenger') {
+            } else if (key === Filtervalg.ytelseTiltakspenger) {
                 return value.map((singleValue: TiltakspengerFilter) => {
                     return (
                         <FiltreringLabel
@@ -252,7 +252,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'avvik14aVedtak') {
+            } else if (key === Filtervalg.avvik14aVedtak) {
                 return value.map(singleValue => {
                     if (singleValue === HAR_AVVIK) {
                         return null;
@@ -279,7 +279,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'barnUnder18Aar' && value.length > 0) {
+            } else if (key === Filtervalg.barnUnder18Aar && value.length > 0) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -289,7 +289,7 @@ function FiltreringLabelContainer({
                         />
                     );
                 });
-            } else if (key === 'barnUnder18AarAlder' && value.length > 0) {
+            } else if (key === Filtervalg.barnUnder18AarAlder && value.length > 0) {
                 return value.map(singleValue => {
                     return (
                         <FiltreringLabel
@@ -320,7 +320,7 @@ function FiltreringLabelContainer({
                             slettFilter={() => slettEnkelt(key, aktivitetkey)}
                         />
                     ));
-            } else if (key === 'navnEllerFnrQuery') {
+            } else if (key === Filtervalg.navnEllerFnrQuery) {
                 const trimmedQuery = value.trim();
                 if (trimmedQuery !== '') {
                     const isFnr = !isNaN(parseInt(trimmedQuery, 10));
@@ -368,7 +368,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dispatch(avmarkerValgtMineFilter(ownProps.oversiktType));
 
             if (filterValue === MINE_FARGEKATEGORIER) {
-                dispatch(endreFiltervalg('fargekategorier', [], ownProps.oversiktType as OversiktType));
+                dispatch(endreFiltervalg(Filtervalg.fargekategorier, [], ownProps.oversiktType as OversiktType));
             }
             if (
                 alleFargekategoriFilterAlternativer.some(f => f === filterValue) &&
@@ -376,7 +376,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             ) {
                 dispatch(
                     endreFiltervalg(
-                        'ferdigfilterListe',
+                        Filtervalg.ferdigfilterListe,
                         ownProps.filtervalg.ferdigfilterListe.filter(f => f !== MINE_FARGEKATEGORIER),
                         ownProps.oversiktType as OversiktType
                     )
@@ -393,7 +393,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 function getLabel(singleValue: any, key: any, enhettiltak: any): string {
-    if (key === 'tiltakstyper') {
+    if (key === Filtervalg.tiltakstyper) {
         return enhettiltak[singleValue];
     }
     if (singleValue?.label) {

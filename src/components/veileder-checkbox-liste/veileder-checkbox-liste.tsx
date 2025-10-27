@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
 import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {AppState} from '../../reducer';
 import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -19,7 +19,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
     const veiledere: VeiledereState = useSelector((state: AppState) => state.veiledere); //SAMME SOM VALG
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
-    const formNavn = 'veiledere';
+    const formNavn = Filtervalg.veiledere;
     const dispatch = useDispatch();
 
     useEffect(() => {
