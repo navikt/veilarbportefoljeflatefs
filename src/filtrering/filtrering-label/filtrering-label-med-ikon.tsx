@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Bleed, Button} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import './filtrering-label.css';
-import './filtrering-skjema.css';
+import '../filtrering-skjema.css';
 
 interface FiltreringLabelMedIkonProps {
     label: string;

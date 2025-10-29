@@ -13,19 +13,19 @@ import {
     MINE_FARGEKATEGORIER,
     TiltakspengerFilter,
     tiltakspengerFilter
-} from './filter-konstanter';
-import {EnhetModell} from '../typer/enhet-og-veiledere-modeller';
-import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
-import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
-import {hentMineFilterForVeileder} from '../ducks/mine-filter';
-import {useGeografiskbostedSelector} from '../hooks/redux/use-geografiskbosted-selector';
-import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../ducks/filtrering';
-import {useFoedelandSelector} from '../hooks/redux/use-foedeland-selector';
-import {useTolkbehovSelector} from '../hooks/redux/use-tolkbehovspraak-selector';
+} from '../filter-konstanter';
+import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
+import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
+import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
+import {useGeografiskbostedSelector} from '../../hooks/redux/use-geografiskbosted-selector';
+import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter} from '../../ducks/filtrering';
+import {useFoedelandSelector} from '../../hooks/redux/use-foedeland-selector';
+import {useTolkbehovSelector} from '../../hooks/redux/use-tolkbehovspraak-selector';
 import {FiltreringLabelMedIkon} from './filtrering-label-med-ikon';
-import {pagineringSetup} from '../ducks/paginering';
-import {avmarkerValgtMineFilter} from '../ducks/lagret-filter-ui-state';
-import {fargekategoriIkonMapper} from '../components/fargekategori/fargekategori-ikon-mapper';
+import {pagineringSetup} from '../../ducks/paginering';
+import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
+import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;

@@ -1,5 +1,5 @@
 import {lagLablerTilVeiledereMedIdenter} from './lagLablerTilVeiledereMedIdenter';
-import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 
 describe('Test lagLablerTilVeiledereMedIdenter', () => {
     it('Test when all veiledere are active', () => {
