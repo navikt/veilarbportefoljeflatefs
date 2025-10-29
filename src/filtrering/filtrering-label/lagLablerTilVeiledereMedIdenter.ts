@@ -1,4 +1,4 @@
-import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 
 export const lagLablerTilVeiledereMedIdenter = (
     identer: string[],

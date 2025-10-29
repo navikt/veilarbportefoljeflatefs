@@ -2,11 +2,11 @@ import {MouseEvent} from 'react';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
-import {lagConfig} from './filter-konstanter';
-import {FilterFeilModal} from '../components/modal/filter-feil-modal';
-import {kebabUtenSpesialtegn} from '../utils/utils';
+import {lagConfig} from '../filter-konstanter';
+import {FilterFeilModal} from '../../components/modal/filter-feil-modal';
+import {kebabUtenSpesialtegn} from '../../utils/utils';
 import './filtrering-label.css';
-import './filtrering-skjema.css';
+import '../filtrering-skjema.css';
 
 interface FiltreringLabelProps {
     label: string | {label: string};
