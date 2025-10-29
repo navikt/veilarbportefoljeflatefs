@@ -61,7 +61,7 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
-    const SkjulSammenlignGjeldende14aOgArenaVedtak = useFeatureSelector()(
+    const skjulSammenlignGjeldende14aOgArenaVedtakFilter = useFeatureSelector()(
         SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
     );
     const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
@@ -332,7 +332,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                {!SkjulSammenlignGjeldende14aOgArenaVedtak && (
+                {!skjulSammenlignGjeldende14aOgArenaVedtakFilter && (
                     <Dropdown
                         name="Sammenlign gjeldende vedtak og Arena"
                         id="status-14a-vedtak-filter"
