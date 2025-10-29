@@ -15,6 +15,8 @@ export const VIS_AAPFILTER_MED_KELVINDATA = 'veilarbportefoljeflatefs.ytelser-vi
 export const VIS_TILTAKSPENGER_MED_TPSAKDATA = 'veilarbportefoljeflatefs.ytelser-vis-tiltakspenger-med-tpsakdata';
 export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
     'veilarbportefoljeflatefs.la-veileder-vise-flere-enn-tre-kolonner-samtidig';
+export const SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA =
+    'veilarbportefoljeflatefs.skjul-filter-sammenlikne-gjeldende-14a-og-arena';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -23,5 +25,6 @@ export const PORTEFOLJE_FEATURES = [
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
     VIS_AAPFILTER_MED_KELVINDATA,
     VIS_TILTAKSPENGER_MED_TPSAKDATA,
-    LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG
+    LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
+    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
 ];

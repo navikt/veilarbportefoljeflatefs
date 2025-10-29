@@ -40,7 +40,11 @@ import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {VIS_AAPFILTER_MED_KELVINDATA, VIS_TILTAKSPENGER_MED_TPSAKDATA} from '../../konstanter';
+import {
+    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA,
+    VIS_AAPFILTER_MED_KELVINDATA,
+    VIS_TILTAKSPENGER_MED_TPSAKDATA
+} from '../../konstanter';
 import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
@@ -57,6 +61,9 @@ type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
     const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
+    const SkjulSammenlignGjeldende14aOgArenaVedtak = useFeatureSelector()(
+        SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
+    );
     const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
 
     const avvik14aVedtakValg = () => {
@@ -325,32 +332,34 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         />
                     )}
                 />
-                <Dropdown
-                    name="Sammenlign gjeldende vedtak og Arena"
-                    id="status-14a-vedtak-filter"
-                    render={() => (
-                        <>
-                            <Alert variant="info" size="small" className="registrering-alert">
-                                Filteret viser brukere der hovedmål/innsatsgruppe i Arena er ulikt det gjeldende § 14
-                                a-vedtaket.{' '}
-                                <Link
-                                    href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                >
-                                    Se mer informasjon på Navet
-                                    <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
-                                </Link>
-                            </Alert>
-                            <CheckboxFilterform
-                                form={Filtervalg.avvik14aVedtak}
-                                valg={avvik14aVedtakValg()}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreAvvik14aVedtakFilterValg()}
-                            />
-                        </>
-                    )}
-                />
+                {!SkjulSammenlignGjeldende14aOgArenaVedtak && (
+                    <Dropdown
+                        name="Sammenlign gjeldende vedtak og Arena"
+                        id="status-14a-vedtak-filter"
+                        render={() => (
+                            <>
+                                <Alert variant="info" size="small" className="registrering-alert">
+                                    Filteret viser brukere der hovedmål/innsatsgruppe i Arena er ulikt det gjeldende §
+                                    14 a-vedtaket.{' '}
+                                    <Link
+                                        href="https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-arbeidsrettet-brukeroppfolging/SitePages/Ulike-hovedm%C3%A5l-og-innsatsgruppe-i-Arena,-og-i-iverksatte-%C2%A7-14-a-vedtak(1).aspx"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                    >
+                                        Se mer informasjon på Navet
+                                        <ExternalLinkIcon title="Åpne lenken i ny fane" fontSize="1.2em" />
+                                    </Link>
+                                </Alert>
+                                <CheckboxFilterform
+                                    form={Filtervalg.avvik14aVedtak}
+                                    valg={avvik14aVedtakValg()}
+                                    filtervalg={filtervalg}
+                                    endreFiltervalg={endreAvvik14aVedtakFilterValg()}
+                                />
+                            </>
+                        )}
+                    />
+                )}
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Status og brukergrupper</Label>
