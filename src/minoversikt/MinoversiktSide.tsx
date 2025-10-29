@@ -14,7 +14,7 @@ import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjelden
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useSetStateFromUrl} from '../hooks/portefolje/use-set-state-from-url';
 import {useFetchPortefolje} from '../hooks/portefolje/use-fetch-portefolje';
-import FiltreringLabelContainer from '../filtrering/filtrering-label-container';
+import FiltreringLabelContainer from '../filtrering/filtrering-label/filtrering-label-container';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {hentPortefoljeForVeileder} from '../ducks/portefolje';
