@@ -348,6 +348,7 @@ export const hendelserLabels = {
     AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
 };
 
+/** Tekstar for filteret sisteEndringKategori, aka "Siste endring av bruker"*/
 export const hendelserEtikett = {
     ULESTE_ENDRINGER: 'Uleste endringer (Siste endring av bruker)',
     MAL: 'Endring i mål',
