@@ -9,7 +9,10 @@ import {
     HAR_AVVIK,
     hendelserEtikett,
     tiltakspengerFilter,
-    TiltakspengerFilter
+    TiltakspengerFilter,
+    utdanning,
+    utdanningBestatt,
+    utdanningGodkjent
 } from '../filter-konstanter';
 import {FiltreringLabelMedIkon} from './filtrering-label-med-ikon';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
@@ -36,8 +39,6 @@ export const LagLabelForFiltervalg = ({
     const geografiskBostedListData = useGeografiskbostedSelector();
 
     if (valgtFilter === 'innsatsgruppe' || valgtFilter === 'hovedmal') {
-        // Desse filtera er ikkje i bruk meir, vi vil helst sleppe å ha dei i FilterValg-typen, så då gjer vi det slik i staden.
-        return null;
         // Desse filtera er ikkje i bruk meir utanom test-data. Vi vil helst sleppe å ha dei i FilterValg-typen, så då gjer vi det slik i staden.
         return [];
     }
@@ -46,46 +47,54 @@ export const LagLabelForFiltervalg = ({
         throw new Error('Klarer ikke lage filtrering-etikett for filter. valgtFilter: ' + valgtFilter);
     }
 
-    if (valgtFilter === Filtervalg.utdanningBestatt) {
-        return valgteFilteralternativer.map(valgtAlternativ => {
-            return (
-                <FiltreringLabel
-                    key={`utdanningBestatt-${valgtAlternativ}`}
-                    label={`Utdanning bestått: ${filterKonstanter[valgtFilter][valgtAlternativ]}`}
-                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                />
-            );
-        });
-    } else if (valgtFilter === Filtervalg.utdanningGodkjent) {
-        return valgteFilteralternativer.map(valgtAlternativ => {
-            return (
-                <FiltreringLabel
-                    key={`utdanningGodkjent-${valgtAlternativ}`}
-                    label={`Utdanning godkjent: ${filterKonstanter[valgtFilter][valgtAlternativ]}`}
-                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                />
-            );
-        });
-    } else if (valgtFilter === Filtervalg.utdanning) {
-        return valgteFilteralternativer.map(valgtAlternativ => {
-            if (valgtAlternativ === 'INGEN_DATA') {
+    switch (valgtFilter) {
+        case Filtervalg.utdanningBestatt: {
+            return valgteFilteralternativer.map(valgtAlternativ => {
                 return (
                     <FiltreringLabel
-                        key={`utdanning-${valgtAlternativ}`}
-                        label={`Utdanning: ${filterKonstanter[valgtFilter][valgtAlternativ].label}`}
+                        key={`utdanningBestatt-${valgtAlternativ}`}
+                        label={`Utdanning bestått: ${utdanningBestatt[valgtAlternativ]}`}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     />
                 );
-            }
-            return (
-                <FiltreringLabel
-                    key={`utdanning-${valgtAlternativ}`}
-                    label={filterKonstanter[valgtFilter][valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                />
-            );
-        });
-    } else if (valgtFilter === Filtervalg.registreringstype) {
+            });
+        }
+        case Filtervalg.utdanningGodkjent: {
+            return valgteFilteralternativer.map(valgtAlternativ => {
+                return (
+                    <FiltreringLabel
+                        key={`utdanningGodkjent-${valgtAlternativ}`}
+                        label={`Utdanning godkjent: ${utdanningGodkjent[valgtAlternativ]}`}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                    />
+                );
+            });
+        }
+        case Filtervalg.utdanning: {
+            return valgteFilteralternativer.map(valgtAlternativ => {
+                if (valgtAlternativ === 'INGEN_DATA') {
+                    return (
+                        <FiltreringLabel
+                            key={`utdanning-${valgtAlternativ}`}
+                            label={`Utdanning: ${utdanning[valgtAlternativ].label}`}
+                            slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                        />
+                    );
+                }
+                return (
+                    <FiltreringLabel
+                        key={`utdanning-${valgtAlternativ}`}
+                        label={utdanning[valgtAlternativ]}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                    />
+                );
+            });
+        }
+        default:
+            break;
+    }
+
+    if (valgtFilter === Filtervalg.registreringstype) {
         return valgteFilteralternativer.map(valgtAlternativ => {
             if (valgtAlternativ === 'INGEN_DATA') {
                 return (
