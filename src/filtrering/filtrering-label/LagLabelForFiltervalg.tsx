@@ -1,4 +1,4 @@
-import {Filtervalg} from '../../typer/filtervalg-modell';
+import {erGyldigFiltervalg, Filtervalg} from '../../typer/filtervalg-modell';
 import {FiltreringLabel} from './filtrering-label';
 import {
     AAPFilterKelvin,
@@ -34,6 +34,10 @@ export const LagLabelForFiltervalg = ({
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
     const geografiskBostedListData = useGeografiskbostedSelector();
+
+    if (!erGyldigFiltervalg(valgtFilter)) {
+        throw new Error('Klarer ikke lage filtrering-etikett for filter. valgtFilter: ' + valgtFilter);
+    }
 
     if (valgtFilter === Filtervalg.utdanningBestatt) {
         return valgteFilteralternativer.map(valgtAlternativ => {
