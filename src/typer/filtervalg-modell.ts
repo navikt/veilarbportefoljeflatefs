@@ -68,10 +68,6 @@ export enum Filtervalg {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export interface FiltervalgModell {
     [Filtervalg.ferdigfilterListe]: string[];
-    nyeBrukereForVeileder?: boolean; // Dette filteret finst berre her
-    inaktiveBrukere?: boolean; // Dette filteret finst berre her
-    venterPaSvarFraNAV?: boolean; // Dette filteret finst berre her
-    venterPaSvarFraBruker?: boolean; // Dette filteret finst berre her
     [Filtervalg.alder]?: string[];
     [Filtervalg.kjonn]?: null | string;
     [Filtervalg.landgruppe]: string[];
