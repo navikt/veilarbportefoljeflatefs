@@ -33,7 +33,7 @@ function FiltreringLabelContainer({
         dispatch(hentMineFilterForVeileder());
     }, [dispatch]);
 
-    const filterElementer = Object.entries(filtervalg)
+    const filterLabels = Object.entries(filtervalg)
         .map(([key, value]) => {
             return LagLabelForFiltervalg({
                 valgtFilter: key,
@@ -46,8 +46,8 @@ function FiltreringLabelContainer({
 
     return (
         <div className={className} data-testid="filtrering_label-container">
-            {filterElementer}
-            {filterElementer.length > 0 && (
+            {filterLabels}
+            {filterLabels.length > 0 && (
                 <FiltreringLabel
                     key="slett-alle"
                     label="Nullstill filtervalg"
