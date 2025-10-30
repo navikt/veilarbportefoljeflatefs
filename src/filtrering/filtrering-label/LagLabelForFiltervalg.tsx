@@ -35,6 +35,13 @@ export const LagLabelForFiltervalg = ({
     const tolkbehovSpraakListData = useTolkbehovSelector();
     const geografiskBostedListData = useGeografiskbostedSelector();
 
+    if (valgtFilter === 'innsatsgruppe' || valgtFilter === 'hovedmal') {
+        // Desse filtera er ikkje i bruk meir, vi vil helst sleppe å ha dei i FilterValg-typen, så då gjer vi det slik i staden.
+        return null;
+        // Desse filtera er ikkje i bruk meir utanom test-data. Vi vil helst sleppe å ha dei i FilterValg-typen, så då gjer vi det slik i staden.
+        return [];
+    }
+
     if (!erGyldigFiltervalg(valgtFilter)) {
         throw new Error('Klarer ikke lage filtrering-etikett for filter. valgtFilter: ' + valgtFilter);
     }
