@@ -34,10 +34,10 @@ function FiltreringLabelContainer({
     }, [dispatch]);
 
     const filterlabelsForValgteFilter = Object.entries(filtervalg)
-        .map(([valgtFilter, filteralternativer]) => {
+        .map(([key, value]) => {
             return LagLabelForFiltervalg({
-                valgtFilter: valgtFilter,
-                valgteFilteralternativer: filteralternativer,
+                valgtFilter: key,
+                valgteFilteralternativer: value,
                 slettEnkeltfilter: slettEnkelt,
                 enhettiltak
             });
