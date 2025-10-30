@@ -19,216 +19,221 @@ import {useGeografiskbostedSelector} from '../../hooks/redux/use-geografiskboste
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
 
 interface Props {
-    filter: string;
-    filteralternativer: any;
+    valgtFilter: string;
+    valgteFilteralternativer: any;
     slettEnkeltfilter: (filterNavn: string, filterValue: boolean | string | null) => void;
     enhettiltak: EnhetModell;
 }
 
-export const LagLabelForFiltervalg = ({filter, filteralternativer, slettEnkeltfilter, enhettiltak}: Props): any[] => {
+export const LagLabelForFiltervalg = ({
+    valgtFilter,
+    valgteFilteralternativer,
+    slettEnkeltfilter,
+    enhettiltak
+}: Props): any[] => {
     const foedelandListData = useFoedelandSelector();
     const tolkbehovSpraakListData = useTolkbehovSelector();
     const geografiskBostedListData = useGeografiskbostedSelector();
 
-    if (filter === Filtervalg.utdanningBestatt) {
-        return filteralternativer.map(valgtAlternativ => {
+    if (valgtFilter === Filtervalg.utdanningBestatt) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
                     key={`utdanningBestatt-${valgtAlternativ}`}
-                    label={`Utdanning bestått: ${filterKonstanter[filter][valgtAlternativ]}`}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    label={`Utdanning bestått: ${filterKonstanter[valgtFilter][valgtAlternativ]}`}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.utdanningGodkjent) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.utdanningGodkjent) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
                     key={`utdanningGodkjent-${valgtAlternativ}`}
-                    label={`Utdanning godkjent: ${filterKonstanter[filter][valgtAlternativ]}`}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    label={`Utdanning godkjent: ${filterKonstanter[valgtFilter][valgtAlternativ]}`}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.utdanning) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.utdanning) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             if (valgtAlternativ === 'INGEN_DATA') {
                 return (
                     <FiltreringLabel
                         key={`utdanning-${valgtAlternativ}`}
-                        label={`Utdanning: ${filterKonstanter[filter][valgtAlternativ].label}`}
-                        slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                        label={`Utdanning: ${filterKonstanter[valgtFilter][valgtAlternativ].label}`}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     />
                 );
             }
             return (
                 <FiltreringLabel
                     key={`utdanning-${valgtAlternativ}`}
-                    label={filterKonstanter[filter][valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    label={filterKonstanter[valgtFilter][valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.registreringstype) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.registreringstype) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             if (valgtAlternativ === 'INGEN_DATA') {
                 return (
                     <FiltreringLabel
                         key={`situasjon-${valgtAlternativ}`}
-                        label={`Situasjon: ${filterKonstanter[filter][valgtAlternativ].label}`}
-                        slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                        label={`Situasjon: ${filterKonstanter[valgtFilter][valgtAlternativ].label}`}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     />
                 );
             }
             return (
                 <FiltreringLabel
                     key={`situasjon-${valgtAlternativ}`}
-                    label={filterKonstanter[filter][valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    label={filterKonstanter[valgtFilter][valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.sisteEndringKategori) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.sisteEndringKategori) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
                     key={`hendelser-${valgtAlternativ}`}
                     label={hendelserEtikett[valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.fodselsdagIMnd) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.fodselsdagIMnd) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
                     key={`fodselsdagIMnd-${valgtAlternativ}`}
                     label={`Fødselsdato: ${valgtAlternativ}`}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.alder) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.alder) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ.key || valgtAlternativ}`}
-                    label={filterKonstanter[filter][valgtAlternativ] || valgtAlternativ + ' år'}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ.key || valgtAlternativ)}
+                    key={`${valgtFilter}--${valgtAlternativ.key || valgtAlternativ}`}
+                    label={filterKonstanter[valgtFilter][valgtAlternativ] || valgtAlternativ + ' år'}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ.key || valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.fargekategorier) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.fargekategorier) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabelMedIkon
                     key={valgtAlternativ}
                     label={filterKonstanter.fargekategorier[valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     ikon={fargekategoriIkonMapper(valgtAlternativ, 'fargekategoriikon')}
                     tittel={`Fjern filtervalg "Kategori ${filterKonstanter.fargekategorier[valgtAlternativ]}"`}
                 />
             );
         });
-    } else if (filter === Filtervalg.aktiviteterForenklet) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.aktiviteterForenklet) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
                     key={valgtAlternativ}
                     label={aktiviteter[valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.ulesteEndringer && filteralternativer === 'ULESTE_ENDRINGER') {
+    } else if (valgtFilter === Filtervalg.ulesteEndringer && valgteFilteralternativer === 'ULESTE_ENDRINGER') {
         return [
             <FiltreringLabel
-                key={filter}
+                key={valgtFilter}
                 label={hendelserEtikett['ULESTE_ENDRINGER']}
-                slettFilter={() => slettEnkeltfilter(filter, null)}
+                slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
             />
         ];
-    } else if (filter === Filtervalg.visGeografiskBosted && filteralternativer.length > 0) {
+    } else if (valgtFilter === Filtervalg.visGeografiskBosted && valgteFilteralternativer.length > 0) {
         return [
             <FiltreringLabel
                 key={`visGeografiskBosted-1`}
                 label={`Vis geografisk bosted`}
-                slettFilter={() => slettEnkeltfilter(filter, '1')}
+                slettFilter={() => slettEnkeltfilter(valgtFilter, '1')}
             />
         ];
-    } else if (filter === Filtervalg.geografiskBosted && filteralternativer.length > 0) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.geografiskBosted && valgteFilteralternativer.length > 0) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={
                         'Bosted: ' +
                         (geografiskBostedListData.has(valgtAlternativ)
                             ? geografiskBostedListData.get(valgtAlternativ)
                             : 'ugyldig')
                     }
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filteralternativer === true) {
+    } else if (valgteFilteralternativer === true) {
         return [
             <FiltreringLabel
-                key={filter}
-                label={filterKonstanter[filter]}
-                slettFilter={() => slettEnkeltfilter(filter, false)}
+                key={valgtFilter}
+                label={filterKonstanter[valgtFilter]}
+                slettFilter={() => slettEnkeltfilter(valgtFilter, false)}
             />
         ];
-    } else if (filter === Filtervalg.foedeland) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.foedeland) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={
                         'Fødeland: ' +
                         (foedelandListData.has(valgtAlternativ) ? foedelandListData.get(valgtAlternativ) : 'ugyldig')
                     }
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.tolkBehovSpraak) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.tolkBehovSpraak) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={
                         'Tolkebehov språk: ' +
                         (tolkbehovSpraakListData.has(valgtAlternativ)
                             ? tolkbehovSpraakListData.get(valgtAlternativ)
                             : 'ugyldig')
                     }
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.ytelseAapKelvin) {
-        return filteralternativer.map((valgtAlternativ: AAPFilterKelvin) => {
+    } else if (valgtFilter === Filtervalg.ytelseAapKelvin) {
+        return valgteFilteralternativer.map((valgtAlternativ: AAPFilterKelvin) => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={aapIKelvinFilter[valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.ytelseTiltakspenger) {
-        return filteralternativer.map((valgtAlternativ: TiltakspengerFilter) => {
+    } else if (valgtFilter === Filtervalg.ytelseTiltakspenger) {
+        return valgteFilteralternativer.map((valgtAlternativ: TiltakspengerFilter) => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={tiltakspengerFilter[valgtAlternativ]}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.avvik14aVedtak) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.avvik14aVedtak) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             if (valgtAlternativ === HAR_AVVIK) {
                 return null;
             }
@@ -236,78 +241,84 @@ export const LagLabelForFiltervalg = ({filter, filteralternativer, slettEnkeltfi
             // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
             // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
             // filter-etiketter fjernes
-            const fjernAvvik14aHovedFilter = filteralternativer.length <= 2;
+            const fjernAvvik14aHovedFilter = valgteFilteralternativer.length <= 2;
             const slettAvvik14aVedtakFilter = () => {
                 if (fjernAvvik14aHovedFilter) {
-                    slettEnkeltfilter(filter, valgtAlternativ);
-                    slettEnkeltfilter(filter, HAR_AVVIK);
+                    slettEnkeltfilter(valgtFilter, valgtAlternativ);
+                    slettEnkeltfilter(valgtFilter, HAR_AVVIK);
                 } else {
-                    slettEnkeltfilter(filter, valgtAlternativ);
+                    slettEnkeltfilter(valgtFilter, valgtAlternativ);
                 }
             };
 
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
-                    label={getLabel(valgtAlternativ, filter, enhettiltak)}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={getLabel(valgtAlternativ, valgtFilter, enhettiltak)}
                     slettFilter={slettAvvik14aVedtakFilter}
                 />
             );
         });
-    } else if (filter === Filtervalg.barnUnder18Aar && filteralternativer.length > 0) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.barnUnder18Aar && valgteFilteralternativer.length > 0) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
-                    label={`${filterKonstanter[filter][valgtAlternativ]}`}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={`${filterKonstanter[valgtFilter][valgtAlternativ]}`}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (filter === Filtervalg.barnUnder18AarAlder && filteralternativer.length > 0) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (valgtFilter === Filtervalg.barnUnder18AarAlder && valgteFilteralternativer.length > 0) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ}`}
+                    key={`${valgtFilter}--${valgtAlternativ}`}
                     label={`Har barn under 18 år:  ${valgtAlternativ} år`}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
         });
-    } else if (Array.isArray(filteralternativer)) {
-        return filteralternativer.map(valgtAlternativ => {
+    } else if (Array.isArray(valgteFilteralternativer)) {
+        return valgteFilteralternativer.map(valgtAlternativ => {
             return (
                 <FiltreringLabel
-                    key={`${filter}--${valgtAlternativ.key || valgtAlternativ}`}
-                    label={getLabel(valgtAlternativ, filter, enhettiltak)}
-                    slettFilter={() => slettEnkeltfilter(filter, valgtAlternativ.key || valgtAlternativ)}
+                    key={`${valgtFilter}--${valgtAlternativ.key || valgtAlternativ}`}
+                    label={getLabel(valgtAlternativ, valgtFilter, enhettiltak)}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ.key || valgtAlternativ)}
                 />
             );
         });
-    } else if (filteralternativer && typeof filteralternativer === 'object') {
+    } else if (valgteFilteralternativer && typeof valgteFilteralternativer === 'object') {
         // key = aktiviteter
-        return Object.entries(filteralternativer)
+        return Object.entries(valgteFilteralternativer)
             .filter(([_, aktivitetvalue]) => aktivitetvalue !== AktiviteterValg.NA)
             .map(([aktivitetkey, aktivitetvalue]) => (
                 <FiltreringLabel
                     key={`aktivitet-${aktivitetkey}`}
-                    label={`${filterKonstanter[filter][aktivitetkey]}: ${aktivitetvalue}`}
-                    slettFilter={() => slettEnkeltfilter(filter, aktivitetkey)}
+                    label={`${filterKonstanter[valgtFilter][aktivitetkey]}: ${aktivitetvalue}`}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, aktivitetkey)}
                 />
             ));
-    } else if (filter === Filtervalg.navnEllerFnrQuery) {
-        const trimmedQuery = filteralternativer.trim();
+    } else if (valgtFilter === Filtervalg.navnEllerFnrQuery) {
+        const trimmedQuery = valgteFilteralternativer.trim();
         if (trimmedQuery !== '') {
             const isFnr = !isNaN(parseInt(trimmedQuery, 10));
             const labelId = isFnr ? 'Søk på fødselsnummer' : 'Søk på navn';
-            return [<FiltreringLabel key={filter} label={labelId} slettFilter={() => slettEnkeltfilter(filter, '')} />];
+            return [
+                <FiltreringLabel
+                    key={valgtFilter}
+                    label={labelId}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, '')}
+                />
+            ];
         }
-    } else if (filteralternativer) {
+    } else if (valgteFilteralternativer) {
         return [
             <FiltreringLabel
-                key={`${filter}--${filteralternativer}`}
-                label={filterKonstanter[filter][filteralternativer]}
-                slettFilter={() => slettEnkeltfilter(filter, null)}
+                key={`${valgtFilter}--${valgteFilteralternativer}`}
+                label={filterKonstanter[valgtFilter][valgteFilteralternativer]}
+                slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
             />
         ];
     }

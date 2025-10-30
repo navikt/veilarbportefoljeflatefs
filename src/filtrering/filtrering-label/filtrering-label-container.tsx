@@ -33,16 +33,21 @@ function FiltreringLabelContainer({
         dispatch(hentMineFilterForVeileder());
     }, [dispatch]);
 
-    const filterElementer = Object.entries(filtervalg)
-        .map(([filter, filteralternativer]) => {
-            return LagLabelForFiltervalg({filter, filteralternativer, slettEnkeltfilter: slettEnkelt, enhettiltak});
+    const filterlabelsForValgteFilter = Object.entries(filtervalg)
+        .map(([valgtFilter, filteralternativer]) => {
+            return LagLabelForFiltervalg({
+                valgtFilter: valgtFilter,
+                valgteFilteralternativer: filteralternativer,
+                slettEnkeltfilter: slettEnkelt,
+                enhettiltak
+            });
         })
         .reduce((acc, l) => [...acc, ...l], []);
 
     return (
         <div className={className} data-testid="filtrering_label-container">
-            {filterElementer}
-            {filterElementer.length > 0 && (
+            {filterlabelsForValgteFilter}
+            {filterlabelsForValgteFilter.length > 0 && (
                 <FiltreringLabel
                     key="slett-alle"
                     label="Nullstill filtervalg"
