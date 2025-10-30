@@ -35,7 +35,12 @@ function FiltreringLabelContainer({
 
     const filterElementer = Object.entries(filtervalg)
         .map(([key, value]) => {
-            return LagLabelForFiltervalg({key, value, slettEnkelt, enhettiltak});
+            return LagLabelForFiltervalg({
+                valgtFilter: key,
+                valgteFilteralternativer: value,
+                slettEnkeltfilter: slettEnkelt,
+                enhettiltak
+            });
         })
         .reduce((acc, l) => [...acc, ...l], []);
 
