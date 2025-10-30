@@ -1,6 +1,7 @@
 import {faker} from '@faker-js/faker/locale/nb_NO';
 import {initialState} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
+import {InnsatsgruppeGjeldendeVedtak14a} from '../../typer/bruker-modell';
 
 export const mineFilter = (): LagretFilter[] => {
     const datointervall = {
@@ -29,7 +30,7 @@ export const mineFilter = (): LagretFilter[] => {
             filterId: 2,
             filterValg: {
                 ...initialState,
-                innsatsgruppe: ['BATT'],
+                innsatsgruppeGjeldendeVedtak14a: [InnsatsgruppeGjeldendeVedtak14a.SPESIELT_TILPASSET_INNSATS],
                 formidlingsgruppe: ['ARBS'],
                 tiltakstyper: ['TULLETOES', 'UTDYRK']
             },
