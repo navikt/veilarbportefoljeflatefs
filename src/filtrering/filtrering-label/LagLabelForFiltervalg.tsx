@@ -10,11 +10,11 @@ import {
     filterKonstanter,
     HAR_AVVIK,
     hendelserEtikett,
-    registreringstype,
+    registreringstypeEtiketter,
     tiltakspengerFilter,
     TiltakspengerFilter,
-    utdanning,
     utdanningBestatt,
+    utdanningEtiketter,
     utdanningGodkjent
 } from '../filter-konstanter';
 import {FiltreringLabelMedIkon} from './filtrering-label-med-ikon';
@@ -75,19 +75,10 @@ export const LagLabelForFiltervalg = ({
         }
         case Filtervalg.utdanning: {
             return valgteFilteralternativer.map(valgtAlternativ => {
-                if (valgtAlternativ === 'INGEN_DATA') {
-                    return (
-                        <FiltreringLabel
-                            key={`utdanning-${valgtAlternativ}`}
-                            label={`Utdanning: ${utdanning[valgtAlternativ].label}`}
-                            slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                        />
-                    );
-                }
                 return (
                     <FiltreringLabel
                         key={`utdanning-${valgtAlternativ}`}
-                        label={utdanning[valgtAlternativ]}
+                        label={utdanningEtiketter[valgtAlternativ]}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     />
                 );
@@ -95,19 +86,10 @@ export const LagLabelForFiltervalg = ({
         }
         case Filtervalg.registreringstype: {
             return valgteFilteralternativer.map(valgtAlternativ => {
-                if (valgtAlternativ === 'INGEN_DATA') {
-                    return (
-                        <FiltreringLabel
-                            key={`situasjon-${valgtAlternativ}`}
-                            label={`Situasjon: ${registreringstype[valgtAlternativ].label}`}
-                            slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                        />
-                    );
-                }
                 return (
                     <FiltreringLabel
                         key={`situasjon-${valgtAlternativ}`}
-                        label={registreringstype[valgtAlternativ]}
+                        label={registreringstypeEtiketter[valgtAlternativ]}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                     />
                 );
