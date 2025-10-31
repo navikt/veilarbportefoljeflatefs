@@ -170,19 +170,23 @@ export const LagLabelForFiltervalg = ({
                 );
             });
         }
+        case Filtervalg.ulesteEndringer: {
+            if (valgteFilteralternativer === 'ULESTE_ENDRINGER') {
+                return [
+                    <FiltreringLabel
+                        key={valgtFilter}
+                        label={hendelserEtikett.ULESTE_ENDRINGER}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
+                    />
+                ];
+            }
+            break;
+        }
         default:
             break;
     }
 
-    if (valgtFilter === Filtervalg.ulesteEndringer && valgteFilteralternativer === 'ULESTE_ENDRINGER') {
-        return [
-            <FiltreringLabel
-                key={valgtFilter}
-                label={hendelserEtikett['ULESTE_ENDRINGER']}
-                slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
-            />
-        ];
-    } else if (valgtFilter === Filtervalg.visGeografiskBosted && valgteFilteralternativer.length > 0) {
+    if (valgtFilter === Filtervalg.visGeografiskBosted && valgteFilteralternativer.length > 0) {
         return [
             <FiltreringLabel
                 key={`visGeografiskBosted-1`}
