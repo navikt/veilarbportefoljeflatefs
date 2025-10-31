@@ -279,6 +279,11 @@ export const registreringstype = {
     ANNET: {label: 'Ingen av situasjonene passer for meg'},
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
+export const registreringstypeEtiketter = {
+    ...registreringstype,
+    INGEN_DATA: {label: 'Situasjon: Ingen registreringsinformasjon'}
+};
+
 export const landgruppe = {
     LANDGRUPPE_0: 'Landgruppe 0',
     LANDGRUPPE_1: 'Landgruppe 1',
@@ -309,6 +314,11 @@ export const utdanning = {
     HOYERE_UTDANNING_1_TIL_4: {label: 'Høyere utdanning (1 til 4 år)'},
     HOYERE_UTDANNING_5_ELLER_MER: {label: 'Høyere utdanning (5 år eller mer)'},
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
+};
+
+export const utdanningEtiketter = {
+    ...utdanning,
+    INGEN_DATA: {label: 'Utdanning: Ingen registreringsinformasjon'}
 };
 
 export const utdanningGodkjent = {
@@ -348,6 +358,7 @@ export const hendelserLabels = {
     AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
 };
 
+/** Tekstar for filteret sisteEndringKategori, aka "Siste endring av bruker"*/
 export const hendelserEtikett = {
     ULESTE_ENDRINGER: 'Uleste endringer (Siste endring av bruker)',
     MAL: 'Endring i mål',
