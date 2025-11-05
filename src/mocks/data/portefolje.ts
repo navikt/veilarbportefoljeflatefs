@@ -227,15 +227,14 @@ const lagUtgattVarsel = (): UtgattVarselHendelse | null => {
     if (maybeUtgattVarsel < 0.5) {
         return {
             beskrivelse: 'Bruker har et utgått varsel',
-            dato: '2024-11-29T09:40:00.052559441+01:00',
+            dato: '2024-11-29',
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
     return {
         beskrivelse: 'Bruker har et utgått varsel',
         dato: new Date().toISOString(),
-        lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan',
-        detaljer: 'Varsel om stans i oppfølging'
+        lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
     };
 };
 
