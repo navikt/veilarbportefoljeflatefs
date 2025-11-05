@@ -13,7 +13,6 @@ import {
 import {
     AapKelvinData,
     BarnUnder18AarModell,
-    BrukerModell,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
     GjeldendeVedtak14aModell,
