@@ -9,7 +9,11 @@ export const GeografiskBostedDetaljerData = ({bruker, valgteKolonner}: DataCellP
 
     return (
         <TekstDataCellType
-            tekst={bruker.bostedBydel ? bostedBydelEllerUkjent(bruker.bostedBydel, geografiskbostedData) : '-'}
+            tekst={
+                bruker.geografiskBosted.bostedBydel
+                    ? bostedBydelEllerUkjent(bruker.geografiskBosted.bostedBydel, geografiskbostedData)
+                    : '-'
+            }
             skalVises={valgteKolonner.includes(Kolonne.BOSTED_BYDEL)}
             className="col col-xs-2"
         />

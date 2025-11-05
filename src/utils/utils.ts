@@ -212,16 +212,9 @@ export function capitalize(str: string) {
 }
 
 export function bostedKommuneUtlandEllerUkjent(bruker: BrukerModell, geografiskbostedData) {
-    if (bruker.bostedKommune) {
-        return geografiskbostedData.get(bruker.bostedKommune);
-    }
-    if (bruker.harUtelandsAddresse) {
-        return 'Utland';
-    }
-    if (bruker.harUkjentBosted) {
-        return 'Ukjent';
-    }
-    return '-';
+    if (bruker.geografiskBosted.bostedKommune) {
+        return geografiskbostedData.get(bruker.geografiskBosted.bostedKommune);
+    } else return bruker.geografiskBosted.bostedKommuneUkjentEllerUtland;
 }
 
 export const bostedBydelEllerUkjent = (bostedBydel: string, geografiskbostedData: Map<string, string>): string => {
