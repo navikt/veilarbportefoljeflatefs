@@ -117,7 +117,7 @@ export function MinoversiktTableRow({
                 <div className="brukerliste__gutter-right">
                     <div className="brukerliste__etiketter">
                         <Etiketter bruker={bruker} />
-                        {bruker.nyForVeileder && (
+                        {bruker.etiketter.nyForVeileder && (
                             <Tag className="tabell-etikett" variant="info" size="small">
                                 Ny bruker
                             </Tag>

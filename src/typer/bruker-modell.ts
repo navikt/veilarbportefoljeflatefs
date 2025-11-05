@@ -1,22 +1,15 @@
 export interface BrukerModell {
+    etiketter: Etiketter;
     fnr: string;
-    guid: string;
+    guid: string; // denne sendes ikke fra backend
     fornavn: string;
     etternavn: string;
     oppfolgingStartdato: string; // dato
     tildeltTidspunkt: string; // dato
     veilederId?: string;
-    sikkerhetstiltak: string[];
-    diskresjonskode?: string;
     egenAnsatt: boolean;
     skjermetTil?: string;
-    nyForVeileder: boolean;
-    nyForEnhet: boolean;
-    vurderingsBehov?: VurderingsBehov;
-    trengerOppfolgingsvedtak: boolean;
-    profileringResultat?: Profileringsresultat;
     innsatsgruppe: Innsatsgruppe;
-    erDoed: boolean;
     ytelse?: string;
     utlopsdato?: string; // dato
     dagputlopUke?: number;
@@ -32,11 +25,10 @@ export interface BrukerModell {
     aktivitetStart?: string; // dato
     nesteAktivitetStart?: string; // dato
     forrigeAktivitetStart?: string; // dato
-    markert?: boolean;
-    erSykmeldtMedArbeidsgiver: boolean;
-    moteStartTid: string; // kun avtalte moter, // moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
-    alleMoterStartTid?: string;
-    alleMoterSluttTid?: string;
+    markert?: boolean; // sendes ikke fra backend
+    moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
+    alleMoterStartTid?: string; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
+    alleMoterSluttTid?: string; // kun for å regne ut varighet
     utkast14a: Utkast14a | null;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
@@ -64,12 +56,16 @@ export interface BrukerModell {
     tiltakspenger: TiltakspengerData | null;
 }
 
-export enum VurderingsBehov {
-    ARBEIDSEVNE_VURDERING = 'ARBEIDSEVNE_VURDERING',
-    IKKE_VURDERT = 'IKKE_VURDERT',
-    ANTATT_GODE_MULIGHETER = 'ANTATT_GODE_MULIGHETER',
-    ANTATT_BEHOV_FOR_VEILEDNING = 'ANTATT_BEHOV_FOR_VEILEDNING',
-    OPPGITT_HINDRINGER = 'OPPGITT_HINDRINGER'
+export interface Etiketter {
+    erDoed: boolean;
+    erSykmeldtMedArbeidsgiver: boolean;
+    trengerOppfolgingsvedtak: boolean;
+    nyForVeileder: boolean;
+    nyForEnhet: boolean;
+    harBehovForArbeidsevneVurdering: boolean;
+    harSikkerhetstiltak: boolean;
+    diskresjonskodeFortrolig?: string | null;
+    profileringResultat?: Profileringsresultat | null;
 }
 
 export enum Profileringsresultat {
