@@ -173,7 +173,6 @@ export interface UtgattVarselHendelse {
     beskrivelse: string;
     dato: string;
     lenke: string;
-    detaljer?: string;
 }
 
 interface Tolkebehov {
