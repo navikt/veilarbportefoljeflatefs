@@ -13,6 +13,7 @@ import {
 import {
     AapKelvinData,
     BarnUnder18AarModell,
+    BrukerModell,
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
     GjeldendeVedtak14aModell,
@@ -271,13 +272,13 @@ const lagTiltakspengerData = (): TiltakspengerData | null => {
     };
 };
 
-function lagBruker(sikkerhetstiltak = []) {
+function lagBruker() {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
-    const nyForVeileder = maybeVeileder && Math.random() < 25 / 100;
+    const nyForVeileder = maybeVeileder > 0 && Math.random() < 0.25;
     const nyForEnhet = Math.random() < 25 / 100;
-    const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
+    const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
 
     const aktoerid = mockAktoeridLopenummer++;
     const ytelse = lagYtelse();
@@ -290,27 +291,34 @@ function lagBruker(sikkerhetstiltak = []) {
     const random_harSkjermetTil = erSkjermet();
 
     return {
+        guid: '',
+        oppfolgingStartdato: '',
+        etiketter: {
+            harSikkerhetstiltak: false,
+            nyForVeileder: nyForVeileder,
+            nyForEnhet: nyForEnhet,
+            erDoed: grunndata.erDoed,
+            erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
+            trengerOppfolgingsvedtak: false,
+            harBehovForArbeidsevneVurdering: false,
+            diskresjonskodeFortrolig: null,
+            profileringResultat: null
+        },
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
-        veilederId,
-        nyForVeileder,
-        nyForEnhet,
+        veilederId: veilederId,
         tildeltTidspunkt: randomDate({past: true}),
-        diskresjonskode: null,
-        sikkerhetstiltak,
         venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
         venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         tiltakshendelse: lagTiltakshendelse(),
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
-        egenAnsatt: random_egenAnsatt ? true : '',
+        egenAnsatt: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
-        erDoed: grunndata.erDoed,
         ...ytelse,
         aktiviteter: grunndata.aktiviteter,
-        erSykmeldtMedArbeidsgiver,
-        moteStartTid: grunndata.moteStartTid,
+        moteStartTid: grunndata.moteStartTid?.toString(),
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
