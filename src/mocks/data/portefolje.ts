@@ -302,6 +302,15 @@ function lagBruker() {
             diskresjonskodeFortrolig: null,
             profileringResultat: null
         },
+        geografiskBosted: {
+            bostedKommune: hentBostedKommune(),
+            bostedBydel: hentBostedBydel(),
+            bostedKommuneUkjentEllerUtland: '-',
+            bostedSistOppdatert: randomDate({past: true})
+        },
+        bostedKommune: hentBostedKommune(),
+        bostedBydel: hentBostedBydel(),
+        bostedSistOppdatert: randomDate({past: true}),
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
@@ -331,9 +340,7 @@ function lagBruker() {
             gyldigTil: ''
         },
         foedeland: hentLand(),
-        bostedKommune: hentBostedKommune(),
-        bostedBydel: hentBostedBydel(),
-        bostedSistOppdatert: randomDate({past: true}),
+
         tolkebehov: {
             talespraaktolk: hentSpraak(),
             tegnspraaktolk: hentSpraak(),

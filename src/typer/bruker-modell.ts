@@ -1,5 +1,6 @@
 export interface BrukerModell {
     etiketter: Etiketter;
+    geografiskBosted: GeografiskBosted;
     fnr: string;
     guid: string; // denne sendes ikke fra backend
     fornavn: string;
@@ -37,11 +38,6 @@ export interface BrukerModell {
     hovedStatsborgerskap: Statsborgerskap;
     foedeland?: string;
     tolkebehov: Tolkebehov;
-    bostedKommune?: string;
-    bostedBydel?: string;
-    bostedSistOppdatert?: string;
-    harUtelandsAddresse?: boolean;
-    harUkjentBosted?: boolean;
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
     ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
@@ -66,6 +62,13 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig?: string | null;
     profileringResultat?: Profileringsresultat | null;
+}
+
+export interface GeografiskBosted {
+    bostedKommune?: string;
+    bostedKommuneUkjentEllerUtland: string;
+    bostedBydel?: string;
+    bostedSistOppdatert?: string;
 }
 
 export enum Profileringsresultat {
