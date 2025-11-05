@@ -18,14 +18,14 @@ export function VeilederNavnData({bruker, valgteKolonner}: DataCellProps) {
     const veilederNavn = brukersVeileder ? `${brukersVeileder.etternavn}, ${brukersVeileder.fornavn}` : '';
 
     const ufordeltBrukerEtikett = (
-        <Tag className="tabell-etikett" size="small" variant="info" hidden={!bruker.nyForEnhet}>
+        <Tag className="tabell-etikett" size="small" variant="info" hidden={!bruker.etiketter.nyForEnhet}>
             Ufordelt bruker
         </Tag>
     );
 
     return (
         <div className="col col-xs-2 ord-brekk">
-            <BodyShort size="small">{bruker.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
+            <BodyShort size="small">{bruker.etiketter.nyForEnhet ? ufordeltBrukerEtikett : veilederNavn}</BodyShort>
         </div>
     );
 }

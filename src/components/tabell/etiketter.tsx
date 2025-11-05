@@ -1,5 +1,5 @@
 import {Tag} from '@navikt/ds-react';
-import {BrukerModell, Profileringsresultat, VurderingsBehov} from '../../typer/bruker-modell';
+import {BrukerModell, Profileringsresultat} from '../../typer/bruker-modell';
 import {hentSkjermetInfo} from '../../utils/dato-utils';
 
 interface EtiketterProps {
@@ -11,19 +11,19 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
 
     return (
         <>
-            {bruker.erDoed && (
+            {bruker.etiketter.erDoed && (
                 <Tag variant="info" size="small" className="tabell-etikett etikett--doed">
                     Død
                 </Tag>
             )}
-            {bruker.sikkerhetstiltak && bruker.sikkerhetstiltak.length !== 0 && (
+            {bruker.etiketter.harSikkerhetstiltak && (
                 <Tag variant="warning" size="small" className="tabell-etikett">
                     Sikkerhetstiltak
                 </Tag>
             )}
-            {bruker.diskresjonskode && (
+            {bruker.etiketter.diskresjonskodeFortrolig && (
                 <Tag variant="warning" size="small" className="tabell-etikett">
-                    {`Kode ${bruker.diskresjonskode}`}
+                    {`Kode ${bruker.etiketter.diskresjonskodeFortrolig}`}
                 </Tag>
             )}
             {!skjermetInfo.hidden && (
@@ -31,35 +31,35 @@ export const Etiketter = ({bruker}: EtiketterProps) => {
                     {`${skjermetInfo.tittel}`}
                 </Tag>
             )}
-            {bruker.trengerOppfolgingsvedtak && (
+            {bruker.etiketter.trengerOppfolgingsvedtak && (
                 <Tag variant="info" size="small" className="tabell-etikett">
                     Trenger oppfølgingsvedtak § 14 a
                 </Tag>
             )}
-            {bruker.trengerOppfolgingsvedtak &&
-                bruker.profileringResultat === Profileringsresultat.OPPGITT_HINDRINGER && (
+            {bruker.etiketter.trengerOppfolgingsvedtak &&
+                bruker.etiketter.profileringResultat === Profileringsresultat.OPPGITT_HINDRINGER && (
                     <Tag variant="info" size="small" className="tabell-etikett">
                         Oppgitt hindringer
                     </Tag>
                 )}
-            {bruker.trengerOppfolgingsvedtak &&
-                bruker.profileringResultat === Profileringsresultat.ANTATT_GODE_MULIGHETER && (
+            {bruker.etiketter.trengerOppfolgingsvedtak &&
+                bruker.etiketter.profileringResultat === Profileringsresultat.ANTATT_GODE_MULIGHETER && (
                     <Tag variant="info" size="small" className="tabell-etikett">
                         Antatt gode muligheter
                     </Tag>
                 )}
-            {bruker.trengerOppfolgingsvedtak &&
-                bruker.profileringResultat === Profileringsresultat.ANTATT_BEHOV_FOR_VEILEDNING && (
+            {bruker.etiketter.trengerOppfolgingsvedtak &&
+                bruker.etiketter.profileringResultat === Profileringsresultat.ANTATT_BEHOV_FOR_VEILEDNING && (
                     <Tag variant="info" size="small" className="tabell-etikett">
                         Antatt behov for veiledning
                     </Tag>
                 )}
-            {bruker.vurderingsBehov === VurderingsBehov.ARBEIDSEVNE_VURDERING && (
+            {bruker.etiketter.harBehovForArbeidsevneVurdering && (
                 <Tag variant="info" size="small" className="tabell-etikett">
                     Behov for AEV
                 </Tag>
             )}
-            {bruker.erSykmeldtMedArbeidsgiver && (
+            {bruker.etiketter.erSykmeldtMedArbeidsgiver && (
                 <Tag variant="info" size="small" className="tabell-etikett">
                     Sykmeldt
                 </Tag>
