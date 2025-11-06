@@ -28,7 +28,7 @@ spec:
       cpu: 500m
       memory: 512Mi
   observability:
-    autoinstrumentation:
+    autoInstrumentation:
       enabled: true
       runtime: nodejs
     logging:
