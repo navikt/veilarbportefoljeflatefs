@@ -28,6 +28,9 @@ spec:
       cpu: 500m
       memory: 512Mi
   observability:
+    autoinstrumentation:
+      enabled: true
+      runtime: nodejs
     logging:
       destinations:
         - id: elastic
