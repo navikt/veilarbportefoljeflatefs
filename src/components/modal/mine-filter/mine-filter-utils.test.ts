@@ -86,7 +86,8 @@ describe('Mine filter utils', () => {
                 ytelseAapArena: [],
                 ytelseAapKelvin: [],
                 ytelseTiltakspengerArena: [],
-                ytelseTiltakspenger: []
+                ytelseTiltakspenger: [],
+                ytelseDagpengerArena: []
             };
 
             expect(
