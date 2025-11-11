@@ -438,15 +438,9 @@ export enum DagpengerFilterArena {
     HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA = 'HAR_DAGPENGER_LONNSGARANTIMIDLER'
 }
 
-// // Dette er om vi skal ha ulike verdiar synlege for alle/ein valgt.
-// export const dagpengerArenaFilter = {
-//     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
-//     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
-// };
-
 // Dette er ikkje eit ekte filter mot backend,
 // men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
-// som, når valgt, sender både UNNTAK og ORDINAR til backend.
+// som, når valgt, sender alle dagpengetypar til backend.
 export enum DagpengerFilterArenaAlle {
     HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
 }
