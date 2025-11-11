@@ -406,13 +406,11 @@ export const aapIArenaFilterBeggeAlternativ = {
 };
 
 export enum AAPFilterKelvin {
-    HAR_AAP_I_KELVIN = 'HAR_AAP',
-    HAR_IKKE_AAP_I_KELVIN = 'HAR_IKKE_AAP'
+    HAR_AAP_I_KELVIN = 'HAR_AAP'
 }
 
 export const aapIKelvinFilter = {
-    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP (Kelvin)'},
-    [AAPFilterKelvin.HAR_IKKE_AAP_I_KELVIN]: {label: 'Har ikke AAP (Kelvin)'}
+    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP (Kelvin)'}
 };
 
 export enum TiltakspengerFilterArena {
@@ -424,13 +422,11 @@ export const tiltakspengerFilterArena = {
 };
 
 export enum TiltakspengerFilter {
-    HAR_TILTAKSPENGER = 'HAR_TILTAKSPENGER',
-    HAR_IKKE_TILTAKSPENGER = 'HAR_IKKE_TILTAKSPENGER'
+    HAR_TILTAKSPENGER = 'HAR_TILTAKSPENGER'
 }
 
 export const tiltakspengerFilter = {
-    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'},
-    [TiltakspengerFilter.HAR_IKKE_TILTAKSPENGER]: {label: 'Har ikke tiltakspenger (TPSAK)'}
+    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'}
 };
 
 /** Lange namn på innsatsgrupper.
