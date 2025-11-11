@@ -2,32 +2,22 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-} from '../../../filtrering/filter-konstanter';
+    filtrertPaFilterMedDagpengerMedPermittering,
+    filtrertPaFilterMedDagpengerUtenPermittering
+} from '../../../utils/DagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetData = ({
     bruker,
     valgteKolonner,
     filtervalg
 }: DataCellMedInnholdBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
+    const {ytelse: valgtArenaytelsesfilter, ytelseDagpengerArena} = filtervalg;
 
     // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const ukerIgjenBasertPaDagpengetype = () => {
-        if (
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-        ) {
+        if (filtrertPaFilterMedDagpengerMedPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return bruker.permutlopUke;
-        } else if (
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_ORDINARE ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
-        ) {
+        } else if (filtrertPaFilterMedDagpengerUtenPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return bruker.dagputlopUke;
         }
     };

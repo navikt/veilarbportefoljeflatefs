@@ -94,6 +94,11 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI ||
         filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER;
 
+    const filtrertPaDagpengerArenaNyttFilter = filtervalg.ytelseDagpengerArena.length > 0;
+
+    const filtrertPaYtelseDagpengerEllerNyttDagpengerfilter =
+        filtrertPaDagpengerArenaNyttFilter || filtrertPaYtelseMedDagpengerettigheter;
+
     const avansertAktivitetErValgt =
         !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
         harValgtMinstEnAktivitet(filtervalg.aktiviteter!) &&
@@ -194,7 +199,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))
         .concat(
-            addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, filtrertPaYtelseMedDagpengerettigheter)
+            addHvis(
+                Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER,
+                filtrertPaYtelseDagpengerEllerNyttDagpengerfilter
+            )
         )
         .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtrertPaTiltakspengerArena))
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt || forenkletAktivitetErValgt))
