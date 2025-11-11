@@ -17,6 +17,7 @@ export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
     'veilarbportefoljeflatefs.la-veileder-vise-flere-enn-tre-kolonner-samtidig';
 export const SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA =
     'veilarbportefoljeflatefs.skjul-filter-sammenlikne-gjeldende-14a-og-arena';
+export const BRUK_NYTT_ARENA_DAGPENGER_FILTER = 'veilarbportefoljeflatefs.ytelser-bruk-nytt-arena-dagpenger-filter';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
 export const PORTEFOLJE_FEATURES = [
@@ -26,5 +27,6 @@ export const PORTEFOLJE_FEATURES = [
     VIS_AAPFILTER_MED_KELVINDATA,
     VIS_TILTAKSPENGER_MED_TPSAKDATA,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
-    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
+    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA,
+    BRUK_NYTT_ARENA_DAGPENGER_FILTER
 ];
