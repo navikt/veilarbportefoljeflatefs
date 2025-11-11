@@ -56,6 +56,9 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         if (filtervalg.ytelseTiltakspengerArena.length === 1) {
             return filtervalg.ytelseAapArena[0];
         }
+        if (filtervalg.ytelseDagpengerArena.length === 1) {
+            return filtervalg.ytelseDagpengerArena[0];
+        }
         return '';
     };
 
@@ -63,6 +66,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         endreFiltervalg(Filtervalg.ytelse, null);
         endreFiltervalg(Filtervalg.ytelseAapArena, []);
         endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+        endreFiltervalg(Filtervalg.ytelseDagpengerArena, []);
     };
 
     const onChange = (e: ChangeEvent<HTMLInputElement>, filter: Arenaytelsesfilter) => {
@@ -72,6 +76,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             case Filtervalg.ytelse: {
                 endreFiltervalg(Filtervalg.ytelseAapArena, []);
                 endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                endreFiltervalg(Filtervalg.ytelseDagpengerArena, []);
                 endreFiltervalg(Filtervalg.ytelse, e.target.value);
                 return;
             }
@@ -79,6 +84,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 if (e.target.value === AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK) {
                     endreFiltervalg(Filtervalg.ytelse, null);
                     endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                    endreFiltervalg(Filtervalg.ytelseDagpengerArena, []);
                     endreFiltervalg(Filtervalg.ytelseAapArena, [
                         AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
                         AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA
@@ -86,6 +92,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 } else {
                     endreFiltervalg(Filtervalg.ytelse, null);
                     endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                    endreFiltervalg(Filtervalg.ytelseDagpengerArena, []);
                     endreFiltervalg(Filtervalg.ytelseAapArena, [e.target.value]);
                 }
                 return;
@@ -93,7 +100,15 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             case Filtervalg.ytelseTiltakspengerArena: {
                 endreFiltervalg(Filtervalg.ytelse, null);
                 endreFiltervalg(Filtervalg.ytelseAapArena, []);
+                endreFiltervalg(Filtervalg.ytelseDagpengerArena, []);
                 endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, [e.target.value]);
+                return;
+            }
+            case Filtervalg.ytelseDagpengerArena: {
+                endreFiltervalg(Filtervalg.ytelse, null);
+                endreFiltervalg(Filtervalg.ytelseAapArena, []);
+                endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                endreFiltervalg(Filtervalg.ytelseDagpengerArena, [e.target.value]);
                 return;
             }
             default:
