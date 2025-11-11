@@ -23,6 +23,7 @@ import {
     servicegruppe,
     stillingFraNavFilter,
     tiltakspengerFilter,
+    tiltakspengerFilterArena,
     utdanning,
     utdanningBestatt,
     utdanningGodkjent
@@ -49,6 +50,7 @@ import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
+import {CheckboxFilterformContainer} from './filterform/checkbox-filterform-container';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -440,12 +442,20 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 )}
                 {skalViseTiltakspengerfilterMedTPSAKdata && (
                     <Dropdown
-                        name="Tiltakspenger (TPSAK)"
-                        id="ytelser-tiltakspenger-utenfor-arena"
+                        name="Tiltakspenger "
+                        id="ytelser-tiltakspenger-alle"
                         render={() => (
-                            <CheckboxFilterform
-                                form={Filtervalg.ytelseTiltakspenger}
-                                valg={tiltakspengerFilter}
+                            <CheckboxFilterformContainer
+                                grupper={[
+                                    {
+                                        form: Filtervalg.ytelseTiltakspenger,
+                                        valg: tiltakspengerFilter
+                                    },
+                                    {
+                                        form: Filtervalg.ytelseTiltakspengerArena,
+                                        valg: tiltakspengerFilterArena
+                                    }
+                                ]}
                                 filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
