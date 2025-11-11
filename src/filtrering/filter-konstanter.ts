@@ -447,12 +447,12 @@ export enum DagpengerFilterArena {
 // Dette er ikkje eit ekte filter mot backend,
 // men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
 // som, når valgt, sender både UNNTAK og ORDINAR til backend.
-export enum DagpengerFilterArenaBegge {
+export enum DagpengerFilterArenaAlle {
     HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
 }
 
 export const dagpengerArenaFilter = {
-    [DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
+    [DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
     [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
         label: 'Ordinære dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse

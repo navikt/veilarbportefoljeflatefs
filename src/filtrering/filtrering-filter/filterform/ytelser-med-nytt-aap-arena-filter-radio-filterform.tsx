@@ -10,7 +10,7 @@ import {
     aapIArenaFilterBeggeAlternativ,
     dagpengerArenaFilter,
     DagpengerFilterArena,
-    DagpengerFilterArenaBegge,
+    DagpengerFilterArenaAlle,
     tiltakspengerFilterArena,
     TiltakspengerFilterArena,
     YTELSE_ARENA_DAGPENGER,
@@ -59,6 +59,9 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         if (filtervalg.ytelseDagpengerArena.length === 1) {
             return filtervalg.ytelseDagpengerArena[0];
         }
+        if (filtervalg.ytelseDagpengerArena.length > 1) {
+            return DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA;
+        }
         return '';
     };
 
@@ -105,10 +108,22 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 return;
             }
             case Filtervalg.ytelseDagpengerArena: {
-                endreFiltervalg(Filtervalg.ytelse, null);
-                endreFiltervalg(Filtervalg.ytelseAapArena, []);
-                endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
-                endreFiltervalg(Filtervalg.ytelseDagpengerArena, [e.target.value]);
+                if (e.target.value === DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA) {
+                    endreFiltervalg(Filtervalg.ytelse, null);
+                    endreFiltervalg(Filtervalg.ytelseAapArena, []);
+                    endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                    endreFiltervalg(Filtervalg.ytelseDagpengerArena, [
+                        DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA,
+                        DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA,
+                        DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA,
+                        DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA
+                    ]);
+                } else {
+                    endreFiltervalg(Filtervalg.ytelse, null);
+                    endreFiltervalg(Filtervalg.ytelseAapArena, []);
+                    endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, []);
+                    endreFiltervalg(Filtervalg.ytelseDagpengerArena, [e.target.value]);
+                }
                 return;
             }
             default:
@@ -123,11 +138,11 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     {brukNyttArenaDagpengerfilter ? (
                         <>
                             <Radio
-                                value={DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA}
-                                name={dagpengerArenaFilter[DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA].label}
+                                value={DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA}
+                                name={dagpengerArenaFilter[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
                                 onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {dagpengerArenaFilter[DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA].label}
+                                {dagpengerArenaFilter[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
                             </Radio>
                             <Radio
                                 value={DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA}
