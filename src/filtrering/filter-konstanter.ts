@@ -384,6 +384,7 @@ export const aapIArenaFilter = {
     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
 };
+
 // Dette er ikkje eit ekte filter mot backend,
 // men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
 // som, når valgt, sender både UNNTAK og ORDINAR til backend.
@@ -427,6 +428,48 @@ export enum TiltakspengerFilter {
 
 export const tiltakspengerFilter = {
     [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'}
+};
+
+/** Dette er det "nye" Dagpenger-Arena-filteret, det som er separat fra "ytelse" */
+export enum DagpengerFilterArena {
+    HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
+    HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
+    HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
+    HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA = 'HAR_DAGPENGER_LONNSGARANTIMIDLER',
+    HAR_DAGPENGER_OVRIGE_ARENA = 'HAR_DAGPENGER_OVRIGE' // Denne er ikkje synleg, men vert sendt til backend når ein filtrerer på "alle dagpenger"
+}
+
+// // Dette er om vi skal ha ulike verdiar synlege for alle/ein valgt.
+// export const dagpengerArenaFilter = {
+//     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
+//     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
+// };
+
+// Dette er ikkje eit ekte filter mot backend,
+// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
+// som, når valgt, sender både UNNTAK og ORDINAR til backend.
+export enum DagpengerFilterArenaBegge {
+    HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
+}
+
+export const dagpengerArenaFilter = {
+    [DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
+        label: 'Ordinære dagpenger (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]: {
+        label: 'Dagpenger under permittering (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA]: {
+        label: 'Dagpenger v/perm fiskeindustri (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {
+        label: 'Lønnsgarantimidler dagpenger (Arena)',
+        className: skjemaelementInnrykkKlasse
+    }
 };
 
 /** Lange namn på innsatsgrupper.
@@ -513,5 +556,6 @@ export const filterKonstanter = {
     ytelseAapArena: aapIArenaFilter,
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
-    ytelseTiltakspenger: tiltakspengerFilter
+    ytelseTiltakspenger: tiltakspengerFilter,
+    ytelseDagpengerArena: dagpengerArenaFilter
 };

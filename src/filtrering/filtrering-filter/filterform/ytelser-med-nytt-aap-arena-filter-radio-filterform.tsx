@@ -8,6 +8,9 @@ import {
     AAPFilterArena,
     AAPFilterArenaBegge,
     aapIArenaFilterBeggeAlternativ,
+    dagpengerArenaFilter,
+    DagpengerFilterArena,
+    DagpengerFilterArenaBegge,
     tiltakspengerFilterArena,
     TiltakspengerFilterArena,
     YTELSE_ARENA_DAGPENGER,
@@ -34,7 +37,11 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
 }: RadioFilterformProps) {
     const brukNyttArenaDagpengerfilter = useFeatureSelector()(BRUK_NYTT_ARENA_DAGPENGER_FILTER);
 
-    type Arenaytelsesfilter = Filtervalg.ytelse | Filtervalg.ytelseAapArena | Filtervalg.ytelseTiltakspengerArena;
+    type Arenaytelsesfilter =
+        | Filtervalg.ytelse
+        | Filtervalg.ytelseAapArena
+        | Filtervalg.ytelseTiltakspengerArena
+        | Filtervalg.ytelseDagpengerArena;
 
     const valgtFiltervalg = () => {
         if (filtervalg.ytelse != null) {
@@ -101,43 +108,72 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                     {brukNyttArenaDagpengerfilter ? (
                         <>
                             <Radio
-                                value={YTELSE_ARENA_DAGPENGER}
-                                name={ytelseArena[YTELSE_ARENA_DAGPENGER].label}
-                                onChange={v => onChange(v, Filtervalg.ytelse)}
+                                value={DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA}
+                                name={dagpengerArenaFilter[DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA].label}
+                                onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {ytelseArena[YTELSE_ARENA_DAGPENGER].label}
+                                {dagpengerArenaFilter[DagpengerFilterArenaBegge.HAR_DAGPENGER_ARENA].label}
                             </Radio>
                             <Radio
-                                value={YTELSE_ARENA_DAGPENGER_ORDINARE}
-                                name={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
-                                className={ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].className}
-                                onChange={v => onChange(v, Filtervalg.ytelse)}
+                                value={DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA}
+                                name={dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
+                                className={
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].className
+                                }
+                                onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {ytelseArena[YTELSE_ARENA_DAGPENGER_ORDINARE].label}
+                                {dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
                             </Radio>
                             <Radio
-                                value={YTELSE_ARENA_DAGPENGER_PERMITTERING}
-                                name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
-                                className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].className}
-                                onChange={v => onChange(v, Filtervalg.ytelse)}
+                                value={DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA}
+                                name={
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]
+                                        .label
+                                }
+                                className={
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]
+                                        .className
+                                }
+                                onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING].label}
+                                {dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA].label}
                             </Radio>
                             <Radio
-                                value={YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI}
-                                name={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
-                                className={ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].className}
-                                onChange={v => onChange(v, Filtervalg.ytelse)}
+                                value={DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA}
+                                name={
+                                    dagpengerArenaFilter[
+                                        DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
+                                    ].label
+                                }
+                                className={
+                                    dagpengerArenaFilter[
+                                        DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
+                                    ].className
+                                }
+                                onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {ytelseArena[YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI].label}
+                                {
+                                    dagpengerArenaFilter[
+                                        DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
+                                    ].label
+                                }
                             </Radio>
                             <Radio
-                                value={YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER}
-                                name={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
-                                className={ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].className}
-                                onChange={v => onChange(v, Filtervalg.ytelse)}
+                                value={DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA}
+                                name={
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]
+                                        .label
+                                }
+                                className={
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]
+                                        .className
+                                }
+                                onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                             >
-                                {ytelseArena[YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER].label}
+                                {
+                                    dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]
+                                        .label
+                                }
                             </Radio>
                         </>
                     ) : (
