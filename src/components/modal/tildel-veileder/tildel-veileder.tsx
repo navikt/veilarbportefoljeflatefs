@@ -10,7 +10,6 @@ import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-g
 import {useIdentSelector} from '../../../hooks/redux/use-innlogget-ident';
 import {Fnr, FnrList} from '../../fnr-list';
 import {useEnhetSelector} from '../../../hooks/redux/use-enhet-selector';
-import {trackAmplitude} from '../../../amplitude/amplitude';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {TildelVeilederRenderer} from './tildel-veileder-renderer';
 import {
@@ -129,10 +128,6 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
             setFnrIAdvarselslista(fjernduplikatOgMapTilFnrArray(brukereMedTingSomVilBliSlettetVedTildeling));
 
             if (brukereMedTingSomVilBliSlettetVedTildeling.length > 0) {
-                trackAmplitude(
-                    {name: 'modal åpnet', data: {tekst: 'Fikk advarsel om sletting av ting ved tildeling av veileder'}},
-                    {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
-                );
                 setVisAdvarselOmSletting(true);
             } else {
                 doTildelTilVeileder(alleTilordninger, ident);
@@ -145,32 +140,12 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
 
     const tildelVeiledereForBrukereDerIngentingBlirSlettet = () => {
         if (tilordningerBrukereUtenTingSomVilBliSlettet.length > 0) {
-            trackAmplitude(
-                {
-                    name: 'knapp klikket',
-                    data: {
-                        knapptekst: 'Avbryt tildeling for de aktuelle brukerne',
-                        effekt: 'Avbryter tildeling'
-                    }
-                },
-                {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
-            );
             doTildelTilVeileder(tilordningerBrukereUtenTingSomVilBliSlettet, ident);
         }
         lukkFjernModal();
     };
 
     const tildelVeilederForAlleValgteBrukere = () => {
-        trackAmplitude(
-            {
-                name: 'knapp klikket',
-                data: {
-                    knapptekst: 'Ja, tildel veilederen',
-                    effekt: 'Fortsetter tildeling'
-                }
-            },
-            {modalId: 'veilarbportefoljeflatefs-advarselOmSlettingAvTingPaBrukerVedTildelVeileder'}
-        );
         doTildelTilVeileder(tilordningerAlleBrukere, ident);
         lukkFjernModal();
     };
