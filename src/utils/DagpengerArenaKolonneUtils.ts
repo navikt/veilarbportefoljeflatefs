@@ -46,7 +46,10 @@ export const filtrertPaYtelsesfilterMedDagpengerUtenPermittering = (valgtArenayt
 };
 
 /** Filtrert på dagpengeytelse med permittering i nytt eller gamalt arenafilter */
-export const filtrertPaFilterMedDagpengerMedPermittering = (ytelseDagpengerArena, valgtArenaytelsesfilter) => {
+export const filtrertPaFilterMedDagpengerMedPermittering = (
+    ytelseDagpengerArena: string[],
+    valgtArenaytelsesfilter: string | null
+) => {
     return (
         filtrertPaYtelseDagpengerArenaFilterMedPermittering(ytelseDagpengerArena) ||
         filtrertPaYtelsesfilterMedDagpengerMedPermittering(valgtArenaytelsesfilter)
@@ -54,7 +57,10 @@ export const filtrertPaFilterMedDagpengerMedPermittering = (ytelseDagpengerArena
 };
 
 /** Filtrert på dagpengeytelser utan permittering (eller "alle med dagpenger"), i nytt eller gamalt arenafilter */
-export const filtrertPaFilterMedDagpengerUtenPermittering = (ytelseDagpengerArena, valgtArenaytelsesfilter) => {
+export const filtrertPaFilterMedDagpengerUtenPermittering = (
+    ytelseDagpengerArena: string[],
+    valgtArenaytelsesfilter: string | null
+) => {
     return (
         filtrertPaYtelseDagpengerArenaFilterUtenPermittering(ytelseDagpengerArena) ||
         filtrertPaYtelsesfilterMedDagpengerUtenPermittering(valgtArenaytelsesfilter)

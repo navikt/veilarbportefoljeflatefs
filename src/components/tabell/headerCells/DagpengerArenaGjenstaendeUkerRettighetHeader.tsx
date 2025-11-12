@@ -18,9 +18,9 @@ export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
 
     // Bruk ulikt sorteringsfelt i OpenSearch for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const sorteringsfeltBasertPaDagpengetype = () => {
-        if (filtrertPaFilterMedDagpengerMedPermittering(valgtArenaytelsesfilter, ytelseDagpengerArena)) {
+        if (filtrertPaFilterMedDagpengerMedPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE;
-        } else if (filtrertPaFilterMedDagpengerUtenPermittering(valgtArenaytelsesfilter, ytelseDagpengerArena)) {
+        } else if (filtrertPaFilterMedDagpengerUtenPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return Sorteringsfelt.DAGPENGER_UTLOP_UKE;
         }
     };
