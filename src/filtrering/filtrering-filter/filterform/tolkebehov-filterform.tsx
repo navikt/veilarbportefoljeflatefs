@@ -142,7 +142,6 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={'tolkbehov'}
                     disabled={tolkebehovValg.length <= 0 && selectedTolkbehovSpraak.length <= 0}
                 />
             </form>

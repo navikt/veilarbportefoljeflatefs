@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {HelpText, Checkbox, CheckboxGroup, Radio, RadioGroup} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup, HelpText, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {hendelserLabels, ulesteEndringer} from '../../filter-konstanter';
@@ -154,7 +154,6 @@ export function HendelserFilterform({
             <NullstillKnapp
                 dataTestId="hendelser-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
                 disabled={hendelserValg === undefined && checkboxValg === null}
             />
         </form>

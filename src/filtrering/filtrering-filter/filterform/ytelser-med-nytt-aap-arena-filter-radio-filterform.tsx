@@ -284,7 +284,6 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={[Filtervalg.ytelse, Filtervalg.ytelseAapArena, Filtervalg.ytelseTiltakspengerArena]}
                 disabled={valgtFiltervalg() === ''}
             />
         </form>
