@@ -215,12 +215,7 @@ export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, fil
                     )}
                 </>
             )}
-            <NullstillKnapp
-                dataTestId="alder-filterform"
-                nullstillValg={nullstillValg}
-                form={[Filtervalg.barnUnder18Aar, Filtervalg.barnUnder18AarAlder]}
-                disabled={!kanVelgeFilter}
-            />
+            <NullstillKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} disabled={!kanVelgeFilter} />
         </form>
     );
 }

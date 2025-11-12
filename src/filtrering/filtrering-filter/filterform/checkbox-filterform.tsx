@@ -71,7 +71,6 @@ export function CheckboxFilterform({
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
                 disabled={checkBoxValg?.length <= 0}
             />
             {!harValg && (

@@ -64,7 +64,6 @@ export function FodselsdatoFilterform({endreFiltervalg, valg, form, filtervalg}:
             <NullstillKnapp
                 dataTestId="fodselsdato-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
                 disabled={checkBoxValg.length <= 0}
             />
             {!harValg && (

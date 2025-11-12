@@ -131,7 +131,6 @@ export function GeografiskBostedFilterform({
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
                 nullstillValg={nullstillValg}
-                form={Filtervalg.landgruppe}
                 disabled={visGeografiskBosted.length <= 0 && selectedGeografiskBosted.length <= 0}
             />
         </form>
