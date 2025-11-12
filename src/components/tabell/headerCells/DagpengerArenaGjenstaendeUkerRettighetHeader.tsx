@@ -3,12 +3,9 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-} from '../../../filtrering/filter-konstanter';
+    filtrertPaFilterMedDagpengerMedPermittering,
+    filtrertPaFilterMedDagpengerUtenPermittering
+} from '../../../utils/DagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
     gjeldendeSorteringsfelt,
@@ -17,20 +14,13 @@ export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
     onClick,
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter} = filtervalg;
+    const {ytelse: valgtArenaytelsesfilter, ytelseDagpengerArena} = filtervalg;
 
     // Bruk ulikt sorteringsfelt i OpenSearch for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const sorteringsfeltBasertPaDagpengetype = () => {
-        if (
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-        ) {
+        if (filtrertPaFilterMedDagpengerMedPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE;
-        } else if (
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_ORDINARE ||
-            valgtArenaytelsesfilter === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER
-        ) {
+        } else if (filtrertPaFilterMedDagpengerUtenPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
             return Sorteringsfelt.DAGPENGER_UTLOP_UKE;
         }
     };
