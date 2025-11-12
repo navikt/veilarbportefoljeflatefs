@@ -17,7 +17,7 @@ import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {FilteringVeiledergrupper} from '../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
 import {useFetchStatustallForVeileder} from '../hooks/portefolje/use-fetch-statustall';
-import {MetrikkEkspanderbartpanel} from '../components/ekspandertbart-panel/metrikk-ekspanderbartpanel';
+import {VeiledergruppePanel} from './veiledergruppe-panel';
 import {oppdaterKolonneAlternativer, OversiktType} from '../ducks/ui/listevisning';
 import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
@@ -79,9 +79,9 @@ export function VeilederoversiktSide() {
                         <Box className="sok-veileder" role="search">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Box>
-                        <MetrikkEkspanderbartpanel tittel="Veiledergrupper">
+                        <VeiledergruppePanel tittel="Veiledergrupper">
                             <FilteringVeiledergrupper oversiktType={OversiktType.veilederOversikt} />
-                        </MetrikkEkspanderbartpanel>
+                        </VeiledergruppePanel>
                     </div>
                     <div className="liste-kolonne">
                         <FiltreringLabelContainer
