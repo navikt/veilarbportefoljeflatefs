@@ -7,8 +7,6 @@ import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {useOutsideClick} from '../../hooks/use-outside-click';
 import {useWindowWidth} from '../../hooks/use-window-width';
 import {SIDEBAR_TAB_ENDRET, skjulSidebar, visSidebar} from '../../ducks/sidebar-tab';
@@ -93,9 +91,6 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
 
     useOutsideClick(sidebarRef, () => {
         if (windowWidth < 1200 && !isSidebarHidden && document.body.className !== 'navds-modal__document-body') {
-            logEvent('portefolje.metrikker.klikk-utenfor', {
-                sideNavn: finnSideNavn()
-            });
             lukkSidemeny();
         }
     });
@@ -112,12 +107,6 @@ export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: Sid
         if (isSidebarHidden) {
             dispatch(visSidebar(oversiktType));
         }
-
-        logEvent('portefolje.metrikker.sidebar-tab', {
-            tab: valgtFane,
-            sideNavn: finnSideNavn(),
-            isSidebarHidden: isSidebarHidden
-        });
     };
 
     return (

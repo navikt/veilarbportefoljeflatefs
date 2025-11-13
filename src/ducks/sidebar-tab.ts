@@ -1,6 +1,4 @@
 import {SidebarTabs} from '../store/sidebar/sidebar-view-store';
-import {logEvent} from '../utils/frontend-logger';
-import {finnSideNavn} from '../middleware/metrics-middleware';
 import {OversiktType} from './ui/listevisning';
 
 export interface SidebarStateType {
@@ -31,10 +29,6 @@ export function sidebarReducer(state = initialStateSidebar, action) {
 }
 
 export function visSidebar(oversiktType: OversiktType) {
-    logEvent('portefolje.metrikker.sidebar-synlig', {
-        sideNavn: finnSideNavn(),
-        isSidebarHidden: false
-    });
     return {
         type: SIDEBAR_VISES,
         name: oversiktType,
@@ -43,10 +37,6 @@ export function visSidebar(oversiktType: OversiktType) {
 }
 
 export function skjulSidebar(oversiktType: OversiktType) {
-    logEvent('portefolje.metrikker.sidebar-synlig', {
-        sideNavn: finnSideNavn(),
-        isSidebarHidden: true
-    });
     return {
         type: SIDEBAR_SKJULT,
         name: oversiktType,

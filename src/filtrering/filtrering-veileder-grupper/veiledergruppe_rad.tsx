@@ -4,8 +4,6 @@ import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
@@ -38,11 +36,6 @@ export function VeiledergruppeRad({
     };
 
     function velgGruppe() {
-        logEvent(
-            'portefolje.metrikker.veiledergrupper.velg-gruppe',
-            {},
-            {gruppeId: veilederGruppe.filterId, sideNavn: finnSideNavn()}
-        );
         dispatch(endreFiltervalg(Filtervalg.veiledere, veilederGruppe.filterValg.veiledere, oversiktType));
         dispatch(markerValgtVeiledergruppe(veilederGruppe, oversiktType));
         oppdaterKolonneAlternativer(
