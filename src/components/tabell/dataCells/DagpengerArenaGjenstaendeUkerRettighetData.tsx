@@ -2,8 +2,8 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {
-    filtrertPaFilterMedDagpengerMedPermittering,
-    filtrertPaFilterMedDagpengerUtenPermittering
+    filtrertPaDagpengerArenaFilterMedPermittering,
+    filtrertPaDagpengerArenaFilterUtenPermittering
 } from '../../../utils/DagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetData = ({
@@ -11,13 +11,13 @@ export const DagpengerArenaGjenstaendeUkerRettighetData = ({
     valgteKolonner,
     filtervalg
 }: DataCellMedInnholdBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter, ytelseDagpengerArena} = filtervalg;
+    const {ytelseDagpengerArena} = filtervalg;
 
     // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const ukerIgjenBasertPaDagpengetype = () => {
-        if (filtrertPaFilterMedDagpengerMedPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
+        if (filtrertPaDagpengerArenaFilterMedPermittering(ytelseDagpengerArena)) {
             return bruker.permutlopUke;
-        } else if (filtrertPaFilterMedDagpengerUtenPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
+        } else if (filtrertPaDagpengerArenaFilterUtenPermittering(ytelseDagpengerArena)) {
             return bruker.dagputlopUke;
         }
     };

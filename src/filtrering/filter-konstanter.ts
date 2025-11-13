@@ -166,36 +166,6 @@ export const manuellBrukerStatusUtenKRR = {
     MANUELL: {label: 'Manuell oppfølging'}
 };
 
-export const ytelseArena = {
-    [YTELSE_ARENA_DAGPENGER]: {label: 'Dagpenger (Arena)'},
-    [YTELSE_ARENA_DAGPENGER_ORDINARE]: {
-        label: 'Ordinære dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING]: {
-        label: 'Dagpenger under permittering (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: {
-        label: 'Dagpenger v/perm fiskeindustri (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: {
-        label: 'Lønnsgarantimidler dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_TILTAKSPENGER]: {label: 'Tiltakspenger (Arena)'}
-};
-
-export const ytelsevalg: () => {[id: string]: string} = () =>
-    Object.keys(ytelseArena).reduce(
-        (acc, val) => ({
-            ...acc,
-            [val]: val
-        }),
-        {}
-    );
-
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
     DAGP: {label: 'Dagpenger (Arena)'},
@@ -535,8 +505,6 @@ export const filterKonstanter = {
     hovedmal,
     formidlingsgruppe,
     servicegruppe,
-    ytelse: ytelseArena,
-    ytelsevalg,
     rettighetsgruppe: rettighetsgruppeArena,
     aktiviteter,
     manuellBrukerStatus,
