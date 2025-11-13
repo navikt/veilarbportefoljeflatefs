@@ -3,12 +3,9 @@ import {useDispatch} from 'react-redux';
 import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
 import {settSortering} from '../../ducks/portefolje';
-import {useIdentSelector} from '../redux/use-innlogget-ident';
 import {useOnMount} from '../use-on-mount';
-import {logBrowserMetrikker} from '../../utils/metrikker/browser-metrikker';
 
 export function useSetStateFromUrl() {
-    const innloggetVeilederIdent = useIdentSelector();
     const dispatch = useDispatch();
 
     const settInitalStateFraUrl = useCallback(() => {
@@ -18,7 +15,6 @@ export function useSetStateFromUrl() {
     }, [dispatch]);
 
     useOnMount(() => {
-        logBrowserMetrikker(innloggetVeilederIdent);
         settInitalStateFraUrl();
     });
 }
