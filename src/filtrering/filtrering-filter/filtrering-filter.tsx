@@ -525,10 +525,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     {
                                         form: Filtervalg.ytelseAapKelvin,
                                         checkboxValg: aapIKelvinFilter
-                                    },
-                                    {
-                                        form: Filtervalg.ytelseAapArena,
-                                        checkboxValg: aapIArenaFilter
                                     }
                                 ]}
                                 filtervalgModell={filtervalg}
