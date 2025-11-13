@@ -3,6 +3,7 @@ import {
     AAPFilterArena,
     AAPFilterKelvin,
     AktiviteterFilternokler,
+    DagpengerFilterArena,
     TiltakspengerFilter,
     TiltakspengerFilterArena
 } from '../filtrering/filter-konstanter';
@@ -115,7 +116,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseAapKelvin]: AAPFilterKelvin[];
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
-    [Filtervalg.ytelseDagpengerArena]: string[];
+    [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
 }
 
 /**

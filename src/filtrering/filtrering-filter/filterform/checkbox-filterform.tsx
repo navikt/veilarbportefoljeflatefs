@@ -1,12 +1,12 @@
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
-import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
+import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {CheckboxFilterMap} from '../../filter-konstanter';
 import './filterform.css';
 import {CheckboxFilterformValg} from './checkbox-filterform-valg';
 import {Alert} from '@navikt/ds-react';
 
 export interface CheckboxFormConfig {
-    form: Filtervalg;
+    form: string;
     checkboxValg: CheckboxFilterMap;
 }
 
@@ -31,18 +31,21 @@ export function CheckboxFilterform({
         filterformOgValgListe.forEach(({form}) => endreFiltervalg(form, []));
     };
 
-    const harValg = filterformOgValgListe.some(({checkboxValg}) => Object.keys(checkboxValg).length > 0);
+    const harMuligeValg = filterformOgValgListe.some(({checkboxValg}) => Object.keys(checkboxValg).length > 0);
+    const harValgtMinstEnCheckbox = filterformOgValgListe.some(
+        ({form}) => filtervalgModell[form] && filtervalgModell[form].length > 0
+    );
 
     return (
         <form className="skjema checkbox-filterform" data-testid={dataTestId}>
-            {harValg && (
+            {harMuligeValg && (
                 <>
                     {filterformOgValgListe.map(({form, checkboxValg}) => (
                         <CheckboxFilterformValg
                             key={form}
                             form={form}
                             valg={checkboxValg}
-                            filtervalg={filtervalgModell}
+                            filtervalgModell={filtervalgModell}
                             endreFiltervalg={endreFiltervalg}
                             className={className}
                         />
@@ -50,12 +53,11 @@ export function CheckboxFilterform({
                     <NullstillKnapp
                         dataTestId={dataTestId}
                         nullstillValg={nullstillAlle}
-                        form="combined"
-                        disabled={!harValg}
+                        disabled={!harValgtMinstEnCheckbox}
                     />
                 </>
             )}
-            {!harValg && (
+            {!harMuligeValg && (
                 <Alert variant="info" className="checkbox-filterform__alertstripe" size="small">
                     {emptyCheckboxFilterFormMessage ??
                         'Får ikke til å vise avhukingsbokser. Meld sak i Porten om problemet varer lenge.'}

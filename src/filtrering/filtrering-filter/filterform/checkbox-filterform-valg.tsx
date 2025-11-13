@@ -8,17 +8,23 @@ import './filterform.css';
 interface CheckboxFilterformProps {
     form: string;
     valg: CheckboxFilterMap;
-    filtervalg: FiltervalgModell;
+    filtervalgModell: FiltervalgModell;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     className?: string;
 }
 
-export function CheckboxFilterformValg({form, valg, filtervalg, endreFiltervalg, className}: CheckboxFilterformProps) {
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalg[form]);
+export function CheckboxFilterformValg({
+    form,
+    valg,
+    filtervalgModell,
+    endreFiltervalg,
+    className
+}: CheckboxFilterformProps) {
+    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalgModell[form]);
 
     useEffect(() => {
-        setCheckBoxValg(filtervalg[form]);
-    }, [filtervalg, form]);
+        setCheckBoxValg(filtervalgModell[form]);
+    }, [filtervalgModell, form]);
 
     const checkboxComponent = ([filterKey, filterValue]: [string, CheckboxFilter | string]) => {
         return typeof filterValue === 'string' ? (
