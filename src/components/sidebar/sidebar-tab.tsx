@@ -4,8 +4,6 @@ import {Button, Heading} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import {endreValgtSidebarTab} from './sidebar';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
 
@@ -21,11 +19,6 @@ export const SidebarTab = ({tab, tittel, oversiktType, headingChildren, children
     const dispatch = useDispatch();
 
     const lukkSidemenyOgNullstillValgtFane = () => {
-        logEvent('portefolje.metrikker.lukk-pa-kryss', {
-            tab: tab,
-            sideNavn: finnSideNavn()
-        });
-
         dispatch(skjulSidebar(oversiktType));
         endreValgtSidebarTab({
             dispatch: dispatch,

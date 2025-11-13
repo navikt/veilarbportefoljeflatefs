@@ -11,22 +11,17 @@ import {VIS_TILDELING_SUKSESS_MODAL} from '../../ducks/modal';
 import {FeilmeldingTildelingModal} from './feilmelding-tildeling-modal';
 import {useModalControllerSelector} from '../../hooks/redux/use-modal-controller.selector';
 import {VeiledergruppeendringFeiletModal} from './veiledergruppe/veiledergruppeendring-feilet-modal';
-import {logEvent} from '../../utils/frontend-logger';
 import './feilmelding-brukere.css';
 
 export function ModalEnhetSideController() {
-    const {serverfeilModalSkalVises, feilmeldingModal, modal, closeServerfeilModal, closeFeilmeldingModal, closeModal} =
-        useModalControllerSelector();
-
-    const lukkTildelingFeiletModal = () => {
-        closeFeilmeldingModal();
-        logEvent('portefolje.metrikker.tildel-veileder-feilet');
-    };
-
-    const lukkTildelingVellykketModal = () => {
-        closeModal();
-        logEvent('portefolje.metrikker.tildel-veileder-vellykket');
-    };
+    const {
+        serverfeilModalSkalVises,
+        feilmeldingModal,
+        modal,
+        closeServerfeilModal,
+        closeFeilmeldingModal: lukkTildelingFeiletModal,
+        closeModal: lukkTildelingVellykketModal
+    } = useModalControllerSelector();
 
     return (
         <>
