@@ -51,7 +51,6 @@ export function RadioFilterform({form, endreFiltervalg, valg, filtervalg, gridCo
             <NullstillKnapp
                 dataTestId="radio-filterform"
                 nullstillValg={nullstillValg}
-                form={form}
                 disabled={valgtFilterValg === '' || valgtFilterValg === null}
             />
         </form>

@@ -1,22 +1,14 @@
 import {PropsWithChildren, useState} from 'react';
 import {ExpansionCard} from '@navikt/ds-react';
-import {trackAmplitude} from '../../amplitude/amplitude';
 
 interface Props {
     tittel: string;
 }
 
-export function MetrikkEkspanderbartpanel({tittel, children}: PropsWithChildren<Props>) {
+export function VeiledergruppePanel({tittel, children}: PropsWithChildren<Props>) {
     const [isApen, setIsApen] = useState(true);
 
     const handleOnClick = () => {
-        trackAmplitude({
-            name: isApen ? 'accordion lukket' : 'accordion åpnet',
-            data: {
-                tekst: tittel
-            }
-        });
-
         setIsApen(prevState => !prevState);
     };
 

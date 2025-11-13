@@ -144,7 +144,6 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={Filtervalg.landgruppe}
                     disabled={landgrupppeValg.length <= 0 && selectedFoedeland.length <= 0}
                 />
             </form>

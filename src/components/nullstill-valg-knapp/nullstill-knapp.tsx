@@ -1,36 +1,17 @@
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
 import './nullstill-knapp.css';
 
 interface Props {
     nullstillValg: () => void;
     dataTestId: string;
-    form: string | string[];
     disabled: boolean;
     className?: string;
 }
 
-export function NullstillKnapp({nullstillValg, dataTestId, form, disabled, className}: Props) {
+export function NullstillKnapp({nullstillValg, dataTestId, disabled, className}: Props) {
     const nullstille = e => {
         e.persist();
-
-        if (typeof form === 'string') {
-            logEvent('portefolje.metrikker.nullstill-knapp', {
-                sideNavn: finnSideNavn(),
-                dropdown: form
-            });
-        } else {
-            // Dette er for filter der vi mappar ulike val til ulike felt på filtermodellen
-            form.forEach(formInList =>
-                logEvent('portefolje.metrikker.nullstill-knapp', {
-                    sideNavn: finnSideNavn(),
-                    dropdown: formInList
-                })
-            );
-        }
-
         return nullstillValg();
     };
 

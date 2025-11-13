@@ -59,6 +59,10 @@ export enum Filtervalg {
     ytelseDagpengerArena = 'ytelseDagpengerArena'
 }
 
+export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
+    return Object.values(Filtervalg).includes(filtervalg as Filtervalg);
+};
+
 /**
  * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * * VIKTIG! * * * * *
  * Om FiltervalgModell får endringar må ein også oppdatere Portefoljefilter i veilarbfilter.       *

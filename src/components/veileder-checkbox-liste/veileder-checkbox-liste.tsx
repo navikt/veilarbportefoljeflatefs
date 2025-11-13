@@ -94,7 +94,6 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
                 <NullstillKnapp
                     dataTestId="veileder-checkbox-filterform"
                     nullstillValg={nullstillValg}
-                    form={formNavn}
                     disabled={valgteVeiledere.length <= 0}
                     className="veilederoversikt-nullstill-knapp"
                 />

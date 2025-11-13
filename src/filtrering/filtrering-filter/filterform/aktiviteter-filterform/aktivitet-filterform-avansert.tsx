@@ -85,7 +85,6 @@ export function AktivitetFilterformAvansert({
                 <NullstillKnapp
                     dataTestId="aktivitet-filterform"
                     nullstillValg={nullstillAvanserteAktiviteter}
-                    form={Filtervalg.aktiviteter}
                     disabled={!harAvanserteAktiviteter}
                 />
             </div>

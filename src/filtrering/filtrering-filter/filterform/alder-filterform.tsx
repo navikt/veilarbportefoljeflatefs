@@ -203,12 +203,7 @@ export function AlderFilterform({
                     )}
                 </>
             )}
-            <NullstillKnapp
-                dataTestId="alder-filterform"
-                nullstillValg={nullstillValg}
-                form={form}
-                disabled={!kanVelgeFilter}
-            />
+            <NullstillKnapp dataTestId="alder-filterform" nullstillValg={nullstillValg} disabled={!kanVelgeFilter} />
         </form>
     );
 }

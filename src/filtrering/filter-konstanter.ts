@@ -279,6 +279,11 @@ export const registreringstype = {
     ANNET: {label: 'Ingen av situasjonene passer for meg'},
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
 };
+export const registreringstypeEtiketter = {
+    ...registreringstype,
+    INGEN_DATA: {label: 'Situasjon: Ingen registreringsinformasjon'}
+};
+
 export const landgruppe = {
     LANDGRUPPE_0: 'Landgruppe 0',
     LANDGRUPPE_1: 'Landgruppe 1',
@@ -309,6 +314,11 @@ export const utdanning = {
     HOYERE_UTDANNING_1_TIL_4: {label: 'Høyere utdanning (1 til 4 år)'},
     HOYERE_UTDANNING_5_ELLER_MER: {label: 'Høyere utdanning (5 år eller mer)'},
     INGEN_DATA: {label: 'Ingen registreringsinformasjon'}
+};
+
+export const utdanningEtiketter = {
+    ...utdanning,
+    INGEN_DATA: {label: 'Utdanning: Ingen registreringsinformasjon'}
 };
 
 export const utdanningGodkjent = {
@@ -348,6 +358,7 @@ export const hendelserLabels = {
     AVBRUTT_SOKEAVTALE: 'Avtale om å søke jobber'
 };
 
+/** Tekstar for filteret sisteEndringKategori, aka "Siste endring av bruker"*/
 export const hendelserEtikett = {
     ULESTE_ENDRINGER: 'Uleste endringer (Siste endring av bruker)',
     MAL: 'Endring i mål',
@@ -384,6 +395,7 @@ export const aapIArenaFilter = {
     [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {label: 'AAP ordinær (Arena)'},
     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
 };
+
 // Dette er ikkje eit ekte filter mot backend,
 // men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
 // som, når valgt, sender både UNNTAK og ORDINAR til backend.
@@ -427,6 +439,41 @@ export enum TiltakspengerFilter {
 
 export const tiltakspengerFilter = {
     [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'}
+};
+
+/** Dette er det "nye" Dagpenger-Arena-filteret, det som er separat fra "ytelse" */
+export enum DagpengerFilterArena {
+    HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
+    HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
+    HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
+    HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA = 'HAR_DAGPENGER_LONNSGARANTIMIDLER'
+}
+
+// Dette er ikkje eit ekte filter mot backend,
+// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
+// som, når valgt, sender alle dagpengetypar til backend.
+export enum DagpengerFilterArenaAlle {
+    HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
+}
+
+export const dagpengerArenaFilter = {
+    [DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
+        label: 'Ordinære dagpenger (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]: {
+        label: 'Dagpenger under permittering (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA]: {
+        label: 'Dagpenger v/perm fiskeindustri (Arena)',
+        className: skjemaelementInnrykkKlasse
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {
+        label: 'Lønnsgarantimidler dagpenger (Arena)',
+        className: skjemaelementInnrykkKlasse
+    }
 };
 
 /** Lange namn på innsatsgrupper.
@@ -513,5 +560,6 @@ export const filterKonstanter = {
     ytelseAapArena: aapIArenaFilter,
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
-    ytelseTiltakspenger: tiltakspengerFilter
+    ytelseTiltakspenger: tiltakspengerFilter,
+    ytelseDagpengerArena: dagpengerArenaFilter
 };
