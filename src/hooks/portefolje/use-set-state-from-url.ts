@@ -1,7 +1,7 @@
 import {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import {useLocation, useParams} from 'react-router';
-import {loggSkjermMetrikker, Side} from '../../utils/metrikker/skjerm-metrikker';
+import {Side} from '../../utils/metrikker/skjerm-metrikker';
 import {loggSideVisning} from '../../utils/metrikker/side-visning-metrikker';
 import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
@@ -42,7 +42,6 @@ export function useSetStateFromUrl() {
     const oversiktsside = useCallback(getSideFromPathName, [pathname])(pathname);
 
     useOnMount(() => {
-        loggSkjermMetrikker(oversiktsside);
         loggSideVisning(innloggetVeilederIdent, oversiktsside);
         logBrowserMetrikker(innloggetVeilederIdent);
         settInitalStateFraUrl();
