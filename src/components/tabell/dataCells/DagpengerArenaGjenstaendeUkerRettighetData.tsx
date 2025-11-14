@@ -4,7 +4,7 @@ import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {
     filtrertPaDagpengerArenaFilterMedPermittering,
     filtrertPaDagpengerArenaFilterUtenPermittering
-} from '../../../utils/DagpengerArenaKolonneUtils';
+} from '../../../utils/dagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetData = ({
     bruker,
