@@ -5,7 +5,7 @@ import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {
     filtrertPaDagpengerArenaFilterMedPermittering,
     filtrertPaDagpengerArenaFilterUtenPermittering
-} from '../../../utils/DagpengerArenaKolonneUtils';
+} from '../../../utils/dagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
     gjeldendeSorteringsfelt,
