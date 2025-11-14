@@ -11,7 +11,6 @@ import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {MinoversiktTableDataCells} from './MinoversiktTableDataCells';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {logEvent} from '../utils/frontend-logger';
 import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
@@ -64,7 +63,6 @@ export function MinoversiktTableRow({
     function handleBrukerpanelKnappClick(event) {
         event.preventDefault();
         setBrukerpanelApent(!brukerpanelApent);
-        logEvent('portefolje.metrikker.ekspander-brukerpanel', {apen: !brukerpanelApent});
         if (onClick) {
             onClick(event);
         }

@@ -3,8 +3,6 @@ import throttle from 'lodash.throttle';
 import classNames from 'classnames';
 import {Button} from '@navikt/ds-react';
 import {ArrowUpIcon} from '@navikt/aksel-icons';
-import {logEvent} from '../../utils/frontend-logger';
-import {finnSideNavn} from '../../middleware/metrics-middleware';
 import './til-toppen-knapp.css';
 
 export const TilToppenKnapp = () => {
@@ -22,9 +20,6 @@ export const TilToppenKnapp = () => {
         if (knappRef?.current) {
             knappRef.current.blur();
         }
-        logEvent('portefolje.metrikker.tiltoppenknapp', {
-            sideNavn: finnSideNavn()
-        });
     };
 
     useEffect(() => {
