@@ -65,7 +65,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
         endreFiltervalgArvaFunksjon(Filtervalg.ytelseDagpengerArena, []);
     };
 
-    const doEndreFiltervalg = (filterId: string, filterVerdi, nyttFiltervalg: FiltervalgModell) => {
+    const byttTilNyttFilterOgFiksKolonnevalg = (filterId: string, filterVerdi, nyttFiltervalg: FiltervalgModell) => {
         dispatch(pagineringSetup({side: 1}));
         dispatch(endreFiltervalg(filterId, filterVerdi, oversiktType));
         oppdaterKolonneAlternativer(dispatch, nyttFiltervalg, oversiktType);
@@ -87,17 +87,20 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA,
                         AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA
                     ];
-                    doEndreFiltervalg(Filtervalg.ytelseAapArena, filterverdiAap, {
+                    byttTilNyttFilterOgFiksKolonnevalg(Filtervalg.ytelseAapArena, filterverdiAap, {
                         ...filtervalgNullstillAndreArenaytelser,
                         [Filtervalg.ytelseAapArena]: filterverdiAap
                     });
                 } else {
                     const filterverdiAap = [e.target.value as AAPFilterArena];
-                    doEndreFiltervalg(Filtervalg.ytelseAapArena, filterverdiAap, {
+                    byttTilNyttFilterOgFiksKolonnevalg(Filtervalg.ytelseAapArena, filterverdiAap, {
                         ...filtervalgNullstillAndreArenaytelser,
                         [Filtervalg.ytelseAapArena]: filterverdiAap
                     });
                 }
+                // Nullstill andre ytelsesfilter
+                dispatch(endreFiltervalg(Filtervalg.ytelseDagpengerArena, [], oversiktType));
+                dispatch(endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, [], oversiktType));
                 return;
             }
             case Filtervalg.ytelseTiltakspengerArena: {
@@ -109,10 +112,13 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 const filterverdiTiltakspenger: [TiltakspengerFilterArena] = [
                     e.target.value as TiltakspengerFilterArena
                 ];
-                doEndreFiltervalg(Filtervalg.ytelseTiltakspengerArena, filterverdiTiltakspenger, {
+                byttTilNyttFilterOgFiksKolonnevalg(Filtervalg.ytelseTiltakspengerArena, filterverdiTiltakspenger, {
                     ...filtervalgNullstillAndreArenaytelser,
                     [Filtervalg.ytelseTiltakspengerArena]: filterverdiTiltakspenger
                 });
+                // Nullstill andre ytelsesfilter
+                dispatch(endreFiltervalg(Filtervalg.ytelseDagpengerArena, [], oversiktType));
+                dispatch(endreFiltervalg(Filtervalg.ytelseAapArena, [], oversiktType));
                 return;
             }
             case Filtervalg.ytelseDagpengerArena: {
@@ -128,18 +134,21 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                         DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA,
                         DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA
                     ];
-                    doEndreFiltervalg(Filtervalg.ytelseDagpengerArena, filterverdiDagpenger, {
+                    byttTilNyttFilterOgFiksKolonnevalg(Filtervalg.ytelseDagpengerArena, filterverdiDagpenger, {
                         ...filtervalgNullstillAndreArenaytelser,
                         [Filtervalg.ytelseDagpengerArena]: filterverdiDagpenger
                     });
                 } else {
                     const filterverdiDagpenger = [e.target.value as DagpengerFilterArena];
 
-                    doEndreFiltervalg(Filtervalg.ytelseDagpengerArena, filterverdiDagpenger, {
+                    byttTilNyttFilterOgFiksKolonnevalg(Filtervalg.ytelseDagpengerArena, filterverdiDagpenger, {
                         ...filtervalgNullstillAndreArenaytelser,
                         [Filtervalg.ytelseDagpengerArena]: filterverdiDagpenger
                     });
                 }
+                // Nullstill andre ytelsesfilter
+                dispatch(endreFiltervalg(Filtervalg.ytelseTiltakspengerArena, [], oversiktType));
+                dispatch(endreFiltervalg(Filtervalg.ytelseAapArena, [], oversiktType));
                 return;
             }
             default:
