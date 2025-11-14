@@ -40,7 +40,7 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
             return AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK;
         }
         if (filtervalg.ytelseTiltakspengerArena.length === 1) {
-            return filtervalg.ytelseAapArena[0];
+            return filtervalg.ytelseTiltakspengerArena[0];
         }
         if (filtervalg.ytelseDagpengerArena.length === 1) {
             return filtervalg.ytelseDagpengerArena[0];
