@@ -26,16 +26,7 @@ export const UTGATTE_VARSEL = 'UTGATTE_VARSEL';
 export const IKKE_I_AVTALT_AKTIVITET = 'IKKE_I_AVTALT_AKTIVITET';
 export const I_AVTALT_AKTIVITET = 'I_AVTALT_AKTIVITET';
 export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
-export const UTLOP_YTELSE = 'UTLOP_YTELSE';
-export const YTELSE_ARENA_DAGPENGER = 'DAGPENGER';
-export const YTELSE_ARENA_DAGPENGER_ORDINARE = 'ORDINARE_DAGPENGER';
-export const YTELSE_ARENA_DAGPENGER_PERMITTERING = 'DAGPENGER_MED_PERMITTERING';
-export const YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI';
-export const YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER';
-export const YTELSE_ARENA_TILTAKSPENGER = 'TILTAKSPENGER';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
-export const SISTE_ENDRING = 'SISTE_ENDRING';
-export const SISTE_ENDRING_DATO = 'SISTE_ENDRING_DATO';
 export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
 export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
 export const HAR_AVVIK = 'HAR_AVVIK';
@@ -165,36 +156,6 @@ export const manuellBrukerStatus = {
 export const manuellBrukerStatusUtenKRR = {
     MANUELL: {label: 'Manuell oppfølging'}
 };
-
-export const ytelseArena = {
-    [YTELSE_ARENA_DAGPENGER]: {label: 'Dagpenger (Arena)'},
-    [YTELSE_ARENA_DAGPENGER_ORDINARE]: {
-        label: 'Ordinære dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING]: {
-        label: 'Dagpenger under permittering (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI]: {
-        label: 'Dagpenger v/perm fiskeindustri (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER]: {
-        label: 'Lønnsgarantimidler dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [YTELSE_ARENA_TILTAKSPENGER]: {label: 'Tiltakspenger (Arena)'}
-};
-
-export const ytelsevalg: () => {[id: string]: string} = () =>
-    Object.keys(ytelseArena).reduce(
-        (acc, val) => ({
-            ...acc,
-            [val]: val
-        }),
-        {}
-    );
 
 export const rettighetsgruppeArena = {
     AAP: {label: 'Arbeidsavklaringspenger (Arena)'},
@@ -535,8 +496,6 @@ export const filterKonstanter = {
     hovedmal,
     formidlingsgruppe,
     servicegruppe,
-    ytelse: ytelseArena,
-    ytelsevalg,
     rettighetsgruppe: rettighetsgruppeArena,
     aktiviteter,
     manuellBrukerStatus,
