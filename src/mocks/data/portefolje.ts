@@ -1,15 +1,7 @@
 import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
-import {
-    aktiviteter,
-    hendelserLabels,
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
-} from '../../filtrering/filter-konstanter';
+import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
     BarnUnder18AarModell,
@@ -29,15 +21,24 @@ import {MoteplanModell} from '../../typer/moteplan';
 
 faker.seed(MOCK_CONFIG.seed);
 
+/* I sjølve koden (utanfor mock) er dette ikkje typa, det er berre hardkoda strengar */
+enum DagpengerYtelseData {
+    YTELSE_ARENA_DAGPENGER = 'DAGPENGER',
+    YTELSE_ARENA_DAGPENGER_ORDINARE = 'ORDINARE_DAGPENGER',
+    YTELSE_ARENA_DAGPENGER_PERMITTERING = 'DAGPENGER_MED_PERMITTERING',
+    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI = 'DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
+    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER = 'LONNSGARANTIMIDLER_DAGPENGER'
+}
+
 const dagpengerYtelserMedPermittering = [
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
+    DagpengerYtelseData.YTELSE_ARENA_DAGPENGER_PERMITTERING,
+    DagpengerYtelseData.YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI
 ];
 
 const dagpengerYtelser = [
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
+    DagpengerYtelseData.YTELSE_ARENA_DAGPENGER,
+    DagpengerYtelseData.YTELSE_ARENA_DAGPENGER_ORDINARE,
+    DagpengerYtelseData.YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
     ...dagpengerYtelserMedPermittering
 ];
 

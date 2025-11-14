@@ -3,8 +3,8 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 import {
-    filtrertPaFilterMedDagpengerMedPermittering,
-    filtrertPaFilterMedDagpengerUtenPermittering
+    filtrertPaDagpengerArenaFilterMedPermittering,
+    filtrertPaDagpengerArenaFilterUtenPermittering
 } from '../../../utils/DagpengerArenaKolonneUtils';
 
 export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
@@ -14,13 +14,13 @@ export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
     onClick,
     filtervalg
 }: HeaderCellMedSorteringBasertPaFiltervalgProps) => {
-    const {ytelse: valgtArenaytelsesfilter, ytelseDagpengerArena} = filtervalg;
+    const {ytelseDagpengerArena} = filtervalg;
 
     // Bruk ulikt sorteringsfelt i OpenSearch for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const sorteringsfeltBasertPaDagpengetype = () => {
-        if (filtrertPaFilterMedDagpengerMedPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
+        if (filtrertPaDagpengerArenaFilterMedPermittering(ytelseDagpengerArena)) {
             return Sorteringsfelt.DAGPENGER_PERM_UTLOP_UKE;
-        } else if (filtrertPaFilterMedDagpengerUtenPermittering(ytelseDagpengerArena, valgtArenaytelsesfilter)) {
+        } else if (filtrertPaDagpengerArenaFilterUtenPermittering(ytelseDagpengerArena)) {
             return Sorteringsfelt.DAGPENGER_UTLOP_UKE;
         }
     };

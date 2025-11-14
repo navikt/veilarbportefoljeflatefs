@@ -16,13 +16,7 @@ import {
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
-    VENTER_PA_SVAR_FRA_NAV,
-    YTELSE_ARENA_DAGPENGER,
-    YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER,
-    YTELSE_ARENA_DAGPENGER_ORDINARE,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING,
-    YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI,
-    YTELSE_ARENA_TILTAKSPENGER
+    VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
 import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {
@@ -87,17 +81,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaUnderVurdering = filtervalg.ferdigfilterListe.includes(UNDER_VURDERING);
 
-    const filtrertPaYtelseMedDagpengerettigheter =
-        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER ||
-        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_ORDINARE ||
-        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING ||
-        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_PERMITTERING_FISKEINDUSTRI ||
-        filtervalg.ytelse === YTELSE_ARENA_DAGPENGER_LONNSGARANTIMIDLER;
-
-    const filtrertPaDagpengerArenaNyttFilter = filtervalg.ytelseDagpengerArena.length > 0;
-
-    const filtrertPaYtelseDagpengerEllerNyttDagpengerfilter =
-        filtrertPaDagpengerArenaNyttFilter || filtrertPaYtelseMedDagpengerettigheter;
+    const filtrertPaDagpengerArena = filtervalg.ytelseDagpengerArena.length > 0;
 
     const avansertAktivitetErValgt =
         !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
@@ -137,9 +121,9 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaAAPMedRettighetsperiode = ordinarAapArena || filtrertPaBeggeAapArena;
     const filtrertPaBareAapUnntakArena = unntakAapArena && !ordinarAapArena;
 
-    const filtrertPaTiltakspengerArena =
-        filtervalg.ytelse === YTELSE_ARENA_TILTAKSPENGER ||
-        filtervalg.ytelseTiltakspengerArena.includes(TiltakspengerFilterArena.HAR_TILTAKSPENGER);
+    const filtrertPaTiltakspengerArena = filtervalg.ytelseTiltakspengerArena.includes(
+        TiltakspengerFilterArena.HAR_TILTAKSPENGER
+    );
 
     const erPaEnhetensOversikt = oversiktType === OversiktType.enhetensOversikt;
 
@@ -198,12 +182,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))
-        .concat(
-            addHvis(
-                Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER,
-                filtrertPaYtelseDagpengerEllerNyttDagpengerfilter
-            )
-        )
+        .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, filtrertPaDagpengerArena))
         .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtrertPaTiltakspengerArena))
         .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt || forenkletAktivitetErValgt))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
