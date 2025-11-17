@@ -470,7 +470,8 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                         render={() => (
                             <YtelserMedNyttAapArenaFilterRadioFilterform
                                 filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
+                                endreFiltervalgArvaFunksjon={endreFiltervalg}
+                                oversiktType={oversiktType}
                             />
                         )}
                     />
