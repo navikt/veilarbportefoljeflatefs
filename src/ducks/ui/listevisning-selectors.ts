@@ -18,7 +18,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
-import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
+import {FiltervalgModell} from '../../typer/filtervalg-modell';
 import {
     filtrertPaAapFilterArenaMenIkkeBegge,
     filtrertPaBeggeAapFilterArena,
