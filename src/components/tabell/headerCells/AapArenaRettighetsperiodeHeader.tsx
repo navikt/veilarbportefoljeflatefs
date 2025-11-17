@@ -32,7 +32,7 @@ export const AapArenaRettighetsperiodeHeader = ({
             erValgt={gjeldendeSorteringsfelt === sorteringsfeltBasertPaAapFiltrering()}
             rekkefolge={rekkefolge}
             onClick={onClick}
-            tekst="Gjenstående uker rettighet AAP"
+            tekst="Gjenstående uker rettighet AAP (Arena)"
             title="Gjenstående uker av rettighetsperioden for AAP (Arena)"
             className="col col-xs-2"
         />

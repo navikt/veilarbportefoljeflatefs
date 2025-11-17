@@ -383,7 +383,7 @@ export enum AAPFilterKelvin {
 }
 
 export const aapIKelvinFilter = {
-    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP (Kelvin)'}
+    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'AAP (Kelvin)'}
 };
 
 export enum TiltakspengerFilterArena {
@@ -399,7 +399,7 @@ export enum TiltakspengerFilter {
 }
 
 export const tiltakspengerFilter = {
-    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'}
+    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Tiltakspenger (TPSAK)'}
 };
 
 /** Dette er det "nye" Dagpenger-Arena-filteret, det som er separat fra "ytelse" */

@@ -40,16 +40,18 @@ export function CheckboxFilterform({
         <form className="skjema checkbox-filterform" data-testid={dataTestId}>
             {harMuligeValg && (
                 <>
-                    {filterformOgValgListe.map(({form, checkboxValg}) => (
-                        <CheckboxFilterformValg
-                            key={form}
-                            form={form}
-                            checkboxValg={checkboxValg}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            className={className}
-                        />
-                    ))}
+                    <div className="checkbox-filterform__valg">
+                        {filterformOgValgListe.map(({form, checkboxValg}) => (
+                            <CheckboxFilterformValg
+                                key={form}
+                                form={form}
+                                checkboxValg={checkboxValg}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                className={className}
+                            />
+                        ))}
+                    </div>
                     <NullstillKnapp
                         dataTestId={dataTestId}
                         nullstillValg={nullstillAlle}

@@ -15,7 +15,7 @@ export const AapArenaVurderingsfristHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.AAP_ARENA_VURDERINGSFRIST}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Frist vurdering rett AAP"
+        tekst="Frist vurdering rett AAP (Arena)"
         title="Omtrentlig frist for ny vurdering av AAP (Arena)"
         className="col col-xs-2"
     />
