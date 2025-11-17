@@ -45,7 +45,7 @@ export function CheckboxFilterformValg({
     };
 
     return (
-        <div className={classNames('skjema checkbox-filterform__valg', className)}>
+        <div className={classNames('skjema', className)}>
             <CheckboxGroup
                 hideLegend
                 legend=""
