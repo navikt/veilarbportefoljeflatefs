@@ -346,7 +346,6 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak § 14 a'}
 };
 
-/** Dette er det "nye" AAP-Arena-filteret, det som er separat fra "ytelse" */
 export enum AAPFilterArena {
     HAR_AAP_ORDINAR_I_ARENA = 'HAR_AAP_ORDINAR',
     HAR_AAP_UNNTAK_I_ARENA = 'HAR_AAP_UNNTAK'
@@ -402,7 +401,6 @@ export const tiltakspengerFilter = {
     [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Tiltakspenger (TPSAK)'}
 };
 
-/** Dette er det "nye" Dagpenger-Arena-filteret, det som er separat fra "ytelse" */
 export enum DagpengerFilterArena {
     HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
     HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',

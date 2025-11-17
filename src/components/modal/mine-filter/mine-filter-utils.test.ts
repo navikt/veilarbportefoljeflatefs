@@ -82,7 +82,6 @@ describe('Mine filter utils', () => {
                 visGeografiskBosted: [],
                 veiledere: [],
                 veilederNavnQuery: '',
-                ytelse: null,
                 ytelseAapArena: [],
                 ytelseAapKelvin: [],
                 ytelseTiltakspengerArena: [],
