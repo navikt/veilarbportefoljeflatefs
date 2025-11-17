@@ -25,7 +25,6 @@ export enum Filtervalg {
     formidlingsgruppe = 'formidlingsgruppe',
     servicegruppe = 'servicegruppe',
     veiledere = 'veiledere',
-    ytelse = 'ytelse',
     aktiviteter = 'aktiviteter',
     aktiviteterForenklet = 'aktiviteterForenklet',
     tiltakstyper = 'tiltakstyper',
@@ -83,7 +82,6 @@ export interface FiltervalgModell {
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
-    [Filtervalg.ytelse]: null | string;
     [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];
     [Filtervalg.tiltakstyper]: string[];

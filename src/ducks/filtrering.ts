@@ -33,7 +33,6 @@ export const initialState: FiltervalgModell = {
     formidlingsgruppe: [],
     servicegruppe: [],
     veiledere: [],
-    ytelse: null,
     aktiviteter: initialStateAktiviteterFiltervalg,
     aktiviteterForenklet: [],
     tiltakstyper: [],
