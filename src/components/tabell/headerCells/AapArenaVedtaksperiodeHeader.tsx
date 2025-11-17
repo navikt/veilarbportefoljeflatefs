@@ -15,7 +15,7 @@ export const AapArenaVedtaksperiodeHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.UTLOPSDATO_AAP_OG_TILTAKSPENGER_ARENA}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Gjenstående uker vedtak AAP"
+        tekst="Gjenstående uker vedtak AAP (Arena)"
         title="Gjenstående uker på gjeldende vedtak AAP (Arena)"
         className="col col-xs-2"
     />

@@ -9,7 +9,7 @@ import {
     AAPFilterArena,
     AAPFilterArenaBegge,
     aapIArenaFilterBeggeAlternativ,
-    dagpengerArenaFilter,
+    dagpengerArenaFilterRadiobuttons,
     DagpengerFilterArena,
     DagpengerFilterArenaAlle,
     tiltakspengerFilterArena,
@@ -162,58 +162,77 @@ export function YtelserMedNyttAapArenaFilterRadioFilterform({
                 <Grid columns={gridColumns} className="radio-filterform__valg">
                     <Radio
                         value={DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA}
-                        name={dagpengerArenaFilter[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
+                        name={dagpengerArenaFilterRadiobuttons[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
                         onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                     >
-                        {dagpengerArenaFilter[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
+                        {dagpengerArenaFilterRadiobuttons[DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA].label}
                     </Radio>
                     <Radio
                         value={DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA}
-                        name={dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
-                        className={dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].className}
-                        onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
-                    >
-                        {dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
-                    </Radio>
-                    <Radio
-                        value={DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA}
-                        name={dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA].label}
+                        name={dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
                         className={
-                            dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA].className
+                            dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].className
                         }
                         onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                     >
-                        {dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA].label}
+                        {dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA].label}
+                    </Radio>
+                    <Radio
+                        value={DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA}
+                        name={
+                            dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]
+                                .label
+                        }
+                        className={
+                            dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]
+                                .className
+                        }
+                        onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
+                    >
+                        {
+                            dagpengerArenaFilterRadiobuttons[DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]
+                                .label
+                        }
                     </Radio>
                     <Radio
                         value={DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA}
                         name={
-                            dagpengerArenaFilter[
+                            dagpengerArenaFilterRadiobuttons[
                                 DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
                             ].label
                         }
                         className={
-                            dagpengerArenaFilter[
+                            dagpengerArenaFilterRadiobuttons[
                                 DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
                             ].className
                         }
                         onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                     >
                         {
-                            dagpengerArenaFilter[
+                            dagpengerArenaFilterRadiobuttons[
                                 DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA
                             ].label
                         }
                     </Radio>
                     <Radio
                         value={DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA}
-                        name={dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA].label}
+                        name={
+                            dagpengerArenaFilterRadiobuttons[
+                                DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA
+                            ].label
+                        }
                         className={
-                            dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA].className
+                            dagpengerArenaFilterRadiobuttons[
+                                DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA
+                            ].className
                         }
                         onChange={v => onChange(v, Filtervalg.ytelseDagpengerArena)}
                     >
-                        {dagpengerArenaFilter[DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA].label}
+                        {
+                            dagpengerArenaFilterRadiobuttons[
+                                DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA
+                            ].label
+                        }
                     </Radio>
 
                     <Radio

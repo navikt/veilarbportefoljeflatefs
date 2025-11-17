@@ -346,7 +346,6 @@ export const gjeldendeVedtak14a = {
     [HAR_IKKE_14A_VEDTAK]: {label: 'Har ikke gjeldende vedtak § 14 a'}
 };
 
-/** Dette er det "nye" AAP-Arena-filteret, det som er separat fra "ytelse" */
 export enum AAPFilterArena {
     HAR_AAP_ORDINAR_I_ARENA = 'HAR_AAP_ORDINAR',
     HAR_AAP_UNNTAK_I_ARENA = 'HAR_AAP_UNNTAK'
@@ -383,7 +382,7 @@ export enum AAPFilterKelvin {
 }
 
 export const aapIKelvinFilter = {
-    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'Har AAP (Kelvin)'}
+    [AAPFilterKelvin.HAR_AAP_I_KELVIN]: {label: 'AAP (Kelvin)'}
 };
 
 export enum TiltakspengerFilterArena {
@@ -399,10 +398,9 @@ export enum TiltakspengerFilter {
 }
 
 export const tiltakspengerFilter = {
-    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Har tiltakspenger (TPSAK)'}
+    [TiltakspengerFilter.HAR_TILTAKSPENGER]: {label: 'Tiltakspenger (TPSAK)'}
 };
 
-/** Dette er det "nye" Dagpenger-Arena-filteret, det som er separat fra "ytelse" */
 export enum DagpengerFilterArena {
     HAR_DAGPENGER_ORDINAR_ARENA = 'HAR_DAGPENGER_ORDINAER',
     HAR_DAGPENGER_MED_PERMITTERING_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING',
@@ -417,7 +415,7 @@ export enum DagpengerFilterArenaAlle {
     HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
 }
 
-export const dagpengerArenaFilter = {
+export const dagpengerArenaFilterRadiobuttons = {
     [DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
     [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
         label: 'Ordinære dagpenger (Arena)',
@@ -435,6 +433,15 @@ export const dagpengerArenaFilter = {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     }
+};
+
+export const dagpengerArenaFilter = {
+    [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {label: 'Ordinære dagpenger (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]: {label: 'Dagpenger under permittering (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA]: {
+        label: 'Dagpenger v/perm fiskeindustri (Arena)'
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {label: 'Lønnsgarantimidler dagpenger (Arena)'}
 };
 
 /** Lange namn på innsatsgrupper.
@@ -520,5 +527,5 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
-    ytelseDagpengerArena: dagpengerArenaFilter
+    ytelseDagpengerArena: dagpengerArenaFilterRadiobuttons
 };

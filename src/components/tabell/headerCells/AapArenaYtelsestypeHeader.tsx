@@ -15,7 +15,7 @@ export const AapArenaYtelsestypeHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.AAP_ARENA_TYPE}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Type AAP-periode"
+        tekst="Type AAP-periode (Arena)"
         title="Type AAP-periode (Arena)"
         className="col col-xs-2"
     />
