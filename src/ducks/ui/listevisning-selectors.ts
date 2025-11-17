@@ -18,7 +18,7 @@ import {
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
 } from '../../filtrering/filter-konstanter';
-import {FiltervalgModell} from '../../typer/filtervalg-modell';
+import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
 import {
     filtrertPaAapFilterArenaMenIkkeBegge,
     filtrertPaBeggeAapFilterArena,
@@ -103,10 +103,15 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
 
+    const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
+    const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
+
     /* Hjelpeverdiar for AAP-filter Arena */
     const ordinarAapArena = filtrertPaOrdinarAapFilterArena(filtervalg);
     const unntakAapArena = filtrertPaUnntakAapFilterArena(filtervalg);
     const filtrertPaBeggeAapArena = filtrertPaBeggeAapFilterArena(filtervalg);
+    const filtrertPaBeggeAapArenaOgIkkeAapKelvin = filtrertPaBeggeAapArena && !filtertPaAapIKelvin;
+    const filtrertPaBeggeAapArenaOgAapKelvin = filtrertPaBeggeAapArena && filtertPaAapIKelvin;
     const aapArenaMenIkkeBegge = filtrertPaAapFilterArenaMenIkkeBegge(filtervalg);
 
     // Ulik rekkefølgje på vurderingsfrist-kolonne basert på filtervalg
@@ -152,9 +157,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         filtrertPaInnsatsgruppeGjeldendeVedtak14a ||
         filtrertPaHovedmalGjeldendeVedtak14a;
 
-    const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
-    const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
-
     /* Rekkefølgja her avgjer kva kolonner som er vist som standard,
      * fordi dei tre første mulige kolonnene basert på valgte filter er dei som vert vist.
      * Rekkefølga til kolonnene i tabellen er styrt av rekkefølgja på deira JSX-element i *-kolonner.tsx og *-listehode.tsx
@@ -193,11 +195,12 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPMedVurderingsfrist))
-        .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArena))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgIkkeAapKelvin))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaAAPMedVedtaksperiode))
         .concat(addHvis(Kolonne.YTELSE_ARENA_RETTIGHETSPERIODE_AAP, filtrertPaAAPMedRettighetsperiode))
         .concat(addHvis(Kolonne.AAP_KELVIN_TOM_VEDTAKSDATO, filtertPaAapIKelvin))
         .concat(addHvis(Kolonne.AAP_KELVIN_RETTIGHET, filtertPaAapIKelvin))
+        .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))
