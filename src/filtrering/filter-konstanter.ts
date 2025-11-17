@@ -417,7 +417,7 @@ export enum DagpengerFilterArenaAlle {
     HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
 }
 
-export const dagpengerArenaFilter = {
+export const dagpengerArenaFilterRadiobuttons = {
     [DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
     [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
         label: 'Ordinære dagpenger (Arena)',
@@ -435,6 +435,15 @@ export const dagpengerArenaFilter = {
         label: 'Lønnsgarantimidler dagpenger (Arena)',
         className: skjemaelementInnrykkKlasse
     }
+};
+
+export const dagpengerArenaFilter = {
+    [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {label: 'Ordinære dagpenger (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]: {label: 'Dagpenger under permittering (Arena)'},
+    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA]: {
+        label: 'Dagpenger v/perm fiskeindustri (Arena)'
+    },
+    [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {label: 'Lønnsgarantimidler dagpenger (Arena)'}
 };
 
 /** Lange namn på innsatsgrupper.
@@ -520,5 +529,5 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
-    ytelseDagpengerArena: dagpengerArenaFilter
+    ytelseDagpengerArena: dagpengerArenaFilterRadiobuttons
 };
