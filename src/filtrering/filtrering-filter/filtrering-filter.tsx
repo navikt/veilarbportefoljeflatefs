@@ -241,7 +241,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: registreringstype
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                                 className="registreringstype"
                             />
@@ -264,7 +264,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: utdanning
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         </>
@@ -286,7 +286,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: utdanningGodkjent
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         </>
@@ -308,7 +308,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: utdanningBestatt
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         </>
@@ -328,7 +328,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: gjeldendeVedtak14a
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -344,7 +344,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: innsatsgruppeGjeldendeVedtak14a
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -360,7 +360,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: hovedmalGjeldendeVedtak14a
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -390,7 +390,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                             checkboxValg: avvik14aVedtakValg()
                                         }
                                     ]}
-                                    filtervalgModell={filtervalg}
+                                    filtervalg={filtervalg}
                                     endreFiltervalg={endreAvvik14aVedtakFilterValg()}
                                 />
                             </>
@@ -423,7 +423,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: formidlingsgruppe
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -439,7 +439,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: servicegruppe
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -455,7 +455,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: manuellBrukerStatus
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -487,7 +487,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: dagpengerArenaFilter
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
@@ -509,7 +509,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: aapIArenaFilter
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
@@ -527,7 +527,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: aapIKelvinFilter
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
@@ -549,7 +549,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: tiltakspengerFilterArena
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
@@ -567,7 +567,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                         checkboxValg: tiltakspengerFilter
                                     }
                                 ]}
-                                filtervalgModell={filtervalg}
+                                filtervalg={filtervalg}
                                 endreFiltervalg={endreFiltervalg}
                             />
                         )}
@@ -584,7 +584,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: ensligeForsorgere
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -600,7 +600,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: rettighetsgruppeArena
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}
@@ -621,7 +621,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     render={() => (
                         <CheckboxFilterform
                             filterformOgValgListe={[{form: Filtervalg.tiltakstyper, checkboxValg: enhettiltak}]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             emptyCheckboxFilterFormMessage="Ingen tiltak funnet"
                             className="tiltakstyper"
@@ -639,7 +639,7 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     checkboxValg: stillingFraNavFilter
                                 }
                             ]}
-                            filtervalgModell={filtervalg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                         />
                     )}

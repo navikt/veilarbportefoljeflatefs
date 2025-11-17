@@ -12,7 +12,7 @@ export interface CheckboxFormConfig {
 
 interface CheckboxFilterformProps {
     filterformOgValgListe: CheckboxFormConfig[];
-    filtervalgModell: FiltervalgModell;
+    filtervalg: FiltervalgModell;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     dataTestId?: string;
     emptyCheckboxFilterFormMessage?: string;
@@ -21,7 +21,7 @@ interface CheckboxFilterformProps {
 
 export function CheckboxFilterform({
     filterformOgValgListe,
-    filtervalgModell,
+    filtervalg,
     endreFiltervalg,
     dataTestId = 'checkbox-filterform',
     emptyCheckboxFilterFormMessage,
@@ -33,7 +33,7 @@ export function CheckboxFilterform({
 
     const harMuligeValg = filterformOgValgListe.some(({checkboxValg}) => Object.keys(checkboxValg).length > 0);
     const harValgtMinstEnCheckbox = filterformOgValgListe.some(
-        ({form}) => filtervalgModell[form] && filtervalgModell[form].length > 0
+        ({form}) => filtervalg[form] && filtervalg[form].length > 0
     );
 
     return (
@@ -44,8 +44,8 @@ export function CheckboxFilterform({
                         <CheckboxFilterformValg
                             key={form}
                             form={form}
-                            valg={checkboxValg}
-                            filtervalgModell={filtervalgModell}
+                            checkboxValg={checkboxValg}
+                            filtervalg={filtervalg}
                             endreFiltervalg={endreFiltervalg}
                             className={className}
                         />

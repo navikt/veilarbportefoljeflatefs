@@ -7,24 +7,24 @@ import './filterform.css';
 
 interface CheckboxFilterformProps {
     form: string;
-    valg: CheckboxFilterMap;
-    filtervalgModell: FiltervalgModell;
+    checkboxValg: CheckboxFilterMap;
+    filtervalg: FiltervalgModell;
     endreFiltervalg: (form: string, filterVerdi: string[]) => void;
     className?: string;
 }
 
 export function CheckboxFilterformValg({
     form,
-    valg,
-    filtervalgModell,
+    checkboxValg,
+    filtervalg,
     endreFiltervalg,
     className
 }: CheckboxFilterformProps) {
-    const [checkBoxValg, setCheckBoxValg] = useState<string[]>(filtervalgModell[form]);
+    const [checkboxerSomHarBlittValgt, setCheckboxerSomHarBlittValgt] = useState<string[]>(filtervalg[form]);
 
     useEffect(() => {
-        setCheckBoxValg(filtervalgModell[form]);
-    }, [filtervalgModell, form]);
+        setCheckboxerSomHarBlittValgt(filtervalg[form]);
+    }, [filtervalg, form]);
 
     const checkboxComponent = ([filterKey, filterValue]: [string, CheckboxFilter | string]) => {
         return typeof filterValue === 'string' ? (
@@ -51,9 +51,9 @@ export function CheckboxFilterformValg({
                 legend=""
                 onChange={(filtre: string[]) => endreFiltervalg(form, filtre)}
                 size="small"
-                value={checkBoxValg}
+                value={checkboxerSomHarBlittValgt}
             >
-                {Object.entries(valg).map(([filterKey, filterValue]) => (
+                {Object.entries(checkboxValg).map(([filterKey, filterValue]) => (
                     <div key={filterKey}>{checkboxComponent([filterKey, filterValue])}</div>
                 ))}
             </CheckboxGroup>
