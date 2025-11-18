@@ -5,6 +5,7 @@ import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
 import {sortBy} from '../ducks/sortering';
 import './veilederoversikt-tabell.css';
+import {RETNING} from '../utils/sortering';
 
 interface VeiledereTabellProps {
     veiledere: any;
@@ -25,11 +26,11 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
-            if (currentSortering.direction === 'stigende') {
+            if (currentSortering.direction === RETNING.STIGENDE) {
                 return (
                     <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
                 );
-            } else if (currentSortering.direction === 'synkende') {
+            } else if (currentSortering.direction === RETNING.SYNKENDE) {
                 return (
                     <ArrowDownIcon
                         title="Sortert synkende"
