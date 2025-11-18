@@ -78,14 +78,12 @@ export interface FiltervalgModell {
     [Filtervalg.landgruppe]: string[];
     [Filtervalg.foedeland]: string[];
     [Filtervalg.fodselsdagIMnd]?: string[];
-    innsatsgruppe?: string[]; // Arena-innsatsgruppe // Er dette filteret i bruk meir? Eg ser det ikkje i frontenden. Det pleidde bu saman med Status og brukergrupper. Ingrid, 2025-10-26
     [Filtervalg.formidlingsgruppe]?: string[];
     [Filtervalg.servicegruppe]?: string[];
     [Filtervalg.veiledere]: string[];
     [Filtervalg.aktiviteter]?: AktiviteterFilternokler;
     [Filtervalg.aktiviteterForenklet]: string[];
     [Filtervalg.tiltakstyper]: string[];
-    hovedmal?: string[]; // Arena-hovedmål // Er dette filteret i bruk meir? Eg ser det ikkje i frontenden. Eg trur det var "søskenfilter" for innsatsgruppe over her. Ingrid, 2025-10-26
     [Filtervalg.navnEllerFnrQuery]: string;
     [Filtervalg.rettighetsgruppe]?: string[];
     [Filtervalg.manuellBrukerStatus]?: string[];
