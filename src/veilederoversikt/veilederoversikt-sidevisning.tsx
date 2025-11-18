@@ -5,7 +5,6 @@ import {VeilederoversiktTabell} from './veilederoversikt-tabell';
 import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import './veilederoversikt.css';
@@ -40,18 +39,14 @@ function propertySort({property, direction}) {
 interface VeilederoversiktSidevisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
-    portefoljestorrelser: PortefoljeStorrelser;
 }
 
-export function VeilederoversiktSidevisning({
-    veilederFilter,
-    veiledere,
-    portefoljestorrelser
-}: VeilederoversiktSidevisningProps) {
+export function VeilederoversiktSidevisning({veilederFilter, veiledere}: VeilederoversiktSidevisningProps) {
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
     const seAlle = useSelector(selectSeFlere);
     const sortering = useSelector((state: AppState) => state.sortering);
+    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
     const veilederListe = useMemo(() => {
         return veiledere
