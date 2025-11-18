@@ -1,7 +1,7 @@
 export const RETNING = {
-    STIGENDE: 'stigende',
-    SYNKENDE: 'synkende',
-    NA: 'na'
+    STIGENDE: 'ascending',
+    SYNKENDE: 'decending',
+    NA: 'none'
 };
 
 const norskStringSort = prop => (a, b) => a[prop].localeCompare(b[prop]);
