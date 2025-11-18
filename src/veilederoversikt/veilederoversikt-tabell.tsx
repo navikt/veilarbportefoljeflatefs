@@ -4,8 +4,8 @@ import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
 import {sortBy} from '../ducks/sortering';
+import {RETNING} from './sortering';
 import './veilederoversikt-tabell.css';
-import {RETNING} from '../utils/sortering';
 
 interface VeiledereTabellProps {
     veiledere: any;
