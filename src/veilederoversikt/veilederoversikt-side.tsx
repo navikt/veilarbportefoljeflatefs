@@ -39,7 +39,6 @@ export function VeilederoversiktSide() {
         return dispatch(slettEnkeltFilter(Filtervalg.veiledere, ident, oversiktType));
     };
     const veiledere = useSelector((state: AppState) => state.veiledere);
-    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
     const id = 'veileder-oversikt';
 
     useEffect(() => {
@@ -96,7 +95,6 @@ export function VeilederoversiktSide() {
                         />
                         <VeilederoversiktSidevisning
                             veiledere={veiledere.data.veilederListe}
-                            portefoljestorrelser={portefoljestorrelser}
                             veilederFilter={filtervalg.veiledere}
                         />
                     </div>
