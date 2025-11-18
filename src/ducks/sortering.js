@@ -1,4 +1,4 @@
-import {RETNING} from '../utils/sortering';
+import {RETNING} from '../veilederoversikt/sortering';
 
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
