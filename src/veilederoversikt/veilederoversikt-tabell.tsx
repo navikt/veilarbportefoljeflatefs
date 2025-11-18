@@ -3,16 +3,12 @@ import {useDispatch} from 'react-redux';
 import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
-import {sortBy} from '../ducks/sortering';
-import {RETNING} from './sortering';
+import {sortBy, SorteringsrekkefolgeVeilederoversikt, VeilederoversiktSortering} from '../ducks/sortering';
 import './veilederoversikt-tabell.css';
 
 interface VeiledereTabellProps {
     veiledere: any;
-    currentSortering: {
-        property: string;
-        direction: string;
-    };
+    currentSortering: VeilederoversiktSortering;
 }
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
@@ -26,11 +22,11 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
-            if (currentSortering.direction === RETNING.STIGENDE) {
+            if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.STIGENDE) {
                 return (
                     <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
                 );
-            } else if (currentSortering.direction === RETNING.SYNKENDE) {
+            } else if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE) {
                 return (
                     <ArrowDownIcon
                         title="Sortert synkende"

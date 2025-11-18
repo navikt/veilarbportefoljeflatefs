@@ -1,12 +1,21 @@
-import {RETNING} from '../veilederoversikt/sortering';
-
 // Actions
 export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
 export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
-const initialState = {
+export enum SorteringsrekkefolgeVeilederoversikt {
+    STIGENDE = 'ascending',
+    SYNKENDE = 'decending',
+    NA = 'none'
+}
+
+export interface VeilederoversiktSortering {
+    property: 'etternavn' | 'portefoljestorrelse';
+    direction: SorteringsrekkefolgeVeilederoversikt;
+}
+
+const initialState: VeilederoversiktSortering = {
     property: 'etternavn',
-    direction: RETNING.STIGENDE
+    direction: SorteringsrekkefolgeVeilederoversikt.STIGENDE
 };
 
 // Reducer
@@ -15,9 +24,12 @@ export function sorteringReducer(state = initialState, action) {
         case SORTERT_PA: {
             const {property} = action.data;
 
-            let direction = RETNING.STIGENDE;
+            let direction = SorteringsrekkefolgeVeilederoversikt.STIGENDE;
             if (property === state.property) {
-                direction = state.direction === RETNING.SYNKENDE ? RETNING.STIGENDE : RETNING.SYNKENDE;
+                direction =
+                    state.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE
+                        ? SorteringsrekkefolgeVeilederoversikt.STIGENDE
+                        : SorteringsrekkefolgeVeilederoversikt.SYNKENDE;
             }
 
             return {property, direction};
