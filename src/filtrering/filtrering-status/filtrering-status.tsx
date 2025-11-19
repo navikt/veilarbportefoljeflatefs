@@ -16,9 +16,10 @@ import {
     NYE_BRUKERE_FOR_VEILEDER,
     TILTAKSHENDELSER,
     TRENGER_OPPFOLGINGSVEDTAK,
+    UDELT_SAMTALEREFERAT,
     UFORDELTE_BRUKERE,
-    UTGATTE_VARSEL,
     UNDER_VURDERING,
+    UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
     VENTER_PA_SVAR_FRA_BRUKER,
     VENTER_PA_SVAR_FRA_NAV
@@ -182,6 +183,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         handleChange={handleRadioButtonChange}
                         labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
                         statustall={statustallMedBrukerinnsyn.utgatteVarsel}
+                    />
+                    <BarInputRadio
+                        filterVerdi={UDELT_SAMTALEREFERAT}
+                        handleChange={handleRadioButtonChange}
+                        labelTekst={ferdigfilterListeLabelTekst[UDELT_SAMTALEREFERAT]}
+                        statustall={statustallMedBrukerinnsyn.udelteSamtalereferat}
                     />
                     <BarInputRadio
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}

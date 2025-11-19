@@ -84,6 +84,7 @@ export const ferdigfilterListeLabelTekst = {
     [MOTER_IDAG]: 'Møte med Nav i dag',
     [TILTAKSHENDELSER]: 'Hendelser på tiltak',
     [UTGATTE_VARSEL]: 'Utgåtte varsel',
+    [UDELT_SAMTALEREFERAT]: 'Udelte samtalereferat',
     [UTLOPTE_AKTIVITETER]: 'Utløpte aktiviteter',
     [IKKE_I_AVTALT_AKTIVITET]: 'Ikke i avtalt aktivitet',
     [I_AVTALT_AKTIVITET]: 'I avtalt aktivitet',
