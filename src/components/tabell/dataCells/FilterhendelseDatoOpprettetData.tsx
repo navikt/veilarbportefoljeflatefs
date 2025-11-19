@@ -2,7 +2,6 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 import {UDELT_SAMTALEREFERAT, UTGATTE_VARSEL} from '../../../filtrering/filter-konstanter';
-import {HendelseKategori} from '../../../typer/bruker-modell';
 
 export const FilterhendelseDatoOpprettetData = ({
     bruker,
@@ -13,9 +12,9 @@ export const FilterhendelseDatoOpprettetData = ({
     const filtrertPaUdelteSamtalereferat = filtervalg.ferdigfilterListe.includes(UDELT_SAMTALEREFERAT);
 
     const hendelseInnhold = filtrertPaUtgattVarsel
-        ? bruker.hendelser?.get(HendelseKategori.UTGATTE_VARSEL)
+        ? bruker.hendelser?.UTGATTE_VARSEL
         : filtrertPaUdelteSamtalereferat
-          ? bruker.hendelser?.get(HendelseKategori.UDELTE_SAMTALEREFERAT)
+          ? bruker.hendelser?.UDELTE_SAMTALEREFERAT
           : null;
 
     return (
