@@ -10,8 +10,6 @@ import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/liste
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
 import {AppState} from '../../../reducer';
-import {logEvent} from '../../../utils/frontend-logger';
-import {finnSideNavn, mapVeilederIdentTilNonsens} from '../../../middleware/metrics-middleware';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
 import './drag-and-drop.css';
@@ -36,7 +34,6 @@ export function DragAndDrop({
     const [valgtFilter, setValgtFilter] = useState('');
     const dispatch = useDispatch();
 
-    const veilederIdent = useSelector((state: AppState) => state.innloggetVeileder.data!);
     const valgtMineFilter = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt
             ? state.mineFilterMinOversikt.valgtMineFilter
@@ -68,15 +65,6 @@ export function DragAndDrop({
         const filter: LagretFilter = dragAndDropOrder.find(
             sortertFilter => `${sortertFilter.filterId}` === filterId
         ) as LagretFilter;
-        logEvent(
-            'portefolje.metrikker.lagredefilter.valgt-lagret-filter',
-            {},
-            {
-                filterId: filter.filterId,
-                sideNavn: finnSideNavn(),
-                id: mapVeilederIdentTilNonsens(veilederIdent.ident)
-            }
-        );
 
         const tiltaksfeil = filter.filterValg.tiltakstyper.some(
             tiltak => enhettiltak && enhettiltak[tiltak] === undefined

@@ -73,7 +73,6 @@
 
         "react-collapse": "5.1.1",
         "react-multi-select-component": "4.3.4",
-        "react-device-detect": "2.2.3",
         "@grafana/faro-web-sdk": "1.14.1"
     },
     "lint-staged": {
