@@ -122,19 +122,6 @@ export const barnUnder18Aar = {
     HAR_BARN_UNDER_18_AAR: 'Har barn under 18 år'
 };
 
-export const innsatsgruppe = {
-    IKVAL: {label: 'Standardinnsats'},
-    BFORM: {label: 'Situasjonsbestemt innsats'},
-    BATT: {label: 'Spesielt tilpasset innsats'},
-    VARIG: {label: 'Varig tilpasset'}
-};
-
-export const hovedmal = {
-    SKAFFEA: {label: 'Skaffe arbeid'},
-    BEHOLDEA: {label: 'Beholde arbeid'},
-    OKEDELT: {label: 'Øke deltakelse eller mål om arbeid'}
-};
-
 export const formidlingsgruppe = {
     ARBS: {label: 'Arbeidssøker'},
     IARBS: {label: 'Ikke arbeidssøker'},
@@ -499,8 +486,6 @@ export const filterKonstanter = {
     fodselsdagIMnd,
     kjonn,
     landgruppe,
-    innsatsgruppe,
-    hovedmal,
     formidlingsgruppe,
     servicegruppe,
     rettighetsgruppe: rettighetsgruppeArena,
