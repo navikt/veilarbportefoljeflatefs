@@ -117,8 +117,13 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <VenterPaSvarFraNavData bruker={bruker} valgteKolonner={valgteKolonner} />
             <VenterPaSvarFraBrukerData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <FilterhendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
-            <FilterhendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <FilterhendelseLenkeData
+                bruker={bruker}
+                valgteKolonner={valgteKolonner}
+                enhetId={enhetId}
+                filtervalg={filtervalg}
+            />
+            <FilterhendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} filtervalg={filtervalg} />
 
             <TiltakshendelseLenkeData bruker={bruker} valgteKolonner={valgteKolonner} enhetId={enhetId} />
             <TiltakshendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />

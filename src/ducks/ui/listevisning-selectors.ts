@@ -12,6 +12,7 @@ import {
     TILTAKSHENDELSER,
     TiltakspengerFilter,
     TiltakspengerFilterArena,
+    UDELT_SAMTALEREFERAT,
     UNDER_VURDERING,
     UTGATTE_VARSEL,
     UTLOPTE_AKTIVITETER,
@@ -148,6 +149,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaTiltakshendelse = filtervalg.ferdigfilterListe.includes(TILTAKSHENDELSER);
     const filtrertPaUtgattVarsel = filtervalg.ferdigfilterListe.includes(UTGATTE_VARSEL);
+    const filtrertPaUdeltSamtalereferat = filtervalg.ferdigfilterListe.includes(UDELT_SAMTALEREFERAT);
 
     const filtrertPaGjeldendeVedtak14a = filtervalg.gjeldendeVedtak14a.includes(HAR_14A_VEDTAK);
     const filtrertPaInnsatsgruppeGjeldendeVedtak14a = filtervalg.innsatsgruppeGjeldendeVedtak14a.length > 0;
@@ -181,6 +183,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TILTAKSHENDELSE_DATO_OPPRETTET, filtrertPaTiltakshendelse))
         .concat(addHvis(Kolonne.FILTERHENDELSE_LENKE, filtrertPaUtgattVarsel))
         .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, filtrertPaUtgattVarsel))
+        .concat(addHvis(Kolonne.FILTERHENDELSE_LENKE, filtrertPaUdeltSamtalereferat))
+        .concat(addHvis(Kolonne.FILTERHENDELSE_DATO_OPPRETTET, filtrertPaUdeltSamtalereferat))
         .concat(addHvis(Kolonne.VEDTAKSTATUS, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.VEDTAKSTATUS_ENDRET, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))

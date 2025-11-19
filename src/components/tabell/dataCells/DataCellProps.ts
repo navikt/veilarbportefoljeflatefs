@@ -14,3 +14,8 @@ export interface DataCellMedLenkeProps extends DataCellProps {
 export interface DataCellMedInnholdBasertPaFiltervalgProps extends DataCellProps {
     filtervalg: FiltervalgModell;
 }
+
+export interface DataCellMedLenkePropsOgFiltervalg extends DataCellProps {
+    enhetId: string;
+    filtervalg: FiltervalgModell;
+}
