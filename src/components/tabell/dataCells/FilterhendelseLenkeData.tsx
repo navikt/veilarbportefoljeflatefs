@@ -13,9 +13,9 @@ export const FilterhendelseLenkeData = ({
     const filtrertPaUdelteSamtalereferat = filtervalg.ferdigfilterListe.includes(UDELT_SAMTALEREFERAT);
 
     const hendelseInnhold = filtrertPaUtgattVarsel
-        ? bruker.hendelser?.UTGATTE_VARSEL
+        ? bruker.hendelser?.UTGATT_VARSEL
         : filtrertPaUdelteSamtalereferat
-          ? bruker.hendelser?.UDELTE_SAMTALEREFERAT
+          ? bruker.hendelser?.UDELT_SAMTALEREFERAT
           : null;
 
     return (

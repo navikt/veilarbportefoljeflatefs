@@ -179,8 +179,8 @@ export interface UtgattVarselHendelse {
 }
 
 export enum HendelseKategori {
-    UTGATTE_VARSEL = 'UTGATTE_VARSEL',
-    UDELTE_SAMTALEREFERAT = 'UDELTE_SAMTALEREFERAT'
+    UTGATT_VARSEL = 'UTGATT_VARSEL',
+    UDELT_SAMTALEREFERAT = 'UDELT_SAMTALEREFERAT'
 }
 
 interface Tolkebehov {
