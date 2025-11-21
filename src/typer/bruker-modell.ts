@@ -47,7 +47,7 @@ export interface BrukerModell {
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
-    hendelse: HendelseInnhold;
+    hendelse: HendelseInnhold | null;
     aapKelvin: AapKelvinData | null;
     tiltakspenger: TiltakspengerData | null;
 }
