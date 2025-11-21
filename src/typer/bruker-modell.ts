@@ -47,7 +47,7 @@ export interface BrukerModell {
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
-    hendelser: Record<HendelseKategori, UtgattVarselHendelse> | null;
+    hendelse: HendelseInnhold;
     aapKelvin: AapKelvinData | null;
     tiltakspenger: TiltakspengerData | null;
 }
@@ -172,15 +172,10 @@ export enum Hovedmal {
     OKE_DELTAKELSE = 'OKE_DELTAKELSE'
 }
 
-export interface UtgattVarselHendelse {
+export interface HendelseInnhold {
     beskrivelse: string;
     dato: string;
     lenke: string;
-}
-
-export enum HendelseKategori {
-    UTGATT_VARSEL = 'UTGATT_VARSEL',
-    UDELT_SAMTALEREFERAT = 'UDELT_SAMTALEREFERAT'
 }
 
 interface Tolkebehov {

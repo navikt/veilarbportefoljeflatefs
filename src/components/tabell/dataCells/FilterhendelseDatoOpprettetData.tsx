@@ -1,26 +1,14 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
-import {DataCellMedInnholdBasertPaFiltervalgProps} from './DataCellProps';
+import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
-import {UDELT_SAMTALEREFERAT, UTGATTE_VARSEL} from '../../../filtrering/filter-konstanter';
 
-export const FilterhendelseDatoOpprettetData = ({
-    bruker,
-    valgteKolonner,
-    filtervalg
-}: DataCellMedInnholdBasertPaFiltervalgProps) => {
-    const filtrertPaUtgattVarsel = filtervalg.ferdigfilterListe.includes(UTGATTE_VARSEL);
-    const filtrertPaUdelteSamtalereferat = filtervalg.ferdigfilterListe.includes(UDELT_SAMTALEREFERAT);
-
-    const hendelseInnhold = filtrertPaUtgattVarsel
-        ? bruker.hendelser?.UTGATT_VARSEL
-        : filtrertPaUdelteSamtalereferat
-          ? bruker.hendelser?.UDELT_SAMTALEREFERAT
-          : null;
+export const FilterhendelseDatoOpprettetData = ({bruker, valgteKolonner}: DataCellProps) => {
+    const dato = bruker.hendelse?.dato ? new Date(bruker.hendelse?.dato) : null;
 
     return (
         <DatoDataCellType
             skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_DATO_OPPRETTET)}
-            dato={hendelseInnhold?.dato ? new Date(hendelseInnhold?.dato) : null}
+            dato={dato}
             className="col col-xs-2"
         />
     );
