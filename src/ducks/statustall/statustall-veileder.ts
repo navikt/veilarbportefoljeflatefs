@@ -25,6 +25,7 @@ export const initalStatusState: StatustallVeilederState = {
         moterMedNAVIdag: 0,
         tiltakshendelser: 0,
         utgatteVarsel: 0,
+        udelteSamtalereferat: 0,
         utlopteAktiviteter: 0,
         ikkeIavtaltAktivitet: 0,
         iavtaltAktivitet: 0,

@@ -8,11 +8,11 @@ import {
     EnsligeForsorgereOvergangsstonad,
     FargekategoriModell,
     GjeldendeVedtak14aModell,
+    HendelseInnhold,
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
     TiltakspengerData,
-    UtgattVarselHendelse,
     Utkast14a
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
@@ -222,21 +222,25 @@ const lag14aVedtak = (): GjeldendeVedtak14aModell | null => {
     return null;
 };
 
-const lagUtgattVarsel = (): UtgattVarselHendelse | null => {
-    const maybeUtgattVarsel = rnd(0, 1);
+const lagHendelse = (): HendelseInnhold | null => {
+    const maybeHendelse = rnd(0, 1);
+    const today = new Date();
 
-    if (maybeUtgattVarsel < 0.5) {
+    if (maybeHendelse < 0.25) {
         return {
             beskrivelse: 'Bruker har et utgått varsel',
-            dato: '2024-11-29',
+            dato: new Date(today.setMonth(today.getDay() - 4)).toString(),
             lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
         };
     }
-    return {
-        beskrivelse: 'Bruker har et utgått varsel',
-        dato: new Date().toISOString(),
-        lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
-    };
+    if (maybeHendelse < 0.5) {
+        return {
+            beskrivelse: 'Bruker har et udelt samtalereferat',
+            dato: new Date(today.setMonth(today.getDay() - 7)).toString(),
+            lenke: 'https://veilarbpersonflate.intern.dev.nav.no/aktivitetsplan'
+        };
+    }
+    return null;
 };
 
 const lagAapKelvinData = (): AapKelvinData | null => {
@@ -356,7 +360,7 @@ function lagBruker() {
         fargekategoriEnhetId: '1234',
         huskelapp,
         gjeldendeVedtak14a: lag14aVedtak(),
-        utgattVarsel: lagUtgattVarsel(),
+        hendelse: lagHendelse(),
         aapKelvin: lagAapKelvinData(),
         tiltakspenger: lagTiltakspengerData()
     };
