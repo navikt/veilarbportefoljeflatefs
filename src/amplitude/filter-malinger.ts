@@ -1,43 +1,22 @@
-import {trackAmplitude} from './amplitude';
 import {formidlingsgruppe, servicegruppe} from '../filtrering/filter-konstanter';
 import {Filtervalg} from '../typer/filtervalg-modell';
+import {trackFilterValgEvent} from '../umami/umami';
 
 export type FilterFields = {sideNavn: string; filter: string; verdi: string; veilederIdent: string};
 
 export const filtermalinger = (fields: FilterFields) => {
     switch (fields.filter) {
         case Filtervalg.servicegruppe:
-            trackAmplitude({
-                name: 'filtervalg',
-                data: {
-                    sidenavn: fields.sideNavn,
-                    filternavn: fields.filter,
-                    kategori: servicegruppe[fields.verdi]?.label
-                }
-            });
+            trackFilterValgEvent(fields.sideNavn, fields.filter, servicegruppe[fields.verdi]?.label);
             break;
         case Filtervalg.formidlingsgruppe:
-            trackAmplitude({
-                name: 'filtervalg',
-                data: {
-                    sidenavn: fields.sideNavn,
-                    filternavn: fields.filter,
-                    kategori: formidlingsgruppe[fields.verdi]?.label
-                }
-            });
+            trackFilterValgEvent(fields.sideNavn, fields.filter, formidlingsgruppe[fields.verdi]?.label);
             break;
         case Filtervalg.navnEllerFnrQuery:
         case Filtervalg.veiledere:
             break;
         default:
-            trackAmplitude({
-                name: 'filtervalg',
-                data: {
-                    sidenavn: fields.sideNavn,
-                    filternavn: fields.filter,
-                    kategori: fields.verdi
-                }
-            });
+            trackFilterValgEvent(fields.sideNavn, fields.filter, fields.verdi);
             break;
     }
 };

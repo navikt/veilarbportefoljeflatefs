@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {trackAmplitude} from '../../../amplitude/amplitude';
+import {trackKnappKlikketEvent} from '../../../umami/umami';
 
 interface HandleDragEnterProps {
     setdDragIsInsideElement: Dispatch<SetStateAction<boolean>>;
@@ -56,10 +56,7 @@ export function handleDragEnd({
 }: HandleDragEndProps) {
     return e => {
         if (dragIsInsideElement) {
-            trackAmplitude({
-                name: 'knapp klikket',
-                data: {knapptekst: 'Endre rekkefølge - mine filter', effekt: 'dragEnd'}
-            });
+            trackKnappKlikketEvent('Endre rekkefølge - mine filter', 'dragEnd');
             requestNewOrder(srcIndex, destIndex);
         }
         setSrcIndex(-1);

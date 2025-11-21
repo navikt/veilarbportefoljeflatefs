@@ -1,14 +1,9 @@
 import {AlertProps} from '@navikt/ds-react';
-import {trackAmplitude} from './amplitude';
+import {trackAlertVistEvent} from '../umami/umami';
 
 export interface AlertVistLoggdata {
     variant: AlertProps['variant'];
     tekst: string;
 }
 
-export const loggVisningAvAlert = (data: AlertVistLoggdata) => {
-    return trackAmplitude({
-        name: 'alert vist',
-        data: data
-    });
-};
+export const loggVisningAvAlert = (data: AlertVistLoggdata) => trackAlertVistEvent(data.variant, data.tekst);
