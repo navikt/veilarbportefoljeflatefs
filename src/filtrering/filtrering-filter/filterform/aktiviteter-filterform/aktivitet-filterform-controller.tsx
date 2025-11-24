@@ -4,12 +4,10 @@ import {AktivitetFilterformForenklet} from './aktivitet-filterform-forenklet';
 import {
     aktiviteter,
     AktiviteterAvtaltMedNav,
-    AktiviteterValg,
-    AktiviteterFilternokler
+    AktiviteterFilternokler,
+    AktiviteterValg
 } from '../../../filter-konstanter';
 import {AktivitetFilterformAvansert} from './aktivitet-filterform-avansert';
-import {logEvent} from '../../../../utils/frontend-logger';
-import {finnSideNavn} from '../../../../middleware/metrics-middleware';
 import '../filterform.css';
 
 interface AktivitetFilterformProps {
@@ -71,10 +69,6 @@ export function AktivitetFilterformController({filtervalg, endreFiltervalg}: Akt
 
     const klikkPaLenke = erForenkletLenke => {
         setErForenkletFilterSynlig(erForenkletLenke);
-        logEvent('portefolje.metrikker.aktivitet-lenke', {
-            erForenkletLenke: erForenkletLenke,
-            sideNavn: finnSideNavn()
-        });
     };
 
     return (

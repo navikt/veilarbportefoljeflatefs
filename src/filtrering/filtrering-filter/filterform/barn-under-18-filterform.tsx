@@ -4,8 +4,6 @@ import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Dictionary} from '../../../utils/types/types';
 import {Grid} from '../../../components/grid/grid';
-import {logEvent} from '../../../utils/frontend-logger';
-import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
 
@@ -61,11 +59,6 @@ export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, fil
             endreFiltervalg(Filtervalg.barnUnder18AarAlder, []);
         }
         endreFiltervalg(Filtervalg.barnUnder18Aar, checkboxValg);
-
-        logEvent('portefolje.metrikker.barn_under_18_filter', {
-            checkbox: true,
-            sideNavn: finnSideNavn()
-        });
     };
 
     const onChangeInput = (e, til) => {
@@ -113,10 +106,6 @@ export function BarnUnder18FilterForm({endreFiltervalg, valg, closeDropdown, fil
                 endreFiltervalgForGyldigeVerdier();
                 closeDropdown();
             }
-            logEvent('portefolje.metrikker.barn_under_18_filter', {
-                alder: inputAlderFra + '-' + inputAlderTil,
-                sideNavn: finnSideNavn()
-            });
         }
     };
 
