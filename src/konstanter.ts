@@ -11,13 +11,10 @@ export const DARKMODE = 'veilarbportefoljeflatefs.darkmode';
 export const ALERTSTRIPE_FEILMELDING = 'veilarbportefoljeflatefs.alertstripe_feilmelding';
 export const VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING =
     'veilarbportefoljeflatefs.vis_melding_om_brukere_med_adressebeskyttelse_eller_skjerming';
-export const VIS_AAPFILTER_MED_KELVINDATA = 'veilarbportefoljeflatefs.ytelser-vis-aap-filter-med-kelvindata';
-export const VIS_TILTAKSPENGER_MED_TPSAKDATA = 'veilarbportefoljeflatefs.ytelser-vis-tiltakspenger-med-tpsakdata';
 export const LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG =
     'veilarbportefoljeflatefs.la-veileder-vise-flere-enn-tre-kolonner-samtidig';
 export const SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA =
     'veilarbportefoljeflatefs.skjul-filter-sammenlikne-gjeldende-14a-og-arena';
-export const VIS_YTELSER_I_SEPARATE_DROPDOWNS = 'veilarbportefoljeflatefs.vis-ytelser-i-separate-dropdowns';
 export const VIS_UDELTE_SAMTALEREFERAT = 'veilarbportefoljeflatefs.vis-udelte-samtalereferat';
 
 //HUSK Å LEGG TIL FEATURE-TOGGLE HER OGSÅ!!!!!!!!!
@@ -25,10 +22,7 @@ export const PORTEFOLJE_FEATURES = [
     DARKMODE,
     ALERTSTRIPE_FEILMELDING,
     VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
-    VIS_AAPFILTER_MED_KELVINDATA,
-    VIS_TILTAKSPENGER_MED_TPSAKDATA,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA,
-    VIS_YTELSER_I_SEPARATE_DROPDOWNS,
     VIS_UDELTE_SAMTALEREFERAT
 ];

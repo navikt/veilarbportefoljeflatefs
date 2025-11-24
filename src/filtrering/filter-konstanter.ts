@@ -345,27 +345,6 @@ export const aapIArenaFilter = {
     [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {label: 'AAP unntak (Arena)'}
 };
 
-// Dette er ikkje eit ekte filter mot backend,
-// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
-// som, når valgt, sender både UNNTAK og ORDINAR til backend.
-export enum AAPFilterArenaBegge {
-    HAR_ORDINAR_ELLER_UNNTAK = 'HAR_ORDINAR_ELLER_UNNTAK'
-}
-
-export const aapIArenaFilterBeggeAlternativ = {
-    [AAPFilterArena.HAR_AAP_ORDINAR_I_ARENA]: {
-        label: 'AAP ordinær (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [AAPFilterArena.HAR_AAP_UNNTAK_I_ARENA]: {
-        label: 'AAP unntak (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [AAPFilterArenaBegge.HAR_ORDINAR_ELLER_UNNTAK]: {
-        label: 'AAP (Arena)'
-    }
-};
-
 export enum AAPFilterKelvin {
     HAR_AAP_I_KELVIN = 'HAR_AAP'
 }
@@ -396,33 +375,6 @@ export enum DagpengerFilterArena {
     HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA = 'HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI',
     HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA = 'HAR_DAGPENGER_LONNSGARANTIMIDLER'
 }
-
-// Dette er ikkje eit ekte filter mot backend,
-// men ein "hjelpeverdi" i Dagpenger, AAP og tiltakspenger (Arena)-filteret
-// som, når valgt, sender alle dagpengetypar til backend.
-export enum DagpengerFilterArenaAlle {
-    HAR_DAGPENGER_ARENA = 'HAR_DAGPENGER_ARENA'
-}
-
-export const dagpengerArenaFilterRadiobuttons = {
-    [DagpengerFilterArenaAlle.HAR_DAGPENGER_ARENA]: {label: 'Dagpenger (Arena)'},
-    [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {
-        label: 'Ordinære dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_ARENA]: {
-        label: 'Dagpenger under permittering (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [DagpengerFilterArena.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI_ARENA]: {
-        label: 'Dagpenger v/perm fiskeindustri (Arena)',
-        className: skjemaelementInnrykkKlasse
-    },
-    [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {
-        label: 'Lønnsgarantimidler dagpenger (Arena)',
-        className: skjemaelementInnrykkKlasse
-    }
-};
 
 export const dagpengerArenaFilter = {
     [DagpengerFilterArena.HAR_DAGPENGER_ORDINAR_ARENA]: {label: 'Ordinære dagpenger (Arena)'},
@@ -514,5 +466,5 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
-    ytelseDagpengerArena: dagpengerArenaFilterRadiobuttons
+    ytelseDagpengerArena: dagpengerArenaFilter
 };

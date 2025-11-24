@@ -42,17 +42,11 @@ import {FoedelandFilterform} from './filterform/foedeland-filterform';
 import {TolkebehovFilterform} from './filterform/tolkebehov-filterform';
 import {BarnUnder18FilterForm} from './filterform/barn-under-18-filterform';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA,
-    VIS_AAPFILTER_MED_KELVINDATA,
-    VIS_TILTAKSPENGER_MED_TPSAKDATA,
-    VIS_YTELSER_I_SEPARATE_DROPDOWNS
-} from '../../konstanter';
-import {YtelserMedNyttAapArenaFilterRadioFilterform} from './filterform/ytelser-med-nytt-aap-arena-filter-radio-filterform';
+import {SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA} from '../../konstanter';
+import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
-import {CheckboxFilterform} from './filterform/checkbox-filterform';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -64,12 +58,9 @@ interface FiltreringFilterProps {
 type FilterEndring = 'FJERNET' | 'LAGT_TIL' | 'UENDRET';
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
-    const skalViseAAPfilterMedKelvindata = useFeatureSelector()(VIS_AAPFILTER_MED_KELVINDATA);
     const skjulSammenlignGjeldende14aOgArenaVedtakFilter = useFeatureSelector()(
         SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
     );
-    const skalViseTiltakspengerfilterMedTPSAKdata = useFeatureSelector()(VIS_TILTAKSPENGER_MED_TPSAKDATA);
-    const skalViseYtelserISeparateDropdowns = useFeatureSelector()(VIS_YTELSER_I_SEPARATE_DROPDOWNS);
 
     const avvik14aVedtakValg = () => {
         const erIndeterminate = () => {
@@ -463,117 +454,62 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Ytelse</Label>
-                {!skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="Dagpenger, AAP og tiltakspenger (Arena)"
-                        id="ytelse"
-                        render={() => (
-                            <YtelserMedNyttAapArenaFilterRadioFilterform
-                                filtervalg={filtervalg}
-                                endreFiltervalgArvaFunksjon={endreFiltervalg}
-                                oversiktType={oversiktType}
-                            />
-                        )}
-                    />
-                )}
-                {skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="Dagpenger"
-                        id="ytelse-dagpenger"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseDagpengerArena,
-                                        checkboxValg: dagpengerArenaFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
-                {skalViseAAPfilterMedKelvindata && skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="AAP"
-                        id="ytelser-aap-i-kelvin-og-arena"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseAapKelvin,
-                                        checkboxValg: aapIKelvinFilter
-                                    },
-                                    {
-                                        form: Filtervalg.ytelseAapArena,
-                                        checkboxValg: aapIArenaFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
-                {skalViseAAPfilterMedKelvindata && !skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="AAP (Kelvin)"
-                        id="ytelser-aap-utenfor-arena"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseAapKelvin,
-                                        checkboxValg: aapIKelvinFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
-                {skalViseTiltakspengerfilterMedTPSAKdata && skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="Tiltakspenger"
-                        id="ytelser-tiltakspenger-alle"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseTiltakspenger,
-                                        checkboxValg: tiltakspengerFilter
-                                    },
-                                    {
-                                        form: Filtervalg.ytelseTiltakspengerArena,
-                                        checkboxValg: tiltakspengerFilterArena
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
-                {skalViseTiltakspengerfilterMedTPSAKdata && !skalViseYtelserISeparateDropdowns && (
-                    <Dropdown
-                        name="Tiltakspenger (TPSAK)"
-                        id="ytelser-tiltakspenger-tpsak"
-                        render={() => (
-                            <CheckboxFilterform
-                                filterformOgValgListe={[
-                                    {
-                                        form: Filtervalg.ytelseTiltakspenger,
-                                        checkboxValg: tiltakspengerFilter
-                                    }
-                                ]}
-                                filtervalg={filtervalg}
-                                endreFiltervalg={endreFiltervalg}
-                            />
-                        )}
-                    />
-                )}
+                <Dropdown
+                    name="Dagpenger"
+                    id="ytelse-dagpenger"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseDagpengerArena,
+                                    checkboxValg: dagpengerArenaFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="AAP"
+                    id="ytelser-aap-i-kelvin-og-arena"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseAapKelvin,
+                                    checkboxValg: aapIKelvinFilter
+                                },
+                                {
+                                    form: Filtervalg.ytelseAapArena,
+                                    checkboxValg: aapIArenaFilter
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Tiltakspenger"
+                    id="ytelser-tiltakspenger-alle"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseTiltakspenger,
+                                    checkboxValg: tiltakspengerFilter
+                                },
+                                {
+                                    form: Filtervalg.ytelseTiltakspengerArena,
+                                    checkboxValg: tiltakspengerFilterArena
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
                 <Dropdown
                     name="Enslige forsørgere"
                     id="ensligeForsorgere"
