@@ -9,7 +9,7 @@ export const FilterhendelseLenkeData = ({bruker, valgteKolonner, enhetId}: DataC
         lenketekst={bruker.hendelse?.beskrivelse ?? ''}
         erAbsoluttLenke={true}
         enhetId={enhetId}
-        skalVises={bruker.hendelse?.lenke != null && valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
+        skalVises={valgteKolonner.includes(Kolonne.FILTERHENDELSE_LENKE)}
         className="col col-xs-2-5"
     />
 );
