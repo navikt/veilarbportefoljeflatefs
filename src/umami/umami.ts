@@ -7,7 +7,7 @@ interface Umami {
 }
 
 declare global {
-    interface Window {
+    interface GlobalThis {
         umami?: Umami;
     }
 }
@@ -15,10 +15,10 @@ declare global {
 export function leggTilUmamiScript() {
     const dataWebsiteId = erProd() ? 'e76b7abe-f2c7-4399-a09f-31d99b82f872' : 'b73cc288-29e2-439c-83c7-565aa6a25a96';
     const script = document.createElement('script');
-    script.setAttribute('data-host-url', 'https://umami.nav.no');
-    script.setAttribute('data-website-id', dataWebsiteId);
-    script.setAttribute('src', 'https://cdn.nav.no/team-researchops/sporing/sporing.js');
-    script.setAttribute('defer', 'defer');
+    script.dataset.dataHostUrl = 'https://umami.nav.no';
+    script.dataset.dataWebsiteId = dataWebsiteId;
+    script.dataset.src = 'https://cdn.nav.no/team-researchops/sporing/sporing.js';
+    script.dataset.defer = 'defer';
     document.head.appendChild(script);
 }
 
@@ -29,28 +29,28 @@ export enum UmamiEvents {
 }
 
 export const trackFilterValgEvent = (sidenavn: string, filternavn: string, kategori: string) => {
-    if (!window.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    window.umami.track(UmamiEvents.filtervalg, {sidenavn: sidenavn, filternavn: filternavn, kategori: kategori});
+    globalThis.umami.track(UmamiEvents.filtervalg, {sidenavn: sidenavn, filternavn: filternavn, kategori: kategori});
 };
 
 export const trackAlertVistEvent = (variant: string, tekst: string) => {
-    if (!window.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    window.umami.track(UmamiEvents.alertvist, {variant: variant, tekst: tekst});
+    globalThis.umami.track(UmamiEvents.alertvist, {variant: variant, tekst: tekst});
 };
 
 export const trackKnappKlikketEvent = (knapptekst: string, effekt: string) => {
-    if (!window.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    window.umami.track(UmamiEvents.knappklikket, {knapptekst: knapptekst, effekt: effekt});
+    globalThis.umami.track(UmamiEvents.knappklikket, {knapptekst: knapptekst, effekt: effekt});
 };
