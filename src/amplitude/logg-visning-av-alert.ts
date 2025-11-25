@@ -6,4 +6,8 @@ export interface AlertVistLoggdata {
     tekst: string;
 }
 
-export const loggVisningAvAlert = (data: AlertVistLoggdata) => trackAlertVistEvent(data.variant, data.tekst);
+export const loggVisningAvAlert = (data: AlertVistLoggdata) =>
+    trackAlertVistEvent({
+        variant: data.variant,
+        tekst: data.tekst
+    });

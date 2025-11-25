@@ -1,6 +1,6 @@
 import {init, track} from '@amplitude/analytics-browser';
 import {erProd} from '../utils/url-utils';
-import {AmplitudeEvent} from './taxonomy-events';
+import {AmplitudeEvent} from './umami-event-datatype';
 
 export function initAmplitude() {
     const projectId = erProd() ? '691963e61d2b11465aa96acfcaa8959b' : 'faf28eb5445abfe75c7ac28ae7a8d050';

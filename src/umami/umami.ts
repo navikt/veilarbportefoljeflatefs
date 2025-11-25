@@ -1,4 +1,5 @@
 import {erProd} from '../utils/url-utils';
+import {AlertVistEvent, FilterValgEvent, KnappKlikketEvent} from '../amplitude/umami-event-datatype';
 
 interface Umami {
     track(payload: unknown): void;
@@ -22,35 +23,46 @@ export function leggTilUmamiScript() {
     document.head.appendChild(script);
 }
 
+//Før du lager en ny event -> sjekk https://github.com/navikt/analytics-taxonomy/tree/main/events
 export enum UmamiEvents {
     filtervalg = 'filtervalg',
     alertvist = 'alert vist',
     knappklikket = 'knapp klikket'
 }
 
-export const trackFilterValgEvent = (sidenavn: string, filternavn: string, kategori: string) => {
+export const trackFilterValgEvent = (eventData: FilterValgEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    globalThis.umami.track(UmamiEvents.filtervalg, {sidenavn: sidenavn, filternavn: filternavn, kategori: kategori});
+    globalThis.umami.track(UmamiEvents.filtervalg, {
+        sidenavn: eventData.sidenavn,
+        filternavn: eventData.filternavn,
+        kategori: eventData.kategori
+    });
 };
 
-export const trackAlertVistEvent = (variant: string, tekst: string) => {
+export const trackAlertVistEvent = (eventData: AlertVistEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    globalThis.umami.track(UmamiEvents.alertvist, {variant: variant, tekst: tekst});
+    globalThis.umami.track(UmamiEvents.alertvist, {
+        variant: eventData.variant,
+        tekst: eventData.tekst
+    });
 };
 
-export const trackKnappKlikketEvent = (knapptekst: string, effekt: string) => {
+export const trackKnappKlikketEvent = (eventData: KnappKlikketEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
-    globalThis.umami.track(UmamiEvents.knappklikket, {knapptekst: knapptekst, effekt: effekt});
+    globalThis.umami.track(UmamiEvents.knappklikket, {
+        knapptekst: eventData.knapptekst,
+        effekt: eventData.effekt
+    });
 };

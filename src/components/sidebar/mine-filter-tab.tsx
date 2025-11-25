@@ -72,10 +72,10 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}
                         onChange={() => {
-                            trackKnappKlikketEvent(
-                                'Endre rekkefølge - mine filter',
-                                `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
-                            );
+                            trackKnappKlikketEvent({
+                                knapptekst: 'Endre rekkefølge - mine filter',
+                                effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
+                            });
                             setIsMinefiltereDraggable(prevState => !prevState);
                         }}
                         ariaLabel="Endre rekkefølge"

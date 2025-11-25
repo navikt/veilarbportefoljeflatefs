@@ -7,16 +7,28 @@ export type FilterFields = {sideNavn: string; filter: string; verdi: string; vei
 export const filtermalinger = (fields: FilterFields) => {
     switch (fields.filter) {
         case Filtervalg.servicegruppe:
-            trackFilterValgEvent(fields.sideNavn, fields.filter, servicegruppe[fields.verdi]?.label);
+            trackFilterValgEvent({
+                sidenavn: fields.sideNavn,
+                filternavn: fields.filter,
+                kategori: servicegruppe[fields.verdi]?.label
+            });
             break;
         case Filtervalg.formidlingsgruppe:
-            trackFilterValgEvent(fields.sideNavn, fields.filter, formidlingsgruppe[fields.verdi]?.label);
+            trackFilterValgEvent({
+                sidenavn: fields.sideNavn,
+                filternavn: fields.filter,
+                kategori: formidlingsgruppe[fields.verdi]?.label
+            });
             break;
         case Filtervalg.navnEllerFnrQuery:
         case Filtervalg.veiledere:
             break;
         default:
-            trackFilterValgEvent(fields.sideNavn, fields.filter, fields.verdi);
+            trackFilterValgEvent({
+                sidenavn: fields.sideNavn,
+                filternavn: fields.filter,
+                kategori: fields.verdi
+            });
             break;
     }
 };
