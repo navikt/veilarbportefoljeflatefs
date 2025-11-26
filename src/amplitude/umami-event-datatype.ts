@@ -6,7 +6,7 @@ export type AmplitudeEvent =
     | {name: string; data: Record<string, unknown>};
 
 export type KnappKlikketEvent = {
-    knapptekst: string;
+    tekst: string;
     effekt: string;
 };
 

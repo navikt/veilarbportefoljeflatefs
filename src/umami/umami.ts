@@ -7,6 +7,7 @@ interface Umami {
     identify(session_data: unknown): void;
 }
 
+//Legger til type umami-felt på globalThis slik at TypeScript forstår at det finnes en globalThis.umami
 declare global {
     interface GlobalThis {
         umami?: Umami;
@@ -30,39 +31,39 @@ export enum UmamiEvents {
     knappklikket = 'knapp klikket'
 }
 
-export const trackFilterValgEvent = (eventData: FilterValgEvent) => {
+export const trackFilterValgEvent = ({sidenavn, filternavn, kategori}: FilterValgEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
     globalThis.umami.track(UmamiEvents.filtervalg, {
-        sidenavn: eventData.sidenavn,
-        filternavn: eventData.filternavn,
-        kategori: eventData.kategori
+        sidenavn: sidenavn,
+        filternavn: filternavn,
+        kategori: kategori
     });
 };
 
-export const trackAlertVistEvent = (eventData: AlertVistEvent) => {
+export const trackAlertVistEvent = ({variant, tekst}: AlertVistEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
     globalThis.umami.track(UmamiEvents.alertvist, {
-        variant: eventData.variant,
-        tekst: eventData.tekst
+        variant: variant,
+        tekst: tekst
     });
 };
 
-export const trackKnappKlikketEvent = (eventData: KnappKlikketEvent) => {
+export const trackKnappKlikketEvent = ({tekst, effekt}: KnappKlikketEvent) => {
     if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
     }
     globalThis.umami.track(UmamiEvents.knappklikket, {
-        knapptekst: eventData.knapptekst,
-        effekt: eventData.effekt
+        tekst: tekst,
+        effekt: effekt
     });
 };

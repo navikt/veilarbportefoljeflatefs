@@ -51,14 +51,14 @@ function DragAndDropRow({
                 showDownBtn={!isLastRow}
                 onClickUp={() => {
                     trackKnappKlikketEvent({
-                        knapptekst: 'Endre rekkefølge (pil) - mine filter',
+                        tekst: 'Endre rekkefølge (pil) - mine filter',
                         effekt: 'Flyttet filter opp'
                     });
                     onClick(idx, idx - 1);
                 }}
                 onClickDown={() => {
                     trackKnappKlikketEvent({
-                        knapptekst: 'Endre rekkefølge (pil) - mine filter',
+                        tekst: 'Endre rekkefølge (pil) - mine filter',
                         effekt: 'Flyttet filter ned'
                     });
                     onClick(idx, idx + 1);
