@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {trackKnappKlikketEvent} from '../../../umami/umami';
+import {trackKnappKlikketEvent} from '../../../umami/umami-events';
 
 interface HandleDragEnterProps {
     setdDragIsInsideElement: Dispatch<SetStateAction<boolean>>;

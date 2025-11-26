@@ -10,7 +10,7 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
-import {trackKnappKlikketEvent} from '../../umami/umami';
+import {trackKnappKlikketEvent} from '../../umami/umami-events';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {

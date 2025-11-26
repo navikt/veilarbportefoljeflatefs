@@ -4,19 +4,3 @@ export type AmplitudeEvent =
     | {name: 'alert vist'; data: {variant: string; tekst: string}}
     | {name: 'filtervalg'; data: {kategori: string; filternavn: string}}
     | {name: string; data: Record<string, unknown>};
-
-export type KnappKlikketEvent = {
-    tekst: string;
-    effekt: string;
-};
-
-export type FilterValgEvent = {
-    sidenavn: string;
-    filternavn: string;
-    kategori: string;
-};
-
-export type AlertVistEvent = {
-    variant: string;
-    tekst: string;
-};

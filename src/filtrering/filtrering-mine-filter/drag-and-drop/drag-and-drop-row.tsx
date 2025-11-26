@@ -2,7 +2,7 @@ import {useRef, useEffect, memo} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
 import {FlyttKnappWrapper} from './flytt-knapp-wrapper';
 import {kebabCase} from '../../../utils/utils';
-import {trackKnappKlikketEvent} from '../../../umami/umami';
+import {trackKnappKlikketEvent} from '../../../umami/umami-events';
 
 interface DragAndDropRowProps {
     idx: number;
