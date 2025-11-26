@@ -9,8 +9,8 @@ import {AppState} from '../../reducer';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {trackAmplitude} from '../../amplitude/amplitude';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
+import {trackKnappKlikketEvent} from '../../umami/umami-events';
 
 function sortMineFilter(a: LagretFilter, b: LagretFilter) {
     if (a.sortOrder !== null) {
@@ -72,12 +72,9 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
                     <ToggleSwitch
                         checked={isMinefiltereDraggable}
                         onChange={() => {
-                            trackAmplitude({
-                                name: 'knapp klikket',
-                                data: {
-                                    knapptekst: 'Endre rekkefølge - mine filter',
-                                    effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
-                                }
+                            trackKnappKlikketEvent({
+                                tekst: 'Endre rekkefølge - mine filter',
+                                effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
                             });
                             setIsMinefiltereDraggable(prevState => !prevState);
                         }}
