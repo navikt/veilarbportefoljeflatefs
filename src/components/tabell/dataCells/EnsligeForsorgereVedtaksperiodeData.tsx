@@ -4,7 +4,7 @@ import {DataCellProps} from './DataCellProps';
 
 export const EnsligeForsorgereVedtaksperiodeData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstDataCellType
-        tekst={bruker.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype ?? '-'}
+        tekst={bruker.ytelser.ensligeForsorgereOvergangsstonad?.vedtaksPeriodetype ?? '-'}
         skalVises={valgteKolonner.includes(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE)}
         className="col col-xs-2"
     />

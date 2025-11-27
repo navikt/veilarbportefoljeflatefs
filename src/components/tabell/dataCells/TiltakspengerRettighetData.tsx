@@ -4,7 +4,7 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 
 export const TiltakspengerRettighetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstDataCellType
-        tekst={bruker.tiltakspenger?.rettighet ?? '-'}
+        tekst={bruker.ytelser.tiltakspenger?.rettighet ?? '-'}
         skalVises={valgteKolonner.includes(Kolonne.TILTAKSPENGER_RETTIGHET)}
         className="col col-xs-2"
     />

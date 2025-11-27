@@ -7,6 +7,6 @@ export const AapArenaYtelsestypeData = ({bruker, valgteKolonner}: DataCellProps)
     <TekstDataCellType
         className="col col-xs-2"
         skalVises={valgteKolonner.includes(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP)}
-        tekst={bruker.ytelse ? ytelsestypetekst(bruker.ytelse) : '–'}
+        tekst={bruker.ytelser.ytelserArena.ytelse ? ytelsestypetekst(bruker.ytelser.ytelserArena.ytelse) : '–'}
     />
 );
