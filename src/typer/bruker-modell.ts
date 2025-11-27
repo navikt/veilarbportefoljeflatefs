@@ -10,16 +10,10 @@ export interface BrukerModell {
     veilederId?: string;
     egenAnsatt: boolean;
     skjermetTil?: string;
-    innsatsgruppe: Innsatsgruppe;
-    ytelse?: string;
-    utlopsdato?: string; // dato
-    dagputlopUke?: number;
-    permutlopUke?: number;
-    aapmaxtidUke?: number;
-    aapUnntakUkerIgjen?: number;
-    aapordinerutlopsdato?: string; // dato
+
     venterPaSvarFraNAV?: string; // dato
     venterPaSvarFraBruker?: string; // dato
+
     nyesteUtlopteAktivitet?: string; // dato
     tiltakshendelse: TiltakshendelseModell | null;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
@@ -40,7 +34,6 @@ export interface BrukerModell {
     tolkebehov: Tolkebehov;
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak: string;
-    ensligeForsorgereOvergangsstonad?: EnsligeForsorgereOvergangsstonad;
     barnUnder18AarData: BarnUnder18AarModell[];
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
@@ -48,8 +41,7 @@ export interface BrukerModell {
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     hendelse: HendelseInnhold | null;
-    aapKelvin: AapKelvinData | null;
-    tiltakspenger: TiltakspengerData | null;
+    ytelser: Ytelser;
 }
 
 export interface Etiketter {
@@ -61,14 +53,32 @@ export interface Etiketter {
     harBehovForArbeidsevneVurdering: boolean;
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig?: string | null;
-    profileringResultat?: Profileringsresultat | null;
+    profileringResultat: Profileringsresultat | null;
 }
 
 export interface GeografiskBosted {
-    bostedKommune?: string;
+    bostedKommune: string | null;
     bostedKommuneUkjentEllerUtland: string;
-    bostedBydel?: string;
-    bostedSistOppdatert?: string;
+    bostedBydel: string | null;
+    bostedSistOppdatert: string | null;
+}
+
+export interface Ytelser {
+    ytelserArena: YtelserArena;
+    aap: AapKelvinData | null;
+    tiltakspenger: TiltakspengerData | null;
+    ensligeForsorgereOvergangsstonad: EnsligeForsorgereOvergangsstonad | null;
+}
+
+export interface YtelserArena {
+    innsatsgruppe: Innsatsgruppe | null;
+    ytelse?: string;
+    utlopsdato?: string;
+    dagputlopUke?: number;
+    permutlopUke?: number;
+    aapmaxtidUke?: number;
+    aapUnntakUkerIgjen?: number;
+    aapordinerutlopsdato?: string;
 }
 
 export enum Profileringsresultat {

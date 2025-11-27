@@ -16,9 +16,9 @@ export const DagpengerArenaGjenstaendeUkerRettighetData = ({
     // Bruk ulik kjelde for "ukerIgjen" basert på kva dagpengetype det er filtrert på
     const ukerIgjenBasertPaDagpengetype = () => {
         if (filtrertPaDagpengerArenaFilterMedPermittering(ytelseDagpengerArena)) {
-            return bruker.permutlopUke;
+            return bruker.ytelser.ytelserArena.permutlopUke;
         } else if (filtrertPaDagpengerArenaFilterUtenPermittering(ytelseDagpengerArena)) {
-            return bruker.dagputlopUke;
+            return bruker.ytelser.ytelserArena.dagputlopUke;
         }
     };
 

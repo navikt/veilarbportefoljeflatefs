@@ -6,10 +6,10 @@ import {dateGreater, toDateString} from '../../../utils/dato-utils';
 
 export const AapArenaVurderingsfristData = ({bruker, valgteKolonner}: DataCellProps) => {
     const vurderingsfristAAP = aapVurderingsfrist(
-        bruker.innsatsgruppe,
-        bruker.ytelse,
-        bruker.utlopsdato,
-        bruker.aapordinerutlopsdato
+        bruker.ytelser.ytelserArena.innsatsgruppe,
+        bruker.ytelser.ytelserArena.ytelse,
+        bruker.ytelser.ytelserArena.utlopsdato,
+        bruker.ytelser.ytelserArena.aapordinerutlopsdato
     );
 
     return (
@@ -22,7 +22,7 @@ export const AapArenaVurderingsfristData = ({bruker, valgteKolonner}: DataCellPr
 };
 
 function aapVurderingsfrist(
-    innsatsgruppe: Innsatsgruppe,
+    innsatsgruppe: Innsatsgruppe | null,
     brukerYtelse: string | undefined,
     utlopsdatoVedtak?: string,
     utlopsdatoOrdinerRettighet?: string

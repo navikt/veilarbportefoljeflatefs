@@ -13,7 +13,8 @@ import {
     InnsatsgruppeGjeldendeVedtak14a,
     TiltakshendelseModell,
     TiltakspengerData,
-    Utkast14a
+    Utkast14a,
+    YtelserArena
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
 import {MOCK_CONFIG} from '../constants';
@@ -95,17 +96,18 @@ function lagGrunndata() {
     };
 }
 
-function lagYtelse() {
+function lagArenaYtelse(): YtelserArena {
     const maybeYtelse = rnd(0, ytelser.length * 1.5);
-    const ytelse = maybeYtelse < ytelser.length ? ytelser[maybeYtelse] : null;
-    const out = {
-        ytelse,
+    const ytelse = maybeYtelse < ytelser.length ? ytelser[maybeYtelse] : undefined;
+    const out: YtelserArena = {
+        innsatsgruppe: null,
+        ytelse: ytelse,
         utlopsdato: '',
-        aapmaxtidUke: '',
-        aapUnntakUkerIgjen: '',
+        aapmaxtidUke: 0,
+        aapUnntakUkerIgjen: undefined,
         aapordinerutlopsdato: '',
-        dagputlopUke: '24',
-        permutlopUke: '10'
+        dagputlopUke: 24,
+        permutlopUke: 10
     };
 
     const dag = rnd(1, 31);
@@ -118,8 +120,8 @@ function lagYtelse() {
 
         const aaptidUke = Math.round((rndDate.getTime() - todayDate.getTime()) / (1000 * 60 * 60 * 24 * 7));
 
-        out.aapmaxtidUke = aaptidUke.toString();
-        out.aapUnntakUkerIgjen = aaptidUke.toString();
+        out.aapmaxtidUke = aaptidUke;
+        out.aapUnntakUkerIgjen = aaptidUke;
         if (ytelse === AapYtelseData.ORDINAR_AAP) {
             if (Math.random() > 0.5) {
                 out.aapordinerutlopsdato = rndDate.toString();
@@ -284,7 +286,7 @@ function lagBruker() {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
 
     const aktoerid = mockAktoeridLopenummer++;
-    const ytelse = lagYtelse();
+    const arenaYtelser = lagArenaYtelse();
     const huskelapp = lagHuskelapp(grunndata.fnr);
     const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
@@ -313,9 +315,6 @@ function lagBruker() {
             bostedKommuneUkjentEllerUtland: '-',
             bostedSistOppdatert: randomDate({past: true})
         },
-        bostedKommune: hentBostedKommune(),
-        bostedBydel: hentBostedBydel(),
-        bostedSistOppdatert: randomDate({past: true}),
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
@@ -328,7 +327,6 @@ function lagBruker() {
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
-        ...ytelse,
         aktiviteter: grunndata.aktiviteter,
         moteStartTid: grunndata.moteStartTid?.toString(),
         alleMoterStartTid: grunndata.alleMoterStartTid,
@@ -341,8 +339,7 @@ function lagBruker() {
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
         hovedStatsborgerskap: {
             statsborgerskap: hentLand(),
-            gyldigFra: '1961-06-12',
-            gyldigTil: ''
+            gyldigFra: '1961-06-12'
         },
         foedeland: hentLand(),
 
@@ -353,7 +350,6 @@ function lagBruker() {
         },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
-        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger(),
         barnUnder18AarData: hentBarnUnder18Aar(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
@@ -361,8 +357,12 @@ function lagBruker() {
         huskelapp,
         gjeldendeVedtak14a: lag14aVedtak(),
         hendelse: lagHendelse(),
-        aapKelvin: lagAapKelvinData(),
-        tiltakspenger: lagTiltakspengerData()
+        ytelser: {
+            ytelserArena: lagArenaYtelse(),
+            aap: lagAapKelvinData(),
+            tiltakspenger: lagTiltakspengerData(),
+            ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
+        }
     };
 }
 
