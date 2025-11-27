@@ -6,14 +6,19 @@ import {
     AapKelvinData,
     BarnUnder18AarModell,
     EnsligeForsorgereOvergangsstonad,
+    Etiketter,
     FargekategoriModell,
+    GeografiskBosted,
     GjeldendeVedtak14aModell,
     HendelseInnhold,
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
+    MeldingerVenterPaSvar,
+    Statsborgerskap,
     TiltakshendelseModell,
     TiltakspengerData,
     Utkast14a,
+    Ytelser,
     YtelserArena
 } from '../../typer/bruker-modell';
 import {rnd} from '../utils';
@@ -66,12 +71,7 @@ const huskelapp: any = {};
 let i = 123456;
 
 function lagGrunndata() {
-    const ar = rnd(0, 99);
-    const erDoed = Math.random() < (100 - ar * 20) / 100;
-
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const venterPaSvarFraBruker = randomDate({past: true});
-    const venterPaSvarFraNAV = randomDate({past: true});
     const nesteUtlopteAktivitet = randomDate({past: false});
 
     const brukerAktiviteter = Object.keys(aktiviteter)
@@ -85,10 +85,7 @@ function lagGrunndata() {
         fnr: String(i++).padStart(11, '0'),
         fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
-        erDoed,
         nesteUtlopteAktivitet,
-        venterPaSvarFraBruker,
-        venterPaSvarFraNAV,
         aktiviteter: brukerAktiviteter,
         moteStartTid,
         alleMoterStartTid,
@@ -277,18 +274,66 @@ const lagTiltakspengerData = (): TiltakspengerData | null => {
     };
 };
 
+const lagYtelser = (): Ytelser => {
+    return {
+        ytelserArena: lagArenaYtelse(),
+        aap: lagAapKelvinData(),
+        tiltakspenger: lagTiltakspengerData(),
+        ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
+    };
+};
+
+const lagGeografiskBosted = (): GeografiskBosted => {
+    return {
+        bostedKommune: hentBostedKommune(),
+        bostedBydel: hentBostedBydel(),
+        bostedKommuneUkjentEllerUtland: '-',
+        bostedSistOppdatert: randomDate({past: true})
+    };
+};
+
+const lagMeldingerVenterPaSvar = (): MeldingerVenterPaSvar => {
+    return {
+        datoMeldingFraNav: randomDate({past: true}),
+        datoMeldingFraBruker: randomDate({past: true})
+    };
+};
+
+const lagEtiketter = (): Etiketter => {
+    const ar = rnd(0, 99);
+    const erDoed = Math.random() < (100 - ar * 20) / 100;
+    const maybeVeileder = rnd(0, veiledere.length * 2);
+    const nyForVeileder = maybeVeileder > 0 && Math.random() < 0.25;
+    const nyForEnhet = Math.random() < 25 / 100;
+    const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
+
+    return {
+        harSikkerhetstiltak: false,
+        nyForVeileder: nyForVeileder,
+        nyForEnhet: nyForEnhet,
+        erDoed: erDoed,
+        erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
+        trengerOppfolgingsvedtak: false,
+        harBehovForArbeidsevneVurdering: false,
+        diskresjonskodeFortrolig: null,
+        profileringResultat: null
+    };
+};
+
+const lagHovedstatsborgerskap = (): Statsborgerskap => {
+    return {
+        statsborgerskap: hentLand(),
+        gyldigFra: '1961-06-12'
+    };
+};
+
 function lagBruker() {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
-    const nyForVeileder = maybeVeileder > 0 && Math.random() < 0.25;
-    const nyForEnhet = Math.random() < 25 / 100;
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
-
     const aktoerid = mockAktoeridLopenummer++;
-    const arenaYtelser = lagArenaYtelse();
     const huskelapp = lagHuskelapp(grunndata.fnr);
-    const erSykmeldtMedArbeidsgiver = Math.random() < 25 / 100;
     const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
@@ -296,33 +341,22 @@ function lagBruker() {
     const random_harSkjermetTil = erSkjermet();
 
     return {
+        // gått gjennom og typesikra:
+        etiketter: lagEtiketter(),
+        geografiskBosted: lagGeografiskBosted(),
+        meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
+        hovedStatsborgerskap: lagHovedstatsborgerskap(),
+        ytelser: lagYtelser(),
+
+        // ikke gått gjennom eller typesikra:
         guid: '',
         oppfolgingStartdato: '',
-        etiketter: {
-            harSikkerhetstiltak: false,
-            nyForVeileder: nyForVeileder,
-            nyForEnhet: nyForEnhet,
-            erDoed: grunndata.erDoed,
-            erSykmeldtMedArbeidsgiver: erSykmeldtMedArbeidsgiver,
-            trengerOppfolgingsvedtak: false,
-            harBehovForArbeidsevneVurdering: false,
-            diskresjonskodeFortrolig: null,
-            profileringResultat: null
-        },
-        geografiskBosted: {
-            bostedKommune: hentBostedKommune(),
-            bostedBydel: hentBostedBydel(),
-            bostedKommuneUkjentEllerUtland: '-',
-            bostedSistOppdatert: randomDate({past: true})
-        },
         fnr: grunndata.fnr,
         aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
         veilederId: veilederId,
         tildeltTidspunkt: randomDate({past: true}),
-        venterPaSvarFraBruker: grunndata.venterPaSvarFraBruker,
-        venterPaSvarFraNAV: grunndata.venterPaSvarFraNAV,
         tiltakshendelse: lagTiltakshendelse(),
         nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt: random_egenAnsatt,
@@ -337,12 +371,7 @@ function lagBruker() {
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
-        hovedStatsborgerskap: {
-            statsborgerskap: hentLand(),
-            gyldigFra: '1961-06-12'
-        },
         foedeland: hentLand(),
-
         tolkebehov: {
             talespraaktolk: hentSpraak(),
             tegnspraaktolk: hentSpraak(),
@@ -356,13 +385,7 @@ function lagBruker() {
         fargekategoriEnhetId: '1234',
         huskelapp,
         gjeldendeVedtak14a: lag14aVedtak(),
-        hendelse: lagHendelse(),
-        ytelser: {
-            ytelserArena: lagArenaYtelse(),
-            aap: lagAapKelvinData(),
-            tiltakspenger: lagTiltakspengerData(),
-            ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
-        }
+        hendelse: lagHendelse()
     };
 }
 

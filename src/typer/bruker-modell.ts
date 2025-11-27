@@ -1,6 +1,9 @@
 export interface BrukerModell {
     etiketter: Etiketter;
     geografiskBosted: GeografiskBosted;
+    meldingerVenterPaSvar: MeldingerVenterPaSvar;
+    ytelser: Ytelser;
+
     fnr: string;
     guid: string; // denne sendes ikke fra backend
     fornavn: string;
@@ -10,10 +13,6 @@ export interface BrukerModell {
     veilederId?: string;
     egenAnsatt: boolean;
     skjermetTil?: string;
-
-    venterPaSvarFraNAV?: string; // dato
-    venterPaSvarFraBruker?: string; // dato
-
     nyesteUtlopteAktivitet?: string; // dato
     tiltakshendelse: TiltakshendelseModell | null;
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
@@ -41,7 +40,6 @@ export interface BrukerModell {
     utdanningOgSituasjonSistEndret: string; // dato
     gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     hendelse: HendelseInnhold | null;
-    ytelser: Ytelser;
 }
 
 export interface Etiketter {
@@ -79,6 +77,11 @@ export interface YtelserArena {
     aapmaxtidUke?: number;
     aapUnntakUkerIgjen?: number;
     aapordinerutlopsdato?: string;
+}
+
+export interface MeldingerVenterPaSvar {
+    datoMeldingFraNav: string | null;
+    datoMeldingFraBruker: string | null;
 }
 
 export enum Profileringsresultat {
@@ -124,10 +127,9 @@ export interface Utkast14a {
     ansvarligVeileder?: string;
 }
 
-interface Statsborgerskap {
+export interface Statsborgerskap {
     statsborgerskap: string;
     gyldigFra?: string;
-    gyldigTil?: string;
 }
 
 export interface EnsligeForsorgereOvergangsstonad {
