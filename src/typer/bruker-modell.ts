@@ -80,8 +80,8 @@ export interface YtelserArena {
 }
 
 export interface MeldingerVenterPaSvar {
-    datoMeldingFraNav: string | null;
-    datoMeldingFraBruker: string | null;
+    datoMeldingVenterPaNav: string | null;
+    datoMeldingVenterPaBruker: string | null;
 }
 
 export enum Profileringsresultat {

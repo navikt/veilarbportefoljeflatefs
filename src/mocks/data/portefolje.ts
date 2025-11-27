@@ -294,8 +294,8 @@ const lagGeografiskBosted = (): GeografiskBosted => {
 
 const lagMeldingerVenterPaSvar = (): MeldingerVenterPaSvar => {
     return {
-        datoMeldingFraNav: randomDate({past: true}),
-        datoMeldingFraBruker: randomDate({past: true})
+        datoMeldingVenterPaNav: randomDate({past: true}),
+        datoMeldingVenterPaBruker: randomDate({past: true})
     };
 };
 

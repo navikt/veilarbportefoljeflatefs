@@ -3,8 +3,8 @@ import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const VenterPaSvarFraNavData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const venterPaSvarFraNAV = bruker.meldingerVenterPaSvar.datoMeldingFraNav
-        ? new Date(bruker.meldingerVenterPaSvar.datoMeldingFraNav)
+    const venterPaSvarFraNAV = bruker.meldingerVenterPaSvar.datoMeldingVenterPaNav
+        ? new Date(bruker.meldingerVenterPaSvar.datoMeldingVenterPaNav)
         : null;
 
     return (
