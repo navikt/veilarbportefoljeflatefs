@@ -14,11 +14,15 @@ declare global {
 }
 
 export function leggTilUmamiScript() {
-    const dataWebsiteId = erProd() ? 'e76b7abe-f2c7-4399-a09f-31d99b82f872' : 'b73cc288-29e2-439c-83c7-565aa6a25a96';
+    const prodSporingskode = 'e76b7abe-f2c7-4399-a09f-31d99b82f872';
+    const devSporingskode = 'b73cc288-29e2-439c-83c7-565aa6a25a96';
+    const dataWebsiteId = erProd() ? prodSporingskode : devSporingskode;
+
     const script = document.createElement('script');
-    script.dataset.dataHostUrl = 'https://umami.nav.no';
-    script.dataset.dataWebsiteId = dataWebsiteId;
-    script.dataset.src = 'https://cdn.nav.no/team-researchops/sporing/sporing.js';
-    script.dataset.defer = 'defer';
+    script.setAttribute('data-host-url', 'https://umami.nav.no');
+    script.setAttribute('data-website-id', dataWebsiteId);
+    script.setAttribute('src', 'https://cdn.nav.no/team-researchops/sporing/sporing.js');
+    script.setAttribute('defer', 'defer');
+
     document.head.appendChild(script);
 }
