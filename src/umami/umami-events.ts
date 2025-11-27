@@ -22,6 +22,7 @@ export type AlertVistEvent = {
 };
 
 //Man må maskere fødselsnummer med funksjonen nedenfor hvis payloaden(data som skal sendes til umami) inneholder det
+// eslint-disable-line @typescript-eslint/no-unused-vars
 const maskereFodselsnummer = (data?: Record<string, unknown>) => {
     const maskertObjekt = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
         fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
