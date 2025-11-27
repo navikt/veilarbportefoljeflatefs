@@ -4,8 +4,6 @@ import {BodyShort, Button, Checkbox, CheckboxGroup, TextField} from '@navikt/ds-
 import {FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Dictionary} from '../../../utils/types/types';
 import {Grid} from '../../../components/grid/grid';
-import {logEvent} from '../../../utils/frontend-logger';
-import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import './filterform.css';
 
@@ -64,11 +62,6 @@ export function AlderFilterform({
 
         setCheckBoxValg(checkboxValg);
         endreFiltervalg(form, checkboxValg);
-
-        logEvent('portefolje.metrikker.aldersfilter', {
-            checkbox: true,
-            sideNavn: finnSideNavn()
-        });
     };
 
     const onChangeInput = (e, til) => {
@@ -107,10 +100,6 @@ export function AlderFilterform({
                 }
                 closeDropdown();
             }
-            logEvent('portefolje.metrikker.aldersfilter', {
-                checkbox: false,
-                sideNavn: finnSideNavn()
-            });
         }
     };
 

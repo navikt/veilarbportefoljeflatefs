@@ -10,7 +10,6 @@ import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
-import {loggSkjermMetrikker, Side} from '../utils/metrikker/skjerm-metrikker';
 import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
@@ -53,7 +52,6 @@ export function VeilederoversiktSide() {
         const side = getSideFromUrl();
         const sidestorrelse = getSidestorrelseFromUrl();
         dispatch(pagineringSetup({side, sidestorrelse}));
-        loggSkjermMetrikker(Side.VEILEDER_OVERSIKT);
     });
 
     useSetLocalStorageOnUnmount();

@@ -10,9 +10,7 @@ import {EndringerIkkeLagretModal} from './ulagrede-endringer-modal';
 import {AppState} from '../../../reducer';
 import {OrNothing} from '../../../utils/types/types';
 import {VeiledergruppeForm} from './veiledergruppe-form';
-import {logEvent} from '../../../utils/frontend-logger';
 import {initialState} from '../../../ducks/filtrering';
-import {finnSideNavn} from '../../../middleware/metrics-middleware';
 import {erTomtObjekt} from '../mine-filter/mine-filter-utils';
 import {STATUS} from '../../../ducks/utils';
 import {LasterModal} from '../lastermodal/laster-modal';
@@ -126,7 +124,6 @@ export function VeiledergruppeModal({
     }
 
     function slettVeiledergruppeOgLukkModaler() {
-        logEvent('portefolje.metrikker.veiledergrupper.slettknapp', {}, {sideNavn: finnSideNavn()});
         onSlett && onSlett();
         setVisSletteVeiledergruppeModal(false);
         onRequestClose();
@@ -194,7 +191,6 @@ export function VeiledergruppeModal({
     };
 
     const avbrytSletting = () => {
-        logEvent('portefolje.metrikker.veiledergrupper.avbrytknapp', {}, {sideNavn: finnSideNavn()});
         setVisSletteVeiledergruppeModal(false);
     };
 

@@ -7,18 +7,20 @@ import './toolbar.css';
 interface VelgalleCheckboksProps {
     disabled: boolean;
     alleMarkert: boolean;
+    noenMarkert: boolean;
     markerAlle: (markert: boolean) => void;
 }
 
-function VelgAlleCheckboks({disabled, markerAlle, alleMarkert}: VelgalleCheckboksProps) {
+function VelgAlleCheckboks({disabled, markerAlle, alleMarkert, noenMarkert}: VelgalleCheckboksProps) {
     const onClickHandler = () => {
-        markerAlle(!alleMarkert);
+        noenMarkert ? markerAlle(false) : markerAlle(!alleMarkert);
     };
 
     return (
         <Checkbox
             size="small"
             checked={alleMarkert}
+            indeterminate={noenMarkert}
             disabled={disabled}
             hideLabel
             onChange={onClickHandler}
@@ -33,9 +35,11 @@ const mapStateToProps = state => {
     const brukere = state.portefolje.data.brukere;
     const alleMarkert =
         brukere.length > 0 && brukere.every(bruker => (bruker.fnr !== '' && bruker.markert) || bruker.fnr === '');
+    const noenMarkert =
+        brukere.length > 0 && brukere.some(bruker => bruker.fnr !== '' && bruker.markert) && !alleMarkert;
     const disabled = brukere.length === 0;
 
-    return {alleMarkert, disabled};
+    return {alleMarkert, noenMarkert, disabled};
 };
 
 const mapDispatchToProps = dispatch =>
