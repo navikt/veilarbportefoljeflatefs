@@ -5,7 +5,6 @@ import {DeploymentEnvironment, erMock} from './utils/url-utils';
 import {initAmplitude} from './amplitude/amplitude';
 import '@navikt/ds-css';
 import './style.css';
-import {leggTilUmamiScript} from './umami/umami';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill');
