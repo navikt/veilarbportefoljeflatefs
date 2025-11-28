@@ -10,6 +10,7 @@ export const hentEndringsLoggEntries = async (
     fetch(`${backendUrl}/endringslogg`, {
         method: 'POST',
         mode: 'cors',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
