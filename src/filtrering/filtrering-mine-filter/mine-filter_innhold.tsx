@@ -7,7 +7,7 @@ import {DragAndDrop} from './drag-and-drop/drag-and-drop';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {AlertVistLoggdata, loggVisningAvAlert} from '../../amplitude/logg-visning-av-alert';
+import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
 

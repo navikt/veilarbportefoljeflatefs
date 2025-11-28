@@ -41,7 +41,6 @@
         "@types/react-collapse": "5.0.4"
     },
     "dependencies": {
-        "@amplitude/analytics-browser": "2.20.1",
         "@navikt/aksel-icons": "7.20.0",
         "@navikt/ds-css": "7.20.0",
         "@navikt/ds-react": "7.20.0",

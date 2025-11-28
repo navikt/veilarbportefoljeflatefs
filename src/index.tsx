@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
 import {DeploymentEnvironment, erMock} from './utils/url-utils';
-import {initAmplitude} from './amplitude/amplitude';
 import '@navikt/ds-css';
 import './style.css';
 
@@ -29,7 +28,6 @@ if (erMock()) {
     const {worker} = require('./mocks/index');
     worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
 } else {
-    initAmplitude();
     //leggTilUmamiScript();
     renderApp();
 }

@@ -1,5 +1,5 @@
 import {erMock} from './url-utils';
-import {FilterFields, filtermalinger} from '../amplitude/filter-malinger';
+import {FilterFields, filtermalinger} from '../umami/filter-malinger';
 
 type Fields = FilterFields | {} | undefined;
 
@@ -20,5 +20,4 @@ export const logEvent = (logTag: string, fields?: Fields, tags?: {}): void => {
     } else if (isFilterFields(fields)) {
         filtermalinger(fields);
     }
-    // Influxdb virker ikke i GCP. Målinger flyttes til Amplitude i stedet.
 };
