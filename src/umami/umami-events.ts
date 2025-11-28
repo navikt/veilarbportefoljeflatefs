@@ -37,7 +37,8 @@ const maskereFodselsnummer = (data?: Record<string, unknown>) => {
 };
 
 export const trackFilterValgEvent = ({sidenavn, filternavn, kategori}: FilterValgEvent) => {
-    if (!globalThis.umami) {
+    return;
+    /*if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -46,11 +47,12 @@ export const trackFilterValgEvent = ({sidenavn, filternavn, kategori}: FilterVal
         sidenavn: sidenavn,
         filternavn: filternavn,
         kategori: kategori
-    });
+    });*/
 };
 
 export const trackAlertVistEvent = ({variant, tekst}: AlertVistEvent) => {
-    if (!globalThis.umami) {
+    return;
+    /*if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -58,11 +60,12 @@ export const trackAlertVistEvent = ({variant, tekst}: AlertVistEvent) => {
     globalThis.umami.track(UmamiEvents.alertvist, {
         variant: variant,
         tekst: tekst
-    });
+    });*/
 };
 
 export const trackKnappKlikketEvent = ({tekst, effekt}: KnappKlikketEvent) => {
-    if (!globalThis.umami) {
+    return;
+    /*if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -70,5 +73,5 @@ export const trackKnappKlikketEvent = ({tekst, effekt}: KnappKlikketEvent) => {
     globalThis.umami.track(UmamiEvents.knappklikket, {
         tekst: tekst,
         effekt: effekt
-    });
+    });*/
 };
