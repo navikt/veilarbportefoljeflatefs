@@ -21,7 +21,7 @@ export type AlertVistEvent = {
     tekst: string;
 };
 
-//Man må maskere fødselsnummer med funksjonen nedenfor hvis payloaden(data som skal sendes til umami) inneholder det
+//Man må maskere fødselsnummer med funksjonen nedenfor hvis payloaden(data som skal sendes til Umami) inneholder det
 // eslint-disable-next-line
 const maskereFodselsnummer = (data?: Record<string, unknown>) => {
     const maskertObjekt = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
@@ -31,7 +31,7 @@ const maskereFodselsnummer = (data?: Record<string, unknown>) => {
     try {
         return JSON.parse(maskertObjekt);
     } catch (e) {
-        console.error('kunne ikke maskere data korrekt før sending til amplitude');
+        console.error('kunne ikke maskere data korrekt før sending til Umami');
     }
     return {};
 };

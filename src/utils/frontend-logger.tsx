@@ -20,4 +20,5 @@ export const logEvent = (logTag: string, fields?: Fields, tags?: {}): void => {
     } else if (isFilterFields(fields)) {
         filtermalinger(fields);
     }
+    // Nokre tilfeller av logEvent vert ikkje sendt vidare til Umami enno, dette gjeld endring i sortering og valgte kolonner, og vert trigga av endringar i Redux-state.
 };

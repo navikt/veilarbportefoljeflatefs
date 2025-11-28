@@ -54,7 +54,7 @@ export function MineFilterInnhold({
         return filtrertListe().filter(elem => !elem.aktiv);
     };
 
-    function visHarInaktiveFilterAlertOgLoggTilAmplitude() {
+    function visHarInaktiveFilterAlertOgLoggTilUmami() {
         const harInaktiveFilter = inaktiveFilter().length !== 0;
         if (harInaktiveFilter) {
             loggVisningAvAlert(loggdataForAlerter.harInaktiveFilter);
@@ -72,7 +72,7 @@ export function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-                {visHarInaktiveFilterAlertOgLoggTilAmplitude() && (
+                {visHarInaktiveFilterAlertOgLoggTilUmami() && (
                     <Alert
                         variant={loggdataForAlerter.harInaktiveFilter.variant}
                         className="mine-filter_alertstripe"
