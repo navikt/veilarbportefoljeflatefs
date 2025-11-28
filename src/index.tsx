@@ -31,7 +31,7 @@ if (erMock()) {
     worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
 } else {
     initAmplitude();
-    leggTilUmamiScript();
+    //leggTilUmamiScript();
     renderApp();
 }
 
