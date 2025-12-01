@@ -24,18 +24,41 @@ export function leggTilUmamiScript() {
     script.src = 'https://cdn.nav.no/team-researchops/sporing/sporing.js';
     script.setAttribute('data-host-url', 'https://umami.nav.no');
     script.setAttribute('data-website-id', dataWebsiteId);
-    script.setAttribute('data-auto-track', 'false'); // temporarily disable auto-tracking
+    script.setAttribute('data-auto-track', 'false');
     script.setAttribute('defer', '');
 
     script.onload = () => {
-        const pathname = window.location.pathname;
-        const sanitizedUrl = /\/[A-Za-z]\d{6}$/.test(pathname) ? pathname.replace(/\/[A-Za-z]\d{6}$/, '/*') : pathname;
+        const trackUrl = (url: string) => {
+            const sanitizedUrl = /\/[A-Za-z]\d{6}$/.test(url)
+                ? url.replace(/\/[A-Za-z]\d{6}$/, '/maskertNavident')
+                : url;
 
-        globalThis.umami?.track({
-            website: dataWebsiteId,
-            url: sanitizedUrl,
-            type: 'pageview'
-        });
+            globalThis.umami?.track({
+                website: dataWebsiteId,
+                url: sanitizedUrl,
+                type: 'pageview'
+            });
+        };
+
+        // Track initial load
+        trackUrl(window.location.pathname);
+
+        // Patch history.pushState and history.replaceState for SPA navigation
+        const originalPush = window.history.pushState;
+        const originalReplace = window.history.replaceState;
+
+        window.history.pushState = function (state, title, url) {
+            if (url) trackUrl(url.toString());
+            return originalPush.apply(this, [state, title, url]);
+        };
+
+        window.history.replaceState = function (state, title, url) {
+            if (url) trackUrl(url.toString());
+            return originalReplace.apply(this, [state, title, url]);
+        };
+
+        // Optional: track back/forward navigation
+        window.addEventListener('popstate', () => trackUrl(window.location.pathname));
     };
 
     document.head.appendChild(script);
