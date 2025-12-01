@@ -19,9 +19,12 @@ export function leggTilUmamiScript() {
     const dataWebsiteId = erProd() ? prodSporingskode : devSporingskode;
 
     const script = document.createElement('script');
+
+    const sanitizedUrl = window.location.pathname.replace(/\/[A-Za-z]\d{6}$/, '/*');
     script.setAttribute('data-host-url', 'https://umami.nav.no');
     script.setAttribute('data-website-id', dataWebsiteId);
     script.setAttribute('src', 'https://cdn.nav.no/team-researchops/sporing/sporing.js');
+    script.setAttribute('data-umami-url', sanitizedUrl);
     script.setAttribute('defer', 'defer');
 
     document.head.appendChild(script);

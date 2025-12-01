@@ -4,6 +4,7 @@ import Application from './application';
 import {DeploymentEnvironment, erMock} from './utils/url-utils';
 import '@navikt/ds-css';
 import './style.css';
+import {leggTilUmamiScript} from './umami/umami';
 
 if (!(window as any)._babelPolyfill) {
     require('babel-polyfill');
@@ -28,7 +29,7 @@ if (erMock()) {
     const {worker} = require('./mocks/index');
     worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
 } else {
-    //leggTilUmamiScript();
+    leggTilUmamiScript();
     renderApp();
 }
 
