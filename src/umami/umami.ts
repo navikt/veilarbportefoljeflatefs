@@ -2,7 +2,9 @@ import {erProd} from '../utils/url-utils';
 
 interface Umami {
     track(payload: unknown): void;
+
     track(event_name: string, payload: unknown): void;
+
     identify(session_data: unknown): void;
 }
 
@@ -27,13 +29,10 @@ export function leggTilUmamiScript() {
 
     script.onload = () => {
         const pathname = window.location.pathname;
-
-        // Only sanitize if it matches the sensitive pattern
-        const sanitizedUrl = /\/[A-Za-z]\d{6}$/.test(pathname)
-            ? pathname.replace(/\/[A-Za-z]\d{6}$/, '/santertident')
-            : pathname;
+        const sanitizedUrl = /\/[A-Za-z]\d{6}$/.test(pathname) ? pathname.replace(/\/[A-Za-z]\d{6}$/, '/*') : pathname;
 
         globalThis.umami?.track({
+            website: dataWebsiteId,
             url: sanitizedUrl,
             type: 'pageview'
         });
