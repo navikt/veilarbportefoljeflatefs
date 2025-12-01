@@ -19,13 +19,25 @@ export function leggTilUmamiScript() {
     const dataWebsiteId = erProd() ? prodSporingskode : devSporingskode;
 
     const script = document.createElement('script');
-
-    const sanitizedUrl = window.location.pathname.replace(/\/[A-Za-z]\d{6}$/, '/*');
+    script.src = 'https://cdn.nav.no/team-researchops/sporing/sporing.js';
     script.setAttribute('data-host-url', 'https://umami.nav.no');
     script.setAttribute('data-website-id', dataWebsiteId);
-    script.setAttribute('src', 'https://cdn.nav.no/team-researchops/sporing/sporing.js');
-    script.setAttribute('data-umami-url', sanitizedUrl);
-    script.setAttribute('defer', 'defer');
+    script.setAttribute('data-auto-track', 'false'); // temporarily disable auto-tracking
+    script.setAttribute('defer', '');
+
+    script.onload = () => {
+        const pathname = window.location.pathname;
+
+        // Only sanitize if it matches the sensitive pattern
+        const sanitizedUrl = /\/[A-Za-z]\d{6}$/.test(pathname)
+            ? pathname.replace(/\/[A-Za-z]\d{6}$/, '/santertident')
+            : pathname;
+
+        globalThis.umami?.track({
+            url: sanitizedUrl,
+            type: 'pageview'
+        });
+    };
 
     document.head.appendChild(script);
 }
