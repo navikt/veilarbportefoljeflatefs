@@ -27,24 +27,14 @@ export function leggTilUmamiScript() {
     //script.setAttribute('data-auto-track', 'false'); // stopper ALL default logging
     script.setAttribute('data-exclude-search', 'true'); // skrur av parametere ved requester
     script.setAttribute('defer', '');
-    // script.setAttribute('data-before-send', 'beforeSendHandler');
-    //
-    // (window as any).beforeSendHandler = function (type: string, payload: any) {
-    //     if (type === 'pageview' && payload?.url) {
-    //         try {
-    //             const urlObj = new URL(payload.url, window.location.origin);
-    //             const segments = urlObj.pathname.split('/').map(segment => {
-    //                 return /^[A-Za-z]\d{6}$/.test(segment) ? 'maskertNavident' : segment;
-    //             });
-    //             urlObj.pathname = segments.join('/');
-    //             payload.url = urlObj.pathname + urlObj.search; // include query string
-    //         } catch (e) {
-    //             // fallback if URL parsing fails
-    //             payload.url = payload.url.replace(/\/[A-Za-z]\d{6}/g, '/maskertNavident');
-    //         }
-    //     }
-    //     return payload;
-    // };
+    script.setAttribute('data-before-send', 'beforeSendHandler');
+
+    (window as any).beforeSendHandler = function (type: string, payload: any) {
+        if (payload?.url) {
+            payload.url = payload.url.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
+        }
+        return payload;
+    };
 
     document.head.appendChild(script);
 }
