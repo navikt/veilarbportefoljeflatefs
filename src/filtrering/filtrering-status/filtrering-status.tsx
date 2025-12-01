@@ -29,10 +29,7 @@ import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {BarInputRadio} from '../../components/barinput/barinput-radio';
 import {tekstAntallBrukere} from '../../utils/tekst-utils';
 import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
-import {
-    VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING,
-    VIS_UDELTE_SAMTALEREFERAT
-} from '../../konstanter';
+import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
 import './filtrering-status.css';
@@ -61,7 +58,6 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
-    const visUdelteSamtalereferat = useFeatureSelector()(VIS_UDELTE_SAMTALEREFERAT);
     const dispatch = useDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
@@ -188,14 +184,12 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         labelTekst={ferdigfilterListeLabelTekst[UTGATTE_VARSEL]}
                         statustall={statustallMedBrukerinnsyn.utgatteVarsel}
                     />
-                    {visUdelteSamtalereferat && (
-                        <BarInputRadio
-                            filterVerdi={UDELT_SAMTALEREFERAT}
-                            handleChange={handleRadioButtonChange}
-                            labelTekst={ferdigfilterListeLabelTekst[UDELT_SAMTALEREFERAT]}
-                            statustall={statustallMedBrukerinnsyn.udelteSamtalereferat}
-                        />
-                    )}
+                    <BarInputRadio
+                        filterVerdi={UDELT_SAMTALEREFERAT}
+                        handleChange={handleRadioButtonChange}
+                        labelTekst={ferdigfilterListeLabelTekst[UDELT_SAMTALEREFERAT]}
+                        statustall={statustallMedBrukerinnsyn.udelteSamtalereferat}
+                    />
                     <BarInputRadio
                         labelTekst={ferdigfilterListeLabelTekst[UTLOPTE_AKTIVITETER]}
                         handleChange={handleRadioButtonChange}
