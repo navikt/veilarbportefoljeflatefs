@@ -30,9 +30,16 @@ export function leggTilUmamiScript() {
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
     (window as any).beforeSendHandler = function (type: string, payload: any) {
+        const maskerNavIdent = (value: string) => value.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
+
         if (payload?.url) {
-            payload.url = payload.url.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
+            payload.url = maskerNavIdent(payload.url);
         }
+
+        if (payload?.referrer) {
+            payload.referrer = maskerNavIdent(payload.referrer);
+        }
+
         return payload;
     };
 
