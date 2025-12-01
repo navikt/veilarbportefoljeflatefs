@@ -25,7 +25,7 @@ export function leggTilUmamiScript() {
     script.setAttribute('data-host-url', 'https://umami.nav.no');
     script.setAttribute('data-website-id', dataWebsiteId);
     //script.setAttribute('data-auto-track', 'false'); // stopper ALL default logging
-    script.setAttribute('data-exclude-search', 'true'); // skrur av parametere ved requester
+    //script.setAttribute('data-exclude-search', 'true'); // skrur av parametere ved requester
     script.setAttribute('defer', '');
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
