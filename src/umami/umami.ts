@@ -29,7 +29,7 @@ export function leggTilUmamiScript() {
     script.setAttribute('defer', '');
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
-    (window as any).beforeSendHandler = function (type: string, payload: any) {
+    (window as any).beforeSendHandler = function (payload: any) {
         const maskerNavIdent = (value: string) => value.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
 
         if (payload?.url) {
@@ -40,15 +40,13 @@ export function leggTilUmamiScript() {
             payload.referrer = maskerNavIdent(payload.referrer);
         }
 
-        const maskertFnr = maskerFodselsnummer(payload);
-        return maskertFnr;
+        return maskerFodselsnummer(payload);
     };
 
     document.head.appendChild(script);
 }
 
-//Man må maskere fødselsnummer med funksjonen nedenfor hvis payloaden(data som skal sendes til Umami) inneholder det
-// eslint-disable-next-line
+//Funksjonen maskerer all potensiell logging av fødselsnummer før det sendes til Umami. Kan også utvides til flere ting senere.
 const maskerFodselsnummer = (data?: Record<string, unknown>) => {
     const maskertObjekt = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
         fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
