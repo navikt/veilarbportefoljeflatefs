@@ -21,24 +21,8 @@ export type AlertVistEvent = {
     tekst: string;
 };
 
-//Man må maskere fødselsnummer med funksjonen nedenfor hvis payloaden(data som skal sendes til Umami) inneholder det
-// eslint-disable-next-line
-const maskereFodselsnummer = (data?: Record<string, unknown>) => {
-    const maskertObjekt = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
-        fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
-    );
-
-    try {
-        return JSON.parse(maskertObjekt);
-    } catch (e) {
-        console.error('kunne ikke maskere data korrekt før sending til Umami');
-    }
-    return {};
-};
-
 export const trackFilterValgEvent = ({sidenavn, filternavn, kategori}: FilterValgEvent) => {
-    return;
-    /*if (!globalThis.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -47,12 +31,11 @@ export const trackFilterValgEvent = ({sidenavn, filternavn, kategori}: FilterVal
         sidenavn: sidenavn,
         filternavn: filternavn,
         kategori: kategori
-    });*/
+    });
 };
 
 export const trackAlertVistEvent = ({variant, tekst}: AlertVistEvent) => {
-    return;
-    /*if (!globalThis.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -60,12 +43,11 @@ export const trackAlertVistEvent = ({variant, tekst}: AlertVistEvent) => {
     globalThis.umami.track(UmamiEvents.alertvist, {
         variant: variant,
         tekst: tekst
-    });*/
+    });
 };
 
 export const trackKnappKlikketEvent = ({tekst, effekt}: KnappKlikketEvent) => {
-    return;
-    /*if (!globalThis.umami) {
+    if (!globalThis.umami) {
         // eslint-disable-next-line no-console
         console.warn('Umami is not initialized. Ignoring');
         return;
@@ -73,5 +55,5 @@ export const trackKnappKlikketEvent = ({tekst, effekt}: KnappKlikketEvent) => {
     globalThis.umami.track(UmamiEvents.knappklikket, {
         tekst: tekst,
         effekt: effekt
-    });*/
+    });
 };
