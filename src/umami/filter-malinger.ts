@@ -21,6 +21,12 @@ export const filtermalinger = (fields: FilterFields) => {
             });
             break;
         case Filtervalg.navnEllerFnrQuery:
+            trackFilterValgEvent({
+                sidenavn: fields.sideNavn,
+                filternavn: fields.filter,
+                kategori: fields.verdi
+            });
+            break;
         case Filtervalg.veiledere:
             break;
         default:
