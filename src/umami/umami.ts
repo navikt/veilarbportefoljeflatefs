@@ -31,9 +31,19 @@ export function leggTilUmamiScript() {
 
     (window as any).beforeSendHandler = function (type: string, payload: any) {
         if (type === 'pageview' && payload?.url) {
-            payload.url = payload.url.replace(/\/[A-Za-z]\d{6}/g, '/maskertNavident');
+            try {
+                const urlObj = new URL(payload.url, window.location.origin);
+                const segments = urlObj.pathname.split('/').map(segment => {
+                    return /^[A-Za-z]\d{6}$/.test(segment) ? 'maskertNavident' : segment;
+                });
+                urlObj.pathname = segments.join('/');
+                payload.url = urlObj.pathname + urlObj.search; // include query string
+            } catch (e) {
+                // fallback if URL parsing fails
+                payload.url = payload.url.replace(/\/[A-Za-z]\d{6}/g, '/maskertNavident');
+            }
         }
-        return payload; // send it
+        return payload;
     };
 
     document.head.appendChild(script);
