@@ -24,8 +24,7 @@ export function leggTilUmamiScript() {
     script.src = 'https://cdn.nav.no/team-researchops/sporing/sporing.js';
     script.setAttribute('data-host-url', 'https://umami.nav.no');
     script.setAttribute('data-website-id', dataWebsiteId);
-    //script.setAttribute('data-auto-track', 'false'); // stopper ALL default logging
-    script.setAttribute('data-exclude-search', 'true'); // skrur av parametere ved requester
+    script.setAttribute('data-exclude-search', 'true');
     script.setAttribute('defer', '');
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
@@ -40,20 +39,21 @@ export function leggTilUmamiScript() {
             payload.referrer = maskerNavIdent(payload.referrer);
         }
 
-        return maskerFodselsnummer(payload);
+        return maskerIdenter(payload);
     };
 
     document.head.appendChild(script);
 }
 
-//Funksjonen maskerer all potensiell logging av fødselsnummer før det sendes til Umami. Kan også utvides til flere ting senere.
-const maskerFodselsnummer = (data?: Record<string, unknown>) => {
-    const maskertObjekt = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
+//Funksjonen maskerer all potensiell logging av fødselsnummer og navident før det sendes til Umami. Kan også utvides til flere ting.
+const maskerIdenter = (data?: Record<string, unknown>) => {
+    const maskertObjektFnr = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
         fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
     );
+    const maskertObjektNavIdent = maskertObjektFnr.replace(/[A-Za-z]\d{6}/g, '*******');
 
     try {
-        return JSON.parse(maskertObjekt);
+        return JSON.parse(maskertObjektNavIdent);
     } catch (e) {
         console.error('kunne ikke maskere data korrekt før sending til Umami');
     }
