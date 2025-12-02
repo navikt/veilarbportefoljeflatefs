@@ -1,4 +1,4 @@
-import {useRef, useEffect, memo} from 'react';
+import {memo, useEffect, useRef} from 'react';
 import {ReactComponent as DragIcon} from './dragIcon.svg';
 import {FlyttKnappWrapper} from './flytt-knapp-wrapper';
 import {kebabCase} from '../../../utils/utils';
@@ -51,14 +51,14 @@ function DragAndDropRow({
                 showDownBtn={!isLastRow}
                 onClickUp={() => {
                     trackKnappKlikketEvent({
-                        tekst: 'Endre rekkefølge (pil) - mine filter',
+                        knappetekst: 'Endre rekkefølge (pil) - mine filter',
                         effekt: 'Flyttet filter opp'
                     });
                     onClick(idx, idx - 1);
                 }}
                 onClickDown={() => {
                     trackKnappKlikketEvent({
-                        tekst: 'Endre rekkefølge (pil) - mine filter',
+                        knappetekst: 'Endre rekkefølge (pil) - mine filter',
                         effekt: 'Flyttet filter ned'
                     });
                     onClick(idx, idx + 1);

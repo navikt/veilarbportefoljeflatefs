@@ -29,14 +29,14 @@ export function leggTilUmamiScript() {
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
     (window as any).beforeSendHandler = function (payload: any) {
-        const maskerNavIdent = (value: string) => value.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
+        const maskerNavIdentIUrl = (value: string) => value.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
 
         if (payload?.url) {
-            payload.url = maskerNavIdent(payload.url);
+            payload.url = maskerNavIdentIUrl(payload.url);
         }
 
         if (payload?.referrer) {
-            payload.referrer = maskerNavIdent(payload.referrer);
+            payload.referrer = maskerNavIdentIUrl(payload.referrer);
         }
 
         return maskerIdenter(payload);
@@ -50,7 +50,7 @@ const maskerIdenter = (data?: Record<string, unknown>) => {
     const maskertObjektFnr = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
         fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
     );
-    const maskertObjektNavIdent = maskertObjektFnr.replace(/[A-Za-z]\d{6}/g, '*******');
+    const maskertObjektNavIdent = maskertObjektFnr.replace(/"([A-Za-z]\d{6})"/g, '"*******"');
 
     try {
         return JSON.parse(maskertObjektNavIdent);
