@@ -2,9 +2,7 @@ import {erProd} from '../utils/url-utils';
 
 interface Umami {
     track(payload: unknown): void;
-
     track(event_name: string, payload: unknown): void;
-
     identify(session_data: unknown): void;
 }
 
@@ -28,7 +26,7 @@ export function leggTilUmamiScript() {
     script.setAttribute('defer', '');
     script.setAttribute('data-before-send', 'beforeSendHandler');
 
-    (window as any).beforeSendHandler = function (payload: any) {
+    (window as any).beforeSendHandler = function (type: string, payload: any) {
         const maskerNavIdentIUrl = (value: string) => value.replace(/[A-Za-z]\d{6}/g, 'maskertNavident');
 
         if (payload?.url) {
