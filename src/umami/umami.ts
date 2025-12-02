@@ -48,10 +48,10 @@ const maskerIdenter = (data?: Record<string, unknown>) => {
     const maskertObjektFnr = JSON.stringify(data).replace(/\d{11}/g, (_, indexOfMatch, fullString) =>
         fullString.charAt(indexOfMatch - 1) === '"' ? '***********' : '"***********"'
     );
-    //const maskertObjektNavIdent = maskertObjektFnr.replace(/"([A-Za-z]\d{6})"/g, '"*******"');
+    const maskertObjektNavIdent = maskertObjektFnr.replace(/[A-Za-z]\d{6}/g, '*******');
 
     try {
-        return JSON.parse(maskertObjektFnr);
+        return JSON.parse(maskertObjektNavIdent);
     } catch (e) {
         console.error('kunne ikke maskere data korrekt før sending til Umami');
     }
