@@ -8,6 +8,7 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import './veilederoversikt.css';
+import {VeilederoversiktSortering} from '../ducks/sortering';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {
@@ -32,7 +33,7 @@ function medPortefoljestorrelse(portefoljeStorrelse) {
     });
 }
 
-function propertySort({property, direction}) {
+function propertySort({property, direction}: VeilederoversiktSortering) {
     return sorter(property, direction);
 }
 
