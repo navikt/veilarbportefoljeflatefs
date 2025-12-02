@@ -73,7 +73,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
                         checked={isMinefiltereDraggable}
                         onChange={() => {
                             trackKnappKlikketEvent({
-                                tekst: 'Endre rekkefølge - mine filter',
+                                knappetekst: 'Endre rekkefølge - mine filter',
                                 effekt: `${isMinefiltereDraggable ? 'Lås' : 'Endre'} rekkefølge - mine filter`
                             });
                             setIsMinefiltereDraggable(prevState => !prevState);
