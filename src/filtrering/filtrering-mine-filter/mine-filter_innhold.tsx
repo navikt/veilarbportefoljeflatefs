@@ -7,7 +7,7 @@ import {DragAndDrop} from './drag-and-drop/drag-and-drop';
 import {slettFilter} from '../../ducks/mine-filter';
 import {OrNothing} from '../../utils/types/types';
 import {Tiltak} from '../../ducks/enhettiltak';
-import {AlertVistLoggdata, loggVisningAvAlert} from '../../amplitude/logg-visning-av-alert';
+import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
 
@@ -54,7 +54,7 @@ export function MineFilterInnhold({
         return filtrertListe().filter(elem => !elem.aktiv);
     };
 
-    function visHarInaktiveFilterAlertOgLoggTilAmplitude() {
+    function visHarInaktiveFilterAlertOgLoggTilUmami() {
         const harInaktiveFilter = inaktiveFilter().length !== 0;
         if (harInaktiveFilter) {
             loggVisningAvAlert(loggdataForAlerter.harInaktiveFilter);
@@ -72,7 +72,7 @@ export function MineFilterInnhold({
     const hentFiltrertListeinnhold = () => {
         return (
             <>
-                {visHarInaktiveFilterAlertOgLoggTilAmplitude() && (
+                {visHarInaktiveFilterAlertOgLoggTilUmami() && (
                     <Alert
                         variant={loggdataForAlerter.harInaktiveFilter.variant}
                         className="mine-filter_alertstripe"

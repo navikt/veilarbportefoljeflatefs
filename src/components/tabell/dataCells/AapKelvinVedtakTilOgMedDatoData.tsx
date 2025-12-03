@@ -3,8 +3,8 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const AapKelvinVedtakTilOgMedDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const tilOgMedVedtaksdato = bruker.aapKelvin?.vedtaksdatoTilOgMed
-        ? new Date(bruker.aapKelvin.vedtaksdatoTilOgMed)
+    const tilOgMedVedtaksdato = bruker.ytelser.aap?.vedtaksdatoTilOgMed
+        ? new Date(bruker.ytelser.aap.vedtaksdatoTilOgMed)
         : null;
 
     return (

@@ -1,5 +1,5 @@
 import {AlertProps} from '@navikt/ds-react';
-import {trackAlertVistEvent} from '../umami/umami-events';
+import {trackAlertVistEvent} from './umami-events';
 
 export interface AlertVistLoggdata {
     variant: AlertProps['variant'];

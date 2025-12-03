@@ -1,6 +1,6 @@
 import {formidlingsgruppe, servicegruppe} from '../filtrering/filter-konstanter';
 import {Filtervalg} from '../typer/filtervalg-modell';
-import {trackFilterValgEvent} from '../umami/umami-events';
+import {trackFilterValgEvent} from './umami-events';
 
 export type FilterFields = {sideNavn: string; filter: string; verdi: string; veilederIdent: string};
 

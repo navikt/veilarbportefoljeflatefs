@@ -14,11 +14,13 @@ export const AapArenaRettighetsperiodeData = ({
 }: DataCellMedInnholdBasertPaFiltervalgProps) => {
     const ukerIgjenForYtelsenDetErFiltrertPa = () => {
         if (filtrertPaBeggeAapFilterArena(filtervalg)) {
-            return bruker.aapmaxtidUke !== 0 ? bruker.aapmaxtidUke : bruker.aapUnntakUkerIgjen;
+            return bruker.ytelser.ytelserArena.aapmaxtidUke !== 0
+                ? bruker.ytelser.ytelserArena.aapmaxtidUke
+                : bruker.ytelser.ytelserArena.aapUnntakUkerIgjen;
         } else if (filtrertPaOrdinarAapFilterArena(filtervalg)) {
-            return bruker.aapmaxtidUke;
+            return bruker.ytelser.ytelserArena.aapmaxtidUke;
         } else if (filtrertPaUnntakAapFilterArena(filtervalg)) {
-            return bruker.aapUnntakUkerIgjen;
+            return bruker.ytelser.ytelserArena.aapUnntakUkerIgjen;
         }
     };
 

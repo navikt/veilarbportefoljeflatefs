@@ -56,7 +56,7 @@ export function handleDragEnd({
 }: HandleDragEndProps) {
     return e => {
         if (dragIsInsideElement) {
-            trackKnappKlikketEvent({tekst: 'Endre rekkefølge - mine filter', effekt: 'dragEnd'});
+            trackKnappKlikketEvent({knappetekst: 'Endre rekkefølge - mine filter', effekt: 'dragEnd'});
             requestNewOrder(srcIndex, destIndex);
         }
         setSrcIndex(-1);

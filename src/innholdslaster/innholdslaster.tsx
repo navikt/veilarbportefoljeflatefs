@@ -2,7 +2,7 @@ import {ReactNode, useState} from 'react';
 import {Alert, BodyShort, Loader} from '@navikt/ds-react';
 import {STATUS} from '../ducks/utils';
 import {getFeilmeldingForReducer} from './get-feilmelding-for-reducer';
-import {loggVisningAvAlert} from '../amplitude/logg-visning-av-alert';
+import {loggVisningAvAlert} from '../umami/logg-visning-av-alert';
 
 interface InnholdslasterProps {
     avhengigheter: any;

@@ -4,7 +4,7 @@ import {UkeDataCellType} from '../dataCellTypes/UkeDataCellType';
 import {ukerIgjenTilUtlopsdato} from '../../../utils/utils';
 
 export const TiltakspengerArenaGjenstaendeUkerVedtakData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const ukerIgjen = ukerIgjenTilUtlopsdato(bruker.utlopsdato);
+    const ukerIgjen = ukerIgjenTilUtlopsdato(bruker.ytelser.ytelserArena.utlopsdato);
 
     return (
         <UkeDataCellType
