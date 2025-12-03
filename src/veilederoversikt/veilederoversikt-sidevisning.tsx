@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {VeilederoversiktTabell} from './veilederoversikt-tabell';
-import {sorter} from './sortering';
+import {sorterVeilederoversikt} from './sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
@@ -34,7 +34,7 @@ function medPortefoljestorrelse(portefoljeStorrelse) {
 }
 
 function propertySort({property, direction}: VeilederoversiktSortering) {
-    return sorter(property, direction);
+    return sorterVeilederoversikt(property, direction);
 }
 
 interface VeilederoversiktSidevisningProps {

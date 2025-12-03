@@ -2,36 +2,36 @@ import {SorteringsrekkefolgeVeilederoversikt, VeilederoversiktSorteringsfelt} fr
 
 type Sorteringsfunksjon = <T>(a: T, b: T) => number;
 
-const norskStringSort = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
+const norskStringSortering = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
     return <T>(a: T, b: T): number => {
         return a[sorteringsfelt].localeCompare(b[sorteringsfelt]);
     };
 };
 
-const annetSort = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
+const annetSortering = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
     return <T>(a: T, b: T): number => {
         return a[sorteringsfelt] - b[sorteringsfelt];
     };
 };
 
-export function sorter(
-    property: VeilederoversiktSorteringsfelt,
-    direction: SorteringsrekkefolgeVeilederoversikt
+export function sorterVeilederoversikt(
+    sorteringsfelt: VeilederoversiktSorteringsfelt,
+    retning: SorteringsrekkefolgeVeilederoversikt
 ): Sorteringsfunksjon {
-    const directionBias = direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE ? -1 : 1;
-    let sortImpl;
+    const retningsBias = retning === SorteringsrekkefolgeVeilederoversikt.SYNKENDE ? -1 : 1;
+    let sorteringsfunksjon: Sorteringsfunksjon;
 
     return (a, b) => {
-        if (sortImpl === undefined) {
-            const aVal = a[property];
+        if (sorteringsfunksjon === undefined) {
+            const aVal = a[sorteringsfelt];
 
             if (typeof aVal === 'string') {
-                sortImpl = norskStringSort(property);
+                sorteringsfunksjon = norskStringSortering(sorteringsfelt);
             } else {
-                sortImpl = annetSort(property);
+                sorteringsfunksjon = annetSortering(sorteringsfelt);
             }
         }
 
-        return directionBias * sortImpl(a, b);
+        return retningsBias * sorteringsfunksjon(a, b);
     };
 }
