@@ -8,6 +8,7 @@ import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import {sorterVeilederoversikt} from './sortering';
 import './veilederoversikt.css';
+import {FacetResults, PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 
 function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederModell) => boolean {
     if (valgteVeiledere?.length > 0) {
@@ -16,19 +17,19 @@ function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederMode
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
 
-function medPortefoljestorrelse(portefoljeStorrelse) {
+function medPortefoljestorrelse(portefoljeStorrelse: PortefoljeStorrelser) {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
         return veileder => ({...veileder, portefoljestorrelse: 0});
     }
-    const storrelseMap = portefoljeStorrelse.data.facetResults.reduce(
-        (acc, {value: ident, count}) => ({...acc, [ident]: count}),
+    const mapIdentOgPortefoljestorrelser: {[ident: string]: number} = portefoljeStorrelse.data.facetResults.reduce(
+        (acc: {[ident: string]: number}, {value: ident, count}: FacetResults) => ({...acc, [ident]: count}),
         {}
     );
 
     return veileder => ({
         ...veileder,
-        portefoljestorrelse: storrelseMap[veileder.ident] || 0
+        portefoljestorrelse: mapIdentOgPortefoljestorrelser[veileder.ident] || 0
     });
 }
 
