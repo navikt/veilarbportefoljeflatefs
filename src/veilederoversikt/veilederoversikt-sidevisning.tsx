@@ -9,9 +9,9 @@ import {AppState} from '../reducer';
 import {sorterVeilederoversikt} from './sortering';
 import './veilederoversikt.css';
 
-function erValgtHvisFiltrering(veiledere: string[]) {
-    if (veiledere?.length > 0) {
-        return veileder => veiledere.includes(veileder.ident);
+function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederModell) => boolean {
+    if (valgteVeiledere?.length > 0) {
+        return veileder => valgteVeiledere.includes(veileder.ident);
     }
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
@@ -46,7 +46,7 @@ export function VeilederoversiktSidevisning({veilederFilter, veiledere}: Veilede
 
     const veilederListe = useMemo(() => {
         return veiledere
-            .filter(erValgtHvisFiltrering(veilederFilter))
+            .filter(finnValgteVeiledere(veilederFilter))
             .map(medPortefoljestorrelse(portefoljestorrelser))
             .sort(sorterVeilederoversikt(sortering.property, sortering.direction));
     }, [veilederFilter, portefoljestorrelser, veiledere, sortering]);
