@@ -17,17 +17,23 @@ function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederMode
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
 
-function medPortefoljestorrelse(portefoljeStorrelse: PortefoljeStorrelser) {
+interface VeilederMedPortefoljestorrelse extends VeilederModell {
+    portefoljestorrelse: number;
+}
+
+function medPortefoljestorrelse(
+    portefoljeStorrelse: PortefoljeStorrelser
+): (veileder: VeilederModell) => VeilederMedPortefoljestorrelse {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
-        return veileder => ({...veileder, portefoljestorrelse: 0});
+        return (veileder: VeilederModell) => ({...veileder, portefoljestorrelse: 0});
     }
     const mapIdentOgPortefoljestorrelser: {[ident: string]: number} = portefoljeStorrelse.data.facetResults.reduce(
         (acc: {[ident: string]: number}, {value: ident, count}: FacetResults) => ({...acc, [ident]: count}),
         {}
     );
 
-    return veileder => ({
+    return (veileder: VeilederModell) => ({
         ...veileder,
         portefoljestorrelse: mapIdentOgPortefoljestorrelser[veileder.ident] || 0
     });
