@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2025.11.05_09.25-b34a8e35f6cc
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2025.12.03_10.39-17c3dbd008e5
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.nav.no
@@ -35,8 +35,6 @@ spec:
       destinations:
         - id: elastic
         - id: loki
-  secureLogs:
-    enabled: true
   azure:
     application:
       allowAllUsers: true
