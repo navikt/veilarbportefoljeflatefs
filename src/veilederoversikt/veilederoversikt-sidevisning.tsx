@@ -2,13 +2,12 @@ import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {VeilederoversiktTabell} from './veilederoversikt-tabell';
-import {sorterVeilederoversikt} from './sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
+import {sorterVeilederoversikt} from './sortering';
 import './veilederoversikt.css';
-import {VeilederoversiktSortering} from '../ducks/sortering';
 
 function erValgtHvisFiltrering(veiledere: string[]) {
     if (veiledere?.length > 0) {
@@ -33,10 +32,6 @@ function medPortefoljestorrelse(portefoljeStorrelse) {
     });
 }
 
-function propertySort({property, direction}: VeilederoversiktSortering) {
-    return sorterVeilederoversikt(property, direction);
-}
-
 interface VeilederoversiktSidevisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
@@ -53,7 +48,7 @@ export function VeilederoversiktSidevisning({veilederFilter, veiledere}: Veilede
         return veiledere
             .filter(erValgtHvisFiltrering(veilederFilter))
             .map(medPortefoljestorrelse(portefoljestorrelser))
-            .sort(propertySort(sortering));
+            .sort(sorterVeilederoversikt(sortering.property, sortering.direction));
     }, [veilederFilter, portefoljestorrelser, veiledere, sortering]);
 
     function getValgteVeiledere() {
