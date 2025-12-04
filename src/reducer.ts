@@ -1,9 +1,9 @@
 import {Action, combineReducers} from 'redux';
-import {persistentReducer, LocalStorageScope} from './utils/persistentReducer';
+import {LocalStorageScope, persistentReducer} from './utils/persistentReducer';
 import {valgtEnhetReducer, ValgtEnhetState} from './ducks/valgt-enhet';
 import {portefoljeReducer, PortefoljeState} from './ducks/portefolje';
 import {pagineringReducer} from './ducks/paginering';
-import {sorteringReducer} from './ducks/sortering';
+import {sorteringReducer, VeilederoversiktSortering} from './ducks/sortering';
 import {veiledereReducer, VeiledereState} from './ducks/veiledere';
 import {PortefoljeStorrelser, portefoljestorrelserReducer} from './ducks/portefoljestorrelser';
 import {filtreringReducer, initialState} from './ducks/filtrering';
@@ -74,7 +74,7 @@ export interface AppState {
     valgtEnhet: ValgtEnhetState;
     portefolje: PortefoljeState;
     paginering: any;
-    sortering: any;
+    sortering: VeilederoversiktSortering;
     veiledere: VeiledereState;
     portefoljestorrelser: PortefoljeStorrelser;
     statustallVeileder: StatustallVeilederState;

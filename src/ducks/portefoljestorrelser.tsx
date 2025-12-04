@@ -6,7 +6,7 @@ const OK = 'veilarbportefolje/portefoljestorrelser/OK';
 const FEILET = 'veilarbportefolje/portefoljestorrelser/FEILET';
 const PENDING = 'veilarbportefolje/portefoljestorrelser/PENDING';
 
-interface FacetResults {
+export interface FacetResults {
     value: string;
     count: number;
 }
