@@ -32,7 +32,6 @@ import {Utkast14aVedtaksstatusEndretData} from '../components/tabell/dataCells/U
 import {Utkast14aAnsvarligVeilederData} from '../components/tabell/dataCells/Utkast14aAnsvarligVeilederData';
 import {SisteEndringDatoData} from '../components/tabell/dataCells/SisteEndringDatoData';
 import {SvarfristCvData} from '../components/tabell/dataCells/SvarfristCvData';
-import {Status14aVedtakData} from '../components/tabell/dataCells/Status14aVedtakData';
 import {GjeldendeVedtak14aInnsatsgruppeData} from '../components/tabell/dataCells/GjeldendeVedtak14aInnsatsgruppeData';
 import {GjeldendeVedtak14aHovedmalData} from '../components/tabell/dataCells/GjeldendeVedtak14aHovedmalData';
 import {GjeldendeVedtak14aVedtaksdatoData} from '../components/tabell/dataCells/GjeldendeVedtak14aVedtaksdatoData';
@@ -155,8 +154,6 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <SisteEndringDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <SvarfristCvData bruker={bruker} valgteKolonner={valgteKolonner} />
-
-            <Status14aVedtakData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <GjeldendeVedtak14aInnsatsgruppeData bruker={bruker} valgteKolonner={valgteKolonner} />
             <GjeldendeVedtak14aHovedmalData bruker={bruker} valgteKolonner={valgteKolonner} />

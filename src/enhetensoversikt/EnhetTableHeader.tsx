@@ -15,7 +15,6 @@ import {GeografiskBostedDetaljerHeader} from '../components/tabell/headerCells/G
 import {GeografiskBostedSistOppdatertHeader} from '../components/tabell/headerCells/GeografiskBostedSistOppdatertHeader';
 import {OppfolgingStartetHeader} from '../components/tabell/headerCells/OppfolgingStartetHeader';
 import {SvarfristCvHeader} from '../components/tabell/headerCells/SvarfristCvHeader';
-import {Status14aVedtakHeader} from '../components/tabell/headerCells/Status14aVedtakHeader';
 import {BarnUnder18AarHeader} from '../components/tabell/headerCells/BarnUnder18AarHeader';
 import {UtdanningOgSituasjonSistEndretHeader} from '../components/tabell/headerCells/UtdanningOgSituasjonSistEndretHeader';
 import {GjeldendeVedtak14aInnsatsgruppeHeader} from '../components/tabell/headerCells/GjeldendeVedtak14aInnsatsgruppeHeader';
@@ -160,8 +159,6 @@ export function EnhetTableHeader() {
                 <SisteEndringDatoHeader {...sorteringTilHeaderCell} />
 
                 <SvarfristCvHeader {...sorteringTilHeaderCell} />
-
-                <Status14aVedtakHeader {...sorteringTilHeaderCell} />
 
                 <GjeldendeVedtak14aInnsatsgruppeHeader {...sorteringTilHeaderCell} />
                 <GjeldendeVedtak14aHovedmalHeader {...sorteringTilHeaderCell} />

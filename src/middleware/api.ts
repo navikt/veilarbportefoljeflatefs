@@ -1,5 +1,5 @@
 import {FargekategoriDataModell} from '../model-interfaces';
-import {VeilederePaEnhetModell, InnloggetVeilederModell} from '../typer/enhet-og-veiledere-modeller';
+import {InnloggetVeilederModell, VeilederePaEnhetModell} from '../typer/enhet-og-veiledere-modeller';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from '../ducks/lagret-filter';
 import {erDev, loginUrl} from '../utils/url-utils';
@@ -109,7 +109,6 @@ export function hentEnhetsPortefolje(
     }
     const filtrerteFiltervalg: FiltervalgModell = {
         ...filtervalg,
-        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f)),
         ferdigfilterListe: filtervalg.ferdigfilterListe.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/enhet/${enhet}/portefolje`;
@@ -134,7 +133,6 @@ export function hentVeiledersPortefolje(
     }
     const filtrerteFiltervalg: FiltervalgModell = {
         ...filtervalg,
-        avvik14aVedtak: filtervalg.avvik14aVedtak.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f)),
         ferdigfilterListe: filtervalg.ferdigfilterListe.filter(f => !filterSomIkkeSkalSendesTilBackend.includes(f))
     };
     const baseUrl = `${VEILARBPORTEFOLJE_URL}/veileder/${veilederident}/portefolje`;

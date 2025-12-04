@@ -3,8 +3,6 @@ import {Fargekategorinavn} from '../model-interfaces';
 import {FargekategoriModell, Hovedmal, InnsatsgruppeGjeldendeVedtak14a} from '../typer/bruker-modell';
 import {Dictionary} from '../utils/types/types';
 
-const skjemaelementInnrykkKlasse = 'skjemaelement--innrykk';
-
 export type CheckboxFilter = {
     label: string;
     className?: string;
@@ -30,11 +28,6 @@ export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
 export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
-export const HAR_AVVIK = 'HAR_AVVIK'; // TODO sjekk om denne kan slettast :)
-export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
-export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
-export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
-export const INNSATSGRUPPE_MANGLER_I_NY_KILDE = 'INNSATSGRUPPE_MANGLER_I_NY_KILDE';
 export const MINE_HUSKELAPPER = 'MINE_HUSKELAPPER';
 export const MINE_FARGEKATEGORIER = 'MINE_FARGEKATEGORIER';
 export const FARGEKATEGORI_A = FargekategoriModell.FARGEKATEGORI_A;
@@ -55,7 +48,9 @@ export const alleFargekategoriFilterAlternativer = [
     INGEN_KATEGORI
 ] as const;
 
-export const filterSomIkkeSkalSendesTilBackend = [HAR_AVVIK, MINE_FARGEKATEGORIER];
+/** Dette er "kunstige" filter som ikkje backend skal bry seg om. Dei finst berre for å gjere det lettare i frontend.
+ * Til dømes "samlefilter" som vel alle avhukingsboksar innanfor eit tema. */
+export const filterSomIkkeSkalSendesTilBackend = [MINE_FARGEKATEGORIER];
 
 export function lagConfig(data: any): any {
     if (typeof data === 'string') {
@@ -409,33 +404,6 @@ export const hovedmalGjeldendeVedtak14aFiltertagtekst = {
     [Hovedmal.OKE_DELTAKELSE]: {label: 'Øke deltakelse eller mål om arbeid (kun Arena)'}
 };
 
-export const avvik14aVedtakHovedFilter = {
-    [HAR_AVVIK]: {label: 'Status'}
-};
-
-// TODO kan sikkert slettast
-export const avvik14aVedtakAvhengigeFilter = {
-    [HOVEDMAL_ULIK]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
-    [INNSATSGRUPPE_ULIK]: {
-        label: 'Innsatsgruppe ulik',
-        className: skjemaelementInnrykkKlasse
-    },
-    [INNSATSGRUPPE_OG_HOVEDMAL_ULIK]: {
-        label: 'Innsatsgruppe og hovedmål ulike',
-        className: skjemaelementInnrykkKlasse
-    },
-    [INNSATSGRUPPE_MANGLER_I_NY_KILDE]: {
-        label: 'Innsatsgruppe mangler',
-        className: skjemaelementInnrykkKlasse
-    }
-};
-
-// TODO kan sikkert slettast
-export const avvik14aVedtak = {
-    ...avvik14aVedtakHovedFilter,
-    ...avvik14aVedtakAvhengigeFilter
-};
-
 export const filterKonstanter = {
     ferdigfilterListe: ferdigfilterListeLabelTekst,
     alder,
@@ -458,7 +426,6 @@ export const filterKonstanter = {
     tolkebehov,
     stillingFraNavFilter,
     gjeldendeVedtak14a,
-    avvik14aVedtak,
     ensligeForsorgere,
     barnUnder18Aar,
     fargekategorier,

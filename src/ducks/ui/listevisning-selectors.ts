@@ -5,7 +5,6 @@ import {
     AktiviteterFilternokler,
     AktiviteterValg,
     HAR_14A_VEDTAK,
-    HAR_AVVIK,
     I_AVTALT_AKTIVITET,
     MINE_HUSKELAPPER,
     MOTER_IDAG,
@@ -102,8 +101,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
             filtervalg.tolkBehovSpraak !== null &&
             filtervalg.tolkBehovSpraak.length > 0);
 
-    const filtrertPaAvvik14aVedtak = filtervalg.avvik14aVedtak.includes(HAR_AVVIK);
-
     const filtertPaAapIKelvin = filtervalg.ytelseAapKelvin.includes(AAPFilterKelvin.HAR_AAP_I_KELVIN);
     const filtrertPaTiltakspenger = filtervalg.ytelseTiltakspenger.includes(TiltakspengerFilter.HAR_TILTAKSPENGER);
 
@@ -197,7 +194,6 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.TOLKEBEHOV, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKESPRAK, filtrertPaTolkBehov))
         .concat(addHvis(Kolonne.TOLKEBEHOV_SIST_OPPDATERT, filtrertPaTolkBehov))
-        .concat(addHvis(Kolonne.AVVIK_14A_VEDTAK, filtrertPaAvvik14aVedtak))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VURDERINGSFRIST_AAP, filtrertPaAAPMedVurderingsfrist))
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgIkkeAapKelvin))
         .concat(addHvis(Kolonne.YTELSE_ARENA_VEDTAKSPERIODE_AAP, filtrertPaAAPMedVedtaksperiode))

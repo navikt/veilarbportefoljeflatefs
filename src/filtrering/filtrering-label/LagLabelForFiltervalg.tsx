@@ -8,7 +8,6 @@ import {
     alder,
     fargekategorier,
     filterKonstanter,
-    HAR_AVVIK,
     hendelserEtikett,
     registreringstypeEtiketter,
     tiltakspengerFilter,
@@ -239,33 +238,6 @@ export const LagLabelForFiltervalg = ({
                     key={`${valgtFilter}--${valgtAlternativ}`}
                     label={tiltakspengerFilter[valgtAlternativ]}
                     slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                />
-            );
-        });
-    } else if (valgtFilter === Filtervalg.avvik14aVedtak) {
-        return valgteFilteralternativer.map(valgtAlternativ => {
-            if (valgtAlternativ === HAR_AVVIK) {
-                return null;
-            }
-
-            // Selv om hovedfilteret ("Har avvik") ikke vises som en filter-etikett
-            // så må vi likevel fjerne filteret fra filtervalg når alle avhengige
-            // filter-etiketter fjernes
-            const fjernAvvik14aHovedFilter = valgteFilteralternativer.length <= 2;
-            const slettAvvik14aVedtakFilter = () => {
-                if (fjernAvvik14aHovedFilter) {
-                    slettEnkeltfilter(valgtFilter, valgtAlternativ);
-                    slettEnkeltfilter(valgtFilter, HAR_AVVIK);
-                } else {
-                    slettEnkeltfilter(valgtFilter, valgtAlternativ);
-                }
-            };
-
-            return (
-                <FiltreringLabel
-                    key={`${valgtFilter}--${valgtAlternativ}`}
-                    label={getLabel(valgtFilter, valgtAlternativ, enhettiltak)}
-                    slettFilter={slettAvvik14aVedtakFilter}
                 />
             );
         });
