@@ -57,9 +57,6 @@ alternativerConfig.set(Kolonne.CV_SVARFRIST, {tekstlabel: 'Frist deling av CV'})
 alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_INNSATSGRUPPE, {tekstlabel: 'Innsatsgruppe § 14 a-vedtak'});
 alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_HOVEDMAL, {tekstlabel: 'Hovedmål § 14 a-vedtak'});
 alternativerConfig.set(Kolonne.GJELDENDE_VEDTAK_14A_VEDTAKSDATO, {tekstlabel: 'Vedtaksdato § 14 a-vedtak'});
-alternativerConfig.set(Kolonne.AVVIK_14A_VEDTAK, {
-    tekstlabel: 'Status § 14 a-vedtak (sammenligning mellom Arena og ny løsning)'
-});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD, {tekstlabel: 'Utløp overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_AKIVITETSPLIKT, {tekstlabel: 'Om aktivitetsplikt overgangsstønad'});
 alternativerConfig.set(Kolonne.ENSLIGE_FORSORGERE_VEDTAKSPERIODE, {tekstlabel: 'Type vedtaksperiode overgangsstønad'});

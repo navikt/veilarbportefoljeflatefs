@@ -4,8 +4,7 @@ import {
     ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
-    PORTEFOLJE_FEATURES,
-    SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA
+    PORTEFOLJE_FEATURES
 } from '../konstanter';
 
 const ADD_FEATURE = 'veilarbportefoljeflatefs/features/ADD_FEATURE';
@@ -17,8 +16,7 @@ export interface FeaturesState {
 const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
-    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
-    [SKJUL_FILTER_SAMMENLIGNE_GJELDENDE_14A_OG_ARENA]: false
+    [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false
 };
 
 // Reducer

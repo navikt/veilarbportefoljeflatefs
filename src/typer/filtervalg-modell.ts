@@ -100,7 +100,7 @@ export interface FiltervalgModell {
     [Filtervalg.stillingFraNavFilter]: string[];
     [Filtervalg.geografiskBosted]: string[];
     [Filtervalg.visGeografiskBosted]: string[]; // Dette filteret finst i veilarbfilter, men ikkje i Filtervalg-klassen hos veilarbportefolje
-    [Filtervalg.avvik14aVedtak]: string[];
+    [Filtervalg.avvik14aVedtak]?: string[]; // Skal slettast, så gjer feltet valfritt på filtermodellen
     [Filtervalg.ensligeForsorgere]: string[];
     [Filtervalg.barnUnder18Aar]: string[];
     [Filtervalg.barnUnder18AarAlder]: string[];

@@ -52,7 +52,6 @@ export enum Kolonne {
     GJELDENDE_VEDTAK_14A_INNSATSGRUPPE = 'gjeldende_vedtak_14a_innsatsgruppe',
     GJELDENDE_VEDTAK_14A_HOVEDMAL = 'gjeldende_vedtak_14a_hovedmal',
     GJELDENDE_VEDTAK_14A_VEDTAKSDATO = 'gjeldende_vedtak_14a_vedtaksdato',
-    AVVIK_14A_VEDTAK = 'avvik_14a_vedtak',
     ENSLIGE_FORSORGERE_UTLOP_OVERGANGSSTONAD = 'utlop_overgangsstonad',
     ENSLIGE_FORSORGERE_VEDTAKSPERIODE = 'type_vedtaksperiode',
     ENSLIGE_FORSORGERE_AKIVITETSPLIKT = 'om_aktivitetsplikt',
