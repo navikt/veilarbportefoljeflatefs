@@ -30,7 +30,7 @@ export const INAKTIVE_BRUKERE = 'INAKTIVE_BRUKERE';
 export const UNDER_VURDERING = 'UNDER_VURDERING';
 export const HAR_14A_VEDTAK = 'HAR_14A_VEDTAK';
 export const HAR_IKKE_14A_VEDTAK = 'HAR_IKKE_14A_VEDTAK';
-export const HAR_AVVIK = 'HAR_AVVIK';
+export const HAR_AVVIK = 'HAR_AVVIK'; // TODO sjekk om denne kan slettast :)
 export const HOVEDMAL_ULIK = 'HOVEDMAAL_ULIK';
 export const INNSATSGRUPPE_ULIK = 'INNSATSGRUPPE_ULIK';
 export const INNSATSGRUPPE_OG_HOVEDMAL_ULIK = 'INNSATSGRUPPE_OG_HOVEDMAAL_ULIK';
@@ -413,6 +413,7 @@ export const avvik14aVedtakHovedFilter = {
     [HAR_AVVIK]: {label: 'Status'}
 };
 
+// TODO kan sikkert slettast
 export const avvik14aVedtakAvhengigeFilter = {
     [HOVEDMAL_ULIK]: {label: 'Hovedmål ulikt', className: skjemaelementInnrykkKlasse},
     [INNSATSGRUPPE_ULIK]: {
@@ -429,6 +430,7 @@ export const avvik14aVedtakAvhengigeFilter = {
     }
 };
 
+// TODO kan sikkert slettast
 export const avvik14aVedtak = {
     ...avvik14aVedtakHovedFilter,
     ...avvik14aVedtakAvhengigeFilter
