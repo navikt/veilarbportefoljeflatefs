@@ -32,7 +32,7 @@ export interface BrukerModell {
     foedeland?: string;
     tolkebehov: Tolkebehov;
     nesteSvarfristCvStillingFraNav?: string;
-    avvik14aVedtak: string;
+    avvik14aVedtak?: string; // Skal fjernast, så gjer feltet valfritt
     barnUnder18AarData: BarnUnder18AarModell[];
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
