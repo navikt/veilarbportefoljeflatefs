@@ -356,7 +356,6 @@ function lagBruker() {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
     const aktoerid = mockAktoeridLopenummer++;
     const huskelapp = lagHuskelapp(grunndata.fnr);
-    const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
     const random_egenAnsatt = erSkjermet();
