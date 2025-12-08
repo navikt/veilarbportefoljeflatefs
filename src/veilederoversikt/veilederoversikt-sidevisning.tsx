@@ -17,7 +17,7 @@ function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederMode
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
 
-interface VeilederMedPortefoljestorrelse extends VeilederModell {
+export interface VeilederMedPortefoljestorrelse extends VeilederModell {
     portefoljestorrelse: number;
 }
 

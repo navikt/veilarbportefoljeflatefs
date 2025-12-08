@@ -1,18 +1,7 @@
 import {SorteringsrekkefolgeVeilederoversikt, VeilederoversiktSorteringsfelt} from '../ducks/sortering';
+import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 
-type Sorteringsfunksjon = <T>(a: T, b: T) => number;
-
-const norskStringSortering = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
-    return <T>(a: T, b: T): number => {
-        return a[sorteringsfelt].localeCompare(b[sorteringsfelt]);
-    };
-};
-
-const annetSortering = (sorteringsfelt: VeilederoversiktSorteringsfelt): Sorteringsfunksjon => {
-    return <T>(a: T, b: T): number => {
-        return a[sorteringsfelt] - b[sorteringsfelt];
-    };
-};
+type Sorteringsfunksjon = (a: VeilederMedPortefoljestorrelse, b: VeilederMedPortefoljestorrelse) => number;
 
 export function sorterVeilederoversikt(
     sorteringsfelt: VeilederoversiktSorteringsfelt,
@@ -21,17 +10,14 @@ export function sorterVeilederoversikt(
     const retningsBias = retning === SorteringsrekkefolgeVeilederoversikt.SYNKENDE ? -1 : 1;
     let sorteringsfunksjon: Sorteringsfunksjon;
 
-    return (a, b) => {
-        if (sorteringsfunksjon === undefined) {
-            const aVal = a[sorteringsfelt];
-
-            if (typeof aVal === 'string') {
-                sorteringsfunksjon = norskStringSortering(sorteringsfelt);
-            } else {
-                sorteringsfunksjon = annetSortering(sorteringsfelt);
-            }
-        }
-
-        return retningsBias * sorteringsfunksjon(a, b);
-    };
+    if (sorteringsfelt === VeilederoversiktSorteringsfelt.ETTERNAVN) {
+        sorteringsfunksjon = (a, b): number => {
+            return a.etternavn.localeCompare(b.etternavn);
+        };
+    } else if (sorteringsfelt === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE) {
+        sorteringsfunksjon = (a, b): number => {
+            return a.portefoljestorrelse - b.portefoljestorrelse;
+        };
+    }
+    return (a, b) => retningsBias * sorteringsfunksjon(a, b);
 }
