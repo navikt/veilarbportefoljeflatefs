@@ -15,7 +15,7 @@ export function sorterVeilederoversikt(
         };
     } else if (sorteringsfelt === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE) {
         return (a, b): number => {
-            return a.portefoljestorrelse - b.portefoljestorrelse * retningsBias;
+            return (a.portefoljestorrelse - b.portefoljestorrelse) * retningsBias;
         };
     } else {
         throw new Error(
