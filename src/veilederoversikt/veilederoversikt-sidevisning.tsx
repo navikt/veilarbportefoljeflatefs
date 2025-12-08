@@ -7,8 +7,8 @@ import {OversiktType} from '../ducks/ui/listevisning';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
 import {sorterVeilederoversikt} from './sortering';
-import './veilederoversikt.css';
 import {FacetResults, PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
+import './veilederoversikt.css';
 
 function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederModell) => boolean {
     if (valgteVeiledere?.length > 0) {

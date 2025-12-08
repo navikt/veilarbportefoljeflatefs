@@ -9,10 +9,11 @@ import {
     VeilederoversiktSortering,
     VeilederoversiktSorteringsfelt
 } from '../ducks/sortering';
+import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 import './veilederoversikt-tabell.css';
 
 interface VeiledereTabellProps {
-    veiledere: any;
+    veiledere: VeilederMedPortefoljestorrelse[];
     currentSortering: VeilederoversiktSortering;
 }
 
@@ -95,7 +96,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                 </Table.Row>
             </Table.Header>
             <Table.Body data-testid="veilederoversikt_veilederliste_tbody">
-                {veiledere.map((veileder: any) => (
+                {veiledere.map(veileder => (
                     <VeilederoversiktTabellrad veileder={veileder} key={veileder.ident} />
                 ))}
             </Table.Body>

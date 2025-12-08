@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
 import {BodyShort, Table} from '@navikt/ds-react';
+import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 
 interface Props {
-    veileder: any;
+    veileder: VeilederMedPortefoljestorrelse;
 }
 
 export const VeilederoversiktTabellrad = ({veileder}: Props) => {
