@@ -1,6 +1,7 @@
-// Actions
-export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
-export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
+export enum VeilederoversiktSorteringsfelt {
+    ETTERNAVN = 'etternavn',
+    PORTEFOLJESTORRELSE = 'portefoljestorrelse'
+}
 
 export enum SorteringsrekkefolgeVeilederoversikt {
     STIGENDE = 'ascending',
@@ -8,15 +9,14 @@ export enum SorteringsrekkefolgeVeilederoversikt {
     NA = 'none'
 }
 
-export enum VeilederoversiktSorteringsfelt {
-    ETTERNAVN = 'etternavn',
-    PORTEFOLJESTORRELSE = 'portefoljestorrelse'
-}
-
 export interface VeilederoversiktSortering {
     property: VeilederoversiktSorteringsfelt;
     direction: SorteringsrekkefolgeVeilederoversikt;
 }
+
+// Actions
+export const SORTERT_PA = 'veilarbportefoljeflatefs/sortering/SORTERT_PA';
+export const RESET = 'veilarbportefoljeflatefs/sortering/SETUP';
 
 const initialState: VeilederoversiktSortering = {
     property: VeilederoversiktSorteringsfelt.ETTERNAVN,

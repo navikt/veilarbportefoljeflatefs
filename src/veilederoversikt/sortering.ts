@@ -18,7 +18,7 @@ export function sorterVeilederoversikt(
             return a.portefoljestorrelse - b.portefoljestorrelse * retningsBias;
         };
     } else {
-        throw Error(
+        throw new Error(
             `Not implemented yet: Det manglar sorteringsfunksjon i veilederoversikt for sorteringsfelt "${sorteringsfelt}"`
         );
     }
