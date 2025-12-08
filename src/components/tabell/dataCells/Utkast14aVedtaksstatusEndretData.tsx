@@ -1,10 +1,10 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {DagerSidenDataCellType} from '../dataCellTypes/DagerSidenDataCellType';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
 export const Utkast14aVedtaksstatusEndretData = ({bruker, valgteKolonner}: DataCellProps) => (
-    <DagerSidenDataCellType
-        dato={bruker.utkast14a?.statusEndret}
+    <TekstDataCellType
+        tekst={bruker.vedtak14a.utkast14a.dagerSidenStatusEndretSeg ?? '-'}
         skalVises={valgteKolonner.includes(Kolonne.VEDTAKSTATUS_ENDRET)}
         className="col col-xs-2"
     />
