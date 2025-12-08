@@ -3,7 +3,12 @@ import {useDispatch} from 'react-redux';
 import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
-import {sortBy, SorteringsrekkefolgeVeilederoversikt, VeilederoversiktSortering} from '../ducks/sortering';
+import {
+    sortBy,
+    SorteringsrekkefolgeVeilederoversikt,
+    VeilederoversiktSortering,
+    VeilederoversiktSorteringsfelt
+} from '../ducks/sortering';
 import './veilederoversikt-tabell.css';
 
 interface VeiledereTabellProps {
@@ -13,11 +18,12 @@ interface VeiledereTabellProps {
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
     const dispatch = useDispatch();
-    const sorterPaaEtternavn = () => dispatch(sortBy('etternavn'));
-    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy('portefoljestorrelse'));
+    const sorterPaaEtternavn = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.ETTERNAVN));
+    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE));
 
-    const gjeldendeSorteringErEtternavn = currentSortering.property === 'etternavn';
-    const gjeldendeSorteringErPortefoljestorrelse = currentSortering.property === 'portefoljestorrelse';
+    const gjeldendeSorteringErEtternavn = currentSortering.property === VeilederoversiktSorteringsfelt.ETTERNAVN;
+    const gjeldendeSorteringErPortefoljestorrelse =
+        currentSortering.property === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE;
 
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';

@@ -8,7 +8,10 @@ export enum SorteringsrekkefolgeVeilederoversikt {
     NA = 'none'
 }
 
-export type VeilederoversiktSorteringsfelt = 'etternavn' | 'portefoljestorrelse';
+export enum VeilederoversiktSorteringsfelt {
+    ETTERNAVN = 'etternavn',
+    PORTEFOLJESTORRELSE = 'portefoljestorrelse'
+}
 
 export interface VeilederoversiktSortering {
     property: VeilederoversiktSorteringsfelt;
@@ -16,7 +19,7 @@ export interface VeilederoversiktSortering {
 }
 
 const initialState: VeilederoversiktSortering = {
-    property: 'etternavn',
+    property: VeilederoversiktSorteringsfelt.ETTERNAVN,
     direction: SorteringsrekkefolgeVeilederoversikt.STIGENDE
 };
 
