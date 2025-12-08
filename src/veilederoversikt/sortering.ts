@@ -8,16 +8,18 @@ export function sorterVeilederoversikt(
     retning: SorteringsrekkefolgeVeilederoversikt
 ): Sorteringsfunksjon {
     const retningsBias = retning === SorteringsrekkefolgeVeilederoversikt.SYNKENDE ? -1 : 1;
-    let sorteringsfunksjon: Sorteringsfunksjon;
 
     if (sorteringsfelt === VeilederoversiktSorteringsfelt.ETTERNAVN) {
-        sorteringsfunksjon = (a, b): number => {
-            return a.etternavn.localeCompare(b.etternavn);
+        return (a, b): number => {
+            return a.etternavn.localeCompare(b.etternavn) * retningsBias;
         };
     } else if (sorteringsfelt === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE) {
-        sorteringsfunksjon = (a, b): number => {
-            return a.portefoljestorrelse - b.portefoljestorrelse;
+        return (a, b): number => {
+            return a.portefoljestorrelse - b.portefoljestorrelse * retningsBias;
         };
+    } else {
+        throw Error(
+            `Not implemented yet: Det manglar sorteringsfunksjon i veilederoversikt for sorteringsfelt "${sorteringsfelt}"`
+        );
     }
-    return (a, b) => retningsBias * sorteringsfunksjon(a, b);
 }
