@@ -3,6 +3,7 @@ export interface BrukerModell {
     geografiskBosted: GeografiskBosted;
     meldingerVenterPaSvar: MeldingerVenterPaSvar;
     ytelser: Ytelser;
+    vedtak14a: Vedtak14a;
 
     fnr: string;
     guid: string; // denne sendes ikke fra backend
@@ -23,7 +24,6 @@ export interface BrukerModell {
     moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
     alleMoterStartTid?: string; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
     alleMoterSluttTid?: string; // kun for å regne ut varighet
-    utkast14a: Utkast14a | null;
     sisteEndringKategori?: string;
     sisteEndringTidspunkt?: string; //dato
     sisteEndringAktivitetId?: string;
@@ -38,7 +38,6 @@ export interface BrukerModell {
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
     utdanningOgSituasjonSistEndret: string; // dato
-    gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
     hendelse: HendelseInnhold | null;
 }
 
@@ -121,10 +120,21 @@ export interface AktiviteterModell {
     gruppeaktivitet?: string;
 }
 
+export interface Vedtak14a {
+    gjeldendeVedtak14a: GjeldendeVedtak14aModell | null;
+    utkast14a: Utkast14a | null;
+}
+
+export interface GjeldendeVedtak14aModell {
+    innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
+    hovedmal: Hovedmal | null;
+    fattetDato: Date;
+}
+
 export interface Utkast14a {
-    status?: string;
-    statusEndret?: string; // LocalDateTime frå backend
-    ansvarligVeileder?: string;
+    status: string;
+    dagerSidenStatusEndretSeg: string;
+    ansvarligVeileder: string;
 }
 
 export interface Statsborgerskap {
@@ -160,12 +170,6 @@ export interface HuskelappModell {
     endretDato: Date | null;
     endretAv: string | null;
     enhetId: string | null;
-}
-
-export interface GjeldendeVedtak14aModell {
-    innsatsgruppe: InnsatsgruppeGjeldendeVedtak14a;
-    hovedmal: Hovedmal;
-    fattetDato: Date;
 }
 
 /** Namn på filter for innsatsgruppe i backend + data ein får på gjeldande vedtak for ein person */

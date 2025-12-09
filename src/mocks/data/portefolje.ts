@@ -18,6 +18,7 @@ import {
     TiltakshendelseModell,
     TiltakspengerData,
     Utkast14a,
+    Vedtak14a,
     Ytelser,
     YtelserArena
 } from '../../typer/bruker-modell';
@@ -139,20 +140,6 @@ function lagOverskrift() {
     return null;
 }
 
-function lagVedtakUtkast(): Utkast14a | null {
-    const maybeUtkast = rnd(0, 1);
-    const maybeUtkastOpprettet = rnd(0, 1);
-    const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
-    if (maybeUtkast > 0.5) {
-        return {
-            status: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
-            statusEndret: randomDate({past: true}),
-            ansvarligVeileder: ansvarligVeileder
-        };
-    }
-    return null;
-}
-
 const lagHuskelapp = fnr => {
     const maybeHuskelapp = rnd(0, 1);
     const huskeklappId = rnd(1, 1000);
@@ -179,7 +166,34 @@ const lagTiltakshendelse = (): TiltakshendelseModell => ({
     tiltakstype: 'ARBFORB'
 });
 
-const lag14aVedtak = (): GjeldendeVedtak14aModell | null => {
+function lagVedtak14a(): Vedtak14a {
+    const gjeldendeVedtak = lagGjeldende14aVedtak();
+    const utkastVedtak = lagVedtakUtkast();
+
+    return {
+        gjeldendeVedtak14a: gjeldendeVedtak,
+        utkast14a: utkastVedtak
+    };
+}
+
+function lagVedtakUtkast(): Utkast14a | null {
+    const maybeUtkast = rnd(0, 1);
+    const maybeUtkastOpprettet = rnd(0, 1);
+    const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
+    const dagerSiden = rnd(1, 30);
+    const daterSidenTekst = dagerSiden + (dagerSiden === 1 ? ' dag' : ' dager') + ' siden';
+
+    if (maybeUtkast > 0.5) {
+        return {
+            status: maybeUtkastOpprettet ? 'Utkast' : 'Venter på beslutter',
+            dagerSidenStatusEndretSeg: daterSidenTekst,
+            ansvarligVeileder: ansvarligVeileder
+        };
+    }
+    return null;
+}
+
+const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell | null => {
     const maybe14aVedtak = rnd(0, 1);
     const today = new Date();
 
@@ -334,7 +348,6 @@ function lagBruker() {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
     const aktoerid = mockAktoeridLopenummer++;
     const huskelapp = lagHuskelapp(grunndata.fnr);
-    const vedtakUtkast = lagVedtakUtkast();
     const randomSisteEndring = randomEndring();
 
     const random_egenAnsatt = erSkjermet();
@@ -347,6 +360,7 @@ function lagBruker() {
         meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
         hovedStatsborgerskap: lagHovedstatsborgerskap(),
         ytelser: lagYtelser(),
+        vedtak14a: lagVedtak14a(),
 
         // ikke gått gjennom eller typesikra:
         guid: '',
@@ -366,7 +380,6 @@ function lagBruker() {
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        utkast14a: vedtakUtkast,
         sisteEndringKategori: randomSisteEndring,
         sisteEndringAktivitetId: '12345',
         sisteEndringTidspunkt: randomDate({past: true}),
@@ -384,7 +397,6 @@ function lagBruker() {
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
         huskelapp,
-        gjeldendeVedtak14a: lag14aVedtak(),
         hendelse: lagHendelse()
     };
 }
