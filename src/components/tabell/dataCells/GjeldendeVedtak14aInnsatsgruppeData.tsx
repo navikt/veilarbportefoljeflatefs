@@ -6,7 +6,7 @@ import {innsatsgruppeNavn} from '../../../model-interfaces';
 export const GjeldendeVedtak14aInnsatsgruppeData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstDataCellType
         tekst={
-            bruker.vedtak14a.gjeldendeVedtak14a.innsatsgruppe
+            bruker.vedtak14a.gjeldendeVedtak14a?.innsatsgruppe
                 ? innsatsgruppeNavn[bruker.vedtak14a.gjeldendeVedtak14a.innsatsgruppe]
                 : '-'
         }

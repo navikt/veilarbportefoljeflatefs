@@ -6,7 +6,7 @@ import {toDateString} from '../../../utils/dato-utils';
 export const GjeldendeVedtak14aVedtaksdatoData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstDataCellType
         tekst={
-            bruker.vedtak14a.gjeldendeVedtak14a.fattetDato
+            bruker.vedtak14a.gjeldendeVedtak14a?.fattetDato
                 ? toDateString(bruker.vedtak14a.gjeldendeVedtak14a.fattetDato)
                 : '-'
         }

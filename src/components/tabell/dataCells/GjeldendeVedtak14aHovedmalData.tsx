@@ -6,7 +6,7 @@ import {HovedmalNavn} from '../../../model-interfaces';
 export const GjeldendeVedtak14aHovedmalData = ({bruker, valgteKolonner}: DataCellProps) => (
     <TekstDataCellType
         tekst={
-            bruker.vedtak14a.gjeldendeVedtak14a.hovedmal
+            bruker.vedtak14a.gjeldendeVedtak14a?.hovedmal
                 ? HovedmalNavn[bruker.vedtak14a.gjeldendeVedtak14a.hovedmal]
                 : '-'
         }
