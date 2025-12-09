@@ -176,7 +176,7 @@ function lagVedtak14a(): Vedtak14a {
     };
 }
 
-function lagVedtakUtkast(): Utkast14a {
+function lagVedtakUtkast(): Utkast14a | null {
     const maybeUtkast = rnd(0, 1);
     const maybeUtkastOpprettet = rnd(0, 1);
     const ansvarligVeileder = faker.person.firstName() + ' ' + faker.person.lastName();
@@ -190,14 +190,10 @@ function lagVedtakUtkast(): Utkast14a {
             ansvarligVeileder: ansvarligVeileder
         };
     }
-    return {
-        status: null,
-        dagerSidenStatusEndretSeg: null,
-        ansvarligVeileder: null
-    };
+    return null;
 }
 
-const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell => {
+const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell | null => {
     const maybe14aVedtak = rnd(0, 1);
     const today = new Date();
 
@@ -236,11 +232,7 @@ const lagGjeldende14aVedtak = (): GjeldendeVedtak14aModell => {
             fattetDato: new Date(today.setMonth(today.getDay() - 20))
         };
     }
-    return {
-        innsatsgruppe: null,
-        hovedmal: null,
-        fattetDato: null
-    };
+    return null;
 };
 
 const lagHendelse = (): HendelseInnhold | null => {
