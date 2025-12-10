@@ -109,7 +109,25 @@ export function filtreringReducer(state: FiltervalgModell = initialState, action
         case SETT_FILTERVALG:
             return {...action.data};
         case VELG_MINE_FILTER:
-            return {...action.data.filterValg};
+            const fv = action.data.filterValg || {};
+            const normalizedFilterValg: FiltervalgModell = {} as FiltervalgModell;
+
+            // Normalize known keys, fallback to empty array if missing
+            for (const key of Object.values(Filtervalg)) {
+                const value = fv[key];
+                normalizedFilterValg[key as keyof FiltervalgModell] = (Array.isArray(value) ? value : []) as any;
+            }
+
+            // Warn about unknown keys
+            for (const key of Object.keys(fv)) {
+                if (!(key in Filtervalg)) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Unknown filter key from backend:', key);
+                }
+            }
+
+            return normalizedFilterValg;
+
         case FARGEKATEGORIER_HOVEDFILTER_KLIKK: {
             const hovedfilterAlleredeValgt = state.ferdigfilterListe.includes(MINE_FARGEKATEGORIER);
 
