@@ -14,6 +14,7 @@ import {
     Hovedmal,
     InnsatsgruppeGjeldendeVedtak14a,
     MeldingerVenterPaSvar,
+    SisteEndringAvBruker,
     Statsborgerskap,
     TiltakshendelseModell,
     TiltakspengerData,
@@ -341,6 +342,16 @@ const lagHovedstatsborgerskap = (): Statsborgerskap => {
     };
 };
 
+const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
+    const randomSisteEndring = randomEndring();
+
+    return {
+        tidspunkt: randomDate({past: true}),
+        kategori: randomSisteEndring,
+        aktivitetId: '12345'
+    };
+};
+
 function lagBruker() {
     const grunndata = lagGrunndata();
 
@@ -348,7 +359,6 @@ function lagBruker() {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
     const aktoerid = mockAktoeridLopenummer++;
     const huskelapp = lagHuskelapp(grunndata.fnr);
-    const randomSisteEndring = randomEndring();
 
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
@@ -361,6 +371,9 @@ function lagBruker() {
         hovedStatsborgerskap: lagHovedstatsborgerskap(),
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
+        sisteEndringAvBruker: lagSisteEndringAvBruker(),
+        hendelse: lagHendelse(),
+        barnUnder18AarData: hentBarnUnder18Aar(),
 
         // ikke gått gjennom eller typesikra:
         guid: '',
@@ -380,9 +393,6 @@ function lagBruker() {
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        sisteEndringKategori: randomSisteEndring,
-        sisteEndringAktivitetId: '12345',
-        sisteEndringTidspunkt: randomDate({past: true}),
         nesteUtlopsdatoAktivitet: randomDate({past: false}),
         foedeland: hentLand(),
         tolkebehov: {
@@ -392,12 +402,10 @@ function lagBruker() {
         },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         avvik14aVedtak: randomAvvik14aVedtak(),
-        barnUnder18AarData: hentBarnUnder18Aar(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
-        huskelapp,
-        hendelse: lagHendelse()
+        huskelapp
     };
 }
 
@@ -477,7 +485,7 @@ const hentSpraak = () => {
     return null;
 };
 
-const hentBarnUnder18Aar = () => {
+const hentBarnUnder18Aar = (): BarnUnder18AarModell[] => {
     const barnInfo: BarnUnder18AarModell[] = [];
     const randomArray = new Int8Array(10);
     window.crypto.getRandomValues(randomArray);

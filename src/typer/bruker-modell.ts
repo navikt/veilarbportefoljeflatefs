@@ -1,44 +1,49 @@
 export interface BrukerModell {
+    guid: string; // denne sendes ikke fra backend
+    markert?: boolean; // sendes ikke fra backend
+
     etiketter: Etiketter;
-    geografiskBosted: GeografiskBosted;
-    meldingerVenterPaSvar: MeldingerVenterPaSvar;
-    ytelser: Ytelser;
-    vedtak14a: Vedtak14a;
 
     fnr: string;
-    guid: string; // denne sendes ikke fra backend
     fornavn: string;
     etternavn: string;
-    oppfolgingStartdato: string; // dato
-    tildeltTidspunkt: string; // dato
+    hovedStatsborgerskap: Statsborgerskap;
+    foedeland?: string;
+    geografiskBosted: GeografiskBosted;
+    tolkebehov: Tolkebehov;
+    barnUnder18AarData: BarnUnder18AarModell[];
+
+    oppfolgingStartdato: string;
+    tildeltTidspunkt: string;
     veilederId?: string;
     egenAnsatt: boolean;
     skjermetTil?: string;
-    nyesteUtlopteAktivitet?: string; // dato
+
     tiltakshendelse: TiltakshendelseModell | null;
+    hendelse: HendelseInnhold | null;
+    meldingerVenterPaSvar: MeldingerVenterPaSvar;
+
+    nesteUtlopsdatoAktivitet?: string;
+    nyesteUtlopteAktivitet?: string; // dato
     aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
     aktivitetStart?: string; // dato
     nesteAktivitetStart?: string; // dato
     forrigeAktivitetStart?: string; // dato
-    markert?: boolean; // sendes ikke fra backend
+
     moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
     alleMoterStartTid?: string; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
     alleMoterSluttTid?: string; // kun for å regne ut varighet
-    sisteEndringKategori?: string;
-    sisteEndringTidspunkt?: string; //dato
-    sisteEndringAktivitetId?: string;
-    nesteUtlopsdatoAktivitet?: string;
-    hovedStatsborgerskap: Statsborgerskap;
-    foedeland?: string;
-    tolkebehov: Tolkebehov;
+
+    sisteEndringAvBruker: SisteEndringAvBruker | null;
+    utdanningOgSituasjonSistEndret: string; // dato
     nesteSvarfristCvStillingFraNav?: string;
     avvik14aVedtak?: string; // Skal fjernast, så gjer feltet valfritt
-    barnUnder18AarData: BarnUnder18AarModell[];
+    ytelser: Ytelser;
+    vedtak14a: Vedtak14a;
+
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
     huskelapp?: HuskelappModell;
-    utdanningOgSituasjonSistEndret: string; // dato
-    hendelse: HendelseInnhold | null;
 }
 
 export interface Etiketter {
@@ -51,6 +56,12 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig?: string | null;
     profileringResultat: Profileringsresultat | null;
+}
+
+export interface SisteEndringAvBruker {
+    kategori: string;
+    tidspunkt: string;
+    aktivitetId: string | null;
 }
 
 export interface GeografiskBosted {
