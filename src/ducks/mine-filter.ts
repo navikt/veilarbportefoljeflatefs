@@ -7,6 +7,7 @@ import {
     slettMineFilter
 } from '../middleware/api';
 import {HandlingsType, LagretFilterState, NyttLagretFilter, RedigerLagretFilter, SorteringOgId} from './lagret-filter';
+import {Filtervalg, FiltervalgModell} from '../typer/filtervalg-modell';
 
 // Actions
 export const HENT_MINEFILTER_OK = 'lagredefilter/OK';
@@ -89,7 +90,10 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
             return {
                 ...state,
                 status: STATUS.OK,
-                data: action.data,
+                data: action.data.map(f => ({
+                    ...f,
+                    filterValg: normalizeFilterValg(f.filterValg)
+                })),
                 handlingType: HandlingsType.HENTE
             };
         case NY_MINEFILTER_OK:
@@ -135,6 +139,22 @@ export function mineFilterReducer(state: LagretFilterState = initialState, actio
         default:
             return state;
     }
+}
+
+function normalizeFilterValg(apiFiltervalg: any): Partial<FiltervalgModell> {
+    const normalized: Partial<FiltervalgModell> = {};
+
+    Object.entries(apiFiltervalg).forEach(([key, value]) => {
+        if (!(key in Filtervalg)) {
+            // eslint-disable-next-line no-console
+            console.warn('Unknown filter key from backend:', key);
+            return; // ignorerer ukjente filtre fra backend
+        }
+
+        normalized[key as Filtervalg] = (Array.isArray(value) ? value : []) as any;
+    });
+
+    return normalized;
 }
 
 export function hentMineFilterForVeileder() {
