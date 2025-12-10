@@ -10,17 +10,22 @@ export function SisteEndringData({bruker, enhetId, valgteKolonner}: DataCellMedL
     const handterKlikk = () =>
         oppdaterBrukerIKontekstOgNavigerTilLenke(
             bruker.fnr,
-            getVeilarbpersonflateUrl(`/aktivitet/vis/${bruker.sisteEndringAktivitetId}#visAktivitetsplanen`, enhetId)
+            getVeilarbpersonflateUrl(
+                `/aktivitet/vis/${bruker.sisteEndringAvBruker?.aktivitetId}#visAktivitetsplanen`,
+                enhetId
+            )
         );
 
-    const sisteEndringKategori = bruker.sisteEndringKategori ? hendelserLabels[bruker.sisteEndringKategori] : ' ';
+    const sisteEndringKategori = bruker.sisteEndringAvBruker?.kategori
+        ? hendelserLabels[bruker.sisteEndringAvBruker?.kategori]
+        : ' ';
 
     const skalVises = valgteKolonner.includes(Kolonne.SISTE_ENDRING);
     if (!skalVises) {
         return null;
     }
 
-    if (bruker.sisteEndringAktivitetId === undefined || bruker.sisteEndringAktivitetId === null) {
+    if (bruker.sisteEndringAvBruker?.aktivitetId === null) {
         return (
             <BodyShort size="small" className="col col-xs-2">
                 {sisteEndringKategori}

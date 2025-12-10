@@ -3,7 +3,9 @@ import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const SisteEndringDatoData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const sisteEndringTidspunkt = bruker.sisteEndringTidspunkt ? new Date(bruker.sisteEndringTidspunkt) : null;
+    const sisteEndringTidspunkt = bruker.sisteEndringAvBruker?.tidspunkt
+        ? new Date(bruker.sisteEndringAvBruker?.tidspunkt)
+        : null;
 
     return (
         <DatoDataCellType
