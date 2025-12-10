@@ -112,13 +112,27 @@ export function filtreringReducer(state: FiltervalgModell = initialState, action
             const fv = action.data.filterValg || {};
             const normalizedFilterValg: FiltervalgModell = {} as FiltervalgModell;
 
-            // Normalize known keys, fallback to empty array if missing
             for (const key of Object.values(Filtervalg)) {
                 const value = fv[key];
-                normalizedFilterValg[key as keyof FiltervalgModell] = (Array.isArray(value) ? value : []) as any;
+
+                let normalizedValue: any;
+
+                if (value === undefined || value === null) {
+                    // fallback default
+                    normalizedValue = Array.isArray(value) ? [] : '';
+                } else if (Array.isArray(value)) {
+                    normalizedValue = value;
+                } else if (typeof value === 'string') {
+                    normalizedValue = value;
+                } else {
+                    // anything else (nullable, number, object) → keep as-is
+                    normalizedValue = value;
+                }
+
+                normalizedFilterValg[key as keyof FiltervalgModell] = normalizedValue;
             }
 
-            // Warn about unknown keys
+            // warn about unknown keys
             for (const key of Object.keys(fv)) {
                 if (!(key in Filtervalg)) {
                     // eslint-disable-next-line no-console
