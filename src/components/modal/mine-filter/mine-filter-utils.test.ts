@@ -47,7 +47,6 @@ describe('Mine filter utils', () => {
                 alder: [],
                 aktiviteter: ingenValgteAktiviteter,
                 aktiviteterForenklet: [],
-                avvik14aVedtak: [],
                 barnUnder18Aar: [],
                 barnUnder18AarAlder: [],
                 cvJobbprofil: null,

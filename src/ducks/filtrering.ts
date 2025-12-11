@@ -51,7 +51,6 @@ export const initialState: FiltervalgModell = {
     stillingFraNavFilter: [],
     geografiskBosted: [],
     visGeografiskBosted: [],
-    avvik14aVedtak: [],
     ensligeForsorgere: [],
     barnUnder18Aar: [],
     barnUnder18AarAlder: [],
