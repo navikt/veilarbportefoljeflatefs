@@ -401,7 +401,6 @@ function lagBruker() {
             sistOppdatert: randomDate({past: true, withoutTimestamp: true})
         },
         nesteSvarfristCvStillingFraNav: '2023-06-12',
-        avvik14aVedtak: randomAvvik14aVedtak(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
@@ -414,18 +413,6 @@ const erSkjermet = () => {
     window.crypto.getRandomValues(randomArray);
 
     return randomArray[0] % 5 === 0;
-};
-
-const randomAvvik14aVedtak = () => {
-    const avvikListe = [
-        'HOVEDMAL_ULIK',
-        'INNSATSGRUPPE_ULIK',
-        'INNSATSGRUPPE_OG_HOVEDMAL_ULIK',
-        'INNSATSGRUPPE_MANGLER_I_NY_KILDE',
-        'INGEN_AVVIK'
-    ];
-
-    return avvikListe[Math.floor(Math.random() * avvikListe.length)];
 };
 
 const hentLand = () => {

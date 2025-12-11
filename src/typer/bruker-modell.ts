@@ -37,7 +37,6 @@ export interface BrukerModell {
     sisteEndringAvBruker: SisteEndringAvBruker | null;
     utdanningOgSituasjonSistEndret: string; // dato
     nesteSvarfristCvStillingFraNav?: string;
-    avvik14aVedtak?: string; // Skal fjernast, så gjer feltet valfritt
     ytelser: Ytelser;
     vedtak14a: Vedtak14a;
 
