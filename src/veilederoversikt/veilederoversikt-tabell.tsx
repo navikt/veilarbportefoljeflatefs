@@ -3,33 +3,37 @@ import {useDispatch} from 'react-redux';
 import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
-import {sortBy} from '../ducks/sortering';
+import {
+    sortBy,
+    SorteringsrekkefolgeVeilederoversikt,
+    VeilederoversiktSortering,
+    VeilederoversiktSorteringsfelt
+} from '../ducks/sortering';
+import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 import './veilederoversikt-tabell.css';
 
 interface VeiledereTabellProps {
-    veiledere: any;
-    currentSortering: {
-        property: string;
-        direction: string;
-    };
+    veiledere: VeilederMedPortefoljestorrelse[];
+    currentSortering: VeilederoversiktSortering;
 }
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
     const dispatch = useDispatch();
-    const sorterPaaEtternavn = () => dispatch(sortBy('etternavn'));
-    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy('portefoljestorrelse'));
+    const sorterPaaEtternavn = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.ETTERNAVN));
+    const sorterPaaPortefoljestorrelse = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE));
 
-    const gjeldendeSorteringErEtternavn = currentSortering.property === 'etternavn';
-    const gjeldendeSorteringErPortefoljestorrelse = currentSortering.property === 'portefoljestorrelse';
+    const gjeldendeSorteringErEtternavn = currentSortering.property === VeilederoversiktSorteringsfelt.ETTERNAVN;
+    const gjeldendeSorteringErPortefoljestorrelse =
+        currentSortering.property === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE;
 
     const sorteringspil = sorterPaa => {
         const className = 'tabellheader__pil';
         if (sorterPaa) {
-            if (currentSortering.direction === 'stigende') {
+            if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.STIGENDE) {
                 return (
                     <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
                 );
-            } else if (currentSortering.direction === 'synkende') {
+            } else if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE) {
                 return (
                     <ArrowDownIcon
                         title="Sortert synkende"
@@ -92,7 +96,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                 </Table.Row>
             </Table.Header>
             <Table.Body data-testid="veilederoversikt_veilederliste_tbody">
-                {veiledere.map((veileder: any) => (
+                {veiledere.map(veileder => (
                     <VeilederoversiktTabellrad veileder={veileder} key={veileder.ident} />
                 ))}
             </Table.Body>

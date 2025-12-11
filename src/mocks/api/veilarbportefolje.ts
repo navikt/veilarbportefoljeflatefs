@@ -6,7 +6,7 @@ import {tolkebehovSpraakMockData} from '../data/tolkebehovSpraak';
 import {geografiskBostedListMockData} from '../data/geografiskBosted';
 import {statustallEnhet, statustallVeileder} from '../data/statustall';
 import {brukere, hentHuskelappForBruker, hentMockPlan} from '../data/portefolje';
-import {lagPortefoljeStorrelser} from '../data/portefoljestorrelser';
+import {lagPortefoljestorrelserForVeiledere} from '../data/portefoljestorrelser';
 import {tiltak} from '../data/tiltak';
 import {FargekategoriModell} from '../../typer/bruker-modell';
 import {withAuth} from './auth';
@@ -84,7 +84,7 @@ export const veilarbportefoljeHandlers: RequestHandler[] = [
     http.get(
         '/veilarbportefolje/api/enhet/:enhetId/portefoljestorrelser',
         withAuth(async () => {
-            return HttpResponse.json(lagPortefoljeStorrelser());
+            return HttpResponse.json(lagPortefoljestorrelserForVeiledere());
         })
     ),
     http.post(

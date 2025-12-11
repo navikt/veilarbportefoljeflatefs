@@ -2,62 +2,60 @@ import {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import {Toolbar} from '../components/toolbar/toolbar';
 import {VeilederoversiktTabell} from './veilederoversikt-tabell';
-import {sorter} from '../utils/sortering';
 import {selectFraIndex, selectSeFlere, selectSidestorrelse} from '../components/toolbar/paginering/paginering-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import {VeilederModell} from '../typer/enhet-og-veiledere-modeller';
 import {AppState} from '../reducer';
+import {sorterVeilederoversikt} from './sortering';
+import {FacetResults, PortefoljeStorrelser} from '../ducks/portefoljestorrelser';
 import './veilederoversikt.css';
 
-function erValgtHvisFiltrering(veiledere: string[]) {
-    if (veiledere?.length > 0) {
-        return veileder => veiledere.includes(veileder.ident);
+function finnValgteVeiledere(valgteVeiledere: string[]): (veileder: VeilederModell) => boolean {
+    if (valgteVeiledere?.length > 0) {
+        return veileder => valgteVeiledere.includes(veileder.ident);
     }
     return () => true; // Ikke valgt noe filter, så alle skal være med.
 }
 
-function medPortefoljestorrelse(portefoljeStorrelse) {
+export interface VeilederMedPortefoljestorrelse extends VeilederModell {
+    portefoljestorrelse: number;
+}
+
+function medPortefoljestorrelse(
+    portefoljeStorrelse: PortefoljeStorrelser
+): (veileder: VeilederModell) => VeilederMedPortefoljestorrelse {
     if (portefoljeStorrelse.status !== 'OK') {
         // Før vi har fått portefoljestorrele har alle 0
-        return veileder => ({...veileder, portefoljestorrelse: 0});
+        return (veileder: VeilederModell) => ({...veileder, portefoljestorrelse: 0});
     }
-    const storrelseMap = portefoljeStorrelse.data.facetResults.reduce(
-        (acc, {value: ident, count}) => ({...acc, [ident]: count}),
+    const mapIdentOgPortefoljestorrelser: {[ident: string]: number} = portefoljeStorrelse.data.facetResults.reduce(
+        (acc: {[ident: string]: number}, {value: ident, count}: FacetResults) => ({...acc, [ident]: count}),
         {}
     );
 
-    return veileder => ({
+    return (veileder: VeilederModell) => ({
         ...veileder,
-        portefoljestorrelse: storrelseMap[veileder.ident] || 0
+        portefoljestorrelse: mapIdentOgPortefoljestorrelser[veileder.ident] || 0
     });
-}
-
-function propertySort({property, direction}) {
-    return sorter(property, direction);
 }
 
 interface VeilederoversiktSidevisningProps {
     veilederFilter: string[];
     veiledere: VeilederModell[];
-    portefoljestorrelser: PortefoljeStorrelser;
 }
 
-export function VeilederoversiktSidevisning({
-    veilederFilter,
-    veiledere,
-    portefoljestorrelser
-}: VeilederoversiktSidevisningProps) {
+export function VeilederoversiktSidevisning({veilederFilter, veiledere}: VeilederoversiktSidevisningProps) {
     const fra = useSelector(selectFraIndex);
     const sidestorrelse = useSelector(selectSidestorrelse);
     const seAlle = useSelector(selectSeFlere);
     const sortering = useSelector((state: AppState) => state.sortering);
+    const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
     const veilederListe = useMemo(() => {
         return veiledere
-            .filter(erValgtHvisFiltrering(veilederFilter))
+            .filter(finnValgteVeiledere(veilederFilter))
             .map(medPortefoljestorrelse(portefoljestorrelser))
-            .sort(propertySort(sortering));
+            .sort(sorterVeilederoversikt(sortering.property, sortering.direction));
     }, [veilederFilter, portefoljestorrelser, veiledere, sortering]);
 
     function getValgteVeiledere() {
