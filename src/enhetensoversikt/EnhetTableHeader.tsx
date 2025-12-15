@@ -33,7 +33,7 @@ import {SisteEndringHeader} from '../components/tabell/headerCells/SisteEndringH
 import {VenterPaSvarFraNavHeader} from '../components/tabell/headerCells/VenterPaSvarFraNavHeader';
 import {VenterPaSvarFraBrukerHeader} from '../components/tabell/headerCells/VenterPaSvarFraBrukerHeader';
 import {UtlopteAktiviteterHeader} from '../components/tabell/headerCells/UtlopteAktiviteterHeader';
-import {AvtaltAktivitetHeader} from '../components/tabell/headerCells/AvtaltAktivitetHeader';
+import {AvtaltAktivitetNesteUtlopsdatoHeader} from '../components/tabell/headerCells/AvtaltAktivitetNesteUtlopsdatoHeader';
 import {MoterIDagHeader} from '../components/tabell/headerCells/MoterIDagHeader';
 import {MoteVarighetHeader} from '../components/tabell/headerCells/MoteVarighetHeader';
 import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeader';
@@ -131,7 +131,7 @@ export function EnhetTableHeader() {
                 <TiltakshendelseDatoOpprettetHeader {...sorteringTilHeaderCell} />
 
                 <UtlopteAktiviteterHeader {...sorteringTilHeaderCell} />
-                <AvtaltAktivitetHeader {...sorteringTilHeaderCell} />
+                <AvtaltAktivitetNesteUtlopsdatoHeader {...sorteringTilHeaderCell} />
 
                 <SorteringHeader
                     skalVises={

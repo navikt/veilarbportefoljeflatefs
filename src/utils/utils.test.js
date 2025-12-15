@@ -1,8 +1,7 @@
 import 'babel-polyfill';
 import moment from 'moment';
-import {nesteUtlopsdatoEllerNull, utledValgteAktivitetsTyper, ukerIgjenTilUtlopsdato} from './utils';
+import {nesteUtlopsdatoEllerNull, ukerIgjenTilUtlopsdato} from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
-import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
 
 describe('Date utils', () => {
@@ -24,29 +23,6 @@ describe('Date utils', () => {
             const utlopsdatoer = {a1: nesteDatoString, a2: null};
             const nesteUtlopsdato = nesteUtlopsdatoEllerNull(utlopsdatoer);
             expect(nesteUtlopsdato.toUTCString()).toBe(new Date(nesteDatoString).toUTCString());
-        });
-    });
-
-    describe('Utledning av valgte aktiviteter', () => {
-        it('skal utlede navn på valg aktivitet', () => {
-            const aktivitetFiltervalg = {a1: AktiviteterValg.NEI, a2: AktiviteterValg.JA, a3: AktiviteterValg.NA};
-            const brukerAktiviteter = {
-                a1: '2050-08-20T13:22:00Z',
-                a2: '2050-08-21T13:22:00Z',
-                a3: '2050-08-22T13:22:00Z',
-                a4: '2050-08-23T13:22:00Z'
-            };
-            expect(utledValgteAktivitetsTyper(brukerAktiviteter, aktivitetFiltervalg)).toStrictEqual({
-                a2: '2050-08-21T13:22:00Z'
-            });
-        });
-        it('skal returnere null om objekter er tomt eller null', () => {
-            expect(utledValgteAktivitetsTyper(null, null)).toBeNull();
-            expect(utledValgteAktivitetsTyper({}, {})).toBeNull();
-        });
-        it('skal returnere null dersom ingen har status JA', () => {
-            const aktivitetFiltervalg = {a1: AktiviteterValg.NEI, a2: AktiviteterValg.NA, a3: AktiviteterValg.NA};
-            expect(utledValgteAktivitetsTyper(null, aktivitetFiltervalg)).toBeNull();
         });
     });
 

@@ -23,12 +23,7 @@ export interface BrukerModell {
     hendelse: HendelseInnhold | null;
     meldingerVenterPaSvar: MeldingerVenterPaSvar;
 
-    nesteUtlopsdatoAktivitet?: string;
-    nyesteUtlopteAktivitet?: string; // dato
-    aktiviteter?: AktiviteterModell; // kun avtalte aktiviteter
-    aktivitetStart?: string; // dato
-    nesteAktivitetStart?: string; // dato
-    forrigeAktivitetStart?: string; // dato
+    aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
 
     moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
     alleMoterStartTid?: string; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
@@ -117,7 +112,15 @@ export interface TiltakshendelseModell {
     tiltakstype: string | null;
 }
 
-// TODO: Alle strenger her er iso-8601 datoer. Bør castes før de lagres i storen? 2017-09-27 Korsveien
+export interface AktiviteterAvtaltMedNav {
+    nesteUtlopsdatoForAlleAktiviteter: string | null;
+    nesteUtlopsdatoForFiltrerteAktiviteter: string | null;
+    nyesteUtlopteAktivitet: string | null;
+    aktivitetStart: string | null;
+    nesteAktivitetStart: string | null;
+    forrigeAktivitetStart: string | null;
+}
+
 export interface AktiviteterModell {
     egen?: string;
     stilling?: string;

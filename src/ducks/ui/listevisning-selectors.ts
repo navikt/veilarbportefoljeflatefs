@@ -83,13 +83,10 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
 
     const filtrertPaDagpengerArena = filtervalg.ytelseDagpengerArena.length > 0;
 
-    const avansertAktivitetErValgt =
-        !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) &&
-        harValgtMinstEnAktivitet(filtervalg.aktiviteter!) &&
-        filtervalg.tiltakstyper.length === 0;
-
-    const forenkletAktivitetErValgt =
-        (!filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET) && filtervalg.aktiviteterForenklet.length > 0) ||
+    const harIkkeFiltertPaIAvtaltAktivitet = !filtervalg.ferdigfilterListe.includes(I_AVTALT_AKTIVITET);
+    const mistEttAktivitetFilterErValgt =
+        harValgtMinstEnAktivitet(filtervalg.aktiviteter!) ||
+        filtervalg.aktiviteterForenklet.length > 0 ||
         filtervalg.tiltakstyper.length > 0;
 
     const filtrertPaIAvtaltAktivitetIMinOversikt =
@@ -187,7 +184,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.ANSVARLIG_VEILEDER_FOR_VEDTAK, filtrertPaUnderVurdering))
         .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_RETTIGHET_DAGPENGER, filtrertPaDagpengerArena))
         .concat(addHvis(Kolonne.YTELSE_ARENA_GJENSTAENDE_UKER_VEDTAK_TILTAKSPENGER, filtrertPaTiltakspengerArena))
-        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, avansertAktivitetErValgt || forenkletAktivitetErValgt))
+        .concat(addHvis(Kolonne.UTLOP_AKTIVITET, mistEttAktivitetFilterErValgt && harIkkeFiltertPaIAvtaltAktivitet))
         .concat(addHvis(Kolonne.START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
         .concat(addHvis(Kolonne.NESTE_START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))
         .concat(addHvis(Kolonne.FORRIGE_START_DATO_AKTIVITET, filtrertPaIAvtaltAktivitetIMinOversikt))

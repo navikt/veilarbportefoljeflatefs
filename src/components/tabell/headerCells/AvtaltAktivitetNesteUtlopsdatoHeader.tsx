@@ -3,7 +3,7 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const AvtaltAktivitetHeader = ({
+export const AvtaltAktivitetNesteUtlopsdatoHeader = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,
     rekkefolge,

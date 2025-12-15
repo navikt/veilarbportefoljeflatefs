@@ -1,4 +1,3 @@
-import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
 import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellType';
@@ -23,7 +22,7 @@ import {FilterhendelseDatoOpprettetData} from '../components/tabell/dataCells/Fi
 import {TiltakshendelseLenkeData} from '../components/tabell/dataCells/TiltakshendelseLenkeData';
 import {TiltakshendelseDatoOpprettetData} from '../components/tabell/dataCells/TiltakshendelseDatoOpprettetData';
 import {UtlopteAktiviteterData} from '../components/tabell/dataCells/UtlopteAktiviteterData';
-import {AvtaltAktivitetData} from '../components/tabell/dataCells/AvtaltAktivitetData';
+import {AvtaltAktivitetNesteUtlopsdato} from '../components/tabell/dataCells/AvtaltAktivitetNesteUtlopsdato';
 import {MoterIDagData} from '../components/tabell/dataCells/MoterIDagData';
 import {MoteVarighetData} from '../components/tabell/dataCells/MoteVarighetData';
 import {MotestatusData} from '../components/tabell/dataCells/MotestatusData';
@@ -65,17 +64,6 @@ interface Props {
 }
 
 export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKolonner}: Props) {
-    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-
-    const avtaltAktivitetOgTiltak: boolean =
-        !!valgteAktivitetstyper &&
-        filtervalg.tiltakstyper.length === 0 &&
-        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-
-    const forenkletAktivitetOgTiltak =
-        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
-        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-
     return (
         <div className="brukerliste__innhold flex flex--center">
             <NavnData bruker={bruker} enhetId={enhetId} />
@@ -119,7 +107,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <TiltakshendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <AvtaltAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitetNesteUtlopsdato bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <MoterIDagData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -131,22 +119,38 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <DatoDataCellType
                 className="col col-xs-2"
-                dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
-                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
+                dato={
+                    bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter
+                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter)
+                        : null
+                }
+                skalVises={valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
             <DatoDataCellType
                 className="col col-xs-2"
-                dato={bruker.aktivitetStart ? new Date(bruker.aktivitetStart) : null}
+                dato={
+                    bruker.aktiviteterAvtaltMedNav.aktivitetStart
+                        ? new Date(bruker.aktiviteterAvtaltMedNav.aktivitetStart)
+                        : null
+                }
                 skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
             />
             <DatoDataCellType
                 className="col col-xs-2"
-                dato={bruker.nesteAktivitetStart ? new Date(bruker.nesteAktivitetStart) : null}
+                dato={
+                    bruker.aktiviteterAvtaltMedNav.nesteAktivitetStart
+                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteAktivitetStart)
+                        : null
+                }
                 skalVises={valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
             />
             <DatoDataCellType
                 className="col col-xs-2"
-                dato={bruker.forrigeAktivitetStart ? new Date(bruker.forrigeAktivitetStart) : null}
+                dato={
+                    bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart
+                        ? new Date(bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart)
+                        : null
+                }
                 skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
             />
 
