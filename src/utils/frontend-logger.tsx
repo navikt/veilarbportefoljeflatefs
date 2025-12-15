@@ -1,4 +1,4 @@
-import {erMock} from './url-utils';
+import env from '../utils/environment';
 import {FilterFields, filtermalinger} from '../umami/filter-malinger';
 
 type Fields = FilterFields | {} | undefined;
@@ -14,7 +14,7 @@ export interface FrontendEvent {
 }
 
 export const logEvent = (logTag: string, fields?: Fields, tags?: {}): void => {
-    if (erMock()) {
+    if (env.isDemo) {
         // eslint-disable-next-line no-console
         console.log('Event', logTag, 'Fields:', fields, 'Tags:', tags);
     } else if (isFilterFields(fields)) {
