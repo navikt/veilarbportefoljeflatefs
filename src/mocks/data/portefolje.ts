@@ -1,9 +1,10 @@
 import moment from 'moment';
 import {fakerNB_NO as faker} from '@faker-js/faker';
 import {veiledere} from './veiledere';
-import {aktiviteter, hendelserLabels} from '../../filtrering/filter-konstanter';
+import {hendelserLabels} from '../../filtrering/filter-konstanter';
 import {
     AapKelvinData,
+    AktiviteterAvtaltMedNav,
     BarnUnder18AarModell,
     EnsligeForsorgereOvergangsstonad,
     Etiketter,
@@ -74,11 +75,6 @@ let i = 123456;
 
 function lagGrunndata() {
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
-    const nesteUtlopteAktivitet = randomDate({past: false});
-
-    const brukerAktiviteter = Object.keys(aktiviteter)
-        .map((x: string) => x.toLowerCase())
-        .reduce((acc, curr) => ({...acc, [curr]: Math.random() > 0.1 ? null : randomDate({past: false})}), {});
 
     const moteStartTid = Math.random() > 0.5 ? new Date() : null;
     const alleMoterStartTid = Math.random() > 0.5 ? new Date() : null;
@@ -87,8 +83,6 @@ function lagGrunndata() {
         fnr: String(i++).padStart(11, '0'),
         fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
         etternavn: 'Testson',
-        nesteUtlopteAktivitet,
-        aktiviteter: brukerAktiviteter,
         moteStartTid,
         alleMoterStartTid,
         alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + randomMotevarighet() * 60 * 1000)
@@ -352,6 +346,17 @@ const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
     };
 };
 
+const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
+    return {
+        nesteUtlopsdatoForAlleAktiviteter: randomDate({past: false}),
+        nesteUtlopsdatoForFiltrerteAktiviteter: randomDate({past: false}),
+        nyesteUtlopteAktivitet: null,
+        aktivitetStart: null,
+        nesteAktivitetStart: null,
+        forrigeAktivitetStart: null
+    };
+};
+
 function lagBruker() {
     const grunndata = lagGrunndata();
 
@@ -374,6 +379,7 @@ function lagBruker() {
         sisteEndringAvBruker: lagSisteEndringAvBruker(),
         hendelse: lagHendelse(),
         barnUnder18AarData: hentBarnUnder18Aar(),
+        aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
 
         // ikke gått gjennom eller typesikra:
         guid: '',
@@ -385,15 +391,12 @@ function lagBruker() {
         veilederId: veilederId,
         tildeltTidspunkt: randomDate({past: true}),
         tiltakshendelse: lagTiltakshendelse(),
-        nyesteUtlopteAktivitet: grunndata.nesteUtlopteAktivitet,
         egenAnsatt: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
-        aktiviteter: grunndata.aktiviteter,
         moteStartTid: grunndata.moteStartTid?.toString(),
         alleMoterStartTid: grunndata.alleMoterStartTid,
         alleMoterSluttTid: grunndata.alleMoterSluttTid,
         moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
-        nesteUtlopsdatoAktivitet: randomDate({past: false}),
         foedeland: hentLand(),
         tolkebehov: {
             talespraaktolk: hentSpraak(),
