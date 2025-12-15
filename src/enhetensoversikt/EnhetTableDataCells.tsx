@@ -4,7 +4,6 @@ import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellT
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {parseDatoString, utledValgteAktivitetsTyper} from '../utils/utils';
 import {VeilederNavnData} from '../components/tabell/dataCells/enhetens-oversikt/veilederNavnData';
 import {VeilederNavidentData} from '../components/tabell/dataCells/enhetens-oversikt/veilederNavidentData';
 import {SisteEndringData} from '../components/tabell/dataCells/SisteEndringData';
@@ -25,7 +24,7 @@ import {FilterhendelseDatoOpprettetData} from '../components/tabell/dataCells/Fi
 import {TiltakshendelseLenkeData} from '../components/tabell/dataCells/TiltakshendelseLenkeData';
 import {TiltakshendelseDatoOpprettetData} from '../components/tabell/dataCells/TiltakshendelseDatoOpprettetData';
 import {UtlopteAktiviteterData} from '../components/tabell/dataCells/UtlopteAktiviteterData';
-import {AvtaltAktivitetData} from '../components/tabell/dataCells/AvtaltAktivitetData';
+import {AvtaltAktivitetNesteUtlopsdatoData} from '../components/tabell/dataCells/AvtaltAktivitetNesteUtlopsdatoData';
 import {MoterIDagData} from '../components/tabell/dataCells/MoterIDagData';
 import {MoteVarighetData} from '../components/tabell/dataCells/MoteVarighetData';
 import {MotestatusData} from '../components/tabell/dataCells/MotestatusData';
@@ -66,17 +65,6 @@ interface Props {
 }
 
 export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, valgteKolonner}: Props) {
-    const valgteAktivitetstyper = utledValgteAktivitetsTyper(bruker.aktiviteter, filtervalg.aktiviteter);
-
-    const avtaltAktivitetOgTiltak: boolean =
-        !!valgteAktivitetstyper &&
-        filtervalg.tiltakstyper.length === 0 &&
-        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET);
-
-    const forenkletAktivitetOgTiltak =
-        valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
-        (filtervalg.tiltakstyper.length > 0 || filtervalg.aktiviteterForenklet.length > 0);
-
     return (
         <div className={className}>
             <NavnData bruker={bruker} enhetId={enhetId} />
@@ -123,12 +111,16 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <TiltakshendelseDatoOpprettetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <AvtaltAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitetNesteUtlopsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <DatoDataCellType
                 className="col col-xs-2"
-                dato={parseDatoString(bruker.nesteUtlopsdatoAktivitet)}
-                skalVises={avtaltAktivitetOgTiltak || forenkletAktivitetOgTiltak}
+                dato={
+                    bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter
+                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter)
+                        : null
+                }
+                skalVises={valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
 
             <MoterIDagData bruker={bruker} valgteKolonner={valgteKolonner} />

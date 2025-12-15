@@ -3,7 +3,6 @@ import {AktiviteterModell, BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Maybe} from './types';
 import {settBrukerIKontekst} from '../middleware/api';
-import {AktiviteterValg} from '../filtrering/filter-konstanter';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
     return new Array(end - start + (inclusive ? 1 : 0)).fill(0).map((_, i) => start + i);
@@ -32,27 +31,6 @@ export function parseDatoString(datoString: Maybe<string>): Maybe<Date> {
     if (!datoString) return null;
 
     return new Date(datoString);
-}
-
-export function utledValgteAktivitetsTyper(
-    brukerAktiviteter,
-    avanserteAktiviteterFiltervalg
-): Maybe<AktiviteterModell> {
-    if (
-        !avanserteAktiviteterFiltervalg ||
-        Object.keys(avanserteAktiviteterFiltervalg).length === 0 ||
-        !brukerAktiviteter ||
-        Object.keys(avanserteAktiviteterFiltervalg).length === 0
-    ) {
-        return null;
-    }
-    return Object.entries(avanserteAktiviteterFiltervalg)
-        .filter(([_, value]) => value === AktiviteterValg.JA)
-        .map(([key, _]) => key.toLowerCase())
-        .reduce((obj, key) => {
-            obj[key] = brukerAktiviteter[key];
-            return obj;
-        }, {});
 }
 
 export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {

@@ -3,7 +3,9 @@ import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
 export const UtlopteAktiviteterData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const nyesteUtlopteAktivitet = bruker.nyesteUtlopteAktivitet ? new Date(bruker.nyesteUtlopteAktivitet) : null;
+    const nyesteUtlopteAktivitet = bruker.aktiviteterAvtaltMedNav.nyesteUtlopteAktivitet
+        ? new Date(bruker.aktiviteterAvtaltMedNav.nyesteUtlopteAktivitet)
+        : null;
 
     return (
         <DatoDataCellType
