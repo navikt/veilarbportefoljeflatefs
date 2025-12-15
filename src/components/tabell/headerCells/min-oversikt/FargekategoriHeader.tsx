@@ -1,6 +1,6 @@
 import {HeaderCellProps} from '../HeaderCellProps';
 import {SorteringHeaderIkon} from '../../sortering-header-ikon';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../../../../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg';
+import FargekategoriIkonTomtBokmerke from '../../../../components/ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg?react';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
 /* Dette er header for fargekategori-ikon-kolonna.

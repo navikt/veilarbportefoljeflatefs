@@ -1,11 +1,11 @@
 import {FargekategoriModell} from '../../typer/bruker-modell';
-import {ReactComponent as FargekategoriIkonBlaHalvsirkel} from '../ikoner/fargekategorier/Fargekategoriikon_bla_halvsirkel.svg';
-import {ReactComponent as FargekategoriIkonGronnTrekant} from '../ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg';
-import {ReactComponent as FargekategoriIkonGulSirkel} from '../ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg';
-import {ReactComponent as FargekategoriIkonLillaFirkant} from '../ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg';
-import {ReactComponent as FargekategoriIkonTurkisFemkant} from '../ikoner/fargekategorier/Fargekategoriikon_turkis_femkant.svg';
-import {ReactComponent as FargekategoriIkonOransjeRombe} from '../ikoner/fargekategorier/Fargekategoriikon_oransje_rombe.svg';
-import {ReactComponent as FargekategoriIkonTomtBokmerke} from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet.svg';
+import FargekategoriIkonBlaHalvsirkel from '../ikoner/fargekategorier/Fargekategoriikon_bla_halvsirkel.svg?react';
+import FargekategoriIkonGronnTrekant from '../ikoner/fargekategorier/Fargekategoriikon_gronn_trekant.svg?react';
+import FargekategoriIkonGulSirkel from '../ikoner/fargekategorier/Fargekategoriikon_gul_sirkel.svg?react';
+import FargekategoriIkonLillaFirkant from '../ikoner/fargekategorier/Fargekategoriikon_lilla_firkant.svg?react';
+import FargekategoriIkonTurkisFemkant from '../ikoner/fargekategorier/Fargekategoriikon_turkis_femkant.svg?react';
+import FargekategoriIkonOransjeRombe from '../ikoner/fargekategorier/Fargekategoriikon_oransje_rombe.svg?react';
+import FargekategoriIkonTomtBokmerke from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet.svg?react';
 
 export const fargekategoriIkonMapper = (
     fargekategori: FargekategoriModell | null,

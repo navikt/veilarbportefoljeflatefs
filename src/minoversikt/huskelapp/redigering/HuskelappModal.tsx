@@ -10,7 +10,7 @@ import {AppState} from '../../../reducer';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
-import {ReactComponent as HuskelappIkon} from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg';
+import HuskelappIkon from '../../../components/ikoner/huskelapp/Huskelappikon_bakgrunnsfarge.svg?react';
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import './rediger-huskelapp.css';
