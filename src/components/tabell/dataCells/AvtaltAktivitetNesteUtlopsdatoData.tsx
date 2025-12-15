@@ -2,7 +2,7 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
-export const AvtaltAktivitetNesteUtlopsdato = ({bruker, valgteKolonner}: DataCellProps) => (
+export const AvtaltAktivitetNesteUtlopsdatoData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoDataCellType
         dato={
             bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForAlleAktiviteter

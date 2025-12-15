@@ -1,5 +1,4 @@
 import {SorteringHeader} from '../components/tabell/sortering-header';
-import {AktiviteterValg} from '../filtrering/filter-konstanter';
 import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
@@ -59,26 +58,12 @@ import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering'
 import './enhetensoversikt.css';
 import './brukerliste.css';
 
-function harValgteAktiviteter(aktiviteter) {
-    if (aktiviteter && Object.keys(aktiviteter).length > 0) {
-        const valgteAktiviteter = Object.values(aktiviteter).filter(
-            aktivitetvalg => aktivitetvalg !== AktiviteterValg.NA
-        );
-        return valgteAktiviteter?.length > 0;
-    }
-    return false;
-}
-
 export function EnhetTableHeader() {
     const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
         OversiktType.enhetensOversikt
     );
     const valgteKolonner = listevisning.valgte;
     const settSorteringOgHentPortefolje = useSetPortefoljeSortering(OversiktType.enhetensOversikt);
-
-    const avansertAktivitet = harValgteAktiviteter(filtervalg.aktiviteter);
-    const forenkletAktivitet = harValgteAktiviteter(filtervalg.aktiviteterForenklet);
-    const tiltaksType = harValgteAktiviteter(filtervalg.tiltakstyper);
 
     const sorteringTilHeaderCell = {
         gjeldendeSorteringsfelt: sorteringsfelt,
@@ -134,10 +119,7 @@ export function EnhetTableHeader() {
                 <AvtaltAktivitetNesteUtlopsdatoHeader {...sorteringTilHeaderCell} />
 
                 <SorteringHeader
-                    skalVises={
-                        sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET) &&
-                        (avansertAktivitet || forenkletAktivitet || tiltaksType)
-                    }
+                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
                     sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
                     erValgt={sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
                     rekkefolge={sorteringTilHeaderCell.rekkefolge}
