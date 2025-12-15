@@ -33,10 +33,10 @@ export function getSorteringsRekkefolgeFromUrl() {
 }
 
 export function getVeilarbpersonflateBasePath() {
-    if (erDev() && getEnv() === Env.ansattDev) {
+    if (getEnv() === Env.ansattDev) {
         return 'https://veilarbpersonflate.ansatt.dev.nav.no';
     }
-    return erDev() || erMock()
+    return erDev() || erDemo()
         ? 'https://veilarbpersonflate.intern.dev.nav.no'
         : 'https://veilarbpersonflate.intern.nav.no';
 }
@@ -59,9 +59,9 @@ export function updateLastPath() {
     }
 }
 
-export const erDev = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'development';
-export const erProd = () => (process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment) === 'production';
-export const erMock = () => process.env.REACT_APP_MOCK === 'true';
+export const erDev = () => getEnv() === Env.dev;
+export const erProd = () => getEnv() === Env.prod;
+export const erDemo = () => import.meta.env.MODE === 'demo';
 
 export const getEnv = (): EnvConfig => {
     const {hostname} = window.location;
@@ -92,7 +92,7 @@ const Env = {
 export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
 
 export const loginUrl = () => {
-    if (erMock()) {
+    if (erDemo()) {
         return '/';
     }
     return `${window.location.origin}/oauth2/login?redirect=${window.location.href}`;

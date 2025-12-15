@@ -1,14 +1,11 @@
 import ReactDOM from 'react-dom';
-import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
+// import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
-import {DeploymentEnvironment, erMock} from './utils/url-utils';
+import {DeploymentEnvironment} from './utils/url-utils';
+import env from './utils/environment';
 import '@navikt/ds-css';
 import './style.css';
 import {leggTilUmamiScript} from './umami/umami';
-
-if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill');
-}
 
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.setItem('filterVersjon', 'v1');
@@ -18,7 +15,7 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
 
 const renderApp = () => ReactDOM.render(<Application />, document.getElementById('mainapp'));
 
-if (erMock()) {
+if (env.isDemo) {
     // eslint-disable-next-line no-console
     console.log('==========================');
     // eslint-disable-next-line no-console
@@ -26,8 +23,19 @@ if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
 
-    const {worker} = require('./mocks/index');
-    worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
+    import('./mocks/index').then(({worker}) =>
+        worker
+            .start({
+                serviceWorker: {url: `${import.meta.env.BASE_URL}mockServiceWorker.js`},
+                onUnhandledRequest(req, print) {
+                    if (req.url.startsWith('wss://modiacontextholder.intern.dev.nav.no/ws')) {
+                        return; // ignore websocket handshake warnings
+                    }
+                    print.warning();
+                }
+            })
+            .then(() => renderApp())
+    );
 } else {
     leggTilUmamiScript();
     renderApp();
@@ -46,26 +54,22 @@ function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
     }
 }
 
-// eslint-disable-next-line
-function settOppCoreWebVitalsMetrikkRapportering() {
-    const metrikkEndepunkt = hentMetrikkEndepunkt(process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment);
+// function settOppCoreWebVitalsMetrikkRapportering() {
+//     const metrikkEndepunkt = hentMetrikkEndepunkt(process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment);
 
-    if (metrikkEndepunkt) {
-        initializeFaro({
-            instrumentations: [new WebVitalsInstrumentation()],
-            url: metrikkEndepunkt,
-            app: {
-                name: 'veilarbportefoljeflatefs',
-                version: '0.0.1'
-            }
-        });
-    } else {
-        // eslint-disable-next-line no-console
-        console.warn(
-            'Klarte ikke å hente metrikkendepunkt, initialiserer ikke Core Web Vitals metrikk rapportering. Dersom du kjører appen lokalt og ønsker å teste mot tracing-demo bruk heller "npm run start:metrics".'
-        );
-    }
-}
+//     if (metrikkEndepunkt) {
+//         initializeFaro({
+//             instrumentations: [new WebVitalsInstrumentation()],
+//             url: metrikkEndepunkt,
+//             app: {name: 'veilarbportefoljeflatefs', version: '0.0.1'}
+//         });
+//     } else {
+//         // eslint-disable-next-line no-console
+//         console.warn(
+//             'Klarte ikke å hente metrikkendepunkt, initialiserer ikke Core Web Vitals metrikk rapportering. Dersom du kjører appen lokalt og ønsker å teste mot tracing-demo bruk heller "npm run start:metrics".'
+//         );
+//     }
+// }
 
 // Ved treghet/problemer relatert til rapportering av web vitals metrikker: fjern denne linjen og deploy på nytt
 //settOppCoreWebVitalsMetrikkRapportering();

@@ -5,6 +5,17 @@ import {DEFAULT_DELAY_MILLISECONDS} from '../constants';
 
 export const modiacontextholderHandlers: RequestHandler[] = [
     http.get(
+        '/modiacontextholder/api/context/v2/aktivenhet',
+        withAuth(async () => {
+            await delay(DEFAULT_DELAY_MILLISECONDS);
+
+            return HttpResponse.json({
+                aktivBruker: null,
+                aktivEnhet: '1234'
+            });
+        })
+    ),
+    http.get(
         '/modiacontextholder/api/context/aktivenhet',
         withAuth(async () => {
             await delay(DEFAULT_DELAY_MILLISECONDS);
