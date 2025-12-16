@@ -9,9 +9,8 @@
     "scripts": {
         "start": "vite --mode demo",
         "build": "vite build",
-        "build:dev": "cross-env REACT_APP_DEPLOYMENT_ENV=development REACT_APP_MOCK=false PUBLIC_URL=/ REACT_APP_DECORATOR=/internarbeidsflatedecorator react-scripts build",
-        "build:mock": "tsc && vite build --mode demo PUBLIC_URL=/veilarbportefoljeflatefs REACT_APP_MOCK=true REACT_APP_DECORATOR=https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev",
-        "build:prod": "cross-env REACT_APP_DEPLOYMENT_ENV=production REACT_APP_MOCK=false PUBLIC_URL=/ REACT_APP_DECORATOR=/internarbeidsflatedecorator react-scripts build",
+        "build:dev": "tsc && vite build --mode development",
+        "build:mock": "tsc && vite build --mode demo --base=/veilarbportefoljeflatefs",
         "cy:run": "cypress run",
         "cypress:clear": "cypress cache clear",
         "cypress:open": "cypress open",

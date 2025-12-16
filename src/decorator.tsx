@@ -14,6 +14,8 @@ function getDecoratorEnv(): Environment {
     const env = getEnv();
     if (env.type === EnvType.prod) {
         return 'prod';
+    } else if (env.type === EnvType.local) {
+        return 'local';
     } else {
         return 'q2';
     }
