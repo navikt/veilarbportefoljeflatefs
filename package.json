@@ -10,7 +10,7 @@
     "start": "vite --mode demo",
     "build": "vite build",
     "build:dev": "tsc && vite build --mode development",
-    "build:mock": "tsc && vite build --mode demo --base=/veilarbportefoljeflatefs",
+    "build:mock": "tsc && vite build --mode demo --base=/veilarbportefoljeflatefs/",
     "cy:run": "cypress run",
     "cypress:clear": "cypress cache clear",
     "cypress:open": "cypress open",
