@@ -3,10 +3,10 @@ name: paoa frontend container dev
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths:
-      - '.github/workflows/poao-frontend-container-dev.yaml'
-      - '.nais/obo-nais-dev.yaml'
+      - ".github/workflows/poao-frontend-container-dev.yaml"
+      - ".nais/obo-nais-dev.yaml"
   workflow_dispatch:
 
 concurrency:
