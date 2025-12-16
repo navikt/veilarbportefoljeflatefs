@@ -2,12 +2,12 @@ import {FargekategoriModell, HuskelappModell} from '../../../typer/bruker-modell
 
 interface SjekkOmNoeSkalSlettesProps {
     tilVeileder: string;
-    fraVeileder: string | undefined;
+    fraVeileder: string | null;
     tilEnhet: string | null;
 }
 
 interface SjekkOmHuskelappSkalSlettesProps extends SjekkOmNoeSkalSlettesProps {
-    huskelapp: HuskelappModell | undefined;
+    huskelapp: HuskelappModell | null;
 }
 
 export const harHuskelappSomVilBliSlettetFilter = ({

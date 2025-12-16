@@ -31,7 +31,7 @@ const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     }, []);
 
 interface Tilordning {
-    fraVeilederId: string | undefined;
+    fraVeilederId: string | null;
     tilVeilederId: string;
     brukerFnr: string;
 }

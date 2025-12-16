@@ -1,7 +1,6 @@
 import {RefObject} from 'react';
-import {AktiviteterModell, BrukerModell} from '../typer/bruker-modell';
+import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Maybe} from './types';
 import {settBrukerIKontekst} from '../middleware/api';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -10,27 +9,6 @@ export function range(start: number, end: number, inclusive: boolean = false): n
 
 export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
-}
-
-export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>): Maybe<Date> {
-    if (!utlopsdatoer) {
-        return null;
-    }
-
-    const dagensDato = new Date();
-    dagensDato.setHours(0, 0, 0, 0);
-    return Object.keys(utlopsdatoer)
-        .map(key => utlopsdatoer[key])
-        .filter(value => !!value)
-        .map(dateString => new Date(dateString))
-        .filter(date => date.getTime() >= dagensDato.getTime())
-        .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
-}
-
-export function parseDatoString(datoString: Maybe<string>): Maybe<Date> {
-    if (!datoString) return null;
-
-    return new Date(datoString);
 }
 
 export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {
@@ -59,23 +37,15 @@ export function ytelsestypetekst(brukerytelse: string) {
 export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
     if (
-        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.tolkebehov.talespraaktolk !== undefined &&
-            bruker.tolkebehov.talespraaktolk !== null &&
-            bruker.tolkebehov.talespraaktolk.length > 0) ||
-        (bruker.tolkebehov.talespraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && bruker.tolkebehov.talespraaktolk.length > 0) ||
+        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk)
     ) {
         behov.push('Talespråktolk');
     }
 
     if (
-        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tolkebehov.tegnspraaktolk !== undefined &&
-            bruker.tolkebehov.tegnspraaktolk !== null &&
-            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
-        (bruker.tolkebehov.tegnspraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk)
     ) {
         if (behov.length > 0) {
             behov.push('tegnspråktolk');
@@ -118,13 +88,8 @@ export function tolkBehovSpraak(
     let leggTilSpraak = leggTilSpraakInfo(filtervalg);
 
     if (
-        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') &&
-            bruker.tolkebehov.talespraaktolk !== undefined &&
-            bruker.tolkebehov.talespraaktolk !== null &&
-            bruker.tolkebehov.talespraaktolk.length > 0) ||
-        (bruker.tolkebehov.talespraaktolk !== null &&
-            bruker.tolkebehov.talespraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk))
+        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && bruker.tolkebehov.talespraaktolk.length > 0) ||
+        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk)
     ) {
         behovSpraak.push(
             formatSpraakTekst(tolkbehovSpraakData.get(bruker.tolkebehov.talespraaktolk)!, leggTilSpraak, 'tale', false)
@@ -132,13 +97,8 @@ export function tolkBehovSpraak(
     }
 
     if (
-        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') &&
-            bruker.tolkebehov.tegnspraaktolk !== undefined &&
-            bruker.tolkebehov.tegnspraaktolk !== null &&
-            bruker.tolkebehov.tegnspraaktolk.length > 0) ||
-        (bruker.tolkebehov.tegnspraaktolk !== null &&
-            bruker.tolkebehov.tegnspraaktolk !== undefined &&
-            filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk))
+        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && bruker.tolkebehov.tegnspraaktolk.length > 0) ||
+        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk)
     ) {
         let spraak = tolkbehovSpraakData.get(bruker.tolkebehov.tegnspraaktolk);
         let convertToLowerCase = behovSpraak.length > 0 && spraak !== undefined;

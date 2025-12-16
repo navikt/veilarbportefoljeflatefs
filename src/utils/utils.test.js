@@ -1,31 +1,10 @@
 import 'babel-polyfill';
 import moment from 'moment';
-import {nesteUtlopsdatoEllerNull, ukerIgjenTilUtlopsdato} from './utils';
+import {ukerIgjenTilUtlopsdato} from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';
 import {oppfolingsdatoEnsligeForsorgere} from './enslig-forsorger';
 
 describe('Date utils', () => {
-    describe('Utlopsdato aktiviteter', () => {
-        it('finn neste utlopsdato', () => {
-            const nesteDatoString = '2050-08-20T13:22:00Z';
-            const utlopsdatoer = {a1: nesteDatoString, a2: '2050-08-21T13:22:00Z'};
-            const nesteUtlopsdato = nesteUtlopsdatoEllerNull(utlopsdatoer);
-            expect(nesteUtlopsdato.toUTCString()).toBe(new Date(nesteDatoString).toUTCString());
-        });
-        it('skal returnere null om ingen datoer finnes', () => {
-            expect(!!nesteUtlopsdatoEllerNull({})).toBeFalsy();
-        });
-        it('skal returnere null dersom dato er null', () => {
-            expect(!!nesteUtlopsdatoEllerNull({a: null})).toBeFalsy();
-        });
-        it('skal returnere nyeste dato dersom én er null', () => {
-            const nesteDatoString = '2050-08-20T13:22:00Z';
-            const utlopsdatoer = {a1: nesteDatoString, a2: null};
-            const nesteUtlopsdato = nesteUtlopsdatoEllerNull(utlopsdatoer);
-            expect(nesteUtlopsdato.toUTCString()).toBe(new Date(nesteDatoString).toUTCString());
-        });
-    });
-
     describe('utlopsdatoUker', () => {
         it('skal håndtere null verdier', () => {
             expect(ukerIgjenTilUtlopsdato(null)).toBeUndefined();

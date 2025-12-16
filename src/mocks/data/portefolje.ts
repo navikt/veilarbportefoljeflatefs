@@ -6,6 +6,7 @@ import {
     AapKelvinData,
     AktiviteterAvtaltMedNav,
     BarnUnder18AarModell,
+    BrukerModell,
     EnsligeForsorgereOvergangsstonad,
     Etiketter,
     FargekategoriModell,
@@ -13,6 +14,7 @@ import {
     GjeldendeVedtak14aModell,
     HendelseInnhold,
     Hovedmal,
+    HuskelappModell,
     InnsatsgruppeGjeldendeVedtak14a,
     MeldingerVenterPaSvar,
     SisteEndringAvBruker,
@@ -68,7 +70,6 @@ const ytelser = [
     TiltakspengerYtelseData.TILTAKSPENGER
 ];
 
-let mockAktoeridLopenummer = 0;
 const huskelapp: any = {};
 
 let i = 123456;
@@ -76,16 +77,10 @@ let i = 123456;
 function lagGrunndata() {
     const kjonn = Math.random() > 0.5 ? 'K' : 'M';
 
-    const moteStartTid = Math.random() > 0.5 ? new Date() : null;
-    const alleMoterStartTid = Math.random() > 0.5 ? new Date() : null;
-
     return {
         fnr: String(i++).padStart(11, '0'),
         fornavn: faker.person.firstName(kjonn === 'K' ? 'female' : 'male'),
-        etternavn: 'Testson',
-        moteStartTid,
-        alleMoterStartTid,
-        alleMoterSluttTid: alleMoterStartTid && new Date(alleMoterStartTid.getTime() + randomMotevarighet() * 60 * 1000)
+        etternavn: 'Testson'
     };
 }
 
@@ -135,21 +130,20 @@ function lagOverskrift() {
     return null;
 }
 
-const lagHuskelapp = fnr => {
+export const lagHuskelapp = (): HuskelappModell | null => {
     const maybeHuskelapp = rnd(0, 1);
-    const huskeklappId = rnd(1, 1000);
+    const huskeklappId = rnd(1, 1000).toString();
     if (maybeHuskelapp > 0.75) {
         return null;
     }
 
     return {
         huskelappId: huskeklappId,
-        brukerFnr: fnr,
         kommentar: '\n\n' + lagOverskrift() + '\n\nDette skal bort ',
-        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').format('YYYY-MM-DD'),
+        frist: moment().add(rnd(0, 20), 'days').add(rnd(0, 23), 'hours').toDate(),
         enhetId: maybeHuskelapp > 0.7 ? '0220' : '1234',
-        sistEndretAv: 'Meg selv',
-        endretDato: moment().subtract(rnd(0, 20), 'days').subtract(rnd(0, 23), 'hours').format('YYYY-MM-DD')
+        endretAv: 'Meg selv',
+        endretDato: moment().subtract(rnd(0, 20), 'days').subtract(rnd(0, 23), 'hours').toDate()
     };
 };
 
@@ -357,57 +351,54 @@ const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
     };
 };
 
-function lagBruker() {
+function lagBruker(): BrukerModell {
     const grunndata = lagGrunndata();
 
     const maybeVeileder = rnd(0, veiledere.length * 2);
-    const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : undefined;
-    const aktoerid = mockAktoeridLopenummer++;
-    const huskelapp = lagHuskelapp(grunndata.fnr);
-
+    const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
 
-    return {
-        // gått gjennom og typesikra:
-        etiketter: lagEtiketter(),
-        geografiskBosted: lagGeografiskBosted(),
-        meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
-        hovedStatsborgerskap: lagHovedstatsborgerskap(),
-        ytelser: lagYtelser(),
-        vedtak14a: lagVedtak14a(),
-        sisteEndringAvBruker: lagSisteEndringAvBruker(),
-        hendelse: lagHendelse(),
-        barnUnder18AarData: hentBarnUnder18Aar(),
-        aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
+    const startTidDate = new Date();
+    const alleMoterStartTid = Math.random() > 0.5 ? startTidDate.toString() : null;
+    const alleMoterSluttTid =
+        alleMoterStartTid && new Date(startTidDate.getTime() + randomMotevarighet() * 60 * 1000).toString();
 
-        // ikke gått gjennom eller typesikra:
+    return {
         guid: '',
-        oppfolgingStartdato: '',
+        etiketter: lagEtiketter(),
         fnr: grunndata.fnr,
-        aktoerid: aktoerid,
         fornavn: grunndata.fornavn,
         etternavn: grunndata.etternavn,
-        veilederId: veilederId,
-        tildeltTidspunkt: randomDate({past: true}),
-        tiltakshendelse: lagTiltakshendelse(),
-        egenAnsatt: random_egenAnsatt,
-        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
-        moteStartTid: grunndata.moteStartTid?.toString(),
-        alleMoterStartTid: grunndata.alleMoterStartTid,
-        alleMoterSluttTid: grunndata.alleMoterSluttTid,
-        moteErAvtaltMedNAV: grunndata.moteStartTid != null && Math.random() < 0.5,
+        hovedStatsborgerskap: lagHovedstatsborgerskap(),
         foedeland: hentLand(),
+        geografiskBosted: lagGeografiskBosted(),
         tolkebehov: {
             talespraaktolk: hentSpraak(),
             tegnspraaktolk: hentSpraak(),
             sistOppdatert: randomDate({past: true, withoutTimestamp: true})
         },
-        nesteSvarfristCvStillingFraNav: '2023-06-12',
+        barnUnder18AarData: hentBarnUnder18Aar(),
+        oppfolgingStartdato: '',
+        tildeltTidspunkt: randomDate({past: true}),
+        veilederId: veilederId,
+        egenAnsatt: random_egenAnsatt,
+        skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
+        tiltakshendelse: lagTiltakshendelse(),
+        hendelse: lagHendelse(),
+        meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
+        aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
+        moteStartTid: alleMoterStartTid,
+        alleMoterStartTid: alleMoterStartTid,
+        alleMoterSluttTid: alleMoterSluttTid,
+        sisteEndringAvBruker: lagSisteEndringAvBruker(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
+        nesteSvarfristCvStillingFraNav: '2023-06-12',
+        ytelser: lagYtelser(),
+        vedtak14a: lagVedtak14a(),
         fargekategori: lagFargekategori(),
         fargekategoriEnhetId: '1234',
-        huskelapp
+        huskelapp: lagHuskelapp()
     };
 }
 
@@ -472,7 +463,7 @@ const hentSpraak = () => {
         return spraakListe[Math.abs(randomArray[1] % spraakListe.length)];
     }
 
-    return null;
+    return '';
 };
 
 const hentBarnUnder18Aar = (): BarnUnder18AarModell[] => {
