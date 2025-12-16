@@ -22,10 +22,8 @@ export interface BrukerModell {
     tiltakshendelse: TiltakshendelseModell | null;
     hendelse: HendelseInnhold | null;
     meldingerVenterPaSvar: MeldingerVenterPaSvar;
-
     aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
-
-    moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
+    moteStartTid: string | null; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
     alleMoterStartTid: string | null; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
     alleMoterSluttTid: string | null; // kun for å regne ut varighet
 
@@ -196,9 +194,9 @@ export interface HendelseInnhold {
 }
 
 interface Tolkebehov {
-    talespraaktolk?: string;
-    tegnspraaktolk?: string;
-    sistOppdatert?: string; // LocalDate i backend
+    talespraaktolk: string;
+    tegnspraaktolk: string;
+    sistOppdatert: string | null; // LocalDate i backend
 }
 
 export interface AapKelvinData {
