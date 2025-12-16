@@ -1,24 +1,23 @@
 {
-  "files": {
-    "main.css": "/veilarbportefoljeflatefs/static/css/main.0fd76563.css",
-    "main.js": "/veilarbportefoljeflatefs/static/js/main.2d5546f8.js",
-    "static/media/Huskelappikon_stiplet.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon_stiplet.f7fac33e61583c46072ff59d3268a59e.svg",
-    "static/media/Fargekategoriikon_bokmerke_stiplet.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bokmerke_stiplet.302d9e8ca2e72e12ba6877918b9485c9.svg",
-    "static/media/x_mark_octagon_icon.svg": "/veilarbportefoljeflatefs/static/media/x_mark_octagon_icon.252c5a9ebaed2457dbc3b6db30334939.svg",
-    "index.html": "/veilarbportefoljeflatefs/index.html",
-    "static/media/Huskelappikon_bakgrunnsfarge.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon_bakgrunnsfarge.41263d0029714b8ca66c772325f85606.svg",
-    "static/media/Huskelappikon.svg": "/veilarbportefoljeflatefs/static/media/Huskelappikon.8274f635de855c12305c7383d4d9298f.svg",
-    "static/media/Fargekategoriikon_bla_halvsirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bla_halvsirkel.c6f1abc23119441bf41297a772eb32b9.svg",
-    "static/media/dragIcon.svg": "/veilarbportefoljeflatefs/static/media/dragIcon.960f7e2f75f3c436d84adc87e31f3007.svg",
-    "static/media/Fargekategoriikon_turkis_femkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_turkis_femkant.341b0699cc832d6f652dc1c068fb9e6f.svg",
-    "static/media/Fargekategoriikon_bokmerke.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_bokmerke.785059a93ad6bef86f778bfc28809033.svg",
-    "static/media/Fargekategoriikon_oransje_rombe.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_oransje_rombe.116ee10864e34aa27f170a800937204a.svg",
-    "static/media/Fargekategoriikon_gronn_trekant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gronn_trekant.4e684227941f2fdab567cc842cb80ec7.svg",
-    "static/media/Fargekategoriikon_lilla_firkant.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_lilla_firkant.f183bf6c23eda69c8c000ae157e5b4f0.svg",
-    "static/media/Fargekategoriikon_gul_sirkel.svg": "/veilarbportefoljeflatefs/static/media/Fargekategoriikon_gul_sirkel.9ac18e243f6f697b58ffc1ab47c5f762.svg"
+  "index.html": {
+    "file": "assets/index-BmDyG91J.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/mocks/index.ts"
+    ],
+    "css": [
+      "assets/index-Cn6yjNVz.css"
+    ]
   },
-  "entrypoints": [
-    "static/css/main.0fd76563.css",
-    "static/js/main.2d5546f8.js"
-  ]
+  "src/mocks/index.ts": {
+    "file": "assets/index-BO6E1MtB.js",
+    "name": "index",
+    "src": "src/mocks/index.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  }
 }
