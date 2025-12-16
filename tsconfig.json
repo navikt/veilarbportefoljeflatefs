@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noImplicitAny": false,
@@ -20,7 +20,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client", "vitest/globals"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

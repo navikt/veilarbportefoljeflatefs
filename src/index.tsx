@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 // import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
 import {DeploymentEnvironment} from './utils/url-utils';
@@ -13,7 +13,7 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.removeItem('enhetsState');
 }
 
-const renderApp = () => ReactDOM.render(<Application />, document.getElementById('mainapp'));
+const renderApp = () => createRoot(document.getElementById('mainapp') as HTMLElement).render(<Application />);
 
 if (env.isDemo) {
     // eslint-disable-next-line no-console
@@ -35,6 +35,9 @@ if (env.isDemo) {
                 }
             })
             .then(() => renderApp())
+            .catch((e: Error) => {
+                console.error('MSW - failed to start', e);
+            })
     );
 } else {
     leggTilUmamiScript();

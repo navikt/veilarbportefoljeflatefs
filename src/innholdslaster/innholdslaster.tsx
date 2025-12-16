@@ -7,7 +7,7 @@ import {loggVisningAvAlert} from '../umami/logg-visning-av-alert';
 interface InnholdslasterProps {
     avhengigheter: any;
     className?: string;
-    children: ReactNode;
+    children: ReactNode | ((avhengigheter: any) => ReactNode);
 }
 
 export function Innholdslaster({avhengigheter, className, children}: InnholdslasterProps) {
@@ -42,7 +42,8 @@ export function Innholdslaster({avhengigheter, className, children}: Innholdslas
 
     const renderChildren = () => {
         if (typeof children === 'function') {
-            return <>{children(avhengigheter)}</>;
+            const render = children as (avhengigheter: any) => ReactNode;
+            return <>{render(avhengigheter)}</>;
         }
         return <>{children}</>;
     };
