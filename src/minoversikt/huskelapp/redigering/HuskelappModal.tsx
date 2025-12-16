@@ -18,7 +18,7 @@ import './rediger-huskelapp.css';
 interface Props {
     isModalOpen: boolean;
     onModalClose: () => void;
-    huskelapp?: HuskelappModell;
+    huskelapp: HuskelappModell | null;
     bruker: BrukerModell;
 }
 

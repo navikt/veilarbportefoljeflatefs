@@ -115,10 +115,7 @@ export function oppfolgingStartetDato(dato: string): Maybe<Date> {
     return oppfolgingStartetDato < tidligsteDato ? tidligsteDato : oppfolgingStartetDato;
 }
 
-export function hentSkjermetInfo(
-    egenAnsatt: boolean | undefined,
-    skjermetTil: string | undefined
-): SkjermingEtikettConfig {
+export function hentSkjermetInfo(egenAnsatt: boolean | null, skjermetTil: string | null): SkjermingEtikettConfig {
     if (!egenAnsatt) {
         return {
             hidden: true,

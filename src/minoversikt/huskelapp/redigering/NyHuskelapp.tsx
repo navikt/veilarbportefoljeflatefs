@@ -8,7 +8,7 @@ import {toDatePrettyPrint} from '../../../utils/dato-utils';
 import './rediger-huskelapp.css';
 
 interface Props {
-    huskelapp?: HuskelappModell;
+    huskelapp: HuskelappModell | null;
     onSubmit: (values: any, formikHelpers: any) => Promise<any>;
     setHuskelappEndret: (endret: boolean) => void;
 }

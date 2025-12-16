@@ -7,8 +7,8 @@ import {
 
 /** Minifisert utgåve av BrukerModell der vi berre har med felta som er relevant i testane */
 interface MiniBrukerModell {
-    veilederId?: string;
-    huskelapp?: HuskelappModell;
+    veilederId: string | null;
+    huskelapp: HuskelappModell | null;
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
     fnr: string;
@@ -53,7 +53,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const brukerUtenHuskelapp: MiniBrukerModell = {
             fnr: '3',
             veilederId: ulikIdent, // eller null
-            huskelapp: undefined,
+            huskelapp: null,
             fargekategori: null,
             fargekategoriEnhetId: null
         };
@@ -96,7 +96,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const brukerMedHuskelappSomSkalSlettes: MiniBrukerModell = {
             fnr: '1',
             veilederId: ulikIdent, // eller null
-            huskelapp: undefined,
+            huskelapp: null,
             fargekategori: FargekategoriModell.FARGEKATEGORI_A,
             fargekategoriEnhetId: ulikEnhet
         };
@@ -104,7 +104,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const brukerMedHuskelappSomIkkeSkalSlettes: MiniBrukerModell = {
             fnr: '2',
             veilederId: ulikIdent, // eller null
-            huskelapp: undefined,
+            huskelapp: null,
             fargekategori: null,
             fargekategoriEnhetId: enhet
         };
@@ -112,7 +112,7 @@ describe('Testar logikk for tildeling av veileder', () => {
         const brukerUtenHuskelapp: MiniBrukerModell = {
             fnr: '3',
             veilederId: ulikIdent, // eller null
-            huskelapp: undefined,
+            huskelapp: null,
             fargekategori: null,
             fargekategoriEnhetId: null
         };
