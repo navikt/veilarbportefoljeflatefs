@@ -1,7 +1,6 @@
 import {RefObject} from 'react';
-import {AktiviteterModell, BrukerModell} from '../typer/bruker-modell';
+import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
-import {Maybe} from './types';
 import {settBrukerIKontekst} from '../middleware/api';
 
 export function range(start: number, end: number, inclusive: boolean = false): number[] {
@@ -10,27 +9,6 @@ export function range(start: number, end: number, inclusive: boolean = false): n
 
 export function lag2Sifret(n: number): string {
     return n < 10 ? `0${n}` : `${n}`;
-}
-
-export function nesteUtlopsdatoEllerNull(utlopsdatoer: Maybe<AktiviteterModell>): Maybe<Date> {
-    if (!utlopsdatoer) {
-        return null;
-    }
-
-    const dagensDato = new Date();
-    dagensDato.setHours(0, 0, 0, 0);
-    return Object.keys(utlopsdatoer)
-        .map(key => utlopsdatoer[key])
-        .filter(value => !!value)
-        .map(dateString => new Date(dateString))
-        .filter(date => date.getTime() >= dagensDato.getTime())
-        .sort((d1, d2) => d1.getTime() - d2.getTime())[0];
-}
-
-export function parseDatoString(datoString: Maybe<string>): Maybe<Date> {
-    if (!datoString) return null;
-
-    return new Date(datoString);
 }
 
 export function ukerIgjenTilUtlopsdato(utlopsdatoStr?: string): number | undefined {

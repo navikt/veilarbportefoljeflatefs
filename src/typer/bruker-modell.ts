@@ -7,17 +7,17 @@ export interface BrukerModell {
     fnr: string;
     fornavn: string;
     etternavn: string;
-    hovedStatsborgerskap: Statsborgerskap;
-    foedeland?: string;
+    hovedStatsborgerskap: Statsborgerskap | null;
+    foedeland: string | null;
     geografiskBosted: GeografiskBosted;
     tolkebehov: Tolkebehov;
     barnUnder18AarData: BarnUnder18AarModell[];
 
     oppfolgingStartdato: string;
-    tildeltTidspunkt: string;
-    veilederId?: string;
+    tildeltTidspunkt: string | null;
+    veilederId: string | null;
     egenAnsatt: boolean;
-    skjermetTil?: string;
+    skjermetTil: string | null;
 
     tiltakshendelse: TiltakshendelseModell | null;
     hendelse: HendelseInnhold | null;
@@ -26,18 +26,18 @@ export interface BrukerModell {
     aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
 
     moteStartTid: string; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
-    alleMoterStartTid?: string; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
-    alleMoterSluttTid?: string; // kun for å regne ut varighet
+    alleMoterStartTid: string | null; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
+    alleMoterSluttTid: string | null; // kun for å regne ut varighet
 
     sisteEndringAvBruker: SisteEndringAvBruker | null;
-    utdanningOgSituasjonSistEndret: string; // dato
-    nesteSvarfristCvStillingFraNav?: string;
+    utdanningOgSituasjonSistEndret: string | null; // dato
+    nesteSvarfristCvStillingFraNav: string | null;
     ytelser: Ytelser;
     vedtak14a: Vedtak14a;
 
     fargekategori: FargekategoriModell | null;
     fargekategoriEnhetId: string | null;
-    huskelapp?: HuskelappModell;
+    huskelapp: HuskelappModell | null;
 }
 
 export interface Etiketter {
@@ -48,7 +48,7 @@ export interface Etiketter {
     nyForEnhet: boolean;
     harBehovForArbeidsevneVurdering: boolean;
     harSikkerhetstiltak: boolean;
-    diskresjonskodeFortrolig?: string | null;
+    diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
 }
 
@@ -119,18 +119,6 @@ export interface AktiviteterAvtaltMedNav {
     aktivitetStart: string | null;
     nesteAktivitetStart: string | null;
     forrigeAktivitetStart: string | null;
-}
-
-export interface AktiviteterModell {
-    egen?: string;
-    stilling?: string;
-    sokeavtale?: string;
-    behandling?: string;
-    ijobb?: string;
-    samtalereferat?: string;
-    mote?: string;
-    tiltak?: string;
-    gruppeaktivitet?: string;
 }
 
 export interface Vedtak14a {
@@ -214,11 +202,11 @@ interface Tolkebehov {
 }
 
 export interface AapKelvinData {
-    vedtaksdatoTilOgMed?: string; // dato
-    rettighetstype?: string;
+    vedtaksdatoTilOgMed: string | null;
+    rettighetstype: string | null;
 }
 
 export interface TiltakspengerData {
-    vedtaksdatoTilOgMed?: string; // dato
-    rettighet?: string;
+    vedtaksdatoTilOgMed: string | null;
+    rettighet: string | null;
 }
