@@ -27,9 +27,9 @@ jobs:
       - name: Build mock application
         run: npm run build:mock
       - name: Legg til 404 fil
-        run: cp ./.github/pages/404.html ./build/404.html
+        run: cp ./.github/pages/404.html ./dist/404.html
       - name: Update GitHub pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist
