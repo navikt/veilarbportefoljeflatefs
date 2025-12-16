@@ -15,17 +15,19 @@ export const TolkebehovData = ({bruker, valgteKolonner, filtervalg}: DataCellMed
 function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
     const behov: string[] = [];
 
-    if (
-        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && bruker.tolkebehov.talespraaktolk.length > 0) ||
-        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk)
-    ) {
+    const filtrertPaTalespraktolkOgHarBehov =
+        filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && bruker.tolkebehov.talespraaktolk.length > 0;
+    const filtrertPaBrukersTalesprak = filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk);
+
+    if (filtrertPaTalespraktolkOgHarBehov || filtrertPaBrukersTalesprak) {
         behov.push('Talespråktolk');
     }
 
-    if (
-        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && bruker.tolkebehov.tegnspraaktolk.length > 0) ||
-        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk)
-    ) {
+    const filtrertPaTegnspraktolkOgHarBehov =
+        filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && bruker.tolkebehov.tegnspraaktolk.length > 0;
+    const filtrertPaBrukersTegnsprak = filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk);
+
+    if (filtrertPaTegnspraktolkOgHarBehov || filtrertPaBrukersTegnsprak) {
         if (behov.length > 0) {
             behov.push('tegnspråktolk');
         } else {
@@ -33,6 +35,7 @@ function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
         }
     }
 
+    // Teoretisk umogleg, brukarar utan behov bør ikkje dukke opp i resultatlista ?? - Ingrid, 2025-12-16
     if (behov.length === 0) {
         return '-';
     }
