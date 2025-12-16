@@ -4,7 +4,7 @@ import {DataCellProps} from './DataCellProps';
 import moment from 'moment/moment';
 
 export const MotestatusData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const moteErAvtaltMedNAV = moment(new Date(bruker.moteStartTid)).isSame(new Date(), 'day');
+    const moteErAvtaltMedNAV = moment(bruker.moteStartTid).isSame(new Date(), 'day');
 
     return (
         <TekstDataCellType
