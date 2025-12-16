@@ -1,6 +1,6 @@
 import {HeaderCellProps} from '../HeaderCellProps';
 import {SorteringHeaderIkon} from '../../sortering-header-ikon';
-import {ReactComponent as HuskelappIkon} from '../../../../components/ikoner/huskelapp/Huskelappikon.svg';
+import HuskelappIkon from '../../../../components/ikoner/huskelapp/Huskelappikon.svg?react';
 import {Sorteringsfelt} from '../../../../typer/kolonnesortering';
 
 /* Dette er header for huskelapp-ikon-knapp-kolonna.
