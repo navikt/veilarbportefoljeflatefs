@@ -32,7 +32,7 @@ jobs:
           install: false
           browser: chrome
           start: npm start
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:5173
           wait-on-timeout: 90
           record: false
       - name: Upload screenshots
