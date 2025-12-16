@@ -28,7 +28,7 @@ export default defineConfig({
         viewportWidth: 700,
         specPattern: 'src/components/**/*.cy.*',
         devServer: {
-            framework: 'create-react-app',
+            framework: 'react',
             bundler: 'webpack'
         }
     }
