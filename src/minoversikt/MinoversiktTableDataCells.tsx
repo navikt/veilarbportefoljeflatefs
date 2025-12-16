@@ -23,7 +23,7 @@ import {TiltakshendelseLenkeData} from '../components/tabell/dataCells/Tiltakshe
 import {TiltakshendelseDatoOpprettetData} from '../components/tabell/dataCells/TiltakshendelseDatoOpprettetData';
 import {UtlopteAktiviteterData} from '../components/tabell/dataCells/UtlopteAktiviteterData';
 import {AvtaltAktivitetNesteUtlopsdatoData} from '../components/tabell/dataCells/AvtaltAktivitetNesteUtlopsdatoData';
-import {MoterIDagData} from '../components/tabell/dataCells/MoterIDagData';
+import {ForstkommendeMoteIDagData} from '../components/tabell/dataCells/ForstkommendeMoteIDagData';
 import {MoteVarighetData} from '../components/tabell/dataCells/MoteVarighetData';
 import {MotestatusData} from '../components/tabell/dataCells/MotestatusData';
 import {Utkast14aVedtaksstatusData} from '../components/tabell/dataCells/Utkast14aVedtaksstatusData';
@@ -109,7 +109,7 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AvtaltAktivitetNesteUtlopsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <MoterIDagData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <ForstkommendeMoteIDagData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MotestatusData bruker={bruker} valgteKolonner={valgteKolonner} />
 
