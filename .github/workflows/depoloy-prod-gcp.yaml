@@ -38,4 +38,4 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
       - name: Upload files to GCS
-        run: gsutil -m rsync -r build gs://obo-veilarbportefoljeflatefs-prod
+        run: gsutil -m rsync -r dist gs://obo-veilarbportefoljeflatefs-prod
