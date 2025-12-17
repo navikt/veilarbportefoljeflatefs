@@ -33,9 +33,9 @@ import {VenterPaSvarFraNavHeader} from '../components/tabell/headerCells/VenterP
 import {VenterPaSvarFraBrukerHeader} from '../components/tabell/headerCells/VenterPaSvarFraBrukerHeader';
 import {UtlopteAktiviteterHeader} from '../components/tabell/headerCells/UtlopteAktiviteterHeader';
 import {AvtaltAktivitetNesteUtlopsdatoHeader} from '../components/tabell/headerCells/AvtaltAktivitetNesteUtlopsdatoHeader';
-import {ForstkommendeMoteHeader} from '../components/tabell/headerCells/ForstkommendeMoteHeader';
-import {MoteVarighetHeader} from '../components/tabell/headerCells/MoteVarighetHeader';
-import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeader';
+import {MoteIDagKlokkeslettHeader} from '../components/tabell/headerCells/MoteIDagKlokkeslettHeader';
+import {MoteIDagVarighetHeader} from '../components/tabell/headerCells/MoteIDagVarighetHeader';
+import {MoteIDagAvtaltHeader} from '../components/tabell/headerCells/MoteIDagAvtaltHeader';
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
 import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
@@ -129,9 +129,9 @@ export function EnhetTableHeader() {
                     className="col col-xs-2"
                 />
 
-                <ForstkommendeMoteHeader {...sorteringTilHeaderCell} />
-                <MoteVarighetHeader {...sorteringTilHeaderCell} />
-                <MotestatusHeader {...sorteringTilHeaderCell} />
+                <MoteIDagKlokkeslettHeader {...sorteringTilHeaderCell} />
+                <MoteIDagVarighetHeader {...sorteringTilHeaderCell} />
+                <MoteIDagAvtaltHeader {...sorteringTilHeaderCell} />
 
                 <Utkast14aVedtaksstatusHeader {...sorteringTilHeaderCell} />
                 <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeaderCell} />

@@ -3,9 +3,9 @@ import {DataCellProps} from './DataCellProps';
 import {formaterVarighetSomTimerOgMinutt} from '../../../utils/dato-utils';
 import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
-export const MoteVarighetData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const motevarighet = bruker.moterMedNav.forstkommendeMoteVarighetMinutter
-        ? formaterVarighetSomTimerOgMinutt(bruker.moterMedNav.forstkommendeMoteVarighetMinutter)
+export const MoteIDagVarighetData = ({bruker, valgteKolonner}: DataCellProps) => {
+    const motevarighet = bruker.moteMedNavIDag?.varighetMinutter
+        ? formaterVarighetSomTimerOgMinutt(bruker.moteMedNavIDag.varighetMinutter)
         : '–';
 
     return (

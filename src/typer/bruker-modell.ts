@@ -23,7 +23,7 @@ export interface BrukerModell {
     hendelse: HendelseInnhold | null;
     meldingerVenterPaSvar: MeldingerVenterPaSvar;
     aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
-    moterMedNav: MoterMedNav;
+    moteMedNavIDag: MoteMedNavIDag | null;
 
     sisteEndringAvBruker: SisteEndringAvBruker | null;
     utdanningOgSituasjonSistEndret: string | null; // dato
@@ -48,10 +48,10 @@ export interface Etiketter {
     profileringResultat: Profileringsresultat | null;
 }
 
-export interface MoterMedNav {
-    harAvtaltMoteMedNavIDag: boolean;
-    forstkommendeMoteDato: string | null;
-    forstkommendeMoteVarighetMinutter: number | null;
+export interface MoteMedNavIDag {
+    avtaltMedNav: boolean;
+    klokkeslett: string;
+    varighetMinutter: number;
 }
 
 export interface SisteEndringAvBruker {
