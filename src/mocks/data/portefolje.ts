@@ -17,6 +17,7 @@ import {
     HuskelappModell,
     InnsatsgruppeGjeldendeVedtak14a,
     MeldingerVenterPaSvar,
+    MoterMedNav,
     SisteEndringAvBruker,
     Statsborgerskap,
     TiltakshendelseModell,
@@ -351,6 +352,18 @@ const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
     };
 };
 
+const lagMoterMedNav = (): MoterMedNav => {
+    const harAvtaltMoteMedNavIDag = Math.random() < 0.3;
+    const forstkommendeMoteDato = harAvtaltMoteMedNavIDag ? randomDate({past: false}) : null;
+    const forstkommendeMoteVarighetMinutter = harAvtaltMoteMedNavIDag ? randomMotevarighet() : null;
+
+    return {
+        harAvtaltMoteMedNavIDag,
+        forstkommendeMoteDato,
+        forstkommendeMoteVarighetMinutter
+    };
+};
+
 function lagBruker(): BrukerModell {
     const grunndata = lagGrunndata();
 
@@ -358,11 +371,6 @@ function lagBruker(): BrukerModell {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
-
-    const startTidDate = new Date();
-    const alleMoterStartTid = Math.random() > 0.5 ? startTidDate.toString() : null;
-    const alleMoterSluttTid =
-        alleMoterStartTid && new Date(startTidDate.getTime() + randomMotevarighet() * 60 * 1000).toString();
 
     return {
         guid: '',
@@ -388,9 +396,7 @@ function lagBruker(): BrukerModell {
         hendelse: lagHendelse(),
         meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
         aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
-        moteStartTid: alleMoterStartTid,
-        alleMoterStartTid: alleMoterStartTid,
-        alleMoterSluttTid: alleMoterSluttTid,
+        moterMedNav: lagMoterMedNav(),
         sisteEndringAvBruker: lagSisteEndringAvBruker(),
         utdanningOgSituasjonSistEndret: randomDate({past: false}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',

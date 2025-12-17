@@ -1,14 +1,16 @@
 import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
-import {VarighetDataCellType} from '../dataCellTypes/VarighetDataCellType';
-import {minuttDifferanse} from '../../../utils/dato-utils';
+import {formaterVarighetSomTimerOgMinutt} from '../../../utils/dato-utils';
+import {TekstDataCellType} from '../dataCellTypes/TekstDataCellType';
 
 export const MoteVarighetData = ({bruker, valgteKolonner}: DataCellProps) => {
-    const motevarighet = minuttDifferanse(bruker.alleMoterSluttTid, bruker.alleMoterStartTid);
+    const motevarighet = bruker.moterMedNav.forstkommendeMoteVarighetMinutter
+        ? formaterVarighetSomTimerOgMinutt(bruker.moterMedNav.forstkommendeMoteVarighetMinutter)
+        : '–';
 
     return (
-        <VarighetDataCellType
-            varighetMinutter={motevarighet}
+        <TekstDataCellType
+            tekst={motevarighet}
             skalVises={valgteKolonner.includes(Kolonne.MOTER_VARIGHET)}
             className="col col-xs-2"
         />

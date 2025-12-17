@@ -23,9 +23,7 @@ export interface BrukerModell {
     hendelse: HendelseInnhold | null;
     meldingerVenterPaSvar: MeldingerVenterPaSvar;
     aktiviteterAvtaltMedNav: AktiviteterAvtaltMedNav;
-    moteStartTid: string | null; // kun avtalte moter, moteStartTid verdien blir brukt til å avgjere kva status som vert vist i kolonna for "avtalt med Nav". Vurder å gje den betre namn og tydelegare verdi. 2025-06-18, Ingrid.
-    alleMoterStartTid: string | null; // klokkeslett for møtet i dag, og regne ut varighet med alleMoterSluttTid
-    alleMoterSluttTid: string | null; // kun for å regne ut varighet
+    moterMedNav: MoterMedNav;
 
     sisteEndringAvBruker: SisteEndringAvBruker | null;
     utdanningOgSituasjonSistEndret: string | null; // dato
@@ -48,6 +46,12 @@ export interface Etiketter {
     harSikkerhetstiltak: boolean;
     diskresjonskodeFortrolig: string | null;
     profileringResultat: Profileringsresultat | null;
+}
+
+export interface MoterMedNav {
+    harAvtaltMoteMedNavIDag: boolean;
+    forstkommendeMoteDato: string | null;
+    forstkommendeMoteVarighetMinutter: number | null;
 }
 
 export interface SisteEndringAvBruker {

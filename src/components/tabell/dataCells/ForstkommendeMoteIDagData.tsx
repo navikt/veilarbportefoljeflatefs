@@ -5,7 +5,7 @@ import {KlokkeslettDataCellType} from '../dataCellTypes/KlokkeslettDataCellType'
 export const ForstkommendeMoteIDagData = ({bruker, valgteKolonner}: DataCellProps) => {
     return (
         <KlokkeslettDataCellType
-            dato={bruker.alleMoterStartTid}
+            dato={bruker.moterMedNav.forstkommendeMoteDato}
             skalVises={valgteKolonner.includes(Kolonne.MOTER_IDAG)}
             className="col col-xs-2"
         />
