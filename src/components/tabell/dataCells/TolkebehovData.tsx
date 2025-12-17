@@ -27,7 +27,7 @@ function tolkebehovTekst(filtervalg: FiltervalgModell, bruker: BrukerModell) {
         }
     }
 
-    // Teoretisk umogleg, brukarar utan behov bør ikkje dukke opp i resultatlista ?? - Ingrid, 2025-12-16
+    // Teoretisk umogleg, brukarar utan behov bør ikkje dukke opp i resultatlista - Ingrid, 2025-12-16
     if (behov.length === 0) {
         return '-';
     }
