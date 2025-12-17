@@ -23,9 +23,9 @@ import {TiltakshendelseLenkeData} from '../components/tabell/dataCells/Tiltakshe
 import {TiltakshendelseDatoOpprettetData} from '../components/tabell/dataCells/TiltakshendelseDatoOpprettetData';
 import {UtlopteAktiviteterData} from '../components/tabell/dataCells/UtlopteAktiviteterData';
 import {AvtaltAktivitetNesteUtlopsdatoData} from '../components/tabell/dataCells/AvtaltAktivitetNesteUtlopsdatoData';
-import {MoterIDagData} from '../components/tabell/dataCells/MoterIDagData';
-import {MoteVarighetData} from '../components/tabell/dataCells/MoteVarighetData';
-import {MotestatusData} from '../components/tabell/dataCells/MotestatusData';
+import {MoteIDagKlokkeslettData} from '../components/tabell/dataCells/MoteIDagKlokkeslettData';
+import {MoteIDagVarighetData} from '../components/tabell/dataCells/MoteIDagVarighetData';
+import {MoteIDagAvtaltData} from '../components/tabell/dataCells/MoteIDagAvtaltData';
 import {Utkast14aVedtaksstatusData} from '../components/tabell/dataCells/Utkast14aVedtaksstatusData';
 import {Utkast14aVedtaksstatusEndretData} from '../components/tabell/dataCells/Utkast14aVedtaksstatusEndretData';
 import {Utkast14aAnsvarligVeilederData} from '../components/tabell/dataCells/Utkast14aAnsvarligVeilederData';
@@ -109,9 +109,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AvtaltAktivitetNesteUtlopsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <MoterIDagData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <MoteVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <MotestatusData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteIDagKlokkeslettData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteIDagVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <MoteIDagAvtaltData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <Utkast14aVedtaksstatusData bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aVedtaksstatusEndretData bruker={bruker} valgteKolonner={valgteKolonner} />

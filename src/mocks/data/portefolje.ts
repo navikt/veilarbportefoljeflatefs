@@ -17,6 +17,7 @@ import {
     HuskelappModell,
     InnsatsgruppeGjeldendeVedtak14a,
     MeldingerVenterPaSvar,
+    MoteMedNavIDag,
     SisteEndringAvBruker,
     Statsborgerskap,
     TiltakshendelseModell,
@@ -291,14 +292,14 @@ const lagGeografiskBosted = (): GeografiskBosted => {
         bostedKommune: hentBostedKommune(),
         bostedBydel: hentBostedBydel(),
         bostedKommuneUkjentEllerUtland: '-',
-        bostedSistOppdatert: randomDate({past: true})
+        bostedSistOppdatert: randomDate({past: true, withoutTimestamp: true})
     };
 };
 
 const lagMeldingerVenterPaSvar = (): MeldingerVenterPaSvar => {
     return {
-        datoMeldingVenterPaNav: randomDate({past: true}),
-        datoMeldingVenterPaBruker: randomDate({past: true})
+        datoMeldingVenterPaNav: randomDate({past: true, withoutTimestamp: true}),
+        datoMeldingVenterPaBruker: randomDate({past: true, withoutTimestamp: true})
     };
 };
 
@@ -334,7 +335,7 @@ const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
     const randomSisteEndring = randomEndring();
 
     return {
-        tidspunkt: randomDate({past: true}),
+        tidspunkt: randomDate({past: true, withoutTimestamp: true}),
         kategori: randomSisteEndring,
         aktivitetId: '12345'
     };
@@ -342,13 +343,28 @@ const lagSisteEndringAvBruker = (): SisteEndringAvBruker | null => {
 
 const lagAktiviteterAvtaltMedNav = (): AktiviteterAvtaltMedNav => {
     return {
-        nesteUtlopsdatoForAlleAktiviteter: randomDate({past: false}),
-        nesteUtlopsdatoForFiltrerteAktiviteter: randomDate({past: false}),
+        nesteUtlopsdatoForAlleAktiviteter: randomDate({past: false, withoutTimestamp: true}),
+        nesteUtlopsdatoForFiltrerteAktiviteter: randomDate({past: false, withoutTimestamp: true}),
         nyesteUtlopteAktivitet: null,
         aktivitetStart: null,
         nesteAktivitetStart: null,
         forrigeAktivitetStart: null
     };
+};
+
+const lagMoteMedNav = (): MoteMedNavIDag | null => {
+    const harMoteMedNavIDag = Math.random() < 0.3;
+    const klokkeslett = moment(randomDateInNearFuture(), 'YYYY-MM-DD HH:mm').format('HH:mm');
+    const varighetMinutter = randomMotevarighet();
+
+    if (harMoteMedNavIDag) {
+        return {
+            avtaltMedNav: Math.random() < 0.5,
+            klokkeslett: klokkeslett,
+            varighetMinutter: varighetMinutter
+        };
+    }
+    return null;
 };
 
 function lagBruker(): BrukerModell {
@@ -358,11 +374,6 @@ function lagBruker(): BrukerModell {
     const veilederId = maybeVeileder < veiledere.length ? veiledere[maybeVeileder].ident : null;
     const random_egenAnsatt = erSkjermet();
     const random_harSkjermetTil = erSkjermet();
-
-    const startTidDate = new Date();
-    const alleMoterStartTid = Math.random() > 0.5 ? startTidDate.toString() : null;
-    const alleMoterSluttTid =
-        alleMoterStartTid && new Date(startTidDate.getTime() + randomMotevarighet() * 60 * 1000).toString();
 
     return {
         guid: '',
@@ -380,7 +391,7 @@ function lagBruker(): BrukerModell {
         },
         barnUnder18AarData: hentBarnUnder18Aar(),
         oppfolgingStartdato: '',
-        tildeltTidspunkt: randomDate({past: true}),
+        tildeltTidspunkt: randomDate({past: true, withoutTimestamp: true}),
         veilederId: veilederId,
         egenAnsatt: random_egenAnsatt,
         skjermetTil: random_harSkjermetTil ? randomDateInNearFuture() : '',
@@ -388,11 +399,9 @@ function lagBruker(): BrukerModell {
         hendelse: lagHendelse(),
         meldingerVenterPaSvar: lagMeldingerVenterPaSvar(),
         aktiviteterAvtaltMedNav: lagAktiviteterAvtaltMedNav(),
-        moteStartTid: alleMoterStartTid,
-        alleMoterStartTid: alleMoterStartTid,
-        alleMoterSluttTid: alleMoterSluttTid,
+        moteMedNavIDag: lagMoteMedNav(),
         sisteEndringAvBruker: lagSisteEndringAvBruker(),
-        utdanningOgSituasjonSistEndret: randomDate({past: false}),
+        utdanningOgSituasjonSistEndret: randomDate({past: false, withoutTimestamp: true}),
         nesteSvarfristCvStillingFraNav: '2023-06-12',
         ytelser: lagYtelser(),
         vedtak14a: lagVedtak14a(),
@@ -626,8 +635,8 @@ const lagRandomOvergangsstonadForEnsligForsorger = (): EnsligeForsorgereOvergang
     return {
         vedtaksPeriodetype: hentRandomVedtaksperiodeType(),
         harAktivitetsplikt: hentRandomAktivitetsplikt(),
-        utlopsDato: new Date(randomDate({past: false})),
-        yngsteBarnsFodselsdato: new Date(randomDate({past: false}))
+        utlopsDato: new Date(randomDate({past: false, withoutTimestamp: true})),
+        yngsteBarnsFodselsdato: new Date(randomDate({past: false, withoutTimestamp: true}))
     };
 };
 

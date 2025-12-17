@@ -3,7 +3,12 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-export const MotestatusHeader = ({gjeldendeSorteringsfelt, valgteKolonner, rekkefolge, onClick}: HeaderCellProps) => (
+export const MoteIDagAvtaltHeader = ({
+    gjeldendeSorteringsfelt,
+    valgteKolonner,
+    rekkefolge,
+    onClick
+}: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.MOTE_ER_AVTALT)}
         sortering={Sorteringsfelt.MOTESTATUS}
