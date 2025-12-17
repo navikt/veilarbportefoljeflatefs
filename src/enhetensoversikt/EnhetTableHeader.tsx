@@ -33,7 +33,7 @@ import {VenterPaSvarFraNavHeader} from '../components/tabell/headerCells/VenterP
 import {VenterPaSvarFraBrukerHeader} from '../components/tabell/headerCells/VenterPaSvarFraBrukerHeader';
 import {UtlopteAktiviteterHeader} from '../components/tabell/headerCells/UtlopteAktiviteterHeader';
 import {AvtaltAktivitetNesteUtlopsdatoHeader} from '../components/tabell/headerCells/AvtaltAktivitetNesteUtlopsdatoHeader';
-import {ForstkommendeMoteIDagHeader} from '../components/tabell/headerCells/ForstkommendeMoteIDagHeader';
+import {ForstkommendeMoteHeader} from '../components/tabell/headerCells/ForstkommendeMoteHeader';
 import {MoteVarighetHeader} from '../components/tabell/headerCells/MoteVarighetHeader';
 import {MotestatusHeader} from '../components/tabell/headerCells/MotestatusHeader';
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
@@ -129,7 +129,7 @@ export function EnhetTableHeader() {
                     className="col col-xs-2"
                 />
 
-                <ForstkommendeMoteIDagHeader {...sorteringTilHeaderCell} />
+                <ForstkommendeMoteHeader {...sorteringTilHeaderCell} />
                 <MoteVarighetHeader {...sorteringTilHeaderCell} />
                 <MotestatusHeader {...sorteringTilHeaderCell} />
 

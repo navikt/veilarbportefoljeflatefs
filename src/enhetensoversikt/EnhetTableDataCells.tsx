@@ -25,7 +25,7 @@ import {TiltakshendelseLenkeData} from '../components/tabell/dataCells/Tiltakshe
 import {TiltakshendelseDatoOpprettetData} from '../components/tabell/dataCells/TiltakshendelseDatoOpprettetData';
 import {UtlopteAktiviteterData} from '../components/tabell/dataCells/UtlopteAktiviteterData';
 import {AvtaltAktivitetNesteUtlopsdatoData} from '../components/tabell/dataCells/AvtaltAktivitetNesteUtlopsdatoData';
-import {ForstkommendeMoteIDagData} from '../components/tabell/dataCells/ForstkommendeMoteIDagData';
+import {ForstkommendeMoteData} from '../components/tabell/dataCells/ForstkommendeMoteData';
 import {MoteVarighetData} from '../components/tabell/dataCells/MoteVarighetData';
 import {MotestatusData} from '../components/tabell/dataCells/MotestatusData';
 import {Utkast14aVedtaksstatusData} from '../components/tabell/dataCells/Utkast14aVedtaksstatusData';
@@ -123,7 +123,7 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
                 skalVises={valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
             />
 
-            <ForstkommendeMoteIDagData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <ForstkommendeMoteData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MotestatusData bruker={bruker} valgteKolonner={valgteKolonner} />
 
