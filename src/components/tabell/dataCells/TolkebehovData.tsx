@@ -13,29 +13,20 @@ export const TolkebehovData = ({bruker, valgteKolonner, filtervalg}: DataCellMed
 );
 
 function tolkebehovTekst(filtervalg: FiltervalgModell, bruker: BrukerModell) {
-    const behov: string[] = [];
+    const trengerTalespraktolk = harTalespraktolkBehov(bruker.tolkebehov, filtervalg);
+    const trengerTegnspraktolk = harTegnspraktolkBehov(bruker.tolkebehov, filtervalg);
 
-    if (trengerTalespraktolk(bruker.tolkebehov, filtervalg)) {
-        behov.push('Talespråktolk');
+    if (trengerTalespraktolk && trengerTegnspraktolk) {
+        return 'Talespråktolk, tegnspråktolk';
+    } else if (trengerTalespraktolk) {
+        return 'Talespråktolk';
+    } else if (trengerTegnspraktolk) {
+        return 'Tegnspråktolk';
     }
-
-    if (trengerTegnspraktolk(bruker.tolkebehov, filtervalg)) {
-        if (behov.length > 0) {
-            behov.push('tegnspråktolk');
-        } else {
-            behov.push('Tegnspråktolk');
-        }
-    }
-
-    // Teoretisk umogleg, brukarar utan behov bør ikkje dukke opp i resultatlista - Ingrid, 2025-12-16
-    if (behov.length === 0) {
-        return '-';
-    }
-
-    return behov.join(', ');
+    return '-';
 }
 
-function trengerTalespraktolk(tolkebehov: Tolkebehov, filtervalg: FiltervalgModell): boolean {
+function harTalespraktolkBehov(tolkebehov: Tolkebehov, filtervalg: FiltervalgModell): boolean {
     const filtrertPaTalespraktolkOgHarBehov =
         filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && tolkebehov.talespraaktolk.length > 0;
     const filtrertPaBrukersTalesprak = filtervalg.tolkBehovSpraak.includes(tolkebehov.talespraaktolk);
@@ -47,7 +38,7 @@ function trengerTalespraktolk(tolkebehov: Tolkebehov, filtervalg: FiltervalgMode
     return false;
 }
 
-function trengerTegnspraktolk(tolkebehov: Tolkebehov, filtervalg: FiltervalgModell) {
+function harTegnspraktolkBehov(tolkebehov: Tolkebehov, filtervalg: FiltervalgModell) {
     const filtrertPaTegnspraktolkOgHarBehov =
         filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && tolkebehov.tegnspraaktolk.length > 0;
     const filtrertPaBrukersTegnsprak = filtervalg.tolkBehovSpraak.includes(tolkebehov.tegnspraaktolk);
