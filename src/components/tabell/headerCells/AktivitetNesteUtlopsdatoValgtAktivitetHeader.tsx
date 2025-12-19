@@ -3,7 +3,8 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {SorteringHeader} from '../sortering-header';
 import {Sorteringsfelt} from '../../../typer/kolonnesortering';
 
-/** Denne høyrer til Aktivitet-filtera (ikkje statusfilteret "i avtalt aktivitet) */
+/** Viser neste utløpsdato for aktivitetane som er valgt i Aktivitet-filtera
+ * (Den heng med andre ord ikkje saman med statusfilteret "i avtalt aktivitet) */
 export const AktivitetNesteUtlopsdatoValgtAktivitetHeader = ({
     gjeldendeSorteringsfelt,
     valgteKolonner,

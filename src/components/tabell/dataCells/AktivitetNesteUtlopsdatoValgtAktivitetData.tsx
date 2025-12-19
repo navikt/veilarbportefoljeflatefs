@@ -2,7 +2,8 @@ import {Kolonne} from '../../../ducks/ui/listevisning';
 import {DataCellProps} from './DataCellProps';
 import {DatoDataCellType} from '../dataCellTypes/DatoDataCellType';
 
-/** Denne høyrer til Aktivitet-filtera (ikkje statusfilteret "i avtalt aktivitet) */
+/** Viser neste utløpsdato for aktivitetane som er valgt i Aktivitet-filtera
+ * (Den heng med andre ord ikkje saman med statusfilteret "i avtalt aktivitet) */
 export const AktivitetNesteUtlopsdatoValgtAktivitetData = ({bruker, valgteKolonner}: DataCellProps) => (
     <DatoDataCellType
         className="col col-xs-2"
