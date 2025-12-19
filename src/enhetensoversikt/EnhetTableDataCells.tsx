@@ -1,6 +1,5 @@
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
-import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellType';
 import {Kolonne} from '../ducks/ui/listevisning';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
@@ -51,10 +50,11 @@ import {AapArenaVedtaksperiodeData} from '../components/tabell/dataCells/AapAren
 import {AapArenaRettighetsperiodeData} from '../components/tabell/dataCells/AapArenaRettighetsperiodeData';
 import {TiltakspengerArenaGjenstaendeUkerVedtakData} from '../components/tabell/dataCells/TiltakspengerArenaGjenstaendeUkerVedtakData';
 import {DagpengerArenaGjenstaendeUkerRettighetData} from '../components/tabell/dataCells/DagpengerArenaGjenstaendeUkerRettighetData';
-import './enhetensoversikt.css';
-import './brukerliste.css';
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';
+import {AktivitetNesteUtlopsdatoValgtAktivitetData} from '../components/tabell/dataCells/AktivitetNesteUtlopsdatoValgtAktivitetData';
+import './enhetensoversikt.css';
+import './brukerliste.css';
 
 interface Props {
     className?: string;
@@ -113,15 +113,7 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
             <UtlopteAktiviteterData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AvtaltAktivitetNesteUtlopsdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoDataCellType
-                className="col col-xs-2"
-                dato={
-                    bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter
-                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter)
-                        : null
-                }
-                skalVises={valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-            />
+            <AktivitetNesteUtlopsdatoValgtAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <MoteIDagKlokkeslettData bruker={bruker} valgteKolonner={valgteKolonner} />
             <MoteIDagVarighetData bruker={bruker} valgteKolonner={valgteKolonner} />
