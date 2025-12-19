@@ -58,6 +58,7 @@ import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/Aap
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
+import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
 import './minoversikt.css';
 
 export function MinoversiktTableHeader() {
@@ -131,16 +132,8 @@ export function MinoversiktTableHeader() {
                 <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeaderCell} />
                 <Utkast14aAnsvarligVeilederHeader {...sorteringTilHeaderCell} />
 
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-                    sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
-                    erValgt={sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Neste utløpsdato valgt aktivitet"
-                    title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
+                <AktivitetNesteUtlopsdatoValgtAktivitetHeader {...sorteringTilHeaderCell} />
+
                 <SorteringHeader
                     skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
                     sortering={Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}

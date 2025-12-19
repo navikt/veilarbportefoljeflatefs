@@ -52,9 +52,10 @@ import {AapArenaVedtaksperiodeData} from '../components/tabell/dataCells/AapAren
 import {AapArenaRettighetsperiodeData} from '../components/tabell/dataCells/AapArenaRettighetsperiodeData';
 import {TiltakspengerArenaGjenstaendeUkerVedtakData} from '../components/tabell/dataCells/TiltakspengerArenaGjenstaendeUkerVedtakData';
 import {DagpengerArenaGjenstaendeUkerRettighetData} from '../components/tabell/dataCells/DagpengerArenaGjenstaendeUkerRettighetData';
-import './minoversikt.css';
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';
+import {AktivitetNesteUtlopsdatoValgtAktivitetData} from '../components/tabell/dataCells/AktivitetNesteUtlopsdatoValgtAktivitetData';
+import './minoversikt.css';
 
 interface Props {
     bruker: BrukerModell;
@@ -117,15 +118,8 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <Utkast14aVedtaksstatusEndretData bruker={bruker} valgteKolonner={valgteKolonner} />
             <Utkast14aAnsvarligVeilederData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoDataCellType
-                className="col col-xs-2"
-                dato={
-                    bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter
-                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteUtlopsdatoForFiltrerteAktiviteter)
-                        : null
-                }
-                skalVises={valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-            />
+            <AktivitetNesteUtlopsdatoValgtAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
+
             <DatoDataCellType
                 className="col col-xs-2"
                 dato={
