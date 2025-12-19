@@ -459,14 +459,6 @@ const hentBostedBydel = () => {
     return '';
 };
 
-/**
- * Lager tilfeldig tolkebehov for testbruker. Alternativa er:
- * - "både tegn- og talespråktolk"
- * - "bare tegnspråktolk"
- * - "bare talespråktolk"
- * - "ingen tolkebehov"
- * Det er like stor sannsynlighet for hvert av de fire alternativene.
- * */
 const lagTolbebehov = (): Tolkebehov => {
     const skalHaTolkebehov = Math.round(Math.random() * 4);
     if (skalHaTolkebehov < 1) {
