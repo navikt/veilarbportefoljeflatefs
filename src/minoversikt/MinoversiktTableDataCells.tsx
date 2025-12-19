@@ -1,6 +1,5 @@
 import {NavnData} from '../components/tabell/dataCells/NavnData';
 import {FnrData} from '../components/tabell/dataCells/FnrData';
-import {DatoDataCellType} from '../components/tabell/dataCellTypes/DatoDataCellType';
 import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {Kolonne} from '../ducks/ui/listevisning';
@@ -55,6 +54,9 @@ import {DagpengerArenaGjenstaendeUkerRettighetData} from '../components/tabell/d
 import {TiltakspengerVedtakTilOgMedDatoData} from '../components/tabell/dataCells/TiltakspengerVedtakTilOgMedDatoData';
 import {TiltakspengerRettighetData} from '../components/tabell/dataCells/TiltakspengerRettighetData';
 import {AktivitetNesteUtlopsdatoValgtAktivitetData} from '../components/tabell/dataCells/AktivitetNesteUtlopsdatoValgtAktivitetData';
+import {AvtaltAktivitetStartdatoAktivitetData} from '../components/tabell/dataCells/min-oversikt/AvtaltAktivitetStartdatoAktivitetData';
+import {AvtaltAktivitetNesteStartdatoAktivitetData} from '../components/tabell/dataCells/min-oversikt/AvtaltAktivitetNesteStartdatoAktivitetData';
+import {AvtaltAktivitetForrigeStartdatoAktivitetData} from '../components/tabell/dataCells/min-oversikt/AvtaltAktivitetForrigeStartdatoAktivitetData';
 import './minoversikt.css';
 
 interface Props {
@@ -120,33 +122,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <AktivitetNesteUtlopsdatoValgtAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DatoDataCellType
-                className="col col-xs-2"
-                dato={
-                    bruker.aktiviteterAvtaltMedNav.aktivitetStart
-                        ? new Date(bruker.aktiviteterAvtaltMedNav.aktivitetStart)
-                        : null
-                }
-                skalVises={valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
-            />
-            <DatoDataCellType
-                className="col col-xs-2"
-                dato={
-                    bruker.aktiviteterAvtaltMedNav.nesteAktivitetStart
-                        ? new Date(bruker.aktiviteterAvtaltMedNav.nesteAktivitetStart)
-                        : null
-                }
-                skalVises={valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
-            />
-            <DatoDataCellType
-                className="col col-xs-2"
-                dato={
-                    bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart
-                        ? new Date(bruker.aktiviteterAvtaltMedNav.forrigeAktivitetStart)
-                        : null
-                }
-                skalVises={valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
-            />
+            <AvtaltAktivitetStartdatoAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitetNesteStartdatoAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <AvtaltAktivitetForrigeStartdatoAktivitetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <SisteEndringData bruker={bruker} enhetId={enhetId} valgteKolonner={valgteKolonner} />
             <SisteEndringDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
