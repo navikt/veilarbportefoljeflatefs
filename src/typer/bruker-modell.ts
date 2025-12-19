@@ -197,7 +197,7 @@ export interface HendelseInnhold {
     lenke: string;
 }
 
-interface Tolkebehov {
+export interface Tolkebehov {
     talespraaktolk: string;
     tegnspraaktolk: string;
     sistOppdatert: string | null; // LocalDate i backend

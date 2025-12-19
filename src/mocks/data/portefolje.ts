@@ -22,6 +22,7 @@ import {
     Statsborgerskap,
     TiltakshendelseModell,
     TiltakspengerData,
+    Tolkebehov,
     Utkast14a,
     Vedtak14a,
     Ytelser,
@@ -384,11 +385,7 @@ function lagBruker(): BrukerModell {
         hovedStatsborgerskap: lagHovedstatsborgerskap(),
         foedeland: hentLand(),
         geografiskBosted: lagGeografiskBosted(),
-        tolkebehov: {
-            talespraaktolk: hentSpraak(),
-            tegnspraaktolk: hentSpraak(),
-            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
-        },
+        tolkebehov: lagTolbebehov(),
         barnUnder18AarData: hentBarnUnder18Aar(),
         oppfolgingStartdato: '',
         tildeltTidspunkt: randomDate({past: true, withoutTimestamp: true}),
@@ -462,17 +459,44 @@ const hentBostedBydel = () => {
     return '';
 };
 
-const hentSpraak = () => {
-    const spraakListe = ['AR', 'NB', 'ES', 'UK'];
-
-    let randomArray = new Int8Array(2);
-    window.crypto.getRandomValues(randomArray);
-
-    if (randomArray[0] % 3 === 0) {
-        return spraakListe[Math.abs(randomArray[1] % spraakListe.length)];
+const lagTolbebehov = (): Tolkebehov => {
+    const skalHaTolkebehov = Math.round(Math.random() * 4);
+    if (skalHaTolkebehov < 1) {
+        // Bare talespråktolk
+        return {
+            talespraaktolk: tilfeldigSprak(),
+            tegnspraaktolk: '',
+            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        };
+    } else if (skalHaTolkebehov < 2) {
+        // Bare tegnspråktolk
+        return {
+            talespraaktolk: '',
+            tegnspraaktolk: tilfeldigSprak(),
+            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        };
+    } else if (skalHaTolkebehov < 3) {
+        // Både tegn- og talespråktolk
+        return {
+            talespraaktolk: tilfeldigSprak(),
+            tegnspraaktolk: tilfeldigSprak(),
+            sistOppdatert: randomDate({past: true, withoutTimestamp: true})
+        };
+    } else {
+        // Ingen tolkebehov
+        return {
+            talespraaktolk: '',
+            tegnspraaktolk: '',
+            sistOppdatert: null
+        };
     }
+};
 
-    return '';
+const tilfeldigSprak = () => {
+    const spraakListe = ['AR', 'NB', 'ES', 'UK'];
+    const randomIndeks = Math.floor(Math.random() * spraakListe.length);
+
+    return spraakListe[randomIndeks];
 };
 
 const hentBarnUnder18Aar = (): BarnUnder18AarModell[] => {

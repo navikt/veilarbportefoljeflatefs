@@ -34,33 +34,6 @@ export function ytelsestypetekst(brukerytelse: string) {
     } else return '-';
 }
 
-export function tolkBehov(filtervalg: FiltervalgModell, bruker: BrukerModell) {
-    const behov: string[] = [];
-    if (
-        (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && bruker.tolkebehov.talespraaktolk.length > 0) ||
-        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.talespraaktolk)
-    ) {
-        behov.push('Talespråktolk');
-    }
-
-    if (
-        (filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK') && bruker.tolkebehov.tegnspraaktolk.length > 0) ||
-        filtervalg.tolkBehovSpraak.includes(bruker.tolkebehov.tegnspraaktolk)
-    ) {
-        if (behov.length > 0) {
-            behov.push('tegnspråktolk');
-        } else {
-            behov.push('Tegnspråktolk');
-        }
-    }
-
-    if (behov.length === 0) {
-        return '-';
-    }
-
-    return behov.join(', ');
-}
-
 function leggTilSpraakInfo(filtervalg: FiltervalgModell) {
     return (
         (filtervalg.tolkebehov.includes('TALESPRAAKTOLK') && filtervalg.tolkebehov.includes('TEGNSPRAAKTOLK')) ||
