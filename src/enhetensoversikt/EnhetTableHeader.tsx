@@ -1,5 +1,4 @@
-import {SorteringHeader} from '../components/tabell/sortering-header';
-import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -41,7 +40,6 @@ import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCel
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
 import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
-import {Sorteringsfelt} from '../typer/kolonnesortering';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
 import {AapKelvinRettighetHeader} from '../components/tabell/headerCells/AapKelvinRettighetHeader';
 import {TildeltTidspunktHeader} from '../components/tabell/headerCells/TildeltTidspunktHeader';
@@ -55,6 +53,7 @@ import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/Aap
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
+import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 
@@ -118,16 +117,7 @@ export function EnhetTableHeader() {
                 <UtlopteAktiviteterHeader {...sorteringTilHeaderCell} />
                 <AvtaltAktivitetNesteUtlopsdatoHeader {...sorteringTilHeaderCell} />
 
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-                    sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
-                    erValgt={sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Neste utløpsdato valgt aktivitet"
-                    title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
+                <AktivitetNesteUtlopsdatoValgtAktivitetHeader {...sorteringTilHeaderCell} />
 
                 <MoteIDagKlokkeslettHeader {...sorteringTilHeaderCell} />
                 <MoteIDagVarighetHeader {...sorteringTilHeaderCell} />

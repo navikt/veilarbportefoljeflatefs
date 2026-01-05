@@ -1,6 +1,4 @@
-import {SorteringHeader} from '../components/tabell/sortering-header';
-import {Sorteringsfelt} from '../typer/kolonnesortering';
-import {Kolonne, OversiktType} from '../ducks/ui/listevisning';
+import {OversiktType} from '../ducks/ui/listevisning';
 import VelgalleCheckboks from '../components/toolbar/velgalle-checkboks';
 import {NavnHeader} from '../components/tabell/headerCells/NavnHeader';
 import {FnrHeader} from '../components/tabell/headerCells/FnrHeader';
@@ -58,6 +56,10 @@ import {AapArenaVedtaksperiodeHeader} from '../components/tabell/headerCells/Aap
 import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/AapArenaRettighetsperiodeHeader';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
+import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
+import {AvtaltAktivitetStartdatoAktivitetHeader} from '../components/tabell/headerCells/min-oversikt/AvtaltAktivitetStartdatoAktivitetHeader';
+import {AvtaltAktivitetNesteStartdatoAktivitetHeader} from '../components/tabell/headerCells/min-oversikt/AvtaltAktivitetNesteStartdatoAktivitetHeader';
+import {AvtaltAktivitetForrigeStartdatoAktivitetHeader} from '../components/tabell/headerCells/min-oversikt/AvtaltAktivitetForrigeStartdatoAktivitetHeader';
 import './minoversikt.css';
 
 export function MinoversiktTableHeader() {
@@ -131,54 +133,11 @@ export function MinoversiktTableHeader() {
                 <Utkast14aVedtaksstatusEndretHeader {...sorteringTilHeaderCell} />
                 <Utkast14aAnsvarligVeilederHeader {...sorteringTilHeaderCell} />
 
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.UTLOP_AKTIVITET)}
-                    sortering={Sorteringsfelt.VALGTE_AKTIVITETER}
-                    erValgt={sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.VALGTE_AKTIVITETER}
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Neste utløpsdato valgt aktivitet"
-                    title='Neste utløpsdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.START_DATO_AKTIVITET)}
-                    sortering={Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={
-                        sorteringTilHeaderCell.gjeldendeSorteringsfelt === Sorteringsfelt.STARTDATO_FOR_AVTALT_AKTIVITET
-                    }
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Startdato aktivitet"
-                    title='Startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.NESTE_START_DATO_AKTIVITET)}
-                    sortering={Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={
-                        sorteringTilHeaderCell.gjeldendeSorteringsfelt ===
-                        Sorteringsfelt.NESTE_STARTDATO_FOR_AVTALT_AKTIVITET
-                    }
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Neste startdato aktivitet"
-                    title='Neste startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
-                <SorteringHeader
-                    skalVises={sorteringTilHeaderCell.valgteKolonner.includes(Kolonne.FORRIGE_START_DATO_AKTIVITET)}
-                    sortering={Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET}
-                    erValgt={
-                        sorteringTilHeaderCell.gjeldendeSorteringsfelt ===
-                        Sorteringsfelt.FORRIGE_DATO_FOR_AVTALT_AKTIVITET
-                    }
-                    rekkefolge={sorteringTilHeaderCell.rekkefolge}
-                    onClick={sorteringTilHeaderCell.onClick}
-                    tekst="Passert startdato aktivitet"
-                    title='Passert startdato på avtalt aktivitet under "Planlegger" eller "Gjennomfører"'
-                    className="col col-xs-2"
-                />
+                <AktivitetNesteUtlopsdatoValgtAktivitetHeader {...sorteringTilHeaderCell} />
+
+                <AvtaltAktivitetStartdatoAktivitetHeader {...sorteringTilHeaderCell} />
+                <AvtaltAktivitetNesteStartdatoAktivitetHeader {...sorteringTilHeaderCell} />
+                <AvtaltAktivitetForrigeStartdatoAktivitetHeader {...sorteringTilHeaderCell} />
 
                 <SisteEndringHeader {...sorteringTilHeaderCell} />
                 <SisteEndringDatoHeader {...sorteringTilHeaderCell} />
