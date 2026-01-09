@@ -1,7 +1,7 @@
 import {createRoot} from 'react-dom/client';
-// import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
+import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
-import {DeploymentEnvironment} from './utils/url-utils';
+import {DeploymentEnvironment, EnvType, getEnv} from './utils/url-utils';
 import env from './utils/environment';
 import '@navikt/ds-css';
 import './style.css';
@@ -44,35 +44,36 @@ if (env.isDemo) {
     renderApp();
 }
 
-function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
-    switch (env) {
-        case 'production':
+function hentMetrikkEndepunkt() {
+    switch (getEnv().type) {
+        case EnvType.prod:
             return 'https://telemetry.nav.no/collect';
-        case 'development':
+        case EnvType.dev:
             return 'https://telemetry.ekstern.dev.nav.no/collect';
-        case 'local':
+        case EnvType.local:
             return 'http://localhost:12347/collect';
         default:
             return null;
     }
 }
 
-// function settOppCoreWebVitalsMetrikkRapportering() {
-//     const metrikkEndepunkt = hentMetrikkEndepunkt(process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment);
+function settOppCoreWebVitalsMetrikkRapportering() {
+    // TODO: Erstatt med autoinjisert variabel: https://doc.nav.cloud.nais.io/observability/frontend/#auto-configuration
+    const metrikkEndepunkt = hentMetrikkEndepunkt();
 
-//     if (metrikkEndepunkt) {
-//         initializeFaro({
-//             instrumentations: [new WebVitalsInstrumentation()],
-//             url: metrikkEndepunkt,
-//             app: {name: 'veilarbportefoljeflatefs', version: '0.0.1'}
-//         });
-//     } else {
-//         // eslint-disable-next-line no-console
-//         console.warn(
-//             'Klarte ikke å hente metrikkendepunkt, initialiserer ikke Core Web Vitals metrikk rapportering. Dersom du kjører appen lokalt og ønsker å teste mot tracing-demo bruk heller "npm run start:metrics".'
-//         );
-//     }
-// }
+    if (metrikkEndepunkt) {
+        initializeFaro({
+            instrumentations: [new WebVitalsInstrumentation()],
+            url: metrikkEndepunkt,
+            app: {name: 'veilarbportefoljeflatefs', version: '0.0.1'}
+        });
+    } else {
+        // eslint-disable-next-line no-console
+        console.warn(
+            'Klarte ikke å hente metrikkendepunkt, initialiserer ikke Core Web Vitals metrikk rapportering. Dersom du kjører appen lokalt og ønsker å teste mot tracing-demo bruk heller "npm run start:metrics".'
+        );
+    }
+}
 
 // Ved treghet/problemer relatert til rapportering av web vitals metrikker: fjern denne linjen og deploy på nytt
 //settOppCoreWebVitalsMetrikkRapportering();
