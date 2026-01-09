@@ -9,6 +9,7 @@ import {
     fargekategorier,
     filterKonstanter,
     hendelserEtikett,
+    hendelserLabels,
     registreringstypeEtiketter,
     tiltakspengerFilter,
     TiltakspengerFilter,
@@ -90,15 +91,16 @@ export const LagLabelForFiltervalg = ({
             });
         }
         case Filtervalg.sisteEndringKategori: {
-            return valgteFilteralternativer.map(valgtAlternativ => {
-                return (
+            if (valgteFilteralternativer && hendelserLabels[valgteFilteralternativer]) {
+                return [
                     <FiltreringLabel
-                        key={`hendelser-${valgtAlternativ}`}
-                        label={hendelserEtikett[valgtAlternativ]}
-                        slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                        key={`hendelser-${valgteFilteralternativer}`}
+                        label={hendelserLabels[valgteFilteralternativer]}
+                        slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
                     />
-                );
-            });
+                ];
+            }
+            break;
         }
         case Filtervalg.fodselsdagIMnd: {
             return valgteFilteralternativer.map(valgtAlternativ => {
