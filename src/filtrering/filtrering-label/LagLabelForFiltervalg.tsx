@@ -95,7 +95,7 @@ export const LagLabelForFiltervalg = ({
                 return [
                     <FiltreringLabel
                         key={`hendelser-${valgteFilteralternativer}`}
-                        label={hendelserLabels[valgteFilteralternativer]}
+                        label={hendelserEtikett[valgteFilteralternativer]}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, null)}
                     />
                 ];

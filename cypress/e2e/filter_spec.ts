@@ -111,7 +111,7 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori').click();
 
         // Vel "Jobb jeg har nå"
-        cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
+        cy.getByTestId('lagtTilAvBruker_jobb-jeg-har-na').check({force: true});
 
         // Sjekk at vi får rett tal kolonner. Dei to siste skal vere "Siste endring" og "Dato siste endring"
         cy.getByTestId('brukerliste_innhold').children().as('kolonneoverskrifter')
@@ -134,7 +134,7 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_velg-kolonner').contains('Velg kolonner').click({force: true});
 
         // Nullstill filtertags
-        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])} `).should('exist').click();
+        cy.getByTestId(`filtreringlabel_${kebabUtenSpesialtegn(hendelserEtikett["NY_IJOBB"])}`).should('exist').click();
     });
 
     it('Hendelser-filterform - Min oversikt', () => {
@@ -146,7 +146,7 @@ describe('Filter', () => {
         cy.getByTestId('dropdown-knapp_sisteEndringKategori').contains('Siste endring av bruker').click();
 
         // Vel "Jobb jeg har nå" og "Uleste endringer"
-        cy.checkbox('lagtTilAvBruker_jobb-jeg-har-na');
+        cy.getByTestId('lagtTilAvBruker_jobb-jeg-har-na').check({force: true});
         cy.checkbox('filter_uleste-endringer');
 
         // Sjå at filtertags dukkar opp
