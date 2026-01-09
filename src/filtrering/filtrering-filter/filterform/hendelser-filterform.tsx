@@ -23,7 +23,7 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const [hendelserValg, setHendelserValg] = useState<string | null>('');
+    const [hendelserValg, setHendelserValg] = useState<string | null>(null);
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
@@ -33,9 +33,9 @@ export function HendelserFilterform({
 
     useEffect(() => {
         if (filtervalg[form]) {
-            setHendelserValg(filtervalg[form][0]);
+            setHendelserValg(filtervalg[form]);
         } else {
-            setHendelserValg('');
+            setHendelserValg(null);
         }
     }, [filtervalg, hendelserValg, form]);
 

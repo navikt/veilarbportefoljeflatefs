@@ -107,8 +107,6 @@ export function EnhetSide() {
         document.title = 'Enhetens oversikt';
     }, []);
 
-    // eslint-disable-next-line no-console
-    console.log('SANITY CHECKKKKKKKKKK');
     useSetStateFromUrl();
     useSyncStateMedUrl();
 
