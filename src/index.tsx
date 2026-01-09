@@ -1,7 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
-import {DeploymentEnvironment, EnvType, getEnv} from './utils/url-utils';
+import {EnvType, getEnv} from './utils/url-utils';
 import env from './utils/environment';
 import '@navikt/ds-css';
 import './style.css';
