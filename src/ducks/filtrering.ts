@@ -44,7 +44,7 @@ export const initialState: FiltervalgModell = {
     utdanning: [],
     utdanningGodkjent: [],
     utdanningBestatt: [],
-    sisteEndringKategori: [],
+    sisteEndringKategori: null,
     ulesteEndringer: null,
     tolkebehov: [],
     tolkBehovSpraak: [],

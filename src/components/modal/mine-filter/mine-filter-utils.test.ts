@@ -67,7 +67,7 @@ describe('Mine filter utils', () => {
                 registreringstype: [],
                 rettighetsgruppe: [],
                 servicegruppe: [],
-                sisteEndringKategori: [],
+                sisteEndringKategori: null,
                 stillingFraNavFilter: [],
                 tiltakstyper: [],
                 tolkBehovSpraak: [],
