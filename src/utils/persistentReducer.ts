@@ -43,12 +43,14 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState) {
     if (!content || content === 'undefined') {
         return true;
     }
-    const keysFromStorage = Object.keys(JSON.parse(content));
+    const stored = JSON.parse(content);
+    const keysFromStorage = Object.keys(stored);
     const keysFromInitialState = Object.keys(initialState);
 
     return !(
         keysFromStorage.length === keysFromInitialState.length &&
-        keysFromStorage.every(key => keysFromInitialState.includes(key))
+        keysFromStorage.every(key => keysFromInitialState.includes(key)) &&
+        keysFromStorage.every(key => typeof stored[key] === typeof initialState[key])
     );
 }
 
