@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {Checkbox, CheckboxGroup, HelpText, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
@@ -10,7 +10,7 @@ import './filterform.css';
 
 interface HendelserFilterformProps {
     form: string;
-    endreFiltervalg: (form: string, filterVerdi: string[]) => void;
+    endreFiltervalg: (form: string, filterVerdi: ReactNode) => void;
     endreCheckboxFiltervalg: (form: string, filterVerdi: OrNothing<string>) => void;
     filtervalg: FiltervalgModell;
     oversiktType: OversiktType;
@@ -23,19 +23,19 @@ export function HendelserFilterform({
     endreCheckboxFiltervalg,
     oversiktType
 }: HendelserFilterformProps) {
-    const [hendelserValg, setHendelserValg] = useState<string | null>('');
+    const [hendelserValg, setHendelserValg] = useState<string | null>(null);
     const [checkboxValg, setCheckboxValg] = useState<string | null>(null);
 
     const nullstillValg = () => {
-        endreFiltervalg(form, []);
+        endreFiltervalg(form, null);
         endreCheckboxFiltervalg(Filtervalg.ulesteEndringer, null);
     };
 
     useEffect(() => {
         if (filtervalg[form]) {
-            setHendelserValg(filtervalg[form][0]);
+            setHendelserValg(filtervalg[form]);
         } else {
-            setHendelserValg('');
+            setHendelserValg(null);
         }
     }, [filtervalg, hendelserValg, form]);
 
@@ -45,7 +45,7 @@ export function HendelserFilterform({
 
     const onRadioChange = e => {
         e.persist();
-        endreFiltervalg(form, [e.target.value]);
+        endreFiltervalg(form, e.target.value);
     };
 
     const onCheckboxChange = e => {

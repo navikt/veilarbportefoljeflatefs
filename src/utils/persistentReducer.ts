@@ -38,18 +38,41 @@ function write(scope: LocalStorageScope, content: any) {
     return localStorage.setItem(scope, JSON.stringify(content));
 }
 
-function erFiltreringEndret(scope: LocalStorageScope, initialState) {
+function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return true;
     }
-    const keysFromStorage = Object.keys(JSON.parse(content));
+
+    const stored = JSON.parse(content);
+    const keysFromStorage = Object.keys(stored);
     const keysFromInitialState = Object.keys(initialState);
 
-    return !(
-        keysFromStorage.length === keysFromInitialState.length &&
-        keysFromStorage.every(key => keysFromInitialState.includes(key))
-    );
+    if (keysFromStorage.length !== keysFromInitialState.length) {
+        return true;
+    }
+
+    if (!keysFromStorage.every(key => keysFromInitialState.includes(key))) {
+        return true;
+    }
+
+    // Sjekk at typene stemmer overens
+    for (const key of keysFromInitialState) {
+        const expected = initialState[key];
+        const actual = stored[key];
+
+        if (Array.isArray(expected)) {
+            if (!Array.isArray(actual)) return true;
+        } else if (expected === null) {
+            if (actual !== null && actual !== undefined && typeof actual !== 'string') {
+                return true;
+            }
+        } else if (typeof expected !== typeof actual) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /**

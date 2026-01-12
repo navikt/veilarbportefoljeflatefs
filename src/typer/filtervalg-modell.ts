@@ -92,7 +92,7 @@ export interface FiltervalgModell {
     [Filtervalg.utdanning]: string[];
     [Filtervalg.utdanningGodkjent]: string[];
     [Filtervalg.utdanningBestatt]: string[];
-    [Filtervalg.sisteEndringKategori]: string[];
+    [Filtervalg.sisteEndringKategori]: null | string;
     [Filtervalg.ulesteEndringer]: null | string;
     [Filtervalg.tolkebehov]: string[];
     [Filtervalg.tolkBehovSpraak]: string[];
