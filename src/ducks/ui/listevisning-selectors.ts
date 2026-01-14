@@ -72,7 +72,8 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
     const filtrertPaGeografiskBosted =
         filtervalg.geografiskBosted.length > 0 || filtervalg.visGeografiskBosted.length > 0;
 
-    const filtrertPaSisteEndringKategori = filtervalg.sisteEndringKategori != null;
+    const filtrertPaSisteEndringKategori =
+        filtervalg.sisteEndringKategori != null && filtervalg.sisteEndringKategori !== '';
 
     const filtrertPaMoterIDag = filtervalg.ferdigfilterListe.includes(MOTER_IDAG);
 
