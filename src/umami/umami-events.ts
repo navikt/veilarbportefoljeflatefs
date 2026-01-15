@@ -3,7 +3,7 @@ export enum UmamiEvents {
     filtervalg = 'filtervalg',
     alertvist = 'alert vist',
     knappklikket = 'knapp klikket',
-    lenkeklikket = 'lenke klikket'
+    lenkeklikket = 'lenke klikket ny'
 }
 
 export type LenkeKlikketEvent = {
