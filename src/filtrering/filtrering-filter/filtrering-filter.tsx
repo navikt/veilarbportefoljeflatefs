@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {Alert, Label} from '@navikt/ds-react';
+import {Alert, Label, Link} from '@navikt/ds-react';
 import {
     aapIArenaFilter,
     aapIKelvinFilter,
@@ -29,7 +29,6 @@ import {Dropdown} from '../../components/dropdown/dropdown';
 import {FodselsdatoFilterform} from './filterform/fodselsdato-filterform';
 import {AlderFilterform} from './filterform/alder-filterform';
 import {RadioFilterform} from './filterform/radio-filterform';
-import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {AktivitetFilterformController} from './filterform/aktiviteter-filterform/aktivitet-filterform-controller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
@@ -41,6 +40,8 @@ import {CheckboxFilterform} from './filterform/checkbox-filterform';
 import '../../components/sidebar/sidebar.css';
 import '../filtrering-skjema.css';
 import './filterform/filterform.css';
+import {HendelserFilterform} from './filterform/hendelser-filterform';
+import {ExternalLinkIcon} from '@navikt/aksel-icons';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -119,7 +120,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                 <Dropdown
                     name="Tolkebehov"
                     id="tolkebehov"
-                    render={() => <TolkebehovFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />}
+                    render={() => (
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                <Link
+                                    target="_blank"
+                                    href={
+                                        'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-oppflging-spesifikke-mlgrupper/SitePages/Språktolk.aspx'
+                                    }
+                                >
+                                    Bruk av språktolk i Nav.
+                                    <ExternalLinkIcon title="Åpner lenke i ny fane" fontSize="1.2em" />
+                                </Link>
+                            </Alert>
+                            <TolkebehovFilterform filtervalg={filtervalg} endreFiltervalg={endreFiltervalg} />
+                        </>
+                    )}
                 />
             </div>
             <div className="filtrering-filter__kolonne">
