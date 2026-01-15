@@ -2,8 +2,13 @@
 export enum UmamiEvents {
     filtervalg = 'filtervalg',
     alertvist = 'alert vist',
-    knappklikket = 'knapp klikket'
+    knappklikket = 'knapp klikket',
+    lenkeklikket = 'lenke klikket'
 }
+
+export type LenkeKlikketEvent = {
+    lenketekst: string;
+};
 
 export type KnappKlikketEvent = {
     knappetekst: string;
@@ -55,5 +60,16 @@ export const trackKnappKlikketEvent = ({knappetekst, effekt}: KnappKlikketEvent)
     globalThis.umami.track(UmamiEvents.knappklikket, {
         knappetekst: knappetekst,
         effekt: effekt
+    });
+};
+
+export const trackLenkeKlikketEvent = ({lenketekst}: LenkeKlikketEvent) => {
+    if (!globalThis.umami) {
+        // eslint-disable-next-line no-console
+        console.warn('Umami is not initialized. Ignoring');
+        return;
+    }
+    globalThis.umami.track(UmamiEvents.lenkeklikket, {
+        lenketekst: lenketekst
     });
 };

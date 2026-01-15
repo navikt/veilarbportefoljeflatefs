@@ -42,6 +42,7 @@ import '../filtrering-skjema.css';
 import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
+import {trackLenkeKlikketEvent} from '../../umami/umami-events';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -127,6 +128,11 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                     target="_blank"
                                     href={
                                         'https://navno.sharepoint.com/sites/fag-og-ytelser-arbeid-oppflging-spesifikke-mlgrupper/SitePages/Språktolk.aspx'
+                                    }
+                                    onClick={() =>
+                                        trackLenkeKlikketEvent({
+                                            lenketekst: 'Bruk av språktolk i Nav'
+                                        })
                                     }
                                 >
                                     Bruk av språktolk i Nav.
