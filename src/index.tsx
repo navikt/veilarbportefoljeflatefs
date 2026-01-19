@@ -1,14 +1,11 @@
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import {initializeFaro, WebVitalsInstrumentation} from '@grafana/faro-web-sdk';
 import Application from './application';
-import {DeploymentEnvironment, erMock} from './utils/url-utils';
+import {EnvType, getEnv} from './utils/url-utils';
+import env from './utils/environment';
 import '@navikt/ds-css';
 import './style.css';
 import {leggTilUmamiScript} from './umami/umami';
-
-if (!(window as any)._babelPolyfill) {
-    require('babel-polyfill');
-}
 
 if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.setItem('filterVersjon', 'v1');
@@ -16,9 +13,9 @@ if (window.localStorage.getItem('filterVersjon') !== 'v1') {
     localStorage.removeItem('enhetsState');
 }
 
-const renderApp = () => ReactDOM.render(<Application />, document.getElementById('mainapp'));
+const renderApp = () => createRoot(document.getElementById('mainapp') as HTMLElement).render(<Application />);
 
-if (erMock()) {
+if (env.isDemo) {
     // eslint-disable-next-line no-console
     console.log('==========================');
     // eslint-disable-next-line no-console
@@ -26,38 +23,49 @@ if (erMock()) {
     // eslint-disable-next-line no-console
     console.log('==========================');
 
-    const {worker} = require('./mocks/index');
-    worker.start({serviceWorker: {url: process.env.PUBLIC_URL + '/mockServiceWorker.js'}}).then(() => renderApp());
+    import('./mocks/index').then(({worker}) =>
+        worker
+            .start({
+                serviceWorker: {url: `${import.meta.env.BASE_URL}mockServiceWorker.js`},
+                onUnhandledRequest(req, print) {
+                    if (req.url.startsWith('wss://modiacontextholder.intern.dev.nav.no/ws')) {
+                        return; // ignore websocket handshake warnings
+                    }
+                    print.warning();
+                }
+            })
+            .then(() => renderApp())
+            .catch((e: Error) => {
+                console.error('MSW - failed to start', e);
+            })
+    );
 } else {
     leggTilUmamiScript();
     renderApp();
 }
 
-function hentMetrikkEndepunkt(env: DeploymentEnvironment) {
-    switch (env) {
-        case 'production':
+function hentMetrikkEndepunkt() {
+    switch (getEnv().type) {
+        case EnvType.prod:
             return 'https://telemetry.nav.no/collect';
-        case 'development':
+        case EnvType.dev:
             return 'https://telemetry.ekstern.dev.nav.no/collect';
-        case 'local':
+        case EnvType.local:
             return 'http://localhost:12347/collect';
         default:
             return null;
     }
 }
 
-// eslint-disable-next-line
 function settOppCoreWebVitalsMetrikkRapportering() {
-    const metrikkEndepunkt = hentMetrikkEndepunkt(process.env.REACT_APP_DEPLOYMENT_ENV as DeploymentEnvironment);
+    // TODO: Erstatt med autoinjisert variabel: https://doc.nav.cloud.nais.io/observability/frontend/#auto-configuration
+    const metrikkEndepunkt = hentMetrikkEndepunkt();
 
     if (metrikkEndepunkt) {
         initializeFaro({
             instrumentations: [new WebVitalsInstrumentation()],
             url: metrikkEndepunkt,
-            app: {
-                name: 'veilarbportefoljeflatefs',
-                version: '0.0.1'
-            }
+            app: {name: 'veilarbportefoljeflatefs', version: '0.0.1'}
         });
     } else {
         // eslint-disable-next-line no-console

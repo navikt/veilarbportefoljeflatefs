@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import {BrowserRouter} from 'react-router-dom';
 import {Routing} from './routing';
 import {Provider} from 'react-redux';
@@ -6,7 +6,6 @@ import createStore from './store';
 import {Decorator} from './decorator';
 import {InitialDataProvider} from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
-import {erMock} from './utils/url-utils';
 import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
 import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjonsmelding';
 
@@ -26,7 +25,10 @@ function Application() {
 
     return (
         <Provider store={store}>
-            <BrowserRouter basename={erMock() ? '/veilarbportefoljeflatefs' : '/'}>
+            <BrowserRouter
+                basename={import.meta.env.BASE_URL}
+                future={{v7_startTransition: true, v7_relativeSplatPath: true}}
+            >
                 <InitialDataProvider>
                     <RedirectPortefolje>
                         <Decorator />

@@ -57,6 +57,7 @@ export function AktivitetFilterformForenklet({
                     variant="tertiary"
                     onClick={klikkPaAvansertLenke}
                     className="filterknapp"
+                    type="button"
                     data-testid="aktiviteter_avansert-filter_knapp"
                     aria-label="Avansert aktivitetsfilter"
                 >

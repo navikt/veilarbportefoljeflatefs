@@ -1,7 +1,13 @@
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import Application from '../application';
 
 it('renders without crashing', () => {
-    const div = document.createElement('mainApp');
-    ReactDOM.render(<Application />, div);
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const root = createRoot(container);
+    expect(() => root.render(<Application />)).not.toThrow();
+
+    root.unmount();
+    container.remove();
 });

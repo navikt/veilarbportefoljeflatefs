@@ -1,5 +1,5 @@
 import {memo, useEffect, useRef} from 'react';
-import {ReactComponent as DragIcon} from './dragIcon.svg';
+import DragIcon from './dragIcon.svg?react';
 import {FlyttKnappWrapper} from './flytt-knapp-wrapper';
 import {kebabCase} from '../../../utils/utils';
 import {trackKnappKlikketEvent} from '../../../umami/umami-events';

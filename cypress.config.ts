@@ -17,7 +17,7 @@ export default defineConfig({
         setupNodeEvents(on, config) {
             return require('./cypress/plugins/index.js')(on, config);
         },
-        baseUrl: 'http://localhost:3000/veilarbportefoljeflatefs',
+        baseUrl: 'http://localhost:5173/',
         specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
         testIsolation: false
     },
@@ -28,8 +28,8 @@ export default defineConfig({
         viewportWidth: 700,
         specPattern: 'src/components/**/*.cy.*',
         devServer: {
-            framework: 'create-react-app',
-            bundler: 'webpack'
+            framework: 'react',
+            bundler: 'vite'
         }
     }
 });

@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/poao-frontend-container-prod.yaml'
-      - '.nais/obo-nais-prod.yaml'
+      - ".github/workflows/poao-frontend-container-prod.yaml"
+      - ".nais/obo-nais-prod.yaml"
   workflow_dispatch:
 
 concurrency:
@@ -23,9 +23,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # ratchet:actions/checkout@v6
       - name: deploy gcp prod
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1 # ratchet:nais/deploy/actions/deploy@v2
         env:
           CLUSTER: prod-gcp
           RESOURCE: .nais/obo-nais-prod.yaml

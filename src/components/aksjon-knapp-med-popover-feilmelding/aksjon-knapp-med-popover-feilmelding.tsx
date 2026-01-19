@@ -1,9 +1,9 @@
 import {MouseEvent, useRef, useState} from 'react';
-import {BodyShort, Button} from '@navikt/ds-react';
 import {KnappOgPopover} from '../knapp-og-popover';
-import {ReactComponent as XMarkOctagonIcon} from '../ikoner/x_mark_octagon_icon.svg';
 import {useEventListener} from '../../hooks/use-event-listener';
 import {vedKlikkUtenfor} from '../../utils/utils';
+import {BodyShort, Button} from '@navikt/ds-react';
+import {XMarkOctagonIcon} from '@navikt/aksel-icons';
 import './aksjon-knapp-med-popover-feilmelding.css';
 
 type AksjonKnappMedPopoverFeilmeldingProps = {
