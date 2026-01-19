@@ -22,9 +22,9 @@
   "dependencies": {
     "@amplitude/analytics-browser": "2.32.1",
     "@grafana/faro-web-sdk": "1.19.0",
-    "@navikt/aksel-icons": "7.35.2",
-    "@navikt/ds-css": "7.35.2",
-    "@navikt/ds-react": "7.35.2",
+    "@navikt/aksel-icons": "7.38.0",
+    "@navikt/ds-css": "7.38.0",
+    "@navikt/ds-react": "7.38.0",
     "@navikt/navspa": "6.2.0",
     "@reduxjs/toolkit": "2.11.2",
     "@sanity/block-content-to-react": "3.0.0",
