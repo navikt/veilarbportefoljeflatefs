@@ -44,7 +44,7 @@
     "react-router-dom": "6.30.2",
     "redux": "4.2.1",
     "redux-thunk": "2.4.2",
-    "reselect": "4.1.8"
+    "reselect": "5.1.1"
   },
   "devDependencies": {
     "@cypress/react": "9.0.1",
