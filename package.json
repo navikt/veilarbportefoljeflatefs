@@ -16,7 +16,8 @@
     "cypress:open": "cypress open",
     "lint": "echo not implemented",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "2.32.1",
@@ -27,7 +28,6 @@
     "@navikt/navspa": "6.2.0",
     "@reduxjs/toolkit": "2.11.2",
     "@sanity/block-content-to-react": "3.0.0",
-    "babel-polyfill": "6.26.0",
     "browserslist": "4.28.1",
     "classnames": "2.5.1",
     "formik": "2.4.9",

@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import moment from 'moment';
 import {ukerIgjenTilUtlopsdato} from './utils';
 import {oppfolgingStartetDato, toDatePrettyPrint} from './dato-utils';

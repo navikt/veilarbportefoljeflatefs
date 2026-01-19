@@ -25,7 +25,7 @@ jobs:
       - name: Build application
         run: npm run build:mock
       - name: Run tests
-        run: npm run test
+        run: npm run test:ci
       - name: Cypress run
         uses: cypress-io/github-action@2ad32e649e4db26c07674ebae31a297601dbcbaf # ratchet:cypress-io/github-action@v6
         with:

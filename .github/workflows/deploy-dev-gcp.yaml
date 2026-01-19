@@ -33,7 +33,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Run tests
-        run: npm run test
+        run: npm run test:ci
       - name: Build application
         run: npm run build:dev
 
@@ -58,7 +58,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Run tests
         if: inputs.skip_tests == false
-        run: npm run test
+        run: npm run test:ci
       - name: Build application
         run: npm run build:dev
       - name: Authenticate to Google Cloud

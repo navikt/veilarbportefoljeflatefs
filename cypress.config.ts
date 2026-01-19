@@ -29,7 +29,7 @@ export default defineConfig({
         specPattern: 'src/components/**/*.cy.*',
         devServer: {
             framework: 'react',
-            bundler: 'webpack'
+            bundler: 'vite'
         }
     }
 });
