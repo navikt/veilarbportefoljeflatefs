@@ -6,6 +6,8 @@ import {
     aktiviteter,
     AktiviteterValg,
     alder,
+    dagpengerFilter,
+    DagpengerFilter,
     fargekategorier,
     filterKonstanter,
     hendelserEtikett,
@@ -239,6 +241,16 @@ export const LagLabelForFiltervalg = ({
                 <FiltreringLabel
                     key={`${valgtFilter}--${valgtAlternativ}`}
                     label={tiltakspengerFilter[valgtAlternativ]}
+                    slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
+                />
+            );
+        });
+    } else if (valgtFilter === Filtervalg.ytelseDagpenger) {
+        return valgteFilteralternativer.map((valgtAlternativ: DagpengerFilter) => {
+            return (
+                <FiltreringLabel
+                    key={`${valgtFilter}--${valgtAlternativ}`}
+                    label={dagpengerFilter[valgtAlternativ]}
                     slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
                 />
             );
