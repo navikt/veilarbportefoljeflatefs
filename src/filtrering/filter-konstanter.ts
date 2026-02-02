@@ -380,6 +380,20 @@ export const dagpengerArenaFilter = {
     [DagpengerFilterArena.HAR_DAGPENGER_LONNSGARANTIMIDLER_ARENA]: {label: 'Lønnsgarantimidler dagpenger (Arena)'}
 };
 
+export enum DagpengerFilter {
+    HAR_DAGPENGER_ORDINAR = 'HAR_DAGPENGER_ORDINAER',
+    HAR_DAGPENGER_MED_PERMITTERING = 'HAR_DAGPENGER_MED_PERMITTERING',
+    HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI = 'HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI'
+}
+
+export const dagpengerFilter = {
+    [DagpengerFilter.HAR_DAGPENGER_ORDINAR]: {label: 'Ordinære dagpenger (DPSAK)'},
+    [DagpengerFilter.HAR_DAGPENGER_MED_PERMITTERING]: {label: 'Dagpenger under permittering (DPSAK)'},
+    [DagpengerFilter.HAR_DAGPENGER_MED_PERMITTERING_FISKEINDUSTRI]: {
+        label: 'Dagpenger v/perm fiskeindustri (DPSAK)'
+    }
+};
+
 /** Lange namn på innsatsgrupper.
  * Brukt i nedtrekksmeny for filtervalg + filtertags. */
 export const innsatsgruppeGjeldendeVedtak14a: {[key in InnsatsgruppeGjeldendeVedtak14a]: string} = {
@@ -435,5 +449,6 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
-    ytelseDagpengerArena: dagpengerArenaFilter
+    ytelseDagpengerArena: dagpengerArenaFilter,
+    ytelseDagpenger: dagpengerFilter
 };

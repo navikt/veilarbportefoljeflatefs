@@ -7,6 +7,7 @@ import {
     barnUnder18Aar,
     cvJobbprofil,
     dagpengerArenaFilter,
+    dagpengerFilter,
     ensligeForsorgere,
     fodselsdagIMnd,
     formidlingsgruppe,
@@ -43,6 +44,8 @@ import './filterform/filterform.css';
 import {HendelserFilterform} from './filterform/hendelser-filterform';
 import {ExternalLinkIcon} from '@navikt/aksel-icons';
 import {trackLenkeKlikketEvent} from '../../umami/umami-events';
+import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
+import {VIS_DAGPENGER_FRA_DPSAK} from '../../konstanter';
 
 interface FiltreringFilterProps {
     filtervalg: FiltervalgModell;
@@ -52,6 +55,7 @@ interface FiltreringFilterProps {
 }
 
 export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, oversiktType}: FiltreringFilterProps) {
+    const visDagpengerFraDpsak = useFeatureSelector()(VIS_DAGPENGER_FRA_DPSAK);
     return (
         <div className="filtrering-filter filtrering-filter__kolonne" data-testid="filtrering-filter_container">
             <div className="filtrering-filter__kolonne">
@@ -368,22 +372,46 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
             </div>
             <div className="filtrering-filter__kolonne">
                 <Label size="small">Ytelse</Label>
-                <Dropdown
-                    name="Dagpenger"
-                    id="ytelse-dagpenger"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.ytelseDagpengerArena,
-                                    checkboxValg: dagpengerArenaFilter
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
+                {!visDagpengerFraDpsak && (
+                    <Dropdown
+                        name="Dagpenger"
+                        id="ytelse-dagpenger"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.ytelseDagpengerArena,
+                                        checkboxValg: dagpengerArenaFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
+                {visDagpengerFraDpsak && (
+                    <Dropdown
+                        name="Dagpenger"
+                        id="ytelser-dappenger-alle"
+                        render={() => (
+                            <CheckboxFilterform
+                                filterformOgValgListe={[
+                                    {
+                                        form: Filtervalg.ytelseDagpenger,
+                                        checkboxValg: dagpengerFilter
+                                    },
+                                    {
+                                        form: Filtervalg.ytelseDagpengerArena,
+                                        checkboxValg: dagpengerArenaFilter
+                                    }
+                                ]}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                            />
+                        )}
+                    />
+                )}
                 <Dropdown
                     name="AAP"
                     id="ytelser-aap-i-kelvin-og-arena"

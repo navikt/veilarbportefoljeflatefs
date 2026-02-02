@@ -3,6 +3,7 @@ import {
     AAPFilterArena,
     AAPFilterKelvin,
     AktiviteterFilternokler,
+    DagpengerFilter,
     DagpengerFilterArena,
     TiltakspengerFilter,
     TiltakspengerFilterArena
@@ -55,7 +56,8 @@ export enum Filtervalg {
     ytelseAapKelvin = 'ytelseAapKelvin',
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
     ytelseTiltakspenger = 'ytelseTiltakspenger',
-    ytelseDagpengerArena = 'ytelseDagpengerArena'
+    ytelseDagpengerArena = 'ytelseDagpengerArena',
+    ytelseDagpenger = 'ytelseDagpenger'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -111,6 +113,7 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
+    [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
 }
 
 /**
