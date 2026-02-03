@@ -71,6 +71,7 @@ export interface Ytelser {
     ytelserArena: YtelserArena;
     aap: AapKelvinData | null;
     tiltakspenger: TiltakspengerData | null;
+    dagpenger: DagpengerData | null;
     ensligeForsorgereOvergangsstonad: EnsligeForsorgereOvergangsstonad | null;
 }
 
@@ -211,4 +212,10 @@ export interface AapKelvinData {
 export interface TiltakspengerData {
     vedtaksdatoTilOgMed: string | null;
     rettighet: string | null;
+}
+
+export interface DagpengerData {
+    rettighetstype: string;
+    datoPlanlagtStans: string | null;
+    resterendeDager: string | null;
 }

@@ -61,6 +61,9 @@ import {AvtaltAktivitetStartdatoAktivitetHeader} from '../components/tabell/head
 import {AvtaltAktivitetNesteStartdatoAktivitetHeader} from '../components/tabell/headerCells/min-oversikt/AvtaltAktivitetNesteStartdatoAktivitetHeader';
 import {AvtaltAktivitetForrigeStartdatoAktivitetHeader} from '../components/tabell/headerCells/min-oversikt/AvtaltAktivitetForrigeStartdatoAktivitetHeader';
 import './minoversikt.css';
+import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
+import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
+import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
 
 export function MinoversiktTableHeader() {
     const {filtervalg, sorteringsrekkefolge, listevisning, sorteringsfelt} = usePortefoljeSelector(
@@ -166,6 +169,10 @@ export function MinoversiktTableHeader() {
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
                 <TiltakspengerRettighetHeader {...sorteringTilHeaderCell} />
+
+                <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+                <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
+                <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
