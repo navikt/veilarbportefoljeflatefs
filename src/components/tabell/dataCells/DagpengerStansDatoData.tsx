@@ -8,17 +8,19 @@ export const DagpengerStansDatoData = ({bruker, valgteKolonner}: DataCellProps) 
         ? new Date(bruker.ytelser.dagpenger?.datoPlanlagtStans)
         : null;
 
+    const harDagpengerMenIngenDato = bruker.ytelser.dagpenger !== null && !tilOgMedVedtaksdato;
+
     return (
         <>
-            {tilOgMedVedtaksdato ? (
-                <DatoDataCellType
-                    dato={tilOgMedVedtaksdato}
+            {harDagpengerMenIngenDato ? (
+                <TekstDataCellType
+                    tekst={'Løpende'}
                     skalVises={valgteKolonner.includes(Kolonne.DAGPENGER_PLANGLAGT_STANS)}
                     className="col col-xs-2"
                 />
             ) : (
-                <TekstDataCellType
-                    tekst={'Løpende'}
+                <DatoDataCellType
+                    dato={tilOgMedVedtaksdato}
                     skalVises={valgteKolonner.includes(Kolonne.DAGPENGER_PLANGLAGT_STANS)}
                     className="col col-xs-2"
                 />
