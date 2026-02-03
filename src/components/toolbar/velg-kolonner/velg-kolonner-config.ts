@@ -76,3 +76,6 @@ alternativerConfig.set(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, {
     tekstlabel: 'Vedtak tiltakspenger til og med-dato (TPSAK)'
 });
 alternativerConfig.set(Kolonne.TILTAKSPENGER_RETTIGHET, {tekstlabel: 'Rettighet tiltakspenger (TPSAK)'});
+alternativerConfig.set(Kolonne.DAGPENGER_PLANGLAGT_STANS, {tekstlabel: 'Utløp dagpenger (DPSAK)'});
+alternativerConfig.set(Kolonne.DAGPENGER_ANTALL_RESTERENDE_DAGER, {tekstlabel: 'Gjenstående dager dagpenger (DPSAK)'});
+alternativerConfig.set(Kolonne.DAGPENGER_RETTIGHETSTYPE, {tekstlabel: 'Rettighet dagpenger (DPSAK)'});
