@@ -218,17 +218,18 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                         statustall={statustallMedBrukerinnsyn.inaktiveBrukere}
                     />
                 </div>
-                {oversiktType === OversiktType.minOversikt && (
-                    <div className="forste-barlabel-i-gruppe">
+
+                <div className="forste-barlabel-i-gruppe">
+                    {oversiktType === OversiktType.minOversikt && (
                         <BarInputRadio
                             filterVerdi={MINE_HUSKELAPPER}
                             handleChange={handleRadioButtonChange}
                             labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
                             statustall={statustallMedBrukerinnsyn.mineHuskelapper}
                         />
-                        <FilterStatusMineFargekategorier />
-                    </div>
-                )}
+                    )}
+                    <FilterStatusMineFargekategorier />
+                </div>
             </RadioGroup>
         </div>
     );
