@@ -18,7 +18,7 @@ const initalState: FeaturesState = {
     [DARKMODE]: false,
     [ALERTSTRIPE_FEILMELDING]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
-    [VIS_DAGPENGER_FRA_DPSAK]: true
+    [VIS_DAGPENGER_FRA_DPSAK]: false
 };
 
 // Reducer
