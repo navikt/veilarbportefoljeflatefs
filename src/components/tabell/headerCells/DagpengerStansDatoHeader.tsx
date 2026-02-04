@@ -11,8 +11,8 @@ export const DagpengerStansDatoHeader = ({
 }: HeaderCellProps) => (
     <SorteringHeader
         skalVises={valgteKolonner.includes(Kolonne.DAGPENGER_STANS)}
-        sortering={Sorteringsfelt.DAGPENGER_PLANGLAGT_STANS}
-        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_PLANGLAGT_STANS}
+        sortering={Sorteringsfelt.DAGPENGER_STANS}
+        erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_STANS}
         rekkefolge={rekkefolge}
         onClick={onClick}
         tekst="Utløp dagpenger"
