@@ -216,6 +216,6 @@ export interface TiltakspengerData {
 
 export interface DagpengerData {
     rettighetstype: string;
-    datoPlanlagtStans: string | null;
+    datoStans: string | null;
     resterendeDager: string | null;
 }

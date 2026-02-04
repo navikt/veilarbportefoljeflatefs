@@ -289,7 +289,7 @@ const lagDagpengerData = (): DagpengerData | null => {
     const randomNumber = rnd(0, 1);
 
     return {
-        datoPlanlagtStans: randomNumber > 0.3 ? randomDate({past: false, withoutTimestamp: true}) : null,
+        datoStans: randomNumber > 0.3 ? randomDate({past: false, withoutTimestamp: true}) : null,
         resterendeDager: rnd(2, 500).toString() + ' dager (per ' + randomDate({past: false, withoutTimestamp: true}),
         rettighetstype: tilfeldigRettigheter()
     };

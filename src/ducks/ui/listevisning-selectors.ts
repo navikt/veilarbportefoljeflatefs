@@ -202,7 +202,7 @@ export function getMuligeKolonner(filtervalg: FiltervalgModell, oversiktType: Ov
         .concat(addHvis(Kolonne.YTELSE_ARENA_YTELSESTYPE_AAP, filtrertPaBeggeAapArenaOgAapKelvin))
         .concat(addHvis(Kolonne.TILTAKSPENGER_VEDTAKSDATO_TOM, filtrertPaTiltakspenger))
         .concat(addHvis(Kolonne.TILTAKSPENGER_RETTIGHET, filtrertPaTiltakspenger))
-        .concat(addHvis(Kolonne.DAGPENGER_PLANGLAGT_STANS, filtrertPaDagpenger))
+        .concat(addHvis(Kolonne.DAGPENGER_STANS, filtrertPaDagpenger))
         .concat(addHvis(Kolonne.DAGPENGER_ANTALL_RESTERENDE_DAGER, filtrertPaDagpenger))
         .concat(addHvis(Kolonne.DAGPENGER_RETTIGHETSTYPE, filtrertPaDagpenger))
         .concat(addHvis(Kolonne.VEILEDER, erPaEnhetensOversiktOgIkkeFiltrertPaMoterIDag))
