@@ -7,6 +7,7 @@ import {
     AktiviteterAvtaltMedNav,
     BarnUnder18AarModell,
     BrukerModell,
+    DagpengerData,
     EnsligeForsorgereOvergangsstonad,
     Etiketter,
     FargekategoriModell,
@@ -279,11 +280,27 @@ const lagTiltakspengerData = (): TiltakspengerData | null => {
     };
 };
 
+const lagDagpengerData = (): DagpengerData | null => {
+    const muligeRettigheter = ['Ordinære dagpenger', 'Dagpenger med permittering', 'Dagpenger v/perm fiskeindustri'];
+
+    const tilfeldigRettigheter = () => {
+        return muligeRettigheter[Math.round(Math.random() * muligeRettigheter.length)];
+    };
+    const randomNumber = rnd(0, 1);
+
+    return {
+        datoStans: randomNumber > 0.3 ? randomDate({past: false, withoutTimestamp: true}) : null,
+        resterendeDager: rnd(2, 500).toString() + ' dager (per ' + randomDate({past: false, withoutTimestamp: true}),
+        rettighetstype: tilfeldigRettigheter()
+    };
+};
+
 const lagYtelser = (): Ytelser => {
     return {
         ytelserArena: lagArenaYtelse(),
         aap: lagAapKelvinData(),
         tiltakspenger: lagTiltakspengerData(),
+        dagpenger: lagDagpengerData(),
         ensligeForsorgereOvergangsstonad: lagRandomOvergangsstonadForEnsligForsorger()
     };
 };

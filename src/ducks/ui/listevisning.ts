@@ -68,7 +68,10 @@ export enum Kolonne {
     AAP_KELVIN_TOM_VEDTAKSDATO = 'aap_kelvin_tom_vedtaksdato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
-    TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet'
+    TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',
+    DAGPENGER_STANS = 'dagpenger_stans',
+    DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
+    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype'
 }
 
 export enum OversiktType {

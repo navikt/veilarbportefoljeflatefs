@@ -56,6 +56,9 @@ import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering'
 import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
+import {DagpengerResterendeDagerHeader} from '../components/tabell/headerCells/DagpengerResterendeDagerHeader';
+import {DagpengerStansDatoHeader} from '../components/tabell/headerCells/DagpengerStansDatoHeader';
 
 export function EnhetTableHeader() {
     const {filtervalg, sorteringsrekkefolge, sorteringsfelt, listevisning} = usePortefoljeSelector(
@@ -150,6 +153,10 @@ export function EnhetTableHeader() {
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
                 <TiltakspengerRettighetHeader {...sorteringTilHeaderCell} />
+
+                <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+                <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
+                <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>

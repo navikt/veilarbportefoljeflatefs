@@ -30,6 +30,10 @@ export enum Sorteringsfelt {
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',
 
+    DAGPENGER_STANS = 'dagpenger_stans',
+    DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
+    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
+
     VENTER_PA_SVAR_FRA_NAV = 'venterpasvarfranav',
     VENTER_PA_SVAR_FRA_BRUKER = 'venterpasvarfrabruker',
 

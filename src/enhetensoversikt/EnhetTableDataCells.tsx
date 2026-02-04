@@ -55,6 +55,9 @@ import {TiltakspengerRettighetData} from '../components/tabell/dataCells/Tiltaks
 import {AktivitetNesteUtlopsdatoValgtAktivitetData} from '../components/tabell/dataCells/AktivitetNesteUtlopsdatoValgtAktivitetData';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {DagpengerRettighetData} from '../components/tabell/dataCells/DagpengerRettighetData';
+import {DagpengerStansDatoData} from '../components/tabell/dataCells/DagpengerStansDatoData';
+import {DagpengerResterendeDagerData} from '../components/tabell/dataCells/DagpengerResterendeDagerData';
 
 interface Props {
     className?: string;
@@ -146,6 +149,10 @@ export function EnhetTableDataCells({className, bruker, enhetId, filtervalg, val
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
