@@ -1,7 +1,6 @@
 import {AppState} from '../reducer';
 import {hentFeatures} from '../middleware/api';
 import {
-    ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     PORTEFOLJE_FEATURES,
@@ -16,7 +15,6 @@ export interface FeaturesState {
 
 const initalState: FeaturesState = {
     [DARKMODE]: false,
-    [ALERTSTRIPE_FEILMELDING]: false,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
     [VIS_DAGPENGER_FRA_DPSAK]: false
 };
