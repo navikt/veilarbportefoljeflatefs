@@ -1,5 +1,4 @@
 import {
-    ALERTSTRIPE_FEILMELDING,
     DARKMODE,
     LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG,
     VIS_DAGPENGER_FRA_DPSAK,
@@ -10,7 +9,6 @@ import {
  * og på demo-versjonen på https://navikt.github.io/veilarbportefoljeflatefs (2025-10-16) */
 export const mockFeatureToggles = {
     [DARKMODE]: true,
-    [ALERTSTRIPE_FEILMELDING]: false,
     [VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING]: true,
     [LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG]: false,
     [VIS_DAGPENGER_FRA_DPSAK]: true
