@@ -1,13 +1,13 @@
-import {createStore, applyMiddleware, compose, Store} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import {applyMiddleware, compose, createStore, Store} from 'redux';
 import reducer, {AppState} from './reducer';
 import {metricsMiddleWare} from './middleware/metrics-middleware';
+import {thunk} from 'redux-thunk';
 
 function create() {
     const useExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
     const composer = useExtension ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
-    const composed = composer(applyMiddleware(thunkMiddleware, metricsMiddleWare));
+    const composed = composer(applyMiddleware(thunk, metricsMiddleWare));
 
     return composed(createStore)(reducer);
 }
