@@ -32,7 +32,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/portefolje')) {
-                        dispatch(fjernBrukerIKontekst());
+                        fjernBrukerIKontekst()(dispatch);
                     }
                 }}
                 to={{
@@ -52,7 +52,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/enhet')) {
-                        dispatch(fjernBrukerIKontekst());
+                        fjernBrukerIKontekst()(dispatch);
                     }
                 }}
                 to={{
@@ -73,7 +73,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/veiledere')) {
-                        dispatch(fjernBrukerIKontekst());
+                        fjernBrukerIKontekst()(dispatch);
                     }
                 }}
                 to={{

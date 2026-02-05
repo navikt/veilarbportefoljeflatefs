@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import NAVSPA from '@navikt/navspa';
-import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
@@ -52,12 +51,12 @@ export function Decorator() {
 
     useEffect(() => {
         if (brukerIKontekst && !window.location.href.includes('/tilbake')) {
-            dispatch(fjernBrukerIKontekst());
+            fjernBrukerIKontekst()(dispatch);
         }
     }, [brukerIKontekst, dispatch]);
 
     function velgEnhet(enhet: string) {
-        dispatch(oppdaterValgtEnhet(enhet));
+        fjernBrukerIKontekst()(dispatch);
     }
 
     const config = getConfig(enhetId, velgEnhet);

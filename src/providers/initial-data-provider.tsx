@@ -15,11 +15,11 @@ export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(hentFeaturesFraUnleash());
-        dispatch(hentInnloggetVeileder());
-        dispatch(hentSystemmeldinger());
-        dispatch(hentBrukerIKontekst());
-        dispatch(hentEnhetIKontekst());
+        hentFeaturesFraUnleash()(dispatch);
+        hentInnloggetVeileder()(dispatch);
+        hentSystemmeldinger()(dispatch);
+        hentBrukerIKontekst()(dispatch);
+        hentEnhetIKontekst()(dispatch);
     }, [dispatch]);
 
     return (
