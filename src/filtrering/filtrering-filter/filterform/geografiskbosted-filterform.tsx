@@ -1,8 +1,7 @@
 import {useEffect, useState} from 'react';
 import {isEmptyArray} from 'formik';
-import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
@@ -28,27 +27,25 @@ export function GeografiskBostedFilterform({
     useEffect(() => {
         setVisGeografiskBosted(filtervalg.visGeografiskBosted);
 
-        if (!isEmptyArray(geografiskbostedListData)) {
-            let selectedValues: GeografiskBostedOptions[] = [];
-            filtervalg.geografiskBosted
-                .filter(bostedKode => geografiskbostedListData.get(bostedKode) != null)
-                .filter(bostedKode => geografiskbostedListData.get(bostedKode) !== undefined)
-                .forEach(bostedKode => {
-                    selectedValues.push({
-                        label: geografiskbostedListData.get(bostedKode)!,
-                        value: bostedKode,
-                        checked: true
-                    });
-                });
-            setSelectedGeografiskBosted(selectedValues);
+        if (isEmptyArray(geografiskbostedListData)) {
+            setSelectedGeografiskBosted([]);
+            return;
         }
-    }, [filtervalg, geografiskbostedListData]);
 
-    const velgGeografiskBosted = data => {
-        endreFiltervalg(
-            Filtervalg.geografiskBosted,
-            data.map(x => x.value)
-        );
+        const selectedValues: GeografiskBostedOptions[] = filtervalg.geografiskBosted.flatMap(bostedKode => {
+            const label = geografiskbostedListData.get(bostedKode);
+            return label ? [{label, value: bostedKode, checked: true}] : [];
+        });
+
+        setSelectedGeografiskBosted(selectedValues);
+    }, [filtervalg.geografiskBosted, filtervalg.visGeografiskBosted, geografiskbostedListData]);
+
+    const velgGeografiskBosted = (value: string, isSelected: boolean) => {
+        const oppdatertVerdi = isSelected
+            ? [...filtervalg.geografiskBosted, value]
+            : filtervalg.geografiskBosted.filter(v => v !== value);
+
+        endreFiltervalg(Filtervalg.geografiskBosted, oppdatertVerdi);
     };
 
     useEffect(() => {
@@ -89,44 +86,16 @@ export function GeografiskBostedFilterform({
                 </Grid>
             </div>
             <hr />
-            <label className="skjemaelement__label">Velg en eller flere</label>
-            <MultiSelect
+            <UNSAFE_Combobox
+                label={'Velg en eller flere bosted'}
                 className="utvalgsliste"
                 options={geografiskBostedOptions}
-                value={selectedGeografiskBosted}
-                onChange={velgGeografiskBosted}
-                labelledBy="Select"
-                hasSelectAll={false}
-                overrideStrings={{
-                    allItemsAreSelected: 'Alle bosteder er valgt.',
-                    clearSearch: 'Fjern søk',
-                    clearSelected: 'Fjern valgt',
-                    noOptions: 'Ingen resultater ved søk',
-                    search: 'Søk',
-                    selectSomeItems: 'Velg bosted...'
-                }}
-                ItemRenderer={({checked, option, onClick, disabled}) => (
-                    <div className={'navds-checkbox navds-checkbox--small'}>
-                        <input
-                            type="checkbox"
-                            onChange={e => {
-                                e.stopPropagation();
-                                onClick();
-                            }}
-                            checked={checked}
-                            tabIndex={-1}
-                            className={'navds-checkbox__input'}
-                            value={option.value}
-                            aria-checked={checked}
-                            id={`checkbox-bosted-${option.value}`}
-                        />
-                        <label className={'navds-checkbox__label'} htmlFor={`checkbox-bosted-${option.value}`}>
-                            <div className="navds-checkbox__content">
-                                <div className="navds-body-short navds-body-short--small">{option.label}</div>
-                            </div>
-                        </label>
-                    </div>
-                )}
+                isMultiSelect
+                selectedOptions={selectedGeografiskBosted}
+                onToggleSelected={velgGeografiskBosted}
+                shouldShowSelectedOptions
+                size={'small'}
+                placeholder={'Søk...'}
             />
             <NullstillKnapp
                 dataTestId="checkbox-filterform"
