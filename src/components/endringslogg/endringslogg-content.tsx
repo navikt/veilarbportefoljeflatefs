@@ -1,11 +1,11 @@
 import classNames from 'classnames/dedupe';
-import BlockContent from '@sanity/block-content-to-react';
 import {Heading, Label} from '@navikt/ds-react';
 import {EndringsloggEntryWithSeenStatus} from './utils/endringslogg-custom';
 import {TourModalButton} from './tour-modal/tour-modal-button';
 import {trackLinkClick} from './utils/utils';
 import {EndringsloggLink} from './endringslogg-link';
 import './endringslogg.css';
+import {PortableText} from '@portabletext/react';
 
 interface EndringsloggContentProps {
     innleggsListe: EndringsloggEntryWithSeenStatus[];
@@ -68,7 +68,11 @@ const EndringsloggEntry = ({
                 <Heading size="small" level="2">
                     {title}
                 </Heading>
-                {description && <BlockContent className={'endringslogg-block-content'} blocks={description} />}
+                {description && (
+                    <div className="endringslogg-block-content">
+                        <PortableText value={description} />
+                    </div>
+                )}
                 <div className="endringslogg-block-footer">
                     {modal && <TourModalButton id={_id} modal={modal} buttonText="Se hvordan" />}
                     {link && linkText && (

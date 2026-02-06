@@ -5,7 +5,7 @@ type KnappOgPopoverProps = {
     ikon: JSX.Element;
     knappTekst: string;
     popoverInnhold: string | JSX.Element;
-    innerRef: RefObject<HTMLDivElement>;
+    innerRef: RefObject<HTMLDivElement | null>;
 };
 
 export const KnappOgPopover = ({ikon, knappTekst, popoverInnhold, innerRef}: KnappOgPopoverProps) => {

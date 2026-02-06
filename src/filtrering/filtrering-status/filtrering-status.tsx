@@ -1,5 +1,4 @@
 import {ChangeEvent} from 'react';
-import {useDispatch} from 'react-redux';
 import {Detail, Label, RadioGroup, ReadMore} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {CHECKBOX_FILTER, fjernFerdigfilter, leggTilFerdigFilter} from './filter-utils';
@@ -32,6 +31,7 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
+import {useAppDispatch} from '../../store';
 import './filtrering-status.css';
 
 /** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.
@@ -58,7 +58,7 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
         statustallUtenBrukerinnsyn !== null &&
         (statustallUtenBrukerinnsyn.ufordelteBrukere > 0 || statustallUtenBrukerinnsyn.venterPaSvarFraNAV > 0);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     function dispatchFiltreringStatusChanged(ferdigFilterListe) {
         dispatch(pagineringSetup({side: 1}));

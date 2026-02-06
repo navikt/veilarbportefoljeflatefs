@@ -1,5 +1,5 @@
 import {ReactNode, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Box} from '@navikt/ds-react';
 import {VeilederoversiktSidevisning} from './veilederoversikt-sidevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -23,13 +23,14 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import './veilederoversikt.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
+import {useAppDispatch} from '../store';
 
 export function VeilederoversiktSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const slettVeilederFilter = ident => {
         const oppdatertFiltervalg = {
             ...filtervalg,

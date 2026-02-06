@@ -1,13 +1,11 @@
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {slettHuskelappAction} from '../../../ducks/huskelapp';
 import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
-import {AppState} from '../../../reducer';
 import {HuskelappModell} from '../../../typer/bruker-modell';
+import {AppDispatch} from '../../../store';
 
 export const handleSlettHuskelapp = async (
-    dispatch: ThunkDispatch<AppState, any, AnyAction>,
+    dispatch: AppDispatch,
     huskelapp: HuskelappModell,
     fnr: string,
     enhetId: string

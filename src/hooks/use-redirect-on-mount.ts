@@ -1,8 +1,8 @@
 import {useLocation, useNavigate} from 'react-router';
-import {useDispatch} from 'react-redux';
 import queryString from 'query-string';
 import {useOnMount} from './use-on-mount';
 import {settSortering} from '../ducks/portefolje';
+import {useAppDispatch} from '../store';
 
 export function useRedirectOnMount() {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ export function useRedirectOnMount() {
     const lastPath = localStorage.getItem('lastpath');
     const lastSearch = localStorage.getItem('lastsearch') ?? '';
     const pathname = location.pathname;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const parsed = queryString.parse(location.search);
 

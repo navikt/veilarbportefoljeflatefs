@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
-import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
-import {Checkbox, CheckboxGroup, Tooltip} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup, Tooltip, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {NullstillKnapp} from '../../../components/nullstill-valg-knapp/nullstill-knapp';
@@ -35,12 +34,11 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
         }
     }, [filtervalg, foedelandListData]);
 
-    const velgFoedeland = data => {
-        nullstillLandgruppeValg();
-        endreFiltervalg(
-            Filtervalg.foedeland,
-            data.map(x => x.value)
-        );
+    const velgFoedeland = (value: string, isSelected: boolean) => {
+        const oppdatertVerdi = isSelected
+            ? [...filtervalg.foedeland, value]
+            : filtervalg.foedeland.filter(v => v !== value);
+        endreFiltervalg(Filtervalg.foedeland, oppdatertVerdi);
     };
 
     useEffect(() => {
@@ -102,44 +100,16 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
                     </Grid>
                 </div>
                 <hr />
-                <label className="skjemaelement__label">Velg et eller flere land</label>
-                <MultiSelect
+                <UNSAFE_Combobox
+                    label={'Velg et eller flere land'}
                     className="utvalgsliste"
                     options={foedelandSelectOptions}
-                    value={selectedFoedeland}
-                    onChange={velgFoedeland}
-                    labelledBy="Select"
-                    hasSelectAll={false}
-                    overrideStrings={{
-                        allItemsAreSelected: 'Alle land er valgt.',
-                        clearSearch: 'Fjern søk',
-                        clearSelected: 'Fjern valgt',
-                        noOptions: 'Ingen resultater ved søk',
-                        search: 'Søk',
-                        selectSomeItems: 'Velg land...'
-                    }}
-                    ItemRenderer={({checked, option, onClick, disabled}) => (
-                        <div className={'navds-checkbox navds-checkbox--small'}>
-                            <input
-                                type="checkbox"
-                                onChange={e => {
-                                    e.stopPropagation();
-                                    onClick();
-                                }}
-                                checked={checked}
-                                tabIndex={-1}
-                                className={'navds-checkbox__input'}
-                                value={option.value}
-                                aria-checked={checked}
-                                id={`checkbox-foedeland-${option.value}`}
-                            />
-                            <label className={'navds-checkbox__label'} htmlFor={`checkbox-foedeland-${option.value}`}>
-                                <div className="navds-checkbox__content">
-                                    <div className="navds-body-short navds-body-short--small">{option.label}</div>
-                                </div>
-                            </label>
-                        </div>
-                    )}
+                    isMultiSelect
+                    selectedOptions={selectedFoedeland}
+                    onToggleSelected={velgFoedeland}
+                    shouldShowSelectedOptions
+                    size={'small'}
+                    placeholder={'Søk...'}
                 />
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"

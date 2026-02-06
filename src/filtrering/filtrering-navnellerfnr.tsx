@@ -10,7 +10,7 @@ interface FiltreringNavnEllerFnrProps {
 export function FiltreringNavnellerfnr({filtervalg, endreFiltervalg}: FiltreringNavnEllerFnrProps) {
     const [navnEllerFnrQuery, setNavnEllerFnrQuery] = useState(filtervalg.navnEllerFnrQuery);
     const isInitialMount = useRef(true);
-    const timer = useRef<number | undefined>();
+    const timer = useRef<number | undefined>(undefined);
     const savedCallback = useRef(null);
 
     useEffect(() => {

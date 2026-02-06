@@ -1,5 +1,5 @@
 import {ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -41,6 +41,7 @@ import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
+import {useAppDispatch} from '../store';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -76,7 +77,7 @@ export function EnhetSide() {
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =
         portefoljeData.antallReturnert > portefoljeData.antallTotalt

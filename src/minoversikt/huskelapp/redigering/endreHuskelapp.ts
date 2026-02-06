@@ -1,13 +1,11 @@
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {FormikValues} from 'formik';
 import {endreHuskelappAction} from '../../../ducks/huskelapp';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
-import {AppState} from '../../../reducer';
 import {BrukerModell} from '../../../typer/bruker-modell';
+import {AppDispatch} from '../../../store';
 
 export const endreHuskelapp = async (
-    dispatch: ThunkDispatch<AppState, any, AnyAction>,
+    dispatch: AppDispatch,
     values: FormikValues,
     bruker: BrukerModell,
     enhetId: string,

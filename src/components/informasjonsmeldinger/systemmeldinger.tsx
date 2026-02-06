@@ -1,7 +1,7 @@
-import BlockContent from '@sanity/block-content-to-react';
 import {Alert, Heading} from '@navikt/ds-react';
 import {useSystemmeldingerSelector} from '../../hooks/redux/use-systemmeldinger';
 import '../modal/feilmelding-brukere.css';
+import {PortableText} from '@portabletext/react';
 
 export const Systemmeldinger = () => {
     const systemmeldinger = useSystemmeldingerSelector();
@@ -12,7 +12,7 @@ export const Systemmeldinger = () => {
                     <Heading spacing size="small" level="3">
                         {systemmelding.tittel}
                     </Heading>
-                    <BlockContent blocks={systemmelding.beskrivelse} />
+                    <PortableText value={systemmelding.beskrivelse} />
                 </Alert>
             ))}
         </>

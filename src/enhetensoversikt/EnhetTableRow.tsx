@@ -1,5 +1,4 @@
 import {useLayoutEffect} from 'react';
-import {useDispatch} from 'react-redux';
 import classNames from 'classnames';
 import {Checkbox} from '@navikt/ds-react';
 import {Etiketter} from '../components/tabell/etiketter';
@@ -11,6 +10,7 @@ import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {useAppDispatch} from '../store';
 
 interface Props {
     bruker: BrukerModell;
@@ -23,7 +23,7 @@ interface Props {
 
 export function EnhetTableRow({bruker, settMarkert, enhetId, filtervalg, valgteKolonner, forrigeBruker}: Props) {
     const varForrigeBruker = bruker.fnr === forrigeBruker;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');

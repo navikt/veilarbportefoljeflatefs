@@ -1,7 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {AnyAction} from 'redux';
-import {useDispatch, useSelector} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
+import {useSelector} from 'react-redux';
 import {RadioGroup} from '@navikt/ds-react';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {lagreEndringer, slettGruppe} from '../../ducks/veiledergrupper_filter';
@@ -19,6 +17,7 @@ import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import '../../components/sidebar/sidebar.css';
 import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
+import {useAppDispatch} from '../../store';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];
@@ -42,7 +41,7 @@ export function VeiledergruppeInnhold({lagretFilter, oversiktType}: Veiledergrup
 
     const outerDivRef = useRef<HTMLDivElement>(null);
 
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const enhet = useEnhetSelector();
 
     const modalTittel = 'Rediger veiledergruppe';
