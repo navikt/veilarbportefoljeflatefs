@@ -5,7 +5,10 @@ import {metricsMiddleWare} from './middleware/metrics-middleware';
 
 export const store = configureStore({
     reducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(metricsMiddleWare),
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+            serializableCheck: false
+        }).concat(metricsMiddleWare),
     devTools: import.meta.env.MODE !== 'production'
 });
 

@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import BlockContent from '@sanity/block-content-to-react';
 import {Button, Heading, Modal} from '@navikt/ds-react';
 import {ArrowLeftIcon, ArrowRightIcon} from '@navikt/aksel-icons';
 import {Stegviser} from '../stegviser/stegviser';
 import {ModalType} from '../utils/endringslogg-custom';
 import './tour-modal.css';
+import {PortableText} from '@portabletext/react';
 
 interface TourModalProps {
     modal: ModalType;
@@ -66,7 +66,7 @@ export const TourModal = ({modal, open, onClose}: TourModalProps) => {
                     </div>
                     <div className={'tour-modal__main--beskrivelse'}>
                         <Heading size="small">{step.slideHeader}</Heading>
-                        {step.slideDescription && <BlockContent blocks={step.slideDescription} />}
+                        {step.slideDescription && <PortableText value={step.slideDescription} />}
                     </div>
                 </main>
                 <footer className={'tour-modal__footer'}>
