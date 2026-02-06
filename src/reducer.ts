@@ -1,4 +1,4 @@
-import {Action, combineReducers, Reducer, UnknownAction} from 'redux';
+import {Action, combineReducers, Reducer} from 'redux';
 import {LocalStorageScope, persistentReducer} from './utils/persistentReducer';
 import {valgtEnhetReducer, ValgtEnhetState} from './ducks/valgt-enhet';
 import {portefoljeReducer, PortefoljeState} from './ducks/portefolje';
@@ -38,7 +38,6 @@ import {statustallEnhetReducer, StatustallEnhetState} from './ducks/statustall/s
 import {brukerIKontekstReducer, BrukerIKontekstState} from './ducks/bruker-i-kontekst';
 import {huskelappReducer} from './ducks/huskelapp';
 import {fargekategoriReducer} from './ducks/fargekategori';
-import {ThunkDispatch} from 'redux-thunk';
 
 /**
  * Hjelpefunksjon for å conditionally kjøre reducere på en action
@@ -66,8 +65,6 @@ function named<S, A extends Action>(
         return reducer(state, action);
     };
 }
-
-export type AppDispatch = ThunkDispatch<AppState, unknown, UnknownAction>;
 
 export interface AppState {
     ui: {

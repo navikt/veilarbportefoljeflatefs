@@ -1,5 +1,5 @@
 import {ReactNode, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Box} from '@navikt/ds-react';
 import {VeilederoversiktSidevisning} from './veilederoversikt-sidevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -10,7 +10,7 @@ import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
-import {AppDispatch, AppState} from '../reducer';
+import {AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -23,13 +23,14 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import './veilederoversikt.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
+import {useAppDispatch} from '../store';
 
 export function VeilederoversiktSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const slettVeilederFilter = ident => {
         const oppdatertFiltervalg = {
             ...filtervalg,

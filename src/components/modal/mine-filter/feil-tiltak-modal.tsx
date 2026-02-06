@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {BodyShort, Button} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {AppDispatch, AppState} from '../../../reducer';
+import {AppState} from '../../../reducer';
 import {BekreftSlettingModal} from '../varselmodal/bekreft-sletting-modal';
 import {slettFilter} from '../../../ducks/mine-filter';
 import {useRequestHandler} from '../../../hooks/use-request-handler';
@@ -10,6 +10,7 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {EgenModal} from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import './mine-filter.css';
+import {useAppDispatch} from '../../../store';
 
 export interface FeilTiltakModalProps {
     gammeltFilterNavn: string;
@@ -21,7 +22,7 @@ export interface FeilTiltakModalProps {
 export function FeilTiltakModal({gammeltFilterNavn, filterId, lukkModal, oversiktType}: FeilTiltakModalProps) {
     const [visBekreftSlettModal, setVisBekreftSlettModal] = useState(false);
     const requestHandlerSlette = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const {erFeilTiltakModalApen} = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt ? state.mineFilterMinOversikt : state.mineFilterEnhetensOversikt

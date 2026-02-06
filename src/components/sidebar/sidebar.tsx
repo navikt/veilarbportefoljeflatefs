@@ -1,5 +1,4 @@
 import {Dispatch, ReactNode, useRef} from 'react';
-import {useDispatch} from 'react-redux';
 import {Tabs} from '@navikt/ds-react';
 import {FunnelIcon, PersonGroupIcon, StarIcon, VitalsIcon} from '@navikt/aksel-icons';
 import {SidebarTabs, useSidebarViewStore} from '../../store/sidebar/sidebar-view-store';
@@ -14,7 +13,7 @@ import {StatustallForStatusfane} from '../../filtrering/filtrering-status/filtre
 import {Fanevelger} from './fanevelger';
 import {Tab} from './Tab';
 import './sidebar.css';
-import {AppDispatch} from '../../reducer';
+import {useAppDispatch} from '../../store';
 
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;
@@ -62,7 +61,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({filtervalg, enhettiltak, oversiktType, statustall}: SidebarProps) => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const erPaMinOversikt = oversiktType === OversiktType.minOversikt;
     const windowWidth = useWindowWidth();
     const sidebarRef = useRef<HTMLDivElement>(null);

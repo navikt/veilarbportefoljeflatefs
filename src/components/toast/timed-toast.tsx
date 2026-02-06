@@ -1,10 +1,9 @@
 import {useEffect, useRef} from 'react';
-import {useDispatch} from 'react-redux';
 import {Alert, BodyShort} from '@navikt/ds-react';
 import {useTimer} from '../../hooks/use-timer';
 import {kebabCase} from '../../utils/utils';
 import './toast.css';
-import {AppDispatch} from '../../reducer';
+import {useAppDispatch} from '../../store';
 
 interface TimedToastProps {
     toastTekst: string;
@@ -16,7 +15,7 @@ export function TimedToast({toastTekst, alertstripe, fjernToast}: TimedToastProp
     const toastRef = useRef<HTMLDivElement>(null);
     const {startTimer} = useTimer();
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         (toastRef.current as HTMLSpanElement).focus();

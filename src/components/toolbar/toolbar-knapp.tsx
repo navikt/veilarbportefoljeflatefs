@@ -1,11 +1,12 @@
 import {ReactNode, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Button, useEventListener} from '@navikt/ds-react';
 import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {AppDispatch, AppState} from '../../reducer';
+import {AppState} from '../../reducer';
+import {useAppDispatch} from '../../store';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -29,7 +30,7 @@ export function ToolbarKnapp({
     const [inputIsOpen, setInputIsOpen] = useState(false);
     const [buttonIsClicked, setButtonIsClicked] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         setInputIsOpen(setOpenTo);
     };

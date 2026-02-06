@@ -1,12 +1,8 @@
 import {useState} from 'react';
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {BodyShort, Button, CopyButton, Heading, Modal} from '@navikt/ds-react';
 import {BrukerModell, HuskelappModell} from '../../../typer/bruker-modell';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
-import {AppState} from '../../../reducer';
 import {visServerfeilModal} from '../../../ducks/modal-serverfeil';
 import {lagreHuskelapp} from './lagreHuskelapp';
 import {endreHuskelapp} from './endreHuskelapp';
@@ -14,6 +10,7 @@ import HuskelappIkon from '../../../components/ikoner/huskelapp/Huskelappikon_ba
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import './rediger-huskelapp.css';
+import {useAppDispatch} from '../../../store';
 
 interface Props {
     isModalOpen: boolean;
@@ -25,7 +22,7 @@ interface Props {
 export const HuskelappModal = ({isModalOpen, onModalClose, huskelapp, bruker}: Props) => {
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
     const [huskelappEndret, setHuskelappEndret] = useState<boolean>(false);
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
 
     const harHuskelapp = !!huskelapp?.huskelappId;
 

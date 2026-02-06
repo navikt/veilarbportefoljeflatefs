@@ -1,5 +1,5 @@
 import {ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -19,7 +19,7 @@ import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {useFetchStatustallForEnhet} from '../hooks/portefolje/use-fetch-statustall';
-import {AppDispatch, AppState} from '../reducer';
+import {AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
@@ -41,6 +41,7 @@ import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
+import {useAppDispatch} from '../store';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -76,7 +77,7 @@ export function EnhetSide() {
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const portefoljeData = portefolje.data;
     const antallBrukere =
         portefoljeData.antallReturnert > portefoljeData.antallTotalt

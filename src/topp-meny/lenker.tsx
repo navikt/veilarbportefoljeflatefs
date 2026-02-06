@@ -1,12 +1,11 @@
 import {NavLink} from 'react-router-dom';
 import {useParams} from 'react-router';
-import {useDispatch} from 'react-redux';
 import {useIdentSelector} from '../hooks/redux/use-innlogget-ident';
 import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-portefolje';
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
-import {AppDispatch} from '../reducer';
+import {useAppDispatch} from '../store';
 
 interface Props {
     erPaloggetVeileder: boolean;
@@ -17,7 +16,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLenkeKlasse = veilederIdent!.ident === ident || !ident ? 'oversiktslenke--valgt' : '';
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const erAktiv = id => {
         const elem = document.getElementById(id);

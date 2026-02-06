@@ -1,5 +1,4 @@
 import {ChangeEvent} from 'react';
-import {useDispatch} from 'react-redux';
 import {Bleed} from '@navikt/ds-react';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
@@ -21,8 +20,8 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
 import {FargekategoriModell} from '../../typer/bruker-modell';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
+import {useAppDispatch} from '../../store';
 import './fargekategori.css';
-import {AppDispatch} from '../../reducer';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -78,7 +77,7 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
 ] as const;
 
 export function FilterStatusMineFargekategorier() {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const statusTall = useStatustallVeilederSelector();
     const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
     const ferdigfilter = filtervalg.ferdigfilterListe;

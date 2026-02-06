@@ -1,12 +1,11 @@
 import {ReactNode} from 'react';
-import {useDispatch} from 'react-redux';
 import {Button, Heading} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import {endreValgtSidebarTab} from './sidebar';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {AppDispatch} from '../../reducer';
+import {useAppDispatch} from '../../store';
 
 interface TabProps {
     tab: SidebarTabs;
@@ -17,7 +16,7 @@ interface TabProps {
 }
 
 export const SidebarTab = ({tab, tittel, oversiktType, headingChildren, children}: TabProps) => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const lukkSidemenyOgNullstillValgtFane = () => {
         dispatch(skjulSidebar(oversiktType));

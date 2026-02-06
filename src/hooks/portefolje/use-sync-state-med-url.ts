@@ -1,9 +1,10 @@
 import {useEffect} from 'react';
 import queryString from 'query-string';
 import {useLocation, useNavigate} from 'react-router';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, AppState} from '../../reducer';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 import {useSetEnhetIUrl} from './use-set-enhet-i-url';
+import {useAppDispatch} from '../../store';
 
 export function useSyncStateMedUrl() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export function useSyncStateMedUrl() {
 
     const pathname = location.pathname;
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (side) {

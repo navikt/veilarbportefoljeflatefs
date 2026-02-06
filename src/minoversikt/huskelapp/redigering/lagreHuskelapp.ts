@@ -1,14 +1,12 @@
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {FormikValues} from 'formik';
 import {HUSKELAPP_LAGRE_OK, lagreHuskelappAction} from '../../../ducks/huskelapp';
 import {hentHuskelappForBruker} from '../../../ducks/portefolje';
 import {leggTilStatustall} from '../../../ducks/statustall/statustall-veileder';
-import {AppState} from '../../../reducer';
 import {BrukerModell} from '../../../typer/bruker-modell';
+import {AppDispatch} from '../../../store';
 
 export const lagreHuskelapp = async (
-    dispatch: ThunkDispatch<AppState, any, AnyAction>,
+    dispatch: AppDispatch,
     values: FormikValues,
     bruker: BrukerModell,
     enhetId: string,

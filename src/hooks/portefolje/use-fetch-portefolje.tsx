@@ -1,17 +1,18 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetensoversikt/EnhetSide';
-import {AppDispatch, AppState} from '../../reducer';
+import {AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
+import {useAppDispatch} from '../../store';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);

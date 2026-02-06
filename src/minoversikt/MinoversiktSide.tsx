@@ -1,6 +1,6 @@
 import {ReactNode, useEffect, useState} from 'react';
 import {useParams} from 'react-router';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -35,12 +35,13 @@ import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
-import {AppDispatch, AppState} from '../reducer';
+import {AppState} from '../reducer';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
 import {StatustallVeilederState} from '../ducks/statustall/statustall-veileder';
 import {StatustallVeileder} from '../ducks/statustall/statustall-typer';
+import {useAppDispatch} from '../store';
 import '../style.css';
 import './minoversikt.css';
 import '../components/tabell/tabell-overskrift.css';
@@ -55,7 +56,7 @@ export function MinoversiktSide() {
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         document.title = 'Min oversikt';

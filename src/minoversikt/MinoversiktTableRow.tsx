@@ -1,7 +1,4 @@
 import {MouseEvent, useEffect, useLayoutEffect, useState} from 'react';
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {Collapse} from 'react-collapse';
 import classNames from 'classnames';
 import {Checkbox, Tag} from '@navikt/ds-react';
@@ -11,7 +8,6 @@ import {BrukerModell} from '../typer/bruker-modell';
 import {FiltervalgModell} from '../typer/filtervalg-modell';
 import {MinoversiktTableDataCells} from './MinoversiktTableDataCells';
 import {Kolonne} from '../ducks/ui/listevisning';
-import {AppState} from '../reducer';
 import {hentHuskelappForBruker} from '../ducks/portefolje';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
 import {HuskelappIkonInngang} from './huskelapp/HuskelappIkonInngang';
@@ -19,6 +15,7 @@ import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisn
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import './minoversikt.css';
+import {useAppDispatch} from '../store';
 
 interface Props {
     bruker: BrukerModell;
@@ -40,7 +37,7 @@ export function MinoversiktTableRow({
     onClick
 }: Props) {
     const [brukerpanelApent, setBrukerpanelApent] = useState<boolean>(false);
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
 
     const scrollToLastPos = () => {
         const xPos = parseInt(localStorage.getItem('xScrollPos') ?? '0');

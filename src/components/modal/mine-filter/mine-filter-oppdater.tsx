@@ -1,7 +1,5 @@
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
+import {useSelector} from 'react-redux';
 import {Button, TextField} from '@navikt/ds-react';
 import {TrashIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../../reducer';
@@ -15,6 +13,7 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
+import {useAppDispatch} from '../../../store';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;
@@ -24,7 +23,7 @@ interface OppdaterMineFilterProps {
 }
 
 export function OppdaterMineFilter({gammeltFilterNavn, filterId, lukkModal, oversiktType}: OppdaterMineFilterProps) {
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const filterValg = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt ? state.filtreringMinoversikt : state.filtreringEnhetensOversikt
     );

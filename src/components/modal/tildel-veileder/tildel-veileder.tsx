@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
 import {BrukerModell} from '../../../typer/bruker-modell';
-import {AppDispatch, AppState} from '../../../reducer';
+import {AppState} from '../../../reducer';
 import {SokFilter} from '../../sok-veiledere/sok-filter';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
@@ -18,6 +18,7 @@ import {
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
 import '../../toolbar/toolbar.css';
+import {useAppDispatch} from '../../../store';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -50,7 +51,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         Tilordning[]
     >([]);
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
     const enhet = useEnhetSelector();

@@ -1,14 +1,15 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {EnhetTableRow} from './EnhetTableRow';
 import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {AppDispatch, AppState} from '../reducer';
+import {AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 import './enhetensoversikt.css';
 import './brukerliste.css';
+import {useAppDispatch} from '../store';
 
 interface Props {
     classNameWrapper: string;
@@ -21,7 +22,7 @@ export function EnhetTableBody({classNameWrapper}: Props) {
     );
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
 
