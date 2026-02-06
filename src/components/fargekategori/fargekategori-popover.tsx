@@ -16,7 +16,7 @@ import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjel
 import {BekreftEndreFargekategoriPaMangeModal} from './bekreft-endre-fargekategori-pa-mange-modal';
 
 interface FargekategoriPopoverProps {
-    buttonRef: RefObject<HTMLButtonElement>;
+    buttonRef: RefObject<HTMLButtonElement | null>;
     popoverOpen: boolean;
     setPopoverOpen: (openState: boolean) => void;
     valgteBrukereFnrs: string[];
