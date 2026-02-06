@@ -10,6 +10,7 @@ import {Tiltak} from '../../ducks/enhettiltak';
 import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
+import {AppDispatch} from '../../reducer';
 
 const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
     harInaktiveFilter: {
@@ -40,7 +41,7 @@ export function MineFilterInnhold({
     enhettiltak
 }: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const filtrertListe = () => {
         return lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem));

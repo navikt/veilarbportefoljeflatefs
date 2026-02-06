@@ -6,12 +6,12 @@ import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {useSelectGjeldendeVeileder} from './use-select-gjeldende-veileder';
 import {antallFilter} from '../../enhetensoversikt/EnhetSide';
-import {AppState} from '../../reducer';
+import {AppDispatch, AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);

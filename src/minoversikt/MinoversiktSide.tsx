@@ -35,7 +35,7 @@ import {LagredeFilterUIController} from '../filtrering/lagrede-filter-controller
 import {useVeilederListeSelector} from '../hooks/redux/use-veilederliste-selector';
 import {lukkFeilTiltakModal} from '../ducks/lagret-filter-ui-state';
 import {FeilTiltakModal} from '../components/modal/mine-filter/feil-tiltak-modal';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {IdentParam} from '../model-interfaces';
 import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informasjonsmeldinger';
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
@@ -55,7 +55,7 @@ export function MinoversiktSide() {
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         document.title = 'Min oversikt';

@@ -11,6 +11,7 @@ import {
 } from '../ducks/sortering';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 import './veilederoversikt-tabell.css';
+import {AppDispatch} from '../reducer';
 
 interface VeiledereTabellProps {
     veiledere: VeilederMedPortefoljestorrelse[];
@@ -18,7 +19,7 @@ interface VeiledereTabellProps {
 }
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const sorterPaaEtternavn = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.ETTERNAVN));
     const sorterPaaPortefoljestorrelse = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE));
 

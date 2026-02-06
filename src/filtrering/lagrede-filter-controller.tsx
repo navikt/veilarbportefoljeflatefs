@@ -8,7 +8,7 @@ import {
     markerValgtVeiledergruppe
 } from '../ducks/lagret-filter-ui-state';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function LagredeFilterUIController({oversiktType}: Props) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
     const filtreringMinoversikt = useSelector((state: AppState) => state.filtreringMinoversikt);

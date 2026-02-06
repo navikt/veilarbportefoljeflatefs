@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppState} from '../../../reducer';
+import {AppDispatch, AppState} from '../../../reducer';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
 import {OrNothing} from '../../../utils/types/types';
@@ -50,7 +50,7 @@ export function MineFilterModal({oversiktType}: Props) {
     );
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY);
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const lukkModal = () => {
         dispatch(lukkMineFilterModal(oversiktType));

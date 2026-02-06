@@ -10,7 +10,7 @@ import {endreFiltervalg, fjern, slettEnkeltFilter} from '../ducks/filtrering';
 import {ToppMeny} from '../topp-meny/topp-meny';
 import {useOnMount} from '../hooks/use-on-mount';
 import {getSideFromUrl, getSidestorrelseFromUrl} from '../utils/url-utils';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {pagineringSetup} from '../ducks/paginering';
 import {useSetEnhetIUrl} from '../hooks/portefolje/use-set-enhet-i-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
@@ -29,7 +29,7 @@ export function VeilederoversiktSide() {
     const statustall = useFetchStatustallForVeileder(gjeldendeVeileder);
     const filtervalg = useSelector((state: AppState) => state.filtreringVeilederoversikt);
     const oversiktType = OversiktType.veilederOversikt;
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const slettVeilederFilter = ident => {
         const oppdatertFiltervalg = {
             ...filtervalg,

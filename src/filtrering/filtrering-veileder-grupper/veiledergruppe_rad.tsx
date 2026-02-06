@@ -4,7 +4,7 @@ import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
-import {AppState} from '../../reducer';
+import {AppDispatch, AppState} from '../../reducer';
 import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
@@ -23,7 +23,7 @@ export function VeiledergruppeRad({
     oversiktType,
     erValgt
 }: VeiledergruppeRadProps) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const lagredeGrupper = useSelector((state: AppState) =>
         state.veiledergrupper.data.filter(v => v.filterId !== veilederGruppe.filterId)

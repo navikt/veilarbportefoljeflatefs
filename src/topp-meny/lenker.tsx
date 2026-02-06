@@ -6,6 +6,7 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
+import {AppDispatch} from '../reducer';
 
 interface Props {
     erPaloggetVeileder: boolean;
@@ -16,7 +17,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
     const {ident} = useParams<IdentParam>();
     const harPortefolje = useVeilederHarPortefolje();
     const aktivLenkeKlasse = veilederIdent!.ident === ident || !ident ? 'oversiktslenke--valgt' : '';
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const erAktiv = id => {
         const elem = document.getElementById(id);
@@ -32,7 +33,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/portefolje')) {
-                        fjernBrukerIKontekst()(dispatch);
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{
@@ -52,7 +53,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/enhet')) {
-                        fjernBrukerIKontekst()(dispatch);
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{
@@ -73,7 +74,7 @@ export function Lenker({erPaloggetVeileder}: Props) {
             <NavLink
                 onClick={() => {
                     if (!window.location.pathname.startsWith('/veiledere')) {
-                        fjernBrukerIKontekst()(dispatch);
+                        dispatch(fjernBrukerIKontekst());
                     }
                 }}
                 to={{

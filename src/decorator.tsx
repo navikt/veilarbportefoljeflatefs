@@ -6,6 +6,7 @@ import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-se
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
+import {AppDispatch} from './reducer';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -45,18 +46,18 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
 }
 
 export function Decorator() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const enhetId = useEnhetSelector();
     const brukerIKontekst = useBrukerIKontekstSelector();
 
     useEffect(() => {
         if (brukerIKontekst && !window.location.href.includes('/tilbake')) {
-            fjernBrukerIKontekst()(dispatch);
+            dispatch(fjernBrukerIKontekst());
         }
     }, [brukerIKontekst, dispatch]);
 
     function velgEnhet(enhet: string) {
-        fjernBrukerIKontekst()(dispatch);
+        dispatch(fjernBrukerIKontekst());
     }
 
     const config = getConfig(enhetId, velgEnhet);

@@ -3,7 +3,7 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
 import {BrukerModell} from '../../../typer/bruker-modell';
-import {AppState} from '../../../reducer';
+import {AppDispatch, AppState} from '../../../reducer';
 import {SokFilter} from '../../sok-veiledere/sok-filter';
 import {nameToStateSliceMap} from '../../../ducks/utils';
 import {useSelectGjeldendeVeileder} from '../../../hooks/portefolje/use-select-gjeldende-veileder';
@@ -50,7 +50,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         Tilordning[]
     >([]);
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
     const enhet = useEnhetSelector();

@@ -4,7 +4,7 @@ import {Pagination} from '@navikt/ds-react';
 import {KnappPanel} from './knapp-panel';
 import {pagineringSetup} from '../../../ducks/paginering';
 import {selectSide, selectSidestorrelse} from './paginering-selector';
-import {AppState} from '../../../reducer';
+import {AppDispatch, AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 import './paginering.css';
 
@@ -15,7 +15,7 @@ interface PagineringProps {
 }
 
 export function Paginering({className, antallTotalt, onPaginering}: PagineringProps) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const side = useSelector((state: AppState) => selectSide(state));
     const sidestorrelseRedux = useSelector((state: AppState) => selectSidestorrelse(state));
     const viserDefaultAntall = DEFAULT_PAGINERING_STORRELSE === sidestorrelseRedux;

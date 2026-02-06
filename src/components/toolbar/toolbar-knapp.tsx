@@ -5,7 +5,7 @@ import TildelVeileder from '../modal/tildel-veileder/tildel-veileder';
 import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {AppState} from '../../reducer';
+import {AppDispatch, AppState} from '../../reducer';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;
@@ -29,7 +29,7 @@ export function ToolbarKnapp({
     const [inputIsOpen, setInputIsOpen] = useState(false);
     const [buttonIsClicked, setButtonIsClicked] = useState(false);
     const loggNode = useRef<HTMLDivElement>(null); // Referanse til omsluttende div rundt loggen
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const requestSetOpenStatus = (setOpenTo: boolean) => {
         setInputIsOpen(setOpenTo);
     };

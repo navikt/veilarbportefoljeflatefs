@@ -10,6 +10,7 @@ import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter
 import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
+import {AppDispatch} from '../../reducer';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -27,7 +28,7 @@ function FiltreringLabelContainer({
     actions: {slettAlle, slettEnkelt},
     className
 }: FiltreringLabelContainerProps) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());

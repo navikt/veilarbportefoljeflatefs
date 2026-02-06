@@ -22,6 +22,7 @@ import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} fr
 import {FargekategoriModell} from '../../typer/bruker-modell';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
 import './fargekategori.css';
+import {AppDispatch} from '../../reducer';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -77,7 +78,7 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
 ] as const;
 
 export function FilterStatusMineFargekategorier() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const statusTall = useStatustallVeilederSelector();
     const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
     const ferdigfilter = filtervalg.ferdigfilterListe;

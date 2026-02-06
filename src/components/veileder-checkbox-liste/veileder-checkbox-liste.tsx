@@ -4,7 +4,7 @@ import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
 import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
 import {Filtervalg, FiltervalgModell} from '../../typer/filtervalg-modell';
-import {AppState} from '../../reducer';
+import {AppDispatch, AppState} from '../../reducer';
 import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -20,7 +20,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const formNavn = Filtervalg.veiledere;
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);

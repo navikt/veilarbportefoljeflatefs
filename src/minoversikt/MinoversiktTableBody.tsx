@@ -7,7 +7,7 @@ import {useOnUnmount} from '../hooks/use-on-unmount';
 import {updateLastPath} from '../utils/url-utils';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {STATUS} from '../ducks/utils';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 import './minoversikt.css';
 
@@ -19,7 +19,7 @@ export function MinoversiktTableBody({classNameWrapper}: Props) {
     const forrigeBruker = useBrukerIKontekstSelector();
     const {brukere, enhetId, filtervalg, listevisning} = usePortefoljeSelector(OversiktType.minOversikt);
     const portefolje = useSelector((state: AppState) => state.portefolje);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
     const tilordningerStatus = portefolje.tilordningerstatus !== STATUS.RELOADING ? STATUS.OK : STATUS.RELOADING;
 

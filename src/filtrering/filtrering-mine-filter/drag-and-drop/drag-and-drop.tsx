@@ -9,7 +9,7 @@ import {LagretFilter} from '../../../ducks/lagret-filter';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../../ducks/ui/listevisning';
 import {OrNothing} from '../../../utils/types/types';
 import {Tiltak} from '../../../ducks/enhettiltak';
-import {AppState} from '../../../reducer';
+import {AppDispatch, AppState} from '../../../reducer';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
 import './drag-and-drop.css';
@@ -32,7 +32,7 @@ export function DragAndDrop({
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const [valgtFilter, setValgtFilter] = useState('');
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const valgtMineFilter = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt

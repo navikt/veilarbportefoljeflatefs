@@ -71,7 +71,7 @@ export const FargekategoriPopover = ({
             fargekategoriVerdi: fargekategori
         };
 
-        const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
+        const apiResponseAction = await dispatch(oppdaterFargekategoriAction(data));
 
         if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
             if (gammelFargekategori) {

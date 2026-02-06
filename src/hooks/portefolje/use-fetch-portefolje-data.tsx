@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {hentEnhetTiltak} from '../../ducks/enhettiltak';
-import {AppState} from '../../reducer';
+import {AppDispatch, AppState} from '../../reducer';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {hentPortefoljeStorrelser} from '../../ducks/portefoljestorrelser';
 import {hentVeiledereForEnhet} from '../../ducks/veiledere';
@@ -11,7 +11,7 @@ import {hentFoedelandList} from '../../ducks/foedeland';
 import {hentTolkebehovSpraak} from '../../ducks/tolkebehov';
 
 export function useFetchPortefoljeData() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const enhet = useEnhetSelector();
 
     const enhettiltak = useSelector((state: AppState) => state.enhettiltak);

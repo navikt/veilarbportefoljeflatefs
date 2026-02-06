@@ -19,7 +19,7 @@ import {hentPortefoljeForEnhet} from '../ducks/portefolje';
 import {useSyncStateMedUrl} from '../hooks/portefolje/use-sync-state-med-url';
 import {useSetLocalStorageOnUnmount} from '../hooks/portefolje/use-set-local-storage-on-unmount';
 import {useFetchStatustallForEnhet} from '../hooks/portefolje/use-fetch-statustall';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {useSidebarViewStore} from '../store/sidebar/sidebar-view-store';
 import {sortTiltak} from '../filtrering/filtrering-status/filter-utils';
 import {pagineringSetup} from '../ducks/paginering';
@@ -76,7 +76,7 @@ export function EnhetSide() {
         usePortefoljeSelector(oversiktType);
     const statustallFetchStatus: StatustallEnhetState = useFetchStatustallForEnhet(enhetId);
     const statustall: StatustallEnhet = useStatustallEnhetSelector();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const portefoljeData = portefolje.data;
     const antallBrukere =
         portefoljeData.antallReturnert > portefoljeData.antallTotalt

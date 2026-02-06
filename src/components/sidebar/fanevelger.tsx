@@ -12,6 +12,7 @@ import {MineFilterTab} from './mine-filter-tab';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {FiltreringFilter} from '../../filtrering/filtrering-filter/filtrering-filter';
 import {FilteringVeiledergrupper} from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
+import {AppDispatch} from '../../reducer';
 
 interface Props {
     valgtFane: SidebarTabs;
@@ -32,7 +33,7 @@ export const Fanevelger = ({
     statustall,
     lukkSidemeny
 }: Props) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));

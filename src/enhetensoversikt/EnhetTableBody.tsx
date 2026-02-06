@@ -4,7 +4,7 @@ import {settBrukerSomMarkert} from '../ducks/portefolje';
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
-import {AppState} from '../reducer';
+import {AppDispatch, AppState} from '../reducer';
 import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 import './enhetensoversikt.css';
@@ -21,7 +21,7 @@ export function EnhetTableBody({classNameWrapper}: Props) {
     );
     const veiledere = useSelector((state: AppState) => state.veiledere);
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const settMarkert = (fnr, markert) => dispatch(settBrukerSomMarkert(fnr, markert));
 
