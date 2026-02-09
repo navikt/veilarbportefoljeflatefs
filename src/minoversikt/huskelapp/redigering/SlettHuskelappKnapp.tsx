@@ -4,7 +4,8 @@ import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from './slettHuskelapp';
 import {BrukerModell} from '../../../typer/bruker-modell';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface SlettHuskelappKnappProps {
     bruker: BrukerModell;

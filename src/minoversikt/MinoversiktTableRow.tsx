@@ -15,7 +15,8 @@ import {HuskelappPanelvisning} from './huskelapp/panelvisning/HuskelappPanelvisn
 import {TomtHuskelappEllerFargekategoriFelt} from './TomtHuskelappEllerFargekategoriFelt';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import './minoversikt.css';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     bruker: BrukerModell;

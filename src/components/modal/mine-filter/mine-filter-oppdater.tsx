@@ -13,7 +13,8 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface OppdaterMineFilterProps {
     oversiktType: OversiktType;

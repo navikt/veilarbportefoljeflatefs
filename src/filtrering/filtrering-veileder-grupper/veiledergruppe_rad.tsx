@@ -9,7 +9,8 @@ import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
 import {Filtervalg} from '../../typer/filtervalg-modell';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;

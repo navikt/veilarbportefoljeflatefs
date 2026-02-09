@@ -13,7 +13,8 @@ import {AppState} from '../../../reducer';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
 import './drag-and-drop.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];

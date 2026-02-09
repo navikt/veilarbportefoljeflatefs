@@ -10,7 +10,8 @@ import {avmarkerSisteValgtMineFilter} from '../../../ducks/lagret-filter-ui-stat
 import {EgenModal} from '../egenModal';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import './mine-filter.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 export interface FeilTiltakModalProps {
     gammeltFilterNavn: string;

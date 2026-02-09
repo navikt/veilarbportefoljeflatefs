@@ -11,7 +11,8 @@ import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;

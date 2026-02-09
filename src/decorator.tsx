@@ -5,8 +5,8 @@ import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-se
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
-import {useAppDispatch} from './store';
 import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
+import {useAppDispatch} from './hooks/redux/use-app-dispatch';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 

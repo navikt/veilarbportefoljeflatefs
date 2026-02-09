@@ -9,7 +9,8 @@ import {Tiltak} from '../../ducks/enhettiltak';
 import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
     harInaktiveFilter: {

@@ -9,7 +9,8 @@ import {antallFilter} from '../../enhetensoversikt/EnhetSide';
 import {AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../redux/use-app-dispatch';
 
 export function useFetchPortefolje(oversiktType: OversiktType) {
     const dispatch = useAppDispatch();

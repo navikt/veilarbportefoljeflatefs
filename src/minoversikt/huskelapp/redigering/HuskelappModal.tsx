@@ -10,7 +10,8 @@ import HuskelappIkon from '../../../components/ikoner/huskelapp/Huskelappikon_ba
 import {NyHuskelapp} from './NyHuskelapp';
 import {SlettHuskelappKnapp} from './SlettHuskelappKnapp';
 import './rediger-huskelapp.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface Props {
     isModalOpen: boolean;

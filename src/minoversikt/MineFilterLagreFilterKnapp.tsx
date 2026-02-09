@@ -6,7 +6,8 @@ import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/mod
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     oversiktType: OversiktType;

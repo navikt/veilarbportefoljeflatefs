@@ -5,7 +5,8 @@ import {useVeilederHarPortefolje} from '../hooks/portefolje/use-veileder-har-por
 import {getSidestorrelseFromUrl} from '../utils/url-utils';
 import {IdentParam} from '../model-interfaces';
 import {fjernBrukerIKontekst} from '../ducks/bruker-i-kontekst';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     erPaloggetVeileder: boolean;

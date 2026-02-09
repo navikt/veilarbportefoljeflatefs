@@ -11,7 +11,8 @@ import {MineFilterTab} from './mine-filter-tab';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {FiltreringFilter} from '../../filtrering/filtrering-filter/filtrering-filter';
 import {FilteringVeiledergrupper} from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface Props {
     valgtFane: SidebarTabs;

@@ -5,7 +5,8 @@ import {VelgKolonnerRad} from './velg-kolonner-rad';
 import {AppState} from '../../../reducer';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG} from '../../../konstanter';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface ListevisningProps {
     oversiktType: OversiktType;

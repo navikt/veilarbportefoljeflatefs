@@ -17,7 +17,8 @@ import {hentMineFilterForVeileder} from '../../ducks/mine-filter';
 import '../../components/sidebar/sidebar.css';
 import './veiledergruppe.css';
 import '../filtrering-filter/filterform/filterform.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeInnholdProps {
     lagretFilter: LagretFilter[];

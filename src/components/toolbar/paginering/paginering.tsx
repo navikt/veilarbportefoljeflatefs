@@ -7,7 +7,8 @@ import {selectSide, selectSidestorrelse} from './paginering-selector';
 import {AppState} from '../../../reducer';
 import {DEFAULT_PAGINERING_STORRELSE, SE_FLERE_PAGINERING_STORRELSE} from '../../../konstanter';
 import './paginering.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface PagineringProps {
     className?: string;

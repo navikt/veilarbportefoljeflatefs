@@ -3,7 +3,8 @@ import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
 import {settSortering} from '../../ducks/portefolje';
 import {useOnMount} from '../use-on-mount';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../redux/use-app-dispatch';
 
 export function useSetStateFromUrl() {
     const dispatch = useAppDispatch();

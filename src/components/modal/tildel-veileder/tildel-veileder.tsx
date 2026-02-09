@@ -18,7 +18,8 @@ import {
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
 import '../../toolbar/toolbar.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {

@@ -5,7 +5,8 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import './mine-filter_innhold.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface MineFilterRadProps {
     filter: LagretFilter;

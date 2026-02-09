@@ -9,7 +9,8 @@ import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import './veileder-checkbox-liste.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;

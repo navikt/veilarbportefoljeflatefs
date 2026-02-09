@@ -3,7 +3,8 @@ import {Alert, BodyShort} from '@navikt/ds-react';
 import {useTimer} from '../../hooks/use-timer';
 import {kebabCase} from '../../utils/utils';
 import './toast.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface TimedToastProps {
     toastTekst: string;

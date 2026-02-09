@@ -5,7 +5,8 @@ import {Fargekategorinavn} from '../../model-interfaces';
 import {FargekategoriPopover} from './fargekategori-popover';
 import {fargekategoriIkonMapper} from './fargekategori-ikon-mapper';
 import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FargekategoriPopoverKnappProps {
     bruker: BrukerModell;

@@ -10,7 +10,8 @@ import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter
 import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;

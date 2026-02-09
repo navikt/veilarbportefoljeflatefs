@@ -12,7 +12,8 @@ import {EgenModal} from '../egenModal';
 import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
 import './mine-filter.css';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 export enum Visningstype {
     MENY,

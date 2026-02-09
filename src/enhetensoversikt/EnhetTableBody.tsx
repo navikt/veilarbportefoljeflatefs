@@ -9,7 +9,8 @@ import {STATUS} from '../ducks/utils';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 import './enhetensoversikt.css';
 import './brukerliste.css';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     classNameWrapper: string;

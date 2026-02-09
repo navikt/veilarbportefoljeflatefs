@@ -31,8 +31,8 @@ import {useFeatureSelector} from '../../hooks/redux/use-feature-selector';
 import {VIS_MELDING_OM_BRUKERE_MED_ADRESSEBESKYTTELSE_ELLER_SKJERMING} from '../../konstanter';
 import {FilterStatusMineFargekategorier} from './fargekategori';
 import {StatustallInnhold} from '../../ducks/statustall/statustall-typer';
-import {useAppDispatch} from '../../store';
 import './filtrering-status.css';
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 /** Denne typen tek i mot StatustallEnhet og StatustallVeileder på formatet til StatustallEnhet.
  * Dersom vi er i Min oversikt får vi inn StatustallVeileder og utenBrukerinnsyn vil vere `null`.

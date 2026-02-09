@@ -41,7 +41,8 @@ import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {

@@ -9,7 +9,8 @@ import {hentLagretFilterForEnhet} from '../../ducks/veiledergrupper_filter';
 import {hentGeografiskBosted} from '../../ducks/geografiskBosted';
 import {hentFoedelandList} from '../../ducks/foedeland';
 import {hentTolkebehovSpraak} from '../../ducks/tolkebehov';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../redux/use-app-dispatch';
 
 export function useFetchPortefoljeData() {
     const dispatch = useAppDispatch();

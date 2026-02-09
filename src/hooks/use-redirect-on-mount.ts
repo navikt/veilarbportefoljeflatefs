@@ -2,7 +2,8 @@ import {useLocation, useNavigate} from 'react-router';
 import queryString from 'query-string';
 import {useOnMount} from './use-on-mount';
 import {settSortering} from '../ducks/portefolje';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from './redux/use-app-dispatch';
 
 export function useRedirectOnMount() {
     const navigate = useNavigate();

@@ -41,10 +41,10 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useStatustallVeilederSelector} from '../hooks/redux/use-statustall';
 import {StatustallVeilederState} from '../ducks/statustall/statustall-veileder';
 import {StatustallVeileder} from '../ducks/statustall/statustall-typer';
-import {useAppDispatch} from '../store';
 import '../style.css';
 import './minoversikt.css';
 import '../components/tabell/tabell-overskrift.css';
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';

@@ -3,7 +3,8 @@ import {AppState} from '../../reducer';
 import {skjulServerfeilModal} from '../../ducks/modal-serverfeil';
 import {skjulFeilmeldingModal} from '../../ducks/modal-feilmelding-brukere';
 import {skjulModal} from '../../ducks/modal';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from './use-app-dispatch';
 
 export function useModalControllerSelector() {
     const serverfeilModalSkalVises = useSelector((state: AppState) => state.serverfeilModal.aarsak);

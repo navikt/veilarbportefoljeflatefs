@@ -7,7 +7,8 @@ import {hentInnloggetVeileder} from '../ducks/innlogget-veileder';
 import {hentSystemmeldinger} from '../ducks/systemmeldinger';
 import {hentBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 import {hentEnhetIKontekst} from '../ducks/valgt-enhet';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);

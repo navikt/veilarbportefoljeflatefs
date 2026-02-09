@@ -10,7 +10,8 @@ import {STATUS} from '../ducks/utils';
 import {AppState} from '../reducer';
 import {useBrukerIKontekstSelector} from '../hooks/redux/use-bruker-i-kontekst-selector';
 import './minoversikt.css';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     classNameWrapper: string;

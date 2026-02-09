@@ -4,7 +4,8 @@ import {useLocation, useNavigate} from 'react-router';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
 import {useSetEnhetIUrl} from './use-set-enhet-i-url';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../redux/use-app-dispatch';
 
 export function useSyncStateMedUrl() {
     const navigate = useNavigate();

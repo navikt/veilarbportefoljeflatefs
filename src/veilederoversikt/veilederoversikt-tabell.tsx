@@ -10,7 +10,8 @@ import {
 } from '../ducks/sortering';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 import './veilederoversikt-tabell.css';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface VeiledereTabellProps {
     veiledere: VeilederMedPortefoljestorrelse[];

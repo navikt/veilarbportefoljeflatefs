@@ -4,7 +4,8 @@ import FargekategoriIkonBokmerke from '../ikoner/fargekategorier/Fargekategoriik
 import {FargekategoriPopover} from '../fargekategori/fargekategori-popover';
 import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];

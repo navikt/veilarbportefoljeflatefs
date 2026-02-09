@@ -10,7 +10,8 @@ import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import './enhetensoversikt.css';
 import './brukerliste.css';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     bruker: BrukerModell;

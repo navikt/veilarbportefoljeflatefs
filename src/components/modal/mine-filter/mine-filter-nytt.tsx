@@ -10,7 +10,8 @@ import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
-import {useAppDispatch} from '../../../store';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;

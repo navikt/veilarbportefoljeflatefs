@@ -20,8 +20,8 @@ import {OversiktType} from '../../ducks/ui/listevisning';
 import {FARGEKATEGORIER_HOVEDFILTER_KLIKK, FARGEKATEGORIER_UNDERFILTER_KLIKK} from '../../ducks/filtrering';
 import {FargekategoriModell} from '../../typer/bruker-modell';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
-import {useAppDispatch} from '../../store';
 import './fargekategori.css';
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;

@@ -11,7 +11,8 @@ import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/mod
 import {AppState} from '../reducer';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     oversiktType: OversiktType;

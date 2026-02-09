@@ -6,7 +6,8 @@ import SokVeileder from './sok-veileder';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {nullstillBrukerfeil, oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
 import {AppState} from '../../reducer';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface ToolbarKnappProps {
     skalVises?: boolean;

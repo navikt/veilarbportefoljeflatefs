@@ -23,7 +23,8 @@ import {Informasjonsmeldinger} from '../components/informasjonsmeldinger/informa
 import {useSelectGjeldendeVeileder} from '../hooks/portefolje/use-select-gjeldende-veileder';
 import './veilederoversikt.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
-import {useAppDispatch} from '../store';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 export function VeilederoversiktSide() {
     const gjeldendeVeileder = useSelectGjeldendeVeileder();

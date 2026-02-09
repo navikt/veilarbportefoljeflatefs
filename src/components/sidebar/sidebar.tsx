@@ -13,7 +13,8 @@ import {StatustallForStatusfane} from '../../filtrering/filtrering-status/filtre
 import {Fanevelger} from './fanevelger';
 import {Tab} from './Tab';
 import './sidebar.css';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface EndreSideBarProps {
     dispatch: Dispatch<any>;

@@ -5,7 +5,8 @@ import {AppState} from '../../reducer';
 import {hentStatustallForVeileder} from '../../ducks/statustall/statustall-veileder';
 import {hentStatustallForEnhet} from '../../ducks/statustall/statustall-enhet';
 import {OrNothing} from '../../utils/types/types';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../redux/use-app-dispatch';
 
 export function useFetchStatustallForVeileder(veilederId: string) {
     const dispatch = useAppDispatch();

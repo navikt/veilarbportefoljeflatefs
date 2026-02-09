@@ -5,7 +5,8 @@ import {endreValgtSidebarTab} from './sidebar';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {skjulSidebar} from '../../ducks/sidebar-tab';
 import {OversiktType} from '../../ducks/ui/listevisning';
-import {useAppDispatch} from '../../store';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface TabProps {
     tab: SidebarTabs;
