@@ -6,6 +6,7 @@ import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils'
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
 import {useAppDispatch} from './store';
+import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -56,7 +57,7 @@ export function Decorator() {
     }, [brukerIKontekst, dispatch]);
 
     function velgEnhet(enhet: string) {
-        dispatch(fjernBrukerIKontekst());
+        dispatch(oppdaterValgtEnhet(enhet));
     }
 
     const config = getConfig(enhetId, velgEnhet);
