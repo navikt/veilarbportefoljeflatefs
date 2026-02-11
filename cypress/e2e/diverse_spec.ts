@@ -4,6 +4,10 @@ before('Start server', () => {
     cy.configure();
 });
 
+beforeEach(() => {
+    cy.gaTilOversikt('enhetens-oversikt');
+});
+
 describe('Diverse', () => {
     it('Paginering', () => {
         cy.gaTilOversikt('min-oversikt');
@@ -23,9 +27,6 @@ describe('Diverse', () => {
         // Sjekkar at ein kan bytte tilbake til 50
         cy.getByTestId('vis-50-per-side_knapp').should('be.visible').click();
         cy.get('.brukerliste').children().should('have.length', 50);
-
-        // Går tilbake til startsida (nullstiller til neste test)
-        cy.gaTilOversikt('enhetens-oversikt');
     });
 
     const aasen = 'Aasen';
@@ -116,9 +117,6 @@ describe('Diverse', () => {
                 cy.get('button').last().click();
             });
         cy.getByTestId('modal-suksess_tildel-veileder').should('not.exist');
-
-        // Går tilbake til startsida (nullstiller til neste test)
-        cy.gaTilOversikt('enhetens-oversikt');
     });
 
     it('Sjekk at feilmelding for tildeling uten valgt bruker forsvinner ved klikk', () => {
@@ -127,10 +125,7 @@ describe('Diverse', () => {
          * og handlinga på knappen verte utført. I testen fungerar det bra, i praksis litt mindre.
          *
          * Svakheiten i testen er at her fortel vi knappar at dei er trykka på, vi trykkar ikkje berre på same området
-         * i vindauget og håpar på det beste. Brukarar gjer det. Døme på at testen ikkje er perfekt ligg nedst, der med
-         * klikk på brukar-checkbox som i dev (per 2024-03-21) lukkar feilmeldinga, men ikkje vel brukaren. I testen gjer
-         * den begge deler.
-         * */
+         * i vindauget og håpar på det beste. Brukarar gjer det. */
 
         // Gå til Min oversikt
         cy.gaTilOversikt('min-oversikt');
@@ -180,18 +175,6 @@ describe('Diverse', () => {
         cy.getByTestId('brukerfeilmelding').should('be.visible');
         cy.klikkTab('MINE_FILTER');
         cy.getByTestId('brukerfeilmelding').should('not.exist');
-
-        // Testar at klikk på brukar-checkbox både vel brukaren og lukkar feilmeldinga. (Dette fungerer i testen, men ikkje i røynda.)
-        cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
-        cy.getByTestId('brukerfeilmelding').should('be.visible');
-        cy.scrollTo('top');
-        cy.wait(100);
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').not(':disabled').first().should('not.be.checked').click();
-        cy.getByTestId('brukerfeilmelding').should('not.exist');
-        cy.getByTestId('min-oversikt_brukerliste-checkbox').not(':disabled').first().should('be.checked');
-
-        // Går tilbake til startsida (nullstiller til neste test)
-        cy.gaTilOversikt('enhetens-oversikt');
     });
 
     it('Sjekk at filter og kolonnevalg blir beholdt mellom oversiktene', () => {

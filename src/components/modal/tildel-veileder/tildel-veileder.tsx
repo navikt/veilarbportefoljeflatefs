@@ -59,7 +59,7 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
-    const sorterVeiledere = veiledere.sort((a, b) => {
+    const sorterVeiledere = [...veiledere].sort((a, b) => {
         if (a.ident === b.ident) return 0;
         if (a.ident === innloggetVeileder) return -1;
         if (b.ident === innloggetVeileder) return 1;

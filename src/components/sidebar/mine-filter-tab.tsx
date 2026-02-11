@@ -86,7 +86,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
             <FiltreringMineFilter
                 oversiktType={oversiktType}
                 fjernUtilgjengeligeFilter={fjernUtilgjengeligeFilter}
-                lagretFilter={mineFilter.sort(sortMineFilter)}
+                lagretFilter={[...mineFilter].sort(sortMineFilter)}
                 isDraggable={isMinefiltereDraggable}
                 setisDraggable={setIsMinefiltereDraggable}
                 enhettiltak={enhettiltak}

@@ -48,7 +48,7 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
             });
     };
 
-    const sortertVeiledergruppe = lagretFilter.sort((a, b) =>
+    const sortertVeiledergruppe = [...lagretFilter].sort((a, b) =>
         a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true})
     );
 

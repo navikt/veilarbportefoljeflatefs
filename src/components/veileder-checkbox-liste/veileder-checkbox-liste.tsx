@@ -61,7 +61,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
             return null;
         }
 
-        return veiledere
+        return [...veiledere]
             .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
             .map((veileder, index) => {
                 return (

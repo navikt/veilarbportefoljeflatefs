@@ -45,88 +45,41 @@ Cypress.Commands.add('findByTestId', {prevSubject: true}, (subject, selector) =>
     return subject.find(`[data-testid=${selector}]`);
 });
 
-/* Ting eg ikkje forstår med denne funksjonen (2025-02-05, Ingrid)
- * - Kvifor forventer vi loader når vi allereie er på ei side? Vi har ikkje trykka på noko her.
- * - Kvifor returnerer vi kalla, i staden for å berre kalle dei? Vi bruker ikkje funksjonen i nøsting uansett.
- *   (Det ville dessutan vore meir fornuftig/lettlest å returnere berre oversikt-elementet.)
- * - Prøver vi nokon gong å gå til ei side vi ikkje er på? Treng vi den koden i det heile? Og om vi prøver, er ikkje
- *   rett oppførsel at vi trykkar på ting?
- * */
 Cypress.Commands.add('gaTilOversikt', side => {
-    if (side === 'min-oversikt') {
-        // Om vi ikkje er på den valgte oversiktsida frå før
-        if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            return (
-                // trykk på den og sjekk at vi får rett url
-                cy.getByTestId(side).click({force: true}) && cy.url().should('include', '/portefolje')
-            );
+    const config = {
+        'min-oversikt': {
+            url: '/portefolje',
+            testId: 'min-oversikt'
+        },
+        'enhetens-oversikt': {
+            url: '/enhet',
+            testId: 'enhetens-oversikt'
+        },
+        'veileder-oversikt': {
+            url: '/veiledere',
+            testId: 'veileder-oversikt'
         }
-        // Om vi er på sida allereie
-        return (
-            // Sjekker at vi ser loader og at url er rett
-            cy.get('.navds-loader').should('be.visible') && cy.url().should('include', '/portefolje')
-        );
-    } else if (side === 'enhetens-oversikt') {
-        // Om vi ikkje er på den valgte oversiktsida frå før
-        if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            return (
-                // trykk på den og sjekk at vi får rett url
-                cy.getByTestId(side).click({force: true}) && cy.url().should('include', '/enhet')
-            );
-        }
-        // Om vi er på sida allereie
-        return (
-            // Sjekker at vi ser loader og at url er rett
-            cy.get('.navds-loader').should('be.visible') && cy.url().should('include', '/enhet')
-        );
-    } else if (side === 'veileder-oversikt') {
-        // Om vi ikkje er på den valgte oversiktsida frå før
-        if (cy.getByTestId(side).should('not.have.class', '.oversiktslenke--valgt')) {
-            // trykk på den og sjekk at vi får rett url
-            return cy.getByTestId(side).click({force: true}) && cy.url().should('include', '/veiledere');
-        }
-        // Om vi er på sida allereie
-        return (
-            // Sjekker at vi ser loader og at url er rett
-            cy.get('.navds-loader').should('be.visible') && cy.url().should('include', '/veiledere')
-        );
-    }
+    };
+
+    const {url, testId} = config[side];
+
+    cy.getByTestId(testId).should('be.visible').click({force: true});
+    cy.url().should('include', url);
+    cy.get('.navds-loader', {timeout: 15000}).should('not.exist');
+    cy.getByTestId(`side-storrelse_${testId}`).should('be.visible');
 });
 
 Cypress.Commands.add('faneErApen', tab => {
     return cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length.at.least', 1);
 });
 
-Cypress.Commands.add('faneErLukket', tab => {
-    return cy.getByTestId(`sidebar__tabinnhold-${tab}`).children().should('have.length', 0);
-});
-
 Cypress.Commands.add('klikkPaSidebarTab', tab => {
     cy.getByTestId(`sidebar-tab_${tab}`).click({force: true});
 });
 
-Cypress.Commands.add('klikkTab', tab => {
-    if (tab === 'VEILEDERGRUPPER') {
-        if (cy.faneErLukket('VEILEDERGRUPPER')) {
-            return cy.klikkPaSidebarTab(tab) && cy.faneErApen('VEILEDERGRUPPER');
-        }
-        return cy.getByTestId('sidebar-header').contains('Veiledergrupper');
-    } else if (tab === 'MINE_FILTER') {
-        if (cy.faneErLukket('MINE_FILTER')) {
-            return cy.klikkPaSidebarTab(tab) && cy.faneErApen('MINE_FILTER');
-        }
-        return cy.getByTestId('sidebar-header').contains('Mine filter');
-    } else if (tab === 'STATUS') {
-        if (cy.faneErLukket('STATUS')) {
-            return cy.klikkPaSidebarTab(tab) && cy.faneErApen('STATUS');
-        }
-        return cy.getByTestId('sidebar-header').contains('Status');
-    } else if (tab === 'FILTER') {
-        if (cy.faneErLukket('FILTER')) {
-            return cy.klikkPaSidebarTab(tab) && cy.faneErApen('FILTER');
-        }
-        return cy.getByTestId('sidebar-header').contains('Filter');
-    }
+Cypress.Commands.add('klikkTab', (tab) => {
+    cy.klikkPaSidebarTab(tab);
+    cy.faneErApen(tab);
 });
 
 Cypress.Commands.add('checkbox', testid => {
@@ -146,4 +99,5 @@ Cypress.Commands.add('checkboxLast', testid => {
 
 Cypress.Commands.add('apneLukkeFilterDropdown', filternavn => {
     cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible').click();
+    cy.getByTestId(`dropdown-knapp_${filternavn}`).should('be.visible');
 });
