@@ -15,7 +15,7 @@ export const DagpengerResterendeDagerHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_ANTALL_RESTERENDE_DAGER}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Gjenstående dager dagpenger"
+        tekst="Gjenstående dager dagpenger (DPSAK)"
         title="Gjenstående dager rettighet dagpenger (DPSAK)"
         className="col col-xs-2"
     />
