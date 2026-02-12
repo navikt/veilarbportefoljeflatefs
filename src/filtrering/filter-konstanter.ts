@@ -200,8 +200,8 @@ export const initialStateAktiviteterFiltervalg: AktiviteterFilternokler = {
 };
 
 export const cvJobbprofil = {
-    HAR_DELT_CV: {label: 'CV delt med Nav'},
-    HAR_IKKE_DELT_CV: {label: 'Ikke delt CV med Nav'}
+    HAR_CV_HOS_NAV: {label: 'Har CV hos Nav'},
+    HAR_IKKE_CV_HOS_NAV: {label: 'Har ikke CV hos Nav'}
 };
 
 export const stillingFraNavFilter = {
