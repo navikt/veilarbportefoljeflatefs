@@ -87,7 +87,7 @@ export function GeografiskBostedFilterform({
             </div>
             <hr />
             <UNSAFE_Combobox
-                label={'Velg en eller flere bosted'}
+                label={'Velg et eller flere bosteder'}
                 className="utvalgsliste"
                 options={geografiskBostedOptions}
                 isMultiSelect
