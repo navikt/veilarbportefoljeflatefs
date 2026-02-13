@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Alert, Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {VeiledereState} from '../../ducks/veiledere';
 import {VeilederModell} from '../../typer/enhet-og-veiledere-modeller';
@@ -9,6 +9,8 @@ import {NullstillKnapp} from '../nullstill-valg-knapp/nullstill-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
 import './veileder-checkbox-liste.css';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeilederCheckboxListeProps {
     nullstillInputfelt: () => void;
@@ -20,7 +22,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
     const veilederNavnQuery = useSelector((state: AppState) => state.filtreringVeilederoversikt.veilederNavnQuery);
     const [valgteVeiledere, setValgteVeiledere] = useState<string[]>([]);
     const formNavn = Filtervalg.veiledere;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         setValgteVeiledere(filtervalg.veiledere);
@@ -59,7 +61,7 @@ export function VeilederCheckboxListe({nullstillInputfelt}: VeilederCheckboxList
             return null;
         }
 
-        return veiledere
+        return [...veiledere]
             .sort((a, b) => (a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1))
             .map((veileder, index) => {
                 return (

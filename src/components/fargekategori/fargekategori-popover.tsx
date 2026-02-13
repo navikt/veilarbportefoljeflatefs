@@ -1,7 +1,5 @@
 import {ReactNode, RefObject, useState} from 'react';
-import {AnyAction} from 'redux';
-import {useDispatch, useSelector} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
+import {useSelector} from 'react-redux';
 import {Button, Popover} from '@navikt/ds-react';
 import {AppState} from '../../reducer';
 import {FARGEKATEGORI_OPPDATER_OK, oppdaterFargekategoriAction} from '../../ducks/fargekategori';
@@ -14,9 +12,10 @@ import {fargekategoriUnderfilterKonfigurasjoner} from '../../filtrering/filtreri
 import {useEnhetSelector} from '../../hooks/redux/use-enhet-selector';
 import {useSelectGjeldendeVeileder} from '../../hooks/portefolje/use-select-gjeldende-veileder';
 import {BekreftEndreFargekategoriPaMangeModal} from './bekreft-endre-fargekategori-pa-mange-modal';
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FargekategoriPopoverProps {
-    buttonRef: RefObject<HTMLButtonElement>;
+    buttonRef: RefObject<HTMLButtonElement | null>;
     popoverOpen: boolean;
     setPopoverOpen: (openState: boolean) => void;
     valgteBrukereFnrs: string[];
@@ -36,7 +35,7 @@ export const FargekategoriPopover = ({
     skalBekrefteFlereEnn10 = false,
     children
 }: FargekategoriPopoverProps) => {
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const apiResponse = useSelector((state: AppState) => state.fargekategori);
     const enhet = useEnhetSelector();
     const veilederIdent = useSelectGjeldendeVeileder();
@@ -71,7 +70,7 @@ export const FargekategoriPopover = ({
             fargekategoriVerdi: fargekategori
         };
 
-        const apiResponseAction = await oppdaterFargekategoriAction(data)(dispatch);
+        const apiResponseAction = await dispatch(oppdaterFargekategoriAction(data));
 
         if (apiResponseAction?.type === FARGEKATEGORI_OPPDATER_OK && !apiResponseAction.data.errors.length) {
             if (gammelFargekategori) {

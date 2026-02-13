@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RadioGroup} from '@navikt/ds-react';
 import {lagreSorteringForFilter} from '../../../ducks/mine-filter';
 import {DragAndDropContainer} from './drag-and-drop-container';
@@ -13,6 +13,8 @@ import {AppState} from '../../../reducer';
 import {apneFeilTiltakModal, avmarkerValgtMineFilter, markerMineFilter} from '../../../ducks/lagret-filter-ui-state';
 import {velgMineFilter} from '../../../ducks/filtrering';
 import './drag-and-drop.css';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface DragAndDropProps {
     stateFilterOrder: LagretFilter[];
@@ -32,7 +34,7 @@ export function DragAndDrop({
     const [dragAndDropOrder, setDragAndDropOrder] = useState([...stateFilterOrder]);
     const [onUnmountRef, setOnUnmount] = useOnlyOnUnmount();
     const [valgtFilter, setValgtFilter] = useState('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const valgtMineFilter = useSelector((state: AppState) =>
         oversiktType === OversiktType.minOversikt

@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
 import {endreFiltervalg} from '../../ducks/filtrering';
@@ -9,6 +9,8 @@ import {markerValgtVeiledergruppe} from '../../ducks/lagret-filter-ui-state';
 import {veilederlisterErLik} from '../../components/modal/mine-filter';
 import {kebabCase} from '../../utils/utils';
 import {Filtervalg} from '../../typer/filtervalg-modell';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface VeiledergruppeRadProps {
     veilederGruppe: LagretFilter;
@@ -23,7 +25,7 @@ export function VeiledergruppeRad({
     oversiktType,
     erValgt
 }: VeiledergruppeRadProps) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const lagredeGrupper = useSelector((state: AppState) =>
         state.veiledergrupper.data.filter(v => v.filterId !== veilederGruppe.filterId)

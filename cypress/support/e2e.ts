@@ -58,13 +58,6 @@ declare global {
             faneErApen(tab: Sidemenyfaner): Chainable<JQuery<HTMLElement>>;
 
             /**
-             * Sjekkar om ei bestemt sidemenyfane er lukka.
-             * @example cy.faneErLukket('STATUS')
-             */
-            faneErLukket(tab: Sidemenyfaner): Chainable<JQuery<HTMLElement>>;
-
-
-            /**
              * Trykker på ei bestemt sidemenyfane
              * @example cy.klikkPaSidebarTab('STATUS')
              */
@@ -79,7 +72,6 @@ declare global {
              * @example cy.klikkTab('STATUS')
              */
             klikkTab(tab: Sidemenyfaner): Chainable<JQuery<HTMLElement>>;
-
 
             /**
              * Hukar av checkbox med innsedt test-id.
@@ -99,7 +91,6 @@ declare global {
              * @example cy.checkboxLast('min-oversikt_brukerliste-checkbox')
              */
             checkboxLast(testid: string): Chainable<JQuery<HTMLElement>>;
-
 
             /**
              * Trykkar på dropdown-elementet for eit filter. Dette togglar open/lukka-tilstand på elementet.

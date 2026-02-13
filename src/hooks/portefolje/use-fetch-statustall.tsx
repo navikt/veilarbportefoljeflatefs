@@ -1,13 +1,15 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {AppState} from '../../reducer';
 import {hentStatustallForVeileder} from '../../ducks/statustall/statustall-veileder';
 import {hentStatustallForEnhet} from '../../ducks/statustall/statustall-enhet';
 import {OrNothing} from '../../utils/types/types';
 
+import {useAppDispatch} from '../redux/use-app-dispatch';
+
 export function useFetchStatustallForVeileder(veilederId: string) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const enhet = useEnhetSelector();
 
     const statustall = useSelector((state: AppState) => state.statustallVeileder);
@@ -22,7 +24,7 @@ export function useFetchStatustallForVeileder(veilederId: string) {
 }
 
 export function useFetchStatustallForEnhet(enhetId: OrNothing<string>) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const statustall = useSelector((state: AppState) => state.statustallEnhet);
 

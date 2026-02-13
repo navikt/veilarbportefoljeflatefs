@@ -306,11 +306,13 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                         .filter(tilordning => !feiledeFnr.includes(tilordning.brukerFnr))
                         .map(tilordning => ({brukerFnr: tilordning.brukerFnr}));
 
-                    visFeiletModal({
-                        aarsak: TILDELING_FEILET,
-                        brukereError: feilendeTilordninger,
-                        brukereOk: vellykkedeTilordninger
-                    })(dispatch);
+                    dispatch(
+                        visFeiletModal({
+                            aarsak: TILDELING_FEILET,
+                            brukereError: feilendeTilordninger,
+                            brukereOk: vellykkedeTilordninger
+                        })
+                    );
                 } else {
                     dispatch(visTilordningOkModal(tilordninger.map(tilordning => ({brukerFnr: tilordning.brukerFnr}))));
                     dispatch(pagineringSetup({side: 1}));
@@ -340,7 +342,7 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                 }, 2000);
             })
             .catch(error => {
-                visServerfeilModal()(dispatch);
+                dispatch(visServerfeilModal());
                 // TILDEL_VEILEDER_FEILET setter errorstatus slik at spinner forsvinner
                 return handterFeil(dispatch, TILDEL_VEILEDER_FEILET)(error);
             })
@@ -349,9 +351,9 @@ export function tildelVeileder(tilordninger, tilVeileder, oversiktType, veileder
                 setTimeout(() => {
                     const enhet = getState().valgtEnhet.data.enhetId;
                     if (oversiktType === OversiktType.minOversikt) {
-                        hentStatustallForVeileder(enhet, veilederIdent)(dispatch);
+                        dispatch(hentStatustallForVeileder(enhet, veilederIdent));
                     } else {
-                        hentStatustallForEnhet(enhet)(dispatch);
+                        dispatch(hentStatustallForEnhet(enhet));
                     }
                 }, 2000);
             });

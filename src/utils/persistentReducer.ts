@@ -1,4 +1,4 @@
-import {Action} from 'redux';
+import {Action, Reducer} from 'redux';
 import {OversiktType} from '../ducks/ui/listevisning';
 
 /**
@@ -86,13 +86,13 @@ function erFiltreringEndret(scope: LocalStorageScope, initialState: any) {
  * @param reducer - Reducer-funksjonen som skal brukes.
  * @param initialFilterstate - Initial state for filtrering.
  */
-export function persistentReducer(
+export function persistentReducer<S, A extends Action>(
     scope: LocalStorageScope,
     location: Location,
-    reducer: (state: any, action: Action & {name: OversiktType}) => any,
-    initialFilterstate: any
-) {
-    return (state: any, action: Action & {name: OversiktType}) => {
+    reducer: (state: S | undefined, action: A & {name: OversiktType}) => S,
+    initialFilterstate: S
+): Reducer<S, A & {name: OversiktType}> {
+    return (state: S | undefined, action: A & {name: OversiktType}): S => {
         let eksisterendeState = state;
 
         if (location.search.includes('clean') || erFiltreringEndret(scope, initialFilterstate)) {

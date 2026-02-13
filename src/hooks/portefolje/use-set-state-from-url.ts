@@ -1,12 +1,13 @@
 import {useCallback} from 'react';
-import {useDispatch} from 'react-redux';
 import {getInitialStateFromUrl} from '../../utils/url-utils';
 import {pagineringSetup} from '../../ducks/paginering';
 import {settSortering} from '../../ducks/portefolje';
 import {useOnMount} from '../use-on-mount';
 
+import {useAppDispatch} from '../redux/use-app-dispatch';
+
 export function useSetStateFromUrl() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const settInitalStateFraUrl = useCallback(() => {
         const {side, sidestorrelse, sorteringsfelt, sorteringsrekkefolge} = getInitialStateFromUrl();

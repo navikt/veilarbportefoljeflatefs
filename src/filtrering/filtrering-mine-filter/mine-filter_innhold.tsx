@@ -1,5 +1,4 @@
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
-import {useDispatch} from 'react-redux';
 import {Alert, BodyShort} from '@navikt/ds-react';
 import {LagretFilter} from '../../ducks/lagret-filter';
 import {OversiktType} from '../../ducks/ui/listevisning';
@@ -10,6 +9,8 @@ import {Tiltak} from '../../ducks/enhettiltak';
 import {AlertVistLoggdata, loggVisningAvAlert} from '../../umami/logg-visning-av-alert';
 import './mine-filter_innhold.css';
 import '../../components/sidebar/sidebar.css';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 const loggdataForAlerter: {[key: string]: AlertVistLoggdata} = {
     harInaktiveFilter: {
@@ -40,7 +41,7 @@ export function MineFilterInnhold({
     enhettiltak
 }: LagredeFilterInnholdProps) {
     const outerDivRef = useRef<HTMLDivElement>(null);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const filtrertListe = () => {
         return lagretFilter.filter(elem => fjernUtilgjengeligeFilter(elem));

@@ -164,7 +164,7 @@ export function endreFiltervalg(
     oversiktType: OversiktType = OversiktType.enhetensOversikt
 ) {
     if (Array.isArray(filterVerdi)) {
-        filterVerdi.sort(alfabetiskSammenligning);
+        [...filterVerdi].sort(alfabetiskSammenligning);
     }
     return {
         type: ENDRE_FILTER,

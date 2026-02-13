@@ -1,12 +1,12 @@
 import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
 import NAVSPA from '@navikt/navspa';
-import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
 import {useEnhetSelector} from './hooks/redux/use-enhet-selector';
 import {useBrukerIKontekstSelector} from './hooks/redux/use-bruker-i-kontekst-selector';
 import {EnvType, getEnv, getVeilarbpersonflateBasePath} from './utils/url-utils';
 import {fjernBrukerIKontekst} from './ducks/bruker-i-kontekst';
 import {DecoratorPropsV3, Environment} from './utils/types/decorator-props-v3';
+import {oppdaterValgtEnhet} from './ducks/valgt-enhet';
+import {useAppDispatch} from './hooks/redux/use-app-dispatch';
 
 const InternflateDecorator = NAVSPA.importer<DecoratorPropsV3>('internarbeidsflate-decorator-v3');
 
@@ -46,7 +46,7 @@ function getConfig(enhet: string | null, settValgtEnhet: (enhet) => void): Decor
 }
 
 export function Decorator() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const enhetId = useEnhetSelector();
     const brukerIKontekst = useBrukerIKontekstSelector();
 

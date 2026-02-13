@@ -1,11 +1,13 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Button} from '@navikt/ds-react';
 import {StarIcon} from '@navikt/aksel-icons';
 import {erObjektValuesTomt, lagretFilterValgModellErLik} from '../components/modal/mine-filter/mine-filter-utils';
 import {AppState} from '../reducer';
 import {apneMineFilterModal} from '../ducks/lagret-filter-ui-state';
 import {OversiktType} from '../ducks/ui/listevisning';
+
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 interface Props {
     oversiktType: OversiktType;
@@ -25,7 +27,7 @@ export function MineFilterLagreFilterKnapp({oversiktType}: Props) {
     const mineFilterList = useSelector((state: AppState) => state.mineFilter.data);
     const valgtMineFilter = !mineFilterList.find(elem => lagretFilterValgModellErLik(elem.filterValg, filtrering));
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     function lagreFilterModal(event) {
         event.preventDefault();

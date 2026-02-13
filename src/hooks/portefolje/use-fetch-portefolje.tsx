@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {hentPortefoljeForEnhet, hentPortefoljeForVeileder} from '../../ducks/portefolje';
 import {useEnhetSelector} from '../redux/use-enhet-selector';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
@@ -10,8 +10,10 @@ import {AppState} from '../../reducer';
 import {initialState as filtreringsInitialState} from '../../ducks/filtrering';
 import {lagretFilterValgModellErLik} from '../../components/modal/mine-filter/mine-filter-utils';
 
+import {useAppDispatch} from '../redux/use-app-dispatch';
+
 export function useFetchPortefolje(oversiktType: OversiktType) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const enhet = useEnhetSelector();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const {sorteringsrekkefolge, filtervalg, sorteringsfelt} = usePortefoljeSelector(oversiktType);

@@ -1,7 +1,5 @@
 import {useState} from 'react';
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {BodyShort, Button, TextField} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {erTomtObjekt, feilValidering} from './mine-filter-utils';
@@ -12,6 +10,8 @@ import {useRequestHandler} from '../../../hooks/use-request-handler';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {SidebarTabs} from '../../../store/sidebar/sidebar-view-store';
 import {endreValgtSidebarTab} from '../../sidebar/sidebar';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface LagreNyttMineFilterProps {
     oversiktType: OversiktType;
@@ -27,7 +27,7 @@ export function LagreNyttMineFilter({lukkModal, oversiktType}: LagreNyttMineFilt
     const [filterNavn, setFilterNavn] = useState('');
     const [feilmelding, setFeilmelding] = useState({} as LagretFilterValideringsError);
 
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const requestHandler = useRequestHandler((state: AppState) => state.mineFilter.status, lukkModal);
 
     const doLagreNyttFilter = event => {

@@ -1,6 +1,6 @@
 import {ReactNode, useEffect, useState} from 'react';
 import {useParams} from 'react-router';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import classNames from 'classnames';
 import {Alert} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
@@ -44,6 +44,7 @@ import {StatustallVeileder} from '../ducks/statustall/statustall-typer';
 import '../style.css';
 import './minoversikt.css';
 import '../components/tabell/tabell-overskrift.css';
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
 const oversiktType = OversiktType.minOversikt;
 const id = 'min-oversikt';
@@ -55,7 +56,7 @@ export function MinoversiktSide() {
     const gjeldendeVeilederId = useSelectGjeldendeVeileder();
     const statustallFetchStatus: StatustallVeilederState = useFetchStatustallForVeileder(gjeldendeVeilederId);
     const statustall: StatustallVeileder = useStatustallVeilederSelector();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         document.title = 'Min oversikt';

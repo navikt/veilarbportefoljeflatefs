@@ -12,7 +12,7 @@ interface ValgtVeiledergruppeListeProps {
 
 export function ValgtVeiledergruppeListe({valgteVeileder, fjernValgtVeileder, feil}: ValgtVeiledergruppeListeProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const veiledere = veilederePaEnheten
+    const veiledere = [...veilederePaEnheten]
         .filter(veilederPaEnhet => valgteVeileder.includes(veilederPaEnhet.ident))
         .sort((veileder1, veiledere2) => veileder1.etternavn.localeCompare(veiledere2.etternavn));
 

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {BodyShort, Button, Heading, Modal} from '@navikt/ds-react';
 import {tildelVeileder} from '../../../ducks/portefolje';
 import {BrukerModell} from '../../../typer/bruker-modell';
@@ -18,6 +18,8 @@ import {
     ingentingHosBrukerVilBliSlettet
 } from './tildel-veileder-utils';
 import '../../toolbar/toolbar.css';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 const fjernduplikatOgMapTilFnrArray = (brukereSomTildeles: BrukerModell[]) =>
     brukereSomTildeles.reduce((arrayUtenDuplikater: Fnr[], bruker: BrukerModell) => {
@@ -50,14 +52,14 @@ function TildelVeileder({oversiktType, closeInput}: TildelVeilederProps) {
         Tilordning[]
     >([]);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const gjeldendeVeileder = useSelectGjeldendeVeileder();
     const innloggetVeileder = useIdentSelector()?.ident;
     const enhet = useEnhetSelector();
     const brukere = useSelector((state: AppState) => state.portefolje.data.brukere);
     const veiledere = useSelector((state: AppState) => state.veiledere.data.veilederListe);
 
-    const sorterVeiledere = veiledere.sort((a, b) => {
+    const sorterVeiledere = [...veiledere].sort((a, b) => {
         if (a.ident === b.ident) return 0;
         if (a.ident === innloggetVeileder) return -1;
         if (b.ident === innloggetVeileder) return 1;

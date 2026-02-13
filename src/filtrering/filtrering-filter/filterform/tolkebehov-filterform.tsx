@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
-import {MultiSelect} from 'react-multi-select-component';
 import classNames from 'classnames';
-import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup, UNSAFE_Combobox} from '@navikt/ds-react';
 import {Filtervalg, FiltervalgModell} from '../../../typer/filtervalg-modell';
 import {Grid} from '../../../components/grid/grid';
 import {tolkebehov} from '../../filter-konstanter';
@@ -37,13 +36,12 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
         }
     }, [filtervalg, tolkbehovSpraakData]);
 
-    const velgTolkbehovSpraak = data => {
-        setSelectedTolkbehovSpraak(data);
+    const velgTolkbehovSpraak = (value: string, isSelected: boolean) => {
+        const oppdatertVerdi = isSelected
+            ? [...filtervalg.tolkBehovSpraak, value]
+            : filtervalg.tolkBehovSpraak.filter(v => v !== value);
 
-        endreFiltervalg(
-            Filtervalg.tolkBehovSpraak,
-            data.map(x => x.value)
-        );
+        endreFiltervalg(Filtervalg.tolkBehovSpraak, oppdatertVerdi);
     };
 
     useEffect(() => {
@@ -99,45 +97,16 @@ export function TolkebehovFilterform({endreFiltervalg, filtervalg, gridColumns =
                     </div>
                 )}
                 <hr />
-                <label className="skjemaelement__label">Velg et eller flere språk</label>
-                <MultiSelect
+                <UNSAFE_Combobox
+                    label={'Velg et eller flere språk'}
                     className="utvalgsliste"
                     options={tolkbehovSpraakSelectOptions}
-                    value={selectedTolkbehovSpraak}
-                    onChange={velgTolkbehovSpraak}
-                    labelledBy="Select"
-                    hasSelectAll={false}
-                    closeOnChangedValue={false}
-                    overrideStrings={{
-                        allItemsAreSelected: 'Alle språk er valgt.',
-                        clearSearch: 'Fjern søk',
-                        clearSelected: 'Fjern valgt',
-                        noOptions: 'Ingen resultater ved søk',
-                        search: 'Søk',
-                        selectSomeItems: 'Velg tolkebehov språk...'
-                    }}
-                    ItemRenderer={({checked, option, onClick, disabled}) => (
-                        <div className={'navds-checkbox navds-checkbox--small'}>
-                            <input
-                                type="checkbox"
-                                onChange={e => {
-                                    e.stopPropagation();
-                                    onClick();
-                                }}
-                                checked={checked}
-                                tabIndex={-1}
-                                className={'navds-checkbox__input'}
-                                value={option.value}
-                                aria-checked={checked}
-                                id={`checkbox-tolkebehov-${option.value}`}
-                            />
-                            <label className={'navds-checkbox__label'} htmlFor={`checkbox-tolkebehov-${option.value}`}>
-                                <div className="navds-checkbox__content">
-                                    <div className="navds-body-short navds-body-short--small">{option.label}</div>
-                                </div>
-                            </label>
-                        </div>
-                    )}
+                    isMultiSelect
+                    selectedOptions={selectedTolkbehovSpraak}
+                    onToggleSelected={velgTolkbehovSpraak}
+                    shouldShowSelectedOptions
+                    size={'small'}
+                    placeholder={'Søk...'}
                 />
                 <NullstillKnapp
                     dataTestId="checkbox-filterform"

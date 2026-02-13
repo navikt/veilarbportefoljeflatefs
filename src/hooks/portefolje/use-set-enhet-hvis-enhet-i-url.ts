@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useQueryParams} from '../use-query-params';
 import {velgEnhetForVeileder} from '../../ducks/valgt-enhet';
 import {AppState} from '../../reducer';
 
+import {useAppDispatch} from '../redux/use-app-dispatch';
+
 export function useSetInitalEnhet() {
     const innloggetVeilederInfo = useSelector((state: AppState) => state.innloggetVeileder.data);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const enhetId = useQueryParams().enhet;
     const enheter = innloggetVeilederInfo?.enheter;
 

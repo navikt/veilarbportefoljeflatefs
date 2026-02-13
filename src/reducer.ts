@@ -1,4 +1,4 @@
-import {Action, combineReducers} from 'redux';
+import {Action, combineReducers, Reducer} from 'redux';
 import {LocalStorageScope, persistentReducer} from './utils/persistentReducer';
 import {valgtEnhetReducer, ValgtEnhetState} from './ducks/valgt-enhet';
 import {portefoljeReducer, PortefoljeState} from './ducks/portefolje';
@@ -50,10 +50,12 @@ import {fargekategoriReducer} from './ducks/fargekategori';
  * @param name Navnet på en oversikttype
  * @param reducer Reduceren som denne funksjonen brukes i kombinasjon med
  */
-function named(name: OversiktType, reducer: (state: any, action: Action) => any) {
-    return (state: any, action: Action & {name: OversiktType}) => {
+function named<S, A extends Action>(
+    name: OversiktType,
+    reducer: (state: S | undefined, action: A) => S
+): Reducer<S, A & {name: OversiktType}> {
+    return (state: S | undefined, action: A & {name: OversiktType}): S => {
         if (state === undefined) {
-            // For å få satt initialState
             return reducer(state, action);
         }
 
@@ -105,7 +107,7 @@ export interface AppState {
     brukerIKontekst: BrukerIKontekstState;
 }
 
-export default combineReducers<AppState>({
+export default combineReducers({
     ui: combineReducers({
         listevisningMinOversikt: persistentReducer(
             LocalStorageScope.MIN_OVERSIKT_LISTEVISNING_STATE,
