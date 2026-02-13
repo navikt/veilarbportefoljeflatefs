@@ -12,6 +12,7 @@ before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
     cy.configure();
+    cy.gaTilOversikt('enhetens-oversikt');
     cy.klikkTab('MINE_FILTER');
 });
 

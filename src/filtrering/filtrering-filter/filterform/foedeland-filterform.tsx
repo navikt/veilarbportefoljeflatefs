@@ -35,6 +35,7 @@ export function FoedelandFilterform({endreFiltervalg, filtervalg, gridColumns = 
     }, [filtervalg, foedelandListData]);
 
     const velgFoedeland = (value: string, isSelected: boolean) => {
+        nullstillLandgruppeValg();
         const oppdatertVerdi = isSelected
             ? [...filtervalg.foedeland, value]
             : filtervalg.foedeland.filter(v => v !== value);
