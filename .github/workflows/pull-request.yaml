@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # ratchet:actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # ratchet:actions/checkout@v6
       - name: Setup node
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # ratchet:actions/setup-node@v6
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Run tests
         run: npm run test:ci
       - name: Cypress run
-        uses: cypress-io/github-action@2ad32e649e4db26c07674ebae31a297601dbcbaf # ratchet:cypress-io/github-action@v6
+        uses: cypress-io/github-action@84d178e4bbce871e23f2ffa3085898cde0e4f0ec # ratchet:cypress-io/github-action@v6
         with:
           install: false
           browser: chrome
@@ -36,7 +36,7 @@ jobs:
           wait-on-timeout: 90
           record: false
       - name: Upload screenshots
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # ratchet:actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # ratchet:actions/upload-artifact@v6.0.0
         if: failure()
         with:
           name: cypress-screenshots
