@@ -2,20 +2,18 @@ import moment from 'moment';
 import {BrowserRouter} from 'react-router-dom';
 import {Routing} from './routing';
 import {Provider} from 'react-redux';
-import createStore from './store';
 import {Decorator} from './decorator';
 import {InitialDataProvider} from './providers/initial-data-provider';
 import {RedirectPortefolje} from './redirect-portefolje';
 import {useBrukeraktivitetTokenRefresh} from './hooks/use-brukeraktivitet-token-refresh';
 import {settSesjonStatusGyldig, settSesjonStatusUtlopt} from './ducks/informasjonsmelding';
+import {store} from './store';
 
 moment.locale('nb');
 
 moment.updateLocale('nb', {
     monthsShort: ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
 });
-
-export const store = createStore();
 
 function Application() {
     useBrukeraktivitetTokenRefresh(

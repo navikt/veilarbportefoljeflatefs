@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import {useDispatch} from 'react-redux';
 import {Button, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
@@ -12,13 +11,15 @@ import {
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
 import './veilederoversikt-tabell.css';
 
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
+
 interface VeiledereTabellProps {
     veiledere: VeilederMedPortefoljestorrelse[];
     currentSortering: VeilederoversiktSortering;
 }
 
 export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereTabellProps) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const sorterPaaEtternavn = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.ETTERNAVN));
     const sorterPaaPortefoljestorrelse = () => dispatch(sortBy(VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE));
 

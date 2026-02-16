@@ -1,10 +1,12 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {avvelgAlternativ, Kolonne, OversiktType, velgAlternativ} from '../../../ducks/ui/listevisning';
 import {selectMuligeAlternativer, selectValgteAlternativer} from '../../../ducks/ui/listevisning-selectors';
 import {VelgKolonnerRad} from './velg-kolonner-rad';
 import {AppState} from '../../../reducer';
 import {useFeatureSelector} from '../../../hooks/redux/use-feature-selector';
 import {LA_VEILEDER_VISE_FLERE_ENN_TRE_KOLONNER_SAMTIDIG} from '../../../konstanter';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface ListevisningProps {
     oversiktType: OversiktType;
@@ -21,7 +23,7 @@ export function VelgKolonnerListe({oversiktType}: ListevisningProps) {
         ? valgteAlternativ.length >= 10
         : valgteAlternativ.length >= 3;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleChange = (kolonne: Kolonne, checked: boolean) => {
         if (checked) {

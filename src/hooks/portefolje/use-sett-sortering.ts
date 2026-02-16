@@ -1,12 +1,13 @@
-import {useDispatch} from 'react-redux';
 import {usePortefoljeSelector} from '../redux/use-portefolje-selector';
 import {OversiktType} from '../../ducks/ui/listevisning';
 import {STIGENDE, SYNKENDE} from '../../konstanter';
 import {settSortering} from '../../ducks/portefolje';
 
+import {useAppDispatch} from '../redux/use-app-dispatch';
+
 export function useSetPortefoljeSortering(listevisningType: OversiktType) {
     const {sorteringsfelt, sorteringsrekkefolge} = usePortefoljeSelector(listevisningType);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     function settSorteringogHentPortefolje(felt) {
         let valgtRekkefolge = '';

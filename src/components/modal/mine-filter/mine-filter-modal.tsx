@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppState} from '../../../reducer';
 import {OppdaterMineFilter} from './mine-filter-oppdater';
 import {LagreNyttMineFilter} from './mine-filter-nytt';
@@ -12,6 +12,8 @@ import {EgenModal} from '../egenModal';
 import {LasterModal} from '../lastermodal/laster-modal';
 import {STATUS} from '../../../ducks/utils';
 import './mine-filter.css';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 export enum Visningstype {
     MENY,
@@ -50,7 +52,7 @@ export function MineFilterModal({oversiktType}: Props) {
     );
     const [valgtVisningstype, setValgtVisningstype] = useState<Visningstype>(Visningstype.MENY);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const lukkModal = () => {
         dispatch(lukkMineFilterModal(oversiktType));

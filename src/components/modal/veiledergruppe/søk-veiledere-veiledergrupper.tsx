@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {CheckboxGroup, Checkbox} from '@navikt/ds-react';
+import {Checkbox, CheckboxGroup} from '@navikt/ds-react';
 import {AppState} from '../../../reducer';
 import {SokFilterVeilederliste} from './sok-filter-veilederliste';
 import '../../../style.css';
@@ -11,7 +11,7 @@ interface SokVeiledereProps {
 
 export function SokVeiledereVeiledergrupper({handterVeiledereValgt, valgteVeiledere}: SokVeiledereProps) {
     const veilederePaEnheten = useSelector((state: AppState) => state.veiledere.data.veilederListe);
-    const sorterteVeilederePaEtterNavn = veilederePaEnheten.sort((a, b) =>
+    const sorterteVeilederePaEtterNavn = [...veilederePaEnheten].sort((a, b) =>
         a.etternavn && b.etternavn ? a.etternavn.localeCompare(b.etternavn) : 1
     );
 

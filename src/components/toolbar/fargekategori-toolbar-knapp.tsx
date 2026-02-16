@@ -1,20 +1,18 @@
 import {useRef, useState} from 'react';
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {BodyShort, Button} from '@navikt/ds-react';
 import FargekategoriIkonBokmerke from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke.svg?react';
 import {FargekategoriPopover} from '../fargekategori/fargekategori-popover';
-import {AppState} from '../../reducer';
 import {resetFargekategoriStateAction} from '../../ducks/fargekategori';
 import {oppdaterBrukerfeil} from '../../ducks/brukerfeilmelding';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FargekategoriToolbarKnappProps {
     valgteBrukereFnrs: string[];
 }
 
 export function FargekategoriToolbarKnapp({valgteBrukereFnrs}: FargekategoriToolbarKnappProps) {
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [popoverOpen, setPopoverOpen] = useState(false);
 
