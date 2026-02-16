@@ -19,6 +19,7 @@ before('Start server', () => {
 beforeEach('Lag alias for Mine filter: @mineFilter', () => {
     // Aliaset kan hentast med cy.get('@mineFilter').
     // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
+    cy.gaTilOversikt('enhetens-oversikt')
     cy.getByTestId('mine-filter_rad-wrapper').should('exist');
     cy.getByTestId('mine-filter_rad-wrapper').as('mineFilter');
 });
