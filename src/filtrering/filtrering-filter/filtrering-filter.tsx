@@ -99,15 +99,21 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
-                    name="Har barn under 18 år"
+                    name="Foreldreansvar for barn under 18 år"
                     id="barnUnder18"
                     render={lukkDropdown => (
-                        <BarnUnder18FilterForm
-                            valg={barnUnder18Aar}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                            closeDropdown={lukkDropdown}
-                        />
+                        <>
+                            <Alert variant="info" size="small" className="registrering-alert">
+                                Filteret viser brukere registrert med foreldreansvar for barn under 18 år. Avvik kan
+                                være fordi foreldreansvaret ikke er registrert i Folkeregisteret.
+                            </Alert>
+                            <BarnUnder18FilterForm
+                                valg={barnUnder18Aar}
+                                filtervalg={filtervalg}
+                                endreFiltervalg={endreFiltervalg}
+                                closeDropdown={lukkDropdown}
+                            />
+                        </>
                     )}
                 />
                 <Dropdown

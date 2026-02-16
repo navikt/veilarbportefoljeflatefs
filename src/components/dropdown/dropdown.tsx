@@ -1,4 +1,4 @@
-import {ReactChild, ReactNode, useEffect, useRef, useState} from 'react';
+import {ReactNode, useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import {BodyShort} from '@navikt/ds-react';
 import {useFocus} from '../../hooks/use-focus';
@@ -15,7 +15,7 @@ const btnWrapperCls = (disabled?: boolean) =>
 interface DropdownProps {
     name: ReactNode;
     id: string;
-    render: (lukkDropdown: () => void) => ReactChild;
+    render: (lukkDropdown: () => void) => ReactNode;
     open?: boolean;
     onClose?: () => void;
     hoyre?: boolean;
@@ -72,7 +72,9 @@ export function Dropdown({
         <div
             className={`dropdown__innhold ${hoyre ? 'hoyre' : null}`}
             id={`${name}-dropdown__innhold`}
-            ref={inputRef => (focusRef.current = inputRef)}
+            ref={inputRef => {
+                focusRef.current = inputRef;
+            }}
         >
             {render(lukkDropdown)}
         </div>

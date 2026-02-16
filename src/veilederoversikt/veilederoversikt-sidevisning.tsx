@@ -52,7 +52,7 @@ export function VeilederoversiktSidevisning({veilederFilter, veiledere}: Veilede
     const portefoljestorrelser = useSelector((state: AppState) => state.portefoljestorrelser);
 
     const veilederListe = useMemo(() => {
-        return veiledere
+        return [...veiledere]
             .filter(finnValgteVeiledere(veilederFilter))
             .map(medPortefoljestorrelse(portefoljestorrelser))
             .sort(sorterVeilederoversikt(sortering.property, sortering.direction));

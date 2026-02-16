@@ -1,7 +1,5 @@
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AnyAction} from 'redux';
-import {ThunkDispatch} from 'redux-thunk';
+import {useSelector} from 'react-redux';
 import {Alert, BodyShort, Button} from '@navikt/ds-react';
 import {PlusCircleIcon} from '@navikt/aksel-icons';
 import {AppState} from '../../reducer';
@@ -14,6 +12,8 @@ import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevis
 import {STATUS} from '../../ducks/utils';
 import {VeiledergruppeInnhold} from './veiledergruppe-innhold';
 
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+
 interface FilteringVeiledergruppeProps {
     oversiktType: OversiktType;
 }
@@ -24,7 +24,7 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
     const lagretFilterState = useSelector((state: AppState) => state.veiledergrupper);
     const lagretFilter = lagretFilterState.data;
 
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const enhet = useEnhetSelector();
     const modalTittel = 'Ny veiledergruppe';
 
@@ -48,7 +48,7 @@ export function FilteringVeiledergrupper({oversiktType}: FilteringVeiledergruppe
             });
     };
 
-    const sortertVeiledergruppe = lagretFilter.sort((a, b) =>
+    const sortertVeiledergruppe = [...lagretFilter].sort((a, b) =>
         a.filterNavn.toLowerCase().localeCompare(b.filterNavn.toLowerCase(), undefined, {numeric: true})
     );
 

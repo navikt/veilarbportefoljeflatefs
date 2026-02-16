@@ -1,5 +1,5 @@
 import {PropsWithChildren, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {hentFeaturesFraUnleash} from '../ducks/features';
 import {AppState} from '../reducer';
@@ -8,11 +8,13 @@ import {hentSystemmeldinger} from '../ducks/systemmeldinger';
 import {hentBrukerIKontekst} from '../ducks/bruker-i-kontekst';
 import {hentEnhetIKontekst} from '../ducks/valgt-enhet';
 
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
+
 export function InitialDataProvider({children}: PropsWithChildren<{}>) {
     const innloggetVeilederState = useSelector((state: AppState) => state.innloggetVeileder);
     const brukerIKontekstState = useSelector((state: AppState) => state.brukerIKontekst);
     const enhetIKontekstState = useSelector((state: AppState) => state.valgtEnhet);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(hentFeaturesFraUnleash());

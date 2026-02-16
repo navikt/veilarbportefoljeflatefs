@@ -150,7 +150,7 @@ export const oppdaterBrukerIKontekstOgNavigerTilLenke = (fnr: string, lenke: str
  * @param callback Funksjonen som skal utføres dersom det klikkes utenfor
  */
 export const vedKlikkUtenfor = (
-    elementer: RefObject<HTMLElement>[],
+    elementer: RefObject<HTMLElement | null>[],
     klikkTarget: Node | null,
     callback: () => void
 ) => {
