@@ -97,6 +97,7 @@ describe('Diverse', () => {
         cy.scrollTo('top');
         cy.wait(100);
         cy.checkboxFirst('min-oversikt_brukerliste-checkbox');
+        cy.wait(300);
 
         // Opne val av veileder
         cy.getByTestId('tildel-veileder_knapp').should('be.enabled').click({force: true});
