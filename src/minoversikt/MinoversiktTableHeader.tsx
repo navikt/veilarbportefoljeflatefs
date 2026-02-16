@@ -170,9 +170,9 @@ export function MinoversiktTableHeader() {
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
                 <TiltakspengerRettighetHeader {...sorteringTilHeaderCell} />
 
-                <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
                 <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
+                <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
