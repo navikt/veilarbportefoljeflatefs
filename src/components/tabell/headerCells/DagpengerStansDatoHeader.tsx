@@ -15,7 +15,7 @@ export const DagpengerStansDatoHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_STANS}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Utløp dagpenger"
+        tekst="Utløp dagpenger (DPSAK)"
         title="Utløp dagpenger (DPSAK)"
         className="col col-xs-2"
     />

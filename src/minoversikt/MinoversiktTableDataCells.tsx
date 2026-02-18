@@ -157,9 +157,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
-            <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }
