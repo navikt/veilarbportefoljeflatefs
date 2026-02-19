@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
     avmarkerSisteValgtMineFilter,
     avmarkerValgtMineFilter,
@@ -12,12 +12,14 @@ import {AppState} from '../reducer';
 import {OversiktType} from '../ducks/ui/listevisning';
 import {veilederlisterErLik} from '../components/modal/veiledergruppe/veileder-gruppe-utils';
 
+import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
+
 interface Props {
     oversiktType: OversiktType;
 }
 
 export function LagredeFilterUIController({oversiktType}: Props) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const filtreringEnhetensOversikt = useSelector((state: AppState) => state.filtreringEnhetensOversikt);
     const filtreringMinoversikt = useSelector((state: AppState) => state.filtreringMinoversikt);

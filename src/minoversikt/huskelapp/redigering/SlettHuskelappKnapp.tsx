@@ -1,13 +1,11 @@
-import {AnyAction} from 'redux';
-import {useDispatch} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
 import {TrashIcon} from '@navikt/aksel-icons';
-import {AppState} from '../../../reducer';
 import {usePortefoljeSelector} from '../../../hooks/redux/use-portefolje-selector';
 import {OversiktType} from '../../../ducks/ui/listevisning';
 import {handleSlettHuskelapp} from './slettHuskelapp';
 import {BrukerModell} from '../../../typer/bruker-modell';
 import {KnappMedBekreftHandling} from '../../../components/knapp-med-slettebekreftelse/KnappMedBekreftHandling';
+
+import {useAppDispatch} from '../../../hooks/redux/use-app-dispatch';
 
 interface SlettHuskelappKnappProps {
     bruker: BrukerModell;
@@ -27,7 +25,7 @@ export const SlettHuskelappKnapp = ({
     size,
     bekreftelsesmelding
 }: SlettHuskelappKnappProps) => {
-    const dispatch: ThunkDispatch<AppState, any, AnyAction> = useDispatch();
+    const dispatch = useAppDispatch();
     const {enhetId} = usePortefoljeSelector(OversiktType.minOversikt);
 
     const slettHuskelapp = () => {

@@ -15,7 +15,7 @@ export const DagpengerRettighetHeader = ({
         erValgt={gjeldendeSorteringsfelt === Sorteringsfelt.DAGPENGER_RETTIGHETSTYPE}
         rekkefolge={rekkefolge}
         onClick={onClick}
-        tekst="Rettighet dagpenger"
+        tekst="Rettighet dagpenger (DPSAK)"
         title="Rettighet dagpenger (DPSAK)"
         className="col col-xs-2"
     />

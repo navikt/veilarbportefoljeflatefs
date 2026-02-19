@@ -12,7 +12,7 @@ export function FiltreringVeiledere({endreFiltervalg, filtervalg}: FiltreringVei
     const [veilederNavnQuery, setVeilederNavnQuery] = useState(filtervalg.veilederNavnQuery);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const isInitialMount = useRef(true);
-    const timer = useRef<number | undefined>();
+    const timer = useRef<number | undefined>(undefined);
     const savedCallback = useRef(null);
 
     useEffect(() => {

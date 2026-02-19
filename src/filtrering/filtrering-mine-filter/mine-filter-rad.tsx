@@ -1,4 +1,3 @@
-import {useDispatch} from 'react-redux';
 import {Radio} from '@navikt/ds-react';
 import {apneMineFilterModal} from '../../ducks/lagret-filter-ui-state';
 import {RedigerKnapp} from '../../components/rediger-knapp/rediger-knapp';
@@ -7,6 +6,8 @@ import {LagretFilter} from '../../ducks/lagret-filter';
 import {kebabCase} from '../../utils/utils';
 import './mine-filter_innhold.css';
 
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+
 interface MineFilterRadProps {
     filter: LagretFilter;
     oversiktType: OversiktType;
@@ -14,7 +15,7 @@ interface MineFilterRadProps {
 }
 
 export function MineFilterRad({filter, oversiktType, erValgt}: MineFilterRadProps) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     function onClickRedigerKnapp() {
         dispatch(apneMineFilterModal(oversiktType));

@@ -1,5 +1,4 @@
 import {ReactNode} from 'react';
-import {useDispatch} from 'react-redux';
 import {SidebarTab} from './sidebar-tab';
 import {FiltreringStatus, StatustallForStatusfane} from '../../filtrering/filtrering-status/filtrering-status';
 import {oppdaterKolonneAlternativer, OversiktType} from '../../ducks/ui/listevisning';
@@ -12,6 +11,8 @@ import {MineFilterTab} from './mine-filter-tab';
 import {SidebarTabs} from '../../store/sidebar/sidebar-view-store';
 import {FiltreringFilter} from '../../filtrering/filtrering-filter/filtrering-filter';
 import {FilteringVeiledergrupper} from '../../filtrering/filtrering-veileder-grupper/filtrering-veiledergrupper';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface Props {
     valgtFane: SidebarTabs;
@@ -32,7 +33,7 @@ export const Fanevelger = ({
     statustall,
     lukkSidemeny
 }: Props) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const doEndreFiltervalg = (filterId: string, filterVerdi: ReactNode) => {
         dispatch(pagineringSetup({side: 1}));

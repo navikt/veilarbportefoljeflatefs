@@ -32,7 +32,7 @@ export const DagpengerArenaGjenstaendeUkerRettighetHeader = ({
             erValgt={gjeldendeSorteringsfelt === sorteringsfeltBasertPaDagpengetype()}
             rekkefolge={rekkefolge}
             onClick={onClick}
-            tekst="Gjenstående uker rettighet dagpenger"
+            tekst="Gjenstående uker rettighet dagpenger (Arena)"
             title="Gjenstående uker av rettighetsperioden for dagpenger (Arena)"
             className="col col-xs-2"
         />

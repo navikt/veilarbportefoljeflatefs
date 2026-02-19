@@ -70,7 +70,7 @@ export const EndringsloggContainer = ({
 };
 
 interface EndringsloggIconButtonProps {
-    buttonRef: RefObject<HTMLButtonElement>;
+    buttonRef: RefObject<HTMLButtonElement | null>;
     visVarselprikk: boolean;
     onClick: (e?: any) => void;
 }

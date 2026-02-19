@@ -53,7 +53,12 @@ export function VelgKolonner({oversiktType}: VelgKolonnerProps) {
 
             {apen && (
                 <div className="velg-kolonner-dropdown">
-                    <div className="checkbox-filterform__valg" ref={inputRef => (focusRef.current = inputRef)}>
+                    <div
+                        className="checkbox-filterform__valg"
+                        ref={inputRef => {
+                            focusRef.current = inputRef;
+                        }}
+                    >
                         <VelgKolonnerListe oversiktType={oversiktType} />
                     </div>
                     <Button

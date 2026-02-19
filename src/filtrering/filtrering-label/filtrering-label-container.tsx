@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {connect, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {FiltreringLabel} from './filtrering-label';
 import {alleFargekategoriFilterAlternativer, MINE_FARGEKATEGORIER} from '../filter-konstanter';
 import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
@@ -10,6 +10,8 @@ import {clearFiltervalg, endreFiltervalg, fjern, initialState, slettEnkeltFilter
 import {pagineringSetup} from '../../ducks/paginering';
 import {avmarkerValgtMineFilter} from '../../ducks/lagret-filter-ui-state';
 import {LagLabelForFiltervalg} from './LagLabelForFiltervalg';
+
+import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FiltreringLabelContainerProps {
     enhettiltak: EnhetModell;
@@ -27,7 +29,7 @@ function FiltreringLabelContainer({
     actions: {slettAlle, slettEnkelt},
     className
 }: FiltreringLabelContainerProps) {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(hentMineFilterForVeileder());
