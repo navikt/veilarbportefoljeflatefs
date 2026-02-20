@@ -82,14 +82,19 @@ export enum EnvType {
     local = 'local'
 }
 
-const Env = {
+export const Env = {
     ansattDev: {ingressType: 'ansatt', type: EnvType.dev},
     dev: {ingressType: 'intern', type: EnvType.dev},
     prod: {ingressType: 'intern', type: EnvType.prod},
     local: {ingressType: 'intern', type: EnvType.local}
 } as const;
-
-export const getEndringsloggUrl = () => `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
+export const getEndringsloggUrl = () => {
+    const env = getEnv();
+    if (env === Env.ansattDev) {
+        return 'https://poao-endringslogg.ansatt.dev.nav.no';
+    }
+    return `https://poao-endringslogg.intern${erDev() ? '.dev' : ''}.nav.no`;
+};
 
 export const loginUrl = () => {
     if (erDemo()) {
