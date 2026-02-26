@@ -21,7 +21,7 @@ interface EndringsloggProps {
 
 export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps) => {
     const {startTimer, stopTimer} = useTimer();
-    const [loadData, setLoadData] = useState(true);
+    const [loadData, setLoadData] = useState(false);
     const [endringsloggEntries, setEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [forcedEndringsloggEntries, setForcedEndringsloggEntries] = useState<EndringsloggEntryWithSeenStatus[]>([]);
@@ -64,6 +64,7 @@ export const Endringslogg: FC<EndringsloggProps> = ({userId}: EndringsloggProps)
     };
 
     const onOpen = () => {
+        setLoadData(true);
         startTimer();
         const ulesteFelter = endringsloggEntries.filter(endringsloggEntry => !endringsloggEntry.seen);
         if (ulesteFelter.length > 0) {
