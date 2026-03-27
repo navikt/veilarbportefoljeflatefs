@@ -10,15 +10,15 @@
     align-items: center;
 }
 .veilarbportefoljeflatefs .filtreringlabel {
-    --ac-button-primary-neutral-bg: var(--a-gray-300);
-    --ac-button-primary-neutral-text: var(--a-gray-900);
-    --ac-button-primary-neutral-hover-bg: var(--a-gray-400);
+    --ac-button-primary-neutral-bg: var(--ax-neutral-400);
+    --ac-button-primary-neutral-text: var(--ax-neutral-1000);
+    --ac-button-primary-neutral-hover-bg: var(--ax-neutral-500);
 
     margin: 0.25rem 0.5rem 0.25rem 0;
     border-radius: 2px;
 }
 .veilarbportefoljeflatefs .filtreringlabel:hover {
-    box-shadow: inset 0 -0.125em 0 var(--a-gray-900);
+    box-shadow: inset 0 -0.125em 0 var(--ax-neutral-1000);
 }
 .veilarbportefoljeflatefs .filtreringlabel:active {
     color: #fff;
@@ -43,7 +43,7 @@
     flex-shrink: 0;
 }
 .veilarbportefoljeflatefs .filtreringlabel--slett-alle {
-    --ac-button-primary-neutral-bg: var(--a-gray-600);
-    --ac-button-primary-neutral-text: var(--a-text-on-neutral);
+    --ac-button-primary-neutral-bg: var(--ax-neutral-700);
+    --ac-button-primary-neutral-text: var(--ax-text-neutral-contrast);
     --ac-button-primary-neutral-hover-bg: var(--a-surface-inverted-hover);
 }

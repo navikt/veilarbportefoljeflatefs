@@ -1,4 +1,4 @@
-const ikonfarge = '--a-gray-800';
+const ikonfarge = '--ax-neutral-900';
 
 export const EndringsloggIkon = () => (
     <svg data-name="Layer 1" height="40" width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">

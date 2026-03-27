@@ -99,7 +99,7 @@
     padding: 0.2rem 0.4rem;
 }
 .flytt-knapp:hover {
-    background: var(--a-surface-hover);
+    background: var(--ax-bg-neutral-moderate-hoverA);
 }
 .drag-and-drop-row #Symbols {
     visibility: hidden;
