@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {Button, Table} from '@navikt/ds-react';
+import {Button, HStack, Table} from '@navikt/ds-react';
 import {ArrowDownIcon, ArrowUpIcon} from '@navikt/aksel-icons';
 import {VeilederoversiktTabellrad} from './veilederoversikt-tabellrad';
 import {
@@ -9,7 +9,6 @@ import {
     VeilederoversiktSorteringsfelt
 } from '../ducks/sortering';
 import {VeilederMedPortefoljestorrelse} from './veilederoversikt-sidevisning';
-import './veilederoversikt-tabell.css';
 
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 
@@ -28,31 +27,22 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
         currentSortering.property === VeilederoversiktSorteringsfelt.PORTEFOLJESTORRELSE;
 
     const sorteringspil = sorterPaa => {
-        const className = 'tabellheader__pil';
         if (sorterPaa) {
             if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.STIGENDE) {
-                return (
-                    <ArrowUpIcon title="Sortert stigende" className={className} data-testid="sorteringspil_stigende" />
-                );
+                return <ArrowUpIcon title="Sortert stigende" data-testid="sorteringspil_stigende" aria-hidden />;
             } else if (currentSortering.direction === SorteringsrekkefolgeVeilederoversikt.SYNKENDE) {
-                return (
-                    <ArrowDownIcon
-                        title="Sortert synkende"
-                        className={className}
-                        data-testid="sorteringspil_synkende"
-                    />
-                );
+                return <ArrowDownIcon title="Sortert synkende" data-testid="sorteringspil_synkende" aria-hidden />;
             }
         }
         return null;
     };
 
     return (
-        <Table className="veileder-tabell" zebraStripes={true} data-testid="veilederoversikt-tabell">
-            <Table.Header className="sticky-tabelloverskrift">
+        <Table zebraStripes={true} data-testid="veilederoversikt-tabell">
+            <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
-                        <div className="veiledertabell__sorteringskolonne navnkolonne">
+                        <HStack as="span" gap="2" align="center" wrap={false}>
                             Fornavn
                             <Button
                                 size="xsmall"
@@ -69,12 +59,14 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                                 Etternavn
                             </Button>
                             {sorteringspil(gjeldendeSorteringErEtternavn)}
-                        </div>
+                        </HStack>
                     </Table.HeaderCell>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
                     <Table.HeaderCell data-testid="veiledertabell__antall-brukere-overskrift">
-                        <div
-                            className="veiledertabell__sorteringskolonne"
+                        <HStack
+                            as="span"
+                            gap="2"
+                            align="center"
                             data-testid="veilederoversikt_sortering_antall-brukere"
                         >
                             <Button
@@ -92,7 +84,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                                 Antall brukere
                             </Button>
                             {sorteringspil(gjeldendeSorteringErPortefoljestorrelse)}
-                        </div>
+                        </HStack>
                     </Table.HeaderCell>
                 </Table.Row>
             </Table.Header>

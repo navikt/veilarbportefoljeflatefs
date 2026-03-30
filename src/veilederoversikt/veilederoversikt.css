@@ -30,10 +30,6 @@
 
 .status-filter-kolonne .sok-veileder {
     margin: 0.5rem 0 1rem;
-    border: 1px solid var(--ax-border-neutral);
-    border-radius: var(--ax-radius-2);
-    background: var(--ax-bg-default);
-    padding: var(--ax-space-16);
 }
 
 .status-filter-kolonne {
