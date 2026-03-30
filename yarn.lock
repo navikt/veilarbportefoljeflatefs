@@ -1458,13 +1458,13 @@
   resolved "https://npm.pkg.github.com/download/@navikt/aksel-icons/7.35.2/1e52ed2d63c12681827ca06918824d23b7126ce9"
   integrity sha512-0jI+QdY7zjQ9sOlNDnvMu7QFCMSLMZB8GVJnJFJoYDB5k+1zefmYnuOEvq51zHugbnUIyFYglkTXCuZiwX+Waw==
 
-"@navikt/aksel@^8.8.0":
-  version "8.8.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/aksel/8.8.0/6264087d28c581fd34c2618a4cbcae2c5b9f6d57"
-  integrity sha512-aS2f+5vGBbu61YX7sM5hXcnryNKyU0Qc9oAuUjXVLK9aCQZovJz9FJg+z0wS+slaFxGwSEXuwg/1XZZxmd7VFg==
+"@navikt/aksel@^8.9.0":
+  version "8.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/aksel/8.9.0/9138b7a941272cb770005d5b3b272bdc63b5035f"
+  integrity sha512-ypjJgwJER7AlvPyaSllKr34A/+uJOHaaVbc7B/CqFz6SzQ9ZmQwA7+N8u+pAmoOiQ4kIhDMJSH6vC8vjRcrbuQ==
   dependencies:
-    "@navikt/ds-css" "^8.8.0"
-    "@navikt/ds-tokens" "^8.8.0"
+    "@navikt/ds-css" "^8.9.0"
+    "@navikt/ds-tokens" "^8.9.0"
     chalk "5.6.2"
     cli-progress "3.12.0"
     clipboardy "5.0.1"
@@ -1477,15 +1477,15 @@
     jscodeshift-add-imports "1.0.11"
     lodash "4.17.23"
 
-"@navikt/ds-css@^7.35.2":
-  version "7.35.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/7.35.2/b47c85445b0cbc28f2579ba96a6282e18ac183e7"
-  integrity sha512-JIYjT05GLLVPe45ewWvIUK2VPifPesxNl2Om5/aXuSGeNJUnFZ2EZ9a+/Q8BO5/w3QDh94toqIjQoLgG3Rsb3w==
+"@navikt/ds-css@^7.40.0":
+  version "7.40.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/7.40.0/267682132732537194904a0498ce8971bf8b4922"
+  integrity sha512-DPxoESUbmPImfbYrmcrOIL1XVsxqqFITgNCZ3cXQgv2xRHP9G6LTEdiYjwHecffHb6L/7mEPJ929MZ50o1fZNA==
 
-"@navikt/ds-css@^8.8.0":
-  version "8.8.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/8.8.0/a54b515f23598d8b8e5850625b64b3a800221bca"
-  integrity sha512-9rJyi5l1NDSJKqN53pUcGqiI0Tenql9YxRjUb9I7Ot4pQfJbvmXI7UMlbhmESD268w4uhaxPSXbs1Fa9jnqKRQ==
+"@navikt/ds-css@^8.9.0":
+  version "8.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/8.9.0/c2c6e77cb08c9433f12b9bb2b610ee74320a0495"
+  integrity sha512-CmUcpiogi1O63nlbufpjt+CbkflPvxGiWqv3VSwRA0IiSCu/lagnU/z23+qraAu0LXOxmAcCsaZzRde2OC042A==
 
 "@navikt/ds-react@7.35.2":
   version "7.35.2"
@@ -1505,10 +1505,10 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/7.40.0/36f981e12d4d90f18155615b7666b737039a3ff0"
   integrity sha512-zBaBKLS5R2OZyXI4UUPOmiB15L/u/aJPHiyoccJDtmqrv5wRkc1oM6UCjzKK0D4gLZHBoxp7YBT0sR9Mp4DXFQ==
 
-"@navikt/ds-tokens@^8.8.0":
-  version "8.8.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/8.8.0/1b64643ec409921069ede0fc5eab1850afa23393"
-  integrity sha512-xrX+4l4EOOSdLXy4NdIft87052I95m3tLDNPjTuyOBMyZZdEivLskc8KbemLhTGJJZ2TfiDe6jpkYwP0iFFLGA==
+"@navikt/ds-tokens@^8.8.0", "@navikt/ds-tokens@^8.9.0":
+  version "8.9.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-tokens/8.9.0/c7f62f91df5fb35b063add5aad4636a7cfc4b802"
+  integrity sha512-dIdV405Nxa5YsIOG51DjAhU5kDM3HE00VitV59RlujEJk92I4hSMpA9ysdetLEBEWlmpjXFgue9Tgg8bIorttA==
 
 "@navikt/navspa@6.2.0":
   version "6.2.0"
