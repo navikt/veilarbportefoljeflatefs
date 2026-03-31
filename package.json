@@ -22,9 +22,9 @@
   "dependencies": {
     "@amplitude/analytics-browser": "2.32.1",
     "@grafana/faro-web-sdk": "1.19.0",
-    "@navikt/aksel-icons": "7.35.2",
-    "@navikt/ds-css": "7.40.0",
-    "@navikt/ds-react": "7.35.2",
+    "@navikt/aksel-icons": "8.8.0",
+    "@navikt/ds-css": "8.8.0",
+    "@navikt/ds-react": "8.8.0",
     "@navikt/ds-tokens": "8.8.0",
     "@navikt/navspa": "6.2.0",
     "@portabletext/react": "6.0.2",
@@ -48,7 +48,6 @@
   "devDependencies": {
     "@cypress/react": "9.0.1",
     "@faker-js/faker": "8.4.1",
-    "@navikt/aksel": "8.9.0",
     "@types/jest": "30.0.0",
     "@types/lodash.throttle": "4.1.9",
     "@types/react": "19.2.13",
