@@ -30,12 +30,17 @@
 
 .status-filter-kolonne .sok-veileder {
     margin: 0.5rem 0 1rem;
+    background-color: var(--ax-bg-default);
 }
 
 .status-filter-kolonne {
     height: fit-content;
     position: sticky;
     top: 0.5rem;
+}
+
+.veilederoversikt_navn_lenke {
+    color: var(--ax-text-accent-decoration);
 }
 
 @media (max-width: 900px) {

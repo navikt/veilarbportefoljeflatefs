@@ -75,13 +75,7 @@ export function VeilederoversiktSide() {
             <Innholdslaster avhengigheter={[statustall]}>
                 <div className="oversikt-sideinnhold-veilederside" role="tabpanel" id={`oversikt-sideinnhold_${id}`}>
                     <div className="status-filter-kolonne">
-                        <Box
-                            className="sok-veileder"
-                            padding="space-16"
-                            borderWidth="1"
-                            borderRadius="12"
-                            borderColor="border-default"
-                        >
+                        <Box className="sok-veileder" padding="space-16" borderWidth="1" borderRadius="12">
                             <FiltreringVeiledere endreFiltervalg={doEndreFiltervalg} filtervalg={filtervalg} />
                         </Box>
                         <VeiledergruppePanel tittel="Veiledergrupper">

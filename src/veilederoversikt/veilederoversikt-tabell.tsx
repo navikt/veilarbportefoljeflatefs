@@ -38,11 +38,11 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
     };
 
     return (
-        <Table zebraStripes={true} data-testid="veilederoversikt-tabell">
+        <Table zebraStripes={true} data-testid="veilederoversikt-tabell" bgcolor="white">
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
-                        <HStack as="span" gap="2" align="center" wrap={false}>
+                        <HStack as="span" gap="space-2" align="center" wrap={false}>
                             Fornavn
                             <Button
                                 size="xsmall"
@@ -65,7 +65,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                     <Table.HeaderCell data-testid="veiledertabell__antall-brukere-overskrift">
                         <HStack
                             as="span"
-                            gap="2"
+                            gap="space-2"
                             align="center"
                             data-testid="veilederoversikt_sortering_antall-brukere"
                         >

@@ -30,7 +30,7 @@ body {
     font-family: 'Source Sans Pro', Arial, sans-serif;
 
     /* Det som set grå bakgrunn på heile sida */
-    background-color: var(--ax-bg-neutral-soft);
+    background-color: var(--ax-bg-neutral-moderate);
 
     filter: none;
 
@@ -764,20 +764,13 @@ GRID
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 4;
-    z-index: 1;
+    z-index: 2;
     background-color: var(--ax-bg-neutral-soft);
     box-shadow: inset 0 -1px var(--ax-neutral-800);
 }
 
 .toolbar-container::before {
-    position: sticky;
-    display: block;
-    grid-column: 1/3;
-    grid-row: 4;
-    top: 11rem;
-    height: 1rem;
-    content: '';
-    box-shadow: 0 8px 5px -5px rgba(0, 0, 0, 0.5);
+    display: none;
 }
 
 .skjemaelement {
