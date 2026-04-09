@@ -118,7 +118,7 @@ export function FilterStatusMineFargekategorier() {
                         key={fargekategori.filterId}
                         labelTekst={
                             <>
-                                <Bleed marginBlock="05" asChild>
+                                <Bleed marginBlock="space-1" asChild>
                                     {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
                                 </Bleed>
                                 {fargekategori.filterLabel}

@@ -25,7 +25,7 @@ export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Reado
             className={buttonClassnames}
             aria-label={tittel}
         >
-            <Bleed marginBlock="05" asChild>
+            <Bleed marginBlock="space-1" asChild>
                 {ikon}
             </Bleed>
             {label}
