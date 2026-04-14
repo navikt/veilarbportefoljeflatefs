@@ -733,6 +733,7 @@ GRID
     grid-template-rows: auto auto auto auto;
     z-index: 3;
     background-color: var(--ax-bg-neutral-moderate);
+    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo {
@@ -742,6 +743,7 @@ GRID
     grid-column-end: 3;
     grid-template-columns: 40% 60%;
     margin-top: 0.75rem;
+    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo__hidden {
@@ -835,6 +837,7 @@ GRID
     grid-column-end: 3;
     display: flex;
     flex-wrap: wrap;
+    font-size: 0.875rem;
 }
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__feature,
@@ -876,7 +879,7 @@ GRID
     font-size: 0.875rem !important;
 }
 
-.veilarbportefoljeflatefs .navds-body-short {
+.veilarbportefoljeflatefs .aksel-body-short {
     font-size: 0.875rem !important;
 }
 
@@ -884,17 +887,17 @@ GRID
     font-size: 0.875rem !important;
 }
 
-.veilarbportefoljeflatefs .navds-label {
+.veilarbportefoljeflatefs .aksel-label {
     font-size: 0.875rem !important;
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .navds-body-short {
+.veilarbportefoljeflatefs .dekorator .aksel-body-short {
     font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-body-short" */
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .navds-label {
+.veilarbportefoljeflatefs .dekorator .aksel-label {
     font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-label" */
 }
 

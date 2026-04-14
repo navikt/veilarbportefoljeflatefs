@@ -15,6 +15,10 @@
     justify-content: space-around;
 }
 
+.veilarbportefoljeflatefs .sidebar .aksel-tabs--small .aksel-tabs__tab {
+    font-size: 0.875rem;
+}
+
 .veilarbportefoljeflatefs .sidebar__content-container {
     height: fit-content;
     z-index: 5;
