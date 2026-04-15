@@ -1,7 +1,5 @@
 import {MouseEvent} from 'react';
-import classNames from 'classnames';
-import {Button} from '@navikt/ds-react';
-import {XMarkIcon} from '@navikt/aksel-icons';
+import {Chips} from '@navikt/ds-react';
 import {lagConfig} from '../filter-konstanter';
 import {FilterFeilModal} from '../../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../../utils/utils';
@@ -16,26 +14,24 @@ interface FiltreringLabelProps {
 
 export function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
     const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label)?.label}"` : 'Nullstill filtervalg';
-    const slettAlleFiltervalg = ariaLabel === 'Nullstill filtervalg';
-    const buttonClassnames = classNames('filtreringlabel', {'filtreringlabel--slett-alle': slettAlleFiltervalg});
 
     if (label === undefined) {
         return <FilterFeilModal isOpen={true} />;
     }
 
+    const handleDelete = (event?: React.MouseEvent<HTMLButtonElement>) => {
+        if (event) {
+            slettFilter(event);
+        }
+    };
+
     return (
-        <Button
-            size="small"
-            variant="primary-neutral"
-            icon={skalHaKryssIkon && <XMarkIcon />}
-            iconPosition="right"
-            title={ariaLabel}
-            onClick={slettFilter}
-            className={buttonClassnames}
-            aria-label={ariaLabel}
+        <Chips.Removable
+            data-color="info"
+            onDelete={handleDelete}
             data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
             {lagConfig(label).label}
-        </Button>
+        </Chips.Removable>
     );
 }

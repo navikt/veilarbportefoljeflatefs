@@ -13,7 +13,7 @@
 
 .huskelapp__postit {
     position: relative;
-    background-color: rgb(249, 252, 204);
+    background-color: #f9fccc;
 }
 
 .huskelapp__postit::before {
