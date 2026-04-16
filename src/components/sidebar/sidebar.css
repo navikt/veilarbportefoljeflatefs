@@ -58,6 +58,11 @@
     margin-right: auto;
 }
 
+.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .aksel-help-text__button,
+.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .navds-help-text__button {
+    font-size: 1.4rem;
+}
+
 @media (max-height: 1250px) {
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-filter,
     .veilarbportefoljeflatefs .sidebar .sidebar__content-container .filtrering-oversikt,

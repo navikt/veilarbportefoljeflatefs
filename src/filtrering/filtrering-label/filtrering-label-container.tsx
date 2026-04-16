@@ -55,6 +55,7 @@ function FiltreringLabelContainer({
                     label="Nullstill filtervalg"
                     slettFilter={slettAlle}
                     skalHaKryssIkon={false}
+                    dataColor="neutral"
                 />
             )}
         </div>

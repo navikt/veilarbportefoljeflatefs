@@ -10,9 +10,15 @@ interface FiltreringLabelProps {
     label: string | {label: string};
     slettFilter: (event: MouseEvent<HTMLButtonElement>) => void;
     skalHaKryssIkon?: boolean;
+    dataColor?: 'info' | 'neutral';
 }
 
-export function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Readonly<FiltreringLabelProps>) {
+export function FiltreringLabel({
+    label,
+    slettFilter,
+    skalHaKryssIkon = true,
+    dataColor = 'info'
+}: Readonly<FiltreringLabelProps>) {
     const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label)?.label}"` : 'Nullstill filtervalg';
 
     if (label === undefined) {
@@ -27,7 +33,7 @@ export function FiltreringLabel({label, slettFilter, skalHaKryssIkon = true}: Re
 
     return (
         <Chips.Removable
-            data-color="info"
+            data-color={dataColor}
             onDelete={handleDelete}
             data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
         >
