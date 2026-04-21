@@ -708,6 +708,8 @@ GRID
 }
 
 .veilarbportefoljeflatefs .dekorator {
+    font-size: 1.125rem;
+
     .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
         font-weight: var(--ax-font-weight-bold);
     }
@@ -889,6 +891,12 @@ GRID
 
 .veilarbportefoljeflatefs .aksel-label {
     font-size: 0.875rem !important;
+}
+
+/* Vår unlayered normalize-CSS overstyrer Aksel sin @layer all:unset på chip-knapper,
+ * noko som gir feil line-height og feil vertikal justering av tekst vs. kryss-ikon. */
+.veilarbportefoljeflatefs .aksel-chips__chip {
+    line-height: 1;
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/

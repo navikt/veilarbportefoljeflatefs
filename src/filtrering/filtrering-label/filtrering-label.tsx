@@ -1,5 +1,5 @@
 import {MouseEvent} from 'react';
-import {Chips} from '@navikt/ds-react';
+import {Button, Chips} from '@navikt/ds-react';
 import {lagConfig} from '../filter-konstanter';
 import {FilterFeilModal} from '../../components/modal/filter-feil-modal';
 import {kebabUtenSpesialtegn} from '../../utils/utils';
@@ -17,7 +17,7 @@ export function FiltreringLabel({
     label,
     slettFilter,
     skalHaKryssIkon = true,
-    dataColor = 'info'
+    dataColor = 'neutral'
 }: Readonly<FiltreringLabelProps>) {
     const ariaLabel = skalHaKryssIkon ? `Fjern filtervalg "${lagConfig(label)?.label}"` : 'Nullstill filtervalg';
 
@@ -30,6 +30,19 @@ export function FiltreringLabel({
             slettFilter(event);
         }
     };
+
+    if (!skalHaKryssIkon) {
+        return (
+            <Button
+                variant="secondary-neutral"
+                size="small"
+                data-testid={`filtreringlabel_${kebabUtenSpesialtegn(label)}`}
+                onClick={handleDelete}
+            >
+                {ariaLabel}
+            </Button>
+        );
+    }
 
     return (
         <Chips.Removable
