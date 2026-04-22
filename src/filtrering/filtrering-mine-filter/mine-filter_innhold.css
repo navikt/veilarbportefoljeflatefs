@@ -24,7 +24,8 @@
     align-items: center;
 }
 .veilarbportefoljeflatefs .mine-filter__filternavn {
-    width: 85%;
+    flex: 1;
+    min-width: 0;
 }
 .veilarbportefoljeflatefs .mine-filter_alertstripe {
     display: flex;

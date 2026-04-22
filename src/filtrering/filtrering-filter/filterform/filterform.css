@@ -26,11 +26,6 @@
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .navds-body-short {
     max-width: 12.5rem;
 }
-.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .navds-radio-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .skjemaelement__label {
     margin-bottom: 1rem;
 }
@@ -236,9 +231,6 @@
     z-index: 1000;
     margin-bottom: 0;
 }
-.veilarbportefoljeflatefs .radio-filterform__valg .navds-radio-buttons div:first-child {
-    border-bottom: 1px solid var(--ax-border-neutral-subtle);
-}
 .veilarbportefoljeflatefs .hendelser-filterform {
     padding: 0.5rem 0 0.5rem 0.5rem;
 }
@@ -257,7 +249,6 @@
 .veilarbportefoljeflatefs .hendelser-filterform__radio-gruppe + .uleste-endringer {
     margin-left: 0.5rem;
 }
-.veilarbportefoljeflatefs .hendelser-filterform .navds-radio-buttons,
 .veilarbportefoljeflatefs .hendelser-filterform .navds-checkboxes {
     margin-left: 0.5rem;
 }
