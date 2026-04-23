@@ -14,27 +14,15 @@ describe('Annen veileder', () => {
         cy.getByTestId('veilederoversikt-tabell').should('be.visible');
 
         // Sjekk at det ikkje er sortert på Antall brukere frå før
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_synkende')
-            .should('not.exist');
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('not.exist');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift').should('have.attr', 'aria-sort', 'none');
 
         // Trykk på Antall brukere, sjekk at det er blitt sortert stigende
         cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('be.visible');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift').should('have.attr', 'aria-sort', 'ascending');
 
         // Trykk på Antall brukere igjen, no skal det vere sortert synkande
         cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_stigende')
-            .should('not.exist');
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
-            .findByTestId('sorteringspil_synkende')
-            .should('be.visible');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift').should('have.attr', 'aria-sort', 'descending');
     });
 
     it('Gå inn til annen veileders oversikt via tabellen', () => {
