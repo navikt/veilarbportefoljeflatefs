@@ -8,7 +8,7 @@ metadata:
   annotations:
     wonderwall.nais.io/beta: "true"
 spec:
-  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.03.26_21.40-5ce834f69a0e
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2026.05.04_08.28-44f053d6a1a4
   port: 8080
   ingresses:
     - https://veilarbportefoljeflate.intern.dev.nav.no
