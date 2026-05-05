@@ -20,13 +20,18 @@
 
 .veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:last-child {
     border-bottom: 1px solid #a0a0a0;
-    border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
+    border-radius: 0 0 var(--ax-radius-4) var(--ax-radius-4);
 }
 
 .veilarbportefoljeflatefs .brukerliste__element {
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
+}
+
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:hover button,
+.veilarbportefoljeflatefs .brukerliste li.brukerliste_rad:hover [role='button'] {
+    border-radius: 2px;
 }
 
 .veilarbportefoljeflatefs .velgalle-checkboks {
@@ -94,7 +99,7 @@
 }
 
 .veilarbportefoljeflatefs .enhet-tabell {
-    background-color: var(--a-bg-subtle);
+    background-color: var(--ax-bg-neutral-soft);
     border-top-color: #fff;
     border-bottom: none;
     border-radius: 0 0 4px 4px;

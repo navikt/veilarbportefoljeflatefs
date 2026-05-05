@@ -42,7 +42,7 @@
     padding: 0.45rem 1.5em 0.45rem 0.45rem;
     background: #fff;
     border: 1px solid #6a6a6a;
-    border-radius: 2px;
+    border-radius: 4px;
     color: #000000;
 }
 .veilarbportefoljeflatefs .dropdown__btn:focus {
@@ -58,7 +58,7 @@
     border: 1px solid #a0a0a0;
     top: calc(100% - 1px);
     background-color: #fff;
-    border-radius: 0 0 2px 2px;
+    border-radius: 0 0 var(--ax-radius-2, 2px) var(--ax-radius-2, 2px);
     width: 100%;
     margin-bottom: 2rem;
 }

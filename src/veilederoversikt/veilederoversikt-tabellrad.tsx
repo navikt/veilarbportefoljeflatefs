@@ -10,7 +10,11 @@ export const VeilederoversiktTabellrad = ({veileder}: Props) => {
     return (
         <Table.Row key={veileder.ident}>
             <Table.HeaderCell>
-                <Link to={`../portefolje/${veileder.ident}`} data-testid="veilederoversikt_navn_lenke">
+                <Link
+                    to={`../portefolje/${veileder.ident}`}
+                    data-testid="veilederoversikt_navn_lenke"
+                    className="veilederoversikt_navn_lenke"
+                >
                     <BodyShort size="small">{`${veileder.navn}`}</BodyShort>
                 </Link>
             </Table.HeaderCell>

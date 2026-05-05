@@ -1,6 +1,6 @@
 import {MouseEvent, ReactNode} from 'react';
 import classNames from 'classnames';
-import {Bleed, Button} from '@navikt/ds-react';
+import {Button} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import './filtrering-label.css';
 import '../filtrering-skjema.css';
@@ -25,10 +25,10 @@ export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Reado
             className={buttonClassnames}
             aria-label={tittel}
         >
-            <Bleed marginBlock="05" asChild>
+            <span style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}>
                 {ikon}
-            </Bleed>
-            {label}
+                {label}
+            </span>
         </Button>
     );
 }

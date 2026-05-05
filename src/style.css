@@ -1,3 +1,5 @@
+@import '@navikt/ds-css';
+
 .veilarbportefoljeflatefs {
     /* Styrer paddinga for innhaldet på sida
      * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
@@ -30,7 +32,7 @@ body {
     font-family: 'Source Sans Pro', Arial, sans-serif;
 
     /* Det som set grå bakgrunn på heile sida */
-    background-color: var(--a-bg-subtle);
+    background-color: var(--ax-bg-neutral-moderate);
 
     filter: none;
 
@@ -708,8 +710,10 @@ GRID
 }
 
 .veilarbportefoljeflatefs .dekorator {
+    font-size: initial;
+
     .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
-        font-weight: var(--a-font-weight-bold);
+        font-weight: var(--ax-font-weight-bold);
     }
 }
 
@@ -732,7 +736,7 @@ GRID
     grid-template-columns: calc(var(--sidebar-bredde) + var(--gap-mellom-sidebar-og-sokefeltkolonner)) auto;
     grid-template-rows: auto auto auto auto;
     z-index: 3;
-    background-color: var(--a-bg-subtle);
+    background-color: var(--ax-bg-neutral-moderate);
 }
 
 .toolbar-container .tabellinfo {
@@ -749,7 +753,7 @@ GRID
 }
 
 .toolbar-container .tabellinfo .tabelloverskrift {
-    background-color: var(--a-bg-subtle);
+    background-color: var(--ax-bg-neutral-moderate);
     grid-column: 1;
 }
 
@@ -764,9 +768,9 @@ GRID
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 4;
-    z-index: 1;
-    background-color: var(--a-bg-subtle);
-    box-shadow: inset 0 -1px var(--a-gray-700);
+    z-index: 2;
+    background-color: var(--ax-bg-neutral-moderate);
+    box-shadow: inset 0 -1px var(--ax-neutral-800);
 }
 
 .toolbar-container::before {
@@ -793,7 +797,7 @@ GRID
 }
 
 .veilarbportefoljeflatefs .side-storrelse > .informasjonsmeldinger:not(:last-child) {
-    margin-bottom: var(--a-spacing-1);
+    margin-bottom: var(--ax-space-4);
 }
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold {
@@ -883,7 +887,7 @@ GRID
     font-size: 0.875rem !important;
 }
 
-.veilarbportefoljeflatefs .navds-body-short {
+.veilarbportefoljeflatefs .aksel-body-short {
     font-size: 0.875rem !important;
 }
 
@@ -891,17 +895,17 @@ GRID
     font-size: 0.875rem !important;
 }
 
-.veilarbportefoljeflatefs .navds-label {
+.veilarbportefoljeflatefs .aksel-label {
     font-size: 0.875rem !important;
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .navds-body-short {
+.veilarbportefoljeflatefs .dekorator .aksel-body-short {
     font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-body-short" */
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
-.veilarbportefoljeflatefs .dekorator .navds-label {
+.veilarbportefoljeflatefs .dekorator .aksel-label {
     font-size: initial !important; /* Bruker !important for å overskrive !important frå selector ".veilarbportefoljeflatefs .navds-label" */
 }
 
@@ -919,7 +923,7 @@ GRID
 .veilarbportefoljeflatefs .navds-button--secondary-neutral {
     /* Gjer at secondary-knappar vert kvite uavhengig av bakgrunnsfargen.
      * (I designsystemet er dei gjennomsiktige.) */
-    background-color: var(--a-bg-default);
+    background-color: var(--ax-bg-default);
 }
 
 .veilarbportefoljeflatefs .dekorator .navds-button--secondary,

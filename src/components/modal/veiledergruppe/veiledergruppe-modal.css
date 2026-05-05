@@ -51,7 +51,7 @@
     overflow-y: scroll;
     height: 15rem;
     border: 1px solid #6a6a6a;
-    border-radius: var(--a-border-radius-medium) 0 0 var(--a-border-radius-medium);
+    border-radius: var(--ax-radius-4) 0 0 var(--ax-radius-4);
 }
 
 .veiledergruppe-modal__valgteveileder__tom-liste-tekst {
@@ -84,7 +84,7 @@
     max-height: 13rem;
     min-height: 13rem;
     border: 1px solid #6a6a6a;
-    border-radius: var(--a-border-radius-medium) 0 0 var(--a-border-radius-medium);
+    border-radius: var(--ax-radius-4) 0 0 var(--ax-radius-4);
     grid-template-columns: 1fr 1fr;
 }
 

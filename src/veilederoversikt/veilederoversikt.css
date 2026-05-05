@@ -28,18 +28,25 @@
     display: none;
 }
 
+.oversikt-sideinnhold-veilederside .veileder-tabell .veiledertabell__sorteringskolonne button {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .status-filter-kolonne .sok-veileder {
     margin: 0.5rem 0 1rem;
-    border: 1px solid var(--a-border-default);
-    border-radius: var(--a-border-radius-small);
-    background: var(--a-surface-default);
-    padding: var(--a-spacing-4);
+    background-color: var(--ax-bg-default);
 }
 
 .status-filter-kolonne {
     height: fit-content;
     position: sticky;
     top: 0.5rem;
+}
+
+/* Denne overstyringen bør fjernes når vi oppgraderer dekoratøren */
+.veilederoversikt_navn_lenke {
+    color: var(--ax-text-accent-decoration);
 }
 
 @media (max-width: 900px) {

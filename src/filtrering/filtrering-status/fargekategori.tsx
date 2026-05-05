@@ -1,5 +1,4 @@
 import {ChangeEvent} from 'react';
-import {Bleed} from '@navikt/ds-react';
 import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {
@@ -117,12 +116,10 @@ export function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         key={fargekategori.filterId}
                         labelTekst={
-                            <>
-                                <Bleed marginBlock="05" asChild>
-                                    {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
-                                </Bleed>
+                            <span style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}>
+                                {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
                                 {fargekategori.filterLabel}
-                            </>
+                            </span>
                         }
                         filterNavn={fargekategori.filterNavn}
                         handleChange={handleUnderfilterEndret}

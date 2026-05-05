@@ -15,6 +15,10 @@
     justify-content: space-around;
 }
 
+.veilarbportefoljeflatefs .sidebar .aksel-tabs--small .aksel-tabs__tab {
+    font-size: 0.875rem;
+}
+
 .veilarbportefoljeflatefs .sidebar__content-container {
     height: fit-content;
     z-index: 5;
@@ -52,6 +56,11 @@
 
 .veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .sidebar-header__tekst {
     margin-right: auto;
+}
+
+.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .aksel-help-text__button,
+.veilarbportefoljeflatefs .sidebar__content-container .sidebar-header .navds-help-text__button {
+    font-size: 1.4rem;
 }
 
 @media (max-height: 1250px) {

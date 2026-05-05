@@ -25,6 +25,6 @@
 }
 
 .stegviser__steg--selected {
-    background-color: var(--a-border-focus);
+    background-color: var(--ax-border-focus);
     transition: background-color 333ms linear;
 }

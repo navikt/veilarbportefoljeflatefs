@@ -1,49 +1,14 @@
 .veilarbportefoljeflatefs .filtrering-label-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
 }
+
 .veilarbportefoljeflatefs .veilederoversikt_sok-veileder {
     font-size: 20px;
 }
+
 .veilarbportefoljeflatefs .filtreringlabel__container {
     display: flex;
     align-items: center;
-}
-.veilarbportefoljeflatefs .filtreringlabel {
-    --ac-button-primary-neutral-bg: var(--a-gray-300);
-    --ac-button-primary-neutral-text: var(--a-gray-900);
-    --ac-button-primary-neutral-hover-bg: var(--a-gray-400);
-
-    margin: 0.25rem 0.5rem 0.25rem 0;
-    border-radius: 2px;
-}
-.veilarbportefoljeflatefs .filtreringlabel:hover {
-    box-shadow: inset 0 -0.125em 0 var(--a-gray-900);
-}
-.veilarbportefoljeflatefs .filtreringlabel:active {
-    color: #fff;
-}
-.veilarbportefoljeflatefs .filtreringlabel span:first-of-type {
-    max-width: 10rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: normal;
-}
-.veilarbportefoljeflatefs .filtreringlabel:hover span {
-    max-width: -moz-fit-content;
-    max-width: fit-content;
-}
-.filtreringlabel--ikon span:first-of-type {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-.filtreringlabel--ikon svg:first-of-type {
-    flex-shrink: 0;
-}
-.veilarbportefoljeflatefs .filtreringlabel--slett-alle {
-    --ac-button-primary-neutral-bg: var(--a-gray-600);
-    --ac-button-primary-neutral-text: var(--a-text-on-neutral);
-    --ac-button-primary-neutral-hover-bg: var(--a-surface-inverted-hover);
 }
