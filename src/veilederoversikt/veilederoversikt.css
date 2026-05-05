@@ -28,6 +28,11 @@
     display: none;
 }
 
+.oversikt-sideinnhold-veilederside .veileder-tabell .veiledertabell__sorteringskolonne button {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .status-filter-kolonne .sok-veileder {
     margin: 0.5rem 0 1rem;
     background-color: var(--ax-bg-default);

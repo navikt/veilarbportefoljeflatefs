@@ -41,7 +41,7 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
         <Table zebraStripes={true} data-testid="veilederoversikt-tabell" bgcolor="white">
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>
+                    <Table.HeaderCell className="veiledertabell__sorteringskolonne">
                         <HStack as="span" gap="space-2" align="center" wrap={false}>
                             Fornavn
                             <Button
@@ -62,7 +62,10 @@ export function VeilederoversiktTabell({veiledere, currentSortering}: VeiledereT
                         </HStack>
                     </Table.HeaderCell>
                     <Table.HeaderCell>Nav-ident</Table.HeaderCell>
-                    <Table.HeaderCell data-testid="veiledertabell__antall-brukere-overskrift">
+                    <Table.HeaderCell
+                        className="veiledertabell__sorteringskolonne"
+                        data-testid="veiledertabell__antall-brukere-overskrift"
+                    >
                         <HStack
                             as="span"
                             gap="space-2"
