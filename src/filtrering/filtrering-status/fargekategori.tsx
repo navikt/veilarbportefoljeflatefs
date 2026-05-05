@@ -1,6 +1,5 @@
 import {ChangeEvent} from 'react';
-import {Bleed} from '@navikt/ds-react';
-import {useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
+import {useStatustallEnhetSelector, useStatustallVeilederSelector} from '../../hooks/redux/use-statustall';
 import {BarInputCheckbox} from '../../components/barinput/barinput-checkbox';
 import {
     alleFargekategoriFilterAlternativer,
@@ -22,6 +21,9 @@ import {FargekategoriModell} from '../../typer/bruker-modell';
 import {fargekategoriIkonMapper} from '../../components/fargekategori/fargekategori-ikon-mapper';
 import './fargekategori.css';
 import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
+import {pagineringSetup} from '../../ducks/paginering';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../reducer';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -76,10 +78,85 @@ export const fargekategoriUnderfilterKonfigurasjoner: readonly FargekategoriUnde
     }
 ] as const;
 
-export function FilterStatusMineFargekategorier() {
+type FilterStatusFargekategorierProps = {
+    oversiktType: OversiktType;
+};
+
+type FargekategoriStatustall = {
+    fargekategoriA: number;
+    fargekategoriB: number;
+    fargekategoriC: number;
+    fargekategoriD: number;
+    fargekategoriE: number;
+    fargekategoriF: number;
+    fargekategoriIngenKategori: number;
+};
+
+const initialeFargekategoriStatustall: FargekategoriStatustall = {
+    fargekategoriA: 0,
+    fargekategoriB: 0,
+    fargekategoriC: 0,
+    fargekategoriD: 0,
+    fargekategoriE: 0,
+    fargekategoriF: 0,
+    fargekategoriIngenKategori: 0
+};
+
+function lagFargekategoriStatustallForEnhet(
+    brukere: AppState['portefolje']['data']['brukere']
+): FargekategoriStatustall {
+    return brukere.reduce(
+        (acc, bruker) => {
+            switch (bruker.fargekategori) {
+                case FARGEKATEGORI_A:
+                    acc.fargekategoriA += 1;
+                    break;
+                case FARGEKATEGORI_B:
+                    acc.fargekategoriB += 1;
+                    break;
+                case FARGEKATEGORI_C:
+                    acc.fargekategoriC += 1;
+                    break;
+                case FARGEKATEGORI_D:
+                    acc.fargekategoriD += 1;
+                    break;
+                case FARGEKATEGORI_E:
+                    acc.fargekategoriE += 1;
+                    break;
+                case FARGEKATEGORI_F:
+                    acc.fargekategoriF += 1;
+                    break;
+                case INGEN_KATEGORI:
+                case null:
+                    acc.fargekategoriIngenKategori += 1;
+                    break;
+            }
+
+            return acc;
+        },
+        {...initialeFargekategoriStatustall}
+    );
+}
+
+export function FilterStatusMineFargekategorier({oversiktType}: FilterStatusFargekategorierProps) {
     const dispatch = useAppDispatch();
-    const statusTall = useStatustallVeilederSelector();
-    const filtervalg = usePortefoljeSelector(OversiktType.minOversikt).filtervalg;
+    const statusTallVeileder = useStatustallVeilederSelector();
+    const enhetStatustall = useStatustallEnhetSelector();
+    const enhetsBrukere = useSelector((state: AppState) => state.portefolje.data.brukere);
+    const beregnetStatusTallEnhet = lagFargekategoriStatustallForEnhet(enhetsBrukere);
+    const statusTallEnhet = {
+        ...beregnetStatusTallEnhet,
+        fargekategoriA: enhetStatustall.medBrukerinnsyn.fargekategoriA ?? beregnetStatusTallEnhet.fargekategoriA,
+        fargekategoriB: enhetStatustall.medBrukerinnsyn.fargekategoriB ?? beregnetStatusTallEnhet.fargekategoriB,
+        fargekategoriC: enhetStatustall.medBrukerinnsyn.fargekategoriC ?? beregnetStatusTallEnhet.fargekategoriC,
+        fargekategoriD: enhetStatustall.medBrukerinnsyn.fargekategoriD ?? beregnetStatusTallEnhet.fargekategoriD,
+        fargekategoriE: enhetStatustall.medBrukerinnsyn.fargekategoriE ?? beregnetStatusTallEnhet.fargekategoriE,
+        fargekategoriF: enhetStatustall.medBrukerinnsyn.fargekategoriF ?? beregnetStatusTallEnhet.fargekategoriF,
+        fargekategoriIngenKategori:
+            enhetStatustall.medBrukerinnsyn.fargekategoriIngenKategori ??
+            beregnetStatusTallEnhet.fargekategoriIngenKategori
+    };
+    const filtervalg = usePortefoljeSelector(oversiktType).filtervalg;
     const ferdigfilter = filtervalg.ferdigfilterListe;
     const fargekategoriFilter = filtervalg.fargekategorier;
 
@@ -91,13 +168,15 @@ export function FilterStatusMineFargekategorier() {
         !alleFargekategoriFilterAlternativer.every(f => fargekategoriFilter.includes(f));
 
     function handleHovedfilterEndret() {
-        dispatch({type: FARGEKATEGORIER_HOVEDFILTER_KLIKK, name: OversiktType.minOversikt});
+        dispatch(pagineringSetup({side: 1}));
+        dispatch({type: FARGEKATEGORIER_HOVEDFILTER_KLIKK, name: oversiktType});
     }
 
     function handleUnderfilterEndret(e: ChangeEvent<HTMLInputElement>) {
+        dispatch(pagineringSetup({side: 1}));
         dispatch({
             type: FARGEKATEGORIER_UNDERFILTER_KLIKK,
-            name: OversiktType.minOversikt,
+            name: oversiktType,
             data: e.target.value as FargekategoriModell
         });
     }
@@ -117,17 +196,19 @@ export function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         key={fargekategori.filterId}
                         labelTekst={
-                            <>
-                                <Bleed marginBlock="05" asChild>
-                                    {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
-                                </Bleed>
+                            <span style={{display: 'inline-flex', alignItems: 'baseline', gap: '0.25rem'}}>
+                                {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
                                 {fargekategori.filterLabel}
-                            </>
+                            </span>
                         }
                         filterNavn={fargekategori.filterNavn}
                         handleChange={handleUnderfilterEndret}
                         checked={fargekategoriFilter.includes(fargekategori.filterId)}
-                        antall={statusTall[fargekategori.statustallId]}
+                        antall={
+                            oversiktType === OversiktType.minOversikt
+                                ? statusTallVeileder[fargekategori.statustallId]
+                                : statusTallEnhet[fargekategori.statustallId]
+                        }
                         filterVerdi={fargekategori.filterId}
                     />
                 ))}

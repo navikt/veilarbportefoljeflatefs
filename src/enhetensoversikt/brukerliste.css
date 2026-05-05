@@ -70,6 +70,16 @@
     align-items: center;
 }
 
+.veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp {
+    min-width: 3.125rem;
+    display: flex;
+    align-items: center;
+}
+
+.veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp .fargekategori-tabellrad-knapp {
+    margin-right: 0;
+}
+
 .veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
     padding-left: 0;
     padding-right: 0;

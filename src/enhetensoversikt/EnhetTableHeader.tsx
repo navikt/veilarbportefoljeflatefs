@@ -38,6 +38,7 @@ import {MoteIDagAvtaltHeader} from '../components/tabell/headerCells/MoteIDagAvt
 import {Utkast14aVedtaksstatusHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusHeader';
 import {Utkast14aVedtaksstatusEndretHeader} from '../components/tabell/headerCells/Utkast14aVedtaksstatusEndretHeader';
 import {Utkast14aAnsvarligVeilederHeader} from '../components/tabell/headerCells/Utkast14aAnsvarligVeilederHeader';
+import {FargekategoriHeader} from '../components/tabell/headerCells/min-oversikt/FargekategoriHeader';
 import {VeilederNavidentHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavidentHeader';
 import {VeilederNavnHeader} from '../components/tabell/headerCells/enhetens-oversikt/VeilederNavnHeader';
 import {AapKelvinVedtakTilOgMedDatoHeaderHeader} from '../components/tabell/headerCells/AapKelvinVedtakTilOgMedDatoHeaderHeader';
@@ -77,6 +78,9 @@ export function EnhetTableHeader() {
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
+            <div className="brukerliste__fargekategori-ikonknapp">
+                <FargekategoriHeader {...sorteringTilHeaderCell} />
+            </div>
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <NavnHeader {...sorteringTilHeaderCell} />
                 <FnrHeader {...sorteringTilHeaderCell} />
