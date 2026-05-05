@@ -59,7 +59,7 @@ export function EnhetTableRow({bruker, settMarkert, enhetId, filtervalg, valgteK
                 Velg bruker {bruker.etternavn}, {bruker.fornavn}
             </Checkbox>
             <div className="brukerliste__fargekategori-ikonknapp">
-                {bruker.fnr ? <FargekategoriTabellradKnapp bruker={bruker} /> : <span aria-hidden />}
+                {bruker.fnr ? <FargekategoriTabellradKnapp bruker={bruker} readOnly /> : <span aria-hidden />}
             </div>
             <EnhetTableDataCells
                 className="brukerliste__innhold flex flex--center"
