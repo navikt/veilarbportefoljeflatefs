@@ -4,7 +4,6 @@ import Application from './application';
 import {EnvType, getEnv} from './utils/url-utils';
 import env from './utils/environment';
 import '@navikt/ds-tokens/dist/tokens.css';
-import '@navikt/ds-css';
 import './style.css';
 import {leggTilUmamiScript} from './umami/umami';
 

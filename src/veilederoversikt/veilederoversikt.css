@@ -39,6 +39,7 @@
     top: 0.5rem;
 }
 
+/* Denne overstyringen bør fjernes når vi oppgraderer dekoratøren */
 .veilederoversikt_navn_lenke {
     color: var(--ax-text-accent-decoration);
 }

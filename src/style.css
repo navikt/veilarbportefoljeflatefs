@@ -1,3 +1,5 @@
+@import '@navikt/ds-css';
+
 .veilarbportefoljeflatefs {
     /* Styrer paddinga for innhaldet på sida
      * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
@@ -708,7 +710,7 @@ GRID
 }
 
 .veilarbportefoljeflatefs .dekorator {
-    font-size: 1.125rem;
+    font-size: initial;
 
     .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
         font-weight: var(--ax-font-weight-bold);
@@ -735,7 +737,6 @@ GRID
     grid-template-rows: auto auto auto auto;
     z-index: 3;
     background-color: var(--ax-bg-neutral-moderate);
-    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo {
@@ -745,7 +746,6 @@ GRID
     grid-column-end: 3;
     grid-template-columns: 40% 60%;
     margin-top: 0.75rem;
-    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo__hidden {
@@ -774,7 +774,14 @@ GRID
 }
 
 .toolbar-container::before {
-    display: none;
+    position: sticky;
+    display: block;
+    grid-column: 1/3;
+    grid-row: 4;
+    top: 11rem;
+    height: 1rem;
+    content: '';
+    box-shadow: 0 8px 5px -5px rgba(0, 0, 0, 0.5);
 }
 
 .skjemaelement {
@@ -839,7 +846,6 @@ GRID
     grid-column-end: 3;
     display: flex;
     flex-wrap: wrap;
-    font-size: 0.875rem;
 }
 
 .veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__feature,
@@ -891,12 +897,6 @@ GRID
 
 .veilarbportefoljeflatefs .aksel-label {
     font-size: 0.875rem !important;
-}
-
-/* Vår unlayered normalize-CSS overstyrer Aksel sin @layer all:unset på chip-knapper,
- * noko som gir feil line-height og feil vertikal justering av tekst vs. kryss-ikon. */
-.veilarbportefoljeflatefs .aksel-chips__chip {
-    line-height: 1;
 }
 
 /* Gjer at tekst i dekoratøren i oversikten får same storleik som på andre sider*/
