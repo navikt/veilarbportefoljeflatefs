@@ -1,3 +1,14 @@
 .veilarbportefoljeflatefs .fargekategorier--underfilter {
     margin-left: 1.5rem;
 }
+
+.veilarbportefoljeflatefs .fargekategorier--underfilter .barinput-checkbox .navds-checkbox__label-text {
+    align-self: stretch;
+}
+
+.veilarbportefoljeflatefs .fargekategorier--underfilter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: 100%;
+}

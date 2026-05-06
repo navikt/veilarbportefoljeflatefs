@@ -196,7 +196,7 @@ export function FilterStatusMineFargekategorier({oversiktType}: FilterStatusFarg
                     <BarInputCheckbox
                         key={fargekategori.filterId}
                         labelTekst={
-                            <span style={{display: 'inline-flex', alignItems: 'baseline', gap: '0.25rem'}}>
+                            <span className="fargekategorier--underfilter-label">
                                 {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
                                 {fargekategori.filterLabel}
                             </span>
