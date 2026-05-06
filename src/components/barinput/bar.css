@@ -3,11 +3,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--a-spacing-1);
 }
-.barinput-checkbox .navds-checkbox__label,
+
+.barinput-checkbox > .navds-checkbox {
+    flex: 1;
+    min-width: 0;
+}
+
 .barinput-checkbox .navds-checkbox__label-text {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     gap: 0.5rem;
 }
 .barinput-checkbox .navds-checkbox__label svg {

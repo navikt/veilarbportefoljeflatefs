@@ -226,9 +226,11 @@ export function FiltreringStatus({filtervalg, oversiktType, statustall}: Filtrer
                             labelTekst={ferdigfilterListeLabelTekst[MINE_HUSKELAPPER]}
                             statustall={statustallMedBrukerinnsyn.mineHuskelapper}
                         />
-                        <FilterStatusMineFargekategorier />
                     </div>
                 )}
+                <div className="forste-barlabel-i-gruppe">
+                    <FilterStatusMineFargekategorier oversiktType={oversiktType} />
+                </div>
             </RadioGroup>
         </div>
     );

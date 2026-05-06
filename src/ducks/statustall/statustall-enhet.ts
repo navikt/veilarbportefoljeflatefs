@@ -33,7 +33,14 @@ export const initalStatusState: StatustallEnhetState = {
             nyeBrukereForVeileder: 0,
             trengerOppfolgingsvedtak: 0,
             underVurdering: 0,
-            mineHuskelapper: 0
+            mineHuskelapper: 0,
+            fargekategoriA: 0,
+            fargekategoriB: 0,
+            fargekategoriC: 0,
+            fargekategoriD: 0,
+            fargekategoriE: 0,
+            fargekategoriF: 0,
+            fargekategoriIngenKategori: 0
         },
         utenBrukerinnsyn: {
             totalt: 0,
@@ -52,7 +59,14 @@ export const initalStatusState: StatustallEnhetState = {
             nyeBrukereForVeileder: 0,
             trengerOppfolgingsvedtak: 0,
             underVurdering: 0,
-            mineHuskelapper: 0
+            mineHuskelapper: 0,
+            fargekategoriA: 0,
+            fargekategoriB: 0,
+            fargekategoriC: 0,
+            fargekategoriD: 0,
+            fargekategoriE: 0,
+            fargekategoriF: 0,
+            fargekategoriIngenKategori: 0
         }
     }
 };
