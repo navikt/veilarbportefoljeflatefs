@@ -26,6 +26,7 @@
     border-top-right-radius: 6px;
     min-height: fit-content;
     text-align: center;
+    font-size: 1.25rem;
 }
 
 .endringslogg .endringslogg-popover .endringslogg-popover-content .innhold-container {

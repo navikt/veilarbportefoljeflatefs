@@ -18,11 +18,18 @@ describe('Annen veileder', () => {
 
         // Trykk på Antall brukere, sjekk at det er blitt sortert stigende
         cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift').should('have.attr', 'aria-sort', 'ascending');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
+            .findByTestId('sorteringspil_stigende')
+            .should('be.visible');
 
         // Trykk på Antall brukere igjen, no skal det vere sortert synkande
         cy.getByTestId('veiledertabell__antall-brukere-overskrift').find('button').click();
-        cy.getByTestId('veiledertabell__antall-brukere-overskrift').should('have.attr', 'aria-sort', 'descending');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
+            .findByTestId('sorteringspil_stigende')
+            .should('not.exist');
+        cy.getByTestId('veiledertabell__antall-brukere-overskrift')
+            .findByTestId('sorteringspil_synkende')
+            .should('be.visible');
     });
 
     it('Gå inn til annen veileders oversikt via tabellen', () => {

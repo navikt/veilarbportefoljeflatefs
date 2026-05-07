@@ -1,3 +1,5 @@
+@import '@navikt/ds-css';
+
 .veilarbportefoljeflatefs {
     /* Styrer paddinga for innhaldet på sida
      * og gjer det mogleg å strekke bakgrunnsfargen til ting heilt ut til kanten av sida.
@@ -708,6 +710,8 @@ GRID
 }
 
 .veilarbportefoljeflatefs .dekorator {
+    font-size: initial;
+
     .dr-flex.dr-min-w-min.dr-items-center.dr-float-left {
         font-weight: var(--ax-font-weight-bold);
     }
@@ -733,7 +737,6 @@ GRID
     grid-template-rows: auto auto auto auto;
     z-index: 3;
     background-color: var(--ax-bg-neutral-moderate);
-    font-size: 0.875rem;
 }
 
 .toolbar-container .tabellinfo {
