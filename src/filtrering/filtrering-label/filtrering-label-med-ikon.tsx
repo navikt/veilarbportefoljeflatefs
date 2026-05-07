@@ -21,7 +21,14 @@ export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Reado
         >
             <span
                 className="aksel-chips__chip-text"
-                style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    alignSelf: 'stretch',
+                    height: '100%',
+                    lineHeight: 1
+                }}
             >
                 {ikon}
                 {label}
