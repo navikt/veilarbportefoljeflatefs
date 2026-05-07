@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--ax-space-4);
 }
 
 .barinput-checkbox > .navds-checkbox {
@@ -23,6 +24,6 @@
 }
 .forste-barlabel-i-gruppe {
     padding-top: 1rem;
-    border-top: 1px solid var(--a-border-divider);
+    border-top: 1px solid var(--ax-border-neutral-subtle);
     margin-top: 1rem;
 }

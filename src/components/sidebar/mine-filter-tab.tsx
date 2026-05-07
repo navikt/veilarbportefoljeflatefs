@@ -66,7 +66,7 @@ export const MineFilterTab = ({valgtFane, fanetittel, oversiktType, enhettiltak}
             oversiktType={oversiktType}
             headingChildren={
                 <>
-                    <HelpText placement="right" strategy="fixed">
+                    <HelpText placement="right" strategy="fixed" style={{fontSize: '1.4rem'}}>
                         {hjelpeTekst(oversiktType)}
                     </HelpText>
                     <ToggleSwitch

@@ -24,6 +24,7 @@ import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 import {pagineringSetup} from '../../ducks/paginering';
 import {useSelector} from 'react-redux';
 import {AppState} from '../../reducer';
+import {Bleed} from '@navikt/ds-react';
 
 type FargekategoriUnderfilterKonfigurasjon = {
     filterLabel: string;
@@ -197,7 +198,9 @@ export function FilterStatusMineFargekategorier({oversiktType}: FilterStatusFarg
                         key={fargekategori.filterId}
                         labelTekst={
                             <span className="fargekategorier--underfilter-label">
-                                {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
+                                <Bleed marginBlock="space-2" asChild>
+                                    {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
+                                </Bleed>
                                 {fargekategori.filterLabel}
                             </span>
                         }
