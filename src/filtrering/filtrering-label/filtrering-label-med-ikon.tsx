@@ -1,6 +1,4 @@
 import {MouseEvent, ReactNode} from 'react';
-import classNames from 'classnames';
-import {Button, Bleed} from '@navikt/ds-react';
 import {XMarkIcon} from '@navikt/aksel-icons';
 import './filtrering-label.css';
 import '../filtrering-skjema.css';
@@ -13,24 +11,24 @@ interface FiltreringLabelMedIkonProps {
 }
 
 export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Readonly<FiltreringLabelMedIkonProps>) {
-    const buttonClassnames = classNames('filtreringlabel', 'filtreringlabel--ikon', {});
     return (
-        <Button
-            size="small"
-            variant="primary-neutral"
-            icon={<XMarkIcon />}
-            iconPosition="right"
+        <button
+            className="aksel-chips__chip aksel-chips__removable aksel-chips--icon-right"
+            data-color="neutral"
+            aria-label={tittel}
             title={tittel}
             onClick={slettFilter}
-            className={buttonClassnames}
-            aria-label={tittel}
         >
-            <span style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}>
-                <Bleed marginBlock="space-2" asChild>
-                    {ikon}
-                </Bleed>
+            <span
+                className="aksel-chips__chip-text"
+                style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}
+            >
+                {ikon}
                 {label}
             </span>
-        </Button>
+            <span className="aksel-chips__removable-icon">
+                <XMarkIcon aria-hidden />
+            </span>
+        </button>
     );
 }
