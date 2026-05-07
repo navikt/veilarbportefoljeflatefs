@@ -55,6 +55,7 @@ import {AapArenaRettighetsperiodeHeader} from '../components/tabell/headerCells/
 import {usePortefoljeSelector} from '../hooks/redux/use-portefolje-selector';
 import {useSetPortefoljeSortering} from '../hooks/portefolje/use-sett-sortering';
 import {AktivitetNesteUtlopsdatoValgtAktivitetHeader} from '../components/tabell/headerCells/AktivitetNesteUtlopsdatoValgtAktivitetHeader';
+import {MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {DagpengerRettighetHeader} from '../components/tabell/headerCells/DagpengerRettighetHeader';
@@ -74,13 +75,17 @@ export function EnhetTableHeader() {
         rekkefolge: sorteringsrekkefolge,
         onClick: settSorteringOgHentPortefolje
     };
+    const visFargekategoriKolonne =
+        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) && filtervalg.fargekategorier.length > 0;
 
     return (
         <div className="brukerliste__header brukerliste__sorteringheader">
             <VelgalleCheckboks />
-            <div className="brukerliste__fargekategori-ikonknapp">
-                <FargekategoriHeader {...sorteringTilHeaderCell} />
-            </div>
+            {visFargekategoriKolonne && (
+                <div className="brukerliste__fargekategori-ikonknapp">
+                    <FargekategoriHeader {...sorteringTilHeaderCell} />
+                </div>
+            )}
             <div className="brukerliste__innhold" data-testid="brukerliste_innhold">
                 <NavnHeader {...sorteringTilHeaderCell} />
                 <FnrHeader {...sorteringTilHeaderCell} />

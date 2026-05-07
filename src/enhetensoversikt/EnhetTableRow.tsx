@@ -9,6 +9,7 @@ import {EnhetTableDataCells} from './EnhetTableDataCells';
 import {OrNothing} from '../utils/types/types';
 import {nullstillBrukerfeil} from '../ducks/brukerfeilmelding';
 import {FargekategoriTabellradKnapp} from '../components/fargekategori/fargekategori-tabellrad-knapp';
+import {MINE_FARGEKATEGORIER} from '../filtrering/filter-konstanter';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 
@@ -42,6 +43,8 @@ export function EnhetTableRow({bruker, settMarkert, enhetId, filtervalg, valgteK
     const classname = classNames('brukerliste__element', 'brukerliste_rad', {
         'brukerliste--forrigeBruker': varForrigeBruker
     });
+    const visFargekategoriKolonne =
+        filtervalg.ferdigfilterListe.includes(MINE_FARGEKATEGORIER) && filtervalg.fargekategorier.length > 0;
 
     return (
         <li className={classname}>
@@ -58,9 +61,11 @@ export function EnhetTableRow({bruker, settMarkert, enhetId, filtervalg, valgteK
             >
                 Velg bruker {bruker.etternavn}, {bruker.fornavn}
             </Checkbox>
-            <div className="brukerliste__fargekategori-ikonknapp">
-                {bruker.fnr ? <FargekategoriTabellradKnapp bruker={bruker} readOnly /> : <span aria-hidden />}
-            </div>
+            {visFargekategoriKolonne && (
+                <div className="brukerliste__fargekategori-ikonknapp">
+                    {bruker.fnr ? <FargekategoriTabellradKnapp bruker={bruker} readOnly /> : <span aria-hidden />}
+                </div>
+            )}
             <EnhetTableDataCells
                 className="brukerliste__innhold flex flex--center"
                 bruker={bruker}

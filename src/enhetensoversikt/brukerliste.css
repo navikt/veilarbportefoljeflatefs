@@ -77,7 +77,7 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp .fargekategori-tabellrad-knapp {
-    margin-right: 0;
+    padding-left: 0.4rem;
 }
 
 .veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
