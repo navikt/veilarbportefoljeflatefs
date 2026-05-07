@@ -240,6 +240,10 @@
     max-height: 24rem;
     overflow-x: auto;
 }
+.veilarbportefoljeflatefs .radio-filterform__valg .aksel-radio-buttons div:first-child {
+    border-bottom: 1px solid var(--a-border-divider);
+    width: 100%;
+}
 .veilarbportefoljeflatefs .hendelser-filterform__radio-gruppe {
     padding-left: 0.2rem;
     display: flex;

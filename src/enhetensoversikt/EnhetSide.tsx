@@ -1,7 +1,7 @@
 import {ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 import classNames from 'classnames';
-import {Alert} from '@navikt/ds-react';
+import {InfoCard} from '@navikt/ds-react';
 import {Innholdslaster} from '../innholdslaster/innholdslaster';
 import {TabellOverskrift} from '../components/tabell/tabell-overskrift';
 import {ModalEnhetSideController} from '../components/modal/modal-enhet-side-controller';
@@ -41,8 +41,9 @@ import '../style.css';
 import './enhetensoversikt.css';
 import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
-
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
+import {InformationSquareIcon} from '@navikt/aksel-icons';
+import {InfoCardContent} from '@navikt/ds-react/esm/alert/info-card';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
@@ -212,17 +213,15 @@ export function EnhetSide() {
                             <EnhetTableBody classNameWrapper={antallBrukere > 0 ? 'portefolje__container' : ''} />
                         </div>
                     ) : (
-                        <Alert
-                            variant="info"
-                            className=" alertstripe__filtrering"
-                            aria-live="assertive"
-                            role="alert"
-                            aria-atomic="true"
+                        <InfoCard
+                            data-color="info"
                             data-testid="alertstripe_filtrering"
-                            size="medium"
+                            className="alertstripe__filtrering"
                         >
-                            Du må gjøre en filtrering for å se brukere i listen.
-                        </Alert>
+                            <InfoCard.Header icon={<InformationSquareIcon aria-hidden />}>
+                                <InfoCard.Title>Du må gjøre en filtrering for å se brukere i listen.</InfoCard.Title>
+                            </InfoCard.Header>
+                        </InfoCard>
                     )}
                 </div>
             </Innholdslaster>
