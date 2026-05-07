@@ -1,5 +1,5 @@
 .veilarbportefoljeflatefs .dropdown--fixed .dropdown__innhold {
-    border-top-right-radius: 2px;
+    border-top-right-radius: var(--ax-radius-2, 2px);
 }
 .veilarbportefoljeflatefs .filtrering--overskrift-med-hjelpetekst {
     display: flex;

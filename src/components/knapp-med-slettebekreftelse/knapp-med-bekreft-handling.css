@@ -1,5 +1,5 @@
 .veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling-feilet {
-    margin-bottom: var(--a-spacing-4);
+    margin-bottom: var(--ax-space-16);
 }
 
 .veilarbportefoljeflatefs .knapp-med-bekreft-handling > button {
@@ -14,7 +14,7 @@
 }
 
 .veilarbportefoljeflatefs .knapp-med-bekreft-handling .bekreft-handling .bekreft-handling__knapper {
-    margin-top: var(--a-spacing-2);
+    margin-top: var(--ax-space-8);
     display: flex;
     gap: 0.5rem;
 }

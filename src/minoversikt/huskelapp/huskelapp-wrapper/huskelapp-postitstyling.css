@@ -1,7 +1,7 @@
 .huskelapp__innhold {
     display: flex;
     flex-direction: column;
-    padding: var(--a-spacing-4);
+    padding: var(--ax-space-16);
     min-width: 16rem;
     max-width: 24rem;
     word-wrap: break-word;
@@ -13,7 +13,7 @@
 
 .huskelapp__postit {
     position: relative;
-    background-color: var(--a-limegreen-100);
+    background-color: #f9fccc;
 }
 
 .huskelapp__postit::before {

@@ -117,12 +117,12 @@ export function FilterStatusMineFargekategorier() {
                     <BarInputCheckbox
                         key={fargekategori.filterId}
                         labelTekst={
-                            <>
-                                <Bleed marginBlock="05" asChild>
+                            <span style={{display: 'inline-flex', alignItems: 'center', gap: '0.25rem'}}>
+                                <Bleed marginBlock="space-2" asChild>
                                     {fargekategoriIkonMapper(fargekategori.filterId, 'fargekategoriikon')}
                                 </Bleed>
                                 {fargekategori.filterLabel}
-                            </>
+                            </span>
                         }
                         filterNavn={fargekategori.filterNavn}
                         handleChange={handleUnderfilterEndret}

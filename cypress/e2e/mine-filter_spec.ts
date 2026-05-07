@@ -6,8 +6,6 @@ const forLangtFilterNavn =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum Lorem Ipsum.";
 const testFilterNavn = 'Denne brukes til test la stå';
 
-const navDsRadioButtonsSelector = '.navds-radio-buttons';
-
 before('Start server', () => {
     cy.clearAllLocalStorage();
     cy.clearAllSessionStorage();
@@ -19,7 +17,16 @@ before('Start server', () => {
 beforeEach('Lag alias for Mine filter: @mineFilter', () => {
     // Aliaset kan hentast med cy.get('@mineFilter').
     // Cypress dobbeltsjekkar at verdien er oppdatert ved bruk av aliaset.
-    cy.gaTilOversikt('enhetens-oversikt')
+    cy.gaTilOversikt('enhetens-oversikt');
+    cy.klikkTab('MINE_FILTER');
+
+    // Sikrar at vi ikkje står att i drag-and-drop-modus frå førre test.
+    cy.get('body').then($body => {
+        if ($body.find('[data-testid="mine-filter_sortering_avbryt-knapp"]').length > 0) {
+            cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
+        }
+    });
+
     cy.getByTestId('mine-filter_rad-wrapper').should('exist');
     cy.getByTestId('mine-filter_rad-wrapper').as('mineFilter');
 });
@@ -213,37 +220,29 @@ describe('Mine filter', () => {
         // Skru på endring av rekkefølge
         cy.getByTestId('toggle-knapp').click();
 
-        // Sjekkar at vi har testfilteret som tredje element i lista over filter
-        cy.getByTestId('mine-filter_radio-container')
-            .children()
-            .children()
-            .first()
-            .next()
-            .next()
-            .contains(testFilterNavn);
+        // Flytt testfilteret ned til botnen av lista.
+        cy.getByTestId('drag-drop_container')
+            .find('li.drag-and-drop-row')
+            .its('length')
+            .then(length => {
+                const sistePosisjon = length - 1;
 
-        // Finn testfilteret på plass 2 i lista (0-indeksert). Flyttar den to hakk ned.
-        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
-            .contains(testFilterNavn)
-            .should('have.value', 2)
-            .click()
-            .type('{shift}{downarrow}{downarrow}');
+                cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+                    .contains(testFilterNavn)
+                    .click()
+                    .type('{shift}{downarrow}{downarrow}{downarrow}{downarrow}');
 
-        // Testfilteret er no på plass 4 (sist)
-        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
-            .contains(testFilterNavn)
-            .should('have.value', 4);
+                cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+                    .contains(testFilterNavn)
+                    .should('have.value', sistePosisjon);
+            });
 
         // Lagre rekkefølga, sjekk at vi er ute av plassendringsvisninga
         cy.getByTestId('mine-filter_sortering_lagre-knapp').click();
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
         // Testfilteret skal no vere list i lista over filter
-        cy.getByTestId('mine-filter_radio-container')
-            .get(navDsRadioButtonsSelector)
-            .children()
-            .last()
-            .contains(testFilterNavn);
+        cy.getByTestId('mine-filter_rad-wrapper').last().contains(testFilterNavn);
     });
 
     /* Avhengig av tidlegare testar: sikre plassering av element i lista */
@@ -252,28 +251,32 @@ describe('Mine filter', () => {
         cy.getByTestId('toggle-knapp').click();
         cy.getByTestId('drag-drop_infotekst').should('be.visible');
 
-        // Finn testfilteret i botnen av lista, flyttar den opp eit hakk
         cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
-            .contains(testFilterNavn)
-            .should('have.value', 4)
-            .click()
-            .type('{shift}{uparrow}');
+            .invoke('val')
+            .then(verdiForFlytting => {
+                const opprinnelegPosisjon = Number(verdiForFlytting);
+                const posisjonEtterFlytting = Math.max(opprinnelegPosisjon - 1, 0);
 
-        // Sjekkar at den har flytta seg
-        cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
-            .contains(testFilterNavn)
-            .should('have.value', 3);
+                // Flytt testfilteret opp eitt hakk.
+                cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+                    .contains(testFilterNavn)
+                    .click()
+                    .type('{shift}{uparrow}');
 
-        // Avbryt redigering av rekkefølgje
-        cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
-        cy.getByTestId('drag-drop_infotekst').should('not.exist');
+                // Sjekkar at den har flytta seg.
+                cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`)
+                    .contains(testFilterNavn)
+                    .should('have.value', posisjonEtterFlytting);
 
-        // Sjekkar at filteret er på botnen av lista igjen (at endringane ikkje vart lagra)
-        cy.getByTestId('mine-filter_radio-container')
-            .get(navDsRadioButtonsSelector)
-            .children()
-            .last()
-            .contains(testFilterNavn);
+                // Avbryt redigering av rekkefølgje.
+                cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
+                cy.getByTestId('drag-drop_infotekst').should('not.exist');
+
+                // Sjekkar at endringa ikkje vart lagra.
+                cy.getByTestId('toggle-knapp').click();
+                cy.getByTestId(`drag-drop_rad_${kebabCase(testFilterNavn)}`).should('have.value', opprinnelegPosisjon);
+                cy.getByTestId('mine-filter_sortering_avbryt-knapp').click();
+            });
     });
 
     /* Avhengig av tidlegare testar: sikre plassering av element i lista */
@@ -290,12 +293,7 @@ describe('Mine filter', () => {
         cy.getByTestId('drag-drop_infotekst').should('not.exist');
 
         // Sjekk at testfilteret er på plass 2 i lista
-        cy.getByTestId('mine-filter_radio-container')
-            .get(navDsRadioButtonsSelector)
-            .children()
-            .first()
-            .next()
-            .contains(testFilterNavn);
+        cy.getByTestId('mine-filter_rad-wrapper').eq(1).contains(testFilterNavn);
 
         // Fjern filter som var vald (dette har lite med denne testen å gjere eigentleg)
 
