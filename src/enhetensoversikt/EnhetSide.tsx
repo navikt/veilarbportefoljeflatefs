@@ -43,7 +43,6 @@ import './brukerliste.css';
 import {Filtervalg} from '../typer/filtervalg-modell';
 import {useAppDispatch} from '../hooks/redux/use-app-dispatch';
 import {InformationSquareIcon} from '@navikt/aksel-icons';
-import {InfoCardContent} from '@navikt/ds-react/esm/alert/info-card';
 
 export function antallFilter(filtervalg) {
     function mapAktivitetFilter(value) {
