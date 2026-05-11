@@ -1,4 +1,6 @@
-.veilarbportefoljeflatefs .filtrering-label-container {
+.veilarbportefoljeflatefs .filtreringlabel-container {
+    grid-column-start: 2;
+    grid-column-end: 3;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;

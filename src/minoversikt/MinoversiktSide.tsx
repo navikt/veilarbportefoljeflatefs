@@ -138,10 +138,7 @@ export function MinoversiktSide() {
                         oversiktType={oversiktType}
                         enhettiltak={enhettiltak.data.tiltak}
                         listevisning={listevisning}
-                        className={classNames(
-                            'filtrering-label-container',
-                            visesAnnenVeiledersPortefolje && 'filtrering-label-container__annen-veileder'
-                        )}
+                        className="filtreringlabel-container"
                     />
                     <div className="oversikt__container">
                         <div className="toolbar-container">
