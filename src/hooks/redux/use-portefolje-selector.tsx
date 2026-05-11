@@ -12,16 +12,12 @@ import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering
 import {INGEN_KATEGORI, MINE_FARGEKATEGORIER} from '../../filtrering/filter-konstanter';
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
-const selectSorteringsrekkefolge = (state: AppState) => state.portefolje.sorteringsrekkefolge;
-const selectBrukere = (state: AppState) => state.portefolje.data.brukere;
-const selectSorteringsFeldt = (state: AppState) => state.portefolje.sorteringsfelt;
 const selectPortefolje = (state: AppState) => state.portefolje;
 const selectEnhetTiltak = (state: AppState) => state.enhettiltak;
 const selectFiltervalgForListevisning = (state: AppState, listevisningType: OversiktType): FiltervalgModell =>
     getFiltreringState(state, listevisningType);
 const selectListevisningForType = (state: AppState, listevisningType: OversiktType): ListevisningState =>
     selectListeVisning(state, listevisningType);
-const selectOversiktType = (_state: AppState, listevisningType: OversiktType): OversiktType => listevisningType;
 
 function filtrerBrukerePaValgtFargekategori(
     brukere: BrukerModell[],
@@ -49,31 +45,17 @@ const selectPortefoljeTabell = createSelector(
     selectEnhetTiltak,
     selectPortefolje,
     selectValgtEnhetId,
-    selectSorteringsrekkefolge,
-    selectBrukere,
     selectFiltervalgForListevisning,
     selectListevisningForType,
-    selectSorteringsFeldt,
-    selectOversiktType,
-    (
+    (enhettiltak, portefolje, enhetId, filtervalg, listevisning) => ({
         enhettiltak,
         portefolje,
         enhetId,
-        sorteringsrekkefolge,
-        brukere,
+        sorteringsrekkefolge: portefolje.sorteringsrekkefolge,
+        brukere: portefolje.data.brukere,
         filtervalg,
         listevisning,
-        sorteringsfelt,
-        oversiktType
-    ) => ({
-        enhettiltak,
-        portefolje,
-        enhetId,
-        sorteringsrekkefolge,
-        brukere: filtrerBrukerePaValgtFargekategori(brukere, filtervalg, oversiktType),
-        filtervalg,
-        listevisning,
-        sorteringsfelt
+        sorteringsfelt: portefolje.sorteringsfelt
     })
 );
 
@@ -89,5 +71,11 @@ interface UsePortefoljeSelector {
 }
 
 export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
-    return useSelector((state: AppState) => selectPortefoljeTabell(state, listevisningType));
+    return useSelector((state: AppState) => {
+        const result = selectPortefoljeTabell(state, listevisningType);
+        return {
+            ...result,
+            brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, listevisningType)
+        };
+    });
 }
