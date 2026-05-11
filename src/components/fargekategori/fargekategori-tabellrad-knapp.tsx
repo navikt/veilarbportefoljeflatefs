@@ -20,13 +20,13 @@ export function FargekategoriTabellradKnapp({bruker, readOnly = false}: Fargekat
 
     if (readOnly) {
         return (
-            <span
-                aria-label={bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori'}
-                className="fargekategori-tabellrad-knapp"
+            <div
+                role="img"
                 title={bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori'}
+                className="fargekategori-tabellrad-knapp"
             >
                 {fargekategoriIkonMapper(bruker.fargekategori)}
-            </span>
+            </div>
         );
     }
 

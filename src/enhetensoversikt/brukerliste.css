@@ -80,7 +80,7 @@
 }
 
 .veilarbportefoljeflatefs .brukerliste__fargekategori-ikonknapp .fargekategori-tabellrad-knapp {
-    padding-left: 0.4rem;
+    padding: var(--ax-space-4);
 }
 
 .veilarbportefoljeflatefs .brukerliste__innhold .knapp-uten-padding {
