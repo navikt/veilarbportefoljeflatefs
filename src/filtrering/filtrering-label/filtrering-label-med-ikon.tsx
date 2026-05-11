@@ -19,17 +19,7 @@ export function FiltreringLabelMedIkon({label, slettFilter, ikon, tittel}: Reado
             title={tittel}
             onClick={slettFilter}
         >
-            <span
-                className="aksel-chips__chip-text"
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    alignSelf: 'stretch',
-                    height: '100%',
-                    lineHeight: 1
-                }}
-            >
+            <span className="filtreringlabel__med-ikon aksel-chips__chip-text">
                 {ikon}
                 {label}
             </span>
