@@ -8,7 +8,6 @@ export interface HeaderCellProps {
     gjeldendeSorteringsfelt: OrNothing<Sorteringsfelt>;
     rekkefolge: OrNothing<Sorteringsrekkefolge>;
     onClick: (sortering: string) => void;
-    className?: string;
 }
 
 export interface HeaderCellMedSorteringBasertPaFiltervalgProps extends HeaderCellProps {
