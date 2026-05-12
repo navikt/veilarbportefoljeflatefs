@@ -839,17 +839,8 @@ GRID
     grid-column: 1;
 }
 
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container,
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__annen-veileder {
-    grid-row: 2;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__feature,
-.veilarbportefoljeflatefs .oversikt-sideinnhold .filtrering-label-container__annen-veileder__feature {
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtreringlabel-container__feature,
+.veilarbportefoljeflatefs .oversikt-sideinnhold .filtreringlabel-container__annen-veileder__feature {
     background-color: #85d5f0;
 }
 
@@ -870,7 +861,7 @@ GRID
     grid-column-start: 1;
 }
 
-.veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .filtrering-label-container {
+.veilarbportefoljeflatefs .oversikt-sideinnhold__hidden .filtreringlabel-container {
     grid-column-start: 1;
 }
 

@@ -5,14 +5,6 @@
     align-items: center;
     margin-bottom: var(--ax-space-4);
 }
-.barinput-checkbox .navds-checkbox__label,
-.barinput-checkbox .navds-checkbox__label-text {
-    display: flex;
-    gap: 0.5rem;
-}
-.barinput-checkbox .navds-checkbox__label svg {
-    vertical-align: middle;
-}
 .barlabel__antall {
     padding-right: 0.5rem;
 }

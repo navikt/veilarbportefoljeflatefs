@@ -92,7 +92,7 @@ export function VeilederoversiktSide() {
                                 )
                             }}
                             oversiktType={OversiktType.veilederOversikt}
-                            className="filtrering-label-container"
+                            className="filtreringlabel-container"
                             role="listitem"
                         />
                         <VeilederoversiktSidevisning

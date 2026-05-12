@@ -10,12 +10,25 @@ import {useAppDispatch} from '../../hooks/redux/use-app-dispatch';
 
 interface FargekategoriPopoverKnappProps {
     bruker: BrukerModell;
+    readOnly?: boolean;
 }
 
-export function FargekategoriTabellradKnapp({bruker}: FargekategoriPopoverKnappProps) {
+export function FargekategoriTabellradKnapp({bruker, readOnly = false}: FargekategoriPopoverKnappProps) {
     const dispatch = useAppDispatch();
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [popoverOpen, setPopoverOpen] = useState(false);
+
+    if (readOnly) {
+        return (
+            <div
+                role="img"
+                title={bruker.fargekategori ? Fargekategorinavn[bruker.fargekategori] : 'Ingen kategori'}
+                className="fargekategori-tabellrad-knapp"
+            >
+                {fargekategoriIkonMapper(bruker.fargekategori)}
+            </div>
+        );
+    }
 
     return (
         <>
