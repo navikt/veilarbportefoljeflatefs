@@ -1,5 +1,5 @@
 import {ChangeEventHandler, ReactNode} from 'react';
-import {Checkbox, Label} from '@navikt/ds-react';
+import {Checkbox, Detail} from '@navikt/ds-react';
 import './bar.css';
 
 interface BarInputCheckboxProps {
@@ -31,15 +31,16 @@ export function BarInputCheckbox({
                 onChange={handleChange}
                 checked={checked}
                 indeterminate={indeterminate}
+                className="barinput-checkbox__checkbox"
                 data-testid={`filter_checkboks-container_${filterNavn}`}
             >
                 {labelTekst}
+                {(antall || antall === 0) && (
+                    <Detail weight="semibold" data-testid={`filter_checkboks-label_${filterNavn}`}>
+                        {antall}
+                    </Detail>
+                )}
             </Checkbox>
-            {(antall || antall === 0) && (
-                <Label className="barlabel__antall" size="small" data-testid={`filter_checkboks-label_${filterNavn}`}>
-                    {antall}
-                </Label>
-            )}
         </div>
     );
 }

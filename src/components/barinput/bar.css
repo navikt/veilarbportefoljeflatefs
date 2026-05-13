@@ -1,12 +1,15 @@
 .barinput-checkbox,
 .barinput-radio {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: var(--ax-space-4);
 }
-.barlabel__antall {
-    padding-right: 0.5rem;
+.barinput-checkbox__checkbox,
+.barinput-radio__radio {
+    width: 100%;
+}
+.barinput-checkbox__checkbox label,
+.barinput-radio__radio label {
+    display: flex;
+    justify-content: space-between;
 }
 .forste-barlabel-i-gruppe {
     padding-top: 1rem;

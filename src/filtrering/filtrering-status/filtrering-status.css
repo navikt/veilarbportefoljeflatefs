@@ -1,6 +1,5 @@
 .veilarbportefoljeflatefs .filter-checkboks-container {
-    padding-top: 1rem;
-    padding-left: 0.25rem;
+    padding: 1rem 0.75em 0;
 }
 .veilarbportefoljeflatefs .permittering_checkboksgruppe {
     border-top: 1px solid #6a6a6a;
