@@ -12,7 +12,10 @@ export function UkeDataCellType({ukerIgjen, minVal, skalVises, className}: Props
     }
 
     const lagUkerTekst = (ukerIgjen, minVal) => {
-        if (ukerIgjen < 0 || ukerIgjen === undefined) {
+        if (ukerIgjen == null || ukerIgjen === 0) {
+            return null;
+        }
+        if (ukerIgjen === undefined || ukerIgjen == null || ukerIgjen <= 0) {
             return null;
         } else if (ukerIgjen < minVal) {
             return `Under ${minVal} uker`;
