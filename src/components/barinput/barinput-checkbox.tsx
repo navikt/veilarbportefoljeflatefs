@@ -1,5 +1,5 @@
 import {ChangeEventHandler, ReactNode} from 'react';
-import {Checkbox, Detail, Label} from '@navikt/ds-react';
+import {Checkbox, Detail} from '@navikt/ds-react';
 import './bar.css';
 
 interface BarInputCheckboxProps {

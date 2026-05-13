@@ -1,5 +1,5 @@
 import {ChangeEventHandler} from 'react';
-import {Detail, Label, Radio} from '@navikt/ds-react';
+import {Detail, Radio} from '@navikt/ds-react';
 import './bar.css';
 
 interface BarinputRadioProps {
