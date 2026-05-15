@@ -6,6 +6,7 @@ import FargekategoriIkonLillaFirkant from '../ikoner/fargekategorier/Fargekatego
 import FargekategoriIkonTurkisFemkant from '../ikoner/fargekategorier/Fargekategoriikon_turkis_femkant.svg?react';
 import FargekategoriIkonOransjeRombe from '../ikoner/fargekategorier/Fargekategoriikon_oransje_rombe.svg?react';
 import FargekategoriIkonTomtBokmerke from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet.svg?react';
+import FargekategoriIkonTomtBokmerkeHvit from '../ikoner/fargekategorier/Fargekategoriikon_bokmerke_stiplet_hvit.svg?react';
 
 export const fargekategoriIkonMapper = (
     fargekategori: FargekategoriModell | null,
@@ -27,6 +28,11 @@ export const fargekategoriIkonMapper = (
             return <FargekategoriIkonTurkisFemkant className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
         case FargekategoriModell.INGEN_KATEGORI:
         case null:
+            if (ikonClassName.includes('fargekategoriikon--ingen-kategori')) {
+                return (
+                    <FargekategoriIkonTomtBokmerkeHvit className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />
+                );
+            }
             return <FargekategoriIkonTomtBokmerke className={ikonClassName} fontSize="1.5rem" title={ikonTitle} />;
     }
 };
