@@ -25,7 +25,6 @@ import {EnhetModell} from '../../typer/enhet-og-veiledere-modeller';
 import {useFoedelandSelector} from '../../hooks/redux/use-foedeland-selector';
 import {useTolkbehovSelector} from '../../hooks/redux/use-tolkbehovspraak-selector';
 import {useGeografiskbostedSelector} from '../../hooks/redux/use-geografiskbosted-selector';
-import {FargekategoriModell} from '../../typer/bruker-modell';
 
 interface Props {
     valgtFilter: string;
@@ -129,18 +128,12 @@ export const LagLabelForFiltervalg = ({
         }
         case Filtervalg.fargekategorier: {
             return valgteFilteralternativer.map(valgtAlternativ => {
-                const erIngenKategori =
-                    valgtAlternativ === FargekategoriModell.INGEN_KATEGORI || valgtAlternativ === 'INGEN_KATEGORI';
-                const ikonClassName = erIngenKategori
-                    ? 'fargekategoriikon fargekategoriikon--ingen-kategori'
-                    : 'fargekategoriikon';
-
                 return (
                     <FiltreringLabelMedIkon
                         key={valgtAlternativ}
                         label={fargekategorier[valgtAlternativ]}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                        ikon={fargekategoriIkonMapper(valgtAlternativ, ikonClassName)}
+                        ikon={fargekategoriIkonMapper(valgtAlternativ)}
                         tittel={`Fjern filtervalg "Kategori ${fargekategorier[valgtAlternativ]}"`}
                     />
                 );
