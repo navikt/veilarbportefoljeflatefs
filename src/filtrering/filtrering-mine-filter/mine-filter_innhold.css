@@ -23,9 +23,6 @@
     justify-content: space-between;
     align-items: center;
 }
-.veilarbportefoljeflatefs .mine-filter__filternavn {
-    width: 85%;
-}
 .veilarbportefoljeflatefs .mine-filter_alertstripe {
     display: flex;
     justify-content: space-between;

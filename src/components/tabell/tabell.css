@@ -15,12 +15,12 @@
 }
 
 .veilarbportefoljeflatefs .sorteringspil {
-    color: var(--a-icon-default);
+    color: var(--ax-text-neutral);
     width: 0.667em; /* Tilsvarer 1rem */
 }
 
 .veilarbportefoljeflatefs .huskelapp__sorteringsheader .sorteringspil {
-    margin-left: var(--a-spacing-1);
+    margin-left: var(--ax-space-4);
 }
 
 .veilarbportefoljeflatefs .fnr-kolonne {
@@ -30,7 +30,7 @@
 
 .veilarbportefoljeflatefs .fnr-kolonne :first-child {
     padding-left: 0;
-    color: var(--a-text-default);
+    color: var(--ax-text-neutral);
     font-weight: normal;
 }
 

@@ -3,7 +3,7 @@
     display: inline-block;
     width: 2.9rem;
     height: 1.6rem;
-    color: var(--a-text-on-inverted);
+    color: var(--ax-text-neutral-contrast);
     cursor: pointer;
 }
 .toggle-switch .toggle-input {
@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--a-surface-neutral);
+    background-color: var(--ax-bg-neutral-strong);
     border-radius: 1.6rem;
 }
 .switch-slider:before {
@@ -33,13 +33,13 @@
     border-radius: 50%;
 }
 .toggle-input:checked + .switch-slider {
-    background-color: var(--a-blue-700); /* --a-surface-action-selected */
+    background-color: var(--ax-accent-800); /* --ax-bg-accent-strong-pressed */
 }
 .toggle-input:hover + .switch-slider {
-    background-color: var(--a-surface-neutral-hover);
+    background-color: var(--ax-bg-neutral-strong-hover);
 }
 .toggle-input:checked:hover + .switch-slider {
-    background-color: var(--a-blue-800); /* --a-surface-action-selected-hover */
+    background-color: var(--ax-accent-900); /* --ax-bg-accent-strong-hover */
 }
 .toggle-input:checked + .switch-slider:before {
     -webkit-transform: translateX(1.223rem);
@@ -55,7 +55,7 @@
     box-sizing: border-box;
 }
 .toggle-input:focus-visible ~ .toggle-switch-border {
-    outline: 2px solid var(--a-border-focus);
+    outline: 2px solid var(--ax-border-focus);
     outline-offset: 2px;
 }
 .toggle-switch-las {
