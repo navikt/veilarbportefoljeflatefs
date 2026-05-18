@@ -15,3 +15,12 @@
     align-items: center;
     gap: 0.25rem;
 }
+
+.veilarbportefoljeflatefs .filtreringlabel__med-ikon .fargekategoriikon [stroke] {
+    stroke: var(--ax-bg-neutral-moderate);
+}
+
+.veilarbportefoljeflatefs .filtreringlabel__med-ikon .fargekategoriikon [fill]:not([stroke]) {
+    fill: #fff;
+    fill-opacity: 1;
+}

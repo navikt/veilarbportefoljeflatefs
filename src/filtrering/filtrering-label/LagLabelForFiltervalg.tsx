@@ -133,7 +133,7 @@ export const LagLabelForFiltervalg = ({
                         key={valgtAlternativ}
                         label={fargekategorier[valgtAlternativ]}
                         slettFilter={() => slettEnkeltfilter(valgtFilter, valgtAlternativ)}
-                        ikon={fargekategoriIkonMapper(valgtAlternativ, 'fargekategoriikon')}
+                        ikon={fargekategoriIkonMapper(valgtAlternativ)}
                         tittel={`Fjern filtervalg "Kategori ${fargekategorier[valgtAlternativ]}"`}
                     />
                 );
