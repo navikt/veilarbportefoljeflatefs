@@ -49,6 +49,7 @@ export function AktivitetFilterformAvansert({
                     <div key={kode} className="aktivitetvalg">
                         <BodyShort size="small">{verdi as string}</BodyShort>
                         <RadioGroup
+                            className="aktivitetvalg__radio-group"
                             legend=""
                             hideLegend
                             onChange={(verdi: string) => handleChange(kode, verdi)}
@@ -56,7 +57,7 @@ export function AktivitetFilterformAvansert({
                         >
                             <Radio data-testid={`aktivitet-filterform-${kode}-ja`} name={kode} size="small" value="JA">
                                 {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
-                                <span className="navds-sr-only">Ja, {verdi}</span>
+                                <span className="sr-only">Ja, {verdi}</span>
                             </Radio>
                             <Radio
                                 data-testid={`aktivitet-filterform-${kode}-nei`}
@@ -65,7 +66,7 @@ export function AktivitetFilterformAvansert({
                                 value="NEI"
                             >
                                 {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
-                                <span className="navds-sr-only">Nei, {verdi}</span>
+                                <span className="sr-only">Nei, {verdi}</span>
                             </Radio>
                         </RadioGroup>
                     </div>

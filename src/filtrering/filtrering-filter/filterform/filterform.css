@@ -12,6 +12,7 @@
     display: grid;
     grid-template-columns: 75% auto auto;
     grid-gap: 0.5rem;
+    margin: 0.5rem;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg__header--first {
     grid-column: 2;
@@ -25,6 +26,20 @@
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .navds-body-short {
     max-width: 12.5rem;
+}
+.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .aktivitetvalg__radio-group {
+    margin-left: auto;
+}
+.veilarbportefoljeflatefs
+    .aktivitetfilterform-avansert__valg
+    .aktivitetvalg
+    .aktivitetvalg__radio-group
+    .aksel-radio-buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 0.5rem;
+    justify-content: end;
+    align-items: end;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .skjemaelement__label {
     margin-bottom: 1rem;
