@@ -34,6 +34,11 @@
     margin-bottom: 1rem;
 }
 
+.veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter__kolonne > .aksel-label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-filter,
 .veilarbportefoljeflatefs .sidebar__content-container .filtrering-oversikt,
 .veilarbportefoljeflatefs .sidebar__content-container .mine-filter__valgfelt,
