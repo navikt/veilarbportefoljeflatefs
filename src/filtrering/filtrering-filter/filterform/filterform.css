@@ -7,26 +7,19 @@
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg {
     display: grid;
     grid-template-columns: 1fr auto;
-    column-gap: 0.5rem;
+    column-gap: 0.75rem;
     row-gap: 0.25rem;
+    align-items: center;
+    padding-left: 0.5rem;
+}
+.veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg fieldset {
+    padding: 0;
 }
 .veilarbportefoljeflatefs .aktivitetvalg-header {
     grid-column: 2 / 2;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0.5rem 0 0 0.2rem;
-}
-.veilarbportefoljeflatefs .aktivitetvalg-rad__aktivitet {
-    grid-column: 1;
-    padding-left: 0.5rem;
-}
-.veilarbportefoljeflatefs .aktivitetvalg-rad__radio-group {
-    display: contents;
-}
-.veilarbportefoljeflatefs .aktivitetvalg-rad__radio-container {
-    grid-column: 1 / 2;
-    justify-content: center;
-    gap: var(--a-spacing-2);
+    padding: 0.5rem 0 0 0.25rem;
 }
 .veilarbportefoljeflatefs .aktivitet-filterform__knappegruppe {
     display: flex;

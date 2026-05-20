@@ -45,17 +45,14 @@ export function AktivitetFilterformAvansert({
                 </div>
                 {Object.entries(valg).map(([kode, verdi]) => (
                     <Fragment key={kode}>
-                        <BodyShort size="small" className="aktivitetvalg-rad__aktivitet">
-                            {verdi}
-                        </BodyShort>
+                        <BodyShort size="small">{verdi}</BodyShort>
                         <RadioGroup
-                            className="aktivitetvalg-rad__radio-group"
                             legend=""
                             hideLegend
                             onChange={(verdi: string) => handleChange(kode, verdi)}
                             value={valgteAvanserteAktiviteter[kode]}
                         >
-                            <HStack className="aktivitetvalg-rad__radio-container" align="center">
+                            <HStack gap="space-4">
                                 <Radio
                                     id={`aktivitet-${kode}-ja`}
                                     data-testid={`aktivitet-filterform-${kode}-ja`}
