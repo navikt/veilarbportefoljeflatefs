@@ -9,7 +9,7 @@ import {OrNothing} from '../../utils/types/types';
 import {PortefoljeState} from '../../ducks/portefolje';
 import {EnhettiltakState} from '../../ducks/enhettiltak';
 import {Sorteringsfelt, Sorteringsrekkefolge} from '../../typer/kolonnesortering';
-import {INGEN_KATEGORI, MINE_FARGEKATEGORIER} from '../../filtrering/filter-konstanter';
+import {INGEN_KATEGORI, MINE_FARGEKATEGORIER, UngdomsprogramytelseFilter} from '../../filtrering/filter-konstanter';
 
 const selectValgtEnhetId = (state: AppState) => state.valgtEnhet.data.enhetId;
 const selectPortefolje = (state: AppState) => state.portefolje;
@@ -38,6 +38,24 @@ function filtrerBrukerePaValgtFargekategori(
         }
 
         return valgteFargekategorier.includes(bruker.fargekategori);
+    });
+}
+
+function filtrerBrukerePaUngdomsprogramytelse(brukere: BrukerModell[], filtervalg: FiltervalgModell): BrukerModell[] {
+    const filtrertPaUngdomsprogramytelse = filtervalg.ytelseUngdomsprogram.includes(
+        UngdomsprogramytelseFilter.HAR_UNGDOMSPROGRAMYTELSE
+    );
+
+    if (!filtrertPaUngdomsprogramytelse) {
+        return brukere;
+    }
+
+    return brukere.filter(bruker => {
+        const ungdomsprogramData = bruker.ytelser?.ungdomsprogram;
+        const harMaksdato = Boolean(ungdomsprogramData?.maksdato?.trim());
+        const harRettighet = Boolean(ungdomsprogramData?.rettighet?.trim());
+
+        return harMaksdato || harRettighet;
     });
 }
 
@@ -73,9 +91,15 @@ interface UsePortefoljeSelector {
 export function usePortefoljeSelector(listevisningType: OversiktType): UsePortefoljeSelector {
     return useSelector((state: AppState) => {
         const result = selectPortefoljeTabell(state, listevisningType);
+        const brukereFiltrertPaFargekategori = filtrerBrukerePaValgtFargekategori(
+            result.brukere,
+            result.filtervalg,
+            listevisningType
+        );
+
         return {
             ...result,
-            brukere: filtrerBrukerePaValgtFargekategori(result.brukere, result.filtervalg, listevisningType)
+            brukere: filtrerBrukerePaUngdomsprogramytelse(brukereFiltrertPaFargekategori, result.filtervalg)
         };
     });
 }
