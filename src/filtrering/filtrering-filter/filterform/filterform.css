@@ -10,9 +10,8 @@
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg__header {
     display: grid;
-    grid-template-columns: 75% auto auto;
-    grid-gap: 0.5rem;
-    margin: 0.5rem;
+    grid-template-columns: 78% auto auto;
+    grid-gap: 0rem;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg__header--first {
     grid-column: 2;
@@ -29,6 +28,7 @@
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .aktivitetvalg__radio-group {
     flex-shrink: 0;
+    padding: 0 0.5rem 0 0;
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg .aktivitetvalg .skjemaelement__label {
     margin-bottom: 1rem;

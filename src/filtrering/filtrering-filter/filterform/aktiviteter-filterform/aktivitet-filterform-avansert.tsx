@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {BodyShort, Button, Label, Radio, RadioGroup, Stack} from '@navikt/ds-react';
+import {BodyShort, Button, HStack, Label, Radio, RadioGroup} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
@@ -55,7 +55,7 @@ export function AktivitetFilterformAvansert({
                             onChange={(verdi: string) => handleChange(kode, verdi)}
                             value={valgteAvanserteAktiviteter[kode]}
                         >
-                            <Stack gap="space-0 space-4" direction={{xs: 'column', sm: 'row'}} wrap={false}>
+                            <HStack gap="space-0 space-4" wrap={false}>
                                 <Radio
                                     data-testid={`aktivitet-filterform-${kode}-ja`}
                                     name={kode}
@@ -74,7 +74,7 @@ export function AktivitetFilterformAvansert({
                                     {/* Radio har (per 18.08.22) ikke støtte for å skjule label - gjør derfor dette manuelt */}
                                     <span className="aksel-sr-only">Nei, {verdi}</span>
                                 </Radio>
-                            </Stack>
+                            </HStack>
                         </RadioGroup>
                     </div>
                 ])}
