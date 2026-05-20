@@ -6,19 +6,15 @@
 }
 .veilarbportefoljeflatefs .aktivitetfilterform-avansert__valg {
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    grid-template-columns: 1fr auto;
+    column-gap: 0.5rem;
+    row-gap: 0.25rem;
 }
 .veilarbportefoljeflatefs .aktivitetvalg-header {
     grid-column: 2 / 2;
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
     padding: 0.5rem 0 0 0.2rem;
-}
-.veilarbportefoljeflatefs .aktivitetvalg-rad {
-    display: contents;
 }
 .veilarbportefoljeflatefs .aktivitetvalg-rad__aktivitet {
     grid-column: 1;

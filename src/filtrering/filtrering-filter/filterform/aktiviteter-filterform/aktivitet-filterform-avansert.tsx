@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {Fragment, ReactNode} from 'react';
 import {BodyShort, Button, Label, Radio, RadioGroup, VStack, HStack} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
@@ -44,7 +44,7 @@ export function AktivitetFilterformAvansert({
                     <Label size="small">Nei</Label>
                 </div>
                 {Object.entries(valg).map(([kode, verdi]) => (
-                    <div key={kode} className="aktivitetvalg-rad">
+                    <Fragment key={kode}>
                         <BodyShort size="small" className="aktivitetvalg-rad__aktivitet">
                             {verdi as string}
                         </BodyShort>
@@ -76,7 +76,7 @@ export function AktivitetFilterformAvansert({
                                 </Radio>
                             </HStack>
                         </RadioGroup>
-                    </div>
+                    </Fragment>
                 ))}
             </div>
             <div className="aktivitet-filterform__knappegruppe">
