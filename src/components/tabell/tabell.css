@@ -48,3 +48,9 @@
     color: #262626;
     border: none;
 }
+
+.veilarbportefoljeflatefs .ungdomsprogram-maksdato-header,
+.veilarbportefoljeflatefs .ungdomsprogram-rettighet-header {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
