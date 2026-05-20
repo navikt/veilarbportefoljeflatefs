@@ -57,9 +57,9 @@ export enum Filtervalg {
     ytelseAapKelvin = 'ytelseAapKelvin',
     ytelseTiltakspengerArena = 'ytelseTiltakspengerArena',
     ytelseTiltakspenger = 'ytelseTiltakspenger',
-    ytelseUngdomsprogram = 'ytelseUngdomsprogram',
     ytelseDagpengerArena = 'ytelseDagpengerArena',
-    ytelseDagpenger = 'ytelseDagpenger'
+    ytelseDagpenger = 'ytelseDagpenger',
+    ytelseUngdomsprogram = 'ytelseUngdomsprogram'
 }
 
 export const erGyldigFiltervalg = (filtervalg: string): filtervalg is Filtervalg => {
@@ -114,9 +114,9 @@ export interface FiltervalgModell {
     [Filtervalg.ytelseAapKelvin]: AAPFilterKelvin[];
     [Filtervalg.ytelseTiltakspengerArena]: TiltakspengerFilterArena[];
     [Filtervalg.ytelseTiltakspenger]: TiltakspengerFilter[];
-    [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
     [Filtervalg.ytelseDagpengerArena]: DagpengerFilterArena[];
     [Filtervalg.ytelseDagpenger]: DagpengerFilter[];
+    [Filtervalg.ytelseUngdomsprogram]: UngdomsprogramytelseFilter[];
 }
 
 /**

@@ -155,8 +155,6 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
 
             <AapKelvinVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <AapKelvinRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
-            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
 
             <TiltakspengerVedtakTilOgMedDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
             <TiltakspengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
@@ -164,6 +162,9 @@ export function MinoversiktTableDataCells({bruker, enhetId, filtervalg, valgteKo
             <DagpengerResterendeDagerData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
             <DagpengerStansDatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+
+            <UngdomsprogramMaksdatoData bruker={bruker} valgteKolonner={valgteKolonner} />
+            <UngdomsprogramRettighetData bruker={bruker} valgteKolonner={valgteKolonner} />
         </div>
     );
 }

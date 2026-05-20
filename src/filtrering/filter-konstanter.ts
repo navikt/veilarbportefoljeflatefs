@@ -457,7 +457,7 @@ export const filterKonstanter = {
     ytelseAapKelvin: aapIKelvinFilter,
     ytelseTiltakspengerArena: tiltakspengerFilterArena,
     ytelseTiltakspenger: tiltakspengerFilter,
-    ytelseUngdomsprogram: ungdomsprogramytelseFilter,
     ytelseDagpengerArena: dagpengerArenaFilter,
-    ytelseDagpenger: dagpengerFilter
+    ytelseDagpenger: dagpengerFilter,
+    ytelseUngdomsprogram: ungdomsprogramytelseFilter
 };

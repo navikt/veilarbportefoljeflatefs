@@ -437,22 +437,6 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                     )}
                 />
                 <Dropdown
-                    name="Ungdomsprogramytelse"
-                    id="ytelser-ungdomsprogram"
-                    render={() => (
-                        <CheckboxFilterform
-                            filterformOgValgListe={[
-                                {
-                                    form: Filtervalg.ytelseUngdomsprogram,
-                                    checkboxValg: ungdomsprogramytelseFilter
-                                }
-                            ]}
-                            filtervalg={filtervalg}
-                            endreFiltervalg={endreFiltervalg}
-                        />
-                    )}
-                />
-                <Dropdown
                     name="Enslige forsørgere"
                     id="ensligeForsorgere"
                     render={() => (
@@ -477,6 +461,22 @@ export function FiltreringFilter({filtervalg, endreFiltervalg, enhettiltak, over
                                 {
                                     form: Filtervalg.rettighetsgruppe,
                                     checkboxValg: rettighetsgruppeArena
+                                }
+                            ]}
+                            filtervalg={filtervalg}
+                            endreFiltervalg={endreFiltervalg}
+                        />
+                    )}
+                />
+                <Dropdown
+                    name="Ungdomsprogramytelse"
+                    id="ytelser-ungdomsprogram"
+                    render={() => (
+                        <CheckboxFilterform
+                            filterformOgValgListe={[
+                                {
+                                    form: Filtervalg.ytelseUngdomsprogram,
+                                    checkboxValg: ungdomsprogramytelseFilter
                                 }
                             ]}
                             filtervalg={filtervalg}

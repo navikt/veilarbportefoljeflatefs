@@ -67,13 +67,13 @@ export enum Kolonne {
     FILTERHENDELSE_DATO_OPPRETTET = 'filterhendelse_dato_opprettet',
     AAP_KELVIN_TOM_VEDTAKSDATO = 'aap_kelvin_tom_vedtaksdato',
     AAP_KELVIN_RETTIGHET = 'aap_kelvin_rettighetstype',
-    UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
-    UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet',
     TILTAKSPENGER_VEDTAKSDATO_TOM = 'tiltakspenger_vedtaksdato_tom',
     TILTAKSPENGER_RETTIGHET = 'tiltakspenger_rettighet',
     DAGPENGER_STANS = 'dagpenger_stans',
     DAGPENGER_ANTALL_RESTERENDE_DAGER = 'dagpenger_antall_resterende_dager',
-    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype'
+    DAGPENGER_RETTIGHETSTYPE = 'dagpenger_rettighetstype',
+    UNGDOMSPROGRAM_MAKSDATO = 'ungdomsprogram_maksdato',
+    UNGDOMSPROGRAM_RETTIGHET = 'ungdomsprogram_rettighet'
 }
 
 export enum OversiktType {

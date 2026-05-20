@@ -70,10 +70,10 @@ export interface GeografiskBosted {
 export interface Ytelser {
     ytelserArena: YtelserArena;
     aap: AapKelvinData | null;
-    ungdomsprogram?: UngdomsprogramData | null;
     tiltakspenger: TiltakspengerData | null;
     dagpenger: DagpengerData | null;
     ensligeForsorgereOvergangsstonad: EnsligeForsorgereOvergangsstonad | null;
+    ungdomsprogram?: UngdomsprogramData | null;
 }
 
 export interface YtelserArena {
@@ -215,13 +215,13 @@ export interface TiltakspengerData {
     rettighet: string | null;
 }
 
-export interface UngdomsprogramData {
-    maksdato: string | null;
-    rettighet: string | null;
-}
-
 export interface DagpengerData {
     rettighetstype: string;
     datoStans: string | null;
     resterendeDager: string | null;
+}
+
+export interface UngdomsprogramData {
+    maksdato: string | null;
+    rettighet: string | null;
 }

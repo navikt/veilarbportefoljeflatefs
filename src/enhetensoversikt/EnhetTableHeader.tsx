@@ -161,8 +161,6 @@ export function EnhetTableHeader() {
 
                 <AapKelvinVedtakTilOgMedDatoHeaderHeader {...sorteringTilHeaderCell} />
                 <AapKelvinRettighetHeader {...sorteringTilHeaderCell} />
-                <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
-                <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
 
                 <TiltakspengerVedtakTilOgMedDatoHeader {...sorteringTilHeaderCell} />
                 <TiltakspengerRettighetHeader {...sorteringTilHeaderCell} />
@@ -170,6 +168,9 @@ export function EnhetTableHeader() {
                 <DagpengerResterendeDagerHeader {...sorteringTilHeaderCell} />
                 <DagpengerRettighetHeader {...sorteringTilHeaderCell} />
                 <DagpengerStansDatoHeader {...sorteringTilHeaderCell} />
+
+                <UngdomsprogramMaksdatoHeader {...sorteringTilHeaderCell} />
+                <UngdomsprogramRettighetHeader {...sorteringTilHeaderCell} />
             </div>
             <div className="brukerliste__gutter-right" />
         </div>
