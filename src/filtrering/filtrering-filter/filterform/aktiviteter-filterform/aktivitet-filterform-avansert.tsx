@@ -1,5 +1,5 @@
 import {Fragment, ReactNode} from 'react';
-import {BodyShort, Button, Label, Radio, RadioGroup, VStack, HStack} from '@navikt/ds-react';
+import {BodyShort, Button, Label, Radio, RadioGroup, HStack} from '@navikt/ds-react';
 import {NullstillKnapp} from '../../../../components/nullstill-valg-knapp/nullstill-knapp';
 import {Dictionary} from '../../../../utils/types/types';
 import {Filtervalg, FiltervalgModell} from '../../../../typer/filtervalg-modell';
@@ -46,7 +46,7 @@ export function AktivitetFilterformAvansert({
                 {Object.entries(valg).map(([kode, verdi]) => (
                     <Fragment key={kode}>
                         <BodyShort size="small" className="aktivitetvalg-rad__aktivitet">
-                            {verdi as string}
+                            {verdi}
                         </BodyShort>
                         <RadioGroup
                             className="aktivitetvalg-rad__radio-group"
